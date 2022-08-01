@@ -1,0 +1,31 @@
+{
+    "version": "Mixly 2.0 rc2",
+    "board": {
+        "url": "http://114.132.216.192:8099/mixly2/cloud-libraries/raw/master/cloud-boards/boards.json"
+    },
+    "defaultPath": {
+        "win32": {
+            "arduinoCli": "../arduino-cli-win32/arduino-cli/arduino-cli.exe",
+            "python3": "None"
+        },
+        "darwin": {
+            "arduinoCli": "None",
+            "python3": "None"
+        },
+        "linux": {
+            "arduinoCli": "None",
+            "python3": "None"
+        }
+    },
+    "webSocket": {
+        "enabled": false,
+        "port": 8082,
+        "protocol": "ws:"
+    },
+    "webCompiler": {
+        "enabled": false,
+        "port": 8082,
+        "protocol": "http:"
+    },
+    "debug": false
+}

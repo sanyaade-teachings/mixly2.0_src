@@ -1,0 +1,141 @@
+<div
+    id="board-config-options"
+    class="layer-extend"
+    style="
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - var(--footer-height));
+    "
+>
+    <style type="text/css">
+        #board-config-options button {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .board-config-btn {
+            font-size: 16px;
+            line-height: 16px;
+            color: #000;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .light .board-config-btn {
+            color: #000;
+        }
+
+        .light .board-config-btn:hover {
+            color: #666;
+        }
+
+        .dark .board-config-btn {
+            color: #fff;
+        }
+
+        .dark .board-config-btn:hover {
+            color: #ccc;
+        }
+
+        .board-config-menu > .layui-dropdown-menu {
+            max-height: 150px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    </style>
+     <div
+        class="layui-layer-title"
+        style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            height: 16px;
+            padding: 3px 5px;
+        "
+    >
+        <i
+            id="board-config-menu-reset"
+            class="board-config-btn layui-icon layui-icon-refresh-1"
+            style="font-size: 14px;line-height: 13px;"
+            title="{{ d.reset }}"
+        ></i>
+        <i
+            id="board-config-menu-colse"
+            class="board-config-btn layui-icon layui-icon-close"
+            title="{{ d.close }}"
+        ></i>
+    </div>
+    <div
+        style="
+            display: flex;
+            flex-direction: row;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 5px;
+            font-size: 14px;
+        "
+    >
+        <div
+            style="
+                display: flex;
+                flex-direction: column;
+            "
+        >
+            {{# layui.each(d.list, function(index, item){ }}
+            <p
+                style="
+                    white-space: nowrap;
+                    text-align: right;
+                    margin: 2px 0px;
+                "
+            >
+                {{ item.name }}
+            </p>
+            {{# }); }}
+        </div>
+        <div
+            style="
+                display: flex;
+                flex-direction: column;
+            "
+        >
+            {{# layui.each(d.list, function(index, item){ }}
+            <p
+                style="
+                    white-space: nowrap;
+                    text-align: center;
+                    margin: 2px 0px;
+                "
+            >
+                &nbsp:&nbsp
+            </p>
+            {{# }); }}
+        </div>
+        <div
+            style="
+                display: flex;
+                flex-direction: column;
+            "
+        >
+            {{# layui.each(d.list, function(index, item){ }}
+            <button
+                id="board-config-{{ item.name }}"
+                class="
+                    layui-btn
+                    layui-btn-normal
+                    layui-btn-fluid
+                    layui-btn-xs
+                "
+                style="margin: 2px 0px;"
+            >
+                <p style="font-size: 13px;">{{ item.label }}</p>
+                <i class="layui-icon layui-icon-triangle-d"></i>
+            </button>
+            {{# }); }}
+        </div>
+    <div>
+</div>

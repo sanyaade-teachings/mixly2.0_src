@@ -1,0 +1,394 @@
+/* 设置滚动条宽高 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* 设置滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    background-color: #C3C1C1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #989998;
+}
+
+/* 设置滚动条滑槽 */
+::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* 设置滚动条滑块 */
+.light ::-webkit-scrollbar-thumb {
+    background-color: #C3C1C1;
+    border-radius: 4px;
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.light ::-webkit-scrollbar-thumb:active {
+    background-color: #989998;
+}
+
+.light ::-webkit-scrollbar-corner {
+    background-color: #fff;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background-color: #989998;
+    border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.dark ::-webkit-scrollbar-thumb:active {
+    background-color: #C3C1C1;
+}
+
+.dark ::-webkit-scrollbar-corner {
+    background-color: #8d8888;
+}
+
+div.layui-form.layui-border-box.layui-table-view {
+    margin:0px !important;
+}
+
+div.layui-form.layui-border-box.layui-table-view {
+    margin: 0px !important;
+    position: relative;
+    height: 100%;
+    border-width: 0px;
+}
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-tool {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 10px 15px;
+    height: 50px;
+    left: 0px;
+}
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-box {
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    top: 50px;
+}
+
+/*div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-header {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 38px;
+    width: 100%;
+    border-bottom-width: 0px;
+    border-right-width: 17px;
+}*/
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-tool > div.layui-table-tool-temp {
+    padding-right: 0px !important;
+}
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-header > table {
+    width: 100%;
+}
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-body.layui-table-main {
+    overflow-x: auto;
+    overflow-y: scroll;
+    position: absolute;
+    top: 38px;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+/*div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div > table > thead > tr > th > div > div {
+    top:6px !important;
+}
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div > table > tbody > tr > td > div > div {
+    top:6px !important;
+}*/
+
+div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-body.layui-table-main > table {
+    width: 100%;
+}
+
+.layui-table-body {
+    margin-right: 0px;
+    /margin-bottom: 0px;
+}
+
+.dark .layui-layer-title {
+    background-color: #7c7171;
+    color: #fff;
+}
+
+.dark .layui-layer-title {
+    border-bottom: 1px solid #5d5a5a;
+}
+
+.dark .layui-tab-title {
+    background-color: #6c6969;
+}
+
+.dark .layui-tab-title .layui-this {
+    color: #fff;
+}
+
+.dark .layui-tab-title li {
+    color: #fff;
+}
+
+.dark .layui-tab-content {
+    border-color: #6c6969;
+}
+
+.dark .layui-table td, .dark .layui-table th, .dark .layui-table-col-set, .dark .layui-table-fixed-r, .dark .layui-table-grid-down, .dark .layui-table-header, .dark .layui-table-page, .dark .layui-table-tips-main, .dark .layui-table-tool, .dark .layui-table-total, .dark .layui-table-view, .dark .layui-table[lay-skin=line], .dark .layui-table[lay-skin=row] {
+    border-color: #4d4848;
+}
+
+.dark .layui-table tbody tr:hover, .dark .layui-table thead tr, .dark .layui-table-click, .dark .layui-table-header, .dark .layui-table-hover, .dark .layui-table-mend, .dark .layui-table-patch, .dark .layui-table-tool, .dark .layui-table-total, .dark .layui-table-total tr, .dark .layui-table[lay-even] tr:nth-child(even) {
+    background-color: #5b5959;
+    color: #fff;
+}
+
+.dark .layui-table {
+    background-color: #726c6c;
+    color: #fff;
+}
+
+.dark .layui-layer-dialog .layui-layer-content {
+    color: #fff;
+}
+
+.dark.layui-layer-page {
+    background-color: #726c6c;
+}
+
+.layui-layer-resize {
+    width: 5px !important;
+    height: 10px !important;
+    border-radius: 0px 0px 5px 0px;
+}
+
+.dark .layui-layer-resize {
+    background-color: #807b7b;
+}
+
+.light .layui-layer-resize {
+    background-color: #fff;
+}
+
+.layui-table-body {
+    margin: 0px;
+}
+
+/*
+.layui-btn:hover {
+    box-shadow: 2px 2px 5px #888;
+}
+*/
+
+.dark .layui-input, .dark .layui-select, .dark .layui-textarea {
+    background-color: #4c4a4a;
+    color: #fff;
+    /*height: 40px;*/
+}
+
+.dark .layui-form-pane .layui-form-label {
+    background-color: #5f5d5d;
+    color: #fff;
+}
+
+.layui-table-header {
+    border-right-width: 10px !important;
+}
+
+.dark .layui-carousel[lay-indicator=outside] .layui-carousel-ind ul {
+    background-color: rgb(141 135 135 / 50%);
+}
+
+.light .layui-carousel[lay-indicator=outside] .layui-carousel-ind ul {
+    background-color: rgb(130 129 129 / 50%);
+}
+
+.light #footer > div > p {
+    color: #888;
+}
+
+.light .layui-carousel-arrow {
+    background-color: rgba(0,0,0,.2);
+}
+
+.light .layui-carousel-arrow:hover, .light .layui-carousel-ind ul:hover {
+    background-color: rgba(0,0,0,.35);
+}
+
+.light .service-single {
+    background: #fff;
+}
+
+.light .service-single h2 {
+    color: #232323;
+}
+
+.dark #footer > div > p {
+    color: #fff;
+}
+
+.dark .layui-carousel-arrow {
+    background-color: #555;
+}
+
+.dark .layui-carousel-arrow:hover, .dark .layui-carousel-ind ul:hover {
+    background-color: rgba(119,119,119,.35);
+}
+
+.dark .service-single {
+    background: #3F3E40;
+}
+
+.dark .service-single h2 {
+    color: #fff;
+}
+
+body[class="light"] {
+    background-color: #fff !important;
+}
+
+body[class="dark"] {
+    background-color: #181818 !important;
+    color: #fff;
+}
+
+.mixly-board:hover .mixly-board-del-btn, .mixly-board:hover .mixly-board-ignore-btn {
+    display: block;
+}
+
+.mixly-board-del-btn, .mixly-board-ignore-btn {
+    display: none;
+    background-color: rgba(0,0,0,0);
+    border: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    opacity: 0.5;
+    color: #666;
+}
+
+.dark .mixly-board-del-btn, .dark .mixly-board-ignore-btn {
+    color: #ccc;
+}
+
+.mixly-board-del-btn:hover, .mixly-board-ignore-btn:hover {
+    opacity: 1;
+}
+
+/* 设置滚动条宽高 */
+.layer-extend ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* 设置滚动条滑槽 */
+.layer-extend ::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0px;
+}
+
+/* 设置滚动条滑块 */
+.light .layer-extend ::-webkit-scrollbar-thumb {
+    background-color: #C3C1C1;
+    border-radius: 4px;
+}
+
+.light .layer-extend ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.light .layer-extend ::-webkit-scrollbar-thumb:active {
+    background-color: #989998;
+}
+
+.dark .layer-extend ::-webkit-scrollbar-thumb {
+    background-color: #989998;
+    border-radius: 4px;
+}
+
+.dark .layer-extend ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.dark .layer-extend ::-webkit-scrollbar-thumb:active {
+    background-color: #C3C1C1;
+}
+
+.dark .layui-badge-rim, .layui-border,
+.dark .layui-colla-content,
+.dark .layui-colla-item,
+.dark .layui-collapse, .layui-elem-field,
+.dark .layui-form-pane .layui-form-item[pane],
+.dark .layui-form-pane .layui-form-label,
+.dark .layui-input, .layui-layedit,
+.dark .layui-layedit-tool,
+.dark .layui-panel,
+.dark .layui-quote-nm,
+.dark .layui-select,
+.dark .layui-tab-bar,
+.dark .layui-tab-card,
+.dark .layui-tab-title,
+.dark .layui-tab-title .layui-this:after,
+.dark .layui-textarea {
+    border-color: #493e3e;
+}
+
+.dark .layui-panel {
+    background-color: #615959;
+}
+
+.dark .layui-card-header {
+    color: #fff;
+    border-bottom: 1px solid #484040;
+}
+
+.dark .layui-progress-text {
+    color: #fff;
+}
+
+.dark .layui-layer-page {
+    background-color: #7d7979;
+}
+
+.layui-table-fixed-r > .layui-table-header {
+    border-bottom-width: 0px;
+}
+
+.layui-table-fixed-r > .layui-table-body > table {
+    width: 100%;
+}
+
+.dark .layui-table-body .layui-none {
+    color: #fff;
+}
+
+.dark .layui-form-checkbox[lay-skin=primary] span {
+    color: #fff;
+}

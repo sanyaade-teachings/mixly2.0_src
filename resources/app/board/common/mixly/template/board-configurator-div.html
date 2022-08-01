@@ -1,0 +1,222 @@
+<div style="width: 100%; height: 100%">
+    <style type="text/css">
+        #board-config-form {
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+        }
+
+        #board-config-form-div {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            width: 100%;
+            left: 0px;
+        }
+
+        /* 设置滚动条宽高 */
+        #board-config-form-div ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        /* 设置滚动条滑槽 */
+        #board-config-form-div ::-webkit-scrollbar-track {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 0px;
+        }
+
+        /* 设置滚动条滑块 */
+        .light #board-config-form-div ::-webkit-scrollbar-thumb {
+            background-color: #c3c1c1;
+            border-radius: 4px;
+        }
+
+        .light #board-config-form-div ::-webkit-scrollbar-thumb:hover {
+            background-color: #aeb2af;
+        }
+
+        .light #board-config-form-div ::-webkit-scrollbar-thumb:active {
+            background-color: #989998;
+        }
+
+        .dark #board-config-form-div ::-webkit-scrollbar-thumb {
+            background-color: #989998;
+            border-radius: 4px;
+        }
+
+        .dark #board-config-form-div ::-webkit-scrollbar-thumb:hover {
+            background-color: #aeb2af;
+        }
+
+        .dark #board-config-form-div ::-webkit-scrollbar-thumb:active {
+            background-color: #c3c1c1;
+        }
+
+        #board-config-menu .layui-nav-tree .layui-nav-item > a {
+            padding-top: 1px;
+        }
+
+        #board-config-menu-left {
+            width: 160px;
+            height: 100%;
+            position: absolute;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .light #board-config-menu-left {
+            background-color: #ffffff;
+            border-right: 1px solid #eee;
+        }
+
+        .dark #board-config-menu-left {
+            background-color: #656161;
+            border-right: 1px solid #8e8b8b;
+        }
+
+        #board-config-menu-options {
+            margin: 5px;
+            width: 150px;
+            border-left-width: 10px;
+        }
+
+        #board-config-menu-body {
+            position: absolute;
+            right: 0px;
+            left: 160px;
+            height: 100%;
+            overflow: auto;
+        }
+
+        /*.light #board-config-menu-body {
+            background-color: #fff;
+        }
+
+        .dark #board-config-menu-body {
+            background-color: #807b7b;
+        }*/
+
+        #board-config-menu-top {
+            position: absolute;
+            width: 100%;
+            top: 0px;
+            bottom: 10px;
+        }
+
+        #board-config-menu-bottom {
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            height: 10px;
+        }
+
+        .light #board-config-menu-bottom {
+            background-color: #ffffff;
+            border-top: 1px solid #eee;
+        }
+
+        .dark #board-config-menu-bottom {
+            background-color: #807b7b;
+            border-top: 1px solid #8e8b8b;
+        }
+
+        #board-config-menu-btn-group {
+            float: right;
+            padding-top: 4px;
+            padding-right: 10px;
+        }
+
+        #board-config-menu .layui-table-header {
+            border-right-width: 5px !important;
+        }
+
+        .layui-table-tips-c:before {
+            position: relative;
+            right: 1px;
+            top: -3px;
+        }
+
+        .light #board-config-menu .layui-bg-cyan {
+            background-color: #e9e9e9 !important;
+        }
+
+        .light #board-config-menu .layui-nav .layui-nav-item a {
+            color: #333;
+        }
+
+        .light #board-config-menu .layui-nav .layui-this a {
+            color: #fff;
+        }
+
+        .light #board-config-menu .layui-nav-tree .layui-nav-item:hover {
+            background-color: #f2f2f2;
+            transition: 0.5s all;
+        }
+
+        .dark #board-config-menu .layui-bg-cyan {
+            background-color: #4e4d4f !important;
+        }
+
+        .dark #board-config-menu .layui-nav .layui-nav-item a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .dark #board-config-menu .layui-nav .layui-this a {
+            color: #fff;
+        }
+
+        .dark #board-config-menu .layui-nav-tree .layui-nav-item:hover {
+            background-color: #afa7a7;
+            transition: 0.5s all;
+        }
+    </style>
+    <div id="board-config-form-div">
+        <div id="board-config-menu" class="layui-layer-wrap">
+            <div id="board-config-menu-top">
+                <div id="board-config-menu-left">
+                    <ul
+                        id="board-config-menu-options"
+                        class="layui-nav layui-nav-tree layui-bg-cyan layui-inline"
+                        lay-filter="board-config-menu-filter"
+                    >
+                        {{#  layui.each(d.menuList, function(index, item){ }}
+                            <li class="layui-nav-item" m-key="{{item}}">
+                                <a href="javascript:;">{{item}}</a>
+                            </li>
+                        {{#  }); }}
+                    </ul>
+                </div>
+                <div id="board-config-menu-body">
+                    <form
+                        class="layui-form layui-form-pane"
+                        id="board-config-form"
+                        lay-filter="board-config-form-filter"
+                    >
+                        <div class="layui-form-item layui-form-text">
+                            <div
+                                class="layui-input-block"
+                                style="width: 100%; margin: 0px; text-align: center"
+                            >
+                                <button
+                                    class="layui-btn layui-btn-normal layui-btn-sm"
+                                    lay-submit
+                                    lay-filter="board-config-submit"
+                                >
+                                    {{d.apply}}
+                                </button>
+                                <button
+                                    type="reset"
+                                    class="layui-btn layui-btn-normal layui-btn-sm"
+                                >
+                                    {{d.reset}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="board-config-menu-bottom"></div>
+        </div>
+    </div>
+</div>

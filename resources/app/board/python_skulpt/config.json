@@ -1,0 +1,11 @@
+{
+    "language": "Python",
+    "nav": {
+        "webrun": true,
+        "webcancel": true,
+        "save": {
+            "img": true,
+            "py": true
+        }
+    }
+}

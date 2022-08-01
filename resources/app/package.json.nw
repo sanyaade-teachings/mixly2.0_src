@@ -1,0 +1,27 @@
+{
+  "name": "Mixly2.0",
+  "version": "2.0.0",
+  "description": "Mixly，A Visual Program IDE for K12",
+  "repository": "",
+  "node-main": "./static-server/server.js",
+  "main": "http://localhost:9007",
+  "node-remote": "http://localhost:9007",
+  "scripts": {
+    "start": "nw ."
+  },
+  "keywords": [
+    "NW.js",
+    "server"
+  ],
+  "author": "Mixly TEAM",
+  "license": "other",
+  "devDependencies": {
+    "nw": "0.60.0-sdk"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
+}

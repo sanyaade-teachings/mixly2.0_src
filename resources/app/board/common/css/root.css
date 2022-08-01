@@ -1,0 +1,29 @@
+:root {
+    --nav-height: 35px;
+    --nav-left-btn-height: 28px;
+    --nav-left-btn-font-size: 14px;
+    --nav-right-btn-height: 26px;
+    --nav-right-btn-font-size: 16px;
+    --nav-select-height: 28px;
+    --footer-height: 22px;
+}
+
+/*@media screen and (max-width: 1920px) {
+    :root {
+        --nav-height: 35px;
+        --nav-left-btn-height: 28px;
+        --nav-right-btn-height: 26px;
+        --nav-select-height: 28px;
+        --footer-height: 22px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    :root {
+        --nav-height: 45px;
+        --nav-left-btn-height: 35px;
+        --nav-right-btn-height: 32px;
+        --nav-select-height: 35px;
+        --footer-height: 30px;
+    }
+}*/

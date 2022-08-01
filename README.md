@@ -1,37 +1,28 @@
-# mixly2.0_src
+## Mixly图形化编程软件(跨平台代码)
 
-#### 介绍
-mixly2.0_src
+![首页](https://images.gitee.com/uploads/images/2022/0617/011457_3dd93247_5225463.jpeg "屏幕截图.png")
 
-#### 软件架构
-软件架构说明
+![板卡页面](https://images.gitee.com/uploads/images/2022/0617/011645_48689fe3_5225463.jpeg "屏幕截图.png")
 
+### Mixly官方网站
 
-#### 安装教程
+http://mixly.org
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### Mixly wiki帮助
 
-#### 使用说明
+http://wiki.mixly.org
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 更新工具
 
-#### 参与贡献
+- Mixly2.0-win32-x64一键更新工具：[下载](http://106.52.57.223:8888/down/SQruvj5BCTww)
+- Mixly2.0-win32-ia32一键更新工具：[下载](http://106.52.57.223:8888/down/bINJqIDY7625)
+- Mixly2.0-mac一键更新工具(x64 & arm64)：[下载](http://106.52.57.223:8888/down/ouypvPqHncQI)
+- Mixly2.0-linux-x64一键更新工具：[下载](http://106.52.57.223:8888/down/H6UT9elkcWlp)
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+### 更新说明
 
+https://gitee.com/mixly2/mixly2.0-win32-x64/blob/master/CHANGELOG.md
 
-#### 特技
+### 官方交流群
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+![群二维码](https://images.gitee.com/uploads/images/2022/0617/011215_1fbe6d6a_5225463.png)

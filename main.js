@@ -170,8 +170,38 @@ function createWindow(filePath = null, indexUrl = null) {
     });
 
     //创建一个新页面
-    electronLocalshortcut.register(win, 'CmdOrCtrl+N', () => {
+    electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+N', () => {
         createWindow(null);
+    });
+
+    //保存文件
+    electronLocalshortcut.register(win, 'CmdOrCtrl+S', () => {
+        const commandObj = {
+            obj: 'Mixly.Electron.File',
+            func: 'save'
+        }
+        const commandStr = JSON.stringify(commandObj);
+        win.webContents.send('command', commandStr);
+    });
+
+    //文件另存为
+    electronLocalshortcut.register(win, 'CmdOrCtrl+Shift+S', () => {
+        const commandObj = {
+            obj: 'Mixly.Electron.File',
+            func: 'saveAs'
+        }
+        const commandStr = JSON.stringify(commandObj);
+        win.webContents.send('command', commandStr);
+    });
+
+    //新建文件
+    electronLocalshortcut.register(win, 'CmdOrCtrl+N', () => {
+        const commandObj = {
+            obj: 'Mixly.Electron.File',
+            func: 'newFile'
+        }
+        const commandStr = JSON.stringify(commandObj);
+        win.webContents.send('command', commandStr);
     });
 
     win.once('ready-to-show', () => {

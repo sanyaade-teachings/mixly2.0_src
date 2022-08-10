@@ -31,7 +31,8 @@ const {
     fs,
     fs_extend,
     fs_extra,
-    path
+    path,
+    app
 } = Modules;
 
 Example.DEPTH = 4;
@@ -62,7 +63,7 @@ Example.getExampleList = () => {
     if (BOARD.thirdPartyBoard) {
         samplePath = path.resolve(Env.indexPath, 'examples');
     } else {
-        samplePath = path.resolve(Env.clientPath, 'sample', BOARD.boardName);
+        samplePath = path.resolve(app.getAppPath(), 'src/sample', BOARD.boardName);
     }
     const sampleList = Example.getExamplesByPath(samplePath, '.mix');
     if (sampleList.length) {

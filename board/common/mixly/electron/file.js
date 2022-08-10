@@ -35,12 +35,13 @@ const {
     fs_extend,
     fs,
     path,
-    electron_remote
+    electron_remote,
+    app
 } = Modules;
 
 const { dialog } = electron_remote;
 
-File.DEFAULT_PATH = path.resolve(Env.clientPath, './sample');
+File.DEFAULT_PATH = path.resolve(app.getAppPath(), 'src/sample');
 
 File.workingPath = File.DEFAULT_PATH;
 

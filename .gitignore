@@ -1,0 +1,11 @@
+# 同步时忽略以下路径
+__pycache__
+
+board/**/libraries/ThirdParty/
+board/**/libraries/myLib/
+board/**/libraries/cloudLibsUrl.json
+!board/ThirdParty/common/
+board/ThirdParty/
+*.DS_Store
+board/**/wiki/content.md
+board/**/build/lib/libs.json

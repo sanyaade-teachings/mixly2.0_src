@@ -14,8 +14,8 @@ http://wiki.mixly.org
 
 ### 更新工具
 
-- Mixly2.0-win32-x64一键更新工具：[下载](http://106.52.57.223:8888/down/SQruvj5BCTww)
-- Mixly2.0-win32-ia32一键更新工具：[下载](http://106.52.57.223:8888/down/bINJqIDY7625)
+- Mixly2.0-win32-x64一键更新工具：[下载](http://106.52.57.223:8888/down/JR3kt1PdFGGk)
+- Mixly2.0-win32-ia32一键更新工具：[下载](http://106.52.57.223:8888/down/wqNvZZHc40iT)
 - Mixly2.0-mac一键更新工具(x64 & arm64)：[下载](http://106.52.57.223:8888/down/ouypvPqHncQI)
 - Mixly2.0-linux-x64一键更新工具：[下载](http://106.52.57.223:8888/down/H6UT9elkcWlp)
 

@@ -3493,3 +3493,7 @@ Blockly.MIXLY_SIGNAL_NOISE_RATE = 'signal to noise ratio';
 Blockly.MIXLY_LORA_INIT_TOOLTIP = 'frequency:433±20, coding rate:5~8, spreading factor:6~12, tx power:5~23';
 Blockly.Msg.ROTATION_FORWARD = "forward rotation";
 Blockly.Msg.ROTATION_BACKWARD = "backward rotation";
+Blockly.Msg.ME_GO_PITCH = 'pitch';
+Blockly.Msg.ME_GO_ROLL = 'roll';
+Blockly.Msg.BOARD_DIRECTION = 'board condition';
+Blockly.MIXLY_GET_GESTURE = 'get car gesture';

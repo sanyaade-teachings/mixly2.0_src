@@ -59,6 +59,10 @@ Blockly.Python.me_go_dc_motor=function(){
     var wheel = this.getFieldValue('wheel');
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var v = this.getFieldValue('direction');
+    if(wheel==0){
+        if(v=='CW'){v='CCW'}
+        else if(v=='CCW'){v='CW'}    
+    }
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
     var code = "car.motor(car.MOTO["+wheel+'],"'+ v + '",' + speed+")\n";
     return code;

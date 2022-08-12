@@ -9,6 +9,7 @@ Micropython library for the MXC6655XA Accelerometer
 dahanzimin From the Mixly Team 
 """
 import time
+from math import atan,sqrt,degrees
 from micropython import const
 
 MXC6655XA_ADDRESS	     = const(0x15)
@@ -77,3 +78,9 @@ class MXC6655XA:
 	
 	def temperature(self): 
 		return self.getdata[3]
+
+	def eulerangles(self,upright=False): 
+		x,y,z=self.acceleration()
+		pitch = degrees(atan(z / sqrt(x ** 2 + y ** 2))) if upright else degrees(atan(y / sqrt(x ** 2 + z ** 2)))
+		roll =  degrees(atan(x / sqrt(y ** 2 + z ** 2)))
+		return round(pitch,2),round(roll,2)

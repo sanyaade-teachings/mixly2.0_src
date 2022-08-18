@@ -21,19 +21,13 @@ def wlan_connect(ssid='MYSSID', password='MYPASS'):
             pass
     print('network config:', wlan.ifconfig())
 
-def do_connect(id,password):
-    import network
-    sta_if = network.WLAN(network.STA_IF)
-    ap_if = network.WLAN(network.AP_IF)
-    if ap_if.active():
-        ap_if.active(False)
-    if not sta_if.isconnected():
-        print('connecting to network...')
-    sta_if.active(True)
-    sta_if.connect(id, password)
-    while not sta_if.isconnected():
-        pass
-    print('network config:', sta_if.ifconfig())
+def ntp(url='mixio.mixly.cn'):
+    import urequests
+    try:
+        results=eval(urequests.get('http://{}/time.php'.format(url)).text)
+    except Exception as e:
+        raise RuntimeError("API request failed or WiFi is not connected",e) 
+    return results
     
 def init_MQTT_client(address, username, password,MQTT_USR_PRJ):
     client = MQTTClient(hexlify(machine.unique_id()), address, 1883, username, password)

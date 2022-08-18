@@ -258,3 +258,26 @@ Blockly.Blocks['me_go_pin_near_state_change'] = {
         this.setInputsInline(true);
     }
 };
+
+Blockly.Blocks['sensor_mixgome_eulerangles'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.MIXLY_GET_GESTURE)   
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.ME_GO_PITCH,'[0]'],
+                [Blockly.Msg.ME_GO_ROLL,'[1]'],
+                [Blockly.Msg.ME_GO_PITCH+', '+Blockly.Msg.ME_GO_ROLL,'']
+                ]),'angle');         
+        // this.appendDummyInput("")
+        //     .appendField(Blockly.Msg.BOARD_DIRECTION)   
+        //     .appendField(new Blockly.FieldDropdown([
+        //         [Blockly.OLED_VER,'True'],
+        //         [Blockly.OLED_HOR,'False'],                
+        //         ]),'dir');             
+        this.appendDummyInput("")        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        
+    }
+};

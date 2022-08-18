@@ -3595,3 +3595,7 @@ Blockly.MIXLY_SIGNAL_NOISE_RATE = '信噪比';
 Blockly.MIXLY_LORA_INIT_TOOLTIP = '频率433±20, 编码率5~8, 扩频因子6~12, 发射功率5~23';
 Blockly.Msg.ROTATION_FORWARD = "正转";
 Blockly.Msg.ROTATION_BACKWARD = "反转";
+Blockly.Msg.ME_GO_PITCH = '俯仰角';
+Blockly.Msg.ME_GO_ROLL = '横滚角';
+Blockly.Msg.BOARD_DIRECTION = '主板状态';
+Blockly.MIXLY_GET_GESTURE = '获取小车姿态';

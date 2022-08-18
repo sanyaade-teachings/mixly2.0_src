@@ -114,3 +114,11 @@ Blockly.Python.me_go_pin_near_state_change = function(){
    
     return code;
 };
+
+
+Blockly.Python.sensor_mixgome_eulerangles=function(){
+    Blockly.Python.definitions_['import_mixgo_me_onboard_mxc6655xa'] = "from mixgo_me import onboard_mxc6655xa";
+    var angle = this.getFieldValue('angle');
+    var code = 'onboard_mxc6655xa.eulerangles(upright=True)'+angle;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

@@ -141,11 +141,19 @@ class Motor:
 			self._apin.duty_u16(65535)
 			self._bpin.duty_u16(65535)
 		elif action=="CW":
-			self._apin.duty_u16(speed*65535//100)
-			self._bpin.duty_u16(0)
+			if speed >=0:
+				self._apin.duty_u16(speed*65535//100)
+				self._bpin.duty_u16(0)
+			else:
+				self._apin.duty_u16(0)
+				self._bpin.duty_u16(-speed*65535//100)				
 		elif action=="CCW":
-			self._apin.duty_u16(0)
-			self._bpin.duty_u16(speed*65535//100)
+			if speed >=0:
+				self._apin.duty_u16(0)
+				self._bpin.duty_u16(speed*65535//100)
+			else:
+				self._apin.duty_u16(-speed*65535//100)
+				self._bpin.duty_u16(0)			
 		else:
 			raise ValueError('Invalid input, valid are "N","P","CW","CCW"')
 

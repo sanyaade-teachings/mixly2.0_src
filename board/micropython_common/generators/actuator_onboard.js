@@ -103,30 +103,34 @@ Blockly.Python.actuator_led_brightness = function() {
 };
 
 Blockly.Python.mixgo_actuator_led_bright = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_mixgo_onboard_led'+op] = 'from mixgo import led'+op;
+    Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
     var bright = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
     var code = "led"+op+".setonoff("+ bright+")\n";
     return code;
 };
 
 Blockly.Python.mixgo_actuator_get_led_bright = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_mixgo_onboard_led'+op] = 'from mixgo import led'+op;
+    Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
     var code = "led"+op+".getbrightness()";
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
 Blockly.Python.mixgo_actuator_get_led_state = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_mixgo_onboard_led'+op] = 'from mixgo import led'+op;
+    Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
     var code = "led" +op +".getonoff()";
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
 Blockly.Python.mixgo_actuator_led_brightness = function() {    
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_mixgo_onboard_led'+op] = 'from mixgo import led'+op;
+    Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
     var flag = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
     var code = "led" + op + ".setbrightness("+ flag+")\n";
     return code;

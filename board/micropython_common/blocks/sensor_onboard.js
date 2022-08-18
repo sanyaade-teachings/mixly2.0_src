@@ -288,7 +288,15 @@ Blockly.Blocks['number1'] = {
 }
 };
 
-
+Blockly.Blocks['number2'] = {
+   init: function() {
+    this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+    this.appendDummyInput("")
+    .appendField(new Blockly.FieldDropdown([["1", "touch1"], ["2", "touch2"],["3", "touch3"], ["4", "touch4"]]), 'op')
+    this.setOutput(true);
+    this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_HIGHLOW);
+}
+};
 
 Blockly.Blocks['sensor_mixgo_pin_near'] = {
     init: function(){
@@ -761,6 +769,20 @@ Blockly.Blocks['sensor_mixgome_temperature'] = {
     }
 };
 
+//mixgo_ce onboard_sensor blocks:
+
+
+Blockly.Blocks['sensor_mixgoce_temperature'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.MIXLY_GETTEMPERATUE)            
+        this.appendDummyInput("")        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        
+    }
+};
 //mpython onboard_sensor:
 Blockly.Blocks['sensor_mpython_qmi8658_get_acceleration'] = {
     init: function(){

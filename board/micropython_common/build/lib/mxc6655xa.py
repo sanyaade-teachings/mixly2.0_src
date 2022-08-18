@@ -37,11 +37,12 @@ MXC6655XA_T_SENSITIVITY	  =0.586
 
 class MXC6655XA:
 
-	def __init__(self,i2c_bus,set_range=2):
+	def __init__(self,i2c_bus,set_range=2, front=False):
 		self._device = i2c_bus
 		self._address = MXC6655XA_ADDRESS
 		self._range = set_range     #default 8g range
-		
+		self._front = front
+
 		if self._chip_id() != 0x02:
 			raise AttributeError("Cannot find a MXC6655XA")
 		self._Enable()              #star
@@ -71,7 +72,7 @@ class MXC6655XA:
 		y_acc=float((self.u2s(data_reg[2])<<8|data_reg[3])>>4)/_Range_X[self._range]
 		z_acc=float((self.u2s(data_reg[4])<<8|data_reg[5])>>4)/_Range_X[self._range]
 		t_acc=float(self.u2s(data_reg[6]))*MXC6655XA_T_SENSITIVITY + MXC6655XA_T_ZERO
-		return (y_acc,-x_acc,z_acc,round(t_acc,1))
+		return (-y_acc,-x_acc,z_acc,round(t_acc,1)) if self._front else (y_acc,-x_acc,z_acc,round(t_acc,1))
 
 	def acceleration(self): 
 		return self.getdata[0:3]

@@ -84,5 +84,10 @@
         "boardName": "Arduino ESP32C3",
         "boardIndex": "./board/arduino_esp32c3/index.html",
         "env": 1
+    },{
+        "boardImg": "./board/micropython_esp32s2/media/mixgoce.png",
+        "boardName": "Python ESP32-S2",
+        "boardIndex": "./board/micropython_esp32s2/index.html",
+        "env": 2
     }
 ]

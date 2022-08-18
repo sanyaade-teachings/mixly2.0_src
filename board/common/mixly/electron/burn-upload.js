@@ -64,15 +64,6 @@ BU.uploadAndCopyLib = false;
 
 BU.shell = null;
 
-function isExitsFunction(funcName) {
-    try {
-        if (typeof (eval(funcName)) == "function") {
-            return true;
-        }
-    } catch (e) { }
-    return false;
-}
-
 function replaceWithReg(str, newData, type) {
     if (str) {
         try {
@@ -817,17 +808,13 @@ BU.searchLibs = function (code, libArr) {
     var moduleName = "";
     var pyFileArr = [];
     for (var i = 0; i < arrayObj.length; i++) {
-        if (arrayObj[i].indexOf("from") === 0) {
-            moduleName = arrayObj[i].substring(4, arrayObj[i].indexOf("import"));
+        const fromLoc = arrayObj[i].indexOf("from");
+        const importLoc = arrayObj[i].indexOf("import");
+        if (fromLoc !== -1) {
+            moduleName = arrayObj[i].substring(fromLoc + 4, arrayObj[i].indexOf("import"));
             moduleName = moduleName.replace(/(^\s*)|(\s*$)/g, "");
-        } else if (arrayObj[i].indexOf("from") === 4) {
-            moduleName = arrayObj[i].substring(8, arrayObj[i].indexOf("import"));
-            moduleName = moduleName.replace(/(^\s*)|(\s*$)/g, "");
-        } else if (arrayObj[i].indexOf("import") === 0) {
-            moduleName = arrayObj[i].substring(6);
-            moduleName = moduleName.replace(/(^\s*)|(\s*$)/g, "");
-        } else if (arrayObj[i].indexOf("import") === 4) {
-            moduleName = arrayObj[i].substring(10);
+        } else if (importLoc !== -1) {
+            moduleName = arrayObj[i].substring(importLoc + 6);
             moduleName = moduleName.replace(/(^\s*)|(\s*$)/g, "");
         } else {
             continue;

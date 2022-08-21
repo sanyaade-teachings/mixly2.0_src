@@ -266,7 +266,7 @@ function createWindow(filePath = null, indexUrl = null) {
     });
 }
 
-app.on('ready', function () {
+app.on('ready', () => {
     if (process.argv.length >= 2) {
         createWindow(process.argv[1]);
     } else {
@@ -274,9 +274,16 @@ app.on('ready', function () {
     }
 });
 
+app.on('activate', () => {
+    createWindow(null);
+});
+
 // 页面全部关闭后关闭主进程,不同平台可能有不同的处理方式
 app.on('window-all-closed', () => {
-    app.quit();
+    usbDetection.stopMonitoring();
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });
 
 app.on('render-process-gone', async (e, w, d) => {

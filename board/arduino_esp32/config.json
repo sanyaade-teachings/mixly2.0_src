@@ -258,7 +258,7 @@
                         "key": "default",
                         "label": "Default"
                     }, {
-                        "key": "Large APP",
+                        "key": "no_ota",
                         "label": "No OTA (Large APP)"
                     }
                 ],
@@ -279,7 +279,7 @@
                         "key": "default",
                         "label": "Default"
                     }, {
-                        "key": "Large APP",
+                        "key": "no_ota",
                         "label": "No OTA (Large APP)"
                     }
                 ],

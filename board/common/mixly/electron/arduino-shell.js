@@ -285,20 +285,6 @@ ArduShell.upload = (boardType, port) => {
     });
     StatusBar.show(1);
     StatusBar.setValue(indexText["上传中"] + "...\n", true);
-    let myLibPath = Env.indexPath + "/libraries/myLib/";
-    if (fs_extend.isdir(myLibPath))
-        myLibPath += '\",\"';
-    else
-        myLibPath = '';
-    const thirdPartyPath = path.resolve(Env.indexPath, 'libraries/ThirdParty');
-    if (fs_extend.isdir(thirdPartyPath)) {
-        const libList = fs.readdirSync(thirdPartyPath);
-        for (let libName of libList) {
-            const libPath = path.resolve(thirdPartyPath, libName, 'libraries');
-            if (!fs_extend.isdir(libPath)) continue;
-            myLibPath += libPath + ',';
-        }
-    }
     const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),
     buildPath = path.resolve(Env.clientPath, './mixlyBuild'),
@@ -313,12 +299,25 @@ ArduShell.upload = (boardType, port) => {
             + ' upload -p '
             + port
             + ' --config-file \"'
-            + '\" --build-cache-path \"' + buildCachePath + '\" --verbose --libraries \"'
-            + myLibPath
+            + configPath
             + '\" --verbose '
             + '-i \"' + ArduShell.binFilePath + '\"';
         ArduShell.binFilePath = '';
     } else {
+        let myLibPath = Env.indexPath + "/libraries/myLib/";
+        if (fs_extend.isdir(myLibPath))
+            myLibPath += '\",\"';
+        else
+            myLibPath = '';
+        const thirdPartyPath = path.resolve(Env.indexPath, 'libraries/ThirdParty');
+        if (fs_extend.isdir(thirdPartyPath)) {
+            const libList = fs.readdirSync(thirdPartyPath);
+            for (let libName of libList) {
+                const libPath = path.resolve(thirdPartyPath, libName, 'libraries');
+                if (!fs_extend.isdir(libPath)) continue;
+                myLibPath += libPath + ',';
+            }
+        }
         cmdStr = '\"'
             + ArduShell.shellPath
             + '\" compile -b '
@@ -600,8 +599,9 @@ ArduShell.writeFile = function (readPath, writePath) {
 
 ArduShell.showUploadBox = function (filePath) {
     const dirPath = path.dirname(filePath);
-    if (fs_extend.isdir(dirPath)) {
-        filePath = path.resolve(dirPath, './' + path.basename(filePath, path.extname(filePath)));
+    const fileName = path.basename(filePath, path.extname(filePath));
+    if (fs_extend.isdir(path.resolve(dirPath, fileName))) {
+        filePath = path.resolve(dirPath, fileName, path.basename(filePath));
     }
     const layerNum = layer.msg(indexText['所打开文件可直接上传'], {
         time: -1,
@@ -625,9 +625,9 @@ ArduShell.showUploadBox = function (filePath) {
     });
 }
 
-ArduShell.uploadWithBinOrHex = function (path) {
+ArduShell.uploadWithBinOrHex = function (filePath) {
     layer.closeAll();
-    ArduShell.binFilePath = path;
+    ArduShell.binFilePath = filePath;
     ArduShell.initUpload();
 }
 })();

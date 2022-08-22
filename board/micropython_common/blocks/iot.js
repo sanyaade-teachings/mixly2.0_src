@@ -464,7 +464,8 @@ Blockly.Blocks['IOT_MIXIO_NTP']={
         // this.appendValueInput('VAR')
         //     .setCheck("var")
         this.appendDummyInput()
-            .appendField("MIXIO"+Blockly.MIXLY_GET_NTP)
+            .appendField("MIXIO")
+            .appendField(Blockly.MIXLY_GET_NTP)
         this.appendValueInput('addr')
             .appendField(Blockly.blynk_SERVER_ADD);     
         this.setInputsInline(true);

@@ -558,7 +558,7 @@ Blockly.Blocks.syn6288_builtin_voice = {
             .appendField(Blockly.MIXLY_PLAY_HINTS);
         this.appendDummyInput()
         .appendField(Blockly.MIXLY_PROGRAM_BLOCK)
-        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'False']]), 'mode');      
+        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']]), 'mode');      
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -579,7 +579,7 @@ Blockly.Blocks.syn6288_tts_play = {
             .appendField(Blockly.MIXLY_BACKGROUND_MUSIC);
         this.appendDummyInput()
         .appendField(Blockly.MIXLY_PROGRAM_BLOCK)
-        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'False']]), 'mode');      
+        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']]), 'mode');      
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);

@@ -77,7 +77,7 @@
             "micropython:esp32s2:mixgo_ce": {
                 "binFile": [
                     {
-                        "offset": "0x0",
+                        "offset": "0x1000",
                         "path": "./build/MixGo_CE-0x1000-V1.19.1-220714.bin"
                     }
                 ]
@@ -85,7 +85,7 @@
             "micropython:esp32s2:generic": {
                 "binFile": [
                     {
-                        "offset": "0x0",
+                        "offset": "0x1000",
                         "path": "./build/MixGo_CE-0x1000-V1.19.1-220714.bin"
                     }
                 ]

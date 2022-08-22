@@ -56,6 +56,15 @@ Blockly.Python.serial_softserial = function () {
   return "uart"+dropdown_uart+"=machine.UART("+dropdown_uart+", "+baudrate+")\n";
 };
 
+Blockly.Python.serial_softserial_new = function () {
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  var rx = Blockly.Python.valueToCode(this, 'RX', Blockly.Python.ORDER_ATOMIC);
+  var tx = Blockly.Python.valueToCode(this, 'TX', Blockly.Python.ORDER_ATOMIC);
+   var dropdown_uart = this.getFieldValue('mode')
+  var baudrate = this.getFieldValue('baudrate');
+  return "uart"+dropdown_uart+"=machine.UART("+dropdown_uart+", tx=" + tx  +", rx=" + rx +", baudrate=" +baudrate+")\n";
+};
+
 Blockly.Python.system_input = function() {
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';

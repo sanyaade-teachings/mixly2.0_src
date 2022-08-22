@@ -1397,7 +1397,18 @@
           </shadow>
         </value>
       </block>
-      <block type="serial_softserial"></block>
+      <block type="serial_softserial_new">
+        <value name="RX">
+          <shadow type="pins_digital_pin">
+              <field name="PIN">0</field>
+            </shadow>
+        </value>
+        <value name="TX">
+          <shadow type="pins_digital_pin">
+              <field name="PIN">2</field>
+            </shadow>
+        </value>        
+      </block>
       <block type="serial_print">
         <value name="CONTENT">
           <shadow type="text">
@@ -2364,6 +2375,13 @@
         <block type="iot_mixio_connect_only"></block>
         <block type="iot_mixio_disconnect"></block>
         <block type="IOT_EMQX_PING"></block>
+        <block type="IOT_MIXIO_NTP">
+          <value name="addr">
+            <shadow type="text">
+              <field name="TEXT">mixio.xbed.cn</field>
+            </shadow>
+          </value>
+        </block>
         <!-- <block type="iot_mixio_format_topic">
           <value name="VAR">
             <shadow type="variables_get">
@@ -3837,6 +3855,69 @@
           </shadow>
         </value>
       </block>
+       <block type="serial_softserial_new">
+        <value name="RX">
+          <shadow type="pins_digital_pin">
+              <field name="PIN">0</field>
+            </shadow>
+        </value>
+        <value name="TX">
+          <shadow type="pins_digital_pin">
+              <field name="PIN">2</field>
+            </shadow>
+        </value>    
+        <next>
+         <block type="actuator_use_uart_init">
+          <value name="SUB">
+              <shadow type="variables_get">
+                <field name="VAR">tts</field>
+              </shadow>
+            </value>           
+          </block>
+        </next>
+        </block>
+        <block type="syn6288_set_voice">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">tts</field>
+            </shadow>
+          </value>
+          <value name="VOICE">
+            <shadow type="pins_tts_voice"></shadow>
+          </value>          
+        </block>
+        <block type="syn6288_get_voice">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">tts</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="syn6288_builtin_voice">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">tts</field>
+            </shadow>
+          </value>
+          <value name="VOICE">
+            <shadow type="pins_tts_builtin_music"></shadow>
+          </value>          
+        </block>
+        <block type="syn6288_tts_play">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">tts</field>
+            </shadow>
+          </value>
+          <value name="data">
+            <shadow type="text">
+              <field name="TEXT">你好米思齐</field>
+            </shadow>
+          </value>
+          <value name="VOICE">
+            <shadow type="pins_tts_bgmusic"></shadow>
+          </value>          
+        </block>
     </category>
     <category id="catExternMonitor" colour='5BA5A5' m-hide="micropython:esp32:rm_e1">
 
@@ -4541,7 +4622,7 @@
       </block>
     </category>
     
-    <category id="catNetwork" colour="225">
+    <category id="catNetwork" colour="225">      
       <block type="iot_wifi_connect">
         <value name="WIFINAME">
           <shadow type="text">

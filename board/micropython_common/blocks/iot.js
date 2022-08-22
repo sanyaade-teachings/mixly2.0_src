@@ -458,6 +458,20 @@ Blockly.Blocks['IOT_EMQX_PING']={
     }
 };
 
+Blockly.Blocks['IOT_MIXIO_NTP']={
+    init: function() {
+        this.setColour(Blockly.Blocks.iot.HUE);
+        // this.appendValueInput('VAR')
+        //     .setCheck("var")
+        this.appendDummyInput()
+            .appendField("MIXIO"+Blockly.MIXLY_GET_NTP)
+        this.appendValueInput('addr')
+            .appendField(Blockly.blynk_SERVER_ADD);     
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
 Blockly.Blocks['IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE'] = {
    init: function() {
     this.setColour(Blockly.Blocks.iot.HUE);

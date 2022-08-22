@@ -120,15 +120,16 @@ Blockly.Blocks['serial_readstr_until'] = {
   }
 };
 
-Blockly.Blocks['serial_softserial'] = {
+Blockly.Blocks['serial_softserial_new'] = {
   init: function() {
    this.setColour(Blockly.Blocks.serial.HUE);
-   this.appendValueInput("RX", Number)
+   this.appendValueInput("RX")
        .appendField(Blockly.MIXLY_SETUP)
+       .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
 	   .appendField("RX#")
        .setCheck(Number)
 	   .setAlign(Blockly.ALIGN_RIGHT);
-    this.appendValueInput("TX", Number)
+    this.appendValueInput("TX")
 	   .appendField("TX#")
        .setCheck(Number)
 	   .setAlign(Blockly.ALIGN_RIGHT);

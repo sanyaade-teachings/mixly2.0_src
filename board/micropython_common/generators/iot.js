@@ -199,6 +199,14 @@ Blockly.Python.IOT_EMQX_PING = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.IOT_MIXIO_NTP = function(block) {
+  Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
+  var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
+  var code ='mixiot.ntp(' + addr + ')';  
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+
 Blockly.Blocks['iot_wificonnect'] = Blockly.Blocks['iot_wifi_connect'];
 Blockly.Blocks['iot_onenetconnect'] = Blockly.Blocks['iot_onenet_connect'];
 Blockly.Blocks['iot_onenetdisconnect'] = Blockly.Blocks['iot_onenet_disconnect'];

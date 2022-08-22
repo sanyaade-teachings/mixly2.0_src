@@ -224,3 +224,45 @@ Blockly.Python.actuator_neopixel_rgb=function(){
   var code= v + '['+value_led+'] = ('+value_rvalue+', '+value_gvalue+', '+value_bvalue+')\n';
   return code;
 };
+
+Blockly.Python.actuator_use_uart_init=function(){
+  Blockly.Python.definitions_['import_syn6288'] = 'import syn6288';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v + '=syn6288.SYN6288(' + key +')\n';    
+    return code;
+};
+
+Blockly.Python.syn6288_set_voice=function(){
+    Blockly.Python.definitions_['import_music'] = 'import music';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var voice = Blockly.Python.valueToCode(this, 'VOICE', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = v+".volume("+ voice +")\n";
+    return code;
+};
+
+Blockly.Python.syn6288_get_voice=function(){
+    Blockly.Python.definitions_['import_music'] = 'import music';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var code =  v+".volume()";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.syn6288_builtin_voice=function(){
+    Blockly.Python.definitions_['import_music'] = 'import music';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
+    var voice = Blockly.Python.valueToCode(this, 'VOICE', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = v+".hint_tones("+ voice +',blocking='+ mode +")\n";
+    return code;
+};
+
+Blockly.Python.syn6288_tts_play=function(){
+    Blockly.Python.definitions_['import_music'] = 'import music';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
+    var voice = Blockly.Python.valueToCode(this, 'VOICE', Blockly.Python.ORDER_ASSIGNMENT);
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = v+".synthesis("+ data + ',music='+ voice +',blocking='+ mode +")\n";
+    return code;
+};

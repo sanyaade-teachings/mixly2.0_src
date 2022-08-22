@@ -1939,6 +1939,13 @@
         <block type="iot_mixio_connect_only"></block>
         <block type="iot_mixio_disconnect"></block>
         <block type="IOT_EMQX_PING"></block>
+        <block type="IOT_MIXIO_NTP">
+          <value name="addr">
+            <shadow type="text">
+              <field name="TEXT">mixio.xbed.cn</field>
+            </shadow>
+          </value>
+        </block>
         <!-- <block type="iot_mixio_format_topic">
           <value name="VAR">
             <shadow type="variables_get">

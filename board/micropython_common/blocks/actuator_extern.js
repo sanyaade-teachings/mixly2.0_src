@@ -497,3 +497,92 @@ Blockly.Blocks.actuator_neopixel_write = {
         this.setTooltip(Blockly.MIXLY_ESP32_MUSIC_WRI);
     }
 };
+
+Blockly.Blocks.actuator_use_uart_init = {
+    init: function () {
+        this.setColour(Blockly.Blocks.actuator_extern.HUE);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"uart")
+            .appendField(new Blockly.FieldDropdown([
+                ["uart1", "uart1"],         
+                ["uart2","uart2"]
+                ]), "key");
+        this.appendValueInput('SUB')
+            .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'SYN6288' + Blockly.MIXLY_AipSpeech_synthesis)
+            
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setFieldValue("LTR308","key");
+    }
+};
+
+Blockly.Blocks.syn6288_set_voice = {
+    init: function () {
+        this.setColour(Blockly.Blocks.actuator_extern.HUE);
+        this.appendValueInput('SUB')
+            .appendField('SYN6288')
+        this.appendValueInput('VOICE')
+            .setCheck(Number)
+            .appendField(Blockly.MIXLY_SET_VOLUME);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_SET_VOLUME_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.syn6288_get_voice = {
+    init: function () {
+        this.setColour(Blockly.Blocks.actuator_extern.HUE);
+        this.appendValueInput('SUB')
+            .appendField('SYN6288')
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_GET_VOLUME)
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_SET_VOLUME_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.syn6288_builtin_voice = {
+    init: function () {
+        this.setColour(Blockly.Blocks.actuator_extern.HUE);
+        this.appendValueInput('SUB')
+            .appendField('SYN6288')
+        this.appendValueInput('VOICE')
+            .setCheck(Number)
+            .appendField(Blockly.MIXLY_PLAY_HINTS);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_PROGRAM_BLOCK)
+        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'False']]), 'mode');      
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_PLAY_HINTS_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.syn6288_tts_play = {
+    init: function () {
+        this.setColour(Blockly.Blocks.actuator_extern.HUE);
+        this.appendValueInput('SUB')
+            .appendField('SYN6288')
+        this.appendValueInput('data')
+            .setCheck(String)
+            .appendField(Blockly.MIXLY_AipSpeech_synthesis);
+        this.appendValueInput('VOICE')
+            .setCheck(Number)
+            .appendField(Blockly.MIXLY_BACKGROUND_MUSIC);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_PROGRAM_BLOCK)
+        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'False']]), 'mode');      
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_PLAY_TTS_TOOLTIP);
+    }
+}

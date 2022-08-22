@@ -328,6 +328,33 @@ Blockly.Blocks['pins_brightness'] = {
     }
 };
 
+Blockly.Blocks['pins_tts_voice'] = {
+    init: function() {
+        this.setColour(Blockly.Blocks.pins.HUE);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown(profile.default.tts_voice), 'PIN');
+        this.setOutput(true, Number);
+    }
+};
+
+Blockly.Blocks['pins_tts_builtin_music'] = {
+    init: function() {
+        this.setColour(Blockly.Blocks.pins.HUE);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown(profile.default.tts_builtin_music), 'PIN');
+        this.setOutput(true, Number);
+    }
+};
+
+Blockly.Blocks['pins_tts_bgmusic'] = {
+    init: function() {
+        this.setColour(Blockly.Blocks.pins.HUE);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown(profile.default.tts_bgmusic), 'PIN');
+        this.setOutput(true, Number);
+    }
+};
+
 Blockly.Blocks['pins_tone_notes'] = {
     init: function() {
         this.setColour(Blockly.Blocks.pins.HUE);

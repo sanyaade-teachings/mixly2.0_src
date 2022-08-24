@@ -123,7 +123,6 @@ Boards.init = () => {
             boardNames.append(`<option value="${Boards.INFO[board]?.key ?? board}" ${(selectedBoardName && selectedBoardName[0] === board)? ' selected' : ''}>${board}</option>`);
         form.render('select', 'boards-type-filter');
     }
-    // Boards.onclickBoardSelector();
     $('#mixly-board-config').off().click(function() {
         Boards.showConfigMenu();
     });
@@ -164,123 +163,13 @@ Boards.updateBoardDefaultConfig = (boardName) => {
     Boards.INFO[boardName].default = defaultConfig;
 }
 
-/* RC2版本弃用，将在以后版本中删除 */
-Boards.onclickBoardSelector = () => {
-    //板卡选择事件
-    $("#boardSelector").on("click", function () {
-        if (Boards.HAS_CONFIG_SETTING) {
-            const ddObj = $("#boardSelector").find('dd');
-            for (let i = 0; i < ddObj.length; i++) {
-                const boardSettingBtnDom = $(`<button type="button" class="layui-btn layui-btn-normal layui-btn-xs board-config-btn" style="margin-right: 5px;width: 23px;height: 22px;line-height: 21px;padding: 0px 1px 0px 1px;"><i class="layui-icon layui-icon-set-fill"></i></button>`);
-                const ddDom = $(ddObj[i]);
-                ddDom.find('button').remove();
-                const boardName = ddDom.html();
-                boardSettingBtnDom.attr('board', boardName);
-                if (Boards.INFO[boardName].config) {
-                    let tipStr = Boards.getConfigInfo(boardName);
-                    if (!tipStr) {
-                        Boards.updateBoardDefaultConfig(boardName);
-                        tipStr = Boards.getConfigInfo(boardName);
-                    };
-                    ddDom.html(boardSettingBtnDom[0].outerHTML + boardName);
-                    let settingObj = $(ddObj[i]).find('i');
-                    let tips;
-                    const defaultConfig = Boards.INFO[boardName].default;
-                    settingObj[0].onmouseenter = function() {
-                        layer.closeAll();
-                        tips = layer.tips(tipStr, ddObj[i], {
-                            tips:[4, 'auto'],
-                            time: 0,
-                            area: 'auto',
-                            maxWidth: 500,
-                            tipsMore: true,
-                            anim: 5,
-                            isOutAnim: true
-                        });
-                    }
-                    settingObj[0].onmouseout = function() {
-                        layer.close(tips);
-                    }
-                } else {
-                    boardSettingBtnDom.addClass('layui-btn-disabled');
-                    ddDom.html(boardSettingBtnDom[0].outerHTML + boardName);
-                }
-            }
-        }
-        Boards.onclickChangeConfig();
-    });
-}
-
-/* RC2版本弃用，将在以后版本中删除 */
-Boards.showConfigDialog = (boardName) => {
-    const { config } = Boards.INFO[boardName];
-    const menuList = Object.keys(config);
-    const boardConfigDom = XML.getDom(XML.TEMPLATE_STR.BOARD_CONFIGURATOR, {
-        apply: indexText['应用'],
-        reset: indexText['复位'],
-        menuList
-    });
-    const boardConfigFormDom = boardConfigDom.find('#board-config-form');
-    const boardConfigFormBtnStr = boardConfigFormDom.html();
-    boardConfigFormDom.empty();
-    for (let i in config) {
-        const boardConfigElementDom = $(XML.render(XML.TEMPLATE_STR.BOARD_CONFIG_ELEMENT, {
-            key: i
-        }));
-        const selectDom = boardConfigElementDom.find('#' + i + '-key-type');
-        selectDom.empty();
-        let num = 0;
-        for (let j of config[i]) {
-            selectDom.append('<div class="layui-col-md12"><input type="radio" name="'+i+'" value="'+j.key+'" title="'+j.label+'" '+(!num?'checked':'')+'></div>');
-            num++;
-        }
-        boardConfigFormDom.append(boardConfigElementDom);
-    }
-    boardConfigFormDom.append(boardConfigFormBtnStr);
-    layer.closeAll('tips');
-    const layerNum = LayerExtend.open({
-        title: boardName,
-        id: 'board-config-layer',
-        content: boardConfigDom[0].outerHTML,
-        shade: LayerExtend.shade,
-        area: ['60%', '80%'],
-        success: (layero) => {
-            $('#board-config-layer').css('overflow', 'hidden');
-            form.render();
-            form.val('board-config-form-filter', Boards.INFO[boardName].default);
-            form.on('submit(board-config-submit)', function(data) {
-                Boards.INFO[boardName].default = data.field;
-                layer.msg(indexText['板卡配置已更新'], { time: 1000 });
-                return false;
-            });
-            const $configForm = $('#board-config-form');
-            element.render('nav', 'board-config-menu-filter');
-            element.on('nav(board-config-menu-filter)', function(elem) {
-                $selected = $configForm.find('.m-anchor[key="' + elem.text() + '"]');
-                $configForm.scrollTop($selected.position().top + $configForm.scrollTop() - 10);
-                elem.parent().removeClass('layui-this');
-            });
-        }, end: () => {
-            layui.off('board-config-menu-filter', 'nav');
-        }
-    });
-}
-
-/* RC2版本弃用，将在以后版本中删除 */
-Boards.onclickChangeConfig = () => {
-    $(".board-config-btn").off("click").click((event) => {
-        const boardName = $(event.currentTarget).attr('board');
-        if (Boards.INFO[boardName].config)
-            Boards.showConfigDialog(boardName);
-    });
-}
-
 Boards.getType = () => {
-    str = BOARD.boardIndex ?? '';
+    let str = BOARD.boardIndex ?? '';
+    str = str.replaceAll('\\', '/');
     if (BOARD.thirdPartyBoard) {
-        return str.match(/(?<=\/board\/ThirdParty\/)[^?\/\\、*\"><|]+/g)[0];
+        return str.match(/(?<=board\/ThirdParty\/)[^?\/\\、*\"><|]+/g)[0];
     } else {
-        return str.match(/(?<=\/board\/)[^?\/\\、*\"><|]+/g)[0];
+        return str.match(/(?<=board\/)[^?\/\\、*\"><|]+/g)[0];
     }
 }
 
@@ -450,12 +339,17 @@ Boards.removeBlocks = (blocksdom, boardKeyList) => {
         for (let key of selectList) {
             const keyList = key.split(':');
             const len = keyList.length;
-            if (len !== 1 && len !== 3)
+            if (![1, 2, 3].includes(len)) {
                 continue;
-            if (len === 3) {
-                const param3 = String(keyList[2]).split(',');
+            }
+            if ([2, 3].includes(len)) {
+                const param3 = (len === 3 ? String(keyList[2]).split(',') : []);
                 if (keyList[0] === boardKeyList[0]
                  && keyList[1] === boardKeyList[1]) {
+                    if (!param3.length) {
+                        needRemove = mShow ? false : true;
+                        break;
+                    }
                     for (let value of param3) {
                         if (value === boardKeyList[2]) {
                             needRemove = mShow ? false : true;

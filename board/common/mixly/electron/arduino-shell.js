@@ -240,6 +240,7 @@ ArduShell.initUpload = () => {
     switch (uploadType) {
         case 'STLinkMethod':
         case 'jlinkMethod':
+        case 'usb':
             port = 'None';
             break;
     }
@@ -363,7 +364,7 @@ ArduShell.cancel = function () {
         if (Env.currentPlatform === 'win32') {
             child_process.exec('taskkill /pid ' + ArduShell.shell.pid + ' /f /t');
         } else {
-            BU.shell.kill("SIGTERM");
+            ArduShell.shell.kill("SIGTERM");
         }
         ArduShell.shell = null;
     }

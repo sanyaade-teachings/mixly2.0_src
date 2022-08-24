@@ -1356,7 +1356,8 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
         *   |6字节 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx|
         *   ------------------------------------------------------------
         */
-        if ((data[0] & 0x80) == 0x00) {
+        if ((data[0] & 0x80) === 0x00) {
+            receiveBuff = [];
             if (chineseStr !== "") {
                 try {
                     let dataArr = String.fromCharCode(data[0]).match(/[\w|\\]/g);
@@ -1382,7 +1383,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
                     Serial.outputBoxAdd(port, data);
                 }
             }
-        } else if ((data[0] & 0xc0) == 0x80) {
+        } else if ((data[0] & 0xc0) === 0x80) {
             receiveBuff.push(data[0]);
             if (receiveBuff.length >= buffLength) {
                 Serial.outputBoxAdd(port, Buffer.from(receiveBuff));

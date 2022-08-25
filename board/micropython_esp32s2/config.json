@@ -61,7 +61,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo_CE-0x1000-V1.19.1-220714.bin"
+                        "path": "./build/MixGo_CE-0x1000-V1.19.1-220822-lib.bin"
                     }
                 ]
             },

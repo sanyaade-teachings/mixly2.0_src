@@ -138,35 +138,27 @@
         >
             <div
                 id="mixly-footer-cursor"
-                style="display: none;"
+                style="
+                    display: none;
+                    font-size: 12px;
+                    line-height: 12px;
+                    color: #fff;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    align-items: center;
+                "
             >
-                <div
-                    style="
-                        display: inline-flex;
-                        flex-direction: row;
-                        flex-wrap: nowrap;
-                        align-items: center;
-                        font-size:12px;
-                        line-height:12px;
-                        color: #fff;
-                    "
-                >
+                <div style="display: inline-flex;">
                     <p>{{ d.row }}&nbsp</p>
                     <p id="mixly-footer-row">1</p>
                 </div>
-                <div
-                    style="
-                        display: inline-flex;
-                        flex-direction: row;
-                        flex-wrap: nowrap;
-                        align-items: center;
-                        font-size: 12px;
-                        line-height: 12px;
-                        color: #fff;
-                    "
-                >
+                <div style="display: inline-flex;">
                     <p>,&nbsp{{ d.column }}&nbsp</p>
                     <p id="mixly-footer-column">1</p>
+                </div>
+                <div style="display: none;">
+                    <p>,&nbsp{{ d.selected }}&nbsp</p>
+                    <p id="mixly-footer-selected"></p>
                 </div>
             </div>
         </div>

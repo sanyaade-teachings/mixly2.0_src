@@ -396,6 +396,16 @@ Editor.codeEditorAddEvent = () => {
         $('#mixly-footer-row').html(cursor.row + 1);
         $('#mixly-footer-column').html(cursor.column + 1);
     });
+    selection.on("changeSelection", function () {
+        if (!selection.isEmpty()) {
+            const range = selection.getRange();
+            const text = codeEditor.session.getTextRange(range);
+            $('#mixly-footer-selected').parent().css('display', 'inline-flex');
+            $('#mixly-footer-selected').html(text.length);
+        } else {
+            $('#mixly-footer-selected').parent().hide();
+        }
+    });
 }
 
 Editor.blockEditorUpdateCode = () => {

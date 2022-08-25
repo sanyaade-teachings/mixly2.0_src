@@ -324,7 +324,8 @@ var indexText = {
     "减小字号": "Decrease font size",
     "默认字号": "Default font size",
     "打开串口终端": "Open terminal",
-    "打开串口": "Open serial port"
+    "打开串口": "Open serial port",
+    "已选择": "Selected"
 };
 
 /* 背包 */

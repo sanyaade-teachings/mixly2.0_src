@@ -65,6 +65,14 @@ Blockly.Python['display_image_builtins'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python['display_image_builtins_all'] = function(block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var dropdown_image = block.getFieldValue('image');
+  var code = 'onboard_matrix.' + dropdown_image;
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 
 
 Blockly.Python['display_image_create'] = function(block) {

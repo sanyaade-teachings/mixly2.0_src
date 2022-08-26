@@ -1735,7 +1735,7 @@
         </value>
       </block>
       <block type="mixgo_display_image_create_new" m-show='micropython:esp32s2:mixgo_ce'></block>
-      <block type="display_image_builtins"></block>
+      <block type="display_image_builtins_all"></block>
 
       <block type="image_arithmetic">
         <value name="A">
@@ -4063,14 +4063,7 @@
       </category>
     </category>
     <!-- </category> -->
-    <category id="catFile" colour="0">
-      <block type="storage_open_file_with_os">
-        <value name="fn">
-          <shadow type="text">
-            <field name="TEXT">readme.txt</field>
-          </shadow>
-        </value>
-      </block>
+    <category id="catFile" colour="0">      
       <block type="storage_fileopen">
         <value name="FILENAME">
           <shadow type="text">

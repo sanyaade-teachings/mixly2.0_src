@@ -2464,21 +2464,21 @@
       </value>
     </block>
     <block type="NTP_server_get_time"></block>
-    <block type="esp_now_send" >
+    <block type="esp_now_send">
       <value name="mac">
-        <block type="text" >
+        <block type="text">
           <field name="TEXT">30:AE:A4:58:9D:7C</field>
         </block>
       </value>
       <value name="data">
-        <block type="text_join" >
+        <block type="text_join">
           <value name="A">
-            <shadow type="text" >
-              <field name="TEXT">random_</field>
+            <shadow type="text">
+              <field name="TEXT">random </field>
             </shadow>
           </value>
           <value name="B">
-            <shadow type="text" >
+            <shadow type="text">
               <field name="TEXT">Mixly</field>
             </shadow>
             <block type="math_random_int">
@@ -2501,7 +2501,7 @@
           <field name="serial_select">Serial</field>
           <value name="CONTENT">
             <block type="text">
-              <field name="TEXT">Sent with success</field>
+              <field name="TEXT">发送成功</field>
             </block>
           </value>
         </block>
@@ -2511,7 +2511,7 @@
           <field name="serial_select">Serial</field>
           <value name="CONTENT">
             <block type="text">
-              <field name="TEXT">Error sending the data</field>
+              <field name="TEXT">发送失败</field>
             </block>
           </value>
         </block>
@@ -2519,11 +2519,11 @@
     </block>
     <block type="esp_now_receive">
       <statement name="receive_data">
-        <block type="serial_println" >
+        <block type="serial_println">
           <field name="serial_select">Serial</field>
           <value name="CONTENT">
-            <block type="variables_get" >
-              <field name="VAR">mydata</field>
+            <block type="variables_get">
+              <field name="VAR">myData</field>
             </block>
           </value>
         </block>

@@ -1126,5 +1126,76 @@ Blockly.Blocks.PS2_stk={
   }
 };
 
+Blockly.Blocks.PS2_init_new={
+  init: function() {
+   this.setColour(Blockly.Blocks.sensor_extern.HUE);
+   this.appendValueInput('SUB')
+   .appendField(Blockly.MIXLY_SETUP+Blockly.PS2);
+   this.appendValueInput('CLK')
+   .appendField('CLK#');
+   this.appendValueInput('DOU')
+   .appendField('DOU#');
+   this.appendValueInput('DIN')
+   .appendField('DIN#');
+   this.appendValueInput('CS')
+   .appendField('CS#');
+   this.setInputsInline(true);
+   this.setPreviousStatement(true);
+   this.setNextStatement(true);
+   this.setTooltip('');
+ }
+};
 
+Blockly.Blocks.PS2_vibration_new={
+  init: function() {
+   this.setColour(Blockly.Blocks.sensor_extern.HUE);
+   this.appendValueInput('SUB')
+   .appendField(Blockly.PS2);
+   this.appendDummyInput("")
+   .appendField(Blockly.PS2_setRumble)
+   .appendField(Blockly.MIXLY_STM32_OLED_SMALL+MSG.catActuator_motor)
+   .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_OFF, "0"],
+                [Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_ON, "1"],   
+                ]), "smotorstate")            
+   .appendField(Blockly.MIXLY_STM32_OLED_BIG+MSG.catActuator_motor+Blockly.MIXLY_MIXGOPE_AMPLITUDE)
+   this.appendValueInput("AMP", Number)   
+   this.setTooltip(Blockly.MIXLY_STM32_OLED_BIG+MSG.catActuator_motor+Blockly.MIXLY_MIXGOPE_AMPLITUDE+"0-100");
+   this.setInputsInline(true);
+   this.setPreviousStatement(true);
+   this.setNextStatement(true);
+ }
+};
 
+Blockly.Blocks.PS2_Buttons_new={
+  init: function() {
+   this.setColour(Blockly.Blocks.sensor_extern.HUE);
+   this.appendValueInput('SUB')
+   .appendField(Blockly.PS2);
+   this.appendDummyInput("")
+   .appendField(Blockly.PS2_BUTTON.slice(3))
+   .appendField(new Blockly.FieldDropdown(PSBUTTON), "psbt")
+   .appendField(Blockly.MIXLY_WAS_PRESSED)
+   this.setOutput(true, Boolean);
+   this.setTooltip('');
+ }
+};
+
+Blockly.Blocks.PS2_stk_new={
+  init: function() {
+    this.setColour(Blockly.Blocks.sensor_extern.HUE);
+    var PSSTK =[
+    [Blockly.PS2_RX,"RX"],
+    [Blockly.PS2_RY,"RY"],
+    [Blockly.PS2_LX,"LX"],
+    [Blockly.PS2_LY,"LY"],
+    ];
+    this.appendValueInput('SUB')
+   .appendField(Blockly.PS2);
+    this.appendDummyInput("")
+    .appendField(Blockly.MIXLY_JOYSTICK)
+    .appendField(new Blockly.FieldDropdown(PSSTK), "psstk");
+    this.setOutput(true, Number);
+    this.setTooltip('');
+  }
+};

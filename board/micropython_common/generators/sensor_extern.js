@@ -530,3 +530,39 @@ Blockly.Python.sensor_dht11 = function () {
     var code ='dhtx.'+sensor_type+"(machine.Pin("+dropdown_pin+')).'+what+'()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.PS2_init_new = function() {
+  Blockly.Python.definitions_['import_ps2'] = 'import ps2';   
+  //Blockly.Python.definitions_['import_board'] = 'import board';  
+  var PS2_CLK = Blockly.Python.valueToCode(this, 'CLK', Blockly.Python.ORDER_ATOMIC);
+  var PS2_DOU = Blockly.Python.valueToCode(this, 'DOU', Blockly.Python.ORDER_ATOMIC);
+  var PS2_DIN = Blockly.Python.valueToCode(this, 'DIN', Blockly.Python.ORDER_ATOMIC);
+  var PS2_CS = Blockly.Python.valueToCode(this, 'CS', Blockly.Python.ORDER_ATOMIC);
+  var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var code = sub + ' = ps2.PS2Controller('+PS2_CLK+','+PS2_DOU+','+PS2_DIN+','+PS2_CS+')\n';  
+  return code;
+};
+
+Blockly.Python.PS2_vibration_new = function() {
+  Blockly.Python.definitions_['import_ps2'] = 'import ps2'; 
+  var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var ss=this.getFieldValue('smotorstate');  
+  var amp = Blockly.Python.valueToCode(this, 'AMP', Blockly.Python.ORDER_ATOMIC);
+  var code= sub + ".vibration(" + ss + ',' + amp +")\n";
+  return code;
+};
+
+Blockly.Python.PS2_Buttons_new = function() {
+  Blockly.Python.definitions_['import_ps2'] = 'import ps2'; 
+  var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);    
+  var bt=this.getFieldValue('psbt');
+  var code=sub + '.button(ps2.'+bt+')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python.PS2_stk_new = function() {
+  Blockly.Python.definitions_['import_ps2'] = 'import ps2';   
+  var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);  
+  var stk=this.getFieldValue('psstk');
+  var code= sub + ".analog(ps2.PSS_"+stk+")";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};

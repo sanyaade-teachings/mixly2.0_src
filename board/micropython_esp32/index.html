@@ -3205,8 +3205,8 @@
             </shadow>
           </value>
           <value name="miso">
-            <shadow type="pins_output_pin">
-              <field name="PIN">7</field>
+            <shadow type="pins_digital_pin">
+              <field name="PIN">12</field>
             </shadow>
           </value>
         </block>
@@ -3464,8 +3464,8 @@
             </shadow>
           </value>
           <value name="miso">
-            <shadow type="pins_output_pin">
-              <field name="PIN">7</field>
+            <shadow type="pins_digital_pin">
+              <field name="PIN">12</field>
             </shadow>
           </value>
           <next>
@@ -3577,23 +3577,59 @@
           </value>
         </block>
 
-        <block type="PS2_init">
-          <field name="PS2_CLK">2</field>
-          <field name="PS2_DOU">4</field>
-          <field name="PS2_DIN">5</field>
-          <field name="PS2_CS">7</field>
+        <block type="PS2_init_new">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ps2_handle</field>
+            </shadow>
+          </value>
+          <value name="CLK">
+            <shadow type="pins_digital_pin">
+              <field name="PIN">2</field>
+            </shadow>
+          </value>
+          <value name="DOU">
+            <shadow type="pins_digital_pin">
+              <field name="PIN">4</field>
+            </shadow>
+          </value>
+          <value name="DIN">
+            <shadow type="pins_digital_pin">
+              <field name="PIN">5</field>
+            </shadow>
+          </value>
+          <value name="CS">
+            <shadow type="pins_digital_pin">
+              <field name="PIN">12</field>
+            </shadow>
+          </value>
         </block>
-        <block type="PS2_vibration">
+        <block type="PS2_vibration_new">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ps2_handle</field>
+            </shadow>
+          </value>
           <value name="AMP">
             <shadow type="math_number">
               <field name="NUM">50</field>
             </shadow>
           </value>
         </block>
-        <block type="PS2_Button"></block>
-        <block type="PS2_Buttons"></block>
-        <block type="PS2_State"></block>
-        <block type="PS2_stk"></block>
+        <block type="PS2_Buttons_new">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ps2_handle</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="PS2_stk_new">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ps2_handle</field>
+            </shadow>
+          </value>
+        </block>
     </category>
     
     <category id="catExternActuator" colour='#74A55B' m-hide="micropython:esp32:rm_e1">   

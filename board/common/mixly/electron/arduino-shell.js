@@ -465,7 +465,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
         const testArduinoDirPath = path.resolve(Env.clientPath, './testArduino');
         ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
         const nowFilePath = Title.getFilePath();
-        if (USER.compileCAndH === 'true' && fs_extend.isfile(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
+        if (USER.compileCAndH === 'yes' && fs_extend.isfile(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
             const nowDirPath = path.dirname(nowFilePath);
             ArduShell.copyHppAndCppFiles(nowDirPath, testArduinoDirPath);
         }

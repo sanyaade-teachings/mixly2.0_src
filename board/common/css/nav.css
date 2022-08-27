@@ -1125,3 +1125,13 @@ body[class="light"] {
 .dark ::-webkit-scrollbar-corner {
     background-color: #8d8888;
 }
+
+.light .layui-table-tips-main {
+    background-color: #fff;
+    color: #5f5f5f;
+}
+
+.dark .layui-table-tips-main {
+    background-color: #8d8888;
+    color: #fff;
+}

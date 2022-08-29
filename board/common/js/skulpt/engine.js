@@ -135,8 +135,8 @@ PyEngine.prototype.skInput = function(prompt) {
              && cursor.row === initCursor.row + 1
              && cursor.column === 0) {
                 endRowStr = endRowStr.replace('>>>' + prompt, '');
-                selection.moveCursorLineEnd();
                 session.selection.removeEventListener('changeCursor', cursorCallback);
+                selection.moveCursorLineEnd();
                 resolve(endRowStr);
             } else {
                 const nowRow = session.getLength();

@@ -1,7 +1,6 @@
 {
     "board": {
-        "MixGo CE": "micropython:esp32s2:mixgo_ce",
-        "ESP32S2 Generic": "micropython:esp32s2:generic"
+        "MixGo CE": "micropython:esp32s2:mixgo_ce"
     },
     "language": "MicroPython",
     "burn": {

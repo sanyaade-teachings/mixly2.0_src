@@ -167,7 +167,7 @@ Blockly.Python['text_substring'] = function(block) {
     var at1 = Blockly.Python.valueToCode(this, 'AT1', Blockly.Python.ORDER_ATOMIC);
     var at2 = Blockly.Python.valueToCode(this, 'AT2', Blockly.Python.ORDER_ATOMIC);
     var code = str + '[' + at1 + ' : ' + at2 + ']';
-    return [code, Blockly.Python.ORDER_MEMBER];
+    return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
 Blockly.Python.text_capital = function() {

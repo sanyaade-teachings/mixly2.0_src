@@ -4,6 +4,11 @@ goog.provide('Mixly');
 goog.provide('Mixly.Url');
 goog.provide('Mixly.Config');
 
+/**
+ * @function 根据传入的相对路径获取文件数据
+ * @param inPath {string}
+ * @return {string | null}
+ **/
 Mixly.get = (inPath) => {
     let str;
     if (typeof nw === 'object') {
@@ -33,12 +38,17 @@ Mixly.get = (inPath) => {
     return str;
 }
 
+// mixly-sw文件夹相对于base.js的路径
 Mixly.MIXLY_DIR_PATH = '../../../mixly-sw';
 
+// 添加Mixly.Env和Mixly.Deps对象所在文件路径到goog的依赖项列表中
 goog.addDependency(Mixly.MIXLY_DIR_PATH + '/common/env.js', ['Mixly.Env'], ['Mixly']);
 goog.addDependency(Mixly.MIXLY_DIR_PATH + '/common/deps.js', ['Mixly.Deps'], ['Mixly', 'Mixly.Env']);
 
+// 获取Mixly对象中的Config、Url对象
 const { Url, Config } = Mixly;
+
+/* Mixly.Url {object} */
 
 /**
 * @function url转json
@@ -103,26 +113,11 @@ Url.urlToJson = (url) => {
 }
 
 /**
-* @function 获取板卡页面传递的配置信息
-* @description 返回板卡页面传递的配置信息
-* @return object
-*/
-Url.getConfig = () => {
-    var href = "";
-    try {
-        href = window.location.href.replaceAll("#", "");
-    } catch (e) {
-        href = window.location.href;
-    }
-    if (href.indexOf("?") !== -1)
-        href = href.substring(href.indexOf("?") + 1, href.length);
-    else
-       return null;
-    var board_config = Url.urlToJson(href);
-    return board_config;
-}
-
-//json转url参数
+ * @function JSON对象转Url字符串
+ * @param param {object | array | string | number | boolean} 传入的JSON对象或者是转换过程中某个键的对应值
+ * @param key {null | string} 转换过程中传入的JSON对象中的某个键
+ * @return {string} 转换后的Url字符串
+ **/
 Url.jsonToUrl = (param, key) => {
     var paramStr = "";
     if (param instanceof String || param instanceof Number || param instanceof Boolean) {
@@ -145,6 +140,33 @@ Url.jsonToUrl = (param, key) => {
     return paramStr.substr(1);
 };
 
+/**
+* @function 获取板卡页面传递的配置信息
+* @description 返回板卡页面传递的配置信息
+* @return object
+*/
+Url.getConfig = () => {
+    var href = "";
+    try {
+        href = window.location.href.replaceAll("#", "");
+    } catch (e) {
+        href = window.location.href;
+    }
+    if (href.indexOf("?") !== -1)
+        href = href.substring(href.indexOf("?") + 1, href.length);
+    else
+       return null;
+    var board_config = Url.urlToJson(href);
+    return board_config;
+}
+
+/**
+ * @function 更改传入Url字符串中某个参数的值，如果没有则添加该参数
+ * @param url {string} Url字符串
+ * @param arg {string} 参数名
+ * @param argVal {string} 参数名对应值
+ * @return {string} 修改后的Url字符串
+ **/
 Url.changeURLArg = (url, arg, argVal) => {
     var pattern = arg + '=([^&]*)';
     var replaceText = arg + '=' + argVal;
@@ -161,9 +183,17 @@ Url.changeURLArg = (url, arg, argVal) => {
     }
 }
 
+/**
+ * @function 获取对应路径下JSON数据
+ * @param inPath {string} JSON文件的相对路径
+ * @param defaultConfig {object} 默认的JSON配置信息
+ * @return {object | null} 当对应路径下文件不存在时将返回null
+ **/
 Config.get = (path, defaultConfig = {}) => {
-    const jsonStr = Mixly.get(path);
+    let jsonStr = Mixly.get(path);
     try {
+        // 去除JSON字符串中的注释
+        jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
         return { ...defaultConfig, ...JSON.parse(jsonStr) };
     } catch (error) {
         console.log(error);
@@ -171,6 +201,10 @@ Config.get = (path, defaultConfig = {}) => {
     return defaultConfig;
 }
 
+/**
+ * @function 读取软件、板卡的配置信息
+ * @return {void}
+ **/
 Config.init = () => {
     const swDefaultConfig = {
         "version": "Mixly2.0",

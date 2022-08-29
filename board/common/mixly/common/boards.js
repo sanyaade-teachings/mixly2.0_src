@@ -271,7 +271,7 @@ Boards.updateCategories = (boardName, enforce = false) => {
         profile['default'] = profile[boardName];
     } else {
         profile = typeof profile === 'object' ? profile : {};
-        profile['default'] = {};
+        profile['default'] = profile['default'] ?? {};
     }
     $('#mixly-footer-boardname').html(boardName);
     if (Boards.INFO[boardName] && Boards.INFO[boardName].config) {

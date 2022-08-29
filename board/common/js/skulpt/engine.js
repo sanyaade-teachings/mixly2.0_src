@@ -135,7 +135,6 @@ PyEngine.prototype.skInput = function(prompt) {
              && cursor.row === initCursor.row + 1
              && cursor.column === 0) {
                 endRowStr = endRowStr.replace('>>>' + prompt, '');
-                Mixly.StatusBar.addValue(endRowStr, true);
                 selection.moveCursorLineEnd();
                 session.selection.removeEventListener('changeCursor', cursorCallback);
                 resolve(endRowStr);
@@ -421,7 +420,7 @@ PyEngine.prototype.run = function(type) {
         var code_piece=[];
         code_piece=code.split("\n");
         for(var i=0;i<code_piece.length;i++){
-            // if(code_piece[i].indexOf("print") >= 0 ){
+            if(code_piece[i].indexOf("print") >= 0 ){
                 if(code_piece[i].indexOf(",end") >= 0 ){
                     var target="";
                     var re=/,end =([\s\S]*)\)$/.exec(code_piece[i])
@@ -441,7 +440,7 @@ PyEngine.prototype.run = function(type) {
                     }
                     //console.log(code_piece[i])
                 }
-            // }  
+            }  
         }
         code_new=code_piece.join("\n");
         // console.log(code_new)

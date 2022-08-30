@@ -5,8 +5,8 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks.display_onboard.HUE = '#569A98';
 
-Blockly.FieldColour.COLOURS = ['#f00', '#000'];
-Blockly.FieldColour.COLUMNS = 2;
+// Blockly.FieldColour.COLOURS = ['#f00', '#000'];
+// Blockly.FieldColour.COLUMNS = 2;
 
 Blockly.Blocks.display_show_image = {
   init: function() {

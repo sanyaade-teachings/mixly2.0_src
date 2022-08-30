@@ -22,16 +22,17 @@ class CAR(TM1931):
     CL=0                    #Turn off infrared to reduce power consumption
     OA=1                    #Obstacle avoidance mode only
     LP=2                    #Line patrol mode only
-    AS=3                    #Automatic mode switching
+    LS=3                    #Light seeking mode only    
+    AS=4                    #Automatic mode switching
 
     '''TM1931 port corresponding function definition'''
-    OAOU=5                            #obstacle avoidance  
-    LPOU=4                            #Line patrol control
-    CCOU=3                            #Extended control
-    WLED=12                            #Headlamp port
+    OAOU=5                          #obstacle avoidance  
+    LPOU=4                          #Line patrol control
+    LSOU=3                          #Light control
+    WLED=12                         #Headlamp port
     GLED=[17,8,6,15]                #Green LED port
     RLED=[16,7,9,18]                #Red LED port
-    UCOU=[1,2]                        #Typec external port
+    UCOU=[1,2]                      #Typec external port
     MOTO=[[13,14],[10,11],[1,2]]    #Motor port
 
     def __init__(self, i2c_bus):
@@ -54,12 +55,19 @@ class CAR(TM1931):
         if select==self.CL:
             self.pwm(self.OAOU,0)
             self.pwm(self.LPOU,0)
+            self.pwm(self.LSOU,0)
         if select==self.OA:
             self.pwm(self.OAOU,255)
             self.pwm(self.LPOU,0)
+            self.pwm(self.LSOU,0)
         if select==self.LP:
             self.pwm(self.OAOU,0)
             self.pwm(self.LPOU,255)
+            self.pwm(self.LSOU,0)
+        if select==self.LS:
+            self.pwm(self.OAOU,0)
+            self.pwm(self.LPOU,0)
+            self.pwm(self.LSOU,255)
         time.sleep_ms(2)
             
     def obstacle(self):
@@ -67,22 +75,37 @@ class CAR(TM1931):
         if self._mode==self.AS:
             self.pwm(self.OAOU,255)
             self.pwm(self.LPOU,0)
+            self.pwm(self.LSOU,0)
             time.sleep_ms(2)
         if self._mode==self.OA or self._mode==self.AS :
             return self.adc2.read(),self.adc1.read(),self.adc0.read(),self.adc3.read()
         else:
-            raise ValueError('In line patrol mode, obstacle avoidance data cannot be read')
+            raise ValueError('Mode selection error, obstacle avoidance data cannot be read')
 
     def patrol(self):
         '''Read the line patrol sensor'''
         if self._mode==self.AS:
             self.pwm(self.OAOU,0)
             self.pwm(self.LPOU,255)
+            self.pwm(self.LSOU,0)
             time.sleep_ms(2)
         if self._mode==self.LP or self._mode==self.AS:
             return self.adc3.read(),self.adc2.read(),self.adc1.read(),self.adc0.read()    
         else:
-            raise ValueError('In obstacle avoidance mode, line patrol data cannot be read')
+            raise ValueError('Mode selection error, line patrol data cannot be read')
+
+    def light(self):
+        '''Read the light seeking sensor'''
+        if self._mode==self.AS:
+            self.pwm(self.OAOU,0)
+            self.pwm(self.LPOU,0)
+            self.pwm(self.LSOU,255)
+            time.sleep_ms(2)
+        if self._mode==self.LS or self._mode==self.AS:
+            return self.adc3.read(),self.adc2.read(),self.adc1.read(),self.adc0.read()    
+        else:
+            raise ValueError('Mode selection error, light seeking data cannot be read')
+
 
     def motor(self,index,action,speed=0):
         if action=="N":

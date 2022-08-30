@@ -122,3 +122,10 @@ Blockly.Python.sensor_mixgome_eulerangles=function(){
     var code = 'onboard_mxc6655xa.eulerangles(upright=True)'+angle;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.me_go_pin_light = function(){
+    var key = this.getFieldValue('key');
+    Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
+    var code = 'car.light()'+key+'';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

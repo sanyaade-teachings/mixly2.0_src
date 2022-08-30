@@ -225,7 +225,7 @@ class LED:
     def getonoff(self,index):
         return True if self._index_pwm[index-1]>0 else False
 
-onboard_led=LED()
+#onboard_led=LED()
 
 '''Reclaim memory'''
 gc.collect()

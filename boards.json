@@ -50,11 +50,6 @@
         "boardIndex": "./board/micropython_nrf51822_mithoncc/index.html",
         "env": 2
     },{
-        "boardImg": "./board/circuitpython_esp32s2_mixgocar/media/mixgocar1.png",
-        "boardName": "MixGo Car",
-        "boardIndex": "./board/circuitpython_esp32s2_mixgocar/index.html",
-        "env": 2
-    },{
         "boardImg": "./board/micropython_nrf51822_microbit/media/microbit.png",
         "boardName": "BBC micro:bit",
         "boardIndex": "./board/micropython_nrf51822_microbit/index.html",

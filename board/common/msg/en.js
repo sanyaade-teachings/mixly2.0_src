@@ -3507,3 +3507,6 @@ Blockly.MIXLY_BACKGROUND_MUSIC = 'background music';
 Blockly.MIXLY_PROGRAM_BLOCK = 'wait until over';
 Blockly.MIXLY_PLAY_TTS_TOOLTIP = 'background music range 0-15, 0 for no background music';
 Blockly.MIXLY_GET_NTP = 'get network time';
+Blockly.MIXLY_ME_GO_CAR_SENSOR_ONBOARD_AUTO_CHANGE = 'Auto changed';
+Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_ONLY = 'Use light chasing only';
+Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_SENSOR = 'light chasing sensor';

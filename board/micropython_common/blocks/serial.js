@@ -4,6 +4,20 @@ goog.provide('Blockly.Blocks.serial');
 goog.require('Blockly.Blocks');
 
 Blockly.Blocks.serial.HUE = 65//'#58a8de'//65;
+Blockly.Blocks['serial_print_byte'] = {
+  init: function() {
+   this.setColour(Blockly.Blocks.serial.HUE);
+    this.appendValueInput("CONTENT", String)
+        .appendField("Serial")
+        .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+        .appendField(Blockly.MIXLY_SERIAL_WRITE+'('+Blockly.LANG_MATH_BYTE+')');
+    //this.setFieldValue('1','mode')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
+  }
+};
+
 Blockly.Blocks['serial_print'] = {
   init: function() {
    this.setColour(Blockly.Blocks.serial.HUE);

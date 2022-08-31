@@ -1,10 +1,10 @@
 """
-ME GO -Onboard resources
+CE GO -Onboard resources
 
-MicroPython library for the ME GO (Smart Car base for MixGo ME)
+MicroPython library for the CE GO (Smart Car base for MixGo CE)
 =======================================================
 
-#Preliminary composition                       20220625
+#Preliminary composition                       20220830
 
 dahanzimin From the Mixly Team
 """
@@ -14,8 +14,8 @@ from tm1931 import TM1931
 from machine import Pin,SoftI2C,ADC
 
 '''i2c-onboard'''
-i2c=SoftI2C(scl = Pin(7), sda = Pin(6), freq = 400000)
-
+i2c=SoftI2C(scl = Pin(4,pull=Pin.PULL_UP), sda = Pin(5,pull=Pin.PULL_UP), freq = 400000)
+print(i2c.scan())
 '''TM1931-Expand'''    
 class CAR(TM1931):
     '''Infrared line patrol obstacle avoidance mode'''
@@ -39,10 +39,10 @@ class CAR(TM1931):
         super().__init__(i2c_bus)
         self._mode=self.CL
         
-        self.adc0 = ADC(Pin(0))
-        self.adc1 = ADC(Pin(1))
-        self.adc2 = ADC(Pin(2))
-        self.adc3 = ADC(Pin(3))
+        self.adc0 = ADC(Pin(9))
+        self.adc1 = ADC(Pin(10))
+        self.adc2 = ADC(Pin(1))
+        self.adc3 = ADC(Pin(2))
         
         self.adc0.atten(ADC.ATTN_11DB)
         self.adc1.atten(ADC.ATTN_11DB)
@@ -78,7 +78,7 @@ class CAR(TM1931):
             self.pwm(self.LSOU,0)
             time.sleep_ms(2)
         if self._mode==self.OA or self._mode==self.AS :
-            return self.adc2.read(),self.adc1.read(),self.adc0.read(),self.adc3.read()
+            return self.adc2.read_u16(),self.adc1.read_u16(),self.adc0.read_u16(),self.adc3.read_u16()
         else:
             raise ValueError('Mode selection error, obstacle avoidance data cannot be read')
 
@@ -90,7 +90,7 @@ class CAR(TM1931):
             self.pwm(self.LSOU,0)
             time.sleep_ms(2)
         if self._mode==self.LP or self._mode==self.AS:
-            return self.adc3.read(),self.adc2.read(),self.adc1.read(),self.adc0.read()    
+            return self.adc3.read_u16(),self.adc2.read_u16(),self.adc1.read_u16(),self.adc0.read_u16()    
         else:
             raise ValueError('Mode selection error, line patrol data cannot be read')
 
@@ -102,10 +102,9 @@ class CAR(TM1931):
             self.pwm(self.LSOU,255)
             time.sleep_ms(2)
         if self._mode==self.LS or self._mode==self.AS:
-            return self.adc3.read(),self.adc2.read(),self.adc1.read(),self.adc0.read()    
+            return self.adc3.read_u16(),self.adc2.read_u16(),self.adc1.read_u16(),self.adc0.read_u16()    
         else:
             raise ValueError('Mode selection error, light seeking data cannot be read')
-
 
     def motor(self,index,action,speed=0):
         if action=="N":
@@ -203,8 +202,8 @@ class HALL:
         if not (distance  is None):
             self.distance = distance
 
-hall_A = HALL(20)
-hall_B = HALL(21)
+hall_A = HALL(6)
+hall_B = HALL(7)
 
 '''Reclaim memory'''
 gc.collect()

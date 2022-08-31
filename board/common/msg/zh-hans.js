@@ -3609,3 +3609,6 @@ Blockly.MIXLY_BACKGROUND_MUSIC = '背景音乐';
 Blockly.MIXLY_PROGRAM_BLOCK = '等待播放结束';
 Blockly.MIXLY_PLAY_TTS_TOOLTIP = '背景音乐范围0-15, 0为无背景音乐';
 Blockly.MIXLY_GET_NTP = '获取网络时间';
+Blockly.MIXLY_ME_GO_CAR_SENSOR_ONBOARD_AUTO_CHANGE = '巡线/避障/追光自动切换';
+Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_ONLY = '只使用追光';
+Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_SENSOR = '追光传感器';

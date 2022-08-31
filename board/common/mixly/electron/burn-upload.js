@@ -448,7 +448,7 @@ BU.searchLibs = function (dirPath, code, libArr) {
                     }
                     if (oldLibPath) {
                         const extname = path.extname(oldLibPath);
-                        const newLibPath = path.resolve(libPath, moduleArr[j] + extname);
+                        const newLibPath = path.resolve(dirPath, moduleArr[j] + extname);
                         StatusBar.addValue(indexText['拷贝库'] + ' ' + moduleArr[j] + '\n', true);
                         fs.copyFileSync(oldLibPath, newLibPath);
                         libArr.push(moduleArr[j] + extname);

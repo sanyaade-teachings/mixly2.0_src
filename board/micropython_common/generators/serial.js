@@ -11,6 +11,14 @@ Blockly.Python.serial_print = function() {
   return code;
 };
 
+Blockly.Python.serial_print_byte = function() {
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  var dropdown_uart = this.getFieldValue('mode');
+  var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC) || '\"\"'
+  var code = "uart"+dropdown_uart+".write("+content+")\n";
+  return code;
+};
+
 Blockly.Python.serial_println = function() {
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   var dropdown_uart = this.getFieldValue('mode');

@@ -154,18 +154,7 @@
           </shadow>
         </value>
       </block>
-      <block type="inout_pin_pressed_init">
-        <value name="PIN">
-          <shadow type="pins_touch_pin">
-          </shadow>
-        </value>
-      </block>
-      <block type="inout_pin_pressed">
-        <value name="pin">
-          <shadow type="pins_touch">
-          </shadow>
-        </value>
-      </block>
+      
       <block type="inout_pin_attachInterrupt">
         <value name="PIN">
           <shadow type="pins_digital_pin"></shadow>
@@ -185,21 +174,7 @@
           <block type="controls_pass"></block>
         </statement>
       </block>
-      <block type="inout_analog_write_init">
-        <value name="PIN">
-          <shadow type="pins_dac_pin"></shadow>
-        </value>
-      </block>
-      <block type="inout_analog_write">
-        <value name="PIN">
-          <shadow type="pins_dac"></shadow>
-        </value>
-        <value name="NUM">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-      </block>
+      
     </category>
     <category id="catControl" colour="120">
       <block type="controls_whileUntil">
@@ -1406,6 +1381,13 @@
         <value name="CONTENT">
           <shadow type="math_number">
             <field name="NUM">0XFF00FF</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="serial_print_byte">
+        <value name="CONTENT">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
           </shadow>
         </value>
       </block>

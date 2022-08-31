@@ -250,6 +250,7 @@ NavEvents.init = () => {
                 console.log(error);
             }
         }
+        Boards.changeTo(boardName);
         Boards.updateCategories(boardName);
     });
 }

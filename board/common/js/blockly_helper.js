@@ -91,11 +91,6 @@ function restore_blocks() {
                 console.log(boardType);
                 Boards.setSelectedBoard(boardType);
                 profile['default'] = profile[boardType] ?? profile['default'];
-                if (Electron?.BU) {
-                    Electron.BU.readConfigAndSet();
-                } else if (Web?.BU) {
-                    Web.BU.readConfigAndSet();
-                }
             }
             Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
             Blockly.mainWorkspace.scrollCenter();
@@ -499,8 +494,6 @@ mixlyjs.renderXml = function (xmlContent) {
             if (profile[$("#boards-type").find("option:selected").text()] != undefined) {
                 profile['default'] = profile[$("#boards-type").find("option:selected").text()];
             }
-            if (Mixly?.Electron?.BU)
-                Mixly.Electron.BU.readConfigAndSet();
         }
     } catch (e) {
         console.log(e);

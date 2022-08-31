@@ -1,17 +1,13 @@
 (() => {
 
-Mixly.require({
-    "common": [
-        "layui",
-        "Mixly.LayerExtend",
-        "Mixly.Config",
-        "Mixly.XML",
-        "Mixly.Env",
-        "Mixly.ToolboxSearcher",
-        "Mixly.Modules"
-    ]
-});
-
+goog.require('layui');
+goog.require('Mixly.LayerExtend');
+goog.require('Mixly.Config');
+goog.require('Mixly.XML');
+goog.require('Mixly.Env');
+goog.require('Mixly.ToolboxSearcher');
+goog.require('Mixly.Modules');
+goog.require('Mixly.MString');
 goog.provide('Mixly.Boards');
 
 const {
@@ -21,20 +17,22 @@ const {
     Env,
     ToolboxSearcher,
     Modules,
+    MString,
     Boards
 } = Mixly;
 
 const { form, element, dropdown } = layui;
 
-const { BOARD, USER } = Config;
+const { BOARD, USER, SELECTED_BOARD } = Config;
 
 /**
- *  "board": {
- *      "key": string | null,
- *      "config": object | null,
- *      "default": object | null
- *  }
- * 
+ * INFO = {
+ *      "boardName": {
+ *          "key": string | null,
+ *          "config": object | null,
+ *          "default": object | null
+ *      }
+ * }
  **/
 Boards.INFO = {};
 
@@ -218,6 +216,7 @@ Boards.setSelectedBoard = (name, userConfig) => {
         }
         form.render('select', 'boards-type-filter');
     }
+    Boards.changeTo(Boards.INFO[name].key);
     Boards.updateCategories(name);
     if (typeof profile === 'object' && profile[name])
         profile['default'] = profile[name];
@@ -262,6 +261,155 @@ Boards.getSelectedBoardConfigParam = (param) => {
     if (defaultConfig && typeof defaultConfig === 'object')
         return defaultConfig[param] ?? '';
     return '';
+}
+
+/**
+ * @function 更新当前所选择板卡及其相关配置
+ * @param boardName {string} 板卡名
+ * @return {void}
+ **/
+Boards.changeTo = (boardName) => {
+    const boardKey = Boards.INFO[boardName].key;
+    for (let i in SELECTED_BOARD) {
+        delete SELECTED_BOARD[i];
+    }
+    for (let i in BOARD) {
+        if (BOARD[i] instanceof Object) {
+            SELECTED_BOARD[i] = { ...BOARD[i] };
+        } else {
+            SELECTED_BOARD[i] = BOARD[i];
+        }
+    }
+    if (BOARD.web instanceof Object) {
+        for (let value of [{
+                type: 'burn',
+                obj: BOARD.web.burn
+            }, {
+                type: 'upload',
+                obj: BOARD.web.upload
+            }]) {
+            if (!(value.obj instanceof Object)) {
+                continue;
+            }
+            let outObj;
+            if (value.obj[boardKey]) {
+                outObj = { ...value.obj, ...value.obj[boardKey] };
+            } else {
+                outObj = { ...value.obj };
+            }
+            for (let i in Boards.INFO) {
+                const key = Boards.INFO[i].key;
+                if (outObj[key]) {
+                    delete outObj[key];
+                }
+            }
+            SELECTED_BOARD.web[value.type] = outObj;
+        }
+    }
+    for (let value of [{
+            type: 'burn',
+            obj: BOARD.burn
+        }, {
+            type: 'upload',
+            obj: BOARD.upload
+        }]) {
+        if (!(value.obj instanceof Object)) {
+            continue;
+        }
+        let outObj;
+        if (value.obj[boardKey]) {
+            outObj = { ...value.obj, ...value.obj[boardKey] };
+        } else {
+            outObj = { ...value.obj };
+        }
+        for (let i in Boards.INFO) {
+            const key = Boards.INFO[i].key;
+            if (outObj[key]) {
+                delete outObj[key];
+            }
+        }
+        const pathObj = {
+            path: Env.clientPath,
+            indexPath: Env.indexPath
+        };
+        switch (outObj.type) {
+            case 'volume':
+                if (Env.currentPlatform == "win32") {
+                    if (typeof outObj.volumeName == "string") {
+                        outObj.volume = "VolumeName='" + outObj.volumeName + "'";
+                    } else if (typeof outObj.volumeName == "object") {
+                        outObj.volume = "VolumeName='" + outObj.volumeName[0] + "'";
+                        for (let i = 1; i < outObj.volumeName.length; i++) {
+                            outObj.volume += " or VolumeName='" + outObj.volumeName[i] + "'";
+                        }
+                    } else {
+                        outObj.volume = "VolumeName='CIRCUITPY'";
+                    }
+                } else {
+                    if (typeof outObj.volumeName == "string") {
+                        outObj.volume = outObj.volumeName;
+                    } else if (typeof outObj.volumeName == "object") {
+                        outObj.volume = outObj.volumeName[0];
+                        for (var i = 1; i < outObj.volumeName.length; i++) {
+                            outObj.volume += "/" + outObj.volumeName[i];
+                        }
+                    } else {
+                        outObj.volume = "CIRCUITPY";
+                    }
+                }
+                break;
+            case 'command':
+                let pyToolPath = "{path}/mixpyBuild/win_python3/Lib/site-packages/";
+                if (Env.currentPlatform == "darwin" || Env.currentPlatform == "linux") {
+                    pyToolPath = "{path}/pyTools/";
+                }
+                let obj = {};
+                let pyTools = {
+                    'esptool': 'esptool.py',
+                    'kflash': 'kflash.py',
+                    'stm32loader': 'stm32loader.py',
+                    'stm32bl': 'stm32bl.py',
+                    'ampy': 'ampy/cli.py'
+                };
+                for (let key in pyTools) {
+                    obj[key] = Env.python3Path + "\" \"" + pyToolPath + pyTools[key];
+                }
+                if (outObj.reset) {
+                    let resetStr = '{}';
+                    try {
+                        resetStr = JSON.stringify(outObj.reset);
+                        resetStr = resetStr.replaceAll('\"', '\\\"');
+                        obj.reset = resetStr;
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }
+                outObj.command = MString.tpl(outObj.command, obj);
+                outObj.command = MString.tpl(outObj.command, pathObj);
+                break;
+        }
+        if (value.type === 'upload' && Env.isElectron && outObj.copyLib) {
+            const { path } = Modules;
+            if (outObj.libPath) {
+                let libPath = [];
+                for (let dirPath of outObj.libPath) {
+                    libPath.push(MString.tpl(dirPath, pathObj));
+                }
+                outObj.libPath = libPath;
+            } else {
+                outObj.libPath = [ path.resolve(Env.indexPath, 'build/lib/') ];
+            }
+        }
+        if (Env.isElectron) {
+            const { path } = Modules;
+            if (outObj.filePath) {
+                outObj.filePath = MString.tpl(outObj.filePath, pathObj);
+            } else {
+                outObj.filePath = path.resolve(Env.indexPath, 'build/main.py');
+            }
+        }
+        SELECTED_BOARD[value.type] = outObj;
+    }
 }
 
 Boards.updateCategories = (boardName, enforce = false) => {

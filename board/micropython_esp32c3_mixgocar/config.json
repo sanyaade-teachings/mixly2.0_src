@@ -5,11 +5,12 @@
     },
     "language": "MicroPython",
     "burn": {
+        "type": "command",
         "portSelect": "all",
         "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/esp32c3.bin\""
     },
     "upload": {
-        "type": "ampy",
+        "type": "command",
         "portSelect": "all",
         "command": "\"{ampy}\" -p {com} -d 1 put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",

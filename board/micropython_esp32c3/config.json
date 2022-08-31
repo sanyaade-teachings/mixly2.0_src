@@ -6,6 +6,7 @@
     },
     "language": "MicroPython",
     "burn": {
+        "type": "command",
         "portSelect": "all",
         "micropython:esp32c3:mixgo_cc": {
             "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_CC-0x0-V1.19.1-220701.bin\" 0X3A0000 \"{indexPath}/build/HZK12.bin\""
@@ -18,7 +19,7 @@
         }
     },
     "upload": {
-        "type": "ampy",
+        "type": "command",
         "portSelect": "all",
         "libPath": [
             "{indexPath}/build/lib",

@@ -9,3 +9,4 @@ board/ThirdParty/
 *.DS_Store
 board/**/wiki/content.md
 board/**/build/lib/libs.json
+board/**/build/upload/

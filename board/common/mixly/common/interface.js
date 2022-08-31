@@ -67,6 +67,7 @@ Interface.init = () => {
         Env.defaultXML = $('#toolbox').html();
     }
     const selectedBoardName = Boards.getSelectedBoardName();
+    Boards.changeTo(selectedBoardName);
     Boards.updateCategories(selectedBoardName);
     Editor.init();
     window.addEventListener('resize', Interface.onresize, false);

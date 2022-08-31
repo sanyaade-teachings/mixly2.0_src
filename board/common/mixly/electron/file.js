@@ -301,7 +301,6 @@ File.openFile = (filePath) => {
                     File.openedFilePath = filePath;
                     File.workingPath = path.dirname(filePath);
                     Title.updeteFilePath(File.openedFilePath);
-                    BU.readConfigAndSet();
                 }
             });
             break;

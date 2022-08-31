@@ -240,6 +240,7 @@ LibManager.reloadThirdPartyLibs = () => {
     LibManager.loadLibsAndUpdateJsCssList(function() {
         // Blockly.fireUiEvent(window, 'resize');
         const board = Boards.getSelectedBoardName();
+        // Boards.changeTo(Boards.INFO[board].key);
         Boards.updateCategories(board, true);
     });
 }

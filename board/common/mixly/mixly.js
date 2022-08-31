@@ -342,6 +342,29 @@ Url.getIPAddress = () => {
     return null;
 }
 
+/* Mixly.Config {object} */
+
+// 被选中板卡的配置信息
+Config.SELECTED_BOARD = {};
+// 板卡页面的配置信息
+Config.BOARD = {};
+// 软件的配置信息
+Config.SOFTWARE = {};
+
+const URL_DEFAULT_CONFIG = {
+    "thirdPartyBoard": false
+};
+const BOARD_DEFAULT_CONFIG = {
+    "burn": "None",
+    "upload": "None",
+    "nav": "None",
+    "serial": "None",
+    "saveMixWithCode": true
+};
+const SOFTWARE_DEFAULT_CONFIG = {
+    "version": "Mixly2.0"
+};
+
 /**
  * @function 获取对应路径下JSON数据
  * @param inPath {string} JSON文件的相对路径
@@ -365,22 +388,11 @@ Config.get = (inPath, defaultConfig = {}) => {
  * @return {void}
  **/
 Config.init = () => {
-    const urlDefaultConfig = {
-        "thirdPartyBoard": false
-    }
-    let urlConfig = Url.getConfig();
-    urlConfig = Object.assign(urlDefaultConfig, urlConfig);
-    const boardDefaultConfig = {
-        "burn": "None",
-        "upload": "None",
-        "nav": "None",
-        "serial": "None",
-        "saveMixWithCode": true
-    }
-    const swDefaultConfig = {
-        "version": "Mixly2.0"
-    }
-    Config.BOARD = Config.get('./config.json', boardDefaultConfig);
+    const urlConfig = {
+        ...URL_DEFAULT_CONFIG,
+        ...Url.getConfig()
+    };
+    Config.BOARD = Config.get('./config.json', BOARD_DEFAULT_CONFIG);
     if (typeof urlConfig === 'object') {
         let {
             thirdPartyBoard,
@@ -411,7 +423,7 @@ Config.init = () => {
     if (Config.BOARD.thirdPartyBoard)
         pathPrefix = '../../';
 
-    Config.SOFTWARE = Config.get(pathPrefix + '../sw-config.json', swDefaultConfig);
+    Config.SOFTWARE = Config.get(pathPrefix + '../sw-config.json', SOFTWARE_DEFAULT_CONFIG);
     if (typeof urlConfig === 'object')
         Config.SOFTWARE = { ...Config.SOFTWARE, ...urlConfig };
     Config.pathPrefix = pathPrefix;

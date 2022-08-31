@@ -1,25 +1,35 @@
 {
     "language": "MicroPython",
-    "upload": {
-        "type": "volumeLabel",
+    "burn": {
+        "type": "volume",
         "volumeName": [
             "MICROBIT",
             "mithoncc"
         ],
+        "filePath": "{indexPath}/build/microbit-micropython-v1.hex"
+    },
+    "upload": {
+        "type": "command",
         "portSelect": [
             {
                 "vendorId": "0D28",
                 "productId": "0204"
             }
         ],
-        "filePath": "{path}/hexbuild/firmware.hex"
+        "libPath": [
+            "{indexPath}/build/lib"
+        ],
+        "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
+        "filePath": "{indexPath}/build/upload/main.py",
+        "copyLib": true,
+        "reset": []
     },
     "nav": {
+        "burn": true,
         "upload": true,
         "save": {
             "img": true,
-            "py": true,
-            "hex": true
+            "py": true
         },
         "setting": {
             "pythonToBlockly": true

@@ -181,7 +181,6 @@ Example.updateCode = (extname, newData) => {
             MFile.parseMix($(newData), false, false, (message) => {
                 Blockly.mainWorkspace.scrollCenter();
                 Blockly.hideChaff();
-                BU.readConfigAndSet();
             });
             break;
         case '.ino':

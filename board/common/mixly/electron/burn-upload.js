@@ -109,8 +109,8 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
                 if (initBtnClicked) {
                     BU.initWithDropdownBox(type, startPath);
                 }
-                $("#mixly-selector-btn2").off("click");
                 $("#mixly-selector-btn1").off("click");
+                $("#mixly-selector-btn2").off("click");
             }
         });
     } else {
@@ -174,9 +174,12 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     }
     fs_extra.copy(startPath, desPath)
     .then(() => {
-        layer.msg((type === 'burn'? indexText['烧录成功'] : indexText['上传成功']) + '!', {
+        layer.close(layerNum);
+        const message = (type === 'burn'? indexText['烧录成功'] : indexText['上传成功']);
+        layer.msg(message + '!', {
             time: 1000
         });
+        StatusBar.setValue(`==${message}==`, true);
         if (type === 'upload' && Serial.uploadPorts.length === 1) {
             Serial.connect(Serial.uploadPorts[0].name, null, (opened) => {
                 if (opened) {
@@ -186,14 +189,14 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
         }
     })
     .catch((error) => {
-        layer.msg('文件拷贝出错' + err, {
+        layer.close(layerNum);
+        layer.msg(indexText['写文件出错了，错误是：'] + error, {
             time: 1000
         });
-        StatusBar.setValue('文件拷贝出错' + err + '\n', true);
+        StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n', true);
         console.log(error);
     })
     .finally(() => {
-        layer.close(layerNum);
         BU.burning = false;
         BU.uploading = false;
     });

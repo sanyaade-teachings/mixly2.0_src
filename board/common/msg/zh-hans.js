@@ -340,7 +340,7 @@ Blockly.Msg.PASTE_ALL_FROM_BACKPACK = '提取背包中的所有图形块';
 Blockly.Msg.REMOVE_FROM_BACKPACK = '从背包中移除';
 
 /* 画布块查找 */
-Blockly.Msg.WORKSPACE_SEARCH_OPEN = '查找图形块';
+Blockly.Msg.WORKSPACE_SEARCH_OPEN = '查找块';
 
 /* Blockly.FieldBitmap文本翻译 */
 Blockly.Msg.RANDOM = '随机';

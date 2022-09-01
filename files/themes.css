@@ -392,3 +392,11 @@ body[class="dark"] {
 .dark .layui-form-checkbox[lay-skin=primary] span {
     color: #fff;
 }
+
+.light .layui-layer-setwin span {
+    color: #777;
+}
+
+.dark .layui-layer-setwin span {
+    color: #fff;
+}

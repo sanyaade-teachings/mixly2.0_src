@@ -116,7 +116,7 @@ Setting.onclick = () => {
     Setting.menuInit();
     Setting.nowIndex = 0;
     LayerExtend.open({
-        title: Msg.getLang('设置'),
+        title: [Msg.getLang('设置'), '36px'],
         id: 'setting-menu-layer',
         content: $('#' + Setting.ID),
         shade: LayerExtend.shade,

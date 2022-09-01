@@ -1135,3 +1135,11 @@ body[class="light"] {
     background-color: #8d8888;
     color: #fff;
 }
+
+.light .layui-layer-setwin span {
+    color: #777;
+}
+
+.dark .layui-layer-setwin span {
+    color: #fff;
+}

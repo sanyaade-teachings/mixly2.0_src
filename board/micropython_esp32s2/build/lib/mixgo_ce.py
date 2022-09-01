@@ -4,13 +4,13 @@ MixGo CE-Onboard resources
 Micropython    library for the MixGo CE-Onboard resources
 =======================================================
 
-#Preliminary composition                   20220816
+#Preliminary composition                   20220901
 
 dahanzimin From the Mixly Team
 """
 
 import time,gc
-from machine import Pin,SoftI2C,ADC,PWM,RTC,TouchPad
+from machine import Pin,SoftI2C,ADC,PWM,RTC
 from ws2812 import NeoPixel
 from music import MIDI
 
@@ -73,20 +73,29 @@ B2key = Button(35)
 
 '''4-TouchPad'''
 class Touch_Pad:
-    def __init__(self, pin,value=26000):
-        self._pin = TouchPad(Pin(pin))
-        self.value = value
+    __species = {}
+    __first_init = True
+    def __new__(cls, pin, *args, **kwargs):
+        if pin not in cls.__species.keys():
+            cls.__first_init = True
+            cls.__species[pin]=object.__new__(cls)
+        return cls.__species[pin]   
+
+    def __init__(self, pin):
+        if self.__first_init:
+            self.__first_init = False
+            from machine import TouchPad
+            self._pin = TouchPad(Pin(pin))
         
-    def is_touched(self):
-        return self._pin.read() > self.value
+    def is_touched(self,value):
+        return self._pin.read() > value
 
     def raw_value(self):
         return self._pin.read()
 
-touch1 = Touch_Pad(4)
-touch2 = Touch_Pad(5)
-touch3 = Touch_Pad(6)
-touch4 = Touch_Pad(7)
+#Touch with function call
+def touched(pin,value=26000):
+    return Touch_Pad(pin).is_touched(value)  if value  else Touch_Pad(pin).raw_value()
 
 '''2-LED'''     #Repair brightness adjustment range 0-100%    
 class LED:

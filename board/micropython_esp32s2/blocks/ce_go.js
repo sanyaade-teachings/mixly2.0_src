@@ -31,7 +31,7 @@ Blockly.Blocks.ce_go_led_bright = {
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
-    .appendField('CE GO')
+    .appendField('ME GO')
     this.appendValueInput('bright')
     .appendField(Blockly.MIXLY_PULSEIN_STAT)  
     this.setPreviousStatement(true, null);
@@ -47,7 +47,7 @@ Blockly.Blocks.ce_go_get_led_bright = {
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
-    .appendField('CE GO')
+    .appendField('ME GO')
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_BRIGHTNESS)  
     this.setOutput(true);
@@ -62,7 +62,7 @@ Blockly.Blocks.ce_go_get_led_state = {
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
-    .appendField('CE GO')
+    .appendField('ME GO')
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_PULSEIN_STAT)  
     this.setOutput(true);
@@ -77,7 +77,7 @@ Blockly.Blocks.ce_go_led_brightness = {
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
-    .appendField('CE GO')
+    .appendField('ME GO')
     this.appendValueInput('bright')
     .appendField(Blockly.MIXLY_BRIGHTNESS)
     this.appendDummyInput("")
@@ -94,7 +94,7 @@ Blockly.Blocks.ce_go_stepper_keep = {
     init: function () {
       this.setColour(Blockly.Blocks.me_go.HUE);
       this.appendDummyInput()
-          .appendField("CE GO")
+          .appendField("ME GO")
           .appendField(new Blockly.FieldDropdown([
             [Blockly.blockpy_forward, "F"],
             [Blockly.blockpy_backward, "B"],
@@ -117,7 +117,7 @@ Blockly.Blocks.ce_go_stepper_stop = {
     init: function () {
       this.setColour(Blockly.Blocks.me_go.HUE);
       this.appendDummyInput()
-          .appendField("CE GO")
+          .appendField("ME GO")
           .appendField(new Blockly.FieldDropdown([           
             [Blockly.MOTOR_P, "P"],
             [Blockly.MOTOR_N, "N"]
@@ -132,7 +132,7 @@ Blockly.Blocks.ce_go_dc_motor = {
     init: function () {
       this.setColour(Blockly.Blocks.me_go.HUE);
       this.appendDummyInput()
-          .appendField("CE GO")
+          .appendField("ME GO")
           .appendField(Blockly.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.MIXLYCAR_WHEEL_LEFT, "0"],

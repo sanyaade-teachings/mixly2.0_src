@@ -1,12 +1,10 @@
-goog.provide('Mixly.WebSocket.Socket');
-
 goog.require('Mixly.Config');
-goog.require('Mixly.WebSocket.BU');
-goog.require('Mixly.WebSocket.Serial');
-goog.require('Mixly.WebSocket.ArduShell');
 goog.require('Mixly.Charts');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
+goog.require('Mixly.Command');
+goog.require('Mixly.WebSocket');
+goog.provide('Mixly.WebSocket.Socket');
 
 Mixly.WebSocket.Socket.obj = null;
 
@@ -73,10 +71,10 @@ Mixly.WebSocket.Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => 
     };
 
     WS.obj.onmessage = (event) => {
-        let command = WS.parseCommand(event.data);
+        let command = Mixly.Command.parse(event.data);
         if (Mixly.WebSocket.Socket.debug)
             console.log('receive -> ', event.data);
-        if (command && command.obj && command.function) {
+        /*if (command && command.obj && command.function) {
             if (command.type === 1) {
                 let args = command.args ?? [];
                 try {
@@ -86,7 +84,8 @@ Mixly.WebSocket.Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => 
                     console.log(e);
                 }
             }
-        }
+        }*/
+        Mixly.Command.run(command);
     };
 
     WS.obj.onerror = (event) => {
@@ -100,11 +99,10 @@ Mixly.WebSocket.Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => 
         Mixly.StatusBar.show(1);
         Mixly.StatusBarPort.tabChange('output');
         Mixly.StatusBar.setValue(WS.url + '连接断开\n', true);
-        let ports = Mixly.StatusBarPort.portName;
+        let ports = Mixly.StatusBarPort.portsName;
         for (let i = 0; i < ports.length; i++) {
             Mixly.StatusBarPort.close(ports[i]);
         }
-        Mixly.WebSocket.Serial.setConnectStatus('', false);
         Mixly.WebSocket.Socket.toggleUIToolbar(false);
         layer.closeAll();
         layer.msg('未连接' + WS.url + '，请在设置中连接', { time: 1000 });
@@ -233,11 +231,11 @@ Mixly.WebSocket.Socket.disconnect = () => {
 Mixly.WebSocket.Socket.toggleUIToolbar = (connected) => {
     try {
         if (connected) {
-            document.getElementById('socket_connect_btn').textContent = MSG['disconnect'];
-            document.getElementById('socket_connect_btn').className = "icon-unlink";
+            $('#socket-connect-btn').html(MSG['disconnect']);
+            $('#socket-connect-btn').removeClass('icon-link').addClass('icon-unlink');
         } else {
-            document.getElementById('socket_connect_btn').textContent = MSG['connect'];
-            document.getElementById('socket_connect_btn').className = "icon-link";
+            $('#socket-connect-btn').html(MSG['connect']);
+            $('#socket-connect-btn').removeClass('icon-unlink').addClass('icon-link');
         }
     } catch (e) {
         console.log(e);

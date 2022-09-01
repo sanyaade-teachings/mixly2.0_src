@@ -32,9 +32,9 @@ Theme.changeTo = function (type) {
     if (StatusBar.Ace) {
         StatusBar.Ace.setOption("theme", statusBarTheme);
     }
-    if (StatusBarPort?.portNames) {
-        for (let i = 0, length = StatusBarPort.portNames.length; i < length; i++) {
-            StatusBarPort.portAce[StatusBarPort.portNames[i]].setOption("theme", statusBarTheme);
+    if (StatusBarPort?.portsName) {
+        for (let i = 0, length = StatusBarPort.portsName.length; i < length; i++) {
+            StatusBarPort.portAce[StatusBarPort.portsName[i]].setOption("theme", statusBarTheme);
         }
     }
 }
@@ -57,9 +57,9 @@ Theme.changeEditorTheme_dark = function () {
         if (StatusBar.Ace != null) {
             StatusBar.Ace.setOption("theme", "ace/theme/terminal");
         }
-        if (StatusBarPort?.portNames) {
-            for (let i = 0, length = StatusBarPort.portNames.length; i < length; i++) {
-                StatusBarPort.portAce[StatusBarPort.portNames[i]].setOption("theme", "ace/theme/terminal");
+        if (StatusBarPort?.portsName) {
+            for (let i = 0, length = StatusBarPort.portsName.length; i < length; i++) {
+                StatusBarPort.portAce[StatusBarPort.portsName[i]].setOption("theme", "ace/theme/terminal");
             }
         }
     } catch (e) {

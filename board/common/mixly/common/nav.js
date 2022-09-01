@@ -465,7 +465,7 @@ Nav.RIGHT_BTN_CONFIG = [
                 // WebSocket版的【连接】按钮
                 type: 'WS_CONNECT',
                 class: 'icon-link',
-                id: 'socket_connect_btn',
+                id: 'socket-connect-btn',
                 title: '',
                 href: '#',
                 onclick: {

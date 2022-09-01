@@ -12,9 +12,9 @@ const { USER } = Config;
 
 StatusBarPort.portAce = {};
 
-StatusBarPort.portNames = [];
+StatusBarPort.portsName = [];
 
-let { portAce, portNames } = StatusBarPort;
+let { portAce, portsName } = StatusBarPort;
 
 StatusBarPort.addDefaultCommand = (port) => {
     portAce[port].commands.addCommands([
@@ -44,7 +44,7 @@ StatusBarPort.addDefaultCommand = (port) => {
 
 StatusBarPort.tabAdd = (port, defaultShortcutKeys = true, sucFunc = (data) => {}, delFunc = (data) => {}) => {
     
-    if (!portNames.includes(port)) {
+    if (!portsName.includes(port)) {
         let newPort = port;
         try {
             newPort = newPort.replaceAll('/', '-');
@@ -58,7 +58,7 @@ StatusBarPort.tabAdd = (port, defaultShortcutKeys = true, sucFunc = (data) => {}
             content: contentData,
             id: `tab-ace-${newPort}`
         });
-        portNames.push(port);
+        portsName.push(port);
         portAce[port] = ace.edit(`tab-${newPort}-ace`);
         if (USER.theme === "dark") {
             portAce[port].setOption("theme", "ace/theme/terminal");
@@ -80,10 +80,10 @@ StatusBarPort.tabAdd = (port, defaultShortcutKeys = true, sucFunc = (data) => {}
             sucFunc(port);
 
         element.on('tabDelete(status-bar-ace)', (data) => {
-            let portName = portNames[data.index - 1];
+            let portName = portsName[data.index - 1];
             portAce[portName].destroy();
             portAce[portName].container.remove();
-            portNames.splice(data.index - 1, 1);
+            portsName.splice(data.index - 1, 1);
             delete portAce[portName];
             if (typeof delFunc === 'function')
                 delFunc(portName);
@@ -93,7 +93,7 @@ StatusBarPort.tabAdd = (port, defaultShortcutKeys = true, sucFunc = (data) => {}
             if (data.index == 0) {
                 StatusBar.scrollToTheBottom();
             } else {
-                StatusBarPort.scrollToTheBottom(portNames[data.index - 1]);
+                StatusBarPort.scrollToTheBottom(portsName[data.index - 1]);
             }
         });
     } else {

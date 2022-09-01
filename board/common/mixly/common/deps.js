@@ -232,7 +232,9 @@ if (Env.isElectron) {
     }
 } else {
     if (Env.hasSocketServer) {
-        goog.require('Mixly.WebSocket.Socket');
+        goog.require('Mixly.WebSocket.BU');
+        goog.require('Mixly.WebSocket.ArduShell');
+        goog.require('Mixly.WebSocket.Serial');
     } else {
         if (Env.hasCompiler) {
             goog.require('Mixly.WebCompiler.Compiler');

@@ -428,7 +428,8 @@
                     "Mixly.Drag",
                     "Mixly.Editor",
                     "WorkspaceSearch",
-                    "Backpack"
+                    "Backpack",
+                    "Mixly.WebSocket.Socket"
                 ]
             },
             {
@@ -481,7 +482,8 @@
                     "Mixly.Drag",
                     "Mixly.Editor",
                     "WorkspaceSearch",
-                    "Backpack"
+                    "Backpack",
+                    "Mixly.WebSocket.Socket"
                 ]
             },
             {
@@ -530,10 +532,14 @@
             {
                 "path":"/web-socket/burn-upload.js",
                 "require":[
-                    "Mixly.Tools",
-                    "Mixly.WebSocket.Socket",
+                    "Mixly.Boards",
+                    "Mixly.Config",
+                    "Mixly.MFile",
+                    "Mixly.MString",
                     "Mixly.StatusBar",
-                    "Mixly.StatusBarPort"
+                    "Mixly.StatusBarPort",
+                    "Mixly.WebSocket.Socket",
+                    "Mixly.WebSocket.Serial"
                 ],
                 "provide":[
                     "Mixly.WebSocket.BU"
@@ -542,11 +548,17 @@
             {
                 "path":"/web-socket/serial.js",
                 "require":[
-                    "Mixly.WebSocket.Socket",
+                    "Mixly.Modules",
                     "Mixly.Charts",
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",
-                    "Mixly.Config"
+                    "Mixly.Config",
+                    "Mixly.Tools",
+                    "Mixly.Env",
+                    "Mixly.LayerExtend",
+                    "Mixly.XML",
+                    "Mixly.MArray",
+                    "Mixly.WebSocket.Socket"
                 ],
                 "provide":[
                     "Mixly.WebSocket.Serial"
@@ -556,12 +568,11 @@
                 "path":"/web-socket/socket.js",
                 "require":[
                     "Mixly.Config",
-                    "Mixly.WebSocket.BU",
-                    "Mixly.WebSocket.Serial",
-                    "Mixly.WebSocket.ArduShell",
                     "Mixly.Charts",
                     "Mixly.StatusBar",
-                    "Mixly.StatusBarPort"
+                    "Mixly.StatusBarPort",
+                    "Mixly.Command",
+                    "Mixly.WebSocket"
                 ],
                 "provide":[
                     "Mixly.WebSocket.Socket"

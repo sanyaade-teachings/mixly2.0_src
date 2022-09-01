@@ -1,28 +1,46 @@
-goog.provide('Mixly.WebSocket.BU');
+(() => {
 
-goog.require('Mixly.Tools');
-goog.require('Mixly.WebSocket.Socket');
+goog.require('Mixly.Boards');
+goog.require('Mixly.Config');
+goog.require('Mixly.MFile');
+goog.require('Mixly.MString');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
+goog.require('Mixly.WebSocket.Socket');
+goog.require('Mixly.WebSocket.Serial');
+goog.provide('Mixly.WebSocket.BU');
 
-MixlySocketBU.boardType = Mixly.Tools.getBoardType();
+const {
+    Boards,
+    Config,
+    MFile,
+    MString,
+    StatusBar,
+    StatusBarPort
+} = Mixly;
 
-MixlySocketBU.burnCommand = Mixly.Config.BOARD?.burn?.command ?? null;
+const { BOARD, SELECTED_BOARD } = Config;
 
-MixlySocketBU.uploadCommand = Mixly.Config.BOARD?.upload?.command ?? null;
+const { BU, Serial, Socket } = Mixly.WebSocket;
 
-MixlySocketBU.uploadType = Mixly.Config.BOARD?.upload?.type ?? 'ampy';
+BU.boardType = Mixly.Tools.getBoardType();
 
-MixlySocketBU.uploadFilePath = Mixly.Config.BOARD?.upload?.filePath ?? '{indexPath}/build/upload/main.py';
+BU.burnCommand = Mixly.Config.BOARD?.burn?.command ?? null;
 
-MixlySocketBU.copyLib = Mixly.Config.BOARD?.upload?.copyLib ?? true;
+BU.uploadCommand = Mixly.Config.BOARD?.upload?.command ?? null;
 
-if (MixlySocketBU.uploadFilePath.toLowerCase().indexOf(".py") != -1)
-    MixlySocketBU.uploadFileType = "py";
+BU.uploadType = Mixly.Config.BOARD?.upload?.type ?? 'ampy';
+
+BU.uploadFilePath = Mixly.Config.BOARD?.upload?.filePath ?? '{indexPath}/build/upload/main.py';
+
+BU.copyLib = Mixly.Config.BOARD?.upload?.copyLib ?? true;
+
+if (BU.uploadFilePath.toLowerCase().indexOf(".py") != -1)
+    BU.uploadFileType = "py";
 else
-    MixlySocketBU.uploadFileType = "hex";
+    BU.uploadFileType = "hex";
 
-MixlySocketBU.burn = () => {
+BU.burn = () => {
     /*
     let WS = Mixly.WebSocket.Socket;
     if (!WS.connected) {
@@ -30,15 +48,15 @@ MixlySocketBU.burn = () => {
         return;
     }
     */
-    Mixly.WebSocket.Socket.connect((WS) => {
+    Socket.connect((WS) => {
         layer.closeAll();
     }, () => {
-        Mixly.StatusBarPort.tabChange('output');
-        let command = MixlySocketBU.burnCommand;
-        let boardType = MixlySocketBU.boardType;
-        let ports = Mixly.WebSocket.Serial.burnPortList;
+        StatusBarPort.tabChange('output');
+        let command = BU.burnCommand;
+        let boardType = BU.boardType;
+        let ports = Serial.burnPortList;
         if (ports.length === 1) {
-            MixlySocketBU.burnWithPort(boardType, ports[0], command);
+            BU.burnWithPort(boardType, ports[0], command);
         } else if (ports.length === 0) {
             layer.msg(indexText['无可用设备'] + '!', {
                 time: 1000
@@ -88,7 +106,7 @@ MixlySocketBU.burn = () => {
                         $(".layui-layer-shade").remove();
                         if (initBtnClicked) {
                             let selectedPort = $('#mixly-selector-type option:selected').val();
-                            MixlySocketBU.burnWithPort(boardType, selectedPort, command);
+                            BU.burnWithPort(boardType, selectedPort, command);
                         }
                     }
                 });
@@ -97,7 +115,7 @@ MixlySocketBU.burn = () => {
     });
 }
 
-MixlySocketBU.burnWithPort = (boardType, port, command) => {
+BU.burnWithPort = (boardType, port, command) => {
     Mixly.StatusBar.show(1);
     Mixly.StatusBar.setValue('');
 
@@ -112,7 +130,7 @@ MixlySocketBU.burnWithPort = (boardType, port, command) => {
             closeBtn: 0,
             success: function () {
                 $(".layui-layer-page").css("z-index", "198910151");
-                Mixly.WebSocket.Socket.sendCommand({
+                Socket.sendCommand({
                     obj: 'BU',
                     function: 'burn',
                     args: [boardType, port, command]
@@ -126,7 +144,7 @@ MixlySocketBU.burnWithPort = (boardType, port, command) => {
                 document.getElementById('mixly-loader-div').style.display = 'none';
                 $(".layui-layer-shade").remove();
                 if (cancelBtnClicked)
-                    Mixly.WebSocket.Socket.sendCommand({
+                    Socket.sendCommand({
                         obj: 'BU',
                         function: 'cancel',
                         args: [
@@ -138,7 +156,7 @@ MixlySocketBU.burnWithPort = (boardType, port, command) => {
     });
 }
 
-MixlySocketBU.upload = () => {
+BU.upload = () => {
     /*
     let WS = Mixly.WebSocket.Socket;
     if (!WS.connected) {
@@ -146,19 +164,19 @@ MixlySocketBU.upload = () => {
         return;
     }
     */
-    Mixly.WebSocket.Socket.connect((WS) => {
+    Socket.connect((WS) => {
         layer.closeAll();
     }, () => {
-        Mixly.StatusBarPort.tabChange('output');
-        let boardType = MixlySocketBU.boardType;
-        let uploadFilePath = MixlySocketBU.uploadFilePath;
-        let copyLib = MixlySocketBU.copyLib;
-        if (MixlySocketBU.uploadType === 'ampy') {
+        StatusBarPort.tabChange('output');
+        let boardType = BU.boardType;
+        let uploadFilePath = BU.uploadFilePath;
+        let copyLib = BU.copyLib;
+        if (BU.uploadType === 'ampy') {
             let code = Mixly.Tools.getPy();
-            let command = MixlySocketBU.uploadCommand;
-            let ports = Mixly.WebSocket.Serial.uploadPortList;
+            let command = BU.uploadCommand;
+            let ports = Serial.uploadPortList;
             if (ports.length === 1) {
-                MixlySocketBU.uploadWithPortByAmpy(boardType, ports[0], code, uploadFilePath, copyLib, command);
+                BU.uploadWithPortByAmpy(boardType, ports[0], code, uploadFilePath, copyLib, command);
             } else if (ports.length === 0) {
                 layer.msg(indexText['无可用设备'] + '!', {
                     time: 1000
@@ -208,21 +226,21 @@ MixlySocketBU.upload = () => {
                             $(".layui-layer-shade").remove();
                             if (initBtnClicked) {
                                 let selectedPort = $('#mixly-selector-type option:selected').val();
-                                MixlySocketBU.uploadWithPortByAmpy(boardType, selectedPort, code, uploadFilePath, copyLib, command);
+                                BU.uploadWithPortByAmpy(boardType, selectedPort, code, uploadFilePath, copyLib, command);
                             }
                         }
                     });
                 });
             }
         } else {
-            let uploadFileType = MixlySocketBU.uploadFileType;
+            let uploadFileType = BU.uploadFileType;
             let volumeName = Mixly.Config.BOARD?.upload?.volumeName ?? "CIRCUITPY";
             let code = '';
             if (uploadFileType === 'hex')
                 code = Mixly.Tools.getHex();
             else
                 code = Mixly.Tools.getPy();
-            Mixly.WebSocket.Socket.sendCommand({
+            Socket.sendCommand({
                 obj: 'BU',
                 function: 'uploadWithVolumeName',
                 args: [boardType, volumeName, code, uploadFilePath, copyLib]
@@ -231,7 +249,7 @@ MixlySocketBU.upload = () => {
     });
 }
 
-MixlySocketBU.uploadWithPortByAmpy = (boardType, port, code, uploadFilePath, copyLib, command) => {
+BU.uploadWithPortByAmpy = (boardType, port, code, uploadFilePath, copyLib, command) => {
     Mixly.StatusBar.show(1);
     Mixly.StatusBar.setValue('');
     layui.use('layer', function () {
@@ -246,7 +264,7 @@ MixlySocketBU.uploadWithPortByAmpy = (boardType, port, code, uploadFilePath, cop
             closeBtn: 0,
             success: function () {
                 $(".layui-layer-page").css("z-index", "198910151");
-                Mixly.WebSocket.Socket.sendCommand({
+                Socket.sendCommand({
                     obj: 'BU',
                     function: 'uploadByAmpy',
                     args: [boardType, port, code, uploadFilePath, copyLib, command]
@@ -261,7 +279,7 @@ MixlySocketBU.uploadWithPortByAmpy = (boardType, port, code, uploadFilePath, cop
                 document.getElementById('mixly-loader-div').style.display = 'none';
                 $(".layui-layer-shade").remove();
                 if (cancelBtnClicked)
-                    Mixly.WebSocket.Socket.sendCommand({
+                    Socket.sendCommand({
                         obj: 'BU',
                         function: 'cancel',
                         args: [
@@ -273,7 +291,7 @@ MixlySocketBU.uploadWithPortByAmpy = (boardType, port, code, uploadFilePath, cop
     });
 }
 
-MixlySocketBU.uploadWithVolumes = (boardType, volumeName, code, uploadFilePath, copyLib) => {
+BU.uploadWithVolumes = (boardType, volumeName, code, uploadFilePath, copyLib) => {
     Mixly.StatusBar.show(1);
     Mixly.StatusBar.setValue('');
     layui.use('layer', function () {
@@ -288,7 +306,7 @@ MixlySocketBU.uploadWithVolumes = (boardType, volumeName, code, uploadFilePath, 
             closeBtn: 0,
             success: function () {
                 $(".layui-layer-page").css("z-index", "198910151");
-                Mixly.WebSocket.Socket.sendCommand({
+                Socket.sendCommand({
                     obj: 'BU',
                     function: 'writeAndCopyFile',
                     args: [boardType, code, uploadFilePath, volumeName, copyLib]
@@ -303,7 +321,7 @@ MixlySocketBU.uploadWithVolumes = (boardType, volumeName, code, uploadFilePath, 
                 document.getElementById('mixly-loader-div').style.display = 'none';
                 $(".layui-layer-shade").remove();
                 if (cancelBtnClicked)
-                    Mixly.WebSocket.Socket.sendCommand({
+                    Socket.sendCommand({
                         obj: 'ArduShell',
                         function: 'cancel',
                         args: [
@@ -315,7 +333,7 @@ MixlySocketBU.uploadWithVolumes = (boardType, volumeName, code, uploadFilePath, 
     });
 }
 
-MixlySocketBU.showVolumesSelectBox = (boardType, volumeName, code, uploadFilePath, copyLib) => {
+BU.showVolumesSelectBox = (boardType, volumeName, code, uploadFilePath, copyLib) => {
     let form = layui.form;
     const devNames = $('#mixly-selector-type');
     let oldDevice = $('#mixly-selector-type option:selected').val();
@@ -360,9 +378,11 @@ MixlySocketBU.showVolumesSelectBox = (boardType, volumeName, code, uploadFilePat
                 $(".layui-layer-shade").remove();
                 if (initBtnClicked) {
                     let selectedName = $('#mixly-selector-type option:selected').val();
-                    MixlySocketBU.uploadWithVolumes(boardType, selectedName, code, uploadFilePath, copyLib);
+                    BU.uploadWithVolumes(boardType, selectedName, code, uploadFilePath, copyLib);
                 }
             }
         });
     });
 }
+
+})();

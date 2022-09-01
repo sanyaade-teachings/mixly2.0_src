@@ -24,6 +24,13 @@ Mixly.require({
         "Mixly.Electron.Example"
     ],
     "web": [],
+    "web-socket": {
+        "electron": [],
+        "web": [],
+        "common": [
+            "Mixly.WebSocket.Socket"
+        ]
+    },
     "common": []
 });
 
@@ -98,6 +105,10 @@ Interface.init = () => {
         weight: 200
     };
     Blockly.ContextMenuRegistry.registry.register(workspaceSearchOpen);
+    if (Env.hasSocketServer) {
+        const { Socket } = Mixly.WebSocket;
+        Socket.init();
+    }
 }
 
 Interface.onresize = (event) => {

@@ -360,7 +360,7 @@ Boards.changeTo = (boardName) => {
                 break;
             case 'command':
                 let pyToolPath = "{path}/mixpyBuild/win_python3/Lib/site-packages/";
-                if (Env.currentPlatform == "darwin" || Env.currentPlatform == "linux") {
+                if (Env.currentPlatform == "darwin" || Env.currentPlatform == "linux" || Env.hasSocketServer) {
                     pyToolPath = "{path}/pyTools/";
                 }
                 let obj = {};
@@ -388,7 +388,7 @@ Boards.changeTo = (boardName) => {
                 outObj.command = MString.tpl(outObj.command, pathObj);
                 break;
         }
-        if (value.type === 'upload' && Env.isElectron && outObj.copyLib) {
+        if (value.type === 'upload' && (Env.isElectron || Env.hasSocketServer) && outObj.copyLib) {
             const { path } = Modules;
             if (outObj.libPath) {
                 let libPath = [];
@@ -397,15 +397,23 @@ Boards.changeTo = (boardName) => {
                 }
                 outObj.libPath = libPath;
             } else {
-                outObj.libPath = [ path.resolve(Env.indexPath, 'build/lib/') ];
+                if (Env.isElectron) {
+                    outObj.libPath = [ path.resolve(Env.indexPath, 'build/lib/') ];
+                } else {
+                    outObj.libPath = goog.normalizePath_(Env.indexPath + '/build/lib/');
+                }
             }
         }
-        if (Env.isElectron) {
+        if (Env.isElectron || Env.hasSocketServer) {
             const { path } = Modules;
             if (outObj.filePath) {
                 outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             } else {
-                outObj.filePath = path.resolve(Env.indexPath, 'build/main.py');
+                if (Env.isElectron) {
+                    outObj.filePath = path.resolve(Env.indexPath, 'build/main.py');
+                } else {
+                    outObj.filePath = goog.normalizePath_(Env.indexPath + '/build/main.py');
+                }
             }
         }
         SELECTED_BOARD[value.type] = outObj;

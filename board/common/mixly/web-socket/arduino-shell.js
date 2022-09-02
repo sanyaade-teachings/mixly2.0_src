@@ -1,201 +1,216 @@
-goog.provide('Mixly.WebSocket.ArduShell');
+(() => {
 
+goog.require('layui');
+goog.require('Mixly.Modules');
+goog.require('Mixly.Env');
+goog.require('Mixly.LayerExtend');
+goog.require('Mixly.Config');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
+goog.require('Mixly.Title');
+goog.require('Mixly.Boards');
+goog.require('Mixly.MFile');
+goog.require('Mixly.MArray');
+goog.require('Mixly.WebSocket.Socket');
 goog.require('Mixly.WebSocket.Serial');
+goog.provide('Mixly.WebSocket.ArduShell');
 
-Mixly.WebSocket.ArduShell.compile = () => {
-    /*
-    let WS = Mixly.WebSocket.Socket;
-    if (!WS.connected) {
-        layer.msg('未连接' + WS.url + '，请在设置中连接', {time: 1000});
-        return;
-    }
-    */
+const {
+    Modules,
+    Env,
+    LayerExtend,
+    StatusBar,
+    StatusBarPort,
+    Title,
+    Boards,
+    MFile,
+    MArray,
+    Config
+} = Mixly;
 
-    Mixly.WebSocket.Socket.connect((WS) => {
+const { BOARD, SOFTWARE, USER } = Config;
+
+const { 
+    Socket,
+    ArduShell,
+    Serial
+} = Mixly.WebSocket;
+
+/**
+* @function 编译
+* @description 开始一个编译过程
+* @return void
+*/
+ArduShell.initCompile = () => {
+    Socket.connect((WS) => {
         layer.closeAll();
     }, () => {
-        Mixly.StatusBarPort.tabChange('output');
-        Mixly.StatusBar.show(1);
-        Mixly.StatusBar.setValue('');
-        let code = "";
-        if (document.getElementById('tab_arduino').className == 'tabon') {
-            code = editor.getValue();
-        } else {
-            code = Blockly.Arduino.workspaceToCode(Blockly.mainWorkspace) || '';
-        }
-        let boardType = $('#boards-type option:selected').val();
-        let command = {
-            obj: 'ArduShell',
-            function: 'compile',
-            args: [
-                boardType,
-                code
-            ]
-        }
-
-        function init() {
-            layui.use('layer', function () {
-                var layer = layui.layer;
-
-                let cancelBtnClicked = false;
-                layer.open({
-                    type: 1,
-                    title: indexText["编译中"] + "...",
-                    content: $('#mixly-loader-div'),
-                    shade: Mixly.LayerExtend.shade,
-                    closeBtn: 0,
-                    success: function () {
-                        $(".layui-layer-page").css("z-index", "198910151");
-                        Mixly.WebSocket.Socket.sendCommand(command);
-                        $("#webusb-cancel").click(function(){
-                            layer.closeAll();
-                            cancelBtnClicked = true;
-                        });
-                    },
-                    end: function () {
-                        document.getElementById('mixly-loader-div').style.display = 'none';
-                        $(".layui-layer-shade").remove();
-                        if (cancelBtnClicked)
-                            Mixly.WebSocket.Socket.sendCommand({
-                                obj: 'ArduShell',
-                                function: 'cancel',
-                                args: [
-                                    indexText['已取消编译']
-                                ]
-                            });
-                    }
-                });
-            });
-        }
-
-        init();
+        ArduShell.compile();
     });
 }
 
-Mixly.WebSocket.ArduShell.upload = () => {
-    /*
-    let WS = Mixly.WebSocket.Socket;
-    if (!WS.connected) {
-        layer.msg('未连接' + WS.url + '，请在设置中连接', {time: 1000});
-        return;
-    }
-    */
-    Mixly.WebSocket.Socket.connect((WS) => {
+/**
+* @function 编译
+* @description 开始一个编译过程
+* @return void
+*/
+ArduShell.compile = () => {
+    StatusBarPort.tabChange("output");
+    ArduShell.compiling = true;
+    ArduShell.uploading = false;
+    const boardType = Boards.getSelectedBoardCommandParam();
+    StatusBar.show(1);
+    const layerNum = layer.open({
+        type: 1,
+        title: indexText["编译中"] + "...",
+        content: $('#mixly-loader-div'),
+        shade: LayerExtend.shadeWithHeight,
+        resize: false,
+        closeBtn: 0,
+        success: (layero, index) => {
+            $(".layui-layer-page").css("z-index", "198910151");
+            $("#mixly-loader-btn").off("click").click(() => {
+                $("#mixly-loader-btn").css('display', 'none');
+                layer.title(indexText['编译终止中'] + '...', index);
+                ArduShell.cancel();
+            });
+            StatusBar.setValue(indexText["编译中"] + "...\n", true);
+            const code = MFile.getCode();
+            Socket.sendCommand({
+                obj: 'ArduShell',
+                func: 'compile',
+                args: [ index, boardType, code ]
+            });
+        },
+        end: () => {
+            $('#mixly-loader-div').css('display', 'none');
+            $("layui-layer-shade" + layerNum).remove();
+            $("#mixly-loader-btn").off("click");
+            $("#mixly-loader-btn").css('display', 'inline-block');
+        }
+    });
+}
+
+/**
+* @function 初始化上传
+* @description 关闭已打开的串口，获取当前所连接的设备数，然后开始上传程序
+* @return void
+*/
+ArduShell.initUpload = () => {
+    Socket.connect((WS) => {
         layer.closeAll();
     }, () => {
-        Mixly.StatusBarPort.tabChange('output');
-        let ports = Mixly.WebSocket.Serial.uploadPortList;
-        let code = "";
-        if (document.getElementById('tab_arduino').className == 'tabon') {
-            code = editor.getValue();
-        } else {
-            code = Blockly.Arduino.workspaceToCode(Blockly.mainWorkspace) || '';
+        ArduShell.compiling = false;
+        ArduShell.uploading = true;
+        const boardType = Boards.getSelectedBoardCommandParam();
+        const uploadType = Boards.getSelectedBoardConfigParam('upload_method');
+        let port = Serial.getSelectedPortName();
+        switch (uploadType) {
+            case 'STLinkMethod':
+            case 'jlinkMethod':
+            case 'usb':
+                port = 'None';
+                break;
         }
-        let boardType = $('#boards-type option:selected').val();
-        if (ports.length === 1) {
-            Mixly.WebSocket.ArduShell.uploadWithPort(boardType, ports[0], code);
-        } else if (ports.length === 0) {
-            layer.msg(indexText['无可用设备'] + '!', {
+        if (port) {
+            ArduShell.upload(boardType, port);
+        } else {
+            layer.msg(indexText["无可用设备"] + "!", {
                 time: 1000
             });
-        } else {
-            let form = layui.form;
-            const devNames = $('#mixly-selector-type');
-            let oldDevice = $('#mixly-selector-type option:selected').val();
-            devNames.empty();
-            ports.map(port => {
-                if (`${port}` != "undefined") {
-                    if (`${port}` == oldDevice) {
-                        devNames.append($(`<option value="${port}" selected>${port}</option>`));
-                    } else {
-                        devNames.append($(`<option value="${port}">${port}</option>`));
-                    }
-                }
-            });
-            form.render();
-
-            let initBtnClicked = false;
-
-            layui.use(['layer', 'form'], function () {
-                var layer = layui.layer;
-                layer.open({
-                    type: 1,
-                    id: "serialSelect",
-                    title: indexText["检测到多个串口，请选择："],
-                    area: ['350px', '150px'],
-                    content: $('#mixly-selector-div'),
-                    shade: Mixly.LayerExtend.shade,
-                    closeBtn: 0,
-                    success: function (layero) {
-                        document.getElementById("serialSelect").style.height = "180px";
-                        $(".layui-layer-page").css("z-index", "198910151");
-                        $("#mixly-selector-btn1").click(function(){
-                            layer.closeAll();
-                            layer.msg(indexText['已取消上传'], { time: 1000 });
-                        });
-                        $("#mixly-selector-btn2").click(function(){
-                            layer.closeAll();
-                            initBtnClicked = true;
-                        });
-                    },
-                    end: function () {
-                        document.getElementById('mixly-selector-div').style.display = 'none';
-                        $(".layui-layer-shade").remove();
-                        if (initBtnClicked) {
-                            let selectedPort = $('#mixly-selector-type option:selected').val();
-                            Mixly.WebSocket.ArduShell.uploadWithPort(boardType, selectedPort, code);
-                        }
-                    }
-                });
-            });
         }
     });
 }
 
-Mixly.WebSocket.ArduShell.uploadWithPort = (boardType, port, code) => {
-    Mixly.StatusBar.show(1);
-    Mixly.StatusBar.setValue('');
-    layui.use('layer', function () {
-        var layer = layui.layer;
+/**
+* @function 上传程序
+* @description 通过所选择串口号开始一个上传过程
+* @return void
+*/
+ArduShell.upload = (boardType, port) => {
+    StatusBarPort.tabChange("output");
+    const layerNum = layer.open({
+        type: 1,
+        title: indexText["上传中"] + "...",
+        content: $('#mixly-loader-div'),
+        shade: LayerExtend.shadeWithHeight,
+        resize: false,
+        closeBtn: 0,
+        success: function (layero, index) {
+            $(".layui-layer-page").css("z-index", "198910151");
+            $("#mixly-loader-btn").off("click").click(() => {
+                $("#mixly-loader-btn").css('display', 'none');
+                layer.title(indexText['上传终止中'] + '...', index);
+                ArduShell.cancel();
+            });
+            StatusBar.show(1);
+            StatusBar.setValue(indexText["上传中"] + "...\n", true);
+            const code = MFile.getCode();
+            Socket.sendCommand({
+                obj: 'ArduShell',
+                func: 'upload',
+                args: [ index, boardType, port, code ]
+            });
+        },
+        end: function () {
+            $('#mixly-loader-div').css('display', 'none');
+            $("layui-layer-shade" + layerNum).remove();
+            $("#mixly-loader-btn").off("click");
+            $("#mixly-loader-btn").css('display', 'inline-block');
+        }
+    }); 
+}
 
-        let cancelBtnClicked = false;
-        layer.open({
-            type: 1,
-            title: indexText["上传中"] + "...",
-            content: $('#mixly-loader-div'),
-            shade: Mixly.LayerExtend.shade,
-            closeBtn: 0,
-            success: function () {
-                $(".layui-layer-page").css("z-index", "198910151");
-                Mixly.WebSocket.Socket.sendCommand({
-                    obj: 'ArduShell',
-                    function: 'upload',
-                    args: [
-                        boardType,
-                        port,
-                        code
-                    ]
-                });
+ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
+    layer.close(layerNum);
+    const value = StatusBar.getValue();
+    let prefix = '';
+    if (value.lastIndexOf('\n') !== value.length - 1) {
+        prefix = '\n';
+    }
+    StatusBar.addValue(prefix, true);
+    const message = (type === 'compile' ? indexText["编译成功"] : indexText["上传成功"]);
+    StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + timeCostStr + ")==\n", true);
+    layer.msg(message + '！', {
+        time: 1000
+    });
+    if (type === 'upload' && port) {
+        Serial.connect(port, baud - 0);
+    }
+    ArduShell.compiling = false;
+    ArduShell.uploading = false;
+}
 
-                $("#webusb-cancel").click(function(){
-                    layer.closeAll();
-                    cancelBtnClicked = true;
-                });
-            },
-            end: function () {
-                document.getElementById('mixly-loader-div').style.display = 'none';
-                $(".layui-layer-shade").remove();
-                if (cancelBtnClicked)
-                    Mixly.WebSocket.Socket.sendCommand({
-                        obj: 'ArduShell',
-                        function: 'cancel',
-                        args: [
-                            indexText['已取消上传']
-                        ]
-                    });
-            }
-        });
+ArduShell.operateOnError = (type, layerNum, error) => {
+    StatusBar.addValue(error, true);
+}
+
+ArduShell.operateEndError = (type, layerNum, error) => {
+    layer.close(layerNum);
+    const value = StatusBar.getValue();
+    let prefix = '';
+    if (value.lastIndexOf('\n') !== value.length - 1) {
+        prefix = '\n';
+    }
+    StatusBar.addValue(prefix, true);
+    error && StatusBar.addValue(error + '\n', true);
+    const message = (type === 'compile' ? indexText["编译失败"] : indexText["上传失败"]);
+    StatusBar.addValue("==" + message + "==\n", true);
+    ArduShell.compiling = false;
+    ArduShell.uploading = false;
+}
+
+/**
+* @function 取消编译或上传
+* @description 取消正在执行的编译或上传过程
+* @return void
+*/
+ArduShell.cancel = function () {
+    Socket.sendCommand({
+        obj: 'ArduShell',
+        func: 'cancel',
+        args: []
     });
 }
+
+})();

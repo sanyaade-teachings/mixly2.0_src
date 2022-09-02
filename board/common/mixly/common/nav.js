@@ -108,7 +108,7 @@ Nav.LEFT_BTN_CONFIG = [
                 mpy: 'Mixly.Web.BU.burn()'
             },
             websocket: {
-                mpy: 'Mixly.WebSocket.BU.burn()'
+                mpy: 'Mixly.WebSocket.BU.initBurn()'
             },
             webcompiler: {
                 mpy: 'Mixly.Web.BU.burn()'
@@ -126,7 +126,7 @@ Nav.LEFT_BTN_CONFIG = [
                 c: 'Mixly.Electron.ArduShell.initCompile()'
             },
             websocket: {
-                c: 'Mixly.WebSocket.ArduShell.compile()'
+                c: 'Mixly.WebSocket.ArduShell.initCompile()'
             },
             webcompiler: {
                 c: 'Mixly.WebCompiler.Compiler.compile()'
@@ -152,8 +152,8 @@ Nav.LEFT_BTN_CONFIG = [
                 mpy: 'Mixly.Web.BU.upload()'
             },
             websocket: {
-                c: 'Mixly.WebSocket.ArduShell.upload()',
-                mpy: 'Mixly.WebSocket.BU.upload()'
+                c: 'Mixly.WebSocket.ArduShell.initUpload()',
+                mpy: 'Mixly.WebSocket.BU.initUpload()'
             }
         }
     }, {

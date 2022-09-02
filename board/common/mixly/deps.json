@@ -521,8 +521,18 @@
             {
                 "path":"/web-socket/arduino-shell.js",
                 "require":[
+                    "layui",
+                    "Mixly.Modules",
+                    "Mixly.Env",
+                    "Mixly.LayerExtend",
+                    "Mixly.Config",
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",
+                    "Mixly.Title",
+                    "Mixly.Boards",
+                    "Mixly.MFile",
+                    "Mixly.MArray",
+                    "Mixly.WebSocket.Socket",
                     "Mixly.WebSocket.Serial"
                 ],
                 "provide":[
@@ -532,14 +542,17 @@
             {
                 "path":"/web-socket/burn-upload.js",
                 "require":[
-                    "Mixly.Boards",
+                    "layui",
                     "Mixly.Config",
-                    "Mixly.MFile",
-                    "Mixly.MString",
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",
-                    "Mixly.WebSocket.Socket",
-                    "Mixly.WebSocket.Serial"
+                    "Mixly.LayerExtend",
+                    "Mixly.Env",
+                    "Mixly.Boards",
+                    "Mixly.MFile",
+                    "Mixly.MString",
+                    "Mixly.WebSocket.Serial",
+                    "Mixly.WebSocket.Socket"
                 ],
                 "provide":[
                     "Mixly.WebSocket.BU"
@@ -567,7 +580,9 @@
             {
                 "path":"/web-socket/socket.js",
                 "require":[
+                    "Mixly.Env",
                     "Mixly.Config",
+                    "Mixly.Boards",
                     "Mixly.Charts",
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",

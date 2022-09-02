@@ -164,7 +164,6 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     const { burn, upload } = SELECTED_BOARD;
     if (type === 'upload' && upload.copyLib) {
         let startLibPath = path.dirname(upload.filePath);
-        let newLibPath = copyFilePath.substring(0, copyFilePath.lastIndexOf('/'));
         let pyFileArr = BU.copyLib(startPath, code);
         startPath = path.dirname(startPath);
     }

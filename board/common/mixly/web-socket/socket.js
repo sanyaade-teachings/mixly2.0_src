@@ -1,4 +1,8 @@
+(() => {
+
+goog.require('Mixly.Env');
 goog.require('Mixly.Config');
+goog.require('Mixly.Boards');
 goog.require('Mixly.Charts');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
@@ -6,28 +10,42 @@ goog.require('Mixly.Command');
 goog.require('Mixly.WebSocket');
 goog.provide('Mixly.WebSocket.Socket');
 
-Mixly.WebSocket.Socket.obj = null;
+const {
+    Env,
+    Config,
+    Boards,
+    Charts,
+    StatusBar,
+    StatusBarPort,
+    Command
+} = Mixly;
 
-Mixly.WebSocket.Socket.url = 'ws://127.0.0.1:8081/';
+const { BOARD, SELECTED_BOARD } = Config;
 
-Mixly.WebSocket.Socket.jsonArr = [];
+const { Socket } = Mixly.WebSocket;
 
-Mixly.WebSocket.Socket.connected = false;
+Socket.obj = null;
 
-Mixly.WebSocket.Socket.debug = false;
+Socket.url = 'ws://127.0.0.1:8081/';
 
-Mixly.WebSocket.Socket.initFunc = null;
+Socket.jsonArr = [];
+
+Socket.connected = false;
+
+Socket.debug = false;
+
+Socket.initFunc = null;
 
 $.get('../../config.json', (fileStr) => {
     let configObj = null;
-    let WS = Mixly.WebSocket.Socket;
+    let WS = Socket;
     try {
         configObj = JSON.parse(fileStr);
         //WS.IPAddress = configObj.IPAddress;
         WS.port = configObj.socket.port;
         //WS.url = 'ws://' + WS.IPAddress + ':' + WS.port + '/';
         WS.debug = configObj.debug;
-        Mixly.Config.BOARD.server = configObj;
+        BOARD.server = configObj;
         let url = window.location.host;
         let IPList = url.match(/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/g);
         if (IPList && IPList.length > 0) {
@@ -47,11 +65,11 @@ try {
     console.log(e);
 }
 
-Mixly.WebSocket.Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
-    if (Mixly.WebSocket.Socket.connected) {
-        if (Mixly.WebSocket.Socket.initFunc) {
-            Mixly.WebSocket.Socket.initFunc();
-            Mixly.WebSocket.Socket.initFunc = null;
+Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
+    if (Socket.connected) {
+        if (Socket.initFunc) {
+            Socket.initFunc();
+            Socket.initFunc = null;
         }
         doFunc();
         return;
@@ -61,18 +79,18 @@ Mixly.WebSocket.Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => 
     WS.obj = new WebSocket(WS.url);
     WS.obj.onopen = () => {
         console.log('已连接' + WS.url);
-        Mixly.StatusBar.show(1);
-        Mixly.StatusBarPort.tabChange('output');
-        Mixly.StatusBar.setValue(WS.url + '连接成功\n', true);
+        StatusBar.show(1);
+        StatusBarPort.tabChange('output');
+        StatusBar.setValue(WS.url + '连接成功\n', true);
         WS.connected = true;
-        Mixly.WebSocket.Socket.toggleUIToolbar(true);
-        Mixly.WebSocket.Socket.initFunc = doFunc;
+        Socket.toggleUIToolbar(true);
+        Socket.initFunc = doFunc;
         onopenFunc(WS);
     };
 
     WS.obj.onmessage = (event) => {
-        let command = Mixly.Command.parse(event.data);
-        if (Mixly.WebSocket.Socket.debug)
+        let command = Command.parse(event.data);
+        if (Socket.debug)
             console.log('receive -> ', event.data);
         /*if (command && command.obj && command.function) {
             if (command.type === 1) {
@@ -85,58 +103,35 @@ Mixly.WebSocket.Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => 
                 }
             }
         }*/
-        Mixly.Command.run(command);
+        Command.run(command);
     };
 
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
-        //Mixly.StatusBar.addValue(event.toString(), true);
+        //StatusBar.addValue(event.toString(), true);
     };
 
     WS.obj.onclose = () => {
         WS.connected = false;
         console.log('已断开' + WS.url);
-        Mixly.StatusBar.show(1);
-        Mixly.StatusBarPort.tabChange('output');
-        Mixly.StatusBar.setValue(WS.url + '连接断开\n', true);
-        let ports = Mixly.StatusBarPort.portsName;
+        StatusBar.show(1);
+        StatusBarPort.tabChange('output');
+        StatusBar.setValue(WS.url + '连接断开\n', true);
+        let ports = StatusBarPort.portsName;
         for (let i = 0; i < ports.length; i++) {
-            Mixly.StatusBarPort.close(ports[i]);
+            StatusBarPort.close(ports[i]);
         }
-        Mixly.WebSocket.Socket.toggleUIToolbar(false);
+        Socket.toggleUIToolbar(false);
         layer.closeAll();
         layer.msg('未连接' + WS.url + '，请在设置中连接', { time: 1000 });
+        Mixly.WebSocket.BU.burning = false;
+        Mixly.WebSocket.BU.uploading = false;
+        Mixly.WebSocket.ArduShell.compiling = false;
+        Mixly.WebSocket.ArduShell.uploading = false;
     }
 }
 
-Mixly.WebSocket.Socket.parseCommand = (commandStr) => {
-    function decodeJson(jsonObj) {
-        // 循环所有键
-        for (var key in jsonObj) {
-            //如果对象类型为object类型且数组长度大于0 或者 是对象 ，继续递归解析
-            var element = jsonObj[key];
-            if (element.length > 0 && typeof (element) == "object" || typeof (element) == "object") {
-                element = { ...decodeJson(element) };
-            } else { //不是对象或数组、直接输出
-                if (typeof (element) === 'string') {
-                    try {
-                        jsonObj[key] = decodeURIComponent(jsonObj[key]);
-                    } catch (e) {
-                    }
-                }
-            }
-        }
-        return jsonObj;
-    }
-    try {
-        return decodeJson(JSON.parse(commandStr));
-    } catch (e) {
-        console.log(e);
-        return null;
-    }
-}
-
-Mixly.WebSocket.Socket.sendCommand = (command) => {
+Socket.sendCommand = (command) => {
     let WS = Mixly.WebSocket.Socket;
     if (!WS.connected) {
         layer.msg('未连接' + WS.url, {time: 1000});
@@ -164,7 +159,7 @@ Mixly.WebSocket.Socket.sendCommand = (command) => {
 
     try {
         commandStr = JSON.stringify(encodeJson(command));
-        if (Mixly.WebSocket.Socket.debug)
+        if (Socket.debug)
             console.log('send -> ', commandStr);
     } catch (e) {
         console.log(e);
@@ -173,18 +168,18 @@ Mixly.WebSocket.Socket.sendCommand = (command) => {
     WS.obj.send(commandStr);
 }
 
-Mixly.WebSocket.Socket.clickConnect = () => {
-    if (Mixly.WebSocket.Socket.connected) {
-        Mixly.WebSocket.Socket.disconnect();
+Socket.clickConnect = () => {
+    if (Socket.connected) {
+        Socket.disconnect();
     } else {
-        Mixly.WebSocket.Socket.connect((WS) => {
+        Socket.connect((WS) => {
             layer.closeAll();
             layer.msg(WS.url + '连接成功', { time: 1000 });
         });
     }
 }
 
-Mixly.WebSocket.Socket.openLoadingBox = (title, successFunc = () => {}, endFunc = () => {}) => {
+Socket.openLoadingBox = (title, successFunc = () => {}, endFunc = () => {}) => {
     layer.open({
         type: 1,
         title: title,
@@ -200,35 +195,35 @@ Mixly.WebSocket.Socket.openLoadingBox = (title, successFunc = () => {}, endFunc 
             $("#mixly-loader-div").css("display", "none");
             $(".layui-layer-shade").remove();
             $("#webusb-cancel").css("display", "unset");
-            if (Mixly.WebSocket.Socket.connected)
+            if (Socket.connected)
                 endFunc();
         }
     });
 }
 
-Mixly.WebSocket.Socket.connect = (onopenFunc = (data) => {}, doFunc = () => {}) => {
-    if (Mixly.WebSocket.Socket.connected) {
+Socket.connect = (onopenFunc = (data) => {}, doFunc = () => {}) => {
+    if (Socket.connected) {
         doFunc();
         return;
     }
     let title = '连接中...';
-    Mixly.WebSocket.Socket.openLoadingBox(title, () => {
+    Socket.openLoadingBox(title, () => {
         setTimeout(() => {
-            Mixly.WebSocket.Socket.init(onopenFunc);
+            Socket.init(onopenFunc);
         }, 1000);
     }, doFunc);
 }
 
-Mixly.WebSocket.Socket.disconnect = () => {
-    if (!Mixly.WebSocket.Socket.connected)
+Socket.disconnect = () => {
+    if (!Socket.connected)
         return;
     let title = '断开中...';
-    Mixly.WebSocket.Socket.openLoadingBox(title, () => {
-        Mixly.WebSocket.Socket.obj.close();
+    Socket.openLoadingBox(title, () => {
+        Socket.obj.close();
     });
 }
 
-Mixly.WebSocket.Socket.toggleUIToolbar = (connected) => {
+Socket.toggleUIToolbar = (connected) => {
     try {
         if (connected) {
             $('#socket-connect-btn').html(MSG['disconnect']);
@@ -242,9 +237,20 @@ Mixly.WebSocket.Socket.toggleUIToolbar = (connected) => {
     }
 }
 
+Socket.updateSelectedBoardConfig = (info) => {
+    Env.currentPlatform = info.currentPlatform;
+    info.clientPath = info.clientPath.replaceAll('\\', '/');
+    Env.clientPath = info.clientPath;
+    info.appPath = info.appPath.replaceAll('\\', '/');
+    Env.indexPath = goog.normalizePath_(info.appPath + '/' + BOARD.boardIndex + '/../');
+    Env.python3Path = info.python3Path;
+    const boardName = Boards.getSelectedBoardName();
+    Boards.changeTo(boardName);
+}
+
 /*
-Mixly.WebSocket.Socket.longSock = (url, fn, intro = '') => {
-    if (Mixly.WebSocket.Socket.connected) return;
+Socket.longSock = (url, fn, intro = '') => {
+    if (Socket.connected) return;
     let lockReconnect = false; //避免重复连接
     let timeoutFlag = true;
     let timeoutSet = null;
@@ -329,9 +335,9 @@ Mixly.WebSocket.Socket.longSock = (url, fn, intro = '') => {
             layer.msg('已断开与node服务器的连接!', {
                 time: 1000
             });
-            let ports = Mixly.StatusBarPort.portName;
+            let ports = StatusBarPort.portName;
             for (let i = 0; i < ports.length; i++) {
-                Mixly.StatusBarPort.close(ports[i]);
+                StatusBarPort.close(ports[i]);
             }
             Mixly.WebSocket.Serial.setConnectStatus('', false);
 
@@ -359,7 +365,7 @@ const handler = (event, ws) => {
     //ws 是请求名称，方便关闭websocket
     let WS = Mixly.WebSocket.Socket;
     let command = WS.parseCommand(event.data);
-    if (Mixly.WebSocket.Socket.debug)
+    if (Socket.debug)
         console.log('receive -> ', event.data);
     if (command && command.obj && command.function) {
         if (command.type === 1) {
@@ -374,10 +380,12 @@ const handler = (event, ws) => {
     }
  }
 
-Mixly.WebSocket.Socket.init = (doFunc = () => {}) => {
+Socket.init = (doFunc = () => {}) => {
     let WS = Mixly.WebSocket.Socket;
     WS.longSock(WS.url, handler, WS.url);
 }
 
-Mixly.WebSocket.Socket.init();
+Socket.init();
 */
+
+})();

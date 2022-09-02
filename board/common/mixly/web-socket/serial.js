@@ -1247,6 +1247,11 @@ Serial.connect = function (port = null, baud = null) {
         rts
     } = toolConfig;
     baud = baud ?? baudRates;
+    if (Serial.DEFAULT_BAUD.includes(baud)) {
+        toolConfig.baudRates = baud;
+    } else {
+        baud = baudRates;
+    }
     const reset = SELECTED_BOARD.upload.reset ?? [];
     Socket.sendCommand({
         obj: 'Serial',
@@ -1284,6 +1289,9 @@ Serial.onopen = (port) => {
     portObj.refreshOutputBoxTimer = setInterval(() => {
         Serial.refreshOutputBox(port);
     }, Serial.REFRESH_OUTPUT_TIME);
+    if (SELECTED_BOARD.serial?.ctrlDBtn) {
+        Serial.writeCtrlD(port);
+    }
 }
 
 Serial.ondata = (port, data) => {

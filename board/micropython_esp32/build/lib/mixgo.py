@@ -107,7 +107,7 @@ class ADCSensor:
             self._switch = Pin(15, Pin.OUT)
 
     def read(self):
-        return self._adc.read()
+        return self._adc.read_u16()
     
     def switch(self,val):
         self._switch.value(val)

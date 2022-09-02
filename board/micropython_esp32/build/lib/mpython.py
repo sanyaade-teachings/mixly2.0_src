@@ -131,14 +131,14 @@ class ADCSensor:
         self.adc.atten(ADC.ATTN_11DB) 
 
     def brightness(self):
-        return self.adc.read()
+        return self.adc.read_u16()
 
     def soundlevel(self):
         value_d= []
         for _ in range(5):
             values = []
             for _ in range(10):
-                val = self.adc.read()
+                val = self.adc.read_u16()
                 values.append(val)
             value_d.append(max(values) - min(values))
         return max(value_d)

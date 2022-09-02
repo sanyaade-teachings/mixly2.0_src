@@ -1310,6 +1310,7 @@ Serial.onbytes = (port, data) => {
     if (!portObj.refreshOutputBoxTimer) return;
     portObj.receiveBuff = portObj.receiveBuff ?? [];
     portObj.chineseStr = portObj.chineseStr ?? '';
+    portObj.buffLength = portObj.buffLength ?? 0;
     if (portObj.toolConfig && !portObj.toolConfig.receiveStr) {
         if (data === 10) {
             Serial.outputBoxAdd(port, '0x0A', false);

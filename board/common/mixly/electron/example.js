@@ -45,7 +45,7 @@ Example.init = () => {
             type="button"
             m-title="${indexText['例程']}"
             class="layui-btn layui-btn-xs layui-btn-primary m-btn"
-            style="cursor:pointer;border:none;margin:0 10px 0 10px;padding:0 5px;display:inline-flex;align-items:center;"
+            style="cursor:pointer;border:none;margin-left:15px;padding:0px;display:inline-flex;align-items:center;"
         >
             <a
                 href="javascript:;"

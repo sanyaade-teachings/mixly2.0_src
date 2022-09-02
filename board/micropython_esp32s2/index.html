@@ -24,6 +24,7 @@
   <script src="blocks/esp32_profile.js"></script>
   <!-- blocks file -->
   <script src="blocks/pins.js"></script>
+  <script src="blocks/ce_go.js"></script>
   <script src="../micropython_common/blocks/inout.js"></script>
   <script src="../python/blocks/control.js"></script>
   <script src="../micropython_common/blocks/system.js"></script>
@@ -52,6 +53,7 @@
   <script src="../python/blocks/html.js"></script>
   <!-- generator file -->
   <script src="generators/pins.js"></script>
+  <script src="generators/ce_go.js"></script>
   <script src="../micropython_common/generators/inout.js"></script>
   <script src="../python/generators/control.js"></script>
   <script src="../micropython_common/generators/system.js"></script>
@@ -83,7 +85,7 @@
   <script src="../common/js/lib/ace/ext-language_tools.js" type="application/javascript"></script>
   <script src="../python/blocks/utility.js"></script>
   <script src="../python/generators/utility.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/color_esp32c3_mixgocc.css" />
+  <link rel="stylesheet" type="text/css" href="css/color_esp32s2_mixgoce.css" />
 </head>
 
 <body>
@@ -1461,7 +1463,7 @@
           <block type="controls_pass"></block>
         </statement>
       </block>
-      <block type="sensor_mixgo_pin_pressed" m-show="micropython:esp32s2:mixgo_ce">
+      <block type="sensor_mixgoce_pin_pressed">
           <value name="button">
             <shadow type="number2">
             </shadow>
@@ -1783,10 +1785,8 @@
           <shadow type="display_onoff">
           </shadow>
         </value>
-      </block>
-      
+      </block>      
       <block type="display_bright_screen">
-
         <value name="x">
           <shadow type="math_number">
             <field name="NUM">0.5</field>
@@ -1794,14 +1794,100 @@
         </value>
       </block>
       <block type="display_get_screen_pixel">
-
       </block>
       <block type="display_clear"></block>
-
-
-
     </category>
-
+    <category id="catME_GO" colour="100">
+      <block type="ce_go_led_bright">
+        <value name="led">
+          <shadow type="ce_go_light_number">
+          </shadow>
+        </value>
+        <value name="bright">
+          <shadow type="ledswitch">
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_get_led_state">
+        <value name="led">
+          <shadow type="ce_go_light_number">
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_led_brightness">
+        <value name="led">
+          <shadow type="ce_go_light_number">
+          </shadow>
+        </value>
+        <value name="bright">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_get_led_bright">
+        <value name="led">
+          <shadow type="ce_go_light_number">
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_stepper_keep">
+        <value name="speed">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_stepper_stop"></block>
+      <block type="ce_go_dc_motor">
+        <value name="speed">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_hall_initialize">
+        <value name="num">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ce_go_hall_attachInterrupt">
+        <value name="DO">
+          <shadow type="factory_block_return">
+            <field name="VALUE">interrupt_func</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="procedures_defnoreturn">
+        <mutation>
+          <arg name="turns"></arg>
+          <arg name="distance"></arg>
+        </mutation>
+        <field name="NAME">interrupt_func</field>
+        <statement name="STACK">
+          <block type="system_print_many">
+            <mutation items="2"></mutation>
+            <value name="ADD0">
+              <block type="variables_get">
+                <field name="VAR">turns</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="variables_get">
+                <field name="VAR">distance</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+      <block type="ce_go_pin_near_state_change"></block>
+      <block type="ce_go_pin_near_line"></block>
+      <block type="ce_go_pin_near"></block>
+      <block type="ce_go_pin_light"></block>
+      <block type="sensor_mixgome_eulerangles"></block>
+    </category>
     
       <category id="catIot" colour="#2FAD7A">
       <category id="catBlynk" colour="#2FAD7A">
@@ -2313,7 +2399,7 @@
         <block type="communicate_ir_send">
           <value name="PIN">
             <shadow type="pins_digital_pin">
-              <field name="PIN">0</field>
+              <field name="PIN">39</field>
             </shadow>
           </value>
            <value name="ADDR">
@@ -2330,7 +2416,7 @@
         <block type="communicate_ir_recv">
           <value name="PIN">
             <shadow type="pins_digital_pin">
-              <field name="PIN">0</field>
+              <field name="PIN">38</field>
             </shadow>
           </value>
           <value name="SUB">

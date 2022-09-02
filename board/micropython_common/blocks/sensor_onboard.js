@@ -141,6 +141,19 @@ Blockly.Blocks['sensor_mixgo_pin_pressed'] = {
     }
 };
 
+Blockly.Blocks['sensor_mixgoce_pin_pressed'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendValueInput("button")
+        .appendField(Blockly.MIXLY_ESP32_TOUCH_SENSOR)
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_IS_TOUCHED);
+        this.setOutput(true, Boolean);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_TOOLTIP_sensor_pin_pressed);
+    }
+};
+
 Blockly.Blocks['sensor_mpython_pin_pressed'] = {
     init: function(){
         this.setColour(Blockly.Blocks.sensor_onboard.HUE);
@@ -292,7 +305,7 @@ Blockly.Blocks['number2'] = {
    init: function() {
     this.setColour(Blockly.Blocks.sensor_onboard.HUE);
     this.appendDummyInput("")
-    .appendField(new Blockly.FieldDropdown([["1", "touch1"], ["2", "touch2"],["3", "touch3"], ["4", "touch4"]]), 'op')
+    .appendField(new Blockly.FieldDropdown([["1", "4"], ["2", "5"],["3", "6"], ["4", "7"]]), 'op')
     this.setOutput(true);
     this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_HIGHLOW);
 }

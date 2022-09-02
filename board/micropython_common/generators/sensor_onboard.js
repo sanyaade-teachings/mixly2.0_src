@@ -258,6 +258,14 @@ Blockly.Python.sensor_mpu9250_get_acceleration = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.sensor_mixgoce_pin_pressed = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var pin = Blockly.Python.valueToCode(this, 'button', Blockly.Python.ORDER_ATOMIC);
+    var code = version+'.touched('+pin+')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.sensor_mixgo_pin_pressed = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version] = 'import '+version;

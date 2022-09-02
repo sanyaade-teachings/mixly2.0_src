@@ -1362,7 +1362,7 @@ Serial.onbytes = (port, data) => {
         }
     } else if ((data & 0xc0) === 0x80) {
         portObj.receiveBuff.push(data);
-        if (portObj.receiveBuff.length >= buffLength) {
+        if (portObj.receiveBuff.length >= portObj.buffLength) {
             Serial.outputBoxAdd(port, Buffer.from(portObj.receiveBuff));
             portObj.receiveBuff = [];
         }
@@ -1370,20 +1370,20 @@ Serial.onbytes = (port, data) => {
         let dataNum = data & 0xe0;
         switch (dataNum) {
             case 0xfc:
-                buffLength = 6;
+                portObj.buffLength = 6;
                 break;
             case 0xf8:
-                buffLength = 5;
+                portObj.buffLength = 5;
                 break;
             case 0xf0:
-                buffLength = 4;
+                portObj.buffLength = 4;
                 break;
             case 0xe0:
-                buffLength = 3;
+                portObj.buffLength = 3;
                 break;
             case 0xc0:
             default:
-                buffLength = 2;
+                portObj.buffLength = 2;
         }
         portObj.receiveBuff.push(data);
     }

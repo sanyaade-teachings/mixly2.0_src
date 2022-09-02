@@ -415,6 +415,7 @@ Blockly.Blocks['communicate_ir_send'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
+        this.setTooltip(Blockly.blynk_IOT_IR_SEND_TOOLTIP);
     }
 };
 

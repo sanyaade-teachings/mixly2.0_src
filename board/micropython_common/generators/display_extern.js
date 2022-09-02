@@ -374,6 +374,9 @@ Blockly.Python.display_tm1650_set_brightness = function () {
 
 Blockly.Python.tft_use_spi_init=function(){
     Blockly.Python.definitions_['import_st7789'] = 'import st7789';
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[1]
+    if(version=='esp32'){var addr = '0x700000'}
+      else{var addr = '0x3A0000'}
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var sv = Blockly.Python.valueToCode(this, 'SPISUB', Blockly.Python.ORDER_ATOMIC);
     var pv = Blockly.Python.valueToCode(this, 'PINCS', Blockly.Python.ORDER_ATOMIC);
@@ -381,7 +384,7 @@ Blockly.Python.tft_use_spi_init=function(){
     var w = Blockly.Python.valueToCode(this, 'WIDTH', Blockly.Python.ORDER_ATOMIC);
     var h = Blockly.Python.valueToCode(this, 'HEIGHT', Blockly.Python.ORDER_ATOMIC);
     var op = this.getFieldValue('rotate');
-    var code = v + ' = st7789.ST7789('+ sv+ ','+ w + ',' + h + ',dc_pin='+ dv + ',cs_pin=' + pv +',rotation='+op + ')\n';    
+    var code = v + ' = st7789.ST7789('+ sv+ ','+ w + ',' + h + ',dc_pin='+ dv + ',cs_pin=' + pv +',rotation='+op + ',font_address='+addr+')\n';    
     return code;
 };
 

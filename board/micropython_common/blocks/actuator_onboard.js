@@ -264,10 +264,13 @@ Blockly.Blocks.actuator_onboard_neopixel_rgb = {
         const { Boards } = Mixly;
         const boardKey = Boards.getSelectedBoardKey();
         switch (boardKey) {
-            case 'micropython:esp32c3:mixgocc':
+            case 'micropython:esp32c3:mixgo_cc':
                 this.setTooltip(Blockly.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
                 break;
-            case 'micropython:esp32c3:mixgome':
+            case 'micropython:esp32s2:mixgo_ce':
+                this.setTooltip(Blockly.MIXLY_RGB_NUM_R_G_B_MIXGOCC);
+                break;    
+            case 'micropython:esp32c3:mixgo_me':
                 this.setTooltip(Blockly.MIXLY_RGB_NUM_R_G_B_MIXGOME);
                 break;
             case 'micropython:esp32:mPython':

@@ -761,7 +761,8 @@ Blockly.Blocks.lora_init = {
                 ['125000','125000'],
                 ['250000','250000'],
                 ['500000','500000']
-            ]), 'bandwidth')    
+            ]), 'bandwidth')  
+        this.setFieldValue("125000","bandwidth");      
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

@@ -33,7 +33,7 @@ Blockly.Python.inout_pwm_analog_write = function () {
     //var dropdown_stat = this.getFieldValue('STAT');
     var value_num = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC);
     //Blockly.Python.setups_['setup_output'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);';
-    var code = dropdown_pin + '.duty(' + value_num + ')\n';
+    var code = dropdown_pin + '.duty_u16(' + value_num + ')\n';
     return code;
 };
 //ok
@@ -72,7 +72,7 @@ Blockly.Python.inout_analog_read = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     //Blockly.Python.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
-    var code = dropdown_pin + '.read()';
+    var code = dropdown_pin + '.read_u16()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 //ok

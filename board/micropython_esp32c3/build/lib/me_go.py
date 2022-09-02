@@ -78,7 +78,7 @@ class CAR(TM1931):
             self.pwm(self.LSOU,0)
             time.sleep_ms(2)
         if self._mode==self.OA or self._mode==self.AS :
-            return self.adc2.read(),self.adc1.read(),self.adc0.read(),self.adc3.read()
+            return self.adc2.read_u16(),self.adc1.read_u16(),self.adc0.read_u16(),self.adc3.read_u16()
         else:
             raise ValueError('Mode selection error, obstacle avoidance data cannot be read')
 
@@ -90,7 +90,7 @@ class CAR(TM1931):
             self.pwm(self.LSOU,0)
             time.sleep_ms(2)
         if self._mode==self.LP or self._mode==self.AS:
-            return self.adc3.read(),self.adc2.read(),self.adc1.read(),self.adc0.read()    
+            return self.adc3.read_u16(),self.adc2.read_u16(),self.adc1.read_u16(),self.adc0.read_u16()    
         else:
             raise ValueError('Mode selection error, line patrol data cannot be read')
 
@@ -102,7 +102,7 @@ class CAR(TM1931):
             self.pwm(self.LSOU,255)
             time.sleep_ms(2)
         if self._mode==self.LS or self._mode==self.AS:
-            return self.adc3.read(),self.adc2.read(),self.adc1.read(),self.adc0.read()    
+            return self.adc3.read_u16(),self.adc2.read_u16(),self.adc1.read_u16(),self.adc0.read_u16()    
         else:
             raise ValueError('Mode selection error, light seeking data cannot be read')
 

@@ -415,6 +415,7 @@ Blockly.Blocks['communicate_ir_send'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
+        this.setTooltip(Blockly.blynk_IOT_IR_SEND_TOOLTIP);
     }
 };
 
@@ -760,7 +761,8 @@ Blockly.Blocks.lora_init = {
                 ['125000','125000'],
                 ['250000','250000'],
                 ['500000','500000']
-            ]), 'bandwidth')    
+            ]), 'bandwidth')  
+        this.setFieldValue("125000","bandwidth");      
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

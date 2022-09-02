@@ -225,7 +225,7 @@ class IRtube:
             self.convert.value(0)
             time.sleep_ms(2)
         if self._mode==self.OA or self._mode==self.AS :
-            return self.adc1.read(),self.adc2.read(),self.adc3.read(),self.adc0.read()
+            return self.adc1.read_u16(),self.adc2.read_u16(),self.adc3.read_u16(),self.adc0.read_u16()
         else:
             raise ValueError('In line patrol mode, obstacle avoidance data cannot be read')
         
@@ -235,7 +235,7 @@ class IRtube:
             self.convert.value(1)
             time.sleep_ms(2)
         if self._mode==self.LP or self._mode==self.AS:
-            return self.adc0.read(),self.adc1.read(),self.adc2.read(),self.adc3.read()
+            return self.adc0.read_u16(),self.adc1.read_u16(),self.adc2.read_u16(),self.adc3.read_u16()
         else:
             raise ValueError('In obstacle avoidance mode, line patrol data cannot be read')      
 

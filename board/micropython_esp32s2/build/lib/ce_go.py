@@ -15,7 +15,7 @@ from machine import Pin,SoftI2C,ADC
 
 '''i2c-onboard'''
 i2c=SoftI2C(scl = Pin(4,pull=Pin.PULL_UP), sda = Pin(5,pull=Pin.PULL_UP), freq = 400000)
-print(i2c.scan())
+
 '''TM1931-Expand'''    
 class CAR(TM1931):
     '''Infrared line patrol obstacle avoidance mode'''

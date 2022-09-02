@@ -38,6 +38,13 @@ Blockly.Python.math_constant = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.math_constant_mp = function() {
+  Blockly.Python.definitions_.import_math = "import math";
+  var name = this.getFieldValue('CONSTANT');
+  var code='math.'+name;
+  return [code,Blockly.Python.ORDER_ATOMIC];
+};
+
 
 Blockly.Python.math_bit = function() {
   var operator = this.getFieldValue('OP');;

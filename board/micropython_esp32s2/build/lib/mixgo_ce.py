@@ -143,7 +143,7 @@ class MICSensor:
     def sample(self):
         values = []
         for i in range(50):
-            val = self.adc.read_u16()//16
+            val = self.adc.read_u16()
             values.append(val)
         return max(values) - min(values)
 
@@ -167,7 +167,7 @@ class ADCSensor:
             self._switch = Pin(39, Pin.OUT)
  
     def read(self):
-        return self._adc.read_u16()//16
+        return self._adc.read_u16()
 
     def switch(self,val):
         self._switch.value(val)

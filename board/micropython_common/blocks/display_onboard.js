@@ -17,7 +17,7 @@ Blockly.Blocks.display_show_image = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.OLED_BITMAP_OR_STRING);
+    
   }
 };
 
@@ -39,7 +39,7 @@ Blockly.Blocks.display_show_image = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.MIXLY_ESP32_SHOW_IMAGE_OR_STRING_DELAY);
+    
   }
 };
 
@@ -70,7 +70,7 @@ Blockly.Blocks.display_scroll_string_delay = {
      this.setPreviousStatement(true, null);
      this.setNextStatement(true, null);
      this.setInputsInline(true);
-     this.setTooltip(Blockly.MIXLY_ESP32_SCROLL_IMAGE_OR_STRING_DELAY);
+     
    }
  };
 
@@ -225,10 +225,10 @@ Blockly.Blocks['display_shift'] = {
         var mode1 = Blockly.Msg.DISPLAY_IMAGE_LET2;
         var mode2 = Blockly.Msg.DISPLAY_IMAGE_LET3;
         var TOOLTIPS = {
-        'up': Blockly.MIXLY_UP,
-        'down':Blockly.MIXLY_DOWN,
-        'left':Blockly.MIXLY_LEFT,
-        'right':Blockly.MIXLY_RIGHT
+        'shift_up': Blockly.MIXLY_UP,
+        'shift_down':Blockly.MIXLY_DOWN,
+        'shift_left':Blockly.MIXLY_LEFT,
+        'shift_right':Blockly.MIXLY_RIGHT
       };
       return mode0 + mode1 +TOOLTIPS[mode]+mode2;
     });
@@ -343,7 +343,7 @@ Blockly.Blocks['mixgo_display_image_create_new']= {
         dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
       }
     }
-    this.setOutput(true);
+    this.setOutput(true,"esp32_image");
     this.setColour(Blockly.Blocks.display_onboard.HUE);
     this.setTooltip(Blockly.MIXLY_MICROBIT_Create_image1);
   }

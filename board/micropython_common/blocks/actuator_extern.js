@@ -446,7 +446,7 @@ Blockly.Blocks.actuator_neopixel_rgb = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip('');
-        this.setTooltip(Blockly.MIXLY_RGB_NUM_R_G_B);
+        this.setTooltip(Blockly.MIXLY_RGB_NUM_R_G_B_MP);
     }
 };
 

@@ -3,26 +3,25 @@ UART Communication
 
 MicroPython library for the UART_COM（Board to board communication）
 =======================================================
-#Preliminary composition           				20220227
+#Preliminary composition           				20220903
 
 dahanzimin From the Mixly Team 
 """
-data_a=None
+_sdata=None
 
 def send(uart,data,repeat=True):
-	global data_a	
-	data_b = data
-	if data_b != data_a:
+	global _sdata	
+	if data != _sdata:
 		uart.write((str(data)+'\n'))
 		if not repeat:
-			data_a=data_b
+			_sdata=data
             
 def recv(uart):
 	data = uart.readline()
 	if data:
+		data_str = data.strip()
 		try:
-			data_dict=eval(data.strip())
-			return data_dict
+			data_str=data_str.decode()
+			return eval(data_str)
 		except:
-			return None
-
+			return data_str

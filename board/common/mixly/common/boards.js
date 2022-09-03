@@ -216,7 +216,7 @@ Boards.setSelectedBoard = (name, userConfig) => {
         }
         form.render('select', 'boards-type-filter');
     }
-    Boards.changeTo(Boards.INFO[name].key);
+    Boards.changeTo(name);
     Boards.updateCategories(name);
     if (typeof profile === 'object' && profile[name])
         profile['default'] = profile[name];

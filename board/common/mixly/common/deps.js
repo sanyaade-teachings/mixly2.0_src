@@ -150,6 +150,26 @@ Deps.DEPENDENCY["web-compiler"]["common"] = [
     ...depsJson["web-compiler"]["common"]
 ];
 
+Deps.DEPENDENCY["web-socket"]["electron"] = [
+    ...Deps.DEPENDENCY["web-socket"]["electron"],
+    ...depsJson["web-socket"]["electron"]
+];
+
+Deps.DEPENDENCY["web-compiler"]["electron"] = [
+    ...Deps.DEPENDENCY["web-compiler"]["electron"],
+    ...depsJson["web-compiler"]["electron"]
+];
+
+Deps.DEPENDENCY["web-socket"]["web"] = [
+    ...Deps.DEPENDENCY["web-socket"]["web"],
+    ...depsJson["web-socket"]["web"]
+];
+
+Deps.DEPENDENCY["web-compiler"]["web"] = [
+    ...Deps.DEPENDENCY["web-compiler"]["web"],
+    ...depsJson["web-compiler"]["web"]
+];
+
 Deps.addDependency = (dependencyList) => {
     if (typeof dependencyList !== 'object') return;
     for (let i = 0; i < dependencyList.length; i++) {
@@ -219,7 +239,9 @@ if (Env.isElectron) {
     goog.require('Mixly.Electron.Loader');
     goog.require('Mixly.Electron.File');
     if (Env.hasSocketServer) {
-        goog.require('Mixly.WebSocket.Socket');
+        goog.require('Mixly.WebSocket.BU');
+        goog.require('Mixly.WebSocket.ArduShell');
+        goog.require('Mixly.WebSocket.Serial');
     } else if (Env.hasCompiler) {
         goog.require('Mixly.WebCompiler.Compiler');
         goog.require('AvrUploader');

@@ -87,7 +87,7 @@
             ]
         },
         {
-            "path":"/electron/example.js",
+            "path":"/electron/example-ext.js",
             "require":[
                 "layui",
                 "Mixly.Env",
@@ -100,7 +100,7 @@
                 "Mixly.Electron.File"
             ],
             "provide":[
-                "Mixly.Electron.Example"
+                "Mixly.Electron.ExampleExt"
             ]
         },
         {
@@ -300,6 +300,18 @@
             ]
         },
         {
+            "path":"/web/example-ext.js",
+            "require":[
+                "Mixly.Config",
+                "Mixly.MJSON",
+                "Mixly.Example",
+                "Mixly.Boards"
+            ],
+            "provide":[
+                "Mixly.Web.ExampleExt"
+            ]
+        },
+        {
             "path":"/web/file.js",
             "require":[
                 "Mixly.MFile",
@@ -372,7 +384,8 @@
                 "Mixly.Drag",
                 "Mixly.Editor",
                 "WorkspaceSearch",
-                "Backpack"
+                "Backpack",
+                "Mixly.Web.ExampleExt"
             ]
         },
         {
@@ -429,7 +442,8 @@
                     "Mixly.Editor",
                     "WorkspaceSearch",
                     "Backpack",
-                    "Mixly.WebSocket.Socket"
+                    "Mixly.WebSocket.Socket",
+                    "Mixly.Web.ExampleExt"
                 ]
             },
             {
@@ -483,7 +497,8 @@
                     "Mixly.Editor",
                     "WorkspaceSearch",
                     "Backpack",
-                    "Mixly.WebSocket.Socket"
+                    "Mixly.WebSocket.Socket",
+                    "Mixly.Web.ExampleExt"
                 ]
             },
             {
@@ -616,7 +631,8 @@
                     "Mixly.Drag",
                     "Mixly.Editor",
                     "WorkspaceSearch",
-                    "Backpack"
+                    "Backpack",
+                    "Mixly.Web.ExampleExt"
                 ]
             },
             {
@@ -669,7 +685,8 @@
                     "Mixly.Drag",
                     "Mixly.Editor",
                     "WorkspaceSearch",
-                    "Backpack"
+                    "Backpack",
+                    "Mixly.Web.ExampleExt"
                 ]
             },
             {
@@ -808,6 +825,18 @@
             ],
             "provide":[
                 "Mixly.Editor"
+            ]
+        },
+        {
+            "path":"/common/example.js",
+            "require":[
+                "layui",
+                "Mixly.MFile",
+                "Mixly.Title",
+                "Mixly.XML"
+            ],
+            "provide":[
+                "Mixly.Example"
             ]
         },
         {

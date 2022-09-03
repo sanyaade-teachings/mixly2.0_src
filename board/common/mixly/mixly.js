@@ -75,7 +75,7 @@ Mixly.require = (requireObj) => {
     Mixly.requireList(nowRequire['common']);
 
     if (window?.process?.versions?.electron)
-        if (SOFTWARE?.nodeServer?.enabled)
+        if (SOFTWARE?.webSocket?.enabled)
             Mixly.requireList([
                 ...nowRequire['web-socket']['common'],
                 ...nowRequire['web-socket']['electron']
@@ -86,7 +86,7 @@ Mixly.require = (requireObj) => {
                 ...nowRequire['web-compiler']['electron']
             ]);
     else
-        if (SOFTWARE?.nodeServer?.enabled)
+        if (SOFTWARE?.webSocket?.enabled)
             Mixly.requireList([
                 ...nowRequire['web-socket']['common'],
                 ...nowRequire['web-socket']['web']

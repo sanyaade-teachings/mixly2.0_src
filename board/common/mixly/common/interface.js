@@ -23,12 +23,22 @@ Mixly.require({
         "Mixly.Electron.WikiManager",
         "Mixly.Electron.Example"
     ],
-    "web": [],
+    "web": [
+        "Mixly.Web.ExampleExt"
+    ],
     "web-socket": {
         "electron": [],
         "web": [],
         "common": [
-            "Mixly.WebSocket.Socket"
+            "Mixly.WebSocket.Socket",
+            "Mixly.Web.ExampleExt"
+        ]
+    },
+    "web-compiler": {
+        "electron": [],
+        "web": [],
+        "common": [
+            "Mixly.Web.ExampleExt"
         ]
     },
     "common": []
@@ -54,11 +64,9 @@ const { BOARD } = Config;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
-    if (Env.isElectron) {
-        const { Electron } = Mixly;
-        const { Example = undefined } = Electron;
-        if (typeof Example === 'object')
-            Example.init();
+    const { ExampleExt } = Env.isElectron? Mixly.Electron : Mixly.Web;
+    if (ExampleExt instanceof Object) {
+        ExampleExt.obj = new ExampleExt('mixly-footer', 'mixly-examples');
     }
     Nav.init();
     Code.init();

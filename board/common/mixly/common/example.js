@@ -28,7 +28,6 @@ Mixly.Example = function (containerId, exampleBtnId) {
             style="cursor:pointer;border:none;margin-left:15px;padding:0px;display:inline-flex;align-items:center;"
         >
             <a
-                href="javascript:;"
                 class="icon-doc-text"
                 style="color:#fff;font-size:12px;line-height:12px;"
             >${indexText['例程']}</a>

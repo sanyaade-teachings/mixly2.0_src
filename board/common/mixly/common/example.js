@@ -15,6 +15,7 @@ const {
 const { dropdown, tree } = layui;
 
 Mixly.Example = function (containerId, exampleBtnId) {
+    this.DEPTH = 5;
     this.containerId_ = containerId;
     this.exampleBtnId_ = exampleBtnId;
     this.$container_ = $(`#${containerId}`);

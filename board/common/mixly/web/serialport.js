@@ -1,3 +1,10 @@
+(() => {
+
+goog.require('Mixly.Web');
+goog.provide('Mixly.Web.SerialPort');
+
+const { Web } = Mixly;
+
 class WebSerialPort {
     constructor(config = {}) {
         const DEFAULT_CONIFG = {
@@ -105,21 +112,21 @@ class WebSerialPort {
         let len = data.length;
         for (var i = 0; i < len; i++) {
             if (data[i].dtr !== undefined
-                    || data[i].rts !== undefined) {
-                    var dtrValue = false;
-                    var rtsValue = false;
-                    if (data[i]?.dtr) {
-                        dtrValue = true;
-                    }
-                    if (data[i]?.rts) {
-                        rtsValue = true;
-                    }
-                    await port.setSignals({ dataTerminalReady: dtrValue, requestToSend: rtsValue });
-                } else if (data[i]?.sleep) {
-                    var sleepValue = parseInt(data[i].sleep) || 100;
-                    await this.sleep(sleepValue);
+                || data[i].rts !== undefined) {
+                var dtrValue = false;
+                var rtsValue = false;
+                if (data[i]?.dtr) {
+                    dtrValue = true;
                 }
+                if (data[i]?.rts) {
+                    rtsValue = true;
+                }
+                await port.setSignals({ dataTerminalReady: dtrValue, requestToSend: rtsValue });
+            } else if (data[i]?.sleep) {
+                var sleepValue = parseInt(data[i].sleep) || 100;
+                await this.sleep(sleepValue);
             }
+        }
     }
 
     async read() {
@@ -291,3 +298,7 @@ class WebSerialPort {
         return this.port.baudRate;
     }
 }
+
+Web.SerialPort = WebSerialPort;
+
+})();

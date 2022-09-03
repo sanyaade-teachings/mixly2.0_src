@@ -21,7 +21,7 @@ Mixly.require({
         "Mixly.Electron",
         "Mixly.Electron.LibManager",
         "Mixly.Electron.WikiManager",
-        "Mixly.Electron.Example"
+        "Mixly.Electron.ExampleExt"
     ],
     "web": [
         "Mixly.Web.ExampleExt"

@@ -82,8 +82,7 @@ BU.readConfigAndSet();
 
 BU.cancel = async function () {
     layer.closeAll('page');
-    document.getElementById('serial-device-form').style.display = 'none';
-    document.getElementById('mixly-loader-div').style.display = 'none';
+    $('#mixly-loader-div').hide();
 
     if (BU.uploading) {
         BU.uploading = false;
@@ -114,20 +113,16 @@ BU.cancel = async function () {
 }
 
 BU.toggleUIToolbar = function (connected) {
-    try {
-        if (connected) {
-            document.getElementById('operate-connect-btn').textContent = MSG['disconnect'];
-            document.getElementById('operate-connect-btn').className = "icon-unlink";
-            document.getElementById('connect-btn').textContent = MSG['disconnect'];
-            document.getElementById('connect-btn').className = "icon-unlink";
-        } else {
-            document.getElementById('operate-connect-btn').textContent = MSG['connect'];
-            document.getElementById('operate-connect-btn').className = "icon-link";
-            document.getElementById('connect-btn').textContent = MSG['connect'];
-            document.getElementById('connect-btn').className = "icon-link";
-        }
-    } catch (e) {
-        console.log(e);
+    if (connected) {
+        $('#operate-connect-btn').html(MSG['disconnect']);
+        $('#operate-connect-btn').removeClass('icon-link').addClass('icon-unlink');
+        $('#connect-btn').html(MSG['disconnect']);
+        $('#connect-btn').removeClass('icon-link').addClass('icon-unlink');
+    } else {
+        $('#operate-connect-btn').html(MSG['connect']);
+        $('#operate-connect-btn').removeClass('icon-unlink').addClass('icon-link');
+        $('#connect-btn').html(MSG['connect']);
+        $('#connect-btn').removeClass('icon-unlink').addClass('icon-link');
     }
 }
 

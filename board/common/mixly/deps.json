@@ -96,6 +96,7 @@
                 "Mixly.MFile",
                 "Mixly.Title",
                 "Mixly.XML",
+                "Mixly.Example",
                 "Mixly.Electron.BU",
                 "Mixly.Electron.File"
             ],
@@ -223,7 +224,7 @@
                 "Mixly.Electron",
                 "Mixly.Electron.LibManager",
                 "Mixly.Electron.WikiManager",
-                "Mixly.Electron.Example"
+                "Mixly.Electron.ExampleExt"
             ]
         },
         {
@@ -345,8 +346,10 @@
         {
             "path":"/web/serialport.js",
             "require":[
+                "Mixly.Web"
             ],
             "provide":[
+                "Mixly.Web.SerialPort"
             ]
         },
         {

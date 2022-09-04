@@ -172,17 +172,11 @@ Boards.getType = () => {
 }
 
 Boards.getSelectedBoardName = () => {
-    const boardKey = Boards.getSelectedBoardKey();
-    const { INFO } = Boards;
-    for (let i in INFO) {
-        if (INFO[i].key === boardKey)
-            return i;
-    }
-    return boardKey;
+    return $('#boards-type option:selected').text();
 }
 
 Boards.getSelectedBoardKey = () => {
-    return $('#boards-type').val();
+    return $('#boards-type option:selected').val();
 }
 
 Boards.setSelectedBoard = (name, userConfig) => {

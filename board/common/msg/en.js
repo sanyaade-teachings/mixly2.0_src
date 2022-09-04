@@ -134,6 +134,7 @@ var MSG = {
     catweather: "Seniverse weather",
     view_btn: "Cloud File",
     view_file: "Resources",
+    open_from_cloud: "Open from the cloud",
     save_ser: "Save to the cloud",
     windowSize: "Window size",
     catRadio: "Radio",

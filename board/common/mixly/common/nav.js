@@ -310,6 +310,18 @@ Nav.RIGHT_BTN_CONFIG = [
                     }
                 }
             }, {
+                //【从云端打开】按钮
+                type: 'OPEN_FROM_CLOUD',
+                class: 'icon-download-cloud-1',
+                id: 'open-from-cloud-btn',
+                title: '',
+                href: '#',
+                onclick: {
+                    websocket: {
+                        web: 'Mixly.WebSocket.File.openFromCloud()'
+                    }
+                }
+            }, {
                 //【保存】按钮
                 type: 'SAVE_FILE',
                 class: 'icon-floppy',
@@ -339,6 +351,18 @@ Nav.RIGHT_BTN_CONFIG = [
                     },
                     webcompiler: {
                         electron: 'Mixly.Electron.File.saveAs()'
+                    }
+                }
+            }, {
+                //【保存到云端】按钮
+                type: 'SAVE_TO_CLOUD',
+                class: 'icon-upload-cloud-1',
+                id: 'save-to-cloud-btn',
+                title: '',
+                href: '#',
+                onclick: {
+                    websocket: {
+                        web: 'Mixly.WebSocket.File.saveToCloud()'
                     }
                 }
             }, {
@@ -419,18 +443,6 @@ Nav.RIGHT_BTN_CONFIG = [
                     },
                     webcompiler: {
                         web: 'mixlyjs.saveBlockImg()'
-                    }
-                }
-            }, {
-                //【保存img】按钮
-                type: 'SAVE_TO_CLOUD',
-                class: 'icon-upload-cloud',
-                id: 'save-to-cloud-btn',
-                title: '',
-                href: '#',
-                onclick: {
-                    websocket: {
-                        web: 'Mixly.WebSocket.saveToCloud()'
                     }
                 }
             }, {
@@ -523,6 +535,7 @@ Nav.RIGHT_BTN_ENV = {
     FILE: true,
     NEW_FILE: true,
     OPEN_FILE: true,
+    OPEN_FROM_CLOUD: !Env.isElectron && Env.hasSocketServer,
     SAVE_FILE: true,
     SAVE_AS_FILE: Env.isElectron,
     SAVE_XML: !Env.isElectron,
@@ -806,12 +819,14 @@ Mixly.Nav.MsgById = {
     'file-btn': 'file',
     'new-btn': 'new',
     'open-btn': 'open',
+    'open-from-cloud-btn': 'open_from_cloud',
     'save-btn': 'save',
     'save-xml-btn': 'save_blocks',
     'save-ino-btn': 'save_ino',
     'save-img-btn': 'save_img',
     'save-py-btn': 'save_py',
     'save-hex-btn': 'save_hex',
+    'save-to-cloud-btn': 'save_ser',
     'save-as-btn': 'save_as',
     'setting-btn': 'setting',
     'language-btn': 'language',

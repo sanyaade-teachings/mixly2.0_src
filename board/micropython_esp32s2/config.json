@@ -67,7 +67,10 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo_CE-0x1000-V1.19.1-220901.bin"
+                        "path": "./build/MixGo_CE-0x1000-V1.19.1-220902-lib.bin"
+                    }, {
+                        "offset": "0x3A0000",
+                        "path": "./build/HZK12.bin"
                     }
                 ]
             },
@@ -75,7 +78,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo_CE-0x1000-V1.19.1-220901.bin"
+                        "path": "./build/MixGo_CE-0x1000-V1.19.1-220902-lib.bin"
                     }
                 ]
             }

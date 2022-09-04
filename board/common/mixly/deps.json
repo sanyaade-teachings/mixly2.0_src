@@ -580,7 +580,11 @@
                 "path":"/web-socket/file.js",
                 "require":[
                     "layui",
+                    "Blockly",
+                    "Mixly.XML",
+                    "Mixly.Editor",
                     "Mixly.MFile",
+                    "Mixly.LayerExtend",
                     "Mixly.WebSocket.Socket"
                 ],
                 "provide":[

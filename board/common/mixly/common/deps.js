@@ -242,6 +242,7 @@ if (Env.isElectron) {
         goog.require('Mixly.WebSocket.BU');
         goog.require('Mixly.WebSocket.ArduShell');
         goog.require('Mixly.WebSocket.Serial');
+        goog.require('Mixly.WebSocket.File');
     } else if (Env.hasCompiler) {
         goog.require('Mixly.WebCompiler.Compiler');
         goog.require('AvrUploader');
@@ -257,6 +258,7 @@ if (Env.isElectron) {
         goog.require('Mixly.WebSocket.BU');
         goog.require('Mixly.WebSocket.ArduShell');
         goog.require('Mixly.WebSocket.Serial');
+        goog.require('Mixly.WebSocket.File');
     } else {
         if (Env.hasCompiler) {
             goog.require('Mixly.WebCompiler.Compiler');

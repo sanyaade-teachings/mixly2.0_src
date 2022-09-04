@@ -584,6 +584,7 @@
                     "Mixly.XML",
                     "Mixly.Editor",
                     "Mixly.MFile",
+                    "Mixly.Boards",
                     "Mixly.LayerExtend",
                     "Mixly.WebSocket.Socket"
                 ],

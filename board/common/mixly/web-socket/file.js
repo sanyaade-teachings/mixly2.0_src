@@ -5,6 +5,7 @@ goog.require('Blockly');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
 goog.require('Mixly.MFile');
+goog.require('Mixly.Boards');
 goog.require('Mixly.LayerExtend');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.File');
@@ -13,9 +14,12 @@ const {
     XML,
     Editor,
     MFile,
+    Boards,
     LayerExtend
 } = Mixly;
 const { Socket, File } = Mixly.WebSocket;
+
+const boardType = Boards.getType();
 
 const { form } = layui;
 
@@ -62,7 +66,7 @@ File.saveToCloud = () => {
             Socket.sendCommand({
                 obj: 'File',
                 func: 'saveAs',
-                args: [ value, data ]
+                args: [ boardType, value, data ]
             });
         });
     });
@@ -84,7 +88,7 @@ File.openFromCloud = () => {
     Socket.sendCommand({
         obj: 'File',
         func: 'getUserFilesInfo',
-        args: []
+        args: [ boardType ]
     });
 }
 
@@ -131,7 +135,7 @@ File.showOpenDialog = (filesObj) => {
             Socket.sendCommand({
                 obj: 'File',
                 func: 'open',
-                args: [ selectedFilePath ]
+                args: [ boardType, selectedFilePath ]
             });
         }
     });

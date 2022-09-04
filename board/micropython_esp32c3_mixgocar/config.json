@@ -63,7 +63,10 @@
             "binFile": [
                 {
                     "offset": "0x1000",
-                    "path": "./build/esp32.bin"
+                    "path": "./build/MixGo_Car-0x0-V1.19.1-220902-lib.bin"
+                }, {
+                    "offset": "0x3A0000",
+                    "path": "./build/HZK12.bin"
                 }
             ]
         },

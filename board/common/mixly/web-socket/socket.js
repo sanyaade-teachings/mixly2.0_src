@@ -26,7 +26,7 @@ const { Socket } = Mixly.WebSocket;
 
 Socket.obj = null;
 
-Socket.url = 'ws://127.0.0.1:8081/';
+Socket.url = 'ws://127.0.0.1:8082/';
 
 Socket.jsonArr = [];
 
@@ -46,12 +46,9 @@ $.get('../../config.json', (fileStr) => {
         //WS.url = 'ws://' + WS.IPAddress + ':' + WS.port + '/';
         WS.debug = configObj.debug;
         BOARD.server = configObj;
-        let url = window.location.host;
-        let IPList = url.match(/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/g);
-        if (IPList && IPList.length > 0) {
-            WS.url = 'ws://' + IPList[0] + ':' + WS.port + '/';
-            WS.IPAddress = IPList[0];
-        }
+        const { hostname } = window.location;
+        WS.url = 'ws://' + hostname + ':' + WS.port + '/';
+        WS.IPAddress = hostname;
     } catch (e) {
         console.log(e);
     }

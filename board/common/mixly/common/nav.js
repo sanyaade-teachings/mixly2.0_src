@@ -422,6 +422,18 @@ Nav.RIGHT_BTN_CONFIG = [
                     }
                 }
             }, {
+                //【保存img】按钮
+                type: 'SAVE_TO_CLOUD',
+                class: 'icon-upload-cloud',
+                id: 'save-to-cloud-btn',
+                title: '',
+                href: '#',
+                onclick: {
+                    websocket: {
+                        web: 'Mixly.WebSocket.saveToCloud()'
+                    }
+                }
+            }, {
                 //【导出库】按钮
                 type: 'EXPORT_LIB',
                 class: 'icon-export',
@@ -518,6 +530,7 @@ Nav.RIGHT_BTN_ENV = {
     SAVE_INO: !Env.isElectron && Nav.CONFIG.save.ino,
     SAVE_HEX: !Env.isElectron && Nav.CONFIG.save.py && Nav.CONFIG.save.hex,
     SAVE_IMG: !Env.isElectron && Nav.CONFIG.save.img,
+    SAVE_TO_CLOUD: !Env.isElectron && Env.hasSocketServer,
     PYTHON_TO_BLOCKLY: Nav.CONFIG?.setting?.pythonToBlockly && ['mpy', 'py', 'webpy'].includes(codeEnv),
     OPEN_WIKI: Env.isElectron && Nav.CONFIG.setting.wiki,
     FEED_BACK: true

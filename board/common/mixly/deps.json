@@ -577,6 +577,17 @@
                 ]
             },
             {
+                "path":"/web-socket/file.js",
+                "require":[
+                    "layui",
+                    "Mixly.MFile",
+                    "Mixly.WebSocket.Socket"
+                ],
+                "provide":[
+                    "Mixly.WebSocket.File"
+                ]
+            },
+            {
                 "path":"/web-socket/serial.js",
                 "require":[
                     "Mixly.Modules",

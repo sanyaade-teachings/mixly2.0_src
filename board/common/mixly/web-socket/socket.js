@@ -136,22 +136,23 @@ Socket.sendCommand = (command) => {
     }
     let commandStr = '';
     function encodeJson(jsonObj) {
+        let newJsonObj = { ...jsonObj };
         // 循环所有键
-        for (var key in jsonObj) {
+        for (var key in newJsonObj) {
             //如果对象类型为object类型且数组长度大于0 或者 是对象 ，继续递归解析
-            var element = jsonObj[key];
+            var element = newJsonObj[key];
             if (element.length > 0 && typeof (element) == "object" || typeof (element) == "object") {
                 element = { ...encodeJson(element) };
             } else { //不是对象或数组、直接输出
                 if (typeof (element) === 'string') {
                     try {
-                        jsonObj[key] = encodeURIComponent(jsonObj[key]);
+                        newJsonObj[key] = encodeURIComponent(newJsonObj[key]);
                     } catch (e) {
                     }
                 }
             }
         }
-        return jsonObj;
+        return newJsonObj;
     }
 
     try {

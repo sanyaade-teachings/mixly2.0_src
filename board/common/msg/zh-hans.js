@@ -3616,3 +3616,4 @@ Blockly.MIXLY_GET_NTP = '获取网络时间';
 Blockly.MIXLY_ME_GO_CAR_SENSOR_ONBOARD_AUTO_CHANGE = '巡线/避障/追光自动切换';
 Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_ONLY = '只使用追光';
 Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_SENSOR = '追光传感器';
+Blockly.MIXLY_OTHER = '其他';

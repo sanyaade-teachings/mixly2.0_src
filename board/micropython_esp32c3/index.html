@@ -1347,6 +1347,15 @@
           </shadow>
         </value>
       </block>
+      <block type="serial_send_to_ai">
+        <value name="CONTENT">
+          <shadow type="variables_get">
+            <field name="VAR">code</field>
+          </shadow>
+        </value>
+      </block>
+    
+      <block type="serial_read_from_ai"></block>
       <block type="serial_print_byte">
         <value name="CONTENT">
           <shadow type="text">

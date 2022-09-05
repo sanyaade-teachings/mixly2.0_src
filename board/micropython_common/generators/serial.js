@@ -118,3 +118,19 @@ Blockly.Python.system_print_many = function() {
   var code = 'print(' + code.join(', ') + ')\n';
   return code;
 };
+
+Blockly.Python.serial_send_to_ai = function() {
+  Blockly.Python.definitions_['import_uart_com'] = 'import uart_com';
+  var dropdown_uart = this.getFieldValue('mode');
+  var dropdown_stat = this.getFieldValue('STAT');
+  var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC) || '0';
+  var code = "uart_com.send(uart"+dropdown_uart+", "+content+", repeat="+dropdown_stat+")\n";
+  return code;
+};
+
+Blockly.Python.serial_read_from_ai = function() {
+  Blockly.Python.definitions_['import_uart_com'] = 'import uart_com';
+  var dropdown_uart = this.getFieldValue('mode');
+  var code ="uart_com.recv(uart"+dropdown_uart+")";
+  return [code,Blockly.Python.ORDER_ATOMIC];
+};

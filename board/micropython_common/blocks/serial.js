@@ -356,3 +356,30 @@ Blockly.Blocks['system_print_item'] = {
     this.contextMenu = false;
   }
 };
+
+Blockly.Blocks['serial_send_to_ai'] = {
+   init: function() {
+    this.setColour(Blockly.Blocks.serial.HUE);
+    this.appendValueInput("CONTENT")
+        .appendField("Serial")
+        .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+        .appendField(Blockly.MIXLY_EMQX_PUBLISH);
+    this.appendDummyInput()
+        .appendField(Blockly.LANG_CONTROLS_FOR_INPUT_TO+Blockly.MIXLY_OTHER+'MP'+Blockly.MIXLY_DEVICE)
+        .appendField(Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT)
+        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']]), 'STAT')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  }
+};
+
+Blockly.Blocks['serial_read_from_ai'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.serial.HUE);
+    this.appendDummyInput()
+        .appendField("Serial")
+        .appendField(new Blockly.FieldDropdown([['uart1', '1'], ['uart2', '2']]), 'mode')
+        .appendField(Blockly.MIXLY_ESP32_READ+Blockly.MIXLY_OTHER+'MP'+Blockly.MIXLY_DEVICE+Blockly.MIXLY_SD_DATA);
+    this.setOutput(true, Boolean);
+  }
+};

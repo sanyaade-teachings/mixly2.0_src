@@ -58,7 +58,7 @@ var profile = {
 
 profile["MixGo CE"] = {
     description: "MicroPython[ESP32C3 MixGo CE]",
-    digital_pin: profile.generate([ '0-18','21-45']),
+    digital_pin: profile.generate([ '0-18','21-46']),
     input_pin: profile.generate(['0-18','21-46']),
     output_pin: profile.generate(['0-18','21-45']),
     pwm_input: profile.generate(['0-18','21-46'], 'pwm', 'pwm'),

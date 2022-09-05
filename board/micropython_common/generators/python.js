@@ -109,7 +109,7 @@ Blockly.Python.quote_ = function(string) {
                  .replace(/\n/g, '\\\n');
 
   // Follow the CPython behaviour of repr() for a non-byte string.
-  var quote = '\'';
+  var quote = '\"';
   if (string.indexOf('\'') !== -1) {
     if (string.indexOf('"') === -1) {
       quote = '"';

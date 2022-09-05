@@ -641,7 +641,7 @@ BU.uploadWithAmpy = async function () {
         let writeData = MFile.getCode();
         writeData = ch2Unicode(writeData) ?? '';
         for (let i = 0; i < writeData.length / 50; i++) {
-            await espTool.write("file.write('''" + writeData.substring(i * 50, (i + 1) * 50) + "''')\r\n");
+            await espTool.write("file.write('''" + writeData.substring(i * 50, (i + 1) * 50).replaceAll('\'', '\\\'') + "''')\r\n");
             await sleep(100);
             StatusBar.setValue("", true);
         }

@@ -7,6 +7,8 @@ goog.provide('Blockly.Python');
 goog.require('Blockly.utils.string');
 goog.require('Blockly.Generator');
 
+Blockly.Generator.prototype.INDENT="    ";
+
 /**
  * Python code generator.
  * @type {!Blockly.Generator}

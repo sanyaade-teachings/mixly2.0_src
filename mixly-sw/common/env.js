@@ -6,6 +6,8 @@ goog.provide('Mixly.Modules');
 
 const { Env, Config, Modules } = Mixly;
 
+const { SOFTWARE } = Config;
+
 /**
   * 获取当前mixly2.0的路径
   * @type {String}
@@ -18,7 +20,23 @@ Env.clientPath = null;
   */
 Env.indexPath = null;
 
+/**
+  * 检测当前环境
+  * @type {Boolean}，true - mixly Client; false - mixly Web
+  */
 Env.isElectron = window?.process?.versions?.electron ? true : false;
+
+/**
+  * 检测是否启用node服务器
+  * @type {Boolean}
+  */
+Env.hasSocketServer = SOFTWARE?.webSocket?.enabled ? true : false;
+
+/**
+  * 检测是否启用node编译服务器
+  * @type {Boolean}
+  */
+Env.hasCompiler = SOFTWARE?.webCompiler?.enabled ? true : false;
 
 Env.thirdPartyBoardPath = './board/ThirdParty';
 
@@ -70,7 +88,6 @@ if (Env.isElectron) {
     Env.arduinoCliPath = path.resolve(Env.clientPath, './arduino-cli/');
     const cliFilePath = path.resolve(Env.arduinoCliPath, './arduino-cli' + (currentPlatform === 'win32'? '.exe':''));
     if (!fs_extend.isfile(cliFilePath)) {
-        const { SOFTWARE } = Config;
         const defaultPath = SOFTWARE?.defaultPath[currentPlatform] ?? null;
         if (defaultPath?.arduinoCli) {
             Env.arduinoCliPath = path.resolve(Env.clientPath, defaultPath.arduinoCli, '../');

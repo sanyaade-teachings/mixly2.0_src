@@ -935,8 +935,7 @@ BoardManager.loadBoards = () => {
     if (typeof USER.boardIgnore !== 'object')
         USER.boardIgnore = [];
     for (let i = 0; BOARDS_INFO[i]; i++) {
-        if ((BOARDS_INFO[i]['env'] === 2 || Env.isElectron == BOARDS_INFO[i]['env'])
-          && !USER.boardIgnore.includes(BOARDS_INFO[i].boardName)) {
+        if (!USER.boardIgnore.includes(BOARDS_INFO[i].boardName)) {
             const config = BOARDS_INFO[i];
             if (Env.isElectron) {
                 const indexPath = path.resolve(__dirname, config.boardIndex);
@@ -958,7 +957,12 @@ BoardManager.loadBoards = () => {
                     boardImg: config.boardImg ?? './files/default.png',
                     boardName: config.boardName ?? 'Unknown board',
                     boardIndex: config.boardIndex ?? 'javascript:;',
-                    env: config.env ?? 1,
+                    env: {
+                        electron: true,
+                        web: false,
+                        webCompiler: false,
+                        webSocket: false
+                    },
                     thirdPartyBoard: true,
                     pyFilePath: config.pyFilePath ?? false
                 }
@@ -971,7 +975,12 @@ BoardManager.loadBoards = () => {
         boardName: "",
         boardDescription: "",
         boardIndex: "javascript:;",
-        env: 1
+        env: {
+            electron: true,
+            web: false,
+            webCompiler: false,
+            webSocket: false
+        }
     };
     newBoardsList.push(boardAdd);
     BoardManager.boardsList = newBoardsList;
@@ -985,119 +994,128 @@ BoardManager.showBoardsCard = (row, col) => {
     boardContainerDom.empty();
     const { boardsList } = BoardManager;
     const params = 'error=0';
-    for (var i = 0; i < boardsList.length; i++) {
-        if (boardsList[i]['env'] === 2 || Env.isElectron == boardsList[i]['env']) {
-            if (boardsList[i]['boardIndex'] !== 'javascript:;' && !boardsList[i]['pyFilePath']) {
-                const {
-                    thirdPartyBoard = false,
-                    boardIndex,
-                    boardName,
-                    boardImg
-                } = boardsList[i];
-                const configUrl = Url.jsonToUrl({
-                    thirdPartyBoard,
-                    boardIndex,
-                    boardName,
-                    boardImg
-                });
+    for (let i = 0; i < boardsList.length; i++) {
+        const {
+            env = {
+                electron: true,
+                web: true,
+                webCompiler: true,
+                webSocket: true
+            },
+            thirdPartyBoard = false,
+            boardIndex,
+            boardName,
+            boardImg,
+            pyFilePath
+        } = boardsList[i];
+        let show = false;
+        if ((Env.hasSocketServer && env.webSocket)
+         || (Env.hasCompiler && env.webCompiler)
+         || (Env.isElectron && env.electron)
+         || (!Env.isElectron && env.web)) {
+            show = true;
+        } else {
+            show = false;
+        }
+        if (!show) {
+            continue;
+        }
+        if (boardIndex !== 'javascript:;' && !pyFilePath) {
+            const configUrl = Url.jsonToUrl({
+                thirdPartyBoard,
+                boardIndex,
+                boardName,
+                boardImg
+            });
+            rowStr += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mixly-board" id="board-${i}">
+                <button id="board-${i}-button" index="${i}" type="button" class="layui-btn layui-btn-sm layui-btn-primary mixly-board-${thirdPartyBoard? 'del-btn' : 'ignore-btn'}">
+                    <i class="icon-${thirdPartyBoard? 'cancel-outline' : 'eye-off'}"></i>
+                </button>
+                <div class="service-single">
+                    <a href="${boardsList[i]['boardIndex']}?${configUrl}">
+                        <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
+                        <h2>${boardsList[i]['boardName']}</h2>
+                    </a>
+                </div>
+            </div>
+            `;
+        } else {
+            if (boardsList[i]['pyFilePath']) {
+                const indexPath = encodeURIComponent(path.resolve(Env.indexPath, boardIndex, '../'));
+                const newPyFilePath = encodeURIComponent(path.resolve(Env.indexPath, pyFilePath));
                 rowStr += `
                 <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mixly-board" id="board-${i}">
                     <button id="board-${i}-button" index="${i}" type="button" class="layui-btn layui-btn-sm layui-btn-primary mixly-board-${thirdPartyBoard? 'del-btn' : 'ignore-btn'}">
                         <i class="icon-${thirdPartyBoard? 'cancel-outline' : 'eye-off'}"></i>
                     </button>
                     <div class="service-single">
-                        <a href="${boardsList[i]['boardIndex']}?${configUrl}">
-                            <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
-                            <h2>${boardsList[i]['boardName']}</h2>
+                        <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
+                            <img src="${boardImg}" alt="service image" class="tiltimage">
+                            <h2>${boardName}</h2>
                         </a>
                     </div>
                 </div>
                 `;
             } else {
-                if (boardsList[i]['pyFilePath']) {
-                    const {
-                        thirdPartyBoard = false,
-                        boardIndex,
-                        boardName,
-                        boardImg,
-                        pyFilePath
-                    } = boardsList[i];
-                    const indexPath = encodeURIComponent(path.resolve(Env.indexPath, boardIndex, '../'));
-                    const newPyFilePath = encodeURIComponent(path.resolve(Env.indexPath, pyFilePath));
-
-                    rowStr += `
-                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mixly-board" id="board-${i}">
-                        <button id="board-${i}-button" index="${i}" type="button" class="layui-btn layui-btn-sm layui-btn-primary mixly-board-${thirdPartyBoard? 'del-btn' : 'ignore-btn'}">
-                            <i class="icon-${thirdPartyBoard? 'cancel-outline' : 'eye-off'}"></i>
-                        </button>
-                        <div class="service-single">
-                            <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
-                                <img src="${boardImg}" alt="service image" class="tiltimage">
-                                <h2>${boardName}</h2>
-                            </a>
-                        </div>
+                rowStr += `
+                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 setting-card">
+                    <div class="service-single">
+                        <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
+                            <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
+                            <h2>${boardsList[i]['boardName']}</h2>
+                        </a>
                     </div>
-                    `;
-                } else {
-                    rowStr += `
-                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 setting-card">
-                        <div class="service-single">
-                            <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
-                                <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
-                                <h2>${boardsList[i]['boardName']}</h2>
-                            </a>
-                        </div>
+                    <div>
                         <div>
-                            <div>
-                                <form class="layui-form" lay-filter="setting-card-filter">
-                                    <div class="layui-form-item layui-form-text">
-                                        <div class="layui-col-md12" style="text-align: center;">
-                                            <input 
-                                            lay-filter="setting-theme-filter"
-                                            type="checkbox"
-                                            name="close"
-                                            lay-skin="switch"
-                                            lay-text="&#xf186|&#xf185"
-                                            ${USER.theme === 'dark'? ' checked' : ''}>
-                                        </div>
+                            <form class="layui-form" lay-filter="setting-card-filter">
+                                <div class="layui-form-item layui-form-text">
+                                    <div class="layui-col-md12" style="text-align: center;">
+                                        <input 
+                                        lay-filter="setting-theme-filter"
+                                        type="checkbox"
+                                        name="close"
+                                        lay-skin="switch"
+                                        lay-text="&#xf186|&#xf185"
+                                        ${USER.theme === 'dark'? ' checked' : ''}>
                                     </div>
-                                    <div class="layui-form-item layui-form-text">
-                                        <div class="layui-col-md12" style="text-align: center;">
-                                            <button 
-                                            type="button"
-                                            class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal"
-                                            lay-submit
-                                            lay-filter="open-setting-dialog-filter">
-                                                <i class="layui-icon layui-icon-set-fill"></i>
-                                            </button>
-                                        </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class="layui-col-md12" style="text-align: center;">
+                                        <button 
+                                        type="button"
+                                        class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal"
+                                        lay-submit
+                                        lay-filter="open-setting-dialog-filter">
+                                            <i class="layui-icon layui-icon-set-fill"></i>
+                                        </button>
                                     </div>
-                                    <div class="layui-form-item layui-form-text">
-                                        <div class="layui-col-md12" style="text-align: center;">
-                                            <button
-                                            type="button"
-                                            class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal"
-                                            lay-submit
-                                            lay-filter="board-reset-filter">
-                                                <i class="layui-icon layui-icon-refresh"></i>
-                                            </button>
-                                        </div>
+                                </div>
+                                <div class="layui-form-item layui-form-text">
+                                    <div class="layui-col-md12" style="text-align: center;">
+                                        <button
+                                        type="button"
+                                        class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal"
+                                        lay-submit
+                                        lay-filter="board-reset-filter">
+                                            <i class="layui-icon layui-icon-refresh"></i>
+                                        </button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    `;
-                }
+                </div>
+                `;
             }
-            boardNum++;
-            if (boardNum % (col * row) === 0 && rowStr) {
-                rowStr = '<div style="background-color:rgba(0,0,0,0);padding-left:70px;padding-right:70px;"><div class="row maxs" style="height:250px;">' + rowStr + '</div></div>';
-                boardContainerDom.append(rowStr);
-                rowStr = '';
-            } else if ((boardNum % col) == 0) {
-                rowStr += '</div><div class="row maxs" style="height:30px;"></div><div class="row maxs" style="height:250px;">';
-            }
+        }
+        boardNum++;
+        if (boardNum % (col * row) === 0 && rowStr) {
+            rowStr = '<div style="background-color:rgba(0,0,0,0);padding-left:70px;padding-right:70px;"><div class="row maxs" style="height:250px;">' + rowStr + '</div></div>';
+            boardContainerDom.append(rowStr);
+            rowStr = '';
+        } else if ((boardNum % col) == 0) {
+            rowStr += '</div><div class="row maxs" style="height:30px;"></div><div class="row maxs" style="height:250px;">';
         }
     }
     if (boardNum % (col * row) && rowStr) {

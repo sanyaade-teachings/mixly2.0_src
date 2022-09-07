@@ -405,7 +405,7 @@ PyEngine.prototype.steprun = function(type) {
                     var re=/\)$/.exec(code_piece[i])
                     if(re!=null){
                         target=re[0];
-                        code_piece[i]=code_piece[i].replace(/\)$/,"\);print('\\n');")
+                        code_piece[i]=code_piece[i].replace(/\)$/,"+'\\n'"+target)
                         // code_piece[i]=code_piece[i].replace(/\)$/,target+";");
                     }
                     //console.log(code_piece[i])
@@ -413,8 +413,8 @@ PyEngine.prototype.steprun = function(type) {
             }  
         }
         code_new=code_piece.join("\n");
-        // console.log(code_new)
-        code=code_new
+        //console.log(code_new)
+        code=code_new    
     }
 
     if (this.layerNum && this.layerSize) {

@@ -378,6 +378,16 @@ Boards.changeTo = (boardName) => {
                 }
                 outObj.command = MString.tpl(outObj.command, obj);
                 outObj.command = MString.tpl(outObj.command, pathObj);
+                if (outObj.special && outObj.special instanceof Array) {
+                    for (let key in outObj.special) {
+                        if (!outObj.special[key]?.name
+                         || !outObj.special[key]?.command) {
+                            continue;
+                        }
+                        outObj.special[key].command = MString.tpl(outObj.command, obj);
+                        outObj.special[key].command = MString.tpl(outObj.command, pathObj);
+                    }
+                }
                 break;
         }
         if (value.type === 'upload' && (Env.isElectron || Env.hasSocketServer) && outObj.copyLib) {

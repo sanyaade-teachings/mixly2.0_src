@@ -566,22 +566,20 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
  * @return {void}
  **/
 BU.burnWithSpecialBin = () => {
-    const devNames = $('#mixly-selector-type');
-    let oldDevice = $('#mixly-selector-type option:selected').val();
-    devNames.empty();
-    let firmwareList = BOARD.burn.special;
+    const $selector = $('#mixly-selector-type');
+    let oldOption = $('#mixly-selector-type option:selected').val();
+    $selector.empty();
+    const firmwareList = SELECTED_BOARD.burn.special;
     let firmwareObj = {};
-    for (let i = 0; i < firmwareList.length; i++)
-        firmwareObj[firmwareList[i].name] = firmwareList[i].command;
-    firmwareList.map(firmware => {
+    for (let firmware of firmwareList) {
         if (!firmware?.name && !firmware?.command) return;
-
-        if (`${firmware.name}` == oldDevice) {
-            devNames.append($(`<option value="${firmware.name}" selected>${firmware.name}</option>`));
+        firmwareObj[firmware.name] = firmware.command;
+        if (`${firmware.name}` == oldOption) {
+            $selector.append($(`<option value="${firmware.name}" selected>${firmware.name}</option>`));
         } else {
-            devNames.append($(`<option value="${firmware.name}">${firmware.name}</option>`));
+            $selector.append($(`<option value="${firmware.name}">${firmware.name}</option>`));
         }
-    });
+    }
     form.render();
 
     let initBtnClicked = false;
@@ -614,25 +612,6 @@ BU.burnWithSpecialBin = () => {
             $(".layui-layer-shade").remove();
             if (initBtnClicked) {
                 let selectedFirmwareName = $('#mixly-selector-type option:selected').val();
-                try {
-                    firmwareObj[selectedFirmwareName] = firmwareObj[selectedFirmwareName].replace(/\\/g, "/");
-                } catch (e) {
-                    console.log(e);
-                }
-                let pyToolName = ["esptool", "kflash", "stm32loader", "stm32bl"];
-                let pyToolPath = "{path}/mixpyBuild/win_python3/Lib/site-packages/"
-                if (Env.currentPlatform == "darwin" || Env.currentPlatform == "linux") {
-                    pyToolPath = "{path}/pyTools/";
-                }
-                for (let i = 0; i < pyToolName.length; i++) {
-                    if (firmwareObj[selectedFirmwareName].indexOf("\"") != -1) {
-                        firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.python3Path + "\" \"" + pyToolPath + pyToolName[i] + ".py", pyToolName[i]);
-                    } else {
-                        firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.python3Path + " " + pyToolPath + pyToolName[i] + ".py", pyToolName[i]);
-                    }
-                }
-                firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.clientPath, "path");
-                firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.indexPath, "indexPath");
                 StatusBar.setValue('', true);
                 StatusBarPort.tabChange("output");
                 StatusBar.show(1);

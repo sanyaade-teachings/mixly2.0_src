@@ -4,7 +4,7 @@
         "type": "volume",
         "volumeName": [
             "MICROBIT",
-            "mithoncc"
+            "MITHONCC"
         ],
         "filePath": "{indexPath}/build/microbit-micropython-v1.hex"
     },

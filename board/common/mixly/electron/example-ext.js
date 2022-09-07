@@ -117,10 +117,10 @@ ExampleExt.prototype.getExamplesByPath = function (inPath, fileExtname) {
 }
 
 Object.defineProperty(Mixly.Electron, 'ExampleExt', {
-  value: ExampleExt,
-  writable: true,
-  enumerable: true,
-  configurable: true,
+    value: ExampleExt,
+    writable: true,
+    enumerable: true,
+    configurable: true,
 });
 
 })();

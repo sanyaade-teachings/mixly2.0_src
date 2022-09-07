@@ -69,10 +69,10 @@ class ExampleExt extends Example {
 }
 
 Object.defineProperty(Mixly.Web, 'ExampleExt', {
-  value: ExampleExt,
-  writable: true,
-  enumerable: true,
-  configurable: true,
+    value: ExampleExt,
+    writable: true,
+    enumerable: true,
+    configurable: true,
 });
 
 ExampleExt.DIR_TREE = MJSON.get(Config.pathPrefix + `../sample/${Boards.getType()}.json`) ?? [];

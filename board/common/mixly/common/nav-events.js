@@ -1,36 +1,15 @@
 (() => {
 
-Mixly.require({
-    "electron": [
-        "Mixly.Electron.BU"
-    ],
-    "web": [
-        "Mixly.Web.BU"
-    ],
-    "web-socket": {
-        "electron": [],
-        "web": [],
-        "common": []
-    },
-    "web-compiler": {
-        "electron": [],
-        "web": [],
-        "common": []
-    },
-    "common": [
-        "layui",
-        "Mixly.LayerExtend",
-        "Mixly.Config",
-        "Mixly.XML",
-        "Mixly.Env",
-        "Mixly.ScriptLoader",
-        "Mixly.Modules",
-        "Mixly.Theme",
-        "Mixly.Boards",
-        "Mixly.Editor"
-    ]
-});
-
+goog.require('layui');
+goog.require('Mixly.LayerExtend');
+goog.require('Mixly.Config');
+goog.require('Mixly.XML');
+goog.require('Mixly.Env');
+goog.require('Mixly.ScriptLoader');
+goog.require('Mixly.Modules');
+goog.require('Mixly.Theme');
+goog.require('Mixly.Boards');
+goog.require('Mixly.Editor');
 goog.provide('Mixly.NavEvents');
 
 const { element, slider, form } = layui;
@@ -49,8 +28,6 @@ const {
     Electron = {},
     Web = {}
 } = Mixly;
-
-const { BU } = Env.isElectron ? Electron : Web;
 
 const { BOARD } = Config;
 
@@ -252,6 +229,11 @@ NavEvents.init = () => {
         }
         Boards.changeTo(boardName);
         Boards.updateCategories(boardName);
+    });
+
+    form.on('select(ports-type)', function (data) {
+        $('#mixly-footer-port-div').css('display', 'inline-flex');
+        $('#mixly-footer-port').html(data.value);
     });
 }
 })();

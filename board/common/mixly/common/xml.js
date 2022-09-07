@@ -96,7 +96,8 @@ XML.TEMPLATE_CONFIG = [
             column: indexText['列'],
             unknown: indexText['未知'],
             config: indexText['配置板卡'],
-            selected: indexText['已选择']
+            selected: indexText['已选择'],
+            on: indexText['在']
         },
         appendToBody: false
     }, {

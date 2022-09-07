@@ -228,25 +228,6 @@
             ]
         },
         {
-            "path":"/common/nav-events.js",
-            "provide":[
-                "Mixly.NavEvents"
-            ],
-            "require":[
-                "layui",
-                "Mixly.LayerExtend",
-                "Mixly.Config",
-                "Mixly.XML",
-                "Mixly.Env",
-                "Mixly.ScriptLoader",
-                "Mixly.Modules",
-                "Mixly.Theme",
-                "Mixly.Boards",
-                "Mixly.Editor",
-                "Mixly.Electron.BU"
-            ]
-        },
-        {
             "path":"/common/serial-charts.js",
             "provide":[
                 "Mixly.Charts"
@@ -392,25 +373,6 @@
             ]
         },
         {
-            "path":"/common/nav-events.js",
-            "provide":[
-                "Mixly.NavEvents"
-            ],
-            "require":[
-                "layui",
-                "Mixly.LayerExtend",
-                "Mixly.Config",
-                "Mixly.XML",
-                "Mixly.Env",
-                "Mixly.ScriptLoader",
-                "Mixly.Modules",
-                "Mixly.Theme",
-                "Mixly.Boards",
-                "Mixly.Editor",
-                "Mixly.Web.BU"
-            ]
-        },
-        {
             "path":"/common/serial-charts.js",
             "provide":[
                 "Mixly.Charts"
@@ -450,24 +412,6 @@
                 ]
             },
             {
-                "path":"/common/nav-events.js",
-                "provide":[
-                    "Mixly.NavEvents"
-                ],
-                "require":[
-                    "layui",
-                    "Mixly.LayerExtend",
-                    "Mixly.Config",
-                    "Mixly.XML",
-                    "Mixly.Env",
-                    "Mixly.ScriptLoader",
-                    "Mixly.Modules",
-                    "Mixly.Theme",
-                    "Mixly.Boards",
-                    "Mixly.Editor"
-                ]
-            },
-            {
                 "path":"/common/serial-charts.js",
                 "provide":[
                     "Mixly.Charts"
@@ -502,24 +446,6 @@
                     "Backpack",
                     "Mixly.WebSocket.Socket",
                     "Mixly.Web.ExampleExt"
-                ]
-            },
-            {
-                "path":"/common/nav-events.js",
-                "provide":[
-                    "Mixly.NavEvents"
-                ],
-                "require":[
-                    "layui",
-                    "Mixly.LayerExtend",
-                    "Mixly.Config",
-                    "Mixly.XML",
-                    "Mixly.Env",
-                    "Mixly.ScriptLoader",
-                    "Mixly.Modules",
-                    "Mixly.Theme",
-                    "Mixly.Boards",
-                    "Mixly.Editor"
                 ]
             },
             {
@@ -655,24 +581,6 @@
                 ]
             },
             {
-                "path":"/common/nav-events.js",
-                "provide":[
-                    "Mixly.NavEvents"
-                ],
-                "require":[
-                    "layui",
-                    "Mixly.LayerExtend",
-                    "Mixly.Config",
-                    "Mixly.XML",
-                    "Mixly.Env",
-                    "Mixly.ScriptLoader",
-                    "Mixly.Modules",
-                    "Mixly.Theme",
-                    "Mixly.Boards",
-                    "Mixly.Editor"
-                ]
-            },
-            {
                 "path":"/common/serial-charts.js",
                 "provide":[
                     "Mixly.Charts"
@@ -706,24 +614,6 @@
                     "WorkspaceSearch",
                     "Backpack",
                     "Mixly.Web.ExampleExt"
-                ]
-            },
-            {
-                "path":"/common/nav-events.js",
-                "provide":[
-                    "Mixly.NavEvents"
-                ],
-                "require":[
-                    "layui",
-                    "Mixly.LayerExtend",
-                    "Mixly.Config",
-                    "Mixly.XML",
-                    "Mixly.Env",
-                    "Mixly.ScriptLoader",
-                    "Mixly.Modules",
-                    "Mixly.Theme",
-                    "Mixly.Boards",
-                    "Mixly.Editor"
                 ]
             },
             {
@@ -966,6 +856,24 @@
             ],
             "provide":[
                 "Mixly.MString"
+            ]
+        },
+        {
+            "path":"/common/nav-events.js",
+            "require":[
+                "layui",
+                "Mixly.LayerExtend",
+                "Mixly.Config",
+                "Mixly.XML",
+                "Mixly.Env",
+                "Mixly.ScriptLoader",
+                "Mixly.Modules",
+                "Mixly.Theme",
+                "Mixly.Boards",
+                "Mixly.Editor"
+            ],
+            "provide":[
+                "Mixly.NavEvents"
             ]
         },
         {

@@ -387,6 +387,13 @@ Serial.refreshUploadPortSelectBox = (ports) => {
             portSelectBoxDom.append($(`<option value="${name}">${name}</option>`));
     });
     form.render('select', 'ports-type-filter');
+    if (ports.length) {
+        $('#mixly-footer-port-div').css('display', 'inline-flex');
+        $('#mixly-footer-port').html(Serial.getSelectedPortName());
+    } else {
+        $('#mixly-footer-port-div').hide();
+        $('#mixly-footer-port').html('');
+    }
 }
 
 Serial.refreshToolPortSelectBox = (ports) => {

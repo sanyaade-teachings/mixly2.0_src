@@ -1,6 +1,6 @@
 # 同步时忽略以下路径
 __pycache__
-
+*.pyc
 board/**/libraries/ThirdParty/
 board/**/libraries/myLib/
 board/**/libraries/cloudLibsUrl.json

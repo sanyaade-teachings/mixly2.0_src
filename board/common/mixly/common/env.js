@@ -55,6 +55,12 @@ Env.pyFilePath = null;
 Env.indexPath = null;
 
 /**
+  * 资源文件夹所在路径
+  * @type {String} 
+  */
+Env.srcPath = null;
+
+/**
   * 获取板卡index或主页面index的缩放比例
   * @type {String} 
   */
@@ -128,5 +134,6 @@ if (Env.isElectron) {
         Env.python3Path = '/usr/bin/python3';
     }
     Env.indexPath = __dirname;
+    Env.srcPath = path.resolve(Env.indexPath, Config.pathPrefix, '../');
 }
 })();

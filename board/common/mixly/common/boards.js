@@ -324,7 +324,8 @@ Boards.changeTo = (boardName) => {
         }
         const pathObj = {
             path: Env.clientPath,
-            indexPath: Env.indexPath
+            indexPath: Env.indexPath,
+            srcPath: Env.srcPath
         };
         switch (outObj.type) {
             case 'volume':
@@ -353,10 +354,7 @@ Boards.changeTo = (boardName) => {
                 }
                 break;
             case 'command':
-                let pyToolPath = "{path}/mixpyBuild/win_python3/Lib/site-packages/";
-                if (Env.currentPlatform == "darwin" || Env.currentPlatform == "linux" || Env.hasSocketServer) {
-                    pyToolPath = "{path}/pyTools/";
-                }
+                let pyToolsPath = "{srcPath}/pyTools/";
                 let obj = {};
                 let pyTools = {
                     'esptool': 'esptool.py',
@@ -366,7 +364,7 @@ Boards.changeTo = (boardName) => {
                     'ampy': 'ampy/cli.py'
                 };
                 for (let key in pyTools) {
-                    obj[key] = Env.python3Path + "\" \"" + pyToolPath + pyTools[key];
+                    obj[key] = Env.python3Path + "\" \"" + pyToolsPath + pyTools[key];
                 }
                 if (outObj.reset) {
                     let resetStr = '{}';

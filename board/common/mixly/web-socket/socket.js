@@ -240,7 +240,8 @@ Socket.updateSelectedBoardConfig = (info) => {
     info.clientPath = info.clientPath.replaceAll('\\', '/');
     Env.clientPath = info.clientPath;
     info.appPath = info.appPath.replaceAll('\\', '/');
-    Env.indexPath = goog.normalizePath_(info.appPath + '/' + BOARD.boardIndex + '/../');
+    Env.srcPath = info.appPath;
+    Env.indexPath = goog.normalizePath_(Env.srcPath + '/' + BOARD.boardIndex + '/../');
     Env.python3Path = info.python3Path;
     const boardName = Boards.getSelectedBoardName();
     Boards.changeTo(boardName);

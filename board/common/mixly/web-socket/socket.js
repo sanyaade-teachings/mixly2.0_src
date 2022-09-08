@@ -36,7 +36,7 @@ Socket.debug = false;
 
 Socket.initFunc = null;
 
-$.get('../../../config.json', 'json', (obj) => {
+$.get('../../config.json', 'json', (obj) => {
     Socket.port = obj.socket.port;
     Socket.debug = obj.debug;
     BOARD.server = obj;

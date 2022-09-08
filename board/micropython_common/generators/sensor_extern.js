@@ -566,3 +566,19 @@ Blockly.Python.PS2_stk_new = function() {
   var code= sub + ".analog(ps2.PSS_"+stk+")";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.sensor_use_uart_init=function(){
+  Blockly.Python.definitions_['import_pm2_5'] = 'import pm2_5';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v + '=pm2_5.PM2_5(' + key +')\n';    
+    return code;
+};
+
+Blockly.Python.pm25_get_data=function(){
+    Blockly.Python.definitions_['import_pm2_5'] = 'import pm2_5';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var pm=this.getFieldValue('pm');
+    var code =  v+".concentration()"+pm;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

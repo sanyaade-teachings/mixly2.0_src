@@ -36,22 +36,13 @@ Socket.debug = false;
 
 Socket.initFunc = null;
 
-$.get('../../config.json', (fileStr) => {
-    let configObj = null;
-    let WS = Socket;
-    try {
-        configObj = JSON.parse(fileStr);
-        //WS.IPAddress = configObj.IPAddress;
-        WS.port = configObj.socket.port;
-        //WS.url = 'ws://' + WS.IPAddress + ':' + WS.port + '/';
-        WS.debug = configObj.debug;
-        BOARD.server = configObj;
-        const { hostname } = window.location;
-        WS.url = 'ws://' + hostname + ':' + WS.port + '/';
-        WS.IPAddress = hostname;
-    } catch (e) {
-        console.log(e);
-    }
+$.get('../../../config.json', 'json', (obj) => {
+    Socket.port = obj.socket.port;
+    Socket.debug = obj.debug;
+    BOARD.server = obj;
+    const { hostname } = window.location;
+    Socket.url = 'ws://' + hostname + ':' + Socket.port + '/';
+    Socket.IPAddress = hostname;
 }).fail(function () {
     console.log('无法加载config.json文件');
 });

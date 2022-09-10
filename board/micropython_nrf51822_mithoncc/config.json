@@ -49,7 +49,7 @@
     "web": {
         "com": "usb",
         "burn": {
-            "filePath": "./build/microbit-micropython-v1.hex"
+            "filePath": "./build/microbit-micropython-v1-lib.hex"
         }
     }
 }

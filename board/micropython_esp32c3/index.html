@@ -3432,6 +3432,34 @@
             </shadow>
           </value>
         </block>
+        <block type="serial_softserial_new">
+        <value name="RX">
+          <shadow type="pins_digital_pin">
+              <field name="PIN">0</field>
+            </shadow>
+        </value>
+        <value name="TX">
+          <shadow type="pins_digital_pin">
+              <field name="PIN">2</field>
+            </shadow>
+        </value>    
+        <next>
+         <block type="sensor_use_uart_init">
+          <value name="SUB">
+              <shadow type="variables_get">
+                <field name="VAR">pm</field>
+              </shadow>
+            </value>           
+          </block>
+        </next>
+        </block>       
+        <block type="pm25_get_data">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">pm</field>
+            </shadow>
+          </value>
+        </block>
     </category>    
     <category id="catExternActuator" colour='#74A55B'>      
       <block type="esp32_music_pitch_init">

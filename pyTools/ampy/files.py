@@ -245,6 +245,20 @@ class Files(object):
                         return sorted([f for f in os.listdir()])\n"""
 
         # Execute os.listdir() command on the board.
+        # 当command执行出错时执行command1
+        command2 = command
+        command2 += """
+                r = []
+                for f in listdir('{0}'):
+                    try:
+                        size = os.stat(f)[6]                    
+                    except:
+                        size = os.size(f)                    
+                    r.append([f, size])
+                print(r)
+            """.format(
+            (directory if directory else "/")
+        )
         command += """
                 r = []
                 for f in listdir('{0}'):
@@ -260,8 +274,10 @@ class Files(object):
         try:
             out = self._pyboard.exec_(textwrap.dedent(command))
         except PyboardError as ex:
+            out = self._pyboard.exec_(textwrap.dedent(command2))
             # Check if this is an OSError #2, i.e. directory doesn't exist and
             # rethrow it as something more descriptive.
+        except PyboardError as ex:
             if ex.args[2].decode("utf-8").find("OSError: [Errno 2] ENOENT") != -1:
                 raise RuntimeError("No such directory: {0}".format(directory))
             else:

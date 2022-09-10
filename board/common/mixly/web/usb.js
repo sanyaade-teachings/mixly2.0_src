@@ -9,12 +9,16 @@ const {
 
 const { USB } = Web;
 
-USB.readStrList = [];
+USB.output = [];
 
 USB.obj = null;
 
-USB.connect = (baud = 115200) => {
+USB.connect = (baud = 115200, onDataLine = (message) => {}) => {
     return new Promise((resolve, reject) => {
+        if (USB.isConnected()) {
+            resolve();
+            return;
+        }
         navigator.usb.requestDevice({
             filters: [{ vendorId: 0xD28 }]
         })
@@ -28,7 +32,7 @@ USB.connect = (baud = 115200) => {
             return USB.setBaudRate(baud);
         })
         .then(() => {
-            USB.addReadEvent();
+            USB.addReadEvent(onDataLine);
             resolve();
         })
         .catch(reject);
@@ -36,39 +40,69 @@ USB.connect = (baud = 115200) => {
 }
 
 USB.close = () => {
-    return USB.DAPLink.disconnect();
+    if (USB.isConnected()) {
+        USB.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_SERIAL_DATA);
+        USB.DAPLink.stopSerialRead();
+        USB.DAPLink.disconnect()
+        .then(() => {
+            return USB.WebUSB.close();
+        })
+        .then(() => {
+            return USB.obj.close();
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        
+    }
 }
 
 USB.isConnected = () => {
-    return USB.DAPLink.connected;
+    return USB.obj && USB.obj.opened;
 }
 
-USB.addReadEvent = () => {
+USB.addReadEvent = (onDataLine = (message) => {}) => {
     USB.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_SERIAL_DATA);
     USB.DAPLink.on(DAPjs.DAPLink.EVENT_SERIAL_DATA, data => {
-        const dataList = data.split('\r\n');
-        const endStr = USB.readStrList.pop() ?? '';
-        if (endStr.lastIndexOf('\n') === endStr.length - 1) {
-            USB.readStrList.push(endStr);
-        }
-        if (dataList.length === 1) {
-            USB.readStrList.push(endStr + dataList[0]);
-        } else if (dataList.length > 1) {
-            USB.readStrList.push(endStr + dataList[0] + '\n');
-            console.log(endStr + dataList[0] + '\n');
-        } else {
+        let dataList = data.split('\n');
+        if (!dataList.length) {
             return;
         }
-        let i = 1;
-        for (; i < dataList.length - 1; i++) {
-            USB.readStrList.push(dataList[i] + '\n');
-            console.log(dataList[i] + '\n');
+        let endStr = '';
+        if (USB.output.length) {
+            endStr = USB.output.pop();
+            USB.output.push(endStr + dataList.shift());
+            if (dataList.length) {
+                // console.log(USB.output[USB.output.length - 1]);
+                onDataLine(USB.output[USB.output.length - 1]);
+            }
         }
-        if (dataList.length > 1) {
-            USB.readStrList.push(dataList[i]);
+        let i = 0;
+        for (let value of dataList) {
+            i++;
+            USB.output.push(value);
+            if (i < dataList.length) {
+                // console.log(value);
+                onDataLine(value);
+            }
+        }
+        while (USB.output.length > 500) {
+            USB.output.shift();
         }
     });
-    return USB.DAPLink.startSerialRead(USB.obj);
+    USB.DAPLink.startSerialRead(USB.obj);
+}
+
+USB.AddOnConnectEvent = (onConnect) => {
+    navigator.usb.addEventListener('connect', (event) => {
+        onConnect();
+    });
+}
+
+USB.AddOnDisconnectEvent = (onDisconnect) => {
+    navigator.usb.addEventListener('disconnect', (event) => {
+        onDisconnect();
+    });
 }
 
 USB.writeString = async (str) => {
@@ -93,7 +127,6 @@ USB.writeCtrlB = async () => {
 }
 
 USB.writeCtrlC = async () => {
-    console.log('writeCtrlC');
     await USB.writeByteArr([3, 13, 10]);
 }
 
@@ -121,15 +154,16 @@ USB.find = async (str, timeout, doFunc) => {
     let nowTime = startTime;
     while (nowTime - startTime < timeout) {
         const nowTime = Number(new Date());
-        let len = USB.readStrList.length;
-        if (USB.readStrList[len - 1] && USB.readStrList[len - 1].lastIndexOf('\n') !== USB.readStrList[len - 1].length - 1) {
-            len--;
-        }
+        let len = USB.output.length;
         if (len) {
+            const lastData = USB.output[len - 1];
+            if (!lastData) {
+                len--;
+            }
             for (let i = 0; i < len; i++) {
-                const data = USB.readStrList.shift();
+                const data = USB.output.shift();
                 if (data.indexOf(str) !== -1) {
-                    USB.readStrList = [];
+                    USB.output = [];
                     return true;
                 }
             }
@@ -170,26 +204,32 @@ USB.exitRawREPL = async (timeout = 5000) => {
 }
 
 USB.put = async (fileName, code) => {
-    try {
-        if (!await USB.interrupt()) {
-            return '中断失败';
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!await USB.interrupt()) {
+                reject('中断失败');
+                return;
+            }
+            console.log('中断成功')
+            if (!await USB.enterRawREPL()) {
+                reject('无法进入Raw REPL');
+                return;
+            }
+            console.log('进入Raw REPL')
+            console.log('写入code中...')
+            await USB.writeCodeString(fileName, code);
+            console.log('写入code成功')
+            await USB.writeByteArr([4]);
+            if (!await USB.exitRawREPL()) {
+                reject('无法退出Raw REPL');
+                return;
+            }
+            await USB.writeCtrlD();
+            resolve();
+        } catch (error) {
+            reject(error.toString());
         }
-        console.log('中断成功')
-        if (!await USB.enterRawREPL()) {
-            return '无法进入Raw REPL';
-        }
-        console.log('进入Raw REPL')
-        console.log('写入code中...')
-        await USB.writeCodeString(fileName, code);
-        console.log('写入code成功')
-        await USB.writeByteArr([4]);
-        if (!await USB.exitRawREPL()) {
-            return '无法退出Raw REPL';
-        }
-        await USB.writeCtrlD();
-    } catch (error) {
-        console.log(error);
-    }
+    })
 }
 
 USB.writeCodeString = async (fileName, code) => {
@@ -222,10 +262,15 @@ USB.writeCodeString = async (fileName, code) => {
         let newData = code.substring(i * 30, (i + 1) * 30);
         newData = newData.replaceAll('\'', '\\\'');
         newData = newData.replaceAll('\\x', '\\\\x');
+        newData = newData.replaceAll('\\u', '\\\\u');
         await USB.writeString("file.write('''" + newData + "''')\r\n");
-        console.log('写入', "file.write('''" + newData + "''')\r\n");
+        // console.log('写入', "file.write('''" + newData + "''')\r\n");
     }
     await USB.writeString("file.close()\r\n");
+}
+
+USB.flash = (buffer) => {
+    return USB.DAPLink.flash(buffer);
 }
 
 USB.sleep = (ms) => {

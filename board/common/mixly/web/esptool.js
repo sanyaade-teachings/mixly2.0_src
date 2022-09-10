@@ -1,17 +1,24 @@
-'use strict';
+(() => {
 
-goog.provide('Mixly.Web.Esptool');
-goog.require('Mixly.Web.Utilities');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Config');
+goog.require('Mixly.Web.Utilities');
+goog.require('Mixly.Web.SerialPort');
+goog.provide('Mixly.Web.Esptool');
 
-let port;
-let reader;
-let writer;
-let inputStream;
-let outputStream;
-let inputBuffer = [];
-let restBuffer = [];
+const {
+    StatusBar,
+    Config,
+    Web
+} = Mixly;
+
+const { SELECTED_BOARD } = Config;
+
+const {
+    Utilities,
+    SerialPort,
+    Esptool
+} = Web;
 
 const esp8266FlashSizes = {
     "512KB": 0x00,
@@ -481,151 +488,13 @@ class EspLoader {
      * does not check response
      */
     async command(opcode, buffer, checksum = 0) {
-        //inputBuffer = []; // Reset input buffer
+        //SerialPort.inputBuffer = []; // Reset input buffer
         let packet = struct.pack("<BBHI", 0x00, opcode, buffer.length, checksum);
         packet = packet.concat(buffer);
         packet = this.slipEncode(packet);
         this.debugMsg(2, "Writing " + packet.length + " byte" + (packet.length == 1 ? "" : "s") + ":", packet);
-        await this.writeToStream(packet);
+        await SerialPort.writeByteArr(packet);
     };
-
-    /**
-     * @name connect
-     * Opens a Web Serial connection to a micro:bit and sets up the input and
-     * output stream.
-     */
-    async connect() {
-        // - Request a port and open a connection.
-        port = await navigator.serial.requestPort();
-
-        // - Wait for the port to open.toggleUIConnected
-        try {
-            // support chrome < 86
-            await port.open({ baudrate: ESP_ROM_BAUD, baudRate: ESP_ROM_BAUD });
-        } catch (e) {
-            port = null;
-            throw e;
-        }
-
-        const signals = await port.getSignals();
-        this.logMsg("连接成功")
-        Mixly.StatusBar.addValue("连接成功\n", true);
-
-        this.logMsg("尝试复位")
-        Mixly.StatusBar.addValue("尝试复位\n", true);
-        await port.setSignals({ dataTerminalReady: false, requestToSend: true });
-        await port.setSignals({ dataTerminalReady: true, requestToSend: false });
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        outputStream = port.writable;
-        inputStream = port.readable;
-        writer = outputStream.getWriter();
-    }
-
-    async reset() {
-        const signals = await port.getSignals();
-        this.logMsg("尝试复位")
-        Mixly.StatusBar.addValue("尝试复位\n", true);
-        await port.setSignals({ dataTerminalReady: false, requestToSend: true });
-        await port.setSignals({ dataTerminalReady: true, requestToSend: false });
-        await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-
-    async justConnect(doFunc = function () { }) {
-        // - Request a port and open a connection.
-        port = await navigator.serial.requestPort();
-
-        // - Wait for the port to open.toggleUIConnected
-        if (this.getChromeVersion() < 86) {
-            await port.open({ baudrate: ESP_ROM_BAUD });
-        } else {
-            await port.open({ baudRate: ESP_ROM_BAUD });
-        }
-
-        const signals = await port.getSignals();
-
-        navigator.serial.addEventListener('disconnect', (e) => {
-            // Remove `e.target` from the list of available ports.
-            console.log(e);
-            Mixly.Web.BU.clickConnect();
-        });
-
-        this.logMsg("连接成功")
-        Mixly.StatusBar.addValue("连接成功\n", true);
-
-        outputStream = port.writable;
-        inputStream = port.readable;
-        writer = outputStream.getWriter();
-        reader = inputStream.getReader();
-        doFunc();
-    }
-
-    connected() {
-        if (port) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @name disconnect
-     * Closes the Web Serial connection.
-     */
-    async disconnect() {
-
-        if (port && port.readable) {
-            if (port.readable.locked) {
-                await reader.cancel();
-                try {
-                    reader.releaseLock();
-                } catch (e) {
-                    console.log(e);
-                }
-            }
-            inputStream = null;
-        }
-
-        if (port && port.writable) {
-            try {
-                if (port.writable.locked) {
-                    writer.releaseLock();
-                }
-                //await writer.close();
-            } catch (e) {
-                console.log(e);
-            }
-            outputStream = null;
-        }
-
-        try {
-            await port.close();
-        } catch (e) {
-            //console.log(e);
-        }
-        port = null;
-    }
-
-    /**
-     * @name writeToStream
-     * Gets a writer from the output stream and send the raw data over WebSerial.
-     */
-    async writeToStream(data) {
-        await writer.write(new Uint8Array(data));
-        //writer.releaseLock();
-    }
-
-    async write(data) {
-        const dataArrayBuffer = this.encoder.encode(data);
-        await writer.write(dataArrayBuffer);
-        //writer.releaseLock();
-    }
-
-    async writeArrayBuffer(data) {
-        const dataArrBuff = data;
-        let arrBuff = new Int8Array(dataArrBuff).buffer;
-        await writer.write(arrBuff);
-        //writer.releaseLock();
-    }
 
     async setDTR(value) {
         await port.setSignals({ dataTerminalReady: value });
@@ -637,102 +506,6 @@ class EspLoader {
 
     async setSignals(dtr, rts) {
         await port.setSignals({ dataTerminalReady: dtr, requestToSend: rts });
-    }
-
-    async read() {
-        let returnStr = "";
-        const { value, done } = await reader.read();
-        restBuffer = [...restBuffer, ...value];
-        do {
-            var { text, arr } = this.readString(restBuffer);
-            restBuffer = arr;
-            returnStr += text;
-        } while (text);
-        return returnStr;
-    }
-
-    readLine(buf) {
-        var text = "";
-        var endWithLF = false;
-        for (var i = 0; i < buf.length; i++) {
-            text += String.fromCharCode(buf[i]);
-            if (buf[i] === 0x0a) {
-                if (i === buf.length - 1) {
-                    endWithLF = true;
-                }
-                break;
-            }
-        }
-        text = text.trim();
-        buf = buf.subarray(i + 1);
-        return { text: text, buf: buf, endWithLF: endWithLF };
-    }
-
-    readChar(arr) {
-        var readBuf = [];
-        var buffLength = 0;
-        var nowIndex = -1;
-        var text = "";
-        /*  UTF-8编码方式
-        *   ------------------------------------------------------------
-        *   |1字节 0xxxxxxx                                             |
-        *   |2字节 110xxxxx 10xxxxxx                                    |
-        *   |3字节 1110xxxx 10xxxxxx 10xxxxxx                           |
-        *   |4字节 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx                  |
-        *   |5字节 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx         |
-        *   |6字节 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx|
-        *   ------------------------------------------------------------
-        */
-        for (var i = 0; i < arr.length; i++) {
-            if ((arr[i] & 0x80) == 0x00) {
-                text = String.fromCharCode(arr[i]);
-                nowIndex = i;
-                break;
-            } else if ((arr[i] & 0xc0) == 0x80) {
-                readBuf.push(arr[i]);
-                if (readBuf.length >= buffLength) {
-                    text = this.decoder.decode(new Uint8Array(readBuf));
-                    nowIndex = i;
-                    break;
-                }
-            } else {
-                let dataNum = arr[i] & 0xe0;
-                switch (dataNum) {
-                    case 0xfc:
-                        buffLength = 6;
-                        break;
-                    case 0xf8:
-                        buffLength = 5;
-                        break;
-                    case 0xf0:
-                        buffLength = 4;
-                        break;
-                    case 0xe0:
-                        buffLength = 3;
-                        break;
-                    case 0xc0:
-                    default:
-                        buffLength = 2;
-                }
-                readBuf.push(arr[i]);
-            }
-        }
-        if (nowIndex == -1) {
-            arr = arr.slice(0);
-        } else {
-            arr = arr.slice(nowIndex + 1);
-        }
-        return { text: text, arr: arr };
-    }
-
-    readString(arr) {
-        var readStr = "";
-        do {
-            var { text, arr } = this.readChar(arr);
-            readStr += text;
-        } while (text);
-
-        return { text: readStr, arr: arr };
     }
 
     hexFormatter(bytes) {
@@ -756,8 +529,8 @@ class EspLoader {
             let stamp = Date.now();
             readBytes = [];
             while (Date.now() - stamp < this.readTimeout) {
-                if (inputBuffer.length > 0) {
-                    readBytes.push(inputBuffer.shift());
+                if (SerialPort.inputBuffer.length > 0) {
+                    readBytes.push(SerialPort.inputBuffer.shift());
                     break;
                 } else {
                     await this.sleep(10);
@@ -776,7 +549,7 @@ class EspLoader {
                         partialPacket = [];
                     } else {
                         this.debugMsg(1, "Read invalid data: " + this.hexFormatter(readBytes));
-                        this.debugMsg(1, "Remaining data in serial buffer: " + this.hexFormatter(inputBuffer));
+                        this.debugMsg(1, "Remaining data in serial buffer: " + this.hexFormatter(SerialPort.inputBuffer));
                         throw new SlipReadError('Invalid head of packet (' + this.toHex(b) + ')');
                     }
                 } else if (inEscape) {  // part-way through escape sequence
@@ -787,7 +560,7 @@ class EspLoader {
                         partialPacket.push(0xdb);
                     } else {
                         this.debugMsg(1, "Read invalid data: " + this.hexFormatter(readBytes));
-                        this.debugMsg(1, "Remaining data in serial buffer: " + this.hexFormatter(inputBuffer));
+                        this.debugMsg(1, "Remaining data in serial buffer: " + this.hexFormatter(SerialPort.inputBuffer));
                         throw new SlipReadError('Invalid SLIP escape (0xdb, ' + this.toHex(b) + ')');
                     }
                 } else if (b == 0xdb) {  // start of escape sequence
@@ -836,7 +609,7 @@ class EspLoader {
                 return [val, data];
             }
             if (data[0] != 0 && data[1] == ROM_INVALID_RECV_MSG) {
-                inputBuffer = [];
+                SerialPort.inputBuffer = [];
                 throw ("Invalid (unsupported) command " + this.toHex(opcode));
             }
         }
@@ -892,10 +665,10 @@ class EspLoader {
     async setBaudrate(baud) {
         if (this._chipfamily == ESP8266) {
             this.logMsg("Baud rate can only change on ESP32 and ESP32-S2");
-            Mixly.StatusBar.addValue("只能在ESP32和ESP32-S2上修改波特率\n", true);
+            StatusBar.addValue("只能在ESP32和ESP32-S2上修改波特率\n", true);
         } else {
             this.logMsg("Attempting to change baud rate to " + baud + "...");
-            Mixly.StatusBar.addValue("尝试修改波特率为" + baud + "\n", true);
+            StatusBar.addValue("尝试修改波特率为" + baud + "\n", true);
             try {
                 // stub takes the new baud rate and the old one
                 let oldBaud = this.IS_STUB ? this.getPortBaudRate() : 0;
@@ -903,9 +676,9 @@ class EspLoader {
                 await this.checkCommand(ESP_CHANGE_BAUDRATE, buffer);
                 this.setPortBaudRate(baud);
                 await this.sleep(50);
-                //inputBuffer = [];
+                //SerialPort.inputBuffer = [];
                 this.logMsg("Changed baud rate to " + baud);
-                Mixly.StatusBar.addValue("已修改波特率为" + baud + "\n", true);
+                StatusBar.addValue("已修改波特率为" + baud + "\n", true);
             } catch (e) {
                 throw ("Unable to change the baud rate, please try setting the connection speed from " + baud + " to 115200 and reconnecting.");
             }
@@ -920,7 +693,7 @@ class EspLoader {
     async sync() {
         this.logMsg("Performing sync...")
         for (let i = 0; i < 5; i++) {
-            inputBuffer = []
+            SerialPort.inputBuffer = []
             let response = await this._sync();
             if (response) {
                 await this.sleep(100);
@@ -973,7 +746,7 @@ class EspLoader {
     async flashData(binaryData, offset = 0, part = 0) {
         let filesize = binaryData.byteLength;
         this.logMsg("\nWriting data with filesize:" + filesize);
-        Mixly.StatusBar.addValue("写入数据，文件大小：" + filesize + "\n", true);
+        StatusBar.addValue("写入数据，文件大小：" + filesize + "\n", true);
         let blocks = await this.flashBegin(filesize, offset);
         let block = [];
         let seq = 0;
@@ -990,9 +763,9 @@ class EspLoader {
                 "Writing at " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)"
             );
             */
-            //Mixly.StatusBar.addValue("Writing at " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n", true);
-            if (Mixly.StatusBar.getValue().lastIndexOf("(" + percentage + " %)") == -1) {
-                Mixly.StatusBar.addValue("写入数据到 " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n", true);
+            //StatusBar.addValue("Writing at " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n", true);
+            if (StatusBar.getValue().lastIndexOf("(" + percentage + " %)") == -1) {
+                StatusBar.addValue("写入数据到 " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n", true);
             }
             if (this.updateProgress !== null) {
                 this.updateProgress(part, percentage);
@@ -1010,7 +783,7 @@ class EspLoader {
             position += flashWriteSize;
         }
         this.logMsg("Took " + (Date.now() - stamp) + "ms to write " + filesize + " bytes");
-        Mixly.StatusBar.addValue("写入 " + filesize + " bytes" + " 耗时 " + (Date.now() - stamp) + " ms\n", true);
+        StatusBar.addValue("写入 " + filesize + " bytes" + " 耗时 " + (Date.now() - stamp) + " ms\n", true);
     };
 
     /**
@@ -1394,12 +1167,12 @@ class EspLoader {
         var stubcode = {};
         let subCodeKey = ["text", "text_start", "entry", "data", "data_start"];
         for (let i = 0; i < subCodeKey.length; i++) {
-            if (Mixly.Config.BOARD?.web[chipInfo.stubFile]
-                && Mixly.Config.BOARD.web[chipInfo.stubFile][subCodeKey[i]]) {
+            if (SELECTED_BOARD?.web[chipInfo.stubFile]
+                && SELECTED_BOARD.web[chipInfo.stubFile][subCodeKey[i]]) {
                 if (subCodeKey[i] == "text" || subCodeKey[i] == "data") {
-                    stubcode[subCodeKey[i]] = toByteArray(atob(Mixly.Config.BOARD.web[chipInfo.stubFile][subCodeKey[i]]));
+                    stubcode[subCodeKey[i]] = toByteArray(atob(SELECTED_BOARD.web[chipInfo.stubFile][subCodeKey[i]]));
                 } else {
-                    stubcode[subCodeKey[i]] = parseInt(Mixly.Config.BOARD.web[chipInfo.stubFile][subCodeKey[i]]);
+                    stubcode[subCodeKey[i]] = parseInt(SELECTED_BOARD.web[chipInfo.stubFile][subCodeKey[i]]);
                 }
             }
         }
@@ -1432,7 +1205,7 @@ class EspLoader {
 
         // Upload
         this.logMsg("Uploading stub...")
-        Mixly.StatusBar.addValue("上传 stub...\n", true);
+        StatusBar.addValue("上传 stub...\n", true);
         for (let field of ['text', 'data']) {
             if (Object.keys(stub).includes(field)) {
                 let offset = stub[field + "_start"];
@@ -1450,7 +1223,7 @@ class EspLoader {
             }
         }
         this.logMsg("Running stub...")
-        Mixly.StatusBar.addValue("运行 stub...\n", true);
+        StatusBar.addValue("运行 stub...\n", true);
         await this.memFinish(stub['entry']);
 
         let p = await this.readBuffer(500);
@@ -1460,7 +1233,7 @@ class EspLoader {
             throw "Failed to start stub. Unexpected response: " + p;
         }
         this.logMsg("Stub is now running...");
-        Mixly.StatusBar.addValue("Stub 正在运行中...\n", true);
+        StatusBar.addValue("Stub 正在运行中...\n", true);
         this.stubClass = new EspStubLoader({
             updateProgress: this.updateProgress,
             logMsg: this.logMsg,
@@ -1518,3 +1291,11 @@ class FatalError extends Error {
         this.name = "FatalError";
     }
 }
+
+Esptool.EspLoader = EspLoader;
+Esptool.EspStubLoader = EspStubLoader;
+Esptool.SlipReadError = SlipReadError;
+Esptool.FatalError = FatalError;
+
+})();
+

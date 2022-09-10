@@ -252,12 +252,15 @@
             "path":"/web/burn-upload.js",
             "require":[
                 "Mixly.StatusBar",
-                "Mixly.Web.Serial",
-                "Mixly.Web.Esptool",
+                "Mixly.StatusBarPort",
                 "Mixly.LayerExtend",
                 "Mixly.Config",
                 "Mixly.MFile",
-                "Mixly.Boards"
+                "Mixly.Boards",
+                "Mixly.Web.Serial",
+                "Mixly.Web.Esptool",
+                "Mixly.Web.USB",
+                "Mixly.Web.SerialPort"
             ],
             "provide":[
                 "Mixly.Web.BU"
@@ -273,9 +276,10 @@
         {
             "path":"/web/esptool.js",
             "require":[
-                "Mixly.Web.Utilities",
                 "Mixly.StatusBar",
-                "Mixly.Config"
+                "Mixly.Config",
+                "Mixly.Web.Utilities",
+                "Mixly.Web.SerialPort"
             ],
             "provide":[
                 "Mixly.Web.Esptool"
@@ -312,13 +316,32 @@
             ]
         },
         {
-            "path":"/web/serial.js",
+            "path":"/web/serial-old.js",
             "require":[
                 "Mixly.Charts",
                 "Mixly.StatusBar",
                 "Mixly.LayerExtend",
                 "Mixly.Config",
                 "Mixly.MFile"
+            ],
+            "provide":[
+                "Mixly.Web.SerialOld"
+            ]
+        },
+        {
+            "path":"/web/serial.js",
+            "require":[
+                "Mixly.Charts",
+                "Mixly.StatusBar",
+                "Mixly.StatusBarPort",
+                "Mixly.Config",
+                "Mixly.Tools",
+                "Mixly.Env",
+                "Mixly.LayerExtend",
+                "Mixly.XML",
+                "Mixly.MArray",
+                "Mixly.Web.USB",
+                "Mixly.Web.SerialPort"
             ],
             "provide":[
                 "Mixly.Web.Serial"
@@ -336,6 +359,7 @@
         {
             "path":"/web/usb.js",
             "require":[
+                "Mixly.Web"
             ],
             "provide":[
                 "Mixly.Web.USB"

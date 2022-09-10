@@ -59,6 +59,7 @@
     },
     "pythonToBlockly": false,
     "web": {
+        "com": "serial",
         "burn": {
             "erase": true,
             "binFile": [

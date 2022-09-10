@@ -45,5 +45,11 @@
         "rts": true,
         "dtr": true
     },
-    "pythonToBlockly": false
+    "pythonToBlockly": false,
+    "web": {
+        "com": "usb",
+        "burn": {
+            "filePath": "./build/microbit-micropython-v1.hex"
+        }
+    }
 }

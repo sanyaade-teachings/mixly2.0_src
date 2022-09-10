@@ -179,7 +179,6 @@ class Files(object):
         # Parse the result list and return it.
         return ast.literal_eval(out.decode("utf-8"))
 
-
     def getFilesInfo(self, directory="/", recursive=False):
         """List the contents of the specified directory (or root if none is
         specified).  Returns a list of strings with the names of files in the

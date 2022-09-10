@@ -1108,6 +1108,12 @@ body[class="light"] {
     background-size: 100% auto;
 }
 
+.blocklyTreeRow > .blocklyTreeRowContentContainer {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .light ::-webkit-resizer {
     background: url('../../common/media/resize-dark.png') no-repeat;
     background-size: 100% auto;

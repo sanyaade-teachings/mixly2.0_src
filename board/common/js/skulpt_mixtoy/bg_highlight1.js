@@ -1588,7 +1588,7 @@ var $builtinmodule = function (name) {
                         alert("挑战失败!请修改后重新尝试")
                         console.log("错误")
                         // document.getElementById("side_code").innerText='错误'
-                        Mixly.StatusBar.setValue('错误\n', true);
+                        Mixly.StatusBar.setValue('错误\n');
                         //恢复初始样式 
                         stepplay_btn.attr('onclick','pyengine.steprun();');
                         stepplay_btn.css("color","B5D9D5");

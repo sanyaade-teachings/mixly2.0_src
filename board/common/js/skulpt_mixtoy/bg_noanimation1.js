@@ -1287,7 +1287,7 @@ var $builtinmodule = function (name) {
                         maze.result=ResultType.FAILURE
                         console.log("错误")
                         // document.getElementById("side_code").innerText='错误'
-                        Mixly.StatusBar.setValue('错误\n', true);
+                        Mixly.StatusBar.setValue('错误\n');
                         // throw new Sk.builtin.TypeError("挑战失败!请修改后重新尝试");
                         Sk.execLimit = 0;
                         // throw new Error("挑战失败!请修改后重新尝试");

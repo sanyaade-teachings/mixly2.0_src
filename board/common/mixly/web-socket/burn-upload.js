@@ -144,7 +144,7 @@ BU.operateSuccess = (type, layerNum, port) => {
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix + `==${message}==\n`, true);
+    StatusBar.addValue(prefix + `==${message}==\n`);
     if (type === 'upload' && (Serial.uploadPorts.length === 1 || port)) {
         Serial.connect(port ?? Serial.uploadPorts[0].name, null);
     }
@@ -159,7 +159,7 @@ BU.operateError = (type, layerNum, error) => {
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix + error + '\n', true);
+    StatusBar.addValue(prefix + error + '\n');
     console.log(error);
     BU.burning = false;
     BU.uploading = false;
@@ -236,7 +236,7 @@ BU.initBurn = function () {
     }, () => {
         if (BU.burning) return;
         const { burn } = SELECTED_BOARD;
-        StatusBar.setValue('', true);
+        StatusBar.setValue('');
         StatusBarPort.tabChange("output");
         StatusBar.show(1);
         BU.burning = true;
@@ -264,7 +264,7 @@ BU.initUpload = function () {
     }, () => {
         if (BU.uploading) return;
         const { upload } = SELECTED_BOARD;
-        StatusBar.setValue('', true);
+        StatusBar.setValue('');
         StatusBarPort.tabChange("output");
         StatusBar.show(1);
         BU.burning = false;
@@ -314,7 +314,7 @@ BU.uploadByCmd = function (layerNum, port, command) {
         libPath = []
     } = upload;
     const code = MFile.getCode();
-    StatusBar.addValue(indexText['上传中'] + '...\n', true);
+    StatusBar.addValue(indexText['上传中'] + '...\n');
     Socket.sendCommand({
         obj: 'BU',
         func: 'uploadByCmd',
@@ -394,7 +394,7 @@ BU.burnWithSpecialBin = () => {
                 }
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.clientPath, "path");
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.indexPath, "indexPath");
-                StatusBar.setValue('', true);
+                StatusBar.setValue('');
                 StatusBarPort.tabChange("output");
                 StatusBar.show(1);
                 BU.burning = true;

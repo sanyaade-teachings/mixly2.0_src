@@ -43,5 +43,8 @@
         "rts": false,
         "dtr": false
     },
-    "pythonToBlockly": false
+    "pythonToBlockly": false,
+    "web": {
+        "com": "serial"
+    }
 }

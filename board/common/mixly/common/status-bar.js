@@ -123,14 +123,22 @@ StatusBar.show = (type) => {
 * @param scroll {Boolean} 是否将滚动条移到底部，true - 移动到底部，false - 保持当前位置不变
 * @return void
 */
-StatusBar.setValue = (data, scroll = false) => {
+StatusBar.setValue = (data, scroll = true) => {
     if (!Ace) return;
     Ace.updateSelectionMarkers();
+    const { selection } = Ace;
+    const initCursor = selection.getCursor();
     if (StatusBar.getValue() === data) return;
-    Ace.setValue(data);
-    if (scroll)
+        Ace.setValue(data, -1);
+    if (scroll) {
         Ace.gotoLine(Ace.session.getLength());
+        selection.moveCursorLineEnd();
+    } else {
+        selection.moveCursorTo(initCursor.row, initCursor.column, true);
+        selection.clearSelection();
+    }
 }
+
 
 /**
 * @function 获取状态栏数据
@@ -149,7 +157,7 @@ StatusBar.getValue = function () {
 * @param scroll {Boolean} 是否将滚动条移到底部，true - 移动到底部，false - 保持当前位置不变
 * @return void
 */
-StatusBar.addValue = (data, scroll = false) => {
+StatusBar.addValue = (data, scroll = true) => {
     if (!Ace) return;
     Ace.updateSelectionMarkers();
     const { selection, session } = Ace;
@@ -157,11 +165,11 @@ StatusBar.addValue = (data, scroll = false) => {
     Ace.gotoLine(session.getLength());
     selection.moveCursorLineEnd();
     Ace.insert(data);
-    if (!scroll) {
-        selection.moveCursorTo(initCursor.row, initCursor.column, true);
-    } else {
+    if (scroll) {
         Ace.gotoLine(session.getLength());
         selection.moveCursorLineEnd();
+    } else {
+        selection.moveCursorTo(initCursor.row, initCursor.column, true);
     }
 }
 

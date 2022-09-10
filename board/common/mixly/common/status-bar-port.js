@@ -130,7 +130,7 @@ StatusBarPort.tabDelete = (id) => {
 * @param scroll {Boolean} 是否将滚动条移到底部，true - 移动到底部，false - 保持当前位置不变
 * @return void
 */
-StatusBarPort.setValue = (portName, data, scroll = false) => {
+StatusBarPort.setValue = (portName, data, scroll = true) => {
     if (!portAce[portName]) return;
     portAce[portName].updateSelectionMarkers();
     const { selection } = portAce[portName];
@@ -181,7 +181,7 @@ StatusBarPort.getValueRange = (portName, startPos, endPos) => {
 * @param scroll {Boolean} 是否将滚动条移到底部，true - 移动到底部，false - 保持当前位置不变
 * @return void
 */
-StatusBarPort.addValue = (portName, data, scroll = false) => {
+StatusBarPort.addValue = (portName, data, scroll = true) => {
     if (!portAce[portName]) return;
     portAce[portName].updateSelectionMarkers();
     const { selection } = portAce[portName];
@@ -189,11 +189,11 @@ StatusBarPort.addValue = (portName, data, scroll = false) => {
     portAce[portName].gotoLine(portAce[portName].session.getLength());
     selection.moveCursorLineEnd();
     portAce[portName].insert(data);
-    if (!scroll) {
-        selection.moveCursorTo(initCursor.row, initCursor.column, true);
-    } else {
+    if (scroll) {
         portAce[portName].gotoLine(portAce[portName].session.getLength());
         selection.moveCursorLineEnd();
+    } else {
+        selection.moveCursorTo(initCursor.row, initCursor.column, true);
     }
 }
 

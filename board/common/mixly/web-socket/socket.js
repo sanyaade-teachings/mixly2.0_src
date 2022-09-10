@@ -69,7 +69,7 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         console.log('已连接' + WS.url);
         StatusBar.show(1);
         StatusBarPort.tabChange('output');
-        StatusBar.setValue(WS.url + '连接成功\n', true);
+        StatusBar.setValue(WS.url + '连接成功\n');
         WS.connected = true;
         Socket.toggleUIToolbar(true);
         Socket.initFunc = doFunc;
@@ -96,7 +96,7 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
 
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
-        //StatusBar.addValue(event.toString(), true);
+        //StatusBar.addValue(event.toString());
     };
 
     WS.obj.onclose = () => {
@@ -104,7 +104,7 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         console.log('已断开' + WS.url);
         StatusBar.show(1);
         StatusBarPort.tabChange('output');
-        StatusBar.setValue(WS.url + '连接断开\n', true);
+        StatusBar.setValue(WS.url + '连接断开\n');
         let ports = StatusBarPort.portsName;
         for (let i = 0; i < ports.length; i++) {
             StatusBarPort.close(ports[i]);

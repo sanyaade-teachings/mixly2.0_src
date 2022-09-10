@@ -1,11 +1,11 @@
 (() => {
 
-goog.require('Mixly.Web');
+goog.require('Mixly.Web.Ampy');
 goog.provide('Mixly.Web.SerialPort');
 
 const { Web } = Mixly;
 
-const { SerialPort } = Web;
+const { SerialPort, Ampy } = Web;
 
 SerialPort.output = [];
 SerialPort.inputBuffer = [];
@@ -25,7 +25,6 @@ SerialPort.connect = (baud = 115200, onDataLine = (message) => {}) => {
         }
         navigator.serial.requestPort()
         .then((device) => {
-            console.log(device);
             SerialPort.obj = device;
             return device.open({ baudRate: baud });
         })
@@ -62,12 +61,7 @@ SerialPort.close = async () => {
                 console.log(e);
             }
         }
-
-        try {
-            await SerialPort.obj.close();
-        } catch (e) {
-            //console.log(e);
-        }
+        await SerialPort.obj.close();
         SerialPort.obj = null;
     }
 }
@@ -176,7 +170,7 @@ SerialPort.readString = (arr) => {
     return { text: readStr, arr: arr };
 }
 
-SerialPort.startReadLine = () => {
+SerialPort.startReadLine = (onDataLine = (message) => {}) => {
     SerialPort.readLineTimer = window.setTimeout(() => {
         if (!SerialPort.keepReading) {
             window.clearTimeout(SerialPort.readLineTimer);
@@ -189,11 +183,15 @@ SerialPort.startReadLine = () => {
             const { text } = readObj;
             SerialPort.output.push((SerialPort.output.length? SerialPort.output.pop() : '') + text);
             if (endWithLF) {
+                const len = SerialPort.output.length;
+                if (len) {
+                    onDataLine(SerialPort.output[len - 1]);
+                }
                 SerialPort.output.push('');
             }
         } while (endWithLF);
         if (SerialPort.keepReading) {
-            SerialPort.startReadLine();
+            SerialPort.startReadLine(onDataLine);
         }
     }, 100);
 }
@@ -204,7 +202,7 @@ SerialPort.addReadEvent = async (onDataLine = (message) => {}) => {
     SerialPort.outputBuffer = [];
     SerialPort.refreshInputBuffer = false;
     SerialPort.refreshOutputBuffer = true;
-    SerialPort.startReadLine();
+    SerialPort.startReadLine(onDataLine);
     while (SerialPort.obj.readable && SerialPort.keepReading) {
         SerialPort.reader = SerialPort.obj.readable.getReader();
         /*const timer = setTimeout(() => {
@@ -213,10 +211,10 @@ SerialPort.addReadEvent = async (onDataLine = (message) => {}) => {
         try {
             while (true) {
                 const { value, done } = await SerialPort.reader.read();
-                if (SerialPort.refreshOutputBuffer) {
+                if (SerialPort.refreshOutputBuffer && value) {
                     SerialPort.outputBuffer = [ ...SerialPort.outputBuffer, ...value ];
                 }
-                if (SerialPort.refreshInputBuffer) {
+                if (SerialPort.refreshInputBuffer && value) {
                     SerialPort.inputBuffer = [ ...SerialPort.inputBuffer, ...value ];
                 }
                 if (done) {
@@ -277,124 +275,16 @@ SerialPort.setBaudRate = (baud) => {
     SerialPort.obj.baudRate = baud;
 }
 
-SerialPort.find = async (str, timeout, doFunc) => {
-    const startTime = Number(new Date());
-    let nowTime = startTime;
-    while (nowTime - startTime < timeout) {
-        const nowTime = Number(new Date());
-        let len = SerialPort.output.length;
-        if (len) {
-            const lastData = SerialPort.output[len - 1];
-            if (!lastData) {
-                len--;
-            }
-            for (let i = 0; i < len; i++) {
-                const data = SerialPort.output.shift();
-                if (data.indexOf(str) !== -1) {
-                    SerialPort.output = [];
-                    return true;
-                }
-            }
-        }
-        if (!((nowTime - startTime) % 500)) {
-            await doFunc();
-        }
-        if (nowTime - startTime >= timeout) {
-            console.log(str + '查找失败');
-            return false;
-        }
-        await SerialPort.sleep(100);
-    }
+SerialPort.setDTR = async (value) => {
+    await SerialPort.obj.setSignals({ dataTerminalReady: value });
 }
 
-SerialPort.interrupt = async (timeout = 5000) => {
-    await SerialPort.writeCtrlC();
-    await SerialPort.sleep(100);
-    if (await SerialPort.find('>>>', timeout, SerialPort.writeCtrlC)) {
-        return true;
-    }
+SerialPort.setRTS = async (value) => {
+    await SerialPort.obj.setSignals({ requestToSend: value });
 }
 
-SerialPort.enterRawREPL = async (timeout = 5000) => {
-    await SerialPort.writeCtrlA();
-    await SerialPort.sleep(100);
-    if (await SerialPort.find('raw REPL; CTRL-B to exit', timeout, SerialPort.writeCtrlA)) {
-        return true;
-    }
-}
-
-SerialPort.exitRawREPL = async (timeout = 5000) => {
-    await SerialPort.writeCtrlB();
-    await SerialPort.sleep(100);
-    if (await SerialPort.find('>>>', timeout, SerialPort.writeCtrlB)) {
-        return true;
-    }
-}
-
-SerialPort.put = async (fileName, code) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            if (!await SerialPort.interrupt()) {
-                reject('中断失败');
-                return;
-            }
-            console.log('中断成功')
-            if (!await SerialPort.enterRawREPL()) {
-                reject('无法进入Raw REPL');
-                return;
-            }
-            console.log('进入Raw REPL')
-            console.log('写入code中...')
-            await SerialPort.writeCodeString(fileName, code);
-            console.log('写入code成功')
-            await SerialPort.writeByteArr([4]);
-            if (!await SerialPort.exitRawREPL()) {
-                reject('无法退出Raw REPL');
-                return;
-            }
-            await SerialPort.writeCtrlD();
-            resolve();
-        } catch (error) {
-            reject(error.toString());
-        }
-    })
-}
-
-SerialPort.writeCodeString = async (fileName, code) => {
-    // 判断字符是否为汉字，
-    function isChinese(s){
-        return /[\u4e00-\u9fa5]/.test(s);
-    }
-
-    // 中文unicode编码
-    function ch2Unicode(str) {
-        if(!str){
-            return;
-        }
-        var unicode = '';
-        for (var i = 0; i <  str.length; i++) {
-            var temp = str.charAt(i);
-            if(isChinese(temp)){
-                unicode += '\\u' +  temp.charCodeAt(0).toString(16);
-            }
-            else{
-                unicode += temp;
-            }
-        }
-        return unicode;
-    }
-    await SerialPort.writeString("file = open('" + fileName + "', 'w')\r\n");
-    console.log("file = open('" + fileName + "', 'w')\r\n")
-    code = ch2Unicode(code) ?? '';
-    for (let i = 0; i < code.length / 30; i++) {
-        let newData = code.substring(i * 30, (i + 1) * 30);
-        newData = newData.replaceAll('\'', '\\\'');
-        newData = newData.replaceAll('\\x', '\\\\x');
-        newData = newData.replaceAll('\\u', '\\\\u');
-        await SerialPort.writeString("file.write('''" + newData + "''')\r\n");
-        // console.log('写入', "file.write('''" + newData + "''')\r\n");
-    }
-    await SerialPort.writeString("file.close()\r\n");
+SerialPort.setSignals = async (dtr, rts) => {
+    await SerialPort.obj.setSignals({ dataTerminalReady: dtr, requestToSend: rts });
 }
 
 SerialPort.sleep = (ms) => {

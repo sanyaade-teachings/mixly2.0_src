@@ -10,6 +10,7 @@ goog.require('Mixly.Web.Serial');
 goog.require('Mixly.Web.Esptool');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.SerialPort');
+goog.require('Mixly.Web.Ampy');
 goog.provide('Mixly.Web.BU');
 
 const {
@@ -27,7 +28,8 @@ const {
     Esptool,
     BU,
     USB,
-    SerialPort
+    SerialPort,
+    Ampy
 } = Web;
 
 const { BOARD, SELECTED_BOARD } = Config;
@@ -35,56 +37,13 @@ const { BOARD, SELECTED_BOARD } = Config;
 BU.uploading = false;
 BU.burning = false;
 
-let isConnected = false;
 let stubLoader = null;
-let closed = null;
-let espTool;
-
-BU.cancel = async function () {
-    layer.closeAll('page');
-    $('#mixly-loader-div').hide();
-
-    if (BU.uploading) {
-        BU.uploading = false;
-        layer.msg('已取消上传', {
-            time: 1000
-        });
-    } else if (BU.burning) {
-        if (port && port.writable) {
-            try {
-                if (port.writable.locked) {
-                    writer.releaseLock();
-                }
-                //await writer.close();
-            } catch (e) {
-                console.log(e);
-            }
-            outputStream = null;
-        }
-        reader.cancel();
-        await closed;
-        BU.burning = false;
-        StatusBar.addValue("已取消烧录\n", true);
-        BU.toggleUIToolbar(false);
-        layer.msg('已取消烧录', {
-            time: 1000
-        });
-    }
-}
-
-/*BU.toggleUIToolbar = function (connected) {
-    if (connected) {
-        $('#operate-connect-btn').html(MSG['disconnect']);
-        $('#operate-connect-btn').removeClass('icon-link').addClass('icon-unlink');
-        $('#connect-btn').html(MSG['disconnect']);
-        $('#connect-btn').removeClass('icon-link').addClass('icon-unlink');
-    } else {
-        $('#operate-connect-btn').html(MSG['connect']);
-        $('#operate-connect-btn').removeClass('icon-unlink').addClass('icon-link');
-        $('#connect-btn').html(MSG['connect']);
-        $('#connect-btn').removeClass('icon-unlink').addClass('icon-link');
-    }
-}*/
+const espTool = new Esptool.EspLoader({
+    updateProgress: false,
+    logMsg: false,
+    debugMsg: false,
+    debug: false
+});
 
 BU.clickConnect = async function () {
     let portName;
@@ -107,19 +66,6 @@ BU.clickConnect = async function () {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    espTool = new Esptool.EspLoader({
-        updateProgress: false,
-        logMsg: false,
-        debugMsg: false,
-        debug: false
-    });
-    /*window.addEventListener('error', function (event) {
-        StatusBar.addValue("Got an uncaught error: " + event.error + "\n", true)
-        console.log("Got an uncaught error: " + event.error)
-    });*/
-});
-
 function base64ToUint8Array(base64String) {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
@@ -137,7 +83,6 @@ function base64ToUint8Array(base64String) {
 
 const readUploadedFileAsArrayBuffer = (inputFile) => {
     const reader = new FileReader();
-
     return new Promise((resolve, reject) => {
         reader.onerror = () => {
             reader.abort();
@@ -198,7 +143,7 @@ BU.burnByUSB = () => {
         }
         BU.burning = true;
         BU.uploading = false;
-        StatusBar.setValue("固件烧录中...\n", true);
+        StatusBar.setValue(indexText['烧录中'] + '...\n');
         StatusBar.show(1);
         StatusBarPort.tabChange('output');
         const layerNum = layer.open({
@@ -210,10 +155,7 @@ BU.burnByUSB = () => {
             closeBtn: 0,
             success: function (layero, index) {
                 $(".layui-layer-page").css("z-index","198910151");
-                $("#mixly-loader-btn").off("click").click(() => {
-                    layer.close(index);
-                    BU.cancel();
-                });
+                $("#mixly-loader-btn").hide();
                 let prevPercent = 0;
                 USB.DAPLink.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
                     const nowPercent = Math.floor(progress * 100);
@@ -225,19 +167,18 @@ BU.burnByUSB = () => {
                     const nowProgressLen = Math.floor(nowPercent / 2);
                     const leftStr = new Array(nowProgressLen).fill('=').join('');
                     const rightStr = (new Array(50 - nowProgressLen).fill('-')).join('');
-                    StatusBar.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`, true);
+                    StatusBar.addValue(`[${leftStr}${rightStr}] ${nowPercent}%\n`);
                 });
                 USB.flash(buffer)
                 .then(() => {
                     layer.close(index);
-                    layer.msg('烧录成功', { time: 1000 });
-                    StatusBar.addValue("==固件烧录成功==\n", true);
+                    layer.msg(indexText['烧录成功'], { time: 1000 });
+                    StatusBar.addValue(`==${indexText['烧录成功']}==\n`);
                 })
                 .catch((error) => {
                     console.log(error);
                     layer.close(index);
-                    layer.msg('烧录失败', { time: 1000 });
-                    StatusBar.addValue("==固件烧录失败==\n", true);
+                    StatusBar.addValue(`==${indexText['烧录失败']}==\n`);
                 })
                 .finally(() => {
                     BU.burning = false;
@@ -246,6 +187,7 @@ BU.burnByUSB = () => {
                 });
             },
             end: function () {
+                $("#mixly-loader-btn").css('display', 'inline-block');
                 $('#mixly-loader-div').css('display', 'none');
                 $("#layui-layer-shade" + layerNum).remove();
             }
@@ -262,18 +204,18 @@ BU.burnWithEsptool = () => {
         }
         const { web } = SELECTED_BOARD;
         const { burn } = web;
-        StatusBar.addValue("固件读取中...", true);
+        StatusBar.setValue("固件读取中...");
         if (typeof burn.binFile !== 'object') {
-            StatusBar.addValue(" Failed!\n配置文件读取出错！\n", true);
+            StatusBar.addValue(" Failed!\n配置文件读取出错！\n");
             // await endBurn(true, false);
             return;
         }
         const { binFile } = burn;
         let firmwarePromise = [];
-        StatusBar.addValue("\n", true);
+        StatusBar.addValue("\n");
         for (let i of binFile) {
             if (i.path && i.offset) {
-                StatusBar.addValue(`读取固件 路径:${i.path}, 偏移:${i.offset}\n`, true);
+                StatusBar.addValue(`读取固件 路径:${i.path}, 偏移:${i.offset}\n`);
                 firmwarePromise.push(readBinFile(i.path, i.offset));
             }
         }
@@ -292,10 +234,10 @@ BU.burnWithEsptool = () => {
             if (!newFilmwareList.length) {
                 throw '';
             }
-            StatusBar.addValue("Done!\n即将开始烧录...\n", true);
+            StatusBar.addValue("Done!\n即将开始烧录...\n");
             BU.burning = true;
             BU.uploading = false;
-            StatusBar.addValue("固件烧录中...\n", true);
+            StatusBar.addValue(indexText['烧录中'] + '...\n');
             StatusBar.show(1);
             StatusBarPort.tabChange('output');
             const layerNum = layer.open({
@@ -307,13 +249,11 @@ BU.burnWithEsptool = () => {
                 closeBtn: 0,
                 success: async function (layero, index) {
                     $(".layui-layer-page").css("z-index","198910151");
-                    $("#mixly-loader-btn").off("click").click(() => {
-                        layer.close(index);
-                        BU.cancel();
-                    });
+                    $("#mixly-loader-btn").hide();
                     try {
                         SerialPort.refreshOutputBuffer = false;
                         SerialPort.refreshInputBuffer = true;
+                        await espTool.reset();
                         if (await clickSync()) {
                             if (burn.erase) {
                                 await clickErase();
@@ -323,22 +263,26 @@ BU.burnWithEsptool = () => {
                             }
                         }
                         layer.close(index);
+                        layer.msg(indexText['烧录成功'], { time: 1000 });
+                        StatusBar.addValue(`==${indexText['烧录成功']}==\n`);
                     } catch (error) {
+                        console.log(error);
                         layer.close(index);
+                        StatusBar.addValue(`==${indexText['烧录失败']}==\n`);
                     } finally {
-                        Serial.portClose(portName);
                         SerialPort.refreshOutputBuffer = true;
                         SerialPort.refreshInputBuffer = false;
                     }
                 },
                 end: function () {
+                    $("#mixly-loader-btn").css('display', 'inline-block');
                     $('#mixly-loader-div').css('display', 'none');
                     $("#layui-layer-shade" + layerNum).remove();
                 }
             });
         })
         .catch(async e => {
-            StatusBar.addValue("Failed!\n无法获取文件，请检查网络！\n", true);
+            StatusBar.addValue("Failed!\n无法获取文件，请检查网络！\n");
             StatusBar.addValue("\n" + e + "\n", true);
         });
     });
@@ -346,8 +290,8 @@ BU.burnWithEsptool = () => {
 
 async function clickSync() {
     if (await espTool.sync()) {
-        StatusBar.addValue("正在连接 " + await espTool.chipName() + "\n", true);
-        StatusBar.addValue("MAC地址：" + formatMacAddr(espTool.macAddr()) + "\n", true);
+        StatusBar.addValue("正在连接 " + await espTool.chipName() + "\n");
+        StatusBar.addValue("MAC地址：" + formatMacAddr(espTool.macAddr()) + "\n");
         stubLoader = await espTool.runStub();
         return 1;
     }
@@ -363,10 +307,10 @@ function sleep(ms) {
  * Click handler for the erase button.
  */
 async function clickErase() {
-    StatusBar.addValue("正在擦除闪存，请稍等..." + "\n", true);
+    StatusBar.addValue("正在擦除闪存，请稍等..." + "\n");
     let stamp = Date.now();
     await stubLoader.eraseFlash();
-    StatusBar.addValue("擦除完成. 擦除耗时" + (Date.now() - stamp) + "ms" + "\n", true);
+    StatusBar.addValue("擦除完成. 擦除耗时" + (Date.now() - stamp) + "ms" + "\n");
     await sleep(100);
 }
 
@@ -375,16 +319,10 @@ async function clickErase() {
  * Click handler for the program button.
  */
 async function clickProgram(binFileOffset, binFile = null) {
-    StatusBar.addValue("正在烧录固件\n", true);
+    StatusBar.addValue("正在烧录固件\n");
     let binOffset = parseInt(binFileOffset, 16);
     await stubLoader.flashData(binFile, binOffset);
     await sleep(100);
-}
-
-async function closeReader() {
-    keepReading = false;
-    reader.cancel();
-    await closed;
 }
 
 function formatMacAddr(macAddr) {
@@ -406,7 +344,7 @@ BU.uploadByPort = (port) => {
         const { serialport } = portObj;
         BU.burning = false;
         BU.uploading = true;
-        StatusBar.setValue("程序上传中...\n", true);
+        StatusBar.setValue(indexText['上传中'] + '...\n');
         StatusBar.show(1);
         StatusBarPort.tabChange('output');
         const layerNum = layer.open({
@@ -417,24 +355,22 @@ BU.uploadByPort = (port) => {
             resize: false,
             closeBtn: 0,
             success: function (layero, index) {
+                $("#mixly-loader-btn").hide();
                 $(".layui-layer-page").css("z-index","198910151");
-                $("#mixly-loader-btn").off("click").click(() => {
-                    layer.close(index);
-                    BU.cancel();
-                });
-                serialport.put('main.py', MFile.getCode())
+                const ampy = new Ampy(serialport);
+                ampy.put('main.py', MFile.getCode())
                 .then(() => {
                     layer.close(index);
-                    layer.msg('程序写入成功', { time: 1000 });
-                    StatusBar.addValue("==程序写入成功==\n", true);
+                    layer.msg(indexText['上传成功'], { time: 1000 });
+                    StatusBar.addValue(`==${indexText['上传成功']}==\n`);
                     StatusBarPort.tabChange(port);
                     StatusBarPort.scrollToTheBottom(port);
                 })
                 .catch((error) => {
                     console.log(error);
                     layer.close(index);
-                    layer.msg('程序写入失败', { time: 1000 });
-                    StatusBar.addValue("==程序写入失败==\n", true);
+                    StatusBar.addValue(`[Error] ${error}\n`);
+                    StatusBar.addValue(`==${indexText['上传失败']}==\n`);
                 })
                 .finally(() => {
                     BU.burning = false;
@@ -442,6 +378,7 @@ BU.uploadByPort = (port) => {
                 });
             },
             end: function () {
+                $("#mixly-loader-btn").css('display', 'inline-block');
                 $('#mixly-loader-div').css('display', 'none');
                 $("#layui-layer-shade" + layerNum).remove();
             }
@@ -465,7 +402,7 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
         }
         if (finish) {
             errorMsg("To run the new firmware, please reset your device.")
-            StatusBar.addValue("要运行新固件，请重置您的设备。\n", true);
+            StatusBar.addValue("要运行新固件，请重置您的设备。\n");
         }
         BU.toggleUIToolbar(false);
         layer.closeAll('page');
@@ -474,7 +411,7 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
         BU.uploading = false;
     }
     if (endType || typeof firmwareData !== 'object') {
-        StatusBar.addValue("固件获取失败！\n", true);
+        StatusBar.addValue("固件获取失败！\n");
         layer.close(layerType);
         return;
     }
@@ -482,8 +419,8 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
     BU.uploading = false;
     if (espTool.connected()) {
         BU.toggleUIToolbar(true);
-        layer.title('上传中...', layerType);
-        StatusBar.addValue("固件读取中... ", true);
+        layer.title(indexText['上传中'] + '...', layerType);
+        StatusBar.addValue("固件读取中... ");
         let firmwareList = [];
         for (let i of firmwareData) {
             const firmware = {
@@ -492,7 +429,7 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
             };
             firmwareList.push(firmware);
         }
-        StatusBar.addValue("Done!\n即将开始烧录...\n", true);
+        StatusBar.addValue("Done!\n即将开始烧录...\n");
         if (espTool.connected()) {
             if (await clickSync()) {
                 if (burn.erase) {
@@ -503,7 +440,7 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
             }
             await endBurn(true, true);
         } else {
-            StatusBar.addValue("设备已断开连接！\n", true);
+            StatusBar.addValue("设备已断开连接！\n");
             await endBurn(false, true);
         }
     } else {
@@ -517,21 +454,21 @@ BU.uploadWithAvrUploader = async (endType, firmwareData, layerType) => {
         layer.close(layerType);
         return;
     }
-    StatusBar.addValue("上传中...\n", true);
-    layer.title('上传中...', layerType);
+    StatusBar.addValue(indexText['上传中'] + '...\n');
+    layer.title(indexText['上传中'] + '...', layerType);
     try {
         let uploadSucMessageShow = true;
         await AvrUploader.upload(firmwareData[0].data, (progress) => {
             if (progress >= 100 && uploadSucMessageShow) {
-                StatusBar.addValue("==上传成功==\n", true);
-                layer.msg('上传成功', { time: 1000 });
+                StatusBar.addValue(`==${indexText['上传成功']}==\n`);
+                layer.msg(indexText['上传成功'], { time: 1000 });
                 layer.close(layerType);
                 uploadSucMessageShow = false;
             }
         }, true);
     } catch (error) {
-        StatusBar.addValue("==上传失败==\n", true);
-        layer.msg('上传失败', { time: 1000 });
+        StatusBar.addValue(`==${indexText['上传失败']}==\n`);
+        layer.msg(indexText['上传失败'], { time: 1000 });
     }
 }
 

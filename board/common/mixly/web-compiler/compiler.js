@@ -75,14 +75,14 @@ Compiler.upload = async () => {
             await AvrUploader.connect(boardUpload, {});
             Compiler.generateCommand('upload', BU.uploadWithAvrUploader);
         } catch (error) {
-            StatusBar.addValue(error.toString() + '\n', true);
+            StatusBar.addValue(error.toString() + '\n');
         }
     } else {
         try {
             await BU.justConnect();
         } catch (e) {
             console.log(e);
-            StatusBar.addValue("已取消上传\n", true);
+            StatusBar.addValue("已取消上传\n");
             BU.burning = false;
             BU.uploading = false;
             return;
@@ -102,7 +102,7 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
         operate
     };
     let commandStr = Compiler.URL + '/?' + Url.jsonToUrl(command);
-    StatusBar.setValue('send -> ' + commandStr + '\n', true);
+    StatusBar.setValue('send -> ' + commandStr + '\n');
     console.log('send -> ', commandStr);
     const compileLayer = layer.open({
         type: 1,
@@ -151,10 +151,10 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
         const dataObj = JSON.parse(data);
         console.log(dataObj);
         if (dataObj.error) {
-            StatusBar.addValue(decodeURIComponent(dataObj.error), true);
+            StatusBar.addValue(decodeURIComponent(dataObj.error));
             endFunc(true, null, layerType);
         } else {
-            StatusBar.addValue(decodeURIComponent(dataObj.compileMessage), true);
+            StatusBar.addValue(decodeURIComponent(dataObj.compileMessage));
             endFunc(false, dataObj.data, layerType);
         } 
     })

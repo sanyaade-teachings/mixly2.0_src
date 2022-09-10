@@ -1318,9 +1318,9 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
                     newPortObj.serialport.close();
                     StatusBarPort.tabChange("output");
                     if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
-                        StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n', true);
+                        StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n');
                     } else {
-                        StatusBar.addValue(indexText['已关闭串口'] + portName + '\n', true);
+                        StatusBar.addValue(indexText['已关闭串口'] + portName + '\n');
                     }
                 }
             });

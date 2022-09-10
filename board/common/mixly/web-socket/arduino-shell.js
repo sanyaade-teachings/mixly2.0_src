@@ -74,7 +74,7 @@ ArduShell.compile = () => {
                 layer.title(indexText['编译终止中'] + '...', index);
                 ArduShell.cancel();
             });
-            StatusBar.setValue(indexText["编译中"] + "...\n", true);
+            StatusBar.setValue(indexText["编译中"] + "...\n");
             const code = MFile.getCode();
             Socket.sendCommand({
                 obj: 'ArduShell',
@@ -144,7 +144,7 @@ ArduShell.upload = (boardType, port) => {
                 ArduShell.cancel();
             });
             StatusBar.show(1);
-            StatusBar.setValue(indexText["上传中"] + "...\n", true);
+            StatusBar.setValue(indexText["上传中"] + "...\n");
             const code = MFile.getCode();
             Socket.sendCommand({
                 obj: 'ArduShell',
@@ -168,9 +168,9 @@ ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix, true);
+    StatusBar.addValue(prefix);
     const message = (type === 'compile' ? indexText["编译成功"] : indexText["上传成功"]);
-    StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + timeCostStr + ")==\n", true);
+    StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
     layer.msg(message + '！', {
         time: 1000
     });
@@ -182,7 +182,7 @@ ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
 }
 
 ArduShell.operateOnError = (type, layerNum, error) => {
-    StatusBar.addValue(error, true);
+    StatusBar.addValue(error);
 }
 
 ArduShell.operateEndError = (type, layerNum, error) => {
@@ -192,10 +192,10 @@ ArduShell.operateEndError = (type, layerNum, error) => {
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix, true);
-    error && StatusBar.addValue(error + '\n', true);
+    StatusBar.addValue(prefix);
+    error && StatusBar.addValue(error + '\n');
     const message = (type === 'compile' ? indexText["编译失败"] : indexText["上传失败"]);
-    StatusBar.addValue("==" + message + "==\n", true);
+    StatusBar.addValue("==" + message + "==\n");
     ArduShell.compiling = false;
     ArduShell.uploading = false;
 }

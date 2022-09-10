@@ -183,7 +183,7 @@ ArduShell.compile = (doFunc = () => {}) => {
         }
     });
     setTimeout(() => {
-        StatusBar.setValue(indexText["编译中"] + "...\n", true);
+        StatusBar.setValue(indexText["编译中"] + "...\n");
 
         let myLibPath = Env.indexPath + "/libraries/myLib/";
         if (fs_extend.isdir(myLibPath))
@@ -285,7 +285,7 @@ ArduShell.upload = (boardType, port) => {
         }
     });
     StatusBar.show(1);
-    StatusBar.setValue(indexText["上传中"] + "...\n", true);
+    StatusBar.setValue(indexText["上传中"] + "...\n");
     const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),
     buildPath = path.resolve(Env.clientPath, './mixlyBuild'),
@@ -479,7 +479,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
 
         ArduShell.shell.stdout.on('data', (data) => {
             if (data.length < 1000) {
-                StatusBar.addValue(data, true);
+                StatusBar.addValue(data);
             }
         });
 
@@ -489,7 +489,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             } catch (error) {
                 console.log(error);
             }
-            StatusBar.addValue(data, true);
+            StatusBar.addValue(data);
         });
 
         ArduShell.shell.on('close', (code) => {
@@ -500,7 +500,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             timeCostStr = (timeCostMinute ? timeCostMinute + "m" : "") + timeCostSecond + "s";
             if (code === 0) {
                 const message = (type === 'compile' ? indexText["编译成功"] : indexText["上传成功"]);
-                StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + timeCostStr + ")==\n", true);
+                StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
                 layer.msg(message + '！', {
                         time: 1000
                     });
@@ -508,7 +508,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             } else {
                 // code = 1 用户终止运行
                 const message = (type === 'compile' ? indexText["编译失败"] : indexText["上传失败"]);
-                StatusBar.addValue("==" + message + "==\n", true);
+                StatusBar.addValue("==" + message + "==\n");
             }
             StatusBar.scrollToTheBottom();
         });
@@ -583,7 +583,7 @@ ArduShell.writeFile = function (readPath, writePath) {
                             });
                         } catch (e) {
                             console.log(e);
-                            StatusBar.addValue(e + "\n", true);
+                            StatusBar.addValue(e + "\n");
                         }
                         layer.close(layerNum);
                     }, 500);

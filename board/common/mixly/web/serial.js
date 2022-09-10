@@ -694,10 +694,10 @@ Serial.refreshTerminalMenu = (port) => {
             }, {
                 title: XML.render(menuElem, { name: indexText['帮助'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-help`
-            }, {type:'-'}, {
+            }/*, {type:'-'}, {
                 title: XML.render(menuElem, { name: indexText['退出串口终端'], hotKey: 'exit' }),
                 id: `tab-${newPort}-ace-terminal-exit`
-            }],
+            }*/],
             terminalClosed: [{
                 title: XML.render(menuElem, { name: indexText['清空'], hotKey: 'Ctrl+E' }),
                 id: `tab-${newPort}-ace-empty`
@@ -718,10 +718,10 @@ Serial.refreshTerminalMenu = (port) => {
             (toolConfig.ctrlDBtn ? {
                 title: XML.render(menuElem, { name: indexText['复位'], hotKey: '' }),
                 id: `tab-${newPort}-serial-send-ctrld`
-            } : {}), {
+            } : {})/*, {
                 title: XML.render(menuElem, { name: indexText['打开串口终端'], hotKey: 'Ctrl+T' }),
                 id: `tab-${newPort}-ace-terminal-open`
-            }]
+            }*/]
         },
         portClosed: {
             terminalOpend: [{
@@ -730,10 +730,10 @@ Serial.refreshTerminalMenu = (port) => {
             }, {
                 title: XML.render(menuElem, { name: indexText['帮助'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-help`
-            }, {type:'-'}, {
+            }/*, {type:'-'}, {
                 title: XML.render(menuElem, { name: indexText['退出串口终端'], hotKey: 'exit' }),
                 id: `tab-${newPort}-ace-terminal-exit`
-            }],
+            }*/],
             terminalClosed: [{
                 title: XML.render(menuElem, { name: indexText['清空'], hotKey: 'Ctrl+E' }),
                 id: `tab-${newPort}-ace-empty`
@@ -746,10 +746,10 @@ Serial.refreshTerminalMenu = (port) => {
             }, {
                 title: XML.render(menuElem, { name: indexText['默认字号'], hotKey: 'Ctrl+0' }),
                 id: `tab-${newPort}-ace-fontsize-default`
-            }, {type:'-'}, {
+            }/*, {type:'-'}, {
                 title: XML.render(menuElem, { name: indexText['打开串口终端'], hotKey: 'Ctrl+T' }),
                 id: `tab-${newPort}-ace-terminal-open`
-            }]
+            }*/]
         }
     }
     terminalMenu.data = TERMINAL_MENU_DATA[
@@ -1029,7 +1029,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
     })
     .then(() => {
         Serial.onConnect(port);
-       /* portObj.serialport.AddOnConnectEvent(() => {
+        /* portObj.serialport.AddOnConnectEvent(() => {
             Serial.onConnect(port);
         });*/
         portObj.serialport.AddOnDisconnectEvent(() => {
@@ -1057,9 +1057,9 @@ Serial.onConnect = (port) => {
             Serial.portClose(portName);
             StatusBarPort.tabChange("output");
             if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
-                StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n', true);
+                StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n');
             } else {
-                StatusBar.addValue(indexText['已关闭串口'] + portName + '\n', true);
+                StatusBar.addValue(indexText['已关闭串口'] + portName + '\n');
             }
         }
     });
@@ -1085,6 +1085,9 @@ Serial.onDisconnect = (port) => {
     const { serialport } = portObj;
     if (USB.DAPLink && USB.DAPLink.connected) {
         USB.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_SERIAL_DATA);
+    }
+    if (!portObj.portOpened) {
+        return;
     }
     portObj.portOpened = false;
     StatusBarPort.close(port);

@@ -243,6 +243,8 @@
         {
             "path":"/web/ampy.js",
             "require":[
+                "Mixly.StatusBar",
+                "Mixly.Web"
             ],
             "provide":[
                 "Mixly.Web.Ampy"
@@ -260,7 +262,8 @@
                 "Mixly.Web.Serial",
                 "Mixly.Web.Esptool",
                 "Mixly.Web.USB",
-                "Mixly.Web.SerialPort"
+                "Mixly.Web.SerialPort",
+                "Mixly.Web.Ampy"
             ],
             "provide":[
                 "Mixly.Web.BU"
@@ -316,19 +319,6 @@
             ]
         },
         {
-            "path":"/web/serial-old.js",
-            "require":[
-                "Mixly.Charts",
-                "Mixly.StatusBar",
-                "Mixly.LayerExtend",
-                "Mixly.Config",
-                "Mixly.MFile"
-            ],
-            "provide":[
-                "Mixly.Web.SerialOld"
-            ]
-        },
-        {
             "path":"/web/serial.js",
             "require":[
                 "Mixly.Charts",
@@ -350,7 +340,7 @@
         {
             "path":"/web/serialport.js",
             "require":[
-                "Mixly.Web"
+                "Mixly.Web.Ampy"
             ],
             "provide":[
                 "Mixly.Web.SerialPort"
@@ -359,7 +349,7 @@
         {
             "path":"/web/usb.js",
             "require":[
-                "Mixly.Web"
+                "Mixly.Web.Ampy"
             ],
             "provide":[
                 "Mixly.Web.USB"

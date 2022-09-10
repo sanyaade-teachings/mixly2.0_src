@@ -1,13 +1,13 @@
 (() => {
 
-goog.require('Mixly.Web');
+goog.require('Mixly.Web.Ampy');
 goog.provide('Mixly.Web.USB');
 
 const {
     Web
 } = Mixly;
 
-const { USB } = Web;
+const { USB, Ampy } = Web;
 
 USB.output = [];
 
@@ -147,126 +147,6 @@ USB.write = async (type, data, dataTail) => {
 
 USB.setBaudRate = (baud) => {
     return USB.DAPLink.setSerialBaudrate(baud);
-}
-
-USB.find = async (str, timeout, doFunc) => {
-    const startTime = Number(new Date());
-    let nowTime = startTime;
-    while (nowTime - startTime < timeout) {
-        const nowTime = Number(new Date());
-        let len = USB.output.length;
-        if (len) {
-            const lastData = USB.output[len - 1];
-            if (!lastData) {
-                len--;
-            }
-            for (let i = 0; i < len; i++) {
-                const data = USB.output.shift();
-                if (data.indexOf(str) !== -1) {
-                    USB.output = [];
-                    return true;
-                }
-            }
-        }
-        if (!((nowTime - startTime) % 500)) {
-            await doFunc();
-        }
-        if (nowTime - startTime >= timeout) {
-            console.log(str + '查找失败');
-            return false;
-        }
-        await USB.sleep(100);
-    }
-}
-
-USB.interrupt = async (timeout = 5000) => {
-    await USB.writeCtrlC();
-    await USB.sleep(100);
-    if (await USB.find('>>>', timeout, USB.writeCtrlC)) {
-        return true;
-    }
-}
-
-USB.enterRawREPL = async (timeout = 5000) => {
-    await USB.writeCtrlA();
-    await USB.sleep(100);
-    if (await USB.find('raw REPL; CTRL-B to exit', timeout, USB.writeCtrlA)) {
-        return true;
-    }
-}
-
-USB.exitRawREPL = async (timeout = 5000) => {
-    await USB.writeCtrlB();
-    await USB.sleep(100);
-    if (await USB.find('>>>', timeout, USB.writeCtrlB)) {
-        return true;
-    }
-}
-
-USB.put = async (fileName, code) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            if (!await USB.interrupt()) {
-                reject('中断失败');
-                return;
-            }
-            console.log('中断成功')
-            if (!await USB.enterRawREPL()) {
-                reject('无法进入Raw REPL');
-                return;
-            }
-            console.log('进入Raw REPL')
-            console.log('写入code中...')
-            await USB.writeCodeString(fileName, code);
-            console.log('写入code成功')
-            await USB.writeByteArr([4]);
-            if (!await USB.exitRawREPL()) {
-                reject('无法退出Raw REPL');
-                return;
-            }
-            await USB.writeCtrlD();
-            resolve();
-        } catch (error) {
-            reject(error.toString());
-        }
-    })
-}
-
-USB.writeCodeString = async (fileName, code) => {
-    // 判断字符是否为汉字，
-    function isChinese(s){
-        return /[\u4e00-\u9fa5]/.test(s);
-    }
-
-    // 中文unicode编码
-    function ch2Unicode(str) {
-        if(!str){
-            return;
-        }
-        var unicode = '';
-        for (var i = 0; i <  str.length; i++) {
-            var temp = str.charAt(i);
-            if(isChinese(temp)){
-                unicode += '\\u' +  temp.charCodeAt(0).toString(16);
-            }
-            else{
-                unicode += temp;
-            }
-        }
-        return unicode;
-    }
-    await USB.writeString("file = open('" + fileName + "', 'w')\r\n");
-    console.log("file = open('" + fileName + "', 'w')\r\n")
-    code = ch2Unicode(code) ?? '';
-    for (let i = 0; i < code.length / 30; i++) {
-        let newData = code.substring(i * 30, (i + 1) * 30);
-        newData = newData.replaceAll('\'', '\\\'');
-        newData = newData.replaceAll('\\x', '\\\\x');
-        newData = newData.replaceAll('\\u', '\\\\u');
-        await USB.writeString("file.write('''" + newData + "''')\r\n");
-        // console.log('写入', "file.write('''" + newData + "''')\r\n");
-    }
-    await USB.writeString("file.close()\r\n");
 }
 
 USB.flash = (buffer) => {

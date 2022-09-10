@@ -136,7 +136,7 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
                         layer.msg(indexText['写文件出错了，错误是：'] + err, {
                             time: 1000
                         });
-                        StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n', true);
+                        StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n');
                     });
                 }
                 $("#mixly-loader-btn").off("click").click(() => {
@@ -178,7 +178,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
         layer.msg(message + '!', {
             time: 1000
         });
-        StatusBar.setValue(`==${message}==`, true);
+        StatusBar.setValue(`==${message}==`);
         if (type === 'upload' && Serial.uploadPorts.length === 1) {
             Serial.connect(Serial.uploadPorts[0].name, null, (opened) => {
                 if (opened) {
@@ -192,7 +192,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
         layer.msg(indexText['写文件出错了，错误是：'] + error, {
             time: 1000
         });
-        StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n', true);
+        StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n');
         console.log(error);
     })
     .finally(() => {
@@ -236,7 +236,7 @@ BU.initWithDropdownBox = function (type, startPath) {
                     layer.msg(indexText['写文件出错了，错误是：'] + err, {
                         time: 1000
                     });
-                    StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n', true);
+                    StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n');
                 });
             }
         },
@@ -344,7 +344,7 @@ BU.cancel = function () {
 BU.initBurn = function () {
     if (BU.burning) return;
     const { burn } = SELECTED_BOARD;
-    StatusBar.setValue('', true);
+    StatusBar.setValue('');
     StatusBarPort.tabChange("output");
     StatusBar.show(1);
     BU.burning = true;
@@ -364,7 +364,7 @@ BU.initBurn = function () {
 BU.initUpload = function () {
     if (BU.uploading) return;
     const { upload } = SELECTED_BOARD;
-    StatusBar.setValue('', true);
+    StatusBar.setValue('');
     StatusBarPort.tabChange("output");
     StatusBar.show(1);
     BU.burning = false;
@@ -451,7 +451,7 @@ BU.searchLibs = function (dirPath, code, libArr) {
                     if (oldLibPath) {
                         const extname = path.extname(oldLibPath);
                         const newLibPath = path.resolve(dirPath, moduleArr[j] + extname);
-                        StatusBar.addValue(indexText['拷贝库'] + ' ' + moduleArr[j] + '\n', true);
+                        StatusBar.addValue(indexText['拷贝库'] + ' ' + moduleArr[j] + '\n');
                         fs.copyFileSync(oldLibPath, newLibPath);
                         libArr.push(moduleArr[j] + extname);
                         if (extname === '.py') {
@@ -496,11 +496,11 @@ BU.uploadByCmd = async function (layerNum, port, command) {
 
     fs_extra.outputFile(upload.filePath, code)
     .then(() => {
-        StatusBar.addValue(indexText['上传中'] + '...\n', true);
+        StatusBar.addValue(indexText['上传中'] + '...\n');
         BU.runCmd(layerNum, 'upload', port, command);
     })
     .catch((error) => {
-        StatusBar.setValue(error.toString() + '\n', true);
+        StatusBar.setValue(error.toString() + '\n');
         console.log(error);
         layer.close(layerNum);
         BU.uploading = false;
@@ -525,7 +525,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
         BU.shell = null;
         const text = StatusBar.getValue();
         if (text.lastIndexOf('\n') !== text.length - 1) {
-            StatusBar.addValue('\n', true);
+            StatusBar.addValue('\n');
         }
         if (error) {
             try {
@@ -533,12 +533,12 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             } catch (e) {
                 console.log(e);
             }
-            StatusBar.addValue(error + "\n", true);
+            StatusBar.addValue(error + "\n");
         } else {
             layer.msg((type === 'burn' ? indexText['烧录成功'] + '！' : indexText['上传成功'] + '！'), {
                 time: 1000
             });
-            StatusBar.addValue((type === 'burn' ? indexText['烧录成功'] + '！' : indexText['上传成功'] + '！') + '\n', true);
+            StatusBar.addValue((type === 'burn' ? indexText['烧录成功'] + '！' : indexText['上传成功'] + '！') + '\n');
             if (type === 'upload') {
                 StatusBar.show(1);
                 Serial.connect(port, null, (opened) => {
@@ -556,7 +556,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             } catch (e) {
                 console.log(e);
             }
-            StatusBar.addValue(data, true);
+            StatusBar.addValue(data);
         }
     });
 }
@@ -612,7 +612,7 @@ BU.burnWithSpecialBin = () => {
             $(".layui-layer-shade").remove();
             if (initBtnClicked) {
                 let selectedFirmwareName = $('#mixly-selector-type option:selected').val();
-                StatusBar.setValue('', true);
+                StatusBar.setValue('');
                 StatusBarPort.tabChange("output");
                 StatusBar.show(1);
                 BU.burning = true;

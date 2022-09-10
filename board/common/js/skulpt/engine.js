@@ -113,9 +113,9 @@ PyEngine.prototype.skInput = function(prompt) {
     return new Promise((resolve, reject) => {
         var currText =  Mixly.StatusBar.getValue();
         if (currText.lastIndexOf('\n') !== currText.length - 1)
-            Mixly.StatusBar.addValue('\n>>>' + prompt, true);
+            Mixly.StatusBar.addValue('\n>>>' + prompt);
         else
-            Mixly.StatusBar.addValue('>>>' + prompt, true);
+            Mixly.StatusBar.addValue('>>>' + prompt);
         const { Ace } = Mixly.StatusBar;
         const { selection } = Ace;
         const session = Ace.getSession();
@@ -302,7 +302,7 @@ var GLOBAL_VALUE;
  * Runs the given python code, resetting the console and Trace Table.
  */
 PyEngine.prototype.run = function(type) {
-    Mixly.StatusBar.setValue('', true);
+    Mixly.StatusBar.setValue('');
     Mixly.StatusBar.show(1);
     if (!$('#skulpt-img').length) {
         $('body').append($(
@@ -368,7 +368,7 @@ PyEngine.prototype.run = function(type) {
             } catch (error) {
                 console.log(error);
             }
-            Mixly.StatusBar.addValue(lineText, true);
+            Mixly.StatusBar.addValue(lineText);
         },
         // Function to handle loading in new files
         read: this.readFile.bind(this),
@@ -394,7 +394,7 @@ PyEngine.prototype.run = function(type) {
     if(code === "") {
         engine.programStatus['running'] = false;
         $("#loading").css('display', "none");
-        Mixly.StatusBar.setValue('==无程序需运行==\n', true);
+        Mixly.StatusBar.setValue('==无程序需运行==\n');
         return;
     }
 
@@ -538,9 +538,9 @@ PyEngine.prototype.run = function(type) {
             console.log('success');
             const nowValue = Mixly.StatusBar.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n', true);
+                Mixly.StatusBar.addValue('\n');
             }
-            Mixly.StatusBar.addValue('==程序运行完成==\n', true);
+            Mixly.StatusBar.addValue('==程序运行完成==\n');
         },
         function(error) {
             engine.programStatus['running'] = false;
@@ -561,9 +561,9 @@ PyEngine.prototype.run = function(type) {
             console.log(error.toString());
             const nowValue = Mixly.StatusBar.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n', true);
+                Mixly.StatusBar.addValue('\n');
             }
-            Mixly.StatusBar.addValue(error.toString() + '\n==程序运行完成==\n', true);
+            Mixly.StatusBar.addValue(error.toString() + '\n==程序运行完成==\n');
         }
 );
 

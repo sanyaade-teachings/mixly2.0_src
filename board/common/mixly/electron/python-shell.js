@@ -52,7 +52,7 @@ function message_decode(s) {
 PythonShell.run = function () {
     const cursorCallback = PythonShell.addEvent();
     StatusBar.show(1);
-    StatusBar.setValue(indexText["程序正在运行"] + "...\n", true);
+    StatusBar.setValue(indexText["程序正在运行"] + "...\n");
     var code = Mixly.MFile.getCode();
     code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) { return decodeURIComponent(s.replace(/_/g, '%')); });
     try {
@@ -74,7 +74,7 @@ PythonShell.run = function () {
             layer.msg(indexText['写文件出错了，错误是：'] + err, {
                 time: 1000
             });
-            StatusBar.setValue(indexText['写文件出错了，错误是：'] + err + '\n', true);
+            StatusBar.setValue(indexText['写文件出错了，错误是：'] + err + '\n');
             StatusBar.show(1);
         } else {
             shell = new Modules.PythonShell(Env.pyFilePath, options);
@@ -91,9 +91,9 @@ PythonShell.run = function () {
                 var timeCostStr = timeCost + "ms";
                 //if (code == 0) {
                 if (StatusBar.getValue().lastIndexOf("\n") == StatusBar.getValue().length - 1)
-                    StatusBar.addValue("==" + indexText["程序运行完成"]  + "(" + indexText["用时"] + " " + timeCostStr + ")==\n", false);
+                    StatusBar.addValue("==" + indexText["程序运行完成"]  + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
                 else
-                    StatusBar.addValue("\n==" + indexText["程序运行完成"]  + "(" + indexText["用时"] + " " + timeCostStr + ")==\n", false);
+                    StatusBar.addValue("\n==" + indexText["程序运行完成"]  + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
                 StatusBar.scrollToTheBottom();
                 shell = null;
                 //}
@@ -113,7 +113,7 @@ PythonShell.run = function () {
                 } catch (e) {
                     console.log(e);
                 }
-                StatusBar.addValue(data, true);
+                StatusBar.addValue(data);
 
                 if (data.lastIndexOf(">>>") != -1 && shell) {
                     input_prompt_message = data.substring(data.lastIndexOf(">>>"));
@@ -135,14 +135,14 @@ PythonShell.run = function () {
                 }
                 try {
                     if (Env.currentPlatform === 'darwin') {
-                        StatusBar.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'utf-8'), false);
+                        StatusBar.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'utf-8'));
                     } else {
-                        StatusBar.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'gbk'), false);
+                        StatusBar.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'gbk'));
                     }
                     err = message_decode(err);
                 } catch (e) {
                     err = message_decode(err);
-                    StatusBar.addValue(err, false);
+                    StatusBar.addValue(err);
                 }
                 StatusBar.scrollToTheBottom();
                 shell = null;
@@ -166,7 +166,7 @@ PythonShell.stop = function () {
         //StatusBar.addValue("\n==" + indexText["程序运行完成"] + "==\n", false);
         shell = null;
     } else {
-        StatusBar.addValue("\n==" + indexText["无程序在运行"] + "==\n", false);
+        StatusBar.addValue("\n==" + indexText["无程序在运行"] + "==\n");
     }
     StatusBar.scrollToTheBottom();
 }

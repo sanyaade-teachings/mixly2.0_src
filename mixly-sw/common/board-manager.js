@@ -1002,7 +1002,9 @@ BoardManager.loadBoards = () => {
             webSocket: false
         }
     };
-    newBoardsList.push(boardAdd);
+    if (Env.isElectron) {
+        newBoardsList.push(boardAdd);
+    }
     BoardManager.boardsList = newBoardsList;
 }
 

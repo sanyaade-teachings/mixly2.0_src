@@ -937,6 +937,26 @@ BoardManager.loadBoards = () => {
     for (let i = 0; BOARDS_INFO[i]; i++) {
         if (!USER.boardIgnore.includes(BOARDS_INFO[i].boardName)) {
             const config = BOARDS_INFO[i];
+            const {
+                env = {
+                    electron: true,
+                    web: true,
+                    webCompiler: true,
+                    webSocket: true
+                }
+            } = config;
+            let show = false;
+            if ((Env.hasSocketServer && env.webSocket)
+             || (Env.hasCompiler && env.webCompiler)
+             || (Env.isElectron && env.electron)
+             || (!Env.isElectron && env.web)) {
+                show = true;
+            } else {
+                show = false;
+            }
+            if (!show) {
+                continue;
+            }
             if (Env.isElectron) {
                 const indexPath = path.resolve(__dirname, config.boardIndex);
                 if (fs_extend.isfile(indexPath))
@@ -996,30 +1016,12 @@ BoardManager.showBoardsCard = (row, col) => {
     const params = 'error=0';
     for (let i = 0; i < boardsList.length; i++) {
         const {
-            env = {
-                electron: true,
-                web: true,
-                webCompiler: true,
-                webSocket: true
-            },
             thirdPartyBoard = false,
             boardIndex,
             boardName,
             boardImg,
             pyFilePath
         } = boardsList[i];
-        let show = false;
-        if ((Env.hasSocketServer && env.webSocket)
-         || (Env.hasCompiler && env.webCompiler)
-         || (Env.isElectron && env.electron)
-         || (!Env.isElectron && env.web)) {
-            show = true;
-        } else {
-            show = false;
-        }
-        if (!show) {
-            continue;
-        }
         if (boardIndex !== 'javascript:;' && !pyFilePath) {
             const configUrl = Url.jsonToUrl({
                 thirdPartyBoard,

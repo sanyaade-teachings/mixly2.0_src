@@ -61,7 +61,11 @@ SerialPort.close = async () => {
                 console.log(e);
             }
         }
-        await SerialPort.obj.close();
+        try {
+            await SerialPort.obj.close();
+        } catch (error) {
+            console.log(error);
+        }
         SerialPort.obj = null;
     }
 }

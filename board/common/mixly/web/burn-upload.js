@@ -357,7 +357,7 @@ BU.uploadByPort = (port) => {
             success: function (layero, index) {
                 $("#mixly-loader-btn").hide();
                 $(".layui-layer-page").css("z-index","198910151");
-                const ampy = new Ampy(serialport);
+                const ampy = new Ampy(serialport, port === 'web-serial');
                 ampy.put('main.py', MFile.getCode())
                 .then(() => {
                     layer.close(index);

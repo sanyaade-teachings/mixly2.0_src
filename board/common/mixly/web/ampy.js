@@ -1,36 +1,82 @@
 (() => {
 
+goog.require('Mixly.MString');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.Ampy');
 
-const { Web, StatusBar } = Mixly;
+const {
+    Web,
+    StatusBar,
+    MString
+} = Mixly;
+
+const GET_FILES_INFO_COMMAND = `try:        
+    import os
+except ImportError:
+    import uos as os
+
+def listdir(directory):
+    try:
+        if directory == '/':
+            return sorted([directory + f for f in os.listdir(directory)])
+        else:
+            return sorted([directory + '/' + f for f in os.listdir(directory)])
+    except:
+        return sorted([f for f in os.listdir()])
+
+r = []
+for f in listdir(''):
+    try:
+        size = os.stat(f)[6]
+    except:
+        size = os.size(f)
+    r.append([f, size])
+print(r)`;
+
+const WRITE_FILE_COMMAND = `
+file = open('{fileName}', 'w')
+file.write('''{data}''')
+file.close()
+`;
 
 class Ampy {
-    constructor(operator) {
+    constructor(operator, writeBuffer = true) {
         this.operator_ = operator;
+        this.encoder_ = new TextEncoder();
+        this.decoder_ = new TextDecoder();
+        this.writeBuffer_ = writeBuffer;
     }
 
-    async find(str, timeout, doFunc) {
+    async readUntil(str, keepStr = true, timeout, doFunc) {
         const startTime = Number(new Date());
         let nowTime = startTime;
+        let readStr = '';
         while (nowTime - startTime < timeout) {
             const nowTime = Number(new Date());
             let len = this.operator_.output.length;
             if (len) {
-                const lastData = this.operator_.output[len - 1];
+                /*const lastData = this.operator_.output[len - 1];
                 if (!lastData) {
                     len--;
-                }
+                }*/
                 for (let i = 0; i < len; i++) {
                     const data = this.operator_.output.shift();
-                    if (data.indexOf(str) !== -1) {
-                        this.operator_.output = [];
-                        return true;
+                    const index = data.toLowerCase().indexOf(str);
+                    if (index !== -1) {
+                        this.operator_.output.unshift(data.substring(
+                            keepStr? (index + str.length) : index
+                        ));
+                        readStr += data.substring(0,
+                            keepStr? (index + str.length) : index
+                        );
+                        return readStr;
+                    } else {
+                        readStr += ((i === len - 1)? data : data + '\n');
                     }
                 }
             }
-            if (!((nowTime - startTime) % 500)) {
+            if (!((nowTime - startTime) % 500) && typeof doFunc === 'function') {
                 await doFunc();
             }
             if (nowTime - startTime >= timeout) {
@@ -41,10 +87,31 @@ class Ampy {
         }
     }
 
+    async getFilesInfo(timeout = 5000) {
+        this.exec(GET_FILES_INFO_COMMAND);
+        await this.sleep(100);
+        if (!await this.readUntil('ok', true, timeout)) {
+            return null;
+        }
+        let infoStr = await this.readUntil('>', false, timeout);
+        let infoList = null, infoObj = {};
+        try {
+            infoStr = infoStr.replaceAll('\'', '\"');
+            infoStr = infoStr.substring(0, infoStr.lastIndexOf(']') + 1);
+            infoList = JSON.parse(infoStr);
+            for (let data of infoList) {
+                infoObj[data[0].substring(data[0].lastIndexOf('/') + 1)] = data[1];
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        return infoObj;
+    }
+
     async interrupt(timeout = 5000) {
         await this.operator_.writeCtrlC();
         await this.sleep(100);
-        if (await this.find('>>>', timeout, this.operator_.writeCtrlC)) {
+        if (await this.readUntil('>>>', true, timeout, this.operator_.writeCtrlC)) {
             return true;
         }
         return false;
@@ -53,7 +120,7 @@ class Ampy {
     async enterRawREPL(timeout = 5000) {
         await this.operator_.writeCtrlA();
         await this.sleep(100);
-        if (await this.find('raw REPL; CTRL-B to exit', timeout, this.operator_.writeCtrlA)) {
+        if (await this.readUntil('raw repl; ctrl-b to exit', true, timeout, this.operator_.writeCtrlA)) {
             return true;
         }
         return false;
@@ -62,7 +129,16 @@ class Ampy {
     async exitRawREPL(timeout = 5000) {
         await this.operator_.writeCtrlB();
         await this.sleep(100);
-        if (await this.find('>>>', timeout, this.operator_.writeCtrlB)) {
+        if (await this.readUntil('>>>', timeout, true, this.operator_.writeCtrlB)) {
+            return true;
+        }
+        return false;
+    }
+
+    async exitREPL(timeout = 5000) {
+        await this.operator_.writeCtrlD();
+        await this.sleep(100);
+        if (await this.readUntil('soft reboot', false, timeout, this.operator_.writeCtrlD)) {
             return true;
         }
         return false;
@@ -81,15 +157,18 @@ class Ampy {
                     return;
                 }
                 console.log('进入Raw REPL')
+                // console.log('文件信息', await this.getFilesInfo());
                 console.log('写入code中...')
-                await this.writeCodeString(fileName, code);
+                await this.writeFile(fileName, code);
                 console.log('写入code成功')
-                await this.operator_.writeByteArr([4]);
                 if (!await this.exitRawREPL()) {
                     reject('无法退出Raw REPL');
                     return;
                 }
-                await this.operator_.writeCtrlD();
+                if (! await this.exitREPL()) {
+                    reject('无法退出REPL');
+                    return;
+                }
                 resolve();
             } catch (error) {
                 reject(error.toString());
@@ -97,7 +176,7 @@ class Ampy {
         });
     }
 
-    async writeCodeString(fileName, code) {
+    async writeFile(fileName, data) {
         // 判断字符是否为汉字，
         function isChinese(s){
             return /[\u4e00-\u9fa5]/.test(s);
@@ -121,19 +200,33 @@ class Ampy {
             return unicode;
         }
         StatusBar.addValue(`Writing ${fileName} `);
-        await this.operator_.writeString(`file = open('${fileName}', 'w')\r\n`);
-        console.log(`file = open('${fileName}', 'w')\r\n`)
-        code = ch2Unicode(code) ?? '';
-        for (let i = 0; i < code.length / 30; i++) {
-            let newData = code.substring(i * 30, (i + 1) * 30);
-            newData = newData.replaceAll('\'', '\\\'');
-            newData = newData.replaceAll('\\x', '\\\\x');
-            newData = newData.replaceAll('\\u', '\\\\u');
-            await this.operator_.writeString(`file.write('''${newData}''')\r\n`);
-            // console.log('写入', "file.write('''" + newData + "''')\r\n");
+        if (!this.writeBuffer_) {
+            data = ch2Unicode(data) ?? '';
+            data = data.replaceAll('\'', '\\\'');
+            data = data.replaceAll('\\x', '\\\\x');
+            data = data.replaceAll('\\u', '\\\\u');
         }
-        await this.operator_.writeString("file.close()\r\n");
+        const str = MString.tpl(WRITE_FILE_COMMAND, { fileName, data });
+        await this.exec(str);
         StatusBar.addValue('Done!\n');
+    }
+
+    async exec(str) {
+        if (this.writeBuffer_) {
+            const buffer = this.encoder_.encode(str);
+            const len = Math.ceil(buffer.length / 250);
+            for (let i = 0; i < len; i++) {
+                const writeBuffer = buffer.slice(i * 250, Math.min((i + 1) * 250, buffer.length));
+                await this.operator_.writeByteArr(writeBuffer);
+            }
+        } else {
+            for (let i = 0; i < str.length / 60; i++) {
+                let newData = str.substring(i * 60, (i + 1) * 60);
+                await this.operator_.writeString(newData);
+                // console.log('写入', "file.write('''" + newData + "''')\r\n");
+            }
+        }
+        await this.operator_.writeByteArr([4]);
     }
 
     sleep(ms) {

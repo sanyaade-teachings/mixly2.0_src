@@ -45,8 +45,8 @@ SerialPort.close = async () => {
                 await SerialPort.reader.cancel();
                 try {
                     SerialPort.reader.releaseLock();
-                } catch (e) {
-                    console.log(e);
+                } catch (error) {
+                    console.log(error);
                 }
             }
         }
@@ -57,8 +57,8 @@ SerialPort.close = async () => {
                     SerialPort.writer.releaseLock();
                 }
                 //await writer.close();
-            } catch (e) {
-                console.log(e);
+            } catch (error) {
+                console.log(error);
             }
         }
         try {
@@ -74,44 +74,28 @@ SerialPort.isConnected = () => {
     return SerialPort.obj;
 }
 
-SerialPort.read = async () => {
-    let returnStr = "";
-    const { value, done } = await reader.read();
-    restBuffer = [...restBuffer, ...value];
-    do {
-        var { text, arr } = this.readString(restBuffer);
-        restBuffer = arr;
-        returnStr += text;
-    } while (text);
-    return returnStr;
-}
-
 SerialPort.readLine = () => {
-    var text = "";
+    var text = "", ch = '';
     var endWithLF = false;
-    const len = SerialPort.outputBuffer.length;
     let i = 0;
-    for (let data of SerialPort.outputBuffer) {
-        i++;
-        if (data === 0x0a) {
-            endWithLF = true;
-            break;
+    do {
+        ch = SerialPort.readChar();
+        if (ch.length) {
+            if (ch === '\n') {
+                endWithLF = true;
+            } else {
+                text += ch;
+            }
         }
-        text += String.fromCharCode(data);
-        if (i === len) {
-            break;
-        }
-    }
-    SerialPort.outputBuffer = SerialPort.outputBuffer.slice(i);
+    } while (ch.length && !endWithLF)
     return { text: text, endWithLF: endWithLF };
 }
 
 SerialPort.readChar = () => {
-    let arr = SerialPort.outputBuffer;
     var readBuf = [];
     var buffLength = 0;
-    var nowIndex = -1;
     var text = "";
+    const len = SerialPort.outputBuffer.length;
     /*  UTF-8编码方式
     *   ------------------------------------------------------------
     *   |1字节 0xxxxxxx                                             |
@@ -122,20 +106,19 @@ SerialPort.readChar = () => {
     *   |6字节 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx|
     *   ------------------------------------------------------------
     */
-    for (var i = 0; i < arr.length; i++) {
-        if ((arr[i] & 0x80) == 0x00) {
-            text = String.fromCharCode(arr[i]);
-            nowIndex = i;
+    for (var i = 0; i < len; i++) {
+        const data = SerialPort.outputBuffer.shift();
+        if ((data & 0x80) == 0x00) {
+            text = String.fromCharCode(data);
             break;
-        } else if ((arr[i] & 0xc0) == 0x80) {
-            readBuf.push(arr[i]);
+        } else if ((data & 0xc0) == 0x80) {
+            readBuf.push(data);
             if (readBuf.length >= buffLength) {
-                text = this.decoder.decode(new Uint8Array(readBuf));
-                nowIndex = i;
+                text = SerialPort.decoder.decode(new Uint8Array(readBuf));
                 break;
             }
         } else {
-            let dataNum = arr[i] & 0xe0;
+            let dataNum = data & 0xe0;
             switch (dataNum) {
                 case 0xfc:
                     buffLength = 6;
@@ -153,25 +136,10 @@ SerialPort.readChar = () => {
                 default:
                     buffLength = 2;
             }
-            readBuf.push(arr[i]);
+            readBuf.push(data);
         }
     }
-    if (nowIndex == -1) {
-        arr = arr.slice(0);
-    } else {
-        arr = arr.slice(nowIndex + 1);
-    }
     return text;
-}
-
-SerialPort.readString = (arr) => {
-    var readStr = "";
-    do {
-        var { text, arr } = this.readChar(arr);
-        readStr += text;
-    } while (text);
-
-    return { text: readStr, arr: arr };
 }
 
 SerialPort.startReadLine = (onDataLine = (message) => {}) => {
@@ -194,6 +162,9 @@ SerialPort.startReadLine = (onDataLine = (message) => {}) => {
                 SerialPort.output.push('');
             }
         } while (endWithLF);
+        while (SerialPort.output.length > 500) {
+            SerialPort.output.shift();
+        }
         if (SerialPort.keepReading) {
             SerialPort.startReadLine(onDataLine);
         }

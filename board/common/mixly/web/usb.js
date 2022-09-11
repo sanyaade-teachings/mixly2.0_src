@@ -10,6 +10,8 @@ const {
 const { USB, Ampy } = Web;
 
 USB.output = [];
+USB.encoder = new TextEncoder();
+USB.decoder = new TextDecoder();
 
 USB.obj = null;
 
@@ -111,11 +113,12 @@ USB.writeString = async (str) => {
 }
 
 USB.writeByteArr = async (buffer) => {
-    let sendStr = '';
-    buffer.map((data) => {
-        sendStr += String.fromCharCode(data);
-    });
-    await USB.writeString(sendStr);
+     if (typeof buffer.unshift === 'function') {
+        buffer.unshift(buffer.length);
+        buffer = new Uint8Array(buffer).buffer;
+     }
+    await USB.DAPLink.send(132, buffer);
+    await USB.sleep(200);
 }
 
 USB.writeCtrlA = async () => {

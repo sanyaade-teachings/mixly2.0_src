@@ -243,6 +243,7 @@
         {
             "path":"/web/ampy.js",
             "require":[
+                "Mixly.MString",
                 "Mixly.StatusBar",
                 "Mixly.Web"
             ],
@@ -280,7 +281,6 @@
             "path":"/web/esptool.js",
             "require":[
                 "Mixly.StatusBar",
-                "Mixly.Config",
                 "Mixly.Web.Utilities",
                 "Mixly.Web.SerialPort"
             ],

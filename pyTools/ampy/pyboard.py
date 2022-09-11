@@ -190,9 +190,9 @@ class Pyboard:
         self.serial.timeout = 1
         try:
             for retry in range(10):
-                self.serial.write(b'\r\x03')
+                self.serial.write(b'\r\x02\x03')
                 time.sleep(0.1)
-                self.serial.write(b'\x03')
+                self.serial.write(b'\x02\x03')
                 time.sleep(0.1)
                 data = self.read_until(1, b'>')
                 sys.stdout.write(".")

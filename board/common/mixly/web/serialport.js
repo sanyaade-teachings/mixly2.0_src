@@ -33,7 +33,10 @@ SerialPort.connect = (baud = 115200, onDataLine = (message) => {}) => {
             SerialPort.addReadEvent(onDataLine);
             resolve();
         })
-        .catch(reject);
+        .catch((error) => {
+            SerialPort.obj = null;
+            reject(error);
+        });
     });
 }
 

@@ -419,14 +419,22 @@ BU.searchLibs = function (dirPath, code, libArr) {
     let moduleName = "";
     let pyFileArr = [];
     for (let i = 0; i < arrayObj.length; i++) {
-        const fromLoc = arrayObj[i].indexOf("from");
-        const importLoc = arrayObj[i].indexOf("import");
+        let fromLoc = arrayObj[i].indexOf("from");
+        let importLoc = arrayObj[i].indexOf("import");
+        const str = arrayObj[i].substring(0, (fromLoc === -1)? importLoc : fromLoc);
+        str.split('').forEach((ch) => {
+            if (ch !== ' ' || ch !== '\t') {
+                fromLoc = -1;
+                importLoc = -1;
+                return;
+            }
+        });
         if (fromLoc !== -1) {
             moduleName = arrayObj[i].substring(fromLoc + 4, arrayObj[i].indexOf("import"));
-            moduleName = moduleName.replace(/(^\s*)|(\s*$)/g, "");
+            moduleName = moduleName.replaceAll('\s', '');
         } else if (importLoc !== -1) {
             moduleName = arrayObj[i].substring(importLoc + 6);
-            moduleName = moduleName.replace(/(^\s*)|(\s*$)/g, "");
+            moduleName = moduleName.replaceAll('\s', '');
         } else {
             continue;
         }

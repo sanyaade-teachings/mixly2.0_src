@@ -50,27 +50,6 @@
         "com": "usb",
         "burn": {
             "filePath": "./build/microbit-micropython-v1-lib.hex"
-        },
-        "lib": {
-            "mixpy": {
-                "path": "build/lib/mixpy.py",
-                "import": [
-                    "math"
-                ]
-            },
-            "motor_control": {
-                "path": "build/lib/motor_control.py",
-                "import": [
-                    "microbit"
-                ]
-            },
-            "rgb_show": {
-                "path": "build/lib/rgb_show.py",
-                "import": [
-                    "microbit",
-                    "neopixel"
-                ]
-            }
         }
     }
 }

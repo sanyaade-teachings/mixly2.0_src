@@ -329,6 +329,65 @@ function formatMacAddr(macAddr) {
     return macAddr.map(value => value.toString(16).toUpperCase().padStart(2, "0")).join(":");
 }
 
+BU.getImportModulesName = (code) => {
+    const { web = {} } = SELECTED_BOARD;
+    const { lib } = web;
+    if (!(lib instanceof Object)) {
+        return [];
+    }
+    let lineList = [];
+    code.trim().split("\n").forEach(function (v, i) {
+        lineList.push(v);
+    });
+    let moduleName = "";
+    let moduleList = [];
+    for (let data of lineList) {
+        let fromLoc = data.indexOf("from");
+        let importLoc = data.indexOf("import");
+        const str = data.substring(0, (fromLoc === -1)? importLoc : fromLoc);
+        str.split('').forEach((ch) => {
+            if (ch !== ' ' || ch !== '\t') {
+                fromLoc = -1;
+                importLoc = -1;
+                return;
+            }
+        });
+        if (fromLoc !== -1) {
+            moduleName = data.substring(fromLoc + 4, data.indexOf("import"));
+            moduleName = moduleName.replaceAll(' ', '');
+        } else if (importLoc !== -1) {
+            moduleName = data.substring(importLoc + 6);
+            moduleName = moduleName.replaceAll(' ', '');
+        } else {
+            continue;
+        }
+        moduleList = [ ...moduleList, ...moduleName.split(",") ];
+    }
+    return moduleList;
+}
+
+BU.searchLibs = (moduleList, libList = []) => {
+    const { web = {} } = SELECTED_BOARD;
+    const { lib } = web;
+    if (!(lib instanceof Object)) {
+        return [];
+    }
+    for (let name of moduleList) {
+        if (!libList.includes(name)) {
+            if (!lib[name]) {
+                continue;
+            }
+            libList.push(name);
+            StatusBar.addValue(indexText['拷贝库'] + ' ' + name + '.py\n');
+            if (!lib[name].import.length) {
+                continue;
+            }
+            libList = BU.searchLibs(lib[name].import, libList);
+        }
+    }
+    return libList;
+}
+
 BU.initUpload = () => {
     const comName = 'web-' + (SELECTED_BOARD.web.com ?? 'serial');
     BU.uploadByPort(comName);
@@ -358,7 +417,14 @@ BU.uploadByPort = (port) => {
                 $("#mixly-loader-btn").hide();
                 $(".layui-layer-page").css("z-index","198910151");
                 const ampy = new Ampy(serialport, port === 'web-serial');
-                ampy.put('main.py', MFile.getCode())
+                const code = MFile.getCode();
+                /*let moduleList = BU.getImportModulesName(code);
+                moduleList = BU.searchLibs(moduleList);
+                const moduleInfo = {};
+                for (let name of moduleList) {
+                    moduleInfo[name] = SELECTED_BOARD.web.lib[name].path;
+                }*/
+                ampy.put('main.py', code)
                 .then(() => {
                     layer.close(index);
                     layer.msg(indexText['上传成功'], { time: 1000 });

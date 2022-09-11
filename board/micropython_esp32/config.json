@@ -1,10 +1,10 @@
 {
     "board": {
         "MixGo(ESP32, 4M)": "micropython:esp32:mixgo",
-        "MixGo PE":"micropython:esp32:mixgope",
-        "RoboMaster E1":"micropython:esp32:rm_e1",
-        "mPython":"micropython:esp32:mpython",
-        "ESP32 Generic":"micropython:esp32:generic"
+        "MixGo PE": "micropython:esp32:mixgope",
+        "RoboMaster E1": "micropython:esp32:rm_e1",
+        "mPython": "micropython:esp32:mpython",
+        "ESP32 Generic": "micropython:esp32:generic"
     },
     "language": "MicroPython",
     "burn": {
@@ -75,7 +75,7 @@
         "pointNum": 100,
         "rts": false,
         "dtr": false
-    },    
+    },
     "lib": {
         "mixly": {
             "url": [

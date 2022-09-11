@@ -56,7 +56,7 @@
         "com": "usb",
         "burn": {
             "micropython:nrf51822:v1": {
-            "filePath": "./build/microbit-micropython-v1-lib.hex"
+                "filePath": "./build/microbit-micropython-v1-lib.hex"
             },
             "micropython:nrf51822:v2": {
                 "filePath": "./build/microbit-micropython-v2-lib.hex"

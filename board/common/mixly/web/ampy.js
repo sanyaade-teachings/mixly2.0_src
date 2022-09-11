@@ -11,7 +11,8 @@ const {
     MString
 } = Mixly;
 
-const GET_FILES_INFO_COMMAND = `try:        
+const GET_FILES_INFO_COMMAND = `
+try:
     import os
 except ImportError:
     import uos as os
@@ -33,12 +34,6 @@ for f in listdir(''):
         size = os.size(f)
     r.append([f, size])
 print(r)`;
-
-const WRITE_FILE_COMMAND = `
-file = open('{fileName}', 'w')
-file.write('''{data}''')
-file.close()
-`;
 
 class Ampy {
     constructor(operator, writeBuffer = true) {
@@ -144,23 +139,34 @@ class Ampy {
         return false;
     }
 
-    put(fileName, code) {
+    put(fileName, code, moduleInfo = null) {
         return new Promise(async (resolve, reject) => {
             try {
                 if (!await this.interrupt()) {
                     reject('中断失败');
                     return;
                 }
-                console.log('中断成功')
+                // console.log('中断成功')
                 if (!await this.enterRawREPL()) {
                     reject('无法进入Raw REPL');
                     return;
                 }
-                console.log('进入Raw REPL')
-                // console.log('文件信息', await this.getFilesInfo());
-                console.log('写入code中...')
+                // console.log('进入Raw REPL')
+                // console.log('写入code中...')
+                if (moduleInfo) {
+                    const fileInfo = await this.getFilesInfo();
+                    for (let name in moduleInfo) {
+                        const libCode = Mixly.get(moduleInfo[name]);
+                        if (!libCode 
+                         || new TextEncoder('utf8').encode(libCode).length === fileInfo[name + '.py']) {
+                            StatusBar.addValue('Skip ' + name + '.py\n');
+                            continue;
+                        }
+                        await this.writeFile(name + '.py', libCode);
+                    }
+                }
                 await this.writeFile(fileName, code);
-                console.log('写入code成功')
+                // console.log('写入code成功')
                 if (!await this.exitRawREPL()) {
                     reject('无法退出Raw REPL');
                     return;
@@ -200,13 +206,22 @@ class Ampy {
             return unicode;
         }
         StatusBar.addValue(`Writing ${fileName} `);
-        if (!this.writeBuffer_) {
-            data = ch2Unicode(data) ?? '';
-            data = data.replaceAll('\'', '\\\'');
-            data = data.replaceAll('\\x', '\\\\x');
-            data = data.replaceAll('\\u', '\\\\u');
+        let str = `file = open('${fileName}', 'w')\n`;
+        const buffer = this.encoder_.encode(data);
+        const len = Math.ceil(buffer.length / 500);
+        for (let i = 0; i < len; i++) {
+            const writeBuffer = buffer.slice(i * 500, Math.min((i + 1) * 500, buffer.length));
+            let writeStr = '';
+            for (let num of writeBuffer) {
+                let numStr = num.toString(16);
+                if (numStr.length === 1) {
+                    numStr = '0' + numStr;
+                }
+                writeStr += '\\x' + numStr;
+            }
+            str += `file.write(b'${writeStr}')\n`;
         }
-        const str = MString.tpl(WRITE_FILE_COMMAND, { fileName, data });
+        str += `file.close()\n`;
         await this.exec(str);
         StatusBar.addValue('Done!\n');
     }

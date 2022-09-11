@@ -8,6 +8,8 @@ goog.provide('Mixly.Config');
 
 /* Mixly {object} */
 
+Mixly.files = {};
+
 /**
  * @function 根据传入的相对路径获取文件数据
  * @param inPath {string}
@@ -15,6 +17,9 @@ goog.provide('Mixly.Config');
  **/
 Mixly.get = (inPath) => {
     let str;
+    if (Mixly.files[inPath]) {
+        return Mixly.files[inPath];
+    }
     if (typeof nw === 'object') {
         const fs = require('fs');
         const path = require('path');
@@ -39,6 +44,7 @@ Mixly.get = (inPath) => {
         });
         $.ajaxSettings.async = true;
     }
+    Mixly.files[inPath] = str;
     return str;
 }
 

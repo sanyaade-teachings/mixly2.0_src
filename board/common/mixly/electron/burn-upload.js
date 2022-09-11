@@ -431,16 +431,15 @@ BU.searchLibs = function (dirPath, code, libArr) {
         });
         if (fromLoc !== -1) {
             moduleName = arrayObj[i].substring(fromLoc + 4, arrayObj[i].indexOf("import"));
-            moduleName = moduleName.replaceAll('\s', '');
+            moduleName = moduleName.replaceAll(' ', '');
         } else if (importLoc !== -1) {
             moduleName = arrayObj[i].substring(importLoc + 6);
-            moduleName = moduleName.replaceAll('\s', '');
+            moduleName = moduleName.replaceAll(' ', '');
         } else {
             continue;
         }
         let moduleArr = moduleName.split(",");
         for (let j = 0; j < moduleArr.length; j++) {
-            moduleArr[j] = moduleArr[j].replace(/(^\s*)|(\s*$)/g, "");
             if (!libArr.includes(moduleArr[j] + '.py') && !libArr.includes(moduleArr[j] + '.mpy')) {
                 try {
                     let oldLibPath = null;

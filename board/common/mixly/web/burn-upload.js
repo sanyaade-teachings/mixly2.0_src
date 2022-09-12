@@ -424,6 +424,7 @@ BU.uploadByPort = (port) => {
                 for (let name of moduleList) {
                     moduleInfo[name] = SELECTED_BOARD.web.lib[name].path;
                 }*/
+                portObj.busy = true;
                 ampy.put('main.py', code)
                 .then(() => {
                     layer.close(index);
@@ -439,6 +440,7 @@ BU.uploadByPort = (port) => {
                     StatusBar.addValue(`==${indexText['上传失败']}==\n`);
                 })
                 .finally(() => {
+                    portObj.busy = false;
                     BU.burning = false;
                     BU.uploading = false;
                 });

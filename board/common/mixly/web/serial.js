@@ -246,6 +246,9 @@ Serial.refreshPortOperator = (ports) => {
 Serial.refreshOutputBox = (port) => {
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
+    if (portObj.busy) {
+        return;
+    }
     const { dom, toolConfig, toolOpened, endPos, serialport } = portObj;
     const output = serialport.output;
     for (let i = output.length; i > Serial.MAX_OUTPUT_LINE; i--) {
@@ -1276,9 +1279,11 @@ Serial.writeCtrlD = function (port) {
 */
 Serial.clearContent = function (port) {
     Serial.receiveBoxSetValue(port, '');
-    const portObj = Serial.portsOperator[port];
-    if (portObj)
-        portObj.output = [];
+    const portObj = Serial.portsOperator[port] ?? {};
+    const { serialport } = portObj;
+    if (serialport) {
+        serialport.output = [];
+    }
 }
 
 Serial.updateDtrAndRts = function (port) {

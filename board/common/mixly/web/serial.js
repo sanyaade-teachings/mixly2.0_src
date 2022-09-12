@@ -1185,15 +1185,18 @@ Serial.writeByteArr = function (port, sendDataStr, sendDataTail) {
             }
         }
     }
-    nowSerialport.writeByteArr(sendDataNum);
-    sendDataTail = sendDataTail.replace("\\r", "\r");
-    sendDataTail = sendDataTail.replace("\\n", "\n");
-    if (sendDataTail == "no") {
-        sendDataTail = "";
-    }
-    if (sendDataTail) {
-        nowSerialport.writeString(sendDataTail);
-    }
+    nowSerialport.writeByteArr(sendDataNum)
+    .then(() => {
+        sendDataTail = sendDataTail.replace("\\r", "\r");
+        sendDataTail = sendDataTail.replace("\\n", "\n");
+        if (sendDataTail == "no") {
+            sendDataTail = "";
+        }
+        if (sendDataTail) {
+            nowSerialport.writeString(sendDataTail);
+        }
+    })
+    .catch(console.log);
 }
 
 /**

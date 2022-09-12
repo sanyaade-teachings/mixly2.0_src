@@ -384,8 +384,8 @@ Boards.changeTo = (boardName) => {
                          || !outObj.special[key]?.command) {
                             continue;
                         }
-                        outObj.special[key].command = MString.tpl(outObj.command, obj);
-                        outObj.special[key].command = MString.tpl(outObj.command, pathObj);
+                        outObj.special[key].command = MString.tpl(outObj.special[key].command, obj);
+                        outObj.special[key].command = MString.tpl(outObj.special[key].command, pathObj);
                     }
                 }
                 break;

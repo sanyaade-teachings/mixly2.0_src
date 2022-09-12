@@ -43,29 +43,27 @@ SerialPort.connect = (baud = 115200, onDataLine = (message) => {}) => {
 SerialPort.close = async () => {
     if (SerialPort.isConnected()) {
         SerialPort.keepReading = false;
-        if (SerialPort.obj && SerialPort.obj.readable) {
-            if (SerialPort.obj.readable.locked) {
+        if (!SerialPort.isConnected()) {
+            return;
+        }
+        const serialObj = SerialPort.obj;
+        if (serialObj.readable && serialObj.readable.locked) {
+            try {
                 await SerialPort.reader.cancel();
-                try {
-                    SerialPort.reader.releaseLock();
-                } catch (error) {
-                    console.log(error);
-                }
+                SerialPort.reader.releaseLock();
+            } catch (error) {
+                console.log(error);
             }
         }
-
-        if (SerialPort.obj && SerialPort.obj.writable) {
+        if (serialObj.writable && serialObj.writable.locked) {
             try {
-                if (SerialPort.obj.writable.locked) {
-                    SerialPort.writer.releaseLock();
-                }
-                //await writer.close();
+                SerialPort.writer.releaseLock();
             } catch (error) {
                 console.log(error);
             }
         }
         try {
-            await SerialPort.obj.close();
+            await serialObj.close();
         } catch (error) {
             console.log(error);
         }
@@ -183,9 +181,6 @@ SerialPort.addReadEvent = async (onDataLine = (message) => {}) => {
     SerialPort.startReadLine(onDataLine);
     while (SerialPort.obj.readable && SerialPort.keepReading) {
         SerialPort.reader = SerialPort.obj.readable.getReader();
-        /*const timer = setTimeout(() => {
-            SerialPort.reader.releaseLock();
-        }, 500);*/
         try {
             while (true) {
                 const { value, done } = await SerialPort.reader.read();
@@ -205,7 +200,6 @@ SerialPort.addReadEvent = async (onDataLine = (message) => {}) => {
             SerialPort.reader.releaseLock();
         }
     }
-    await SerialPort.obj.close();
 }
 
 SerialPort.AddOnConnectEvent = (onConnect) => {

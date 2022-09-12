@@ -1,13 +1,15 @@
 (() => {
 
-goog.provide('Mixly.DomOperator');
 goog.require('Mixly.Config');
 goog.require('Mixly.XML');
+goog.require('Mixly.Env');
+goog.provide('Mixly.DomOperator');
 
 const {
     DomOperator,
     Config,
-    XML
+    XML,
+    Env
 } = Mixly;
 
 const { BOARD, USER } = Config;
@@ -175,7 +177,16 @@ class SerialDomGenerator {
                 <input id="${scrollId}" type="checkbox" title="${indexText['滚屏']}" lay-filter="${scrollFilter}" lay-skin="primary" checked>
             </label>
             <div class="layui-input-block">
-                <textarea readonly id="${receiveId}" name="desc" wrap="off" spellcheck="false" placeholder="${indexText['串口输出']}" class="layui-textarea" style="height:220px"></textarea>
+                <textarea
+                    readonly
+                    id="${receiveId}"
+                    name="desc"
+                    wrap="off"
+                    spellcheck="false"
+                    placeholder="${indexText['串口输出']}"
+                    class="layui-textarea"
+                    style="height:${this.type || Env.hasSocketServer ? '220px' : '320px'}"
+                ></textarea>
             </div>
         </div>`;
 
@@ -254,7 +265,7 @@ class SerialDomGenerator {
             </ul>
             <div class="layui-tab-content" style="position: absolute;left: 0px;top: 40px;bottom: 10px;right: 0px;overflow: auto;padding-bottom: 0px;">
                 <div class="layui-tab-item layui-show">
-                    ${this.type == 1 || Mixly.Env.hasSocketServer ? selectPortDivStr : ""}
+                    ${this.type || Env.hasSocketServer ? selectPortDivStr : ""}
                     ${sendDivStr}
                     ${receiveDivStr}
                     ${ctrlBtnDivStr}

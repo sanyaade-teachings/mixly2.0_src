@@ -722,7 +722,8 @@
             "path":"/common/dom-operator.js",
             "require":[
                 "Mixly.Config",
-                "Mixly.XML"
+                "Mixly.XML",
+                "Mixly.Env"
             ],
             "provide":[
                 "Mixly.DomOperator"

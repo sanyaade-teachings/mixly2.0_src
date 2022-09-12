@@ -651,8 +651,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-close`) {
                 StatusBarPort.tabDelete(port);
             } else if (obj.id === `tab-${newPort}-ace-empty`) {
-                // portAce[port].execCommand('Empty');
-                portObj.output = [];
+                Serial.clearContent(port);
             } else if (obj.id === `tab-${newPort}-serial-send-ctrlc`) {
                 Serial.writeCtrlC(port);
             } else if (obj.id === `tab-${newPort}-serial-send-ctrld`) {
@@ -1286,6 +1285,8 @@ Serial.clearContent = function (port) {
     const { serialport } = portObj;
     if (serialport) {
         serialport.output = [];
+    } else {
+        StatusBarPort.setValue(port, '');
     }
 }
 

@@ -142,6 +142,7 @@ class Ampy {
     put(fileName, code, moduleInfo = null) {
         return new Promise(async (resolve, reject) => {
             try {
+                await this.operator_.writeCtrlB();
                 if (!await this.interrupt()) {
                     reject('中断失败');
                     return;

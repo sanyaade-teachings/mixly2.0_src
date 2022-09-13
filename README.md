@@ -14,10 +14,11 @@ http://wiki.mixly.org
 
 ### 更新工具
 
-- Mixly2.0-win32-x64一键更新工具：[下载](http://106.52.57.223:8888/down/JR3kt1PdFGGk)
-- Mixly2.0-win32-ia32一键更新工具：[下载](http://106.52.57.223:8888/down/wqNvZZHc40iT)
-- Mixly2.0-mac一键更新工具(x64 & arm64)：[下载](http://106.52.57.223:8888/down/3RS9HuKojWlj)
-- Mixly2.0-linux-x64一键更新工具：[下载](http://106.52.57.223:8888/down/H6UT9elkcWlp)
+- Mixly2.0-win32-x64一键更新工具：[下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly2.0-win32-ia32一键更新工具：[下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly2.0-mac一键更新工具(x64 & arm64)：[下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-mac%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
+- Mixly2.0-linux-x64一键更新工具：[下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/Mixly2.0-linux-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.zip)
+- Mixly2.0-linux-arm64一键更新工具：[下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/Mixly2.0-linux-arm64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.zip)
 
 ### 更新说明
 
@@ -37,13 +38,13 @@ https://gitee.com/mixly2/mixly2.0-win32-x64/blob/master/CHANGELOG.md
 
 新版本一键更新工具下载地址如下：
 
-- [Mixly2.0-win32-x64一键更新版下载](http://106.52.57.223:8888/down/JR3kt1PdFGGk)
+- [Mixly2.0-win32-x64一键更新版下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
 
-  下载地址：**`http://106.52.57.223:8888/down/JR3kt1PdFGGk`**
+  下载地址：**`http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z`**
 
-- [Mixly2.0-win32-ia32一键更新版下载](http://106.52.57.223:8888/down/wqNvZZHc40iT)
+- [Mixly2.0-win32-ia32一键更新版下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
 
-  下载地址：**`http://106.52.57.223:8888/down/wqNvZZHc40iT`**
+  下载地址：**`http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z`**
 
 有以下两种升级方案可选：
 
@@ -59,13 +60,13 @@ https://gitee.com/mixly2/mixly2.0-win32-x64/blob/master/CHANGELOG.md
 
 1. 下载新版本一键更新工具
 
-   - [Mixly2.0-win32-x64一键更新版下载](http://106.52.57.223:8888/down/JR3kt1PdFGGk)
+   - [Mixly2.0-win32-x64一键更新版下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
 
-     下载地址：**`http://106.52.57.223:8888/down/JR3kt1PdFGGk`**
+     下载地址：**`http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-x64%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z`**
 
-   - [Mixly2.0-win32-ia32一键更新版下载](http://106.52.57.223:8888/down/wqNvZZHc40iT)
+   - [Mixly2.0-win32-ia32一键更新版下载](http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z)
 
-     下载地址：**`http://106.52.57.223:8888/down/wqNvZZHc40iT`**
+     下载地址：**`http://114.132.216.192:8099/mixly2/update-tool/raw/master/mixly2.0-win32-ia32%E4%B8%80%E9%94%AE%E6%9B%B4%E6%96%B0%E7%89%88.7z`**
 
 ​	解压下载后的文件，拷贝解压目录下的Git目录到当前所使用的 **`mixly2.0`** 软件下
 

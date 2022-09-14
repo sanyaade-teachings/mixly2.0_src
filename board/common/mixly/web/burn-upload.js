@@ -346,7 +346,7 @@ BU.getImportModulesName = (code) => {
         let importLoc = data.indexOf("import");
         const str = data.substring(0, (fromLoc === -1)? importLoc : fromLoc);
         str.split('').forEach((ch) => {
-            if (ch !== ' ' || ch !== '\t') {
+            if (ch !== ' ' && ch !== '\t') {
                 fromLoc = -1;
                 importLoc = -1;
                 return;
@@ -354,13 +354,13 @@ BU.getImportModulesName = (code) => {
         });
         if (fromLoc !== -1) {
             moduleName = data.substring(fromLoc + 4, data.indexOf("import"));
-            moduleName = moduleName.replaceAll(' ', '');
         } else if (importLoc !== -1) {
             moduleName = data.substring(importLoc + 6);
-            moduleName = moduleName.replaceAll(' ', '');
         } else {
             continue;
         }
+        moduleName = moduleName.replaceAll(' ', '');
+        moduleName = moduleName.replaceAll('\r', '');
         moduleList = [ ...moduleList, ...moduleName.split(",") ];
     }
     return moduleList;

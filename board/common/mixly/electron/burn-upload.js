@@ -423,7 +423,7 @@ BU.searchLibs = function (dirPath, code, libArr) {
         let importLoc = arrayObj[i].indexOf("import");
         const str = arrayObj[i].substring(0, (fromLoc === -1)? importLoc : fromLoc);
         str.split('').forEach((ch) => {
-            if (ch !== ' ' || ch !== '\t') {
+            if (ch !== ' ' && ch !== '\t') {
                 fromLoc = -1;
                 importLoc = -1;
                 return;
@@ -431,13 +431,13 @@ BU.searchLibs = function (dirPath, code, libArr) {
         });
         if (fromLoc !== -1) {
             moduleName = arrayObj[i].substring(fromLoc + 4, arrayObj[i].indexOf("import"));
-            moduleName = moduleName.replaceAll(' ', '');
         } else if (importLoc !== -1) {
             moduleName = arrayObj[i].substring(importLoc + 6);
-            moduleName = moduleName.replaceAll(' ', '');
         } else {
             continue;
         }
+        moduleName = moduleName.replaceAll(' ', '');
+        moduleName = moduleName.replaceAll('\r', '');
         let moduleArr = moduleName.split(",");
         for (let j = 0; j < moduleArr.length; j++) {
             if (!libArr.includes(moduleArr[j] + '.py') && !libArr.includes(moduleArr[j] + '.mpy')) {

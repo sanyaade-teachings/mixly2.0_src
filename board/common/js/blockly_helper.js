@@ -805,7 +805,7 @@ mixlyjs.viewfile = function (type) {
 };
 
 mixlyjs.getCodeContent = function () {
-    Mixly.MFile.getCode();
+    return Mixly.MFile.getCode();
 };
 
 mixlyjs.getXmlContent = function (xmlType) {

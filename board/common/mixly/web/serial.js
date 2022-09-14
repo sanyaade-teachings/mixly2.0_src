@@ -6,7 +6,7 @@ goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Config');
 goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Web.USB');
@@ -21,7 +21,7 @@ const {
     Config,
     Tools,
     Env,
-    LayerExtend,
+    LayerExt,
     XML,
     MArray
 } = Mixly;
@@ -323,7 +323,7 @@ Serial.openTool = () => {
         }
         let toolDom = portObj.dom;
         if (!portObj.dom) {
-            toolDom = LayerExtend.openSerialTool(toolConfig, successFunc, endFunc);
+            toolDom = LayerExt.openSerialTool(toolConfig, successFunc, endFunc);
         } else {
             toolDom.updateTool(toolConfig);
             toolDom.open(successFunc, endFunc);

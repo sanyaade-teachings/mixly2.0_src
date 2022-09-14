@@ -7,7 +7,7 @@
                 "layui",
                 "Mixly.Modules",
                 "Mixly.Env",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.StatusBar",
                 "Mixly.StatusBarPort",
@@ -43,7 +43,7 @@
                 "Mixly.StatusBar",
                 "Mixly.StatusBarPort",
                 "Mixly.Modules",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Env",
                 "Mixly.Boards",
                 "Mixly.MFile",
@@ -109,7 +109,7 @@
             "require":[
                 "Mixly.Modules",
                 "Mixly.Env",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.Title",
                 "Mixly.MFile",
@@ -135,7 +135,7 @@
                 "Mixly.ScriptLoader",
                 "Mixly.CssLoader",
                 "Mixly.Boards",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.CloudDownload",
                 "Mixly.Nav"
@@ -180,7 +180,7 @@
                 "Mixly.Config",
                 "Mixly.Tools",
                 "Mixly.Env",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.XML",
                 "Mixly.MArray"
             ],
@@ -256,7 +256,7 @@
             "require":[
                 "Mixly.StatusBar",
                 "Mixly.StatusBarPort",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.MFile",
                 "Mixly.Boards",
@@ -327,7 +327,7 @@
                 "Mixly.Config",
                 "Mixly.Tools",
                 "Mixly.Env",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.XML",
                 "Mixly.MArray",
                 "Mixly.Web.USB",
@@ -482,7 +482,7 @@
                     "layui",
                     "Mixly.Modules",
                     "Mixly.Env",
-                    "Mixly.LayerExtend",
+                    "Mixly.LayerExt",
                     "Mixly.Config",
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",
@@ -504,7 +504,7 @@
                     "Mixly.Config",
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",
-                    "Mixly.LayerExtend",
+                    "Mixly.LayerExt",
                     "Mixly.Env",
                     "Mixly.Boards",
                     "Mixly.MFile",
@@ -525,7 +525,7 @@
                     "Mixly.Editor",
                     "Mixly.MFile",
                     "Mixly.Boards",
-                    "Mixly.LayerExtend",
+                    "Mixly.LayerExt",
                     "Mixly.WebSocket.Socket"
                 ],
                 "provide":[
@@ -542,7 +542,7 @@
                     "Mixly.Config",
                     "Mixly.Tools",
                     "Mixly.Env",
-                    "Mixly.LayerExtend",
+                    "Mixly.LayerExt",
                     "Mixly.XML",
                     "Mixly.MArray",
                     "Mixly.WebSocket.Socket"
@@ -657,7 +657,7 @@
                     "Mixly.Url",
                     "Mixly.StatusBar",
                     "Mixly.Config",
-                    "Mixly.LayerExtend",
+                    "Mixly.LayerExt",
                     "Mixly.Boards",
                     "Mixly.MFile",
                     "Mixly.Web.BU"
@@ -673,7 +673,7 @@
             "path":"/common/boards.js",
             "require":[
                 "layui",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.XML",
                 "Mixly.Env",
@@ -773,7 +773,7 @@
             ]
         },
         {
-            "path":"/common/layer-extend.js",
+            "path":"/common/layer-ext.js",
             "require":[
                 "layui",
                 "Mixly.Env",
@@ -781,7 +781,7 @@
                 "Mixly.Config"
             ],
             "provide":[
-                "Mixly.LayerExtend"
+                "Mixly.LayerExt"
             ]
         },
         {
@@ -825,7 +825,7 @@
                 "Mixly.MArray",
                 "Mixly.Boards",
                 "Mixly.XML",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.MicrobitFs",
                 "Mixly.Editor",
                 "Mixly.Drag"
@@ -877,7 +877,7 @@
             "path":"/common/nav-events.js",
             "require":[
                 "layui",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.XML",
                 "Mixly.Env",
@@ -903,6 +903,13 @@
             ],
             "provide":[
                 "Mixly.Nav"
+            ]
+        },
+        {
+            "path":"/common/notify.js",
+            "require":[
+            ],
+            "provide":[
             ]
         },
         {

@@ -2037,14 +2037,14 @@ Blockly.Blocks['tft_define_bitmap_data'] = {
 
 (() => {
 
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MFile');
 goog.require('Base64');
 goog.require('layui');
 
 const {
-  LayerExtend,
+  LayerExt,
   XML,
   MFile
 } = Mixly;
@@ -2080,7 +2080,7 @@ Blockly.Blocks['tft_generate_bitmap_data'] = {
     this.ctx = this.canvas[0].getContext('2d');
     this.ctx.textAlign='left';
     this.ctx.textBaseline='top';
-    const layerNum = LayerExtend.open({
+    const layerNum = LayerExt.open({
       title: '图片取模工具',
       id: 'read-bitmap-layer',
       area: ['50%', '250px'],

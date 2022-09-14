@@ -4,7 +4,7 @@ goog.require('layui');
 goog.require('Mixly.Config');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
@@ -17,7 +17,7 @@ const {
     Config,
     StatusBar,
     StatusBarPort,
-    LayerExtend,
+    LayerExt,
     Env,
     Boards,
     MFile,
@@ -71,7 +71,7 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
             title: indexText['检测到多个同类型设备，请选择：'],
             area: ['350px', '150px'],
             content: $('#mixly-selector-div'),
-            shade: LayerExtend.shade,
+            shade: LayerExt.SHADE_ALL,
             resize: false,
             closeBtn: 0,
             success: function (layero) {
@@ -101,7 +101,7 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
             type: 1,
             title: (type === 'burn'? indexText['烧录中'] : indexText['上传中']) + '...',
             content: $('#mixly-loader-div'),
-            shade: LayerExtend.shadeWithHeight,
+            shade: LayerExt.SHADE_NAV,
             resize: false,
             closeBtn: 0,
             success: function (layero, index) {
@@ -184,7 +184,7 @@ BU.initWithDropdownBox = function (type, startPath) {
         type: 1,
         title: (type === 'burn'? indexText['烧录中'] : indexText['上传中']) + '...',
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shadeWithHeight,
+        shade: LayerExt.SHADE_NAV,
         resize: false,
         closeBtn: 0,
         success: function (layero, index) {
@@ -353,7 +353,7 @@ BU.burnWithSpecialBin = () => {
         title: "请选择固件：",
         area: ['350px', '150px'],
         content: $('#mixly-selector-div'),
-        shade: Mixly.LayerExtend.shade,
+        shade: Mixly.LayerExt.SHADE_ALL,
         resize: false,
         closeBtn: 0,
         success: function (layero) {
@@ -430,7 +430,7 @@ BU.operateWithPort = (type, port, command) => {
             type: 1,
             title,
             content: $('#mixly-loader-div'),
-            shade: LayerExtend.shadeWithHeight,
+            shade: LayerExt.SHADE_NAV,
             resize: false,
             closeBtn: 0,
             success: function (layero, index) {

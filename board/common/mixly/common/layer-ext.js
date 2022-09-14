@@ -4,11 +4,11 @@ goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.DomOperator');
 goog.require('Mixly.Config');
-goog.provide('Mixly.LayerExtend');
+goog.provide('Mixly.LayerExt');
 
 const {
     Env,
-    LayerExtend,
+    LayerExt,
     Config,
     DomOperator
 } = Mixly;
@@ -17,7 +17,10 @@ const { BOARD, USER } = Config;
 
 const { layer } = layui;
 
-LayerExtend.DEFAULT_CONFIG = {
+// 默认的弹层标题高度
+LayerExt.DEFAULT_TITLE_HEIGHT = 42;
+// 默认的弹层配置项
+LayerExt.DEFAULT_CONFIG = {
     area: ['50%', '50%'],
     max: ['850px', '543px'],
     min: ['350px', '243px'],
@@ -25,7 +28,7 @@ LayerExtend.DEFAULT_CONFIG = {
     id: 'info',
     content: '',
     resize: true,
-    shade: LayerExtend.shade,
+    shade: LayerExt.SHADE_ALL,
     success: null,
     end: null,
     cancel: null,
@@ -35,8 +38,8 @@ LayerExtend.DEFAULT_CONFIG = {
     borderRadius: '8px',
     maxmin: false
 };
-
-LayerExtend.SHADE = {
+// 弹层遮罩设置
+LayerExt.SHADE = {
     "dark": [
         [0.005, 'rgb(46 64 86)'],
         [0.005, 'rgb(46 64 86)', '40px']
@@ -47,21 +50,21 @@ LayerExtend.SHADE = {
     ]
 };
 
-LayerExtend.shade = LayerExtend.SHADE['light'][0];
-LayerExtend.shadeWithHeight = LayerExtend.SHADE['light'][1];
+LayerExt.SHADE_ALL = LayerExt.SHADE['light'][0];
+LayerExt.SHADE_NAV = LayerExt.SHADE['light'][1];
 
-LayerExtend.updateShade = () => {
+LayerExt.updateShade = () => {
     let theme = ['light', 'dark'];
     if (!theme.includes(USER.theme))
         USER.theme = 'light';
-    LayerExtend.shade = LayerExtend.SHADE[USER.theme][0];
-    LayerExtend.shadeWithHeight = LayerExtend.SHADE[USER.theme][1];
+    LayerExt.SHADE_ALL = LayerExt.SHADE[USER.theme][0];
+    LayerExt.SHADE_NAV = LayerExt.SHADE[USER.theme][1];
 }
 
-LayerExtend.openSerialTool = (toolConfig, sucFunc, endFunc) => {
+LayerExt.openSerialTool = (toolConfig, sucFunc, endFunc) => {
     let serialTool = new DomOperator.SerialDom.generate(
         toolConfig,
-        LayerExtend.shade,
+        LayerExt.SHADE_ALL,
         Code.LANG,
         Env.isElectron
     );
@@ -69,12 +72,12 @@ LayerExtend.openSerialTool = (toolConfig, sucFunc, endFunc) => {
     return serialTool;
 }
 
-LayerExtend.open = (toolConfig) => {
+LayerExt.open = (toolConfig) => {
     if (typeof toolConfig !== 'object')
-        toolConfig = LayerExtend.DEFAULT_CONFIG;
+        toolConfig = LayerExt.DEFAULT_CONFIG;
     else
         toolConfig = {
-            ...LayerExtend.DEFAULT_CONFIG,
+            ...LayerExt.DEFAULT_CONFIG,
             ...toolConfig
         };
 

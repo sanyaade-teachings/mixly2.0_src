@@ -3,7 +3,7 @@
 goog.require('Mixly.Url');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Config');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Url');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
@@ -17,7 +17,7 @@ const {
     MFile,
     StatusBar,
     Config,
-    LayerExtend,
+    LayerExt,
     Web
 } = Mixly;
 const { SOFTWARE, BOARD } = Config;
@@ -108,7 +108,7 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
         type: 1,
         title: indexText["编译中"] + "...",
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shadeWithHeight,
+        shade: LayerExt.SHADE_NAV,
         closeBtn: 0,
         success: function () {
             $(".layui-layer-page").css("z-index", "198910151");

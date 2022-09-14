@@ -1,7 +1,7 @@
 (() => {
 
 goog.require('layui');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
@@ -18,7 +18,7 @@ const {
     Env,
     ScriptLoader,
     Modules,
-    LayerExtend,
+    LayerExt,
     NavEvents,
     Config,
     XML,
@@ -34,7 +34,7 @@ const { BOARD } = Config;
 NavEvents.onclickNewFile = () => {
     layer.confirm(MSG['confirm_newfile'], {
         title: false,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         btn: [MSG['newfile_yes'], MSG['newfile_no']]
         , btn2: function (index, layero) {
@@ -79,7 +79,7 @@ NavEvents.onclickChangeLang = () => {
     }
     layer.confirm(MSG['choose_language'], {
         title: false,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         btn: ['简体中文', '繁体中文', 'English']
         , btn3: function (index, layero) {
@@ -107,7 +107,7 @@ NavEvents.onclickChangeLang = () => {
 NavEvents.onclickChangeTheme = () => {
     layer.confirm(MSG['choose_theme'], {
         title: false,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         btn: ['Dark', 'Light']
         , btn2: function (index, layero) {
@@ -119,7 +119,7 @@ NavEvents.onclickChangeTheme = () => {
             if (Env.isElectron) {
                 Modules.currentWindow.setBackgroundColor("#fff");
             }
-            LayerExtend.updateShade();
+            LayerExt.updateShade();
         }
     }, function (index, layero) {
         localStorage.Theme = 'Dark';
@@ -130,7 +130,7 @@ NavEvents.onclickChangeTheme = () => {
         if (Env.isElectron) {
             Modules.currentWindow.setBackgroundColor("#181818");
         }
-        LayerExtend.updateShade();
+        LayerExt.updateShade();
         layer.close(index);
     });
 }
@@ -145,7 +145,7 @@ NavEvents.onclickChangeWinSize = () => {
         title: MSG['windowSize'],
         area: ['350px', '180px'],
         content: `<div style="padding:50px 20px 20px 20px;"><div id="slider_winsize" class="slider"></div></div>`,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         closeBtn: 1,
         btn: [indexText["复位"], indexText["应用"]],

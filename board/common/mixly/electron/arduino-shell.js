@@ -3,7 +3,7 @@
 goog.require('layui');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
@@ -18,7 +18,7 @@ const {
     Modules,
     Env,
     Electron,
-    LayerExtend,
+    LayerExt,
     StatusBar,
     StatusBarPort,
     Title,
@@ -164,7 +164,7 @@ ArduShell.compile = (doFunc = () => {}) => {
         type: 1,
         title: indexText["编译中"] + "...",
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shadeWithHeight,
+        shade: LayerExt.SHADE_NAV,
         resize: false,
         closeBtn: 0,
         success: () => {
@@ -266,7 +266,7 @@ ArduShell.upload = (boardType, port) => {
         type: 1,
         title: indexText["上传中"] + "...",
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shadeWithHeight,
+        shade: LayerExt.SHADE_NAV,
         resize: false,
         closeBtn: 0,
         success: function () {
@@ -530,7 +530,7 @@ ArduShell.writeFile = function (readPath, writePath) {
                 type: 1,
                 title: indexText['保存中'] + '...',
                 content: $('#mixly-loader-div'),
-                shade: LayerExtend.shade,
+                shade: LayerExt.SHADE_ALL,
                 resize: false,
                 closeBtn: 0,
                 success: function () {
@@ -607,7 +607,7 @@ ArduShell.showUploadBox = function (filePath) {
     const layerNum = layer.msg(indexText['所打开文件可直接上传'], {
         time: -1,
         btn: [indexText['取消'], indexText['上传']],
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         btnAlign: 'c',
         yes: function () {
             layer.close(layerNum);

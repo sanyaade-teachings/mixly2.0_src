@@ -1,7 +1,7 @@
 (() => {
 
 goog.require('layui');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
@@ -12,7 +12,7 @@ goog.provide('Mixly.Boards');
 
 const {
     Config,
-    LayerExtend,
+    LayerExt,
     XML,
     Env,
     ToolboxSearcher,

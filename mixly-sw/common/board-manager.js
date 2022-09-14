@@ -6,7 +6,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.CloudDownload');
 goog.require('Mixly.Msg');
 goog.require('Mixly.XML');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Url');
@@ -19,7 +19,7 @@ const {
     CloudDownload,
     Msg,
     XML,
-    LayerExtend,
+    LayerExt,
     Config,
     MArray,
     Url,
@@ -96,7 +96,7 @@ BoardManager.showLocalImportDialog = () => {
                 id: "import-local-board-layer",
                 title: Msg.getLang("板卡导入中") + "...",
                 content: $('#mixly-loader-div'),
-                shade: LayerExtend.shade,
+                shade: LayerExt.SHADE_ALL,
                 resize: false,
                 closeBtn: 0,
                 success: function (layero) {
@@ -251,7 +251,7 @@ BoardManager.showDelBoardProgress = () => {
         id: "del-local-board-layer",
         title: Msg.getLang("板卡删除中") + "...",
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         closeBtn: 0,
         success: function (layero) {
@@ -416,11 +416,11 @@ BoardManager.showCloudImportProgress = (boardList, endFunc = (errorMessages) => 
     parentDom.append(childDom);
     $('body').append(parentDom);
     element.render('progress');
-    LayerExtend.open({
+    LayerExt.open({
         title: Msg.getLang('板卡导入中') + '...',
         id: 'setting-menu-layer1',
         content: parentDom,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         area: ['40%', '60%'],
         max: ['800px', (boardList.length * 106 + 42) + 'px'],
         min: ['500px', '100px'],

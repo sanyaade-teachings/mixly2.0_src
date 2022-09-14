@@ -2,7 +2,7 @@
 
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Boards');
@@ -17,7 +17,7 @@ const {
     StatusBar,
     StatusBarPort,
     Web,
-    LayerExtend,
+    LayerExt,
     Config,
     MFile,
     Boards
@@ -150,7 +150,7 @@ BU.burnByUSB = () => {
             type: 1,
             title: indexText['烧录中'] + '...',
             content: $('#mixly-loader-div'),
-            shade: LayerExtend.shadeWithHeight,
+            shade: LayerExt.SHADE_NAV,
             resize: false,
             closeBtn: 0,
             success: function (layero, index) {
@@ -244,7 +244,7 @@ BU.burnWithEsptool = () => {
                 type: 1,
                 title: indexText['烧录中'] + '...',
                 content: $('#mixly-loader-div'),
-                shade: LayerExtend.shadeWithHeight,
+                shade: LayerExt.SHADE_NAV,
                 resize: false,
                 closeBtn: 0,
                 success: async function (layero, index) {
@@ -410,7 +410,7 @@ BU.uploadByPort = (port) => {
             type: 1,
             title: indexText['上传中'] + '...',
             content: $('#mixly-loader-div'),
-            shade: LayerExtend.shadeWithHeight,
+            shade: LayerExt.SHADE_NAV,
             resize: false,
             closeBtn: 0,
             success: function (layero, index) {

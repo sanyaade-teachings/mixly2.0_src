@@ -7,7 +7,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Boards');
 goog.require('Mixly.XML');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.MicrobitFs');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Drag');
@@ -20,7 +20,7 @@ const {
     MArray,
     Boards,
     XML,
-    LayerExtend,
+    LayerExt,
     MicrobitFs,
     Editor,
     Drag,
@@ -385,13 +385,13 @@ MFile.showParseMixErrorDialog = (xml, undefinedBlocks, endFunc = () => {}) => {
         btn2Name: indexText['忽略未定义块'],
         btn3Name: indexText['读取代码']
     })
-    LayerExtend.open({
+    LayerExt.open({
         title: indexText['一些图形化模块尚未定义'],
         id: 'parse-mix-error-layer',
         area: ['50%', '250px'],
         max: ['500px', '250px'],
         min: ['350px', '100px'],
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         content: renderStr,
         borderRadius: '5px',
         success: (layero, index) => {

@@ -2,7 +2,7 @@
 
 goog.require('layui');
 goog.require('Mixly.XML');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
 goog.require('Mixly.BoardManager');
 goog.require('Mixly.Config');
@@ -12,7 +12,7 @@ goog.provide('Mixly.Setting');
 
 const {
     XML,
-    LayerExtend,
+    LayerExt,
     Msg,
     BoardManager,
     Config,
@@ -59,7 +59,7 @@ Setting.init = () => {
         }
         Msg.nowLang = USER.language ?? 'zh-hans';
         Env.theme = USER.theme;
-        LayerExtend.updateShade();
+        LayerExt.updateShade();
         layer.closeAll(() => {
             XML.renderAllTemplete();
             layer.msg(Msg.getLang('配置更新成功'), { time: 1000 });
@@ -75,7 +75,7 @@ Setting.init = () => {
         Env.theme = USER.theme;
         $('body').removeClass('dark light')
                  .addClass(Env.theme);
-        LayerExtend.updateShade();
+        LayerExt.updateShade();
         try {
             fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
                 spaces: '    '
@@ -115,11 +115,11 @@ Setting.menuInit = () => {
 Setting.onclick = () => {
     Setting.menuInit();
     Setting.nowIndex = 0;
-    LayerExtend.open({
+    LayerExt.open({
         title: [Msg.getLang('设置'), '36px'],
         id: 'setting-menu-layer',
         content: $('#' + Setting.ID),
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         area: ['50%', '50%'],
         min: ['400px', '200px'],
         success: () => {

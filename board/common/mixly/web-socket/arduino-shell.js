@@ -3,7 +3,7 @@
 goog.require('layui');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
@@ -18,7 +18,7 @@ goog.provide('Mixly.WebSocket.ArduShell');
 const {
     Modules,
     Env,
-    LayerExtend,
+    LayerExt,
     StatusBar,
     StatusBarPort,
     Title,
@@ -64,7 +64,7 @@ ArduShell.compile = () => {
         type: 1,
         title: indexText["编译中"] + "...",
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shadeWithHeight,
+        shade: LayerExt.SHADE_NAV,
         resize: false,
         closeBtn: 0,
         success: (layero, index) => {
@@ -133,7 +133,7 @@ ArduShell.upload = (boardType, port) => {
         type: 1,
         title: indexText["上传中"] + "...",
         content: $('#mixly-loader-div'),
-        shade: LayerExtend.shadeWithHeight,
+        shade: LayerExt.SHADE_NAV,
         resize: false,
         closeBtn: 0,
         success: function (layero, index) {

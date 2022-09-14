@@ -505,7 +505,7 @@ PyEngine.prototype.run = function(type) {
     // Actually run the python code
     if (showSkulptImg && !this.layerNum) {
         const _this = this;
-        this.layerNum = Mixly.LayerExtend.open({
+        this.layerNum = Mixly.LayerExt.open({
             title: ['显示', '30px'],
             shade: 0,
             offset: 'rt',

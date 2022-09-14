@@ -6,7 +6,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Boards');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.File');
 
@@ -15,7 +15,7 @@ const {
     Editor,
     MFile,
     Boards,
-    LayerExtend
+    LayerExt
 } = Mixly;
 const { Socket, File } = Mixly.WebSocket;
 
@@ -29,7 +29,7 @@ File.saveToCloud = () => {
     }, () => {
         layer.prompt({
             title: MSG['save_ser'],
-            shade: LayerExtend.shade,
+            shade: LayerExt.SHADE_ALL,
             value: 'main.mix',
             success: function(layero, index) {
                 $(layero).find('input').attr('spellcheck', false);
@@ -108,7 +108,7 @@ File.showOpenDialog = (filesObj) => {
         title: "请选择需要打开的文件：",
         area: ['350px', '150px'],
         content: $('#mixly-selector-div'),
-        shade: Mixly.LayerExtend.shade,
+        shade: Mixly.LayerExt.SHADE_ALL,
         resize: false,
         closeBtn: 0,
         success: function (layero) {

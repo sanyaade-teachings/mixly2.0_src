@@ -2,7 +2,7 @@
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.Title');
 goog.require('Mixly.MFile');
@@ -16,7 +16,7 @@ goog.provide('Mixly.Electron.File');
 const {
     Modules,
     Env,
-    LayerExtend,
+    LayerExt,
     Config,
     Title,
     MFile,
@@ -238,7 +238,7 @@ File.newFile = () => {
     }
     layer.confirm(MSG['confirm_newfile'], {
         title: false,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         btn: [MSG['newfile_yes'], MSG['newfile_no']]
         , btn2: (index, layero) => {

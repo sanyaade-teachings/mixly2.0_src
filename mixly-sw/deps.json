@@ -30,7 +30,7 @@
                 "Mixly.CloudDownload",
                 "Mixly.Msg",
                 "Mixly.XML",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Config",
                 "Mixly.MArray",
                 "Mixly.Url",
@@ -106,7 +106,7 @@
             "require":[
                 "layui",
                 "Mixly.XML",
-                "Mixly.LayerExtend",
+                "Mixly.LayerExt",
                 "Mixly.Msg",
                 "Mixly.BoardManager",
                 "Mixly.Config",

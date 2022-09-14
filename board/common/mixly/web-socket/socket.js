@@ -173,7 +173,7 @@ Socket.openLoadingBox = (title, successFunc = () => {}, endFunc = () => {}) => {
         type: 1,
         title: title,
         content: $('#mixly-loader-div'),
-        shade: Mixly.LayerExtend.shade,
+        shade: Mixly.LayerExt.SHADE_ALL,
         closeBtn: 0,
         success: function () {
             $("#webusb-cancel").css("display","none");

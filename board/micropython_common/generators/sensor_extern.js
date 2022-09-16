@@ -222,7 +222,7 @@ Blockly.Python.sensor_use_i2c_init=function(){
       code = v + ' = shtc3.' + key + "("+ iv+ ')\n';
     }else if (key=='AHT21') {
       Blockly.Python.definitions_['import_ahtx0'] = 'import ahtx0';
-      code = v + ' = adafruit_ahtx0.AHTx0('+ iv+ ')\n';
+      code = v + ' = ahtx0.AHTx0('+ iv+ ')\n';
     }
     else if (key=='VL53L0X') {
       Blockly.Python.definitions_['import_vl53l0x'] = 'import vl53l0x';
@@ -299,7 +299,7 @@ Blockly.Python.sensor_aht11_extern=function(){
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_ahtx0'] = 'import ahtx0';
-    var code = sub + '.' + key;
+    var code = sub + '.' + key + '()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

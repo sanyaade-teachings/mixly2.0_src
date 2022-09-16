@@ -1,9 +1,18 @@
 {
+    "board": {
+        "MixGo AI": "MixGo AI",
+        "MixGo AI sensor": "MixGo AI sensor"
+    },
     "language": "MicroPython",
     "burn": {
         "type": "command",
         "portSelect": "all",
-        "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-ASR_V2.0.kfpkg\""
+        "MixGo AI": {
+            "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-ASR_V2.0.kfpkg\""
+        },
+        "MixGo AI sensor":{
+            "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-Sensor_V1.0.kfpkg\""
+        }
     },
     "upload": {
         "type": "command",

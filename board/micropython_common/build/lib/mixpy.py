@@ -4,12 +4,10 @@ import math
 def math_map(v, al, ah, bl, bh):
     if al==ah:
         return bl
+    if al < ah:
+        v = max(min(ah,v),al)
     if al > ah:
-        al, ah = ah, al
-    if v > ah:
-        v = ah
-    if v < al:
-        v = al
+        v = max(min(al,v),ah)
     return bl + (bh - bl) * (v - al) / (ah - al)
 
 def math_mean(myList):

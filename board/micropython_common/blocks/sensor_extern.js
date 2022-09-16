@@ -471,7 +471,7 @@ Blockly.Blocks['sensor_aht11_extern'] = {
         this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([
             [Blockly.MIXLY_GETTEMPERATUE, "temperature"],
-            [Blockly.MIXLY_GETHUMIDITY, "relative_humidity"]
+            [Blockly.MIXLY_GETHUMIDITY, "humidity"]
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);

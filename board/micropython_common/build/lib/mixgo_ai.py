@@ -22,6 +22,8 @@ class INFO:
 			self.y=rect[1]
 			self.w=rect[2]
 			self.h=rect[3]
+			self.xc=rect[0]+rect[2]//2
+			self.yc=rect[1]+rect[3]//2
 		self.type="info"
 
 class AI:

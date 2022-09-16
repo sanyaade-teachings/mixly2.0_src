@@ -92,7 +92,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo-0x1000-V1.19.1-220902-lib.bin"
+                        "path": "./build/MixGo-0x1000-V1.19.1-220916-lib.bin"
                     }
                 ]
             },
@@ -100,7 +100,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo_PE-0x1000-V1.19.1-220902-lib.bin"
+                        "path": "./build/MixGo_PE-0x1000-V1.19.1-220916-lib.bin"
                     },
                     {
                         "offset": "0x700000",
@@ -112,7 +112,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo_PE-0x1000-V1.19.1-220902-lib.bin"
+                        "path": "./build/MixGo_PE-0x1000-V1.19.1-220916-lib.bin"
                     }
                 ]
             },
@@ -120,7 +120,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/RM_E1-0x1000-V1.19.1-220902-Slib.bin"
+                        "path": "./build/RM_E1-0x1000-V1.19.1-220916-Slib.bin"
                     }
                 ]
             },
@@ -128,7 +128,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/mPython-0x1000-V1.19.1-220902-lib.bin"
+                        "path": "./build/mPython-0x1000-V1.19.1-220916-lib.bin"
                     },
                     {
                         "offset": "0x700000",

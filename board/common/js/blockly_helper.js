@@ -83,14 +83,20 @@ function restore_blocks() {
         File.openFile(window.localStorage[BOARD.boardType + '.filePath']);
         window.localStorage[BOARD.boardType + '.filePath'] = '';
     } else if (window.localStorage[BOARD.boardType]) {
-        /*let xml;
+        let xml;
         try {
-            xml = Blockly.Xml.textToDom(window.localStorage[Mixly.Config.BOARD.boardType]);
-            if (document.getElementById("boards-type")) {
-                var boardType = window.localStorage[Mixly.Config.BOARD.boardType].match(/(?<=board[\s]*=[\s]*\")[^\n\"]+(?=\")/g);
-                console.log(boardType);
-                Boards.setSelectedBoard(boardType);
-                profile['default'] = profile[boardType] ?? profile['default'];
+            xml = Blockly.Xml.textToDom(window.localStorage[BOARD.boardType]);
+            if ($("#boards-type").length) {
+                const boardNameList = window.localStorage[BOARD.boardType].match(/(?<=board[\s]*=[\s]*\")[^\n\"]+(?=\")/g);
+                let boardName = boardNameList.length? boardNameList[0] : '';
+                if (BOARD.boardName
+                 && boardName !== BOARD.boardName
+                 && BOARD.board
+                 && BOARD.board[BOARD.boardName]) {
+                    boardName = BOARD.boardName;
+                }
+                Boards.setSelectedBoard(boardName);
+                profile['default'] = profile[boardName] ?? profile['default'];
             }
             Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
             Blockly.mainWorkspace.scrollCenter();
@@ -115,6 +121,7 @@ function restore_blocks() {
             File.openedFilePath = filePath;
             File.workingPath = path.dirname(filePath);
             Title.updeteFilePath(File.openedFilePath);
+        }
     }
     const $loading = $('.loading');
     const toolboxWidth = $('.blocklyToolboxDiv').width();

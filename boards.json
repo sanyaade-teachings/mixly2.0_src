@@ -12,7 +12,6 @@
     },{
         "boardImg": "./board/micropython_esp32c3/media/c3.png",
         "boardType": "Python ESP32-C3",
-        "boardName": "MixGo ME",
         "boardIndex": "./board/micropython_esp32c3/index.html",
         "env": {
             "electron": true,

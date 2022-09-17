@@ -307,7 +307,7 @@
                 "Mixly.MFile",
                 "Mixly.Editor",
                 "Mixly.Drag",
-                "Mixly.LayerExtend"
+                "Mixly.LayerExt"
             ],
             "provide":[
                 "Mixly.Web.File"

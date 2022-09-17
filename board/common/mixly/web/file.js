@@ -3,7 +3,7 @@
 goog.require('Mixly.MFile');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Drag');
-goog.require('Mixly.LayerExtend');
+goog.require('Mixly.LayerExt');
 goog.provide('Mixly.Web.File');
 
 const {
@@ -11,7 +11,7 @@ const {
     Editor,
     Drag,
     Web,
-    LayerExtend
+    LayerExt
 } = Mixly;
 
 const { File } = Web;
@@ -161,7 +161,7 @@ File.saveAs = async () => {
 File.new = async () => {
     layer.confirm(MSG['confirm_newfile'], {
         title: false,
-        shade: LayerExtend.shade,
+        shade: LayerExt.SHADE_ALL,
         resize: false,
         btn: [MSG['newfile_yes'], MSG['newfile_no']]
         , btn2: function (index, layero) {

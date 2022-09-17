@@ -12,6 +12,7 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.ToolboxSearcher');
 goog.require('Mixly.Drag');
 goog.require('Mixly.Editor');
+goog.require('Mixly.LevelSelector');
 goog.require('WorkspaceSearch');
 goog.require('Backpack');
 goog.provide('Mixly.Interface');
@@ -57,7 +58,8 @@ const {
     Env,
     ToolboxSearcher,
     Drag,
-    Editor
+    Editor,
+    LevelSelector
 } = Mixly;
 
 const { BOARD } = Config;
@@ -88,7 +90,21 @@ Interface.init = () => {
     window.addEventListener('resize', Interface.onresize, false);
     Interface.onresize();
     Drag.init();
-    auto_save_and_restore_blocks();
+    if (BOARD.nav.levelSelector) {
+        LevelSelector.init();
+        const $loading = $('.loading');
+        const toolboxWidth = $('.blocklyToolboxDiv').width();
+        $loading.children('.left-div').animate({
+          width: toolboxWidth + 'px'
+        }, () => {
+            $loading.fadeOut("fast", () => {
+                $loading.remove();
+            });
+        });
+        LevelSelector.xmlToWorkspace(1);
+    } else {
+        auto_save_and_restore_blocks();
+    }
     NavEvents.init();
     StatusBar.init();
     ToolboxSearcher.init();

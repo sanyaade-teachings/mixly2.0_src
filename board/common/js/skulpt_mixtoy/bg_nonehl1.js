@@ -102,7 +102,7 @@ var $builtinmodule = function (name) {
         wall:'https://test.mixly.org/static/pic/wall.png',
         award:'https://test.mixly.org/static/pic/award.png',
         barrier:'https://test.mixly.org/static/pic/roadblock.png',
-        markers:['https://test.mixly.org/static/pic/book/red.png','https://test.mixly.org/static/pic/book/yellow.png','https://test.mixly.org/static/pic/book/blue.png','https://test.mixly.org/static/pic/book/green.png'],
+        markers:['https://test.mixly.org/static/pic/red.png','https://test.mixly.org/static/pic/yellow.png','https://test.mixly.org/static/pic/blue.png','https://test.mixly.org/static/pic/green.png'],
         SquareType :{//迷宫中方块的类型
             WALL: 0,
             OPEN: 1,
@@ -363,12 +363,12 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: 'https://test.mixly.org/static/pic/tiles_road.png',//地图路径图片
-            marker: 'https://test.mixly.org/static/pic/book/Start_final.png',//终点图标图片
-            background: 'https://test.mixly.org/static/pic/book/bg_car1.png',//地图背景图片
+            marker: 'https://test.mixly.org/static/pic/Start_final.png',//终点图标图片
+            background: 'https://test.mixly.org/static/pic/bg_car1.png',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
-            markers:['https://test.mixly.org/static/pic/book/red.png','https://test.mixly.org/static/pic/book/yellow.png','https://test.mixly.org/static/pic/book/blue.png','https://test.mixly.org/static/pic/book/green.png'],
+            markers:['https://test.mixly.org/static/pic/red.png','https://test.mixly.org/static/pic/yellow.png','https://test.mixly.org/static/pic/blue.png','https://test.mixly.org/static/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -399,12 +399,12 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: 'https://test.mixly.org/static/pic/tiles_road.png',//地图路径图片
-            marker: 'https://test.mixly.org/static/pic/book/Start_final.png',//终点图标图片
-            background: 'https://test.mixly.org/static/pic/book/bg_car2.png',//地图背景图片
+            marker: 'https://test.mixly.org/static/pic/Start_final.png',//终点图标图片
+            background: 'https://test.mixly.org/static/pic/bg_car2.png',//地图背景图片
             wall:'',
             award:'',
-            barrier:'https://test.mixly.org/static/pic/book/barrier.png',
-            markers:['https://test.mixly.org/static/pic/book/red.png','https://test.mixly.org/static/pic/book/yellow.png','https://test.mixly.org/static/pic/book/blue.png','https://test.mixly.org/static/pic/book/green.png'],
+            barrier:'https://test.mixly.org/static/pic/barrier.png',
+            markers:['https://test.mixly.org/static/pic/red.png','https://test.mixly.org/static/pic/yellow.png','https://test.mixly.org/static/pic/blue.png','https://test.mixly.org/static/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -435,12 +435,12 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: 'https://test.mixly.org/static/pic/tiles_road.png',//地图路径图片
-            marker: 'https://test.mixly.org/static/pic/book/Start_final.png',//终点图标图片
-            background: 'https://test.mixly.org/static/pic/book/bg_car2.png',//地图背景图片
+            marker: 'https://test.mixly.org/static/pic/Start_final.png',//终点图标图片
+            background: 'https://test.mixly.org/static/pic/bg_car2.png',//地图背景图片
             wall:'',
             award:'',
-            barrier:'https://test.mixly.org/static/pic/book/barrier.png',
-            markers:['https://test.mixly.org/static/pic/book/red.png','https://test.mixly.org/static/pic/book/yellow.png','https://test.mixly.org/static/pic/book/blue.png','https://test.mixly.org/static/pic/book/green.png'],
+            barrier:'https://test.mixly.org/static/pic/barrier.png',
+            markers:['https://test.mixly.org/static/pic/red.png','https://test.mixly.org/static/pic/yellow.png','https://test.mixly.org/static/pic/blue.png','https://test.mixly.org/static/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -468,12 +468,12 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: 'https://test.mixly.org/static/pic/tiles_road.png',//地图路径图片
-            marker: 'https://test.mixly.org/static/pic/book/Start_final.png',//终点图标图片
-            background: 'https://test.mixly.org/static/pic/book/bg_car3.png',//地图背景图片
+            marker: 'https://test.mixly.org/static/pic/Start_final.png',//终点图标图片
+            background: 'https://test.mixly.org/static/pic/bg_car3.png',//地图背景图片
             wall:'',
             award:'',
-            barrier:'https://test.mixly.org/static/pic/book/barrier.png',
-            markers:['https://test.mixly.org/static/pic/book/red.png','https://test.mixly.org/static/pic/book/yellow.png','https://test.mixly.org/static/pic/book/blue.png','https://test.mixly.org/static/pic/book/green.png'],
+            barrier:'https://test.mixly.org/static/pic/barrier.png',
+            markers:['https://test.mixly.org/static/pic/red.png','https://test.mixly.org/static/pic/yellow.png','https://test.mixly.org/static/pic/blue.png','https://test.mixly.org/static/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -502,8 +502,8 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: 'https://test.mixly.org/static/pic/tiles_road.png',//地图路径图片
-            marker: 'https://test.mixly.org/static/pic/book/Start_final.png',//终点图标图片
-            background: 'https://test.mixly.org/static/pic/book/bg_car4.png',//地图背景图片
+            marker: 'https://test.mixly.org/static/pic/Start_final.png',//终点图标图片
+            background: 'https://test.mixly.org/static/pic/bg_car4.png',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
@@ -535,8 +535,8 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: 'https://test.mixly.org/static/pic/tiles_road.png',//地图路径图片
-            marker: 'https://test.mixly.org/static/pic/book/Start_final.png',//终点图标图片
-            background: 'https://test.mixly.org/static/pic/book/bg_car4.png',//地图背景图片
+            marker: 'https://test.mixly.org/static/pic/Start_final.png',//终点图标图片
+            background: 'https://test.mixly.org/static/pic/bg_car4.png',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
@@ -751,16 +751,16 @@ var $builtinmodule = function (name) {
                         maze.finish={x:x,y:y}
                     }else if(map[y][x]==20){//当地图中此处标记为20——加油站时
                         svg.append('image').attr('id','station').attr('x',x * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.8/2)).attr('y',y * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.8/2)).attr('width',maze_SQUARE_SIZE*2*0.8).attr('height',maze_SQUARE_SIZE*0.8)
-                        .attr('xlink:href','https://test.mixly.org/static/pic/book/oilstation.png')
+                        .attr('xlink:href','https://test.mixly.org/static/pic/oilstation.png')
                     }else if(map[y][x]==21){//当地图中此处标记为21——红绿灯时
                         svg.append('image').attr('id','trafficlight').attr('x',x * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('y',y * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('width',maze_SQUARE_SIZE*0.7).attr('height',maze_SQUARE_SIZE*0.7)
-                        .attr('xlink:href','https://test.mixly.org/static/pic/book/trafficlight.png')
+                        .attr('xlink:href','https://test.mixly.org/static/pic/trafficlight.png')
                     }else if(map[y][x]==22){//当地图中此处标记为22——红绿灯中的绿灯时
                         svg.append('image').attr('id','lightgreen').attr('x',x * maze_SQUARE_SIZE-5).attr('y',y * maze_SQUARE_SIZE+ 5).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                        .attr('xlink:href','https://test.mixly.org/static/pic/book/greenlight.png')
+                        .attr('xlink:href','https://test.mixly.org/static/pic/greenlight.png')
                     }else if(map[y][x]==23){//当地图中此处标记为23——红绿灯中的红灯时
                         svg.append('image').attr('id','lightred').attr('x',x * maze_SQUARE_SIZE-5).attr('y',y * maze_SQUARE_SIZE+ 5).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                        .attr('xlink:href','https://test.mixly.org/static/pic/book/redlight.png')
+                        .attr('xlink:href','https://test.mixly.org/static/pic/redlight.png')
                     }else if(map[y][x]==2){//当地图中此处标记为起点时，画上和“既是起点又是终点”一样的图标
                         actor.x= x;
                         actor.y= y;
@@ -1315,7 +1315,7 @@ var $builtinmodule = function (name) {
                             if(actor.oil==0){//在加油站处，如果没有油还想继续往前面走
                                 maze.result=ResultType.FAILURE
                                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                                .attr('xlink:href','https://test.mixly.org/static/pic/book/no_oil.png')
+                                .attr('xlink:href','https://test.mixly.org/static/pic/no_oil.png')
                                 alert("挑战失败!小车没有油了")
                                 throw new Sk.builtin.TypeError("挑战失败!小车没有油了");
                             }
@@ -1362,7 +1362,7 @@ var $builtinmodule = function (name) {
                             if(actor.traffic_light==maze.SquareType.LIGHT_RED){//图像变为红灯
                                 d3.select("#lightgreen").remove();
                                 svg.append('image').attr('id','lightred').attr('x',(actor.x+1) * maze_SQUARE_SIZE-5).attr('y',actor.y * maze_SQUARE_SIZE+5).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                                .attr('xlink:href','https://test.mixly.org/static/pic/book/redlight.png')
+                                .attr('xlink:href','https://test.mixly.org/static/pic/redlight.png')
                             }   
                         }
                     }
@@ -1491,10 +1491,10 @@ var $builtinmodule = function (name) {
             actor.oil=Math.random()>0.5?1:0;//随机初始化汽车的油量
             if(actor.oil==0){//没油(呈现少量油的图片)
                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                .attr('xlink:href','https://test.mixly.org/static/pic/book/none_oil.png')
+                .attr('xlink:href','https://test.mixly.org/static/pic/none_oil.png')
             }else if(actor.oil==1){//油量充足（呈现油量充足的图片）
                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                .attr('xlink:href','https://test.mixly.org/static/pic/book/full_oil.png')
+                .attr('xlink:href','https://test.mixly.org/static/pic/full_oil.png')
             }
         });
         //判断是否需要加油
@@ -1512,7 +1512,7 @@ var $builtinmodule = function (name) {
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 Sk.setTimeout(function() {
                     svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                    .attr('xlink:href','https://test.mixly.org/static/pic/book/full_oil.png')
+                    .attr('xlink:href','https://test.mixly.org/static/pic/full_oil.png')
                     actor.oil=1//油量充足
                     resolve(Sk.builtin.none.none$);
                 }, 800);

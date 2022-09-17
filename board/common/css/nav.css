@@ -259,80 +259,41 @@
     top: calc((var(--nav-height) - var(--nav-select-height)) / 2);
 }
 
-#boardSelector-div {
-    width: 150px;
-    margin-left: 10px;
-    /*position: absolute;
-    top: 3px;
-    z-index: 2000;*/
-}
-
-.light #boardSelector-div input, .light #portSelector-div input {
+.light #nav input {
     background-color: #009f90;
     border-color: #009f90;
     color: #fff;
 }
 
-.light #boardSelector-div input:hover,
-.light #portSelector-div input:hover,
-.light #boardSelector-div input:focus,
-.light #portSelector-div input:focus {
+.light #nav input:hover,
+.light #nav input:focus {
     border-color: #037a6f !important;
 }
 
-.dark #boardSelector-div input:hover,
-.dark #portSelector-div input:hover,
-.dark #boardSelector-div input:focus,
-.dark #portSelector-div input:focus {
+.dark #nav input:hover,
+.dark #nav input:focus {
     border-color: #1f1f1f !important;
 }
 
-#boardSelector-div input::-webkit-input-placeholder,
-#portSelector-div input::-webkit-input-placeholder {
+#nav input::-webkit-input-placeholder,
+#nav input::-webkit-input-placeholder {
     color: #ddd;
 }
 
-#portSelector-div {
-    width: 100px;
-    margin-left: 5px;
-    margin-right: 3px;
-}
-
-#boardSelector {
-    position: absolute;
-    width: 150px;
-    top: 3px;
-}
-
-#portSelector {
-    position: absolute;
-    width: 100px;
-    top: 3px;
-}
-
-#boardSelector .layui-input,
-#portSelector .layui-input {
+#nav .layui-input {
     border-radius: 3px;
 }
 
-#boardSelector > div > div > input,
-#portSelector > div > div > input {
+#nav .layui-form input {
     height: 24px;
 }
 
-#boardSelector > div > dl,
-#portSelector > div > dl {
+#nav .layui-form dl {
     top: calc(var(--nav-select-height) + (var(--nav-height) - var(--nav-select-height)) / 2);
     padding: 3px 0;
 }
 
-#boardSelector > dl,
-#portSelector > dl {
-    top: 24px;
-}
-
-#boardSelector dl dd,
-#portSelector dl dd {
+#nav .layui-form dl > dd {
     line-height: 30px;
     display: flex;
     flex-direction: row;

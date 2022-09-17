@@ -71,6 +71,16 @@
             "webSocket": true
         }
     },{
+        "boardImg": "./board/python_skulpt/media/webpy.png",
+        "boardType": "Python 3 Car",
+        "boardIndex": "./board/python_skulpt_car/index_skulpt_board_mixpy.html",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        }
+    },{
         "boardImg": "./board/micropython_k210_mixgoai/media/mixgoai.png",
         "boardType": "MixGo AI",
         "boardIndex": "./board/micropython_k210_mixgoai/index.html",

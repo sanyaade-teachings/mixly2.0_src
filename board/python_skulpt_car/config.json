@@ -1,0 +1,14 @@
+{
+    "language": "Python",
+    "nav": {
+        "webrun": true,
+        "websteprun": true,
+        "webcancel": true,
+        "save": {
+            "img": true,
+            "py": true
+        },
+        "levelSelector": true
+    },
+    "saveMixWithCode": false
+}

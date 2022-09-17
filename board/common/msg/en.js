@@ -328,7 +328,8 @@ var indexText = {
     "打开串口终端": "Open terminal",
     "打开串口": "Open serial port",
     "已选择": "Selected",
-    "在": "on"
+    "在": "on",
+    "关卡": "Level"
 };
 
 /* 背包 */

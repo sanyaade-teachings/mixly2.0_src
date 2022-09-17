@@ -219,6 +219,7 @@
                 "Mixly.ToolboxSearcher",
                 "Mixly.Drag",
                 "Mixly.Editor",
+                "Mixly.LevelSelector",
                 "WorkspaceSearch",
                 "Backpack",
                 "Mixly.Electron",
@@ -381,6 +382,7 @@
                 "Mixly.ToolboxSearcher",
                 "Mixly.Drag",
                 "Mixly.Editor",
+                "Mixly.LevelSelector",
                 "WorkspaceSearch",
                 "Backpack",
                 "Mixly.Web.ExampleExt"
@@ -419,6 +421,7 @@
                     "Mixly.ToolboxSearcher",
                     "Mixly.Drag",
                     "Mixly.Editor",
+                    "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
                     "Mixly.WebSocket.Socket",
@@ -456,6 +459,7 @@
                     "Mixly.ToolboxSearcher",
                     "Mixly.Drag",
                     "Mixly.Editor",
+                    "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
                     "Mixly.WebSocket.Socket",
@@ -589,6 +593,7 @@
                     "Mixly.ToolboxSearcher",
                     "Mixly.Drag",
                     "Mixly.Editor",
+                    "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
                     "Mixly.Web.ExampleExt"
@@ -625,6 +630,7 @@
                     "Mixly.ToolboxSearcher",
                     "Mixly.Drag",
                     "Mixly.Editor",
+                    "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
                     "Mixly.Web.ExampleExt"
@@ -782,6 +788,16 @@
             ],
             "provide":[
                 "Mixly.LayerExt"
+            ]
+        },
+        {
+            "path":"/common/level-selector.js",
+            "require":[
+                "layui",
+                "Mixly"
+            ],
+            "provide":[
+                "Mixly.LevelSelector"
             ]
         },
         {

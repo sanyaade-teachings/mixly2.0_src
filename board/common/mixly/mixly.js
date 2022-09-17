@@ -404,6 +404,7 @@ Config.init = () => {
             thirdPartyBoard,
             boardImg,
             boardIndex,
+            boardType,
             boardName,
             filePath
         } = urlConfig;
@@ -413,12 +414,14 @@ Config.init = () => {
             thirdPartyBoard,
             boardImg,
             boardIndex,
+            boardType,
             boardName,
             filePath
         };
         delete urlConfig.thirdPartyBoard;
         delete urlConfig.boardImg;
         delete urlConfig.boardIndex;
+        delete urlConfig.boardType;
         delete urlConfig.boardName;
         delete urlConfig.filePath;
     }

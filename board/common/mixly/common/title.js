@@ -4,8 +4,8 @@ goog.require('Mixly.Config');
 
 let { Url, Config, Title } = Mixly;
 let { BOARD, SOFTWARE } = Config;
-if (SOFTWARE?.version && BOARD?.boardName) {
-    Title.title = SOFTWARE.version + " For " + BOARD.boardName;
+if (SOFTWARE?.version && BOARD?.boardType) {
+    Title.title = SOFTWARE.version + " For " + BOARD.boardType;
     document.title = Title.title;
 } else {
     Title.title = document.title;

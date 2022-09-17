@@ -83,17 +83,17 @@ ipcRenderer.on('open-file', (event, message) => {
     if (boardType) {
         const { boardsList } = BoardManager;
         for (let i = 0; i < boardsList.length; i++) {
-            if (boardsList[i].boardName == boardType) {
+            if (boardsList[i].boardType == boardType) {
                 boardsList[i].filePath = message;
                 const {
-                    boardName,
+                    boardType,
                     boardIndex,
                     boardImg,
                     thirdPartyBoard,
                     filePath
                 } = boardsList[i];
                 let boardJson = JSON.parse(JSON.stringify({
-                    boardName,
+                    boardType,
                     boardIndex,
                     boardImg,
                     thirdPartyBoard,

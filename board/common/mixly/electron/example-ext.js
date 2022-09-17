@@ -51,13 +51,13 @@ ExampleExt.prototype.getExampleList = function () {
     if (BOARD.thirdPartyBoard) {
         samplePath = path.resolve(Env.indexPath, 'examples');
     } else {
-        samplePath = path.resolve(app.getAppPath(), 'src/sample', BOARD.boardName);
+        samplePath = path.resolve(app.getAppPath(), 'src/sample', BOARD.boardType);
     }
     const sampleList = this.getExamplesByPath(samplePath, '.mix');
     if (sampleList.length) {
         exampleList.push({
             id: samplePath,
-            title: BOARD.boardName,
+            title: BOARD.boardType,
             children: []
         });
     }

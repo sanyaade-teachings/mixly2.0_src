@@ -228,9 +228,9 @@ BoardManager.delBoard = (boardDir, endFunc) => {
     });
 }
 
-BoardManager.ignoreBoard = (boardName, endFunc) => {
+BoardManager.ignoreBoard = (boardType, endFunc) => {
     USER.boardIgnore = USER.boardIgnore ?? [];
-    USER.boardIgnore.push(boardName);
+    USER.boardIgnore.push(boardType);
     const settingPath = path.resolve(Env.clientPath, './setting/config.json');
     fs_extra.outputJson(settingPath, USER, {
         spaces: '    '
@@ -405,7 +405,7 @@ BoardManager.showCloudImportProgress = (boardList, endFunc = (errorMessages) => 
         const boardInfo = boardList[i];
         const boardPanelConfig = {
             boardPanelId: 'board-' + i + '-panel-id',
-            boardName: boardInfo.name,
+            boardType: boardInfo.name,
             progressFilter: 'board-' + i + '-progress-filter',
             progressStatusId: 'board-' + i + '-progress-status-id'
         };
@@ -798,9 +798,9 @@ BoardManager.unZipPromise = (boardInfo, config) => {
 BoardManager.readBoardConfig = (inPath) => {
     const boardConfig = fs_extra.readJsonSync(inPath, { throws: false });
     if (boardConfig) {
-        const { boardName, boardImg } = boardConfig;
+        const { boardType, boardImg } = boardConfig;
 
-        if (boardName && boardImg) {
+        if (boardType && boardImg) {
             const boardIndexPath = path.resolve(inPath, '../index.html');
             boardConfig.boardIndex = path.relative(Env.indexPath, boardIndexPath);
             return boardConfig;
@@ -935,7 +935,7 @@ BoardManager.loadBoards = () => {
     if (typeof USER.boardIgnore !== 'object')
         USER.boardIgnore = [];
     for (let i = 0; BOARDS_INFO[i]; i++) {
-        if (!USER.boardIgnore.includes(BOARDS_INFO[i].boardName)) {
+        if (!USER.boardIgnore.includes(BOARDS_INFO[i].boardType)) {
             const config = BOARDS_INFO[i];
             const {
                 env = {
@@ -975,7 +975,7 @@ BoardManager.loadBoards = () => {
             if (fs_extend.isfile(indexPath)) {
                 const boardInfo = {
                     boardImg: config.boardImg ?? './files/default.png',
-                    boardName: config.boardName ?? 'Unknown board',
+                    boardType: config.boardType ?? 'Unknown board',
                     boardIndex: config.boardIndex ?? 'javascript:;',
                     env: {
                         electron: true,
@@ -992,7 +992,7 @@ BoardManager.loadBoards = () => {
     }
     const boardAdd = {
         boardImg: "./files/add.png",
-        boardName: "",
+        boardType: "",
         boardDescription: "",
         boardIndex: "javascript:;",
         env: {
@@ -1020,17 +1020,22 @@ BoardManager.showBoardsCard = (row, col) => {
         const {
             thirdPartyBoard = false,
             boardIndex,
+            boardType,
             boardName,
             boardImg,
             pyFilePath
         } = boardsList[i];
         if (boardIndex !== 'javascript:;' && !pyFilePath) {
-            const configUrl = Url.jsonToUrl({
+            let configObj = {
                 thirdPartyBoard,
                 boardIndex,
-                boardName,
+                boardType,
                 boardImg
-            });
+            };
+            if (boardName) {
+                configObj.boardName = boardName;
+            }
+            const configUrl = Url.jsonToUrl(configObj);
             rowStr += `
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mixly-board" id="board-${i}">
                 <button id="board-${i}-button" index="${i}" type="button" class="layui-btn layui-btn-sm layui-btn-primary mixly-board-${thirdPartyBoard? 'del-btn' : 'ignore-btn'}">
@@ -1039,7 +1044,7 @@ BoardManager.showBoardsCard = (row, col) => {
                 <div class="service-single">
                     <a href="${boardsList[i]['boardIndex']}?${configUrl}">
                         <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
-                        <h2>${boardsList[i]['boardName']}</h2>
+                        <h2>${boardsList[i]['boardType']}</h2>
                     </a>
                 </div>
             </div>
@@ -1056,7 +1061,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <div class="service-single">
                         <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
                             <img src="${boardImg}" alt="service image" class="tiltimage">
-                            <h2>${boardName}</h2>
+                            <h2>${boardType}</h2>
                         </a>
                     </div>
                 </div>
@@ -1067,7 +1072,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <div class="service-single">
                         <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
                             <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
-                            <h2>${boardsList[i]['boardName']}</h2>
+                            <h2>${boardsList[i]['boardType']}</h2>
                         </a>
                     </div>
                     <div>
@@ -1162,7 +1167,7 @@ BoardManager.showBoardsCard = (row, col) => {
     $(".mixly-board-ignore-btn").off("click").click((event) => {
         const index = $(event.currentTarget).attr('index');
         const config = BoardManager.boardsList[index];
-        Env.isElectron && BoardManager.ignoreBoard(config.boardName, endFunc);
+        Env.isElectron && BoardManager.ignoreBoard(config.boardType, endFunc);
     });
 
     const footerDom = $('#footer');
@@ -1245,10 +1250,10 @@ BoardManager.updateBoardsCard = (offset = 0) => {
 
     let pageIndex = 0;
 
-    if (BOARD_PAGE.boardName)
+    if (BOARD_PAGE.boardType)
         for (let i in boardsList) {
             const config = boardsList[i];
-            if (config.boardName === BOARD_PAGE.boardName) {
+            if (config.boardType === BOARD_PAGE.boardType) {
                 pageIndex = Math.floor((i - 0) / (boardRowNum * boardColNum));
                 break;
             }

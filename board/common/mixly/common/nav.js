@@ -255,7 +255,7 @@ Nav.LEFT_BTN_ENV = {
     UNDO: true,
     REDO: true,
     CONNECT: !Env.isElectron && (codeEnv !== 'py' && codeEnv !== 'webpy'),
-    BURN: Nav.CONFIG.burn && !(!Env.isElectron && BOARD?.boardName === "MixGo AI" && !Env.hasSocketServer),
+    BURN: Nav.CONFIG.burn && !(!Env.isElectron && BOARD?.boardType === "MixGo AI" && !Env.hasSocketServer),
     COMPILE: Nav.CONFIG.compile,
     UPLOAD: Nav.CONFIG.upload,
     SIMULATE: Nav.CONFIG.simulate,

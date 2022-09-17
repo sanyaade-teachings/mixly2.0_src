@@ -26,7 +26,7 @@ Loader.onbeforeunload = function(reload = false) {
             window.location.reload(true);
         }
     }
-    let href = Config.pathPrefix + '../index.html?' + Url.jsonToUrl({ boardName: BOARD.boardName ?? 'None' });
+    let href = Config.pathPrefix + '../index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
     Serial?.refreshPortsTimer && clearInterval(Serial?.refreshPortsTimer);
     const portsObj = Serial?.portsOperator ?? null;
     if (Env.isElectron && portsObj && typeof portsObj === 'object') {

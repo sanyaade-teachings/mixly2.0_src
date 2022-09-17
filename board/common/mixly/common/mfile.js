@@ -137,8 +137,8 @@ MFile.loadHex = (hexStr) => {
 MFile.getMix = () => {
     const mixDom = $(Blockly.Xml.workspaceToDom(Editor.blockEditor)),
     version = SOFTWARE?.version ?? 'Mixly 2.0',
-    board = BOARD?.boardName ?? 'default',
     boardName = Boards.getSelectedBoardName(),
+    board = BOARD?.boardType ?? 'default',
     config = Boards.getSelectedBoardConfig(true);
     mixDom.removeAttr('xmlns')
           .attr('version', version)

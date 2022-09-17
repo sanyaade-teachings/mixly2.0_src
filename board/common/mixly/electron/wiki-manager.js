@@ -144,7 +144,7 @@ class WikiPage {
         if (fs_extend.isfile(wikiHomePagePath + '.md'))
             wikiList.push({ h4: { link: { title: indexText['首页'], source: '?file=' + encodeURIComponent(wikiHomePagePath) } } });
         if (fs_extend.isdir(defaultWikiPath)) {
-            const childContentList = this.getContentJson(defaultWikiPath, BOARD.boardName);
+            const childContentList = this.getContentJson(defaultWikiPath, BOARD.boardType);
             if (childContentList)
                 wikiList.push(childContentList);
         }

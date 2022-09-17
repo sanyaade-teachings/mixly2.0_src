@@ -41,8 +41,8 @@ function loadServer() {
 //当有localStorage缓存时，不从api接口中读取数据，否则api读取后会存在localStorage中，重复显示出来 add by qiang 20180521
     var xml_str;
     console.log('loadfrommoodle');
-    if ('localStorage' in window && window['localStorage'] != null && window.localStorage[BOARD.boardName]) {
-        xml_str = window.localStorage[BOARD.boardName];
+    if ('localStorage' in window && window['localStorage'] != null && window.localStorage[BOARD.boardType]) {
+        xml_str = window.localStorage[BOARD.boardType];
         console.log('localStorage');
         console.log(xml_str);
         var pattern=/<xml[\w\W]*?>(.*)<\/xml>/i

@@ -24,10 +24,10 @@ class ExampleExt extends Example {
     getExampleList() {
         const { DIR_TREE } = ExampleExt;
         let exampleList = [];
-        if ((DIR_TREE instanceof Object) && DIR_TREE[BOARD.boardName]) {
+        if ((DIR_TREE instanceof Object) && DIR_TREE[BOARD.boardType]) {
             exampleList = [{
-                title: BOARD.boardName,
-                id: BOARD.boardName,
+                title: BOARD.boardType,
+                id: BOARD.boardType,
                 children: []
             }];
         }

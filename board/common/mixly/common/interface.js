@@ -166,7 +166,7 @@ Interface.onbeforeunload = (reload = false) => {
             window.location.reload(true);
         }
     }
-    let href = Config.pathPrefix + '../index.html?' + Url.jsonToUrl({ boardName: BOARD.boardName });
+    let href = Config.pathPrefix + '../index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType });
     pageReload(href);
 }
 

@@ -16,8 +16,8 @@ let { fs } = Modules;
 if (Env.isElectron && BOARD?.filePath && BOARD?.filePath !== "None") {
     let mixStr = fs.readFileSync(BOARD.filePath, "utf8");
     if ('localStorage' in window && window['localStorage'] != null) {
-        window.localStorage.setItem(BOARD.boardName, mixStr);
-        window.localStorage.setItem(BOARD.boardName + ".filePath", BOARD.filePath);
+        window.localStorage.setItem(BOARD.boardType, mixStr);
+        window.localStorage.setItem(BOARD.boardType + ".filePath", BOARD.filePath);
     }
     history.replaceState({}, "", Url.changeURLArg(window.location.href, "filePath", "None"));
 }

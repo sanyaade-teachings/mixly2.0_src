@@ -87,10 +87,7 @@ Nav.LEFT_BTN_CONFIG = [
         title: '',
         href: '#',
         onclick: {
-            web: 'Mixly.Web.BU.clickConnect()',
-            webcompiler: {
-                web: 'Mixly.Web.BU.clickConnect()'
-            }
+            web: 'Mixly.Web.BU.clickConnect()'
         }
     }, {
         // 【初始化固件】按钮
@@ -286,9 +283,9 @@ Nav.RIGHT_BTN_CONFIG = [
                 href: '#',
                 onclick: {
                     electron: 'Mixly.Electron.File.newFile()',
-                    web: 'Mixly.NavEvents.onclickNewFile()',
-                    webcompiler: 'Mixly.NavEvents.onclickNewFile()',
-                    websocket: 'Mixly.NavEvents.onclickNewFile()'
+                    web: 'Mixly.Web.File.new()',
+                    webcompiler: 'Mixly.Web.File.new()',
+                    websocket: 'Mixly.Web.File.new()'
                 }
             }, {
                 //【打开】按钮
@@ -331,11 +328,14 @@ Nav.RIGHT_BTN_CONFIG = [
                 onclick: {
                     electron: 'Mixly.Electron.File.save()',
                     websocket: {
-                        electron: 'Mixly.Electron.File.save()'
+                        electron: 'Mixly.Electron.File.save()',
+                        web: 'Mixly.Web.File.save()'
                     },
                     webcompiler: {
-                        electron: 'Mixly.Electron.File.save()'
-                    }
+                        electron: 'Mixly.Electron.File.save()',
+                        web: 'Mixly.Web.File.save()'
+                    },
+                    web: 'Mixly.Web.File.save()'
                 }
             }, {
                 //【另存为】按钮
@@ -347,11 +347,14 @@ Nav.RIGHT_BTN_CONFIG = [
                 onclick: {
                     electron: 'Mixly.Electron.File.saveAs()',
                     websocket: {
-                        electron: 'Mixly.Electron.File.saveAs()'
+                        electron: 'Mixly.Electron.File.saveAs()',
+                        web: 'Mixly.Web.File.saveAs()'
                     },
                     webcompiler: {
-                        electron: 'Mixly.Electron.File.saveAs()'
-                    }
+                        electron: 'Mixly.Electron.File.saveAs()',
+                        web: 'Mixly.Web.File.saveAs()'
+                    },
+                    web: 'Mixly.Web.File.saveAs()'
                 }
             }, {
                 //【保存到云端】按钮
@@ -536,13 +539,13 @@ Nav.RIGHT_BTN_ENV = {
     NEW_FILE: true,
     OPEN_FILE: true,
     OPEN_FROM_CLOUD: !Env.isElectron && Env.hasSocketServer,
-    SAVE_FILE: true,
-    SAVE_AS_FILE: Env.isElectron,
-    SAVE_XML: !Env.isElectron,
-    SAVE_PY: !Env.isElectron && Nav.CONFIG.save.py,
-    SAVE_INO: !Env.isElectron && Nav.CONFIG.save.ino,
-    SAVE_HEX: !Env.isElectron && Nav.CONFIG.save.py && Nav.CONFIG.save.hex,
-    SAVE_IMG: !Env.isElectron && Nav.CONFIG.save.img,
+    SAVE_FILE: !(!Env.isElectron && location.protocol !== 'https:'),
+    SAVE_AS_FILE: !(!Env.isElectron && location.protocol !== 'https:'),
+    SAVE_XML: !Env.isElectron && location.protocol !== 'https:',
+    SAVE_PY: !Env.isElectron && location.protocol !== 'https:' && Nav.CONFIG.save.py,
+    SAVE_INO: !Env.isElectron && location.protocol !== 'https:' && Nav.CONFIG.save.ino,
+    SAVE_HEX: !Env.isElectron && location.protocol !== 'https:' && Nav.CONFIG.save.py && Nav.CONFIG.save.hex,
+    SAVE_IMG: !Env.isElectron && location.protocol !== 'https:' && Nav.CONFIG.save.img,
     SAVE_TO_CLOUD: !Env.isElectron && Env.hasSocketServer,
     PYTHON_TO_BLOCKLY: Nav.CONFIG?.setting?.pythonToBlockly && ['mpy', 'py', 'webpy'].includes(codeEnv),
     OPEN_WIKI: Env.isElectron && Nav.CONFIG.setting.wiki,

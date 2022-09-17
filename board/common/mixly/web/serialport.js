@@ -210,7 +210,7 @@ SerialPort.AddOnConnectEvent = (onConnect) => {
 
 SerialPort.AddOnDisconnectEvent = (onDisconnect) => {
     navigator.serial.addEventListener('disconnect', (event) => {
-        SerialPort.obj = null;
+        SerialPort.obj && SerialPort.close();
         onDisconnect();
     });
 }

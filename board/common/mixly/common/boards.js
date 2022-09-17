@@ -102,8 +102,8 @@ Boards.init = () => {
         else
             Boards.HAS_CONFIG_SETTING = true;
     } else {
-        Boards.NAME.push(BOARD.boardName);
-        Boards.INFO[BOARD.boardName] = {
+        Boards.NAME.push(BOARD.boardType);
+        Boards.INFO[BOARD.boardType] = {
             key: null,
             config: null,
             default: null,
@@ -112,13 +112,11 @@ Boards.init = () => {
         Boards.HAS_CONFIG_SETTING = false;
     }
 
-    const boardNames = $('#boards-type');
-
-    const selectedBoardName = (window?.localStorage[BOARD.boardName] ?? '').match(/(?<=board[\s]*=[\s]*\")[^\n\"]+(?=\")/g);
-    if (boardNames) {
-        boardNames.empty();
+    const $boards = $('#boards-type');
+    if ($boards.length) {
+        $boards.empty();
         for (let board of Boards.NAME)
-            boardNames.append(`<option value="${Boards.INFO[board]?.key ?? board}" ${(selectedBoardName && selectedBoardName[0] === board)? ' selected' : ''}>${board}</option>`);
+            $boards.append(`<option value="${Boards.INFO[board]?.key}">${board}</option>`);
         form.render('select', 'boards-type-filter');
     }
     $('#mixly-board-config').off().click(function() {

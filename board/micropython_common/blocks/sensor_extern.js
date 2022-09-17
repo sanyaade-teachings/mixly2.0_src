@@ -495,9 +495,9 @@ Blockly.Blocks['sensor_hp203_extern'] = {
             .setCheck("var");
         this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([
-            [Blockly.MIXLY_GETPRESSURE, "p_data()"],
-            [Blockly.MIXLY_GETTEMPERATUE, "t_data()"],
-            [Blockly.MIXLY_GET_ALTITUDE, "h_data()"],
+            [Blockly.MIXLY_GETPRESSURE, "pressure()"],
+            [Blockly.MIXLY_GETTEMPERATUE, "temperature()"],
+            [Blockly.MIXLY_GET_ALTITUDE, "altitude()"],
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);

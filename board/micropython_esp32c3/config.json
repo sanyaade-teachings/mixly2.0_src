@@ -1,7 +1,7 @@
 {
     "board": {
-        "MixGo CC": "micropython:esp32c3:mixgo_cc",
         "MixGo ME": "micropython:esp32c3:mixgo_me",
+        "MixGo CC": "micropython:esp32c3:mixgo_cc",
         "ESP32C3 Generic": "micropython:esp32c3:generic"
     },
     "language": "MicroPython",

@@ -798,11 +798,15 @@ BoardManager.unZipPromise = (boardInfo, config) => {
 BoardManager.readBoardConfig = (inPath) => {
     const boardConfig = fs_extra.readJsonSync(inPath, { throws: false });
     if (boardConfig) {
-        const { boardType, boardImg } = boardConfig;
+        const { boardType, boardImg, boardName } = boardConfig;
 
-        if (boardType && boardImg) {
+        if ((boardType || boardName) && boardImg) {
             const boardIndexPath = path.resolve(inPath, '../index.html');
             boardConfig.boardIndex = path.relative(Env.indexPath, boardIndexPath);
+            if (!boardType && boardName) {
+                boardConfig.boardType = boardName;
+                delete boardConfig.boardName;
+            }
             return boardConfig;
         }
     }

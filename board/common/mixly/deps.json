@@ -306,7 +306,8 @@
             "require":[
                 "Mixly.MFile",
                 "Mixly.Editor",
-                "Mixly.Drag"
+                "Mixly.Drag",
+                "Mixly.LayerExtend"
             ],
             "provide":[
                 "Mixly.Web.File"

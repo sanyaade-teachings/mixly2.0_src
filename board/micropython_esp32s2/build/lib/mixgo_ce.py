@@ -194,7 +194,7 @@ if version==0:
     '''temperature'''
     def get_temperature():
         adc_val = ADCSensor(16).read() 
-        return adc_val * 3.9 / 5900 *16
+        return adc_val * 3.9 / 5900
 
     def infrared_left():   
         print("Warning: Old version, without this function")    

@@ -133,7 +133,7 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
                         layer.close(index);
                         BU.burning = false;
                         BU.uploading = false;
-                        layer.msg(indexText['写文件出错了，错误是：'] + err, {
+                        layer.msg(indexText['写文件出错了，错误是：'] + error, {
                             time: 1000
                         });
                         StatusBar.setValue(indexText['写文件出错了，错误是：'] + error + '\n');
@@ -164,7 +164,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     const { burn, upload } = SELECTED_BOARD;
     if (type === 'upload' && upload.copyLib) {
         let startLibPath = path.dirname(upload.filePath);
-        let pyFileArr = BU.copyLib(startPath, code);
+        let pyFileArr = BU.copyLib(startPath, MFile.getCode());
         startPath = path.dirname(startPath);
     }
     // 如果需要拷贝的是文件，则在目的路径后要加上文件名

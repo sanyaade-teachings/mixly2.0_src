@@ -58,9 +58,13 @@ class PS2Controller:
 				raise AttributeError("Cannot find a PS2Controller",self._cmds([0x01,0x42])[1])
 
 		self._cmds([0x01,0x43,0x00,0x01,0x00])                            # 进入配置模式
+		time.sleep_ms(10)
 		self._cmds([0x01,0x44,0x00,mode,0x03,0x00,0x00,0x00,0x00])        # “红绿灯”配置模式
+		time.sleep_ms(10)
 		self._cmds([0x01,0x4D,0x00,0x00,0x01])                            # 开启震动模式
+		time.sleep_ms(10)
 		self._cmds([0x01,0x43,0x00,0x5A,0x5A,0x5A,0x5A,0x5A,0x5A])        # 完成并保存配置
+		time.sleep_ms(10)
 
 	def _cmd(self,cmd):
 		'''Single byte command sending and receiving'''
@@ -86,7 +90,7 @@ class PS2Controller:
 		for i, cmd  in enumerate(cmds):
 			buffer[i]=self._cmd(cmd)
 		self.cs.value(1)
-		time.sleep_ms(5)
+		time.sleep_ms(6)
 		return buffer
 
 	def keydata(self):

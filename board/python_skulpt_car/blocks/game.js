@@ -692,6 +692,10 @@ Blockly.Blocks['isCirculationRight'] = {
       data: '移动到距离当前位置最近的岔路口'
     }, {
       data: '输出没有符合条件的路线'
+    }, {
+      data: '将当前位置加入路线'
+    }, {
+      data: '将当前位置移出路线'
     }
   ];
 

@@ -752,7 +752,8 @@
                 "Blockly",
                 "Mixly.Config",
                 "Mixly.Nav",
-                "Mixly.XML"
+                "Mixly.XML",
+                "Mixly.Boards"
             ],
             "provide":[
                 "Mixly.Editor"

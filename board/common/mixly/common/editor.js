@@ -4,12 +4,14 @@ goog.require('Blockly');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
 goog.require('Mixly.XML');
+goog.require('Mixly.Boards');
 goog.provide('Mixly.Editor');
 
 const {
     Config,
     Nav,
     XML,
+    Boards,
     Editor
 } = Mixly;
 
@@ -79,8 +81,8 @@ Editor.init = () => {
             } catch (e) {
                 console.log(e);
             }
-        } else if (BOARD.boardIndex.indexOf("/python_skulpt_mixtoy/") !== -1
-                || BOARD.boardIndex.indexOf("/python_skulpt_mixcar/") !== -1) {
+        } else if (Boards.getType() === 'python_skulpt_mixtoy'
+                || Boards.getType() === 'python_skulpt_car') {
             if ((code.indexOf("import blocktool")!=-1)||(code.indexOf("import blocklygame")!=-1)||(code.indexOf("from blocklygame import")!=-1)){
                 //正则匹配替换block id元素
                 var code_piece=[];

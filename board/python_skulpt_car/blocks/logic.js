@@ -28,6 +28,8 @@ Blockly.Msg["LOGIC_HUE"] = 210;
             data: '路线为空'
         }, {
             data: '没到小技家'
+        }, {
+            data: '当前位置是学校'
         }
     ];
 

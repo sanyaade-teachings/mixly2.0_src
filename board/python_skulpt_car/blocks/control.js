@@ -973,5 +973,20 @@ Blockly.Blocks.do_while= {
   }
 };
 
+Blockly.Blocks.time_sleep = {
+  init: function() {
+    this.setColour(Blockly.Blocks.system.HUE);
+    this.appendValueInput("DELAY_TIME", Number)
+        .appendField(Blockly.MIXLY_DELAY)
+        .setCheck(Number);
+    this.appendDummyInput()
+        .appendField(Blockly.MIXLY_SECOND)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_TOOLTIP_CONTROL_DELAY);
+  }
+};
+
 Blockly.Blocks.base_type=Blockly.Blocks.controls_type;
 Blockly.Blocks.controls_TypeLists=Blockly.Blocks.controls_typeLists

@@ -32,6 +32,7 @@
   <script src="./blocks/set.js"></script>
   <script src="./blocks/turtle.js"></script>
   <script src="./blocks/data.js"></script>
+  <script src="./blocks/logic.js"></script>
   <!-- 新增game模块 -->
   <script src="./blocks/game.js"></script>
   <script src="./blocks/tuple.js"></script>
@@ -155,6 +156,13 @@
                   </shadow>
               </value>
           </block>-->
+      <block type="time_sleep">
+        <value name="DELAY_TIME">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+      </block>
       <block type="controls_if"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -388,7 +396,6 @@
           </shadow>
         </value>
       </block>
-
     </category>
     <category id="catLogic" colour="210">
       <block type="logic_compare"></block>
@@ -445,6 +452,16 @@
           </shadow>
         </value>
       </block>
+      <block type="logic_block0"></block>
+      <block type="logic_block1"></block>
+      <block type="logic_block2"></block>
+      <block type="logic_block3"></block>
+      <block type="logic_block4"></block>
+      <block type="logic_block5"></block>
+      <block type="logic_block6"></block>
+      <block type="logic_block7"></block>
+      <block type="logic_block8"></block>
+      <block type="logic_block9"></block>
     </category>
     <category id="catText" colour="160">
       <block type="text">
@@ -1257,7 +1274,26 @@
       <block type="isOilFull"></block> 
       <block type="addOil"></block> 
       <block type="isCirculationRight"></block> 
-      <block type="isLightGreen"></block>       
+      <block type="isLightGreen"></block>
+      <block type="game_block0"></block>
+      <block type="game_block1"></block>
+      <block type="game_block2"></block>
+      <block type="game_block3"></block>
+      <block type="game_block4"></block>
+      <block type="game_block5"></block>
+      <block type="game_block6"></block>
+      <block type="game_block7"></block>
+      <block type="game_block8"></block>
+      <block type="game_block9"></block>
+      <block type="game_block10"></block>
+      <block type="game_block11"></block>
+      <block type="game_block12"></block>
+      <block type="game_block13"></block>
+      <block type="game_block14"></block>
+      <block type="game_block15"></block>
+      <block type="game_block16"></block>
+      <block type="game_block17"></block>
+      <block type="game_block18"></block>
     </category>
   </xml>
 </body>

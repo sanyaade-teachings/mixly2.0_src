@@ -679,7 +679,7 @@ Blockly.Blocks['isCirculationRight'] = {
     }, {
       data: '将路线增加当前位置'
     }, {
-      data: '将路线较少当前位置'
+      data: '将路线减少当前位置'
     }, {
       data: '将当前位置设置为这条通向同学家的路'
     }, {

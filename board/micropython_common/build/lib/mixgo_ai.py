@@ -17,7 +17,7 @@ class INFO:
 		self.info1=info1
 		self.info2=info2
 		self.rect=rect
-		if type(rect) ==list:
+		if type(rect) in [tuple,list]:
 			self.x=rect[0]
 			self.y=rect[1]
 			self.w=rect[2]
@@ -111,7 +111,7 @@ class AI:
 		return len(self._info)
 
 	def info_number(self,number):
-		if self.info_len > number:
+		if self.info_len() > number:
 			return self._info[number]
 
 	def configure(self, tx_pin, rx_pin, restart=False):
@@ -137,7 +137,11 @@ class AI:
 		return self.request('rect', para=[threshold])
 
 	def find_colors(self, scale=2):
-		return self.request('color', para=[scale])
+		info=self.request('color', para=[scale])
+		if info:
+			return info[0].info1,info[0].info2
+		else:
+			return None,None
 
 	def color_track(self, lab=[0, 100, 0, 100, 0, 0], pixels_threshold=10, margin=1):
 		return self.request('ctrace', para=[lab, pixels_threshold, margin])

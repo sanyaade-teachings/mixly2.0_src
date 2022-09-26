@@ -456,6 +456,14 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background:url('../../common/media/mark/4Digitdisplay2.png') no-repeat;
     background-size: 100% auto;
 }
+#catAIsensor.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../common/media/mark/image.png') no-repeat;
+    background-size: 100% auto;
+}
+#catAIsensor.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../common/media/mark/image2.png') no-repeat;
+    background-size: 100% auto;
+}
 #catFile.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
     background:url('../../common/media/mark/file.png') no-repeat;
     background-size: 100% auto;

@@ -26,6 +26,7 @@ var MSG = {
     catStorageEEPROM: 'EEPROM',
     catME_GO:"ME GO",
     catAIOT:"Intelligent IOT",
+    catAIsensor:"MixGo AI Sensor",
     catSensor: "Sensor",
     catActuator: "Actuator",
     catExternSensor: "External Sensor",
@@ -3521,3 +3522,68 @@ Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_SENSOR = 'light chasing sensor';
 Blockly.MIXLY_OTHER = 'other';
 Blockly.MIXLY_CONCENTRATION = 'concentration';
 Blockly.MIXLY_PM_CONCENTRATION_TOOLTIP = 'Concentration unit ug/m³';
+Blockly.MIXLY_QR_CODE_RECOGNTITION = "QR code recognition";
+Blockly.MIXLY_QR_CODE_ANALYSIS = "QR code analysis";
+Blockly.MIXLY_QR_CODE = "QR code";
+Blockly.MIXLY_POSITION_XY = "coordinate";
+Blockly.MIXLY_AI_SENSOR_QR_CODE_TOOLTIP = "Obtain the corresponding information of the QR code object";
+Blockly.MIXLY_AI_SENSOR_QR_CODE_RECOGNTITION_TOOLTIP = "Use the MixGo AI camera to identify the QR code, and return a list containing all the identification result objects";
+Blockly.MIXLY_AI_SENSOR_CONFIG_TOOLTIP = "Set the port where MixGo AI interacts with the motherboard";
+Blockly.MIXLY_BAR_CODE = "bar code";
+Blockly.MIXLY_BAR_CODE_RECOGNTITION = "ShopSavvy Barcode Scanner";
+Blockly.MIXLY_BAR_CODE_ANALYSIS = "Barcode analysis";
+Blockly.MIXLY_AI_SENSOR_BAR_CODE_TOOLTIP = "Get the corresponding information of the barcode object";
+Blockly.MIXLY_AI_SENSOR_BAR_CODE_RECOGNTITION_TOOLTIP = "Use the MixGo AI camera to identify the barcode and return a list containing all the identified result objects";
+Blockly.MIXLY_TAG = "Tag code";
+Blockly.MIXLY_TAG_RECOGNTITION = "Identification of tag code";
+Blockly.MIXLY_TAG_ANALYSIS = "Label code analysis";
+Blockly.MIXLY_AI_SENSOR_TAG_TOOLTIP = "Obtain the corresponding information of the label code object";
+Blockly.MIXLY_AI_SENSOR_TAG_RECOGNTITION_TOOLTIP = "Use MixGo AI camera identification tag code to return a list containing all identification result objects";
+Blockly.MIXLY_LINE = "straight line";
+Blockly.MIXLY_LINE_RECOGNTITION = "Line recognition";
+Blockly.MIXLY_LINE_ANALYSIS = "Straight line analysis";
+Blockly.MIXLY_AI_SENSOR_LINE_TOOLTIP = "Get the corresponding information of line objects";
+Blockly.MIXLY_AI_SENSOR_LINE_RECOGNTITION_TOOLTIP = "Use the MixGo AI camera to recognize straight lines and return a list containing all the objects identified";
+Blockly.MIXLY_LINE_RECOGNTITION_ANGLE = "Merge Angle";
+Blockly.MIXLY_LINE_RECOGNTITION_SLOPE = "Merge slope";
+Blockly.MIXLY_LINE_ANGLE = "Line angle";
+Blockly.MIXLY_CIRCLE = "circular";
+Blockly.MIXLY_CIRCLE_RECOGNTITION = "Circle recognition";
+Blockly.MIXLY_CIRCLE_ANALYSIS = "Circular analysis";
+Blockly.MIXLY_AI_SENSOR_CIRCLE_TOOLTIP = "Get the corresponding information of the circular object";
+Blockly.MIXLY_AI_SENSOR_CIRCLE_RECOGNTITION_TOOLTIP = "Use the MixGo AI camera to identify circles and return a list containing all the objects identified";
+Blockly.MIXLY_CIRCLE_RECOGNTITION_MAX = "Merge Minimum Radius";
+Blockly.MIXLY_CIRCLE_RECOGNTITION_MIN = "Merge maximum radius";
+Blockly.MIXLY_CIRCLE_AREA = "the measure of area";
+Blockly.MIXLY_RECT = "rectangle";
+Blockly.MIXLY_RECT_RECOGNTITION = "Rectangle recognition";
+Blockly.MIXLY_RECT_ANALYSIS = "Rectangular analysis";
+Blockly.MIXLY_AI_SENSOR_RECT_TOOLTIP = "Get the corresponding information of the rectangular object";
+Blockly.MIXLY_AI_SENSOR_RECT_RECOGNTITION_TOOLTIP = "Use MixGo AI camera to recognize rectangle, and return a list containing all recognition result objects";
+Blockly.MIXLY_COLOR_RECOGNTITION = "Color recognition";
+Blockly.MIXLY_COLOR_ANALYSIS = "Color analysis";
+Blockly.MIXLY_AI_SENSOR_COLOR_TOOLTIP = "Get the corresponding information of the color object";
+Blockly.MIXLY_AI_SENSOR_COLOR_RECOGNTITION_TOOLTIP = "Use the MixGo AI camera to identify colors, and return a list containing all the objects identified";
+Blockly.MIXLY_COLOR_LAB = "Gamut";
+Blockly.MIXLY_AI_SENSOR_COLOR_THRESHOLD = "LAB threshold zoom range";
+Blockly.MIXLY_COLOR_CHASE = "Color Tracking";
+Blockly.MIXLY_COLOR_CHASE_ANALYSIS = "Color Tracking";
+Blockly.MIXLY_COLOR_CHASE_MERGE = "merge";
+Blockly.MIXLY_COLOR_CHASE_ANALYSIS = "analysis";
+Blockly.MIXLY_AI_SENSOR_RGB_TOOLTIP = "Set the color values (0~255) of the two RGB lights of the MixGo AI camera respectively, and the parameters are sequences containing three items";
+Blockly.MIXLY_LOCAL_TRAIN = "Self model training";
+Blockly.MIXLY_OBJECT_LIST = "Item List";
+Blockly.MIXLY_MODEL_NAME = "Model name";
+Blockly.MIXLY_TRAIN_TIME = "Training times";
+Blockly.MIXLY_AI_SENSOR_LOCAL_TRAIN_TOOLTIP = "Use the camera to acquire images for model training, and stop communication during model training";
+Blockly.MIXLY_LOCAL_CLASS = "Self model recognition";
+Blockly.MIXLY_CONFIDENCE_DEGREE = "Confidence";
+Blockly.MIXLY_AI_SENSOR_LOCAL_CLASS_TOOLTIP = "Obtain the corresponding information from the model recognition result object";
+Blockly.MIXLY_MUSIC_RECORD = "audio recording";
+Blockly.MIXLY_MUSIC_PLAY = "Audio play";
+Blockly.MIXLY_AI_SENSOR_MUSIC_RECORD_TOOLTIP = "Use MixGo AI camera to record audio without blocking the recording process";
+Blockly.MIXLY_YOLO_RECOGNIZE = "External model loading";
+Blockly.MIXLY_ANCHOR = "Anchor parameters";
+Blockly.MIXLY_MODEL_PATH = "Model Path";
+Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP = "Use the camera to read the model file in the SD card for item identification, and return a list containing all the identification result objects";
+Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP = "Get the corresponding information of the external model loading result object";

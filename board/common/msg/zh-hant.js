@@ -23,6 +23,7 @@ var MSG = {
     catStorage: "存儲",
     catME_GO:"ME GO",
     catAIOT:"智能物聯",
+    catAIsensor:"MixGo AI感測器",
     catSensor: "感測器",
     catActuator: "執行器",
     catExternSensor: "外接感測器",
@@ -3499,3 +3500,68 @@ Blockly.MIXLY_ME_GO_CAR_LIGHT_SEEKING_SENSOR = '追光感測器';
 Blockly.MIXLY_OTHER = '其他';
 Blockly.MIXLY_CONCENTRATION = '濃度';
 Blockly.MIXLY_PM_CONCENTRATION_TOOLTIP = '濃度單位ug/m³';
+Blockly.MIXLY_QR_CODE_RECOGNTITION = '二維碼識別';
+Blockly.MIXLY_QR_CODE_ANALYSIS = '二維碼解析';
+Blockly.MIXLY_QR_CODE = '二維碼';
+Blockly.MIXLY_POSITION_XY = '座標';
+Blockly.MIXLY_AI_SENSOR_QR_CODE_TOOLTIP = '獲取二維碼物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_QR_CODE_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別二維碼，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_AI_SENSOR_CONFIG_TOOLTIP = '設置MixGo AI與主機板交互的埠';
+Blockly.MIXLY_BAR_CODE = '條碼';
+Blockly.MIXLY_BAR_CODE_RECOGNTITION = '條碼識別';
+Blockly.MIXLY_BAR_CODE_ANALYSIS = '條碼解析';
+Blockly.MIXLY_AI_SENSOR_BAR_CODE_TOOLTIP = '獲取條碼物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_BAR_CODE_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別條碼，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_TAG = '標籤碼';
+Blockly.MIXLY_TAG_RECOGNTITION = '標籤碼識別';
+Blockly.MIXLY_TAG_ANALYSIS = '標籤碼解析';
+Blockly.MIXLY_AI_SENSOR_TAG_TOOLTIP = '獲取標籤碼物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_TAG_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別標籤碼，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_LINE = '直線';
+Blockly.MIXLY_LINE_RECOGNTITION = '直線識別';
+Blockly.MIXLY_LINE_ANALYSIS = '直線解析';
+Blockly.MIXLY_AI_SENSOR_LINE_TOOLTIP = '獲取直線物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_LINE_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別直線，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_LINE_RECOGNTITION_ANGLE = '合併角度';
+Blockly.MIXLY_LINE_RECOGNTITION_SLOPE = '合併斜率';
+Blockly.MIXLY_LINE_ANGLE = '線角度';
+Blockly.MIXLY_CIRCLE = '圓形';
+Blockly.MIXLY_CIRCLE_RECOGNTITION = '圓形識別';
+Blockly.MIXLY_CIRCLE_ANALYSIS = '圓形解析';
+Blockly.MIXLY_AI_SENSOR_CIRCLE_TOOLTIP = '獲取圓形物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_CIRCLE_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別圓形，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_CIRCLE_RECOGNTITION_MAX = '合併最小半徑';
+Blockly.MIXLY_CIRCLE_RECOGNTITION_MIN = '合併最大半徑';
+Blockly.MIXLY_CIRCLE_AREA = '面積';
+Blockly.MIXLY_RECT = '矩形';
+Blockly.MIXLY_RECT_RECOGNTITION = '矩形識別';
+Blockly.MIXLY_RECT_ANALYSIS = '矩形解析';
+Blockly.MIXLY_AI_SENSOR_RECT_TOOLTIP = '獲取矩形物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_RECT_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別矩形，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_COLOR_RECOGNTITION = '顏色識別';
+Blockly.MIXLY_COLOR_ANALYSIS = '顏色解析';
+Blockly.MIXLY_AI_SENSOR_COLOR_TOOLTIP = '獲取顏色物件的相應資訊';
+Blockly.MIXLY_AI_SENSOR_COLOR_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別顏色，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_COLOR_LAB = '色域';
+Blockly.MIXLY_AI_SENSOR_COLOR_THRESHOLD = 'LAB閾值縮放範圍';
+Blockly.MIXLY_COLOR_CHASE = '顏色追蹤';
+Blockly.MIXLY_COLOR_CHASE_ANALYSIS = '顏色追蹤';
+Blockly.MIXLY_COLOR_CHASE_MERGE = '合併';
+Blockly.MIXLY_COLOR_CHASE_ANALYSIS = '解析';
+Blockly.MIXLY_AI_SENSOR_RGB_TOOLTIP = '分別設置MixGo AI攝像頭兩個RGB燈的色值（0~255），參數為包含三項的序列';
+Blockly.MIXLY_LOCAL_TRAIN = '自模型訓練';
+Blockly.MIXLY_OBJECT_LIST = '物品列表';
+Blockly.MIXLY_MODEL_NAME = '模型名稱';
+Blockly.MIXLY_TRAIN_TIME = '訓練次數';
+Blockly.MIXLY_AI_SENSOR_LOCAL_TRAIN_TOOLTIP = '利用攝像頭獲取圖像進行模型訓練，模型訓練過程中停止通信';
+Blockly.MIXLY_LOCAL_CLASS = '自模型識別';
+Blockly.MIXLY_CONFIDENCE_DEGREE = '置信度';
+Blockly.MIXLY_AI_SENSOR_LOCAL_CLASS_TOOLTIP = '獲取自模型識別結果物件的相應資訊';
+Blockly.MIXLY_MUSIC_RECORD = '音訊錄製';
+Blockly.MIXLY_MUSIC_PLAY = '音訊播放';
+Blockly.MIXLY_AI_SENSOR_MUSIC_RECORD_TOOLTIP = '利用MixGo AI攝像頭錄製音訊，錄製過程程式不阻塞';
+Blockly.MIXLY_YOLO_RECOGNIZE = '外部模型載入';
+Blockly.MIXLY_ANCHOR = '錨點參數';
+Blockly.MIXLY_MODEL_PATH = '模型路徑';
+Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP = '利用攝像頭讀取SD卡中的模型檔進行物品識別，返回包含所有識別結果物件的清單';
+Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP = '獲取外部模型載入結果物件的相應資訊';

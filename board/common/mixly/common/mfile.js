@@ -145,20 +145,16 @@ MFile.getMix = () => {
           .attr('board', board + '@' + boardName);
     let xmlStr = mixDom[0].outerHTML;
     let code = MFile.getCode();
-    const configDom = config && $('<config></config>'),
-    codeDom = BOARD.saveMixWithCode && $('<code></code>');
-    if (configDom) {
+    if (config) {
         try {
-            configDom.html(JSON.stringify(config));
-            xmlStr += configDom[0].outerHTML;
+            xmlStr += `<config>${JSON.stringify(config)}</config>`;
         } catch (error) {
             console.log(error);
         }
     }
-    if (codeDom) {
+    if (BOARD.saveMixWithCode) {
         code = Base64.encode(code);
-        codeDom.html(code);
-        xmlStr += codeDom[0].outerHTML;
+        xmlStr += `<code>${code}</code>`;
     }
     return xmlStr;
 }

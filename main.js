@@ -275,7 +275,9 @@ app.on('ready', () => {
 });
 
 app.on('activate', () => {
-    createWindow(null);
+    if (!webContents.getAllWebContents().length) {
+        createWindow(null);
+    }
 });
 
 // 页面全部关闭后关闭主进程,不同平台可能有不同的处理方式

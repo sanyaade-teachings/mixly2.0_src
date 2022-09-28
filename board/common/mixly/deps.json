@@ -886,69 +886,6 @@
             ]
         },
         {
-            "path":"/modules/base64.min.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/lazyload.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/microbit-fs.umd.min.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/notify.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/popper.min.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/sortable.min.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/store.modern.min.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/tippy-bundle.umd.min.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
-            "path":"/modules/xscrollbar.js",
-            "require":[
-            ],
-            "provide":[
-            ]
-        },
-        {
             "path":"/common/mstring.js",
             "require":[
                 "Mixly"

@@ -96,29 +96,37 @@ Deps.DEPENDENCY = {
             "provide": ['Backpack'],
             "require": ['Blockly']
         },{
-            "path": '/common/lazyload.js',
+            "path": '/common/modules/lazyload.js',
             "provide": ['LazyLoad'],
             "require": []
         },{
-            "path": '/common/microbit-fs.umd.min.js',
+            "path": '/common/modules/microbit-fs.umd.min.js',
             "provide": ['microbitFs'],
             "require": []
         },{
-            "path": '/common/base64.min.js',
+            "path": '/common/modules/base64.min.js',
             "provide": ['Base64'],
             "require": []
         },{
-            "path": '/common/sortable.min.js',
+            "path": '/common/modules/sortable.min.js',
             "provide": ['Sortable'],
             "require": []
         },{
-            "path": '/common/store.modern.min.js',
+            "path": '/common/modules/store.modern.min.js',
             "provide": ['store'],
             "require": []
         },{
-            "path": '/common/xscrollbar.js',
+            "path": '/common/modules/xscrollbar.js',
             "provide": ['XScrollbar'],
             "require": []
+        },{
+            "path": '/common/modules/popper.min.js',
+            "provide": ['Popper'],
+            "require": []
+        },{
+            "path": '/common/modules/tippy-bundle.umd.min.js',
+            "provide": ['tippy'],
+            "require": ['Popper']
         }
     ]
 };

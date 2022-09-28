@@ -21,11 +21,7 @@ const config = {
     "fileIgnore": [
         /*"./common/serial-charts.js"*/
         "./common/env.js",
-        "./common/deps.js",
-        "./common/base64.min.js",
-        "./common/sortable.min.js",
-        "./common/microbit-fs.umd.min.js",
-        "./common/lazyload.js"
+        "./common/deps.js"
     ]
 };
 

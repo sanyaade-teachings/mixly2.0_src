@@ -1,5 +1,6 @@
 (() => {
 
+goog.require('tippy');
 goog.require('layui');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
@@ -33,25 +34,45 @@ Mixly.Example = function (containerId, exampleBtnId) {
             >${indexText['例程']}</a>
         </button>
     `);
+    _this = this;
+    _this.menuHTML = XML.render(XML.TEMPLATE_STR['EXAMPLE_MENU_DIV'], {
+        id: _this.exampleBtnId_,
+        close: indexText['关闭窗口']
+    });
+    $('#' + _this.exampleBtnId_).off().click(function() {
+        if (_this.menu
+         && _this.menu.length
+         && !_this.menu[0].state.isDestroyed) {
+            if (_this.menu[0].state.isShown) {
+                _this.menu[0].destroy();
+                _this.menu = null;
+            } else {
+                _this.menu[0].show();
+            }
+        } else {
+            _this.render();
+            _this.menu[0].show();
+        }
+    });
 }
 
 Mixly.Example.prototype.render = function () {
     const _this = this;
-    this.dropdownId_ = dropdown.render({
-        elem: '#' + _this.exampleBtnId_,
-        content: `<div id="${_this.exampleBtnId_}-tree" style="height:100%;width:100%;overflow:auto;"></div>`,
-        className: 'layer-extend examples-dropdown',
-        style: 'display:inline-block;box-shadow:1px 1px 30px rgb(0 0 0 / 12%);',
-        ready: function() {
-            const $treeDiv = $(`#${_this.exampleBtnId_}-tree`);
-            const $treeDivParent = $treeDiv.parent();
-            $treeDivParent.css({
-                'bottom': 'var(--footer-height)',
-                'top': 'auto',
-                'margin-bottom': '0px'
+    _this.menu = tippy('#' + _this.exampleBtnId_, {
+        allowHTML: true,
+        content: _this.menuHTML,
+        trigger: 'manual',
+        interactive: true,
+        hideOnClick: false,
+        maxWidth: 'none',
+        offset: [ 0, 6 ],
+        onMount(instance) {
+            $(`#${_this.exampleBtnId_}-tree-colse`).off().click(function() {
+                _this.menu[0].destroy();
+                _this.menu = null;
             });
             _this.examplesTree_ = tree.render({
-                elem: `#${_this.exampleBtnId_}-tree`,
+                elem: `#${_this.exampleBtnId_}-tree-body`,
                 data: _this.getExampleList(),
                 id: `${_this.exampleBtnId_}-tree-dom`,
                 accordion: true,
@@ -61,40 +82,12 @@ Mixly.Example.prototype.render = function () {
                     return _this.getExamples(obj.data.id);
                 },
                 click: function(obj) {
-                    const offset = $treeDivParent.offset();
-                    const height = $treeDiv.prop("scrollHeight");
-                    const bodyHeight = $('body').height();
-                    const bodyWidth = $('body').width();
-                    offset.bottom = 23;
-                    $treeDivParent.css({
-                        'max-height': (bodyHeight - offset.bottom) + 'px',
-                        'max-width': (bodyWidth - offset.left) + 'px'
-                    });
                     if (obj.data.children)
                         return;
                     _this.dataToWorkspace(obj.data.id);
                 },
                 statusChange: function() {
-                    const offset = $treeDivParent.offset();
-                    const height = $treeDiv.prop("scrollHeight");
-                    const width = $treeDiv.prop("scrollWidth");
-                    const bodyHeight = $('body').height();
-                    const bodyWidth = $('body').width();
-                    offset.bottom = 23;
-                    if (bodyHeight < offset.bottom + height) {
-                        $treeDivParent.css({
-                            'height': (bodyHeight - offset.bottom) + 'px'
-                        });
-                    } else {
-                        $treeDivParent.css({
-                            'height': 'auto'
-                        });
-                    }
-                    if (bodyWidth < offset.left + width) {
-                        $treeDivParent.css('width', (bodyWidth - offset.left) + 'px');
-                    } else {
-                        $treeDivParent.css('width', 'auto');
-                    }
+                    _this.menu[0].setProps({});
                 }
             });
             _this.examplesTree_.config.statusChange();

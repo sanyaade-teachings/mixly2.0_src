@@ -1,5 +1,6 @@
 (() => {
 
+goog.require('tippy');
 goog.require('layui');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
@@ -120,12 +121,18 @@ Boards.init = () => {
         form.render('select', 'boards-type-filter');
     }
     $('#mixly-board-config').off().click(function() {
-        Boards.showConfigMenu();
-    });
-    $(window).on('resize', function() {
-        if (Boards.layerMenuNum) {
-            $('#layui-layer' + Boards.layerMenuNum).css('display', 'none');
-            layer.close(Boards.layerMenuNum);
+        if (Boards.configMenu
+         && Boards.configMenu.length
+         && !Boards.configMenu[0].state.isDestroyed) {
+            if (Boards.configMenu[0].state.isShown) {
+                Boards.configMenu[0].destroy();
+                Boards.configMenu = null;
+            } else {
+                Boards.configMenu[0].show();
+            }
+        } else {
+            Boards.showConfigMenu();
+            Boards.configMenu[0].show();
         }
     });
 }
@@ -435,9 +442,10 @@ Boards.updateCategories = (boardName, enforce = false) => {
     } else {
         $('#mixly-board-config').css('display', 'none');
     }
-    if (Boards.layerMenuNum) {
-        $('#layui-layer' + Boards.layerMenuNum).css('display', 'none');
-        layer.close(Boards.layerMenuNum);
+    if (Boards.configMenu
+     && Boards.configMenu.length
+     && !Boards.configMenu[0].state.isDestroyed) {
+        Boards.configMenu[0].destroy();
     }
     let thirdPartyStr = '';
     if (Env.isElectron) {
@@ -531,7 +539,7 @@ Boards.removeBlocks = (blocksdom, boardKeyList) => {
 }
 
 Boards.showConfigMenu = () => {
-    if (Boards.layerMenuNum)
+    if (Boards.configMenu)
         return;
     const selectedBoardName = Boards.getSelectedBoardName();
     const { INFO } = Boards;
@@ -563,53 +571,33 @@ Boards.showConfigMenu = () => {
         reset: indexText['使用默认配置'],
         close: indexText['关闭窗口']
     });
-    Boards.layerMenuNum = layer.tips(`<div id="mixly-board-config" 
-                                        style="
-                                            max-height:calc(100vh - var(--footer-height));
-                                            height:100%;
-                                            width:100%;
-                                            overflow:hidden;
-                                        "
-                                    >${xmlStr}
-                                    </div>`, '#mixly-board-config', {
-        tips: 1,
-        time: 0,
-        offset: 'rb',
-        move: false,
-        tipsMore: false,
-        success: function(layero, index) {
-            $('#board-config-menu-reset').off().click(function() {
-                INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
-                for (let key in config) {
-                    defaultConfig[key] = config[key][0].key;
-                    $('#board-config-' + key).find('p').text(config[key][0].label);
-                }
-            });
-            $('#board-config-menu-colse').off().click(function() {
-                layero.css('display', 'none');
-                layer.close(Boards.layerMenuNum);
-            });
-            layero.css({
-                'left': 'auto',
-                'right': '5px',
-                'top': 'auto',
-                'bottom': 'calc(var(--footer-height) + 1px)',
-                'width': 'auto',
-                'height': 'auto',
-                'max-height': 'calc(100vh - var(--footer-height))'
-            });
-            layero.children('.layui-layer-content').css({
-                'padding': '0px',
-                'max-height': 'calc(100vh - var(--footer-height))'
-            });
-            layero.find('.layui-layer-TipsG').css('display', 'none');
-            Boards.renderConfigMenuDropdown(list);
-        },
-        end: function() {
-            Boards.layerMenuNum = null;
-            Boards.writeSelectedBoardConfig();
-        }
-    });
+    Boards.configMenu = tippy('#mixly-board-config', {
+            allowHTML: true,
+            content: xmlStr,
+            trigger: 'manual',
+            interactive: true,
+            hideOnClick: false,
+            maxWidth: 'none',
+            offset: [ 0, 6 ],
+            onMount(instance) {
+                $('#board-config-menu-reset').off().click(function() {
+                    INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
+                    for (let key in config) {
+                        defaultConfig[key] = config[key][0].key;
+                        $('#board-config-' + key).find('p').text(config[key][0].label);
+                    }
+                });
+                $('#board-config-menu-colse').off().click(function() {
+                    Boards.configMenu[0].destroy();
+                    Boards.configMenu = null;
+                });
+                Boards.renderConfigMenuDropdown(list);
+            },
+            onHidden(instance) {
+                Boards.configMenu = null;
+                Boards.writeSelectedBoardConfig();
+            }
+        });
 }
 
 Boards.renderConfigMenuDropdown = (optionList) => {
@@ -645,6 +633,7 @@ Boards.renderConfigMenuDropdown = (optionList) => {
                 const $p = $elem.children('p');
                 $p.text(data.title);
                 Boards.INFO[selectedBoardName].default[item.name] = data.id;
+                Boards.configMenu[0].setProps({});
             }
         });
     }

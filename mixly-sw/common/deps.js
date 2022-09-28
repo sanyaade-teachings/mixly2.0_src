@@ -30,7 +30,7 @@ Deps.DEPENDENCY = {
             "provide": ['layui.loading'],
             "require": ['layui']
         }, {
-            "path": '/../board/common/mixly/common/lazyload.js',
+            "path": '/../board/common/mixly/common/modules/lazyload.js',
             "provide": ['LazyLoad'],
             "require": []
         }, {

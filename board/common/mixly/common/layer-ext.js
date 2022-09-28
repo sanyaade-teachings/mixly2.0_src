@@ -17,6 +17,21 @@ const { BOARD, USER } = Config;
 
 const { layer } = layui;
 
+// 弹层遮罩设置
+LayerExt.SHADE = {
+    "dark": [
+        [0.005, 'rgb(46 64 86)'],
+        [0.005, 'rgb(46 64 86)', '40px']
+    ],
+    "light": [
+        [0.005, '#009688'],
+        [0.005, '#009688', '40px']
+    ]
+};
+
+LayerExt.SHADE_ALL = LayerExt.SHADE['light'][0];
+LayerExt.SHADE_NAV = LayerExt.SHADE['light'][1];
+
 // 默认的弹层标题高度
 LayerExt.DEFAULT_TITLE_HEIGHT = 42;
 // 默认的弹层配置项
@@ -38,20 +53,6 @@ LayerExt.DEFAULT_CONFIG = {
     borderRadius: '8px',
     maxmin: false
 };
-// 弹层遮罩设置
-LayerExt.SHADE = {
-    "dark": [
-        [0.005, 'rgb(46 64 86)'],
-        [0.005, 'rgb(46 64 86)', '40px']
-    ],
-    "light": [
-        [0.005, '#009688'],
-        [0.005, '#009688', '40px']
-    ]
-};
-
-LayerExt.SHADE_ALL = LayerExt.SHADE['light'][0];
-LayerExt.SHADE_NAV = LayerExt.SHADE['light'][1];
 
 LayerExt.updateShade = () => {
     let theme = ['light', 'dark'];

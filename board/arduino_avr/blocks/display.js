@@ -2088,6 +2088,7 @@ Blockly.Blocks['tft_generate_bitmap_data'] = {
       min: ['350px', '100px'],
       content: renderStr,
       borderRadius: '5px',
+      shade: LayerExt.SHADE_ALL,
       success: (layero, index) => {
         $('#read-bitmap-layer').css('overflow', 'hidden');
         this.addEvents(layero);

@@ -211,9 +211,9 @@ Blockly.Arduino.tool_modulus_show = function() {
   this.setFieldValue(X_1,"x");
   
   if(checkbox_save_hz)
-    Blockly.Arduino.definitions_['var_declare'+varName] = 'static const unsigned char PROGMEM '+varName+'['+X_1+'] = '+ '{' + value_input + '};';
+    Blockly.Arduino.libs_[varName] = 'static const unsigned char PROGMEM '+varName+'['+X_1+'] = '+ '{' + value_input + '};';
   else
-    Blockly.Arduino.definitions_['var_declare'+varName] = 'unsigned char '+varName+'['+X_1+'] = '+ '{' + value_input + '};';
+    Blockly.Arduino.libs_[varName] = 'unsigned char '+varName+'['+X_1+'] = '+ '{' + value_input + '};';
   var code = '';
   return code;
 };

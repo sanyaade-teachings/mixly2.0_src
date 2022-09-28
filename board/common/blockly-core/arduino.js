@@ -627,6 +627,9 @@ profile['arduino_esp32s3']
     Blockly.Arduino.definitions_ = Object.create(null);
     // Create a dictionary of setups to be printed before the code.
     Blockly.Arduino.setups_ = Object.create(null);
+    Blockly.Arduino.libs_ = Object.create(null);
+    Blockly.Arduino.loops_begin_ = Object.create(null);
+    Blockly.Arduino.loops_end_ = Object.create(null);
     //Blockly.Arduino.variableTypes_ = Object.create(null);//处理变量类型
 
     if (!Blockly.Arduino.variableDB_) {
@@ -657,30 +660,28 @@ profile['arduino_esp32s3']
     code = '  ' + code.replace(/\n/g, '\n  ');
     var positions = new Array();
     var pos = code.indexOf("timer.run();");
-    while(pos > -1){
+    while (pos > -1){
         positions.push(pos);
-        pos = code.indexOf("timer.run();",pos + 1);
+        pos = code.indexOf("timer.run();", pos + 1);
     }
-    for(var i=0;i<positions.length-1;i++)
-    {
-        code=code.replace('timer.run();\n','');
+    for (var i = 0; i < positions.length-1; i++) {
+        code = code.replace('timer.run();\n','');
     }
     code = code.replace(/\n\s+$/, '\n');
-    code = 'void loop(){\n' + code + '\n}';
     // Convert the definitions dictionary into a list.
     var imports = [];
     var define = [];
     var definitions_var = []; //变量定义
     var definitions_fun = []; //函数定义
     //var sorted_keys=Object.keys(Blockly.Arduino.definitions_).sort();
-    var sorted_keys=Object.keys(Blockly.Arduino.definitions_);
-    if (sorted_keys.length)
+    var sorted_keys = Object.keys(Blockly.Arduino.definitions_);
+    if (sorted_keys.length) {
         for(var idx in sorted_keys){
             var name=sorted_keys[idx];
             var def = Blockly.Arduino.definitions_[name];
             if (name.match(/^define/)) {
                 define.push(def);
-                }
+            }
             else if (name.match(/^include/)) {
                 imports.push(def);
             } 
@@ -693,12 +694,29 @@ profile['arduino_esp32s3']
                 definitions_fun.push(def);
             }
         }
+    }
     // Convert the setups dictionary into a list.
     var setups = [];
     for (var name in Blockly.Arduino.setups_) {
         setups.push(Blockly.Arduino.setups_[name]);
     }
 
+    for (var name in Blockly.Arduino.libs_) {
+        imports.push(`#include "${name}.h"`);
+    }
+
+    var loopsBegin = [], loopsEnd = [];
+    for (var name in Blockly.Arduino.loops_begin_) {
+        loopsBegin.push(Blockly.Arduino.loops_begin_[name]);
+    }
+    for (var name in Blockly.Arduino.loops_end_) {
+        loopsEnd.push(Blockly.Arduino.loops_end_[name]);
+    }
+    code = 'void loop(){\n'
+         + (loopsBegin.length? ('  ' + loopsBegin.join('\n  ')) : '')
+         + code
+         + (loopsEnd.length? ('  ' + loopsEnd.join('\n  ')) : '')
+         + '\n}';
     var allDefs = define.join('\n') + '\n' +imports.join('\n') + '\n\n' + definitions_var.join('\n') + '\n\n' + definitions_fun.join('\n') + '\n\nvoid setup(){\n  ' + setups.join('\n  ') + '\n}' + '\n\n';
     return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n') + code;
 };

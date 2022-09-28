@@ -1,6 +1,7 @@
 (() => {
 
 goog.require('layui');
+goog.require('Blockly');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
@@ -155,6 +156,9 @@ ArduShell.initCompile = () => {
 * @return void
 */
 ArduShell.compile = (doFunc = () => {}) => {
+    if (!ArduShell.shellPath) {
+        ArduShell.shellPath = '';
+    }
     StatusBarPort.tabChange("output");
     ArduShell.compiling = true;
     ArduShell.uploading = false;
@@ -261,6 +265,9 @@ ArduShell.initUpload = () => {
 * @return void
 */
 ArduShell.upload = (boardType, port) => {
+    if (!ArduShell.shellPath) {
+        ArduShell.shellPath = '';
+    }
     StatusBarPort.tabChange("output");
     const layerNum = layer.open({
         type: 1,
@@ -452,6 +459,38 @@ ArduShell.copyHppAndCppFiles = (oldDir, newDir) => {
 }
 
 /**
+* @function 写库文件
+* @description 将库文件数据写入本地
+* @param inPath {string} 需要写入库文件的目录
+* @return void
+*/
+ArduShell.writeLibFiles = (inPath) => {
+    return new Promise((resolve, reject) => {
+        const promiseList = [];
+        for (let name in Blockly.Arduino.libs_) {
+            const data = Blockly.Arduino.libs_[name];
+            const codePath = path.resolve(inPath, name + '.h');
+            promiseList.push(
+                new Promise((childResolve, childReject) => {
+                    fs_extra.outputFile(codePath, data)
+                    .finally(() => {
+                        childResolve();
+                    });
+                }
+            ));
+        }
+        if (!promiseList.length) {
+            resolve();
+            return;
+        }
+        Promise.all(promiseList)
+        .finally(() => {
+            resolve();
+        });
+    });
+}
+
+/**
 * @function 运行一个cmd命令
 * @description 输入编译或上传的cmd命令
 * @param cmd {String} 输入的cmd命令
@@ -459,17 +498,19 @@ ArduShell.copyHppAndCppFiles = (oldDir, newDir) => {
 */
 ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const code = MFile.getCode();
-    const codePath = path.resolve(Env.clientPath, './testArduino/testArduino.ino');
-    fs_extra.outputFile(codePath, code)
+    const testArduinoDirPath = path.resolve(Env.clientPath, 'testArduino');
+    const codePath = path.resolve(testArduinoDirPath, 'testArduino.ino');
+    ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
+    const nowFilePath = Title.getFilePath();
+    if (USER.compileCAndH === 'yes' && fs_extend.isfile(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
+        const nowDirPath = path.dirname(nowFilePath);
+        ArduShell.copyHppAndCppFiles(nowDirPath, testArduinoDirPath);
+    }
+    ArduShell.writeLibFiles(testArduinoDirPath)
     .then(() => {
-        const testArduinoDirPath = path.resolve(Env.clientPath, './testArduino');
-        ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
-        const nowFilePath = Title.getFilePath();
-        if (USER.compileCAndH === 'yes' && fs_extend.isfile(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
-            const nowDirPath = path.dirname(nowFilePath);
-            ArduShell.copyHppAndCppFiles(nowDirPath, testArduinoDirPath);
-        }
-
+        return fs_extra.outputFile(codePath, code);
+    })
+    .then(() => {
         let startTime = Number(new Date());
         ArduShell.shell = child_process.exec(cmd, { maxBuffer: 4096 * 1000000 }, (error, stdout, stderr) => {
             if (error !== null) {
@@ -516,6 +557,8 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     .catch((error) => {
         console.log(error);
         layer.close(layerNum);
+        const message = (type === 'compile' ? indexText["编译失败"] : indexText["上传失败"]);
+        StatusBar.addValue("==" + message + "==\n");
     });
 }
 

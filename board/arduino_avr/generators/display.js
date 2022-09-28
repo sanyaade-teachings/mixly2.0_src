@@ -506,7 +506,7 @@ Blockly.Arduino.oled_face = function() {
  // YANG use PROGMEM to save the RAM space
  //Blockly.Arduino.definitions_['var_declare' + varName] = 'static unsigned char ' + varName + '[]={' + FACE_IMAGE + ' };\n';
  //var code="u8g2.drawXBM("+POS_x+","+POS_y+",89,64,"+varName+");\n";
- Blockly.Arduino.definitions_['var_declare' + varName] = 'const static unsigned char ' + varName + '[] PROGMEM ={' + FACE_IMAGE + ' };\n';
+ Blockly.Arduino.libs_[varName] = 'const static unsigned char ' + varName + '[] PROGMEM ={' + FACE_IMAGE + ' };';
  var code=NAME+".drawXBMP("+POS_x+","+POS_y+",89,64,"+varName+");\n";
  return code;
 };
@@ -569,7 +569,7 @@ Blockly.Arduino.oled_define_bitmap_data = function() {
   var text = this.getFieldValue('TEXT');
   //YANG use PROGMEM to save the RAM space
   //Blockly.Arduino.definitions_['var_declare' + varName] = 'static unsigned char ' + varName + '[]={' + text + ' };\n';
-  Blockly.Arduino.definitions_['var_declare' + varName] = 'const static unsigned char ' + varName + '[] PROGMEM ={' + text + ' };\n';
+  Blockly.Arduino.libs_[varName] = 'const static unsigned char ' + varName + '[] PROGMEM ={' + text + ' };';
   return '';
 };
 
@@ -1004,37 +1004,39 @@ Blockly.Arduino.TFT_st7735_show_hz = function() {
     
     if(checkbox_st7735_show_hz)
     {
+      Blockly.Arduino.definitions_['var_declare_oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = HZ_image + "\n//" + hz_sharp;
       if(checkbox_st7735_show_hz_save)
       {
-        Blockly.Arduino.definitions_['var_declare_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = HZ_image + "\n//" + hz_sharp + "\nstatic const unsigned char PROGMEM oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
+        Blockly.Arduino.libs_['oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = HZ_image + "\n//" + hz_sharp + "\nstatic const unsigned char PROGMEM oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
       }
       else
       {
-        Blockly.Arduino.definitions_['var_declare_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = HZ_image + "\n//" + hz_sharp + "\nunsigned char oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
+        Blockly.Arduino.libs_['oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = HZ_image + "\n//" + hz_sharp + "\nunsigned char oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
       }
     }
     else
     {
       if(checkbox_st7735_show_hz_message)
       {
+        Blockly.Arduino.definitions_['var_declare_oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "//" + hz_sharp;
         if(checkbox_st7735_show_hz_save)
         {
-          Blockly.Arduino.definitions_['var_declare_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "//" + hz_sharp + "\nstatic const unsigned char PROGMEM oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
+          Blockly.Arduino.libs_['oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "//" + hz_sharp + "\nstatic const unsigned char PROGMEM oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
         }
         else
         {
-          Blockly.Arduino.definitions_['var_declare_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "//" + hz_sharp + "\nunsigned char oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
+          Blockly.Arduino.libs_['oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "//" + hz_sharp + "\nunsigned char oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
         }
       }
       else
       {
         if(checkbox_st7735_show_hz_save)
         {
-          Blockly.Arduino.definitions_['var_declare_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "static const unsigned char PROGMEM oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
+          Blockly.Arduino.libs_['oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "static const unsigned char PROGMEM oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
         }
         else
         {
-          Blockly.Arduino.definitions_['var_declare_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "unsigned char oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
+          Blockly.Arduino.libs_['oled_st7735_'+dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)] = "unsigned char oled_st7735_" + dropdown_st7735_hz_sharp + '_' + text_st7735_hz_line_height + 'px' + encodeUnicode(value_st7735_hz_data)+"["+(bs*fontSize_height)+"]={"+outStr+"};";
         }
       }
     }
@@ -1251,14 +1253,14 @@ Blockly.Arduino.tft_Circle = function() {
 Blockly.Arduino.tft_define_bitmap_data = function() {
   var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   var text = this.getFieldValue('TEXT');
-  Blockly.Arduino.definitions_['var_declare' + varName] = 'const uint16_t ' + varName + '[] PROGMEM = {\n' + text + '\n};\n';
+  Blockly.Arduino.libs_[varName] = 'const uint16_t ' + varName + '[] PROGMEM = {\n' + text + '\n};\n';
   return '';
 };
 
 Blockly.Arduino.tft_generate_bitmap_data = function() {
   var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   var text = this.getFieldValue('TEXT');
-  Blockly.Arduino.definitions_['var_declare' + varName] = 'const uint16_t ' + varName + '[] PROGMEM = {\n  ' + text + '\n};\n';
+  Blockly.Arduino.libs_[varName] = 'const uint16_t ' + varName + '[] PROGMEM = {\n  ' + text + '\n};\n';
   return '';
 };
 

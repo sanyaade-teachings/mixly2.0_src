@@ -586,6 +586,7 @@ Boards.showConfigMenu = () => {
                         defaultConfig[key] = config[key][0].key;
                         $('#board-config-' + key).find('p').text(config[key][0].label);
                     }
+                    Boards.configMenu[0].setProps({});
                 });
                 $('#board-config-menu-colse').off().click(function() {
                     Boards.configMenu[0].destroy();

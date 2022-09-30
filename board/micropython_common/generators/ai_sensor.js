@@ -210,7 +210,7 @@ Blockly.Python.ai_sensor_audio_record = function () {
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
   var v2 = Blockly.Python.valueToCode(this, 'VAR2', Blockly.Python.ORDER_ATOMIC);  
-  var code = v+'.audio_record('+v1+',times='+v2+')\n';
+  var code = v+'.audio_record(path='+v1+',times='+v2+')\n';
   return code; 
 };
 
@@ -219,7 +219,7 @@ Blockly.Python.ai_sensor_audio_play = function () {
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
   var v2 = Blockly.Python.valueToCode(this, 'VAR2', Blockly.Python.ORDER_ATOMIC);  
-  var code = v+'.audio_play('+v1+',volume='+v2+')\n';
+  var code = v+'.audio_play(path='+v1+',volume='+v2+')\n';
   return code; 
 };
 

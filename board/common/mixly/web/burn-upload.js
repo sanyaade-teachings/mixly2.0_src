@@ -463,56 +463,47 @@ function hexToBuf (hex) {
 }
 
 BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
-    async function endBurn(serialClose = false, finish = false) {
-        if (serialClose) {
-            reader.cancel();
-            await closed;
-        }
-        if (finish) {
-            errorMsg("To run the new firmware, please reset your device.")
-            StatusBar.addValue("要运行新固件，请重置您的设备。\n");
-        }
-        BU.toggleUIToolbar(false);
-        layer.closeAll('page');
-        document.getElementById('mixly-loader-div').style.display = 'none';
-        BU.burning = false;
-        BU.uploading = false;
-    }
     if (endType || typeof firmwareData !== 'object') {
         StatusBar.addValue("固件获取失败！\n");
         layer.close(layerType);
         return;
     }
+    layer.title(indexText['上传中'] + '...', layerType);
+    StatusBar.addValue("固件读取中... ");
+    let firmwareList = [];
+    for (let i of firmwareData) {
+        const firmware = {
+            offset: i.offset,
+            binBuf: hexToBuf(i.data)
+        };
+        firmwareList.push(firmware);
+    }
+    StatusBar.addValue("Done!\n即将开始烧录...\n");
     BU.burning = true;
     BU.uploading = false;
-    if (espTool.connected()) {
-        BU.toggleUIToolbar(true);
-        layer.title(indexText['上传中'] + '...', layerType);
-        StatusBar.addValue("固件读取中... ");
-        let firmwareList = [];
-        for (let i of firmwareData) {
-            const firmware = {
-                offset: i.offset,
-                binBuf: hexToBuf(i.data)
-            };
-            firmwareList.push(firmware);
-        }
-        StatusBar.addValue("Done!\n即将开始烧录...\n");
-        if (espTool.connected()) {
-            if (await clickSync()) {
-                if (burn.erase) {
-                    await clickErase();
-                }
-                for (let i of firmwareList)
-                    await clickProgram(i.offset, i.binBuf);
+    StatusBar.addValue(indexText['上传中'] + '...\n');
+    StatusBar.show(1);
+    StatusBarPort.tabChange('output');
+    try {
+        SerialPort.refreshOutputBuffer = false;
+        SerialPort.refreshInputBuffer = true;
+        await espTool.reset();
+        if (await clickSync()) {
+            // await clickErase();
+            for (let i of firmwareList) {
+                await clickProgram(i.offset, i.binBuf);
             }
-            await endBurn(true, true);
-        } else {
-            StatusBar.addValue("设备已断开连接！\n");
-            await endBurn(false, true);
         }
-    } else {
         layer.close(layerType);
+        layer.msg(indexText['上传成功'], { time: 1000 });
+        StatusBar.addValue(`==${indexText['上传成功']}==\n`);
+    } catch (error) {
+        console.log(error);
+        layer.close(layerType);
+        StatusBar.addValue(`==${indexText['上传失败']}==\n`);
+    } finally {
+        SerialPort.refreshOutputBuffer = true;
+        SerialPort.refreshInputBuffer = false;
     }
 }
 
@@ -524,20 +515,19 @@ BU.uploadWithAvrUploader = async (endType, firmwareData, layerType) => {
     }
     StatusBar.addValue(indexText['上传中'] + '...\n');
     layer.title(indexText['上传中'] + '...', layerType);
-    try {
-        let uploadSucMessageShow = true;
-        await AvrUploader.upload(firmwareData[0].data, (progress) => {
-            if (progress >= 100 && uploadSucMessageShow) {
-                StatusBar.addValue(`==${indexText['上传成功']}==\n`);
-                layer.msg(indexText['上传成功'], { time: 1000 });
-                layer.close(layerType);
-                uploadSucMessageShow = false;
-            }
-        }, true);
-    } catch (error) {
+    let uploadSucMessageShow = true;
+    AvrUploader.upload(firmwareData[0].data, (progress) => {
+        if (progress >= 100 && uploadSucMessageShow) {
+            StatusBar.addValue(`==${indexText['上传成功']}==\n`);
+            layer.msg(indexText['上传成功'], { time: 1000 });
+            layer.close(layerType);
+            uploadSucMessageShow = false;
+        }
+    }, true)
+    .catch((error) => {
+        layer.close(layerType);
         StatusBar.addValue(`==${indexText['上传失败']}==\n`);
-        layer.msg(indexText['上传失败'], { time: 1000 });
-    }
+    });
 }
 
 })();

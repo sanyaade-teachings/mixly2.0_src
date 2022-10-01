@@ -2,12 +2,14 @@
 
 goog.require('Mixly.Url');
 goog.require('Mixly.StatusBar');
+goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Config');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Url');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Web.BU');
+goog.require('Mixly.Web.Serial');
 goog.provide('Mixly.WebCompiler.Compiler');
 
 const {
@@ -16,20 +18,22 @@ const {
     Boards,
     MFile,
     StatusBar,
+    StatusBarPort,
     Config,
     LayerExt,
     Web
 } = Mixly;
 const { SOFTWARE, BOARD } = Config;
 const { Compiler } = WebCompiler;
-const { BU } = Web;
+const { BU, Serial } = Web;
 
 const DEFAULT_CONFIG = {
     "enabled": true,
     "port": 8082,
     "protocol": "http:",
     "ip": "localhost"
-}
+};
+
 Compiler.CONFIG = { ...DEFAULT_CONFIG, ...(SOFTWARE?.webCompiler ?? {}) };
 const { CONFIG } = Compiler;
 Compiler.URL = CONFIG.protocol + '//' + CONFIG.ip + ':' + CONFIG.port + '/';
@@ -50,8 +54,8 @@ Compiler.compile = () => {
 Compiler.upload = async () => {
     StatusBar.show(1);
     StatusBar.setValue('');
-    BU.burning = true;
-    BU.uploading = false;
+    BU.burning = false;
+    BU.uploading = true;
     const board = Boards.getSelectedBoardKey();
     const boardParam = board.split(':');
     if (boardParam[1] === 'avr') {
@@ -78,16 +82,15 @@ Compiler.upload = async () => {
             StatusBar.addValue(error.toString() + '\n');
         }
     } else {
-        try {
-            await BU.justConnect();
-        } catch (e) {
-            console.log(e);
-            StatusBar.addValue("已取消上传\n");
-            BU.burning = false;
-            BU.uploading = false;
-            return;
-        }
-        Compiler.generateCommand('upload', BU.uploadWithEsptool);
+        const portName = 'web-serial';
+        Serial.connect(portName, 115200, async (port) => {
+            if (!port) {
+                layer.msg('已取消连接', { time: 1000 });
+                return;
+            }
+            StatusBarPort.tabChange('output');
+            Compiler.generateCommand('upload', BU.uploadWithEsptool);
+        });
     }
 }
 

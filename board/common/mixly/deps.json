@@ -664,11 +664,13 @@
                 "require":[
                     "Mixly.Url",
                     "Mixly.StatusBar",
+                    "Mixly.StatusBarPort",
                     "Mixly.Config",
                     "Mixly.LayerExt",
                     "Mixly.Boards",
                     "Mixly.MFile",
-                    "Mixly.Web.BU"
+                    "Mixly.Web.BU",
+                    "Mixly.Web.Serial"
                 ],
                 "provide":[
                     "Mixly.WebCompiler.Compiler"

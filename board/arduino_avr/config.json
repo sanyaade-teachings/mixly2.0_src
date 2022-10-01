@@ -48,12 +48,6 @@
                     }, {
                         "key": "atmega1280",
                         "label": "ATmega1280"
-                    }, {
-                        "key": "16MHzatmega168",
-                        "label": "ATmega168 (5V, 16 MHz)"
-                    }, {
-                        "key": "8MHzatmega168",
-                        "label": "ATmega168 (3.3V, 8 MHz)"
                     }
                 ]
             }

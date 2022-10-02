@@ -427,7 +427,7 @@ LibManager.onclickImportLibs = () => {
         title: indexText['云端库'],
         cols: [[
             { type: 'checkbox', unresize: false, align: "center" },
-            { field: 'status', title: indexText['状态'], unresize: false, align: "center", minWidth: 100 },
+            { field: 'status', title: indexText['状态'], sort: true, unresize: false, align: "center", minWidth: 100 },
             { field: 'name', title: indexText['名称'], sort: true, unresize: false, align: "center", minWidth: 200 },
             { field: 'version', title: indexText['版本'], unresize: false, align: "center", minWidth: 80 },
             { field: 'desc', title: indexText['介绍'], unresize: false, align: "center", minWidth: 250 }

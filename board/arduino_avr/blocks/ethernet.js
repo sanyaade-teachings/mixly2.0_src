@@ -970,8 +970,9 @@ Blockly.Blocks['mixio_mqtt_subscribe_key'] = {
     this.appendDummyInput()
         .appendField(Blockly.USE_MIXLY_KEY)
         .appendField(new Blockly.FieldTextInput("1RFOH08C"), "key")
-        .appendField(Blockly.CONNECT_TO_MIXIO);
-    //this.setPreviousStatement(true, null);
+        .appendField(Blockly.CONNECT_TO_MIXIO)
+        .appendField(Blockly.blynk_SERVER_ADD)
+        .appendField(new Blockly.FieldTextInput("mixio.mixly.org"), "server");
     this.setNextStatement(true, null);
     this.setColour(170);
  this.setTooltip("");
@@ -988,7 +989,7 @@ Blockly.Blocks['mixio_mqtt_publish'] = {
         .setCheck(null)
         .appendField(Blockly.TO_TOPIC);
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["MixIO","1"], ["MixIO Key","2"]]), "mode");        
+        .appendField(new Blockly.FieldDropdown([["MixIO","1"], ["Mixly Key","2"]]), "mode");        
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(170);
@@ -1004,7 +1005,7 @@ Blockly.Blocks['mixio_mqtt_received_the_news'] = {
         .appendField(Blockly.WHEN_THE_SUBJECT_IS_RECEIVED);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_MSG)
-        .appendField(new Blockly.FieldDropdown([["MixIO","1"], ["MixIO Key","2"]]), "mode");
+        .appendField(new Blockly.FieldDropdown([["MixIO","1"], ["Mixly Key","2"]]), "mode");
     this.appendStatementInput("function")
         .setCheck(null);
     this.setPreviousStatement(false, null);

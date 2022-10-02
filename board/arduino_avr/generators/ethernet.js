@@ -4363,6 +4363,7 @@ Blockly.Arduino.mixio_mqtt_subscribe = function() {
                                                    +'  Serial.printf("The client %s connects to the public mqtt broker\\n", client_id.c_str());\n'
                                                    +'  if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {\n'
                                                    +'    Serial.println("Public emqx mqtt broker connected");\n'
+                                                   +'    client.publish(String(String(mqtt_username) +"/"+ String(project) +"/"+ String("b640a0ce465fa2a4150c36b305c1c11b")).c_str(),String(client_id).c_str());\n'
                                                    +'  } else {\n'
                                                    +'    Serial.print("failed with state ");\n'
                                                    +'    Serial.print(client.state());\n'
@@ -4375,8 +4376,9 @@ Blockly.Arduino.mixio_mqtt_subscribe = function() {
 
 Blockly.Arduino.mixio_mqtt_subscribe_key = function() {
     var key= this.getFieldValue('key');
+    var server= this.getFieldValue('server');
     Blockly.Arduino.definitions_['include_PubSubClient'] ='#include <PubSubClient.h>\n';
-    Blockly.Arduino.definitions_['var_declare_PubSubClient'] = 'const char *mqtt_broker = "mixio.mixly.org";\n'
+    Blockly.Arduino.definitions_['var_declare_PubSubClient'] = 'const char *mqtt_broker = "' +server+ '";\n'
                                                               +'const char *mqtt_username = "MixIO_public";\n'
                                                               +'const char *mqtt_password = "MixIO_public";\n'
                                                               +'const int mqtt_port = 1883;\n'
@@ -4405,6 +4407,7 @@ Blockly.Arduino.mixio_mqtt_subscribe_key = function() {
                                                    +'  Serial.printf("The client %s connects to the public mqtt broker\\n", client_id.c_str());\n'
                                                    +'  if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {\n'
                                                    +'    Serial.println("Public emqx mqtt broker connected");\n'
+                                                   +'    client.publish(String(String(mqtt_username) +"/"+ String(project) +"/"+ String("b640a0ce465fa2a4150c36b305c1c11b")).c_str(),String(client_id).c_str());\n'
                                                    +'  } else {\n'
                                                    +'    Serial.print("failed with state ");\n'
                                                    +'    Serial.print(client.state());\n'

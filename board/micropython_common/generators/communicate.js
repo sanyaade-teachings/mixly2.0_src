@@ -388,7 +388,7 @@ Blockly.Python.espnow_radio_recv_certain_msg= function(block) {
     Blockly.Python.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(ESPNow_radio_recv_callback)\n";
     var message = block.getFieldValue('msg');
     var message_utf8 = toUTF8Hex(message);
-    Blockly.Python.functions_['def_radio_recv_' + message_utf8] =
+    Blockly.Python.definitions_['def_radio_recv_' + message_utf8] =
         '_radio_msg_list.append(\'' + message + '\')\n' +
         'def radio_recv_' + message_utf8 + '():\n' + doCode;
     return '';

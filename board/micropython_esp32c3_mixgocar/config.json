@@ -68,7 +68,7 @@
                     "path": "./build/MixGo_Car-0x0-V1.19.1-220916-lib.bin"
                 }, {
                     "offset": "0x3A0000",
-                    "path": "./build/HZK12.bin"
+                    "path": "../micropython_common/build/HZK12.bin"
                 }
             ]
         }

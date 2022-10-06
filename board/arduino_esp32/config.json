@@ -448,10 +448,10 @@
                 "PSRAM": [
                     {
                         "key": "disabled",
-                        "label": "Enabled"
-                    }, {
-                        "key": "disabled",
                         "label": "Disabled"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
                     }
                 ],
                 "PartitionScheme": [

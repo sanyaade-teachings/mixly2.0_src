@@ -472,6 +472,9 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
     StatusBar.addValue("固件读取中... ");
     let firmwareList = [];
     for (let i of firmwareData) {
+        if (!i.offset || !i.data) {
+            continue;
+        }
         const firmware = {
             offset: i.offset,
             binBuf: hexToBuf(i.data)

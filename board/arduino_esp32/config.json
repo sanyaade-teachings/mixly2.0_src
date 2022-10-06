@@ -447,7 +447,7 @@
             "config": {
                 "PSRAM": [
                     {
-                        "key": "enabled",
+                        "key": "disabled",
                         "label": "Enabled"
                     }, {
                         "key": "disabled",

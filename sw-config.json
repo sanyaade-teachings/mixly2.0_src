@@ -23,9 +23,10 @@
         "protocol": "wss:"
     },
     "webCompiler": {
-        "enabled": false,
+        "enabled": true,
         "port": 8083,
-        "protocol": "https:"
+        "protocol": "https:",
+        "domain": ""
     },
     "debug": false
 }

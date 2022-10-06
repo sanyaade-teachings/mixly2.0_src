@@ -36,8 +36,8 @@ const DEFAULT_CONFIG = {
 
 Compiler.CONFIG = { ...DEFAULT_CONFIG, ...(SOFTWARE?.webCompiler ?? {}) };
 const { CONFIG } = Compiler;
-CONFIG.ip = window.location.hostname ?? 'localhost';
-Compiler.URL = CONFIG.protocol + '//' + CONFIG.ip + ':' + CONFIG.port + '/';
+CONFIG.ip = (CONFIG.ip === 'localhost'? window.location.hostname : CONFIG.ip);
+Compiler.URL = CONFIG.protocol + '//' + (CONFIG.domain? CONFIG.domain : (CONFIG.ip + ':' + CONFIG.port))  + '/';
 
 Compiler.compile = () => {
     StatusBar.show(1);

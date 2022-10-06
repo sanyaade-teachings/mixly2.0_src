@@ -24,8 +24,8 @@
     },
     "webCompiler": {
         "enabled": false,
-        "port": 8082,
-        "protocol": "http:"
+        "port": 8083,
+        "protocol": "https:"
     },
     "debug": false
 }

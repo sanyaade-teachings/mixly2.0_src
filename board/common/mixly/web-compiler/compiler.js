@@ -149,7 +149,6 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
         credentials: 'omit', // 设置不传递cookie
         mode: 'cors', // 设置请求不允许跨域
     }).then(res => {
-        console.log(res)
         return res.text();
     }).then((data) => {
         const dataObj = JSON.parse(data);

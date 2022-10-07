@@ -26,7 +26,7 @@ const { Socket } = Mixly.WebSocket;
 
 Socket.obj = null;
 
-Socket.url = 'wss://127.0.0.1:8082/';
+Socket.url = 'ws://127.0.0.1:8082/';
 
 Socket.jsonArr = [];
 
@@ -41,7 +41,7 @@ $.get('../../config.json', 'json', (obj) => {
     Socket.debug = obj.debug;
     BOARD.server = obj;
     const { hostname } = window.location;
-    Socket.url = obj.socket.protocol + '//' + hostname + ':' + Socket.port + '/';
+    Socket.url = 'ws://' + hostname + ':' + Socket.port + '/';
     Socket.IPAddress = hostname;
 }).fail(function () {
     console.log('无法加载config.json文件');

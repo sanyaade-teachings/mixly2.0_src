@@ -60,8 +60,12 @@ class RFM98:
 		self.init()
 
 	def init(self):
-		if self._read_u8(_REG_VERSION) != 18:				# No device type check!
-			raise RuntimeError("Cannot find a RFM9x")
+		for i in range(6):
+			if self._read_u8(_REG_VERSION) == 18:				# No device type check!
+				break
+			if i >=5:
+				raise AttributeError("Cannot find a RFM9x")
+			time.sleep(1)	
 		
 		self.sleep()
 		time.sleep(0.01)

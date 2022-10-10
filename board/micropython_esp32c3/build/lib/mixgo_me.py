@@ -4,9 +4,7 @@ MixGo ME -Onboard resources
 MicroPython library for the MixGo ME -Onboard resources
 =======================================================
 
-#Preliminary composition                       20220616
-#Instantiate onboard resources              20220622
-#Improve ADC key reading calculation        20220627
+#Preliminary composition                       20221010
 
 dahanzimin From the Mixly Team
 """
@@ -20,14 +18,14 @@ onboard_i2c=SoftI2C(scl = Pin(7), sda = Pin(6), freq = 400000)
 '''RTC'''
 rtc_clock=RTC()
 
-'''ACC-Sensor'''    #Including acceleration,temperature
+'''ACC-Sensor'''
 try :
     import mxc6655xa
     onboard_mxc6655xa = mxc6655xa.MXC6655XA(onboard_i2c)     
 except Exception as e:
     print("Warning: Failed to communicate with MXC6655XA or",e)
 
-'''ALS_PS-Sensor'''    #Including als_vis,als_ir,ps_nl
+'''ALS_PS-Sensor'''
 try :
     import ltr553als
     onboard_ltr553als = ltr553als.LTR_553ALS(onboard_i2c)     
@@ -41,7 +39,7 @@ try :
 except Exception as e:
     print("Warning: Failed to communicate with Matrix8x5 or",e)
 
-'''2RGB_WS2812'''    #color_chase(),rainbow_cycle()方法移至类里
+'''2RGB_WS2812'''
 from ws2812 import NeoPixel
 onboard_rgb = NeoPixel(Pin(9), 2, ORDER=(0, 1, 2, 3),multiplex=1)
 
@@ -85,7 +83,7 @@ class KEYSensor:
         for _ in range(20):
             values.append(self.adc.read())
             time.sleep(0.001)
-        return (self.range-200) < (sum(sorted(values)[5:15])//10) < (self.range+200)
+        return (self.range-300) < (sum(sorted(values)[5:15])//10) < (self.range+300)
     
     def get_presses(self, delay = 1):
         last_time,presses = time.time(), 0

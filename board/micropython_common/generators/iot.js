@@ -206,6 +206,10 @@ Blockly.Python.IOT_MIXIO_NTP = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.iot_client_onboard = function(){    
+    var code = 'mqtt_client';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
 
 Blockly.Blocks['iot_wificonnect'] = Blockly.Blocks['iot_wifi_connect'];
 Blockly.Blocks['iot_onenetconnect'] = Blockly.Blocks['iot_onenet_connect'];

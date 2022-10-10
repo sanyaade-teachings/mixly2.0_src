@@ -35,7 +35,7 @@
   <script src="../python/blocks/logic.js"></script>
   <script src="blocks/serial.js"></script>
   <script src="../micropython_common/blocks/communicate.js"></script>
-  <script src="blocks/iot.js"></script>
+  <script src="../micropython_common/blocks/iot.js"></script>
   <script src="../micropython_common/blocks/sensor.js"></script>
   <script src="../micropython_common/blocks/sensor_onboard.js"></script>
   <script src="../micropython_common/blocks/network.js"></script>
@@ -60,7 +60,7 @@
   <script src="../python/generators/dicts.js"></script>
   <script src="../python/generators/logic.js"></script>
   <script src="generators/serial.js"></script>
-  <script src="generators/iot.js"></script>
+  <script src="../micropython_common/generators/iot.js"></script>
   <script src="../micropython_common/generators/communicate.js"></script>
   <script src="../micropython_common/generators/sensor.js"></script>
   <script src="../micropython_common/generators/sensor_onboard.js"></script>
@@ -1882,6 +1882,7 @@
           </statement>
         </block>
         <block type="iot_mixio_check"></block>
+        <block type="iot_client_onboard"></block>
         <block type="IOT_FORMATTING">
           <value name="VAR">
             <block type="dicts_create_with_noreturn" inline="true">

@@ -524,6 +524,16 @@ Blockly.Blocks['iot_mixly_key'] = {
   }
 };
 
+Blockly.Blocks['iot_client_onboard'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.iot.HUE);
+        this.appendDummyInput()
+            .appendField('MIXIO '+MSG.catEthernet_clinet);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
 Blockly.Blocks['iot_wificonnect'] = Blockly.Blocks['iot_wifi_connect'];
 Blockly.Blocks['iot_onenetconnect'] = Blockly.Blocks['iot_onenet_connect'];
 Blockly.Blocks['iot_onenetdisconnect'] = Blockly.Blocks['iot_onenet_disconnect'];

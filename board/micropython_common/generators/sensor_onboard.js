@@ -89,7 +89,7 @@ Blockly.Python.sensor_mixgo_light= function(){
     return ['mixgo.get_brightness()', Blockly.Python.ORDER_ATOMIC];
     }
     else if (version == "mixgo_ce"){
-    Blockly.Python.definitions_['mixgo_ce'] = 'import mixgo_ce';
+    Blockly.Python.definitions_['import_mixgo_ce'] = 'import mixgo_ce';
     return ['mixgo_ce.get_brightness()', Blockly.Python.ORDER_ATOMIC];
     }
     else if(version == "mpython"){

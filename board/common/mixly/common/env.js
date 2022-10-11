@@ -128,11 +128,6 @@ if (Env.isElectron) {
     } else {
         Env.python3Path = Env.clientPath + '/mixpyBuild/win_python3/python3.exe';
     }
-    if (Env.currentPlatform === 'win32') {
-        Env.python3Path = path.resolve(Env.clientPath, 'mixpyBuild/win_python3/python3.exe');
-    } else {
-        Env.python3Path = '/usr/bin/python3';
-    }
     Env.indexPath = __dirname;
     Env.srcPath = path.resolve(Env.indexPath, Config.pathPrefix, '../');
 }

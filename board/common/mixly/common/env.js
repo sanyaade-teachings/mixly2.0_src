@@ -120,13 +120,13 @@ if (Env.isElectron) {
         Env.clientPath = path.resolve(app.getPath("exe"), '../');
     }
     Env.pyFilePath = path.resolve(Env.clientPath, 'mixpyBuild/mixly.py');
-    if (Env.currentPlatform == "darwin" || Env.currentPlatform == "linux") {
+    if (Env.currentPlatform === 'win32') {
+        Env.python3Path = path.resolve(Env.clientPath, 'mixpyBuild/win_python3/python3.exe');
+    } else {
         Env.python3Path = '/usr/bin/python3';
         if (fs_extend.isfile('/usr/local/bin/python3')) {
             Env.python3Path = '/usr/local/bin/python3';
         }
-    } else {
-        Env.python3Path = Env.clientPath + '/mixpyBuild/win_python3/python3.exe';
     }
     Env.indexPath = __dirname;
     Env.srcPath = path.resolve(Env.indexPath, Config.pathPrefix, '../');

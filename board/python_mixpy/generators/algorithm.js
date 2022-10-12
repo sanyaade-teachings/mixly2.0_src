@@ -25,22 +25,22 @@ Blockly.Python.algorithm_get_current_location = function() {
 };
 
 Blockly.Python.algorithm_have_path = function() {
-  var code = "vis[i] == 0 and g[f][i] == 1";
+  var code = "vis[_my_variable+1] == 0 and g[f][_my_variable+1] == 1";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.algorithm_new_path = function() {
-  var code = "mark[f][i] == 0";
+  var code = "mark[f][_my_variable+1] == 0";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.algorithm_set_path = function() {   
-  var code = "mark[f][i] = 1\n";
+  var code = "mark[f][_my_variable+1] = 1\n";
   return code;
 };
 
 Blockly.Python.algorithm_add_path = function() {   
-  var code = "vis[i] = 1\npath.append(i)\nflag = 1\n";
+  var code = "vis[_my_variable+1] = 1\npath.append(_my_variable+1)\nflag = 1\n";
   return code;
 };
 

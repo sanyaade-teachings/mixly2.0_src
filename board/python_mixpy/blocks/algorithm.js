@@ -39,14 +39,17 @@ Blockly.Blocks['algorithm_get_current_location'] = {
   }
 };
 
-Blockly.Blocks['algorithm_have_path']={
+Blockly.Blocks['algorithm_find_path'] = {
   init: function() {
     this.setColour(Blockly.Blocks.algorithm.HUE);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_HAVE_PATH);
-    this.setOutput(true);
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_FIND_PATH);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
   }
-}
+};
+
+
 
 Blockly.Blocks['algorithm_new_path']={
   init: function() {
@@ -76,15 +79,6 @@ Blockly.Blocks['algorithm_add_path'] = {
     this.setNextStatement(true, null);    
   }
 };
-
-Blockly.Blocks['algorithm_no_path']={
-  init: function() {
-    this.setColour(Blockly.Blocks.algorithm.HUE);
-    this.appendDummyInput()
-    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_NO_PATH);
-    this.setOutput(true);
-  }
-}
 
 Blockly.Blocks['algorithm_del_path'] = {
   init: function() {

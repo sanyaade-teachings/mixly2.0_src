@@ -55,6 +55,7 @@ var MSG = {
     catIot: "物联网",
     catSet: "集合",
     catData: "数据分析",
+    catAlgorithm: "算法",
     catCv: "图像处理",
     catHardware: "硬件交互",
     catAI: "人工智能",
@@ -3688,3 +3689,15 @@ Blockly.MIXLY_ANCHOR = '锚点参数';
 Blockly.MIXLY_MODEL_PATH = '模型路径';
 Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP = '利用摄像头读取SD卡中的模型文件进行物品识别，返回包含所有识别结果对象的列表';
 Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP = '获取外部模型加载结果对象的相应信息';
+Blockly.MIXLY_MIXPY_ALGORITHM_PREPARE = '加载地图';
+Blockly.MIXLY_MIXPY_ALGORITHM_ADD_SCHOOL = '将当前位置设为学校并加入路径中';
+Blockly.MIXLY_MIXPY_ALGORITHM_GET_CURRENT_LOCATION = '获取当前位置';
+Blockly.MIXLY_MIXPY_ALGORITHM_HAVE_PATH = '从当前位置有路直接通向未送走的同学家';
+Blockly.MIXLY_MIXPY_ALGORITHM_NEW_PATH = '这条路之前未尝试过';
+Blockly.MIXLY_MIXPY_ALGORITHM_SET_PATH = '将当前位置设置为通向这个同学家的路';
+Blockly.MIXLY_MIXPY_ALGORITHM_ADD_PATH = '将路线增加到当前位置';
+Blockly.MIXLY_MIXPY_ALGORITHM_NO_PATH = '没有找到直接通向未送走的同学家的路';
+Blockly.MIXLY_MIXPY_ALGORITHM_DEL_PATH = '将路线减少当前位置';
+Blockly.MIXLY_MIXPY_ALGORITHM_RETURN_PATH = '回退到上一位置';
+Blockly.MIXLY_MIXPY_ALGORITHM_NO_LEFT = '所有同学都被送回家啦';
+Blockly.MIXLY_MIXPY_ALGORITHM_PRINT_PATH = '显示路线';

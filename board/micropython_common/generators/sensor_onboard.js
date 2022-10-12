@@ -448,6 +448,22 @@ Blockly.Python.onboard_RTC_get_time = function () {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+//mixgo_cc onboard_sensor generators:
+
+Blockly.Python.sensor_mixgo_cc_mmc5603_get_magnetic = function(){   
+    var key = this.getFieldValue('key');
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
+    var code = 'onboard_mmc5603.getdata()' + key ;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python.sensor_mixgo_cc_mmc5603_get_angle = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
+    var code = 'onboard_mmc5603.getangle()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 //mixgo_me onboard_sensor generators:
 
 

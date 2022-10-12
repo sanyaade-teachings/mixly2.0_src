@@ -1430,6 +1430,8 @@
       <block type="sensor_hp203" m-show='micropython:esp32c3:mixgo_cc'></block>
       <block type="sensor_aht11" m-show='micropython:esp32c3:mixgo_cc'></block>
       <block type="sensor_get_acceleration"></block>
+      <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c3:mixgo_cc"></block>
+        <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c3:mixgo_cc"></block>
       <block type="rfid_readid" m-show='micropython:esp32c3:mixgo_cc'>
         <value name="SUB">
           <shadow type="variables_get">
@@ -1504,9 +1506,9 @@
 
     </category>
     <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858" m-hide='micropython:esp32c3:generic'>
-      <!-- <block type="actuator_led_bright" m-show='micropython:esp32c3:mixgo_cc'>
+      <block type="mixgo_cc_actuator_led_bright" m-show='micropython:esp32c3:mixgo_cc'>
         <value name="led">
-          <shadow type="number">
+          <shadow type="cc_number">
           </shadow>
         </value>
         <value name="bright">
@@ -1514,15 +1516,15 @@
           </shadow>
         </value>
       </block>
-      <block type="actuator_get_led_state" m-show='micropython:esp32c3:mixgo_cc'>
+      <block type="mixgo_cc_actuator_get_led_state" m-show='micropython:esp32c3:mixgo_cc'>
         <value name="led">
-          <shadow type="number">
+          <shadow type="cc_number">
           </shadow>
         </value>
       </block>
-      <block type="actuator_led_brightness" m-show='micropython:esp32c3:mixgo_cc'>
+      <block type="mixgo_cc_actuator_led_brightness" m-show='micropython:esp32c3:mixgo_cc'>
         <value name="led">
-          <shadow type="number">
+          <shadow type="cc_number">
           </shadow>
         </value>
         <value name="bright">
@@ -1531,12 +1533,12 @@
           </shadow>
         </value>
       </block>
-      <block type="actuator_get_led_bright" m-show='micropython:esp32c3:mixgo_cc'>
+      <block type="mixgo_cc_actuator_get_led_bright" m-show='micropython:esp32c3:mixgo_cc'>
         <value name="led">
-          <shadow type="number">
+          <shadow type="cc_number">
           </shadow>
         </value>
-      </block> -->
+      </block>
       <block type="esp32_onboard_music_pitch">
         <value name="pitch">
           <shadow type="pins_tone_notes">

@@ -102,6 +102,46 @@ Blockly.Python.actuator_led_brightness = function() {
     return code;
 };
 
+Blockly.Python.cc_number = function () {
+    var code = this.getFieldValue('op');
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixgo_cc_actuator_led_bright = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var bright = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
+    var code = version+".ledonoff(" + op + ","+ bright+")\n";
+    return code;
+};
+
+Blockly.Python.mixgo_cc_actuator_get_led_bright = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var code = version+".ledbrightness(" +op +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];;
+};
+
+Blockly.Python.mixgo_cc_actuator_get_led_state = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var code = version+".ledonoff(" +op +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];;
+};
+
+Blockly.Python.mixgo_cc_actuator_led_brightness = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var flag = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
+    var code = version+".ledbrightness(" + op + ","+ flag+")\n";
+    return code;
+};
+
+
 Blockly.Python.mixgo_actuator_led_bright = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);

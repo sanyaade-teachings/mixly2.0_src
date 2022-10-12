@@ -766,6 +766,47 @@ Blockly.Blocks['sensor_onboard_compass_reset'] = {
 }
 };
 
+//mixgo_cc onboard_sensor blocks:
+Blockly.Blocks['sensor_mixgo_cc_mmc5603_get_magnetic'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MICROBIT_JS_GET+Blockly.MIXLY_MICROBIT_JS_FIELD_STRENGTH)
+        .appendField(new Blockly.FieldDropdown([
+            ["x", "[0]"],
+            ["y", "[1]"],
+            ["z", "[2]"],
+            ["(x,y,z)", ""]
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        var thisBlock = this;
+        this.setTooltip(function() {
+            var mode = thisBlock.getFieldValue('key');
+            var mode0 = Blockly.MIXLY_MICROBIT_PY_STORAGE_GET;
+            var mode1 = Blockly.MIXLY_MICROBIT_Direction;
+            var mode2 = Blockly.MIXLY_MICROBIT_JS_FIELD_STRENGTH;
+            var TOOLTIPS = {
+                '[0]': 'x',
+                '[1]': 'y',
+                '[2]': 'z',
+                '':Blockly.MIXLY_MICROBIT_Shiliang_Direction,
+            };
+            return mode0 +TOOLTIPS[mode]+mode1+mode2;
+        });
+    }
+};
+Blockly.Blocks['sensor_mixgo_cc_mmc5603_get_angle'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MICROBIT_JS_GET_COMPASS+Blockly.MIXLY_MICROBIT_JS_BY_ANGLE)
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+
+    }
+};
+
 
 //mixgo_me onboard_sensor blocks:
 

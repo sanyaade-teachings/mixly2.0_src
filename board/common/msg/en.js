@@ -53,6 +53,7 @@ var MSG = {
     catIot: "IOT",
     catSet: "Set",
     catData: "Data",
+    catAlgorithm: "Algorithm",
     catHardware: "Hardware",
     catAI: "AI",
     catHear: "machine Hear",

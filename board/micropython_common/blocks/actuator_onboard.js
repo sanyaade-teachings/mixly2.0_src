@@ -237,6 +237,84 @@ Blockly.Blocks.rm_actuator_led_brightness = {
   }
 };
 
+Blockly.Blocks['cc_number'] = {
+    init: function() {
+        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                ["L1", "20"],
+                ["L2", "21"]
+            ]), 'op')
+        this.setOutput(true);
+    }
+};
+
+
+Blockly.Blocks.mixgo_cc_actuator_led_bright = {
+  init: function() {
+    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_SETTING);
+    this.appendValueInput('led')
+    .appendField(Blockly.MIXLY_BUILDIN_LED)
+    this.appendValueInput('bright')
+    .appendField(Blockly.MIXLY_PULSEIN_STAT)  
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_ESP32_LED_SETONOFF);
+  }
+};
+
+Blockly.Blocks.mixgo_cc_actuator_get_led_bright = {
+  init: function() {
+    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
+    this.appendValueInput('led')
+    .appendField(Blockly.MIXLY_BUILDIN_LED)
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_BRIGHTNESS)  
+    this.setOutput(true);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_ESP32_LED_GETONOFF);
+  }
+};
+
+Blockly.Blocks.mixgo_cc_actuator_get_led_state = {
+  init: function() {
+    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
+    this.appendValueInput('led')
+    .appendField(Blockly.MIXLY_BUILDIN_LED)
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_PULSEIN_STAT)  
+    this.setOutput(true);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_ESP32_LED_GETONOFF);
+  }
+};
+
+Blockly.Blocks.mixgo_cc_actuator_led_brightness = {
+  init: function() {
+    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_SETTING);
+    this.appendValueInput('led')
+    .appendField(Blockly.MIXLY_BUILDIN_LED)
+    this.appendValueInput('bright')
+    .appendField(Blockly.MIXLY_BRIGHTNESS)
+    this.appendDummyInput("")
+    .appendField("%")
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_SETTING+Blockly.MIXLY_BUILDIN_LED+Blockly.MIXLY_BRIGHTNESS+'(0-10)');
+  }
+};
+
+
 Blockly.Blocks.actuator_onboard_neopixel_rgb = {
     init: function () {
         this.setColour(Blockly.Blocks.actuator_onboard.HUE);

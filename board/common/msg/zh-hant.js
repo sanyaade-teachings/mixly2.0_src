@@ -50,6 +50,7 @@ var MSG = {
     catIot: "物聯網",
     catSet: "集合",
     catData: "資料分析",
+    catAlgorithm: "算法",
     catHardware: "硬體交互",
     catAI: "人工智慧",
     catHear: "機器聽覺",

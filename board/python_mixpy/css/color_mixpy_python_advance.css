@@ -401,7 +401,14 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(16) > div.blo
   background:url('../../common/media/mark/cv2.png') no-repeat;
   background-size: 100% auto; 
 }
-
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(17) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+  background:url('../../common/media/mark/algorithm.png') no-repeat;
+  background-size: 100% auto; 
+}
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(17) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+  background:url('../../common/media/mark/algorithm2.png') no-repeat;
+  background-size: 100% auto; 
+}
 
 /*text.blocklyCheckbox {
   fill: #ff3030!important;

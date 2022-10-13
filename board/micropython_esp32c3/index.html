@@ -2285,15 +2285,9 @@
         <block type="dicts_create_with" inline="true">
           <mutation items="1"></mutation>
           <field name="VAR">iot_dict</field>
-          <field name="KEY0">"tc"</field>
+          <field name="KEY0">"sound"</field>
           <value name="ADD0">
-            <block type="inout_pin_pressed">
-              <value name="pin">
-                <shadow type="pins_touch">
-                  <field name="PIN">tc0</field>
-                </shadow>
-              </value>
-            </block>
+            <block type="sensor_sound"></block>
           </value>
           <next>
             <block type="iot_onenet_publish_dict">

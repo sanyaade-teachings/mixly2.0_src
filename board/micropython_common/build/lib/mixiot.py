@@ -129,11 +129,11 @@ class MQTTClient:
         matched = False
         if topic is not None:
             for callback in self._on_message_filtered.iter_match(topic):
-                callback(client, topic, message)  # on_msg with callback
+                callback(client, topic.split("/")[-1], message)  # on_msg with callback
                 matched = True
 
         if not matched and self.on_message:  # regular on_message
-            self.on_message(client, topic, message)
+            self.on_message(client, topic.split("/")[-1], message)
 
     def set_last_will(self, topic, msg, retain=False, qos=0):
         assert 0 <= qos <= 2

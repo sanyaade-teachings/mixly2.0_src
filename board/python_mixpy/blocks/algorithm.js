@@ -19,6 +19,16 @@ Blockly.Blocks['algorithm_prepare'] = {
   }
 };
 
+Blockly.Blocks['algorithm_prepare2'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_PREPARE2);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+  }
+};
+
 Blockly.Blocks['algorithm_add_school'] = {
   init: function() {
     this.setColour(Blockly.Blocks.algorithm.HUE);
@@ -49,7 +59,14 @@ Blockly.Blocks['algorithm_find_path'] = {
   }
 };
 
-
+Blockly.Blocks['algorithm_current_school']={
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_CURRENT_SCHOOL);
+    this.setOutput(true);
+  }
+}
 
 Blockly.Blocks['algorithm_new_path']={
   init: function() {
@@ -69,6 +86,25 @@ Blockly.Blocks['algorithm_set_path'] = {
     this.setNextStatement(true, null);    
   }
 };
+
+Blockly.Blocks['algorithm_no_path'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_NO_PATH);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+  }
+};
+
+Blockly.Blocks['algorithm_void_path']={
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_VOID_PATH);
+    this.setOutput(true);
+  }
+}
 
 Blockly.Blocks['algorithm_add_path'] = {
   init: function() {

@@ -402,3 +402,87 @@ Blockly.Python.turtle_screen_savefig = function () {
     var code = varName + ".getcanvas().postscript(file="+file+")\n";
     return code;
 };
+
+Blockly.Python.hanoi_init = function() {
+  Blockly.Python.definitions_.import_turtle = "import turtle";
+  Blockly.Python.definitions_.import_time = "import time";
+  Blockly.Python.definitions_.import_math = "import math";
+  function randomHexColor() {
+    //随机生成十六进制颜色 
+    var hex = Math.floor(Math.random() * 16777216).toString(16);
+    //生成ffffff以内16进制数 
+    while (hex.length < 6) {
+      //while循环判断hex位数，少于6位前面加0凑够6位
+      hex = '0' + hex;
+    }
+    return '#' + hex;  //返回‘#'开头16进制颜色
+  }
+  var num = this.getFieldValue('NUM');
+  let colorList = [];
+  let towerList = [];
+  let i = 0;
+  while (i < num) {
+    i++;
+    colorList.push('"' + randomHexColor() + '"');
+    towerList.push('[]');
+  }
+  Blockly.Python.setups_['init_Hanoi'] = `
+def init_Hanoi():
+    pen = turtle.Turtle()
+    pen.hideturtle()
+    pen.speed(0)
+    for i in range(0, 3, 1):
+        pen.penup()
+        pen.setheading(0)
+        pen.goto(150 * i - 200,-100)
+        pen.pendown()
+        pen.pensize(5)
+        pen.forward(100)
+        pen.goto(150 * i - 150,-100)
+        pen.setheading(90)
+        pen.forward(200)`;
+  Blockly.Python.setups_['begin'] = `
+def begin():
+    s = turtle.Turtle()
+    s.hideturtle()
+    s.penup()
+    s.speed(0)
+    s.goto(0,-150)
+    s.write('3')
+    time.sleep(1)
+    s.clear()
+    s.write('2')
+    time.sleep(1)
+    s.clear()
+    s.write('1')
+    time.sleep(1)
+    s.clear()
+    s.write('Start!')
+    time.sleep(1)
+    s.clear()`;
+    Blockly.Python.setups_['move'] = `
+def move(x, y):
+    t = tower[x].pop(-1)
+    t.goto(150 * y - 150,20 * len(tower[y]) - 90)
+    tower[y].append(t)`;
+  var code = `num = ${num}
+tower = [${towerList.join(', ')}]
+color= (${colorList.join(', ')})
+init_Hanoi()
+for i in range(0, num, 1):
+    tina = turtle.Turtle()
+    tina.penup()
+    tina.shape('square')
+    tina.color("#000000",color[i])
+    tina.goto(-150,20 * i - 90)
+    tower[0].append(tina)
+begin()\n`;
+  return code;
+};
+
+Blockly.Python.hanoi_move = function() {
+  var fromNum = Blockly.Python.valueToCode(this, 'FROM_NUM', Blockly.Python.ORDER_ATOMIC) || '0';
+  var toNum = Blockly.Python.valueToCode(this, 'TO_NUM', Blockly.Python.ORDER_ATOMIC) || '0';
+  var code = `move(${fromNum}, ${toNum})\n`;
+  return code;
+};

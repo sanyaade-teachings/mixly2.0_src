@@ -863,8 +863,8 @@ Blockly.Blocks['turtle_listen'] = {
   }
 };
 
- Blockly.Blocks['turtle_screen_savefig'] = {
-   init: function() {
+Blockly.Blocks['turtle_screen_savefig'] = {
+    init: function() {
      this.setColour(Blockly.Blocks.turtle.HUE);
      this.appendValueInput('TUR')
      this.appendValueInput("FILE")
@@ -875,5 +875,40 @@ Blockly.Blocks['turtle_listen'] = {
      this.setNextStatement(true);
      this.setOutput(false);
      this.setTooltip(Blockly.mixpy_TURTLE_SAVEFIG_TOOLTIP);
-   }
- };
+    }
+};
+
+Blockly.Blocks.hanoi_init = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("准备")
+            .appendField(new Blockly.FieldNumber(3, 0, 100, 1), "NUM")
+            .appendField("层汉诺塔");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Blocks.turtle.HUE);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.Blocks.hanoi_move = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("移动圆盘从");
+        this.appendValueInput("FROM_NUM")
+            .setCheck(null)
+            .appendField("柱");
+        this.appendDummyInput()
+            .appendField("到");
+        this.appendValueInput("TO_NUM")
+            .setCheck(null)
+            .appendField("柱");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Blocks.turtle.HUE);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};

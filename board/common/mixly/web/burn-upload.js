@@ -462,7 +462,8 @@ function hexToBuf (hex) {
     return typedArray.buffer;
 }
 
-BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
+BU.uploadWithEsptool = async (endType, obj, layerType) => {
+    let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
         StatusBar.addValue("固件获取失败！\n");
         layer.close(layerType);
@@ -510,7 +511,8 @@ BU.uploadWithEsptool = async (endType, firmwareData, layerType) => {
     }
 }
 
-BU.uploadWithAvrUploader = async (endType, firmwareData, layerType) => {
+BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
+    let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
         StatusBar.addValue("固件获取失败！\n");
         layer.close(layerType);

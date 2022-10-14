@@ -42,13 +42,14 @@ Compiler.URL = CONFIG.protocol + '//' + (CONFIG.domain? CONFIG.domain : (CONFIG.
 Compiler.compile = () => {
     StatusBar.show(1);
     StatusBar.setValue('');
-    Compiler.generateCommand('compile', (error, data, layerNum) => {
+    Compiler.generateCommand('compile', (error, obj, layerNum) => {
         layer.close(layerNum);
+        let message = indexText["编译成功"];
         if (error) {
-            layer.msg('编译失败', { time: 1000 });
-        } else {
-            layer.msg('编译成功', { time: 1000 });
+            message = indexText["编译失败"];
         }
+        layer.msg(message, { time: 1000 });
+        StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + obj.timeCost + ")==\n");
     });
 }
 
@@ -158,7 +159,10 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
             endFunc(true, null, layerType);
         } else {
             StatusBar.addValue(decodeURIComponent(dataObj.compileMessage));
-            endFunc(false, dataObj.data, layerType);
+            endFunc(false, {
+                data: dataObj.data,
+                timeCost: decodeURIComponent(dataObj.timeCost)
+            }, layerType);
         } 
     })
     .catch((error) => {

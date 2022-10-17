@@ -19,8 +19,9 @@ class ESPNow(espnow.ESPNow):
         self.active(True)
         self._channel=channel
         self._nic = network.WLAN(network.AP_IF)
-        self._nic.config(hidden=True,channel=self._channel,txpower=txpower)
         self._nic.active(True)
+        self._nic.config(hidden=True,channel=self._channel,txpower=txpower)
+
         
     def send(self,peer,msg):
         '''Send data after error reporting and effective processing'''    

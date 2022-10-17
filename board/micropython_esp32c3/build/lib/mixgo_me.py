@@ -39,6 +39,13 @@ try :
 except Exception as e:
     print("Warning: Failed to communicate with Matrix8x5 or",e)
 
+'''Magnetic'''
+try :
+    import mmc5603
+    onboard_mmc5603 = mmc5603.MMC5603(onboard_i2c)
+except Exception as e:
+    print("Warning: Failed to communicate with MMC5603 or",e)
+
 '''2RGB_WS2812'''
 from ws2812 import NeoPixel
 onboard_rgb = NeoPixel(Pin(9), 2, ORDER=(0, 1, 2, 3),multiplex=1)

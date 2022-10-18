@@ -223,6 +223,12 @@ Blockly.Python.communicate_bluetooth_send = function(){
     return code;
 };
 
+Blockly.Python.communicate_bluetooth_recv_only = function (block) {
+    var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
+    var code = v + '.recv()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.communicate_bluetooth_recv = function (block) {
     var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var method = Blockly.Python.valueToCode(this, 'METHOD', Blockly.Python.ORDER_ATOMIC);

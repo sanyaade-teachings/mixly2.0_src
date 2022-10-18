@@ -3,8 +3,7 @@ Bluetooth-Peripheral
 
 Micropython  library for the Bluetooth-Peripheral
 =======================================================
-#Preliminary composition	       				202200329
-#Add access MAC address and repair bytes		202200329
+#Preliminary composition	       				20221018
 #https://github.com/micropython/micropython/tree/master/examples/bluetooth
 
 dahanzimin From the Mixly Team 
@@ -37,6 +36,7 @@ class BLESimplePeripheral:
 		((self._handle_tx, self._handle_rx),) = self._ble.gatts_register_services((_UART_SERVICE,))
 		self._connections = set()
 		self._write_callback = None
+		self._write_data = None
 		self._payload = advertising_payload(name=name, services=[_UART_UUID])
 		self._advertise()
 
@@ -55,11 +55,13 @@ class BLESimplePeripheral:
 		elif event == _IRQ_GATTS_WRITE:
 			conn_handle, value_handle = data
 			value = self._ble.gatts_read(value_handle)
-			if value_handle == self._handle_rx and self._write_callback:
+			if value_handle == self._handle_rx:
 				try:
-					self._write_callback(value.decode().strip())
+					self._write_data=value.decode().strip()
 				except:
-					self._write_callback(value)
+					self._write_data=value
+				if self._write_callback:
+						self._write_callback(self._write_data)
 
 	def send(self, data):
 		for conn_handle in self._connections:
@@ -72,10 +74,15 @@ class BLESimplePeripheral:
 		print("Starting advertising")
 		self._ble.gap_advertise(interval_us, adv_data=self._payload)
 
-	def recv(self, callback):
-		self._write_callback = callback
+	def recv(self, callback= None):
+		if callback:
+			self._write_callback = callback
+		else:
+			write_data=self._write_data
+			self._write_data=None
+			return write_data
 
-	@property
+	@property 
 	def mac(self):
 		'''Get mac address'''
 		return hexlify(self._ble.config('mac')[1]).decode()

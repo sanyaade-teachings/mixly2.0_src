@@ -3,16 +3,16 @@ Bluetooth-Central
 
 Micropython  library for the Bluetooth-Central
 =======================================================
-#Preliminary composition	       202200329
+#Preliminary composition	       20221018
 #https://github.com/micropython/micropython/tree/master/examples/bluetooth
 
 dahanzimin From the Mixly Team 
 """
-import bluetooth
 import time
-
-from ble_advertising import decode_services, decode_name
+import bluetooth
 from micropython import const
+from ubinascii import hexlify
+from ble_advertising import decode_services, decode_name
 
 _IRQ_CENTRAL_CONNECT = const(1)
 _IRQ_CENTRAL_DISCONNECT = const(2)
@@ -69,6 +69,7 @@ class BLESimpleCentral:
 
 		# Persistent callback for when new data is notified from the device.
 		self._notify_callback = None
+		self._write_data=None
 
 		# Connected device.
 		self._conn_handle = None
@@ -149,8 +150,12 @@ class BLESimpleCentral:
 		elif event == _IRQ_GATTC_NOTIFY:
 			conn_handle, value_handle, notify_data = data
 			if conn_handle == self._conn_handle and value_handle == self._tx_handle:
+				try:
+					self._write_data=bytes(notify_data).decode().strip()
+				except:
+					self._write_data=bytes(notify_data)				
 				if self._notify_callback:
-					self._notify_callback(bytes(notify_data).decode().strip())
+					self._notify_callback(self._write_data)
 
 	# Returns true if we've successfully connected and discovered characteristics.
 	def is_connected(self):
@@ -192,7 +197,15 @@ class BLESimpleCentral:
 		self._ble.gattc_write(self._conn_handle, self._rx_handle, v, 1 if response else 0)
 
 	# Set handler for when data is received over the UART.
-	def recv(self, callback):
-		self._notify_callback = callback
+	def recv(self, callback= None):
+		if callback:
+			self._notify_callback = callback
+		else:
+			write_data=self._write_data
+			self._write_data=None
+			return write_data		
 
-
+	@property 
+	def mac(self):
+		'''Get mac address'''
+		return hexlify(self._ble.config('mac')[1]).decode()

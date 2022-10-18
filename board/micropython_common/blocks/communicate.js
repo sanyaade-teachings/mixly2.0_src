@@ -526,6 +526,19 @@ Blockly.Blocks["communicate_bluetooth_recv"] = {
     }
 };
 
+Blockly.Blocks["communicate_bluetooth_recv_only"] = {
+    init: function () {
+        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.appendValueInput('VAR')
+            .setCheck("var")
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_MIXGO_ESPNOW_RECV)                  
+        this.setOutput(true);
+        this.setInputsInline(true);
+        //this.setTooltip(Blockly.MIXLY_ESP32_IOT_EMQX_SUBSCRIBE_TOOLTIP);
+    }
+};
+
 Blockly.Blocks["communicate_bluetooth_handle"] = {
     init: function () {
         this.setColour(Blockly.Blocks.communicate.HUE);

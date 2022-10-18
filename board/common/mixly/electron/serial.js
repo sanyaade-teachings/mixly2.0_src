@@ -339,7 +339,7 @@ Serial.getPorts = (ports, portSelect) => {
     let newPorts = [];
     if (typeof portSelect === 'string' && portSelect === 'all') {
         for (let i = 0; i < ports.length; i++) {
-            let port = ports[i];
+            let port = { ...ports[i] };
             if (Env.currentPlatform !== 'linux') {
                 if (!port.vendorId)
                     port.vendorId = 'None';
@@ -354,7 +354,7 @@ Serial.getPorts = (ports, portSelect) => {
         }
     } else if (typeof portSelect === 'object') {
         for (let i = 0; i < ports.length; i++) {
-            let port = ports[i];
+            let port = { ...ports[i] };
             for (let j = 0; j < portSelect.length; j++) {
                 if (portSelect[j].vendorId
                  && portSelect[j].productId

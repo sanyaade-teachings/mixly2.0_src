@@ -32,7 +32,6 @@ Blockly.Arduino.ledcWrite= function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Arduino'] = '#include <Arduino.h>';
-    Blockly.Arduino.definitions_['include_analogWrite'] = '#include <analogWrite.h>';
     var code = 'analogWrite('+dropdown_pin+', '+value_num+');\n';
     return code;
 };

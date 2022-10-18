@@ -83,7 +83,6 @@ Blockly.Arduino.Mixly_motor = function() {
   var speed = Blockly.Arduino.valueToCode(this, 'speed', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   var code = 'setMotor(' + SPEED_PIN + ', '+DIR_PIN+', ' + speed + ');\n';
   Blockly.Arduino.definitions_['include_Arduino'] = '#include <Arduino.h>';
-  Blockly.Arduino.definitions_['include_analogWrite'] = '#include <analogWrite.h>';
   Blockly.Arduino.setups_['setup_output_'+SPEED_PIN+DIR_PIN+'_S'] = 'pinMode('+SPEED_PIN+', OUTPUT);';
   Blockly.Arduino.setups_['setup_output_'+SPEED_PIN+DIR_PIN+'_D'] = 'pinMode('+DIR_PIN+', OUTPUT);';
   Blockly.Arduino.setups_['setup_output_'+SPEED_PIN+DIR_PIN+'_S_W'] = 'digitalWrite('+SPEED_PIN+', LOW);';

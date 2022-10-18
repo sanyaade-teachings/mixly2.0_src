@@ -419,12 +419,10 @@ Blockly.Python.hanoi_init = function() {
   }
   var num = this.getFieldValue('NUM');
   let colorList = [];
-  let towerList = [];
   let i = 0;
   while (i < num) {
     i++;
     colorList.push('"' + randomHexColor() + '"');
-    towerList.push('[]');
   }
   Blockly.Python.setups_['init_Hanoi'] = `
 def init_Hanoi():
@@ -466,7 +464,7 @@ def move(x, y):
     t.goto(150 * y - 150,20 * len(tower[y]) - 90)
     tower[y].append(t)`;
   var code = `num = ${num}
-tower = [${towerList.join(', ')}]
+tower = [[], [], []]
 color= (${colorList.join(', ')})
 init_Hanoi()
 for i in range(0, num, 1):

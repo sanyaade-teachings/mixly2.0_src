@@ -555,6 +555,26 @@ Blockly.Blocks['communicate_espnow_init'] = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['communicate_espnow_init_new'] = {
+    init: function() {
+        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.appendValueInput('VAR')
+            .setCheck('var')
+            .appendField('ESPnow '+Blockly.MIXLY_SETUP);
+        this.appendValueInput('CHNL')
+            .setCheck(Number)
+            .appendField(Blockly.MIXLY_MP_ESPNOW_CHANNEL);
+        this.appendValueInput('DB')
+            .setCheck(Number)
+            .appendField(Blockly.MIXLY_MICROBIT_JS_BLE_POWER);    
+        this.appendDummyInput()
+            .appendField('db');    
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
         this.setTooltip(Blockly.MIXLY_MP_ESPNOW_INIT_TOOLTIP);
     }
 };
@@ -643,6 +663,24 @@ Blockly.Blocks['espnow_radio_channel'] = {
             .appendField(Blockly.MIXLY_MP_ESPNOW_RADIO_INIT);
         this.appendValueInput('CHNL')
             .setCheck(Number);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['espnow_radio_channel_new'] = {
+    init: function() {
+        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_MP_ESPNOW_RADIO_INIT);
+        this.appendValueInput('CHNL')
+            .setCheck(Number);
+        this.appendValueInput('DB')
+            .setCheck(Number)
+            .appendField(Blockly.MIXLY_MICROBIT_JS_BLE_POWER);    
+        this.appendDummyInput()
+            .appendField('db');    
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);

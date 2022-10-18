@@ -20,6 +20,13 @@ Blockly.Python.algorithm_prepare2 = function() {
   return code;
 };
 
+Blockly.Python.algorithm_prepare3 = function() {  
+  var line1 = 'g = [[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000],[10000,10000,500,300,10000,10000,10000,10000,10000,10000,10000],[10000,500,10000,10000,100,10000,10000,10000,10000,10000,10000],[10000,300,10000,10000,400,300,10000,10000,10000,10000,10000],[10000,10000,100,400,10000,10000,200,10000,10000,10000,10000],[10000,10000,10000,300,10000,10000,100,200,10000,10000,10000],[10000,10000,10000,10000,200,100,10000,10000,100,10000,10000],[10000,10000,10000,10000,10000,200,10000,10000,100,10000,10000],[10000,10000,10000,10000,10000,10000,100,100,10000,10000,10000]]\n';
+  var line2 = 'now=1\n';
+  var code = line1+line2+"dist=0\nlast=1\n";
+  return code;
+};
+
 Blockly.Python.algorithm_add_school = function() {  
   var code = "path = [1]\n";
   return code;
@@ -37,6 +44,16 @@ Blockly.Python.algorithm_find_path = function() {
   return code;
 };
 
+Blockly.Python.algorithm_move_recent = function() {  
+  var line1 = 'tmp=10000\nfor i in range (9):\n'+'    if g[now][i]<tmp and i!=last:\n'+'        next=i\n'+'        tmp=g[now][i]\n'+'dist+=tmp\n'+'last=now\n'+'now=next\n';
+  var code = line1;
+  return code;
+};
+
+Blockly.Python.algorithm_not_home = function() {
+  var code = "now != 8";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
 
 Blockly.Python.algorithm_current_school = function() {
   var code = "f == 1";

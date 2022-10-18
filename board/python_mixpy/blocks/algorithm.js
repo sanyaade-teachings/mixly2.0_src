@@ -29,6 +29,16 @@ Blockly.Blocks['algorithm_prepare2'] = {
   }
 };
 
+Blockly.Blocks['algorithm_prepare3'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_PREPARE3);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+  }
+};
+
 Blockly.Blocks['algorithm_add_school'] = {
   init: function() {
     this.setColour(Blockly.Blocks.algorithm.HUE);
@@ -58,6 +68,25 @@ Blockly.Blocks['algorithm_find_path'] = {
     this.setNextStatement(true, null);    
   }
 };
+
+Blockly.Blocks['algorithm_move_recent'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_MOVE_RECENT);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+  }
+};
+
+Blockly.Blocks['algorithm_not_home']={
+  init: function() {
+    this.setColour(Blockly.Blocks.algorithm.HUE);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_NOT_HOME);
+    this.setOutput(true);
+  }
+}
 
 Blockly.Blocks['algorithm_current_school']={
   init: function() {

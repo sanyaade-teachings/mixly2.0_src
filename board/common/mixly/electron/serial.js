@@ -393,8 +393,17 @@ Serial.refreshPorts = () => {
             } else {
                 Serial.uploadPorts = [];
             }
-            let allPorts = [ ...Serial.burnPorts, ...Serial.uploadPorts ];
-            allPorts =  MArray.unique(allPorts);
+            let allPorts = [ ...Serial.burnPorts ];
+            let usedPorts = [];
+            for (let value of allPorts) {
+                usedPorts.push(value.name);
+            }
+            for (let value of Serial.uploadPorts) {
+                if (usedPorts.includes(value.name)) {
+                    continue;
+                }
+                allPorts.push({ ...value });
+            }
             Serial.refreshPortOperator(allPorts);
             Serial.refreshUploadPortSelectBox(allPorts);
         }

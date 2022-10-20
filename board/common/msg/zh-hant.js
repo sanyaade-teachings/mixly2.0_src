@@ -3194,6 +3194,7 @@ Blockly.MIXLY_EMQX_QOS = '服務質量';
 Blockly.MIXLY_WIFI_CONNECT = '連接Wi-Fi';
 Blockly.MIXLY_WIFI_USERNAME = '用戶名';
 Blockly.MIXLY_WIFI_PASSWORD = '密碼';
+Blockly.MIXLY_IOT_PASSWORD = '密鑰';
 Blockly.MIXLY_SSL_DEFAULT = 'SSL默認上下文';
 Blockly.MIXLY_CREATE_SOCKETPOOL = '為Wi-Fi創建連接池';
 Blockly.MIXLY_EMQX_SUBSCRIBE = '訂閱';

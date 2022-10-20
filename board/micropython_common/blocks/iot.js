@@ -315,7 +315,7 @@ Blockly.Blocks['iot_mixio_connect'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
     this.appendValueInput('PASSWORD')
         .setCheck(String)
-        .appendField(Blockly.MIXLY_WIFI_PASSWORD)
+        .appendField(Blockly.MIXLY_IOT_PASSWORD)
         .setAlign(Blockly.ALIGN_RIGHT)
     this.appendValueInput('PROJECT')
         .setCheck(String)

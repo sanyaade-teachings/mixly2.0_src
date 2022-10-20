@@ -3209,6 +3209,7 @@ Blockly.MIXLY_EMQX_QOS = 'service quality';
 Blockly.MIXLY_WIFI_CONNECT = 'connect Wi Fi';
 Blockly.MIXLY_WIFI_USERNAME = 'user name';
 Blockly.MIXLY_WIFI_PASSWORD = 'password';
+Blockly.MIXLY_IOT_PASSWORD = 'key';
 Blockly.MIXLY_SSL_DEFAULT = 'ssl default context';
 Blockly.MIXLY_CREATE_SOCKETPOOL = 'create connection pool for Wi Fi';
 Blockly.MIXLY_EMQX_SUBSCRIBE = 'subscribe';

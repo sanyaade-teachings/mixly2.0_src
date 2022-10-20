@@ -72,7 +72,7 @@ class NeoPixel:
 	def rainbow_cycle(self,wait):
 		for j in range(255):
 			for i in range(self.n):
-				rc_index = (i * 256 // 4) + j
+				rc_index = (i * 256 // self.n) + j
 				self.__setitem__(i,self.wheel(rc_index & 255))
 			self.write()
 			sleep(wait/1000/256)
@@ -82,10 +82,11 @@ class NeoPixel:
 	def wheel(self,pos):
 		if pos < 0 or pos > 255:
 			return (0, 0, 0)
-		if pos < 85:
-			return (255 - pos * 3, pos * 3, 0)
-		if pos < 170:
+		elif pos < 85:
+			return (pos * 3, 255 - pos * 3,  0)
+		elif pos < 170:
 			pos -= 85
-			return (0, 255 - pos * 3, pos * 3)
-		pos -= 170
-		return (pos * 3, 0, 255 - pos * 3)
+			return (255 - pos * 3, 0, pos * 3)
+		else:
+			pos -= 170
+			return (0, pos * 3, 255 - pos * 3)

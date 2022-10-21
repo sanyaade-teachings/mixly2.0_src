@@ -313,7 +313,7 @@ class MQTTClient:
     # Checks whether a pending message from server is available.
     def check_msg(self):
         self.sock.settimeout(0.05)
-        if time.ticks_diff(time.ticks_ms(), self._star_time) >30000:
+        if time.ticks_diff(time.ticks_ms(), self._star_time) >60000:
             self._star_time = time.ticks_ms()
             self.ping()
         return self.wait_msg()

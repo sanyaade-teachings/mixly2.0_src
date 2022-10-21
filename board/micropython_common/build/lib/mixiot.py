@@ -32,7 +32,8 @@ def init_MQTT_client(address, username, password,MQTT_USR_PRJ):
     client = MQTTClient(hexlify(unique_id()), address, 1883, username, password)
     client.set_last_will(topic=MQTT_USR_PRJ+WILL_TOPIC, msg=client.client_id, qos=2)
     if client.connect()==0:
-        client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=1)
+        client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=0)
+    time.sleep_ms(50)
     return client
 
 # Add by Mixly Team
@@ -312,8 +313,7 @@ class MQTTClient:
 
     # Checks whether a pending message from server is available.
     def check_msg(self):
-        time.sleep_ms(50)
-        self.sock.setblocking(False)
+        self.sock.settimeout(0.05)
         if time.ticks_diff(time.ticks_ms(), self._star_time) >60000:
             self._star_time = time.ticks_ms()
             self.ping()

@@ -1477,6 +1477,7 @@ Blockly.MIXLY_MICROBIT_JS_GET_GESTURE = 'get gesture';
 Blockly.MIXLY_MICROBIT_JS_CURRENT_GESTURE = 'current gesture';
 Blockly.MIXLY_MICROBIT_JS_GESTURE = 'gesture';
 Blockly.MIXLY_MICROBIT_JS_FIELD_STRENGTH = 'field strength';
+Blockly.MIXLY_MICROBIT_JS_FIELD_STRENGTH_ALL = 'synthetical strength';
 Blockly.MIXLY_MICROBIT_JS_IS_COMPASS_CALIBRATED = 'is compass calibrated';
 Blockly.MIXLY_IS_TOUCHED = 'is touched';
 Blockly.MIXLY_WAS_PRESSED = 'was pressed?';

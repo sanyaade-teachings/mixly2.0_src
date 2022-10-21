@@ -2597,19 +2597,33 @@
         <block type="communicate_bluetooth_scan">
           <value name="VAR">
             <shadow type="variables_get">
-              <field name="VAR">ble_x</field>
+              <field name="VAR">ble_c</field>
             </shadow>
           </value>
         </block>
         <block type="communicate_bluetooth_connect">
           <value name="VAR">
             <shadow type="variables_get">
-              <field name="VAR">ble_x</field>
+              <field name="VAR">ble_c</field>
             </shadow>
           </value>
           <value name="data">
             <shadow type="text">
               <field name="TEXT">Mixly</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="communicate_bluetooth_disconnect">
+          <value name="VAR">
+            <shadow type="variables_get">
+              <field name="VAR">ble_c</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="communicate_bluetooth_mac">
+          <value name="VAR">
+            <shadow type="variables_get">
+              <field name="VAR">ble_x</field>
             </shadow>
           </value>
         </block>

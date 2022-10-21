@@ -454,9 +454,16 @@ Blockly.Python.sensor_mixgo_cc_mmc5603_get_magnetic = function(){
     var key = this.getFieldValue('key');
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
+    if(key == 'all'){
+        var code = 'onboard_mmc5603.getstrength()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+    }
+    else{
     var code = 'onboard_mmc5603.getdata()' + key ;
     return [code, Blockly.Python.ORDER_ATOMIC];
+    }
 };
+
 Blockly.Python.sensor_mixgo_cc_mmc5603_get_angle = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
@@ -464,6 +471,12 @@ Blockly.Python.sensor_mixgo_cc_mmc5603_get_angle = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.sensor_mixgo_cc_mmc5603_calibrate_compass= function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
+    var code = 'onboard_mmc5603.calibrate()\n';
+    return code;
+};
 //mixgo_me onboard_sensor generators:
 
 

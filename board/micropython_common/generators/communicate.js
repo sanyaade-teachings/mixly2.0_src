@@ -205,10 +205,22 @@ Blockly.Python.communicate_bluetooth_scan = function(){
 
 Blockly.Python.communicate_bluetooth_connect = function(){
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
-    var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);    
-    var code = name+".connect(" + data + ")\n";
+    var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);   
+    var mode=this.getFieldValue('mode'); 
+    var code = name+".connect(" +mode+'='+ data + ")\n";
     return code;
 };
+
+Blockly.Python.communicate_bluetooth_disconnect = function(block) {
+    var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);   
+    var code= name+'.disconnect()\n';  
+    return code;
+};
+
+Blockly.Python.communicate_bluetooth_mac= function() {    
+    var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
+    return [name+".mac", Blockly.Python.ORDER_ATOMIC];
+}
 
 Blockly.Python.communicate_bluetooth_is_connected = function(){
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -453,6 +465,34 @@ Blockly.Python.lora_recv= function() {
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     return [name+'.recv()', Blockly.Python.ORDER_ATOMIC];
 }
+
+Blockly.Python.urequests_get = function() {
+  Blockly.Python.definitions_.import_requests = "import urequests";
+  var dropdown_type = this.getFieldValue('TYPE');
+  var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
+    Blockly.Variables.NAME_TYPE);
+  var str =Blockly.Python.valueToCode(this, 'DOMAIN', Blockly.Python.ORDER_ATOMIC) ;
+  var code=varName+'= '+ 'urequests.get(' + str + ')\n';
+
+  return code;
+ 
+};
+
+Blockly.Python.urequests_attribute = function() {
+  Blockly.Python.definitions_.import_requests = "import urequests";
+  var varName = Blockly.Python.valueToCode(this, 'VAL', Blockly.Python.ORDER_ASSIGNMENT) || '0';
+  var attr = this.getFieldValue('ATTR');
+  var code=varName+"." + attr;
+  return [code,Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.urequests_method = function() {
+  Blockly.Python.definitions_.import_requests = "import urequests";    
+    var method = this.getFieldValue('DIR');
+  var str =Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+  var code="urequests." + method + "(" +  str  + ')';
+  return [code,Blockly.Python.ORDER_ATOMIC];
+};
 
 Blockly.Blocks['i2c_init'] = Blockly.Blocks['communicate_i2c_init'];
 Blockly.Blocks['i2c_read'] = Blockly.Blocks['communicate_i2c_read'];

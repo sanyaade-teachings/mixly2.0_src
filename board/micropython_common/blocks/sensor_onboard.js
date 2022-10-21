@@ -776,7 +776,8 @@ Blockly.Blocks['sensor_mixgo_cc_mmc5603_get_magnetic'] = {
             ["x", "[0]"],
             ["y", "[1]"],
             ["z", "[2]"],
-            ["(x,y,z)", ""]
+            ["(x,y,z)", ""],
+            [Blockly.MIXLY_MICROBIT_JS_FIELD_STRENGTH_ALL, "all"]
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -804,6 +805,18 @@ Blockly.Blocks['sensor_mixgo_cc_mmc5603_get_angle'] = {
         this.setOutput(true, Number);
         this.setInputsInline(true);
 
+    }
+};
+
+Blockly.Blocks['sensor_mixgo_cc_mmc5603_calibrate_compass'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MICROBIT_JS_CALIBRATE_COMPASS)
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_CALIBRATE_COMPASS);
     }
 };
 

@@ -33,7 +33,7 @@ def init_MQTT_client(address, username, password,MQTT_USR_PRJ):
     client.set_last_will(topic=MQTT_USR_PRJ+WILL_TOPIC, msg=client.client_id, qos=2)
     if client.connect()==0:
         client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=0)
-    time.sleep_ms(50)
+    time.sleep_ms(200)
     return client
 
 # Add by Mixly Team

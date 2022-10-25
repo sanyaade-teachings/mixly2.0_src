@@ -236,6 +236,7 @@ class MQTTClient:
             i += 1
         pkt[i] = sz
         #print(hex(str_len(pkt)), hexlify(pkt, ":"))
+        self.sock.setblocking(True)
         self.sock.write(pkt, i + 1)
         self._send_str(topic)
         if qos > 0:
@@ -281,6 +282,7 @@ class MQTTClient:
     # Wait for a single incoming MQTT message and process it.
     def wait_msg(self):
         res = self.sock.read(1)
+        time.sleep_ms(10)
         self.sock.setblocking(True)
         if res is None:
             return None

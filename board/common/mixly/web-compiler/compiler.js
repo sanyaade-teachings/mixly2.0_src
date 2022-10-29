@@ -87,7 +87,7 @@ Compiler.upload = async () => {
         const portName = 'web-serial';
         Serial.connect(portName, 115200, async (port) => {
             if (!port) {
-                layer.msg('已取消连接', { time: 1000 });
+                layer.msg(indexText['已取消连接'], { time: 1000 });
                 return;
             }
             StatusBarPort.tabChange('output');

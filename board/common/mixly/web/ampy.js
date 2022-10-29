@@ -144,12 +144,12 @@ class Ampy {
             try {
                 await this.operator_.writeCtrlB();
                 if (!await this.interrupt()) {
-                    reject('中断失败');
+                    reject(indexText['中断失败']);
                     return;
                 }
                 // console.log('中断成功')
                 if (!await this.enterRawREPL()) {
-                    reject('无法进入Raw REPL');
+                    reject(indexText['无法进入Raw REPL']);
                     return;
                 }
                 // console.log('进入Raw REPL')
@@ -169,11 +169,11 @@ class Ampy {
                 await this.writeFile(fileName, code);
                 // console.log('写入code成功')
                 if (!await this.exitRawREPL()) {
-                    reject('无法退出Raw REPL');
+                    reject(indexText['无法退出Raw REPL']);
                     return;
                 }
                 if (! await this.exitREPL()) {
-                    reject('无法退出REPL');
+                    reject(indexText['无法退出REPL']);
                     return;
                 }
                 resolve();

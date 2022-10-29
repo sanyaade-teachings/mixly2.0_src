@@ -281,7 +281,7 @@ Serial.refreshOutputBox = (port) => {
 Serial.openTool = () => {
     Serial.connect('web-' + SELECTED_BOARD.web.com, 115200, (selectedPort) => {
         if (!selectedPort) {
-            layer.msg('已取消连接', { time: 1000 });
+            layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
         }
         let portObj = Serial.portsOperator[selectedPort];

@@ -60,7 +60,7 @@ BU.clickConnect = async function () {
             if (port) {
                 StatusBar.show(1);
             } else {
-                layer.msg('已取消连接', { time: 1000 });
+                layer.msg(indexText['已取消连接'], { time: 1000 });
             }
         });
     }
@@ -129,7 +129,7 @@ BU.burnByUSB = () => {
     const portName = 'web-usb';
     Serial.connect(portName, 115200, async (port) => {
         if (!port) {
-            layer.msg('已取消连接', { time: 1000 });
+            layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
         }
         const { web } = SELECTED_BOARD;
@@ -138,7 +138,7 @@ BU.burnByUSB = () => {
         const hex2Blob = new Blob([ hexStr ], { type: 'text/plain' });
         const buffer = await hex2Blob.arrayBuffer();
         if (!buffer) {
-            layer.msg('固件读取出错', { time: 1000 });
+            layer.msg(indexText['固件读取出错'], { time: 1000 });
             return;
         }
         BU.burning = true;
@@ -199,14 +199,14 @@ BU.burnWithEsptool = () => {
     const portName = 'web-serial';
     Serial.connect(portName, 115200, async (port) => {
         if (!port) {
-            layer.msg('已取消连接', { time: 1000 });
+            layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
         }
         const { web } = SELECTED_BOARD;
         const { burn } = web;
-        StatusBar.setValue("固件读取中...");
+        StatusBar.setValue(indexText["固件读取中"] + "...");
         if (typeof burn.binFile !== 'object') {
-            StatusBar.addValue(" Failed!\n配置文件读取出错！\n");
+            StatusBar.addValue(" Failed!\n" + indexText["配置文件读取出错"] + "！\n");
             // await endBurn(true, false);
             return;
         }
@@ -215,7 +215,7 @@ BU.burnWithEsptool = () => {
         StatusBar.addValue("\n");
         for (let i of binFile) {
             if (i.path && i.offset) {
-                StatusBar.addValue(`读取固件 路径:${i.path}, 偏移:${i.offset}\n`);
+                StatusBar.addValue(`${indexText['读取固件'] + ' ' + indexText['路径']}:${i.path}, ${indexText['偏移']}:${i.offset}\n`);
                 firmwarePromise.push(readBinFile(i.path, i.offset));
             }
         }
@@ -234,7 +234,7 @@ BU.burnWithEsptool = () => {
             if (!newFilmwareList.length) {
                 throw '';
             }
-            StatusBar.addValue("Done!\n即将开始烧录...\n");
+            StatusBar.addValue("Done!\n" + indexText["即将开始烧录"] + "...\n");
             BU.burning = true;
             BU.uploading = false;
             StatusBar.addValue(indexText['烧录中'] + '...\n');
@@ -282,7 +282,7 @@ BU.burnWithEsptool = () => {
             });
         })
         .catch(async e => {
-            StatusBar.addValue("Failed!\n无法获取文件，请检查网络！\n");
+            StatusBar.addValue("Failed!\n" + indexText["无法获取文件，请检查网络"] + "！\n");
             StatusBar.addValue("\n" + e + "\n", true);
         });
     });
@@ -290,8 +290,8 @@ BU.burnWithEsptool = () => {
 
 async function clickSync() {
     if (await espTool.sync()) {
-        StatusBar.addValue("正在连接 " + await espTool.chipName() + "\n");
-        StatusBar.addValue("MAC地址：" + formatMacAddr(espTool.macAddr()) + "\n");
+        StatusBar.addValue(indexText["正在连接"] + " " + await espTool.chipName() + "\n");
+        StatusBar.addValue(indexText["MAC地址"] + "：" + formatMacAddr(espTool.macAddr()) + "\n");
         stubLoader = await espTool.runStub();
         return 1;
     }
@@ -307,10 +307,10 @@ function sleep(ms) {
  * Click handler for the erase button.
  */
 async function clickErase() {
-    StatusBar.addValue("正在擦除闪存，请稍等..." + "\n");
+    StatusBar.addValue(indexText["正在擦除闪存，请稍等"] + "..." + "\n");
     let stamp = Date.now();
     await stubLoader.eraseFlash();
-    StatusBar.addValue("擦除完成. 擦除耗时" + (Date.now() - stamp) + "ms" + "\n");
+    StatusBar.addValue(indexText["擦除完成，擦除耗时"] + (Date.now() - stamp) + "ms" + "\n");
     await sleep(100);
 }
 
@@ -319,7 +319,7 @@ async function clickErase() {
  * Click handler for the program button.
  */
 async function clickProgram(binFileOffset, binFile = null) {
-    StatusBar.addValue("正在烧录固件\n");
+    StatusBar.addValue(indexText["正在烧录固件"] + "\n");
     let binOffset = parseInt(binFileOffset, 16);
     await stubLoader.flashData(binFile, binOffset);
     await sleep(100);
@@ -396,7 +396,7 @@ BU.initUpload = () => {
 BU.uploadByPort = (port) => {
     Serial.connect(port, 115200, async (port) => {
         if (!port) {
-            layer.msg('已取消连接', { time: 1000 });
+            layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
         }
         const portObj = Serial.portsOperator[port];
@@ -465,12 +465,12 @@ function hexToBuf (hex) {
 BU.uploadWithEsptool = async (endType, obj, layerType) => {
     let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
-        StatusBar.addValue("固件获取失败！\n");
+        StatusBar.addValue(indexText["固件获取失败"] + "！\n");
         layer.close(layerType);
         return;
     }
     layer.title(indexText['上传中'] + '...', layerType);
-    StatusBar.addValue("固件读取中... ");
+    StatusBar.addValue(indexText["固件读取中"] + "... ");
     let firmwareList = [];
     for (let i of firmwareData) {
         if (!i.offset || !i.data) {
@@ -482,7 +482,7 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         };
         firmwareList.push(firmware);
     }
-    StatusBar.addValue("Done!\n即将开始烧录...\n");
+    StatusBar.addValue("Done!\n" + indexText["即将开始烧录"] + "...\n");
     BU.burning = true;
     BU.uploading = false;
     StatusBar.addValue(indexText['上传中'] + '...\n');
@@ -514,7 +514,7 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
 BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
     let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
-        StatusBar.addValue("固件获取失败！\n");
+        StatusBar.addValue(indexText["固件获取失败"] + "！\n");
         layer.close(layerType);
         return;
     }

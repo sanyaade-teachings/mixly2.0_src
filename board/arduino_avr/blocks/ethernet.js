@@ -972,7 +972,7 @@ Blockly.Blocks['mixio_mqtt_subscribe_key'] = {
         .appendField(new Blockly.FieldTextInput("1RFOH08C"), "key")
         .appendField(Blockly.CONNECT_TO_MIXIO)
         .appendField(Blockly.blynk_SERVER_ADD)
-        .appendField(new Blockly.FieldTextInput("mixio.mixly.org"), "server");
+        .appendField(new Blockly.FieldTextInput("mixio.mixly.cn"), "server");
     this.setNextStatement(true, null);
     this.setColour(170);
  this.setTooltip("");

@@ -105,3 +105,118 @@ Blockly.Python.algorithm_print_path = function() {
   var code = "print(path)\n";
   return code;
 };
+
+Blockly.Python.algorithm_first_book = function() {  
+  var line1 = '';
+  var code = line1+"i=1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_no_ring = function() {
+  var code = "ring[i]==0";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.algorithm_next_book = function() {    
+  var code = "i+=1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_print_book = function() {  
+  var code = "print(i)\n";
+  return code;
+};
+
+Blockly.Python.algorithm_number_zero = function() {  
+  var code = "cnt=0\n";
+  return code;
+};
+
+Blockly.Python.algorithm_number_add = function() {  
+  var code = "cnt+=1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_print_number = function() {  
+  var code = "print(cnt)\n";
+  return code;
+};
+
+Blockly.Python.algorithm_all_books_sequence = function() {  
+  var line1 = 'ring=[0,0,0,0,0,0,1,0,0,0,0]\n';
+  var code = line1+"left=1\n"+"right=10\n";
+  return code;
+};
+
+Blockly.Python.algorithm_all_books = function() {  
+  var line1 = 'ring=[0,0,0,0,0,0,1,0,0,0,0]\n';
+  var code = line1+"left=1\n"+"right=10\n";
+  return code;
+};
+
+Blockly.Python.algorithm_two_left = function() {
+  var code = "left<right";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.algorithm_divide_books = function() {  
+  var code = "mid = int((left + right) / 2)\n";
+  return code;
+};
+
+Blockly.Python.algorithm_get_half_books = function() {  
+  var code = "i=left\nflag=1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_check_half_books = function() {  
+  var code = "while ring[i]==0:\n    if i==mid:\n        flag=0\n        break\n    i+=1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_no_ring2 = function() {
+  var code = "flag==0";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.algorithm_delete_books = function() {  
+  var code = "left = mid + 1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_delete_books2 = function() {  
+  var code = "right=mid\n";
+  return code;
+};
+
+Blockly.Python.algorithm_print_book2 = function() {  
+  var code = "print(left)\n";
+  return code;
+};
+
+Blockly.Python.algorithm_get_book_num = function() {  
+  var code = 'n='+this.getFieldValue('NUM')+'\n';
+  return code;
+};
+
+Blockly.Python.algorithm_use_sequence = function() {  
+  var line1 = 'ring=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]\n';
+  var code = line1+"ring[n]=1\n";
+  return code;
+};
+
+Blockly.Python.algorithm_print_sequence = function() {  
+  var code = 'print("顺序法查找次数为：",cnt)';
+  return code;
+};
+
+Blockly.Python.algorithm_use_divide = function() {  
+  var line1 = 'ring=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]\n';
+  var code = line1+"left=1\n"+'right=n\n';
+  return code;
+};
+
+Blockly.Python.algorithm_print_divide = function() {  
+  var code = 'print("二分法查找次数为：",cnt)';
+  return code;
+};

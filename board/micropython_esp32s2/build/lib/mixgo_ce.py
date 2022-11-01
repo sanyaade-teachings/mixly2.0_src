@@ -185,7 +185,10 @@ if version==0:
         print("Warning: Failed to communicate with MSA301 or",e)
 
     '''4-RGB''' 
-    onboard_rgb = NeoPixel(Pin(8), 4, ORDER=(0, 1, 2, 3))
+    if Pin(40, Pin.IN).value():
+        onboard_rgb = NeoPixel(Pin(8), 4)
+    else:
+        onboard_rgb = NeoPixel(Pin(8), 4, ORDER=(0, 1, 2, 3))
 
     '''1Buzzer-Music'''
     Pin(40, Pin.OUT).value(1)

@@ -100,7 +100,7 @@ Blockly.Python.storage_delete_file = function () {
 Blockly.Python.storage_get_file_size = function () {
     Blockly.Python.definitions_['import_os'] = 'import os';
     var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
-    var code = "os.size("+file+")";
+    var code = "os.path.getsize("+file+")";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

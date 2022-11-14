@@ -59,7 +59,7 @@ Editor.init = () => {
             }
             break;
         default:
-            blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
+            blocklyGenerator = Blockly.Python ?? Blockly.Arduino;
     }
     //实时更新右侧对比代码
     Editor.codeChangeEvent = blockEditor.addChangeListener(codeChangeEvent);

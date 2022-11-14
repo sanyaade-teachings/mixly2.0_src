@@ -5,12 +5,14 @@ goog.require('layui');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
 goog.require('Mixly.XML');
+goog.require('Mixly.Editor');
 goog.provide('Mixly.Example');
 
 const {
     MFile,
     Title,
-    XML
+    XML,
+    Editor
 } = Mixly;
 
 const { dropdown, tree } = layui;
@@ -118,6 +120,10 @@ Mixly.Example.prototype.updateCode = (extname, data) => {
                 });
             } catch (error) {
                 console.log(error);
+            }
+            // 如果当前在代码区则先切换到模块区
+            if (Editor.selected === 'CODE') {
+                Editor.items.vDrag.full('POSITIVE');
             }
             MFile.parseMix($(data), false, false, (message) => {
                 Blockly.mainWorkspace.scrollCenter();

@@ -770,7 +770,8 @@
                 "layui",
                 "Mixly.MFile",
                 "Mixly.Title",
-                "Mixly.XML"
+                "Mixly.XML",
+                "Mixly.Editor"
             ],
             "provide":[
                 "Mixly.Example"

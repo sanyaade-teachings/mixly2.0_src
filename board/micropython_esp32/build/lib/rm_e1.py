@@ -43,7 +43,7 @@ except Exception as e:
 
 '''2RGB_WS2812'''	#color_chase(),rainbow_cycle()方法移至类里
 from ws2812 import NeoPixel
-onboard_rgb = NeoPixel(Pin(12), 2,invert=1)
+onboard_rgb = NeoPixel(Pin(12), 2, default=1)
 
 '''3-Button'''
 class Button:

@@ -846,23 +846,25 @@ Blockly.Blocks['weather_data'] = {
         this.appendDummyInput("")
         .appendField(Blockly.MIXLY_MICROBIT_JS_GET)
         .appendField(new Blockly.FieldDropdown([
-            ["全部", "data()"],
-            ["编号", "data()[0]"],
-            ["电量", "data()[1]"],
-            ["风速", "data()[2]"],
-            ["阵风", "data()[3]"],
-            ["风向", "data()[4]"],
-            ["雨量", "data()[5]"],
-            ["温度", "data()[6]"],
-            ["湿度", "data()[7]"],
-            ["光照", "data()[8]"],
-            ["紫外线", "data()[9]"],
-            ["信号强度", "data()[10]"],
-            ["信噪比", "data()[11]"],            
+            ["全部（元组）", "data()[0]"],
+            ["全部（json）", "data()[1]"],
+            ["编号", "data()[0][0]"],
+            ["电量", "data()[0][1]"],
+            ["风速", "data()[0][2]"],
+            ["阵风", "data()[0][3]"],
+            ["风向", "data()[0][4]"],
+            ["雨量", "data()[0][5]"],
+            ["温度", "data()[0][6]"],
+            ["湿度", "data()[0][7]"],
+            ["光照", "data()[0][8]"],
+            ["紫外线", "data()[0][9]"],
+            ["大气压", "data()[0][10]"],
+            ["信号强度", "data()[0][11]"],
+            ["信噪比", "data()[0][12]"],            
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip("返回气象数据元组 data= (设备id,电池状态,风速m/s,阵风m/s,风向°,雨量mm,温度℃,湿度%,光照Lux,UVI,信号强度dB,信噪比dB)");
+        this.setTooltip("返回气象数据元组 data= (设备id,电池状态,风速m/s,阵风m/s,风向°,雨量mm,温度℃,湿度%,光照Lux,UVI,大气压Pa,信号强度dB,信噪比dB)");
     }
 };
 

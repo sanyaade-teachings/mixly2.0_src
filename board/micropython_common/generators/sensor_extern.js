@@ -321,8 +321,10 @@ Blockly.Python.sensor_use_spi_init=function(){
       Blockly.Python.definitions_['import_rc522'] = 'import rc522';
       var code = v + ' = rc522.RC522('+ sv + ','+ pv + ')\n';
     }else if (key=='Weather') {
+      var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+      Blockly.Python.definitions_['import_'+version] = 'import '+version;    
       Blockly.Python.definitions_['import_ws_lora'] = 'import ws_lora';
-      var code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ')\n';
+      var code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c'+')\n';
     }
     return code;
 };

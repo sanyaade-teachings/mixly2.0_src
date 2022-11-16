@@ -868,6 +868,19 @@ Blockly.Blocks['weather_data'] = {
     }
 };
 
+Blockly.Blocks['weather_have_data'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_extern.HUE);
+        this.appendValueInput('SUB')
+            .appendField("无线气象站"+" WS-LoRa")
+            .setCheck("var");
+        this.appendDummyInput("")
+        .appendField(Blockly.MIXLY_SERIAL_AVAILABLE)        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);        
+    }
+};
+
 Blockly.Blocks['weather_uart_mixio'] = {
     init: function(){
         this.setColour(Blockly.Blocks.sensor_extern.HUE);

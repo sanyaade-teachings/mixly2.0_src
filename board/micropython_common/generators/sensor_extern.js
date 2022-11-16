@@ -380,6 +380,13 @@ Blockly.Python.weather_data=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.weather_have_data=function(){
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_ws_lora'] = 'import ws_lora';
+    var code = sub + '.any()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.weather_uart_mixio=function(){
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var base = Blockly.Python.valueToCode(this, 'BASE', Blockly.Python.ORDER_ATOMIC);

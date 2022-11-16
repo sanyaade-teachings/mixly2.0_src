@@ -3362,7 +3362,13 @@
           </value>
         </block> 
        
-        
+        <block type="weather_have_data">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ysensor</field>
+            </shadow>
+          </value>
+        </block> 
         <block type="weather_data">
           <value name="SUB">
             <shadow type="variables_get">

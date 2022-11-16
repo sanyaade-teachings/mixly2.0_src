@@ -59,27 +59,31 @@ class Weather(RFM98):
 				else:
 					crc = crc << 1
 		return crc &0xff # return the bottom 8 bits		
-			
-	def	data(self):
-		'''获取气象数据'''	
+
+	def	any(self):
+		'''判读是否有数据'''	
 		buffer=super().recv()
 		if buffer:
 			if (len(buffer)>=15) & (buffer[0] == 0xD4):
 				self._data=self._data_deal(buffer)
-				info_dict={"设备ID":self._data[0],	
-					"电量":"正常" if self._data[1]==1 else "亏电",			
-					"风速":self._data[2],
-					"阵风":self._data[3],
-					"风向":self._data[4],
-					"雨量":self._data[5],
-					"温度":self._data[6],
-					"湿度":self._data[7],
-					"光照":self._data[8],
-					"紫外线":self._data[9],
-					"大气压":self._data[10],
-					"信号强度":self._data[11],
-					}
-				return self._data,dumps(info_dict)
+				return True
+
+	def	data(self):
+		'''获取气象数据'''	
+		info_dict={"设备ID":self._data[0],	
+			"电量":"正常" if self._data[1]==1 else "亏电",			
+			"风速":self._data[2],
+			"阵风":self._data[3],
+			"风向":self._data[4],
+			"雨量":self._data[5],
+			"温度":self._data[6],
+			"湿度":self._data[7],
+			"光照":self._data[8],
+			"紫外线":self._data[9],
+			"大气压":self._data[10],
+			"信号强度":self._data[11],
+			}
+		return self._data,dumps(info_dict)
 				
 	def uart_mixio(self,topic="station"):
 		'''打包气象数据串口转发'''

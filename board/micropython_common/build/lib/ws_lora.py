@@ -5,21 +5,27 @@ Micropython library for Weather Station /Lora
 =======================================================
 
 #Preliminary composition      					 20220408
-#Add uart_mixio			      					 20220410
 
 dahanzimin From the Mixly Team
 """
+from json import dumps
 from rfm98 import RFM98
-import json
+from machine import I2C,SoftI2C
 
 class Weather(RFM98):
-	def __init__(self,spi,cs_pin):
+	def __init__(self,spi,cs_pin,i2c=None):
 		'''对继承初始化配置'''
 		super().__init__(spi,cs_pin,frequency_mhz=433.92,
 									signal_bandwidth=125E3,
 									coding_rate=5,
 									spreading_factor=11)
-		self._data=(None,None,None,None,None,None,None,None,None,None,None,None)
+		self._data=(None,None,None,None,None,None,None,None,None,None,None,None,None)
+		self._atmos=None
+
+		if type(i2c) in [I2C,SoftI2C]:
+			if 0x76 in i2c.scan():
+				import hp203x
+				self._atmos = hp203x.HP203X(i2c)
 
 	def	_data_deal(self,buffer):
 		'''对解码数据进行处理'''
@@ -35,9 +41,9 @@ class Weather(RFM98):
 			Humidity   =  buffer[10]
 			Light_Lux  = (buffer[12]  | buffer[11]  <<8 | (buffer[8] & 0x30)<<12)/10
 			UVI        =  buffer[13]  / 10
-			
+			Pa         =  self._atmos.pressure() if self._atmos else None	
 			#待添加数据值(Temp_F,Humidity,Light_Lux,UVI)报错处理
-			return Device_ID,1-State_BAT,AVG_Swind,Gust_Swind,DIR_wind,SUM_Rain,Temp_C,Humidity,Light_Lux,UVI,super().packet_rssi(),super().packet_snr() 
+			return Device_ID,1-State_BAT,AVG_Swind,Gust_Swind,DIR_wind,SUM_Rain,Temp_C,Humidity,Light_Lux,UVI,Pa,super().packet_rssi(),super().packet_snr() 
 		
 		else:
 			return False
@@ -61,6 +67,23 @@ class Weather(RFM98):
 			if (len(buffer)>=15) & (buffer[0] == 0xD4):
 				self._data=self._data_deal(buffer)
 				return self._data
+
+	def	data_json(self):
+		'''获取气象的json数据'''
+		info_dict={"设备ID":self._data[0],	
+		"电量":"正常" if self._data[1]==1 else "亏电",			
+		"风速":self._data[2],
+		"阵风":self._data[3],
+		"风向":self._data[4],
+		"雨量":self._data[5],
+		"温度":self._data[6],
+		"湿度":self._data[7],
+		"光照":self._data[8],
+		"紫外线":self._data[9],
+		"大气压":self._data[10],
+		"信号强度":self._data[11],
+		}
+		return dumps(info_dict)
 				
 	def uart_mixio(self,topic="station"):
 		'''打包气象数据串口转发'''
@@ -74,7 +97,8 @@ class Weather(RFM98):
 			"湿度":self._data[7],
 			"光照":self._data[8],
 			"紫外线":self._data[9],
-			"信号强度":self._data[10],
+			"大气压":self._data[10],
+			"信号强度":self._data[11],
 			}}
-		print(json.dumps(info_dict))
+		print(dumps(info_dict))
 		return	info_dict

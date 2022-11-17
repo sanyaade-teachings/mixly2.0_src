@@ -10,7 +10,8 @@ dahanzimin From the Mixly Team
 """
 from json import dumps
 from rfm98 import RFM98
-from machine import I2C,SoftI2C
+from ubinascii import hexlify
+from machine import I2C,SoftI2C,unique_id
 
 class Weather(RFM98):
 	def __init__(self,spi,cs_pin,i2c=None):
@@ -21,6 +22,7 @@ class Weather(RFM98):
 									spreading_factor=11)
 		self._data=(None,None,None,None,None,None,None,None,None,None,None,None,None)
 		self._atmos=None
+		self._labels=[]
 
 		if type(i2c) in [I2C,SoftI2C]:
 			if 0x76 in i2c.scan():
@@ -60,6 +62,14 @@ class Weather(RFM98):
 					crc = crc << 1
 		return crc &0xff # return the bottom 8 bits		
 
+	def	label(self,*args):
+		'''标记气象站标签如 (id,long,lat)''' 
+		for arg in args:
+			if len(arg)>=3:
+				self._labels.append({'ws_id':arg[0],'long':arg[1],'lat':arg[2]})
+			else:
+				raise AttributeError('Invalid Input , format is (id,long,lat)')
+
 	def	any(self):
 		'''判读是否有数据'''	
 		buffer=super().recv()
@@ -81,9 +91,17 @@ class Weather(RFM98):
 			"光照":self._data[8],
 			"紫外线":self._data[9],
 			"大气压":self._data[10],
-			"信号强度":self._data[11],
-			}
-		return self._data,dumps(info_dict)
+			"信号强度":self._data[11]}
+
+		for label in self._labels:
+			if label['ws_id'] == self._data[0]:
+				msg_list=[]
+				for info in info_dict:
+					msg_list.append({"label":info,"value":info_dict[info]})
+				label_dict={"message":msg_list,'clientid':hexlify(unique_id())}
+				label_dict.update(label)
+				return self._data,dumps(info_dict),dumps(label_dict)
+		return self._data,dumps(info_dict),'null'
 				
 	def uart_mixio(self,topic="station"):
 		'''打包气象数据串口转发'''
@@ -98,7 +116,7 @@ class Weather(RFM98):
 			"光照":self._data[8],
 			"紫外线":self._data[9],
 			"大气压":self._data[10],
-			"信号强度":self._data[11],
-			}}
+			"信号强度":self._data[11]}}
+
 		print(dumps(info_dict))
 		return	info_dict

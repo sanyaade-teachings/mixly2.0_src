@@ -88,7 +88,7 @@ def analyse_sharekey(url):
     response = urequests.get(url)
     
     if response.text == '-1':
-        print('Invalid share key')
+        raise AttributeError('Invalid share key')
     else:
         result = json.loads(response.text)
         return (result['0'], result['1'], result['2'])    

@@ -65,10 +65,17 @@ class Weather(RFM98):
 	def	label(self,*args):
 		'''标记气象站标签如 (id,long,lat)''' 
 		for arg in args:
-			if len(arg)>=3:
-				self._labels.append({'ws_id':arg[0],'long':arg[1],'lat':arg[2]})
+			if len(arg) == 3:
+				flag=True
+				for label in self._labels:
+					if label['ws_id'] == arg[0]:
+						label.update({'long':arg[1],'lat':arg[2]})
+						flag=False
+				if flag:
+					self._labels.append({'ws_id':arg[0],'long':arg[1],'lat':arg[2]})
 			else:
 				raise AttributeError('Invalid Input , format is (id,long,lat)')
+		return self._labels
 
 	def	any(self):
 		'''判读是否有数据'''	

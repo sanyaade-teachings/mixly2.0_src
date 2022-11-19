@@ -351,7 +351,7 @@ Blockly.Blocks.sensor_use_i2c_init = {
             ["SHT20", "SHT20"],
             ["ADXL345","ADXL345"],
                 ["LTR308", "LTR308"],
-                ["HP203B", "HP203B"],
+                ["HP203X", "HP203X"],
                 ["SHTC3", "SHTC3"],                
                 ["AHT21", "AHT21"],
                 ["VL53L0X","VL53L0X"],
@@ -491,7 +491,7 @@ Blockly.Blocks['sensor_hp203_extern'] = {
     init: function(){
         this.setColour(Blockly.Blocks.sensor_extern.HUE);
         this.appendValueInput('SUB')
-            .appendField(Blockly.MIXLY_Altitude+MSG.catSensor+" HP203B")
+            .appendField(Blockly.MIXLY_Altitude+MSG.catSensor+" HP203X")
             .setCheck("var");
         this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([

@@ -146,7 +146,7 @@ Blockly.Python.sensor_use_i2c_init=function(){
     if (key=='LTR308') {
       Blockly.Python.definitions_['import_ltr308al'] = 'import ltr308al';
        code = v + ' = ltr308al.LTR_308ALS('+ iv+ ')\n';
-    }else if (key=='HP203B') {
+    }else if (key=='HP203X') {
       Blockly.Python.definitions_['import_hp203x'] = 'import hp203x';
       code = v + ' = hp203x.HP203X('+ iv+ ')\n';
     }else if (key=='SHTC3') {

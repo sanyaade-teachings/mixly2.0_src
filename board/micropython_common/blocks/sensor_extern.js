@@ -357,7 +357,8 @@ Blockly.Blocks.sensor_use_i2c_init = {
                 ["VL53L0X","VL53L0X"],
                 ["QMC5883L","QMC5883L"],
                 ["MAX30102","MAX30102"],
-                ["APDS9960","APDS9960"]
+                ["APDS9960","APDS9960"],
+                ["RFID", "RFID"]
                 ]), "key");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);

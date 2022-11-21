@@ -240,6 +240,10 @@ Blockly.Python.sensor_use_i2c_init=function(){
       Blockly.Python.definitions_['import_apds9960'] = 'import apds9960';
       code = v + ' = apds9960.APDS9960('+ iv+ ')\n';
     }
+    else if (key=='RFID') {
+      Blockly.Python.definitions_['import_rc522'] = 'import rc522';
+      code = v + ' = rc522.RC522('+ iv+ ')\n';
+    }
     return code;
 };
 

@@ -1273,3 +1273,129 @@ Blockly.Blocks.tft_line_arbitrarily= {
         this.setTooltip(Blockly.MIXLY_OLED_LINE_ARBIT);
     }
 }
+
+Blockly.Blocks.display_lcd_use_i2c_init = {
+    init: function () {
+        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.appendValueInput('I2CSUB')
+            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
+            .setCheck("var");
+        this.appendValueInput('SUB')
+            .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+            .appendField(new Blockly.FieldDropdown([
+                // ["MPU9250", "MPU9250"],
+                // ["TM1637", "TM1637"],
+                ["LCD1602", "16"],
+                ["LCD2004", "20"]
+                ]), "key");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        var thisBlock = this;
+        this.setTooltip(function() {
+        var mode = thisBlock.getFieldValue('key');
+        var mode0 = Blockly.MIXLY_SETUP;        
+        var TOOLTIPS = {
+        "16": "LCD1602",
+        "20": "LCD2004"
+      };
+      return mode0 +TOOLTIPS[mode]
+    });
+    }
+};
+
+Blockly.Blocks.lcd_show_image_or_string_delay = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.appendValueInput('SUB')
+        .appendField(MSG.catLCD);  
+    this.appendValueInput('data')
+        .setCheck(String)
+        .appendField(Blockly.OLED_DRAWSTR);
+    this.appendValueInput("x")
+        .setCheck(Number)
+        .appendField(Blockly.array2_cols);  
+    this.appendValueInput("y")
+        .setCheck(Number)
+        .appendField(Blockly.array2_rows);      
+    this.appendDummyInput("")
+      .appendField(Blockly.Msg.TEXT_CENTER)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MICROPYTHON_DISPLAY_YES, "True"],
+                [Blockly.MICROPYTHON_DISPLAY_NO, "False"]
+            ]), 'center')     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_ESP32_SHOW_IMAGE_OR_STRING_DELAY);
+  }
+};
+
+Blockly.Blocks.lcd_print_string = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.appendValueInput('SUB')
+        .appendField(MSG.catLCD);  
+    this.appendValueInput('data')
+        .setCheck(String)
+        .appendField(Blockly.MIXLY_SERIAL_PRINT+Blockly.OLED_DRAWSTR);    
+    this.appendValueInput("x")
+        .setCheck(Number)
+        .appendField(Blockly.array2_cols);  
+    this.appendValueInput("y")
+        .setCheck(Number)
+        .appendField(Blockly.array2_rows); 
+    this.appendValueInput("time")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['lcd_backlight'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.appendValueInput('SUB')
+            .setCheck("var")
+            .appendField(MSG.catLCD);  
+        this.appendDummyInput()
+            .appendField(Blockly.TFT_Brightness)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXLY_MICROBIT_Turn_on_display, "1"],
+                [Blockly.MIXLY_MICROBIT_Turn_off_display, "0"]
+            ]), "key");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_ACCELERATION);
+        var thisBlock = this;
+        this.setTooltip(function() {
+        var mode = thisBlock.getFieldValue('key');
+        var TOOLTIPS = {
+        '1': Blockly.MIXLY_MICROBIT_Turn_on_display,
+        '0': Blockly.MIXLY_MICROBIT_Turn_off_display
+       };
+      return MSG.catLCD+Blockly.TFT_Brightness+TOOLTIPS[mode];
+    });
+    }
+};
+
+Blockly.Blocks.lcd_clear = {
+  init: function() {
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catLCD);  
+    this.setColour(Blockly.Blocks.display_extern.HUE);
+  this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MICROBIT_Clear_display);
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  this.setTooltip(Blockly.MIXLY_MICROBIT_Clear_display);
+  }
+};

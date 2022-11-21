@@ -13,13 +13,13 @@ from rfm98 import RFM98
 from ubinascii import hexlify
 from machine import I2C,SoftI2C,unique_id
 
+names =(("编号","电量","风速","阵风","风向","雨量","温度","湿度","光照","紫外线指数","气压","信号强度"),
+		("ID","Battery","Wind Speed","Gust","Wind Direction","Rainfall","Temperature","Humidity","Illumination","UVI","Atmospheric","RSSI"))
+
 class Weather(RFM98):
 	def __init__(self,spi,cs_pin,i2c=None):
 		'''对继承初始化配置'''
-		super().__init__(spi,cs_pin,frequency_mhz=433.92,
-									signal_bandwidth=125E3,
-									coding_rate=5,
-									spreading_factor=11)
+		super().__init__(spi,cs_pin,frequency_mhz=433.92,signal_bandwidth=125E3,coding_rate=5,spreading_factor=11)
 		self._data=(None,None,None,None,None,None,None,None,None,None,None,None,None)
 		self._atmos=None
 		self._labels=[]
@@ -46,7 +46,6 @@ class Weather(RFM98):
 			Pa         =  self._atmos.pressure() if self._atmos else None	
 			#待添加数据值(Temp_F,Humidity,Light_Lux,UVI)报错处理
 			return Device_ID,1-State_BAT,AVG_Swind,Gust_Swind,DIR_wind,SUM_Rain,Temp_C,Humidity,Light_Lux,UVI,Pa,super().packet_rssi(),super().packet_snr() 
-		
 		else:
 			return False
 
@@ -60,7 +59,7 @@ class Weather(RFM98):
 					crc = (crc << 1) ^ 0x31
 				else:
 					crc = crc << 1
-		return crc &0xff # return the bottom 8 bits		
+		return crc & 0xff # return the bottom 8 bits		
 
 	def	label(self,*args):
 		'''标记气象站标签如 (id,long,lat)''' 
@@ -85,20 +84,21 @@ class Weather(RFM98):
 				self._data=self._data_deal(buffer)
 				return True
 
-	def	data(self):
+	def	data(self,chinese=True):
 		'''获取气象数据'''	
-		info_dict={"设备ID":self._data[0],	
-			"电量":"正常" if self._data[1]==1 else "亏电",			
-			"风速":self._data[2],
-			"阵风":self._data[3],
-			"风向":self._data[4],
-			"雨量":self._data[5],
-			"温度":self._data[6],
-			"湿度":self._data[7],
-			"光照":self._data[8],
-			"紫外线":self._data[9],
-			"大气压":self._data[10],
-			"信号强度":self._data[11]}
+		_name=names[0] if chinese else names[1]
+		info_dict={_name[0]:self._data[0],	
+			_name[1]:"Normal" if self._data[1]==1 else "Low",			
+			_name[2]:str(self._data[2])+'m/s',
+			_name[3]:str(self._data[3])+'m/s',
+			_name[4]:str(self._data[4])+'°',
+			_name[5]:str(self._data[5])+'mm',
+			_name[6]:str(self._data[6])+'℃',
+			_name[7]:str(self._data[7])+'%',
+			_name[8]:str(self._data[8])+'lux',
+			_name[9]:self._data[9],
+			_name[10]:str(self._data[10])+'hPa',
+			_name[11]:str(self._data[11])+'dBm'}
 
 		for label in self._labels:
 			if label['ws_id'] == self._data[0]:

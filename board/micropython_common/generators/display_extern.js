@@ -465,3 +465,51 @@ Blockly.Python.tft_line_arbitrarily=function(){
   var code = varName + '.line('+location_x1+', '+location_y1+', '+location_x2+', '+location_y2+', color='+color+')\n';
   return code;
 };
+
+Blockly.Python.display_lcd_use_i2c_init = function () {
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var iv = Blockly.Python.valueToCode(this, 'I2CSUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue("key");
+    var code;    
+    Blockly.Python.definitions_['import_i2clcd'] = 'import i2clcd';
+    code = v + ' = i2clcd.LCD' + "("+ iv+',lcd_width=' + key + ')\n';
+    
+    return code;
+};
+
+Blockly.Python.lcd_show_image_or_string_delay = function() {
+    Blockly.Python.definitions_['import_i2clcd'] = 'import i2clcd';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var op = this.getFieldValue('center');
+    var code = v+".shows(" + data + ',column = ' + x +',line = ' + y + ',center = ' + op +  ")\n";
+    return code;
+}
+
+Blockly.Python.lcd_print_string = function() {
+    Blockly.Python.definitions_['import_i2clcd'] = 'import i2clcd';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var delay = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = v+".print(" + data + ',column = ' + x +',line = ' + y + ',delay='+delay+ ")\n";
+    return code;
+}
+
+Blockly.Python.lcd_backlight=function(){
+  Blockly.Python.definitions_['import_i2clcd'] = 'import i2clcd';
+  var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var key = this.getFieldValue('key');
+  var code = v + '.backlight('+key+')\n';
+  return code;
+};
+
+Blockly.Python['lcd_clear'] = function(block) {
+  Blockly.Python.definitions_['import_i2clcd'] = 'import i2clcd';
+  var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var code = v+'.clear()\n';
+  return code;
+};

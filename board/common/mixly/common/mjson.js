@@ -37,7 +37,7 @@ MJSON.parse = (jsonStr) => {
 MJSON.stringify = (jsonObj) => {
     let jsonStr = '';
     try {
-        jsonStr = JSON.parse(jsonObj);
+        jsonStr = JSON.stringify(jsonObj);
     } catch (error) {
         console.log(error);
     }

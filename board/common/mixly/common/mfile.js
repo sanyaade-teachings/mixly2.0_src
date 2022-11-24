@@ -307,8 +307,12 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
     } else {
         try {
             code = util.unescape(code);
-            code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
-                return decodeURIComponent(s.replace(/_/g, '%'));
+            code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
+                try {
+                    return decodeURIComponent(s.replace(/_/g, '%'));
+                } catch (error) {
+                    return s;
+                }
             });
         } catch (error) {
             console.log(error);

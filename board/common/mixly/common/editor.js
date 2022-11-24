@@ -69,8 +69,12 @@ Editor.init = () => {
         }
         //更新代码
         var code = blocklyGenerator.workspaceToCode(blockEditor) || '';
-        code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
-            return decodeURIComponent(s.replace(/_/g, '%'));
+        code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
+            try {
+                return decodeURIComponent(s.replace(/_/g, '%'));
+            } catch (error) {
+                return s;
+            }
         });
         if (BOARD.boardIndex.indexOf("/python_mixpy/") !== -1) {
             try {

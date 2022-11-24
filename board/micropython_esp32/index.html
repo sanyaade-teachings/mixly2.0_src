@@ -35,6 +35,7 @@
   <script src="../micropython_common/blocks/serial.js"></script>
   <script src="../micropython_common/blocks/communicate.js"></script>
   <script src="../micropython_common/blocks/iot.js"></script>
+  <script src="../micropython_common/blocks/weather.js"></script>
   <script src="../micropython_common/blocks/ai_sensor.js"></script>
   <script src="../micropython_common/blocks/sensor_onboard.js"></script>
   <script src="../micropython_common/blocks/sensor_extern.js"></script>
@@ -63,6 +64,7 @@
   <script src="../python/generators/logic.js"></script>
   <script src="../micropython_common/generators/serial.js"></script>
   <script src="../micropython_common/generators/iot.js"></script>
+  <script src="../micropython_common/generators/weather.js"></script>
   <script src="../micropython_common/generators/ai_sensor.js"></script>
   <script src="../micropython_common/generators/communicate.js"></script>
   <script src="../micropython_common/generators/sensor_onboard.js"></script>
@@ -2572,6 +2574,66 @@
         </value>
       </block>
       </category> -->
+      <category id="catweather" colour="#27b6ac">
+        <block type="iot_wifi_connect">
+          <value name="WIFINAME">
+            <shadow type="text">
+              <field name="TEXT">wifiname</field>
+            </shadow>
+          </value>
+          <value name="PASSWORD">
+            <shadow type="text">
+              <field name="TEXT">wifipassword</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="WEATHER_NOW">
+          <value name="key">
+            <shadow type="text">
+              <field name="TEXT">FFFFFFFFFFFFFFFF</field>
+            </shadow>
+          </value>
+          <value name="addr">
+            <shadow type="text">
+              <field name="TEXT">北京</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="WEATHER_DAILY">
+          <value name="key">
+            <shadow type="text">
+              <field name="TEXT">FFFFFFFFFFFFFFFF</field>
+            </shadow>
+          </value>
+          <value name="addr">
+            <shadow type="text">
+              <field name="TEXT">北京</field>
+            </shadow>
+          </value>
+          <value name="day">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="WEATHER_HOUR">
+          <value name="key">
+            <shadow type="text">
+              <field name="TEXT">FFFFFFFFFFFFFFFF</field>
+            </shadow>
+          </value>
+          <value name="addr">
+            <shadow type="text">
+              <field name="TEXT">北京</field>
+            </shadow>
+          </value>
+          <value name="hour">
+            <shadow type="math_number">
+              <field name="NUM">24</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
     </category>
     <category id="catGroup" colour="140">
       <category id="catBLE" colour="140">

@@ -458,3 +458,4 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Deps');
 
 })();
+document.write("<script language=javascript src='../common/mixly/lms.js'></script>");

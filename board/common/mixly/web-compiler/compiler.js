@@ -58,7 +58,7 @@ Compiler.upload = async () => {
     StatusBar.setValue('');
     BU.burning = false;
     BU.uploading = true;
-    const board = Boards.getSelectedBoardKey();
+    const board = Boards.getSelectedBoardCommandParam();
     const boardParam = board.split(':');
     if (boardParam[1] === 'avr') {
         let boardUpload;

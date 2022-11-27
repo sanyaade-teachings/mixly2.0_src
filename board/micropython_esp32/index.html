@@ -4402,6 +4402,11 @@
                   <field name="VAR">i2c_extend</field>
                 </shadow>
               </value>
+              <value name="ADDR">
+                <shadow type="math_number">
+                  <field name="NUM">0x27</field>
+                </shadow>
+              </value>
             </block>
           </next>
         </block>
@@ -4471,88 +4476,216 @@
       </block>
       </category>
       <category id="catOLED" colour='5BA5A5'>
-      <block type="display_use_i2c_init">
+      <block type="communicate_i2c_init">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">i2c_extend</field>
+            </shadow>
+          </value>
+          <value name="TX">
+            <shadow type="pins_digital_pin">
+              <field name="PIN">4</field>
+            </shadow>
+          </value>
+          <value name="RX">
+            <shadow type="pins_digital_pin">
+              <field name="PIN">5</field>
+            </shadow>
+          </value>
+          <value name="freq">
+            <shadow type="math_number">
+              <field name="NUM">100000</field>
+            </shadow>
+          </value>
+          <next>
+            <block type="display_oled_use_i2c_init">
+              <value name="SUB">
+                <shadow type="variables_get">
+                  <field name="VAR">oled</field>
+                </shadow>
+              </value>
+              <value name="I2CSUB">
+                <shadow type="variables_get">
+                  <field name="VAR">i2c_extend</field>
+                </shadow>
+              </value>
+              <value name="ADDR">
+                <shadow type="math_number">
+                  <field name="NUM">0x3c</field>
+                </shadow>
+              </value>
+            </block>
+          </next>
+        </block>
+      <block type="mpython_pbm_image"></block> 
+      <block type="extern_oled_show_image">
         <value name="SUB">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
-        <value name="I2CSUB">
-          <shadow type="variables_get">
-            <field name="VAR">i2c</field>
-          </shadow>
-        </value>
-        <value name="row">
-          <shadow type="math_number">
-            <field name="NUM">128</field>
-          </shadow>
-        </value>
-        <value name="column">
-          <shadow type="math_number">
-            <field name="NUM">64</field>
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="mpython_pbm_image">
           </shadow>
         </value>
       </block>
-      <block type="display_fill">
+      <block type="extern_oled_show_image_xy">
         <value name="SUB">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="display_draw_4strings">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
-        <value name="Text_line1">
-          <shadow type="text">
-            <field name="TEXT">Example1</field>
-          </shadow>
-        </value>
-        <value name="Text_line2">
-          <shadow type="text">
-            <field name="TEXT">Example2</field>
-          </shadow>
-        </value>
-        <value name="Text_line3">
-          <shadow type="text">
-            <field name="TEXT">Example3</field>
-          </shadow>
-        </value>
-        <value name="Text_line4">
-          <shadow type="text">
-            <field name="TEXT">Example4</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="display_oled_drawPixel">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
-        <value name="POS_X">
-          <shadow type="math_number">
-            <field name="NUM">64</field>
-          </shadow>
-        </value>
-        <value name="POS_Y">
-          <shadow type="math_number">
-            <field name="NUM">32</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="display_line">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="mpython_pbm_image">
           </shadow>
         </value>
         <value name="x">
           <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="y">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="size">
+          <shadow type="math_number">
             <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>      
+      <block type="extern_oled_show_string">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_oled_show_image_or_string_delay">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+        <value name="x">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="y">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="size">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="space">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_oled_scroll_string">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_oled_scroll_string_delay">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+        <value name="y">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="size">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="space">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_oled_show_frame_string">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_oled_show_frame_string_delay">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+        <value name="size">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">500</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_oled_hvline">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="x">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
           </shadow>
         </value>
         <value name="y">
@@ -4566,12 +4699,12 @@
           </shadow>
         </value>
       </block>
-      <block type="display_line_arbitrarily">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
+      <block type="extern_oled_line">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
         <value name="x1">
           <shadow type="math_number">
             <field name="NUM">0</field>
@@ -4584,21 +4717,21 @@
         </value>
         <value name="x2">
           <shadow type="math_number">
-            <field name="NUM">40</field>
+            <field name="NUM">50</field>
           </shadow>
         </value>
         <value name="y2">
           <shadow type="math_number">
-            <field name="NUM">40</field>
+            <field name="NUM">50</field>
           </shadow>
         </value>
       </block>
-      <block type="display_rect">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
+      <block type="extern_oled_shape_rect">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
         <value name="x">
           <shadow type="math_number">
             <field name="NUM">20</field>
@@ -4609,108 +4742,74 @@
             <field name="NUM">20</field>
           </shadow>
         </value>
-        <value name="width">
+        <value name="w">
           <shadow type="math_number">
             <field name="NUM">20</field>
           </shadow>
         </value>
-        <value name="height">
+        <value name="h">
           <shadow type="math_number">
-            <field name="NUM">20</field>
+            <field name="NUM">15</field>
           </shadow>
         </value>
       </block>
-      <block type="display_circle">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
+      <block type="extern_oled_shift">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="val">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
           </shadow>
         </value>
+      </block>
+      <block type="extern_oled_get_pixel">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
         <value name="x">
           <shadow type="math_number">
-            <field name="NUM">20</field>
+            <field name="NUM">0</field>
           </shadow>
         </value>
         <value name="y">
           <shadow type="math_number">
-            <field name="NUM">20</field>
-          </shadow>
-        </value>
-        <value name="r">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
+            <field name="NUM">0</field>
           </shadow>
         </value>
       </block>
-      <block type="display_triangle">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
+      <block type="extern_oled_bright_point">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+        <value name="x">
+         <shadow type="math_number">
+            <field name="NUM">0</field>
           </shadow>
         </value>
-        <value name="x0">
+        <value name="y">
           <shadow type="math_number">
             <field name="NUM">0</field>
           </shadow>
         </value>
-        <value name="y0">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="x1">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-        <value name="y1">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
-          </shadow>
-        </value>
-        <value name="x2">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
-          </shadow>
-        </value>
-        <value name="y2">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
+        <value name="STAT">
+          <shadow type="display_onoff">
           </shadow>
         </value>
       </block>
-      <block type="display_oled_showBitmap">
-        <value name="VAR">
-          <shadow type="variables_get">
-            <field name="VAR">oled</field>
-          </shadow>
-        </value>
-        <value name="START_X">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="START_Y">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="WIDTH">
-          <shadow type="math_number">
-            <field name="NUM">128</field>
-          </shadow>
-        </value>
-        <value name="HEIGHT">
-          <shadow type="math_number">
-            <field name="NUM">64</field>
-          </shadow>
-        </value>
-        <value name="bitmap_name">
-          <shadow type="variables_get">
-            <field name="VAR">bitmap</field>
-          </shadow>
-        </value>
-      </block>      
+      <block type="extern_oled_clear">
+        <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">oled</field>
+            </shadow>
+          </value>
+      </block>   
       </category>
       <category id="catTFT" colour='5BA5A5'>
         <block type="communicate_spi_init">

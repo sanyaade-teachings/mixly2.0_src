@@ -3759,3 +3759,6 @@ Blockly.MIXLY_MIXPY_ALGORITHM_USE_SEQUENCE = '开始计算顺序查找法次数'
 Blockly.MIXLY_MIXPY_ALGORITHM_PRINT_SEQUENCE = '输出顺序法查找次数';
 Blockly.MIXLY_MIXPY_ALGORITHM_USE_DIVIDE = '开始计算二分查找次数';
 Blockly.MIXLY_MIXPY_ALGORITHM_PRINT_DIVIDE = '输出二分查找次数';
+Blockly.Msg.MPYTHON_DISPLAY_HVLINE_MESSAGE1 = 'OLED显示屏 %1 %2 %3 线 %4 x %5 y %6 长度 %7';
+Blockly.Msg.MPYTHON_DISPLAY_SHAPE_RECT_MESSAGE1 = 'OLED显示屏 %1 %2 %3 矩形 %4 x %5 y %6 宽 %7 高 %8';
+Blockly.Msg.mpython_display_line_MESSAGE1 ='OLED显示屏 %1 %2 线%3 x1 %4  y1 %5 到  x2 %6 y2 %7';

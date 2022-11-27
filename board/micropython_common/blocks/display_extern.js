@@ -1291,6 +1291,9 @@ Blockly.Blocks.display_lcd_use_i2c_init = {
                 ["LCD1602", "16"],
                 ["LCD2004", "20"]
                 ]), "key");
+        this.appendValueInput("ADDR")
+            .setCheck(Number)
+            .appendField(Blockly.MQTT_SERVER_ADD);     
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1397,5 +1400,473 @@ Blockly.Blocks.lcd_clear = {
   this.setNextStatement(true, null);
   this.setInputsInline(true);
   this.setTooltip(Blockly.MIXLY_MICROBIT_Clear_display);
+  }
+};
+
+Blockly.Blocks.display_oled_use_i2c_init = {
+    init: function () {
+        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.appendValueInput('I2CSUB')
+            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
+            .setCheck("var");
+        this.appendValueInput('SUB')
+            .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO+'oled128x64')
+            
+        this.appendValueInput("ADDR")
+            .setCheck(Number)
+            .appendField(Blockly.MQTT_SERVER_ADD);     
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        var thisBlock = this;
+        this.setTooltip(function() {
+        var mode = thisBlock.getFieldValue('key');
+        var mode0 = Blockly.MIXLY_SETUP;        
+        var TOOLTIPS = {
+        "16": "LCD1602",
+        "20": "LCD2004"
+      };
+      return mode0 +TOOLTIPS[mode]
+    });
+    }
+};
+
+Blockly.Blocks.extern_oled_show_image = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+  this.appendValueInput('data')
+        .appendField(Blockly.OLED_BITMAP);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.OLED_BITMAP_OR_STRING);
+  }
+};
+
+Blockly.Blocks.extern_oled_show_image_xy = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+  this.appendValueInput('data')
+        .appendField(Blockly.OLED_BITMAP);
+     this.appendValueInput("x")
+        .setCheck(Number)
+        .appendField('x');  
+    this.appendValueInput("y")
+        .setCheck(Number)
+        .appendField('y');  
+    this.appendValueInput("size")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_MICROBIT_JS_NUMBER);    
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.OLED_BITMAP_OR_STRING);
+  }
+};
+
+Blockly.Blocks.extern_oled_show_string = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+  this.appendValueInput('data')
+        .setCheck([String, "esp32_image","List",'Tuple'])
+        .appendField(Blockly.OLED_DRAWSTR);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.OLED_BITMAP_OR_STRING);
+  }
+};
+
+ Blockly.Blocks.extern_oled_show_image_or_string_delay = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+    this.appendValueInput('data')
+        .setCheck(String)
+        .appendField(Blockly.OLED_DRAWSTR);
+    this.appendValueInput("x")
+        .setCheck(Number)
+        .appendField('x');  
+    this.appendValueInput("y")
+        .setCheck(Number)
+        .appendField('y');  
+    this.appendValueInput("size")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_TURTLE_WRITE_FONT_NUM);              
+    this.appendValueInput("space")
+        .setCheck(Number)
+        .appendField(Blockly.MICROPYTHON_DISPLAY_FONT_SPACE);   
+    this.appendDummyInput("")
+      .appendField(Blockly.Msg.TEXT_CENTER)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MICROPYTHON_DISPLAY_YES, "True"],
+                [Blockly.MICROPYTHON_DISPLAY_NO, "False"]
+            ]), 'center')     
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_ESP32_SHOW_IMAGE_OR_STRING_DELAY);
+  }
+};
+
+Blockly.Blocks.extern_oled_scroll_string = {
+   init: function() {
+     this.setColour(Blockly.Blocks.display_onboard.HUE);
+     this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+     this.appendValueInput('data')
+         .setCheck(String)
+         .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+   }
+ };
+
+Blockly.Blocks.extern_oled_scroll_string_delay = {
+   init: function() {
+     this.setColour(Blockly.Blocks.display_onboard.HUE);
+     this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+     this.appendValueInput('data')
+         .setCheck(String)
+         .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
+     this.appendValueInput("y")
+        .setCheck(Number)
+        .appendField('y');  
+    this.appendValueInput("size")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_TURTLE_WRITE_FONT_NUM);    
+     this.appendValueInput("space")
+        .setCheck(Number)
+        .appendField(Blockly.MICROPYTHON_DISPLAY_FONT_SPACE);       
+     this.appendValueInput("time")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);    
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+     this.setTooltip(Blockly.MIXLY_ESP32_SCROLL_IMAGE_OR_STRING_DELAY);
+   }
+ };
+
+Blockly.Blocks.extern_oled_show_frame_string = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+  this.appendValueInput('data')
+        .setCheck(String)
+        .appendField(Blockly.MIXLY_ESP32_MONITOR_SHOW_FRAME);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks.extern_oled_show_frame_string_delay = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+    this.appendValueInput('data')
+        .setCheck(String)
+        .appendField(Blockly.MIXLY_ESP32_MONITOR_SHOW_FRAME);
+    this.appendValueInput("size")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_TURTLE_WRITE_FONT_NUM);    
+    this.appendValueInput("time")
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);        
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Blocks['extern_oled_shift'] = {
+  init: function() {
+    var OPERATORS =
+        [[Blockly.MIXLY_UP, 'shift_up'],
+         [Blockly.MIXLY_DOWN, 'shift_down'],
+         [Blockly.MIXLY_LEFT, 'shift_left'],
+         [Blockly.MIXLY_RIGHT, 'shift_right'],
+        ];
+    //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+    // this.setOutput(true);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.appendValueInput('val')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
+        .setCheck(Number);
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_UNIT)
+    var thisBlock = this;
+        this.setTooltip(function() {
+        var mode = thisBlock.getFieldValue('OP');
+        var mode0 = Blockly.Msg.DISPLAY_IMAGE_LET;
+        var mode1 = Blockly.Msg.DISPLAY_IMAGE_LET2;
+        var mode2 = Blockly.Msg.DISPLAY_IMAGE_LET3;
+        var TOOLTIPS = {
+        'up': Blockly.MIXLY_UP,
+        'down':Blockly.MIXLY_DOWN,
+        'left':Blockly.MIXLY_LEFT,
+        'right':Blockly.MIXLY_RIGHT
+      };
+      return mode0 + mode1 +TOOLTIPS[mode]+mode2;
+    });
+  }
+};
+
+Blockly.Blocks.extern_oled_get_pixel = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+      this.appendValueInput('x')
+        .setCheck(Number)
+            .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
+      this.appendValueInput('y')
+          .setCheck(Number)
+          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_PLOT_POINT_Y);
+    this.appendDummyInput()
+        .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_GET_POINT);
+    this.setInputsInline(true);
+      this.setOutput(true, Number);
+    this.setTooltip(Blockly.MIXLY_ESP32_JS_MONITOR_BRIGHTNESS);
+  }
+};
+
+Blockly.Blocks.extern_oled_bright_point = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+    this.appendValueInput('x')
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_BRIGHTNESS)
+          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
+    this.appendValueInput('y')
+        .setCheck(Number)
+        .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_PLOT_POINT_Y);
+    this.appendValueInput("STAT")        
+        .setCheck([Number,Boolean]);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.MIXLY_ESP32_DISPLAY_SETPIXEL);
+  }
+};
+
+
+
+Blockly.Blocks.extern_oled_clear = {
+  init: function() {
+    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.appendValueInput('SUB')
+        .setCheck("var")
+        .appendField(MSG.catOLED); 
+  this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MICROBIT_Clear_display);
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  this.setTooltip(Blockly.MIXLY_MICROBIT_Clear_display);
+  }
+};
+
+Blockly.Blocks['extern_oled_shape_rect'] = {
+  init: function () {
+    this.jsonInit({
+      "colour": Blockly.Blocks.display_onboard.HUE,
+      "args0": [
+        {
+          "name": "SUB",
+          
+          "type": "input_value"
+        },
+        {
+          "name": "state",
+          "options": [
+          [Blockly.Msg.MPYTHON_DISPLAY_MODE_1, '1'],
+          [Blockly.Msg.MPYTHON_DISPLAY_MODE_0, '0']
+          ],
+          "type": "field_dropdown"
+        },
+        {
+          "name": "shape",
+          "options": [
+            [Blockly.Msg.MPYTHON_DISPLAY_HOLLOW, 'rect'],
+            [Blockly.Msg.MPYTHON_DISPLAY_SOLID, 'fill_rect']
+          ],
+          "type": "field_dropdown"
+        },
+        {
+          "type": "input_dummy"
+        },
+        {
+          "name": "x",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "y",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "w",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "h",
+          "type": "input_value",
+          //"check": "Number"
+        }
+
+      ],
+      "inputsInline": true,
+      "helpUrl": Blockly.Msg.mpython_HELPURL,
+      "tooltip": Blockly.Msg.MPYTHON_DISPLAY_SHAPE_RECT_TOOLTIP,
+      "message0": Blockly.Msg.MPYTHON_DISPLAY_SHAPE_RECT_MESSAGE1,
+      "nextStatement": null,
+      "previousStatement": null
+    });
+  }
+};
+
+Blockly.Blocks['extern_oled_hvline'] = {
+  init: function () {
+    this.jsonInit({
+      "colour": Blockly.Blocks.display_onboard.HUE,
+      "args0": [
+        {
+          "name": "SUB",
+          
+          "type": "input_value"
+        },
+        {
+          "name": "state",
+          "options": [
+          [Blockly.Msg.MPYTHON_DISPLAY_MODE_1, '1'],
+          [Blockly.Msg.MPYTHON_DISPLAY_MODE_0, '0']
+          ],
+          "type": "field_dropdown"
+        },
+        {
+          "name": "dir_h_v",
+          "options": [
+            [Blockly.Msg.mpython_vertical, '0'],
+            [Blockly.Msg.mpython_horizontal, '1']
+          ],
+          "type": "field_dropdown"
+        },
+        {
+          "type": "input_dummy"
+        },
+        {
+          "name": "x",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "y",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "length",
+          "type": "input_value",
+          //"check": "Number"
+        }
+
+      ],
+      "inputsInline": true,
+      "helpUrl": Blockly.Msg.mpython_HELPURL,
+      "tooltip": Blockly.Msg.MPYTHON_DISPLAY_HVLINE_TOOLTIP,
+      "message0": Blockly.Msg.MPYTHON_DISPLAY_HVLINE_MESSAGE1,
+      "nextStatement": null,
+      "previousStatement": null
+    });
+  }
+};
+
+Blockly.Blocks['extern_oled_line'] = {
+  init: function () {
+    this.jsonInit({
+      "colour": Blockly.Blocks.display_onboard.HUE,
+      "args0": [
+        {
+          "name": "SUB",
+          
+          "type": "input_value"
+        },
+        {
+          "name": "state",
+          "options": [[Blockly.Msg.mpython_display_hline_1, '1'], [Blockly.Msg.mpython_display_hline_0, '0']],
+          "type": "field_dropdown"
+        },
+        {
+          "type": "input_dummy"
+        }, {
+          "name": "x1",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "y1",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "x2",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "y2",
+          "type": "input_value",
+          //"check": "Number"
+        }
+
+      ],
+      "inputsInline": true,
+      "helpUrl": Blockly.Msg.mpython_HELPURL,
+      "tooltip": Blockly.Msg.mpython_display_line_TOOLTIP,
+      "message0": Blockly.Msg.mpython_display_line_MESSAGE1,
+      "nextStatement": null,
+      "previousStatement": null
+    });
   }
 };

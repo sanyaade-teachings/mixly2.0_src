@@ -24,7 +24,7 @@ Blockly.Arduino.controls_if = function () {
     var code = 'if (' + argument + ') {\n' + branch + '\n}';
     for (n = 1; n <= this.elseifCount_; n++) {
         argument = Blockly.Arduino.valueToCode(this, 'IF' + n,
-          Blockly.Arduino.ORDER_NONE) || 'false';
+            Blockly.Arduino.ORDER_NONE) || 'false';
         branch = Blockly.Arduino.statementToCode(this, 'DO' + n);
         code += ' else if (' + argument + ') {\n' + branch + '}';
     }
@@ -43,7 +43,7 @@ Blockly.Arduino.controls_switch_case = function () {
     var code = 'switch (' + argument + ') {\n';
     for (n = 1; n <= this.elseifCount_; n++) {
         argument = Blockly.Arduino.valueToCode(this, 'IF' + n,
-          Blockly.Arduino.ORDER_NONE) || 'NULL';
+            Blockly.Arduino.ORDER_NONE) || 'NULL';
         branch = Blockly.Arduino.statementToCode(this, 'DO' + n);
         code += ' case ' + argument + ': \n' + branch + '  break;\n';
     }
@@ -75,26 +75,26 @@ Blockly.Arduino.controls_for = function () {
     if (argument0.match(/^-?\d+(\.\d+)?$/) &&
         argument1.match(/^-?\d+(\.\d+)?$/)) {
         //起止数是常量
-    down = (argument1 - argument0 < 0);
-    code = 'for (int ' + variable0 + ' = ' + argument0 + '; ' +
-    variable0 + (down ? ' >= ' : ' <= ') + argument1 + '; ' +
-    variable0 + ' = ' + variable0 + ' + (' + step + ')) {\n' +
-    branch + '}\n';
-} else {
+        down = (argument1 - argument0 < 0);
+        code = 'for (int ' + variable0 + ' = ' + argument0 + '; ' +
+            variable0 + (down ? ' >= ' : ' <= ') + argument1 + '; ' +
+            variable0 + ' = ' + variable0 + ' + (' + step + ')) {\n' +
+            branch + '}\n';
+    } else {
         //起止数有变量
         if (step.match(/^-?\d+(\.\d+)?$/)) {
             //步长是常量
             down = step < 0;
             code = 'for (int ' + variable0 + ' = (' + argument0 + '); ' +
-            variable0 + (down ? ' >= ' : ' <= ') + '(' + argument1 + '); ' +
-            variable0 + ' = ' + variable0 + ' + (' + step + ')) {\n' +
-            branch + '}\n';
+                variable0 + (down ? ' >= ' : ' <= ') + '(' + argument1 + '); ' +
+                variable0 + ' = ' + variable0 + ' + (' + step + ')) {\n' +
+                branch + '}\n';
         } else {
             //步长是变量
             code = 'for (int ' + variable0 + ' = (' + argument0 + '); ' +
-            '(' + argument1 + '>=' + argument0 + ')?(' + variable0 + '<=' + argument1 + '):(' + variable0 + '>=' + argument1 + '); ' +
-            variable0 + ' = ' + variable0 + ' + (' + step + ')) {\n' +
-            branch + '}\n';
+                '(' + argument1 + '>=' + argument0 + ')?(' + variable0 + '<=' + argument1 + '):(' + variable0 + '>=' + argument1 + '); ' +
+                variable0 + ' = ' + variable0 + ' + (' + step + ')) {\n' +
+                branch + '}\n';
         }
 
     }
@@ -123,9 +123,9 @@ Blockly.Arduino.controls_flow_statements = function () {
     // Flow statements: continue, break.
     switch (this.getFieldValue('FLOW')) {
         case 'BREAK':
-        return 'break;\n';
+            return 'break;\n';
         case 'CONTINUE':
-        return 'continue;\n';
+            return 'continue;\n';
     }
     throw 'Unknown flow statement.';
 };
@@ -171,10 +171,10 @@ Blockly.Arduino.controls_end_program = function () {
         return 'while(true);\n';
 };
 Blockly.Arduino.controls_soft_reset = function () {
-  var funcName = 'resetFunc';
-  var code = 'void(* resetFunc) (void) = 0;\n';
-  Blockly.Arduino.definitions_[funcName] = code;
-  return 'resetFunc();\n';
+    var funcName = 'resetFunc';
+    var code = 'void(* resetFunc) (void) = 0;\n';
+    Blockly.Arduino.definitions_[funcName] = code;
+    return 'resetFunc();\n';
 };
 Blockly.Arduino.controls_interrupts = function () {
     return 'interrupts();\n';
@@ -183,38 +183,36 @@ Blockly.Arduino.controls_interrupts = function () {
 Blockly.Arduino.controls_nointerrupts = function () {
     return 'noInterrupts();\n';
 };
-Blockly.Arduino.base_delay=Blockly.Arduino.controls_delay;
+Blockly.Arduino.base_delay = Blockly.Arduino.controls_delay;
 //简单定时器
 Blockly.Arduino.simple_timer = function () {
     var NO = this.getFieldValue('NO');
     var timein = Blockly.Arduino.valueToCode(this, 'timein', Blockly.Arduino.ORDER_ATOMIC);
-    var funcName = 'Simple_timer_'+NO;
+    var funcName = 'Simple_timer_' + NO;
     var branch = Blockly.Arduino.statementToCode(this, 'zxhs');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
     var code = 'void' + ' ' + funcName + '() {\n  ' + branch + '\n}\n';
-    Blockly.Arduino.definitions_[funcName]  = code;
-    Blockly.Arduino.definitions_['include_SimpleTimer'] ='#include <SimpleTimer.h>\n';
+    Blockly.Arduino.definitions_[funcName] = code;
+    Blockly.Arduino.definitions_['include_SimpleTimer'] = '#include <SimpleTimer.h>\n';
     Blockly.Arduino.definitions_['var_declare_SimpleTimer'] = 'SimpleTimer timer;';
-    Blockly.Arduino.setups_[funcName] = 'timer.setInterval('+ timein+'L, '+funcName+');\n';
+    Blockly.Arduino.setups_[funcName] = 'timer.setInterval(' + timein + 'L, ' + funcName + ');\n';
     return 'timer.run();\n';
 };
 
 //do-while循环
-Blockly.Arduino.do_while = function() {
-    var statements_input_data = Blockly.Arduino.statementToCode(this, 'input_data');  
+Blockly.Arduino.do_while = function () {
+    var statements_input_data = Blockly.Arduino.statementToCode(this, 'input_data');
     var value_select_data = Blockly.Arduino.valueToCode(this, 'select_data', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_type = this.getFieldValue('type');
-    if(dropdown_type == 'false')
-    {
+    if (dropdown_type == 'false') {
         var code = 'do{\n'
-        +statements_input_data
-        +'}while(!('+value_select_data+'));\n';
+            + statements_input_data
+            + '}while(!(' + value_select_data + '));\n';
     }
-    else
-    {
+    else {
         var code = 'do{\n'
-        +statements_input_data
-        +'}while('+value_select_data+');\n';
+            + statements_input_data
+            + '}while(' + value_select_data + ');\n';
     }
     return code;
 };
@@ -223,21 +221,21 @@ Blockly.Arduino.do_while = function() {
 Blockly.Arduino.super_delay_function1 = function () {
     var number = this.getFieldValue('number');
     var timein = Blockly.Arduino.valueToCode(this, 'timein', Blockly.Arduino.ORDER_ATOMIC);
-    var funcName = 'super_delay_function'+number;
+    var funcName = 'super_delay_function' + number;
     var branch = Blockly.Arduino.statementToCode(this, 'delay_function');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
     var code = 'void' + ' ' + funcName + '() {\n  ' + branch + '\n}\n';
-    Blockly.Arduino.definitions_[funcName]  = code;
-    Blockly.Arduino.definitions_['include_SimpleTimer'] ='#include <SimpleTimer.h>\n';
+    Blockly.Arduino.definitions_[funcName] = code;
+    Blockly.Arduino.definitions_['include_SimpleTimer'] = '#include <SimpleTimer.h>\n';
     Blockly.Arduino.definitions_['var_declare_SimpleTimer'] = 'SimpleTimer timer;';
     return 'timer.run();\n';
 };
 
 //执行超级延时函数
-Blockly.Arduino.execute_super_delay_function1 = function() {
-    var number= this.getFieldValue('number');
-    var time_interval= Blockly.Arduino.valueToCode(this, 'time_interval', Blockly.Arduino.ORDER_ATOMIC);
-    var frequency= Blockly.Arduino.valueToCode(this, 'frequency', Blockly.Arduino.ORDER_ATOMIC);
-    var code='timer.setTimer('+ time_interval+', super_delay_function'+ number+', '+ frequency+');\n';
+Blockly.Arduino.execute_super_delay_function1 = function () {
+    var number = this.getFieldValue('number');
+    var time_interval = Blockly.Arduino.valueToCode(this, 'time_interval', Blockly.Arduino.ORDER_ATOMIC);
+    var frequency = Blockly.Arduino.valueToCode(this, 'frequency', Blockly.Arduino.ORDER_ATOMIC);
+    var code = 'timer.setTimer(' + time_interval + ', super_delay_function' + number + ', ' + frequency + ');\n';
     return code;
 };

@@ -23,7 +23,7 @@ Blockly.Arduino.inout_pinMode = function () {
 Blockly.Arduino.inout_digital_write2 = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
-    var code="";
+    var code = "";
     var board_type = Mixly.JSFuncs.getPlatform();
     if (window.isNaN(dropdown_pin) && board_type.match(RegExp(/STM32/)) == null) {
         code = code + 'pinMode(' + dropdown_pin + ', OUTPUT);\n';
@@ -49,11 +49,11 @@ Blockly.Arduino.inout_digital_read2 = function () {
     if (window.isNaN(dropdown_pin) && !(new RegExp("^A([0-9]|10|11|12|13|14|15)$").test(dropdown_pin))) {
         var funcName = 'mixly_digitalRead';
         var code2 = 'boolean' + ' ' + funcName + '(uint8_t pin) {\n'
-        + '  pinMode(pin, INPUT);\n'
-        + '  boolean _return =  digitalRead(pin);\n'
-        + '  pinMode(pin, OUTPUT);\n'
-        + '  return _return;\n'
-        + '}\n';
+            + '  pinMode(pin, INPUT);\n'
+            + '  boolean _return =  digitalRead(pin);\n'
+            + '  pinMode(pin, OUTPUT);\n'
+            + '  return _return;\n'
+            + '}\n';
         Blockly.Arduino.definitions_[funcName] = code2;
         code = 'mixly_digitalRead(' + dropdown_pin + ')';
     } else {
@@ -81,7 +81,7 @@ Blockly.Arduino.inout_analog_write = function () {
     if (typeof pwm === 'object') {
         for (let i of pwm)
             if (dropdown_pin === i[1]) {
-                Blockly.Arduino.setups_['setup_output'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);';
+                Blockly.Arduino.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
                 break;
             }
     }
@@ -95,7 +95,7 @@ Blockly.Arduino.inout_analog_read = function () {
     if (typeof analog === 'object') {
         for (let i of analog)
             if (dropdown_pin === i[1]) {
-                Blockly.Arduino.setups_['setup_output'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+                Blockly.Arduino.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
                 break;
             }
     }
@@ -109,18 +109,18 @@ Blockly.Arduino.inout_buildin_led = function () {
     return code;
 };
 Blockly.Arduino.OneButton_interrupt = function () {
- Blockly.Arduino.definitions_['include_OneButton'] = '#include <OneButton.h>';
- var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
- var dropdown_mode = this.getFieldValue('mode');
- var dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
- Blockly.Arduino.definitions_['var_declare_button'+dropdown_pin] = 'OneButton button'+dropdown_pin+'('+dropdown_pin+ ','+((dropdown_stat == 'HIGH')?'false':'true')+');';
- Blockly.Arduino.setups_['setup_onebutton_' + dropdown_pin+dropdown_mode] = 'button'+dropdown_pin+'.' + dropdown_mode + '('+dropdown_mode+dropdown_pin+');';
- var code = 'button' +dropdown_pin+ '.tick();';
- var funcName = dropdown_mode+dropdown_pin;
- var branch = Blockly.Arduino.statementToCode(this, 'DO');
- var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
- Blockly.Arduino.definitions_[funcName] = code2;
- return code;
+    Blockly.Arduino.definitions_['include_OneButton'] = '#include <OneButton.h>';
+    var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
+    var dropdown_mode = this.getFieldValue('mode');
+    var dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
+    Blockly.Arduino.definitions_['var_declare_button' + dropdown_pin] = 'OneButton button' + dropdown_pin + '(' + dropdown_pin + ',' + ((dropdown_stat == 'HIGH') ? 'false' : 'true') + ');';
+    Blockly.Arduino.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
+    var code = 'button' + dropdown_pin + '.tick();';
+    var funcName = dropdown_mode + dropdown_pin;
+    var branch = Blockly.Arduino.statementToCode(this, 'DO');
+    var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
+    Blockly.Arduino.definitions_[funcName] = code2;
+    return code;
 };
 
 Blockly.Arduino.controls_attachInterrupt = function () {
@@ -198,17 +198,17 @@ Blockly.Arduino.inout_shiftout = function () {
 };
 
 Blockly.Arduino.ESP32touchButton = function () {
- Blockly.Arduino.definitions_['include_ESP32touchButton'] = '#include <ESP32touchButton.h>';
- var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
- var dropdown_mode = this.getFieldValue('mode');
- Blockly.Arduino.definitions_['var_declare_button'+dropdown_pin] = 'ESP32touchButton button'+dropdown_pin+'('+dropdown_pin+ ',true);';
- Blockly.Arduino.setups_['setup_onebutton_' + dropdown_pin+dropdown_mode] = 'button'+dropdown_pin+'.' + dropdown_mode + '('+dropdown_mode+dropdown_pin+');';
- var code = 'button' +dropdown_pin+ '.tick();';
- var funcName = dropdown_mode+dropdown_pin;
- var branch = Blockly.Arduino.statementToCode(this, 'DO');
- var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
- Blockly.Arduino.definitions_[funcName] = code2;
- return code;
+    Blockly.Arduino.definitions_['include_ESP32touchButton'] = '#include <ESP32touchButton.h>';
+    var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
+    var dropdown_mode = this.getFieldValue('mode');
+    Blockly.Arduino.definitions_['var_declare_button' + dropdown_pin] = 'ESP32touchButton button' + dropdown_pin + '(' + dropdown_pin + ',true);';
+    Blockly.Arduino.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
+    var code = 'button' + dropdown_pin + '.tick();';
+    var funcName = dropdown_mode + dropdown_pin;
+    var branch = Blockly.Arduino.statementToCode(this, 'DO');
+    var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
+    Blockly.Arduino.definitions_[funcName] = code2;
+    return code;
 };
 
 Blockly.Arduino.inout_soft_analog_write = function () {
@@ -229,35 +229,35 @@ Blockly.Arduino.inout_cancel_soft_analog_write = function () {
 };
 
 //ADS1015模数转换模块 设置范围以及精度
-Blockly.Arduino.ADS1015_setGain = function() {
-  var GAIN = this.getFieldValue('ADS1015_setGain');
-  Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-  Blockly.Arduino.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
-  Blockly.Arduino.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
-  Blockly.Arduino.setups_['setup_ads.begin()'] = 'ads.begin(); \n';
-  Blockly.Arduino.setups_['setup_ads.setGain'] = 'ads.setGain('+GAIN+');';
-  var code='';
-  return code;
+Blockly.Arduino.ADS1015_setGain = function () {
+    var GAIN = this.getFieldValue('ADS1015_setGain');
+    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Blockly.Arduino.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
+    Blockly.Arduino.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
+    Blockly.Arduino.setups_['setup_ads.begin()'] = 'ads.begin(); \n';
+    Blockly.Arduino.setups_['setup_ads.setGain'] = 'ads.setGain(' + GAIN + ');';
+    var code = '';
+    return code;
 };
 
 //ADS1015模数转换模块 采集数值
-Blockly.Arduino.ADS1015_Get_Value = function() {
-  Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-  Blockly.Arduino.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
-  Blockly.Arduino.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
-  Blockly.Arduino.setups_['setup_ads.begin()'] = 'ads.begin();';
-  var dropdown_type = this.getFieldValue('ADS1015_AIN');
-  var code = dropdown_type;
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+Blockly.Arduino.ADS1015_Get_Value = function () {
+    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Blockly.Arduino.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
+    Blockly.Arduino.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
+    Blockly.Arduino.setups_['setup_ads.begin()'] = 'ads.begin();';
+    var dropdown_type = this.getFieldValue('ADS1015_AIN');
+    var code = dropdown_type;
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //PCF8591T模数转换模块 采集数值
-Blockly.Arduino.PCF8591T = function() {
-  //Blockly.Arduino.definitions_['include_Wire'] = '#include "Arduino.h"';
-  Blockly.Arduino.definitions_['include_PCF8591_h'] = '#include <PCF8591.h>';
-  Blockly.Arduino.definitions_['var_declare_PCF8591'] ='PCF8591 pcf8591(0x48);';
-  Blockly.Arduino.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin(); \n';
-  var dropdown_type = this.getFieldValue('PCF8591T_AIN');
-  var code = dropdown_type;
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+Blockly.Arduino.PCF8591T = function () {
+    //Blockly.Arduino.definitions_['include_Wire'] = '#include "Arduino.h"';
+    Blockly.Arduino.definitions_['include_PCF8591_h'] = '#include <PCF8591.h>';
+    Blockly.Arduino.definitions_['var_declare_PCF8591'] = 'PCF8591 pcf8591(0x48);';
+    Blockly.Arduino.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin(); \n';
+    var dropdown_type = this.getFieldValue('PCF8591T_AIN');
+    var code = dropdown_type;
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

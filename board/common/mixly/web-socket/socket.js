@@ -20,38 +20,21 @@ const {
     Command
 } = Mixly;
 
-const { BOARD, SELECTED_BOARD } = Config;
+const { BOARD, SELECTED_BOARD, SOFTWARE } = Config;
 
 const { Socket } = Mixly.WebSocket;
 
 Socket.obj = null;
-
 Socket.url = 'ws://127.0.0.1:8082/';
-
 Socket.jsonArr = [];
-
 Socket.connected = false;
-
-Socket.debug = false;
-
 Socket.initFunc = null;
-
-$.get('../../config.json', 'json', (obj) => {
-    Socket.port = obj.socket.port;
-    Socket.debug = obj.debug;
-    BOARD.server = obj;
-    const { hostname } = window.location;
-    Socket.url = 'ws://' + hostname + ':' + Socket.port + '/';
-    Socket.IPAddress = hostname;
-}).fail(function () {
-    console.log('无法加载config.json文件');
-});
-
-try {
-    console.log()
-} catch (e) {
-    console.log(e);
-}
+Socket.port = SOFTWARE.webSocket.port;
+Socket.debug = SOFTWARE.debug;
+BOARD.server = { ...SOFTWARE.webSocket };
+const { hostname } = window.location;
+Socket.url = SOFTWARE.webSocket.protocol + '//' + hostname + ':' + Socket.port + '/';
+Socket.IPAddress = hostname;
 
 Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     if (Socket.connected) {

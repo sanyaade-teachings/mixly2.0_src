@@ -156,7 +156,7 @@
         "env": {
             "electron": true,
             "web": false,
-            "webCompiler": false,
+            "webCompiler": true,
             "webSocket": true
         }
     },{

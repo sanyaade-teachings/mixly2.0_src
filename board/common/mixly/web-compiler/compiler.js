@@ -60,6 +60,7 @@ Compiler.upload = async () => {
     BU.uploading = true;
     const board = Boards.getSelectedBoardCommandParam();
     const boardParam = board.split(':');
+    const portName = 'web-serial';
     if (boardParam[1] === 'avr') {
         let boardUpload;
         switch (boardParam[2]) {
@@ -77,14 +78,16 @@ Compiler.upload = async () => {
                 boardUpload = 'proMini';
                 break;
         }
-        try {
-            await AvrUploader.connect(boardUpload, {});
-            Compiler.generateCommand('upload', BU.uploadWithAvrUploader);
-        } catch (error) {
-            StatusBar.addValue(error.toString() + '\n');
-        }
+        Serial.portClose(portName, async () => {
+            StatusBarPort.tabChange('output');
+            try {
+                await AvrUploader.connect(boardUpload, {});
+                Compiler.generateCommand('upload', BU.uploadWithAvrUploader);
+            } catch (error) {
+                StatusBar.addValue(error.toString() + '\n');
+            }
+        });
     } else {
-        const portName = 'web-serial';
         Serial.connect(portName, 115200, async (port) => {
             if (!port) {
                 layer.msg(indexText['已取消连接'], { time: 1000 });

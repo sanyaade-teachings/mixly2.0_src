@@ -767,7 +767,7 @@ function RGB_RGB565(colour) {
     R = colour.substr(0, 2);
     G = colour.substr(2, 2);
     B = colour.substr(4, 2);
-    colour = B + G + R;
+    colour = R + G + B;
     colour = "0x" + colour;
     var RGB565_red = (colour & 0xf80000) >> 8;
     var RGB565_green = (colour & 0xfc00) >> 5;
@@ -1075,7 +1075,7 @@ Blockly.Arduino.TFT_color_rgb = function () {
     var R = Blockly.Arduino.valueToCode(this, 'R', Blockly.Arduino.ORDER_ATOMIC);
     var G = Blockly.Arduino.valueToCode(this, 'G', Blockly.Arduino.ORDER_ATOMIC);
     var B = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_ATOMIC);
-    var colour = B + "*256" + "+" + G + "*8" + "+" + R + "/8";
+    var colour = R + "*256" + "+" + G + "*8" + "+" + B + "/8";
     return [colour, Blockly.Arduino.ORDER_NONE];
 };
 

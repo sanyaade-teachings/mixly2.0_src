@@ -524,7 +524,7 @@ Blockly.Python.display_oled_use_i2c_init = function () {
     if (['mpython','mixgope'].indexOf(version)>=0){
       font = '0x700000'
     }
-    else if(['mixgo_cc','mixgo_ce'].indexOf(version)>=0){
+    else {
       font = '0x3A0000'
     }
     var code;    

@@ -12,7 +12,7 @@
             "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_CC-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32c3:mixgo_me": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_ME-0x0-V1.19.1.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_ME-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32c3:generic": {
             "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_CC-0x0-V1.19.1.bin\""

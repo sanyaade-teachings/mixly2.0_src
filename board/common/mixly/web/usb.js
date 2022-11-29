@@ -148,6 +148,9 @@ USB.write = async (type, data, dataTail) => {
     }
 }
 
+USB.setSignals = async (dtr, rts) => {
+}
+
 USB.setBaudRate = (baud) => {
     return USB.DAPLink.setSerialBaudrate(baud);
 }

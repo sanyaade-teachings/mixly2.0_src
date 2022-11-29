@@ -425,7 +425,10 @@ BU.uploadByPort = (port) => {
                     moduleInfo[name] = SELECTED_BOARD.web.lib[name].path;
                 }*/
                 portObj.busy = true;
-                ampy.put('main.py', code)
+                Serial.reset(port)
+                .then(() => {
+                    return ampy.put('main.py', code);
+                })
                 .then(() => {
                     layer.close(index);
                     layer.msg(indexText['上传成功'], { time: 1000 });

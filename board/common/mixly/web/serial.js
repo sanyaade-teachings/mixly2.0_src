@@ -1300,7 +1300,9 @@ Serial.updateDtrAndRts = function (port) {
 }
 
 Serial.reset = async function (port) {
-    /*const reset = Serial.UPLOAD_RESET;
+    const newPortObj = Serial.portsOperator[port];
+    const newSerialport = newPortObj.serialport;
+    const reset = SELECTED_BOARD?.upload?.reset;
     if (typeof reset !== 'object') return;
     let len = reset.length;
     for (var i = 0; i < len; i++) {
@@ -1314,32 +1316,12 @@ Serial.reset = async function (port) {
             if (reset[i]?.rts) {
                 rtsValue = true;
             }
-            await Serial.setDtrAndRts(port, dtrValue, rtsValue);
+            await newSerialport.setSignals(dtrValue, rtsValue);
         } else if (reset[i]?.sleep) {
             var sleepValue = parseInt(reset[i].sleep) || 100;
             await Serial.sleep(sleepValue);
         }
-    }*/
-}
-
-Serial.setDtrAndRts = function(port, dtr, rts) {
-    return new Promise((resolve, reject) => {
-        const portObj = Serial.portsOperator[port];
-        const nowSerialport = portObj.serialport;
-        console.log('dtr:' + dtr, 'rts:' + rts);
-        nowSerialport.set({
-            brk: false,
-            cts: false,
-            dsr: false,
-            dtr: dtr,
-            rts: rts
-        }, error => {
-            if (error && nowSerialport && nowSerialport.isOpen) {
-                nowSerialport.close();
-            }
-            resolve();
-        });
-    })
+    }
 }
 
 Serial.setBaudRate = (port, baud) => {

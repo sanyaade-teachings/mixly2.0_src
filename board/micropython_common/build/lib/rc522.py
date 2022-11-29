@@ -34,10 +34,12 @@ def myencode(s):
 
 def mydecode(a):
 	r = ""
-	for i in a:
-		if i > 0:
-			r = r + chr(i)
-	return r
+	if a:
+		if len(a) >=16:
+			for i in a:
+				if i > 0:
+					r = r + chr(i)
+			return " " if sum(a)==0 else r
 
 class RC522:
 	def __init__(self, drive_bus,cs_pin=None,addr=0x28):

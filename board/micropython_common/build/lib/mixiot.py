@@ -282,7 +282,7 @@ class MQTTClient:
     # Wait for a single incoming MQTT message and process it.
     def wait_msg(self):
         res = self.sock.read(1)
-        time.sleep_ms(10)
+        time.sleep_ms(50)
         self.sock.setblocking(True)
         if res is None:
             return None

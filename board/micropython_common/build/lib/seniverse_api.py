@@ -49,7 +49,7 @@ def weather_daily(key,location,days=1):
 	url="{}key={}&location={}&days={}".format(_weather_daily,key,location,days)
 	results=_urequests_api(url)[0]
 	data=[]
-	for i in range(days):
+	for i in range(len(results['daily'])):
 		data.append(results['daily'][i])
 	return tuple(data)
 
@@ -58,7 +58,7 @@ def weather_hourly(key,location,hours=1):
 	url="{}key={}&location={}&hours={}".format(_weather_hourly,key,location,hours)
 	results=_urequests_api(url)[0]
 	data=[]
-	for i in range(hours):
+	for i in range(len(results['hourly'])):
 		data.append(results['hourly'][i])
 	return tuple(data)
 
@@ -76,7 +76,7 @@ def life_suggestion(key,location,days=1):
 	url="{}key={}&location={}&days={}".format(_life_suggestion,key,location,days)
 	results=_urequests_api(url)[0]
 	data=[]
-	for i in range(days):
+	for i in range(len(results['suggestion'])):
 		data.append(results['suggestion'][i])
 	return tuple(data)
 
@@ -91,7 +91,7 @@ def air_daily(key,location,days=1):
 	url="{}key={}&location={}&days={}".format(_air_daily,key,location,days)
 	results=_urequests_api(url)[0]
 	data=[]
-	for i in range(days):
+	for i in range(len(results['daily'])):
 		data.append(results['daily'][i])
 	return tuple(data)
 
@@ -111,7 +111,7 @@ def geo_sun(key,location,days=1):
 	url="{}key={}&location={}&days={}".format(_geo_sun,key,location,days)
 	results=_urequests_api(url)[0]
 	data=[]
-	for i in range(days):
+	for i in range(len(results['sun'])):
 		data.append(results['sun'][i])
 	return tuple(data)
 	
@@ -120,7 +120,7 @@ def geo_moon(key,location,days=1):
 	url="{}key={}&location={}&days={}".format(_geo_moon,key,location,days)
 	results=_urequests_api(url)[0]
 	data=[]
-	for i in range(days):
+	for i in range(len(results['moon'])):
 		data.append(results['moon'][i])
 	return tuple(data)
 	

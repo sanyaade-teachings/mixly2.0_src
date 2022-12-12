@@ -36,7 +36,7 @@ Blockly.Blocks['ai_sensor_qrcode'] = {
             .appendField(Blockly.MIXLY_QR_CODE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_QR_CODE_ANALYSIS);        
+            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -52,6 +52,26 @@ Blockly.Blocks['ai_sensor_qrcode'] = {
         this.setOutput(true);
         this.setInputsInline(true);
          this.setTooltip(Blockly.MIXLY_AI_SENSOR_QR_CODE_TOOLTIP);
+    }
+};
+
+Blockly.Blocks['ai_sensor_qrcode_lite'] = {
+    init: function () {
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
+        this.appendValueInput('VAR')
+            .setCheck("var");               
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXLY_QR_CODE+Blockly.MIXPY_OBJECT, "qrcode"], 
+                [Blockly.MIXLY_BAR_CODE+Blockly.MIXPY_OBJECT, "barcode"], 
+                [Blockly.MIXLY_TAG+Blockly.MIXPY_OBJECT, "apriltag"]                             
+            ]), "TYPE");
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_ANALYSIS_RESULT);             
+        this.setOutput(true);
+        this.setInputsInline(true);
+         this.setTooltip();
     }
 };
 
@@ -120,7 +140,7 @@ Blockly.Blocks['ai_sensor_barcode'] = {
             .appendField(Blockly.MIXLY_BAR_CODE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_BAR_CODE_ANALYSIS);        
+            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -161,7 +181,7 @@ Blockly.Blocks['ai_sensor_tag'] = {
             .appendField(Blockly.MIXLY_TAG+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_TAG_ANALYSIS);        
+            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -203,7 +223,7 @@ Blockly.Blocks['ai_sensor_line'] = {
             .appendField(Blockly.MIXLY_LINE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_LINE_ANALYSIS);        
+            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -254,7 +274,7 @@ Blockly.Blocks['ai_sensor_circle'] = {
             .appendField(Blockly.MIXLY_CIRCLE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_CIRCLE_ANALYSIS);        
+            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -307,7 +327,7 @@ Blockly.Blocks['ai_sensor_rect'] = {
             .appendField(Blockly.MIXLY_RECT+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_RECT_ANALYSIS);        
+            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([

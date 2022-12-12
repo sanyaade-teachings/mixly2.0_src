@@ -118,6 +118,18 @@ class AI:
 		info=self.request('start',para=[["uart",tx_pin,rx_pin],restart])
 		return info[0].info1 if info else False
 
+	def find_qrcode(self):
+		info=self.request('qr')
+		return (info[0].info1,info[0].rect) if info else (None,None)
+
+	def find_barcode(self):
+		info=self.request('bar')
+		return (info[0].info1,info[0].rect) if info else (None,None)
+
+	def find_apriltag(self):
+		info=self.request('tag')
+		return (info[0].info1,info[0].rect) if info else (None,None)
+
 	def find_qrcodes(self):
 		return self.request('qr')
 

@@ -20,6 +20,14 @@ Blockly.Python.ai_sensor_qrcode = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
+Blockly.Python.ai_sensor_qrcode_lite = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
+  var type = this.getFieldValue('TYPE');
+  var code = sub+'.find_'+type+'()';
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};
+
 Blockly.Python.ai_sensor_find_qrcodes = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);

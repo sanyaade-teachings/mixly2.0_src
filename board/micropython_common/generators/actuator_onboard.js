@@ -267,3 +267,36 @@ Blockly.Python.rm_motor=function(){
     var code = "motor"+wheel+'.motion("'+ v + '",' + speed+")\n";
     return code;
 };
+
+//c3 motor onboard
+Blockly.Python.actuator_stepper_keep=function(){
+    var v = this.getFieldValue('VAR');
+    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = 'car.motor_move("'+v+'",'+ speed +")\n";
+    return code;
+};
+
+Blockly.Python.actuator_stepper_stop=function(){
+    var v = this.getFieldValue('VAR');
+    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    var code = 'car.motor_move("'+v+'"' +")\n";
+    return code;
+};
+
+Blockly.Python.actuator_dc_motor=function(){
+    var wheel = this.getFieldValue('wheel');
+    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    var v = this.getFieldValue('direction');
+    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
+    var code = "car.motor(car.MOTO_"+wheel+',"'+v+'",'+speed+")\n";
+    return code;
+};
+
+Blockly.Python.actuator_dc_motor_stop=function(){
+    var wheel = this.getFieldValue('wheel');
+    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    var v = this.getFieldValue('direction');
+    var code = "car.motor(car.MOTO_"+wheel+',"'+v+'"'+")\n";
+    return code;
+};

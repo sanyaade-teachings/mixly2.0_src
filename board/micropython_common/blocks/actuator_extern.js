@@ -219,8 +219,10 @@ Blockly.Blocks.servo_init = {
 Blockly.Blocks.servo_move = {
     init: function() {
         this.setColour(Blockly.Blocks.actuator_extern.HUE);
-        this.appendValueInput("VAR")
+        this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_SERVO)
+            .appendField(Blockly.MIXLY_PIN )
+            .setCheck(Number);
         this.appendValueInput("DEGREE", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)

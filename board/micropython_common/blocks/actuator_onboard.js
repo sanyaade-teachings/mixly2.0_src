@@ -676,3 +676,92 @@ Blockly.Blocks.rm_motor = {
       this.setInputsInline(true);
     }
 }
+
+//c3 motor onboard
+
+Blockly.Blocks.actuator_stepper_keep = {
+    init: function () {
+      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.appendDummyInput()
+          .appendField("MixGo Car")
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.blockpy_forward, "F"],
+            [Blockly.blockpy_backward, "B"],
+            [Blockly.blockpy_left, "L"],
+            [Blockly.blockpy_right, "R"]
+            ]), "VAR");
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.MIXLY_STEPPER_SET_SPEED);
+      this.appendDummyInput()
+          .appendField('%')    
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.actuator_stepper_stop = {
+    init: function () {
+        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.appendDummyInput("")
+            .appendField("MixGo Car")
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MOTOR_P, "P"],
+            [Blockly.MOTOR_N, "N"]
+            ]), "VAR");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip('');
+    }
+};
+
+Blockly.Blocks.actuator_dc_motor = {
+    init: function () {
+      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.MOTOR_DC)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLYCAR_WHEEL_LEFT, "L"],
+            [Blockly.MIXLYCAR_WHEEL_RIGHT, "R"]
+            ]), "wheel");
+      this.appendDummyInput()
+          .appendField(Blockly.MIXLY_MICROBIT_Direction)
+                  .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.CLOCKWISE, "CW"],
+            [Blockly.Msg.ANTI_CLOCKWISE, "CCW"]
+            ]), "direction");
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.MIXLY_STEPPER_SET_SPEED);
+      this.appendDummyInput()
+          .appendField('%')    
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.actuator_dc_motor_stop = {
+    init: function () {
+      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.MOTOR_DC)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLYCAR_WHEEL_LEFT, "L"],
+            [Blockly.MIXLYCAR_WHEEL_RIGHT, "R"]
+            ]), "wheel");
+      this.appendDummyInput()
+          .appendField(Blockly.MIXLY_STOP)
+                  .appendField(new Blockly.FieldDropdown([
+            [Blockly.MOTOR_P, "P"],        
+            [Blockly.MOTOR_N, "N"]            
+            ]), "direction");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}

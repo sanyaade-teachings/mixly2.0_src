@@ -13,11 +13,14 @@ Blockly.Python.servo_init = function() {
 };
 
 Blockly.Python.servo_move = function() {
-  var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_['import_servo'] = 'import servo';
+  Blockly.Python.definitions_['import_machine'] = 'import machine';
+  var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
   var value_degree = Blockly.Python.valueToCode(this, 'DEGREE', Blockly.Python.ORDER_ATOMIC);
-  var code = v+'.write_angle('+value_degree+')\n';
+  var code = 'servo.servo_write_angle('+dropdown_pin+','+value_degree+')\n';
   return code;
 };
+
 
 Blockly.Python.servo_speed_360 = function() {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);

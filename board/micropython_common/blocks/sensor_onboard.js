@@ -124,6 +124,7 @@ Blockly.Blocks.sensor_mixgocar42_button_attachInterrupt = {
     .appendField(Blockly.MIXLY_DO)
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setInputsInline(true);
     this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
 }
 };
@@ -1013,6 +1014,82 @@ Blockly.Blocks['sensor_rm_acc'] = {
         this.setInputsInline(true);
         this.setTooltip(Blockly.MIXLY_MICROBIT_JS_ACCELERATION);
         
+    }
+};
+
+//car4.2
+Blockly.Blocks['sensor_mixgocar_pin_near_line'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.TEXT_TRIM_LEFT, "[0]"], 
+                [Blockly.MIXGO_LEFT_MID, "[1]"],
+                [Blockly.MIXGO_RIGHT_MID, "[2]"],
+                [Blockly.Msg.TEXT_TRIM_RIGHT, "[3]"],
+                [Blockly.MIXLY_ALL, ""]
+                ]), "key")
+            .appendField(Blockly.MIXGO_LINE_SENSOR_VAL);
+        this.setOutput(true,Number);
+        this.setInputsInline(true);
+        var thisBlock = this;
+        this.setTooltip(function() {
+            var mode0 = Blockly.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
+            var mode1 = Blockly.MIXLY_ESP32_NEAR;
+            return mode0 + mode1
+        });
+    }
+};
+
+Blockly.Blocks['sensor_mixgocar_pin_near'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXGO_LEFT_FRONT, "[0]"], 
+                [Blockly.MIXGO_RIGHT_FRONT, "[1]"],
+                [Blockly.MIXGO_LEFT_BACK, "[3]"],
+                [Blockly.MIXGO_RIGHT_BACK, "[2]"],
+                [Blockly.MIXLY_ALL, ""]
+                ]), "key")
+            .appendField(Blockly.MIXGO_PROXIMITY_SENSOR);
+        this.setOutput(true,Number);
+        this.setInputsInline(true);
+        var thisBlock = this;
+        this.setTooltip(function() {
+            var mode0 = Blockly.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
+            var mode1 = Blockly.MIXLY_ESP32_NEAR;
+            return mode0 + mode1
+        });
+    }
+};
+
+Blockly.Blocks['sensor_mixgocar_pin_near_state_change'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_MIXGO_CAR_SENSOR_ONBOARD_CHANGE)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXLY_MIXGO_CAR_SENSOR_ONBOARD_AUTO_CHANGE, "AS"],
+                [Blockly.MIXLY_MIXGO_CAR_USE_LINE_ONLY, "LP"], 
+                [Blockly.MIXLY_MIXGO_CAR_USE_PROXIMITY_ONLY, "OA"]
+                ]), "key");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
+
+Blockly.Blocks['sensor_mixgocar_battery_left'] = {
+    init: function(){
+        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXGO_CAR_BATTERY_LEFT);
+        this.setOutput(true);
+        this.setInputsInline(true);
     }
 };
 

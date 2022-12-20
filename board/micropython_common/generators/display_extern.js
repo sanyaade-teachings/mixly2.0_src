@@ -616,7 +616,7 @@ Blockly.Python.extern_oled_scroll_string_delay = function() {
 Blockly.Python['extern_oled_clear'] = function(block) {
   Blockly.Python.definitions_['import_oled128x64'] = 'import oled128x64';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
-    var code = v + '.fill(0)\n'+'onboard_oled.show()\n';
+    var code = v + '.fill(0)\n' +v+'.show()\n';
   return code;
 };
 
@@ -644,7 +644,7 @@ Blockly.Python.extern_oled_bright_point= function() {
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
     var dropdown_stat = Blockly.Python.valueToCode(this, 'STAT', Blockly.Python.ORDER_ATOMIC);
-    var code =v + '.pixel(int(' + x + '), int(' + y + '), '+ dropdown_stat + ")\n"+'onboard_oled.show()\n';
+    var code =v + '.pixel(int(' + x + '), int(' + y + '), '+ dropdown_stat + ")\n"+v+'.show()\n';
     return code;
 }
 

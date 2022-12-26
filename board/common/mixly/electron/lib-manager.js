@@ -92,36 +92,31 @@ LibManager.getLibs = (libsDir) => {
                     libPath: nowPath
                 });
                 for (let i = 0; $xml[i]; i++) {
-                    switch ($xml[i].nodeName) {
-                        case 'SCRIPT':
-                            let { src } = $xml[i];
-                            try {
-                                src = decodeURIComponent(src.replace('file:///', ''));
-                                if (fs_extend.isfile(src)) {
-                                    src = path.relative(Env.indexPath, src);
-                                    src = src.replaceAll('\\', '/');
-                                    loadJs.push(src);
-                                }
-                            } catch (error) {
-                                console.log(error);
+                    if (['SCRIPT', 'LINK'].includes($xml[i].nodeName)) {
+                        let loader, src;
+                        if ($xml[i].nodeName == 'SCRIPT') {
+                            loader = loadJs;
+                            src = $xml[i].src;
+                        } else {
+                            loader = loadCss;
+                            src = $xml[i].href;
+                        }
+                        try {
+                            src = decodeURIComponent(src.replace('file:///', ''));
+                            const reSrcIndexDir = path.relative(Env.indexPath, src);
+                            const reSrcThirdDir = path.relative(Env.indexPath, path.resolve(nowPath, reSrcIndexDir));
+                            const srcIndexDir = path.resolve(Env.indexPath, reSrcIndexDir);
+                            const srcThirdDir = path.resolve(Env.indexPath, reSrcThirdDir);
+                            if (fs_extend.isfile(srcIndexDir)) {
+                                loader.push(reSrcIndexDir);
+                            } else if (fs_extend.isfile(srcThirdDir)) {
+                                loader.push(reSrcThirdDir);
                             }
-                            break;
-                        case "LINK":
-                            let { href } = $xml[i];
-                            try {
-                                href = decodeURIComponent(href.replace('file:///', ''));
-                                if (fs_extend.isfile(href)) {
-                                    href = path.relative(Env.indexPath, href);
-                                    href = href.replaceAll('\\', '/');
-                                    loadCss.push(href);
-                                }
-                            } catch (error) {
-                                console.log(error);
-                            }
-                            break;
-                        case "CATEGORY":
-                            thirdPartyXML.push($xml[i].outerHTML);
-                            break;
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    } else if ($xml[i].nodeName == 'CATEGORY') {
+                        thirdPartyXML.push($xml[i].outerHTML);
                     }
                 }
             }

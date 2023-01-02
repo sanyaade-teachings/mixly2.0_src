@@ -164,6 +164,9 @@ LibManager.convertLibs = (libsDir) => {
         const blockList = fs.readdirSync(blocksDir);
         for (let block of blockList) {
             const blockPath = path.resolve(blocksDir, './' + block);
+            if (fs_extend.isdir(blockPath)) {
+                continue;
+            }
             let blockData = fs.readFileSync(blockPath, 'utf8');
             try {
                 blockData = blockData.replace(/\.\.\/\.\.\/media\//g, "./libraries/ThirdParty/" + libName + "/media/");

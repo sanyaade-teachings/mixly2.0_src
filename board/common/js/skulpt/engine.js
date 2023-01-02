@@ -68,7 +68,7 @@ PyEngine.prototype.loadEngine = function() {
     Sk.domOutput = function(html) {
         const _this = this;
         this.layerNum = Mixly.LayerExt.open({
-            title: ['显示', '30px'],
+            title: [indexText['显示'], '30px'],
             shade: 0,
             offset: 'rt',
             area: _this?.layerSize?.layero ?? ['50%', '70%'],
@@ -528,7 +528,7 @@ PyEngine.prototype.run = function(type) {
     if (showSkulptImg && !this.layerNum) {
         const _this = this;
         this.layerNum = Mixly.LayerExt.open({
-            title: ['显示', '30px'],
+            title: [indexText['显示'], '30px'],
             shade: 0,
             offset: 'rt',
             area: _this?.layerSize?.layero ?? ['50%', '70%'],

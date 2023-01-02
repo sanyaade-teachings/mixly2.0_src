@@ -472,7 +472,7 @@ PyEngine.prototype.steprun = function(type) {
     if (ifpgzrun || ifbg_nonehl) {
         const _this = this;
         this.layerNum = Mixly.LayerExt.open({
-            title: ['显示', '30px'],
+            title: [indexText['显示'], '30px'],
             shade: 0,
             offset: 'rt',
             area: _this?.layerSize?.layero ?? ['50%', '70%'],
@@ -748,7 +748,7 @@ PyEngine.prototype.steprun = function(type) {
     if (ifpgzrun || ifbg_nonehl) {
         const _this = this;
         this.layerNum = Mixly.LayerExt.open({
-            title: ['显示', '30px'],
+            title: [indexText['显示'], '30px'],
             shade: 0,
             offset: 'rt',
             area: _this?.layerSize?.layero ?? ['50%', '70%'],

@@ -64,6 +64,27 @@ PyEngine.prototype.loadEngine = function() {
     
     // Keeps track of the tracing while the program is executing; destroyed afterwards.
     this.executionBuffer = {};
+
+    Sk.domOutput = function(html) {
+        const _this = this;
+        this.layerNum = Mixly.LayerExt.open({
+            title: ['显示', '30px'],
+            shade: 0,
+            offset: 'rt',
+            area: _this?.layerSize?.layero ?? ['50%', '70%'],
+            max: [$('body').width() + 'px', $('body').height() + 'px'],
+            fixed: false,
+            content: $('#skulpt-img'),
+            resizing: function(size) {
+                _this.layerSize = size;
+            },
+            end: function() {
+                _this.layerNum = null;
+                pyengine.kill();
+            }
+        });
+        return $('#output_img').append(html).children().last();
+    };
 }
 
 /**

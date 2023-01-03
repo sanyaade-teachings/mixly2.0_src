@@ -554,3 +554,17 @@ Blockly.Blocks.Arduinojson = {
         this.setHelpUrl("https://arduinojson.org/v5/assistant/");
     }
 };
+
+//字符串转长整数
+Blockly.Blocks['String_to_Long_Integer'] = {
+  init: function() {
+    this.appendValueInput("data")
+        .setCheck(null)
+        .appendField(Blockly.MIXLY_MICROBIT_TYPE_STRING+Blockly.Msg.A_TO_B+Blockly.LANG_MATH_LONG)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX,"16"], [Blockly.Msg.MATH_DEC,"10"], [Blockly.Msg.MATH_OCT,"8"], ["Blockly.Msg.MATH_BIN","2"], [Blockly.blynk_IOT_AUTO,"0"]]), "type");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.texts.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("https://blog.csdn.net/lizhengze1117/article/details/103318662?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-10.base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-10.base");
+  }
+};

@@ -144,3 +144,11 @@ Blockly.Arduino.text_join2 = function () {
     code1 = code1.substring(3);
     return [code1, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//字符串转长整数
+Blockly.Arduino.String_to_Long_Integer = function() {
+    var data= Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
+    var type= this.getFieldValue('type');
+    var code = 'strtol(String(' +data+ ').c_str(), NULL, ' +type+ ')';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+};

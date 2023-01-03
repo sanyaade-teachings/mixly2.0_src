@@ -561,7 +561,7 @@ Blockly.Blocks['String_to_Long_Integer'] = {
     this.appendValueInput("data")
         .setCheck(null)
         .appendField(Blockly.MIXLY_MICROBIT_TYPE_STRING+Blockly.Msg.A_TO_B+Blockly.LANG_MATH_LONG)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX,"16"], [Blockly.Msg.MATH_DEC,"10"], [Blockly.Msg.MATH_OCT,"8"], ["Blockly.Msg.MATH_BIN","2"], [Blockly.blynk_IOT_AUTO,"0"]]), "type");
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX,"16"], [Blockly.Msg.MATH_DEC,"10"], [Blockly.Msg.MATH_OCT,"8"], [Blockly.Msg.MATH_BIN,"2"], [Blockly.blynk_IOT_AUTO,"0"]]), "type");
     this.setOutput(true, null);
     this.setColour(Blockly.Blocks.texts.HUE);
  this.setTooltip("");

@@ -4,7 +4,7 @@ goog.provide('Blockly.Blocks.variables');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['VARIABLES_HUE'] = 330;
+Blockly.Blocks.variables.HUE = 330;
 var DATATYPES =
     [[Blockly.LANG_MATH_INT, 'int'],
     [Blockly.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
@@ -28,7 +28,7 @@ var DATATYPES =
 Blockly.Blocks['variables_declare'] = {
     // Variable setter.
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         this.appendValueInput('VALUE', null)
             .appendField(Blockly.MIXLY_DECLARE)
             .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GLOBAL_VARIABLE, "global_variate"], [Blockly.MIXLY_LOCAL_VARIABLE, "local_variate"]]), "variables_type")
@@ -53,7 +53,7 @@ Blockly.Blocks['variables_declare'] = {
 
 Blockly.Blocks['variables_get'] = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
         this.setOutput(true);
@@ -79,7 +79,7 @@ Blockly.Blocks['variables_get'] = {
 
 Blockly.Blocks['variables_set'] = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         this.appendValueInput('VALUE')
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
             .appendField(Blockly.MIXLY_VALUE2);
@@ -106,7 +106,7 @@ Blockly.Blocks['variables_set'] = {
 };
 Blockly.Blocks['variables_set'] = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         this.appendValueInput('VALUE')
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
             .appendField(Blockly.MIXLY_VALUE2);
@@ -129,7 +129,7 @@ Blockly.Blocks['variables_set'] = {
   */
 Blockly.Blocks['variables_change'] = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         var DATATYPES =
             [[Blockly.LANG_MATH_INT, 'int'],
             [Blockly.LANG_MATH_UNSIGNED_INT, 'unsigned int'],

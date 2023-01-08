@@ -5,12 +5,12 @@ goog.provide('Blockly.Blocks.system');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['SYSTEM_HUE'] = 120;
+Blockly.Blocks.system.HUE = 120;
 
 
 Blockly.Blocks.base_delay = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendValueInput("DELAY_TIME", Number)
         .appendField(Blockly.MIXLY_DELAY + '(' + Blockly.MIXLY_MILLIS + ')')
         .setCheck(Number);
@@ -25,7 +25,7 @@ Blockly.Blocks.base_delay = {
 
 Blockly.Blocks.controls_millis = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendDummyInput()
 	    .appendField(Blockly.blockpy_time_time);
     this.setOutput(true, Number);
@@ -35,7 +35,7 @@ Blockly.Blocks.controls_millis = {
 
 Blockly.Blocks['time_localtime'] = {
     init: function() {
-        this.setColour(Blockly.Msg['SYSTEM_HUE']);        
+        this.setColour(Blockly.Blocks.system.HUE);        
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_SYSTEM_TIME_LOCALTIME)
         this.appendDummyInput()
@@ -58,7 +58,7 @@ Blockly.Blocks['time_localtime'] = {
 
 Blockly.Blocks.Panic_with_status_code = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendValueInput("STATUS_CODE", Number)
         .appendField(Blockly.MIXLY_MICROBIT_Panic_with_status_code)
         .setCheck(Number);
@@ -71,7 +71,7 @@ Blockly.Blocks.Panic_with_status_code = {
 
 Blockly.Blocks.reset = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendDummyInput()
       .appendField(Blockly.MIXLY_MICROBIT_Reset_micro);
     this.setPreviousStatement(true);
@@ -83,7 +83,7 @@ Blockly.Blocks.reset = {
 
 Blockly.Blocks.controls_mstimer2 = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
 	this.appendValueInput('TIME')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -100,7 +100,7 @@ Blockly.Blocks.controls_mstimer2 = {
 
 Blockly.Blocks.controls_mstimer2_start = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendDummyInput()
 		.appendField('MsTimer2')
 		.appendField(Blockly.MIXLY_MSTIMER2_START);
@@ -111,7 +111,7 @@ Blockly.Blocks.controls_mstimer2_start = {
 
 Blockly.Blocks.controls_mstimer2_stop = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendDummyInput()
 		.appendField('MsTimer2')
 		.appendField(Blockly.MIXLY_STOP);
@@ -123,7 +123,7 @@ Blockly.Blocks.controls_mstimer2_stop = {
 
 Blockly.Blocks.time_sleep = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendValueInput("DELAY_TIME", Number)
         .appendField(Blockly.MIXLY_DELAY)        
         .setCheck(Number);

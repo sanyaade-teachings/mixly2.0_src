@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.iot');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['IOT_HUE'] = '#526FC3';
+Blockly.Blocks.iot.HUE = '#526FC3';
 //'#2FAD7A';
 
 Blockly.Blocks['iot_wifi_connect'] = {
    init: function() {
-    this.setColour(Blockly.Msg['NETWORK_HUE']);
+    this.setColour(Blockly.Blocks.network.HUE);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_ESP32_IOT_CONNECT_WIFI);
     this.appendValueInput('WIFINAME')
@@ -257,7 +257,7 @@ Blockly.Blocks['iot_publish_container'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_TYPE_DICT);
     this.appendStatementInput('STACK');
@@ -273,7 +273,7 @@ Blockly.Blocks['iot_publish_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -289,7 +289,7 @@ Blockly.Blocks['iot_create_with_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -302,7 +302,7 @@ Blockly.Blocks['iot_create_with_item'] = {
 
 Blockly.Blocks['iot_mixio_connect'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_CREATE_MQTT_CLIENT_AND_CONNECT);
     this.appendValueInput('SERVER')
@@ -328,7 +328,7 @@ Blockly.Blocks['iot_mixio_connect'] = {
 
 Blockly.Blocks['IOT_MIXIO_PUBLISH'] = {
     init: function () {
-        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.setColour(Blockly.Blocks.iot.HUE);
         this.appendDummyInput()
             .appendField("MixIO")
         this.appendValueInput('TOPIC')
@@ -345,7 +345,7 @@ Blockly.Blocks['IOT_MIXIO_PUBLISH'] = {
 
 Blockly.Blocks["IOT_MIXIO_SUBSCRIBE"] = {
     init: function () {
-        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.setColour(Blockly.Blocks.iot.HUE);
         this.appendDummyInput()
             .appendField("MixIO")
         this.appendValueInput('TOPIC')
@@ -361,7 +361,7 @@ Blockly.Blocks["IOT_MIXIO_SUBSCRIBE"] = {
 
 Blockly.Blocks['iot_mixio_disconnect'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField("MixIO")
     this.appendDummyInput()
@@ -375,7 +375,7 @@ Blockly.Blocks['iot_mixio_disconnect'] = {
 
 Blockly.Blocks['iot_mixio_connect_only'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField("MixIO")
     this.appendDummyInput()
@@ -389,7 +389,7 @@ Blockly.Blocks['iot_mixio_connect_only'] = {
 
 Blockly.Blocks['iot_mixio_check'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField("MixIO")
     this.appendDummyInput()
@@ -403,7 +403,7 @@ Blockly.Blocks['iot_mixio_check'] = {
 
 Blockly.Blocks['iot_mixio_format_topic'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROPYTHON_FORMAT)
         .appendField(Blockly.MQTT_Topic);
@@ -414,7 +414,7 @@ Blockly.Blocks['iot_mixio_format_topic'] = {
 
 Blockly.Blocks['iot_mixio_format_msg'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROPYTHON_FORMAT)
         .appendField(Blockly.MIXLY_EMQX_PUBLISH_MSG);
@@ -425,7 +425,7 @@ Blockly.Blocks['iot_mixio_format_msg'] = {
 
 Blockly.Blocks['IOT_FORMATTING'] = {
   init: function () {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendValueInput('VAR')
         .appendField(Blockly.MIXLY_ESP32_IOT_MAP_FORMATING);
     this.setOutput(true);
@@ -435,7 +435,7 @@ Blockly.Blocks['IOT_FORMATTING'] = {
 
  Blockly.Blocks['IOT_FORMAT_STRING'] = {
   init: function () {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendValueInput('VAR')
         .appendField(Blockly.MIXLY_MICROPYTHON_FORMAT+'(Json)');
     this.setOutput(true);
@@ -445,7 +445,7 @@ Blockly.Blocks['IOT_FORMATTING'] = {
 
 Blockly.Blocks['IOT_EMQX_PING']={
     init: function() {
-        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.setColour(Blockly.Blocks.iot.HUE);
         // this.appendValueInput('VAR')
         //     .setCheck("var")
         this.appendDummyInput()
@@ -460,7 +460,7 @@ Blockly.Blocks['IOT_EMQX_PING']={
 
 Blockly.Blocks['IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_CREATE_MQTT_CLIENT_AND_CONNECT);
     this.appendValueInput('SERVER')
@@ -478,7 +478,7 @@ Blockly.Blocks['IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE'] = {
 
 Blockly.Blocks['IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_CREATE_MQTT_CLIENT_AND_CONNECT);
     this.appendValueInput('SERVER')
@@ -497,7 +497,7 @@ Blockly.Blocks['IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE'] = {
 Blockly.Blocks['iot_mixly_key'] = {
   init: function() {
     this.VISITOR_ID = Mixly.Config.BOARD.visitorId.str32.substring(0, 8).toUpperCase();
-    this.setColour(Blockly.Msg['FACTORY_HUE']);
+    this.setColour(Blockly.Blocks.factory.HUE);
     this.appendDummyInput("")
     .appendField(new Blockly.FieldTextInput(this.visitorId), 'VISITOR_ID');
     this.setOutput(true, null);

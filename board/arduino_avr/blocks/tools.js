@@ -2,10 +2,10 @@
 
 goog.provide('Blockly.Blocks.tools');
 goog.require('Blockly.Blocks');
-Blockly.Msg['TOOLS_HUE'] = "#555555";
+Blockly.Blocks.tools.HUE = "#555555";
 Blockly.Blocks.factory_notes = {
     init: function () {
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_CONTROL_NOTES)
             .appendField(new Blockly.FieldMultilineInput(''), 'VALUE');
@@ -16,7 +16,7 @@ Blockly.Blocks.factory_notes = {
 
 Blockly.Blocks.folding_block = {
     init: function () {
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldTextInput(Blockly.FOLDING_BLOCK), "peien");
         this.appendStatementInput('DO')
@@ -31,7 +31,7 @@ Blockly.Blocks.folding_block = {
 //IIC地址查找
 Blockly.Blocks.IICSCAN = {
     init: function () {
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.IICSCAN);
         this.setInputsInline(true);
@@ -42,7 +42,7 @@ Blockly.Blocks.IICSCAN = {
 //取模工具显示数据部分
 Blockly.Blocks.tool_modulus_show = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(Blockly.Blocks.lists.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.OLED_BITMAP_NAME)
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
@@ -105,7 +105,7 @@ Blockly.Blocks['uno_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/uno.png", 525, 372, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -114,7 +114,7 @@ Blockly.Blocks['nano_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/nano.png", 525, 368, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -123,7 +123,7 @@ Blockly.Blocks['mega_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/mega.png", 525, 736, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -132,7 +132,7 @@ Blockly.Blocks['promini_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/ProMini.png", 525, 371, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -141,7 +141,7 @@ Blockly.Blocks['leonardo_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/leonardo.png", 525, 371, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -151,7 +151,7 @@ Blockly.Blocks['esp32s2_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP32s2.jpg", 525, 376, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -161,7 +161,7 @@ Blockly.Blocks['esp32c3_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP32c3.jpg", 525, 376, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -171,7 +171,7 @@ Blockly.Blocks['core_esp32c3_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/core_esp32c3_pin.png", 500, 376, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -181,7 +181,7 @@ Blockly.Blocks['esp8266_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP8266-NodeMCU.png", 525, 346, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -191,7 +191,7 @@ Blockly.Blocks['wemos_d1_mini_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP8266-WeMos-D1-Mini.png", 525, 264, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl();
     }
@@ -201,7 +201,7 @@ Blockly.Blocks['stm32f103c8t6_pin'] = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../common/media/board_pin/STM32F103C8T6.png", 525, 376, "*"));
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip();
         this.setHelpUrl("https://blog.csdn.net/xatsoft/article/details/90687016?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.nonecase");
     }
@@ -231,7 +231,7 @@ Blockly.Blocks['get_the_number_of_days_between_the_two_dates'] = {
             .setCheck(null)
             .appendField(Blockly.END + Blockly.MIXLY_GPS_DATE_DAY);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip("");
         this.setHelpUrl("https://blog.csdn.net/a_ran/article/details/43601699?utm_source=distribute.pc_relevant.none-task");
     }
@@ -260,7 +260,7 @@ Blockly.Blocks['esp8266_board_pin'] = {
             .appendField("ESP8266 GPIO")
             .appendField(new Blockly.FieldDropdown(esp8266_board_pin), "pin");
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setColour(Blockly.Blocks.tools.HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

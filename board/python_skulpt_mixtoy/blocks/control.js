@@ -5,11 +5,11 @@ goog.provide('Blockly.Blocks.loops');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['LOOPS_HUE'] = 120;
+Blockly.Blocks.loops.HUE = 120;
 
 Blockly.Blocks.controls_main = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_PYTHON_NAME_MAIN);
     this.appendStatementInput('DO')
@@ -20,7 +20,7 @@ Blockly.Blocks.controls_main = {
 
 Blockly.Blocks.base_setup = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
 	    .appendField(Blockly.MIXLY_SETUP);
 	this.appendStatementInput('DO')
@@ -32,7 +32,7 @@ Blockly.Blocks.base_setup = {
 
 Blockly.Blocks.controls_end_program = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
 	      .appendField(Blockly.MIXLY_CONTROL_END_PROGRAM);
 	  this.setPreviousStatement(true);
@@ -47,7 +47,7 @@ Blockly.Blocks['controls_if'] = {
    */
    init: function() {
     //this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('IF0')
     .setCheck([Boolean,Number])
     .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
@@ -316,7 +316,7 @@ Blockly.Blocks['controls_if'] = {
 
 Blockly.Blocks.controls_range = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('FROM')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -339,7 +339,7 @@ Blockly.Blocks.controls_range = {
 
 Blockly.Blocks.controls_forEach = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('LIST')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.CONTROLS_FOREACH_INPUT);
@@ -369,7 +369,7 @@ Blockly.Blocks.controls_forEach = {
 
 Blockly.Blocks.controls_whileUntil = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
         .setCheck([Boolean,Number])
         .appendField(Blockly.MIXLY_MICROBIT_JS_CURRENT)
@@ -398,7 +398,7 @@ Blockly.Blocks['controls_try_finally'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_PYTHON_TRY);
     this.appendStatementInput('try');
@@ -653,7 +653,7 @@ Blockly.Blocks['controls_try_finally'] = {
 
 Blockly.Blocks.controls_flow_statements = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendDummyInput()
         .appendField(dropdown, 'FLOW')
@@ -701,7 +701,7 @@ Blockly.Blocks.controls_flow_statements = {
 
 Blockly.Blocks.controls_for = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.LANG_CONTROLS_FOR_INPUT_WITH)
         .appendField(new Blockly.FieldTextInput('i'), 'VAR');
@@ -740,7 +740,7 @@ Blockly.Blocks.controls_for = {
 
 Blockly.Blocks.controls_for_range = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.LANG_CONTROLS_FOR_INPUT_WITH)
         .appendField(new Blockly.FieldTextInput('i'), 'VAR');
@@ -796,7 +796,7 @@ Blockly.Blocks['controls_if_if'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.CONTROLS_IF_IF_TITLE_IF);
     this.appendStatementInput('STACK');
@@ -811,7 +811,7 @@ Blockly.Blocks['controls_if_elseif'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
     this.setPreviousStatement(true);
@@ -827,7 +827,7 @@ Blockly.Blocks['controls_if_else'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.CONTROLS_IF_ELSE_TITLE_ELSE);
     this.setPreviousStatement(true);
@@ -844,7 +844,7 @@ Blockly.Blocks['controls_try'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField('try');
     this.appendStatementInput('STACK');
@@ -860,7 +860,7 @@ Blockly.Blocks['controls_except'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_PYTHON_EXCEPT);
     this.setPreviousStatement(true);
@@ -876,7 +876,7 @@ Blockly.Blocks['controls_finally'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_PYTHON_FINALLY);
     this.setPreviousStatement(true);
@@ -904,7 +904,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "colour": Blockly.Msg['LOOPS_HUE'],
+      "colour": Blockly.Blocks.loops.HUE,
       "tooltip": Blockly.Msg.CONTROLS_REPEAT_TOOLTIP,
       "helpUrl": Blockly.Msg.CONTROLS_REPEAT_HELPURL
     });
@@ -916,7 +916,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
 
 Blockly.Blocks.controls_lambda = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
         .appendField('lambda')
         //.appendField(new Blockly.FieldDropdown(this.OPERATORS), 'MODE');
@@ -929,7 +929,7 @@ Blockly.Blocks.controls_lambda = {
 
 Blockly.Blocks.controls_pass = {
   init: function() {
-    this.setColour(Blockly.Msg['LOOPS_HUE']);
+    this.setColour(Blockly.Blocks.loops.HUE);
     this.appendDummyInput()
       .appendField(Blockly.MIXLY_PYTHON_PASS);
   this.setPreviousStatement(true);
@@ -940,7 +940,7 @@ Blockly.Blocks.controls_pass = {
 
 Blockly.Blocks.controls_thread = {
   init: function() {
-    this.setColour(Blockly.Msg['SYSTEM_HUE']);
+    this.setColour(Blockly.Blocks.system.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_PYTHON_CONTROLS_THREAD_START)
     this.appendValueInput('callback')

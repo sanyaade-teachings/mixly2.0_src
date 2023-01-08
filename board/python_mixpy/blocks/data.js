@@ -5,12 +5,12 @@ goog.provide('Blockly.Blocks.data');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['DATA_HUE'] = 170//'#5ec73d'//195;
+Blockly.Blocks.data.HUE = 170//'#5ec73d'//195;
 
 
 Blockly.Blocks['series_create'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
   this.appendDummyInput("")
   
       .appendField(Blockly.blockpy_series_create)
@@ -35,7 +35,7 @@ Blockly.Blocks['series_create'] = {
 
 Blockly.Blocks['series_create_from_index'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput("")
   
       .appendField(Blockly.blockpy_series_create)
@@ -63,7 +63,7 @@ Blockly.Blocks['series_create_from_index'] = {
 
 Blockly.Blocks['dataframe_create'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
   this.appendDummyInput("")
   
       .appendField(Blockly.blockpy_dataframe_create)
@@ -88,7 +88,7 @@ Blockly.Blocks['dataframe_create'] = {
 
 Blockly.Blocks['dataframe_create_from_one_index'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var column_raw =
         [[Blockly.Msg.DATAFRAME_RAW, 'index'],[Blockly.Msg.DATAFRAME_COLUMN, 'columns']];
     this.appendDummyInput("")  
@@ -119,7 +119,7 @@ Blockly.Blocks['dataframe_create_from_one_index'] = {
 
 Blockly.Blocks['dataframe_create_from_index'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput("")
   
       .appendField(Blockly.blockpy_dataframe_create)
@@ -152,7 +152,7 @@ Blockly.Blocks['dataframe_create_from_index'] = {
 
 Blockly.Blocks['series_create_from_text'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput("")
   
         .appendField(new Blockly.FieldTextInput('ser1'), 'VAR')
@@ -183,7 +183,7 @@ Blockly.Blocks['series_index_value'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var index_value =
         [[Blockly.Msg.SERIES_INDEX, 'index'],[Blockly.Msg.HTML_VALUE, 'value']];
     this.appendValueInput('SERIES')
@@ -208,7 +208,7 @@ Blockly.Blocks['series_index_value'] = {
 
 Blockly.Blocks.series_get_num = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     //this.setOutput(true, Number);
     this.setOutput(true);
     this.appendValueInput('SER')
@@ -226,7 +226,7 @@ Blockly.Blocks.series_get_num = {
 
 Blockly.Blocks['pl_plot_easy'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']); 
+    this.setColour(Blockly.Blocks.data.HUE); 
     this.appendValueInput('SER')
         .setCheck('Series')
         .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE);   
@@ -240,7 +240,7 @@ Blockly.Blocks['pl_plot_easy'] = {
 
 Blockly.Blocks['pl_plot'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']); 
+    this.setColour(Blockly.Blocks.data.HUE); 
     var line_type =
         [[Blockly.blockpy_PYLAB_PLOT_LINE_SOLID, '-'],[Blockly.blockpy_PYLAB_PLOT_LINE_DOTTED, '--'],
         [Blockly.blockpy_PYLAB_PLOT_LINE_CHAIN, '-.'],[Blockly.blockpy_PYLAB_PLOT_LINE_POINT_DOTTED, ':']
@@ -282,7 +282,7 @@ Blockly.Blocks['pl_plot'] = {
 
 Blockly.Blocks['pl_show'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput()
           .appendField(Blockly.blockpy_PYLAB_SHOW);
     this.setInputsInline(true);
@@ -293,7 +293,7 @@ Blockly.Blocks['pl_show'] = {
 
 Blockly.Blocks['pl_axes'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput()
           .appendField(Blockly.mixpy_PL_AXES);
     this.setInputsInline(true);
@@ -305,7 +305,7 @@ Blockly.Blocks['pl_axes'] = {
 
 Blockly.Blocks['pl_legend'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput()
           .appendField(Blockly.blockpy_PYLAB_LEGEND);
     this.setInputsInline(true);
@@ -316,7 +316,7 @@ Blockly.Blocks['pl_legend'] = {
 
 Blockly.Blocks['pl_title'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);    
+    this.setColour(Blockly.Blocks.data.HUE);    
     this.appendDummyInput()
         .appendField(Blockly.blockpy_PYLAB_TITLE);
     this.appendValueInput('TITLE')
@@ -329,7 +329,7 @@ Blockly.Blocks['pl_title'] = {
 
 Blockly.Blocks['pl_label'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']); 
+    this.setColour(Blockly.Blocks.data.HUE); 
     var xylabel =
         [[Blockly.Msg.PYLAB_LABEL_X, 'x'],[Blockly.Msg.PYLAB_LABEL_Y, 'y']];   
     this.appendDummyInput()
@@ -356,7 +356,7 @@ Blockly.Blocks['pl_label'] = {
 
 Blockly.Blocks.array_create = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendValueInput('FROM')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -378,7 +378,7 @@ Blockly.Blocks.array_create = {
 
 Blockly.Blocks['pl_plot_bar'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var plot_bar =
         [[Blockly.mixpy_PYLAB_PLOT_BAR_PLOT, 'plot'],[Blockly.mixpy_PYLAB_PLOT_BAR_BAR, 'bar']];  
     this.appendDummyInput()
@@ -405,7 +405,7 @@ Blockly.Blocks['pl_plot_bar'] = {
 
 Blockly.Blocks['pl_plot_scatter'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var line_type =
         [[Blockly.blockpy_PYLAB_PLOT_LINE_SOLID, '-'],[Blockly.blockpy_PYLAB_PLOT_LINE_DOTTED, '--'],
         [Blockly.blockpy_PYLAB_PLOT_LINE_CHAIN, '-.'],[Blockly.blockpy_PYLAB_PLOT_LINE_POINT_DOTTED, ':']
@@ -449,7 +449,7 @@ Blockly.Blocks['pl_plot_scatter'] = {
 
 Blockly.Blocks['pl_plot_xy'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var line_type =
         [[Blockly.blockpy_PYLAB_PLOT_LINE_SOLID, '-'],[Blockly.blockpy_PYLAB_PLOT_LINE_DOTTED, '--'],
         [Blockly.blockpy_PYLAB_PLOT_LINE_CHAIN, '-.'],[Blockly.blockpy_PYLAB_PLOT_LINE_POINT_DOTTED, ':']
@@ -494,7 +494,7 @@ Blockly.Blocks['pl_plot_xy'] = {
 
 Blockly.Blocks['pl_bar'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var align =
         [[Blockly.MIXLY_TURTLE_WRITE_ALIGN_CENTER, 'center'],[Blockly.Msg.AILGN_EDGE, 'edge']];    
     this.appendValueInput('A')
@@ -523,7 +523,7 @@ Blockly.Blocks['pl_bar'] = {
 
 Blockly.Blocks['pl_pie'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var shadow =
         [[Blockly.mixpy_PL_PIE_SHADOW_N, 'False'],[Blockly.mixpy_PL_PIE_SHADOW_Y, 'True']]; 
     var autopct =
@@ -551,7 +551,7 @@ Blockly.Blocks['pl_pie'] = {
 
 Blockly.Blocks['pl_hist'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);      
+    this.setColour(Blockly.Blocks.data.HUE);      
     this.appendValueInput('A')        
         .appendField(Blockly.mixpy_PYLAB_HIST)
         .appendField(Blockly.MIXLY_SD_DATA);
@@ -566,7 +566,7 @@ Blockly.Blocks['pl_hist'] = {
 
 Blockly.Blocks['pl_ticks'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var xylabel =
         [[Blockly.Msg.PYLAB_LABEL_X, 'x'],[Blockly.Msg.PYLAB_LABEL_Y, 'y']]; 
     this.appendDummyInput()
@@ -602,7 +602,7 @@ Blockly.Blocks['numpy_trig'] = {
          [Blockly.LANG_MATH_TO_CEIL, 'ceil'],
          [Blockly.LANG_MATH_TO_FLOOR, 'floor']
         ];
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.setOutput(true);
     this.setInputsInline(true);
     this.appendDummyInput()
@@ -617,7 +617,7 @@ Blockly.Blocks['numpy_trig'] = {
 
 Blockly.Blocks.pl_subplot = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendValueInput('VET')
         .setCheck(Number)
         .appendField(Blockly.mixpy_SUBPLOT)
@@ -637,7 +637,7 @@ Blockly.Blocks.pl_subplot = {
 
 Blockly.Blocks.pandas_readcsv = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendValueInput("FILENAME")
         .appendField(Blockly.MIXPY_PANDAS_READ_CSV);
     this.appendDummyInput()
@@ -660,7 +660,7 @@ Blockly.Blocks.pandas_readcsv = {
 
 Blockly.Blocks['dataframe_get'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')    
     this.appendValueInput('KEY')
@@ -676,7 +676,7 @@ Blockly.Blocks['dataframe_get'] = {
 
  Blockly.Blocks['pl_savefig'] = {
    init: function() {
-     this.setColour(Blockly.Msg['DATA_HUE']);
+     this.setColour(Blockly.Blocks.data.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.mixpy_PL_SAVEFIG);
@@ -690,7 +690,7 @@ Blockly.Blocks['dataframe_get'] = {
 
  Blockly.Blocks.pl_text = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var halign =
         [[Blockly.Msg.TEXT_TRIM_LEFT, 'right'],[Blockly.mixpy_PL_TEXT_CENTER, 'center'],[Blockly.Msg.TEXT_TRIM_RIGHT, 'left']];    
     var valign =
@@ -723,7 +723,7 @@ Blockly.Blocks['dataframe_get'] = {
 
 Blockly.Blocks['array_toarray'] = {
   init: function () {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TOARRAY);
     this.setOutput(true, 'List');
@@ -739,7 +739,7 @@ Blockly.Blocks['array_toarray'] = {
 
 Blockly.Blocks['plot_plot_easy'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']); 
+    this.setColour(Blockly.Blocks.data.HUE); 
     this.appendValueInput('SER')
         .setCheck('Series')
         .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE);   
@@ -753,7 +753,7 @@ Blockly.Blocks['plot_plot_easy'] = {
 
 Blockly.Blocks['plot_plot'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']); 
+    this.setColour(Blockly.Blocks.data.HUE); 
     var line_type =
         [[Blockly.blockpy_PYLAB_PLOT_LINE_SOLID, '-'],[Blockly.blockpy_PYLAB_PLOT_LINE_DOTTED, '--'],
         [Blockly.blockpy_PYLAB_PLOT_LINE_CHAIN, '-.'],[Blockly.blockpy_PYLAB_PLOT_LINE_POINT_DOTTED, ':']
@@ -795,7 +795,7 @@ Blockly.Blocks['plot_plot'] = {
 
 Blockly.Blocks['plot_show'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput()
           .appendField(Blockly.blockpy_PYLAB_SHOW);
     this.setInputsInline(true);
@@ -806,7 +806,7 @@ Blockly.Blocks['plot_show'] = {
 
 Blockly.Blocks['plot_axes'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput()
           .appendField(Blockly.mixpy_PL_AXES);
     this.setInputsInline(true);
@@ -818,7 +818,7 @@ Blockly.Blocks['plot_axes'] = {
 
 Blockly.Blocks['plot_legend'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendDummyInput()
           .appendField(Blockly.blockpy_PYLAB_LEGEND);
     this.setInputsInline(true);
@@ -829,7 +829,7 @@ Blockly.Blocks['plot_legend'] = {
 
 Blockly.Blocks['plot_title'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);    
+    this.setColour(Blockly.Blocks.data.HUE);    
     this.appendDummyInput()
         .appendField(Blockly.blockpy_PYLAB_TITLE);
     this.appendValueInput('TITLE')
@@ -842,7 +842,7 @@ Blockly.Blocks['plot_title'] = {
 
 Blockly.Blocks['plot_label'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']); 
+    this.setColour(Blockly.Blocks.data.HUE); 
     var xylabel =
         [[Blockly.Msg.PYLAB_LABEL_X, 'x'],[Blockly.Msg.PYLAB_LABEL_Y, 'y']];   
     this.appendDummyInput()
@@ -868,7 +868,7 @@ Blockly.Blocks['plot_label'] = {
 
 Blockly.Blocks['plot_plot_bar'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var plot_bar =
         [[Blockly.mixpy_PYLAB_PLOT_BAR_PLOT, 'plot'],[Blockly.mixpy_PYLAB_PLOT_BAR_BAR, 'bar']];  
     this.appendDummyInput()
@@ -895,7 +895,7 @@ Blockly.Blocks['plot_plot_bar'] = {
 
 Blockly.Blocks['plot_plot_scatter'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var line_type =
         [[Blockly.blockpy_PYLAB_PLOT_LINE_SOLID, '-'],[Blockly.blockpy_PYLAB_PLOT_LINE_DOTTED, '--'],
         [Blockly.blockpy_PYLAB_PLOT_LINE_CHAIN, '-.'],[Blockly.blockpy_PYLAB_PLOT_LINE_POINT_DOTTED, ':']
@@ -939,7 +939,7 @@ Blockly.Blocks['plot_plot_scatter'] = {
 
 Blockly.Blocks['plot_plot_xy'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var line_type =
         [[Blockly.blockpy_PYLAB_PLOT_LINE_SOLID, '-'],[Blockly.blockpy_PYLAB_PLOT_LINE_DOTTED, '--'],
         [Blockly.blockpy_PYLAB_PLOT_LINE_CHAIN, '-.'],[Blockly.blockpy_PYLAB_PLOT_LINE_POINT_DOTTED, ':']
@@ -984,7 +984,7 @@ Blockly.Blocks['plot_plot_xy'] = {
 
 Blockly.Blocks['plot_bar'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var align =
         [[Blockly.MIXLY_TURTLE_WRITE_ALIGN_CENTER, 'center'],[Blockly.Msg.AILGN_EDGE, 'edge']];    
     this.appendValueInput('A')
@@ -1013,7 +1013,7 @@ Blockly.Blocks['plot_bar'] = {
 
 Blockly.Blocks['plot_pie'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var shadow =
         [[Blockly.mixpy_PL_PIE_SHADOW_N, 'False'],[Blockly.mixpy_PL_PIE_SHADOW_Y, 'True']]; 
     var autopct =
@@ -1041,7 +1041,7 @@ Blockly.Blocks['plot_pie'] = {
 
 Blockly.Blocks['plot_hist'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);      
+    this.setColour(Blockly.Blocks.data.HUE);      
     this.appendValueInput('A')        
         .appendField(Blockly.mixpy_PYLAB_HIST)
         .appendField(Blockly.MIXLY_SD_DATA);
@@ -1056,7 +1056,7 @@ Blockly.Blocks['plot_hist'] = {
 
 Blockly.Blocks['plot_ticks'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var xylabel =
         [[Blockly.Msg.PYLAB_LABEL_X, 'x'],[Blockly.Msg.PYLAB_LABEL_Y, 'y']]; 
     this.appendDummyInput()
@@ -1076,7 +1076,7 @@ Blockly.Blocks['plot_ticks'] = {
 
 Blockly.Blocks.plot_subplot = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     this.appendValueInput('VET')
         .setCheck(Number)
         .appendField(Blockly.mixpy_SUBPLOT)
@@ -1096,7 +1096,7 @@ Blockly.Blocks.plot_subplot = {
 
 Blockly.Blocks['plot_savefig'] = {
    init: function() {
-     this.setColour(Blockly.Msg['DATA_HUE']);
+     this.setColour(Blockly.Blocks.data.HUE);
      this.appendDummyInput("")
          .appendField(Blockly.mixpy_PL_SAVEFIG);
      this.setInputsInline(true);
@@ -1109,7 +1109,7 @@ Blockly.Blocks['plot_savefig'] = {
 
  Blockly.Blocks.plot_text = {
   init: function() {
-    this.setColour(Blockly.Msg['DATA_HUE']);
+    this.setColour(Blockly.Blocks.data.HUE);
     var halign =
         [[Blockly.Msg.TEXT_TRIM_LEFT, 'right'],[Blockly.mixpy_PL_TEXT_CENTER, 'center'],[Blockly.Msg.TEXT_TRIM_RIGHT, 'left']];    
     var valign =

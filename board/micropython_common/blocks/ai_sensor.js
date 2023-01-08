@@ -4,13 +4,13 @@ goog.provide('Blockly.Blocks.ai_sensor');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['AI_SENSOR_HUE'] = '#90A244'//'#9e77c9'//40;
+Blockly.Blocks.ai_sensor.HUE = '#90A244'//'#9e77c9'//40;
 
 
 
 Blockly.Blocks.ai_sensor_use_uart_init = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"uart")
             .appendField(new Blockly.FieldDropdown([
@@ -31,7 +31,7 @@ Blockly.Blocks.ai_sensor_use_uart_init = {
 
 Blockly.Blocks['ai_sensor_qrcode'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_QR_CODE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -57,7 +57,7 @@ Blockly.Blocks['ai_sensor_qrcode'] = {
 
 Blockly.Blocks['ai_sensor_qrcode_lite'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .setCheck("var");               
         this.appendDummyInput()
@@ -77,7 +77,7 @@ Blockly.Blocks['ai_sensor_qrcode_lite'] = {
 
 Blockly.Blocks['ai_sensor_find_qrcodes'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_QR_CODE_RECOGNTITION);        
@@ -92,7 +92,7 @@ Blockly.Blocks['ai_sensor_find_qrcodes'] = {
 
 Blockly.Blocks['ai_sensor_config'] = {
   init: function() {
-   this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+   this.setColour(Blockly.Blocks.ai_sensor.HUE);
    this.appendValueInput('SUB')
    this.appendValueInput("RX")
        .appendField(Blockly.MIXLY_SETTING+Blockly.MIXLY_ETHERNET_CLINET_PORT)       
@@ -115,7 +115,7 @@ Blockly.Blocks['ai_sensor_config'] = {
 
 Blockly.Blocks['ai_sensor_rgb'] = {
   init: function() {
-   this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+   this.setColour(Blockly.Blocks.ai_sensor.HUE);
    this.appendValueInput('SUB')
    this.appendValueInput("led1")
        .appendField(Blockly.MIXLY_SETTING)       
@@ -135,7 +135,7 @@ Blockly.Blocks['ai_sensor_rgb'] = {
 
 Blockly.Blocks['ai_sensor_barcode'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_BAR_CODE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -161,7 +161,7 @@ Blockly.Blocks['ai_sensor_barcode'] = {
 
 Blockly.Blocks['ai_sensor_find_barcodes'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_BAR_CODE_RECOGNTITION);        
@@ -176,7 +176,7 @@ Blockly.Blocks['ai_sensor_find_barcodes'] = {
 
 Blockly.Blocks['ai_sensor_tag'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_TAG+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -203,7 +203,7 @@ Blockly.Blocks['ai_sensor_tag'] = {
 
 Blockly.Blocks['ai_sensor_find_tags'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_TAG_RECOGNTITION);        
@@ -218,7 +218,7 @@ Blockly.Blocks['ai_sensor_find_tags'] = {
 
 Blockly.Blocks['ai_sensor_line'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_LINE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -242,7 +242,7 @@ Blockly.Blocks['ai_sensor_line'] = {
 
 Blockly.Blocks['ai_sensor_find_lines'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_LINE_RECOGNTITION);        
@@ -269,7 +269,7 @@ Blockly.Blocks['ai_sensor_find_lines'] = {
 
 Blockly.Blocks['ai_sensor_circle'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_CIRCLE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -295,7 +295,7 @@ Blockly.Blocks['ai_sensor_circle'] = {
 
 Blockly.Blocks['ai_sensor_find_circles'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_CIRCLE_RECOGNTITION);        
@@ -322,7 +322,7 @@ Blockly.Blocks['ai_sensor_find_circles'] = {
 
 Blockly.Blocks['ai_sensor_rect'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_RECT+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -348,7 +348,7 @@ Blockly.Blocks['ai_sensor_rect'] = {
 
 Blockly.Blocks['ai_sensor_find_rects'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_RECT_RECOGNTITION);        
@@ -367,7 +367,7 @@ Blockly.Blocks['ai_sensor_find_rects'] = {
 
 Blockly.Blocks['ai_sensor_color'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.HTML_COLOUR+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -387,7 +387,7 @@ Blockly.Blocks['ai_sensor_color'] = {
 
 Blockly.Blocks['ai_sensor_find_colors'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_COLOR_RECOGNTITION);   
@@ -402,7 +402,7 @@ Blockly.Blocks['ai_sensor_find_colors'] = {
 
 Blockly.Blocks['ai_sensor_color_chases_result'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_COLOR_CHASE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -428,7 +428,7 @@ Blockly.Blocks['ai_sensor_color_chases_result'] = {
 
 Blockly.Blocks['ai_sensor_color_chases'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_COLOR_CHASE);        
@@ -455,7 +455,7 @@ Blockly.Blocks['ai_sensor_color_chases'] = {
 
 Blockly.Blocks['ai_sensor_ailocal_train'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_LOCAL_TRAIN);        
@@ -480,7 +480,7 @@ Blockly.Blocks['ai_sensor_ailocal_train'] = {
 
 Blockly.Blocks['ai_sensor_ailocal_class'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_LOCAL_CLASS);        
@@ -504,7 +504,7 @@ Blockly.Blocks['ai_sensor_ailocal_class'] = {
 
 Blockly.Blocks['ai_sensor_ailocal_class_result'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_LOCAL_CLASS+Blockly.MIXPY_OBJECT)
             .setCheck("var");       
@@ -524,7 +524,7 @@ Blockly.Blocks['ai_sensor_ailocal_class_result'] = {
 
 Blockly.Blocks['ai_sensor_audio_record'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MUSIC_RECORD);
@@ -543,7 +543,7 @@ Blockly.Blocks['ai_sensor_audio_record'] = {
 
 Blockly.Blocks['ai_sensor_audio_play'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MUSIC_PLAY);
@@ -564,7 +564,7 @@ Blockly.Blocks['ai_sensor_audio_play'] = {
 
 Blockly.Blocks['ai_sensor_yolo_recognize'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);
         this.appendValueInput('SUB')
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_YOLO_RECOGNIZE);        
@@ -588,7 +588,7 @@ Blockly.Blocks['ai_sensor_yolo_recognize'] = {
 
 Blockly.Blocks['ai_sensor_yolo_recognize_result'] = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
+        this.setColour(Blockly.Blocks.ai_sensor.HUE);        
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_YOLO_RECOGNIZE+Blockly.MIXPY_OBJECT)
             .setCheck("var");       

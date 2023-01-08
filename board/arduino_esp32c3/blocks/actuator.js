@@ -3,10 +3,10 @@
 goog.provide('Blockly.Blocks.actuator');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['ACTUATOR_HUE'] = 100;
+Blockly.Blocks.actuator.HUE = 100;
 Blockly.Blocks.controls_tone={
     init:function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
         .appendField(Blockly.MIXLY_TONE);
         this.appendValueInput("PIN")
@@ -33,7 +33,7 @@ Blockly.Blocks.controls_tone={
 
 Blockly.Blocks.controls_notone={
     init:function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
         .appendField(Blockly.MIXLY_NOTONE);
         this.appendValueInput("PIN")
@@ -52,7 +52,7 @@ Blockly.Blocks.controls_notone={
 
 Blockly.Blocks.onboard_tone={
     init:function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
         .appendField(Blockly.MIXLY_TONE);
         this.appendValueInput('CHANNEL')
@@ -75,7 +75,7 @@ Blockly.Blocks.onboard_tone={
 
 Blockly.Blocks.onboard_notone={
     init:function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
         .appendField(Blockly.MIXLY_NOTONE);
         this.appendValueInput('CHANNEL')
@@ -95,7 +95,7 @@ Blockly.Arduino.motor_id = function() {
 
 Blockly.Blocks['motor_id'] = {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([
            ["1","1"],["2","2"],["3","3"],["4","4"]
@@ -108,7 +108,7 @@ Blockly.Blocks['motor_id'] = {
 
 Blockly.Blocks.HR8833_Motor_Setup= {
   init: function() {
-    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+    this.setColour(Blockly.Blocks.actuator.HUE);
     this.appendDummyInput("")
     .appendField(Blockly.MOTOR_HR8833+Blockly.MIXLY_SETUP);
     this.appendValueInput('MOTOR_ID')
@@ -130,7 +130,7 @@ Blockly.Blocks.HR8833_Motor_Setup= {
 
 Blockly.Blocks.HR8833_Motor_Speed= {
   init: function() {
-    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+    this.setColour(Blockly.Blocks.actuator.HUE);
     this.appendDummyInput("")
     .appendField(Blockly.MOTOR_HR8833+Blockly.MIXLY_SETTING);
     this.appendValueInput('MOTOR_ID')

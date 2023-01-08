@@ -4,11 +4,11 @@ goog.provide('Blockly.Blocks.network');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['NETWORK_HUE']=225
+Blockly.Blocks.network.HUE=225
 
 Blockly.Blocks['network_init'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
              .setCheck("var");;
         this.appendDummyInput("")
@@ -29,7 +29,7 @@ Blockly.Blocks['network_init'] = {
 
 Blockly.Blocks['network_open'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput()
@@ -57,7 +57,7 @@ Blockly.Blocks['network_open'] = {
 
 Blockly.Blocks['network_is_active'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -70,7 +70,7 @@ Blockly.Blocks['network_is_active'] = {
 
 Blockly.Blocks['network_scan'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -97,7 +97,7 @@ Blockly.Blocks['network_scan'] = {
 
 Blockly.Blocks['network_connect'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -117,7 +117,7 @@ Blockly.Blocks['network_connect'] = {
 
 Blockly.Blocks['network_wifi_connect'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -132,7 +132,7 @@ Blockly.Blocks['network_wifi_connect'] = {
 
 Blockly.Blocks['network_get_connect'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -163,7 +163,7 @@ Blockly.Blocks['network_get_connect'] = {
 
 Blockly.Blocks['network_stop'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -177,7 +177,7 @@ Blockly.Blocks['network_stop'] = {
 
 Blockly.Blocks['network_get_wifi'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -195,7 +195,7 @@ Blockly.Blocks['network_get_wifi'] = {
 
 Blockly.Blocks['network_ap_connect'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -215,7 +215,7 @@ Blockly.Blocks['network_ap_connect'] = {
 
 Blockly.Blocks['network_server'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput("")
@@ -231,7 +231,7 @@ Blockly.Blocks['network_server'] = {
 
 Blockly.Blocks['network_socket_init'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_INIT)
             .setCheck("var");
@@ -259,7 +259,7 @@ Blockly.Blocks['network_socket_init'] = {
 
 Blockly.Blocks['network_socket_bind'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_LET_SOCKET)
@@ -274,7 +274,7 @@ Blockly.Blocks['network_socket_bind'] = {
 
 Blockly.Blocks['network_socket_connect'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_LET_SOCKET)
@@ -289,7 +289,7 @@ Blockly.Blocks['network_socket_connect'] = {
 
 Blockly.Blocks['network_socket_listen'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendValueInput('queue')
@@ -305,7 +305,7 @@ Blockly.Blocks['network_socket_listen'] = {
 
 Blockly.Blocks['network_socket_accept'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput()
@@ -318,7 +318,7 @@ Blockly.Blocks['network_socket_accept'] = {
 
 Blockly.Blocks['network_socket_receive'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField("TCP")
@@ -333,7 +333,7 @@ Blockly.Blocks['network_socket_receive'] = {
 
 Blockly.Blocks['network_socket_send'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
             // .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
         this.appendValueInput('VAR')
             .setCheck("var")
@@ -349,7 +349,7 @@ Blockly.Blocks['network_socket_send'] = {
 
 Blockly.Blocks['network_socket_receive_from'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField("UDP")
@@ -364,7 +364,7 @@ Blockly.Blocks['network_socket_receive_from'] = {
 
 Blockly.Blocks['network_socket_send_to'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
             // .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
         this.appendValueInput('VAR')
             .setCheck("var")
@@ -382,7 +382,7 @@ Blockly.Blocks['network_socket_send_to'] = {
 
 Blockly.Blocks['network_socket_close'] = {
     init: function() {
-        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.setColour(Blockly.Blocks.network.HUE);
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput()
@@ -397,7 +397,7 @@ Blockly.Blocks['network_socket_close'] = {
 
 Blockly.Blocks['requests_get'] = {
   init: function() {
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(Blockly.Blocks.communicate.HUE);
     this.appendValueInput("DOMAIN")
       .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
       .setCheck(String);
@@ -429,7 +429,7 @@ Blockly.Blocks['requests_attribute'] = {
   var attr =
         [[Blockly.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],[Blockly.blockpy_REQUESTS_GET_ATTR_TEXT, 'text']
         ,[Blockly.blockpy_REQUESTS_GET_ATTR_COOKIES, 'cookies'],[Blockly.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']];
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(Blockly.Blocks.communicate.HUE);
     this.appendDummyInput("")
         .appendField(Blockly.MIXLY_MICROBIT_JS_GET)
         .appendField(new Blockly.FieldDropdown(attr), 'ATTR')
@@ -461,7 +461,7 @@ Blockly.Blocks['requests_method'] = {
         [['post', 'post'],['put', 'put'],
         ['delete', 'delete'],['head', 'head'],
         ['option', 'option']];
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(Blockly.Blocks.communicate.HUE);
     this.appendDummyInput("")
         .appendField(Blockly.blockpy_CONDUCT)
         .appendField(new Blockly.FieldDropdown(method), 'DIR')

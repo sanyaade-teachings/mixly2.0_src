@@ -1,15 +1,15 @@
 "use strict";
 goog.provide("Blockly.Blocks.blynk");
 goog.require("Blockly.Blocks");
-Blockly.Msg['BLYNK0_HUE'] = 0; //红色
-Blockly.Msg['BLYNK1_HUE'] = 159; //Mountain Meadow
+Blockly.Blocks.blynk.HUE0 = 0; //红色
+Blockly.Blocks.blynk.HUE1 = 159; //Mountain Meadow
 Blockly.Blocks.blynk.ICON_WIDTH = 20; //传感器图标宽度
 Blockly.Blocks.blynk.ICON_HEIGHT = 20; //传感器图标高度
 
 //物联网-服务器信息
 Blockly.Blocks.blynk_usb_server = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 25, 25))
             .appendField(Blockly.blynk_USB_SERVER_INFO);
@@ -26,7 +26,7 @@ Blockly.Blocks.blynk_usb_server = {
 //物联网-一键配网
 Blockly.Blocks.blynk_smartconfig = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField("SmartConfig" + Blockly.blynk_smartconfig);
         this.appendValueInput("server_add")
@@ -45,7 +45,7 @@ Blockly.Blocks.blynk_smartconfig = {
 //物联网-服务器信息_uno
 Blockly.Blocks.blynk_server = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.blynk_SERVER_INFO);
@@ -136,7 +136,7 @@ var BLYNK_TIMER_SELECT = [
 //物联网-发送数据到app
 Blockly.Blocks.blynk_iot_push_data = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.blynk_IOT_PUSH_DATA);
@@ -159,7 +159,7 @@ Blockly.Blocks.blynk_iot_get_data = {
    * @this Blockly.Block
    */
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.blynk_IOT_GET_DATA);
@@ -466,7 +466,7 @@ Blockly.Blocks.blynk_iot_get_data = {
 //blynk定时器
 Blockly.Blocks.Blynk_iot_timer = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendValueInput("TIME")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -484,7 +484,7 @@ Blockly.Blocks.Blynk_iot_timer = {
 //blynk服务器连接状态
 Blockly.Blocks.Blynk_connect_state = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.Blynk_connect_state);
         this.setOutput(true, null);
@@ -502,7 +502,7 @@ var BLYNK_CONNECT_STATE_SELECT = [
 //blynk 连接状态函数
 Blockly.Blocks.Blynk_iot_CONNECT_STATE = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_CONNECT_STATE_SELECT), "state");
         this.appendStatementInput("DO")
@@ -515,7 +515,7 @@ Blockly.Blocks.Blynk_iot_CONNECT_STATE = {
 //blynk同步所有管脚状态
 Blockly.Blocks.Blynk_iot_BLYNK_syncAll = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(Blockly.BLYNK_syncAll);
         this.setPreviousStatement(true);
@@ -526,7 +526,7 @@ Blockly.Blocks.Blynk_iot_BLYNK_syncAll = {
 //blynk同步虚拟管脚状态
 Blockly.Blocks.blynk_iot_syncVirtual = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.blynk_IOT_syncVirtual);
@@ -543,7 +543,7 @@ Blockly.Blocks.blynk_iot_syncVirtual = {
 //物联网-LED组件颜色&开关
 Blockly.Blocks.blynk_iot_WidgetLED_COLOR = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_led.png", 20, 20))
             .appendField(Blockly.blynk_IOT_WidgetLED);
@@ -567,7 +567,7 @@ Blockly.Blocks.blynk_iot_WidgetLED_COLOR = {
 //物联网-LED组件颜色&亮度
 Blockly.Blocks.blynk_iot_WidgetLED_VALUE = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_led.png", 20, 20))
             .appendField(Blockly.blynk_IOT_WidgetLED);
@@ -612,7 +612,7 @@ var AC_FAN = [
 //红外控制空调
 Blockly.Blocks.blynk_iot_ir_send_ac = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(Blockly.blynk_IOT_IR_SEND)
             .appendField(new Blockly.FieldDropdown(AC_TYPE), "AC_TYPE");
@@ -642,7 +642,7 @@ Blockly.Blocks.blynk_iot_ir_send_ac = {
 //红外接收模块(raw)
 Blockly.Blocks.blynk_iot_ir_recv_raw = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendValueInput("PIN", Number).appendField(Blockly.blynk_IOT_IR_RECEIVE_RAW).setCheck(Number);
         //  this.appendValueInput("PIN", Number).appendField(Blockly.MIXLY_PIN).setCheck(Number);
         this.setPreviousStatement(true);
@@ -655,7 +655,7 @@ Blockly.Blocks.blynk_iot_ir_recv_raw = {
 //红外发送
 Blockly.Blocks.blynk_iot_ir_send = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.blynk_IOT_IR_SEND)
             .setCheck(Number);
@@ -672,7 +672,7 @@ Blockly.Blocks.blynk_iot_ir_send = {
 //物联网-发送邮件
 Blockly.Blocks.blynk_email = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_email.png", 20, 20))
             .appendField(Blockly.blynk_EMAIL);
@@ -695,7 +695,7 @@ Blockly.Blocks.blynk_email = {
 //物联网-发送通知
 Blockly.Blocks.blynk_notify = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_push_notifications.png", 20, 20))
             .appendField(Blockly.blynk_NOTIFY);
@@ -713,7 +713,7 @@ Blockly.Blocks.blynk_notify = {
 //物联网-终端组件显示文本
 Blockly.Blocks.blynk_terminal = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_terminal.png", 20, 20))
             .appendField(Blockly.blynk_terminal)
@@ -734,7 +734,7 @@ Blockly.Blocks.blynk_terminal = {
 //物联网-视频流
 Blockly.Blocks.blynk_videourl = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_video.png", 20, 20))
             .appendField(Blockly.BLYNK_VIRTUALPIN)
@@ -754,7 +754,7 @@ Blockly.Blocks.blynk_videourl = {
 //物联网-桥接授权码
 Blockly.Blocks.blynk_bridge_auth = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20))
             .appendField(Blockly.BLYNK_BRIDGE_VIRTUALPIN)
@@ -774,7 +774,7 @@ Blockly.Blocks.blynk_bridge_auth = {
 //物联网-桥接数字输出
 Blockly.Blocks.blynk_bridge_digitalWrite = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20));
         this.appendDummyInput("")
@@ -798,7 +798,7 @@ Blockly.Blocks.blynk_bridge_digitalWrite = {
 //物联网-桥接模拟输出
 Blockly.Blocks.blynk_bridge_AnaloglWrite = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20));
         this.appendDummyInput("")
@@ -822,7 +822,7 @@ Blockly.Blocks.blynk_bridge_AnaloglWrite = {
 //物联网-桥接虚拟管脚
 Blockly.Blocks.blynk_bridge_VPin = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20));
         this.appendDummyInput("")
@@ -845,7 +845,7 @@ Blockly.Blocks.blynk_bridge_VPin = {
 //物联网-RTC组件初始化
 Blockly.Blocks.blynk_WidgetRTC_init = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_rtc.png", 20, 20))
             .appendField(Blockly.blynk_WidgetRTC_init);
@@ -876,7 +876,7 @@ var BLYNK_RTC_TIME_TYPE = [
 //传感器-实时时钟块_获取时间
 Blockly.Blocks.blynk_WidgetRTC_get_time = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_rtc.png", 20, 20))
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -893,7 +893,7 @@ Blockly.Blocks.blynk_WidgetRTC_get_time = {
 //播放音乐
 Blockly.Blocks.blynk_iot_playmusic = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_player.png", 20, 20))
             .appendField(Blockly.blynk_iot_playmusic);
@@ -909,7 +909,7 @@ Blockly.Blocks.blynk_iot_playmusic = {
 //从终端获取字符串
 Blockly.Blocks.blynk_iot_terminal_get = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_terminal.png", 20, 20))
             .appendField(Blockly.blynk_IOT_terminal_get);
@@ -925,7 +925,7 @@ Blockly.Blocks.blynk_iot_terminal_get = {
 //光线传感器
 Blockly.Blocks.blynk_light = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_light_sensor.png", 20, 20))
             .appendField(Blockly.blynk_LIGHT);
@@ -941,7 +941,7 @@ Blockly.Blocks.blynk_light = {
 //重力传感器
 Blockly.Blocks.blynk_gravity = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_gravity_sensor.png", 20, 20))
             .appendField(Blockly.blynk_GRAVITY);
@@ -957,7 +957,7 @@ Blockly.Blocks.blynk_gravity = {
 //加速度传感器
 Blockly.Blocks.blynk_acc = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_accelerometer_sensor.png", 20, 20))
             .appendField(Blockly.blynk_ACC);
@@ -973,7 +973,7 @@ Blockly.Blocks.blynk_acc = {
 //时间输入-简单
 Blockly.Blocks.blynk_time_input_1 = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../common/media/blynk/widget_timeinput.png", 20, 20))
             .appendField(Blockly.blynk_time_input_1);
@@ -989,7 +989,7 @@ Blockly.Blocks.blynk_time_input_1 = {
 //lm35温度传感器-arduino
 Blockly.Blocks.LM35ESP = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.sensor.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_LM35);
         this.appendValueInput("PIN", Number)
@@ -1004,7 +1004,7 @@ Blockly.Blocks.LM35ESP = {
 //一键配网（无需安可信）
 Blockly.Blocks.blynk_AP_config = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.blynk_AP_config);
         this.appendValueInput("server_add")
@@ -1023,7 +1023,7 @@ Blockly.Blocks.blynk_AP_config = {
 //一键配网手动配置授权码
 Blockly.Blocks.blynk_AP_config_2 = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.blynk_AP_config2);
         this.appendValueInput("server_add")
@@ -1039,7 +1039,7 @@ Blockly.Blocks.blynk_AP_config_2 = {
 //Blynk终端清屏
 Blockly.Blocks['blynk_terminal_clear'] = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.blynk_terminal_clear);
         this.setPreviousStatement(true, null);
@@ -1051,7 +1051,7 @@ Blockly.Blocks['blynk_terminal_clear'] = {
 //Blynk LCD显示
 Blockly.Blocks['blynk_lcd'] = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.blynk_lcd)
             .appendField(Blockly.BLYNK_VIRTUALPIN);
@@ -1085,7 +1085,7 @@ Blockly.Blocks.blynk_lcd_clear = {
             .appendField(Blockly.MIXLY_LCD_STAT_CLEAR);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setHelpUrl("");
     }
 };
@@ -1093,7 +1093,7 @@ Blockly.Blocks.blynk_lcd_clear = {
 //ESP32 blynk BLE连接方式
 Blockly.Blocks['blynk_esp32_ble'] = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.blynk_esp32_ble);
         this.appendValueInput("auth")
@@ -1109,7 +1109,7 @@ Blockly.Blocks['blynk_esp32_ble'] = {
 //ESP32 blynk Bluetooth连接方式
 Blockly.Blocks['blynk_esp32_Bluetooth'] = {
     init: function () {
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.appendDummyInput()
             .appendField(Blockly.blynk_esp32_Bluetooth);
         this.appendValueInput("auth")
@@ -1137,7 +1137,7 @@ Blockly.Blocks['arduino_blynk_bluetooth'] = {
         this.appendValueInput("TX")
             .setCheck(null)
             .appendField("TX");
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -1164,7 +1164,7 @@ Blockly.Blocks['blynk_table'] = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -1191,7 +1191,7 @@ Blockly.Blocks['blynk_table_update'] = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -1210,7 +1210,7 @@ Blockly.Blocks['blynk_table_highlight'] = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -1229,7 +1229,7 @@ Blockly.Blocks['blynk_table_select'] = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -1248,7 +1248,7 @@ Blockly.Blocks['blynk_table_unselect'] = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -1263,7 +1263,7 @@ Blockly.Blocks['blynk_table_cleardata'] = {
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -1283,7 +1283,7 @@ Blockly.Blocks['esp_camera'] = {
             .appendField(Blockly.blynk_WIFI_PASS);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip(Blockly.esp_camera);
         this.setHelpUrl("");
     }
@@ -1308,7 +1308,7 @@ Blockly.Blocks['esp_camera_blynk'] = {
             .appendField(Blockly.blynk_IOT_AUTH);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip(Blockly.esp_camera);
         this.setHelpUrl("");
     }
@@ -1320,7 +1320,7 @@ Blockly.Blocks['take_a_photo1'] = {
             .appendField(Blockly.take_a_photo1);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip(Blockly.take_a_photo1);
         this.setHelpUrl("");
     }
@@ -1334,7 +1334,7 @@ Blockly.Blocks['blynk_table_click'] = {
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
         this.appendStatementInput("function")
             .setCheck(null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip("");
         this.setHelpUrl("https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Table/Table_Advanced/Table_Advanced.ino");
     }
@@ -1348,7 +1348,7 @@ Blockly.Blocks['blynk_table_order'] = {
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
         this.appendStatementInput("function")
             .setCheck(null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip("");
         this.setHelpUrl("https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Table/Table_Advanced/Table_Advanced.ino");
     }
@@ -1367,7 +1367,7 @@ Blockly.Blocks['blynk_table_add_data'] = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['BLYNK1_HUE']);
+        this.setColour(Blockly.Blocks.blynk.HUE1);
         this.setTooltip("");
         this.setHelpUrl("https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Table/Table_Advanced/Table_Advanced.ino");
     }

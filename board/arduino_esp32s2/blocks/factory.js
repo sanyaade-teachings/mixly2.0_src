@@ -2,4 +2,4 @@
 
 goog.provide('Blockly.Blocks.factory');
 goog.require('Blockly.Blocks');
-Blockly.Msg['FACTORY_HUE'] = 65;
+Blockly.Blocks.factory.HUE = 65;

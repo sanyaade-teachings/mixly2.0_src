@@ -4,11 +4,11 @@ goog.provide('Blockly.Blocks.storage');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['STORAGE_HUE'] = 0//'#5d69c5'//0;
+Blockly.Blocks.storage.HUE = 0//'#5d69c5'//0;
 
 Blockly.Blocks['storage_open_file_with_os'] = {
     init:function(){
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(Blockly.Blocks.storage.HUE);
         this.appendValueInput('fn')
             .setCheck(String)
             .appendField(Blockly.Msg.MIXLY_PYTHON_STORAGE_OPEN_FILE_WITH_OS+"(For Windows)");
@@ -20,7 +20,7 @@ Blockly.Blocks['storage_open_file_with_os'] = {
 
 Blockly.Blocks.storage_fileopen = {
   init: function() {
-    this.setColour(Blockly.Msg['STORAGE_HUE']);
+    this.setColour(Blockly.Blocks.storage.HUE);
     this.appendValueInput("FILENAME")
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
         //.appendField(new Blockly.FieldTextInput('filename.txt'), 'FILENAME');
@@ -61,7 +61,7 @@ Blockly.Blocks.storage_fileopen = {
 
 Blockly.Blocks.storage_fileopen_new = {
   init: function() {
-    this.setColour(Blockly.Msg['STORAGE_HUE']);
+    this.setColour(Blockly.Blocks.storage.HUE);
     this.appendValueInput("FILENAME")
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
         //.appendField(new Blockly.FieldTextInput('filename.txt'), 'FILENAME');
@@ -93,7 +93,7 @@ Blockly.Blocks.storage_fileopen_new = {
 
 Blockly.Blocks.storage_fileopen_new_encoding = {
   init: function() {
-    this.setColour(Blockly.Msg['STORAGE_HUE']);
+    this.setColour(Blockly.Blocks.storage.HUE);
     this.appendValueInput("FILENAME")
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
         //.appendField(new Blockly.FieldTextInput('filename.txt'), 'FILENAME');
@@ -130,7 +130,7 @@ Blockly.Blocks.storage_fileopen_new_encoding = {
 
 Blockly.Blocks['storage_file_write'] = {
     init:function(){
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(Blockly.Blocks.storage.HUE);
         this.appendValueInput('data')
             .setCheck(String)
             .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE);
@@ -146,7 +146,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_get_contents_without_para'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck('Variable')
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_FROM_FILE);
@@ -161,7 +161,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_get_contents'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck('Variable')
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_FROM_FILE);
@@ -192,7 +192,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_get_a_line'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_FROM_FILE);
      this.setNextStatement(true);
@@ -211,7 +211,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_can_write_ornot'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .appendField(Blockly.Msg.HTML_FILE);
      this.appendDummyInput()
@@ -226,7 +226,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_get_filename'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
      this.appendDummyInput()
@@ -241,7 +241,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_close_file'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_CLOSE_FILE);
      this.setInputsInline(true);
@@ -254,7 +254,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_list_all_files'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendDummyInput()
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_LIST_ALL_FILES);
      this.setInputsInline(true);
@@ -267,7 +267,7 @@ Blockly.Blocks['storage_file_write'] = {
  Blockly.MIXLY_MICROBIT_PY_STORAGE_DELETE_FILE
  Blockly.Blocks['storage_delete_file'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendDummyInput()
          .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_MICROBIT_PY_STORAGE_DELETE_FILE,'remove'],[Blockly.MIXLY_MICROBIT_PY_STORAGE_DELETE_DIRS,'removedirs']]),'MODE');
      this.appendValueInput("FILE")
@@ -282,7 +282,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_get_file_size'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET_FILE_SIZE);
@@ -298,7 +298,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_file_tell'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_RETURN_FILE);
@@ -314,7 +314,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_file_seek'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck('Variable')
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_SET_FILE_POSITION);
@@ -349,7 +349,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_change_dir'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_CHANGE_DIR);
@@ -363,7 +363,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_get_current_dir'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendDummyInput()
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET_CURRENT_DIR);
      this.setInputsInline(true);
@@ -376,7 +376,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_make_dir'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("PATH")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_PATH);
@@ -404,7 +404,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_rename'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_RENAME);
@@ -421,7 +421,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_change_dir'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_CHANGE_DIR);
@@ -435,7 +435,7 @@ Blockly.Blocks['storage_file_write'] = {
 
  Blockly.Blocks['storage_is_file'] = {
    init: function() {
-     this.setColour(Blockly.Msg['STORAGE_HUE']);
+     this.setColour(Blockly.Blocks.storage.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);

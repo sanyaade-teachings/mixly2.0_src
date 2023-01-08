@@ -5,13 +5,13 @@ goog.provide('Blockly.Blocks.lists');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['LISTS_HUE'] = 260//'#70b234'//260;
+Blockly.Blocks.lists.HUE = 260//'#70b234'//260;
 
 
 Blockly.Blocks.lists_get_index = {
     init: function () {
         this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(Blockly.Blocks.lists.HUE);
         this.appendValueInput("LIST")
         this.appendValueInput("AT")
             .setCheck(Number)
@@ -32,7 +32,7 @@ Blockly.Blocks['lists_get_sublist'] = {
      */
     init: function () {
         this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(Blockly.Blocks.lists.HUE);
         this.appendValueInput('LIST')
         this.appendDummyInput('')
         this.appendValueInput('AT1')
@@ -59,7 +59,7 @@ Blockly.Blocks.lists_2d_get_data_with_col_row= {
       .appendField(Blockly.Msg.DATAFRAME_COLUMN);
   this.setInputsInline(true);
   this.setOutput(true, null);
-  this.setColour(Blockly.Msg['LISTS_HUE']);
+  this.setColour(Blockly.Blocks.lists.HUE);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -85,7 +85,7 @@ Blockly.Blocks.lists_2d_get_col_row_data= {
       .appendField(") "+Blockly.Msg.DICTS_ADD_VALUE);
   this.setInputsInline(true);
   this.setOutput(true, 'List');
-  this.setColour(Blockly.Msg['LISTS_HUE']);
+  this.setColour(Blockly.Blocks.lists.HUE);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -97,7 +97,7 @@ Blockly.Blocks['lists_create_with'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
 	this.appendDummyInput("")
   //don't need to specify the data type in Python
         // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>'], [Blockly.LANG_MATH_STRING, 'Array<string>'], [Blockly.LANG_MATH_BOOLEAN, 'Array<boolean>']]), 'TYPE')
@@ -234,7 +234,7 @@ Blockly.Blocks['lists_create_with'] = {
 
 Blockly.Blocks['lists_create_with_text'] = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
   this.appendDummyInput("")
   //don't need to specify the data type in Python
         // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>']]), 'TYPE')
@@ -269,7 +269,7 @@ Blockly.Blocks['lists_create_with_container'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_TYPE_LIST);
     this.appendStatementInput('STACK');
@@ -284,7 +284,7 @@ Blockly.Blocks['lists_create_with_item'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -297,7 +297,7 @@ Blockly.Blocks['lists_create_with_item'] = {
 
 Blockly.Blocks.lists_set_index = {
     init: function() {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(Blockly.Blocks.lists.HUE);
         this.appendValueInput('LIST');
         this.appendValueInput('AT')
             .setCheck(Number)
@@ -313,7 +313,7 @@ Blockly.Blocks.lists_set_index = {
 
 Blockly.Blocks['lists_append_extend'] = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this['TYPE'] =
         [[Blockly.MIXLY_blockpy_set_add, 'append'],
          [Blockly.MIXLY_MICROBIT_LIST_EXTEND, 'extend']];
@@ -348,7 +348,7 @@ Blockly.Blocks['lists_get_random_item'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
   this.appendValueInput("LIST");
   this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_RANDOM)
@@ -363,7 +363,7 @@ Blockly.Blocks['lists_get_random_sublist'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
   this.appendValueInput("LIST");
   this.appendValueInput('VAR')
       .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.MIXLY_MICROBIT_RANDOM)
@@ -376,7 +376,7 @@ Blockly.Blocks['lists_get_random_sublist'] = {
 
 Blockly.Blocks.lists_insert_value = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('LIST');
     this.appendValueInput('AT')
         .setCheck(Number)
@@ -393,7 +393,7 @@ Blockly.Blocks.lists_insert_value = {
 
 Blockly.Blocks['lists_reverse'] = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('VAR')
         .setCheck('List') //this.appendDummyInput("")
     this.appendDummyInput()
@@ -407,7 +407,7 @@ Blockly.Blocks['lists_reverse'] = {
 };
 Blockly.Blocks['lists_clear'] = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('VAR')
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROPYTHON_CLEAR)
@@ -422,7 +422,7 @@ Blockly.Blocks['lists_clear'] = {
 
 Blockly.Blocks.lists_remove_at = {
     init: function() {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(Blockly.Blocks.lists.HUE);
         this['TYPE'] =
             [[Blockly.Msg.SERIES_INDEX, 'del'],
                 [Blockly.MIXLY_MICROBIT_JS_I2C_VALUE, 'remove']];
@@ -447,7 +447,7 @@ Blockly.Blocks.lists_remove_at = {
 };
 Blockly.Blocks.lists_pop = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('LIST');
     this.appendValueInput('VALUE')
         .appendField(Blockly.MIXLY_MICROBIT_LIST_POP);
@@ -465,7 +465,7 @@ Blockly.Blocks['lists_find'] = {
         [[Blockly.Msg.MIXLY_LIST_INDEX, 'INDEX'],
          [Blockly.Msg.MIXLY_LIST_COUNT, 'COUNT']
         ];
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('VAR')
         .setCheck('List')
     this.appendValueInput('data')
@@ -502,7 +502,7 @@ Blockly.Blocks['list_trig'] = {
          [Blockly.Msg.MATH_ONLIST_OPERATOR_STD_DEV, 'STD_DEV'],
         ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.setOutput(true, Number);
     this.appendValueInput('data')
     this.appendDummyInput()
@@ -563,7 +563,7 @@ Blockly.Blocks['lists_sort'] = {
       "message0": Blockly.Msg.LISTS_SORT_TITLE,
       "inputsInline": true,
       "output": "List",
-      "colour": Blockly.Msg['LISTS_HUE'],
+      "colour": Blockly.Blocks.lists.HUE,
       "tooltip": Blockly.Msg.LISTS_SORT_TOOLTIP,
       "helpUrl": Blockly.Msg.LISTS_SORT_HELPURL
     });
@@ -577,7 +577,7 @@ Blockly.Blocks['lists_change_to'] = {
          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD, 'set'],
          [Blockly.Msg.LISTS_CREATE_WITH_CONTAINER_TITLE_ADD, 'array']
         ];
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('VAR')
         .setCheck("List")
         // .appendField(Blockly.blockpy_USE_LIST);   
@@ -602,7 +602,7 @@ Blockly.Blocks['lists_change_to'] = {
 
 Blockly.Blocks['list_many_input']= {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendDummyInput("")
         .appendField('[')
         .appendField(new Blockly.FieldTextInput('0,0,0'),"CONTENT")
@@ -618,7 +618,7 @@ Blockly.Blocks['lists_create_with_noreturn'] = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(Blockly.Blocks.lists.HUE);
         this.itemCount_ = 3;
         this.updateShape_();
         this.setPreviousStatement(false);
@@ -753,7 +753,7 @@ Blockly.Blocks['lists_change_to_general'] = {
          [Blockly.MIXLY_MICROBIT_TYPE_TUPLE, 'tuple'],
          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD, 'set']
         ];
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('VAR');
     this.appendDummyInput("")
         .appendField(Blockly.Msg.A_TO_B)
@@ -771,7 +771,7 @@ Blockly.Blocks['lists_del_general'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('TUP')
     this.appendDummyInput("")
         .appendField(Blockly.Msg.OBJECT_DELETE);
@@ -782,7 +782,7 @@ Blockly.Blocks['lists_del_general'] = {
 
 Blockly.Blocks['lists_zip'] = {
     init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     
     this.itemCount_ = 2;
     this.updateShape_();
@@ -879,7 +879,7 @@ Blockly.Blocks['lists_zip'] = {
 };
 Blockly.Blocks['lists_zip_container'] = {  
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_PYTHON_LISTS_ZIP)
         .appendField('[]');
@@ -891,7 +891,7 @@ Blockly.Blocks['lists_zip_container'] = {
 
 Blockly.Blocks['lists_zip_item'] = {
   init: function() {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_PYTHON_LISTS_ZIP_ITEM);
     this.setPreviousStatement(true);
@@ -903,7 +903,7 @@ Blockly.Blocks['lists_zip_item'] = {
 
 Blockly.Blocks['list_tolist'] = {
   init: function () {
-    this.setColour(Blockly.Msg['LISTS_HUE']);
+    this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TOLIST);
     this.setOutput(true, 'List');

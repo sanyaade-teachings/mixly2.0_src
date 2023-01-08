@@ -5,14 +5,14 @@ goog.provide('Blockly.Blocks.variables');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['VARIABLES_HUE'] = 330//'#af5180'//330;
+Blockly.Blocks.variables.HUE = 330//'#af5180'//330;
 
 // ************************************************************************
 // THIS SECTION IS INSERTED INTO BLOCKLY BY BLOCKLYDUINO.
 //  Blockly.Blocks['variables_declare'] = {
 //  // Variable setter.
 //   init: function() {
-//     this.setColour(Blockly.Msg['VARIABLES_HUE']);
+//     this.setColour(Blockly.Blocks.variables.HUE);
 //     this.appendValueInput('VALUE', null)
 //         .appendField(Blockly.MIXLY_DECLARE)
 //         .appendField(new Blockly.FieldTextInput(''), 'VAR')
@@ -36,7 +36,7 @@ Blockly.Msg['VARIABLES_HUE'] = 330//'#af5180'//330;
 
 Blockly.Blocks['variables_get'] = {
   init: function() {
-    this.setColour(Blockly.Msg['VARIABLES_HUE']);
+    this.setColour(Blockly.Blocks.variables.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput(''), 'VAR')
     this.setOutput(true);
@@ -62,7 +62,7 @@ Blockly.Blocks['variables_get'] = {
 
 // Blockly.Blocks['variables_set'] = {
 //   init: function() {
-//     this.setColour(Blockly.Msg['VARIABLES_HUE']);
+//     this.setColour(Blockly.Blocks.variables.HUE);
 //     this.appendValueInput('VALUE')
 //         .appendField(new Blockly.FieldTextInput(''), 'VAR')
 // 		.appendField(Blockly.MIXLY_VALUE2);
@@ -89,7 +89,7 @@ Blockly.Blocks['variables_get'] = {
 // };
 Blockly.Blocks['variables_set'] = {
    init: function() {
-    this.setColour(Blockly.Msg['VARIABLES_HUE']);
+    this.setColour(Blockly.Blocks.variables.HUE);
     this.appendValueInput('VALUE')
         .appendField(new Blockly.FieldTextInput(''), 'VAR')
 		.appendField(Blockly.MIXLY_VALUE2);
@@ -116,7 +116,7 @@ Blockly.Blocks['variables_set'] = {
   */
 Blockly.Blocks['variables_change'] = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         var DATATYPES =
          [
           [Blockly.LANG_MATH_INT, "int"],
@@ -141,7 +141,7 @@ Blockly.Blocks['variables_change'] = {
 
 Blockly.Blocks['variables_global'] = {
   init: function() {
-    this.setColour(Blockly.Msg['VARIABLES_HUE']);
+    this.setColour(Blockly.Blocks.variables.HUE);
         this.appendValueInput("VAR")
         .appendField(Blockly.MIXLY_PYTHON_GLOBAL)
         .setCheck("var");
@@ -154,7 +154,7 @@ Blockly.Blocks['variables_global'] = {
 
 Blockly.Blocks.controls_type = {
   init: function() {
-    this.setColour(Blockly.Msg['VARIABLES_HUE']);
+    this.setColour(Blockly.Blocks.variables.HUE);
     this.appendValueInput("DATA")
         .appendField(Blockly.MICROBIT_PYTHON_TYPE);
     // this.setInputsInline(true);
@@ -166,7 +166,7 @@ Blockly.Blocks.controls_type = {
 
 Blockly.Blocks.controls_typeLists = {
     init: function() {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(Blockly.Blocks.variables.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_CONTORL_GET_TYPE)
             .appendField(new Blockly.FieldDropdown([

@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.display');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['DISPLAY_HUE'] = 180//'#cc6688' //180;
+Blockly.Blocks.display.HUE = 180//'#cc6688' //180;
 
 Blockly.Blocks['angle'] = {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["0°", "0"],
@@ -22,7 +22,7 @@ Blockly.Blocks['angle'] = {
 
 Blockly.Blocks['lcd_color'] = {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["黑色", "lcd.BLACK"],
@@ -52,7 +52,7 @@ Blockly.Blocks['lcd_color'] = {
 
 Blockly.Blocks['on_off'] = {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["开启", "1"],
@@ -67,7 +67,7 @@ Blockly.Blocks['on_off'] = {
 
 Blockly.Blocks.lcd_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 初始化");
         this.appendValueInput('freq')
@@ -87,7 +87,7 @@ Blockly.Blocks.lcd_init = {
 
 Blockly.Blocks['lcd_width'] = {
     init: function(){
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 获取 ");
 		this.appendDummyInput()
@@ -105,7 +105,7 @@ Blockly.Blocks['lcd_width'] = {
 
 Blockly.Blocks['lcd_colour'] = {
     init: function(){
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD");
 		this.appendValueInput('key')
@@ -118,7 +118,7 @@ Blockly.Blocks['lcd_colour'] = {
 
 Blockly.Blocks.lcd_display = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 显示图像");
         this.appendValueInput('img')
@@ -132,7 +132,7 @@ Blockly.Blocks.lcd_display = {
 
 Blockly.Blocks.lcd_clear = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 清屏颜色");
         this.appendValueInput('color')
@@ -147,7 +147,7 @@ Blockly.Blocks.lcd_clear = {
 
 Blockly.Blocks.lcd_rotation = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 屏幕旋转");
 		this.appendValueInput('key')
@@ -161,7 +161,7 @@ Blockly.Blocks.lcd_rotation = {
 
 Blockly.Blocks.lcd_mirror = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 镜像显示");
 		this.appendValueInput('key')
@@ -175,7 +175,7 @@ Blockly.Blocks.lcd_mirror = {
 
 Blockly.Blocks.lcd_draw_string = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(Blockly.Blocks.display.HUE);
 		this.appendDummyInput()
             .appendField("LCD 绘制文本");
         this.appendValueInput('x')
@@ -207,7 +207,7 @@ Blockly.Blocks.lcd_draw_string = {
 
 Blockly.Blocks.touch_init= {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.sensor.HUE);
 		this.appendDummyInput()
             .appendField("Touch 初始化");	
         this.appendValueInput('I2C')
@@ -222,7 +222,7 @@ Blockly.Blocks.touch_init= {
 
 Blockly.Blocks.touch_calibrate= {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.sensor.HUE);
 		this.appendDummyInput()
             .appendField("Touch 校准");
         this.setInputsInline(true);
@@ -234,7 +234,7 @@ Blockly.Blocks.touch_calibrate= {
 
 Blockly.Blocks['touch_read'] = {
     init: function(){
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.sensor.HUE);
 		this.appendDummyInput()
             .appendField("Touch 获取 ");
 		this.appendDummyInput()
@@ -256,7 +256,7 @@ Blockly.Blocks['touch_read'] = {
 
 Blockly.Blocks['touch_info'] = {
     init: function(){
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.sensor.HUE);
 		this.appendDummyInput()
             .appendField("Touch 状态");
 		this.appendDummyInput()

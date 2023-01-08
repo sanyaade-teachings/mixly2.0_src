@@ -3,10 +3,10 @@
 goog.provide('Blockly.Blocks.serial');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['SERIAL_HUE'] = 65//'#58a8de'//65;
+Blockly.Blocks.serial.HUE = 65//'#58a8de'//65;
 Blockly.Blocks['serial_print'] = {
   init: function() {
-   this.setColour(Blockly.Msg['SERIAL_HUE']);
+   this.setColour(Blockly.Blocks.serial.HUE);
     this.appendValueInput("CONTENT", String)
         .appendField("Serial " + Blockly.MIXLY_SERIAL_PRINT);
     this.setPreviousStatement(true, null);
@@ -17,7 +17,7 @@ Blockly.Blocks['serial_print'] = {
 
 Blockly.Blocks['serial_println'] = {
    init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendValueInput("CONTENT", String)
         .appendField("Serial " + Blockly.MIXLY_SERIAL_PRINTLN);
     this.setPreviousStatement(true, null);
@@ -28,7 +28,7 @@ Blockly.Blocks['serial_println'] = {
 //打印16进制数
 Blockly.Blocks['serial_print_hex'] = {
    init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendValueInput("CONTENT", Number)
         .appendField("Serial " + Blockly.MIXLY_SERIAL_PRINT + "  (" + Blockly.Msg.MATH_HEX + ")")
         .setCheck(Number);
@@ -40,7 +40,7 @@ Blockly.Blocks['serial_print_hex'] = {
 
 Blockly.Blocks['serial_receive_data_event'] = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(Blockly.Blocks.serial.HUE);
         this.appendValueInput('char_marker')
             .setCheck(String)
             .appendField(Blockly.MIXLY_MICROBIT_JS_SERIAL_WHEN_CONTAIN_DATA)
@@ -51,7 +51,7 @@ Blockly.Blocks['serial_receive_data_event'] = {
 
 Blockly.Blocks['serial_readstr'] = {
   init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
 	this.appendDummyInput()
         .appendField("Serial " + Blockly.MIXLY_SERIAL_READSTR);
 	this.setOutput(true, String);
@@ -61,7 +61,7 @@ Blockly.Blocks['serial_readstr'] = {
 
 Blockly.Blocks['serial_any'] = {
   init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
   this.appendDummyInput()
         .appendField("Serial " + Blockly.MIXLY_SERIAL_AVAILABLE);
   this.setOutput(true, Boolean);
@@ -71,7 +71,7 @@ Blockly.Blocks['serial_any'] = {
 
 Blockly.Blocks['serial_readline'] = {
     init: function() {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(Blockly.Blocks.serial.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_JS_SERIAL_READ_LINE);
         this.setOutput(true, String);
@@ -81,7 +81,7 @@ Blockly.Blocks['serial_readline'] = {
 
 Blockly.Blocks['serial_readstr_until'] = {
   init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
 	this.appendDummyInput()
         .appendField("Serial " + Blockly.MIXLY_SERIAL_READSTR_UNTIL)
         .appendField(new Blockly.FieldDropdown([
@@ -100,7 +100,7 @@ Blockly.Blocks['serial_readstr_until'] = {
 
 Blockly.Blocks['serial_softserial'] = {
   init: function() {
-   this.setColour(Blockly.Msg['SERIAL_HUE']);
+   this.setColour(Blockly.Blocks.serial.HUE);
    this.appendValueInput("RX", Number)
        .appendField(Blockly.MIXLY_SETUP)
 	   .appendField("RX#")
@@ -122,7 +122,7 @@ Blockly.Blocks['serial_softserial'] = {
 
 Blockly.Blocks['serial_begin'] = {
   init: function() {
-   this.setColour(Blockly.Msg['SERIAL_HUE']);
+   this.setColour(Blockly.Blocks.serial.HUE);
    this.appendDummyInput()
           .appendField("Serial " + Blockly.MIXLY_SERIAL_BEGIN)
           .appendField(new Blockly.FieldDropdown([['115200', '115200'], ['57600', '57600'], ['38400', '38400'], ['28800', '28800'], ['19200', '19200'], ['14400', '14400'], ['9600', '9600']]), 'baudrate');
@@ -135,7 +135,7 @@ Blockly.Blocks['serial_begin'] = {
 
 Blockly.Blocks['IO_input']={
 init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendValueInput("VAR")
         .appendField(Blockly.blockpy_inout_raw_input)
         .setCheck(String);
@@ -146,7 +146,7 @@ init: function() {
 
 Blockly.Blocks['IO_print'] = {
   init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
         this.appendValueInput("VAR")
         .appendField(Blockly.MIXLY_SERIAL_PRINTLN);
         this.setPreviousStatement(true, null);
@@ -157,7 +157,7 @@ Blockly.Blocks['IO_print'] = {
 
 Blockly.Blocks['IO_print_inline'] = {
   init: function() {
-    this.setColour(Blockly.Msg['SERIAL_HUE']);
+    this.setColour(Blockly.Blocks.serial.HUE);
         this.appendValueInput("VAR")
         .appendField(Blockly.MIXLY_SERIAL_PRINT);
         this.setPreviousStatement(true, null);

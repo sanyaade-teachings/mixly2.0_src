@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.base');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['BASE_HUE'] = 20//'#ae3838';//40;
+Blockly.Blocks.base.HUE = 20//'#ae3838';//40;
 
 
 Blockly.Blocks['inout_highlow'] = {
    init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_HIGH, "HIGH"], [Blockly.MIXLY_LOW, "LOW"]]), 'BOOL')
     this.setOutput(true, Boolean);
@@ -19,7 +19,7 @@ Blockly.Blocks['inout_highlow'] = {
 
 Blockly.Blocks['inout_digital_init'] = {
     init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendDummyInput()
 		.appendField("初始化 ");	
 	this.appendDummyInput("")
@@ -42,7 +42,7 @@ Blockly.Blocks['inout_digital_init'] = {
 
 Blockly.Blocks.inout_digital_write = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendValueInput("PIN",Number)
         .appendField(Blockly.MIXLY_Digital_PINMODEOUT)
         .setCheck(Number);
@@ -58,7 +58,7 @@ Blockly.Blocks.inout_digital_write = {
 
 Blockly.Blocks.inout_digital_read = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
 	this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
         .appendField(Blockly.MIXLY_Digital_PINMODEIN)
@@ -74,7 +74,7 @@ Blockly.Blocks.inout_digital_read = {
 
 Blockly.Blocks.inout_pwm_init = {
 	init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);	
+    this.setColour(Blockly.Blocks.base.HUE);	
     this.appendDummyInput()
 		.appendField("初始化 PWM输出");			
 	this.appendValueInput("PIN", Number)
@@ -95,7 +95,7 @@ Blockly.Blocks.inout_pwm_init = {
 
 Blockly.Blocks.inout_pwm_write = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendValueInput("PIN",Number)
         .appendField("PWM输出")
         .setCheck(Number);
@@ -114,7 +114,7 @@ Blockly.Blocks.inout_pwm_write = {
 
 Blockly.Blocks.inout_pin_attachInterrupt = {
   init: function() {
-	this.setColour(Blockly.Msg['BASE_HUE']);
+	this.setColour(Blockly.Blocks.base.HUE);
 	this.appendDummyInput()
 		.appendField("硬件中断");
     this.appendValueInput("PIN", Number)
@@ -134,7 +134,7 @@ Blockly.Blocks.inout_pin_attachInterrupt = {
 
 Blockly.Blocks.inout_pin_disirq = {
   init: function() {
-	this.setColour(Blockly.Msg['BASE_HUE']);
+	this.setColour(Blockly.Blocks.base.HUE);
 	this.appendDummyInput()
 		.appendField("取消中断");
     this.appendValueInput("PIN", Number)

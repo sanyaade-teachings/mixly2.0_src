@@ -2,11 +2,11 @@
 
 goog.provide('Blockly.Blocks.factory');
 goog.require('Blockly.Blocks');
-Blockly.Msg['FACTORY_HUE'] = "#777777";
+Blockly.Blocks.factory.HUE = "#777777";
 
 Blockly.Blocks.factory_include = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField("#include <")
             .appendField(new Blockly.FieldTextInput('Test'), 'INCLUDE')
@@ -19,7 +19,7 @@ Blockly.Blocks.factory_include = {
 Blockly.Blocks.factory_function_noreturn = {
     init: function () {
         //console.log('init');
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('function'), 'NAME');
         this.itemCount_ = 1;
@@ -126,7 +126,7 @@ Blockly.Blocks.factory_function_noreturn = {
 
 Blockly.Blocks['factory_create_with_container'] = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_PARAMS);
         this.appendStatementInput('STACK');
@@ -136,7 +136,7 @@ Blockly.Blocks['factory_create_with_container'] = {
 
 Blockly.Blocks['factory_create_with_item'] = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE + ':')
             .appendField(new Blockly.FieldTextInput('x'), 'NAME');
@@ -148,7 +148,7 @@ Blockly.Blocks['factory_create_with_item'] = {
 
 Blockly.Blocks.factory_function_return = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('function'), 'NAME');
         this.itemCount_ = 1;
@@ -167,7 +167,7 @@ Blockly.Blocks.factory_function_return = {
 
 Blockly.Blocks.factory_declare = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('Test'), 'TYPE')
             .appendField(" ")
@@ -179,7 +179,7 @@ Blockly.Blocks.factory_declare = {
 }
 Blockly.Blocks.factory_declare2 = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldMultilineInput('//define user code;'), 'VALUE');
         this.setPreviousStatement(true);
@@ -188,7 +188,7 @@ Blockly.Blocks.factory_declare2 = {
 };
 Blockly.Blocks.factory_define = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('#define'), 'TYPE')
             .appendField(" ")
@@ -199,7 +199,7 @@ Blockly.Blocks.factory_define = {
 }
 Blockly.Blocks.factory_static_method_noreturn = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('Test'), 'TYPE')
             .appendField("::")
@@ -221,7 +221,7 @@ Blockly.Blocks.factory_static_method_noreturn = {
 
 Blockly.Blocks.factory_static_method_return = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('Test'), 'TYPE')
             .appendField("::")
@@ -242,7 +242,7 @@ Blockly.Blocks.factory_static_method_return = {
 
 Blockly.Blocks.factory_callMethod_noreturn = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('test'), 'NAME')
             .appendField('.')
@@ -264,7 +264,7 @@ Blockly.Blocks.factory_callMethod_noreturn = {
 
 Blockly.Blocks.factory_callMethod_return = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('test'), 'NAME')
             .appendField('.')
@@ -285,7 +285,7 @@ Blockly.Blocks.factory_callMethod_return = {
 
 Blockly.Blocks.factory_block = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('Serial.println("hello");'), 'VALUE');
         this.setPreviousStatement(true);
@@ -295,7 +295,7 @@ Blockly.Blocks.factory_block = {
 
 Blockly.Blocks.factory_block_return = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldTextInput('test'), 'VALUE');
         this.setOutput(true);
@@ -304,7 +304,7 @@ Blockly.Blocks.factory_block_return = {
 
 Blockly.Blocks.factory_block_with_textarea = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldMultilineInput('Serial.println("Hello");\nSerial.println("Mixly");'), 'VALUE');
         this.setPreviousStatement(true);
@@ -314,7 +314,7 @@ Blockly.Blocks.factory_block_with_textarea = {
 
 Blockly.Blocks.factory_block_return_with_textarea = {
     init: function () {
-        this.setColour(Blockly.Msg['FACTORY_HUE']);
+        this.setColour(Blockly.Blocks.factory.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldMultilineInput('Hello\nMixly'), 'VALUE');
         this.setOutput(true);

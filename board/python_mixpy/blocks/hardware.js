@@ -4,11 +4,11 @@ goog.provide('Blockly.Blocks.hardware');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['HARDWARE_HUE'] = 40
+Blockly.Blocks.hardware.HUE = 40
 
 Blockly.Blocks.hardware_arduino_start = {
     init: function () {
-        this.setColour(Blockly.Msg['HARDWARE_HUE']);
+        this.setColour(Blockly.Blocks.hardware.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_HARDWARE)
         this.appendValueInput('SUB')
@@ -23,7 +23,7 @@ Blockly.Blocks.hardware_arduino_start = {
 
 Blockly.Blocks['inout_highlow'] = {
    init: function() {
-    this.setColour(Blockly.Msg['HARDWARE_HUE']);
+    this.setColour(Blockly.Blocks.hardware.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_HIGH, "HIGH"], [Blockly.MIXLY_LOW, "LOW"]]), 'BOOL')
     this.setOutput(true, Boolean);
@@ -33,7 +33,7 @@ Blockly.Blocks['inout_highlow'] = {
 
 Blockly.Blocks.hardware_arduino_digital_write = {
   init: function() {
-    this.setColour(Blockly.Msg['HARDWARE_HUE']);
+    this.setColour(Blockly.Blocks.hardware.HUE);
     this.appendValueInput('SUB')
         .appendField(Blockly.MIXLY_HARDWARE)
         .setCheck("var");
@@ -53,7 +53,7 @@ Blockly.Blocks.hardware_arduino_digital_write = {
 
 Blockly.Blocks.hardware_arduino_digital_read = {
   init: function() {
-    this.setColour(Blockly.Msg['HARDWARE_HUE']);
+    this.setColour(Blockly.Blocks.hardware.HUE);
     this.appendValueInput('SUB')
         .appendField(Blockly.MIXLY_HARDWARE)
         .setCheck("var");
@@ -71,7 +71,7 @@ Blockly.Blocks.hardware_arduino_digital_read = {
 
 Blockly.Blocks.hardware_arduino_analog_write = {
   init: function() {
-    this.setColour(Blockly.Msg['HARDWARE_HUE']);
+    this.setColour(Blockly.Blocks.hardware.HUE);
     this.appendValueInput('SUB')
         .appendField(Blockly.MIXLY_HARDWARE)
         .setCheck("var");
@@ -91,7 +91,7 @@ Blockly.Blocks.hardware_arduino_analog_write = {
 
 Blockly.Blocks.hardware_arduino_analog_read = {
   init: function() {
-    this.setColour(Blockly.Msg['HARDWARE_HUE']);
+    this.setColour(Blockly.Blocks.hardware.HUE);
     this.appendValueInput('SUB')
         .appendField(Blockly.MIXLY_HARDWARE)
         .setCheck("var");

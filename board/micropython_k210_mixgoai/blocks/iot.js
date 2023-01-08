@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.iot');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['IOT_HUE'] = '#637AAC';
+Blockly.Blocks.iot.HUE = '#637AAC';
 
 Blockly.Blocks['iot_wifi_connect'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField("OneNET 连接WiFi");
     this.appendValueInput('WIFINAME')
@@ -25,7 +25,7 @@ Blockly.Blocks['iot_wifi_connect'] = {
 
 Blockly.Blocks['iot_onenet_connect'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendValueInput('VAR')
     .setCheck("var")
     .appendField("OneNET" + Blockly.Msg.TUPLE_JOIN);
@@ -61,7 +61,7 @@ Blockly.Blocks['iot_onenet_connect'] = {
 
 Blockly.Blocks['iot_onenet_disconnect'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendValueInput('VAR')
     .setCheck("var")
     .appendField("OneNET")
@@ -76,7 +76,7 @@ Blockly.Blocks['iot_onenet_disconnect'] = {
 
 Blockly.Blocks['iot_onenet_check'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendValueInput('VAR')
     .setCheck("var")
     .appendField("OneNET")
@@ -91,7 +91,7 @@ Blockly.Blocks['iot_onenet_check'] = {
 
 Blockly.Blocks['iot_onenet_publish_dict'] = {
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendValueInput('VAR')
     .setCheck("var")
     .appendField("OneNET")
@@ -113,7 +113,7 @@ Blockly.Blocks['iot_onenet_publish'] = {
      * @this Blockly.Block
      */
      init: function () {
-        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.setColour(Blockly.Blocks.iot.HUE);
         this.appendValueInput('VAR')
         .setCheck("var")
         .appendField("OneNET")
@@ -260,7 +260,7 @@ Blockly.Blocks['iot_publish_container'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_TYPE_DICT);
     this.appendStatementInput('STACK');
@@ -276,7 +276,7 @@ Blockly.Blocks['iot_publish_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -292,7 +292,7 @@ Blockly.Blocks['iot_create_with_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['IOT_HUE']);
+    this.setColour(Blockly.Blocks.iot.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);

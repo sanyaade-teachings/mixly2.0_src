@@ -4,11 +4,11 @@ goog.provide('Blockly.Blocks.AI');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['AI_HUE'] = 205
+Blockly.Blocks.AI.HUE = 205
 
 Blockly.Blocks.AI_ChooseAndGet = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(Blockly.Blocks.storage.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_CHOOSE_AND_GET)
             .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_CHOOSE_AND_GET_ONE_FILE_NAME, "getOneFile"], 
@@ -22,7 +22,7 @@ Blockly.Blocks.AI_ChooseAndGet = {
 
 Blockly.Blocks.AI_client = {
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_SETUP)
             .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_AipImageClassify, "AipImageClassify"], 
@@ -52,7 +52,7 @@ Blockly.Blocks.AI_client = {
 
 Blockly.Blocks.AI_Speech_synthesis = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipSpeech_synthesis)
             .appendField(Blockly.MIXLY_Client)
@@ -71,7 +71,7 @@ Blockly.Blocks.AI_Speech_synthesis = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_Speech_asr = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipSpeech_asr)
             .appendField(Blockly.MIXLY_Client)
@@ -90,7 +90,7 @@ Blockly.Blocks.AI_Speech_asr = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_ImageClassify = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipImageClassify)
             .appendField(Blockly.MIXLY_Client)
@@ -113,7 +113,7 @@ Blockly.Blocks.AI_ImageClassify = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_ImageClassify_Func = {
    init: function() {
-    this.setColour(Blockly.Msg['AI_HUE']);
+    this.setColour(Blockly.Blocks.AI.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_AipImageClassify_advancedGeneral, "advancedGeneral"], 
                                                  [Blockly.MIXLY_AipImageClassify_dishDetect, "dishDetect"],
@@ -128,7 +128,7 @@ Blockly.Blocks.AI_ImageClassify_Func = {
 
 Blockly.Blocks.AI_Face_match = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipFace_match)
             .appendField(Blockly.MIXLY_Client)
@@ -150,7 +150,7 @@ Blockly.Blocks.AI_Face_match = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_Ocr = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipOcr)
             .appendField(Blockly.MIXLY_Client)
@@ -173,7 +173,7 @@ Blockly.Blocks.AI_Ocr = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_Ocr_Func = {
    init: function() {
-    this.setColour(Blockly.Msg['AI_HUE']);
+    this.setColour(Blockly.Blocks.AI.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_AipOcr_basicGeneral, "basicGeneral"], 
                                                  [Blockly.MIXLY_AipOcr_webImage, "webImage"],
@@ -197,7 +197,7 @@ Blockly.Blocks.AI_Ocr_Func = {
 
 Blockly.Blocks.AI_Nlp = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipNlp)
             .appendField(Blockly.MIXLY_Client)
@@ -219,7 +219,7 @@ Blockly.Blocks.AI_Nlp = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_Nlp_Sim = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipNlp_Sim)
             .appendField(Blockly.MIXLY_Client)
@@ -244,7 +244,7 @@ Blockly.Blocks.AI_Nlp_Sim = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_Nlp_Func = {
    init: function() {
-    this.setColour(Blockly.Msg['AI_HUE']);
+    this.setColour(Blockly.Blocks.AI.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_AipNlp_lexer, "lexer"], 
                                                  [Blockly.MIXLY_AipNlp_depParser, "depParser"],
@@ -263,7 +263,7 @@ Blockly.Blocks.AI_Nlp_Func = {
 
 Blockly.Blocks.AI_Nlp_Func_sim = {
    init: function() {
-    this.setColour(Blockly.Msg['AI_HUE']);
+    this.setColour(Blockly.Blocks.AI.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_AipNlp_wordSimEmbedding, "wordSimEmbedding"],
                                                 [Blockly.MIXLY_AipNlp_simnet, "simnet"]
@@ -274,7 +274,7 @@ Blockly.Blocks.AI_Nlp_Func_sim = {
 
 Blockly.Blocks.AI_Nlp_Topic = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipNlp_topic)
             .appendField(Blockly.MIXLY_Client)
@@ -293,7 +293,7 @@ Blockly.Blocks.AI_Nlp_Topic = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.AI_Nlp_newsSummary = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Msg['AI_HUE']);
+        this.setColour(Blockly.Blocks.AI.HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipNlp_summary)
             .appendField(Blockly.MIXLY_Client)
@@ -319,7 +319,7 @@ Blockly.Blocks.AI_Nlp_newsSummary = { //  AI_TYPE_FUNC
 
  Blockly.Blocks['AI_audio'] = {
   init: function() {
-    this.setColour(Blockly.Msg['STORAGE_HUE']);
+    this.setColour(Blockly.Blocks.storage.HUE);
     this.appendValueInput("VAR")
         .appendField(Blockly.Msg.MIXPY_AI_AUDIO);
     this.appendValueInput("TIME")
@@ -333,7 +333,7 @@ Blockly.Blocks.AI_Nlp_newsSummary = { //  AI_TYPE_FUNC
 
  Blockly.Blocks['AI_photo'] = {
   init: function() {
-    this.setColour(Blockly.Msg['STORAGE_HUE']);
+    this.setColour(Blockly.Blocks.storage.HUE);
     this.appendValueInput("VAR")
         .appendField(Blockly.Msg.MIXPY_AI_PHOTO);
     this.appendValueInput("BUT")
@@ -352,7 +352,7 @@ Blockly.Blocks['AI_result'] = {
    */
   init: function() {
     
-    this.setColour(Blockly.Msg['AI_HUE']);
+    this.setColour(Blockly.Blocks.AI.HUE);
             
     this.appendValueInput('AI')
         .appendField(Blockly.Msg.MIXPY_AI_RESULT)

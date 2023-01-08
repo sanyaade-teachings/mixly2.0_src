@@ -5,11 +5,11 @@ goog.provide('Blockly.Blocks.html');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['HTML_HUE'] = '#1ec1e4';
+Blockly.Blocks.html.HUE = '#1ec1e4';
 
 Blockly.Blocks.html_document = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.HTML_DOCUMENT);
     this.appendStatementInput('HEAD')
@@ -22,7 +22,7 @@ Blockly.Blocks.html_document = {
 
 Blockly.Blocks.html_title = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.HTML_LEVEL)
         .appendField(new Blockly.FieldDropdown([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"]]), 'LEVEL');
@@ -35,7 +35,7 @@ Blockly.Blocks.html_title = {
 
 Blockly.Blocks.html_head_body = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.HTML_HEAD,"head"],
                                                 [Blockly.Msg.HTML_BODY,"body"]]), 'LEVEL');
@@ -48,7 +48,7 @@ Blockly.Blocks.html_head_body = {
 
 Blockly.Blocks.html_content = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.HTML_P,"p"],
                                                 [Blockly.Msg.HTML_SPAN,"span"],
@@ -72,7 +72,7 @@ Blockly.Blocks.html_content = {
 
 Blockly.Blocks.html_content_more = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField('<')
         .appendField(new Blockly.FieldTextInput('tag'),"LEVEL")
@@ -90,7 +90,7 @@ Blockly.Blocks.html_content_more = {
 
 Blockly.Blocks.html_style = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.HTML_STYLE)
     this.appendStatementInput('STYLE');
@@ -100,7 +100,7 @@ Blockly.Blocks.html_style = {
 
 Blockly.Blocks.html_form = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.HTML_FORM_CONTENT)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.HTML_TEXT,"text"],
@@ -142,7 +142,7 @@ Blockly.Blocks.html_form = {
 
 Blockly.Blocks.html_style_content = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('property'),"KEY")
         .appendField(':')
@@ -154,7 +154,7 @@ Blockly.Blocks.html_style_content = {
 
 Blockly.Blocks.html_style_color = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('property'),"KEY")
         .appendField(':')
@@ -166,7 +166,7 @@ Blockly.Blocks.html_style_color = {
 
 Blockly.Blocks.html_text = {
   init: function() {
-    this.setColour(Blockly.Msg['HTML_HUE']);
+    this.setColour(Blockly.Blocks.html.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.HTML_TEXT)
         .appendField(new Blockly.FieldTextInput('text'),"TEXT");

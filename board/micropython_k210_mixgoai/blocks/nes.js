@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.game');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['GAME_HUE'] = '#2E9883'
+Blockly.Blocks.game.HUE = '#2E9883'
 
 
 Blockly.Blocks.nes_joystick_init = {
     init: function () {
-        this.setColour(Blockly.Msg['GAME_HUE']);
+        this.setColour(Blockly.Blocks.game.HUE);
 		this.appendDummyInput()
             .appendField("NES 初始化");
 		this.appendDummyInput()
@@ -42,7 +42,7 @@ Blockly.Blocks.nes_joystick_init = {
 
 Blockly.Blocks.nes_keyboard_init = {
     init: function () {
-        this.setColour(Blockly.Msg['GAME_HUE']);
+        this.setColour(Blockly.Blocks.game.HUE);
 		this.appendDummyInput()
             .appendField("NES 初始化");
 		this.appendDummyInput()
@@ -61,7 +61,7 @@ Blockly.Blocks.nes_keyboard_init = {
 
 Blockly.Blocks.nes_run = {
     init: function () {
-        this.setColour(Blockly.Msg['GAME_HUE']);
+        this.setColour(Blockly.Blocks.game.HUE);
 		this.appendDummyInput()
             .appendField("NES 运行游戏");
         this.appendValueInput('path')

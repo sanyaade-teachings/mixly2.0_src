@@ -4,7 +4,7 @@ goog.provide('Blockly.Blocks.sensor');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['SENSOR_HUE'] = 40;
+Blockly.Blocks.sensor.HUE = 40;
 
 Blockly.FieldColour.COLOURS = ['#0f0', '#0e0', '#0d0', '#0c0', '#0b0', '#0a0',
     '#080', '#060', '#040', '#000'];
@@ -15,7 +15,7 @@ Blockly.Blocks.base_loop = {
       this.jsonInit({
         "message0": Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT + Blockly.Msg.CONTROLS_REPEAT_INPUT_DO,
         "message1": "%1",
-        "colour": Blockly.Msg['LOOPS_HUE'],
+        "colour": Blockly.Blocks.loops.HUE,
         "args1": [
             {
               "type": "input_statement",
@@ -32,7 +32,7 @@ Blockly.Blocks.base_loop = {
 
 Blockly.Blocks.actuator_rgb_color = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
             .appendField(Blockly.MIXLY_RGB_NUM);
@@ -64,7 +64,7 @@ Blockly.Blocks.actuator_rgb_color = {
 
 Blockly.Blocks.actuator_rgb_off = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
             .appendField(Blockly.MIXLY_RGB_NUM);
@@ -85,7 +85,7 @@ Blockly.Blocks.actuator_rgb_off = {
 
 Blockly.Blocks.actuator_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("_LED_")
@@ -112,7 +112,7 @@ Blockly.Blocks.actuator_rgb = {
 
 Blockly.Blocks.actuator_motor_on = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_MOTOR)
             .appendField(Blockly.LCD_NUMBERING);
@@ -139,7 +139,7 @@ Blockly.Blocks.actuator_motor_on = {
 
 Blockly.Blocks.actuator_motor_off = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_MOTOR)
             .appendField(Blockly.LCD_NUMBERING);
@@ -159,7 +159,7 @@ Blockly.Blocks.actuator_motor_off = {
 
 Blockly.Blocks['sensor_pin_near'] = {
     init: function(){
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(Blockly.Blocks.sensor.HUE);
         this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
         .appendField(Blockly.LCD_NUMBERING)

@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.actuator');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['ACTUATOR_HUE'] = 100
+Blockly.Blocks.actuator.HUE = 100
 
 
 Blockly.Blocks.actuator_stepper_keep = {
     init: function () {
-      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
       this.appendDummyInput()
           .appendField("MixGo Car")
           .appendField(new Blockly.FieldDropdown([
@@ -31,7 +31,7 @@ Blockly.Blocks.actuator_stepper_keep = {
 
 Blockly.Blocks.actuator_stepper = {
     init: function () {
-      this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+      this.setColour(Blockly.Blocks.actuator.HUE);
       this.appendDummyInput()
           .appendField("MixGo Car")
           .appendField(new Blockly.FieldDropdown([
@@ -56,7 +56,7 @@ Blockly.Blocks.actuator_stepper = {
 
 Blockly.Blocks.actuator_stepper_stop = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
         this.appendDummyInput("")
             .appendField("MixGo Car")
           .appendField(new Blockly.FieldDropdown([
@@ -72,7 +72,7 @@ Blockly.Blocks.actuator_stepper_stop = {
 
 Blockly.Blocks.actuator_stepper_readbusy = {
     init: function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput()
             .appendField("MixGo Car")
             .appendField(Blockly.MIXGO_CAR_READBUSY);
@@ -83,7 +83,7 @@ Blockly.Blocks.actuator_stepper_readbusy = {
 
 Blockly.Blocks.actuator_stepper_wheel = {
     init: function () {
-      this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+      this.setColour(Blockly.Blocks.actuator.HUE);
       this.appendDummyInput()
           .appendField(Blockly.MIXLY_STEPPER)
                   .appendField(new Blockly.FieldDropdown([
@@ -114,7 +114,7 @@ Blockly.Blocks.actuator_stepper_wheel = {
 
 Blockly.Blocks.actuator_stepper_wheel_stop = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_STEPPER)
             .appendField(new Blockly.FieldDropdown([
@@ -134,7 +134,7 @@ Blockly.Blocks.actuator_stepper_wheel_stop = {
 
 Blockly.Blocks.actuator_stepper_wheel_readbusy = {
     init: function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_STEPPER)
             .appendField(new Blockly.FieldDropdown([
@@ -152,7 +152,7 @@ Blockly.Blocks.actuator_stepper_wheel_readbusy = {
 
 Blockly.Blocks.esp32_s2_mixgo_car_audio_init =  {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_SETUP+Blockly.MIXGO_CE_SPEAKER);
         this.setInputsInline(true);
@@ -164,7 +164,7 @@ Blockly.Blocks.esp32_s2_mixgo_car_audio_init =  {
 
 Blockly.Blocks.esp32_s2_mixgo_car_audio_wave_play = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendValueInput('wav')
             .appendField(Blockly.MIXGO_WAVE)        
         this.setPreviousStatement(true);
@@ -175,7 +175,7 @@ Blockly.Blocks.esp32_s2_mixgo_car_audio_wave_play = {
 
 Blockly.Blocks.esp32_s2_mixgo_car_audio_wave_is_playing = {
     init: function(){
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXGO_WAVE_IS_PLAYING);
         this.setOutput(true);
@@ -185,7 +185,7 @@ Blockly.Blocks.esp32_s2_mixgo_car_audio_wave_is_playing = {
 
 Blockly.Blocks.actuator_dc_motor = {
     init: function () {
-      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
       this.appendDummyInput()
           .appendField(Blockly.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([
@@ -212,7 +212,7 @@ Blockly.Blocks.actuator_dc_motor = {
 
 Blockly.Blocks.actuator_dc_motor_stop = {
     init: function () {
-      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
       this.appendDummyInput()
           .appendField(Blockly.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([

@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.base');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['BASE_HUE'] = 20//'#ae3838';//40;
+Blockly.Blocks.base.HUE = 20//'#ae3838';//40;
 
 Blockly.Blocks['inout_highlow'] = {
    init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_HIGH, "HIGH"], [Blockly.MIXLY_LOW, "LOW"]]), 'BOOL')
     this.setOutput(true, Boolean);
@@ -17,7 +17,7 @@ Blockly.Blocks['inout_highlow'] = {
 
 Blockly.Blocks.inout_digital_write = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendValueInput("PIN",Number)
         .appendField(Blockly.MIXLY_Digital_PINMODEOUT)
         .setCheck(Number);
@@ -33,7 +33,7 @@ Blockly.Blocks.inout_digital_write = {
 
 Blockly.Blocks.inout_digital_read = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
 	this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
         .appendField(Blockly.MIXLY_Digital_PINMODEIN)
@@ -48,7 +48,7 @@ Blockly.Blocks.inout_digital_read = {
 
 Blockly.Blocks.inout_pwm_analog_write = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
 	this.appendValueInput("PIN", Number)
         .appendField("PWM"+Blockly.MIXLY_Analog_PINMODEOUT)
         .setCheck(Number);
@@ -64,7 +64,7 @@ Blockly.Blocks.inout_pwm_analog_write = {
 
 Blockly.Blocks.inout_analog_write = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
     this.appendValueInput("PIN", Number)
         .appendField("DAC"+Blockly.MIXLY_Analog_PINMODEOUT)
         .setCheck(Number);
@@ -80,7 +80,7 @@ Blockly.Blocks.inout_analog_write = {
 
 Blockly.Blocks.inout_analog_write_set = {
     init: function(){
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_Analog_PINMODEOUT)
             .setCheck(Number);
@@ -102,7 +102,7 @@ Blockly.Blocks.inout_analog_write_set = {
 
 Blockly.Blocks.inout_pwm_analog_write_set_freq = {
     init: function(){
-                this.setColour(Blockly.Msg['BASE_HUE']);
+                this.setColour(Blockly.Blocks.base.HUE);
                 this.appendValueInput("PIN", Number)
                     .appendField("PWM"+Blockly.MIXLY_Analog_PINMODEOUT)
                     .setCheck(Number);
@@ -118,7 +118,7 @@ Blockly.Blocks.inout_pwm_analog_write_set_freq = {
 
 Blockly.Blocks.inout_analog_read = {
   init: function() {
-    this.setColour(Blockly.Msg['BASE_HUE']);
+    this.setColour(Blockly.Blocks.base.HUE);
 	this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
         .appendField(Blockly.MIXLY_Analog_PINMODEIN)
@@ -133,7 +133,7 @@ Blockly.Blocks.inout_analog_read = {
 
 Blockly.Blocks.inout_analog_atten = {
     init: function(){
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_Analog_PINMODEIN)
             .setCheck(Number);
@@ -155,7 +155,7 @@ Blockly.Blocks.inout_analog_atten = {
 
 Blockly.Blocks['inout_pin_pressed'] = {
     init: function(){
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         this.appendValueInput('pin')
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(Blockly.MIXLY_ESP32_TOUCH_SENSOR);
@@ -220,7 +220,7 @@ Blockly.Blocks['inout_digital_init'] = {
 
 Blockly.Blocks.inout_pwm_analog_write_init = {
     init: function() {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         // this.appendValueInput("PIN", Number)
         //     .appendField(Blockly.MIXLY_SETUP)
         //     .appendField("PWM"+Blockly.MIXLY_Analog_PINMODEOUT)
@@ -254,7 +254,7 @@ Blockly.Blocks.inout_pwm_analog_write_init = {
 
 Blockly.Blocks.inout_analog_write_init = {
     init: function() {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         // this.appendValueInput("PIN", Number)
         //     .appendField(Blockly.MIXLY_SETUP)
         //     .appendField("PWM"+Blockly.MIXLY_Analog_PINMODEOUT)
@@ -288,7 +288,7 @@ Blockly.Blocks.inout_analog_write_init = {
 
 Blockly.Blocks.inout_analog_read_init = {
     init: function() {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         // this.appendValueInput("PIN", Number)
         //     .appendField(Blockly.MIXLY_SETUP)
         //     .appendField("PWM"+Blockly.MIXLY_Analog_PINMODEOUT)
@@ -322,7 +322,7 @@ Blockly.Blocks.inout_analog_read_init = {
 
 Blockly.Blocks['inout_pin_pressed_init'] = {
     init: function() {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(Blockly.Blocks.base.HUE);
         // this.appendValueInput("PIN", Number)
         //     .appendField(Blockly.MIXLY_SETUP)
         //     .appendField("PWM"+Blockly.MIXLY_Analog_PINMODEOUT)

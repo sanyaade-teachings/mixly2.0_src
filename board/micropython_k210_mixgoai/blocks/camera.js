@@ -2,11 +2,11 @@
 
 goog.provide('Blockly.Blocks.camera');
 goog.require('Blockly.Blocks');
-Blockly.Msg['CAMERA_HUE'] = "#bc9705"//'#9e77c9'//40;
+Blockly.Blocks.camera.HUE = "#bc9705"//'#9e77c9'//40;
 
 Blockly.Blocks['mode'] = {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["彩色图(YUV422)", "sensor.YUV422"],
@@ -20,7 +20,7 @@ Blockly.Blocks['mode'] = {
 
 Blockly.Blocks['size'] = {
     init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(Blockly.Blocks.actuator.HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
 				["320x240", "sensor.QVGA"],
@@ -36,7 +36,7 @@ Blockly.Blocks['size'] = {
 
 Blockly.Blocks.camera_init = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera")
             .appendField("初始化");
@@ -61,7 +61,7 @@ Blockly.Blocks.camera_init = {
 
 Blockly.Blocks.camera_reset = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendDummyInput()
@@ -75,7 +75,7 @@ Blockly.Blocks.camera_reset = {
 
 Blockly.Blocks.camera_set_pixformat = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -89,7 +89,7 @@ Blockly.Blocks.camera_set_pixformat = {
 
 Blockly.Blocks.camera_set_framesize = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -103,7 +103,7 @@ Blockly.Blocks.camera_set_framesize = {
 
 Blockly.Blocks.camera_run = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -118,7 +118,7 @@ Blockly.Blocks.camera_run = {
 
 Blockly.Blocks.camera_skip_frames = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('frame')
@@ -133,7 +133,7 @@ Blockly.Blocks.camera_skip_frames = {
 
 Blockly.Blocks['camera_snapshot'] = {
     init: function(){
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendDummyInput()
@@ -146,7 +146,7 @@ Blockly.Blocks['camera_snapshot'] = {
 
 Blockly.Blocks.camera_shutdown = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -160,7 +160,7 @@ Blockly.Blocks.camera_shutdown = {
 
 Blockly.Blocks.camera_set_hmirror = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -174,7 +174,7 @@ Blockly.Blocks.camera_set_hmirror = {
 
 Blockly.Blocks.camera_set_vflip = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -188,7 +188,7 @@ Blockly.Blocks.camera_set_vflip = {
 
 Blockly.Blocks.camera_set_colorbar = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendValueInput('key')
@@ -202,7 +202,7 @@ Blockly.Blocks.camera_set_colorbar = {
 
 Blockly.Blocks['camera_getinfo'] = {
     init: function(){
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendDummyInput()
@@ -222,7 +222,7 @@ Blockly.Blocks['camera_getinfo'] = {
 
 Blockly.Blocks.camera_setmun = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendDummyInput()
@@ -245,7 +245,7 @@ Blockly.Blocks.camera_setmun = {
 
 Blockly.Blocks.camera_set_windowing = {
     init: function () {
-        this.setColour(Blockly.Msg['CAMERA_HUE']);
+        this.setColour(Blockly.Blocks.camera.HUE);
 		this.appendDummyInput()
             .appendField("Camera");
 		this.appendDummyInput()

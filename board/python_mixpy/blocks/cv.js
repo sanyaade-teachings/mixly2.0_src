@@ -4,11 +4,11 @@ goog.provide('Blockly.Blocks.cv');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['CV_HUE'] = "f0a559";
+Blockly.Blocks.cv.HUE = "f0a559";
 
  Blockly.Blocks['cv_read_image'] = {
    init: function() {
-     this.setColour(Blockly.Msg['CV_HUE']);
+     this.setColour(Blockly.Blocks.cv.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_CV_IMREAD);
@@ -21,7 +21,7 @@ Blockly.Msg['CV_HUE'] = "f0a559";
 
 Blockly.Blocks['cv_show_image'] = {
     init:function(){
-        this.setColour(Blockly.Msg['CV_HUE']);
+        this.setColour(Blockly.Blocks.cv.HUE);
         this.appendValueInput("FILE")
             .appendField(Blockly.OLED_BITMAP);
         this.appendValueInput('data')
@@ -35,7 +35,7 @@ Blockly.Blocks['cv_show_image'] = {
 
 Blockly.Blocks['cv_write_image'] = {
     init:function(){
-        this.setColour(Blockly.Msg['CV_HUE']);
+        this.setColour(Blockly.Blocks.cv.HUE);
         this.appendValueInput("FILE")
             .appendField(Blockly.MIXLY_CV_IMWRITE);
         this.appendValueInput('data')
@@ -49,7 +49,7 @@ Blockly.Blocks['cv_write_image'] = {
 
 Blockly.Blocks['cv_waitkey'] = {
     init:function(){
-        this.setColour(Blockly.Msg['CV_HUE']);
+        this.setColour(Blockly.Blocks.cv.HUE);
         this.appendValueInput('data')
             .setCheck(Number)
             .appendField(Blockly.MIXLY_DELAY);
@@ -64,7 +64,7 @@ Blockly.Blocks['cv_waitkey'] = {
 
 Blockly.Blocks['cv_destroy_all'] = {
     init:function(){
-        this.setColour(Blockly.Msg['CV_HUE']);
+        this.setColour(Blockly.Blocks.cv.HUE);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_CV_DESTROY_ALL)    
         this.setPreviousStatement(true);
@@ -75,7 +75,7 @@ Blockly.Blocks['cv_destroy_all'] = {
 
 Blockly.Blocks['cv_line_rect'] = {
     init:function(){
-        this.setColour(Blockly.Msg['CV_HUE']);
+        this.setColour(Blockly.Blocks.cv.HUE);
         this.appendValueInput("FILE")
             .appendField(Blockly.MIXLY_MICROBIT_IMAGE);
         var line_rect =
@@ -110,7 +110,7 @@ Blockly.Blocks['cv_line_rect'] = {
 
 Blockly.Blocks['cv_text'] = {
     init:function(){
-        this.setColour(Blockly.Msg['CV_HUE']);
+        this.setColour(Blockly.Blocks.cv.HUE);
         this.appendValueInput("FILE")
             .appendField(Blockly.MIXLY_MICROBIT_IMAGE);
         var font =
@@ -145,7 +145,7 @@ Blockly.Blocks['cv_text'] = {
 
 Blockly.Blocks['cv_face_classifier'] = {
    init: function() {
-     this.setColour(Blockly.Msg['CV_HUE']);
+     this.setColour(Blockly.Blocks.cv.HUE);
      this.appendValueInput("FILE")
          .setCheck(String)
          .appendField(Blockly.MIXLY_CV_FACE_CLASSIFIER);
@@ -158,7 +158,7 @@ Blockly.Blocks['cv_face_classifier'] = {
 
 Blockly.Blocks['cv_face_detect'] = {
    init: function() {
-     this.setColour(Blockly.Msg['CV_HUE']);
+     this.setColour(Blockly.Blocks.cv.HUE);
      this.appendValueInput("FILE")
          .appendField(Blockly.MIXLY_MICROBIT_IMAGE);
      this.appendValueInput("FACE")
@@ -178,7 +178,7 @@ Blockly.Blocks['cv_face_detect'] = {
 
  Blockly.Blocks['cv_face_detect_all'] = {
    init: function() {
-     this.setColour(Blockly.Msg['CV_HUE']);
+     this.setColour(Blockly.Blocks.cv.HUE);
      this.appendValueInput("FILE")
          .appendField(Blockly.MIXLY_MICROBIT_IMAGE);
      this.appendValueInput("FACE")

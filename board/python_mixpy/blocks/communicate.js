@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.communicate');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['COMMUNICATE_HUE'] = 0//'#3288dd';
+Blockly.Blocks.communicate.HUE = 0//'#3288dd';
 
 Blockly.Blocks['requests_get'] = {
   init: function() {
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(Blockly.Blocks.communicate.HUE);
     this.appendValueInput("DOMAIN")
       .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
       .setCheck(String);
@@ -39,7 +39,7 @@ Blockly.Blocks['requests_attribute'] = {
   var attr =
         [[Blockly.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],[Blockly.blockpy_REQUESTS_GET_ATTR_TEXT, 'text']
         ,[Blockly.blockpy_REQUESTS_GET_ATTR_COOKIES, 'cookies'],[Blockly.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']];
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(Blockly.Blocks.communicate.HUE);
     this.appendDummyInput("")
         .appendField(Blockly.MIXLY_MICROBIT_JS_GET)
         .appendField(new Blockly.FieldDropdown(attr), 'ATTR')
@@ -71,7 +71,7 @@ Blockly.Blocks['requests_method'] = {
         [['post', 'post'],['put', 'put'],
         ['delete', 'delete'],['head', 'head'],
         ['option', 'option']];
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(Blockly.Blocks.communicate.HUE);
     this.appendDummyInput("")
         .appendField(Blockly.blockpy_CONDUCT)
         .appendField(new Blockly.FieldDropdown(method), 'DIR')

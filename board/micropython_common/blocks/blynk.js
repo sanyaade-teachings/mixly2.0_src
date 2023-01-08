@@ -5,7 +5,7 @@ goog.require('Blockly.Blocks');
 
 
 /******************* Blynk *****************/
-Blockly.Msg['BLYNK_HUE'] ='#2FAD7A';
+Blockly.Blocks.blynk.HUE ='#2FAD7A';
 
 
 // 自定义终端部件 Terminal Blynk
@@ -15,7 +15,7 @@ Blockly.Blocks['mpython_blynk_terminal_widget_vpin'] = {
             "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_MESSAGE0,
@@ -37,7 +37,7 @@ Blockly.Blocks['mpython_blynk_sync_virtual'] = {
             "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_SYNC_VIRTUAL_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_SYNC_VIRTUAL_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_SYNC_VIRTUAL_MESSAGE0,
@@ -59,7 +59,7 @@ Blockly.Blocks['mpython_blynk_on_disconnected'] = {
             "inputsInline": true,
             // "nextStatement": null,
             // "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_ON_DISCONNECTED_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_ON_DISCONNECTED_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_ON_DISCONNECTED_MESSAGE0
@@ -76,7 +76,7 @@ Blockly.Blocks['mpython_blynk_on_connected'] = {
             "inputsInline": true,
             // "nextStatement": null,
             // "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_ON_CONNECTED_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_ON_CONNECTED_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_ON_CONNECTED_MESSAGE0
@@ -93,7 +93,7 @@ Blockly.Blocks['mpython_blynktimer_run'] = {
             "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNKTIMER_RUN_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNKTIMER_RUN_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNKTIMER_RUN_MESSAGE0
@@ -108,7 +108,7 @@ Blockly.Blocks['mpython_blynk_run'] = {
             "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_RUN_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_RUN_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_RUN_MESSAGE0
@@ -123,7 +123,7 @@ Blockly.Blocks['mpython_blynk_app_notify'] = {
             "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_APP_NOTIFY_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_APP_NOTIFY_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_APP_NOTIFY_MESSAGE0,
@@ -146,7 +146,7 @@ Blockly.Blocks['mpython_blynk_stop_timers'] = {
             "nextStatement": null,
             "previousStatement": null,
             // "output": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_STOP_TIMERS_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNKTIMER_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_STOP_TIMERS_MESSAGE0,
@@ -169,7 +169,7 @@ Blockly.Blocks['mpython_blynk_set_property'] = {
             "nextStatement": null,
             "previousStatement": null,
             // "output": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_SET_PROPERTY_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_SET_PROPERTY_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_SET_PROPERTY_MESSAGE0,
@@ -198,7 +198,7 @@ Blockly.Blocks['mpython_blynk_email'] = {
             "nextStatement": null,
             "previousStatement": null,
             // "output": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_EMAIL_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_EMAIL_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_EMAIL_MESSAGE0,
@@ -233,7 +233,7 @@ Blockly.Blocks['mpython_blynk_get_timers'] = {
             // "nextStatement": null,
             // "previousStatement": null,
             "output": null,
-            "colour":Blockly.Msg['BLYNK_HUE'],
+            "colour":Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_GET_TIMERS_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_GET_TIMERS_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_GET_TIMERS_MESSAGE0,
@@ -248,7 +248,7 @@ Blockly.Blocks['mpython_blynktimer'] = {
             "message0": Blockly.MPYTHON_BLYNKTIMER_MESSAGE0,
             // "nextStatement": null,
             // "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNKTIMER_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNKTIMER_TOOLTIP,
             "args0": [
@@ -286,7 +286,7 @@ Blockly.Blocks['mpython_blynk_sensor_data_to_app'] = {
             "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_MESSAGE0,
@@ -314,7 +314,7 @@ Blockly.Blocks['mpython_blynk_app_data'] = {
             // "nextStatement": null,
             // "previousStatement": null,
             // "output":null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_APP_DATA_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_APP_DATA_MESSAGE0,
@@ -343,7 +343,7 @@ Blockly.Blocks['mpython_blynk_setup'] = {
             // "inputsInline": true,
             "nextStatement": null,
             "previousStatement": null,
-            "colour": Blockly.Msg['BLYNK_HUE'],
+            "colour": Blockly.Blocks.blynk.HUE,
             "helpUrl": Blockly.MPYTHON_BLYNK_SETUP_HELPURL,
             "tooltip": Blockly.MPYTHON_BLYNK_SETUP_TOOLTIP,
             "message0": Blockly.MPYTHON_BLYNK_SETUP_MESSAGE0,

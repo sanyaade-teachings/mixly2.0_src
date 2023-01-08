@@ -5,7 +5,7 @@ goog.provide('Blockly.Blocks.texts');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['TEXTS_HUE'] = 160//'#9ec440'//160;
+Blockly.Blocks.texts.HUE = 160//'#9ec440'//160;
 
 Blockly.Blocks['text'] = {
   /**
@@ -14,7 +14,7 @@ Blockly.Blocks['text'] = {
    */
    init: function() {
     //this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput()
     .appendField(this.newQuote_(true))
     .appendField(new Blockly.FieldTextInput(''), 'TEXT')
@@ -45,7 +45,7 @@ Blockly.Blocks['text_textarea'] = {
    */
    init: function() {
     //this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput()
     .appendField(this.newQuote_(true))
     .appendField(new Blockly.FieldMultilineInput('Hello\nMixly'), 'VALUE')
@@ -93,7 +93,7 @@ return String(text).substring(0, 1);
 
 Blockly.Blocks['text_char'] = {
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput()
     .appendField(this.newQuote_(true))
     .appendField(new Blockly.FieldTextInput('',Blockly.FieldTextInput.char_validator), 'TEXT')
@@ -114,7 +114,7 @@ Blockly.Blocks['text_char'] = {
 
 Blockly.Blocks['text_join'] = {
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('A')
     .setCheck([String, Number]);
     this.appendValueInput('B')
@@ -130,7 +130,7 @@ Blockly.Blocks['text_to_number'] = {
   init: function() {
    var TO_INT_FLOAT =
    [[Blockly.MIXLY_TO_INT, 'int'],[Blockly.MIXLY_TO_FLOAT, 'float'],[Blockly.MIXLY_TO_BITES, 'b']];
-   this.setColour(Blockly.Msg['MATH_HUE']);
+   this.setColour(Blockly.Blocks.math.HUE);
    this.appendValueInput('VAR')
    .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
    this.setOutput(true, Number);
@@ -151,7 +151,7 @@ Blockly.Blocks['text_to_number_skulpt'] = {
   init: function() {
     var TO_INT_FLOAT =
     [[Blockly.MIXLY_TO_INT, 'int'],[Blockly.MIXLY_TO_FLOAT, 'float']];
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('VAR')
     .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
     this.setOutput(true, Number);
@@ -169,7 +169,7 @@ Blockly.Blocks['text_to_number_skulpt'] = {
 
 Blockly.Blocks['ascii_to_char'] = {
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('VAR')
     .setCheck(Number)
     .appendField(Blockly.MIXLY_TOCHAR);
@@ -180,7 +180,7 @@ Blockly.Blocks['ascii_to_char'] = {
 
 Blockly.Blocks['char_to_ascii'] = {
   init: function () {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('VAR')
     .setCheck(String)
     .appendField(Blockly.MIXLY_TOASCII);
@@ -191,7 +191,7 @@ Blockly.Blocks['char_to_ascii'] = {
 
 Blockly.Blocks['number_to_text'] = {
   init: function () {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TOSTRING);
     this.setOutput(true, String);
@@ -201,7 +201,7 @@ Blockly.Blocks['number_to_text'] = {
 
 Blockly.Blocks['text_length']={
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .appendField(Blockly.MIXLY_LENGTH);
     this.setOutput(true, Number);
@@ -217,7 +217,7 @@ Blockly.Blocks['text_char_at2'] = {
     [Blockly.Msg.LISTS_GET_INDEX_FROM_END, "FROM_END"],
     [Blockly.Msg.TEXT_GET_INDEX_RANDOM+1+Blockly.Msg.TEXT_CHARAT2, "RANDOM"]];
     this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .setCheck(String)
         //    .appendField(Blockly.MIXLY_MICROBIT_TYPE_LIST)
@@ -306,7 +306,7 @@ Blockly.Msg.LISTS_GET_INDEX_TAIL && this.appendDummyInput("TAIL").appendField(Bl
     Blockly.Blocks['text_char_at'] = {
       init: function () {
         this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(Blockly.Blocks.texts.HUE);
         this.appendValueInput("VAR")
         .setCheck(String);
         this.appendValueInput("AT")
@@ -323,7 +323,7 @@ Blockly.Msg.LISTS_GET_INDEX_TAIL && this.appendDummyInput("TAIL").appendField(Bl
     Blockly.Blocks['text_random_char'] = {
       init: function () {
         this.setHelpUrl(Blockly.Msg.LISTS_GET_INDEX_HELPURL);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(Blockly.Blocks.texts.HUE);
         this.appendValueInput("VAR")
         .setCheck(String);
         this.appendDummyInput()
@@ -349,7 +349,7 @@ Blockly.Msg.LISTS_GET_INDEX_TAIL && this.appendDummyInput("TAIL").appendField(Bl
     [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END, 'FROM_END'],
     [Blockly.Msg.LISTS_GET_SUBLIST_END_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .setCheck(String)
         //.appendField(Blockly.Msg.LISTS_GET_SUBLIST_TAIL)
@@ -450,7 +450,7 @@ Blockly.Blocks['text_substring'] = {
      */
      init: function () {
       this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
-      this.setColour(Blockly.Msg['TEXTS_HUE']);
+      this.setColour(Blockly.Blocks.texts.HUE);
       this.appendValueInput("VAR")
       .setCheck(String)
       this.appendValueInput('AT1')
@@ -471,7 +471,7 @@ Blockly.Blocks['text_substring'] = {
      [[Blockly.MIXLY_EQUALS, '==='],
      [Blockly.MIXLY_STARTSWITH, 'startswith'],
      [Blockly.MIXLY_ENDSWITH, 'endswith']];
-     this.setColour(Blockly.Msg['TEXTS_HUE']);
+     this.setColour(Blockly.Blocks.texts.HUE);
      this.appendValueInput("STR1")
      .setCheck(String);
      this.appendValueInput("STR2")
@@ -484,7 +484,7 @@ Blockly.Blocks['text_substring'] = {
 
  Blockly.Blocks['text_compare_to']={
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("STR1")
     .setCheck(String);
     this.appendValueInput("STR2")
@@ -501,7 +501,7 @@ Blockly.Blocks['text_capital']={
     var TEXT_CAPITAL =
     [[Blockly.Msg.TEXT_UPPER, 'upper'],[Blockly.Msg.TEXT_TITLE, 'title'],[Blockly.Msg.TEXT_CAPITALIZE, 'capitalize'],[Blockly.Msg.TEXT_SWAPCASE, 'swapcase'],
     [Blockly.Msg.TEXT_LOWER, 'lower']];
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
     .appendField(new Blockly.FieldDropdown(TEXT_CAPITAL), 'CAPITAL')
@@ -528,7 +528,7 @@ Blockly.Blocks['text_center']={
     [[Blockly.Msg.TEXT_LJUST, 'ljust'],
     [Blockly.Msg.TEXT_CENTER, 'center'],
     [Blockly.Msg.TEXT_RJUST, 'rjust']];
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .appendField(new Blockly.FieldDropdown(TEXT_CENTER), 'CENTER')
     .setCheck(String);
@@ -546,7 +546,7 @@ Blockly.Blocks['text_center']={
 
 Blockly.Blocks['text_find']={
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
     .setCheck(String);
@@ -563,7 +563,7 @@ Blockly.Blocks['text_find']={
 
 Blockly.Blocks['text_join_seq']={
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .appendField(Blockly.MIXLY_PYTHON_TEXT_JOIN_SEQ_USE_STR)
     .setCheck(String);
@@ -580,7 +580,7 @@ Blockly.Blocks['text_join_seq']={
 
 Blockly.Blocks['text_replace']={
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR")
     .setCheck(String);
     this.appendValueInput("STR1")
@@ -597,7 +597,7 @@ Blockly.Blocks['text_replace']={
 
 Blockly.Blocks['text_split']={
   init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput("VAR");
     this.appendValueInput("VAL")
     .appendField(Blockly.Msg.LIST_SPLIT_AS);   
@@ -613,7 +613,7 @@ Blockly.Blocks['text_strip'] = {
   init: function() {
     var STRIP =
     [[Blockly.Msg.TEXT_TRIM_BOTH, 'strip'],[Blockly.Msg.TEXT_TRIM_LEFT, 'lstrip'],[Blockly.Msg.TEXT_TRIM_RIGHT, 'rstrip']];
-    this.setColour(Blockly.Msg['TEXTS_HUE']);    
+    this.setColour(Blockly.Blocks.texts.HUE);    
     this.appendValueInput('VAR')
     this.appendDummyInput('')
     .appendField(Blockly.Msg.TEXT_STRIM);
@@ -642,7 +642,7 @@ Blockly.Blocks['text_format'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_MICROPYTHON_FORMAT)
   //don't need to specify the data type in Python
@@ -789,7 +789,7 @@ Blockly.Blocks['text_format'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE);
     this.appendStatementInput('STACK');
@@ -804,7 +804,7 @@ Blockly.Blocks['text_create_with_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME);
     this.setPreviousStatement(true);
@@ -824,7 +824,7 @@ Blockly.Blocks['text_format_noreturn'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_MICROPYTHON_FORMAT)
   //don't need to specify the data type in Python
@@ -955,7 +955,7 @@ Blockly.Blocks['text_format_noreturn'] = {
 
 Blockly.Blocks['text_encode'] = {
   init: function() {
-      this.setColour(Blockly.Msg['TEXTS_HUE']);
+      this.setColour(Blockly.Blocks.texts.HUE);
       var encode_decode =
         [[Blockly.Msg.MIXPY_TEXT_ENCODE, 'encode'],[Blockly.Msg.MIXPY_TEXT_DECODE, 'decode']];
       var code =
@@ -977,7 +977,7 @@ Blockly.Blocks['text_encode'] = {
 Blockly.Blocks['text_eval'] = {
  init: function() {
     
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('VAR')
         .setCheck(String)
         .appendField(Blockly.MIXLY_PYTHON_TEXT_EVAL);
@@ -991,7 +991,7 @@ Blockly.Blocks['text_eval'] = {
 
 Blockly.Blocks['os_system'] = {
  init: function() {    
-    this.setColour(Blockly.Msg['TEXTS_HUE']);
+    this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('VAR')
         .setCheck(String)
         .appendField(Blockly.MIXLY_PYTHON_OS_SYSTEM);

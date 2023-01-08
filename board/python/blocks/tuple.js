@@ -5,7 +5,7 @@ goog.provide('Blockly.Blocks.tuple');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Msg['TUPLE_HUE'] = 195//'#5ec73d'//195;
+Blockly.Blocks.tuple.HUE = 195//'#5ec73d'//195;
 
 
 Blockly.Blocks['tuple_create_with'] = {
@@ -14,7 +14,7 @@ Blockly.Blocks['tuple_create_with'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
   this.appendDummyInput("")
   //don't need to specify the data type in Python
         // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>'], [Blockly.LANG_MATH_STRING, 'Array<string>'], [Blockly.LANG_MATH_BOOLEAN, 'Array<boolean>']]), 'TYPE')
@@ -151,7 +151,7 @@ Blockly.Blocks['tuple_create_with_container'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.TUPLE_CREATE_WITH_CONTAINER_TITLE_ADD);
     this.appendStatementInput('STACK');
@@ -166,7 +166,7 @@ Blockly.Blocks['tuple_create_with_item'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME);
     this.setPreviousStatement(true);
@@ -178,7 +178,7 @@ Blockly.Blocks['tuple_create_with_item'] = {
 
 Blockly.Blocks['tuple_create_with_text2'] = {
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
   this.appendDummyInput("")
   //don't need to specify the data type in Python
         // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>']]), 'TYPE')
@@ -216,7 +216,7 @@ Blockly.Blocks['tuple_create_with_text2'] = {
 
 Blockly.Blocks['tuple_create_with_text_return'] = {
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
   this.appendDummyInput("")
         .appendField('(')
         .appendField(new Blockly.FieldTextInput('0,0,0'), 'TEXT')
@@ -246,7 +246,7 @@ Blockly.Blocks['tuple_create_with_text_return'] = {
 
 Blockly.Blocks.tuple_getIndex = {
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.setOutput(true);
     this.appendValueInput('TUP')
         .setCheck('Tuple')
@@ -267,7 +267,7 @@ Blockly.Blocks['tuple_length'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendValueInput('TUP');
   this.appendDummyInput("")
         .appendField(Blockly.MIXLY_LENGTH);
@@ -283,7 +283,7 @@ Blockly.Blocks['tuple_del'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendValueInput('TUP')
         .setCheck('Tuple')
     this.appendDummyInput("")         
@@ -300,7 +300,7 @@ Blockly.Blocks['tuple_join'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
   this.appendValueInput('TUP1')
         .setCheck('Tuple')
   this.appendDummyInput("")
@@ -320,7 +320,7 @@ Blockly.Blocks['tuple_max'] = {
         .setCheck('Tuple')
   var max_min =
         [[Blockly.blockpy_TUPLE_MAX, 'max'],[Blockly.blockpy_TUPLE_MIN, 'min'],[Blockly.Msg.MATH_ONLIST_OPERATOR_SUM,'sum']];
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendDummyInput("")
         .appendField(Blockly.MIXLY_MICROBIT_JS_GET)
         .appendField(new Blockly.FieldDropdown(max_min), 'DIR')
@@ -347,7 +347,7 @@ Blockly.Blocks['tuple_change_to'] = {
         [[Blockly.MIXLY_MICROBIT_TYPE_LIST, 'list'],
          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD, 'set']
         ];
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendValueInput('VAR')
         .setCheck("Tuple")
         // .appendField(Blockly.blockpy_USE_LIST);   
@@ -374,7 +374,7 @@ Blockly.Blocks['tuple_find'] = {
         [[Blockly.Msg.MIXLY_LIST_INDEX, 'INDEX'],
          [Blockly.Msg.MIXLY_LIST_COUNT, 'COUNT']
         ];
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendValueInput('VAR')
         .setCheck('List')
     this.appendValueInput('data')
@@ -412,7 +412,7 @@ Blockly.Blocks['tuple_trig'] = {
          [Blockly.Msg.MATH_ONLIST_OPERATOR_STD_DEV, 'STD_DEV'],
         ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.setOutput(true, Number);
     this.appendValueInput('data')
         .setCheck('List')
@@ -455,7 +455,7 @@ Blockly.Blocks['tuple_getSublist'] = {
          [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END, 'FROM_END'],
          [Blockly.Msg.LISTS_GET_SUBLIST_END_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendValueInput('LIST')
         .setCheck('List')
         //.appendField(Blockly.Msg.LISTS_GET_SUBLIST_TAIL)
@@ -555,7 +555,7 @@ Blockly.Blocks['tuple_create_with_noreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.itemCount_ = 3;
     this.updateShape_();
     this.setPreviousStatement(false);
@@ -689,7 +689,7 @@ Blockly.Blocks['tuple_get_sublist'] = {
      */
     init: function () {
         this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
-        this.setColour(Blockly.Msg['TUPLE_HUE']);
+        this.setColour(Blockly.Blocks.tuple.HUE);
         this.appendValueInput('LIST')
         this.appendDummyInput('')
         this.appendValueInput('AT1')
@@ -706,7 +706,7 @@ Blockly.Blocks['tuple_get_sublist'] = {
 
 Blockly.Blocks['tuple_get_random_item'] = {  
   init: function() {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
   this.appendValueInput("TUP");
   this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_RANDOM)
@@ -717,7 +717,7 @@ Blockly.Blocks['tuple_get_random_item'] = {
 
 Blockly.Blocks['tuple_totuple'] = {
   init: function () {
-    this.setColour(Blockly.Msg['TUPLE_HUE']);
+    this.setColour(Blockly.Blocks.tuple.HUE);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TOTUPLE);
     this.setOutput(true);

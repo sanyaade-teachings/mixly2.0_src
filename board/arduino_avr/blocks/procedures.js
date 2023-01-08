@@ -32,7 +32,7 @@ goog.require('Blockly.Blocks');
 /**
  * Common HSV hue for all blocks in this category.
  */
-Blockly.Msg['PROCEDURES_HUE'] = 290;
+Blockly.Blocks.procedures.HUE = 290;
 
 Blockly.Blocks['procedures_defnoreturn'] = {
     /**
@@ -659,7 +659,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
      */
     init: function () {
         this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);
-        this.setColour(Blockly.Msg['PROCEDURES_HUE']);
+        this.setColour(Blockly.Blocks.procedures.HUE);
         this.appendDummyInput('TOPROW')
             .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO)
             .appendField(this.id, 'NAME');
@@ -906,7 +906,7 @@ Blockly.Blocks['procedures_callreturn'] = {
      */
     init: function () {
         this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL);
-        this.setColour(Blockly.Msg['PROCEDURES_HUE']);
+        this.setColour(Blockly.Blocks.procedures.HUE);
         this.appendDummyInput('TOPROW')
             .appendField(Blockly.Msg.PROCEDURES_CALLRETURN_CALL)
             .appendField('', 'NAME');
@@ -933,7 +933,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['PROCEDURES_HUE']);
+        this.setColour(Blockly.Blocks.procedures.HUE);
         this.appendValueInput('CONDITION')
             .setCheck(Boolean)
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
@@ -1020,7 +1020,7 @@ Blockly.Blocks['procedures_return'] = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['PROCEDURES_HUE']);
+        this.setColour(Blockly.Blocks.procedures.HUE);
         // this.appendValueInput('CONDITION')
         //     .setCheck(Boolean)
         //     .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);

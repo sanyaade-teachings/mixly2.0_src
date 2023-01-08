@@ -29,7 +29,7 @@
  goog.require('Blockly.Blocks');
 
 
- Blockly.Msg['DICTS_HUE'] = 345;
+ Blockly.Blocks.dicts.HUE = 345;
 
 
 
@@ -41,7 +41,7 @@
      */
 
      init: function () {
-      this.setColour(Blockly.Msg['DICTS_HUE']);
+      this.setColour(Blockly.Blocks.dicts.HUE);
       this.appendDummyInput("")
       .appendField(new Blockly.FieldTextInput('mydict'), 'VAR')
       .appendField(new Blockly.FieldLabel(Blockly.Msg.DICTS_CREATE_WITH_INPUT_WITH), 'TIP')
@@ -199,7 +199,7 @@
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_TYPE_DICT);
     this.appendStatementInput('STACK');
@@ -214,7 +214,7 @@ Blockly.Blocks['dicts_create_with_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -230,7 +230,7 @@ Blockly.Blocks['dicts_keys'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
@@ -242,7 +242,7 @@ Blockly.Blocks['dicts_keys'] = {
 
 Blockly.Blocks['dicts_get'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     // this.appendDummyInput("")
     
     //     .appendField(Blockly.Msg.DICTS_GET_FROM_DICTS)
@@ -262,7 +262,7 @@ Blockly.Blocks['dicts_get'] = {
 
 Blockly.Blocks['dicts_get_default'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')    
     this.appendValueInput('KEY')
@@ -278,7 +278,7 @@ Blockly.Blocks['dicts_get_default'] = {
 
     Blockly.Blocks['dicts_add_or_change'] = {
       init: function() {
-        this.setColour(Blockly.Msg['DICTS_HUE']);
+        this.setColour(Blockly.Blocks.dicts.HUE);
         this.appendValueInput('DICT')
         this.appendValueInput('KEY')
         .appendField(Blockly.Msg.DICTS_ADD)
@@ -296,7 +296,7 @@ Blockly.Blocks['dicts_get_default'] = {
 
     Blockly.Blocks['dicts_delete'] = {
       init: function() {
-        this.setColour(Blockly.Msg['DICTS_HUE']);
+        this.setColour(Blockly.Blocks.dicts.HUE);
         this.appendValueInput('DICT')
         this.appendValueInput('KEY')
         .appendField(Blockly.Msg.DICTS_DELETE_IN)
@@ -317,7 +317,7 @@ Blockly.Blocks['dicts_get_default'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT2')
     .setCheck('Dict')
     .appendField(Blockly.Msg.MAKE_DICT)      
@@ -338,7 +338,7 @@ Blockly.Blocks['dicts_clear'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
@@ -355,7 +355,7 @@ Blockly.Blocks['dicts_items'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
@@ -372,7 +372,7 @@ Blockly.Blocks['dicts_values'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
@@ -389,7 +389,7 @@ Blockly.Blocks['dicts_length'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")
@@ -406,7 +406,7 @@ Blockly.Blocks['dicts_deldict'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
@@ -430,7 +430,7 @@ Blockly.Blocks['dicts_add_change_del'] = {
     
     [Blockly.MIXLY_MICROBIT_JS_DELETE_VAR, 'DELETE']];
     this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput('AT2')
@@ -527,7 +527,7 @@ Blockly.Blocks['dicts_add_change_del'] = {
 
 Blockly.Blocks['dicts_pop'] = {
   init: function() {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")
@@ -544,7 +544,7 @@ Blockly.Blocks['dicts_pop'] = {
 
     Blockly.Blocks['dicts_setdefault'] = {
       init: function() {
-        this.setColour(Blockly.Msg['DICTS_HUE']);
+        this.setColour(Blockly.Blocks.dicts.HUE);
         this.appendValueInput('DICT')
         .setCheck('Dict');
         this.appendValueInput('KEY')
@@ -566,7 +566,7 @@ Blockly.Blocks['dicts_pop'] = {
    * @this Blockly.Block
    */
    init: function () {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendDummyInput("")
         //    .appendField(new Blockly.FieldTextInput('mydict'), 'VAR')
         .appendField(new Blockly.FieldLabel(Blockly.MIXLY_MICROBIT_TYPE_DICT), 'TIP')
@@ -721,7 +721,7 @@ Blockly.Blocks['dicts_pop'] = {
 
 Blockly.Blocks['dicts_todict'] = {
   init: function () {
-    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.setColour(Blockly.Blocks.dicts.HUE);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TODICT);
     this.setOutput(true);

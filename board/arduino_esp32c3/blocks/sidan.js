@@ -2,7 +2,7 @@
 
 goog.provide('Blockly.Blocks.Handbit');
 goog.require('Blockly.Blocks');
-Blockly.Msg['HANDBIT_HUE'] = 65;
+Blockly.Blocks.Handbit.HUE = 65;
 
 profile["default"] = profile["esp32_handbit"];
 
@@ -64,7 +64,7 @@ Blockly.Blocks['hsc025a_instruction'] = {
         .appendField(new Blockly.FieldDropdown(hsc025a_mode), "instruction");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+    this.setColour(Blockly.Blocks.actuator.HUE);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -79,7 +79,7 @@ Blockly.Blocks['hsc025a_play'] = {
     this.appendDummyInput();
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+    this.setColour(Blockly.Blocks.actuator.HUE);
  this.setTooltip(Blockly.Msg.HSC025A_DESIGNATED_PLAYBACK1);
  this.setHelpUrl("");
   }
@@ -94,7 +94,7 @@ Blockly.Blocks['hsc025a_volume'] = {
     this.appendDummyInput();
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+    this.setColour(Blockly.Blocks.actuator.HUE);
  this.setTooltip(Blockly.Msg.RANGE_0);
  this.setHelpUrl("");
   }

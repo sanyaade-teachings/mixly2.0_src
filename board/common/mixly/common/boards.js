@@ -268,6 +268,12 @@ Boards.getSelectedBoardConfigParam = (param) => {
  * @return {void}
  **/
 Boards.changeTo = (boardName) => {
+    profile = typeof profile === 'object' ? profile : {};
+    if (profile[boardName]) {
+        profile['default'] = profile[boardName];
+    } else {
+        profile['default'] = profile['default'] ?? {};
+    }
     const boardKey = Boards.INFO[boardName].key;
     for (let i in SELECTED_BOARD) {
         delete SELECTED_BOARD[i];
@@ -430,12 +436,6 @@ Boards.changeTo = (boardName) => {
 Boards.updateCategories = (boardName, enforce = false) => {
     if (Boards.selected === boardName && !enforce) return;
     Boards.selected = boardName;
-    if (typeof profile === 'object' && profile[boardName]) {
-        profile['default'] = profile[boardName];
-    } else {
-        profile = typeof profile === 'object' ? profile : {};
-        profile['default'] = profile['default'] ?? {};
-    }
     $('#mixly-footer-boardname').html(boardName);
     if (Boards.INFO[boardName] && Boards.INFO[boardName].config) {
         $('#mixly-board-config').css('display', 'inline-flex');

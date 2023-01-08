@@ -215,6 +215,7 @@ NavEvents.init = () => {
 
     form.on('select(boards-type)', function (data) {
         const boardName = Boards.getSelectedBoardName();
+        Boards.changeTo(boardName);
         if (Boards.selected !== boardName) {
             try {
                 var xmlDom = Blockly.Xml.workspaceToDom(Editor.blockEditor);
@@ -227,7 +228,6 @@ NavEvents.init = () => {
                 console.log(error);
             }
         }
-        Boards.changeTo(boardName);
         Boards.updateCategories(boardName);
     });
 

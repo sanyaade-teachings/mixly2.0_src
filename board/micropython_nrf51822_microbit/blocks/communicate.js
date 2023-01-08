@@ -3,7 +3,7 @@
 goog.provide('Blockly.Blocks.communicate');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.communicate.HUE = 140//'#3288dd';
+Blockly.Msg['COMMUNICATE_HUE'] = 140//'#3288dd';
 
 Blockly.Blocks['radio_ons'] = {
     init: function() {
@@ -192,7 +192,7 @@ Blockly.Blocks['radio_receive_string'] = {
 
 Blockly.Blocks['i2c_init'] = {
   init: function() {
-   this.setColour(Blockly.Blocks.communicate.HUE);
+   this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
    this.appendValueInput("RX", Number)
        //.appendField(Blockly.MIXLY_SETUP)
        .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_SETUP)
@@ -215,7 +215,7 @@ Blockly.Blocks['i2c_init'] = {
 
 Blockly.Blocks['i2c_read'] = {
     init:function(){
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('address')
             .setCheck(Number)
             .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_READ_ADDRESS);
@@ -233,7 +233,7 @@ Blockly.Blocks['i2c_read'] = {
 
 Blockly.Blocks['i2c_write'] = {
     init:function(){
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('address')
             .setCheck(Number)
             .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_WRITE_ADDRESS);
@@ -252,7 +252,7 @@ Blockly.Blocks['i2c_write'] = {
 Blockly.Blocks['spi_init'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.communicate.HUE,
+      "colour" : Blockly.Msg['COMMUNICATE_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "message0" : Blockly.MIXLY_MICROBIT_SPI_INIT,
@@ -297,7 +297,7 @@ Blockly.Blocks['spi_init'] = {
 
 Blockly.Blocks['spi_write'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('data')
             .setCheck(Number)
             .appendField(Blockly.MIXLY_MICROBIT_JS_SPI_WRITE);

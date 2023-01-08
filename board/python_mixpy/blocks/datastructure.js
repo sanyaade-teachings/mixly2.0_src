@@ -5,7 +5,7 @@ goog.provide('Blockly.Blocks.DS');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.DS.HUE = 80;
+Blockly.Msg['DS_HUE'] = 80;
 
  Blockly.Blocks['ds_create_linkedlist'] = {
 
@@ -15,7 +15,7 @@ Blockly.Blocks.DS.HUE = 80;
      */
 
      init: function () {
-      this.setColour(Blockly.Blocks.DS.HUE);
+      this.setColour(Blockly.Msg['DS_HUE']);
       this.appendDummyInput("")
           .appendField(new Blockly.FieldLabel(Blockly.Msg.DS_CREATE_LINKEDLIST_NEW))
       this.appendDummyInput("")
@@ -179,7 +179,7 @@ Blockly.Blocks.DS.HUE = 80;
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);
+    this.setColour(Blockly.Msg['DS_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DS_CREATE_LINKEDLIST_CONTAINER_TITLE);
     this.appendStatementInput('STACK');
@@ -194,7 +194,7 @@ Blockly.Blocks['ds_create_linkedlist_item'] = {
    * @this Blockly.Block
    */
    init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);
+    this.setColour(Blockly.Msg['DS_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.Msg.DS_CREATE_LINKEDLIST_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -207,7 +207,7 @@ Blockly.Blocks['ds_create_linkedlist_item'] = {
 
 Blockly.Blocks['ds_create_node'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);
+    this.setColour(Blockly.Msg['DS_HUE']);
     this.appendDummyInput("")          
         .appendField(Blockly.Msg.DS_CREATE_NODE_USE)
         .appendField(new Blockly.FieldTextInput('tag'), 'TYPE')
@@ -223,7 +223,7 @@ Blockly.Blocks['ds_create_node'] = {
 
 Blockly.Blocks['ds_get_node_attr'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendDummyInput("")
         .appendField(Blockly.Msg.DS_GET_NODE_ATTR_NODE)   
     this.appendValueInput('NODE')    
@@ -240,7 +240,7 @@ Blockly.Blocks['ds_get_node_attr'] = {
 
 Blockly.Blocks['ds_set_node_attr'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendDummyInput("")
         .appendField(Blockly.Msg.DS_SET_NODE_ATTR_NODE)   
     this.appendValueInput('NODE')    
@@ -258,7 +258,7 @@ Blockly.Blocks['ds_set_node_attr'] = {
 
 Blockly.Blocks['ds_add_node_by_name'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
         .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     var pos =
@@ -279,7 +279,7 @@ Blockly.Blocks['ds_add_node_by_name'] = {
 
 Blockly.Blocks['ds_add_node_by_attr'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
         .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     var pos =
@@ -305,7 +305,7 @@ Blockly.Blocks['ds_add_node_by_attr'] = {
 
 Blockly.Blocks['ds_del_node_by_name'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
         .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     
@@ -322,7 +322,7 @@ Blockly.Blocks['ds_del_node_by_name'] = {
 
 Blockly.Blocks['ds_del_node_by_attr'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
         .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     
@@ -344,7 +344,7 @@ Blockly.Blocks['ds_del_node_by_attr'] = {
 
 Blockly.Blocks['ds_reverse_linkedlist'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.DS.HUE);    
+    this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
         .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     

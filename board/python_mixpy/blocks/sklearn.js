@@ -3,7 +3,7 @@
 goog.provide('Blockly.Blocks.sklearn');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.sklearn.HUE = 80;
+Blockly.Msg['SKLEARN_HUE'] = 80;
 
 Blockly.Blocks.sklearn_make_classification= {
   init: function() { 
@@ -43,7 +43,7 @@ Blockly.Blocks.sklearn_make_classification= {
       .appendField(Blockly.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -84,7 +84,7 @@ Blockly.Blocks.sklearn_make_regression= {
       .appendField(Blockly.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -125,7 +125,7 @@ Blockly.Blocks.sklearn_make_blobs= {
       .appendField(Blockly.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -148,7 +148,7 @@ Blockly.Blocks.sklearn_load= {
       .appendField(new Blockly.FieldTextInput("iris"), "name");
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   },
@@ -173,7 +173,7 @@ Blockly.Blocks.sklearn_data_target= {
       .appendField(Blockly.MIXLY_GET)
       .appendField(new Blockly.FieldDropdown([[Blockly.EIGENVALUES,"data"],[Blockly.LABEL_VALUE,"target"],[Blockly.FEATURE,"feature_names"],[Blockly.mixpy_PYLAB_TICKS_TAG,"target_names"]]), "type");
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -202,7 +202,7 @@ Blockly.Blocks.sklearn_train_test_split= {
       .appendField(Blockly.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -227,7 +227,7 @@ Blockly.Blocks.sklearn_train_test_split_no_target= {
       .appendField(Blockly.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -257,7 +257,7 @@ Blockly.Blocks.sklearn_LinearRegression= {
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -295,7 +295,7 @@ Blockly.Blocks.sklearn_Ridge= {
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -322,7 +322,7 @@ Blockly.Blocks.sklearn_DecisionTreeClassifier_Regressor= {
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -357,7 +357,7 @@ Blockly.Blocks.sklearn_RandomForestClassifier_Regressor= {
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -384,7 +384,7 @@ Blockly.Blocks.sklearn_KNeighborsClassifier_Regressor= {
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -402,7 +402,7 @@ Blockly.Blocks.sklearn_GaussianNB= {
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -436,7 +436,7 @@ Blockly.Blocks.sklearn_KMeans= {
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -462,7 +462,7 @@ Blockly.Blocks.sklearn_fit= {
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -484,7 +484,7 @@ Blockly.Blocks.sklearn_fit_no_target= {
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -505,7 +505,7 @@ Blockly.Blocks.sklearn_predict= {
       .appendField(Blockly.EIGENVALUES);
   this.setInputsInline(true);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -530,7 +530,7 @@ Blockly.Blocks.sklearn_score= {
       .appendField(Blockly.LABEL_VALUE);
   this.setInputsInline(true);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -551,7 +551,7 @@ Blockly.Blocks.sklearn_score_no_target= {
       .appendField(Blockly.EIGENVALUES);
   this.setInputsInline(true);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -571,7 +571,7 @@ Blockly.Blocks.sklearn_coef_intercept= {
       .appendField(Blockly.MIXLY_GET)
       .appendField(new Blockly.FieldDropdown([[Blockly.SKLEARN_COEF,"coef_"],[Blockly.SKLEARN_INTERCEPT,"intercept_"]]), "type");
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -591,7 +591,7 @@ Blockly.Blocks.sklearn_cluster_centers_labels_inertia= {
       .appendField(new Blockly.FieldDropdown([[Blockly.SKLEARN_CLUSTER_CENTER,"cluster_centers_"],[Blockly.SKLEARN_LABELS_AFTER_CLUSTERING,"labels_"],[Blockly.SKLEARN_CLUSTERING_SUM_OF_SQUARED_DISTANCES,"inertia_"]]), "type");
   this.setInputsInline(true);
   this.setOutput(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }
@@ -613,7 +613,7 @@ Blockly.Blocks.sklearn_save_load_model= {
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
-  this.setColour(Blockly.Blocks.sklearn.HUE);
+  this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
   this.setHelpUrl("");
   }

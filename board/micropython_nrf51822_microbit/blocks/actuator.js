@@ -3,14 +3,14 @@
 goog.provide('Blockly.Blocks.actuator');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.actuator.HUE = 100//'#b574c2';
+Blockly.Msg['ACTUATOR_HUE'] = 100//'#b574c2';
 
 
 
 Blockly.Blocks['microbit_music_play_built_in'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.actuator.HUE,
+      "colour" : Blockly.Msg['ACTUATOR_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "inputsInline": true,
@@ -47,7 +47,7 @@ Blockly.Blocks['microbit_music_play_built_in'] = {
 Blockly.Blocks['microbit_music_play_built_in_easy'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.actuator.HUE,
+      "colour" : Blockly.Msg['ACTUATOR_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "inputsInline": true,
@@ -72,7 +72,7 @@ Blockly.Blocks['microbit_music_play_built_in_easy'] = {
 
 Blockly.Blocks.microbit_music_pitch_delay={
 init:function(){
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_TONE)
         .appendField(Blockly.MIXLY_PIN)
@@ -99,7 +99,7 @@ init:function(){
 
 Blockly.Blocks.microbit_music_pitch={
 init:function(){
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_TONE)
         .appendField(Blockly.MIXLY_PIN)
@@ -117,7 +117,7 @@ init:function(){
 Blockly.Blocks['microbit_music_play_list_of_notes'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.actuator.HUE,
+      "colour" : Blockly.Msg['ACTUATOR_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "inputsInline": true,
@@ -150,7 +150,7 @@ Blockly.Blocks['microbit_music_play_list_of_notes'] = {
 Blockly.Blocks['microbit_music_play_list_of_notes_easy'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.actuator.HUE,
+      "colour" : Blockly.Msg['ACTUATOR_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "inputsInline": true,
@@ -179,7 +179,7 @@ Blockly.Blocks['microbit_music_play_list_of_notes_easy'] = {
 Blockly.Blocks['microbit_music_reset'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.actuator.HUE,
+      "colour" : Blockly.Msg['ACTUATOR_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/music.html#music.reset",
@@ -194,7 +194,7 @@ Blockly.Blocks['microbit_music_reset'] = {
 
 Blockly.Blocks.microbit_music_stop={
 init:function(){
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendValueInput("PIN")
         .appendField(Blockly.MIXLY_NOTONE)
         .appendField(Blockly.MIXLY_PIN);
@@ -210,7 +210,7 @@ init:function(){
 Blockly.Blocks['microbit_music_get_tempo'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.actuator.HUE,
+      "colour" : Blockly.Msg['ACTUATOR_HUE'],
       "output" : "Array",
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/music.html#music.get_tempo",
       "message0" : Blockly.MIXLY_MICROBIT_Get_current_tempo
@@ -221,7 +221,7 @@ Blockly.Blocks['microbit_music_get_tempo'] = {
 
 Blockly.Blocks.tone_set_tempo = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('TICKS')
             .setCheck(Number)
             .appendField(Blockly.MIXLY_MICROBIT_JS_SET_TEMPO)
@@ -238,7 +238,7 @@ Blockly.Blocks.tone_set_tempo = {
 
 Blockly.Blocks['speech_say'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('VAR')
             .setCheck(String)
             .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_SAY,'say'],[Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_SING,'sing'],[Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_PRENOUNCE,
@@ -275,7 +275,7 @@ Blockly.Blocks['speech_say'] = {
 
 // Blockly.Blocks['speech_sing'] = {
 //     init: function () {
-//         this.setColour(Blockly.Blocks.actuator.HUE);
+//         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 //         this.appendValueInput('VAR')
 //           .setCheck(String)
 //           .appendField(Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_SING);
@@ -299,7 +299,7 @@ Blockly.Blocks['speech_say'] = {
 
 // Blockly.Blocks['speech_prenounce'] = {
 //     init: function () {
-//         this.setColour(Blockly.Blocks.actuator.HUE);
+//         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 //         this.appendValueInput('VAR')
 //           .setCheck(String)
 //           .appendField(Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_PRENOUNCE);
@@ -323,7 +323,7 @@ Blockly.Blocks['speech_say'] = {
 
 Blockly.Blocks['speech_say_easy'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('VAR')
             .setCheck(String)
             .appendField(Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_SAY);
@@ -335,7 +335,7 @@ Blockly.Blocks['speech_say_easy'] = {
 
 Blockly.Blocks['speech_sing_easy'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('VAR')
           .setCheck(String)
           .appendField(Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_SING);
@@ -347,7 +347,7 @@ Blockly.Blocks['speech_sing_easy'] = {
 
 Blockly.Blocks['speech_pronounce_easy'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('VAR')
           .setCheck(String)
           .appendField(Blockly.MIXLY_MICROBIT_PY_ACTUATOR_SPEECH_PRENOUNCE);
@@ -359,7 +359,7 @@ Blockly.Blocks['speech_pronounce_easy'] = {
 
 Blockly.Blocks['speech_translate'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('VAR')
           .setCheck(String)
           .appendField(Blockly.MICROBIT_SPEECH_translation);
@@ -370,7 +370,7 @@ Blockly.Blocks['speech_translate'] = {
 
 Blockly.Blocks.servo_move = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 	  this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_SERVO)
         .appendField(Blockly.MIXLY_PIN)
@@ -402,7 +402,7 @@ Blockly.Blocks['bit_motor_control'] = {
         .appendField(new Blockly.FieldDropdown([["Forward","1*"], ["Reverse","-1*"]]), "mode");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -411,7 +411,7 @@ Blockly.Blocks['bit_motor_control'] = {
 //RGB
 Blockly.Blocks.display_rgb_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("PIN", Number)
@@ -431,7 +431,7 @@ Blockly.Blocks.display_rgb_init = {
 
 Blockly.Blocks.display_rgb = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
          // this.appendValueInput("PIN", Number)
@@ -463,7 +463,7 @@ Blockly.Blocks.display_rgb = {
 };
 Blockly.Blocks.display_rgb2 = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
          // this.appendValueInput("PIN", Number)
@@ -485,7 +485,7 @@ Blockly.Blocks.display_rgb2 = {
 
 Blockly.Blocks.display_rgb_show = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendDummyInput()
@@ -500,7 +500,7 @@ Blockly.Blocks.display_rgb_show = {
 
 Blockly.Blocks.MP3_INIT = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_SETUP + ' ' + Blockly.QJ00X_MP3);
     this.appendValueInput("RX")
@@ -530,7 +530,7 @@ var MP3_CONTROL_TYPE = [
 //MP3模块
 Blockly.Blocks.MP3_CONTROL = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.QJ00X_MP3);
     this.appendDummyInput("")
@@ -555,7 +555,7 @@ var MP3_LOOP_MODE = [
 //MP3模块循环模式
 Blockly.Blocks.MP3_LOOP_MODE = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.QJ00X_MP3);
     this.appendDummyInput("")
@@ -583,7 +583,7 @@ var MP3_EQ_MODE = [
 //MP3模块EQ模式
 Blockly.Blocks.MP3_EQ_MODE = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.QJ00X_MP3);
     this.appendDummyInput("")
@@ -601,7 +601,7 @@ Blockly.Blocks.MP3_EQ_MODE = {
 //MP3模块设置音量
 Blockly.Blocks.MP3_VOL = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.QJ00X_MP3);
     this.appendDummyInput("")
@@ -620,7 +620,7 @@ Blockly.Blocks.MP3_VOL = {
 //MP3模块播放第N首
 Blockly.Blocks.MP3_PLAY_NUM = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.QJ00X_MP3);
     this.appendValueInput("NUM", Number)
@@ -638,7 +638,7 @@ Blockly.Blocks.MP3_PLAY_NUM = {
 
 Blockly.Blocks.MP3_PLAY_FOLDER = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.QJ00X_MP3);
     this.appendValueInput("FOLDER", Number)

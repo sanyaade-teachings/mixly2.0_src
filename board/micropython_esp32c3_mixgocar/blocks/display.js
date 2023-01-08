@@ -3,7 +3,7 @@
 goog.provide('Blockly.Blocks.display');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.display.HUE = 180;
+Blockly.Msg['DISPLAY_HUE'] = 180;
 
 Blockly.FieldColour.COLOURS = ['#f00', '#000'];
 Blockly.FieldColour.COLUMNS = 2;
@@ -14,7 +14,7 @@ var IMG = [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],
 Blockly.Blocks['display_clear'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/display.html#microbit.display.clear",
@@ -26,7 +26,7 @@ Blockly.Blocks['display_clear'] = {
 
 Blockly.Blocks.display_get_pixel = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
 	  this.appendValueInput('x')
         .setCheck(Number)
 		    .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
@@ -43,7 +43,7 @@ Blockly.Blocks.display_get_pixel = {
 
 Blockly.Blocks.display_bright_point = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   	this.appendValueInput('x')
         .setCheck(Number)
         .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_BRIGHTNESS)
@@ -62,7 +62,7 @@ Blockly.Blocks.display_bright_point = {
 
 Blockly.Blocks.monitor_show_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
 	  this.appendValueInput('data')
         .setCheck(String)
         .appendField(new Blockly.FieldDropdown([[Blockly.OLED_DRAWSTR_ONE_BY_ONE,'show'],[Blockly.MIXLY_ESP32_MONITOR_SCROLL,'scroll']]),"MODE")
@@ -85,7 +85,7 @@ Blockly.Blocks.monitor_show_string = {
 
 Blockly.Blocks.monitor_show_scroll_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(new Blockly.FieldDropdown([[Blockly.OLED_DRAWSTR_ONE_BY_ONE,'show'],[Blockly.MIXLY_ESP32_MONITOR_SCROLL,'scroll']]),"MODE")
@@ -112,7 +112,7 @@ Blockly.Blocks.monitor_show_scroll_string = {
 
 Blockly.Blocks.display_scroll_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   this.appendValueInput('data')
         .setCheck(String)
     .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -124,7 +124,7 @@ Blockly.Blocks.display_scroll_string = {
 
 Blockly.Blocks.display_show_static = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   this.appendValueInput('data')
         .setCheck(String)
     .appendField(Blockly.MIXLY_ESP32_MONITOR_SHOW_STATIC);
@@ -137,7 +137,7 @@ Blockly.Blocks.display_show_static = {
 
 Blockly.Blocks.microbit_display_show_image = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput('PIN',String)
         .setCheck("esp32_image")
         .appendField(Blockly.OLED_BITMAP);
@@ -153,7 +153,7 @@ Blockly.Blocks.microbit_display_show_image = {
 Blockly.Blocks['esp32_display_show_default_image'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "InputsInline": true,
       "nextStatement" : null,
       "previousStatement" : null,
@@ -174,7 +174,7 @@ Blockly.Blocks['esp32_display_show_default_image'] = {
 Blockly.Blocks['esp32_display_show_animation'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "inputsInline": true,
       "nextStatement" : null,
       "previousStatement" : null,
@@ -216,7 +216,7 @@ Blockly.Blocks['esp32_display_show_animation'] = {
 Blockly.Blocks['esp32_display_scroll'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/display.html#microbit.display.scroll",
@@ -234,7 +234,7 @@ Blockly.Blocks['esp32_display_scroll'] = {
 
 Blockly.Blocks['esp32_display_on'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_MICROBIT_Turn_on_display,'on'],[Blockly.MIXLY_MICROBIT_Turn_off_display,'off']]),'on_off')
       .appendField(Blockly.MIXLY_MICROBIT_monitor);
@@ -258,7 +258,7 @@ Blockly.Blocks['esp32_display_on'] = {
 Blockly.Blocks['esp32_display_off'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/display.html#microbit.display.off",
@@ -271,7 +271,7 @@ Blockly.Blocks['esp32_display_off'] = {
 Blockly.Blocks['esp32_display_is_on'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "output" : "Boolean",
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/display.html#microbit.display.is_on",
       "message0" : Blockly.MIXLY_MICROBIT_Display_is_on
@@ -283,7 +283,7 @@ Blockly.Blocks['esp32_display_is_on'] = {
 Blockly.Blocks['display_image_builtins'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "args0" : [{
           "name" : "image",
           "options" : [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"],["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]],
@@ -302,7 +302,7 @@ Blockly.Blocks['display_image_builtins'] = {
 Blockly.Blocks['display_image_create'] = {
   init : function () {
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "args0" : [{
         "type" : "input_dummy"
         }, {
@@ -851,7 +851,7 @@ Blockly.Blocks['display_shift'] = {
          [Blockly.MIXLY_RIGHT, 'right'],
         ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     // this.setOutput(true);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -890,7 +890,7 @@ Blockly.Blocks['image_shift'] = {
          [Blockly.MIXLY_RIGHT, 'right'],
         ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.setOutput(true);
     this.setInputsInline(true);
     this.appendValueInput('img')
@@ -927,7 +927,7 @@ Blockly.Blocks['image_arithmetic'] = {
         [[Blockly.MICROBIT_DISPLAY_UNION, '+'],
          [Blockly.MICROBIT_DISPLAY_MINUS, '-']];
     //this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.setOutput(true, "esp32_image");
     this.appendValueInput('A')
         // .setCheck(["esp32_image", "List", String])
@@ -953,7 +953,7 @@ Blockly.Blocks['esp32_display_show_string'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([[Blockly.OLED_DRAWSTR_ONE_BY_ONE,'show'],[Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING,'scroll']]),"MODE");
     this.jsonInit({
-      "colour" : Blockly.Blocks.display.HUE,
+      "colour" : Blockly.Msg['DISPLAY_HUE'],
       "inputsInline": true,
       "nextStatement" : null,
       "previousStatement" : null,
@@ -1007,7 +1007,7 @@ Blockly.Blocks['esp32_display_show_string'] = {
 // Blockly.Blocks['esp32_display_scroll_string'] = {
 //   init : function () {
 //     this.jsonInit({
-//       "colour" : Blockly.Blocks.display.HUE,
+//       "colour" : Blockly.Msg['DISPLAY_HUE'],
 //       "inputsInline": true,
 //       "nextStatement" : null,
 //       "previousStatement" : null,
@@ -1047,7 +1047,7 @@ Blockly.Blocks['esp32_display_show_string'] = {
 
 Blockly.Blocks.group_lcd_print = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput("TEXT", String)
         .setCheck([String,Number])
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -1077,7 +1077,7 @@ Blockly.Blocks.group_lcd_print = {
 
 Blockly.Blocks.group_lcd_init = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput('device')
         .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
@@ -1095,7 +1095,7 @@ Blockly.Blocks.group_lcd_init = {
 
 Blockly.Blocks.group_lcd_print2 = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput("row", Number)
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -1119,7 +1119,7 @@ Blockly.Blocks.group_lcd_print2 = {
 
 Blockly.Blocks.group_lcd_power = {
   init: function() {
-      this.setColour(Blockly.Blocks.display.HUE);
+      this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_DF_LCD)
     .appendField('mylcd')
@@ -1146,7 +1146,7 @@ Blockly.Blocks.group_lcd_power = {
 
 // Blockly.Blocks['oled_init'] = {
 //   init: function() {
-//    this.setColour(Blockly.Blocks.display.HUE);
+//    this.setColour(Blockly.Msg['DISPLAY_HUE']);
 //    this.appendValueInput('VAR')
 //             .appendField(Blockly.OLED)
 //             .setCheck("var");
@@ -1174,7 +1174,7 @@ Blockly.Blocks.group_lcd_power = {
 
 Blockly.Blocks.display_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -1225,7 +1225,7 @@ Blockly.Blocks.display_draw_4strings = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.setTooltip(Blockly.MIXLY_DF_LCD+Blockly.Msg.OLEDDISPLAY+Blockly.MIXLY_MICROBIT_TYPE_STRING);
     }
 };
@@ -1236,7 +1236,7 @@ Blockly.Blocks['display_image_size'] = {
         [[Blockly.MIXLY_HEIGHT, 'height'],
          [Blockly.MIXLY_WIDTH, 'width']
         ];
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.MIXLY_MICROBIT_IMAGE);
     this.appendValueInput('VAR')
@@ -1266,7 +1266,7 @@ Blockly.Blocks.display_rect = {
         [[Blockly.MIXLY_4DIGITDISPLAY_ON, '1'],
          [Blockly.MIXLY_4DIGITDISPLAY_OFF, '0']
         ];
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -1318,7 +1318,7 @@ Blockly.Blocks.display_rect = {
 
 Blockly.Blocks.display_line = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -1358,7 +1358,7 @@ Blockly.Blocks.display_line = {
 
 Blockly.Blocks.display_line_arbitrarily= {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -1399,7 +1399,7 @@ Blockly.Blocks.display_line_arbitrarily= {
 
 Blockly.Blocks.display_get_screen_pixel = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_GET_SCREEN_BRIGHTNESS);
     this.setInputsInline(true);
@@ -1410,7 +1410,7 @@ Blockly.Blocks.display_get_screen_pixel = {
 
 Blockly.Blocks.display_get_screen_image = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_ESP32_MONITOR_GET_SCREEN_IMAGE);
     this.setInputsInline(true);
@@ -1421,7 +1421,7 @@ Blockly.Blocks.display_get_screen_image = {
 
 Blockly.Blocks.display_bright_screen = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   this.appendValueInput('x')
       .setCheck(Number)
       .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_SCREEN_BRIGHTNESS)
@@ -1434,7 +1434,7 @@ Blockly.Blocks.display_bright_screen = {
 
 Blockly.Blocks.display_blink_rate = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   this.appendValueInput('x')
       .setCheck(Number)
       .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_BLINK_RATE)
@@ -1447,7 +1447,7 @@ Blockly.Blocks.display_blink_rate = {
 
 Blockly.Blocks.display_rgb_color = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
          // this.appendValueInput("PIN", Number)
@@ -1471,7 +1471,7 @@ Blockly.Blocks.display_rgb_color = {
 
 Blockly.Blocks.display_show_image_or_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
   this.appendValueInput('data')
         .setCheck([String, "esp32_image","List",'Tuple'])
         .appendField(Blockly.MIXLY_ESP32_SHOW_IMAGE_OR_STRING_OR_ANIMATION);
@@ -1484,7 +1484,7 @@ Blockly.Blocks.display_show_image_or_string = {
 
 Blockly.Blocks.display_scroll_string = {
    init: function() {
-     this.setColour(Blockly.Blocks.display.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_HUE']);
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -1496,7 +1496,7 @@ Blockly.Blocks.display_scroll_string = {
 
  Blockly.Blocks.display_show_image_or_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput('data')
         .setCheck([String, "esp32_image","List",'Tuple'])
         .appendField(Blockly.MIXLY_ESP32_SHOW_IMAGE_OR_STRING_OR_ANIMATION);
@@ -1512,7 +1512,7 @@ Blockly.Blocks.display_scroll_string = {
 
 Blockly.Blocks.display_scroll_string_delay = {
    init: function() {
-     this.setColour(Blockly.Blocks.display.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_HUE']);
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -1528,7 +1528,7 @@ Blockly.Blocks.display_scroll_string_delay = {
 
  Blockly.Blocks['display_onoff'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_ESP32_ON, "ON"], [Blockly.MIXLY_ESP32_OFF, "OFF"]]), 'ONOFF')
     this.setOutput(true, Boolean);
@@ -1538,7 +1538,7 @@ Blockly.Blocks.display_scroll_string_delay = {
 
 Blockly.Blocks['switch'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.MIXLY_ESP32_ON, "1"],
@@ -1551,7 +1551,7 @@ Blockly.Blocks['switch'] = {
 
 Blockly.Blocks['display_fill'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendValueInput('SUB');
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
@@ -1576,7 +1576,7 @@ Blockly.Blocks['display_fill'] = {
 
 Blockly.Blocks.display_tm_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -1610,7 +1610,7 @@ Blockly.Blocks.display_tm_use_i2c_init = {
 
 Blockly.Blocks.display_tm1650_power = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1626,7 +1626,7 @@ Blockly.Blocks.display_tm1650_power = {
 
 Blockly.Blocks.display_tm1650_show_num = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1643,7 +1643,7 @@ Blockly.Blocks.display_tm1650_show_num = {
 
 Blockly.Blocks.display_tm1650_show_dot = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1664,7 +1664,7 @@ Blockly.Blocks['display_animate'] = {
     var ANIMATE =
         [["ALL_CLOCKS", 'ALL_CLOCKS'],
          ["ALL_ARROWS", 'ALL_ARROWS']];
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.setOutput(true, 'Tuple');
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_ESP32_DISPLAY_ANIMATE)
@@ -1679,7 +1679,7 @@ Blockly.Blocks.display_circle = {
         [[Blockly.MIXLY_4DIGITDISPLAY_ON, '1'],
          [Blockly.MIXLY_4DIGITDISPLAY_OFF, '0']
         ];
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendValueInput('VAR')
             .appendField(Blockly.OLED)
             .setCheck("var");
@@ -1723,7 +1723,7 @@ Blockly.Blocks.display_triangle = {
         [[Blockly.MIXLY_4DIGITDISPLAY_ON, '1'],
          [Blockly.MIXLY_4DIGITDISPLAY_OFF, '0']
         ];
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendValueInput('VAR')
             .appendField(Blockly.OLED)
             .setCheck("var");
@@ -1786,7 +1786,7 @@ Blockly.Blocks.display_help = {
 //显示-OLED-显示图像
 Blockly.Blocks.display_oled_showBitmap = {
   init: function () {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput('VAR')
         .appendField(Blockly.OLED)
         .setCheck("var");
@@ -1816,7 +1816,7 @@ Blockly.Blocks.display_oled_showBitmap = {
 //显示-OLED-画点
 Blockly.Blocks.display_oled_drawPixel = {
   init: function () {
-    this.setColour(Blockly.Blocks.display.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_HUE']);
     this.appendValueInput('VAR')
         .appendField(Blockly.OLED)
     this.appendDummyInput("")
@@ -1834,7 +1834,7 @@ Blockly.Blocks.display_oled_drawPixel = {
 
 Blockly.Blocks.display_tm_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -1868,7 +1868,7 @@ Blockly.Blocks.display_tm_use_i2c_init = {
 
 Blockly.Blocks.display_tm1650_power = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1884,7 +1884,7 @@ Blockly.Blocks.display_tm1650_power = {
 
 Blockly.Blocks.display_tm1650_show_num = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1901,7 +1901,7 @@ Blockly.Blocks.display_tm1650_show_num = {
 
 Blockly.Blocks.display_tm1650_show_dot = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1919,7 +1919,7 @@ Blockly.Blocks.display_tm1650_show_dot = {
 
 Blockly.Blocks.display_tm1650_set_brightness = {
     init: function () {
-        this.setColour(Blockly.Blocks.display.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");

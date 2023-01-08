@@ -4,7 +4,7 @@
 goog.provide('Blockly.Blocks.ethernet');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.ethernet.HUE = 0;
+Blockly.Msg['ETHERNET_HUE'] = 0;
 //esp_now
 Blockly.Blocks['esp_now_send'] = {
   init: function() {
@@ -24,7 +24,7 @@ Blockly.Blocks['esp_now_send'] = {
         .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_SEND+Blockly.MIXLY_FAILED);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.ethernet.HUE);
+    this.setColour(Blockly.Msg['ETHERNET_HUE']);
  this.setTooltip("");
  this.setHelpUrl("https://randomnerdtutorials.com/esp-now-esp32-arduino-ide/");
   }
@@ -37,7 +37,7 @@ Blockly.Blocks['esp_now_receive'] = {
         .appendField("ESP NOW"+Blockly.MQTT_subscribe2+Blockly.MIXLY_SD_DATA);
     this.appendStatementInput("receive_data")
         .setCheck(null);
-    this.setColour(Blockly.Blocks.ethernet.HUE);
+    this.setColour(Blockly.Msg['ETHERNET_HUE']);
  this.setTooltip("");
  this.setHelpUrl("https://randomnerdtutorials.com/esp-now-esp32-arduino-ide/");
   }

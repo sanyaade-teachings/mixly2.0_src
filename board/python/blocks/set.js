@@ -3,7 +3,7 @@
 goog.provide('Blockly.Blocks.set');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.set.HUE = 100;
+Blockly.Msg['SET_HUE'] = 100;
 
 Blockly.Blocks['set_create_with'] = {
   /**
@@ -11,7 +11,7 @@ Blockly.Blocks['set_create_with'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
   this.appendDummyInput("")
   //don't need to specify the data type in Python
         // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>'], [Blockly.LANG_MATH_STRING, 'Array<string>'], [Blockly.LANG_MATH_BOOLEAN, 'Array<boolean>']]), 'TYPE')
@@ -149,7 +149,7 @@ Blockly.Blocks['set_create_with_container'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD);
     this.appendStatementInput('STACK');
@@ -164,7 +164,7 @@ Blockly.Blocks['set_create_with_item'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME);
     this.setPreviousStatement(true);
@@ -177,7 +177,7 @@ Blockly.Blocks['set_create_with_item'] = {
 Blockly.Blocks['set_length'] = {
   
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);          
+    this.setColour(Blockly.Msg['SET_HUE']);          
     this.appendValueInput('SET');
     this.appendDummyInput("")
           .appendField(Blockly.MIXLY_LENGTH);
@@ -189,7 +189,7 @@ Blockly.Blocks['set_length'] = {
 
 Blockly.Blocks['set_pop'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendValueInput('SET')
         .setCheck('Set')
     this.appendDummyInput("")
@@ -206,7 +206,7 @@ Blockly.Blocks['set_clear'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendValueInput('SET')
         .setCheck('Set')
     this.appendDummyInput("")        
@@ -226,7 +226,7 @@ Blockly.Blocks['set_operate'] = {
   var operate =
         [[Blockly.blockpy_set_union, 'union'],
         [Blockly.blockpy_set_intersection, 'intersection'],[Blockly.blockpy_set_difference, 'difference']];
-    this.setColour(Blockly.Blocks.set.HUE);    
+    this.setColour(Blockly.Msg['SET_HUE']);    
     this.appendDummyInput("")
         .appendField(Blockly.blockpy_and_set)    
     this.appendValueInput('SET2')
@@ -259,7 +259,7 @@ Blockly.Blocks['set_operate_update'] = {
         [[Blockly.blockpy_set_union, 'update'],
         [Blockly.blockpy_set_intersection, 'intersection_update'],
         [Blockly.blockpy_set_difference, 'difference_update']];
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendDummyInput("")
         .appendField(Blockly.blockpy_and_set)   
     this.appendValueInput('SET2')
@@ -293,7 +293,7 @@ Blockly.Blocks['set_add_discard'] = {
         .setCheck('Set')  
   var changenum =
         [[Blockly.MIXLY_blockpy_set_add, 'add'],[Blockly.MIXLY_blockpy_set_discard, 'discard']];
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendDummyInput("")   
         .appendField(new Blockly.FieldDropdown(changenum), 'OPERATE')
     this.appendValueInput('data')
@@ -323,7 +323,7 @@ Blockly.Blocks['set_sub'] = {
   var sub_super =
         [[Blockly.blockpy_set_sub, 'issubset'],
         [Blockly.blockpy_set_super, 'issuperset']];
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendDummyInput("")
         .appendField(Blockly.blockpy_is_set) 
     this.appendValueInput('SET2')
@@ -352,7 +352,7 @@ Blockly.Blocks['set_update'] = {
  init: function() {
     this.appendValueInput('SET')
         .setCheck('Set')
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendValueInput('VAR')
         .setCheck([String,'List'])
         .appendField(Blockly.blockpy_set_add_update);    
@@ -369,7 +369,7 @@ Blockly.Blocks['set_update'] = {
 //         [[Blockly.MIXLY_MICROBIT_TYPE_LIST, 'list'],
 //          [Blockly.MIXLY_MICROBIT_TYPE_TUPLE, 'tuple']
 //         ];
-//     this.setColour(Blockly.Blocks.set.HUE);
+//     this.setColour(Blockly.Msg['SET_HUE']);
 //     this.appendValueInput('VAR')
 //         .setCheck("Set")
 //         // .appendField(Blockly.blockpy_USE_LIST);   
@@ -392,7 +392,7 @@ Blockly.Blocks['set_update'] = {
 
 Blockly.Blocks['set_create_with_text_return'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
   this.appendDummyInput("")
         .appendField('{')
         .appendField(new Blockly.FieldTextInput('0,0,0'), 'TEXT')
@@ -406,7 +406,7 @@ Blockly.Blocks['set_create_with_text_return'] = {
 
 Blockly.Blocks['set_toset'] = {
   init: function () {
-    this.setColour(Blockly.Blocks.set.HUE);
+    this.setColour(Blockly.Msg['SET_HUE']);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TOSET);
     this.setOutput(true);

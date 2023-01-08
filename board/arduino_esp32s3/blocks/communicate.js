@@ -5,12 +5,12 @@ goog.provide('Blockly.Blocks.communicate');
 goog.require('Blockly.Blocks');
 
 profile["default"] = profile["arduino_esp32"];
-Blockly.Blocks.communicate.HUE = 140;
+Blockly.Msg['COMMUNICATE_HUE'] = 140;
 
 
 Blockly.Blocks['serialBT_Init'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.communicate.HUE);
+    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendValueInput("CONTENT", String)
     .appendField(Blockly.MIXLY_SERIALBT_INIT)
     .setCheck(String);
@@ -22,7 +22,7 @@ Blockly.Blocks['serialBT_Init'] = {
 };
 Blockly.Blocks['serialBT_available'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.communicate.HUE);
+    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SERIALBT_AVAILABLE);
     this.setOutput(true, Boolean);
@@ -32,7 +32,7 @@ Blockly.Blocks['serialBT_available'] = {
 
 Blockly.Blocks['serialBT_read'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.communicate.HUE);
+    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SERIALBT_READ);
     this.setOutput(true, Boolean);
@@ -42,7 +42,7 @@ Blockly.Blocks['serialBT_read'] = {
 };
 Blockly.Blocks['serialBT_write'] = {
   init: function () {
-    this.setColour(Blockly.Blocks.communicate.HUE);
+    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendValueInput("CONTENT", String)
     .appendField(Blockly.MIXLY_SERIALBT_WRITE);
     this.setPreviousStatement(true, null);

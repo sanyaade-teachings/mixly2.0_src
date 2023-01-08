@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.PocketCard');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.actuator.HUE = 100;
+Blockly.Msg['ACTUATOR_HUE'] = 100;
 profile["default"] = profile["PocketCard"];
 
 Blockly.Blocks.mixgo_button_is_pressed = {
   init: function(){
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_BUTTON);
      this.appendDummyInput("")
@@ -24,7 +24,7 @@ Blockly.Blocks.mixgo_button_is_pressed = {
 
 Blockly.Blocks.sensor_mixgo_light= {
   init: function(){
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_ESP32_LIGHT);
     this.setOutput(true, Number);
@@ -35,7 +35,7 @@ Blockly.Blocks.sensor_mixgo_light= {
 
 Blockly.Blocks.sensor_mixgo_sound= {
   init: function(){
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_ESP32_SOUND);
     this.setOutput(true, Number);
@@ -46,7 +46,7 @@ Blockly.Blocks.sensor_mixgo_sound= {
 
 Blockly.Blocks.mixgo_touch_pin= {
   init: function(){
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput()
      .appendField(Blockly.MIXLY_ESP32_TOUCH)
      .appendField(Blockly.MIXLY_PIN)
@@ -61,7 +61,7 @@ Blockly.Blocks.mixgo_touch_pin= {
 
 Blockly.Blocks.sensor_mixgo_light = {
   init: function(){
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_ESP32_LIGHT)
       .appendField(new Blockly.FieldDropdown([["A", "39"], ["B", "36"]]), "direction");
@@ -73,7 +73,7 @@ Blockly.Blocks.sensor_mixgo_light = {
 //NTC电阻
 Blockly.Blocks.NTC_TEMP = {
   init: function () {
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput("")
     .appendField("NTC")
     .appendField(Blockly.MIXLY_TEMP);
@@ -98,7 +98,7 @@ var MixGo_MPU9250_GETAB = [
 
 Blockly.Blocks.MPU9250_update= {
   init: function() {
-   this.setColour(Blockly.Blocks.sensor.HUE);
+   this.setColour(Blockly.Msg['SENSOR_HUE']);
    this.appendDummyInput("")
    .appendField("MPU9250"+Blockly.MIXLY_update_data);
    this.setPreviousStatement(true);
@@ -108,7 +108,7 @@ Blockly.Blocks.MPU9250_update= {
 };
 Blockly.Blocks.Pocket_rgb = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_RGB);
   
@@ -125,7 +125,7 @@ Blockly.Blocks.Pocket_rgb = {
 
 Blockly.Blocks.Pocket_rgb2 = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_RGB);
     this.appendDummyInput("")
@@ -140,7 +140,7 @@ Blockly.Blocks.Pocket_rgb2 = {
 
 Blockly.Blocks.Pocket_rgb_Brightness = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_RGB);
     this.appendValueInput("Brightness")
@@ -155,7 +155,7 @@ Blockly.Blocks.Pocket_rgb_Brightness = {
 };
 Blockly.Blocks.Pocket_rgb_show = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_RGB_SHOW)
     this.setPreviousStatement(true, null);
@@ -164,7 +164,7 @@ Blockly.Blocks.Pocket_rgb_show = {
 };
 Blockly.Blocks.pocket_RGB_color_HSV = {
   init: function () {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_RGB);
     this.appendValueInput("H")

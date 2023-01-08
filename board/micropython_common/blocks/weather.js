@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.weather');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.weather.HUE = '#27b6ac';
+Blockly.Msg['WEATHER_HUE'] = '#27b6ac';
 
 Blockly.Blocks['WEATHER_NOW']={
     init: function() {
-        this.setColour(Blockly.Blocks.weather.HUE);
+        this.setColour(Blockly.Msg['WEATHER_HUE']);
         this.appendDummyInput()
             .appendField(MSG.catweather)
             .appendField(new Blockly.FieldDropdown([
@@ -28,7 +28,7 @@ Blockly.Blocks['WEATHER_NOW']={
 
 Blockly.Blocks['WEATHER_DAILY']={
     init: function() {
-        this.setColour(Blockly.Blocks.weather.HUE);
+        this.setColour(Blockly.Msg['WEATHER_HUE']);
         this.appendDummyInput()
             .appendField(MSG.catweather)
             .appendField(new Blockly.FieldDropdown([
@@ -51,7 +51,7 @@ Blockly.Blocks['WEATHER_DAILY']={
 
 Blockly.Blocks['WEATHER_HOUR']={
     init: function() {
-        this.setColour(Blockly.Blocks.weather.HUE);
+        this.setColour(Blockly.Msg['WEATHER_HUE']);
         this.appendDummyInput()
             .appendField(MSG.catweather)
             .appendField(Blockly.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_HOURS);

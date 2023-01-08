@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.actuator');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.actuator.HUE = 100
+Blockly.Msg['ACTUATOR_HUE'] = 100
 
 
 Blockly.Blocks.actuator_Servo_init = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput()
     .appendField("初始化");
     this.appendDummyInput()
@@ -28,7 +28,7 @@ Blockly.Blocks.actuator_Servo_init = {
 
 Blockly.Blocks.actuator_Servo = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput()
     .appendField("设置");
     this.appendDummyInput()
@@ -48,7 +48,7 @@ Blockly.Blocks.actuator_Servo = {
 
 Blockly.Blocks.actuator_PAC9685_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 		this.appendDummyInput()
 			.appendField("初始化"); 
 		this.appendDummyInput()
@@ -69,7 +69,7 @@ Blockly.Blocks.actuator_PAC9685_init = {
 
 Blockly.Blocks.actuator_PAC9685_Servo = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput()
     .appendField("设置");
     this.appendDummyInput()
@@ -91,7 +91,7 @@ Blockly.Blocks.actuator_PAC9685_Servo = {
 
 Blockly.Blocks.actuator_rgb_init = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 	this.appendValueInput('SUB')
 		.appendField("初始化")
 		.setCheck("var");
@@ -111,7 +111,7 @@ Blockly.Blocks.actuator_rgb_init = {
 
 Blockly.Blocks.actuator_rgb_set = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 	this.appendValueInput('SUB')
 		.appendField("")
 		.setCheck("var");
@@ -136,7 +136,7 @@ Blockly.Blocks.actuator_rgb_set = {
 
 Blockly.Blocks.actuator_rgb_display = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 	this.appendValueInput('SUB')
 		.appendField("")
 		.setCheck("var");
@@ -152,7 +152,7 @@ Blockly.Blocks.actuator_rgb_display = {
 
 Blockly.Blocks.actuator_ms32006_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 		this.appendValueInput('SUB')
 			.appendField("初始化")
 			.setCheck("var");
@@ -174,7 +174,7 @@ Blockly.Blocks.actuator_ms32006_init = {
 
 Blockly.Blocks.actuator_ms32006_dcmotor = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 	this.appendValueInput('SUB')
 		.appendField("直流电机")
 		.setCheck("var");
@@ -201,7 +201,7 @@ Blockly.Blocks.actuator_ms32006_dcmotor = {
 
 Blockly.Blocks.actuator_ms32006_stepper = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_HUE']);
 	this.appendValueInput('SUB')
 		.appendField("步进电机")
 		.setCheck("var");
@@ -232,7 +232,7 @@ Blockly.Blocks.actuator_ms32006_stepper = {
 //-新20211221------PID算法，暂时放此处------------------------------------------//
 Blockly.Blocks.PID_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
 			.appendField("初始化");     			
@@ -258,7 +258,7 @@ Blockly.Blocks.PID_init = {
 //-新20211221------PID算法，暂时放此处------------------------------------------//
 Blockly.Blocks.PID_get_pid = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
 			.appendField(""); 

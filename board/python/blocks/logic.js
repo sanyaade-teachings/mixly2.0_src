@@ -5,7 +5,7 @@ goog.provide('Blockly.Blocks.logic');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.logic.HUE = 210;
+Blockly.Msg['LOGIC_HUE'] = 210;
 
 Blockly.Blocks['logic_compare'] = {
   /**
@@ -29,7 +29,7 @@ Blockly.Blocks['logic_compare'] = {
           ['\u2265', 'GTE']
         ];
     //this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true, Boolean);
     this.appendValueInput('A');
     this.appendValueInput('B')
@@ -105,7 +105,7 @@ Blockly.Blocks['logic_compare_continous'] = {
           ['\u2265', 'GTE']
         ];    
     //this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true, Boolean);
     this.appendValueInput('A');
     this.appendValueInput('B')
@@ -128,7 +128,7 @@ Blockly.Blocks['logic_operation'] = {
         [[Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
          [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
     //this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true, Boolean);
     this.appendValueInput('A')
         .setCheck([Boolean,Number]);
@@ -156,7 +156,7 @@ Blockly.Blocks['logic_negate'] = {
    */
   init: function() {
     //this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true, Boolean);
 	this.appendValueInput('BOOL')
         .setCheck([Number,Boolean])
@@ -178,7 +178,7 @@ Blockly.Blocks['logic_boolean'] = {
         [[Blockly.Msg.LOGIC_BOOLEAN_TRUE, 'TRUE'],
          [Blockly.Msg.LOGIC_BOOLEAN_FALSE, 'FALSE']];
     //this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true, Boolean);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
@@ -193,7 +193,7 @@ Blockly.Blocks['logic_null'] = {
    */
   init: function() {
     //this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true);
     this.appendDummyInput()
         .appendField(Blockly.Msg.LOGIC_NULL);
@@ -204,7 +204,7 @@ Blockly.Blocks['logic_null'] = {
 
 Blockly.Blocks['logic_true_or_false'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('A');
     this.appendValueInput('B')
         .appendField(Blockly.Msg.LOGIC_TERNARY_IF_TRUE);
@@ -221,7 +221,7 @@ Blockly.Blocks['logic_is_in'] = {
     var BOOLEANS =
         [[Blockly.Msg.TEXT_APPEND_TO, 'in'],
          [Blockly.MIXLY_PYTHON_LOGIC_IS_NOT_IN, 'not in']];
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('A');
     this.appendValueInput('B')
         .setCheck([String,'List'])
@@ -240,7 +240,7 @@ Blockly.Blocks['logic_is'] = {
     var BOOLEANS =
         [[Blockly.MIXLY_PYTHON_LOGIC_IS, 'is'],
          [Blockly.MIXLY_PYTHON_LOGIC_IS_NOT, 'is not']];
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('A');
     this.appendValueInput('B')
         .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
@@ -253,7 +253,7 @@ Blockly.Blocks['logic_is'] = {
 
 Blockly.Blocks['logic_tobool'] = {
   init: function () {
-    this.setColour(Blockly.Blocks.logic.HUE);
+    this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('VAR')
     .appendField(Blockly.MIXLY_TOBOOL);
     this.setOutput(true, Boolean);

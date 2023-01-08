@@ -2,12 +2,12 @@
 
 goog.provide('Blockly.Blocks.hear');
 goog.require('Blockly.Blocks');
-Blockly.Blocks.hear.HUE = "#47B670"
+Blockly.Msg['HEAR_HUE'] = "#47B670"
 
 
 Blockly.Blocks.asrloca_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.hear.HUE);
+        this.setColour(Blockly.Msg['HEAR_HUE']);
 		this.appendValueInput('SUB')
             .appendField("")
             .setCheck("var");   			
@@ -33,7 +33,7 @@ Blockly.Blocks['asrloca_config'] = {
      * @this Blockly.Block
      */
      init: function () {
-        this.setColour(Blockly.Blocks.hear.HUE);
+        this.setColour(Blockly.Msg['HEAR_HUE']);
 		this.appendValueInput('SUB')
             .appendField("添加词条")
             .setCheck("var");   			
@@ -174,7 +174,7 @@ Blockly.Blocks['asrloca_config'] = {
 
 Blockly.Blocks['asrloca_recognize'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.hear.HUE);
+        this.setColour(Blockly.Msg['HEAR_HUE']);
 		this.appendValueInput('SUB')
             .appendField("")
             .setCheck("var");
@@ -188,7 +188,7 @@ Blockly.Blocks['asrloca_recognize'] = {
 
 Blockly.Blocks.asrloca_del = {
     init: function () {
-        this.setColour(Blockly.Blocks.hear.HUE);
+        this.setColour(Blockly.Msg['HEAR_HUE']);
 		this.appendValueInput('SUB')
             .appendField("")
             .setCheck("var");

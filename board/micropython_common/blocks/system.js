@@ -5,12 +5,12 @@ goog.provide('Blockly.Blocks.system');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.system.HUE = 120//'#EB8045';
+Blockly.Msg['SYSTEM_HUE'] = 120//'#EB8045';
 
 
 Blockly.Blocks.controls_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_DELAY)
     this.appendDummyInput("")
@@ -27,7 +27,7 @@ Blockly.Blocks.controls_delay = {
 
 Blockly.Blocks.controls_delay_new = {
   init: function() {
-    this.setColour(Blockly.Blocks.loops.HUE);
+    this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_DELAY)
     this.appendValueInput("DELAY_TIME", Number)
@@ -45,7 +45,7 @@ Blockly.Blocks.controls_delay_new = {
 
 Blockly.Blocks.controls_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_DELAY)
     this.appendDummyInput("")
@@ -62,7 +62,7 @@ Blockly.Blocks.controls_delay = {
 
 Blockly.Blocks.Panic_with_status_code = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("STATUS_CODE", Number)
         .appendField(Blockly.MIXLY_MICROBIT_Panic_with_status_code)
         .setCheck(Number);
@@ -75,7 +75,7 @@ Blockly.Blocks.Panic_with_status_code = {
 
 Blockly.Blocks.reset = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
       .appendField(Blockly.MIXLY_MICROBIT_Reset_micro);
     this.setPreviousStatement(true);
@@ -87,7 +87,7 @@ Blockly.Blocks.reset = {
 
 Blockly.Blocks.controls_millis = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
 	      .appendField(Blockly.MIXLY_RUNTIME);
     this.appendDummyInput("")
@@ -102,7 +102,7 @@ Blockly.Blocks.controls_millis = {
 Blockly.Blocks['raw_block'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendDummyInput()
@@ -114,7 +114,7 @@ Blockly.Blocks['raw_block'] = {
 
 Blockly.Blocks.controls_uname = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_CONTORL_UNAME);
 
@@ -126,7 +126,7 @@ Blockly.Blocks.controls_uname = {
 
 Blockly.Blocks.timer = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput('VAR')
         .appendField("Timer")
         .setCheck("var");
@@ -150,7 +150,7 @@ Blockly.Blocks.timer = {
 
 Blockly.Blocks.system_timer = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput('VAR')
         .appendField("Timer")
         .setCheck("var");
@@ -173,7 +173,7 @@ Blockly.Blocks.system_timer = {
 
 Blockly.Blocks.system_ticks_diff = {
   init: function() {
-    this.setColour(Blockly.Blocks.loops.HUE);
+    this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendValueInput('END')
         // .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -190,7 +190,7 @@ Blockly.Blocks.system_ticks_diff = {
 
 Blockly.Blocks.system_timer_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.loops.HUE);
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendDummyInput("")
             .appendField("Timer")
         this.appendValueInput('SUB')
@@ -204,7 +204,7 @@ Blockly.Blocks.system_timer_init = {
 
 Blockly.Blocks.c3_system_timer_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.loops.HUE);
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendDummyInput("")
             .appendField("Timer")
         this.appendValueInput('SUB')
@@ -218,7 +218,7 @@ Blockly.Blocks.c3_system_timer_init = {
 
 Blockly.Blocks.system_wdt_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.loops.HUE);
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_MACHINE_WDT)
             .appendField(Blockly.MIXLY_SETUP)
@@ -237,7 +237,7 @@ Blockly.Blocks.system_wdt_init = {
 
 Blockly.Blocks.system_wdt_feed = {
     init: function () {
-        this.setColour(Blockly.Blocks.loops.HUE);
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_MACHINE_WDT)
 		this.appendDummyInput("")
@@ -251,7 +251,7 @@ Blockly.Blocks.system_wdt_feed = {
 
 Blockly.Blocks.system_machine_reset = {
     init: function () {
-        this.setColour(Blockly.Blocks.loops.HUE);
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_MACHINE_RESET)
         this.setInputsInline(true);

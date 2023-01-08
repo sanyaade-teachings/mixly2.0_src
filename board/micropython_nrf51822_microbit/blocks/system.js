@@ -5,11 +5,11 @@ goog.provide('Blockly.Blocks.system');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.system.HUE = 120;
+Blockly.Msg['SYSTEM_HUE'] = 120;
 
 Blockly.Blocks.base_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("DELAY_TIME", Number)
         .appendField(Blockly.MIXLY_DELAY + '(' + Blockly.MIXLY_MILLIS + ')')
         .setCheck(Number);
@@ -23,7 +23,7 @@ Blockly.Blocks.base_delay = {
 
 Blockly.Blocks.controls_millis = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
 	      .appendField(Blockly.MIXLY_RUNTIME + "(" + Blockly.MIXLY_MILLIS + ")");
     this.setOutput(true, Number);
@@ -34,7 +34,7 @@ Blockly.Blocks.controls_millis = {
 
 Blockly.Blocks.Panic_with_status_code = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("STATUS_CODE", Number)
         .appendField(Blockly.MIXLY_MICROBIT_Panic_with_status_code)
         .setCheck(Number);
@@ -48,7 +48,7 @@ Blockly.Blocks.Panic_with_status_code = {
 
 Blockly.Blocks.reset = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
       .appendField(Blockly.MIXLY_MICROBIT_Reset_micro);
     this.setPreviousStatement(true);
@@ -60,7 +60,7 @@ Blockly.Blocks.reset = {
 
 Blockly.Blocks.controls_uname = {
   init: function() {
-    this.setColour(Blockly.Blocks.system.HUE);
+    this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_CONTORL_UNAME);
 

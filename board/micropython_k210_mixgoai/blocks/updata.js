@@ -4,9 +4,9 @@ goog.provide('Blockly.Blocks.updata');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.lists.HUE = 260//'#70b234'//260;
-Blockly.Blocks.tuple.HUE = 195//'#5ec73d'//195;
-Blockly.Blocks.math.HUE = 230//'#e49f16';
+Blockly.Msg['LISTS_HUE'] = 260//'#70b234'//260;
+Blockly.Msg['TUPLE_HUE'] = 195//'#5ec73d'//195;
+Blockly.Msg['MATH_HUE'] = 230//'#e49f16';
 
 
 Blockly.FieldColour.COLOURS = ['#ffffff', '#cccccc', '#c0c0c0', '#999999', '#666666', '#333333', '#000000',
@@ -24,7 +24,7 @@ Blockly.FieldColour.COLUMNS = 7;
 
 Blockly.Blocks['lists_create_with_text1'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.lists.HUE);
+    this.setColour(Blockly.Msg['LISTS_HUE']);
 	this.appendDummyInput("")
         .appendField('[')
         .appendField(new Blockly.FieldTextInput('0,0,0'), 'TEXT')
@@ -37,7 +37,7 @@ Blockly.Blocks['lists_create_with_text1'] = {
 
 Blockly.Blocks['tuple_create_with_text3'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.tuple.HUE);
+    this.setColour(Blockly.Msg['TUPLE_HUE']);
   this.appendDummyInput("")
         .appendField('(')
         .appendField(new Blockly.FieldTextInput('0,0,0'), 'TEXT')
@@ -50,7 +50,7 @@ Blockly.Blocks['tuple_create_with_text3'] = {
 
 Blockly.Blocks.LCD_color_seclet = {
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendDummyInput("")
 		.setAlign(Blockly.ALIGN_RIGHT)
 		.appendField(new Blockly.FieldColour("33ccff"), "COLOR");

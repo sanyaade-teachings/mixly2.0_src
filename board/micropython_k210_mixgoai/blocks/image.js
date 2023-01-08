@@ -4,12 +4,12 @@ goog.provide('Blockly.Blocks.image');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.image.HUE = "#90A244"
+Blockly.Msg['IMAGE_HUE'] = "#90A244"
 
 
 Blockly.Blocks['true_false'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["否", "0"],
@@ -24,7 +24,7 @@ Blockly.Blocks['true_false'] = {
 
 Blockly.Blocks.image_Image = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var");
         this.appendValueInput('path')
@@ -39,7 +39,7 @@ Blockly.Blocks.image_Image = {
 
 Blockly.Blocks.image_Image1 = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var");
 		this.appendDummyInput()
@@ -53,7 +53,7 @@ Blockly.Blocks.image_Image1 = {
 
 Blockly.Blocks['image_getinfo'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像信息");
         this.appendValueInput('VAR')
@@ -77,7 +77,7 @@ Blockly.Blocks['image_getinfo'] = {
 
 Blockly.Blocks.image_save = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像保存");
         this.appendValueInput('VAR')
@@ -98,7 +98,7 @@ Blockly.Blocks.image_save = {
 
 Blockly.Blocks['image_copy'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像截取");
         this.appendValueInput('VAR')
@@ -118,7 +118,7 @@ Blockly.Blocks['image_copy'] = {
 
 Blockly.Blocks['image_RGB'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.lists.HUE);
+        this.setColour(Blockly.Msg['LISTS_HUE']);
 		this.appendDummyInput()
             .appendField("RGB");
 		this.appendDummyInput()
@@ -142,7 +142,7 @@ Blockly.Blocks['image_RGB'] = {
 
 Blockly.Blocks['image_compress'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像压缩");
         this.appendValueInput('VAR')
@@ -162,7 +162,7 @@ Blockly.Blocks['image_compress'] = {
 
 Blockly.Blocks.image_clear= {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像清除");
         this.appendValueInput('VAR')
@@ -178,7 +178,7 @@ Blockly.Blocks.image_clear= {
 
 Blockly.Blocks['image_tonew'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像转换");
         this.appendValueInput('VAR')
@@ -202,7 +202,7 @@ Blockly.Blocks['image_tonew'] = {
 
 Blockly.Blocks.image_set_pixel= {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("修改点颜色");
         this.appendValueInput('VAR')
@@ -224,7 +224,7 @@ Blockly.Blocks.image_set_pixel= {
 
 Blockly.Blocks['image_get_pixel'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("获取点颜色");
         this.appendValueInput('VAR')
@@ -246,7 +246,7 @@ Blockly.Blocks['image_get_pixel'] = {
 //----开始--------------cool.ai-----弃用字体加载，出厂内存加载------------------
 Blockly.Blocks.image_font_load = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("字库加载");
         this.appendValueInput('path')
@@ -262,7 +262,7 @@ Blockly.Blocks.image_font_load = {
 
 Blockly.Blocks.image_font_free = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("字库释放");
         this.setInputsInline(false);
@@ -274,7 +274,7 @@ Blockly.Blocks.image_font_free = {
 
 Blockly.Blocks['image_draw_string_flash'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制文本(中)");
         this.appendValueInput('VAR')
@@ -315,7 +315,7 @@ Blockly.Blocks['image_draw_string_flash'] = {
 
 Blockly.Blocks['image_draw_string_UTF'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制文本");
         this.appendValueInput('VAR')
@@ -354,7 +354,7 @@ Blockly.Blocks['image_draw_string_UTF'] = {
 
 Blockly.Blocks['image_draw_string'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制文本(英)");
         this.appendValueInput('VAR')
@@ -390,7 +390,7 @@ Blockly.Blocks['image_draw_string'] = {
 
 Blockly.Blocks['image_draw_line'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制直线");
         this.appendValueInput('VAR')
@@ -416,7 +416,7 @@ Blockly.Blocks['image_draw_line'] = {
 
 Blockly.Blocks['image_draw_arrow'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制箭头");
         this.appendValueInput('VAR')
@@ -442,7 +442,7 @@ Blockly.Blocks['image_draw_arrow'] = {
 
 Blockly.Blocks['image_draw_cross'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制十字");
         this.appendValueInput('VAR')
@@ -472,7 +472,7 @@ Blockly.Blocks['image_draw_cross'] = {
 
 Blockly.Blocks['image_draw_circle'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制圆形");
         this.appendValueInput('VAR')
@@ -502,7 +502,7 @@ Blockly.Blocks['image_draw_circle'] = {
 
 Blockly.Blocks['image_draw_rectangle'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制矩形");
         this.appendValueInput('VAR')
@@ -533,7 +533,7 @@ Blockly.Blocks['image_draw_rectangle'] = {
 
 Blockly.Blocks['image_draw_keypoints'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制特征点");
 		this.appendValueInput('VAR')
@@ -567,7 +567,7 @@ Blockly.Blocks['image_draw_keypoints'] = {
 
 Blockly.Blocks['image_draw_image'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("绘制图像");
         this.appendValueInput('VAR')
@@ -598,7 +598,7 @@ Blockly.Blocks['image_draw_image'] = {
 
 Blockly.Blocks['image_find_lines'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("直线识别");
         this.appendValueInput('VAR')
@@ -631,7 +631,7 @@ Blockly.Blocks['image_find_lines'] = {
 
 Blockly.Blocks['image_find_line_segments'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("线段识别");
         this.appendValueInput('VAR')
@@ -660,7 +660,7 @@ Blockly.Blocks['image_find_line_segments'] = {
 
 Blockly.Blocks['image_find_circles'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("圆形识别");
         this.appendValueInput('VAR')
@@ -709,7 +709,7 @@ Blockly.Blocks['image_find_circles'] = {
 
 Blockly.Blocks['image_find_rects'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("矩形识别");
         this.appendValueInput('VAR')
@@ -734,7 +734,7 @@ Blockly.Blocks['image_find_rects'] = {
 
 Blockly.Blocks['image_get_regression'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
         this.appendDummyInput()
             .appendField("线性回归");
         this.appendValueInput('VAR')
@@ -767,7 +767,7 @@ Blockly.Blocks['image_get_regression'] = {
 //--形状列表解析------------------------------------------//
 Blockly.Blocks['image_line'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("直线解析");
         this.appendValueInput('VAR')
@@ -794,7 +794,7 @@ Blockly.Blocks['image_line'] = {
 
 Blockly.Blocks['image_circle'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("圆形解析");
         this.appendValueInput('VAR')
@@ -816,7 +816,7 @@ Blockly.Blocks['image_circle'] = {
 
 Blockly.Blocks['image_rect'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("矩形解析");
         this.appendValueInput('VAR')
@@ -842,7 +842,7 @@ Blockly.Blocks['image_rect'] = {
 
 Blockly.Blocks['image_histeq'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("直方图均衡");
         this.appendValueInput('VAR')
@@ -864,7 +864,7 @@ Blockly.Blocks['image_histeq'] = {
 
 Blockly.Blocks['image_mean'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("模糊滤波");
         this.appendValueInput('VAR')
@@ -890,7 +890,7 @@ Blockly.Blocks['image_mean'] = {
 
 Blockly.Blocks['image_cartoon'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("卡通化滤波");
         this.appendValueInput('VAR')
@@ -913,7 +913,7 @@ Blockly.Blocks['image_cartoon'] = {
 
 Blockly.Blocks['image_erode'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像腐蚀");
         this.appendValueInput('VAR')
@@ -936,7 +936,7 @@ Blockly.Blocks['image_erode'] = {
 
 Blockly.Blocks['image_dilate'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像膨胀");
         this.appendValueInput('VAR')
@@ -959,7 +959,7 @@ Blockly.Blocks['image_dilate'] = {
 
 Blockly.Blocks['image_flood_fill'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像填充");
         this.appendValueInput('VAR')
@@ -995,7 +995,7 @@ Blockly.Blocks['image_flood_fill'] = {
 
 Blockly.Blocks['image_linpolar'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像投影");
         this.appendValueInput('VAR')
@@ -1013,7 +1013,7 @@ Blockly.Blocks['image_linpolar'] = {
 
 Blockly.Blocks['image_invert'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("图像反转");
         this.appendValueInput('VAR')
@@ -1027,7 +1027,7 @@ Blockly.Blocks['image_invert'] = {
 
 Blockly.Blocks['image_lens_corr'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("校正缩放");
 		this.appendValueInput('VAR')
@@ -1048,7 +1048,7 @@ Blockly.Blocks['image_lens_corr'] = {
 
 Blockly.Blocks['image_binary'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
         this.appendDummyInput()
             .appendField("图像二值化");
         this.appendValueInput('VAR')
@@ -1074,7 +1074,7 @@ Blockly.Blocks['image_binary'] = {
 
 Blockly.Blocks['image_morph'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.image.HUE);
+        this.setColour(Blockly.Msg['IMAGE_HUE']);
         this.appendDummyInput()
             .appendField("图像边缘检测");
         this.appendValueInput('VAR')
@@ -1099,7 +1099,7 @@ Blockly.Blocks['image_morph'] = {
 
 Blockly.Blocks['image_find_barcodes'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("条形码识别");
         this.appendValueInput('VAR')
@@ -1121,7 +1121,7 @@ Blockly.Blocks['image_find_barcodes'] = {
 
 Blockly.Blocks['image_find_qrcodes'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("二维码识别");
         this.appendValueInput('VAR')
@@ -1142,7 +1142,7 @@ Blockly.Blocks['image_find_qrcodes'] = {
 
 Blockly.Blocks['image_find_apriltags'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("AprilTag识别");
         this.appendValueInput('VAR')
@@ -1171,7 +1171,7 @@ Blockly.Blocks['image_find_apriltags'] = {
 
 Blockly.Blocks['image_qrcode'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("二维码解析");
         this.appendValueInput('VAR')
@@ -1198,7 +1198,7 @@ Blockly.Blocks['image_qrcode'] = {
 
 Blockly.Blocks['image_barcode'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("条形码解析");
         this.appendValueInput('VAR')
@@ -1225,7 +1225,7 @@ Blockly.Blocks['image_barcode'] = {
 
 Blockly.Blocks['image_apriltag'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("AprilTag解析");
         this.appendValueInput('VAR')
@@ -1263,7 +1263,7 @@ Blockly.Blocks['image_apriltag'] = {
 
 Blockly.Blocks['image_find_blobs'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("色块追踪");
         this.appendValueInput('VAR')
@@ -1302,7 +1302,7 @@ Blockly.Blocks['image_find_blobs'] = {
 
 Blockly.Blocks['image_get_histogram'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("颜色识别");
         this.appendValueInput('VAR')
@@ -1327,7 +1327,7 @@ Blockly.Blocks['image_get_histogram'] = {
 
 Blockly.Blocks['image_blob'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("追踪解析");
         this.appendValueInput('VAR')
@@ -1359,7 +1359,7 @@ Blockly.Blocks['image_blob'] = {
 
 Blockly.Blocks['image_Histogram'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("色阈浮点");
         this.appendValueInput('VAR')
@@ -1381,7 +1381,7 @@ Blockly.Blocks['image_Histogram'] = {
 
 Blockly.Blocks['image_percentile'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("颜色解析");
         this.appendValueInput('VAR')
@@ -1406,7 +1406,7 @@ Blockly.Blocks['image_percentile'] = {
 
 Blockly.Blocks['image_threshold'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("色阈解析");
         this.appendValueInput('VAR')
@@ -1431,7 +1431,7 @@ Blockly.Blocks['image_threshold'] = {
 
 Blockly.Blocks['image_lab_to_rgb'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("RGB888值");		
 		this.appendValueInput('LIST')
@@ -1444,7 +1444,7 @@ Blockly.Blocks['image_lab_to_rgb'] = {
 
 Blockly.Blocks['image_rgb_to_lab'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("LAB值");		
 		this.appendValueInput('LIST')
@@ -1457,7 +1457,7 @@ Blockly.Blocks['image_rgb_to_lab'] = {
 
 Blockly.Blocks['image_rgb_to_grayscale'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("灰度值");		
 		this.appendValueInput('LIST')
@@ -1470,7 +1470,7 @@ Blockly.Blocks['image_rgb_to_grayscale'] = {
 
 Blockly.Blocks['image_grayscale_to_rgb'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("RGB888");		
  		this.appendValueInput("g_value")
@@ -1486,7 +1486,7 @@ Blockly.Blocks['image_grayscale_to_rgb'] = {
 
 Blockly.Blocks['image_find_hog'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("定向梯度图");
         this.appendValueInput('VAR')
@@ -1509,7 +1509,7 @@ Blockly.Blocks['image_find_hog'] = {
 
 Blockly.Blocks['image_find_keypoints'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("特征识别");
         this.appendValueInput('VAR')
@@ -1545,7 +1545,7 @@ Blockly.Blocks['image_find_keypoints'] = {
 
 Blockly.Blocks['image_match_descriptor'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("特征比较");
         this.appendValueInput('VAR1')
@@ -1575,7 +1575,7 @@ Blockly.Blocks['image_match_descriptor'] = {
 
 Blockly.Blocks['image_kptmatch'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.image.HUE);
+		this.setColour(Blockly.Msg['IMAGE_HUE']);
 		this.appendDummyInput()
             .appendField("特征信息");
         this.appendValueInput('VAR')

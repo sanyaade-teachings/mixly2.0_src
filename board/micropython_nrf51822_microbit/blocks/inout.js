@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.base');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.base.HUE = 20//'#ae3838';//40;
+Blockly.Msg['BASE_HUE'] = 20//'#ae3838';//40;
 
 Blockly.Blocks['inout_highlow'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_HIGH, "HIGH"], [Blockly.MIXLY_LOW, "LOW"]]), 'BOOL')
     this.setOutput(true, Boolean);
@@ -17,7 +17,7 @@ Blockly.Blocks['inout_highlow'] = {
 
 Blockly.Blocks.inout_digital_write = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_DIGITALWRITE_PIN)
         .setCheck(Number);
@@ -33,7 +33,7 @@ Blockly.Blocks.inout_digital_write = {
 
 Blockly.Blocks.inout_digital_read = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
 	this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_DIGITALREAD_PIN)
         .setCheck(Number);
@@ -45,7 +45,7 @@ Blockly.Blocks.inout_digital_read = {
 
 Blockly.Blocks.inout_analog_write = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
 	this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_ANALOGWRITE_PIN)
         .setCheck(Number);
@@ -61,7 +61,7 @@ Blockly.Blocks.inout_analog_write = {
 
 Blockly.Blocks.inout_analog_write_set = {
     init: function(){
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_ANALOGWRITE_PIN)
             .setCheck(Number);
@@ -83,7 +83,7 @@ Blockly.Blocks.inout_analog_write_set = {
 
 Blockly.Blocks.inout_analog_read = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
 	this.appendValueInput("PIN", Number)
         .appendField(Blockly.MIXLY_ANALOGREAD_PIN)
         .setCheck(Number);
@@ -95,7 +95,7 @@ Blockly.Blocks.inout_analog_read = {
 
 Blockly.Blocks['sensor_pin_pressed'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput('pin')
             .appendField(Blockly.MIXLY_PIN);
         this.appendDummyInput()
@@ -108,7 +108,7 @@ Blockly.Blocks['sensor_pin_pressed'] = {
 
 Blockly.Blocks.inout_digital_write = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN",Number)
         .appendField(Blockly.MIXLY_DIGITALWRITE_PIN)
         .setCheck(Number);

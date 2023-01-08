@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.base');
 
 goog.require('Blockly.Blocks');
-Blockly.Blocks.base.HUE = 20;//'#ae3838';//40;
+Blockly.Msg['BASE_HUE'] = 20;//'#ae3838';//40;
 
 Blockly.Blocks['inout_highlow'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_HIGH, "HIGH"], [Blockly.MIXLY_LOW, "LOW"]]), 'BOOL')
         this.setOutput(true, Boolean);
@@ -17,7 +17,7 @@ Blockly.Blocks['inout_highlow'] = {
 
 Blockly.Blocks['inout_pinMode'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_PINMODE)
             .setCheck(Number);
@@ -39,7 +39,7 @@ Blockly.Blocks['inout_pinMode'] = {
 
 Blockly.Blocks.inout_digital_write2 = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_DIGITALWRITE_PIN)
             .setCheck(Number);
@@ -61,7 +61,7 @@ Blockly.Blocks.inout_digital_write2 = {
 
 Blockly.Blocks.inout_digital_read = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_DIGITALREAD_PIN)
             .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
@@ -78,7 +78,7 @@ Blockly.Blocks.inout_digital_read = {
 
 Blockly.Blocks.inout_digital_read2 = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_DIGITALREAD_PIN)
             .setCheck(Number);
@@ -96,7 +96,7 @@ Blockly.Blocks.inout_digital_read2 = {
 
 Blockly.Blocks.inout_analog_write = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_ANALOGWRITE_PIN)
             .setCheck(Number);
@@ -118,7 +118,7 @@ Blockly.Blocks.inout_analog_write = {
 
 Blockly.Blocks.inout_analog_read = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_ANALOGREAD_PIN)
             .setCheck(Number);
@@ -136,7 +136,7 @@ Blockly.Blocks.inout_analog_read = {
 
 Blockly.Blocks.inout_buildin_led = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_BUILDIN_LED)
             .appendField(Blockly.MIXLY_STAT)
@@ -149,7 +149,7 @@ Blockly.Blocks.inout_buildin_led = {
 
 Blockly.Blocks.OneButton_interrupt = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.ONEBUTTON + " " + Blockly.MIXLY_PIN)
             .setCheck(Number);
@@ -172,7 +172,7 @@ Blockly.Blocks.OneButton_interrupt = {
 
 Blockly.Blocks.controls_attachInterrupt = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_ATTACHINTERRUPT_PIN)
             .setCheck(Number);
@@ -196,7 +196,7 @@ Blockly.Blocks.controls_attachInterrupt = {
 
 Blockly.Blocks.controls_detachInterrupt = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_DETACHINTERRUPT_PIN)
             .setCheck(Number);
@@ -216,7 +216,7 @@ Blockly.Blocks.controls_detachInterrupt = {
 
 Blockly.Blocks.controls_attachPinInterrupt = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_ATTACHPININTERRUPT_PIN)
             .setCheck(Number);
@@ -239,7 +239,7 @@ Blockly.Blocks.controls_attachPinInterrupt = {
 
 Blockly.Blocks.controls_detachPinInterrupt = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_DETACHPININTERRUPT_PIN)
             .setCheck(Number);
@@ -257,7 +257,7 @@ Blockly.Blocks.controls_detachPinInterrupt = {
 
 Blockly.Blocks.inout_pulseIn = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_PULSEIN)
             .setCheck(Number);
@@ -277,7 +277,7 @@ Blockly.Blocks.inout_pulseIn = {
 
 Blockly.Blocks.inout_pulseIn2 = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_PULSEIN)
             .setCheck(Number);
@@ -301,7 +301,7 @@ Blockly.Blocks.inout_pulseIn2 = {
 
 Blockly.Blocks.inout_shiftout = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("")
             .appendField("ShiftOut");
         this.appendValueInput("PIN1", Number)
@@ -332,7 +332,7 @@ Blockly.Blocks.inout_shiftout = {
 
 Blockly.Blocks.ESP32touchButton = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField("ESP32" + Blockly.MIXLY_ESP32_TOUCH + Blockly.ONEBUTTON + " " + Blockly.MIXLY_PIN)
             .setCheck(Number);
@@ -348,7 +348,7 @@ Blockly.Blocks.ESP32touchButton = {
 
 Blockly.Blocks.inout_soft_analog_write = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_SOFT_ANALOGWRITE_PIN)
             .setCheck(Number);
@@ -365,7 +365,7 @@ Blockly.Blocks.inout_soft_analog_write = {
 
 Blockly.Blocks.inout_cancel_soft_analog_write = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_CANCEL_SOFT_ANALOGWRITE_PIN)
             .setCheck(Number);
@@ -390,7 +390,7 @@ var ADS1015_setGain = [
 //ADS1015模拟数字转换模块-增益设置
 Blockly.Blocks.ADS1015_setGain = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("").appendField(Blockly.MIXLY_SETTING).appendField(Blockly.ADS1015_setGain);
         this.appendDummyInput("").setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(ADS1015_setGain), "ADS1015_setGain");
         this.setInputsInline(true);
@@ -403,7 +403,7 @@ Blockly.Blocks.ADS1015_setGain = {
 //ADS1015模拟数字转换模块 数值获取
 Blockly.Blocks.ADS1015_Get_Value = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("").appendField("ADS1015" + Blockly.ADS1015_Get_Value);
         this.appendDummyInput("").appendField(new Blockly.FieldDropdown([["AIN0", "ads.readADC_SingleEnded(0)"], ["AIN1", "ads.readADC_SingleEnded(1)"], ["AIN2", "ads.readADC_SingleEnded(2)"], ["AIN3", "ads.readADC_SingleEnded(3)"]]), "ADS1015_AIN");
         this.setInputsInline(true);
@@ -413,7 +413,7 @@ Blockly.Blocks.ADS1015_Get_Value = {
 //PCF8591T模拟数字转换模块 数值获取
 Blockly.Blocks.PCF8591T = {
     init: function () {
-        this.setColour(Blockly.Blocks.base.HUE);
+        this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("").appendField("PCF8591T" + Blockly.ADS1015_Get_Value);
         this.appendDummyInput("").appendField(new Blockly.FieldDropdown([["AIN0", "pcf8591.analogRead(AIN0)"], ["AIN1", "pcf8591.analogRead(AIN1)"], ["AIN2", "pcf8591.analogRead(AIN2)"], ["AIN3", "pcf8591.analogRead(AIN3)"]]), "PCF8591T_AIN");
         this.setInputsInline(true);

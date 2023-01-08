@@ -2,14 +2,14 @@
 
 goog.provide('Blockly.Blocks.av');
 goog.require('Blockly.Blocks');
-Blockly.Blocks.av.HUE = "#2CAAD2"
+Blockly.Msg['AV_HUE'] = "#2CAAD2"
 
 
 
 
 Blockly.Blocks.spk_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.av.HUE);
+        this.setColour(Blockly.Msg['AV_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
 			.appendField("初始化");     			
@@ -35,7 +35,7 @@ Blockly.Blocks.spk_init = {
 
 Blockly.Blocks.mic_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.av.HUE);
+        this.setColour(Blockly.Msg['AV_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
 			.appendField("初始化");     			
@@ -61,7 +61,7 @@ Blockly.Blocks.mic_init = {
 //-新20210329------音频播放-------------------------------------------//
 Blockly.Blocks.audio_play = {
     init: function () {
-        this.setColour(Blockly.Blocks.av.HUE);
+        this.setColour(Blockly.Msg['AV_HUE']);
         this.appendDummyInput()
 			.appendField("Audio 音频播放");     			
         this.appendValueInput('path')
@@ -86,7 +86,7 @@ Blockly.Blocks.audio_play = {
 //-新20210329------音频录制-------------------------------------------//
 Blockly.Blocks.audio_record = {
     init: function () {
-        this.setColour(Blockly.Blocks.av.HUE);
+        this.setColour(Blockly.Msg['AV_HUE']);
         this.appendDummyInput()
 			.appendField("Audio 音频录制");     			
         this.appendValueInput('path')
@@ -111,7 +111,7 @@ Blockly.Blocks.audio_record = {
 //-新20210329------视频播放-------------------------------------------//
 Blockly.Blocks.video_play = {
     init: function () {
-        this.setColour(Blockly.Blocks.av.HUE);
+        this.setColour(Blockly.Msg['AV_HUE']);
         this.appendDummyInput()
 			.appendField("Video 视频播放");     			
         this.appendValueInput('path')
@@ -136,7 +136,7 @@ Blockly.Blocks.video_play = {
 //-新20210329------视频录制-------------------------------------------//
 Blockly.Blocks.video_record = {
     init: function () {
-        this.setColour(Blockly.Blocks.av.HUE);
+        this.setColour(Blockly.Msg['AV_HUE']);
         this.appendDummyInput()
 			.appendField("Video 视频录制");     			
         this.appendValueInput('path')

@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.actuator_onboard');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.actuator_onboard.HUE = '#6C9858'
+Blockly.Msg['ACTUATOR_ONBOARD_HUE'] = '#6C9858'
 
 //LED
 Blockly.Blocks['number'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["L1", "1"],
@@ -20,7 +20,7 @@ Blockly.Blocks['number'] = {
 
 Blockly.Blocks['ledswitch'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.MIXLY_ESP32_ON, "1"],
@@ -34,7 +34,7 @@ Blockly.Blocks['ledswitch'] = {
 
 Blockly.Blocks.actuator_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -50,7 +50,7 @@ Blockly.Blocks.actuator_led_bright = {
 
 Blockly.Blocks.actuator_get_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -65,7 +65,7 @@ Blockly.Blocks.actuator_get_led_bright = {
 
 Blockly.Blocks.actuator_get_led_state = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -80,7 +80,7 @@ Blockly.Blocks.actuator_get_led_state = {
 
 Blockly.Blocks.actuator_led_brightness = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -98,7 +98,7 @@ Blockly.Blocks.actuator_led_brightness = {
 
 Blockly.Blocks.mixgo_actuator_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -114,7 +114,7 @@ Blockly.Blocks.mixgo_actuator_led_bright = {
 
 Blockly.Blocks.mixgo_actuator_get_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -129,7 +129,7 @@ Blockly.Blocks.mixgo_actuator_get_led_bright = {
 
 Blockly.Blocks.mixgo_actuator_get_led_state = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -144,7 +144,7 @@ Blockly.Blocks.mixgo_actuator_get_led_state = {
 
 Blockly.Blocks.mixgo_actuator_led_brightness = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -162,7 +162,7 @@ Blockly.Blocks.mixgo_actuator_led_brightness = {
 
 Blockly.Blocks.rm_actuator_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING)
     .appendField(Blockly.MIXLY_BUILDIN_LED)
@@ -181,7 +181,7 @@ Blockly.Blocks.rm_actuator_led_bright = {
 
 Blockly.Blocks.rm_actuator_get_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
     
@@ -200,7 +200,7 @@ Blockly.Blocks.rm_actuator_get_led_bright = {
 
 Blockly.Blocks.rm_actuator_get_led_state = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
     .appendField(Blockly.MIXLY_BUILDIN_LED)
@@ -218,7 +218,7 @@ Blockly.Blocks.rm_actuator_get_led_state = {
 
 Blockly.Blocks.rm_actuator_led_brightness = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING)
     .appendField(Blockly.MIXLY_BUILDIN_LED)
@@ -239,7 +239,7 @@ Blockly.Blocks.rm_actuator_led_brightness = {
 
 Blockly.Blocks['cc_number'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ["L1", "20"],
@@ -252,7 +252,7 @@ Blockly.Blocks['cc_number'] = {
 
 Blockly.Blocks.mixgo_cc_actuator_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -268,7 +268,7 @@ Blockly.Blocks.mixgo_cc_actuator_led_bright = {
 
 Blockly.Blocks.mixgo_cc_actuator_get_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -283,7 +283,7 @@ Blockly.Blocks.mixgo_cc_actuator_get_led_bright = {
 
 Blockly.Blocks.mixgo_cc_actuator_get_led_state = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -298,7 +298,7 @@ Blockly.Blocks.mixgo_cc_actuator_get_led_state = {
 
 Blockly.Blocks.mixgo_cc_actuator_led_brightness = {
   init: function() {
-    this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+    this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -317,7 +317,7 @@ Blockly.Blocks.mixgo_cc_actuator_led_brightness = {
 
 Blockly.Blocks.actuator_onboard_neopixel_rgb = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("_LED_")
@@ -362,7 +362,7 @@ Blockly.Blocks.actuator_onboard_neopixel_rgb = {
 
 Blockly.Blocks.actuator_onboard_neopixel_rgb_all = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("RVALUE")
@@ -387,7 +387,7 @@ Blockly.Blocks.actuator_onboard_neopixel_rgb_all = {
 
 Blockly.Blocks.actuator_onboard_neopixel_rgb_show_all_rainbow = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB);
         this.appendDummyInput("")
@@ -406,7 +406,7 @@ Blockly.Blocks.actuator_onboard_neopixel_rgb_show_all_rainbow = {
 
 Blockly.Blocks.actuator_onboard_neopixel_rgb_show_all_chase = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB);
         this.appendDummyInput("")
@@ -436,7 +436,7 @@ Blockly.Blocks.actuator_onboard_neopixel_rgb_show_all_chase = {
 
 Blockly.Blocks.actuator_onboard_neopixel_write = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendDummyInput()
@@ -452,7 +452,7 @@ Blockly.Blocks.actuator_onboard_neopixel_write = {
 
 Blockly.Blocks.actuator_rm_onboard_neopixel_rgb = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("_LED_")
@@ -494,7 +494,7 @@ Blockly.Blocks.actuator_rm_onboard_neopixel_rgb = {
 
 Blockly.Blocks.actuator_rm_onboard_neopixel_rgb_all = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("RVALUE")
@@ -521,7 +521,7 @@ Blockly.Blocks.actuator_rm_onboard_neopixel_rgb_all = {
 
 Blockly.Blocks.actuator_rm_onboard_neopixel_rgb_show_all_chase = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB);
         this.appendDummyInput("")
@@ -552,7 +552,7 @@ Blockly.Blocks.actuator_rm_onboard_neopixel_rgb_show_all_chase = {
 
 Blockly.Blocks.esp32_music_set_tempo = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendValueInput('TICKS')
             .setCheck(Number)
             .appendField(Blockly.MIXLY_MICROBIT_JS_SET_TEMPO)
@@ -569,7 +569,7 @@ Blockly.Blocks.esp32_music_set_tempo = {
 
 Blockly.Blocks.esp32_music_get_tempo = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_Get_current_tempo)
         this.setOutput(true);
@@ -580,7 +580,7 @@ Blockly.Blocks.esp32_music_get_tempo = {
 
 Blockly.Blocks.esp32_music_reset = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_Reset_music)
         this.setPreviousStatement(true);
@@ -592,7 +592,7 @@ Blockly.Blocks.esp32_music_reset = {
 
 Blockly.Blocks.esp32_onboard_music_pitch = {
     init: function() {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_TONE);  
         this.appendValueInput('pitch')
@@ -607,7 +607,7 @@ Blockly.Blocks.esp32_onboard_music_pitch = {
 
 Blockly.Blocks.esp32_onboard_music_pitch_with_time = {
     init: function() {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);        
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);        
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_TONE);    
         this.appendValueInput('pitch')
@@ -625,7 +625,7 @@ Blockly.Blocks.esp32_onboard_music_pitch_with_time = {
 
 Blockly.Blocks.esp32_onboard_music_stop = {
     init: function() {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_NOTONE); 
         this.setInputsInline(true);
@@ -636,7 +636,7 @@ Blockly.Blocks.esp32_onboard_music_stop = {
 
 Blockly.Blocks.esp32_onboard_music_play_list = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendValueInput('LIST')
             .appendField(Blockly.MIXLY_ESP32_MUSIC_PLAY_LISTS)        
         this.setPreviousStatement(true);
@@ -649,7 +649,7 @@ Blockly.Blocks.esp32_onboard_music_play_list = {
 
 Blockly.Blocks.rm_motor = {
     init: function () {
-      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([
@@ -681,7 +681,7 @@ Blockly.Blocks.rm_motor = {
 
 Blockly.Blocks.actuator_stepper_keep = {
     init: function () {
-      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
           .appendField("MixGo Car")
           .appendField(new Blockly.FieldDropdown([
@@ -704,7 +704,7 @@ Blockly.Blocks.actuator_stepper_keep = {
 
 Blockly.Blocks.actuator_stepper_stop = {
     init: function () {
-        this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField("MixGo Car")
           .appendField(new Blockly.FieldDropdown([
@@ -720,7 +720,7 @@ Blockly.Blocks.actuator_stepper_stop = {
 
 Blockly.Blocks.actuator_dc_motor = {
     init: function () {
-      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([
@@ -747,7 +747,7 @@ Blockly.Blocks.actuator_dc_motor = {
 
 Blockly.Blocks.actuator_dc_motor_stop = {
     init: function () {
-      this.setColour(Blockly.Blocks.actuator_onboard.HUE);
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([

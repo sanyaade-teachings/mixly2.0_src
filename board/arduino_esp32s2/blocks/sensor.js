@@ -2,7 +2,7 @@
 
 goog.provide('Blockly.Blocks.sensor');
 goog.require('Blockly.Blocks');
-Blockly.Blocks.sensor.HUE = 40;
+Blockly.Msg['SENSOR_HUE'] = 40;
 //ESP32片内霍尔传感器值
 profile["default"] = profile["esp32_handbit"];
 Blockly.Blocks['ESP32_hallRead'] = {
@@ -10,7 +10,7 @@ Blockly.Blocks['ESP32_hallRead'] = {
     this.appendDummyInput()
     .appendField(Blockly.ESP32_HALL);
     this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.setTooltip();
     this.setHelpUrl("");
 }
@@ -22,7 +22,7 @@ Blockly.Blocks['ESP32_temprature'] = {
     this.appendDummyInput()
     .appendField(Blockly.ESP32_TEMP);
     this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.setTooltip();
     this.setHelpUrl("");
 }
@@ -30,7 +30,7 @@ Blockly.Blocks['ESP32_temprature'] = {
 
 Blockly.Blocks.OneButton = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
      this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_JS_CURRENT);
     this.appendDummyInput("")

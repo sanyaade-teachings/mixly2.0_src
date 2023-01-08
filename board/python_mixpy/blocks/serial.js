@@ -4,7 +4,7 @@ goog.provide('Blockly.Blocks.serial');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.serial.HUE = 40
+Blockly.Msg['SERIAL_HUE'] = 40
 
 Blockly.Blocks.serial_open = {
     init: function () {
@@ -14,7 +14,7 @@ Blockly.Blocks.serial_open = {
          ["43000", '43000'],["38400", '38400'],["28800", '28800'],["19200", '19200'], ["9600", '9600'] ,  
          ["4800", '4800'],["2400", '2400'],["1200", '1200'],["600", '600'], ["300", '300']  , ["110", '110']
         ];
-        this.setColour(Blockly.Blocks.serial.HUE);   
+        this.setColour(Blockly.Msg['SERIAL_HUE']);   
         this.appendDummyInput("")
           .appendField(new Blockly.FieldLabel(Blockly.Msg.MIXPY_SERIAL_OPEN))   
           .appendField(new Blockly.FieldTextInput('ser'), 'SER')     
@@ -32,7 +32,7 @@ Blockly.Blocks.serial_open = {
 
 Blockly.Blocks.serial_write = {
     init: function () {
-        this.setColour(Blockly.Blocks.serial.HUE);
+        this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput('SER')
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.MIXPY_SERIAL_WRITE);
@@ -46,7 +46,7 @@ Blockly.Blocks.serial_write = {
 
 Blockly.Blocks.serial_read_b = {
   init: function() {
-    this.setColour(Blockly.Blocks.serial.HUE);
+    this.setColour(Blockly.Msg['SERIAL_HUE']);
     this.appendValueInput('SER')
     this.appendValueInput('VAR')
         .setCheck(Number)
@@ -59,7 +59,7 @@ Blockly.Blocks.serial_read_b = {
 
 Blockly.Blocks.serial_close = {
     init: function () {
-        this.setColour(Blockly.Blocks.serial.HUE);
+        this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput('SER')
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXPY_SERIAL_CLOSE);

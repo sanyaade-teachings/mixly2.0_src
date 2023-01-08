@@ -4,11 +4,11 @@ goog.provide('Blockly.Blocks.base');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.base.HUE = 20//'#ae3838';//40;
+Blockly.Msg['BASE_HUE'] = 20//'#ae3838';//40;
 
 Blockly.Blocks.ledcSetup = {
   init: function(){
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput('CHANNEL')
     .setCheck(Number)
     .appendField("ledc"+Blockly.MIXLY_SETUP+Blockly.MIXLY_CHANNEL);
@@ -29,7 +29,7 @@ Blockly.Blocks.ledcSetup = {
 
 Blockly.Blocks.ledcAttachPin = {
   init: function(){
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
     .appendField("ledc"+Blockly.MIXLY_ATTATCH+Blockly.MIXLY_PIN)
     .setCheck(Number);
@@ -44,7 +44,7 @@ Blockly.Blocks.ledcAttachPin = {
 };
 Blockly.Blocks.ledcDetachPin = {
   init: function(){
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
     .appendField("ledc"+Blockly.MIXLY_DETACH+Blockly.MIXLY_PIN)
     .setCheck(Number);
@@ -58,7 +58,7 @@ Blockly.Blocks.ledcWrite=Blockly.Blocks.inout_analog_write;
 
 Blockly.Blocks.inout_touchRead = {
   init: function(){
-   this.setColour(Blockly.Blocks.base.HUE);
+   this.setColour(Blockly.Msg['BASE_HUE']);
    this.appendValueInput("PIN", Number)
    .appendField(Blockly.MIXLY_ESP32_TOUCH)
    .appendField(Blockly.MIXLY_PIN);
@@ -72,7 +72,7 @@ Blockly.Blocks.inout_touchRead = {
 
 Blockly.Blocks.touchAttachInterrupt = {
   init: function() {
-    this.setColour(Blockly.Blocks.base.HUE);
+    this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
     .appendField(Blockly.MIXLY_TOUCHATTACHINTERRUPT_PIN)
     .setCheck(Number);

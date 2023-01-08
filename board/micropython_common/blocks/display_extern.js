@@ -3,7 +3,7 @@
 goog.provide('Blockly.Blocks.display_extern');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.display_extern.HUE = '5BA5A5';
+Blockly.Msg['DISPLAY_EXTERN_HUE'] = '5BA5A5';
 
 
 
@@ -19,7 +19,7 @@ var IMG = [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],
 
 Blockly.Blocks.display_matrix_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -44,7 +44,7 @@ Blockly.Blocks.display_matrix_extern_show_image = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendValueInput('data')
         .setCheck([String, "esp32_image","List",'Tuple'])
         .appendField(Blockly.MIXLY_ESP32_SHOW_IMAGE_OR_STRING);
@@ -57,7 +57,7 @@ Blockly.Blocks.display_matrix_extern_show_image = {
 
  Blockly.Blocks.display_matrix_extern_show_image_or_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var");
     this.appendValueInput('data')
@@ -83,7 +83,7 @@ Blockly.Blocks.display_matrix_extern_scroll_string = {
    init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-     this.setColour(Blockly.Blocks.display_extern.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -97,7 +97,7 @@ Blockly.Blocks.display_matrix_extern_scroll_string_delay = {
    init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-     this.setColour(Blockly.Blocks.display_extern.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -118,7 +118,7 @@ Blockly.Blocks.display_matrix_extern_show_frame_string = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.MIXLY_ESP32_MONITOR_SHOW_FRAME);
@@ -132,7 +132,7 @@ Blockly.Blocks.display_matrix_extern_show_frame_string_delay = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.MIXLY_ESP32_MONITOR_SHOW_FRAME);
@@ -156,7 +156,7 @@ Blockly.Blocks['display_matrix_extern_shift'] = {
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     // this.setOutput(true);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -192,7 +192,7 @@ Blockly.Blocks.display_matrix_extern_get_pixel = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
       this.appendValueInput('x')
         .setCheck(Number)
             .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
@@ -211,7 +211,7 @@ Blockly.Blocks.display_matrix_extern_bright_point = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('x')
         .setCheck(Number)
         .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_BRIGHTNESS)
@@ -232,7 +232,7 @@ Blockly.Blocks.display_matrix_extern_get_screen_pixel = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_GET_SCREEN_BRIGHTNESS);
     this.setInputsInline(true);
@@ -245,7 +245,7 @@ Blockly.Blocks.display_matrix_extern_bright_screen = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendValueInput('x')
       .setCheck(Number)
       .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_SCREEN_BRIGHTNESS)
@@ -260,7 +260,7 @@ Blockly.Blocks.display_matrix_extern_clear = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_Clear_display);
   this.setPreviousStatement(true, null);
@@ -279,7 +279,7 @@ Blockly.Blocks['display_matrix_extern_image_builtins'] = {
           ];
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_Built_in_image1)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'image');
@@ -297,7 +297,7 @@ Blockly.Blocks['matrix_extern_image_arithmetic'] = {
          [Blockly.MICROBIT_DISPLAY_MINUS, 'sub']];
     this.appendValueInput('SUB')
         .setCheck("var");     
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.setOutput(true, "esp32_image");
     this.appendValueInput('A')
         // .setCheck(["esp32_image", "List", String])
@@ -322,7 +322,7 @@ Blockly.Blocks.matrix_extern_image_invert = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var");
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('A')
         .setCheck("esp32_image")
         .appendField(Blockly.MIXLY_MICROBIT_Invert_image1);
@@ -345,7 +345,7 @@ Blockly.Blocks.matrix_extern_image_invert = {
 //oled
 Blockly.Blocks.display_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -396,7 +396,7 @@ Blockly.Blocks.display_draw_4strings = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.setTooltip(Blockly.MIXLY_DF_LCD+Blockly.Msg.OLEDDISPLAY+Blockly.MIXLY_MICROBIT_TYPE_STRING);
     }
 };
@@ -407,7 +407,7 @@ Blockly.Blocks['display_image_size'] = {
         [[Blockly.MIXLY_HEIGHT, 'height'],
          [Blockly.MIXLY_WIDTH, 'width']
         ];
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.MIXLY_MICROBIT_IMAGE);
     this.appendValueInput('VAR')
@@ -437,7 +437,7 @@ Blockly.Blocks.display_rect = {
         [[Blockly.MIXLY_4DIGITDISPLAY_ON, '1'],
          [Blockly.MIXLY_4DIGITDISPLAY_OFF, '0']
         ];
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -489,7 +489,7 @@ Blockly.Blocks.display_rect = {
 
 Blockly.Blocks.display_line = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -529,7 +529,7 @@ Blockly.Blocks.display_line = {
 
 Blockly.Blocks.display_line_arbitrarily= {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -570,7 +570,7 @@ Blockly.Blocks.display_line_arbitrarily= {
 
 Blockly.Blocks.display_get_screen_image = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_ESP32_MONITOR_GET_SCREEN_IMAGE);
     this.setInputsInline(true);
@@ -581,7 +581,7 @@ Blockly.Blocks.display_get_screen_image = {
 
 Blockly.Blocks.display_blink_rate = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendValueInput('x')
       .setCheck(Number)
       .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_BLINK_RATE)
@@ -594,7 +594,7 @@ Blockly.Blocks.display_blink_rate = {
 
 Blockly.Blocks.display_rgb_color = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_RGB)
         this.appendValueInput("_LED_")
@@ -614,7 +614,7 @@ Blockly.Blocks.display_rgb_color = {
 
 Blockly.Blocks['display_onoff'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_ESP32_ON, "ON"], [Blockly.MIXLY_ESP32_OFF, "OFF"]]), 'ONOFF')
     this.setOutput(true, Boolean);
@@ -624,7 +624,7 @@ Blockly.Blocks['display_onoff'] = {
 
 Blockly.Blocks['switch'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.MIXLY_ESP32_ON, "1"],
@@ -637,7 +637,7 @@ Blockly.Blocks['switch'] = {
 
 Blockly.Blocks['display_fill'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var");
         this.appendDummyInput()
@@ -663,7 +663,7 @@ Blockly.Blocks['display_fill'] = {
 
 Blockly.Blocks.display_tm_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -697,7 +697,7 @@ Blockly.Blocks.display_tm_use_i2c_init = {
 
 Blockly.Blocks.display_tm1650_power = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -713,7 +713,7 @@ Blockly.Blocks.display_tm1650_power = {
 
 Blockly.Blocks.display_tm1650_show_num = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -730,7 +730,7 @@ Blockly.Blocks.display_tm1650_show_num = {
 
 Blockly.Blocks.display_tm1650_show_dot = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -751,7 +751,7 @@ Blockly.Blocks['display_animate'] = {
     var ANIMATE =
         [["ALL_CLOCKS", 'ALL_CLOCKS'],
          ["ALL_ARROWS", 'ALL_ARROWS']];
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.setOutput(true, 'Tuple');
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_ESP32_DISPLAY_ANIMATE)
@@ -766,7 +766,7 @@ Blockly.Blocks.display_circle = {
         [[Blockly.MIXLY_4DIGITDISPLAY_ON, '1'],
          [Blockly.MIXLY_4DIGITDISPLAY_OFF, '0']
         ];
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('VAR')
             .appendField(Blockly.OLED)
             .setCheck("var");
@@ -810,7 +810,7 @@ Blockly.Blocks.display_triangle = {
         [[Blockly.MIXLY_4DIGITDISPLAY_ON, '1'],
          [Blockly.MIXLY_4DIGITDISPLAY_OFF, '0']
         ];
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('VAR')
             .appendField(Blockly.OLED)
             .setCheck("var");
@@ -873,7 +873,7 @@ Blockly.Blocks.display_help = {
 //显示-OLED-显示图像
 Blockly.Blocks.display_oled_showBitmap = {
   init: function () {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('VAR')
         .appendField(Blockly.OLED)
         .setCheck("var");
@@ -903,7 +903,7 @@ Blockly.Blocks.display_oled_showBitmap = {
 //显示-OLED-画点
 Blockly.Blocks.display_oled_drawPixel = {
   init: function () {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('VAR')
         .appendField(Blockly.OLED)
     this.appendDummyInput("")
@@ -921,7 +921,7 @@ Blockly.Blocks.display_oled_drawPixel = {
 
 Blockly.Blocks.display_tm_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -955,7 +955,7 @@ Blockly.Blocks.display_tm_use_i2c_init = {
 
 Blockly.Blocks.display_tm1650_power = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -971,7 +971,7 @@ Blockly.Blocks.display_tm1650_power = {
 
 Blockly.Blocks.display_tm1650_show_num = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -988,7 +988,7 @@ Blockly.Blocks.display_tm1650_show_num = {
 
 Blockly.Blocks.display_tm1650_show_dot = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1006,7 +1006,7 @@ Blockly.Blocks.display_tm1650_show_dot = {
 
 Blockly.Blocks.display_tm1650_set_brightness = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_4DIGITDISPLAY)
             .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
@@ -1023,7 +1023,7 @@ Blockly.Blocks.display_tm1650_set_brightness = {
 
 Blockly.Blocks.tft_use_spi_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('SPISUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"SPI")
             .setCheck("var");
@@ -1058,7 +1058,7 @@ Blockly.Blocks.tft_use_spi_init = {
 
 Blockly.Blocks.tft_show_image_xy = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
         .appendField(MSG.catTFT);  
   this.appendValueInput('data')
@@ -1083,7 +1083,7 @@ Blockly.Blocks.tft_show_image_xy = {
 
 Blockly.Blocks.display_color_seclet = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     let fieldColorObj = new Blockly.FieldColour('#f00');
     fieldColorObj.setColours([
   // grays
@@ -1117,7 +1117,7 @@ Blockly.Blocks.display_color_seclet = {
 
 Blockly.Blocks.tft_show_image_or_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .appendField(MSG.catTFT);  
     this.appendValueInput('data')
@@ -1153,7 +1153,7 @@ Blockly.Blocks.tft_show_image_or_string_delay = {
 
 Blockly.Blocks.tft_scroll_string_delay = {
    init: function() {
-     this.setColour(Blockly.Blocks.display_onboard.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
      this.appendValueInput('SUB')
          .appendField(MSG.catTFT);  
      this.appendValueInput('data')
@@ -1182,7 +1182,7 @@ Blockly.Blocks.tft_scroll_string_delay = {
 
 Blockly.Blocks.tft_show_frame_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .appendField(MSG.catTFT);  
     this.appendValueInput('data')
@@ -1206,7 +1206,7 @@ Blockly.Blocks.tft_show_frame_string_delay = {
 
 Blockly.Blocks['tft_fill'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
             .appendField(MSG.catTFT);  
@@ -1233,7 +1233,7 @@ Blockly.Blocks['tft_fill'] = {
 
 Blockly.Blocks.tft_line_arbitrarily= {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         // this.appendDummyInput()
         //     .appendField(Blockly.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
@@ -1276,7 +1276,7 @@ Blockly.Blocks.tft_line_arbitrarily= {
 
 Blockly.Blocks.display_lcd_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -1312,7 +1312,7 @@ Blockly.Blocks.display_lcd_use_i2c_init = {
 
 Blockly.Blocks.lcd_show_image_or_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
         .appendField(MSG.catLCD);  
     this.appendValueInput('data')
@@ -1339,7 +1339,7 @@ Blockly.Blocks.lcd_show_image_or_string_delay = {
 
 Blockly.Blocks.lcd_print_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
         .appendField(MSG.catLCD);  
     this.appendValueInput('data')
@@ -1362,7 +1362,7 @@ Blockly.Blocks.lcd_print_string = {
 
 Blockly.Blocks['lcd_backlight'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
             .appendField(MSG.catLCD);  
@@ -1393,7 +1393,7 @@ Blockly.Blocks.lcd_clear = {
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catLCD);  
-    this.setColour(Blockly.Blocks.display_extern.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_Clear_display);
   this.setPreviousStatement(true, null);
@@ -1405,7 +1405,7 @@ Blockly.Blocks.lcd_clear = {
 
 Blockly.Blocks.display_oled_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -1436,7 +1436,7 @@ Blockly.Blocks.display_oled_use_i2c_init = {
 
 Blockly.Blocks.extern_oled_show_image = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1451,7 +1451,7 @@ Blockly.Blocks.extern_oled_show_image = {
 
 Blockly.Blocks.extern_oled_show_image_xy = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1475,7 +1475,7 @@ Blockly.Blocks.extern_oled_show_image_xy = {
 
 Blockly.Blocks.extern_oled_show_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1491,7 +1491,7 @@ Blockly.Blocks.extern_oled_show_string = {
 
  Blockly.Blocks.extern_oled_show_image_or_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1525,7 +1525,7 @@ Blockly.Blocks.extern_oled_show_string = {
 
 Blockly.Blocks.extern_oled_scroll_string = {
    init: function() {
-     this.setColour(Blockly.Blocks.display_onboard.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
      this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1540,7 +1540,7 @@ Blockly.Blocks.extern_oled_scroll_string = {
 
 Blockly.Blocks.extern_oled_scroll_string_delay = {
    init: function() {
-     this.setColour(Blockly.Blocks.display_onboard.HUE);
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
      this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1568,7 +1568,7 @@ Blockly.Blocks.extern_oled_scroll_string_delay = {
 
 Blockly.Blocks.extern_oled_show_frame_string = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1583,7 +1583,7 @@ Blockly.Blocks.extern_oled_show_frame_string = {
 
 Blockly.Blocks.extern_oled_show_frame_string_delay = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1611,7 +1611,7 @@ Blockly.Blocks['extern_oled_shift'] = {
          [Blockly.MIXLY_RIGHT, 'shift_right'],
         ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1648,7 +1648,7 @@ Blockly.Blocks['extern_oled_shift'] = {
 
 Blockly.Blocks.extern_oled_get_pixel = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1668,7 +1668,7 @@ Blockly.Blocks.extern_oled_get_pixel = {
 
 Blockly.Blocks.extern_oled_bright_point = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1692,7 +1692,7 @@ Blockly.Blocks.extern_oled_bright_point = {
 
 Blockly.Blocks.extern_oled_clear = {
   init: function() {
-    this.setColour(Blockly.Blocks.display_onboard.HUE);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
         .appendField(MSG.catOLED); 
@@ -1708,7 +1708,7 @@ Blockly.Blocks.extern_oled_clear = {
 Blockly.Blocks['extern_oled_shape_rect'] = {
   init: function () {
     this.jsonInit({
-      "colour": Blockly.Blocks.display_onboard.HUE,
+      "colour": Blockly.Msg['DISPLAY_ONBOARD_HUE'],
       "args0": [
         {
           "name": "SUB",
@@ -1769,7 +1769,7 @@ Blockly.Blocks['extern_oled_shape_rect'] = {
 Blockly.Blocks['extern_oled_hvline'] = {
   init: function () {
     this.jsonInit({
-      "colour": Blockly.Blocks.display_onboard.HUE,
+      "colour": Blockly.Msg['DISPLAY_ONBOARD_HUE'],
       "args0": [
         {
           "name": "SUB",
@@ -1825,7 +1825,7 @@ Blockly.Blocks['extern_oled_hvline'] = {
 Blockly.Blocks['extern_oled_line'] = {
   init: function () {
     this.jsonInit({
-      "colour": Blockly.Blocks.display_onboard.HUE,
+      "colour": Blockly.Msg['DISPLAY_ONBOARD_HUE'],
       "args0": [
         {
           "name": "SUB",

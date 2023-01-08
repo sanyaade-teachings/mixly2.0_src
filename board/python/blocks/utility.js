@@ -29,12 +29,12 @@ goog.provide('Blockly.Blocks.utility');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.utility.HUE = 160;
+Blockly.Msg['UTILITY_HUE'] = 160;
 
 Blockly.Blocks['raw_table'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendDummyInput()
@@ -47,7 +47,7 @@ Blockly.Blocks['raw_table'] = {
 Blockly.Blocks['raw_block'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendDummyInput()
@@ -60,7 +60,7 @@ Blockly.Blocks['raw_block'] = {
 Blockly.Blocks['raw_expression'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendDummyInput()
         .appendField('Code Expression:');
     this.appendDummyInput()
@@ -72,7 +72,7 @@ Blockly.Blocks['raw_expression'] = {
 Blockly.Blocks['raw_empty'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendValueInput('VALUE')
@@ -84,7 +84,7 @@ Blockly.Blocks['raw_empty'] = {
 Blockly.Blocks['text_comment'] = {
   // Text value.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendDummyInput()
         .appendTitle('Comment:')
         .appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
@@ -97,7 +97,7 @@ Blockly.Blocks['text_comment'] = {
 Blockly.Blocks['type_check'] = {
   // Set element at index.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendValueInput('VALUE')
         .appendField(Blockly.Msg.TYPE_CHECK);
     this.setInputsInline(false);
@@ -114,7 +114,7 @@ Blockly.Blocks['text_print_multiple'] = {
      * @this Blockly.Block
      */
     init: function() {
-        this.setColour(Blockly.Blocks.utility.HUE);
+        this.setColour(Blockly.Msg['UTILITY_HUE']);
         this.itemCount_ = 1;
         this.updateShape_();
         this.setPreviousStatement(true);
@@ -237,7 +237,7 @@ Blockly.Blocks['text_print_multiple'] = {
 Blockly.Blocks['text_print_multiple_container'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendDummyInput()
         .appendField('print');
     this.appendStatementInput('STACK');
@@ -248,7 +248,7 @@ Blockly.Blocks['text_print_multiple_container'] = {
 Blockly.Blocks['text_print_multiple_item'] = {
   // Add items.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendDummyInput()
         .appendField('item');
     this.setInputsInline(true);
@@ -265,7 +265,7 @@ Blockly.Blocks['function_call'] = {
      * @this Blockly.Block
      */
     init: function() {
-        this.setColour(Blockly.Blocks.utility.HUE);
+        this.setColour(Blockly.Msg['UTILITY_HUE']);
         this.itemCount_ = 1;
         this.hasReturn_ = false;
         this.appendDummyInput()
@@ -407,7 +407,7 @@ Blockly.Blocks['function_call'] = {
 Blockly.Blocks['function_call_container'] = {
   // Container.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendDummyInput()
         .appendField('Arguments');
     this.appendStatementInput('STACK');
@@ -423,7 +423,7 @@ Blockly.Blocks['function_call_container'] = {
 Blockly.Blocks['function_call_item'] = {
   // Add items.
   init: function() {
-    this.setColour(Blockly.Blocks.utility.HUE);
+    this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendDummyInput()
         .appendField('argument');
     this.setInputsInline(true);

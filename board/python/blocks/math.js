@@ -5,7 +5,7 @@ goog.provide('Blockly.Blocks.math');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.math.HUE = 230//'#e49f16';
+Blockly.Msg['MATH_HUE'] = 230//'#e49f16';
 
 Blockly.FieldTextInput.math_number_validator = function(text) {
   //return window.isNaN(text) ? null : String(text);
@@ -30,7 +30,7 @@ Blockly.Blocks['math_number'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('0',
         Blockly.FieldTextInput.math_number_validator), 'NUM');
@@ -41,7 +41,7 @@ Blockly.Blocks['math_number'] = {
 
 Blockly.Blocks['math_constant'] = {  
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     var constant =
         [['π', 'pi'],['e', 'e']];    
     this.appendDummyInput("")                
@@ -64,7 +64,7 @@ Blockly.Blocks['math_constant'] = {
 
 Blockly.Blocks['math_constant_mp'] = {  
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     var constant =
         [['π', 'pi'],['e', 'e']];    
     this.appendDummyInput("")                
@@ -100,7 +100,7 @@ Blockly.Blocks['math_arithmetic'] = {
          ['//', 'ZHENGCHU'],
          ['**', 'POWER']];
     //this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true);
     this.appendValueInput('A')
     this.appendValueInput('B')
@@ -139,7 +139,7 @@ Blockly.Blocks['math_selfcalcu'] = {
          ['//=', 'ZHENGCHU'],
          ['**=', 'POWER']];
     
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendValueInput('A')
@@ -170,7 +170,7 @@ Blockly.Blocks['math_bit'] = {
          ['|', '|'],
          ['>>', '>>'],
          ['<<', '<<']];
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true, Number);
     this.appendValueInput('A')
         .setCheck(Number);
@@ -202,7 +202,7 @@ Blockly.Blocks['math_trig'] = {
          ['10^', 'POW10']
         ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true, Number);
     this.appendValueInput('NUM')
         .setCheck(Number)
@@ -237,7 +237,7 @@ Blockly.Blocks['math_dec'] = {
          [Blockly.Msg.MATH_HEX, 'hex'],
                  ];
     //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true, String);
     this.appendValueInput('NUM')
         .setCheck(Number)
@@ -267,7 +267,7 @@ Blockly.Blocks['math_to_int']= {
 		 [Blockly.Msg.MATH_ABS, 'fabs'],
          // [Blockly.Msg.MATH_SQ, 'pow'],
          [Blockly.Msg.MATH_SQRT, 'sqrt']];
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendValueInput('A')
         .setCheck(Number)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
@@ -295,7 +295,7 @@ Blockly.Blocks['math_max_min']= {
 		     [Blockly.MIXLY_MIN, 'min'],
         ];
 
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendValueInput('A')
         .setCheck(Number)
 		.setAlign(Blockly.ALIGN_RIGHT)
@@ -330,7 +330,7 @@ init: function() {
          [Blockly.Msg.MATH_TEN, 'ten'],
          [Blockly.Msg.MATH_SIXTEEN, 'sixteen']
          ];
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendDummyInput('')
         .appendField(Blockly.Msg.MATH_BA)
     this.appendValueInput("NUM")
@@ -371,7 +371,7 @@ init: function() {
 Blockly.Blocks['math_random'] = {
     init: function() {
     var INT_FLOAT = [[Blockly.LANG_MATH_INT, 'int'],[Blockly.LANG_MATH_FLOAT, 'float']];
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true, Number);
     this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_RANDOM)
@@ -403,7 +403,7 @@ Blockly.Blocks['math_constrain'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true, Number);
     this.appendValueInput('VALUE')
         .setCheck(Number)
@@ -421,7 +421,7 @@ Blockly.Blocks['math_constrain'] = {
 
 Blockly.Blocks.math_map = {
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendValueInput("NUM", Number)
         .appendField(Blockly.MIXLY_MAP)
         .setCheck(Number);
@@ -451,7 +451,7 @@ Blockly.Blocks['math_indexer_number'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('0', Blockly.FieldTextInput.math_number_validator_include_blank), 'NUM');
     this.setOutput(true);
@@ -461,7 +461,7 @@ Blockly.Blocks['math_indexer_number'] = {
 
 Blockly.Blocks['math_random_seed'] = {
     init: function () {
-        this.setColour(Blockly.Blocks.math.HUE);
+        this.setColour(Blockly.Msg['MATH_HUE']);
         this.appendValueInput('NUM')
             .setCheck(Number)
             .appendField(Blockly.LANG_MATH_RANDOM_SEED);
@@ -474,7 +474,7 @@ Blockly.Blocks['math_random_seed'] = {
 Blockly.Blocks['math_round'] = {
   
   init: function() {
-    this.setColour(Blockly.Blocks.math.HUE);
+    this.setColour(Blockly.Msg['MATH_HUE']);
     this.setOutput(true, Number);
     this.appendValueInput('VALUE')
         .setCheck(Number)

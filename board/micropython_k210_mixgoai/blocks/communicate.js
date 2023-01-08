@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.communicate');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.communicate.HUE = 140
+Blockly.Msg['COMMUNICATE_HUE'] = 140
 
 
 Blockly.Blocks['communicate_ir_recv'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('PIN')
             .appendField(Blockly.MIXLY_IR_RECEIVE);
 		this.appendDummyInput()
@@ -23,7 +23,7 @@ Blockly.Blocks['communicate_ir_recv'] = {
 
 Blockly.Blocks['communicate_i2c_init'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('SUB')
             .appendField("I2C " + Blockly.MIXLY_SETUP)
             .setCheck("var");
@@ -55,7 +55,7 @@ Blockly.Blocks['communicate_i2c_init'] = {
 
 Blockly.Blocks['communicate_i2s_init'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
 			.appendField("I2S 初始化");   
@@ -91,7 +91,7 @@ Blockly.Blocks['communicate_i2s_init'] = {
 
 Blockly.Blocks['communicate_i2c_read'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .appendField("I2C")
             .setCheck("var");
@@ -109,7 +109,7 @@ Blockly.Blocks['communicate_i2c_read'] = {
 
 Blockly.Blocks['communicate_i2c_write'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .appendField("I2C")
             .setCheck("var");
@@ -128,7 +128,7 @@ Blockly.Blocks['communicate_i2c_write'] = {
 
 Blockly.Blocks['communicate_i2c_scan'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField(Blockly.MIXLY_ESP32_I2C_SCAN1);
@@ -142,7 +142,7 @@ Blockly.Blocks['communicate_i2c_scan'] = {
 
 Blockly.Blocks['communicate_spi_init'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField(Blockly.MIXLY_ESP32_SPI_INIT);
@@ -173,7 +173,7 @@ Blockly.Blocks['communicate_spi_init'] = {
 
 Blockly.Blocks['communicate_spi_set'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField(Blockly.MIXLY_SETTING + " SPI")
@@ -189,7 +189,7 @@ Blockly.Blocks['communicate_spi_set'] = {
 
 Blockly.Blocks['communicate_spi_buffer'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField(Blockly.MIXLY_ESP32_SET + 'SPI');
@@ -205,7 +205,7 @@ Blockly.Blocks['communicate_spi_buffer'] = {
 
 Blockly.Blocks['communicate_spi_read'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('SPI');
@@ -222,7 +222,7 @@ Blockly.Blocks['communicate_spi_read'] = {
 
 Blockly.Blocks['communicate_spi_read_output'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('SPI');
@@ -241,7 +241,7 @@ Blockly.Blocks['communicate_spi_read_output'] = {
 
 Blockly.Blocks['communicate_spi_readinto'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('SPI');
@@ -256,7 +256,7 @@ Blockly.Blocks['communicate_spi_readinto'] = {
 
 Blockly.Blocks['communicate_spi_readinto_output'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('SPI');
@@ -274,7 +274,7 @@ Blockly.Blocks['communicate_spi_readinto_output'] = {
 
 Blockly.Blocks['communicate_spi_write'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('SPI');
@@ -289,7 +289,7 @@ Blockly.Blocks['communicate_spi_write'] = {
 
 Blockly.Blocks['communicate_spi_write_readinto'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('SPI');
@@ -311,7 +311,7 @@ Blockly.Blocks['communicate_spi_write_readinto'] = {
 
 Blockly.Blocks.communicate_i2c_master_read = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField("I2C");
@@ -323,7 +323,7 @@ Blockly.Blocks.communicate_i2c_master_read = {
 
 Blockly.Blocks.communicate_i2c_available = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck("var")
             .appendField(Blockly.MIXLY_ESP32_READ + "I2C");
@@ -336,7 +336,7 @@ Blockly.Blocks.communicate_i2c_available = {
 
 Blockly.Blocks.i2c_slave_onreceive = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_I2C_SLAVE_ONRECEIVE)
             .setCheck(Number);
@@ -349,7 +349,7 @@ Blockly.Blocks.i2c_slave_onreceive = {
 
 Blockly.Blocks['communicate_ow_init'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('OneWire');
@@ -365,7 +365,7 @@ Blockly.Blocks['communicate_ow_init'] = {
 
 Blockly.Blocks['communicate_ow_scan'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('OneWire');
@@ -378,7 +378,7 @@ Blockly.Blocks['communicate_ow_scan'] = {
 
 Blockly.Blocks['communicate_ow_read'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('OneWire');
@@ -391,7 +391,7 @@ Blockly.Blocks['communicate_ow_read'] = {
 
 Blockly.Blocks['communicate_ow_write'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField('OneWire');
@@ -412,7 +412,7 @@ Blockly.Blocks['communicate_ow_write'] = {
 
 Blockly.Blocks['communicate_ow_select'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField(Blockly.MIXLY_ESP32_ONEWIRE_SELECT)
@@ -429,7 +429,7 @@ Blockly.Blocks['communicate_ow_select'] = {
 
 Blockly.Blocks['communicate_ow_reset'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.communicate.HUE);
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
             .appendField(Blockly.MIXLY_ESP32_ONEWIRE_RESET);

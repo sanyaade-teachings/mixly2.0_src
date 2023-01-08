@@ -4,13 +4,13 @@ goog.provide('Blockly.Blocks.AI');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.AI.HUE = 205
+Blockly.Msg['AI_HUE'] = 205
 
 
 
 Blockly.Blocks.MICROPYTHON_AI_client = {
     init: function () {
-        this.setColour(Blockly.Blocks.AI.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_SETUP)
             .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_AipSpeech_asr, "ASR"],
@@ -33,7 +33,7 @@ Blockly.Blocks.MICROPYTHON_AI_client = {
 
 Blockly.Blocks.MICROPYTHON_AI_Speech_unit = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Blocks.AI.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AI_UNIT)
             .appendField(Blockly.MIXLY_Client)
@@ -51,7 +51,7 @@ Blockly.Blocks.MICROPYTHON_AI_Speech_unit = { //  AI_TYPE_FUNC
 
 Blockly.Blocks.MICROPYTHON_AI_Speech_asr = { //  AI_TYPE_FUNC
     init: function () {
-        this.setColour(Blockly.Blocks.AI.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_AipSpeech_asr)
             .appendField(Blockly.MIXLY_Client)

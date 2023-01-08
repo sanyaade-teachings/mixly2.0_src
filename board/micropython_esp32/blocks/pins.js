@@ -1,11 +1,11 @@
 'use strict';
 goog.provide('Blockly.Blocks.pins');
 goog.require('Blockly.Blocks');
-Blockly.Blocks.pins.HUE = 230;
+Blockly.Msg['PINS_HUE'] = 230;
 
 Blockly.Blocks['pins_digital'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.digital), 'PIN');
     this.setOutput(true);
@@ -14,7 +14,7 @@ Blockly.Blocks['pins_digital'] = {
 
 Blockly.Blocks['pins_digital_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.digital_pin), 'PIN');
     this.setOutput(true, Number);
@@ -23,7 +23,7 @@ Blockly.Blocks['pins_digital_pin'] = {
 
 Blockly.Blocks['pins_input_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.input_pin), 'PIN');
     this.setOutput(true, Number);
@@ -32,7 +32,7 @@ Blockly.Blocks['pins_input_pin'] = {
 
 Blockly.Blocks['pins_output_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.output_pin), 'PIN');
     this.setOutput(true, Number);
@@ -41,7 +41,7 @@ Blockly.Blocks['pins_output_pin'] = {
 
 Blockly.Blocks['pins_mpython_touch'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.touch_mpython), 'PIN');
     this.setOutput(true, Number);
@@ -51,7 +51,7 @@ Blockly.Blocks['pins_mpython_touch'] = {
 
 Blockly.Blocks['espnow_channel'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.espnow_channel), 'PIN');
     this.setOutput(true, Number);
@@ -60,7 +60,7 @@ Blockly.Blocks['espnow_channel'] = {
 
 Blockly.Blocks['haskylens_model'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.haskylens_model), 'PIN');
     this.setOutput(true, Number);
@@ -69,7 +69,7 @@ Blockly.Blocks['haskylens_model'] = {
 
 Blockly.Blocks['pwm_input'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.pwm_input), 'PIN');
     this.setOutput(true);
@@ -78,7 +78,7 @@ Blockly.Blocks['pwm_input'] = {
 
 Blockly.Blocks['analog_input'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.analog_input), 'PIN');
     this.setOutput(true);
@@ -87,7 +87,7 @@ Blockly.Blocks['analog_input'] = {
 
 Blockly.Blocks['pwm_output'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.pwm_output), 'PIN');
     this.setOutput(true);
@@ -96,7 +96,7 @@ Blockly.Blocks['pwm_output'] = {
 
 Blockly.Blocks['analog_output'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.analog_output), 'PIN');
     this.setOutput(true);
@@ -105,7 +105,7 @@ Blockly.Blocks['analog_output'] = {
 
 Blockly.Blocks['i2c_A_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.i2c_A_pin), 'PIN');
     this.setOutput(true, Number);
@@ -114,7 +114,7 @@ Blockly.Blocks['i2c_A_pin'] = {
 
 Blockly.Blocks['i2c_B_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.i2c_B_pin), 'PIN');
     this.setOutput(true, Number);
@@ -124,7 +124,7 @@ Blockly.Blocks['i2c_B_pin'] = {
 
 Blockly.Blocks['spi_A_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.spi_A_pin), 'PIN');
     this.setOutput(true, Number);
@@ -133,7 +133,7 @@ Blockly.Blocks['spi_A_pin'] = {
 
 Blockly.Blocks['spi_B_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.spi_B_pin), 'PIN');
     this.setOutput(true, Number);
@@ -142,7 +142,7 @@ Blockly.Blocks['spi_B_pin'] = {
 
 Blockly.Blocks['spi_C_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.spi_C_pin), 'PIN');
     this.setOutput(true, Number);
@@ -151,7 +151,7 @@ Blockly.Blocks['spi_C_pin'] = {
 
 Blockly.Blocks['spi_D_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.spi_D_pin), 'PIN');
     this.setOutput(true, Number);
@@ -160,7 +160,7 @@ Blockly.Blocks['spi_D_pin'] = {
 
 Blockly.Blocks['pins_analog'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.analog), 'PIN');
     this.setOutput(true);
@@ -169,7 +169,7 @@ Blockly.Blocks['pins_analog'] = {
 
 Blockly.Blocks['pins_analog_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.analog_pin), 'PIN');
     this.setOutput(true, Number);
@@ -178,7 +178,7 @@ Blockly.Blocks['pins_analog_pin'] = {
 
 Blockly.Blocks['pins_dac'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.dac), 'PIN');
     this.setOutput(true);
@@ -187,7 +187,7 @@ Blockly.Blocks['pins_dac'] = {
 
 Blockly.Blocks['pins_dac_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.dac_pin), 'PIN');
     this.setOutput(true, Number);
@@ -196,7 +196,7 @@ Blockly.Blocks['pins_dac_pin'] = {
 
 Blockly.Blocks['pins_button'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.button), 'PIN');
     this.setOutput(true, Number);
@@ -205,7 +205,7 @@ Blockly.Blocks['pins_button'] = {
 
 Blockly.Blocks['pins_pwm'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.pwm), 'PIN');
     this.setOutput(true);
@@ -214,7 +214,7 @@ Blockly.Blocks['pins_pwm'] = {
 
 Blockly.Blocks['pins_pwm_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.pwm_pin), 'PIN');
     this.setOutput(true, Number);
@@ -223,7 +223,7 @@ Blockly.Blocks['pins_pwm_pin'] = {
 
 Blockly.Blocks['pins_touch_pin'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.touch_pin), 'PIN');
     this.setOutput(true, Number);
@@ -232,7 +232,7 @@ Blockly.Blocks['pins_touch_pin'] = {
 
 Blockly.Blocks['pins_touch'] = {
    init: function() {
-    this.setColour(Blockly.Blocks.pins.HUE);
+    this.setColour(Blockly.Msg['PINS_HUE']);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(profile.default.touch), 'PIN');
     this.setOutput(true);
@@ -241,7 +241,7 @@ Blockly.Blocks['pins_touch'] = {
 
 Blockly.Blocks['pins_serial'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.serial_pin), 'PIN');
         this.setOutput(true, Number);
@@ -250,7 +250,7 @@ Blockly.Blocks['pins_serial'] = {
 
 Blockly.Blocks['pins_builtinimg'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.display_onboard.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.builtinimg), 'PIN');
         this.setOutput(true, "esp32_image");
@@ -259,7 +259,7 @@ Blockly.Blocks['pins_builtinimg'] = {
 
 Blockly.Blocks['pins_builtinimg_extern'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.display_extern.HUE);
+        this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.builtinimg_extern), 'PIN');
         this.setOutput(true, "esp32_image");
@@ -268,7 +268,7 @@ Blockly.Blocks['pins_builtinimg_extern'] = {
 
 Blockly.Blocks['pins_imglist'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.imglist), 'PIN');
         this.setOutput(true);
@@ -277,7 +277,7 @@ Blockly.Blocks['pins_imglist'] = {
 
 Blockly.Blocks['pins_playlist'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.playlist), 'PIN');
         this.setOutput(true);
@@ -286,7 +286,7 @@ Blockly.Blocks['pins_playlist'] = {
 
 Blockly.Blocks['pins_playlist_extern'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.playlist_extern), 'PIN');
         this.setOutput(true);
@@ -295,7 +295,7 @@ Blockly.Blocks['pins_playlist_extern'] = {
 
 Blockly.Blocks['pins_exlcdh'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.exlcdh), 'PIN');
         this.setOutput(true, Number);
@@ -304,7 +304,7 @@ Blockly.Blocks['pins_exlcdh'] = {
 
 Blockly.Blocks['pins_exlcdv'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.exlcdv), 'PIN');
         this.setOutput(true, Number);
@@ -313,7 +313,7 @@ Blockly.Blocks['pins_exlcdv'] = {
 
 Blockly.Blocks['pins_axis'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.axis), 'PIN');
         this.setOutput(true, Number);
@@ -321,7 +321,7 @@ Blockly.Blocks['pins_axis'] = {
 };
 Blockly.Blocks['pins_brightness'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.brightness), 'PIN');
         this.setOutput(true, Number);
@@ -330,7 +330,7 @@ Blockly.Blocks['pins_brightness'] = {
 
 Blockly.Blocks['pins_tts_voice'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.tts_voice), 'PIN');
         this.setOutput(true, Number);
@@ -339,7 +339,7 @@ Blockly.Blocks['pins_tts_voice'] = {
 
 Blockly.Blocks['pins_tts_builtin_music'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.tts_builtin_music), 'PIN');
         this.setOutput(true, Number);
@@ -348,7 +348,7 @@ Blockly.Blocks['pins_tts_builtin_music'] = {
 
 Blockly.Blocks['pins_tts_bgmusic'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.tts_bgmusic), 'PIN');
         this.setOutput(true, Number);
@@ -357,7 +357,7 @@ Blockly.Blocks['pins_tts_bgmusic'] = {
 
 Blockly.Blocks['pins_tone_notes'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.tone_notes), 'PIN');
         this.setOutput(true, Number);
@@ -366,7 +366,7 @@ Blockly.Blocks['pins_tone_notes'] = {
 
 Blockly.Blocks['pins_radio_power'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.radio_power), 'PIN');
         this.setOutput(true, Number);
@@ -375,7 +375,7 @@ Blockly.Blocks['pins_radio_power'] = {
 
 Blockly.Blocks['pins_radio_datarate'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.radio_datarate), 'PIN');
         this.setOutput(true, Number);
@@ -384,7 +384,7 @@ Blockly.Blocks['pins_radio_datarate'] = {
 
 Blockly.Blocks['pins_one_more'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.one_more), 'PIN');
         this.setOutput(true);
@@ -393,7 +393,7 @@ Blockly.Blocks['pins_one_more'] = {
 
 Blockly.Blocks['pins_digital_dot'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.pins.HUE);
+        this.setColour(Blockly.Msg['PINS_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(profile.default.digital_dot), 'PIN');
         this.setOutput(true, Number);

@@ -2,11 +2,11 @@
 
 goog.provide('Blockly.Blocks.ai');
 goog.require('Blockly.Blocks');
-Blockly.Blocks.ai.HUE = "#55839A"
+Blockly.Msg['AI_HUE'] = "#55839A"
 
 Blockly.Blocks['tuple_anchor'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.tuple.HUE);
+    this.setColour(Blockly.Msg['TUPLE_HUE']);
 	this.appendDummyInput("")
         .appendField(new Blockly.FieldTextInput('anchor'), 'VAR')
         .appendField('锚点参数= (')
@@ -20,7 +20,7 @@ Blockly.Blocks['tuple_anchor'] = {
 
 Blockly.Blocks['tuple_calss'] = {
   init: function() {
-    this.setColour(Blockly.Blocks.tuple.HUE);
+    this.setColour(Blockly.Msg['TUPLE_HUE']);
 	this.appendDummyInput("")
         .appendField(new Blockly.FieldTextInput('calss'), 'VAR')
         .appendField('物品名称= [')
@@ -34,7 +34,7 @@ Blockly.Blocks['tuple_calss'] = {
 
 Blockly.Blocks.KPU_load = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
         this.appendValueInput('SUB')
             .appendField("")
             .setCheck("var");
@@ -50,7 +50,7 @@ Blockly.Blocks.KPU_load = {
 
 Blockly.Blocks.KPU_load1 = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
         this.appendValueInput('SUB')
             .appendField("")
             .setCheck("var");
@@ -66,7 +66,7 @@ Blockly.Blocks.KPU_load1 = {
 
 Blockly.Blocks.KPU_init_yolo2= {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("yolo2")
 			.appendField("初始化");
@@ -98,7 +98,7 @@ Blockly.Blocks.KPU_init_yolo2= {
 
 Blockly.Blocks['KPU_run_yolo2']= {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("yolo2")
 			.appendField("运行网络");
@@ -117,7 +117,7 @@ Blockly.Blocks['KPU_run_yolo2']= {
 
 Blockly.Blocks['KPU_forward']= {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("yolo2")
 			.appendField("前向运算");
@@ -137,7 +137,7 @@ Blockly.Blocks['KPU_forward']= {
 
 Blockly.Blocks['KPU_analysis'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.ai.HUE);
+		this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput()
 			.appendField("yolo2")
             .appendField("模型解析");
@@ -160,7 +160,7 @@ Blockly.Blocks['KPU_analysis'] = {
 
 Blockly.Blocks.aionenet_nic_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_OneNET")
 			.appendField("连接WiFi");
@@ -179,7 +179,7 @@ Blockly.Blocks.aionenet_nic_init = {
 
 Blockly.Blocks.aionenet_token = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_OneNET")
 			.appendField("获鉴权码");
@@ -199,7 +199,7 @@ Blockly.Blocks.aionenet_token = {
 
 Blockly.Blocks.aionenet_API = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_OneNET")
 			.appendField("调取API");
@@ -230,7 +230,7 @@ Blockly.Blocks.aionenet_API = {
 
 Blockly.Blocks.ailocal_training = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_Local")
 			.appendField("模型训练");		
@@ -254,7 +254,7 @@ Blockly.Blocks.ailocal_training = {
 
 Blockly.Blocks.ailocal_loading = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_Local")
 			.appendField("模型加载");					
@@ -272,7 +272,7 @@ Blockly.Blocks.ailocal_loading = {
 
 Blockly.Blocks.ailocal_predict = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_Local")
 			.appendField("运行模型");
@@ -292,7 +292,7 @@ Blockly.Blocks.ailocal_predict = {
 
 Blockly.Blocks.ai_face_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_Face")
 			.appendField("初始化 加载");			
@@ -317,7 +317,7 @@ Blockly.Blocks.ai_face_init = {
 
 Blockly.Blocks['ai_face_train']= {
     init: function () {
-        this.setColour(Blockly.Blocks.ai.HUE);
+        this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput("")
 			.appendField("AI_Face")
 			.appendField("运行识别");
@@ -339,7 +339,7 @@ Blockly.Blocks['ai_face_train']= {
 
 Blockly.Blocks['ai_face_info'] = {
     init: function () {
-		this.setColour(Blockly.Blocks.ai.HUE);
+		this.setColour(Blockly.Msg['AI_HUE']);
 		this.appendDummyInput()
 			.appendField("AI_Face")
 			.appendField("识别解析");		

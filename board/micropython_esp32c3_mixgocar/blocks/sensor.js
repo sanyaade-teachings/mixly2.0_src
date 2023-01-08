@@ -4,13 +4,13 @@ goog.provide('Blockly.Blocks.sensor');
 
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.sensor.HUE = 40//'#9e77c9'//40;
+Blockly.Msg['SENSOR_HUE'] = 40//'#9e77c9'//40;
 
 
 
 Blockly.Blocks['sensor_mixgocar_pin_near_line'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -34,7 +34,7 @@ Blockly.Blocks['sensor_mixgocar_pin_near_line'] = {
 
 Blockly.Blocks['sensor_mixgocar_pin_near'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -58,7 +58,7 @@ Blockly.Blocks['sensor_mixgocar_pin_near'] = {
 
 Blockly.Blocks['sensor_mixgocar_pin_near_state_change'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MIXGO_CAR_SENSOR_ONBOARD_CHANGE)
             .appendField(new Blockly.FieldDropdown([
@@ -75,7 +75,7 @@ Blockly.Blocks['sensor_mixgocar_pin_near_state_change'] = {
 
 Blockly.Blocks['sensor_mixgocar_battery_left'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor_onboard.HUE);
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
         .appendField(Blockly.MIXLY_MIXGO_CAR_BATTERY_LEFT);
         this.setOutput(true);
@@ -91,7 +91,7 @@ Blockly.Blocks['sensor_mixgocar_battery_left'] = {
 
 Blockly.Blocks['number1'] = {
    	init: function() {
-	    this.setColour(Blockly.Blocks.sensor.HUE);
+	    this.setColour(Blockly.Msg['SENSOR_HUE']);
 	    this.appendDummyInput("")
 	    .appendField(new Blockly.FieldDropdown([["T1", "touch_T1"], ["T2", "touch_T2"],["T3", "touch_T3"],["T4", "touch_T4"]]), 'op')
 	    this.setOutput(true);
@@ -101,7 +101,7 @@ Blockly.Blocks['number1'] = {
 
 Blockly.Blocks['sensor_mixgoce_pin_pressed'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput("button")
             .appendField(Blockly.MIXLY_ESP32_TOUCH_SENSOR)
         this.appendDummyInput()
@@ -117,7 +117,7 @@ Blockly.Blocks['sensor_mixgoce_pin_pressed'] = {
 
 Blockly.Blocks['sensor_mixgoce_pin_near_more'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.MIXLY_ESP32_NEAR);
         this.appendValueInput('freq')
@@ -139,7 +139,7 @@ Blockly.Blocks['sensor_mixgoce_pin_near_more'] = {
 
 Blockly.Blocks['sensor_MSA301_get_acceleration'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
         .appendField(Blockly.MIXGO_ACC_8658_SENSOR)
         .appendField(new Blockly.FieldDropdown([
@@ -173,7 +173,7 @@ Blockly.Blocks['sensor_MSA301_get_acceleration'] = {
 
 Blockly.Blocks['sensor_mixgoce_extern_button_is_pressed'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_BUTTON)
             .appendField(Blockly.MIXLY_PIN)
@@ -188,7 +188,7 @@ Blockly.Blocks['sensor_mixgoce_extern_button_is_pressed'] = {
 
 Blockly.Blocks['sensor_mixgoce_extern_button_was_pressed'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_BUTTON)
             .appendField(Blockly.MIXLY_PIN)
@@ -203,7 +203,7 @@ Blockly.Blocks['sensor_mixgoce_extern_button_was_pressed'] = {
 
 Blockly.Blocks['sensor_mixgoce_extern_button_get_presses'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.MIXLY_BUTTON)
             .appendField(Blockly.MIXLY_PIN)
@@ -221,7 +221,7 @@ Blockly.Blocks['sensor_mixgoce_extern_button_get_presses'] = {
 
 Blockly.Blocks['sensor_mixgoce_extern_dimmer'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_DISPLAY_MATRIX_ROTATE+Blockly.MIXLY_POTENTIOMETER);
         this.appendValueInput("PIN", Number)
@@ -236,7 +236,7 @@ Blockly.Blocks['sensor_mixgoce_extern_dimmer'] = {
 
 Blockly.Blocks['sensor_mixgoce_extern_pin_near'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_IR_RANGE);
         this.appendValueInput("PINA", Number)
@@ -255,7 +255,7 @@ Blockly.Blocks['sensor_mixgoce_extern_pin_near'] = {
 
 Blockly.Blocks.sensor_use_i2c_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput('I2CSUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
@@ -280,7 +280,7 @@ Blockly.Blocks.sensor_use_i2c_init = {
 
 Blockly.Blocks['sensor_LTR308'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_ESP32_EXTERN_LIGHT+" LTR308");
         this.appendValueInput('SUB')
@@ -295,7 +295,7 @@ Blockly.Blocks['sensor_LTR308'] = {
 
 Blockly.Blocks['sensor_VL530LX'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_LASER_RANGE+" VL53L0X");
         this.appendValueInput('SUB')
@@ -310,7 +310,7 @@ Blockly.Blocks['sensor_VL530LX'] = {
 
 Blockly.Blocks['sensor_shtc3'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_TEM_HUM+" SHTC3")
             .setCheck("var");
@@ -337,7 +337,7 @@ Blockly.Blocks['sensor_shtc3'] = {
 
 Blockly.Blocks['sensor_hp203'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput('SUB')
             .appendField(Blockly.MIXLY_Altitude+MSG.catSensor+" HP203X")
             .setCheck("var");
@@ -355,7 +355,7 @@ Blockly.Blocks['sensor_hp203'] = {
 
 Blockly.Blocks.rfid_use_spi_init = {
     init: function () {
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendValueInput('SPISUB')
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"SPI")
             .setCheck("var");
@@ -374,7 +374,7 @@ Blockly.Blocks.rfid_use_spi_init = {
 
 Blockly.Blocks['rfid_read'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_COMMUNICATION_RFID_READ);
         this.appendValueInput('SUB')
@@ -386,7 +386,7 @@ Blockly.Blocks['rfid_read'] = {
 
 Blockly.Blocks['rfid_write'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.sensor.HUE);
+        this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_COMMUNICATION_RFID_WRITE);
         this.appendValueInput('SUB')
@@ -401,7 +401,7 @@ Blockly.Blocks['rfid_write'] = {
 
 Blockly.Blocks.PS2_init={
   init: function() {
-   this.setColour(Blockly.Blocks.sensor.HUE);
+   this.setColour(Blockly.Msg['SENSOR_HUE']);
    this.appendDummyInput("")
    .appendField(Blockly.MIXLY_SETUP+Blockly.PS2);
    this.appendDummyInput("")  
@@ -450,7 +450,7 @@ var PSBUTTON =[
 //
 Blockly.Blocks.PS2_vibration={
   init: function() {
-   this.setColour(Blockly.Blocks.sensor.HUE);
+   this.setColour(Blockly.Msg['SENSOR_HUE']);
    this.appendDummyInput("")
    .appendField(Blockly.PS2+Blockly.PS2_setRumble)
    .appendField(Blockly.MIXLY_STM32_OLED_SMALL+MSG.catActuator_motor)
@@ -470,7 +470,7 @@ Blockly.Blocks.PS2_vibration={
 //
 Blockly.Blocks.PS2_Button={
   init: function() {
-   this.setColour(Blockly.Blocks.sensor.HUE);
+   this.setColour(Blockly.Msg['SENSOR_HUE']);
    this.appendDummyInput("")
    .appendField(Blockly.PS2_BUTTON)
    .appendField(new Blockly.FieldDropdown(PSBUTTON), "psbt")
@@ -488,7 +488,7 @@ Blockly.Blocks.PS2_Button={
 //
 Blockly.Blocks.PS2_State={
   init: function() {
-   this.setColour(Blockly.Blocks.sensor.HUE);
+   this.setColour(Blockly.Msg['SENSOR_HUE']);
    this.appendDummyInput("")
    .appendField(Blockly.MIXLY_GET+Blockly.PS2_BUTTON)
    .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_PULSEIN_STAT ,"0"]
@@ -503,7 +503,7 @@ Blockly.Blocks.PS2_State={
 
 Blockly.Blocks.PS2_Buttons={
   init: function() {
-   this.setColour(Blockly.Blocks.sensor.HUE);
+   this.setColour(Blockly.Msg['SENSOR_HUE']);
    this.appendDummyInput("")
    .appendField(Blockly.PS2_BUTTON)
    .appendField(new Blockly.FieldDropdown(PSBUTTON), "psbt")
@@ -514,7 +514,7 @@ Blockly.Blocks.PS2_Buttons={
 
 Blockly.Blocks.PS2_stk={
   init: function() {
-    this.setColour(Blockly.Blocks.sensor.HUE);
+    this.setColour(Blockly.Msg['SENSOR_HUE']);
     var PSSTK =[
     [Blockly.PS2_RX,"0"],
     [Blockly.PS2_RY,"1"],

@@ -3,11 +3,11 @@
 goog.provide('Blockly.Blocks.serial');
 
 goog.require('Blockly.Blocks');
-Blockly.Blocks.serial.HUE = 65;
+Blockly.Msg['SERIAL_HUE'] = 65;
 
 Blockly.Blocks['serial_HardwareSerial'] = {
 	init: function() {
-		this.setColour(Blockly.Blocks.serial.HUE);
+		this.setColour(Blockly.Msg['SERIAL_HUE']);
 		this.appendDummyInput("")
 		.appendField(Blockly.MIXLY_SETUP+Blockly.Hardware_Serial)
 		.appendField(new Blockly.FieldDropdown(profile.default.serial_HardwareSelect), "serial_select");

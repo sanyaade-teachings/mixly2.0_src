@@ -3,12 +3,12 @@
 goog.provide('Blockly.Blocks.me_go');
 goog.require('Blockly.Blocks');
 
-Blockly.Blocks.me_go.HUE = 100
+Blockly.Msg['MEGO_HUE'] = 100
 
 //LED
 Blockly.Blocks['ce_go_light_number'] = {
     init: function() {
-        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.MIXGO_LEFT_FRONT+Blockly.Msg.COLOUR_RGB_GREEN+Blockly.MIXLY_EXTERN_LED, "GLED[0]"],
@@ -27,7 +27,7 @@ Blockly.Blocks['ce_go_light_number'] = {
 
 Blockly.Blocks.ce_go_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.me_go.HUE);
+    this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -43,7 +43,7 @@ Blockly.Blocks.ce_go_led_bright = {
 
 Blockly.Blocks.ce_go_get_led_bright = {
   init: function() {
-    this.setColour(Blockly.Blocks.me_go.HUE);
+    this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -58,7 +58,7 @@ Blockly.Blocks.ce_go_get_led_bright = {
 
 Blockly.Blocks.ce_go_get_led_state = {
   init: function() {
-    this.setColour(Blockly.Blocks.me_go.HUE);
+    this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET);
     this.appendValueInput('led')
@@ -73,7 +73,7 @@ Blockly.Blocks.ce_go_get_led_state = {
 
 Blockly.Blocks.ce_go_led_brightness = {
   init: function() {
-    this.setColour(Blockly.Blocks.me_go.HUE);
+    this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.MIXLY_SETTING);
     this.appendValueInput('led')
@@ -92,7 +92,7 @@ Blockly.Blocks.ce_go_led_brightness = {
 
 Blockly.Blocks.ce_go_stepper_keep = {
     init: function () {
-      this.setColour(Blockly.Blocks.me_go.HUE);
+      this.setColour(Blockly.Msg['MEGO_HUE']);
       this.appendDummyInput()
           .appendField("ME GO")
           .appendField(new Blockly.FieldDropdown([
@@ -115,7 +115,7 @@ Blockly.Blocks.ce_go_stepper_keep = {
 
 Blockly.Blocks.ce_go_stepper_stop = {
     init: function () {
-      this.setColour(Blockly.Blocks.me_go.HUE);
+      this.setColour(Blockly.Msg['MEGO_HUE']);
       this.appendDummyInput()
           .appendField("ME GO")
           .appendField(new Blockly.FieldDropdown([           
@@ -130,7 +130,7 @@ Blockly.Blocks.ce_go_stepper_stop = {
 
 Blockly.Blocks.ce_go_dc_motor = {
     init: function () {
-      this.setColour(Blockly.Blocks.me_go.HUE);
+      this.setColour(Blockly.Msg['MEGO_HUE']);
       this.appendDummyInput()
           .appendField("ME GO")
           .appendField(Blockly.MOTOR_DC)
@@ -161,7 +161,7 @@ Blockly.Blocks.ce_go_dc_motor = {
 
 Blockly.Blocks.ce_go_hall_attachInterrupt = {
   init: function() {
-    this.setColour(Blockly.Blocks.me_go.HUE);
+    this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput("")
     .appendField(Blockly.MIXLY_ESP32_INTERRUPT)
     .appendField(Blockly.ME_GO_HALL_SENSOR)
@@ -177,7 +177,7 @@ Blockly.Blocks.ce_go_hall_attachInterrupt = {
 
 Blockly.Blocks.ce_go_hall_initialize = {
   init: function() {
-    this.setColour(Blockly.Blocks.me_go.HUE);
+    this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput("")    
     .appendField(Blockly.ME_GO_HALL_SENSOR)    
     this.appendDummyInput("")
@@ -196,7 +196,7 @@ Blockly.Blocks.ce_go_hall_initialize = {
 
 Blockly.Blocks['ce_go_pin_near_line'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -220,7 +220,7 @@ Blockly.Blocks['ce_go_pin_near_line'] = {
 
 Blockly.Blocks['ce_go_pin_near'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -244,7 +244,7 @@ Blockly.Blocks['ce_go_pin_near'] = {
 
 Blockly.Blocks['ce_go_pin_near_state_change'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MIXGO_CAR_SENSOR_ONBOARD_CHANGE)
             .appendField(new Blockly.FieldDropdown([
@@ -262,7 +262,7 @@ Blockly.Blocks['ce_go_pin_near_state_change'] = {
 
 Blockly.Blocks['sensor_mixgome_eulerangles'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_GET_GESTURE)   
             .appendField(new Blockly.FieldDropdown([
@@ -285,7 +285,7 @@ Blockly.Blocks['sensor_mixgome_eulerangles'] = {
 
 Blockly.Blocks['ce_go_pin_light'] = {
     init: function(){
-        this.setColour(Blockly.Blocks.me_go.HUE);
+        this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([

@@ -1110,29 +1110,3 @@ body[class="light"] {
 .dark .layui-layer-setwin span {
     color: #fff;
 }
-
-.light .tippy-box {
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%);
-    color: #000;
-    border-radius: 0.25rem;
-}
-
-.light .tippy-arrow {
-    color: rgba(255,255,255,.85);
-}
-
-.dark .tippy-box {
-    background-color: #7c7171;
-    background-clip: padding-box;
-    border: 1px solid rgba(255,255,255,.1);
-    box-shadow: 0 0.25rem 0.75rem rgb(255 255 255 / 10%);
-    color: #fff;
-    border-radius: 0.25rem;
-}
-
-.dark .tippy-arrow {
-    color: #7c7171;
-}

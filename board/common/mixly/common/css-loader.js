@@ -45,7 +45,8 @@ Mixly.CssLoader.commonCss = [
     "common/css/library.css",
     "common/css/drag.css",
     "common/css/button.css",
-    "common/css/xscrollbar.css"
+    "common/css/xscrollbar.css",
+    "common/css/tippy-ext.css"
 ];
 
 /* 客户端css */

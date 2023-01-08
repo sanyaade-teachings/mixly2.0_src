@@ -266,6 +266,10 @@ File.open = () => {
 File.openFile = (filePath) => {
     const extname = path.extname(filePath);
     let data;
+    if (!fs_extend.isfile(filePath)) {
+        console.log(filePath + '不存在');
+        return;
+    }
     try {
         data = fs.readFileSync(filePath, 'utf-8');
     } catch (error) {

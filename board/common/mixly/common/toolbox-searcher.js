@@ -86,23 +86,25 @@ ToolboxSearcher.searchBlocks = function (keyList) {
                             for (let field of fieldRow) {
                                 const fieldText = field.getText().toLowerCase();
                                 for (let key = 0; key < searchKeyList.length; key++) {
-                                    if (fieldText.indexOf(searchKeyList[key]) !== -1) {
-                                        searchKeyList.splice(key, 1);
-                                        key--;
-                                        if (!searchKeyList.length) {
-                                            if (addLabel) {
-                                                const categoryPath = this.getCategoryPath(category);
-                                                outputXML.push({
-                                                    kind: 'LABEL',
-                                                    text: categoryPath
-                                                });
-                                                addLabel = false;
-                                            }
-                                            outputXML.push(blockDef);
-                                            select = true;
-                                            break;
-                                        }
+                                    if (fieldText.indexOf(searchKeyList[key]) === -1) {
+                                        continue;
                                     }
+                                    searchKeyList.splice(key, 1);
+                                    key--;
+                                    if (searchKeyList.length) {
+                                        continue;
+                                    }
+                                    if (addLabel) {
+                                        const categoryPath = this.getCategoryPath(category);
+                                        outputXML.push({
+                                            kind: 'LABEL',
+                                            text: categoryPath
+                                        });
+                                        addLabel = false;
+                                    }
+                                    outputXML.push(blockDef);
+                                    select = true;
+                                    break;
                                 }
                                 if (select) break;
                             }

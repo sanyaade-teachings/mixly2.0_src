@@ -63,9 +63,9 @@ function sendCommand (commandObj, win = null) {
 app.disableHardwareAcceleration();
 
 app.allowRendererProcessReuse = false;
+Menu.setApplicationMenu(null);
 
 function createWindow(filePath = null, indexUrl = null) {
-    Menu.setApplicationMenu(null);
     // 可以创建多个渲染进程
     let win = new BrowserWindow({
         show: false,

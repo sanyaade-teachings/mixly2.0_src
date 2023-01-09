@@ -145,21 +145,15 @@
     left: 0px;
     top: 0;
 }
-/*layui child nav*/
-/*
-.layui-nav-child{display: none; position: absolute; left: 0; top: 65px; min-width: 100%; line-height: 36px; padding: 5px 0;  box-shadow: 0 2px 4px rgba(0,0,0,.12); border: 1px solid #d2d2d2; background-color: #fff; z-index: 100; border-radius: 2px; white-space: nowrap;}
-.layui-nav .layui-nav-child a{color: white;}
-.layui-nav .layui-nav-child a:hover{background-color:deepskyblue; color: white;}
-.layui-nav-child dd{position: relative;}
-.layui-nav-child dd.layui-this{background-color: transparent; color: white;}
-.layui-nav .layui-nav-child dd.layui-this a{background-color: transparent; color: white;}
-.layui-nav-child dd.layui-this:after{display: none;}
-*/
-/*layui child nav*/
-.layui-nav-child {
+
+#nav .layui-nav-child {
     right: 0px;
     left: auto;
+    max-height: calc(100vh - var(--nav-height) - 12px);
+    line-height: 30px;
+    overflow-y: auto;
 }
+
 /*layui third level nav*/
 .layui-nav-third-child {
     display: none;
@@ -176,25 +170,31 @@
     border-radius: 2px;
     white-space: nowrap;
 }
+
 .layui-nav .layui-nav-third-child a {
     color: #000;
 }
+
 .layui-nav .layui-nav-third-child a:hover {
     color: #000;
 }
+
 .layui-nav-third-child li {
     position: relative;
     background-color: white;
     color: black;
 }
+
 .layui-nav .layui-nav-third-child li.layui-this a {
     background-color: white !important;
     color: black;
 }
+
 .layui-nav > li > dl > dd.layui-this > ol > li > a {
     background-color: #fff !important;
     color: #000 !important;
 }
+
 .layui-nav-third-child li:after {
     display: none;
 }
@@ -357,9 +357,9 @@
     -webkit-line-clamp: 2;
 }
 
-.layui-icon-file:before {
+/*.layui-icon-file:before {
     display: none;
-}
+}*/
 
 /*.layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
     text-decoration: none;
@@ -422,67 +422,6 @@
 .light #table_whole {
     background-color: #fff;
 }
-
-/* 设置滚动条宽高 */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-/* 设置滚动条滑槽 */
-::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-/* 设置滚动条滑块 */
-::-webkit-scrollbar-thumb {
-    background-color: #C3C1C1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
-}
-
-::-webkit-scrollbar-thumb:active {
-    background-color: #989998;
-}
-
-/* 设置滚动条滑块 */
-.light ::-webkit-scrollbar-thumb {
-    background-color: #C3C1C1;
-    border-radius: 4px;
-}
-
-.light ::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
-}
-
-.light ::-webkit-scrollbar-thumb:active {
-    background-color: #989998;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-    background-color: #989998;
-    border-radius: 4px;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
-}
-
-.dark ::-webkit-scrollbar-thumb:active {
-    background-color: #C3C1C1;
-}
-
-/*
-::-webkit-scrollbar-button {
-    width: 10px;
-    height: 10px;
-    background-color: #5F6058;
-}
-*/
 
 .dark .layui-tab-card>.layui-tab-title .layui-this {
     background-color: #c2bebe;
@@ -853,45 +792,6 @@ body[class="light"] {
     background: #979292 !important;
 }
 
-/* 设置滚动条宽高 */
-.layer-extend ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-}
-
-/* 设置滚动条滑槽 */
-.layer-extend ::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 0px;
-}
-
-/* 设置滚动条滑块 */
-.light .layer-extend ::-webkit-scrollbar-thumb {
-    background-color: #C3C1C1;
-    border-radius: 4px;
-}
-
-.light .layer-extend ::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
-}
-
-.light .layer-extend ::-webkit-scrollbar-thumb:active {
-    background-color: #989998;
-}
-
-.dark .layer-extend ::-webkit-scrollbar-thumb {
-    background-color: #989998;
-    border-radius: 4px;
-}
-
-.dark .layer-extend ::-webkit-scrollbar-thumb:hover {
-    background-color: #AEB2AF;
-}
-
-.dark .layer-extend ::-webkit-scrollbar-thumb:active {
-    background-color: #C3C1C1;
-}
-
 #nav button:after {
     content: "";
     display: block;
@@ -1073,24 +973,6 @@ body[class="light"] {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-}
-
-.light ::-webkit-resizer {
-    background: url('../../common/media/resize-dark.png') no-repeat;
-    background-size: 100% auto;
-}
-
-.dark ::-webkit-resizer {
-    background: url('../../common/media/resize-light.png') no-repeat;
-    background-size: 100% auto;
-}
-
-.light ::-webkit-scrollbar-corner {
-    background-color: #fff;
-}
-
-.dark ::-webkit-scrollbar-corner {
-    background-color: #8d8888;
 }
 
 .light .layui-table-tips-main {

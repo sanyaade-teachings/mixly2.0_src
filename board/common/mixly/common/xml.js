@@ -159,16 +159,16 @@ XML.convert = function (str, trimEscaped) {
             hasComleteAngleBracket = true;
         }
 
-        if (trimEscaped === true
-            && hasComleteAngleBracket === false
+        if (trimEscaped
+            && !hasComleteAngleBracket
             && i + 1 < lenStr
             && str[i] === "\\"
             && str[i + 1] === '"') {
             i += 1;
         }
 
-        if (trimEscaped === false
-            && hasComleteAngleBracket === false
+        if (!trimEscaped
+            && !hasComleteAngleBracket
             && i > 0
             && str[i - 1] !== "\\"
             && str[i] === '"') {

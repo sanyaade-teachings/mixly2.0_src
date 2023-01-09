@@ -41,7 +41,7 @@ LevelSelector.init = () => {
     $('#nav-right-btn-list').prepend(`
         <div
             id="level-selector"
-            class="layui-form layer-extend"
+            class="layui-form scrollbar1"
             lay-filter="level-selector-filter"
             style="
                 width: 90px;

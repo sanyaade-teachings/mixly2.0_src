@@ -572,36 +572,36 @@ Boards.showConfigMenu = () => {
         close: indexText['关闭窗口']
     });
     Boards.configMenu = tippy('#mixly-board-config', {
-            allowHTML: true,
-            content: xmlStr,
-            trigger: 'manual',
-            interactive: true,
-            hideOnClick: false,
-            maxWidth: 'none',
-            offset: [ 0, 6 ],
-            onMount(instance) {
-                $('#board-config-menu-reset').off().click(function() {
-                    INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
-                    for (let key in config) {
-                        defaultConfig[key] = config[key][0].key;
-                        $('#board-config-' + key).find('p').text(config[key][0].label);
-                    }
-                    Boards.configMenu[0].setProps({});
-                });
-                $('#board-config-menu-colse').off().click(function() {
-                    Boards.configMenu[0].destroy();
-                    Boards.configMenu = null;
-                });
-                Boards.renderConfigMenuDropdown(list);
-            },
-            onHidden(instance) {
+        allowHTML: true,
+        content: xmlStr,
+        trigger: 'manual',
+        interactive: true,
+        hideOnClick: false,
+        maxWidth: 'none',
+        offset: [ 0, 6 ],
+        onMount(instance) {
+            $('#board-config-menu-reset').off().click(function() {
+                INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
+                for (let key in config) {
+                    defaultConfig[key] = config[key][0].key;
+                    $('#board-config-' + key).find('p').text(config[key][0].label);
+                }
+                Boards.configMenu[0].setProps({});
+            });
+            $('#board-config-menu-colse').off().click(function() {
+                Boards.configMenu[0].destroy();
                 Boards.configMenu = null;
-                Boards.writeSelectedBoardConfig();
-            }
-        });
+            });
+            Boards.renderConfigMenu(list);
+        },
+        onHidden(instance) {
+            Boards.configMenu = null;
+            Boards.writeSelectedBoardConfig();
+        }
+    });
 }
 
-Boards.renderConfigMenuDropdown = (optionList) => {
+Boards.renderConfigMenu = (optionList) => {
     const selectedBoardName = Boards.getSelectedBoardName();
     for (let item of optionList) {
         dropdown.render({
@@ -609,7 +609,7 @@ Boards.renderConfigMenuDropdown = (optionList) => {
             align: 'right',
             data: item.options,
             anywhereClose: true,
-            className: 'layer-extend editor-dropdown-menu board-config-menu',
+            className: 'scrollbar1 editor-dropdown-menu board-config-menu',
             style: 'display:inline-block;box-shadow:1px 1px 30px rgb(0 0 0 / 12%);',
             ready: function(elemPanel, elem) {
                 const $elemPanel = $(elemPanel);

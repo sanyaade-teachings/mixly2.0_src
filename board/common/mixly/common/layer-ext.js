@@ -127,7 +127,7 @@ LayerExt.open = (toolConfig) => {
             layer.style(index, { borderRadius });
             const { max, min, success } = toolConfig;
             const pageBody = $('#' + id);
-            pageBody.addClass('layer-extend');
+            pageBody.addClass('scrollbar1');
             if (typeof max === 'object') {
                 layero.css({
                     'maxWidth': max[0],

@@ -1,5 +1,6 @@
 (() => {
 
+goog.require('layui');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
 goog.require('Mixly.StatusBar');
@@ -11,6 +12,8 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.provide('Mixly.Electron.Serial');
+
+const { laytpl } = layui;
 
 const { 
     Electron,
@@ -28,7 +31,7 @@ const {
 
 const { Serial } = Electron;
 
-const { BOARD } = Config;
+const { BOARD, USER } = Config;
 
 Modules.serialport = require('serialport');
 Modules.minimist = require('minimist');
@@ -1308,7 +1311,24 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     portObj.serialport.pipe(parser);
     portObj.refreshOutputBoxTimer = null;
     portObj.serialport.open(function (error) {
+        StatusBarPort.tabAdd(port, true, (portName) => {
+            Serial.$menu[0].hide();
+            Serial.statusBarPortAddHotKey(portName);
+        }, (portName) => {
+            const newPortObj = Serial.portsOperator[portName];
+            if (newPortObj && newPortObj.serialport && newPortObj.serialport.isOpen) {
+                newPortObj.serialport.close();
+                StatusBarPort.tabChange("output");
+                if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
+                    StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n');
+                } else {
+                    StatusBar.addValue(indexText['已关闭串口'] + portName + '\n');
+                }
+            }
+        });
+        StatusBarPort.tabChange(port);
         if (error) {
+            StatusBarPort.close(port);
             console.log('failed to open: ' + error);
             StatusBarPort.setValue(port, error + '\n', true);
             Serial.receiveBoxAddValue(port, error + '\n', true);
@@ -1321,19 +1341,6 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             //Serial.statusBarPortRemoveCursorEvent(port);
             endFunc(1);
             portObj.portOpened = true;
-            StatusBarPort.tabAdd(port, true, Serial.statusBarPortAddHotKey, (portName) => {
-                const newPortObj = Serial.portsOperator[portName];
-                if (newPortObj && newPortObj.serialport && newPortObj.serialport.isOpen) {
-                    newPortObj.serialport.close();
-                    StatusBarPort.tabChange("output");
-                    if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
-                        StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n');
-                    } else {
-                        StatusBar.addValue(indexText['已关闭串口'] + portName + '\n');
-                    }
-                }
-            });
-            StatusBarPort.tabChange(port);
             Serial.refreshTerminalMenu(port);
             Serial.refreshConnectStatus(port);
             StatusBarPort.setValue(port, indexText['已打开串口'] + ': ' + port + '\n', true);
@@ -1720,6 +1727,65 @@ Serial.setBaudRate = (port, baud) => {
 
 Serial.sleep = async function(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+Serial.getMenu = (ports) => {
+    let newPorts = [];
+    for (let port of ports) {
+        if (StatusBarPort.portsName.includes(port.name)) {
+            continue;
+        }
+        newPorts.push(port.name);
+    }
+    return newPorts;
+}
+
+Serial.addBtnToStatusBar = () => {
+    const BTN_TEMPLETE = `
+    <button type="button" id="tab-ace-add-btn" class="layui-btn${USER.theme === 'dark'? ' layui-btn-normal' : ''} layui-btn-xs m-btn">
+        <i class="layui-icon layui-icon-addition"></i>
+    </button>`;
+    $('#tab-ace-output').after(BTN_TEMPLETE);
+    
+    const MENU_TEMPLETE = `
+    <div class="scrollbar1" style="width: 100%; height: 100%;">
+        <div style="max-height: 100px; overflow-x: hidden; overflow-y: auto; padding: 0 2px;">
+            {{#  layui.each(d.list, function(index, item){ }}
+                <li class="tab-ace-port-add-btn m-btn" value="{{ item }}" lay-unselect style="
+                    display: block;
+                    padding: 0 3px;
+                ">{{ item }}</li>
+            {{#  }); }}
+            {{#  if(d.list.length === 0){ }}
+                ${indexText['无可用串口']}
+            {{#  } }}
+        </div>
+    </div>`;
+
+    Serial.$menu = tippy('#tab-ace-add-btn', {
+        allowHTML: true,
+        content: '',
+        trigger: 'click',
+        interactive: true,
+        maxWidth: 'none',
+        offset: [ 0, 6 ],
+        onMount(instance) {
+            let htmlStr = laytpl(MENU_TEMPLETE).render({
+                list: Serial.getMenu(Serial.uploadPorts)
+            });
+            instance.setContent(htmlStr);
+            $('.tab-ace-port-add-btn').off().click((event) => {
+                const port = $(event.currentTarget).attr('value');
+                const portObj = Serial.portsOperator[port];
+                Serial.connect(port, portObj.toolConfig.baudRates);
+                Serial.$menu[0].hide(500);
+            });
+        }
+    });
+
+    $(window).on('resize', () => {
+        Serial.$menu[0].hide();
+    });
 }
 
 })();

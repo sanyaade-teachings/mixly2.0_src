@@ -22,7 +22,8 @@ Mixly.require({
         "Mixly.Electron",
         "Mixly.Electron.LibManager",
         "Mixly.Electron.WikiManager",
-        "Mixly.Electron.ExampleExt"
+        "Mixly.Electron.ExampleExt",
+        "Mixly.Electron.Serial"
     ],
     "web": [
         "Mixly.Web.ExampleExt"
@@ -75,11 +76,20 @@ Interface.init = () => {
     Boards.init();
     if (Env.isElectron) {
         const { Electron } = Mixly;
-        const { LibManager = undefined, WikiManager = undefined } = Electron;
-        if (typeof LibManager === 'object')
+        const {
+            LibManager = undefined,
+            WikiManager = undefined,
+            Serial = undefined
+        } = Electron;
+        if (typeof LibManager === 'object') {
             LibManager.init();
-        if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki)
+        }
+        if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki) {
             WikiManager.registerContextMenu();
+        }
+        if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
+            Serial.addBtnToStatusBar();
+        }
     } else {
         Env.defaultXML = $('#toolbox').html();
     }

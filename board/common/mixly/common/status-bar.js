@@ -6,7 +6,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.Drag');
 goog.provide('Mixly.StatusBar');
 
-let {
+const {
     Env,
     XML,
     StatusBar,
@@ -16,7 +16,7 @@ let {
 StatusBar.selected = false;
 
 const { BOARD, USER } = Config;
-let { Ace } = StatusBar;
+let Ace;
 
 /**
 * @function 初始化状态栏
@@ -193,4 +193,5 @@ StatusBar.scrollToTheTop = () => {
     if (!Ace) return;
     Ace.gotoLine(0);
 }
+
 })();

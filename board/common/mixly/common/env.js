@@ -84,12 +84,6 @@ Env.thirdPartyCSS = [];
   */
 Env.thirdPartyJS = [];
 
-/**
-  * 获取系统主题
-  * @type {string}
-  */
-Env.theme = '';
-
 Env.templatePath = goog.normalizePath_(goog.basePath + '../mixly/template/');
 
 Env.isElectron = window?.process?.versions?.electron ? true : false;

@@ -121,6 +121,31 @@
         width: 6px;
         height: 6px;
     }
+
+    .light #tab-ace-add-btn {
+        width: 23px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 3px;
+    }
+
+    .dark #tab-ace-add-btn {
+        width: 23px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 3px;
+    }
+}
+
+.light #tab-ace-add-btn {
+    color: #fff;
+    margin-left: 3px;
+}
+
+.dark #tab-ace-add-btn {
+    color: #fff;
+    margin-left: 3px;
+    border-color: #484444;
 }
 
 .tab-ace {
@@ -991,4 +1016,26 @@ body[class="light"] {
 
 .dark .layui-layer-setwin span {
     color: #fff;
+}
+
+.dark .dropdown-menu {
+    background-color: #615959;
+    color: #fff;
+    min-width: 50px;
+}
+
+.light .tab-ace-port-add-btn {
+    color: #000;
+}
+
+.light .tab-ace-port-add-btn:hover {
+    background-color: #f6f6f6;
+}
+
+.dark .tab-ace-port-add-btn {
+    color: #fff;
+}
+
+.dark .tab-ace-port-add-btn:hover {
+    background-color: #AEA6A6;
 }

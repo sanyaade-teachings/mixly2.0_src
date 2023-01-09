@@ -11,7 +11,6 @@ const { StatusBarPort, Config, StatusBar } = Mixly;
 const { USER } = Config;
 
 StatusBarPort.portAce = {};
-
 StatusBarPort.portsName = [];
 
 let { portAce, portsName } = StatusBarPort;
@@ -259,4 +258,5 @@ StatusBarPort.close = (portName) => {
         aceSpan[0].className = "layui-badge-dot layui-bg-blue";
     }
 }
+
 })();

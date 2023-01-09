@@ -240,8 +240,12 @@ File.newFile = () => {
         title: false,
         shade: LayerExt.SHADE_ALL,
         resize: false,
-        btn: [MSG['newfile_yes'], MSG['newfile_no']]
-        , btn2: (index, layero) => {
+        success: (layero) => {
+            layero[0].childNodes[1].childNodes[0].classList.remove('layui-layer-close2');
+            layero[0].childNodes[1].childNodes[0].classList.add('layui-layer-close1');
+        },
+        btn: [MSG['newfile_yes'], MSG['newfile_no']],
+        btn2: (index, layero) => {
             layer.close(index);
         }
     }, (index, layero) => {

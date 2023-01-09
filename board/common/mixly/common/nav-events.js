@@ -15,21 +15,6 @@ const {
     Editor
 } = Mixly;
 
-NavEvents.onclickNewFile = () => {
-    layer.confirm(MSG['confirm_newfile'], {
-        title: false,
-        shade: LayerExt.SHADE_ALL,
-        resize: false,
-        btn: [MSG['newfile_yes'], MSG['newfile_no']]
-        , btn2: function (index, layero) {
-            layer.close(index);
-        }
-    }, function (index, layero) {
-        mixlyjs.createFn();
-        layer.close(index);
-    });
-}
-
 NavEvents.init = () => {
     //nav二级菜单栏事件
     $(".layui-nav-third-child").hide();

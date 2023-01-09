@@ -430,6 +430,8 @@ class SerialDomGenerator {
                 //content: this.getHtmlStr()[0],
                 content: $('#' + formId),
                 success: (layero, index) => {
+                    layero[0].childNodes[1].childNodes[0].classList.remove('layui-layer-close2');
+                    layero[0].childNodes[1].childNodes[0].classList.add('layui-layer-close1');
                     receiveDom.val("");
                     form.render(null, formFilter);
                     serialDom.adjustSerialTool(layero, index);

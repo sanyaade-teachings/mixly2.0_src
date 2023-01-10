@@ -59,43 +59,17 @@ Mixly.ScriptLoader.loadLangJs = function (oldLang, newLang, doFunc) {
 }
 
 /* 公共js */
-/*
+
 Mixly.ScriptLoader.commonJs = [
-    //"common/js/drag.js",
-    //"common/js/Blob.js",
-    //"common/spin.js",
-    //"common/js/FileSaver.min.js",
-    //"common/dap.umd.js",
-    //"common/modules/serial-highcharts.js",
-    //"common/modules/title.js",
-    //"common/js/blockly_helper.js",
-    //"common/modules/dom-generator.js",
-    //"common/nav-init.js",
-    //"common/modules/Mixly.JSFuncs.js",
-    //"common/modules/status-bar.js",
-    //"common/modules/nav.js"
-    //"common/serial-init.js"
 ];
-*/
+
 
 /* 客户端js */
 Mixly.ScriptLoader.clientJs = [
-    "common/modules/mixlyClient/serial.js",
-    "common/modules/mixlyClient/file.js",
-    "common/modules/mixlyClient/cloud-libs.js"
 ];
 
 /* 网页端js */
 Mixly.ScriptLoader.webJs = [
-/*
-    "common/modules/mixlyWeb/Highcharts/code/highcharts.js",
-    "common/modules/mixlyWeb/web-serial-controller.js",
-    "common/modules/mixlyWeb/web-serial.js",
-    "common/modules/mixlyWeb/esptool.js",
-    "common/modules/mixlyWeb/web-burn-upload.js"
-*/
-    "common/modules/mixlyClient/serial.js",
-    "common/modules/mixlyClient/file.js"
 ];
 
 Mixly.ScriptLoader.load = function () {

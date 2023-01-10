@@ -172,6 +172,13 @@ LibManager.convertLibs = (libsDir) => {
                 blockData = blockData.replace(/\.\.\/\.\.\/media\//g, "./libraries/ThirdParty/" + libName + "/media/");
                 blockData = blockData.replace(/Blockly\.Block\.obtain\([\s]*workspace[\s]*\,/g, "workspace.newBlock(");
                 blockData = blockData.replace(/Blockly\.FieldTextArea/g, "Blockly.FieldMultilineInput");
+                blockData = blockData.replace(/Blockly\.Blocks\.[\u4E00-\u9FA5A-Za-z0-9_]+\.HUE/g, function (s) {
+                    let strList = s.split('.');
+                    if (strList.length !== 4) {
+                        return s;
+                    }
+                    return `Blockly.Msg['${strList[2].toUpperCase()}_HUE']`;
+                });
                 fs.writeFileSync(blockPath, blockData);
             } catch (e) {
                 console.log(e);

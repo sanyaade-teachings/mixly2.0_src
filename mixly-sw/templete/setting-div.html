@@ -89,7 +89,8 @@
     top: -3px;
   }
 
-  .menu-body {
+  #setting-menu-body .menu-body {
+    height: 100%;
     display: none;
   }
 
@@ -144,6 +145,43 @@
   .dark #setting-menu .layui-table-box {
     border: 4px solid #7c7171;
   }
+
+  #setting-menu-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+  }
+
+  #setting-menu-user > div:nth-child(1) {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  #setting-menu-user > div:nth-child(2) {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .light #setting-menu-user > div:nth-child(2) {
+    border-top: 1px solid #eee;
+  }
+
+  .dark #setting-menu-user > div:nth-child(2) {
+    border-top: 1px solid #8e8b8b;
+  }
+
+  #setting-menu-user .layui-form-pane {
+    padding: 5px 5px 1px 5px;
+  }
 </style>
 <div id="setting-menu" class="layui-layer-wrap">
   <div id="setting-menu-top">
@@ -155,119 +193,88 @@
         <li class="layui-nav-item" lay-id="1">
           <a m-id="1" href="javascript:;">{{d.importBoard}}</a>
         </li>
-        <!--
-        <li class="layui-nav-item" lay-id="2">
-          <a m-id="2" href="javascript:;">{{d.manageBoard}}</a>
-        </li>
-        -->
       </ul>
     </div>
     <div id="setting-menu-body">
-      <div class="menu-body layui-show" style="height: 100%;">      
-        <form class="layui-form layui-form-pane" lay-filter="setting-form-filter" action="" style="padding: 5px 5px 1px 5px;">
-          <!--
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">{{d.theme}}</label>
-            <div class="layui-input-block layui-row layui-col-space10">
-              <div class="layui-col-md4">
-                <input type="radio" name="theme" value="light" title="{{d.light}}" checked="">
+      <div class="menu-body layui-show">
+        <div id="setting-menu-user">
+          <div>
+            <div class="layui-collapse" lay-filter="test" lay-accordion="">
+              <div class="layui-colla-item">
+                <h2 class="layui-colla-title">{{ d.softwareSettings }}</h2>
+                <div class="layui-colla-content layui-show">
+                  <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label">{{ d.theme }}</label>
+                      <div class="layui-input-block layui-row layui-col-space10">
+                        <select class="setting-menu-item" value="theme" lay-ignore>
+                          <option value="light">{{ d.light }}</option>
+                          <option value="dark">{{ d.dark }}</option>
+                          <option value="auto">{{ d.autoWithSys }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label">{{ d.language }}</label>
+                      <div class="layui-input-block layui-row layui-col-space10">
+                        <select class="setting-menu-item" value="language" lay-ignore>
+                          <option value="zh-hans">简体中文</option>
+                          <option value="zh-hant">繁體中文</option>
+                          <option value="en">English</option>
+                          <option value="auto">{{ d.autoWithSys }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label">{{ d.autoUpdate }}</label>
+                      <div class="layui-input-block layui-row layui-col-space10">
+                        <select class="setting-menu-item" value="autoUpdate" lay-ignore>
+                          <option value="yes">{{ d.yes }}</option>
+                          <option value="no">{{ d.no }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
-              <div class="layui-col-md4">
-                <input type="radio" name="theme" value="dark" title="{{d.dark}}">
-              </div>
-              <div class="layui-col-md4">
+              <div class="layui-colla-item">
+                <h2 class="layui-colla-title">{{ d.boardSettings }}</h2>
+                <div class="layui-colla-content">
+                  <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label">{{ d.compileCAndH }}</label>
+                      <div class="layui-input-block layui-row layui-col-space10">
+                        <select class="setting-menu-item" value="compileCAndH" lay-ignore>
+                          <option value="yes">{{ d.yes }}</option>
+                          <option value="no">{{ d.no }}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                      <label class="layui-form-label">{{ d.autoOpenPort }}</label>
+                      <div class="layui-input-block layui-row layui-col-space10">
+                        <select class="setting-menu-item" value="autoOpenPort" lay-ignore>
+                          <option value="yes">{{ d.yes }}</option>
+                          <option value="no">{{ d.no }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-          -->
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">{{d.language}}</label>
-            <div class="layui-input-block layui-row layui-col-space10">
-              <div class="layui-col-md4">
-                <input type="radio" name="language" value="zh-hans" title="简体中文" checked="">
-              </div>
-              <div class="layui-col-md4">
-                <input type="radio" name="language" value="zh-hant" title="繁體中文">
-              </div>
-              <div class="layui-col-md4">
-                <input type="radio" name="language" value="en" title="English">
-              </div>
-            </div>
+          <div>
+            <button class="layui-btn layui-btn-normal layui-btn-sm" value="apply">{{d.apply}}</button>
+            <button class="layui-btn layui-btn-normal layui-btn-sm" value="reset">{{d.reset}}</button>
           </div>
-          <!-- 
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">{{d.blockRenderer}}</label>
-            <div class="layui-input-block layui-row layui-col-space10">
-              <div class="layui-col-md4">
-                <input type="radio" name="blockRenderer" value="geras" title="geras" checked="">
-              </div>
-              <div class="layui-col-md4">
-                <input type="radio" name="blockRenderer" value="zelos" title="zelos">
-              </div>
-              <div class="layui-col-md4"></div>
-            </div>
-          </div>
-          -->
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">{{d.compileCAndH}}</label>
-            <div class="layui-input-block layui-row layui-col-space10">
-              <div class="layui-col-md4">
-                <input type="radio" name="compileCAndH" value="yes" title="{{d.yes}}" checked="">
-              </div>
-              <div class="layui-col-md4">
-                <input type="radio" name="compileCAndH" value="no" title="{{d.no}}">
-              </div>
-              <div class="layui-col-md4"></div>
-            </div>
-          </div>
-          <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">{{d.autoUpdate}}</label>
-            <div class="layui-input-block layui-row layui-col-space10">
-              <div class="layui-col-md4">
-                <input type="radio" name="autoUpdate" value="yes" title="{{d.yes}}" checked="">
-              </div>
-              <div class="layui-col-md4">
-                <input type="radio" name="autoUpdate" value="no" title="{{d.no}}">
-              </div>
-              <div class="layui-col-md4"></div>
-            </div>
-          </div>
-          <div class="layui-form-item layui-form-text">
-            <div class="layui-input-block" style="width: 100%;margin: 0px;text-align: center;">
-              <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="setting-submit">{{d.apply}}</button>
-              <button type="reset" class="layui-btn layui-btn-normal layui-btn-sm">{{d.reset}}</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
-      <div class="menu-body" id="import-board" style="height: 100%;">
+      <div class="menu-body" id="import-board">
         <div class="layui-hide" id="import-board-page" lay-filter="import-board-page-filter"></div>
       </div>
-      <!--
-      <div class="menu-body" style="height: 100%;">
-        <form class="layui-form layui-form-pane" lay-filter="manage-board-form-filter" action="" style="padding: 5px 5px 1px 5px;">
-          <div class="layui-form-item layui-form-text">
-            <div class="layui-input-block" style="width: 100%;margin: 0px;text-align: center;">
-              <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="manage-board-reset">{{d.resetBoard}}</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      -->
-      <!-- 
-      <div class="menu-body" id="update-board" style="height: 100%;">
-        <div class="layui-hide" id="update-board-page" lay-filter="update-board-page-filter"></div>
-      </div>
-      <div class="menu-body" id="installed-board" style="height: 100%;">
-        <div class="layui-hide" id="installed-board-page" lay-filter="installed-board-page-filter"></div>
-      </div>
-      -->
     </div>
   </div>
   <div id="setting-menu-bottom">
-    <!-- <div id="setting-menu-btn-group" class="layui-btn-group">
-      <button type="button" class="layui-btn layui-btn-xs">重置</button>
-      <button type="button" class="layui-btn layui-btn-xs">保存</button>
-    </div> -->
   </div>
 </div>

@@ -69,5 +69,9 @@
     "否": "No",
     "复位板卡": "Reset board",
     "管理板卡": "Manage board",
-    "自动检查更新": "Automatically check for updates"
+    "自动检查更新": "Automatically check for updates",
+    "上传结束后自动打开串口": "Auto open the SerialPort after uploading",
+    "软件设置": "software settings",
+    "板卡设置": "Board settings",
+    "跟随系统": "Follow the system"
 }

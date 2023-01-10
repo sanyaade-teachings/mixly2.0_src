@@ -22,21 +22,13 @@ const {
 } = Mixly;
 
 const { LANG } = Msg;
-
 const { element, form } = layui;
-
 const { fs_extra, path } = Modules;
-
 const { USER } = Config;
 
 Setting.ID = 'setting-menu';
-
-Setting.CONFIG = {
-
-}
-
+Setting.CONFIG = {}
 Setting.nowIndex = 0;
-
 Setting.config = {};
 
 Setting.init = () => {
@@ -45,36 +37,13 @@ Setting.init = () => {
         bodyElem: '#setting-menu-body>.menu-body'
     });
     element.render('nav', 'setting-menu-filter');
-    Setting.onchangeOption();
-    form.on('submit(setting-submit)', function(data) {
-        for (let i in data.field) {
-            USER[i] = data.field[i];
-        }
-        try {
-            fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
-                spaces: '    '
-            });
-        } catch(error) {
-            console.log(error);
-        }
-        Msg.nowLang = USER.language ?? 'zh-hans';
-        Env.theme = USER.theme;
-        LayerExt.updateShade();
-        layer.closeAll(() => {
-            XML.renderAllTemplete();
-            layer.msg(Msg.getLang('配置更新成功'), { time: 1000 });
-            $('body').removeClass('dark light')
-                     .addClass(Env.theme);
-        });
-        return false;
-    });
+    Setting.addOnchangeOptionListener();
 
     form.on('switch(setting-theme-filter)', function(data) {
         const { checked } = data.elem;
         USER.theme = checked ? 'dark' : 'light';
-        Env.theme = USER.theme;
         $('body').removeClass('dark light')
-                 .addClass(Env.theme);
+                 .addClass(USER.theme);
         LayerExt.updateShade();
         try {
             fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
@@ -92,8 +61,9 @@ Setting.init = () => {
 
     form.on('submit(board-reset-filter)', function(data) {
         BoardManager.resetBoard((error) => {
-            if (error)
+            if (error) {
                 console.log(error);
+            }
             BoardManager.screenWidthLevel = -1;
             BoardManager.screenHeightLevel = -1;
             BoardManager.loadBoards();
@@ -114,6 +84,12 @@ Setting.menuInit = () => {
 
 Setting.onclick = () => {
     Setting.menuInit();
+    let obj = $(".setting-menu-item").select2({
+        width: '100%',
+        minimumResultsForSearch: 10
+    });
+    Setting.configMenuSetValue(obj, USER);
+    element.render('collapse', 'test');
     Setting.nowIndex = 0;
     LayerExt.open({
         title: [Msg.getLang('设置'), '36px'],
@@ -125,9 +101,76 @@ Setting.onclick = () => {
         success: () => {
         }
     });
+    $('#setting-menu-user button').off().click((event) => {
+        const type = $(event.currentTarget).attr('value');
+        switch (type) {
+            case 'apply':
+                let oldTheme = USER.themeAuto? 'auto' : USER.theme;
+                let oldLanglage = USER.languageAuto? 'auto' : USER.language;
+                let updateTheme = false, updateLanguage = false;
+                let value = Setting.configMenuGetValue(obj);
+                for (let i in value) {
+                    USER[i] = value[i];
+                }
+                updateTheme = oldTheme !== USER.theme;
+                updateLanguage = oldLanglage !== USER.language;
+                if (updateTheme) {
+                    if (USER.theme === 'auto') {
+                        const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+                        USER.theme = themeMedia.matches ? 'light' : 'dark';
+                        USER.themeAuto = true;
+                    } else {
+                        USER.themeAuto = false;
+                    }
+                    $('body').removeClass('dark light')
+                             .addClass(USER.theme);
+                }
+                if (updateLanguage) {
+                    if (USER.language === 'auto') {
+                        switch (navigator.language) {
+                            case 'zh-CN':
+                                USER.language = 'zh-hans';
+                                break;
+                            case 'zh-HK':
+                            case 'zh-SG':
+                            case 'zh-TW':
+                                USER.language = 'zh-hant';
+                                break;
+                            default:
+                                USER.language = 'en';
+                        }
+                        USER.languageAuto = true;
+                    } else {
+                        USER.languageAuto = false;
+                    }
+                    Msg.nowLang = USER.language ?? 'zh-hans';
+                    LayerExt.updateShade();
+                }
+                if (updateTheme || updateLanguage) {
+                    BoardManager.screenWidthLevel = -1;
+                    BoardManager.screenHeightLevel = -1;
+                    BoardManager.updateBoardsCard();
+                }
+                try {
+                    fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
+                        spaces: '    '
+                    });
+                } catch(error) {
+                    console.log(error);
+                }
+                layer.closeAll(() => {
+                    XML.renderAllTemplete();
+                    layer.msg(Msg.getLang('配置更新成功'), { time: 1000 });
+                });
+                break;
+            case 'reset':
+                Setting.configMenuReset(obj);
+                break;
+        }
+    }); 
 }
 
-Setting.onchangeOption = () => {
+Setting.addOnchangeOptionListener = () => {
     element.on('tab(setting-menu-filter)', function(data){
         if (data.index === 1) {
             if (data.index !== Setting.nowIndex) {
@@ -142,6 +185,41 @@ Setting.onchangeOption = () => {
         }
         Setting.nowIndex = data.index;
     });
+}
+
+Setting.configMenuReset = (obj) => {
+    for (let i = 0; i < obj.length; i++) {
+        let $item = $(obj[i]);
+        let newValue = $item.children('option').first().val();
+        $item.val(newValue).trigger("change");
+    }
+}
+
+Setting.configMenuSetValue = (obj, value) => {
+    let newValue = { ...value };
+    if (value.themeAuto) {
+        newValue.theme = 'auto';
+    }
+    if (value.languageAuto) {
+        newValue.language = 'auto';
+    }
+    for (let i = 0; i < obj.length; i++) {
+        let $item = $(obj[i]);
+        let type = $item.attr('value');
+        if (!newValue[type]) {
+            continue;
+        }
+        $item.val(newValue[type]).trigger("change");
+    }
+}
+
+Setting.configMenuGetValue = (obj) => {
+    let config = {};
+    for (let i = 0; i < obj.length; i++) {
+        let $item = $(obj[i]);
+        config[$item.attr('value')] = $item.val();
+    }
+    return config;
 }
 
 window.addEventListener('DOMContentLoaded', () => {

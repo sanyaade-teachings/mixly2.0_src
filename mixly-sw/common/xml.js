@@ -20,9 +20,6 @@ XML.TEMPLATE_CONFIG = [
             personalise: () => {
                 return Msg.getLang('个性化');
             },
-            importBoard: () => {
-                return Msg.getLang('导入板卡');
-            },
             theme: () => {
                 return Msg.getLang('主题');
             },
@@ -35,6 +32,9 @@ XML.TEMPLATE_CONFIG = [
             language: () => {
                 return Msg.getLang('语言');
             },
+            autoUpdate: () => {
+                return Msg.getLang('自动检查更新');
+            },
             blockRenderer: () => {
                 return Msg.getLang('块渲染器');
             },
@@ -44,23 +44,35 @@ XML.TEMPLATE_CONFIG = [
             reset: () => {
                 return Msg.getLang('重置');
             },
-            manageBoard: () => {
-                return Msg.getLang('管理板卡');
-            },
-            resetBoard: () => {
-                return Msg.getLang('复位板卡');
-            },
             compileCAndH: () => {
                 return Msg.getLang('同时编译同目录.c和.h');
             },
-            autoUpdate: () => {
-                return Msg.getLang('自动检查更新');
+            autoOpenPort: () => {
+                return Msg.getLang('上传结束后自动打开串口');
+            },
+            autoWithSys: () => {
+                return Msg.getLang('跟随系统');
             },
             yes: () => {
                 return Msg.getLang('是');
             },
             no: () => {
                 return Msg.getLang('否');
+            },
+            manageBoard: () => {
+                return Msg.getLang('管理板卡');
+            },
+            resetBoard: () => {
+                return Msg.getLang('复位板卡');
+            },
+            importBoard: () => {
+                return Msg.getLang('导入板卡');
+            },
+            softwareSettings: () => {
+                return Msg.getLang('软件设置');
+            },
+            boardSettings: () => {
+                return Msg.getLang('板卡设置');
             }
         },
         appendToBody: true,

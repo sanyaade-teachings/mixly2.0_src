@@ -27,7 +27,7 @@ const {
 } = Mixly;
 
 const { BU, Serial } = Electron;
-const { BOARD, SELECTED_BOARD } = Config;
+const { BOARD, SELECTED_BOARD, USER } = Config;
 
 var downloadShell = null;
 
@@ -180,6 +180,9 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
         });
         StatusBar.setValue(`==${message}==`);
         if (type === 'upload' && Serial.uploadPorts.length === 1) {
+            if (USER.autoOpenPort === 'no') {
+                return;
+            }
             Serial.connect(Serial.uploadPorts[0].name, null, (opened) => {
                 if (opened) {
                     Serial.writeCtrlD(Serial.uploadPorts[0].name);
@@ -548,9 +551,13 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             StatusBar.addValue((type === 'burn' ? indexText['烧录成功'] + '！' : indexText['上传成功'] + '！') + '\n');
             if (type === 'upload') {
                 StatusBar.show(1);
+                if (USER.autoOpenPort === 'no') {
+                    return;
+                }
                 Serial.connect(port, null, (opened) => {
-                    if (opened)
+                    if (opened) {
                         Serial.writeCtrlD(port);
+                    }
                 });
             }
         }

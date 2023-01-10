@@ -1082,7 +1082,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <div>
                         <div>
                             <form class="layui-form" lay-filter="setting-card-filter">
-                                <div class="layui-form-item layui-form-text">
+                                <div class="layui-form-item layui-form-text" style="display: ${USER.themeAuto? 'none':'block'};">
                                     <div class="layui-col-md12" style="text-align: center;">
                                         <input 
                                         lay-filter="setting-theme-filter"

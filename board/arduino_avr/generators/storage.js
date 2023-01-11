@@ -78,7 +78,7 @@ Blockly.Arduino.sd_read = function () {
     var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || profile.default.serial;
     Blockly.Arduino.definitions_['var_declare_File_datafile'] = 'File datafile;';
     Blockly.Arduino.definitions_['var_declare_File_datafile_SD_card_reading'] = 'String SD_card_reading(String path) {\n'
-        + 'datafile = SD.open(path);\n'
+        + 'datafile = SD.open(path.c_str());\n'
         + ' String sd_data = "";\n'
         + ' while (datafile.available()) {\n'
         + '  sd_data = String(sd_data) + String(char(datafile.read()));\n'

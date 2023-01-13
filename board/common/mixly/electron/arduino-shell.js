@@ -354,6 +354,9 @@ ArduShell.upload = (boardType, port) => {
             if (baudRateList && Serial.BAUDRATES.includes(baudRateList[0]-0)) {
                 toolConfig.baudRates = baudRateList[0]-0;
             }
+            if (USER.autoOpenPort === 'no') {
+                return;
+            }
             Serial.connect(port, toolConfig.baudRates);
         }
     );

@@ -127,6 +127,10 @@ Deps.DEPENDENCY = {
             "path": '/common/modules/tippy-bundle.umd.min.js',
             "provide": ['tippy'],
             "require": ['Popper']
+        },{
+            "path": '/common/modules/select2.min.js',
+            "provide": [],
+            "require": []
         }
     ]
 };
@@ -242,6 +246,7 @@ goog.require('Mixly.Interface');
 goog.require('Blockly.FieldGridDropdown');
 goog.require('Blockly.FieldSlider');
 goog.require('Blockly.FieldBitmap');
+goog.require(Mixly.MIXLY_DIR_PATH + '/common/modules/select2.min.js');
 
 if (Env.isElectron) {
     goog.require('Mixly.Electron.Loader');

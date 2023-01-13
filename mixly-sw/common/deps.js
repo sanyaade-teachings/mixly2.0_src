@@ -57,6 +57,10 @@ Deps.DEPENDENCY = {
             "path": '/../board/common/mixly/electron/cloud-download.js',
             "provide": ['Mixly.CloudDownload'],
             "require": ['Mixly.Env', 'Mixly.Modules']
+        }, {
+            "path": '/../board/common/mixly/common/modules/select2.min.js',
+            "provide": [],
+            "require": []
         }
     ]
 };
@@ -152,6 +156,7 @@ Deps.initDependency(Deps.DEPENDENCY);
 goog.require('Mixly.Loading');
 goog.require('layui');
 goog.require('LazyLoad');
+goog.require(Mixly.MIXLY_DIR_PATH + '/../board/common/mixly/common/modules/select2.min.js');
 goog.require('Mixly.Msg');
 goog.require('Mixly.XML');
 goog.require('Mixly.Setting');

@@ -1039,3 +1039,22 @@ body[class="light"] {
 .dark .tab-ace-port-add-btn:hover {
     background-color: #AEA6A6;
 }
+
+/* 折叠卡片 */
+.dark .layui-colla-title {
+    color: #fff;
+    background-color: #656161;
+}
+
+.dark .layui-colla-content {
+    color: #fff;
+}
+
+.light input[m-id="search-area"] {
+    background-color: #f3efef;
+    border-color: #ddd;
+}
+
+.light input[m-id="search-area"] + button.layui-btn-disabled {
+    background-color: #f3efef !important;
+}

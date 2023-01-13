@@ -32,9 +32,12 @@ if (userConfig)
         ...userConfig
     };
 
-if (!Env.isElectron) {
+if (!Env.isElectron || Config.USER.themeAuto) {
     const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
     Config.USER.theme = themeMedia.matches ? 'light' : 'dark';
+}
+
+if (!Env.isElectron || Config.USER.languageAuto) {
     switch (navigator.language) {
         case 'zh-CN':
             Config.USER.language = 'zh-hans';

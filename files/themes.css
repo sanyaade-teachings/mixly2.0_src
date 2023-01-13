@@ -300,3 +300,13 @@ body[class="dark"] {
 .dark .layui-layer-setwin span {
     color: #fff;
 }
+
+/* 折叠卡片 */
+.dark .layui-colla-title {
+    color: #fff;
+    background-color: #656161;
+}
+
+.dark .layui-colla-content {
+    color: #fff;
+}

@@ -32,16 +32,21 @@ if (userConfig)
         ...userConfig
     };
 
-if (!Env.isElectron) {
+if (!Env.isElectron || Config.USER.themeAuto) {
     const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
     themeMedia.addListener(e => {
+        if (Env.isElectron && !Config.USER.themeAuto) {
+            return;
+        }
         if (e.matches) {
             $('body').removeClass('dark').addClass('light');
         } else {
             $('body').removeClass('light').addClass('dark');
         }
     });
-    Config.USER.theme = themeMedia.matches ? 'light' : 'dark';
+}
+
+if (!Env.isElectron || Config.USER.languageAuto) {
     switch (navigator.language) {
         case 'zh-CN':
             Config.USER.language = 'zh-hans';

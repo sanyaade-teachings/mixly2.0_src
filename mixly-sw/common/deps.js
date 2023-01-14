@@ -58,6 +58,10 @@ Deps.DEPENDENCY = {
             "provide": ['Mixly.CloudDownload'],
             "require": ['Mixly.Env', 'Mixly.Modules']
         }, {
+            "path": '/../board/common/mixly/common/modules/store.modern.min.js',
+            "provide": ['store'],
+            "require": []
+        }, {
             "path": '/../board/common/mixly/common/modules/select2.min.js',
             "provide": [],
             "require": []

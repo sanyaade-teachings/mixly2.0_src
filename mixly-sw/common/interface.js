@@ -30,7 +30,7 @@ Interface.init = () => {
     BoardManager.updateBoardsCard();
     window.addEventListener('resize', BoardManager.updateBoardsCard, false);
     carousel.on('change(board-switch-filter)', function (obj) {
-        const boardType = obj.item.find('.mixly-board').find('h2').html();
+        const boardType = obj.item.find('.mixly-board').find('h2').html() ?? 'Add';
         history.replaceState({}, "", Url.changeURLArg(window.location.href, "boardType", boardType));
         BOARD_PAGE.boardType = boardType;
     });

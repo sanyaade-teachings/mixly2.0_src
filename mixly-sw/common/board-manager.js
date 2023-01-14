@@ -231,18 +231,28 @@ BoardManager.delBoard = (boardDir, endFunc) => {
 BoardManager.ignoreBoard = (boardType, endFunc) => {
     USER.boardIgnore = USER.boardIgnore ?? [];
     USER.boardIgnore.push(boardType);
-    const settingPath = path.resolve(Env.clientPath, './setting/config.json');
-    fs_extra.outputJson(settingPath, USER, {
-        spaces: '    '
-    }, endFunc);
+    if (Env.isElectron) {
+        const settingPath = path.resolve(Env.clientPath, './setting/config.json');
+        fs_extra.outputJson(settingPath, USER, {
+            spaces: '    '
+        }, endFunc);
+    } else {
+        store.set('mixly2.0-config', USER);
+        endFunc();
+    }
 }
 
 BoardManager.resetBoard = (endFunc) => {
     USER.boardIgnore = [];
-    const settingPath = path.resolve(Env.clientPath, './setting/config.json');
-    fs_extra.outputJson(settingPath, USER, {
-        spaces: '    '
-    }, endFunc);
+    if (Env.isElectron) {
+        const settingPath = path.resolve(Env.clientPath, './setting/config.json');
+        fs_extra.outputJson(settingPath, USER, {
+            spaces: '    '
+        }, endFunc);
+    } else {
+        store.set('mixly2.0-config', USER);
+        endFunc();
+    }
 }
 
 BoardManager.showDelBoardProgress = () => {
@@ -996,19 +1006,17 @@ BoardManager.loadBoards = () => {
     }
     const boardAdd = {
         boardImg: "./files/add.png",
-        boardType: "",
+        boardType: "Add",
         boardDescription: "",
         boardIndex: "javascript:;",
         env: {
             electron: true,
-            web: false,
-            webCompiler: false,
-            webSocket: false
+            web: true,
+            webCompiler: true,
+            webSocket: true
         }
     };
-    if (Env.isElectron) {
-        newBoardsList.push(boardAdd);
-    }
+    newBoardsList.push(boardAdd);
     BoardManager.boardsList = newBoardsList;
 }
 
@@ -1076,7 +1084,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <div class="service-single">
                         <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
                             <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
-                            <h2>${boardsList[i]['boardType']}</h2>
+                            <h2></h2>
                         </a>
                     </div>
                     <div>
@@ -1153,8 +1161,9 @@ BoardManager.showBoardsCard = (row, col) => {
     }
 
     const endFunc = (error) => {
-        if (error)
+        if (error) {
             console.log(error);
+        }
         BoardManager.screenWidthLevel = -1;
         BoardManager.screenHeightLevel = -1;
         BoardManager.loadBoards();
@@ -1171,7 +1180,7 @@ BoardManager.showBoardsCard = (row, col) => {
     $(".mixly-board-ignore-btn").off("click").click((event) => {
         const index = $(event.currentTarget).attr('index');
         const config = BoardManager.boardsList[index];
-        Env.isElectron && BoardManager.ignoreBoard(config.boardType, endFunc);
+        BoardManager.ignoreBoard(config.boardType, endFunc);
     });
 
     const footerDom = $('#footer');

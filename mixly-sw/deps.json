@@ -71,6 +71,7 @@
         {
             "path":"/common/loading.js",
             "require":[
+                "store",
                 "Mixly",
                 "Mixly.Env",
                 "Mixly.LocalStorage",
@@ -105,6 +106,7 @@
             "path":"/common/setting.js",
             "require":[
                 "layui",
+                "store",
                 "Mixly.XML",
                 "Mixly.LayerExt",
                 "Mixly.Msg",

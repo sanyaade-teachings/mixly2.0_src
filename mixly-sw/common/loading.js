@@ -1,5 +1,6 @@
 (() => {
 
+goog.require('store');
 goog.require('Mixly');
 goog.require('Mixly.Env');
 goog.require('Mixly.LocalStorage');
@@ -23,7 +24,7 @@ if (Env.isElectron) {
     const SETTING_FILE = path.resolve(Env.clientPath, './setting/config.json');
     userConfig = fs_extra.readJsonSync(SETTING_FILE, { throws: false });
 } else {
-    userConfig = LocalStorage.readJson('setting');
+    userConfig = store.get('mixly2.0-config');
 }
 
 if (userConfig)
@@ -32,7 +33,7 @@ if (userConfig)
         ...userConfig
     };
 
-if (!Env.isElectron || Config.USER.themeAuto) {
+/*if (!Env.isElectron || Config.USER.themeAuto) {
     const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
     themeMedia.addListener(e => {
         if (Env.isElectron && !Config.USER.themeAuto) {
@@ -44,9 +45,14 @@ if (!Env.isElectron || Config.USER.themeAuto) {
             $('body').removeClass('light').addClass('dark');
         }
     });
+}*/
+
+if (Config.USER.themeAuto) {
+    const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+    Config.USER.theme = themeMedia.matches ? 'light' : 'dark';
 }
 
-if (!Env.isElectron || Config.USER.languageAuto) {
+if (Config.USER.languageAuto) {
     switch (navigator.language) {
         case 'zh-CN':
             Config.USER.language = 'zh-hans';

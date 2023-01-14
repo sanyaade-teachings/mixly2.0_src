@@ -30,7 +30,8 @@ const config = {
         "./common/modules/sortable.min.js",
         "./common/modules/store.modern.min.js",
         "./common/modules/tippy-bundle.umd.min.js",
-        "./common/modules/xscrollbar.js"
+        "./common/modules/xscrollbar.js",
+        "./common/modules/select2.min.js"
     ]
 };
 

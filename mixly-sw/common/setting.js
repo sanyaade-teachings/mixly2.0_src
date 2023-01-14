@@ -1,6 +1,7 @@
 (() => {
 
 goog.require('layui');
+goog.require('store');
 goog.require('Mixly.XML');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
@@ -45,12 +46,16 @@ Setting.init = () => {
         $('body').removeClass('dark light')
                  .addClass(USER.theme);
         LayerExt.updateShade();
-        try {
-            fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
-                spaces: '    '
-            });
-        } catch(error) {
-            console.log(error);
+        if (Env.isElectron) {
+            try {
+                fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
+                    spaces: '    '
+                });
+            } catch(error) {
+                console.log(error);
+            }
+        } else {
+            store.set('mixly2.0-config', USER);
         }
     });
 
@@ -151,12 +156,16 @@ Setting.onclick = () => {
                     BoardManager.screenHeightLevel = -1;
                     BoardManager.updateBoardsCard();
                 }
-                try {
-                    fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
-                        spaces: '    '
-                    });
-                } catch(error) {
-                    console.log(error);
+                if (Env.isElectron) {
+                    try {
+                        fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
+                            spaces: '    '
+                        });
+                    } catch(error) {
+                        console.log(error);
+                    }
+                } else {
+                    store.set('mixly2.0-config', USER);
                 }
                 layer.closeAll(() => {
                     XML.renderAllTemplete();
@@ -171,16 +180,14 @@ Setting.onclick = () => {
 }
 
 Setting.addOnchangeOptionListener = () => {
-    element.on('tab(setting-menu-filter)', function(data){
-        if (data.index === 1) {
+    element.on('tab(setting-menu-filter)', function(data) {
+        let $li = $(data.elem.context);
+        let index = $li.attr('lay-id') - 0;
+        if (index === 1) {
             if (data.index !== Setting.nowIndex) {
-                BoardManager.onclickImportBoards();
+                Env.isElectron && BoardManager.onclickImportBoards();
             } else {
                 layui.table.resize('cloud-boards-table');
-            }
-        } else if (data.index === 2) {
-            if (data.index !== Setting.nowIndex) {
-                element.render('nav', 'manage-board-form-filter');
             }
         }
         Setting.nowIndex = data.index;

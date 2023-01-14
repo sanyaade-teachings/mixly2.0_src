@@ -7,6 +7,7 @@ goog.require('Mixly.Charts');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Command');
+goog.require('Mixly.MJSON');
 goog.require('Mixly.WebSocket');
 goog.provide('Mixly.WebSocket.Socket');
 
@@ -17,7 +18,8 @@ const {
     Charts,
     StatusBar,
     StatusBarPort,
-    Command
+    Command,
+    MJSON
 } = Mixly;
 
 const { BOARD, SELECTED_BOARD, SOFTWARE } = Config;
@@ -36,6 +38,57 @@ const { hostname } = window.location;
 Socket.url = SOFTWARE.webSocket.protocol + '//' + hostname + ':' + Socket.port + '/';
 Socket.IPAddress = hostname;
 
+let lockReconnect = false; //避免重复连接
+let timeoutFlag = true;
+let timeoutSet = null;
+let reconectNum = 0;
+const timeout = 5000; //超时重连间隔
+
+function reconnect () {
+    if (lockReconnect) return;
+    lockReconnect = true;
+    //没连接上会一直重连，设置延迟避免请求过多
+    setTimeout(function () {
+        timeoutFlag = true;
+        Socket.init();
+        console.info(`正在重连第${reconectNum + 1}次`);
+        reconectNum++;
+        lockReconnect = false;
+    }, timeout); //这里设置重连间隔(ms)
+}
+
+//心跳检测
+const heartCheck = {
+    timeout, //毫秒
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: function () {
+        clearInterval(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        return this;
+    },
+    start: function () {
+        const self = this;
+        let count = 0;
+        let WS = Socket;
+        this.timeoutObj = setInterval(() => {
+            if (count < 3) {
+                if (WS.obj.readyState === 1) {
+                    WS.obj.send('HeartBeat');
+                    console.info(`HeartBeat第${count + 1}次`);
+                }
+                count++;
+            } else {
+                clearInterval(this.timeoutObj);
+                count = 0;
+                if (WS.obj.readyState === 0 && WS.obj.readyState === 1) {
+                    WS.obj.close();
+                }
+            }
+        }, self.timeout);
+    }
+}
+
 Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     if (Socket.connected) {
         if (Socket.initFunc) {
@@ -45,8 +98,16 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         doFunc();
         return;
     }
+
+    timeoutSet = setTimeout(() => {
+        if (timeoutFlag && reconectNum < 3) {
+            console.info(`重连`);
+            reconectNum++;
+            Socket.init();
+        }
+    }, timeout);
     
-    let WS = Mixly.WebSocket.Socket;
+    let WS = Socket;
     WS.obj = new WebSocket(WS.url);
     WS.obj.onopen = () => {
         console.log('已连接' + WS.url);
@@ -56,10 +117,15 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         WS.connected = true;
         Socket.toggleUIToolbar(true);
         Socket.initFunc = doFunc;
+        reconectNum = 0;
+        timeoutFlag = false;
+        clearTimeout(timeoutSet);
+        heartCheck.reset().start();
         onopenFunc(WS);
     };
 
     WS.obj.onmessage = (event) => {
+        heartCheck.reset().start();
         let command = Command.parse(event.data);
         if (Socket.debug)
             console.log('receive -> ', event.data);
@@ -79,26 +145,36 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
 
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
+        reconnect(); //重连
         //StatusBar.addValue(event.toString());
     };
 
-    WS.obj.onclose = () => {
+    WS.obj.onclose = (event) => {
         WS.connected = false;
         console.log('已断开' + WS.url);
         StatusBar.show(1);
         StatusBarPort.tabChange('output');
-        StatusBar.setValue(WS.url + '连接断开\n');
+        StatusBar.setValue(WS.url + '连接断开，请在设置中重新连接\n');
         let ports = StatusBarPort.portsName;
         for (let i = 0; i < ports.length; i++) {
             StatusBarPort.close(ports[i]);
         }
         Socket.toggleUIToolbar(false);
         layer.closeAll();
-        layer.msg('未连接' + WS.url + '，请在设置中连接', { time: 1000 });
         Mixly.WebSocket.BU.burning = false;
         Mixly.WebSocket.BU.uploading = false;
         Mixly.WebSocket.ArduShell.compiling = false;
         Mixly.WebSocket.ArduShell.uploading = false;
+
+        console.info(`关闭`, event.code);
+        if (event.code !== 1000) {
+            timeoutFlag = false;
+            clearTimeout(timeoutSet);
+            reconnect();
+        } else {
+            clearInterval(heartCheck.timeoutObj);
+            clearTimeout(heartCheck.serverTimeoutObj);
+        }
     }
 }
 
@@ -109,28 +185,9 @@ Socket.sendCommand = (command) => {
         return;
     }
     let commandStr = '';
-    function encodeJson(jsonObj) {
-        let newJsonObj = { ...jsonObj };
-        // 循环所有键
-        for (var key in newJsonObj) {
-            //如果对象类型为object类型且数组长度大于0 或者 是对象 ，继续递归解析
-            var element = newJsonObj[key];
-            if (element.length > 0 && typeof (element) == "object" || typeof (element) == "object") {
-                element = { ...encodeJson(element) };
-            } else { //不是对象或数组、直接输出
-                if (typeof (element) === 'string') {
-                    try {
-                        newJsonObj[key] = encodeURIComponent(newJsonObj[key]);
-                    } catch (e) {
-                    }
-                }
-            }
-        }
-        return newJsonObj;
-    }
-
+    
     try {
-        commandStr = JSON.stringify(encodeJson(command));
+        commandStr = JSON.stringify(MJSON.encode(command));
         if (Socket.debug)
             console.log('send -> ', commandStr);
     } catch (e) {
@@ -220,145 +277,5 @@ Socket.updateSelectedBoardConfig = (info) => {
     const boardType = Boards.getSelectedBoardName();
     Boards.changeTo(boardType);
 }
-
-/*
-Socket.longSock = (url, fn, intro = '') => {
-    if (Socket.connected) return;
-    let lockReconnect = false; //避免重复连接
-    let timeoutFlag = true;
-    let timeoutSet = null;
-    let reconectNum = 0;
-    const timeout = 30000; //超时重连间隔
-    let wsObj;
-    function reconnect() {
-        if (lockReconnect) return;
-        lockReconnect = true;
-        //没连接上会一直重连，设置延迟避免请求过多
-        if (reconectNum < 3) {
-            setTimeout(function () {
-                timeoutFlag = true;
-                createWebSocket();
-                console.info(`${intro}正在重连第${reconectNum + 1}次`);
-                reconectNum++;
-                lockReconnect = false;
-            }, 5000); //这里设置重连间隔(ms)
-        }
-    }
-    //心跳检测
-    const heartCheck = {
-        timeout: 5000, //毫秒
-        timeoutObj: null,
-        serverTimeoutObj: null,
-        reset: function () {
-            clearInterval(this.timeoutObj);
-            clearTimeout(this.serverTimeoutObj);
-            return this;
-        },
-        start: function () {
-            const self = this;
-            let count = 0;
-            this.timeoutObj = setInterval(() => {
-                if (count < 3) {
-                    if (wsObj.readyState === 1) {
-                        wsObj.send('HeartBeat');
-                        console.info(`${intro}HeartBeat第${count + 1}次`);
-                    }
-                    count++;
-                } else {
-                    clearInterval(this.timeoutObj);
-                    count = 0;
-                    if (wsObj.readyState === 0 && wsObj.readyState === 1) {
-                        wsObj.close();
-                    }
-                }
-            }, self.timeout);
-        }
-    }
-    const createWebSocket = () => {
-        console.info(`${intro}创建11`);
-        timeoutSet = setTimeout(() => {
-            if (timeoutFlag && reconectNum < 3) {
-                console.info(`${intro}重连22`);
-                reconectNum++;
-                createWebSocket();
-            }
-        }, timeout);
-        let WS = Mixly.WebSocket.Socket;
-
-        wsObj = new WebSocket(url);
-
-        WS.obj = wsObj;
-
-        wsObj.onopen = () => {
-            WS.connected = true;
-            reconectNum = 0;
-            timeoutFlag = false;
-            clearTimeout(timeoutSet);
-            heartCheck.reset().start();
-        }
-        wsObj.onmessage = evt => {
-            heartCheck.reset().start();
-            // console.info(evt);
-            if (evt.data === 'HeartBeat') return;
-            fn(evt, wsObj);
-        }
-        wsObj.onclose = e => {
-            WS.connected = false;
-            console.log('已断开与node服务器的连接！');
-            layer.msg('已断开与node服务器的连接!', {
-                time: 1000
-            });
-            let ports = StatusBarPort.portName;
-            for (let i = 0; i < ports.length; i++) {
-                StatusBarPort.close(ports[i]);
-            }
-            Mixly.WebSocket.Serial.setConnectStatus('', false);
-
-            console.info(`${intro}关闭11`, e.code);
-            if (e.code !== 1000) {
-                timeoutFlag = false;
-                clearTimeout(timeoutSet);
-                reconnect();
-            } else {
-                clearInterval(heartCheck.timeoutObj);
-                clearTimeout(heartCheck.serverTimeoutObj);
-            }
-        }
-        wsObj.onerror = function () {
-            console.info(`${intro}错误11`);
-            reconnect(); //重连
-        }
-    }
-    createWebSocket();
-}
-
-//方法调用
-const handler = (event, ws) => {
-    //event 是 websockett数据
-    //ws 是请求名称，方便关闭websocket
-    let WS = Mixly.WebSocket.Socket;
-    let command = WS.parseCommand(event.data);
-    if (Socket.debug)
-        console.log('receive -> ', event.data);
-    if (command && command.obj && command.function) {
-        if (command.type === 1) {
-            let args = command.args ?? [];
-            try {
-                if (window[command.obj][command.function])
-                    window[command.obj][command.function](...args);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    }
- }
-
-Socket.init = (doFunc = () => {}) => {
-    let WS = Mixly.WebSocket.Socket;
-    WS.longSock(WS.url, handler, WS.url);
-}
-
-Socket.init();
-*/
 
 })();

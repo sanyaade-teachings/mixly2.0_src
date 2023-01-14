@@ -569,6 +569,7 @@
                     "Mixly.StatusBar",
                     "Mixly.StatusBarPort",
                     "Mixly.Command",
+                    "Mixly.MJSON",
                     "Mixly.WebSocket"
                 ],
                 "provide":[

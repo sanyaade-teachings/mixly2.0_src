@@ -485,14 +485,34 @@
             }
             //创建语法高亮
             else if (className.indexOf('lang') >= 0) {
-                hljs.highlightBlock(element);
+                // hljs.highlightElement(element);
+                let nameList = className.split('-');
+                let language;
+                if (nameList.length >= 2) {
+                    if (nameList.length >= 3) {
+                        nameList[1] += '-' + nameList[2];
+                    }
+                    language = nameList[1];
+                }
+                if (!['arduino', 'bash', 'c', 'cpp',
+                      'css', 'javascript', 'json', 'lua',
+                      'node-repl', 'python', 'python-repl', 'shell',
+                      'xml'].includes(language)) {
+                    language = null;
+                }
+                if (language) {
+                    element.innerHTML = hljs.highlight(element.outerText, {
+                        language,
+                        ignoreIllegals: false
+                    }).value;
+                }
+                that._copyCode($elm);
             }
             //创建js注释开关
             className = $elm.attr('class') || '';
             if (className.indexOf('javascript') >= 0) {
                 that._setJSCommentDisable($elm);
             }
-            that._copyCode($elm);
         });
         //设置网页title
         var title = this.$e.view.find('h1').eq(0).text();

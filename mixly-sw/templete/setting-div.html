@@ -188,18 +188,23 @@
     <div id="setting-menu-left">
       <ul id="setting-menu-options" class="layui-nav layui-nav-tree layui-bg-cyan layui-inline" lay-filter="setting-menu-filter">
         <li class="layui-nav-item layui-this" lay-id="0">
-          <a m-id="0" href="javascript:;">{{d.personalise}}</a>
+          <a m-id="0" href="javascript:;">{{ d.personalise }}</a>
         </li>
         <li class="layui-nav-item" lay-id="1">
-          <a m-id="1" href="javascript:;">{{d.importBoard}}</a>
+          <a m-id="1" href="javascript:;">{{ d.importBoard }}</a>
         </li>
+        {{#  if(d.env === 'web-socket'){ }}
+          <li class="layui-nav-item" lay-id="2">
+            <a m-id="2" href="javascript:;">{{ d.checkForUpdates }}</a>
+          </li>
+        {{#  } }}
       </ul>
     </div>
     <div id="setting-menu-body">
       <div class="menu-body layui-show">
         <div id="setting-menu-user">
           <div>
-            <div class="layui-collapse" lay-filter="test" lay-accordion="">
+            <div class="layui-collapse" lay-filter="menu-user-collapse-filter" lay-accordion="">
               <div class="layui-colla-item">
                 <h2 class="layui-colla-title">{{ d.softwareSettings }}</h2>
                 <div class="layui-colla-content layui-show">
@@ -225,54 +230,63 @@
                         </select>
                       </div>
                     </div>
-                    <div class="layui-form-item layui-form-text">
-                      <label class="layui-form-label">{{ d.autoUpdate }}</label>
-                      <div class="layui-input-block layui-row layui-col-space10">
-                        <select class="setting-menu-item" value="autoUpdate" lay-ignore>
-                          <option value="yes">{{ d.yes }}</option>
-                          <option value="no">{{ d.no }}</option>
-                        </select>
+                    {{#  if(d.env === 'electron'){ }}
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">{{ d.autoUpdate }}</label>
+                        <div class="layui-input-block layui-row layui-col-space10">
+                          <select class="setting-menu-item" value="autoUpdate" lay-ignore>
+                            <option value="yes">{{ d.yes }}</option>
+                            <option value="no">{{ d.no }}</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
+                    {{#  } }}
                   </form>
                 </div>
               </div>
-              <div class="layui-colla-item">
-                <h2 class="layui-colla-title">{{ d.boardSettings }}</h2>
-                <div class="layui-colla-content">
-                  <form class="layui-form layui-form-pane" action="">
-                    <div class="layui-form-item layui-form-text">
-                      <label class="layui-form-label">{{ d.compileCAndH }}</label>
-                      <div class="layui-input-block layui-row layui-col-space10">
-                        <select class="setting-menu-item" value="compileCAndH" lay-ignore>
-                          <option value="yes">{{ d.yes }}</option>
-                          <option value="no">{{ d.no }}</option>
-                        </select>
+              {{#  if(d.env === 'electron'){ }}
+                <div class="layui-colla-item">
+                  <h2 class="layui-colla-title">{{ d.boardSettings }}</h2>
+                  <div class="layui-colla-content">
+                    <form class="layui-form layui-form-pane" action="">
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">{{ d.compileCAndH }}</label>
+                        <div class="layui-input-block layui-row layui-col-space10">
+                          <select class="setting-menu-item" value="compileCAndH" lay-ignore>
+                            <option value="yes">{{ d.yes }}</option>
+                            <option value="no">{{ d.no }}</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                      <label class="layui-form-label">{{ d.autoOpenPort }}</label>
-                      <div class="layui-input-block layui-row layui-col-space10">
-                        <select class="setting-menu-item" value="autoOpenPort" lay-ignore>
-                          <option value="yes">{{ d.yes }}</option>
-                          <option value="no">{{ d.no }}</option>
-                        </select>
+                      <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">{{ d.autoOpenPort }}</label>
+                        <div class="layui-input-block layui-row layui-col-space10">
+                          <select class="setting-menu-item" value="autoOpenPort" lay-ignore>
+                            <option value="yes">{{ d.yes }}</option>
+                            <option value="no">{{ d.no }}</option>
+                          </select>
+                        </div>
                       </div>
-                    </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
-              </div>
+              {{#  } }}
             </div>
           </div>
           <div>
-            <button class="layui-btn layui-btn-normal layui-btn-sm" value="apply">{{d.apply}}</button>
-            <button class="layui-btn layui-btn-normal layui-btn-sm" value="reset">{{d.reset}}</button>
+            <button class="layui-btn layui-btn-normal layui-btn-sm" value="apply">{{ d.apply }}</button>
+            <button class="layui-btn layui-btn-normal layui-btn-sm" value="reset">{{ d.reset }}</button>
           </div>
         </div>
       </div>
       <div class="menu-body" id="import-board">
         <div class="layui-hide" id="import-board-page" lay-filter="import-board-page-filter"></div>
       </div>
+      {{#  if(d.env === 'web-socket'){ }}
+        <div class="menu-body">
+          <div class="layui-hide"></div>
+        </div>
+      {{#  } }}
     </div>
   </div>
   <div id="setting-menu-bottom">

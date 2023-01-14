@@ -89,7 +89,7 @@ Setting.onclick = () => {
         minimumResultsForSearch: 10
     });
     Setting.configMenuSetValue(obj, USER);
-    element.render('collapse', 'test');
+    element.render('collapse', 'menu-user-collapse-filter');
     Setting.nowIndex = 0;
     LayerExt.open({
         title: [Msg.getLang('设置'), '36px'],

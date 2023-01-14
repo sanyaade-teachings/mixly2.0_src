@@ -12,11 +12,22 @@ const { laytpl } = layui;
 
 XML.TEMPLATE_DIR_PATH = './mixly-sw/templete';
 
+let env = 'electron';
+if (Env.hasSocketServer) {
+    env = 'web-socket';
+} else if (Env.hasCompiler) {
+    env = 'web-compiler';
+}
+if (env === 'electron' && !Env.isElectron) {
+    env = 'web';
+}
+
 XML.TEMPLATE_CONFIG = [
     {
         type: 'SETTING_DIV',
         path: '/setting-div.html',
         config: {
+            env,
             personalise: () => {
                 return Msg.getLang('个性化');
             },
@@ -73,6 +84,9 @@ XML.TEMPLATE_CONFIG = [
             },
             boardSettings: () => {
                 return Msg.getLang('板卡设置');
+            },
+            checkForUpdates: () => {
+                return Msg.getLang('检查更新');
             }
         },
         appendToBody: true,

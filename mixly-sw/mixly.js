@@ -38,6 +38,73 @@ Mixly.get = (inPath) => {
     return str;
 }
 
+/**
+ * @function 根据不同环境require不同对象
+ * @param requireObj {object}
+ * @return {void}
+ **/
+Mixly.require = (requireObj) => {
+    if (typeof requireObj !== 'object') return;
+
+    const { SOFTWARE } = Config;
+    const defaultRequire = {
+        "electron": [],
+        "web": [],
+        "web-socket": {
+            "electron": [],
+            "web": [],
+            "common": []
+        },
+        "web-compiler": {
+            "electron": [],
+            "web": [],
+            "common": []
+        },
+        "common": []
+    };
+
+    let nowRequire = {
+        ...defaultRequire,
+        ...requireObj
+    };
+
+    Mixly.requireList(nowRequire['common']);
+
+    if (window?.process?.versions?.electron)
+        if (SOFTWARE?.webSocket?.enabled)
+            Mixly.requireList([
+                ...nowRequire['web-socket']['common'],
+                ...nowRequire['web-socket']['electron']
+            ]);
+        else if (SOFTWARE?.webCompiler?.enabled)
+            Mixly.requireList([
+                ...nowRequire['web-compiler']['common'],
+                ...nowRequire['web-compiler']['electron']
+            ]);
+    else
+        if (SOFTWARE?.webSocket?.enabled)
+            Mixly.requireList([
+                ...nowRequire['web-socket']['common'],
+                ...nowRequire['web-socket']['web']
+            ]);
+        else if (SOFTWARE?.webCompiler?.enabled)
+            Mixly.requireList([
+                ...nowRequire['web-compiler']['common'],
+                ...nowRequire['web-compiler']['web']
+            ]);
+}
+
+/**
+ * @function require多个对象
+ * @param list {array} 对象字符串列表
+ * @return {void}
+ **/
+Mixly.requireList = (list) => {
+    if (typeof list !== 'object') return;
+    for (let i = 0; i < list.length; i++)
+        goog.require(list[i]);
+}
+
 // mixly-sw文件夹相对于base.js的路径
 Mixly.MIXLY_DIR_PATH = '../../../mixly-sw';
 

@@ -96,6 +96,26 @@ Deps.DEPENDENCY["web-compiler"]["common"] = [
     ...depsJson["web-compiler"]["common"]
 ];
 
+Deps.DEPENDENCY["web-socket"]["electron"] = [
+    ...Deps.DEPENDENCY["web-socket"]["electron"],
+    ...depsJson["web-socket"]["electron"]
+];
+
+Deps.DEPENDENCY["web-compiler"]["electron"] = [
+    ...Deps.DEPENDENCY["web-compiler"]["electron"],
+    ...depsJson["web-compiler"]["electron"]
+];
+
+Deps.DEPENDENCY["web-socket"]["web"] = [
+    ...Deps.DEPENDENCY["web-socket"]["web"],
+    ...depsJson["web-socket"]["web"]
+];
+
+Deps.DEPENDENCY["web-compiler"]["web"] = [
+    ...Deps.DEPENDENCY["web-compiler"]["web"],
+    ...depsJson["web-compiler"]["web"]
+];
+
 Deps.addDependency = (dependencyList) => {
     if (typeof dependencyList !== 'object') return;
     for (let i = 0; i < dependencyList.length; i++) {

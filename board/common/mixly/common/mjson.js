@@ -12,7 +12,10 @@ MJSON.operate = (jsonObj, optFunc) => {
         //如果对象类型为object类型且数组长度大于0 或者 是对象 ，继续递归解析
         var element = newJsonObj[key];
         if (element.length > 0 && typeof (element) == "object" || typeof (element) == "object") {
-            element = { ...MJSON.operate(element, optFunc) };
+            let data = MJSON.operate(element, optFunc);
+            for (let i in data) {
+                newJsonObj[key][i] = data[i];
+            }
         } else { //不是对象或数组、直接输出
             if (typeof (element) === 'string') {
                 try {

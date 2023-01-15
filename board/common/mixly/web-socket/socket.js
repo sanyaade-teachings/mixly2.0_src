@@ -127,6 +127,7 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     WS.obj.onmessage = (event) => {
         heartCheck.reset().start();
         let command = Command.parse(event.data);
+        command = MJSON.decode(command);
         if (Socket.debug)
             console.log('receive -> ', event.data);
         /*if (command && command.obj && command.function) {

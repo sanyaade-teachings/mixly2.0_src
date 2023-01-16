@@ -45,6 +45,7 @@
   <script src="../micropython_common/blocks/actuator_onboard.js"></script>
   <script src="../micropython_common/blocks/actuator_extern.js"></script>
   <script src="blocks/me_go.js"></script>
+  <script src="blocks/me_g1.js"></script>
   <script src="../micropython_common/blocks/display_onboard.js"></script>
   <script src="../micropython_common/blocks/display_extern.js"></script>
   <script src="../python/blocks/procedures.js"></script>
@@ -74,6 +75,7 @@
   <script src="../micropython_common/generators/actuator_onboard.js"></script>
   <script src="../micropython_common/generators/actuator_extern.js"></script>
   <script src="generators/me_go.js"></script>
+  <script src="generators/me_g1.js"></script>
   <script src="../micropython_common/generators/display_onboard.js"></script>
   <script src="../micropython_common/generators/display_extern.js"></script>
   <script src="../micropython_common/generators/network.js"></script>
@@ -1921,6 +1923,34 @@
       <block type="me_go_pin_light"></block>
       <block type="sensor_mixgome_eulerangles" m-show='micropython:esp32c3:mixgo_me'></block>
     </category>
+    <category id="catME_G1" colour="40" m-show='micropython:esp32c3:mixgo_me'>
+        <block type="me_g1_aht11"></block>   
+        <block type="me_g1_hp203"></block>   
+        <block type="me_g1_varistor"></block>
+        <block type="me_g1_rfid_readcontent">
+          <value name="SECTOR">
+            <shadow type="math_number">
+              <field name="NUM">0</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="me_g1_rfid_readid"></block>
+        <block type="me_g1_rfid_write">
+          <value name="SECTOR">
+            <shadow type="math_number">
+              <field name="NUM">0</field>
+            </shadow>
+          </value>
+          <value name="CONTENT">
+            <shadow type="text">
+              <field name="TEXT">Mixly</field>
+            </shadow>
+          </value>
+        </block>
+               
+        <block type="me_g1_rfid_status"></block> 
+
+    </category>  
       <category id="catIot" colour="#2FAD7A">
       <category id="catBlynk" colour="#2FAD7A">
         <block type="iot_wifi_connect">

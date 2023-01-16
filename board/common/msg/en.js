@@ -25,6 +25,7 @@ var MSG = {
     catStorageSPIFFS: 'SPIFFS',
     catStorageEEPROM: 'EEPROM',
     catME_GO:"ME GO",
+    catME_G1:"ME G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
     catSensor: "Sensor",

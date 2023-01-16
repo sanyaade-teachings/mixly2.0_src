@@ -22,6 +22,7 @@ var MSG = {
     catRFID: "RFID",
     catStorage: "存儲",
     catME_GO:"ME GO",
+    catME_G1:"ME G1",
     catAIOT:"智能物聯",
     catAIsensor:"MixGo AI感測器",
     catSensor: "感測器",

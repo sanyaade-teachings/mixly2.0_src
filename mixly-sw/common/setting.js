@@ -286,7 +286,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
         $btnDiv.css('display', 'flex');
         $btnDiv.children('button').off().click((event) => {
             let index = layer.load(2);
-            layer.alert('正在更新中，更新结束后将会自动重载页面，<br/>若页面长时间未重载请尝试手动重载页面。', {
+            layer.alert(Msg.getLang('info'), {
                 shade: LayerExt.SHADE_ALL
             });
             const { Socket } = Mixly.WebSocket;

@@ -80,5 +80,6 @@
     "版本": "Version",
     "已最新": "latest",
     "待更新": "obsolete",
-    "更新": "Update"
+    "更新": "Update",
+    "info": "The page will be automatically reloaded after the update is in progress.<br/>if the page has not been reloaded for a long time,<br/>try to reload the page manually."
 }

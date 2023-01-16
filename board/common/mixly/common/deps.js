@@ -67,19 +67,23 @@ Deps.DEPENDENCY = {
             "path": '/../ui/layui/layui.js',
             "provide": ['layui'],
             "require": []
-        },{
+        }, {
+            "path": '/../ui/layui/extend/loading/loading.js',
+            "provide": ['layui.loading'],
+            "require": ['layui']
+        }, {
             "path": '/../blockly-core/blockly_compressed.js',
             "provide": ['Blockly'],
             "require": []
-        },{
+        }, {
             "path": '/../blockly-core/field_grid_dropdown.js',
             "provide": ['Blockly.FieldGridDropdown'],
             "require": ['Blockly']
-        },{
+        }, {
             "path": '/../blockly-core/field_slider.js',
             "provide": ['Blockly.FieldSlider'],
             "require": ['Blockly']
-        },{
+        }, {
             "path": '/../blockly-core/field_bitmap.js',
             "provide": ['Blockly.FieldBitmap'],
             "require": ['Blockly']
@@ -87,47 +91,47 @@ Deps.DEPENDENCY = {
             "path": '/../blockly-core/continuous_toolbox.js',
             "provide": ['ContinuousToolbox', 'ContinuousFlyout', 'ContinuousMetrics'],
             "require": ['Blockly']
-        }*/,{
+        }*/, {
             "path": '/../blockly-core/workspace_search.js',
             "provide": ['WorkspaceSearch'],
             "require": ['Blockly']
-        },{
+        }, {
             "path": '/../blockly-core/workspace_backpack.js',
             "provide": ['Backpack'],
             "require": ['Blockly']
-        },{
+        }, {
             "path": '/common/modules/lazyload.js',
             "provide": ['LazyLoad'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/microbit-fs.umd.min.js',
             "provide": ['microbitFs'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/base64.min.js',
             "provide": ['Base64'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/sortable.min.js',
             "provide": ['Sortable'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/store.modern.min.js',
             "provide": ['store'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/xscrollbar.js',
             "provide": ['XScrollbar'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/popper.min.js',
             "provide": ['Popper'],
             "require": []
-        },{
+        }, {
             "path": '/common/modules/tippy-bundle.umd.min.js',
             "provide": ['tippy'],
             "require": ['Popper']
-        },{
+        }, {
             "path": '/common/modules/select2.min.js',
             "provide": [],
             "require": []

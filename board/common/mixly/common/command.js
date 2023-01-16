@@ -1,6 +1,5 @@
 (() => {
 
-goog.require('Mixly');
 goog.require('Mixly.Config');
 goog.require('Mixly.MJSON')
 goog.provide('Mixly.Command');

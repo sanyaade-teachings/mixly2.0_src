@@ -44,6 +44,25 @@
                 "Mixly.XML",
                 "Mixly.PythonShell"
             ]
+        },
+        {
+            "path":"/common/setting.js",
+            "provide":[
+                "Mixly.Setting"
+            ],
+            "require":[
+                "layui",
+                "layui.loading",
+                "store",
+                "Mixly.XML",
+                "Mixly.LayerExt",
+                "Mixly.Msg",
+                "Mixly.BoardManager",
+                "Mixly.Config",
+                "Mixly.Env",
+                "Mixly.Modules",
+                "Mixly.MJSON"
+            ]
         }
     ],
     "web":[
@@ -77,6 +96,25 @@
                 "Mixly.BoardManager",
                 "Mixly.XML"
             ]
+        },
+        {
+            "path":"/common/setting.js",
+            "provide":[
+                "Mixly.Setting"
+            ],
+            "require":[
+                "layui",
+                "layui.loading",
+                "store",
+                "Mixly.XML",
+                "Mixly.LayerExt",
+                "Mixly.Msg",
+                "Mixly.BoardManager",
+                "Mixly.Config",
+                "Mixly.Env",
+                "Mixly.Modules",
+                "Mixly.MJSON"
+            ]
         }
     ],
     "web-socket":{
@@ -109,7 +147,28 @@
                     "Mixly.Env",
                     "Mixly.Config",
                     "Mixly.BoardManager",
-                    "Mixly.XML"
+                    "Mixly.XML",
+                    "Mixly.WebSocket.Socket"
+                ]
+            },
+            {
+                "path":"/common/setting.js",
+                "provide":[
+                    "Mixly.Setting"
+                ],
+                "require":[
+                    "layui",
+                    "layui.loading",
+                    "store",
+                    "Mixly.XML",
+                    "Mixly.LayerExt",
+                    "Mixly.Msg",
+                    "Mixly.BoardManager",
+                    "Mixly.Config",
+                    "Mixly.Env",
+                    "Mixly.Modules",
+                    "Mixly.MJSON",
+                    "Mixly.WebSocket.Socket"
                 ]
             }
         ],
@@ -142,11 +201,46 @@
                     "Mixly.Env",
                     "Mixly.Config",
                     "Mixly.BoardManager",
-                    "Mixly.XML"
+                    "Mixly.XML",
+                    "Mixly.WebSocket.Socket"
+                ]
+            },
+            {
+                "path":"/common/setting.js",
+                "provide":[
+                    "Mixly.Setting"
+                ],
+                "require":[
+                    "layui",
+                    "layui.loading",
+                    "store",
+                    "Mixly.XML",
+                    "Mixly.LayerExt",
+                    "Mixly.Msg",
+                    "Mixly.BoardManager",
+                    "Mixly.Config",
+                    "Mixly.Env",
+                    "Mixly.Modules",
+                    "Mixly.MJSON",
+                    "Mixly.WebSocket.Socket"
                 ]
             }
         ],
         "common":[
+            {
+                "path":"/web-socket/socket.js",
+                "require":[
+                    "Mixly.Env",
+                    "Mixly.Config",
+                    "Mixly.MJSON",
+                    "Mixly.WebSocket",
+                    "Mixly.LayerExt",
+                    "Mixly.Command"
+                ],
+                "provide":[
+                    "Mixly.WebSocket.Socket"
+                ]
+            }
         ]
     },
     "web-compiler":{
@@ -181,6 +275,25 @@
                     "Mixly.BoardManager",
                     "Mixly.XML"
                 ]
+            },
+            {
+                "path":"/common/setting.js",
+                "provide":[
+                    "Mixly.Setting"
+                ],
+                "require":[
+                    "layui",
+                    "layui.loading",
+                    "store",
+                    "Mixly.XML",
+                    "Mixly.LayerExt",
+                    "Mixly.Msg",
+                    "Mixly.BoardManager",
+                    "Mixly.Config",
+                    "Mixly.Env",
+                    "Mixly.Modules",
+                    "Mixly.MJSON"
+                ]
             }
         ],
         "web":[
@@ -213,6 +326,25 @@
                     "Mixly.Config",
                     "Mixly.BoardManager",
                     "Mixly.XML"
+                ]
+            },
+            {
+                "path":"/common/setting.js",
+                "provide":[
+                    "Mixly.Setting"
+                ],
+                "require":[
+                    "layui",
+                    "layui.loading",
+                    "store",
+                    "Mixly.XML",
+                    "Mixly.LayerExt",
+                    "Mixly.Msg",
+                    "Mixly.BoardManager",
+                    "Mixly.Config",
+                    "Mixly.Env",
+                    "Mixly.Modules",
+                    "Mixly.MJSON"
                 ]
             }
         ],
@@ -255,23 +387,6 @@
             ],
             "provide":[
                 "Mixly.Msg"
-            ]
-        },
-        {
-            "path":"/common/setting.js",
-            "require":[
-                "layui",
-                "store",
-                "Mixly.XML",
-                "Mixly.LayerExt",
-                "Mixly.Msg",
-                "Mixly.BoardManager",
-                "Mixly.Config",
-                "Mixly.Env",
-                "Mixly.Modules"
-            ],
-            "provide":[
-                "Mixly.Setting"
             ]
         },
         {

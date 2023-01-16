@@ -54,6 +54,10 @@ Deps.DEPENDENCY = {
             "provide": ['Mixly.DomOperator'],
             "require": ['Mixly.Config', 'Mixly.XML']
         }, {
+            "path": '/../board/common/mixly/common/command.js',
+            "provide": ['Mixly.Command'],
+            "require": ['Mixly.Config', 'Mixly.MJSON']
+        }, {
             "path": '/../board/common/mixly/electron/cloud-download.js',
             "provide": ['Mixly.CloudDownload'],
             "require": ['Mixly.Env', 'Mixly.Modules']

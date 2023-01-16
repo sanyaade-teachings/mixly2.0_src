@@ -570,6 +570,7 @@
                     "Mixly.StatusBarPort",
                     "Mixly.Command",
                     "Mixly.MJSON",
+                    "Mixly.LayerExt",
                     "Mixly.WebSocket"
                 ],
                 "provide":[
@@ -715,7 +716,6 @@
         {
             "path":"/common/command.js",
             "require":[
-                "Mixly",
                 "Mixly.Config",
                 "Mixly.MJSON"
             ],

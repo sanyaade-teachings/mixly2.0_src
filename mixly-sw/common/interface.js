@@ -8,7 +8,7 @@ Mixly.require({
     "web-socket": {
         "electron": [],
         "web": [],
-        "common": []
+        "common": ["Mixly.WebSocket.Socket"]
     },
     "web-compiler": {
         "electron": [],
@@ -36,6 +36,10 @@ Interface.init = () => {
     $('body').append(XML.TEMPLATE_STR['INTERFACE']);
     if (Env.isElectron) {
         PythonShell.init();
+    }
+    if (Env.hasSocketServer) {
+        const { Socket } = Mixly.WebSocket;
+        Socket.init();
     }
     BoardManager.loadBoards();
     BoardManager.updateBoardsCard();

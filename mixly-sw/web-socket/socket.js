@@ -134,7 +134,6 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     WS.obj.onclose = (event) => {
         WS.connected = false;
         console.log('已断开' + WS.url);
-        layer.closeAll();
 
         console.info(`关闭`, event.code);
         if (event.code !== 1000) {

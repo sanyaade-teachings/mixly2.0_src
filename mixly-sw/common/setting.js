@@ -289,6 +289,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
             layer.alert('正在更新中，更新结束后将会自动重载页面，<br/>若页面长时间未重载请尝试手动重载页面。', {
                 shade: LayerExt.SHADE_ALL
             });
+            const { Socket } = Mixly.WebSocket;
             Socket.sendCommand({
                 obj: 'PM2',
                 func: 'updateSW',

@@ -146,7 +146,7 @@
     border: 4px solid #7c7171;
   }
 
-  #setting-menu-user {
+  .setting-menu-info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -156,14 +156,14 @@
     flex-grow: 1;
   }
 
-  #setting-menu-user > div:nth-child(1) {
+  .setting-menu-info > div:nth-child(1) {
     height: auto;
     overflow-x: hidden;
     overflow-y: auto;
     flex: 1;
   }
 
-  #setting-menu-user > div:nth-child(2) {
+  .setting-menu-info > div:nth-child(2) {
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -171,16 +171,20 @@
     align-items: center;
   }
 
-  .light #setting-menu-user > div:nth-child(2) {
+  .light .setting-menu-info > div:nth-child(2) {
     border-top: 1px solid #eee;
   }
 
-  .dark #setting-menu-user > div:nth-child(2) {
+  .dark .setting-menu-info > div:nth-child(2) {
     border-top: 1px solid #8e8b8b;
   }
 
   #setting-menu-user .layui-form-pane {
     padding: 5px 5px 1px 5px;
+  }
+
+  #setting-menu-update .layui-panel {
+    margin: 5px;
   }
 </style>
 <div id="setting-menu" class="layui-layer-wrap">
@@ -204,7 +208,7 @@
     </div>
     <div id="setting-menu-body">
       <div class="menu-body layui-show">
-        <div id="setting-menu-user">
+        <div id="setting-menu-user" class="setting-menu-info">
           <div>
             <div class="layui-collapse" lay-filter="menu-user-collapse-filter" lay-accordion="">
               <div class="layui-colla-item">
@@ -288,7 +292,35 @@
       {{#  } }}
       {{#  if(d.env === 'web-socket'){ }}
         <div class="menu-body">
-          <div class="layui-hide"></div>
+          <div id="setting-menu-update" class="setting-menu-info">
+            <div>
+              <div id="setting-menu-update-server" class="layui-card layui-panel">
+                <div class="layui-card-header">
+                  <label>服务器</label>
+                  <span class="layui-badge layui-bg-green" value="latest">已最新</span>
+                  <span class="layui-badge" value="obsolete">待更新</span>
+                </div>
+                <div class="layui-card-body" class="">
+                  <label>版本：</label>
+                  <text>1.0.0</text>
+                </div>
+              </div>
+              <div id="setting-menu-update-client" class="layui-card layui-panel">
+                <div class="layui-card-header">
+                  <label>客户端</label>
+                  <span class="latest layui-badge layui-bg-green" value="latest">已最新</span>
+                  <span class="layui-badge" value="obsolete">待更新</span>
+                </div>
+                <div class="layui-card-body">
+                  <label>版本：</label>
+                  <text>1.0.0</text>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="layui-btn layui-btn-normal layui-btn-sm" value="update">更新</button>
+            </div>
+          </div>
         </div>
       {{#  } }}
     </div>

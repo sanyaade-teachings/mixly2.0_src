@@ -1,15 +1,24 @@
 (() => {
 
-goog.require('layui');
-goog.require('store');
-goog.require('Mixly.XML');
-goog.require('Mixly.LayerExt');
-goog.require('Mixly.Msg');
-goog.require('Mixly.BoardManager');
-goog.require('Mixly.Config');
-goog.require('Mixly.Env');
-goog.require('Mixly.Modules');
 goog.provide('Mixly.Setting');
+
+Mixly.require({
+    "electron": [],
+    "web": [],
+    "web-socket": {
+        "electron": [],
+        "web": [],
+        "common": ["Mixly.WebSocket.Socket"]
+    },
+    "web-compiler": {
+        "electron": [],
+        "web": [],
+        "common": []
+    },
+    "common": ["layui", "layui.loading", "store", "Mixly.XML",
+               "Mixly.LayerExt", "Mixly.Msg", "Mixly.BoardManager", "Mixly.Config",
+               "Mixly.Env", "Mixly.Modules", "Mixly.MJSON"]
+});
 
 const {
     XML,
@@ -19,13 +28,14 @@ const {
     Config,
     Env,
     Modules,
+    MJSON,
     Setting
 } = Mixly;
 
 const { LANG } = Msg;
-const { element, form } = layui;
+const { element, form, loading, layer } = layui;
 const { fs_extra, path } = Modules;
-const { USER } = Config;
+const { USER, SOFTWARE } = Config;
 
 Setting.ID = 'setting-menu';
 Setting.CONFIG = {}
@@ -189,6 +199,21 @@ Setting.addOnchangeOptionListener = () => {
             } else {
                 layui.table.resize('cloud-boards-table');
             }
+        } else if (index === 2) {
+            if (data.index !== Setting.nowIndex) {
+                $('#setting-menu-update').loading({
+                    background: USER.theme === 'dark' ? '#807b7b' : '#fff',
+                    opacity: 1,
+                    animateTime: 0,
+                    imgSrc: 1
+                });
+                const { Socket } = Mixly.WebSocket;
+                Socket.sendCommand({
+                    obj: 'Socket',
+                    func: 'getConfigByUrl',
+                    args: [ SOFTWARE.configUrl ]
+                });
+            }
         }
         Setting.nowIndex = data.index;
     });
@@ -227,6 +252,56 @@ Setting.configMenuGetValue = (obj) => {
         config[$item.attr('value')] = $item.val();
     }
     return config;
+}
+
+Setting.refreshUpdateMenuStatus = (config) => {
+    console.log(config);
+    const {
+        serverVersion,
+        clientVersion
+    } = config;
+    let $serverDiv = $('#setting-menu-update-server');
+    let $clientDiv = $('#setting-menu-update-client');
+    let $btnDiv = $('#setting-menu-update > div:nth-child(2)');
+    $serverDiv.find('span').css('display', 'none');
+    $clientDiv.find('span').css('display', 'none');
+    let needUpdateServer = false, needUpdateClient = false;
+    if (serverVersion && serverVersion !== SOFTWARE.serverVersion) {
+        $serverDiv.find('span[value="obsolete"]').css('display', 'inline-block');
+        needUpdateServer = true;
+        $serverDiv.find('text').text(`${SOFTWARE.serverVersion} → ${serverVersion}`);
+    } else {
+        $serverDiv.find('span[value="latest"]').css('display', 'inline-block');
+        $serverDiv.find('text').text(SOFTWARE.serverVersion);
+    }
+    if (clientVersion && clientVersion !== SOFTWARE.clientVersion) {
+        $clientDiv.find('span[value="obsolete"]').css('display', 'inline-block');
+        needUpdateClient = true;
+        $clientDiv.find('text').text(`${SOFTWARE.clientVersion} → ${clientVersion}`);
+    } else {
+        $clientDiv.find('span[value="latest"]').css('display', 'inline-block');
+        $clientDiv.find('text').text(SOFTWARE.clientVersion);
+    }
+    if (needUpdateServer || needUpdateClient) {
+        $btnDiv.css('display', 'flex');
+        $btnDiv.children('button').off().click((event) => {
+            let index = layer.load(2);
+            layer.alert('正在更新中，更新结束后将会自动重载页面，<br/>若页面长时间未重载请尝试手动重载页面。', {
+                shade: LayerExt.SHADE_ALL
+            });
+            const { Socket } = Mixly.WebSocket;
+            Socket.sendCommand({
+                obj: 'PM2',
+                func: 'updateSW',
+                args: []
+            });
+        });
+    } else {
+        $btnDiv.css('display', 'none');
+    }
+    setTimeout(() => {
+        $('#setting-menu-update').loading('destroy');
+    }, 500);
 }
 
 window.addEventListener('DOMContentLoaded', () => {

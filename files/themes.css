@@ -269,6 +269,10 @@ body[class="dark"] {
     border-bottom: 1px solid #484040;
 }
 
+.dark .layui-card-body {
+    color: #fff;
+}
+
 .dark .layui-progress-text {
     color: #fff;
 }
@@ -309,4 +313,14 @@ body[class="dark"] {
 
 .dark .layui-colla-content {
     color: #fff;
+}
+
+.dark .layui-layer-dialog {
+    background-color: #807b7b;
+}
+
+.dark .layui-layer-btn a {
+    color: #fff;
+    border: 1px solid #765454;
+    background-color: #575353;
 }

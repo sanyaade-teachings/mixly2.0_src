@@ -1,6 +1,9 @@
 (() => {
 
 goog.provide('Mixly');
+goog.provide('Mixly.Web');
+goog.provide('Mixly.WebSocket');
+goog.provide('Mixly.WebCompiler');
 goog.provide('Mixly.Url');
 goog.provide('Mixly.Config');
 

@@ -296,29 +296,29 @@
             <div>
               <div id="setting-menu-update-server" class="layui-card layui-panel">
                 <div class="layui-card-header">
-                  <label>服务器</label>
-                  <span class="layui-badge layui-bg-green" value="latest">已最新</span>
-                  <span class="layui-badge" value="obsolete">待更新</span>
+                  <label>{{ d.server }}</label>
+                  <span class="layui-badge layui-bg-green" value="latest">{{ d.latest }}</span>
+                  <span class="layui-badge" value="obsolete">{{ d.obsolete }}</span>
                 </div>
                 <div class="layui-card-body" class="">
-                  <label>版本：</label>
+                  <label>{{ d.version }}: </label>
                   <text>1.0.0</text>
                 </div>
               </div>
               <div id="setting-menu-update-client" class="layui-card layui-panel">
                 <div class="layui-card-header">
-                  <label>客户端</label>
-                  <span class="latest layui-badge layui-bg-green" value="latest">已最新</span>
-                  <span class="layui-badge" value="obsolete">待更新</span>
+                  <label>{{ d.client }}</label>
+                  <span class="latest layui-badge layui-bg-green" value="latest">{{ d.latest }}</span>
+                  <span class="layui-badge" value="obsolete">{{ d.obsolete }}</span>
                 </div>
                 <div class="layui-card-body">
-                  <label>版本：</label>
+                  <label>{{ d.version }}：</label>
                   <text>1.0.0</text>
                 </div>
               </div>
             </div>
             <div>
-              <button class="layui-btn layui-btn-normal layui-btn-sm" value="update">更新</button>
+              <button class="layui-btn layui-btn-normal layui-btn-sm" value="update">{{ d.update }}</button>
             </div>
           </div>
         </div>

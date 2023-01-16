@@ -74,5 +74,11 @@
     "软件设置": "software settings",
     "板卡设置": "Board settings",
     "跟随系统": "Follow the system",
-    "检查更新": "Check for updates"
+    "检查更新": "Check for updates",
+    "服务器": "Server",
+    "客户端": "Client",
+    "版本": "Version",
+    "已最新": "latest",
+    "待更新": "obsolete",
+    "更新": "Update"
 }

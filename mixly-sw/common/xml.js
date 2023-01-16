@@ -87,6 +87,24 @@ XML.TEMPLATE_CONFIG = [
             },
             checkForUpdates: () => {
                 return Msg.getLang('检查更新');
+            },
+            server: () => {
+                return Msg.getLang('服务器');
+            },
+            client: () => {
+                return Msg.getLang('客户端');
+            },
+            version: () => {
+                return Msg.getLang('版本');
+            },
+            latest: () => {
+                return Msg.getLang('已最新');
+            },
+            obsolete: () => {
+                return Msg.getLang('待更新');
+            },
+            update: () => {
+                return Msg.getLang('更新');
             }
         },
         appendToBody: true,

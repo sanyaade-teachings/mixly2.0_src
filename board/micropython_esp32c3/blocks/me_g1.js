@@ -9,7 +9,7 @@ Blockly.Blocks['me_g1_aht11'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEG1_HUE']);        
         this.appendDummyInput("")
-        .appendField(Blockly.MIXLY_TEM_HUM+" AHT11")
+        .appendField(Blockly.MIXLY_TEM_HUM+" AHT21")
         .appendField(new Blockly.FieldDropdown([
             [Blockly.MIXLY_GETTEMPERATUE, "temperature"],
             [Blockly.MIXLY_GETHUMIDITY, "humidity"]

@@ -87,7 +87,11 @@ Deps.DEPENDENCY = {
             "path": '/../blockly-core/field_bitmap.js',
             "provide": ['Blockly.FieldBitmap'],
             "require": ['Blockly']
-        }/*,{
+        }, {
+            "path": '/../blockly-core/field_colour_hsv_sliders.js',
+            "provide": ['Blockly.FieldColourHsvSliders'],
+            "require": ['Blockly']
+        }/*, {
             "path": '/../blockly-core/continuous_toolbox.js',
             "provide": ['ContinuousToolbox', 'ContinuousFlyout', 'ContinuousMetrics'],
             "require": ['Blockly']
@@ -98,6 +102,14 @@ Deps.DEPENDENCY = {
         }, {
             "path": '/../blockly-core/workspace_backpack.js',
             "provide": ['Backpack'],
+            "require": ['Blockly']
+        }, {
+            "path": '/../blockly-core/content_highlight.js',
+            "provide": ['ContentHighlight'],
+            "require": ['Blockly']
+        }, {
+            "path": '/../blockly-core/zoom_to_fit.js',
+            "provide": ['ZoomToFitControl'],
             "require": ['Blockly']
         }, {
             "path": '/common/modules/lazyload.js',
@@ -250,6 +262,7 @@ goog.require('Mixly.Interface');
 goog.require('Blockly.FieldGridDropdown');
 goog.require('Blockly.FieldSlider');
 goog.require('Blockly.FieldBitmap');
+goog.require('Blockly.FieldColourHsvSliders');
 goog.require(Mixly.MIXLY_DIR_PATH + '/common/modules/select2.min.js');
 
 if (Env.isElectron) {

@@ -71,8 +71,8 @@
     "管理板卡": "Manage board",
     "自动检查更新": "Automatically check for updates",
     "上传结束后自动打开串口": "Auto open the SerialPort after uploading",
-    "软件设置": "software settings",
-    "板卡设置": "Board settings",
+    "软件": "Software",
+    "板卡": "Board",
     "跟随系统": "Follow the system",
     "检查更新": "Update",
     "服务器": "Server",
@@ -81,5 +81,6 @@
     "已最新": "latest",
     "待更新": "obsolete",
     "更新": "Update",
-    "info": "The page will be automatically reloaded after the update is in progress.<br/>if the page has not been reloaded for a long time,<br/>try to reload the page manually."
+    "info": "The page will be automatically reloaded after the update is in progress.<br/>if the page has not been reloaded for a long time,<br/>try to reload the page manually.",
+    "高亮显示画布中所有块": "Highlights the content on the workspace"
 }

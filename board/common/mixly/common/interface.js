@@ -15,6 +15,8 @@ goog.require('Mixly.Editor');
 goog.require('Mixly.LevelSelector');
 goog.require('WorkspaceSearch');
 goog.require('Backpack');
+goog.require('ContentHighlight');
+goog.require('ZoomToFitControl');
 goog.provide('Mixly.Interface');
 
 Mixly.require({
@@ -63,7 +65,7 @@ const {
     LevelSelector
 } = Mixly;
 
-const { BOARD } = Config;
+const { BOARD, USER } = Config;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
@@ -117,11 +119,17 @@ Interface.init = () => {
     }
     NavEvents.init();
     StatusBar.init();
+    const zoomToFit = new ZoomToFitControl(Blockly.mainWorkspace);
+    zoomToFit.init();
     ToolboxSearcher.init();
     const workspaceSearch = new WorkspaceSearch(Blockly.mainWorkspace);
     workspaceSearch.init();
     const backpack = new Backpack(Blockly.mainWorkspace);
     backpack.init();
+    if (USER.contentHighlight === 'yes') {
+        const contentHighlight = new ContentHighlight(Blockly.mainWorkspace);
+        contentHighlight.init();
+    }
     const workspaceSearchOpen = {
         displayText: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
         preconditionFn: function(scope) {

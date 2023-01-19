@@ -382,6 +382,12 @@ Blockly.Msg.WORKSPACE_SEARCH_OPEN = '查找块';
 Blockly.Msg.RANDOM = '随机';
 Blockly.Msg.CLEAR = '清空';
 
+/* Blockly.FieldColourHsvSliders文本翻译 */
+Blockly.Msg.HUE = '色调';
+Blockly.Msg.SATURATION = '饱和度';
+Blockly.Msg.BRIGHTNESS = '亮度';
+Blockly.Msg.EYEDROPPER = '取色器';
+
 Blockly.Msg.ADD_COMMENT = "添加注释";
 Blockly.Msg.AUTH = "请授权这个应用程序以保存您的作品并共享。";
 Blockly.Msg.CHANGE_VALUE_TITLE = "更改值：";

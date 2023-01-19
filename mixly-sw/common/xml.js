@@ -80,10 +80,10 @@ XML.TEMPLATE_CONFIG = [
                 return Msg.getLang('导入板卡');
             },
             softwareSettings: () => {
-                return Msg.getLang('软件设置');
+                return Msg.getLang('软件');
             },
             boardSettings: () => {
-                return Msg.getLang('板卡设置');
+                return Msg.getLang('板卡');
             },
             checkForUpdates: () => {
                 return Msg.getLang('检查更新');
@@ -105,6 +105,9 @@ XML.TEMPLATE_CONFIG = [
             },
             update: () => {
                 return Msg.getLang('更新');
+            },
+            contentHighlight: () => {
+                return Msg.getLang('高亮显示画布中所有块');
             }
         },
         appendToBody: true,

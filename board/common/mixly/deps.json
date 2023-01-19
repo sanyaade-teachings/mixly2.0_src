@@ -224,6 +224,8 @@
                 "Mixly.LevelSelector",
                 "WorkspaceSearch",
                 "Backpack",
+                "ContentHighlight",
+                "ZoomToFitControl",
                 "Mixly.Electron",
                 "Mixly.Electron.LibManager",
                 "Mixly.Electron.WikiManager",
@@ -389,6 +391,8 @@
                 "Mixly.LevelSelector",
                 "WorkspaceSearch",
                 "Backpack",
+                "ContentHighlight",
+                "ZoomToFitControl",
                 "Mixly.Web.ExampleExt"
             ]
         },
@@ -428,6 +432,8 @@
                     "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
+                    "ContentHighlight",
+                    "ZoomToFitControl",
                     "Mixly.WebSocket.Socket",
                     "Mixly.Web.ExampleExt"
                 ]
@@ -466,6 +472,8 @@
                     "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
+                    "ContentHighlight",
+                    "ZoomToFitControl",
                     "Mixly.WebSocket.Socket",
                     "Mixly.Web.ExampleExt"
                 ]
@@ -602,6 +610,8 @@
                     "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
+                    "ContentHighlight",
+                    "ZoomToFitControl",
                     "Mixly.Web.ExampleExt"
                 ]
             },
@@ -639,6 +649,8 @@
                     "Mixly.LevelSelector",
                     "WorkspaceSearch",
                     "Backpack",
+                    "ContentHighlight",
+                    "ZoomToFitControl",
                     "Mixly.Web.ExampleExt"
                 ]
             },

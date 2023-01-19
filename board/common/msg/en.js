@@ -379,6 +379,12 @@ Blockly.Msg.WORKSPACE_SEARCH_OPEN = 'Search blocks';
 Blockly.Msg.RANDOM = 'Random';
 Blockly.Msg.CLEAR = 'Clear';
 
+/* Blockly.FieldColourHsvSliders文本翻译 */
+Blockly.Msg.HUE = 'Hue';
+Blockly.Msg.SATURATION = 'Saturation';
+Blockly.Msg.BRIGHTNESS = 'Brightness';
+Blockly.Msg.EYEDROPPER = 'Eyedropper';
+
 Blockly.Msg.ADD_COMMENT = "Add Comment";
 Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Change value:";

@@ -56,6 +56,20 @@ if (Config.USER.languageAuto) {
 
 console.log('Config.USER', Config.USER);
 
+let windowBackgroundColor;
+if (Config.USER.theme === 'dark') {
+    if (Config.USER.contentHighlight === 'yes') {
+        windowBackgroundColor = '#353535';
+    } else {
+        windowBackgroundColor = '#181818';
+    }
+} else {
+    if (Config.USER.contentHighlight === 'yes') {
+        windowBackgroundColor = '#e6e6e6';
+    } else {
+        windowBackgroundColor = '#fff';
+    }
+}
 Loading.LIGHT_CSS = `
 .loading {
     position: absolute;
@@ -64,7 +78,7 @@ Loading.LIGHT_CSS = `
     top: 0px;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: ${windowBackgroundColor};
 }
 
 .loading .left-div {
@@ -113,7 +127,7 @@ Loading.DARK_CSS = `
     top: 0px;
     width: 100%;
     height: 100%;
-    background-color: #181818;
+    background-color: ${windowBackgroundColor};
 }
 
 .loading .left-div {
@@ -155,10 +169,7 @@ body {
 
 const nowWindow = Modules.currentWindow;
 const winTheme = Config.USER.theme;
-if (winTheme === "dark")
-    nowWindow && nowWindow.setBackgroundColor("#181818");
-else
-    nowWindow && nowWindow.setBackgroundColor("#fff");
+nowWindow && nowWindow.setBackgroundColor(windowBackgroundColor);
 
 
 const loadingStyle = $('<style type="text/css"></style>').text(

@@ -129,7 +129,7 @@ Editor.blockEditorInit = () => {
     Editor.blockEditor = Blockly.inject($('#' + Editor.DIV_NAME.BLOCK)[0], {
         media: mediaPath,
         toolbox,
-        renderer: 'geras',
+        renderer,
         zoom:
         {
             controls: true,

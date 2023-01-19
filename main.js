@@ -59,8 +59,8 @@ function sendCommand (commandObj, win = null) {
     }
 }
 
-//程序 ready 前禁用GPU加速，解决软件打开时的黑屏问题
-app.disableHardwareAcceleration();
+// 程序 ready 前禁用GPU加速，解决软件打开时的黑屏问题
+// app.disableHardwareAcceleration();
 
 app.allowRendererProcessReuse = false;
 Menu.setApplicationMenu(null);

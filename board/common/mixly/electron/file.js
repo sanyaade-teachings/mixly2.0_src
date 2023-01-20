@@ -230,7 +230,7 @@ File.newFile = () => {
         }
     } else {
         if (!blocksList.length) {
-            layer.msg(indexText['画布已清空'], { time: 1000 });
+            layer.msg(indexText['工作区已清空'], { time: 1000 });
             File.openedFilePath = null;
             Title.updateTitle(Title.title);
             return;

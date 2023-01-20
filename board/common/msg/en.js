@@ -260,7 +260,7 @@ var indexText = {
     "写文件出错": "Error writing file",
     "库导出成功": "The mil was exported successfully",
     "代码区已清空": "Code area is cleared",
-    "画布已清空": "Canvas is empty",
+    "工作区已清空": "Workspace is cleared",
     "未找到有效数据": "No valid data found",
     "忽略未定义块": "Ignore blocks",
     "读取代码": "Read code",
@@ -372,7 +372,7 @@ Blockly.Msg.EMPTY_BACKPACK = 'Empty';
 Blockly.Msg.PASTE_ALL_FROM_BACKPACK = 'Paste All Blocks from Backpack';
 Blockly.Msg.REMOVE_FROM_BACKPACK = 'Remove from Backpack';
 
-/* 画布块查找 */
+/* 工作区块查找 */
 Blockly.Msg.WORKSPACE_SEARCH_OPEN = 'Search blocks';
 Blockly.Msg.SEARCH = 'Search';
 

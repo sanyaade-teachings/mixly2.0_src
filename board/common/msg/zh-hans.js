@@ -263,7 +263,7 @@ var indexText = {
     "写文件出错": "写文件出错",
     "库导出成功": "库导出成功",
     "代码区已清空": "代码区已清空",
-    "画布已清空": "画布已清空",
+    "工作区已清空": "工作区已清空",
     "未找到有效数据": "未找到有效数据",
     "忽略未定义块": "忽略未定义块",
     "读取代码": "读取代码",
@@ -375,7 +375,7 @@ Blockly.Msg.EMPTY_BACKPACK = '清空';
 Blockly.Msg.PASTE_ALL_FROM_BACKPACK = '提取背包中的所有图形块';
 Blockly.Msg.REMOVE_FROM_BACKPACK = '从背包中移除';
 
-/* 画布块查找 */
+/* 工作区块查找 */
 Blockly.Msg.WORKSPACE_SEARCH_OPEN = '查找块';
 Blockly.Msg.SEARCH = '查找';
 

@@ -126,16 +126,22 @@ Editor.blockEditorInit = () => {
     const mediaPath = Config.pathPrefix + 'common/media/';
     const toolbox = $('#toolbox')[0];
     const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
+    const grid = USER.blocklyShowGrid ==='yes' ? {
+            spacing: 20,
+            length: 3,
+            colour: '#ccc',
+            snap: true
+        } : {};
     Editor.blockEditor = Blockly.inject($('#' + Editor.DIV_NAME.BLOCK)[0], {
         media: mediaPath,
         toolbox,
         renderer,
-        zoom:
-        {
+        zoom: {
             controls: true,
             wheel: true,
             scaleSpeed: 1.03
-        }
+        },
+        grid
     });
     if (USER.theme === 'dark') {
         Editor.blockEditor.setTheme(Blockly.Themes.Dark);

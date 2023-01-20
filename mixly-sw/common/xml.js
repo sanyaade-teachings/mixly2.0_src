@@ -106,9 +106,13 @@ XML.TEMPLATE_CONFIG = [
             update: () => {
                 return Msg.getLang('更新');
             },
-            contentHighlight: () => {
-                return Msg.getLang('高亮显示画布中所有块');
+            blocklyContentHighlight: () => {
+                return Msg.getLang('工作区高亮显示所有块');
+            },
+            blocklyShowGrid: () => {
+                return Msg.getLang('工作区显示网格');
             }
+
         },
         appendToBody: true,
         generateDom: false,

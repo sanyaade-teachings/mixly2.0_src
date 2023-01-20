@@ -126,7 +126,7 @@ Interface.init = () => {
     workspaceSearch.init();
     const backpack = new Backpack(Blockly.mainWorkspace);
     backpack.init();
-    if (USER.contentHighlight === 'yes') {
+    if (USER.blocklyContentHighlight === 'yes') {
         const contentHighlight = new ContentHighlight(Blockly.mainWorkspace);
         contentHighlight.init();
     }

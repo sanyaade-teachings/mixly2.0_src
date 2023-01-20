@@ -374,6 +374,7 @@ Blockly.Msg.REMOVE_FROM_BACKPACK = 'Remove from Backpack';
 
 /* 画布块查找 */
 Blockly.Msg.WORKSPACE_SEARCH_OPEN = 'Search blocks';
+Blockly.Msg.SEARCH = 'Search';
 
 /* Blockly.FieldBitmap文本翻译 */
 Blockly.Msg.RANDOM = 'Random';

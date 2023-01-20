@@ -58,17 +58,9 @@ console.log('Config.USER', Config.USER);
 
 let windowBackgroundColor;
 if (Config.USER.theme === 'dark') {
-    if (Config.USER.contentHighlight === 'yes') {
-        windowBackgroundColor = '#353535';
-    } else {
-        windowBackgroundColor = '#181818';
-    }
+    windowBackgroundColor = '#181818';
 } else {
-    if (Config.USER.contentHighlight === 'yes') {
-        windowBackgroundColor = '#e6e6e6';
-    } else {
-        windowBackgroundColor = '#fff';
-    }
+    windowBackgroundColor = '#fff';
 }
 Loading.LIGHT_CSS = `
 .loading {

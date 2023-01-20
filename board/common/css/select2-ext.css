@@ -63,6 +63,14 @@
     background-color: #8d8888;
 }
 
+.light .select2-container--default .select2-selection--single {
+    border: 1px solid #ece5e5;
+}
+
+.light .select2-dropdown {
+    border: 1px solid #ece5e5;
+}
+
 .dark .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #fff;
 }

@@ -5,7 +5,7 @@ goog.provide('Blockly.Arduino.communicate');
 goog.require('Blockly.Arduino');
 
 Blockly.Arduino.ir_recv = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"controls_tone\"") === -1 && xmlText.indexOf("type=\"controls_notone\"") === -1) {
         this.setWarningText(null);
@@ -64,7 +64,7 @@ ${branch2}
 
 
 Blockly.Arduino.ir_recv_enable = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"controls_tone\"") == -1 && xmlText.indexOf("type=\"controls_notone\"") == -1) {
         this.setWarningText(null);
@@ -98,7 +98,7 @@ Blockly.Arduino.ir_send_nec = function () {
 }
 
 Blockly.Arduino.ir_recv_raw = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"controls_tone\"") == -1 && xmlText.indexOf("type=\"controls_notone\"") == -1) {
         this.setWarningText(null);

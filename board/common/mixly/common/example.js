@@ -126,7 +126,7 @@ Mixly.Example.prototype.updateCode = (extname, data) => {
                 Editor.items.vDrag.full('POSITIVE');
             }
             MFile.parseMix($(data), false, false, (message) => {
-                Blockly.mainWorkspace.scrollCenter();
+                Editor.blockEditor.scrollCenter();
                 Blockly.hideChaff();
             });
             break;

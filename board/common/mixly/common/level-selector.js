@@ -1,10 +1,10 @@
 (() => {
 
 goog.require('layui');
-goog.require('Mixly');
+goog.require('Mixly.Editor');
 goog.provide('Mixly.LevelSelector');
 
-const { LevelSelector } = Mixly;
+const { Editor, LevelSelector } = Mixly;
 
 const { form } = layui;
 
@@ -74,12 +74,12 @@ LevelSelector.xmlToWorkspace = (level) => {
     }
     const xmlStr =  LevelSelector.XML_STR[--level];
     try {
-        Blockly.mainWorkspace.clear();
+        Editor.blockEditor.clear();
         const xmlDom = Blockly.Xml.textToDom(xmlStr);
-        Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
-        Blockly.mainWorkspace.scrollCenter();
+        Blockly.Xml.domToWorkspace(xmlDom, Editor.blockEditor);
+        Editor.blockEditor.scrollCenter();
     } catch (e) {
-        Blockly.mainWorkspace.clear();
+        Editor.blockEditor.clear();
         console.log(e);
     }
 }

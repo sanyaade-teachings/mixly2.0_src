@@ -84,7 +84,7 @@ File.parseData = (ext, text) => {
                             // console.log('一些块已被忽略');
                             break;
                     }
-                    Blockly.mainWorkspace.scrollCenter();
+                    Editor.blockEditor.scrollCenter();
                     Blockly.hideChaff();
                 }
             });

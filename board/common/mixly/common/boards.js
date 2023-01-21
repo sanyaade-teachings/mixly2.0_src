@@ -9,6 +9,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.ToolboxSearcher');
 goog.require('Mixly.Modules');
 goog.require('Mixly.MString');
+goog.require('Mixly.Editor');
 goog.provide('Mixly.Boards');
 
 const {
@@ -19,6 +20,7 @@ const {
     ToolboxSearcher,
     Modules,
     MString,
+    Editor,
     Boards
 } = Mixly;
 
@@ -467,10 +469,10 @@ Boards.updateCategories = (boardName, enforce = false) => {
         categoriesDom[i].setAttribute('toolboxitemid', categoriesDom[i].id);
     }
     Code.initLanguage(false);
-    if (Blockly.mainWorkspace) {
-        Blockly.mainWorkspace.updateToolbox(toolboxDom[0]);
+    if (Editor.blockEditor) {
+        Editor.blockEditor.updateToolbox(toolboxDom[0]);
         ToolboxSearcher.restart();
-        Blockly.mainWorkspace.scrollCenter();
+        Editor.blockEditor.scrollCenter();
         Blockly.hideChaff();
     }
 }

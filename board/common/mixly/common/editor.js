@@ -4,14 +4,12 @@ goog.require('Blockly');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
 goog.require('Mixly.XML');
-goog.require('Mixly.Boards');
 goog.provide('Mixly.Editor');
 
 const {
     Config,
     Nav,
     XML,
-    Boards,
     Editor
 } = Mixly;
 
@@ -63,7 +61,16 @@ Editor.init = () => {
     }
     //实时更新右侧对比代码
     Editor.codeChangeEvent = blockEditor.addChangeListener(codeChangeEvent);
-    function codeChangeEvent(masterEvent) {
+    function getboardType () {
+        let str = BOARD.boardIndex ?? '';
+        str = str.replaceAll('\\', '/');
+        if (BOARD.thirdPartyBoard) {
+            return str.match(/(?<=board\/ThirdParty\/)[^?\/\\、*\"><|]+/g)[0];
+        } else {
+            return str.match(/(?<=board\/)[^?\/\\、*\"><|]+/g)[0];
+        }
+    }
+    function codeChangeEvent (masterEvent) {
         if (masterEvent.type === Blockly.Events.UI || Editor.selected !== 'BLOCK') {
            return;  // Don't update UI events.
         }
@@ -85,8 +92,8 @@ Editor.init = () => {
             } catch (e) {
                 console.log(e);
             }
-        } else if (Boards.getType() === 'python_skulpt_mixtoy'
-                || Boards.getType() === 'python_skulpt_car') {
+        } else if (getboardType() === 'python_skulpt_mixtoy'
+                || getboardType() === 'python_skulpt_car') {
             if ((code.indexOf("import blocktool")!=-1)||(code.indexOf("import blocklygame")!=-1)||(code.indexOf("from blocklygame import")!=-1)){
                 //正则匹配替换block id元素
                 var code_piece=[];
@@ -123,7 +130,7 @@ Editor.init = () => {
 }
 
 Editor.blockEditorInit = () => {
-    const mediaPath = Config.pathPrefix + 'common/media/';
+    const media = Config.pathPrefix + 'common/media/';
     const toolbox = $('#toolbox')[0];
     const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
     const grid = USER.blocklyShowGrid ==='yes' ? {
@@ -133,7 +140,7 @@ Editor.blockEditorInit = () => {
             snap: true
         } : {};
     Editor.blockEditor = Blockly.inject($('#' + Editor.DIV_NAME.BLOCK)[0], {
-        media: mediaPath,
+        media,
         toolbox,
         renderer,
         zoom: {

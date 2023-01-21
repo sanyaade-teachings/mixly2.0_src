@@ -341,7 +341,7 @@ PyEngine.prototype.run = function(type) {
             </div>`
       ));
     }
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var data = Blockly.Xml.domToText(xml);
     if (document.getElementById("boardSelector").value == ""){
         var fn = 'filename.xml'

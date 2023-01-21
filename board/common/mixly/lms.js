@@ -15,7 +15,7 @@ function save2moodle() {
   	 console.log(data)
   	 console.log(type);
   //	if(data==null){
-      	  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      	  var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
          data = Blockly.Xml.domToText(xml);
         	 console.log(data)
     		type='xml';
@@ -74,9 +74,9 @@ var type='xml';
                     if(result==''){
 						return;	
 				}else{
-					var count = Blockly.mainWorkspace.getAllBlocks().length;
+					var count = Mixly.Editor.blockEditor.getAllBlocks().length;
 		      if (count){
-						Blockly.mainWorkspace.clear();
+						Mixly.Editor.blockEditor.clear();
 					}
 type=result.substr(0,3)
 data=result.substr(3); 
@@ -112,9 +112,9 @@ var selectFile = document.getElementById('select_file');
 //	$("#select_file").change(parseInputXMLfile);
   }
   selectFile.click();
-	//	      var count = Blockly.mainWorkspace.getAllBlocks().length;
+	//	      var count = Mixly.Editor.blockEditor.getAllBlocks().length;
 	//	      if (count) {// && confirm('Replace existing blocks?\n"Cancel" will merge.')
-	//	        Blockly.mainWorkspace.clear();
+	//	        Mixly.Editor.blockEditor.clear();
 	//	      }
 	  }); 
      

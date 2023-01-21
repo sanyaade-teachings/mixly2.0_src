@@ -1,11 +1,11 @@
 (() => {
 
+goog.require('Code');
+goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Command');
 goog.require('Mixly.XML');
-goog.require('Code');
-goog.require('layui');
 goog.provide('Mixly.Nav');
 
 const {

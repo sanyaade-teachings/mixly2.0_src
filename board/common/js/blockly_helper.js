@@ -18,7 +18,7 @@ function runJS() {
  * Backup code blocks to localStorage.
  */
 function backup_blocks() {
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     xml = Blockly.Xml.domToText(xml);
     var mixlyVersion = "Mixly 2.0";
     if (Mixly.Config.SOFTWARE?.version) {
@@ -53,7 +53,7 @@ function clear_blocks_from_storage() {
             if ('localStorage' in window && window['localStorage'] != null && window.localStorage[Mixly.Config.BOARD.boardType]) {
                 window.localStorage.removeItem(Mixly.Config.BOARD.boardType);
             }
-            Blockly.mainWorkspace.clear();
+            Mixly.Editor.blockEditor.clear();
             clearInterval(itl);
         }
     }, 200);
@@ -98,10 +98,10 @@ function restore_blocks() {
                 Boards.setSelectedBoard(boardName);
                 profile['default'] = profile[boardName] ?? profile['default'];
             }
-            Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
-            Blockly.mainWorkspace.scrollCenter();
+            Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
+            Mixly.Editor.blockEditor.scrollCenter();
         } catch (e) {
-            Blockly.mainWorkspace.clear();
+            Mixly.Editor.blockEditor.clear();
             console.log(e);
             clear_blocks_from_storage();
         }
@@ -139,7 +139,7 @@ function restore_blocks() {
  * better include Blob and FileSaver for browser compatibility
  */
 function save() {
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var data = Blockly.Xml.domToText(xml);
 
     // Store data in blob.
@@ -181,12 +181,12 @@ function load(event) {
                 alert('Error parsing XML:\n' + e);
                 return;
             }
-            var count = Blockly.mainWorkspace.getAllBlocks().length;
+            var count = Mixly.Editor.blockEditor.getAllBlocks().length;
             if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
-                Blockly.mainWorkspace.clear();
+                Mixly.Editor.blockEditor.clear();
             }
-            Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
-            Blockly.mainWorkspace.scrollCenter();
+            Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
+            Mixly.Editor.blockEditor.scrollCenter();
         }
         // Reset value of input after loading because Chrome will not fire
         // a 'change' event if the same file is loaded again.
@@ -199,9 +199,9 @@ function load(event) {
  * Discard all blocks from the workspace.
  */
 function discard() {
-    var count = Blockly.mainWorkspace.getAllBlocks().length;
+    var count = Mixly.Editor.blockEditor.getAllBlocks().length;
     if (count < 2 || window.confirm('Delete all ' + count + ' blocks?')) {
-        Blockly.mainWorkspace.clear();
+        Mixly.Editor.blockEditor.clear();
     }
 }
 
@@ -217,7 +217,7 @@ function auto_save_and_restore_blocks() {
     // tabClick(selected);
     //$('.loading').remove();
     
-    //Blockly.mainWorkspace.clear();
+    //Mixly.Editor.blockEditor.clear();
     // Init load event.
     //var loadInput = document.getElementById('load');
     //loadInput.addEventListener('change', load, false);
@@ -271,12 +271,12 @@ function onSuccess() {
                 alert('Error parsing XML:\n' + e);
                 return;
             }
-            var count = Blockly.mainWorkspace.getAllBlocks().length;
+            var count = Mixly.Editor.blockEditor.getAllBlocks().length;
             if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
-                Blockly.mainWorkspace.clear();
+                Mixly.Editor.blockEditor.clear();
             }
-            Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
-            Blockly.mainWorkspace.scrollCenter();
+            Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
+            Mixly.Editor.blockEditor.scrollCenter();
         } else {
             //alert("Server error");
         }
@@ -399,7 +399,7 @@ mixlyjs.createFn = function () {
  *clear the mainWorkSpace 
  */
 mixlyjs.discardAllBlocks = function () {
-    Blockly.mainWorkspace.clear();
+    Mixly.Editor.blockEditor.clear();
 };
 
 mixlyjs.operateModal = function (action) {
@@ -523,24 +523,24 @@ mixlyjs.renderXml = function (xmlContent) {
     }
     try {
         var xml = Blockly.Xml.textToDom(xmlContent);
-        Blockly.mainWorkspace.clear();
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-        Blockly.mainWorkspace.scrollCenter();
+        Mixly.Editor.blockEditor.clear();
+        Blockly.Xml.domToWorkspace(Mixly.Editor.blockEditor, xml);
+        Mixly.Editor.blockEditor.scrollCenter();
         Blockly.hideChaff();
     } catch (e) {
         try {
             var xml = Blockly.Xml.textToDom(xmlData);
-            Blockly.mainWorkspace.clear();
-            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-            Blockly.mainWorkspace.scrollCenter();
+            Mixly.Editor.blockEditor.clear();
+            Blockly.Xml.domToWorkspace(Mixly.Editor.blockEditor, xml);
+            Mixly.Editor.blockEditor.scrollCenter();
             Blockly.hideChaff();
         } catch (e) {
             boardType = xmlContent.match(/(?<=board[\s]*=[\s]*\")[^\n\"]+(?=\")/g);
             alert("代码面向" + boardType[0] + "板卡开发，不支持本板卡")
             var xml = Blockly.Xml.textToDom(oldBlock);
-            Blockly.mainWorkspace.clear();
-            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-            Blockly.mainWorkspace.scrollCenter();
+            Mixly.Editor.blockEditor.clear();
+            Blockly.Xml.domToWorkspace(Mixly.Editor.blockEditor, xml);
+            Mixly.Editor.blockEditor.scrollCenter();
             Blockly.hideChaff();
             editor.setValue(oldCode, -1);
             console.log(e);
@@ -815,7 +815,7 @@ mixlyjs.getCodeContent = function () {
 };
 
 mixlyjs.getXmlContent = function (xmlType) {
-    var xmlCodes = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace));
+    var xmlCodes = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor));
     var mixlyVersion = "Mixly 2.0";
     if (Mixly.Config.BOARD?.software?.version) {
         mixlyVersion = Mixly.Config.BOARD.software.version;
@@ -899,7 +899,7 @@ mixlyjs.saveBlockImg = function () {
     var scaleFactor = 2;
 
     //Any modifications are executed on a deep copy of the element
-    var cp = Blockly.mainWorkspace.svgBlockCanvas_.cloneNode(true);
+    var cp = Mixly.Editor.blockEditor.svgBlockCanvas_.cloneNode(true);
     cp.removeAttribute("width");
     cp.removeAttribute("height");
     cp.removeAttribute("transform");
@@ -937,7 +937,7 @@ mixlyjs.saveBlockImg = function () {
     cp.insertBefore(styleElem, cp.firstChild);
 
     //Creates a complete SVG document with the correct bounds (it is necessary to get the viewbox right, in the case of negative offsets)
-    var bbox = Blockly.mainWorkspace.svgBlockCanvas_.getBBox();
+    var bbox = Mixly.Editor.blockEditor.svgBlockCanvas_.getBBox();
     var xml = new XMLSerializer().serializeToString(cp);
     xml = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="' + bbox.width + '" height="' + bbox.height + '" viewBox="' + bbox.x + ' ' + bbox.y + ' ' + bbox.width + ' ' + bbox.height + '"><rect width="100%" height="100%" style="fill-opacity:0"></rect>' + xml + '</svg>';
     //If you just want the SVG then do console.log(xml)

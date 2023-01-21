@@ -68,7 +68,7 @@ function loadServer() {
     }
     $.post('../../../index/problem/code_detail',{id:id},function(result){
         if(result.code==200){
-            var count = Blockly.mainWorkspace.getAllBlocks().length;
+            var count = Mixly.Editor.blockEditor.getAllBlocks().length;
                 data=result.data; 
         }else{
             return;  
@@ -102,9 +102,9 @@ function loadServer() {
     //  $("#select_file").change(parseInputXMLfile);
         }
         selectFile.click();
-    //        var count = Blockly.mainWorkspace.getAllBlocks().length;
+    //        var count = Mixly.Editor.blockEditor.getAllBlocks().length;
     //        if (count) {// && confirm('Replace existing blocks?\n"Cancel" will merge.')
-    //          Blockly.mainWorkspace.clear();
+    //          Mixly.Editor.blockEditor.clear();
     //        }
      });
 }
@@ -277,7 +277,7 @@ function submit() {
     event_save('submit');//存储行为
     //保存文件并提交判断
     $ = layui.jquery;
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlCode = Blockly.Xml.domToText(xml);
     var pyCode = mixlyjs.getCodeContent();
     if (document.getElementById("boardSelector").value == ""){
@@ -308,7 +308,7 @@ function submit2() {
     }   
     //保存文件
     $ = layui.jquery;
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlCode = Blockly.Xml.domToText(xml);
     var pyCode = mixlyjs.getCodeContent();
     if (document.getElementById("boardSelector").value == ""){

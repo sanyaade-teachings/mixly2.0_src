@@ -309,7 +309,7 @@ PyEngine.prototype.steprun = function(type) {
             </div>`
       ));
     }
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var data = Blockly.Xml.domToText(xml);
     if (document.getElementById("boardSelector").value == ""){
         var fn = 'filename.xml'
@@ -354,7 +354,7 @@ PyEngine.prototype.steprun = function(type) {
     var code = Mixly.MFile.getCode();
     //如果存在游戏模块，则只能读取模块代码
     /*if ((code.indexOf("import blocklygame")!=-1)||(code.indexOf("from blocklygame import")!=-1)){
-        code = Blockly.Python.workspaceToCode(Blockly.mainWorkspace) || '';//code
+        code = Blockly.Python.workspaceToCode(Mixly.Editor.blockEditor) || '';//code
         code+="\nprint(blocklygame.getFinishState())"
     }*/
 
@@ -559,7 +559,7 @@ PyEngine.prototype.steprun = function(type) {
             </div>`
       ));
     }
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var data = Blockly.Xml.domToText(xml);
     if (document.getElementById("boardSelector").value == ""){
         var fn = 'filename.xml'
@@ -614,7 +614,7 @@ PyEngine.prototype.steprun = function(type) {
     }
     //如果存在游戏模块，则只能读取模块代码
     /*if ((code.indexOf("import blocklygame")!=-1)||(code.indexOf("from blocklygame import")!=-1)){
-        code = Blockly.Python.workspaceToCode(Blockly.mainWorkspace) || '';//code
+        code = Blockly.Python.workspaceToCode(Mixly.Editor.blockEditor) || '';//code
         code+="\nprint(blocklygame.getFinishState())"
     }*/
     //改为只读区代码区的代码，这样就能够消除高亮执行
@@ -818,7 +818,7 @@ PyEngine.prototype.steprun = function(type) {
 
 //提交代码：先运行代码，返回运行结果，然后提交
 PyEngine.prototype.run2 = function(type) {
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var data = Blockly.Xml.domToText(xml);
     if (document.getElementById("boardSelector").value == ""){
         var fn = 'filename.xml'
@@ -867,7 +867,7 @@ PyEngine.prototype.run2 = function(type) {
     var code = Mixly.MFile.getCode();
     //如果存在游戏模块，则只能读取模块代码
     /*if ((code.indexOf("import blocklygame")!=-1)||(code.indexOf("from blocklygame import")!=-1)){
-        code = Blockly.Python.workspaceToCode(Blockly.mainWorkspace) || '';//code
+        code = Blockly.Python.workspaceToCode(Mixly.Editor.blockEditor) || '';//code
         code+="\nprint(blocklygame.getFinishState())"
     }*/
     //改为只读区代码区的代码，这样就能够消除高亮执行

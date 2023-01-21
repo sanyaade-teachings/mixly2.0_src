@@ -706,7 +706,8 @@
                 "Mixly.Env",
                 "Mixly.ToolboxSearcher",
                 "Mixly.Modules",
-                "Mixly.MString"
+                "Mixly.MString",
+                "Mixly.Editor"
             ],
             "provide":[
                 "Mixly.Boards"
@@ -771,8 +772,7 @@
                 "Blockly",
                 "Mixly.Config",
                 "Mixly.Nav",
-                "Mixly.XML",
-                "Mixly.Boards"
+                "Mixly.XML"
             ],
             "provide":[
                 "Mixly.Editor"
@@ -817,7 +817,7 @@
             "path":"/common/level-selector.js",
             "require":[
                 "layui",
-                "Mixly"
+                "Mixly.Editor"
             ],
             "provide":[
                 "Mixly.LevelSelector"
@@ -928,12 +928,12 @@
         {
             "path":"/common/nav.js",
             "require":[
+                "Code",
+                "layui",
                 "Mixly.Env",
                 "Mixly.Config",
                 "Mixly.Command",
-                "Mixly.XML",
-                "Code",
-                "layui"
+                "Mixly.XML"
             ],
             "provide":[
                 "Mixly.Nav"
@@ -997,7 +997,8 @@
             "path":"/common/toolbox-searcher.js",
             "require":[
                 "Blockly",
-                "Mixly.XML"
+                "Mixly.XML",
+                "Mixly.Editor"
             ],
             "provide":[
                 "Mixly.ToolboxSearcher"

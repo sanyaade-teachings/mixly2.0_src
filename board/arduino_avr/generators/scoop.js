@@ -18,7 +18,7 @@ Blockly.Arduino['SCoopTask'] = function () {
         + '{\n'
         + statements_loop
         + '}\n';
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     var select = false;
     var data = "";

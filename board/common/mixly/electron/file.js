@@ -216,7 +216,7 @@ File.exportLib = (endFunc = () => {}) => {
 }
 
 File.newFile = () => {
-    const blocksList = Blockly.mainWorkspace.getAllBlocks();
+    const blocksList = Editor.blockEditor.getAllBlocks();
     const { blockEditor, codeEditor, selected } = Editor;
     const blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
     if (selected === 'CODE') {
@@ -301,7 +301,7 @@ File.openFile = (filePath) => {
                             // console.log('一些块已被忽略');
                             break;
                     }
-                    Blockly.mainWorkspace.scrollCenter();
+                    Editor.blockEditor.scrollCenter();
                     Blockly.hideChaff();
                     File.openedFilePath = null;
                     Title.updateTitle(Title.title);

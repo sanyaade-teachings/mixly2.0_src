@@ -679,7 +679,7 @@ var $builtinmodule = function (name) {
      //高亮辅助函数
      var highlight = function(id) {
         id=Sk.ffi.remapToJs(id)
-        Blockly.mainWorkspace.highlightBlock(id);
+        Mixly.Editor.blockEditor.highlightBlock(id);
     };
 
     /**

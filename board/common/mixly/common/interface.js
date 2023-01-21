@@ -119,21 +119,21 @@ Interface.init = () => {
     }
     NavEvents.init();
     StatusBar.init();
-    const zoomToFit = new ZoomToFitControl(Blockly.mainWorkspace);
+    const zoomToFit = new ZoomToFitControl(Editor.blockEditor);
     zoomToFit.init();
     ToolboxSearcher.init();
-    const workspaceSearch = new WorkspaceSearch(Blockly.mainWorkspace);
+    const workspaceSearch = new WorkspaceSearch(Editor.blockEditor);
     workspaceSearch.init();
-    const backpack = new Backpack(Blockly.mainWorkspace);
+    const backpack = new Backpack(Editor.blockEditor);
     backpack.init();
     if (USER.blocklyContentHighlight === 'yes') {
-        const contentHighlight = new ContentHighlight(Blockly.mainWorkspace);
+        const contentHighlight = new ContentHighlight(Editor.blockEditor);
         contentHighlight.init();
     }
     const workspaceSearchOpen = {
         displayText: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
         preconditionFn: function(scope) {
-            const blocks = Blockly.mainWorkspace.getAllBlocks();
+            const blocks = Editor.blockEditor.getAllBlocks();
             if (blocks.length)
                 return 'enabled';
             else

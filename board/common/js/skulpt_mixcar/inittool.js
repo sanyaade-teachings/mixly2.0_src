@@ -3,7 +3,7 @@ var $builtinmodule = function (name) {
 
     var highlight = function(id) {
         id=Sk.ffi.remapToJs(id)
-        Blockly.mainWorkspace.highlightBlock(id);
+        Mixly.Editor.blockEditor.highlightBlock(id);
     };
     
     var highlight_f=function(block_id) {

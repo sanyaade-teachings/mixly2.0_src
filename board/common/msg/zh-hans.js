@@ -389,6 +389,9 @@ Blockly.Msg.SATURATION = '饱和度';
 Blockly.Msg.BRIGHTNESS = '亮度';
 Blockly.Msg.EYEDROPPER = '取色器';
 
+/* Blockly.FieldDate文本翻译 */
+Blockly.Msg.TODAY = '今天';
+
 Blockly.Msg.ADD_COMMENT = "添加注释";
 Blockly.Msg.AUTH = "请授权这个应用程序以保存您的作品并共享。";
 Blockly.Msg.CHANGE_VALUE_TITLE = "更改值：";
@@ -745,7 +748,6 @@ Blockly.Msg.TEXT_TRIM_HELPURL = "https://github.com/google/blockly/wiki/Text#tri
 Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "消除两侧空格";
 Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "消除左侧空格";
 Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "消除右侧空格";
-Blockly.Msg.TODAY = "Today";  // untranslated
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "item";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "创建“设定%1”";
 Blockly.Msg.VARIABLES_GET_HELPURL = "https://github.com/google/blockly/wiki/Variables#get";  // untranslated

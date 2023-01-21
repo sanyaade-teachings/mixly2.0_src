@@ -386,6 +386,9 @@ Blockly.Msg.SATURATION = 'Saturation';
 Blockly.Msg.BRIGHTNESS = 'Brightness';
 Blockly.Msg.EYEDROPPER = 'Eyedropper';
 
+/* Blockly.FieldDate文本翻译 */
+Blockly.Msg.TODAY = 'Today';
+
 Blockly.Msg.ADD_COMMENT = "Add Comment";
 Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Change value:";
@@ -742,7 +745,6 @@ Blockly.Msg.TEXT_TRIM_HELPURL = "https://github.com/google/blockly/wiki/Text#tri
 Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "trim spaces from both sides of";
 Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "trim spaces from left side of";
 Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "trim spaces from right side of";
-Blockly.Msg.TODAY = "Today";
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "item";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "Create 'set %1'";
 Blockly.Msg.VARIABLES_GET_HELPURL = "https://github.com/google/blockly/wiki/Variables#get";

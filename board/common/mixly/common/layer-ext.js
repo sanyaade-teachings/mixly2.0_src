@@ -51,7 +51,8 @@ LayerExt.DEFAULT_CONFIG = {
     offset: 'auto',
     fixed: true,
     borderRadius: '8px',
-    maxmin: false
+    maxmin: false,
+    zIndex: 19891014
 };
 
 LayerExt.updateShade = () => {
@@ -95,7 +96,8 @@ LayerExt.open = (toolConfig) => {
         offset,
         fixed,
         borderRadius,
-        maxmin
+        maxmin,
+        zIndex
     } = toolConfig;
 
     let layerOffset = 42;
@@ -123,6 +125,7 @@ LayerExt.open = (toolConfig) => {
         fixed,
         offset,
         maxmin,
+        zIndex,
         success: function (layero, index) {
             layer.style(index, { borderRadius });
             const { max, min, success } = toolConfig;

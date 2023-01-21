@@ -91,6 +91,10 @@ Deps.DEPENDENCY = {
             "path": '/../blockly-core/field_colour_hsv_sliders.js',
             "provide": ['Blockly.FieldColourHsvSliders'],
             "require": ['Blockly']
+        }, {
+            "path": '/../blockly-core/field_date.js',
+            "provide": ['Blockly.FieldDate'],
+            "require": ['Blockly']
         }/*, {
             "path": '/../blockly-core/continuous_toolbox.js',
             "provide": ['ContinuousToolbox', 'ContinuousFlyout', 'ContinuousMetrics'],
@@ -263,6 +267,7 @@ goog.require('Blockly.FieldGridDropdown');
 goog.require('Blockly.FieldSlider');
 goog.require('Blockly.FieldBitmap');
 goog.require('Blockly.FieldColourHsvSliders');
+goog.require('Blockly.FieldDate');
 goog.require(Mixly.MIXLY_DIR_PATH + '/common/modules/select2.min.js');
 
 if (Env.isElectron) {

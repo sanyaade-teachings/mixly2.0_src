@@ -627,6 +627,8 @@ profile['arduino_esp32s3']
     Blockly.Arduino.definitions_ = Object.create(null);
     // Create a dictionary of setups to be printed before the code.
     Blockly.Arduino.setups_ = Object.create(null);
+    Blockly.Arduino.setups_begin_ = Object.create(null);
+    Blockly.Arduino.setups_end_ = Object.create(null);
     Blockly.Arduino.libs_ = Object.create(null);
     Blockly.Arduino.loops_begin_ = Object.create(null);
     Blockly.Arduino.loops_end_ = Object.create(null);
@@ -700,6 +702,13 @@ profile['arduino_esp32s3']
     for (var name in Blockly.Arduino.setups_) {
         setups.push(Blockly.Arduino.setups_[name]);
     }
+    var setupsBegin = [], setupsEnd = [];
+    for (var name in Blockly.Arduino.setups_begin_) {
+        setupsBegin.push(Blockly.Arduino.setups_begin_[name]);
+    }
+    for (var name in Blockly.Arduino.setups_end_) {
+        setupsEnd.push(Blockly.Arduino.setups_end_[name]);
+    }
 
     for (var name in Blockly.Arduino.libs_) {
         imports.push(`#include "${name}.h"`);
@@ -717,7 +726,13 @@ profile['arduino_esp32s3']
          + code
          + (loopsEnd.length? ('  ' + loopsEnd.join('\n  ')) : '')
          + '\n}';
-    var allDefs = define.join('\n') + '\n' +imports.join('\n') + '\n\n' + definitions_var.join('\n') + '\n\n' + definitions_fun.join('\n') + '\n\nvoid setup(){\n  ' + setups.join('\n  ') + '\n}' + '\n\n';
+    var allDefs = define.join('\n') + '\n' +imports.join('\n') + '\n\n' 
+                + definitions_var.join('\n')
+                + '\n\n' + definitions_fun.join('\n')
+                + '\n\nvoid setup(){\n  '
+                + setupsBegin.join('\n  ') + ((setupsBegin.length && (setupsEnd.length || setups.length)) ? '\n  ' : '')
+                + setups.join('\n  ') + ((setupsEnd.length && setups.length) ? '\n  ' : '')
+                + setupsEnd.join('\n  ') + '\n}' + '\n\n';
     return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n') + code;
 };
 

@@ -269,6 +269,7 @@ goog.require('Blockly.FieldBitmap');
 goog.require('Blockly.FieldColourHsvSliders');
 goog.require('Blockly.FieldDate');
 goog.require(Mixly.MIXLY_DIR_PATH + '/common/modules/select2.min.js');
+goog.require('XScrollbar');
 
 if (Env.isElectron) {
     goog.require('Mixly.Electron.Loader');

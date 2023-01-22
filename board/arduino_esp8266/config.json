@@ -300,7 +300,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://106.52.57.223:8300/mixly2/cloud-libraries/raw/master/cloud-libs/arduino_esp8266/libs.json"
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/arduino_esp8266/libs.json"
             ]
         }
     },

@@ -163,8 +163,9 @@ BoardManager.importBoardPackageWithConfig = (configPath) => {
                 Promise.all(copyPromiseList)
                 .then((message) => {
                     for (let j of message) {
-                        if (!j.error)
+                        if (!j.error) {
                             packagePath.push(j.endPath);
+                        }
                     }
                     resolve(packagePath);
                 })
@@ -317,7 +318,7 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
         const dirPath = path.dirname(inPath);
         const dirName = path.basename(dirPath);
         const finalDir = path.resolve(Env.thirdPartyBoardPath, './' + dirName);
-        if (dirPath !== finalDir)
+        if (dirPath !== finalDir) {
             fs_extra.ensureDir(Env.thirdPartyBoardPath)
             .then(() => {
                 return fs_extra.emptyDir(finalDir);
@@ -331,7 +332,9 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
             .then((message) => {
                 if (message) {
                     boardConfig.packagePath = message;
-                    fs_extra.writeJsonSync(path.resolve(finalDir, './config.json'), boardConfig);
+                    fs_extra.writeJsonSync(path.resolve(finalDir, './config.json'), boardConfig, {
+                        spaces: '    '
+                    });
                 }
                 return fs_extra.remove(path.resolve(finalDir, './hardware'));
             })
@@ -342,13 +345,15 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
                 console.log(error);
                 endFunc(error);
             });
-        else
+        } else {
             if (fs_extend.isdir(hardwarePath)) {
                 BoardManager.importBoardPackageWithConfig(inPath)
                 .then((message) => {
                     if (message) {
                         boardConfig.packagePath = message;
-                        fs_extra.writeJsonSync(path.resolve(finalDir, './config.json'), boardConfig);
+                        fs_extra.writeJsonSync(path.resolve(finalDir, './config.json'), boardConfig, {
+                            spaces: '    '
+                        });
                     }
                     return fs_extra.remove(path.resolve(finalDir, './hardware'));
                 })
@@ -362,6 +367,7 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
             } else {
                 endFunc(null);
             }
+        }
     } else {
         console.log(Msg.getLang('配置文件解析失败'));
         endFunc(Msg.getLang('配置文件解析失败'));
@@ -836,12 +842,25 @@ BoardManager.getThirdPartyBoardsConfig = () => {
         const nameList = fs.readdirSync(Env.thirdPartyBoardPath);
         for (let i of nameList) {
             const namePath = path.resolve(Env.thirdPartyBoardPath, './' + i);
-            if (fs_extend.isdir(namePath)) {
-                const configPath = path.resolve(namePath, './config.json');
-                const boardConfig = BoardManager.readBoardConfig(configPath);
-                if (boardConfig)
-                    thirdPartyBoardsConfig.push(boardConfig);
+            if (!fs_extend.isdir(namePath)) {
+                continue;
             }
+            const configPath = path.resolve(namePath, './config.json');
+            const boardConfig = BoardManager.readBoardConfig(configPath);
+            if (!boardConfig) {
+                continue;
+            }
+            const { boardImg = '' } = boardConfig;
+            const srcIndexDir = path.resolve(Env.indexPath, boardImg);
+            const srcThirdDir = path.resolve(namePath, boardImg);
+            const reSrcIndexDir = path.relative(Env.indexPath, srcIndexDir);
+            const reSrcThirdDir = path.relative(Env.indexPath, srcThirdDir);
+            if (fs_extend.isfile(srcIndexDir)) {
+                boardConfig.boardImg = reSrcIndexDir;
+            } else if (fs_extend.isfile(srcThirdDir)) {
+                boardConfig.boardImg = reSrcThirdDir;
+            }
+            thirdPartyBoardsConfig.push(boardConfig);
         }
     }
     return thirdPartyBoardsConfig;

@@ -95,6 +95,7 @@ ExampleExt.prototype.dataToWorkspace = function (inPath) {
     const data = fs.readFileSync(inPath, 'utf8');
     const extname = path.extname(inPath);
     this.updateCode(extname, data);
+    File.openedFilePath = null;
 }
 
 ExampleExt.prototype.getExamplesByPath = function (inPath, fileExtname) {

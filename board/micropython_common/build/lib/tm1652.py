@@ -69,13 +69,14 @@ class TM1652(framebuf.FrameBuffer):
 
 	def show(self):
 		"""Refresh the display and show the changes."""
-		self._write_cmd(_TM1652_REG_ADD)
-		for i in range(5):
-			self._write_cmd(self._buffer[i])
-		time.sleep_ms(3)
-		self._write_cmd(_TM1652_REG_CMD)
-		self._write_cmd(self._brightness)
-		time.sleep_ms(3)
+		for _ in range(2):
+			self._write_cmd(_TM1652_REG_ADD)
+			for i in range(5):
+				self._write_cmd(self._buffer[i])
+			time.sleep_ms(3)
+			self._write_cmd(_TM1652_REG_CMD)
+			self._write_cmd(self._brightness)
+			time.sleep_ms(3)
 
 	def set_buffer(self, buffer):
 		for i in range(min(len(buffer),len(self._buffer))):

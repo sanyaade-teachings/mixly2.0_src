@@ -23,6 +23,7 @@ var MSG = {
     catStorage: "存儲",
     catME_GO:"ME GO",
     catME_G1:"ME G1",
+    catPE_G1:"PE G1",
     catAIOT:"智能物聯",
     catAIsensor:"MixGo AI感測器",
     catSensor: "感測器",
@@ -1130,6 +1131,7 @@ Blockly.MIXLY_STEPPER_PIN3 = '腳位3#';
 Blockly.MIXLY_STEPPER_PIN4 = '腳位4#';
 Blockly.MIXLY_STEPSPERREVOLUTION = '設置步數';
 Blockly.MIXLY_STEPPER_SET_SPEED = '設置轉速';
+Blockly.MIXLY_STEPPER_GET_SPEED = '獲取轉速';
 Blockly.MIXLY_STEPPER_STEP = '遞增量';
 Blockly.MIXLY_ETHERNET_BEGIN = '初始化 (DHCP)';
 Blockly.MIXLY_ETHERNET = '乙太網';

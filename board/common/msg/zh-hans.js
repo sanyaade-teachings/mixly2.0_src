@@ -26,6 +26,7 @@ var MSG = {
     catStorageEEPROM: 'EEPROM',
     catME_GO:"ME GO",
     catME_G1:"ME G1",
+    catPE_G1:"PE G1",
     catAIOT:"智能物联",
     catAIsensor:"MixGo AI传感器",
     catSensor: "传感器",
@@ -1136,6 +1137,7 @@ Blockly.MIXLY_STEPPER_PIN3 = '管脚3#';
 Blockly.MIXLY_STEPPER_PIN4 = '管脚4#';
 Blockly.MIXLY_STEPSPERREVOLUTION = '设置步数';
 Blockly.MIXLY_STEPPER_SET_SPEED = '设置转速';
+Blockly.MIXLY_STEPPER_GET_SPEED = '获取转速';
 Blockly.MIXLY_STEPPER_STEP = '移动步数';
 Blockly.MIXLY_ETHERNET_BEGIN = '初始化 (DHCP)';
 Blockly.MIXLY_ETHERNET = '以太网';

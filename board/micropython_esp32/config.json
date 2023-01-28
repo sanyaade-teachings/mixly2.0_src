@@ -1,7 +1,7 @@
 {
     "board": {
         "MixGo(ESP32, 4M)": "micropython:esp32:mixgo",
-        "MixGo PE": "micropython:esp32:mixgope",
+        "MixGo PE": "micropython:esp32:mixgo_pe",
         "RoboMaster E1": "micropython:esp32:rm_e1",
         "mPython": "micropython:esp32:mpython",
         "ESP32 Generic": "micropython:esp32:generic"

@@ -39,6 +39,7 @@
   <script src="../micropython_common/blocks/ai_sensor.js"></script>
   <script src="../micropython_common/blocks/sensor_onboard.js"></script>
   <script src="../micropython_common/blocks/sensor_extern.js"></script>
+  <script src="blocks/pe_g1.js"></script>
   <script src="../micropython_common/blocks/network.js"></script>
   <script src="../micropython_common/blocks/ai.js"></script>
   <script src="../python/blocks/storage.js"></script>
@@ -70,6 +71,7 @@
   <script src="../micropython_common/generators/sensor_onboard.js"></script>
   <script src="../micropython_common/generators/sensor_extern.js"></script>
   <script src="../python/generators/storage.js"></script>
+  <script src="generators/pe_g1.js"></script>
   <script src="../micropython_common/generators/actuator_onboard.js"></script>
   <script src="../micropython_common/generators/actuator_extern.js"></script>
   <script src="../micropython_common/generators/display_onboard.js"></script>
@@ -1427,20 +1429,20 @@
       <block type="serial_readline"></block>
     </category>
     <!-- <category id="catOnBoard" name="catOnBoard" colour="65"> -->
-      <category id="catOnBoardSensor" name="catOnBoardSensor" colour="#947C54"  m-show="micropython:esp32:mixgo micropython:esp32:rm_e1 micropython:esp32:mpython">
-        <block type="sensor_mixgo_button_is_pressed">
+      <category id="catOnBoardSensor" name="catOnBoardSensor" colour="#947C54"  m-show="micropython:esp32:mixgo micropython:esp32:rm_e1 micropython:esp32:mpython micropython:esp32:mixgo_pe">
+        <block type="sensor_mixgo_button_is_pressed" m-hide="micropython:esp32:mixgo_pe">
           <value name="btn">
             <shadow type="pins_button">
             </shadow>
           </value>
         </block>
-        <block type="sensor_mixgo_button_was_pressed">
+        <block type="sensor_mixgo_button_was_pressed" m-hide="micropython:esp32:mixgo_pe">
           <value name="btn">
             <shadow type="pins_button">
             </shadow>
           </value>
         </block>
-        <block type="sensor_mixgo_button_get_presses">
+        <block type="sensor_mixgo_button_get_presses" m-hide="micropython:esp32:mixgo_pe">
           <value name="btn">
             <shadow type="pins_button">
             </shadow>
@@ -1451,7 +1453,7 @@
             </shadow>
           </value>
         </block>
-        <block type="sensor_mixgo_button_attachInterrupt">
+        <block type="sensor_mixgo_button_attachInterrupt" m-hide="micropython:esp32:mixgo_pe">
           <value name="btn">
             <shadow type="pins_button">
             </shadow>
@@ -1462,7 +1464,7 @@
             </shadow>
           </value>
         </block>
-        <block type="procedures_defnoreturn">
+        <block type="procedures_defnoreturn" m-hide="micropython:esp32:mixgo_pe">
           <mutation>
             <arg name="x"></arg>
           </mutation>
@@ -1480,6 +1482,12 @@
         <block type="sensor_mpython_pin_pressed" m-show="micropython:esp32:mpython">
           <value name="button">
             <shadow type="pins_mpython_touch">p
+            </shadow>
+          </value>
+        </block>
+        <block type="sensor_mixgoce_pin_pressed" m-show="micropython:esp32:mixgo_pe">
+          <value name="button">
+            <shadow type="number3">
             </shadow>
           </value>
         </block>
@@ -1503,7 +1511,7 @@
         <block type="sensor_mpython_qmi8658_get_gyro" m-show="micropython:esp32:mpython"></block>
         <block type="sensor_mpython_mmc5603_get_magnetic" m-show="micropython:esp32:mpython"></block>
         <block type="sensor_mpython_mmc5603_get_angle" m-show="micropython:esp32:mpython"></block>
-        <block type="onboard_RTC_set_datetime">
+        <block type="onboard_RTC_set_datetime" m-hide="micropython:esp32:mixgo_pe">
           <value name="year">
             <shadow type="math_number">
               <field name="NUM">2018</field>
@@ -1545,7 +1553,7 @@
             </shadow>
           </value>
         </block>
-        <block type="onboard_RTC_get_time"></block>
+        <block type="onboard_RTC_get_time" m-hide="micropython:esp32:mixgo_pe"></block>
       </category>
       <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"  m-show="micropython:esp32:mixgo micropython:esp32:rm_e1 micropython:esp32:mpython">
         <block type="rm_actuator_led_bright" m-show='micropython:esp32:rm_e1'>
@@ -1733,7 +1741,7 @@
         </value>
       </block>
       </category>
-      <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98'  m-show="micropython:esp32:mixgo">
+      <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-show="micropython:esp32:mixgo micropython:esp32:mixgo_pe">
         <block type="display_show_image">
         <value name="data">
           <shadow type="pins_builtinimg"></shadow>
@@ -1794,7 +1802,8 @@
           </shadow>
         </value>
       </block>
-      
+      <block type="mixgome_display_font" m-show='micropython:esp32:mixgo_pe'></block>
+      <block type="mixgome_display_image_create" m-show='micropython:esp32:mixgo_pe'></block>
       <block type="mixgo_display_image_create_new" m-show='micropython:esp32:mixgo'></block>
       <block type="display_image_builtins"></block>
 
@@ -2075,6 +2084,108 @@
         </value>
       </block>
       <block type="onboard_oled_clear"></block>
+    </category>
+    <category id="catPE_G1" colour="100" m-show='micropython:esp32:mixgo_pe'>
+      <block type="communicate_i2c_init">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">i2c_extend</field>
+          </shadow>
+        </value>
+        <value name="TX">
+          <shadow type="pins_digital_pin">
+            <field name="PIN">21</field>
+          </shadow>
+        </value>
+        <value name="RX">
+          <shadow type="pins_digital_pin">
+            <field name="PIN">22</field>
+          </shadow>
+        </value>
+        <value name="freq">
+          <shadow type="math_number">
+            <field name="NUM">400000</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="pe_g1_use_i2c_init">
+            <value name="SUB">
+              <shadow type="variables_get">
+                <field name="VAR">pe</field>
+              </shadow>
+            </value>
+            <value name="I2CSUB">
+              <shadow type="variables_get">
+                <field name="VAR">i2c_extend</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+        </block>
+      <block type="pe_g1_battery_left">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pe_g1_servo_set_angle">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>
+        <value name="NUM">
+          <shadow type="math_number">
+           <field name="NUM">100</field>
+          </shadow>
+         </value>
+       </block>
+       <block type="pe_g1_servo_get_angle">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>
+       </block>
+       <block type="pe_g1_servo_set_speed">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>
+        <value name="NUM">
+          <shadow type="math_number">
+           <field name="NUM">100</field>
+          </shadow>
+         </value>
+       </block>       
+       <block type="pe_g1_servo_get_speed">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>       
+       </block>
+      <block type="pe_g1_dc_motor">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>
+        <value name="speed">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pe_g1_dc_motor_speed">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">pe</field>
+          </shadow>
+        </value>
+      </block>
     </category>
     <category id="catIot" colour="#2FAD7A">
       <category id="catBlynk" colour="#2FAD7A">
@@ -2850,7 +2961,7 @@
         </block>
       </category>
       <category id="catI2C" colour="140">
-        <block type="communicate_i2c_onboard" m-hide='micropython:esp32:mixgope micropython:esp32:generic'></block>
+        <block type="communicate_i2c_onboard" m-hide='micropython:esp32:mixgo_pe micropython:esp32:generic'></block>
         <block type="communicate_i2c_init">
           <value name="SUB">
             <shadow type="variables_get">

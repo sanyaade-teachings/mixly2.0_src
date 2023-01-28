@@ -312,6 +312,16 @@ Blockly.Blocks['number2'] = {
 }
 };
 
+Blockly.Blocks['number3'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+    this.appendDummyInput("")
+    .appendField(new Blockly.FieldDropdown([["0", "12"], ["1", "13"],["2", "14"], ["3", "15"], ["4", "32"], ["5", "33"]]), 'op')
+    this.setOutput(true);
+    this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_HIGHLOW);
+}
+};
+
 Blockly.Blocks['sensor_mixgo_pin_near'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);

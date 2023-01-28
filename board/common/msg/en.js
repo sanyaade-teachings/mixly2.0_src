@@ -26,6 +26,7 @@ var MSG = {
     catStorageEEPROM: 'EEPROM',
     catME_GO:"ME GO",
     catME_G1:"ME G1",
+    catPE_G1:"PE G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
     catSensor: "Sensor",
@@ -1133,6 +1134,7 @@ Blockly.MIXLY_STEPPER_PIN3 = 'PIN3#';
 Blockly.MIXLY_STEPPER_PIN4 = 'PIN4#';
 Blockly.MIXLY_STEPSPERREVOLUTION = 'steps per revolution';
 Blockly.MIXLY_STEPPER_SET_SPEED = 'setSpeed';
+Blockly.MIXLY_STEPPER_GET_SPEED = 'getSpeed';
 Blockly.MIXLY_STEPPER_STEP = 'step';
 Blockly.MIXLY_ETHERNET_BEGIN = 'Begin (DHCP)';
 Blockly.MIXLY_ETHERNET = 'Ethernet';

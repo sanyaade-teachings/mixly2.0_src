@@ -256,7 +256,8 @@ Blockly.Python['mixgome_display_image_create'] = function(block) {
 
 
 Blockly.Python['mixgome_display_font'] = function(a) {
-  Blockly.Python.definitions_['import_mixgo_me_onboard_matrix'] = "from mixgo_me import onboard_matrix";
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var op = a.getFieldValue("OP");
   var code = 'onboard_matrix.font(' +  op + ')\n';  
   return code;

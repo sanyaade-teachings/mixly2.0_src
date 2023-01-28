@@ -115,15 +115,16 @@ Blockly.Python.sensor_mixgo_sound= function(){
 
 
 Blockly.Python.number1 = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version] = 'import '+version;
     var code = this.getFieldValue('op');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.number2 = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var code = this.getFieldValue('op');
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.number3 = function(){
     var code = this.getFieldValue('op');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };

@@ -3,6 +3,54 @@
         "Generic ESP8266 Module": {
             "key": "esp8266:esp8266:generic",
             "config": {
+                "xtal": [
+                    {
+                        "key": "80",
+                        "label": "80 MHz"
+                    }, {
+                        "key": "160",
+                        "label": "160 MHz"
+                    }
+                ],
+                "vt": [
+                    {
+                        "key": "flash",
+                        "label": "Flash"
+                    }, {
+                        "key": "heap",
+                        "label": "Heap"
+                    }, {
+                        "key": "iram",
+                        "label": "IRAM"
+                    }
+                ],
+                "exception": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled (new aborts on oom)"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "stacksmash": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "ssl": [
+                    {
+                        "key": "all",
+                        "label": "All SSL ciphers (most compatible)"
+                    }, {
+                        "key": "basic",
+                        "label": "Basic SSL ciphers (lower ROM use)"
+                    }
+                ],
                 "mmu": [
                     {
                         "key": "3232",
@@ -22,6 +70,27 @@
                     }, {
                         "key": "ext1024k",
                         "label": "1M External 64 MBit PSRAM"
+                    }
+                ],
+                "non32xfer": [
+                    {
+                        "key": "fast",
+                        "label": "Use pgm_read macros for IRAM/PROGMEM"
+                    }, {
+                        "key": "safe",
+                        "label": "Byte/Word access to IRAM/PROGMEM (very slow)"
+                    }
+                ],
+                "ResetMethod": [
+                    {
+                        "key": "nodemcu",
+                        "label": "dtr (aka nodemcu)"
+                    }, {
+                        "key": "ck",
+                        "label": "no dtr (aka ck)"
+                    }, {
+                        "key": "nodtr_nosync",
+                        "label": "no dtr, no_sync"
                     }
                 ],
                 "CrystalFreq": [
@@ -143,12 +212,192 @@
                         "key": "512K",
                         "label": "512KB (FS:none OTA:~246KB)"
                     }
+                ],
+                "led": [
+                    {
+                        "key": "2",
+                        "label": "2"
+                    }, {
+                        "key": "0",
+                        "label": "0"
+                    }, {
+                        "key": "1",
+                        "label": "1"
+                    }, {
+                        "key": "3",
+                        "label": "3"
+                    }, {
+                        "key": "4",
+                        "label": "4"
+                    }, {
+                        "key": "5",
+                        "label": "5"
+                    }, {
+                        "key": "6",
+                        "label": "6"
+                    }, {
+                        "key": "7",
+                        "label": "7"
+                    }, {
+                        "key": "8",
+                        "label": "8"
+                    }, {
+                        "key": "9",
+                        "label": "9"
+                    }, {
+                        "key": "10",
+                        "label": "10"
+                    }, {
+                        "key": "11",
+                        "label": "11"
+                    }, {
+                        "key": "12",
+                        "label": "12"
+                    }, {
+                        "key": "13",
+                        "label": "13"
+                    }, {
+                        "key": "14",
+                        "label": "14"
+                    }, {
+                        "key": "15",
+                        "label": "15"
+                    }, {
+                        "key": "16",
+                        "label": "16"
+                    }
+                ],
+                "sdk": [
+                    {
+                        "key": "nonosdk_190703",
+                        "label": "nonos-sdk 2.2.1+100 (190703)"
+                    }, {
+                        "key": "nonosdk_191122",
+                        "label": "nonos-sdk 2.2.1+119 (191122)"
+                    }, {
+                        "key": "nonosdk_191105",
+                        "label": "nonos-sdk 2.2.1+113 (191105)"
+                    }, {
+                        "key": "nonosdk_191024",
+                        "label": "nonos-sdk 2.2.1+111 (191024)"
+                    }, {
+                        "key": "nonosdk221",
+                        "label": "nonos-sdk 2.2.1 (legacy)"
+                    }
+                ],
+                "ip": [
+                    {
+                        "key": "lm2f",
+                        "label": "v2 Lower Memory"
+                    }, {
+                        "key": "hb2f",
+                        "label": "v2 Higher Bandwidth"
+                    }, {
+                        "key": "lm2n",
+                        "label": "v2 Lower Memory (no features)"
+                    }, {
+                        "key": "hb2n",
+                        "label": "v2 Higher Bandwidth (no features)"
+                    }, {
+                        "key": "lm6f",
+                        "label": "v2 IPv6 Lower Memory"
+                    }, {
+                        "key": "hb6f",
+                        "label": "v2 IPv6 Higher Bandwidth"
+                    }
+                ],
+                "dbg": [
+                    {
+                        "key": "Disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "Serial",
+                        "label": "Serial"
+                    }, {
+                        "key": "Serial1",
+                        "label": "Serial1"
+                    }
+                ],
+                "wipe": [
+                    {
+                        "key": "none",
+                        "label": "Only Sketch"
+                    }, {
+                        "key": "sdk",
+                        "label": "Sketch + WiFi Settings"
+                    }, {
+                        "key": "all",
+                        "label": "All Flash Contents"
+                    }
+                ],
+                "baud": [
+                    {
+                        "key": "115200",
+                        "label": "115200"
+                    }, {
+                        "key": "57600",
+                        "label": "57600"
+                    }, {
+                        "key": "921600",
+                        "label": "921600"
+                    }, {
+                        "key": "3000000",
+                        "label": "3000000"
+                    }
                 ]
             }
         },
         "NodeMCU 0.9 (ESP-12 Module)": {
             "key": "esp8266:esp8266:nodemcu",
             "config": {
+                "xtal": [
+                    {
+                        "key": "80",
+                        "label": "80 MHz"
+                    }, {
+                        "key": "160",
+                        "label": "160 MHz"
+                    }
+                ],
+                "vt": [
+                    {
+                        "key": "flash",
+                        "label": "Flash"
+                    }, {
+                        "key": "heap",
+                        "label": "Heap"
+                    }, {
+                        "key": "iram",
+                        "label": "IRAM"
+                    }
+                ],
+                "exception": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled (new aborts on oom)"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "stacksmash": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "ssl": [
+                    {
+                        "key": "all",
+                        "label": "All SSL ciphers (most compatible)"
+                    }, {
+                        "key": "basic",
+                        "label": "Basic SSL ciphers (lower ROM use)"
+                    }
+                ],
                 "mmu": [
                     {
                         "key": "3232",
@@ -170,6 +419,15 @@
                         "label": "1M External 64 MBit PSRAM"
                     }
                 ],
+                "non32xfer": [
+                    {
+                        "key": "fast",
+                        "label": "Use pgm_read macros for IRAM/PROGMEM"
+                    }, {
+                        "key": "safe",
+                        "label": "Byte/Word access to IRAM/PROGMEM (very slow)"
+                    }
+                ],
                 "eesz": [
                     {
                         "key": "4M2M",
@@ -183,6 +441,66 @@
                     }, {
                         "key": "4M",
                         "label": "4MB (FS:none OTA:~1019KB)"
+                    }
+                ],
+                "ip": [
+                    {
+                        "key": "lm2f",
+                        "label": "v2 Lower Memory"
+                    }, {
+                        "key": "hb2f",
+                        "label": "v2 Higher Bandwidth"
+                    }, {
+                        "key": "lm2n",
+                        "label": "v2 Lower Memory (no features)"
+                    }, {
+                        "key": "hb2n",
+                        "label": "v2 Higher Bandwidth (no features)"
+                    }, {
+                        "key": "lm6f",
+                        "label": "v2 IPv6 Lower Memory"
+                    }, {
+                        "key": "hb6f",
+                        "label": "v2 IPv6 Higher Bandwidth"
+                    }
+                ],
+                "dbg": [
+                    {
+                        "key": "Disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "Serial",
+                        "label": "Serial"
+                    }, {
+                        "key": "Serial1",
+                        "label": "Serial1"
+                    }
+                ],
+                "wipe": [
+                    {
+                        "key": "none",
+                        "label": "Only Sketch"
+                    }, {
+                        "key": "sdk",
+                        "label": "Sketch + WiFi Settings"
+                    }, {
+                        "key": "all",
+                        "label": "All Flash Contents"
+                    }
+                ],
+                "baud": [
+                    {
+                        "key": "115200",
+                        "label": "115200"
+                    }, {
+                        "key": "57600",
+                        "label": "57600"
+                    }, {
+                        "key": "921600",
+                        "label": "921600"
+                    }, {
+                        "key": "3000000",
+                        "label": "3000000"
                     }
                 ]
             }
@@ -190,6 +508,54 @@
         "NodeMCU 1.0 (ESP-12E Module)": {
             "key": "esp8266:esp8266:nodemcuv2",
             "config": {
+                "xtal": [
+                    {
+                        "key": "80",
+                        "label": "80 MHz"
+                    }, {
+                        "key": "160",
+                        "label": "160 MHz"
+                    }
+                ],
+                "vt": [
+                    {
+                        "key": "flash",
+                        "label": "Flash"
+                    }, {
+                        "key": "heap",
+                        "label": "Heap"
+                    }, {
+                        "key": "iram",
+                        "label": "IRAM"
+                    }
+                ],
+                "exception": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled (new aborts on oom)"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "stacksmash": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "ssl": [
+                    {
+                        "key": "all",
+                        "label": "All SSL ciphers (most compatible)"
+                    }, {
+                        "key": "basic",
+                        "label": "Basic SSL ciphers (lower ROM use)"
+                    }
+                ],
                 "mmu": [
                     {
                         "key": "3232",
@@ -211,6 +577,15 @@
                         "label": "1M External 64 MBit PSRAM"
                     }
                 ],
+                "non32xfer": [
+                    {
+                        "key": "fast",
+                        "label": "Use pgm_read macros for IRAM/PROGMEM"
+                    }, {
+                        "key": "safe",
+                        "label": "Byte/Word access to IRAM/PROGMEM (very slow)"
+                    }
+                ],
                 "eesz": [
                     {
                         "key": "4M2M",
@@ -224,6 +599,75 @@
                     }, {
                         "key": "4M",
                         "label": "4MB (FS:none OTA:~1019KB)"
+                    }
+                ],
+                "led": [
+                    {
+                        "key": "2",
+                        "label": "2"
+                    }, {
+                        "key": "16",
+                        "label": "16"
+                    }
+                ],
+                "ip": [
+                    {
+                        "key": "lm2f",
+                        "label": "v2 Lower Memory"
+                    }, {
+                        "key": "hb2f",
+                        "label": "v2 Higher Bandwidth"
+                    }, {
+                        "key": "lm2n",
+                        "label": "v2 Lower Memory (no features)"
+                    }, {
+                        "key": "hb2n",
+                        "label": "v2 Higher Bandwidth (no features)"
+                    }, {
+                        "key": "lm6f",
+                        "label": "v2 IPv6 Lower Memory"
+                    }, {
+                        "key": "hb6f",
+                        "label": "v2 IPv6 Higher Bandwidth"
+                    }
+                ],
+                "dbg": [
+                    {
+                        "key": "Disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "Serial",
+                        "label": "Serial"
+                    }, {
+                        "key": "Serial1",
+                        "label": "Serial1"
+                    }
+                ],
+                "wipe": [
+                    {
+                        "key": "none",
+                        "label": "Only Sketch"
+                    }, {
+                        "key": "sdk",
+                        "label": "Sketch + WiFi Settings"
+                    }, {
+                        "key": "all",
+                        "label": "All Flash Contents"
+                    }
+                ],
+                "baud": [
+                    {
+                        "key": "115200",
+                        "label": "115200"
+                    }, {
+                        "key": "57600",
+                        "label": "57600"
+                    }, {
+                        "key": "921600",
+                        "label": "921600"
+                    }, {
+                        "key": "3000000",
+                        "label": "3000000"
                     }
                 ]
             }
@@ -231,6 +675,54 @@
         "WeMos D1 R1": {
             "key": "esp8266:esp8266:d1",
             "config": {
+                "xtal": [
+                    {
+                        "key": "80",
+                        "label": "80 MHz"
+                    }, {
+                        "key": "160",
+                        "label": "160 MHz"
+                    }
+                ],
+                "vt": [
+                    {
+                        "key": "flash",
+                        "label": "Flash"
+                    }, {
+                        "key": "heap",
+                        "label": "Heap"
+                    }, {
+                        "key": "iram",
+                        "label": "IRAM"
+                    }
+                ],
+                "exception": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled (new aborts on oom)"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "stacksmash": [
+                    {
+                        "key": "disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "enabled",
+                        "label": "Enabled"
+                    }
+                ],
+                "ssl": [
+                    {
+                        "key": "all",
+                        "label": "All SSL ciphers (most compatible)"
+                    }, {
+                        "key": "basic",
+                        "label": "Basic SSL ciphers (lower ROM use)"
+                    }
+                ],
                 "mmu": [
                     {
                         "key": "3232",
@@ -265,6 +757,66 @@
                     }, {
                         "key": "4M",
                         "label": "4MB (FS:none OTA:~1019KB)"
+                    }
+                ],
+                "ip": [
+                    {
+                        "key": "lm2f",
+                        "label": "v2 Lower Memory"
+                    }, {
+                        "key": "hb2f",
+                        "label": "v2 Higher Bandwidth"
+                    }, {
+                        "key": "lm2n",
+                        "label": "v2 Lower Memory (no features)"
+                    }, {
+                        "key": "hb2n",
+                        "label": "v2 Higher Bandwidth (no features)"
+                    }, {
+                        "key": "lm6f",
+                        "label": "v2 IPv6 Lower Memory"
+                    }, {
+                        "key": "hb6f",
+                        "label": "v2 IPv6 Higher Bandwidth"
+                    }
+                ],
+                "dbg": [
+                    {
+                        "key": "Disabled",
+                        "label": "Disabled"
+                    }, {
+                        "key": "Serial",
+                        "label": "Serial"
+                    }, {
+                        "key": "Serial1",
+                        "label": "Serial1"
+                    }
+                ],
+                "wipe": [
+                    {
+                        "key": "none",
+                        "label": "Only Sketch"
+                    }, {
+                        "key": "sdk",
+                        "label": "Sketch + WiFi Settings"
+                    }, {
+                        "key": "all",
+                        "label": "All Flash Contents"
+                    }
+                ],
+                "baud": [
+                    {
+                        "key": "115200",
+                        "label": "115200"
+                    }, {
+                        "key": "57600",
+                        "label": "57600"
+                    }, {
+                        "key": "921600",
+                        "label": "921600"
+                    }, {
+                        "key": "3000000",
+                        "label": "3000000"
                     }
                 ]
             }

@@ -316,11 +316,32 @@ Blockly.Blocks['number3'] = {
    init: function() {
     this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
     this.appendDummyInput("")
-    .appendField(new Blockly.FieldDropdown([["0", "12"], ["1", "13"],["2", "14"], ["3", "15"], ["4", "32"], ["5", "33"]]), 'op')
+    .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_UP, "12"],[Blockly.MIXLY_DOWN, "14"], [Blockly.MIXLY_LEFT, "13"], [Blockly.MIXLY_RIGHT, "15"], ["A", "32"], ["B", "33"]]), 'op')
     this.setOutput(true);
     this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_HIGHLOW);
 }
 };
+
+Blockly.Blocks['number4'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+    this.appendDummyInput("")
+    .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"],["2", "2"], ["3", "3"], ["4", "4"]]), 'op')
+    this.setOutput(true);
+    this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_HIGHLOW);
+}
+};
+
+Blockly.Blocks['number5'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+    this.appendDummyInput("")
+    .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"],["2", "2"], ["3", "3"]]), 'op')
+    this.setOutput(true);
+    this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_HIGHLOW);
+}
+};
+
 
 Blockly.Blocks['sensor_mixgo_pin_near'] = {
     init: function(){

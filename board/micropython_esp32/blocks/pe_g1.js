@@ -90,8 +90,6 @@ Blockly.Blocks.pe_g1_dc_motor_speed = {
             ]), "wheel");
       this.appendDummyInput()          
           .appendField(Blockly.MIXLY_STEPPER_GET_SPEED);
-      this.appendDummyInput("")
-          .appendField("(%)")    
       this.setOutput(true,Number);
       this.setInputsInline(true);
     }
@@ -159,7 +157,6 @@ Blockly.Blocks.pe_g1_servo_get_angle = {
             .setCheck("var");
         this.appendDummyInput()
             .appendField('180°'+Blockly.MIXLY_SERVO)
-            .appendField(Blockly.LCD_NUMBERING)
             .appendField(new Blockly.FieldDropdown([
             ["0", "0"],
             ["1", "1"],

@@ -13,7 +13,7 @@
         "micropython:esp32:mixgo": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixGo-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
-        "micropython:esp32:mixgope": {
+        "micropython:esp32:mixgo_pe": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixGo_PE-0x1000-V1.19.1.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32:generic": {
@@ -96,7 +96,7 @@
                     }
                 ]
             },
-            "micropython:esp32:mixgope": {
+            "micropython:esp32:mixgo_pe": {
                 "binFile": [
                     {
                         "offset": "0x1000",

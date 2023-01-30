@@ -805,7 +805,6 @@
             "path":"/common/layer-ext.js",
             "require":[
                 "layui",
-                "Mixly.Env",
                 "Mixly.DomOperator",
                 "Mixly.Config"
             ],

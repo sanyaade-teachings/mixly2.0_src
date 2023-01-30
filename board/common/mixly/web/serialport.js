@@ -13,6 +13,7 @@ SerialPort.outputBuffer = [];
 SerialPort.refreshInputBuffer = false;
 SerialPort.refreshOutputBuffer = true;
 SerialPort.obj = null;
+SerialPort.onDataLine = null;
 
 SerialPort.encoder = new TextEncoder();
 SerialPort.decoder = new TextDecoder();
@@ -30,6 +31,7 @@ SerialPort.connect = (baud = 115200, onDataLine = (message) => {}) => {
         })
         .then(() => {
             SerialPort.keepReading = true;
+            SerialPort.onDataLine = onDataLine;
             SerialPort.addReadEvent(onDataLine);
             resolve();
         })
@@ -243,8 +245,14 @@ SerialPort.writeCtrlD = async () => {
     await SerialPort.writeByteArr([3, 4]);
 }
 
-SerialPort.setBaudRate = (baud) => {
-    SerialPort.obj.baudRate = baud;
+SerialPort.setBaudRate = async (baud) => {
+    SerialPort.keepReading = false;
+    const serialObj = SerialPort.obj;
+    await SerialPort.close();
+    await serialObj.open({ baudRate: baud - 0 });
+    SerialPort.obj = serialObj;
+    SerialPort.keepReading = true;
+    SerialPort.addReadEvent(SerialPort.onDataLine);
 }
 
 SerialPort.setDTR = async (value) => {

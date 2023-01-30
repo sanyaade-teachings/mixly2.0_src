@@ -132,6 +132,10 @@ BU.burnByUSB = () => {
             layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
         }
+        let portObj = Serial.portsOperator[portName];
+        const { toolConfig, serialport } = portObj;
+        toolConfig.baudRates = 115200;
+        await serialport.setBaudRate(toolConfig.baudRates);
         const { web } = SELECTED_BOARD;
         const { burn } = web;
         const hexStr = Mixly.get(burn.filePath);
@@ -202,6 +206,10 @@ BU.burnWithEsptool = () => {
             layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
         }
+        let portObj = Serial.portsOperator[portName];
+        const { toolConfig, serialport } = portObj;
+        toolConfig.baudRates = 115200;
+        await serialport.setBaudRate(toolConfig.baudRates);
         const { web } = SELECTED_BOARD;
         const { burn } = web;
         StatusBar.setValue(indexText["固件读取中"] + "...");
@@ -400,7 +408,9 @@ BU.uploadByPort = (port) => {
             return;
         }
         const portObj = Serial.portsOperator[port];
-        const { serialport } = portObj;
+        const { serialport, toolConfig } = portObj;
+        toolConfig.baudRates = 115200;
+        await serialport.setBaudRate(toolConfig.baudRates);
         BU.burning = false;
         BU.uploading = true;
         StatusBar.setValue(indexText['上传中'] + '...\n');
@@ -466,6 +476,11 @@ function hexToBuf (hex) {
 }
 
 BU.uploadWithEsptool = async (endType, obj, layerType) => {
+    const portName = 'web-serial';
+    const portObj = Serial.portsOperator[portName];
+    const { serialport, toolConfig } = portObj;
+    toolConfig.baudRates = 115200;
+    await serialport.setBaudRate(toolConfig.baudRates);
     let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
         StatusBar.addValue(indexText["固件获取失败"] + "！\n");
@@ -504,6 +519,8 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         layer.close(layerType);
         layer.msg(indexText['上传成功'], { time: 1000 });
         StatusBar.addValue(`==${indexText['上传成功']}==\n`);
+        Serial.reset(portName);
+        StatusBarPort.tabChange(portName);
     } catch (error) {
         console.log(error);
         layer.close(layerType);

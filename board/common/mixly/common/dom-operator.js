@@ -27,9 +27,8 @@ const {SerialDom} = DomOperator;
 
 // 串口工具
 class SerialDomGenerator {
-    constructor(serialConfig, shade, lang, type = 1) {
+    constructor(serialConfig, shade, lang) {
         this.mark = SerialDom.getTimes();
-        this.type = type;
         this.id = this.getId();
         this.filter = this.getFilter();
         this.lang = lang;
@@ -185,7 +184,7 @@ class SerialDomGenerator {
                     spellcheck="false"
                     placeholder="${indexText['串口输出']}"
                     class="layui-textarea"
-                    style="height:${this.type || Env.hasSocketServer ? '220px' : '320px'}"
+                    style="height: 220px;"
                 ></textarea>
             </div>
         </div>`;
@@ -265,7 +264,7 @@ class SerialDomGenerator {
             </ul>
             <div class="layui-tab-content" style="position: absolute;left: 0px;top: 40px;bottom: 10px;right: 0px;overflow: auto;padding-bottom: 0px;">
                 <div class="layui-tab-item layui-show">
-                    ${this.type || Env.hasSocketServer ? selectPortDivStr : ""}
+                    ${selectPortDivStr}
                     ${sendDivStr}
                     ${receiveDivStr}
                     ${ctrlBtnDivStr}

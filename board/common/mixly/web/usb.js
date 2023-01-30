@@ -14,6 +14,7 @@ USB.encoder = new TextEncoder();
 USB.decoder = new TextDecoder();
 
 USB.obj = null;
+USB.onDataLine = null;
 
 USB.connect = (baud = 115200, onDataLine = (message) => {}) => {
     return new Promise((resolve, reject) => {
@@ -34,6 +35,7 @@ USB.connect = (baud = 115200, onDataLine = (message) => {}) => {
             return USB.setBaudRate(baud);
         })
         .then(() => {
+            USB.onDataLine = onDataLine;
             USB.addReadEvent(onDataLine);
             resolve();
         })

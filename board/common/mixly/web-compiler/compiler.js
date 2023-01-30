@@ -110,7 +110,8 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
         operate
     };
     let commandStr = Compiler.URL + '/?' + Url.jsonToUrl(command);
-    StatusBar.setValue('send -> ' + commandStr + '\n');
+    // StatusBar.setValue('send -> ' + commandStr + '\n');
+    StatusBar.setValue(indexText['编译中'] + '...\n');
     console.log('send -> ', commandStr);
     const compileLayer = layer.open({
         type: 1,

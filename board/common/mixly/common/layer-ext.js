@@ -1,13 +1,11 @@
 (() => {
 
 goog.require('layui');
-goog.require('Mixly.Env');
 goog.require('Mixly.DomOperator');
 goog.require('Mixly.Config');
 goog.provide('Mixly.LayerExt');
 
 const {
-    Env,
     LayerExt,
     Config,
     DomOperator
@@ -67,8 +65,7 @@ LayerExt.openSerialTool = (toolConfig, sucFunc, endFunc) => {
     let serialTool = new DomOperator.SerialDom.generate(
         toolConfig,
         LayerExt.SHADE_ALL,
-        Code.LANG,
-        Env.isElectron
+        Code.LANG
     );
     serialTool.open(sucFunc, endFunc);
     return serialTool;

@@ -437,7 +437,6 @@ Serial.refreshUploadPortSelectBox = (ports) => {
 
 Serial.refreshToolPortSelectBox = (ports) => {
     const { form } = layui;
-    const openedPorts = Serial.getOpenedPortsName();
     for (let i in Serial.portsOperator) {
         const { dom } = Serial.portsOperator[i];
         if (dom) {

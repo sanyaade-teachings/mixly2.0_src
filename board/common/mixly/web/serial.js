@@ -194,6 +194,21 @@ Serial.portsOperator = {};
  **/
 Serial.deadPortsOperator = {};
 
+Serial.refreshToolPortSelectBox = () => {
+    const { form } = layui;
+    for (let i in Serial.portsOperator) {
+        const { dom } = Serial.portsOperator[i];
+        if (dom) {
+            const { selectPortId } = dom.id;
+            const { formFilter } = dom.filter;
+            const selectPortDom = $('#' + selectPortId);
+            selectPortDom.empty();
+            selectPortDom.append($(`<option value="${i}" selected>${i}</option>`));
+            form.render('select', formFilter);
+        }
+    }
+}
+
 Serial.refreshPortOperator = (ports) => {
     const oldPortOperator = { ...Serial.portsOperator };
     Serial.portsOperator = {};
@@ -206,6 +221,7 @@ Serial.refreshPortOperator = (ports) => {
         } else if (Serial.deadPortsOperator[port.name]) {
             Serial.portsOperator[port.name] = { ...Serial.deadPortsOperator[port.name] };
             delete Serial.deadPortsOperator[port.name];
+            Serial.refreshToolPortSelectBox();
         } else {
             const defaultPortConfig = {
                 toolConfig: { ...Serial.TOOL_DEFAULT_CONFIG },
@@ -279,7 +295,9 @@ Serial.refreshOutputBox = (port) => {
 * @return void
 **/
 Serial.openTool = () => {
-    Serial.connect('web-' + SELECTED_BOARD.web.com, 115200, (selectedPort) => {
+    const portName = 'web-' + SELECTED_BOARD.web.com;
+    const baud = Serial.portsOperator[portName]?.toolConfig?.baudRates ?? Serial.TOOL_DEFAULT_CONFIG.baudRates;
+    Serial.connect(portName, baud, (selectedPort) => {
         if (!selectedPort) {
             layer.msg(indexText['已取消连接'], { time: 1000 });
             return;
@@ -290,6 +308,7 @@ Serial.openTool = () => {
         let successFunc = (serialDom) => {
             if (!portObj.dom)
                 portObj.dom = serialDom;
+            Serial.refreshToolPortSelectBox();
             const { selectPortId } = serialDom.id;
             portObj.toolOpened = true;
             StatusBar.show(1);
@@ -299,7 +318,7 @@ Serial.openTool = () => {
             const { tabFilter } = serialDom.filter;
             element.tabChange(tabFilter, portObj.toolConfig.tabIndex);
             Serial.refreshConnectStatus(serialDom.nowPort);
-            Serial.connect(serialDom.nowPort, baudRates ?? 9600);
+            // Serial.connect(serialDom.nowPort, baudRates ?? 9600);
         }
 
         let endFunc = (port) => {
@@ -329,17 +348,21 @@ Serial.openTool = () => {
             toolDom.open(successFunc, endFunc);
         }
 
-        /*toolDom.onClickSetDtr((port, data) => {
+        toolDom.onClickSetDtr((port, data) => {
             const newPortObj = Serial.portsOperator[port];
-            newPortObj.toolConfig.dtr = data.elem.checked;
-            Serial.updateDtrAndRts(port);
+            const { portOpened, serialport, toolConfig } = newPortObj;
+            toolConfig.dtr = data.elem.checked;
+            const { dtr, rts } = newPortObj.toolConfig;
+            portOpened && serialport.setSignals(dtr, rts);
         });
 
         toolDom.onClickSetRts((port, data) => {
             const newPortObj = Serial.portsOperator[port];
-            newPortObj.toolConfig.rts = data.elem.checked;
-            Serial.updateDtrAndRts(port);
-        });*/
+            const { portOpened, serialport, toolConfig } = newPortObj;
+            toolConfig.rts = data.elem.checked;
+            const { dtr, rts } = newPortObj.toolConfig;
+            portOpened && serialport.setSignals(dtr, rts);
+        });
 
         toolDom.onClickSendType((port, data) => {
             let { sendId } = toolDom.id;
@@ -367,13 +390,14 @@ Serial.openTool = () => {
                     Serial.connect(newPort, newPortObj.toolConfig.baudRates);
                 });
             }
-        });
+        });*/
 
         toolDom.onClickSelectBaud((port, data) => {
             const newPortObj = Serial.portsOperator[port];
-            newPortObj.toolConfig.baudRates = data.elem.value;
-            Serial.setBaudRate(port, data.elem.value)
-        });*/
+            const { portOpened, serialport, toolConfig } = newPortObj;
+            toolConfig.baudRates = data.elem.value;
+            portOpened && serialport.setBaudRate(data.elem.value - 0);
+        });
 
         toolDom.onClickTab((port, data) => {
             const newPortObj = Serial.portsOperator[port];
@@ -387,9 +411,14 @@ Serial.openTool = () => {
             }
         });
 
-        /*toolDom.onClickConnectBtn((port) => {
-            Serial.portOpenOrClose(port);
-        });*/
+        toolDom.onClickConnectBtn((port) => {
+            const newPortObj = Serial.portsOperator[port];
+            if (newPortObj.portOpened) {
+                Serial.portClose(port)
+            } else {
+                Serial.openTool();
+            }
+        });
 
         toolDom.onClickSendBtn((port) => {
             Serial.write(port, 0);
@@ -1302,7 +1331,7 @@ Serial.updateDtrAndRts = function (port) {
 Serial.reset = async function (port) {
     const newPortObj = Serial.portsOperator[port];
     const newSerialport = newPortObj.serialport;
-    const reset = SELECTED_BOARD?.upload?.reset;
+    const reset = SELECTED_BOARD?.upload?.reset || SELECTED_BOARD?.web?.upload?.reset;
     if (typeof reset !== 'object') return;
     let len = reset.length;
     for (var i = 0; i < len; i++) {

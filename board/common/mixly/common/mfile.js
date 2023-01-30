@@ -365,6 +365,7 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
         }
         endFunc();
     }
+    Drag.items.vDrag.full('POSITIVE'); // 完全显示块编辑器
     if (useIncompleteBlocks)
         endFunc('USE_INCOMPLETE_BLOCKS');
     else

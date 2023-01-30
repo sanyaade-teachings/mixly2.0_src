@@ -744,7 +744,7 @@ Blockly.Blocks.find_books_by_dichotomy = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(270);
+        this.setColour(290);
         this.setTooltip('');
         this.setHelpUrl('');
     }
@@ -760,7 +760,7 @@ Blockly.Blocks.find_books_by_sequence = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(270);
+        this.setColour(290);
         this.setTooltip('');
         this.setHelpUrl('');
     }

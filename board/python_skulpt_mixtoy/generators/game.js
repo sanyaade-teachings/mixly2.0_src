@@ -272,3 +272,37 @@ Blockly.Python.settedSimpleMap = function(block) {
   var level = this.getFieldValue('level');
   return 'blocklygame.settedSimpleMap('+level+',\'block_id=' + block.id + '\');\n';
 };
+
+Blockly.Python.find_books_by_dichotomy = function () {
+  var VALUE_INPUT_N = Blockly.Python.valueToCode(this, "N", Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.setups_["find_books_by_dichotomy"] = `
+def find_books_by_dichotomy(N):
+    counter = 0
+    left = 0
+    right = N
+    key = N
+    i = (left + right) / 2
+    while i != key:
+        counter = counter + 1
+        if i > key:
+            right = i
+        else:
+            left = i
+        i = ((left + right) + 1) / 2
+    print(counter,end ="")\n`;
+  return `find_books_by_dichotomy(${VALUE_INPUT_N})\n`;
+};
+
+Blockly.Python.find_books_by_sequence = function () {
+    var VALUE_INPUT_N = Blockly.Python.valueToCode(this, "N", Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.setups_["find_books_by_sequence"] = `
+def find_books_by_sequence(N):
+    counter = 1
+    key = N
+    i = 1
+    while i != key:
+        counter = counter + 1
+        i = i + 1
+    print(counter,end ="")\n`;
+    return `find_books_by_sequence(${VALUE_INPUT_N})\n`;
+};

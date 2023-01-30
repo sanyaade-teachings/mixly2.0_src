@@ -733,3 +733,36 @@ Blockly.Blocks['settedSimpleMap'] = {
   this.setTooltip('');
 }
 };
+
+Blockly.Blocks.find_books_by_dichotomy = {
+    init: function () {
+        this.appendValueInput("N")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_LEFT)
+            .appendField("二分法查找书籍")
+            .appendField("N");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.Blocks.find_books_by_sequence = {
+    init: function () {
+        this.appendValueInput("N")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_LEFT)
+            .appendField("顺序法查找书籍")
+            .appendField("N");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+

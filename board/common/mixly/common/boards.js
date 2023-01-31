@@ -613,7 +613,7 @@ Boards.renderConfigMenu = (optionList) => {
             anywhereClose: true,
             className: 'scrollbar1 editor-dropdown-menu board-config-menu',
             style: 'display:inline-block;box-shadow:1px 1px 30px rgb(0 0 0 / 12%);',
-            ready: function(elemPanel, elem) {
+            ready: function (elemPanel, elem) {
                 const $elemPanel = $(elemPanel);
                 const $elem = $(elem);
                 $elemPanel.css({
@@ -631,7 +631,7 @@ Boards.renderConfigMenu = (optionList) => {
                     }
                 }
             },
-            click: function(data, othis){
+            click: function (data, othis) {
                 const $elem = $(this.elem);
                 const $p = $elem.children('p');
                 $p.text(data.title);

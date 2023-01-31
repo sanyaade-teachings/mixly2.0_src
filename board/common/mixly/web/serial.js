@@ -1152,7 +1152,7 @@ Serial.onDisconnect = (port) => {
 
 Serial.portClose = (port, endFunc = () => {}) => {
     const portObj = Serial.portsOperator[port];
-    if (portObj) {
+    if (portObj && portObj.portOpened) {
         const newSerialport = portObj.serialport;
         newSerialport.close();
         Serial.onDisconnect(port);

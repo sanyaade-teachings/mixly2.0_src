@@ -71,6 +71,9 @@
                     "path": "../micropython_common/build/HZK12.bin"
                 }
             ]
+        },
+        "upload": {
+            "reset": []
         }
     }
 }

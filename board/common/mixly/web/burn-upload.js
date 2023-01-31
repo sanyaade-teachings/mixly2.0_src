@@ -134,9 +134,10 @@ BU.burnByUSB = () => {
         }
         let portObj = Serial.portsOperator[portName];
         const { toolConfig, serialport } = portObj;
-        const prevBaud = toolConfig.baudRates;
-        toolConfig.baudRates = 115200;
-        await serialport.setBaudRate(toolConfig.baudRates);
+        if (prevBaud !== 115200) {
+            toolConfig.baudRates = 115200;
+            await serialport.setBaudRate(toolConfig.baudRates);
+        }
         const { web } = SELECTED_BOARD;
         const { burn } = web;
         const hexStr = Mixly.get(burn.filePath);
@@ -188,8 +189,10 @@ BU.burnByUSB = () => {
                 .finally(async () => {
                     BU.burning = false;
                     BU.uploading = false;
-                    toolConfig.baudRates = prevBaud;
-                    await serialport.setBaudRate(prevBaud);
+                    if (toolConfig.baudRates !== prevBaud) {
+                        toolConfig.baudRates = prevBaud;
+                        await serialport.setBaudRate(prevBaud);
+                    }
                     USB.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
                 });
             },
@@ -212,8 +215,10 @@ BU.burnWithEsptool = () => {
         let portObj = Serial.portsOperator[portName];
         const { toolConfig, serialport } = portObj;
         const prevBaud = toolConfig.baudRates;
-        toolConfig.baudRates = 115200;
-        await serialport.setBaudRate(toolConfig.baudRates);
+        if (prevBaud !== 115200) {
+            toolConfig.baudRates = 115200;
+            await serialport.setBaudRate(toolConfig.baudRates);
+        }
         const { web } = SELECTED_BOARD;
         const { burn } = web;
         StatusBar.setValue(indexText["固件读取中"] + "...");
@@ -284,8 +289,10 @@ BU.burnWithEsptool = () => {
                     } finally {
                         SerialPort.refreshOutputBuffer = true;
                         SerialPort.refreshInputBuffer = false;
-                        toolConfig.baudRates = prevBaud;
-                        await serialport.setBaudRate(prevBaud);
+                        if (toolConfig.baudRates !== prevBaud) {
+                            toolConfig.baudRates = prevBaud;
+                            await serialport.setBaudRate(prevBaud);
+                        }
                     }
                 },
                 end: function () {
@@ -416,8 +423,10 @@ BU.uploadByPort = (port) => {
         const portObj = Serial.portsOperator[port];
         const { serialport, toolConfig } = portObj;
         const prevBaud = toolConfig.baudRates;
-        toolConfig.baudRates = 115200;
-        await serialport.setBaudRate(toolConfig.baudRates);
+        if (prevBaud !== 115200) {
+            toolConfig.baudRates = 115200;
+            await serialport.setBaudRate(toolConfig.baudRates);
+        }
         BU.burning = false;
         BU.uploading = true;
         StatusBar.setValue(indexText['上传中'] + '...\n');
@@ -490,9 +499,11 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
     const portName = 'web-serial';
     const portObj = Serial.portsOperator[portName];
     const { serialport, toolConfig } = portObj;
-    const prevBaud = toolConfig.baudRates;
-    toolConfig.baudRates = 115200;
-    await serialport.setBaudRate(toolConfig.baudRates);
+    let prevBaud = toolConfig.baudRates;
+    if (prevBaud !== 115200) {
+        toolConfig.baudRates = 115200;
+        await serialport.setBaudRate(toolConfig.baudRates);
+    }
     let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
         StatusBar.addValue(indexText["固件获取失败"] + "！\n");
@@ -543,11 +554,13 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         const code = MFile.getCode();
         const baudRateList = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
         if (baudRateList && Serial.BAUDRATES.includes(baudRateList[0]-0)) {
-            toolConfig.baudRates = baudRateList[0]-0;
-        } else {
-            toolConfig.baudRates = prevBaud;
+            prevBaud = baudRateList[0]-0;
         }
-        await serialport.setBaudRate(toolConfig.baudRates);
+        if (toolConfig.baudRates !== prevBaud) {
+            toolConfig.baudRates = prevBaud;
+            await serialport.setBaudRate(prevBaud);
+        }
+        // await Serial.reset(portName);
     }
 }
 

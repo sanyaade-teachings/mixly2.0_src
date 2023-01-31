@@ -857,6 +857,26 @@
         }
     },
     "web": {
-        "com": "serial"
+        "com": "serial",
+        "upload": {
+            "reset": [
+                {
+                    "dtr": true,
+                    "rts": true
+                }, {
+                    "sleep": 500
+                }, {
+                    "dtr": false,
+                    "rts": true
+                }, {
+                    "sleep": 500
+                }, {
+                    "dtr": true,
+                    "rts": true
+                }, {
+                    "sleep": 500
+                }
+            ]
+        }
     }
 }

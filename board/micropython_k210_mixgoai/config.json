@@ -54,6 +54,9 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "serial"
+        "com": "serial",
+        "upload": {
+            "reset": []
+        }
     }
 }

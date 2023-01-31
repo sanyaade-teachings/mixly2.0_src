@@ -1332,9 +1332,8 @@ Serial.updateDtrAndRts = async function (port) {
 Serial.reset = async function (port) {
     const newPortObj = Serial.portsOperator[port];
     const newSerialport = newPortObj.serialport;
-    const reset = SELECTED_BOARD?.upload?.reset || SELECTED_BOARD?.web?.upload?.reset;
+    const reset = SELECTED_BOARD?.web?.upload?.reset || SELECTED_BOARD?.upload?.reset;
     if (typeof reset !== 'object') {
-        await Serial.updateDtrAndRts(port);
         return;
     };
     let len = reset.length;
@@ -1355,7 +1354,6 @@ Serial.reset = async function (port) {
             await Serial.sleep(sleepValue);
         }
     }
-    await Serial.updateDtrAndRts(port);
 }
 
 Serial.setBaudRate = (port, baud) => {

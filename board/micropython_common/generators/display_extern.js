@@ -4,13 +4,20 @@ goog.provide('Blockly.Python.display');
 goog.require('Blockly.Python');
 
 Blockly.Python.display_matrix_use_i2c_init = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var iv = Blockly.Python.valueToCode(this, 'I2CSUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue("key");
     var code;
     if (key=='32x12 Matrix') {
+      if(version=='mixgo_ce'){
       Blockly.Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
-      code = v + ' = matrix32x12.Matrix(' + iv+ ',font_address=0x700000)\n';
+      code = v + ' = matrix32x12.Matrix(' + iv+ ',font_address=0x3A0000)\n';
+      }
+      else{
+      Blockly.Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
+      code = v + ' = matrix32x12.Matrix(' + iv+ ',font_address=0x700000)\n';  
+      }
     }else if (key=='16x8 Matrix') {
       Blockly.Python.definitions_['import_matrix16x8'] = 'import matrix16x8';
       code = v + ' = matrix16x8.Matrix(' + iv+ ')\n';

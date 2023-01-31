@@ -134,6 +134,7 @@ BU.burnByUSB = () => {
         }
         let portObj = Serial.portsOperator[portName];
         const { toolConfig, serialport } = portObj;
+        const prevBaud = toolConfig.baudRates;
         toolConfig.baudRates = 115200;
         await serialport.setBaudRate(toolConfig.baudRates);
         const { web } = SELECTED_BOARD;
@@ -184,9 +185,11 @@ BU.burnByUSB = () => {
                     layer.close(index);
                     StatusBar.addValue(`==${indexText['烧录失败']}==\n`);
                 })
-                .finally(() => {
+                .finally(async () => {
                     BU.burning = false;
                     BU.uploading = false;
+                    toolConfig.baudRates = prevBaud;
+                    await serialport.setBaudRate(prevBaud);
                     USB.DAPLink.removeAllListeners(DAPjs.DAPLink.EVENT_PROGRESS);
                 });
             },
@@ -208,6 +211,7 @@ BU.burnWithEsptool = () => {
         }
         let portObj = Serial.portsOperator[portName];
         const { toolConfig, serialport } = portObj;
+        const prevBaud = toolConfig.baudRates;
         toolConfig.baudRates = 115200;
         await serialport.setBaudRate(toolConfig.baudRates);
         const { web } = SELECTED_BOARD;
@@ -280,6 +284,8 @@ BU.burnWithEsptool = () => {
                     } finally {
                         SerialPort.refreshOutputBuffer = true;
                         SerialPort.refreshInputBuffer = false;
+                        toolConfig.baudRates = prevBaud;
+                        await serialport.setBaudRate(prevBaud);
                     }
                 },
                 end: function () {
@@ -409,6 +415,7 @@ BU.uploadByPort = (port) => {
         }
         const portObj = Serial.portsOperator[port];
         const { serialport, toolConfig } = portObj;
+        const prevBaud = toolConfig.baudRates;
         toolConfig.baudRates = 115200;
         await serialport.setBaudRate(toolConfig.baudRates);
         BU.burning = false;
@@ -452,10 +459,12 @@ BU.uploadByPort = (port) => {
                     StatusBar.addValue(`[Error] ${error}\n`);
                     StatusBar.addValue(`==${indexText['上传失败']}==\n`);
                 })
-                .finally(() => {
+                .finally(async () => {
                     portObj.busy = false;
                     BU.burning = false;
                     BU.uploading = false;
+                    toolConfig.baudRates = prevBaud;
+                    await serialport.setBaudRate(prevBaud);
                 });
             },
             end: function () {
@@ -479,6 +488,7 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
     const portName = 'web-serial';
     const portObj = Serial.portsOperator[portName];
     const { serialport, toolConfig } = portObj;
+    const prevBaud = toolConfig.baudRates;
     toolConfig.baudRates = 115200;
     await serialport.setBaudRate(toolConfig.baudRates);
     let firmwareData = obj.data;
@@ -528,6 +538,8 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
     } finally {
         SerialPort.refreshOutputBuffer = true;
         SerialPort.refreshInputBuffer = false;
+        toolConfig.baudRates = prevBaud;
+        await serialport.setBaudRate(prevBaud);
     }
 }
 

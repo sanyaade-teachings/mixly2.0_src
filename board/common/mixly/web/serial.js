@@ -1059,6 +1059,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
         Charts.addData(data);
     })
     .then(() => {
+        Serial.reset(port);
         Serial.onConnect(port);
         /* portObj.serialport.AddOnConnectEvent(() => {
             Serial.onConnect(port);

@@ -17,6 +17,8 @@ SerialPort.onDataLine = null;
 
 SerialPort.encoder = new TextEncoder();
 SerialPort.decoder = new TextDecoder();
+SerialPort.dtr = false;
+SerialPort.rts = false;
 
 SerialPort.connect = (baud = 115200, onDataLine = (message) => {}) => {
     return new Promise((resolve, reject) => {
@@ -252,18 +254,23 @@ SerialPort.setBaudRate = async (baud) => {
     await serialObj.open({ baudRate: baud - 0 });
     SerialPort.obj = serialObj;
     SerialPort.keepReading = true;
+    SerialPort.setSignals(SerialPort.dtr, SerialPort.rts);
     SerialPort.addReadEvent(SerialPort.onDataLine);
 }
 
 SerialPort.setDTR = async (value) => {
+    SerialPort.dtr = value;
     await SerialPort.obj.setSignals({ dataTerminalReady: value });
 }
 
 SerialPort.setRTS = async (value) => {
+    SerialPort.rts = value;
     await SerialPort.obj.setSignals({ requestToSend: value });
 }
 
 SerialPort.setSignals = async (dtr, rts) => {
+    SerialPort.dtr = dtr;
+    SerialPort.rts = rts;
     await SerialPort.obj.setSignals({ dataTerminalReady: dtr, requestToSend: rts });
 }
 

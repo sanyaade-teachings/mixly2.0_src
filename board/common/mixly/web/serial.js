@@ -395,7 +395,7 @@ Serial.openTool = () => {
         toolDom.onClickSelectBaud((port, data) => {
             const newPortObj = Serial.portsOperator[port];
             const { portOpened, serialport, toolConfig } = newPortObj;
-            toolConfig.baudRates = data.elem.value;
+            toolConfig.baudRates = data.elem.value - 0;
             portOpened && serialport.setBaudRate(data.elem.value - 0);
         });
 
@@ -1059,7 +1059,6 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
         Charts.addData(data);
     })
     .then(() => {
-        Serial.reset(port);
         Serial.onConnect(port);
         /* portObj.serialport.AddOnConnectEvent(() => {
             Serial.onConnect(port);
@@ -1068,6 +1067,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
             Serial.onDisconnect(port);
         });
         endFunc(port);
+        return Serial.reset(port);
     })
     .catch((error) => {
         console.log(error);
@@ -1320,20 +1320,23 @@ Serial.clearContent = function (port) {
     }
 }
 
-Serial.updateDtrAndRts = function (port) {
+Serial.updateDtrAndRts = async function (port) {
     const portObj = Serial.portsOperator[port];
     const { toolConfig } = portObj;
-    // const nowSerialport = portObj.serialport;
-    // if (nowSerialport && nowSerialport.isOpen) {
-    //     nowSerialport.set({ dtr: toolConfig.dtr, rts: toolConfig.rts });
-    // }
+    const serialport = portObj.serialport;
+    if (portObj.portOpened && serialport) {
+        await serialport.setSignals(toolConfig.dtr, toolConfig.rts);
+    }
 }
 
 Serial.reset = async function (port) {
     const newPortObj = Serial.portsOperator[port];
     const newSerialport = newPortObj.serialport;
     const reset = SELECTED_BOARD?.upload?.reset || SELECTED_BOARD?.web?.upload?.reset;
-    if (typeof reset !== 'object') return;
+    if (typeof reset !== 'object') {
+        await Serial.updateDtrAndRts(port);
+        return;
+    };
     let len = reset.length;
     for (var i = 0; i < len; i++) {
         if (reset[i].dtr !== undefined
@@ -1352,6 +1355,7 @@ Serial.reset = async function (port) {
             await Serial.sleep(sleepValue);
         }
     }
+    await Serial.updateDtrAndRts(port);
 }
 
 Serial.setBaudRate = (port, baud) => {

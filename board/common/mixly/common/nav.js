@@ -87,7 +87,8 @@ Nav.LEFT_BTN_CONFIG = [
         title: '',
         href: '#',
         onclick: {
-            web: 'Mixly.Web.BU.clickConnect()'
+            web: 'Mixly.Web.BU.clickConnect()',
+            webcompiler: 'Mixly.Web.BU.clickConnect()'
         }
     }, {
         // 【初始化固件】按钮

@@ -463,8 +463,10 @@ BU.uploadByPort = (port) => {
                     portObj.busy = false;
                     BU.burning = false;
                     BU.uploading = false;
-                    toolConfig.baudRates = prevBaud;
-                    await serialport.setBaudRate(prevBaud);
+                    if (toolConfig.baudRates !== prevBaud) {
+                        toolConfig.baudRates = prevBaud;
+                        await serialport.setBaudRate(prevBaud);
+                    }
                 });
             },
             end: function () {

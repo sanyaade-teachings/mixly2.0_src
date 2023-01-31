@@ -251,11 +251,6 @@
                     "rts": false
                 }, {
                     "sleep": 300
-                }, {
-                    "dtr": false,
-                    "rts": true
-                }, {
-                    "sleep": 300
                 }
             ]
         }

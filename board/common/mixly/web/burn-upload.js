@@ -538,8 +538,14 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
     } finally {
         SerialPort.refreshOutputBuffer = true;
         SerialPort.refreshInputBuffer = false;
-        toolConfig.baudRates = prevBaud;
-        await serialport.setBaudRate(prevBaud);
+        const code = MFile.getCode();
+        const baudRateList = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
+        if (baudRateList && Serial.BAUDRATES.includes(baudRateList[0]-0)) {
+            toolConfig.baudRates = baudRateList[0]-0;
+        } else {
+            toolConfig.baudRates = prevBaud;
+        }
+        await serialport.setBaudRate(toolConfig.baudRates);
     }
 }
 

@@ -756,7 +756,7 @@ Blockly.Arduino.display_lcd_bitmap = function () {
     for (; i < bitmap.length - 1; i++) {
         code += '0B' + bitmap[i].join('') + ',';
     }
-    code += bitmap[i].join('') + '};';
+    code += '0B' + bitmap[i].join('') + '};';
     Blockly.Arduino.definitions_[varName] = "byte " + varName + "[]=" + code;
     return [varName, Blockly.Arduino.ORDER_ATOMIC];
 };

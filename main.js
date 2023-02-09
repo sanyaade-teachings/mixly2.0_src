@@ -74,7 +74,7 @@ function createWindow(filePath = null, indexUrl = null) {
         minWidth: 700,
         width: 0,
         height: 0,
-        icon: __dirname + '/files/mixly.ico',
+        icon: __dirname + '/files/mixly_uncompressed.ico',
         allowRunningInsecureContent: true,
         webPreferences: {
             nodeIntegration: true,

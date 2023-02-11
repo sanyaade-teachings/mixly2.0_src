@@ -1741,7 +1741,11 @@ Serial.getMenu = (ports) => {
 
 Serial.addBtnToStatusBar = () => {
     const BTN_TEMPLETE = `
-    <button type="button" id="tab-ace-add-btn" class="layui-btn${USER.theme === 'dark'? ' layui-btn-normal' : ''} layui-btn-xs m-btn">
+    <button type="button" id="tab-ace-add-btn" class="layui-btn${USER.theme === 'dark'? ' layui-btn-normal' : ''} layui-btn-xs m-btn" style="
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    ">
         <i class="layui-icon layui-icon-addition"></i>
     </button>`;
     $('#tab-ace-output').after(BTN_TEMPLETE);

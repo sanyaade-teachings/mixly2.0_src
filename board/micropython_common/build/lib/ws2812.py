@@ -21,7 +21,7 @@ class NeoPixel:
 		self.ORDER=ORDER
 		self.multiplex=multiplex
 		self.buf = bytearray(n * bpp)
-		self.timing = (((400, 850, 800, 450) if timing else (800, 1700, 1600, 900))	if isinstance(timing, int) else timing)
+		self.timing = (((350, 850, 800, 400) if timing else (800, 1700, 1600, 900))	if isinstance(timing, int) else timing)
 
 		if not self.multiplex:
 			self.pin.init(self.pin.OUT,value=default)

@@ -36,24 +36,7 @@
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
         "copyLib": true,
-        "reset": [
-            {
-                "dtr": false,
-                "rts": false
-            }, {
-                "sleep": 500
-            }, {
-                "dtr": false,
-                "rts": true
-            }, {
-                "sleep": 500
-            }, {
-                "dtr": false,
-                "rts": false
-            }, {
-                "sleep": 500
-            }
-        ]
+        "reset": []
     },
     "nav": {
         "burn": true,

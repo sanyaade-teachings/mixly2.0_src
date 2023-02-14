@@ -1,10 +1,10 @@
 {
     "board": {
-        "MixGo(ESP32, 4M)": "micropython:esp32:mixgo",
+        "MixGo": "micropython:esp32:mixgo",
         "MixGo PE": "micropython:esp32:mixgo_pe",
         "RoboMaster E1": "micropython:esp32:rm_e1",
         "mPython": "micropython:esp32:mpython",
-        "ESP32 Generic": "micropython:esp32:generic"
+        "ESP32 Generic(4MB)": "micropython:esp32:generic"
     },
     "language": "MicroPython",
     "burn": {
@@ -76,6 +76,10 @@
                     {
                         "offset": "0x1000",
                         "path": "./build/MixGo-0x1000-V1.19.1-lib.bin"
+                    },
+                    {
+                        "offset": "0X3A0000",
+                        "path": "../micropython_common/build/HZK12.bin"
                     }
                 ]
             },
@@ -95,7 +99,11 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo_PE-0x1000-V1.19.1-lib.bin"
+                        "path": "./build/MixGo-0x1000-V1.19.1-lib.bin"
+                    },
+                    {
+                        "offset": "0X3A0000",
+                        "path": "../micropython_common/build/HZK12.bin"
                     }
                 ]
             },

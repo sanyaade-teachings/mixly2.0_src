@@ -535,6 +535,81 @@ Blockly.Blocks['iot_client_onboard'] = {
     }
 };
 
+Blockly.Blocks['iot_http_client']={
+    init: function() {
+        this.setColour(Blockly.Msg['IOT_HUE']);
+        // this.appendValueInput('VAR')
+        //     .setCheck("var")
+        this.appendDummyInput()
+            .appendField("HTTP"+Blockly.MIXLY_Client)
+        this.appendValueInput('addr')
+            .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2);
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_REQUESTS_GET)
+            .appendField(Blockly.MIXLY_GET_CURRENT_TIME);         
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Blocks['iot_http_data'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.appendDummyInput()
+        .appendField("HTTP"+Blockly.MIXLY_Client)
+        .appendField(Blockly.MIXLY_GET)
+        .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_REQUESTS_ALL, "debug_len"],
+            [Blockly.MIXLY_REQUESTS_LEN, "debug_len[0]"],
+            [Blockly.MIXLY_REQUESTS_GET, "debug_len[1]"],
+            [Blockly.MIXLY_REQUESTS_MESSAGE, "text"]
+            ]), "key");
+        this.setOutput(true);
+        this.setInputsInline(true);
+        
+    }
+};
+
+Blockly.Blocks['iot_mqtt_client']={
+    init: function() {
+        this.setColour(Blockly.Msg['IOT_HUE']);
+        // this.appendValueInput('VAR')
+        //     .setCheck("var")
+        this.appendDummyInput()
+            .appendField("MQTT"+Blockly.MIXLY_Client)
+        this.appendValueInput('addr')
+            .appendField(Blockly.MIXLY_CONNECTTO );
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_INIT_SUBSCRIBE)
+            .appendField(Blockly.MQTT_Topic)
+            .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_GET_CURRENT_TIME, ""],
+            ]), "key");         
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Blocks['iot_mqtt_data'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.appendDummyInput()
+        .appendField("MQTT"+Blockly.MIXLY_Client)
+        .appendField(Blockly.MIXLY_GET)
+        .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_REQUESTS_ALL, "debug_len"],
+            [Blockly.MIXLY_REQUESTS_LEN, "debug_len[0]"],
+            [Blockly.MIXLY_REQUESTS_GET, "debug_len[1]"],
+            [Blockly.MIXLY_REQUESTS_MESSAGE, "text"]
+            ]), "key");
+        this.setOutput(true);
+        this.setInputsInline(true);
+        
+    }
+};
+
 Blockly.Blocks['iot_wificonnect'] = Blockly.Blocks['iot_wifi_connect'];
 Blockly.Blocks['iot_onenetconnect'] = Blockly.Blocks['iot_onenet_connect'];
 Blockly.Blocks['iot_onenetdisconnect'] = Blockly.Blocks['iot_onenet_disconnect'];

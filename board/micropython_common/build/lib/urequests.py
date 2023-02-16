@@ -1,4 +1,4 @@
-import usocket
+import usocket_debug as usocket
 
 class Response:
 
@@ -32,7 +32,7 @@ class Response:
         return ujson.loads(self.content)
 
 
-def request(method, url, data=None, json=None, headers={}, stream=None, parse_headers=True):
+def request(method, url, data=None, json=None, headers={}, stream=None, parse_headers=True, debug=False):
     redir_cnt = 1
     while True:
         try:
@@ -59,7 +59,7 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
         if parse_headers is not False:
             resp_d = {}
 
-        s = usocket.socket(ai[0], ai[1], ai[2])
+        s = usocket.socket(ai[0], ai[1], ai[2], debug=debug)
         try:
             s.connect(ai[-1])
             if proto == "https:":
@@ -127,6 +127,7 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
     resp = Response(s)
     resp.status_code = status
     resp.reason = reason
+    resp.debug_len=(s.client_len,s.server_len)
     if resp_d is not None:
         resp.headers = resp_d
     return resp

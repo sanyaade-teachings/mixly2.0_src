@@ -1,8 +1,9 @@
-import time
-import usocket as socket
+import usocket_debug as socket
 import ustruct as struct
-from machine import unique_id
+import time
+import machine
 from ubinascii import hexlify
+import ujson as json
 from matcher import MQTTMatcher
 
 ADDITIONAL_TOPIC = 'b640a0ce465fa2a4150c36b305c1c11b'
@@ -28,27 +29,29 @@ def ntp(url='mixio.mixly.cn'):
         raise RuntimeError("API request failed or WiFi is not connected",e) 
     return results
     
-def init_MQTT_client(address, username, password,MQTT_USR_PRJ):
-    client = MQTTClient(hexlify(unique_id()), address, 1883, username, password)
+def init_MQTT_client(address, username, password,MQTT_USR_PRJ, debug=False):
+    client = MQTTClient(hexlify(machine.unique_id()), address, 1883, username, password,debug=debug)
     client.set_last_will(topic=MQTT_USR_PRJ+WILL_TOPIC, msg=client.client_id, qos=2)
     if client.connect()==0:
-        client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=0)
-    time.sleep_ms(200)
+        client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=1)
+        machine.Timer(2).init(period = 30000, mode = machine.Timer.PERIODIC, callback = lambda x : client.ping())
     return client
 
+len_overrided = len
+
 # Add by Mixly Team
-def str_len(object):
+def len(object):
     if isinstance(object, str):
-        return len(object.encode('utf-8'))
+        return len_overrided(object.encode('utf-8'))
     else:
-        return len(object)
+        return len_overrided(object)
 #####################################################    
 
 class MQTTException(Exception):
     pass
 
 class MQTTClient:
-    def __init__(self, client_id, server, port=0, username=None, password=None, keepalive=60, ssl=False, ssl_params={}):
+    def __init__(self, client_id, server, port=0, username=None, password=None, keepalive=60, ssl=False, ssl_params={},debug=False):
         if port == 0:
             port = 8883 if ssl else 1883
         self.client_id = client_id
@@ -57,19 +60,22 @@ class MQTTClient:
         self.ssl = ssl
         self.ssl_params = ssl_params
         self.pid = 0
+        self.pid = 0
+        self.debug=debug
+        #self.cb = None
         self._on_message = None
         self.username = username
         self.password = password
+        #self.project = project
         self.keepalive = keepalive
         self.lw_topic = None
         self.lw_msg = None
         self.lw_qos = 0
         self.lw_retain = False
         self._on_message_filtered = MQTTMatcher()
-        self._star_time = time.ticks_ms()
 
     def _send_str(self, s):
-        self.sock.write(struct.pack("!H", str_len(s)))
+        self.sock.write(struct.pack("!H", len(s)))
         self.sock.write(s)
 
     def _recv_len(self):
@@ -82,14 +88,24 @@ class MQTTClient:
                 return n
             sh += 7
 
+    # def set_callback(self, f):
+    #     self.cb = f
+
     def set_callback(self, mqtt_topic, callback_method, MQTT_USR_PRJ):
-        """Registers a callback_method for a specific MQTT topic"""
+        """Registers a callback_method for a specific MQTT topic.
+
+        :param str mqtt_topic: MQTT topic identifier.
+        :param str callback_method: Name of callback method.
+        """
         if mqtt_topic is None or callback_method is None:
             raise ValueError("MQTT topic and callback method must both be defined.")
         self._on_message_filtered[MQTT_USR_PRJ+mqtt_topic] = callback_method
 
     def remove_callback(self, mqtt_topic):
-        """Removes a registered callback method"""
+        """Removes a registered callback method.
+
+        :param str mqtt_topic: MQTT topic identifier string.
+        """
         if mqtt_topic is None:
             raise ValueError("MQTT Topic must be defined.")
         try:
@@ -101,7 +117,10 @@ class MQTTClient:
 
     @property
     def on_message(self):
-        """Called when a new message has been received on a subscribed topic"""
+        """Called when a new message has been received on a subscribed topic.
+
+        Expected method signature is ``on_message(client, topic, message)``
+        """
         return self._on_message
 
     @on_message.setter
@@ -127,7 +146,7 @@ class MQTTClient:
         self.lw_retain = retain
     
     def connect(self, clean_session=True):
-        self.sock = socket.socket()
+        self.sock = socket.socket(debug=self.debug)
         self.sock.connect(self.addr)
         print(self.addr)
         if self.ssl:
@@ -135,18 +154,18 @@ class MQTTClient:
             self.sock = ussl.wrap_socket(self.sock, **self.ssl_params)
         msg_header=bytearray([0x10])
         msg = bytearray(b"\x04MQTT\x04\x02\0\0")
-        msg_length = 12 + str_len(self.client_id)
+        msg_length = 12 + len(self.client_id)
         msg[6] = clean_session << 1
         
         if self.username is not None:
-            msg_length += 2 + str_len(self.username) + 2 + str_len(self.password)
+            msg_length += 2 + len(self.username) + 2 + len(self.password)
             msg[6] |= 0xC0
         if self.keepalive:
             assert self.keepalive < 65536
             msg[7] |= self.keepalive >> 8
             msg[8] |= self.keepalive & 0x00FF
         if self.lw_topic:
-            msg_length += 2 + str_len(self.lw_topic) + 2 + str_len(self.lw_msg)
+            msg_length += 2 + len(self.lw_topic) + 2 + len(self.lw_msg)
             msg[6] |= 0x4 | (self.lw_qos & 0x1) << 3 | (self.lw_qos & 0x2) << 3
             msg[6] |= self.lw_retain << 5
             
@@ -200,6 +219,7 @@ class MQTTClient:
         self.sock.write(b"\xc0\0")
     
     def pingSync(self):
+        time.ticks_ms()
         self.ping()
         for i in range(0,10):
             msg = self.check_msg()
@@ -225,7 +245,7 @@ class MQTTClient:
             raise MQTTException("Invalid message data type.")
         pkt = bytearray(b"\x30\0\0\0")
         pkt[0] |= qos << 1 | retain
-        sz = 2 + str_len(topic) + str_len(msg)
+        sz = 2 + len(topic) + len(msg)
         if qos > 0:
             sz += 2
         assert sz < 2097152
@@ -235,8 +255,7 @@ class MQTTClient:
             sz >>= 7
             i += 1
         pkt[i] = sz
-        #print(hex(str_len(pkt)), hexlify(pkt, ":"))
-        self.sock.setblocking(True)
+        #print(hex(len(pkt)), hexlify(pkt, ":"))
         self.sock.write(pkt, i + 1)
         self._send_str(topic)
         if qos > 0:
@@ -264,8 +283,8 @@ class MQTTClient:
         self.pid += 1
         if isinstance(topic, str):
             topic=topic.encode()
-        struct.pack_into("!BH", pkt, 1, 2 + 2 + str_len(topic) + 1, self.pid)
-        #print(hex(str_len(pkt)), hexlify(pkt, ":"))
+        struct.pack_into("!BH", pkt, 1, 2 + 2 + len(topic) + 1, self.pid)
+        #print(hex(len(pkt)), hexlify(pkt, ":"))
         self.sock.write(pkt)
         self._send_str(topic)
         self.sock.write(qos.to_bytes(1, "little"))
@@ -280,6 +299,9 @@ class MQTTClient:
                 return
 
     # Wait for a single incoming MQTT message and process it.
+    # Subscribed messages are delivered to a callback previously
+    # set by .set_callback() method. Other (internal) MQTT
+    # messages processed internally.
     def wait_msg(self):
         res = self.sock.read(1)
         time.sleep_ms(50)
@@ -306,6 +328,7 @@ class MQTTClient:
             sz -= 2
         msg = self.sock.read(sz)
         self._handle_on_message(self, str(topic, "utf-8"), str(msg, "utf-8"))
+        #self.cb(topic.decode(), msg.decode())
         if op & 6 == 2:
             pkt = bytearray(b"\x40\x02\0\0")
             struct.pack_into("!H", pkt, 2, pid)
@@ -314,9 +337,58 @@ class MQTTClient:
             assert 0
 
     # Checks whether a pending message from server is available.
+    # If not, returns immediately with None. Otherwise, does
+    # the same processing as wait_msg.
     def check_msg(self):
+        self.sock.setblocking(False)
         self.sock.settimeout(0.05)
-        if time.ticks_diff(time.ticks_ms(), self._star_time) >60000:
-            self._star_time = time.ticks_ms()
-            self.ping()
         return self.wait_msg()
+
+    @property
+    def debug_len(self):
+        debug_len=(self.sock.client_len,self.sock.server_len)
+        self.sock.client_len,self.sock.server_len=0,0
+        return debug_len
+
+def analyze_msg(client):
+    fullPacket = b''
+    res = client.sock.read(1)
+    fullPacket = fullPacket + res
+    client.sock.setblocking(True)
+    if res is None:
+        return None
+    if res == b"":
+        raise OSError(-1)
+    if res == b"\xd0":    # PINGRESP
+        sz = client.sock.read(1)
+        fullPacket = fullPacket + sz
+        assert sz[0] == 0
+        return "PINGRESP"
+    op = res[0]
+    if op & 0xf0 != 0x30:
+        return op
+    sz = client._recv_len()
+    topic_len = client.sock.read(2)
+    fullPacket = fullPacket + topic_len
+    topic_len = (topic_len[0] << 8) | topic_len[1]
+    topic = client.sock.read(topic_len)
+    fullPacket = fullPacket + topic
+    sz -= topic_len + 2
+    if op & 6:
+        pid = client.sock.read(2)
+        fullPacket = fullPacket + pid
+        pid = pid[0] << 8 | pid[1]
+        sz -= 2
+    msg = client.sock.read(sz)
+    fullPacket = fullPacket + msg
+    if op & 6 == 2:
+        pkt = bytearray(b"\x40\x02\0\0")
+        struct.pack_into("!H", pkt, 2, pid)
+        client.sock.write(pkt)
+    elif op & 6 == 4:
+        assert 0
+    return {
+        "msg": msg.decode(),
+        "topic": topic.decode(),
+        "fullPacket": fullPacket
+    }        

@@ -2510,6 +2510,22 @@
             </shadow>
           </value>
         </block>
+        <block type="iot_http_client">
+            <value name="addr">
+              <shadow type="text">
+                <field name="TEXT">http://mixio.mixly.org/time.php</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="iot_http_data"></block>
+          <block type="iot_mqtt_client">
+            <value name="addr">
+              <shadow type="text">
+                <field name="TEXT">mixio.mixly.cn</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="iot_mqtt_data"></block>
         <!-- <block type="iot_mixio_format_topic">
           <value name="VAR">
             <shadow type="variables_get">

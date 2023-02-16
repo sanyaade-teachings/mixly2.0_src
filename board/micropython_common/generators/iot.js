@@ -211,6 +211,45 @@ Blockly.Python.iot_client_onboard = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.iot_http_client = function(block) {
+  Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+  Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
+  var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
+  var code ='HTTP_client = urequests.get(' + addr + ',debug=True)\n';  
+  return code;
+};
+
+Blockly.Python.iot_http_data = function(){
+    Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+    Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
+    var key = this.getFieldValue('key');
+    var code='HTTP_client.'+key;    
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.iot_mqtt_client = function(block) {
+  Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+  Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
+  var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
+  var code ='mqtt_client = mixiot.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug=True)\n';
+  code+='mqtt_client.subscribe("$SYS/hello")\n';  
+  return code;
+};
+
+Blockly.Python.iot_mqtt_data = function(){
+    Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+    Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
+    var key = this.getFieldValue('key');
+    if (key=='text'){
+      var code = 'mixiot.analyze_msg(mqtt_client)'
+    }
+    else{
+    var code='mqtt_client.'+key;    
+  }
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+
 Blockly.Blocks['iot_wificonnect'] = Blockly.Blocks['iot_wifi_connect'];
 Blockly.Blocks['iot_onenetconnect'] = Blockly.Blocks['iot_onenet_connect'];
 Blockly.Blocks['iot_onenetdisconnect'] = Blockly.Blocks['iot_onenet_disconnect'];

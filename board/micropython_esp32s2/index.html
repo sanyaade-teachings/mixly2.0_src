@@ -2189,6 +2189,24 @@
             </shadow>
           </value>
         </block> -->
+
+          <block type="iot_http_client">
+            <value name="addr">
+              <shadow type="text">
+                <field name="TEXT">http://mixio.mixly.cn/time.php</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="iot_http_data"></block>
+           <block type="iot_mqtt_client">
+            <value name="addr">
+              <shadow type="text">
+                <field name="TEXT">mixio.mixly.cn</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="iot_mqtt_data"></block>
+       
       </category>
       <category id="catOnenet" colour="#78AAE0">
         <block type="iot_wifi_connect">

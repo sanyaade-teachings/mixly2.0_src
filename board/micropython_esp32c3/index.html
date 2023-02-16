@@ -3498,6 +3498,19 @@
             </shadow>
           </value>
         </block> 
+        <block type="weather_set_label">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ysensor</field>
+            </shadow>
+          </value>
+          <mutation items="1"></mutation>
+          <value name="ADD0">
+            <block type="tuple_create_with_text_return">
+            <field name="TEXT">39,119.96,31.67</field>
+          </block>
+          </value>
+        </block>
         <block type="weather_data" m-hide='micropython:esp32c3:mixgocar_c3'>
           <value name="SUB">
             <shadow type="variables_get">
@@ -3517,6 +3530,7 @@
             </shadow>
           </value>
         </block>    
+
         <block type="sensor_dht11" m-hide='micropython:esp32c3:mixgocar_c3'>
         <value name="PIN">
           <shadow type="pins_digital_pin"></shadow>

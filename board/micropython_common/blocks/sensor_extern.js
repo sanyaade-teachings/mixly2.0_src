@@ -849,6 +849,7 @@ Blockly.Blocks['weather_data'] = {
         .appendField(new Blockly.FieldDropdown([
             ["全部（元组）", "data()[0]"],
             ["全部（json）", "data()[1]"],
+            ["全部（json,附带位置信息）", "data()[2]"],
             ["编号", "data()[0][0]"],
             ["电量", "data()[0][1]"],
             ["风速", "data()[0][2]"],
@@ -896,6 +897,129 @@ Blockly.Blocks['weather_uart_mixio'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
     }
+};
+
+Blockly.Blocks['weather_set_label'] = {
+  
+  init: function() {
+    this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+    this.appendValueInput('SUB')
+            .appendField("无线气象站"+" WS-LoRa")
+            .setCheck("var");
+    this.itemCount_ = 2;
+    this.updateShape_();
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setInputsInline(true);
+    this.setMutator(new Blockly.Mutator(['weather_set_label_item']));
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip();
+  },
+  
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('items', this.itemCount_);
+    return container;
+  },
+
+  domToMutation: function(xmlElement) {
+    this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
+    this.updateShape_();
+  },
+
+  decompose: function(workspace) {
+    var containerBlock =
+    workspace.newBlock('weather_set_label_container');
+    containerBlock.initSvg();
+    var connection = containerBlock.getInput('STACK').connection;
+    for (var i = 0; i < this.itemCount_; i++) {
+      var itemBlock = workspace.newBlock('weather_set_label_item');
+      itemBlock.initSvg();
+      connection.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+
+  compose: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    // Count number of inputs.
+    var connections = [];
+    var i = 0;
+    while (itemBlock) {
+      connections[i] = itemBlock.valueConnection_;
+      itemBlock = itemBlock.nextConnection &&
+      itemBlock.nextConnection.targetBlock();
+      i++;
+    }
+    this.itemCount_ = i;
+    this.updateShape_();
+    // Reconnect any child blocks.
+    for (var i = 0; i < this.itemCount_; i++) {
+      if (connections[i]) {
+        this.getInput('ADD' + i)
+        .connection.connect(connections[i]);
+      }
+    }
+  },
+
+  saveConnections: function(containerBlock) {
+    var itemBlock = containerBlock.getInputTargetBlock('STACK');
+    var i = 0;
+    while (itemBlock) {
+      var input = this.getInput('ADD' + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      i++;
+      itemBlock = itemBlock.nextConnection &&
+      itemBlock.nextConnection.targetBlock();
+    }
+  },
+
+  updateShape_: function() {
+    // Delete everything.
+    if (this.getInput('EMPTY')) {
+      this.removeInput('EMPTY');
+    } else {
+      var i = 0;
+      while (this.getInput('ADD' + i)) {
+        this.removeInput('ADD' + i);
+        i++;
+      }
+    }
+    // Rebuild block.
+    if (this.itemCount_ == 0) {
+      this.appendDummyInput('EMPTY')
+      .appendField(Blockly.MIXLY_SETTING+Blockly.MIXLY_GPS_LOCATION+Blockly.mixpy_PYLAB_TICKS_TAG+'(id,long,lat)');
+    } else {
+      for (var i = 0; i < this.itemCount_; i++) {
+        var input = this.appendValueInput('ADD' + i);
+        if (i == 0) {
+          input.appendField(Blockly.MIXLY_SETTING+Blockly.MIXLY_GPS_LOCATION+Blockly.mixpy_PYLAB_TICKS_TAG+'(id,long,lat)');
+        }
+      }
+    }
+  }
+};
+Blockly.Blocks['weather_set_label_container'] = {  
+  init: function() {
+    this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_SETTING+Blockly.MIXLY_GPS_LOCATION+Blockly.mixpy_PYLAB_TICKS_TAG);
+        this.appendStatementInput('STACK');    
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Blocks['weather_set_label_item'] = {
+  init: function() {
+    this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+    this.appendDummyInput()
+    .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);    
+    this.contextMenu = false;
+  }
 };
 
 Blockly.Blocks['sensor_mixgoce_hot_wheel_is_touched'] = {

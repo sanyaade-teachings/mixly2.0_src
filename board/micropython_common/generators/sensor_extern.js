@@ -399,6 +399,20 @@ Blockly.Python.weather_uart_mixio=function(){
     return code;
 };
 
+Blockly.Python.weather_set_label = function() {  
+  var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
+  Blockly.Python.definitions_['import_ws_lora'] = 'import ws_lora'; 
+  var dropdown_type = this.getFieldValue('TYPE');  
+  var code = new Array(this.itemCount_);
+  var default_value = '0';
+  for (var n = 0; n < this.itemCount_; n++) {
+  code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
+    Blockly.Python.ORDER_NONE) || default_value;
+  }
+  var code = sub+'.label(' + code.join(', ') + ')\n';
+  return code;
+};
+
 Blockly.Python.sensor_mixgoce_hot_wheel_is_touched=function(){
     var key = this.getFieldValue('key');
     var stat = this.getFieldValue('stat');

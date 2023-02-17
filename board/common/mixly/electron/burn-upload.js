@@ -435,7 +435,11 @@ BU.searchLibs = function (dirPath, code, libArr) {
         if (fromLoc !== -1) {
             moduleName = arrayObj[i].substring(fromLoc + 4, arrayObj[i].indexOf("import"));
         } else if (importLoc !== -1) {
-            moduleName = arrayObj[i].substring(importLoc + 6);
+            let endPos = arrayObj[i].indexOf("as");
+            if (endPos === -1) {
+                endPos = arrayObj[i].length;
+            }
+            moduleName = arrayObj[i].substring(importLoc + 6, endPos);
         } else {
             continue;
         }

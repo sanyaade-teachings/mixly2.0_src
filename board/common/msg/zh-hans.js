@@ -3777,3 +3777,4 @@ Blockly.MIXLY_REQUESTS_LEN = '发送包长度';
 Blockly.MIXLY_REQUESTS_GET = '接收包长度';
 Blockly.MIXLY_CONNECTTO = '连接到';
 Blockly.MIXLY_INIT_SUBSCRIBE = '初始化并订阅';
+Blockly.MIXLY_OPEN_DEBUG = '打开调试';

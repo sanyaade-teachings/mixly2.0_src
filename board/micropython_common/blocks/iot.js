@@ -546,7 +546,12 @@ Blockly.Blocks['iot_http_client']={
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2);
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_REQUESTS_GET)
-            .appendField(Blockly.MIXLY_GET_CURRENT_TIME);         
+            .appendField(Blockly.MIXLY_GET_CURRENT_TIME)
+            .appendField(Blockly.MIXLY_OPEN_DEBUG)  
+            .appendField(new Blockly.FieldDropdown([            
+            [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, "True"],
+            [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, "False"]
+            ]), "key");     
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -559,8 +564,7 @@ Blockly.Blocks['iot_http_data'] = {
         this.appendDummyInput()
         .appendField("HTTP"+Blockly.MIXLY_Client)
         .appendField(Blockly.MIXLY_GET)
-        .appendField(new Blockly.FieldDropdown([
-            [Blockly.MIXLY_REQUESTS_ALL, "debug_len"],
+        .appendField(new Blockly.FieldDropdown([            
             [Blockly.MIXLY_REQUESTS_LEN, "debug_len[0]"],
             [Blockly.MIXLY_REQUESTS_GET, "debug_len[1]"],
             [Blockly.MIXLY_REQUESTS_MESSAGE, "text"]
@@ -585,7 +589,11 @@ Blockly.Blocks['iot_mqtt_client']={
             .appendField(Blockly.MQTT_Topic)
             .appendField(new Blockly.FieldDropdown([
             [Blockly.MIXLY_GET_CURRENT_TIME, ""],
-            ]), "key");         
+            ]), "key")
+            .appendField(new Blockly.FieldDropdown([            
+            [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, "True"],
+            [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, "False"]
+            ]), "key2");           
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -598,8 +606,7 @@ Blockly.Blocks['iot_mqtt_data'] = {
         this.appendDummyInput()
         .appendField("MQTT"+Blockly.MIXLY_Client)
         .appendField(Blockly.MIXLY_GET)
-        .appendField(new Blockly.FieldDropdown([
-            [Blockly.MIXLY_REQUESTS_ALL, "debug_len"],
+        .appendField(new Blockly.FieldDropdown([            
             [Blockly.MIXLY_REQUESTS_LEN, "debug_len[0]"],
             [Blockly.MIXLY_REQUESTS_GET, "debug_len[1]"],
             [Blockly.MIXLY_REQUESTS_MESSAGE, "text"]

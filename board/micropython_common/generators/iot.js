@@ -215,7 +215,8 @@ Blockly.Python.iot_http_client = function(block) {
   Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
   Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
-  var code ='HTTP_client = urequests.get(' + addr + ',debug=True)\n';  
+  var key = this.getFieldValue('key');
+  var code ='HTTP_client = urequests.get(' + addr + ',debug='+key+')\n';  
   return code;
 };
 
@@ -231,7 +232,8 @@ Blockly.Python.iot_mqtt_client = function(block) {
   Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
   Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
-  var code ='mqtt_client = mixiot.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug=True)\n';
+  var key = this.getFieldValue('key2');
+  var code ='mqtt_client = mixiot.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug='+key+')\n';
   code+='mqtt_client.subscribe("$SYS/hello")\n';  
   return code;
 };

@@ -31,7 +31,8 @@ const DEFAULT_CONFIG = {
     "enabled": true,
     "port": 8082,
     "protocol": "http:",
-    "ip": "localhost"
+    "ip": "localhost",
+    "domain": null
 };
 
 Compiler.CONFIG = { ...DEFAULT_CONFIG, ...(SOFTWARE?.webCompiler ?? {}) };

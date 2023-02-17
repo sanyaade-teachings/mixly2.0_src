@@ -351,7 +351,7 @@ class MQTTClient:
             sz = self.sock.read(1)
             fullPacket = fullPacket + sz
             assert sz[0] == 0
-            return "PINGRESP"
+            return None
         op = res[0]
         if op & 0xf0 != 0x30:
             return op
@@ -375,8 +375,4 @@ class MQTTClient:
             self.sock.write(pkt)
         elif op & 6 == 4:
             assert 0
-        return {
-            "msg": msg.decode(),
-            "topic": topic.decode(),
-            "fullPacket": fullPacket
-        }  
+        return {"msg": msg.decode(), "topic": topic.decode(), "fullPacket": fullPacket}  

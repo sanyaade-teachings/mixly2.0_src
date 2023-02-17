@@ -322,12 +322,19 @@ class MQTTClient:
             self.ping()
         return self.wait_msg()
 
-    #The length of received and sent data obtained during debugging
+    #The length of client data obtained during debugging
     @property
-    def debug_len(self):
-        debug_len=(self.sock.client_len,self.sock.server_len)
-        self.sock.client_len,self.sock.server_len=0,0
-        return debug_len
+    def client_len(self):
+        _len=self.sock.client_len
+        self.sock.client_len=0
+        return _len
+
+    #The length of server data obtained during debugging
+    @property
+    def server_len(self):
+        _len=self.sock.server_len
+        self.sock.server_len=0
+        return _len
 
     #Acquired data receiving and sending information during debugging
     @property

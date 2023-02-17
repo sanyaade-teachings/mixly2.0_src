@@ -127,7 +127,8 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
     resp = Response(s)
     resp.status_code = status
     resp.reason = reason
-    resp.debug_len=(s.client_len,s.server_len)
+    resp.client_len=s.client_len
+    resp.server_len=s.server_len
     if resp_d is not None:
         resp.headers = resp_d
     return resp

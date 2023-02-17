@@ -15,9 +15,9 @@ class socket(socket):
  
     def readline(self,*args):
         buf=super().readline(*args)
+        self.server_len+=len(buf)
         if self._debug:
             print('server:',buf)
-            self.server_len+=len(buf)
         return buf
 
     def read(self,*args):

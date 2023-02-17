@@ -590,6 +590,7 @@ Blockly.Blocks['iot_mqtt_client']={
             .appendField(new Blockly.FieldDropdown([
             [Blockly.MIXLY_GET_CURRENT_TIME, ""],
             ]), "key")
+            .appendField(Blockly.MIXLY_OPEN_DEBUG)
             .appendField(new Blockly.FieldDropdown([            
             [Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, "True"],
             [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, "False"]

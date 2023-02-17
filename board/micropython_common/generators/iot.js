@@ -242,12 +242,7 @@ Blockly.Python.iot_mqtt_data = function(){
     Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
     Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
     var key = this.getFieldValue('key');
-    if (key=='text'){
-      var code = 'mixiot.analyze_msg(mqtt_client)'
-    }
-    else{
-    var code='mqtt_client.'+key;    
-  }
+    var code='mqtt_client.'+key;   
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

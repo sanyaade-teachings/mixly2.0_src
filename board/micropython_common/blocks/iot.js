@@ -566,7 +566,7 @@ Blockly.Blocks['iot_http_data'] = {
         .appendField(Blockly.MIXLY_GET)
         .appendField(new Blockly.FieldDropdown([            
             [Blockly.MIXLY_REQUESTS_LEN, "client_len"],
-            [Blockly.MIXLY_REQUESTS_GET, "server_len"],
+            [Blockly.MIXLY_REQUESTS_GET_LEN, "server_len"],
             [Blockly.MIXLY_REQUESTS_MESSAGE, "text"]
             ]), "key");
         this.setOutput(true);
@@ -609,7 +609,7 @@ Blockly.Blocks['iot_mqtt_data'] = {
         .appendField(Blockly.MIXLY_GET)
         .appendField(new Blockly.FieldDropdown([            
             [Blockly.MIXLY_REQUESTS_LEN, "client_len"],
-            [Blockly.MIXLY_REQUESTS_GET, "server_len"],
+            [Blockly.MIXLY_REQUESTS_GET_LEN, "server_len"],
             [Blockly.MIXLY_REQUESTS_MESSAGE, "analyze_msg"]
             ]), "key");
         this.setOutput(true);

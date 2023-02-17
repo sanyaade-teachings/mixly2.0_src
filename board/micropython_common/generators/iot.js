@@ -213,7 +213,6 @@ Blockly.Python.iot_client_onboard = function(){
 
 Blockly.Python.iot_http_client = function(block) {
   Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
-  Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key');
   var code ='HTTP_client = urequests.get(' + addr + ',debug='+key+')\n';  
@@ -222,7 +221,6 @@ Blockly.Python.iot_http_client = function(block) {
 
 Blockly.Python.iot_http_data = function(){
     Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
-    Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
     var key = this.getFieldValue('key');
     var code='HTTP_client.'+key;    
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -230,7 +228,6 @@ Blockly.Python.iot_http_data = function(){
 
 Blockly.Python.iot_mqtt_client = function(block) {
   Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
-  Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key2');
   var code ='mqtt_client = mixiot.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug='+key+')\n';
@@ -240,7 +237,6 @@ Blockly.Python.iot_mqtt_client = function(block) {
 
 Blockly.Python.iot_mqtt_data = function(){
     Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
-    Blockly.Python.definitions_['import_usocket_debug'] = "import usocket_debug"; 
     var key = this.getFieldValue('key');
     var code='mqtt_client.'+key;   
     return [code, Blockly.Python.ORDER_ATOMIC];

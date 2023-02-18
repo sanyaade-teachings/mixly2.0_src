@@ -12,7 +12,7 @@ Blockly.Python.iot_wifi_connect = function(block) {
 };
 
 Blockly.Python.iot_onenet_connect = function(block) {
-  Blockly.Python.definitions_['import_simple'] = "import simple";
+  Blockly.Python.definitions_['import_onenet'] = "import onenet";
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var client =  Blockly.Python.valueToCode(this, 'CLIENT', Blockly.Python.ORDER_ATOMIC) ;
   var server =  Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC) ;
@@ -20,13 +20,13 @@ Blockly.Python.iot_onenet_connect = function(block) {
   var password =  Blockly.Python.valueToCode(this, 'PASSWORD', Blockly.Python.ORDER_ATOMIC) ;
   var topic =  Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC) ;
   var subscribe = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT) || '0';
-  var code= v + ' = miot.init_MQTT_client(' + client + ', ' + server + ', '+ username + ', ' + password +', ' + topic+', ' + subscribe + ')\n';
+  var code= v + ' = onenet.init_MQTT_client(' + client + ', ' + server + ', '+ username + ', ' + password +', ' + topic+', ' + subscribe + ')\n';
   return code;
 };
 
 Blockly.Python.iot_onenet_disconnect = function(block) {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-  Blockly.Python.definitions_['import_simple'] = "import simple"; 
+  Blockly.Python.definitions_['import_onenet'] = "import onenet"; 
   var code=v + '.do_disconnect()\n';  
   return code;
 };
@@ -35,14 +35,14 @@ Blockly.Python.iot_onenet_publish_dict = function(block) {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var d = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ATOMIC) ;
   var check = this.getFieldValue("is_print") == 'TRUE' ? 'True' : 'False';
-  Blockly.Python.definitions_['import_simple'] = "import simple"; 
+  Blockly.Python.definitions_['import_onenet'] = "import onenet"; 
   var code=v + '.publish('+d+', is_print = '+check+')\n';  
   return code;
 };
 
 Blockly.Python.iot_onenet_check = function(block) {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ; 
-  Blockly.Python.definitions_['import_simple'] = "import simple"; 
+  Blockly.Python.definitions_['import_onenet'] = "import onenet"; 
   var code=v + '.check_msg()\n';  
   return code;
 };
@@ -51,7 +51,7 @@ Blockly.Python.iot_onenet_publish = function() {
   // Create a list with any number of elements of any type.
   
   //var size=window.parseFloat(this.getFieldValue('SIZE'));
- Blockly.Python.definitions_['import_miot'] = "import miot";  
+ Blockly.Python.definitions_['import_onenet'] = "import onenet";  
   var ck = new Array(this.itemCount_);
   var cv = new Array(this.itemCount_);
   var ct = new Array(this.itemCount_);

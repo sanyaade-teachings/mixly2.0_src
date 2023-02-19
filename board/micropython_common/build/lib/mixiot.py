@@ -299,20 +299,21 @@ class MQTTClient:
         sz = self._recv_len()
         topic_len = self.sock.read(2)
         topic_len = (topic_len[0] << 8) | topic_len[1]
-        topic = self.sock.read(topic_len)
+        topic = self.sock.read(topic_len).decode('utf-8')
         sz -= topic_len + 2
         if op & 6:
             pid = self.sock.read(2)
             pid = pid[0] << 8 | pid[1]
             sz -= 2
-        msg = self.sock.read(sz)
-        self._handle_on_message(self, str(topic, "utf-8"), str(msg, "utf-8"))
+        msg = self.sock.read(sz).decode('utf-8')
+        self._handle_on_message(self, topic, msg)
         if op & 6 == 2:
             pkt = bytearray(b"\x40\x02\0\0")
             struct.pack_into("!H", pkt, 2, pid)
             self.sock.write(pkt)
         elif op & 6 == 4:
             assert 0
+        return {"msg":msg, "topic":topic}  
 
     # Checks whether a pending message from server is available.
     def check_msg(self):
@@ -322,57 +323,24 @@ class MQTTClient:
             self.ping()
         return self.wait_msg()
 
-    #The length of client data obtained during debugging
+    #The length of client data obtained
     @property
     def client_len(self):
         _len=self.sock.client_len
         self.sock.client_len=0
         return _len
 
-    #The length of server data obtained during debugging
+    #The length of server data obtained
     @property
     def server_len(self):
         _len=self.sock.server_len
         self.sock.server_len=0
         return _len
 
-    #Acquired data receiving and sending information during debugging
-    @property
-    def analyze_msg(self):
-        fullPacket = b''
-        res = self.sock.read(1)
-        fullPacket = fullPacket + res
-        self.sock.setblocking(True)
-        if res is None:
-            return None
-        if res == b"":
-            raise OSError(-1)
-        if res == b"\xd0":    # PINGRESP
-            sz = self.sock.read(1)
-            fullPacket = fullPacket + sz
-            assert sz[0] == 0
-            return None
-        op = res[0]
-        if op & 0xf0 != 0x30:
-            return op
-        sz = self._recv_len()
-        topic_len = self.sock.read(2)
-        fullPacket = fullPacket + topic_len
-        topic_len = (topic_len[0] << 8) | topic_len[1]
-        topic = self.sock.read(topic_len)
-        fullPacket = fullPacket + topic
-        sz -= topic_len + 2
-        if op & 6:
-            pid = self.sock.read(2)
-            fullPacket = fullPacket + pid
-            pid = pid[0] << 8 | pid[1]
-            sz -= 2
-        msg = self.sock.read(sz)
-        fullPacket = fullPacket + msg
-        if op & 6 == 2:
-            pkt = bytearray(b"\x40\x02\0\0")
-            struct.pack_into("!H", pkt, 2, pid)
-            self.sock.write(pkt)
-        elif op & 6 == 4:
-            assert 0
-        return {"msg": msg.decode(), "topic": topic.decode(), "fullPacket": fullPacket}  
+    #Get server time information
+    def time_msg(self,utc=28800):
+        msg=self.wait_msg()
+        if isinstance(msg, dict):
+            if msg['topic'] =='$SYS/hello':
+                val=time.gmtime(int(msg['msg'])//1000-946684800+utc)[0:7]
+                return str(val).replace(' ','')[1:-1]

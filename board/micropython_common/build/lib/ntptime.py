@@ -24,6 +24,18 @@ def time(host="pool.ntp.org", utc=28800):
     return (val[0], val[1], val[2], val[6] , val[3], val[4], val[5], val[7])
 
 # There's currently no timezone support in MicroPython, and the RTC is set in UTC time.
-def settime():
-    utime.sleep_ms(100)
-    RTC().datetime(time())
+def settime(times):
+    if isinstance(times, str): 
+        try:
+            val=eval(times)
+            if len(val)==7:
+                times=(val[0], val[1], val[2], val[6] , val[3], val[4], val[5], 0) 
+            else:
+                raise ValueError("Clock information format error")
+        except:
+            raise ValueError("Clock information format error")
+    if isinstance(times, tuple):
+        if len(times) ==8:
+            RTC().datetime(times)
+        else:
+            raise ValueError("Clock information format error")

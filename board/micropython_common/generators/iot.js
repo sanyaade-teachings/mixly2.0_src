@@ -227,7 +227,7 @@ Blockly.Python.iot_http_data = function(){
 };
 
 Blockly.Python.iot_mqtt_client = function(block) {
-  Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+  Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key2');
   var code ='mqtt_client = mixiot.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug='+key+')\n';
@@ -236,7 +236,7 @@ Blockly.Python.iot_mqtt_client = function(block) {
 };
 
 Blockly.Python.iot_mqtt_data = function(){
-    Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+    Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
     var key = this.getFieldValue('key');
     var code='mqtt_client.'+key;   
     return [code, Blockly.Python.ORDER_ATOMIC];

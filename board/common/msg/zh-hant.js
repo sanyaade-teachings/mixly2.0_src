@@ -3615,3 +3615,4 @@ Blockly.MIXLY_REQUESTS_GET_LEN = '接收包長度';
 Blockly.MIXLY_CONNECTTO = '連接到';
 Blockly.MIXLY_INIT_SUBSCRIBE = '初始化並訂閱';
 Blockly.MIXLY_OPEN_DEBUG = '打開調試';
+Blockly.MIXLY_USE_STRING = '使用字符串';

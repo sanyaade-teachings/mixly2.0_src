@@ -452,6 +452,13 @@ Blockly.Python.onboard_RTC_set_datetime= function () {
   return code;
 };
 
+Blockly.Python.onboard_RTC_settime_string=function(){
+    var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_ntptime'] = "import ntptime";
+    var code = 'ntptime.settime('+cnt+')\n';
+    return code;
+};
+
 Blockly.Python.onboard_RTC_get_time = function () {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   Blockly.Python.definitions_['import_'+version+'rtc_clock'] = 'from '+version + ' import rtc_clock';  

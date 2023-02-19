@@ -1553,6 +1553,13 @@
             </shadow>
           </value>
         </block>
+        <block type="onboard_RTC_settime_string" m-hide="micropython:esp32:mixgo_pe">        
+          <value name="CONTENT">
+            <shadow type="text">
+              <field name="TEXT">2023,1,1,12,0,0,6</field>
+            </shadow>
+          </value>
+        </block>
         <block type="onboard_RTC_get_time" m-hide="micropython:esp32:mixgo_pe"></block>
       </category>
       <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"  m-show="micropython:esp32:mixgo micropython:esp32:rm_e1 micropython:esp32:mpython">

@@ -3641,3 +3641,4 @@ Blockly.MIXLY_REQUESTS_GET_LEN = 'received-packet length';
 Blockly.MIXLY_CONNECTTO = 'connect to';
 Blockly.MIXLY_INIT_SUBSCRIBE = 'initialize and subscribe';
 Blockly.MIXLY_OPEN_DEBUG = 'debug';
+Blockly.MIXLY_USE_STRING = 'use string';

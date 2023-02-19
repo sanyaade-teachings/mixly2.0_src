@@ -411,6 +411,21 @@ Blockly.Blocks.onboard_RTC_get_time = {
 }
 };
 
+Blockly.Blocks['onboard_RTC_settime_string'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField('RTC'); 
+        this.appendValueInput('CONTENT')
+            .appendField(Blockly.MIXLY_USE_STRING)
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_RTCSETTIME);     
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+    }
+};
+
 Blockly.Blocks.onboard_RTC_set_datetime = {
  init: function() {    
     this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);

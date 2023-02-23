@@ -4,10 +4,13 @@
   </a>
 </p>
 <h2 align="center">Mixly</h2>
+<p align="center">
+  图形化编程软件
+</p>
 
 ---
 
-## Mixly图形化编程软件(跨平台代码)
+## 跨平台代码
 
 ### Mixly官方网站
 

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://mixly2.gitee.io/mixly2.0_src">
-    <img src="https://foruda.gitee.com/images/1677153325273369270/10f2e228_5225463.png" width="100" alt="Mixly">
+    <img src="https://foruda.gitee.com/images/1677155717148882961/0c044ac0_5225463.png" width="100" alt="Mixly">
   </a>
 </p>
 <h1 align="center">Mixly</h1>

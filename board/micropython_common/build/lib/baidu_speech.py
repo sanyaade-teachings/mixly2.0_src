@@ -4,20 +4,17 @@ Baidu ASR API
 MicroPython library for Baidu ASR API
 =======================================================
 
-#Preliminary composition					20220708
-#Add intelligent dialog (unit) function		20220711
+#Preliminary composition	  	    20230223
+#https://ai.baidu.com/ai-doc/SPEECH/Ek39uxgre
+#https://ai.baidu.com/unit/home#/home
 
-https://ai.baidu.com/ai-doc/SPEECH/Ek39uxgre
-https://ai.baidu.com/unit/home#/home
-
-dahanzimin From the Mixly Team
+@dahanzimin From the Mixly Team
 """
 
 import json,gc
 import urequests,array
 from ubinascii import hexlify
 from machine import Timer,unique_id
-
 
 '''Set constant'''
 _framerate=8000
@@ -32,7 +29,7 @@ def urequests_api(method, url, **kw):
 		
 def fetch_token(API_Key,Secret_Key):
 	"""Get access_token"""
-	url='https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={}&client_secret={}'.format(API_Key,Secret_Key)
+	url='http://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id={}&client_secret={}'.format(API_Key,Secret_Key)
 	results=urequests_api("GET",url)
 	if "error_description" in results.keys():
 		raise ValueError(results["error_description"])
@@ -46,24 +43,31 @@ class Recorder:
 
 	def _timer_callback(self,timer):
 		'''Timer callback read microphone'''
-		self._pcm_buffer.append(self._mic.read_u16()-32768)
-		self._record_time-=1
+		try:
+			_mic=self._mic.read_u16()-32768
+			self._pcm_buffer.append(_mic &0xFF)
+			self._pcm_buffer.append(_mic >>8)
+			self._record_time-=1
+		except:
+			#print("MemoryError: memory allocation failed")
+			gc.collect()
+			self._record_time=0
 			
 	def record(self,record_time=1):
 		"""Call timer to record audio"""
-		self._pcm_buffer=array.array('H',[])
+		self._pcm_buffer=bytearray(0)	
 		self._record_time=record_time*_framerate
-		self._timer.init(freq =_framerate*2, mode = Timer.PERIODIC, callback = self._timer_callback)
+		self._timer.init(freq =_framerate, mode = Timer.PERIODIC, callback = self._timer_callback)
 		while True:
 			if self._record_time <= 0:
 				self._timer.deinit()
 				gc.collect()
-				return	bytes(self._pcm_buffer)
+				return	self._pcm_buffer
 
 class ASR(Recorder):
-	def __init__(self, adc, API_Key, Secret_Key):
+	def __init__(self, adc, API_Key, Secret_Key, timer=2):
 		self._token=fetch_token(API_Key,Secret_Key)
-		super().__init__(adc)
+		super().__init__(adc,timer)
 		
 	def	recognize(self,record_time=1,dev_pid=1537):
 		"""Access API to get voice results"""
@@ -79,7 +83,7 @@ class ASR(Recorder):
 				return results["result"][0]
 		else:
 			return ''
-		
+
 class UNIT:
 	def __init__(self, API_Key, Secret_Key):
 		self._token=fetch_token(API_Key,Secret_Key)
@@ -88,7 +92,7 @@ class UNIT:
 	def chatbot(self,chatbot_id,query):
 		"""Access API to intelligent dialog"""
 		if len(query) > 0:
-			url='https://aip.baidubce.com/rpc/2.0/unit/service/v3/chat?access_token={}'.format(self._token)	
+			url='http://aip.baidubce.com/rpc/2.0/unit/service/v3/chat?access_token={}'.format(self._token)	
 			data={"log_id":"log"+_unique_id,
 				   "version":"3.0",
 				   "service_id":chatbot_id,

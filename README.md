@@ -3,7 +3,7 @@
     <img src="https://foruda.gitee.com/images/1677155717148882961/0c044ac0_5225463.png" width="100" alt="Mixly">
   </a>
 </p>
-<h1 align="center">Mixly</h1>
+<h2 align="center">Mixly</h2>
 
 ---
 

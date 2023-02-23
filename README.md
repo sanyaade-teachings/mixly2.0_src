@@ -5,7 +5,7 @@
 </p>
 <h2 align="center">Mixly</h2>
 <p align="center">
-  图形化编程软件
+  一款面向初学者、硬件编程爱好者的图形化编程工具
 </p>
 
 ---
@@ -28,6 +28,10 @@ http://wiki.mixly.org
     <tr>
         <td><img src="https://foruda.gitee.com/images/1677153641352478950/f4d0eb67_5225463.png"/></td>
         <td><img src="https://foruda.gitee.com/images/1677153954316335623/5ffa2d91_5225463.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://foruda.gitee.com/images/1677156373211671352/7922a57e_5225463.png"/></td>
+        <td><img src="https://foruda.gitee.com/images/1677156435604305593/6f5e54aa_5225463.png"/></td>
     </tr>
     <tr>
         <td><img src="https://foruda.gitee.com/images/1677153736660048584/765aa0b6_5225463.png"/></td>

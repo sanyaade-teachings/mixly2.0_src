@@ -221,12 +221,8 @@ ArduShell.compile = (doFunc = () => {}) => {
                      + buildPath
                      + '\" \"'
                      + codePath
-                     + '\"';
-        ArduShell.runCmd(layerNum, 'compile', cmdStr,
-            function () {
-                doFunc();
-            }
-        );
+                     + '\" --no-color';
+        ArduShell.runCmd(layerNum, 'compile', cmdStr, doFunc);
     }, 100);
 }
 
@@ -309,7 +305,7 @@ ArduShell.upload = (boardType, port) => {
             + ' --config-file \"'
             + configPath
             + '\" --verbose '
-            + '-i \"' + ArduShell.binFilePath + '\"';
+            + '-i \"' + ArduShell.binFilePath + '\" --no-color';
         ArduShell.binFilePath = '';
     } else {
         let myLibPath = Env.indexPath + "/libraries/myLib/";
@@ -341,7 +337,7 @@ ArduShell.upload = (boardType, port) => {
             + buildPath
             + '\" \"'
             + codePath
-            + '\"';
+            + '\" --no-color';
     }
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {

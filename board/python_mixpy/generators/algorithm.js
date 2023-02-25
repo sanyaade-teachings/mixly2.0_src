@@ -27,19 +27,32 @@ Blockly.Python.algorithm_prepare3 = function() {
   return code;
 };
 
-Blockly.Python.algorithm_add_school = function() {  
-  var code = "path = [1]\n";
+Blockly.Python.algorithm_add_school = function() {
+  var code = "path = [1]\n"
+           + "list1 = [0,1,2,3,4,5,6]\n"
+           + "list2 = [3,1,0,4,5,6,2]\n";
   return code;
 };
 
-Blockly.Python.algorithm_get_current_location = function() {  
+Blockly.Python.algorithm_get_current_location = function() {
   var line1 = 'f = path[(len(path) - 1)]\n';
   var code = line1;
   return code;
 };
 
-Blockly.Python.algorithm_find_path = function() {  
-  var line1 = 'f = path[(len(path) - 1)]\nflag = 0\n'+'for _my_variable in range(7):\n'+'    if vis[_my_variable+1] == 0 and g[f][_my_variable+1] == 1:\n'+'        if mark[f][_my_variable+1] == 0:\n'+'            flag = 1\n'+'            break\n';
+Blockly.Python.algorithm_find_path = function() {
+  Blockly.Python.definitions_.import_random = "import random";
+  var line1 = 'if random.choice([0,1]) == 0:\n'
+            + '    list = list1\n'
+            + 'else:\n'
+            + '    list = list2\n'
+            + 'f = path[(len(path) - 1)]\n'
+            + 'flag = 0\n'
+            + 'for _my_variable in range(7):\n'
+            + '    if vis[_my_variable+1] == 0 and g[f][_my_variable+1] == 1:\n'
+            + '        if mark[f][_my_variable+1] == 0:\n'
+            + '            flag = 1\n'
+            + '            break\n';
   var code = line1;
   return code;
 };

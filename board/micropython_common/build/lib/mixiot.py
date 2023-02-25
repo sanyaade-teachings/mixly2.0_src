@@ -1,5 +1,5 @@
 import time
-import usocket_debug as socket
+import usocket as socket
 import ustruct as struct
 from machine import unique_id
 from ubinascii import hexlify
@@ -28,8 +28,8 @@ def ntp(url='mixio.mixly.cn'):
         raise RuntimeError("API request failed or WiFi is not connected",e) 
     return results
     
-def init_MQTT_client(address, username, password, MQTT_USR_PRJ, debug=False):
-    client = MQTTClient(hexlify(unique_id()), address, 1883, username, password, debug=debug)
+def init_MQTT_client(address, username, password,MQTT_USR_PRJ):
+    client = MQTTClient(hexlify(unique_id()), address, 1883, username, password)
     client.set_last_will(topic=MQTT_USR_PRJ+WILL_TOPIC, msg=client.client_id, qos=2)
     if client.connect()==0:
         client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=0)
@@ -48,7 +48,7 @@ class MQTTException(Exception):
     pass
 
 class MQTTClient:
-    def __init__(self, client_id, server, port=0, username=None, password=None, keepalive=60, ssl=False, ssl_params={}, debug=False):
+    def __init__(self, client_id, server, port=0, username=None, password=None, keepalive=60, ssl=False, ssl_params={}):
         if port == 0:
             port = 8883 if ssl else 1883
         self.client_id = client_id
@@ -57,7 +57,6 @@ class MQTTClient:
         self.ssl = ssl
         self.ssl_params = ssl_params
         self.pid = 0
-        self.debug=debug
         self._on_message = None
         self.username = username
         self.password = password
@@ -128,7 +127,7 @@ class MQTTClient:
         self.lw_retain = retain
     
     def connect(self, clean_session=True):
-        self.sock = socket.socket(debug=self.debug)
+        self.sock = socket.socket()
         self.sock.connect(self.addr)
         print(self.addr)
         if self.ssl:
@@ -299,21 +298,20 @@ class MQTTClient:
         sz = self._recv_len()
         topic_len = self.sock.read(2)
         topic_len = (topic_len[0] << 8) | topic_len[1]
-        topic = self.sock.read(topic_len).decode('utf-8')
+        topic = self.sock.read(topic_len)
         sz -= topic_len + 2
         if op & 6:
             pid = self.sock.read(2)
             pid = pid[0] << 8 | pid[1]
             sz -= 2
-        msg = self.sock.read(sz).decode('utf-8')
-        self._handle_on_message(self, topic, msg)
+        msg = self.sock.read(sz)
+        self._handle_on_message(self, str(topic, "utf-8"), str(msg, "utf-8"))
         if op & 6 == 2:
             pkt = bytearray(b"\x40\x02\0\0")
             struct.pack_into("!H", pkt, 2, pid)
             self.sock.write(pkt)
         elif op & 6 == 4:
             assert 0
-        return {"msg":msg, "topic":topic}  
 
     # Checks whether a pending message from server is available.
     def check_msg(self):
@@ -322,25 +320,3 @@ class MQTTClient:
             self._star_time = time.ticks_ms()
             self.ping()
         return self.wait_msg()
-
-    #The length of client data obtained
-    @property
-    def client_len(self):
-        _len=self.sock.client_len
-        self.sock.client_len=0
-        return _len
-
-    #The length of server data obtained
-    @property
-    def server_len(self):
-        _len=self.sock.server_len
-        self.sock.server_len=0
-        return _len
-
-    #Get server time information
-    def time_msg(self,utc=28800):
-        msg=self.wait_msg()
-        if isinstance(msg, dict):
-            if msg['topic'] =='$SYS/hello':
-                val=time.gmtime(int(msg['msg'])//1000-946684800+utc)[0:7]
-                return str(val).replace(' ','')[1:-1]

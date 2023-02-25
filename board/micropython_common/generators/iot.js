@@ -19,7 +19,7 @@ Blockly.Python.iot_onenet_connect = function(block) {
   var username =  Blockly.Python.valueToCode(this, 'USERNAME', Blockly.Python.ORDER_ATOMIC) ;
   var password =  Blockly.Python.valueToCode(this, 'PASSWORD', Blockly.Python.ORDER_ATOMIC) ;
   var topic =  Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC) ;
-  var subscribe = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT) || '0';
+  var subscribe = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   var code= v + ' = onenet.init_MQTT_client(' + client + ', ' + server + ', '+ username + ', ' + password +', ' + topic+', ' + subscribe + ')\n';
   return code;
 };
@@ -212,25 +212,25 @@ Blockly.Python.iot_client_onboard = function(){
 };
 
 Blockly.Python.iot_http_client = function(block) {
-  Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+  Blockly.Python.definitions_['import_debugnet'] = "import debugnet"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key');
-  var code ='HTTP_client = urequests.get(' + addr + ',debug='+key+')\n';  
+  var code ='HTTP_client = debugnet.request("GET",' + addr + ',debug='+key+')\n';  
   return code;
 };
 
 Blockly.Python.iot_http_data = function(){
-    Blockly.Python.definitions_['import_urequests'] = "import urequests"; 
+    Blockly.Python.definitions_['import_debugnet'] = "import debugnet"; 
     var key = this.getFieldValue('key');
     var code='HTTP_client.'+key;    
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.iot_mqtt_client = function(block) {
-  Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
+  Blockly.Python.definitions_['import_debugnet'] = "import debugnet"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key2');
-  var code ='mqtt_client = mixiot.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug='+key+')\n';
+  var code ='mqtt_client = debugnet.init_MQTT_client(' + addr + ', "MixIO_public", "MixIO_public", "MixIO/3QBAGKRL/default/",debug='+key+')\n';
   code+='mqtt_client.subscribe("$SYS/hello")\n';  
   return code;
 };

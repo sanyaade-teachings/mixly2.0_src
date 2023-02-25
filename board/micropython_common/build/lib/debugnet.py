@@ -1,38 +1,50 @@
-import usocket
+"""
+Debugnet(HTTP,MQTT)
 
-class Response:
+MicroPython library for network request debugging
+=======================================================
 
-    def __init__(self, f):
-        self.raw = f
-        self.encoding = "utf-8"
-        self._cached = None
+#Preliminary composition            20230225
 
-    def close(self):
-        if self.raw:
-            self.raw.close()
-            self.raw = None
-        self._cached = None
+@dahanzimin From the Mixly Team
+"""
+import time
+from umqtt import MQTTClient
+from ubinascii import hexlify
+from machine import unique_id
+from urequests import Response
+from usocket import socket,getaddrinfo,SOCK_STREAM
+from mixiot import WILL_TOPIC,ADDITIONAL_TOPIC
 
-    @property
-    def content(self):
-        if self._cached is None:
-            try:
-                self._cached = self.raw.read()
-            finally:
-                self.raw.close()
-                self.raw = None
-        return self._cached
+class socket_d(socket):
+    def __init__(self,*args,debug=False,**kw):
+        super().__init__(*args,**kw)
+        self._debug=debug
+        self.client_len=0
+        self.server_len=0
 
-    @property
-    def text(self):
-        return str(self.content, self.encoding)
+    def write(self,*args):
+        super().write(*args)
+        self.client_len=min(self.client_len+len(args[0]),65535)
+        if self._debug:
+            print('client:',args[0])
+ 
+    def readline(self,*args):
+        buf=super().readline(*args)
+        self.server_len=min(self.server_len+len(buf),65535) if buf else self.server_len
+        if self._debug:
+            print('server:',buf)
+        return buf
 
-    def json(self):
-        import ujson
-        return ujson.loads(self.content)
+    def read(self,*args):
+        buf=super().read(*args)
+        self.server_len=min(self.server_len+len(buf),65535) if buf else self.server_len
+        if self._debug:
+            print('server:',buf)
+        return buf
 
-
-def request(method, url, data=None, json=None, headers={}, stream=None, parse_headers=True):
+#HTTP
+def request(method, url, data=None, json=None, headers={}, stream=None, parse_headers=True, debug=False):
     redir_cnt = 1
     while True:
         try:
@@ -47,19 +59,15 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
             port = 443
         else:
             raise ValueError("Unsupported protocol: " + proto)
-
         if ":" in host:
             host, port = host.split(":", 1)
             port = int(port)
-
-        ai = usocket.getaddrinfo(host, port, 0, usocket.SOCK_STREAM)
+        ai = getaddrinfo(host, port, 0, SOCK_STREAM)
         ai = ai[0]
-
         resp_d = None
         if parse_headers is not False:
             resp_d = {}
-
-        s = usocket.socket(ai[0], ai[1], ai[2])
+        s = socket_d(ai[0], ai[1], ai[2], debug=debug)
         try:
             s.connect(ai[-1])
             if proto == "https:":
@@ -67,7 +75,6 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
             s.write(b"%s /%s HTTP/1.0\r\n" % (method, path))
             if not "Host" in headers:
                 s.write(b"Host: %s\r\n" % host)
-            # Iterate over keys to avoid tuple alloc
             for k in headers:
                 s.write(k)
                 s.write(b": ")
@@ -83,9 +90,7 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
             s.write(b"Connection: close\r\n\r\n")
             if data:
                 s.write(data)
-
             l = s.readline()
-            #print(l)
             l = l.split(None, 2)
             status = int(l[1])
             reason = ""
@@ -95,8 +100,6 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
                 l = s.readline()
                 if not l or l == b"\r\n":
                     break
-                #print(l)
-
                 if l.startswith(b"Transfer-Encoding:"):
                     if b"chunked" in l:
                         raise ValueError("Unsupported " + l)
@@ -105,10 +108,8 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
                         raise ValueError("Too many redirects")
                     redir_cnt -= 1
                     url = l[9:].decode().strip()
-                    #print("redir to:", url)
                     status = 300
                     break
-
                 if parse_headers is False:
                     pass
                 elif parse_headers is True:
@@ -120,32 +121,46 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
         except OSError:
             s.close()
             raise
-
         if status != 300:
             break
-
     resp = Response(s)
     resp.status_code = status
     resp.reason = reason
+    resp.client_len=s.client_len
+    resp.server_len=s.server_len
     if resp_d is not None:
         resp.headers = resp_d
     return resp
 
+class MQTT_Client(MQTTClient):
+    def __init__(self,*args,debug=False,**kw):
+        super().__init__(*args,**kw)
+        self.sock = socket_d(debug=debug)
 
-def head(url, **kw):
-    return request("HEAD", url, **kw)
+    @property
+    def client_len(self):           #The length of client data obtained
+        _len=self.sock.client_len
+        self.sock.client_len=0
+        return _len
 
-def get(url, **kw):
-    return request("GET", url, **kw)
+    @property
+    def server_len(self):           #The length of server data obtained
+        _len=self.sock.server_len
+        self.sock.server_len=0
+        return _len
 
-def post(url, **kw):
-    return request("POST", url, **kw)
+    def time_msg(self,utc=28800):   #Get server time information
+        msg=self.wait_msg()
+        if isinstance(msg, dict):
+            if msg['topic'] =='$SYS/hello':
+                val=time.gmtime(int(msg['msg'])//1000-946684800+utc)[0:7]
+                return str(val).replace(' ','')[1:-1]
 
-def put(url, **kw):
-    return request("PUT", url, **kw)
-
-def patch(url, **kw):
-    return request("PATCH", url, **kw)
-
-def delete(url, **kw):
-    return request("DELETE", url, **kw)
+#MQTT
+def init_MQTT_client(address, username, password, MQTT_USR_PRJ, debug=False):
+    client = MQTT_Client(hexlify(unique_id()), address, 1883, username, password, debug=debug)
+    client.set_last_will(topic=MQTT_USR_PRJ+WILL_TOPIC, msg=client.client_id, qos=2)
+    if client.connect()==0:
+        client.publish(MQTT_USR_PRJ+ADDITIONAL_TOPIC, client.client_id, qos=0)
+    time.sleep_ms(200)
+    return client

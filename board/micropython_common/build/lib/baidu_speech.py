@@ -49,13 +49,15 @@ class Recorder:
 			self._pcm_buffer.append(_mic >>8)
 			self._record_time-=1
 		except:
-			#print("MemoryError: memory allocation failed")
+			print("Warning: MemoryError!")
+			self._pcm_buffer=bytearray()
 			gc.collect()
 			self._record_time=0
-			
+	
 	def record(self,record_time=1):
 		"""Call timer to record audio"""
-		self._pcm_buffer=bytearray(0)	
+		self._pcm_buffer=bytearray()
+		gc.collect()	
 		self._record_time=record_time*_framerate
 		self._timer.init(freq =_framerate, mode = Timer.PERIODIC, callback = self._timer_callback)
 		while True:
@@ -72,7 +74,7 @@ class ASR(Recorder):
 	def	recognize(self,record_time=1,dev_pid=1537):
 		"""Access API to get voice results"""
 		pcm_buffer=self.record(record_time)
-		if max(pcm_buffer)>=250 and min(pcm_buffer) <=5:
+		if max(pcm_buffer)>=250:
 			url='http://vop.baidu.com/server_api?dev_pid={}&cuid={}&token={}'.format(dev_pid,_unique_id,self._token)
 			headers = {'Content-Type': 'audio/pcm; rate={}'.format(_framerate)}
 			results=urequests_api("POST",url,data=pcm_buffer,headers=headers)
@@ -92,7 +94,7 @@ class UNIT:
 	def chatbot(self,chatbot_id,query):
 		"""Access API to intelligent dialog"""
 		if len(query) > 0:
-			url='http://aip.baidubce.com/rpc/2.0/unit/service/v3/chat?access_token={}'.format(self._token)	
+			url='https://aip.baidubce.com/rpc/2.0/unit/service/v3/chat?access_token={}'.format(self._token)	
 			data={"log_id":"log"+_unique_id,
 				   "version":"3.0",
 				   "service_id":chatbot_id,
@@ -108,5 +110,5 @@ class UNIT:
 				return results["result"]['responses'][0]['actions'][0]['say']
 		else:
 			return ''
-			
+	
 gc.collect()

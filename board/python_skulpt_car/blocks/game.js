@@ -628,6 +628,17 @@ Blockly.Blocks.isLightGreen = {
   }
 };
 
+Blockly.Blocks.isLightRed = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField('信号灯为红灯?');
+    this.setOutput(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
 Blockly.Blocks['addOil'] = {
   init: function () {
     this.appendDummyInput()

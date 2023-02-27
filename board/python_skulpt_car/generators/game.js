@@ -188,6 +188,12 @@ Blockly.Python.isLightGreen = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.isLightRed = function(block) {
+  Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
+  var code = 'not actor.isLightGreen(\'block_id='+ block.id + '\')';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.addOil = function(block) {
   Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
   var code = 'actor.addOil(\'block_id='+ block.id + '\');\n';

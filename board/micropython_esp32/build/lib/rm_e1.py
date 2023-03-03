@@ -92,7 +92,16 @@ class ADCSensor:
 	
 adc1=ADCSensor(32)
 adc2=ADCSensor(33)
-battery=ADCSensor(26)
+
+'''ADC conflicts with WiFi'''
+try:
+	battery=ADCSensor(26)
+except:
+	class Clash:
+		def voltage(self):
+			print("Warning: battery power collection conflicts with WiFi")
+			return None
+	battery=Clash()
 
 '''2-LED'''	 #Repair brightness adjustment range 0-100%	
 class LED:

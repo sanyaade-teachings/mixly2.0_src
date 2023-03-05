@@ -285,7 +285,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
                 success: (layero, index) => {
                     $('#setting-menu-update-layer').css('overflow', 'hidden');
                     layero.find('.layui-layer-setwin').css('display', 'none');
-                    Setting.term = new Terminal(
+                    Setting.term = new Terminal({
                         rendererType: "canvas",
                         convertEol: true,
                         scrollback: 10,
@@ -297,7 +297,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
                             background: "#060101",
                             cursor: "help"
                         }
-                    );
+                    });
                     Setting.term.open($('#setting-menu-update-layer')[0]);
                     const { Socket } = Mixly.WebSocket;
                     Socket.sendCommand({

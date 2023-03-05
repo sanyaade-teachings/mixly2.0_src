@@ -288,14 +288,13 @@ Setting.refreshUpdateMenuStatus = (config) => {
                     Setting.term = new Terminal({
                         rendererType: "canvas",
                         convertEol: true,
-                        scrollback: 10,
                         disableStdin: true,
                         cursorStyle: "underline",
                         cursorBlink: true,
                         theme: {
-                            foreground: "yellow",
+                            foreground: "white",
                             background: "#060101",
-                            cursor: "help"
+                            lineHeight: 16
                         }
                     });
                     Setting.term.open($('#setting-menu-update-layer')[0]);

@@ -23,7 +23,7 @@ DomOperator.SerialDom = {
     }
 }
 
-const {SerialDom} = DomOperator;
+const { SerialDom } = DomOperator;
 
 // 串口工具
 class SerialDomGenerator {

@@ -257,15 +257,12 @@ Setting.configMenuGetValue = (obj) => {
 Setting.refreshUpdateMenuStatus = (config) => {
     console.log(config);
     const {
-        serverVersion,
-        clientVersion
+        serverVersion
     } = config;
     let $serverDiv = $('#setting-menu-update-server');
-    let $clientDiv = $('#setting-menu-update-client');
     let $btnDiv = $('#setting-menu-update > div:nth-child(2)');
     $serverDiv.find('span').css('display', 'none');
-    $clientDiv.find('span').css('display', 'none');
-    let needUpdateServer = false, needUpdateClient = false;
+    let needUpdateServer = false;
     if (serverVersion && serverVersion !== SOFTWARE.serverVersion) {
         $serverDiv.find('span[value="obsolete"]').css('display', 'inline-block');
         needUpdateServer = true;
@@ -274,26 +271,28 @@ Setting.refreshUpdateMenuStatus = (config) => {
         $serverDiv.find('span[value="latest"]').css('display', 'inline-block');
         $serverDiv.find('text').text(SOFTWARE.serverVersion);
     }
-    if (clientVersion && clientVersion !== SOFTWARE.clientVersion) {
-        $clientDiv.find('span[value="obsolete"]').css('display', 'inline-block');
-        needUpdateClient = true;
-        $clientDiv.find('text').text(`${SOFTWARE.clientVersion} → ${clientVersion}`);
-    } else {
-        $clientDiv.find('span[value="latest"]').css('display', 'inline-block');
-        $clientDiv.find('text').text(SOFTWARE.clientVersion);
-    }
-    if (needUpdateServer || needUpdateClient) {
+    if (needUpdateServer) {
         $btnDiv.css('display', 'flex');
         $btnDiv.children('button').off().click((event) => {
             let index = layer.load(2);
-            layer.alert(Msg.getLang('info'), {
-                shade: LayerExt.SHADE_ALL
-            });
-            const { Socket } = Mixly.WebSocket;
-            Socket.sendCommand({
-                obj: 'PM2',
-                func: 'updateSW',
-                args: []
+            LayerExt.open({
+                title: Msg.getLang('进度'),
+                id: 'setting-menu-update-layer',
+                shade: LayerExt.SHADE_ALL,
+                area: ['40%', '60%'],
+                max: ['800px', '300px'],
+                min: ['500px', '100px'],
+                success: (layero, index) => {
+                    layero.find('.layui-layer-setwin').css('display', 'none');
+                    const { Socket } = Mixly.WebSocket;
+                    Socket.sendCommand({
+                        obj: 'Socket',
+                        func: 'updateSW',
+                        args: []
+                    });
+                },
+                end: () => {
+                }
             });
         });
     } else {
@@ -302,6 +301,10 @@ Setting.refreshUpdateMenuStatus = (config) => {
     setTimeout(() => {
         $('#setting-menu-update').loading('destroy');
     }, 500);
+}
+
+Setting.showUpdateMessage = (data) => {
+    $('#setting-menu-update-layer').html($('#setting-menu-update-layer').html() + data + '\n');
 }
 
 window.addEventListener('DOMContentLoaded', () => {

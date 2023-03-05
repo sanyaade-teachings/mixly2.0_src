@@ -283,8 +283,21 @@ Setting.refreshUpdateMenuStatus = (config) => {
                 max: ['800px', '300px'],
                 min: ['500px', '100px'],
                 success: (layero, index) => {
+                    $('#setting-menu-update-layer').css('overflow', 'hidden');
                     layero.find('.layui-layer-setwin').css('display', 'none');
-                    Setting.term = new Terminal();
+                    Setting.term = new Terminal(
+                        rendererType: "canvas",
+                        convertEol: true,
+                        scrollback: 10,
+                        disableStdin: true,
+                        cursorStyle: "underline",
+                        cursorBlink: true,
+                        theme: {
+                            foreground: "yellow",
+                            background: "#060101",
+                            cursor: "help"
+                        }
+                    );
                     Setting.term.open($('#setting-menu-update-layer')[0]);
                     const { Socket } = Mixly.WebSocket;
                     Socket.sendCommand({
@@ -292,6 +305,10 @@ Setting.refreshUpdateMenuStatus = (config) => {
                         func: 'updateSW',
                         args: []
                     });
+                    Setting.onResize();
+                },
+                resizing: (layero) => {
+                    Setting.onResize();
                 },
                 end: () => {
                 }
@@ -306,6 +323,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
 }
 
 Setting.showUpdateMessage = (data) => {
+    console.log(data);
     Setting.term.write(data);
 }
 

@@ -126,7 +126,9 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
 
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
-        reconnect(); //重连
+        setTimeout(() => {
+            reconnect();
+        }, timeout);
         //StatusBar.addValue(event.toString());
     };
 
@@ -142,7 +144,9 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         if (event.code !== 1000) {
             timeoutFlag = false;
             clearTimeout(timeoutSet);
-            reconnect();
+            setTimeout(() => {
+                reconnect();
+            }, timeout);
         } else {
             clearInterval(heartCheck.timeoutObj);
             clearTimeout(heartCheck.serverTimeoutObj);

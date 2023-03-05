@@ -304,7 +304,12 @@ Setting.refreshUpdateMenuStatus = (config) => {
 }
 
 Setting.showUpdateMessage = (data) => {
-    $('#setting-menu-update-layer').html($('#setting-menu-update-layer').html() + data + '\n');
+    try {
+        let oldValue = $('#setting-menu-update-layer').html();
+        $('#setting-menu-update-layer').html(oldValue + data.replaceAll('\n', '<br/>') + '<br/>');
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 window.addEventListener('DOMContentLoaded', () => {

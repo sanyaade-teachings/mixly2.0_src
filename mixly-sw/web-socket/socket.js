@@ -30,6 +30,7 @@ Socket.debug = SOFTWARE.debug;
 const { hostname } = window.location;
 Socket.url = SOFTWARE.webSocket.protocol + '//' + hostname + ':' + Socket.port + '/';
 Socket.IPAddress = hostname;
+Socket.disconnectTimes = 0;
 Socket.updating = false;
 
 let lockReconnect = false; // 避免重复连接
@@ -132,6 +133,10 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
 
     WS.obj.onclose = (event) => {
         WS.connected = false;
+        WS.disconnectTimes += 1;
+        if (WS.disconnectTimes > 255) {
+            WS.disconnectTimes = 1;
+        }
         console.log('已断开' + WS.url);
 
         console.info(`关闭`, event.code);
@@ -221,7 +226,7 @@ Socket.disconnect = () => {
 }
 
 Socket.reload = () => {
-    if (!Socket.updating) {
+    if (!Socket.updating && Socket.disconnectTimes) {
         window.location.reload();
     }
 }

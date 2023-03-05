@@ -151,6 +151,10 @@ Deps.DEPENDENCY = {
             "path": '/common/modules/select2.min.js',
             "provide": [],
             "require": []
+        }, {
+            "path": '/common/modules/xterm.min.js',
+            "provide": ['Terminal'],
+            "require": []
         }
     ]
 };

@@ -305,10 +305,10 @@ Setting.refreshUpdateMenuStatus = (config) => {
                         func: 'updateSW',
                         args: []
                     });
-                    Setting.onResize();
+                    Setting.term.onResize();
                 },
                 resizing: (layero) => {
-                    Setting.onResize();
+                    Setting.term.onResize();
                 },
                 end: () => {
                 }

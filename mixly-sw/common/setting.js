@@ -208,6 +208,7 @@ Setting.addOnchangeOptionListener = () => {
                     imgSrc: 1
                 });
                 const { Socket } = Mixly.WebSocket;
+                Socket.updating = true;
                 Socket.sendCommand({
                     obj: 'Socket',
                     func: 'getConfigByUrl',

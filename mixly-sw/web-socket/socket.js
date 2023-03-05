@@ -30,7 +30,7 @@ Socket.debug = SOFTWARE.debug;
 const { hostname } = window.location;
 Socket.url = SOFTWARE.webSocket.protocol + '//' + hostname + ':' + Socket.port + '/';
 Socket.IPAddress = hostname;
-Socket.disconnectTimes = 0;
+Socket.updating = false;
 
 let lockReconnect = false; // 避免重复连接
 let timeoutFlag = true;
@@ -126,27 +126,19 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
 
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
-        setTimeout(() => {
-            reconnect();
-        }, timeout);
+        reconnect();
         //StatusBar.addValue(event.toString());
     };
 
     WS.obj.onclose = (event) => {
         WS.connected = false;
-        WS.disconnectTimes += 1;
-        if (WS.disconnectTimes > 255) {
-            WS.disconnectTimes = 1;
-        }
         console.log('已断开' + WS.url);
 
         console.info(`关闭`, event.code);
         if (event.code !== 1000) {
             timeoutFlag = false;
             clearTimeout(timeoutSet);
-            setTimeout(() => {
-                reconnect();
-            }, timeout);
+            reconnect();
         } else {
             clearInterval(heartCheck.timeoutObj);
             clearTimeout(heartCheck.serverTimeoutObj);
@@ -229,7 +221,7 @@ Socket.disconnect = () => {
 }
 
 Socket.reload = () => {
-    if (Socket.disconnectTimes) {
+    if (!Socket.updating) {
         window.location.reload();
     }
 }

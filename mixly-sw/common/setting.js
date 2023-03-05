@@ -8,7 +8,7 @@ Mixly.require({
     "web-socket": {
         "electron": [],
         "web": [],
-        "common": ["Mixly.WebSocket.Socket"]
+        "common": ["Mixly.WebSocket.Socket", "Terminal"]
     },
     "web-compiler": {
         "electron": [],
@@ -275,7 +275,6 @@ Setting.refreshUpdateMenuStatus = (config) => {
     if (needUpdateServer) {
         $btnDiv.css('display', 'flex');
         $btnDiv.children('button').off().click((event) => {
-            let index = layer.load(2);
             LayerExt.open({
                 title: Msg.getLang('进度'),
                 id: 'setting-menu-update-layer',
@@ -285,6 +284,8 @@ Setting.refreshUpdateMenuStatus = (config) => {
                 min: ['500px', '100px'],
                 success: (layero, index) => {
                     layero.find('.layui-layer-setwin').css('display', 'none');
+                    Setting.term = new Terminal();
+                    Setting.term.open($('#setting-menu-update-layer')[0]);
                     const { Socket } = Mixly.WebSocket;
                     Socket.sendCommand({
                         obj: 'Socket',
@@ -305,12 +306,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
 }
 
 Setting.showUpdateMessage = (data) => {
-    try {
-        let oldValue = $('#setting-menu-update-layer').html();
-        $('#setting-menu-update-layer').html(oldValue + data.replaceAll('\n', '<br/>') + '<br/>');
-    } catch (error) {
-        console.log(error);
-    }
+    Setting.term.write(data);
 }
 
 window.addEventListener('DOMContentLoaded', () => {

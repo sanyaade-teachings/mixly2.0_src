@@ -114,6 +114,9 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         heartCheck.reset().start();
         onopenFunc(WS);
         Socket.reload();
+        if (socket.updating) {
+            Socket.updating = false;
+        }
     };
 
     WS.obj.onmessage = (event) => {

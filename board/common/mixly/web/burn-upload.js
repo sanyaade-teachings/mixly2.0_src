@@ -134,6 +134,7 @@ BU.burnByUSB = () => {
         }
         let portObj = Serial.portsOperator[portName];
         const { toolConfig, serialport } = portObj;
+        const prevBaud = toolConfig.baudRates;
         if (prevBaud !== 115200) {
             toolConfig.baudRates = 115200;
             await serialport.setBaudRate(toolConfig.baudRates);

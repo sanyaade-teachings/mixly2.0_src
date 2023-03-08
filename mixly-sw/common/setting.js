@@ -285,29 +285,17 @@ Setting.refreshUpdateMenuStatus = (config) => {
                 success: (layero, index) => {
                     $('#setting-menu-update-layer').css('overflow', 'hidden');
                     layero.find('.layui-layer-setwin').css('display', 'none');
-                    Setting.term = new Terminal({
-                        rendererType: "canvas",
-                        convertEol: true,
-                        disableStdin: true,
-                        cursorStyle: "underline",
-                        cursorBlink: true,
-                        theme: {
-                            foreground: "white",
-                            background: "#060101",
-                            lineHeight: 16
-                        }
-                    });
-                    Setting.term.open($('#setting-menu-update-layer')[0]);
+                    Setting.ace = Setting.createAceEditor('setting-menu-update-layer');
+                    Setting.ace.resize();
                     const { Socket } = Mixly.WebSocket;
                     Socket.sendCommand({
                         obj: 'Socket',
                         func: 'updateSW',
                         args: []
                     });
-                    Setting.term.onResize();
                 },
                 resizing: (layero) => {
-                    Setting.term.onResize();
+                    Setting.ace.resize();
                 },
                 end: () => {
                 }
@@ -322,8 +310,33 @@ Setting.refreshUpdateMenuStatus = (config) => {
 }
 
 Setting.showUpdateMessage = (data) => {
-    console.log(data);
-    Setting.term.write(data);
+    Setting.ace.updateSelectionMarkers();
+    const { selection, session } = Setting.ace;
+    const initCursor = selection.getCursor();
+    Setting.ace.gotoLine(session.getLength());
+    selection.moveCursorLineEnd();
+    Setting.ace.insert(data);
+    Setting.ace.gotoLine(session.getLength());
+    selection.moveCursorLineEnd();
+}
+
+Setting.createAceEditor = (container, language = 'txt', tabSize = 4) => {
+    let codeEditor = ace.edit(container);
+    if (USER.theme === 'dark') {
+        codeEditor.setTheme('ace/theme/dracula');
+    } else {
+        codeEditor.setTheme('ace/theme/xcode');
+    }
+    codeEditor.getSession().setMode(`ace/mode/${language}`);
+    codeEditor.getSession().setTabSize(tabSize);
+    codeEditor.setFontSize(15);
+    codeEditor.setShowPrintMargin(false);
+    codeEditor.setReadOnly(true);
+    codeEditor.setScrollSpeed(0.8);
+    codeEditor.setShowPrintMargin(false);
+    codeEditor.renderer.setShowGutter(false);
+    codeEditor.setValue('', -1);
+    return codeEditor;
 }
 
 window.addEventListener('DOMContentLoaded', () => {

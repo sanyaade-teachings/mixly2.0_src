@@ -49,7 +49,8 @@ Mixly.CssLoader.commonCss = [
     "common/css/tippy-ext.css",
     "common/css/scrollbar.css",
     "common/css/select2.min.css",
-    "common/css/select2-ext.css"
+    "common/css/select2-ext.css",
+    "common/css/xterm.css"
 ];
 
 /* 客户端css */

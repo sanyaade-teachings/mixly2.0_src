@@ -8,7 +8,7 @@ Mixly.require({
     "web-socket": {
         "electron": [],
         "web": [],
-        "common": ["Mixly.WebSocket.Socket"]
+        "common": ["Mixly.WebSocket.Socket", "Terminal"]
     },
     "web-compiler": {
         "electron": [],
@@ -208,6 +208,7 @@ Setting.addOnchangeOptionListener = () => {
                     imgSrc: 1
                 });
                 const { Socket } = Mixly.WebSocket;
+                Socket.updating = true;
                 Socket.sendCommand({
                     obj: 'Socket',
                     func: 'getConfigByUrl',
@@ -257,15 +258,12 @@ Setting.configMenuGetValue = (obj) => {
 Setting.refreshUpdateMenuStatus = (config) => {
     console.log(config);
     const {
-        serverVersion,
-        clientVersion
+        serverVersion
     } = config;
     let $serverDiv = $('#setting-menu-update-server');
-    let $clientDiv = $('#setting-menu-update-client');
     let $btnDiv = $('#setting-menu-update > div:nth-child(2)');
     $serverDiv.find('span').css('display', 'none');
-    $clientDiv.find('span').css('display', 'none');
-    let needUpdateServer = false, needUpdateClient = false;
+    let needUpdateServer = false;
     if (serverVersion && serverVersion !== SOFTWARE.serverVersion) {
         $serverDiv.find('span[value="obsolete"]').css('display', 'inline-block');
         needUpdateServer = true;
@@ -274,26 +272,33 @@ Setting.refreshUpdateMenuStatus = (config) => {
         $serverDiv.find('span[value="latest"]').css('display', 'inline-block');
         $serverDiv.find('text').text(SOFTWARE.serverVersion);
     }
-    if (clientVersion && clientVersion !== SOFTWARE.clientVersion) {
-        $clientDiv.find('span[value="obsolete"]').css('display', 'inline-block');
-        needUpdateClient = true;
-        $clientDiv.find('text').text(`${SOFTWARE.clientVersion} → ${clientVersion}`);
-    } else {
-        $clientDiv.find('span[value="latest"]').css('display', 'inline-block');
-        $clientDiv.find('text').text(SOFTWARE.clientVersion);
-    }
-    if (needUpdateServer || needUpdateClient) {
+    if (needUpdateServer) {
         $btnDiv.css('display', 'flex');
         $btnDiv.children('button').off().click((event) => {
-            let index = layer.load(2);
-            layer.alert(Msg.getLang('info'), {
-                shade: LayerExt.SHADE_ALL
-            });
-            const { Socket } = Mixly.WebSocket;
-            Socket.sendCommand({
-                obj: 'PM2',
-                func: 'updateSW',
-                args: []
+            LayerExt.open({
+                title: Msg.getLang('进度'),
+                id: 'setting-menu-update-layer',
+                shade: LayerExt.SHADE_ALL,
+                area: ['40%', '60%'],
+                max: ['800px', '300px'],
+                min: ['500px', '100px'],
+                success: (layero, index) => {
+                    $('#setting-menu-update-layer').css('overflow', 'hidden');
+                    layero.find('.layui-layer-setwin').css('display', 'none');
+                    Setting.ace = Setting.createAceEditor('setting-menu-update-layer');
+                    Setting.ace.resize();
+                    const { Socket } = Mixly.WebSocket;
+                    Socket.sendCommand({
+                        obj: 'Socket',
+                        func: 'updateSW',
+                        args: []
+                    });
+                },
+                resizing: (layero) => {
+                    Setting.ace.resize();
+                },
+                end: () => {
+                }
             });
         });
     } else {
@@ -302,6 +307,36 @@ Setting.refreshUpdateMenuStatus = (config) => {
     setTimeout(() => {
         $('#setting-menu-update').loading('destroy');
     }, 500);
+}
+
+Setting.showUpdateMessage = (data) => {
+    Setting.ace.updateSelectionMarkers();
+    const { selection, session } = Setting.ace;
+    const initCursor = selection.getCursor();
+    Setting.ace.gotoLine(session.getLength());
+    selection.moveCursorLineEnd();
+    Setting.ace.insert(data);
+    Setting.ace.gotoLine(session.getLength());
+    selection.moveCursorLineEnd();
+}
+
+Setting.createAceEditor = (container, language = 'txt', tabSize = 4) => {
+    let codeEditor = ace.edit(container);
+    if (USER.theme === 'dark') {
+        codeEditor.setTheme('ace/theme/dracula');
+    } else {
+        codeEditor.setTheme('ace/theme/xcode');
+    }
+    codeEditor.getSession().setMode(`ace/mode/${language}`);
+    codeEditor.getSession().setTabSize(tabSize);
+    codeEditor.setFontSize(15);
+    codeEditor.setShowPrintMargin(false);
+    codeEditor.setReadOnly(true);
+    codeEditor.setScrollSpeed(0.8);
+    codeEditor.setShowPrintMargin(false);
+    codeEditor.renderer.setShowGutter(false);
+    codeEditor.setValue('', -1);
+    return codeEditor;
 }
 
 window.addEventListener('DOMContentLoaded', () => {

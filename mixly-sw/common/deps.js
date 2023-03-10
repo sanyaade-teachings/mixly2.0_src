@@ -69,6 +69,10 @@ Deps.DEPENDENCY = {
             "path": '/../board/common/mixly/common/modules/select2.min.js',
             "provide": [],
             "require": []
+        }, {
+            "path": '/../board/common/mixly/common/modules/xterm.min.js',
+            "provide": ['Terminal'],
+            "require": []
         }
     ]
 };

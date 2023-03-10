@@ -168,7 +168,8 @@
                     "Mixly.Env",
                     "Mixly.Modules",
                     "Mixly.MJSON",
-                    "Mixly.WebSocket.Socket"
+                    "Mixly.WebSocket.Socket",
+                    "Terminal"
                 ]
             }
         ],
@@ -222,7 +223,8 @@
                     "Mixly.Env",
                     "Mixly.Modules",
                     "Mixly.MJSON",
-                    "Mixly.WebSocket.Socket"
+                    "Mixly.WebSocket.Socket",
+                    "Terminal"
                 ]
             }
         ],

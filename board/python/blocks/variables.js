@@ -178,7 +178,7 @@ Blockly.Blocks.controls_typeLists = {
               [Blockly.MIXLY_MICROBIT_TYPE_DICT,"dict"],
               [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD,"set"],
               // [Blockly.MIXLY_MICROBIT_IMAGE,"image"],
-              [Blockly.Msg.LOGIC_NULL,"NoneType"]]), "type");
+              [Blockly.Msg.LOGIC_NULL,"type(None)"]]), "type");
             //整数、浮点数、字符串、列表、元组、字典、集合、图像不太对, unfinished
         this.setInputsInline(true);
         this.setOutput(true);

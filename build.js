@@ -31,7 +31,8 @@ const config = {
         "./common/modules/store.modern.min.js",
         "./common/modules/tippy-bundle.umd.min.js",
         "./common/modules/xscrollbar.js",
-        "./common/modules/select2.min.js"
+        "./common/modules/select2.min.js",
+        "./common/modules/xterm.min.js"
     ]
 };
 

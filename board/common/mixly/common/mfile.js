@@ -364,6 +364,7 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
             Editor.codeEditor.setValue(code, -1);
         }
         endFunc();
+        return;
     }
     Drag.items.vDrag.full('POSITIVE'); // 完全显示块编辑器
     if (useIncompleteBlocks)
@@ -402,17 +403,17 @@ MFile.showParseMixErrorDialog = (xml, undefinedBlocks, endFunc = () => {}) => {
                 layer.close(index);
                 const mId = $(event.currentTarget).attr('m-id');
                 switch (mId) {
-                    case '0':
-                        break;
-                    case '1':
-                        for (let i of undefinedBlocks) {
-                            xml.find('*[type='+i+']').remove();
-                        }
-                        MFile.parseMix(xml, false, true, endFunc);
-                        break;
-                    case '2':
-                        MFile.parseMix(xml, true, false, endFunc);
-                        break;
+                case '0':
+                    break;
+                case '1':
+                    for (let i of undefinedBlocks) {
+                        xml.find('*[type='+i+']').remove();
+                    }
+                    MFile.parseMix(xml, false, true, endFunc);
+                    break;
+                case '2':
+                    MFile.parseMix(xml, true, false, endFunc);
+                    break;
                 }
             });
         }
@@ -453,17 +454,17 @@ MFile.onclickOpenFile = (input, readType, endFunc) => {
         const filename = resultFile.name;
         const reader = new FileReader();
         switch (readType) {
-            case 'text':
-                reader.readAsText(resultFile);
-                break;
-            case 'bin':
-                reader.readAsBinaryString(resultFile);
-                break;
-            case 'url':
-                reader.readAsDataURL(resultFile);
-                break;
-            default:
-                reader.readAsArrayBuffer(resultFile);
+        case 'text':
+            reader.readAsText(resultFile);
+            break;
+        case 'bin':
+            reader.readAsBinaryString(resultFile);
+            break;
+        case 'url':
+            reader.readAsDataURL(resultFile);
+            break;
+        default:
+            reader.readAsArrayBuffer(resultFile);
         }
         reader.onload = function (e) {
             const data = e.target.result;

@@ -30,6 +30,8 @@ Socket.debug = SOFTWARE.debug;
 const { hostname } = window.location;
 Socket.url = SOFTWARE.webSocket.protocol + '//' + hostname + ':' + Socket.port + '/';
 Socket.IPAddress = hostname;
+Socket.disconnectTimes = 0;
+Socket.updating = false;
 
 let lockReconnect = false; // 避免重复连接
 let timeoutFlag = true;
@@ -106,14 +108,15 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         console.log('已连接' + WS.url);
         WS.connected = true;
         Socket.initFunc = doFunc;
-        if (reconectNum) {
-            window.location.reload();
-        }
         reconectNum = 0;
         timeoutFlag = false;
         clearTimeout(timeoutSet);
         heartCheck.reset().start();
         onopenFunc(WS);
+        Socket.reload();
+        if (Socket.updating) {
+            Socket.updating = false;
+        }
     };
 
     WS.obj.onmessage = (event) => {
@@ -127,12 +130,16 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
 
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
-        reconnect(); //重连
+        reconnect();
         //StatusBar.addValue(event.toString());
     };
 
     WS.obj.onclose = (event) => {
         WS.connected = false;
+        WS.disconnectTimes += 1;
+        if (WS.disconnectTimes > 255) {
+            WS.disconnectTimes = 1;
+        }
         console.log('已断开' + WS.url);
 
         console.info(`关闭`, event.code);
@@ -219,6 +226,12 @@ Socket.disconnect = () => {
     Socket.openLoadingBox(title, () => {
         Socket.obj.close();
     });
+}
+
+Socket.reload = () => {
+    if (!Socket.updating && Socket.disconnectTimes) {
+        window.location.reload();
+    }
 }
 
 })();

@@ -174,34 +174,40 @@ except Exception as e:
 
 '''2Hall_HEP'''
 class HALL:
-    
+
     _pulse_turns=1/400
     _pulse_distance=1/400*math.pi*4.4
 
     def __init__(self, pin):
-        self._pin = Pin(pin, Pin.IN)
-        self.turns = 0
-        self.distance = 0
-        
+        self.turns = 0 
+        self.distance = 0   #cm
+        self._speed = 0     #cm/s
+        self._on_receive = None
+        self._time = time.ticks_ms()
+        Pin(pin, Pin.IN).irq(handler=self._receive_cb, trigger = (Pin.IRQ_RISING | Pin.IRQ_FALLING))
+
     def _receive_cb(self, event_source):
-            if self._on_receive:
-                self.turns += self._pulse_turns
-                self.distance += self._pulse_distance
-                self._on_receive(round(self.turns,2),round(self.distance,2))
-    
+        self.turns += self._pulse_turns
+        self.distance += self._pulse_distance
+        self._speed += self._pulse_distance
+        if self._on_receive:
+            self._on_receive(round(self.turns,2),round(self.distance,2))
+
     def irq_cb(self, callback):
         self._on_receive = callback
-        if callback:
-            self.irq(handler=self._receive_cb)
-        
-    def irq(self, handler, trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING)):
-        self._pin.irq(handler = handler, trigger = trigger)
-        
+
     def initial(self,turns=None,distance=None):
         if not (turns is None):
             self.turns = turns
         if not (distance  is None):
             self.distance = distance
+
+    @property
+    def speed(self):   
+        value=self._speed/time.ticks_diff(time.ticks_ms(), self._time)*1000 if self._speed>0 else 0
+        self._time = time.ticks_ms()
+        self._speed=0
+        return round(value, 2)
 
 hall_A = HALL(20)
 hall_B = HALL(21)

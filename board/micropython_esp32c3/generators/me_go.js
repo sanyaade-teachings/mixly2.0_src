@@ -92,6 +92,14 @@ Blockly.Python.me_go_hall_initialize = function () {
     }
 };
 
+Blockly.Python.me_go_hall_data = function() {
+    var dropdown_mode = this.getFieldValue('mode');
+    var args = this.getFieldValue('args');
+    Blockly.Python.definitions_['import_me_go_hall_'+dropdown_mode] = 'from me_go import hall_'+dropdown_mode;
+    var code = 'hall_' + dropdown_mode + '.' + args + '';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.me_go_pin_near_line = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';

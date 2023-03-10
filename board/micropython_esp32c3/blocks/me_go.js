@@ -194,6 +194,22 @@ Blockly.Blocks.me_go_hall_initialize = {
 }
 };
 
+Blockly.Blocks.me_go_hall_data = {
+  init: function() {
+    this.setColour(Blockly.Msg['MEGO_HUE']);
+    this.appendDummyInput("")    
+    .appendField(Blockly.ME_GO_HALL_SENSOR)    
+    this.appendDummyInput("")
+    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "A"], [Blockly.Msg.TEXT_TRIM_RIGHT, "B"]]), "mode");
+    this.appendDummyInput("")
+        .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
+    this.appendDummyInput("")
+      .appendField(new Blockly.FieldDropdown([['turns', "turns"], ['distance', "distance"],['speed','speed']]), "args");    
+    this.setOutput(true);
+    this.setInputsInline(true);
+}
+};
+
 Blockly.Blocks['me_go_pin_near_line'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);

@@ -8,7 +8,7 @@ Micropython	library for the PE_G1(Motor*5*2 & Servo*4)
 
 @dahanzimin From the Mixly Team
 """
-
+from time import sleep_ms
 from micropython import const
 
 _PE_G1_ADDRESS			= const(0x25)
@@ -22,18 +22,25 @@ class PE_G1:
 	def __init__(self, i2c_bus, addr=_PE_G1_ADDRESS):
 		self._i2c=i2c_bus
 		self._addr = addr
+		sleep_ms(500)
 		if self._rreg(_PE_G1_ID)!= 0x25:
 			raise AttributeError("Cannot find a PE_G1")
 		self.reset()
 
 	def _wreg(self, reg, val):
 		'''Write memory address'''
-		self._i2c.writeto_mem(self._addr, reg, val.to_bytes(1, 'little'))
+		try:
+			self._i2c.writeto_mem(self._addr, reg, val.to_bytes(1, 'little'))
+		except:
+			return 0 
 
 	def _rreg(self, reg, nbytes=1):
 		'''Read memory address'''
-		self._i2c.writeto(self._addr, reg.to_bytes(1, 'little'))
-		return  self._i2c.readfrom(self._addr, nbytes)[0] if nbytes<=1 else self._i2c.readfrom(self._addr, nbytes)[0:nbytes]
+		try:
+			self._i2c.writeto(self._addr, reg.to_bytes(1, 'little'))
+			return  self._i2c.readfrom(self._addr, nbytes)[0] if nbytes<=1 else self._i2c.readfrom(self._addr, nbytes)[0:nbytes]
+		except:
+			return 0
 
 	def reset(self):
 		"""Reset all registers to default state"""
@@ -69,6 +76,8 @@ class PE_G1:
 			self._wreg(_PE_G1_SERVO+index*2+1,duty&0xff)
 
 	def motor(self,index,action,speed=0):
+		if not 0 <= speed <= 100:
+			raise ValueError("Speed parameters must be a number in the range: 0~100")
 		if action=="N":
 			self.m_pwm(index*2,0)
 			self.m_pwm(index*2+1,0)

@@ -283,6 +283,7 @@ BU.burnWithEsptool = () => {
                         layer.close(index);
                         layer.msg(indexText['烧录成功'], { time: 1000 });
                         StatusBar.addValue(`==${indexText['烧录成功']}==\n`);
+                        Serial.reset(portName, 'burn');
                     } catch (error) {
                         console.log(error);
                         layer.close(index);
@@ -412,10 +413,10 @@ BU.searchLibs = (moduleList, libList = []) => {
 
 BU.initUpload = () => {
     const comName = 'web-' + (SELECTED_BOARD.web.com ?? 'serial');
-    BU.uploadByPort(comName);
+    BU.uploadWithAmpy(comName);
 }
 
-BU.uploadByPort = (port) => {
+BU.uploadWithAmpy = (port) => {
     Serial.connect(port, 115200, async (port) => {
         if (!port) {
             layer.msg(indexText['已取消连接'], { time: 1000 });
@@ -452,7 +453,7 @@ BU.uploadByPort = (port) => {
                     moduleInfo[name] = SELECTED_BOARD.web.lib[name].path;
                 }*/
                 portObj.busy = true;
-                Serial.reset(port)
+                Serial.reset(port, 'upload')
                 .then(() => {
                     return ampy.put('main.py', code);
                 })
@@ -543,7 +544,7 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         layer.close(layerType);
         layer.msg(indexText['上传成功'], { time: 1000 });
         StatusBar.addValue(`==${indexText['上传成功']}==\n`);
-        Serial.reset(portName);
+        Serial.reset(portName, 'upload');
         StatusBarPort.tabChange(portName);
     } catch (error) {
         console.log(error);
@@ -561,7 +562,6 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
             toolConfig.baudRates = prevBaud;
             await serialport.setBaudRate(prevBaud);
         }
-        // await Serial.reset(portName);
     }
 }
 

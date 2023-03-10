@@ -1067,7 +1067,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
             Serial.onDisconnect(port);
         });
         endFunc(port);
-        return Serial.reset(port);
+        return Serial.reset(port, 'upload');
     })
     .catch((error) => {
         console.log(error);
@@ -1329,28 +1329,28 @@ Serial.updateDtrAndRts = async function (port) {
     }
 }
 
-Serial.reset = async function (port) {
+Serial.reset = async function (port, resetType) {
+    const resetConfig = Serial.getResetConfig(resetType);
     const newPortObj = Serial.portsOperator[port];
     const newSerialport = newPortObj.serialport;
-    const reset = SELECTED_BOARD?.web?.upload?.reset || SELECTED_BOARD?.upload?.reset;
-    if (typeof reset !== 'object') {
+    if (typeof resetConfig !== 'object') {
         return;
     };
-    let len = reset.length;
+    let len = resetConfig.length;
     for (var i = 0; i < len; i++) {
-        if (reset[i].dtr !== undefined
-            || reset[i].rts !== undefined) {
+        if (resetConfig[i].dtr !== undefined
+            || resetConfig[i].rts !== undefined) {
             var dtrValue = false;
             var rtsValue = false;
-            if (reset[i]?.dtr) {
+            if (resetConfig[i]?.dtr) {
                 dtrValue = true;
             }
-            if (reset[i]?.rts) {
+            if (resetConfig[i]?.rts) {
                 rtsValue = true;
             }
             await newSerialport.setSignals(dtrValue, rtsValue);
-        } else if (reset[i]?.sleep) {
-            var sleepValue = parseInt(reset[i].sleep) || 100;
+        } else if (resetConfig[i]?.sleep) {
+            var sleepValue = parseInt(resetConfig[i].sleep) || 100;
             await Serial.sleep(sleepValue);
         }
     }
@@ -1366,6 +1366,19 @@ Serial.setBaudRate = (port, baud) => {
 
 Serial.sleep = async function(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+Serial.getResetConfig = (type) => {
+    if (typeof SELECTED_BOARD !== 'object') {
+        return null;
+    }
+    let resetConfig = null;
+    if (SELECTED_BOARD.web && SELECTED_BOARD.web[type] && SELECTED_BOARD.web[type].reset) {
+        resetConfig = SELECTED_BOARD.web[type].reset;
+    } else if (SELECTED_BOARD[type]) {
+        resetConfig = SELECTED_BOARD[type].reset;
+    }
+    return resetConfig;
 }
 
 })();

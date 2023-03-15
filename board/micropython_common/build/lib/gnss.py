@@ -15,7 +15,7 @@ class NMEA0183:
 		self._uart=uart
 		self._uart.init(baudrate=baudrate, timeout=timeout, rxbuf=1024)
 		self.time=[None, None, None, 0, None, None, None, 0]
-		self.locate=['', None, '', None, None, None, None]		#0'1经度,2'3纬度,4海拔m,5速度m/s,6方向°
+		self.locate=['', None, '', None, None, None, None]		#0'1经度,2'3纬度,4海拔m,5速度m/s,6航向°
 		self.status=[False, ' ', 0]		#有效标注,定位模式,卫星量
 
 	def _crc8(self, buffer):
@@ -67,7 +67,7 @@ class NMEA0183:
 					self.locate[1]= int(data[5][:3])+int(data[5][3:].replace('.',''))/6000000 if data[5] else None
 					self.locate[2]= data[4]
 					self.locate[3]= int(data[3][:2])+int(data[3][2:].replace('.',''))/6000000 if data[3] else None
-					self.locate[5]= float(data[7]) if data[7] else None
+					self.locate[5]= round(float(data[7])*0.514, 2) if data[7] else None
 					self.locate[6]= float(data[8]) if data[8] else None
 					self.status[0]= False if 'V' in data[2] else True
 					self.status[1]= data[12]

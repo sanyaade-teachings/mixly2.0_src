@@ -797,7 +797,7 @@ Blockly.Blocks['extern_rfid_readcontent'] = {
             .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
         this.appendDummyInput("")
             .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_ALL);   
-        this.setOutput(true, Number);
+        this.setOutput(true, 'Tuple');
         this.setInputsInline(true);
     }
 };
@@ -1353,7 +1353,12 @@ Blockly.Blocks.sensor_use_uart_init = {
             .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'PM2.5' + MSG.catSensor)
+            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXLY_PM25_SENSOR, "PM"],         
+                [Blockly.MIXLY_GNSS_SENSOR,"GNSS"]
+                ]), "sensor");
+            
             
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -1380,3 +1385,44 @@ Blockly.Blocks.pm25_get_data = {
         this.setTooltip(Blockly.MIXLY_PM_CONCENTRATION_TOOLTIP);
     }
 }
+
+Blockly.Blocks['gnss_have_data'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.MIXLY_GNSS_SENSOR)
+            .setCheck("var");
+        this.appendDummyInput("")
+        .appendField(Blockly.MIXLY_SERIAL_AVAILABLE)        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);        
+    }
+};
+
+Blockly.Blocks['gnss_get_data'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.MIXLY_GNSS_SENSOR)
+            .setCheck("var");
+        this.appendDummyInput("")
+        .appendField(Blockly.MIXLY_MICROBIT_JS_GET)
+        .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_GPS_TIME, "time"],
+            [Blockly.MIXLY_GPS_LOCATION, "locate"],  
+            [Blockly.MIXLY_PULSEIN_STAT, "status"]          
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        var thisBlock = this;
+        this.setTooltip(function() {
+            var mode = thisBlock.getFieldValue('key');
+            var TOOLTIPS = {
+                'time':Blockly.MIXLY_GNSS_SENSOR_GET_TIME_TOOLTIP,
+                'locate':Blockly.MIXLY_GNSS_SENSOR_GET_LOCATE_TOOLTIP,
+                'status':Blockly.MIXLY_GNSS_SENSOR_GET_STATUS_TOOLTIP
+            };
+            return TOOLTIPS[mode];
+        });
+    }
+};

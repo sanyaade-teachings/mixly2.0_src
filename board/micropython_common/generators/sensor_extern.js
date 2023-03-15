@@ -594,11 +594,19 @@ Blockly.Python.PS2_stk_new = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_use_uart_init=function(){
-  Blockly.Python.definitions_['import_pm2_5'] = 'import pm2_5';
+Blockly.Python.sensor_use_uart_init=function(){  
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    var code = v + '=pm2_5.PM2_5(' + key +')\n';    
+    var s = this.getFieldValue('sensor');
+    var code =''
+    if(s=='PM'){
+    Blockly.Python.definitions_['import_pm2_5'] = 'import pm2_5';
+    code = v + '=pm2_5.PM2_5(' + key +')\n';    
+    }
+    else if(s=='GNSS'){
+    Blockly.Python.definitions_['import_gnss'] = 'import gnss';
+    code = v + '=gnss.NMEA0183(' + key +')\n';    
+    } 
     return code;
 };
 
@@ -607,5 +615,20 @@ Blockly.Python.pm25_get_data=function(){
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var pm=this.getFieldValue('pm');
     var code =  v+".concentration()"+pm;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.gnss_get_data=function(){
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    Blockly.Python.definitions_['import_gnss'] = 'import gnss';
+    var code = sub + '.' + key;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.gnss_have_data=function(){
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_gnss'] = 'import gnss';
+    var code = sub + '.any()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };

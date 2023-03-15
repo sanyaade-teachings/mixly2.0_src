@@ -3637,7 +3637,7 @@
          <block type="sensor_use_uart_init">
           <value name="SUB">
               <shadow type="variables_get">
-                <field name="VAR">pm</field>
+                <field name="VAR">zsensor</field>
               </shadow>
             </value>           
           </block>
@@ -3646,10 +3646,24 @@
         <block type="pm25_get_data" m-hide='micropython:esp32c3:mixgocar_c3'>
           <value name="SUB">
             <shadow type="variables_get">
-              <field name="VAR">pm</field>
+              <field name="VAR">zsensor</field>
             </shadow>
           </value>
         </block>
+        <block type="gnss_have_data">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">zsensor</field>
+            </shadow>
+          </value>
+        </block> 
+        <block type="gnss_get_data">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">zsensor</field>
+            </shadow>
+          </value>
+        </block> 
     </category>    
     <category id="catExternActuator" colour='#74A55B'>     
       <block type="servo_move" m-show='micropython:esp32c3:mixgocar_c3'>

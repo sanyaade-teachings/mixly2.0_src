@@ -38,12 +38,12 @@ Env.hasSocketServer = SOFTWARE?.webSocket?.enabled ? true : false;
   */
 Env.hasCompiler = SOFTWARE?.webCompiler?.enabled ? true : false;
 
-Env.thirdPartyBoardPath = './board/ThirdParty';
+Env.thirdPartyBoardPath = './boards/extend';
 
 if (Env.isElectron) {
     Modules.fs = require('fs');
     Modules.fs_extra = require('fs-extra');
-    Modules.fs_extend = require('./board/common/mixly/node-modules/fsExtend.js');
+    Modules.fs_extend = require('./common/mixly/node-modules/fsExtend.js');
     Modules.path = require('path');
     Modules.os = require('os');
     Modules.electron = require('electron');

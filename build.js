@@ -1,27 +1,12 @@
 const fs = require('fs');
+const fs_extra = require('fs-extra');
+const fs_extend = require('./common/mixly/node-modules/fsExtend.js');
 const path = require('path');
 
 const config = {
-    "electron": {
-        "dirName": "electron"
-    },
-    "web": {
-        "dirName": "web"
-    },
-    "web-socket": {
-        "dirName": "web-socket"
-    },
-    "web-compiler": {
-        "dirName": "web-compiler"
-    },
-    "common": {
-        "dirName": "common"
-    },
     "workPath": __dirname,
     "fileIgnore": [
-        /*"./common/serial-charts.js"*/
-        "./common/env.js",
-        "./common/deps.js",
+        /*"./common/serial-charts.js"
         "./common/modules/base64.min.js",
         "./common/modules/lazyload.js",
         "./common/modules/microbit-fs.umd.min.js",
@@ -32,82 +17,57 @@ const config = {
         "./common/modules/tippy-bundle.umd.min.js",
         "./common/modules/xscrollbar.js",
         "./common/modules/select2.min.js",
-        "./common/modules/xterm.min.js"
+        "./common/modules/xterm.min.js"*/
+    ],
+    "dirIgnore": [
+        "./common/modules"
     ]
 };
 
 const needBuildDirList = [
     __dirname + '/mixly-sw/',
-    __dirname + '/board/common/mixly/'
+    __dirname + '/common/mixly/'
 ];
 
-const scan = (dir, fileIgnore, outputConfig) => {
+const scan = (dir, ignore) => {
     let googList = [];
-    let dirName = path.basename(dir);
-    if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
-        let childNames = fs.readdirSync(dir);
-        for (let i = 0; i < childNames.length; i++) {
-            let childPath = path.join(dir, childNames[i]);
-            if (fs.existsSync(childPath) && fs.statSync(childPath).isFile()) {
-                if (typeof fileIgnore === 'object'
-                    && fileIgnore.includes(childPath))
-                    continue;
-                let jsStr = fs.readFileSync(childPath, 'utf8');
-                let googObj = {};
-                googObj.path = '/' + dirName + '/' + childNames[i];
-                googObj.require = match('goog.require', jsStr);
-                googObj.provide = match("goog.provide", jsStr);
-                let Mixly = {};
-                Mixly.require = match("Mixly.require", jsStr);
-                if (googObj.require || googObj.provide || Mixly.require) {
-                    if (!googObj.require)
-                        googObj.require = [];
-                    if (!googObj.provide)
-                        googObj.provide = [];
-                    if (Mixly.require.length > 0) {
-                        let obj = {};
-                        let defaultObj = {
-                            "electron": [],
-                            "web": [],
-                            "web-socket": {
-                                "electron": [],
-                                "web": [],
-                                "common": []
-                            },
-                            "web-compiler": {
-                                "electron": [],
-                                "web": [],
-                                "common": []
-                            },
-                            "common": []
-                        };
-                        for (let j = 0; j < Mixly.require.length; j++) {
-                            let nowGoogObj = {};
-                            let nowGoogRequireObj = {
-                                ...defaultObj,
-                                ...Mixly.require[j]
-                            };
-                            nowGoogObj.path = googObj.path;
-                            nowGoogObj.provide = googObj.provide;
-                            nowGoogRequireObj.common = [...googObj.require, ...nowGoogRequireObj.common];
-                            nowGoogObj.require = nowGoogRequireObj;
-                            addDeps(nowGoogObj, outputConfig);
-                        }
-                        continue;
-                    } else {
-                        googList.push(googObj);
-                    }
-                }
-            } else {
-                googList = [...googList, ...scan(childPath, fileIgnore)];
+    const dirName = path.basename(dir);
+    const dirIgnore = ignore?.dir ?? [];
+    const fileIgnore = ignore?.file ?? [];
+    if (!fs_extend.isdir(dir) || dirIgnore.includes(dir)) {
+        return googList;
+    }
+
+    let childNames = fs.readdirSync(dir);
+    for (let i = 0; i < childNames.length; i++) {
+        let childPath = path.join(dir, childNames[i]);
+        if (fs_extend.isfile(childPath)) {
+            if (fileIgnore.includes(childPath)) {
+                continue;
             }
+            let jsStr = fs.readFileSync(childPath, 'utf8');
+            let googObj = {};
+            googObj.path = '/' + dirName + '/' + childNames[i];
+            googObj.require = match('goog.require', jsStr);
+            googObj.provide = match("goog.provide", jsStr);
+            if (googObj.require || googObj.provide) {
+                if (!googObj.require) {
+                    googObj.require = [];
+                }
+                if (!googObj.provide) {
+                    googObj.provide = [];
+                }
+                googList.push(googObj);
+            }
+        } else {
+            googList = [...googList, ...scan(childPath, ignore)];
         }
     }
 
     return googList;
 }
 
-const addDeps = (obj, outputConfig) => {
+/*const addDeps = (obj, outputConfig) => {
     let electronObj = {
         'path': obj['path'],
         'provide': obj['provide'],
@@ -150,7 +110,7 @@ const addDeps = (obj, outputConfig) => {
     outputConfig['web-socket']['web'].push(websocketWebObj);
     outputConfig['web-compiler']['electron'].push(webcompilerElectronObj);
     outputConfig['web-compiler']['web'].push(webcompilerWebObj);
-}
+}*/
 
 const match = (type, jsStr) => {
     let list = [];
@@ -244,46 +204,39 @@ const formatJson = (json, options) => {
 const generateDeps = () => {
     for (let needBuildDir of needBuildDirList) {
         let fileIgnore = [];
+        let dirIgnore = [];
         if (typeof config.fileIgnore === 'object') {
-            for (let i = 0; i < config.fileIgnore.length; i++) {
-                fileIgnore.push(path.resolve(needBuildDir, config.fileIgnore[i]));
+            for (let data of config.fileIgnore) {
+                fileIgnore.push(path.resolve(needBuildDir, data));
             }
         }
-        let outputConfig = {
-            "electron": [],
-            "web": [],
-            "web-socket": {
-                "electron": [],
-                "web": [],
-                "common": []
-            },
-            "web-compiler": {
-                "electron": [],
-                "web": [],
-                "common": []
-            },
-            "common": []
-        };
+        if (typeof config.dirIgnore === 'object') {
+            for (let data of config.dirIgnore) {
+                dirIgnore.push(path.resolve(needBuildDir, data));
+            }
+        }
+        let outputConfig = [];
         console.log('deps.json生成中...');
-        outputConfig['electron'] = [
-            ...outputConfig['electron'],
-            ...scan(path.join(needBuildDir, config['electron'].dirName), fileIgnore, outputConfig)
+        const ignore = {
+            dir: dirIgnore,
+            file: fileIgnore
+        };
+        outputConfig = scan(path.resolve(needBuildDir, 'common'), ignore);
+        outputConfig = [
+            ...scan(path.resolve(needBuildDir, 'electron'), ignore),
+            ...outputConfig
         ];
-        outputConfig['web'] = [
-            ...outputConfig['web'],
-            ...scan(path.join(needBuildDir, config['web'].dirName), fileIgnore, outputConfig)
+        outputConfig = [
+            ...scan(path.resolve(needBuildDir, 'web'), ignore),
+            ...outputConfig
         ];
-        outputConfig['web-socket'].common = [
-            ...outputConfig['web-socket'].common,
-            ...scan(path.join(needBuildDir, config['web-socket'].dirName), fileIgnore, outputConfig)
+        outputConfig = [
+            ...scan(path.resolve(needBuildDir, 'web-compiler'), ignore),
+            ...outputConfig
         ];
-        outputConfig['web-compiler'].common = [
-            ...outputConfig['web-compiler'].common,
-            ...scan(path.join(needBuildDir, config['web-compiler'].dirName), fileIgnore, outputConfig)
-        ];
-        outputConfig['common'] = [
-            ...outputConfig['common'],
-            ...scan(path.join(needBuildDir, config['common'].dirName), fileIgnore, outputConfig)
+        outputConfig = [
+            ...scan(path.resolve(needBuildDir, 'web-socket'), ignore),
+            ...outputConfig
         ];
         fs.writeFileSync(path.join(needBuildDir, 'deps.json'), formatJson(JSON.stringify(outputConfig)));
         console.log(path.join(needBuildDir, 'deps.json') + '生成成功');

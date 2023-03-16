@@ -1,22 +1,17 @@
 (() => {
 
+goog.require('layui');
+goog.require('Mixly.Url');
+goog.require('Mixly.Env');
+goog.require('Mixly.Config');
+goog.require('Mixly.BoardManager');
+goog.require('Mixly.XML');
+goog.require('Mixly.PythonShell');
+goog.require('Mixly.Msg');
+goog.require('Mixly.XML');
+goog.require('Mixly.Setting');
+goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.Interface');
-
-Mixly.require({
-    "electron": ["Mixly.PythonShell"],
-    "web": [],
-    "web-socket": {
-        "electron": [],
-        "web": [],
-        "common": ["Mixly.WebSocket.Socket"]
-    },
-    "web-compiler": {
-        "electron": [],
-        "web": [],
-        "common": []
-    },
-    "common": ["layui", "Mixly.Url", "Mixly.Env", "Mixly.Config", "Mixly.BoardManager", "Mixly.XML"]
-});
 
 const {
     Url,

@@ -1,0 +1,97 @@
+<html manifest=node.manifest>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/ico" href="../../files/mixly.ico">
+  <title></title>
+  <script type="text/javascript" src="../../../common/blockly-core/base.js"></script>
+  <script type="text/javascript" src="../../../common/mixly/common/modules/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript" src="../../../common/mixly/mixly.js"></script>
+  <script type="text/javascript" src="../../../common/blockly-core/arduino.js"></script>
+  <script type="text/javascript" src="../../../common/blockly-core/names.js"></script>
+  <script type="text/javascript" src="../../../common/blockly-core/variables.js"></script>
+  <script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
+
+  <script type="text/javascript" src="libraries/digitalPinToInterrupt.js"></script>
+  <script type="text/javascript" src="../../../common/js/blockly_helper.js"></script>
+
+  <script type="text/javascript" src="../arduino_avr/generators/factory.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/blynk.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/pins.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/inout.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/control.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/math.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/text.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/lists.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/logic.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/display.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/communicate.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/storage.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/sensor.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/ethernet.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/variables.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/procedures.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/serial.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/actuator.js"></script>
+  <script type="text/javascript" src="generators/ethernet.js"></script>
+  <script type="text/javascript" src="generators/pins.js"></script>
+  <script type="text/javascript" src="generators/inout.js"></script>
+  <script type="text/javascript" src="generators/control.js"></script>
+  <script type="text/javascript" src="generators/math.js"></script>
+  <script type="text/javascript" src="generators/text.js"></script>
+  <script type="text/javascript" src="generators/lists.js"></script>
+  <script type="text/javascript" src="generators/logic.js"></script>
+  <script type="text/javascript" src="generators/communicate.js"></script>
+  <script type="text/javascript" src="generators/storage.js"></script>
+  <script type="text/javascript" src="generators/sensor.js"></script>
+  <script type="text/javascript" src="generators/variables.js"></script>
+  <script type="text/javascript" src="generators/procedures.js"></script>
+  <script type="text/javascript" src="generators/serial.js"></script>
+  <script type="text/javascript" src="generators/actuator.js"></script>
+  <script type="text/javascript" src="generators/Handbit.js"></script>
+  <script type="text/javascript" src="../arduino_avr/generators/tools.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/blynk.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/factory.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/pins.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/inout.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/control.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/math.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/text.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/lists.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/logic.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/display.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/communicate.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/storage.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/sensor.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/ethernet.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/variables.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/procedures.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/serial.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/actuator.js"></script>
+  <script type="text/javascript" src="blocks/actuator.js"></script>
+  <script type="text/javascript" src="blocks/pins.js"></script>
+  <script type="text/javascript" src="blocks/inout.js"></script>
+  <script type="text/javascript" src="blocks/control.js"></script>
+  <script type="text/javascript" src="blocks/math.js"></script>
+  <script type="text/javascript" src="blocks/text.js"></script>
+  <script type="text/javascript" src="blocks/lists.js"></script>
+  <script type="text/javascript" src="blocks/logic.js"></script>
+  <script type="text/javascript" src="blocks/communicate.js"></script>
+  <script type="text/javascript" src="blocks/storage.js"></script>
+  <script type="text/javascript" src="blocks/sensor.js"></script>
+  <script type="text/javascript" src="blocks/ethernet.js"></script>
+  <script type="text/javascript" src="blocks/variables.js"></script>
+  <script type="text/javascript" src="blocks/procedures.js"></script>
+  <script type="text/javascript" src="blocks/serial.js"></script>
+  <script type="text/javascript" src="blocks/display.js"></script>
+  <script type="text/javascript" src="blocks/Handbit.js"></script>
+  <script type="text/javascript" src="blocks/tools.js"></script>
+  <script type="text/javascript" src="../arduino_avr/blocks/tools.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/color_esp32_arduino.css" />
+</head>
+
+<body>
+  <xml id="toolbox" style="display: none">
+  </xml>
+</body>
+</html>

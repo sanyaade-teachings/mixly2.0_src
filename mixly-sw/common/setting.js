@@ -1,24 +1,17 @@
 (() => {
 
+goog.require('layui');
+goog.require('store');
+goog.require('Mixly.XML');
+goog.require('Mixly.LayerExt');
+goog.require('Mixly.Msg');
+goog.require('Mixly.BoardManager');
+goog.require('Mixly.Config');
+goog.require('Mixly.Env');
+goog.require('Mixly.Modules');
+goog.require('Mixly.MJSON');
+goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.Setting');
-
-Mixly.require({
-    "electron": [],
-    "web": [],
-    "web-socket": {
-        "electron": [],
-        "web": [],
-        "common": ["Mixly.WebSocket.Socket", "Terminal"]
-    },
-    "web-compiler": {
-        "electron": [],
-        "web": [],
-        "common": []
-    },
-    "common": ["layui", "layui.loading", "store", "Mixly.XML",
-               "Mixly.LayerExt", "Mixly.Msg", "Mixly.BoardManager", "Mixly.Config",
-               "Mixly.Env", "Mixly.Modules", "Mixly.MJSON"]
-});
 
 const {
     XML,

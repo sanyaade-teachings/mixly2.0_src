@@ -220,6 +220,18 @@ body[class="dark"] {
     display: block;
 }
 
+/*.mixly-board:hover .service-single label {
+    opacity: 1;
+}
+
+.mixly-board .service-single label {
+    opacity: 0;
+}
+
+.mixly-board:hover .service-single h2 {
+    margin-bottom: 10px;
+}*/
+
 .mixly-board-del-btn, .mixly-board-ignore-btn {
     display: none;
     background-color: rgba(0,0,0,0);

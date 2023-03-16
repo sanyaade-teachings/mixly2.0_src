@@ -22,55 +22,55 @@ Deps.DEPENDENCY = {
     "node-modules": [],
     "common": [
         {
-            "path": '/../board/common/ui/layui/layui.js',
+            "path": '/../common/ui/layui/layui.js',
             "provide": ['layui'],
             "require": []
         }, {
-            "path": '/../board/common/ui/layui/extend/loading/loading.js',
+            "path": '/../common/ui/layui/extend/loading/loading.js',
             "provide": ['layui.loading'],
             "require": ['layui']
         }, {
-            "path": '/../board/common/mixly/common/modules/lazyload.js',
+            "path": '/../common/mixly/common/modules/lazyload.js',
             "provide": ['LazyLoad'],
             "require": []
         }, {
-            "path": '/../board/common/mixly/common/local-storage.js',
+            "path": '/../common/mixly/common/local-storage.js',
             "provide": ['Mixly.LocalStorage'],
             "require": ['Mixly']
         }, {
-            "path": '/../board/common/mixly/common/marray.js',
+            "path": '/../common/mixly/common/marray.js',
             "provide": ['Mixly.MArray'],
             "require": ['Mixly']
         }, {
-            "path": '/../board/common/mixly/common/mjson.js',
+            "path": '/../common/mixly/common/mjson.js',
             "provide": ['Mixly.MJSON'],
             "require": ['Mixly']
         }, {
-            "path": '/../board/common/mixly/common/layer-ext.js',
+            "path": '/../common/mixly/common/layer-ext.js',
             "provide": ['Mixly.LayerExt'],
             "require": ['layui', 'Mixly.Env', 'Mixly.Config', 'Mixly.DomOperator']
         }, {
-            "path": '/../board/common/mixly/common/dom-operator.js',
+            "path": '/../common/mixly/common/dom-operator.js',
             "provide": ['Mixly.DomOperator'],
             "require": ['Mixly.Config', 'Mixly.XML']
         }, {
-            "path": '/../board/common/mixly/common/command.js',
+            "path": '/../common/mixly/common/command.js',
             "provide": ['Mixly.Command'],
             "require": ['Mixly.Config', 'Mixly.MJSON']
         }, {
-            "path": '/../board/common/mixly/electron/cloud-download.js',
+            "path": '/../common/mixly/electron/cloud-download.js',
             "provide": ['Mixly.CloudDownload'],
             "require": ['Mixly.Env', 'Mixly.Modules']
         }, {
-            "path": '/../board/common/mixly/common/modules/store.modern.min.js',
+            "path": '/../common/mixly/common/modules/store.modern.min.js',
             "provide": ['store'],
             "require": []
         }, {
-            "path": '/../board/common/mixly/common/modules/select2.min.js',
+            "path": '/../common/mixly/common/modules/select2.min.js',
             "provide": [],
             "require": []
         }, {
-            "path": '/../board/common/mixly/common/modules/xterm.min.js',
+            "path": '/../common/mixly/common/modules/xterm.min.js',
             "provide": ['Terminal'],
             "require": []
         }
@@ -188,7 +188,7 @@ Deps.initDependency(Deps.DEPENDENCY);
 goog.require('Mixly.Loading');
 goog.require('layui');
 goog.require('LazyLoad');
-goog.require(Mixly.MIXLY_DIR_PATH + '/../board/common/mixly/common/modules/select2.min.js');
+goog.require(Mixly.MIXLY_DIR_PATH + '/../common/mixly/common/modules/select2.min.js');
 goog.require('Mixly.Msg');
 goog.require('Mixly.XML');
 goog.require('Mixly.Setting');

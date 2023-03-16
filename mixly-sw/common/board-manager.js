@@ -1,24 +1,17 @@
 (() => {
 
+goog.require('layui');
+goog.require('Mixly.Modules');
+goog.require('Mixly.Env');
+goog.require('Mixly.Msg');
+goog.require('Mixly.XML');
+goog.require('Mixly.LayerExt');
+goog.require('Mixly.Config');
+goog.require('Mixly.MArray');
+goog.require('Mixly.Url');
+goog.require('Mixly.CloudDownload');
+goog.require('Mixly.PythonShell');
 goog.provide('Mixly.BoardManager');
-
-Mixly.require({
-    "electron": ["Mixly.CloudDownload", "Mixly.PythonShell"],
-    "web": [],
-    "web-socket": {
-        "electron": [],
-        "web": [],
-        "common": []
-    },
-    "web-compiler": {
-        "electron": [],
-        "web": [],
-        "common": []
-    },
-    "common": ["layui", "Mixly.Modules", "Mixly.Env", "Mixly.Msg",
-               "Mixly.XML", "Mixly.LayerExt", "Mixly.Config", "Mixly.MArray",
-               "Mixly.Url"]
-});
 
 const {
     Modules,
@@ -1024,7 +1017,8 @@ BoardManager.loadBoards = () => {
                         webSocket: false
                     },
                     thirdPartyBoard: true,
-                    pyFilePath: config.pyFilePath ?? false
+                    pyFilePath: config.pyFilePath ?? false,
+                    language: config.language
                 }
                 newBoardsList.push(boardInfo);
             }
@@ -1061,14 +1055,16 @@ BoardManager.showBoardsCard = (row, col) => {
             boardType,
             boardName,
             boardImg,
-            pyFilePath
+            pyFilePath,
+            language
         } = boardsList[i];
         if (boardIndex !== 'javascript:;' && !pyFilePath) {
             let configObj = {
                 thirdPartyBoard,
                 boardIndex,
                 boardType,
-                boardImg
+                boardImg,
+                language
             };
             if (boardName) {
                 configObj.boardName = boardName;
@@ -1083,6 +1079,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <a href="${boardsList[i]['boardIndex']}?${configUrl}">
                         <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
                         <h2>${boardsList[i]['boardType']}</h2>
+                        <label style="color: #888">编程语言: ${language}</label>
                     </a>
                 </div>
             </div>
@@ -1100,6 +1097,7 @@ BoardManager.showBoardsCard = (row, col) => {
                         <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
                             <img src="${boardImg}" alt="service image" class="tiltimage">
                             <h2>${boardType}</h2>
+                            <label style="color: #888">编程语言: ${language}</label>
                         </a>
                     </div>
                 </div>
@@ -1111,6 +1109,7 @@ BoardManager.showBoardsCard = (row, col) => {
                         <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
                             <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
                             <h2></h2>
+                            <label></label>
                         </a>
                     </div>
                     <div>
@@ -1172,6 +1171,7 @@ BoardManager.showBoardsCard = (row, col) => {
                 <div class="service-single">
                     <a href="javascript:;">
                         <img src="./files/blank.png" alt="service image" class="tiltimage">
+                        <label></label>
                     </a>
                 </div>
             </div>

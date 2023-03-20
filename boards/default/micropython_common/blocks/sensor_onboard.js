@@ -417,7 +417,7 @@ Blockly.Blocks['onboard_RTC_settime_string'] = {
         this.appendDummyInput()
             .appendField('RTC'); 
         this.appendValueInput('CONTENT')
-            .appendField(Blockly.MIXLY_USE_STRING)
+            .appendField(Blockly.MIXLY_USE_STRING_TUPLE)
         this.appendDummyInput()
             .appendField(Blockly.MIXLY_RTCSETTIME);     
         this.setInputsInline(true);

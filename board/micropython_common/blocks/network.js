@@ -483,3 +483,30 @@ Blockly.Blocks['requests_method'] = {
     });
   }
 };
+
+Blockly.Blocks['ntptime_time'] = {
+    init: function() {
+        this.setColour(Blockly.Msg['NETWORK_HUE']);        
+        this.appendDummyInput("")
+            .appendField(Blockly.MIXLY_GET_NTP+'(NTP)')
+        this.appendDummyInput()
+            .appendField(Blockly.blynk_SERVER_ADD)
+            .appendField(new Blockly.FieldDropdown([
+                ['ntp.aliyun.com', "ntp.aliyun.com"],
+                ['ntp1.aliyun.com', "ntp1.aliyun.com"],
+                ['ntp2.aliyun.com', "ntp2.aliyun.com"],
+                ['ntp3.aliyun.com', "ntp3.aliyun.com"],
+                ['ntp4.aliyun.com', "ntp4.aliyun.com"],
+                ['ntp5.aliyun.com', "ntp5.aliyun.com"],
+                ['ntp6.aliyun.com', "ntp6.aliyun.com"],
+                ['ntp7.aliyun.com', "ntp7.aliyun.com"],
+                ['time1.cloud.tencent.com', "time1.cloud.tencent.com"],
+                ['time2.cloud.tencent.com', "time2.cloud.tencent.com"],
+                ['time3.cloud.tencent.com', "time3.cloud.tencent.com"],
+                ['time4.cloud.tencent.com', "time4.cloud.tencent.com"],
+                ['time5.cloud.tencent.com', "time5.cloud.tencent.com"]
+            ]), "mode");
+        this.setOutput(true, 'Tuple');
+        this.setInputsInline(true);
+    }
+};

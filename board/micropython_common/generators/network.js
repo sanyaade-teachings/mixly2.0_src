@@ -230,3 +230,10 @@ Blockly.Python.requests_method = function() {
   var code="requests." + method + "(" +  str  + ')\n';
   return code;
 };
+
+Blockly.Python.ntptime_time= function() {
+    Blockly.Python.definitions_['import_ntptime'] = "import ntptime";
+    var mode=this.getFieldValue('mode');
+    var code= "ntptime.time(host='"+mode+"')";
+    return [code,Blockly.Python.ORDER_ATOMIC];
+}

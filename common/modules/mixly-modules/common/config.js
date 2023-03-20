@@ -35,7 +35,7 @@ Config.init = () => {
         ...URL_DEFAULT_CONFIG,
         ...Url.getConfig()
     };
-    Config.BOARD = Mixly.getJSON('./config.json', BOARD_DEFAULT_CONFIG);
+    Config.BOARD = goog.getJSON('./config.json', BOARD_DEFAULT_CONFIG);
     if (typeof urlConfig === 'object') {
         let {
             thirdPartyBoard,
@@ -66,15 +66,13 @@ Config.init = () => {
     console.log('Config.BOARD:', Config.BOARD);
 
     let pathPrefix = '../../../';
-    // if (Config.BOARD.thirdPartyBoard)
-    //     pathPrefix = '../../';
 
-    Config.SOFTWARE = Mixly.getJSON(pathPrefix + 'sw-config.json', SOFTWARE_DEFAULT_CONFIG);
+    Config.SOFTWARE = goog.getJSON(pathPrefix + 'sw-config.json', SOFTWARE_DEFAULT_CONFIG);
     if (typeof urlConfig === 'object')
         Config.SOFTWARE = { ...Config.SOFTWARE, ...urlConfig };
     Config.pathPrefix = pathPrefix;
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
-    $.getScript('../../../common/mixly/common/modules/fp.min.js', () => {
+    $.getScript('../../../common/modules/web-modules/fp.min.js', () => {
         // Url.initFingerprintJS();
     }).fail(() => {
     });

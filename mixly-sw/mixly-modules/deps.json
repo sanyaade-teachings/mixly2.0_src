@@ -113,6 +113,8 @@
             "Mixly.BoardManager",
             "Mixly.XML",
             "Mixly.PythonShell",
+            "Mixly.Msg",
+            "Mixly.Setting",
             "Mixly.WebSocket.Socket"
         ],
         "provide":[
@@ -131,6 +133,14 @@
         ],
         "provide":[
             "Mixly.Loading"
+        ]
+    },
+    {
+        "path":"/common/mixly.js",
+        "require":[
+        ],
+        "provide":[
+            "Mixly"
         ]
     },
     {

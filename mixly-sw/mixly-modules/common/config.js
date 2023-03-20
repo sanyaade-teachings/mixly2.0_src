@@ -12,7 +12,7 @@ const { Url, Config } = Mixly;
  * @return {object | null} 当对应路径下文件不存在时将返回null
  **/
 Config.get = (path, defaultConfig = {}) => {
-    let jsonStr = Mixly.get(path);
+    let jsonStr = goog.get(path);
     try {
         // 去除JSON字符串中的注释
         jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
@@ -59,9 +59,9 @@ Config.init = () => {
         },
         "debug": false
     }
-    Config.SOFTWARE = Mixly.getJSON('./sw-config.json', swDefaultConfig);
+    Config.SOFTWARE = goog.getJSON('./sw-config.json', swDefaultConfig);
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
-    Config.BOARDS_INFO = Mixly.getJSON('./boards.json', {});
+    Config.BOARDS_INFO = goog.getJSON('./boards.json', {});
     console.log('Config.BOARDS_INFO:', Config.BOARDS_INFO);
     const boardPageConfig = Url.getConfig();
     Config.BOARD_PAGE = boardPageConfig ?? {};

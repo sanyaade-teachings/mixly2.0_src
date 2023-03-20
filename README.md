@@ -64,8 +64,9 @@ https://gitee.com/mixly2/mixly2.0-win32-x64/blob/master/CHANGELOG.md
         <td align="center">米思齐公益培训群2023</td>
     </tr>
     <tr>
-        <td><img src="https://foruda.gitee.com/images/1677155200693014860/246cbd2e_5225463.jpeg"/></td>
-        <td><img src="https://foruda.gitee.com/images/1677155247192137948/1508698a_5225463.jpeg"/></td>
-        <td><img src="https://foruda.gitee.com/images/1677155350027940742/19085ccb_5225463.jpeg"/></td>
+        <td align="center"><img src="https://foruda.gitee.com/images/1677155200693014860/246cbd2e_5225463.jpeg"/></td>
+        <td align="center"><img src="https://foruda.gitee.com/images/1677155247192137948/1508698a_5225463.jpeg"/></td>
+        <td align="center"><img src="https://foruda.gitee.com/images/1677155350027940742/19085ccb_5225463.jpeg"/></td>
     </tr>
 </table>
+

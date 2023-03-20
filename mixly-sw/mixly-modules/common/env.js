@@ -43,12 +43,11 @@ Env.thirdPartyBoardPath = './boards/extend';
 if (Env.isElectron) {
     Modules.fs = require('fs');
     Modules.fs_extra = require('fs-extra');
-    Modules.fs_extend = require('./common/mixly/node-modules/fsExtend.js');
+    Modules.fs_extend = require('./common/modules/node-modules/fsExtend.js');
     Modules.path = require('path');
     Modules.os = require('os');
     Modules.electron = require('electron');
     Modules.electron_remote = require('@electron/remote');
-    Modules.electron_dev_console = require('electron-dev-console');
     Modules.node_downloader_helper = require('node-downloader-helper');
     Modules.adm_zip_iconv = require('adm-zip-iconv');
     Modules.compressing = require('compressing');
@@ -59,13 +58,8 @@ if (Env.isElectron) {
         fs_extend,
         path,
         os,
-        electron_remote,
-        electron_dev_console
+        electron_remote
     } = Modules;
-
-    // 初始化主进程信息打印工具
-    const { renderer } = electron_dev_console;
-    renderer.init();
 
     Env.currentPlatform = os.platform();
     Env.currentWindow = electron_remote.getCurrentWindow();

@@ -448,7 +448,8 @@
             "Mixly.ToolboxSearcher",
             "Mixly.Modules",
             "Mixly.MString",
-            "Mixly.Editor"
+            "Mixly.Editor",
+            "Mixly.FooterLayer"
         ],
         "provide":[
             "Mixly.Boards"
@@ -549,6 +550,25 @@
         ],
         "provide":[
             "Mixly.Example"
+        ]
+    },
+    {
+        "path":"/common/footer-bar.js",
+        "require":[
+            "Mixly.FooterLayer"
+        ],
+        "provide":[
+            "Mixly.FooterBar"
+        ]
+    },
+    {
+        "path":"/common/footer-layer.js",
+        "require":[
+            "tippy",
+            "Mixly"
+        ],
+        "provide":[
+            "Mixly.FooterLayer"
         ]
     },
     {
@@ -686,6 +706,14 @@
         ]
     },
     {
+        "path":"/common/mixly.js",
+        "require":[
+        ],
+        "provide":[
+            "Mixly"
+        ]
+    },
+    {
         "path":"/common/mjson.js",
         "require":[
             "Mixly"
@@ -792,6 +820,16 @@
         ],
         "provide":[
             "Mixly.StatusBar"
+        ]
+    },
+    {
+        "path":"/common/storage.js",
+        "require":[
+            "PouchDB",
+            "Mixly"
+        ],
+        "provide":[
+            "Mixly.Storage"
         ]
     },
     {

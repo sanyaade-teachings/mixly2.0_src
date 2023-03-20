@@ -11,7 +11,7 @@ const { Tools, Env, Config, XML } = Mixly;
 const { BOARD } = Config;
 const { laytpl } = layui;
 
-XML.TEMPLATE_DIR_PATH = goog.normalizePath_(goog.basePath + '../mixly/template/');
+XML.TEMPLATE_DIR_PATH = goog.normalizePath_(goog.basePath + '../template/');
 
 XML.TEMPLATE_CONFIG = [
     {
@@ -182,7 +182,7 @@ XML.convert = function (str, trimEscaped) {
 for (let i of XML.TEMPLATE_CONFIG) {
     const { type, path, config, appendToBody } = i;
     if (XML.TEMPLATE_ENV[type]) {
-        const xmlStr = Mixly.get(XML.TEMPLATE_DIR_PATH + path);
+        const xmlStr = goog.get(XML.TEMPLATE_DIR_PATH + path);
         if (xmlStr) {
             XML.TEMPLATE_STR[type] = xmlStr;
             XML.TEMPLATE_STR_RENDER[type] = XML.render(xmlStr, config);
@@ -198,7 +198,7 @@ if (layui._typeof(BOARD.board) === 'object') {
         const boardConfig = BOARD.board[i];
         if (layui._typeof(boardConfig) === 'object'
          && layui._typeof(boardConfig.xmlPath) === 'string') {
-            const categoriesStr = Mixly.get(boardConfig.xmlPath);
+            const categoriesStr = goog.get(boardConfig.xmlPath);
             if (categoriesStr)
                 XML.CATEGORIES_STR[i] = categoriesStr;
         }

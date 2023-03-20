@@ -1,72 +1,75 @@
 (() => {
 
-goog.provide('Mixly');
 
 /**
-  * mixly-sw文件夹相对于base.js的路径
+  * mixly文件夹相对于base.js的路径
   * @type {string}
   */
-Mixly.MIXLY_DIR_PATH = '../../mixly-sw';
+goog.MIXLY_DIR_PATH = '../../mixly-sw/mixly-modules';
 
 /**
   * 所有模块的信息所构成的列表，其中模块路径为其相对于mixly目录的相对路径
   * @type {list}
   */
-Mixly.DEPENDENCY = [
+goog.DEPENDENCIES = [
     {
-        "path": '/../common/ui/layui/layui.js',
+        "path": '/../../common/ui/layui/layui.js',
         "provide": ['layui'],
         "require": []
     }, {
-        "path": '/../common/ui/layui/extend/loading/loading.js',
+        "path": '/../../common/ui/layui/extend/loading/loading.js',
         "provide": ['layui.loading'],
         "require": ['layui']
     }, {
-        "path": '/../common/mixly/common/modules/lazyload.js',
+        "path": '/../../common/modules/web-modules/lazyload.js',
         "provide": ['LazyLoad'],
         "require": []
     }, {
-        "path": '/../common/mixly/common/local-storage.js',
+        "path": '/../../common/modules/web-modules/pouchdb.min.js',
+        "provide": ['PouchDB'],
+        "require": []
+    }, {
+        "path": '/../../common/modules/mixly-modules/common/local-storage.js',
         "provide": ['Mixly.LocalStorage'],
         "require": ['Mixly']
     }, {
-        "path": '/../common/mixly/common/marray.js',
+        "path": '/../../common/modules/mixly-modules/common/marray.js',
         "provide": ['Mixly.MArray'],
         "require": ['Mixly']
     }, {
-        "path": '/../common/mixly/common/mjson.js',
+        "path": '/../../common/modules/mixly-modules/common/mjson.js',
         "provide": ['Mixly.MJSON'],
         "require": ['Mixly']
     }, {
-        "path": '/../common/mixly/common/layer-ext.js',
+        "path": '/../../common/modules/mixly-modules/common/layer-ext.js',
         "provide": ['Mixly.LayerExt'],
         "require": ['layui', 'Mixly.Env', 'Mixly.Config', 'Mixly.DomOperator']
     }, {
-        "path": '/../common/mixly/common/dom-operator.js',
+        "path": '/../../common/modules/mixly-modules/common/dom-operator.js',
         "provide": ['Mixly.DomOperator'],
         "require": ['Mixly.Config', 'Mixly.XML']
     }, {
-        "path": '/../common/mixly/common/command.js',
+        "path": '/../../common/modules/mixly-modules/common/command.js',
         "provide": ['Mixly.Command'],
         "require": ['Mixly.Config', 'Mixly.MJSON']
     }, {
-        "path": '/../common/mixly/common/url.js',
+        "path": '/../../common/modules/mixly-modules/common/url.js',
         "provide": ['Mixly.Url'],
         "require": ['Mixly']
     }, {
-        "path": '/../common/mixly/electron/cloud-download.js',
+        "path": '/../../common/modules/mixly-modules/electron/cloud-download.js',
         "provide": ['Mixly.CloudDownload'],
         "require": ['Mixly.Env', 'Mixly.Modules']
     }, {
-        "path": '/../common/mixly/common/modules/store.modern.min.js',
+        "path": '/../../common/modules/web-modules/store.modern.min.js',
         "provide": ['store'],
         "require": []
     }, {
-        "path": '/../common/mixly/common/modules/select2.min.js',
-        "provide": [],
+        "path": '/../../common/modules/web-modules/select2.min.js',
+        "provide": ['select2'],
         "require": []
     }, {
-        "path": '/../common/mixly/common/modules/xterm.min.js',
+        "path": '/../../common/modules/web-modules/xterm.min.js',
         "provide": ['Terminal'],
         "require": []
     }
@@ -76,17 +79,17 @@ Mixly.DEPENDENCY = [
   * 缓存已请求成功的文本数据，防止重复请求
   * @type {object}
   */
-Mixly.files = {};
+goog.files = {};
 
 /**
  * @function 根据传入的相对路径获取文件数据
  * @param inPath {string} 文件所在的相对路径
  * @return {string | null} 请求成功返回请求文本，请求失败或请求超时时返回null
  **/
-Mixly.get = (inPath) => {
+goog.get = (inPath) => {
     let str;
-    if (Mixly.files[inPath]) {
-        return Mixly.files[inPath];
+    if (goog.files[inPath]) {
+        return goog.files[inPath];
     }
     if (typeof nw === 'object') {
         const fs = require('fs');
@@ -112,7 +115,7 @@ Mixly.get = (inPath) => {
         });
         $.ajaxSettings.async = true;
     }
-    Mixly.files[inPath] = str;
+    goog.files[inPath] = str;
     return str;
 }
 
@@ -122,8 +125,8 @@ Mixly.get = (inPath) => {
  * @param defaultConfig {object} 默认的JSON配置信息
  * @return {object | null} 当对应路径下文件不存在时将返回null
  **/
-Mixly.getJSON = (inPath, defaultValue = {}) => {
-    let jsonStr = Mixly.get(inPath);
+goog.getJSON = (inPath, defaultValue = {}) => {
+    let jsonStr = goog.get(inPath);
     try {
         // 去除JSON字符串中的注释
         jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
@@ -135,48 +138,38 @@ Mixly.getJSON = (inPath, defaultValue = {}) => {
 }
 
 /**
- * @function require多个对象
- * @param list {array} 对象字符串列表
- * @return {void}
- **/
-Mixly.requireList = (list) => {
-    if (typeof list !== 'object') return;
-    for (let i = 0; i < list.length; i++)
-        goog.require(list[i]);
-}
-
-/**
  * @function 添加依赖项
- * @param {list} 依赖列表
+ * @param dependencies {list} 依赖列表
  * @return {void}
  **/
-Mixly.addDependency = (dependencyList) => {
-    if (typeof dependencyList !== 'object') return;
-    for (let i = 0; i < dependencyList.length; i++) {
-        const googPath = dependencyList[i].path ?? null;
-        const googProvide = dependencyList[i].provide ?? [];
-        const googRequire = dependencyList[i].require ?? [];
+goog.addDependencies = (dependencies) => {
+    if (typeof dependencies !== 'object') return;
+    for (let i = 0; i < dependencies.length; i++) {
+        const googPath = dependencies[i].path ?? null;
+        const googProvide = dependencies[i].provide ?? [];
+        const googRequire = dependencies[i].require ?? [];
         if (!googPath || !googProvide || !googRequire) {
             continue;
         }
-        goog.addDependency(Mixly.MIXLY_DIR_PATH + googPath, googProvide, googRequire);
+        goog.addDependency(goog.MIXLY_DIR_PATH + googPath, googProvide, googRequire);
     }
 }
 
-Mixly.initDependency = () => {
-    const depsJson = Mixly.getJSON(goog.normalizePath_(goog.basePath + Mixly.MIXLY_DIR_PATH + '/deps.json'));
+goog.initDependencies = () => {
+    const depsJson = goog.getJSON(goog.normalizePath_(goog.basePath + goog.MIXLY_DIR_PATH + '/deps.json'), {});
     if (depsJson && typeof depsJson === 'object') {
         for (let i in depsJson) {
-            Mixly.DEPENDENCY.push(depsJson[i]);
+            goog.DEPENDENCIES.push(depsJson[i]);
         }
     }
-    Mixly.addDependency(Mixly.DEPENDENCY);
+    goog.addDependencies(goog.DEPENDENCIES);
 }
 
-Mixly.initDependency();
+goog.initDependencies();
 
 goog.require('Mixly.Loading');
-goog.require(Mixly.MIXLY_DIR_PATH + '/../common/mixly/common/modules/select2.min.js');
+goog.require('select2');
 goog.require('Mixly.Interface');
+goog.require('PouchDB');
 
 })();

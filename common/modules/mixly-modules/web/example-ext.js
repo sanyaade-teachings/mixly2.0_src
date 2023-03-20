@@ -65,7 +65,7 @@ class ExampleExt extends Example {
     }
 
     dataToWorkspace(inPath) {
-        const data = Mixly.get(Config.pathPrefix + `../sample/${inPath}`);
+        const data = goog.get(Config.pathPrefix + `../sample/${inPath}`);
         this.updateCode(inPath.substring(inPath.lastIndexOf('.')), data);
     }
 }

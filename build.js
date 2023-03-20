@@ -1,32 +1,19 @@
 const fs = require('fs');
 const fs_extra = require('fs-extra');
-const fs_extend = require('./common/mixly/node-modules/fsExtend.js');
+const fs_extend = require('./common/modules/node-modules/fsExtend.js');
 const path = require('path');
 
 const config = {
     "workPath": __dirname,
     "fileIgnore": [
-        /*"./common/serial-charts.js"
-        "./common/modules/base64.min.js",
-        "./common/modules/lazyload.js",
-        "./common/modules/microbit-fs.umd.min.js",
-        "./common/modules/notify.js",
-        "./common/modules/popper.min.js",
-        "./common/modules/sortable.min.js",
-        "./common/modules/store.modern.min.js",
-        "./common/modules/tippy-bundle.umd.min.js",
-        "./common/modules/xscrollbar.js",
-        "./common/modules/select2.min.js",
-        "./common/modules/xterm.min.js"*/
     ],
     "dirIgnore": [
-        "./common/modules"
     ]
 };
 
 const needBuildDirList = [
-    __dirname + '/mixly-sw/',
-    __dirname + '/common/mixly/'
+    __dirname + '/mixly-sw/mixly-modules/',
+    __dirname + '/common/modules/mixly-modules/'
 ];
 
 const scan = (dir, ignore) => {

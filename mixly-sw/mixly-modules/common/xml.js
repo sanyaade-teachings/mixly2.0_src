@@ -203,7 +203,7 @@ for (let i of XML.TEMPLATE_CONFIG) {
         generateDom
     } = i;
     if (XML.TEMPLATE_ENV[type]) {
-        const xmlStr = Mixly.get(XML.TEMPLATE_DIR_PATH + path);
+        const xmlStr = goog.get(XML.TEMPLATE_DIR_PATH + path);
         if (xmlStr) {
             XML.TEMPLATE_STR[type] = xmlStr;
             if (generateDom) {

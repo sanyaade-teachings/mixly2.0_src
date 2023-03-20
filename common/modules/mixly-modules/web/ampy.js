@@ -157,7 +157,7 @@ class Ampy {
                 if (moduleInfo) {
                     const fileInfo = await this.getFilesInfo();
                     for (let name in moduleInfo) {
-                        const libCode = Mixly.get(moduleInfo[name]);
+                        const libCode = goog.get(moduleInfo[name]);
                         if (!libCode 
                          || new TextEncoder('utf8').encode(libCode).length === fileInfo[name + '.py']) {
                             StatusBar.addValue('Skip ' + name + '.py\n');

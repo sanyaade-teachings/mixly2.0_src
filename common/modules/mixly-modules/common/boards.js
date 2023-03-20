@@ -10,6 +10,7 @@ goog.require('Mixly.ToolboxSearcher');
 goog.require('Mixly.Modules');
 goog.require('Mixly.MString');
 goog.require('Mixly.Editor');
+goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.Boards');
 
 const {
@@ -21,6 +22,7 @@ const {
     Modules,
     MString,
     Editor,
+    FooterLayer,
     Boards
 } = Mixly;
 
@@ -130,7 +132,7 @@ Boards.init = () => {
             $boards.append(`<option value="${Boards.INFO[board]?.key}">${board}</option>`);
         form.render('select', 'boards-type-filter');
     }
-    $('#mixly-board-config').off().click(function() {
+    /*$('#mixly-board-config').off().click(function() {
         if (Boards.configMenu
          && Boards.configMenu.length
          && !Boards.configMenu[0].state.isDestroyed) {
@@ -143,6 +145,60 @@ Boards.init = () => {
         } else {
             Boards.showConfigMenu();
             Boards.configMenu[0].show();
+        }
+    });*/
+    Boards.configMenu = new FooterLayer('mixly-board-config', {
+        tippy: {
+            onMount(instance) {
+                const { list } = Boards.configMenu;
+                const { INFO } = Boards;
+                $('#board-config-menu-reset').off().click(function() {
+                    INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
+                    for (let key in config) {
+                        defaultConfig[key] = config[key][0].key;
+                        $('#board-config-' + key).find('p').text(config[key][0].label);
+                    }
+                    linstance.setProps({});
+                });
+                Boards.renderConfigMenu(list);
+            },
+            onHidden(instance) {
+                Boards.writeSelectedBoardConfig();
+            }
+        },
+        onShow() {
+            const selectedBoardName = Boards.getSelectedBoardName();
+            const { INFO } = Boards;
+            const { config, ignore, key } = INFO[selectedBoardName];
+            INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
+            const defaultConfig = INFO[selectedBoardName].default;
+            let list = [];
+            for (let key in config) {
+                let selectedConfig = defaultConfig[key] ?? config[key][0].label;
+                let options = [];
+                for (let i of config[key]) {
+                    if (defaultConfig[key] && i.key === defaultConfig[key])
+                        selectedConfig = i.label;
+                    options.push({
+                        title: i.label,
+                        id: i.key
+                    });
+                }
+                if (!defaultConfig)
+                    selectedConfig = config[key][0].label;
+                list.push({
+                    name: key,
+                    label: selectedConfig,
+                    options
+                });
+            }
+            const xmlStr = XML.render(XML.TEMPLATE_STR['BOARD_CONFIG_MENU_DIV'], {
+                list,
+                reset: indexText['使用默认配置'],
+                close: indexText['关闭窗口']
+            });
+            Boards.configMenu.list = list;
+            Boards.configMenu.updateContent(xmlStr);
         }
     });
 }
@@ -452,8 +508,7 @@ Boards.updateCategories = (boardName, enforce = false) => {
     } else {
         $('#mixly-board-config').css('display', 'none');
     }
-    if (Boards.configMenu
-     && Boards.configMenu.length
+    if (Boards.configMenu?.length
      && !Boards.configMenu[0].state.isDestroyed) {
         Boards.configMenu[0].destroy();
     }
@@ -581,6 +636,7 @@ Boards.showConfigMenu = () => {
         reset: indexText['使用默认配置'],
         close: indexText['关闭窗口']
     });
+
     Boards.configMenu = tippy('#mixly-board-config', {
         allowHTML: true,
         content: xmlStr,
@@ -644,7 +700,7 @@ Boards.renderConfigMenu = (optionList) => {
                 const $p = $elem.children('p');
                 $p.text(data.title);
                 Boards.INFO[selectedBoardName].default[item.name] = data.id;
-                Boards.configMenu[0].setProps({});
+                Boards.configMenu.layer[0].setProps({});
             }
         });
     }

@@ -232,6 +232,14 @@ body[class="dark"] {
     margin-bottom: 10px;
 }*/
 
+.dark .mixly-board .service-single label {
+    color: #ccc;
+}
+
+.light .mixly-board .service-single label {
+    color: #888;
+}
+
 .mixly-board-del-btn, .mixly-board-ignore-btn {
     display: none;
     background-color: rgba(0,0,0,0);

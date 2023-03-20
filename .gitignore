@@ -9,3 +9,5 @@ boards/default/**/wiki/content.md
 boards/default/**/build/lib/libs.json
 boards/default/**/build/upload/
 boards/extend/
+node_modules/
+package-lock.json

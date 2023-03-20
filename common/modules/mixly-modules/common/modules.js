@@ -13,7 +13,7 @@ const loadNodeModules = () => {
     Modules.child_process = require("child_process");
     Modules.fs = require('fs');
     Modules.fs_extra = require('fs-extra');
-    Modules.fs_extend = require('../../../common/mixly/node-modules/fsExtend.js');
+    Modules.fs_extend = require('../../../common/modules/node-modules/fsExtend.js');
     Modules.compressing = require('compressing');
     Modules.json2md = require('json2md');
     Modules.electron = require('electron');

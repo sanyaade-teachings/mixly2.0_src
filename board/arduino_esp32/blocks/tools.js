@@ -7,7 +7,7 @@ goog.provide('Blockly.Arduino.tools');
 
 const BOARDS_PIN_DEF = {
     esp32_pin: {
-        path: "../common/media/board_pin/ESP32.jpg"
+        path: "../common/media/board_pin/ESP32.png"
     },
     handbit_A: {
         path: "../common/media/board_pin/handbit_A.jpg"

@@ -1,12 +1,14 @@
 (() => {
 
 goog.require('Mixly.StatusBar');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Web.Utilities');
 goog.require('Mixly.Web.SerialPort');
 goog.provide('Mixly.Web.Esptool');
 
 const {
     StatusBar,
+    Msg,
     Web
 } = Mixly;
 
@@ -523,7 +525,7 @@ class EspLoader {
     async reset() {
         const signals = await SerialPort.obj.getSignals();
         this.logMsg("尝试复位")
-        Mixly.StatusBar.addValue(indexText["尝试复位"] + "\n", true);
+        Mixly.StatusBar.addValue(Msg.Lang["尝试复位"] + "\n", true);
         await SerialPort.obj.setSignals({ dataTerminalReady: false, requestToSend: true });
         await SerialPort.obj.setSignals({ dataTerminalReady: true, requestToSend: false });
         await this.sleep(1000);
@@ -686,11 +688,11 @@ class EspLoader {
     async setBaudrate(baud) {
         if (this._chipfamily == ESP8266) {
             this.logMsg("Baud rate can only change on ESP32 and ESP32-S2");
-            StatusBar.addValue(indexText["只能在ESP32和ESP32-S2上修改波特率"] + '\n');
+            StatusBar.addValue(Msg.Lang["只能在ESP32和ESP32-S2上修改波特率"] + '\n');
 
         } else {
             this.logMsg("Attempting to change baud rate to " + baud + "...");
-            StatusBar.addValue(indexText["尝试修改波特率为"] + baud + "\n");
+            StatusBar.addValue(Msg.Lang["尝试修改波特率为"] + baud + "\n");
             try {
                 // stub takes the new baud rate and the old one
                 let oldBaud = this.IS_STUB ? this.getPortBaudRate() : 0;
@@ -700,7 +702,7 @@ class EspLoader {
                 await this.sleep(50);
                 //SerialPort.inputBuffer = [];
                 this.logMsg("Changed baud rate to " + baud);
-                StatusBar.addValue(indexText["已修改波特率为"] + baud + "\n");
+                StatusBar.addValue(Msg.Lang["已修改波特率为"] + baud + "\n");
             } catch (e) {
                 throw ("Unable to change the baud rate, please try setting the connection speed from " + baud + " to 115200 and reconnecting.");
             }
@@ -768,7 +770,7 @@ class EspLoader {
     async flashData(binaryData, offset = 0, part = 0) {
         let filesize = binaryData.byteLength;
         this.logMsg("\nWriting data with filesize:" + filesize);
-        StatusBar.addValue(indexText["写入数据，文件大小："] + filesize + "\n");
+        StatusBar.addValue(Msg.Lang["写入数据，文件大小："] + filesize + "\n");
         let blocks = await this.flashBegin(filesize, offset);
         let block = [];
         let seq = 0;
@@ -787,7 +789,7 @@ class EspLoader {
             */
             //StatusBar.addValue("Writing at " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n", true);
             if (StatusBar.getValue().lastIndexOf("(" + percentage + " %)") == -1) {
-                StatusBar.addValue(indexText["写入数据到"] + " " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n");
+                StatusBar.addValue(Msg.Lang["写入数据到"] + " " + this.toHex(address + seq * flashWriteSize, 8) + "... (" + percentage + " %)\n");
             }
             if (this.updateProgress !== null) {
                 this.updateProgress(part, percentage);
@@ -805,7 +807,7 @@ class EspLoader {
             position += flashWriteSize;
         }
         this.logMsg("Took " + (Date.now() - stamp) + "ms to write " + filesize + " bytes");
-        StatusBar.addValue(indexText["写入"] + " " + filesize + " bytes" + " " + indexText["耗时"] + " " + (Date.now() - stamp) + " ms\n");
+        StatusBar.addValue(Msg.Lang["写入"] + " " + filesize + " bytes" + " " + Msg.Lang["耗时"] + " " + (Date.now() - stamp) + " ms\n");
     };
 
     /**
@@ -1227,7 +1229,7 @@ class EspLoader {
 
         // Upload
         this.logMsg("Uploading stub...")
-        StatusBar.addValue(indexText["上传"] + " stub...\n");
+        StatusBar.addValue(Msg.Lang["上传"] + " stub...\n");
         for (let field of ['text', 'data']) {
             if (Object.keys(stub).includes(field)) {
                 let offset = stub[field + "_start"];
@@ -1245,7 +1247,7 @@ class EspLoader {
             }
         }
         this.logMsg("Running stub...")
-        StatusBar.addValue(indexText["运行"] + " stub...\n");
+        StatusBar.addValue(Msg.Lang["运行"] + " stub...\n");
         await this.memFinish(stub['entry']);
 
         let p = await this.readBuffer(500);
@@ -1255,7 +1257,7 @@ class EspLoader {
             throw "Failed to start stub. Unexpected response: " + p;
         }
         this.logMsg("Stub is now running...");
-        StatusBar.addValue("Stub " + indexText["正在运行中"] + "...\n");
+        StatusBar.addValue("Stub " + Msg.Lang["正在运行中"] + "...\n");
         this.stubClass = new EspStubLoader({
             updateProgress: this.updateProgress,
             logMsg: this.logMsg,

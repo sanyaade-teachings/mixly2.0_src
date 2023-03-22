@@ -8,6 +8,7 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.Url');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.Serial');
 goog.provide('Mixly.WebCompiler.Compiler');
@@ -21,6 +22,7 @@ const {
     StatusBarPort,
     Config,
     LayerExt,
+    Msg,
     Web
 } = Mixly;
 const { SOFTWARE, BOARD } = Config;
@@ -45,12 +47,12 @@ Compiler.compile = () => {
     StatusBar.setValue('');
     Compiler.generateCommand('compile', (error, obj, layerNum) => {
         layer.close(layerNum);
-        let message = indexText["编译成功"];
+        let message = Msg.Lang["编译成功"];
         if (error) {
-            message = indexText["编译失败"];
+            message = Msg.Lang["编译失败"];
         }
         layer.msg(message, { time: 1000 });
-        StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + obj.timeCost + ")==\n");
+        StatusBar.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + obj.timeCost + ")==\n");
     });
 }
 
@@ -91,7 +93,7 @@ Compiler.upload = async () => {
     } else {
         Serial.connect(portName, 115200, async (port) => {
             if (!port) {
-                layer.msg(indexText['已取消连接'], { time: 1000 });
+                layer.msg(Msg.Lang['已取消连接'], { time: 1000 });
                 return;
             }
             StatusBarPort.tabChange('output');
@@ -112,11 +114,11 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
     };
     let commandStr = Compiler.URL + '/?' + Url.jsonToUrl(command);
     // StatusBar.setValue('send -> ' + commandStr + '\n');
-    StatusBar.setValue(indexText['编译中'] + '...\n');
+    StatusBar.setValue(Msg.Lang['编译中'] + '...\n');
     console.log('send -> ', commandStr);
     const compileLayer = layer.open({
         type: 1,
-        title: indexText["编译中"] + "...",
+        title: Msg.Lang["编译中"] + "...",
         content: $('#mixly-loader-div'),
         shade: LayerExt.SHADE_NAV,
         closeBtn: 0,

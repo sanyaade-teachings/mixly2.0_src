@@ -2,38 +2,20 @@
 
 goog.require('Mixly.MString');
 goog.require('Mixly.StatusBar');
+goog.require('Mixly.Msg');
+goog.require('Mixly.Env');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.Ampy');
 
 const {
     Web,
     StatusBar,
-    MString
+    MString,
+    Msg,
+    Env
 } = Mixly;
 
-const GET_FILES_INFO_COMMAND = `
-try:
-    import os
-except ImportError:
-    import uos as os
-
-def listdir(directory):
-    try:
-        if directory == '/':
-            return sorted([directory + f for f in os.listdir(directory)])
-        else:
-            return sorted([directory + '/' + f for f in os.listdir(directory)])
-    except:
-        return sorted([f for f in os.listdir()])
-
-r = []
-for f in listdir(''):
-    try:
-        size = os.stat(f)[6]
-    except:
-        size = os.size(f)
-    r.append([f, size])
-print(r)`;
+const GET_FILES_INFO_COMMAND = goog.get(Env.templatePath + '/get-files-info.py');
 
 class Ampy {
     constructor(operator, writeBuffer = true) {
@@ -144,12 +126,12 @@ class Ampy {
             try {
                 await this.operator_.writeCtrlB();
                 if (!await this.interrupt()) {
-                    reject(indexText['中断失败']);
+                    reject(Msg.Lang['中断失败']);
                     return;
                 }
                 // console.log('中断成功')
                 if (!await this.enterRawREPL()) {
-                    reject(indexText['无法进入Raw REPL']);
+                    reject(Msg.Lang['无法进入Raw REPL']);
                     return;
                 }
                 // console.log('进入Raw REPL')
@@ -169,11 +151,11 @@ class Ampy {
                 await this.writeFile(fileName, code);
                 // console.log('写入code成功')
                 if (!await this.exitRawREPL()) {
-                    reject(indexText['无法退出Raw REPL']);
+                    reject(Msg.Lang['无法退出Raw REPL']);
                     return;
                 }
                 if (! await this.exitREPL()) {
-                    reject(indexText['无法退出REPL']);
+                    reject(Msg.Lang['无法退出REPL']);
                     return;
                 }
                 resolve();

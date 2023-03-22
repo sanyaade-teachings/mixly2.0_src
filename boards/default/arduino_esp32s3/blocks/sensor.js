@@ -8,7 +8,7 @@ profile["default"] = profile["esp32_handbit"];
 Blockly.Blocks['ESP32_hallRead'] = {
   init: function() {
     this.appendDummyInput()
-    .appendField(Blockly.Msg.ESP32_HALL);
+    .appendField(Blockly.Msg.Lang.ESP32_HALL);
     this.setOutput(true, null);
     this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.setTooltip();
@@ -20,7 +20,7 @@ Blockly.Blocks['ESP32_hallRead'] = {
 Blockly.Blocks['ESP32_temprature'] = {
   init: function() {
     this.appendDummyInput()
-    .appendField(Blockly.Msg.ESP32_TEMP);
+    .appendField(Blockly.Msg.Lang.ESP32_TEMP);
     this.setOutput(true, null);
     this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.setTooltip();
@@ -32,15 +32,15 @@ Blockly.Blocks.OneButton = {
   init: function() {
     this.setColour(Blockly.Msg['BASE_HUE']);
      this.appendDummyInput()
-    .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT);
+    .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT);
     this.appendDummyInput("")
     .appendField(new Blockly.FieldDropdown(profile.default.button), 'PIN');
     this.appendDummyInput("")
-    .appendField(Blockly.Msg.MIXLY_BUTTON)
-    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_CLICK, "attachClick"], [Blockly.Msg.MIXLY_DOUBLE_CLICK, "attachDoubleClick"], [Blockly.Msg.MIXLY_LONG_PRESS_START, "attachLongPressStart"], [Blockly.Msg.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"], [Blockly.Msg.MIXLY_LONG_PRESS_END, "attachLongPressStop"]]), "mode");
+    .appendField(Blockly.Msg.Lang.MIXLY_BUTTON)
+    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_CLICK, "attachClick"], [Blockly.Msg.Lang.MIXLY_DOUBLE_CLICK, "attachDoubleClick"], [Blockly.Msg.Lang.MIXLY_LONG_PRESS_START, "attachLongPressStart"], [Blockly.Msg.Lang.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"], [Blockly.Msg.Lang.MIXLY_LONG_PRESS_END, "attachLongPressStop"]]), "mode");
     this.appendStatementInput('DO')
-    .appendField(Blockly.Msg.MIXLY_DO);
-    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
+    .appendField(Blockly.Msg.Lang.MIXLY_DO);
+    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
     this.setInputsInline(true);
     this.setHelpUrl();
 }

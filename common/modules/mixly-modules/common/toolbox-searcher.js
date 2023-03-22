@@ -3,9 +3,15 @@
 goog.require('Blockly');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.ToolboxSearcher');
 
-const { XML, Editor, ToolboxSearcher } = Mixly;
+const {
+    XML,
+    Editor,
+    Msg,
+    ToolboxSearcher
+} = Mixly;
 
 ToolboxSearcher.init = function () {
     this.workspace = new Blockly.Workspace(new Blockly.Options({
@@ -133,7 +139,7 @@ ToolboxSearcher.searchBlocks = function (keyList) {
                     showNum++;
             outputXML.unshift({
                 kind: 'LABEL',
-                text: indexText['共搜索到图形块'] + ': ' + (hideNum + showNum) + '，' + indexText['显示'] + ': ' + showNum + '，' + indexText['请添加关键词以显示全部。例如：管脚 数字']
+                text: Msg.Lang['共搜索到图形块'] + ': ' + (hideNum + showNum) + '，' + Msg.Lang['显示'] + ': ' + showNum + '，' + Msg.Lang['请添加关键词以显示全部。例如：管脚 数字']
             });
         }
         
@@ -141,7 +147,7 @@ ToolboxSearcher.searchBlocks = function (keyList) {
             outputXML.length ? 
             outputXML : [{
                 kind: 'LABEL',
-                text: indexText['无数据']
+                text: Msg.Lang['无数据']
             }]
         );
         mainToolbox.refreshSelection();

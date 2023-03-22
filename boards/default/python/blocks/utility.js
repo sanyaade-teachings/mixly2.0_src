@@ -99,7 +99,7 @@ Blockly.Blocks['type_check'] = {
   init: function() {
     this.setColour(Blockly.Msg['UTILITY_HUE']);
     this.appendValueInput('VALUE')
-        .appendField(Blockly.Msg.TYPE_CHECK);
+        .appendField(Blockly.Msg.Lang.TYPE_CHECK);
     this.setInputsInline(false);
     this.setOutput(true, 'Type');
     //this.setPreviousStatement(true);
@@ -120,7 +120,7 @@ Blockly.Blocks['text_print_multiple'] = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setMutator(new Blockly.Mutator(['text_print_multiple_item']));
-        this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.TEXT_PRINT_TOOLTIP);
   },
     /**
      * Create XML to represent print inputs.

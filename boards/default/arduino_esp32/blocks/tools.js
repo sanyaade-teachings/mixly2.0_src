@@ -52,7 +52,7 @@ const BOARDS_PIN_DEF = {
 
 for (let i in BOARDS_PIN_DEF) {
     const defaultDef = {
-        path: '../common/media/board_pin/ESP32.jpg',
+        path: '../../../common/media/board_pin/ESP32.jpg',
         height: 376,
         width: 525,
         tooltip: '',

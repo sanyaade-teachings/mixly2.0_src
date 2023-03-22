@@ -80,6 +80,7 @@ goog.require('Highcharts');
 goog.require('Mixly.Env');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.Charts');
 
 Mixly.Modules.highcharts = Highcharts;
@@ -371,7 +372,7 @@ Mixly.Charts.init = function (serialOpened, dom) {
             type: 'line'
         },
         title: {
-            text: indexText['串口数据']
+            text: Mixly.Msg.Lang['串口数据']
         },
         credits: {
             enabled: false // 禁用版权信息
@@ -380,7 +381,7 @@ Mixly.Charts.init = function (serialOpened, dom) {
             //reversed: false,
             title: {
                 enabled: true,
-                text: indexText['时间/ms']
+                text: Mixly.Msg.Lang['时间/ms']
             },
             lineWidth: 2
             //endOnTick: true
@@ -389,13 +390,13 @@ Mixly.Charts.init = function (serialOpened, dom) {
         },
         yAxis: {
             title: {
-                text: indexText['串口数据']
+                text: Mixly.Msg.Lang['串口数据']
             },
             endOnTick: true,
             lineWidth: 2
         },
         series: [{
-            name: indexText['串口数据'] + '1',
+            name: Mixly.Msg.Lang['串口数据'] + '1',
             data: []
         }]
     });
@@ -490,7 +491,7 @@ Mixly.Charts.addData = function (serialData) {
         Mixly.Charts.data.push(newData);
         while (Mixly.Charts.chart && Mixly.Charts.chart.series && Mixly.Charts.chart.series.length < serialNumber.length) {
             Mixly.Charts.chart.addSeries({
-                name: indexText['串口数据'] + (Mixly.Charts.chart.series.length + 1),
+                name: Mixly.Msg.Lang['串口数据'] + (Mixly.Charts.chart.series.length + 1),
                 data: []
             });
         }

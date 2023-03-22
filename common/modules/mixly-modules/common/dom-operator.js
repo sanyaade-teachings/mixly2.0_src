@@ -1,18 +1,23 @@
 (() => {
 
+goog.require('layui');
 goog.require('Mixly.Config');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.DomOperator');
 
 const {
     DomOperator,
     Config,
     XML,
-    Env
+    Env,
+    Msg
 } = Mixly;
 
 const { BOARD, USER } = Config;
+
+const { laytpl } = layui;
 
 DomOperator.SerialDom = {
     times: 0,
@@ -34,6 +39,7 @@ class SerialDomGenerator {
         this.lang = lang;
         this.shade = shade;
         this.config = this.getConfig(serialConfig);
+        this.htmlTemplatePath = Env.templatePath + '/serial-tool.html';
         this.htmlStr = this.getHtmlStr();
         this.generateDom();
         this.destroyed = false;
@@ -112,177 +118,35 @@ class SerialDomGenerator {
             connectBtnFilter
         } = this.filter;
 
-        /* 串口监视器 */
-        //串口选择div
-        let selectPortDivStr = `
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label" style="height: 44px;padding-top: 1px;padding-bottom: 1px;">
-                <p style="display:inline;">${indexText['串口']}</p>
-                <input style="display:none;">
-                <input id="${setDtrId}" type="checkbox" title="DTR" lay-filter="${setDtrFilter}" lay-skin="primary" ${this.config.dtr ? "checked" : ""}>
-                <input id="${setRtsId}" type="checkbox" title="RTS" lay-filter="${setRtsFilter}" lay-skin="primary" ${this.config.rts ? "checked" : ""}>
-            </label>
-            <div style="position: relative; height: 38px;">
-                <div style="position: absolute; left: 0px; right: 64px;">
-                    <div class="layui-input-inline" style="width:50%;clear:none;">
-                        <select id="${selectPortId}" lay-verify="required" lay-filter="${selectPortFilter}"></select>
-                    </div>
-                    <div class="layui-input-inline" style="width:50%;clear:none;">
-                        <select id="${selectBaudId}" lay-filter="${selectBaudFilter}">
-                            <option value="9600" ${this.config.baudRates == 9600 ? "selected" : ""}>9600</option>
-                            <option value="19200" ${this.config.baudRates == 19200 ? "selected" : ""}>19200</option>
-                            <option value="28800" ${this.config.baudRates == 28800 ? "selected" : ""}>28800</option>
-                            <option value="38400" ${this.config.baudRates == 38400 ? "selected" : ""}>38400</option>
-                            <option value="57600" ${this.config.baudRates == 57600 ? "selected" : ""}>57600</option>
-                            <option value="115200" ${this.config.baudRates == 115200 ? "selected" : ""}>115200</option>
-                        </select>
-                    </div>
-                </div>
-                <button id="${connectBtnId}" class="layui-btn layui-btn-normal" style="position: absolute; right: 0px; width: 64px;" lay-filter="${connectBtnFilter}">${indexText['打开']}</button>
-            </div>
-        </div>`;
-
-        //串口发送数据div
-        let sendDivStr = `
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label" style="height: 44px;padding-top: 1px;padding-bottom: 1px;">
-                <p style="display:inline;">${indexText['发送数据']}</p>
-                <input style="display:none;">
-                <input id="${sendTypeId}" type="checkbox" title="${indexText['字符串']}" lay-filter="${sendTypeFilter}" lay-skin="primary" checked>
-            </label>
-            <div style="position: relative; height: 38px;">
-                <div class="layui-input-inline" style="position: absolute; right: 128px; left: 0px;clear: none;">
-                    <input id="${sendId}" type="text" name="title" placeholder="${indexText['请输入内容']}" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="position: absolute; right: 64px; width: 64px;clear: none;">
-                  <select id="${sendWithId}" lay-filter="${sendWithFilter}">
-                    <option value="no">no</option>
-                    <option value="\\n">\\n</option>
-                    <option value="\\r">\\r</option>
-                    <option value="\\r\\n" selected>\\r\\n</option>
-                  </select>
-                </div>
-                <button id="${sendBtnId}" class="layui-btn layui-btn-normal" style="position: absolute; right: 0px; width: 64px;">${indexText['发送']}</button>
-            </div>
-        </div>`;
-
-        //串口接收数据div
-        let receiveDivStr = `
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label" style="height: 44px;padding-top: 1px;padding-bottom: 1px;">
-                <p style="display:inline;">${indexText['接收数据']}</p>
-                <input style="display:none;">
-                <input id="${receiveTypeId}" type="checkbox" title="${indexText['字符串']}" lay-filter="${receiveTypeFilter}" lay-skin="primary" checked>
-                <input id="${scrollId}" type="checkbox" title="${indexText['滚屏']}" lay-filter="${scrollFilter}" lay-skin="primary" checked>
-            </label>
-            <div class="layui-input-block">
-                <textarea
-                    readonly
-                    id="${receiveId}"
-                    name="desc"
-                    wrap="off"
-                    spellcheck="false"
-                    placeholder="${indexText['串口输出']}"
-                    class="layui-textarea"
-                    style="height: 220px;"
-                ></textarea>
-            </div>
-        </div>`;
-
-        //串口控制按钮div
-        let ctrlBtnDivStr = `
-        <div class="layui-form-item layui-form-text">
-            <div style="text-align: center;"> 
-                <button id="${clearBtnId}" class="layui-btn layui-btn-danger">${indexText['清空']}</button>
-                ${this.config.ctrlCBtn ? `<button id="${ctrlCBtnId}" class="layui-btn layui-btn-danger">${indexText['中断']}</button>` : ''}
-                ${this.config.ctrlDBtn ? `<button id="${ctrlDBtnId}" class="layui-btn layui-btn-danger">${indexText['复位']}</button>` : ''}
-            </div>
-        </div>`;
-
-        /* 串口绘图器 */
-        //串口绘图设置div
-        let drawSettingDivStr = `
-        <div class="layui-form-item layui-form-text">
-            <div class="layui-input-inline" style="width:15%;clear:none;">
-                <label class="layui-form-label">${indexText['最小']}</label>
-                <input id="${yMinId}" type="text" name="title" autocomplete="off" class="layui-input" value="${this.config.yMin}">
-            </div>
-            <div class="layui-input-inline" style="width:15%;clear:none;">
-                <label class="layui-form-label">${indexText['最大']}</label>
-                <input id="${yMaxId}" type="text" name="title" autocomplete="off" class="layui-input" value="${this.config.yMax}">
-            </div>
-            <div class="layui-input-inline" style="width:15%;clear:none;">
-                <label class="layui-form-label">${indexText['点数']}</label>
-                <select id="${pointNumId}" lay-filter="${selectPointNumFilter}">
-                    <option value="50" ${this.config.pointNum == "50" ? "selected" : ""}>50</option>
-                    <option value="100" ${this.config.pointNum == "100" ? "selected" : ""}>100</option>
-                    <option value="150" ${this.config.pointNum == "150" ? "selected" : ""}>150</option>
-                    <option value="200" ${this.config.pointNum == "200" ? "selected" : ""}>200</option>
-                    <option value="250" ${this.config.pointNum == "250" ? "selected" : ""}>250</option>
-                    <option value="300" ${this.config.pointNum == "300" ? "selected" : ""}>300</option>
-                </select>
-            </div>
-            <div class="layui-input-inline" style="width:55%;clear:none;">
-                <!--
-                <label class="layui-form-label" style="height: 44px;padding-top: 1px;padding-bottom: 1px;">
-                    <p style="display:inline;">${indexText['发送数据']}</p>
-                    <input style="display:none;">
-                    <input id="${chartSendTypeId}" type="checkbox" title="${indexText['字符串']}" lay-filter="${chartSendTypeFilter}" lay-skin="primary" checked>
-                </label>
-                -->
-                <label class="layui-form-label">${indexText["发送数据"]}</label>
-                <div style="position: relative;width: 100%;height: 38px;">
-                    <div class="layui-input-inline" style="position: absolute;left: 0px;right: 128px;clear: none;bottom: 0px;top: 0px;">
-                        <input id="${chartSendId}" type="text" name="title" placeholder="${indexText['请输入内容']}" autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-input-inline" style="position: absolute;right: 64px;width: 64px;clear: none;bottom: 0px;top: 0px;">
-                        <select id="${chartSendWithId}">
-                            <option value="no">no</option>
-                            <option value="\\n">\\n</option>
-                            <option value="\\r">\\r</option>
-                            <option value="\\r\\n" selected>\\r\\n</option>
-                        </select>
-                    </div>
-                    <button id="${chartSendBtnId}" class="layui-btn layui-btn-normal" style="position: absolute;right: 0px;width: 64px;">${indexText['发送']}</button>
-                </div>
-            </div>
-        </div>`;
-
-        //串口绘图div
-        let drawChartsDivStr = `
-        <div class="layui-form-item layui-form-text" style="padding-top: 25px;">
-            <div id="${dataDrawId}" style="width: 100%;overflow-x: auto;">
-            </div>
-        </div>`;
-
-        let innerHtmlStr = `
-        <div id="${moveId}" style="height: 10px;width: 100%;"></div>
-        <div class="layui-tab" lay-filter="${tabFilter}" style="width: 100%;height: 100%;margin-top: 0px;margin-bottom: 0px;position: relative;">
-            <ul class="layui-tab-title" style="position: absolute;left: 0px;top: 0px;height: 40px;right: 0px;">
-                <li class="layui-this" lay-id="0">${indexText['串口监视器']}</li>
-                <li lay-id="1">${indexText['串口可视化']}</li>
-            </ul>
-            <div class="layui-tab-content" style="position: absolute;left: 0px;top: 40px;bottom: 10px;right: 0px;overflow: auto;padding-bottom: 0px;">
-                <div class="layui-tab-item layui-show">
-                    ${selectPortDivStr}
-                    ${sendDivStr}
-                    ${receiveDivStr}
-                    ${ctrlBtnDivStr}
-                </div>
-                <div class="layui-tab-item">
-                    ${drawSettingDivStr}
-                    ${drawChartsDivStr}
-                </div>
-            </div>
-        </div>`;
-
-        //串口监视器&绘图器div
-        let formStr = `
-        <div class="layui-form layui-form-pane" id="${formId}" lay-filter="${formFilter}">
-            ${innerHtmlStr}
-        </div>`;
-
-        return [formStr, innerHtmlStr];
+        this.htmlTemplate = goog.get(this.htmlTemplatePath);
+        return laytpl(this.htmlTemplate).render({
+            ...this.id,
+            ...this.filter,
+            baudRates: [ 9600, 19200, 28800, 38400, 57600, 115200 ],
+            selectedBaud: this.config.baudRates,
+            pointList: [ 50, 100, 150, 200, 250, 300 ],
+            pointNum: this.config.pointNum,
+            ctrlCBtn: this.config.ctrlCBtn,
+            ctrlDBtn: this.config.ctrlDBtn,
+            Msg: {
+                monitor: Msg.Lang['串口监视器'],
+                visualization: Msg.Lang['串口可视化'],
+                serial: Msg.Lang['串口'],
+                open: Msg.Lang['打开'],
+                sendData: Msg.Lang['发送数据'],
+                send: Msg.Lang['发送'],
+                string: Msg.Lang['字符串'],
+                input: Msg.Lang['请输入内容'],
+                receiveData: Msg.Lang['接收数据'],
+                scroll: Msg.Lang['滚屏'],
+                clear: Msg.Lang['清空'],
+                interrupt: Msg.Lang['中断'],
+                reset: Msg.Lang['复位'],
+                min: Msg.Lang['最小'],
+                max: Msg.Lang['最大'],
+                pointNum: Msg.Lang['点数']
+            }
+        });
     }
 
 
@@ -293,7 +157,7 @@ class SerialDomGenerator {
         layui.use(['layer', 'form'], function () {
             let form = layui.form;
             let _divObj = document.createElement("div");
-            _divObj.innerHTML = serialDom.htmlStr[1];
+            _divObj.innerHTML = serialDom.htmlStr;
             _divObj.className = "layui-form layui-form-pane";
             _divObj.id = formId;
             _divObj.style.display = "none";
@@ -311,7 +175,7 @@ class SerialDomGenerator {
             let form = layui.form;
             let _divObj = document.getElementById(formId);
             serialDom.htmlStr = serialDom.getHtmlStr();
-            _divObj.innerHTML = serialDom.htmlStr[1];
+            _divObj.innerHTML = serialDom.htmlStr;
             form.render(null, formFilter);
         });
     }

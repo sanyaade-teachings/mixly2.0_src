@@ -31,7 +31,7 @@ Blockly.Blocks['lists_create_with_text1'] = {
         .appendField(']');
     this.setOutput(true);
 	this.setInputsInline(true);
-	this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LISTS_CREATE_WITH_TEXT2);
+	this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_LISTS_CREATE_WITH_TEXT2);
   }
 };
 
@@ -44,7 +44,7 @@ Blockly.Blocks['tuple_create_with_text3'] = {
         .appendField(')');
   this.setOutput(true);
   this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.MIXPY_TOOLTIP_TUPLE_CREATE_WITH_TEXT);
+  this.setTooltip(Blockly.Msg.Lang.MIXPY_TOOLTIP_TUPLE_CREATE_WITH_TEXT);
   }
 };
 

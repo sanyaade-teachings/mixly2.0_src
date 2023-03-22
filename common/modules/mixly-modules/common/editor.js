@@ -4,12 +4,14 @@ goog.require('Blockly');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
 goog.require('Mixly.XML');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.Editor');
 
 const {
     Config,
     Nav,
     XML,
+    Msg,
     Editor
 } = Mixly;
 
@@ -275,31 +277,31 @@ Editor.codeEditorMenuRender = () => {
     let data = [];
     if (Editor.selected === 'CODE') {
         data = [{
-            title: XML.render(menuElem, { name: indexText['剪切'], hotKey: 'Ctrl+X' }),
+            title: XML.render(menuElem, { name: Msg.Lang['剪切'], hotKey: 'Ctrl+X' }),
             id: 'cut'
         }, {
-            title: XML.render(menuElem, { name: indexText['复制'], hotKey: 'Ctrl+C' }),
+            title: XML.render(menuElem, { name: Msg.Lang['复制'], hotKey: 'Ctrl+C' }),
             id: 'copy'
         }, {
-            title: XML.render(menuElem, { name: indexText['粘贴'], hotKey: 'Ctrl+V' }),
+            title: XML.render(menuElem, { name: Msg.Lang['粘贴'], hotKey: 'Ctrl+V' }),
             id: 'paste'
         }, {type:'-'}, {
-            title: XML.render(menuElem, { name: indexText['全选'], hotKey: 'Ctrl+A' }),
+            title: XML.render(menuElem, { name: Msg.Lang['全选'], hotKey: 'Ctrl+A' }),
             id: 'selectall'
         }, {
-            title: XML.render(menuElem, { name: indexText['查找'], hotKey: 'Ctrl+F' }),
+            title: XML.render(menuElem, { name: Msg.Lang['查找'], hotKey: 'Ctrl+F' }),
             id: 'find'
         }, {type:'-'}, {
-            title: XML.render(menuElem, { name: indexText['切换行注释'], hotKey: 'Ctrl+/' }),
+            title: XML.render(menuElem, { name: Msg.Lang['切换行注释'], hotKey: 'Ctrl+/' }),
             id: 'togglecomment'
         }, {
-            title: XML.render(menuElem, { name: indexText['切换块注释'], hotKey: 'Ctrl+Shift+/' }),
+            title: XML.render(menuElem, { name: Msg.Lang['切换块注释'], hotKey: 'Ctrl+Shift+/' }),
             id: 'toggleBlockComment'
         }/*, {type:'-'}, {
-            title: XML.render(menuElem, { name: indexText['命令面板'], hotKey: 'F1' }),
+            title: XML.render(menuElem, { name: Msg.Lang['命令面板'], hotKey: 'F1' }),
             id: 'openCommandPallete'
         }*/, {type:'-'}, {
-            title: XML.render(menuElem, { name: indexText['退出代码编辑器'], hotKey: 'Ctrl+E' }),
+            title: XML.render(menuElem, { name: Msg.Lang['退出代码编辑器'], hotKey: 'Ctrl+E' }),
             id: 'exitCodeEditor'
         }];
         switch (BOARD.language) {
@@ -311,7 +313,7 @@ Editor.codeEditorMenuRender = () => {
         }
     } else {
         data = [{
-            title: XML.render(menuElem, { name: indexText['打开代码编辑器'], hotKey: '' }),
+            title: XML.render(menuElem, { name: Msg.Lang['打开代码编辑器'], hotKey: '' }),
             id: 'openCodeEditor'
         }];
     }

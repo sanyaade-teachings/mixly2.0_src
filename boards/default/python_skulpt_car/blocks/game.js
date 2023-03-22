@@ -5,7 +5,7 @@ goog.require('Blockly.Blocks');
 // Blockly.Blocks['game_init'] = {
 //     init: function() {
 //     this.appendDummyInput()
-//     .appendField(Blockly.Msg.MIXLY_GAME_INIT);
+//     .appendField(Blockly.Msg.Lang.MIXLY_GAME_INIT);
 //     this.setPreviousStatement(true); 
 //     this.setNextStatement(true);
 //     this.setColour(290);
@@ -90,7 +90,7 @@ Blockly.Blocks['game_init'] = {
     this.setColour(290);
     this.setTooltip('');
     this.appendStatementInput('DO0')
-      .appendField(Blockly.Msg.MIXLY_GAME_INIT);
+      .appendField(Blockly.Msg.Lang.MIXLY_GAME_INIT);
   }
 };
 
@@ -142,7 +142,7 @@ Blockly.Blocks['move_direction_steps'] = {
 // Blockly.Blocks.move_backward= {
 //   init: function() {
 //     this.appendDummyInput()
-//           .appendField(Blockly.Msg.MIXLY_GAME_MOVE_BACKWARD);
+//           .appendField(Blockly.Msg.Lang.MIXLY_GAME_MOVE_BACKWARD);
 //   this.setPreviousStatement(true, null);
 //   this.setNextStatement(true, null);
 //   this.setColour(290);
@@ -154,12 +154,12 @@ Blockly.Blocks['move_direction_steps'] = {
 Blockly.Blocks.Turn = {
   init: function () {
     var Directions =
-      [[Blockly.Msg.MIXLY_GAME_Turn_LEFT, 'left'],
-      [Blockly.Msg.MIXLY_GAME_Turn_RIGHT, 'right']];
+      [[Blockly.Msg.Lang.MIXLY_GAME_Turn_LEFT, 'left'],
+      [Blockly.Msg.Lang.MIXLY_GAME_Turn_RIGHT, 'right']];
     this.appendDummyInput()
-      .appendField(Blockly.Msg.MIXLY_GAME_TURN1)
+      .appendField(Blockly.Msg.Lang.MIXLY_GAME_TURN1)
       .appendField(new Blockly.FieldDropdown(Directions), 'Direction')
-      .appendField(Blockly.Msg.MIXLY_GAME_TURN2);
+      .appendField(Blockly.Msg.Lang.MIXLY_GAME_TURN2);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
@@ -171,7 +171,7 @@ Blockly.Blocks.Turn = {
 Blockly.Blocks.isDone = {
   init: function () {
     this.appendDummyInput()
-      .appendField(Blockly.Msg.MIXLY_GAME_ISDONE);
+      .appendField(Blockly.Msg.Lang.MIXLY_GAME_ISDONE);
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');
@@ -182,12 +182,12 @@ Blockly.Blocks.isDone = {
 Blockly.Blocks.isPath = {
   init: function () {
     var Directions =
-      [[Blockly.Msg.MIXLY_GAME_ISPATH_LEFT, 'left'],
-      [Blockly.Msg.MIXLY_GAME_ISPATH_RIGHT, 'right']];
+      [[Blockly.Msg.Lang.MIXLY_GAME_ISPATH_LEFT, 'left'],
+      [Blockly.Msg.Lang.MIXLY_GAME_ISPATH_RIGHT, 'right']];
     this.appendDummyInput()
-      .appendField(Blockly.Msg.MIXLY_GAME_ISPATH1)
+      .appendField(Blockly.Msg.Lang.MIXLY_GAME_ISPATH1)
       .appendField(new Blockly.FieldDropdown(Directions), 'Direction')
-      .appendField(Blockly.Msg.MIXLY_GAME_ISPATH2);
+      .appendField(Blockly.Msg.Lang.MIXLY_GAME_ISPATH2);
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');

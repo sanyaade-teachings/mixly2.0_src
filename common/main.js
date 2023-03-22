@@ -133,8 +133,16 @@ goog.DEPENDENCIES = [
         "provide": ['AvrUploader'],
         "require": []
     }, {
-        "path": '/../../msg/zh-hans.js',
-        "provide": ['Blockly.Msg.zh-hans'],
+        "path": '/../../msg/blockly/zh-hans.js',
+        "provide": ['Blockly.Msg.ZhHans'],
+        "require": ['Blockly']
+    }, {
+        "path": '/../../msg/blockly/zh-hant.js',
+        "provide": ['Blockly.Msg.ZhHant'],
+        "require": ['Blockly']
+    }, {
+        "path": '/../../msg/blockly/en.js',
+        "provide": ['Blockly.Msg.En'],
         "require": ['Blockly']
     }
 ];
@@ -232,7 +240,6 @@ goog.initDependencies = () => {
 goog.initDependencies();
 
 goog.require('Blockly');
-goog.require('Blockly.Msg.zh-hans');
 goog.require('Mixly.Loading');
 goog.require('Mixly.JSFuncs');
 goog.require('Mixly.Interface');
@@ -246,8 +253,7 @@ goog.require('XScrollbar');
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('PouchDB');
-
-
+goog.require('Mixly.Electron.Events');
 /*if (Env.isElectron) {
     goog.require('Mixly.Electron.Loader');
     goog.require('Mixly.Electron.File');

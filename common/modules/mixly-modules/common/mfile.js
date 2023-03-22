@@ -11,6 +11,7 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.MicrobitFs');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Drag');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.MFile');
 
 const { form, util } = layui;
@@ -24,19 +25,20 @@ const {
     MicrobitFs,
     Editor,
     Drag,
+    Msg,
     MFile
 } = Mixly;
 
 const { BOARD, SOFTWARE } = Config;
 
 MFile.SAVE_FILTER_TYPE = {
-    mix: { name: indexText['Mixly文件'], extensions: ['mix'] },
-    py: { name: indexText['Python文件'], extensions: ['py'] },
-    ino: { name: indexText['Arduino文件'], extensions: ['ino'] },
-    hex: { name: indexText['Hex文件'], extensions: ['hex'] },
-    bin: { name: indexText['Bin文件'], extensions: ['bin'] },
-    png: { name: indexText['图像文件'], extensions: ['png'] },
-    mil: { name: indexText['Mixly库文件'], extensions: ['mil'] }
+    mix: { name: Msg.Lang['Mixly文件'], extensions: ['mix'] },
+    py: { name: Msg.Lang['Python文件'], extensions: ['py'] },
+    ino: { name: Msg.Lang['Arduino文件'], extensions: ['ino'] },
+    hex: { name: Msg.Lang['Hex文件'], extensions: ['hex'] },
+    bin: { name: Msg.Lang['Bin文件'], extensions: ['bin'] },
+    png: { name: Msg.Lang['图像文件'], extensions: ['png'] },
+    mil: { name: Msg.Lang['Mixly库文件'], extensions: ['mil'] }
 };
 
 MFile.saveFilters = [ MFile.SAVE_FILTER_TYPE.mix ];
@@ -275,7 +277,7 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
         }
     }
     if (!xmlDom && !codeDom) {
-        layer.msg(indexText['未找到有效数据'], { time: 1000 });
+        layer.msg(Msg.Lang['未找到有效数据'], { time: 1000 });
         return;
     }
     for (let i of ['version', 'id', 'type', 'varid', 'name', 'x', 'y', 'items']) {
@@ -320,7 +322,7 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
     }
     if (useCode) {
         if (!codeDom) {
-            layer.msg(indexText['未找到有效数据'], { time: 1000 });
+            layer.msg(Msg.Lang['未找到有效数据'], { time: 1000 });
             return;
         }
         Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
@@ -383,12 +385,12 @@ MFile.showParseMixErrorDialog = (xml, undefinedBlocks, endFunc = () => {}) => {
     const { PARSE_MIX_ERROR_DIV } = XML.TEMPLATE_STR;
     const renderStr = XML.render(PARSE_MIX_ERROR_DIV, {
         text: undefinedBlocks.join('<br/>'),
-        btn1Name: indexText['取消'],
-        btn2Name: indexText['忽略未定义块'],
-        btn3Name: indexText['读取代码']
+        btn1Name: Msg.Lang['取消'],
+        btn2Name: Msg.Lang['忽略未定义块'],
+        btn3Name: Msg.Lang['读取代码']
     })
     LayerExt.open({
-        title: indexText['一些图形化模块尚未定义'],
+        title: Msg.Lang['一些图形化模块尚未定义'],
         id: 'parse-mix-error-layer',
         area: ['50%', '250px'],
         max: ['500px', '250px'],

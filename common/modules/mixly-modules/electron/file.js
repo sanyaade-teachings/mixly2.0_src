@@ -9,6 +9,7 @@ goog.require('Mixly.MFile');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Drag');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Electron.ArduShell');
 goog.require('Mixly.Electron.BU');
 goog.provide('Mixly.Electron.File');
@@ -23,6 +24,7 @@ const {
     XML,
     Editor,
     Drag,
+    Msg,
     Electron
 } = Mixly;
 
@@ -61,7 +63,7 @@ File.showSaveDialog = (title, filters, endFunc) => {
         title,
         defaultPath: File.workingPath,
         filters,
-        // nameFieldLabel: indexText['替换文件'],
+        // nameFieldLabel: Msg.Lang['替换文件'],
         showsTagField: true,
         properties: ['showHiddenFiles'],
         message: title
@@ -107,18 +109,18 @@ File.save = (endFunc = () => {}) => {
                 data = MFile.getCode();
                 break;
             default:
-                layer.msg(indexText['文件后缀错误'], { time: 1000 });
+                layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
                 return;
         }
         fs_extra.outputFile(File.openedFilePath, data)
         .then(() => {
             Title.updeteFilePath(File.openedFilePath);
-            layer.msg(indexText['保存成功'], { time: 1000 });
+            layer.msg(Msg.Lang['保存成功'], { time: 1000 });
         })
         .catch((error) => {
             File.openedFilePath = null;
             console.log(error);
-            layer.msg(indexText['写文件出错'], { time: 1000 });
+            layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
         })
         .finally(() => {
             endFunc();
@@ -129,7 +131,7 @@ File.save = (endFunc = () => {}) => {
 }
 
 File.saveAs = (endFunc = () => {}) => {
-    File.showSaveDialog(indexText['另存为'], MFile.saveFilters, (filePath) => {
+    File.showSaveDialog(Msg.Lang['另存为'], MFile.saveFilters, (filePath) => {
         const extname = path.extname(filePath);
         if (['.mix', '.py', '.ino'].includes(extname)) {
             File.openedFilePath = filePath;
@@ -145,11 +147,11 @@ File.saveAs = (endFunc = () => {}) => {
                         const hexStr = MFile.getHex();
                         fs_extra.outputFile(filePath, hexStr)
                         .then(() => {
-                            layer.msg(indexText['保存成功'], { time: 1000 });
+                            layer.msg(Msg.Lang['保存成功'], { time: 1000 });
                         })
                         .catch((error) => {
                             console.log(error);
-                            layer.msg(indexText['写文件出错'], { time: 1000 });
+                            layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
                         })
                         .finally(() => {
                             endFunc();
@@ -162,11 +164,11 @@ File.saveAs = (endFunc = () => {}) => {
                         return fs_extra.outputFile(filePath, data);
                     })
                     .then(() => {
-                        layer.msg(indexText['保存成功'], { time: 1000 });
+                        layer.msg(Msg.Lang['保存成功'], { time: 1000 });
                     })
                     .catch((error) => {
                         console.log(error);
-                        layer.msg(indexText['写文件出错'], { time: 1000 });
+                        layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
                     })
                     .finally(() => {
                         endFunc();
@@ -182,14 +184,14 @@ File.saveAs = (endFunc = () => {}) => {
                     })
                     .catch((error) => {
                         console.log(error);
-                        layer.msg(indexText['写文件出错'], { time: 1000 });
+                        layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
                     })
                     .finally(() => {
                         endFunc();
                     });
                     break;
                 default:
-                    layer.msg(indexText['文件后缀错误'], { time: 1000 });
+                    layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
                     endFunc();
             }
         }
@@ -207,7 +209,7 @@ File.exportLib = (endFunc = () => {}) => {
         })
         .catch((error) => {
             console.log(error);
-            layer.msg(indexText['写文件出错'], { time: 1000 });
+            layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
         })
         .finally(() => {
             endFunc();
@@ -223,14 +225,14 @@ File.newFile = () => {
         const code = codeEditor.getValue(),
         workspaceToCode = blocklyGenerator.workspaceToCode(blockEditor) || '';
         if (!blocksList.length && workspaceToCode === code) {
-            layer.msg(indexText['代码区已清空'], { time: 1000 });
+            layer.msg(Msg.Lang['代码区已清空'], { time: 1000 });
             File.openedFilePath = null;
             Title.updateTitle(Title.title);
             return;
         }
     } else {
         if (!blocksList.length) {
-            layer.msg(indexText['工作区已清空'], { time: 1000 });
+            layer.msg(Msg.Lang['工作区已清空'], { time: 1000 });
             File.openedFilePath = null;
             Title.updateTitle(Title.title);
             return;
@@ -260,8 +262,8 @@ File.newFile = () => {
 }
 
 File.open = () => {
-    File.showOpenDialog(indexText['打开'], [
-        { name: indexText['Mixly文件'], extensions: MFile.openFilters }
+    File.showOpenDialog(Msg.Lang['打开'], [
+        { name: Msg.Lang['Mixly文件'], extensions: MFile.openFilters }
     ], (filePath) => {
         File.openFile(filePath);
     });
@@ -329,7 +331,7 @@ File.openFile = (filePath) => {
             }
             break;
         default:
-            layer.msg(indexText['文件后缀错误'], { time: 1000 });
+            layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
     }
 }
 

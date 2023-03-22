@@ -4,6 +4,7 @@ goog.require('Mixly.MFile');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Drag');
 goog.require('Mixly.LayerExt');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.Web.File');
 
 const {
@@ -11,7 +12,8 @@ const {
     Editor,
     Drag,
     Web,
-    LayerExt
+    LayerExt,
+    Msg
 } = Mixly;
 
 const { File } = Web;
@@ -99,7 +101,7 @@ File.parseData = (ext, text) => {
             MFile.loadHex(text);
             break;
         default:
-            layer.msg(indexText['文件后缀错误'], { time: 1000 });
+            layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
             File.obj = null;
     }
 }

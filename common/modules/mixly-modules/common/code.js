@@ -32,6 +32,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
 goog.require('Mixly.ScriptLoader');
+goog.require('Mixly.Msg');
 goog.provide('Code');
 
 const {
@@ -493,28 +494,28 @@ Code.initLanguage = function (addToolboxitemid = false) {
     // 获取id为toolbox下的所有category标签
     var catObjArr = document.getElementById("toolbox").getElementsByTagName("category");
     for (var i = 0; i < catObjArr.length; i++) {
-        if (MSG[catObjArr[i].id]) {
-            catObjArr[i].setAttribute('name', MSG[catObjArr[i].id]);
+        if (Blockly.Msg.Lang.MSG[catObjArr[i].id]) {
+            catObjArr[i].setAttribute('name', Blockly.Msg.Lang.MSG[catObjArr[i].id]);
             if (addToolboxitemid) {
                 if (catObjArr[i].hasAttribute('toolboxitemid')) continue;
                 catObjArr[i].setAttribute('toolboxitemid', catObjArr[i].id);
-                catObjArr[i].setAttribute('name', MSG[catObjArr[i].id]);
+                catObjArr[i].setAttribute('name', Blockly.Msg.Lang.MSG[catObjArr[i].id]);
             } else {
                 if (document.getElementById(catObjArr[i].id + ".label"))
-                    document.getElementById(catObjArr[i].id + ".label").innerText = MSG[catObjArr[i].id];
+                    document.getElementById(catObjArr[i].id + ".label").innerText = Blockly.Msg.Lang.MSG[catObjArr[i].id];
             }
         }
     }
-    document.getElementById('copyright').textContent = MSG['copyright'];
+    document.getElementById('copyright').textContent = Blockly.Msg.Lang.MSG['copyright'];
 
     var textVars = document.getElementsByClassName('textVar');
 
     for (var i = 0, textVar; textVar = textVars[i]; i++) {
-        textVar.textContent = MSG['textVariable'];
+        textVar.textContent = Blockly.Msg.Lang.MSG['textVariable'];
     }
     var listVars = document.getElementsByClassName('listVar');
     for (var i = 0, listVar; listVar = listVars[i]; i++) {
-        listVar.textContent = MSG['listVariable'];
+        listVar.textContent = Blockly.Msg.Lang.MSG['listVariable'];
     }
 };
 
@@ -558,20 +559,20 @@ Code.LANG = USER.language ?? 'zh-hans';
 // Load the Code demo's language strings.
 //document.write('<script src="msg/' + Code.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
-document.write('<script src="' + Config.pathPrefix + 'common/msg/' + Code.LANG + '.js"></script>\n');
+// document.write('<script src="' + Config.pathPrefix + 'common/msg/' + Code.LANG + '.js"></script>\n');
 
 // 动态加载用户配置的语言文件夹
-if (BOARD?.langFileDir) {
-    if (typeof BOARD.langFileDir === "object") {
-        for (let i = 0, len = BOARD.langFileDir.length; i < len; i++) {
-            ScriptLoader.loadScript(BOARD.langFileDir[i] + '/' + Code.LANG + '.js');
-        }
-    } else {
-        ScriptLoader.loadScript(BOARD.langFileDir + '/' + Code.LANG + '.js');
-    }
-}
+// if (BOARD?.langFileDir) {
+//     if (typeof BOARD.langFileDir === "object") {
+//         for (let i = 0, len = BOARD.langFileDir.length; i < len; i++) {
+//             ScriptLoader.loadScript(BOARD.langFileDir[i] + '/' + Code.LANG + '.js');
+//         }
+//     } else {
+//         ScriptLoader.loadScript(BOARD.langFileDir + '/' + Code.LANG + '.js');
+//     }
+// }
 
-Code.loadThirdPartyLanJs = () => {
+/*Code.loadThirdPartyLanJs = () => {
     if (!Env.isElectron) return;
 
     //动态加载板卡目录msg
@@ -612,7 +613,7 @@ Code.loadThirdPartyLanJs = () => {
     }
 }
 
-Code.loadThirdPartyLanJs();
+Code.loadThirdPartyLanJs();*/
 
-//window.addEventListener('load', Code.init);
+window.addEventListener('load', Code.init);
 })();

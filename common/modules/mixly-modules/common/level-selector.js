@@ -2,9 +2,14 @@
 
 goog.require('layui');
 goog.require('Mixly.Editor');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.LevelSelector');
 
-const { Editor, LevelSelector } = Mixly;
+const {
+    Editor,
+    Msg,
+    LevelSelector
+} = Mixly;
 
 const { form } = layui;
 
@@ -56,7 +61,7 @@ LevelSelector.init = () => {
     const $level = $('#level-type');
     $level.empty();
     for (let i = 1; i < 7; i++) {
-        $level.append(`<option value="${i}">${indexText['关卡']} ${i}</option>`);
+        $level.append(`<option value="${i}">${Msg.Lang['关卡']} ${i}</option>`);
     }
     form.render('select', 'level-selector-filter');
 

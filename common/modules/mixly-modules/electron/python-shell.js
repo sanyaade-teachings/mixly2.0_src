@@ -4,6 +4,7 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Env');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.PythonShell');
 
@@ -12,7 +13,8 @@ const {
     Modules,
     MFile,
     StatusBar,
-    Env
+    Env,
+    Msg
 } = Mixly;
 
 const { PythonShell } = Electron;
@@ -52,7 +54,7 @@ function message_decode(s) {
 PythonShell.run = function () {
     const cursorCallback = PythonShell.addEvent();
     StatusBar.show(1);
-    StatusBar.setValue(indexText["程序正在运行"] + "...\n");
+    StatusBar.setValue(Msg.Lang["程序正在运行"] + "...\n");
     var code = Mixly.MFile.getCode();
     code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) { return decodeURIComponent(s.replace(/_/g, '%')); });
     try {
@@ -71,10 +73,10 @@ PythonShell.run = function () {
         //如果err=null，表示文件使用成功，否则，表示希尔文件失败
         err = message_decode(err);
         if (err) {
-            layer.msg(indexText['写文件出错了，错误是：'] + err, {
+            layer.msg(Msg.Lang['写文件出错了，错误是：'] + err, {
                 time: 1000
             });
-            StatusBar.setValue(indexText['写文件出错了，错误是：'] + err + '\n');
+            StatusBar.setValue(Msg.Lang['写文件出错了，错误是：'] + err + '\n');
             StatusBar.show(1);
         } else {
             shell = new Modules.PythonShell(Env.pyFilePath, options);
@@ -91,9 +93,9 @@ PythonShell.run = function () {
                 var timeCostStr = timeCost + "ms";
                 //if (code == 0) {
                 if (StatusBar.getValue().lastIndexOf("\n") == StatusBar.getValue().length - 1)
-                    StatusBar.addValue("==" + indexText["程序运行完成"]  + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
+                    StatusBar.addValue("==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 else
-                    StatusBar.addValue("\n==" + indexText["程序运行完成"]  + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
+                    StatusBar.addValue("\n==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 StatusBar.scrollToTheBottom();
                 shell = null;
                 //}
@@ -163,10 +165,10 @@ PythonShell.stop = function () {
         shell.terminate('SIGKILL');
         //shell.stdout.end();
         //shell.stdin.end();
-        //StatusBar.addValue("\n==" + indexText["程序运行完成"] + "==\n", false);
+        //StatusBar.addValue("\n==" + Msg.Lang["程序运行完成"] + "==\n", false);
         shell = null;
     } else {
-        StatusBar.addValue("\n==" + indexText["无程序在运行"] + "==\n");
+        StatusBar.addValue("\n==" + Msg.Lang["无程序在运行"] + "==\n");
     }
     StatusBar.scrollToTheBottom();
 }

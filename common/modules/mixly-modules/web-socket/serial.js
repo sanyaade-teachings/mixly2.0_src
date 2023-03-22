@@ -10,6 +10,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
+goog.require('Mixly.Msg');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.Serial');
 
@@ -24,6 +25,7 @@ const {
     LayerExt,
     XML,
     MArray,
+    Msg
 } = Mixly;
 
 const { Socket, Serial } = Mixly.WebSocket;
@@ -528,7 +530,7 @@ Serial.refreshOutputBox = (port) => {
 Serial.openTool = () => {
     const selectedPort = Serial.getSelectedPortName();
     if (!selectedPort) {
-        layer.msg(indexText["无可用设备"] + "!", {
+        layer.msg(Msg.Lang["无可用设备"] + "!", {
             time: 1000
         });
         return;
@@ -597,9 +599,9 @@ Serial.openTool = () => {
         const newPortObj = Serial.portsOperator[port];
         newPortObj.toolConfig.sendStr = data.elem.checked;
         if (data.elem.checked) {
-            sendDom.attr("placeholder", indexText["请输入内容"]);
+            sendDom.attr("placeholder", Msg.Lang["请输入内容"]);
         } else {
-            sendDom.attr("placeholder", indexText["请输入内容"] + "  " + indexText["例如"] + ":0x03,0x04");
+            sendDom.attr("placeholder", Msg.Lang["请输入内容"] + "  " + Msg.Lang["例如"] + ":0x03,0x04");
         }
     });
 
@@ -691,10 +693,10 @@ Serial.refreshConnectStatus = (port) => {
         const { connectBtnId } = dom.id;
         const connectBtnDom = $('#' + connectBtnId);
         if (portOpened) {
-            connectBtnDom.text(indexText["关闭"]);
+            connectBtnDom.text(Msg.Lang["关闭"]);
             connectBtnDom.attr("class", "layui-btn layui-btn-danger");
         } else {
-            connectBtnDom.text(indexText["打开"]);
+            connectBtnDom.text(Msg.Lang["打开"]);
             connectBtnDom.attr("class", "layui-btn layui-btn-normal");
         }
     }
@@ -900,7 +902,7 @@ Serial.refreshTerminalMenu = (port) => {
     }
     if (!portObj) {
         terminalMenu.data = [{
-            title: indexText['关闭串口输出框'],
+            title: Msg.Lang['关闭串口输出框'],
             id: `tab-${newPort}-ace-close`
         }];
         layui.dropdown.render(terminalMenu);
@@ -909,7 +911,7 @@ Serial.refreshTerminalMenu = (port) => {
 
     if (portObj && portObj.toolOpened) {
         terminalMenu.data = [{
-            title: indexText['关闭串口工具'],
+            title: Msg.Lang['关闭串口工具'],
             id: `tab-${newPort}-tool-close`
         }];
         layui.dropdown.render(terminalMenu);
@@ -919,76 +921,76 @@ Serial.refreshTerminalMenu = (port) => {
     const TERMINAL_MENU_DATA = {
         portOpend: {
             terminalOpend: [{
-                title: XML.render(menuElem, { name: indexText['关闭串口'], hotKey: 'port -c' }),
+                title: XML.render(menuElem, { name: Msg.Lang['关闭串口'], hotKey: 'port -c' }),
                 id: `tab-${newPort}-ace-terminal-port-close`
             },
             (toolConfig.ctrlCBtn ? {
-                title: XML.render(menuElem, { name: indexText['中断'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['中断'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-send-ctrlc`
             } : {}),
             (toolConfig.ctrlDBtn ? {
-                title: XML.render(menuElem, { name: indexText['复位'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['复位'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-send-ctrld`
             } : {}), {
-                title: XML.render(menuElem, { name: indexText['发送字符串'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['发送字符串'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-send-str`
             }, {
-                title: XML.render(menuElem, { name: indexText['帮助'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['帮助'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-help`
             }, {type:'-'}, {
-                title: XML.render(menuElem, { name: indexText['退出串口终端'], hotKey: 'exit' }),
+                title: XML.render(menuElem, { name: Msg.Lang['退出串口终端'], hotKey: 'exit' }),
                 id: `tab-${newPort}-ace-terminal-exit`
             }],
             terminalClosed: [{
-                title: XML.render(menuElem, { name: indexText['清空'], hotKey: 'Ctrl+E' }),
+                title: XML.render(menuElem, { name: Msg.Lang['清空'], hotKey: 'Ctrl+E' }),
                 id: `tab-${newPort}-ace-empty`
             }, {type:'-'}, {
-                title: XML.render(menuElem, { name: indexText['增大字号'], hotKey: 'Ctrl+=' }),
+                title: XML.render(menuElem, { name: Msg.Lang['增大字号'], hotKey: 'Ctrl+=' }),
                 id: `tab-${newPort}-ace-fontsize-increase`
             }, {
-                title: XML.render(menuElem, { name: indexText['减小字号'], hotKey: 'Ctrl+-' }),
+                title: XML.render(menuElem, { name: Msg.Lang['减小字号'], hotKey: 'Ctrl+-' }),
                 id: `tab-${newPort}-ace-fontsize-decrease`
             }, {
-                title: XML.render(menuElem, { name: indexText['默认字号'], hotKey: 'Ctrl+0' }),
+                title: XML.render(menuElem, { name: Msg.Lang['默认字号'], hotKey: 'Ctrl+0' }),
                 id: `tab-${newPort}-ace-fontsize-default`
             }, {type:'-'},
             (toolConfig.ctrlCBtn ? {
-                title: XML.render(menuElem, { name: indexText['中断'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['中断'], hotKey: '' }),
                 id: `tab-${newPort}-serial-send-ctrlc`
             } : {}),
             (toolConfig.ctrlDBtn ? {
-                title: XML.render(menuElem, { name: indexText['复位'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['复位'], hotKey: '' }),
                 id: `tab-${newPort}-serial-send-ctrld`
             } : {}), {
-                title: XML.render(menuElem, { name: indexText['打开串口终端'], hotKey: 'Ctrl+T' }),
+                title: XML.render(menuElem, { name: Msg.Lang['打开串口终端'], hotKey: 'Ctrl+T' }),
                 id: `tab-${newPort}-ace-terminal-open`
             }]
         },
         portClosed: {
             terminalOpend: [{
-                title: XML.render(menuElem, { name: indexText['打开串口'], hotKey: 'port -o' }),
+                title: XML.render(menuElem, { name: Msg.Lang['打开串口'], hotKey: 'port -o' }),
                 id: `tab-${newPort}-ace-terminal-port-open`
             }, {
-                title: XML.render(menuElem, { name: indexText['帮助'], hotKey: '' }),
+                title: XML.render(menuElem, { name: Msg.Lang['帮助'], hotKey: '' }),
                 id: `tab-${newPort}-ace-terminal-help`
             }, {type:'-'}, {
-                title: XML.render(menuElem, { name: indexText['退出串口终端'], hotKey: 'exit' }),
+                title: XML.render(menuElem, { name: Msg.Lang['退出串口终端'], hotKey: 'exit' }),
                 id: `tab-${newPort}-ace-terminal-exit`
             }],
             terminalClosed: [{
-                title: XML.render(menuElem, { name: indexText['清空'], hotKey: 'Ctrl+E' }),
+                title: XML.render(menuElem, { name: Msg.Lang['清空'], hotKey: 'Ctrl+E' }),
                 id: `tab-${newPort}-ace-empty`
             }, {type:'-'}, {
-                title: XML.render(menuElem, { name: indexText['增大字号'], hotKey: 'Ctrl+=' }),
+                title: XML.render(menuElem, { name: Msg.Lang['增大字号'], hotKey: 'Ctrl+=' }),
                 id: `tab-${newPort}-ace-fontsize-increase`
             }, {
-                title: XML.render(menuElem, { name: indexText['减小字号'], hotKey: 'Ctrl+-' }),
+                title: XML.render(menuElem, { name: Msg.Lang['减小字号'], hotKey: 'Ctrl+-' }),
                 id: `tab-${newPort}-ace-fontsize-decrease`
             }, {
-                title: XML.render(menuElem, { name: indexText['默认字号'], hotKey: 'Ctrl+0' }),
+                title: XML.render(menuElem, { name: Msg.Lang['默认字号'], hotKey: 'Ctrl+0' }),
                 id: `tab-${newPort}-ace-fontsize-default`
             }, {type:'-'}, {
-                title: XML.render(menuElem, { name: indexText['打开串口终端'], hotKey: 'Ctrl+T' }),
+                title: XML.render(menuElem, { name: Msg.Lang['打开串口终端'], hotKey: 'Ctrl+T' }),
                 id: `tab-${newPort}-ace-terminal-open`
             }]
         }
@@ -1278,20 +1280,20 @@ Serial.onopen = (port) => {
             Serial.portClose(port);
             StatusBarPort.tabChange("output");
             if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
-                StatusBar.addValue('\n' + indexText['已关闭串口'] + portName + '\n');
+                StatusBar.addValue('\n' + Msg.Lang['已关闭串口'] + portName + '\n');
             } else {
-                StatusBar.addValue(indexText['已关闭串口'] + portName + '\n');
+                StatusBar.addValue(Msg.Lang['已关闭串口'] + portName + '\n');
             }
         }
     });
     StatusBarPort.tabChange(port);
     Serial.refreshTerminalMenu(port);
     Serial.refreshConnectStatus(port);
-    StatusBarPort.setValue(port, indexText['已打开串口'] + ': ' + port + '\n', true);
+    StatusBarPort.setValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
 
-    Serial.receiveBoxSetValue(port, indexText['已打开串口'] + ': ' + port + '\n', true);
+    Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
     portObj.output.push('');
-    Serial.outputBoxAdd(port, indexText['已打开串口'] + ': ' + port);
+    Serial.outputBoxAdd(port, Msg.Lang['已打开串口'] + ': ' + port);
     portObj.output.push('');
     portObj.refreshOutputBoxTimer = setInterval(() => {
         Serial.refreshOutputBox(port);
@@ -1417,15 +1419,15 @@ Serial.onclose = (port) => {
     Charts.stopRefresh();
     const receiveStr = Serial.receiveBoxGetValue(port);
     if (receiveStr && receiveStr.lastIndexOf("\n") != receiveStr.length - 1) {
-        Serial.receiveBoxAddValue(port, '\n' + indexText['已关闭串口'] + ': ' + port + '\n', true);
+        Serial.receiveBoxAddValue(port, '\n' + Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
     } else {
-        Serial.receiveBoxAddValue(port, indexText['已关闭串口'] + ': ' + port + '\n', true);
+        Serial.receiveBoxAddValue(port, Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
     }
 
     if (StatusBarPort.getValue(port).lastIndexOf("\n") != StatusBarPort.getValue(port).length - 1) {
-        StatusBarPort.addValue(port, '\n' + indexText['已关闭串口'] + ': ' + port + '\n', true);
+        StatusBarPort.addValue(port, '\n' + Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
     } else {
-        StatusBarPort.addValue(port, indexText['已关闭串口'] + ': ' + port + '\n', true);
+        StatusBarPort.addValue(port, Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
     }
     portObj.output = [];
     //Serial.dom.destroy();

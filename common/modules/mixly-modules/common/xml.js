@@ -4,10 +4,17 @@ goog.require('layui');
 goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
+goog.require('Mixly.Msg');
 goog.require('Code');
 goog.provide('Mixly.XML');
 
-const { Tools, Env, Config, XML } = Mixly;
+const {
+    Tools,
+    Env,
+    Config,
+    Msg,
+    XML
+} = Mixly;
 const { BOARD } = Config;
 const { laytpl } = layui;
 
@@ -18,15 +25,15 @@ XML.TEMPLATE_CONFIG = [
         type: 'LOADER_DIV',
         path: '/loader-div.html',
         config: {
-            btnName: indexText['取消']
+            btnName: Msg.Lang['取消']
         },
         appendToBody: true
     }, {
         type: 'SELECTOR_DIV',
         path: '/selector-div.html',
         config: {
-            btn1Name: indexText['取消'],
-            btn2Name: indexText['确定']
+            btn1Name: Msg.Lang['取消'],
+            btn2Name: Msg.Lang['确定']
         },
         appendToBody: true
     }, {
@@ -43,8 +50,8 @@ XML.TEMPLATE_CONFIG = [
         type: 'PORT_SELECTOR',
         path: '/port-selector-div.html',
         config: {
-            selectPort: indexText['选择串口'],
-            noPort: indexText['无可用串口']
+            selectPort: Msg.Lang['选择串口'],
+            noPort: Msg.Lang['无可用串口']
         },
         appendToBody: false
     }, {
@@ -69,7 +76,7 @@ XML.TEMPLATE_CONFIG = [
         type: 'SEARCH_DIV',
         path: '/search-div.html',
         config: {
-            search: indexText['查找']
+            search: Msg.Lang['查找']
         },
         appendToBody: false
     }, {
@@ -86,13 +93,13 @@ XML.TEMPLATE_CONFIG = [
         type: 'APP_DIV',
         path: '/app.html',
         config: {
-            outputAceName: indexText['输出'],
-            row: indexText['行'],
-            column: indexText['列'],
-            unknown: indexText['未知'],
-            config: indexText['配置板卡'],
-            selected: indexText['已选择'],
-            on: indexText['在']
+            outputAceName: Msg.Lang['输出'],
+            row: Msg.Lang['行'],
+            column: Msg.Lang['列'],
+            unknown: Msg.Lang['未知'],
+            config: Msg.Lang['配置板卡'],
+            selected: Msg.Lang['已选择'],
+            on: Msg.Lang['在']
         },
         appendToBody: false
     }, {

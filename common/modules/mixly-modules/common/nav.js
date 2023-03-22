@@ -2,6 +2,7 @@
 
 goog.require('Code');
 goog.require('layui');
+goog.require('Blockly');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Command');
@@ -853,15 +854,15 @@ function showTag() {
         const pythonToBlocklyDom = $('#python-to-blockly-btn');
         const status = BOARD?.pythonToBlockly ?? false;
         if (status) {
-            pythonToBlocklyDom.html(MSG['disablePythonToBlockly'])
+            pythonToBlocklyDom.html(Blockly.Msg.Lang.MSG['disablePythonToBlockly'])
                               .attr('class', 'icon-toggle-on-1');
         } else {
-            pythonToBlocklyDom.html(MSG['enablePythonToBlockly'])
+            pythonToBlocklyDom.html(Blockly.Msg.Lang.MSG['enablePythonToBlockly'])
                               .attr('class', 'icon-toggle-off-1');
         }
     }
     if (document.getElementById('boardSelector'))
-        document.getElementById('boardSelector').placeholder = MSG['fn'];
+        document.getElementById('boardSelector').placeholder = Blockly.Msg.Lang.MSG['fn'];
     tagSelect('operate-btn', 'operate');
     tagSelect('operate_save_ser_btn', 'save_ser');
     tagSelect('change_board_btn', 'change_board');
@@ -906,9 +907,9 @@ function tagSelect(id, msg) {
     var tagObject = document.getElementById(id);
     if (tagObject) {
         if (tagObject.tagName == "A" && tagObject.parentNode.innerHTML.indexOf("<dl") != -1) {
-            tagObject.innerHTML = MSG[msg] + '<i class="layui-icon layui-icon-down layui-nav-more"></i>';
+            tagObject.innerHTML = Blockly.Msg.Lang.MSG[msg] + '<i class="layui-icon layui-icon-down layui-nav-more"></i>';
         } else {
-            document.getElementById(id).innerHTML = MSG[msg];
+            document.getElementById(id).innerHTML = Blockly.Msg.Lang.MSG[msg];
         }
     }
 }

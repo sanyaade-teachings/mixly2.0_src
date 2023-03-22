@@ -85,6 +85,7 @@ Env.thirdPartyCSS = [];
 Env.thirdPartyJS = [];
 
 Env.templatePath = goog.normalizePath_(goog.basePath + '../template/');
+Env.msgPath = goog.normalizePath_(goog.basePath + '../msg/');
 
 Env.isElectron = window?.process?.versions?.electron ? true : false;
 

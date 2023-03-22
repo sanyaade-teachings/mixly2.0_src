@@ -12,6 +12,7 @@ goog.require('Mixly.Boards');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Electron.CloudDownload');
 goog.provide('Mixly.Electron.LibManager');
 
@@ -25,7 +26,8 @@ const {
     Boards,
     LayerExt,
     Config,
-    Nav
+    Nav,
+    Msg
 } = Mixly;
 
 const {
@@ -239,7 +241,7 @@ LibManager.reloadThirdPartyLibs = () => {
     }
     Env.thirdPartyJS = [];
     Env.thirdPartyCSS = [];
-    Code.loadThirdPartyLanJs();
+    // Code.loadThirdPartyLanJs();
     $('#toolbox').html(Env.defaultXML);
     LibManager.loadLibsAndUpdateJsCssList(function() {
         // Blockly.fireUiEvent(window, 'resize');
@@ -329,7 +331,7 @@ LibManager.menuAddEvent = (layero) => {
                 if (libList.length > 0) {
                     LibManager.showCloudImportProgress(libList);
                 } else {
-                    layer.msg(indexText['请选择至少一个库'] + '!', { time: 1000 });
+                    layer.msg(Msg.Lang['请选择至少一个库'] + '!', { time: 1000 });
                 }
                 break;
             case 'local-import':
@@ -348,7 +350,7 @@ LibManager.menuAddEvent = (layero) => {
                         LibManager.delLibs(delType, libPathList, index);
                     });
                 } else {
-                    layer.msg(indexText['请选择至少一个库'] + '!', { time: 1000 });
+                    layer.msg(Msg.Lang['请选择至少一个库'] + '!', { time: 1000 });
                 }
                 break;
             case 'open-folder':
@@ -376,17 +378,17 @@ LibManager.menuAddEvent = (layero) => {
 
 LibManager.showManageDialog = () => {
     const htmlStr = XML.render(XML.TEMPLATE_STR.LIB_MANAGER_DIV, {
-        importBoard: indexText['导入库'],
-        delBoard: indexText['管理库'],
+        importBoard: Msg.Lang['导入库'],
+        delBoard: Msg.Lang['管理库'],
         mixlyLib: 'Mixly',
         codeLib: Nav.codeEnv === 'c'? 'Arduino' : 'Python',
-        cloudImport: indexText['云端导入'],
-        localImport: indexText['本地导入'],
-        openFolder: indexText['打开对应文件夹'],
-        del: indexText['删除']
+        cloudImport: Msg.Lang['云端导入'],
+        localImport: Msg.Lang['本地导入'],
+        openFolder: Msg.Lang['打开对应文件夹'],
+        del: Msg.Lang['删除']
     });
     LayerExt.open({
-        title: [indexText['库管理器'], '35px'],
+        title: [Msg.Lang['库管理器'], '35px'],
         id: 'lib-manage-layer',
         content: htmlStr,
         shade: LayerExt.SHADE_ALL,
@@ -412,11 +414,11 @@ LibManager.compareLibConfig = (cloudConfig) => {
                 cloudConfig.downloadIndex = false;
         }
         if (cloudConfig.downloadIndex)
-            cloudConfig.status = indexText['待更新'];
+            cloudConfig.status = Msg.Lang['待更新'];
         else
-            cloudConfig.status = indexText['已安装'];
+            cloudConfig.status = Msg.Lang['已安装'];
     } else {
-        cloudConfig.status = indexText['待安装'];
+        cloudConfig.status = Msg.Lang['待安装'];
     }
     return cloudConfig;
 }
@@ -428,13 +430,13 @@ LibManager.onclickImportLibs = () => {
         elem: '#import-mixly-lib-page',
         data: [],
         defaultToolbar: [],
-        title: indexText['云端库'],
+        title: Msg.Lang['云端库'],
         cols: [[
             { type: 'checkbox', unresize: false, align: "center" },
-            { field: 'status', title: indexText['状态'], sort: true, unresize: false, align: "center", minWidth: 100 },
-            { field: 'name', title: indexText['名称'], sort: true, unresize: false, align: "center", minWidth: 200 },
-            { field: 'version', title: indexText['版本'], unresize: false, align: "center", minWidth: 80 },
-            { field: 'desc', title: indexText['介绍'], unresize: false, align: "center", minWidth: 250 }
+            { field: 'status', title: Msg.Lang['状态'], sort: true, unresize: false, align: "center", minWidth: 100 },
+            { field: 'name', title: Msg.Lang['名称'], sort: true, unresize: false, align: "center", minWidth: 200 },
+            { field: 'version', title: Msg.Lang['版本'], unresize: false, align: "center", minWidth: 80 },
+            { field: 'desc', title: Msg.Lang['介绍'], unresize: false, align: "center", minWidth: 250 }
         ]],
         limit: 1000,
         skin: 'line',
@@ -447,12 +449,12 @@ LibManager.onclickImportLibs = () => {
         elem: '#import-code-lib-page',
         data: [],
         defaultToolbar: [],
-        title: indexText['云端库'],
+        title: Msg.Lang['云端库'],
         cols: [[
             { type: 'checkbox', unresize: false, align: "center" },
-            { field: 'name', title: indexText['名称'], sort: true, unresize: false, align: "center", minWidth: 200 },
-            { field: 'version', title: indexText['版本'], unresize: false, align: "center", minWidth: 80 },
-            { field: 'desc', title: indexText['介绍'], unresize: false, align: "center", minWidth: 250 }
+            { field: 'name', title: Msg.Lang['名称'], sort: true, unresize: false, align: "center", minWidth: 200 },
+            { field: 'version', title: Msg.Lang['版本'], unresize: false, align: "center", minWidth: 80 },
+            { field: 'desc', title: Msg.Lang['介绍'], unresize: false, align: "center", minWidth: 250 }
         ]],
         limit: 1000,
         skin: 'line',
@@ -462,13 +464,13 @@ LibManager.onclickImportLibs = () => {
     table.render({
         ...mixlyTableConfig,
         text: {
-            none: indexText['云端库JSON下载中'] + '...'
+            none: Msg.Lang['云端库JSON下载中'] + '...'
         }
     });
     table.render({
         ...codeTableConfig,
         text: {
-            none: indexText['云端库JSON下载中'] + '...'
+            none: Msg.Lang['云端库JSON下载中'] + '...'
         }
     });
     const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
@@ -479,7 +481,7 @@ LibManager.onclickImportLibs = () => {
                 table.render({
                     ...mixlyTableConfig,
                     text: {
-                        none: indexText['无数据']
+                        none: Msg.Lang['无数据']
                     }
                 });
                 return;
@@ -495,7 +497,7 @@ LibManager.onclickImportLibs = () => {
         table.render({
             ...mixlyTableConfig,
             text: {
-                none: indexText['无数据']
+                none: Msg.Lang['无数据']
             }
         });
     }
@@ -514,7 +516,7 @@ LibManager.onclickImportLibs = () => {
                 table.render({
                     ...codeTableConfig,
                     text: {
-                        none: indexText['无数据']
+                        none: Msg.Lang['无数据']
                     }
                 });
                 return;
@@ -530,7 +532,7 @@ LibManager.onclickImportLibs = () => {
         table.render({
             ...codeTableConfig,
             text: {
-                none: indexText['无数据']
+                none: Msg.Lang['无数据']
             }
         });
     }
@@ -543,11 +545,11 @@ LibManager.onclickManageLibs = () => {
         elem: '#del-mixly-lib-page',
         data: [],
         defaultToolbar: [],
-        title: indexText['管理库'],
+        title: Msg.Lang['管理库'],
         cols: [[
             { type: 'checkbox', unresize: false, align: "center" },
-            { field: 'name', title: indexText['名称'], sort: true, unresize: false, align: "center", minWidth: 150 },
-            { field: 'path', title: indexText['路径'], unresize: false, align: "center", minWidth: 300 }
+            { field: 'name', title: Msg.Lang['名称'], sort: true, unresize: false, align: "center", minWidth: 150 },
+            { field: 'path', title: Msg.Lang['路径'], unresize: false, align: "center", minWidth: 300 }
         ]],
         limit: 1000,
         skin: 'line',
@@ -560,7 +562,7 @@ LibManager.onclickManageLibs = () => {
         elem: '#del-code-lib-page',
         data: [],
         defaultToolbar: [],
-        title: indexText['管理库'],
+        title: Msg.Lang['管理库'],
         cols: mixlyTableConfig.cols,
         limit: 1000,
         skin: 'line',
@@ -570,13 +572,13 @@ LibManager.onclickManageLibs = () => {
     table.render({
         ...mixlyTableConfig,
         text: {
-            none: indexText['本地库读取中'] + '...'
+            none: Msg.Lang['本地库读取中'] + '...'
         }
     });
     table.render({
         ...codeTableConfig,
         text: {
-            none: indexText['本地库读取中'] + '...'
+            none: Msg.Lang['本地库读取中'] + '...'
         }
     });
     const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
@@ -598,7 +600,7 @@ LibManager.onclickManageLibs = () => {
                     table.render({
                         ...needRead.tableConfig,
                         text: {
-                            none: indexText['读取失败']
+                            none: Msg.Lang['读取失败']
                         }
                     });
                     return;
@@ -621,7 +623,7 @@ LibManager.onclickManageLibs = () => {
                     table.render({
                         ...needRead.tableConfig,
                         text: {
-                            none: indexText['无数据']
+                            none: Msg.Lang['无数据']
                         }
                     });
             });
@@ -629,7 +631,7 @@ LibManager.onclickManageLibs = () => {
             table.render({
                 ...needRead.tableConfig,
                 text: {
-                    none: indexText['无数据']
+                    none: Msg.Lang['无数据']
                 }
             });
         }
@@ -640,13 +642,13 @@ LibManager.showLocalImportDialog = (type) => {
     Modules.currentWindow.focus();
     let layerNum;
     dialog.showOpenDialog(Modules.currentWindow, {
-        title: indexText['导入库'],
+        title: Msg.Lang['导入库'],
         defaultPath: Env.clientPath,
-        buttonLabel: indexText['确定'],
+        buttonLabel: Msg.Lang['确定'],
         // 限制能够选择的文件类型
         filters: LibManager.LOCAL_IMPORT_FILTERS[type],
         properties: ['openFile', 'showHiddenFiles'],
-        message: indexText['导入库']
+        message: Msg.Lang['导入库']
     }).then(result => {
         const selectedPath = result.filePaths[0];
 
@@ -658,7 +660,7 @@ LibManager.showLocalImportDialog = (type) => {
             layerNum = layer.open({
                 type: 1,
                 id: "import-local-lib-layer",
-                title: indexText["导入中"] + "...",
+                title: Msg.Lang["导入中"] + "...",
                 content: $('#mixly-loader-div'),
                 shade: LayerExt.SHADE_ALL,
                 closeBtn: 0,
@@ -677,15 +679,15 @@ LibManager.showLocalImportDialog = (type) => {
             layer.close(layerNum);
             if (error) {
                 console.log(error);
-                layer.msg(indexText['导入失败'], { time: 1000 });
+                layer.msg(Msg.Lang['导入失败'], { time: 1000 });
             } else {
-                layer.msg(indexText['导入成功'], { time: 1000 });
+                layer.msg(Msg.Lang['导入成功'], { time: 1000 });
             }
         });
     }).catch(error => {
         layer.close(layerNum);
         console.log(error);
-        layer.msg(indexText['导入失败'], { time: 1000 });
+        layer.msg(Msg.Lang['导入失败'], { time: 1000 });
     });
 }
 
@@ -698,7 +700,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
             case '.py':
                 var dirPath = path.resolve(inPath, '../');
                 if (pyLibPath === dirPath) {
-                    errorFunc(indexText['此库已导入']);
+                    errorFunc(Msg.Lang['此库已导入']);
                     return;
                 }
                 sucFunc();
@@ -707,7 +709,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
             case '.mil':
                 var dirPath = path.resolve(inPath, '../');
                 if (thirdPartyPath === dirPath) {
-                    errorFunc(indexText['此库已导入']);
+                    errorFunc(Msg.Lang['此库已导入']);
                     return;
                 }
                 sucFunc();
@@ -716,7 +718,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
             case '.xml':
                 var dirPath = path.resolve(inPath, '../../');
                 if (dirPath === thirdPartyPath) {
-                    errorFunc(indexText['此库已导入']);
+                    errorFunc(Msg.Lang['此库已导入']);
                     return;
                 }
                 sucFunc();
@@ -727,10 +729,10 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
                 LibManager.importFromLocalWithZip(type, inPath, endFunc);
                 break;
             default:
-                errorFunc(indexText['所选文件非配置文件']);
+                errorFunc(Msg.Lang['所选文件非配置文件']);
         }
     } else {
-        errorFunc(indexText['文件不存在']);
+        errorFunc(Msg.Lang['文件不存在']);
     }
 }
 
@@ -794,8 +796,8 @@ LibManager.importFromLocalWithFile = (type, filePath, endFunc) => {
             copyPromiseList.push(LibManager.copyFile(filePath, pyPath));
             break;
         default:
-            layer.msg(indexText['文件后缀错误'], { time: 1000 });
-            endFunc(indexText['文件后缀错误']);
+            layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+            endFunc(Msg.Lang['文件后缀错误']);
     }
     Promise.all(copyPromiseList)
     .then((message) => {
@@ -823,7 +825,7 @@ LibManager.importFromLocalWithZip = (type, filePath, endFunc) => {
             desPath = myLibPath;
             break;
         default:
-            endFunc(indexText['解压出错']);
+            endFunc(Msg.Lang['解压出错']);
             return;
     }
     LibManager.unZip(filePath, desPath, false, (error) => {
@@ -861,7 +863,7 @@ LibManager.showDelLibsProgress = (sucFunc) => {
     const layerNum = layer.open({
         type: 1,
         id: "del-local-lib-layer",
-        title: indexText["删除中"] + "...",
+        title: Msg.Lang["删除中"] + "...",
         content: $('#mixly-loader-div'),
         shade: LayerExt.SHADE_ALL,
         closeBtn: 0,
@@ -966,7 +968,7 @@ LibManager.showCloudImportProgress = (importList, endFunc = (errorMessages) => {
     $('body').append(parentDom);
     element.render('progress');
     LayerExt.open({
-        title: indexText['导入中'] + '...',
+        title: Msg.Lang['导入中'] + '...',
         id: 'setting-menu-layer1',
         content: parentDom,
         shade: LayerExt.SHADE_ALL,
@@ -1001,22 +1003,22 @@ LibManager.importFromCloud = (importList, layero, layerIndex) => {
             progressStatusDom.removeClass('layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop');
             if (i.error) {
                 progressStatusDom.addClass('layui-icon-close-fill');
-                cardHeadDom.html(i.name + ' - ' + indexText['导入失败']);
+                cardHeadDom.html(i.name + ' - ' + Msg.Lang['导入失败']);
                 failedTimes++;
                 console.log(i.error);
             } else {
                 progressStatusDom.addClass('layui-icon-ok-circle');
-                cardHeadDom.html(i.name + ' - ' + indexText['导入完成']);
+                cardHeadDom.html(i.name + ' - ' + Msg.Lang['导入完成']);
                 sucTimes++;
                 // BoardManager.writePackageConfig(i);
             }
         }
         const sucIcon = `<i class="layui-icon layui-icon-ok" style="font-size:13px;color:#41ce28;"></i>`;
         const errIcon = `<i class="layui-icon layui-icon-close" style="font-size:13px;color:#b9063b;"></i>`;
-        layer.title(indexText['导入完成'] + ' ' + sucTimes + sucIcon + ' ' + failedTimes + errIcon, layerIndex);
+        layer.title(Msg.Lang['导入完成'] + ' ' + sucTimes + sucIcon + ' ' + failedTimes + errIcon, layerIndex);
     })
     .catch((error) => {
-        layer.title(indexText['导入失败'], layerIndex);
+        layer.title(Msg.Lang['导入失败'], layerIndex);
     })
     .finally(() => {
         layero.find('.layui-layer-setwin').css('display', 'block');
@@ -1068,9 +1070,9 @@ LibManager.importWithUrl = (info) => {
         LibManager.downloadPromise(info, {
             desPath: path.resolve(Env.clientPath, './download'),
             url: info.downloadIndex ? info.url : 'None',
-            startMessage: indexText['下载中'] + '...',
-            endMessage: indexText['下载完成'],
-            errorMessage: indexText['下载失败']
+            startMessage: Msg.Lang['下载中'] + '...',
+            endMessage: Msg.Lang['下载完成'],
+            errorMessage: Msg.Lang['下载失败']
         })
         .then((newInfo) => {
             if (newInfo.error)
@@ -1080,9 +1082,9 @@ LibManager.importWithUrl = (info) => {
                 return LibManager.unZipPromise(newInfo, {
                     desPath: newInfo.desPath,
                     zipPath: newInfo.downloadPath,
-                    startMessage: indexText['解压中'] + '...',
-                    endMessage: indexText['解压完成'],
-                    errorMessage: indexText['解压失败']
+                    startMessage: Msg.Lang['解压中'] + '...',
+                    endMessage: Msg.Lang['解压完成'],
+                    errorMessage: Msg.Lang['解压失败']
                 });
         })
         .then((newInfo) => {
@@ -1093,7 +1095,7 @@ LibManager.importWithUrl = (info) => {
             const progressStatusDom = $('#' + newInfo.index + '-progress-status-id');
             if (!info.downloadIndex) {
                 progressStatusDom.removeClass('layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop');
-                cardHeadDom.html(newInfo.name + ' - ' + indexText['已是最新版']);
+                cardHeadDom.html(newInfo.name + ' - ' + Msg.Lang['已是最新版']);
                 progressStatusDom.addClass('layui-icon-ok-circle');
                 element.progress(newInfo.index + '-progress-filter', '100%');
                 element.render('progress', newInfo.index + '-progress-filter');
@@ -1114,9 +1116,9 @@ LibManager.downloadPromise = (info, config) => {
         const DEFAULT_CONFIG = {
             desPath: path.resolve(Env.clientPath, './download'),
             url: null,
-            startMessage: indexText['下载中'] + '...',
-            endMessage: indexText['下载完成'],
-            errorMessage: indexText['下载失败']
+            startMessage: Msg.Lang['下载中'] + '...',
+            endMessage: Msg.Lang['下载完成'],
+            errorMessage: Msg.Lang['下载失败']
         };
         if (typeof config !== 'object')
             config = DEFAULT_CONFIG
@@ -1208,9 +1210,9 @@ LibManager.unZipPromise = (info, config) => {
         const DEFAULT_CONFIG = {
             desPath: path.resolve(Env.clientPath, './download'),
             zipPath: null,
-            startMessage: indexText['解压中'] + '...',
-            endMessage: indexText['解压完成'],
-            errorMessage: indexText['解压失败'],
+            startMessage: Msg.Lang['解压中'] + '...',
+            endMessage: Msg.Lang['解压完成'],
+            errorMessage: Msg.Lang['解压失败'],
             delZip: true
         };
         if (typeof config !== 'object')

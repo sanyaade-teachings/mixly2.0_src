@@ -44,13 +44,13 @@
       this.setColour(Blockly.Msg['DICTS_HUE']);
       this.appendDummyInput("")
       .appendField(new Blockly.FieldTextInput('mydict'), 'VAR')
-      .appendField(new Blockly.FieldLabel(Blockly.Msg.DICTS_CREATE_WITH_INPUT_WITH), 'TIP')
+      .appendField(new Blockly.FieldLabel(Blockly.Msg.Lang.DICTS_CREATE_WITH_INPUT_WITH), 'TIP')
       this.itemCount_ = 3;
       this.updateShape_();
       this.setPreviousStatement(true);
       this.setNextStatement(true);
       this.setMutator(new Blockly.Mutator(['dicts_create_with_item']));
-      this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_TOOLTIP);
+      this.setTooltip(Blockly.Msg.Lang.DICTS_CREATE_WITH_TOOLTIP);
     },
 
     /**
@@ -164,9 +164,9 @@
           }
         // Rebuild block.
         if (this.itemCount_ == 0) {
-          this.getField('TIP').setValue(Blockly.Msg.DICTS_CREATE_EMPTY_TITLE);
+          this.getField('TIP').setValue(Blockly.Msg.Lang.DICTS_CREATE_EMPTY_TITLE);
         } else {
-          this.getField('TIP').setValue(Blockly.Msg.DICTS_CREATE_WITH_INPUT_WITH);
+          this.getField('TIP').setValue(Blockly.Msg.Lang.DICTS_CREATE_WITH_INPUT_WITH);
           for (var i = 0; i < this.itemCount_; i++) {
             this.appendValueInput('ADD' + i)
             .setCheck(null)
@@ -201,9 +201,9 @@
    init: function() {
     this.setColour(Blockly.Msg['DICTS_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT);
+    .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_TYPE_DICT);
     this.appendStatementInput('STACK');
-    this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_CONTAINER_TOOLTIP);
+    this.setTooltip(Blockly.Msg.Lang.DICTS_CREATE_WITH_CONTAINER_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -216,10 +216,10 @@ Blockly.Blocks['dicts_create_with_item'] = {
    init: function() {
     this.setColour(Blockly.Msg['DICTS_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TITLE);
+    .appendField(Blockly.Msg.Lang.DICTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_ITEM_TOOLTIP);
+    this.setTooltip(Blockly.Msg.Lang.DICTS_CREATE_WITH_ITEM_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -234,8 +234,8 @@ Blockly.Blocks['dicts_keys'] = {
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
-    .appendField(Blockly.Msg.DICT_KEYS);  
-    this.setTooltip(Blockly.Msg.DICTS_KEYS_TOOLTIP);      
+    .appendField(Blockly.Msg.Lang.DICT_KEYS);  
+    this.setTooltip(Blockly.Msg.Lang.DICTS_KEYS_TOOLTIP);      
     this.setOutput(true, 'List');
   }
 };
@@ -245,18 +245,18 @@ Blockly.Blocks['dicts_get'] = {
     this.setColour(Blockly.Msg['DICTS_HUE']);
     // this.appendDummyInput("")
     
-    //     .appendField(Blockly.Msg.DICTS_GET_FROM_DICTS)
+    //     .appendField(Blockly.Msg.Lang.DICTS_GET_FROM_DICTS)
     
     this.appendValueInput('DICT')
     .setCheck('Dict')    
     this.appendValueInput('KEY')
-    .appendField(Blockly.Msg.DICTS_GET_IN)
+    .appendField(Blockly.Msg.Lang.DICTS_GET_IN)
     this.appendDummyInput("")   
         // .appendField(new Blockly.FieldTextInput('"key"'), 'KEY')
-        .appendField(Blockly.Msg.DICTS_ADD_VALUE);
+        .appendField(Blockly.Msg.Lang.DICTS_ADD_VALUE);
         
         this.setOutput(true);
-        this.setTooltip(Blockly.Msg.DICTS_GET_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.DICTS_GET_TOOLTIP);
   }
 };
 
@@ -266,13 +266,13 @@ Blockly.Blocks['dicts_get_default'] = {
     this.appendValueInput('DICT')
     .setCheck('Dict')    
     this.appendValueInput('KEY')
-    .appendField(Blockly.Msg.DICTS_GET_IN)
+    .appendField(Blockly.Msg.Lang.DICTS_GET_IN)
     this.appendDummyInput("")   
-        .appendField(Blockly.Msg.DICTS_ADD_VALUE);
+        .appendField(Blockly.Msg.Lang.DICTS_ADD_VALUE);
     this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.DICTS_DEFAULT_VALUE);    
+        .appendField(Blockly.Msg.Lang.DICTS_DEFAULT_VALUE);    
     this.setOutput(true);
-    this.setTooltip(Blockly.Msg.DICTS_GET_DEFAULT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.Lang.DICTS_GET_DEFAULT_TOOLTIP);
   }
 };
 
@@ -281,15 +281,15 @@ Blockly.Blocks['dicts_get_default'] = {
         this.setColour(Blockly.Msg['DICTS_HUE']);
         this.appendValueInput('DICT')
         this.appendValueInput('KEY')
-        .appendField(Blockly.Msg.DICTS_ADD)
+        .appendField(Blockly.Msg.Lang.DICTS_ADD)
         // .appendField(new Blockly.FieldTextInput('"key"'), 'KEY')
         this.appendDummyInput()
         this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.DICTS_ADD_VALUE);
+        .appendField(Blockly.Msg.Lang.DICTS_ADD_VALUE);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.DICTS_ADD_OR_CHANGE_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.DICTS_ADD_OR_CHANGE_TOOLTIP);
       }
     };
 
@@ -299,14 +299,14 @@ Blockly.Blocks['dicts_get_default'] = {
         this.setColour(Blockly.Msg['DICTS_HUE']);
         this.appendValueInput('DICT')
         this.appendValueInput('KEY')
-        .appendField(Blockly.Msg.DICTS_DELETE_IN)
+        .appendField(Blockly.Msg.Lang.DICTS_DELETE_IN)
         this.appendDummyInput("")
         // .appendField(new Blockly.FieldTextInput('"key"'), 'KEY')
-        .appendField(Blockly.Msg.DICTS_DELETE_VALUE);
+        .appendField(Blockly.Msg.Lang.DICTS_DELETE_VALUE);
         
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.DICTS_DELETE_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.DICTS_DELETE_TOOLTIP);
       }
     };
 
@@ -320,13 +320,13 @@ Blockly.Blocks['dicts_get_default'] = {
     this.setColour(Blockly.Msg['DICTS_HUE']);
     this.appendValueInput('DICT2')
     .setCheck('Dict')
-    .appendField(Blockly.Msg.MAKE_DICT)      
+    .appendField(Blockly.Msg.Lang.MAKE_DICT)      
     this.appendValueInput('DICT')
     .setCheck('Dict')
-    .appendField(Blockly.Msg.DICT_UPDATE); 
+    .appendField(Blockly.Msg.Lang.DICT_UPDATE); 
     this.appendDummyInput("")        
-    .appendField(Blockly.Msg.MIXLY_MID);    
-    this.setTooltip(Blockly.Msg.DICTS_UPDATE_TOOLTIP);
+    .appendField(Blockly.Msg.Lang.MIXLY_MID);    
+    this.setTooltip(Blockly.Msg.Lang.DICTS_UPDATE_TOOLTIP);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -342,8 +342,8 @@ Blockly.Blocks['dicts_clear'] = {
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")        
-    .appendField(Blockly.Msg.DICT_CLEAR);  
-    this.setTooltip(Blockly.Msg.DICTS_CLEAR_TOOLTIP);
+    .appendField(Blockly.Msg.Lang.DICT_CLEAR);  
+    this.setTooltip(Blockly.Msg.Lang.DICTS_CLEAR_TOOLTIP);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -360,8 +360,8 @@ Blockly.Blocks['dicts_items'] = {
     .setCheck('Dict')
     this.appendDummyInput("")        
     
-    .appendField(Blockly.Msg.DICT_ITEMS);  
-    this.setTooltip(Blockly.Msg.DICTS_ITEMS_TOOLTIP);      
+    .appendField(Blockly.Msg.Lang.DICT_ITEMS);  
+    this.setTooltip(Blockly.Msg.Lang.DICTS_ITEMS_TOOLTIP);      
     this.setOutput(true, 'List');
   }
 };
@@ -377,8 +377,8 @@ Blockly.Blocks['dicts_values'] = {
     .setCheck('Dict')
     this.appendDummyInput("")        
     
-    .appendField(Blockly.Msg.DICT_VALUES);  
-    this.setTooltip(Blockly.Msg.DICTS_VALUES_TOOLTIP);      
+    .appendField(Blockly.Msg.Lang.DICT_VALUES);  
+    this.setTooltip(Blockly.Msg.Lang.DICTS_VALUES_TOOLTIP);      
     this.setOutput(true, 'List');
   }
 };
@@ -393,9 +393,9 @@ Blockly.Blocks['dicts_length'] = {
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")
-    .appendField(Blockly.Msg.MIXLY_LENGTH)
+    .appendField(Blockly.Msg.Lang.MIXLY_LENGTH)
     
-    this.setTooltip(Blockly.Msg.DICT_LENGTH_TOOLTIP);
+    this.setTooltip(Blockly.Msg.Lang.DICT_LENGTH_TOOLTIP);
     this.setOutput(true, Number);
   }
 };
@@ -411,8 +411,8 @@ Blockly.Blocks['dicts_deldict'] = {
     .setCheck('Dict')
     this.appendDummyInput("")        
     
-    .appendField(Blockly.Msg.DICT_DELDICT);  
-    this.setTooltip(Blockly.Msg.DICTS_DEL_TOOLTIP);
+    .appendField(Blockly.Msg.Lang.DICT_DELDICT);  
+    this.setTooltip(Blockly.Msg.Lang.DICTS_DEL_TOOLTIP);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -426,19 +426,19 @@ Blockly.Blocks['dicts_add_change_del'] = {
    init: function() {
      
     this['MODE'] =
-    [[Blockly.Msg.DICTS_ADD_OR_CHANGE, 'INSERT'],
+    [[Blockly.Msg.Lang.DICTS_ADD_OR_CHANGE, 'INSERT'],
     
-    [Blockly.Msg.MIXLY_MICROBIT_JS_DELETE_VAR, 'DELETE']];
-    this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
+    [Blockly.Msg.Lang.MIXLY_MICROBIT_JS_DELETE_VAR, 'DELETE']];
+    this.setHelpUrl(Blockly.Msg.Lang.LISTS_GET_SUBLIST_HELPURL);
     this.setColour(Blockly.Msg['DICTS_HUE']);
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput('AT2')
     this.appendValueInput('KEY')
     this.appendDummyInput("")   
-    .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
+    .appendField(Blockly.Msg.Lang.MIXLY_MICROPYTHON_SOCKET_MAKE)
         // .appendField(new Blockly.FieldTextInput('"key"'), 'KEY')
-        .appendField(Blockly.Msg.DICTS_ADD_VALUE);
+        .appendField(Blockly.Msg.Lang.DICTS_ADD_VALUE);
         this.updateAt_(true);
         this.setInputsInline(true);
         this.setOutput(false);
@@ -451,14 +451,14 @@ Blockly.Blocks['dicts_add_change_del'] = {
           switch (e) {
             
             case "INSERT":
-            d = Blockly.Msg.DICTS_ADD_TOOLTIP;
+            d = Blockly.Msg.Lang.DICTS_ADD_TOOLTIP;
             break;
             case "DELETE":
-            d = Blockly.Msg.DICTS_DELETE_TOOLTIP;
+            d = Blockly.Msg.Lang.DICTS_DELETE_TOOLTIP;
             break;
             
           }
-            //if ("FROM_START" == e || "FROM_END" == e) d += "  " + Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP.replace("%1", Blockly.Blocks.ONE_BASED_INDEXING ? "#1": "#0");
+            //if ("FROM_START" == e || "FROM_END" == e) d += "  " + Blockly.Msg.Lang.LISTS_INDEX_FROM_START_TOOLTIP.replace("%1", Blockly.Blocks.ONE_BASED_INDEXING ? "#1": "#0");
             return d
           })
         
@@ -531,12 +531,12 @@ Blockly.Blocks['dicts_pop'] = {
     this.appendValueInput('DICT')
     .setCheck('Dict')
     this.appendDummyInput("")
-    .appendField(Blockly.Msg.blockpy_DICT_POP)
+    .appendField(Blockly.Msg.Lang.blockpy_DICT_POP)
     this.appendValueInput('KEY')
     this.appendDummyInput("")
         // .appendField(new Blockly.FieldTextInput('"key"'), 'KEY')
-        .appendField(Blockly.Msg.DICTS_ADD_VALUE);    
-        this.setTooltip(Blockly.Msg.DICT_POP_TOOLTIP);
+        .appendField(Blockly.Msg.Lang.DICTS_ADD_VALUE);    
+        this.setTooltip(Blockly.Msg.Lang.DICT_POP_TOOLTIP);
         this.setInputsInline(true);
         this.setOutput(true);
       }
@@ -548,15 +548,15 @@ Blockly.Blocks['dicts_pop'] = {
         this.appendValueInput('DICT')
         .setCheck('Dict');
         this.appendValueInput('KEY')
-        .appendField(Blockly.Msg.DICTS_SET_DEFAULT)
+        .appendField(Blockly.Msg.Lang.DICTS_SET_DEFAULT)
         this.appendDummyInput("")
         // .appendField(new Blockly.FieldTextInput('"key"'), 'KEY')
-        .appendField(Blockly.Msg.DICTS_DEFAULT_VALUE);
+        .appendField(Blockly.Msg.Lang.DICTS_DEFAULT_VALUE);
         this.appendValueInput('VAR')    
         
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.DICTS_SETDEFAULT_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.DICTS_SETDEFAULT_TOOLTIP);
       }
     };
 
@@ -569,7 +569,7 @@ Blockly.Blocks['dicts_pop'] = {
     this.setColour(Blockly.Msg['DICTS_HUE']);
     this.appendDummyInput("")
         //    .appendField(new Blockly.FieldTextInput('mydict'), 'VAR')
-        .appendField(new Blockly.FieldLabel(Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT), 'TIP')
+        .appendField(new Blockly.FieldLabel(Blockly.Msg.Lang.MIXLY_MICROBIT_TYPE_DICT), 'TIP')
         .appendField(' ')
         this.itemCount_ = 3;
         this.updateShape_();
@@ -577,7 +577,7 @@ Blockly.Blocks['dicts_pop'] = {
         this.setPreviousStatement(false);
         this.setNextStatement(false);
         this.setMutator(new Blockly.Mutator(['dicts_create_with_item']));
-        this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.DICTS_CREATE_WITH_TOOLTIP);
       },
 
     /**
@@ -691,9 +691,9 @@ Blockly.Blocks['dicts_pop'] = {
           }
         // Rebuild block.
         if (this.itemCount_ == 0) {
-          this.getField('TIP').setValue(Blockly.Msg.LOGIC_NULL+Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT);
+          this.getField('TIP').setValue(Blockly.Msg.Lang.LOGIC_NULL+Blockly.Msg.Lang.MIXLY_MICROBIT_TYPE_DICT);
         } else {
-          this.getField('TIP').setValue(Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT);
+          this.getField('TIP').setValue(Blockly.Msg.Lang.MIXLY_MICROBIT_TYPE_DICT);
           for (var i = 0; i < this.itemCount_; i++) {
             this.appendValueInput('ADD' + i)
             .setCheck(null)
@@ -723,8 +723,8 @@ Blockly.Blocks['dicts_todict'] = {
   init: function () {
     this.setColour(Blockly.Msg['DICTS_HUE']);
     this.appendValueInput('VAR')
-    .appendField(Blockly.Msg.MIXLY_TODICT);
+    .appendField(Blockly.Msg.Lang.MIXLY_TODICT);
     this.setOutput(true);
-    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TODICT);
+    this.setTooltip(Blockly.Msg.Lang.MIXLY_PYTHON_TOOLTIP_TODICT);
   }
 };    

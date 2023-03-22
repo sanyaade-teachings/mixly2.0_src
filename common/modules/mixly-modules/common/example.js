@@ -6,13 +6,15 @@ goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.Example');
 
 const {
     MFile,
     Title,
     XML,
-    Editor
+    Editor,
+    Msg
 } = Mixly;
 
 const { dropdown, tree } = layui;
@@ -26,20 +28,20 @@ Mixly.Example = function (containerId, exampleBtnId) {
         <button
             id="${exampleBtnId}"
             type="button"
-            m-title="${indexText['例程']}"
+            m-title="${Msg.Lang['例程']}"
             class="layui-btn layui-btn-xs layui-btn-primary m-btn"
             style="cursor:pointer;border:none;margin-left:12px;padding:3px;display:inline-flex;align-items:center;"
         >
             <a
                 class="icon-doc-text"
                 style="color:#fff;font-size:12px;line-height:12px;"
-            >${indexText['例程']}</a>
+            >${Msg.Lang['例程']}</a>
         </button>
     `);
     _this = this;
     _this.menuHTML = XML.render(XML.TEMPLATE_STR['EXAMPLE_MENU_DIV'], {
         id: _this.exampleBtnId_,
-        close: indexText['关闭窗口']
+        close: Msg.Lang['关闭窗口']
     });
     $('#' + _this.exampleBtnId_).off().click(function() {
         if (_this.menu

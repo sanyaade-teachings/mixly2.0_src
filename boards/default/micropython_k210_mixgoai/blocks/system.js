@@ -34,16 +34,16 @@ Blockly.Blocks.controls_delay = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_DELAY)
+        .appendField(Blockly.Msg.Lang.MIXLY_DELAY)
     this.appendDummyInput("")
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_SECOND, "s"], [Blockly.Msg.MIXLY_mSecond, "ms"], [Blockly.Msg.MIXLY_uSecond, "us"]]), 'Time');
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_SECOND, "s"], [Blockly.Msg.Lang.MIXLY_mSecond, "ms"], [Blockly.Msg.Lang.MIXLY_uSecond, "us"]]), 'Time');
      this.appendValueInput("DELAY_TIME", Number)
          .setCheck(Number);
     this.setFieldValue('ms','Time')
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_DELAY);
+    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_DELAY);
   }
 };
 
@@ -51,12 +51,12 @@ Blockly.Blocks.Panic_with_status_code = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("STATUS_CODE", Number)
-        .appendField(Blockly.Msg.MIXLY_MICROBIT_Panic_with_status_code)
+        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Panic_with_status_code)
         .setCheck(Number);
     this.setPreviousStatement(true, null);
     // this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Panic_with_status_code);
+    this.setTooltip(Blockly.Msg.Lang.MIXLY_MICROBIT_Panic_with_status_code);
   }
 };
 
@@ -66,12 +66,12 @@ Blockly.Blocks.controls_millis = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
-	      .appendField(Blockly.Msg.MIXLY_RUNTIME);
+	      .appendField(Blockly.Msg.Lang.MIXLY_RUNTIME);
     this.appendDummyInput("")
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_mSecond, "ms"], [Blockly.Msg.MIXLY_uSecond, "us"]]), 'Time');
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_mSecond, "ms"], [Blockly.Msg.Lang.MIXLY_uSecond, "us"]]), 'Time');
     this.setOutput(true, Number);
     this.setInputsInline(true);
-	  this.setTooltip(Blockly.Msg.MIXLY_ESP32_CONTROLS_MILLIS_TOOLTIP);
+	  this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_CONTROLS_MILLIS_TOOLTIP);
   }
 };
 
@@ -93,11 +93,11 @@ Blockly.Blocks.controls_uname = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_UNAME);
+        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_CONTORL_UNAME);
 
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN + Blockly.Msg.MIXLY_MICROBIT_PY_CONTORL_UNAME);
+    this.setTooltip(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN + Blockly.Msg.Lang.MIXLY_MICROBIT_PY_CONTORL_UNAME);
   }
 };
 
@@ -114,19 +114,19 @@ Blockly.Blocks.system_timer = {
 		.appendField("初始化");
 	this.appendDummyInput("")
 		.setAlign(Blockly.ALIGN_RIGHT)
-		.appendField(Blockly.Msg.MIXLY_MODE)
-		.appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PYTHON_ONE_SHOT, "ONE_SHOT"], [Blockly.Msg.MIXLY_PYTHON_PERIODIC, "PERIODIC"]]), "mode");		
+		.appendField(Blockly.Msg.Lang.MIXLY_MODE)
+		.appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_PYTHON_ONE_SHOT, "ONE_SHOT"], [Blockly.Msg.Lang.MIXLY_PYTHON_PERIODIC, "PERIODIC"]]), "mode");		
 	this.appendValueInput("period")
 		.setAlign(Blockly.ALIGN_RIGHT)
         .appendField("周期ms")
         .setCheck(Number);
     this.appendValueInput('callback')
 		.setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.MIXLY_DO);
+        .appendField(Blockly.Msg.Lang.MIXLY_DO);
 	this.setInputsInline(true);
 	this.setPreviousStatement(true, null);
 	this.setNextStatement(true, null);
-    this.setTooltip(Blockly.Msg.MIXLY_ESP32_SYSTEM_TIMER_TOOLTIP);
+    this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_SYSTEM_TIMER_TOOLTIP);
   }
 };
 
@@ -170,14 +170,14 @@ Blockly.Blocks.system_ticks_diff = {
     this.appendValueInput('END')
         // .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.MIXLY_ESP32_TIME_TICKS_DIFF);
+        .appendField(Blockly.Msg.Lang.MIXLY_ESP32_TIME_TICKS_DIFF);
     this.appendValueInput('START')
         // .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.MIXLY_ESP32_TIME_MINUS);
+        .appendField(Blockly.Msg.Lang.MIXLY_ESP32_TIME_MINUS);
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setTooltip(Blockly.Msg.MIXLY_ESP32_SYSTEM_TICKS_DIFF_TOOLTIP);
+    this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_SYSTEM_TICKS_DIFF_TOOLTIP);
   }
 };
 
@@ -194,7 +194,7 @@ Blockly.Blocks.system_timer_init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SYSTEM_TIMER_INIT_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_SYSTEM_TIMER_INIT_TOOLTIP);
     }
 };
 

@@ -11,6 +11,7 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.MString');
 goog.require('Mixly.Editor');
 goog.require('Mixly.FooterLayer');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.Boards');
 
 const {
@@ -23,6 +24,7 @@ const {
     MString,
     Editor,
     FooterLayer,
+    Msg,
     Boards
 } = Mixly;
 
@@ -194,8 +196,8 @@ Boards.init = () => {
             }
             const xmlStr = XML.render(XML.TEMPLATE_STR['BOARD_CONFIG_MENU_DIV'], {
                 list,
-                reset: indexText['使用默认配置'],
-                close: indexText['关闭窗口']
+                reset: Msg.Lang['使用默认配置'],
+                close: Msg.Lang['关闭窗口']
             });
             Boards.configMenu.list = list;
             Boards.configMenu.updateContent(xmlStr);
@@ -517,7 +519,7 @@ Boards.updateCategories = (boardName, enforce = false) => {
         thirdPartyStr = Env.thirdPartyXML.join('');
     }
     const searchCategoryStr = '<category id="catSearch" hidden="true" colour="#ff6666"><label text="'
-                             + indexText['无数据']
+                             + Msg.Lang['无数据']
                              + '"></label></category>';
     thirdPartyStr = Boards.selectCategories(boardName, thirdPartyStr);
     const toolboxDom = $('#toolbox');
@@ -633,8 +635,8 @@ Boards.showConfigMenu = () => {
     }
     const xmlStr = XML.render(XML.TEMPLATE_STR['BOARD_CONFIG_MENU_DIV'], {
         list,
-        reset: indexText['使用默认配置'],
-        close: indexText['关闭窗口']
+        reset: Msg.Lang['使用默认配置'],
+        close: Msg.Lang['关闭窗口']
     });
 
     Boards.configMenu = tippy('#mixly-board-config', {

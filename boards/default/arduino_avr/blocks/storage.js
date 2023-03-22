@@ -10,27 +10,27 @@ Blockly.Blocks.store_sd_init = {
     init: function () {
         this.appendDummyInput("")
             .appendField("SD")
-            .appendField(Blockly.Msg.MIXLY_SETUP);
+            .appendField(Blockly.Msg.Lang.MIXLY_SETUP);
         this.appendValueInput("PIN_MOSI")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("MOSI")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.appendValueInput("PIN_MISO")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("MISO")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.appendValueInput("PIN_SCK")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("CLK")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.appendValueInput("PIN_CS")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("CS")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(Blockly.Msg['STORAGE_HUE']);
@@ -44,27 +44,27 @@ Blockly.Blocks.store_sd_init_32 = {
     init: function () {
         this.appendDummyInput("")
             .appendField("SD")
-            .appendField(Blockly.Msg.MIXLY_SETUP);
+            .appendField(Blockly.Msg.Lang.MIXLY_SETUP);
         this.appendValueInput("PIN_MOSI")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("MOSI")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.appendValueInput("PIN_MISO")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("MISO")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.appendValueInput("PIN_SCK")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("CLK")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.appendValueInput("PIN_CS")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("CS")
-            .appendField(Blockly.Msg.MIXLY_PIN);
+            .appendField(Blockly.Msg.Lang.MIXLY_PIN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(Blockly.Msg['STORAGE_HUE']);
@@ -77,7 +77,7 @@ Blockly.Blocks.store_sd_init_32 = {
 Blockly.Blocks.sd_card_type = {
     init: function () {
         this.appendDummyInput()
-            .appendField("SD" + Blockly.Msg.MIXLY_TYPE);
+            .appendField("SD" + Blockly.Msg.Lang.MIXLY_TYPE);
         this.setOutput(true, null);
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.setTooltip("");
@@ -88,7 +88,7 @@ Blockly.Blocks.sd_card_type = {
 Blockly.Blocks.sd_card_root_files = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_SD_LIST_FILES);
+            .appendField(Blockly.Msg.Lang.MIXLY_SD_LIST_FILES);
         this.setOutput(false, null);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -99,13 +99,13 @@ Blockly.Blocks.sd_card_root_files = {
 };
 
 var volume_TYPE =
-    [[Blockly.Msg.MIXLY_SD_clusterCount, 'volume.clusterCount()'],
-    [Blockly.Msg.MIXLY_SD_blocksPerCluster, 'volume.blocksPerCluster()'],
-    [Blockly.Msg.MIXLY_SD_TOTAL_blocks, 'volume.blocksPerCluster() * volume.clusterCount()'],
-    ["FAT" + Blockly.Msg.MIXLY_TYPE, 'volume.fatType()'],
-    [Blockly.Msg.MIXLY_volume + "(KB)", 'volume.blocksPerCluster()*volume.clusterCount()/2'],
-    [Blockly.Msg.MIXLY_volume + "(MB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024'],
-    [Blockly.Msg.MIXLY_volume + "(GB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024/1024.0'],
+    [[Blockly.Msg.Lang.MIXLY_SD_clusterCount, 'volume.clusterCount()'],
+    [Blockly.Msg.Lang.MIXLY_SD_blocksPerCluster, 'volume.blocksPerCluster()'],
+    [Blockly.Msg.Lang.MIXLY_SD_TOTAL_blocks, 'volume.blocksPerCluster() * volume.clusterCount()'],
+    ["FAT" + Blockly.Msg.Lang.MIXLY_TYPE, 'volume.fatType()'],
+    [Blockly.Msg.Lang.MIXLY_volume + "(KB)", 'volume.blocksPerCluster()*volume.clusterCount()/2'],
+    [Blockly.Msg.Lang.MIXLY_volume + "(MB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024'],
+    [Blockly.Msg.Lang.MIXLY_volume + "(GB)", 'volume.blocksPerCluster()*volume.clusterCount()/2/1024/1024.0'],
 
     ];
 
@@ -126,7 +126,7 @@ Blockly.Blocks.sd_exist = {
             .appendField(this.newQuote_(true))
         this.appendDummyInput()
             .appendField(this.newQuote_(false))
-            .appendField(Blockly.Msg.MIXLY_SD_FILE_Exist);
+            .appendField(Blockly.Msg.Lang.MIXLY_SD_FILE_Exist);
         this.setOutput(true, null);
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.setTooltip("");
@@ -145,7 +145,7 @@ Blockly.Blocks.sd_exist = {
 Blockly.Blocks.sd_DelFile = {
     init: function () {
         this.appendValueInput("FileName")
-            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_DELETE_VAR)
+            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_DELETE_VAR)
             .appendField(this.newQuote_(true))
         this.appendDummyInput()
             .appendField(this.newQuote_(false));
@@ -168,7 +168,7 @@ Blockly.Blocks.sd_DelFile = {
 Blockly.Blocks.sd_read = {
     init: function () {
         this.appendValueInput("FileName")
-            .appendField(Blockly.Msg.MIXLY_SERIAL_READ)
+            .appendField(Blockly.Msg.Lang.MIXLY_SERIAL_READ)
             .appendField(this.newQuote_(true));
         this.appendDummyInput()
             .appendField(this.newQuote_(false));
@@ -191,21 +191,21 @@ Blockly.Blocks.store_sd_write = {
     init: function () {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.MIXLY_WRITE_SD_FILE)
+            .appendField(Blockly.Msg.Lang.MIXLY_WRITE_SD_FILE)
             .appendField(this.newQuote_(true));
         this.appendDummyInput()
             .appendField(this.newQuote_(false));
         this.appendValueInput("DATA", String)
             .setCheck([String, Number])
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.MIXLY_SD_DATA);
+            .appendField(Blockly.Msg.Lang.MIXLY_SD_DATA);
         this.appendValueInput("NEWLINE", Boolean)
             .setCheck(Boolean)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.MIXLY_SD_NEWLINE);
+            .appendField(Blockly.Msg.Lang.MIXLY_SD_NEWLINE);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_SDWRITE);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_SDWRITE);
     },
     newQuote_: function (open) {
         if (open == this.RTL) {
@@ -222,14 +222,14 @@ Blockly.Blocks.store_eeprom_write_long = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_EEPROM_WRITE_LONG);
+            .appendField(Blockly.Msg.Lang.MIXLY_EEPROM_WRITE_LONG);
         this.appendValueInput("DATA", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.MIXLY_DATA);
+            .appendField(Blockly.Msg.Lang.MIXLY_DATA);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_WRITELONG);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_EEPROM_WRITELONG);
     }
 };
 
@@ -238,9 +238,9 @@ Blockly.Blocks.store_eeprom_read_long = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_EEPROM_READ_LONG);
+            .appendField(Blockly.Msg.Lang.MIXLY_EEPROM_READ_LONG);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_READLONG);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_EEPROM_READLONG);
     }
 };
 
@@ -250,14 +250,14 @@ Blockly.Blocks.store_eeprom_write_byte = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_EEPROM_WRITE_BYTE);
+            .appendField(Blockly.Msg.Lang.MIXLY_EEPROM_WRITE_BYTE);
         this.appendValueInput("DATA", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.MIXLY_DATA);
+            .appendField(Blockly.Msg.Lang.MIXLY_DATA);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_WRITEBYTE);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_EEPROM_WRITEBYTE);
     }
 };
 
@@ -266,9 +266,9 @@ Blockly.Blocks.store_eeprom_read_byte = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_EEPROM_READ_BYTE);
+            .appendField(Blockly.Msg.Lang.MIXLY_EEPROM_READ_BYTE);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_READBYTE);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_EEPROM_READBYTE);
     }
 };
 
@@ -277,17 +277,17 @@ Blockly.Blocks.store_eeprom_put = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("ADDRESS")
             .setCheck(null)
-            .appendField(Blockly.Msg.MIXLY_ESP32_WRITE)
-            //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_INT,"int"],[Blockly.Msg.LANG_MATH_LONG,"long"],[Blockly.Msg.LANG_MATH_FLOAT,"float"],[Blockly.Msg.LANG_MATH_BYTE,"byte"],["字节数组","byte_array"],["字符数组","char_array"]]), "type")
+            .appendField(Blockly.Msg.Lang.MIXLY_ESP32_WRITE)
+            //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.LANG_MATH_INT,"int"],[Blockly.Msg.Lang.LANG_MATH_LONG,"long"],[Blockly.Msg.Lang.LANG_MATH_FLOAT,"float"],[Blockly.Msg.Lang.LANG_MATH_BYTE,"byte"],["字节数组","byte_array"],["字符数组","char_array"]]), "type")
             .appendField("EEPROM")
-            .appendField(Blockly.Msg.MQTT_SERVER_ADD);
+            .appendField(Blockly.Msg.Lang.MQTT_SERVER_ADD);
         this.appendValueInput("DATA")
             .setCheck(null)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.MIXLY_SD_DATA);
+            .appendField(Blockly.Msg.Lang.MIXLY_SD_DATA);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_PUT);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_EEPROM_PUT);
     }
 };
 
@@ -296,16 +296,16 @@ Blockly.Blocks.store_eeprom_get = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("ADDRESS")
             .setCheck(null)
-            .appendField(Blockly.Msg.MIXLY_SERIAL_READ)
-            //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_INT,"int"],[Blockly.Msg.LANG_MATH_LONG,"long"],[Blockly.Msg.LANG_MATH_FLOAT,"float"],[Blockly.Msg.LANG_MATH_BYTE,"byte"],["字节数组","byte_array"],["字符数组","char_array"]]), "type")
+            .appendField(Blockly.Msg.Lang.MIXLY_SERIAL_READ)
+            //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.LANG_MATH_INT,"int"],[Blockly.Msg.Lang.LANG_MATH_LONG,"long"],[Blockly.Msg.Lang.LANG_MATH_FLOAT,"float"],[Blockly.Msg.Lang.LANG_MATH_BYTE,"byte"],["字节数组","byte_array"],["字符数组","char_array"]]), "type")
             .appendField("EEPROM")
-            .appendField(Blockly.Msg.MQTT_SERVER_ADD);
+            .appendField(Blockly.Msg.Lang.MQTT_SERVER_ADD);
         this.appendValueInput("DATA")
             .setCheck(null)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.SAVETO + ' ' + MSG["catVar"]);
+            .appendField(Blockly.Msg.Lang.SAVETO + ' ' + MSG["catVar"]);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_GET);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_STORE_EEPROM_GET);
     }
 };

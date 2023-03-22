@@ -12,6 +12,7 @@ goog.require('Mixly.Title');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
 goog.require('Mixly.MArray');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.ArduShell');
 
@@ -26,6 +27,7 @@ const {
     Boards,
     MFile,
     MArray,
+    Msg,
     Config
 } = Mixly;
 
@@ -166,7 +168,7 @@ ArduShell.compile = (doFunc = () => {}) => {
     StatusBar.show(1);
     const layerNum = layer.open({
         type: 1,
-        title: indexText["编译中"] + "...",
+        title: Msg.Lang["编译中"] + "...",
         content: $('#mixly-loader-div'),
         shade: LayerExt.SHADE_NAV,
         resize: false,
@@ -175,7 +177,7 @@ ArduShell.compile = (doFunc = () => {}) => {
             $(".layui-layer-page").css("z-index", "198910151");
             $("#mixly-loader-btn").off("click").click(() => {
                 $("#mixly-loader-btn").css('display', 'none');
-                layer.title(indexText['编译终止中'] + '...', layerNum);
+                layer.title(Msg.Lang['编译终止中'] + '...', layerNum);
                 ArduShell.cancel();
             });
         },
@@ -187,7 +189,7 @@ ArduShell.compile = (doFunc = () => {}) => {
         }
     });
     setTimeout(() => {
-        StatusBar.setValue(indexText["编译中"] + "...\n");
+        StatusBar.setValue(Msg.Lang["编译中"] + "...\n");
 
         let myLibPath = Env.indexDirPath + "/libraries/myLib/";
         if (fs_extend.isdir(myLibPath))
@@ -249,7 +251,7 @@ ArduShell.initUpload = () => {
             ArduShell.upload(boardType, port);
         });
     } else {
-        layer.msg(indexText["无可用设备"] + "!", {
+        layer.msg(Msg.Lang["无可用设备"] + "!", {
             time: 1000
         });
     }
@@ -267,7 +269,7 @@ ArduShell.upload = (boardType, port) => {
     StatusBarPort.tabChange("output");
     const layerNum = layer.open({
         type: 1,
-        title: indexText["上传中"] + "...",
+        title: Msg.Lang["上传中"] + "...",
         content: $('#mixly-loader-div'),
         shade: LayerExt.SHADE_NAV,
         resize: false,
@@ -276,7 +278,7 @@ ArduShell.upload = (boardType, port) => {
             $(".layui-layer-page").css("z-index", "198910151");
             $("#mixly-loader-btn").off("click").click(() => {
                 $("#mixly-loader-btn").css('display', 'none');
-                layer.title(indexText['上传终止中'] + '...', layerNum);
+                layer.title(Msg.Lang['上传终止中'] + '...', layerNum);
                 ArduShell.cancel();
             });
         },
@@ -288,7 +290,7 @@ ArduShell.upload = (boardType, port) => {
         }
     });
     StatusBar.show(1);
-    StatusBar.setValue(indexText["上传中"] + "...\n");
+    StatusBar.setValue(Msg.Lang["上传中"] + "...\n");
     const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),
     buildPath = path.resolve(Env.clientPath, './mixlyBuild'),
@@ -539,15 +541,15 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             timeCostMinute = parseInt(timeCost / 60),
             timeCostStr = (timeCostMinute ? timeCostMinute + "m" : "") + timeCostSecond + "s";
             if (code === 0) {
-                const message = (type === 'compile' ? indexText["编译成功"] : indexText["上传成功"]);
-                StatusBar.addValue("==" + message + "(" + indexText["用时"] + " " + timeCostStr + ")==\n");
+                const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
+                StatusBar.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 layer.msg(message + '！', {
                         time: 1000
                     });
                 sucFunc();
             } else {
                 // code = 1 用户终止运行
-                const message = (type === 'compile' ? indexText["编译失败"] : indexText["上传失败"]);
+                const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
                 StatusBar.addValue("==" + message + "==\n");
             }
             StatusBar.scrollToTheBottom();
@@ -556,7 +558,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     .catch((error) => {
         console.log(error);
         layer.close(layerNum);
-        const message = (type === 'compile' ? indexText["编译失败"] : indexText["上传失败"]);
+        const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
         StatusBar.addValue("==" + message + "==\n");
     });
 }
@@ -570,7 +572,7 @@ ArduShell.writeFile = function (readPath, writePath) {
         window.setTimeout(function () {
             const layerNum = layer.open({
                 type: 1,
-                title: indexText['保存中'] + '...',
+                title: Msg.Lang['保存中'] + '...',
                 content: $('#mixly-loader-div'),
                 shade: LayerExt.SHADE_ALL,
                 resize: false,
@@ -620,7 +622,7 @@ ArduShell.writeFile = function (readPath, writePath) {
                                     fs.writeFileSync(writeFilePath, binData);
                                 }
                             }
-                            layer.msg(indexText['保存成功'] + '！', {
+                            layer.msg(Msg.Lang['保存成功'] + '！', {
                                 time: 1000
                             });
                         } catch (e) {
@@ -646,15 +648,15 @@ ArduShell.showUploadBox = function (filePath) {
     if (fs_extend.isdir(path.resolve(dirPath, fileName))) {
         filePath = path.resolve(dirPath, fileName, path.basename(filePath));
     }
-    const layerNum = layer.msg(indexText['所打开文件可直接上传'], {
+    const layerNum = layer.msg(Msg.Lang['所打开文件可直接上传'], {
         time: -1,
-        btn: [indexText['取消'], indexText['上传']],
+        btn: [Msg.Lang['取消'], Msg.Lang['上传']],
         shade: LayerExt.SHADE_ALL,
         btnAlign: 'c',
         yes: function () {
             layer.close(layerNum);
             ArduShell.binFilePath = '';
-            layer.msg(indexText['已取消上传'], {
+            layer.msg(Msg.Lang['已取消上传'], {
                 time: 1000
             });
         },

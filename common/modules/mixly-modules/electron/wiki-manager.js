@@ -4,6 +4,7 @@ goog.require('Code');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.WikiManager');
 
@@ -11,6 +12,7 @@ const {
     Modules,
     Config,
     Env,
+    Msg,
     Electron
 } = Mixly;
 
@@ -144,7 +146,7 @@ class WikiPage {
         const changelogPath = path.resolve(Env.clientPath, './CHANGELOG');
         const wikiList = [];
         if (fs_extend.isfile(wikiHomePagePath + '.md'))
-            wikiList.push({ h4: { link: { title: indexText['首页'], source: '?file=' + encodeURIComponent(wikiHomePagePath) } } });
+            wikiList.push({ h4: { link: { title: Msg.Lang['首页'], source: '?file=' + encodeURIComponent(wikiHomePagePath) } } });
         if (fs_extend.isdir(defaultWikiPath)) {
             const childContentList = this.getContentJson(defaultWikiPath, BOARD.boardType);
             if (childContentList)
@@ -242,7 +244,7 @@ WikiManager.openWiki = (gotoInfo) => {
         if (fs_extend.isfile(wikiPath)) {
             WikiManager.wiki = new WikiPage(wikiPath, goto);
         } else {
-            layer.msg(indexText['未找到Wiki页'], { time: 1000 });
+            layer.msg(Msg.Lang['未找到Wiki页'], { time: 1000 });
         }
     } else {
         const { win } = WikiManager.wiki;
@@ -256,7 +258,7 @@ WikiManager.openWiki = (gotoInfo) => {
 
 WikiManager.registerContextMenu = () => {
     const openWikiPage = {
-        displayText: indexText['打开Wiki'],
+        displayText: Msg.Lang['打开Wiki'],
         preconditionFn: function(scope) {
             const { wiki } =  scope.block;
             if (typeof wiki === 'object') {

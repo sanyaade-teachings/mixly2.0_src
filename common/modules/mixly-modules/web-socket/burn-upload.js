@@ -9,6 +9,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
 goog.require('Mixly.MString');
+goog.require('Mixly.Msg');
 goog.require('Mixly.WebSocket.Serial');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.BU');
@@ -21,7 +22,8 @@ const {
     Env,
     Boards,
     MFile,
-    MString
+    MString,
+    Msg
 } = Mixly;
 
 const { BU, Serial, Socket } = Mixly.WebSocket;
@@ -68,7 +70,7 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
         const layerNum = layer.open({
             type: 1,
             id: "serial-select",
-            title: indexText['检测到多个同类型设备，请选择：'],
+            title: Msg.Lang['检测到多个同类型设备，请选择：'],
             area: ['350px', '150px'],
             content: $('#mixly-selector-div'),
             shade: LayerExt.SHADE_ALL,
@@ -99,7 +101,7 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
     } else {
         const layerNum = layer.open({
             type: 1,
-            title: (type === 'burn'? indexText['烧录中'] : indexText['上传中']) + '...',
+            title: (type === 'burn'? Msg.Lang['烧录中'] : Msg.Lang['上传中']) + '...',
             content: $('#mixly-loader-div'),
             shade: LayerExt.SHADE_NAV,
             resize: false,
@@ -135,7 +137,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
 
 BU.operateSuccess = (type, layerNum, port) => {
     layer.close(layerNum);
-    const message = (type === 'burn'? indexText['烧录成功'] : indexText['上传成功']);
+    const message = (type === 'burn'? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']);
     layer.msg(message + '!', {
         time: 1000
     });
@@ -166,7 +168,7 @@ BU.operateError = (type, layerNum, error) => {
 }
 
 BU.noDevice = () => {
-    layer.msg(indexText['无可用设备'] + '!', {
+    layer.msg(Msg.Lang['无可用设备'] + '!', {
         time: 1000
     });
     BU.burning = false;
@@ -182,7 +184,7 @@ BU.noDevice = () => {
 BU.initWithDropdownBox = function (type, startPath) {
     const layerNum = layer.open({
         type: 1,
-        title: (type === 'burn'? indexText['烧录中'] : indexText['上传中']) + '...',
+        title: (type === 'burn'? Msg.Lang['烧录中'] : Msg.Lang['上传中']) + '...',
         content: $('#mixly-loader-div'),
         shade: LayerExt.SHADE_NAV,
         resize: false,
@@ -215,12 +217,12 @@ BU.cancel = function () {
     });
     if (BU.uploading) {
         BU.uploading = false;
-        layer.msg(indexText['已取消上传'], {
+        layer.msg(Msg.Lang['已取消上传'], {
             time: 1000
         });
     } else if (BU.burning) {
         BU.burning = false;
-        layer.msg(indexText['已取消烧录'], {
+        layer.msg(Msg.Lang['已取消烧录'], {
             time: 1000
         });
     }
@@ -314,7 +316,7 @@ BU.uploadByCmd = function (layerNum, port, command) {
         libPath = []
     } = upload;
     const code = MFile.getCode();
-    StatusBar.addValue(indexText['上传中'] + '...\n');
+    StatusBar.addValue(Msg.Lang['上传中'] + '...\n');
     Socket.sendCommand({
         obj: 'BU',
         func: 'uploadByCmd',
@@ -402,7 +404,7 @@ BU.burnWithSpecialBin = () => {
                 const port = Serial.getSelectedPortName();
                 BU.burnWithPort(port, firmwareObj[selectedFirmwareName]);
             } else {
-                layer.msg(indexText['已取消烧录'], { time: 1000 });
+                layer.msg(Msg.Lang['已取消烧录'], { time: 1000 });
             }
         }
     });
@@ -417,14 +419,14 @@ BU.burnWithSpecialBin = () => {
  **/
 BU.operateWithPort = (type, port, command) => {
     if (!port) {
-        layer.msg(indexText['无可用设备'] + '!', {
+        layer.msg(Msg.Lang['无可用设备'] + '!', {
             time: 1000
         });
         BU.burning = false;
         BU.uploading = false;
         return;
     }
-    const title = (type === 'burn' ? indexText['烧录中'] : indexText['上传中']) + '...';
+    const title = (type === 'burn' ? Msg.Lang['烧录中'] : Msg.Lang['上传中']) + '...';
     const operate = () => {
         const layerNum = layer.open({
             type: 1,
@@ -447,11 +449,11 @@ BU.operateWithPort = (type, port, command) => {
                     $("#mixly-loader-btn").css('display', 'none');
                     switch (type) {
                         case 'burn':
-                            layer.title(indexText['烧录终止中'] + '...', index);
+                            layer.title(Msg.Lang['烧录终止中'] + '...', index);
                             break;
                         case 'upload':
                         default:
-                            layer.title(indexText['上传终止中'] + '...', index);
+                            layer.title(Msg.Lang['上传终止中'] + '...', index);
                     }
                     BU.cancel(type);
                 });

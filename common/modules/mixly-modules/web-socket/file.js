@@ -7,6 +7,7 @@ goog.require('Mixly.Editor');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Boards');
 goog.require('Mixly.LayerExt');
+goog.require('Mixly.Msg');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.File');
 
@@ -15,7 +16,8 @@ const {
     Editor,
     MFile,
     Boards,
-    LayerExt
+    LayerExt,
+    Msg
 } = Mixly;
 const { Socket, File } = Mixly.WebSocket;
 
@@ -42,7 +44,7 @@ File.saveToCloud = () => {
                 saveType = [ ...saveType, ...filter.extensions ];
             });
             if (!saveType.includes(extname.substring(1))) {
-                layer.msg(indexText['文件后缀错误'], {
+                layer.msg(Msg.Lang['文件后缀错误'], {
                     time: 1000
                 });
                 return;
@@ -56,7 +58,7 @@ File.saveToCloud = () => {
                 case '.py':
                     data = MFile.getCode();
                 default:
-                    layer.msg(indexText['文件后缀错误'], {
+                    layer.msg(Msg.Lang['文件后缀错误'], {
                         time: 1000
                     });
             }
@@ -73,7 +75,7 @@ File.saveToCloud = () => {
 }
 
 File.saveSuccess = (filename) => {
-    layer.msg(filename + ' ' + indexText['保存成功'], {
+    layer.msg(filename + ' ' + Msg.Lang['保存成功'], {
         time: 1000
     });
 }

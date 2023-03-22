@@ -7,7 +7,7 @@ Blockly.Blocks.factory_notes = {
     init: function () {
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_CONTROL_NOTES)
+            .appendField(Blockly.Msg.Lang.MIXLY_CONTROL_NOTES)
             .appendField(new Blockly.FieldMultilineInput(''), 'VALUE');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -18,12 +18,12 @@ Blockly.Blocks.folding_block = {
     init: function () {
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldTextInput(Blockly.Msg.FOLDING_BLOCK), "peien");
+            .appendField(new Blockly.FieldTextInput(Blockly.Msg.Lang.FOLDING_BLOCK), "peien");
         this.appendStatementInput('DO')
             .appendField('');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.FOLDING_BLOCK_HELP);
+        this.setTooltip(Blockly.Msg.Lang.FOLDING_BLOCK_HELP);
     }
 };
 
@@ -33,7 +33,7 @@ Blockly.Blocks.IICSCAN = {
     init: function () {
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.IICSCAN);
+            .appendField(Blockly.Msg.Lang.IICSCAN);
         this.setInputsInline(true);
         this.setTooltip('');
     }
@@ -44,13 +44,13 @@ Blockly.Blocks.tool_modulus_show = {
     init: function () {
         this.setColour(Blockly.Msg['LISTS_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.OLED_BITMAP_NAME)
+            .appendField(Blockly.Msg.Lang.OLED_BITMAP_NAME)
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
             .appendField('[')
             .appendField(new Blockly.FieldTextInput('3'), 'x')
             .appendField(']');
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.SAVETO + " flash")
+            .appendField(Blockly.Msg.Lang.SAVETO + " flash")
             .appendField(new Blockly.FieldCheckbox("true"), "save_hz");
         this.appendValueInput("input_data");
         this.setPreviousStatement(true);
@@ -70,12 +70,12 @@ Blockly.Blocks.tool_modulus = {
             .appendField(" 取模走向")
             .appendField(new Blockly.FieldDropdown([["顺向(高位在前)", "1"], ["逆向(低位在前)", "2"]]), "modulus_direction");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_TURTLE_WRITE_FONT_NAME)
+            .appendField(Blockly.Msg.Lang.MIXLY_TURTLE_WRITE_FONT_NAME)
             .appendField(new Blockly.FieldDropdown([["华文黑体", "STHeiti"], ["华文楷体", "STKaiti"], ["华文细黑", "STXihei"], ["华文宋体", "STSong"], ["华文中宋", "STZhongsong"], ["华文仿宋", "STFangsong"], ["华文彩云", "STCaiyun"], ["华文琥珀", "STHupo"], ["华文隶书", "STLiti"], ["华文行楷", "STXingkai"], ["华文新魏", "STXinwei"], ["黑体", "simHei"], ["宋体", "simSun"], ["新宋体", "NSimSun"], ["仿宋", "FangSong"], ["楷体", "KaiTi"], ["仿宋_GB2312", "FangSong_GB2312"], ["楷体_GB2312", "KaiTi_GB2312"], ["隶书", "LiSu"], ["幼圆", "YouYuan"], ["新细明体", "PMingLiU"], ["细明体", "MingLiU"], ["标楷体", "DFKai-SB"], ["微软正黑体", "Microsoft JhengHei"], ["微软雅黑体", "Microsoft YaHei"]]), "hz_sharp")
-            .appendField(Blockly.Msg.MIXLY_TURTLE_WRITE_FONT_NUM)
+            .appendField(Blockly.Msg.Lang.MIXLY_TURTLE_WRITE_FONT_NUM)
             .appendField(new Blockly.FieldTextInput("16"), "hz_line_height")
             .appendField("px")
-            //.appendField("px "+Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_FILE_SEEK_OFFSET+":")
+            //.appendField("px "+Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_FILE_SEEK_OFFSET+":")
             //.appendField(new Blockly.FieldDropdown([["上移","hz_up"],["下移","hz_down"]]), "hz_up_down")
             //.appendField(new Blockly.FieldTextInput("0"), "hz_up_down_data")
             //.appendField("px ")
@@ -83,9 +83,9 @@ Blockly.Blocks.tool_modulus = {
             //.appendField(new Blockly.FieldTextInput("0"), "hz_left_right_data")
             //.appendField("px");
             // this.appendDummyInput()  
-            .appendField(Blockly.Msg.MIXLY_WIDTH)
+            .appendField(Blockly.Msg.Lang.MIXLY_WIDTH)
             .appendField(new Blockly.FieldTextInput("16"), "bitmap_width")
-            .appendField("px " + Blockly.Msg.MIXLY_HEIGHT)
+            .appendField("px " + Blockly.Msg.Lang.MIXLY_HEIGHT)
             .appendField(new Blockly.FieldTextInput("16"), "bitmap_height")
             .appendField("px");
         //      .appendField(new Blockly.FieldCheckbox("true"), "show_hz");
@@ -211,25 +211,25 @@ Blockly.Blocks['stm32f103c8t6_pin'] = {
 Blockly.Blocks['get_the_number_of_days_between_the_two_dates'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.GET_THE_DIFFERENCE_BETWEEN_TWO_DATES);
+            .appendField(Blockly.Msg.Lang.GET_THE_DIFFERENCE_BETWEEN_TWO_DATES);
         this.appendValueInput("year_start")
             .setCheck(null)
-            .appendField(Blockly.Msg.START + Blockly.Msg.MIXLY_GPS_DATE_YEAR);
+            .appendField(Blockly.Msg.Lang.START + Blockly.Msg.Lang.MIXLY_GPS_DATE_YEAR);
         this.appendValueInput("month_start")
             .setCheck(null)
-            .appendField(Blockly.Msg.START + Blockly.Msg.MIXLY_GPS_DATE_MONTH);
+            .appendField(Blockly.Msg.Lang.START + Blockly.Msg.Lang.MIXLY_GPS_DATE_MONTH);
         this.appendValueInput("day_start")
             .setCheck(null)
-            .appendField(Blockly.Msg.START + Blockly.Msg.MIXLY_GPS_DATE_DAY);
+            .appendField(Blockly.Msg.Lang.START + Blockly.Msg.Lang.MIXLY_GPS_DATE_DAY);
         this.appendValueInput("year_end")
             .setCheck(null)
-            .appendField(Blockly.Msg.END + Blockly.Msg.MIXLY_GPS_DATE_YEAR);
+            .appendField(Blockly.Msg.Lang.END + Blockly.Msg.Lang.MIXLY_GPS_DATE_YEAR);
         this.appendValueInput("month_end")
             .setCheck(null)
-            .appendField(Blockly.Msg.END + Blockly.Msg.MIXLY_GPS_DATE_MONTH);
+            .appendField(Blockly.Msg.Lang.END + Blockly.Msg.Lang.MIXLY_GPS_DATE_MONTH);
         this.appendValueInput("day_end")
             .setCheck(null)
-            .appendField(Blockly.Msg.END + Blockly.Msg.MIXLY_GPS_DATE_DAY);
+            .appendField(Blockly.Msg.Lang.END + Blockly.Msg.Lang.MIXLY_GPS_DATE_DAY);
         this.setOutput(true, null);
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip("");

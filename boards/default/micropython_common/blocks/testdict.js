@@ -8,13 +8,13 @@ Blockly.Blocks.dict_get_literal={
 
 			.appendField(this.newQuote_(!0))
 
-			.appendField(new Blockly.FieldTextInput(Blockly.Msg.DICTS_CREATE_WITH_ITEM_KEY),"ITEM")
+			.appendField(new Blockly.FieldTextInput(Blockly.Msg.Lang.DICTS_CREATE_WITH_ITEM_KEY),"ITEM")
 
 			.appendField(this.newQuote_(!1))
 
 			.setCheck("dict")
 
-			.appendField(Blockly.Msg.DICT_GET_TO);
+			.appendField(Blockly.Msg.Lang.DICT_GET_TO);
 
 		this.setInputsInline(!1);
 
@@ -42,7 +42,7 @@ Blockly.Blocks.dict_keys={
 
 			.setCheck("dict")
 
-			.appendField(Blockly.Msg.DICT_KEYS);
+			.appendField(Blockly.Msg.Lang.DICT_KEYS);
 
 		this.setInputsInline(!1);
 

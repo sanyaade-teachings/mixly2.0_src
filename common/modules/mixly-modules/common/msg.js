@@ -3,17 +3,30 @@
 goog.require('Mixly.MJSON');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
-goog.require('Blockly.Msg.zh-hans')
+goog.require('Blockly.Msg.ZhHans');
+goog.require('Blockly.Msg.ZhHant');
+goog.require('Blockly.Msg.En');
 goog.provide('Mixly.Msg');
 
-/*const { Msg, MJSON, Config } = Mixly;
+const {
+    Msg,
+    MJSON,
+    Config,
+    Env
+} = Mixly;
 
 const { USER } = Config;
 
+const {
+    ZhHans,
+    ZhHant,
+    En
+} = Blockly.Msg;
+
 Msg.LANG_PATH = {
-    "zh-hans": "./mixly-sw/msg/zh-hans.json",
-    "zh-hant": "./mixly-sw/msg/zh-hant.json",
-    "en": "./mixly-sw/msg/en.json"
+    "zh-hans": Env.msgPath + "./mixly/zh-hans.json",
+    "zh-hant": Env.msgPath + "./mixly/zh-hant.json",
+    "en": Env.msgPath + "./mixly/en.json"
 }
 
 Msg.LANG = {
@@ -28,6 +41,21 @@ Msg.getLang = (str) => {
     return Msg.LANG[Msg.nowLang][str];
 }
 
-console.log('Msg.LANG', Msg.LANG);*/
+Msg.changeTo = (lang) => {
+    Mixly.Msg.Lang = Msg.LANG[lang ?? 'zh-hans'];
+    switch (lang) {
+    case 'zh-hant':
+        Blockly.Msg.Lang = ZhHant;
+        break;
+    case 'en':
+        Blockly.Msg.Lang = En;
+        break;
+    default:
+        Blockly.Msg.Lang = ZhHans;
+    }
+}
+
+Msg.changeTo(Msg.nowLang);
+console.log('Msg.LANG', Msg.LANG);
 
 })();

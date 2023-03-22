@@ -105,12 +105,16 @@ goog.DEPENDENCIES = [
         "provide": ['Terminal'],
         "require": []
     }, {
-        "path": '/../web-modules/highcharts.js',
+        "path": '/../web-modules/highcharts.min.js',
         "provide": ['Highcharts'],
         "require": []
     }, {
         "path": '/../web-modules/pouchdb.min.js',
         "provide": ['PouchDB'],
+        "require": []
+    }, {
+        "path": '/../web-modules/avr-uploader.min.js',
+        "provide": ['AvrUploader'],
         "require": []
     }, {
         "path": '/../web-modules/ace/ace.js',

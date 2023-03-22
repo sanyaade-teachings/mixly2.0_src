@@ -19,7 +19,7 @@ Blockly.Blocks['iot_wifi_connect'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_ESP32_IOT_WIFI_CONNECT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_WIFI_CONNECT_TOOLTIP);
 }
 };
 
@@ -32,30 +32,30 @@ Blockly.Blocks['iot_onenet_connect'] = {
     this.appendValueInput('CLIENT')
 		.setAlign(Blockly.ALIGN_RIGHT)
     .setCheck(String)
-    .appendField(Blockly.MIXLY_ESP32_ONENET_CLIENT);
+    .appendField(Blockly.Msg.MIXLY_ESP32_ONENET_CLIENT);
     this.appendValueInput('SERVER')
 		.setAlign(Blockly.ALIGN_RIGHT)
     .setCheck(String)
-    .appendField(Blockly.MIXLY_ESP32_ONENET_SERVER);
+    .appendField(Blockly.Msg.MIXLY_ESP32_ONENET_SERVER);
     this.appendValueInput('USERNAME')
 		.setAlign(Blockly.ALIGN_RIGHT)
     .setCheck(String)
-    .appendField(Blockly.MIXLY_ESP32_ONENET_USERNAME);
+    .appendField(Blockly.Msg.MIXLY_ESP32_ONENET_USERNAME);
     this.appendValueInput('PASSWORD')
 		.setAlign(Blockly.ALIGN_RIGHT)
     .setCheck(String)
-    .appendField(Blockly.MIXLY_ESP32_ONENET_PASSWORD);
+    .appendField(Blockly.Msg.MIXLY_ESP32_ONENET_PASSWORD);
     this.appendValueInput('TOPIC')
 		.setAlign(Blockly.ALIGN_RIGHT)
     .setCheck(String)
-    .appendField(Blockly.MIXLY_ESP32_ONENET_TOPIC);
+    .appendField(Blockly.Msg.MIXLY_ESP32_ONENET_TOPIC);
     this.appendValueInput('SUB')
 		.setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_ESP32_ONENET_SUB);
+    .appendField(Blockly.Msg.MIXLY_ESP32_ONENET_SUB);
     //this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_ESP32_IOT_ONENET_CONNECT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_CONNECT_TOOLTIP);
 }
 };
 
@@ -66,11 +66,11 @@ Blockly.Blocks['iot_onenet_disconnect'] = {
     .setCheck("var")
     .appendField("OneNET")
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_ESP32_DISCONNECT_ONENET);
+    .appendField(Blockly.Msg.MIXLY_ESP32_DISCONNECT_ONENET);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_ESP32_IOT_ONENET_DISCONNECT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_DISCONNECT_TOOLTIP);
 }
 };
 
@@ -81,11 +81,11 @@ Blockly.Blocks['iot_onenet_check'] = {
     .setCheck("var")
     .appendField("OneNET")
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_ESP32_CHECK_ONENET);
+    .appendField(Blockly.Msg.MIXLY_ESP32_CHECK_ONENET);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_ESP32_IOT_ONENET_CHECK_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_CHECK_TOOLTIP);
 }
 };
 
@@ -96,14 +96,14 @@ Blockly.Blocks['iot_onenet_publish_dict'] = {
     .setCheck("var")
     .appendField("OneNET")
     this.appendValueInput('DICT')
-    .appendField(Blockly.MIXLY_ESP32_PUBLISH_ONENET);
+    .appendField(Blockly.Msg.MIXLY_ESP32_PUBLISH_ONENET);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_ESP32_IOT_ONENET_PRINT_DATA)
+    .appendField(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_PRINT_DATA)
     .appendField(new Blockly.FieldCheckbox('TRUE'), 'is_print');
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_ESP32_IOT_ONENET_PUBLISH_DICT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_PUBLISH_DICT_TOOLTIP);
 }
 };
 
@@ -119,7 +119,7 @@ Blockly.Blocks['iot_onenet_publish'] = {
         .appendField("OneNET")
         .setAlign(Blockly.ALIGN_RIGHT)
         this.appendDummyInput()
-        .appendField(new Blockly.FieldLabel(Blockly.MIXLY_ESP32_PUBLISH_ONENET), 'TIP')
+        .appendField(new Blockly.FieldLabel(Blockly.Msg.MIXLY_ESP32_PUBLISH_ONENET), 'TIP')
         .setAlign(Blockly.ALIGN_RIGHT)
         this.itemCount_ = 2;
         this.updateShape_();
@@ -127,7 +127,7 @@ Blockly.Blocks['iot_onenet_publish'] = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setMutator(new Blockly.Mutator(['iot_publish_item']));
-        this.setTooltip(Blockly.MIXLY_ESP32_IOT_ONENET_PUBLISH_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_PUBLISH_TOOLTIP);
     },
     /**
      * Create XML to represent list inputs.
@@ -227,10 +227,10 @@ Blockly.Blocks['iot_onenet_publish'] = {
         // Rebuild block.
         if (this.itemCount_ == 0) {
             this.getField('TIP')
-            .setValue(Blockly.MIXLY_ESP32_PUBLISH_ONENET_EMPTY);
+            .setValue(Blockly.Msg.MIXLY_ESP32_PUBLISH_ONENET_EMPTY);
         } else {
             this.getField('TIP')
-            .setValue(Blockly.MIXLY_ESP32_PUBLISH_ONENET);
+            .setValue(Blockly.Msg.MIXLY_ESP32_PUBLISH_ONENET);
             for (var i = 0; i < this.itemCount_; i++) {
                 this.appendValueInput('ADD' + i)
                 .setCheck(null)
@@ -262,7 +262,7 @@ Blockly.Blocks['iot_publish_container'] = {
    init: function() {
     this.setColour(Blockly.Msg['IOT_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_MICROBIT_TYPE_DICT);
+    .appendField(Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT);
     this.appendStatementInput('STACK');
     this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_CONTAINER_TOOLTIP);
     this.contextMenu = false;

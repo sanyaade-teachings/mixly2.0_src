@@ -25,23 +25,23 @@ goog.DEPENDENCIES = [
         "provide": ['Blockly'],
         "require": []
     }, {
-        "path": '/../../blockly-core/field_grid_dropdown.js',
+        "path": '/../../blockly-core/plugins/field_grid_dropdown.js',
         "provide": ['Blockly.FieldGridDropdown'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/field_slider.js',
+        "path": '/../../blockly-core/plugins/field_slider.js',
         "provide": ['Blockly.FieldSlider'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/field_bitmap.js',
+        "path": '/../../blockly-core/plugins/field_bitmap.js',
         "provide": ['Blockly.FieldBitmap'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/field_colour_hsv_sliders.js',
+        "path": '/../../blockly-core/plugins/field_colour_hsv_sliders.js',
         "provide": ['Blockly.FieldColourHsvSliders'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/field_date.js',
+        "path": '/../../blockly-core/plugins/field_date.js',
         "provide": ['Blockly.FieldDate'],
         "require": ['Blockly']
     }/*, {
@@ -49,19 +49,19 @@ goog.DEPENDENCIES = [
         "provide": ['ContinuousToolbox', 'ContinuousFlyout', 'ContinuousMetrics'],
         "require": ['Blockly']
     }*/, {
-        "path": '/../../blockly-core/workspace_search.js',
+        "path": '/../../blockly-core/plugins/workspace_search.js',
         "provide": ['WorkspaceSearch'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/workspace_backpack.js',
+        "path": '/../../blockly-core/plugins/workspace_backpack.js',
         "provide": ['Backpack'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/content_highlight.js',
+        "path": '/../../blockly-core/plugins/content_highlight.js',
         "provide": ['ContentHighlight'],
         "require": ['Blockly']
     }, {
-        "path": '/../../blockly-core/zoom_to_fit.js',
+        "path": '/../../blockly-core/plugins/zoom_to_fit.js',
         "provide": ['ZoomToFitControl'],
         "require": ['Blockly']
     }, {
@@ -132,6 +132,10 @@ goog.DEPENDENCIES = [
         "path": '/web-compiler/avr-uploader.js',
         "provide": ['AvrUploader'],
         "require": []
+    }, {
+        "path": '/../../msg/zh-hans.js',
+        "provide": ['Blockly.Msg.zh-hans'],
+        "require": ['Blockly']
     }
 ];
 
@@ -227,6 +231,8 @@ goog.initDependencies = () => {
 
 goog.initDependencies();
 
+goog.require('Blockly');
+goog.require('Blockly.Msg.zh-hans');
 goog.require('Mixly.Loading');
 goog.require('Mixly.JSFuncs');
 goog.require('Mixly.Interface');

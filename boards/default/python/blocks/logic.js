@@ -113,7 +113,7 @@ Blockly.Blocks['logic_compare_continous'] = {
     this.appendValueInput('C')
         .appendField(new Blockly.FieldDropdown(OPERATORS2), 'OP2');    
     this.setInputsInline(true);    
-    this.setTooltip(Blockly.MIXLY_PYTHON_LOGIC_COMPARE_CONTINOUS_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_LOGIC_COMPARE_CONTINOUS_TOOLTIP);
     
   }
 };
@@ -212,7 +212,7 @@ Blockly.Blocks['logic_true_or_false'] = {
         .appendField(Blockly.Msg.LOGIC_TERNARY_IF_FALSE);
 	this.setOutput(true);
     this.setInputsInline(true);
-	this.setTooltip(Blockly.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
+	this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
   }
 };
 
@@ -220,7 +220,7 @@ Blockly.Blocks['logic_is_in'] = {
   init: function() {
     var BOOLEANS =
         [[Blockly.Msg.TEXT_APPEND_TO, 'in'],
-         [Blockly.MIXLY_PYTHON_LOGIC_IS_NOT_IN, 'not in']];
+         [Blockly.Msg.MIXLY_PYTHON_LOGIC_IS_NOT_IN, 'not in']];
     this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('A');
     this.appendValueInput('B')
@@ -228,26 +228,26 @@ Blockly.Blocks['logic_is_in'] = {
         //.appendField(Blockly.Msg.TEXT_APPEND_TO)
         .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
     this.appendDummyInput("")
-        .appendField(Blockly.MICROBIT_LOGIC_IS_IN);
+        .appendField(Blockly.Msg.MICROBIT_LOGIC_IS_IN);
     this.setOutput(true, Boolean);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg_IN);
+    this.setTooltip(Blockly.Msg.IN);
   }
 };
 
 Blockly.Blocks['logic_is'] = {
   init: function() {
     var BOOLEANS =
-        [[Blockly.MIXLY_PYTHON_LOGIC_IS, 'is'],
-         [Blockly.MIXLY_PYTHON_LOGIC_IS_NOT, 'is not']];
+        [[Blockly.Msg.MIXLY_PYTHON_LOGIC_IS, 'is'],
+         [Blockly.Msg.MIXLY_PYTHON_LOGIC_IS_NOT, 'is not']];
     this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('A');
     this.appendValueInput('B')
         .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
-        //.appendField(Blockly.MIXLY_PYTHON_LOGIC_IS);    
+        //.appendField(Blockly.Msg.MIXLY_PYTHON_LOGIC_IS);    
     this.setOutput(true, Boolean);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.MIXLY_PYTHON_LOGIC_IS_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_LOGIC_IS_TOOLTIP);
   }
 };
 
@@ -255,8 +255,8 @@ Blockly.Blocks['logic_tobool'] = {
   init: function () {
     this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.appendValueInput('VAR')
-    .appendField(Blockly.MIXLY_TOBOOL);
+    .appendField(Blockly.Msg.MIXLY_TOBOOL);
     this.setOutput(true, Boolean);
-    this.setTooltip(Blockly.MIXLY_PYTHON_TOOLTIP_TOBOOL);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOBOOL);
   }
 };

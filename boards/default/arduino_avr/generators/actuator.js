@@ -99,7 +99,7 @@ Blockly.Arduino.controls_tone = function () {
         this.setWarningText(null);
     }
     else {
-        this.setWarningText(Blockly.IR_AND_TONE_WARNING);
+        this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }
 
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
@@ -122,7 +122,7 @@ Blockly.Arduino.controls_notone = function () {
         this.setWarningText(null);
     }
     else {
-        this.setWarningText(Blockly.IR_AND_TONE_WARNING);
+        this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }
 
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);

@@ -147,6 +147,6 @@ Blockly.Blocks['logic_true_or_false'] = {
             .appendField(Blockly.Msg.LOGIC_TERNARY_IF_FALSE);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
     }
 };

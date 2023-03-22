@@ -141,7 +141,7 @@ Blockly.Blocks['factory_create_with_container'] = {
   init: function() {
     this.setColour(Blockly.Msg['FACTORY_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_PARAMS);
+    .appendField(Blockly.Msg.MIXLY_PARAMS);
     this.appendStatementInput('STACK');
     this.contextMenu = false;
   }

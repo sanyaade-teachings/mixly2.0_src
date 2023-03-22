@@ -9,21 +9,20 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Url');
-goog.require('Mixly.CloudDownload');
-goog.require('Mixly.PythonShell');
+goog.require('Mixly.Electron.CloudDownload');
+goog.require('Mixly.Electron.PythonShell');
 goog.provide('Mixly.BoardManager');
 
 const {
     Modules,
     Env,
-    CloudDownload,
     Msg,
     XML,
     LayerExt,
     Config,
     MArray,
     Url,
-    PythonShell,
+    Electron,
     BoardManager
 } = Mixly;
 
@@ -52,6 +51,11 @@ const {
     USER,
     BOARD_PAGE
 } = Config;
+
+const {
+    PythonShell,
+    CloudDownload
+} = Electron;
 
 /*BoardManager.ERROR = {
     "CONFIG_PARSE_ERROR": 0,

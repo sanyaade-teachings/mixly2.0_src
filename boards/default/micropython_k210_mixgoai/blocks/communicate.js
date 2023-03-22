@@ -10,12 +10,12 @@ Blockly.Blocks['communicate_ir_recv'] = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('PIN')
-            .appendField(Blockly.MIXLY_IR_RECEIVE);
+            .appendField(Blockly.Msg.MIXLY_IR_RECEIVE);
 		this.appendDummyInput()
 			.appendField("获取编码");
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_I2C_SCAN);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_I2C_SCAN);
     }
 };
 
@@ -25,7 +25,7 @@ Blockly.Blocks['communicate_i2c_init'] = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('SUB')
-            .appendField("I2C " + Blockly.MIXLY_SETUP)
+            .appendField("I2C " + Blockly.Msg.MIXLY_SETUP)
             .setCheck("var");
         this.appendValueInput("TX", Number)
             .appendField("SCL#")
@@ -40,12 +40,12 @@ Blockly.Blocks['communicate_i2c_init'] = {
 			.appendField(new Blockly.FieldDropdown([['0', 'I2C0'], ['1', 'I2C1'], ['2', 'I2C2']]), 'mode'); 
         this.appendValueInput('freq')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_FREQUENCY)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_I2C_INIT);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_I2C_INIT);
     }
 };
 
@@ -81,7 +81,7 @@ Blockly.Blocks['communicate_i2s_init'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_I2C_INIT);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_I2C_INIT);
     }
 };
 
@@ -97,13 +97,13 @@ Blockly.Blocks['communicate_i2c_read'] = {
             .setCheck("var");
         this.appendValueInput('address')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_ESP32_RNUMBER);
+            .appendField(Blockly.Msg.MIXLY_ESP32_RNUMBER);
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.LANG_MATH_BYTE);
+            .appendField(Blockly.Msg.LANG_MATH_BYTE);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_I2C_READ);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_READ);
     }
 }
 
@@ -115,14 +115,14 @@ Blockly.Blocks['communicate_i2c_write'] = {
             .setCheck("var");
         this.appendValueInput('address')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_ESP32_WNUMBER);
+            .appendField(Blockly.Msg.MIXLY_ESP32_WNUMBER);
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_VALUE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_VALUE);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_I2C_WRITE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_WRITE);
     }
 }
 
@@ -131,12 +131,12 @@ Blockly.Blocks['communicate_i2c_scan'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck("var")
-            .appendField(Blockly.MIXLY_ESP32_I2C_SCAN1);
+            .appendField(Blockly.Msg.MIXLY_ESP32_I2C_SCAN1);
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ESP32_I2C_SCAN2);
+            .appendField(Blockly.Msg.MIXLY_ESP32_I2C_SCAN2);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_I2C_SCAN);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_I2C_SCAN);
     }
 }
 
@@ -145,10 +145,10 @@ Blockly.Blocks['communicate_spi_init'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_ESP32_SPI_INIT);
+            .appendField(Blockly.Msg.MIXLY_ESP32_SPI_INIT);
         this.appendValueInput('freq')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_SERIAL_BEGIN);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN);
         this.appendValueInput('polarity')
             .setCheck(Number)
             .appendField('polarity');
@@ -167,7 +167,7 @@ Blockly.Blocks['communicate_spi_init'] = {
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_INIT_TOOLTIP);   
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_INIT_TOOLTIP);   
     }
 };
 
@@ -176,14 +176,14 @@ Blockly.Blocks['communicate_spi_set'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_SETTING + " SPI")
+            .appendField(Blockly.Msg.MIXLY_SETTING + " SPI")
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_SERIAL_BEGIN);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_SET);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_SET);
     }
 };
 
@@ -192,14 +192,14 @@ Blockly.Blocks['communicate_spi_buffer'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_ESP32_SET + 'SPI');
+            .appendField(Blockly.Msg.MIXLY_ESP32_SET + 'SPI');
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_ESP32_SPI_BUFFER);
+            .appendField(Blockly.Msg.MIXLY_ESP32_SPI_BUFFER);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_BUFFER_SET);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_BUFFER_SET);
     }
 };
 
@@ -211,12 +211,12 @@ Blockly.Blocks['communicate_spi_read'] = {
             .appendField('SPI');
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_SERIAL_READ);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_READ);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.LANG_MATH_BYTE)
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.Msg.LANG_MATH_BYTE)
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_READ);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_READ);
     }
 }
 
@@ -228,14 +228,14 @@ Blockly.Blocks['communicate_spi_read_output'] = {
             .appendField('SPI');
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_SERIAL_READ);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_READ);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.LANG_MATH_BYTE + ',' + Blockly.MIXLY_ESP32_SPI_OUTPUT);
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER2 + Blockly.Msg.LANG_MATH_BYTE + ',' + Blockly.Msg.MIXLY_ESP32_SPI_OUTPUT);
         this.appendValueInput('val')
             .setCheck(Number);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_READ_OUTPUT);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_READ_OUTPUT);
     }
 }
 
@@ -247,10 +247,10 @@ Blockly.Blocks['communicate_spi_readinto'] = {
             .appendField('SPI');
         this.appendValueInput('data')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_SERIAL_READ + Blockly.MIXLY_ESP32_SPI_BUFFER);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_READ + Blockly.Msg.MIXLY_ESP32_SPI_BUFFER);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_READINTO);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_READINTO);
     }
 }
 
@@ -262,13 +262,13 @@ Blockly.Blocks['communicate_spi_readinto_output'] = {
             .appendField('SPI');
         this.appendValueInput('data')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_SERIAL_READ + Blockly.MIXLY_ESP32_SPI_BUFFER);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_READ + Blockly.Msg.MIXLY_ESP32_SPI_BUFFER);
         this.appendValueInput('val')
             .setCheck(Number)
-            .appendField(',' + Blockly.MIXLY_ESP32_SPI_OUTPUT);
+            .appendField(',' + Blockly.Msg.MIXLY_ESP32_SPI_OUTPUT);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_READINTO_OUTPUT);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_READINTO_OUTPUT);
     }
 }
 
@@ -280,10 +280,10 @@ Blockly.Blocks['communicate_spi_write'] = {
             .appendField('SPI');
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(Blockly.MIXLY_ESP32_WRITE);
+            .appendField(Blockly.Msg.MIXLY_ESP32_WRITE);
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_WRITE);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_WRITE);
     }
 };
 
@@ -295,17 +295,17 @@ Blockly.Blocks['communicate_spi_write_readinto'] = {
             .appendField('SPI');
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(Blockly.MIXLY_ESP32_WRITE)
+            .appendField(Blockly.Msg.MIXLY_ESP32_WRITE)
             // .appendField(new Blockly.FieldDropdown([
-            //     [Blockly.LANG_MATH_BYTE, "byte"],
-            //     [Blockly.MIXLY_ESP32_SPI_BUFFER, "buffer"]
+            //     [Blockly.Msg.LANG_MATH_BYTE, "byte"],
+            //     [Blockly.Msg.MIXLY_ESP32_SPI_BUFFER, "buffer"]
             // ]), "op");
         this.appendValueInput('val')
             .setCheck('var')
-            .appendField(',' + Blockly.MIXLY_ESP32_BUFFER_READ);
+            .appendField(',' + Blockly.Msg.MIXLY_ESP32_BUFFER_READ);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SPI_WRITE_READINTO);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SPI_WRITE_READINTO);
     }
 };
 
@@ -316,7 +316,7 @@ Blockly.Blocks.communicate_i2c_master_read = {
             .setCheck("var")
             .appendField("I2C");
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ESP32_READ);
+            .appendField(Blockly.Msg.MIXLY_ESP32_READ);
         this.setOutput(true, Number);
     }
 };
@@ -326,11 +326,11 @@ Blockly.Blocks.communicate_i2c_available = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck("var")
-            .appendField(Blockly.MIXLY_ESP32_READ + "I2C");
+            .appendField(Blockly.Msg.MIXLY_ESP32_READ + "I2C");
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ESP32_SUCCESS);
+            .appendField(Blockly.Msg.MIXLY_ESP32_SUCCESS);
         this.setOutput(true, Boolean);
-        this.setTooltip(Blockly.MIXLY_ESP32_I2C_AVAILABLE);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_I2C_AVAILABLE);
     }
 };
 
@@ -338,10 +338,10 @@ Blockly.Blocks.i2c_slave_onreceive = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput("PIN", Number)
-            .appendField(Blockly.MIXLY_I2C_SLAVE_ONRECEIVE)
+            .appendField(Blockly.Msg.MIXLY_I2C_SLAVE_ONRECEIVE)
             .setCheck(Number);
         this.appendStatementInput('DO')
-            .appendField(Blockly.MIXLY_DO);
+            .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
     }
@@ -355,11 +355,11 @@ Blockly.Blocks['communicate_ow_init'] = {
             .appendField('OneWire');
         this.appendValueInput('BUS')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_SETUP+' '+Blockly.MIXLY_PIN);
+            .appendField(Blockly.Msg.MIXLY_SETUP+' '+Blockly.Msg.MIXLY_PIN);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_OW_INIT);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_OW_INIT);
     }
 };
 
@@ -370,9 +370,9 @@ Blockly.Blocks['communicate_ow_scan'] = {
             .setCheck('var')
             .appendField('OneWire');
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ESP32_ONEWIRE_SCAN);
+            .appendField(Blockly.Msg.MIXLY_ESP32_ONEWIRE_SCAN);
         this.setOutput(true, 'List');
-        this.setTooltip(Blockly.MIXLY_ESP32_OW_SCAN);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_OW_SCAN);
     }
 };
 
@@ -383,9 +383,9 @@ Blockly.Blocks['communicate_ow_read'] = {
             .setCheck('var')
             .appendField('OneWire');
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ESP32_ONEWIRE_READ);
+            .appendField(Blockly.Msg.MIXLY_ESP32_ONEWIRE_READ);
         this.setOutput(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_OW_READ);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_OW_READ);
     }
 };
 
@@ -396,17 +396,17 @@ Blockly.Blocks['communicate_ow_write'] = {
             .setCheck('var')
             .appendField('OneWire');
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_ESP32_WRITE)
+            .appendField(Blockly.Msg.MIXLY_ESP32_WRITE)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.LANG_MATH_STRING, "write"],
-                [Blockly.LANG_MATH_BYTE, "writebyte"]
+                [Blockly.Msg.LANG_MATH_STRING, "write"],
+                [Blockly.Msg.LANG_MATH_BYTE, "writebyte"]
             ]), "op");
         this.appendValueInput('byte')
             .setCheck([Number,String]);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_OW_WRITE);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_OW_WRITE);
     }
 };
 
@@ -415,14 +415,14 @@ Blockly.Blocks['communicate_ow_select'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_ESP32_ONEWIRE_SELECT)
+            .appendField(Blockly.Msg.MIXLY_ESP32_ONEWIRE_SELECT)
         this.appendValueInput('byte')
             .setCheck(String)
             .appendField("ROM");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_OW_SELECT);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_OW_SELECT);
     }
 };
 
@@ -432,11 +432,11 @@ Blockly.Blocks['communicate_ow_reset'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
             .setCheck('var')
-            .appendField(Blockly.MIXLY_ESP32_ONEWIRE_RESET);
+            .appendField(Blockly.Msg.MIXLY_ESP32_ONEWIRE_RESET);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setOutput(false);
-        this.setTooltip(Blockly.MIXLY_ESP32_OW_RESET);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_OW_RESET);
     }
 };
 

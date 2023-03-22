@@ -6,7 +6,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.BoardManager');
 goog.require('Mixly.XML');
-goog.require('Mixly.PythonShell');
+goog.require('Mixly.Electron.PythonShell');
 goog.require('Mixly.Msg');
 goog.require('Mixly.XML');
 goog.require('Mixly.Setting');
@@ -19,13 +19,15 @@ const {
     Config,
     BoardManager,
     XML,
-    PythonShell,
+    Electron,
     Interface
 } = Mixly;
 
 const { carousel } = layui;
 
 const { BOARD_PAGE } = Config;
+
+const { PythonShell } = Electron;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_STR['INTERFACE']);

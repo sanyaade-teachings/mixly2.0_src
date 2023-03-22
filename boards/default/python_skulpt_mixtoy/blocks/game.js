@@ -5,7 +5,7 @@ goog.require('Blockly.Blocks');
 // Blockly.Blocks['game_init'] = {
 //     init: function() {
 //     this.appendDummyInput()
-//     .appendField(Blockly.MIXLY_GAME_INIT);
+//     .appendField(Blockly.Msg.MIXLY_GAME_INIT);
 //     this.setPreviousStatement(true); 
 //     this.setNextStatement(true);
 //     this.setColour(290);
@@ -16,8 +16,8 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks['initSettedMap'] = {
   init: function() {
   this.appendDummyInput()
-    .appendField(Blockly.MIXLY_GAME_INIT_AS)
-    .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_ONE,'0'],[Blockly.MIXLY_GAME_TWO,'1'],[Blockly.MIXLY_GAME_THREE,'2'],[Blockly.MIXLY_GAME_FOUR,'3'],[Blockly.MIXLY_GAME_FIVE,'4'],[Blockly.MIXLY_GAME_SIX,'5']]), "level");
+    .appendField(Blockly.Msg.MIXLY_GAME_INIT_AS)
+    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_ONE,'0'],[Blockly.Msg.MIXLY_GAME_TWO,'1'],[Blockly.Msg.MIXLY_GAME_THREE,'2'],[Blockly.Msg.MIXLY_GAME_FOUR,'3'],[Blockly.Msg.MIXLY_GAME_FIVE,'4'],[Blockly.Msg.MIXLY_GAME_SIX,'5']]), "level");
   this.setInputsInline(true);
   this.setNextStatement(true);
   this.setColour(290);
@@ -31,7 +31,7 @@ Blockly.Blocks['game_init'] = {
   this.setColour(290);
   this.setTooltip('');
   this.appendStatementInput('DO0')
-  .appendField(Blockly.MIXLY_GAME_INIT);
+  .appendField(Blockly.Msg.MIXLY_GAME_INIT);
 } 
 };
 
@@ -39,14 +39,14 @@ Blockly.Blocks['game_init'] = {
 Blockly.Blocks['move_direction_steps'] = {
     init: function() {
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_TOWARD)
-      .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_RIGHT,'1'],[Blockly.MIXLY_GAME_DOWN,'2'],[Blockly.MIXLY_GAME_LEFT,'3'],[Blockly.MIXLY_GAME_UP,'0']]), "direction");
+      .appendField(Blockly.Msg.MIXLY_GAME_TOWARD)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_RIGHT,'1'],[Blockly.Msg.MIXLY_GAME_DOWN,'2'],[Blockly.Msg.MIXLY_GAME_LEFT,'3'],[Blockly.Msg.MIXLY_GAME_UP,'0']]), "direction");
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_MOVE);
+      .appendField(Blockly.Msg.MIXLY_GAME_MOVE);
     this.appendValueInput("times")
       .setCheck(Number)
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_STEP);
+      .appendField(Blockly.Msg.MIXLY_GAME_STEP);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -83,7 +83,7 @@ Blockly.Blocks['move_direction_steps'] = {
 // Blockly.Blocks.move_backward= {
 //   init: function() {
 //     this.appendDummyInput()
-//           .appendField(Blockly.MIXLY_GAME_MOVE_BACKWARD);
+//           .appendField(Blockly.Msg.MIXLY_GAME_MOVE_BACKWARD);
 //   this.setPreviousStatement(true, null);
 //   this.setNextStatement(true, null);
 //   this.setColour(290);
@@ -94,17 +94,17 @@ Blockly.Blocks['move_direction_steps'] = {
 Blockly.Blocks.move_related_to_spirite= {
   init: function() {
      var Directions =
-        [[Blockly.MIXLY_GAME_FORWARD, 'f'],
-         [Blockly.MIXLY_GAME_BACKWARD, 'b']];
+        [[Blockly.Msg.MIXLY_GAME_FORWARD, 'f'],
+         [Blockly.Msg.MIXLY_GAME_BACKWARD, 'b']];
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_RE_SPIRITE)
-        .appendField(Blockly.MIXLY_GAME_TOWARD)
+        .appendField(Blockly.Msg.MIXLY_RE_SPIRITE)
+        .appendField(Blockly.Msg.MIXLY_GAME_TOWARD)
         .appendField(new Blockly.FieldDropdown(Directions), 'Direction')
-        .appendField(Blockly.MIXLY_GAME_MOVE);
+        .appendField(Blockly.Msg.MIXLY_GAME_MOVE);
     this.appendValueInput("times")
         .setCheck(Number)
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_GAME_STEP);
+        .appendField(Blockly.Msg.MIXLY_GAME_STEP);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
   this.setColour(290);
@@ -118,13 +118,13 @@ Blockly.Blocks.move_related_to_spirite= {
 Blockly.Blocks.Turn= {
   init: function() {
      var Directions =
-        [[Blockly.MIXLY_GAME_TURN_LEFT, 'left'],
-         [Blockly.MIXLY_GAME_TURN_RIGHT, 'right']];
+        [[Blockly.Msg.MIXLY_GAME_TURN_LEFT, 'left'],
+         [Blockly.Msg.MIXLY_GAME_TURN_RIGHT, 'right']];
     this.appendDummyInput()
-          .appendField(Blockly.MIXLY_RE_SPIRITE)
-          .appendField(Blockly.MIXLY_GAME_TOWARD)
+          .appendField(Blockly.Msg.MIXLY_RE_SPIRITE)
+          .appendField(Blockly.Msg.MIXLY_GAME_TOWARD)
         .appendField(new Blockly.FieldDropdown(Directions), 'Direction')
-          .appendField(Blockly.MIXLY_GAME_TURN);
+          .appendField(Blockly.Msg.MIXLY_GAME_TURN);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
   this.setColour(290);
@@ -136,7 +136,7 @@ Blockly.Blocks.Turn= {
 Blockly.Blocks.isDone= {
   init: function() {
     this.appendDummyInput()
-          .appendField(Blockly.MIXLY_GAME_ISDONE);
+          .appendField(Blockly.Msg.MIXLY_GAME_ISDONE);
   this.setOutput(true, null);
   this.setColour(290);
   this.setTooltip('');
@@ -147,13 +147,13 @@ Blockly.Blocks.isDone= {
 Blockly.Blocks.isPath= {
   init: function() {
     var Directions =
-        [[Blockly.MIXLY_GAME_UP, "0"],
-         [Blockly.MIXLY_GAME_DOWN, "2"],
-        [Blockly.MIXLY_GAME_RIGHT, "1"],
-        [Blockly.MIXLY_GAME_LEFT, "3"]];
+        [[Blockly.Msg.MIXLY_GAME_UP, "0"],
+         [Blockly.Msg.MIXLY_GAME_DOWN, "2"],
+        [Blockly.Msg.MIXLY_GAME_RIGHT, "1"],
+        [Blockly.Msg.MIXLY_GAME_LEFT, "3"]];
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(Directions), 'Direction')
-          .appendField(Blockly.MIXLY_GAME_ISPATH);
+          .appendField(Blockly.Msg.MIXLY_GAME_ISPATH);
   this.setOutput(true, null);
   this.setColour(290);
   this.setTooltip('');
@@ -163,11 +163,11 @@ Blockly.Blocks.isPath= {
 
 Blockly.Blocks.is_Related_Path= {
   init: function() {
-    var Directions =[[Blockly.MIXLY_GAME_FORWARD,"f"],[Blockly.MIXLY_GAME_BACKWARD,"b"],[Blockly.MIXLY_GAME_LEFT,"l"],[Blockly.MIXLY_GAME_RIGHT,"r"]];
+    var Directions =[[Blockly.Msg.MIXLY_GAME_FORWARD,"f"],[Blockly.Msg.MIXLY_GAME_BACKWARD,"b"],[Blockly.Msg.MIXLY_GAME_LEFT,"l"],[Blockly.Msg.MIXLY_GAME_RIGHT,"r"]];
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_RE_SPIRITE)
+      .appendField(Blockly.Msg.MIXLY_RE_SPIRITE)
       .appendField(new Blockly.FieldDropdown(Directions), 'Direction')
-      .appendField(Blockly.MIXLY_GAME_ISPATH);
+      .appendField(Blockly.Msg.MIXLY_GAME_ISPATH);
   this.setOutput(true, null);
   this.setColour(290);
   this.setTooltip('');
@@ -180,7 +180,7 @@ Blockly.Blocks.set_map_bg={
   init:function(){
     this.appendValueInput("background")
         .setCheck(null)
-        .appendField(Blockly.Msg.LISTS_SET_INDEX_SET+Blockly.MIXLY_GAME_BACKGROUND);       
+        .appendField(Blockly.Msg.LISTS_SET_INDEX_SET+Blockly.Msg.MIXLY_GAME_BACKGROUND);       
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -197,12 +197,12 @@ Blockly.Blocks.set_map= {
     //     .appendField("设置地图：长");
     this.appendValueInput("x")
         .setCheck(Number)
-          .appendField(Blockly.MIXLY_GAME_SETMAP+Blockly.MIXLY_GAME_LENGTH_IS);
+          .appendField(Blockly.Msg.MIXLY_GAME_SETMAP+Blockly.Msg.MIXLY_GAME_LENGTH_IS);
     this.appendValueInput("y")
         .setCheck(Number)
-          .appendField(Blockly.MIXLY_GAME_WIDTH_IS);
+          .appendField(Blockly.Msg.MIXLY_GAME_WIDTH_IS);
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_GAME_STARTPOS_IS+"(");
+        .appendField(Blockly.Msg.MIXLY_GAME_STARTPOS_IS+"(");
     this.appendValueInput("startPos_x")
         .setCheck(Number)
     this.appendDummyInput()
@@ -212,7 +212,7 @@ Blockly.Blocks.set_map= {
     this.appendDummyInput()
         .appendField(")");
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_GAME_ENDPOS_IS+"(");
+        .appendField(Blockly.Msg.MIXLY_GAME_ENDPOS_IS+"(");
     this.appendValueInput("endPos_x")
         .setCheck(Number)
     this.appendDummyInput()
@@ -336,7 +336,7 @@ Blockly.Blocks.set_pathtype= {
   init: function() {
     this.appendValueInput("pathtype")
         .setCheck(null)
-          .appendField(Blockly.MIXLY_GAME_SETPATHTYPE);
+          .appendField(Blockly.Msg.MIXLY_GAME_SETPATHTYPE);
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -454,8 +454,8 @@ Blockly.Blocks.place_item = {
         .setCheck(null)
         .appendField("");  
     this.appendDummyInput()
-      .appendField(')'+Blockly.MIXLY_GAME_LAY)
-      .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_WALL,"'wall'"],[Blockly.MIXLY_GAME_BARRIER,"'barrier'"],[Blockly.MIXLY_GAME_COIN,"'coin'"],[Blockly.MIXLY_GAME_REDMARKER,"'redmarker'"],[Blockly.MIXLY_GAME_YELLOWMARKER,"'yellowmarker'"],[Blockly.MIXLY_GAME_BLUEMARKER,"'bluemarker'"],[Blockly.MIXLY_GAME_GREENMARKER,"'greenmarker'"]]), "item");
+      .appendField(')'+Blockly.Msg.MIXLY_GAME_LAY)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_WALL,"'wall'"],[Blockly.Msg.MIXLY_GAME_BARRIER,"'barrier'"],[Blockly.Msg.MIXLY_GAME_COIN,"'coin'"],[Blockly.Msg.MIXLY_GAME_REDMARKER,"'redmarker'"],[Blockly.Msg.MIXLY_GAME_YELLOWMARKER,"'yellowmarker'"],[Blockly.Msg.MIXLY_GAME_BLUEMARKER,"'bluemarker'"],[Blockly.Msg.MIXLY_GAME_GREENMARKER,"'greenmarker'"]]), "item");
   this.setTooltip('');
   }
 };
@@ -565,13 +565,13 @@ Blockly.Blocks.initialize = {
     this.setColour(290);
     this.appendValueInput("character")
         .setCheck(null)
-        .appendField(Blockly.MIXLY_GAME_INIT_CHARA)
-    this.appendDummyInput() .appendField(Blockly.MIXLY_GAME_FACE+Blockly.MIXLY_GAME_RIGHT);
+        .appendField(Blockly.Msg.MIXLY_GAME_INIT_CHARA)
+    this.appendDummyInput() .appendField(Blockly.Msg.MIXLY_GAME_FACE+Blockly.Msg.MIXLY_GAME_RIGHT);
     // this.appendDummyInput()
     //     // .appendField('初始化角色为')
     //     // .appendField(new Blockly.FieldDropdown([["默认⼩⼈","0"],["熊猫","1"],["宇航员","2"],["机器⼈","3"]]), "character")
-    //     .appendField(Blockly.MIXLY_GAME_FACE)
-    //     .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_NORTH,"0"],[Blockly.MIXLY_GAME_SOUTH,"2"],[Blockly.MIXLY_GAME_WEST,"3"],[Blockly.MIXLY_GAME_EAST,"1"]]), "direction");
+    //     .appendField(Blockly.Msg.MIXLY_GAME_FACE)
+    //     .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_NORTH,"0"],[Blockly.Msg.MIXLY_GAME_SOUTH,"2"],[Blockly.Msg.MIXLY_GAME_WEST,"3"],[Blockly.Msg.MIXLY_GAME_EAST,"1"]]), "direction");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   this.setTooltip('');
@@ -582,7 +582,7 @@ Blockly.Blocks.get_actor_point = {
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_GETPOINT);
+      .appendField(Blockly.Msg.MIXLY_GAME_GETPOINT);
     this.setOutput(true, Number);
   this.setTooltip('');
   }
@@ -591,9 +591,9 @@ Blockly.Blocks.get_actor_point = {
 Blockly.Blocks.isBarrier= {
   init: function() {
     this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_UP,"0"],[Blockly.MIXLY_GAME_DOWN,"2"],[Blockly.MIXLY_GAME_LEFT,"3"],[Blockly.MIXLY_GAME_RIGHT,"1"]]), "direction");
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_UP,"0"],[Blockly.Msg.MIXLY_GAME_DOWN,"2"],[Blockly.Msg.MIXLY_GAME_LEFT,"3"],[Blockly.Msg.MIXLY_GAME_RIGHT,"1"]]), "direction");
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_ISBARRIER);
+      .appendField(Blockly.Msg.MIXLY_GAME_ISBARRIER);
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(290);
@@ -605,10 +605,10 @@ Blockly.Blocks.isBarrier= {
 Blockly.Blocks.is_Related_Barrier= {
   init: function() {
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_RE_SPIRITE)
-      .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_FORWARD,"f"],[Blockly.MIXLY_GAME_BACKWARD,"b"],[Blockly.MIXLY_GAME_LEFT,"l"],[Blockly.MIXLY_GAME_RIGHT,"r"]]), "direction");
+      .appendField(Blockly.Msg.MIXLY_RE_SPIRITE)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_FORWARD,"f"],[Blockly.Msg.MIXLY_GAME_BACKWARD,"b"],[Blockly.Msg.MIXLY_GAME_LEFT,"l"],[Blockly.Msg.MIXLY_GAME_RIGHT,"r"]]), "direction");
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_ISBARRIER);
+      .appendField(Blockly.Msg.MIXLY_GAME_ISBARRIER);
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(290);
@@ -620,7 +620,7 @@ Blockly.Blocks.is_Related_Barrier= {
 Blockly.Blocks['randomOil'] = {
   init: function() {
   this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_RANDOMCAROIL);
+      .appendField(Blockly.Msg.MIXLY_GAME_RANDOMCAROIL);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour(290);
@@ -631,7 +631,7 @@ Blockly.Blocks['randomOil'] = {
 Blockly.Blocks.isOilFull= {
   init: function() {
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_NEEDOIL);
+      .appendField(Blockly.Msg.MIXLY_GAME_NEEDOIL);
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');
@@ -642,7 +642,7 @@ Blockly.Blocks.isOilFull= {
 Blockly.Blocks.isLightGreen= {
   init: function() {
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_ISGREEN);
+      .appendField(Blockly.Msg.MIXLY_GAME_ISGREEN);
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');
@@ -653,7 +653,7 @@ Blockly.Blocks.isLightGreen= {
 Blockly.Blocks['addOil'] = {
   init: function() {
   this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_ADDOIL);
+      .appendField(Blockly.Msg.MIXLY_GAME_ADDOIL);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour(290);
@@ -664,7 +664,7 @@ Blockly.Blocks['addOil'] = {
 Blockly.Blocks['isCirculationRight'] = {
   init: function() {
   this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_CHECKCIRCURIGHT);
+      .appendField(Blockly.Msg.MIXLY_GAME_CHECKCIRCURIGHT);
   this.setPreviousStatement(true);
   this.setColour(290);
   this.setTooltip('');
@@ -675,9 +675,9 @@ Blockly.Blocks.checkMarker = {
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_CHECK_WHETHER_PASS); 
+      .appendField(Blockly.Msg.MIXLY_GAME_CHECK_WHETHER_PASS); 
     this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_REDMARKER,"'redmarker'"],[Blockly.MIXLY_GAME_YELLOWMARKER,"'yellowmarker'"],[Blockly.MIXLY_GAME_BLUEMARKER,"'bluemarker'"],[Blockly.MIXLY_GAME_GREENMARKER,"'greenmarker'"]]), "marker");    
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_REDMARKER,"'redmarker'"],[Blockly.Msg.MIXLY_GAME_YELLOWMARKER,"'yellowmarker'"],[Blockly.Msg.MIXLY_GAME_BLUEMARKER,"'bluemarker'"],[Blockly.Msg.MIXLY_GAME_GREENMARKER,"'greenmarker'"]]), "marker");    
     this.appendDummyInput()
       .appendField("?");   
     this.setInputsInline(true);
@@ -690,11 +690,11 @@ Blockly.Blocks.getMarkerNum = {
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_GET_MARKER_NUM); 
+      .appendField(Blockly.Msg.MIXLY_GAME_GET_MARKER_NUM); 
     this.appendDummyInput()
-      .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_REDMARKER,"'redmarker'"],[Blockly.MIXLY_GAME_YELLOWMARKER,"'yellowmarker'"],[Blockly.MIXLY_GAME_BLUEMARKER,"'bluemarker'"],[Blockly.MIXLY_GAME_GREENMARKER,"'greenmarker'"]]), "marker");    
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_REDMARKER,"'redmarker'"],[Blockly.Msg.MIXLY_GAME_YELLOWMARKER,"'yellowmarker'"],[Blockly.Msg.MIXLY_GAME_BLUEMARKER,"'bluemarker'"],[Blockly.Msg.MIXLY_GAME_GREENMARKER,"'greenmarker'"]]), "marker");    
     this.appendDummyInput()
-      .appendField(Blockly.MIXLY_GAME_NUMBER_OF_MARKER);   
+      .appendField(Blockly.Msg.MIXLY_GAME_NUMBER_OF_MARKER);   
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setTooltip('');
@@ -715,7 +715,7 @@ Blockly.Blocks.randomPlaceBarrier = {
         .setCheck(null)
         .appendField("");  
     this.appendDummyInput()
-      .appendField(')'+Blockly.Msg.TEXT_GET_INDEX_RANDOM + Blockly.MIXLY_GAME_LAY+Blockly.MIXLY_GAME_BARRIER)
+      .appendField(')'+Blockly.Msg.TEXT_GET_INDEX_RANDOM + Blockly.Msg.MIXLY_GAME_LAY+Blockly.Msg.MIXLY_GAME_BARRIER)
   this.setTooltip('');
   }
 };
@@ -724,9 +724,9 @@ Blockly.Blocks.randomPlaceBarrier = {
 Blockly.Blocks['settedSimpleMap'] = {
   init: function() {
   this.appendDummyInput()
-    .appendField(Blockly.MIXLY_GAME_INIT_AS)
-    .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GAME_ONE,'0'],[Blockly.MIXLY_GAME_TWO,'1'],[Blockly.MIXLY_GAME_THREE,'2'],[Blockly.MIXLY_GAME_FOUR,'3'],[Blockly.MIXLY_GAME_FIVE,'4'],[Blockly.MIXLY_GAME_SIX,'5'],[Blockly.MIXLY_GAME_SEVEN,'6'],[Blockly.MIXLY_GAME_EIGHT,'7'],[Blockly.MIXLY_GAME_NINE,'8']
-  ,[Blockly.MIXLY_GAME_TEN,'9'],[Blockly.MIXLY_GAME_ELE,'10'],[Blockly.MIXLY_GAME_TWEL,'11'],[Blockly.MIXLY_GAME_THIR,'12'],[Blockly.MIXLY_GAME_FORT,'13'],[Blockly.MIXLY_GAME_FIFT,'14'],[Blockly.MIXLY_GAME_SIXT,'15'],[Blockly.MIXLY_GAME_SEVENT,'16']]), "level");
+    .appendField(Blockly.Msg.MIXLY_GAME_INIT_AS)
+    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GAME_ONE,'0'],[Blockly.Msg.MIXLY_GAME_TWO,'1'],[Blockly.Msg.MIXLY_GAME_THREE,'2'],[Blockly.Msg.MIXLY_GAME_FOUR,'3'],[Blockly.Msg.MIXLY_GAME_FIVE,'4'],[Blockly.Msg.MIXLY_GAME_SIX,'5'],[Blockly.Msg.MIXLY_GAME_SEVEN,'6'],[Blockly.Msg.MIXLY_GAME_EIGHT,'7'],[Blockly.Msg.MIXLY_GAME_NINE,'8']
+  ,[Blockly.Msg.MIXLY_GAME_TEN,'9'],[Blockly.Msg.MIXLY_GAME_ELE,'10'],[Blockly.Msg.MIXLY_GAME_TWEL,'11'],[Blockly.Msg.MIXLY_GAME_THIR,'12'],[Blockly.Msg.MIXLY_GAME_FORT,'13'],[Blockly.Msg.MIXLY_GAME_FIFT,'14'],[Blockly.Msg.MIXLY_GAME_SIXT,'15'],[Blockly.Msg.MIXLY_GAME_SEVENT,'16']]), "level");
   this.setInputsInline(true);
   this.setNextStatement(true);
   this.setColour(290);

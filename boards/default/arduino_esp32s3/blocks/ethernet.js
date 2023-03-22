@@ -7,19 +7,19 @@ Blockly.Msg['ETHERNET_HUE'] = 0;
 Blockly.Blocks['esp_now_send'] = {
   init: function() {
   	 this.appendDummyInput()
-        .appendField("ESP NOW"+Blockly.MIXLY_MICROPYTHON_SOCKET_SEND);
+        .appendField("ESP NOW"+Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_SEND);
     this.appendValueInput("mac")
         .setCheck(null)
-        .appendField(Blockly.MIXLY_ETHERNET_MAC_ADDRESS);
+        .appendField(Blockly.Msg.MIXLY_ETHERNET_MAC_ADDRESS);
     this.appendValueInput("data")
         .setCheck(null)
-        .appendField(Blockly.MIXLY_SD_DATA);
+        .appendField(Blockly.Msg.MIXLY_SD_DATA);
     this.appendStatementInput("success")
         .setCheck(null)
-        .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_SEND+Blockly.MIXLY_SUCCESS);
+        .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_SEND+Blockly.Msg.MIXLY_SUCCESS);
     this.appendStatementInput("failure")
         .setCheck(null)
-        .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_SEND+Blockly.MIXLY_FAILED);
+        .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_SEND+Blockly.Msg.MIXLY_FAILED);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Msg['ETHERNET_HUE']);
@@ -32,7 +32,7 @@ Blockly.Blocks['esp_now_send'] = {
 Blockly.Blocks['esp_now_receive'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("ESP NOW"+Blockly.MQTT_subscribe2+Blockly.MIXLY_SD_DATA);
+        .appendField("ESP NOW"+Blockly.Msg.MQTT_subscribe2+Blockly.Msg.MIXLY_SD_DATA);
     this.appendStatementInput("receive_data")
         .setCheck(null);
     this.setColour(Blockly.Msg['ETHERNET_HUE']);

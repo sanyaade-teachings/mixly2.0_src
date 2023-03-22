@@ -15,7 +15,7 @@ Blockly.Blocks.lists_get_index = {
         this.appendValueInput("LIST")
         this.appendValueInput("AT")
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_FROM_START)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_FROM_START)
         this.appendDummyInput()
             .appendField(Blockly.Msg.TEXT_CHARAT_TAIL);
         this.setInputsInline(true);
@@ -36,7 +36,7 @@ Blockly.Blocks['lists_get_sublist'] = {
         this.appendValueInput('LIST')
         this.appendDummyInput('')
         this.appendValueInput('AT1')
-            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_FROM_START);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_FROM_START);
         this.appendValueInput('AT2')
             .appendField(Blockly.Msg.TEXT_CHARAT_TAIL + " " + Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START);
         this.appendDummyInput()
@@ -53,7 +53,7 @@ Blockly.Blocks.lists_2d_get_data_with_col_row= {
       .setCheck(null);
   this.appendValueInput("row")
       .setCheck(null) 
-      .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET+" "+Blockly.Msg.DATAFRAME_RAW);
+      .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET+" "+Blockly.Msg.DATAFRAME_RAW);
   this.appendValueInput("col")
       .setCheck(null) 
       .appendField(Blockly.Msg.DATAFRAME_COLUMN);
@@ -71,7 +71,7 @@ Blockly.Blocks.lists_2d_get_col_row_data= {
       .setCheck(null);
   this.appendValueInput("row_start")
       .setCheck(null) 
-      .appendField(Blockly.MIXLY_GET+" "+Blockly.Msg.DATAFRAME_RAW+" [");
+      .appendField(Blockly.Msg.MIXLY_GET+" "+Blockly.Msg.DATAFRAME_RAW+" [");
   this.appendValueInput("row_end")
       .setCheck(null) 
       .appendField(",");
@@ -100,7 +100,7 @@ Blockly.Blocks['lists_create_with'] = {
     this.setColour(Blockly.Msg['LISTS_HUE']);
 	this.appendDummyInput("")
   //don't need to specify the data type in Python
-        // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>'], [Blockly.LANG_MATH_STRING, 'Array<string>'], [Blockly.LANG_MATH_BOOLEAN, 'Array<boolean>']]), 'TYPE')
+        // .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_NUMBER, 'Array<number>'], [Blockly.Msg.LANG_MATH_STRING, 'Array<string>'], [Blockly.Msg.LANG_MATH_BOOLEAN, 'Array<boolean>']]), 'TYPE')
         // .appendField(' ')
         .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
         .appendField('[')
@@ -237,12 +237,12 @@ Blockly.Blocks['lists_create_with_text'] = {
     this.setColour(Blockly.Msg['LISTS_HUE']);
   this.appendDummyInput("")
   //don't need to specify the data type in Python
-        // .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'Array<number>']]), 'TYPE')
+        // .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_NUMBER, 'Array<number>']]), 'TYPE')
         // .appendField(' ')
-    // .appendField(Blockly.blockpy_MIXLY_SPLITBYDOU)
+    // .appendField(Blockly.Msg.blockpy_MIXLY_SPLITBYDOU)
         .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
         //.appendField(new Blockly.FieldTextInput('3',Blockly.FieldTextInput.math_number_validator), 'SIZE')
-      // .appendField(Blockly.MIXLY_MAKELISTFROM)
+      // .appendField(Blockly.Msg.MIXLY_MAKELISTFROM)
     // .appendField(this.newQuote_(true))
         .appendField(' = [')
         .appendField(new Blockly.FieldTextInput('0,0,0'), 'TEXT')
@@ -250,7 +250,7 @@ Blockly.Blocks['lists_create_with_text'] = {
         // .appendField(this.newQuote_(false))
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setTooltip(Blockly.MIXLY_TOOLTIP_LISTS_CREATE_WITH_TEXT2);
+  this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LISTS_CREATE_WITH_TEXT2);
   },
   getVars: function() {
     return [this.getFieldValue('VAR')];
@@ -271,7 +271,7 @@ Blockly.Blocks['lists_create_with_container'] = {
   init: function() {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_TYPE_LIST);
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_TYPE_LIST);
     this.appendStatementInput('STACK');
     this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_CONTAINER_TOOLTIP);
     this.contextMenu = false;
@@ -301,13 +301,13 @@ Blockly.Blocks.lists_set_index = {
         this.appendValueInput('LIST');
         this.appendValueInput('AT')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_LIST_ASSIGN_AT);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_LIST_ASSIGN_AT);
         this.appendValueInput('TO')
-            .appendField(Blockly.MIXLY_MICROBIT_JS_LIST_VALUE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_LIST_VALUE);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.LANG_LISTS_SET_INDEX_TOOLTIP);
+        this.setTooltip(Blockly.Msg.LANG_LISTS_SET_INDEX_TOOLTIP);
     }
 };
 
@@ -315,16 +315,16 @@ Blockly.Blocks['lists_append_extend'] = {
   init: function() {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this['TYPE'] =
-        [[Blockly.MIXLY_blockpy_set_add, 'append'],
-         [Blockly.MIXLY_MICROBIT_LIST_EXTEND, 'extend']];
+        [[Blockly.Msg.MIXLY_blockpy_set_add, 'append'],
+         [Blockly.Msg.MIXLY_MICROBIT_LIST_EXTEND, 'extend']];
 
     this.appendValueInput('LIST')
         .setCheck('List')
     this.appendValueInput('DATA')
         .appendField(new Blockly.FieldDropdown(this['TYPE']), 'OP')
-        .appendField(Blockly.MIXLY_MICROBIT_LIST_A_ITEM)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_LIST_A_ITEM)
     this.appendDummyInput("")
-        .appendField(Blockly.MIXLY_MICROBIT_JS_LIST_TO_END);
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_LIST_TO_END);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -332,7 +332,7 @@ Blockly.Blocks['lists_append_extend'] = {
     this.setTooltip(function() {
       var mode = thisBlock.getFieldValue('OP');
       var TOOLTIPS = {
-        'append': Blockly.MIXLY_TOOLTIP_LIST_APPEND,
+        'append': Blockly.Msg.MIXLY_TOOLTIP_LIST_APPEND,
         'extend': Blockly.Msg.LISTS_EXTEND_TOOLTIP
 
       };
@@ -351,7 +351,7 @@ Blockly.Blocks['lists_get_random_item'] = {
     this.setColour(Blockly.Msg['LISTS_HUE']);
   this.appendValueInput("LIST");
   this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_RANDOM)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + " " + Blockly.Msg.LISTS_GET_INDEX_RANDOM)
   this.setTooltip(Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM);
   this.setOutput(true);
   }
@@ -366,9 +366,9 @@ Blockly.Blocks['lists_get_random_sublist'] = {
     this.setColour(Blockly.Msg['LISTS_HUE']);
   this.appendValueInput("LIST");
   this.appendValueInput('VAR')
-      .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.MIXLY_MICROBIT_RANDOM)
+      .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.Msg.MIXLY_MICROBIT_RANDOM)
   this.appendDummyInput()
-      .appendField(Blockly.LANG_LISTS_GET_INDEX2 + Blockly.Msg.LISTS_GET_RANDOM_SUBLIST)      
+      .appendField(Blockly.Msg.LANG_LISTS_GET_INDEX2 + Blockly.Msg.LISTS_GET_RANDOM_SUBLIST)      
   this.setTooltip(Blockly.Msg.LISTS_GET_RANDOM_SUBLIST_TOOLTIP);
   this.setOutput(true,'List');
   }
@@ -380,13 +380,13 @@ Blockly.Blocks.lists_insert_value = {
     this.appendValueInput('LIST');
     this.appendValueInput('AT')
         .setCheck(Number)
-        .appendField(Blockly.MIXLY_MICROBIT_JS_LIST_INSERT_AT);
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_LIST_INSERT_AT);
     this.appendValueInput('VALUE')
-        .appendField(Blockly.MIXLY_MICROBIT_JS_LIST_VALUE);
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_LIST_VALUE);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.LANG_LISTS_SET_INDEX_TOOLTIP);
+    this.setTooltip(Blockly.Msg.LANG_LISTS_SET_INDEX_TOOLTIP);
     this.setTooltip(Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_INSERT);
   }
 };
@@ -397,9 +397,9 @@ Blockly.Blocks['lists_reverse'] = {
     this.appendValueInput('VAR')
         .setCheck('List') //this.appendDummyInput("")
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_JS_LIST_REVERSE)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_LIST_REVERSE)
         //.appendField(new Blockly.FieldTextInput('mylist'), 'VAR');
-    this.setTooltip(Blockly.LANG_LISTS_CLEAR_TOOLTIP);
+    this.setTooltip(Blockly.Msg.LANG_LISTS_CLEAR_TOOLTIP);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -410,9 +410,9 @@ Blockly.Blocks['lists_clear'] = {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendValueInput('VAR')
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROPYTHON_CLEAR)
+        .appendField(Blockly.Msg.MIXLY_MICROPYTHON_CLEAR)
         //.appendField(new Blockly.FieldTextInput('mylist'), 'VAR');
-    this.setTooltip(Blockly.LANG_LISTS_REVERSE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.LANG_LISTS_REVERSE_TOOLTIP);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -425,11 +425,11 @@ Blockly.Blocks.lists_remove_at = {
         this.setColour(Blockly.Msg['LISTS_HUE']);
         this['TYPE'] =
             [[Blockly.Msg.SERIES_INDEX, 'del'],
-                [Blockly.MIXLY_MICROBIT_JS_I2C_VALUE, 'remove']];
+                [Blockly.Msg.MIXLY_MICROBIT_JS_I2C_VALUE, 'remove']];
         this.appendValueInput('LIST')
             .setCheck('List')
         this.appendValueInput('DATA')
-            .appendField(Blockly.MIXLY_MIXPY_LISTS_REMOVE)
+            .appendField(Blockly.Msg.MIXLY_MIXPY_LISTS_REMOVE)
             .appendField(new Blockly.FieldDropdown(this['TYPE']), 'OP')
         this.setInputsInline(true);
         this.setPreviousStatement(true);
@@ -439,7 +439,7 @@ Blockly.Blocks.lists_remove_at = {
             var mode = thisBlock.getFieldValue('OP');
             var TOOLTIPS = {
                 'del': Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_DELETE,
-                'remove': Blockly.MIXLY_TOOLTIP_LIST_REMOVE
+                'remove': Blockly.Msg.MIXLY_TOOLTIP_LIST_REMOVE
             };
             return TOOLTIPS[mode];
         });
@@ -450,7 +450,7 @@ Blockly.Blocks.lists_pop = {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendValueInput('LIST');
     this.appendValueInput('VALUE')
-        .appendField(Blockly.MIXLY_MICROBIT_LIST_POP);
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_LIST_POP);
     this.appendDummyInput()
         .appendField(Blockly.Msg.TEXT_CHARAT_TAIL);
     this.setInputsInline(true);
@@ -469,10 +469,10 @@ Blockly.Blocks['lists_find'] = {
     this.appendValueInput('VAR')
         .setCheck('List')
     this.appendValueInput('data')
-        .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
         .appendField(Blockly.Msg.HTML_VALUE)
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_DE)
+        .appendField(Blockly.Msg.MIXLY_DE)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
         //.appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
     this.setInputsInline(true);
@@ -481,8 +481,8 @@ Blockly.Blocks['lists_find'] = {
     this.setTooltip(function() {
       var mode = thisBlock.getFieldValue('OP');
       var TOOLTIPS = {
-        'INDEX': Blockly.MIXLY_TOOLTIP_LIST_FIND_INDEX,
-        'COUNT': Blockly.MIXLY_TOOLTIP_LIST_FIND_COUNT
+        'INDEX': Blockly.Msg.MIXLY_TOOLTIP_LIST_FIND_INDEX,
+        'COUNT': Blockly.Msg.MIXLY_TOOLTIP_LIST_FIND_COUNT
         
       };
       return TOOLTIPS[mode];
@@ -506,7 +506,7 @@ Blockly.Blocks['list_trig'] = {
     this.setOutput(true, Number);
     this.appendValueInput('data')
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
+    .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -573,14 +573,14 @@ Blockly.Blocks['lists_sort'] = {
 Blockly.Blocks['lists_change_to'] = {
   init: function() {
     var OPERATORS =
-        [[Blockly.MIXLY_MICROBIT_TYPE_TUPLE, 'tuple'],
+        [[Blockly.Msg.MIXLY_MICROBIT_TYPE_TUPLE, 'tuple'],
          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD, 'set'],
          [Blockly.Msg.LISTS_CREATE_WITH_CONTAINER_TITLE_ADD, 'array']
         ];
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendValueInput('VAR')
         .setCheck("List")
-        // .appendField(Blockly.blockpy_USE_LIST);   
+        // .appendField(Blockly.Msg.blockpy_USE_LIST);   
     this.appendDummyInput("")
         .appendField(Blockly.Msg.A_TO_B)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
@@ -588,9 +588,9 @@ Blockly.Blocks['lists_change_to'] = {
     this.setTooltip(function() {
       var mode = thisBlock.getFieldValue('OP');
       var TOOLTIPS = {
-        'tuple': Blockly.MIXLY_TOOLTIP_CONVERT_LIST_TO_TUPLE,
-        'set': Blockly.MIXLY_TOOLTIP_CONVERT_LIST_TO_SET,
-        'array': Blockly.MIXLY_TOOLTIP_CONVERT_LIST_TO_ARRAY
+        'tuple': Blockly.Msg.MIXLY_TOOLTIP_CONVERT_LIST_TO_TUPLE,
+        'set': Blockly.Msg.MIXLY_TOOLTIP_CONVERT_LIST_TO_SET,
+        'array': Blockly.Msg.MIXLY_TOOLTIP_CONVERT_LIST_TO_ARRAY
       };
       return TOOLTIPS[mode];
     });    
@@ -749,8 +749,8 @@ Blockly.Blocks['lists_change_to_general'] = {
   init: function() {
     var OPERATORS =
         [
-         [Blockly.MIXLY_MICROBIT_TYPE_LIST, 'list'],
-         [Blockly.MIXLY_MICROBIT_TYPE_TUPLE, 'tuple'],
+         [Blockly.Msg.MIXLY_MICROBIT_TYPE_LIST, 'list'],
+         [Blockly.Msg.MIXLY_MICROBIT_TYPE_TUPLE, 'tuple'],
          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD, 'set']
         ];
     this.setColour(Blockly.Msg['LISTS_HUE']);
@@ -791,7 +791,7 @@ Blockly.Blocks['lists_zip'] = {
     this.setNextStatement(false);
     this.setOutput(true, "List")
     this.setMutator(new Blockly.Mutator(['lists_zip_item']));    
-    this.setTooltip(Blockly.MIXLY_PYTHON_LISTS_ZIP_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP_TOOLTIP);
   },
   
   mutationToDom: function() {
@@ -866,12 +866,12 @@ Blockly.Blocks['lists_zip'] = {
     // Rebuild block.
     if (this.itemCount_ == 0) {
       this.appendDummyInput('EMPTY')
-          .appendField(Blockly.MIXLY_PYTHON_LISTS_ZIP);
+          .appendField(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP);
     } else {
       for (var i = 0; i < this.itemCount_; i++) {
         var input = this.appendValueInput('ADD' + i);
         if (i == 0) {
-          input.appendField(Blockly.MIXLY_PYTHON_LISTS_ZIP);
+          input.appendField(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP);
         }
       }
     }
@@ -881,10 +881,10 @@ Blockly.Blocks['lists_zip_container'] = {
   init: function() {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_PYTHON_LISTS_ZIP)
+        .appendField(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP)
         .appendField('[]');
     this.appendStatementInput('STACK');
-    this.setTooltip(Blockly.MIXLY_MIXPY_INOUT_PRINT_MANY_CONTAINER_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_MIXPY_INOUT_PRINT_MANY_CONTAINER_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -893,10 +893,10 @@ Blockly.Blocks['lists_zip_item'] = {
   init: function() {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_PYTHON_LISTS_ZIP_ITEM);
+        .appendField(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP_ITEM);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_PYTHON_LISTS_ZIP_ITEM_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP_ITEM_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -905,9 +905,9 @@ Blockly.Blocks['list_tolist'] = {
   init: function () {
     this.setColour(Blockly.Msg['LISTS_HUE']);
     this.appendValueInput('VAR')
-    .appendField(Blockly.MIXLY_TOLIST);
+    .appendField(Blockly.Msg.MIXLY_TOLIST);
     this.setOutput(true, 'List');
-    this.setTooltip(Blockly.MIXLY_PYTHON_TOOLTIP_TOLIST);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOLIST);
   }
 };
 

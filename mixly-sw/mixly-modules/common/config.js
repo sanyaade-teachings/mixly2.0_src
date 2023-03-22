@@ -6,24 +6,6 @@ goog.provide('Mixly.Config');
 const { Url, Config } = Mixly;
 
 /**
- * @function 获取对应路径下JSON数据
- * @param inPath {string} JSON文件的相对路径
- * @param defaultConfig {object} 默认的JSON配置信息
- * @return {object | null} 当对应路径下文件不存在时将返回null
- **/
-Config.get = (path, defaultConfig = {}) => {
-    let jsonStr = goog.get(path);
-    try {
-        // 去除JSON字符串中的注释
-        jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
-        return { ...defaultConfig, ...JSON.parse(jsonStr) };
-    } catch (error) {
-        console.log(error);
-    }
-    return defaultConfig;
-}
-
-/**
  * @function 读取软件、板卡的配置信息
  * @return {void}
  **/

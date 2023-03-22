@@ -18,10 +18,10 @@ Blockly.Blocks.ai_sensor_use_uart_init = {
                 ["uart2","uart2"]
                 ]), "key");
         this.appendValueInput('SUB')
-            .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'MixGo AI' + MSG.catSensor)
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO + 'MixGo AI' + MSG.catSensor)
             
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -33,25 +33,25 @@ Blockly.Blocks['ai_sensor_qrcode'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_QR_CODE+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_QR_CODE+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.OLED_STRING, "info1"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.OLED_STRING, "info1"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_QR_CODE_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_QR_CODE_TOOLTIP);
     }
 };
 
@@ -61,14 +61,14 @@ Blockly.Blocks['ai_sensor_qrcode_lite'] = {
         this.appendValueInput('VAR')
             .setCheck("var");               
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_QR_CODE+Blockly.MIXPY_OBJECT, "qrcode"], 
-                [Blockly.MIXLY_BAR_CODE+Blockly.MIXPY_OBJECT, "barcode"], 
-                [Blockly.MIXLY_TAG+Blockly.MIXPY_OBJECT, "apriltag"]                             
+                [Blockly.Msg.MIXLY_QR_CODE+Blockly.Msg.MIXPY_OBJECT, "qrcode"], 
+                [Blockly.Msg.MIXLY_BAR_CODE+Blockly.Msg.MIXPY_OBJECT, "barcode"], 
+                [Blockly.Msg.MIXLY_TAG+Blockly.Msg.MIXPY_OBJECT, "apriltag"]                             
             ]), "TYPE");
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ANALYSIS_RESULT);             
+            .appendField(Blockly.Msg.MIXLY_ANALYSIS_RESULT);             
         this.setOutput(true);
         this.setInputsInline(true);
          this.setTooltip();
@@ -80,13 +80,13 @@ Blockly.Blocks['ai_sensor_find_qrcodes'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_QR_CODE_RECOGNTITION);        
+            .appendField(Blockly.Msg.MIXLY_QR_CODE_RECOGNTITION);        
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[qrcode]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_QR_CODE_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_QR_CODE_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -95,7 +95,7 @@ Blockly.Blocks['ai_sensor_config'] = {
    this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
    this.appendValueInput('SUB')
    this.appendValueInput("RX")
-       .appendField(Blockly.MIXLY_SETTING+Blockly.MIXLY_ETHERNET_CLINET_PORT)       
+       .appendField(Blockly.Msg.MIXLY_SETTING+Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT)       
        .appendField("RX#")
        .setCheck(Number)
        .setAlign(Blockly.ALIGN_RIGHT);
@@ -104,12 +104,12 @@ Blockly.Blocks['ai_sensor_config'] = {
        .setCheck(Number)
        .setAlign(Blockly.ALIGN_RIGHT);
     this.appendDummyInput()
-          .appendField(Blockly.SOFT_RESET+Blockly.MIXLY_ESP32_RGB_WRITE)
-          .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']]), 'mode')
+          .appendField(Blockly.Msg.SOFT_RESET+Blockly.Msg.MIXLY_ESP32_RGB_WRITE)
+          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_TRUE, 'True'], [Blockly.Msg.MIXLY_TURTLE_WRITE_MOVE_FALSE, 'False']]), 'mode')
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.MIXLY_AI_SENSOR_CONFIG_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_CONFIG_TOOLTIP);
   }
 };
 
@@ -118,7 +118,7 @@ Blockly.Blocks['ai_sensor_rgb'] = {
    this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
    this.appendValueInput('SUB')
    this.appendValueInput("led1")
-       .appendField(Blockly.MIXLY_SETTING)       
+       .appendField(Blockly.Msg.MIXLY_SETTING)       
        .appendField("RGB1")
        .setCheck(Number)
        .setAlign(Blockly.ALIGN_RIGHT);
@@ -129,7 +129,7 @@ Blockly.Blocks['ai_sensor_rgb'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.MIXLY_AI_SENSOR_CONFIG_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_CONFIG_TOOLTIP);
   }
 };
 
@@ -137,25 +137,25 @@ Blockly.Blocks['ai_sensor_barcode'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_BAR_CODE+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_BAR_CODE+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.OLED_STRING, "info1"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.OLED_STRING, "info1"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_BAR_CODE_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_BAR_CODE_TOOLTIP);
     }
 };
 
@@ -164,13 +164,13 @@ Blockly.Blocks['ai_sensor_find_barcodes'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_BAR_CODE_RECOGNTITION);        
+            .appendField(Blockly.Msg.MIXLY_BAR_CODE_RECOGNTITION);        
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[barcode]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_BAR_CODE_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_BAR_CODE_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -178,26 +178,26 @@ Blockly.Blocks['ai_sensor_tag'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_TAG+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_TAG+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.OLED_STRING, "info1"],
-                [Blockly.blockpy_turtle_rotate+Blockly.MIXLY_MICROBIT_JS_BY_ANGLE, "info2"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.OLED_STRING, "info1"],
+                [Blockly.Msg.blockpy_turtle_rotate+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE, "info2"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_TAG_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_TAG_TOOLTIP);
     }
 };
 
@@ -206,13 +206,13 @@ Blockly.Blocks['ai_sensor_find_tags'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_TAG_RECOGNTITION);        
+            .appendField(Blockly.Msg.MIXLY_TAG_RECOGNTITION);        
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[tag]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_TAG_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_TAG_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -220,23 +220,23 @@ Blockly.Blocks['ai_sensor_line'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_LINE+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_LINE+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_LINE_ANGLE, "info1"],
-                [Blockly.MIXLY_POSITION_XY+"-x1x2y1y2", "rect"],
-                ["x1"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["x2"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["y1"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["y2"+Blockly.MIXLY_POSITION_XY, "rect[3]"]                                
+                [Blockly.Msg.MIXLY_LINE_ANGLE, "info1"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-x1x2y1y2", "rect"],
+                ["x1"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["x2"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["y1"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["y2"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_LINE_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_LINE_TOOLTIP);
     }
 };
 
@@ -245,17 +245,17 @@ Blockly.Blocks['ai_sensor_find_lines'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_LINE_RECOGNTITION);        
+            .appendField(Blockly.Msg.MIXLY_LINE_RECOGNTITION);        
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_ESP32_THRESHOLD)
+            .appendField(Blockly.Msg.MIXLY_ESP32_THRESHOLD)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MIXLY_LINE_RECOGNTITION_ANGLE)
+            .appendField(Blockly.Msg.MIXLY_LINE_RECOGNTITION_ANGLE)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR3")
-            .appendField(Blockly.MIXLY_LINE_RECOGNTITION_SLOPE)
+            .appendField(Blockly.Msg.MIXLY_LINE_RECOGNTITION_SLOPE)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);                    
         this.appendDummyInput()
@@ -263,7 +263,7 @@ Blockly.Blocks['ai_sensor_find_lines'] = {
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[line]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_LINE_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_LINE_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -271,25 +271,25 @@ Blockly.Blocks['ai_sensor_circle'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_CIRCLE+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_CIRCLE+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_CIRCLE_AREA, "info1"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.MIXLY_CIRCLE_AREA, "info1"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_CIRCLE_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_CIRCLE_TOOLTIP);
     }
 };
 
@@ -298,17 +298,17 @@ Blockly.Blocks['ai_sensor_find_circles'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_CIRCLE_RECOGNTITION);        
+            .appendField(Blockly.Msg.MIXLY_CIRCLE_RECOGNTITION);        
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_ESP32_THRESHOLD)
+            .appendField(Blockly.Msg.MIXLY_ESP32_THRESHOLD)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MIXLY_CIRCLE_RECOGNTITION_MIN)
+            .appendField(Blockly.Msg.MIXLY_CIRCLE_RECOGNTITION_MIN)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR3")
-            .appendField(Blockly.MIXLY_CIRCLE_RECOGNTITION_MAX)
+            .appendField(Blockly.Msg.MIXLY_CIRCLE_RECOGNTITION_MAX)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);                    
         this.appendDummyInput()
@@ -316,7 +316,7 @@ Blockly.Blocks['ai_sensor_find_circles'] = {
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[circle]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_CIRCLE_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_CIRCLE_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -324,25 +324,25 @@ Blockly.Blocks['ai_sensor_rect'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_RECT+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_RECT+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_ALL_CODE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_ALL_CODE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_CIRCLE_AREA, "info1"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.MIXLY_CIRCLE_AREA, "info1"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_RECT_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_RECT_TOOLTIP);
     }
 };
 
@@ -351,9 +351,9 @@ Blockly.Blocks['ai_sensor_find_rects'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_RECT_RECOGNTITION);        
+            .appendField(Blockly.Msg.MIXLY_RECT_RECOGNTITION);        
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_ESP32_THRESHOLD)
+            .appendField(Blockly.Msg.MIXLY_ESP32_THRESHOLD)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);            
         this.appendDummyInput()
@@ -361,7 +361,7 @@ Blockly.Blocks['ai_sensor_find_rects'] = {
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[rect]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_COLOR_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_COLOR_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -369,19 +369,19 @@ Blockly.Blocks['ai_sensor_color'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.Msg.HTML_COLOUR+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.HTML_COLOUR+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_COLOR_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_COLOR_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
                 ['RGB'+Blockly.Msg.HTML_COLOUR, "[0]"],
-                ['LAB'+Blockly.MIXLY_COLOR_LAB, "[1]"]                       
+                ['LAB'+Blockly.Msg.MIXLY_COLOR_LAB, "[1]"]                       
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_COLOR_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_COLOR_TOOLTIP);
     }
 };
 
@@ -390,13 +390,13 @@ Blockly.Blocks['ai_sensor_find_colors'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_COLOR_RECOGNTITION);   
+            .appendField(Blockly.Msg.MIXLY_COLOR_RECOGNTITION);   
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"color");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_COLOR_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_COLOR_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -404,25 +404,25 @@ Blockly.Blocks['ai_sensor_color_chases_result'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_COLOR_CHASE+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_COLOR_CHASE+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_COLOR_CHASE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_COLOR_CHASE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_CIRCLE_AREA, "info1"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.MIXLY_CIRCLE_AREA, "info1"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_CIRCLE_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_CIRCLE_TOOLTIP);
     }
 };
 
@@ -431,17 +431,17 @@ Blockly.Blocks['ai_sensor_color_chases'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_COLOR_CHASE);        
+            .appendField(Blockly.Msg.MIXLY_COLOR_CHASE);        
         this.appendValueInput("VAR1")
-            .appendField('LAB'+Blockly.MIXLY_COLOR_LAB)
+            .appendField('LAB'+Blockly.Msg.MIXLY_COLOR_LAB)
             
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MIXLY_ESP32_THRESHOLD)
+            .appendField(Blockly.Msg.MIXLY_ESP32_THRESHOLD)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR3")
-            .appendField(Blockly.MIXLY_COLOR_CHASE_MERGE)
+            .appendField(Blockly.Msg.MIXLY_COLOR_CHASE_MERGE)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT);                    
         this.appendDummyInput()
@@ -449,7 +449,7 @@ Blockly.Blocks['ai_sensor_color_chases'] = {
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[colors]");     
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_CIRCLE_RECOGNTITION_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_CIRCLE_RECOGNTITION_TOOLTIP);
     }
 };
 
@@ -458,23 +458,23 @@ Blockly.Blocks['ai_sensor_ailocal_train'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_LOCAL_TRAIN);        
+            .appendField(Blockly.Msg.MIXLY_LOCAL_TRAIN);        
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_OBJECT_LIST)
+            .appendField(Blockly.Msg.MIXLY_OBJECT_LIST)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MICROPYTHON_HUSKYLENS_SAVE_AS+Blockly.MIXLY_MODEL_NAME)
+            .appendField(Blockly.Msg.MICROPYTHON_HUSKYLENS_SAVE_AS+Blockly.Msg.MIXLY_MODEL_NAME)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR3")
-            .appendField(Blockly.MIXLY_TRAIN_TIME)
+            .appendField(Blockly.Msg.MIXLY_TRAIN_TIME)
             .setAlign(Blockly.ALIGN_RIGHT);                    
         this.appendValueInput("VAR4")
-            .appendField(Blockly.MIXLY_AipNlp_Topic_Title)
+            .appendField(Blockly.Msg.MIXLY_AipNlp_Topic_Title)
             .setAlign(Blockly.ALIGN_RIGHT);      
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_LOCAL_TRAIN_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_LOCAL_TRAIN_TOOLTIP);
     }
 };
 
@@ -483,22 +483,22 @@ Blockly.Blocks['ai_sensor_ailocal_class'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_LOCAL_CLASS);        
+            .appendField(Blockly.Msg.MIXLY_LOCAL_CLASS);        
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_OBJECT_LIST)
+            .appendField(Blockly.Msg.MIXLY_OBJECT_LIST)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MIXLY_MODEL_NAME)
+            .appendField(Blockly.Msg.MIXLY_MODEL_NAME)
             .setAlign(Blockly.ALIGN_RIGHT);                    
         this.appendValueInput("VAR4")
-            .appendField(Blockly.MIXLY_AipNlp_Topic_Title)
+            .appendField(Blockly.Msg.MIXLY_AipNlp_Topic_Title)
             .setAlign(Blockly.ALIGN_RIGHT);      
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[objects]");    
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_AI_SENSOR_MODEL_NAME_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_MODEL_NAME_TOOLTIP);
     }
 };
 
@@ -506,19 +506,19 @@ Blockly.Blocks['ai_sensor_ailocal_class_result'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_LOCAL_CLASS+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_LOCAL_CLASS+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_COLOR_CHASE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_COLOR_CHASE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
                 ['ID', "info1"],
-                [Blockly.MIXLY_CONFIDENCE_DEGREE, "info2"],                                               
+                [Blockly.Msg.MIXLY_CONFIDENCE_DEGREE, "info2"],                                               
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_LOCAL_CLASS_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_LOCAL_CLASS_TOOLTIP);
     }
 };
 
@@ -527,9 +527,9 @@ Blockly.Blocks['ai_sensor_audio_record'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MUSIC_RECORD);
+            .appendField(Blockly.Msg.MIXLY_MUSIC_RECORD);
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_THE_PATH)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
             .appendField(Blockly.Msg.MIXPY_AI_AUDIO_TIME)
@@ -537,7 +537,7 @@ Blockly.Blocks['ai_sensor_audio_record'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_MUSIC_RECORD_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_MUSIC_RECORD_TOOLTIP);
     }
 };
 
@@ -546,12 +546,12 @@ Blockly.Blocks['ai_sensor_audio_play'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MUSIC_PLAY);
+            .appendField(Blockly.Msg.MIXLY_MUSIC_PLAY);
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_THE_PATH)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MIXLY_MP3_VOL)
+            .appendField(Blockly.Msg.MIXLY_MP3_VOL)
             .setAlign(Blockly.ALIGN_RIGHT); 
         this.appendDummyInput()
             .appendField('%')
@@ -567,22 +567,22 @@ Blockly.Blocks['ai_sensor_yolo_recognize'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_YOLO_RECOGNIZE);        
+            .appendField(Blockly.Msg.MIXLY_YOLO_RECOGNIZE);        
         this.appendValueInput("VAR1")
-            .appendField(Blockly.MIXLY_ANCHOR)
+            .appendField(Blockly.Msg.MIXLY_ANCHOR)
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("VAR2")
-            .appendField(Blockly.MIXLY_MODEL_PATH)
+            .appendField(Blockly.Msg.MIXLY_MODEL_PATH)
             .setAlign(Blockly.ALIGN_RIGHT);                    
         this.appendValueInput("VAR4")
-            .appendField(Blockly.MIXLY_AipNlp_Topic_Title)
+            .appendField(Blockly.Msg.MIXLY_AipNlp_Topic_Title)
             .setAlign(Blockly.ALIGN_RIGHT);      
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[objects]");    
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP);
     }
 };
 
@@ -590,25 +590,25 @@ Blockly.Blocks['ai_sensor_yolo_recognize_result'] = {
     init: function () {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);        
         this.appendValueInput('VAR')
-            .appendField(Blockly.MIXLY_YOLO_RECOGNIZE+Blockly.MIXPY_OBJECT)
+            .appendField(Blockly.Msg.MIXLY_YOLO_RECOGNIZE+Blockly.Msg.MIXPY_OBJECT)
             .setCheck("var");       
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_COLOR_CHASE_ANALYSIS);        
+            .appendField(Blockly.Msg.MIXLY_COLOR_CHASE_ANALYSIS);        
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
                 ['ID', "info1"],
-                [Blockly.MIXLY_CONFIDENCE_DEGREE, "info2"],
-                [Blockly.MIXLY_POSITION_XY+"-xywh", "rect"],
-                ["x"+Blockly.MIXLY_POSITION_XY, "rect[0]"],
-                ["y"+Blockly.MIXLY_POSITION_XY, "rect[1]"],
-                ["w"+Blockly.MIXLY_POSITION_XY, "rect[2]"],
-                ["h"+Blockly.MIXLY_POSITION_XY, "rect[3]"],
-                [Blockly.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.MIXLY_POSITION_XY, "xc"],
-                [Blockly.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.MIXLY_POSITION_XY, "yc"]                                
+                [Blockly.Msg.MIXLY_CONFIDENCE_DEGREE, "info2"],
+                [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
+                ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
+                ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
+                ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
+                ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_X_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "xc"],
+                [Blockly.Msg.MICROPYTHON_HUSKYLENS_Y_CENTERED+Blockly.Msg.MIXLY_POSITION_XY, "yc"]                                
             ]), "key");         
         this.setOutput(true);
         this.setInputsInline(true);
-         this.setTooltip(Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP);
+         this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP);
     }
 };

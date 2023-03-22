@@ -141,7 +141,7 @@ Blockly.Blocks['factory_create_with_container'] = {
   init: function() {
     this.setColour(Blockly.Msg['FACTORY_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_PARAMS);
+    .appendField(Blockly.Msg.MIXLY_PARAMS);
     this.appendStatementInput('STACK');
     this.contextMenu = false;
   }
@@ -277,11 +277,11 @@ Blockly.Blocks.folding_block = {
   init: function() {
     this.setColour(Blockly.Msg['FACTORY_HUE']);
     this.appendDummyInput()
-    .appendField(new Blockly.FieldTextInput(Blockly.FOLDING_BLOCK), "peien");
+    .appendField(new Blockly.FieldTextInput(Blockly.Msg.FOLDING_BLOCK), "peien");
     this.appendStatementInput('DO')
     .appendField('');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip(Blockly.FOLDING_BLOCK_HELP);
+    this.setTooltip(Blockly.Msg.FOLDING_BLOCK_HELP);
   }
 };

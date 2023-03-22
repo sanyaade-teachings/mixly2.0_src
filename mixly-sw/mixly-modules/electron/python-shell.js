@@ -2,15 +2,18 @@
 
 goog.require('Mixly.Env');
 goog.require('Mixly.Modules');
-goog.provide('Mixly.PythonShell');
+goog.require('Mixly.Electron');
+goog.provide('Mixly.Electron.PythonShell');
 
 const {
     Env,
     Modules,
-    PythonShell
+    Electron
 } = Mixly;
 
 const { fs_extra, fs_extend } = Modules;
+
+const { PythonShell } = Electron;
 
 PythonShell.init = () => {
     if (!Env.isElectron)

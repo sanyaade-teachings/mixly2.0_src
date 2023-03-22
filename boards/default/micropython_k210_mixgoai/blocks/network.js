@@ -244,10 +244,10 @@ Blockly.Blocks['network_socket_close'] = {
         this.appendValueInput('VAR')
             .setCheck("var")
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_CLOSE);
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_CLOSE);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_NETWORK_SOCKET_CLOSE_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_NETWORK_SOCKET_CLOSE_TOOLTIP);
     }
 };

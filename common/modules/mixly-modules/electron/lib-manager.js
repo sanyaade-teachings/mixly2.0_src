@@ -11,8 +11,8 @@ goog.require('Mixly.CssLoader');
 goog.require('Mixly.Boards');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
-goog.require('Mixly.CloudDownload');
 goog.require('Mixly.Nav');
+goog.require('Mixly.Electron.CloudDownload');
 goog.provide('Mixly.Electron.LibManager');
 
 const {
@@ -25,7 +25,6 @@ const {
     Boards,
     LayerExt,
     Config,
-    CloudDownload,
     Nav
 } = Mixly;
 
@@ -40,7 +39,7 @@ const {
 
 const { BOARD, USER } = Config;
 
-const { LibManager } = Electron;
+const { CloudDownload, LibManager } = Electron;
 
 const { table, element } = layui;
 

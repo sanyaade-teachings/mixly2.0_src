@@ -34,11 +34,11 @@ Blockly.Blocks.actuator_rgb_color = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_RGB)
-            .appendField(Blockly.MIXLY_RGB_NUM);
+            .appendField(Blockly.Msg.MIXLY_RGB)
+            .appendField(Blockly.Msg.MIXLY_RGB_NUM);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_ALL,"0"],
+                [Blockly.Msg.MIXLY_ALL,"0"],
                 ["0", "1"],
                 ["1", "2"],
                 ["2", "3"],
@@ -66,17 +66,17 @@ Blockly.Blocks.actuator_rgb_off = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_RGB)
-            .appendField(Blockly.MIXLY_RGB_NUM);
+            .appendField(Blockly.Msg.MIXLY_RGB)
+            .appendField(Blockly.Msg.MIXLY_RGB_NUM);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_ALL,"0"],
+                [Blockly.Msg.MIXLY_ALL,"0"],
                 ["0", "1"],
                 ["1", "2"],
                 ["2", "3"],
                 ["3", "4"]
         ]),'LED')
-            .appendField(Blockly.MIXLY_MICROBIT_Turn_off_display);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_Turn_off_display);
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -87,23 +87,23 @@ Blockly.Blocks.actuator_rgb = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_RGB)
+            .appendField(Blockly.Msg.MIXLY_RGB)
         this.appendValueInput("_LED_")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.MIXLY_RGB_NUM);
+            .appendField(Blockly.Msg.MIXLY_RGB_NUM);
         this.appendValueInput("RVALUE")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.MIXLY_RGB_R);
+            .appendField(Blockly.Msg.MIXLY_RGB_R);
         this.appendValueInput("GVALUE")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.MIXLY_RGB_G);
+            .appendField(Blockly.Msg.MIXLY_RGB_G);
         this.appendValueInput("BVALUE")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.MIXLY_RGB_B);
+            .appendField(Blockly.Msg.MIXLY_RGB_B);
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -114,19 +114,19 @@ Blockly.Blocks.actuator_motor_on = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_MOTOR)
-            .appendField(Blockly.LCD_NUMBERING);
+            .appendField(Blockly.Msg.MIXLY_MOTOR)
+            .appendField(Blockly.Msg.LCD_NUMBERING);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_ALL,"0"],
+                [Blockly.Msg.MIXLY_ALL,"0"],
                 ["1", "1"],
                 ["2", "2"],
                 ["3", "3"]
         ]),'NUMBER');
         this.appendValueInput('SPEED')
-            .appendField(Blockly.MIXLY_SPEED+"(0~12)")
+            .appendField(Blockly.Msg.MIXLY_SPEED+"(0~12)")
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_MICROBIT_Direction)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_Direction)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.CLOCKWISE, "1"],
                 [Blockly.Msg.ANTI_CLOCKWISE, "0"]
@@ -141,16 +141,16 @@ Blockly.Blocks.actuator_motor_off = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_MOTOR)
-            .appendField(Blockly.LCD_NUMBERING);
+            .appendField(Blockly.Msg.MIXLY_MOTOR)
+            .appendField(Blockly.Msg.LCD_NUMBERING);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_ALL,"0"],
+                [Blockly.Msg.MIXLY_ALL,"0"],
                 ["1", "1"],
                 ["2", "2"],
                 ["3", "3"]
         ]),'NUMBER')
-            .appendField(Blockly.MIXLY_STOP)        ;         
+            .appendField(Blockly.Msg.MIXLY_STOP)        ;         
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -161,13 +161,13 @@ Blockly.Blocks['sensor_pin_near'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
-        .appendField(Blockly.LCD_NUMBERING)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+        .appendField(Blockly.Msg.LCD_NUMBERING)
         .appendField(new Blockly.FieldDropdown([
             ["1", "1"],
             ["2", "2"]
             ]),'NUMBER')
-        .appendField(Blockly.MIXLY_ESP32_NEAR);
+        .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
         this.setOutput(true,Number);
         this.setInputsInline(true);
     }
@@ -177,7 +177,7 @@ Blockly.Blocks['sensor_while_btn_pressed'] = {
     init: function(){
         this.setColour(20);
         this.appendValueInput('btn')
-            .appendField(Blockly.MIXLY_MICROBIT_JS_CURRENT+Blockly.MIXLY_BUTTON_PRESSED+Blockly.MIXLY_BUTTON)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT+Blockly.Msg.MIXLY_BUTTON_PRESSED+Blockly.Msg.MIXLY_BUTTON)
             .setCheck(Number);
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
@@ -189,8 +189,8 @@ Blockly.Blocks['sensor_while_is_gesture'] = {
     init: function(){
         this.setColour(20);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_MICROBIT_JS_CURRENT+Blockly.MIXLY_MICROBIT_JS_IS_GESTURE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_MICROBIT_shake, "shake"], [Blockly.MIXLY_UP, "up"], [Blockly.MIXLY_DOWN, "down"], [Blockly.MIXLY_LEFT, "left"], [Blockly.MIXLY_RIGHT, "right"], [Blockly.MIXLY_MICROBIT_face_up, "face up"], [Blockly.MIXLY_MICROBIT_face_down, "face down"], [Blockly.MIXLY_MICROBIT_freefall, "freefall"], ["3g", "3g"], ["6g", "6g"], ["8g", "8g"]]), "gesture");
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT+Blockly.Msg.MIXLY_MICROBIT_JS_IS_GESTURE)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MICROBIT_shake, "shake"], [Blockly.Msg.MIXLY_UP, "up"], [Blockly.Msg.MIXLY_DOWN, "down"], [Blockly.Msg.MIXLY_LEFT, "left"], [Blockly.Msg.MIXLY_RIGHT, "right"], [Blockly.Msg.MIXLY_MICROBIT_face_up, "face up"], [Blockly.Msg.MIXLY_MICROBIT_face_down, "face down"], [Blockly.Msg.MIXLY_MICROBIT_freefall, "freefall"], ["3g", "3g"], ["6g", "6g"], ["8g", "8g"]]), "gesture");
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         this.setInputsInline(true);
@@ -202,9 +202,9 @@ Blockly.Blocks['sensor_while_is_near'] = {
     init: function(){
         this.setColour(20);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_MICROBIT_JS_CURRENT+Blockly.MIXLY_ESP32_EXTERN_NEAR)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT+Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR)
             .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"]]), "near")
-            .appendField(Blockly.MIXLY_MITHON_NEAR);
+            .appendField(Blockly.Msg.MIXLY_MITHON_NEAR);
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         this.setInputsInline(true);

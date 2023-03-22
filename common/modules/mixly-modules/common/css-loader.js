@@ -1,5 +1,6 @@
 goog.provide('Mixly.CssLoader');
 goog.require('Mixly.Config');
+goog.require('Mixly.Env');
 /**
  * 加载 link 文件
  * @param href

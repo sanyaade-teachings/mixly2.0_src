@@ -19,7 +19,7 @@ Blockly.Blocks.serial_open = {
           .appendField(new Blockly.FieldLabel(Blockly.Msg.MIXPY_SERIAL_OPEN))   
           .appendField(new Blockly.FieldTextInput('ser'), 'SER')     
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_SERIAL_BEGIN)    
+            .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)    
             .appendField(new Blockly.FieldDropdown(bps), 'BPS')
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.MIXPY_SERIAL_OPEN_TIMEOUT);    

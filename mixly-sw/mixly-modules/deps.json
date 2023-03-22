@@ -1,41 +1,7 @@
-
 [
     {
-        "path":"/web-socket/socket.js",
-        "require":[
-            "Mixly.Env",
-            "Mixly.Config",
-            "Mixly.MJSON",
-            "Mixly.WebSocket",
-            "Mixly.LayerExt",
-            "Mixly.Command"
-        ],
-        "provide":[
-            "Mixly.WebSocket.Socket"
-        ]
-    },
-    {
-        "path":"/web-socket/web-socket.js",
-        "require":[
-            "Mixly"
-        ],
-        "provide":[
-            "Mixly.WebSocket"
-        ]
-    },
-    {
-        "path":"/electron/python-shell.js",
-        "require":[
-            "Mixly.Env",
-            "Mixly.Modules"
-        ],
-        "provide":[
-            "Mixly.PythonShell"
-        ]
-    },
-    {
-        "path":"/common/board-manager.js",
-        "require":[
+        "path": "/common/board-manager.js",
+        "require": [
             "layui",
             "Mixly.Modules",
             "Mixly.Env",
@@ -45,85 +11,67 @@
             "Mixly.Config",
             "Mixly.MArray",
             "Mixly.Url",
-            "Mixly.CloudDownload",
-            "Mixly.PythonShell"
+            "Mixly.Electron.CloudDownload",
+            "Mixly.Electron.PythonShell"
         ],
-        "provide":[
+        "provide": [
             "Mixly.BoardManager"
         ]
     },
     {
-        "path":"/common/config.js",
-        "require":[
+        "path": "/common/config.js",
+        "require": [
             "Mixly.Url"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Config"
         ]
     },
     {
-        "path":"/common/deps.js",
-        "require":[
-            "Mixly",
-            "Mixly.Env",
-            "Mixly.Loading",
-            "layui",
-            "LazyLoad",
-            "Mixly.Msg",
-            "Mixly.XML",
-            "Mixly.Setting",
-            "Mixly.Interface",
-            "Mixly.Events"
-        ],
-        "provide":[
-            "Mixly.Deps"
-        ]
-    },
-    {
-        "path":"/common/env.js",
-        "require":[
+        "path": "/common/env.js",
+        "require": [
             "Mixly",
             "Mixly.Config"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Env",
             "Mixly.Modules"
         ]
     },
     {
-        "path":"/common/events.js",
-        "require":[
+        "path": "/common/events.js",
+        "require": [
             "Mixly.BoardManager",
             "Mixly.Modules",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Url"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Events"
         ]
     },
     {
-        "path":"/common/interface.js",
-        "require":[
+        "path": "/common/interface.js",
+        "require": [
             "layui",
             "Mixly.Url",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.BoardManager",
             "Mixly.XML",
-            "Mixly.PythonShell",
+            "Mixly.Electron.PythonShell",
             "Mixly.Msg",
             "Mixly.Setting",
             "Mixly.WebSocket.Socket"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Interface"
         ]
     },
     {
-        "path":"/common/loading.js",
-        "require":[
+        "path": "/common/loading.js",
+        "require": [
             "store",
             "Mixly",
             "Mixly.Env",
@@ -131,31 +79,30 @@
             "Mixly.Modules",
             "Mixly.Config"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Loading"
         ]
     },
     {
-        "path":"/common/mixly.js",
-        "require":[
-        ],
-        "provide":[
+        "path": "/common/mixly.js",
+        "require": [],
+        "provide": [
             "Mixly"
         ]
     },
     {
-        "path":"/common/msg.js",
-        "require":[
+        "path": "/common/msg.js",
+        "require": [
             "Mixly.MJSON",
             "Mixly.Config"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Msg"
         ]
     },
     {
-        "path":"/common/setting.js",
-        "require":[
+        "path": "/common/setting.js",
+        "require": [
             "layui",
             "store",
             "Mixly.XML",
@@ -168,21 +115,63 @@
             "Mixly.MJSON",
             "Mixly.WebSocket.Socket"
         ],
-        "provide":[
+        "provide": [
             "Mixly.Setting"
         ]
     },
     {
-        "path":"/common/xml.js",
-        "require":[
+        "path": "/common/xml.js",
+        "require": [
             "layui",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Msg"
         ],
-        "provide":[
+        "provide": [
             "Mixly.XML"
+        ]
+    },
+    {
+        "path": "/electron/electron.js",
+        "require": [
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.Electron"
+        ]
+    },
+    {
+        "path": "/electron/python-shell.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.Modules",
+            "Mixly.Electron"
+        ],
+        "provide": [
+            "Mixly.Electron.PythonShell"
+        ]
+    },
+    {
+        "path": "/web-socket/socket.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.Config",
+            "Mixly.MJSON",
+            "Mixly.WebSocket",
+            "Mixly.LayerExt",
+            "Mixly.Command"
+        ],
+        "provide": [
+            "Mixly.WebSocket.Socket"
+        ]
+    },
+    {
+        "path": "/web-socket/web-socket.js",
+        "require": [
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.WebSocket"
         ]
     }
 ]
-

@@ -9,12 +9,12 @@ Blockly.Blocks['serial_begin'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", Number)
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_BEGIN)
+            .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)
             .setCheck(Number);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_SERIAL_BEGIN);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIAL_BEGIN);
     }
 };
 
@@ -23,7 +23,7 @@ Blockly.Blocks['serial_write'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_WRITE);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_WRITE);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.TEXT_WRITE_TOOLTIP);
@@ -35,8 +35,8 @@ Blockly.Blocks['serial_print'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_PRINT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line");
+            .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
@@ -48,8 +48,8 @@ Blockly.Blocks['serial_println'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_PRINT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"], [Blockly.MIXLY_PRINT_INLINE, "print"]]), "new_line");
+            .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"], [Blockly.Msg.MIXLY_PRINT_INLINE, "print"]]), "new_line");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
@@ -62,9 +62,9 @@ Blockly.Blocks['serial_print_num'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_PRINT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line")
-            .appendField(Blockly.MIXLY_NUMBER);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line")
+            .appendField(Blockly.Msg.MIXLY_NUMBER);
         this.appendValueInput("CONTENT", Number)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX, "HEX"], [Blockly.Msg.MATH_BIN, "BIN"], [Blockly.Msg.MATH_OCT, "OCT"], [Blockly.Msg.MATH_DEC, "DEC"]]), "STAT")
             .setCheck(Number);
@@ -82,9 +82,9 @@ Blockly.Blocks['serial_available'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_AVAILABLE);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_AVAILABLE);
         this.setOutput(true, Boolean);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
     }
 };
 
@@ -93,9 +93,9 @@ Blockly.Blocks['serial_readstr'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_READSTR);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR);
         this.setOutput(true, String);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_STR);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_STR);
     }
 };
 
@@ -104,11 +104,11 @@ Blockly.Blocks['serial_readstr_until'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", Number)
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_READSTR_UNTIL)
+            .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR_UNTIL)
             .setCheck(Number);
         this.setInputsInline(true);
         this.setOutput(true, String);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_SERIAL_READSTRUNITL.replace('%1', Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC)));
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIAL_READSTRUNITL.replace('%1', Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC)));
     }
 };
 
@@ -117,15 +117,15 @@ Blockly.Blocks['serial_parseInt_Float'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            //.appendField(Blockly.MIXLY_SERIAL_READ)
+            //.appendField(Blockly.Msg.MIXLY_SERIAL_READ)
             .appendField(new Blockly.FieldDropdown([["read", "read"], ["peek", "peek"], ["parseInt", "parseInt"], ["parseFloat", "parseFloat"]]), "STAT");
         this.setOutput(true, Number);
         var thisBlock = this;
         this.setTooltip(function () {
             var op = thisBlock.getFieldValue('STAT');
             var TOOLTIPS = {
-                'parseInt': Blockly.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_INT,
-                'parseFloat': Blockly.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_FLOAT
+                'parseInt': Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_INT,
+                'parseFloat': Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_FLOAT
             };
             return TOOLTIPS[op];
         });
@@ -137,17 +137,17 @@ Blockly.Blocks['serial_flush'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_FLUSH);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_FLUSH);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_SERIAL_FLUSH);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIAL_FLUSH);
     }
 };
 Blockly.Blocks['serial_softserial'] = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_SETUP)
+            .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select");
         this.appendValueInput("RX", Number)
             .setCheck(Number)
@@ -160,7 +160,7 @@ Blockly.Blocks['serial_softserial'] = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_SOFTSERIAL.replace('%1', Blockly.Arduino.valueToCode(this, 'RX', Blockly.Arduino.ORDER_ATOMIC))
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SOFTSERIAL.replace('%1', Blockly.Arduino.valueToCode(this, 'RX', Blockly.Arduino.ORDER_ATOMIC))
             .replace('%2', Blockly.Arduino.valueToCode(this, 'TX', Blockly.Arduino.ORDER_ATOMIC)));
     }
 };
@@ -170,11 +170,11 @@ Blockly.Blocks['serial_event'] = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
-            .appendField(Blockly.MIXLY_SERIAL_EVENT);
+            .appendField(Blockly.Msg.MIXLY_SERIAL_EVENT);
         this.appendStatementInput('DO')
-            .appendField(Blockly.MIXLY_DO);
+            .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_SERIALEVENT);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIALEVENT);
     }
 };

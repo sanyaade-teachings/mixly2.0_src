@@ -11,13 +11,13 @@ Blockly.Blocks.ledcSetup = {
     this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput('CHANNEL')
     .setCheck(Number)
-    .appendField("ledc"+Blockly.MIXLY_SETUP+Blockly.MIXLY_CHANNEL);
+    .appendField("ledc"+Blockly.Msg.MIXLY_SETUP+Blockly.Msg.MIXLY_CHANNEL);
     this.appendValueInput("FREQ", Number)
-    .appendField(Blockly.MIXLY_FREQUENCY)
+    .appendField(Blockly.Msg.MIXLY_FREQUENCY)
     .setCheck(Number);
     this.appendValueInput('PWM_RESOLUTION')
     .setCheck(Number)
-    .appendField(Blockly.MIXLY_RESOLUTION);
+    .appendField(Blockly.Msg.MIXLY_RESOLUTION);
     this.appendDummyInput("")
     .appendField("bit");
     this.setInputsInline(true);
@@ -31,11 +31,11 @@ Blockly.Blocks.ledcAttachPin = {
   init: function(){
     this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
-    .appendField("ledc"+Blockly.MIXLY_ATTATCH+Blockly.MIXLY_PIN)
+    .appendField("ledc"+Blockly.Msg.MIXLY_ATTATCH+Blockly.Msg.MIXLY_PIN)
     .setCheck(Number);
     this.appendValueInput('CHANNEL')
     .setCheck(Number)
-    .appendField(Blockly.MIXLY_CHANNEL);
+    .appendField(Blockly.Msg.MIXLY_CHANNEL);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -46,7 +46,7 @@ Blockly.Blocks.ledcDetachPin = {
   init: function(){
     this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
-    .appendField("ledc"+Blockly.MIXLY_DETACH+Blockly.MIXLY_PIN)
+    .appendField("ledc"+Blockly.Msg.MIXLY_DETACH+Blockly.Msg.MIXLY_PIN)
     .setCheck(Number);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -60,13 +60,13 @@ Blockly.Blocks.inout_touchRead = {
   init: function(){
    this.setColour(Blockly.Msg['BASE_HUE']);
    this.appendValueInput("PIN", Number)
-   .appendField(Blockly.MIXLY_ESP32_TOUCH)
-   .appendField(Blockly.MIXLY_PIN);
+   .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
+   .appendField(Blockly.Msg.MIXLY_PIN);
    this.appendDummyInput()
-   .appendField(Blockly.MIXLY_ESP32_MACHINE_VALUE)
+   .appendField(Blockly.Msg.MIXLY_ESP32_MACHINE_VALUE)
    this.setOutput(true, Number);
    this.setInputsInline(true);
-   this.setTooltip(Blockly.MIXLY_ESP32_INOUT_PIN_PRESSED_TOOLTIP);
+   this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_PIN_PRESSED_TOOLTIP);
  }
 };
 
@@ -74,31 +74,31 @@ Blockly.Blocks.touchAttachInterrupt = {
   init: function() {
     this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN", Number)
-    .appendField(Blockly.MIXLY_TOUCHATTACHINTERRUPT_PIN)
+    .appendField(Blockly.Msg.MIXLY_TOUCHATTACHINTERRUPT_PIN)
     .setCheck(Number);
     this.appendValueInput("threshold", Number)
-    .appendField(Blockly.MIXLY_ESP32_THRESHOLD)
+    .appendField(Blockly.Msg.MIXLY_ESP32_THRESHOLD)
     .setCheck(Number);
     this.appendDummyInput("");
     this.appendStatementInput('DO')
-    .appendField(Blockly.MIXLY_DO);
+    .appendField(Blockly.Msg.MIXLY_DO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_ATTACHINTERRUPT);
   }
 };
 Blockly.Blocks['inout_esp32_dac'] = {
   init: function() {
     this.appendValueInput("value")
     .setCheck(null)
-    .appendField(Blockly.inout_esp32_dac)
+    .appendField(Blockly.Msg.inout_esp32_dac)
     .appendField(new Blockly.FieldDropdown(profile.default.dac), "PIN")
-    .appendField(Blockly.MIXLY_VALUE2);
+    .appendField(Blockly.Msg.MIXLY_VALUE2);
     this.appendDummyInput();
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(20);
-    this.setTooltip(Blockly.inout_esp32_dac_HELP);
+    this.setTooltip(Blockly.Msg.inout_esp32_dac_HELP);
     this.setHelpUrl("");
   }
 };

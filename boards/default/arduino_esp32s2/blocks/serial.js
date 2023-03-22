@@ -9,7 +9,7 @@ Blockly.Blocks['serial_HardwareSerial'] = {
 	init: function() {
 		this.setColour(Blockly.Msg['SERIAL_HUE']);
 		this.appendDummyInput("")
-		.appendField(Blockly.MIXLY_SETUP+Blockly.Hardware_Serial)
+		.appendField(Blockly.Msg.MIXLY_SETUP+Blockly.Msg.Hardware_Serial)
 		.appendField(new Blockly.FieldDropdown(profile.default.serial_HardwareSelect), "serial_select");
 		this.appendValueInput("RX", Number)
 		.setCheck(Number)
@@ -20,12 +20,12 @@ Blockly.Blocks['serial_HardwareSerial'] = {
 		.setCheck(Number)
 		.setAlign(Blockly.ALIGN_RIGHT);
 		this.appendValueInput("CONTENT", Number)
-		.appendField(Blockly.MIXLY_SERIAL_BEGIN)
+		.appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)
 		.setCheck(Number);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setInputsInline(true);
-		this.setTooltip(Blockly.MIXLY_TOOLTIP_SOFTSERIAL.replace('%1',Blockly.Arduino.valueToCode(this, 'RX',Blockly.Arduino.ORDER_ATOMIC))
+		this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SOFTSERIAL.replace('%1',Blockly.Arduino.valueToCode(this, 'RX',Blockly.Arduino.ORDER_ATOMIC))
 			.replace('%2',Blockly.Arduino.valueToCode(this, 'TX',Blockly.Arduino.ORDER_ATOMIC)));
 	}
 };
@@ -36,8 +36,8 @@ Blockly.Blocks['ESPS2_USB_Serial'] = {
     this.appendValueInput("data")
         .setCheck(null)
         .appendField("USB Serial")
-        .appendField(Blockly.MIXLY_SERIAL_PRINT)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP,"1"], [Blockly.MIXLY_PRINT_INLINE,"2"]]), "mode");
+        .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP,"1"], [Blockly.Msg.MIXLY_PRINT_INLINE,"2"]]), "mode");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Msg['SERIAL_HUE']);
@@ -51,7 +51,7 @@ Blockly.Blocks['ESPS2_USB_read'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("USB Serial")
-        .appendField(Blockly.MIXLY_AVAILABLE);
+        .appendField(Blockly.Msg.MIXLY_AVAILABLE);
     this.setOutput(true, null);
     this.setColour(Blockly.Msg['SERIAL_HUE']);
  this.setTooltip("");
@@ -64,7 +64,7 @@ Blockly.Blocks['ESPS2_USB_read_String'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("USB Serial")
-        .appendField(Blockly.MIXLY_SERIAL_READSTR);
+        .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR);
     this.setOutput(true, null);
     this.setColour(Blockly.Msg['SERIAL_HUE']);
  this.setTooltip("");

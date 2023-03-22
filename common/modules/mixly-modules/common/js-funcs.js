@@ -3,4 +3,4 @@ goog.require('Mixly.Config');
 
 Mixly.JSFuncs.getPlatform = function () {
     return Mixly.Config.BOARD.boardType;
-}
+};

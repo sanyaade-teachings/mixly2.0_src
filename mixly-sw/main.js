@@ -58,8 +58,8 @@ goog.DEPENDENCIES = [
         "require": ['Mixly']
     }, {
         "path": '/../../common/modules/mixly-modules/electron/cloud-download.js',
-        "provide": ['Mixly.CloudDownload'],
-        "require": ['Mixly.Env', 'Mixly.Modules']
+        "provide": ['Mixly.Electron.CloudDownload'],
+        "require": ['Mixly.Env', 'Mixly.Modules', 'Mixly.Electron']
     }, {
         "path": '/../../common/modules/web-modules/store.modern.min.js',
         "provide": ['store'],

@@ -12,10 +12,10 @@ Blockly.Blocks.pe_g1_use_i2c_init = {
             .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"I2C")
             .setCheck("var");
         this.appendValueInput('SUB')
-            .appendField(Blockly.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField('PE G1');
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -30,7 +30,7 @@ Blockly.Blocks['pe_g1_battery_left'] = {
             .appendField("PE G1")
             .setCheck("var");
         this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MIXGO_CAR_BATTERY_LEFT);
+        .appendField(Blockly.Msg.MIXLY_MIXGO_CAR_BATTERY_LEFT);
         this.setOutput(true,Number);
         this.setInputsInline(true);
     }
@@ -43,20 +43,20 @@ Blockly.Blocks.pe_g1_dc_motor = {
             .appendField("PE G1")
             .setCheck("var");
       this.appendValueInput('PIN')
-          .appendField(Blockly.MOTOR_DC)
-          .appendField(Blockly.LCD_NUMBERING)   
+          .appendField(Blockly.Msg.MOTOR_DC)
+          .appendField(Blockly.Msg.LCD_NUMBERING)   
       this.appendDummyInput()
-          .appendField(Blockly.MIXLY_MICROBIT_Direction)
+          .appendField(Blockly.Msg.MIXLY_MICROBIT_Direction)
                   .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.CLOCKWISE, "CW"],
             [Blockly.Msg.ANTI_CLOCKWISE, "CCW"],
-            [Blockly.MOTOR_P, "P"],
-            [Blockly.MOTOR_N, "N"]
+            [Blockly.Msg.MOTOR_P, "P"],
+            [Blockly.Msg.MOTOR_N, "N"]
             ]), "direction");
       this.appendValueInput('speed')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.MIXLY_STEPPER_SET_SPEED);
+          .appendField(Blockly.Msg.MIXLY_STEPPER_SET_SPEED);
       this.appendDummyInput("")
           .appendField("%")    
       this.setPreviousStatement(true, null);
@@ -72,11 +72,11 @@ Blockly.Blocks.pe_g1_dc_motor_speed = {
             .appendField("PE G1")
             .setCheck("var");
       this.appendValueInput('PIN')
-          .appendField(Blockly.MOTOR_DC)
-          .appendField(Blockly.LCD_NUMBERING)          
+          .appendField(Blockly.Msg.MOTOR_DC)
+          .appendField(Blockly.Msg.LCD_NUMBERING)          
           
       this.appendDummyInput()          
-          .appendField(Blockly.MIXLY_STEPPER_GET_SPEED);
+          .appendField(Blockly.Msg.MIXLY_STEPPER_GET_SPEED);
       this.setOutput(true,Number);
       this.setInputsInline(true);
     }
@@ -89,17 +89,17 @@ Blockly.Blocks.pe_g1_servo_set_angle = {
             .appendField("PE G1")
             .setCheck("var");
         this.appendValueInput('PIN')
-            .appendField('180°'+Blockly.MIXLY_SERVO)
-            .appendField(Blockly.LCD_NUMBERING)          
+            .appendField('180°'+Blockly.Msg.MIXLY_SERVO)
+            .appendField(Blockly.Msg.LCD_NUMBERING)          
           
         this.appendValueInput("NUM", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.MIXLY_MICROBIT_JS_BY_ANGLE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SERVO_MOVE);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SERVO_MOVE);
     }
 };
 
@@ -110,19 +110,19 @@ Blockly.Blocks.pe_g1_servo_set_speed = {
             .appendField("PE G1")
             .setCheck("var");
         this.appendValueInput('PIN')
-            .appendField('360°'+Blockly.MIXLY_SERVO)
-            .appendField(Blockly.LCD_NUMBERING)          
+            .appendField('360°'+Blockly.Msg.MIXLY_SERVO)
+            .appendField(Blockly.Msg.LCD_NUMBERING)          
           
         this.appendValueInput("NUM", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.MIXLY_SPEED);
+            .appendField(Blockly.Msg.MIXLY_SPEED);
         this.appendDummyInput()
             .appendField('%');    
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_ESP32_SERVO_SPEED_TOOLIPS);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_SERVO_SPEED_TOOLIPS);
     }
 };
 
@@ -133,10 +133,10 @@ Blockly.Blocks.pe_g1_servo_get_angle = {
             .appendField("PE G1")
             .setCheck("var");
         this.appendValueInput('PIN')
-            .appendField('180°'+Blockly.MIXLY_SERVO)
+            .appendField('180°'+Blockly.Msg.MIXLY_SERVO)
             
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET+Blockly.MIXLY_MICROBIT_JS_BY_ANGLE);      
+            .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE);      
         this.setOutput(true,Number);
         this.setInputsInline(true);
     }
@@ -149,11 +149,11 @@ Blockly.Blocks.pe_g1_servo_get_speed = {
             .appendField("PE G1")
             .setCheck("var");
         this.appendValueInput('PIN')
-            .appendField('360°'+Blockly.MIXLY_SERVO)
-            .appendField(Blockly.LCD_NUMBERING)
+            .appendField('360°'+Blockly.Msg.MIXLY_SERVO)
+            .appendField(Blockly.Msg.LCD_NUMBERING)
             
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_GET+Blockly.MIXLY_SPEED);    
+            .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_SPEED);    
         this.setOutput(true,Number);
         this.setInputsInline(true);
     }

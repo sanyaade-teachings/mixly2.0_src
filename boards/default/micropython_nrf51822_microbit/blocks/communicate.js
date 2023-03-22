@@ -9,8 +9,8 @@ Blockly.Blocks['radio_ons'] = {
     init: function() {
         this.setColour(225);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_ON,'on'],[Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_OFF,'off'],[Blockly.Msg.HTML_RESET,'reset']]), "type")
-            .appendField(Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_WIFI);
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_MICROBIT_PY_COMMUNICATE_ON,'on'],[Blockly.Msg.MIXLY_MICROBIT_PY_COMMUNICATE_OFF,'off'],[Blockly.Msg.HTML_RESET,'reset']]), "type")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_COMMUNICATE_WIFI);
         this.setInputsInline(true);
         this.setOutput(false);
         this.setPreviousStatement(true);
@@ -18,10 +18,10 @@ Blockly.Blocks['radio_ons'] = {
         var thisBlock = this;
         this.setTooltip(function() {
         var mode = thisBlock.getFieldValue('type');
-        var mode0 =Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_WIFI;
+        var mode0 =Blockly.Msg.MIXLY_MICROBIT_PY_COMMUNICATE_WIFI;
         var TOOLTIPS = {
-        'on':Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_ON,
-        'off':Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_OFF,
+        'on':Blockly.Msg.MIXLY_MICROBIT_PY_COMMUNICATE_ON,
+        'off':Blockly.Msg.MIXLY_MICROBIT_PY_COMMUNICATE_OFF,
         'reset':Blockly.Blockly.Msg.HTML_RESET
       };
       return TOOLTIPS[mode]+mode0;
@@ -37,7 +37,7 @@ Blockly.Blocks['microbit_radio_on'] = {
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/radio.html#radio.on",
       "tooltip" : "Turn on the radio. This needs to be explicitly called since the radio draws power and takes up memory that you may otherwise need.",
-      "message0" : Blockly.MIXLY_MICROBIT_Switch_on_radio
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_Switch_on_radio
     });
   }
 };
@@ -50,7 +50,7 @@ Blockly.Blocks['microbit_radio_off'] = {
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/radio.html#radio.off",
       "tooltip" : "Turn off the radio, thus saving power and memory.",
-      "message0" : Blockly.MIXLY_MICROBIT_Switch_off_radio
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_Switch_off_radio
     });
   }
 };
@@ -62,8 +62,8 @@ Blockly.Blocks['microbit_radio_config'] = {
       "nextStatement" : null,
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/radio.html#radio.config",
-      "tooltip" : Blockly.MIXLY_MICROBIT_Configure_radio1,
-      "message0" : Blockly.MIXLY_MICROBIT_Configure_radio,
+      "tooltip" : Blockly.Msg.MIXLY_MICROBIT_Configure_radio1,
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_Configure_radio,
       "args0" : [{
           "min" : 4,
           "value" : 32,
@@ -120,7 +120,7 @@ Blockly.Blocks['microbit_radio_reset'] = {
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/radio.html#radio.reset",
       "tooltip" : "Reset the radio to default settings.",
-      "message0" : Blockly.MIXLY_MICROBIT_Reset_radio
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_Reset_radio
     });
   }
 };
@@ -133,7 +133,7 @@ Blockly.Blocks['microbit_radio_send_string'] = {
       "previousStatement" : null,
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/radio.html#radio.send",
       "tooltip" : "Broadcast a text message.",
-      "message0" : Blockly.MIXLY_MICROBIT_Send_message,
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_Send_message,
       "args0" : [{
           "check" : "String",
           "type" : "input_value",
@@ -148,17 +148,17 @@ Blockly.Blocks['radio_send_string'] = {
     init:function(){
         this.setColour(225);
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MICROBIT_RADIO_SEND);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_RADIO_SEND);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
-              [Blockly.MIXLY_MICROBIT_MSG,'send'],
-              [Blockly.MIXLY_MICROBIT_MSG_BYTE,'send_bytes']]), "type")
+              [Blockly.Msg.MIXLY_MICROBIT_MSG,'send'],
+              [Blockly.Msg.MIXLY_MICROBIT_MSG_BYTE,'send_bytes']]), "type")
         this.appendValueInput('data')
             // .setCheck(String)
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_Send_message1);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Send_message1);
     }
 }
 
@@ -168,8 +168,8 @@ Blockly.Blocks['microbit_radio_receive'] = {
       "colour" : 225,
       "output" : "String",
       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/radio.html#radio.receive",
-      "tooltip" :  Blockly.MIXLY_MICROBIT_Receive_message,
-      "message0" : Blockly.MIXLY_MICROBIT_Receive_message
+      "tooltip" :  Blockly.Msg.MIXLY_MICROBIT_Receive_message,
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_Receive_message
     });
   }
 };
@@ -178,15 +178,15 @@ Blockly.Blocks['radio_receive_string'] = {
     init:function(){
         this.setColour(225);
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MICROBIT_Receive_message);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_Receive_message);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
-              [Blockly.MIXLY_MICROBIT_MSG,'receive'],
-              [Blockly.MIXLY_MICROBIT_MSG_BYTE,'receive_bytes'],
-              [Blockly.MIXLY_MICROBIT_MSG_FULL,'receive_full']]), "type")
+              [Blockly.Msg.MIXLY_MICROBIT_MSG,'receive'],
+              [Blockly.Msg.MIXLY_MICROBIT_MSG_BYTE,'receive_bytes'],
+              [Blockly.Msg.MIXLY_MICROBIT_MSG_FULL,'receive_full']]), "type")
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_Receive_message);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Receive_message);
     }
 }
 
@@ -194,8 +194,8 @@ Blockly.Blocks['i2c_init'] = {
   init: function() {
    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
    this.appendValueInput("RX", Number)
-       //.appendField(Blockly.MIXLY_SETUP)
-       .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_SETUP)
+       //.appendField(Blockly.Msg.MIXLY_SETUP)
+       .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_SETUP)
        .appendField("sda")
        .setCheck(Number)
        .setAlign(Blockly.ALIGN_RIGHT);
@@ -218,16 +218,16 @@ Blockly.Blocks['i2c_read'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('address')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_READ_ADDRESS);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_READ_ADDRESS);
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.LANG_MATH_BYTE);
+            .appendField(Blockly.Msg.LANG_MATH_BYTE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT)
             .appendField(new Blockly.FieldCheckbox(false), "is_repeated");
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_I2C_READ);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_READ);
     }
 }
 
@@ -236,16 +236,16 @@ Blockly.Blocks['i2c_write'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('address')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_WRITE_ADDRESS);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_WRITE_ADDRESS);
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_JS_I2C_VALUE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_VALUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT)
             .appendField(new Blockly.FieldCheckbox(false), "is_repeated");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_I2C_WRITE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_JS_I2C_WRITE);
     }
 }
 
@@ -255,7 +255,7 @@ Blockly.Blocks['spi_init'] = {
       "colour" : Blockly.Msg['COMMUNICATE_HUE'],
       "nextStatement" : null,
       "previousStatement" : null,
-      "message0" : Blockly.MIXLY_MICROBIT_SPI_INIT,
+      "message0" : Blockly.Msg.MIXLY_MICROBIT_SPI_INIT,
       "args0" : [{
           "value" : 1000000,
           "type" : "field_number",
@@ -300,10 +300,10 @@ Blockly.Blocks['spi_write'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.MIXLY_MICROBIT_JS_SPI_WRITE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_SPI_WRITE);
 
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_SPI_WRITE);
+        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_JS_SPI_WRITE);
     }
 }

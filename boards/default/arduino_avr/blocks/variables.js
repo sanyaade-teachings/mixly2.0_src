@@ -6,18 +6,18 @@ goog.require('Blockly.Blocks');
 
 Blockly.Msg['VARIABLES_HUE'] = 330;
 var DATATYPES =
-    [[Blockly.LANG_MATH_INT, 'int'],
-    [Blockly.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-    [Blockly.LANG_MATH_WORD, 'word'],
-    [Blockly.LANG_MATH_LONG, 'long'],
-    [Blockly.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-    [Blockly.LANG_MATH_FLOAT, 'float'],
-    [Blockly.LANG_MATH_DOUBLE, 'double'],
-    [Blockly.LANG_MATH_BOOLEAN, 'boolean'],
-    [Blockly.LANG_MATH_BYTE, 'byte'],
-    [Blockly.LANG_MATH_CHAR, 'char'],
-    [Blockly.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-    [Blockly.LANG_MATH_STRING, 'String'],
+    [[Blockly.Msg.LANG_MATH_INT, 'int'],
+    [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
+    [Blockly.Msg.LANG_MATH_WORD, 'word'],
+    [Blockly.Msg.LANG_MATH_LONG, 'long'],
+    [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
+    [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
+    [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
+    [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
+    [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
+    [Blockly.Msg.LANG_MATH_CHAR, 'char'],
+    [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
+    [Blockly.Msg.LANG_MATH_STRING, 'String'],
     ["char*", "char*"],
     ["uint8_t", "uint8_t"],
     ["uint16_t", "uint16_t"],
@@ -30,15 +30,15 @@ Blockly.Blocks['variables_declare'] = {
     init: function () {
         this.setColour(Blockly.Msg['VARIABLES_HUE']);
         this.appendValueInput('VALUE', null)
-            .appendField(Blockly.MIXLY_DECLARE)
-            .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_GLOBAL_VARIABLE, "global_variate"], [Blockly.MIXLY_LOCAL_VARIABLE, "local_variate"]]), "variables_type")
+            .appendField(Blockly.Msg.MIXLY_DECLARE)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GLOBAL_VARIABLE, "global_variate"], [Blockly.Msg.MIXLY_LOCAL_VARIABLE, "local_variate"]]), "variables_type")
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
-            .appendField(Blockly.MIXLY_AS)
+            .appendField(Blockly.Msg.MIXLY_AS)
             .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
-            .appendField(Blockly.MIXLY_VALUE);
+            .appendField(Blockly.Msg.MIXLY_VALUE);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_VARIABLES_DECLARE);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_VARIABLES_DECLARE);
     },
     getVars: function () {
         return [this.getFieldValue('VAR')];
@@ -72,7 +72,7 @@ Blockly.Blocks['variables_get'] = {
 	  if(Blockly.Arduino.definitions_['var_declare'+varName]){
 		  this.setWarningText(null);
 	  }else{
-		  this.setWarningText(Blockly.MIXLY_WARNING_NOT_DECLARE);
+		  this.setWarningText(Blockly.Msg.MIXLY_WARNING_NOT_DECLARE);
 	  }
   }*/
 };
@@ -82,7 +82,7 @@ Blockly.Blocks['variables_set'] = {
         this.setColour(Blockly.Msg['VARIABLES_HUE']);
         this.appendValueInput('VALUE')
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
-            .appendField(Blockly.MIXLY_VALUE2);
+            .appendField(Blockly.Msg.MIXLY_VALUE2);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
@@ -100,7 +100,7 @@ Blockly.Blocks['variables_set'] = {
 	  if(Blockly.Arduino.definitions_['var_declare'+varName]){
 		  this.setWarningText(null);
 	  }else{
-		  this.setWarningText(Blockly.MIXLY_WARNING_NOT_DECLARE);
+		  this.setWarningText(Blockly.Msg.MIXLY_WARNING_NOT_DECLARE);
 	  }
   }*/
 };
@@ -109,7 +109,7 @@ Blockly.Blocks['variables_set'] = {
         this.setColour(Blockly.Msg['VARIABLES_HUE']);
         this.appendValueInput('VALUE')
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
-            .appendField(Blockly.MIXLY_VALUE2);
+            .appendField(Blockly.Msg.MIXLY_VALUE2);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
@@ -131,23 +131,23 @@ Blockly.Blocks['variables_change'] = {
     init: function () {
         this.setColour(Blockly.Msg['VARIABLES_HUE']);
         var DATATYPES =
-            [[Blockly.LANG_MATH_INT, 'int'],
-            [Blockly.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-            [Blockly.LANG_MATH_WORD, 'word'],
-            [Blockly.LANG_MATH_LONG, 'long'],
-            [Blockly.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-            [Blockly.LANG_MATH_FLOAT, 'float'],
-            [Blockly.LANG_MATH_DOUBLE, 'double'],
-            [Blockly.LANG_MATH_BOOLEAN, 'boolean'],
-            [Blockly.LANG_MATH_BYTE, 'byte'],
-            [Blockly.LANG_MATH_CHAR, 'char'],
-            [Blockly.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-            [Blockly.LANG_MATH_STRING, 'String']];
+            [[Blockly.Msg.LANG_MATH_INT, 'int'],
+            [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
+            [Blockly.Msg.LANG_MATH_WORD, 'word'],
+            [Blockly.Msg.LANG_MATH_LONG, 'long'],
+            [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
+            [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
+            [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
+            [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
+            [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
+            [Blockly.Msg.LANG_MATH_CHAR, 'char'],
+            [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
+            [Blockly.Msg.LANG_MATH_STRING, 'String']];
         this.appendValueInput('MYVALUE')
             .appendField(new Blockly.FieldDropdown(DATATYPES), 'OP');
         // Assign 'this' to a variable for use in the tooltip closure below.
         this.setOutput(true);
-        this.setTooltip(Blockly.MIXLY_TOOLTIP_VARIABLES_CHANGE);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_VARIABLES_CHANGE);
     }
 };
 

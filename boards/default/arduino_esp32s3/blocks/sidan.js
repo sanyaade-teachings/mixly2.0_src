@@ -28,21 +28,21 @@ Blockly.Msg.STOP_PLAYING = "放完停止";
 Blockly.Msg.BLUETOOTH_CONNECT = "蓝牙回连";
 Blockly.Msg.MATH_DEC_MODE = "方式";
 Blockly.Msg.REQUEST_SUCCEEDED = "请求成功";
-Blockly.MIXLY_FAILED = "请求失败";
+Blockly.Msg.MIXLY_FAILED = "请求失败";
 Blockly.Msg.MODE_SWITCH = "模式切换";
 //HSC025A 蓝牙MP3指令
 var hsc025a_mode = [
 [Blockly.Msg.MODE_SWITCH, "1"],
-[Blockly.MIXLY_MP3_PLAY, "2"],
-[Blockly.MIXLY_MP3_PAUSE, "3"],
-[Blockly.MIXLY_MP3_NEXT, "4"],
-[Blockly.MIXLY_MP3_PREV, "5"],
-[Blockly.MIXLY_MP3_VOL_UP, "6"],
-[Blockly.MIXLY_MP3_VOL_DOWN, "7"],
+[Blockly.Msg.MIXLY_MP3_PLAY, "2"],
+[Blockly.Msg.MIXLY_MP3_PAUSE, "3"],
+[Blockly.Msg.MIXLY_MP3_NEXT, "4"],
+[Blockly.Msg.MIXLY_MP3_PREV, "5"],
+[Blockly.Msg.MIXLY_MP3_VOL_UP, "6"],
+[Blockly.Msg.MIXLY_MP3_VOL_DOWN, "7"],
 [Blockly.Msg.STANDBY, "8"],
 [Blockly.Msg.BOOT, "9"],
 [Blockly.Msg.PLAY_PAUSE, "10"],
-[Blockly.MIXLY_MICROBIT_Stop_music, "11"],
+[Blockly.Msg.MIXLY_MICROBIT_Stop_music, "11"],
 [Blockly.Msg.SHUTDOWN, "12"],
 [Blockly.Msg.SD_CARD_MODE, "13"],
 [Blockly.Msg.BLUETOOTH_MODE, "14"],

@@ -3,9 +3,10 @@
 goog.require('Mixly.MJSON');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
+goog.require('Blockly.Msg.zh-hans')
 goog.provide('Mixly.Msg');
 
-const { Msg, MJSON, Config } = Mixly;
+/*const { Msg, MJSON, Config } = Mixly;
 
 const { USER } = Config;
 
@@ -27,6 +28,6 @@ Msg.getLang = (str) => {
     return Msg.LANG[Msg.nowLang][str];
 }
 
-console.log('Msg.LANG', Msg.LANG);
+console.log('Msg.LANG', Msg.LANG);*/
 
 })();

@@ -2,13 +2,16 @@
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
-goog.provide('Mixly.CloudDownload');
+goog.require('Mixly.Electron');
+goog.provide('Mixly.Electron.CloudDownload');
 
 const {
     Modules,
     Env,
-    CloudDownload
+    Electron
 } = Mixly;
+
+const { CloudDownload } = Electron;
 
 const {
     fs_extra,

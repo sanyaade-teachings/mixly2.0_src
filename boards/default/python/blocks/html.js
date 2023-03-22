@@ -60,7 +60,7 @@ Blockly.Blocks.html_content = {
                                                 [Blockly.Msg.HTML_UL,"ul"],
                                                 [Blockly.Msg.HTML_LI,"li"]]), 'LEVEL')
     // this.appendValueInput('style')
-    //     .appendField(Blockly.MIXLY_AIP_ATTR)
+    //     .appendField(Blockly.Msg.MIXLY_AIP_ATTR)
     //     .setAlign(Blockly.ALIGN_RIGHT);            
     this.appendStatementInput('DO')
         .appendField('');
@@ -78,7 +78,7 @@ Blockly.Blocks.html_content_more = {
         .appendField(new Blockly.FieldTextInput('tag'),"LEVEL")
         .appendField('>')
     this.appendValueInput('style')
-        .appendField(Blockly.MIXLY_AIP_ATTR)
+        .appendField(Blockly.Msg.MIXLY_AIP_ATTR)
         .setAlign(Blockly.ALIGN_RIGHT);            
     this.appendStatementInput('DO')
         .appendField('');
@@ -132,7 +132,7 @@ Blockly.Blocks.html_form = {
         .appendField(Blockly.Msg.HTML_VALUE)
         .appendField(new Blockly.FieldTextInput('go'),"VALUE")
     this.appendValueInput('style')
-        .appendField(Blockly.MIXLY_AIP_ATTR)
+        .appendField(Blockly.Msg.MIXLY_AIP_ATTR)
         .setAlign(Blockly.ALIGN_RIGHT);            
     this.setInputsInline(true);
     this.setPreviousStatement(true);

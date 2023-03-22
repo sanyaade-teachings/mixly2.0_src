@@ -12,7 +12,7 @@ Blockly.Blocks.class.OBJECT_HUE = 345;
 Blockly.Blocks.class_make= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField(Blockly.CREATE_CLASS)
+      .appendField(Blockly.Msg.CREATE_CLASS)
       .appendField(new Blockly.FieldTextInput(""), "VAR");
   this.appendStatementInput("data")
       .setCheck(null)
@@ -38,9 +38,9 @@ Blockly.Blocks.class_make= {
 Blockly.Blocks.class_make_with_base= {
   init: function() { 
   this.appendValueInput("NAME")  
-      .appendField(Blockly.CREATE_CLASS)
+      .appendField(Blockly.Msg.CREATE_CLASS)
       .appendField(new Blockly.FieldTextInput(""), "VAR")
-      .appendField(" "+Blockly.FATHER_CLASS+":");
+      .appendField(" "+Blockly.Msg.FATHER_CLASS+":");
   this.appendStatementInput("data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT);
@@ -66,7 +66,7 @@ Blockly.Blocks['class_get'] = {
   init: function() {
     this.setColour(Blockly.Blocks.class.CLASS_HUE);
     this.appendDummyInput()
-        .appendField(Blockly.MIXPY_CLASS)
+        .appendField(Blockly.Msg.MIXPY_CLASS)
         .appendField(new Blockly.FieldTextInput(''), 'VAR');
     this.setOutput(true);
     this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
@@ -86,9 +86,9 @@ Blockly.Blocks['property_set'] = {
     this.setColour(Blockly.Blocks.class.PROPERTY_HUE);
     this.appendValueInput('VALUE');
     this.appendValueInput('DATA')
-        .appendField(Blockly.MIXPY_ATTRIBUTE_OF)
+        .appendField(Blockly.Msg.MIXPY_ATTRIBUTE_OF)
         .appendField(new Blockly.FieldTextInput(''), 'VAR')
-        .appendField(" "+Blockly.MIXLY_VALUE2+" ");
+        .appendField(" "+Blockly.Msg.MIXLY_VALUE2+" ");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -113,7 +113,7 @@ Blockly.Blocks['property_get'] = {
     this.setColour(Blockly.Blocks.class.PROPERTY_HUE);
     this.appendValueInput('VALUE');
     this.appendDummyInput()
-        .appendField(Blockly.MIXPY_ATTRIBUTE_OF)
+        .appendField(Blockly.Msg.MIXPY_ATTRIBUTE_OF)
         .appendField(new Blockly.FieldTextInput(''), 'VAR');
     this.setInputsInline(true);
     this.setOutput(true);
@@ -144,7 +144,7 @@ Blockly.Blocks['method_procedures_defnoreturn'] = {
         Blockly.Class.prorename);
     nameField.setSpellcheck(false);
     this.appendDummyInput()
-        .appendField(Blockly.MIXPY_CREATE_METHOD)
+        .appendField(Blockly.Msg.MIXPY_CREATE_METHOD)
         .appendField(Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE)
         .appendField(nameField, 'NAME')
         .appendField('', 'PARAMS');
@@ -459,7 +459,7 @@ Blockly.Blocks['method_procedures_defreturn'] = {
         Blockly.Class.prorename);
     nameField.setSpellcheck(false);
     this.appendDummyInput()
-        .appendField(Blockly.MIXPY_CREATE_METHOD)
+        .appendField(Blockly.Msg.MIXPY_CREATE_METHOD)
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_TITLE)
         .appendField(nameField, 'NAME')
         .appendField('', 'PARAMS');
@@ -538,7 +538,7 @@ Blockly.Blocks['method_procedures_mutatorarg'] = {
     this.setColour(Blockly.Blocks.class.METHOD_HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_BEFORE_PARAMS)
-    //.appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_NUMBER, 'number'], [Blockly.LANG_MATH_STRING, 'string'], [Blockly.LANG_MATH_BOOLEAN, 'boolean'], [Blockly.MIXLY_MICROBIT_JS_TYPE_ARRAY_NUMBER, 'Array<number>'], [Blockly.MIXLY_MICROBIT_JS_TYPE_ARRAY_STRING, 'Array<string>']]), 'TYPEVAR')
+    //.appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_NUMBER, 'number'], [Blockly.Msg.LANG_MATH_STRING, 'string'], [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'], [Blockly.Msg.MIXLY_MICROBIT_JS_TYPE_ARRAY_NUMBER, 'Array<number>'], [Blockly.Msg.MIXLY_MICROBIT_JS_TYPE_ARRAY_STRING, 'Array<string>']]), 'TYPEVAR')
         .appendField(new Blockly.FieldTextInput('x', this.validator_), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -570,7 +570,7 @@ Blockly.Blocks['method_procedures_callnoreturn'] = {
     this.setColour(Blockly.Blocks.class.METHOD_HUE);
     this.appendValueInput('DATA');
     this.appendDummyInput('TOPROW')
-        .appendField(Blockly.MIXPY_EXECUTION_METHOD)
+        .appendField(Blockly.Msg.MIXPY_EXECUTION_METHOD)
         .appendField(this.id, 'NAME');
     this.setInputsInline(true);
     this.setPreviousStatement(true);
@@ -818,7 +818,7 @@ Blockly.Blocks['method_procedures_callreturn'] = {
     this.setColour(Blockly.Blocks.class.METHOD_HUE);
     this.appendValueInput('DATA');
     this.appendDummyInput('TOPROW')
-        .appendField(Blockly.MIXPY_EXECUTION_METHOD)
+        .appendField(Blockly.Msg.MIXPY_EXECUTION_METHOD)
         .appendField(Blockly.Msg.PROCEDURES_CALLRETURN_CALL)
         .appendField('', 'NAME');
     this.setOutput(true);
@@ -1015,9 +1015,9 @@ Blockly.Blocks['method_procedures_return'] = {
 Blockly.Blocks.object_set= {
   init: function() { 
   this.appendDummyInput("EMPTY")  
-      .appendField(Blockly.MIXPY_OBJECT)
+      .appendField(Blockly.Msg.MIXPY_OBJECT)
       .appendField(new Blockly.FieldTextInput(""), "VAR11")
-      .appendField(" "+Blockly.MIXLY_VALUE2+" "+Blockly.MIXPY_CLASS)
+      .appendField(" "+Blockly.Msg.MIXLY_VALUE2+" "+Blockly.Msg.MIXPY_CLASS)
       .appendField(new Blockly.FieldTextInput(""), "VAR10");
   this.itemCount_ = 0;
   this.updateShape_();
@@ -1113,7 +1113,7 @@ Blockly.Blocks.object_set= {
       for (var i = 0; i < this.itemCount_; i++) {
         var input = this.appendValueInput('ADD' + i);
         input.setAlign(Blockly.ALIGN_RIGHT)
-        input.appendField(Blockly.MIXLY_PARAMS+(i+1)+":");
+        input.appendField(Blockly.Msg.MIXLY_PARAMS+(i+1)+":");
       }
     }
   }
@@ -1127,7 +1127,7 @@ Blockly.Blocks['object_set_with_item'] = {
    init: function() {
     this.setColour(Blockly.Blocks.class.OBJECT_HUE);
     this.appendDummyInput()
-    .appendField(Blockly.MIXPY_ADD_PARAMETERS);
+    .appendField(Blockly.Msg.MIXPY_ADD_PARAMETERS);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TOOLTIP);
@@ -1143,7 +1143,7 @@ Blockly.Blocks['object_set_with_container'] = {
    init: function() {
     this.setColour(Blockly.Blocks.class.OBJECT_HUE);
     this.appendDummyInput()
-        .appendField(Blockly.MIXLY_PARAMS);
+        .appendField(Blockly.Msg.MIXLY_PARAMS);
     this.appendStatementInput('STACK');
     this.setTooltip("");
     this.contextMenu = false;
@@ -1154,7 +1154,7 @@ Blockly.Blocks['object_get'] = {
   init: function() {
     this.setColour(Blockly.Blocks.class.OBJECT_HUE);
     this.appendDummyInput()
-        .appendField(Blockly.MIXPY_OBJECT)
+        .appendField(Blockly.Msg.MIXPY_OBJECT)
         .appendField(new Blockly.FieldTextInput(''), 'VAR');
     this.setOutput(true);
     this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);

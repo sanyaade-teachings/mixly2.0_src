@@ -10,12 +10,12 @@ Blockly.Blocks.MixePi.HUE3 = "#EF5411";
 profile["default"] = profile["esp32_mixepi"];
 
 var MIXEPI_ADXL345_ACTION = [
-[Blockly.HANDBIT_FORWARD, "accel.getAcceleration().x>-4.7&&accel.getAcceleration().x<0&&accel.getAcceleration().y<1&&accel.getAcceleration().y>-1&&accel.getAcceleration().z<-8&&accel.getAcceleration().z>-9.8"],
-[Blockly.HANDBIT_BACKWARD, "accel.getAcceleration().x>0&&accel.getAcceleration().x<4.7&&accel.getAcceleration().y<1&&accel.getAcceleration().y>-1&&accel.getAcceleration().z<-8&&accel.getAcceleration().z>-9.8"],
-[Blockly.HANDBIT_LEFT, "accel.getAcceleration().y>0&&accel.getAcceleration().y<5.5&&accel.getAcceleration().z<-7.5&&accel.getAcceleration().z>-9.8"],
-[Blockly.HANDBIT_RIGHT, "accel.getAcceleration().y<0&&accel.getAcceleration().y>-4.7&&accel.getAcceleration().z<-7.5&&accel.getAcceleration().z>-9.8"],
-[Blockly.HANDBIT_UP, "accel.getAcceleration().z>-9.8&&accel.getAcceleration().z<-8"],
-[Blockly.HANDBIT_DOWN, "accel.getAcceleration().z>8&&accel.getAcceleration().z<9.8"]
+[Blockly.Msg.HANDBIT_FORWARD, "accel.getAcceleration().x>-4.7&&accel.getAcceleration().x<0&&accel.getAcceleration().y<1&&accel.getAcceleration().y>-1&&accel.getAcceleration().z<-8&&accel.getAcceleration().z>-9.8"],
+[Blockly.Msg.HANDBIT_BACKWARD, "accel.getAcceleration().x>0&&accel.getAcceleration().x<4.7&&accel.getAcceleration().y<1&&accel.getAcceleration().y>-1&&accel.getAcceleration().z<-8&&accel.getAcceleration().z>-9.8"],
+[Blockly.Msg.HANDBIT_LEFT, "accel.getAcceleration().y>0&&accel.getAcceleration().y<5.5&&accel.getAcceleration().z<-7.5&&accel.getAcceleration().z>-9.8"],
+[Blockly.Msg.HANDBIT_RIGHT, "accel.getAcceleration().y<0&&accel.getAcceleration().y>-4.7&&accel.getAcceleration().z<-7.5&&accel.getAcceleration().z>-9.8"],
+[Blockly.Msg.HANDBIT_UP, "accel.getAcceleration().z>-9.8&&accel.getAcceleration().z<-8"],
+[Blockly.Msg.HANDBIT_DOWN, "accel.getAcceleration().z>8&&accel.getAcceleration().z<9.8"]
 ];
 
 
@@ -35,14 +35,14 @@ Blockly.Blocks.mixePi_button_is_pressed = {
   init: function(){
     this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput("")
-    .appendField(Blockly.MIXLY_BUTTON);
+    .appendField(Blockly.Msg.MIXLY_BUTTON);
     this.appendDummyInput("")
     .appendField(new Blockly.FieldDropdown(profile.default.button),  'btn');
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_IS_PRESSED);
+    .appendField(Blockly.Msg.MIXLY_IS_PRESSED);
     this.setOutput(true, Boolean);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.MIXLY_SENOR_IS_PRESSED);
+    this.setTooltip(Blockly.Msg.MIXLY_SENOR_IS_PRESSED);
 }
 };
 
@@ -50,10 +50,10 @@ Blockly.Blocks.mixepi_light= {
   init: function(){
     this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_ESP32_LIGHT);
+    .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
     this.setOutput(true, Number);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
 }
 };
 
@@ -61,10 +61,10 @@ Blockly.Blocks.mixepi_sound= {
   init: function(){
     this.setColour(Blockly.Msg['SENSOR_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.MIXLY_ESP32_SOUND);
+    .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
     this.setOutput(true, Number);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
+    this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
 }
 };
 
@@ -72,14 +72,14 @@ Blockly.Blocks.mixepi_inout_touchRead = {
   init: function(){
      this.setColour(Blockly.Msg['SENSOR_HUE']);
      this.appendDummyInput()
-     .appendField(Blockly.MIXLY_ESP32_TOUCH)
-     .appendField(Blockly.MIXLY_PIN)
+     .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
+     .appendField(Blockly.Msg.MIXLY_PIN)
      .appendField(new Blockly.FieldDropdown(profile.default.touch), 'touch_pin');
      this.appendDummyInput()
-     .appendField(Blockly.MIXLY_ESP32_MACHINE_VALUE)
+     .appendField(Blockly.Msg.MIXLY_ESP32_MACHINE_VALUE)
      this.setOutput(true, Number);
      this.setInputsInline(true);
-     this.setTooltip(Blockly.MIXLY_ESP32_INOUT_PIN_PRESSED_TOOLTIP);
+     this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_PIN_PRESSED_TOOLTIP);
  }
 };
 
@@ -103,11 +103,11 @@ Blockly.Blocks.mixepi_rgb_rainbow1 = {
   init: function () {
     this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
-    .appendField(Blockly.MIXLY_RGB);
+    .appendField(Blockly.Msg.MIXLY_RGB);
     this.appendValueInput("WAIT")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_RGBdisplay_rgb_rainbow1);
+    .appendField(Blockly.Msg.MIXLY_RGBdisplay_rgb_rainbow1);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -118,13 +118,13 @@ Blockly.Blocks.mixepi_rgb_rainbow3 = {
   init: function () {
     this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
-    .appendField(Blockly.MIXLY_RGB);
+    .appendField(Blockly.Msg.MIXLY_RGB);
     this.appendDummyInput("")
     .appendField(new Blockly.FieldDropdown(DISPLAY_RAINBOW_TYPE), "TYPE");
     this.appendValueInput("rainbow_color")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_RGB_display_rgb_rainbow3);
+    .appendField(Blockly.Msg.MIXLY_RGB_display_rgb_rainbow3);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -139,7 +139,7 @@ Blockly.Blocks.RGB_color_seclet = {
     .appendField(new Blockly.FieldColour("ff0000"), "COLOR");
     this.setInputsInline(true);
     this.setOutput(true, Number);
-    this.setTooltip(Blockly.OLED_DRAW_PIXE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.OLED_DRAW_PIXE_TOOLTIP);
 }
 };
 
@@ -149,15 +149,15 @@ Blockly.Blocks.RGB_color_rgb = {
     this.appendValueInput("R")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_RGB_R);
+    .appendField(Blockly.Msg.MIXLY_RGB_R);
     this.appendValueInput("G")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_RGB_G);
+    .appendField(Blockly.Msg.MIXLY_RGB_G);
     this.appendValueInput("B")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_RGB_B);
+    .appendField(Blockly.Msg.MIXLY_RGB_B);
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('');
@@ -168,11 +168,11 @@ Blockly.Blocks.mixepi_rgb = {
   init: function () {
     this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
-    .appendField(Blockly.MIXLY_RGB);
+    .appendField(Blockly.Msg.MIXLY_RGB);
     this.appendValueInput("_LED_")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_RGB_NUM);
+    .appendField(Blockly.Msg.MIXLY_RGB_NUM);
     this.appendDummyInput("")
     .appendField(Blockly.Msg.HTML_COLOUR);
     this.appendValueInput("COLOR", Number)
@@ -188,7 +188,7 @@ Blockly.Blocks.mixepi_rgb2 = {
   init: function () {
     this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
-    .appendField(Blockly.MIXLY_RGB);
+    .appendField(Blockly.Msg.MIXLY_RGB);
     this.appendDummyInput("")
     .appendField("1")
     .appendField(Blockly.Msg.HTML_COLOUR);
@@ -214,11 +214,11 @@ Blockly.Blocks.mixepi_rgb_Brightness = {
   init: function () {
     this.setColour(Blockly.Msg['ACTUATOR_HUE']);
     this.appendDummyInput("")
-    .appendField(Blockly.MIXLY_RGB);
+    .appendField(Blockly.Msg.MIXLY_RGB);
     this.appendValueInput("Brightness")
     .setCheck(Number)
     .setAlign(Blockly.ALIGN_RIGHT)
-    .appendField(Blockly.MIXLY_BRIGHTNESS);
+    .appendField(Blockly.Msg.MIXLY_BRIGHTNESS);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

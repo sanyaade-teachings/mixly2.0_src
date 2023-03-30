@@ -233,3 +233,197 @@ Blockly.Python.algorithm_print_divide = function() {
   var code = 'print("二分法查找次数为：",cnt)';
   return code;
 };
+
+Blockly.Python.hanoi_init = function() {
+  Blockly.Python.definitions_.import_turtle = "import turtle";
+  Blockly.Python.definitions_.import_time = "import time";
+  Blockly.Python.definitions_.import_math = "import math";
+  function randomHexColor() {
+    //随机生成十六进制颜色 
+    var hex = Math.floor(Math.random() * 16777216).toString(16);
+    //生成ffffff以内16进制数 
+    while (hex.length < 6) {
+      //while循环判断hex位数，少于6位前面加0凑够6位
+      hex = '0' + hex;
+    }
+    return '#' + hex;  //返回‘#'开头16进制颜色
+  }
+  var num = this.getFieldValue('NUM');
+  let colorList = [];
+  let i = 0;
+  while (i < num) {
+    i++;
+    colorList.push('"' + randomHexColor() + '"');
+  }
+  Blockly.Python.setups_['init_Hanoi'] = `
+def init_Hanoi():
+    pen = turtle.Turtle()
+    pen.hideturtle()
+    pen.speed(0)
+    for i in range(0, 3, 1):
+        pen.penup()
+        pen.setheading(0)
+        pen.goto(150 * i - 200,-100)
+        pen.pendown()
+        pen.pensize(5)
+        pen.forward(100)
+        pen.goto(150 * i - 150,-100)
+        pen.setheading(90)
+        pen.forward(200)`;
+  Blockly.Python.setups_['begin'] = `
+def begin():    
+    s = turtle.Turtle()
+    s.hideturtle()
+    s.penup()
+    s.speed(0)
+    s.goto(0,-150)
+    s.write('3')
+    time.sleep(1)
+    s.clear()
+    s.write('2')
+    time.sleep(1)
+    s.clear()
+    s.write('1')
+    time.sleep(1)
+    s.clear()
+    s.write('Start!')
+    time.sleep(1)
+    s.clear()`;
+    Blockly.Python.setups_['move'] = `
+def move(x, y):
+    try:
+        t = tower[x].pop(-1)
+        a = tower_num[x].pop(-1)
+        if tower_num[y]!=[]:
+            b = tower_num[y][-1]
+            if a<b:
+                print('非法移动，不能将大盘放置在小盘上')
+                exit()        
+        t.goto(150 * y - 150,20 * len(tower[y]) - 90)
+        tower[y].append(t)
+        tower_num[y].append(a)
+    except IndexError:
+        print('非法移动，未找到可移动的圆盘')
+        exit()`;
+  var code = `num = ${num}
+tower = [[], [], []]
+tower_num = [[], [], []]
+A,B,C=0,1,2
+total_num=0
+color= (${colorList.join(', ')})
+init_Hanoi()
+for i in range(0, num, 1):
+    tina = turtle.Turtle()
+    tina.penup()
+    tina.shape('square')
+    tina.color("#000000",color[i])
+    tina.goto(-150,20 * i - 90)
+    tower[0].append(tina)
+    tower_num[0].append(i)
+count_turtle=turtle.Turtle()
+count_turtle.hideturtle()
+count_turtle.penup()
+count_turtle.goto(0,150)
+count_turtle.write('总步数：0')    
+begin()\n`;
+  return code;
+};
+
+Blockly.Python.hanoi_init_offline = function() {
+  Blockly.Python.definitions_.import_turtle = "import turtle";
+  Blockly.Python.definitions_.import_time = "import time";
+  Blockly.Python.definitions_.import_math = "import math";
+  var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+  var num = this.getFieldValue('NUM');
+  Blockly.Python.setups_['init_Hanoi'] = `
+def init_Hanoi():
+    pen = turtle.Turtle()
+    pen.hideturtle()
+    pen.speed(0)
+    for i in range(0, 3, 1):
+        pen.penup()
+        pen.setheading(0)
+        pen.goto(150 * i - 200,-100)
+        pen.pendown()
+        pen.pensize(5)
+        pen.forward(100)
+        pen.goto(150 * i - 150,-100)
+        pen.setheading(90)
+        pen.forward(200)`;
+  Blockly.Python.setups_['begin'] = `
+def begin():    
+    s = turtle.Turtle()
+    s.hideturtle()
+    s.penup()
+    s.speed(0)
+    s.goto(0,-150)
+    s.write('3')
+    time.sleep(1)
+    s.clear()
+    s.write('2')
+    time.sleep(1)
+    s.clear()
+    s.write('1')
+    time.sleep(1)
+    s.clear()
+    s.write('Start!')
+    time.sleep(1)
+    s.clear()`;
+    Blockly.Python.setups_['move'] = `
+def move(x, y):
+    try:
+        t = tower[x].pop(-1)
+        a = tower_num[x].pop(-1)
+        if tower_num[y]!=[]:
+            b = tower_num[y][-1]
+            if a<b:
+                print('非法移动，不能将大盘放置在小盘上')
+                exit()        
+        t.goto(150 * y - 150,20 * len(tower[y]) - 90)
+        tower[y].append(t)
+        tower_num[y].append(a)
+    except IndexError:
+        print('非法移动，未找到可移动的圆盘')
+        exit()`;
+  var code = `num = ${num}
+tower = [[], [], []]
+tower_num = [[], [], []]
+A,B,C=0,1,2
+total_num=0
+color= (${color})
+init_Hanoi()
+for i in range(0, num, 1):
+    tina = turtle.Turtle()
+    tina.penup()
+    tina.shape('square')
+    if num == 1:
+        tina.shapesize(1,7,1)
+    else:
+        tina.shapesize(1,7 - (6 / (num - 1)) * i,1)
+    tina.color("#000000",color)
+    tina.speed(3)
+    tina.goto(-150,20 * i - 90)
+    tower[0].append(tina)
+    tower_num[0].append(i)
+count_turtle=turtle.Turtle()
+count_turtle.hideturtle()
+count_turtle.penup()
+count_turtle.goto(0,150)
+count_turtle.write('总步数：0')    
+begin()\n`;
+  return code;
+};
+
+
+Blockly.Python.hanoi_move = function() {
+  var fromNum = Blockly.Python.valueToCode(this, 'FROM_NUM', Blockly.Python.ORDER_ATOMIC) || '0';
+  var toNum = Blockly.Python.valueToCode(this, 'TO_NUM', Blockly.Python.ORDER_ATOMIC) || '0';
+  var code = `move(${fromNum}, ${toNum})\ntotal_num+=1\ncount_turtle.clear()\ncount_turtle.write('总步数：'+str(total_num))\n`;
+  return code;
+};
+
+Blockly.Python.algorithm_color_seclet = function() {
+  var colour = this.getFieldValue('COLOR');
+  var code = '"' + colour +'"'
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};

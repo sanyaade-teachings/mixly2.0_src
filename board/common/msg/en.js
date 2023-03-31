@@ -3647,3 +3647,6 @@ Blockly.MIXLY_GNSS_SENSOR = 'GNSS locator';
 Blockly.MIXLY_GNSS_SENSOR_GET_TIME_TOOLTIP = 'return a list of satellite data time information，#0year,1month,2day,3week,4hour,5minute,6second,7microsecond';
 Blockly.MIXLY_GNSS_SENSOR_GET_LOCATE_TOOLTIP = 'return a list of location information，#0longitude direction,1longitude,2latitude direction,3latitude,4height(m),5speed(m/s),6direction°';
 Blockly.MIXLY_GNSS_SENSOR_GET_STATUS_TOOLTIP = 'return a list of status information，#0positioning is successful or not,1positioning mode,2number of satellites for positioning';
+Blockly.MIXLY_ESP32_WIFI_CONNECTION_EVENT1 = 'WIFI is connected';
+Blockly.MIXLY_ESP32_WIFI_CONNECTION_EVENT2 = 'The router successfully assigns an IP';
+Blockly.MIXLY_ESP32_WIFI_CONNECTION_EVENT3 = 'WIFI is disconnected';

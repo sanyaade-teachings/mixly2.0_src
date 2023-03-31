@@ -2335,6 +2335,10 @@
         </shadow>
       </value>
     </block>
+
+    <block type="esp32_wifi_connection_event">
+    </block>
+    
     <block type="network_wifi_connect">
     </block>
     <block type="network_get_connect">

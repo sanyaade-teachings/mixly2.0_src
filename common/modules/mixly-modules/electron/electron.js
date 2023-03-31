@@ -30,7 +30,7 @@ Electron.newBrowserWindow = (indexPath, config = {}) => {
             minWidth: 700,
             width: 0,
             height: 0,
-            icon: path.resolve(__dirname, '../../files/mixly.ico'),
+            icon: path.resolve(Env.indexDirPath, '../../../files/mixly.ico'),
             webPreferences: {
                 nodeIntegration: true,
                 enableRemoteModule: true,

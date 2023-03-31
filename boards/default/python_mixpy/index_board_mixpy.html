@@ -2819,6 +2819,28 @@
       <block type="algorithm_print_sequence"></block>
       <block type="algorithm_use_divide"></block>
       <block type="algorithm_print_divide"></block>
+       <block type="hanoi_init_offline">
+        <value name="VAR">
+          <block type="algorithm_color_seclet">
+            <field name="COLOR">#ff6600</field>
+          </block>
+          <shadow type="text">
+            <field name="TEXT">#FF6600</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="hanoi_move">
+        <value name="FROM_NUM">
+          <shadow type="variables_get">
+            <field name="VAR">A</field>
+          </shadow>
+        </value>
+        <value name="TO_NUM">
+          <shadow type="variables_get">
+            <field name="VAR">B</field>
+          </shadow>
+        </value>
+      </block>
     </category>  
   </xml>
 </body>

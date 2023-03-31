@@ -401,3 +401,67 @@ Blockly.Blocks['algorithm_print_divide'] = {
     this.setNextStatement(true, null);    
   }
 };
+
+Blockly.Blocks.hanoi_init = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("准备")
+            .appendField(new Blockly.FieldNumber(3, 0, 100, 1), "NUM")
+            .appendField("层汉诺塔");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.Blocks.hanoi_init_offline = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("准备")
+            .appendField(new Blockly.FieldNumber(3, 0, 100, 1), "NUM")
+            .appendField("层汉诺塔");
+        this.appendValueInput('VAR')
+            .setCheck(String)
+            .appendField(Blockly.Msg.HTML_COLOUR);    
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+        this.setInputsInline(true);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.Blocks.hanoi_move = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("移动圆盘从");
+        this.appendValueInput("FROM_NUM")
+            .setCheck(null)
+            .appendField("柱");
+        this.appendDummyInput()
+            .appendField("到");
+        this.appendValueInput("TO_NUM")
+            .setCheck(null)
+            .appendField("柱");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
+Blockly.Blocks.algorithm_color_seclet = {
+  init: function() {
+    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+    this.appendDummyInput("")
+    .setAlign(Blockly.ALIGN_RIGHT)
+    .appendField(new Blockly.FieldColour("ff0000"), "COLOR");
+    this.setInputsInline(true);
+    this.setOutput(true, String);
+}
+};

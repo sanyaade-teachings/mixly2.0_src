@@ -33,6 +33,7 @@ class MIDI():
 		self._invert=invert
 		self._pin = pin
 		self._volume = volume
+		self._pwm = None
 
 	def set_volume(self,volume):
 		if not 0 <= volume <= 100:
@@ -96,7 +97,7 @@ class MIDI():
 			tone = tone[:pos]
 
 	def play(self, tune, duration=None):
-		pwm = PWM(Pin(self._pin))
+		self._pwm = PWM(Pin(self._pin), duty=1023 if self._invert else 0)
 		if duration is None:
 			self.set_default(tune[0])
 		else:
@@ -106,29 +107,30 @@ class MIDI():
 			if tone[0] not in Letter:
 				continue
 			midi = self.midi(tone)
-			pwm.duty(1023-self._volume) if self._invert else pwm.duty(self._volume)
-			pwm.freq(midi[0])  
+			self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
+			self._pwm.freq(midi[0])  
 			sleep_ms(midi[1])
-			pwm.freq(400000)
+			self._pwm.freq(400000)
 			sleep_ms(1)
-		pwm.deinit()
+		self._pwm.deinit()
 		sleep_ms(10)
 
 	def pitch(self, freq):
-		pwm = PWM(Pin(self._pin))
-		pwm.duty(1023-self._volume) if self._invert else pwm.duty(self._volume)
-		pwm.freq(int(freq)) 
+		self._pwm = PWM(Pin(self._pin))
+		self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
+		self._pwm.freq(int(freq)) 
 
 	def pitch_time(self, freq, delay):
-		pwm = PWM(Pin(self._pin))
-		pwm.duty(1023-self._volume) if self._invert else pwm.duty(self._volume)
-		pwm.freq(int(freq))  
+		self._pwm = PWM(Pin(self._pin))
+		self._pwm.duty(1023-self._volume) if self._invert else self._pwm.duty(self._volume)
+		self._pwm.freq(int(freq))  
 		sleep_ms(delay)
-		pwm.deinit()
+		self._pwm.deinit()
 		sleep_ms(10)
 		
 	def stop(self):
-		PWM(Pin(self._pin)).deinit()
+		if self._pwm:
+			self._pwm.deinit()
 		sleep_ms(10)
 
 	DADADADUM=['r4:2','g','g','g','eb:8','r:2','f','f','f','d:8']

@@ -64,60 +64,10 @@ class SerialDomGenerator {
             "yMax": 100,
             "yMin": 0
         };
-        /*
-        let _config = {};
-        for (let key in _defaultConfig) {
-            _config[key] = config[key] ?? _defaultConfig[key];
-        }
-        */
         return DomOperator.getConfig(config, _defaultConfig);
     }
 
     getHtmlStr() {
-        let {
-            formId,
-            setDtrId,
-            setRtsId,
-            selectPortId,
-            selectBaudId,
-            connectBtnId,
-            sendTypeId,
-            sendId,
-            sendWithId,
-            sendBtnId,
-            receiveTypeId,
-            scrollId,
-            receiveId,
-            clearBtnId,
-            ctrlCBtnId,
-            ctrlDBtnId,
-            yMinId,
-            yMaxId,
-            pointNumId,
-            chartSendTypeId,
-            chartSendId,
-            chartSendWithId,
-            chartSendBtnId,
-            dataDrawId,
-            moveId
-        } = this.id;
-
-        let {
-            formFilter,
-            setDtrFilter,
-            setRtsFilter,
-            selectPortFilter,
-            selectBaudFilter,
-            sendTypeFilter,
-            sendWithFilter,
-            chartSendTypeFilter,
-            tabFilter,
-            receiveTypeFilter,
-            scrollFilter,
-            selectPointNumFilter,
-            connectBtnFilter
-        } = this.filter;
-
         this.htmlTemplate = goog.get(this.htmlTemplatePath);
         return laytpl(this.htmlTemplate).render({
             ...this.id,
@@ -293,8 +243,9 @@ class SerialDomGenerator {
                 //content: this.getHtmlStr()[0],
                 content: $('#' + formId),
                 success: (layero, index) => {
-                    layero[0].childNodes[1].childNodes[0].classList.remove('layui-layer-close2');
-                    layero[0].childNodes[1].childNodes[0].classList.add('layui-layer-close1');
+                    const { classList } = layero[0].childNodes[1].childNodes[0];
+                    classList.remove('layui-layer-close2');
+                    classList.add('layui-layer-close1');
                     receiveDom.val("");
                     form.render(null, formFilter);
                     serialDom.adjustSerialTool(layero, index);

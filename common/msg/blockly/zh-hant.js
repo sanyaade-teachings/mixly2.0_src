@@ -1,3 +1,6 @@
+(() => {
+
+
 // This file was automatically generated.  Do not modify.
 'use strict';
 goog.require('Blockly.Msg');
@@ -3418,3 +3421,8 @@ ZhHant.MIXLY_GNSS_SENSOR = 'GNSS定位器';
 ZhHant.MIXLY_GNSS_SENSOR_GET_TIME_TOOLTIP = '返回衛星資料時間資訊清單，#0年,1月,2日,3星期,4時,5分,6秒,7微秒';
 ZhHant.MIXLY_GNSS_SENSOR_GET_LOCATE_TOOLTIP = '返回定位資訊清單，#0經度方向,1經度值,2緯度方向,3緯度值,4海拔m,5速度m/s,6航向°';
 ZhHant.MIXLY_GNSS_SENSOR_GET_STATUS_TOOLTIP = '返回狀態資訊清單，#0是否定位成功,1定位模式,2定位用衛星數量';
+ZhHant.MIXLY_ESP32_WIFI_CONNECTION_EVENT1 = 'WIFI已連接';
+ZhHant.MIXLY_ESP32_WIFI_CONNECTION_EVENT2 = '路由器成功分配IP';
+ZhHant.MIXLY_ESP32_WIFI_CONNECTION_EVENT3 = 'WIFI斷開';
+
+})();

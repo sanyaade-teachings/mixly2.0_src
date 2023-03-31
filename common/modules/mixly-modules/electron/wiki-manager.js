@@ -146,7 +146,14 @@ class WikiPage {
         const changelogPath = path.resolve(Env.clientPath, './CHANGELOG');
         const wikiList = [];
         if (fs_extend.isfile(wikiHomePagePath + '.md'))
-            wikiList.push({ h4: { link: { title: Msg.Lang['首页'], source: '?file=' + encodeURIComponent(wikiHomePagePath) } } });
+            wikiList.push({
+                h4: {
+                    link: {
+                        title: Msg.Lang['首页'],
+                        source: '?file=' + encodeURIComponent(wikiHomePagePath)
+                    }
+                }
+            });
         if (fs_extend.isdir(defaultWikiPath)) {
             const childContentList = this.getContentJson(defaultWikiPath, BOARD.boardType);
             if (childContentList)

@@ -117,3 +117,37 @@ Blockly.Arduino.esp_now_receive = function () {
     var code = '';
     return code;
 };
+
+Blockly.Arduino.esp32_wifi_connection_event = function () {
+    var type= this.getFieldValue('type');
+    var branch = Blockly.Arduino.statementToCode(this, 'event');
+    branch = branch.replace(/(^\s*)|(\s*$)/g, "");
+    Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
+    if(type==1)
+  {
+    Blockly.Arduino.definitions_['function_WiFiStationConnected'] = 'void WiFiStationConnected(WiFiEvent_t event, WiFiEventInfo_t info){\n'
+        + '  ' + branch + '\n'
+        + '}\n';
+
+    Blockly.Arduino.setups_['esp32_wifi_WiFiStationConnected'] = 'WiFi.onEvent(WiFiStationConnected, WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_CONNECTED);';
+  }
+    if(type==2)
+  {
+    Blockly.Arduino.definitions_['function_WiFiGotIP'] = 'void WiFiGotIP(WiFiEvent_t event, WiFiEventInfo_t info){\n'
+        + '  ' + branch + '\n'
+        + '}\n';
+
+    Blockly.Arduino.setups_['esp32_wifi_WiFiGotIP'] = 'WiFi.onEvent(WiFiGotIP, WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);';
+  }
+    if(type==3)
+  {
+    Blockly.Arduino.definitions_['function_WiFiStationDisconnected'] = 'void WiFiStationDisconnected(WiFiEvent_t event, WiFiEventInfo_t info){\n'
+        + '  ' + branch + '\n'
+        + '}\n';
+
+    Blockly.Arduino.setups_['esp32_wifi_WiFiStationDisconnected'] = 'WiFi.onEvent(WiFiStationDisconnected, WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);';
+  }  
+
+    var code = '';
+    return code;
+};

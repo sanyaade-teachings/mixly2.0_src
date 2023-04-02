@@ -65,6 +65,10 @@ goog.DEPENDENCIES = [
         "provide": ['ZoomToFitControl'],
         "require": ['Blockly']
     }, {
+        "path": '/../../blockly-core/plugins/lexical_variables.js',
+        "provide": ['LexicalVariables'],
+        "require": ['Blockly']
+    }, {
         "path": '/../web-modules/lazyload.js',
         "provide": ['LazyLoad'],
         "require": []

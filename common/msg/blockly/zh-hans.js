@@ -3582,7 +3582,6 @@ ZhHans.MIXLY_GNSS_SENSOR = 'GNSS定位器';
 ZhHans.MIXLY_GNSS_SENSOR_GET_TIME_TOOLTIP = '返回卫星数据时间信息列表，#0年,1月,2日,3星期,4时,5分,6秒,7微秒';
 ZhHans.MIXLY_GNSS_SENSOR_GET_LOCATE_TOOLTIP = '返回定位信息列表，#0经度方向,1经度值,2纬度方向,3纬度值,4海拔m,5速度m/s,6航向°';
 ZhHans.MIXLY_GNSS_SENSOR_GET_STATUS_TOOLTIP = '返回状态信息列表，#0是否定位成功,1定位模式,2定位用卫星数量';
-ZhHans.MIXLY_GNSS_SENSOR_GET_STATUS_TOOLTIP = '返回状态信息列表，#0是否定位成功,1定位模式,2定位用卫星数量';
 ZhHans.MIXLY_ESP32_WIFI_CONNECTION_EVENT1 = 'WIFI已连接';
 ZhHans.MIXLY_ESP32_WIFI_CONNECTION_EVENT2 = '路由器成功分配IP';
 ZhHans.MIXLY_ESP32_WIFI_CONNECTION_EVENT3 = 'WIFI断开';

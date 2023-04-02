@@ -26,13 +26,12 @@ const {
     fs_extra,
     fs_extend,
     json2md,
-    electron_remote
+    electron_remote,
+    electron_localshortcut
 } = Modules;
 
 const { ipcMain } = electron_remote;
 
-
-const electronLocalshortcut = require('electron-localshortcut');
 
 class WikiPage {
     constructor(indexPath, gotoInfo = null) {
@@ -53,13 +52,13 @@ class WikiPage {
 
     addLocalShortcutEvent() {
         //打开或关闭开发者工具
-        electronLocalshortcut.register(this.win, 'CmdOrCtrl+Shift+I', () => {
+        electron_localshortcut.register(this.win, 'CmdOrCtrl+Shift+I', () => {
             if (!this.isDestroyed)
                 this.win.webContents.toggleDevTools();
         });
 
         //重载页面
-        electronLocalshortcut.register(this.win, 'CmdOrCtrl+R', () => {
+        electron_localshortcut.register(this.win, 'CmdOrCtrl+R', () => {
             this.reload();
         });
     }

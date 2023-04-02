@@ -17,6 +17,7 @@ goog.require('WorkspaceSearch');
 goog.require('Backpack');
 goog.require('ContentHighlight');
 goog.require('ZoomToFitControl');
+goog.require('LexicalVariables');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
 goog.require('Mixly.Electron.ExampleExt');

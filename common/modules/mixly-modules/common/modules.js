@@ -6,9 +6,6 @@ goog.provide('Mixly.Modules');
 const { Env, Modules } = Mixly;
 
 const loadNodeModules = () => {
-    if (!Env.isElectron) {
-        return;
-    }
     Modules.path = require('path');
     Modules.child_process = require("child_process");
     Modules.fs = require('fs');
@@ -19,6 +16,7 @@ const loadNodeModules = () => {
     Modules.electron = require('electron');
     Modules.chokidar = require('chokidar');
     Modules.clipboard = Modules.electron.clipboard;
+    Modules.electron_localshortcut = require('electron-localshortcut');
     Modules.os = require('os');
     Modules.electron_remote = require('@electron/remote');
     const { electron_remote } = Modules;
@@ -47,6 +45,6 @@ const loadNodeModules = () => {
     Env.srcPath = path.resolve(Env.indexDirPath, '../');
 }
 
-loadNodeModules();
+Env.isElectron && loadNodeModules();
 
 })();

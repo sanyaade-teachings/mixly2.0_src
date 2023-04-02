@@ -673,6 +673,7 @@ dd > button {
 
 .blocklyToolboxDiv {
     overflow-x: hidden;
+    overflow-y: scroll;
     padding: 0px;
 }
 

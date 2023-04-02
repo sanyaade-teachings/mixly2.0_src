@@ -40,3 +40,16 @@ Blockly.Blocks['esp_now_receive'] = {
  this.setHelpUrl("https://randomnerdtutorials.com/esp-now-esp32-arduino-ide/");
   }
 };
+
+Blockly.Blocks['esp32_wifi_connection_event'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("WiFi连接事件")
+        .appendField(new Blockly.FieldDropdown([[Blockly.MIXLY_ESP32_WIFI_CONNECTION_EVENT1,"1"], [Blockly.MIXLY_ESP32_WIFI_CONNECTION_EVENT2,"2"], [Blockly.MIXLY_ESP32_WIFI_CONNECTION_EVENT3,"3"]]), "type");
+    this.appendStatementInput("event")
+        .setCheck(null);
+    this.setColour(Blockly.Msg['ETHERNET_HUE']);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};

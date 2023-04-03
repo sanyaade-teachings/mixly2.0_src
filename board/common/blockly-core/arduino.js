@@ -683,14 +683,11 @@ profile['arduino_esp32s3']
             var def = Blockly.Arduino.definitions_[name];
             if (name.match(/^define/)) {
                 define.push(def);
-            }
-            else if (name.match(/^include/)) {
+            } else if (name.match(/^include/)) {
                 imports.push(def);
-            } 
-            else if (def.match(/^WiFiClient/)) {
+            } else if (def.match(/^WiFiClient/)) {
                 imports.push(def);
-            } 
-            else if (name.match(/^var_declare/)) {
+            } else if (name.match(/^var_declare/)) {
                 definitions_var.push(def);
             } else {
                 definitions_fun.push(def);

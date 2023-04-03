@@ -408,7 +408,7 @@ Blockly.Arduino.sensor_encoder_init = function () {
     Blockly.Arduino.definitions_['include_ESPRotary'] = '#include <ESPRotary.h>';
     Blockly.Arduino.definitions_['var_declare_encoder' + dropdownType] = `ESPRotary encoder${dropdownType};`;
     Blockly.Arduino.setups_['setup_encoder' + dropdownType] = `encoder${dropdownType}.begin(${valueDt}, ${valueClk});\n  encoder${dropdownType}.setStepsPerClick(${mode});`;
-    var code = `encoder${dropdownType}.loop();\n`;
+    Blockly.Arduino.loopsBegin['loop_encoder' + dropdownType] = `encoder${dropdownType}.loop();\n`;
     return code;
 };
 

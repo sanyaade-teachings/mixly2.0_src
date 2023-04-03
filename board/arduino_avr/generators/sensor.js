@@ -409,7 +409,7 @@ Blockly.Arduino.sensor_encoder_init = function () {
     Blockly.Arduino.definitions_['var_declare_encoder' + dropdownType] = `ESPRotary encoder${dropdownType};`;
     Blockly.Arduino.setups_['setup_encoder' + dropdownType] = `encoder${dropdownType}.begin(${valueDt}, ${valueClk});\n  encoder${dropdownType}.setStepsPerClick(${mode});`;
     Blockly.Arduino.loops_begin_['loop_encoder' + dropdownType] = `encoder${dropdownType}.loop();\n`;
-    return code;
+    return '';
 };
 
 // 旋转编码器读取

@@ -1,5 +1,15 @@
 [
     {
+        "path": "/common/board-config-menu.js",
+        "require": [
+            "Mixly.FooterLayer",
+            "Mixly.MArray"
+        ],
+        "provide": [
+            "Mixly.BoardConfigMenu"
+        ]
+    },
+    {
         "path": "/common/boards.js",
         "require": [
             "tippy",
@@ -13,7 +23,8 @@
             "Mixly.MString",
             "Mixly.Editor",
             "Mixly.FooterLayer",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.BoardConfigMenu"
         ],
         "provide": [
             "Mixly.Boards"

@@ -2,7 +2,9 @@
     "name": "Mixly",
     "description": "Mixly",
     "scripts": {
-        "static": "node ./static-server/server.js"
+        "static": "node ./static-server/server.js",
+        "build": "gulp script",
+        "test": "node build.js && npm run static"
     },
     "author": "Mixly",
     "license": "MIT",

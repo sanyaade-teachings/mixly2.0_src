@@ -55,14 +55,6 @@ XML.TEMPLATE_CONFIG = [
         },
         appendToBody: false
     }, {
-        type: 'BOARD_CONFIG_ELEMENT',
-        path: '/board-config-element-div.html',
-        config: {
-            apply: '应用',
-            reset: '复位'
-        },
-        appendToBody: false
-    }, {
         type: 'PARSE_MIX_ERROR_DIV',
         path: '/parse-mix-error-div.html',
         config: {},
@@ -121,7 +113,6 @@ XML.TEMPLATE_ENV = {
     SIMULATOR_DIV: Env.isElectron && BOARD?.nav?.compile,
     BOARD_SELECTOR: true,
     PORT_SELECTOR: !(BOARD?.nav?.run || BOARD?.nav?.cancel || BOARD?.nav?.webrun || BOARD?.nav?.webcancel || (!Env.isElectron && !Env.hasSocketServer)),
-    BOARD_CONFIG_ELEMENT: BOARD?.nav?.compile,
     PARSE_MIX_ERROR_DIV: true,
     READ_BITMAP_DIV: true,
     SEARCH_DIV: true,

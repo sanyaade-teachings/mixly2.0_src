@@ -12,6 +12,7 @@ goog.require('Mixly.MString');
 goog.require('Mixly.Editor');
 goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
+goog.require('Mixly.BoardConfigMenu');
 goog.provide('Mixly.Boards');
 
 const {
@@ -134,21 +135,7 @@ Boards.init = () => {
             $boards.append(`<option value="${Boards.INFO[board]?.key}">${board}</option>`);
         form.render('select', 'boards-type-filter');
     }
-    /*$('#mixly-board-config').off().click(function() {
-        if (Boards.configMenu
-         && Boards.configMenu.length
-         && !Boards.configMenu[0].state.isDestroyed) {
-            if (Boards.configMenu[0].state.isShown) {
-                Boards.configMenu[0].destroy();
-                Boards.configMenu = null;
-            } else {
-                Boards.configMenu[0].show();
-            }
-        } else {
-            Boards.showConfigMenu();
-            Boards.configMenu[0].show();
-        }
-    });*/
+
     Boards.configMenu = new FooterLayer('mixly-board-config', {
         tippy: {
             onMount(instance) {
@@ -603,70 +590,6 @@ Boards.removeBlocks = (blocksdom, boardKeyList) => {
         }
     }
     return false;
-}
-
-Boards.showConfigMenu = () => {
-    if (Boards.configMenu)
-        return;
-    const selectedBoardName = Boards.getSelectedBoardName();
-    const { INFO } = Boards;
-    const { config, ignore, key } = INFO[selectedBoardName];
-    INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
-    const defaultConfig = INFO[selectedBoardName].default;
-    let list = [];
-    for (let key in config) {
-        let selectedConfig = defaultConfig[key] ?? config[key][0].label;
-        let options = [];
-        for (let i of config[key]) {
-            if (defaultConfig[key] && i.key === defaultConfig[key])
-                selectedConfig = i.label;
-            options.push({
-                title: i.label,
-                id: i.key
-            });
-        }
-        if (!defaultConfig)
-            selectedConfig = config[key][0].label;
-        list.push({
-            name: key,
-            label: selectedConfig,
-            options
-        });
-    }
-    const xmlStr = XML.render(XML.TEMPLATE_STR['BOARD_CONFIG_MENU_DIV'], {
-        list,
-        reset: Msg.Lang['使用默认配置'],
-        close: Msg.Lang['关闭窗口']
-    });
-
-    Boards.configMenu = tippy('#mixly-board-config', {
-        allowHTML: true,
-        content: xmlStr,
-        trigger: 'manual',
-        interactive: true,
-        hideOnClick: false,
-        maxWidth: 'none',
-        offset: [ 0, 6 ],
-        onMount(instance) {
-            $('#board-config-menu-reset').off().click(function() {
-                INFO[selectedBoardName].default = INFO[selectedBoardName].default ?? {};
-                for (let key in config) {
-                    defaultConfig[key] = config[key][0].key;
-                    $('#board-config-' + key).find('p').text(config[key][0].label);
-                }
-                Boards.configMenu[0].setProps({});
-            });
-            $('#board-config-menu-colse').off().click(function() {
-                Boards.configMenu[0].destroy();
-                Boards.configMenu = null;
-            });
-            Boards.renderConfigMenu(list);
-        },
-        onHidden(instance) {
-            Boards.configMenu = null;
-            Boards.writeSelectedBoardConfig();
-        }
-    });
 }
 
 Boards.renderConfigMenu = (optionList) => {

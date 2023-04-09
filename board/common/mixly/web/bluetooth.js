@@ -8,8 +8,8 @@ const { Bluetooth } = Web;
 
 Bluetooth.output = [];
 Bluetooth.mtu = 100;
-Bluetooth.encoder = new TextEncoder();
-Bluetooth.decoder = new TextDecoder();
+Bluetooth.encoder = new TextEncoder('utf-8');
+Bluetooth.decoder = new TextDecoder('utf-8');
 Bluetooth.nordicUartServiceUuid = 0xfff0;
 Bluetooth.uartRxCharacteristicUuid = 0xfff2;
 Bluetooth.uartTxCharacteristicUuid = 0xfff1;
@@ -26,8 +26,7 @@ Bluetooth.connect = (baud = 115200, onDataLine = (message) => {}) => {
             return;
         }
         navigator.bluetooth.requestDevice({
-            optionalServices: [Bluetooth.nordicUartServiceUuid],
-            acceptAllDevices: true
+            filters: [{name: ['Mixly']}]
         })
         .then((device) => {
             Bluetooth.obj = device;
@@ -43,7 +42,7 @@ Bluetooth.connect = (baud = 115200, onDataLine = (message) => {}) => {
         })
         .then((uartRxCharacteristic) => {
             Bluetooth.uartRxCharacteristic = uartRxCharacteristic;
-            return Bluetooth.getCharacteristic(Bluetooth.uartTxCharacteristicUuid);
+            return Bluetooth.service.getCharacteristic(Bluetooth.uartTxCharacteristicUuid);
         })
         .then((uartTxCharacteristic) => {
             Bluetooth.uartTxCharacteristic = uartTxCharacteristic;
@@ -123,17 +122,13 @@ Bluetooth.AddOnDisconnectEvent = (onDisconnect) => {
 Bluetooth.writeString = async (str) => {
     let buffer = Bluetooth.encoder.encode(str);
     await Bluetooth.writeByteArr(buffer);
-    await Bluetooth.sleep(200);
 }
 
 Bluetooth.writeByteArr = async (buffer) => {
-    if (typeof buffer.unshift === 'function') {
-        buffer.unshift(buffer.length);
-        buffer = new Uint8Array(buffer).buffer;
-    }
+    buffer = new Uint8Array(buffer);
     for (let chunk = 0; chunk < Math.ceil(buffer.length / Bluetooth.mtu); chunk++) {
-        let start = mtu * chunk;
-        let end = mtu * (chunk + 1);
+        let start = Bluetooth.mtu * chunk;
+        let end = Bluetooth.mtu * (chunk + 1);
         await Bluetooth.uartRxCharacteristic.writeValueWithResponse(buffer.slice(start, end))
             .catch(error => {
                 if (error == "NetworkError: GATT operation already in progress.") {

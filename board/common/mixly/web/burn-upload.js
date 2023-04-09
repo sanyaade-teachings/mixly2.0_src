@@ -46,12 +46,7 @@ const espTool = new Esptool.EspLoader({
 });
 
 BU.clickConnect = async function () {
-    let portName;
-    if (SELECTED_BOARD.web.com == "usb") {
-        portName = 'web-usb';
-    } else {
-        portName = 'web-serial';
-    }
+    let portName = `web-${SELECTED_BOARD.web.com ?? 'serial'}`;
     const portObj = Serial.portsOperator[portName];
     if (portObj && portObj.portOpened) {
         Serial.portClose(portName);

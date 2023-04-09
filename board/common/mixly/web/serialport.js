@@ -15,8 +15,8 @@ SerialPort.refreshOutputBuffer = true;
 SerialPort.obj = null;
 SerialPort.onDataLine = null;
 
-SerialPort.encoder = new TextEncoder();
-SerialPort.decoder = new TextDecoder();
+SerialPort.encoder = new TextEncoder('utf8');
+SerialPort.decoder = new TextDecoder('utf8');
 SerialPort.dtr = false;
 SerialPort.rts = false;
 

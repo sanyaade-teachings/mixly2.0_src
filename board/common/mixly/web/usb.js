@@ -10,8 +10,8 @@ const {
 const { USB } = Web;
 
 USB.output = [];
-USB.encoder = new TextEncoder();
-USB.decoder = new TextDecoder();
+USB.encoder = new TextEncoder('utf8');
+USB.decoder = new TextDecoder('utf8');
 
 USB.obj = null;
 USB.onDataLine = null;

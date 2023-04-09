@@ -26,7 +26,9 @@ Bluetooth.connect = (baud = 115200, onDataLine = (message) => {}) => {
             return;
         }
         navigator.bluetooth.requestDevice({
-            filters: [{name: ['Mixly']}]
+            // filters: [{name: ['Mixly']}]
+            optionalServices: [Bluetooth.nordicUartServiceUuid],
+            acceptAllDevices: true
         })
         .then((device) => {
             Bluetooth.obj = device;

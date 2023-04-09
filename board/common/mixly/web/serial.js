@@ -267,6 +267,9 @@ Serial.refreshOutputBox = (port) => {
         return;
     }
     const { dom, toolConfig, toolOpened, endPos, serialport } = portObj;
+    if (!serialport) {
+        return;
+    }
     const output = serialport.output;
     for (let i = output.length; i > Serial.MAX_OUTPUT_LINE; i--) {
         output.shift();

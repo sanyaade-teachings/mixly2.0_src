@@ -86,7 +86,7 @@
     },
     "pythonToBlockly": false,
     "web": {
-        "com": "serial",
+        "com": "bluetooth",
         "burn": {
             "erase": true,
             "micropython:esp32:mixgo": {

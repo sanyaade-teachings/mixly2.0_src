@@ -1,11 +1,11 @@
 (() => {
 
-goog.require('Mixly.Web.Ampy');
+goog.require('Mixly.Web');
 goog.provide('Mixly.Web.SerialPort');
 
 const { Web } = Mixly;
 
-const { SerialPort, Ampy } = Web;
+const { SerialPort } = Web;
 
 SerialPort.output = [];
 SerialPort.inputBuffer = [];

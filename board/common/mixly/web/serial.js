@@ -11,6 +11,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.SerialPort');
+goog.require('Mixly.Web.Bluetooth');
 goog.provide('Mixly.Web.Serial');
 
 const { 
@@ -26,7 +27,7 @@ const {
     MArray
 } = Mixly;
 
-const { Serial, USB, SerialPort } = Web;
+const { Serial, USB, SerialPort, Bluetooth } = Web;
 
 const { BOARD, SELECTED_BOARD } = Config;
 
@@ -1052,6 +1053,8 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
     portObj.refreshOutputBoxTimer = null;
     if (SELECTED_BOARD.web.com === 'usb') {
         portObj.serialport = USB;
+    } else if (SELECTED_BOARD.web.com === 'bluetooth') {
+        portObj.serialport = Bluetooth;
     } else {
         portObj.serialport = SerialPort;
     }

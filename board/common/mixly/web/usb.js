@@ -1,13 +1,13 @@
 (() => {
 
-goog.require('Mixly.Web.Ampy');
+goog.require('Mixly.Web');
 goog.provide('Mixly.Web.USB');
 
 const {
     Web
 } = Mixly;
 
-const { USB, Ampy } = Web;
+const { USB } = Web;
 
 USB.output = [];
 USB.encoder = new TextEncoder();
@@ -115,10 +115,10 @@ USB.writeString = async (str) => {
 }
 
 USB.writeByteArr = async (buffer) => {
-     if (typeof buffer.unshift === 'function') {
+    if (typeof buffer.unshift === 'function') {
         buffer.unshift(buffer.length);
         buffer = new Uint8Array(buffer).buffer;
-     }
+    }
     await USB.DAPLink.send(132, buffer);
     await USB.sleep(200);
 }

@@ -130,14 +130,14 @@ Bluetooth.writeByteArr = async (buffer) => {
         let start = Bluetooth.mtu * chunk;
         let end = Bluetooth.mtu * (chunk + 1);
         await Bluetooth.uartRxCharacteristic.writeValueWithResponse(buffer.slice(start, end))
-            .catch(error => {
-                if (error == "NetworkError: GATT operation already in progress.") {
-                    Bluetooth.writeByteArr(buffer);
-                }
-                else {
-                    return Promise.reject(error);
-                }
-            });
+        .catch(error => {
+            if (error == "NetworkError: GATT operation already in progress.") {
+                Bluetooth.writeByteArr(buffer);
+            }
+            else {
+                return Promise.reject(error);
+            }
+        });
     }
     await Bluetooth.sleep(200);
 }

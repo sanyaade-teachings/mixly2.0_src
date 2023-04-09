@@ -296,7 +296,10 @@ Serial.refreshOutputBox = (port) => {
 * @return void
 **/
 Serial.openTool = () => {
-    const portName = 'web-' + SELECTED_BOARD.web.com;
+    let portName = `web-${SELECTED_BOARD.web.com ?? 'serial'}`;
+    if (!navigator.serial || !navigator.usb) {
+        portName = 'web-bluetooth';
+    }
     const baud = Serial.portsOperator[portName]?.toolConfig?.baudRates ?? Serial.TOOL_DEFAULT_CONFIG.baudRates;
     Serial.connect(portName, baud, (selectedPort) => {
         if (!selectedPort) {
@@ -1051,9 +1054,9 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
         return;
     }
     portObj.refreshOutputBoxTimer = null;
-    if (SELECTED_BOARD.web.com === 'usb') {
+    if (port === 'web-usb') {
         portObj.serialport = USB;
-    } else if (SELECTED_BOARD.web.com === 'bluetooth') {
+    } else if (port === 'web-bluetooth') {
         portObj.serialport = Bluetooth;
     } else {
         portObj.serialport = SerialPort;

@@ -3,7 +3,7 @@
         "Mixbot-s1": "micropython:esp32:mixbot_s1",
         "Mixbot-s2": "micropython:esp32:mixbot_s2",
         "RoboMaster E1": "micropython:esp32:rm_e1"
-        //"ESP32 Generic(4MB)": "micropython:esp32:generic"
+//"ESP32 Generic(4MB)": "micropython:esp32:generic"
     },
     "language": "MicroPython",
     "burn": {
@@ -104,17 +104,16 @@
                         "path": "./build/RM_E1-0x1000-V1.19.1-Slib.bin"
                     }
                 ]
-            }
-        },
-        "micropython:esp32:mixbot_s1": {
+            },
+            "micropython:esp32:mixbot_s1": {
                 "binFile": [
                     {
                         "offset": "0x1000",
                         "path": "./build/MixBot-0x1000-V1.19.1-lib.bin"
                     }
                 ]
-            }
-        },
+            },
+       
         "micropython:esp32:mixbot_s2": {
                 "binFile": [
                     {
@@ -123,7 +122,9 @@
                     }
                 ]
             }
+       
         },
+        
         "upload": {
             "reset": []
         }

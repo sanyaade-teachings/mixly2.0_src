@@ -2,7 +2,7 @@ var externalLibs = {//外部引入的第三方库
   "./numpy/__init__.js": "../../../common/js/skulpt_libs/numpy/__init__.js",
   "./pygal/__init__.js": "../../../common/js/skulpt_libs/pygal/__init__.js",
   // "./numpy/random/__init__.js" : 'https://cdn.jsdelivr.net/gh/ebertmi/skulpt_numpy@master/numpy/random/__init__.js',
-  "./matplotlib/__init__.js" : '../common/js/skulpt_libs/matplotlib/__init__.js',
+  "./matplotlib/__init__.js" : '../../../common/js/skulpt_libs/matplotlib/__init__.js',
   "./matplotlib/pyplot/__init__.js" : "../../../common/js/skulpt_libs/pyplot/__init__.js",
   './pgzhelper/__init__.js':"../../../common/js/skulpt_libs/pgzhelper/pgzhelper.js"
 };
@@ -68,7 +68,7 @@ PyEngine.prototype.loadEngine = function() {
     Sk.domOutput = function(html) {
         const _this = this;
         this.layerNum = Mixly.LayerExt.open({
-            title: [indexText['显示'], '30px'],
+            title: [Mixly.Msg.Lang['显示'], '30px'],
             shade: 0,
             offset: 'rt',
             area: _this?.layerSize?.layero ?? ['50%', '70%'],
@@ -528,7 +528,7 @@ PyEngine.prototype.run = function(type) {
     if (showSkulptImg && !this.layerNum) {
         const _this = this;
         this.layerNum = Mixly.LayerExt.open({
-            title: [indexText['显示'], '30px'],
+            title: [Mixly.Msg.Lang['显示'], '30px'],
             shade: 0,
             offset: 'rt',
             area: _this?.layerSize?.layero ?? ['50%', '70%'],

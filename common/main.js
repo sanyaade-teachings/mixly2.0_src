@@ -133,6 +133,10 @@ goog.DEPENDENCIES = [
         "provide": ['DAPjs'],
         "require": []
     }, {
+        "path": '/../web-modules/d3.min.js',
+        "provide": ['d3'],
+        "require": []
+    }, {
         "path": '/web/serialport.js',
         "provide": ['WebSerialPort'],
         "require": []
@@ -261,6 +265,7 @@ goog.require('XScrollbar');
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('PouchDB');
+goog.require('d3');
 goog.require('Mixly.Electron.Events');
 /*if (Env.isElectron) {
     goog.require('Mixly.Electron.Loader');

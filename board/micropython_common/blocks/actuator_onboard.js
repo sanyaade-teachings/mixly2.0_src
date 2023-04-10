@@ -851,3 +851,29 @@ Blockly.Blocks.mixbot_motor = {
       this.setTooltip(Blockly.MIXLY_MIXBOT_MOVE_TOOLTIP);
     }
 }
+
+Blockly.Blocks['actuator_mixbot_sound'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXBOT_SOUND_LOUDNESS);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['actuator_mixbot_buzzer_on_off'] = {
+    init: function() {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_MIXBOT_BUZZER);
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_ON, "0"],
+                [Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_OFF, "1"]
+            ]), 'on_off')
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};

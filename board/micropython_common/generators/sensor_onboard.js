@@ -602,13 +602,7 @@ Blockly.Python.sensor_mixgocar_battery_left = function(){
 };
 
 //mixbot onboard_sensor below:
-Blockly.Python.sensor_mixbot_sound = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
-    Blockly.Python.definitions_['import_'+version+'_sound'] = 'from '+version+' import sound';
-    var code =  'sound.loudness()';
-    return [code, Blockly.Python.ORDER_ATOMIC];
-};
+
 
 Blockly.Python.sensor_mixbot_patrol_calibrate = function(){
     var key = this.getFieldValue('key');
@@ -625,6 +619,26 @@ Blockly.Python.sensor_mixbot_patrol_value = function(){
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_patrol'] = 'from '+version+' import patrol';
     var code = 'patrol.getdata()'+key+'';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_mixbot_temperature=function(){
+    Blockly.Python.definitions_['import_mixbot_acc_gyr'] = "from mixbot import acc_gyr";
+    var code = 'acc_gyr.temperature()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_mixbot_get_acceleration = function(){
+    var key = this.getFieldValue('key');
+    Blockly.Python.definitions_['import_mixbot_acc_gyr'] = "from mixbot import acc_gyr";
+    var code = 'acc_gyr.accelerometer()' + key ;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_mixbot_get_gyro = function(){
+    var key = this.getFieldValue('key');
+    Blockly.Python.definitions_['import_mixbot_acc_gyr'] = "from mixbot import acc_gyr";
+    var code = 'acc_gyr.gyroscope()' + key ;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

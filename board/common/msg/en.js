@@ -3661,3 +3661,4 @@ Blockly.MIXLY_MIXBOT_SOUND_LOUDNESS = 'get microphone volume';
 Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_WHITE = 'calibrate white';
 Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_BLACK = 'calibrate black';
 Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = 'factory reset';
+Blockly.MIXLY_MIXBOT_BUZZER = 'buzzer';

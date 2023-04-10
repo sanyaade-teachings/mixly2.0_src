@@ -30,7 +30,7 @@
             "webSocket": true
         }
     }, {
-        "boardImg": "./board/micropython_robot/media/mixbot.jpg",
+        "boardImg": "./board/micropython_robot/media/mixbot.png",
         "boardType": "Python Robot",
         "boardIndex": "./board/micropython_robot/index.html",
         "env": {

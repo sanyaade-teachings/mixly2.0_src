@@ -1461,9 +1461,11 @@
         <block type="sensor_mixbot_patrol_value" m-show='micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2'></block>
         <block type="sensor_rm_pin_near_double"></block>
         <block type="sensor_rm_battery_left"></block>
-        <block type="sensor_mixbot_sound" m-show='micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2'></block>
+        
         <block type="sensor_rm_acc" m-show="micropython:esp32:rm_e1"></block>   
-             
+        <block type="sensor_mixbot_temperature" m-show='micropython:esp32:mixbot_s2'></block>
+        <block type="sensor_mixbot_get_acceleration" m-show='micropython:esp32:mixbot_s2'></block>
+        <block type="sensor_mixbot_get_gyro" m-show='micropython:esp32:mixbot_s2'></block>     
         <block type="onboard_RTC_set_datetime">
           <value name="year">
             <shadow type="math_number">
@@ -1547,6 +1549,58 @@
         </value>
       </block>
       <block type="rm_actuator_get_led_bright"></block>      
+       <block type="esp32_onboard_music_pitch" m-show='micropython:esp32:mixbot_s2'>
+        <value name="pitch">
+          <shadow type="pins_tone_notes">
+            <field name="PIN">440</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="esp32_onboard_music_pitch_with_time" m-show='micropython:esp32:mixbot_s2'>
+        <value name="pitch">
+          <shadow type="pins_tone_notes">
+            <field name="PIN">440</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">1000</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="esp32_onboard_music_stop" m-show='micropython:esp32:mixbot_s2'>
+        <value name="PIN">
+          <shadow type="pins_pwm_pin">
+            <field name="PIN">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="esp32_onboard_music_play_list" m-show='micropython:esp32:mixbot_s2'>
+        <value name="LIST">
+          <shadow type="pins_playlist"></shadow>
+        </value>
+        <value name="PIN">
+          <shadow type="pins_pwm_pin">
+            <field name="PIN">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="esp32_music_set_tempo" m-show='micropython:esp32:mixbot_s2'>
+        <value name="TICKS">
+          <shadow type="math_number">
+            <field name="NUM">4</field>
+          </shadow>
+        </value>
+        <value name="BPM">
+          <shadow type="math_number">
+            <field name="NUM">120</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="esp32_music_get_tempo" m-show='micropython:esp32:mixbot_s2'></block>
+      <block type="esp32_music_reset" m-show='micropython:esp32:mixbot_s2'></block>
+      <block type="actuator_mixbot_buzzer_on_off" m-show='micropython:esp32:mixbot_s2'></block>
+      <block type="actuator_mixbot_sound" m-show='micropython:esp32:mixbot_s2'></block>
       <block type="actuator_onboard_neopixel_rgb">
         <value name="_LED_">
           <shadow type="math_number">
@@ -1624,6 +1678,7 @@
           </shadow>
         </value>
       </block>
+      
       </category>
       <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-show="micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2">
         <block type="display_show_image">

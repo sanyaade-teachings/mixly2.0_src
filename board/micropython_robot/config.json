@@ -19,7 +19,7 @@
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
         },
         "micropython:esp32:mixbot_s2": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1-lib.bin\""
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
         },
         "reset": [
             {
@@ -110,7 +110,7 @@
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixBot-0x1000-V1.19.1.bin"
+                        "path": "./build/MixBot-0x1000-V1.19.1-lib.bin"
                     }
                 ]
             }

@@ -21,7 +21,7 @@ Blockly.Blocks.ai_sensor_use_uart_init = {
             .appendField(Blockly.Msg.Lang.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_SETUP + Blockly.Msg.Lang.LISTS_SET_INDEX_INPUT_TO + 'MixGo AI' + MSG.catSensor)
+            .appendField(Blockly.Msg.Lang.MIXLY_SETUP + Blockly.Msg.Lang.LISTS_SET_INDEX_INPUT_TO + 'MixGo AI' + Blockly.Msg.Lang.MSG.catSensor)
             
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);

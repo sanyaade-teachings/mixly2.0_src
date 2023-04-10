@@ -60,7 +60,7 @@ Blockly.Blocks.sensor_current_gesture1 = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -93,7 +93,7 @@ Blockly.Blocks.sensor_current_gesture2 = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -128,7 +128,7 @@ Blockly.Blocks.controls_attachGestureInterrupt = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -191,7 +191,7 @@ Blockly.Blocks.controls_attachGestureInterrupt2 = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.CONTROLS_IF_MSG_IF;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_WAS_GESTURE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE;
             var TOOLTIPS = {

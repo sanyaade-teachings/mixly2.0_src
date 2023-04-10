@@ -1035,7 +1035,7 @@ Blockly.Blocks.tft_use_spi_init = {
             .appendField(Blockly.Msg.Lang.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_SETUP + Blockly.Msg.Lang.LISTS_SET_INDEX_INPUT_TO + MSG.catTFT)  
+            .appendField(Blockly.Msg.Lang.MIXLY_SETUP + Blockly.Msg.Lang.LISTS_SET_INDEX_INPUT_TO + Blockly.Msg.Lang.MSG.catTFT)  
         this.appendValueInput("WIDTH")
             .appendField(Blockly.Msg.Lang.MIXLY_WIDTH)
             .setCheck(Number);
@@ -1060,7 +1060,7 @@ Blockly.Blocks.tft_show_image_xy = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
-        .appendField(MSG.catTFT);  
+        .appendField(Blockly.Msg.Lang.MSG.catTFT);  
   this.appendValueInput('data')
         .appendField(Blockly.Msg.Lang.OLED_BITMAP);
      this.appendValueInput("x")
@@ -1119,7 +1119,7 @@ Blockly.Blocks.tft_show_image_or_string_delay = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
-        .appendField(MSG.catTFT);  
+        .appendField(Blockly.Msg.Lang.MSG.catTFT);  
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.OLED_DRAWSTR);
@@ -1155,7 +1155,7 @@ Blockly.Blocks.tft_scroll_string_delay = {
    init: function() {
      this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
      this.appendValueInput('SUB')
-         .appendField(MSG.catTFT);  
+         .appendField(Blockly.Msg.Lang.MSG.catTFT);  
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -1184,7 +1184,7 @@ Blockly.Blocks.tft_show_frame_string_delay = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
-        .appendField(MSG.catTFT);  
+        .appendField(Blockly.Msg.Lang.MSG.catTFT);  
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.MIXLY_ESP32_MONITOR_SHOW_FRAME);
@@ -1209,7 +1209,7 @@ Blockly.Blocks['tft_fill'] = {
         this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
-            .appendField(MSG.catTFT);  
+            .appendField(Blockly.Msg.Lang.MSG.catTFT);  
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.Lang.MIXLY_LCD_STAT_CLEAR, "BLACK"],
@@ -1238,7 +1238,7 @@ Blockly.Blocks.tft_line_arbitrarily= {
         //     .appendField(Blockly.Msg.Lang.OLED)         
         //     .appendField(new Blockly.FieldTextInput('lcd'), 'VAR') 
         this.appendValueInput('SUB')
-            .appendField(MSG.catTFT)
+            .appendField(Blockly.Msg.Lang.MSG.catTFT)
             .setCheck("var");
          // this.appendValueInput("PIN", Number)
          //    .setCheck(Number)
@@ -1314,7 +1314,7 @@ Blockly.Blocks.lcd_show_image_or_string_delay = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
-        .appendField(MSG.catLCD);  
+        .appendField(Blockly.Msg.Lang.MSG.catLCD);  
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.OLED_DRAWSTR);
@@ -1341,7 +1341,7 @@ Blockly.Blocks.lcd_print_string = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
     this.appendValueInput('SUB')
-        .appendField(MSG.catLCD);  
+        .appendField(Blockly.Msg.Lang.MSG.catLCD);  
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.MIXLY_SERIAL_PRINT+Blockly.Msg.Lang.OLED_DRAWSTR);    
@@ -1365,7 +1365,7 @@ Blockly.Blocks['lcd_backlight'] = {
         this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
         this.appendValueInput('SUB')
             .setCheck("var")
-            .appendField(MSG.catLCD);  
+            .appendField(Blockly.Msg.Lang.MSG.catLCD);  
         this.appendDummyInput()
             .appendField(Blockly.Msg.Lang.TFT_Brightness)
             .appendField(new Blockly.FieldDropdown([
@@ -1383,7 +1383,7 @@ Blockly.Blocks['lcd_backlight'] = {
         '1': Blockly.Msg.Lang.MIXLY_MICROBIT_Turn_on_display,
         '0': Blockly.Msg.Lang.MIXLY_MICROBIT_Turn_off_display
        };
-      return MSG.catLCD+Blockly.Msg.Lang.TFT_Brightness+TOOLTIPS[mode];
+      return Blockly.Msg.Lang.MSG.catLCD+Blockly.Msg.Lang.TFT_Brightness+TOOLTIPS[mode];
     });
     }
 };
@@ -1392,7 +1392,7 @@ Blockly.Blocks.lcd_clear = {
   init: function() {
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catLCD);  
+        .appendField(Blockly.Msg.Lang.MSG.catLCD);  
     this.setColour(Blockly.Msg['DISPLAY_EXTERN_HUE']);
   this.appendDummyInput()
         .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Clear_display);
@@ -1439,7 +1439,7 @@ Blockly.Blocks.extern_oled_show_image = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
   this.appendValueInput('data')
         .appendField(Blockly.Msg.Lang.OLED_BITMAP);
     this.setPreviousStatement(true, null);
@@ -1454,7 +1454,7 @@ Blockly.Blocks.extern_oled_show_image_xy = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
   this.appendValueInput('data')
         .appendField(Blockly.Msg.Lang.OLED_BITMAP);
      this.appendValueInput("x")
@@ -1478,7 +1478,7 @@ Blockly.Blocks.extern_oled_show_string = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
   this.appendValueInput('data')
         .setCheck([String, "esp32_image","List",'Tuple'])
         .appendField(Blockly.Msg.Lang.OLED_DRAWSTR);
@@ -1494,7 +1494,7 @@ Blockly.Blocks.extern_oled_show_string = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.OLED_DRAWSTR);
@@ -1528,7 +1528,7 @@ Blockly.Blocks.extern_oled_scroll_string = {
      this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
      this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -1543,7 +1543,7 @@ Blockly.Blocks.extern_oled_scroll_string_delay = {
      this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
      this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
      this.appendValueInput('data')
          .setCheck(String)
          .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
@@ -1571,7 +1571,7 @@ Blockly.Blocks.extern_oled_show_frame_string = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
   this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.MIXLY_ESP32_MONITOR_SHOW_FRAME);
@@ -1586,7 +1586,7 @@ Blockly.Blocks.extern_oled_show_frame_string_delay = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
     this.appendValueInput('data')
         .setCheck(String)
         .appendField(Blockly.Msg.Lang.MIXLY_ESP32_MONITOR_SHOW_FRAME);
@@ -1614,7 +1614,7 @@ Blockly.Blocks['extern_oled_shift'] = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
     // this.setOutput(true);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -1651,7 +1651,7 @@ Blockly.Blocks.extern_oled_get_pixel = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
       this.appendValueInput('x')
         .setCheck(Number)
             .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
@@ -1671,7 +1671,7 @@ Blockly.Blocks.extern_oled_bright_point = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
     this.appendValueInput('x')
         .setCheck(Number)
         .appendField(Blockly.Msg.Lang.MIXLY_ESP32_JS_MONITOR_SET_BRIGHTNESS)
@@ -1695,7 +1695,7 @@ Blockly.Blocks.extern_oled_clear = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('SUB')
         .setCheck("var")
-        .appendField(MSG.catOLED); 
+        .appendField(Blockly.Msg.Lang.MSG.catOLED); 
   this.appendDummyInput()
         .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Clear_display);
   this.setPreviousStatement(true, null);

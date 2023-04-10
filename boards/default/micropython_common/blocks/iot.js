@@ -529,7 +529,7 @@ Blockly.Blocks['iot_client_onboard'] = {
         this.setColour(Blockly.Msg['IOT_HUE']);
         this.appendDummyInput()
             .appendField('MixIO')
-            .appendField(MSG.catEthernet_clinet);
+            .appendField(Blockly.Msg.Lang.MSG.catEthernet_clinet);
         this.setOutput(true);
         this.setInputsInline(true);
     }

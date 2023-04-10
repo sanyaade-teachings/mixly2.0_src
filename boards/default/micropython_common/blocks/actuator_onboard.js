@@ -772,10 +772,10 @@ Blockly.Blocks['mixbot_motor_status'] = {
     init: function(){
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MIXBOT_MOTOR_STATUS);
+        .appendField(Blockly.Msg.Lang.MIXLY_MIXBOT_MOTOR_STATUS);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MIXBOT_MOTOR_STATUS_TOOLTIP);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXBOT_MOTOR_STATUS_TOOLTIP);
     }
 };
 
@@ -785,26 +785,26 @@ Blockly.Blocks.mixbot_move = {
       this.appendDummyInput()
           .appendField("Mixbot")
           .appendField(new Blockly.FieldDropdown([
-            [Blockly.blockpy_forward, "F"],
-            [Blockly.blockpy_backward, "B"],
-            [Blockly.blockpy_left, "L"],
-            [Blockly.blockpy_right, "R"]            
+            [Blockly.Msg.Lang.blockpy_forward, "F"],
+            [Blockly.Msg.Lang.blockpy_backward, "B"],
+            [Blockly.Msg.Lang.blockpy_left, "L"],
+            [Blockly.Msg.Lang.blockpy_right, "R"]            
             ]), "VAR");
       this.appendDummyInput()
-          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_MODE)
+          .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_MODE)
           .appendField(new Blockly.FieldDropdown([
-            [Blockly.MIXLY_MICROBIT_JS_BLE_POWER, "PWR"],
-            [Blockly.MIXLY_SPEED, "SPEED"],
-            [Blockly.MIXLY_MIXBOT_MOTOR_TURNS, "TURNS"]
+            [Blockly.Msg.Lang.MIXLY_MICROBIT_JS_BLE_POWER, "PWR"],
+            [Blockly.Msg.Lang.MIXLY_SPEED, "SPEED"],
+            [Blockly.Msg.Lang.MIXLY_MIXBOT_MOTOR_TURNS, "TURNS"]
             ]), "mode");    
       this.appendValueInput('speed')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.MIXLY_PARAMS);
+          .appendField(Blockly.Msg.Lang.MIXLY_PARAMS);
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setInputsInline(true);
-      this.setTooltip(Blockly.MIXLY_MIXBOT_MOVE_TOOLTIP);
+      this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXBOT_MOVE_TOOLTIP);
     }
 }
 
@@ -814,8 +814,8 @@ Blockly.Blocks.mixbot_stop = {
       this.appendDummyInput()
           .appendField("Mixbot")
           .appendField(new Blockly.FieldDropdown([           
-            [Blockly.MOTOR_P, "P"],
-            [Blockly.MOTOR_N, "N"]
+            [Blockly.Msg.Lang.MOTOR_P, "P"],
+            [Blockly.Msg.Lang.MOTOR_N, "N"]
             ]), "VAR");      
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
@@ -828,27 +828,27 @@ Blockly.Blocks.mixbot_motor = {
       this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
           .appendField("Mixbot")
-          .appendField(Blockly.MIXLY_MOTOR)
+          .appendField(Blockly.Msg.Lang.MIXLY_MOTOR)
           .appendField(new Blockly.FieldDropdown([
-            [Blockly.Msg.TEXT_TRIM_LEFT, "1"],
-            [Blockly.Msg.TEXT_TRIM_RIGHT, "2"],
-            [Blockly.Msg.TEXT_TRIM_BOTH, "0"]
+            [Blockly.Msg.Lang.TEXT_TRIM_LEFT, "1"],
+            [Blockly.Msg.Lang.TEXT_TRIM_RIGHT, "2"],
+            [Blockly.Msg.Lang.TEXT_TRIM_BOTH, "0"]
             ]), "wheel");
       this.appendDummyInput()
-          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_MODE)
+          .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_MODE)
           .appendField(new Blockly.FieldDropdown([
-            [Blockly.MIXLY_MICROBIT_JS_BLE_POWER, "PWR"],
-            [Blockly.MIXLY_SPEED, "SPEED"],
-            [Blockly.MIXLY_MIXBOT_MOTOR_TURNS, "TURNS"]
+            [Blockly.Msg.Lang.MIXLY_MICROBIT_JS_BLE_POWER, "PWR"],
+            [Blockly.Msg.Lang.MIXLY_SPEED, "SPEED"],
+            [Blockly.Msg.Lang.MIXLY_MIXBOT_MOTOR_TURNS, "TURNS"]
             ]), "mode");    
       this.appendValueInput('speed')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.MIXLY_PARAMS);      
+          .appendField(Blockly.Msg.Lang.MIXLY_PARAMS);      
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
       this.setInputsInline(true);
-      this.setTooltip(Blockly.MIXLY_MIXBOT_MOVE_TOOLTIP);
+      this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXBOT_MOVE_TOOLTIP);
     }
 }
 
@@ -856,7 +856,7 @@ Blockly.Blocks['actuator_mixbot_sound'] = {
     init: function(){
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MIXBOT_SOUND_LOUDNESS);
+        .appendField(Blockly.Msg.Lang.MIXLY_MIXBOT_SOUND_LOUDNESS);
         this.setOutput(true);
         this.setInputsInline(true);
     }
@@ -866,11 +866,11 @@ Blockly.Blocks['actuator_mixbot_buzzer_on_off'] = {
     init: function() {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MIXBOT_BUZZER);
+            .appendField(Blockly.Msg.Lang.MIXLY_MIXBOT_BUZZER);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_ON, "0"],
-                [Blockly.MIXLY_MICROBIT_PY_COMMUNICATE_OFF, "1"]
+                [Blockly.Msg.Lang.MIXLY_MICROBIT_PY_COMMUNICATE_ON, "0"],
+                [Blockly.Msg.Lang.MIXLY_MICROBIT_PY_COMMUNICATE_OFF, "1"]
             ]), 'on_off')
         this.setPreviousStatement(true);
         this.setNextStatement(true);

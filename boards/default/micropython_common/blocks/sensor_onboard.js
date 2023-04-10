@@ -528,7 +528,7 @@ Blockly.Blocks['sensor_hp203'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_Altitude+MSG.catSensor+" ")
+            .appendField(Blockly.Msg.Lang.MIXLY_Altitude+Blockly.Msg.Lang.MSG.catSensor+" ")
         this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.Lang.MIXLY_GETPRESSURE, "pressure()"],
@@ -628,7 +628,7 @@ Blockly.Blocks.sensor_onboard_mpu9250_gesture = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -1146,11 +1146,11 @@ Blockly.Blocks['sensor_mixbot_patrol_calibrate'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.MIXGO_LINE_SENSOR)
+            .appendField(Blockly.Msg.Lang.MIXGO_LINE_SENSOR)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_WHITE, "WHITE"],
-                [Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_BLACK, "BLACK"], 
-                [Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET, "RESET_TO_FAB"]
+                [Blockly.Msg.Lang.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_WHITE, "WHITE"],
+                [Blockly.Msg.Lang.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_BLACK, "BLACK"], 
+                [Blockly.Msg.Lang.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET, "RESET_TO_FAB"]
                 ]), "key");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1162,21 +1162,21 @@ Blockly.Blocks['sensor_mixbot_patrol_value'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET)
+            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MIXGO_LEFT_FRONT, "[0]"], 
-                [Blockly.MIXGO_RIGHT_FRONT, "[1]"],
-                [Blockly.MIXGO_LEFT_BACK, "[3]"],
-                [Blockly.MIXGO_RIGHT_BACK, "[2]"],
-                [Blockly.MIXLY_ALL, ""]
+                [Blockly.Msg.Lang.MIXGO_LEFT_FRONT, "[0]"], 
+                [Blockly.Msg.Lang.MIXGO_RIGHT_FRONT, "[1]"],
+                [Blockly.Msg.Lang.MIXGO_LEFT_BACK, "[3]"],
+                [Blockly.Msg.Lang.MIXGO_RIGHT_BACK, "[2]"],
+                [Blockly.Msg.Lang.MIXLY_ALL, ""]
                 ]), "key")
-            .appendField(Blockly.MIXGO_PROXIMITY_SENSOR);
+            .appendField(Blockly.Msg.Lang.MIXGO_PROXIMITY_SENSOR);
         this.setOutput(true,Number);
         this.setInputsInline(true);
         var thisBlock = this;
         this.setTooltip(function() {
-            var mode0 = Blockly.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
-            var mode1 = Blockly.MIXLY_ESP32_NEAR;
+            var mode0 = Blockly.Msg.Lang.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
+            var mode1 = Blockly.Msg.Lang.MIXLY_ESP32_NEAR;
             return mode0 + mode1
         });
     }
@@ -1186,7 +1186,7 @@ Blockly.Blocks['sensor_mixbot_temperature'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.MIXLY_MICROBIT_JS_GET+Blockly.MIXLY_MICROBIT_Board_temperature)            
+            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_GET+Blockly.Msg.Lang.MIXLY_MICROBIT_Board_temperature)            
         this.appendDummyInput("")        
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -1198,7 +1198,7 @@ Blockly.Blocks['sensor_mixbot_get_acceleration'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_JS_ACCELERATION)
+        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_ACCELERATION)
         .appendField(new Blockly.FieldDropdown([
             ["x", "[0]"],
             ["y", "[1]"],
@@ -1207,18 +1207,18 @@ Blockly.Blocks['sensor_mixbot_get_acceleration'] = {
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_ACCELERATION);
+        this.setTooltip(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_ACCELERATION);
         var thisBlock = this;
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('key');
-            var mode0 = Blockly.MIXLY_MICROBIT_PY_STORAGE_GET;
-            var mode1 = Blockly.MIXLY_MICROBIT_Direction;
-            var mode2 = Blockly.MIXLY_MICROBIT_JS_ACCELERATION1;
+            var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET;
+            var mode1 = Blockly.Msg.Lang.MIXLY_MICROBIT_Direction;
+            var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_ACCELERATION1;
             var TOOLTIPS = {
                 '[0]': 'x',
                 '[1]': 'y',
                 '[2]': 'z',
-                '':Blockly.MIXLY_MICROBIT_Shiliang_Direction,
+                '':Blockly.Msg.Lang.MIXLY_MICROBIT_Shiliang_Direction,
             };
             return mode0 +TOOLTIPS[mode]+mode1+mode2;
         });
@@ -1229,7 +1229,7 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.MIXLY_ESP32_SENOR_GYRO)
+        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.Msg.Lang.MIXLY_ESP32_SENOR_GYRO)
         .appendField(new Blockly.FieldDropdown([
             ["x", "[0]"],
             ["y", "[1]"],
@@ -1241,14 +1241,14 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
         var thisBlock = this;
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('key');
-            var mode0 = Blockly.MIXLY_MICROBIT_PY_STORAGE_GET;
-            var mode1 = Blockly.MIXLY_MICROBIT_Direction;
-            var mode2 = Blockly.MIXLY_ESP32_SENOR_GYRO;
+            var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET;
+            var mode1 = Blockly.Msg.Lang.MIXLY_MICROBIT_Direction;
+            var mode2 = Blockly.Msg.Lang.MIXLY_ESP32_SENOR_GYRO;
             var TOOLTIPS = {
                 '[0]': 'x',
                 '[1]': 'y',
                 '[2]': 'z',
-                '':Blockly.MIXLY_MICROBIT_Shiliang_Direction,
+                '':Blockly.Msg.Lang.MIXLY_MICROBIT_Shiliang_Direction,
             };
             return mode0 +TOOLTIPS[mode]+mode1+mode2;
         });

@@ -423,10 +423,10 @@ Blockly.Blocks['communicate_bluetooth_central_init'] = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
-            .appendField(MSG.catBLE)
+            .appendField(Blockly.Msg.Lang.MSG.catBLE)
             .setCheck("var");
         this.appendDummyInput()
-            .appendField(MSG.catEthernet_init + Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_AS+MSG.catBLE_UART);        
+            .appendField(Blockly.Msg.Lang.MSG.catEthernet_init + Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_AS+Blockly.Msg.Lang.MSG.catBLE_UART);        
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -438,10 +438,10 @@ Blockly.Blocks['communicate_bluetooth_peripheral_init'] = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendValueInput('VAR')
-            .appendField(MSG.catBLE)
+            .appendField(Blockly.Msg.Lang.MSG.catBLE)
             .setCheck("var");
         this.appendDummyInput()
-            .appendField(MSG.catEthernet_init + Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_AS+MSG.catBLE_HID);  
+            .appendField(Blockly.Msg.Lang.MSG.catEthernet_init + Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_AS+Blockly.Msg.Lang.MSG.catBLE_HID);  
         this.appendValueInput('data')
             .setCheck(String)
             .appendField(Blockly.Msg.Lang.HTML_NAME);                
@@ -458,7 +458,7 @@ Blockly.Blocks['communicate_bluetooth_scan'] = {
         this.appendValueInput('VAR')
             .setCheck("var");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ESP32_ONEWIRE_SCAN+MSG.catBLE);
+            .appendField(Blockly.Msg.Lang.MIXLY_ESP32_ONEWIRE_SCAN+Blockly.Msg.Lang.MSG.catBLE);
         this.setOutput(true);
         this.setInputsInline(true);
         //this.setTooltip(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_I2C_READ);
@@ -483,7 +483,7 @@ Blockly.Blocks['communicate_bluetooth_connect'] = {
         this.appendValueInput('VAR')
             .setCheck("var");
             this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_TEXT_JOIN + MSG.catBLE)
+            .appendField(Blockly.Msg.Lang.MIXLY_TEXT_JOIN + Blockly.Msg.Lang.MSG.catBLE)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.Lang.HTML_NAME,"name"],
                 [Blockly.Msg.Lang.MIXLY_ETHERNET_MAC_ADDRESS, "mac"]
@@ -517,7 +517,7 @@ Blockly.Blocks['communicate_bluetooth_send'] = {
         this.appendValueInput('VAR')
             .setCheck("var");
         this.appendDummyInput()
-            .appendField(MSG.catBLE+Blockly.Msg.Lang.MIXLY_SEND_DATA);   
+            .appendField(Blockly.Msg.Lang.MSG.catBLE+Blockly.Msg.Lang.MIXLY_SEND_DATA);   
         this.appendValueInput('data')
             .appendField(Blockly.Msg.Lang.HTML_BODY);                 
         this.setPreviousStatement(true);
@@ -533,7 +533,7 @@ Blockly.Blocks['communicate_bluetooth_is_connected'] = {
         this.appendValueInput('VAR')
             .setCheck("var");
         this.appendDummyInput()
-            .appendField(MSG.catBLE+Blockly.Msg.Lang.MIXLY_EMQX_IS_CONNECT);
+            .appendField(Blockly.Msg.Lang.MSG.catBLE+Blockly.Msg.Lang.MIXLY_EMQX_IS_CONNECT);
         this.setOutput(true);
         this.setInputsInline(true);
         //this.setTooltip(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_I2C_READ);

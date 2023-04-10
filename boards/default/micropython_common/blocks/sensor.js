@@ -157,7 +157,7 @@ Blockly.Blocks.sensor_mpu9250_attachGestureInterrupt = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -192,7 +192,7 @@ Blockly.Blocks.sensor_mpu9250_gesture = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {

@@ -95,7 +95,7 @@ Blockly.Blocks.sensor_mpu9250_attachGestureInterrupt = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -492,7 +492,7 @@ Blockly.Blocks['sensor_hp203_extern'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.Lang.MIXLY_Altitude+MSG.catSensor+" HP203X")
+            .appendField(Blockly.Msg.Lang.MIXLY_Altitude+Blockly.Msg.Lang.MSG.catSensor+" HP203X")
             .setCheck("var");
         this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([
@@ -509,7 +509,7 @@ Blockly.Blocks['sensor_QMC5883L_extern'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.Lang.MIXLY_MIXGOPE_FIELD+MSG.catSensor+" QMC5883L")
+            .appendField(Blockly.Msg.Lang.MIXLY_MIXGOPE_FIELD+Blockly.Msg.Lang.MSG.catSensor+" QMC5883L")
             .setCheck("var");
         this.appendDummyInput("")
         .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_GET)
@@ -536,7 +536,7 @@ Blockly.Blocks.sensor_mpu9250_gesture = {
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('gesture');
             var mode0 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT;
-            var mode1 = MSG.catSensor;
+            var mode1 = Blockly.Msg.Lang.MSG.catSensor;
             var mode2 = Blockly.Msg.Lang.MIXLY_MICROBIT_JS_STATE;
             var mode3 = Blockly.Msg.Lang.MIXLY_MICROBIT_PERFORMANCE
             var TOOLTIPS = {
@@ -1064,7 +1064,7 @@ Blockly.Blocks.esp32_s2_weather_init =  {
     init: function() {
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_SETUP+Blockly.Msg.Lang.ForecastType+MSG.catSensor);
+            .appendField(Blockly.Msg.Lang.MIXLY_SETUP+Blockly.Msg.Lang.ForecastType+Blockly.Msg.Lang.MSG.catSensor);
         this.appendValueInput('wd')
             .setCheck(Number)
             .appendField('wd');
@@ -1084,7 +1084,7 @@ Blockly.Blocks['esp32_s2_weather_wd'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.ForecastType+MSG.catSensor)
+            .appendField(Blockly.Msg.Lang.ForecastType+Blockly.Msg.Lang.MSG.catSensor)
             .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET+Blockly.Msg.Lang.ForecastFx)
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -1095,7 +1095,7 @@ Blockly.Blocks['esp32_s2_weather_rain'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendValueInput('rain')
-            .appendField(Blockly.Msg.Lang.ForecastType+MSG.catSensor)
+            .appendField(Blockly.Msg.Lang.ForecastType+Blockly.Msg.Lang.MSG.catSensor)
             .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET)
         this.appendDummyInput()
             .appendField(Blockly.Msg.Lang.MIXLY_RAIN_TIME+Blockly.Msg.Lang.MIXLY_RAIN)
@@ -1108,7 +1108,7 @@ Blockly.Blocks['esp32_s2_weather_ws'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.ForecastType+MSG.catSensor)
+            .appendField(Blockly.Msg.Lang.ForecastType+Blockly.Msg.Lang.MSG.catSensor)
             .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET)
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
@@ -1190,14 +1190,14 @@ Blockly.Blocks.PS2_vibration={
    this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
    this.appendDummyInput("")
    .appendField(Blockly.Msg.Lang.PS2+Blockly.Msg.Lang.PS2_setRumble)
-   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_SMALL+MSG.catActuator_motor)
+   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_SMALL+Blockly.Msg.Lang.MSG.catActuator_motor)
    .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.Lang.MIXLY_MICROBIT_PY_COMMUNICATE_OFF, "0"],
                 [Blockly.Msg.Lang.MIXLY_MICROBIT_PY_COMMUNICATE_ON, "1"],   
                 ]), "smotorstate")            
-   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE)
+   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+Blockly.Msg.Lang.MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE)
    this.appendValueInput("AMP", Number)   
-   this.setTooltip(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE+"0-100");
+   this.setTooltip(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+Blockly.Msg.Lang.MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE+"0-100");
    this.setInputsInline(true);
    this.setPreviousStatement(true);
    this.setNextStatement(true);
@@ -1293,14 +1293,14 @@ Blockly.Blocks.PS2_vibration_new={
    .appendField(Blockly.Msg.Lang.PS2);
    this.appendDummyInput("")
    .appendField(Blockly.Msg.Lang.PS2_setRumble)
-   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_SMALL+MSG.catActuator_motor)
+   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_SMALL+Blockly.Msg.Lang.MSG.catActuator_motor)
    .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.Lang.MIXLY_MICROBIT_PY_COMMUNICATE_OFF, "0"],
                 [Blockly.Msg.Lang.MIXLY_MICROBIT_PY_COMMUNICATE_ON, "1"],   
                 ]), "smotorstate")            
-   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE)
+   .appendField(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+Blockly.Msg.Lang.MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE)
    this.appendValueInput("AMP", Number)   
-   this.setTooltip(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE+"0-100");
+   this.setTooltip(Blockly.Msg.Lang.MIXLY_STM32_OLED_BIG+Blockly.Msg.Lang.MSG.catActuator_motor+Blockly.Msg.Lang.MIXLY_MIXGOPE_AMPLITUDE+"0-100");
    this.setInputsInline(true);
    this.setPreviousStatement(true);
    this.setNextStatement(true);
@@ -1370,7 +1370,7 @@ Blockly.Blocks.pm25_get_data = {
     init: function () {
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendValueInput('SUB')
-            .appendField('PM2.5' + MSG.catSensor)
+            .appendField('PM2.5' + Blockly.Msg.Lang.MSG.catSensor)
         this.appendDummyInput()
             .appendField(Blockly.Msg.Lang.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([

@@ -32,7 +32,7 @@ Blockly.Blocks['me_g1_hp203'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEG1_HUE']);
         this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.MIXLY_Altitude+MSG.catSensor+" HP203X")
+        .appendField(Blockly.Msg.Lang.MIXLY_Altitude+Blockly.Msg.Lang.MSG.catSensor+" HP203X")
         .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.Lang.MIXLY_GETPRESSURE, "pressure()"],
             [Blockly.Msg.Lang.MIXLY_GETTEMPERATUE, "temperature()"],

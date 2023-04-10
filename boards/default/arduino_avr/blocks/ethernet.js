@@ -832,7 +832,7 @@ Blockly.Blocks.weather_private_key = {
 Blockly.Blocks.weather_seniverse_city_weather = {
     init: function () {
         this.appendDummyInput("")
-            .appendField(MSG.catweather)
+            .appendField(Blockly.Msg.Lang.Blockly.Msg.Lang.MSG.catweather)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_LIVE_WEATHER, "weather/now"], [Blockly.Msg.Lang.MIXLY_3_DAY_WEATHER_FORECAST, "weather/daily"], [Blockly.Msg.Lang.MIXLY_6_LIFE_INDEXES, "life/suggestion"]]), "api")
             .appendField(Blockly.Msg.Lang.MIXLY_INFORMATION_CONFIGURATION);
         this.appendValueInput("location")

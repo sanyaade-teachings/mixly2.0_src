@@ -18,6 +18,51 @@ rtc_clock=RTC()
 from ws2812 import NeoPixel
 onboard_rgb = NeoPixel(Pin(12), 2, default=1)
 
+'''1Buzzer-Music'''
+from music import MIDI
+onboard_music =MIDI(25)
+
+spk_en = Pin(27, Pin.OUT)
+spk_en.value(0)
+
+'''i2c-onboard & ext'''
+class I2C_device(SoftI2C):
+
+	CRC8_Table =b'\x00^\xbc\xe2a?\xdd\x83\xc2\x9c~ \xa3\xfd\x1fA\x9d\xc3!\x7f\xfc\xa2@\x1e_\x01\xe3\xbd>`\x82\xdc#}\x9f\xc1B\x1c\xfe\xa0\xe1\xbf]\x03\x80\xde<b\xbe\xe0\x02\\\xdf\x81c=|"\xc0\x9e\x1dC\xa1\xffF\x18\xfa\xa4\'y\x9b\xc5\x84\xda8f\xe5\xbbY\x07\xdb\x85g9\xba\xe4\x06X\x19G\xa5\xfbx&\xc4\x9ae;\xd9\x87\x04Z\xb8\xe6\xa7\xf9\x1bE\xc6\x98z$\xf8\xa6D\x1a\x99\xc7%{:d\x86\xd8[\x05\xe7\xb9\x8c\xd20n\xed\xb3Q\x0fN\x10\xf2\xac/q\x93\xcd\x11O\xad\xf3p.\xcc\x92\xd3\x8do1\xb2\xec\x0eP\xaf\xf1\x13M\xce\x90r,m3\xd1\x8f\x0cR\xb0\xee2l\x8e\xd0S\r\xef\xb1\xf0\xaeL\x12\x91\xcf-s\xca\x94v(\xab\xf5\x17I\x08V\xb4\xeai7\xd5\x8bW\t\xeb\xb56h\x8a\xd4\x95\xcb)w\xf4\xaaH\x16\xe9\xb7U\x0b\x88\xd64j+u\x97\xc9J\x14\xf6\xa8t*\xc8\x96\x15K\xa9\xf7\xb6\xe8\nT\xd7\x89k5'
+
+	def _crc8(self, buf):
+		_sum = 0
+		for i in range(0, len(buf)):
+			_sum = self.CRC8_Table[_sum ^ buf[i]]
+		return _sum
+
+	def read_device(self, addr, cmd, nbytes=1):
+		buf = self.readfrom_mem(addr, cmd, nbytes+2)
+		if self._crc8(buf[:-1]) == buf[-1]:
+			return buf[0] if nbytes<=1 else buf[1:-1]
+
+	def write_device(self, addr, cmd, buf):
+		buf = buf.to_bytes(1, 'little') if type(buf) is int else buf
+		buf = bytearray([cmd, random.randint(0, 255)]) + buf
+		crc8 = self._crc8(buf).to_bytes(1, 'little')
+		self.writeto(addr, buf + crc8)
+		if crc8 == self.readfrom(addr, 1):
+			return True
+
+onboard_i2c = I2C_device(scl=Pin(18), sda=Pin(23) , freq=400000)
+ext_i2c = I2C_device(scl=Pin(22), sda=Pin(21), freq=200000)
+
+'''Version judgment'''
+if 0x68 in onboard_i2c.scan():
+	version=1
+else:
+	version=0
+
+'''Accelerometer+Gyroscope'''
+if version:
+	import icm42670
+	acc_gyr = icm42670.ICM42670(onboard_i2c)
+
 '''2-Button'''
 class Button:
 	def __init__(self, pin, level=True):
@@ -107,33 +152,6 @@ adc1 = ADCSensor(33)
 adc2 = ADCSensor(32)
 battery = ADCSensor(36)
 sound = ADCSensor(38)
-
-'''i2c-onboard & ext'''
-class I2C_device(SoftI2C):
-
-	CRC8_Table =b'\x00^\xbc\xe2a?\xdd\x83\xc2\x9c~ \xa3\xfd\x1fA\x9d\xc3!\x7f\xfc\xa2@\x1e_\x01\xe3\xbd>`\x82\xdc#}\x9f\xc1B\x1c\xfe\xa0\xe1\xbf]\x03\x80\xde<b\xbe\xe0\x02\\\xdf\x81c=|"\xc0\x9e\x1dC\xa1\xffF\x18\xfa\xa4\'y\x9b\xc5\x84\xda8f\xe5\xbbY\x07\xdb\x85g9\xba\xe4\x06X\x19G\xa5\xfbx&\xc4\x9ae;\xd9\x87\x04Z\xb8\xe6\xa7\xf9\x1bE\xc6\x98z$\xf8\xa6D\x1a\x99\xc7%{:d\x86\xd8[\x05\xe7\xb9\x8c\xd20n\xed\xb3Q\x0fN\x10\xf2\xac/q\x93\xcd\x11O\xad\xf3p.\xcc\x92\xd3\x8do1\xb2\xec\x0eP\xaf\xf1\x13M\xce\x90r,m3\xd1\x8f\x0cR\xb0\xee2l\x8e\xd0S\r\xef\xb1\xf0\xaeL\x12\x91\xcf-s\xca\x94v(\xab\xf5\x17I\x08V\xb4\xeai7\xd5\x8bW\t\xeb\xb56h\x8a\xd4\x95\xcb)w\xf4\xaaH\x16\xe9\xb7U\x0b\x88\xd64j+u\x97\xc9J\x14\xf6\xa8t*\xc8\x96\x15K\xa9\xf7\xb6\xe8\nT\xd7\x89k5'
-
-	def _crc8(self, buf):
-		_sum = 0
-		for i in range(0, len(buf)):
-			_sum = self.CRC8_Table[_sum ^ buf[i]]
-		return _sum
-
-	def read_device(self, addr, cmd, nbytes=1):
-		buf = self.readfrom_mem(addr, cmd, nbytes+2)
-		if self._crc8(buf[:-1]) == buf[-1]:
-			return buf[0] if nbytes<=1 else buf[1:-1]
-
-	def write_device(self, addr, cmd, buf):
-		buf = buf.to_bytes(1, 'little') if type(buf) is int else buf
-		buf = bytearray([cmd, random.randint(0, 255)]) + buf
-		crc8 = self._crc8(buf).to_bytes(1, 'little')
-		self.writeto(addr, buf + crc8)
-		if crc8 == self.readfrom(addr, 1):
-			return True
-
-onboard_i2c = I2C_device(scl=Pin(18), sda=Pin(23) , freq=400000)
-ext_i2c = I2C_device(scl=Pin(22), sda=Pin(21), freq=200000)
 
 '''4-FindLine /i2c'''
 class FindLine(object):

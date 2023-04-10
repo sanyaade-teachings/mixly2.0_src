@@ -5,6 +5,7 @@ goog.require('Blockly.Python');
 
 Blockly.Python.display_show_image = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "onboard_matrix.shows(" + data + ")\n";
@@ -169,7 +170,8 @@ Blockly.Python['image_invert'] = function(a) {
 
 Blockly.Python['display_shift'] = function(a) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+  Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var op = a.getFieldValue("OP");
   var value = Blockly.Python.valueToCode(a, 'val', Blockly.Python.ORDER_ATOMIC);
   var code = 'onboard_matrix.' + op + '(' + value + ')\n';
@@ -178,6 +180,7 @@ Blockly.Python['display_shift'] = function(a) {
 
 Blockly.Python['display_get_pixel'] = function(block) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var value_x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
   var value_y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
@@ -187,6 +190,7 @@ Blockly.Python['display_get_pixel'] = function(block) {
 
 Blockly.Python.display_bright_point= function() {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
@@ -467,5 +471,91 @@ Blockly.Python['mpython_display_line'] = function (block) {
   var y2 = Blockly.Python.valueToCode(block, 'y2', Blockly.Python.ORDER_ATOMIC);
   var state = block.getFieldValue('state');
   var code = 'onboard_oled.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + state + ')\n'+'onboard_oled.show()\n';
+  return code;
+};
+
+//mixbot onboard_matrix below:
+
+
+
+
+Blockly.Python['mixbot_display_image_create'] = function(block) {
+  var colours = {
+    "#000000": "0",
+    "#ff0000": "1"
+  }
+  function pad(num) {
+    let newNum = '';
+    if(num.length % 2 === 1) {
+      num = '0' + num;
+    }
+
+    for (let i = 1; i <= num.length; i++)
+      if (i % 2 === 0 && i !== num.length)
+        newNum = newNum + num[i - 1] + '\\x';
+      else
+        newNum += num[i - 1];
+    return '\\x' + newNum;
+  }
+  let colorList = [];
+  for (let i = 0; i < 5; i++) {
+    let colorRow = '';
+    let colorNum = 0;
+    for (let j = 0; j < 5; j++) {
+      colorNum += Number(colours[block.getFieldValue((4-i) + '-' + j)]) * Math.pow(2, j);
+    }
+    colorRow += pad(colorNum.toString(16));
+    colorList.unshift(colorRow);
+  }
+
+  var code = "b'" + colorList.join('') + "'";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['mixbot_display_image_builtins'] = function(block) {
+  var dropdown_image = block.getFieldValue('image');
+  var code = dropdown_image;
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['mixbot_display_clear'] = function(block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+  Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var code = 'onboard_matrix.clear()\n';
+  return code;
+};
+
+Blockly.Python['mixbot_display_get_screen_pixel'] = function() {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var code = 'onboard_matrix.screenbright()';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python['mixbot_display_get_ambientbright'] = function() {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var code = 'onboard_matrix.ambientbright()';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_display_bright_screen= function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = 'onboard_matrix.screenbright(' + x + ')\n';
+    return code;
+};
+
+Blockly.Python['mixbot_display_ratate'] = function(a) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+  Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var op = a.getFieldValue("OP");
+  var code = 'onboard_matrix.direction(' +  op + ')\n';  
   return code;
 };

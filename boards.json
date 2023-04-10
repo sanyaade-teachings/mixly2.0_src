@@ -30,6 +30,16 @@
             "webSocket": true
         }
     }, {
+        "boardImg": "./board/micropython_robot/media/mixbot.jpg",
+        "boardType": "Python Robot",
+        "boardIndex": "./board/micropython_robot/index.html",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        }
+    }, {
         "boardImg": "./board/arduino_avr/media/uno_compressed.png",
         "boardType": "Arduino AVR",
         "boardIndex": "./board/arduino_avr/index.html",

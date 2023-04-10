@@ -765,3 +765,89 @@ Blockly.Blocks.actuator_dc_motor_stop = {
       this.setInputsInline(true);
     }
 }
+
+//mixbot onboard_motor below:
+
+Blockly.Blocks['mixbot_motor_status'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXBOT_MOTOR_STATUS);
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.MIXLY_MIXBOT_MOTOR_STATUS_TOOLTIP);
+    }
+};
+
+Blockly.Blocks.mixbot_move = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.blockpy_forward, "F"],
+            [Blockly.blockpy_backward, "B"],
+            [Blockly.blockpy_left, "L"],
+            [Blockly.blockpy_right, "R"]            
+            ]), "VAR");
+      this.appendDummyInput()
+          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_MODE)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_MICROBIT_JS_BLE_POWER, "PWR"],
+            [Blockly.MIXLY_SPEED, "SPEED"],
+            [Blockly.MIXLY_MIXBOT_MOTOR_TURNS, "TURNS"]
+            ]), "mode");    
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.MIXLY_PARAMS);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+      this.setTooltip(Blockly.MIXLY_MIXBOT_MOVE_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.mixbot_stop = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(new Blockly.FieldDropdown([           
+            [Blockly.MOTOR_P, "P"],
+            [Blockly.MOTOR_N, "N"]
+            ]), "VAR");      
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_motor = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.MIXLY_MOTOR)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.TEXT_TRIM_LEFT, "1"],
+            [Blockly.Msg.TEXT_TRIM_RIGHT, "2"],
+            [Blockly.Msg.TEXT_TRIM_BOTH, "0"]
+            ]), "wheel");
+      this.appendDummyInput()
+          .appendField(Blockly.MIXLY_MICROBIT_PY_STORAGE_MODE)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_MICROBIT_JS_BLE_POWER, "PWR"],
+            [Blockly.MIXLY_SPEED, "SPEED"],
+            [Blockly.MIXLY_MIXBOT_MOTOR_TURNS, "TURNS"]
+            ]), "mode");    
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.MIXLY_PARAMS);      
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+      this.setTooltip(Blockly.MIXLY_MIXBOT_MOVE_TOOLTIP);
+    }
+}

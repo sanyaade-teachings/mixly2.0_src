@@ -17,6 +17,10 @@ Blockly.Blocks.display_show_image = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
+    var version = Mixly.Boards.getSelectedBoardKey()
+    if(version=='micropython:esp32:mixbot_s1' || version=='micropython:esp32:mixbot_s2'){
+      this.setTooltip(Blockly.MIXLY_MIXBOT_SHOW_SCROLL_STRING_TOOLTIP);
+    }
     
   }
 };
@@ -879,5 +883,108 @@ Blockly.Blocks['mpython_pbm_image'] = {
       "tooltip": '',
       "message0": '%1 %2'
     });
+  }
+};
+
+//mixbot onboard_matrix below:
+
+
+
+Blockly.Blocks['mixbot_display_image_create']= {
+  init: function() {
+    this.appendDummyInput('')
+        .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)    
+    for (let i = 0; i < 5; i++) {
+      let dummyInputObj = this.appendDummyInput();
+      for (let j = 0; j < 5; j++) {
+        dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+      }
+    }
+    this.setOutput(true);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.setTooltip(Blockly.MIXLY_MICROBIT_Create_image1);
+  }
+};
+
+Blockly.Blocks['mixbot_display_image_builtins'] = {
+  init : function () {
+    this.jsonInit({
+      "colour" : Blockly.Msg['DISPLAY_ONBOARD_HUE'],
+      "args0" : [{
+          "name" : "image",
+          "options" :[["HEART","0"],["HEART_SMALL","1"],["HAPPY","2"],["SMILE","3"],["SAD","4"],["CONFUSED","5"],["ANGRY","6"],["ASLEEP","7"],["SURPRISED","8"],["SILLY","9"],["FABULOUS","10"],["MEH","11"],["YES","12"],["NO","13"],["CLOCK1","14"],["CLOCK2","15"],["CLOCK3","16"],["CLOCK4","17"],["CLOCK5","18"],["CLOCK6","19"],["CLOCK7","20"],["CLOCK8","21"],["CLOCK9","22"],["CLOCK10","23"],["CLOCK11","24"],["CLOCK12","25"],["ARROW_N","26"],["ARROW_NE","27"],["ARROW_E","28"],["ARROW_SE","29"],["ARROW_S","30"],["ARROW_SW","31"],["ARROW_W","32"],["ARROW_NW","33"],["TRIANGLE","34"],["TRIANGLE_LEFT","35"],["CHESSBOARD","36"],["DIAMOND","37"],["DIAMOND_SMALL","38"],["SQUARE","39"],["SQUARE_SMALL","40"],["RABBIT","41"],["COW","42"],["MUSIC_CROTCHET","43"],["MUSIC_QUAVER","44"],["MUSIC_QUAVERS","45"],["PITCHFORK","46"],["XMAS","47"],["PACMAN","48"],["TARGET","49"],["TSHIRT","50"],["ROLLERSKATE","51"],["DUCK","52"],["HOUSE","53"],["TORTOISE","54"],["BUTTERFLY","55"],["STICKFIGURE","56"],["GHOST","57"],["SWORD","58"],["GIRAFFE","59"],["SKULL","60"],["UMBRELLA","61"],["SNAKE","62"],["SCISSORS","63"]
+          ],
+          "type" : "field_dropdown"
+        }
+      ],
+      "output" : ["esp32_image", "List"],
+      "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/image.html#attributes",
+      "tooltip" : Blockly.MIXLY_MICROBIT_Built_in_image1,
+      "message0" : Blockly.MIXLY_MICROBIT_Built_in_image
+    });
+  }
+};
+
+Blockly.Blocks.mixbot_display_clear = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+  this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MICROBIT_Clear_display);
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  this.setTooltip(Blockly.MIXLY_MICROBIT_Clear_display);
+  }
+};
+
+Blockly.Blocks.mixbot_display_get_screen_pixel = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.appendDummyInput()
+        .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_GET_SCREEN_BRIGHTNESS);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+    this.setTooltip(Blockly.MIXLY_ESP32_JS_MONITOR_GET_SCREEN_BRIGHTNESS);
+  }
+};
+
+Blockly.Blocks.mixbot_display_get_ambientbright = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXBOT_AMBIENTBRIGHT);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks.mixbot_display_bright_screen = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+  this.appendValueInput('x')
+      .setCheck(Number)
+      .appendField(Blockly.MIXLY_ESP32_JS_MONITOR_SET_SCREEN_BRIGHTNESS)
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  this.setTooltip(Blockly.MIXLY_ESP32_JS_MONITOR_SET_SCREEN_BRIGHTNESS + ' 0.0-1.0');
+  }
+};
+
+Blockly.Blocks['mixbot_display_ratate'] = {
+  init: function() {
+    var OPERATORS =
+        [[Blockly.mixpy_PL_PIE_SHADOW_N, '0'],
+         [Blockly.Msg.CLOCKWISE+'90'+Blockly.blockpy_setheading_degree, '1'],
+         [Blockly.Msg.CLOCKWISE+'180'+Blockly.blockpy_setheading_degree, '2'],
+         [Blockly.Msg.CLOCKWISE+'270'+Blockly.blockpy_setheading_degree, '3']];
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXBOT_SCREEN_ROTATE)
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    
   }
 };

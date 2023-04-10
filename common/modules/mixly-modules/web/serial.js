@@ -12,6 +12,7 @@ goog.require('Mixly.MArray');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.SerialPort');
+goog.require('Mixly.Web.Bluetooth');
 goog.provide('Mixly.Web.Serial');
 
 const { 
@@ -28,7 +29,7 @@ const {
     Msg
 } = Mixly;
 
-const { Serial, USB, SerialPort } = Web;
+const { Serial, USB, SerialPort, Bluetooth } = Web;
 
 const { BOARD, SELECTED_BOARD } = Config;
 
@@ -268,6 +269,9 @@ Serial.refreshOutputBox = (port) => {
         return;
     }
     const { dom, toolConfig, toolOpened, endPos, serialport } = portObj;
+    if (!serialport) {
+        return;
+    }
     const output = serialport.output;
     for (let i = output.length; i > Serial.MAX_OUTPUT_LINE; i--) {
         output.shift();
@@ -297,7 +301,10 @@ Serial.refreshOutputBox = (port) => {
 * @return void
 **/
 Serial.openTool = () => {
-    const portName = 'web-' + SELECTED_BOARD.web.com;
+    let portName = `web-${SELECTED_BOARD.web.com ?? 'serial'}`;
+    if (!navigator.serial || !navigator.usb) {
+        portName = 'web-bluetooth';
+    }
     const baud = Serial.portsOperator[portName]?.toolConfig?.baudRates ?? Serial.TOOL_DEFAULT_CONFIG.baudRates;
     Serial.connect(portName, baud, (selectedPort) => {
         if (!selectedPort) {
@@ -1052,8 +1059,10 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
         return;
     }
     portObj.refreshOutputBoxTimer = null;
-    if (SELECTED_BOARD.web.com === 'usb') {
+    if (port === 'web-usb') {
         portObj.serialport = USB;
+    } else if (port === 'web-bluetooth') {
+        portObj.serialport = Bluetooth;
     } else {
         portObj.serialport = SerialPort;
     }

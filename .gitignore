@@ -11,3 +11,4 @@ boards/default/**/build/upload/
 boards/extend/
 node_modules/
 package-lock.json
+.idea/

@@ -33,6 +33,17 @@
         },
         "language": "MicroPython"
     }, {
+        "boardImg": "./boards/default/micropython_robot/media/mixbot.png",
+        "boardType": "Python Robot",
+        "boardIndex": "./boards/default/micropython_robot/index.html",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        },
+        "language": "MicroPython"
+    }, {
         "boardImg": "./boards/default/arduino_avr/media/uno_compressed.png",
         "boardType": "Arduino AVR",
         "boardIndex": "./boards/default/arduino_avr/index.html",

@@ -48,11 +48,9 @@ const espTool = new Esptool.EspLoader({
 });
 
 BU.clickConnect = async function () {
-    let portName;
-    if (SELECTED_BOARD.web.com == "usb") {
-        portName = 'web-usb';
-    } else {
-        portName = 'web-serial';
+    let portName = `web-${SELECTED_BOARD.web.com ?? 'serial'}`;
+    if (!navigator.serial || !navigator.usb) {
+        portName = 'web-bluetooth';
     }
     const portObj = Serial.portsOperator[portName];
     if (portObj && portObj.portOpened) {
@@ -414,8 +412,11 @@ BU.searchLibs = (moduleList, libList = []) => {
 }
 
 BU.initUpload = () => {
-    const comName = 'web-' + (SELECTED_BOARD.web.com ?? 'serial');
-    BU.uploadWithAmpy(comName);
+    let portName = `web-${SELECTED_BOARD.web.com ?? 'serial'}`;
+    if (!navigator.serial || !navigator.usb) {
+        portName = 'web-bluetooth';
+    }
+    BU.uploadWithAmpy(portName);
 }
 
 BU.uploadWithAmpy = (port) => {

@@ -3449,5 +3449,17 @@ En.MIXLY_GNSS_SENSOR_GET_STATUS_TOOLTIP = 'return a list of status informationï¼
 En.MIXLY_ESP32_WIFI_CONNECTION_EVENT1 = 'WIFI is connected';
 En.MIXLY_ESP32_WIFI_CONNECTION_EVENT2 = 'The router successfully assigns an IP';
 En.MIXLY_ESP32_WIFI_CONNECTION_EVENT3 = 'WIFI is disconnected';
+En.MIXLY_MIXBOT_SHOW_SCROLL_STRING_TOOLTIP = 'Single character static display, multi character scrolling display, non blocking when scrolling display';
+En.MIXLY_MIXBOT_AMBIENTBRIGHT = 'get ambient brightness';
+En.MIXLY_MIXBOT_SCREEN_ROTATE = 'set screen rotation';
+En.MIXLY_MIXBOT_MOTOR_STATUS = 'get motor status';
+En.MIXLY_MIXBOT_MOTOR_STATUS_TOOLTIP = 'Returns two tuples, corresponding to the left and right motor states, in order of mode, speed, power, and turns'
+En.MIXLY_MIXBOT_MOTOR_TURNS = 'turns';
+En.MIXLY_MIXBOT_MOVE_TOOLTIP = 'Power/speed parameter range -100~100, turns parameter range -32768~32767), negative sign represents reversal';
+En.MIXLY_MIXBOT_SOUND_LOUDNESS = 'get microphone volume';
+En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_WHITE = 'calibrate white';
+En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_BLACK = 'calibrate black';
+En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = 'factory reset';
+En.MIXLY_MIXBOT_BUZZER = 'buzzer';
 
 })();

@@ -3,7 +3,8 @@
         "path": "/common/board-config-menu.js",
         "require": [
             "Mixly.FooterLayer",
-            "Mixly.MArray"
+            "Mixly.MArray",
+            "Mixly.Env"
         ],
         "provide": [
             "Mixly.BoardConfigMenu"
@@ -696,6 +697,15 @@
         ]
     },
     {
+        "path": "/web/bluetooth.js",
+        "require": [
+            "Mixly.Web"
+        ],
+        "provide": [
+            "Mixly.Web.Bluetooth"
+        ]
+    },
+    {
         "path": "/web/burn-upload.js",
         "require": [
             "Mixly.StatusBar",
@@ -767,7 +777,8 @@
             "Mixly.MArray",
             "Mixly.Msg",
             "Mixly.Web.USB",
-            "Mixly.Web.SerialPort"
+            "Mixly.Web.SerialPort",
+            "Mixly.Web.Bluetooth"
         ],
         "provide": [
             "Mixly.Web.Serial"
@@ -776,7 +787,7 @@
     {
         "path": "/web/serialport.js",
         "require": [
-            "Mixly.Web.Ampy"
+            "Mixly.Web"
         ],
         "provide": [
             "Mixly.Web.SerialPort"
@@ -785,7 +796,7 @@
     {
         "path": "/web/usb.js",
         "require": [
-            "Mixly.Web.Ampy"
+            "Mixly.Web"
         ],
         "provide": [
             "Mixly.Web.USB"

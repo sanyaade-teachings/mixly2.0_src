@@ -9,7 +9,7 @@ Blockly.Blocks['WEATHER_NOW']={
     init: function() {
         this.setColour(Blockly.Msg['WEATHER_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.Blockly.Msg.Lang.MSG.catweather)
+            .appendField(Blockly.Msg.Lang.MSG.catweather)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.Lang.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_NOW, "weather_now"], 
                 [Blockly.Msg.Lang.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_ALARM, "weather_alarm"], 
@@ -30,7 +30,7 @@ Blockly.Blocks['WEATHER_DAILY']={
     init: function() {
         this.setColour(Blockly.Msg['WEATHER_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.Blockly.Msg.Lang.MSG.catweather)
+            .appendField(Blockly.Msg.Lang.MSG.catweather)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.Lang.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_DAILY, "weather_daily"], 
                 [Blockly.Msg.Lang.MIXLY_WEB_DATA_SENIVERSE_GET_LIFE_SUGGESTION, "life_suggestion"], 
@@ -53,7 +53,7 @@ Blockly.Blocks['WEATHER_HOUR']={
     init: function() {
         this.setColour(Blockly.Msg['WEATHER_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.Blockly.Msg.Lang.MSG.catweather)
+            .appendField(Blockly.Msg.Lang.MSG.catweather)
             .appendField(Blockly.Msg.Lang.MIXLY_WEB_DATA_SENIVERSE_GET_WEATHER_HOURS);
         this.appendValueInput('key')
             .appendField(Blockly.Msg.Lang.MIXLY_API_PRIVATE_KEY);   

@@ -119,10 +119,12 @@
                         "path": "./build/MixBot-0x1000-V1.19.1-lib.bin"
                     }
                 ]
-            },
-            "upload": {
-                "reset": []
             }
+       
+        },
+        
+        "upload": {
+            "reset": []
         }
     }
 }

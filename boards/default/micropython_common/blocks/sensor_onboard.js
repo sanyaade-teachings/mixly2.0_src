@@ -1170,7 +1170,7 @@ Blockly.Blocks['sensor_mixbot_patrol_value'] = {
                 [Blockly.Msg.Lang.MIXGO_RIGHT_BACK, "[2]"],
                 [Blockly.Msg.Lang.MIXLY_ALL, ""]
                 ]), "key")
-            .appendField(Blockly.Msg.Lang.MIXGO_PROXIMITY_SENSOR);
+            .appendField(Blockly.Msg.Lang.MIXGO_LINE_SENSOR_VAL);
         this.setOutput(true,Number);
         this.setInputsInline(true);
         var thisBlock = this;
@@ -1252,6 +1252,16 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
             };
             return mode0 +TOOLTIPS[mode]+mode1+mode2;
         });
+    }
+};
+
+Blockly.Blocks['sensor_mixbot_sound'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXBOT_SOUND_LOUDNESS);
+        this.setOutput(true);
+        this.setInputsInline(true);
     }
 };
 

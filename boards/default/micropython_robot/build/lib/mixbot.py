@@ -39,9 +39,9 @@ class I2C_device(SoftI2C):
 	def read_device(self, addr, cmd, nbytes=1):
 		buf = self.readfrom_mem(addr, cmd, nbytes+2)
 		if self._crc8(buf[:-1]) == buf[-1]:
-			return buf[0] if nbytes<=1 else buf[1:-1]
+			return buf[1] if nbytes<=1 else buf[1:-1]
 
-	def write_device(self, addr, cmd, buf):
+	def write_device(self, addr, cmd, buf=0):
 		buf = buf.to_bytes(1, 'little') if type(buf) is int else buf
 		buf = bytearray([cmd, random.randint(0, 255)]) + buf
 		crc8 = self._crc8(buf).to_bytes(1, 'little')
@@ -97,28 +97,28 @@ button_b = Button(39, False)
 '''2-LED'''  
 class LED:
 	def __init__(self, pin):
-		self._pin =PWM(Pin(pin),freq=5000,duty_u16=65535)
+		self._pin =PWM(Pin(pin), freq=5000, duty_u16=65535)
 		self.setbrightness(0)
 		
 	def setbrightness(self,val):
 		if not 0 <= val <= 100:
 			raise ValueError("Brightness must be in the range: 0-100%")
 		self._brightness=val
-		self._pin.duty_u16(val*65535//100)
+		self._pin.duty_u16(val * 65535 // 100)
 
 	def getbrightness(self):
 		return self._brightness
 
 	def setonoff(self,val):
 		if(val == -1):
-			self.setbrightness(100)  if self._brightness<50 else self.setbrightness(0) 
+			self.setbrightness(100)  if self._brightness < 50 else self.setbrightness(0) 
 		elif(val == 1):
 			self.setbrightness(100) 
 		elif(val == 0):
 			self.setbrightness(0) 
 			
 	def getonoff(self):
-		return True if self._brightness>0 else False
+		return True if self._brightness > 0 else False
 
 	def value(self,val=None):
 		if val is None:
@@ -189,8 +189,8 @@ class Matrix5x5(framebuf.FrameBuffer):
 		self._brightness= brightness
 		self._buffer = bytearray(5)
 		super().__init__(self._buffer, self.columns, self.rows, framebuf.MONO_HMSB) 
-		#self.screenbright(0.5, 0)   
-		
+		self.clear()   
+
 	def screenbright(self, brightness=None, background=0):
 		if brightness is None :
 			return self._brightness
@@ -198,16 +198,16 @@ class Matrix5x5(framebuf.FrameBuffer):
 			if not 0.0 <= brightness <= 1.0:
 				raise ValueError("Brightness must be a decimal number in the range: 0.0-1.0")
 			self._brightness = brightness
-			self._i2c.write_device(self._addr,0xa5,bytes([round(255 * brightness),round(255 * background)])) 
+			self._i2c.write_device(self._addr, 0xA5, bytes([round(255 * brightness), round(255 * background)])) 
 
 	def ambientbright(self):
-		read_buf = bytearray((1 + 2))
-		if self._i2c.read_device(self._addr, 0x10, read_buf):
-			return int(read_buf[1])
+		bright = self._i2c.read_device(self._addr, 0x10)
+		if bright:
+			return bright
 
 	def direction(self,mode = 0):
 		'''set display direction '''
-		self._i2c.write_device(self._addr, 0xA7, bytes([mode]))
+		self._i2c.write_device(self._addr, 0xA7, mode)
 
 	def __getitem__(self, key):
 		x, y = key
@@ -273,7 +273,7 @@ class Matrix5x5(framebuf.FrameBuffer):
 				self._buffer[i] = data[i]
 			self.show() 
 		elif type(data) is int:
-			self._i2c.write_device(self._addr, 0xA0, bytes([data]))
+			self._i2c.write_device(self._addr, 0xA0, data)
 		else:
 			data=str(data)
 			self.writestring(data)
@@ -284,7 +284,7 @@ class Matrix5x5(framebuf.FrameBuffer):
 			return False
 		if str_len > 128:
 			raise Error("content size must less than 128")
-		self._i2c.write_device(self._addr,0xa2,bytes([str_len]))
+		self._i2c.write_device(self._addr, 0xA2, str_len)
 		str_idx = 0
 		str_write_step_len = 12
 		while str_idx <= str_len :
@@ -292,22 +292,22 @@ class Matrix5x5(framebuf.FrameBuffer):
 			buf = bytearray(12)
 			for i in range(0,len(tmp_buf)):
 				buf[i] = tmp_buf[i]
-			self._i2c.write_device(self._addr,0xA3,buf)
+			self._i2c.write_device(self._addr, 0xA3, buf)
 			str_idx += str_write_step_len
-		self._i2c.write_device(self._addr, 0xA4, b'\x00')
+		self._i2c.write_device(self._addr, 0xA4)
 
 	def show(self):
 		'''Refresh the display and show the changes'''
 		buf = bytearray(4)
-		buf[0] = self._buffer[4] >>4
-		buf[1] = self._buffer[3] >>1 | self._buffer[4] <<4
-		buf[2] = self._buffer[1] >>3 | self._buffer[2] <<2 | self._buffer[3] << 7
-		buf[3] = self._buffer[0] | self._buffer[1] <<5 
+		buf[0] = self._buffer[4] >> 4
+		buf[1] = self._buffer[3] >> 1 | self._buffer[4] << 4
+		buf[2] = self._buffer[1] >> 3 | self._buffer[2] << 2 | self._buffer[3] << 7
+		buf[3] = self._buffer[0] | self._buffer[1] << 5 
 		self._i2c.write_device(self._addr, 0xA1, buf)
 
 	def clear(self):
 		''' clear display'''
-		self._i2c.write_device(self._addr, 0xA6, b'\x00')
+		self._i2c.write_device(self._addr, 0xA6)
 	
 onboard_matrix = Matrix5x5(onboard_i2c)
 
@@ -323,10 +323,10 @@ class Motor(object):
 	def __init__(self, i2c_bus, addr=0x02):
 		self._i2c = i2c_bus
 		self._addr = addr
-		self._signala = PWM(Pin(13),freq=500,duty_u16=49150)
-		self._signalb = PWM(Pin(14),freq=500,duty_u16=49150)
-		self._status = ((0,0,0,0),(0,0,0,0))
-		self._motor = ([0,0],[0,0])
+		self._signala = PWM(Pin(13), freq=500, duty_u16=49150)
+		self._signalb = PWM(Pin(14), freq=500, duty_u16=49150)
+		self._status = ((0,0,0,0), (0,0,0,0))
+		self._motor = ([0,0], [0,0])
 	
 	def _u2s(self, value, n=8):
 		return value if value < (1 << (n-1)) else value - (1 << n)	
@@ -335,7 +335,7 @@ class Motor(object):
 		_buf = self._i2c.read_device(self._addr, 0x10, 9)
 		if _buf:
 			self._status = ((_buf[0] >> 4, -self._u2s(_buf[1]), -self._u2s(_buf[3]), abs(self._u2s(_buf[6] << 8 | _buf[5], 16))),
-							(_buf[0] & 0x0f, self._u2s(_buf[2]), self._u2s(_buf[4]), abs(self._u2s(_buf[8] << 8 | _buf[7], 16))))   
+							(_buf[0] & 0x0F, self._u2s(_buf[2]), self._u2s(_buf[4]), abs(self._u2s(_buf[8] << 8 | _buf[7], 16))))   
 		return self._status
 		
 	def run(self, idx, mode, value):
@@ -348,19 +348,19 @@ class Motor(object):
 		m1_pwr_speed, m2_pwr_speed = 0, 0
 		buf[0] = (self._motor[0][0] << 4) | self._motor[1][0] 
 		if self._motor[0][0] == self.TURNS_MODE:
-			buf[1] = (- self._motor[0][1]) & 0xff
-			buf[2] = ((- self._motor[0][1]) >> 8) & 0xff
+			buf[1] = (- self._motor[0][1]) & 0xFF
+			buf[2] = ((- self._motor[0][1]) >> 8) & 0xFF
 		else:
 			m1_pwr_speed = - max(min(self._motor[0][1], 100), -100)
 		if self._motor[1][0] == self.TURNS_MODE:
-			buf[3] = self._motor[1][1] & 0xff
-			buf[4] = (self._motor[1][1] >> 8) & 0xff
+			buf[3] = self._motor[1][1] & 0xFF
+			buf[4] = (self._motor[1][1] >> 8) & 0xFF
 		else:
 			m2_pwr_speed = max(min(self._motor[1][1], 100), -100)
 		
-		self._i2c.write_device(self._addr, 0xa0, buf)
-		self._signala.duty_u16(33422+31457*(m1_pwr_speed+100)//200)
-		self._signalb.duty_u16(33422+31457*(m2_pwr_speed+100)//200)
+		self._i2c.write_device(self._addr, 0xA0, buf)
+		self._signala.duty_u16(33422 + 31457 * (m1_pwr_speed + 100) // 200)
+		self._signalb.duty_u16(33422 + 31457 * (m2_pwr_speed + 100) // 200)
 
 	def move(self, action, mode, value=100):
 		if action=="N":

@@ -852,16 +852,6 @@ Blockly.Blocks.mixbot_motor = {
     }
 }
 
-Blockly.Blocks['actuator_mixbot_sound'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.MIXLY_MIXBOT_SOUND_LOUDNESS);
-        this.setOutput(true);
-        this.setInputsInline(true);
-    }
-};
-
 Blockly.Blocks['actuator_mixbot_buzzer_on_off'] = {
     init: function() {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);

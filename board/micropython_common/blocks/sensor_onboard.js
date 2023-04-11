@@ -1255,6 +1255,16 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     }
 };
 
+Blockly.Blocks['sensor_mixbot_sound'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.MIXLY_MIXBOT_SOUND_LOUDNESS);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
 Blockly.Blocks['sensor_button_is_pressed']=Blockly.Blocks['sensor_mixgo_button_is_pressed'];
 Blockly.Blocks['sensor_button_was_pressed']=Blockly.Blocks['sensor_mixgo_button_was_pressed'];
 Blockly.Blocks['sensor_button_get_presses']=Blockly.Blocks['sensor_mixgo_button_get_presses'];

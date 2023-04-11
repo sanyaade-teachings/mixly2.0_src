@@ -355,14 +355,6 @@ Blockly.Python.mixbot_motor=function(){
     return code;
 };
 
-Blockly.Python.actuator_mixbot_sound = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
-    Blockly.Python.definitions_['import_'+version+'_sound'] = 'from '+version+' import sound';
-    var code =  'sound.loudness()';
-    return [code, Blockly.Python.ORDER_ATOMIC];
-};
-
 Blockly.Python.actuator_mixbot_buzzer_on_off = function () {var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_spk_en'] = 'from '+version+' import spk_en';

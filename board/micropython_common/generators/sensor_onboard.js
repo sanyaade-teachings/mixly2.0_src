@@ -442,6 +442,7 @@ Blockly.Python.sensor_onboard_compass_reset = function(block) {
 
 Blockly.Python.onboard_RTC_set_datetime= function () {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'rtc_clock'] = 'from '+version + ' import rtc_clock';  
   var year = Blockly.Python.valueToCode(this, "year", Blockly.Python.ORDER_ASSIGNMENT);
   var month = Blockly.Python.valueToCode(this, "month",Blockly.Python.ORDER_ASSIGNMENT);
@@ -464,6 +465,7 @@ Blockly.Python.onboard_RTC_settime_string=function(){
 
 Blockly.Python.onboard_RTC_get_time = function () {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'rtc_clock'] = 'from '+version + ' import rtc_clock';  
   var code = 'rtc_clock.datetime()';
   return [code, Blockly.Python.ORDER_ATOMIC];
@@ -641,6 +643,15 @@ Blockly.Python.sensor_mixbot_get_gyro = function(){
     var code = 'acc_gyr.gyroscope()' + key ;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.sensor_mixbot_sound = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
+    Blockly.Python.definitions_['import_'+version+'_sound'] = 'from '+version+' import sound';
+    var code =  'sound.loudness()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 
 Blockly.Python.sensor_button_is_pressed=Blockly.Python.sensor_mixgo_button_is_pressed;
 Blockly.Python.sensor_button_was_pressed=Blockly.Python.sensor_mixgo_button_was_pressed;

@@ -3418,7 +3418,6 @@ Blockly.MIXLY_MIXIO_SHARE_KEY = '项目授权码';
 Blockly.MIXLY_MIXGOPE_FIELD = '磁场';
 Blockly.MIXLY_MIXGOPE_AMPLITUDE = '振幅';
 Blockly.MIXGO_LINE_SENSOR_VAL = '巡线传感器数值';
-Blockly.MIXGO_LINE_SENSOR_VAL = '巡线传感器数值';
 Blockly.MIXLY_MIXGO_CAR_SENSOR_ONBOARD_CHANGE = '板载传感器设置为';
 Blockly.MIXLY_MIXGO_CAR_USE_LINE_ONLY = '只使用巡线';
 Blockly.MIXLY_MIXGO_CAR_USE_PROXIMITY_ONLY = '只使用避障';

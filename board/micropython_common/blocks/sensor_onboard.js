@@ -1170,7 +1170,7 @@ Blockly.Blocks['sensor_mixbot_patrol_value'] = {
                 [Blockly.MIXGO_RIGHT_BACK, "[2]"],
                 [Blockly.MIXLY_ALL, ""]
                 ]), "key")
-            .appendField(Blockly.MIXGO_PROXIMITY_SENSOR);
+            .appendField(Blockly.MIXGO_LINE_SENSOR_VAL);
         this.setOutput(true,Number);
         this.setInputsInline(true);
         var thisBlock = this;

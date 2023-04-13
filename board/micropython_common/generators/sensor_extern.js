@@ -328,7 +328,12 @@ Blockly.Python.sensor_use_spi_init=function(){
       var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
       Blockly.Python.definitions_['import_'+version] = 'import '+version;    
       Blockly.Python.definitions_['import_ws_lora'] = 'import ws_lora';
+      if (version=='mixgo_pe'){
+        var code = v + ' = ws_lora.Weather('+ sv + ','+ pv +')\n';
+      }
+      else{
       var code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c'+')\n';
+      }
     }
     return code;
 };

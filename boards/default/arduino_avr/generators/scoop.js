@@ -63,7 +63,7 @@ Blockly.Arduino['SCoopTask'] = function () {
         this.setWarningText(null);
     }
     else {
-        this.setWarningText(Blockly.Msg.Lang.SCOOPTASK_WARNING);
+        this.setWarningText(Blockly.Msg.SCOOPTASK_WARNING);
     }
     Blockly.Arduino.definitions_['include_Scoop'] = '#include \"SCoop.h\"';
     Blockly.Arduino.setups_['scoop_start'] = 'mySCoop.start();';

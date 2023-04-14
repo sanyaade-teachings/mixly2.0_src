@@ -8,39 +8,39 @@ Blockly.Msg['SKLEARN_HUE'] = 80;
 Blockly.Blocks.sklearn_make_classification= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField(Blockly.Msg.Lang.SKLEARN_CLASSIFICATION_GENERATION);
+      .appendField(Blockly.Msg.SKLEARN_CLASSIFICATION_GENERATION);
   this.appendValueInput("n_samples")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_SAMPLES);
+      .appendField(Blockly.Msg.NUMBER_OF_SAMPLES);
   this.appendValueInput("n_features")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_FEATURES);
   this.appendValueInput("n_informative")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_EFFECTIVE_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_EFFECTIVE_FEATURES);
   this.appendValueInput("n_redundant")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_REDUNDANT_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_REDUNDANT_FEATURES);
   this.appendValueInput("n_repeated")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_REPEATED_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_REPEATED_FEATURES);
   this.appendValueInput("n_classes")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_CLASSES);
+      .appendField(Blockly.Msg.NUMBER_OF_CLASSES);
   this.appendValueInput("n_clusters_per_class")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_CLUSTERS_PER_CLASSES);
+      .appendField(Blockly.Msg.NUMBER_OF_CLUSTERS_PER_CLASSES);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -53,35 +53,35 @@ Blockly.Blocks.sklearn_make_classification= {
 Blockly.Blocks.sklearn_make_regression= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField(Blockly.Msg.Lang.SKLEARN_REGRESSION_GENERATION);
+      .appendField(Blockly.Msg.SKLEARN_REGRESSION_GENERATION);
   this.appendValueInput("n_samples")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_SAMPLES);
+      .appendField(Blockly.Msg.NUMBER_OF_SAMPLES);
   this.appendValueInput("n_features")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_FEATURES);
   this.appendValueInput("n_informative")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_EFFECTIVE_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_EFFECTIVE_FEATURES);
   this.appendValueInput("n_targets")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_LABELS);
+      .appendField(Blockly.Msg.NUMBER_OF_LABELS);
   this.appendValueInput("bias")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.DEVIATION);
+      .appendField(Blockly.Msg.DEVIATION);
   this.appendValueInput("noise")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NOISE);
+      .appendField(Blockly.Msg.NOISE);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -94,35 +94,35 @@ Blockly.Blocks.sklearn_make_regression= {
 Blockly.Blocks.sklearn_make_blobs= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField(Blockly.Msg.Lang.SKLEARN_CLUSTERING_GENERATION);
+      .appendField(Blockly.Msg.SKLEARN_CLUSTERING_GENERATION);
   this.appendValueInput("n_samples")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_SAMPLES);
+      .appendField(Blockly.Msg.NUMBER_OF_SAMPLES);
   this.appendValueInput("n_features")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_FEATURES);
+      .appendField(Blockly.Msg.NUMBER_OF_FEATURES);
   this.appendValueInput("centers")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_CLUSTERS);
+      .appendField(Blockly.Msg.NUMBER_OF_CLUSTERS);
   this.appendValueInput("cluster_std")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.STANDARD_DEVIATION_OF_CLUSTER);
+      .appendField(Blockly.Msg.STANDARD_DEVIATION_OF_CLUSTER);
   this.appendValueInput("center_box")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.CLUSTER_BOUNDING_BOX);
+      .appendField(Blockly.Msg.CLUSTER_BOUNDING_BOX);
   this.appendValueInput("shuffle")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SHUFFLE_SAMPLES);
+      .appendField(Blockly.Msg.SHUFFLE_SAMPLES);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -135,15 +135,15 @@ Blockly.Blocks.sklearn_make_blobs= {
 Blockly.Blocks.sklearn_load= {
   init: function() { 
   var data = [
-  [Blockly.Msg.Lang.SKLEARN_LOAD_IRIS,"load_iris"],
-  [Blockly.Msg.Lang.SKLEARN_LOAD_BOSTON,"load_boston"],
-  [Blockly.Msg.Lang.SKLEARN_LOAD_DIABETES,"load_diabetes"],
-  [Blockly.Msg.Lang.SKLEARN_LOAD_BREAST_CANCER,"load_breast_cancer"],
-  [Blockly.Msg.Lang.SKLEARN_LOAD_LINNERUD,"load_linnerud"],
-  [Blockly.Msg.Lang.SKLEARN_LOAD_DIGITS,"load_digits"]
+  [Blockly.Msg.SKLEARN_LOAD_IRIS,"load_iris"],
+  [Blockly.Msg.SKLEARN_LOAD_BOSTON,"load_boston"],
+  [Blockly.Msg.SKLEARN_LOAD_DIABETES,"load_diabetes"],
+  [Blockly.Msg.SKLEARN_LOAD_BREAST_CANCER,"load_breast_cancer"],
+  [Blockly.Msg.SKLEARN_LOAD_LINNERUD,"load_linnerud"],
+  [Blockly.Msg.SKLEARN_LOAD_DIGITS,"load_digits"]
   ];
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.LOAD)
+      .appendField("sklearn "+Blockly.Msg.LOAD)
       .appendField(new Blockly.FieldDropdown(data), "type")
       .appendField(new Blockly.FieldTextInput("iris"), "name");
   this.setPreviousStatement(true, null);
@@ -167,11 +167,11 @@ Blockly.Blocks.sklearn_data_target= {
   init: function() { 
   this.appendValueInput("name")
       .setCheck(null)  
-      .appendField("sklearn "+Blockly.Msg.Lang.DATA_SET);
+      .appendField("sklearn "+Blockly.Msg.DATA_SET);
   this.appendDummyInput()
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MIXLY_GET)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.EIGENVALUES,"data"],[Blockly.Msg.Lang.LABEL_VALUE,"target"],[Blockly.Msg.Lang.FEATURE,"feature_names"],[Blockly.Msg.Lang.mixpy_PYLAB_TICKS_TAG,"target_names"]]), "type");
+      .appendField(Blockly.Msg.MIXLY_GET)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.EIGENVALUES,"data"],[Blockly.Msg.LABEL_VALUE,"target"],[Blockly.Msg.FEATURE,"feature_names"],[Blockly.Msg.mixpy_PYLAB_TICKS_TAG,"target_names"]]), "type");
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
@@ -183,23 +183,23 @@ Blockly.Blocks.sklearn_data_target= {
 Blockly.Blocks.sklearn_train_test_split= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.DATA_SEGMENTATION);
+      .appendField("sklearn "+Blockly.Msg.DATA_SEGMENTATION);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.appendValueInput("train_target")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.LABEL_VALUE);
+      .appendField(Blockly.Msg.LABEL_VALUE);
   this.appendValueInput("test_size")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.TEST_SET_PROPORTION);
+      .appendField(Blockly.Msg.TEST_SET_PROPORTION);
   this.appendValueInput("rondom_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -212,19 +212,19 @@ Blockly.Blocks.sklearn_train_test_split= {
 Blockly.Blocks.sklearn_train_test_split_no_target= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.DATA_SEGMENTATION);
+      .appendField("sklearn "+Blockly.Msg.DATA_SEGMENTATION);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.appendValueInput("test_size")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.TEST_SET_PROPORTION);
+      .appendField(Blockly.Msg.TEST_SET_PROPORTION);
   this.appendValueInput("rondom_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -237,23 +237,23 @@ Blockly.Blocks.sklearn_train_test_split_no_target= {
 Blockly.Blocks.sklearn_LinearRegression= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_LINEARREGRESSION_INIT);
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_LINEARREGRESSION_INIT);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("fit_intercept")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_CALCULATE_MODEL_INTERRUPT);
+      .appendField(Blockly.Msg.SKLEARN_CALCULATE_MODEL_INTERRUPT);
   this.appendValueInput("normalize")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_REGRESSION_NORMIALIZATION);
+      .appendField(Blockly.Msg.SKLEARN_REGRESSION_NORMIALIZATION);
   this.appendValueInput("n_jobs")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_THREADS);
+      .appendField(Blockly.Msg.SKLEARN_THREADS);
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -267,31 +267,31 @@ Blockly.Blocks.sklearn_LinearRegression= {
 Blockly.Blocks.sklearn_Ridge= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_RIDGE_INIT);
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_RIDGE_INIT);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("alpha")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_REGULA_INTENSITY);
+      .appendField(Blockly.Msg.SKLEARN_REGULA_INTENSITY);
   this.appendValueInput("fit_intercept")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_CALCULATE_MODEL_INTERRUPT);
+      .appendField(Blockly.Msg.SKLEARN_CALCULATE_MODEL_INTERRUPT);
   this.appendValueInput("normalize")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_REGRESSION_NORMIALIZATION);
+      .appendField(Blockly.Msg.SKLEARN_REGRESSION_NORMIALIZATION);
   this.appendValueInput("max_iter")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_MAX_ITER);
+      .appendField(Blockly.Msg.SKLEARN_MAX_ITER);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -305,20 +305,20 @@ Blockly.Blocks.sklearn_Ridge= {
 Blockly.Blocks.sklearn_DecisionTreeClassifier_Regressor= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_DECISIONTREE_INIT)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.SKLEARN_CLASSIFICATION_ALGORITHM,"DecisionTreeClassifier"],[Blockly.Msg.Lang.SKLEARN_REGRESSION_ALGORITHM,"DecisionTreeRegressor"]]), "type");
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_DECISIONTREE_INIT)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.SKLEARN_CLASSIFICATION_ALGORITHM,"DecisionTreeClassifier"],[Blockly.Msg.SKLEARN_REGRESSION_ALGORITHM,"DecisionTreeRegressor"]]), "type");
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("max_depth")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_MAXIMUM_TREE_DEPTH);
+      .appendField(Blockly.Msg.SKLEARN_MAXIMUM_TREE_DEPTH);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -332,28 +332,28 @@ Blockly.Blocks.sklearn_DecisionTreeClassifier_Regressor= {
 Blockly.Blocks.sklearn_RandomForestClassifier_Regressor= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_RANDOMFOREST_INIT)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.SKLEARN_CLASSIFICATION_ALGORITHM,"RandomForestClassifier"],[Blockly.Msg.Lang.SKLEARN_REGRESSION_ALGORITHM,"RandomForestRegressor"]]), "type");
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_RANDOMFOREST_INIT)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.SKLEARN_CLASSIFICATION_ALGORITHM,"RandomForestClassifier"],[Blockly.Msg.SKLEARN_REGRESSION_ALGORITHM,"RandomForestRegressor"]]), "type");
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("n_estimators")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_TREES);
+      .appendField(Blockly.Msg.NUMBER_OF_TREES);
   this.appendValueInput("max_depth")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_MAXIMUM_TREE_DEPTH);
+      .appendField(Blockly.Msg.SKLEARN_MAXIMUM_TREE_DEPTH);
   this.appendValueInput("n_jobs")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_THREADS);
+      .appendField(Blockly.Msg.SKLEARN_THREADS);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -367,12 +367,12 @@ Blockly.Blocks.sklearn_RandomForestClassifier_Regressor= {
 Blockly.Blocks.sklearn_KNeighborsClassifier_Regressor= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_KNN_INIT)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.SKLEARN_CLASSIFICATION_ALGORITHM,"KNeighborsClassifier"],[Blockly.Msg.Lang.SKLEARN_REGRESSION_ALGORITHM,"KNeighborsRegressor"]]), "type");
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_KNN_INIT)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.SKLEARN_CLASSIFICATION_ALGORITHM,"KNeighborsClassifier"],[Blockly.Msg.SKLEARN_REGRESSION_ALGORITHM,"KNeighborsRegressor"]]), "type");
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("K")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
@@ -380,7 +380,7 @@ Blockly.Blocks.sklearn_KNeighborsClassifier_Regressor= {
   this.appendValueInput("n_jobs")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_THREADS);
+      .appendField(Blockly.Msg.SKLEARN_THREADS);
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -394,11 +394,11 @@ Blockly.Blocks.sklearn_KNeighborsClassifier_Regressor= {
 Blockly.Blocks.sklearn_GaussianNB= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_GAUSSINNB_INIT);
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_GAUSSINNB_INIT);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -412,27 +412,27 @@ Blockly.Blocks.sklearn_GaussianNB= {
 Blockly.Blocks.sklearn_KMeans= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_KMEANS_INIT);
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_KMEANS_INIT);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("n_clusters")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.NUMBER_OF_CLUSTERS_JUST);
+      .appendField(Blockly.Msg.NUMBER_OF_CLUSTERS_JUST);
   this.appendValueInput("max_iter")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_MAX_ITER);
+      .appendField(Blockly.Msg.SKLEARN_MAX_ITER);
   this.appendValueInput("random_state")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.RANDOM_SEED);
+      .appendField(Blockly.Msg.RANDOM_SEED);
   this.appendValueInput("n_jobs")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.SKLEARN_THREADS);
+      .appendField(Blockly.Msg.SKLEARN_THREADS);
   this.setInputsInline(false);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -446,19 +446,19 @@ Blockly.Blocks.sklearn_KMeans= {
 Blockly.Blocks.sklearn_fit= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.TRAINING_MODEL);
+      .appendField("sklearn "+Blockly.Msg.TRAINING_MODEL);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.appendValueInput("train_target")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.LABEL_VALUE);
+      .appendField(Blockly.Msg.LABEL_VALUE);
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -472,15 +472,15 @@ Blockly.Blocks.sklearn_fit= {
 Blockly.Blocks.sklearn_fit_no_target= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.TRAINING_MODEL);
+      .appendField("sklearn "+Blockly.Msg.TRAINING_MODEL);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
@@ -494,15 +494,15 @@ Blockly.Blocks.sklearn_fit_no_target= {
 Blockly.Blocks.sklearn_predict= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.MODEL_PRODICTION);
+      .appendField("sklearn "+Blockly.Msg.MODEL_PRODICTION);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.setInputsInline(true);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -515,19 +515,19 @@ Blockly.Blocks.sklearn_predict= {
 Blockly.Blocks.sklearn_score= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.CALCULATE_THE_SCORE);
+      .appendField("sklearn "+Blockly.Msg.CALCULATE_THE_SCORE);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.appendValueInput("train_target")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.LABEL_VALUE);
+      .appendField(Blockly.Msg.LABEL_VALUE);
   this.setInputsInline(true);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -540,15 +540,15 @@ Blockly.Blocks.sklearn_score= {
 Blockly.Blocks.sklearn_score_no_target= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.CALCULATE_THE_SCORE);
+      .appendField("sklearn "+Blockly.Msg.CALCULATE_THE_SCORE);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendValueInput("train_data")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.EIGENVALUES);
+      .appendField(Blockly.Msg.EIGENVALUES);
   this.setInputsInline(true);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -561,15 +561,15 @@ Blockly.Blocks.sklearn_score_no_target= {
 Blockly.Blocks.sklearn_coef_intercept= {
   init: function() { 
   this.appendDummyInput() 
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_GENERALIZED_LINEAR_REGRESSION);
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_GENERALIZED_LINEAR_REGRESSION);
   this.appendValueInput("model_name")
       .setAlign(Blockly.ALIGN_RIGHT)  
       .setCheck(null)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendDummyInput()
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MIXLY_GET)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.SKLEARN_COEF,"coef_"],[Blockly.Msg.Lang.SKLEARN_INTERCEPT,"intercept_"]]), "type");
+      .appendField(Blockly.Msg.MIXLY_GET)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.SKLEARN_COEF,"coef_"],[Blockly.Msg.SKLEARN_INTERCEPT,"intercept_"]]), "type");
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
   this.setTooltip("");
@@ -581,14 +581,14 @@ Blockly.Blocks.sklearn_coef_intercept= {
 Blockly.Blocks.sklearn_cluster_centers_labels_inertia= {
   init: function() { 
   this.appendDummyInput()  
-      .appendField("sklearn "+Blockly.Msg.Lang.SKLEARN_CLUSTERING);
+      .appendField("sklearn "+Blockly.Msg.SKLEARN_CLUSTERING);
   this.appendValueInput("model_name")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(Blockly.Msg.MODEL_NAME);
   this.appendDummyInput()  
-      .appendField(Blockly.Msg.Lang.MIXLY_GET)
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.SKLEARN_CLUSTER_CENTER,"cluster_centers_"],[Blockly.Msg.Lang.SKLEARN_LABELS_AFTER_CLUSTERING,"labels_"],[Blockly.Msg.Lang.SKLEARN_CLUSTERING_SUM_OF_SQUARED_DISTANCES,"inertia_"]]), "type");
+      .appendField(Blockly.Msg.MIXLY_GET)
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.SKLEARN_CLUSTER_CENTER,"cluster_centers_"],[Blockly.Msg.SKLEARN_LABELS_AFTER_CLUSTERING,"labels_"],[Blockly.Msg.SKLEARN_CLUSTERING_SUM_OF_SQUARED_DISTANCES,"inertia_"]]), "type");
   this.setInputsInline(true);
   this.setOutput(true, null);
   this.setColour(Blockly.Msg['SKLEARN_HUE']);
@@ -604,12 +604,12 @@ Blockly.Blocks.sklearn_save_load_model= {
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
       .appendField("sklearn")
-      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.SKLEARN_SAVE_MODEL,"dump"],[Blockly.Msg.Lang.SKLEARN_LOAD_MODEL,"load"]]), "type")
-      .appendField(" "+Blockly.Msg.Lang.MODEL_NAME);
+      .appendField(new Blockly.FieldDropdown([[Blockly.Msg.SKLEARN_SAVE_MODEL,"dump"],[Blockly.Msg.SKLEARN_LOAD_MODEL,"load"]]), "type")
+      .appendField(" "+Blockly.Msg.MODEL_NAME);
   this.appendValueInput("address")
       .setCheck(null)
       .setAlign(Blockly.ALIGN_RIGHT)  
-      .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
+      .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
   this.setInputsInline(true);
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);

@@ -1,10 +1,10 @@
 (() => {
 
 'use strict';
-goog.require('Blockly.Msg');
-goog.provide('Blockly.Msg.En');
+goog.require('Blockly.Lang');
+goog.provide('Blockly.Lang.En');
 
-const { En } = Blockly.Msg;
+const { En } = Blockly.Lang;
 
 En.MSG = {
     catInOut: "In/Out",

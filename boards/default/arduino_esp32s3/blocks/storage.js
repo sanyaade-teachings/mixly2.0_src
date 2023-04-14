@@ -9,7 +9,7 @@ Blockly.Msg['STORAGE_HUE'] = 0;
 Blockly.Blocks['initialize_spiffs'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_SETUP+"SPIFFS");
+		.appendField(Blockly.Msg.MIXLY_SETUP+"SPIFFS");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(Blockly.Msg['STORAGE_HUE']);
@@ -18,23 +18,23 @@ Blockly.Blocks['initialize_spiffs'] = {
 	}
 };
 var OPEN_MODE =[
-[Blockly.Msg.Lang.MIXLY_READONLY, 'FILE_READ'],
-[Blockly.Msg.Lang.TEXT_WRITE_TEXT, 'FILE_WRITE'],
-[Blockly.Msg.Lang.TEXT_APPEND_APPENDTEXT, 'FILE_APPEND']]
+[Blockly.Msg.MIXLY_READONLY, 'FILE_READ'],
+[Blockly.Msg.TEXT_WRITE_TEXT, 'FILE_WRITE'],
+[Blockly.Msg.TEXT_APPEND_APPENDTEXT, 'FILE_APPEND']]
 
 //打开文件并向其中写入数据
 Blockly.Blocks['spiffs_open_file'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
+		.appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("myFile"), "file_var");
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_FILE_PATH);
+		.appendField(Blockly.Msg.MIXLY_FILE_PATH);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("/fileName.txt"), "file_path");
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MODE);
+		.appendField(Blockly.Msg.MIXLY_MODE);
 		this.appendDummyInput()
 		.appendField(new Blockly.FieldDropdown(OPEN_MODE), 'MODE');
 		this.setInputsInline(true);
@@ -50,7 +50,7 @@ Blockly.Blocks['spiffs_open_file'] = {
 Blockly.Blocks['spiffs_close_file'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_CLOSE_FILE);
+		.appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_CLOSE_FILE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("myFile"), "file_var");
 		this.setPreviousStatement(true, null);
@@ -65,11 +65,11 @@ Blockly.Blocks['spiffs_close_file'] = {
 Blockly.Blocks['spiffs_write_data'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
+		.appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_OPEN_FILE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("myFile"), "file_var");
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_WRITE);
+		.appendField(Blockly.Msg.MIXLY_WRITE);
 		this.appendValueInput("data")
 		.setCheck(null);
 		this.setPreviousStatement(true, null);
@@ -84,11 +84,11 @@ Blockly.Blocks['spiffs_write_data'] = {
 Blockly.Blocks['spiffs_read_available'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.HTML_FILE);
+		.appendField(Blockly.Msg.HTML_FILE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("myFile"), "file_var");
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_AVAILABLE);
+		.appendField(Blockly.Msg.MIXLY_AVAILABLE);
 		this.setColour(Blockly.Msg['STORAGE_HUE']);
 		this.setOutput(true, null);
 		this.setInputsInline(true);
@@ -101,11 +101,11 @@ Blockly.Blocks['spiffs_read_available'] = {
 Blockly.Blocks['spiffs_read_data'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET_FILE_SIZE);
+		.appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET_FILE_SIZE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("myFile"), "file_var");
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.OLED_STRING);
+		.appendField(Blockly.Msg.OLED_STRING);
 		this.setOutput(true, null);
 		this.setInputsInline(true);
 		this.setColour(Blockly.Msg['STORAGE_HUE']);
@@ -118,11 +118,11 @@ Blockly.Blocks['spiffs_read_data'] = {
 Blockly.Blocks['spiffs_file_size'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.HTML_FILE);
+		.appendField(Blockly.Msg.HTML_FILE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("myFile"), "file_var");
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_SIZE);
+		.appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_SIZE);
 		this.setOutput(true, null);
 		this.setInputsInline(true);
 		this.setColour(Blockly.Msg['STORAGE_HUE']);
@@ -135,7 +135,7 @@ Blockly.Blocks['spiffs_file_size'] = {
 Blockly.Blocks['spiffs_delete_file'] = {
 	init: function() {
 		this.appendDummyInput()
-		.appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_DELETE_FILE);
+		.appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_DELETE_FILE);
 		this.appendDummyInput() 
 		.appendField(new Blockly.FieldTextInput("/fileName.txt"), "file_path");
 		this.appendDummyInput();

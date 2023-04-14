@@ -446,18 +446,18 @@ Blockly.Blocks['procedures_defreturn'] = {
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg['PROCEDURES_DEFRETURN_RETURN'])
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.Lang.LANG_MATH_INT, 'int'],
-                [Blockly.Msg.Lang.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-                [Blockly.Msg.Lang.LANG_MATH_WORD, 'word'],
-                [Blockly.Msg.Lang.LANG_MATH_LONG, 'long'],
-                [Blockly.Msg.Lang.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-                [Blockly.Msg.Lang.LANG_MATH_FLOAT, 'float'],
-                [Blockly.Msg.Lang.LANG_MATH_DOUBLE, 'double'],
-                [Blockly.Msg.Lang.LANG_MATH_BOOLEAN, 'boolean'],
-                [Blockly.Msg.Lang.LANG_MATH_BYTE, 'byte'],
-                [Blockly.Msg.Lang.LANG_MATH_CHAR, 'char'],
-                [Blockly.Msg.Lang.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-                [Blockly.Msg.Lang.LANG_MATH_STRING, 'String'],
+                [Blockly.Msg.LANG_MATH_INT, 'int'],
+                [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
+                [Blockly.Msg.LANG_MATH_WORD, 'word'],
+                [Blockly.Msg.LANG_MATH_LONG, 'long'],
+                [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
+                [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
+                [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
+                [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
+                [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
+                [Blockly.Msg.LANG_MATH_CHAR, 'char'],
+                [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
+                [Blockly.Msg.LANG_MATH_STRING, 'String'],
                 ["char*", "char*"],
                 ["uint8_t", "uint8_t"],
                 ["uint16_t", "uint16_t"],
@@ -541,20 +541,20 @@ Blockly.Blocks['procedures_mutatorarg'] = {
         field.showEditor_ = newShowEditorFn;
 
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.PROCEDURES_BEFORE_PARAMS)
+            .appendField(Blockly.Msg.PROCEDURES_BEFORE_PARAMS)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.Lang.LANG_MATH_INT, 'int'],
-                [Blockly.Msg.Lang.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
-                [Blockly.Msg.Lang.LANG_MATH_WORD, 'word'],
-                [Blockly.Msg.Lang.LANG_MATH_LONG, 'long'],
-                [Blockly.Msg.Lang.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
-                [Blockly.Msg.Lang.LANG_MATH_FLOAT, 'float'],
-                [Blockly.Msg.Lang.LANG_MATH_DOUBLE, 'double'],
-                [Blockly.Msg.Lang.LANG_MATH_BOOLEAN, 'boolean'],
-                [Blockly.Msg.Lang.LANG_MATH_BYTE, 'byte'],
-                [Blockly.Msg.Lang.LANG_MATH_CHAR, 'char'],
-                [Blockly.Msg.Lang.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
-                [Blockly.Msg.Lang.LANG_MATH_STRING, 'String'],
+                [Blockly.Msg.LANG_MATH_INT, 'int'],
+                [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],
+                [Blockly.Msg.LANG_MATH_WORD, 'word'],
+                [Blockly.Msg.LANG_MATH_LONG, 'long'],
+                [Blockly.Msg.LANG_MATH_UNSIGNED_LONG, 'unsigned long'],
+                [Blockly.Msg.LANG_MATH_FLOAT, 'float'],
+                [Blockly.Msg.LANG_MATH_DOUBLE, 'double'],
+                [Blockly.Msg.LANG_MATH_BOOLEAN, 'boolean'],
+                [Blockly.Msg.LANG_MATH_BYTE, 'byte'],
+                [Blockly.Msg.LANG_MATH_CHAR, 'char'],
+                [Blockly.Msg.LANG_MATH_UNSIGNED_CHAR, 'unsigned char'],
+                [Blockly.Msg.LANG_MATH_STRING, 'String'],
                 ["char*", "char*"],
                 ["uint8_t", "uint8_t"],
                 ["uint16_t", "uint16_t"],
@@ -658,10 +658,10 @@ Blockly.Blocks['procedures_callnoreturn'] = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setHelpUrl(Blockly.Msg.Lang.PROCEDURES_CALLNORETURN_HELPURL);
+        this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);
         this.setColour(Blockly.Msg['PROCEDURES_HUE']);
         this.appendDummyInput('TOPROW')
-            .appendField(Blockly.Msg.Lang.CONTROLS_REPEAT_INPUT_DO)
+            .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO)
             .appendField(this.id, 'NAME');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -690,8 +690,8 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         if (Blockly.Names.equals(oldName, this.getProcedureCall())) {
             this.setFieldValue(newName, 'NAME');
             this.setTooltip(
-                (this.outputConnection ? Blockly.Msg.Lang.PROCEDURES_CALLRETURN_TOOLTIP :
-                    Blockly.Msg.Lang.PROCEDURES_CALLNORETURN_TOOLTIP)
+                (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP :
+                    Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP)
                     .replace('%1', newName));
         }
     },
@@ -822,7 +822,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         if (topRow) {
             if (this.arguments_.length) {
                 if (!this.getField('WITH')) {
-                    topRow.appendField(Blockly.Msg.Lang.PROCEDURES_CALL_BEFORE_PARAMS, 'WITH');
+                    topRow.appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS, 'WITH');
                     topRow.init();
                 }
             } else {
@@ -888,7 +888,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
      */
     customContextMenu: function (options) {
         var option = { enabled: true };
-        option.text = Blockly.Msg.Lang.PROCEDURES_HIGHLIGHT_DEF;
+        option.text = Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;
         var name = this.getProcedureCall();
         var workspace = this.workspace;
         option.callback = function () {
@@ -905,10 +905,10 @@ Blockly.Blocks['procedures_callreturn'] = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setHelpUrl(Blockly.Msg.Lang.PROCEDURES_CALLRETURN_HELPURL);
+        this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL);
         this.setColour(Blockly.Msg['PROCEDURES_HUE']);
         this.appendDummyInput('TOPROW')
-            .appendField(Blockly.Msg.Lang.PROCEDURES_CALLRETURN_CALL)
+            .appendField(Blockly.Msg.PROCEDURES_CALLRETURN_CALL)
             .appendField('', 'NAME');
         this.setOutput(true);
         // Tooltip is set in domToMutation.
@@ -936,13 +936,13 @@ Blockly.Blocks['procedures_ifreturn'] = {
         this.setColour(Blockly.Msg['PROCEDURES_HUE']);
         this.appendValueInput('CONDITION')
             .setCheck(Boolean)
-            .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_IF);
+            .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
         this.appendValueInput('VALUE')
-            .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+            .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.Lang.PROCEDURES_IFRETURN_TOOLTIP);
+        this.setTooltip(Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP);
         this.hasReturnValue_ = true;
     },
     /**
@@ -966,7 +966,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
         if (!this.hasReturnValue_) {
             this.removeInput('VALUE');
             this.appendDummyInput('VALUE')
-                .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+                .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
         }
     },
     /**
@@ -991,18 +991,18 @@ Blockly.Blocks['procedures_ifreturn'] = {
             if (block.type == 'procedures_defnoreturn' && this.hasReturnValue_) {
                 this.removeInput('VALUE');
                 this.appendDummyInput('VALUE')
-                    .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+                    .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
                 this.hasReturnValue_ = false;
             } else if (block.type == 'procedures_defreturn' &&
                 !this.hasReturnValue_) {
                 this.removeInput('VALUE');
                 this.appendValueInput('VALUE')
-                    .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+                    .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
                 this.hasReturnValue_ = true;
             }
             this.setWarningText(null);
         } else {
-            this.setWarningText(Blockly.Msg.Lang.PROCEDURES_IFRETURN_WARNING);
+            this.setWarningText(Blockly.Msg.PROCEDURES_IFRETURN_WARNING);
         }
     },
     /**
@@ -1023,9 +1023,9 @@ Blockly.Blocks['procedures_return'] = {
         this.setColour(Blockly.Msg['PROCEDURES_HUE']);
         // this.appendValueInput('CONDITION')
         //     .setCheck(Boolean)
-        //     .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_IF);
+        //     .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
         this.appendValueInput('VALUE')
-            .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+            .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -1053,7 +1053,7 @@ Blockly.Blocks['procedures_return'] = {
         if (!this.hasReturnValue_) {
             this.removeInput('VALUE');
             this.appendDummyInput('VALUE')
-                .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+                .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
         }
     },
     /**
@@ -1078,18 +1078,18 @@ Blockly.Blocks['procedures_return'] = {
             if (block.type == 'procedures_defnoreturn' && this.hasReturnValue_) {
                 this.removeInput('VALUE');
                 this.appendDummyInput('VALUE')
-                    .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+                    .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
                 this.hasReturnValue_ = false;
             } else if (block.type == 'procedures_defreturn' &&
                 !this.hasReturnValue_) {
                 this.removeInput('VALUE');
                 this.appendValueInput('VALUE')
-                    .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+                    .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
                 this.hasReturnValue_ = true;
             }
             this.setWarningText(null);
         } else {
-            this.setWarningText(Blockly.Msg.Lang.PROCEDURES_IFRETURN_WARNING);
+            this.setWarningText(Blockly.Msg.PROCEDURES_IFRETURN_WARNING);
         }
     },
     /**

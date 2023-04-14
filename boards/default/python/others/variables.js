@@ -107,8 +107,8 @@ Blockly.Variables.flyoutCategory = function(workspace) {
   // variable name at the top.  We also don't want this duplicated if the
   // user has created a variable of the same name.
   // alert(variableList)
-  // goog.array.remove(variableList, Blockly.Msg.Lang.VARIABLES_DEFAULT_NAME);
-  // variableList.unshift(Blockly.Msg.Lang.VARIABLES_DEFAULT_NAME);
+  // goog.array.remove(variableList, Blockly.Msg.VARIABLES_DEFAULT_NAME);
+  // variableList.unshift(Blockly.Msg.VARIABLES_DEFAULT_NAME);
 
   var xmlList = [];
   

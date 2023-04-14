@@ -16,9 +16,9 @@ Blockly.Blocks['mpython_blynk_terminal_widget_vpin'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_MESSAGE0,
             "args0": [
             {
                 "check": Number,
@@ -38,9 +38,9 @@ Blockly.Blocks['mpython_blynk_sync_virtual'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_SYNC_VIRTUAL_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_SYNC_VIRTUAL_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_SYNC_VIRTUAL_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_SYNC_VIRTUAL_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_SYNC_VIRTUAL_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_SYNC_VIRTUAL_MESSAGE0,
             "args0": [
             {
                 "check": Number,
@@ -60,9 +60,9 @@ Blockly.Blocks['mpython_blynk_on_disconnected'] = {
             // "nextStatement": null,
             // "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_ON_DISCONNECTED_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_ON_DISCONNECTED_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_ON_DISCONNECTED_MESSAGE0
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_ON_DISCONNECTED_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_ON_DISCONNECTED_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_ON_DISCONNECTED_MESSAGE0
         });
         this.appendStatementInput('DO')
         .appendField(Blockly.CONTROLS_REPEAT_INPUT_DO);
@@ -77,9 +77,9 @@ Blockly.Blocks['mpython_blynk_on_connected'] = {
             // "nextStatement": null,
             // "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_ON_CONNECTED_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_ON_CONNECTED_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_ON_CONNECTED_MESSAGE0
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_ON_CONNECTED_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_ON_CONNECTED_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_ON_CONNECTED_MESSAGE0
         });
         this.appendStatementInput('DO')
         .appendField(Blockly.CONTROLS_REPEAT_INPUT_DO);
@@ -94,9 +94,9 @@ Blockly.Blocks['mpython_blynktimer_run'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_RUN_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_RUN_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_RUN_MESSAGE0
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNKTIMER_RUN_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNKTIMER_RUN_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNKTIMER_RUN_MESSAGE0
         });
     }
 };
@@ -109,9 +109,9 @@ Blockly.Blocks['mpython_blynk_run'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_RUN_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_RUN_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_RUN_MESSAGE0
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_RUN_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_RUN_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_RUN_MESSAGE0
         });
     }
 };
@@ -124,9 +124,9 @@ Blockly.Blocks['mpython_blynk_app_notify'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_APP_NOTIFY_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_APP_NOTIFY_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_APP_NOTIFY_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_APP_NOTIFY_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_APP_NOTIFY_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_APP_NOTIFY_MESSAGE0,
             "args0": [
             {
                 "check":String,
@@ -147,9 +147,9 @@ Blockly.Blocks['mpython_blynk_stop_timers'] = {
             "previousStatement": null,
             // "output": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_STOP_TIMERS_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_STOP_TIMERS_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_STOP_TIMERS_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNKTIMER_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_STOP_TIMERS_MESSAGE0,
             "args0": [
             {
                 "check": Number,
@@ -170,9 +170,9 @@ Blockly.Blocks['mpython_blynk_set_property'] = {
             "previousStatement": null,
             // "output": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_SET_PROPERTY_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_SET_PROPERTY_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_SET_PROPERTY_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_SET_PROPERTY_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_SET_PROPERTY_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_SET_PROPERTY_MESSAGE0,
             "args0": [
             {
                 "check":String,
@@ -199,9 +199,9 @@ Blockly.Blocks['mpython_blynk_email'] = {
             "previousStatement": null,
             // "output": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_EMAIL_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_EMAIL_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_EMAIL_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_EMAIL_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_EMAIL_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_EMAIL_MESSAGE0,
             "args0": [
             {
                 "check":String,
@@ -234,9 +234,9 @@ Blockly.Blocks['mpython_blynk_get_timers'] = {
             // "previousStatement": null,
             "output": null,
             "colour":Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_GET_TIMERS_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_GET_TIMERS_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_GET_TIMERS_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_GET_TIMERS_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_GET_TIMERS_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_GET_TIMERS_MESSAGE0,
         });
     }
 };
@@ -245,12 +245,12 @@ Blockly.Blocks['mpython_blynk_get_timers'] = {
 Blockly.Blocks['mpython_blynktimer'] = {
     init: function () {
         this.jsonInit({
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_MESSAGE0,
+            "message0": Blockly.Msg.MPYTHON_BLYNKTIMER_MESSAGE0,
             // "nextStatement": null,
             // "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNKTIMER_TOOLTIP,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNKTIMER_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNKTIMER_TOOLTIP,
             "args0": [
             {
                 "check": Number,
@@ -260,8 +260,8 @@ Blockly.Blocks['mpython_blynktimer'] = {
             ,
             {
                 "options": [
-                [Blockly.Msg.Lang.MIXLY_PYTHON_PERIODIC, 'False'],
-                [Blockly.Msg.Lang.MIXLY_PYTHON_ONE_SHOT, 'True']
+                [Blockly.Msg.MIXLY_PYTHON_PERIODIC, 'False'],
+                [Blockly.Msg.MIXLY_PYTHON_ONE_SHOT, 'True']
                 ],
                 "type": "field_dropdown",
                 "name": "Timer_mode"
@@ -287,9 +287,9 @@ Blockly.Blocks['mpython_blynk_sensor_data_to_app'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_MESSAGE0,
             "args0": [
             {
                 "type": "input_value",
@@ -315,9 +315,9 @@ Blockly.Blocks['mpython_blynk_app_data'] = {
             // "previousStatement": null,
             // "output":null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_APP_DATA_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_APP_DATA_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_APP_DATA_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_APP_DATA_MESSAGE0,
             "args0": [
                 {
                     "check": Number,
@@ -344,9 +344,9 @@ Blockly.Blocks['mpython_blynk_setup'] = {
             "nextStatement": null,
             "previousStatement": null,
             "colour": Blockly.Msg['BLYNK_HUE'],
-            "helpUrl": Blockly.Msg.Lang.MPYTHON_BLYNK_SETUP_HELPURL,
-            "tooltip": Blockly.Msg.Lang.MPYTHON_BLYNK_SETUP_TOOLTIP,
-            "message0": Blockly.Msg.Lang.MPYTHON_BLYNK_SETUP_MESSAGE0,
+            "helpUrl": Blockly.Msg.MPYTHON_BLYNK_SETUP_HELPURL,
+            "tooltip": Blockly.Msg.MPYTHON_BLYNK_SETUP_TOOLTIP,
+            "message0": Blockly.Msg.MPYTHON_BLYNK_SETUP_MESSAGE0,
             "args0": [
                 {
                     "type": "input_dummy"

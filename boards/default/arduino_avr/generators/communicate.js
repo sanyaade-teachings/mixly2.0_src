@@ -10,7 +10,7 @@ Blockly.Arduino.ir_recv = function () {
     if (xmlText.indexOf("type=\"controls_tone\"") === -1 && xmlText.indexOf("type=\"controls_notone\"") === -1) {
         this.setWarningText(null);
     } else {
-        this.setWarningText(Blockly.Msg.Lang.IR_AND_TONE_WARNING);
+        this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
@@ -70,7 +70,7 @@ Blockly.Arduino.ir_recv_enable = function () {
         this.setWarningText(null);
     }
     else {
-        this.setWarningText(Blockly.Msg.Lang.IR_AND_TONE_WARNING);
+        this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }
 
     Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>';
@@ -104,7 +104,7 @@ Blockly.Arduino.ir_recv_raw = function () {
         this.setWarningText(null);
     }
     else {
-        this.setWarningText(Blockly.Msg.Lang.IR_AND_TONE_WARNING);
+        this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }
 
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);

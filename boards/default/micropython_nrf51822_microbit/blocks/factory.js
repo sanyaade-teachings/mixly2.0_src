@@ -142,7 +142,7 @@ Blockly.Blocks['factory_create_with_container'] = {
   init: function() {
     this.setColour(Blockly.Msg['FACTORY_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.MIXLY_PARAMS);
+    .appendField(Blockly.Msg.MIXLY_PARAMS);
     this.appendStatementInput('STACK');
     this.contextMenu = false;
   }
@@ -152,7 +152,7 @@ Blockly.Blocks['factory_create_with_item'] = {
   init: function() {
     this.setColour(Blockly.Msg['FACTORY_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.LISTS_CREATE_WITH_ITEM_TITLE+':')
+    .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE+':')
     .appendField(new Blockly.FieldTextInput('x'), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);

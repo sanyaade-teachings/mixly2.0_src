@@ -11,10 +11,10 @@ Blockly.Blocks.controls_main = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_NAME_MAIN);
+    .appendField(Blockly.Msg.MIXLY_PYTHON_NAME_MAIN);
     this.appendStatementInput('DO')
     .appendField('');
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_SETUP);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_SETUP);
   }
 };
 
@@ -22,10 +22,10 @@ Blockly.Blocks.base_setup = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-	    .appendField(Blockly.Msg.Lang.MIXLY_SETUP);
+	    .appendField(Blockly.Msg.MIXLY_SETUP);
 	this.appendStatementInput('DO')
         .appendField('');
-	this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_SETUP);
+	this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_SETUP);
   }
 };
 
@@ -34,9 +34,9 @@ Blockly.Blocks.controls_end_program = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-	      .appendField(Blockly.Msg.Lang.MIXLY_CONTROL_END_PROGRAM);
+	      .appendField(Blockly.Msg.MIXLY_CONTROL_END_PROGRAM);
 	  this.setPreviousStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXPY_CONTROL_END_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_MIXPY_CONTROL_END_TOOLTIP);
   }
 };
 
@@ -46,13 +46,13 @@ Blockly.Blocks['controls_if'] = {
    * @this Blockly.Block
    */
    init: function() {
-    //this.setHelpUrl(Blockly.Msg.Lang.CONTROLS_IF_HELPURL);
+    //this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendValueInput('IF0')
     .setCheck([Boolean,Number])
-    .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_IF);
+    .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendStatementInput('DO0')
-    .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_THEN);
+    .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#if");
@@ -62,13 +62,13 @@ Blockly.Blocks['controls_if'] = {
     var thisBlock = this;
     this.setTooltip(function() {
       if (!thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return Blockly.Msg.Lang.CONTROLS_IF_TOOLTIP_1;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_1;
       } else if (!thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return Blockly.Msg.Lang.CONTROLS_IF_TOOLTIP_2;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_2;
       } else if (thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return Blockly.Msg.Lang.CONTROLS_IF_TOOLTIP_3;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_3;
       } else if (thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return Blockly.Msg.Lang.CONTROLS_IF_TOOLTIP_4;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_4;
       }
       return '';
     });
@@ -126,13 +126,13 @@ Blockly.Blocks['controls_if'] = {
     for (var i = 1; i <= this.elseifCount_; i++) {
       this.appendValueInput('IF' + i)
       .setCheck([Boolean,Number])
-      .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_ELSEIF);
+      .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
       this.appendStatementInput('DO' + i)
-      .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_THEN);
+      .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     }
     if (this.elseCount_) {
       this.appendStatementInput('ELSE')
-      .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_ELSE);
+      .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSE);
     }
     for(var i = valueConnections.length - 2; i > 0; i--){
       if(valueConnections[i])
@@ -320,19 +320,19 @@ Blockly.Blocks.controls_range = {
     this.appendValueInput('FROM')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.PYTHON_RANGE)
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_FROM);
+        .appendField(Blockly.Msg.PYTHON_RANGE)
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_FROM);
     this.appendValueInput('TO')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_TO);
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_TO);
     this.appendValueInput('STEP')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.PYTHON_RANGE_STEP);
+        .appendField(Blockly.Msg.PYTHON_RANGE_STEP);
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_RANGE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_CONTROLS_RANGE_TOOLTIP);
   }
 };
 
@@ -342,18 +342,18 @@ Blockly.Blocks.controls_forEach = {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendValueInput('LIST')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.CONTROLS_FOREACH_INPUT);
+        .appendField(Blockly.Msg.CONTROLS_FOREACH_INPUT);
     this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.Lang.CONTROLS_FOREACH_INPUT_ITEM)
+        .appendField(Blockly.Msg.CONTROLS_FOREACH_INPUT_ITEM)
     //    .appendField(new Blockly.FieldTextInput('i'), 'VAR');
     this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.Lang.MIXLY_DO);
+        .appendField(Blockly.Msg.MIXLY_DO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
   var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.Msg.Lang.CONTROLS_FOR_TOOLTIP.replace('%1',
+      return Blockly.Msg.CONTROLS_FOR_TOOLTIP.replace('%1',
           thisBlock.getFieldValue('VAR'));
     });
   },
@@ -372,20 +372,20 @@ Blockly.Blocks.controls_whileUntil = {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendValueInput('BOOL')
         .setCheck([Boolean,Number])
-        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT)
         .appendField(new Blockly.FieldDropdown(this.OPERATORS), 'MODE')
     // this.appendDummyInput()
-    //     .appendField(Blockly.Msg.Lang.CONTROLS_WHILE_SHI);
+    //     .appendField(Blockly.Msg.CONTROLS_WHILE_SHI);
     this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT+Blockly.Msg.Lang.MIXLY_DO);
+        .appendField(Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT+Blockly.Msg.MIXLY_DO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
 	var thisBlock = this;
 	this.setTooltip(function() {
       var op = thisBlock.getFieldValue('MODE');
       var TOOLTIPS = {
-        'WHILE': Blockly.Msg.Lang.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE,
-        'UNTIL': Blockly.Msg.Lang.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL
+        'WHILE': Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE,
+        'UNTIL': Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL
       };
       return TOOLTIPS[op];
     });
@@ -400,16 +400,16 @@ Blockly.Blocks['controls_try_finally'] = {
    init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_TRY);
+        .appendField(Blockly.Msg.MIXLY_PYTHON_TRY);
     this.appendStatementInput('try');
     this.appendValueInput('IF1')
-        .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_EXCEPT);
+        .appendField(Blockly.Msg.MIXLY_PYTHON_EXCEPT);
     this.appendStatementInput('DO1')
         .appendField('');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(['controls_except','controls_finally']));
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXPY_CONTROL_TRY_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_MIXPY_CONTROL_TRY_TOOLTIP);
     this.elseifCount_ = 1;
     this.elseCount_ = 0;
   },
@@ -464,13 +464,13 @@ Blockly.Blocks['controls_try_finally'] = {
     for (var i = 1; i <= this.elseifCount_; i++) {
       this.appendValueInput('IF' + i)
       .setCheck([Boolean,Number])
-      .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_EXCEPT);
+      .appendField(Blockly.Msg.MIXLY_PYTHON_EXCEPT);
       this.appendStatementInput('DO' + i)
       .appendField("");
     }
     if (this.elseCount_) {
       this.appendStatementInput('ELSE')
-      .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_FINALLY);
+      .appendField(Blockly.Msg.MIXLY_PYTHON_FINALLY);
     }
     for(var i = valueConnections.length - 2; i > 0; i--){
       if(valueConnections[i])
@@ -623,13 +623,13 @@ Blockly.Blocks['controls_try_finally'] = {
     for (var i = 1; i <= this.elseifCount_; i++) {
       this.appendValueInput('IF' + i)
       .setCheck([Number,Boolean])
-      .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_EXCEPT);
+      .appendField(Blockly.Msg.MIXLY_PYTHON_EXCEPT);
       this.appendStatementInput('DO' + i)
       .appendField('');
     }
     if (this.elseCount_) {
       this.appendStatementInput('ELSE')
-      .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_FINALLY);
+      .appendField(Blockly.Msg.MIXLY_PYTHON_FINALLY);
     }
   },
   /**
@@ -657,15 +657,15 @@ Blockly.Blocks.controls_flow_statements = {
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendDummyInput()
         .appendField(dropdown, 'FLOW')
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);
+        .appendField(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);
     this.setPreviousStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_FLOW_STATEMENTS_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_CONTROLS_FLOW_STATEMENTS_TOOLTIP);
 	var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getFieldValue('FLOW');
       var TOOLTIPS = {
-        'BREAK': Blockly.Msg.Lang.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
-        'CONTINUE': Blockly.Msg.Lang.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
+        'BREAK': Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
+        'CONTINUE': Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
       };
       return TOOLTIPS[op];
     });
@@ -693,7 +693,7 @@ Blockly.Blocks.controls_flow_statements = {
     if (legal) {
       this.setWarningText(null);
     } else {
-      this.setWarningText(Blockly.Msg.Lang.LANG_CONTROLS_FLOW_STATEMENTS_WARNING);
+      this.setWarningText(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_WARNING);
     }
   }
 };
@@ -703,28 +703,28 @@ Blockly.Blocks.controls_for = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_WITH)
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_WITH)
         .appendField(new Blockly.FieldTextInput('i'), 'VAR');
     this.appendValueInput('FROM')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_FROM);
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_FROM);
     this.appendValueInput('TO')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_TO);
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_TO);
     this.appendValueInput('STEP')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.MIXLY_STEP);
+        .appendField(Blockly.Msg.MIXLY_STEP);
     this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.Lang.MIXLY_DO);
+        .appendField(Blockly.Msg.MIXLY_DO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
 	var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.Msg.Lang.CONTROLS_FOR_TOOLTIP.replace('%1',
+      return Blockly.Msg.CONTROLS_FOR_TOOLTIP.replace('%1',
           thisBlock.getFieldValue('VAR'));
     });
   },
@@ -742,28 +742,28 @@ Blockly.Blocks.controls_for_range = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_WITH)
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_WITH)
         .appendField(new Blockly.FieldTextInput('i'), 'VAR');
     this.appendValueInput('FROM')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_FROM);
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_FROM);
     this.appendValueInput('TO')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.LANG_CONTROLS_FOR_INPUT_TO);
+        .appendField(Blockly.Msg.LANG_CONTROLS_FOR_INPUT_TO);
     this.appendValueInput('STEP')
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.Lang.MIXLY_STEP);
+        .appendField(Blockly.Msg.MIXLY_STEP);
     this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.Lang.MIXLY_DO);
+        .appendField(Blockly.Msg.MIXLY_DO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_FOR_RANGE_TOOLTIP.replace('%1',
+      return Blockly.Msg.MIXLY_PYTHON_CONTROLS_FOR_RANGE_TOOLTIP.replace('%1',
           thisBlock.getFieldValue('VAR'));
     });
   },
@@ -779,14 +779,14 @@ Blockly.Blocks.controls_for_range = {
 
 
 Blockly.Blocks.controls_whileUntil.OPERATORS =
-    [[Blockly.Msg.Lang.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
-     [Blockly.Msg.Lang.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
+    [[Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
+     [Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
 
 
 
 Blockly.Blocks.controls_flow_statements.OPERATORS =
-    [[Blockly.Msg.Lang.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
-     [Blockly.Msg.Lang.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
+    [[Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
+     [Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
 
 
 
@@ -798,9 +798,9 @@ Blockly.Blocks['controls_if_if'] = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.CONTROLS_IF_IF_TITLE_IF);
+        .appendField(Blockly.Msg.CONTROLS_IF_IF_TITLE_IF);
     this.appendStatementInput('STACK');
-    this.setTooltip(Blockly.Msg.Lang.CONTROLS_IF_IF_TOOLTIP);
+    this.setTooltip(Blockly.Msg.CONTROLS_IF_IF_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -813,10 +813,10 @@ Blockly.Blocks['controls_if_elseif'] = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
+        .appendField(Blockly.Msg.CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.CONTROLS_IF_ELSEIF_TOOLTIP);
+    this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -829,9 +829,9 @@ Blockly.Blocks['controls_if_else'] = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.CONTROLS_IF_ELSE_TITLE_ELSE);
+        .appendField(Blockly.Msg.CONTROLS_IF_ELSE_TITLE_ELSE);
     this.setPreviousStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.CONTROLS_IF_ELSE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -862,11 +862,11 @@ Blockly.Blocks['controls_except'] = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_EXCEPT);
+        .appendField(Blockly.Msg.MIXLY_PYTHON_EXCEPT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.contextMenu = false;
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXPY_CONTROL_EXCEPT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_MIXPY_CONTROL_EXCEPT_TOOLTIP);
   }
 };
 
@@ -878,10 +878,10 @@ Blockly.Blocks['controls_finally'] = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_FINALLY);
+        .appendField(Blockly.Msg.MIXLY_PYTHON_FINALLY);
     this.setPreviousStatement(true);
     this.contextMenu = false;
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_MIXPY_CONTROL_FINALLY_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_MIXPY_CONTROL_FINALLY_TOOLTIP);
   }
 };
 
@@ -894,7 +894,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": Blockly.Msg.Lang.CONTROLS_REPEAT_TITLE,
+      "message0": Blockly.Msg.CONTROLS_REPEAT_TITLE,
       "args0": [
         {
           "type": "input_value",
@@ -905,8 +905,8 @@ Blockly.Blocks['controls_repeat_ext'] = {
       "previousStatement": null,
       "nextStatement": null,
       "colour": Blockly.Msg['LOOPS_HUE'],
-      "tooltip": Blockly.Msg.Lang.CONTROLS_REPEAT_TOOLTIP,
-      "helpUrl": Blockly.Msg.Lang.CONTROLS_REPEAT_HELPURL
+      "tooltip": Blockly.Msg.CONTROLS_REPEAT_TOOLTIP,
+      "helpUrl": Blockly.Msg.CONTROLS_REPEAT_HELPURL
     });
     this.appendStatementInput('DO');
   }
@@ -921,7 +921,7 @@ Blockly.Blocks.controls_lambda = {
         .appendField('lambda')
         //.appendField(new Blockly.FieldDropdown(this.OPERATORS), 'MODE');
     this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.Lang.MIXLY_STAT);
+        .appendField(Blockly.Msg.MIXLY_STAT);
     this.setOutput(true);
     // this.setNextStatement(true);
   }
@@ -931,10 +931,10 @@ Blockly.Blocks.controls_pass = {
   init: function() {
     this.setColour(Blockly.Msg['LOOPS_HUE']);
     this.appendDummyInput()
-      .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_PASS);
+      .appendField(Blockly.Msg.MIXLY_PYTHON_PASS);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
-  this.setTooltip(Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_PASS_TOOLTIP);
+  this.setTooltip(Blockly.Msg.MIXLY_PYTHON_CONTROLS_PASS_TOOLTIP);
   }
 };
 
@@ -942,15 +942,15 @@ Blockly.Blocks.controls_thread = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_THREAD_START)
+        .appendField(Blockly.Msg.MIXLY_PYTHON_CONTROLS_THREAD_START)
     this.appendValueInput('callback')
-        .appendField(Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_THREAD_USE)
+        .appendField(Blockly.Msg.MIXLY_PYTHON_CONTROLS_THREAD_USE)
     this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.Lang.MIXLY_PARAMS);
+        .appendField(Blockly.Msg.MIXLY_PARAMS);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_PYTHON_CONTROLS_THREAD_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_PYTHON_CONTROLS_THREAD_TOOLTIP);
   }
 };
 
@@ -958,13 +958,13 @@ Blockly.Blocks.controls_thread = {
 Blockly.Blocks.do_while= {
   init: function() { 
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.CONTROLS_REPEAT_TITLE_REPEAT + Blockly.Msg.Lang.MIXLY_DO);
+    .appendField(Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT + Blockly.Msg.MIXLY_DO);
     this.appendStatementInput("input_data")
     .setCheck(null)  
     this.appendValueInput("select_data")
     .setCheck(null)  
-    .appendField(Blockly.Msg.Lang.CONTROLS_OPERATOR_UNTIL)
-    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE,"true"],[Blockly.Msg.Lang.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL ,"false"]]), "type");
+    .appendField(Blockly.Msg.CONTROLS_OPERATOR_UNTIL)
+    .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE,"true"],[Blockly.Msg.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL ,"false"]]), "type");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);

@@ -12,12 +12,12 @@ Blockly.Blocks.base_delay = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("DELAY_TIME", Number)
-        .appendField(Blockly.Msg.Lang.MIXLY_DELAY + '(' + Blockly.Msg.Lang.MIXLY_MILLIS + ')')
+        .appendField(Blockly.Msg.MIXLY_DELAY + '(' + Blockly.Msg.MIXLY_MILLIS + ')')
         .setCheck(Number);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_DELAY);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_DELAY);
   }
 };
 
@@ -27,9 +27,9 @@ Blockly.Blocks.controls_millis = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
-	    .appendField(Blockly.Msg.Lang.blockpy_time_time);
+	    .appendField(Blockly.Msg.blockpy_time_time);
     this.setOutput(true, Number);
-	this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_MILLIS);
+	this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_MILLIS);
   }
 };
 
@@ -37,19 +37,19 @@ Blockly.Blocks['time_localtime'] = {
     init: function() {
         this.setColour(Blockly.Msg['SYSTEM_HUE']);        
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME)
+            .appendField(Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME)
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_ALL, "all"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_YEAR, "0"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_MONTH, "1"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_DATE, "2"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_HOUR, "3"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_MINUTE, "4"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_SECOND, "5"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_INWEEK, "6"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_INYEAR, "7"],
-                [Blockly.Msg.Lang.MIXLY_SYSTEM_TIME_LOCALTIME_DST, "8"]                
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_ALL, "all"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_YEAR, "0"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_MONTH, "1"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_DATE, "2"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_HOUR, "3"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_MINUTE, "4"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_SECOND, "5"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_INWEEK, "6"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_INYEAR, "7"],
+                [Blockly.Msg.MIXLY_SYSTEM_TIME_LOCALTIME_DST, "8"]                
             ]), "op");
         this.setOutput(true);
         this.setInputsInline(true);
@@ -60,12 +60,12 @@ Blockly.Blocks.Panic_with_status_code = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("STATUS_CODE", Number)
-        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Panic_with_status_code)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_Panic_with_status_code)
         .setCheck(Number);
     this.setPreviousStatement(true, null);
     // this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_DELAY);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_DELAY);
   }
 };
 
@@ -73,7 +73,7 @@ Blockly.Blocks.reset = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
-      .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Reset_micro);
+      .appendField(Blockly.Msg.MIXLY_MICROBIT_Reset_micro);
     this.setPreviousStatement(true);
     // this.setNextStatement(true);
   }
@@ -88,11 +88,11 @@ Blockly.Blocks.controls_mstimer2 = {
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
 		.appendField('MsTimer2')
-        .appendField(Blockly.Msg.Lang.MIXLY_MSTIMER2_EVERY);
+        .appendField(Blockly.Msg.MIXLY_MSTIMER2_EVERY);
     this.appendDummyInput()
 		.appendField('ms');
 	this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.Lang.MIXLY_MSTIMER2_DO);
+        .appendField(Blockly.Msg.MIXLY_MSTIMER2_DO);
 	this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -103,7 +103,7 @@ Blockly.Blocks.controls_mstimer2_start = {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
 		.appendField('MsTimer2')
-		.appendField(Blockly.Msg.Lang.MIXLY_MSTIMER2_START);
+		.appendField(Blockly.Msg.MIXLY_MSTIMER2_START);
 	this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -114,7 +114,7 @@ Blockly.Blocks.controls_mstimer2_stop = {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendDummyInput()
 		.appendField('MsTimer2')
-		.appendField(Blockly.Msg.Lang.MIXLY_STOP);
+		.appendField(Blockly.Msg.MIXLY_STOP);
 	this.setPreviousStatement(true);
     this.setNextStatement(true);
   }
@@ -125,13 +125,13 @@ Blockly.Blocks.time_sleep = {
   init: function() {
     this.setColour(Blockly.Msg['SYSTEM_HUE']);
     this.appendValueInput("DELAY_TIME", Number)
-        .appendField(Blockly.Msg.Lang.MIXLY_DELAY)        
+        .appendField(Blockly.Msg.MIXLY_DELAY)        
         .setCheck(Number);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.MIXLY_SECOND)
+        .appendField(Blockly.Msg.MIXLY_SECOND)
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_CONTROL_DELAY);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_DELAY);
   }
 };

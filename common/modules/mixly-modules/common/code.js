@@ -494,28 +494,28 @@ Code.initLanguage = function (addToolboxitemid = false) {
     // 获取id为toolbox下的所有category标签
     var catObjArr = document.getElementById("toolbox").getElementsByTagName("category");
     for (var i = 0; i < catObjArr.length; i++) {
-        if (Blockly.Msg.Lang.MSG[catObjArr[i].id]) {
-            catObjArr[i].setAttribute('name', Blockly.Msg.Lang.MSG[catObjArr[i].id]);
+        if (Blockly.Msg.MSG[catObjArr[i].id]) {
+            catObjArr[i].setAttribute('name', Blockly.Msg.MSG[catObjArr[i].id]);
             if (addToolboxitemid) {
                 if (catObjArr[i].hasAttribute('toolboxitemid')) continue;
                 catObjArr[i].setAttribute('toolboxitemid', catObjArr[i].id);
-                catObjArr[i].setAttribute('name', Blockly.Msg.Lang.MSG[catObjArr[i].id]);
+                catObjArr[i].setAttribute('name', Blockly.Msg.MSG[catObjArr[i].id]);
             } else {
                 if (document.getElementById(catObjArr[i].id + ".label"))
-                    document.getElementById(catObjArr[i].id + ".label").innerText = Blockly.Msg.Lang.MSG[catObjArr[i].id];
+                    document.getElementById(catObjArr[i].id + ".label").innerText = Blockly.Msg.MSG[catObjArr[i].id];
             }
         }
     }
-    document.getElementById('copyright').textContent = Blockly.Msg.Lang.MSG['copyright'];
+    document.getElementById('copyright').textContent = Blockly.Msg.MSG['copyright'];
 
     var textVars = document.getElementsByClassName('textVar');
 
     for (var i = 0, textVar; textVar = textVars[i]; i++) {
-        textVar.textContent = Blockly.Msg.Lang.MSG['textVariable'];
+        textVar.textContent = Blockly.Msg.MSG['textVariable'];
     }
     var listVars = document.getElementsByClassName('listVar');
     for (var i = 0, listVar; listVar = listVars[i]; i++) {
-        listVar.textContent = Blockly.Msg.Lang.MSG['listVariable'];
+        listVar.textContent = Blockly.Msg.MSG['listVariable'];
     }
 };
 

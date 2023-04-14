@@ -7,14 +7,14 @@ Blockly.Blocks['ethernet_init_begin'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_BEGIN)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_ETHERNET, 'Ethernet'], [Blockly.Msg.Lang.MIXLY_ETHERNET2, 'Ethernet2']]), "Ethernet");
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_BEGIN)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ETHERNET, 'Ethernet'], [Blockly.Msg.MIXLY_ETHERNET2, 'Ethernet2']]), "Ethernet");
         this.appendValueInput('MAC')
             .setCheck(Array)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_MAC_ADDRESS);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_MAC_ADDRESS);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_INIT);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_INIT);
     }
 };
 
@@ -34,7 +34,7 @@ Blockly.Blocks['ethernet_mac_address'] = {
             .appendField('-')
             .appendField(new Blockly.FieldTextInput('ED'), 'VAR6');
         this.setOutput(true, Array);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_MACADDRESS);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_MACADDRESS);
     }
 }
 
@@ -42,9 +42,9 @@ Blockly.Blocks['ethernet_init_local_ip'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_LOCALIP);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_LOCALIP);
         this.setOutput(true, 'IPAddress');
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_LOCALIP);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_LOCALIP);
     }
 };
 
@@ -52,17 +52,17 @@ Blockly.Blocks['ethernet_client_connect_server'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_CONNECT_SERVER)
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_CONNECT_SERVER)
             .appendField(this.newQuote_(true))
             .appendField(new Blockly.FieldTextInput('mixly.org'), 'SERVER')
             .appendField(this.newQuote_(false));
         this.appendValueInput('PORT')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_PORT);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT);
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_CONNECT);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_CONNECT);
     },
     newQuote_: function (open) {
         if (open == this.RTL) {
@@ -78,10 +78,10 @@ Blockly.Blocks['ethernet_client_stop'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_STOP);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_STOP);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_STOP);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_STOP);
     }
 };
 
@@ -89,9 +89,9 @@ Blockly.Blocks['ethernet_client_connected'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_CONNECTED);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_CONNECTED);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_CONNECTED);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_CONNECTED);
     }
 };
 
@@ -99,9 +99,9 @@ Blockly.Blocks['ethernet_client_available'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_AVAILABLE);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_AVAILABLE);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_CLIENT_AVAILABLE);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_CLIENT_AVAILABLE);
     }
 };
 
@@ -110,11 +110,11 @@ Blockly.Blocks['ethernet_client_print'] = {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendValueInput('TEXT')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_PRINT);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PRINT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_CLIENT_PRINT);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_CLIENT_PRINT);
     }
 };
 
@@ -123,11 +123,11 @@ Blockly.Blocks['ethernet_client_println'] = {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendValueInput('TEXT')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_PRINTLN);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PRINTLN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_CLIENT_PRINTLN);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_CLIENT_PRINTLN);
     }
 };
 
@@ -135,9 +135,9 @@ Blockly.Blocks['ethernet_client_read'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_READ);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_READ);
         this.setOutput(true, Number);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_CLIENT_READ);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_CLIENT_READ);
     }
 };
 
@@ -145,20 +145,20 @@ Blockly.Blocks['ethernet_client_get_request'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_GET_REQUEST);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_GET_REQUEST);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_URL)
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_URL)
             .appendField(this.newQuote_(true))
             .appendField(new Blockly.FieldTextInput(''), 'URL')
             .appendField(this.newQuote_(false));
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_SERVER)
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_SERVER)
             .appendField(this.newQuote_(true))
             .appendField(new Blockly.FieldTextInput(''), 'SERVER')
             .appendField(this.newQuote_(false));
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_ETHERNET_GET_REQUEST);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_ETHERNET_GET_REQUEST);
     },
     newQuote_: function (open) {
         if (open == this.RTL) {
@@ -175,15 +175,15 @@ Blockly.Blocks.NTP_server = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.NTP_SERVER);
+            .appendField(Blockly.Msg.NTP_SERVER);
         this.appendValueInput("server_add")
-            .appendField(Blockly.Msg.Lang.blynk_SERVER_ADD)
+            .appendField(Blockly.Msg.blynk_SERVER_ADD)
             .setCheck(String);
         this.appendValueInput("timeZone")
-            .appendField(Blockly.Msg.Lang.MIXLY_TimeZone)
+            .appendField(Blockly.Msg.MIXLY_TimeZone)
             .setCheck(Number);
         this.appendValueInput("Interval")
-            .appendField(Blockly.Msg.Lang.blynk_WidgetRTC_setSyncInterval)
+            .appendField(Blockly.Msg.blynk_WidgetRTC_setSyncInterval)
             .setCheck(Number);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -193,13 +193,13 @@ Blockly.Blocks.NTP_server = {
 };
 //传感器-实时时钟块_时间变量
 var NTP_TIME_TYPE = [
-    [Blockly.Msg.Lang.MIXLY_YEAR, "NTP.getDateYear()"],
-    [Blockly.Msg.Lang.MIXLY_MONTH, "NTP.getDateMonth()"],
-    [Blockly.Msg.Lang.MIXLY_DAY, "NTP.getDateDay()"],
-    [Blockly.Msg.Lang.MIXLY_HOUR, "NTP.getTimeHour24()"],
-    [Blockly.Msg.Lang.MIXLY_MINUTE, "NTP.getTimeMinute()"],
-    [Blockly.Msg.Lang.MIXLY_SECOND, "NTP.getTimeSecond()"],
-    [Blockly.Msg.Lang.MIXLY_WEEK, "NTP.getDateWeekday()"]
+    [Blockly.Msg.MIXLY_YEAR, "NTP.getDateYear()"],
+    [Blockly.Msg.MIXLY_MONTH, "NTP.getDateMonth()"],
+    [Blockly.Msg.MIXLY_DAY, "NTP.getDateDay()"],
+    [Blockly.Msg.MIXLY_HOUR, "NTP.getTimeHour24()"],
+    [Blockly.Msg.MIXLY_MINUTE, "NTP.getTimeMinute()"],
+    [Blockly.Msg.MIXLY_SECOND, "NTP.getTimeSecond()"],
+    [Blockly.Msg.MIXLY_WEEK, "NTP.getDateWeekday()"]
 ];
 //传感器-实时时钟块_获取时间
 Blockly.Blocks.NTP_server_get_time = {
@@ -207,7 +207,7 @@ Blockly.Blocks.NTP_server_get_time = {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.Lang.NTP_server_get_time);
+            .appendField(Blockly.Msg.NTP_server_get_time);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(new Blockly.FieldDropdown(NTP_TIME_TYPE), "TIME_TYPE");
@@ -221,21 +221,21 @@ Blockly.Blocks.MQTT_server = {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
-            .appendField(Blockly.Msg.Lang.MQTT_SERVER);
+            .appendField(Blockly.Msg.MQTT_SERVER);
         this.appendValueInput("server_add")
-            .appendField(Blockly.Msg.Lang.MQTT_SERVER_ADD)
+            .appendField(Blockly.Msg.MQTT_SERVER_ADD)
             .setCheck(String);
         this.appendValueInput("server_port")
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_PORT)
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT)
             .setCheck(Number);
         this.appendValueInput("IOT_ID")
-            .appendField(Blockly.Msg.Lang.MIXLY_EMQX_USERNAME)
+            .appendField(Blockly.Msg.MIXLY_EMQX_USERNAME)
             .setCheck(String);
         this.appendValueInput("IOT_PWD", String)
-            .appendField(Blockly.Msg.Lang.HTML_PASSWORD)
+            .appendField(Blockly.Msg.HTML_PASSWORD)
             .setCheck([String, Number]);
         this.appendValueInput("Client_ID")
-            .appendField(Blockly.Msg.Lang.MQTT_Client_ID)
+            .appendField(Blockly.Msg.MQTT_Client_ID)
             .setCheck(String);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -250,11 +250,11 @@ Blockly.Blocks.WIFI_info = {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
-            .appendField(Blockly.Msg.Lang.MIXLY_NETWORK_INIT);
+            .appendField(Blockly.Msg.MIXLY_NETWORK_INIT);
         this.appendValueInput("SSID")
-            .appendField(Blockly.Msg.Lang.HTML_NAME);
+            .appendField(Blockly.Msg.HTML_NAME);
         this.appendValueInput("PWD")
-            .appendField(Blockly.Msg.Lang.HTML_PASSWORD);
+            .appendField(Blockly.Msg.HTML_PASSWORD);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -267,17 +267,17 @@ Blockly.Blocks['network_connect'] = {
     init: function () {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_ESP32_NETWORK_CONNECT);
+            .appendField(Blockly.Msg.MIXLY_ESP32_NETWORK_CONNECT);
         this.appendValueInput('id')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.HTML_NAME);
+            .appendField(Blockly.Msg.HTML_NAME);
         this.appendValueInput('password')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.HTML_PASSWORD);
+            .appendField(Blockly.Msg.HTML_PASSWORD);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_NETWORK_CONNECT_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_NETWORK_CONNECT_TOOLTIP);
     }
 };
 
@@ -285,10 +285,10 @@ Blockly.Blocks['network_wifi_connect'] = {
     init: function () {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_NETWORK_WIFI_CONNECT);
+            .appendField(Blockly.Msg.MIXLY_NETWORK_WIFI_CONNECT);
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_NETWORK_WIFI_CONNECT_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_NETWORK_WIFI_CONNECT_TOOLTIP);
     }
 };
 
@@ -297,9 +297,9 @@ Blockly.Blocks['network_get_connect'] = {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendDummyInput()
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_GET + Blockly.Msg.Lang.MIXLY_DEVICE)
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DEVICE)
             .appendField(new Blockly.FieldDropdown([["MAC", "MAC"], ["IP", "IP"]]), "mode")
-            .appendField(Blockly.Msg.Lang.MQTT_SERVER_ADD);
+            .appendField(Blockly.Msg.MQTT_SERVER_ADD);
         this.setOutput(true);
         this.setInputsInline(true);
     }
@@ -309,7 +309,7 @@ Blockly.Blocks['MQTT_connect'] = {
     init: function () {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MQTT_connect);
+            .appendField(Blockly.Msg.MQTT_connect);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -326,12 +326,12 @@ Blockly.Blocks.MQTT_publish = {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
-            .appendField(Blockly.Msg.Lang.MQTT_publish);
+            .appendField(Blockly.Msg.MQTT_publish);
         this.appendValueInput("data");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.LANG_MATH_RANDOM_INT_INPUT_TO);
+            .appendField(Blockly.Msg.LANG_MATH_RANDOM_INT_INPUT_TO);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MQTT_Topic)
+            .appendField(Blockly.Msg.MQTT_Topic)
             .appendField(new Blockly.FieldTextInput('Topic', Topic_validator), "Topic");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -345,10 +345,10 @@ Blockly.Blocks.MQTT_subscribe_value = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MQTT_Topic)
+            .appendField(Blockly.Msg.MQTT_Topic)
             .appendField(new Blockly.FieldTextInput('Topic_0', Topic_validator), "Topic_0");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.HTML_VALUE)
+            .appendField(Blockly.Msg.HTML_VALUE)
         this.setInputsInline(true);
         this.setOutput(true, String);
     }
@@ -361,10 +361,10 @@ Blockly.Blocks['MQTT_add_subscribe_topic'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MQTT_Topic);
+            .appendField(Blockly.Msg.MQTT_Topic);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.Lang.CONTROLS_IF_ELSEIF_TOOLTIP);
+        this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
         this.contextMenu = false;
     }
 };
@@ -377,11 +377,11 @@ Blockly.Blocks['MQTT_subscribe'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT)
-            .appendField(Blockly.Msg.Lang.MQTT_Topic + Blockly.Msg.Lang.MQTT_subscribe2)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT)
+            .appendField(Blockly.Msg.MQTT_Topic + Blockly.Msg.MQTT_subscribe2)
             .appendField(new Blockly.FieldTextInput('Topic_0', Topic_validator), "Topic_0");
         this.appendStatementInput('DO0')
-            .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_THEN);
+            .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
         this.setMutator(new Blockly.Mutator(['MQTT_add_subscribe_topic']));
@@ -389,9 +389,9 @@ Blockly.Blocks['MQTT_subscribe'] = {
         var thisBlock = this;
         this.setTooltip(function () {
             if (!thisBlock.elseifCount_) {
-                return Blockly.Msg.Lang.CONTROLS_IF_TOOLTIP_1;
+                return Blockly.Msg.CONTROLS_IF_TOOLTIP_1;
             } else if (thisBlock.elseifCount_) {
-                return Blockly.Msg.Lang.CONTROLS_IF_TOOLTIP_3;
+                return Blockly.Msg.CONTROLS_IF_TOOLTIP_3;
             }
         });
         this.elseifCount_ = 0;
@@ -434,11 +434,11 @@ Blockly.Blocks['MQTT_subscribe'] = {
         for (var i = 1; i <= this.elseifCount_; i++) {
             this.appendDummyInput('DummyInput' + i)
                 .setAlign(Blockly.ALIGN_RIGHT)
-                .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT)
-                .appendField(Blockly.Msg.Lang.MQTT_Topic + Blockly.Msg.Lang.MQTT_subscribe2)
+                .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT)
+                .appendField(Blockly.Msg.MQTT_Topic + Blockly.Msg.MQTT_subscribe2)
                 .appendField(new Blockly.FieldTextInput('Topic_' + i, Topic_validator), "Topic_" + i);
             this.appendStatementInput('DO' + i)
-                .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_THEN);
+                .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         }
         for (var i = statementConnections.length - 2; i > 0; i--) {
             if (statementConnections[i])
@@ -550,11 +550,11 @@ Blockly.Blocks['MQTT_subscribe'] = {
         for (var i = 1; i <= this.elseifCount_; i++) {
             this.appendDummyInput("DummyInput" + i)
                 .setAlign(Blockly.ALIGN_RIGHT)
-                .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_JS_CURRENT)
-                .appendField(Blockly.Msg.Lang.MQTT_Topic + Blockly.Msg.Lang.MQTT_subscribe2)
+                .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT)
+                .appendField(Blockly.Msg.MQTT_Topic + Blockly.Msg.MQTT_subscribe2)
                 .appendField(new Blockly.FieldTextInput('Topic_' + i, Topic_validator), "Topic_" + i);
             this.appendStatementInput('DO' + i)
-                .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_THEN);
+                .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         }
     },
     /**
@@ -582,7 +582,7 @@ Blockly.Blocks['mqtt_topics_set'] = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_EMQX_SUBSCRIBE + Blockly.Msg.Lang.MQTT_Topic);
+            .appendField(Blockly.Msg.MIXLY_EMQX_SUBSCRIBE + Blockly.Msg.MQTT_Topic);
         this.appendStatementInput('STACK');
         this.contextMenu = false;
     }
@@ -592,16 +592,16 @@ Blockly.Blocks['mqtt_topics_set'] = {
 Blockly.Blocks.http_get = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_GET_REQUEST);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_GET_REQUEST);
         this.appendValueInput("api")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.blynk_SERVER_ADD);
+            .appendField(Blockly.Msg.blynk_SERVER_ADD);
         this.appendStatementInput("success")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_SUCCESS);
+            .appendField(Blockly.Msg.MIXLY_SUCCESS);
         this.appendStatementInput("failure")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_FAILED);
+            .appendField(Blockly.Msg.MIXLY_FAILED);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
@@ -613,12 +613,12 @@ Blockly.Blocks.WIFI_smartConfig = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.blynk_smartconfig)
+            .appendField(Blockly.Msg.blynk_smartconfig)
             .appendField(new Blockly.FieldDropdown([["SmartConfig", 'SmartConfig'], ["AP", 'AP']]), "MODE");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);//可上下连接
         this.setNextStatement(true, null);
-        this.setTooltip(Blockly.Msg.Lang.MQTT_TEST_TOOLTIP);
+        this.setTooltip(Blockly.Msg.MQTT_TEST_TOOLTIP);
     }
 };
 
@@ -626,28 +626,28 @@ Blockly.Blocks.WIFI_ap_or_sta = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/wifi_udp.PNG", 25, 25, "*"))
-            .appendField(Blockly.Msg.Lang.MIXLY_SETUP + " UDP WIFI");
+            .appendField(Blockly.Msg.MIXLY_SETUP + " UDP WIFI");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_MODE + ":")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_MODE + ":")
             .appendField(new Blockly.FieldDropdown([["STA", "STA"], ["AP", "AP"]]), "mode");
         this.appendValueInput("SSID")
             .setCheck(null)
-            .appendField("WIFI " + Blockly.Msg.Lang.HTML_NAME);
+            .appendField("WIFI " + Blockly.Msg.HTML_NAME);
         this.appendValueInput("PSK")
             .setCheck(null)
-            .appendField("WIFI " + Blockly.Msg.Lang.HTML_PASSWORD);
+            .appendField("WIFI " + Blockly.Msg.HTML_PASSWORD);
         this.appendValueInput("IP1")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_WIFI_LINK_DEVICE + " IP1");
+            .appendField(Blockly.Msg.MIXLY_WIFI_LINK_DEVICE + " IP1");
         this.appendValueInput("IP2")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_WIFI_LINK_DEVICE + " IP2");
+            .appendField(Blockly.Msg.MIXLY_WIFI_LINK_DEVICE + " IP2");
         this.appendValueInput("IP")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_ESP32_BLUETOOTH_FLAG + " IP");
+            .appendField(Blockly.Msg.MIXLY_ESP32_BLUETOOTH_FLAG + " IP");
         this.appendValueInput("duankou")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_PORT);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
@@ -659,33 +659,33 @@ Blockly.Blocks.WIFI_ap_and_sta = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/wifi_udp.PNG", 25, 25, "*"))
-            .appendField(Blockly.Msg.Lang.MIXLY_SETUP + " UDP WIFI");
+            .appendField(Blockly.Msg.MIXLY_SETUP + " UDP WIFI");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_MODE + ": AP+STA");
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_MODE + ": AP+STA");
         this.appendValueInput("SSID1")
             .setCheck(null)
-            .appendField("WIFI " + Blockly.Msg.Lang.HTML_NAME + "(STA)");
+            .appendField("WIFI " + Blockly.Msg.HTML_NAME + "(STA)");
         this.appendValueInput("SSID2")
             .setCheck(null)
-            .appendField("WIFI " + Blockly.Msg.Lang.HTML_NAME + "(AP)");
+            .appendField("WIFI " + Blockly.Msg.HTML_NAME + "(AP)");
         this.appendValueInput("PSK1")
             .setCheck(null)
-            .appendField("WIFI " + Blockly.Msg.Lang.HTML_PASSWORD + "(STA)");
+            .appendField("WIFI " + Blockly.Msg.HTML_PASSWORD + "(STA)");
         this.appendValueInput("PSK2")
             .setCheck(null)
-            .appendField("WIFI " + Blockly.Msg.Lang.HTML_PASSWORD + "(AP)");
+            .appendField("WIFI " + Blockly.Msg.HTML_PASSWORD + "(AP)");
         this.appendValueInput("IP1")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_WIFI_LINK_DEVICE + " IP1");
+            .appendField(Blockly.Msg.MIXLY_WIFI_LINK_DEVICE + " IP1");
         this.appendValueInput("IP2")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_WIFI_LINK_DEVICE + " IP2");
+            .appendField(Blockly.Msg.MIXLY_WIFI_LINK_DEVICE + " IP2");
         this.appendValueInput("IP")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_ESP32_BLUETOOTH_FLAG + " IP");
+            .appendField(Blockly.Msg.MIXLY_ESP32_BLUETOOTH_FLAG + " IP");
         this.appendValueInput("duankou")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_ETHERNET_CLINET_PORT);
+            .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
@@ -697,12 +697,12 @@ Blockly.Blocks.WIFI_incomingPacket = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/wifi_udp.PNG", 25, 25, "*"))
-            .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_IF + " WIFI UDP " + Blockly.Msg.Lang.MIXLY_STM32_SPI_DATA_RECEIVED + "？")
+            .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF + " WIFI UDP " + Blockly.Msg.MIXLY_STM32_SPI_DATA_RECEIVED + "？")
         this.appendValueInput("input_data")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.PROCEDURES_CALL_BEFORE_PARAMS);
+            .appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS);
         this.appendDummyInput()
-            .appendField("(" + Blockly.Msg.Lang.LANG_MATH_STRING + ")");
+            .appendField("(" + Blockly.Msg.LANG_MATH_STRING + ")");
         this.appendStatementInput("do")
             .setCheck(null);
         this.setInputsInline(true);
@@ -718,7 +718,7 @@ Blockly.Blocks.WIFI_send_data = {
     init: function () {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("../../../common/media/blynk/wifi_udp.PNG", 25, 25, "*"))
-            .appendField("WIFI UDP " + Blockly.Msg.Lang.MIXLY_SEND_DATA);
+            .appendField("WIFI UDP " + Blockly.Msg.MIXLY_SEND_DATA);
         this.appendValueInput("data")
             .setCheck(null);
         this.setInputsInline(true);
@@ -735,7 +735,7 @@ Blockly.Blocks.WeatherGet = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.WeatherGet)
+            .appendField(Blockly.Msg.WeatherGet)
             .appendField(new Blockly.FieldTextInput('北京'), 'data')
             .appendField("1", "check");
         this.setOutput(true, Boolean);
@@ -748,8 +748,8 @@ Blockly.Blocks.WeatherGetToday = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.WeatherGetToday)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_Humidity, "0"], ['PM2.5', "1"], ['PM1.0', "2"], [Blockly.Msg.Lang.TodayQuality, "3"], [Blockly.Msg.Lang.MIXLY_TEMPERATURE, "4"]]), "type");
+            .appendField(Blockly.Msg.WeatherGetToday)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_Humidity, "0"], ['PM2.5', "1"], ['PM1.0', "2"], [Blockly.Msg.TodayQuality, "3"], [Blockly.Msg.MIXLY_TEMPERATURE, "4"]]), "type");
         this.setOutput(true, Number);
         this.setTooltip("返回对应数据 字符串型。");
     }
@@ -760,10 +760,10 @@ Blockly.Blocks.WeatherGetForecast = {
     init: function () {
         this.setColour(Blockly.Msg['ETHERNET_HUE']);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.WeatherGetForecast)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_GPS_DATE, "ForecastDate"], [Blockly.Msg.Lang.ForecastHigh, "ForecastHigh"], [Blockly.Msg.Lang.ForecastLow, "ForecastLow"], [Blockly.Msg.Lang.ForecastYmd, "ForecastYmd"], [Blockly.Msg.Lang.MIXLY_WEEK, "ForecastWeek"], [Blockly.Msg.Lang.ForecastAqi, "ForecastAqi"], [Blockly.Msg.Lang.ForecastFx, "ForecastFx"], [Blockly.Msg.Lang.ForecastFl, "ForecastFl"], [Blockly.Msg.Lang.ForecastType, "ForecastType"]]), "type");
+            .appendField(Blockly.Msg.WeatherGetForecast)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GPS_DATE, "ForecastDate"], [Blockly.Msg.ForecastHigh, "ForecastHigh"], [Blockly.Msg.ForecastLow, "ForecastLow"], [Blockly.Msg.ForecastYmd, "ForecastYmd"], [Blockly.Msg.MIXLY_WEEK, "ForecastWeek"], [Blockly.Msg.ForecastAqi, "ForecastAqi"], [Blockly.Msg.ForecastFx, "ForecastFx"], [Blockly.Msg.ForecastFl, "ForecastFl"], [Blockly.Msg.ForecastType, "ForecastType"]]), "type");
         this.appendValueInput('date', Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_GPS_DATE + '(0~14)');
+            .appendField(Blockly.Msg.MIXLY_GPS_DATE + '(0~14)');
         this.setOutput(true, Number);
         this.setTooltip("返回预报天气内容0表示当天，最大为14，字符串型。");
         this.setInputsInline(true);
@@ -832,21 +832,21 @@ Blockly.Blocks.weather_private_key = {
 Blockly.Blocks.weather_seniverse_city_weather = {
     init: function () {
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MSG.catweather)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_LIVE_WEATHER, "weather/now"], [Blockly.Msg.Lang.MIXLY_3_DAY_WEATHER_FORECAST, "weather/daily"], [Blockly.Msg.Lang.MIXLY_6_LIFE_INDEXES, "life/suggestion"]]), "api")
-            .appendField(Blockly.Msg.Lang.MIXLY_INFORMATION_CONFIGURATION);
+            .appendField(Blockly.Msg.MSG.catweather)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LIVE_WEATHER, "weather/now"], [Blockly.Msg.MIXLY_3_DAY_WEATHER_FORECAST, "weather/daily"], [Blockly.Msg.MIXLY_6_LIFE_INDEXES, "life/suggestion"]]), "api")
+            .appendField(Blockly.Msg.MIXLY_INFORMATION_CONFIGURATION);
         this.appendValueInput("location")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_GEOGRAPHIC_LOCATION);
+            .appendField(Blockly.Msg.MIXLY_GEOGRAPHIC_LOCATION);
         this.appendValueInput("private_key")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_API_PRIVATE_KEY);
+            .appendField(Blockly.Msg.MIXLY_API_PRIVATE_KEY);
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_LANGUAGE)
+            .appendField(Blockly.Msg.MIXLY_LANGUAGE)
             .appendField(new Blockly.FieldDropdown([["简体中文", "zh-Hans"], ["繁體中文", "zh-Hant"], ["English", "en"]]), "language");
         this.appendDummyInput("")
-            .appendField(Blockly.Msg.Lang.MIXLY_TEMPERATURE_UNIT)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_CELSIUS + "(℃)", "c"], [Blockly.Msg.Lang.MIXLY_FAHRENHEIT + "(℉)", "f"]]), "unit");
+            .appendField(Blockly.Msg.MIXLY_TEMPERATURE_UNIT)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_CELSIUS + "(℃)", "c"], [Blockly.Msg.MIXLY_FAHRENHEIT + "(℉)", "f"]]), "unit");
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -861,8 +861,8 @@ Blockly.Blocks.weather_get_seniverse_weather_info = {
     init: function () {
         this.appendDummyInput("")
             //.appendField("心知天气")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_LIVE_WEATHER, "weather/now"], [Blockly.Msg.Lang.MIXLY_3_DAY_WEATHER_FORECAST, "weather/daily"], [Blockly.Msg.Lang.MIXLY_6_LIFE_INDEXES, "life/suggestion"]]), "api")
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_AVAILABLE, "update"], [Blockly.Msg.Lang.MIXLY_GET_DATA_UPDATE_TIME, "getLastUpdate"], [Blockly.Msg.Lang.MIXLY_GET_SERVER_RESPONSE_STATUS_CODE, "getServerCode"]]), "type");
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LIVE_WEATHER, "weather/now"], [Blockly.Msg.MIXLY_3_DAY_WEATHER_FORECAST, "weather/daily"], [Blockly.Msg.MIXLY_6_LIFE_INDEXES, "life/suggestion"]]), "api")
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_AVAILABLE, "update"], [Blockly.Msg.MIXLY_GET_DATA_UPDATE_TIME, "getLastUpdate"], [Blockly.Msg.MIXLY_GET_SERVER_RESPONSE_STATUS_CODE, "getServerCode"]]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour("#27b6ac");
@@ -876,9 +876,9 @@ Blockly.Blocks.weather_get_seniverse_weather_info1 = {
     init: function () {
         this.appendDummyInput("")
             //.appendField("心知天气")
-            .appendField(Blockly.Msg.Lang.MIXLY_LIVE_WEATHER)
-            .appendField(Blockly.Msg.Lang.MIXLY_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_WEATHER_PHENOMENON, "getWeatherText"], [Blockly.Msg.Lang.MIXLY_WEATHER_PHENOMENON_CODE, "getWeatherCode"], [Blockly.Msg.Lang.MIXLY_TEMPERATURE, "getDegree"]]), "type");
+            .appendField(Blockly.Msg.MIXLY_LIVE_WEATHER)
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_WEATHER_PHENOMENON, "getWeatherText"], [Blockly.Msg.MIXLY_WEATHER_PHENOMENON_CODE, "getWeatherCode"], [Blockly.Msg.MIXLY_TEMPERATURE, "getDegree"]]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour("#27b6ac");
@@ -892,21 +892,21 @@ Blockly.Blocks.weather_get_seniverse_weather_info2 = {
     init: function () {
         this.appendDummyInput("")
             //.appendField("心知天气")
-            .appendField(Blockly.Msg.Lang.MIXLY_3_DAY_WEATHER_FORECAST)
-            .appendField(Blockly.Msg.Lang.MIXLY_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_TODAY, "0"], [Blockly.Msg.Lang.MIXLY_TOMORROW, "1"], [Blockly.Msg.Lang.MIXLY_DAY_AFTER_TOMORROW, "2"]]), "date")
+            .appendField(Blockly.Msg.MIXLY_3_DAY_WEATHER_FORECAST)
+            .appendField(Blockly.Msg.MIXLY_GET)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_TODAY, "0"], [Blockly.Msg.MIXLY_TOMORROW, "1"], [Blockly.Msg.MIXLY_DAY_AFTER_TOMORROW, "2"]]), "date")
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.Lang.ForecastHigh, "getHigh"],
-                [Blockly.Msg.Lang.ForecastLow, "getLow"],
-                [Blockly.Msg.Lang.MIXLY_DAYTIME_WEATHER_PHENOMENON, "getDayText"],
-                [Blockly.Msg.Lang.MIXLY_DAYTIME_WEATHER_PHENOMENON_CODE, "getDayCode"],
-                [Blockly.Msg.Lang.MIXLY_EVENING_WEATHER_PHENOMENON, "getNightText"],
-                [Blockly.Msg.Lang.MIXLY_EVENING_WEATHER_PHENOMENON_CODE, "getNightCode"],
-                [Blockly.Msg.Lang.MIXLY_PROBABILITY_OF_PRECIPITATION, "getRain"],
-                [Blockly.Msg.Lang.ForecastFx, "getWindDirection"],
-                [Blockly.Msg.Lang.MIXLY_WIND_SPEED, "getWindSpeed"],
-                [Blockly.Msg.Lang.MIXLY_WIND_RATING, "getWindScale"],
-                [Blockly.Msg.Lang.MIXLY_Humidity, "getHumidity"]
+                [Blockly.Msg.ForecastHigh, "getHigh"],
+                [Blockly.Msg.ForecastLow, "getLow"],
+                [Blockly.Msg.MIXLY_DAYTIME_WEATHER_PHENOMENON, "getDayText"],
+                [Blockly.Msg.MIXLY_DAYTIME_WEATHER_PHENOMENON_CODE, "getDayCode"],
+                [Blockly.Msg.MIXLY_EVENING_WEATHER_PHENOMENON, "getNightText"],
+                [Blockly.Msg.MIXLY_EVENING_WEATHER_PHENOMENON_CODE, "getNightCode"],
+                [Blockly.Msg.MIXLY_PROBABILITY_OF_PRECIPITATION, "getRain"],
+                [Blockly.Msg.ForecastFx, "getWindDirection"],
+                [Blockly.Msg.MIXLY_WIND_SPEED, "getWindSpeed"],
+                [Blockly.Msg.MIXLY_WIND_RATING, "getWindScale"],
+                [Blockly.Msg.MIXLY_Humidity, "getHumidity"]
             ]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
@@ -920,15 +920,15 @@ Blockly.Blocks.weather_get_seniverse_weather_info3 = {
     init: function () {
         this.appendDummyInput("")
             //.appendField("心知天气")
-            .appendField(Blockly.Msg.Lang.MIXLY_6_LIFE_INDEXES)
-            .appendField(Blockly.Msg.Lang.MIXLY_GET)
+            .appendField(Blockly.Msg.MIXLY_6_LIFE_INDEXES)
+            .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.Lang.MIXLY_CAR_WASH_INDEX, "getCarWash"],
-                [Blockly.Msg.Lang.MIXLY_DRESSING_INDEX, "getDressing"],
-                [Blockly.Msg.Lang.MIXLY_COLD_INDEX, "getFactorFlu"],
-                [Blockly.Msg.Lang.MIXLY_MOVEMENT_INDEX, "getExercise"],
-                [Blockly.Msg.Lang.MIXLY_TOURISM_INDEX, "getTravel"],
-                [Blockly.Msg.Lang.MIXLY_UV_INDEX, "getUV"]]
+                [Blockly.Msg.MIXLY_CAR_WASH_INDEX, "getCarWash"],
+                [Blockly.Msg.MIXLY_DRESSING_INDEX, "getDressing"],
+                [Blockly.Msg.MIXLY_COLD_INDEX, "getFactorFlu"],
+                [Blockly.Msg.MIXLY_MOVEMENT_INDEX, "getExercise"],
+                [Blockly.Msg.MIXLY_TOURISM_INDEX, "getTravel"],
+                [Blockly.Msg.MIXLY_UV_INDEX, "getUV"]]
             ), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
@@ -941,22 +941,22 @@ Blockly.Blocks.weather_get_seniverse_weather_info3 = {
 Blockly.Blocks['mixio_mqtt_subscribe'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_CREATE_MQTT_CLIENT_AND_CONNECT);
+            .appendField(Blockly.Msg.MIXLY_CREATE_MQTT_CLIENT_AND_CONNECT);
         this.appendValueInput("server")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.blynk_SERVER_ADD);
+            .appendField(Blockly.Msg.blynk_SERVER_ADD);
         this.appendValueInput("port")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_EMQX_PORT);
+            .appendField(Blockly.Msg.MIXLY_EMQX_PORT);
         this.appendValueInput("mqtt_username")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_WIFI_USERNAME);
+            .appendField(Blockly.Msg.MIXLY_WIFI_USERNAME);
         this.appendValueInput("mqtt_password")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_WIFI_PASSWORD);
+            .appendField(Blockly.Msg.MIXLY_WIFI_PASSWORD);
         this.appendValueInput("project")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MIXLY_EMQX_PROJECT);
+            .appendField(Blockly.Msg.MIXLY_EMQX_PROJECT);
         //this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(170);
@@ -968,10 +968,10 @@ Blockly.Blocks['mixio_mqtt_subscribe'] = {
 Blockly.Blocks['mixio_mqtt_subscribe_key'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.USE_MIXLY_KEY)
+            .appendField(Blockly.Msg.USE_MIXLY_KEY)
             .appendField(new Blockly.FieldTextInput("1RFOH08C"), "key")
-            .appendField(Blockly.Msg.Lang.CONNECT_TO_MIXIO)
-            .appendField(Blockly.Msg.Lang.blynk_SERVER_ADD)
+            .appendField(Blockly.Msg.CONNECT_TO_MIXIO)
+            .appendField(Blockly.Msg.blynk_SERVER_ADD)
             .appendField(new Blockly.FieldTextInput("mixio.mixly.cn"), "server");
         this.setNextStatement(true, null);
         this.setColour(170);
@@ -984,10 +984,10 @@ Blockly.Blocks['mixio_mqtt_publish'] = {
     init: function () {
         this.appendValueInput("data")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.MQTT_SEND_MESSAGE);
+            .appendField(Blockly.Msg.MQTT_SEND_MESSAGE);
         this.appendValueInput("topic")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.TO_TOPIC);
+            .appendField(Blockly.Msg.TO_TOPIC);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([["MixIO", "1"], ["Mixly Key", "2"]]), "mode");
         this.setPreviousStatement(true, null);
@@ -1002,9 +1002,9 @@ Blockly.Blocks['mixio_mqtt_received_the_news'] = {
     init: function () {
         this.appendValueInput("topic")
             .setCheck(null)
-            .appendField(Blockly.Msg.Lang.WHEN_THE_SUBJECT_IS_RECEIVED);
+            .appendField(Blockly.Msg.WHEN_THE_SUBJECT_IS_RECEIVED);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_MSG)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_MSG)
             .appendField(new Blockly.FieldDropdown([["MixIO", "1"], ["Mixly Key", "2"]]), "mode");
         this.appendStatementInput("function")
             .setCheck(null);

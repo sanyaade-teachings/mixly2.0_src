@@ -10,9 +10,9 @@ Blockly.Blocks['inout_highlow'] = {
    init: function() {
     this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendDummyInput("")
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_HIGH, "HIGH"], [Blockly.Msg.Lang.MIXLY_LOW, "LOW"]]), 'BOOL')
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_HIGH, "HIGH"], [Blockly.Msg.MIXLY_LOW, "LOW"]]), 'BOOL')
     this.setOutput(true, Boolean);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_INOUT_HIGHLOW_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_HIGHLOW_TOOLTIP);
   }
 };
 
@@ -23,12 +23,12 @@ Blockly.Blocks['inout_digital_init'] = {
     this.appendDummyInput()
 		.appendField("初始化 ");	
 	this.appendDummyInput("")
-		//.appendField(Blockly.Msg.Lang.MIXLY_MICROPYTHON_AS)
-		// .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_MODE+Blockly.Msg.Lang.LISTS_SET_INDEX_INPUT_TO)
-		.appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_Digital_PINMODEOUT, "GPIO.OUT"],
-			[Blockly.Msg.Lang.MIXLY_Digital_PINMODEIN, "GPIO.IN"],
-			[Blockly.Msg.Lang.MIXLY_PINMODEPULLUP, "GPIO.IN, board.GPIO.PULL_UP"],
-			[Blockly.Msg.Lang.MIXLY_PINMODEPULLDOWN, "GPIO.IN, board.GPIO.PULL_DOWN"]
+		//.appendField(Blockly.Msg.MIXLY_MICROPYTHON_AS)
+		// .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_MODE+Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+		.appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_Digital_PINMODEOUT, "GPIO.OUT"],
+			[Blockly.Msg.MIXLY_Digital_PINMODEIN, "GPIO.IN"],
+			[Blockly.Msg.MIXLY_PINMODEPULLUP, "GPIO.IN, board.GPIO.PULL_UP"],
+			[Blockly.Msg.MIXLY_PINMODEPULLDOWN, "GPIO.IN, board.GPIO.PULL_DOWN"]
 			]),"MODE")
 	this.appendValueInput("PIN", Number)
 		.appendField("管脚")
@@ -36,7 +36,7 @@ Blockly.Blocks['inout_digital_init'] = {
 	this.setPreviousStatement(true, null);
 	this.setNextStatement(true, null);
 	this.setInputsInline(true);
-	this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_INOUT_DIGITAL_INIT_TOOLTIP);
+	this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_DIGITAL_INIT_TOOLTIP);
       }
 };
 
@@ -44,15 +44,15 @@ Blockly.Blocks.inout_digital_write = {
   init: function() {
     this.setColour(Blockly.Msg['BASE_HUE']);
     this.appendValueInput("PIN",Number)
-        .appendField(Blockly.Msg.Lang.MIXLY_Digital_PINMODEOUT)
+        .appendField(Blockly.Msg.MIXLY_Digital_PINMODEOUT)
         .setCheck(Number);
     this.appendValueInput("STAT")
-        .appendField(Blockly.Msg.Lang.MIXLY_STAT)
+        .appendField(Blockly.Msg.MIXLY_STAT)
         .setCheck([Number,Boolean]);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_INOUT_DIGITAL_WRITE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_DIGITAL_WRITE_TOOLTIP);
   }
 };
 
@@ -60,14 +60,14 @@ Blockly.Blocks.inout_digital_read = {
   init: function() {
     this.setColour(Blockly.Msg['BASE_HUE']);
 	this.appendValueInput("PIN", Number)
-        .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_PY_STORAGE_GET)
-        .appendField(Blockly.Msg.Lang.MIXLY_Digital_PINMODEIN)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+        .appendField(Blockly.Msg.MIXLY_Digital_PINMODEIN)
         .setCheck(Number);
     this.appendDummyInput()
         .appendField("值");
 	this.setInputsInline(true);
     this.setOutput(true, [Boolean,Number]);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_INOUT_DIGITAL_READ_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_DIGITAL_READ_TOOLTIP);
   }
 };
 
@@ -121,13 +121,13 @@ Blockly.Blocks.inout_pin_attachInterrupt = {
         .appendField("管键")
         .setCheck(Number);
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.MIXLY_MODE)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.Lang.MIXLY_RISING, "GPIO.IRQ_RISING"], [Blockly.Msg.Lang.MIXLY_FALLING, "GPIO.IRQ_FALLING"], [Blockly.Msg.Lang.MIXLY_CHANGE, "GPIO.IRQ_BOTH"]]), "mode");
+        .appendField(Blockly.Msg.MIXLY_MODE)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_RISING, "GPIO.IRQ_RISING"], [Blockly.Msg.MIXLY_FALLING, "GPIO.IRQ_FALLING"], [Blockly.Msg.MIXLY_CHANGE, "GPIO.IRQ_BOTH"]]), "mode");
     this.appendValueInput('DO')
-        .appendField(Blockly.Msg.Lang.MIXLY_DO)
+        .appendField(Blockly.Msg.MIXLY_DO)
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_ESP32_INOUT_PIN_ATTACHINTERRUPT_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_INOUT_PIN_ATTACHINTERRUPT_TOOLTIP);
   }
 };
 

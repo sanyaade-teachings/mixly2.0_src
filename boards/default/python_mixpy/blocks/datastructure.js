@@ -17,21 +17,21 @@ Blockly.Msg['DS_HUE'] = 80;
      init: function () {
       this.setColour(Blockly.Msg['DS_HUE']);
       this.appendDummyInput("")
-          .appendField(new Blockly.FieldLabel(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_NEW))
+          .appendField(new Blockly.FieldLabel(Blockly.Msg.DS_CREATE_LINKEDLIST_NEW))
       this.appendDummyInput("")
-          .appendField(new Blockly.FieldLabel(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_HEAD))   
+          .appendField(new Blockly.FieldLabel(Blockly.Msg.DS_CREATE_LINKEDLIST_HEAD))   
           .appendField(new Blockly.FieldTextInput('head'), 'VAR')
       this.appendDummyInput("")
-          .appendField(new Blockly.FieldLabel(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_TYPE))   
+          .appendField(new Blockly.FieldLabel(Blockly.Msg.DS_CREATE_LINKEDLIST_TYPE))   
           .appendField(new Blockly.FieldTextInput('tag'), 'TYPE')    
       this.appendDummyInput()
-          .appendField(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_ATTRIBUTE);    
+          .appendField(Blockly.Msg.DS_CREATE_LINKEDLIST_ATTRIBUTE);    
       this.itemCount_ = 1;
       this.updateShape_();
       this.setPreviousStatement(true);
       this.setNextStatement(true);
       this.setMutator(new Blockly.Mutator(['ds_create_linkedlist_item']));
-      this.setTooltip(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_TOOLTIP);
+      this.setTooltip(Blockly.Msg.DS_CREATE_LINKEDLIST_TOOLTIP);
     },
 
     /**
@@ -145,9 +145,9 @@ Blockly.Msg['DS_HUE'] = 80;
           }
         // Rebuild block.
         //if (this.itemCount_ == 0) {
-        //  this.getField('TIP').setText(Blockly.Msg.Lang.DICTS_CREATE_EMPTY_TITLE);
+        //  this.getField('TIP').setText(Blockly.Msg.DICTS_CREATE_EMPTY_TITLE);
        // } else {
-        //  this.getField('TIP').setText(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_NEW);
+        //  this.getField('TIP').setText(Blockly.Msg.DS_CREATE_LINKEDLIST_NEW);
           for (var i = 0; i < this.itemCount_; i++) {
             this.appendValueInput('ADD' + i)
             .setCheck(null)
@@ -181,9 +181,9 @@ Blockly.Msg['DS_HUE'] = 80;
    init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_CONTAINER_TITLE);
+    .appendField(Blockly.Msg.DS_CREATE_LINKEDLIST_CONTAINER_TITLE);
     this.appendStatementInput('STACK');
-    this.setTooltip(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_CONTAINER_TOOLTIP);
+    this.setTooltip(Blockly.Msg.DS_CREATE_LINKEDLIST_CONTAINER_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -196,10 +196,10 @@ Blockly.Blocks['ds_create_linkedlist_item'] = {
    init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_ITEM_TITLE);
+    .appendField(Blockly.Msg.DS_CREATE_LINKEDLIST_ITEM_TITLE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_ITEM_TOOLTIP);
+    this.setTooltip(Blockly.Msg.DS_CREATE_LINKEDLIST_ITEM_TOOLTIP);
     this.contextMenu = false;
   }
 };
@@ -209,15 +209,15 @@ Blockly.Blocks['ds_create_node'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_CREATE_NODE_USE)
+        .appendField(Blockly.Msg.DS_CREATE_NODE_USE)
         .appendField(new Blockly.FieldTextInput('tag'), 'TYPE')
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.DS_CREATE_NODE_NEW)
+        .appendField(Blockly.Msg.DS_CREATE_NODE_NEW)
     this.appendValueInput('NODE')    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_CREATE_NODE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_CREATE_NODE_TOOLTIP);
   }
 }
 
@@ -225,16 +225,16 @@ Blockly.Blocks['ds_get_node_attr'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.DS_GET_NODE_ATTR_NODE)   
+        .appendField(Blockly.Msg.DS_GET_NODE_ATTR_NODE)   
     this.appendValueInput('NODE')    
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.MIXLY_AIP_ATTR)
+        .appendField(Blockly.Msg.MIXLY_AIP_ATTR)
         .appendField(new Blockly.FieldTextInput('name'), 'TYPE')
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.DICTS_ADD_VALUE)
+        .appendField(Blockly.Msg.DICTS_ADD_VALUE)
     this.setOutput(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_GET_NODE_ATTR_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_GET_NODE_ATTR_TOOLTIP);
   }
 }
 
@@ -242,17 +242,17 @@ Blockly.Blocks['ds_set_node_attr'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.DS_SET_NODE_ATTR_NODE)   
+        .appendField(Blockly.Msg.DS_SET_NODE_ATTR_NODE)   
     this.appendValueInput('NODE')    
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.MIXLY_AIP_ATTR)
+        .appendField(Blockly.Msg.MIXLY_AIP_ATTR)
         .appendField(new Blockly.FieldTextInput('name'), 'TYPE')
     this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.Lang.DS_SET_NODE_ATTR_SET)
+        .appendField(Blockly.Msg.DS_SET_NODE_ATTR_SET)
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_SET_NODE_ATTR_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_SET_NODE_ATTR_TOOLTIP);
   }
 }
 
@@ -260,20 +260,20 @@ Blockly.Blocks['ds_add_node_by_name'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_HEAD_NODE)   
+        .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     var pos =
-        [[Blockly.Msg.Lang.DS_ADD_NODE_BEFORE, 'before'],[Blockly.Msg.Lang.DS_ADD_NODE_AFTER, 'after']];    
+        [[Blockly.Msg.DS_ADD_NODE_BEFORE, 'before'],[Blockly.Msg.DS_ADD_NODE_AFTER, 'after']];    
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_LINKEDLIST)
+        .appendField(Blockly.Msg.DS_ADD_NODE_LINKEDLIST)
     this.appendValueInput('NODE2')
-        .appendField(Blockly.Msg.Lang.DS_SET_NODE_ATTR_NODE)
+        .appendField(Blockly.Msg.DS_SET_NODE_ATTR_NODE)
     this.appendValueInput('NODE3')
         .appendField(new Blockly.FieldDropdown(pos), 'DIR')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE)    
+        .appendField(Blockly.Msg.DS_ADD_NODE)    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_ADD_NODE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_ADD_NODE_TOOLTIP);
   }
 }
 
@@ -281,25 +281,25 @@ Blockly.Blocks['ds_add_node_by_attr'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_HEAD_NODE)   
+        .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     var pos =
-        [[Blockly.Msg.Lang.DS_ADD_NODE_BEFORE, 'before'],[Blockly.Msg.Lang.DS_ADD_NODE_AFTER, 'after']];    
+        [[Blockly.Msg.DS_ADD_NODE_BEFORE, 'before'],[Blockly.Msg.DS_ADD_NODE_AFTER, 'after']];    
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_LINKEDLIST)
+        .appendField(Blockly.Msg.DS_ADD_NODE_LINKEDLIST)
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.DS_CREATE_LINKEDLIST_ITEM_TITLE)
+        .appendField(Blockly.Msg.DS_CREATE_LINKEDLIST_ITEM_TITLE)
         .appendField(new Blockly.FieldTextInput('name'), 'TYPE')
     this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.Lang.MIXLY_AS)    
+        .appendField(Blockly.Msg.MIXLY_AS)    
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_ATTR)    
+        .appendField(Blockly.Msg.DS_ADD_NODE_ATTR)    
     this.appendValueInput('NODE3')
         .appendField(new Blockly.FieldDropdown(pos), 'DIR')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE)    
+        .appendField(Blockly.Msg.DS_ADD_NODE)    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_ADD_NODE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_ADD_NODE_TOOLTIP);
   }
 }
 
@@ -307,16 +307,16 @@ Blockly.Blocks['ds_del_node_by_name'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_HEAD_NODE)   
+        .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_LINKEDLIST)
+        .appendField(Blockly.Msg.DS_ADD_NODE_LINKEDLIST)
     this.appendValueInput('NODE2')
-        .appendField(Blockly.Msg.Lang.DS_DEL_NODE_NAME)
+        .appendField(Blockly.Msg.DS_DEL_NODE_NAME)
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_DEL_NODE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_DEL_NODE_TOOLTIP);
   }
 }
 
@@ -324,21 +324,21 @@ Blockly.Blocks['ds_del_node_by_attr'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_HEAD_NODE)   
+        .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_LINKEDLIST)
+        .appendField(Blockly.Msg.DS_ADD_NODE_LINKEDLIST)
     this.appendDummyInput("")
-        .appendField(Blockly.Msg.Lang.DS_DEL_NODE_ATTR)
+        .appendField(Blockly.Msg.DS_DEL_NODE_ATTR)
         .appendField(new Blockly.FieldTextInput('name'), 'TYPE')
     this.appendValueInput('VAR')
-        .appendField(Blockly.Msg.Lang.MIXLY_AS)    
+        .appendField(Blockly.Msg.MIXLY_AS)    
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_ATTR)    
+        .appendField(Blockly.Msg.DS_ADD_NODE_ATTR)    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_DEL_NODE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_DEL_NODE_TOOLTIP);
   }
 }
 
@@ -346,15 +346,15 @@ Blockly.Blocks['ds_reverse_linkedlist'] = {
   init: function() {
     this.setColour(Blockly.Msg['DS_HUE']);    
     this.appendValueInput('NODE')
-        .appendField(Blockly.Msg.Lang.DS_ADD_NODE_HEAD_NODE)   
+        .appendField(Blockly.Msg.DS_ADD_NODE_HEAD_NODE)   
     
     this.appendDummyInput("")          
-        .appendField(Blockly.Msg.Lang.DS_REVERSE_LINKEDLIST)
+        .appendField(Blockly.Msg.DS_REVERSE_LINKEDLIST)
     this.appendValueInput('NODE2')
-        .appendField(Blockly.Msg.Lang.DS_REVERSE_LINKEDLIST_NEW_HEAD)
+        .appendField(Blockly.Msg.DS_REVERSE_LINKEDLIST_NEW_HEAD)
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-  this.setTooltip(Blockly.Msg.Lang.DS_DEL_NODE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.DS_DEL_NODE_TOOLTIP);
   }
 }

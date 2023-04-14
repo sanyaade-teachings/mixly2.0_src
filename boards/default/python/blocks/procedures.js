@@ -494,7 +494,7 @@ Blockly.Blocks['procedures_mutatorarg'] = {
     field.showEditor_ = newShowEditorFn;
 
     this.appendDummyInput()
-        .appendField(Blockly.Msg.Lang.PROCEDURES_BEFORE_PARAMS)
+        .appendField(Blockly.Msg.PROCEDURES_BEFORE_PARAMS)
         .appendField(field, 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -1087,13 +1087,13 @@ Blockly.Blocks['procedures_return'] = {
     this.setStyle('procedure_blocks');
     // this.appendValueInput('CONDITION')
     //     .setCheck(Boolean)
-    //     .appendField(Blockly.Msg.Lang.CONTROLS_IF_MSG_IF);
+    //     .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendValueInput('VALUE')
-        .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+        .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.Lang.PROCEDURES_IFRETURN_TOOLTIP);
+    this.setTooltip(Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP);
     this.hasReturnValue_ = true;
   },
   /**
@@ -1117,7 +1117,7 @@ Blockly.Blocks['procedures_return'] = {
     if (!this.hasReturnValue_) {
       this.removeInput('VALUE');
       this.appendDummyInput('VALUE')
-        .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+        .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
     }
   },
   /**
@@ -1142,18 +1142,18 @@ Blockly.Blocks['procedures_return'] = {
       if (block.type == 'procedures_defnoreturn' && this.hasReturnValue_) {
         this.removeInput('VALUE');
         this.appendDummyInput('VALUE')
-          .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+          .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
         this.hasReturnValue_ = false;
       } else if (block.type == 'procedures_defreturn' &&
                  !this.hasReturnValue_) {
         this.removeInput('VALUE');
         this.appendValueInput('VALUE')
-          .appendField(Blockly.Msg.Lang.PROCEDURES_DEFRETURN_RETURN);
+          .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
         this.hasReturnValue_ = true;
       }
       this.setWarningText(null);
     } else {
-      this.setWarningText(Blockly.Msg.Lang.PROCEDURES_IFRETURN_WARNING);
+      this.setWarningText(Blockly.Msg.PROCEDURES_IFRETURN_WARNING);
     }
   },
   /**

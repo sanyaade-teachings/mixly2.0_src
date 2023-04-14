@@ -179,17 +179,17 @@ Blockly.Blocks.actuator_ms32006_dcmotor = {
 		.appendField("直流电机")
 		.setCheck("var");
   this.appendDummyInput()
-	  .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Direction)
+	  .appendField(Blockly.Msg.MIXLY_MICROBIT_Direction)
 			  .appendField(new Blockly.FieldDropdown([
-		[Blockly.Msg.Lang.CLOCKWISE, "ms32006.MOT_CW"],
-		[Blockly.Msg.Lang.ANTI_CLOCKWISE, "ms32006.MOT_CCW"],
-		[Blockly.Msg.Lang.MOTOR_N, "ms32006.MOT_N"],
-		[Blockly.Msg.Lang.MOTOR_P, "ms32006.MOT_P"]
+		[Blockly.Msg.CLOCKWISE, "ms32006.MOT_CW"],
+		[Blockly.Msg.ANTI_CLOCKWISE, "ms32006.MOT_CCW"],
+		[Blockly.Msg.MOTOR_N, "ms32006.MOT_N"],
+		[Blockly.Msg.MOTOR_P, "ms32006.MOT_P"]
 		]), "direction");
   this.appendValueInput('speed')
 	  .setCheck(Number)
 	  .setAlign(Blockly.ALIGN_RIGHT)
-	  .appendField(Blockly.Msg.Lang.MIXLY_STEPPER_SET_SPEED);
+	  .appendField(Blockly.Msg.MIXLY_STEPPER_SET_SPEED);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
@@ -209,10 +209,10 @@ Blockly.Blocks.actuator_ms32006_stepper = {
 		.appendField("选择")
 		.appendField(new Blockly.FieldDropdown([['A', 'ms32006.MOT_A'], ['B', 'ms32006.MOT_B']]), 'mode');		
   this.appendDummyInput()
-	  .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_Direction)
+	  .appendField(Blockly.Msg.MIXLY_MICROBIT_Direction)
 			  .appendField(new Blockly.FieldDropdown([
-		[Blockly.Msg.Lang.CLOCKWISE, "ms32006.MOT_CW"],
-		[Blockly.Msg.Lang.ANTI_CLOCKWISE, "ms32006.MOT_CCW"]
+		[Blockly.Msg.CLOCKWISE, "ms32006.MOT_CW"],
+		[Blockly.Msg.ANTI_CLOCKWISE, "ms32006.MOT_CCW"]
 		]), "direction");
   this.appendValueInput('speed')
 	  .setCheck(Number)

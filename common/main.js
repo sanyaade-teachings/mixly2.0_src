@@ -145,17 +145,21 @@ goog.DEPENDENCIES = [
         "provide": ['AvrUploader'],
         "require": []
     }, {
-        "path": '/../../msg/blockly/zh-hans.js',
-        "provide": ['Blockly.Msg.ZhHans'],
+        "path": '/../../msg/blockly/lang.js',
+        "provide": ['Blockly.Lang'],
         "require": ['Blockly']
+    }, {
+        "path": '/../../msg/blockly/zh-hans.js',
+        "provide": ['Blockly.Lang.ZhHans'],
+        "require": ['Blockly.Lang']
     }, {
         "path": '/../../msg/blockly/zh-hant.js',
-        "provide": ['Blockly.Msg.ZhHant'],
-        "require": ['Blockly']
+        "provide": ['Blockly.Lang.ZhHant'],
+        "require": ['Blockly.Lang']
     }, {
         "path": '/../../msg/blockly/en.js',
-        "provide": ['Blockly.Msg.En'],
-        "require": ['Blockly']
+        "provide": ['Blockly.Lang.En'],
+        "require": ['Blockly.Lang']
     }
 ];
 

@@ -1,12 +1,10 @@
 (() => {
 
-
-// This file was automatically generated.  Do not modify.
 'use strict';
-goog.require('Blockly.Msg');
-goog.provide('Blockly.Msg.ZhHant');
+goog.require('Blockly.Lang');
+goog.provide('Blockly.Lang.ZhHant');
 
-const { ZhHant } = Blockly.Msg;
+const { ZhHant } = Blockly.Lang;
 ZhHant.MSG = {
     catInOut: "輸入/輸出",
     catControl: "控制",

@@ -173,7 +173,6 @@
             "Backpack",
             "ContentHighlight",
             "ZoomToFitControl",
-            "LexicalVariables",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.ExampleExt",
@@ -322,9 +321,10 @@
             "Mixly.MJSON",
             "Mixly.Config",
             "Mixly.Env",
-            "Blockly.Msg.ZhHans",
-            "Blockly.Msg.ZhHant",
-            "Blockly.Msg.En"
+            "Blockly",
+            "Blockly.Lang.ZhHans",
+            "Blockly.Lang.ZhHant",
+            "Blockly.Lang.En"
         ],
         "provide": [
             "Mixly.Msg"

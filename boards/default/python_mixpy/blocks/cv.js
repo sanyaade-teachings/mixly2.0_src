@@ -11,7 +11,7 @@ Blockly.Msg['CV_HUE'] = "f0a559";
      this.setColour(Blockly.Msg['CV_HUE']);
      this.appendValueInput("FILE")
          .setCheck(String)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_IMREAD);
+         .appendField(Blockly.Msg.MIXLY_CV_IMREAD);
      this.setInputsInline(true);
      this.setPreviousStatement(false); 
      this.setNextStatement(false);
@@ -23,10 +23,10 @@ Blockly.Blocks['cv_show_image'] = {
     init:function(){
         this.setColour(Blockly.Msg['CV_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.Lang.OLED_BITMAP);
+            .appendField(Blockly.Msg.OLED_BITMAP);
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.MIXLY_AipNlp_Topic_Title);
+            .appendField(Blockly.Msg.MIXLY_AipNlp_Topic_Title);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -37,10 +37,10 @@ Blockly.Blocks['cv_write_image'] = {
     init:function(){
         this.setColour(Blockly.Msg['CV_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_IMWRITE);
+            .appendField(Blockly.Msg.MIXLY_CV_IMWRITE);
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.HTML_NAME);
+            .appendField(Blockly.Msg.HTML_NAME);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -52,13 +52,13 @@ Blockly.Blocks['cv_waitkey'] = {
         this.setColour(Blockly.Msg['CV_HUE']);
         this.appendValueInput('data')
             .setCheck(Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_DELAY);
+            .appendField(Blockly.Msg.MIXLY_DELAY);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_MILLIS+Blockly.Msg.Lang.MIXLY_CV_OR_PRESS)    
+            .appendField(Blockly.Msg.MIXLY_MILLIS+Blockly.Msg.MIXLY_CV_OR_PRESS)    
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_CV_WAITKEY_TOOLTIP)
+        this.setTooltip(Blockly.Msg.MIXLY_CV_WAITKEY_TOOLTIP)
     }
 }
 
@@ -66,7 +66,7 @@ Blockly.Blocks['cv_destroy_all'] = {
     init:function(){
         this.setColour(Blockly.Msg['CV_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_DESTROY_ALL)    
+            .appendField(Blockly.Msg.MIXLY_CV_DESTROY_ALL)    
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -77,34 +77,34 @@ Blockly.Blocks['cv_line_rect'] = {
     init:function(){
         this.setColour(Blockly.Msg['CV_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_IMAGE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_IMAGE);
         var line_rect =
-        [[Blockly.Msg.Lang.MIXLY_CV_RECT, 'rectangle'],[Blockly.Msg.Lang.MIXLY_CV_LINE, 'line']];  
+        [[Blockly.Msg.MIXLY_CV_RECT, 'rectangle'],[Blockly.Msg.MIXLY_CV_LINE, 'line']];  
 
         this.appendValueInput('x1')
             .setCheck(Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_DISPLAY_DRAW)
+            .appendField(Blockly.Msg.MIXLY_DISPLAY_DRAW)
             .appendField(new Blockly.FieldDropdown(line_rect), 'DIR')
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_BEGIN+'(x1')
+            .appendField(Blockly.Msg.MIXLY_CV_DRAWLINE_BEGIN+'(x1')
         this.appendValueInput('y1')
             .setCheck(Number)
             .appendField(',y1');
         this.appendValueInput('x2')
             .setCheck(Number)
-            .appendField(') '+ Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_END +'(x2');
+            .appendField(') '+ Blockly.Msg.MIXLY_CV_DRAWLINE_END +'(x2');
         this.appendValueInput('y2')
             .setCheck(Number)
             .appendField(',y2');   
         this.appendDummyInput()
-            .appendField(') ' + Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_COLOR)
+            .appendField(') ' + Blockly.Msg.MIXLY_CV_DRAWLINE_COLOR)
             .appendField(new Blockly.FieldColour('#ff0000'), 'FIELDNAME');             
         this.appendValueInput('thick')
             .setCheck(Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_THICKNESS);  
+            .appendField(Blockly.Msg.MIXLY_CV_DRAWLINE_THICKNESS);  
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_RECT_TOOLTIP)
+        this.setTooltip(Blockly.Msg.MIXLY_CV_DRAWLINE_RECT_TOOLTIP)
     }
 }
 
@@ -112,34 +112,34 @@ Blockly.Blocks['cv_text'] = {
     init:function(){
         this.setColour(Blockly.Msg['CV_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_IMAGE);
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_IMAGE);
         var font =
         [['SIMPLEX', 'SIMPLEX'],['PLAIN', 'PLAIN'],['DUPLEX', 'DUPLEX'],['COMPLEX', 'COMPLEX'],['COMPLEX_SMALL', 'COMPLEX_SMALL'],['TRIPLEX', 'TRIPLEX'],['SCRIPT_SIMPLEX', 'SCRIPT_SIMPLEX'],['SCRIPT_COMPLEX', 'SCRIPT_COMPLEX'],];  
         this.appendValueInput('data')
             .setCheck(String)
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_DRAWTEXT);
+            .appendField(Blockly.Msg.MIXLY_CV_DRAWTEXT);
         this.appendValueInput('x1')
             .setCheck(Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_BEGIN+'(x1')
+            .appendField(Blockly.Msg.MIXLY_CV_DRAWLINE_BEGIN+'(x1')
         this.appendValueInput('y1')
             .setCheck(Number)
             .appendField(',y1');
         this.appendDummyInput()
-            .appendField(') '+ Blockly.Msg.Lang.MIXLY_TURTLE_WRITE_FONT_NAME)
+            .appendField(') '+ Blockly.Msg.MIXLY_TURTLE_WRITE_FONT_NAME)
             .appendField(new Blockly.FieldDropdown(font), 'font');
         this.appendValueInput('size')
             .setCheck(Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_TURTLE_WRITE_FONT_NUM);   
+            .appendField(Blockly.Msg.MIXLY_TURTLE_WRITE_FONT_NUM);   
         this.appendDummyInput()
-            .appendField(') ' + Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_COLOR)
+            .appendField(') ' + Blockly.Msg.MIXLY_CV_DRAWLINE_COLOR)
             .appendField(new Blockly.FieldColour('#ff0000'), 'FIELDNAME');             
         this.appendValueInput('thick')
             .setCheck(Number)
-            .appendField(Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_THICKNESS);  
+            .appendField(Blockly.Msg.MIXLY_CV_DRAWLINE_THICKNESS);  
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_CV_DRAWLINE_RECT_TOOLTIP)
+        this.setTooltip(Blockly.Msg.MIXLY_CV_DRAWLINE_RECT_TOOLTIP)
     }
 }
 
@@ -148,7 +148,7 @@ Blockly.Blocks['cv_face_classifier'] = {
      this.setColour(Blockly.Msg['CV_HUE']);
      this.appendValueInput("FILE")
          .setCheck(String)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_CLASSIFIER);
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_CLASSIFIER);
      this.setInputsInline(true);
      this.setPreviousStatement(false); 
      this.setNextStatement(false);
@@ -160,15 +160,15 @@ Blockly.Blocks['cv_face_detect'] = {
    init: function() {
      this.setColour(Blockly.Msg['CV_HUE']);
      this.appendValueInput("FILE")
-         .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_IMAGE);
+         .appendField(Blockly.Msg.MIXLY_MICROBIT_IMAGE);
      this.appendValueInput("FACE")
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT);    
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT);    
      this.appendValueInput('SCALE')
          .setCheck(Number)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT_SCALE)
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT_SCALE)
      this.appendValueInput('NEIGHBOR')
          .setCheck(Number)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT_NEIGHBOR)              
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT_NEIGHBOR)              
      this.setInputsInline(true);
      this.setPreviousStatement(false); 
      this.setNextStatement(false);
@@ -180,25 +180,25 @@ Blockly.Blocks['cv_face_detect'] = {
    init: function() {
      this.setColour(Blockly.Msg['CV_HUE']);
      this.appendValueInput("FILE")
-         .appendField(Blockly.Msg.Lang.MIXLY_MICROBIT_IMAGE);
+         .appendField(Blockly.Msg.MIXLY_MICROBIT_IMAGE);
      this.appendValueInput("FACE")
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT);    
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT);    
      this.appendValueInput('SCALE')
          .setCheck(Number)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT_SCALE)
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT_SCALE)
      this.appendValueInput('NEIGHBOR')
          .setCheck(Number)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT_NEIGHBOR)
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT_NEIGHBOR)
      this.appendValueInput('x1')
          .setCheck(Number)
-         .appendField(Blockly.Msg.Lang.MIXLY_CV_FACE_DETECT_RANGE)
-         .appendField(Blockly.Msg.Lang.blockpy_TUPLE_MIN)
+         .appendField(Blockly.Msg.MIXLY_CV_FACE_DETECT_RANGE)
+         .appendField(Blockly.Msg.blockpy_TUPLE_MIN)
      this.appendValueInput('y1')
          .setCheck(Number)
          .appendField('×')
      this.appendValueInput('x2')
          .setCheck(Number)
-         .appendField(Blockly.Msg.Lang.blockpy_TUPLE_MAX)
+         .appendField(Blockly.Msg.blockpy_TUPLE_MAX)
      this.appendValueInput('y2')
          .setCheck(Number)
          .appendField('×')                         

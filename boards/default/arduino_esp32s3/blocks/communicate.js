@@ -12,21 +12,21 @@ Blockly.Blocks['serialBT_Init'] = {
   init: function() {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendValueInput("CONTENT", String)
-    .appendField(Blockly.Msg.Lang.MIXLY_SERIALBT_INIT)
+    .appendField(Blockly.Msg.MIXLY_SERIALBT_INIT)
     .setCheck(String);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_SERIAL_BEGIN);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SERIAL_BEGIN);
   }
 };
 Blockly.Blocks['serialBT_available'] = {
   init: function() {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.MIXLY_SERIALBT_AVAILABLE);
+    .appendField(Blockly.Msg.MIXLY_SERIALBT_AVAILABLE);
     this.setOutput(true, Boolean);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
   }
 };
 
@@ -34,9 +34,9 @@ Blockly.Blocks['serialBT_read'] = {
   init: function() {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendDummyInput()
-    .appendField(Blockly.Msg.Lang.MIXLY_SERIALBT_READ);
+    .appendField(Blockly.Msg.MIXLY_SERIALBT_READ);
     this.setOutput(true, Boolean);
-    this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
     
   }
 };
@@ -44,10 +44,10 @@ Blockly.Blocks['serialBT_write'] = {
   init: function () {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendValueInput("CONTENT", String)
-    .appendField(Blockly.Msg.Lang.MIXLY_SERIALBT_WRITE);
+    .appendField(Blockly.Msg.MIXLY_SERIALBT_WRITE);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip(Blockly.Msg.Lang.TEXT_WRITE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.TEXT_WRITE_TOOLTIP);
   }
 };
 

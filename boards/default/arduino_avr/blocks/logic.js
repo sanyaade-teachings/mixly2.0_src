@@ -28,7 +28,7 @@ Blockly.Blocks['logic_compare'] = {
             ['>', 'GT'],
             ['\u2265', 'GTE']
         ];
-        //this.setHelpUrl(Blockly.Msg.Lang.LOGIC_COMPARE_HELPURL);
+        //this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
         this.setColour(Blockly.Msg['LOGIC_HUE']);
         this.setOutput(true, Boolean);
         this.appendValueInput('A');
@@ -40,12 +40,12 @@ Blockly.Blocks['logic_compare'] = {
         this.setTooltip(function () {
             var op = thisBlock.getFieldValue('OP');
             var TOOLTIPS = {
-                'EQ': Blockly.Msg.Lang.LOGIC_COMPARE_TOOLTIP_EQ,
-                'NEQ': Blockly.Msg.Lang.LOGIC_COMPARE_TOOLTIP_NEQ,
-                'LT': Blockly.Msg.Lang.LOGIC_COMPARE_TOOLTIP_LT,
-                'LTE': Blockly.Msg.Lang.LOGIC_COMPARE_TOOLTIP_LTE,
-                'GT': Blockly.Msg.Lang.LOGIC_COMPARE_TOOLTIP_GT,
-                'GTE': Blockly.Msg.Lang.LOGIC_COMPARE_TOOLTIP_GTE
+                'EQ': Blockly.Msg.LOGIC_COMPARE_TOOLTIP_EQ,
+                'NEQ': Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ,
+                'LT': Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LT,
+                'LTE': Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LTE,
+                'GT': Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GT,
+                'GTE': Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GTE
             };
             return TOOLTIPS[op];
         });
@@ -60,9 +60,9 @@ Blockly.Blocks['logic_operation'] = {
      */
     init: function () {
         var OPERATORS =
-            [[Blockly.Msg.Lang.LOGIC_OPERATION_AND, 'AND'],
-            [Blockly.Msg.Lang.LOGIC_OPERATION_OR, 'OR']];
-        //this.setHelpUrl(Blockly.Msg.Lang.LOGIC_OPERATION_HELPURL);
+            [[Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
+            [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
+        //this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
         this.setColour(Blockly.Msg['LOGIC_HUE']);
         this.setOutput(true, Boolean);
         this.appendValueInput('A')
@@ -76,8 +76,8 @@ Blockly.Blocks['logic_operation'] = {
         this.setTooltip(function () {
             var op = thisBlock.getFieldValue('OP');
             var TOOLTIPS = {
-                'AND': Blockly.Msg.Lang.LOGIC_OPERATION_TOOLTIP_AND,
-                'OR': Blockly.Msg.Lang.LOGIC_OPERATION_TOOLTIP_OR
+                'AND': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND,
+                'OR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR
             };
             return TOOLTIPS[op];
         });
@@ -90,16 +90,16 @@ Blockly.Blocks['logic_negate'] = {
      * @this Blockly.Block
      */
     init: function () {
-        //this.setHelpUrl(Blockly.Msg.Lang.LOGIC_NEGATE_HELPURL);
+        //this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
         this.setColour(Blockly.Msg['LOGIC_HUE']);
         this.setOutput(true, Boolean);
         this.appendValueInput('BOOL')
             .setCheck([Number, Boolean])
-            .appendField(Blockly.Msg.Lang.LOGIC_NEGATE_TITLE);
-        //this.interpolateMsg(Blockly.Msg.Lang.LOGIC_NEGATE_TITLE,
+            .appendField(Blockly.Msg.LOGIC_NEGATE_TITLE);
+        //this.interpolateMsg(Blockly.Msg.LOGIC_NEGATE_TITLE,
         //                  ['BOOL', Boolean, Blockly.ALIGN_RIGHT],
         //                Blockly.ALIGN_RIGHT);
-        this.setTooltip(Blockly.Msg.Lang.LOGIC_NEGATE_TOOLTIP);
+        this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
     }
 };
 
@@ -110,14 +110,14 @@ Blockly.Blocks['logic_boolean'] = {
      */
     init: function () {
         var BOOLEANS =
-            [[Blockly.Msg.Lang.LOGIC_BOOLEAN_TRUE, 'TRUE'],
-            [Blockly.Msg.Lang.LOGIC_BOOLEAN_FALSE, 'FALSE']];
-        //this.setHelpUrl(Blockly.Msg.Lang.LOGIC_BOOLEAN_HELPURL);
+            [[Blockly.Msg.LOGIC_BOOLEAN_TRUE, 'TRUE'],
+            [Blockly.Msg.LOGIC_BOOLEAN_FALSE, 'FALSE']];
+        //this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL);
         this.setColour(Blockly.Msg['LOGIC_HUE']);
         this.setOutput(true, Boolean);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
-        this.setTooltip(Blockly.Msg.Lang.LOGIC_BOOLEAN_TOOLTIP);
+        this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
     }
 };
 
@@ -127,12 +127,12 @@ Blockly.Blocks['logic_null'] = {
      * @this Blockly.Block
      */
     init: function () {
-        //this.setHelpUrl(Blockly.Msg.Lang.LOGIC_NULL_HELPURL);
+        //this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL);
         this.setColour(Blockly.Msg['LOGIC_HUE']);
         this.setOutput(true);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.Lang.LOGIC_NULL);
-        this.setTooltip(Blockly.Msg.Lang.LOGIC_NULL_TOOLTIP);
+            .appendField(Blockly.Msg.LOGIC_NULL);
+        this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP);
     }
 };
 
@@ -142,11 +142,11 @@ Blockly.Blocks['logic_true_or_false'] = {
         this.setColour(Blockly.Msg['LOGIC_HUE']);
         this.appendValueInput('A');
         this.appendValueInput('B')
-            .appendField(Blockly.Msg.Lang.LOGIC_TERNARY_IF_TRUE);
+            .appendField(Blockly.Msg.LOGIC_TERNARY_IF_TRUE);
         this.appendValueInput('C')
-            .appendField(Blockly.Msg.Lang.LOGIC_TERNARY_IF_FALSE);
+            .appendField(Blockly.Msg.LOGIC_TERNARY_IF_FALSE);
         this.setOutput(true);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.Lang.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LOGIT_TRUEORFALSE);
     }
 };

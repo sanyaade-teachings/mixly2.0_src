@@ -186,31 +186,23 @@ class Matrix5x5(uframebuf.FrameBuffer_Ascall):
 	HEART = b'\n\x1f\x1f\x0e\x04'
 	HEART_SMALL = b'\x00\n\x0e\x04\x00'
 	HAPPY = b'\x00\n\x00\x11\x0e'
-	SMILE =  b'\x00\x00\x00\x11\x0e'
 	SAD = b'\x00\n\x00\x0e\x11'
-	CONFUSED = b'\x00\n\x00\n\x15'
-	ANGRY = b'\x11\n\x00\x1f\x15'
-	ASLEEP = b'\x00\x1b\x00\x0e\x00'
-	SURPRISED = b'\n\x00\x04\n\x04'
+	SMILE =  b'\x00\x00\x00\x11\x0e'
 	SILLY = b'\x11\x00\x1f\x14\x1c'
 	FABULOUS = b'\x1f\x1b\x00\n\x0e'
-	MEH = b'\n\x00\x08\x04\x02'
-	YES = b'\x00\x10\x08\x05\x02'
+	SURPRISED = b'\n\x00\x04\n\x04'
+	ASLEEP = b'\x00\x1b\x00\x0e\x00'
+	ANGRY = b'\x11\n\x00\x1f\x15'		
+	CONFUSED = b'\x00\n\x00\n\x15'
 	NO = b'\x11\n\x04\n\x11'
-	TRIANGLE = b'\x00\x04\n\x1f\x00'
-	TRIANGLE_LEFT = b'\x01\x03\x05\t\x1f'
-	CHESSBOARD = b'\n\x15\n\x15\n'
-	DIAMOND = b'\x04\n\x11\n\x04' 
-	DIAMOND_SMALL = b'\x00\x04\n\x04\x00'
-	SQUARE = b'\x1f\x11\x11\x11\x1f'
-	SQUARE_SMALL = b'\x00\x0e\n\x0e\x00'
-	RABBIT = b'\x05\x05\x0f\x0b\x0f'
-	COW = b'\x11\x11\x1f\x0e\x04'
-	MUSIC_CROTCHET = b'\x04\x04\x04\x07\x07'
-	MUSIC_QUAVER = b'\x04\x0c\x14\x07\x07'
-	MUSIC_QUAVERS = b'\x1e\x12\x12\x1b\x1b'
-	PITCHFORK = b'\x15\x15\x1f\x04\x04'
-	XMAS = b'\x04\x0e\x04\x0e\x1f'
+	YES = b'\x00\x10\x08\x05\x02'
+	LEFT_ARROW = b'\x04\x02\x1f\x02\x04'
+	RIGHT_ARROW = b'\x04\x08\x1f\x08\x04'
+	DRESS = b'\n\x1b\x0e\x0e\x1f'
+	TRANSFORMERS = b'\x04\x0e\x15\n\x11'
+	SCISSORS = b'\x13\x0b\x04\x0b\x13'
+	EXIT = b'\x04\x0e\x15\x0b\x10'
+	TREE = b'\x04\x0e\x1f\x04\x04'
 	PACMAN = b'\x1e\x0b\x07\x0f\x1e'
 	TARGET = b'\x04\x0e\x1b\x0e\x04'
 	TSHIRT = b'\x1b\x1f\x0e\x0e\x0e'
@@ -221,12 +213,25 @@ class Matrix5x5(uframebuf.FrameBuffer_Ascall):
 	BUTTERFLY = b'\x1b\x1f\x04\x1f\x1b'
 	STICKFIGURE = b'\x04\x1f\x04\n\x11'
 	GHOST = b'\x1f\x15\x1f\x1f\x15'
-	SWORD = b'\x04\x04\x04\x0e\x04' 
-	GIRAFFE = b'\x03\x02\x02\x0e\n'
-	SKULL = b'\x0e\x15\x1f\x0e\x0e'
-	UMBRELLA = b'\x0e\x1f\x04\x05\x06'
+	PITCHFORK = b'\x15\x15\x1f\x04\x04'
+	MUSIC_QUAVERS = b'\x1e\x12\x12\x1b\x1b'	
+	MUSIC_QUAVER = b'\x04\x0c\x14\x07\x07'
+	MUSIC_CROTCHET = b'\x04\x04\x04\x07\x07'
+	COW = b'\x11\x11\x1f\x0e\x04'
+	RABBIT = b'\x05\x05\x0f\x0b\x0f'
+	SQUARE_SMALL = b'\x00\x0e\n\x0e\x00'
+	SQUARE = b'\x1f\x11\x11\x11\x1f'
+	DIAMOND_SMALL = b'\x00\x04\n\x04\x00'
+	DIAMOND = b'\x04\n\x11\n\x04' 
+	CHESSBOARD = b'\n\x15\n\x15\n'
+	TRIANGLE_LEFT = b'\x01\x03\x05\t\x1f'				
+	TRIANGLE = b'\x00\x04\n\x1f\x00'
 	SNAKE = b'\x03\x1b\n\x0e\x00'
-	SCISSORS = b'\x13\x0b\x04\x0b\x13'
+	UMBRELLA = b'\x0e\x1f\x04\x05\x06'
+	SKULL = b'\x0e\x15\x1f\x0e\x0e'	
+	GIRAFFE = b'\x03\x02\x02\x0e\n'
+	SWORD = b'\x04\x04\x04\x0e\x04' 
+
 
 	def __init__(self, i2c_bus, addr=0x03, brightness=0.5):
 		self._i2c = i2c_bus
@@ -259,10 +264,10 @@ class Matrix5x5(uframebuf.FrameBuffer_Ascall):
 	def show(self):
 		'''Refresh the display and show the changes'''
 		buf = bytearray(4)
-		buf[0] = self._buffer[4] >> 4
-		buf[1] = self._buffer[3] >> 1 | self._buffer[4] << 4
-		buf[2] = self._buffer[1] >> 3 | self._buffer[2] << 2 | self._buffer[3] << 7
-		buf[3] = self._buffer[0] | self._buffer[1] << 5 
+		buf[0] = (self._buffer[4] & 0xF0) >> 4
+		buf[1] = (self._buffer[3] & 0x1E) >> 1 | (self._buffer[4] & 0x0F) << 4
+		buf[2] = (self._buffer[1] & 0x18) >> 3 | (self._buffer[2] & 0x1F) << 2 | (self._buffer[3] & 0x01) << 7
+		buf[3] = (self._buffer[0] & 0x1F) | (self._buffer[1] & 0x07) << 5 
 		self._i2c.write_device(self._addr, 0xA1, buf)
 
 	def clear(self):

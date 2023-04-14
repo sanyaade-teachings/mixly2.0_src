@@ -1824,8 +1824,8 @@
       <block type="mixgome_display_font" m-show='micropython:esp32:mixgo_pe'></block>
       <block type="mixgome_display_image_create" m-show='micropython:esp32:mixgo_pe'></block>
       <block type="mixgo_display_image_create_new" m-show='micropython:esp32:mixgo'></block>
-      <block type="display_image_builtins"></block>
-
+      <block type="display_image_builtins" m-hide='micropython:esp32:mixgo_pe'></block>
+      <block type="display_image_builtins_all" m-show='micropython:esp32:mixgo_pe'></block>
       <block type="image_arithmetic">
         <value name="A">
           <shadow type="pins_builtinimg"></shadow>

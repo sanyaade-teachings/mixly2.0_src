@@ -1,19 +1,39 @@
 # DHT11/DHT22 driver for MicroPython
 # MIT license; Copyright (c) 2016 Damien P. George
 
+from time import sleep 
 from esp import dht_readinto
+from machine import Pin
 
 class DHTBase:
+    __species = {}
+    __first_init = True
+    def __new__(cls, pin, *args, **kwargs):
+        if pin not in cls.__species.keys():
+            cls.__first_init = True
+            cls.__species[pin] = object.__new__(cls)
+        return cls.__species[pin]
+
     def __init__(self, pin):
-        self.pin = pin
-        self.buf = bytearray(5)
+        if self.__first_init:
+            self.__first_init = False
+            self.pin = Pin(pin)
+            self.buf = bytearray(5)
+            self.err = 0
 
-    def measure(self):
-        buf = self.buf
-        dht_readinto(self.pin, buf)
-        if (buf[0] + buf[1] + buf[2] + buf[3]) & 0xFF != buf[4]:
-            raise Exception("checksum error")
-
+    def measure(self): 
+        buf = bytearray(5)
+        try:
+            dht_readinto(self.pin, buf)
+            if (buf[0] + buf[1] + buf[2] + buf[3]) & 0xFF == buf[4]:
+                self.buf = buf 
+                self.err = 0
+        except:
+            if self.err > 10:
+                raise AttributeError("DHTx operation error")
+            self.err += 1
+            sleep(0.5)
+            return
 
 class DHT11(DHTBase):
     def humidity(self):
@@ -23,7 +43,6 @@ class DHT11(DHTBase):
     def temperature(self):
         self.measure()
         return self.buf[2]
-
 
 class DHT22(DHTBase):
     def humidity(self):

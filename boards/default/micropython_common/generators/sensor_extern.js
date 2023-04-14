@@ -328,7 +328,12 @@ Blockly.Python.sensor_use_spi_init=function(){
       var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
       Blockly.Python.definitions_['import_'+version] = 'import '+version;    
       Blockly.Python.definitions_['import_ws_lora'] = 'import ws_lora';
+      if (version=='mixgo_pe'){
+        var code = v + ' = ws_lora.Weather('+ sv + ','+ pv +')\n';
+      }
+      else{
       var code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c'+')\n';
+      }
     }
     return code;
 };
@@ -550,11 +555,10 @@ Blockly.Python.RTC_get_time = function () {
 
 Blockly.Python.sensor_dht11 = function () {
     Blockly.Python.definitions_['import_dhtx'] = 'import dhtx';
-    Blockly.Python.definitions_['import_machine'] = 'import machine';
     var sensor_type = this.getFieldValue('TYPE');
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var what = this.getFieldValue('WHAT');
-    var code ='dhtx.'+sensor_type+"(machine.Pin("+dropdown_pin+')).'+what+'()';
+    var code ='dhtx.'+sensor_type+"("+dropdown_pin+').'+what+'()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

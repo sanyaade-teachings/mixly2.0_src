@@ -4,12 +4,11 @@ HT16K33-framebuf
 Micropython	library for the HT16K33 Matrix16x8
 =======================================================
 
-#Preliminary composition	  	    20220620
+#Preliminary composition					20230411
 
-dahanzimin From the Mixly Team
+@dahanzimin From the Mixly Team
 """
-
-import framebuf
+import uframebuf
 from micropython import const
 
 _HT16K33_BLINK_CMD 			= const(0x80)
@@ -17,15 +16,14 @@ _HT16K33_BLINK_DISPLAYON 	= const(0x01)
 _HT16K33_CMD_BRIGHTNESS 	= const(0xE0)
 _HT16K33_OSCILATOR_ON 		= const(0x21)
 
-class HT16K33(framebuf.FrameBuffer):
-	def __init__(self, i2c, address=0x70, brightness=0.3):
+class HT16K33(uframebuf.FrameBuffer_Ascall):
+	def __init__(self, i2c, address=0x70, brightness=0.3, width=16, height=8):
 		self._i2c = i2c
 		self._address = address	
 		self._blink_rate=0
 		self._brightness=brightness
-		self._buffer = bytearray(16)	
-		super().__init__(self._buffer, 16, 8, framebuf.MONO_HMSB)	
-		
+		self._buffer = bytearray((width + 7) // 8 * height)	
+		super().__init__(self._buffer, width, height, uframebuf.MONO_HMSB)
 		self._write_cmd(_HT16K33_OSCILATOR_ON)
 		self.blink_rate(0)
 		self.set_brightness(brightness)
@@ -59,10 +57,3 @@ class HT16K33(framebuf.FrameBuffer):
 	def show(self):
 		"""Refresh the display and show the changes."""
 		self._i2c.writeto_mem(self._address, 0x00, self._buffer)
-		
-	def set_buffer(self, buffer):
-		for i in range(min(len(buffer),len(self._buffer))):
-			self._buffer[i] = self._buffer[i] | buffer[i]
-
-	def get_buffer(self):
-		return self._buffer	

@@ -410,7 +410,8 @@ Blockly.Python.tft_show_image_xy = function() {
 Blockly.Python.display_color_seclet = function() {
   var colour = this.getFieldValue('COLOR');
   var code = '0x' + colour.slice(1) +''
-  return [code, Blockly.Python.ORDER_ATOMIC];
+  var rgb565 = (code & 0xf80000) >>8 | (code & 0xfc00) >>5 | (code & 0xff) >>3
+  return ['0x'+rgb565.toString(16), Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.tft_show_image_or_string_delay = function() {

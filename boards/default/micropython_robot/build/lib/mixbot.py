@@ -7,7 +7,7 @@ Micropython library for the Mixbot-Onboard resources
 @dahanzimin From the Mixly Team
 """
 
-import time, gc, random, framebuf
+import time, gc, random, uframebuf
 from micropython import const
 from machine import Pin, SoftI2C, ADC, PWM, RTC
 
@@ -180,15 +180,67 @@ class FindLine(object):
 patrol = FindLine(onboard_i2c)
 
 '''4-LEDmatrix /i2c'''
-class Matrix5x5(framebuf.FrameBuffer):
-	def __init__(self, i2c_bus, addr=0x03, brightness=0.3):
+class Matrix5x5(uframebuf.FrameBuffer_Ascall):
+
+	"""Graph module 5x5"""
+	HEART = b'\n\x1f\x1f\x0e\x04'
+	HEART_SMALL = b'\x00\n\x0e\x04\x00'
+	HAPPY = b'\x00\n\x00\x11\x0e'
+	SAD = b'\x00\n\x00\x0e\x11'
+	SMILE =  b'\x00\x00\x00\x11\x0e'
+	SILLY = b'\x11\x00\x1f\x14\x1c'
+	FABULOUS = b'\x1f\x1b\x00\n\x0e'
+	SURPRISED = b'\n\x00\x04\n\x04'
+	ASLEEP = b'\x00\x1b\x00\x0e\x00'
+	ANGRY = b'\x11\n\x00\x1f\x15'		
+	CONFUSED = b'\x00\n\x00\n\x15'
+	NO = b'\x11\n\x04\n\x11'
+	YES = b'\x00\x10\x08\x05\x02'
+	LEFT_ARROW = b'\x04\x02\x1f\x02\x04'
+	RIGHT_ARROW = b'\x04\x08\x1f\x08\x04'
+	DRESS = b'\n\x1b\x0e\x0e\x1f'
+	TRANSFORMERS = b'\x04\x0e\x15\n\x11'
+	SCISSORS = b'\x13\x0b\x04\x0b\x13'
+	EXIT = b'\x04\x0e\x15\x0b\x10'
+	TREE = b'\x04\x0e\x1f\x04\x04'
+	PACMAN = b'\x1e\x0b\x07\x0f\x1e'
+	TARGET = b'\x04\x0e\x1b\x0e\x04'
+	TSHIRT = b'\x1b\x1f\x0e\x0e\x0e'
+	ROLLERSKATE = b'\x18\x18\x1f\x1f\n'
+	DUCK = b'\x06\x07\x1e\x0e\x00'
+	HOUSE = b'\x04\x0e\x1f\x0e\n'
+	TORTOISE = b'\x00\x0e\x1f\n\x00'
+	BUTTERFLY = b'\x1b\x1f\x04\x1f\x1b'
+	STICKFIGURE = b'\x04\x1f\x04\n\x11'
+	GHOST = b'\x1f\x15\x1f\x1f\x15'
+	PITCHFORK = b'\x15\x15\x1f\x04\x04'
+	MUSIC_QUAVERS = b'\x1e\x12\x12\x1b\x1b'	
+	MUSIC_QUAVER = b'\x04\x0c\x14\x07\x07'
+	MUSIC_CROTCHET = b'\x04\x04\x04\x07\x07'
+	COW = b'\x11\x11\x1f\x0e\x04'
+	RABBIT = b'\x05\x05\x0f\x0b\x0f'
+	SQUARE_SMALL = b'\x00\x0e\n\x0e\x00'
+	SQUARE = b'\x1f\x11\x11\x11\x1f'
+	DIAMOND_SMALL = b'\x00\x04\n\x04\x00'
+	DIAMOND = b'\x04\n\x11\n\x04' 
+	CHESSBOARD = b'\n\x15\n\x15\n'
+	TRIANGLE_LEFT = b'\x01\x03\x05\t\x1f'				
+	TRIANGLE = b'\x00\x04\n\x1f\x00'
+	SNAKE = b'\x03\x1b\n\x0e\x00'
+	UMBRELLA = b'\x0e\x1f\x04\x05\x06'
+	SKULL = b'\x0e\x15\x1f\x0e\x0e'	
+	GIRAFFE = b'\x03\x02\x02\x0e\n'
+	SWORD = b'\x04\x04\x04\x0e\x04' 
+
+
+	def __init__(self, i2c_bus, addr=0x03, brightness=0.5):
 		self._i2c = i2c_bus
 		self._addr = addr
-		self.columns = 5
-		self.rows = 5
 		self._brightness= brightness
 		self._buffer = bytearray(5)
-		super().__init__(self._buffer, self.columns, self.rows, framebuf.MONO_HMSB) 
+		super().__init__(self._buffer, 5, 5, uframebuf.MONO_HMSB) 
+		self.font("5x5")
+		self.screenbright(self._brightness)
 		self.clear()   
 
 	def screenbright(self, brightness=None, background=0):
@@ -209,100 +261,13 @@ class Matrix5x5(framebuf.FrameBuffer):
 		'''set display direction '''
 		self._i2c.write_device(self._addr, 0xA7, mode)
 
-	def __getitem__(self, key):
-		x, y = key
-		return self.pixel(x, y)
-
-	def __setitem__(self, key, value):
-		x, y = key
-		self.pixel(x, y, value)
-
-	def shift(self, x, y, rotate=False):
-		"""Shift pixels by x and y"""
-		if x > 0:  # Shift Right
-			for _ in range(x):
-				for row in range(0, self.rows):
-					last_pixel = self[self.columns - 1, row] if rotate else 0
-					for col in range(self.columns - 1, 0, -1):
-						self[col, row] = self[col - 1, row]
-					self[0, row] = last_pixel
-		elif x < 0:  # Shift Left
-			for _ in range(-x):
-				for row in range(0, self.rows):
-					last_pixel = self[0, row] if rotate else 0
-					for col in range(0, self.columns - 1):
-						self[col, row] = self[col + 1, row]
-					self[self.columns - 1, row] = last_pixel
-		if y > 0:  # Shift Up
-			for _ in range(y):
-				for col in range(0, self.columns):
-					last_pixel = self[col, self.rows - 1] if rotate else 0
-					for row in range(self.rows - 1, 0, -1):
-						self[col, row] = self[col, row - 1]
-					self[col, 0] = last_pixel
-		elif y < 0:  # Shift Down
-			for _ in range(-y):
-				for col in range(0, self.columns):
-					last_pixel = self[col, 0] if rotate else 0
-					for row in range(0, self.rows - 1):
-						self[col, row] = self[col, row + 1]
-					self[col, self.rows - 1] = last_pixel
-		self.show()         
-
-	def shift_right(self,num, rotate=False):
-		"""Shift all pixels right"""
-		self.shift(num, 0, rotate)
-
-	def shift_left(self,num, rotate=False):
-		"""Shift all pixels left"""
-		self.shift(-num, 0, rotate)
-
-	def shift_up(self,num, rotate=False):
-		"""Shift all pixels up"""
-		self.shift(0, -num, rotate)
-
-	def shift_down(self,num, rotate=False):
-		"""Shift all pixels down"""
-		self.shift(0, num, rotate)  
-
-	def shows(self,data):
-		"""Display character"""
-		self.fill(0)
-		if type(data) in [list,bytes,tuple,bytearray]:
-			for i in range(min(len(data),len(self._buffer))):
-				self._buffer[i] = data[i]
-			self.show() 
-		elif type(data) is int:
-			self._i2c.write_device(self._addr, 0xA0, data)
-		else:
-			data=str(data)
-			self.writestring(data)
-
-	def writestring(self,content):
-		str_len = len(content)
-		if str_len < 1:
-			return False
-		if str_len > 128:
-			raise Error("content size must less than 128")
-		self._i2c.write_device(self._addr, 0xA2, str_len)
-		str_idx = 0
-		str_write_step_len = 12
-		while str_idx <= str_len :
-			tmp_buf =  [ord(x) for x in content[str_idx : str_idx + str_write_step_len]]
-			buf = bytearray(12)
-			for i in range(0,len(tmp_buf)):
-				buf[i] = tmp_buf[i]
-			self._i2c.write_device(self._addr, 0xA3, buf)
-			str_idx += str_write_step_len
-		self._i2c.write_device(self._addr, 0xA4)
-
 	def show(self):
 		'''Refresh the display and show the changes'''
 		buf = bytearray(4)
-		buf[0] = self._buffer[4] >> 4
-		buf[1] = self._buffer[3] >> 1 | self._buffer[4] << 4
-		buf[2] = self._buffer[1] >> 3 | self._buffer[2] << 2 | self._buffer[3] << 7
-		buf[3] = self._buffer[0] | self._buffer[1] << 5 
+		buf[0] = (self._buffer[4] & 0xF0) >> 4
+		buf[1] = (self._buffer[3] & 0x1E) >> 1 | (self._buffer[4] & 0x0F) << 4
+		buf[2] = (self._buffer[1] & 0x18) >> 3 | (self._buffer[2] & 0x1F) << 2 | (self._buffer[3] & 0x01) << 7
+		buf[3] = (self._buffer[0] & 0x1F) | (self._buffer[1] & 0x07) << 5 
 		self._i2c.write_device(self._addr, 0xA1, buf)
 
 	def clear(self):

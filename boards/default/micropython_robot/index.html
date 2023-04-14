@@ -1029,6 +1029,18 @@
           </shadow>
         </value>
       </block>
+      <block type="tuple_find">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">mytup</field>
+          </shadow>
+        </value>
+        <value name="data">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
       <block type="tuple_del">
         <value name="TUP">
           <shadow type="variables_get">
@@ -1680,9 +1692,77 @@
           <shadow type="pins_builtinimg"></shadow>
         </value>
       </block>
+      <block type="display_show_image_or_string_delay">
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+        <value name="space">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="display_scroll_string">
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="display_scroll_string_delay">
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="space">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="display_show_frame_string">
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="display_show_frame_string_delay">
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">500</field>
+          </shadow>
+        </value>
+      </block>
            
       <block type="mixbot_display_image_create"></block>
-      <block type="mixbot_display_image_builtins"></block>      
+      <block type="display_image_builtins_all"></block>
+      <block type="image_arithmetic">
+        <value name="A">
+          <shadow type="pins_builtinimg"></shadow>
+        </value>>
+        <value name="B">
+          <shadow type="pins_builtinimg"></shadow>
+        </value>
+      </block>
+      <block type="image_invert">
+        <value name="A">
+          <shadow type="pins_builtinimg"></shadow>
+        </value>
+      </block>
       <block type="display_shift">
 
         <value name="val">
@@ -1712,7 +1792,7 @@
           </shadow>
         </value>
       </block>
-      <block type="mixbot_display_ratate"></block>
+      <block type="mixbot_display_rotate"></block>
       <block type="mixbot_display_bright_screen">
 
         <value name="x">
@@ -1723,7 +1803,7 @@
       </block>
       <block type="mixbot_display_get_screen_pixel"></block>
       <block type="mixbot_display_get_ambientbright"></block>
-      <block type="mixbot_display_clear"></block>
+      <block type="display_clear"></block>
       <!-- </category> -->
     </category>
     

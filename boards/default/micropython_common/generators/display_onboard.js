@@ -14,6 +14,7 @@ Blockly.Python.display_show_image = function() {
 
 Blockly.Python.display_show_image_or_string_delay = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
@@ -24,6 +25,7 @@ Blockly.Python.display_show_image_or_string_delay = function() {
 
 Blockly.Python.display_show_frame_string = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "onboard_matrix.frame(" + data + ")\n";
@@ -32,6 +34,7 @@ Blockly.Python.display_show_frame_string = function() {
 
 Blockly.Python.display_show_frame_string_delay = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
@@ -41,6 +44,7 @@ Blockly.Python.display_show_frame_string_delay = function() {
 
 Blockly.Python.display_scroll_string = function() {
      var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
      var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
      var code = "onboard_matrix.scroll("+ data +")\n";
@@ -50,6 +54,7 @@ Blockly.Python.display_scroll_string = function() {
 
 Blockly.Python.display_scroll_string_delay = function() {  
      var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
      var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
      var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
@@ -144,6 +149,7 @@ Blockly.Python['display_image_create'] = function(block) {
 
 Blockly.Python['display_clear'] = function(block) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var code = 'onboard_matrix.fill(0)\n'+'onboard_matrix.show()\n';
   return code;
@@ -152,6 +158,7 @@ Blockly.Python['display_clear'] = function(block) {
 
 Blockly.Python['image_arithmetic'] = function(a) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var op = a.getFieldValue("OP");
   var imga = Blockly.Python.valueToCode(a, 'A', Blockly.Python.ORDER_ATOMIC);
@@ -162,6 +169,7 @@ Blockly.Python['image_arithmetic'] = function(a) {
 
 Blockly.Python['image_invert'] = function(a) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var imga = Blockly.Python.valueToCode(a, 'A', Blockly.Python.ORDER_ATOMIC);
   var code = 'onboard_matrix.map_invert(' + imga +')';  
@@ -201,6 +209,7 @@ Blockly.Python.display_bright_point= function() {
 
 Blockly.Python['display_get_screen_pixel'] = function() {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
   var code = 'onboard_matrix.get_brightness()';
   return [code, Blockly.Python.ORDER_ATOMIC];
@@ -210,6 +219,7 @@ Blockly.Python['display_get_screen_pixel'] = function() {
 
 Blockly.Python.display_bright_screen= function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var code = 'onboard_matrix.set_brightness(' + x + ')\n';
@@ -512,20 +522,6 @@ Blockly.Python['mixbot_display_image_create'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['mixbot_display_image_builtins'] = function(block) {
-  var dropdown_image = block.getFieldValue('image');
-  var code = dropdown_image;
-  return [code, Blockly.Python.ORDER_ATOMIC];
-};
-
-Blockly.Python['mixbot_display_clear'] = function(block) {
-  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-  if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
-  Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
-  var code = 'onboard_matrix.clear()\n';
-  return code;
-};
-
 Blockly.Python['mixbot_display_get_screen_pixel'] = function() {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
@@ -551,7 +547,7 @@ Blockly.Python.mixbot_display_bright_screen= function() {
     return code;
 };
 
-Blockly.Python['mixbot_display_ratate'] = function(a) {
+Blockly.Python['mixbot_display_rotate'] = function(a) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";

@@ -555,11 +555,10 @@ Blockly.Python.RTC_get_time = function () {
 
 Blockly.Python.sensor_dht11 = function () {
     Blockly.Python.definitions_['import_dhtx'] = 'import dhtx';
-    Blockly.Python.definitions_['import_machine'] = 'import machine';
     var sensor_type = this.getFieldValue('TYPE');
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var what = this.getFieldValue('WHAT');
-    var code ='dhtx.'+sensor_type+"(machine.Pin("+dropdown_pin+')).'+what+'()';
+    var code ='dhtx.'+sensor_type+"("+dropdown_pin+').'+what+'()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

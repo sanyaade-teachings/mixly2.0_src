@@ -1,9 +1,16 @@
-# MicroPython SSD1106 OLED driver, I2C and SPI interfaces
+"""
+SSD1106
 
+library for the SSD1x06 OLED128x64
+=======================================================
+
+#Preliminary composition                    20230412
+
+@dahanzimin From the Mixly Team
+"""
+import uframebuf
 from micropython import const
-import framebuf
 
-# register definitions
 SET_CONTRAST        = const(0x81)
 SET_ENTIRE_ON       = const(0xa4)
 SET_NORM_INV        = const(0xa6)
@@ -26,15 +33,11 @@ SET_COL_ADDR_H      = const(0x10)
 SET_PAGE_ADDR1      = const(0xb0)
 SET_CONTRACT_CTRL   = const(0x81)
 
-# Subclassing FrameBuffer provides support for graphics primitives
-class SSD1106(framebuf.FrameBuffer):
+class SSD1106(uframebuf.FrameBuffer_Uincode):
     def __init__(self, width, height, external_vcc):
-        self.width = width
-        self.height = height
-        self.external_vcc = external_vcc
-        self.pages = self.height // 8
-        self.buffer = bytearray(self.pages * self.width)
-        super().__init__(self.buffer, self.width, self.height, framebuf.MONO_VLSB)
+        self._external = external_vcc
+        self._buffer = bytearray((width + 7) // 8 * height)
+        super().__init__(self._buffer, width, height, uframebuf.MONO_VLSB)
         self.init_display()
 
     def init_display(self):
@@ -44,13 +47,13 @@ class SSD1106(framebuf.FrameBuffer):
             SET_MUX_RATIO, 0x3f,       #0xa8
             SET_DISP_OFFSET, 0x00,    #0xd3
             SET_DISP_START_LINE | 0x00, #start line
-            SET_CHARGE_PUMP, 0x10 if self.external_vcc else 0x14,
+            SET_CHARGE_PUMP, 0x10 if self._external else 0x14,
             SET_MEM_ADDR, 0x00, # address setting
             SET_SEG_REMAP | 0x01, # column addr 127 mapped to SEG0
             SET_COM_OUT_DIR | 0x08, # scan from COM[N] to COM0
             SET_COM_PIN_CFG, 0x12,
             SET_CONTRACT_CTRL, 0xcf,
-            SET_PRECHARGE, 0x22 if self.external_vcc else 0xf1,
+            SET_PRECHARGE, 0x22 if self._external else 0xf1,
             SET_VCOM_DESEL, 0x40, # 0.83*Vcc
             SET_ENTIRE_ON, # output follows RAM contents
             SET_NORM_INV,
@@ -77,14 +80,7 @@ class SSD1106(framebuf.FrameBuffer):
             self.write_cmd(SET_PAGE_ADDR1 + i)
             self.write_cmd(SET_COL_ADDR_L + 0)     # offset 2 pixels for 128x64 panel
             self.write_cmd(SET_COL_ADDR_H + 0)
-            self.write_data(self.buffer[i*128:(i+1)*128])   # send one page display data
-
-    def set_buffer(self, buffer):
-        for i in range(min(len(buffer),len(self.buffer))):
-            self.buffer[i] = self.buffer[i] | buffer[i]
-
-    def get_buffer(self):
-        return self.buffer 
+            self.write_data(self._buffer[i*128:(i+1)*128])   # send one page display data
 
 class SSD1106_I2C(SSD1106):
     def __init__(self, width, height, i2c, addr=0x3c, external_vcc=False):
@@ -94,12 +90,12 @@ class SSD1106_I2C(SSD1106):
         super().__init__(width, height, external_vcc)
 
     def write_cmd(self, cmd):
-        self.temp[0] = 0x80 # Co=1, D/C#=0
+        self.temp[0] = 0x80
         self.temp[1] = cmd
         self.i2c.writeto(self.addr, self.temp)
 
     def write_data(self, buf):
-        tmp = bytearray([0x40]) # Co=0, D/C#=1
+        tmp = bytearray([0x40])
         self.i2c.writeto(self.addr, tmp+buf)
 
 class SSD1106_SPI(SSD1106):

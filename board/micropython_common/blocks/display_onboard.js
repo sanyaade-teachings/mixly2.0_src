@@ -358,8 +358,9 @@ Blockly.Blocks['mixgo_display_image_create_new']= {
 Blockly.Blocks['mixgome_display_font'] = {
   init: function() {
     var OPERATORS =
-        [['4x5'+Blockly.MIXGO_ME_DISPLAY_HORIZONTAL, '1'],
-         ['5x8'+Blockly.MIXGO_ME_DISPLAY_VERTICAL, '2']];
+        [['4x5'+Blockly.MIXGO_ME_DISPLAY_HORIZONTAL, "'4x5'"],
+         ['5x5'+Blockly.MIXGO_ME_DISPLAY_HORIZONTAL, "'5x5'"],
+         ['5x8'+Blockly.MIXGO_ME_DISPLAY_VERTICAL, "'5x8'"]];
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.OLED_SET_FONT)

@@ -9,10 +9,12 @@ MicroPython library for the ST7789(TFT-SPI)
 dahanzimin From the Mixly Team
 """
 
-import time,uincode_font,image_bmp
+import time
 from machine import Pin
 from micropython import const
+from uframebuf import Font_Uincode, Image
 import ustruct as struct
+
 
 ST7789_NOP = const(0x00)
 ST7789_SWRESET = const(0x01)
@@ -93,8 +95,8 @@ class ST7789():
 		if height != 240 or width not in [320, 240, 135]:
 			raise ValueError("Unsupported display. 320x240, 240x240 and 135x240 are supported.")
 
-		self._font= uincode_font.Font_B(font_address)
-		self._image= image_bmp.Image()
+		self._font= Font_Uincode(font_address)
+		self._image= Image()
 		self._display_width = self.width = width
 		self._display_height = self.height = height
 		self.xstart = 0
@@ -285,7 +287,7 @@ class ST7789():
 		font_buffer=[]
 		font_len=0
 		for c in strs:                    
-			buffer=self._font.CharData(c)
+			buffer=self._font.chardata(c)
 			font_buffer.append(buffer)
 			font_len=font_len+buffer[1][0]*size+space
 		return font_len,font_buffer

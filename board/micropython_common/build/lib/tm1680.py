@@ -4,31 +4,25 @@ TM1680
 library for the TM1680 Matrix32x12
 =======================================================
 
-#Preliminary composition	  	20211112
-#Change to	Micropython		  	20220118
-#Introducing framebuf Library	20220224
-#Format unified					20220623
+#Preliminary composition					20230412
 
-dahanzimin From the Mixly Team
+@dahanzimin From the Mixly Team
 """
-
-import framebuf
+import uframebuf
 from micropython import const
 
 TM1680_SYS_EN			= const(0x81)
 TM1680_LED_ON			= const(0x83)
 TM1680_COM_16N			= const(0xA4)
 
-class TM1680(framebuf.FrameBuffer):
-
-	def __init__(self, i2c, address=0x72, brightness=0.3):
+class TM1680(uframebuf.FrameBuffer_Uincode):
+	def __init__(self, i2c, address=0x72, brightness=0.3, width=32, height=12):
 		self._device= i2c
 		self._address = address	
 		self._blink_rate=0
 		self._brightness=brightness		
-		self._buffer = bytearray(48)
-		super().__init__(self._buffer, 32, 12, framebuf.MONO_HMSB)
-		
+		self._buffer = bytearray((width + 7) // 8 * height)
+		super().__init__(self._buffer, width, height, uframebuf.MONO_HMSB)
 		self._write_cmd(TM1680_SYS_EN)	 #打开系统振荡器
 		self._write_cmd(TM1680_LED_ON)	 #开启 LED 循环
 		self._write_cmd(TM1680_COM_16N)	 #16COM Nmos
@@ -72,10 +66,3 @@ class TM1680(framebuf.FrameBuffer):
 						#Convert the high and low 4 bits of the address content
 			tm_buffer[i]= (tm_buffer[i]>>4) | (tm_buffer[i] <<4)
 		self._device.writeto_mem(self._address,0x00,tm_buffer)
-
-	def set_buffer(self, buffer):
-		for i in range(min(len(buffer),len(self._buffer))):
-			self._buffer[i] = self._buffer[i] | buffer[i]
-
-	def get_buffer(self):
-		return self._buffer	

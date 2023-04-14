@@ -6,24 +6,23 @@ Micropython	library for the TM1652 Matrix8x5
 
 #Preliminary composition	  	    20230126
 
-dahanzimin From the Mixly Team
+@dahanzimin From the Mixly Team
 """
 import time
-import framebuf
+import uframebuf
 from machine import Pin
-from micropython import const
+from micropython import const, schedule 
 
 _TM1652_REG_ADD	     = const(0x08)		#Display address command
 _TM1652_REG_CMD	     = const(0x18)		#Display control command
 _TM1652_SET_CUR	     = const(0x04)      #LED current setting 3/8 
 
-class TM1652(framebuf.FrameBuffer):
-	def __init__(self, pin, brightness=0.3):
+class TM1652(uframebuf.FrameBuffer_Ascall):
+	def __init__(self, pin, brightness=0.3, width=8, height=5):
 		self.pin=Pin(pin,Pin.OUT)
 		self.pin.value(1)	
-		self._buffer = bytearray(5)	
-		super().__init__(self._buffer, 8, 5, framebuf.MONO_HMSB)	
-		
+		self._buffer = bytearray((width + 7) // 8 * height)	
+		super().__init__(self._buffer, width, height, uframebuf.MONO_HMSB)	
 		self.brightness = brightness
 		self._brightness = None
 		self.set_brightness(brightness)
@@ -47,7 +46,7 @@ class TM1652(framebuf.FrameBuffer):
 			else:
 				self.pin.value(0)
 				falg+=0
-			time.sleep_us(45)
+			time.sleep_us(44)
 		#Check bit
 		self.pin.value(1) if  falg%2 == 0 else self.pin.value(0)
 		time.sleep_us(50)
@@ -69,18 +68,11 @@ class TM1652(framebuf.FrameBuffer):
 
 	def show(self):
 		"""Refresh the display and show the changes."""
-		for _ in range(2):
-			self._write_cmd(_TM1652_REG_ADD)
-			for i in range(5):
-				self._write_cmd(self._buffer[i])
-			time.sleep_ms(3)
-			self._write_cmd(_TM1652_REG_CMD)
-			self._write_cmd(self._brightness)
-			time.sleep_ms(3)
-
-	def set_buffer(self, buffer):
-		for i in range(min(len(buffer),len(self._buffer))):
-			self._buffer[i] = self._buffer[i] | buffer[i]
-
-	def get_buffer(self):
-		return self._buffer	
+		#for _ in range(2):
+		schedule(self._write_cmd, _TM1652_REG_ADD)
+		for i in range(5):
+			schedule(self._write_cmd,self._buffer[i])
+		time.sleep_ms(3)
+		schedule(self._write_cmd,_TM1652_REG_CMD)
+		schedule(self._write_cmd,self._brightness)
+		time.sleep_ms(3)

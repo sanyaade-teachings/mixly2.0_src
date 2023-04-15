@@ -43,6 +43,8 @@ const {
 
 const { dialog } = electron_remote;
 
+const { MSG } = Blockly.Msg;
+
 File.DEFAULT_PATH = path.resolve(app.getAppPath(), 'src/sample');
 
 File.workingPath = File.DEFAULT_PATH;

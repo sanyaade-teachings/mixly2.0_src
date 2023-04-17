@@ -688,7 +688,8 @@ Blockly.Arduino.oled_set_EN_Font = function () {
     var FONT_NAME = this.getFieldValue('FONT_NAME');
     var FONT_SIZE = this.getFieldValue('FONT_SIZE');
     var FONT_STYLE = this.getFieldValue('FONT_STYLE');
-    var code = NAME + ".setFont(u8g2_font_" + FONT_NAME + FONT_STYLE + FONT_SIZE + "_tf);\n" + NAME + ".setFontPosTop();\n";
+    //var code = NAME + ".setFont(u8g2_font_" + FONT_NAME + FONT_STYLE + FONT_SIZE + "_tf);\n" + NAME + ".setFontPosTop();\n";
+    var code = NAME + ".setFont(u8g2_font_" + FONT_NAME + FONT_STYLE + FONT_SIZE + "_tf);\n";
     return code;
 };
 
@@ -696,7 +697,8 @@ Blockly.Arduino.oled_set_CN_Font = function () {
     var NAME = this.getFieldValue('NAME') || 'u8g2';
     var FONT_NAME = this.getFieldValue('FONT_NAME');
     var FONT_SIZE = this.getFieldValue('FONT_SIZE');
-    var code = NAME + ".setFont(u8g2_font_" + FONT_SIZE + FONT_NAME + ");\n" + NAME + ".setFontPosTop();\n";
+    //var code = NAME + ".setFont(u8g2_font_" + FONT_SIZE + FONT_NAME + ");\n" + NAME + ".setFontPosTop();\n";
+    var code = NAME + ".setFont(u8g2_font_" + FONT_SIZE + FONT_NAME + ");\n";
     return code;
 };
 Blockly.Arduino.oled_set_ZH_TW_Font = function () {

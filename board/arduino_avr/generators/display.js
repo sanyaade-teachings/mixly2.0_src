@@ -507,7 +507,7 @@ Blockly.Arduino.oled_icons = function () {
     var POS_y = Blockly.Arduino.valueToCode(this, 'POS_Y', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var ICON_SIZE = this.getFieldValue('ICON_SIZE');
     var ICON_IMAGE = this.getFieldValue('ICON_IMAGE');
-    var code = NAME + ".setFont(u8g2_font_open_iconic_all_" + ICON_SIZE + "x_t);\n"
+    var code = NAME + ".setFontPosBottom();\n"NAME + ".setFont(u8g2_font_open_iconic_all_" + ICON_SIZE + "x_t);\n"
         + NAME + ".drawGlyph(" + POS_x + "," + POS_y + "+" + ICON_SIZE + "*8," + ICON_IMAGE + ");\n";
     return code;
 };
@@ -676,7 +676,7 @@ Blockly.Arduino.oled_print = function () {
     var POS_y = Blockly.Arduino.valueToCode(this, 'POS_Y', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var TEXT = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.setups_["setup_enableUTF8Print" + NAME] = NAME + '.enableUTF8Print();\n';
-    var code = NAME + ".setFontPosBottom();\n";
+    var code = "";
     code = NAME + '.setCursor(' + POS_x + ',';
     code += POS_y + "); \n";
     code += NAME + ".print(" + TEXT + "); \n";

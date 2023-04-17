@@ -676,10 +676,10 @@ Blockly.Arduino.oled_print = function () {
     var POS_y = Blockly.Arduino.valueToCode(this, 'POS_Y', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var TEXT = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.setups_["setup_enableUTF8Print" + NAME] = NAME + '.enableUTF8Print();\n';
-    var code = "";
+    var code = NAME + ".setFontPosBottom();\n";
     code = NAME + '.setCursor(' + POS_x + ',';
     code += POS_y + "); \n";
-    code += NAME + ".print(" + TEXT + "); \n" + NAME + ".setFontPosBottom();\n";
+    code += NAME + ".print(" + TEXT + "); \n";
     return code;
 };
 

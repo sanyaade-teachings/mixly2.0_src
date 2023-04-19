@@ -17,15 +17,16 @@ from machine import Pin,SoftI2C,ADC
 i2c = SoftI2C(scl = Pin(4, pull=Pin.PULL_UP), sda = Pin(5, pull=Pin.PULL_UP), freq = 400000)
 
 '''Judging the type of external motor'''
-if 0x30 in i2c.scan():
-    Mi2c = True
-else:
-    Mi2c = False
+Mi2c = 0
+for addr in i2c.scan():
+    if addr in [0x30, 0x31, 0x32, 0x33]:
+        Mi2c = addr
+        break
 
 '''i2c-motor'''
 def  i2c_motor(speed):
     _speed = max(min(speed, 100), -100)
-    i2c.writeto(0x30, b'\x00\x00' + _speed.to_bytes(1, 'little') + b'\x00')
+    i2c.writeto(Mi2c, b'\x00\x00' + _speed.to_bytes(1, 'little') + b'\x00')
 
 '''TM1931-Expand'''    
 class CAR(TM1931):
@@ -119,25 +120,25 @@ class CAR(TM1931):
 
     def motor(self, index, action, speed=0):
         if action=="N":
-            if (index == [1, 2]) & Mi2c:
+            if (index == [1, 2]) & (Mi2c > 0):
                 i2c_motor(0)
             else:
                 self.pwm(index[0], 255)
                 self.pwm(index[1], 255)
         elif action=="P":
-            if (index == [1, 2]) & Mi2c:
+            if (index == [1, 2]) & (Mi2c > 0):
                 i2c_motor(0)
             else:
                 self.pwm(index[0], 0)
                 self.pwm(index[1], 0)
         elif action=="CW":
-            if (index == [1, 2]) & Mi2c:
+            if (index == [1, 2]) & (Mi2c > 0):
                 i2c_motor(speed)
             else:
                 self.pwm(index[0], speed * 255 // 100)
                 self.pwm(index[1], 0)
         elif action=="CCW":
-            if (index == [1, 2]) & Mi2c:
+            if (index == [1, 2]) & (Mi2c > 0):
                 i2c_motor(- speed)
             else:
                 self.pwm(index[0], 0)

@@ -14,7 +14,18 @@ from tm1931 import TM1931
 from machine import Pin,SoftI2C,ADC
 
 '''i2c-onboard'''
-i2c=SoftI2C(scl = Pin(4,pull=Pin.PULL_UP), sda = Pin(5,pull=Pin.PULL_UP), freq = 400000)
+i2c = SoftI2C(scl = Pin(4, pull=Pin.PULL_UP), sda = Pin(5, pull=Pin.PULL_UP), freq = 400000)
+
+'''Judging the type of external motor'''
+if 0x30 in i2c.scan():
+    Mi2c = True
+else:
+    Mi2c = False
+
+'''i2c-motor'''
+def  i2c_motor(speed):
+    _speed = max(min(speed, 100), -100)
+    i2c.writeto(0x30, b'\x00\x00' + _speed.to_bytes(1, 'little') + b'\x00')
 
 '''TM1931-Expand'''    
 class CAR(TM1931):
@@ -106,19 +117,31 @@ class CAR(TM1931):
         else:
             raise ValueError('Mode selection error, light seeking data cannot be read')
 
-    def motor(self,index,action,speed=0):
+    def motor(self, index, action, speed=0):
         if action=="N":
-            self.pwm(index[0],255)
-            self.pwm(index[1],255)
+            if (index == [1, 2]) & Mi2c:
+                i2c_motor(0)
+            else:
+                self.pwm(index[0], 255)
+                self.pwm(index[1], 255)
         elif action=="P":
-            self.pwm(index[0],0)
-            self.pwm(index[1],0)
+            if (index == [1, 2]) & Mi2c:
+                i2c_motor(0)
+            else:
+                self.pwm(index[0], 0)
+                self.pwm(index[1], 0)
         elif action=="CW":
-            self.pwm(index[0],speed*255//100)
-            self.pwm(index[1],0)
+            if (index == [1, 2]) & Mi2c:
+                i2c_motor(speed)
+            else:
+                self.pwm(index[0], speed * 255 // 100)
+                self.pwm(index[1], 0)
         elif action=="CCW":
-            self.pwm(index[0],0)
-            self.pwm(index[1],speed*255//100)
+            if (index == [1, 2]) & Mi2c:
+                i2c_motor(- speed)
+            else:
+                self.pwm(index[0], 0)
+                self.pwm(index[1], speed * 255 // 100)
         else:
             raise ValueError('Invalid input, valid are "N","P","CW","CCW"')
             

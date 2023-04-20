@@ -957,6 +957,7 @@ Blockly.MIXLY_PULSEIN_TIMEOUT = 'timeout(μs)';
 Blockly.MIXLY_MAX = 'max';
 Blockly.MIXLY_MIN = 'min';
 Blockly.MIXLY_WRITE_SD_FILE = 'Write SD File';
+Blockly.MIXLY_WRITE_SPIFFS_FILE = 'Write SPIFFS File';
 Blockly.MIXLY_SD_DATA = 'Data';
 Blockly.MIXLY_SD_NEWLINE = 'NewLine';
 Blockly.MIXLY_EEPROM_WRITE_LONG = 'Write(long) EEPROM address';

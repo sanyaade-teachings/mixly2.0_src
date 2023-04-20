@@ -954,6 +954,7 @@ Blockly.MIXLY_PULSEIN_TIMEOUT = '超時（微秒）';
 Blockly.MIXLY_MAX = '取最大值';
 Blockly.MIXLY_MIN = '取最小值';
 Blockly.MIXLY_WRITE_SD_FILE = '寫入SD 文件';
+Blockly.MIXLY_WRITE_SPIFFS_FILE = '寫入SPIFFS 文件';
 Blockly.MIXLY_SD_DATA = '數據';
 Blockly.MIXLY_SD_NEWLINE = '換行';
 Blockly.MIXLY_EEPROM_WRITE_LONG = '寫入(長整數) EEPROM 位址';

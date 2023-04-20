@@ -3662,3 +3662,5 @@ Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_WHITE = 'calibrate white';
 Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_BLACK = 'calibrate black';
 Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = 'factory reset';
 Blockly.MIXLY_MIXBOT_BUZZER = 'buzzer';
+Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_CORPUS = 'corpus';
+Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_TOOLTIP = 'Return a tuple, contains the content and confidence level of the speech recognition result';

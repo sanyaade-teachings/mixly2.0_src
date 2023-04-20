@@ -248,3 +248,12 @@ Blockly.Python.ai_sensor_yolo_recognize_result = function () {
   var code = sub+'.'+key;
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
+
+Blockly.Python.ai_sensor_asr_recognize = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
+  var v2 = Blockly.Python.valueToCode(this, 'VAR2', Blockly.Python.ORDER_ATOMIC);  
+  var code = v+'.asr_recognize('+v1+',threshold='+v2+')';
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};

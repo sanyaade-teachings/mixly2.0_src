@@ -5077,6 +5077,23 @@
             <field name="TEXT">0,0,255</field>
           </shadow>
       </value>    
+    </block>   
+      <block type="ai_sensor_asr_recognize">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ai_sensor</field>
+        </shadow>
+      </value>      
+      <value name="VAR1">
+        <shadow type="list_many_input">
+            <field name="CONTENT">'ni-hao','hong-se','lv-se','lan-se','bai-se','hei-se'</field>
+          </shadow>
+      </value>   
+      <value name="VAR2">
+        <shadow type="math_number">
+            <field name="NUM">0.1</field>
+          </shadow>
+      </value>          
     </block>
     <block type="ai_sensor_audio_record">
       <value name="SUB">

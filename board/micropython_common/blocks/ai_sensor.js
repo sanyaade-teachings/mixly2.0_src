@@ -612,3 +612,21 @@ Blockly.Blocks['ai_sensor_yolo_recognize_result'] = {
          this.setTooltip(Blockly.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP);
     }
 };
+
+Blockly.Blocks['ai_sensor_asr_recognize'] = {
+    init: function () {
+        this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
+        this.appendValueInput('SUB')
+        this.appendDummyInput()
+            .appendField(Blockly.MIXLY_AipSpeech_asr);
+        this.appendValueInput("VAR1")
+            .appendField(Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_CORPUS)
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.appendValueInput("VAR2")
+            .appendField(Blockly.MIXLY_ESP32_THRESHOLD)
+            .setAlign(Blockly.ALIGN_RIGHT); 
+        this.setOutput(true);
+        this.setInputsInline(true);
+         this.setTooltip(Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_TOOLTIP);
+    }
+};

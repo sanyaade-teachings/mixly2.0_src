@@ -756,6 +756,7 @@ En.MIXLY_PULSEIN_TIMEOUT = 'timeout(μs)';
 En.MIXLY_MAX = 'max';
 En.MIXLY_MIN = 'min';
 En.MIXLY_WRITE_SD_FILE = 'Write SD File';
+En.MIXLY_WRITE_SPIFFS_FILE = 'Write SPIFFS File';
 En.MIXLY_SD_DATA = 'Data';
 En.MIXLY_SD_NEWLINE = 'NewLine';
 En.MIXLY_EEPROM_WRITE_LONG = 'Write(long) EEPROM address';
@@ -3461,5 +3462,7 @@ En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_WHITE = 'calibrate white';
 En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_BLACK = 'calibrate black';
 En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = 'factory reset';
 En.MIXLY_MIXBOT_BUZZER = 'buzzer';
+En.MIXLY_AI_SENSOR_ASR_RECOGNISE_CORPUS = 'corpus';
+En.MIXLY_AI_SENSOR_ASR_RECOGNISE_TOOLTIP = 'Return a tuple, contains the content and confidence level of the speech recognition result';
 
 })();

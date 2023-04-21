@@ -166,3 +166,108 @@ Blockly.Arduino.store_eeprom_get = function () {
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     return 'EEPROM.get(' + address + ', ' + data + ');\n';
 }
+
+//ESP32简化SPIFFS
+Blockly.Arduino.simple_spiffs_store_spiffs_write = function () {
+    var MODE= this.getFieldValue('MODE');
+    var file = Blockly.Arduino.valueToCode(this, 'FILE', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
+    //file=file.replace(/String/,"");
+    var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
+    //data=data.replace(/String/,"");
+    var newline = Blockly.Arduino.valueToCode(this, 'NEWLINE', Blockly.Arduino.ORDER_ATOMIC) || 'false';
+    Blockly.Arduino.definitions_['include_ESP_FS'] = '#include "FS.h"';
+    Blockly.Arduino.definitions_['include_ESP_SPIFFS'] = '#include "SPIFFS.h"';
+
+  if(MODE==1)
+  {
+    Blockly.Arduino.definitions_['var_simple_spiffs_store_spiffs_write'+MODE] = 'void writeFile(fs::FS &fs, const char * path, const char * message) {\n'
+        + '  File file = fs.open(path, FILE_WRITE);\n'
+        + '  if (!file) {\n'
+        + '    Serial.println("- failed to open file for writing");\n'
+        + '    return;\n'
+        + '  }\n'
+        + '  if (file.print(message)) {\n'
+        + '    Serial.println("- file written");\n'
+        + '  } else {\n'
+        + '    Serial.println("- write failed");\n'
+        + '  }\n'
+        + '  file.close();\n'
+        + '}';
+    if (newline == 'true') {
+        var code = 'writeFile(SPIFFS, ' + file + ', String(String(' + data + ') + String("\\r\\n")).c_str());\n';
+    }else {
+        var code = 'writeFile(SPIFFS, ' + file + ', String(' + data + ').c_str());\n';
+    }
+  }
+    if(MODE==2)
+  {
+    Blockly.Arduino.definitions_['var_simple_spiffs_store_spiffs_write'+MODE] = 'void appendFile(fs::FS &fs, const char * path, const char * message) {\n'
+        + '  File file = fs.open(path, FILE_APPEND);\n'
+        + '  if (!file) {\n'
+        + '    Serial.println("- failed to open file for appending");\n'
+        + '    return;\n'
+        + '  }\n'
+        + '  if (file.print(message)) {\n'
+        + '    Serial.println("- message appended");\n'
+        + '  } else {\n'
+        + '    Serial.println("- append failed");\n'
+        + '  }\n'
+        + '  file.close();\n'
+        + '}';
+    if (newline == 'true') {
+        var code = 'appendFile(SPIFFS, ' + file + ', String(String(' + data + ') + String("\\r\\n")).c_str());\n';
+    }else {
+        var code = 'appendFile(SPIFFS, ' + file + ', String(' + data + ').c_str());\n';
+    }
+  }    
+    return code;
+}
+
+Blockly.Arduino.simple_spiffs_read = function () {
+    var text_FileName = Blockly.Arduino.valueToCode(this, 'FileName', Blockly.Arduino.ORDER_ATOMIC);
+    const serial_select = 'Serial';
+    var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || profile.default.serial;
+    Blockly.Arduino.definitions_['include_ESP_FS'] = '#include "FS.h"';
+    Blockly.Arduino.definitions_['include_ESP_SPIFFS'] = '#include "SPIFFS.h"';
+    Blockly.Arduino.definitions_['var_simple_spiffs_read'] = 'String readFile(fs::FS &fs, const char * path) {\n'
+        + '  File file = fs.open(path);\n'
+        + '  if (!file || file.isDirectory()) {\n'
+        + '    Serial.println("- failed to open file for reading");\n'
+        + '    file.close();\n'
+        + '    return "SPIFFS_error";\n'
+        + '  } else {\n'
+        + '    Serial.println("- read from file:");\n'
+        + '    String SPIFFS_data = "";\n'
+        + '    while (file.available()) {\n'
+        + '     SPIFFS_data = String(SPIFFS_data) + String(char(file.read()));\n'
+        + '   }\n'
+        + '   file.close();\n'
+        + '   return SPIFFS_data;\n'
+        + ' }\n'
+        + '}';
+    Blockly.Arduino.setups_['setup_ESP_SPIFFS'] = '  if (!SPIFFS.begin(true)) {\n'
+        + '    Serial.println("SPIFFS Mount Failed");\n'
+        + '   return;\n'
+        + ' }';
+    var code = 'readFile(SPIFFS, ' + text_FileName + ')'
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.simple_spiffs_DelFile = function () {
+    Blockly.Arduino.definitions_['include_ESP_FS'] = '#include "FS.h"';
+    Blockly.Arduino.definitions_['include_ESP_SPIFFS'] = '#include "SPIFFS.h"';
+    Blockly.Arduino.definitions_['var_simple_spiffs_DelFile'] = 'void deleteFile(fs::FS &fs, const char * path) {\n'
+        + '  if (fs.remove(path)) {\n'
+        + '    Serial.println("- file deleted");\n'
+        + '  } else {\n'
+        + '    Serial.println("- delete failed");\n'
+        + '  }\n'
+        + '}';
+    Blockly.Arduino.setups_['setup_ESP_SPIFFS'] = '  if (!SPIFFS.begin(true)) {\n'
+        + '    Serial.println("SPIFFS Mount Failed");\n'
+        + '   return;\n'
+        + ' }';
+    var text_FileName = Blockly.Arduino.valueToCode(this, 'FileName', Blockly.Arduino.ORDER_ATOMIC);
+    var code = 'deleteFile(SPIFFS, ' + text_FileName + ');\n';
+    return code;
+};

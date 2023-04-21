@@ -2215,62 +2215,95 @@
         </block>
       </category>
       <category id="catStorageSPIFFS" colour="0">
-        <block type="initialize_spiffs">
-        </block>
-        <block type="spiffs_open_file">
-          <value name="file_var">
+        <block type="simple_spiffs_store_spiffs_write">
+         <value name="FILE">
+          <shadow type="text">
+           <field name="TEXT">/fileName.txt</field>
+          </shadow>
+         </value> 
+          <value name="DATA">
             <shadow type="text">
-              <field name="TEXT">myFile</field>
+              <field name="TEXT">hello world</field>
             </shadow>
           </value>
-          <value name="file_path">
-            <shadow type="text">
-              <field name="TEXT">/fileName.txt</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="spiffs_close_file">
-          <value name="file_var">
-            <shadow type="text">
-              <field name="TEXT">myFile</field>
+          <value name="NEWLINE">
+            <shadow type="logic_boolean">
+              <field name="BOOL">TRUE</field>
             </shadow>
           </value>
         </block>
-        <block type="spiffs_write_data">
-          <value name="data">
-            <shadow type="text">
-              <field name="TEXT">hello</field>
-            </shadow>
-          </value>
+        <block type="simple_spiffs_read">
+         <value name="FileName">
+          <shadow type="text">
+           <field name="TEXT">/fileName.txt</field>
+          </shadow>
+         </value> 
         </block>
-        <block type="spiffs_read_available">
-          <value name="file_var">
-            <shadow type="text">
-              <field name="TEXT">myFile</field>
-            </shadow>
-          </value>
+        <block type="simple_spiffs_DelFile">
+         <value name="FileName">
+          <shadow type="text">
+           <field name="TEXT">/fileName.txt</field>
+          </shadow>
+         </value> 
         </block>
-        <block type="spiffs_read_data">
-          <value name="file_var">
-            <shadow type="text">
-              <field name="TEXT">myFile</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="spiffs_file_size">
-          <value name="file_var">
-            <shadow type="text">
-              <field name="TEXT">myFile</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="spiffs_delete_file">
-          <value name="file_path">
-            <shadow type="text">
-              <field name="TEXT">/fileName.txt</field>
-            </shadow>
-          </value>
-        </block>
+<!--       
+    <block type="initialize_spiffs">
+    </block>
+    <block type="spiffs_open_file">
+      <value name="file_var">
+        <shadow type="text">
+          <field name="TEXT">myFile</field>
+        </shadow>
+      </value>
+      <value name="file_path">
+        <shadow type="text">
+          <field name="TEXT">/fileName.txt</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="spiffs_close_file">
+      <value name="file_var">
+        <shadow type="text">
+          <field name="TEXT">myFile</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="spiffs_write_data">
+      <value name="data">
+        <shadow type="text">
+          <field name="TEXT">hello</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="spiffs_read_available">
+      <value name="file_var">
+        <shadow type="text">
+          <field name="TEXT">myFile</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="spiffs_read_data">
+      <value name="file_var">
+        <shadow type="text">
+          <field name="TEXT">myFile</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="spiffs_file_size">
+      <value name="file_var">
+        <shadow type="text">
+          <field name="TEXT">myFile</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="spiffs_delete_file">
+      <value name="file_path">
+        <shadow type="text">
+          <field name="TEXT">/fileName.txt</field>
+        </shadow>
+      </value>
+    </block>
+    -->
       </category>
       <category id="catStorageEEPROM" colour="0">
         <block type="store_eeprom_put">

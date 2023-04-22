@@ -366,9 +366,9 @@ Blockly.Generator.prototype.INDENT="  ";
 
 profile.arduino_esp32c3 = {
     description: "esp32c3_Arduino",
-    digital: profile.generate([ '0-10', '18-21' ]),
-    digitalWrite: profile.generate([ '0-10', '18-21' ]),
-    interrupt: profile.generate([ '0-10', '18-21' ]),
+    digital: profile.generate([ '0-11', '18-21' ]),
+    digitalWrite: profile.generate([ '0-11', '18-21' ]),
+    interrupt: profile.generate([ '0-11', '18-21' ]),
     pwm: profile.generate([ '0-10', '18-21' ]),
     analog: profile.generate([ '0-5' ]),
     tx: profile.generate([ '21' ]),
@@ -388,9 +388,9 @@ profile.arduino_esp32c3 = {
 
 profile.arduino_core_esp32c3 = {
     description: "core_esp32c3_Arduino",
-    digital: profile.generate([ '0-10', '12-13', '18-21' ]),
-    digitalWrite: profile.generate([ '0-8', '10', '12-13', '18-21' ]),
-    interrupt: profile.generate([ '0-10', '12-13', '18-21' ]),
+    digital: profile.generate([ '0-13', '18-21' ]),
+    digitalWrite: profile.generate([ '0-8', '10-13', '18-21' ]),
+    interrupt: profile.generate([ '0-13', '18-21' ]),
     pwm: profile.generate([ '2', '6', '8', '10' ]),
     analog: profile.generate([ '0-5' ]),
     tx: profile.generate([ '21' ]),

@@ -92,6 +92,12 @@ nowWindow && nowWindow.setBackgroundColor(windowBackgroundColor);
 
 $('html').append(Loading.TEMPLATE_RENDER);
 
+if (Config.USER.theme === 'dark') {
+    $('html').attr('data-bs-theme', 'dark');
+} else {
+    $('html').attr('data-bs-theme', 'light');
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     if (winTheme === "dark") {
         $("body").addClass('dark');

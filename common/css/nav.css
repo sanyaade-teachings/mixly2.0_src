@@ -465,105 +465,7 @@
 }
 
 .dark .layui-layer-title {
-    background-color: #7c7171;
-    color: #fff;
-}
-
-.dark .layui-layer-title {
     border-bottom: 1px solid #5d5a5a;
-}
-
-.dark .layui-tab-title {
-    background-color: #6c6969;
-}
-
-.dark .layui-tab-brief>.layui-tab-title .layui-this {
-    color: #493e3e;
-}
-
-.dark .layui-badge-rim,
-.dark .layui-colla-content,
-.dark .layui-colla-item,
-.dark .layui-collapse,
-.dark .layui-elem-field,
-.dark .layui-form-pane
-.layui-form-item[pane],
-.dark .layui-form-pane
-.layui-form-label,
-.dark .layui-input,
-.dark .layui-layedit,
-.dark .layui-layedit-tool,
-.dark .layui-quote-nm,
-.dark .layui-select,
-.dark .layui-tab-bar,
-.dark .layui-tab-card,
-.dark .layui-tab-title,
-.dark .layui-tab-title .layui-this:after,
-.dark .layui-textarea {
-    border-color: #655050;
-}
-
-.dark .layui-tab-title li {
-    color: #fff;
-}
-
-.dark .layui-tab-content {
-    border-color: #6c6969;
-}
-
-.dark .layui-table td,
-.dark .layui-table th,
-.dark .layui-table-col-set,
-.dark .layui-table-fixed-r,
-.dark .layui-table-grid-down,
-.dark .layui-table-header,
-.dark .layui-table-page,
-.dark .layui-table-tips-main,
-.dark .layui-table-tool,
-.dark .layui-table-total,
-.dark .layui-table-view,
-.dark .layui-table[lay-skin=line],
-.dark .layui-table[lay-skin=row] {
-    border-color: #4d4848;
-}
-
-.dark .layui-table tbody tr:hover,
-.dark .layui-table thead tr,
-.dark .layui-table-click,
-.dark .layui-table-header,
-.dark .layui-table-hover,
-.dark .layui-table-mend,
-.dark .layui-table-patch,
-.dark .layui-table-tool,
-.dark .layui-table-total,
-.dark .layui-table-total tr,
-.dark .layui-table[lay-even] tr:nth-child(even) {
-    background-color: #5b5959;
-    color: #fff;
-}
-
-.dark .layui-table {
-    background-color: #726c6c;
-    color: #fff;
-}
-
-.dark .layui-form-pane .layui-form-label {
-    background-color: #5f5d5d;
-    color: #fff;
-}
-
-.dark .layui-form-checkbox[lay-skin=primary] span {
-    color: #fff;
-}
-
-.dark .layui-input, .dark .layui-select, .dark .layui-textarea {
-    background-color: #4c4a4a;
-    color: #fff;
-    height: 40px;
-}
-
-.dark .layui-form-select dl dd.layui-disabled {
-    background-color: #afacac;
 }
 
 .dark .layui-form-select dl {
@@ -577,25 +479,9 @@
     color: #000;
 }
 
-.dark .layui-form-select dl dd:hover {
-    background-color: #afa7a7;
-}
-
 .dark .layui-nav-child {
     background-color: #646363;
     border: 1px solid #646363;
-}
-
-.dark .layui-nav .layui-nav-child a {
-    color: #fff;
-}
-
-.dark .layui-nav .layui-nav-child a:hover {
-    background-color: #AEA6A6;
-}
-
-.dark .layui-layer-dialog .layui-layer-content {
-    color: #fff;
 }
 
 .dark .layui-layer-btn a {
@@ -694,27 +580,6 @@ body[class="dark"] {
 
 body[class="light"] {
     background-color: #fff !important;
-}
-
-.dark .layui-badge-rim, .layui-border,
-.dark .layui-colla-content,
-.dark .layui-colla-item,
-.dark .layui-collapse,
-.dark .layui-elem-field,
-.dark .layui-form-pane .layui-form-item[pane],
-.dark .layui-form-pane .layui-form-label,
-.dark .layui-layedit,
-.dark .layui-layedit-tool,
-.dark .layui-panel,
-.dark .layui-quote-nm,
-.dark .layui-tab-bar,
-.dark .layui-tab-card,
-.dark .layui-tab-title,
-.dark .layui-tab-title .layui-this:after,
-.dark .layui-input,
-.dark .layui-select,
-.dark .layui-textarea {
-    border-color: #493e3e !important;
 }
 
 .dark .layui-input:hover, .dark .layui-select:hover {
@@ -1038,7 +903,7 @@ body[class="light"] {
 }
 
 .dark .tab-ace-port-add-btn:hover {
-    background-color: #AEA6A6;
+    background-color: #353A3F;
 }
 
 /* 折叠卡片 */

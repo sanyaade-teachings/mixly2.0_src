@@ -1011,6 +1011,10 @@ html[data-bs-theme=dark] .layui-nav .layui-this:after,
 html[data-bs-theme=dark] .layui-nav-bar {
   background-color: var(--lay-color-secondary);
 }
+html[data-bs-theme=dark] .layui-nav .layui-nav-item a:hover,
+html[data-bs-theme=dark] .layui-nav .layui-this a {
+  color: var(--lay-color-text-1);
+}
 html[data-bs-theme=dark] .layui-nav-child {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   border: 1px solid var(--lay-color-border-2);
@@ -1742,10 +1746,6 @@ html[data-bs-theme=dark] .layui-nav-child dd.layui-this {
   background-color: var(--lay-color-fill-2);
 }
 html[data-bs-theme=dark] .layui-nav .layui-nav-child a:hover {
-  background-color: var(--lay-color-fill-2);
-}
-html[data-bs-theme=dark] .layui-nav .layui-nav-item a:hover,
-html[data-bs-theme=dark] .layui-nav .layui-this a {
   background-color: var(--lay-color-fill-2);
 }
 html[data-bs-theme=dark] .layui-nav-child dd.layui-this {

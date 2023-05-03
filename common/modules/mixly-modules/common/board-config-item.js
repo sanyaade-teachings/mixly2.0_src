@@ -70,6 +70,63 @@ class BoardConfigItem {
         this.generateOptions();
     }
 
+    /**
+     * @method 根据传入的某个板卡配置构造字典
+     --------------------------------------------
+       this.options {array}:
+        [
+            {
+                "name": "Flash Mode",
+                "key": "FlashMode",
+                "options": [
+                    {
+                        "title": "QIO",
+                        "id": "qio"
+                    },
+                    ...
+                ]
+            },
+            ...
+        ]
+     --------------------------------------------
+       this.selectedOptions {object}:
+        {
+            "xxxkey": {
+                "label": "xxx",
+                "key": "xxx"
+            },
+            ...
+        }
+        例如:
+        {
+            "FlashMode": {
+                "label": "QIO",
+                "key": "qio"
+            },
+            ...
+        }
+     --------------------------------------------
+       this.defaultOptions = this.selectedOptions;
+     --------------------------------------------
+       this.optionsInfo {object}:
+        {
+            "xxxkey": {
+                "key": [ "xxx", "xxx", ... ],
+                "label": [ "xxx", "xxx", ... ]
+            },
+            ...
+        }
+        例如:
+        {
+            "FlashMode": {
+                "key": [ "qio", "dio", ... ],
+                "label": [ "QIO", "DIO", ... ]
+            },
+            ...
+        }
+     --------------------------------------------
+     * @return {void}
+     **/
     generateOptions() {
         this.options = [];
         this.selectedOptions = {};
@@ -87,7 +144,10 @@ class BoardConfigItem {
                 continue;
             }
             this.defaultOptions[child.key] = { ...child.options[0] };
-            this.optionsInfo[child.key] = [];
+            this.optionsInfo[child.key] = {
+                key: [],
+                label: []
+            };
             let childOptions = [];
             for (let j in child.options) {
                 let childOption = child.options[j];
@@ -98,7 +158,8 @@ class BoardConfigItem {
                     title: childOption.label,
                     id: childOption.key
                 });
-                this.optionsInfo[child.key].push(childOption.key);
+                this.optionsInfo[child.key].label.push(childOption.label);
+                this.optionsInfo[child.key].key.push(childOption.key);
             }
             this.options.push({
                 name: child.label,
@@ -109,21 +170,70 @@ class BoardConfigItem {
         this.selectedOptions = { ...this.defaultOptions };
     }
 
+    /**
+     * @method 判断所要更新的配置项是否合法，
+               也即为判断新的配置项是否存在以及配置项的选中项是否在该配置项中存在
+     * @param name {string} 所要设置的配置项，xxxkey
+     * @param value {object} 所要设置的配置项的新的值
+        value = {
+            "label": "xxx",
+            "key": "xxx"
+        }
+     * @return {boolean}
+     **/
+    optionIsLegal(name, value) {
+        let optionsType = Object.keys(this.defaultOptions);
+        if (!optionsType.includes(name)
+         || !this.optionsInfo[name].key.includes(value.key)
+         || !this.optionsInfo[name].label.includes(value.label)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * @method 设置当前某个配置项的选中项
+     * @param name {string} 所要设置的配置项，xxxkey
+     * @param value {object} 所要设置的配置项的新的值
+        value = {
+            "label": "xxx",
+            "key": "xxx"
+        }
+     * @return {void}
+     **/
+    setSelectedOption(name, value) {
+        if (this.optionIsLegal(name, value)) {
+            this.selectedOptions[name] = { ...value };
+        }
+    }
+
+    /**
+     * @method 设置当前某些配置项的选中项
+     * @param newOptions {object} 所要设置的配置项
+        newOptions = {
+            "xxxkey": {
+                "label": "xxx",
+                "key": "xxx"
+            },
+            ...
+        }
+     * @return {void}
+     **/
     setSelectedOptions(newOptions) {
         if (!(newOptions instanceof Object)) {
             return;
         }
         this.selectedOptions = this.selectedOptions ?? {};
-        let optionsType = Object.keys(this.defaultOptions);
         for (let i in newOptions) {
-            if (!optionsType.includes(i) 
-             || !this.optionsInfo[i].includes(newOptions[i].key)) {
-                continue;
-            }
-            this.selectedOptions[i] = { ...newOptions[i] };
+            this.setSelectedOption(i, newOptions[i]);
         }
     }
 
+    /**
+     * @method 储存新的配置项设置
+     * @return {void}
+     **/
     writeSelectedOptions = () => {
         if (!Env.isElectron) {
             return;

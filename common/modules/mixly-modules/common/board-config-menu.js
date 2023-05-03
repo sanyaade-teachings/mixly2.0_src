@@ -65,10 +65,15 @@ class BoardConfigMenu extends FooterLayer {
         // 每次打开板卡设置窗口时设置其默认选中项
         const selectedBoardName = this.boardName;
         const boardsInfo = this.boardsInfo[selectedBoardName];
+        let optionsType = Object.keys(boardsInfo.defaultOptions);
         for (let i in selectedOptions) {
-            $('#board-config-' + i).find('p').text(selectedOptions[i].label);
+            let label = boardsInfo.defaultOptions[i].label;
+            if (boardsInfo.optionIsLegal(i, selectedOptions[i])) {
+                label = selectedOptions[i].label;
+            }
+            $('#board-config-' + i).find('p').text(label);
+            boardsInfo.setSelectedOption(i, selectedOptions[i]);
         }
-        boardsInfo.selectedOptions = { ...selectedOptions };
         // 重新计算窗口的位置
         instance.setProps({});
     }

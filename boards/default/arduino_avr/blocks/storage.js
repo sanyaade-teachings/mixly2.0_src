@@ -303,7 +303,7 @@ Blockly.Blocks.store_eeprom_get = {
         this.appendValueInput("DATA")
             .setCheck(null)
             .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.SAVETO + ' ' + MSG["catVar"]);
+            .appendField(Blockly.Msg.SAVETO + ' ' + Blockly.Msg.MSG["catVar"]);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_STORE_EEPROM_GET);

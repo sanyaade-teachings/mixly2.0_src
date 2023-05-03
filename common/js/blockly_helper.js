@@ -551,7 +551,7 @@ mixlyjs.renderXml = function (xmlContent) {
 };
 mixlyjs.renderIno = function (xmlContent) {
     document.getElementById('changemod-btn').value = 0;
-    document.getElementById('changemod-btn').textContent = MSG['tab_blocks'];
+    document.getElementById('changemod-btn').textContent = Blockly.Msg.MSG['tab_blocks'];
     document.getElementById('changemod-btn').className = "icon-puzzle";
     tabClick('arduino');
     editor.setValue(xmlContent, -1);

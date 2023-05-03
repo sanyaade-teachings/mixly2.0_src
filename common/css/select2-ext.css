@@ -45,24 +45,6 @@
     background-color: #C3C1C1;
 }
 
-.light ::-webkit-resizer {
-    background: url('../../common/media/resize-dark.png') no-repeat;
-    background-size: 100% auto;
-}
-
-.dark ::-webkit-resizer {
-    background: url('../../common/media/resize-light.png') no-repeat;
-    background-size: 100% auto;
-}
-
-.light ::-webkit-scrollbar-corner {
-    background-color: #fff;
-}
-
-.dark ::-webkit-scrollbar-corner {
-    background-color: #8d8888;
-}
-
 .light .select2-container--default .select2-selection--single {
     border: 1px solid #ece5e5;
 }

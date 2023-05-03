@@ -21,6 +21,10 @@ goog.DEPENDENCIES = [
         "provide": ['layui.loading'],
         "require": ['layui']
     }, {
+        "path": '/../../ui/bootstrap/bootstrap.min.js',
+        "provide": ['bootstrap'],
+        "require": ['Popper']
+    }, {
         "path": '/../../blockly-core/blockly_compressed.js',
         "provide": ['Blockly'],
         "require": []
@@ -271,6 +275,7 @@ goog.require('ace.ExtLanguageTools');
 goog.require('PouchDB');
 goog.require('d3');
 goog.require('Mixly.Electron.Events');
+goog.require('bootstrap');
 /*if (Env.isElectron) {
     goog.require('Mixly.Electron.Loader');
     goog.require('Mixly.Electron.File');

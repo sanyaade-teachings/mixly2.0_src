@@ -30,7 +30,7 @@ Mixly.Example = function (containerId, exampleBtnId) {
             type="button"
             m-title="${Msg.Lang['例程']}"
             class="layui-btn layui-btn-xs layui-btn-primary m-btn"
-            style="cursor:pointer;border:none;margin-left:12px;padding:3px;display:inline-flex;align-items:center;"
+            style="cursor:pointer;border:none;margin-left:7px;padding:3px;display:inline-flex;align-items:center;"
         >
             <a
                 class="icon-doc-text"

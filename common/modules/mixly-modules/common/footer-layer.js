@@ -18,17 +18,13 @@ class FooterLayer {
      * @param domId 被绑定元素的ID
      * @param config 配置项
         {
-            onshow: function
-            tippy: {
-                ...DEFAULT_CONFIG_TIPPY
-            }
+            ...DEFAULT_CONFIG_TIPPY
         }
      **/
     constructor(domId, config) {
-        this.config = config ?? {};
-        this.config.tippy = {
+        this.config = {
             ...DEFAULT_CONFIG_TIPPY,
-            ...(this.config.tippy ?? {})
+            ...(config ?? {})
         };
         this.domId = domId;
         this.layer = null;
@@ -50,7 +46,6 @@ class FooterLayer {
                 }
             } else {
                 this.show();
-                this.layer[0].show();
             }
         });
     }
@@ -63,30 +58,21 @@ class FooterLayer {
         if (this.layer?.length) {
             return;
         }
-        const { onShow } = this.config;
-        if (typeof onShow === 'function') {
-            onShow();
-        }
         const _this = this;
-        const { onMount, onHidden } = this.config.tippy;
+        const { onMount, onHidden } = this.config;
         this.layer = tippy(`#${this.domId}`, {
-            ...this.config.tippy,
+            ...this.config,
             onMount(instance) {
+                if (typeof onMount === 'function') {
+                    onMount(instance);
+                }
                 $(instance.popper).find('.footer-layer-close').off().click(function() {
                     instance.destroy();
                     _this.layer = null;
                 });
-                if (typeof onMount === 'function') {
-                    onMount(instance);
-                }
-            },
-            onHidden(instance) {
-                _this.layer = null;
-                if (typeof onHidden === 'function') {
-                    onHidden(instance);
-                }
             },
         });
+        this.layer[0].show();
     }
 
     /**
@@ -95,7 +81,16 @@ class FooterLayer {
      * @return {void}
      **/
     updateContent(content) {
-        this.config.tippy.content = content;
+        this.layer[0].setContent(content);
+    }
+
+    /**
+     * @method 更新弹层组件的配置
+     * @param config {object} 配置项
+     * @return {void}
+     **/
+    setProps(config = {}) {
+        this.layer[0].setProps(config);
     }
 
     /**

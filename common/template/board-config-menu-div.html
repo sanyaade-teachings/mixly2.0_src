@@ -101,7 +101,7 @@
                     flex-direction: column;
                 "
             >
-                {{# layui.each(d.list, function(index, item){ }}
+                {{# layui.each(d.options, function(index, item){ }}
                 <p
                     style="
                         white-space: nowrap;
@@ -119,7 +119,7 @@
                     flex-direction: column;
                 "
             >
-                {{# layui.each(d.list, function(index, item){ }}
+                {{# layui.each(d.options, function(index, item){ }}
                 <p
                     style="
                         white-space: nowrap;
@@ -137,9 +137,9 @@
                     flex-direction: column;
                 "
             >
-                {{# layui.each(d.list, function(index, item){ }}
+                {{# layui.each(d.options, function(index, item){ }}
                 <button
-                    id="board-config-{{ item.name }}"
+                    id="board-config-{{ item.key }}"
                     class="
                         layui-btn
                         layui-btn-normal

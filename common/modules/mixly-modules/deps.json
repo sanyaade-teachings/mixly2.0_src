@@ -1,10 +1,25 @@
 [
     {
+        "path": "/common/board-config-item.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.Config",
+            "Mixly.Modules"
+        ],
+        "provide": [
+            "Mixly.BoardConfigItem"
+        ]
+    },
+    {
         "path": "/common/board-config-menu.js",
         "require": [
+            "layui",
+            "tippy",
             "Mixly.FooterLayer",
             "Mixly.MArray",
-            "Mixly.Env"
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.BoardConfigMenu"
@@ -25,7 +40,8 @@
             "Mixly.Editor",
             "Mixly.FooterLayer",
             "Mixly.Msg",
-            "Mixly.BoardConfigMenu"
+            "Mixly.BoardConfigMenu",
+            "Mixly.BoardConfigItem"
         ],
         "provide": [
             "Mixly.Boards"

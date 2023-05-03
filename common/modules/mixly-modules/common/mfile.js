@@ -141,7 +141,7 @@ MFile.getMix = () => {
     version = SOFTWARE?.version ?? 'Mixly 2.0',
     boardName = Boards.getSelectedBoardName(),
     board = BOARD?.boardType ?? 'default',
-    config = Boards.getSelectedBoardConfig(true);
+    config = Boards.getSelectedBoardConfig();
     mixDom.removeAttr('xmlns')
           .attr('version', version)
           .attr('board', board + '@' + boardName);

@@ -229,6 +229,12 @@ body {
     color: #fff;
 }`;
 
+if (Config.USER.theme === 'dark') {
+    $('html').attr('data-bs-theme', 'dark');
+} else {
+    $('html').attr('data-bs-theme', 'light');
+}
+
 const nowWindow = Env.currentWindow;
 const winTheme = Config.USER.theme;
 if (winTheme === "dark")

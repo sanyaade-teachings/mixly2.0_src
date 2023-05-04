@@ -48,6 +48,7 @@ Setting.init = () => {
         USER.theme = checked ? 'dark' : 'light';
         $('body').removeClass('dark light')
                  .addClass(USER.theme);
+        $('html').attr('data-bs-theme', USER.theme);
         LayerExt.updateShade();
         if (Env.isElectron) {
             try {
@@ -132,6 +133,7 @@ Setting.onclick = () => {
                     }
                     $('body').removeClass('dark light')
                              .addClass(USER.theme);
+                    $('html').attr('data-bs-theme', USER.theme);
                 }
                 if (updateLanguage) {
                     if (USER.language === 'auto') {

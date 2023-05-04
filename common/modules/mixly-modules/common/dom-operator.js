@@ -185,8 +185,6 @@ class SerialDomGenerator {
 
     adjustSerialTool(layero, index) {
         const { pageId, moveId } = this.id;
-        if (USER.theme === 'dark')
-            $('#' + moveId).css('background-color', '#6c6969');
         layero.css({
             minWidth: '350px',
             minHeight: '200px',

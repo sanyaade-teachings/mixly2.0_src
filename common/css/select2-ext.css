@@ -58,7 +58,7 @@
 }
 
 .dark .select2-container--default .select2-selection--single {
-    background-color: #807b7b;
+    background-color: #2a2a2b;
     border: 1px solid #484646;
 }
 
@@ -71,12 +71,12 @@
 }
 
 .dark .select2-dropdown {
-    background-color: #656161;
+    background-color: #2a2a2b;
     border: 1px solid #484646;
 }
 
 .dark .select2-container--default .select2-results__option[aria-selected=true] {
-    background-color: #AEA6A6;
+    background-color: #3a3a3a;
 }
 
 .dark .select2-container--default .select2-results__option--highlighted[aria-selected] {

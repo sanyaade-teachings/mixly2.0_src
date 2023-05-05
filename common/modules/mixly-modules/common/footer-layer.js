@@ -28,79 +28,54 @@ class FooterLayer {
         };
         this.domId = domId;
         this.layer = null;
-        this.addClickEvent();
+        this.createLayer();
+        this.addSharedMethod();
+        this.addContainerOnclickEvent();
+    }
+
+    createLayer() {
+        const { onShown, onAfterUpdate } = this.config;
+        this.layer = tippy('#' + this.domId, { ...this.config })[0];
+        this.layer.props.onShown = (instance) => {
+            if (typeof onShown === 'function') {
+                onShown(instance);
+            }
+            this.addCloseBtnOnclickEvent(instance);
+        }
+        this.layer.props.onAfterUpdate = (instance) => {
+            this.layer.props.onShown(instance);
+            if (typeof onAfterUpdate === 'function') {
+                onAfterUpdate(instance);
+            }
+        }
+    }
+
+    addCloseBtnOnclickEvent(instance) {
+        $(instance.popper).find('.footer-layer-close')
+        .off().click(() => {
+            instance.hide();
+        });
+    }
+
+    addSharedMethod() {
+        let sharedMethod = ['hide', 'show', 'destroy', 'setProps', 'setContent'];
+        for (let type of sharedMethod) {
+            this[type] = this.layer[type];
+        }
     }
 
     /**
      * @method 为绑定的元素添加鼠标单击事件
      * @return {void}
      **/
-    addClickEvent() {
+    addContainerOnclickEvent() {
         $(`#${this.domId}`).off().click(() => {
-            if (this.layer?.length && !this.layer[0].state.isDestroyed) {
-                if (this.layer[0].state.isShown) {
-                    this.layer[0].destroy();
-                    this.layer = null;
-                } else {
-                    this.layer[0].show();
-                }
+            if (this.layer.state.isShown) {
+                this.hide();
             } else {
                 this.show();
             }
         });
-    }
-
-    /**
-     * @method 在绑定元素上显示弹层
-     * @return {void}
-     **/
-    show() {
-        if (this.layer?.length) {
-            return;
-        }
-        const _this = this;
-        const { onMount, onHidden } = this.config;
-        this.layer = tippy(`#${this.domId}`, {
-            ...this.config,
-            onMount(instance) {
-                if (typeof onMount === 'function') {
-                    onMount(instance);
-                }
-                $(instance.popper).find('.footer-layer-close').off().click(function() {
-                    instance.destroy();
-                    _this.layer = null;
-                });
-            },
-        });
-        this.layer[0].show();
-    }
-
-    /**
-     * @method 更新弹层中的显示内容
-     * @param content {string} html片段
-     * @return {void}
-     **/
-    setContent(content) {
-        this.layer[0].setContent(content);
-    }
-
-    /**
-     * @method 更新弹层组件的配置
-     * @param config {object} 配置项
-     * @return {void}
-     **/
-    setProps(config = {}) {
-        this.layer[0].setProps(config);
-    }
-
-    /**
-     * @method 销毁弹层
-     * @return {void}
-     **/
-    destroy() {
-        if (this.layer?.length && !this.layer[0].state.isDestroyed) {
-            this.layer[0].destroy();
-        }
     }
 }
 

@@ -1,68 +1,27 @@
 <div
+    class="footer-layer"
     style="
         height:100%;
         width:100%;
         overflow:hidden;
     "
 >
-    <div
-        id="board-config-options"
-        class="scrollbar1"
-        style="
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            max-height: calc(100vh - var(--footer-height) - var(--nav-height) - 25px);
-        "
-    >
+    <div class="footer-layer-content scrollbar1">
         <style type="text/css">
-            #board-config-options button {
+            .footer-layer-content button {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
             }
 
-            .board-config-btn {
-                font-size: 16px;
-                line-height: 16px;
-                color: #000;
-                cursor: pointer;
-                margin-left: 5px;
-            }
-
-            .light .board-config-btn {
-                color: #000;
-            }
-
-            .light .board-config-btn:hover {
-                color: #666;
-            }
-
-            .dark .board-config-btn {
-                color: #fff;
-            }
-
-            .dark .board-config-btn:hover {
-                color: #ccc;
+            .dark .footer-layer-content button {
+                background-color: #007acc;
             }
 
             .board-config-menu > .layui-dropdown-menu {
                 max-height: 150px;
                 overflow-x: hidden;
                 overflow-y: auto;
-            }
-
-            .light #board-config-options > .layui-layer-title {
-                border-bottom: 1.5px solid #ddd9d9;
-            }
-
-            .dark #board-config-options > .layui-layer-title {
-                border-bottom: 1.5px solid rgba(255,255,255,.5);
-            }
-
-            .dark #board-config-options button {
-                background-color: #007acc;
             }
         </style>
          <div
@@ -78,17 +37,17 @@
             "
         >
             <i
-                id="board-config-menu-reset"
-                class="board-config-btn layui-icon layui-icon-refresh-1"
+                class="footer-layer-reset footer-layer-btn layui-icon layui-icon-refresh-1"
                 style="font-size: 14px;line-height: 13px;"
                 title="{{ d.reset }}"
             ></i>
             <i
-                class="footer-layer-close board-config-btn layui-icon layui-icon-close"
+                class="footer-layer-close footer-layer-btn layui-icon layui-icon-close"
                 title="{{ d.close }}"
             ></i>
         </div>
         <div
+            class="footer-layer-body"
             style="
                 display: flex;
                 flex-direction: row;

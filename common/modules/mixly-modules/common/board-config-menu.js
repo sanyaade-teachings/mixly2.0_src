@@ -31,22 +31,26 @@ class BoardConfigMenu extends FooterLayer {
      **/
     constructor(domId, boardsInfo) {
         super(domId, {
+            onHidden: (instance) => {
+                this.boardsInfo[this.boardName].writeSelectedOptions();
+            },
             onMount: (instance) => {
                 this.renderMenu(instance);
-                $('#board-config-menu-reset').off().click(() => {
+            },
+            onShown: (instance) => {
+                $(instance.popper).find('.footer-layer-reset')
+                .off().click(() => {
                     const selectedBoardName = this.boardName;
                     let { defaultOptions } = this.boardsInfo[selectedBoardName];
                     this.setSelectedOptions(instance, defaultOptions);
                 });
-            },
-            onHidden: (instance) => {
-                this.boardsInfo[this.boardName].writeSelectedOptions();
             }
         });
         this.containerId = domId;
         this.boardsInfo = boardsInfo;
         this.boardName = null;
         this.template = goog.get(Env.templatePath + '/board-config-menu-div.html');
+        this.dropdownItems = {};
     }
 
     getOptionsByBoardName(name) {
@@ -82,14 +86,17 @@ class BoardConfigMenu extends FooterLayer {
         const boardName = this.boardName;
         const _this = this;
         for (let item of options) {
-            dropdown.render({
+            if (!$('#board-config-' + item.key).length) {
+                continue;
+            }
+            let dropdownConfig = {
                 elem: '#board-config-' + item.key,
                 align: 'right',
                 data: item.options,
                 anywhereClose: true,
                 className: 'scrollbar1 editor-dropdown-menu board-config-menu',
                 style: 'display:inline-block;box-shadow:1px 1px 30px rgb(0 0 0 / 12%);',
-                ready: function(elemPanel, elem) {
+                ready: function (elemPanel, elem) {
                     const $elemPanel = $(elemPanel);
                     const $elem = $(elem);
                     $elemPanel.css({
@@ -107,17 +114,22 @@ class BoardConfigMenu extends FooterLayer {
                         }
                     }
                 },
-                click: function(data, othis) {
+                click: function (data, othis) {
                     const $elem = $(this.elem);
                     const $p = $elem.children('p');
                     $p.text(data.title);
-                    _this.boardsInfo[boardName].selectedOptions[item.key] = {
+                    _this.boardsInfo[boardName].setSelectedOption(item.key, {
                         key: data.id,
                         label: data.title
-                    };
+                    });
                     instance.setProps({});
                 }
-            });
+            };
+            if (this.dropdownItems[item.key]) {
+                this.dropdownItems[item.key].reload(dropdownConfig);
+                continue;
+            }
+            this.dropdownItems[item.key] = dropdown.render(dropdownConfig);
         }
     }
 
@@ -138,9 +150,12 @@ class BoardConfigMenu extends FooterLayer {
             $('#' + this.containerId).css('display', 'inline-flex');
         } else {
             $('#' + this.containerId).css('display', 'none');
+            this.hide();
         }
         this.boardName = boardName;
-        this.destroy();
+        if (this.layer.state.isShown) {
+            this.renderMenu(this.layer);
+        }
     }
 }
 

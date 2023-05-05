@@ -25,8 +25,7 @@ for addr in i2c.scan():
 
 '''i2c-motor'''
 def  i2c_motor(speed):
-    _speed = max(min(speed, 100), -100)
-    i2c.writeto(Mi2c, b'\x00\x00' + _speed.to_bytes(1, 'little') + b'\x00')
+    i2c.writeto(Mi2c, b'\x00\x00' + speed.to_bytes(1, 'little') + b'\x00')
 
 '''TM1931-Expand'''    
 class CAR(TM1931):
@@ -119,30 +118,39 @@ class CAR(TM1931):
             raise ValueError('Mode selection error, light seeking data cannot be read')
 
     def motor(self, index, action, speed=0):
+        speed = max(min(speed, 100), -100)
         if action=="N":
-            if (index == [1, 2]) & (Mi2c > 0):
+            if (index == [1, 2]) and Mi2c:
                 i2c_motor(0)
             else:
                 self.pwm(index[0], 255)
                 self.pwm(index[1], 255)
         elif action=="P":
-            if (index == [1, 2]) & (Mi2c > 0):
+            if (index == [1, 2]) and Mi2c:
                 i2c_motor(0)
             else:
                 self.pwm(index[0], 0)
                 self.pwm(index[1], 0)
         elif action=="CW":
-            if (index == [1, 2]) & (Mi2c > 0):
+            if (index == [1, 2]) and Mi2c:
                 i2c_motor(speed)
             else:
-                self.pwm(index[0], speed * 255 // 100)
-                self.pwm(index[1], 0)
+                if speed >= 0:
+                    self.pwm(index[0], speed * 255 // 100)
+                    self.pwm(index[1], 0)
+                else:
+                    self.pwm(index[0], 0)
+                    self.pwm(index[1], - speed * 255 // 100)
         elif action=="CCW":
-            if (index == [1, 2]) & (Mi2c > 0):
+            if (index == [1, 2]) and Mi2c:
                 i2c_motor(- speed)
             else:
-                self.pwm(index[0], 0)
-                self.pwm(index[1], speed * 255 // 100)
+                if speed >= 0:
+                    self.pwm(index[0], 0)
+                    self.pwm(index[1], speed * 255 // 100)
+                else:
+                    self.pwm(index[0], - speed * 255 // 100)
+                    self.pwm(index[1], 0)
         else:
             raise ValueError('Invalid input, valid are "N","P","CW","CCW"')
             

@@ -53,7 +53,8 @@ Mixly.CssLoader.commonCss = [
     "common/css/scrollbar.css",
     "common/css/select2.min.css",
     "common/css/select2-ext.css",
-    "common/css/xterm.css"
+    "common/css/xterm.css",
+    "common/css/footer-layer.css"
 ];
 
 /* 客户端css */

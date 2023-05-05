@@ -127,7 +127,7 @@ class BoardConfigMenu extends FooterLayer {
             reset: Msg.Lang['使用默认配置'],
             close: Msg.Lang['关闭窗口']
         });
-        this.updateContent(xmlStr);
+        this.setContent(xmlStr);
     }
 
     changeTo(boardName) {

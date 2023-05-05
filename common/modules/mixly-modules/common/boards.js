@@ -14,6 +14,7 @@ goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
 goog.require('Mixly.BoardConfigMenu');
 goog.require('Mixly.BoardConfigItem');
+goog.require('Mixly.FooterBar');
 goog.provide('Mixly.Boards');
 
 const {
@@ -63,7 +64,7 @@ Boards.init = () => {
             }
         }
     } else {
-        Boards.dict[BOARD.boardType] = new BoardConfigItem(BOARD.boardType);
+        Boards.dict[BOARD.boardType] = new BoardConfigItem(BOARD.boardType, BOARD.boardType);
     }
     Boards.NAME = Object.keys(Boards.dict);
     Boards.configMenu = new BoardConfigMenu('mixly-board-config', Boards.dict);
@@ -75,6 +76,7 @@ Boards.init = () => {
         }
         form.render('select', 'boards-type-filter');
     }
+    Mixly.FooterBar.init();
 }
 
 Boards.getType = () => {

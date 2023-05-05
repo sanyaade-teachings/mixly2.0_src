@@ -1,0 +1,51 @@
+<div class="footer-layer">
+    <div class="footer-layer-content scrollbar1">
+        <div class="layui-layer-title">
+            <i
+                class="footer-layer-btn footer-layer-close layui-icon layui-icon-close"
+                title="{{ d.close }}"
+            ></i>
+        </div>
+        <div class="footer-layer-body"
+            style="
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                overflow-y: auto;
+                overflow-x: hidden;
+                padding: 5px 5px 0px 5px;
+                font-size: 14px;
+                width: 350px;
+            "
+        >
+            <div class="toast-container bottom-0 end-0" style="position:relative;">
+                {{# layui.each(d.list, function(index, item) { }}
+                    {{# if (item.type === 1) { }}
+                        <div class="toast show text-bg-{{= item.style }}" role="alert" aria-live="assertive" aria-atomic="true" style="margin-bottom: 8px;">
+                            <div class="toast-header">
+                                <img src="{{= item.src }}" width="22" height="22" class="rounded me-2">
+                                <strong class="me-auto">{{= item.name }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                {{- item.message }}
+                            </div>
+                        </div>
+                    {{# } else { }}
+                        <div class="toast show text-bg-{{= item.style }}" role="alert" aria-live="assertive" aria-atomic="true" style="margin-bottom: 8px;">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    {{- item.message }}
+                                </div>
+                                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    {{# } }}
+                {{# }); }}
+                {{# if ((d.list && d.list.length === 0) || !d.list) { }}
+                    无消息
+                {{# } }}
+            </div>
+        </div>
+    </div>
+</div>

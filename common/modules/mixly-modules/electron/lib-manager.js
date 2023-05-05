@@ -473,6 +473,14 @@ LibManager.onclickImportLibs = () => {
             none: Msg.Lang['云端库JSON下载中'] + '...'
         }
     });
+
+    table.on('row(import-mixly-lib-page-filter)', function(obj) {
+        let $checkbox = obj.tr.first().find('.layui-form-checkbox');
+        obj.setRowChecked({
+            checked: !$checkbox.hasClass('layui-form-checked')
+        });
+    });
+
     const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
     if (LibManager.URL.mixly) {
         CloudDownload.getJson(LibManager.URL.mixly, thirdPartyPath, (message) => {

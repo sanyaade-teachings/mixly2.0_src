@@ -619,13 +619,6 @@ body[class="light"] {
     color: #fff;
 }
 
-.dark .layui-btn-disabled,
-.dark .layui-btn-disabled:active,
-.dark .layui-btn-disabled:hover {
-    border-color: #191919 !important;
-    background-color: #464646 !important;
-}
-
 .dark .layui-layer {
     box-shadow: none !important;
 }

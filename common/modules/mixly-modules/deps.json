@@ -41,7 +41,8 @@
             "Mixly.FooterLayer",
             "Mixly.Msg",
             "Mixly.BoardConfigMenu",
-            "Mixly.BoardConfigItem"
+            "Mixly.BoardConfigItem",
+            "Mixly.FooterBar"
         ],
         "provide": [
             "Mixly.Boards"
@@ -153,6 +154,9 @@
     {
         "path": "/common/footer-bar.js",
         "require": [
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.Msg",
             "Mixly.FooterLayer"
         ],
         "provide": [

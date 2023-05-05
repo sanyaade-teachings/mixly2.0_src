@@ -80,7 +80,7 @@ class FooterLayer {
      * @param content {string} html片段
      * @return {void}
      **/
-    updateContent(content) {
+    setContent(content) {
         this.layer[0].setContent(content);
     }
 

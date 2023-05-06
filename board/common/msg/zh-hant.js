@@ -3638,3 +3638,5 @@ Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = '恢復出廠';
 Blockly.MIXLY_MIXBOT_BUZZER = '喇叭';
 Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_CORPUS = '拼音語料庫';
 Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_TOOLTIP = '返回一個元組，分別為語音辨識出的語料內容和置信度';
+Blockly.MIXLY_IR_STRENGTH = '紅外光強';
+Blockly.MIXLY_LIGHT_STRENGTH = '自然光強';

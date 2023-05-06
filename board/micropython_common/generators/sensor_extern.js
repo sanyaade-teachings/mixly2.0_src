@@ -214,6 +214,9 @@ Blockly.Python.sensor_use_i2c_init=function(){
     else if (key=='LTR308') {
       Blockly.Python.definitions_['import_ltr308al'] = 'import ltr308al';
        code = v + ' = ltr308al.LTR_308ALS('+ iv+ ')\n';
+    }else if (key=='LTR381RGB') {
+      Blockly.Python.definitions_['import_ltr381rgb'] = 'import ltr381rgb';
+       code = v + ' = ltr381rgb.LTR_381RGB('+ iv+ ')\n';
     }else if (key=='HP203X') {
       Blockly.Python.definitions_['import_hp203x'] = 'import hp203x';
       code = v + ' = hp203x.HP203X('+ iv+ ')\n';
@@ -275,6 +278,14 @@ Blockly.Python.sensor_hp203_extern=function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_hp203x'] = 'import hp203x';
     var code = sub + '.' + key;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_ltr381_extern=function(){
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    Blockly.Python.definitions_['import_ltr381rgb'] = 'import ltr381rgb';
+    var code = sub + '.getdata()' + key;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

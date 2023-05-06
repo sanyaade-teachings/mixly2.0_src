@@ -3665,3 +3665,5 @@ Blockly.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = 'factory reset';
 Blockly.MIXLY_MIXBOT_BUZZER = 'buzzer';
 Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_CORPUS = 'corpus';
 Blockly.MIXLY_AI_SENSOR_ASR_RECOGNISE_TOOLTIP = 'Return a tuple, contains the content and confidence level of the speech recognition result';
+Blockly.MIXLY_IR_STRENGTH = 'Infrared light intensity';
+Blockly.MIXLY_LIGHT_STRENGTH = 'Natural light intensity';

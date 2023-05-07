@@ -29,7 +29,6 @@ const { BU, Serial } = Web;
 
 const DEFAULT_CONFIG = {
     "enabled": true,
-    "port": 8082,
     "protocol": "http:",
     "ip": "localhost",
     "domain": null
@@ -38,7 +37,7 @@ const DEFAULT_CONFIG = {
 Compiler.CONFIG = { ...DEFAULT_CONFIG, ...(SOFTWARE?.webCompiler ?? {}) };
 const { CONFIG } = Compiler;
 CONFIG.ip = (CONFIG.ip === 'localhost'? window.location.hostname : CONFIG.ip);
-Compiler.URL = CONFIG.protocol + '//' + (CONFIG.domain? CONFIG.domain : (CONFIG.ip + ':' + CONFIG.port))  + '/';
+Compiler.URL = CONFIG.protocol + '//' + (CONFIG.domain? CONFIG.domain : CONFIG.ip)  + '/compile';
 
 Compiler.compile = () => {
     StatusBar.show(1);
@@ -110,7 +109,7 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
         visitorId: BOARD.visitorId.str32CRC32b,
         operate
     };
-    let commandStr = Compiler.URL + '/?' + Url.jsonToUrl(command);
+    let commandStr = Compiler.URL + '?' + Url.jsonToUrl(command);
     // StatusBar.setValue('send -> ' + commandStr + '\n');
     StatusBar.setValue(indexText['编译中'] + '...\n');
     console.log('send -> ', commandStr);

@@ -19,14 +19,9 @@
     },
     "webSocket": {
         "enabled": false,
-        "port": 8082,
-        "protocol": "wss:"
     },
     "webCompiler": {
         "enabled": false,
-        "port": 8083,
-        "protocol": "https:",
-        "domain": ""
     },
     "debug": false
 }

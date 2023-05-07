@@ -18,10 +18,10 @@
         }
     },
     "webSocket": {
-        "enabled": false,
+        "enabled": false
     },
     "webCompiler": {
-        "enabled": false,
+        "enabled": false
     },
     "debug": false
 }

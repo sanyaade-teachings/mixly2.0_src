@@ -351,6 +351,7 @@ Blockly.Blocks.sensor_use_i2c_init = {
             ["SHT20", "SHT20"],
             ["ADXL345","ADXL345"],
                 ["LTR308", "LTR308"],
+                ["LTR381RGB", "LTR381RGB"],
                 ["HP203X", "HP203X"],
                 ["SHTC3", "SHTC3"],                
                 ["AHT21", "AHT21"],
@@ -417,6 +418,23 @@ Blockly.Blocks['sensor_LTR308_extern'] = {
             .setCheck("var");  
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET_LIGHT_INTENSITY);     
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['sensor_ltr381_extern'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.HTML_COLOUR+Blockly.Msg.MSG.catSensor+" LTR308RGB")
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_GET+Blockly.Msg.HTML_COLOUR, "[2]"],
+            [Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_IR_STRENGTH, "[1]"],
+            [Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_LIGHT_STRENGTH, "[0]"],
+            ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }

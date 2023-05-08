@@ -1147,7 +1147,7 @@ Blockly.Css.register([
 ".blocklyIconShape {","fill: #00f;","stroke: #fff;","stroke-width: 1px;","}",
 ".blocklyIconSymbol {","fill: #fff;","}",
 ".blocklyMinimalBody {","margin: 0;","padding: 0;","}",
-".blocklyHtmlInput {","border: none;","border-radius: 4px;","height: 100%;","margin: 0;","outline: none;","padding: 0;","width: 100%;","text-align: center;","display: block;","box-sizing: border-box;","}",
+".blocklyHtmlInput {","border: none;","border-radius: 4px;","height: 100%;","margin: 0;","outline: none;","padding: 0;","width: 100%;","text-align: center;","display: block;","box-sizing: border-box;","background-color: inherit;","color: black;","}",
 ".blocklyHtmlInput::-ms-clear {","display: none;","}",
 ".blocklyMainBackground {","stroke-width: 1;","stroke: #c6c6c6;","}",
 ".blocklyMutatorBackground {","fill: #fff;","stroke: #ddd;","stroke-width: 1;","}",

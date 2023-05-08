@@ -3464,5 +3464,7 @@ En.MIXLY_MIXBOT_LINE_SENSOR_CALIBRATE_RESET = 'factory reset';
 En.MIXLY_MIXBOT_BUZZER = 'buzzer';
 En.MIXLY_AI_SENSOR_ASR_RECOGNISE_CORPUS = 'corpus';
 En.MIXLY_AI_SENSOR_ASR_RECOGNISE_TOOLTIP = 'Return a tuple, contains the content and confidence level of the speech recognition result';
+En.MIXLY_IR_STRENGTH = 'Infrared light intensity';
+En.MIXLY_LIGHT_STRENGTH = 'Natural light intensity';
 
 })();

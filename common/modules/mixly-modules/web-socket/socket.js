@@ -29,15 +29,19 @@ const { BOARD, SELECTED_BOARD, SOFTWARE } = Config;
 const { Socket } = Mixly.WebSocket;
 
 Socket.obj = null;
-Socket.url = 'ws://127.0.0.1:8082/';
+Socket.url = 'ws://127.0.0.1/socket';
 Socket.jsonArr = [];
 Socket.connected = false;
 Socket.initFunc = null;
-Socket.port = SOFTWARE.webSocket.port;
 Socket.debug = SOFTWARE.debug;
 BOARD.server = { ...SOFTWARE.webSocket };
-const { hostname } = window.location;
-Socket.url = SOFTWARE.webSocket.protocol + '//' + hostname + ':' + Socket.port + '/';
+const { hostname, protocol, port } = window.location;
+if (protocol === 'http:') {
+    Socket.protocol = 'ws:';
+} else {
+    Socket.protocol = 'wss:';
+}
+Socket.url = Socket.protocol + '//' + hostname + ':' + port + '/socket';
 Socket.IPAddress = hostname;
 
 let lockReconnect = false; //避免重复连接

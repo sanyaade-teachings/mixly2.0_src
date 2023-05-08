@@ -26,13 +26,16 @@ Socket.jsonArr = [];
 Socket.connected = false;
 Socket.initFunc = null;
 Socket.debug = SOFTWARE.debug;
-const { hostname, protocol, port } = window.location;
+let { hostname, protocol, port } = window.location;
 if (protocol === 'http:') {
     Socket.protocol = 'ws:';
 } else {
     Socket.protocol = 'wss:';
 }
-Socket.url = Socket.protocol + '//' + hostname + ':' + port + '/socket';
+if (port) {
+    port = ':' + port;
+}
+Socket.url = Socket.protocol + '//' + hostname + port + '/socket';
 Socket.IPAddress = hostname;
 Socket.disconnectTimes = 0;
 Socket.updating = false;

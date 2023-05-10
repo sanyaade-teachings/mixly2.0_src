@@ -33,12 +33,12 @@ Blockly.Blocks.display_show_image = {
         .appendField(Blockly.OLED_DRAWSTR);
     this.appendValueInput("space")
         .setCheck(Number)
-        .appendField(Blockly.MICROPYTHON_DISPLAY_FONT_SPACE);   
+        .appendField(Blockly.Msg.MICROPYTHON_DISPLAY_FONT_SPACE);   
     this.appendDummyInput("")
       .appendField(Blockly.Msg.TEXT_CENTER)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MICROPYTHON_DISPLAY_YES, "True"],
-                [Blockly.MICROPYTHON_DISPLAY_NO, "False"]
+                [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
+                [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
             ]), 'center')     
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -67,7 +67,7 @@ Blockly.Blocks.display_scroll_string_delay = {
          .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_STRING);
      this.appendValueInput("space")
         .setCheck(Number)
-        .appendField(Blockly.MICROPYTHON_DISPLAY_FONT_SPACE);       
+        .appendField(Blockly.Msg.MICROPYTHON_DISPLAY_FONT_SPACE);       
      this.appendValueInput("time")
         .setCheck(Number)
         .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);    
@@ -439,12 +439,12 @@ Blockly.Blocks.onboard_oled_show_string = {
         .appendField(Blockly.MIXLY_TURTLE_WRITE_FONT_NUM);              
     this.appendValueInput("space")
         .setCheck(Number)
-        .appendField(Blockly.MICROPYTHON_DISPLAY_FONT_SPACE);   
+        .appendField(Blockly.Msg.MICROPYTHON_DISPLAY_FONT_SPACE);   
     this.appendDummyInput("")
       .appendField(Blockly.Msg.TEXT_CENTER)
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.MICROPYTHON_DISPLAY_YES, "True"],
-                [Blockly.MICROPYTHON_DISPLAY_NO, "False"]
+                [Blockly.Msg.MICROPYTHON_DISPLAY_YES, "True"],
+                [Blockly.Msg.MICROPYTHON_DISPLAY_NO, "False"]
             ]), 'center')     
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -479,7 +479,7 @@ Blockly.Blocks.onboard_oled_scroll_string_delay = {
         .appendField(Blockly.MIXLY_TURTLE_WRITE_FONT_NUM);    
      this.appendValueInput("space")
         .setCheck(Number)
-        .appendField(Blockly.MICROPYTHON_DISPLAY_FONT_SPACE);       
+        .appendField(Blockly.Msg.MICROPYTHON_DISPLAY_FONT_SPACE);       
      this.appendValueInput("time")
         .setCheck(Number)
         .appendField(Blockly.MIXLY_MICROBIT_JS_MONITOR_SCROLL_INTERVAL);    

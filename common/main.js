@@ -1,5 +1,14 @@
 (() => {
 
+const NOW_ENV = window?.process?.versions?.electron ? 'electron' : 'web';
+
+goog.loadJs = (type, func) => {
+    if (type !== NOW_ENV && type !== 'common') {
+        return;
+    }
+    func();
+}
+
 
 /**
   * mixly文件夹相对于base.js的路径

@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('store');
@@ -106,4 +106,4 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-})();
+});

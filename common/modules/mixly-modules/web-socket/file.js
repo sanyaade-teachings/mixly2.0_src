@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('layui');
 goog.require('Blockly');
@@ -181,4 +181,4 @@ File.openError = (filename, error) => {
     });
 }
 
-})();
+});

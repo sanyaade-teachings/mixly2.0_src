@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Mixly.Config');
@@ -513,4 +513,4 @@ DomOperator.getConfig = (inConfig, defaultConfig) => {
     return _config;
 }
 
-})();
+});

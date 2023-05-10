@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Code');
 goog.require('Mixly.Modules');
@@ -286,4 +286,4 @@ WikiManager.registerContextMenu = () => {
     Blockly.ContextMenuRegistry.registry.register(openWikiPage);
 }
 
-})();
+});

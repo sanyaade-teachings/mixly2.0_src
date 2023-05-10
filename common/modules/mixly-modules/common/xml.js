@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Mixly.Tools');
@@ -213,4 +213,4 @@ window.addEventListener('load', () => {
     }
 });
 
-})();
+});

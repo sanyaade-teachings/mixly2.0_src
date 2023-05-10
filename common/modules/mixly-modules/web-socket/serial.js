@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
@@ -1666,4 +1666,4 @@ Serial.setBaudRate = (port, baud) => {
     });
 }
 
-})();
+});

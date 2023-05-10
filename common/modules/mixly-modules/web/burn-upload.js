@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.StatusBarPort');
@@ -592,4 +592,4 @@ BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
     });
 }
 
-})();
+});

@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Mixly.Url');
 goog.require('Mixly.Modules');
@@ -51,4 +51,4 @@ Electron.newBrowserWindow = (indexPath, config = {}) => {
     return win;
 }
 
-})();
+});

@@ -773,6 +773,7 @@
     {
         "path": "/web/file.js",
         "require": [
+            "Blockly",
             "Mixly.MFile",
             "Mixly.Editor",
             "Mixly.Drag",

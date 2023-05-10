@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Blockly');
@@ -478,4 +478,4 @@ MFile.onclickOpenFile = (input, readType, endFunc) => {
     }
 }
 
-})();
+});

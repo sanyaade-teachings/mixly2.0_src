@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
@@ -102,4 +102,4 @@ CloudDownload.download = (url, downloadDir, options = {}) => {
     });
 }
 
-})();
+});

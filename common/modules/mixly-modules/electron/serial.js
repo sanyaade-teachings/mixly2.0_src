@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('layui');
 goog.require('Mixly.Modules');
@@ -1793,4 +1793,4 @@ Serial.addBtnToStatusBar = () => {
     });
 }
 
-})();
+});

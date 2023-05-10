@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 goog.require('Mixly');
 goog.provide('Mixly.MArray');
 
@@ -59,4 +59,4 @@ MArray.unique = (arr) => {
     return Array.from(new Set(arr));
 }
 
-})();
+});

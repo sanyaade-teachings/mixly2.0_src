@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.Bluetooth');
@@ -181,4 +181,4 @@ Bluetooth.sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-})();
+});

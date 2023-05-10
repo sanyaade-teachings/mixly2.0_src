@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.SerialPort');
@@ -278,4 +278,4 @@ SerialPort.sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-})();
+});

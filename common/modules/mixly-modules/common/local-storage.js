@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly');
 goog.provide('Mixly.LocalStorage');
@@ -38,4 +38,4 @@ LocalStorage.readJson = (key) => {
     }
 }
 
-})();
+});

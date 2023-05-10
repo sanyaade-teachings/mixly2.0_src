@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Url');
 goog.provide('Mixly.Config');
@@ -88,4 +88,4 @@ Config.USER = {
     compileCAndH: 'true'
 };
 
-})();
+});

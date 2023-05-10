@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('tippy');
 goog.require('layui');
@@ -140,4 +140,4 @@ Mixly.Example.prototype.updateCode = (extname, data) => {
     Title.updateTitle(Title.title);
 }
 
-})();
+});

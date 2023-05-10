@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
@@ -260,4 +260,4 @@ class BoardConfigItem {
 
 Mixly.BoardConfigItem = BoardConfigItem;
 
-})();
+});

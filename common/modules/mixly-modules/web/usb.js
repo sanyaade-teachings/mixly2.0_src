@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.USB');
@@ -165,4 +165,4 @@ USB.sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-})();
+});

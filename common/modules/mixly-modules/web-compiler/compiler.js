@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Url');
 goog.require('Mixly.StatusBar');
@@ -180,4 +180,4 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
     });
 }
 
-})();
+});

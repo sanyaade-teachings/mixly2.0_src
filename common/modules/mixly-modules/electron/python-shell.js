@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
@@ -212,4 +212,4 @@ PythonShell.addEvent = () => {
     });
 }
 
-})();
+});

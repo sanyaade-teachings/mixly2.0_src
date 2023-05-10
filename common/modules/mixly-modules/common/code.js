@@ -21,7 +21,7 @@
  * @fileoverview JavaScript for Blockly's Code demo.
  * @author fraser@google.com (Neil Fraser)
  */
- (() => {
+goog.loadJs('common', () => {
 'use strict';
 
 /**
@@ -616,4 +616,4 @@ Code.LANG = USER.language ?? 'zh-hans';
 Code.loadThirdPartyLanJs();*/
 
 window.addEventListener('load', Code.init);
-})();
+});

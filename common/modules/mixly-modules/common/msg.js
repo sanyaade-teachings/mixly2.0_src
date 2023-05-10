@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.MJSON');
 goog.require('Mixly.Config');
@@ -59,4 +59,4 @@ Msg.changeTo = (lang) => {
 Msg.changeTo(Msg.nowLang);
 console.log('Msg.LANG', Msg.LANG);
 
-})();
+});

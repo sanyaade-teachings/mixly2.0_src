@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
 goog.provide('Mixly.Env');
@@ -92,4 +92,5 @@ Env.isElectron = window?.process?.versions?.electron ? true : false;
 if (Env.isElectron) {
     Env.indexDirPath = __dirname;
 }
-})();
+
+});

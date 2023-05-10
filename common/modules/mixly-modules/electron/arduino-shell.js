@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('layui');
 goog.require('Blockly');
@@ -675,4 +675,4 @@ ArduShell.uploadWithBinOrHex = function (filePath) {
     ArduShell.binFilePath = filePath;
     ArduShell.initUpload();
 }
-})();
+});

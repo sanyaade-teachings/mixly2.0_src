@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Charts');
 goog.require('Mixly.StatusBar');
@@ -1392,4 +1392,4 @@ Serial.getResetConfig = (type) => {
     return resetConfig;
 }
 
-})();
+});

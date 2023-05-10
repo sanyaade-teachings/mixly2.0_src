@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 goog.provide('Mixly.Title');
 goog.require('Mixly.Config');
 
@@ -62,4 +62,4 @@ Title.updateTitle = (newTitle) => {
     Title.NOWTITLE = newTitle;
     document.title = newTitle;
 }
-})();
+});

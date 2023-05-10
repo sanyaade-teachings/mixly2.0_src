@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('layui');
 goog.require('Mixly.Modules');
@@ -215,4 +215,4 @@ ArduShell.cancel = function () {
     });
 }
 
-})();
+});

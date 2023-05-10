@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
@@ -194,4 +194,4 @@ StatusBar.scrollToTheTop = () => {
     Ace.gotoLine(0);
 }
 
-})();
+});

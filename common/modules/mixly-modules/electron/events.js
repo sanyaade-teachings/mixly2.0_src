@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Mixly.Command');
 goog.require('Mixly.Modules');
@@ -19,4 +19,4 @@ Modules.ipcRenderer.on('command', (event, message) => {
     Command.run(commandObj);
 });
 
-})();
+});

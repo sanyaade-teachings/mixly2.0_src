@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
 goog.require('Mixly.MJSON')
@@ -44,4 +44,4 @@ Command.run = (commandObj) => {
     }
 }
 
-})();
+});

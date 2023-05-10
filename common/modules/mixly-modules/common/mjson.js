@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly');
 goog.provide('Mixly.MJSON');
@@ -65,4 +65,4 @@ MJSON.get = (inPath) => {
     return goog.getJSON(inPath);
 }
 
-})();
+});

@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
@@ -103,4 +103,4 @@ FooterBar.add = () => {
     
 }
 
-})();
+});

@@ -4,7 +4,7 @@
  *   https://github.com/microbit-foundation/microbit-fs
  *   https://github.com/microbit-foundation/microbit-universal-hex
  */
-(() => {
+goog.loadJs('common', () => {
 
 'use strict';
 goog.require('microbitFs');
@@ -148,4 +148,4 @@ fsWrapper.importHexAppended = function(hexStr) {
     return ['main.py'];
 };
 
-})();
+});

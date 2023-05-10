@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
@@ -288,4 +288,4 @@ Socket.updateSelectedBoardConfig = (info) => {
     Boards.changeTo(boardType);
 }
 
-})();
+});

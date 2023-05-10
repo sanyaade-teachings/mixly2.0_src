@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Mixly.Editor');
@@ -89,4 +89,4 @@ LevelSelector.xmlToWorkspace = (level) => {
     }
 }
 
-})();
+});

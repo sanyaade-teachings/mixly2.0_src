@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly');
 goog.provide('Mixly.Url');
@@ -226,4 +226,4 @@ Url.getIPAddress = () => {
     return null;
 }
 
-})();
+});

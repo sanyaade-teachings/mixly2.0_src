@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('layui');
 goog.require('Mixly.Env');
@@ -124,4 +124,4 @@ Object.defineProperty(Mixly.Electron, 'ExampleExt', {
     configurable: true,
 });
 
-})();
+});

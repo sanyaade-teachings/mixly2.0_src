@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('tippy');
@@ -161,4 +161,4 @@ class BoardConfigMenu extends FooterLayer {
 
 Mixly.BoardConfigMenu = BoardConfigMenu;
 
-})();
+});

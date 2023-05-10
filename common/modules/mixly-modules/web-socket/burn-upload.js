@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('layui');
 goog.require('Mixly.Config');
@@ -489,4 +489,4 @@ BU.uploadWithPort = (port, command) => {
     BU.operateWithPort('upload', port, command);
 }
 
-})();
+});

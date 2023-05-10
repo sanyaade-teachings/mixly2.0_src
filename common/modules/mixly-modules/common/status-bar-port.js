@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 goog.provide('Mixly.StatusBarPort');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Config');
@@ -259,4 +259,4 @@ StatusBarPort.close = (portName) => {
     }
 }
 
-})();
+});

@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.Config');
@@ -449,4 +449,4 @@ Editor.py2BlockEditorChangeStatus = () => {
     }
 }
 
-})();
+});

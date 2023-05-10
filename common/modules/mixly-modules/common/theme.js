@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.StatusBar');
@@ -76,4 +76,4 @@ themeMedia.addListener(e => {
     }
 });
 
-})();
+});

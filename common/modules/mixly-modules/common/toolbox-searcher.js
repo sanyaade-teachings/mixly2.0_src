@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.XML');
@@ -203,4 +203,4 @@ ToolboxSearcher.restart = function () {
     searchCategory.hide();
 }
 
-})();
+});

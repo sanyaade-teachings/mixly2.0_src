@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Mixly.DomOperator');
@@ -204,4 +204,4 @@ LayerExt.open = (toolConfig) => {
     });
 }
 
-})();
+});

@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.MString');
 goog.require('Mixly.StatusBar');
@@ -234,4 +234,4 @@ class Ampy {
 
 Web.Ampy = Ampy;
 
-})();
+});

@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Code');
 goog.require('layui');
@@ -945,4 +945,4 @@ Nav.init = () => {
     }
 }
 
-})();
+});

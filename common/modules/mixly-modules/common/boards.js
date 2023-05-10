@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('tippy');
 goog.require('layui');
@@ -33,7 +33,7 @@ const {
     BoardConfigMenu
 } = Mixly;
 
-const { form, element, dropdown } = layui;
+const { form } = layui;
 
 const { BOARD, USER, SELECTED_BOARD } = Config;
 
@@ -421,4 +421,4 @@ Boards.removeBlocks = (blocksdom, boardKeyList) => {
     return false;
 }
 
-})();
+});

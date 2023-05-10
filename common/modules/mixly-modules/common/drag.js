@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Editor');
 goog.require('Mixly.Config');
@@ -437,4 +437,4 @@ Drag.addBtnClickEvent = () => {
     }
 }
 
-})();
+});

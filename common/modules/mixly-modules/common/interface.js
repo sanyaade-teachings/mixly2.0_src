@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
@@ -193,4 +193,4 @@ Interface.feedback = () => {
     }
 }
 
-})();
+});

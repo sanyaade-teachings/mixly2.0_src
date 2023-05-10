@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('tippy');
 goog.require('Mixly');
@@ -81,4 +81,4 @@ class FooterLayer {
 
 Mixly.FooterLayer = FooterLayer;
 
-})();
+});

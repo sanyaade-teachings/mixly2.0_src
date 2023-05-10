@@ -1,5 +1,6 @@
-(() => {
+goog.loadJs('web', () => {
 
+goog.require('Blockly');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Drag');
@@ -15,6 +16,8 @@ const {
     LayerExt,
     Msg
 } = Mixly;
+
+const { MSG } = Blockly.Msg;
 
 const { File } = Web;
 
@@ -196,4 +199,4 @@ File.saveHex = () => {
 
 }
 
-})();
+});

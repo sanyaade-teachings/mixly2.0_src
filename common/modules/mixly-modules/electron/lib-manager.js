@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('LazyLoad');
 goog.require('layui');
@@ -1271,4 +1271,4 @@ LibManager.unZipPromise = (info, config) => {
     });
 }
 
-})();
+});

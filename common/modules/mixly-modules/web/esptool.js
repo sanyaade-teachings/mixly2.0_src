@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Msg');
@@ -1321,5 +1321,5 @@ Esptool.EspStubLoader = EspStubLoader;
 Esptool.SlipReadError = SlipReadError;
 Esptool.FatalError = FatalError;
 
-})();
+});
 

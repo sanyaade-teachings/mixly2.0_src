@@ -12,7 +12,7 @@ const footer = require('gulp-footer');
 const del = require('del');
 const minimist = require('minimist');
 const yargs = require('yargs');
-const build_deps = require('./pkg/build-deps.js');
+const build_deps = require('./build/build-deps.js');
 const path = require('path');
 const fs_extra = require('fs-extra');
 

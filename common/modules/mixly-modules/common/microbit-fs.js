@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('fsWrapper');
 goog.require('Mixly.Config');
@@ -136,4 +136,4 @@ MicrobitFs.getHex = (code) => {
     }
 }
 
-})();
+});

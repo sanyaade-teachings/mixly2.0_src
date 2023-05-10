@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('Mixly.Env');
 goog.provide('Mixly.Modules');
@@ -47,4 +47,4 @@ const loadNodeModules = () => {
 
 Env.isElectron && loadNodeModules();
 
-})();
+});

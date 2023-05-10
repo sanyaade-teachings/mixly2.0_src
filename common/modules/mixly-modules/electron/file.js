@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
@@ -337,4 +337,4 @@ File.openFile = (filePath) => {
     }
 }
 
-})();
+});

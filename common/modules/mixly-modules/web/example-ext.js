@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('web', () => {
 
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -81,4 +81,4 @@ if (!Env.isElectron) {
     ExampleExt.DIR_TREE = MJSON.get(`../../../sample/${Boards.getType()}.json`) ?? [];
 }
 
-})();
+});

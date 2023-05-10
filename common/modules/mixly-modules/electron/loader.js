@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('electron', () => {
 
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
@@ -63,4 +63,4 @@ Loader.reload = () => {
     Loader.onbeforeunload(true);
 }
 
-})();
+});

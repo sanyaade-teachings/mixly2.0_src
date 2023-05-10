@@ -1,4 +1,4 @@
-(() => {
+goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Mixly.LayerExt');
@@ -62,4 +62,4 @@ NavEvents.init = () => {
         $('#mixly-footer-port').html(data.value);
     });
 }
-})();
+});

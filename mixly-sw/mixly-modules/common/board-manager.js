@@ -408,7 +408,6 @@ BoardManager.showCloudImportProgress = (boardList, endFunc = (errorMessages) => 
     parentDom.css({
         'overflow': 'hidden',
         'padding': '5px',
-        'background-color': USER.theme === 'dark'? '#807b7b' : '#fff',
         'width': '100%',
         'height': '100%',
         'display': 'none'
@@ -417,7 +416,6 @@ BoardManager.showCloudImportProgress = (boardList, endFunc = (errorMessages) => 
     childDom.css({
         'overflow-x': 'hidden',
         'overflow-y': 'auto',
-        'background-color': USER.theme === 'dark'? '#807b7b' : '#fff',
         'width': '100%',
         'height': '100%'
     });

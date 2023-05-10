@@ -944,7 +944,6 @@ LibManager.showCloudImportProgress = (importList, endFunc = (errorMessages) => {
     const parentDom = $('<div></div>');
     parentDom.css({
         'overflow': 'hidden',
-        'background-color': USER.theme === 'dark'? '#807b7b' : '#fff',
         'width': '100%',
         'height': '100%',
         'display': 'none'
@@ -953,7 +952,6 @@ LibManager.showCloudImportProgress = (importList, endFunc = (errorMessages) => {
     childDom.css({
         'overflow-x': 'hidden',
         'overflow-y': 'auto',
-        'background-color': USER.theme === 'dark'? '#807b7b' : '#fff',
         'left': '5px',
         'right': '5px',
         'top': '5px',

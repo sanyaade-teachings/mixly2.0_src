@@ -26,16 +26,16 @@ const scan = (dir, ignore) => {
         return googList;
     }
 
-    let childNames = fs.readdirSync(dir);
-    for (let i = 0; i < childNames.length; i++) {
-        let childPath = path.join(dir, childNames[i]);
+    let nameList = fs.readdirSync(dir);
+    for (let i = 0; i < nameList.length; i++) {
+        let childPath = path.join(dir, nameList[i]);
         if (fs_extend.isfile(childPath)) {
             if (fileIgnore.includes(childPath)) {
                 continue;
             }
             let jsStr = fs.readFileSync(childPath, 'utf8');
             let googObj = {};
-            googObj.path = '/' + dirName + '/' + childNames[i];
+            googObj.path = '/' + dirName + '/' + nameList[i];
             googObj.require = match('goog.require', jsStr);
             googObj.provide = match("goog.provide", jsStr);
             if (googObj.require || googObj.provide) {

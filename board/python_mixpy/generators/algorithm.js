@@ -288,7 +288,7 @@ def begin():
     s.clear()
     s.write('Start!')
     time.sleep(1)
-    s.clear()`;
+    s.clear()\n`;
     Blockly.Python.setups_['move'] = `
 def move(x, y):
     try:
@@ -304,7 +304,7 @@ def move(x, y):
         tower_num[y].append(a)
     except IndexError:
         print('非法移动，未找到可移动的圆盘')
-        exit()`;
+        exit()\n`;
   var code = `num = ${num}
 tower = [[], [], []]
 tower_num = [[], [], []]
@@ -368,7 +368,7 @@ def begin():
     s.clear()
     s.write('Start!')
     time.sleep(1)
-    s.clear()`;
+    s.clear()\n`;
     Blockly.Python.setups_['move'] = `
 def move(x, y):
     try:
@@ -384,7 +384,7 @@ def move(x, y):
         tower_num[y].append(a)
     except IndexError:
         print('非法移动，未找到可移动的圆盘')
-        exit()`;
+        exit()\n`;
   var code = `num = ${num}
 tower = [[], [], []]
 tower_num = [[], [], []]

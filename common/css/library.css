@@ -69,7 +69,7 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div > t
 }
 
 div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-body.layui-table-main > table {
-	width: 100%;
+	width: 100% !important;
 }
 
 .layui-table-header {

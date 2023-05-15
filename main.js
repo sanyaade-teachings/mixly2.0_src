@@ -62,7 +62,10 @@ function sendCommand (commandObj, win = null) {
 // app.disableHardwareAcceleration();
 
 app.allowRendererProcessReuse = false;
-Menu.setApplicationMenu(null);
+
+if (process.platform !== 'darwin') {
+    Menu.setApplicationMenu(null);
+}
 
 function createWindow(filePath = null, indexUrl = null) {
     // 可以创建多个渲染进程
@@ -277,9 +280,7 @@ app.on('activate', () => {
 // 页面全部关闭后关闭主进程,不同平台可能有不同的处理方式
 app.on('window-all-closed', () => {
     usbDetection.stopMonitoring();
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+    app.quit();
 });
 
 app.on('render-process-gone', async (e, w, d) => {

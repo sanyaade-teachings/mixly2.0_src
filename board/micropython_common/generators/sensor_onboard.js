@@ -35,6 +35,7 @@ Blockly.Python.sensor_mixgo_button_get_presses = function(){
 Blockly.Python.sensor_mixgo_button_attachInterrupt = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+	if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
     var dropdown_btn = Blockly.Python.valueToCode(this, 'btn', Blockly.Python.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');

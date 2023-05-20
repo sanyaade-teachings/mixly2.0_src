@@ -14,7 +14,7 @@ class NMEA0183:
 	def __init__(self, uart, baudrate=9600, timeout=200):
 		self._uart=uart
 		self._uart.init(baudrate=baudrate, timeout=timeout, rxbuf=1024)
-		self.time=[None, None, None, 0, None, None, None, 0]
+		self.time=[None, None, None, None, None, None, None, 0]
 		self.locate=['', None, '', None, None, None, None]		#0'1经度,2'3纬度,4海拔m,5速度m/s,6航向°
 		self.status=[False, ' ', 0]		#有效标注,定位模式,卫星量
 
@@ -43,9 +43,9 @@ class NMEA0183:
 				flag_gga,data=self._judge(_data, 15)
 				#print("GGA----",flag_gga)
 				if flag_gga:
-					self.time[4]= int(data[1][0:2])+8
-					self.time[5]= int(data[1][2:4])
-					self.time[6]= int(data[1][4:6])
+					self.time[4]= int(data[1][0:2]) if data[1] else None
+					self.time[5]= int(data[1][2:4]) if data[1] else None
+					self.time[6]= int(data[1][4:6]) if data[1] else None
 					self.locate[0]= data[5]
 					self.locate[1]= int(data[4][:3])+int(data[4][3:].replace('.',''))/6000000 if data[4] else None
 					self.locate[2]= data[3]
@@ -57,12 +57,12 @@ class NMEA0183:
 				flag_rmc,data=self._judge(_data, 14)
 				#print("RMC----",flag_rmc)
 				if flag_rmc:
-					self.time[0]= int(data[9][4:6])+2000
-					self.time[1]= int(data[9][2:4])
-					self.time[2]= int(data[9][0:2])    
-					self.time[4]= int(data[1][0:2])+8
-					self.time[5]= int(data[1][2:4])
-					self.time[6]= int(data[1][4:6])
+					self.time[0]= int(data[9][4:6])+2000 if data[9] else None
+					self.time[1]= int(data[9][2:4])      if data[9] else None
+					self.time[2]= int(data[9][0:2])      if data[9] else None
+					self.time[4]= int(data[1][0:2])+8    if data[1] else None
+					self.time[5]= int(data[1][2:4])      if data[1] else None
+					self.time[6]= int(data[1][4:6])      if data[1] else None
 					self.locate[0]= data[6]
 					self.locate[1]= int(data[5][:3])+int(data[5][3:].replace('.',''))/6000000 if data[5] else None
 					self.locate[2]= data[4]

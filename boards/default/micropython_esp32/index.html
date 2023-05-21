@@ -10,9 +10,7 @@
   <script type="text/javascript" src="../../../common/blockly-core/python_compressed.js"></script>
   <script type="text/javascript" src="../micropython_common/others/variables.js"></script>
   <script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
-
   <script type="text/javascript" src="../micropython_common/others/names.js"></script>
-
   <script type="text/javascript" src="../../../common/js/blockly_helper.js"></script>
 
   <!---profiles-->
@@ -272,11 +270,39 @@
       <block type="controls_pass"></block>
       <block type="controls_flow_statements"></block>
       <block type="controls_try_finally">
+        <statement name="try">
+          <block type="system_print">
+            <value name="VAR">
+              <block type="math_arithmetic">
+                <field name="OP">DIVIDE</field>
+                <value name="A">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="B">
+                  <shadow type="math_number">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
         <value name="IF1">
           <shadow type="factory_block_return">
-            <field name="VALUE">sub_cb</field>
+            <field name="VALUE">Exception as e</field>
           </shadow>
         </value>
+        <statement name="DO1">
+          <block type="system_print">
+            <value name="VAR">
+              <block type="variables_get">
+                <field name="VAR">e</field>
+              </block>
+            </value>
+          </block>
+        </statement>
       </block>
       <block type="controls_thread">
         <value name="callback">

@@ -23,6 +23,7 @@
   <script src="../python/blocks/control.js"></script>
   <script src="../python/blocks/math.js"></script>
   <script src="../python_skulpt/blocks/text.js"></script>
+  <script src="../python_mixpy/blocks/factory.js"></script>
   <script src="../python/blocks/lists.js"></script>
   <script src="../python/blocks/dicts.js"></script>
   <script src="../python/blocks/logic.js"></script>
@@ -38,6 +39,7 @@
   <script src="../python/generators/control.js"></script>
   <script src="../python/generators/math.js"></script>
   <script src="../python_skulpt/generators/text.js"></script>
+  <script src="../python_mixpy/generators/factory.js"></script>
   <script src="../python/generators/lists.js"></script>
   <script src="../python/generators/dicts.js"></script>
   <script src="../python/generators/logic.js"></script>
@@ -213,7 +215,41 @@
         </value>
       </block>
 
-      <block type="controls_try_finally"></block>
+      <block type="controls_try_finally">
+        <statement name="try">
+          <block type="inout_print">
+            <value name="VAR">
+              <block type="math_arithmetic">
+                <field name="OP">DIVIDE</field>
+                <value name="A">
+                  <shadow type="math_number">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="B">
+                  <shadow type="math_number">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <shadow type="factory_block_return">
+            <field name="VALUE">Exception as e</field>
+          </shadow>
+        </value>
+        <statement name="DO1">
+          <block type="inout_print">
+            <value name="VAR">
+              <block type="variables_get">
+                <field name="VAR">e</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
       <!--0    <block type="controls_repeat_ext">
               <value name="TIMES">
                   <shadow type="math_number">

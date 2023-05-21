@@ -526,14 +526,15 @@ Blockly.Arduino.oled_page = function () {
     var NAME = this.getFieldValue('NAME') || 'u8g2';
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     //branch = branch.replace(/(^\s*)|(\s*$)/g, ""); 
+    var code = '';
     if (branch) {
-        var code = NAME + ".firstPage();"
+        code = NAME + ".firstPage();"
             + "\ndo"
             + "\n{"
             + "\n" + branch
             + "}while(" + NAME + ".nextPage());\n";
-        return code;
     }
+    return code;
 };
 
 Blockly.Arduino.oled_showBitmap = function () {

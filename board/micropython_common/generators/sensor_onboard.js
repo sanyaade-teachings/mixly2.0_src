@@ -182,9 +182,16 @@ Blockly.Python.sensor_LTR308 = function(){
 
 Blockly.Python.sensor_sound = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version=='mixbot_s1' || version=='mixbot_s2'){
+        version='mixbot';    
+    Blockly.Python.definitions_['import_'+version+'_sound'] = 'from '+version+' import sound';
+    var code =  'sound.loudness()';
+    }
+    else{
     Blockly.Python.definitions_['import_'+version+'_onboard_sound'] = 'from '+version+' import onboard_sound';
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var code = 'onboard_sound.read()';
+    }
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -234,18 +241,18 @@ Blockly.Python.rfid_write=function(){
 
 Blockly.Python.sensor_get_acceleration = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";
     var key = this.getFieldValue('key');
-    var code;
-    if (key=='x') {
-        code = 'onboard_mxc6655xa.acceleration()[0]';
-    }else if (key=='y') {
-        code = 'onboard_mxc6655xa.acceleration()[1]';
-    }else if (key=='z') {
-        code = 'onboard_mxc6655xa.acceleration()[2]';
-    }else if (key=='values') {
-        code = 'onboard_mxc6655xa.acceleration()';
+    if (version=='mixbot_s1' || version=='mixbot_s2'){
+        version='mixbot';    
+        Blockly.Python.definitions_['import_'+version+'_acc_gyr'] = 'from '+version+' import acc_gyr';
+        var code = 'acc_gyr.gyroscope()' + key ;
     }
+    else{
+        Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";
+        var code = 'onboard_mxc6655xa.acceleration()' + key ;
+    }   
+    
+   
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -631,12 +638,6 @@ Blockly.Python.sensor_mixbot_temperature=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mixbot_get_acceleration = function(){
-    var key = this.getFieldValue('key');
-    Blockly.Python.definitions_['import_mixbot_acc_gyr'] = "from mixbot import acc_gyr";
-    var code = 'acc_gyr.accelerometer()' + key ;
-    return [code, Blockly.Python.ORDER_ATOMIC];
-};
 
 Blockly.Python.sensor_mixbot_get_gyro = function(){
     var key = this.getFieldValue('key');
@@ -645,13 +646,6 @@ Blockly.Python.sensor_mixbot_get_gyro = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mixbot_sound = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
-    Blockly.Python.definitions_['import_'+version+'_sound'] = 'from '+version+' import sound';
-    var code =  'sound.loudness()';
-    return [code, Blockly.Python.ORDER_ATOMIC];
-};
 
 
 Blockly.Python.sensor_button_is_pressed=Blockly.Python.sensor_mixgo_button_is_pressed;

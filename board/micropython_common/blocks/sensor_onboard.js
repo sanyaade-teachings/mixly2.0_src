@@ -587,14 +587,13 @@ Blockly.Blocks['sensor_get_acceleration'] = {
         this.appendDummyInput()
         .appendField(Blockly.MIXLY_MICROBIT_JS_ACCELERATION)
         .appendField(new Blockly.FieldDropdown([
-            ["x", "x"],
-            ["y", "y"],
-            ["z", "z"],
-            ["(x,y,z)", "values"]
+            ["x", "[0]"],
+            ["y", "[1]"],
+            ["z", "[2]"],
+            ["(x,y,z)", ""]
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_ACCELERATION);
         var thisBlock = this;
         this.setTooltip(function() {
             var mode = thisBlock.getFieldValue('key');
@@ -602,10 +601,10 @@ Blockly.Blocks['sensor_get_acceleration'] = {
             var mode1 = Blockly.MIXLY_MICROBIT_Direction;
             var mode2 = Blockly.MIXLY_MICROBIT_JS_ACCELERATION1;
             var TOOLTIPS = {
-                'x': 'x',
-                'y': 'y',
-                'z': 'z',
-                '(x,y,z)':Blockly.MIXLY_MICROBIT_Shiliang_Direction,
+                '[0]': 'x',
+                '[1]': 'y',
+                '[2]': 'z',
+                '':Blockly.MIXLY_MICROBIT_Shiliang_Direction,
             };
             return mode0 +TOOLTIPS[mode]+mode1+mode2;
         });
@@ -1194,36 +1193,7 @@ Blockly.Blocks['sensor_mixbot_temperature'] = {
     }
 };
 
-Blockly.Blocks['sensor_mixbot_get_acceleration'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MICROBIT_JS_ACCELERATION)
-        .appendField(new Blockly.FieldDropdown([
-            ["x", "[0]"],
-            ["y", "[1]"],
-            ["z", "[2]"],
-            ["(x,y,z)", ""]
-            ]), "key");
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.MIXLY_MICROBIT_JS_ACCELERATION);
-        var thisBlock = this;
-        this.setTooltip(function() {
-            var mode = thisBlock.getFieldValue('key');
-            var mode0 = Blockly.MIXLY_MICROBIT_PY_STORAGE_GET;
-            var mode1 = Blockly.MIXLY_MICROBIT_Direction;
-            var mode2 = Blockly.MIXLY_MICROBIT_JS_ACCELERATION1;
-            var TOOLTIPS = {
-                '[0]': 'x',
-                '[1]': 'y',
-                '[2]': 'z',
-                '':Blockly.MIXLY_MICROBIT_Shiliang_Direction,
-            };
-            return mode0 +TOOLTIPS[mode]+mode1+mode2;
-        });
-    }
-};
+
 
 Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     init: function(){
@@ -1255,15 +1225,7 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     }
 };
 
-Blockly.Blocks['sensor_mixbot_sound'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.MIXLY_MIXBOT_SOUND_LOUDNESS);
-        this.setOutput(true);
-        this.setInputsInline(true);
-    }
-};
+
 
 Blockly.Blocks['sensor_button_is_pressed']=Blockly.Blocks['sensor_mixgo_button_is_pressed'];
 Blockly.Blocks['sensor_button_was_pressed']=Blockly.Blocks['sensor_mixgo_button_was_pressed'];

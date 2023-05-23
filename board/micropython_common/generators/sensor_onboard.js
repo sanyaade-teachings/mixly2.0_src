@@ -245,7 +245,7 @@ Blockly.Python.sensor_get_acceleration = function(){
     if (version=='mixbot_s1' || version=='mixbot_s2'){
         version='mixbot';    
         Blockly.Python.definitions_['import_'+version+'_acc_gyr'] = 'from '+version+' import acc_gyr';
-        var code = 'acc_gyr.gyroscope()' + key ;
+        var code = 'acc_gyr.accelerometer()' + key ;
     }
     else{
         Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";

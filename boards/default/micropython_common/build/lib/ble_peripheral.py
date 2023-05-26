@@ -29,7 +29,7 @@ _UART_RX = (bluetooth.UUID("6E400002-B5A3-F393-E0A9-E50E24DCCA9E"),_FLAG_WRITE |
 _UART_SERVICE = (_UART_UUID,(_UART_TX, _UART_RX),)
 
 class BLESimplePeripheral:
-	def __init__(self,name="mpy-uart"):
+	def __init__(self, name=None):
 		self._ble = bluetooth.BLE()
 		self._ble.active(True)
 		self._ble.irq(self._irq)
@@ -37,6 +37,9 @@ class BLESimplePeripheral:
 		self._connections = set()
 		self._write_callback = None
 		self._write_data = None
+		if (name is '') or (name is None):
+			name = "Mixgo" + self.mac[-3:].upper()
+			print("Bluetooth name:", name)
 		self._payload = advertising_payload(name=name, services=[_UART_UUID])
 		self._advertise()
 

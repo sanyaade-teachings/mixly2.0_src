@@ -332,10 +332,10 @@ Blockly.Blocks['IOT_MIXIO_PUBLISH'] = {
         this.appendDummyInput()
             .appendField("MixIO")
         this.appendValueInput('TOPIC')
-            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH)
+            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_NEW)
             .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
         this.appendValueInput('MSG')
-            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_MSG);
+            .appendField(Blockly.Msg.HTML_BODY);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -349,7 +349,8 @@ Blockly.Blocks["IOT_MIXIO_SUBSCRIBE"] = {
         this.appendDummyInput()
             .appendField("MixIO")
         this.appendValueInput('TOPIC')
-            .appendField(Blockly.Msg.MIXLY_EMQX_SUBSCRIBE+Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
+            .appendField(Blockly.Msg.MIXLY_EMQX_SUBSCRIBE+Blockly.Msg.MIXLY_MICROBIT_MSG)
+            .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
         this.appendValueInput('METHOD')
             .appendField(Blockly.Msg.MIXLY_EMQX_SET_METHOD);    
         this.setInputsInline(true);

@@ -176,6 +176,7 @@ class Color_ID(Base):
 		except Exception as e:
 			raise RuntimeError("Cannot find a Color sensor", e)
 
+'''Servo Motor'''
 class Motor_servo(Base):
 	_addrs = [0x60, 0x61, 0x62, 0x63]
 	_mstop = [0, 0, 0, 0]
@@ -230,10 +231,9 @@ class Motor_servo(Base):
 		self._write(naddr=naddr, keep=1)
 	
 	def state(self,naddr=0):
-		'''运行状态返回 (功率, 速度, 绝对角度, 相对角度, 是否堵住, 是否装完) '''
+		'''运行状态返回 (功率, 速度, 绝对角度, 相对角度, 是否堵住, 是否转完) '''
 		try:        
 			_buf = self._i2c.read_device(self._addrs[naddr], 0x10, 7)
 			return _u2s(_buf[0]), _u2s(_buf[1]), (_buf[2] & 0x01)<<8 | _buf[3], _u2s((_buf[4]<<16 | _buf[5]<<8 | _buf[6]),24), bool(_buf[2] & 0x40), bool(_buf[2] & 0x80)
 		except Exception as e:
 			raise RuntimeError("Cannot find a Servo Motor", e)
-			

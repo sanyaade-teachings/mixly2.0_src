@@ -309,7 +309,7 @@ def move(x, y):
 tower = [[], [], []]
 tower_num = [[], [], []]
 A,B,C=0,1,2
-total_num=0
+total_num=[0]
 color= (${colorList.join(', ')})
 init_Hanoi()
 for i in range(0, num, 1):
@@ -389,7 +389,7 @@ def move(x, y):
 tower = [[], [], []]
 tower_num = [[], [], []]
 A,B,C=0,1,2
-total_num=0
+total_num=[0]
 color= (${color})
 init_Hanoi()
 for i in range(0, num, 1):
@@ -418,7 +418,7 @@ begin()\n`;
 Blockly.Python.hanoi_move = function() {
   var fromNum = Blockly.Python.valueToCode(this, 'FROM_NUM', Blockly.Python.ORDER_ATOMIC) || '0';
   var toNum = Blockly.Python.valueToCode(this, 'TO_NUM', Blockly.Python.ORDER_ATOMIC) || '0';
-  var code = `move(${fromNum}, ${toNum})\ntotal_num+=1\ncount_turtle.clear()\ncount_turtle.write('总步数：'+str(total_num))\n`;
+  var code = `move(${fromNum}, ${toNum})\ntotal_num[0]+=1\ncount_turtle.clear()\ncount_turtle.write('总步数：'+str(total_num[0]))\n`;
   return code;
 };
 

@@ -647,3 +647,41 @@ Blockly.Python.gnss_have_data=function(){
     var code = sub + '.any()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+//mixbot extern below:
+Blockly.Python.mixbot_button_extern_get_value=function(){
+    var mode = this.getFieldValue('mode');
+    var num = this.getFieldValue('num');    
+    Blockly.Python.definitions_['import_mixbot_ext_ext_button'] = 'from mixbot_ext import ext_button';
+    var code = 'ext_button.value('+ mode +")"+num;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_touch_extern_get_value=function(){
+    var mode = this.getFieldValue('mode');
+    Blockly.Python.definitions_['import_mixbot_ext_ext_collision'] = 'from mixbot_ext import ext_collision';
+    var code = 'ext_collision.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_infrared_extern_get_value=function(){
+    var mode = this.getFieldValue('mode');
+    Blockly.Python.definitions_['import_mixbot_ext_ext_infrared'] = 'from mixbot_ext import ext_infrared';
+    var code = 'ext_infrared.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_potentiometer_extern_get_value=function(){
+    var mode = this.getFieldValue('mode');
+    Blockly.Python.definitions_['import_mixbot_ext_ext_potentiometer'] = 'from mixbot_ext import ext_potentiometer';
+    var code = 'ext_potentiometer.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_color_extern_get_value=function(){
+    var mode = this.getFieldValue('mode');
+    var color = this.getFieldValue('color');
+    Blockly.Python.definitions_['import_mixbot_ext_ext_color'] = 'from mixbot_ext import ext_color';
+    var code = 'ext_color.recognition('+ mode +")"+color;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

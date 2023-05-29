@@ -269,3 +269,51 @@ Blockly.Python.syn6288_tts_play=function(){
     var code = v+".synthesis("+ data + ',music='+ voice +',blocking='+ mode +")\n";
     return code;
 };
+
+//mixbot extern below:
+Blockly.Python.mixbot_motor_extern=function(){
+    Blockly.Python.definitions_['import_mixbot_ext_ext_motor'] = 'from mixbot_ext import ext_motor';
+    var mode = this.getFieldValue('mode');
+    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
+    var code = 'ext_motor.run('+ mode + ',' + speed +")\n";
+    return code;
+};
+
+Blockly.Python.mixbot_motor_extern_get_speed=function(){
+    Blockly.Python.definitions_['import_mixbot_ext_ext_motor'] = 'from mixbot_ext import ext_motor';
+    var mode = this.getFieldValue('mode');
+    var code = 'ext_motor.run('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_traffic_light_extern=function(){
+    Blockly.Python.definitions_['import_mixbot_ext_ext_traffic'] = 'from mixbot_ext import ext_traffic';
+    var mode = this.getFieldValue('mode');
+    var light = this.getFieldValue('light');
+    var code = 'ext_traffic.led('+ mode + ',';
+    if (light=='0' || light=='1' || light=='2'){code+='0'+ ','} 
+    else if (light=='3' || light=='4'){code+='1'+ ','} 
+    else if (light=='5' || light=='6'){code+='2'+ ','} 
+    if (light =='0'){code+='0'}   
+    else if (light=='1' || light=='3' || light=='5'){code+='1'} 
+    else if (light=='2' || light=='4' || light=='6'){code+='-1'} 
+    code+=")\n";
+    return code;
+};
+
+Blockly.Python.mixbot_led_extern=function(){
+    var mode = this.getFieldValue('mode');
+    var color = this.getFieldValue('color');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+color+'_motor'] = 'from mixbot_ext import '+color+'_LED';
+    var value = Blockly.Python.valueToCode(this, 'value', Blockly.Python.ORDER_ATOMIC);
+    var code = color+'_LED.brightness('+ mode + ',' + value +")\n";
+    return code;
+};
+
+Blockly.Python.mixbot_led_extern_get_value=function(){
+    var mode = this.getFieldValue('mode');
+    var color = this.getFieldValue('color');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+color+'_motor'] = 'from mixbot_ext import '+color+'_LED';
+    var code = color+'_LED.brightness('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

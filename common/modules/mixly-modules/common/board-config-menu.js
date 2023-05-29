@@ -53,8 +53,34 @@ class BoardConfigMenu extends FooterLayer {
         this.dropdownItems = {};
     }
 
-    getOptionsByBoardName(name) {
+    getSelectedOptions() {
+        const selectedBoardName = this.boardName;
+        let { selectedOptions } = this.boardsInfo[selectedBoardName];
+        return selectedOptions;
+    }
 
+    getSelectedParams() {
+        let options = this.getSelectedOptions();
+        let paramList = [];
+        for (let i in options) {
+            paramList.push(i + '=' + options[i].key);
+        }
+        let { boardKey } = this;
+        const index = key.indexOf('@');
+        if (index !== -1) {
+            boardKey = boardKey.substring(0, index);
+        }
+        return paramList.length ? (boardKey + ':' + paramList.join(',')) : boardKey;
+    }
+
+    getSelectedParamByName(name) {
+        let options = this.getSelectedOptions();
+        for (let i in options) {
+            if (i === name) {
+                return options[i].key;
+            }
+        }
+        return '';
     }
 
     renderMenu(instance) {
@@ -153,6 +179,7 @@ class BoardConfigMenu extends FooterLayer {
             this.hide();
         }
         this.boardName = boardName;
+        this.boardKey = this.boardsInfo[boardName].key;
         if (this.layer.state.isShown) {
             this.renderMenu(this.layer);
         }

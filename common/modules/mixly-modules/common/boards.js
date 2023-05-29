@@ -83,10 +83,17 @@ Boards.getType = () => {
     let str = BOARD.boardIndex ?? '';
     str = str.replaceAll('\\', '/');
     if (BOARD.thirdPartyBoard) {
-        return str.match(/(?<=boards\/extend\/)[^?\/\\、*\"><|]+/g)[0];
+        let results = str.match(/(?<=boards\/extend\/)[^?\/\\、*\"><|]+/g);
+        if (results instanceof Array) {
+            return results[0];
+        }
     } else {
-        return str.match(/(?<=boards\/default\/)[^?\/\\、*\"><|]+/g)[0];
+        let results = str.match(/(?<=boards\/default\/)[^?\/\\、*\"><|]+/g);
+        if (results instanceof Array) {
+            return results[0];
+        }
     }
+    return BOARD.boardType;
 }
 
 Boards.getSelectedBoardName = () => {
@@ -121,37 +128,12 @@ Boards.getSelectedBoardConfig = () => {
     return Boards.dict[boardName]?.selectedOptions ?? null;
 }
 
-Boards.getBoardCommandParam = (boardName) => {
-    if (!Boards.dict[boardName]) return null;
-    const info = Boards.dict[boardName];
-    let { key, ignore = [] } = info;
-    const { selectedOptions } = info;
-    if (!key) return null;
-    const index = key.indexOf('@');
-    if (index !== -1)
-        key = key.substring(0, index);
-    let commandStr = key;
-    if (typeof selectedOptions === 'object') {
-        commandStr += ':';
-        for (let i in selectedOptions) {
-            if (!ignore.includes(i))
-                commandStr += i + '=' + selectedOptions[i].key + ',';
-        }
-        commandStr = commandStr.substring(0, commandStr.length - 1);
-    }
-    return commandStr;
-}
-
 Boards.getSelectedBoardCommandParam = () => {
-    const boardName = Boards.getSelectedBoardName();
-    return Boards.getBoardCommandParam(boardName);
+    return Boards.configMenu.getSelectedParams();
 }
 
-Boards.getSelectedBoardConfigParam = (param) => {
-    const selectedOptions = Boards.getSelectedBoardConfig();
-    if (selectedOptions && typeof selectedOptions === 'object')
-        return selectedOptions[param].key ?? '';
-    return '';
+Boards.getSelectedBoardConfigParam = (name) => {
+    return Boards.configMenu.getSelectedParamByName(name);
 }
 
 /**

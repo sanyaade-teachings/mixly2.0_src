@@ -94,7 +94,7 @@ class Touch_Pad:
         return self._pin.read()
 
 #Touch with function call
-def touched(pin,value=30000):
+def touched(pin,value=33000):
     return Touch_Pad(pin).is_touched(value)  if value  else Touch_Pad(pin).raw_value()
 
 '''2-LED'''     #Repair brightness adjustment range 0-100%    

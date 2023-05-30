@@ -92,6 +92,7 @@ profile["Mixbot-s1"] = {
     radio_datarate:[["1Mbit", "RATE_1MBIT"], ["250Kbit", "RATE_250KBIT"], ["2Mbit", "RATE_2MBIT"]],
     one_more:[["ONE_SHOT", "ONE_SHOT"], ["PERIODIC", "PERIODIC"]],
     digital_dot:[["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]],
+    extern_addr: profile.generate([ '0-3' ]),
 };
 
 profile["Mixbot-s2"] = {
@@ -130,6 +131,7 @@ profile["Mixbot-s2"] = {
     radio_datarate:[["1Mbit", "RATE_1MBIT"], ["250Kbit", "RATE_250KBIT"], ["2Mbit", "RATE_2MBIT"]],
     one_more:[["ONE_SHOT", "ONE_SHOT"], ["PERIODIC", "PERIODIC"]],
     digital_dot:[["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]],
+    extern_addr: profile.generate([ '0-3' ]),
 };
 
 profile["ESP32 Generic"] = {

@@ -309,7 +309,7 @@ Blockly.Python.mixbot_traffic_light_extern=function(){
 Blockly.Python.mixbot_led_extern=function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var color = this.getFieldValue('color');    
-    Blockly.Python.definitions_['import_mixbot_ext_'+color+'_motor'] = 'from mixbot_ext import '+color+'_LED';
+    Blockly.Python.definitions_['import_mixbot_ext_'+color+'_LED'] = 'from mixbot_ext import '+color+'_LED';
     var value = Blockly.Python.valueToCode(this, 'value', Blockly.Python.ORDER_ATOMIC);
     var code = color+'_LED.brightness('+ mode + ',' + value +")\n";
     return code;
@@ -318,7 +318,7 @@ Blockly.Python.mixbot_led_extern=function(){
 Blockly.Python.mixbot_led_extern_get_value=function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var color = this.getFieldValue('color');    
-    Blockly.Python.definitions_['import_mixbot_ext_'+color+'_motor'] = 'from mixbot_ext import '+color+'_LED';
+    Blockly.Python.definitions_['import_mixbot_ext_'+color+'_LED'] = 'from mixbot_ext import '+color+'_LED';
     var code = color+'_LED.brightness('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
@@ -381,5 +381,21 @@ Blockly.Python.mixbot_servo_extern_relative_continue=function(){
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
     var direction = this.getFieldValue('direction');
     var code = 'ext_servo.relative_continue('+ mode+ "," + status+ ","+ speed + ","  +direction +")\n";
+    return code;
+};
+
+Blockly.Python.mixbot_actuator_extern_get_addr=function(){
+    var name = this.getFieldValue('name');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;
+    var code = name+'.addr_get()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_actuator_extern_set_addr=function(){
+    var name = this.getFieldValue('name');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;
+    var oldaddr = Blockly.Python.valueToCode(this, 'old', Blockly.Python.ORDER_ATOMIC);
+    var newaddr = Blockly.Python.valueToCode(this, 'new', Blockly.Python.ORDER_ATOMIC);
+    var code = name+'.addr_set('+oldaddr+','+newaddr+')\n';
     return code;
 };

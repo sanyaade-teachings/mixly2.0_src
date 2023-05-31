@@ -685,3 +685,19 @@ Blockly.Python.mixbot_color_extern_get_value=function(){
     var code = 'ext_color.recognition('+ mode +")"+color;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.mixbot_sensor_extern_get_addr=function(){
+    var name = this.getFieldValue('name');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;
+    var code = name+'.addr_get()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_sensor_extern_set_addr=function(){
+    var name = this.getFieldValue('name');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;
+    var oldaddr = Blockly.Python.valueToCode(this, 'old', Blockly.Python.ORDER_ATOMIC);
+    var newaddr = Blockly.Python.valueToCode(this, 'new', Blockly.Python.ORDER_ATOMIC);
+    var code = name+'.addr_set('+oldaddr+','+newaddr+')\n';
+    return code;
+};

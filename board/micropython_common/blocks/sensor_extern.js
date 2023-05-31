@@ -1448,7 +1448,7 @@ Blockly.Blocks['gnss_get_data'] = {
 //mixbot extern below:
 Blockly.Blocks.mixbot_button_extern_get_value = {
     init: function () {
-      this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField("Mixbot")
           .appendField(Blockly.ME_GO_MOTOR_EXTERN+Blockly.MIXLY_BUTTON)
@@ -1474,16 +1474,16 @@ Blockly.Blocks.mixbot_button_extern_get_value = {
 
 Blockly.Blocks.mixbot_touch_extern_get_value = {
     init: function () {
-      this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField("Mixbot")
-          .appendField(Blockly.ME_GO_MOTOR_EXTERN+Blockly.MIXLY_ESP32_TOUCH_SENSOR)
+          .appendField(Blockly.ME_GO_MOTOR_EXTERN+Blockly.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH+MSG.catSensor)
       this.appendValueInput('mode')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField(Blockly.LCD_NUMBERING);                   
       this.appendDummyInput()
-          .appendField(Blockly.MIXLY_IS_TOUCHED+"?")       
+          .appendField(Blockly.MIXLY_MIXBOT_EXTERN_TOUCHED+"?")       
       this.setOutput(true,Boolean);
       this.setInputsInline(true);
     }
@@ -1491,7 +1491,7 @@ Blockly.Blocks.mixbot_touch_extern_get_value = {
 
 Blockly.Blocks.mixbot_infrared_extern_get_value = {
     init: function () {
-      this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField("Mixbot")
           .appendField(Blockly.ME_GO_MOTOR_EXTERN+Blockly.MIXLY_ESP32_EXTERN_NEAR)
@@ -1508,7 +1508,7 @@ Blockly.Blocks.mixbot_infrared_extern_get_value = {
 
 Blockly.Blocks.mixbot_potentiometer_extern_get_value = {
     init: function () {
-      this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField("Mixbot")
           .appendField(Blockly.ME_GO_MOTOR_EXTERN+Blockly.MIXLY_KNOB_POTENTIOMETER)
@@ -1525,7 +1525,7 @@ Blockly.Blocks.mixbot_potentiometer_extern_get_value = {
 
 Blockly.Blocks.mixbot_color_extern_get_value = {
     init: function () {
-      this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField("Mixbot")
           .appendField(Blockly.ME_GO_MOTOR_EXTERN+Blockly.Msg.HTML_COLOUR+MSG.catSensor)
@@ -1543,6 +1543,55 @@ Blockly.Blocks.mixbot_color_extern_get_value = {
             [Blockly.MIXLY_ALL, '']
             ]), "color");    
       this.setOutput(true,Boolean);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_sensor_extern_get_addr = {
+    init: function () {
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.ME_GO_MOTOR_EXTERN)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_BUTTON, 'ext_button'],
+            [Blockly.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH+MSG.catSensor, 'ext_collision'],
+            [Blockly.MIXLY_ESP32_EXTERN_NEAR, 'ext_infrared'],
+            [Blockly.MIXLY_KNOB_POTENTIOMETER, 'ext_potentiometer'],
+            [Blockly.Msg.HTML_COLOUR+MSG.catSensor, 'ext_color']
+            ]), "name")       
+      this.appendDummyInput()
+          .appendField(Blockly.MIXLY_MIXBOT_EXTERN_GET_ADDR)       
+      this.setOutput(true);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_sensor_extern_set_addr = {
+    init: function () {
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.ME_GO_MOTOR_EXTERN)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.MIXLY_BUTTON, 'ext_button'],
+            [Blockly.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH+MSG.catSensor, 'ext_collision'],
+            [Blockly.MIXLY_ESP32_EXTERN_NEAR, 'ext_infrared'],
+            [Blockly.MIXLY_KNOB_POTENTIOMETER, 'ext_potentiometer'],
+            [Blockly.Msg.HTML_COLOUR+MSG.catSensor, 'ext_color']
+            ]), "name")        
+      this.appendDummyInput()
+          .appendField(Blockly.MIXLY_MIXBOT_EXTERN_SET_ADDR)    
+      this.appendValueInput('old')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.MIXLY_MICROBIT_JS_CURRENT_GESTURE);
+      this.appendValueInput('new')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.MIXLY_UPDATE);           
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
       this.setInputsInline(true);
     }
 }

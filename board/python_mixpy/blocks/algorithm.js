@@ -184,6 +184,16 @@ Blockly.Blocks['algorithm_print_path'] = {
   }
 };
 
+Blockly.Blocks['algorithm_print_path2'] = {
+  init: function() {
+    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+    this.appendDummyInput()
+    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_PRINT_PATH2);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+  }
+};
+
 Blockly.Blocks['algorithm_first_book'] = {
   init: function() {
     this.setColour(Blockly.Msg['ALGORITHM_HUE']);

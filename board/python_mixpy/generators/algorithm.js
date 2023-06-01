@@ -23,7 +23,7 @@ Blockly.Python.algorithm_prepare2 = function() {
 Blockly.Python.algorithm_prepare3 = function() {  
   var line1 = 'g = [[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000],[10000,10000,500,300,10000,10000,10000,10000,10000,10000,10000],[10000,500,10000,10000,100,10000,10000,10000,10000,10000,10000],[10000,300,10000,10000,400,300,10000,10000,10000,10000,10000],[10000,10000,100,400,10000,10000,200,10000,10000,10000,10000],[10000,10000,10000,300,10000,10000,100,200,10000,10000,10000],[10000,10000,10000,10000,200,100,10000,10000,100,10000,10000],[10000,10000,10000,10000,10000,200,10000,10000,100,10000,10000],[10000,10000,10000,10000,10000,10000,100,100,10000,10000,10000]]\n';
   var line2 = 'now=1\n';
-  var code = line1+line2+"dist=0\nlast=1\n";
+  var code = line1+line2+"last=1\npath=[]\npath.append(1)\n";
   return code;
 };
 
@@ -58,7 +58,7 @@ Blockly.Python.algorithm_find_path = function() {
 };
 
 Blockly.Python.algorithm_move_recent = function() {  
-  var line1 = 'tmp=10000\nfor i in range (9):\n'+'    if g[now][i]<tmp and i!=last:\n'+'        next=i\n'+'        tmp=g[now][i]\n'+'dist+=tmp\n'+'last=now\n'+'now=next\n';
+  var line1 = 'tmp=10000\nfor i in range (9):\n'+'    if g[now][i]<tmp and i!=last:\n'+'        next=i\n'+'        tmp=g[now][i]\n'+'path.append(next)\n'+'last=now\n'+'now=next\n';
   var code = line1;
   return code;
 };
@@ -115,7 +115,31 @@ Blockly.Python.algorithm_no_left = function() {
 };
 
 Blockly.Python.algorithm_print_path = function() {  
-  var code = "print(path)\n";
+  var code = 'name = ["","学校","小智家","小欣家","小思家","小科家","贝贝家","乐乐家"]\nres = ""\nfor i in path:\n    res = res + name[i] + "-"\nprint(res[:-1])\n';
+  return code;
+};
+
+Blockly.Python.algorithm_print_path2 = function() {  
+  Blockly.Python.setups_['print_path2'] = `
+def printpath(path):
+    for i in path:
+        if i == 1:
+            print('小思家→',end ='')
+        if i == 2:
+            print('银行→',end ='')
+        if i == 3:
+            print('邮局→',end ='')
+        if i == 4:
+            print('餐厅→',end ='')
+        if i == 5:
+            print('便利店→',end ='')
+        if i == 6:
+            print('礼品店→',end ='')
+        if i == 7:
+            print('银行→',end ='')
+        if i == 8:
+            print('小科家')`;
+  var code = 'printpath(path)\n';
   return code;
 };
 

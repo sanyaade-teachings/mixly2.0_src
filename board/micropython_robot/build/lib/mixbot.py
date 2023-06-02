@@ -285,9 +285,10 @@ class Motor(object):
 	SPEED_MODE	= const(0x03)
 	TURNS_MODE	= const(0x04)
 	
-	def __init__(self, i2c_bus, addr=0x02):
+	def __init__(self, i2c_bus, addr=0x02, scale=90 * 4):
 		self._i2c = i2c_bus
 		self._addr = addr
+		self._scale = scale
 		self._signala = PWM(Pin(13), freq=500, duty_u16=49150)
 		self._signalb = PWM(Pin(14), freq=500, duty_u16=49150)
 		self._status = ((0,0,0,0), (0,0,0,0))
@@ -313,13 +314,15 @@ class Motor(object):
 		m1_pwr_speed, m2_pwr_speed = 0, 0
 		buf[0] = (self._motor[0][0] << 4) | self._motor[1][0] 
 		if self._motor[0][0] == self.TURNS_MODE:
-			buf[1] = (- self._motor[0][1]) & 0xFF
-			buf[2] = ((- self._motor[0][1]) >> 8) & 0xFF
+			_turns = round(self._motor[0][1] * self._scale)
+			buf[1] = (- _turns) & 0xFF
+			buf[2] = ((- _turns) >> 8) & 0xFF
 		else:
 			m1_pwr_speed = - max(min(self._motor[0][1], 100), -100)
 		if self._motor[1][0] == self.TURNS_MODE:
-			buf[3] = self._motor[1][1] & 0xFF
-			buf[4] = (self._motor[1][1] >> 8) & 0xFF
+			_turns = round(self._motor[1][1] * self._scale)
+			buf[3] = _turns & 0xFF
+			buf[4] = (_turns >> 8) & 0xFF
 		else:
 			m2_pwr_speed = max(min(self._motor[1][1], 100), -100)
 		

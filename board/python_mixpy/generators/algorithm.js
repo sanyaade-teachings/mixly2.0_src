@@ -120,26 +120,12 @@ Blockly.Python.algorithm_print_path = function() {
 };
 
 Blockly.Python.algorithm_print_path2 = function() {  
-  Blockly.Python.setups_['print_path2'] = `
-def printpath(path):
-    for i in path:
-        if i == 1:
-            print('小思家→',end ='')
-        if i == 2:
-            print('银行→',end ='')
-        if i == 3:
-            print('邮局→',end ='')
-        if i == 4:
-            print('餐厅→',end ='')
-        if i == 5:
-            print('便利店→',end ='')
-        if i == 6:
-            print('礼品店→',end ='')
-        if i == 7:
-            print('银行→',end ='')
-        if i == 8:
-            print('小科家')`;
-  var code = 'printpath(path)\n';
+  var code =`name = ["","小思家","银行","邮局","餐厅","书店","医院","超市","小科家"]
+res = ""
+for i in path:
+    res = res + name[i] + "→"
+print(res[:-1])\n`;
+  
   return code;
 };
 

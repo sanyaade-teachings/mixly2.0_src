@@ -517,7 +517,7 @@ Blockly.Blocks['sensor_aht11'] = {
             var mode = thisBlock.getFieldValue('key');
             var TOOLTIPS = {
                 "temperature":Blockly.MIXLY_MICROBIT_SENSOR_SHT_temperature_TOOLTIP,
-                "relative_humidity":Blockly.MIXLY_MICROBIT_SENSOR_SHT_HUM_TOOLTIP
+                "humidity":Blockly.MIXLY_ESP32C3_SENSOR_AHT_HUM_TOOLTIP
             };
             return TOOLTIPS[mode]
         });

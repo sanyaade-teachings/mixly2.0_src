@@ -2348,6 +2348,7 @@ Blockly.MIXLY_MICROBIT_SENSOR_BMP_temperature_TOOLTIP = "Get temperature (-45 ~ 
 Blockly.MIXLY_MICROBIT_SENSOR_BMP_press_TOOLTIP = "Get atmospheric pressure (0 ~ 20000hPa)";
 Blockly.MIXLY_MICROBIT_SENSOR_SHT_temperature_TOOLTIP = "Get temperature (-40 ~ + 125 ℃)";
 Blockly.MIXLY_MICROBIT_SENSOR_SHT_HUM_TOOLTIP = "Get Humidity (0 ~ 100%)";
+Blockly.MIXLY_ESP32C3_SENSOR_AHT_HUM_TOOLTIP = "Get Humidity (relative humidity, 0 ~ 100%)";
 Blockly.MIXLY_ESP32_SENSOR_USE_I2C_TOOLTIP = 'Initial sensor type is:';
 Blockly.MIXLY_MICROBIT_SENSOR_DS18X20_TOOLTIP = 'Return temperature, the range is (-55 ~ + 125 ℃)';
 Blockly.MIXLY_TOOLTIP_RTC_SETTIME = Blockly.MIXLY_RTCSETTIME;

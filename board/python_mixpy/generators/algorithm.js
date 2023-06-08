@@ -130,25 +130,25 @@ print(res[:-1])\n`;
 };
 
 Blockly.Python.algorithm_first_book = function() {  
-  var line1 = '';
-  var code = line1+"i=1\n";
+  var line1 = 'res=1\n';
+  var code = line1+"flag=ring[res]\n";
   return code;
 };
 
-Blockly.Python.algorithm_no_ring = function() {
-  var code = "ring[i]==0";
-  return [code, Blockly.Python.ORDER_ATOMIC];
-};
+// Blockly.Python.algorithm_no_ring = function() {
+//   var code = "ring[i]==0";
+//   return [code, Blockly.Python.ORDER_ATOMIC];
+// };
 
 Blockly.Python.algorithm_next_book = function() {    
-  var code = "i+=1\n";
+  var code = "res+=1\nflag=ring[res]\n";
   return code;
 };
 
-Blockly.Python.algorithm_print_book = function() {  
-  var code = "print(i)\n";
-  return code;
-};
+// Blockly.Python.algorithm_print_book = function() {  
+//   var code = "print(i)\n";
+//   return code;
+// };
 
 Blockly.Python.algorithm_number_zero = function() {  
   var code = "cnt=0\n";
@@ -166,8 +166,7 @@ Blockly.Python.algorithm_print_number = function() {
 };
 
 Blockly.Python.algorithm_all_books_sequence = function() {  
-  var line1 = 'ring=[0,0,0,0,0,0,1,0,0,0,0]\n';
-  var code = line1+"left=1\n"+"right=10\n";
+  var code = 'ring=[0,0,0,0,0,0,1,0,0,0,0]\n';
   return code;
 };
 
@@ -178,17 +177,17 @@ Blockly.Python.algorithm_all_books = function() {
 };
 
 Blockly.Python.algorithm_two_left = function() {
-  var code = "left<right";
+  var code = "right-left>= 1";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.algorithm_divide_books = function() {  
-  var code = "mid = int((left + right) / 2)\n";
+  var code = "res = int((left + right) / 2)\n";
   return code;
 };
 
 Blockly.Python.algorithm_get_half_books = function() {  
-  var code = "i=left\nflag=1\n";
+  var code = "flag=sum(ring[left:res+1])\n";
   return code;
 };
 
@@ -203,17 +202,17 @@ Blockly.Python.algorithm_no_ring2 = function() {
 };
 
 Blockly.Python.algorithm_delete_books = function() {  
-  var code = "left = mid + 1\n";
+  var code = "left = res + 1\n";
   return code;
 };
 
 Blockly.Python.algorithm_delete_books2 = function() {  
-  var code = "right=mid\n";
+  var code = "right=res\n";
   return code;
 };
 
 Blockly.Python.algorithm_print_book2 = function() {  
-  var code = "print(left)\n";
+  var code = "print(res)\n";
   return code;
 };
 

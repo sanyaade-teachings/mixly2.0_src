@@ -204,14 +204,14 @@ Blockly.Blocks['algorithm_first_book'] = {
   }
 };
 
-Blockly.Blocks['algorithm_no_ring']={
-  init: function() {
-    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
-    this.appendDummyInput()
-    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_NO_RING);
-    this.setOutput(true);
-  }
-}
+// Blockly.Blocks['algorithm_no_ring']={
+//   init: function() {
+//     this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+//     this.appendDummyInput()
+//     .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_NO_RING);
+//     this.setOutput(true);
+//   }
+// }
 
 Blockly.Blocks['algorithm_next_book'] = {
   init: function() {
@@ -223,15 +223,15 @@ Blockly.Blocks['algorithm_next_book'] = {
   }
 };
 
-Blockly.Blocks['algorithm_print_book'] = {
-  init: function() {
-    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
-    this.appendDummyInput()
-    .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_PRINT_BOOK);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);    
-  }
-};
+// Blockly.Blocks['algorithm_print_book'] = {
+//   init: function() {
+//     this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+//     this.appendDummyInput()
+//     .appendField(Blockly.MIXLY_MIXPY_ALGORITHM_PRINT_BOOK);
+//     this.setPreviousStatement(true, null);
+//     this.setNextStatement(true, null);    
+//   }
+// };
 
 Blockly.Blocks['algorithm_number_zero'] = {
   init: function() {

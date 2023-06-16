@@ -17,6 +17,12 @@ class INFO:
 		self.info1=info1
 		self.info2=info2
 		self.rect=rect
+		self.x=None
+		self.y=None
+		self.w=None
+		self.h=None
+		self.xc=None
+		self.yc=None
 		if type(rect) in [tuple,list]:
 			self.x=rect[0]
 			self.y=rect[1]

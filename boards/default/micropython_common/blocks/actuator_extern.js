@@ -588,3 +588,398 @@ Blockly.Blocks.syn6288_tts_play = {
         this.setTooltip(Blockly.Msg.MIXLY_PLAY_TTS_TOOLTIP);
     }
 }
+
+//mixbot extern
+Blockly.Blocks['mixbot_addr_extern'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['MATH_HUE']);
+    this.appendDummyInput("")
+        .appendField(new Blockly.FieldDropdown(profile.default.extern_addr), 'PIN');
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks.mixbot_motor_extern = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MOTOR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);       
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_SPEED);   
+      this.appendDummyInput()
+          .appendField('%')       
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+      this.setTooltip(Blockly.Msg.MIXLY_MIXBOT_MOTOR_EXTERN_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.mixbot_motor_extern_get_speed = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MOTOR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_SPEED);   
+      this.setOutput(true,Number);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_traffic_light_extern = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_TRAFFIC_LIGHT)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);   
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LISTS_SET_INDEX_SET)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_MICROBIT_Turn_off_display, '0'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT_RED_ON, '1'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT_RED_BLINK, '2'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT_YELLOW_ON, '3'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT_YELLOW_BLINK, '4'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT_GREEN_ON, '5'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT_GREEN_BLINK, '6']
+            ]), "light");  
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);      
+    }
+}
+
+Blockly.Blocks.mixbot_led_extern = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.COLOUR_RGB_WHITE, 'W'],
+            [Blockly.Msg.COLOUR_RGB_RED, 'R'],
+            [Blockly.Msg.COLOUR_RGB_YELLOW, 'Y'],
+            [Blockly.Msg.COLOUR_RGB_GREEN, 'G'],
+            [Blockly.Msg.COLOUR_RGB_BLUE, 'B']
+            ]), "color")
+          .appendField("LED")
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);
+      this.appendValueInput('value')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.BRIGHTNESS);   
+      this.appendDummyInput()
+          .appendField('%')       
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_led_extern_get_value = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.COLOUR_RGB_WHITE, 'W'],
+            [Blockly.Msg.COLOUR_RGB_RED, 'R'],
+            [Blockly.Msg.COLOUR_RGB_YELLOW, 'Y'],
+            [Blockly.Msg.COLOUR_RGB_GREEN, 'G'],
+            [Blockly.Msg.COLOUR_RGB_BLUE, 'B']
+            ]), "color")
+          .appendField("LED")
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING); 
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.BRIGHTNESS)       
+      this.setOutput(true,Number);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_get_status = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_GET)   
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_MICROBIT_JS_BLE_POWER, '[0]'],
+            [Blockly.Msg.MIXLY_SPEED, '[1]'],
+            [Blockly.Msg.MATH_SINGLE_OP_ABSOLUTE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE, '[2]'],
+            [Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE, '[3]'],
+            [Blockly.Msg.MIXLY_MIXBOT_SERVO_BLOCK_OR_NOT, '[4]'],
+            [Blockly.Msg.MIXLY_MIXBOT_SERVO_FINISH_OR_NOT, '[5]'],
+            [Blockly.Msg.MIXLY_ALL, '']
+            ]), "status");   
+      this.setOutput(true,Number);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_stop_mode = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MIXBOT_SERVO_SET_STOP_MODE)   
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_MIXBOT_SERVO_STOP_MODE_KEEP, '0'],
+            [Blockly.Msg.MIXLY_MIXBOT_SERVO_STOP_MODE_COAST, '1'],
+            [Blockly.Msg.MIXLY_MIXBOT_SERVO_STOP_MODE_BRAKE, '2']            
+            ]), "status");   
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_stop = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_STOP)          
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_absolute_run = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+          .appendField(Blockly.Msg.MATH_SINGLE_OP_ABSOLUTE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MODE)  
+          .setAlign(Blockly.ALIGN_RIGHT) 
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_SPEED+Blockly.Msg.MIXLY_MODE, '0'],
+            [Blockly.Msg.MIXLY_MICROBIT_JS_BLE_POWER+Blockly.Msg.MIXLY_MODE, '1']            
+            ]), "status");   
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_PARAMS);    
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField('%')     
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MIXBOT_SERVO_TURN_DIRECTION)  
+          .setAlign(Blockly.ALIGN_RIGHT) 
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.CLOCKWISE, '0'],
+            [Blockly.Msg.MIXLY_MIXBOT_SERVO_NEAREST_PATH, '1'],
+            [Blockly.Msg.ANTI_CLOCKWISE, '2']            
+            ]), "direction");    
+      this.appendValueInput('angle')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE);         
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+      this.setTooltip(Blockly.Msg.MIXLY_MIXBOT_SERVO_ABSOLUTE_ANGLE_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_relative_origin = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+          .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MIXBOT_SERVO_RELATIVE_ORIGIN_PATH)          
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_relative_run = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+          .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
+          .appendField("("+Blockly.Msg.MIXLY_MIXBOT_SERVO_LIKE_ENCODING_MOTOR+")")
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MODE)  
+          .setAlign(Blockly.ALIGN_RIGHT) 
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_SPEED+Blockly.Msg.MIXLY_MODE, '0'],
+            [Blockly.Msg.MIXLY_MICROBIT_JS_BLE_POWER+Blockly.Msg.MIXLY_MODE, '1']            
+            ]), "status");   
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_PARAMS);    
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField('%')           
+      this.appendValueInput('angle')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ROTATE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE);             
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+      this.setTooltip(Blockly.Msg.MIXLY_MIXBOT_SERVO_RELATIVE_ANGLE_TOOLTIP);
+    }
+}
+
+Blockly.Blocks.mixbot_servo_extern_relative_continue = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
+          .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
+          .appendField("("+Blockly.Msg.MIXLY_MIXBOT_SERVO_LIKE_ORDINARY_MOTOR+")")
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);    
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MODE)  
+          .setAlign(Blockly.ALIGN_RIGHT) 
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_SPEED+Blockly.Msg.MIXLY_MODE, '0'],
+            [Blockly.Msg.MIXLY_MICROBIT_JS_BLE_POWER+Blockly.Msg.MIXLY_MODE, '1']            
+            ]), "status");   
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_PARAMS);    
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField('%')           
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MIXBOT_SERVO_TURN_DIRECTION)  
+          .setAlign(Blockly.ALIGN_RIGHT) 
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.CLOCKWISE, '0'],
+            [Blockly.Msg.ANTI_CLOCKWISE, '2']            
+            ]), "direction");         
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_actuator_extern_get_addr = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_MOTOR, 'ext_motor'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT, 'ext_traffic'],
+            [Blockly.Msg.COLOUR_RGB_WHITE+"LED", 'W_LED'],
+            [Blockly.Msg.COLOUR_RGB_RED+"LED", 'R_LED'],
+            [Blockly.Msg.COLOUR_RGB_YELLOW+"LED", 'Y_LED'],
+            [Blockly.Msg.COLOUR_RGB_GREEN+"LED", 'G_LED'],
+            [Blockly.Msg.COLOUR_RGB_BLUE+"LED", 'B_LED'],
+            [Blockly.Msg.MIXLY_SERVO_MOTOR, 'ext_servo']
+            ]), "name")       
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MIXBOT_EXTERN_GET_ADDR)       
+      this.setOutput(true);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.mixbot_actuator_extern_set_addr = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
+      this.appendDummyInput()
+          .appendField("Mixbot")
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.MIXLY_MOTOR, 'ext_motor'],
+            [Blockly.Msg.MIXLY_TRAFFIC_LIGHT, 'ext_traffic'],
+            [Blockly.Msg.COLOUR_RGB_WHITE+"LED", 'W_LED'],
+            [Blockly.Msg.COLOUR_RGB_RED+"LED", 'R_LED'],
+            [Blockly.Msg.COLOUR_RGB_YELLOW+"LED", 'Y_LED'],
+            [Blockly.Msg.COLOUR_RGB_GREEN+"LED", 'G_LED'],
+            [Blockly.Msg.COLOUR_RGB_BLUE+"LED", 'B_LED'],
+            [Blockly.Msg.MIXLY_SERVO_MOTOR, 'ext_servo']
+            ]), "name")       
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MIXBOT_EXTERN_SET_ADDR)    
+      this.appendValueInput('old')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT_GESTURE);
+      this.appendValueInput('new')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_UPDATE);           
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}

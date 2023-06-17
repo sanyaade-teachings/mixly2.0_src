@@ -586,7 +586,7 @@ Blockly.Blocks.isBarrier = {
     this.appendDummyInput()
       .appendField(new Blockly.FieldDropdown([["北", "0"], ["南", "2"], ["西", "3"], ["东", "1"]]), "direction");
     this.appendDummyInput()
-      .appendField('侧有障碍?');
+      .appendField('侧有障碍');
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(290);
@@ -609,7 +609,7 @@ Blockly.Blocks['randomOil'] = {
 Blockly.Blocks.isOilFull = {
   init: function () {
     this.appendDummyInput()
-      .appendField('需要加油?');
+      .appendField('需要加油');
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');

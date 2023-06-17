@@ -517,7 +517,7 @@ Blockly.Blocks['sensor_aht11'] = {
             var mode = thisBlock.getFieldValue('key');
             var TOOLTIPS = {
                 "temperature":Blockly.Msg.MIXLY_MICROBIT_SENSOR_SHT_temperature_TOOLTIP,
-                "relative_humidity":Blockly.Msg.MIXLY_MICROBIT_SENSOR_SHT_HUM_TOOLTIP
+                "humidity":Blockly.Msg.MIXLY_ESP32C3_SENSOR_AHT_HUM_TOOLTIP
             };
             return TOOLTIPS[mode]
         });
@@ -1192,6 +1192,8 @@ Blockly.Blocks['sensor_mixbot_temperature'] = {
         
     }
 };
+
+
 
 Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     init: function(){

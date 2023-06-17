@@ -647,3 +647,57 @@ Blockly.Python.gnss_have_data=function(){
     var code = sub + '.any()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+//mixbot extern below:
+Blockly.Python.mixbot_button_extern_get_value=function(){
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    var num = this.getFieldValue('num');    
+    Blockly.Python.definitions_['import_mixbot_ext_ext_button'] = 'from mixbot_ext import ext_button';
+    var code = 'ext_button.value('+ mode +")"+num;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_touch_extern_get_value=function(){
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_mixbot_ext_ext_collision'] = 'from mixbot_ext import ext_collision';
+    var code = 'ext_collision.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_infrared_extern_get_value=function(){
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_mixbot_ext_ext_infrared'] = 'from mixbot_ext import ext_infrared';
+    var code = 'ext_infrared.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_potentiometer_extern_get_value=function(){
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_mixbot_ext_ext_potentiometer'] = 'from mixbot_ext import ext_potentiometer';
+    var code = 'ext_potentiometer.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_color_extern_get_value=function(){
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    var color = this.getFieldValue('color');
+    Blockly.Python.definitions_['import_mixbot_ext_ext_color'] = 'from mixbot_ext import ext_color';
+    var code = 'ext_color.recognition('+ mode +")"+color;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_sensor_extern_get_addr=function(){
+    var name = this.getFieldValue('name');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;
+    var code = name+'.addr_get()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.mixbot_sensor_extern_set_addr=function(){
+    var name = this.getFieldValue('name');    
+    Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;
+    var oldaddr = Blockly.Python.valueToCode(this, 'old', Blockly.Python.ORDER_ATOMIC);
+    var newaddr = Blockly.Python.valueToCode(this, 'new', Blockly.Python.ORDER_ATOMIC);
+    var code = name+'.addr_set('+oldaddr+','+newaddr+')\n';
+    return code;
+};

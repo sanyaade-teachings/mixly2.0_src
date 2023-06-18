@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.logic');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.logic_compare = function() {
+Blockly.Python.forBlock['logic_compare'] = function() {
   // Comparison operator.
   var mode = this.getFieldValue('OP');
   var operator = Blockly.Python.logic_compare.OPERATORS[mode];
@@ -16,10 +16,10 @@ Blockly.Python.logic_compare = function() {
   return [code, order];
 };
 
-Blockly.Python.logic_compare_continous = function() {
+Blockly.Python.forBlock['logic_compare_continous'] = function() {
   // Comparison operator.
   var mode1 = this.getFieldValue('OP1');
-  var operator1 = Blockly.Python.logic_compare.OPERATORS[mode1];
+  var operator1 = Blockly.Python.forBlock.logic_compare.OPERATORS[mode1];
   var mode2 = this.getFieldValue('OP2');
   var operator2 = Blockly.Python.logic_compare.OPERATORS[mode2];  
   var argument0 = Blockly.Python.valueToCode(this, 'A', Blockly.Python.ORDER_RELATIONAL) || '0';
@@ -29,7 +29,7 @@ Blockly.Python.logic_compare_continous = function() {
   return [code, Blockly.Python.ORDER_RELATIONAL];
 };
 
-Blockly.Python.logic_compare.OPERATORS = {
+Blockly.Python.forBlock.logic_compare.OPERATORS = {
   EQ: '==',
   NEQ: '!=',
   LT: '<',
@@ -38,7 +38,7 @@ Blockly.Python.logic_compare.OPERATORS = {
   GTE: '>='
 };
 
-Blockly.Python.logic_operation = function() {
+Blockly.Python.forBlock['logic_operation'] = function() {
   // Operations 'and', 'or'.
   var operator = (this.getFieldValue('OP') == 'AND') ? 'and' : 'or';
   var order = (operator == '&&') ? Blockly.Python.ORDER_LOGICAL_AND :
@@ -49,7 +49,7 @@ Blockly.Python.logic_operation = function() {
   return [code, order];
 };
 
-Blockly.Python.logic_negate = function() {
+Blockly.Python.forBlock['logic_negate'] = function() {
   // Negation.
   var order = Blockly.Python.ORDER_UNARY_PREFIX;
   var argument0 = Blockly.Python.valueToCode(this, 'BOOL', order) || 'False';
@@ -57,18 +57,18 @@ Blockly.Python.logic_negate = function() {
   return [code, order];
 };
 
-Blockly.Python.logic_boolean = function() {
+Blockly.Python.forBlock['logic_boolean'] = function() {
   // Boolean values true and false.
   var code = (this.getFieldValue('BOOL') == 'TRUE') ? 'True' : 'False';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_null = function() {
+Blockly.Python.forBlock['logic_null'] = function() {
   var code = 'None';
   return [code ,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_true_or_false = function() {
+Blockly.Python.forBlock['logic_true_or_false'] = function() {
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || 'False';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || 'False';
   var c = Blockly.Python.valueToCode(this, 'C',Blockly.Python.ORDER_ATOMIC) || 'False';
@@ -76,7 +76,7 @@ Blockly.Python.logic_true_or_false = function() {
   return [code ,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_is_in = function() {
+Blockly.Python.forBlock['logic_is_in'] = function() {
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var bool = this.getFieldValue('BOOL');
@@ -84,7 +84,7 @@ Blockly.Python.logic_is_in = function() {
   return [code ,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_is = function() {
+Blockly.Python.forBlock['logic_is'] = function() {
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var bool = this.getFieldValue('BOOL');
@@ -92,7 +92,7 @@ Blockly.Python.logic_is = function() {
   return [code ,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_tobool = function() {  
+Blockly.Python.forBlock['logic_tobool'] = function() {  
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'
   return ['bool('+str+')', Blockly.Python.ORDER_ATOMIC];
 };

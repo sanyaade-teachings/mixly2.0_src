@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.actuator');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.mixgo_button_is_pressed = function(){
+Blockly.Arduino.forBlock['mixgo_button_is_pressed'] = function(){
  var btn = this.getFieldValue('PIN');
  Blockly.Arduino.setups_['setup_btn'+btn] = 'pinMode('+btn+',INPUT);';
  var code =  'digitalRead('+btn+')';
@@ -15,13 +15,13 @@ Blockly.Arduino.sensor_mixgo_light= Blockly.Arduino.sensor_light;
 
 Blockly.Arduino.sensor_mixgo_sound=Blockly.Arduino.sensor_sound; 
 
-Blockly.Arduino.mixgo_touch_pin = function(){
+Blockly.Arduino.forBlock['mixgo_touch_pin'] = function(){
   var touch_pin = this.getFieldValue('touch_pin');
   var code = 'touchRead('+touch_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensor_mixgo_light = function(){
+Blockly.Arduino.forBlock['sensor_mixgo_light'] = function(){
   var direction = this.getFieldValue('direction');
   var code = 'analogRead('+ direction +')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -36,7 +36,7 @@ Blockly.Blocks.sensor_pin_near=Blockly.Blocks.sensor_mixgo_pin_near;
 Blockly.Blocks.sensor_light=Blockly.Blocks.sensor_mixgo_light;
 Blockly.Blocks.sensor_sound=Blockly.Blocks.sensor_mixgo_sound;
 
-Blockly.Arduino.OneButton = function () {
+Blockly.Arduino.forBlock['OneButton'] = function () {
  Blockly.Arduino.definitions_['include_OneButton'] = '#include <OneButton.h>';
  var dropdown_pin = this.getFieldValue('PIN');
  var dropdown_mode = this.getFieldValue('mode');
@@ -49,7 +49,7 @@ Blockly.Arduino.OneButton = function () {
  Blockly.Arduino.definitions_[funcName] = code2;
  return code;
 };
-Blockly.Arduino.NTC_TEMP = function () {
+Blockly.Arduino.forBlock['NTC_TEMP'] = function () {
   var PIN = 34;
   var NominalResistance= 10000;
   var betaCoefficient= 3380;
@@ -80,7 +80,7 @@ Blockly.Arduino.onboard_tone=function(){
 };
 
 //传感器_重力感应块_获取9轴数据
-Blockly.Arduino.mixgo_MPU9250 = function() {
+Blockly.Arduino.forBlock['mixgo_MPU9250'] = function() {
   var dropdown_type = this.getFieldValue('MixGo_MPU9250_GETAB');
   Blockly.Arduino.definitions_['include_MPU9250_asukiaaa'] = '#include <MPU9250_asukiaaa.h>';
   Blockly.Arduino.definitions_['define_CALIB_SEC']='#define CALIB_SEC 20';
@@ -135,7 +135,7 @@ Blockly.Arduino.mixgo_MPU9250 = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 //传感器-MPU9250-更新数据
-Blockly.Arduino.MPU9250_update = function() {
+Blockly.Arduino.forBlock['MPU9250_update'] = function() {
  var code = 'myMPU9250.accelUpdate();\nmyMPU9250.gyroUpdate();\nmyMPU9250.magUpdate();\n';
  return code;
 };
@@ -169,11 +169,11 @@ Blockly.Arduino.Pocket_rgb_Brightness=function(){
   return code;
 };
 
-Blockly.Arduino.Pocket_rgb_show = function () {
+Blockly.Arduino.forBlock['Pocket_rgb_show'] = function () {
   var code = 'rgb_display_12.show();\ndelay(1);\n';
   return code;
 };
-Blockly.Arduino.pocket_RGB_color_HSV = function () {
+Blockly.Arduino.forBlock['pocket_RGB_color_HSV'] = function () {
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display12'] = 'Adafruit_NeoPixel rgb_display_12= Adafruit_NeoPixel(1,12,NEO_GRB + NEO_KHZ800);';
   var dropdown_rgbpin = 12;

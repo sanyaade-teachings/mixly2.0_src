@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.serial');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.serial_HardwareSerial = function () {
+Blockly.Arduino.forBlock['serial_HardwareSerial'] = function () {
 	var serial_select = this.getFieldValue('serial_select');
 	var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC);
 	//var serial_no=serial_select.charAt(serial_select.length – 1);
@@ -16,7 +16,7 @@ Blockly.Arduino.serial_HardwareSerial = function () {
 };
 
 //USB串口打印
-Blockly.Arduino.ESPS2_USB_Serial = function() {
+Blockly.Arduino.forBlock['ESPS2_USB_Serial'] = function() {
 	var mode= this.getFieldValue('mode');
 	var data= Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
 	Blockly.Arduino.definitions_['include_ESPS2_USB_Serial'] = '#include "USB.h"\n'
@@ -43,7 +43,7 @@ Blockly.Arduino.ESPS2_USB_Serial = function() {
 };
 
 //USB串口有数据可读
-Blockly.Arduino.ESPS2_USB_read = function() {
+Blockly.Arduino.forBlock['ESPS2_USB_read'] = function() {
    Blockly.Arduino.definitions_['include_ESPS2_USB_Serial'] = '#include "USB.h"\n'
                                                               +'USBCDC USBSerial;\n'
                                                               +'String ESPS2_USB_read_String() {\n'
@@ -61,7 +61,7 @@ Blockly.Arduino.ESPS2_USB_read = function() {
 };
 
 //USB串口读取字符串
-Blockly.Arduino.ESPS2_USB_read_String = function() {
+Blockly.Arduino.forBlock['ESPS2_USB_read_String'] = function() {
     var code = 'ESPS2_USB_read_String()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

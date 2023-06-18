@@ -5,12 +5,12 @@ goog.provide('Blockly.Python.image');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.true_false = function () {
+Blockly.Python.forBlock['true_false'] = function () {
     var code = this.getFieldValue('flag');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.image_RGB = function () {
+Blockly.Python.forBlock['image_RGB'] = function () {
   var R =Blockly.Python.valueToCode(this, 'R',Blockly.Python.ORDER_ATOMIC);
   var G =Blockly.Python.valueToCode(this, 'G',Blockly.Python.ORDER_ATOMIC);
   var B =Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC);
@@ -18,7 +18,7 @@ Blockly.Python.image_RGB = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_Image = function () {	
+Blockly.Python.forBlock['image_Image'] = function () {	
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
@@ -26,14 +26,14 @@ Blockly.Python.image_Image = function () {
   return code;  
 };
 
-Blockly.Python.image_Image1 = function () {	
+Blockly.Python.forBlock['image_Image1'] = function () {	
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   var code = sub+" = image.Image()\n";
   return code;  
 };
 
-Blockly.Python.image_getinfo = function () {
+Blockly.Python.forBlock['image_getinfo'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -41,7 +41,7 @@ Blockly.Python.image_getinfo = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_save = function () {
+Blockly.Python.forBlock['image_save'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
@@ -51,21 +51,21 @@ Blockly.Python.image_save = function () {
 
 //----开始--------------cool.ai-----弃用字体加载，出厂内存加载------------------
 
-Blockly.Python.image_font_free = function () {
+Blockly.Python.forBlock['image_font_free'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
   var code = "image.font_free()\n";
   return code; 
 };
 
-Blockly.Python.image_font_load = function () {
+Blockly.Python.forBlock['image_font_load'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
   var code = "image.font_load(image.UTF8, 16, 16, "+path+")\n";
   return code; 
 };
 
-Blockly.Python.image_draw_string_flash = function () {
+Blockly.Python.forBlock['image_draw_string_flash'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   Blockly.Python.definitions_['font_load'] = 'image.font_load(image.UTF8, 16, 16, 0xA00000)';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -82,7 +82,7 @@ Blockly.Python.image_draw_string_flash = function () {
 //----结束--------------cool.ai-----弃用字体加载，出厂内存加载------------------
 
 
-Blockly.Python.image_draw_string_UTF = function () {
+Blockly.Python.forBlock['image_draw_string_UTF'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var x0 =Blockly.Python.valueToCode(this, 'x0',Blockly.Python.ORDER_ATOMIC);
@@ -95,7 +95,7 @@ Blockly.Python.image_draw_string_UTF = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_string = function () {
+Blockly.Python.forBlock['image_draw_string'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var x0 =Blockly.Python.valueToCode(this, 'x0',Blockly.Python.ORDER_ATOMIC);
@@ -107,7 +107,7 @@ Blockly.Python.image_draw_string = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_copy = function () {
+Blockly.Python.forBlock['image_copy'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -116,7 +116,7 @@ Blockly.Python.image_copy = function () {
 };
 
 
-Blockly.Python.image_compress = function () {
+Blockly.Python.forBlock['image_compress'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var quality =Blockly.Python.valueToCode(this, 'quality',Blockly.Python.ORDER_ATOMIC);
@@ -124,14 +124,14 @@ Blockly.Python.image_compress = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_clear = function () {
+Blockly.Python.forBlock['image_clear'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var code = sub+".clear()\n";
   return code; 
 };
 
-Blockly.Python.image_tonew = function () {
+Blockly.Python.forBlock['image_tonew'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -139,7 +139,7 @@ Blockly.Python.image_tonew = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_set_pixel = function () {
+Blockly.Python.forBlock['image_set_pixel'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -148,7 +148,7 @@ Blockly.Python.image_set_pixel = function () {
   return code; 
 };
 
-Blockly.Python.image_get_pixel = function () {
+Blockly.Python.forBlock['image_get_pixel'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -156,7 +156,7 @@ Blockly.Python.image_get_pixel = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_line = function () {
+Blockly.Python.forBlock['image_draw_line'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -166,7 +166,7 @@ Blockly.Python.image_draw_line = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_arrow = function () {
+Blockly.Python.forBlock['image_draw_arrow'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -176,7 +176,7 @@ Blockly.Python.image_draw_arrow = function () {
   return [code, Blockly.Python.ORDER_ATOMIC];  
 };
 
-Blockly.Python.image_draw_cross = function () {
+Blockly.Python.forBlock['image_draw_cross'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -187,7 +187,7 @@ Blockly.Python.image_draw_cross = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_circle = function () {
+Blockly.Python.forBlock['image_draw_circle'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -198,7 +198,7 @@ Blockly.Python.image_draw_circle = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_rectangle = function () {
+Blockly.Python.forBlock['image_draw_rectangle'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -209,7 +209,7 @@ Blockly.Python.image_draw_rectangle = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_keypoints = function () {
+Blockly.Python.forBlock['image_draw_keypoints'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key =Blockly.Python.valueToCode(this, 'keypoints',Blockly.Python.ORDER_ATOMIC);
@@ -221,7 +221,7 @@ Blockly.Python.image_draw_keypoints = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_draw_image = function () {
+Blockly.Python.forBlock['image_draw_image'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -233,7 +233,7 @@ Blockly.Python.image_draw_image = function () {
 
 //--形状识别----------------------------------------------//
 
-Blockly.Python.image_find_lines = function () {
+Blockly.Python.forBlock['image_find_lines'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -244,7 +244,7 @@ Blockly.Python.image_find_lines = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_find_line_segments = function () {
+Blockly.Python.forBlock['image_find_line_segments'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -255,7 +255,7 @@ Blockly.Python.image_find_line_segments = function () {
 };
 
 
-Blockly.Python.image_find_circles = function () {
+Blockly.Python.forBlock['image_find_circles'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -271,7 +271,7 @@ Blockly.Python.image_find_circles = function () {
 };
 
 
-Blockly.Python.image_find_rects = function () {
+Blockly.Python.forBlock['image_find_rects'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -280,7 +280,7 @@ Blockly.Python.image_find_rects = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_get_regression = function () {
+Blockly.Python.forBlock['image_get_regression'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -295,7 +295,7 @@ Blockly.Python.image_get_regression = function () {
 
 
 
-Blockly.Python.image_line = function () {
+Blockly.Python.forBlock['image_line'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -303,7 +303,7 @@ Blockly.Python.image_line = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_circle = function () {
+Blockly.Python.forBlock['image_circle'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -314,7 +314,7 @@ Blockly.Python.image_circle = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_rect = function () {
+Blockly.Python.forBlock['image_rect'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -324,7 +324,7 @@ Blockly.Python.image_rect = function () {
 
 //--图像滤波------------------------------------------//
 
-Blockly.Python.image_histeq = function () {
+Blockly.Python.forBlock['image_histeq'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = Blockly.Python.valueToCode(this, 'key',Blockly.Python.ORDER_ATOMIC);
@@ -333,7 +333,7 @@ Blockly.Python.image_histeq = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_mean = function () {
+Blockly.Python.forBlock['image_mean'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var size = Blockly.Python.valueToCode(this, 'size',Blockly.Python.ORDER_ATOMIC);
@@ -343,7 +343,7 @@ Blockly.Python.image_mean = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_cartoon = function () {
+Blockly.Python.forBlock['image_cartoon'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var seed = Blockly.Python.valueToCode(this, 'seed',Blockly.Python.ORDER_ATOMIC);
@@ -352,7 +352,7 @@ Blockly.Python.image_cartoon = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_erode = function () {
+Blockly.Python.forBlock['image_erode'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var size = Blockly.Python.valueToCode(this, 'size',Blockly.Python.ORDER_ATOMIC);
@@ -361,7 +361,7 @@ Blockly.Python.image_erode = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_dilate = function () {
+Blockly.Python.forBlock['image_dilate'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var size = Blockly.Python.valueToCode(this, 'size',Blockly.Python.ORDER_ATOMIC);
@@ -370,7 +370,7 @@ Blockly.Python.image_dilate = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_flood_fill = function () {
+Blockly.Python.forBlock['image_flood_fill'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var list =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -383,7 +383,7 @@ Blockly.Python.image_flood_fill = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_linpolar = function () {
+Blockly.Python.forBlock['image_linpolar'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key =Blockly.Python.valueToCode(this, 'key',Blockly.Python.ORDER_ATOMIC); 
@@ -391,14 +391,14 @@ Blockly.Python.image_linpolar = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_invert = function () {
+Blockly.Python.forBlock['image_invert'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC); 
   var code = sub+'.invert()';   
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_lens_corr = function () {
+Blockly.Python.forBlock['image_lens_corr'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC); 
   var strength =Blockly.Python.valueToCode(this, 'strength',Blockly.Python.ORDER_ATOMIC); 
@@ -407,7 +407,7 @@ Blockly.Python.image_lens_corr = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_binary = function () {
+Blockly.Python.forBlock['image_binary'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var threshold =Blockly.Python.valueToCode(this, 'threshold',Blockly.Python.ORDER_ATOMIC);
@@ -417,7 +417,7 @@ Blockly.Python.image_binary = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_morph = function () {
+Blockly.Python.forBlock['image_morph'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var size =Blockly.Python.valueToCode(this, 'size',Blockly.Python.ORDER_ATOMIC);
@@ -430,7 +430,7 @@ Blockly.Python.image_morph = function () {
 
 
 
-Blockly.Python.image_find_barcodes = function () {
+Blockly.Python.forBlock['image_find_barcodes'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -438,7 +438,7 @@ Blockly.Python.image_find_barcodes = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_find_qrcodes = function () {
+Blockly.Python.forBlock['image_find_qrcodes'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -446,7 +446,7 @@ Blockly.Python.image_find_qrcodes = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_find_apriltags = function () {
+Blockly.Python.forBlock['image_find_apriltags'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -458,7 +458,7 @@ Blockly.Python.image_find_apriltags = function () {
 //--维码列表解析------------------------------------------//
 
 
-Blockly.Python.image_barcode = function () {
+Blockly.Python.forBlock['image_barcode'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -466,7 +466,7 @@ Blockly.Python.image_barcode = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_qrcode = function () {
+Blockly.Python.forBlock['image_qrcode'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -475,7 +475,7 @@ Blockly.Python.image_qrcode = function () {
 };
 
 
-Blockly.Python.image_apriltag = function () {
+Blockly.Python.forBlock['image_apriltag'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -486,7 +486,7 @@ Blockly.Python.image_apriltag = function () {
 
 //--颜色识别----------------------------------------------//
 
-Blockly.Python.image_find_blobs = function () {
+Blockly.Python.forBlock['image_find_blobs'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
@@ -500,7 +500,7 @@ Blockly.Python.image_find_blobs = function () {
 };
 
 
-Blockly.Python.image_get_histogram = function () {
+Blockly.Python.forBlock['image_get_histogram'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -511,7 +511,7 @@ Blockly.Python.image_get_histogram = function () {
 //--颜色列表解析------------------------------------------//
 
 
-Blockly.Python.image_blob = function () {
+Blockly.Python.forBlock['image_blob'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -519,7 +519,7 @@ Blockly.Python.image_blob = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_Histogram = function () {
+Blockly.Python.forBlock['image_Histogram'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -527,7 +527,7 @@ Blockly.Python.image_Histogram = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_percentile = function () {
+Blockly.Python.forBlock['image_percentile'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var per =Blockly.Python.valueToCode(this, 'percentile',Blockly.Python.ORDER_ATOMIC);
@@ -537,7 +537,7 @@ Blockly.Python.image_percentile = function () {
 };
 
 
-Blockly.Python.image_threshold = function () {
+Blockly.Python.forBlock['image_threshold'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -548,28 +548,28 @@ Blockly.Python.image_threshold = function () {
 
 //--颜色格式转换------------------------------------------//
 
-Blockly.Python.image_lab_to_rgb = function () {
+Blockly.Python.forBlock['image_lab_to_rgb'] = function () {
   Blockly.Python.definitions_['import_image_pic'] = 'import image as pic';
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
   var code = 'pic.lab_to_rgb('+LIST+')';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_rgb_to_lab = function () {
+Blockly.Python.forBlock['image_rgb_to_lab'] = function () {
   Blockly.Python.definitions_['import_image_pic'] = 'import image as pic';
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
   var code = 'pic.rgb_to_lab('+LIST+')';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_rgb_to_grayscale = function () {
+Blockly.Python.forBlock['image_rgb_to_grayscale'] = function () {
   Blockly.Python.definitions_['import_image_pic'] = 'import image as pic';
   var LIST =Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
   var code = 'pic.rgb_to_grayscale('+LIST+')';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_grayscale_to_rgb = function () {
+Blockly.Python.forBlock['image_grayscale_to_rgb'] = function () {
   Blockly.Python.definitions_['import_image_pic'] = 'import image as pic';
   var g_value =Blockly.Python.valueToCode(this, 'g_value',Blockly.Python.ORDER_ATOMIC);
   var code = 'pic.grayscale_to_rgb('+g_value+')';
@@ -578,7 +578,7 @@ Blockly.Python.image_grayscale_to_rgb = function () {
 
 //--特征识别----------------------------------------------//
 
-Blockly.Python.image_find_hog = function () {
+Blockly.Python.forBlock['image_find_hog'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -588,7 +588,7 @@ Blockly.Python.image_find_hog = function () {
 };
 
 
-Blockly.Python.image_find_keypoints = function () {
+Blockly.Python.forBlock['image_find_keypoints'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var roi =Blockly.Python.valueToCode(this, 'roi',Blockly.Python.ORDER_ATOMIC);
@@ -600,7 +600,7 @@ Blockly.Python.image_find_keypoints = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.image_match_descriptor = function () {
+Blockly.Python.forBlock['image_match_descriptor'] = function () {
   Blockly.Python.definitions_['import_image_pic'] = 'import image as pic';
   var sub1 =Blockly.Python.valueToCode(this, 'VAR1',Blockly.Python.ORDER_ATOMIC);
   var sub2 =Blockly.Python.valueToCode(this, 'VAR2',Blockly.Python.ORDER_ATOMIC);
@@ -614,7 +614,7 @@ Blockly.Python.image_match_descriptor = function () {
 //--颜色列表解析------------------------------------------//
 
 
-Blockly.Python.image_kptmatch = function () {
+Blockly.Python.forBlock['image_kptmatch'] = function () {
   Blockly.Python.definitions_['import_image'] = 'import image';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');

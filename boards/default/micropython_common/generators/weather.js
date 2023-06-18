@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.iotweather');
 goog.require('Blockly.Python');
 
-Blockly.Python.WEATHER_NOW = function(block) {
+Blockly.Python.forBlock['WEATHER_NOW'] = function(block) {
   Blockly.Python.definitions_['import_seniverse_api'] = "import seniverse_api"; 
   var dropdown_mode = this.getFieldValue('mode');
   var key =  Blockly.Python.valueToCode(this, 'key', Blockly.Python.ORDER_ATOMIC) ; 
@@ -12,7 +12,7 @@ Blockly.Python.WEATHER_NOW = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.WEATHER_DAILY = function(block) {
+Blockly.Python.forBlock['WEATHER_DAILY'] = function(block) {
   Blockly.Python.definitions_['import_seniverse_api'] = "import seniverse_api"; 
   var dropdown_mode = this.getFieldValue('mode');
   var key =  Blockly.Python.valueToCode(this, 'key', Blockly.Python.ORDER_ATOMIC) ; 
@@ -22,7 +22,7 @@ Blockly.Python.WEATHER_DAILY = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.WEATHER_HOUR = function(block) {
+Blockly.Python.forBlock['WEATHER_HOUR'] = function(block) {
   Blockly.Python.definitions_['import_seniverse_api'] = "import seniverse_api"; 
   var key =  Blockly.Python.valueToCode(this, 'key', Blockly.Python.ORDER_ATOMIC) ; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 

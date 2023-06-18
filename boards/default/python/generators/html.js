@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.html');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.html_document = function() {
+Blockly.Python.forBlock['html_document'] = function() {
   var head = Blockly.Python.statementToCode(this, 'HEAD');
   var body = Blockly.Python.statementToCode(this, 'BODY');
   var code = "'''<!DOCTYPE HTML>\n<html>\n<head>\n"+'\t<meta charset="utf-8">\n' + head + "</head>\n<body>\n" + body + "</body>\n</html>\n'''";
@@ -12,7 +12,7 @@ Blockly.Python.html_document = function() {
 };
 
 
-Blockly.Python.html_title = function() {
+Blockly.Python.forBlock['html_title'] = function() {
   var t = Blockly.Python.statementToCode(this, 'DO');
   var l = this.getFieldValue('LEVEL');
   var code = "<h" + l + ">\n" + t + "</h" + l + ">\n";
@@ -20,7 +20,7 @@ Blockly.Python.html_title = function() {
 };
 
 
-Blockly.Python.html_head_body = function() {
+Blockly.Python.forBlock['html_head_body'] = function() {
   var t = Blockly.Python.statementToCode(this, 'DO');
   var l = this.getFieldValue('LEVEL');
   if(l=='head'){
@@ -32,7 +32,7 @@ Blockly.Python.html_head_body = function() {
   return code;
 };
 
-Blockly.Python.html_content = function() {
+Blockly.Python.forBlock['html_content'] = function() {
   var t = Blockly.Python.statementToCode(this, 'DO');
   // var s = Blockly.Python.valueToCode(this, 'style');
   var l = this.getFieldValue('LEVEL');
@@ -41,7 +41,7 @@ Blockly.Python.html_content = function() {
   return code;
 };
 
-Blockly.Python.html_content_more = function() {
+Blockly.Python.forBlock['html_content_more'] = function() {
   var t = Blockly.Python.statementToCode(this, 'DO');
   var s = Blockly.Python.valueToCode(this, 'style');
   var l = this.getFieldValue('LEVEL');
@@ -49,13 +49,13 @@ Blockly.Python.html_content_more = function() {
   return code;
 };
 
-Blockly.Python.html_style = function() {
+Blockly.Python.forBlock['html_style'] = function() {
   var style = Blockly.Python.statementToCode(this, 'STYLE');
   var code = 'style="' + style + '"';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.html_form = function() {
+Blockly.Python.forBlock['html_form'] = function() {
   var tag = this.getFieldValue('LEVEL');
   var name = this.getFieldValue('NAME');
   var value = this.getFieldValue('VALUE');
@@ -64,14 +64,14 @@ Blockly.Python.html_form = function() {
   return code;
 };
 
-Blockly.Python.html_style_content = function() {
+Blockly.Python.forBlock['html_style_content'] = function() {
   var key = this.getFieldValue('KEY');
   var value = this.getFieldValue('VALUE');
   var code = key + ':' + value + ";";
   return code;
 };
 
-Blockly.Python.html_text = function() {
+Blockly.Python.forBlock['html_text'] = function() {
   var text = this.getFieldValue('TEXT');
   var code = text+"\n";
   return code;

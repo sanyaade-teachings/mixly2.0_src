@@ -5,7 +5,7 @@ goog.provide('Blockly.Python.data');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.series_create = function() {
+Blockly.Python.forBlock['series_create'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName1 = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -16,7 +16,7 @@ Blockly.Python.series_create = function() {
  
 };
 
-Blockly.Python.series_create_from_index = function() {
+Blockly.Python.forBlock['series_create_from_index'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName1 = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -27,7 +27,7 @@ Blockly.Python.series_create_from_index = function() {
   return code; 
 };
 
-Blockly.Python.dataframe_create = function() {
+Blockly.Python.forBlock['dataframe_create'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName1 = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -38,7 +38,7 @@ Blockly.Python.dataframe_create = function() {
  
 };
 
-Blockly.Python.dataframe_create_from_index = function() {
+Blockly.Python.forBlock['dataframe_create_from_index'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName1 = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -51,7 +51,7 @@ Blockly.Python.dataframe_create_from_index = function() {
  
 };
 
-Blockly.Python.dataframe_create_from_one_index = function() {
+Blockly.Python.forBlock['dataframe_create_from_one_index'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var dropdown_type = this.getFieldValue('TYPE');
   var name = this.getFieldValue('COLUMN_RAW');
@@ -64,7 +64,7 @@ Blockly.Python.dataframe_create_from_one_index = function() {
  
 };
 
-Blockly.Python.series_create_from_text = function() {
+Blockly.Python.forBlock['series_create_from_text'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -75,7 +75,7 @@ Blockly.Python.series_create_from_text = function() {
   return code;
 };
 
-Blockly.Python.series_index_value = function() {
+Blockly.Python.forBlock['series_index_value'] = function() {
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var varName = Blockly.Python.valueToCode(this, 'SERIES', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var name = this.getFieldValue('INDEX_VALUE');
@@ -83,7 +83,7 @@ Blockly.Python.series_index_value = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.series_get_num = function() {
+Blockly.Python.forBlock['series_get_num'] = function() {
   // Indexing into a list is the same as indexing into a string.
   var varName = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var argument0 = Blockly.Python.valueToCode(this, 'AT',
@@ -94,26 +94,26 @@ Blockly.Python.series_get_num = function() {
 };
 
 
-Blockly.Python.pl_show = function(){
+Blockly.Python.forBlock['pl_show'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var code='pylab.show()\n';
   return code;
 };
 
-Blockly.Python.pl_axes = function(){
+Blockly.Python.forBlock['pl_axes'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var code='pylab.axes(aspect=1)\n';
   return code;
 };
 
-Blockly.Python.pl_plot_easy = function(){
+Blockly.Python.forBlock['pl_plot_easy'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var varName = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code='pylab.plot(' + varName + ")\n";
   return code;
 };
 
-Blockly.Python.pl_plot = function(){
+Blockly.Python.forBlock['pl_plot'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var line = this.getFieldValue('LINE');
   var color = this.getFieldValue('COLOR');
@@ -123,21 +123,21 @@ Blockly.Python.pl_plot = function(){
   return code;
 };
 
-Blockly.Python.pl_legend = function(){
+Blockly.Python.forBlock['pl_legend'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   Blockly.Python.definitions_.import_matplotlib_font_manager = "import matplotlib.font_manager";
   var code='pylab.legend(' + 'prop=matplotlib.font_manager.FontProperties("'+ "STSong"+'")' + ')\n';
   return code;
 };
 
-Blockly.Python.pl_title = function(){
+Blockly.Python.forBlock['pl_title'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var a =  Blockly.Python.valueToCode(this, 'TITLE', Blockly.Python.ORDER_ATOMIC);
   var code='pylab.title(' + a +  ', fontproperties = "' + "STSong" +'")\n';
   return code;
 };
 
-Blockly.Python.pl_label = function(){
+Blockly.Python.forBlock['pl_label'] = function(){
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var direction = this.getFieldValue('DIR');
   var a =  Blockly.Python.valueToCode(this, 'LABEL', Blockly.Python.ORDER_ATOMIC) ;
@@ -146,7 +146,7 @@ Blockly.Python.pl_label = function(){
 };
 
 
-Blockly.Python.array_create = function () {
+Blockly.Python.forBlock['array_create'] = function () {
     Blockly.Python.definitions_.import_numpy = "import numpy";
     var from = Blockly.Python.valueToCode(this, "FROM", Blockly.Python.ORDER_NONE) || "0";
     var end = Blockly.Python.valueToCode(this, "TO", Blockly.Python.ORDER_NONE) || "0";
@@ -155,7 +155,7 @@ Blockly.Python.array_create = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pl_plot_bar = function() {
+Blockly.Python.forBlock['pl_plot_bar'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var direction = this.getFieldValue('DIR');
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -164,7 +164,7 @@ Blockly.Python.pl_plot_bar = function() {
   return code ;
 };
 
-Blockly.Python.pl_plot_scatter = function() {
+Blockly.Python.forBlock['pl_plot_scatter'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -176,7 +176,7 @@ Blockly.Python.pl_plot_scatter = function() {
   return code ;
 };
 
-Blockly.Python.pl_plot_xy = function() {
+Blockly.Python.forBlock['pl_plot_xy'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -188,7 +188,7 @@ Blockly.Python.pl_plot_xy = function() {
   return code ;
 };
 
-Blockly.Python.pl_bar = function() {
+Blockly.Python.forBlock['pl_bar'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -200,7 +200,7 @@ Blockly.Python.pl_bar = function() {
   return code ;
 };
 
-Blockly.Python.pl_pie = function() {
+Blockly.Python.forBlock['pl_pie'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -212,7 +212,7 @@ Blockly.Python.pl_pie = function() {
   return code ;
 };
 
-Blockly.Python.pl_hist = function() {
+Blockly.Python.forBlock['pl_hist'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -221,7 +221,7 @@ Blockly.Python.pl_hist = function() {
 };
 
 
-Blockly.Python.pl_ticks = function() {
+Blockly.Python.forBlock['pl_ticks'] = function() {
   Blockly.Python.definitions_.import_pylab = "import pylab";
   var direction = this.getFieldValue('DIR');
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -230,7 +230,7 @@ Blockly.Python.pl_ticks = function() {
   return code ;
 };
 
-Blockly.Python.numpy_trig = function() {
+Blockly.Python.forBlock['numpy_trig'] = function() {
   Blockly.Python.definitions_.import_numpy = "import numpy";
   var argument0 = Blockly.Python.valueToCode(this, 'NUM',Blockly.Python.ORDER_NONE) || '0';
   var operator = this.getFieldValue('OP');
@@ -240,7 +240,7 @@ Blockly.Python.numpy_trig = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pl_subplot = function () {
+Blockly.Python.forBlock['pl_subplot'] = function () {
     Blockly.Python.definitions_.import_numpy = "import numpy";
     var from = Blockly.Python.valueToCode(this, "VET", Blockly.Python.ORDER_NONE) || "0";
     var end = Blockly.Python.valueToCode(this, "HOR", Blockly.Python.ORDER_NONE) || "0";
@@ -258,7 +258,7 @@ Blockly.Python['pandas_readcsv'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dataframe_get = function() {
+Blockly.Python.forBlock['dataframe_get'] = function() {
   var mode = this.getFieldValue('MODE');
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var text = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ASSIGNMENT);
@@ -270,14 +270,14 @@ Blockly.Python.dataframe_get = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pl_savefig = function () {
+Blockly.Python.forBlock['pl_savefig'] = function () {
     Blockly.Python.definitions_.import_pylab = "import pylab";
     var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
     var code = "pylab.savefig("+file+")\n";
     return code;
 };
 
-Blockly.Python.pl_text = function () {
+Blockly.Python.forBlock['pl_text'] = function () {
     Blockly.Python.definitions_.import_numpy = "import numpy";
     var from = Blockly.Python.valueToCode(this, "VET", Blockly.Python.ORDER_NONE) || "0";
     var end = Blockly.Python.valueToCode(this, "HOR", Blockly.Python.ORDER_NONE) || "0";
@@ -289,7 +289,7 @@ Blockly.Python.pl_text = function () {
     return code
 };
 
-Blockly.Python.array_toarray = function() {  
+Blockly.Python.forBlock['array_toarray'] = function() {  
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0';
   Blockly.Python.definitions_['import_numpy'] = 'import numpy';
   var code = 'numpy.array('+str+')';
@@ -301,26 +301,26 @@ Blockly.Python.array_toarray = function() {
 
 
 
-Blockly.Python.plot_show = function(){
+Blockly.Python.forBlock['plot_show'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var code='matplotlib.pyplot.show()\n';
   return code;
 };
 
-Blockly.Python.plot_axes = function(){
+Blockly.Python.forBlock['plot_axes'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var code='matplotlib.pyplot.axes(aspect=1)\n';
   return code;
 };
 
-Blockly.Python.plot_plot_easy = function(){
+Blockly.Python.forBlock['plot_plot_easy'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var varName = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code='matplotlib.pyplot.plot(' + varName + ")\n";
   return code;
 };
 
-Blockly.Python.plot_plot = function(){
+Blockly.Python.forBlock['plot_plot'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var line = this.getFieldValue('LINE');
   var color = this.getFieldValue('COLOR');
@@ -330,21 +330,21 @@ Blockly.Python.plot_plot = function(){
   return code;
 };
 
-Blockly.Python.plot_legend = function(){
+Blockly.Python.forBlock['plot_legend'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   Blockly.Python.definitions_.import_matplotlib_font_manager = "import matplotlib.font_manager";
   var code='matplotlib.pyplot.legend(' + 'prop=matplotlib.font_manager.FontProperties("'+ "STSong"+'")' + ')\n';
   return code;
 };
 
-Blockly.Python.plot_title = function(){
+Blockly.Python.forBlock['plot_title'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var a =  Blockly.Python.valueToCode(this, 'TITLE', Blockly.Python.ORDER_ATOMIC);
   var code='matplotlib.pyplot.title(' + a +  ')\n';
   return code;
 };
 
-Blockly.Python.plot_label = function(){
+Blockly.Python.forBlock['plot_label'] = function(){
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var direction = this.getFieldValue('DIR');
   var a =  Blockly.Python.valueToCode(this, 'LABEL', Blockly.Python.ORDER_ATOMIC) ;
@@ -352,7 +352,7 @@ Blockly.Python.plot_label = function(){
   return code;
 };
 
-Blockly.Python.plot_plot_bar = function() {
+Blockly.Python.forBlock['plot_plot_bar'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var direction = this.getFieldValue('DIR');
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -361,7 +361,7 @@ Blockly.Python.plot_plot_bar = function() {
   return code ;
 };
 
-Blockly.Python.plot_plot_scatter = function() {
+Blockly.Python.forBlock['plot_plot_scatter'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -373,7 +373,7 @@ Blockly.Python.plot_plot_scatter = function() {
   return code ;
 };
 
-Blockly.Python.plot_plot_xy = function() {
+Blockly.Python.forBlock['plot_plot_xy'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -385,7 +385,7 @@ Blockly.Python.plot_plot_xy = function() {
   return code ;
 };
 
-Blockly.Python.plot_bar = function() {
+Blockly.Python.forBlock['plot_bar'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -397,7 +397,7 @@ Blockly.Python.plot_bar = function() {
   return code ;
 };
 
-Blockly.Python.plot_pie = function() {
+Blockly.Python.forBlock['plot_pie'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -409,7 +409,7 @@ Blockly.Python.plot_pie = function() {
   return code ;
 };
 
-Blockly.Python.plot_hist = function() {
+Blockly.Python.forBlock['plot_hist'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -418,7 +418,7 @@ Blockly.Python.plot_hist = function() {
 };
 
 
-Blockly.Python.plot_ticks = function() {
+Blockly.Python.forBlock['plot_ticks'] = function() {
   Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
   var direction = this.getFieldValue('DIR');
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_ATOMIC) || '\'\'';
@@ -427,7 +427,7 @@ Blockly.Python.plot_ticks = function() {
   return code ;
 };
 
-Blockly.Python.plot_subplot = function () {
+Blockly.Python.forBlock['plot_subplot'] = function () {
     Blockly.Python.definitions_.import_numpy = "import numpy";
     Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
     var from = Blockly.Python.valueToCode(this, "VET", Blockly.Python.ORDER_NONE) || "0";
@@ -437,13 +437,13 @@ Blockly.Python.plot_subplot = function () {
     return code
 };
 
-Blockly.Python.plot_savefig = function () {
+Blockly.Python.forBlock['plot_savefig'] = function () {
     Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
     var code = "matplotlib.pyplot.savefig('1.png')\n";
     return code;
 };
 
-Blockly.Python.plot_text = function () {
+Blockly.Python.forBlock['plot_text'] = function () {
     Blockly.Python.definitions_.import_numpy = "import numpy";
     Blockly.Python.definitions_.import_matplotlib_pyplot = "import matplotlib.pyplot";
     var from = Blockly.Python.valueToCode(this, "VET", Blockly.Python.ORDER_NONE) || "0";

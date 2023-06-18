@@ -5,35 +5,35 @@ goog.provide('Blockly.Python.sensor');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.sensor_button_is_pressed = function(){
+Blockly.Python.forBlock['sensor_button_is_pressed'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var btn = Blockly.Python.valueToCode(this, 'btn', Blockly.Python.ORDER_ATOMIC);
     var code =  btn + '.is_pressed()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_button_was_pressed = function(){
+Blockly.Python.forBlock['sensor_button_was_pressed'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var btn = Blockly.Python.valueToCode(this, 'btn', Blockly.Python.ORDER_ATOMIC);
     var code =  btn + '.was_pressed()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_button_get_presses = function(){
+Blockly.Python.forBlock['sensor_button_get_presses'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var btn = Blockly.Python.valueToCode(this, 'btn', Blockly.Python.ORDER_ATOMIC);
     var code =  btn + '.get_presses()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.controls_GestureLists = function(){
+Blockly.Python.forBlock['controls_GestureLists'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     // Blockly.Python.definitions_['func_gesture' + gesture] = code;
     return ['"'+gesture+'"', Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.controls_attachGestureInterrupt = function(){
+Blockly.Python.forBlock['controls_attachGestureInterrupt'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     var branch = Blockly.Python.statementToCode(this, 'DO');
@@ -43,7 +43,7 @@ Blockly.Python.controls_attachGestureInterrupt = function(){
     return code;
 }
 
-Blockly.Python.sensor_current_gesture1 = function(){
+Blockly.Python.forBlock['sensor_current_gesture1'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     
@@ -51,7 +51,7 @@ Blockly.Python.sensor_current_gesture1 = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.sensor_current_gesture2 = function(){
+Blockly.Python.forBlock['sensor_current_gesture2'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     
@@ -60,7 +60,7 @@ Blockly.Python.sensor_current_gesture2 = function(){
 }
 
 
-Blockly.Python.controls_attachGestureInterrupt2 = function(){
+Blockly.Python.forBlock['controls_attachGestureInterrupt2'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     var branch = Blockly.Python.statementToCode(this, 'DO');
@@ -89,14 +89,14 @@ Blockly.Python.sensor_current_gesture= function(){
 };
 
 
-Blockly.Python.sensor_get_acceleration = function(){
+Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var key = this.getFieldValue('key')
     var code = 'accelerometer.get_' + key + '()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_set_acceleration = function(){
+Blockly.Python.forBlock['sensor_set_acceleration'] = function(){
     var key = this.getFieldValue('key')
     var code = 'input.setAccelerometerRange(' + key  + ')\n';
     return code;
@@ -121,7 +121,7 @@ Blockly.Python.sensor_compass_heading= function(){
     return ['compass.heading()', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_temperature = function(){
+Blockly.Python.forBlock['sensor_temperature'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return ['temperature()', Blockly.Python.ORDER_ATOMIC];
 };
@@ -131,7 +131,7 @@ Blockly.Python.sensor_field_strength= function(){
     var code = 'compass.'+compass+'()'
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_rotation = function(){
+Blockly.Python.forBlock['sensor_rotation'] = function(){
     var key = this.getFieldValue('key')
     var code = 'input.rotation(' + key  + ')';
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -196,7 +196,7 @@ Blockly.Python.sensor_distance_hrsc04_= function(){
     return ['sonar.distance_cm()', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.DS1307_init = function () {
+Blockly.Python.forBlock['DS1307_init'] = function () {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_RTC'] = 'from RTC import *';
     var SDA = Blockly.Python.valueToCode(this, 'SDA', Blockly.Python.ORDER_ATOMIC);
@@ -208,7 +208,7 @@ Blockly.Python.DS1307_init = function () {
     //return 'DS1307' + '('+SDA+','+SCL+')\n';
 };
 
-Blockly.Python.RTC_get_time = function () {
+Blockly.Python.forBlock['RTC_get_time'] = function () {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
@@ -257,7 +257,7 @@ Blockly.Python.RTC_get_time = function () {
 
 };
 
-Blockly.Python.RTC_set_time = function () {
+Blockly.Python.forBlock['RTC_set_time'] = function () {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
@@ -270,7 +270,7 @@ Blockly.Python.RTC_set_time = function () {
     return code;
 };
 
-Blockly.Python.RTC_set_date = function () {
+Blockly.Python.forBlock['RTC_set_date'] = function () {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
@@ -282,7 +282,7 @@ Blockly.Python.RTC_set_date = function () {
     return code;
 };
 
-Blockly.Python.sensor_compass_reset = function(block) {
+Blockly.Python.forBlock['sensor_compass_reset'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return 'compass.clear_calibration()\n';
 };
@@ -301,7 +301,7 @@ Blockly.Python.sensor_hrsc04_init= function(){
     return "sonar = HCSR04(tpin=pin"+Trig+", epin=pin"+Echo+")\n"
 };
 
-Blockly.Python.TCS34725_Get_RGB = function() {
+Blockly.Python.forBlock['TCS34725_Get_RGB'] = function() {
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_TCS'] = 'from TCS import *';
 
@@ -309,7 +309,7 @@ Blockly.Python.TCS34725_Get_RGB = function() {
   return ["tcs.getRawRGBData(" + RGB + ")", Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.NTC_TEMP = function () {
+Blockly.Python.forBlock['NTC_TEMP'] = function () {
   var PIN = this.getFieldValue('PIN');
   var NominalResistance= Blockly.Python.valueToCode(this, 'NominalResistance', Blockly.Python.ORDER_ATOMIC);
   var betaCoefficient= Blockly.Python.valueToCode(this, 'betaCoefficient', Blockly.Python.ORDER_ATOMIC);

@@ -6,32 +6,32 @@ goog.require('Blockly.Python');
 // ok
 
 
-Blockly.Python.inout_input = function() {
+Blockly.Python.forBlock['inout_input'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   return ['input(' + str+')', Blockly.Python.ORDER_ATOMIC];
 };
 
 
-Blockly.Python.inout_print = function() {
+Blockly.Python.forBlock['inout_print'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var code = "print("+str+")\n";
   return code;
 };
 
-Blockly.Python.inout_print_inline = function() {
+Blockly.Python.forBlock['inout_print_inline'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var code = "print("+str+',end ="")\n';
   return code;
 };
 
-Blockly.Python.inout_print_end = function() {
+Blockly.Python.forBlock['inout_print_end'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var end = Blockly.Python.valueToCode(this, 'END', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var code = "print("+str+',end =' + end + ')\n';
   return code;
 };
 
-Blockly.Python.inout_type_input = function() {
+Blockly.Python.forBlock['inout_type_input'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var type = this.getFieldValue('DIR');
   var num = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -42,7 +42,7 @@ Blockly.Python.inout_type_input = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.inout_print_many = function() {
+Blockly.Python.forBlock['inout_print_many'] = function() {
   
   var dropdown_type = this.getFieldValue('TYPE');
   

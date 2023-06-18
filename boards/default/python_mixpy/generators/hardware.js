@@ -12,13 +12,13 @@ Blockly.Python.hardware_arduino_start=function(){
   return code;
 };
 
-Blockly.Python.inout_highlow = function () {
+Blockly.Python.forBlock['inout_highlow'] = function () {
     // Boolean values HIGH and LOW.
     var code = (this.getFieldValue('BOOL') == 'HIGH') ? '1' : '0';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.hardware_arduino_digital_write = function () {
+Blockly.Python.forBlock['hardware_arduino_digital_write'] = function () {
     Blockly.Python.definitions_['import_s4alib'] = 'import s4alib';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -28,7 +28,7 @@ Blockly.Python.hardware_arduino_digital_write = function () {
     return code;
 };
 
-Blockly.Python.hardware_arduino_digital_read = function () {
+Blockly.Python.forBlock['hardware_arduino_digital_read'] = function () {
     Blockly.Python.definitions_['import_s4alib'] = 'import s4alib';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -37,7 +37,7 @@ Blockly.Python.hardware_arduino_digital_read = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.hardware_arduino_analog_read = function () {
+Blockly.Python.forBlock['hardware_arduino_analog_read'] = function () {
     Blockly.Python.definitions_['import_s4alib'] = 'import s4alib';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -46,7 +46,7 @@ Blockly.Python.hardware_arduino_analog_read = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.hardware_arduino_analog_write = function () {
+Blockly.Python.forBlock['hardware_arduino_analog_write'] = function () {
     Blockly.Python.definitions_['import_s4alib'] = 'import s4alib';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);

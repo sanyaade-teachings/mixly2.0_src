@@ -4,7 +4,7 @@ goog.require('Blockly.Arduino');
 
 goog.require('Mixly.JSFuncs');
 
-Blockly.Arduino.ethernet_init_begin = function () {
+Blockly.Arduino.forBlock['ethernet_init_begin'] = function () {
     var Ethernet = this.getFieldValue('Ethernet');
     Blockly.Arduino.definitions_['include_spi'] = '#include <SPI.h>';
     Blockly.Arduino.definitions_['include_' + Ethernet] = '#include <' + Ethernet + '.h>';
@@ -14,7 +14,7 @@ Blockly.Arduino.ethernet_init_begin = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ethernet_mac_address = function () {
+Blockly.Arduino.forBlock['ethernet_mac_address'] = function () {
     var VAR1 = this.getFieldValue('VAR1');
     var VAR2 = this.getFieldValue('VAR2');
     var VAR3 = this.getFieldValue('VAR3');
@@ -26,47 +26,47 @@ Blockly.Arduino.ethernet_mac_address = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ethernet_init_local_ip = function () {
+Blockly.Arduino.forBlock['ethernet_init_local_ip'] = function () {
     var code = "Ethernet.localIP()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ethernet_client_connect_server = function () {
+Blockly.Arduino.forBlock['ethernet_client_connect_server'] = function () {
     var PORT = Blockly.Arduino.valueToCode(this, 'PORT', Blockly.Arduino.ORDER_ATOMIC);
     var SERVER = Blockly.Arduino.quote_(this.getFieldValue('SERVER'));
     var code = 'client.connect(' + SERVER + ',' + PORT + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ethernet_client_stop = function () {
+Blockly.Arduino.forBlock['ethernet_client_stop'] = function () {
     var code = "client.stop();\n";
     return code;
 };
-Blockly.Arduino.ethernet_client_connected = function () {
+Blockly.Arduino.forBlock['ethernet_client_connected'] = function () {
     var code = "client.connected()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-Blockly.Arduino.ethernet_client_available = function () {
+Blockly.Arduino.forBlock['ethernet_client_available'] = function () {
     var code = "client.available()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ethernet_client_print = function () {
+Blockly.Arduino.forBlock['ethernet_client_print'] = function () {
     var TEXT = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
     var code = 'client.print(' + TEXT + ');\n';
     return code;
 };
-Blockly.Arduino.ethernet_client_println = function () {
+Blockly.Arduino.forBlock['ethernet_client_println'] = function () {
     var TEXT = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
     var code = 'client.println(' + TEXT + ');\n';
     return code;
 };
-Blockly.Arduino.ethernet_client_read = function () {
+Blockly.Arduino.forBlock['ethernet_client_read'] = function () {
     var code = "(char)client.read()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ethernet_client_get_request = function () {
+Blockly.Arduino.forBlock['ethernet_client_get_request'] = function () {
     var URL = this.getFieldValue('URL');
     var SERVER = this.getFieldValue('SERVER');
     var code = 'client.println("GET ' + URL + ' HTTP/1.1");\n'
@@ -76,7 +76,7 @@ Blockly.Arduino.ethernet_client_get_request = function () {
     return code;
 };
 
-Blockly.Arduino.WIFI_info = function () {
+Blockly.Arduino.forBlock['WIFI_info'] = function () {
     var SSID = Blockly.Arduino.valueToCode(this, 'SSID', Blockly.Arduino.ORDER_ATOMIC);
     var PWD = Blockly.Arduino.valueToCode(this, 'PWD', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
@@ -90,11 +90,11 @@ Blockly.Arduino.WIFI_info = function () {
     return "";
 };
 
-Blockly.Arduino.network_wifi_connect = function () {
+Blockly.Arduino.forBlock['network_wifi_connect'] = function () {
     return ["WiFi.status()", Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.network_get_connect = function () {
+Blockly.Arduino.forBlock['network_get_connect'] = function () {
     var board_type = Mixly.JSFuncs.getPlatform();
     var mode = this.getFieldValue('mode');
     if (board_type.match(RegExp(/ESP8266/))) {
@@ -110,7 +110,7 @@ Blockly.Arduino.network_get_connect = function () {
         return ["WiFi.macAddress()", Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.NTP_server = function () {
+Blockly.Arduino.forBlock['NTP_server'] = function () {
     var server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
     var timeZone = Blockly.Arduino.valueToCode(this, 'timeZone', Blockly.Arduino.ORDER_ATOMIC);
     var Interval = Blockly.Arduino.valueToCode(this, 'Interval', Blockly.Arduino.ORDER_ATOMIC);
@@ -123,13 +123,13 @@ Blockly.Arduino.NTP_server = function () {
     Blockly.Arduino.setups_['setup_NTP.begin'] = 'NTP.begin (ntpServer, timeZone, false);';
     return "";
 };
-Blockly.Arduino.NTP_server_get_time = function () {
+Blockly.Arduino.forBlock['NTP_server_get_time'] = function () {
     var timeType = this.getFieldValue('TIME_TYPE');
     var code = timeType;
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 var Client_ID;
-Blockly.Arduino.MQTT_server = function () {
+Blockly.Arduino.forBlock['MQTT_server'] = function () {
     var server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
     var server_port = Blockly.Arduino.valueToCode(this, 'server_port', Blockly.Arduino.ORDER_ATOMIC);
     var IOT_ID = Blockly.Arduino.valueToCode(this, 'IOT_ID', Blockly.Arduino.ORDER_ATOMIC);
@@ -171,7 +171,7 @@ Blockly.Arduino.MQTT_server = function () {
     return funcName + '();\n';
 };
 
-Blockly.Arduino.MQTT_connect = function () {
+Blockly.Arduino.forBlock['MQTT_connect'] = function () {
     var funcName = 'MQTT_connect';
     var code = 'void' + ' ' + funcName + '() {\n'
         + '  int8_t ret;\n'
@@ -196,7 +196,7 @@ Blockly.Arduino.MQTT_connect = function () {
 }
 
 //物联网-发送数据到app
-Blockly.Arduino.MQTT_publish = function () {
+Blockly.Arduino.forBlock['MQTT_publish'] = function () {
     var Topic = this.getFieldValue('Topic');
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var Topic_var = "MQTT_Topic_" + Topic;
@@ -205,7 +205,7 @@ Blockly.Arduino.MQTT_publish = function () {
     return code;
 };
 
-Blockly.Arduino.MQTT_subscribe_value = function () {
+Blockly.Arduino.forBlock['MQTT_subscribe_value'] = function () {
     var Topic = this.getFieldValue('Topic_0');
     if (Topic)
         Topic = Topic.replace(/\"/g, "");
@@ -214,7 +214,7 @@ Blockly.Arduino.MQTT_subscribe_value = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.MQTT_subscribe = function () {
+Blockly.Arduino.forBlock['MQTT_subscribe'] = function () {
     var n = 0;
     var Topic = this.getFieldValue('Topic_0');
     if (Topic)
@@ -242,7 +242,7 @@ Blockly.Arduino.MQTT_subscribe = function () {
 };
 
 //ESP8266 GET请求
-Blockly.Arduino.http_get = function () {
+Blockly.Arduino.forBlock['http_get'] = function () {
     var api = Blockly.Arduino.valueToCode(this, 'api', Blockly.Arduino.ORDER_ATOMIC);
     var branch = Blockly.Arduino.statementToCode(this, 'success');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
@@ -254,7 +254,7 @@ Blockly.Arduino.http_get = function () {
     return code;
 };
 
-Blockly.Arduino.WIFI_smartConfig = function () {
+Blockly.Arduino.forBlock['WIFI_smartConfig'] = function () {
     var MODE = this.getFieldValue('MODE');
     // var board_type = Mixly.JSFuncs.getPlatform();
     var board_type = "ESP8266";
@@ -296,7 +296,7 @@ Blockly.Arduino.WIFI_smartConfig = function () {
     }
 };
 
-Blockly.Arduino.WIFI_ap_or_sta = function () {
+Blockly.Arduino.forBlock['WIFI_ap_or_sta'] = function () {
     var dropdown_mode = this.getFieldValue('mode');
     var value_SSID = Blockly.Arduino.valueToCode(this, 'SSID', Blockly.Arduino.ORDER_ATOMIC);
     var value_PSK = Blockly.Arduino.valueToCode(this, 'PSK', Blockly.Arduino.ORDER_ATOMIC);
@@ -359,7 +359,7 @@ Blockly.Arduino.WIFI_ap_or_sta = function () {
     return code;
 };
 
-Blockly.Arduino.WIFI_ap_and_sta = function () {
+Blockly.Arduino.forBlock['WIFI_ap_and_sta'] = function () {
     var value_SSID1 = Blockly.Arduino.valueToCode(this, 'SSID1', Blockly.Arduino.ORDER_ATOMIC);
     var value_SSID2 = Blockly.Arduino.valueToCode(this, 'SSID2', Blockly.Arduino.ORDER_ATOMIC);
     var value_PSK1 = Blockly.Arduino.valueToCode(this, 'PSK1', Blockly.Arduino.ORDER_ATOMIC);
@@ -400,7 +400,7 @@ Blockly.Arduino.WIFI_ap_and_sta = function () {
     return code;
 };
 
-Blockly.Arduino.WIFI_incomingPacket = function () {
+Blockly.Arduino.forBlock['WIFI_incomingPacket'] = function () {
     var value_input_data = Blockly.Arduino.valueToCode(this, 'input_data', Blockly.Arduino.ORDER_ATOMIC) || 'COM';
     var statements_do = Blockly.Arduino.statementToCode(this, 'do');
     statements_do = statements_do.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
@@ -418,7 +418,7 @@ Blockly.Arduino.WIFI_incomingPacket = function () {
     return code;
 };
 
-Blockly.Arduino.WIFI_send_data = function () {
+Blockly.Arduino.forBlock['WIFI_send_data'] = function () {
     var value_data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'Udp.beginPacket(Udp.remoteIP(),Udp.remotePort());\n'
         + 'Udp.write(' + value_data + ');\n'
@@ -3015,7 +3015,7 @@ var WeatherCity = {
     "新港": "101340904"
 };
 //天气GET
-Blockly.Arduino.WeatherGet = function () {
+Blockly.Arduino.forBlock['WeatherGet'] = function () {
     var data = this.getFieldValue('data');
     var CityCode = WeatherCity[data];
     Blockly.Arduino.definitions_['include_Weather_Forcast'] = '#include <Weather_Forcast.h>';
@@ -3032,14 +3032,14 @@ Blockly.Arduino.WeatherGet = function () {
 };
 
 //获取当天天气
-Blockly.Arduino.WeatherGetToday = function () {
+Blockly.Arduino.forBlock['WeatherGetToday'] = function () {
     var type = this.getFieldValue('type');
     var code = "Weather.getToday(" + type + ")";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //获取预报天气
-Blockly.Arduino.WeatherGetForecast = function () {
+Blockly.Arduino.forBlock['WeatherGetForecast'] = function () {
     var type = this.getFieldValue('type');
     var date = Blockly.Arduino.valueToCode(this, 'date', Blockly.Arduino.ORDER_ATOMIC);
     var code = "Weather.get" + type + "(" + date + ")";
@@ -4233,7 +4233,7 @@ const CITYS_DATA = {
 };
 
 //网络天气
-Blockly.Arduino.china_city = function () {
+Blockly.Arduino.forBlock['china_city'] = function () {
     var a = this.getFieldValue("province");
     var b = this.getFieldValue("city");
     var code = "";
@@ -4245,13 +4245,13 @@ Blockly.Arduino.china_city = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.weather_private_key = function () {
+Blockly.Arduino.forBlock['weather_private_key'] = function () {
     var a = this.getFieldValue("key");
     var code = '"' + a + '"';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.weather_seniverse_city_weather = function () {
+Blockly.Arduino.forBlock['weather_seniverse_city_weather'] = function () {
     var api = this.getFieldValue("api");
     var location = Blockly.Arduino.valueToCode(this, "location", Blockly.Arduino.ORDER_ATOMIC);
     var private_key = Blockly.Arduino.valueToCode(this, "private_key", Blockly.Arduino.ORDER_ATOMIC);
@@ -4283,7 +4283,7 @@ Blockly.Arduino.weather_seniverse_city_weather = function () {
     return code;
 };
 
-Blockly.Arduino.weather_get_seniverse_weather_info = function () {
+Blockly.Arduino.forBlock['weather_get_seniverse_weather_info'] = function () {
     var api = this.getFieldValue("api");
     var type = this.getFieldValue("type");
     var code = '';
@@ -4302,26 +4302,26 @@ Blockly.Arduino.weather_get_seniverse_weather_info = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.weather_get_seniverse_weather_info1 = function () {
+Blockly.Arduino.forBlock['weather_get_seniverse_weather_info1'] = function () {
     var type = this.getFieldValue("type");
     var code = 'weatherNow.' + type + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.weather_get_seniverse_weather_info2 = function () {
+Blockly.Arduino.forBlock['weather_get_seniverse_weather_info2'] = function () {
     var date = this.getFieldValue("date");
     var type = this.getFieldValue("type");
     var code = 'forecast.' + type + '(' + date + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.weather_get_seniverse_weather_info3 = function () {
+Blockly.Arduino.forBlock['weather_get_seniverse_weather_info3'] = function () {
     var type = this.getFieldValue("type");
     var code = 'lifeInfo.' + type + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.mixio_mqtt_subscribe = function () {
+Blockly.Arduino.forBlock['mixio_mqtt_subscribe'] = function () {
     var server = Blockly.Arduino.valueToCode(this, 'server', Blockly.Arduino.ORDER_ATOMIC);
     var port = Blockly.Arduino.valueToCode(this, 'port', Blockly.Arduino.ORDER_ATOMIC);
     var mqtt_username = Blockly.Arduino.valueToCode(this, 'mqtt_username', Blockly.Arduino.ORDER_ATOMIC);
@@ -4369,7 +4369,7 @@ Blockly.Arduino.mixio_mqtt_subscribe = function () {
     return code;
 };
 
-Blockly.Arduino.mixio_mqtt_subscribe_key = function () {
+Blockly.Arduino.forBlock['mixio_mqtt_subscribe_key'] = function () {
     var key = this.getFieldValue('key');
     var server = this.getFieldValue('server');
     Blockly.Arduino.definitions_['include_PubSubClient'] = '#include <PubSubClient.h>\n';
@@ -4413,7 +4413,7 @@ Blockly.Arduino.mixio_mqtt_subscribe_key = function () {
     return code;
 };
 
-Blockly.Arduino.mixio_mqtt_publish = function () {
+Blockly.Arduino.forBlock['mixio_mqtt_publish'] = function () {
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var topic = Blockly.Arduino.valueToCode(this, 'topic', Blockly.Arduino.ORDER_ATOMIC);
     var mode = this.getFieldValue('mode');
@@ -4426,7 +4426,7 @@ Blockly.Arduino.mixio_mqtt_publish = function () {
     return code;
 };
 
-Blockly.Arduino.mixio_mqtt_received_the_news = function () {
+Blockly.Arduino.forBlock['mixio_mqtt_received_the_news'] = function () {
     var mode = this.getFieldValue('mode');
     var topic = Blockly.Arduino.valueToCode(this, 'topic', Blockly.Arduino.ORDER_ATOMIC);
     var branch = Blockly.Arduino.statementToCode(this, 'function');
@@ -4452,7 +4452,7 @@ Blockly.Arduino.mixio_mqtt_received_the_news = function () {
     return code;
 };
 
-Blockly.Arduino.asyncelegantota = function () {
+Blockly.Arduino.forBlock['asyncelegantota'] = function () {
     var board_type = Mixly.JSFuncs.getPlatform();
     if (board_type.match(RegExp(/ESP8266/))) {
         Blockly.Arduino.definitions_['include_ESPAsyncTCP'] = '#include <ESPAsyncTCP.h>';

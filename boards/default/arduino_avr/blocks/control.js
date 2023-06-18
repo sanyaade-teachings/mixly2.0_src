@@ -219,8 +219,8 @@ Blockly.Blocks['controls_if'] = {
                 page: ['Arduino AVR', '控制', 'if 选择']
             }
         };
-        this.setMutator(new Blockly.Mutator(['controls_if_elseif',
-            'controls_if_else']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['controls_if_elseif',
+            'controls_if_else'], this));
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
         this.setTooltip(function () {
@@ -299,11 +299,11 @@ Blockly.Blocks['controls_if'] = {
         }
         for (var i = valueConnections.length - 2; i > 0; i--) {
             if (valueConnections[i])
-                Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
+                valueConnections[i].reconnect(this, 'IF' + i);
         }
         for (var i = statementConnections.length - 2; i > 0; i--) {
             if (statementConnections[i])
-                Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+                statementConnections[i].reconnect(this, 'DO' + i);
         }
     },
     /**
@@ -469,10 +469,10 @@ Blockly.Blocks['controls_if'] = {
     reconnectChildBlocks_: function (valueConnections, statementConnections,
         elseStatementConnection) {
         for (var i = 1; i <= this.elseifCount_; i++) {
-            Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
-            Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+            valueConnections[i] && valueConnections[i].reconnect(this, 'IF' + i);
+            statementConnections[i] && statementConnections[i].reconnect(this, 'DO' + i);
         }
-        Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE');
+        elseStatementConnection && elseStatementConnection.reconnect(this, 'ELSE');
     }
 };
 
@@ -536,8 +536,8 @@ Blockly.Blocks['controls_switch_case'] = {
                 page: ['Arduino AVR', '控制', 'switch 选择']
             }
         };
-        this.setMutator(new Blockly.Mutator(['controls_case',
-            'controls_default']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['controls_case',
+            'controls_default'], this));
         this.elseifCount_ = 0;
         this.elseCount_ = 0;
     },

@@ -5,14 +5,14 @@ goog.provide('Blockly.Arduino.variables');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.variables_get = function () {
+Blockly.Arduino.forBlock['variables_get'] = function () {
     // Variable getter.
     var code = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.variables_declare = function () {
+Blockly.Arduino.forBlock['variables_declare'] = function () {
     var dropdown_type = this.getFieldValue('TYPE');
     var dropdown_variables_type = this.getFieldValue('variables_type');
     var argument0;
@@ -47,7 +47,7 @@ Blockly.Arduino.variables_declare = function () {
     return code;
 };
 
-Blockly.Arduino.variables_set = function () {
+Blockly.Arduino.forBlock['variables_set'] = function () {
     // Variable setter.
     var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE',
         Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -55,7 +55,7 @@ Blockly.Arduino.variables_set = function () {
         Blockly.Variables.NAME_TYPE);
     return varName + ' = ' + argument0 + ';\n';
 };
-Blockly.Arduino.variables_change = function () {
+Blockly.Arduino.forBlock['variables_change'] = function () {
     // Variable setter.
     var operator = this.getFieldValue('OP');
     var varName = Blockly.Arduino.valueToCode(this, 'MYVALUE', Blockly.Arduino.ORDER_ASSIGNMENT);

@@ -349,14 +349,14 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
     }
     const blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
     for (let i of blocks)
-        if (!Blockly.Blocks[i] || !blocklyGenerator[i])
+        if (!Blockly.Blocks[i] || !blocklyGenerator.forBlock[i])
             undefinedBlocks.push(i);
     if (undefinedBlocks.length) {
         MFile.showParseMixErrorDialog(mixDom, undefinedBlocks, endFunc);
         return;
     }
     Editor.blockEditor.clear();
-    Blockly.Xml.domToWorkspace(Editor.blockEditor, xmlDom[0]);
+    Blockly.Xml.domToWorkspace(xmlDom[0], Editor.blockEditor);
     Editor.blockEditor.scrollCenter();
     Blockly.hideChaff();
     if (!useIncompleteBlocks && codeDom) {

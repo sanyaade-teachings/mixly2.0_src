@@ -3,7 +3,7 @@
 goog.provide('Blockly.Arduino.tools');
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.factory_notes = function () {
+Blockly.Arduino.forBlock['factory_notes'] = function () {
     var content = this.getFieldValue('VALUE');
     //console.log(content);
     if (content) {
@@ -24,13 +24,13 @@ Blockly.Arduino.factory_notes = function () {
     }
 }
 
-Blockly.Arduino.folding_block = function () {
+Blockly.Arduino.forBlock['folding_block'] = function () {
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     return '' + branch + '\n';
 };
 
-Blockly.Arduino.IICSCAN = function () {
+Blockly.Arduino.forBlock['IICSCAN'] = function () {
     Blockly.Arduino.definitions_['include_WIRE'] = '#include <Wire.h>';
     Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
@@ -191,7 +191,7 @@ function myAtoi(str) {
 };
 
 //取模工具显示数据部分
-Blockly.Arduino.tool_modulus_show = function () {
+Blockly.Arduino.forBlock['tool_modulus_show'] = function () {
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
     var X = this.getFieldValue('x');
@@ -221,7 +221,7 @@ for (var i = 0; i < 8; i++)bitArr[i] = (0x80 >> i);//初始化位数组
 var canvas = document.createElement("canvas");//创建canvas
 var ctx = canvas.getContext("2d");//获得内容描述句柄
 
-Blockly.Arduino.tool_modulus = function () {
+Blockly.Arduino.forBlock['tool_modulus'] = function () {
     var dropdown_bitmap_formats = this.getFieldValue('bitmap_formats');
     var dropdown_modulus_way = this.getFieldValue('modulus_way');
     var dropdown_modulus_direction = this.getFieldValue('modulus_direction');
@@ -584,7 +584,7 @@ Blockly.Arduino.tool_modulus = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.nano_pin = function () {
+Blockly.Arduino.forBlock['nano_pin'] = function () {
     return "";
 };
 Blockly.Arduino.promini_pin = Blockly.Arduino.nano_pin;
@@ -599,7 +599,7 @@ Blockly.Arduino.esp32c3_pin = Blockly.Arduino.nano_pin;
 Blockly.Arduino.core_esp32c3_pin = Blockly.Arduino.nano_pin;
 
 //获取两个日期差值
-Blockly.Arduino.get_the_number_of_days_between_the_two_dates = function () {
+Blockly.Arduino.forBlock['get_the_number_of_days_between_the_two_dates'] = function () {
     var year_start = Blockly.Arduino.valueToCode(this, 'year_start', Blockly.Arduino.ORDER_ATOMIC);
     var month_start = Blockly.Arduino.valueToCode(this, 'month_start', Blockly.Arduino.ORDER_ATOMIC);
     var day_start = Blockly.Arduino.valueToCode(this, 'day_start', Blockly.Arduino.ORDER_ATOMIC);
@@ -611,7 +611,7 @@ Blockly.Arduino.get_the_number_of_days_between_the_two_dates = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.esp8266_board_pin = function () {
+Blockly.Arduino.forBlock['esp8266_board_pin'] = function () {
     var pin = this.getFieldValue('pin');
     var code = '' + pin + '';
     return [code, Blockly.Arduino.ORDER_ATOMIC];

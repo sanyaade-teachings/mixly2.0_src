@@ -24,7 +24,7 @@ Blockly.Python.serial_write=function(){
   return code;
 };
 
-Blockly.Python.serial_read_b = function () {
+Blockly.Python.forBlock['serial_read_b'] = function () {
     Blockly.Python.definitions_['import_serial'] = 'import serial';
     var ser = Blockly.Python.valueToCode(this, 'SER', Blockly.Python.ORDER_ADDITIVE) || 'ser';
     var len = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'

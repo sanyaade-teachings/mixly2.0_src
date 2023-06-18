@@ -22,7 +22,7 @@ Blockly.Blocks['set_create_with'] = {
     this.updateShape_();
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['set_create_with_item']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['set_create_with_item'], this));
     this.setTooltip(Blockly.Msg.blockpy_SET_CREATE_WITH_TOOLTIP);
   },
   /**

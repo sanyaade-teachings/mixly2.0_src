@@ -110,7 +110,7 @@ Blockly.Blocks['lists_create_with'] = {
     this.updateShape_();
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['lists_create_with_item'], this));
     this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_PYTHON_TOOLTIP);
   },
   /**
@@ -624,7 +624,7 @@ Blockly.Blocks['lists_create_with_noreturn'] = {
         this.setPreviousStatement(false);
         this.setNextStatement(false);
         this.setOutput(true, "List")
-        this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['lists_create_with_item'], this));
         this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_PYTHON_TOOLTIP);
     },
     /**
@@ -790,7 +790,7 @@ Blockly.Blocks['lists_zip'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setOutput(true, "List")
-    this.setMutator(new Blockly.Mutator(['lists_zip_item']));    
+    this.setMutator(new Blockly.icons.MutatorIcon(['lists_zip_item'], this));    
     this.setTooltip(Blockly.Msg.MIXLY_PYTHON_LISTS_ZIP_TOOLTIP);
   },
   

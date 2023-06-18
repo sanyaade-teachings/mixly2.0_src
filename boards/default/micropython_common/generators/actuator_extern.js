@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.actuator');
 goog.require('Blockly.Python');
 
-Blockly.Python.servo_init = function() {
+Blockly.Python.forBlock['servo_init'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   Blockly.Python.definitions_['import_board'] = 'import board';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
@@ -12,7 +12,7 @@ Blockly.Python.servo_init = function() {
   return code;
 };
 
-Blockly.Python.servo_move = function() {
+Blockly.Python.forBlock['servo_move'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
@@ -22,14 +22,14 @@ Blockly.Python.servo_move = function() {
 };
 
 
-Blockly.Python.servo_speed_360 = function() {
+Blockly.Python.forBlock['servo_speed_360'] = function() {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
   var speed = Blockly.Python.valueToCode(this, 'SPEED', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.set_speed('+speed+')\n';
   return code;
 };
 
-Blockly.Python.servo_set_angle = function() {
+Blockly.Python.forBlock['servo_set_angle'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
   var num = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC);
@@ -37,7 +37,7 @@ Blockly.Python.servo_set_angle = function() {
   return code;
 };
 
-Blockly.Python.servo_set_speed = function() {
+Blockly.Python.forBlock['servo_set_speed'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
   var num = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC);
@@ -45,21 +45,21 @@ Blockly.Python.servo_set_speed = function() {
   return code;
 };
 
-Blockly.Python.servo_get_angle = function() {
+Blockly.Python.forBlock['servo_get_angle'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
   var code = 'servo.servo180_angle('+dropdown_pin+')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.servo_get_speed = function() {
+Blockly.Python.forBlock['servo_get_speed'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
   var code = 'servo.servo360_speed('+dropdown_pin+')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.actuator_ms32006_init = function () {
+Blockly.Python.forBlock['actuator_ms32006_init'] = function () {
   Blockly.Python.definitions_['import ms32006'] = 'import ms32006';
   var address =this.getFieldValue('mode')
   var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -68,7 +68,7 @@ Blockly.Python.actuator_ms32006_init = function () {
     return code;
 };
 
-Blockly.Python.actuator_ms32006_dcmotor = function () {
+Blockly.Python.forBlock['actuator_ms32006_dcmotor'] = function () {
   Blockly.Python.definitions_['import ms32006'] = 'import ms32006';
   var direction =this.getFieldValue('direction')
   var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -77,7 +77,7 @@ Blockly.Python.actuator_ms32006_dcmotor = function () {
     return code;
 };
 
-Blockly.Python.actuator_ms32006_stepper = function () {
+Blockly.Python.forBlock['actuator_ms32006_stepper'] = function () {
   Blockly.Python.definitions_['import ms32006'] = 'import ms32006';
   var mode =this.getFieldValue('mode')
   var direction =this.getFieldValue('direction')
@@ -96,7 +96,7 @@ Blockly.Python.esp32_music_pitch_init=function(){
     return code;
 };
 
-Blockly.Python.esp32_music_pitch = function(block) {
+Blockly.Python.forBlock['esp32_music_pitch'] = function(block) {
   Blockly.Python.definitions_['import_music'] = 'import music';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
@@ -104,7 +104,7 @@ Blockly.Python.esp32_music_pitch = function(block) {
   return code;
 };
 
-Blockly.Python.esp32_music_pitch_with_time = function(block) {
+Blockly.Python.forBlock['esp32_music_pitch_with_time'] = function(block) {
   Blockly.Python.definitions_['import_music'] = 'import music';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
@@ -113,7 +113,7 @@ Blockly.Python.esp32_music_pitch_with_time = function(block) {
   return code;
 };
 
-Blockly.Python.esp32_music_stop = function(block) {
+Blockly.Python.forBlock['esp32_music_stop'] = function(block) {
   Blockly.Python.definitions_['import_music'] = 'import music';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.stop('+')\n';
@@ -150,7 +150,7 @@ Blockly.Python.esp32_music_reset_extern=function(){
     return v+".reset()\n";
 };
 
-Blockly.Python.servo_move = function() {
+Blockly.Python.forBlock['servo_move'] = function() {
   Blockly.Python.definitions_['import_servo'] = 'import servo';
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);

@@ -5,7 +5,7 @@ goog.provide('Blockly.Python.loops');
 goog.require('Blockly.Python');
 
 //物联网-wifi信息
-Blockly.Python.blynk_server = function() {
+Blockly.Python.forBlock['blynk_server'] = function() {
 	var wifi_ssid = Blockly.Python.valueToCode(this, 'wifi_ssid', Blockly.Python.ORDER_ATOMIC);
 	var wifi_pass = Blockly.Python.valueToCode(this, 'wifi_pass', Blockly.Python.ORDER_ATOMIC);
 	var auth_key = Blockly.Python.valueToCode(this, 'auth_key', Blockly.Python.ORDER_ATOMIC);
@@ -29,7 +29,7 @@ Blockly.Python.blynk_server = function() {
 };
 
 //物联网-wifi信息
-Blockly.Python.blynk_iot_get_data = function() {
+Blockly.Python.forBlock['blynk_iot_get_data'] = function() {
 	var Vpin = this.getFieldValue('Vpin');
   var args = [];
   for (var x = 0; x < this.arguments_.length; x++) {

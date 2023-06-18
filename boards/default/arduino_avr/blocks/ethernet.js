@@ -384,7 +384,7 @@ Blockly.Blocks['MQTT_subscribe'] = {
             .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
-        this.setMutator(new Blockly.Mutator(['MQTT_add_subscribe_topic']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['MQTT_add_subscribe_topic'], this));
         // Assign 'this' to a variable for use in the tooltip closure below.
         var thisBlock = this;
         this.setTooltip(function () {
@@ -442,7 +442,7 @@ Blockly.Blocks['MQTT_subscribe'] = {
         }
         for (var i = statementConnections.length - 2; i > 0; i--) {
             if (statementConnections[i])
-                Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+                statementConnections[i] && statementConnections[i].reconnect(this, 'DO' + i);
         }
     },
     /**
@@ -568,8 +568,8 @@ Blockly.Blocks['MQTT_subscribe'] = {
      */
     reconnectChildBlocks_: function (statementConnections) {
         for (var i = 1; i <= this.elseifCount_; i++) {
-            //Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
-            Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+            //valueConnections[i] && valueConnections[i].reconnect(this, 'IF' + i);
+            statementConnections[i] && statementConnections[i].reconnect(this, 'DO' + i);
         }
     }
 };

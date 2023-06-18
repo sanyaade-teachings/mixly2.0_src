@@ -5,20 +5,20 @@ goog.provide('Blockly.Python.sensor');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.KEY_SELET = function () {
+Blockly.Python.forBlock['KEY_SELET'] = function () {
     var code = this.getFieldValue('KEY');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 
-Blockly.Python.sensor_button_init = function () {
+Blockly.Python.forBlock['sensor_button_init'] = function () {
     Blockly.Python.definitions_['import board'] = 'import board';
 	var key =Blockly.Python.valueToCode(this, 'key',Blockly.Python.ORDER_ATOMIC);
 	var code1 = 'button'+key+'=board.pin('+key+',board.GPIO.IN,board.GPIO.PULL_UP)\n';
 	return code1;  
 };
 
-Blockly.Python.sensor_button_read = function () {
+Blockly.Python.forBlock['sensor_button_read'] = function () {
     Blockly.Python.definitions_['import board'] = 'import board';
 	var key =Blockly.Python.valueToCode(this, 'key',Blockly.Python.ORDER_ATOMIC);
 	var code = 'not button'+key+'.value()';
@@ -27,7 +27,7 @@ Blockly.Python.sensor_button_read = function () {
 
 
 
-Blockly.Python.sensor_dht11 = function () {
+Blockly.Python.forBlock['sensor_dht11'] = function () {
     Blockly.Python.definitions_['import dht11'] = 'import dht11';
     var TYPE = this.getFieldValue('TYPE');
     var PIN = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -38,7 +38,7 @@ Blockly.Python.sensor_dht11 = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.HCSR04 = function () {
+Blockly.Python.forBlock['HCSR04'] = function () {
     Blockly.Python.definitions_['import_sonar'] = 'import hcr04';
     var dropdown_pin1 = Blockly.Python.valueToCode(this, "PIN1", Blockly.Python.ORDER_ASSIGNMENT);
     var dropdown_pin2 = Blockly.Python.valueToCode(this, "PIN2", Blockly.Python.ORDER_ASSIGNMENT);
@@ -47,7 +47,7 @@ Blockly.Python.HCSR04 = function () {
 }
 
 
-Blockly.Python.sensor_mpu9250_attachGestureInterrupt = function(){
+Blockly.Python.forBlock['sensor_mpu9250_attachGestureInterrupt'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     var gesture = this.getFieldValue('gesture');
     var branch = Blockly.Python.statementToCode(this, 'DO');
@@ -59,7 +59,7 @@ Blockly.Python.sensor_mpu9250_attachGestureInterrupt = function(){
     return code;
 }
 
-Blockly.Python.sensor_mpu9250_gesture = function(){
+Blockly.Python.forBlock['sensor_mpu9250_gesture'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     var gesture = this.getFieldValue('gesture');
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -70,7 +70,7 @@ Blockly.Python.sensor_mpu9250_gesture = function(){
 }
 
 
-Blockly.Python.sensor_mpu9250_get_acceleration = function(){
+Blockly.Python.forBlock['sensor_mpu9250_get_acceleration'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     var key = this.getFieldValue('key');
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -80,7 +80,7 @@ Blockly.Python.sensor_mpu9250_get_acceleration = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_adxl345_get_acceleration = function(){
+Blockly.Python.forBlock['sensor_adxl345_get_acceleration'] = function(){
     Blockly.Python.definitions_['import_adxl345'] = 'import adxl345';
     var key = this.getFieldValue('key');
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -97,7 +97,7 @@ Blockly.Python.sensor_adxl345_get_acceleration = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mpu9250_get_magnetic = function(){
+Blockly.Python.forBlock['sensor_mpu9250_get_magnetic'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     var key = this.getFieldValue('key');
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -107,7 +107,7 @@ Blockly.Python.sensor_mpu9250_get_magnetic = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mpu9250_get_gyro = function(){
+Blockly.Python.forBlock['sensor_mpu9250_get_gyro'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     var key = this.getFieldValue('key');
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -124,7 +124,7 @@ Blockly.Python.sensor_mpu9250_calibrate_compass= function(){
     return ''+v+'.calibrate()\n';
 };
 
-Blockly.Python.sensor_mpu9250_temperature = function(){
+Blockly.Python.forBlock['sensor_mpu9250_temperature'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     if (v == "mpu")
@@ -149,7 +149,7 @@ Blockly.Python.sensor_mpu9250_field_strength= function(){
 };
 
 
-Blockly.Python.sensor_compass_reset = function(block) {
+Blockly.Python.forBlock['sensor_compass_reset'] = function(block) {
   Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
   Blockly.Python.definitions_['import_mixgo_compass'] = 'from mixgo import compass';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);

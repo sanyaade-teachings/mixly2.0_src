@@ -5,14 +5,14 @@ goog.provide('Blockly.Python.variables');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.variables_get = function() {
+Blockly.Python.forBlock['variables_get'] = function() {
   // Variable getter.
   var code = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   return [code, Blockly.Python.ORDER_ATOMIC];
 }; 
 
-// Blockly.Python.variables_declare = function() {
+// Blockly.Python.forBlock['variables_declare'] = function() {
 //   var dropdown_type = this.getFieldValue('TYPE');
 //   var argument0;
 //   //TODO: settype to variable
@@ -37,7 +37,7 @@ Blockly.Python.variables_get = function() {
 //   return '';
 // };
 
-Blockly.Python.variables_set = function(block) {
+Blockly.Python.forBlock['variables_set'] = function(block) {
   // Variable setter.
   Blockly.Python.definitions_.import_blocktool = "import blocktool";
   var code=""
@@ -55,7 +55,7 @@ Blockly.Python.variables_set = function(block) {
   return code
 };
 
-Blockly.Python.variables_change = function () {
+Blockly.Python.forBlock['variables_change'] = function () {
     // Variable setter.
     var operator = this.getFieldValue('OP');
     var varName = Blockly.Python.valueToCode(this, 'MYVALUE', Blockly.Python.ORDER_ATOMIC) || 'None';
@@ -63,7 +63,7 @@ Blockly.Python.variables_change = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.variables_global = function(block) {
+Blockly.Python.forBlock['variables_global'] = function(block) {
   Blockly.Python.definitions_.import_blocktool = "import blocktool";
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || 'None';
   var code ="blocktool.highlight(\'"+block.id+"\')\n"+ "global "+str+'\n';
@@ -72,13 +72,13 @@ Blockly.Python.variables_global = function(block) {
 
 
 //ok
-Blockly.Python.controls_type = function () {
+Blockly.Python.forBlock['controls_type'] = function () {
     var data = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ATOMIC) || 'None'
     var code = 'type(' + data + ')';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.controls_typeLists = function(){
+Blockly.Python.forBlock['controls_typeLists'] = function(){
     //Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var type = this.getFieldValue('type');
     // Blockly.Python.definitions_['func_type' + type] = code;

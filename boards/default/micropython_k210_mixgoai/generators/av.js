@@ -1,7 +1,7 @@
 'use strict';
 
 
-Blockly.Python.spk_init = function () {
+Blockly.Python.forBlock['spk_init'] = function () {
     Blockly.Python.definitions_['import player'] = 'import player';	
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
 	var BCK = Blockly.Python.valueToCode(this, 'BCK',Blockly.Python.ORDER_ATOMIC);
@@ -12,7 +12,7 @@ Blockly.Python.spk_init = function () {
   return code;  
 };
 
-Blockly.Python.mic_init = function () {
+Blockly.Python.forBlock['mic_init'] = function () {
     Blockly.Python.definitions_['import player'] = 'import player';	
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
 	// var BCK = Blockly.Python.valueToCode(this, 'BCK',Blockly.Python.ORDER_ATOMIC);
@@ -24,7 +24,7 @@ Blockly.Python.mic_init = function () {
 };
 
 
-Blockly.Python.audio_play = function () {
+Blockly.Python.forBlock['audio_play'] = function () {
   Blockly.Python.definitions_['import player'] = 'import player';	
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
   var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -33,7 +33,7 @@ Blockly.Python.audio_play = function () {
   return code; 
 };
 
-Blockly.Python.audio_record = function () {
+Blockly.Python.forBlock['audio_record'] = function () {
   Blockly.Python.definitions_['import player'] = 'import player';	
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
   var time =Blockly.Python.valueToCode(this, 'time',Blockly.Python.ORDER_ATOMIC);
@@ -43,7 +43,7 @@ Blockly.Python.audio_record = function () {
 };
 
 
-Blockly.Python.video_play = function () {
+Blockly.Python.forBlock['video_play'] = function () {
   Blockly.Python.definitions_['import player'] = 'import player';	
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
   var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -53,7 +53,7 @@ Blockly.Python.video_play = function () {
 };
 
 
-Blockly.Python.video_record = function () {
+Blockly.Python.forBlock['video_record'] = function () {
   Blockly.Python.definitions_['import player'] = 'import player';	
   var path =Blockly.Python.valueToCode(this, 'path',Blockly.Python.ORDER_ATOMIC);
   var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);

@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.communicate');
 goog.require('Blockly.Python');
 
-Blockly.Python.requests_get = function() {
+Blockly.Python.forBlock['requests_get'] = function() {
   Blockly.Python.definitions_.import_requests = "import requests";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -16,7 +16,7 @@ Blockly.Python.requests_get = function() {
 };
 
 
-Blockly.Python.requests_attribute = function() {
+Blockly.Python.forBlock['requests_attribute'] = function() {
   Blockly.Python.definitions_.import_requests = "import requests";
   var varName = Blockly.Python.valueToCode(this, 'VAL', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var attr = this.getFieldValue('ATTR');
@@ -25,7 +25,7 @@ Blockly.Python.requests_attribute = function() {
 };
 
 
-Blockly.Python.requests_method = function() {
+Blockly.Python.forBlock['requests_method'] = function() {
   Blockly.Python.definitions_.import_requests = "import requests";    
     var method = this.getFieldValue('DIR');
   var str =Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;

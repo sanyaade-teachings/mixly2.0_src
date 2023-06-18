@@ -5,7 +5,7 @@ goog.provide('Blockly.Arduino.lists');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.lists_create_with = function () {
+Blockly.Arduino.forBlock['lists_create_with'] = function () {
     // Create a list with any number of elements of any type.
     var dropdown_type = this.getFieldValue('TYPE');
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
@@ -20,7 +20,7 @@ Blockly.Arduino.lists_create_with = function () {
     return '';
 };
 
-Blockly.Arduino.lists_create_with_text = function () {
+Blockly.Arduino.forBlock['lists_create_with_text'] = function () {
     var dropdown_type = this.getFieldValue('TYPE');
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
@@ -30,7 +30,7 @@ Blockly.Arduino.lists_create_with_text = function () {
     return '';
 };
 
-Blockly.Arduino.lists_create_with2 = function () {
+Blockly.Arduino.forBlock['lists_create_with2'] = function () {
     // Create a list with any number of elements of any type.
     var dropdown_type = this.getFieldValue('TYPE');
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
@@ -45,7 +45,7 @@ Blockly.Arduino.lists_create_with2 = function () {
     return '';
 };
 
-Blockly.Arduino.lists_create_with_text2 = function () {
+Blockly.Arduino.forBlock['lists_create_with_text2'] = function () {
     var dropdown_type = this.getFieldValue('TYPE');
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
@@ -55,7 +55,7 @@ Blockly.Arduino.lists_create_with_text2 = function () {
     return '';
 };
 
-Blockly.Arduino.lists_getIndex = function () {
+Blockly.Arduino.forBlock['lists_getIndex'] = function () {
     // Indexing into a list is the same as indexing into a string.
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
@@ -72,7 +72,7 @@ Blockly.Arduino.lists_getIndex = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.lists_setIndex = function () {
+Blockly.Arduino.forBlock['lists_setIndex'] = function () {
     // Set element at index.
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
@@ -91,7 +91,7 @@ Blockly.Arduino.lists_setIndex = function () {
     return varName + '[(int)(' + argument0 + ')] = ' + argument2 + ';\n';
 };
 
-Blockly.Arduino.listsGetValueByIndex = function () {
+Blockly.Arduino.forBlock['listsGetValueByIndex'] = function () {
     // Indexing into a list is the same as indexing into a string.
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
@@ -101,7 +101,7 @@ Blockly.Arduino.listsGetValueByIndex = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.listsSetValueByIndex = function () {
+Blockly.Arduino.forBlock['listsSetValueByIndex'] = function () {
     // Set element at index.
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
@@ -112,7 +112,7 @@ Blockly.Arduino.listsSetValueByIndex = function () {
     return varName + '[' + argument0 + '] = ' + argument2 + ';\n';
 };
 
-Blockly.Arduino.lists_length = function () {
+Blockly.Arduino.forBlock['lists_length'] = function () {
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
     var code = 'sizeof(' + varName + ')/sizeof(' + varName + '[0])';
@@ -120,7 +120,7 @@ Blockly.Arduino.lists_length = function () {
 };
 
 //创建二维数组
-Blockly.Arduino.create_array2_with_text = function () {
+Blockly.Arduino.forBlock['create_array2_with_text'] = function () {
     var TYPE = this.getFieldValue('TYPE');
     var line = Blockly.Arduino.valueToCode(this, 'line', Blockly.Arduino.ORDER_ATOMIC);
     var list = Blockly.Arduino.valueToCode(this, 'list', Blockly.Arduino.ORDER_ATOMIC);
@@ -131,7 +131,7 @@ Blockly.Arduino.create_array2_with_text = function () {
 };
 
 //二维数组赋值
-Blockly.Arduino.array2_assignment = function () {
+Blockly.Arduino.forBlock['array2_assignment'] = function () {
     var line = Blockly.Arduino.valueToCode(this, 'line', Blockly.Arduino.ORDER_ATOMIC);
     var list = Blockly.Arduino.valueToCode(this, 'list', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
@@ -141,7 +141,7 @@ Blockly.Arduino.array2_assignment = function () {
 };
 
 //获取二维数组值
-Blockly.Arduino.get_array2_value = function () {
+Blockly.Arduino.forBlock['get_array2_value'] = function () {
     var line = Blockly.Arduino.valueToCode(this, 'line', Blockly.Arduino.ORDER_ATOMIC);
     var list = Blockly.Arduino.valueToCode(this, 'list', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
@@ -150,7 +150,7 @@ Blockly.Arduino.get_array2_value = function () {
 };
 
 //二维数组赋值
-Blockly.Arduino.lists2SetValueByIndex = function () {
+Blockly.Arduino.forBlock['lists2SetValueByIndex'] = function () {
     var line = Blockly.Arduino.valueToCode(this, 'line', Blockly.Arduino.ORDER_ATOMIC);
     var list = Blockly.Arduino.valueToCode(this, 'list', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
@@ -160,7 +160,7 @@ Blockly.Arduino.lists2SetValueByIndex = function () {
 };
 
 //二维数组取值
-Blockly.Arduino.lists2GetValueByIndex = function () {
+Blockly.Arduino.forBlock['lists2GetValueByIndex'] = function () {
     var line = Blockly.Arduino.valueToCode(this, 'line', Blockly.Arduino.ORDER_ATOMIC);
     var list = Blockly.Arduino.valueToCode(this, 'list', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
@@ -168,7 +168,7 @@ Blockly.Arduino.lists2GetValueByIndex = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.lists_array2_setup = function () {
+Blockly.Arduino.forBlock['lists_array2_setup'] = function () {
     var dropdown_lists_create_type = this.getFieldValue('lists_create_type');
     var text_lists_create_name = this.getFieldValue('lists_create_name');
     var statements_lists_with_2_1_data = Blockly.Arduino.statementToCode(this, 'lists_with_2_1_data');
@@ -220,7 +220,7 @@ Blockly.Arduino.lists_array2_setup = function () {
     var code = '';
     return code;
 };
-Blockly.Arduino.lists_array2_setup_get_data = function () {
+Blockly.Arduino.forBlock['lists_array2_setup_get_data'] = function () {
     // Create a list with any number of elements of any type.
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
@@ -264,7 +264,7 @@ Blockly.Arduino.lists_array2_setup_get_data = function () {
 };
 
 //一维数组循环
-Blockly.Arduino.loop_array = function () {
+Blockly.Arduino.forBlock['loop_array'] = function () {
     var type = this.getFieldValue('TYPE');
     var mode = this.getFieldValue('mode');
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
@@ -279,7 +279,7 @@ Blockly.Arduino.loop_array = function () {
     return code;
 };
 //获取二维数组的行数与列数
-Blockly.Arduino.lists_array2_get_length = function () {
+Blockly.Arduino.forBlock['lists_array2_get_length'] = function () {
     var text_list_name = this.getFieldValue('list_name');
     var dropdown_type = this.getFieldValue('type');
     var code = '';

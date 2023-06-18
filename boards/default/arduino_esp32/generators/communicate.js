@@ -5,7 +5,7 @@ goog.provide('Blockly.Arduino.communicate');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.spi_transfer = function () {
+Blockly.Arduino.forBlock['spi_transfer'] = function () {
   Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
   Blockly.Arduino.setups_['setup_spi'] = 'SPI.begin();';
   var pin = Blockly.Arduino.valueToCode(this, 'pin', Blockly.Arduino.ORDER_ATOMIC);
@@ -17,7 +17,7 @@ Blockly.Arduino.spi_transfer = function () {
   return code;
 };
 
-Blockly.Arduino.serialBT_Init = function () {
+Blockly.Arduino.forBlock['serialBT_Init'] = function () {
   var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || profile.default.serial;
   Blockly.Arduino.definitions_['include_BluetoothSerial'] = '#include "BluetoothSerial.h"';
     Blockly.Arduino.definitions_['var_declare_BluetoothSerial'] = 'BluetoothSerial SerialBT;';
@@ -26,18 +26,18 @@ Blockly.Arduino.serialBT_Init = function () {
   return '';
 };
 
-Blockly.Arduino.serialBT_available = function () {
+Blockly.Arduino.forBlock['serialBT_available'] = function () {
   var code =  "SerialBT.available() > 0";
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.serialBT_read = function () {
+Blockly.Arduino.forBlock['serialBT_read'] = function () {
 
   var code = 'SerialBT.read()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.serialBT_write = function () {
+Blockly.Arduino.forBlock['serialBT_write'] = function () {
   var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '\"\"'
   var code =  'SerialBT.write(' + content + ');\n';
   return code;

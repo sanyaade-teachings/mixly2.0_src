@@ -121,7 +121,7 @@ Blockly.Blocks['inout_print_many'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setInputsInline(true);
-    this.setMutator(new Blockly.Mutator(['inout_print_item']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['inout_print_item'], this));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.MIXLY_MIXPY_INOUT_PRINT_MANY_TOOLTIP);

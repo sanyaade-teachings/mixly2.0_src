@@ -18,20 +18,20 @@ function str2hex(str){
 
 
 
-Blockly.Arduino.mixepi_inout_touchRead = function(){
+Blockly.Arduino.forBlock['mixepi_inout_touchRead'] = function(){
  var touch_pin = this.getFieldValue('touch_pin');
  var code ='touchRead('+touch_pin+')';
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.mixepi_button_is_pressed = function(){
+Blockly.Arduino.forBlock['mixepi_button_is_pressed'] = function(){
  var btn = this.getFieldValue('btn');
  Blockly.Arduino.setups_['setup_btn'+btn] = 'pinMode('+btn+',INPUT);';
  var code ='!digitalRead('+btn+')';
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.mixePi_button_is_pressed = function(){
+Blockly.Arduino.forBlock['mixePi_button_is_pressed'] = function(){
  var btn = this.getFieldValue('btn');
  Blockly.Arduino.setups_['setup_btn'+btn] = 'pinMode('+btn+',INPUT_PULLUP);';
  var code ='!digitalRead('+btn+')';
@@ -47,7 +47,7 @@ Blockly.Arduino.mixepi_sound= function(){
 };
 
 //传感器_重力感应块
-Blockly.Arduino.mixepi_ADXL345_action = function() {
+Blockly.Arduino.forBlock['mixepi_ADXL345_action'] = function() {
   Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
   Blockly.Arduino.definitions_['include_I2Cdev'] = '#include <I2Cdev.h>';
   Blockly.Arduino.definitions_['include_ADXL345'] = '#include <ADXL345.h>';
@@ -59,7 +59,7 @@ Blockly.Arduino.mixepi_ADXL345_action = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.RGB_color_seclet = function() {
+Blockly.Arduino.forBlock['RGB_color_seclet'] = function() {
   var colour = this.getFieldValue('COLOR');
   return [colour, Blockly.Arduino.ORDER_NONE];
 };
@@ -168,7 +168,7 @@ Blockly.Arduino.mixepi_rgb_rainbow3=function(){
   return code3;
 };
 
-Blockly.Arduino.brightness_select = function() {
+Blockly.Arduino.forBlock['brightness_select'] = function() {
   var code = this.getFieldValue('STAT');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

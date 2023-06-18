@@ -4,14 +4,14 @@ goog.provide('Blockly.Python.class_test');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.class_make = function() {
+Blockly.Python.forBlock['class_make'] = function() {
   var text_name = this.getFieldValue('VAR') || 'None';
   var statements_data = Blockly.Python.statementToCode(this, 'data');
   var code = 'class '+text_name+':\n'+statements_data;
   return code;
 };
 
-Blockly.Python.class_make_with_base = function() {
+Blockly.Python.forBlock['class_make_with_base'] = function() {
   var text_name = this.getFieldValue('VAR') || 'None';
   var name = Blockly.Python.valueToCode(this, 'NAME',Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   var statements_data = Blockly.Python.statementToCode(this, 'data');
@@ -23,25 +23,25 @@ Blockly.Python.class_make_with_base = function() {
   return code;
 };
 
-Blockly.Python.class_get = function() {
+Blockly.Python.forBlock['class_get'] = function() {
   var code = this.getFieldValue('VAR') || 'None';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.property_set = function() {
+Blockly.Python.forBlock['property_set'] = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   var argument1 = Blockly.Python.valueToCode(this, 'DATA',Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   var varName = this.getFieldValue('VAR') || 'None';
   return argument0 + '.'+varName+' = ' + argument1 + '\n';
 };
 
-Blockly.Python.property_get = function() {
+Blockly.Python.forBlock['property_get'] = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   var code = this.getFieldValue('VAR') || 'None';
   return [argument0+'.'+code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.object_set = function() {
+Blockly.Python.forBlock['object_set'] = function() {
   var text_name = this.getFieldValue('VAR10') || 'None';
   var text_new_name = this.getFieldValue('VAR11') || 'None';
   var code = new Array(this.itemCount_);
@@ -52,12 +52,12 @@ Blockly.Python.object_set = function() {
   return code;
 };
 
-Blockly.Python.object_get = function() {
+Blockly.Python.forBlock['object_get'] = function() {
   var code = this.getFieldValue('VAR') || 'None';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.method_procedures_defreturn = function() {
+Blockly.Python.forBlock['method_procedures_defreturn'] = function() {
   // Define a procedure with a return value.
   //var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
   //    Blockly.Class_Test.NAME_TYPE);
@@ -90,7 +90,7 @@ Blockly.Python.method_procedures_defreturn = function() {
 
 Blockly.Python.method_procedures_defnoreturn = Blockly.Python.method_procedures_defreturn;
 
-Blockly.Python.method_procedures_callreturn = function() {
+Blockly.Python.forBlock['method_procedures_callreturn'] = function() {
   var argument1 = Blockly.Python.valueToCode(this, 'DATA',Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   // Call a procedure with a return value.
   //var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
@@ -105,7 +105,7 @@ Blockly.Python.method_procedures_callreturn = function() {
   return [code, Blockly.Python.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Python.method_procedures_callnoreturn = function() {
+Blockly.Python.forBlock['method_procedures_callnoreturn'] = function() {
   var argument1 = Blockly.Python.valueToCode(this, 'DATA',Blockly.Python.ORDER_ASSIGNMENT) || 'None';
   // Call a procedure with no return value.
   //var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
@@ -120,7 +120,7 @@ Blockly.Python.method_procedures_callnoreturn = function() {
   return code;
 };
 
-Blockly.Python.method_procedures_ifreturn = function() {
+Blockly.Python.forBlock['method_procedures_ifreturn'] = function() {
   // Conditionally return value from a procedure.
   var condition = Blockly.Python.valueToCode(this, 'CONDITION',
       Blockly.Python.ORDER_NONE) || 'False';
@@ -136,7 +136,7 @@ Blockly.Python.method_procedures_ifreturn = function() {
   return code;
 };
 
-Blockly.Python.method_procedures_return = function() {
+Blockly.Python.forBlock['method_procedures_return'] = function() {
   // Conditionally return value from a procedure.
   var code=""
   if (this.hasReturnValue_) {

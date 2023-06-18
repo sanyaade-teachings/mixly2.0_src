@@ -4,14 +4,14 @@ goog.provide('Blockly.Python.AI');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.AI_ChooseAndGet = function(){
+Blockly.Python.forBlock['AI_ChooseAndGet'] = function(){
     var type = this.getFieldValue('TYPE');
     Blockly.Python.definitions_['import_FileDialog'] = 'import FileDialog';
     var code = 'FileDialog.' + type + '()';   
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_client = function(){
+Blockly.Python.forBlock['AI_client'] = function(){
     var ctype = this.getFieldValue('CTYPE');
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_' + ctype] = 'from aip import '+ ctype;
@@ -23,7 +23,7 @@ Blockly.Python.AI_client = function(){
     return code;
 };
 
-Blockly.Python.AI_Speech_synthesis = function(){
+Blockly.Python.forBlock['AI_Speech_synthesis'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_AipSpeech'] = 'from aip import AipSpeech';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -33,7 +33,7 @@ Blockly.Python.AI_Speech_synthesis = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Speech_asr = function(){
+Blockly.Python.forBlock['AI_Speech_asr'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_AipSpeech'] = 'from aip import AipSpeech';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -45,7 +45,7 @@ Blockly.Python.AI_Speech_asr = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_ImageClassify = function(){
+Blockly.Python.forBlock['AI_ImageClassify'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_AipImageClassify'] = 'from aip import AipImageClassify';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -56,7 +56,7 @@ Blockly.Python.AI_ImageClassify = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Face_match = function(){
+Blockly.Python.forBlock['AI_Face_match'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_AipSpeech'] = 'from aip import AipSpeech';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -67,7 +67,7 @@ Blockly.Python.AI_Face_match = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Ocr = function(){
+Blockly.Python.forBlock['AI_Ocr'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_Ocr'] = 'from aip import Ocr';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -78,7 +78,7 @@ Blockly.Python.AI_Ocr = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Nlp = function(){
+Blockly.Python.forBlock['AI_Nlp'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_Nlp'] = 'from aip import Nlp';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -89,7 +89,7 @@ Blockly.Python.AI_Nlp = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Nlp_Sim = function(){
+Blockly.Python.forBlock['AI_Nlp_Sim'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_Nlp'] = 'from aip import Nlp';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -101,7 +101,7 @@ Blockly.Python.AI_Nlp_Sim = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Nlp_Topic = function(){
+Blockly.Python.forBlock['AI_Nlp_Topic'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_Nlp'] = 'from aip import Nlp';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -111,7 +111,7 @@ Blockly.Python.AI_Nlp_Topic = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Nlp_newsSummary = function(){
+Blockly.Python.forBlock['AI_Nlp_newsSummary'] = function(){
     Blockly.Python.definitions_['import_aip'] = 'import aip';
     //Blockly.Python.definitions_['import_aip_Nlp'] = 'from aip import Nlp';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -123,27 +123,27 @@ Blockly.Python.AI_Nlp_newsSummary = function(){
 };
 
 
-Blockly.Python.AI_ImageClassify_Func = function () {
+Blockly.Python.forBlock['AI_ImageClassify_Func'] = function () {
     var code = this.getFieldValue('TYPE');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Ocr_Func = function () {
+Blockly.Python.forBlock['AI_Ocr_Func'] = function () {
     var code = this.getFieldValue('TYPE');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Nlp_Func = function () {
+Blockly.Python.forBlock['AI_Nlp_Func'] = function () {
     var code = this.getFieldValue('TYPE');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_Nlp_Func_sim = function () {
+Blockly.Python.forBlock['AI_Nlp_Func_sim'] = function () {
     var code = this.getFieldValue('TYPE');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.AI_audio = function() {
+Blockly.Python.forBlock['AI_audio'] = function() {
     Blockly.Python.definitions_['import_audio'] = 'import audio';
     var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
     var num = Blockly.Python.valueToCode(this, 'TIME', Blockly.Python.ORDER_ATOMIC) || '0';
@@ -151,7 +151,7 @@ Blockly.Python.AI_audio = function() {
     return code;
 };
 
-Blockly.Python.AI_photo = function() {
+Blockly.Python.forBlock['AI_photo'] = function() {
     Blockly.Python.definitions_['import_audio'] = 'import cam';
     var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
     var button = Blockly.Python.valueToCode(this, 'BUT', Blockly.Python.ORDER_ATOMIC) || '\"\"';
@@ -159,7 +159,7 @@ Blockly.Python.AI_photo = function() {
     return code;
 };
 
-Blockly.Python.AI_result = function() {
+Blockly.Python.forBlock['AI_result'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'AI', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var ctype = this.getFieldValue('CTYPE');
   if(ctype == 'Image'){var code = varName + '["result"][0]["keyword"]'}

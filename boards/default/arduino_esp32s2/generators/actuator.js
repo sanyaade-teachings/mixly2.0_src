@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.actuator');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.display_rgb_show = function () {
+Blockly.Arduino.forBlock['display_rgb_show'] = function () {
   var dropdown_rgbpin = this.getFieldValue('PIN');
   var code = 'rgb_display_' + dropdown_rgbpin + '.show();\n'
  // +'rgb_display_' + dropdown_rgbpin + '.show();\n'
@@ -12,7 +12,7 @@ Blockly.Arduino.display_rgb_show = function () {
   return code;
 };
 
-Blockly.Arduino.servo_move = function() {
+Blockly.Arduino.forBlock['servo_move'] = function() {
  var dropdown_pin = this.getFieldValue('PIN');
  var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
  var delay_time = Blockly.Arduino.valueToCode(this, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC) || '0' 
@@ -23,7 +23,7 @@ Blockly.Arduino.servo_move = function() {
  return code;
 };
 
-Blockly.Arduino.servo_writeMicroseconds = function() {
+Blockly.Arduino.forBlock['servo_writeMicroseconds'] = function() {
   var dropdown_pin = this.getFieldValue('PIN');
   var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);  
   Blockly.Arduino.definitions_['include_ESP32_Servo'] = '#include <ESP32_Servo.h>';
@@ -33,7 +33,7 @@ Blockly.Arduino.servo_writeMicroseconds = function() {
   return code;
 };
 
-Blockly.Arduino.servo_read_degrees = function() {
+Blockly.Arduino.forBlock['servo_read_degrees'] = function() {
   var dropdown_pin = this.getFieldValue('PIN');
   Blockly.Arduino.definitions_['include_ESP32_Servo'] = '#include <ESP32_Servo.h>';
   Blockly.Arduino.definitions_['var_declare_servo'+dropdown_pin] = 'Servo servo_'+dropdown_pin+';';
@@ -77,7 +77,7 @@ Blockly.Arduino.onboard_notone=function(){
  return code;
 };
 //执行器-电机转动
-Blockly.Arduino.Mixly_motor = function() {
+Blockly.Arduino.forBlock['Mixly_motor'] = function() {
   var SPEED_PIN = Blockly.Arduino.valueToCode(this, 'PIN1', Blockly.Arduino.ORDER_ATOMIC);
   var DIR_PIN = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
   var speed = Blockly.Arduino.valueToCode(this, 'speed', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -112,7 +112,7 @@ Blockly.Arduino.Mixly_motor = function() {
   return code;
 };
 
-Blockly.Arduino.HR8833_Motor_Setup = function() {
+Blockly.Arduino.forBlock['HR8833_Motor_Setup'] = function() {
   var motor_id = Blockly.Arduino.valueToCode(this, 'MOTOR_ID', Blockly.Arduino.ORDER_ATOMIC);
   var pin1 = Blockly.Arduino.valueToCode(this, 'PIN1', Blockly.Arduino.ORDER_ATOMIC);
   var pin2 = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
@@ -127,7 +127,7 @@ Blockly.Arduino.HR8833_Motor_Setup = function() {
   return code;
 };
 
-Blockly.Arduino.HR8833_Motor_Speed = function() {
+Blockly.Arduino.forBlock['HR8833_Motor_Speed'] = function() {
   var motor_id = Blockly.Arduino.valueToCode(this, 'MOTOR_ID', Blockly.Arduino.ORDER_ATOMIC);
   var speed = Blockly.Arduino.valueToCode(this, 'SPEED', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['HR8833_Motor_Speed_fun'] ='void HR8833_Motor_Speed(int motorID,int speed){//电机速度设置 ID=1~4,speed=-255~255\n'
@@ -148,7 +148,7 @@ Blockly.Arduino.HR8833_Motor_Speed = function() {
   return code;
 };
 
-Blockly.Arduino.handbit_motor_move = function() {
+Blockly.Arduino.forBlock['handbit_motor_move'] = function() {
   var dropdown_type = this.getFieldValue('type');
   var value_speed = Blockly.Arduino.valueToCode(this, 'speed', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';

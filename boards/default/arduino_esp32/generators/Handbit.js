@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.Handbit');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.handbit_button_is_pressed = function () {
+Blockly.Arduino.forBlock['handbit_button_is_pressed'] = function () {
   var btn = this.getFieldValue('btn');
   Blockly.Arduino.setups_['setup_btn' + btn] = 'pinMode(' + btn + ',INPUT);';
   var code = '!digitalRead(' + btn + ')';
@@ -16,7 +16,7 @@ Blockly.Arduino.handbit_light =Blockly.Arduino.sensor_light;
 Blockly.Arduino.handbit_sound =Blockly.Arduino.sensor_sound;
 
 //传感器_重力感应块
-Blockly.Arduino.handbit_MSA300 = function () {
+Blockly.Arduino.forBlock['handbit_MSA300'] = function () {
   Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
   Blockly.Arduino.definitions_['include_MSA300'] = '#include <MSA300.h>';
   Blockly.Arduino.definitions_['var_declare_MSA300'] = 'MSA300 msa;\n';
@@ -28,7 +28,7 @@ Blockly.Arduino.handbit_MSA300 = function () {
 };
 
 //传感器_重力感应块
-Blockly.Arduino.handbit_MSA300_action = function () {
+Blockly.Arduino.forBlock['handbit_MSA300_action'] = function () {
   Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
   Blockly.Arduino.definitions_['include_MSA300'] = '#include <MSA300.h>';
   Blockly.Arduino.definitions_['var_declare_MSA300'] = 'MSA300 msa;\n';
@@ -39,7 +39,7 @@ Blockly.Arduino.handbit_MSA300_action = function () {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.touchAttachInterrupt = function () {
+Blockly.Arduino.forBlock['touchAttachInterrupt'] = function () {
   var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
   var threshold = Blockly.Arduino.valueToCode(this, 'threshold', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.setups_['touchAttachInterrupt' + dropdown_pin] = 'touchAttachInterrupt(' + dropdown_pin + ',gotTouch' + dropdown_pin + ', ' + threshold + ');';
@@ -52,14 +52,14 @@ Blockly.Arduino.touchAttachInterrupt = function () {
   return code;
 };
 
-Blockly.Arduino.inout_touchRead = function () {
+Blockly.Arduino.forBlock['inout_touchRead'] = function () {
   var pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
   var code = 'touchRead(' + pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 
-Blockly.Arduino.handbit_rgb = function () {
+Blockly.Arduino.forBlock['handbit_rgb'] = function () {
   var value_led = Blockly.Arduino.valueToCode(this, '_LED_', Blockly.Arduino.ORDER_ATOMIC);
   var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
   COLOR = COLOR.replace(/#/g, "0x");
@@ -70,7 +70,7 @@ Blockly.Arduino.handbit_rgb = function () {
   return code;
 };
 
-Blockly.Arduino.handbit_rgb2 = function () {
+Blockly.Arduino.forBlock['handbit_rgb2'] = function () {
   var COLOR1 = Blockly.Arduino.valueToCode(this, 'COLOR1', Blockly.Arduino.ORDER_ATOMIC);
   var COLOR2 = Blockly.Arduino.valueToCode(this, 'COLOR2', Blockly.Arduino.ORDER_ATOMIC);
   var COLOR3 = Blockly.Arduino.valueToCode(this, 'COLOR3', Blockly.Arduino.ORDER_ATOMIC);
@@ -86,7 +86,7 @@ Blockly.Arduino.handbit_rgb2 = function () {
   return code;
 };
 
-Blockly.Arduino.handbit_rgb_Brightness = function () {
+Blockly.Arduino.forBlock['handbit_rgb_Brightness'] = function () {
   var Brightness = Blockly.Arduino.valueToCode(this, 'Brightness', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_GRB + NEO_KHZ800);';
@@ -95,13 +95,13 @@ Blockly.Arduino.handbit_rgb_Brightness = function () {
   return code;
 };
 
-Blockly.Arduino.handbit_rgb_show = function () {
+Blockly.Arduino.forBlock['handbit_rgb_show'] = function () {
   var code = 'rgb_display_17.show();\n'
  // +'rgb_display_17.show();\ndelay(1);\n'
  return code;
 };
 
-Blockly.Arduino.handbit_rgb_rainbow1 = function () {
+Blockly.Arduino.forBlock['handbit_rgb_rainbow1'] = function () {
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_GRB + NEO_KHZ800);';
   var wait_time = Blockly.Arduino.valueToCode(this, 'WAIT', Blockly.Arduino.ORDER_ATOMIC);
@@ -126,7 +126,7 @@ Blockly.Arduino.handbit_rgb_rainbow1 = function () {
  return code;
 };
 
-Blockly.Arduino.handbit_rgb_rainbow3 = function () {
+Blockly.Arduino.forBlock['handbit_rgb_rainbow3'] = function () {
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_GRB + NEO_KHZ800);';
   var rainbow_color = Blockly.Arduino.valueToCode(this, 'rainbow_color', Blockly.Arduino.ORDER_ATOMIC);
@@ -145,7 +145,7 @@ Blockly.Arduino.handbit_rgb_rainbow3 = function () {
   return code3;
 };
 
-Blockly.Arduino.OneButton = function () {
+Blockly.Arduino.forBlock['OneButton'] = function () {
  Blockly.Arduino.definitions_['include_OneButton'] = '#include <OneButton.h>';
  var dropdown_pin = this.getFieldValue('PIN');
  var dropdown_mode = this.getFieldValue('mode');
@@ -159,7 +159,7 @@ Blockly.Arduino.OneButton = function () {
  return code;
 };
 
-Blockly.Arduino.handbit_motor_move = function() {
+Blockly.Arduino.forBlock['handbit_motor_move'] = function() {
   var dropdown_type = this.getFieldValue('type');
   var value_speed = Blockly.Arduino.valueToCode(this, 'speed', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
@@ -173,7 +173,7 @@ Blockly.Arduino.handbit_motor_move = function() {
   var code = 'HandBit_Motor_Speed('+dropdown_type+', '+value_speed+');\n';
   return code;
 };
-Blockly.Arduino.handbit_RGB_color_HSV = function () {
+Blockly.Arduino.forBlock['handbit_RGB_color_HSV'] = function () {
     Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_GRB + NEO_KHZ800);';
   var dropdown_rgbpin = 17;

@@ -49,7 +49,7 @@
       this.updateShape_();
       this.setPreviousStatement(true);
       this.setNextStatement(true);
-      this.setMutator(new Blockly.Mutator(['dicts_create_with_item']));
+      this.setMutator(new Blockly.icons.MutatorIcon(['dicts_create_with_item'], this));
       this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_TOOLTIP);
     },
 
@@ -576,7 +576,7 @@ Blockly.Blocks['dicts_pop'] = {
         this.setOutput(true, "Dict")
         this.setPreviousStatement(false);
         this.setNextStatement(false);
-        this.setMutator(new Blockly.Mutator(['dicts_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['dicts_create_with_item'], this));
         this.setTooltip(Blockly.Msg.DICTS_CREATE_WITH_TOOLTIP);
       },
 

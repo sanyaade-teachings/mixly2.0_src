@@ -150,7 +150,7 @@ Blockly.Blocks['method_procedures_defnoreturn'] = {
         .appendField('', 'PARAMS');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['method_procedures_mutatorarg']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['method_procedures_mutatorarg'], this));
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);
     this.arguments_ = [];
     this.argumentstype_ = [];//新增
@@ -316,7 +316,7 @@ Blockly.Blocks['method_procedures_defnoreturn'] = {
         if (hasStatements) {
           this.setStatements_(true);
           // Restore the stack, if one was saved.
-          Blockly.Mutator.reconnect(this.statementConnection_, this, 'STACK');
+          this.statementConnection_ && this.statementConnection_.reconnect(this, 'STACK');
           this.statementConnection_ = null;
         } else {
           // Save the stack, then disconnect it.
@@ -468,7 +468,7 @@ Blockly.Blocks['method_procedures_defreturn'] = {
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['method_procedures_mutatorarg']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['method_procedures_mutatorarg'], this));
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP);
     this.arguments_ = [];
     this.setStatements_(true);
@@ -685,7 +685,7 @@ Blockly.Blocks['method_procedures_callnoreturn'] = {
         var quarkId = this.quarkIds_[i];
         if (quarkId in this.quarkConnections_) {
           var connection = this.quarkConnections_[quarkId];
-          if (!Blockly.Mutator.reconnect(connection, this, 'ARG' + i)) {
+          if (connection && !connection.reconnect(this, 'ARG' + i)) {
             // Block no longer exists or has been attached elsewhere.
             delete this.quarkConnections_[quarkId];
           }
@@ -1024,7 +1024,7 @@ Blockly.Blocks.object_set= {
   this.setPreviousStatement(true, null);
   this.setNextStatement(true, null);
   this.setColour(Blockly.Blocks.class.OBJECT_HUE);
-  this.setMutator(new Blockly.Mutator(['object_set_with_item']));
+  this.setMutator(new Blockly.icons.MutatorIcon(['object_set_with_item'], this));
   this.setTooltip("");
   this.setHelpUrl("");
   },

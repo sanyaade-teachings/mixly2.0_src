@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.sensor');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.chaoshengbo = function () {
+Blockly.Arduino.forBlock['chaoshengbo'] = function () {
     var dropdown_pin1 = this.getFieldValue('PIN1');
     var dropdown_pin2 = this.getFieldValue('PIN2');
     Blockly.Arduino.setups_['setup_output_' + dropdown_pin1] = 'pinMode(' + dropdown_pin1 + ', OUTPUT);';
@@ -21,7 +21,7 @@ Blockly.Arduino.chaoshengbo = function () {
     return [funcName + '()', Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.DHT = function () {
+Blockly.Arduino.forBlock['DHT'] = function () {
   var sensor_type = this.getFieldValue('TYPE');
   var dropdown_pin = this.getFieldValue('PIN');
   var what = this.getFieldValue('WHAT');
@@ -38,13 +38,13 @@ Blockly.Arduino.DHT = function () {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 //ESP32片内霍尔传感器值
-Blockly.Arduino.ESP32_hallRead = function() {
+Blockly.Arduino.forBlock['ESP32_hallRead'] = function() {
     var code = 'hallRead()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //ESP32片内温度传感器值
-Blockly.Arduino.ESP32_temprature = function() {
+Blockly.Arduino.forBlock['ESP32_temprature'] = function() {
     Blockly.Arduino.definitions_['wendu'] ='extern "C"\n{\nuint8_t temprature_sens_read();\n}\nuint8_t temprature_sens_read();\n';
     var code = '(temprature_sens_read() - 32) / 1.8';
     return [code, Blockly.Arduino.ORDER_ATOMIC];

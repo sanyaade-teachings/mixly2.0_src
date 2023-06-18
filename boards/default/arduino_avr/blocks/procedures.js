@@ -48,7 +48,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
             .appendField(Blockly.Msg['PROCEDURES_DEFNORETURN_TITLE'])
             .appendField(nameField, 'NAME')
             .appendField('', 'PARAMS');
-        this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['procedures_mutatorarg'], this));
         if ((this.workspace.options.comments ||
             (this.workspace.options.parentWorkspace &&
                 this.workspace.options.parentWorkspace.options.comments)) &&
@@ -464,7 +464,7 @@ Blockly.Blocks['procedures_defreturn'] = {
                 ["uint32_t", "uint32_t"],
                 ["uint64_t", "uint64_t"]
             ]), "TYPE");
-        this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['procedures_mutatorarg'], this));
         if ((this.workspace.options.comments ||
             (this.workspace.options.parentWorkspace &&
                 this.workspace.options.parentWorkspace.options.comments)) &&
@@ -588,7 +588,7 @@ Blockly.Blocks['procedures_mutatorarg'] = {
      */
     validator_: function (varName) {
         var sourceBlock = this.getSourceBlock();
-        var outerWs = Blockly.Mutator.findParentWs(sourceBlock.workspace);
+        var outerWs = sourceBlock.workspace.getRootWorkspace();
         varName = varName.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
         if (!varName) {
             return null;
@@ -639,7 +639,7 @@ Blockly.Blocks['procedures_mutatorarg'] = {
      * @this Blockly.FieldTextInput
      */
     deleteIntermediateVars_: function (newText) {
-        var outerWs = Blockly.Mutator.findParentWs(this.getSourceBlock().workspace);
+        var outerWs = this.getSourceBlock().workspace.getRootWorkspace();
         if (!outerWs) {
             return;
         }
@@ -775,7 +775,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
                 var quarkId = this.quarkIds_[i];
                 if (quarkId in this.quarkConnections_) {
                     var connection = this.quarkConnections_[quarkId];
-                    if (!Blockly.Mutator.reconnect(connection, this, 'ARG' + i)) {
+                    if (connection && !connection.reconnect(this, 'ARG' + i)) {
                         // Block no longer exists or has been attached elsewhere.
                         delete this.quarkConnections_[quarkId];
                     }

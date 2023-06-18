@@ -152,6 +152,17 @@ Editor.blockEditorInit = () => {
         },
         grid
     });
+
+    Editor.blockEditor.registerToolboxCategoryCallback(
+        Blockly.Variables.CATEGORY_NAME,
+        Blockly.Variables.flyoutCategory
+    );
+
+    Editor.blockEditor.registerToolboxCategoryCallback(
+        Blockly.Procedures.CATEGORY_NAME,
+        Blockly.Procedures.flyoutCategory
+    );
+
     if (USER.theme === 'dark') {
         Editor.blockEditor.setTheme(Blockly.Themes.Dark);
     } else {

@@ -14,12 +14,9 @@ goog.provide('Blockly.Blocks.procedures');
 
 goog.require('Blockly');
 goog.require('Blockly.Blocks');
-goog.require('Blockly.Comment');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldLabel');
 goog.require('Blockly.FieldTextInput');
-goog.require('Blockly.Mutator');
-goog.require('Blockly.Warning');
 
 
 Blockly.Blocks['procedures_defnoreturn'] = {
@@ -36,7 +33,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
         .appendField(Blockly.Msg['PROCEDURES_DEFNORETURN_TITLE'])
         .appendField(nameField, 'NAME')
         .appendField('', 'PARAMS');
-    this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['procedures_mutatorarg'], this));
     if ((this.workspace.options.comments ||
          (this.workspace.options.parentWorkspace &&
           this.workspace.options.parentWorkspace.options.comments)) &&
@@ -235,7 +232,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
         if (hasStatements) {
           this.setStatements_(true);
           // Restore the stack, if one was saved.
-          Blockly.Mutator.reconnect(this.statementConnection_, this, 'STACK');
+          this.statementConnection_ && this.statementConnection_.reconnect(this, 'STACK');
           this.statementConnection_ = null;
         } else {
           // Save the stack, then disconnect it.
@@ -417,7 +414,7 @@ Blockly.Blocks['procedures_defreturn'] = {
     this.appendValueInput('RETURN')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg['PROCEDURES_DEFRETURN_RETURN']);
-    this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['procedures_mutatorarg'], this));
     if ((this.workspace.options.comments ||
          (this.workspace.options.parentWorkspace &&
           this.workspace.options.parentWorkspace.options.comments)) &&
@@ -522,7 +519,7 @@ Blockly.Blocks['procedures_mutatorarg'] = {
    */
   validator_: function(varName) {
     var sourceBlock = this.getSourceBlock();
-    var outerWs = Blockly.Mutator.findParentWs(sourceBlock.workspace);
+    var outerWs = Blockly.icons.MutatorIcon.findParentWs(sourceBlock.workspace);
     varName = varName.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
     if (!varName) {
       return null;
@@ -573,7 +570,7 @@ Blockly.Blocks['procedures_mutatorarg'] = {
    * @this Blockly.FieldTextInput
    */
   deleteIntermediateVars_: function(newText) {
-    var outerWs = Blockly.Mutator.findParentWs(this.getSourceBlock().workspace);
+    var outerWs = Blockly.icons.MutatorIcon.findParentWs(this.getSourceBlock().workspace);
     if (!outerWs) {
       return;
     }
@@ -713,7 +710,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         var quarkId = this.quarkIds_[i];
         if (quarkId in this.quarkConnections_) {
           var connection = this.quarkConnections_[quarkId];
-          if (!Blockly.Mutator.reconnect(connection, this, 'ARG' + i)) {
+          if (connection && !connection.reconnect(this, 'ARG' + i)) {
             // Block no longer exists or has been attached elsewhere.
             delete this.quarkConnections_[quarkId];
           }

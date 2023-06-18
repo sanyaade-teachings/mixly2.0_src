@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.loops');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.controls_runnig_core = function () {
+Blockly.Arduino.forBlock['controls_runnig_core'] = function () {
     var task = this.getFieldValue('task');
     var core = this.getFieldValue('core');
     var value_length = Blockly.Arduino.valueToCode(this, 'length',Blockly.Arduino.ORDER_ATOMIC);
@@ -17,13 +17,13 @@ Blockly.Arduino.controls_runnig_core = function () {
     return 'vTaskDelay(1);\n';
 };
 
-Blockly.Arduino.control_core_delay = function() {
+Blockly.Arduino.forBlock['control_core_delay'] = function() {
   var value_sleeplength = Blockly.Arduino.valueToCode(this, 'sleeplength',Blockly.Arduino.ORDER_ATOMIC);
   var code = 'vTaskDelay('+value_sleeplength+');\n'
   return code;
 };
 
-Blockly.Arduino.controls_hw_timer = function () {
+Blockly.Arduino.forBlock['controls_hw_timer'] = function () {
     var time = Blockly.Arduino.valueToCode(this, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
     var TIMER_NUM = this.getFieldValue('TIMER_NUM');
      var mode = this.getFieldValue('mode');
@@ -40,28 +40,28 @@ Blockly.Arduino.controls_hw_timer = function () {
     return '';
 };
 
-Blockly.Arduino.controls_hw_timer_start = function () {
+Blockly.Arduino.forBlock['controls_hw_timer_start'] = function () {
     var TIMER_NUM = this.getFieldValue('TIMER_NUM');
     return 'timerAlarmEnable(timer'+TIMER_NUM+');\n';
 };
 
-Blockly.Arduino.controls_hw_timer_stop = function () {
+Blockly.Arduino.forBlock['controls_hw_timer_stop'] = function () {
    var TIMER_NUM = this.getFieldValue('TIMER_NUM');
    return 'timerEnd(timer'+TIMER_NUM+');\n';
 };
 
-Blockly.Arduino.controls_end_program = function () {
+Blockly.Arduino.forBlock['controls_end_program'] = function () {
     return 'while(true);\n';
 };
-Blockly.Arduino.controls_interrupts = function () {
+Blockly.Arduino.forBlock['controls_interrupts'] = function () {
     return 'interrupts();\n';
 };
 
-Blockly.Arduino.controls_nointerrupts = function () {
+Blockly.Arduino.forBlock['controls_nointerrupts'] = function () {
     return 'noInterrupts();\n';
 };
 
-Blockly.Arduino.esp32_deep_sleep = function () {
+Blockly.Arduino.forBlock['esp32_deep_sleep'] = function () {
     var time = this.getFieldValue('time');
     var code = 'esp_sleep_enable_timer_wakeup('+time+' * 1000000);\nesp_deep_sleep_start();\n';
     return code;

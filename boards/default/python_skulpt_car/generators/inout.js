@@ -7,27 +7,27 @@ goog.require('Blockly.Python');
 
 
 
-Blockly.Python.inout_input = function() {
+Blockly.Python.forBlock['inout_input'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   return ['input(' + str+')', Blockly.Python.ORDER_ATOMIC];
 };
 
 
-Blockly.Python.inout_print = function(block) {
+Blockly.Python.forBlock['inout_print'] = function(block) {
   Blockly.Python.definitions_.import_blocktool = "import blocktool";
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var code = "blocktool.highlight(\'"+block.id+"\')\n"+"print("+str+")\n";
   return code;
 };
 
-Blockly.Python.inout_print_inline = function(block) {
+Blockly.Python.forBlock['inout_print_inline'] = function(block) {
   Blockly.Python.definitions_.import_blocktool = "import blocktool";
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var code = "blocktool.highlight(\'"+block.id+"\')\n" + "print("+str+',end ="")\n';
   return code;
 };
 
-Blockly.Python.inout_print_end = function(block) {
+Blockly.Python.forBlock['inout_print_end'] = function(block) {
   Blockly.Python.definitions_.import_blocktool = "import blocktool";
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var end = Blockly.Python.valueToCode(this, 'END', Blockly.Python.ORDER_ATOMIC) || '\"\"';
@@ -35,7 +35,7 @@ Blockly.Python.inout_print_end = function(block) {
   return code;
 };
 
-Blockly.Python.inout_type_input = function() {
+Blockly.Python.forBlock['inout_type_input'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var type = this.getFieldValue('DIR');
   var num = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -46,7 +46,7 @@ Blockly.Python.inout_type_input = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.inout_print_many = function(block) {
+Blockly.Python.forBlock['inout_print_many'] = function(block) {
   Blockly.Python.definitions_.import_blocktool = "import blocktool";
   var dropdown_type = this.getFieldValue('TYPE');
   

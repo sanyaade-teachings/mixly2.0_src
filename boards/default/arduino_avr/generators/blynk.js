@@ -7,12 +7,12 @@ goog.require('Mixly.JSFuncs');
 var blynk_timer = false;
 
 //物联网-授权码
-Blockly.Arduino.blynk_iot_auth = function () {
+Blockly.Arduino.forBlock['blynk_iot_auth'] = function () {
     return '';
 };
 
 //物联网-一键配网
-Blockly.Arduino.blynk_smartconfig = function () {
+Blockly.Arduino.forBlock['blynk_smartconfig'] = function () {
     var auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
     var server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
     if (!isNaN(server_add.charAt(2))) {
@@ -57,7 +57,7 @@ Blockly.Arduino.blynk_smartconfig = function () {
 };
 
 //物联网-wifi信息
-Blockly.Arduino.blynk_server = function () {
+Blockly.Arduino.forBlock['blynk_server'] = function () {
     var wifi_ssid = Blockly.Arduino.valueToCode(this, 'wifi_ssid', Blockly.Arduino.ORDER_ATOMIC);
     var wifi_pass = Blockly.Arduino.valueToCode(this, 'wifi_pass', Blockly.Arduino.ORDER_ATOMIC);
     var auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
@@ -103,7 +103,7 @@ Blockly.Arduino.blynk_server = function () {
 };
 
 //物联网-wifi信息
-Blockly.Arduino.blynk_usb_server = function () {
+Blockly.Arduino.forBlock['blynk_usb_server'] = function () {
     //Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT DebugSerial';
     Blockly.Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
     Blockly.Arduino.definitions_['include_BlynkSimpleStream'] = '#include <BlynkSimpleStream.h>';
@@ -118,7 +118,7 @@ Blockly.Arduino.blynk_usb_server = function () {
 };
 
 //物联网-发送数据到app 
-Blockly.Arduino.blynk_iot_push_data = function () {
+Blockly.Arduino.forBlock['blynk_iot_push_data'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'Blynk.virtualWrite(' + Vpin + ', ' + data + ');\n';
@@ -126,7 +126,7 @@ Blockly.Arduino.blynk_iot_push_data = function () {
 };
 
 //从app接收数据
-Blockly.Arduino.blynk_iot_get_data = function () {
+Blockly.Arduino.forBlock['blynk_iot_get_data'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
@@ -193,7 +193,7 @@ Blockly.Arduino.blynk_iot_get_data = function () {
 };
 
 //blynk 定时器
-Blockly.Arduino.Blynk_iot_timer = function () {
+Blockly.Arduino.forBlock['Blynk_iot_timer'] = function () {
     Blockly.Arduino.definitions_['var_declare_BlynkTimer'] = 'BlynkTimer timer;';
     var timerNo = this.getFieldValue('timerNo');
     var time = Blockly.Arduino.valueToCode(this, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
@@ -208,7 +208,7 @@ Blockly.Arduino.Blynk_iot_timer = function () {
 };
 
 //blynk 连接状态函数
-Blockly.Arduino.Blynk_iot_CONNECT_STATE = function () {
+Blockly.Arduino.forBlock['Blynk_iot_CONNECT_STATE'] = function () {
     var funcName = this.getFieldValue('state');
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     var code = funcName + '() {\n' + branch + '}\n';
@@ -217,20 +217,20 @@ Blockly.Arduino.Blynk_iot_CONNECT_STATE = function () {
 };
 
 //blynk 同步所有管脚状态
-Blockly.Arduino.Blynk_iot_BLYNK_syncAll = function () {
+Blockly.Arduino.forBlock['Blynk_iot_BLYNK_syncAll'] = function () {
     var code = 'Blynk.syncAll();\n';
     return code;
 };
 
 //物联网-发送数据到app
-Blockly.Arduino.blynk_iot_syncVirtual = function () {
+Blockly.Arduino.forBlock['blynk_iot_syncVirtual'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var code = 'Blynk.syncVirtual(' + Vpin + ');\n';
     return code;
 };
 
 //LED组件颜色&开关
-Blockly.Arduino.blynk_iot_WidgetLED_COLOR = function () {
+Blockly.Arduino.forBlock['blynk_iot_WidgetLED_COLOR'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
     COLOR = "#" + COLOR.substring(2);
@@ -246,7 +246,7 @@ Blockly.Arduino.blynk_iot_WidgetLED_COLOR = function () {
 };
 
 //LED组件颜色&亮度
-Blockly.Arduino.blynk_iot_WidgetLED_VALUE = function () {
+Blockly.Arduino.forBlock['blynk_iot_WidgetLED_VALUE'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
     COLOR = COLOR.replace(/#/g, "#");
@@ -258,7 +258,7 @@ Blockly.Arduino.blynk_iot_WidgetLED_VALUE = function () {
 };
 
 //红外控制空调
-Blockly.Arduino.blynk_iot_ir_send_ac = function () {
+Blockly.Arduino.forBlock['blynk_iot_ir_send_ac'] = function () {
     var AC_TYPE = this.getFieldValue('AC_TYPE');
     var AC_POWER = this.getFieldValue('AC_POWER');
     var AC_MODE = this.getFieldValue('AC_MODE');
@@ -281,7 +281,7 @@ Blockly.Arduino.blynk_iot_ir_send_ac = function () {
 };
 
 //红外接收
-Blockly.Arduino.blynk_iot_ir_recv_raw = function () {
+Blockly.Arduino.forBlock['blynk_iot_ir_recv_raw'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_IRremote'] = '#ifndef UNIT_TEST\n'
         + '#include <Arduino.h>\n'
@@ -359,7 +359,7 @@ Blockly.Arduino.blynk_iot_ir_recv_raw = function () {
 };
 
 //红外发射
-Blockly.Arduino.blynk_iot_ir_send = function () {
+Blockly.Arduino.forBlock['blynk_iot_ir_send'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var IR_CODE = this.getFieldValue('IR_CODE');
     var IR_CODE_LENGTH = IR_CODE.split(',').length;
@@ -374,7 +374,7 @@ Blockly.Arduino.blynk_iot_ir_send = function () {
 }
 
 //发送邮件
-Blockly.Arduino.blynk_email = function () {
+Blockly.Arduino.forBlock['blynk_email'] = function () {
     var email_add = Blockly.Arduino.valueToCode(this, 'email_add', Blockly.Arduino.ORDER_ATOMIC);
     var Subject = Blockly.Arduino.valueToCode(this, 'Subject', Blockly.Arduino.ORDER_ATOMIC);
     var content = Blockly.Arduino.valueToCode(this, 'content', Blockly.Arduino.ORDER_ATOMIC);
@@ -384,14 +384,14 @@ Blockly.Arduino.blynk_email = function () {
 };
 
 //发送通知
-Blockly.Arduino.blynk_notify = function () {
+Blockly.Arduino.forBlock['blynk_notify'] = function () {
     var content = Blockly.Arduino.valueToCode(this, 'content', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'Blynk.notify(' + content + ');\n';
     return code;
 };
 
 //物联网-终端组件显示文本
-Blockly.Arduino.blynk_terminal = function () {
+Blockly.Arduino.forBlock['blynk_terminal'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     Blockly.Arduino.definitions_['var_declare_WidgetTerminal' + Vpin] = 'WidgetTerminal terminal' + Vpin + '(' + Vpin + ');\n';
     var content = Blockly.Arduino.valueToCode(this, 'content', Blockly.Arduino.ORDER_ATOMIC);
@@ -400,7 +400,7 @@ Blockly.Arduino.blynk_terminal = function () {
 };
 
 //从终端获取字符串
-Blockly.Arduino.blynk_iot_terminal_get = function () {
+Blockly.Arduino.forBlock['blynk_iot_terminal_get'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     Blockly.Arduino.definitions_['var_declare_WidgetTerminal'] = 'WidgetTerminal terminal(' + Vpin + ');\n';
     Blockly.Arduino.definitions_['var_declare_action'] = 'String terminal_text ;';
@@ -416,7 +416,7 @@ Blockly.Arduino.blynk_iot_terminal_get = function () {
 };
 
 //视频流
-Blockly.Arduino.blynk_videourl = function () {
+Blockly.Arduino.forBlock['blynk_videourl'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var url = Blockly.Arduino.valueToCode(this, 'url', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'Blynk.setProperty(' + Vpin + ',"url",' + url + ');\n';
@@ -424,7 +424,7 @@ Blockly.Arduino.blynk_videourl = function () {
 };
 
 //桥接授权码
-Blockly.Arduino.blynk_bridge_auth = function () {
+Blockly.Arduino.forBlock['blynk_bridge_auth'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['var_declare_WidgetBridge' + Vpin] = 'WidgetBridge bridge' + Vpin + '(' + Vpin + ');\n';
@@ -433,7 +433,7 @@ Blockly.Arduino.blynk_bridge_auth = function () {
 };
 
 //桥接数字输出
-Blockly.Arduino.blynk_bridge_digitalWrite = function () {
+Blockly.Arduino.forBlock['blynk_bridge_digitalWrite'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
@@ -442,7 +442,7 @@ Blockly.Arduino.blynk_bridge_digitalWrite = function () {
 };
 
 //桥接模拟输出
-Blockly.Arduino.blynk_bridge_AnaloglWrite = function () {
+Blockly.Arduino.forBlock['blynk_bridge_AnaloglWrite'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
@@ -451,7 +451,7 @@ Blockly.Arduino.blynk_bridge_AnaloglWrite = function () {
 };
 
 //桥接虚拟管脚
-Blockly.Arduino.blynk_bridge_VPin = function () {
+Blockly.Arduino.forBlock['blynk_bridge_VPin'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var Vpin2 = this.getFieldValue('Vpin2');
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
@@ -460,7 +460,7 @@ Blockly.Arduino.blynk_bridge_VPin = function () {
 };
 
 //RTC组件初始化
-Blockly.Arduino.blynk_WidgetRTC_init = function () {
+Blockly.Arduino.forBlock['blynk_WidgetRTC_init'] = function () {
     Blockly.Arduino.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
     Blockly.Arduino.definitions_['include_WidgetRTC'] = '#include <WidgetRTC.h>';
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
@@ -471,14 +471,14 @@ Blockly.Arduino.blynk_WidgetRTC_init = function () {
 };
 
 //RTC获取时间
-Blockly.Arduino.blynk_WidgetRTC_get_time = function () {
+Blockly.Arduino.forBlock['blynk_WidgetRTC_get_time'] = function () {
     var timeType = this.getFieldValue('TIME_TYPE');
     var code = timeType + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //播放音乐组件
-Blockly.Arduino.blynk_iot_playmusic = function () {
+Blockly.Arduino.forBlock['blynk_iot_playmusic'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
@@ -495,7 +495,7 @@ Blockly.Arduino.blynk_iot_playmusic = function () {
     return "";
 };
 //光线传感器
-Blockly.Arduino.blynk_light = function () {
+Blockly.Arduino.forBlock['blynk_light'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
@@ -508,7 +508,7 @@ Blockly.Arduino.blynk_light = function () {
 };
 
 //重力传感器
-Blockly.Arduino.blynk_gravity = function () {
+Blockly.Arduino.forBlock['blynk_gravity'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
@@ -526,7 +526,7 @@ Blockly.Arduino.blynk_gravity = function () {
 Blockly.Arduino.blynk_acc = Blockly.Arduino.blynk_gravity;
 
 //时间输入
-Blockly.Arduino.blynk_time_input_1 = function () {
+Blockly.Arduino.forBlock['blynk_time_input_1'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
@@ -542,19 +542,19 @@ Blockly.Arduino.blynk_time_input_1 = function () {
 };
 
 //执行器-蜂鸣器频率选择列表
-Blockly.Arduino.tone_notes = function () {
+Blockly.Arduino.forBlock['tone_notes'] = function () {
     var code = this.getFieldValue('STAT');
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.factory_declare2 = function () {
+Blockly.Arduino.forBlock['factory_declare2'] = function () {
     var VALUE = this.getFieldValue('VALUE');
     Blockly.Arduino.definitions_['var_' + VALUE] = VALUE;
     return '';
 };
 
 //一键配网（无需安可信）
-Blockly.Arduino.blynk_AP_config = function () {
+Blockly.Arduino.forBlock['blynk_AP_config'] = function () {
     var server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
     var auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
     var board_type = Mixly.JSFuncs.getPlatform();
@@ -589,7 +589,7 @@ Blockly.Arduino.blynk_AP_config = function () {
 };
 
 //一键配网手动配置授权码（无需安可信）
-Blockly.Arduino.blynk_AP_config_2 = function () {
+Blockly.Arduino.forBlock['blynk_AP_config_2'] = function () {
     var server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
     Blockly.Arduino.definitions_['include_FS'] = '#include <FS.h>';
@@ -673,19 +673,19 @@ Blockly.Arduino.blynk_AP_config_2 = function () {
     return code;
 };
 
-Blockly.Arduino.Blynk_connect_state = function () {
+Blockly.Arduino.forBlock['Blynk_connect_state'] = function () {
     var code = 'Blynk.connected()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //Blynk终端清屏
-Blockly.Arduino.blynk_terminal_clear = function () {
+Blockly.Arduino.forBlock['blynk_terminal_clear'] = function () {
     var code = 'terminal.clear();\n';
     return code;
 };
 
 //Blynk LCD显示
-Blockly.Arduino.blynk_lcd = function () {
+Blockly.Arduino.forBlock['blynk_lcd'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var x = Blockly.Arduino.valueToCode(this, 'x', Blockly.Arduino.ORDER_ATOMIC);
     var y = Blockly.Arduino.valueToCode(this, 'y', Blockly.Arduino.ORDER_ATOMIC);
@@ -696,13 +696,13 @@ Blockly.Arduino.blynk_lcd = function () {
 };
 
 //Blynk LCD清屏
-Blockly.Arduino.blynk_lcd_clear = function () {
+Blockly.Arduino.forBlock['blynk_lcd_clear'] = function () {
     var code = 'lcd.clear();\n';
     return code;
 };
 
 //ESP32 blynk BLE连接方式
-Blockly.Arduino.blynk_esp32_ble = function () {
+Blockly.Arduino.forBlock['blynk_esp32_ble'] = function () {
     var auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
@@ -720,7 +720,7 @@ Blockly.Arduino.blynk_esp32_ble = function () {
 };
 
 //ESP32 blynk Bluetooth连接方式
-Blockly.Arduino.blynk_esp32_Bluetooth = function () {
+Blockly.Arduino.forBlock['blynk_esp32_Bluetooth'] = function () {
     var auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
@@ -736,7 +736,7 @@ Blockly.Arduino.blynk_esp32_Bluetooth = function () {
 };
 
 //Arduino blynk Bluetooth 连接方式
-Blockly.Arduino.arduino_blynk_bluetooth = function () {
+Blockly.Arduino.forBlock['arduino_blynk_bluetooth'] = function () {
     var auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
     var RX = Blockly.Arduino.valueToCode(this, 'RX', Blockly.Arduino.ORDER_ATOMIC);
     var TX = Blockly.Arduino.valueToCode(this, 'TX', Blockly.Arduino.ORDER_ATOMIC);
@@ -760,7 +760,7 @@ Blockly.Arduino.arduino_blynk_bluetooth = function () {
 };
 
 //Blynk Table小部件添加数据
-Blockly.Arduino.blynk_table = function () {
+Blockly.Arduino.forBlock['blynk_table'] = function () {
     var id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
     var mingcheng = Blockly.Arduino.valueToCode(this, 'mingcheng', Blockly.Arduino.ORDER_ATOMIC);
     var shujv = Blockly.Arduino.valueToCode(this, 'shujv', Blockly.Arduino.ORDER_ATOMIC);
@@ -770,7 +770,7 @@ Blockly.Arduino.blynk_table = function () {
 };
 
 //Blynk Table小部件更新数据
-Blockly.Arduino.blynk_table_update = function () {
+Blockly.Arduino.forBlock['blynk_table_update'] = function () {
     var id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
     var mingcheng = Blockly.Arduino.valueToCode(this, 'mingcheng', Blockly.Arduino.ORDER_ATOMIC);
     var shujv = Blockly.Arduino.valueToCode(this, 'shujv', Blockly.Arduino.ORDER_ATOMIC);
@@ -780,7 +780,7 @@ Blockly.Arduino.blynk_table_update = function () {
 };
 
 //Blynk Table小部件高亮显示数据
-Blockly.Arduino.blynk_table_highlight = function () {
+Blockly.Arduino.forBlock['blynk_table_highlight'] = function () {
     var id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
     var Vpin = this.getFieldValue('Vpin');
     var code = 'Blynk.virtualWrite(' + Vpin + ', "pick", ' + id + ');\n';
@@ -788,7 +788,7 @@ Blockly.Arduino.blynk_table_highlight = function () {
 };
 
 //Blynk Table小部件选择数据
-Blockly.Arduino.blynk_table_select = function () {
+Blockly.Arduino.forBlock['blynk_table_select'] = function () {
     var id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
     var Vpin = this.getFieldValue('Vpin');
     var code = 'Blynk.virtualWrite(' + Vpin + ', "select", ' + id + ');\n';
@@ -796,7 +796,7 @@ Blockly.Arduino.blynk_table_select = function () {
 };
 
 //Blynk Table小部件取消选择数据
-Blockly.Arduino.blynk_table_unselect = function () {
+Blockly.Arduino.forBlock['blynk_table_unselect'] = function () {
     var id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
     var Vpin = this.getFieldValue('Vpin');
     var code = 'Blynk.virtualWrite(' + Vpin + ', "deselect", ' + id + ');\n';
@@ -804,7 +804,7 @@ Blockly.Arduino.blynk_table_unselect = function () {
 };
 
 //Blynk Table小部件数据清除
-Blockly.Arduino.blynk_table_cleardata = function () {
+Blockly.Arduino.forBlock['blynk_table_cleardata'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     Blockly.Arduino.definitions_["rowIndex_" + Vpin] = 'int rowIndex_' + Vpin + ' = 0;\n';
     var code = 'Blynk.virtualWrite(' + Vpin + ', "clr");\nrowIndex_' + Vpin + ' = 0;\n';
@@ -812,13 +812,13 @@ Blockly.Arduino.blynk_table_cleardata = function () {
 };
 
 //blynk服务器连接状态
-Blockly.Arduino.blynk_connected = function () {
+Blockly.Arduino.forBlock['blynk_connected'] = function () {
     var code = 'Blynk.connected()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //ESP32 CAM相机
-Blockly.Arduino.esp_camera = function () {
+Blockly.Arduino.forBlock['esp_camera'] = function () {
     var wifi_ssid = Blockly.Arduino.valueToCode(this, 'wifi_ssid', Blockly.Arduino.ORDER_ATOMIC);
     var wifi_pass = Blockly.Arduino.valueToCode(this, 'wifi_pass', Blockly.Arduino.ORDER_ATOMIC);
     var mode = this.getFieldValue('mode');
@@ -848,7 +848,7 @@ Blockly.Arduino.esp_camera = function () {
 };
 
 //ESP32 CAM相机 & blynk
-Blockly.Arduino.esp_camera_blynk = function () {
+Blockly.Arduino.forBlock['esp_camera_blynk'] = function () {
     var wifi_ssid = Blockly.Arduino.valueToCode(this, 'wifi_ssid', Blockly.Arduino.ORDER_ATOMIC);
     var wifi_pass = Blockly.Arduino.valueToCode(this, 'wifi_pass', Blockly.Arduino.ORDER_ATOMIC);
     var server_add = Blockly.Arduino.valueToCode(this, 'server', Blockly.Arduino.ORDER_ATOMIC);
@@ -870,13 +870,13 @@ Blockly.Arduino.esp_camera_blynk = function () {
     return 'Blynk.run();\n';
 };
 
-Blockly.Arduino.take_a_photo1 = function () {
+Blockly.Arduino.forBlock['take_a_photo1'] = function () {
     Blockly.Arduino.definitions_['take_a_photo'] = '#include "esp_camera.h"\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "fd_forward.h"\n#include "fr_forward.h"\n#include "FS.h" \n#include "SD_MMC.h" \n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h" \n#include "dl_lib.h"\n#include "driver/rtc_io.h"\n#include <EEPROM.h>\n#define EEPROM_SIZE 1\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nint pictureNumber = 0;\n';
     var code = 'WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);\nSerial.begin(115200);\ncamera_config_t config;\nconfig.ledc_channel = LEDC_CHANNEL_0;\nconfig.ledc_timer = LEDC_TIMER_0;\nconfig.pin_d0 = Y2_GPIO_NUM;\nconfig.pin_d1 = Y3_GPIO_NUM;\nconfig.pin_d2 = Y4_GPIO_NUM;\nconfig.pin_d3 = Y5_GPIO_NUM;\nconfig.pin_d4 = Y6_GPIO_NUM;\nconfig.pin_d5 = Y7_GPIO_NUM;\nconfig.pin_d6 = Y8_GPIO_NUM;\nconfig.pin_d7 = Y9_GPIO_NUM;\nconfig.pin_xclk = XCLK_GPIO_NUM;\nconfig.pin_pclk = PCLK_GPIO_NUM;\nconfig.pin_vsync = VSYNC_GPIO_NUM;\nconfig.pin_href = HREF_GPIO_NUM;\nconfig.pin_sscb_sda = SIOD_GPIO_NUM;\nconfig.pin_sscb_scl = SIOC_GPIO_NUM;\nconfig.pin_pwdn = PWDN_GPIO_NUM;\nconfig.pin_reset = RESET_GPIO_NUM;\nconfig.xclk_freq_hz = 20000000;\nconfig.pixel_format = PIXFORMAT_JPEG; \nif(psramFound()){\n  config.frame_size = FRAMESIZE_UXGA;\n  config.jpeg_quality = 10;\n  config.fb_count = 2;\n} else {\n  config.frame_size = FRAMESIZE_SVGA;\n  config.jpeg_quality = 12;\n  config.fb_count = 1;\n}\nesp_err_t err = esp_camera_init(&config);\nif (err != ESP_OK) {\n  Serial.printf("Camera init failed with error 0x%x", err);\n  return;\n}\nif(!SD_MMC.begin()){\n  Serial.println("SD Card Mount Failed");\n  return;\n}\nuint8_t cardType = SD_MMC.cardType();\nif(cardType == CARD_NONE){\n  Serial.println("No SD Card attached");\n  return;\n}\ncamera_fb_t * fb = NULL;\nfb = esp_camera_fb_get();\nif(!fb) {\n  Serial.println("Camera capture failed");\n  return;\n}\nEEPROM.begin(EEPROM_SIZE);\npictureNumber = EEPROM.read(0) + 1;\nString path = "/picture" + String(pictureNumber) +".jpg";\nfs::FS &fs = SD_MMC; \nSerial.printf("Picture file name: %s\\n", path.c_str());\nFile file = fs.open(path.c_str(), FILE_WRITE);\nif(!file){\n  Serial.println("Failed to open file in writing mode");\n} \nelse {\n  file.write(fb->buf, fb->len);\n  Serial.printf("Saved file to path: %s\\n", path.c_str());\n  EEPROM.write(0, pictureNumber);\n  EEPROM.commit();\n}\nfile.close();\nesp_camera_fb_return(fb); \npinMode(4, OUTPUT);\ndigitalWrite(4, LOW);\nrtc_gpio_hold_en(GPIO_NUM_4);\n';
     return code;
 };
 
-Blockly.Arduino.blynk_table_click = function () {
+Blockly.Arduino.forBlock['blynk_table_click'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var branch = Blockly.Arduino.statementToCode(this, 'function');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
@@ -886,7 +886,7 @@ Blockly.Arduino.blynk_table_click = function () {
     return code;
 };
 
-Blockly.Arduino.blynk_table_order = function () {
+Blockly.Arduino.forBlock['blynk_table_order'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var branch = Blockly.Arduino.statementToCode(this, 'function');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
@@ -896,7 +896,7 @@ Blockly.Arduino.blynk_table_order = function () {
     return code;
 };
 
-Blockly.Arduino.blynk_table_add_data = function () {
+Blockly.Arduino.forBlock['blynk_table_add_data'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);

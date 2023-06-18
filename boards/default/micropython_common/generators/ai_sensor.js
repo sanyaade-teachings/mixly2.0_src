@@ -12,7 +12,7 @@ Blockly.Python.ai_sensor_use_uart_init=function(){
     return code;
 };
 
-Blockly.Python.ai_sensor_qrcode = function () {
+Blockly.Python.forBlock['ai_sensor_qrcode'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -20,7 +20,7 @@ Blockly.Python.ai_sensor_qrcode = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_qrcode_lite = function () {
+Blockly.Python.forBlock['ai_sensor_qrcode_lite'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var type = this.getFieldValue('TYPE');
@@ -28,14 +28,14 @@ Blockly.Python.ai_sensor_qrcode_lite = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_qrcodes = function () {
+Blockly.Python.forBlock['ai_sensor_find_qrcodes'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.find_qrcodes()';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_config = function () {
+Blockly.Python.forBlock['ai_sensor_config'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var rx = Blockly.Python.valueToCode(this, 'RX', Blockly.Python.ORDER_ATOMIC);
@@ -45,7 +45,7 @@ Blockly.Python.ai_sensor_config = function () {
   return code;
 };
 
-Blockly.Python.ai_sensor_rgb = function () {
+Blockly.Python.forBlock['ai_sensor_rgb'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var led1 = Blockly.Python.valueToCode(this, 'led1', Blockly.Python.ORDER_ATOMIC);
@@ -54,7 +54,7 @@ Blockly.Python.ai_sensor_rgb = function () {
   return code;
 };
 
-Blockly.Python.ai_sensor_qrcode = function () {
+Blockly.Python.forBlock['ai_sensor_qrcode'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -62,14 +62,14 @@ Blockly.Python.ai_sensor_qrcode = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_qrcodes = function () {
+Blockly.Python.forBlock['ai_sensor_find_qrcodes'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.find_qrcodes()';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_barcode = function () {
+Blockly.Python.forBlock['ai_sensor_barcode'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -77,14 +77,14 @@ Blockly.Python.ai_sensor_barcode = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_barcodes = function () {
+Blockly.Python.forBlock['ai_sensor_find_barcodes'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.find_barcodes()';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_tag = function () {
+Blockly.Python.forBlock['ai_sensor_tag'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -92,14 +92,14 @@ Blockly.Python.ai_sensor_tag = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_tags = function () {
+Blockly.Python.forBlock['ai_sensor_find_tags'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.find_apriltags()';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_line = function () {
+Blockly.Python.forBlock['ai_sensor_line'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -107,7 +107,7 @@ Blockly.Python.ai_sensor_line = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_lines = function () {
+Blockly.Python.forBlock['ai_sensor_find_lines'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -117,7 +117,7 @@ Blockly.Python.ai_sensor_find_lines = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_circle = function () {
+Blockly.Python.forBlock['ai_sensor_circle'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -125,7 +125,7 @@ Blockly.Python.ai_sensor_circle = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_circles = function () {
+Blockly.Python.forBlock['ai_sensor_find_circles'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -135,7 +135,7 @@ Blockly.Python.ai_sensor_find_circles = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_rect = function () {
+Blockly.Python.forBlock['ai_sensor_rect'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -143,7 +143,7 @@ Blockly.Python.ai_sensor_rect = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_rects = function () {
+Blockly.Python.forBlock['ai_sensor_find_rects'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -151,7 +151,7 @@ Blockly.Python.ai_sensor_find_rects = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_color = function () {
+Blockly.Python.forBlock['ai_sensor_color'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -159,14 +159,14 @@ Blockly.Python.ai_sensor_color = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_find_colors = function () {
+Blockly.Python.forBlock['ai_sensor_find_colors'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = v+'.find_colors()';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_color_chases_result = function () {
+Blockly.Python.forBlock['ai_sensor_color_chases_result'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -174,7 +174,7 @@ Blockly.Python.ai_sensor_color_chases_result = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_color_chases = function () {
+Blockly.Python.forBlock['ai_sensor_color_chases'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -184,7 +184,7 @@ Blockly.Python.ai_sensor_color_chases = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_ailocal_train = function () {
+Blockly.Python.forBlock['ai_sensor_ailocal_train'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -195,7 +195,7 @@ Blockly.Python.ai_sensor_ailocal_train = function () {
   return code; 
 };
 
-Blockly.Python.ai_sensor_ailocal_class = function () {
+Blockly.Python.forBlock['ai_sensor_ailocal_class'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -205,7 +205,7 @@ Blockly.Python.ai_sensor_ailocal_class = function () {
   return [code, Blockly.Python.ORDER_ATOMIC];  
 };
 
-Blockly.Python.ai_sensor_ailocal_class_result = function () {
+Blockly.Python.forBlock['ai_sensor_ailocal_class_result'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -213,7 +213,7 @@ Blockly.Python.ai_sensor_ailocal_class_result = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_audio_record = function () {
+Blockly.Python.forBlock['ai_sensor_audio_record'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -222,7 +222,7 @@ Blockly.Python.ai_sensor_audio_record = function () {
   return code; 
 };
 
-Blockly.Python.ai_sensor_audio_play = function () {
+Blockly.Python.forBlock['ai_sensor_audio_play'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -231,7 +231,7 @@ Blockly.Python.ai_sensor_audio_play = function () {
   return code; 
 };
 
-Blockly.Python.ai_sensor_yolo_recognize = function () {
+Blockly.Python.forBlock['ai_sensor_yolo_recognize'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);
@@ -241,7 +241,7 @@ Blockly.Python.ai_sensor_yolo_recognize = function () {
   return [code, Blockly.Python.ORDER_ATOMIC];  
 };
 
-Blockly.Python.ai_sensor_yolo_recognize_result = function () {
+Blockly.Python.forBlock['ai_sensor_yolo_recognize_result'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -249,7 +249,7 @@ Blockly.Python.ai_sensor_yolo_recognize_result = function () {
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.ai_sensor_asr_recognize = function () {
+Blockly.Python.forBlock['ai_sensor_asr_recognize'] = function () {
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var v1 = Blockly.Python.valueToCode(this, 'VAR1', Blockly.Python.ORDER_ATOMIC);

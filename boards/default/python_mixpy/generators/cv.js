@@ -4,14 +4,14 @@ goog.provide('Blockly.Python.cv');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.cv_read_image = function () {
+Blockly.Python.forBlock['cv_read_image'] = function () {
   Blockly.Python.definitions_['import_cv2'] = 'import cv2';
   var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
   var code = "cv2.imread(" + file + ")";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.cv_show_image = function () {
+Blockly.Python.forBlock['cv_show_image'] = function () {
     Blockly.Python.definitions_['import_cv2'] = 'import cv2';
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
@@ -19,7 +19,7 @@ Blockly.Python.cv_show_image = function () {
     return code;
 }
 
-Blockly.Python.cv_write_image = function () {
+Blockly.Python.forBlock['cv_write_image'] = function () {
     Blockly.Python.definitions_['import_cv2'] = 'import cv2';
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
@@ -27,20 +27,20 @@ Blockly.Python.cv_write_image = function () {
     return code;
 }
 
-Blockly.Python.cv_waitkey = function () {
+Blockly.Python.forBlock['cv_waitkey'] = function () {
     Blockly.Python.definitions_['import_cv2'] = 'import cv2';
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var code = "cv2.waitKey(" + data + ")\n";
     return code;
 }
 
-Blockly.Python.cv_destroy_all = function () {
+Blockly.Python.forBlock['cv_destroy_all'] = function () {
     Blockly.Python.definitions_['import_cv2'] = 'import cv2';
     var code = "cv2.destroyAllWindows()\n";
     return code;
 }
 
-Blockly.Python.cv_line_rect = function () {
+Blockly.Python.forBlock['cv_line_rect'] = function () {
     Blockly.Python.definitions_['import_cv2'] = 'import cv2';
     var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
     var x1 = Blockly.Python.valueToCode(this, 'x1', Blockly.Python.ORDER_ATOMIC);
@@ -57,7 +57,7 @@ Blockly.Python.cv_line_rect = function () {
     return code;
 }
 
-Blockly.Python.cv_text = function () {
+Blockly.Python.forBlock['cv_text'] = function () {
     Blockly.Python.definitions_['import_cv2'] = 'import cv2';
     var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
     var x1 = Blockly.Python.valueToCode(this, 'x1', Blockly.Python.ORDER_ATOMIC);
@@ -74,14 +74,14 @@ Blockly.Python.cv_text = function () {
     return code;
 }
 
-Blockly.Python.cv_face_classifier = function () {
+Blockly.Python.forBlock['cv_face_classifier'] = function () {
   Blockly.Python.definitions_['import_cv2'] = 'import cv2';
   var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
   var code = "cv2.CascadeClassifier(" + file + ")";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.cv_face_detect = function () {
+Blockly.Python.forBlock['cv_face_detect'] = function () {
   Blockly.Python.definitions_['import_cv2'] = 'import cv2';
   var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
   var face = Blockly.Python.valueToCode(this, 'FACE', Blockly.Python.ORDER_ATOMIC);
@@ -91,7 +91,7 @@ Blockly.Python.cv_face_detect = function () {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.cv_face_detect_all = function () {
+Blockly.Python.forBlock['cv_face_detect_all'] = function () {
   Blockly.Python.definitions_['import_cv2'] = 'import cv2';
   var file = Blockly.Python.valueToCode(this, 'FILE', Blockly.Python.ORDER_ATOMIC);
   var face = Blockly.Python.valueToCode(this, 'FACE', Blockly.Python.ORDER_ATOMIC);

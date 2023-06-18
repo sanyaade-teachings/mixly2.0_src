@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.actuator');
 goog.require('Blockly.Python');
 
-Blockly.Python.microbit_music_play_built_in = function(block) {
+Blockly.Python.forBlock['microbit_music_play_built_in'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     var dropdown_melody = block.getFieldValue('melody');
@@ -14,7 +14,7 @@ Blockly.Python.microbit_music_play_built_in = function(block) {
     return code;
 };
 
-Blockly.Python.microbit_music_play_built_in_easy = function(block) {
+Blockly.Python.forBlock['microbit_music_play_built_in_easy'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     var dropdown_melody = block.getFieldValue('melody');
@@ -23,7 +23,7 @@ Blockly.Python.microbit_music_play_built_in_easy = function(block) {
     return code;
 };
 
-Blockly.Python.microbit_music_pitch_delay = function(block) {
+Blockly.Python.forBlock['microbit_music_pitch_delay'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     Blockly.Python.definitions_['import_math'] = 'import math';
@@ -35,7 +35,7 @@ Blockly.Python.microbit_music_pitch_delay = function(block) {
     return code;
 };
 
-Blockly.Python.microbit_music_pitch = function(block) {
+Blockly.Python.forBlock['microbit_music_pitch'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     Blockly.Python.definitions_['import_math'] = 'import math';
@@ -46,7 +46,7 @@ Blockly.Python.microbit_music_pitch = function(block) {
     return code;
 };
 
-Blockly.Python.microbit_music_play_list_of_notes = function(block) {
+Blockly.Python.forBlock['microbit_music_play_list_of_notes'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -59,14 +59,14 @@ Blockly.Python.microbit_music_play_list_of_notes = function(block) {
 
 
 
-Blockly.Python.microbit_music_reset = function(block) {
+Blockly.Python.forBlock['microbit_music_reset'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     var code = 'music.reset()\n';
     return code;
 };
 
-Blockly.Python.microbit_music_stop = function(block) {
+Blockly.Python.forBlock['microbit_music_stop'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -74,7 +74,7 @@ Blockly.Python.microbit_music_stop = function(block) {
     return code;
 };
 
-Blockly.Python.microbit_music_get_tempo = function(block) {
+Blockly.Python.forBlock['microbit_music_get_tempo'] = function(block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_music'] = 'import music';
     var code = 'music.get_tempo()';
@@ -160,7 +160,7 @@ Blockly.Python.speech_pronounce_easy=function(){
     return code
 };
 
-Blockly.Python.servo_move = function() {
+Blockly.Python.forBlock['servo_move'] = function() {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_Servolib'] = 'import Servo';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
@@ -172,7 +172,7 @@ Blockly.Python.servo_move = function() {
     return code;
 };
 
-Blockly.Python.bit_motor_control = function() {
+Blockly.Python.forBlock['bit_motor_control'] = function() {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_motor_control'] = 'import motor_control';
 
@@ -218,14 +218,14 @@ Blockly.Python.display_rgb2=function(){
   return code;
 };
 
-Blockly.Python.display_rgb_show = function(){
+Blockly.Python.forBlock['display_rgb_show'] = function(){
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_neopixel'] = 'import neopixel';
   var code= 'np.show()\n';   
   return code;
 };
 
-Blockly.Python.MP3_INIT = function () {
+Blockly.Python.forBlock['MP3_INIT'] = function () {
   var dropdown_pin1 = Blockly.Python.valueToCode(this, 'RX',Blockly.Python.ORDER_ATOMIC);
   var dropdown_pin2 = Blockly.Python.valueToCode(this, 'TX',Blockly.Python.ORDER_ATOMIC);
   if (!isNaN(parseInt(dropdown_pin1)))
@@ -239,7 +239,7 @@ Blockly.Python.MP3_INIT = function () {
 };
 
 //mp3 控制播放
-Blockly.Python.MP3_CONTROL = function () {
+Blockly.Python.forBlock['MP3_CONTROL'] = function () {
   var CONTROL_TYPE = this.getFieldValue('CONTROL_TYPE');
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_QJ00X_MP3'] = 'from MP3 import QJ00X_MP3';
@@ -248,7 +248,7 @@ Blockly.Python.MP3_CONTROL = function () {
 };
 
 //mp3 循环模式
-Blockly.Python.MP3_LOOP_MODE = function () {
+Blockly.Python.forBlock['MP3_LOOP_MODE'] = function () {
   var LOOP_MODE = this.getFieldValue('LOOP_MODE');
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_QJ00X_MP3'] = 'from MP3 import QJ00X_MP3';
@@ -257,7 +257,7 @@ Blockly.Python.MP3_LOOP_MODE = function () {
 };
 
 //mp3 EQ模式
-Blockly.Python.MP3_EQ_MODE = function () {
+Blockly.Python.forBlock['MP3_EQ_MODE'] = function () {
   var EQ_MODE = this.getFieldValue('EQ_MODE');
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_QJ00X_MP3'] = 'from MP3 import QJ00X_MP3';
@@ -266,7 +266,7 @@ Blockly.Python.MP3_EQ_MODE = function () {
 };
 
 //mp3 设置音量
-Blockly.Python.MP3_VOL = function () {
+Blockly.Python.forBlock['MP3_VOL'] = function () {
   var vol = Blockly.Python.valueToCode(this, 'vol', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_QJ00X_MP3'] = 'from MP3 import QJ00X_MP3';
@@ -275,7 +275,7 @@ Blockly.Python.MP3_VOL = function () {
 };
 
 //mp3 播放第N首
-Blockly.Python.MP3_PLAY_NUM = function () {
+Blockly.Python.forBlock['MP3_PLAY_NUM'] = function () {
   var NUM = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_QJ00X_MP3'] = 'from MP3 import QJ00X_MP3';
@@ -283,7 +283,7 @@ Blockly.Python.MP3_PLAY_NUM = function () {
   return code;
 };
 
-Blockly.Python.MP3_PLAY_FOLDER = function () {
+Blockly.Python.forBlock['MP3_PLAY_FOLDER'] = function () {
   var FOLDER = Blockly.Python.valueToCode(this, 'FOLDER', Blockly.Python.ORDER_ATOMIC);
   var NUM = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';

@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.procedures');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.procedures_defreturn = function () {
+Blockly.Arduino.forBlock['procedures_defreturn'] = function () {
     // Define a procedure with a return value.
     var funcName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
@@ -32,9 +32,9 @@ Blockly.Arduino.procedures_defreturn = function () {
     return null;
 };
 
-Blockly.Arduino.procedures_defnoreturn = Blockly.Arduino.procedures_defreturn;
+Blockly.Arduino.forBlock.procedures_defnoreturn = Blockly.Arduino.forBlock.procedures_defreturn;
 
-Blockly.Arduino.procedures_callreturn = function () {
+Blockly.Arduino.forBlock['procedures_callreturn'] = function () {
     // Call a procedure with a return value.
     var funcName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
@@ -47,7 +47,7 @@ Blockly.Arduino.procedures_callreturn = function () {
     return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Arduino.procedures_callnoreturn = function () {
+Blockly.Arduino.forBlock['procedures_callnoreturn'] = function () {
     // Call a procedure with no return value.
     var funcName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
@@ -60,7 +60,7 @@ Blockly.Arduino.procedures_callnoreturn = function () {
     return code;
 };
 
-Blockly.Arduino.procedures_ifreturn = function () {
+Blockly.Arduino.forBlock['procedures_ifreturn'] = function () {
     // Conditionally return value from a procedure.
     var condition = Blockly.Arduino.valueToCode(this, 'CONDITION',
         Blockly.Arduino.ORDER_NONE) || 'false';
@@ -76,7 +76,7 @@ Blockly.Arduino.procedures_ifreturn = function () {
     return code;
 };
 
-Blockly.Arduino.procedures_return = function () {
+Blockly.Arduino.forBlock['procedures_return'] = function () {
     // Conditionally return value from a procedure.
     var code = ""
     if (this.hasReturnValue_) {

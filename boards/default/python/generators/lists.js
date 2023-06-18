@@ -16,7 +16,7 @@ Blockly.Python['lists_get_sublist'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.lists_2d_get_data_with_col_row = function() {
+Blockly.Python.forBlock['lists_2d_get_data_with_col_row'] = function() {
   var value_LIST = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ATOMIC) || 'mylist';
   var value_row = Blockly.Python.valueToCode(this, 'row', Blockly.Python.ORDER_ATOMIC) || 0;
   var value_col = Blockly.Python.valueToCode(this, 'col', Blockly.Python.ORDER_ATOMIC) || 0;
@@ -24,7 +24,7 @@ Blockly.Python.lists_2d_get_data_with_col_row = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.lists_2d_get_col_row_data = function() {
+Blockly.Python.forBlock['lists_2d_get_col_row_data'] = function() {
   var value_LIST = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ATOMIC) || 'mylist';
   var value_row_start = Blockly.Python.valueToCode(this, 'row_start', Blockly.Python.ORDER_ATOMIC) || 0;
   var value_row_end = Blockly.Python.valueToCode(this, 'row_end', Blockly.Python.ORDER_ATOMIC) || 1;
@@ -36,7 +36,7 @@ Blockly.Python.lists_2d_get_col_row_data = function() {
 
 
 
-Blockly.Python.lists_create_with = function() {
+Blockly.Python.forBlock['lists_create_with'] = function() {
   // Create a list with any number of elements of any type.
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -55,7 +55,7 @@ Blockly.Python.lists_create_with = function() {
   var code = varName+' = '+ '[' + code.join(', ') + ']\n';
   return code;
 };
-Blockly.Python.lists_create_with_text = function() {
+Blockly.Python.forBlock['lists_create_with_text'] = function() {
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
     Blockly.Variables.NAME_TYPE);
@@ -66,7 +66,7 @@ Blockly.Python.lists_create_with_text = function() {
   return code;
 };
 
-Blockly.Python.lists_get_index = function() {
+Blockly.Python.forBlock['lists_get_index'] = function() {
   // Indexing into a list is the same as indexing into a string.
   var list = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || 'mylist';
   var argument0 = Blockly.Python.valueToCode(this, 'AT', Blockly.Python.ORDER_ADDITIVE) || 0;
@@ -75,7 +75,7 @@ Blockly.Python.lists_get_index = function() {
 };
 
 
-Blockly.Python.lists_set_index = function() {
+Blockly.Python.forBlock['lists_set_index'] = function() {
   // Set element at index.
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || 'mylist';
   var argument0 = Blockly.Python.valueToCode(this, 'AT',
@@ -86,7 +86,7 @@ Blockly.Python.lists_set_index = function() {
   return varName + '[' + argument0 + '] = ' + argument2 + '\n';
 };
 
-Blockly.Python.lists_append_extend = function(){
+Blockly.Python.forBlock['lists_append_extend'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var argument = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var op = this.getFieldValue('OP');
@@ -94,7 +94,7 @@ Blockly.Python.lists_append_extend = function(){
   return code;
 };
 
-Blockly.Python.lists_get_random_item = function() {
+Blockly.Python.forBlock['lists_get_random_item'] = function() {
   Blockly.Python.definitions_['import_random'] = 'import random';
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || 'mylist';
   var code='random.choice(' +varName + ')';
@@ -102,7 +102,7 @@ Blockly.Python.lists_get_random_item = function() {
 };
 
 
-Blockly.Python.lists_get_random_sublist = function() {
+Blockly.Python.forBlock['lists_get_random_sublist'] = function() {
   Blockly.Python.definitions_['import_random'] = 'import random';
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || 'mylist';
   var VALUE = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -110,7 +110,7 @@ Blockly.Python.lists_get_random_sublist = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.lists_insert_value = function(){
+Blockly.Python.forBlock['lists_insert_value'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var at = Blockly.Python.valueToCode(this, 'AT', Blockly.Python.ORDER_ADDITIVE) || '0';
   var VALUE = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -119,18 +119,18 @@ Blockly.Python.lists_insert_value = function(){
 };
 
 
-Blockly.Python.lists_reverse = function(){
+Blockly.Python.forBlock['lists_reverse'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName + '.reverse()\n';
   return code;
 }
-Blockly.Python.lists_clear = function(){
+Blockly.Python.forBlock['lists_clear'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName + '.clear()\n';
   return code;
 }
 
-Blockly.Python.lists_find = function(){
+Blockly.Python.forBlock['lists_find'] = function(){
   var op = this.getFieldValue('OP');
   var varName = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var argument = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -141,7 +141,7 @@ Blockly.Python.lists_find = function(){
   return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.lists_remove_at = function(){
+Blockly.Python.forBlock['lists_remove_at'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var argument = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var op = this.getFieldValue('OP');
@@ -154,14 +154,14 @@ Blockly.Python.lists_remove_at = function(){
   return code;
 };
 
-Blockly.Python.lists_pop = function(){
+Blockly.Python.forBlock['lists_pop'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || 'mylist';
   var argument = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code = varName + '.pop('  + argument + ')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.list_trig = function (a) {
+Blockly.Python.forBlock['list_trig'] = function (a) {
   var b = a.getFieldValue("OP"), c;
   Blockly.Python.definitions_['import_math'] = "import math";
   a = Blockly.Python.valueToCode(a, 'data', Blockly.Python.ORDER_NONE) 
@@ -217,7 +217,7 @@ Blockly.Python['lists_sort'] = function(block) {
 };
 
 
-Blockly.Python.lists_change_to = function(){
+Blockly.Python.forBlock['lists_change_to'] = function(){
   var op = this.getFieldValue('OP');
   var varName = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code = '';
@@ -234,13 +234,13 @@ Blockly.Python.lists_change_to = function(){
 }
 
 
-Blockly.Python.list_many_input = function() {
+Blockly.Python.forBlock['list_many_input'] = function() {
   var text=this.getFieldValue('CONTENT');
   var code='['+text+']'
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.lists_create_with_noreturn = function() {
+Blockly.Python.forBlock['lists_create_with_noreturn'] = function() {
   // Create a list with any number of elements of any type.
   var code = new Array(this.itemCount_);
   var default_value = '0';
@@ -254,7 +254,7 @@ Blockly.Python.lists_create_with_noreturn = function() {
 
 Blockly.Python.lists_change_to_general = Blockly.Python.lists_change_to;
 
-Blockly.Python.lists_del_general = function() {
+Blockly.Python.forBlock['lists_del_general'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'TUP', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code='del ' + varName + '\n';
   return code;
@@ -270,7 +270,7 @@ Blockly.Python['lists_setIndex3'] = Blockly.Python['lists_set_index']
 Blockly.Python['lists_insert_value2'] = Blockly.Python['lists_insert_value']
 Blockly.Python['lists_remove_at2'] = Blockly.Python['lists_remove_at']
 
-Blockly.Python.lists_zip = function() {    
+Blockly.Python.forBlock['lists_zip'] = function() {    
   var dropdown_type = this.getFieldValue('TYPE');  
   var code = new Array(this.itemCount_);
   var default_value = '[]';
@@ -282,12 +282,12 @@ Blockly.Python.lists_zip = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.list_tolist = function() {  
+Blockly.Python.forBlock['list_tolist'] = function() {  
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'
   return ['list('+str+')', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.list_tolist2 = function() {  
+Blockly.Python.forBlock['list_tolist2'] = function() {  
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'
   return [str+'.tolist()', Blockly.Python.ORDER_ATOMIC];
 };

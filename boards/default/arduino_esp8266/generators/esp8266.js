@@ -5,12 +5,12 @@ goog.provide('Blockly.Arduino.storage');
 goog.require('Blockly.Arduino');
 
 //LM35 Temperature
-Blockly.Arduino.LM35 = function () {
+Blockly.Arduino.forBlock['LM35'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'analogRead(' + dropdown_pin + ')*0.322';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-Blockly.Arduino.store_eeprom_write_long = function () {
+Blockly.Arduino.forBlock['store_eeprom_write_long'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
@@ -33,7 +33,7 @@ Blockly.Arduino.store_eeprom_write_long = function () {
     return 'eepromWriteLong(' + address + ', ' + data + ');\n';
 }
 
-Blockly.Arduino.store_eeprom_read_long = function () {
+Blockly.Arduino.forBlock['store_eeprom_read_long'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     Blockly.Arduino.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
@@ -55,7 +55,7 @@ Blockly.Arduino.store_eeprom_read_long = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.store_eeprom_write_byte = function () {
+Blockly.Arduino.forBlock['store_eeprom_write_byte'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
@@ -64,7 +64,7 @@ Blockly.Arduino.store_eeprom_write_byte = function () {
 }
 
 
-Blockly.Arduino.controls_attachInterrupt = function () {
+Blockly.Arduino.forBlock['controls_attachInterrupt'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     Blockly.Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
@@ -77,7 +77,7 @@ Blockly.Arduino.controls_attachInterrupt = function () {
     Blockly.Arduino.definitions_[funcName] = code2;
     return code;
 };
-Blockly.Arduino.store_eeprom_read_byte = function () {
+Blockly.Arduino.forBlock['store_eeprom_read_byte'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     Blockly.Arduino.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
@@ -85,7 +85,7 @@ Blockly.Arduino.store_eeprom_read_byte = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.store_eeprom_put = function () {
+Blockly.Arduino.forBlock['store_eeprom_put'] = function () {
     Blockly.Arduino.setups_['setup_EEPROM_begin'] = 'EEPROM.begin(4000);';
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
@@ -93,18 +93,18 @@ Blockly.Arduino.store_eeprom_put = function () {
     return 'EEPROM.put(' + address + ', ' + data + ');\nEEPROM.commit();';
 }
 
-Blockly.Arduino.store_eeprom_get = function () {
+Blockly.Arduino.forBlock['store_eeprom_get'] = function () {
     Blockly.Arduino.setups_['setup_EEPROM_begin'] = 'EEPROM.begin(4000);';
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     return 'EEPROM.get(' + address + ', ' + data + ');\n';
 }
-Blockly.Arduino.controls_soft_reset = function () {
+Blockly.Arduino.forBlock['controls_soft_reset'] = function () {
     return ' ESP.restart();\n';
 };
 
-Blockly.Arduino.servo_move = function () {
+Blockly.Arduino.forBlock['servo_move'] = function () {
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
     var delay_time = Blockly.Arduino.valueToCode(this, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC) || '0'

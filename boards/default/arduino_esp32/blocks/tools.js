@@ -73,7 +73,7 @@ for (let i in BOARDS_PIN_DEF) {
         }
     };
 
-    Blockly.Arduino[i] = function() {
+    Blockly.Arduino.forBlock[i] = function() {
         return "";
     };
 }

@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.actuator');
 goog.require('Blockly.Python');
 
-Blockly.Python.actuator_Servo_init = function () {
+Blockly.Python.forBlock['actuator_Servo_init'] = function () {
 	Blockly.Python.definitions_['import board'] = 'import board';
 	Blockly.Python.definitions_['from machine import PWM'] = 'from machine import PWM';
 	Blockly.Python.definitions_['from machine import Timer'] = 'from machine import Timer';
@@ -17,7 +17,7 @@ Blockly.Python.actuator_Servo_init = function () {
 };
 
 
-Blockly.Python.actuator_Servo = function () {
+Blockly.Python.forBlock['actuator_Servo'] = function () {
   Blockly.Python.definitions_['from machine import PWM'] = 'from machine import PWM';
   var key = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
   var range = Blockly.Python.valueToCode(this,'range', Blockly.Python.ORDER_ATOMIC);
@@ -26,7 +26,7 @@ Blockly.Python.actuator_Servo = function () {
 };
 
 
-Blockly.Python.actuator_PAC9685_init = function () {
+Blockly.Python.forBlock['actuator_PAC9685_init'] = function () {
 	Blockly.Python.definitions_['from servo import Servos'] = 'from servo import Servos';
 	var address =Blockly.Python.valueToCode(this, 'address',Blockly.Python.ORDER_ATOMIC);
 	var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -34,7 +34,7 @@ Blockly.Python.actuator_PAC9685_init = function () {
     return code;
 };
 
-Blockly.Python.actuator_PAC9685_Servo = function () {
+Blockly.Python.forBlock['actuator_PAC9685_Servo'] = function () {
   Blockly.Python.definitions_['from servo import Servos'] = 'from servo import Servos';
   var index = Blockly.Python.valueToCode(this,'index', Blockly.Python.ORDER_ATOMIC);
   var range = Blockly.Python.valueToCode(this,'range', Blockly.Python.ORDER_ATOMIC);
@@ -44,7 +44,7 @@ Blockly.Python.actuator_PAC9685_Servo = function () {
 };
 
 
-Blockly.Python.actuator_rgb_init = function () {
+Blockly.Python.forBlock['actuator_rgb_init'] = function () {
     Blockly.Python.definitions_['import board'] = 'import board';	
   Blockly.Python.definitions_['from modules import ws2812'] = 'from modules import ws2812'; 
   var SUB = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -55,7 +55,7 @@ Blockly.Python.actuator_rgb_init = function () {
 };
 
 
-Blockly.Python.actuator_rgb_set = function () {
+Blockly.Python.forBlock['actuator_rgb_set'] = function () {
   var SUB = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var R = Blockly.Python.valueToCode(this, 'R', Blockly.Python.ORDER_ATOMIC);
   var G = Blockly.Python.valueToCode(this, 'G', Blockly.Python.ORDER_ATOMIC);
@@ -65,14 +65,14 @@ Blockly.Python.actuator_rgb_set = function () {
   return code;  
 };
 
-Blockly.Python.actuator_rgb_display = function () {
+Blockly.Python.forBlock['actuator_rgb_display'] = function () {
   var SUB = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var code = ''+SUB+'.display()\n';
   return code;  
 };
 
 
-Blockly.Python.actuator_ms32006_init = function () {
+Blockly.Python.forBlock['actuator_ms32006_init'] = function () {
 	Blockly.Python.definitions_['import ms32006'] = 'import ms32006';
 	var address =this.getFieldValue('mode')
 	var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -81,7 +81,7 @@ Blockly.Python.actuator_ms32006_init = function () {
     return code;
 };
 
-Blockly.Python.actuator_ms32006_dcmotor = function () {
+Blockly.Python.forBlock['actuator_ms32006_dcmotor'] = function () {
 	Blockly.Python.definitions_['import ms32006'] = 'import ms32006';
 	var direction =this.getFieldValue('direction')
 	var sub =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -90,7 +90,7 @@ Blockly.Python.actuator_ms32006_dcmotor = function () {
     return code;
 };
 
-Blockly.Python.actuator_ms32006_stepper = function () {
+Blockly.Python.forBlock['actuator_ms32006_stepper'] = function () {
 	Blockly.Python.definitions_['import ms32006'] = 'import ms32006';
 	var mode =this.getFieldValue('mode')
 	var direction =this.getFieldValue('direction')
@@ -102,7 +102,7 @@ Blockly.Python.actuator_ms32006_stepper = function () {
 };
 
 //-新20211221------PID算法，暂时放此处------------------------------------------//
-Blockly.Python.PID_init = function () {
+Blockly.Python.forBlock['PID_init'] = function () {
     Blockly.Python.definitions_['import pid'] = 'import pid';	
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
 	var P = Blockly.Python.valueToCode(this, 'P',Blockly.Python.ORDER_ATOMIC);

@@ -1,7 +1,7 @@
 'use strict';
 goog.provide('Blockly.Arduino.ethernet');
 goog.require('Blockly.Arduino');
-Blockly.Arduino.WIFI_info = function () {
+Blockly.Arduino.forBlock['WIFI_info'] = function () {
     var SSID = Blockly.Arduino.valueToCode(this, 'SSID', Blockly.Arduino.ORDER_ATOMIC);
     var PWD = Blockly.Arduino.valueToCode(this, 'PWD', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
@@ -16,7 +16,7 @@ Blockly.Arduino.WIFI_info = function () {
 };
 
 //GET请求
-Blockly.Arduino.http_get = function () {
+Blockly.Arduino.forBlock['http_get'] = function () {
     var api = Blockly.Arduino.valueToCode(this, 'api', Blockly.Arduino.ORDER_ATOMIC);
     var branch = Blockly.Arduino.statementToCode(this, 'success');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
@@ -41,7 +41,7 @@ Blockly.Arduino.http_get = function () {
 };
 
 //esp_now发送数据
-Blockly.Arduino.esp_now_send = function () {
+Blockly.Arduino.forBlock['esp_now_send'] = function () {
     var mac = Blockly.Arduino.valueToCode(this, 'mac', Blockly.Arduino.ORDER_ATOMIC);
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var branch = Blockly.Arduino.statementToCode(this, 'success');
@@ -88,7 +88,7 @@ Blockly.Arduino.esp_now_send = function () {
 };
 
 //esp_now接收数据
-Blockly.Arduino.esp_now_receive = function () {
+Blockly.Arduino.forBlock['esp_now_receive'] = function () {
     var branch = Blockly.Arduino.statementToCode(this, 'receive_data');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
     Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <WiFi.h>';
@@ -118,7 +118,7 @@ Blockly.Arduino.esp_now_receive = function () {
     return code;
 };
 
-Blockly.Arduino.esp32_wifi_connection_event = function () {
+Blockly.Arduino.forBlock['esp32_wifi_connection_event'] = function () {
     var type= this.getFieldValue('type');
     var branch = Blockly.Arduino.statementToCode(this, 'event');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");

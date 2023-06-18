@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.base');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.inout_touchRead = function(){
+Blockly.Arduino.forBlock['inout_touchRead'] = function(){
    var pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
    var code =  'touchRead('+pin+')';
    return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -55,7 +55,7 @@ Blockly.Arduino.inout_pwm_analog_write= function () {
     return code;
 };
 
-Blockly.Arduino.controls_attachInterrupt = function () {
+Blockly.Arduino.forBlock['controls_attachInterrupt'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
     // Blockly.Arduino.definitions_['pin_interrupt'] = '#include <Arduino.h>';
@@ -68,14 +68,14 @@ Blockly.Arduino.controls_attachInterrupt = function () {
     return code;
 };
 
-Blockly.Arduino.controls_detachInterrupt = function () {
+Blockly.Arduino.forBlock['controls_detachInterrupt'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     var code = 'detachInterrupt' + '(' + dropdown_pin + ');\n'
     return code;
 };
 
-Blockly.Arduino.touchAttachInterrupt = function () {
+Blockly.Arduino.forBlock['touchAttachInterrupt'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var threshold = Blockly.Arduino.valueToCode(this, 'threshold', Blockly.Arduino.ORDER_ATOMIC);    
     Blockly.Arduino.setups_['touchAttachInterrupt' + dropdown_pin] = 'touchAttachInterrupt(' + dropdown_pin +',gotTouch'+dropdown_pin+', '+threshold+');';
@@ -87,14 +87,14 @@ Blockly.Arduino.touchAttachInterrupt = function () {
     return code;
 };
 
-Blockly.Arduino.inout_esp32_dac = function() {
+Blockly.Arduino.forBlock['inout_esp32_dac'] = function() {
     var PIN= this.getFieldValue('PIN');
     var value= Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC);
     var code='dacWrite('+PIN+', '+value+');\n';
     return code;
 };
 
-Blockly.Arduino.esp32_led_pwm = function () {
+Blockly.Arduino.forBlock['esp32_led_pwm'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var val = Blockly.Arduino.valueToCode(this, 'val', Blockly.Arduino.ORDER_ATOMIC);
     var resolution = this.getFieldValue('resolution');

@@ -258,7 +258,7 @@ button.launch {
 	background-image: url("../../../../common/media/sidebar/sidebar2_red.png");
 }
 
-div.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon.blocklyTreeIconOpen {
+/*div.blocklyTreeRow.blocklyTreeSelected>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon.blocklyTreeIconOpen {
 	background-image: url('../../../../common/media/sprites.png') !important;
 	height: 16px !important;
 	vertical-align: middle !important;
@@ -296,7 +296,7 @@ div.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon.block
 	margin: 10px !important;
 	background-position: -32px -1px !important;
 	background-size: auto !important;
-}
+}*/
 
 div.blocklyTreeRow>div.blocklyTreeRowContentContainer>span.blocklyTreeIcon {
 	width: 20px;

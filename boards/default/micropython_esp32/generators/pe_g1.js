@@ -11,7 +11,7 @@ Blockly.Python.pe_g1_use_i2c_init=function(){
     return code;
 };    
 
-Blockly.Python.pe_g1_battery_left = function(){   
+Blockly.Python.forBlock['pe_g1_battery_left'] = function(){   
     Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
     var code =  v + '.read_bat()';
@@ -37,7 +37,7 @@ Blockly.Python.pe_g1_dc_motor_speed=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pe_g1_servo_set_angle = function() {
+Blockly.Python.forBlock['pe_g1_servo_set_angle'] = function() {
   Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC); 
@@ -46,7 +46,7 @@ Blockly.Python.pe_g1_servo_set_angle = function() {
   return code;
 };
 
-Blockly.Python.pe_g1_servo_set_speed = function() {
+Blockly.Python.forBlock['pe_g1_servo_set_speed'] = function() {
   Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);     
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC); 
@@ -55,7 +55,7 @@ Blockly.Python.pe_g1_servo_set_speed = function() {
   return code;
 };
 
-Blockly.Python.pe_g1_servo_get_angle = function() {
+Blockly.Python.forBlock['pe_g1_servo_get_angle'] = function() {
   Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC); 
@@ -63,7 +63,7 @@ Blockly.Python.pe_g1_servo_get_angle = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pe_g1_servo_get_speed = function() {
+Blockly.Python.forBlock['pe_g1_servo_get_speed'] = function() {
   Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
   var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC); 

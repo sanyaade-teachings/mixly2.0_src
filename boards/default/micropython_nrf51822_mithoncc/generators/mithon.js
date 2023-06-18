@@ -48,7 +48,7 @@ Blockly.Python['microbit_image_create'] = function (block) {
 };
 
 
-Blockly.Python.base_loop = function (a) {
+Blockly.Python.forBlock['base_loop'] = function (a) {
     //var b = "UNTIL" == a.getFieldValue("MODE"),
     //var c = Blockly.Python.valueToCode(a, "BOOL", b ? Blockly.Python.ORDER_LOGICAL_NOT : Blockly.Python.ORDER_NONE) || "False",
     var d = Blockly.Python.statementToCode(a, "DO"),
@@ -57,7 +57,7 @@ Blockly.Python.base_loop = function (a) {
     return "";
 };
 
-Blockly.Python.actuator_rgb_color = function () {
+Blockly.Python.forBlock['actuator_rgb_color'] = function () {
     var value_led = this.getFieldValue('LED');
     var values = this.getFieldValue('COLOR').split(",");
     var value_rvalue = values[0];
@@ -78,7 +78,7 @@ Blockly.Python.actuator_rgb_color = function () {
     return code;
 };
 
-Blockly.Python.actuator_rgb_off = function () {
+Blockly.Python.forBlock['actuator_rgb_off'] = function () {
     var value_led = this.getFieldValue('LED');
     var value_rvalue = 0;
     var value_gvalue = 0;
@@ -97,7 +97,7 @@ Blockly.Python.actuator_rgb_off = function () {
     return code;
 };
 
-Blockly.Python.actuator_rgb = function () {
+Blockly.Python.forBlock['actuator_rgb'] = function () {
     var value_led = Blockly.Python.valueToCode(this, '_LED_', Blockly.Python.ORDER_ATOMIC);
     var value_rvalue = Blockly.Python.valueToCode(this, 'RVALUE', Blockly.Python.ORDER_ATOMIC);
     var value_gvalue = Blockly.Python.valueToCode(this, 'GVALUE', Blockly.Python.ORDER_ATOMIC);
@@ -111,7 +111,7 @@ Blockly.Python.actuator_rgb = function () {
     return code;
 };
 
-Blockly.Python.actuator_motor_on = function () {
+Blockly.Python.forBlock['actuator_motor_on'] = function () {
     var n = this.getFieldValue('NUMBER');
     var v = Blockly.Python.valueToCode(this, 'SPEED', Blockly.Python.ORDER_ATOMIC);
     var d = this.getFieldValue('DIRECTION');
@@ -138,7 +138,7 @@ Blockly.Python.actuator_motor_on = function () {
     return code;
 };
 
-Blockly.Python.actuator_motor_off = function () {
+Blockly.Python.forBlock['actuator_motor_off'] = function () {
     var n = this.getFieldValue('NUMBER');
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_motor_control'] = 'import motor_control';
@@ -163,13 +163,13 @@ Blockly.Python.actuator_motor_off = function () {
     return code;
 };
 
-Blockly.Python.sensor_pin_near = function () {
+Blockly.Python.forBlock['sensor_pin_near'] = function () {
     var number = this.getFieldValue('NUMBER');
     var code = 'pin' + number + '.read_analog()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_while_btn_pressed = function (a) {
+Blockly.Python.forBlock['sensor_while_btn_pressed'] = function (a) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var btn = Blockly.Python.valueToCode(this, 'btn', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.setups_['on_' + btn] = 'def on_' + btn + '():\n' +
@@ -186,7 +186,7 @@ Blockly.Python.sensor_while_btn_pressed = function (a) {
     return "def callback_" + btn + "():\n" + d;
 };
 
-Blockly.Python.sensor_while_is_gesture = function (a) {
+Blockly.Python.forBlock['sensor_while_is_gesture'] = function (a) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     Blockly.Python.setups_['on_' + gesture] = 'def on_gesture_' + gesture + '():\n' +
@@ -203,7 +203,7 @@ Blockly.Python.sensor_while_is_gesture = function (a) {
     return "def callback_gesture_" + gesture + '():\n' + d;
 };
 
-Blockly.Python.sensor_while_is_near = function (a) {
+Blockly.Python.forBlock['sensor_while_is_near'] = function (a) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var near = this.getFieldValue('near');
     Blockly.Python.setups_['on_' + near] = 'def on_near_' + near + '():\n' +
@@ -220,7 +220,7 @@ Blockly.Python.sensor_while_is_near = function (a) {
     return "def callback_near_" + near + '():\n' + d;
 };
 
-Blockly.Python.controls_repeat_ext = function (a) {
+Blockly.Python.forBlock['controls_repeat_ext'] = function (a) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var times = Blockly.Python.valueToCode(this, 'TIMES', Blockly.Python.ORDER_ATOMIC);
     var d = Blockly.Python.statementToCode(a, "DO"),

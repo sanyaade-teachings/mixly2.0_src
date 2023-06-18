@@ -88,7 +88,7 @@ Blockly.Blocks.onboard_notone={
     }
 };
 
-Blockly.Arduino.motor_id = function() {
+Blockly.Arduino.forBlock['motor_id'] = function() {
   var code = this.getFieldValue('CHANNEL');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

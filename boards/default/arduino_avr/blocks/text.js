@@ -426,7 +426,7 @@ Blockly.Blocks.text_join2 = {
         this.updateShape_();
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setMutator(new Blockly.Mutator(['create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['create_with_item'], this));
         this.setTooltip("");
     },
     /**
@@ -435,7 +435,7 @@ Blockly.Blocks.text_join2 = {
      * @this Blockly.Block
      */
     mutationToDom: function () {
-        var container = document.createElement('mutation');
+        var container = Blockly.utils.xml.createElement('mutation');
         container.setAttribute('items', this.itemCount_);
         return container;
     },

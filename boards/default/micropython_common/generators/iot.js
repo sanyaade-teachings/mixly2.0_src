@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.iot');
 goog.require('Blockly.Python');
 
-Blockly.Python.iot_wifi_connect = function(block) {  
+Blockly.Python.forBlock['iot_wifi_connect'] = function(block) {  
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";  
   var username =  Blockly.Python.valueToCode(this, 'WIFINAME', Blockly.Python.ORDER_ATOMIC) ;
   var password =  Blockly.Python.valueToCode(this, 'PASSWORD', Blockly.Python.ORDER_ATOMIC) ; 
@@ -11,7 +11,7 @@ Blockly.Python.iot_wifi_connect = function(block) {
   return code;
 };
 
-Blockly.Python.iot_onenet_connect = function(block) {
+Blockly.Python.forBlock['iot_onenet_connect'] = function(block) {
   Blockly.Python.definitions_['import_onenet'] = "import onenet";
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var client =  Blockly.Python.valueToCode(this, 'CLIENT', Blockly.Python.ORDER_ATOMIC) ;
@@ -24,14 +24,14 @@ Blockly.Python.iot_onenet_connect = function(block) {
   return code;
 };
 
-Blockly.Python.iot_onenet_disconnect = function(block) {
+Blockly.Python.forBlock['iot_onenet_disconnect'] = function(block) {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   Blockly.Python.definitions_['import_onenet'] = "import onenet"; 
   var code=v + '.do_disconnect()\n';  
   return code;
 };
 
-Blockly.Python.iot_onenet_publish_dict = function(block) {
+Blockly.Python.forBlock['iot_onenet_publish_dict'] = function(block) {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var d = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ATOMIC) ;
   var check = this.getFieldValue("is_print") == 'TRUE' ? 'True' : 'False';
@@ -40,14 +40,14 @@ Blockly.Python.iot_onenet_publish_dict = function(block) {
   return code;
 };
 
-Blockly.Python.iot_onenet_check = function(block) {
+Blockly.Python.forBlock['iot_onenet_check'] = function(block) {
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ; 
   Blockly.Python.definitions_['import_onenet'] = "import onenet"; 
   var code=v + '.check_msg()\n';  
   return code;
 };
 
-Blockly.Python.iot_onenet_publish = function() {
+Blockly.Python.forBlock['iot_onenet_publish'] = function() {
   // Create a list with any number of elements of any type.
   
   //var size=window.parseFloat(this.getFieldValue('SIZE'));
@@ -78,7 +78,7 @@ Blockly.Python.iot_onenet_publish = function() {
   return code;
 };
 
-Blockly.Python.iot_mixio_connect = function(block) {
+Blockly.Python.forBlock['iot_mixio_connect'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   Blockly.Python.definitions_['import_machine'] = "import machine";
   Blockly.Python.definitions_['import_ubinascii_hexlify'] = "from ubinascii import hexlify";
@@ -92,7 +92,7 @@ Blockly.Python.iot_mixio_connect = function(block) {
   return code;
 };
 
-Blockly.Python.IOT_MIXIO_PUBLISH = function(block) {
+Blockly.Python.forBlock['IOT_MIXIO_PUBLISH'] = function(block) {
   var topic = Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC);
   var msg = Blockly.Python.valueToCode(this, 'MSG', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
@@ -100,7 +100,7 @@ Blockly.Python.IOT_MIXIO_PUBLISH = function(block) {
   return code;
 };
 
-Blockly.Python.IOT_MIXIO_SUBSCRIBE = function (block) {
+Blockly.Python.forBlock['IOT_MIXIO_SUBSCRIBE'] = function (block) {
     var topic = Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC);
     var method = Blockly.Python.valueToCode(this, 'METHOD', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
@@ -109,42 +109,42 @@ Blockly.Python.IOT_MIXIO_SUBSCRIBE = function (block) {
     return code;
 };
 
-Blockly.Python.iot_mixio_disconnect = function(block) {
+Blockly.Python.forBlock['iot_mixio_disconnect'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code= 'mqtt_client.disconnect(MQTT_USR_PRJ)\n';  
   return code;
 };
 
-Blockly.Python.iot_mixio_connect_only = function(block) {
+Blockly.Python.forBlock['iot_mixio_connect_only'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code= 'mqtt_client.connect()\n';  
   return code;
 };
 
-Blockly.Python.iot_mixio_check = function(block) {
+Blockly.Python.forBlock['iot_mixio_check'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code='mqtt_client.check_msg()\n';  
   return code;
 };
 
-Blockly.Python.iot_mixio_format_topic = function(block) {
+Blockly.Python.forBlock['iot_mixio_format_topic'] = function(block) {
   var code='mqtt_client.decode("utf-8").split("/")[-1]';  
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.iot_mixio_format_msg = function(block) {
+Blockly.Python.forBlock['iot_mixio_format_msg'] = function(block) {
   var code='mqtt_client.decode("utf-8")';  
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.IOT_FORMATTING = function(block) {
+Blockly.Python.forBlock['IOT_FORMATTING'] = function(block) {
   Blockly.Python.definitions_['import_mixpy'] = "import mixpy"; 
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
   var code = 'mixpy.format_content('+ v +', mqtt_client.client_id)';  
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.IOT_FORMAT_STRING = function(block) {
+Blockly.Python.forBlock['IOT_FORMAT_STRING'] = function(block) {
   Blockly.Python.definitions_['import_mixpy'] = "import mixpy"; 
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
   var code = 'mixpy.format_str('+ v +')';  
@@ -152,7 +152,7 @@ Blockly.Python.IOT_FORMAT_STRING = function(block) {
 };
 
 
-Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function(block) {
+Blockly.Python.forBlock['IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE'] = function(block) {
   var server = Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC);
   var port = '1883';
   var share_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
@@ -170,13 +170,13 @@ Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function(block) {
   return code;
 };
 
-Blockly.Python.iot_mixly_key = function() {
+Blockly.Python.forBlock['iot_mixly_key'] = function() {
   var code =  this.getFieldValue('VISITOR_ID') ;
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 
-Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = function(block) {
+Blockly.Python.forBlock['IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   Blockly.Python.definitions_['import_machine'] = "import machine";
   Blockly.Python.definitions_['import_ubinascii_hexlify'] = "from ubinascii import hexlify";
@@ -193,25 +193,25 @@ Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = function(block) {
   return code;
 };
 
-Blockly.Python.IOT_EMQX_PING = function(block) {
+Blockly.Python.forBlock['IOT_EMQX_PING'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code ='mqtt_client.pingSync()';  
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.IOT_MIXIO_NTP = function(block) {
+Blockly.Python.forBlock['IOT_MIXIO_NTP'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var code ='mixiot.ntp(' + addr + ')';  
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.iot_client_onboard = function(){    
+Blockly.Python.forBlock['iot_client_onboard'] = function(){    
     var code = 'mqtt_client';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.iot_http_client = function(block) {
+Blockly.Python.forBlock['iot_http_client'] = function(block) {
   Blockly.Python.definitions_['import_debugnet'] = "import debugnet"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key');
@@ -219,14 +219,14 @@ Blockly.Python.iot_http_client = function(block) {
   return code;
 };
 
-Blockly.Python.iot_http_data = function(){
+Blockly.Python.forBlock['iot_http_data'] = function(){
     Blockly.Python.definitions_['import_debugnet'] = "import debugnet"; 
     var key = this.getFieldValue('key');
     var code='HTTP_client.'+key;    
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.iot_mqtt_client = function(block) {
+Blockly.Python.forBlock['iot_mqtt_client'] = function(block) {
   Blockly.Python.definitions_['import_debugnet'] = "import debugnet"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var key = this.getFieldValue('key2');
@@ -235,7 +235,7 @@ Blockly.Python.iot_mqtt_client = function(block) {
   return code;
 };
 
-Blockly.Python.iot_mqtt_data = function(){
+Blockly.Python.forBlock['iot_mqtt_data'] = function(){
     Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
     var key = this.getFieldValue('key');
     var code='mqtt_client.'+key;   

@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.loops');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.base_setup = function () {
+Blockly.Python.forBlock['base_setup'] = function () {
     var branch = Blockly.Python.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "").replace(/\n    /g, '\n');//去除两端空格
     if (branch) {
@@ -19,7 +19,7 @@ Blockly.Python.base_setup = function () {
 };
 
 //ok
-Blockly.Python.controls_if = function (a) {
+Blockly.Python.forBlock['controls_if'] = function (a) {
     var b = 0,
     c = "",
     d,
@@ -32,7 +32,7 @@ Blockly.Python.controls_if = function (a) {
 };
 
 //ok
-Blockly.Python.controls_for = function (a) {
+Blockly.Python.forBlock['controls_for'] = function (a) {
     var b = Blockly.Python.variableDB_.getName(a.getFieldValue("VAR"), Blockly.Variables.NAME_TYPE),
     //var b = Blockly.Python.valueToCode(a, "VAR", Blockly.Python.ORDER_MEMBER) || "''",
     c = Blockly.Python.valueToCode(a, "FROM", Blockly.Python.ORDER_NONE) || "0",
@@ -79,7 +79,7 @@ Blockly.Python.controls_for = function (a) {
 Blockly.Python.controls_repeat = Blockly.Python.controls_repeat_ext;
 
 
-Blockly.Python.controls_whileUntil = function (a) {
+Blockly.Python.forBlock['controls_whileUntil'] = function (a) {
     var b = "UNTIL" == a.getFieldValue("MODE"),
     c = Blockly.Python.valueToCode(a, "BOOL", b ? Blockly.Python.ORDER_LOGICAL_NOT : Blockly.Python.ORDER_NONE) || "False",
     d = Blockly.Python.statementToCode(a, "DO"),
@@ -89,7 +89,7 @@ Blockly.Python.controls_whileUntil = function (a) {
 };
 
 //ok
-Blockly.Python.controls_flow_statements = function (a) {
+Blockly.Python.forBlock['controls_flow_statements'] = function (a) {
     switch (a.getFieldValue("FLOW")) {
     case "BREAK":
         return "break\n";
@@ -117,13 +117,13 @@ Blockly.Python['controls_forEach'] = function(block) {
 };
 
 //ok
-Blockly.Python.controls_type = function () {
+Blockly.Python.forBlock['controls_type'] = function () {
     var data = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ATOMIC) || '1000'
     var code = 'type(' + data + ')';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.controls_typeLists = function(){
+Blockly.Python.forBlock['controls_typeLists'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var type = this.getFieldValue('type');
     // Blockly.Python.definitions_['func_type' + type] = code;

@@ -1,4 +1,4 @@
-.setFontSize {
+/*.setFontSize {
 	position: absolute;
 	right: 20px;
 	background-image: url('../media/sprites.png');
@@ -21,7 +21,7 @@
 #content_blocks > div > div {
     padding-top: 0px;
     padding-bottom: 0px;
-}
+}*/
 
 
 /*Blocks*/
@@ -133,12 +133,11 @@ text.blocklyText {
     /* font-family: 'SourceHanSansCN-Regular', 'Arial', 'SimHei'; */
 }
 
-.blocklyWidgetDiv .goog-menuitem-content {
+/*.blocklyWidgetDiv .goog-menuitem-content {
     color: #000;
     font: normal 13px Arial, sans-serif;
-    /* font-family: 'SourceHanSansCN-Regular', 'Arial', 'SimHei'; */
     margin: 0 0 0 0;
-}
+}*/
 
 /* @font-face {
     font-family: 'SourceHanSansCN-Regular';

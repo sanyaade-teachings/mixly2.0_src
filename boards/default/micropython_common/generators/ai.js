@@ -6,7 +6,7 @@ goog.require('Blockly.Python');
 
 
 
-Blockly.Python.MICROPYTHON_AI_client = function(){
+Blockly.Python.forBlock['MICROPYTHON_AI_client'] = function(){
     var ctype = this.getFieldValue('CTYPE');
     Blockly.Python.definitions_['import_baidu_speech'] = 'import baidu_speech';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -22,7 +22,7 @@ Blockly.Python.MICROPYTHON_AI_client = function(){
     return code;
 };
 
-Blockly.Python.MICROPYTHON_AI_Speech_unit = function(){
+Blockly.Python.forBlock['MICROPYTHON_AI_Speech_unit'] = function(){
     Blockly.Python.definitions_['import_baidu_speech'] = 'import baidu_speech';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var id = Blockly.Python.valueToCode(this, 'ID', Blockly.Python.ORDER_ATOMIC);
@@ -31,7 +31,7 @@ Blockly.Python.MICROPYTHON_AI_Speech_unit = function(){
     return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.MICROPYTHON_AI_Speech_asr = function(){
+Blockly.Python.forBlock['MICROPYTHON_AI_Speech_asr'] = function(){
     var language = this.getFieldValue('LANGUAGE');
     Blockly.Python.definitions_['import_baidu_speech'] = 'import baidu_speech';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);

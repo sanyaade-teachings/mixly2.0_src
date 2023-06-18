@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.procedures');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.procedures_defreturn = function() {
+Blockly.Python.forBlock['procedures_defreturn'] = function() {
   // Define a procedure with a return value.
   var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
@@ -34,7 +34,7 @@ Blockly.Python.procedures_defreturn = function() {
 
 Blockly.Python.procedures_defnoreturn = Blockly.Python.procedures_defreturn;
 
-Blockly.Python.procedures_callreturn = function() {
+Blockly.Python.forBlock['procedures_callreturn'] = function() {
   // Call a procedure with a return value.
   var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
@@ -47,7 +47,7 @@ Blockly.Python.procedures_callreturn = function() {
   return [code, Blockly.Python.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Python.procedures_callnoreturn = function() {
+Blockly.Python.forBlock['procedures_callnoreturn'] = function() {
   // Call a procedure with no return value.
   var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
@@ -60,7 +60,7 @@ Blockly.Python.procedures_callnoreturn = function() {
   return code;
 };
 
-Blockly.Python.procedures_ifreturn = function() {
+Blockly.Python.forBlock['procedures_ifreturn'] = function() {
   // Conditionally return value from a procedure.
   var condition = Blockly.Python.valueToCode(this, 'CONDITION',
       Blockly.Python.ORDER_NONE) || 'False';
@@ -76,7 +76,7 @@ Blockly.Python.procedures_ifreturn = function() {
   return code;
 };
 
-Blockly.Python.procedures_return = function() {
+Blockly.Python.forBlock['procedures_return'] = function() {
   // Conditionally return value from a procedure.
   var code=""
   if (this.hasReturnValue_) {

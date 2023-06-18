@@ -4,7 +4,7 @@ goog.provide('Blockly.Arduino.logic');
 
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.logic_compare = function () {
+Blockly.Arduino.forBlock['logic_compare'] = function () {
     // Comparison operator.
     var mode = this.getFieldValue('OP');
     var operator = Blockly.Arduino.logic_compare.OPERATORS[mode];
@@ -16,7 +16,7 @@ Blockly.Arduino.logic_compare = function () {
     return [code, order];
 };
 
-Blockly.Arduino.logic_compare.OPERATORS = {
+Blockly.Arduino.forBlock['logic_compare'].OPERATORS = {
     EQ: '==',
     NEQ: '!=',
     LT: '<',
@@ -25,7 +25,7 @@ Blockly.Arduino.logic_compare.OPERATORS = {
     GTE: '>='
 };
 
-Blockly.Arduino.logic_operation = function () {
+Blockly.Arduino.forBlock['logic_operation'] = function () {
     // Operations 'and', 'or'.
     var operator = (this.getFieldValue('OP') == 'AND') ? '&&' : '||';
     var order = (operator == '&&') ? Blockly.Arduino.ORDER_LOGICAL_AND :
@@ -36,7 +36,7 @@ Blockly.Arduino.logic_operation = function () {
     return [code, order];
 };
 
-Blockly.Arduino.logic_negate = function () {
+Blockly.Arduino.forBlock['logic_negate'] = function () {
     // Negation.
     var order = Blockly.Arduino.ORDER_UNARY_PREFIX;
     var argument0 = Blockly.Arduino.valueToCode(this, 'BOOL', order) || 'false';
@@ -44,18 +44,18 @@ Blockly.Arduino.logic_negate = function () {
     return [code, order];
 };
 
-Blockly.Arduino.logic_boolean = function () {
+Blockly.Arduino.forBlock['logic_boolean'] = function () {
     // Boolean values true and false.
     var code = (this.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.logic_null = function () {
+Blockly.Arduino.forBlock['logic_null'] = function () {
     var code = 'NULL';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.logic_true_or_false = function () {
+Blockly.Arduino.forBlock['logic_true_or_false'] = function () {
     var a = Blockly.Arduino.valueToCode(this, 'A', Blockly.Arduino.ORDER_ATOMIC) || 'false';
     var b = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_ATOMIC) || 'false';
     var c = Blockly.Arduino.valueToCode(this, 'C', Blockly.Arduino.ORDER_ATOMIC) || 'false';

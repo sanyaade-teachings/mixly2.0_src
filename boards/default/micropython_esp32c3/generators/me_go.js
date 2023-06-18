@@ -4,13 +4,13 @@ goog.provide('Blockly.Python.me_go');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.me_go_light_number = function () {
+Blockly.Python.forBlock['me_go_light_number'] = function () {
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var code = 'car.' + this.getFieldValue('op');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.me_go_led_bright = function() {
+Blockly.Python.forBlock['me_go_led_bright'] = function() {
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var bright = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
@@ -18,21 +18,21 @@ Blockly.Python.me_go_led_bright = function() {
     return code;
 };
 
-Blockly.Python.me_go_get_led_bright = function() {
+Blockly.Python.forBlock['me_go_get_led_bright'] = function() {
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var code = "car.getrightness(" +op +")";
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.me_go_get_led_state = function() {
+Blockly.Python.forBlock['me_go_get_led_state'] = function() {
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var code = "car.getonoff(" +op +")";
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.me_go_led_brightness = function() {
+Blockly.Python.forBlock['me_go_led_brightness'] = function() {
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var flag = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
@@ -68,7 +68,7 @@ Blockly.Python.me_go_dc_motor=function(){
     return code;
 };
 
-Blockly.Python.me_go_hall_attachInterrupt = function () {
+Blockly.Python.forBlock['me_go_hall_attachInterrupt'] = function () {
     var dropdown_mode = this.getFieldValue('mode');
     Blockly.Python.definitions_['import_me_go_hall_'+dropdown_mode] = 'from me_go import hall_'+dropdown_mode;
     
@@ -77,7 +77,7 @@ Blockly.Python.me_go_hall_attachInterrupt = function () {
     return code;
 };
 
-Blockly.Python.me_go_hall_initialize = function () {
+Blockly.Python.forBlock['me_go_hall_initialize'] = function () {
     var dropdown_mode = this.getFieldValue('mode');
     var args = this.getFieldValue('args');
     Blockly.Python.definitions_['import_me_go_hall_'+dropdown_mode] = 'from me_go import hall_'+dropdown_mode;
@@ -92,7 +92,7 @@ Blockly.Python.me_go_hall_initialize = function () {
     }
 };
 
-Blockly.Python.me_go_hall_data = function() {
+Blockly.Python.forBlock['me_go_hall_data'] = function() {
     var dropdown_mode = this.getFieldValue('mode');
     var args = this.getFieldValue('args');
     Blockly.Python.definitions_['import_me_go_hall_'+dropdown_mode] = 'from me_go import hall_'+dropdown_mode;
@@ -100,21 +100,21 @@ Blockly.Python.me_go_hall_data = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.me_go_pin_near_line = function(){
+Blockly.Python.forBlock['me_go_pin_near_line'] = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
     var code = 'car.patrol()'+key+'';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.me_go_pin_near = function(){
+Blockly.Python.forBlock['me_go_pin_near'] = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
     var code = 'car.obstacle()'+key+'';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.me_go_pin_near_state_change = function(){
+Blockly.Python.forBlock['me_go_pin_near_state_change'] = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
     
@@ -131,7 +131,7 @@ Blockly.Python.sensor_mixgome_eulerangles=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.me_go_pin_light = function(){
+Blockly.Python.forBlock['me_go_pin_light'] = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
     var code = 'car.light()'+key+'';

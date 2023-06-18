@@ -21,7 +21,7 @@ Blockly.Python.esp32_music_get_tempo=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.esp32_onboard_music_pitch = function(block) {
+Blockly.Python.forBlock['esp32_onboard_music_pitch'] = function(block) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
@@ -30,7 +30,7 @@ Blockly.Python.esp32_onboard_music_pitch = function(block) {
   return code;
 };
 
-Blockly.Python.esp32_onboard_music_pitch_with_time = function(block) {
+Blockly.Python.forBlock['esp32_onboard_music_pitch_with_time'] = function(block) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
@@ -40,7 +40,7 @@ Blockly.Python.esp32_onboard_music_pitch_with_time = function(block) {
   return code;
 };
 
-Blockly.Python.esp32_onboard_music_stop = function(block) {
+Blockly.Python.forBlock['esp32_onboard_music_stop'] = function(block) {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
@@ -65,17 +65,17 @@ Blockly.Python.esp32_music_reset=function(){
     return "onboard_music.reset()\n";
 };
 
-Blockly.Python.number = function () {
+Blockly.Python.forBlock['number'] = function () {
     var code = this.getFieldValue('op');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.ledswitch = function () {
+Blockly.Python.forBlock['ledswitch'] = function () {
     var code = this.getFieldValue('flag');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.actuator_led_bright = function() {
+Blockly.Python.forBlock['actuator_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'] = 'from '+version+' import onboard_led';
@@ -84,7 +84,7 @@ Blockly.Python.actuator_led_bright = function() {
     return code;
 };
 
-Blockly.Python.actuator_get_led_bright = function() {
+Blockly.Python.forBlock['actuator_get_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'] = 'from '+version+' import onboard_led';
@@ -92,7 +92,7 @@ Blockly.Python.actuator_get_led_bright = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.actuator_get_led_state = function() {
+Blockly.Python.forBlock['actuator_get_led_state'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'] = 'from '+version+' import onboard_led';
@@ -100,7 +100,7 @@ Blockly.Python.actuator_get_led_state = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.actuator_led_brightness = function() {
+Blockly.Python.forBlock['actuator_led_brightness'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'] = 'from '+version+' import onboard_led';
@@ -109,12 +109,12 @@ Blockly.Python.actuator_led_brightness = function() {
     return code;
 };
 
-Blockly.Python.cc_number = function () {
+Blockly.Python.forBlock['cc_number'] = function () {
     var code = this.getFieldValue('op');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.mixgo_cc_actuator_led_bright = function() {
+Blockly.Python.forBlock['mixgo_cc_actuator_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
@@ -123,7 +123,7 @@ Blockly.Python.mixgo_cc_actuator_led_bright = function() {
     return code;
 };
 
-Blockly.Python.mixgo_cc_actuator_get_led_bright = function() {
+Blockly.Python.forBlock['mixgo_cc_actuator_get_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
@@ -131,7 +131,7 @@ Blockly.Python.mixgo_cc_actuator_get_led_bright = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.mixgo_cc_actuator_get_led_state = function() {
+Blockly.Python.forBlock['mixgo_cc_actuator_get_led_state'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
@@ -139,7 +139,7 @@ Blockly.Python.mixgo_cc_actuator_get_led_state = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.mixgo_cc_actuator_led_brightness = function() {
+Blockly.Python.forBlock['mixgo_cc_actuator_led_brightness'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
@@ -149,7 +149,7 @@ Blockly.Python.mixgo_cc_actuator_led_brightness = function() {
 };
 
 
-Blockly.Python.mixgo_actuator_led_bright = function() {
+Blockly.Python.forBlock['mixgo_actuator_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
@@ -158,7 +158,7 @@ Blockly.Python.mixgo_actuator_led_bright = function() {
     return code;
 };
 
-Blockly.Python.mixgo_actuator_get_led_bright = function() {
+Blockly.Python.forBlock['mixgo_actuator_get_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
@@ -166,7 +166,7 @@ Blockly.Python.mixgo_actuator_get_led_bright = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.mixgo_actuator_get_led_state = function() {
+Blockly.Python.forBlock['mixgo_actuator_get_led_state'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
@@ -174,7 +174,7 @@ Blockly.Python.mixgo_actuator_get_led_state = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.mixgo_actuator_led_brightness = function() {    
+Blockly.Python.forBlock['mixgo_actuator_led_brightness'] = function() {    
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this,'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_'+version+'_onboard_led'+op] = 'from '+version+' import led'+op;
@@ -183,7 +183,7 @@ Blockly.Python.mixgo_actuator_led_brightness = function() {
     return code;
 };
 
-Blockly.Python.rm_actuator_led_bright = function() {
+Blockly.Python.forBlock['rm_actuator_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     var op = this.getFieldValue('color');
@@ -193,7 +193,7 @@ Blockly.Python.rm_actuator_led_bright = function() {
     return code;
 };
 
-Blockly.Python.rm_actuator_get_led_bright = function() {
+Blockly.Python.forBlock['rm_actuator_get_led_bright'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     var op = this.getFieldValue('color');
@@ -202,7 +202,7 @@ Blockly.Python.rm_actuator_get_led_bright = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.rm_actuator_get_led_state = function() {
+Blockly.Python.forBlock['rm_actuator_get_led_state'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     var op = this.getFieldValue('color');
@@ -211,7 +211,7 @@ Blockly.Python.rm_actuator_get_led_state = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.rm_actuator_led_brightness = function() {
+Blockly.Python.forBlock['rm_actuator_led_brightness'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     var op = this.getFieldValue('color');
@@ -252,7 +252,7 @@ Blockly.Python.actuator_onboard_neopixel_rgb_all=function(){
   return code;
 };
 
-Blockly.Python.actuator_onboard_neopixel_rgb_show_all_chase = function(){
+Blockly.Python.forBlock['actuator_onboard_neopixel_rgb_show_all_chase'] = function(){
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_rgb'] = 'from '+version+' import onboard_rgb';
@@ -264,7 +264,7 @@ Blockly.Python.actuator_onboard_neopixel_rgb_show_all_chase = function(){
   return code;
 };
 
-Blockly.Python.actuator_onboard_neopixel_rgb_show_all_rainbow = function(){
+Blockly.Python.forBlock['actuator_onboard_neopixel_rgb_show_all_rainbow'] = function(){
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_onboard_rgb'] = 'from '+version+' import onboard_rgb';
@@ -319,7 +319,7 @@ Blockly.Python.actuator_dc_motor_stop=function(){
 
 //mixbot onboard_motor below:
 
-Blockly.Python.mixbot_motor_status = function(){
+Blockly.Python.forBlock['mixbot_motor_status'] = function(){
     Blockly.Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     var code =  'motor.status()';
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -355,7 +355,7 @@ Blockly.Python.mixbot_motor=function(){
     return code;
 };
 
-Blockly.Python.actuator_mixbot_buzzer_on_off = function () {var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+Blockly.Python.forBlock['actuator_mixbot_buzzer_on_off'] = function () {var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_spk_en'] = 'from '+version+' import spk_en';
     var op = this.getFieldValue('on_off');

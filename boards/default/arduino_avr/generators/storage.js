@@ -6,7 +6,7 @@ goog.require('Blockly.Arduino');
 
 goog.require('Mixly.JSFuncs');
 var pin_cs;
-Blockly.Arduino.store_sd_init = function () {
+Blockly.Arduino.forBlock['store_sd_init'] = function () {
     var board_type = Mixly.JSFuncs.getPlatform();
     pin_cs = Blockly.Arduino.valueToCode(this, 'PIN_CS', Blockly.Arduino.ORDER_ATOMIC);
     if (board_type.match(RegExp(/ESP32/))) {
@@ -21,7 +21,7 @@ Blockly.Arduino.store_sd_init = function () {
     return code;
 };
 
-Blockly.Arduino.store_sd_write = function () {
+Blockly.Arduino.forBlock['store_sd_write'] = function () {
     var file = Blockly.Arduino.valueToCode(this, 'FILE', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
     //file=file.replace(/String/,"");
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
@@ -39,14 +39,14 @@ Blockly.Arduino.store_sd_write = function () {
     return code;
 }
 
-Blockly.Arduino.sd_card_type = function () {
+Blockly.Arduino.forBlock['sd_card_type'] = function () {
     Blockly.Arduino.definitions_['var_declare_Sd2Card_card'] = 'Sd2Card card;';
     Blockly.Arduino.setups_['setup_card_init'] = 'card.init(SPI_HALF_SPEED, ' + pin_cs + ');';
     var code = 'card.type()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sd_card_root_files = function () {
+Blockly.Arduino.forBlock['sd_card_root_files'] = function () {
     Blockly.Arduino.definitions_['var_declare_Sd2Card_card'] = 'Sd2Card card;';
     Blockly.Arduino.definitions_['var_declare_SdFile'] = 'SdFile root;';
     Blockly.Arduino.definitions_['var_declare_SdVolume'] = 'SdVolume volume;';
@@ -56,7 +56,7 @@ Blockly.Arduino.sd_card_root_files = function () {
     return code;
 };
 
-Blockly.Arduino.sd_volume = function () {
+Blockly.Arduino.forBlock['sd_volume'] = function () {
     Blockly.Arduino.definitions_['var_declare_Sd2Card_card'] = 'Sd2Card card;';
     Blockly.Arduino.setups_['setup_card_init'] = 'card.init(SPI_HALF_SPEED, ' + pin_cs + ');';
     Blockly.Arduino.definitions_['var_declare_SdVolume'] = 'SdVolume volume;';
@@ -66,13 +66,13 @@ Blockly.Arduino.sd_volume = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sd_exist = function () {
+Blockly.Arduino.forBlock['sd_exist'] = function () {
     var text_FileName = Blockly.Arduino.valueToCode(this, 'FileName', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'SD.exists(' + text_FileName + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sd_read = function () {
+Blockly.Arduino.forBlock['sd_read'] = function () {
     var text_FileName = Blockly.Arduino.valueToCode(this, 'FileName', Blockly.Arduino.ORDER_ATOMIC);
     const serial_select = 'Serial';
     var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || profile.default.serial;
@@ -89,13 +89,13 @@ Blockly.Arduino.sd_read = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sd_DelFile = function () {
+Blockly.Arduino.forBlock['sd_DelFile'] = function () {
     var text_FileName = Blockly.Arduino.valueToCode(this, 'FileName', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'SD.remove(' + text_FileName + ');';
     return code;
 };
 
-Blockly.Arduino.store_eeprom_write_long = function () {
+Blockly.Arduino.forBlock['store_eeprom_write_long'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
@@ -118,7 +118,7 @@ Blockly.Arduino.store_eeprom_write_long = function () {
     return 'eepromWriteLong(' + address + ', ' + data + ');\n';
 }
 
-Blockly.Arduino.store_eeprom_read_long = function () {
+Blockly.Arduino.forBlock['store_eeprom_read_long'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     var code = 'eepromReadLong(' + address + ')';
@@ -139,28 +139,28 @@ Blockly.Arduino.store_eeprom_read_long = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.store_eeprom_write_byte = function () {
+Blockly.Arduino.forBlock['store_eeprom_write_byte'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     return 'EEPROM.write(' + address + ', ' + data + ');\n';
 }
 
-Blockly.Arduino.store_eeprom_read_byte = function () {
+Blockly.Arduino.forBlock['store_eeprom_read_byte'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     var code = 'EEPROM.read(' + address + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.store_eeprom_put = function () {
+Blockly.Arduino.forBlock['store_eeprom_put'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     return 'EEPROM.put(' + address + ', ' + data + ');\n';
 }
 
-Blockly.Arduino.store_eeprom_get = function () {
+Blockly.Arduino.forBlock['store_eeprom_get'] = function () {
     var address = Blockly.Arduino.valueToCode(this, 'ADDRESS', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
     Blockly.Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
@@ -168,7 +168,7 @@ Blockly.Arduino.store_eeprom_get = function () {
 }
 
 //ESP32简化SPIFFS
-Blockly.Arduino.simple_spiffs_store_spiffs_write = function () {
+Blockly.Arduino.forBlock['simple_spiffs_store_spiffs_write'] = function () {
     var MODE= this.getFieldValue('MODE');
     var file = Blockly.Arduino.valueToCode(this, 'FILE', Blockly.Arduino.ORDER_ATOMIC) || '\"\"';
     //file=file.replace(/String/,"");
@@ -223,7 +223,7 @@ Blockly.Arduino.simple_spiffs_store_spiffs_write = function () {
     return code;
 }
 
-Blockly.Arduino.simple_spiffs_read = function () {
+Blockly.Arduino.forBlock['simple_spiffs_read'] = function () {
     var text_FileName = Blockly.Arduino.valueToCode(this, 'FileName', Blockly.Arduino.ORDER_ATOMIC);
     const serial_select = 'Serial';
     var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || profile.default.serial;
@@ -253,7 +253,7 @@ Blockly.Arduino.simple_spiffs_read = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.simple_spiffs_DelFile = function () {
+Blockly.Arduino.forBlock['simple_spiffs_DelFile'] = function () {
     Blockly.Arduino.definitions_['include_ESP_FS'] = '#include "FS.h"';
     Blockly.Arduino.definitions_['include_ESP_SPIFFS'] = '#include "SPIFFS.h"';
     Blockly.Arduino.definitions_['var_simple_spiffs_DelFile'] = 'void deleteFile(fs::FS &fs, const char * path) {\n'

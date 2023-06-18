@@ -44,15 +44,19 @@ Msg.getLang = (str) => {
 
 Msg.changeTo = (lang) => {
     Mixly.Msg.Lang = Msg.LANG[lang ?? 'zh-hans'];
+    let newMsg;
     switch (lang) {
     case 'zh-hant':
-        Blockly.Msg = ZhHant;
+        newMsg = ZhHant;
         break;
     case 'en':
-        Blockly.Msg = En;
+        newMsg = En;
         break;
     default:
-        Blockly.Msg = ZhHans;
+        newMsg = ZhHans;
+    }
+    for (let key in newMsg) {
+        Blockly.Msg[key] = newMsg[key];
     }
 }
 

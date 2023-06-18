@@ -724,7 +724,7 @@ Blockly.Blocks['isCirculationRight'] = {
         this.setHelpUrl('');
       }
     };
-    Blockly.Python[blockName] = function () {
+    Blockly.Python.forBlock['blockName]'] = function () {
       var code = '';
       return code;
     };

@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.sklearn');
 goog.require('Blockly.Python');
 
-Blockly.Python.sklearn_make_classification = function() {
+Blockly.Python.forBlock['sklearn_make_classification'] = function() {
   var value_n_samples = Blockly.Python.valueToCode(this, 'n_samples', Blockly.Python.ORDER_ATOMIC) || '100';
   var value_n_features = Blockly.Python.valueToCode(this, 'n_features', Blockly.Python.ORDER_ATOMIC) || '20';
   var value_n_informative = Blockly.Python.valueToCode(this, 'n_informative', Blockly.Python.ORDER_ATOMIC) || '2';
@@ -18,7 +18,7 @@ Blockly.Python.sklearn_make_classification = function() {
 };
 
 //sklearn 生成回归样本
-Blockly.Python.sklearn_make_regression = function() {
+Blockly.Python.forBlock['sklearn_make_regression'] = function() {
   var value_n_samples = Blockly.Python.valueToCode(this, 'n_samples', Blockly.Python.ORDER_ATOMIC) || '100';
   var value_n_features = Blockly.Python.valueToCode(this, 'n_features', Blockly.Python.ORDER_ATOMIC) || '100';
   var value_n_informative = Blockly.Python.valueToCode(this, 'n_informative', Blockly.Python.ORDER_ATOMIC) || '10';
@@ -32,7 +32,7 @@ Blockly.Python.sklearn_make_regression = function() {
 };
 
 //sklearn 生成聚类样本
-Blockly.Python.sklearn_make_blobs = function() {
+Blockly.Python.forBlock['sklearn_make_blobs'] = function() {
   var value_n_samples = Blockly.Python.valueToCode(this, 'n_samples', Blockly.Python.ORDER_ATOMIC) || '100';
   var value_n_features = Blockly.Python.valueToCode(this, 'n_features', Blockly.Python.ORDER_ATOMIC) || '2';
   var value_centers = Blockly.Python.valueToCode(this, 'centers', Blockly.Python.ORDER_ATOMIC) || 'None';
@@ -46,7 +46,7 @@ Blockly.Python.sklearn_make_blobs = function() {
 };
 
 //sklearn 加载数据集
-Blockly.Python.sklearn_load = function() {
+Blockly.Python.forBlock['sklearn_load'] = function() {
   var dropdown_type = this.getFieldValue('type');
   var text_name = this.getFieldValue('name');
   Blockly.Python.definitions_['import_sklearn_datasets'] = 'from sklearn import datasets';
@@ -55,7 +55,7 @@ Blockly.Python.sklearn_load = function() {
 };
 
 //sklearn 获取特征值/标签值/标签/特征
-Blockly.Python.sklearn_data_target = function() {
+Blockly.Python.forBlock['sklearn_data_target'] = function() {
   var value_name = Blockly.Python.valueToCode(this, 'name', Blockly.Python.ORDER_ATOMIC) || 'iris';
   var dropdown_type = this.getFieldValue('type');
   var code = value_name+'.'+dropdown_type;
@@ -63,7 +63,7 @@ Blockly.Python.sklearn_data_target = function() {
 };
 
 //sklearn 数据集分割
-Blockly.Python.sklearn_train_test_split = function() {
+Blockly.Python.forBlock['sklearn_train_test_split'] = function() {
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'iris_X';
   var value_train_target = Blockly.Python.valueToCode(this, 'train_target', Blockly.Python.ORDER_ATOMIC) || 'iris_y';
   var value_test_size = Blockly.Python.valueToCode(this, 'test_size', Blockly.Python.ORDER_ATOMIC) || '0.3';
@@ -77,7 +77,7 @@ Blockly.Python.sklearn_train_test_split = function() {
 };
 
 //sklearn 数据集分割-无标签值
-Blockly.Python.sklearn_train_test_split_no_target = function() {
+Blockly.Python.forBlock['sklearn_train_test_split_no_target'] = function() {
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'iris_X';
   var value_test_size = Blockly.Python.valueToCode(this, 'test_size', Blockly.Python.ORDER_ATOMIC) || '0.3';
   var value_rondom_state = Blockly.Python.valueToCode(this, 'rondom_state', Blockly.Python.ORDER_ATOMIC) || 'None';
@@ -87,7 +87,7 @@ Blockly.Python.sklearn_train_test_split_no_target = function() {
 };
 
 //sklearn 初始化线性回归
-Blockly.Python.sklearn_LinearRegression = function() {
+Blockly.Python.forBlock['sklearn_LinearRegression'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_fit_intercept = Blockly.Python.valueToCode(this, 'fit_intercept', Blockly.Python.ORDER_ATOMIC) || 'True';
   var value_normalize = Blockly.Python.valueToCode(this, 'normalize', Blockly.Python.ORDER_ATOMIC) || 'False';
@@ -98,7 +98,7 @@ Blockly.Python.sklearn_LinearRegression = function() {
 };
 
 //sklearn 初始化岭回归
-Blockly.Python.sklearn_Ridge = function() {
+Blockly.Python.forBlock['sklearn_Ridge'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_alpha = Blockly.Python.valueToCode(this, 'alpha', Blockly.Python.ORDER_ATOMIC) || '1.0';
   var value_fit_intercept = Blockly.Python.valueToCode(this, 'fit_intercept', Blockly.Python.ORDER_ATOMIC) || 'True';
@@ -111,7 +111,7 @@ Blockly.Python.sklearn_Ridge = function() {
 };
 
 //sklearn 初始化决策树 分类/回归算法
-Blockly.Python.sklearn_DecisionTreeClassifier_Regressor = function() {
+Blockly.Python.forBlock['sklearn_DecisionTreeClassifier_Regressor'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var dropdown_type = this.getFieldValue('type');
   var value_max_depth = Blockly.Python.valueToCode(this, 'max_depth', Blockly.Python.ORDER_ATOMIC) || 'None';
@@ -121,7 +121,7 @@ Blockly.Python.sklearn_DecisionTreeClassifier_Regressor = function() {
   return code;
 };
 
-Blockly.Python.sklearn_RandomForestClassifier_Regressor = function() {
+Blockly.Python.forBlock['sklearn_RandomForestClassifier_Regressor'] = function() {
   var dropdown_type = this.getFieldValue('type');
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'Model';
   var value_n_estimators = Blockly.Python.valueToCode(this, 'n_estimators', Blockly.Python.ORDER_ATOMIC) || '100';
@@ -134,7 +134,7 @@ Blockly.Python.sklearn_RandomForestClassifier_Regressor = function() {
 };
 
 //sklearn 初始化K近邻 分类/回归算法
-Blockly.Python.sklearn_KNeighborsClassifier_Regressor = function() {
+Blockly.Python.forBlock['sklearn_KNeighborsClassifier_Regressor'] = function() {
   var dropdown_type = this.getFieldValue('type');
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_K = Blockly.Python.valueToCode(this, 'K', Blockly.Python.ORDER_ATOMIC) || '5';
@@ -145,7 +145,7 @@ Blockly.Python.sklearn_KNeighborsClassifier_Regressor = function() {
 };
 
 //sklearn 初始化高斯贝叶斯分类算法
-Blockly.Python.sklearn_GaussianNB = function() {
+Blockly.Python.forBlock['sklearn_GaussianNB'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   Blockly.Python.definitions_['import_sklearn_GaussianNB'] = 'from sklearn.naive_bayes import GaussianNB';
   var code = value_model_name+' = GaussianNB()\n';
@@ -153,7 +153,7 @@ Blockly.Python.sklearn_GaussianNB = function() {
 };
 
 //sklearn 初始K-均值聚类
-Blockly.Python.sklearn_KMeans = function() {
+Blockly.Python.forBlock['sklearn_KMeans'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_n_clusters = Blockly.Python.valueToCode(this, 'n_clusters', Blockly.Python.ORDER_ATOMIC) || '8';
   var value_max_iter = Blockly.Python.valueToCode(this, 'max_iter', Blockly.Python.ORDER_ATOMIC) || '300';
@@ -165,7 +165,7 @@ Blockly.Python.sklearn_KMeans = function() {
 };
 
 //sklearn 训练模型
-Blockly.Python.sklearn_fit = function() {
+Blockly.Python.forBlock['sklearn_fit'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'X_train';
   var value_train_target = Blockly.Python.valueToCode(this, 'train_target', Blockly.Python.ORDER_ATOMIC) || 'y_train';
@@ -177,7 +177,7 @@ Blockly.Python.sklearn_fit = function() {
 };
 
 //sklearn 训练模型-无标签值
-Blockly.Python.sklearn_fit_no_target = function() {
+Blockly.Python.forBlock['sklearn_fit_no_target'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'X_train';
   var code = value_model_name+'.fit('+value_train_data+')\n';
@@ -185,7 +185,7 @@ Blockly.Python.sklearn_fit_no_target = function() {
 };
 
 //sklearn 模型预测
-Blockly.Python.sklearn_predict = function() {
+Blockly.Python.forBlock['sklearn_predict'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'X_test';
   var code = value_model_name+'.predict('+value_train_data+')';
@@ -193,7 +193,7 @@ Blockly.Python.sklearn_predict = function() {
 };
 
 //sklearn 计算模型得分
-Blockly.Python.sklearn_score = function() {
+Blockly.Python.forBlock['sklearn_score'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'X_train';
   var value_train_target = Blockly.Python.valueToCode(this, 'train_target', Blockly.Python.ORDER_ATOMIC) || 'y_train';
@@ -205,7 +205,7 @@ Blockly.Python.sklearn_score = function() {
 };
 
 //sklearn 计算模型得分-无标签值
-Blockly.Python.sklearn_score_no_target = function() {
+Blockly.Python.forBlock['sklearn_score_no_target'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var value_train_data = Blockly.Python.valueToCode(this, 'train_data', Blockly.Python.ORDER_ATOMIC) || 'X_train';
   var code = value_model_name+'.score('+value_train_data+')';
@@ -213,7 +213,7 @@ Blockly.Python.sklearn_score_no_target = function() {
 };
 
 //sklearn 线性回归 模型获取 斜率/截距
-Blockly.Python.sklearn_coef_intercept = function() {
+Blockly.Python.forBlock['sklearn_coef_intercept'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var dropdown_type = this.getFieldValue('type');
   var code = value_model_name+'.'+dropdown_type;
@@ -221,7 +221,7 @@ Blockly.Python.sklearn_coef_intercept = function() {
 };
 
 //sklearn K-均值聚类 模型获取 簇中心坐标/聚类后的标签/所有点到对应簇中心的距离平方和
-Blockly.Python.sklearn_cluster_centers_labels_inertia = function() {
+Blockly.Python.forBlock['sklearn_cluster_centers_labels_inertia'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var dropdown_type = this.getFieldValue('type');
   var code = value_model_name+'.'+dropdown_type;
@@ -229,7 +229,7 @@ Blockly.Python.sklearn_cluster_centers_labels_inertia = function() {
 };
 
 //sklearn 保存/加载模型
-Blockly.Python.sklearn_save_load_model = function() {
+Blockly.Python.forBlock['sklearn_save_load_model'] = function() {
   var value_model_name = Blockly.Python.valueToCode(this, 'model_name', Blockly.Python.ORDER_ATOMIC) || 'model';
   var dropdown_type = this.getFieldValue('type');
   var value_address = Blockly.Python.valueToCode(this, 'address', Blockly.Python.ORDER_ATOMIC) || 'D:/mixly/test.pkl';

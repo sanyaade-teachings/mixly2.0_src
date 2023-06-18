@@ -5,14 +5,14 @@ goog.provide('Blockly.Python.system');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.controls_millis = function () {
+Blockly.Python.forBlock['controls_millis'] = function () {
     Blockly.Python.definitions_.import_time = "import time";
     var code = 'time.time()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 
-Blockly.Python.controls_end_program = function (block) {
+Blockly.Python.forBlock['controls_end_program'] = function (block) {
     Blockly.Python.definitions_.import_blocktool = "import blocktool";
     return  "blocktool.highlight(\'"+block.id+"\')\n"+'exit()\n';
 };

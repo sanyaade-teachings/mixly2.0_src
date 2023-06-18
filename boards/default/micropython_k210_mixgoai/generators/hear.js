@@ -1,7 +1,7 @@
 'use strict';
 
 
-Blockly.Python.asrloca_init = function () {
+Blockly.Python.forBlock['asrloca_init'] = function () {
   Blockly.Python.definitions_['import asrloca'] = 'import asrloca';
   var SUB =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   var KEY = this.getFieldValue('KEY');
@@ -10,7 +10,7 @@ Blockly.Python.asrloca_init = function () {
 };
 
 
-Blockly.Python.asrloca_config = function() {
+Blockly.Python.forBlock['asrloca_config'] = function() {
   var ck = new Array(this.itemCount_);
   var cv = new Array(this.itemCount_);
   var ct = new Array(this.itemCount_);
@@ -35,13 +35,13 @@ Blockly.Python.asrloca_config = function() {
   return code;
 };
 
-Blockly.Python.asrloca_recognize = function () {
+Blockly.Python.forBlock['asrloca_recognize'] = function () {
   var SUB =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   var code = SUB+".recognize()";
     return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.asrloca_del = function () {
+Blockly.Python.forBlock['asrloca_del'] = function () {
   var SUB =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   var code = SUB+".__del__()";
   return code;

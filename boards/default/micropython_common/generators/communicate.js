@@ -3,14 +3,14 @@
 goog.provide('Blockly.Python.communicate');
 goog.require('Blockly.Python');
 
-Blockly.Python.communicate_i2c_onboard = function(){
+Blockly.Python.forBlock['communicate_i2c_onboard'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
     var code = version+'.onboard_i2c';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_i2c_init = function () {
+Blockly.Python.forBlock['communicate_i2c_init'] = function () {
 	Blockly.Python.definitions_['import_machine'] = 'import machine';
 	var dropdown_pin1 = Blockly.Python.valueToCode(this, 'RX',Blockly.Python.ORDER_ATOMIC);
     var dropdown_pin2 = Blockly.Python.valueToCode(this, 'TX',Blockly.Python.ORDER_ATOMIC);
@@ -19,30 +19,30 @@ Blockly.Python.communicate_i2c_init = function () {
     return ""+sub+" = machine.SoftI2C(scl = machine.Pin(" + dropdown_pin2 + "), sda = machine.Pin(" + dropdown_pin1 + "), freq = " + freq + ")\n";
 };
 
-Blockly.Python.communicate_i2c_read = function(){
+Blockly.Python.forBlock['communicate_i2c_read'] = function(){
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var address = Blockly.Python.valueToCode(this, 'address', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
    	return [""+name+".readfrom(" + address + ", " + data +  ")", Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_i2c_write = function(){
+Blockly.Python.forBlock['communicate_i2c_write'] = function(){
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var address = Blockly.Python.valueToCode(this, 'address', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     return ""+name+".writeto("+ address + ", " + data + ")\n";
 };
 
-Blockly.Python.communicate_i2c_scan = function(){
+Blockly.Python.forBlock['communicate_i2c_scan'] = function(){
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     return [""+name+".scan()", Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.communicate_i2c_master_read = function () {
+Blockly.Python.forBlock['communicate_i2c_master_read'] = function () {
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var code = ""+name+".read()";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.communicate_i2c_available = function () {
+Blockly.Python.forBlock['communicate_i2c_available'] = function () {
    
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var code = ""+name+".available()";
@@ -50,7 +50,7 @@ Blockly.Python.communicate_i2c_available = function () {
 };
 
 
-Blockly.Python.i2c_slave_onreceive = function () {
+Blockly.Python.forBlock['i2c_slave_onreceive'] = function () {
     var pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.setups_['setup_i2c_' + pin] = 'Wire.begin(' + pin + ');';
     Blockly.Python.setups_['setup_i2c_onReceive_' + pin] = 'Wire.onReceive(i2cReceiveEvent_' + pin + ');';
@@ -70,50 +70,50 @@ Blockly.Python.communicate_spi_init= function(block) {
     return ""+name+" = machine.SoftSPI(baudrate=" + freq + ", sck=machine.Pin(" + sck + "), mosi=machine.Pin(" + mosi + "), miso=machine.Pin(" + miso + "))\n";
 }
 
-Blockly.Python.communicate_spi_set = function() {   
+Blockly.Python.forBlock['communicate_spi_set'] = function() {   
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     return "spi.init(baudrate=" + data + ")\n";
 }
 
-Blockly.Python.communicate_spi_buffer = function() {   
+Blockly.Python.forBlock['communicate_spi_buffer'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     return ""+varname+"=bytearray(" + data + ")\n";
 }
 
-Blockly.Python.communicate_spi_read = function() {   
+Blockly.Python.forBlock['communicate_spi_read'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     return [""+varname+".read(" + data + ")", Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.communicate_spi_read_output = function() {   
+Blockly.Python.forBlock['communicate_spi_read_output'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var val = Blockly.Python.valueToCode(this, 'val', Blockly.Python.ORDER_ATOMIC);
     return [""+varname+".read(" + data + ","+val+")", Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.communicate_spi_readinto = function() {   
+Blockly.Python.forBlock['communicate_spi_readinto'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     return [""+varname+".readinto(" + data + ")", Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.communicate_spi_readinto_output = function() {   
+Blockly.Python.forBlock['communicate_spi_readinto_output'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var val = Blockly.Python.valueToCode(this, 'val', Blockly.Python.ORDER_ATOMIC);
     return [""+varname+".readinto(" + data + ","+val+")", Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.communicate_spi_write = function() {   
+Blockly.Python.forBlock['communicate_spi_write'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     return [""+varname+".write(" + data + ".encode('utf-8'))", Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.communicate_spi_write_readinto = function() {   
+Blockly.Python.forBlock['communicate_spi_write_readinto'] = function() {   
     var varname = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var val = Blockly.Python.valueToCode(this, 'val', Blockly.Python.ORDER_ATOMIC);
@@ -125,7 +125,7 @@ Blockly.Python.communicate_spi_write_readinto = function() {
     // }
 }
 
-Blockly.Python.communicate_ow_init = function () {
+Blockly.Python.forBlock['communicate_ow_init'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_onewire'] = "import onewire";
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -134,25 +134,25 @@ Blockly.Python.communicate_ow_init = function () {
     return code;
 };
 
-Blockly.Python.communicate_ow_scan = function () {
+Blockly.Python.forBlock['communicate_ow_scan'] = function () {
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var code = ""+name+".scan()";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_ow_reset = function () {
+Blockly.Python.forBlock['communicate_ow_reset'] = function () {
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var code = ""+name+".reset()\n";
     return code;
 };
 
-Blockly.Python.communicate_ow_read = function () {
+Blockly.Python.forBlock['communicate_ow_read'] = function () {
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var code = ""+name+".readbyte()";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_ow_write = function () {
+Blockly.Python.forBlock['communicate_ow_write'] = function () {
     var varName =Blockly.Python.valueToCode(this, 'byte',Blockly.Python.ORDER_ATOMIC);
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var op=this.getFieldValue('op');
@@ -160,21 +160,21 @@ Blockly.Python.communicate_ow_write = function () {
     return code;
 };
 
-Blockly.Python.communicate_ow_select = function () {
+Blockly.Python.forBlock['communicate_ow_select'] = function () {
     var varName =Blockly.Python.valueToCode(this, 'byte',Blockly.Python.ORDER_ATOMIC);
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var code = ""+name+".select_rom(" + varName + ".encode('utf-8'))\n";
     return code;
 };
 
-Blockly.Python.communicate_ir_recv = function(){
+Blockly.Python.forBlock['communicate_ir_recv'] = function(){
     Blockly.Python.definitions_['import_ir_remote'] = 'import ir_remote';   
     var pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
     return "ir_remote.IRrecv("+pin+", "+sub+")\n"
 };
 
-Blockly.Python.communicate_ir_send = function(){
+Blockly.Python.forBlock['communicate_ir_send'] = function(){
     Blockly.Python.definitions_['import_ir_remote'] = 'import ir_remote';   
     var pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
@@ -182,14 +182,14 @@ Blockly.Python.communicate_ir_send = function(){
     return "ir_remote.IRsend("+pin+", "+addr+", "+sub+")\n"
 };
 
-Blockly.Python.communicate_bluetooth_central_init = function(){
+Blockly.Python.forBlock['communicate_bluetooth_central_init'] = function(){
     Blockly.Python.definitions_['import_ble_central'] = 'import ble_central';   
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);    
     var code = name+" = ble_central.BLESimpleCentral()\n";
     return code;
 };
 
-Blockly.Python.communicate_bluetooth_peripheral_init = function(){
+Blockly.Python.forBlock['communicate_bluetooth_peripheral_init'] = function(){
     Blockly.Python.definitions_['import_ble_peripheral'] = 'import ble_peripheral';  
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC); 
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);    
@@ -197,13 +197,13 @@ Blockly.Python.communicate_bluetooth_peripheral_init = function(){
     return code;
 };
 
-Blockly.Python.communicate_bluetooth_scan = function(){
+Blockly.Python.forBlock['communicate_bluetooth_scan'] = function(){
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var code = name+".scan()";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_bluetooth_connect = function(){
+Blockly.Python.forBlock['communicate_bluetooth_connect'] = function(){
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);   
     var mode=this.getFieldValue('mode'); 
@@ -211,7 +211,7 @@ Blockly.Python.communicate_bluetooth_connect = function(){
     return code;
 };
 
-Blockly.Python.communicate_bluetooth_disconnect = function(block) {
+Blockly.Python.forBlock['communicate_bluetooth_disconnect'] = function(block) {
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);   
     var code= name+'.disconnect()\n';  
     return code;
@@ -222,33 +222,33 @@ Blockly.Python.communicate_bluetooth_mac= function() {
     return [name+".mac", Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.communicate_bluetooth_is_connected = function(){
+Blockly.Python.forBlock['communicate_bluetooth_is_connected'] = function(){
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var code = name+".is_connected()";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_bluetooth_send = function(){
+Blockly.Python.forBlock['communicate_bluetooth_send'] = function(){
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);    
     var code = name+".send(" + data + ")\n";
     return code;
 };
 
-Blockly.Python.communicate_bluetooth_recv_only = function (block) {
+Blockly.Python.forBlock['communicate_bluetooth_recv_only'] = function (block) {
     var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var code = v + '.recv()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.communicate_bluetooth_recv = function (block) {
+Blockly.Python.forBlock['communicate_bluetooth_recv'] = function (block) {
     var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var method = Blockly.Python.valueToCode(this, 'METHOD', Blockly.Python.ORDER_ATOMIC);
     var code = v + '.recv('+ method +')\n';
     return code;
 };
 
-Blockly.Python.communicate_bluetooth_handle = function (block) {
+Blockly.Python.forBlock['communicate_bluetooth_handle'] = function (block) {
     Blockly.Python.definitions_['import_ble_handle'] = 'import ble_handle'; 
     var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var method = Blockly.Python.valueToCode(this, 'METHOD', Blockly.Python.ORDER_ATOMIC);
@@ -257,7 +257,7 @@ Blockly.Python.communicate_bluetooth_handle = function (block) {
 };
 
 //espnow
-Blockly.Python.communicate_espnow_init = function () {
+Blockly.Python.forBlock['communicate_espnow_init'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
@@ -265,7 +265,7 @@ Blockly.Python.communicate_espnow_init = function () {
     return code;
 };
 
-Blockly.Python.communicate_espnow_init_new = function () {
+Blockly.Python.forBlock['communicate_espnow_init_new'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
@@ -303,7 +303,7 @@ Blockly.Python.network_espnow_send= function() {
     return code;
 }
 
-Blockly.Python.network_espnow_recv_handle = function (block) {
+Blockly.Python.forBlock['network_espnow_recv_handle'] = function (block) {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var method = Blockly.Python.valueToCode(this, 'METHOD', Blockly.Python.ORDER_ATOMIC);
@@ -312,7 +312,7 @@ Blockly.Python.network_espnow_recv_handle = function (block) {
 };
 
 //radio
-Blockly.Python.espnow_radio_channel = function () {
+Blockly.Python.forBlock['espnow_radio_channel'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=0)";
     var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
@@ -320,7 +320,7 @@ Blockly.Python.espnow_radio_channel = function () {
     return code;
 };
 
-Blockly.Python.espnow_radio_channel_new = function () {
+Blockly.Python.forBlock['espnow_radio_channel_new'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     var varName2 =Blockly.Python.valueToCode(this, 'DB',Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=0,txpower="+varName2+")";
@@ -329,7 +329,7 @@ Blockly.Python.espnow_radio_channel_new = function () {
     return code;
 };
 
-Blockly.Python.espnow_radio_on_off = function () {
+Blockly.Python.forBlock['espnow_radio_on_off'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     //Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=0)";
     var op = this.getFieldValue('on_off');
@@ -337,7 +337,7 @@ Blockly.Python.espnow_radio_on_off = function () {
     return code;
 };
 
-Blockly.Python.espnow_radio_send = function () {
+Blockly.Python.forBlock['espnow_radio_send'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     //Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=0)";
     var varName =Blockly.Python.valueToCode(this, 'send',Blockly.Python.ORDER_ATOMIC);
@@ -452,7 +452,7 @@ Blockly.Python.lora_packet= function() {
     return [name+"."+key+'()', Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.lora_send = function(){
+Blockly.Python.forBlock['lora_send'] = function(){
     Blockly.Python.definitions_['import_rfm98'] = 'import rfm98';
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC);
     var name = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);    
@@ -466,7 +466,7 @@ Blockly.Python.lora_recv= function() {
     return [name+'.recv()', Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.urequests_get = function() {
+Blockly.Python.forBlock['urequests_get'] = function() {
   Blockly.Python.definitions_.import_requests = "import urequests";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -478,7 +478,7 @@ Blockly.Python.urequests_get = function() {
  
 };
 
-Blockly.Python.urequests_attribute = function() {
+Blockly.Python.forBlock['urequests_attribute'] = function() {
   Blockly.Python.definitions_.import_requests = "import urequests";
   var varName = Blockly.Python.valueToCode(this, 'VAL', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var attr = this.getFieldValue('ATTR');
@@ -486,7 +486,7 @@ Blockly.Python.urequests_attribute = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.urequests_method = function() {
+Blockly.Python.forBlock['urequests_method'] = function() {
   Blockly.Python.definitions_.import_requests = "import urequests";    
     var method = this.getFieldValue('DIR');
   var str =Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;

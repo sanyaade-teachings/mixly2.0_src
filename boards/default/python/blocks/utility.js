@@ -119,7 +119,7 @@ Blockly.Blocks['text_print_multiple'] = {
         this.updateShape_();
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setMutator(new Blockly.Mutator(['text_print_multiple_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['text_print_multiple_item'], this));
         this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
   },
     /**
@@ -271,7 +271,7 @@ Blockly.Blocks['function_call'] = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldTextInput("str"), 'NAME');
         this.updateShape_();
-        this.setMutator(new Blockly.Mutator(['function_call_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['function_call_item'], this));
         this.setTooltip("Can be used to call any function");
   },
     /**

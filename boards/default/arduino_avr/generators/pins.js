@@ -2,7 +2,7 @@
 goog.provide('Blockly.Arduino.pins');
 goog.require('Blockly.Arduino');
 
-Blockly.Arduino.pins_digital = function () {
+Blockly.Arduino.forBlock['pins_digital'] = function () {
     var code = this.getFieldValue('PIN');
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

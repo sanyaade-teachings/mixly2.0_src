@@ -5,7 +5,7 @@ goog.provide('Blockly.Python.math');
 goog.require('Blockly.Python');
 
 
-// Blockly.Python.math_number = function() {
+// Blockly.Python.forBlock['math_number'] = function() {
 //   // Numeric value.
 //   var code = (this.getFieldValue('NUM'));
 //   // -4.abs() returns -4 in Dart due to strange order of operation choices.
@@ -17,7 +17,7 @@ goog.require('Blockly.Python');
 
 Blockly.Python.math = {};
 Blockly.Python.addReservedWords("math,random,Number");
-Blockly.Python.math_number = function () {
+Blockly.Python.forBlock['math_number'] = function () {
   // a = parseFloat(a.getFieldValue("NUM"));
   // var b;
   // Infinity == a ? (a = 'float("inf")', b = Blockly.Python.ORDER_FUNCTION_CALL) : -Infinity == a ? (a = '-float("inf")', b = Blockly.Python.ORDER_UNARY_SIGN) : b = 0 > a ? Blockly.Python.ORDER_UNARY_SIGN : Blockly.Python.ORDER_ATOMIC;
@@ -31,14 +31,14 @@ Blockly.Python.math_number = function () {
   return [code, order];
 };
 
-Blockly.Python.math_constant = function() {
+Blockly.Python.forBlock['math_constant'] = function() {
   Blockly.Python.definitions_.import_math = "import math";
   var name = this.getFieldValue('CONSTANT');
   var code='math.'+name;
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.math_constant_mp = function() {
+Blockly.Python.forBlock['math_constant_mp'] = function() {
   Blockly.Python.definitions_.import_math = "import math";
   var name = this.getFieldValue('CONSTANT');
   var code='math.'+name;
@@ -46,7 +46,7 @@ Blockly.Python.math_constant_mp = function() {
 };
 
 
-Blockly.Python.math_bit = function() {
+Blockly.Python.forBlock['math_bit'] = function() {
   var operator = this.getFieldValue('OP');;
   var order = Blockly.Python.ORDER_ATOMIC;
   var argument0 = Blockly.Python.valueToCode(this, 'A', order) || '0';
@@ -56,7 +56,7 @@ Blockly.Python.math_bit = function() {
 };
 
 
-Blockly.Python.math_arithmetic = function (a) {
+Blockly.Python.forBlock['math_arithmetic'] = function (a) {
   var b = {
     ADD : [" + ", Blockly.Python.ORDER_ADDITIVE],
     MINUS : [" - ", Blockly.Python.ORDER_ADDITIVE],
@@ -74,7 +74,7 @@ Blockly.Python.math_arithmetic = function (a) {
   return [d + c + a, b]
 };
 
-Blockly.Python.math_selfcalcu = function (a) {    
+Blockly.Python.forBlock['math_selfcalcu'] = function (a) {    
   var argument0 = Blockly.Python.valueToCode(this, 'A', Blockly.Python.ORDER_RELATIONAL) || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'B', Blockly.Python.ORDER_RELATIONAL) || '0';
   var operator = this.getFieldValue('OP');
@@ -93,7 +93,7 @@ Blockly.Python.math_selfcalcu = function (a) {
 
 
 
-Blockly.Python.math_single = function (a) {
+Blockly.Python.forBlock['math_single'] = function (a) {
   var b = a.getFieldValue("OP"),
   c;
   if ("NEG" == b)
@@ -170,7 +170,7 @@ Blockly.Python.math_single = function (a) {
 
 Blockly.Python.math_trig = Blockly.Python.math_single;
 
-Blockly.Python.math_dec = function (a) {
+Blockly.Python.forBlock['math_dec'] = function (a) {
   var argument0 = Blockly.Python.valueToCode(this, 'NUM',Blockly.Python.ORDER_NONE) || '0';
   var operator = this.getFieldValue('OP');
   var code = operator + '(' + argument0 + ')';
@@ -178,7 +178,7 @@ Blockly.Python.math_dec = function (a) {
 
 };
 
-Blockly.Python.math_to_int = function() {
+Blockly.Python.forBlock['math_to_int'] = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_NONE) || '0';
   var operator = this.getFieldValue('OP');
   var code = "";
@@ -191,7 +191,7 @@ Blockly.Python.math_to_int = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.math_max_min = function() {
+Blockly.Python.forBlock['math_max_min'] = function() {
   var a = Blockly.Python.valueToCode(this, 'A',Blockly.Python.ORDER_NONE) || '0';
   var b = Blockly.Python.valueToCode(this, 'B',Blockly.Python.ORDER_NONE) || '0';
   var operator = this.getFieldValue('OP');
@@ -200,7 +200,7 @@ Blockly.Python.math_max_min = function() {
 };
 
 
-Blockly.Python.math_random = function() {
+Blockly.Python.forBlock['math_random'] = function() {
   Blockly.Python.definitions_.import_random = "import random";
   // Random integer between [X] and [Y].
   var type = this.getFieldValue('TYPE');
@@ -217,7 +217,7 @@ Blockly.Python.math_random = function() {
 };
 
 
-Blockly.Python.math_map = function() {
+Blockly.Python.forBlock['math_map'] = function() {
   var value_num = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_NONE);
   var value_fl = Blockly.Python.valueToCode(this, 'fromLow', Blockly.Python.ORDER_ATOMIC);
   var value_fh = Blockly.Python.valueToCode(this, 'fromHigh', Blockly.Python.ORDER_ATOMIC);
@@ -228,7 +228,7 @@ Blockly.Python.math_map = function() {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python.math_constrain = function() {
+Blockly.Python.forBlock['math_constrain'] = function() {
   // Constrain a number between two limits.
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '0';
@@ -242,7 +242,7 @@ Blockly.Python.math_constrain = function() {
 
 
 
-Blockly.Python.math_number_base_conversion = function (a) {
+Blockly.Python.forBlock['math_number_base_conversion'] = function (a) {
   var c1 = a.getFieldValue("OP");
   var d = Blockly.Python.valueToCode(this, 'NUM',Blockly.Python.ORDER_NONE) || '0';
   var c2 = a.getFieldValue("OP2");
@@ -277,7 +277,7 @@ Blockly.Python.math_number_base_conversion = function (a) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.math_random_seed = function () {
+Blockly.Python.forBlock['math_random_seed'] = function () {
     // Random integer between [X] and [Y].
     Blockly.Python.definitions_.import_random = "import random";
     var a = Blockly.Python.valueToCode(this, 'NUM',Blockly.Python.ORDER_NONE) || '0';
@@ -285,7 +285,7 @@ Blockly.Python.math_random_seed = function () {
     return code;
 };
 
-Blockly.Python.math_indexer_number = function () {
+Blockly.Python.forBlock['math_indexer_number'] = function () {
     var code = this.getFieldValue('NUM');
     // -4.abs() returns -4 in Dart due to strange order of operation choices.
     // -4 is actually an operator and a number.  Reflect this in the order.
@@ -294,7 +294,7 @@ Blockly.Python.math_indexer_number = function () {
     return [code, order];
 }
 
-Blockly.Python.math_round = function() {
+Blockly.Python.forBlock['math_round'] = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'VAR',

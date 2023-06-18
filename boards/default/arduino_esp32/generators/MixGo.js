@@ -6,7 +6,7 @@ goog.require('Blockly.Arduino');
 
 
 //执行器_点阵屏显示_字符显示
-Blockly.Arduino.HT16K33_TEXT = function() {
+Blockly.Arduino.forBlock['HT16K33_TEXT'] = function() {
   Blockly.Arduino.definitions_['include_HT16K33'] = '#include <ZT16K33.h>';
   Blockly.Arduino.definitions_['var_declare_HT16K33'] = 'HT16K33 MixGo_HT16K33;';
   Blockly.Arduino.setups_['setup_Matrix_1'] = 'MixGo_HT16K33.begin(0x70);';
@@ -17,7 +17,7 @@ Blockly.Arduino.HT16K33_TEXT = function() {
 };
 
 //执行器_点阵屏显示_画点显示
-Blockly.Arduino.HT16K33_POS = function() {
+Blockly.Arduino.forBlock['HT16K33_POS'] = function() {
   Blockly.Arduino.definitions_['2_include_HT16K33'] = '#include <ZT16K33.h>';
   Blockly.Arduino.definitions_['var_declare_HT16K33'] = 'HT16K33 MixGo_HT16K33;';
   Blockly.Arduino.setups_['setup_Matrix_1'] = 'MixGo_HT16K33.begin(0x70);';
@@ -31,7 +31,7 @@ Blockly.Arduino.HT16K33_POS = function() {
 };
 
 //执行器_点阵屏显示_显示图案
-Blockly.Arduino.HT16K33_DisplayChar = function() {
+Blockly.Arduino.forBlock['HT16K33_DisplayChar'] = function() {
  Blockly.Arduino.definitions_['2_include_HT16K33'] = '#include <ZT16K33.h>';
  Blockly.Arduino.definitions_['var_declare_HT16K33'] = 'HT16K33 MixGo_HT16K33;';
  Blockly.Arduino.definitions_['var_declare_Matrix1'] = 'uint16_t  MixGo_LedArray[8];';
@@ -56,7 +56,7 @@ return code;
 
 
 //执行器_点阵屏显示_图案数组
-Blockly.Arduino.HT16K33_LedArray = function() {
+Blockly.Arduino.forBlock['HT16K33_LedArray'] = function() {
   var varName = this.getFieldValue('VAR');
   var a = new Array();
   for (var i = 1; i < 9; i++) {
@@ -88,7 +88,7 @@ Blockly.Arduino.definitions_[varName] = "uint16_t " + varName + "[8]=" + code;
 };
 
 //辅助块_点阵屏_清除显示
-Blockly.Arduino.HT16K33_Displayclear = function() {
+Blockly.Arduino.forBlock['HT16K33_Displayclear'] = function() {
  Blockly.Arduino.definitions_['2_include_HT16K33'] = '#include <ZT16K33.h>';
  Blockly.Arduino.definitions_['var_declare_HT16K33'] = 'HT16K33 MixGo_HT16K33;';
  Blockly.Arduino.setups_['setup_Matrix_1'] = 'MixGo_HT16K33.begin(0x70);';
@@ -99,7 +99,7 @@ Blockly.Arduino.HT16K33_Displayclear = function() {
 };
 
 //辅助块_点阵屏_清除显示
-Blockly.Arduino.HT16K33_brightness = function() {
+Blockly.Arduino.forBlock['HT16K33_brightness'] = function() {
   var BRIGHTNESS = Blockly.Arduino.valueToCode(this, 'Brightness', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['2_include_HT16K33'] = '#include <ZT16K33.h>';
   Blockly.Arduino.definitions_['var_declare_HT16K33'] = 'HT16K33 MixGo_HT16K33;';
@@ -110,7 +110,7 @@ Blockly.Arduino.HT16K33_brightness = function() {
   return code;
 };
 
-Blockly.Arduino.HT16K33_show_image = function() {
+Blockly.Arduino.forBlock['HT16K33_show_image'] = function() {
   var dropdown_img_ = this.getFieldValue('img_');
   var code = '"' + dropdown_img_ + '"';
   code = '{';
@@ -129,13 +129,13 @@ Blockly.Arduino.sensor_mixgo_light= Blockly.Arduino.sensor_light;
 
 Blockly.Arduino.sensor_mixgo_sound=Blockly.Arduino.sensor_sound; 
 
-Blockly.Arduino.mixgo_touch_pin = function(){
+Blockly.Arduino.forBlock['mixgo_touch_pin'] = function(){
   var touch_pin = this.getFieldValue('touch_pin');
   var code = 'touchRead('+touch_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensor_mixgo_pin_near = function(){
+Blockly.Arduino.forBlock['sensor_mixgo_pin_near'] = function(){
   var direction = this.getFieldValue('direction');
   var code = 'digitalRead('+ direction +')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -235,12 +235,12 @@ Blockly.Arduino.MixGo_rgb_rainbow3=function(){
   return code3;
 };
 
-Blockly.Arduino.MixGo_rgb_show = function () {
+Blockly.Arduino.forBlock['MixGo_rgb_show'] = function () {
   var code = 'rgb_display_02.show();rgb_display_02.show();\ndelay(1);\n';
   return code;
 };
 
-Blockly.Arduino.OneButton = function () {
+Blockly.Arduino.forBlock['OneButton'] = function () {
  Blockly.Arduino.definitions_['include_OneButton'] = '#include <OneButton.h>';
  var dropdown_pin = this.getFieldValue('PIN');
  var dropdown_mode = this.getFieldValue('mode');
@@ -253,7 +253,7 @@ Blockly.Arduino.OneButton = function () {
  Blockly.Arduino.definitions_[funcName] = code2;
  return code;
 };
-Blockly.Arduino.mixgo_button_is_pressed = function(){
+Blockly.Arduino.forBlock['mixgo_button_is_pressed'] = function(){
  var btn = this.getFieldValue('PIN');
  Blockly.Arduino.setups_['setup_btn'+btn] = 'pinMode('+btn+',INPUT);';
  var code =  'digitalRead('+btn+')';

@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.set');
 goog.require('Blockly.Python');
 
-Blockly.Python.set_create_with = function() {
+Blockly.Python.forBlock['set_create_with'] = function() {
   
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -24,25 +24,25 @@ Blockly.Python.set_create_with = function() {
   return code;
 };
 
-Blockly.Python.set_length = function() {
+Blockly.Python.forBlock['set_length'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'SET', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code='len(' +varName + ')';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.set_pop = function(){
+Blockly.Python.forBlock['set_pop'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'SET', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName + '.pop()';
   return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.set_clear = function() {
+Blockly.Python.forBlock['set_clear'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'SET', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName+'.clear()\n';
   return code;
 };
 
-Blockly.Python.set_operate = function() {
+Blockly.Python.forBlock['set_operate'] = function() {
   var vars1 = Blockly.Python.valueToCode(this, 'SET1', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var vars2 = Blockly.Python.valueToCode(this, 'SET2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var operate = this.getFieldValue('OPERATE');
@@ -51,7 +51,7 @@ Blockly.Python.set_operate = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.set_operate_update = function() {
+Blockly.Python.forBlock['set_operate_update'] = function() {
   var vars1 = Blockly.Python.valueToCode(this, 'SET1', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var vars2 = Blockly.Python.valueToCode(this, 'SET2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var operate = this.getFieldValue('OPERATE');
@@ -60,7 +60,7 @@ Blockly.Python.set_operate_update = function() {
   return code;
 };
 
-Blockly.Python.set_add_discard = function() {
+Blockly.Python.forBlock['set_add_discard'] = function() {
   var vars1 = Blockly.Python.valueToCode(this, 'SET', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var operate = this.getFieldValue('OPERATE');
   var argument = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -68,7 +68,7 @@ Blockly.Python.set_add_discard = function() {
   return code;
 };
 
-Blockly.Python.set_sub = function() {
+Blockly.Python.forBlock['set_sub'] = function() {
   var vars1 = Blockly.Python.valueToCode(this, 'SET1', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var vars2 = Blockly.Python.valueToCode(this, 'SET2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var operate = this.getFieldValue('OPERATE');
@@ -77,7 +77,7 @@ Blockly.Python.set_sub = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.set_update = function(block) {
+Blockly.Python.forBlock['set_update'] = function(block) {
 
   var varName = Blockly.Python.valueToCode(this, 'SET', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
@@ -86,20 +86,20 @@ Blockly.Python.set_update = function(block) {
   return code;
 };
 
-// Blockly.Python.set_change_to = function(){
+// Blockly.Python.forBlock['set_change_to'] = function(){
 //   var op = this.getFieldValue('OP');
 //   var varName = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
 //   var code = op + '(' + varName + ')\n';
 //   return [code, Blockly.Python.ORDER_ATOMIC];
 // }
 
-Blockly.Python.set_create_with_text_return = function() {
+Blockly.Python.forBlock['set_create_with_text_return'] = function() {
   var text=this.getFieldValue('TEXT');
   var code = '{' + text + '}';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.set_toset = function() {  
+Blockly.Python.forBlock['set_toset'] = function() {  
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'
   return ['set('+str+')', Blockly.Python.ORDER_ATOMIC];
 };

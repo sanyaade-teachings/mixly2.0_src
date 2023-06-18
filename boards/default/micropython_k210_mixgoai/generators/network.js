@@ -16,7 +16,7 @@ Blockly.Python.network_scan= function() {
     return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.network_connect = function () {
+Blockly.Python.forBlock['network_connect'] = function () {
 	Blockly.Python.definitions_['import net_espat'] = "import net_espat";
 	var account =Blockly.Python.valueToCode(this, 'account',Blockly.Python.ORDER_ATOMIC);
 	var passwor =Blockly.Python.valueToCode(this, 'password',Blockly.Python.ORDER_ATOMIC);
@@ -40,7 +40,7 @@ Blockly.Python.network_disconnect= function() {
 	return code;  
 }
 
-Blockly.Python.network_enable_ap = function () {
+Blockly.Python.forBlock['network_enable_ap'] = function () {
 	Blockly.Python.definitions_['import net_espat'] = "import net_espat";
 	var account =Blockly.Python.valueToCode(this, 'account',Blockly.Python.ORDER_ATOMIC);
 	var passwor =Blockly.Python.valueToCode(this, 'password',Blockly.Python.ORDER_ATOMIC);

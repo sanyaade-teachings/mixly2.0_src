@@ -22,19 +22,19 @@ function RGB_RGB565(colour){
 	return n565Color;
 }
 
-Blockly.Python.lists_create_with_text1 = function() {
+Blockly.Python.forBlock['lists_create_with_text1'] = function() {
   var text=this.getFieldValue('TEXT');
   var code ='[' + text + ']';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.tuple_create_with_text3 = function() {
+Blockly.Python.forBlock['tuple_create_with_text3'] = function() {
   var text=this.getFieldValue('TEXT');
   var code = '(' + text + ')';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.LCD_color_seclet1 = function() {
+Blockly.Python.forBlock['LCD_color_seclet1'] = function() {
   var colour = this.getFieldValue('COLOR');
   colour=colour.substr(1);
   var R,G,B;
@@ -45,7 +45,7 @@ Blockly.Python.LCD_color_seclet1 = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.LCD_color_seclet = function() {
+Blockly.Python.forBlock['LCD_color_seclet'] = function() {
   var colour = this.getFieldValue('COLOR');
   colour=RGB_RGB565(colour);
   return [colour, Blockly.Python.ORDER_ATOMIC];

@@ -85,7 +85,7 @@ function restore_blocks() {
     } else if (window.localStorage[BOARD.boardType]) {
         let xml;
         try {
-            xml = Blockly.Xml.textToDom(window.localStorage[BOARD.boardType]);
+            xml = $(window.localStorage[BOARD.boardType])[0];
             if ($("#boards-type").length) {
                 const boardNameList = window.localStorage[BOARD.boardType].match(/(?<=board[\s]*=[\s]*\")[^\n\"]+(?=\")/g);
                 let boardName = boardNameList.length? boardNameList[0] : '';

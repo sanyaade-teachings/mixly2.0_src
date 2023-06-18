@@ -5,7 +5,7 @@ goog.provide('Blockly.Arduino.math');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.math_number = function () {
+Blockly.Arduino.forBlock['math_number'] = function () {
     // Numeric value.
     var code = (this.getFieldValue('NUM'));
     // -4.abs() returns -4 in Dart due to strange order of operation choices.
@@ -15,10 +15,10 @@ Blockly.Arduino.math_number = function () {
     return [code, order];
 };
 
-Blockly.Arduino.math_arithmetic = function () {
+Blockly.Arduino.forBlock['math_arithmetic'] = function () {
     // Basic arithmetic operators, and power.
     var mode = this.getFieldValue('OP');
-    var tuple = Blockly.Arduino.math_arithmetic.OPERATORS[mode];
+    var tuple = Blockly.Arduino.forBlock.math_arithmetic.OPERATORS[mode];
     var operator = tuple[0];
     var order = tuple[1];
     var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '0';
@@ -37,7 +37,7 @@ Blockly.Arduino.math_arithmetic = function () {
     return [code, order];
 };
 
-Blockly.Arduino.math_bit = function () {
+Blockly.Arduino.forBlock['math_bit'] = function () {
     var operator = this.getFieldValue('OP');;
     var order = Blockly.Arduino.ORDER_ATOMIC;
     var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '0';
@@ -46,7 +46,7 @@ Blockly.Arduino.math_bit = function () {
     return [code, order];
 };
 
-Blockly.Arduino.math_arithmetic.OPERATORS = {
+Blockly.Arduino.forBlock['math_arithmetic'].OPERATORS = {
     ADD: [' + ', Blockly.Arduino.ORDER_ADDITIVE],
     MINUS: [' - ', Blockly.Arduino.ORDER_ADDITIVE],
     MULTIPLY: [' * ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
@@ -55,7 +55,7 @@ Blockly.Arduino.math_arithmetic.OPERATORS = {
     POWER: [null, Blockly.Arduino.ORDER_NONE]  // Handle power separately.
 };
 
-Blockly.Arduino.math_single = function () {
+Blockly.Arduino.forBlock['math_single'] = function () {
     // Math operators with single operand.
     var operator = this.getFieldValue('OP');
     var code;
@@ -151,7 +151,7 @@ Blockly.Arduino.math_single = function () {
 
 Blockly.Arduino.math_trig = Blockly.Arduino.math_single;
 
-Blockly.Arduino.math_to_int = function () {
+Blockly.Arduino.forBlock['math_to_int'] = function () {
     var argument0 = Blockly.Arduino.valueToCode(this, 'A', Blockly.Arduino.ORDER_NONE) || '0';
     var operator = this.getFieldValue('OP');
     var code = operator + '(' + argument0 + ')';
@@ -159,21 +159,21 @@ Blockly.Arduino.math_to_int = function () {
 };
 
 //变量定义
-Blockly.Arduino.arduino_variate_type = function () {
+Blockly.Arduino.forBlock['arduino_variate_type'] = function () {
     var dropdown_variate_type = this.getFieldValue('variate_type');
     var code = dropdown_variate_type;
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //获取某个变量在内存中所占用的字节数
-Blockly.Arduino.math_SizeOf = function () {
+Blockly.Arduino.forBlock['math_SizeOf'] = function () {
     this.setTooltip("以字节形式返回某个操作数的储存大小");
     var value_data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'sizeof(' + value_data + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.math_max_min = function () {
+Blockly.Arduino.forBlock['math_max_min'] = function () {
     var a = Blockly.Arduino.valueToCode(this, 'A', Blockly.Arduino.ORDER_NONE) || '0';
     var b = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_NONE) || '0';
     var operator = this.getFieldValue('OP');
@@ -181,14 +181,14 @@ Blockly.Arduino.math_max_min = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.math_random_seed = function () {
+Blockly.Arduino.forBlock['math_random_seed'] = function () {
     // Random integer between [X] and [Y].
     var a = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE) || '0';
     //Blockly.Arduino.setups_['setup_randomSeed'] ='randomSeed(' + a +  ');'+'\n';  
     return 'randomSeed(' + a + ');' + '\n';
 };
 
-Blockly.Arduino.math_random_int = function () {
+Blockly.Arduino.forBlock['math_random_int'] = function () {
     // Random integer between [X] and [Y].
     var argument0 = Blockly.Arduino.valueToCode(this, 'FROM',
         Blockly.Arduino.ORDER_NONE) || '0';
@@ -198,7 +198,7 @@ Blockly.Arduino.math_random_int = function () {
     return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Arduino.base_map = function () {
+Blockly.Arduino.forBlock['base_map'] = function () {
     var dropdown_maptype = this.getFieldValue('maptype');
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE);
     var value_fl = Blockly.Arduino.valueToCode(this, 'fromLow', Blockly.Arduino.ORDER_ATOMIC);
@@ -218,7 +218,7 @@ Blockly.Arduino.base_map = function () {
     return [code, Blockly.Arduino.ORDER_NONE];
 };
 
-Blockly.Arduino.math_constrain = function () {
+Blockly.Arduino.forBlock['math_constrain'] = function () {
     // Constrain a number between two limits.
     var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE',
         Blockly.Arduino.ORDER_NONE) || '0';
@@ -231,14 +231,14 @@ Blockly.Arduino.math_constrain = function () {
     return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Arduino.variables_operation = function () {
+Blockly.Arduino.forBlock['variables_operation'] = function () {
     var type = this.getFieldValue('type');
     var variables = Blockly.Arduino.valueToCode(this, 'variables', Blockly.Arduino.ORDER_ATOMIC);
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + variables + ' = ' + variables + ' ' + type + ' ' + data + ';\n';
     return code;
 };
-Blockly.Arduino.math_auto_add_or_minus = function () {
+Blockly.Arduino.forBlock['math_auto_add_or_minus'] = function () {
     var value_math_auto_add_minus_output = Blockly.Arduino.valueToCode(this, 'math_auto_add_minus_output', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_math_auto_add_minus_type = this.getFieldValue('math_auto_add_minus_type');
     var code = value_math_auto_add_minus_output + dropdown_math_auto_add_minus_type + ';\n';

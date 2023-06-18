@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.sensor');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.sensor_mixgo_extern_button_is_pressed = function(){
+Blockly.Python.forBlock['sensor_mixgo_extern_button_is_pressed'] = function(){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
     var pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var dropdown_stat = Blockly.Python.valueToCode(this, 'STAT', Blockly.Python.ORDER_ATOMIC);
@@ -12,7 +12,7 @@ Blockly.Python.sensor_mixgo_extern_button_is_pressed = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 //ok
-Blockly.Python.sensor_mixgo_extern_button_was_pressed = function(){
+Blockly.Python.forBlock['sensor_mixgo_extern_button_was_pressed'] = function(){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
     var pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var dropdown_stat = Blockly.Python.valueToCode(this, 'STAT', Blockly.Python.ORDER_ATOMIC);
@@ -20,7 +20,7 @@ Blockly.Python.sensor_mixgo_extern_button_was_pressed = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mixgo_extern_button_get_presses = function(){
+Blockly.Python.forBlock['sensor_mixgo_extern_button_get_presses'] = function(){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
     var pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var argument = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -28,7 +28,7 @@ Blockly.Python.sensor_mixgo_extern_button_get_presses = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mixgo_extern_button_attachInterrupt = function () {
+Blockly.Python.forBlock['sensor_mixgo_extern_button_attachInterrupt'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
     var pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -38,7 +38,7 @@ Blockly.Python.sensor_mixgo_extern_button_attachInterrupt = function () {
     return code;
 };
 
-Blockly.Python.sensor_mpu9250_attachGestureInterrupt = function(){
+Blockly.Python.forBlock['sensor_mpu9250_attachGestureInterrupt'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var gesture = this.getFieldValue('gesture');
@@ -112,7 +112,7 @@ Blockly.Python.RTC_set_datetime= function () {
   return code;
 };
 
-Blockly.Python.RTC_get_time = function () {
+Blockly.Python.forBlock['RTC_get_time'] = function () {
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   if (v == "rtc")
     Blockly.Python.definitions_['import_mixgo_rtc'] = 'from mixgo import rtc';  
@@ -121,7 +121,7 @@ Blockly.Python.RTC_get_time = function () {
 };
 
 
-Blockly.Python.RTC_set_time = function () {
+Blockly.Python.forBlock['RTC_set_time'] = function () {
   Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
   var hour = Blockly.Python.valueToCode(this, "hour", Blockly.Python.ORDER_ASSIGNMENT);
   var minute = Blockly.Python.valueToCode(this, "minute", Blockly.Python.ORDER_ASSIGNMENT);
@@ -131,7 +131,7 @@ Blockly.Python.RTC_set_time = function () {
   return code;
 };
 
-Blockly.Python.RTC_set_date = function () {
+Blockly.Python.forBlock['RTC_set_date'] = function () {
   Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
   var year = Blockly.Python.valueToCode(this, "year", Blockly.Python.ORDER_ASSIGNMENT);
   var month = Blockly.Python.valueToCode(this, "month",Blockly.Python.ORDER_ASSIGNMENT);
@@ -158,7 +158,7 @@ Blockly.Python.sensor_mixgo_extern_sound= function(){
 };
 
 
-Blockly.Python.sensor_mixgo_extern_pin_near = function(){
+Blockly.Python.forBlock['sensor_mixgo_extern_pin_near'] = function(){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
     var direction = this.getFieldValue('direction');
     var code = 'mixgo.'+'infrared_'+ direction +'.near()';
@@ -250,7 +250,7 @@ Blockly.Python.sensor_use_i2c_init=function(){
     return code;
 };
 
-Blockly.Python.sensor_MAX30102_extern = function(){
+Blockly.Python.forBlock['sensor_MAX30102_extern'] = function(){
     Blockly.Python.definitions_['import_max30102'] = 'import max30102';
     var key = this.getFieldValue('key');
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -258,7 +258,7 @@ Blockly.Python.sensor_MAX30102_extern = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_APDS9960_extern = function(){
+Blockly.Python.forBlock['sensor_APDS9960_extern'] = function(){
     Blockly.Python.definitions_['import_apds9960'] = 'import apds9960';
     var key = this.getFieldValue('key');
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -266,7 +266,7 @@ Blockly.Python.sensor_APDS9960_extern = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_LTR308_extern = function(){
+Blockly.Python.forBlock['sensor_LTR308_extern'] = function(){
     Blockly.Python.definitions_['import_ltr308al'] = 'import ltr308al';
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var code = sub + '.getdata()';
@@ -415,7 +415,7 @@ Blockly.Python.weather_uart_mixio=function(){
     return code;
 };
 
-Blockly.Python.weather_set_label = function() {  
+Blockly.Python.forBlock['weather_set_label'] = function() {  
   var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
   Blockly.Python.definitions_['import_ws_lora'] = 'import ws_lora'; 
   var dropdown_type = this.getFieldValue('TYPE');  
@@ -480,7 +480,7 @@ Blockly.Python.esp32_s2_weather_ws=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.HCSR04 = function () {
+Blockly.Python.forBlock['HCSR04'] = function () {
     Blockly.Python.definitions_['import_sonar'] = 'import sonar';
     
     var dropdown_pin1 = Blockly.Python.valueToCode(this, "PIN1", Blockly.Python.ORDER_ASSIGNMENT);
@@ -489,7 +489,7 @@ Blockly.Python.HCSR04 = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 }
 
-Blockly.Python.PS2_init = function() {
+Blockly.Python.forBlock['PS2_init'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';   
   //Blockly.Python.definitions_['import_board'] = 'import board';  
   var PS2_CLK = this.getFieldValue('PS2_CLK');
@@ -501,7 +501,7 @@ Blockly.Python.PS2_init = function() {
   return code;
 };
 
-Blockly.Python.PS2_vibration = function() {
+Blockly.Python.forBlock['PS2_vibration'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2'; 
   var ss=this.getFieldValue('smotorstate');  
   var amp = Blockly.Python.valueToCode(this, 'AMP', Blockly.Python.ORDER_ATOMIC);
@@ -509,28 +509,28 @@ Blockly.Python.PS2_vibration = function() {
   return code;
 };
 
-Blockly.Python.PS2_Button = function() {
+Blockly.Python.forBlock['PS2_Button'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';     
   var bt=this.getFieldValue('psbt');
   var code= "mixgope_ps.PS2_keydata()[0] & (ps2."+bt+")";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.PS2_Buttons = function() {
+Blockly.Python.forBlock['PS2_Buttons'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';     
   var bt=this.getFieldValue('psbt');
   var code= "ps2."+bt;
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.PS2_State = function() {
+Blockly.Python.forBlock['PS2_State'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';     
   var bt=this.getFieldValue('btstate');
   var code= "mixgope_ps.PS2_keydata()["+bt+"]";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.PS2_stk = function() {
+Blockly.Python.forBlock['PS2_stk'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';     
   var stk=this.getFieldValue('psstk');
   var code= "mixgope_ps.PS2_keydata()[1]["+stk+"]";
@@ -554,7 +554,7 @@ Blockly.Python.RTC_set_datetime= function () {
   return code;
 };
 
-Blockly.Python.RTC_get_time = function () {
+Blockly.Python.forBlock['RTC_get_time'] = function () {
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   if (v == "rtc")
@@ -564,7 +564,7 @@ Blockly.Python.RTC_get_time = function () {
 };
 
 
-Blockly.Python.sensor_dht11 = function () {
+Blockly.Python.forBlock['sensor_dht11'] = function () {
     Blockly.Python.definitions_['import_dhtx'] = 'import dhtx';
     var sensor_type = this.getFieldValue('TYPE');
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -573,7 +573,7 @@ Blockly.Python.sensor_dht11 = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.PS2_init_new = function() {
+Blockly.Python.forBlock['PS2_init_new'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';   
   //Blockly.Python.definitions_['import_board'] = 'import board';  
   var PS2_CLK = Blockly.Python.valueToCode(this, 'CLK', Blockly.Python.ORDER_ATOMIC);
@@ -585,7 +585,7 @@ Blockly.Python.PS2_init_new = function() {
   return code;
 };
 
-Blockly.Python.PS2_vibration_new = function() {
+Blockly.Python.forBlock['PS2_vibration_new'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2'; 
   var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var ss=this.getFieldValue('smotorstate');  
@@ -594,14 +594,14 @@ Blockly.Python.PS2_vibration_new = function() {
   return code;
 };
 
-Blockly.Python.PS2_Buttons_new = function() {
+Blockly.Python.forBlock['PS2_Buttons_new'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2'; 
   var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);    
   var bt=this.getFieldValue('psbt');
   var code=sub + '.button(ps2.'+bt+')';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.PS2_stk_new = function() {
+Blockly.Python.forBlock['PS2_stk_new'] = function() {
   Blockly.Python.definitions_['import_ps2'] = 'import ps2';   
   var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);  
   var stk=this.getFieldValue('psstk');

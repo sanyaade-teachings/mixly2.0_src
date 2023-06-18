@@ -5,7 +5,7 @@ goog.provide('Blockly.Python.DS');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.ds_create_linkedlist = function() {
+Blockly.Python.forBlock['ds_create_linkedlist'] = function() {
   // Create a list with any number of elements of any type.
   //var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -29,7 +29,7 @@ Blockly.Python.ds_create_linkedlist = function() {
   return code;
 };
 
-Blockly.Python.ds_create_node = function() {
+Blockly.Python.forBlock['ds_create_node'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var typeName = Blockly.Python.variableDB_.getName(this.getFieldValue('TYPE'),
     Blockly.Variables.NAME_TYPE);
@@ -39,7 +39,7 @@ Blockly.Python.ds_create_node = function() {
   return code;
 };
 
-Blockly.Python.ds_get_node_attr = function() {
+Blockly.Python.forBlock['ds_get_node_attr'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var typeName = Blockly.Python.variableDB_.getName(this.getFieldValue('TYPE'),
     Blockly.Variables.NAME_TYPE);
@@ -47,7 +47,7 @@ Blockly.Python.ds_get_node_attr = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.ds_set_node_attr = function() {
+Blockly.Python.forBlock['ds_set_node_attr'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var typeName = Blockly.Python.variableDB_.getName(this.getFieldValue('TYPE'),
     Blockly.Variables.NAME_TYPE);
@@ -56,7 +56,7 @@ Blockly.Python.ds_set_node_attr = function() {
   return code;
 };
 
-Blockly.Python.ds_add_node_by_name = function() {
+Blockly.Python.forBlock['ds_add_node_by_name'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName2 = Blockly.Python.valueToCode(this, 'NODE2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName3 = Blockly.Python.valueToCode(this, 'NODE3', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -89,7 +89,7 @@ Blockly.Python.ds_add_node_by_name = function() {
   return code;
 };
 
-Blockly.Python.ds_add_node_by_attr = function() {
+Blockly.Python.forBlock['ds_add_node_by_attr'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName2 = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName3 = Blockly.Python.valueToCode(this, 'NODE3', Blockly.Python.ORDER_ASSIGNMENT) || '0';
@@ -124,7 +124,7 @@ Blockly.Python.ds_add_node_by_attr = function() {
   return code;
 };
 
-Blockly.Python.ds_del_node_by_name = function() {
+Blockly.Python.forBlock['ds_del_node_by_name'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName2 = Blockly.Python.valueToCode(this, 'NODE2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   
@@ -144,7 +144,7 @@ Blockly.Python.ds_del_node_by_name = function() {
   return code;
 };
 
-Blockly.Python.ds_del_node_by_attr = function() {
+Blockly.Python.forBlock['ds_del_node_by_attr'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName2 = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   
@@ -166,7 +166,7 @@ Blockly.Python.ds_del_node_by_attr = function() {
   return code;
 };
 
-Blockly.Python.ds_reverse_linkedlist = function() {
+Blockly.Python.forBlock['ds_reverse_linkedlist'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'NODE', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName2 = Blockly.Python.valueToCode(this, 'NODE2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   

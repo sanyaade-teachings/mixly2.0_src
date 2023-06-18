@@ -6,7 +6,7 @@ goog.require('Blockly.Arduino');
 
 goog.require('Mixly.JSFuncs');
 
-Blockly.Arduino.servo_move = function () {
+Blockly.Arduino.forBlock['servo_move'] = function () {
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
     var delay_time = Blockly.Arduino.valueToCode(this, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC) || '0'
@@ -17,7 +17,7 @@ Blockly.Arduino.servo_move = function () {
     return code;
 };
 
-Blockly.Arduino.servo_writeMicroseconds = function () {
+Blockly.Arduino.forBlock['servo_writeMicroseconds'] = function () {
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Servo'] = '#include <Servo.h>';
@@ -27,7 +27,7 @@ Blockly.Arduino.servo_writeMicroseconds = function () {
     return code;
 };
 
-Blockly.Arduino.servo_read_degrees = function () {
+Blockly.Arduino.forBlock['servo_read_degrees'] = function () {
     var dropdown_pin = this.getFieldValue('PIN');
     Blockly.Arduino.definitions_['include_Servo'] = '#include <Servo.h>';
     Blockly.Arduino.definitions_['var_declare_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';';
@@ -36,7 +36,7 @@ Blockly.Arduino.servo_read_degrees = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.servo_move1 = function () {
+Blockly.Arduino.forBlock['servo_move1'] = function () {
     var mode = this.getFieldValue('mode');
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
@@ -54,7 +54,7 @@ Blockly.Arduino.servo_move1 = function () {
     return code;
 };
 
-Blockly.Arduino.servo_writeMicroseconds1 = function () {
+Blockly.Arduino.forBlock['servo_writeMicroseconds1'] = function () {
     var mode = this.getFieldValue('mode');
     var dropdown_pin = this.getFieldValue('PIN');
     var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
@@ -71,7 +71,7 @@ Blockly.Arduino.servo_writeMicroseconds1 = function () {
     return code;
 };
 
-Blockly.Arduino.servo_read_degrees1 = function () {
+Blockly.Arduino.forBlock['servo_read_degrees1'] = function () {
     var mode = this.getFieldValue('mode');
     var dropdown_pin = this.getFieldValue('PIN');
     if (mode == 0) {
@@ -87,12 +87,12 @@ Blockly.Arduino.servo_read_degrees1 = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.tone_notes = function () {
+Blockly.Arduino.forBlock['tone_notes'] = function () {
     var code = this.getFieldValue('STAT');
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.controls_tone = function () {
+Blockly.Arduino.forBlock['controls_tone'] = function () {
     var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"ir_recv\"") == -1 && xmlText.indexOf("type=\"ir_recv_enable\"") == -1 && xmlText.indexOf("type=\"ir_recv_raw\"") == -1) {
@@ -115,7 +115,7 @@ Blockly.Arduino.controls_tone = function () {
     return code;
 };
 
-Blockly.Arduino.controls_notone = function () {
+Blockly.Arduino.forBlock['controls_notone'] = function () {
     var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"ir_recv\"") == -1 && xmlText.indexOf("type=\"ir_recv_enable\"") == -1 && xmlText.indexOf("type=\"ir_recv_raw\"") == -1) {
@@ -136,7 +136,7 @@ Blockly.Arduino.controls_notone = function () {
     return code;
 };
 //执行器-蜂鸣器
-Blockly.Arduino.controls_tone_noTimer = function () {
+Blockly.Arduino.forBlock['controls_tone_noTimer'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var fre = Blockly.Arduino.valueToCode(this, 'FREQUENCY', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
     var dur = Blockly.Arduino.valueToCode(this, 'DURATION', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -147,14 +147,14 @@ Blockly.Arduino.controls_tone_noTimer = function () {
 };
 
 //执行器-蜂鸣器结束声音
-Blockly.Arduino.controls_notone_noTimer = function () {
+Blockly.Arduino.forBlock['controls_notone_noTimer'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.setups_['setup_output_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
     var code = "NewNoTone(" + dropdown_pin + ");\n";
     return code;
 };
 
-Blockly.Arduino.group_stepper_setup = function () {
+Blockly.Arduino.forBlock['group_stepper_setup'] = function () {
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
     var dropdown_pin1 = Blockly.Arduino.valueToCode(this, 'PIN1', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_pin2 = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
@@ -166,7 +166,7 @@ Blockly.Arduino.group_stepper_setup = function () {
     return '';
 };
 
-Blockly.Arduino.group_stepper_setup2 = function () {
+Blockly.Arduino.forBlock['group_stepper_setup2'] = function () {
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
     var dropdown_pin1 = Blockly.Arduino.valueToCode(this, 'PIN1', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_pin2 = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
@@ -180,20 +180,20 @@ Blockly.Arduino.group_stepper_setup2 = function () {
     return '';
 };
 
-Blockly.Arduino.group_stepper_move = function () {
+Blockly.Arduino.forBlock['group_stepper_move'] = function () {
     var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
     var step = Blockly.Arduino.valueToCode(this, 'step', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Stepper'] = '#include <Stepper.h>';
     return varName + '.step(' + step + ');\n';
 };
 
-Blockly.Arduino.RGB_color_seclet = function () {
+Blockly.Arduino.forBlock['RGB_color_seclet'] = function () {
     var colour = this.getFieldValue('COLOR');
     colour = '0x' + colour.substring(1, colour.length);
     return [colour, Blockly.Arduino.ORDER_NONE];
 };
 
-Blockly.Arduino.RGB_color_rgb = function () {
+Blockly.Arduino.forBlock['RGB_color_rgb'] = function () {
     var R = Blockly.Arduino.valueToCode(this, 'R', Blockly.Arduino.ORDER_ATOMIC);
     var G = Blockly.Arduino.valueToCode(this, 'G', Blockly.Arduino.ORDER_ATOMIC);
     var B = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_ATOMIC);
@@ -201,7 +201,7 @@ Blockly.Arduino.RGB_color_rgb = function () {
     return [colour, Blockly.Arduino.ORDER_NONE];
 };
 
-Blockly.Arduino.display_rgb_init = function () {
+Blockly.Arduino.forBlock['display_rgb_init'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var type = this.getFieldValue('TYPE');
     var value_ledcount = Blockly.Arduino.valueToCode(this, 'LEDCOUNT', Blockly.Arduino.ORDER_ATOMIC);
@@ -211,7 +211,7 @@ Blockly.Arduino.display_rgb_init = function () {
     return '';
 };
 
-Blockly.Arduino.display_rgb_Brightness = function () {
+Blockly.Arduino.forBlock['display_rgb_Brightness'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var Brightness = Blockly.Arduino.valueToCode(this, 'Brightness', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
@@ -220,7 +220,7 @@ Blockly.Arduino.display_rgb_Brightness = function () {
     return code;
 };
 
-Blockly.Arduino.display_rgb = function () {
+Blockly.Arduino.forBlock['display_rgb'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var value_led = Blockly.Arduino.valueToCode(this, '_LED_', Blockly.Arduino.ORDER_ATOMIC);
     var Brightness = Blockly.Arduino.valueToCode(this, 'Brightness', Blockly.Arduino.ORDER_ATOMIC);
@@ -230,7 +230,7 @@ Blockly.Arduino.display_rgb = function () {
     return code;
 };
 
-Blockly.Arduino.RGB_color_HSV = function () {
+Blockly.Arduino.forBlock['RGB_color_HSV'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var value_led = Blockly.Arduino.valueToCode(this, '_LED_', Blockly.Arduino.ORDER_ATOMIC);
     var H = Blockly.Arduino.valueToCode(this, 'H', Blockly.Arduino.ORDER_ATOMIC);
@@ -240,7 +240,7 @@ Blockly.Arduino.RGB_color_HSV = function () {
     return code;
 };
 
-Blockly.Arduino.display_rgb_show = function () {
+Blockly.Arduino.forBlock['display_rgb_show'] = function () {
     var board_type = Mixly.JSFuncs.getPlatform();
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var code = 'rgb_display_' + dropdown_rgbpin + '.show();\n';
@@ -250,7 +250,7 @@ Blockly.Arduino.display_rgb_show = function () {
     return code;
 };
 
-Blockly.Arduino.display_rgb_rainbow1 = function () {
+Blockly.Arduino.forBlock['display_rgb_rainbow1'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var wait_time = Blockly.Arduino.valueToCode(this, 'WAIT', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.setups_['setup_rgb_display_begin_' + dropdown_rgbpin] = 'rgb_display_' + dropdown_rgbpin + '.begin();\n';
@@ -285,7 +285,7 @@ Blockly.Arduino.display_rgb_rainbow1 = function () {
     return code;
 };
 
-Blockly.Arduino.display_rgb_rainbow2 = function () {
+Blockly.Arduino.forBlock['display_rgb_rainbow2'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var wait_time = Blockly.Arduino.valueToCode(this, 'WAIT', Blockly.Arduino.ORDER_ATOMIC);
     var funcName2 = 'Wheel';
@@ -331,7 +331,7 @@ Blockly.Arduino.display_rgb_rainbow2 = function () {
     return code;
 };
 
-Blockly.Arduino.display_rgb_rainbow3 = function () {
+Blockly.Arduino.forBlock['display_rgb_rainbow3'] = function () {
     var dropdown_rgbpin = this.getFieldValue('PIN');
     var rainbow_color = Blockly.Arduino.valueToCode(this, 'rainbow_color', Blockly.Arduino.ORDER_ATOMIC);
     var type = this.getFieldValue('TYPE');
@@ -362,7 +362,7 @@ Blockly.Arduino.display_rgb_rainbow3 = function () {
     return code3;
 };
 //执行器-电机转动
-Blockly.Arduino.Mixly_motor = function () {
+Blockly.Arduino.forBlock['Mixly_motor'] = function () {
     var PIN1 = Blockly.Arduino.valueToCode(this, 'PIN1', Blockly.Arduino.ORDER_ATOMIC);
     var PIN2 = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
     var PIN_EN = Blockly.Arduino.valueToCode(this, 'PIN_EN', Blockly.Arduino.ORDER_ATOMIC);
@@ -390,7 +390,7 @@ Blockly.Arduino.Mixly_motor = function () {
     return code;
 
 };
-Blockly.Arduino.Motor_8833 = function () {
+Blockly.Arduino.forBlock['Motor_8833'] = function () {
     var PIN1 = Blockly.Arduino.valueToCode(this, 'PIN1', Blockly.Arduino.ORDER_ATOMIC);
     var PIN2 = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
     var speed = Blockly.Arduino.valueToCode(this, 'speed', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -416,7 +416,7 @@ Blockly.Arduino.Motor_8833 = function () {
     return code;
 };
 //语音模块（68段日常用语）
-Blockly.Arduino.voice_module = function () {
+Blockly.Arduino.forBlock['voice_module'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_voice = this.getFieldValue('VOICE');
     var wait_time = Blockly.Arduino.valueToCode(this, 'WAIT', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -449,7 +449,7 @@ Blockly.Arduino.voice_module = function () {
 };
 
 //gd5800 mp3 控制播放
-Blockly.Arduino.GD5800_MP3_CONTROL = function () {
+Blockly.Arduino.forBlock['GD5800_MP3_CONTROL'] = function () {
     var rxpin = Blockly.Arduino.valueToCode(this, 'RXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var txpin = Blockly.Arduino.valueToCode(this, 'TXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var CONTROL_TYPE = this.getFieldValue('CONTROL_TYPE');
@@ -460,7 +460,7 @@ Blockly.Arduino.GD5800_MP3_CONTROL = function () {
     return code;
 };
 
-Blockly.Arduino.GD5800_MP3_Set_Device = function () {
+Blockly.Arduino.forBlock['GD5800_MP3_Set_Device'] = function () {
     var rxpin = Blockly.Arduino.valueToCode(this, 'RXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var txpin = Blockly.Arduino.valueToCode(this, 'TXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var DEVICEID = this.getFieldValue('DEVICEID');
@@ -474,7 +474,7 @@ Blockly.Arduino.GD5800_MP3_Set_Device = function () {
 
 
 //gd5800 mp3 循环模式
-Blockly.Arduino.GD5800_MP3_LOOP_MODE = function () {
+Blockly.Arduino.forBlock['GD5800_MP3_LOOP_MODE'] = function () {
     var rxpin = Blockly.Arduino.valueToCode(this, 'RXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var txpin = Blockly.Arduino.valueToCode(this, 'TXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var LOOP_MODE = this.getFieldValue('LOOP_MODE');
@@ -486,7 +486,7 @@ Blockly.Arduino.GD5800_MP3_LOOP_MODE = function () {
 };
 
 //gd5800 mp3 EQ模式
-Blockly.Arduino.GD5800_MP3_EQ_MODE = function () {
+Blockly.Arduino.forBlock['GD5800_MP3_EQ_MODE'] = function () {
     var rxpin = Blockly.Arduino.valueToCode(this, 'RXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var txpin = Blockly.Arduino.valueToCode(this, 'TXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var EQ_MODE = this.getFieldValue('EQ_MODE');
@@ -498,7 +498,7 @@ Blockly.Arduino.GD5800_MP3_EQ_MODE = function () {
 };
 
 //gd5800 mp3 设置音量
-Blockly.Arduino.GD5800_MP3_VOL = function () {
+Blockly.Arduino.forBlock['GD5800_MP3_VOL'] = function () {
     var rxpin = Blockly.Arduino.valueToCode(this, 'RXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var txpin = Blockly.Arduino.valueToCode(this, 'TXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var vol = Blockly.Arduino.valueToCode(this, 'vol', Blockly.Arduino.ORDER_ATOMIC);
@@ -510,7 +510,7 @@ Blockly.Arduino.GD5800_MP3_VOL = function () {
 };
 
 //gd5800 mp3 播放第N首
-Blockly.Arduino.GD5800_MP3_PLAY_NUM = function () {
+Blockly.Arduino.forBlock['GD5800_MP3_PLAY_NUM'] = function () {
     var rxpin = Blockly.Arduino.valueToCode(this, 'RXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var txpin = Blockly.Arduino.valueToCode(this, 'TXPIN', Blockly.Arduino.ORDER_ATOMIC);
     var NUM = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
@@ -521,7 +521,7 @@ Blockly.Arduino.GD5800_MP3_PLAY_NUM = function () {
     return code;
 };
 
-Blockly.Arduino.AFMotorRun = function () {
+Blockly.Arduino.forBlock['AFMotorRun'] = function () {
     Blockly.Arduino.definitions_['include_AFMotor'] = '#include <AFMotor.h>';
     var motorNO = this.getFieldValue('motor');
     var direction = this.getFieldValue('direction');
@@ -532,7 +532,7 @@ Blockly.Arduino.AFMotorRun = function () {
     return code;
 };
 
-Blockly.Arduino.AFMotorStop = function () {
+Blockly.Arduino.forBlock['AFMotorStop'] = function () {
     Blockly.Arduino.definitions_['include_AFMotor'] = '#include <AFMotor.h>';
     var motorNO = this.getFieldValue('motor');
     var code = "";
@@ -542,7 +542,7 @@ Blockly.Arduino.AFMotorStop = function () {
 };
 
 //初始化DFPlayer Mini
-Blockly.Arduino.arduino_dfplayer_mini_begin = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_begin'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_dfplayer_pin = Blockly.Arduino.valueToCode(this, 'dfplayer_pin', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Arduino'] = '#include "Arduino.h"';
@@ -554,7 +554,7 @@ Blockly.Arduino.arduino_dfplayer_mini_begin = function () {
 };
 
 //定义DFPlayer Mini 所使用的串口类型
-Blockly.Arduino.arduino_dfplayer_mini_pin = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_pin'] = function () {
     var dropdown_pin_type = this.getFieldValue('pin_type');
     Blockly.Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
     var code = dropdown_pin_type;
@@ -562,7 +562,7 @@ Blockly.Arduino.arduino_dfplayer_mini_pin = function () {
 };
 
 //DFPlayer Mini 设置串口通信的超时时间
-Blockly.Arduino.arduino_dfplayer_mini_setTimeOut = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_setTimeOut'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_timeout_data = Blockly.Arduino.valueToCode(this, 'timeout_data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + text_dfplayer_name + '.setTimeOut(' + value_timeout_data + ');\n';
@@ -570,7 +570,7 @@ Blockly.Arduino.arduino_dfplayer_mini_setTimeOut = function () {
 };
 
 //DFPlayer Mini 设置音量
-Blockly.Arduino.arduino_dfplayer_mini_volume = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_volume'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_volume_data = Blockly.Arduino.valueToCode(this, 'volume_data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + text_dfplayer_name + '.volume(' + value_volume_data + ');\n';
@@ -578,7 +578,7 @@ Blockly.Arduino.arduino_dfplayer_mini_volume = function () {
 };
 
 //DFPlayer Mini 音量+|-
-Blockly.Arduino.arduino_dfplayer_mini_volume_up_down = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_volume_up_down'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var dropdown_volume_type = this.getFieldValue('volume_type');
     var code = '' + text_dfplayer_name + '.' + dropdown_volume_type + '();\n';
@@ -586,7 +586,7 @@ Blockly.Arduino.arduino_dfplayer_mini_volume_up_down = function () {
 };
 
 //DFPlayer Mini 设置音效
-Blockly.Arduino.arduino_dfplayer_mini_EQ = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_EQ'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_eq_data = Blockly.Arduino.valueToCode(this, 'eq_data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + text_dfplayer_name + '.EQ(' + value_eq_data + ');\n';
@@ -594,14 +594,14 @@ Blockly.Arduino.arduino_dfplayer_mini_EQ = function () {
 };
 
 //DFPlayer Mini 定义音效类型
-Blockly.Arduino.arduino_dfplayer_mini_EQ_type = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_EQ_type'] = function () {
     var dropdown_eq_type = this.getFieldValue('eq_type');
     var code = dropdown_eq_type;
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //DFPlayer Mini 指定播放设备
-Blockly.Arduino.arduino_dfplayer_mini_outputDevice = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_outputDevice'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_outputdevice_data = Blockly.Arduino.valueToCode(this, 'outputdevice_data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + text_dfplayer_name + '.outputDevice(' + value_outputdevice_data + ');\n';
@@ -609,14 +609,14 @@ Blockly.Arduino.arduino_dfplayer_mini_outputDevice = function () {
 };
 
 //DFPlayer Mini 定义播放设备类型
-Blockly.Arduino.arduino_dfplayer_mini_outputDevice_type = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_mini_outputDevice_type'] = function () {
     var dropdown_outputdevice_type = this.getFieldValue('outputdevice_type');
     var code = dropdown_outputdevice_type;
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //DFPlayer Mini 设置-1
-Blockly.Arduino.arduino_dfplayer_set_1 = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_set_1'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var dropdown_set_data = this.getFieldValue('set_data');
     var code = '' + text_dfplayer_name + '.' + dropdown_set_data + '();\n';
@@ -624,7 +624,7 @@ Blockly.Arduino.arduino_dfplayer_set_1 = function () {
 };
 
 //DFPlayer Mini 播放和循环指定曲目
-Blockly.Arduino.arduino_dfplayer_play_loop = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_play_loop'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_play_data = Blockly.Arduino.valueToCode(this, 'play_data', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_play_type = this.getFieldValue('play_type');
@@ -633,7 +633,7 @@ Blockly.Arduino.arduino_dfplayer_play_loop = function () {
 };
 
 //DFPlayer Mini 播放指定文件夹下的曲目
-Blockly.Arduino.arduino_dfplayer_playFolder = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_playFolder'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_fold_data = Blockly.Arduino.valueToCode(this, 'fold_data', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_fold_type = this.getFieldValue('fold_type');
@@ -643,7 +643,7 @@ Blockly.Arduino.arduino_dfplayer_playFolder = function () {
 };
 
 //DFPlayer Mini 循环播放指定文件夹下的曲目
-Blockly.Arduino.arduino_dfplayer_loopFolder = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_loopFolder'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_fold_data = Blockly.Arduino.valueToCode(this, 'fold_data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + text_dfplayer_name + '.loopFolder(' + value_fold_data + ');\n';
@@ -651,7 +651,7 @@ Blockly.Arduino.arduino_dfplayer_loopFolder = function () {
 };
 
 //DFPlayer Mini 获取当前信息
-Blockly.Arduino.arduino_dfplayer_read_now = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_read_now'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var dropdown_read_type = this.getFieldValue('read_type');
     var code = '' + text_dfplayer_name + '.' + dropdown_read_type + '()';
@@ -659,7 +659,7 @@ Blockly.Arduino.arduino_dfplayer_read_now = function () {
 };
 
 //DFPlayer Mini 获取U盘|SD卡|FLASH的总文件数
-Blockly.Arduino.arduino_dfplayer_readFileCounts = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_readFileCounts'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_device_type = Blockly.Arduino.valueToCode(this, 'device_type', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_play_data = this.getFieldValue('play_data');
@@ -668,20 +668,20 @@ Blockly.Arduino.arduino_dfplayer_readFileCounts = function () {
 };
 
 //DFPlayer Mini 获取指定文件夹下的文件数
-Blockly.Arduino.arduino_dfplayer_readFileCountsInFolder = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_readFileCountsInFolder'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var value_folder_data = Blockly.Arduino.valueToCode(this, 'folder_data', Blockly.Arduino.ORDER_ATOMIC);
     var code = '' + text_dfplayer_name + '.readFileCountsInFolder(' + value_folder_data + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.arduino_dfplayer_available = function () {
+Blockly.Arduino.forBlock['arduino_dfplayer_available'] = function () {
     var text_dfplayer_name = this.getFieldValue('dfplayer_name');
     var dropdown_type = this.getFieldValue('type');
     var code = '' + text_dfplayer_name + '.' + dropdown_type + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-Blockly.Arduino.I2Cmotor = function () {
+Blockly.Arduino.forBlock['I2Cmotor'] = function () {
     var motorNO = this.getFieldValue('motor');
     var speed = Blockly.Arduino.valueToCode(this, 'SPEED', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h> ';
@@ -702,7 +702,7 @@ Blockly.Arduino.I2Cmotor = function () {
     return code;
 };
 //M9101X mp3 单线控制播放
-Blockly.Arduino.M9101X_S_MP3_CONTROL = function () {
+Blockly.Arduino.forBlock['M9101X_S_MP3_CONTROL'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var CONTROL_TYPE = this.getFieldValue('CONTROL_TYPE');
     Blockly.Arduino.definitions_['include_N910X'] = '#include <RL_N910X.h>';
@@ -713,7 +713,7 @@ Blockly.Arduino.M9101X_S_MP3_CONTROL = function () {
 };
 
 //M9101X mp3 单线音量控制
-Blockly.Arduino.M9101X_S_MP3_VOL_CONTROL = function () {
+Blockly.Arduino.forBlock['M9101X_S_MP3_VOL_CONTROL'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var vol = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_N910X'] = '#include <RL_N910X.h>';
@@ -723,7 +723,7 @@ Blockly.Arduino.M9101X_S_MP3_VOL_CONTROL = function () {
     return code;
 };
 //M9101X mp3 单线播放第N首
-Blockly.Arduino.M9101X_S_MP3_PLAY_NUM = function () {
+Blockly.Arduino.forBlock['M9101X_S_MP3_PLAY_NUM'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_N910X'] = '#include <RL_N910X.h>';

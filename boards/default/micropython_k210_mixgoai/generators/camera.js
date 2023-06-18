@@ -3,17 +3,17 @@
 goog.provide('Blockly.Python.camera');
 goog.require('Blockly.Python');
 
-Blockly.Python.mode = function () {
+Blockly.Python.forBlock['mode'] = function () {
     var code = this.getFieldValue('flag');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.size = function () {
+Blockly.Python.forBlock['size'] = function () {
     var code = this.getFieldValue('flag');
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.camera_init = function () {	
+Blockly.Python.forBlock['camera_init'] = function () {	
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key1 = Blockly.Python.valueToCode(this,'key1', Blockly.Python.ORDER_ATOMIC);
   var key2 = Blockly.Python.valueToCode(this,'key2', Blockly.Python.ORDER_ATOMIC);
@@ -28,68 +28,68 @@ Blockly.Python.camera_init = function () {
   return code;  
 };
 
-Blockly.Python.camera_reset = function () {
+Blockly.Python.forBlock['camera_reset'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var code = "sensor.reset()\n";
   return code;  
 };
 
-Blockly.Python.camera_set_pixformat = function () {
+Blockly.Python.forBlock['camera_set_pixformat'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.set_pixformat("+key+")\n";
   return code;  
 };
 
-Blockly.Python.camera_set_framesize = function () {
+Blockly.Python.forBlock['camera_set_framesize'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.set_framesize("+key+")\n";
   return code;  
 };
 
-Blockly.Python.camera_run = function () {
+Blockly.Python.forBlock['camera_run'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.run("+key+")\n";
   return code;  
 };
 
-Blockly.Python.camera_skip_frames = function () {
+Blockly.Python.forBlock['camera_skip_frames'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var frame =Blockly.Python.valueToCode(this, 'frame',Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.skip_frames(n="+frame+")\n";
   return code;  
 };
 
-Blockly.Python.camera_snapshot = function(){
+Blockly.Python.forBlock['camera_snapshot'] = function(){
     Blockly.Python.definitions_['import_sensor'] = 'import sensor';
     var code =  'sensor.snapshot()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.camera_shutdown = function () {
+Blockly.Python.forBlock['camera_shutdown'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.shutdown("+key+")\n";
   return code;  
 };
 
-Blockly.Python.camera_set_hmirror = function () {
+Blockly.Python.forBlock['camera_set_hmirror'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.set_hmirror("+key+")\n";
   return code;  
 };
 
-Blockly.Python.camera_set_vflip = function () {
+Blockly.Python.forBlock['camera_set_vflip'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.set_vflip("+key+")\n";
   return code;  
 };
 
-Blockly.Python.camera_set_colorbar = function () {
+Blockly.Python.forBlock['camera_set_colorbar'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = Blockly.Python.valueToCode(this,'key', Blockly.Python.ORDER_ATOMIC);
   var code = "sensor.set_colorbar("+key+")\n";
@@ -98,14 +98,14 @@ Blockly.Python.camera_set_colorbar = function () {
 
 
 
-Blockly.Python.camera_getinfo = function () {
+Blockly.Python.forBlock['camera_getinfo'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = this.getFieldValue('key');
   var code = "sensor."+key+"()";
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
 
-Blockly.Python.camera_setmun = function () {
+Blockly.Python.forBlock['camera_setmun'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var key = this.getFieldValue('key');
   var num =Blockly.Python.valueToCode(this, 'num',Blockly.Python.ORDER_ATOMIC);
@@ -113,7 +113,7 @@ Blockly.Python.camera_setmun = function () {
   return code;  
 };
 
-Blockly.Python.camera_set_windowing = function () {
+Blockly.Python.forBlock['camera_set_windowing'] = function () {
   Blockly.Python.definitions_['import_sensor'] = 'import sensor';
   var numa =Blockly.Python.valueToCode(this, 'numa',Blockly.Python.ORDER_ATOMIC);
   var numb =Blockly.Python.valueToCode(this, 'numb',Blockly.Python.ORDER_ATOMIC);

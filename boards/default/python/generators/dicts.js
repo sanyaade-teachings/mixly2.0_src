@@ -28,7 +28,7 @@ goog.provide('Blockly.Python.dicts');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.dicts_create_with = function() {
+Blockly.Python.forBlock['dicts_create_with'] = function() {
   // Create a list with any number of elements of any type.
   //var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -53,13 +53,13 @@ Blockly.Python.dicts_create_with = function() {
 
 
 
-Blockly.Python.dicts_keys = function() {
+Blockly.Python.forBlock['dicts_keys'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName+'.keys()';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_get = function() {
+Blockly.Python.forBlock['dicts_get'] = function() {
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   //var size=window.parseFloat(this.getFieldValue('SIZE'));
@@ -69,7 +69,7 @@ Blockly.Python.dicts_get = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_get_default = function() {
+Blockly.Python.forBlock['dicts_get_default'] = function() {
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   //var size=window.parseFloat(this.getFieldValue('SIZE'));
@@ -80,7 +80,7 @@ Blockly.Python.dicts_get_default = function() {
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_add_or_change = function(){
+Blockly.Python.forBlock['dicts_add_or_change'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || 'mydict';
   var text = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ASSIGNMENT);
   // var text=this.getFieldValue('KEY');
@@ -89,7 +89,7 @@ Blockly.Python.dicts_add_or_change = function(){
   return code;
 };
 
-Blockly.Python.dicts_delete = function() {
+Blockly.Python.forBlock['dicts_delete'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || 'mydict';
   var text = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ASSIGNMENT);
   // var text=this.getFieldValue('KEY');
@@ -97,44 +97,44 @@ Blockly.Python.dicts_delete = function() {
   return code;
 };
 
-Blockly.Python.dicts_update = function() {
+Blockly.Python.forBlock['dicts_update'] = function() {
  var varName2 = Blockly.Python.valueToCode(this, 'DICT2', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName+'.update(' + varName2 +')\n';
   return code;
 };
 
-Blockly.Python.dicts_clear = function() {
+Blockly.Python.forBlock['dicts_clear'] = function() {
  var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName+'.clear()\n';
   return code;
 };
 
-Blockly.Python.dicts_items = function() {
+Blockly.Python.forBlock['dicts_items'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName+'.items()';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_values = function() {
+Blockly.Python.forBlock['dicts_values'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code=varName+'.values()';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_length = function() {
+Blockly.Python.forBlock['dicts_length'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code='len(' +varName + ')';
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_deldict = function() {
+Blockly.Python.forBlock['dicts_deldict'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var code='del ' + varName + '\n';
   return code;
 };
 
-Blockly.Python.dicts_add_change_del = function(block){
+Blockly.Python.forBlock['dicts_add_change_del'] = function(block){
   var dict = Blockly.Python.valueToCode(block, 'DICT',
       Blockly.Python.ORDER_MEMBER) || '[]';
   var mode = block.getFieldValue('WHERE');
@@ -160,7 +160,7 @@ Blockly.Python.dicts_add_change_del = function(block){
   return code;
 };
 
-Blockly.Python.dicts_pop = function(){
+Blockly.Python.forBlock['dicts_pop'] = function(){
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var text = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ASSIGNMENT);
   // var text=this.getFieldValue('KEY');
@@ -169,7 +169,7 @@ Blockly.Python.dicts_pop = function(){
 }
 
 
-Blockly.Python.dicts_setdefault = function() {
+Blockly.Python.forBlock['dicts_setdefault'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || 'mydict';
   var text = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ASSIGNMENT);
   // var text=this.getFieldValue('KEY');
@@ -178,7 +178,7 @@ Blockly.Python.dicts_setdefault = function() {
   return code;
 };
 
-Blockly.Python.dicts_create_with_noreturn = function() {
+Blockly.Python.forBlock['dicts_create_with_noreturn'] = function() {
   // Create a list with any number of elements of any type.
   // var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
   //  Blockly.Variables.NAME_TYPE);
@@ -202,7 +202,7 @@ Blockly.Python.dicts_create_with_noreturn = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.dicts_todict = function() {  
+Blockly.Python.forBlock['dicts_todict'] = function() {  
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'
   return ['dict('+str+')', Blockly.Python.ORDER_ATOMIC];
 };

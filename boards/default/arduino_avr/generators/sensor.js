@@ -5,7 +5,7 @@ goog.require('Blockly.Arduino');
 
 goog.require('Mixly.JSFuncs');
 
-Blockly.Arduino.gps_init = function () {
+Blockly.Arduino.forBlock['gps_init'] = function () {
     Blockly.Arduino.definitions_['include_TinyGPS++'] = '#include <TinyGPS++.h>';
     Blockly.Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
     var rx = Blockly.Arduino.valueToCode(this, 'RX', Blockly.Arduino.ORDER_ATOMIC);
@@ -17,29 +17,29 @@ Blockly.Arduino.gps_init = function () {
     return '';
 };
 
-Blockly.Arduino.gps_data_available = function () {
+Blockly.Arduino.forBlock['gps_data_available'] = function () {
     var code = 'gps_ss.available()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.gps_data_encode = function () {
+Blockly.Arduino.forBlock['gps_data_encode'] = function () {
     var code = 'gps.encode(gps_ss.read())';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.gps_xxx_isValid = function () {
+Blockly.Arduino.forBlock['gps_xxx_isValid'] = function () {
     var WHAT = this.getFieldValue('WHAT');
     var code = 'gps.' + WHAT + '.isValid()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.gps_getData_xxx = function () {
+Blockly.Arduino.forBlock['gps_getData_xxx'] = function () {
     var WHAT = this.getFieldValue('WHAT');
     var code = 'gps.' + WHAT + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.chaoshengbo2 = function () {
+Blockly.Arduino.forBlock['chaoshengbo2'] = function () {
     var Trig = this.getFieldValue('Trig');
     var Echo = this.getFieldValue('Echo');
     Blockly.Arduino.setups_['setup_output_' + Trig] = 'pinMode(' + Trig + ', OUTPUT);';
@@ -56,7 +56,7 @@ Blockly.Arduino.chaoshengbo2 = function () {
     return [funcName + '()', Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.DHT = function () {
+Blockly.Arduino.forBlock['DHT'] = function () {
     var sensor_type = this.getFieldValue('TYPE');
     var dropdown_pin = this.getFieldValue('PIN');
     var what = this.getFieldValue('WHAT');
@@ -72,7 +72,7 @@ Blockly.Arduino.DHT = function () {
 }
 
 //LM35 Temperature
-Blockly.Arduino.LM35 = function () {
+Blockly.Arduino.forBlock['LM35'] = function () {
     var board_type = Mixly.JSFuncs.getPlatform();
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'analogRead(' + dropdown_pin + ')*0.488';
@@ -85,7 +85,7 @@ Blockly.Arduino.LM35 = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.ds18b20 = function () {
+Blockly.Arduino.forBlock['ds18b20'] = function () {
     var dropdown_pin = this.getFieldValue('PIN');
     var unit = this.getFieldValue('UNIT');
     Blockly.Arduino.definitions_['include_OneWire'] = '#include <OneWire.h>';
@@ -104,7 +104,7 @@ Blockly.Arduino.ds18b20 = function () {
     return ['ds18b20_' + dropdown_pin + '_getTemp(' + unit + ')', Blockly.Arduino.ORDER_ATOMIC];
 }
 //初始化MLX90614红外测温传感器
-Blockly.Arduino.mlx90614_init = function () {
+Blockly.Arduino.forBlock['mlx90614_init'] = function () {
     var value_mlx90614_address = Blockly.Arduino.valueToCode(this, 'mlx90614_address', Blockly.Arduino.ORDER_ATOMIC);
     var text_mlx90614_name = 'MLX';
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
@@ -115,13 +115,13 @@ Blockly.Arduino.mlx90614_init = function () {
     return code;
 };
 //MLX90614获取数据
-Blockly.Arduino.mlx90614_get_data = function () {
+Blockly.Arduino.forBlock['mlx90614_get_data'] = function () {
     var text_mlx90614_name = 'MLX';
     var dropdown_mlx90614_data = this.getFieldValue('mlx90614_data');
     var code = '' + text_mlx90614_name + '.' + dropdown_mlx90614_data + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-Blockly.Arduino.weightSensor = function () {
+Blockly.Arduino.forBlock['weightSensor'] = function () {
     var DOUT = this.getFieldValue('DOUT');
     var SCK = this.getFieldValue('SCK');
     var scale = Blockly.Arduino.valueToCode(this, 'scale', Blockly.Arduino.ORDER_ATOMIC);
@@ -133,7 +133,7 @@ Blockly.Arduino.weightSensor = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 //DS1302
-Blockly.Arduino.DS1302_init = function () {
+Blockly.Arduino.forBlock['DS1302_init'] = function () {
     var dropdown_rst = Blockly.Arduino.valueToCode(this, 'RST', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_dat = Blockly.Arduino.valueToCode(this, 'DAT', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_clk = Blockly.Arduino.valueToCode(this, 'CLK', Blockly.Arduino.ORDER_ATOMIC);
@@ -146,7 +146,7 @@ Blockly.Arduino.DS1302_init = function () {
     return "";
 };
 
-Blockly.Arduino.DS1307_init = function () {
+Blockly.Arduino.forBlock['DS1307_init'] = function () {
     var SDA = Blockly.Arduino.valueToCode(this, 'SDA', Blockly.Arduino.ORDER_ATOMIC);
     var SCL = Blockly.Arduino.valueToCode(this, 'SCL', Blockly.Arduino.ORDER_ATOMIC);
     var RTCType = this.getFieldValue('RTCType');
@@ -165,13 +165,13 @@ Blockly.Arduino.DS1307_init = function () {
     return "";
 }
 
-Blockly.Arduino.RTC_get_time = function () {
+Blockly.Arduino.forBlock['RTC_get_time'] = function () {
     var timeType = this.getFieldValue('TIME_TYPE');
     var code = 'Rtc.GetDateTime().' + timeType + '()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.RTC_date = function () {
+Blockly.Arduino.forBlock['RTC_date'] = function () {
     var year = Blockly.Arduino.valueToCode(this, "year", Blockly.Arduino.ORDER_ATOMIC);
     var month = Blockly.Arduino.valueToCode(this, "month", Blockly.Arduino.ORDER_ATOMIC);
     var day = Blockly.Arduino.valueToCode(this, "day", Blockly.Arduino.ORDER_ATOMIC);
@@ -222,7 +222,7 @@ Blockly.Arduino.RTC_date = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
-Blockly.Arduino.RTC_time = function () {
+Blockly.Arduino.forBlock['RTC_time'] = function () {
     var hour = Blockly.Arduino.valueToCode(this, "hour", Blockly.Arduino.ORDER_ATOMIC);
     var minute = Blockly.Arduino.valueToCode(this, "minute", Blockly.Arduino.ORDER_ATOMIC);
     var second = Blockly.Arduino.valueToCode(this, "second", Blockly.Arduino.ORDER_ATOMIC);
@@ -237,7 +237,7 @@ Blockly.Arduino.RTC_time = function () {
 }
 
 //设置时间
-Blockly.Arduino.RTC_set_time = function () {
+Blockly.Arduino.forBlock['RTC_set_time'] = function () {
     var value_date = Blockly.Arduino.valueToCode(this, 'date', Blockly.Arduino.ORDER_ATOMIC);
     var value_time = Blockly.Arduino.valueToCode(this, 'time', Blockly.Arduino.ORDER_ATOMIC);
     var code = '';
@@ -245,19 +245,19 @@ Blockly.Arduino.RTC_set_time = function () {
     return code;
 };
 //获取烧录时间和日期
-Blockly.Arduino.get_system_date_time = function () {
+Blockly.Arduino.forBlock['get_system_date_time'] = function () {
     var dropdown_type = this.getFieldValue('type');
     var code = '__' + dropdown_type + '__';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-Blockly.Arduino.RTC_set_date = function () {
+Blockly.Arduino.forBlock['RTC_set_date'] = function () {
     var RTCName = "myRTC";
     var code = RTCName + '.setDate(' + year + ',' + month + ',' + day + ');\n';
     code += RTCName + '.setDOW(' + year + ',' + month + ',' + day + ');\n';
     return code;
 }
 //传感器_sht20
-Blockly.Arduino.SHT20 = function () {
+Blockly.Arduino.forBlock['SHT20'] = function () {
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['include_DFRobot_SHT20'] = '#include <DFRobot_SHT20.h>';
     Blockly.Arduino.definitions_['var_declare_DFRobot_SHT20'] = 'DFRobot_SHT20 sht20;\n';
@@ -269,7 +269,7 @@ Blockly.Arduino.SHT20 = function () {
 };
 
 //传感器_重力感应块
-Blockly.Arduino.ADXL345 = function () {
+Blockly.Arduino.forBlock['ADXL345'] = function () {
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['include_I2Cdev'] = '#include <I2Cdev.h>';
     Blockly.Arduino.definitions_['include_ADXL345'] = '#include <ADXL345.h>';
@@ -281,7 +281,7 @@ Blockly.Arduino.ADXL345 = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 //传感器_重力感应块
-Blockly.Arduino.LIS3DHTR = function () {
+Blockly.Arduino.forBlock['LIS3DHTR'] = function () {
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['include_LIS3DHTR'] = '#include <LIS3DHTR.h>';
     Blockly.Arduino.definitions_['include_define_Wire'] = '#define WIRE  Wire';
@@ -295,7 +295,7 @@ Blockly.Arduino.LIS3DHTR = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 //传感器_重力感应块
-Blockly.Arduino.ADXL345_setOffset = function () {
+Blockly.Arduino.forBlock['ADXL345_setOffset'] = function () {
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['include_I2Cdev'] = '#include <I2Cdev.h>';
     Blockly.Arduino.definitions_['include_ADXL345'] = '#include <ADXL345.h>';
@@ -320,7 +320,7 @@ Blockly.Arduino.ADXL345_setOffset = function () {
 
 
 //传感器-MPU6050-获取数据
-Blockly.Arduino.MPU6050 = function () {
+Blockly.Arduino.forBlock['MPU6050'] = function () {
     Blockly.Arduino.definitions_['include_MPU6050_tockn'] = '#include <MPU6050_tockn.h>';
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['var_declare_mpu6050'] = 'MPU6050 mpu6050(Wire);';
@@ -330,13 +330,13 @@ Blockly.Arduino.MPU6050 = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 //传感器-MPU6050-更新数据
-Blockly.Arduino.MPU6050_update = function () {
+Blockly.Arduino.forBlock['MPU6050_update'] = function () {
     var code = 'mpu6050.update();\n';
     return code;
 };
 
 //旋转编码器写
-Blockly.Arduino.encoder_write = function () {
+Blockly.Arduino.forBlock['encoder_write'] = function () {
     var Encoder_NO = this.getFieldValue('Encoder_NO');
     var value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'encoder_' + Encoder_NO + '.write(' + value + ');\n ';
@@ -344,14 +344,14 @@ Blockly.Arduino.encoder_write = function () {
 };
 
 //旋转编码器读值
-Blockly.Arduino.encoder_read = function () {
+Blockly.Arduino.forBlock['encoder_read'] = function () {
     var Encoder_NO = this.getFieldValue('Encoder_NO');
     var code = 'encoder_' + Encoder_NO + '.read()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //旋转编码管脚定义
-Blockly.Arduino.encoder_init = function () {
+Blockly.Arduino.forBlock['encoder_init'] = function () {
     var CLK = this.getFieldValue('CLK');
     var DT = this.getFieldValue('DT');
     var Encoder_NO = this.getFieldValue('Encoder_NO');
@@ -362,7 +362,7 @@ Blockly.Arduino.encoder_init = function () {
 };
 
 //旋转编码器写
-Blockly.Arduino.encoder_write1 = function () {
+Blockly.Arduino.forBlock['encoder_write1'] = function () {
     var Encoder_NO = this.getFieldValue('Encoder_NO');
     var value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'encoder_counter_' + Encoder_NO + ' = ' + value + ';\n ';
@@ -370,14 +370,14 @@ Blockly.Arduino.encoder_write1 = function () {
 };
 
 //旋转编码器读值
-Blockly.Arduino.encoder_read1 = function () {
+Blockly.Arduino.forBlock['encoder_read1'] = function () {
     var Encoder_NO = this.getFieldValue('Encoder_NO');
     var code = 'encoder_counter_' + Encoder_NO + '';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 //旋转编码管脚定义
-Blockly.Arduino.encoder_init1 = function () {
+Blockly.Arduino.forBlock['encoder_init1'] = function () {
     var CLK = this.getFieldValue('CLK');
     var DT = this.getFieldValue('DT');
     var Encoder_NO = this.getFieldValue('Encoder_NO');
@@ -400,7 +400,7 @@ Blockly.Arduino.encoder_init1 = function () {
 };
 
 // 旋转编码器初始化
-Blockly.Arduino.sensor_encoder_init = function () {
+Blockly.Arduino.forBlock['sensor_encoder_init'] = function () {
     var dropdownType = this.getFieldValue('TYPE');
     var mode = this.getFieldValue('mode');
     var valueClk = Blockly.Arduino.valueToCode(this, 'CLK', Blockly.Arduino.ORDER_ATOMIC);
@@ -413,7 +413,7 @@ Blockly.Arduino.sensor_encoder_init = function () {
 };
 
 // 旋转编码器读取
-Blockly.Arduino.sensor_encoder_get = function () {
+Blockly.Arduino.forBlock['sensor_encoder_get'] = function () {
     var dropdownType = this.getFieldValue('TYPE');
     var dropdownOperateType = this.getFieldValue('OPERATE_TYPE');
     var code = `encoder${dropdownType}.${dropdownOperateType}()`;
@@ -421,7 +421,7 @@ Blockly.Arduino.sensor_encoder_get = function () {
 };
 
 // 旋转编码器设置
-Blockly.Arduino.sensor_encoder_set = function () {
+Blockly.Arduino.forBlock['sensor_encoder_set'] = function () {
     var dropdownType = this.getFieldValue('TYPE');
     var valueData = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC);
     var dropdownOperateType = this.getFieldValue('OPERATE_TYPE');
@@ -430,7 +430,7 @@ Blockly.Arduino.sensor_encoder_set = function () {
 };
 
 // 旋转编码器事件
-Blockly.Arduino.sensor_encoder_handle = function () {
+Blockly.Arduino.forBlock['sensor_encoder_handle'] = function () {
     var dropdownType = this.getFieldValue('TYPE');
     var dropdownOperateType = this.getFieldValue('OPERATE_TYPE');
     var statementsDo = Blockly.Arduino.statementToCode(this, 'DO');
@@ -461,7 +461,7 @@ Blockly.Arduino.sensor_encoder_handle = function () {
 };
 
 //BME280读取
-Blockly.Arduino.BME280_READ = function () {
+Blockly.Arduino.forBlock['BME280_READ'] = function () {
     var TYPE = this.getFieldValue('TYPE');
     var address = Blockly.Arduino.valueToCode(this, 'address', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
@@ -481,7 +481,7 @@ Blockly.Arduino.BME280_READ = function () {
     return [TYPE + "." + code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.PS2_init = function () {
+Blockly.Arduino.forBlock['PS2_init'] = function () {
     Blockly.Arduino.definitions_['include_PS2X_lib'] = '#include <PS2X_lib.h>';
     Blockly.Arduino.definitions_['var_declare_PS2X'] = 'PS2X ps2x;';
     var PS2_DAT = this.getFieldValue('PS2_DAT');
@@ -494,19 +494,19 @@ Blockly.Arduino.PS2_init = function () {
     return "";
 };
 
-Blockly.Arduino.PS2_update = function () {
+Blockly.Arduino.forBlock['PS2_update'] = function () {
     var code = 'ps2x.read_gamepad(false, 0);\ndelay(30);\n';
     return code;
 };
 
-Blockly.Arduino.PS2_Button = function () {
+Blockly.Arduino.forBlock['PS2_Button'] = function () {
     var bt = this.getFieldValue('psbt');
     var btstate = this.getFieldValue('btstate');
     var code = "ps2x." + btstate + "(" + bt + ")";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.PS2_stk = function () {
+Blockly.Arduino.forBlock['PS2_stk'] = function () {
     var stk = this.getFieldValue('psstk');
     var code = "ps2x.Analog(" + stk + ")";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -514,7 +514,7 @@ Blockly.Arduino.PS2_stk = function () {
 
 
 // 改用DF TCS34725 颜色识别传感器库
-Blockly.Arduino.TCS34725_Get_RGB = function () {
+Blockly.Arduino.forBlock['TCS34725_Get_RGB'] = function () {
     Blockly.Arduino.definitions_['include_DFRobot_TCS34725'] = '#include <DFRobot_TCS34725.h>';
     Blockly.Arduino.definitions_['var_declare_TCS34725'] = 'DFRobot_TCS34725 tcs34725;\n';
     // Blockly.Arduino.setups_['setup_DFRobot_TCS34725' ] = 'if (tcs34725.begin()) {\n  Serial.println("Found sensor");\n} \nelse { \nSerial.println("No TCS34725 found ... check your connections");\nwhile (1);\n}';
@@ -524,7 +524,7 @@ Blockly.Arduino.TCS34725_Get_RGB = function () {
 };
 
 //初始化TCS230颜色传感器
-Blockly.Arduino.tcs230_init = function () {
+Blockly.Arduino.forBlock['tcs230_init'] = function () {
     var value_tcs230_s0 = Blockly.Arduino.valueToCode(this, 'tcs230_s0', Blockly.Arduino.ORDER_ATOMIC);
     var value_tcs230_s1 = Blockly.Arduino.valueToCode(this, 'tcs230_s1', Blockly.Arduino.ORDER_ATOMIC);
     var value_tcs230_s2 = Blockly.Arduino.valueToCode(this, 'tcs230_s2', Blockly.Arduino.ORDER_ATOMIC);
@@ -593,13 +593,13 @@ Blockly.Arduino.tcs230_init = function () {
 };
 
 //TCS230颜色传感器 获取RGB值
-Blockly.Arduino.tcs230_Get_RGB = function () {
+Blockly.Arduino.forBlock['tcs230_Get_RGB'] = function () {
     var dropdown_tcs230_color = this.getFieldValue('tcs230_color');
     var code = 'tcs230_Getcolor(\'' + dropdown_tcs230_color + '\')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.Arduino_keypad_4_4_start = function () {
+Blockly.Arduino.forBlock['Arduino_keypad_4_4_start'] = function () {
     var text_keypad_name = this.getFieldValue('keypad_name');
     var text_keypad_row = Blockly.Arduino.valueToCode(this, 'keypad_row', Blockly.Arduino.ORDER_ATOMIC);
     var text_keypad_col = Blockly.Arduino.valueToCode(this, 'keypad_col', Blockly.Arduino.ORDER_ATOMIC);
@@ -616,7 +616,7 @@ Blockly.Arduino.Arduino_keypad_4_4_start = function () {
     return code;
 };
 
-Blockly.Arduino.keypad_row_data = function () {
+Blockly.Arduino.forBlock['keypad_row_data'] = function () {
     var pin_keypad_row_1 = Blockly.Arduino.valueToCode(this, 'keypad_row_1', Blockly.Arduino.ORDER_ATOMIC);
     var pin_keypad_row_2 = Blockly.Arduino.valueToCode(this, 'keypad_row_2', Blockly.Arduino.ORDER_ATOMIC);
     var pin_keypad_row_3 = Blockly.Arduino.valueToCode(this, 'keypad_row_3', Blockly.Arduino.ORDER_ATOMIC);
@@ -625,7 +625,7 @@ Blockly.Arduino.keypad_row_data = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.keypad_col_data = function () {
+Blockly.Arduino.forBlock['keypad_col_data'] = function () {
     var pin_keypad_col_1 = Blockly.Arduino.valueToCode(this, 'keypad_col_1', Blockly.Arduino.ORDER_ATOMIC);
     var pin_keypad_col_2 = Blockly.Arduino.valueToCode(this, 'keypad_col_2', Blockly.Arduino.ORDER_ATOMIC);
     var pin_keypad_col_3 = Blockly.Arduino.valueToCode(this, 'keypad_col_3', Blockly.Arduino.ORDER_ATOMIC);
@@ -634,7 +634,7 @@ Blockly.Arduino.keypad_col_data = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.keypad_type_data = function () {
+Blockly.Arduino.forBlock['keypad_type_data'] = function () {
     var text_keypad_1_1 = this.getFieldValue('keypad_1_1');
     var text_keypad_1_2 = this.getFieldValue('keypad_1_2');
     var text_keypad_1_3 = this.getFieldValue('keypad_1_3');
@@ -662,7 +662,7 @@ Blockly.Arduino.keypad_type_data = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.get_keypad_num = function () {
+Blockly.Arduino.forBlock['get_keypad_num'] = function () {
     var text_keypad_name = this.getFieldValue('keypad_name');
     var code = '' + text_keypad_name + '.getKey()';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
@@ -686,7 +686,7 @@ Blockly.Arduino['arduino_keypad_event'] = function () {
 };
 
 //传感器_重力感应块_获取9轴数据
-Blockly.Arduino.mixgo_MPU9250 = function () {
+Blockly.Arduino.forBlock['mixgo_MPU9250'] = function () {
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['include_FaBo9Axis_MPU9250'] = '#include <FaBo9Axis_MPU9250.h>';
     Blockly.Arduino.definitions_['var_declare_FaBo9Axis'] = 'FaBo9Axis fabo_9axis;\n float ax,ay,az,gx,gy,gz,mx,my,mz;';
@@ -705,7 +705,7 @@ Blockly.Arduino.mixgo_MPU9250 = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.NTC_TEMP = function () {
+Blockly.Arduino.forBlock['NTC_TEMP'] = function () {
     var PIN = this.getFieldValue('PIN');
     var NominalResistance = Blockly.Arduino.valueToCode(this, 'NominalResistance', Blockly.Arduino.ORDER_ATOMIC);
     var betaCoefficient = Blockly.Arduino.valueToCode(this, 'betaCoefficient', Blockly.Arduino.ORDER_ATOMIC);
@@ -716,7 +716,7 @@ Blockly.Arduino.NTC_TEMP = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 //AHT20/21温湿度传感器
-Blockly.Arduino.AHT20_21 = function () {
+Blockly.Arduino.forBlock['AHT20_21'] = function () {
     Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
     Blockly.Arduino.definitions_['include_RL_AHT21'] = '#include <RL_AHT21.h>';
     Blockly.Arduino.definitions_['var_declare_AHT21'] = 'AHT21Class AHT21;\n';

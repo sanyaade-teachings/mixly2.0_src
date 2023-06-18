@@ -4,13 +4,13 @@ goog.provide('Blockly.Python.base');
 goog.require('Blockly.Python');
 
 // ok
-Blockly.Python.inout_highlow = function () {
+Blockly.Python.forBlock['inout_highlow'] = function () {
     // Boolean values HIGH and LOW.
     var code = (this.getFieldValue('BOOL') == 'HIGH') ? '1' : '0';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 // ok
-Blockly.Python.inout_digital_write = function () {
+Blockly.Python.forBlock['inout_digital_write'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var dropdown_stat = Blockly.Python.valueToCode(this, 'STAT', Blockly.Python.ORDER_ATOMIC);
@@ -19,7 +19,7 @@ Blockly.Python.inout_digital_write = function () {
     return code;
 };
 // ok
-Blockly.Python.inout_digital_read = function () {
+Blockly.Python.forBlock['inout_digital_read'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var code = "";
@@ -27,7 +27,7 @@ Blockly.Python.inout_digital_read = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 //ok
-Blockly.Python.inout_pwm_analog_write = function () {
+Blockly.Python.forBlock['inout_pwm_analog_write'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     //var dropdown_stat = this.getFieldValue('STAT');
@@ -37,7 +37,7 @@ Blockly.Python.inout_pwm_analog_write = function () {
     return code;
 };
 //ok
-Blockly.Python.inout_analog_write = function () {
+Blockly.Python.forBlock['inout_analog_write'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     //var dropdown_stat = this.getFieldValue('STAT');
@@ -47,7 +47,7 @@ Blockly.Python.inout_analog_write = function () {
     return code;
 };
 //ok
-Blockly.Python.inout_analog_write_set = function () {
+Blockly.Python.forBlock['inout_analog_write_set'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var value_num = Blockly.Python.valueToCode(this, 'NUM', Blockly.Python.ORDER_ATOMIC);
@@ -57,7 +57,7 @@ Blockly.Python.inout_analog_write_set = function () {
     return code;
 };
 
-Blockly.Python.inout_pwm_analog_write_set_freq = function () {
+Blockly.Python.forBlock['inout_pwm_analog_write_set_freq'] = function () {
     //Blockly.Python.definitions_['import_machine_Pin'] = "from machine import Pin";
    // Blockly.Python.definitions_['import_machine_PWM'] = "from machine import PWM";
    Blockly.Python.definitions_['import_machine'] = 'import machine';
@@ -68,7 +68,7 @@ Blockly.Python.inout_pwm_analog_write_set_freq = function () {
     return code;
 };
 //ok
-Blockly.Python.inout_analog_read = function () {
+Blockly.Python.forBlock['inout_analog_read'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     //Blockly.Python.setups_['setup_input_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
@@ -76,14 +76,14 @@ Blockly.Python.inout_analog_read = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 //ok
-Blockly.Python.inout_pin_pressed = function(){
+Blockly.Python.forBlock['inout_pin_pressed'] = function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var pin = Blockly.Python.valueToCode(this, 'pin', Blockly.Python.ORDER_ATOMIC);
     var code = pin +'.read()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.inout_pin_attachInterrupt = function () {
+Blockly.Python.forBlock['inout_pin_attachInterrupt'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
@@ -96,7 +96,7 @@ Blockly.Python.inout_pin_attachInterrupt = function () {
     return code;
 };
 
-Blockly.Python.inout_digital_init = function () {
+Blockly.Python.forBlock['inout_digital_init'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var pin_obj = this.getFieldValue('PIN_OBJ') || 'pin#';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -106,7 +106,7 @@ Blockly.Python.inout_digital_init = function () {
     return code;
 };
 
-Blockly.Python.inout_pwm_analog_write_init = function () {
+Blockly.Python.forBlock['inout_pwm_analog_write_init'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var pin_obj = this.getFieldValue('PIN_OBJ') || 'pwm#';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -115,7 +115,7 @@ Blockly.Python.inout_pwm_analog_write_init = function () {
     return code;
 };
 //ok
-Blockly.Python.inout_analog_write_init = function () {
+Blockly.Python.forBlock['inout_analog_write_init'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var pin_obj = this.getFieldValue('PIN_OBJ') || 'dac#';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -123,7 +123,7 @@ Blockly.Python.inout_analog_write_init = function () {
     var code = varName + ' = machine.DAC(machine.Pin(' + dropdown_pin + '))\n';
     return code;
 };
-Blockly.Python.inout_analog_read_init = function () {
+Blockly.Python.forBlock['inout_analog_read_init'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var pin_obj = this.getFieldValue('PIN_OBJ') || 'adc#';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -132,7 +132,7 @@ Blockly.Python.inout_analog_read_init = function () {
     return code;
 };
 
-Blockly.Python.inout_analog_atten = function () {
+Blockly.Python.forBlock['inout_analog_atten'] = function () {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     //var dropdown_stat = this.getFieldValue('STAT');
@@ -142,7 +142,7 @@ Blockly.Python.inout_analog_atten = function () {
 };
 
 //ok
-Blockly.Python.inout_pin_pressed_init = function(){
+Blockly.Python.forBlock['inout_pin_pressed_init'] = function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var pin_obj = this.getFieldValue('PIN_OBJ') || 'tc#';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);

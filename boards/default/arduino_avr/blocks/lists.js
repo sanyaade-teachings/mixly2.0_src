@@ -25,7 +25,7 @@ Blockly.Blocks['lists_create_with'] = {
         this.updateShape_();
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['lists_create_with_item'], this));
         this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
     },
     /**
@@ -185,7 +185,7 @@ Blockly.Blocks['lists_create_with2'] = {
         this.updateShape_();
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['lists_create_with_item'], this));
         this.setTooltip(Blockly.Msg.LISTS_CREATE_WITH_TOOLTIP);
     },
     /**
@@ -594,7 +594,7 @@ Blockly.Blocks.lists_array2_setup_get_data = {
         this.updateShape_();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['lists_create_with_item'], this));
         this.setTooltip("");
     },
     /**

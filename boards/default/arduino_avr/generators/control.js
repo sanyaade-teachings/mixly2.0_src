@@ -6,7 +6,7 @@ goog.require('Blockly.Arduino');
 
 goog.require('Mixly.JSFuncs');
 
-Blockly.Arduino.base_setup = function () {
+Blockly.Arduino.forBlock['base_setup'] = function () {
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     if (branch) {
@@ -15,7 +15,7 @@ Blockly.Arduino.base_setup = function () {
     return '';
 };
 
-Blockly.Arduino.controls_if = function () {
+Blockly.Arduino.forBlock['controls_if'] = function () {
     // If/elseif/else condition.
     var n = 0;
     var argument = Blockly.Arduino.valueToCode(this, 'IF' + n,
@@ -35,7 +35,7 @@ Blockly.Arduino.controls_if = function () {
     return code + '\n';
 };
 
-Blockly.Arduino.controls_switch_case = function () {
+Blockly.Arduino.forBlock['controls_switch_case'] = function () {
     var n = 0;
     var argument = Blockly.Arduino.valueToCode(this, 'IF' + n,
         Blockly.Arduino.ORDER_NONE) || 'NULL';
@@ -55,7 +55,7 @@ Blockly.Arduino.controls_switch_case = function () {
     return code + '\n';
 };
 
-Blockly.Arduino.controls_for = function () {
+Blockly.Arduino.forBlock['controls_for'] = function () {
     // For loop.
     var variable0 = Blockly.Arduino.variableDB_.getName(
         this.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -101,7 +101,7 @@ Blockly.Arduino.controls_for = function () {
     return code;
 };
 
-Blockly.Arduino.controls_whileUntil = function () {
+Blockly.Arduino.forBlock['controls_whileUntil'] = function () {
     // Do while/until loop.
     var argument0 = Blockly.Arduino.valueToCode(this, 'BOOL',
         Blockly.Arduino.ORDER_NONE) || 'false';
@@ -119,7 +119,7 @@ Blockly.Arduino.controls_whileUntil = function () {
     return 'while (' + argument0 + ') {\n' + branch + '}\n';
 };
 
-Blockly.Arduino.controls_flow_statements = function () {
+Blockly.Arduino.forBlock['controls_flow_statements'] = function () {
     // Flow statements: continue, break.
     switch (this.getFieldValue('FLOW')) {
         case 'BREAK':
@@ -130,20 +130,20 @@ Blockly.Arduino.controls_flow_statements = function () {
     throw 'Unknown flow statement.';
 };
 
-Blockly.Arduino.controls_delay = function () {
+Blockly.Arduino.forBlock['controls_delay'] = function () {
     var delay_time = Blockly.Arduino.valueToCode(this, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC) || '1000'
     var unit = this.getFieldValue('UNIT');
     var code = unit + '(' + delay_time + ');\n';
     return code;
 };
 
-Blockly.Arduino.controls_millis = function () {
+Blockly.Arduino.forBlock['controls_millis'] = function () {
     var unit = this.getFieldValue('UNIT');
     var code = unit + "()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.controls_mstimer2 = function () {
+Blockly.Arduino.forBlock['controls_mstimer2'] = function () {
     Blockly.Arduino.definitions_['include_MsTimer2'] = '#include <MsTimer2.h>';
     var time = Blockly.Arduino.valueToCode(this, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
     var funcName = 'msTimer2_func';
@@ -153,39 +153,39 @@ Blockly.Arduino.controls_mstimer2 = function () {
     return 'MsTimer2::set(' + time + ', ' + funcName + ');\n';
 };
 
-Blockly.Arduino.controls_mstimer2_start = function () {
+Blockly.Arduino.forBlock['controls_mstimer2_start'] = function () {
     Blockly.Arduino.definitions_['include_MsTimer2'] = '#include <MsTimer2.h>';
     return 'MsTimer2::start();\n';
 };
 
-Blockly.Arduino.controls_mstimer2_stop = function () {
+Blockly.Arduino.forBlock['controls_mstimer2_stop'] = function () {
     Blockly.Arduino.definitions_['include_MsTimer2'] = '#include <MsTimer2.h>';
     return 'MsTimer2::stop();\n';
 };
 
-Blockly.Arduino.controls_end_program = function () {
+Blockly.Arduino.forBlock['controls_end_program'] = function () {
     var board_type = Mixly.JSFuncs.getPlatform();
     if (board_type.match(RegExp(/ESP8266/)))
         return 'while(true) delay(1000);\n';
     else
         return 'while(true);\n';
 };
-Blockly.Arduino.controls_soft_reset = function () {
+Blockly.Arduino.forBlock['controls_soft_reset'] = function () {
     var funcName = 'resetFunc';
     var code = 'void(* resetFunc) (void) = 0;\n';
     Blockly.Arduino.definitions_[funcName] = code;
     return 'resetFunc();\n';
 };
-Blockly.Arduino.controls_interrupts = function () {
+Blockly.Arduino.forBlock['controls_interrupts'] = function () {
     return 'interrupts();\n';
 };
 
-Blockly.Arduino.controls_nointerrupts = function () {
+Blockly.Arduino.forBlock['controls_nointerrupts'] = function () {
     return 'noInterrupts();\n';
 };
 Blockly.Arduino.base_delay = Blockly.Arduino.controls_delay;
 //简单定时器
-Blockly.Arduino.simple_timer = function () {
+Blockly.Arduino.forBlock['simple_timer'] = function () {
     var NO = this.getFieldValue('NO');
     var timein = Blockly.Arduino.valueToCode(this, 'timein', Blockly.Arduino.ORDER_ATOMIC);
     var funcName = 'Simple_timer_' + NO;
@@ -200,7 +200,7 @@ Blockly.Arduino.simple_timer = function () {
 };
 
 //do-while循环
-Blockly.Arduino.do_while = function () {
+Blockly.Arduino.forBlock['do_while'] = function () {
     var statements_input_data = Blockly.Arduino.statementToCode(this, 'input_data');
     var value_select_data = Blockly.Arduino.valueToCode(this, 'select_data', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_type = this.getFieldValue('type');
@@ -218,7 +218,7 @@ Blockly.Arduino.do_while = function () {
 };
 
 //注册超级延时函数
-Blockly.Arduino.super_delay_function1 = function () {
+Blockly.Arduino.forBlock['super_delay_function1'] = function () {
     var number = this.getFieldValue('number');
     var timein = Blockly.Arduino.valueToCode(this, 'timein', Blockly.Arduino.ORDER_ATOMIC);
     var funcName = 'super_delay_function' + number;
@@ -232,7 +232,7 @@ Blockly.Arduino.super_delay_function1 = function () {
 };
 
 //执行超级延时函数
-Blockly.Arduino.execute_super_delay_function1 = function () {
+Blockly.Arduino.forBlock['execute_super_delay_function1'] = function () {
     var number = this.getFieldValue('number');
     var time_interval = Blockly.Arduino.valueToCode(this, 'time_interval', Blockly.Arduino.ORDER_ATOMIC);
     var frequency = Blockly.Arduino.valueToCode(this, 'frequency', Blockly.Arduino.ORDER_ATOMIC);

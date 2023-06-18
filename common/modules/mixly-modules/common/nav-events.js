@@ -46,7 +46,7 @@ NavEvents.init = () => {
             try {
                 var xmlDom = Blockly.Xml.workspaceToDom(Editor.blockEditor);
                 Editor.blockEditor.clear();
-                Blockly.Xml.domToWorkspace(Editor.blockEditor, xmlDom);
+                Blockly.Xml.domToWorkspace(xmlDom, Editor.blockEditor);
                 if (Editor.selected === 'BLOCK') {
                     Editor.blockEditorUpdateCode();
                 }

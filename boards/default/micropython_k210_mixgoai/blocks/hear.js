@@ -45,7 +45,7 @@ Blockly.Blocks['asrloca_config'] = {
         this.setInputsInline(false);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setMutator(new Blockly.Mutator(['iot_publish_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['iot_publish_item'], this));
         this.setTooltip("初始化语音识别，添加语音识别词条，需拼音中间-隔开，阈值");
     },
     /**

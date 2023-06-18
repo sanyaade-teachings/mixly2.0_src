@@ -929,7 +929,7 @@ Blockly.Blocks['weather_set_label'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setInputsInline(true);
-    this.setMutator(new Blockly.Mutator(['weather_set_label_item']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['weather_set_label_item'], this));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip();

@@ -39,7 +39,7 @@ Blockly.Blocks.factory_function_noreturn = {
   this.updateShape_();
   this.setPreviousStatement(true);
   this.setNextStatement(true);
-  this.setMutator(new Blockly.Mutator(['factory_create_with_item']));
+  this.setMutator(new Blockly.icons.MutatorIcon(['factory_create_with_item'], this));
 },
 mutationToDom: function() {
     //console.log('mutationToDom');
@@ -168,7 +168,7 @@ Blockly.Blocks.factory_function_return = {
   this.arguments_ = ['x'];//add
   this.updateShape_();
   this.setOutput(true);
-  this.setMutator(new Blockly.Mutator(['factory_create_with_item']));
+  this.setMutator(new Blockly.icons.MutatorIcon(['factory_create_with_item'], this));
 },
 mutationToDom: Blockly.Blocks.factory_function_noreturn.mutationToDom,
 domToMutation: Blockly.Blocks.factory_function_noreturn.domToMutation,
@@ -204,7 +204,7 @@ Blockly.Blocks.factory_callMethod_noreturn = {
   this.updateShape_();
   this.setPreviousStatement(true);
   this.setNextStatement(true);
-  this.setMutator(new Blockly.Mutator(['factory_create_with_item']));
+  this.setMutator(new Blockly.icons.MutatorIcon(['factory_create_with_item'], this));
 },
 mutationToDom: Blockly.Blocks.factory_function_noreturn.mutationToDom,
 domToMutation: Blockly.Blocks.factory_function_noreturn.domToMutation,
@@ -225,7 +225,7 @@ Blockly.Blocks.factory_callMethod_return = {
   this.arguments_ = ['x'];//add
   this.updateShape_();
   this.setOutput(true);
-  this.setMutator(new Blockly.Mutator(['factory_create_with_item']));
+  this.setMutator(new Blockly.icons.MutatorIcon(['factory_create_with_item'], this));
 },
 mutationToDom: Blockly.Blocks.factory_function_noreturn.mutationToDom,
 domToMutation: Blockly.Blocks.factory_function_noreturn.domToMutation,

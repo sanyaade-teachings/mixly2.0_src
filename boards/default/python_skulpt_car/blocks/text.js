@@ -655,7 +655,7 @@ Blockly.Blocks['text_format'] = {
         this.setPreviousStatement(false);
         this.setNextStatement(false);
         this.setInputsInline(true);
-        this.setMutator(new Blockly.Mutator(['text_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['text_create_with_item'], this));
         this.setOutput(true);
         this.setTooltip(Blockly.Msg.MIXLY_MIXPY_TEXT_FORMAT_TOOLTIP);
       },
@@ -837,7 +837,7 @@ Blockly.Blocks['text_format_noreturn'] = {
         this.setPreviousStatement(false);
         this.setNextStatement(false);
         this.setInputsInline(true);
-        this.setMutator(new Blockly.Mutator(['text_create_with_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['text_create_with_item'], this));
         this.setOutput(true);
         this.setTooltip(Blockly.Msg.MIXLY_MIXPY_TEXT_FORMAT_TOOLTIP);
       },

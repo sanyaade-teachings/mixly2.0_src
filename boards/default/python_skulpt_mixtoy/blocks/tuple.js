@@ -24,7 +24,7 @@ Blockly.Blocks['tuple_create_with'] = {
     this.updateShape_();
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['tuple_create_with_item']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['tuple_create_with_item'], this));
     this.setTooltip(Blockly.Msg.TUPLE_CREATE_WITH_TOOLTIP);
   },
   /**
@@ -561,7 +561,7 @@ Blockly.Blocks['tuple_create_with_noreturn'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
 	this.setOutput(true, "Tuple")
-    this.setMutator(new Blockly.Mutator(['tuple_create_with_item']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['tuple_create_with_item'], this));
     this.setTooltip(Blockly.Msg.TUPLE_CREATE_WITH_TOOLTIP);
   },
   /**

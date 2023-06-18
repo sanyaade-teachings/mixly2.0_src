@@ -121,7 +121,7 @@ Blockly.Blocks['iot_onenet_publish'] = {
         this.setInputsInline(false);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setMutator(new Blockly.Mutator(['iot_publish_item']));
+        this.setMutator(new Blockly.icons.MutatorIcon(['iot_publish_item'], this));
         this.setTooltip(Blockly.Msg.MIXLY_ESP32_IOT_ONENET_PUBLISH_TOOLTIP);
     },
     /**

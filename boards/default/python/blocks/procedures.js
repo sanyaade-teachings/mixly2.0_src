@@ -519,7 +519,8 @@ Blockly.Blocks['procedures_mutatorarg'] = {
    */
   validator_: function(varName) {
     var sourceBlock = this.getSourceBlock();
-    var outerWs = Blockly.icons.MutatorIcon.findParentWs(sourceBlock.workspace);
+    
+    var outerWs = sourceBlock.workspace.getRootWorkspace();
     varName = varName.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
     if (!varName) {
       return null;
@@ -570,7 +571,7 @@ Blockly.Blocks['procedures_mutatorarg'] = {
    * @this Blockly.FieldTextInput
    */
   deleteIntermediateVars_: function(newText) {
-    var outerWs = Blockly.icons.MutatorIcon.findParentWs(this.getSourceBlock().workspace);
+    var outerWs = this.getSourceBlock().workspace.getRootWorkspace();
     if (!outerWs) {
       return;
     }

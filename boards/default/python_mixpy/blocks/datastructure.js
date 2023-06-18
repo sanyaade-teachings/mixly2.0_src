@@ -30,7 +30,7 @@ Blockly.Msg['DS_HUE'] = 80;
       this.updateShape_();
       this.setPreviousStatement(true);
       this.setNextStatement(true);
-      this.setMutator(new Blockly.Mutator(['ds_create_linkedlist_item']));
+      this.setMutator(new Blockly.icons.MutatorIcon(['ds_create_linkedlist_item'], this));
       this.setTooltip(Blockly.Msg.DS_CREATE_LINKEDLIST_TOOLTIP);
     },
 

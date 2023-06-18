@@ -522,24 +522,24 @@ mixlyjs.renderXml = function (xmlContent) {
         console.log(error);
     }
     try {
-        var xml = Blockly.Xml.textToDom(xmlContent);
+        var xml = Blockly.utils.xml.textToDom(xmlContent);
         Mixly.Editor.blockEditor.clear();
-        Blockly.Xml.domToWorkspace(Mixly.Editor.blockEditor, xml);
+        Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
         Mixly.Editor.blockEditor.scrollCenter();
         Blockly.hideChaff();
     } catch (e) {
         try {
-            var xml = Blockly.Xml.textToDom(xmlData);
+            var xml = Blockly.utils.xml.textToDom(xmlData);
             Mixly.Editor.blockEditor.clear();
-            Blockly.Xml.domToWorkspace(Mixly.Editor.blockEditor, xml);
+            Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
             Mixly.Editor.blockEditor.scrollCenter();
             Blockly.hideChaff();
         } catch (e) {
             boardType = xmlContent.match(/(?<=board[\s]*=[\s]*\")[^\n\"]+(?=\")/g);
             alert("代码面向" + boardType[0] + "板卡开发，不支持本板卡")
-            var xml = Blockly.Xml.textToDom(oldBlock);
+            var xml = Blockly.utils.xml.textToDom(oldBlock);
             Mixly.Editor.blockEditor.clear();
-            Blockly.Xml.domToWorkspace(Mixly.Editor.blockEditor, xml);
+            Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
             Mixly.Editor.blockEditor.scrollCenter();
             Blockly.hideChaff();
             editor.setValue(oldCode, -1);

@@ -203,8 +203,8 @@ Blockly.Blocks['controls_if'] = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#if");
-    this.setMutator(new Blockly.Mutator(['controls_if_elseif',
-     'controls_if_else']));
+    this.setMutator(new Blockly.icons.MutatorIcon(['controls_if_elseif',
+     'controls_if_else'], this));
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
@@ -283,11 +283,11 @@ Blockly.Blocks['controls_if'] = {
     }
     for(var i = valueConnections.length - 2; i > 0; i--){
       if(valueConnections[i])
-        Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
+        valueConnections[i].reconnect(this, 'IF' + i);
     }
     for(var i = statementConnections.length - 2; i > 0; i--){
       if(statementConnections[i])
-        Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+        statementConnections[i].reconnect(this, 'DO' + i);
     }
   },
   /**
@@ -453,10 +453,10 @@ Blockly.Blocks['controls_if'] = {
    reconnectChildBlocks_: function(valueConnections, statementConnections,
     elseStatementConnection) {
     for (var i = 1; i <= this.elseifCount_; i++) {
-      Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i);
-      Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i);
+      valueConnections[i] && Blockly.Mutator.reconnect(this, 'IF' + i);
+      statementConnections[i] && statementConnections[i].reconnect(this, 'DO' + i);
     }
-    Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE');
+    elseStatementConnection && elseStatementConnection.reconnect(this, 'ELSE');
   }
 };
 

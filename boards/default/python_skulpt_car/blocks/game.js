@@ -620,7 +620,7 @@ Blockly.Blocks.isOilFull = {
 Blockly.Blocks.isLightGreen = {
   init: function () {
     this.appendDummyInput()
-      .appendField('信号灯为绿灯?');
+      .appendField('信号灯为绿灯');
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');
@@ -631,7 +631,7 @@ Blockly.Blocks.isLightGreen = {
 Blockly.Blocks.isLightRed = {
   init: function () {
     this.appendDummyInput()
-      .appendField('信号灯为红灯?');
+      .appendField('信号灯为红灯');
     this.setOutput(true, null);
     this.setColour(290);
     this.setTooltip('');

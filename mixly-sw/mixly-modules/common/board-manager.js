@@ -913,6 +913,14 @@ BoardManager.onclickImportBoards = () => {
         even: false,
         size: 'sm'
     };
+
+    table.on('row(import-board-page-filter)', function(obj) {
+        let $checkbox = obj.tr.first().find('.layui-form-checkbox');
+        obj.setRowChecked({
+            checked: !$checkbox.hasClass('layui-form-checked')
+        });
+    });
+    
     table.render({
         ...tableConfig,
         text: {

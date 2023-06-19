@@ -185,6 +185,9 @@ ZhHant.EYEDROPPER = '取色器';
 /* Blockly.FieldDate文本翻译 */
 ZhHant.TODAY = '今天';
 
+ZhHant.WORKSPACE_COMMENT_DEFAULT_TEXT = "來說些事情...";
+ZhHant.REMOVE_COMMENT = "移除註解";
+ZhHant.DUPLICATE_COMMENT = "複製註解";
 ZhHant.ADD_COMMENT = "添加注釋";
 ZhHant.AUTH = "請授權這個應用程式以保存您的作品並共用。";
 ZhHant.CHANGE_VALUE_TITLE = "更改值：";
@@ -475,7 +478,6 @@ ZhHant.PROCEDURES_BEFORE_PARAMS = "參數：";
 ZhHant.PROCEDURES_MUTATORARG_TOOLTIP = "添加函數輸入。";
 ZhHant.PROCEDURES_MUTATORCONTAINER_TITLE = "輸入";
 ZhHant.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "添加、刪除或重新排此函數的輸入。";
-ZhHant.REMOVE_COMMENT = "刪除注釋";
 ZhHant.RENAME_VARIABLE = "重命名變數...";
 ZhHant.RENAME_VARIABLE_TITLE = "將所有“%1”變數重命名為:";
 ZhHant.TEXT_APPEND_APPENDTEXT = "追加文本";

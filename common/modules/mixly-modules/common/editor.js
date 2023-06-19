@@ -163,6 +163,12 @@ Editor.blockEditorInit = () => {
         Blockly.Procedures.flyoutCategory
     );
 
+    Editor.blockEditor.configureContextMenu = (menuOptions, e) => {
+        menuOptions.push(
+            Blockly.ContextMenu.workspaceCommentOption(Editor.blockEditor, e)
+        );
+    }
+
     if (USER.theme === 'dark') {
         Editor.blockEditor.setTheme(Blockly.Themes.Dark);
     } else {

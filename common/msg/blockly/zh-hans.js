@@ -191,6 +191,9 @@ ZhHans.EYEDROPPER = '取色器';
 /* Blockly.FieldDate文本翻译 */
 ZhHans.TODAY = '今天';
 
+ZhHans.WORKSPACE_COMMENT_DEFAULT_TEXT = "说点什么...";
+ZhHans.REMOVE_COMMENT = "删除注释";
+ZhHans.DUPLICATE_COMMENT = "复制注释";
 ZhHans.ADD_COMMENT = "添加注释";
 ZhHans.AUTH = "请授权这个应用程序以保存您的作品并共享。";
 ZhHans.CHANGE_VALUE_TITLE = "更改值：";
@@ -481,7 +484,6 @@ ZhHans.PROCEDURES_BEFORE_PARAMS = "参数：";
 ZhHans.PROCEDURES_MUTATORARG_TOOLTIP = "添加函数输入。";
 ZhHans.PROCEDURES_MUTATORCONTAINER_TITLE = "输入";
 ZhHans.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "添加、删除或重新排此函数的输入。";
-ZhHans.REMOVE_COMMENT = "删除注释";
 ZhHans.RENAME_VARIABLE = "重命名变量...";
 ZhHans.RENAME_VARIABLE_TITLE = "将所有“%1”变量重命名为:";
 ZhHans.TEXT_APPEND_APPENDTEXT = "追加文本";

@@ -189,6 +189,9 @@ En.EYEDROPPER = 'Eyedropper';
 /* Blockly.FieldDate文本翻译 */
 En.TODAY = 'Today';
 
+En.WORKSPACE_COMMENT_DEFAULT_TEXT = "Say something...";
+En.REMOVE_COMMENT = "Remove Comment";
+En.DUPLICATE_COMMENT = "Duplicate Comment";
 En.ADD_COMMENT = "Add Comment";
 En.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";
 En.CHANGE_VALUE_TITLE = "Change value:";
@@ -479,7 +482,6 @@ En.PROCEDURES_BEFORE_PARAMS = "with:";
 En.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";
 En.PROCEDURES_MUTATORCONTAINER_TITLE = "inputs";
 En.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";
-En.REMOVE_COMMENT = "Remove Comment";
 En.RENAME_VARIABLE = "Rename variable...";
 En.RENAME_VARIABLE_TITLE = "Rename all '%1' variables to:";
 En.TEXT_APPEND_APPENDTEXT = "append text";

@@ -716,8 +716,9 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         // which might reappear if a param is reattached in the mutator.
         var defBlock = Blockly.Procedures.getDefinition(this.getProcedureCall(),
             this.workspace);
-        var mutatorOpen = defBlock && defBlock.mutator &&
-            defBlock.mutator.isVisible();
+        const mutatorIcon = defBlock && defBlock.getIcon(Blockly.icons.MutatorIcon.TYPE);
+        const mutatorOpen =
+            mutatorIcon && mutatorIcon.bubbleIsVisible();
         if (!mutatorOpen) {
             this.quarkConnections_ = {};
             this.quarkIds_ = null;

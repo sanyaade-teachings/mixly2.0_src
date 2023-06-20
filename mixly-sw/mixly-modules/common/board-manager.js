@@ -1089,7 +1089,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <a href="${boardsList[i]['boardIndex']}?${configUrl}">
                         <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
                         <h2>${boardsList[i]['boardType']}</h2>
-                        <label>编程语言: ${language}</label>
+                        <label style="letter-spacing:1.5px;">编程语言: ${language}</label>
                     </a>
                 </div>
             </div>
@@ -1107,7 +1107,7 @@ BoardManager.showBoardsCard = (row, col) => {
                         <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
                             <img src="${boardImg}" alt="service image" class="tiltimage">
                             <h2>${boardType}</h2>
-                            <label>编程语言: ${language}</label>
+                            <label style="letter-spacing:1.5px;">编程语言: ${language}</label>
                         </a>
                     </div>
                 </div>
@@ -1322,7 +1322,7 @@ BoardManager.updateBoardsCard = (offset = 0) => {
         index: pageIndex
     });
     form.render(null, 'setting-card-filter');
-    $('.setting-card > div:nth-child(2)').find('em').addClass('fontello-icon');
+    $('.setting-card > div:nth-child(2)').find('div').addClass('fontello-icon');
 }
 
 })();

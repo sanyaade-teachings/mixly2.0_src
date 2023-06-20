@@ -40,17 +40,6 @@
   --lay-color-lightblue-9: #064E74;
   --lay-color-lightblue-10: #002F4D;
 
-  /* --lay-color-green-1: #E8FFF9;
-  --lay-color-green-2: #AAEADB;
-  --lay-color-green-3: #74D5C2;
-  --lay-color-green-4: #46C0AC;
-  --lay-color-green-5: #1FAB98;
-  --lay-color-green-6: #009688;
-  --lay-color-green-7: #00847B;
-  --lay-color-green-8: #00716D;
-  --lay-color-green-9: #005F5F;
-  --lay-color-green-10: #004A4D; */
-
   --lay-color-green-1: #E8FFF9;
   --lay-color-green-2: #B5F1E3;
   --lay-color-green-3: #87E3D1;
@@ -61,17 +50,6 @@
   --lay-color-green-8: #08837F;
   --lay-color-green-9: #036868;
   --lay-color-green-10: #004A4D;
-
-  /* --lay-color-lightgreen-1: #E8FFEB;
-  --lay-color-lightgreen-2: #C8F1CE;
-  --lay-color-lightgreen-3: #ABE3B5;
-  --lay-color-lightgreen-4: #8FD49E;
-  --lay-color-lightgreen-5: #76C68A;
-  --lay-color-lightgreen-6: #5FB878;
-  --lay-color-lightgreen-7: #3D9D5B;
-  --lay-color-lightgreen-8: #228243;
-  --lay-color-lightgreen-9: #0D6730;
-  --lay-color-lightgreen-10: #004D20; */
 
   --lay-color-lightgreen-1: #E8FFF2;
   --lay-color-lightgreen-2: #B5F1D1;
@@ -128,17 +106,6 @@
   --lay-color-black-9: #0C213C;
   --lay-color-black-10: #00183C;
 
-  /* --lay-color-black-1: #E8F2FF;
-  --lay-color-black-2: #C1CBDB;
-  --lay-color-black-3: #9CA5B6;
-  --lay-color-black-4: #798192;
-  --lay-color-black-5: #585E6D;
-  --lay-color-black-6: #393D49;
-  --lay-color-black-7: #2B3149;
-  --lay-color-black-8: #1D2549;
-  --lay-color-black-9: #0E1749;
-  --lay-color-black-10: #000949; */
-
   --lay-color-gray-1: #FAFAFA;
   --lay-color-gray-2: #F6F6F6;
   --lay-color-gray-3: #EEEEEE;
@@ -177,6 +144,7 @@
   --lay-color-normal-hover: var(--lay-color-blue-5);
   --lay-color-normal-active: var(--lay-color-blue-7);
   --lay-color-normal-disabled: var(--lay-color-blue-3);
+  --lay-color-normal-light: var(--lay-color-blue-4);
 
   /* 警示 */
   --lay-color-warning: var(--lay-color-orange-6);
@@ -417,7 +385,7 @@ html[data-bs-theme=dark] .layui-border-purple {
 }
 html[data-bs-theme=dark] .layui-border-black {
   border-color: var(--lay-color-black-6) !important;
-  color: var(--lay-color-black-5) !important;
+  color: var(--lay-color-text-1) !important;
 }
 html[data-bs-theme=dark] .layui-text {
   color: var(--lay-color-text-3);
@@ -481,7 +449,7 @@ html[data-bs-theme=dark] .layui-btn-primary {
   background: 0 0;
 }
 html[data-bs-theme=dark] .layui-btn-primary:hover {
-  border-color: var(--lay-color-primary);
+  border-color: transparent;
   color: var(--lay-color-text-2);
 }
 html[data-bs-theme=dark] .layui-btn-normal {
@@ -524,6 +492,7 @@ html[data-bs-theme=dark] .layui-select[disabled],
 html[data-bs-theme=dark] .layui-textarea[disabled] {
   background-color: var(--lay-color-fill-1);
   color: var(--lay-color-text-4);
+  border-color: var(--lay-color-border-1) !important;
 }
 html[data-bs-theme=dark] .layui-input:hover,
 html[data-bs-theme=dark] .layui-textarea:hover {
@@ -532,6 +501,14 @@ html[data-bs-theme=dark] .layui-textarea:hover {
 html[data-bs-theme=dark] .layui-input:focus,
 html[data-bs-theme=dark] .layui-textarea:focus {
   border-color: var(--lay-color-border-2) !important;
+}
+html[data-bs-theme=dark] .layui-input:hover[disabled],
+html[data-bs-theme=dark] .layui-textarea:hover[disabled] {
+  border-color: var(--lay-color-border-1) !important;
+}
+html[data-bs-theme=dark] .layui-input:focus[disabled],
+html[data-bs-theme=dark] .layui-textarea:focus[disabled] {
+  border-color: var(--lay-color-border-1) !important;
 }
 html[data-bs-theme=dark] .layui-form-danger + .layui-form-select .layui-input,
 html[data-bs-theme=dark] .layui-form-danger:focus {
@@ -586,7 +563,7 @@ html[data-bs-theme=dark] .layui-select-none {
   color: var(--lay-color-black-8);
 }
 html[data-bs-theme=dark] .layui-select-disabled .layui-disabled {
-  border-color: var(--lay-color-gray-3) !important;
+  border-color: var(--lay-color-border-1) !important;
 }
 html[data-bs-theme=dark] .layui-select-disabled .layui-edge {
   border-top-color: var(--lay-color-gray-6);
@@ -594,14 +571,14 @@ html[data-bs-theme=dark] .layui-select-disabled .layui-edge {
 html[data-bs-theme=dark] .layui-form-checkbox {
   background-color: var(--lay-color-fill-2);
 }
-html[data-bs-theme=dark] .layui-form-checkbox span {
+html[data-bs-theme=dark] .layui-form-checkbox > div {
   background-color: var(--lay-color-fill-3);
   color: var(--lay-color-text-2);
 }
-html[data-bs-theme=dark] .layui-form-checkbox:hover span {
+html[data-bs-theme=dark] .layui-form-checkbox:hover > div {
   background-color: var(--lay-color-active);
 }
-html[data-bs-theme=dark] .layui-form-checkbox i {
+html[data-bs-theme=dark] .layui-form-checkbox > i {
   background-color: var(--lay-color-fill-1);
   border-top-color: var(--lay-color-border-1);
   border-right-color: var(--lay-color-border-1);
@@ -609,7 +586,7 @@ html[data-bs-theme=dark] .layui-form-checkbox i {
   border-left-color: initial;
   color: var(--lay-color-text-1);
 }
-html[data-bs-theme=dark] .layui-form-checkbox:hover i {
+html[data-bs-theme=dark] .layui-form-checkbox:hover > i {
   border-color: var(--lay-color-border-2);
   color: var(--lay-color-text-4);
 }
@@ -617,133 +594,129 @@ html[data-bs-theme=dark] .layui-form-checked,
 html[data-bs-theme=dark] .layui-form-checked:hover {
   border-color: var(--lay-color-secondary-active);
 }
-html[data-bs-theme=dark] .layui-form-checked span,
-html[data-bs-theme=dark] .layui-form-checked:hover span {
+html[data-bs-theme=dark] .layui-form-checked > div,
+html[data-bs-theme=dark] .layui-form-checked:hover > div {
   background-color: var(--lay-color-secondary);
 }
-html[data-bs-theme=dark] .layui-form-checked i,
-html[data-bs-theme=dark] .layui-form-checked:hover i {
+html[data-bs-theme=dark] .layui-form-checked > i,
+html[data-bs-theme=dark] .layui-form-checked:hover > i {
   color: var(--lay-color-secondary-hover);
+}
+html[data-bs-theme=dark] .layui-form-checkbox.layui-checkbox-disabled > div {
+  background-color: var(--lay-color-fill-3) !important;
 }
 html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary] {
   background-image: none;
   background-color: initial;
   border-color: initial !important;
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary] span {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary] > div {
   background-image: none;
   background-color: initial;
   color: var(--lay-color-text-2);
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary] i {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary] > i {
   border-color: var(--lay-color-border-1);
   background-color: var(--lay-color-fill-2);
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary]:hover i {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary]:hover > i {
   border-color: var(--lay-color-secondary-hover);
   color: var(--lay-color-text-1);
 }
-html[data-bs-theme=dark] .layui-form-checked[lay-skin=primary] i {
+html[data-bs-theme=dark] .layui-form-checked[lay-skin=primary] > i {
   background-color: var(--lay-color-secondary);
   color: var(--lay-color-text-1);
   border-color: var(--lay-color-secondary-active) !important;
 }
-html[data-bs-theme=dark] .layui-checkbox-disabled[lay-skin=primary] span {
-  background-image: none!important;
-  background-color: initial!important;
+html[data-bs-theme=dark] .layui-checkbox-disabled[lay-skin=primary] > div {
+  background: none!important;
   color: var(--lay-color-text-4) !important;
 }
-html[data-bs-theme=dark] .layui-form-checked.layui-checkbox-disabled[lay-skin=primary] i {
-  background-image: initial!important;
+html[data-bs-theme=dark] .layui-form-checked.layui-checkbox-disabled[lay-skin=primary] > i {
   background-color: var(--lay-color-fill-1) !important;
   border-color: var(--lay-color-border-2) !important;
 }
-html[data-bs-theme=dark] .layui-checkbox-disabled[lay-skin=primary]:hover i {
+html[data-bs-theme=dark] .layui-checkbox-disabled[lay-skin=primary]:hover > i {
   border-color: var(--lay-color-border-1);
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] .layui-icon-indeterminate:before {
-  background-color: var(--lay-color-gray-6);
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] > .layui-icon-subtraction:before {
   opacity: 1;
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"]:hover .layui-icon-indeterminate:before {
-  background-color: var(--lay-color-secondary-hover);
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"]:hover > .layui-icon-subtraction:before {
   opacity: 1;
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] .layui-icon-indeterminate {
-  border-color: var(--lay-color-border-2);
-}
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"]:hover .layui-icon-indeterminate {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] > .layui-icon-subtraction {
   border-color: var(--lay-color-secondary-hover);
 }
 html[data-bs-theme=dark] .layui-form-switch {
   border-color: var(--lay-color-border-2);
   background-color: var(--lay-color-fill-2);
 }
-html[data-bs-theme=dark] .layui-form-switch i {
+html[data-bs-theme=dark] .layui-form-switch > i {
   background-color: var(--lay-color-gray-4);
 }
-html[data-bs-theme=dark] .layui-form-switch.layui-checkbox-disabled i {
+html[data-bs-theme=dark] .layui-form-switch.layui-checkbox-disabled > i {
   background-color: var(--lay-color-gray-4);
 }
-html[data-bs-theme=dark] .layui-form-switch em {
+html[data-bs-theme=dark] .layui-form-switch > div {
   color: var(--lay-color-gray-8) !important;
 }
 html[data-bs-theme=dark] .layui-form-onswitch {
   border-color: var(--lay-color-secondary-active);
   background-color: var(--lay-color-secondary);
 }
-html[data-bs-theme=dark] .layui-form-onswitch i {
+html[data-bs-theme=dark] .layui-form-onswitch > i {
   background-color: var(--lay-color-gray-4);
 }
-html[data-bs-theme=dark] .layui-form-onswitch em {
+html[data-bs-theme=dark] .layui-form-onswitch > div {
   color: var(--lay-color-text-1) !important;
 }
 html[data-bs-theme=dark] .layui-checkbox-disabled {
   border-color: var(--lay-color-border-2) !important;
 }
-html[data-bs-theme=dark] .layui-checkbox-disabled span {
+html[data-bs-theme=dark] .layui-checkbox-disabled > div {
   background-color: var(--lay-color-fill-3) !important;
-  color: var(--lay-color-text-4);
-}
-html[data-bs-theme=dark] .layui-checkbox-disabled i {
-  border-color: var(--lay-color-border-2) !important;
-}
-html[data-bs-theme=dark] .layui-checkbox-disabled em {
   color: var(--lay-color-text-4) !important;
 }
-html[data-bs-theme=dark] .layui-checkbox-disabled:hover i {
+html[data-bs-theme=dark] .layui-checkbox-disabled > i {
+  border-color: var(--lay-color-border-2) !important;
+}
+html[data-bs-theme=dark] .layui-checkbox-disabled:hover > i {
   color: var(--lay-color-text-1) !important;
 }
-html[data-bs-theme=dark] .layui-form-checkbox i:before {
+html[data-bs-theme=dark] .layui-form-switch.layui-checkbox-disabled > div {
+  background-color: initial!important;
+}
+html[data-bs-theme=dark] .layui-form-checkbox > i:before {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-html[data-bs-theme=dark] .layui-form-checkbox:hover i:before {
+html[data-bs-theme=dark] .layui-form-checkbox:hover > i:before {
   opacity: 1;
   filter: alpha(opacity=100);
 }
-html[data-bs-theme=dark] .layui-form-checked.layui-checkbox-disabled:hover i:before,
-html[data-bs-theme=dark] .layui-form-checked:hover i:before,
-html[data-bs-theme=dark] .layui-form-checked i:before {
+html[data-bs-theme=dark] .layui-form-checked.layui-checkbox-disabled:hover > i:before,
+html[data-bs-theme=dark] .layui-form-checked:hover > i:before,
+html[data-bs-theme=dark] .layui-form-checked > i:before {
   opacity: 1;
   filter: alpha(opacity=100);
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary]:hover i:before {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary]:hover > i:before {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-html[data-bs-theme=dark] .layui-form-checked[lay-skin=primary]:hover i:before {
+html[data-bs-theme=dark] .layui-form-checked[lay-skin=primary]:hover > i:before {
   opacity: 1;
   filter: alpha(opacity=100);
 }
-html[data-bs-theme=dark] .layui-checkbox-disabled:hover i:before {
+html[data-bs-theme=dark] .layui-checkbox-disabled:hover > i:before {
   opacity: 0;
   filter: alpha(opacity=0);
 }
 html[data-bs-theme=dark] .layui-form-radio > i {
   color: var(--lay-color-gray-8);
 }
-html[data-bs-theme=dark] .layui-form-radio:hover *,
+html[data-bs-theme=dark] .layui-form-radio:hover > *,
 html[data-bs-theme=dark] .layui-form-radioed,
 html[data-bs-theme=dark] .layui-form-radioed > i {
   color: var(--lay-color-secondary);
@@ -751,7 +724,7 @@ html[data-bs-theme=dark] .layui-form-radioed > i {
 html[data-bs-theme=dark] .layui-radio-disabled > i {
   color: var(--lay-color-text-4) !important;
 }
-html[data-bs-theme=dark] .layui-radio-disabled * {
+html[data-bs-theme=dark] .layui-radio-disabled > * {
   color: var(--lay-color-text-4) !important;
 }
 html[data-bs-theme=dark] .layui-form-pane .layui-form-label {
@@ -816,6 +789,14 @@ html[data-bs-theme=dark] .layui-table-click,
 html[data-bs-theme=dark] .layui-table-hover,
 html[data-bs-theme=dark] .layui-table[lay-even] tbody tr:nth-child(even) {
   background-color: var(--lay-color-bg-2);
+}
+html[data-bs-theme=dark] .layui-table-checked {
+  background-color: var(--lay-color-green-6);
+  color: var(--lay-color-text-1);
+}
+html[data-bs-theme=dark] .layui-table-checked.layui-table-hover,
+html[data-bs-theme=dark] .layui-table-checked.layui-table-click {
+  background-color: var(--lay-color-green-7);
 }
 html[data-bs-theme=dark] .layui-table td,
 html[data-bs-theme=dark] .layui-table th,
@@ -1001,7 +982,7 @@ html[data-bs-theme=dark] .layui-dropdown.layui-panel .layui-menu {
   background-color: var(--lay-color-bg-5);
 }
 html[data-bs-theme=dark] .layui-nav {
-  background-color: #393d49;
+  background-color: var(--lay-color-black-6);
   color: var(--lay-color-white);
 }
 html[data-bs-theme=dark] .layui-nav .layui-nav-item a {
@@ -1236,7 +1217,10 @@ html[data-bs-theme=dark] .layui-transfer-active .layui-btn-disabled {
   color: var(--lay-color-gray-8);
 }
 html[data-bs-theme=dark] .layui-transfer-data li:hover {
-  background-color: var(--lay-color-gray-2);
+  background-color: var(--lay-color-active);
+}
+html[data-bs-theme=dark] .layui-transfer-data li:hover:has([lay-filter="layTransferCheckbox"][disabled]) {
+  background-color: var(--lay-color-bg-2);
 }
 html[data-bs-theme=dark] .layui-transfer-data .layui-none {
   color: var(--lay-color-gray-7);
@@ -1329,6 +1313,9 @@ html[data-bs-theme=dark] .layui-tree-line .layui-tree-set .layui-tree-set:after 
 html[data-bs-theme=dark] .layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
   color: var(--lay-color-text-3);
 }
+html[data-bs-theme=dark] .layui-tree-entry:hover:has(span.layui-tree-txt.layui-disabled) {
+  background-color: transparent !important;
+}
 html[data-bs-theme=dark] .layui-tree-line .layui-tree-set:before {
   border-left: 1px dotted var(--lay-color-gray-7);
 }
@@ -1389,7 +1376,7 @@ html[data-bs-theme=dark] .layui-code-dark > .layui-code-ul > li {
   background-color: #3f3f3f;
 }
 html[data-bs-theme=dark] .layui-code-full {
-  background-color: var(--lay-color-white);
+  background-color: var(--lay-color-bg-1);
 }
 html[data-bs-theme=dark] .layui-laydate-header i {
   color: var(--lay-color-gray-8);
@@ -1769,9 +1756,6 @@ html[data-bs-theme=dark] .layui-table-hover,
 html[data-bs-theme=dark] .layui-table[lay-even] tbody tr:nth-child(even) {
   background-color: var(--lay-color-fill-3);
 }
-html[data-bs-theme=dark] .layui-transfer-data li:hover {
-  background-color: var(--lay-color-active);
-}
 html[data-bs-theme=dark] .layui-menu .layui-menu-item-checked,
 html[data-bs-theme=dark] .layui-menu .layui-menu-item-checked2 {
   background-color: var(--lay-color-fill-2) !important;
@@ -1784,5 +1768,12 @@ html[data-bs-theme=dark] .layui-layer-tab .layui-layer-title span:first-child {
 }
 html[data-bs-theme=dark] .layui-slider-input.layui-input,
 html[data-bs-theme=dark] .layui-slider-input .layui-input {
+  background-color: var(--lay-color-bg-2);
+}
+html[data-bs-theme=dark] a {
+  color: var(--lay-color-text-1);
+}
+html[data-bs-theme=dark] .layui-code,
+html[data-bs-theme=dark] pre > code {
   background-color: var(--lay-color-bg-2);
 }

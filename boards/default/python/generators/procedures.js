@@ -32,7 +32,7 @@ Blockly.Python.forBlock['procedures_defreturn'] = function() {
   return null;
 };
 
-Blockly.Python.procedures_defnoreturn = Blockly.Python.procedures_defreturn;
+Blockly.Python.forBlock.procedures_defnoreturn = Blockly.Python.forBlock.procedures_defreturn;
 
 Blockly.Python.forBlock['procedures_callreturn'] = function() {
   // Call a procedure with a return value.

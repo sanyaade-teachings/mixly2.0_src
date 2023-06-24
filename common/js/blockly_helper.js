@@ -39,8 +39,8 @@ function backup_blocks() {
         //JSFuncs.saveToLocalStorageCache(xml);
     }
 
-    if ('localStorage' in window && window['localStorage'] != null && Mixly.Editor.selected === 'CODE') {
-        window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".code", Mixly.Editor.codeEditor.getValue());
+    if ('localStorage' in window && window['localStorage'] != null && Mixly.selected === 'CODE') {
+        window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".code", Mixly.Editor.blockEditor.getValue());
         window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".loadCode", "true");
     } else {
         window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".loadCode", "false");
@@ -98,10 +98,10 @@ function restore_blocks() {
                 Boards.setSelectedBoard(boardName);
                 profile['default'] = profile[boardName] ?? profile['default'];
             }
-            Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
-            Mixly.Editor.blockEditor.scrollCenter();
+            Blockly.Xml.domToWorkspace(xml, Editor.blockEditor);
+            Editor.blockEditor.scrollCenter();
         } catch (e) {
-            Mixly.Editor.blockEditor.clear();
+            blockEditor.clear();
             console.log(e);
             clear_blocks_from_storage();
         }

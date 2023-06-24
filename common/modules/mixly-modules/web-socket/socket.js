@@ -4,10 +4,9 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Boards');
 goog.require('Mixly.Charts');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Command');
 goog.require('Mixly.MJSON');
+goog.require('Mixly.MArray');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.WebSocket');
 goog.provide('Mixly.WebSocket.Socket');
@@ -17,10 +16,9 @@ const {
     Config,
     Boards,
     Charts,
-    StatusBar,
-    StatusBarPort,
     Command,
     MJSON,
+    MArray,
     LayerExt
 } = Mixly;
 
@@ -119,10 +117,12 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     let WS = Socket;
     WS.obj = new WebSocket(WS.url);
     WS.obj.onopen = () => {
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
         console.log('已连接' + WS.url);
-        StatusBar.show(1);
-        StatusBarPort.tabChange('output');
-        StatusBar.setValue(WS.url + '连接成功\n');
+        mainStatusBarTab.show();
+        mainStatusBarTab.changeTo('output');
+        statusBarTerminal.setValue(WS.url + '连接成功\n');
         WS.connected = true;
         Socket.toggleUIToolbar(true);
         Socket.initFunc = doFunc;
@@ -160,14 +160,17 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     };
 
     WS.obj.onclose = (event) => {
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
         WS.connected = false;
         console.log('已断开' + WS.url);
-        StatusBar.show(1);
-        StatusBarPort.tabChange('output');
-        StatusBar.setValue(WS.url + '连接断开，请在设置中重新连接\n');
-        let ports = StatusBarPort.portsName;
+        mainStatusBarTab.show();
+        mainStatusBarTab.changeTo('output');
+        statusBarTerminal.setValue(WS.url + '连接断开，请在设置中重新连接\n');
+        let ports = MArray.remove(mainStatusBarTab.statusBarIndexToIds, 'output');
         for (let i = 0; i < ports.length; i++) {
-            StatusBarPort.close(ports[i]);
+            const statusBarSerial = mainStatusBarTab.getStatusBarById(ports[i]);
+            statusBarSerial.close(ports[i]);
         }
         Socket.toggleUIToolbar(false);
         layer.closeAll();

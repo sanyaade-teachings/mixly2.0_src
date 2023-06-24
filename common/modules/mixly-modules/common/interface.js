@@ -3,20 +3,14 @@ goog.loadJs('common', () => {
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
 goog.require('Mixly.NavEvents');
-goog.require('Mixly.StatusBar');
 goog.require('Mixly.XML');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
 goog.require('Mixly.Modules');
-goog.require('Mixly.ToolboxSearcher');
-goog.require('Mixly.Drag');
 goog.require('Mixly.Editor');
+goog.require('Mixly.Msg');
 goog.require('Mixly.LevelSelector');
-goog.require('WorkspaceSearch');
-goog.require('Backpack');
-goog.require('ContentHighlight');
-goog.require('ZoomToFitControl');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
 goog.require('Mixly.Electron.ExampleExt');
@@ -30,7 +24,6 @@ const {
     Url,
     Config,
     NavEvents,
-    StatusBar,
     XML,
     Nav,
     Boards,
@@ -38,8 +31,8 @@ const {
     Interface,
     Env,
     ToolboxSearcher,
-    Drag,
     Editor,
+    Msg,
     LevelSelector
 } = Mixly;
 
@@ -67,9 +60,6 @@ Interface.init = () => {
         if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki) {
             WikiManager.registerContextMenu();
         }
-        if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
-            Serial.addBtnToStatusBar();
-        }
     } else {
         Env.defaultXML = $('#toolbox').html();
     }
@@ -77,9 +67,16 @@ Interface.init = () => {
     Boards.changeTo(selectedBoardName);
     Boards.updateCategories(selectedBoardName);
     Editor.init();
+    if (Env.isElectron) {
+        const { Electron } = Mixly;
+        const { Serial = undefined } = Electron;
+        if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
+            Serial.addStatusbarTabExtFunc();
+        }
+    }
     window.addEventListener('resize', Interface.onresize, false);
     Interface.onresize();
-    Drag.init();
+    // Drag.init();
     if (BOARD.nav.levelSelector) {
         LevelSelector.init();
         const $loading = $('.loading');
@@ -96,35 +93,7 @@ Interface.init = () => {
         auto_save_and_restore_blocks();
     }
     NavEvents.init();
-    StatusBar.init();
-    const zoomToFit = new ZoomToFitControl(Editor.blockEditor);
-    zoomToFit.init();
-    ToolboxSearcher.init();
-    const workspaceSearch = new WorkspaceSearch(Editor.blockEditor);
-    workspaceSearch.init();
-    const backpack = new Backpack(Editor.blockEditor);
-    backpack.init();
-    if (USER.blocklyContentHighlight === 'yes') {
-        const contentHighlight = new ContentHighlight(Editor.blockEditor);
-        contentHighlight.init();
-    }
-    const workspaceSearchOpen = {
-        displayText: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
-        preconditionFn: function(scope) {
-            const blocks = Editor.blockEditor.getAllBlocks();
-            if (blocks.length)
-                return 'enabled';
-            else
-                return 'hidden';
-        },
-        callback: function() {
-            workspaceSearch.open();
-        },
-        scopeType: Blockly.ContextMenuRegistry.ScopeType.WORKSPACE,
-        id: 'workspaceSearch_open',
-        weight: 200
-    };
-    Blockly.ContextMenuRegistry.registry.register(workspaceSearchOpen);
+    // StatusBar.init();
     if (Env.hasSocketServer) {
         const { Socket } = Mixly.WebSocket;
         Socket.init();
@@ -158,8 +127,9 @@ Interface.onresize = (event) => {
         }
         Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
     }
-    Editor.codeEditor.resize();
-    Editor.blockEditor.resize();
+    const { codeEditor, blockEditor } = Editor;
+    codeEditor.resize();
+    blockEditor.resize();
 }
 
 window.addEventListener('load', () => {

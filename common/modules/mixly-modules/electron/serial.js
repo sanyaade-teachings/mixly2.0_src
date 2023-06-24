@@ -3,8 +3,6 @@ goog.loadJs('electron', () => {
 goog.require('layui');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Config');
 goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
@@ -20,8 +18,6 @@ const {
     Electron,
     Modules,
     Charts,
-    StatusBar,
-    StatusBarPort,
     Config,
     Tools,
     Env,
@@ -47,7 +43,6 @@ const {
 
 const { SerialPort } = serialport;
 
-const { portAce } = StatusBarPort;
 
 Serial.TOOL_DEFAULT_CONFIG = {
     "ctrlCBtn": false,
@@ -535,6 +530,8 @@ Serial.getSelectedPortName = () => {
 }
 
 Serial.refreshOutputBox = (port) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
     const { dom, toolConfig, toolOpened, output, endPos } = portObj;
@@ -547,16 +544,16 @@ Serial.refreshOutputBox = (port) => {
     } else {
         outputStr = outputStr.replaceAll('\r\n', '\n');
         if (endPos && typeof endPos === 'object') {
-            const oldOutputStr = StatusBarPort.getValueRange(port, {
+            const oldOutputStr = statusBarSerial.getValueRange({
                 row: 0,
                 column: 0
             }, endPos);
             if (outputStr === oldOutputStr)
                 return;
         }
-        StatusBarPort.setValue(port, outputStr, toolConfig.scroll);
-        portObj.endPos = StatusBarPort.getEndPos(port);
-        portAce[port] && portAce[port].setReadOnly(false);
+        statusBarSerial.setValue(outputStr, toolConfig.scroll);
+        portObj.endPos = statusBarSerial.getEndPos();
+        statusBarSerial.ace && statusBarSerial.ace.setReadOnly(false);
     }
 }
 
@@ -573,16 +570,19 @@ Serial.openTool = () => {
         });
         return;
     }
+    const { mainStatusBarTab } = Mixly;
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     let portObj = Serial.portsOperator[selectedPort];
     const { toolConfig } = portObj;
     const { baudRates } = toolConfig;
     let successFunc = (serialDom) => {
-        if (!portObj.dom)
+        if (!portObj.dom) {
             portObj.dom = serialDom;
+        }
         Serial.refreshToolPortSelectBox(Serial.uploadPorts);
         const { selectPortId } = serialDom.id;
         portObj.toolOpened = true;
-        StatusBar.show(1);
+        mainStatusBarTab.show();
         serialDom.nowPort = $('#' + selectPortId + ' option:selected').val();
         serialDom.prevPort = null;
         const element = layui.element;
@@ -767,7 +767,7 @@ Serial.receiveBoxGetValue = (port) => {
     return receiveDom.val();
 }
 
-Serial.receiveBoxScrollToTheBottom = () => {
+Serial.receiveBoxscrollToBottom = () => {
     const portObj = Serial.portsOperator[port];
     const { dom } = portObj;
     if (dom) {
@@ -777,18 +777,19 @@ Serial.receiveBoxScrollToTheBottom = () => {
     }
 }
 
-Serial.receiveBoxScrollToTheTop = () => {
+Serial.receiveBoxscrollToTop = () => {
     
 }
 
 Serial.statusBarPortAddHotKey = (port) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     const session = portAce[port].getSession();
     portAce[port].commands.addCommands([
         {
             name: "Empty",
             bindKey: "Ctrl-E",
             exec: (editor) => {
-                // StatusBarPort.setValue(port, "");
                 const portObj = Serial.portsOperator[port];
                 if (portObj) {
                     portObj.output = [];
@@ -835,8 +836,8 @@ Serial.statusBarPortAddHotKey = (port) => {
                 }
                 const cursor = session.selection.getCursor();
                 if (cursor.row === endPos.row) {
-                    const newPos = StatusBarPort.getEndPos(port);
-                    const sendStr = StatusBarPort.getValueRange(port, endPos, newPos);
+                    const newPos = statusBarSerial.getEndPos();
+                    const sendStr = statusBarSerial.getValueRange(endPos, newPos);
                     Serial.writeString(port, sendStr, '\r\n');
                 }
                 return false;
@@ -884,6 +885,8 @@ Serial.statusBarPortEnterTerminal = (port) => {
 Serial.refreshTerminalMenu = (port) => {
     const portObj = Serial.portsOperator[port];
     let newPort = port;
+    const { mainStatusBarTab } = Mixly;
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     try {
         newPort = newPort.replaceAll('/', '-');
         newPort = newPort.replaceAll('.', '-');
@@ -903,7 +906,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-terminal-open`) {
                 Serial.statusBarPortEnterTerminal(port);
             } else if (obj.id === `tab-${newPort}-ace-terminal-close`) {
-                StatusBarPort.tabDelete(port);
+                statusBarSerial.tabDelete(port);
             } else if (obj.id === `tab-${newPort}-ace-terminal-help`) {
                 Serial.statusBarPortAddCommand(port, 'config port send -h');
             } else if (obj.id === `tab-${newPort}-ace-fontsize-decrease`) {
@@ -1741,56 +1744,23 @@ Serial.getMenu = (ports) => {
     return newPorts;
 }
 
-Serial.addBtnToStatusBar = () => {
-    const BTN_TEMPLETE = `
-    <button type="button" id="tab-ace-add-btn" class="layui-btn${USER.theme === 'dark'? ' layui-btn-normal' : ''} layui-btn-xs m-btn" style="
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-    ">
-        <i class="layui-icon layui-icon-addition"></i>
-    </button>`;
-    $('#tab-ace-output').after(BTN_TEMPLETE);
-    
-    const MENU_TEMPLETE = `
-    <div class="scrollbar1" style="width: 100%; height: 100%;">
-        <div style="max-height: 100px; overflow-x: hidden; overflow-y: auto; padding: 0 2px;">
-            {{#  layui.each(d.list, function(index, item){ }}
-                <li class="tab-ace-port-add-btn m-btn" value="{{ item }}" lay-unselect style="
-                    display: block;
-                    padding: 0 3px;
-                ">{{ item }}</li>
-            {{#  }); }}
-            {{#  if(d.list.length === 0){ }}
-                ${Msg.Lang['无可用串口']}
-            {{#  } }}
-        </div>
-    </div>`;
+Serial.addStatusbarTabExtFunc = () => {
+    const { mainStatusBarTab } = Mixly;
+    mainStatusBarTab.addCtrlBtn();
+    mainStatusBarTab.menuOptionOnclick = (event) => {
+        const port = $(event.currentTarget).attr('value');
+        const portObj = Serial.portsOperator[port];
+        Serial.connect(port, portObj.toolConfig.baudRates);
+    }
 
-    Serial.$menu = tippy('#tab-ace-add-btn', {
-        allowHTML: true,
-        content: '',
-        trigger: 'click',
-        interactive: true,
-        maxWidth: 'none',
-        offset: [ 0, 6 ],
-        onMount(instance) {
-            let htmlStr = laytpl(MENU_TEMPLETE).render({
-                list: Serial.getMenu(Serial.uploadPorts)
-            });
-            instance.setContent(htmlStr);
-            $('.tab-ace-port-add-btn').off().click((event) => {
-                const port = $(event.currentTarget).attr('value');
-                const portObj = Serial.portsOperator[port];
-                Serial.connect(port, portObj.toolConfig.baudRates);
-                Serial.$menu[0].hide(500);
-            });
+    mainStatusBarTab.getMenuOptions = () => {
+        const ports = Serial.getMenu(Serial.uploadPorts);
+        let menu = { list: ports };
+        if (!ports.length) {
+            menu.empty = Msg.Lang['无可用串口'];
         }
-    });
-
-    $(window).on('resize', () => {
-        Serial.$menu[0].hide();
-    });
+        return menu;
+    }
 }
 
 });

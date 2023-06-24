@@ -2,8 +2,6 @@ goog.loadJs('web', () => {
 
 goog.require('layui');
 goog.require('Mixly.Config');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
@@ -16,8 +14,6 @@ goog.provide('Mixly.WebSocket.BU');
 
 const {
     Config,
-    StatusBar,
-    StatusBarPort,
     LayerExt,
     Env,
     Boards,
@@ -136,17 +132,19 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
 }
 
 BU.operateSuccess = (type, layerNum, port) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     layer.close(layerNum);
     const message = (type === 'burn'? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']);
     layer.msg(message + '!', {
         time: 1000
     });
-    const value = StatusBar.getValue();
+    const value = statusBarTerminal.getValue();
     let prefix = '';
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix + `==${message}==\n`);
+    statusBarTerminal.addValue(prefix + `==${message}==\n`);
     if (type === 'upload' && (Serial.uploadPorts.length === 1 || port)) {
         Serial.connect(port ?? Serial.uploadPorts[0].name, null);
     }
@@ -155,13 +153,15 @@ BU.operateSuccess = (type, layerNum, port) => {
 }
 
 BU.operateError = (type, layerNum, error) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     layer.close(layerNum);
-    const value = StatusBar.getValue();
+    const value = statusBarTerminal.getValue();
     let prefix = '';
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix + error + '\n');
+    statusBarTerminal.addValue(prefix + error + '\n');
     console.log(error);
     BU.burning = false;
     BU.uploading = false;
@@ -237,10 +237,12 @@ BU.initBurn = function () {
         layer.closeAll();
     }, () => {
         if (BU.burning) return;
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
         const { burn } = SELECTED_BOARD;
-        StatusBar.setValue('');
-        StatusBarPort.tabChange("output");
-        StatusBar.show(1);
+        statusBarTerminal.setValue('');
+        mainStatusBarTab.changeTo("output");
+        mainStatusBarTab.show();
         BU.burning = true;
         BU.uploading = false;
         if (burn.type === 'volume') {
@@ -266,9 +268,11 @@ BU.initUpload = function () {
     }, () => {
         if (BU.uploading) return;
         const { upload } = SELECTED_BOARD;
-        StatusBar.setValue('');
-        StatusBarPort.tabChange("output");
-        StatusBar.show(1);
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        statusBarTerminal.setValue('');
+        mainStatusBarTab.changeTo("output");
+        mainStatusBarTab.show();
         BU.burning = false;
         BU.uploading = true;
         if (upload.type === "volume") {
@@ -308,6 +312,8 @@ BU.burnByCmd = function (layerNum, port, command) {
 * @return {void}
 */
 BU.uploadByCmd = function (layerNum, port, command) {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     const newCommand = MString.tpl(command, { com: port });
     const { upload } = SELECTED_BOARD;
     const {
@@ -316,7 +322,7 @@ BU.uploadByCmd = function (layerNum, port, command) {
         libPath = []
     } = upload;
     const code = MFile.getCode();
-    StatusBar.addValue(Msg.Lang['上传中'] + '...\n');
+    statusBarTerminal.addValue(Msg.Lang['上传中'] + '...\n');
     Socket.sendCommand({
         obj: 'BU',
         func: 'uploadByCmd',
@@ -396,9 +402,11 @@ BU.burnWithSpecialBin = () => {
                 }
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.clientPath, "path");
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.indexDirPath, "indexPath");
-                StatusBar.setValue('');
-                StatusBarPort.tabChange("output");
-                StatusBar.show(1);
+                const { mainStatusBarTab } = Mixly;
+                const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+                statusBarTerminal.setValue('');
+                mainStatusBarTab.changeTo("output");
+                mainStatusBarTab.show();
                 BU.burning = true;
                 BU.uploading = false;
                 const port = Serial.getSelectedPortName();

@@ -2,18 +2,17 @@ goog.loadJs('common', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.XML');
-goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.ToolboxSearcher');
 
 const {
     XML,
-    Editor,
     Msg,
     ToolboxSearcher
 } = Mixly;
 
-ToolboxSearcher.init = function () {
+ToolboxSearcher.init = function (editor) {
+    this.editor = editor;
     this.workspace = new Blockly.Workspace(new Blockly.Options({
         toolbox: ''
     }));
@@ -31,7 +30,7 @@ ToolboxSearcher.init = function () {
         this.startSearch();
     });
     this.inputDom.bind('input propertychange', (event) => {
-        const mainToolbox = Editor.blockEditor.getToolbox();
+        const mainToolbox = this.editor.getToolbox();
         const searchCategory = mainToolbox.getToolboxItemById('catSearch');
         const keyText = event.target.value;
         try {
@@ -63,7 +62,7 @@ ToolboxSearcher.getCategoryPath = (category) => {
 
 ToolboxSearcher.searchBlocks = function (keyList) {
     return new Promise((resolve, reject) => {
-        const mainToolbox = Editor.blockEditor.getToolbox();
+        const mainToolbox = this.editor.getToolbox();
         const searchCategory = mainToolbox.getToolboxItemById('catSearch');
         let outputXML = [];
         const categories = mainToolbox.getToolboxItems();
@@ -197,7 +196,7 @@ ToolboxSearcher.startSearch = function () {
 
 ToolboxSearcher.restart = function () {
     this.preKeyText = '';
-    const mainToolbox = Editor.blockEditor.getToolbox();
+    const mainToolbox = this.editor.getToolbox();
     const searchCategory = mainToolbox.getToolboxItemById('catSearch');
     this.inputDom.val('');
     searchCategory.hide();

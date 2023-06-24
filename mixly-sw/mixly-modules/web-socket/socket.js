@@ -139,7 +139,6 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     WS.obj.onerror = (event) => {
         console.log('WebSocket error: ', event);
         reconnect();
-        //StatusBar.addValue(event.toString());
     };
 
     WS.obj.onclose = (event) => {

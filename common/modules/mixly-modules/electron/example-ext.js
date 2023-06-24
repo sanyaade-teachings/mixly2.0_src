@@ -45,7 +45,7 @@ const ExampleExt = function (containerId, exampleBtnId) {
 ExampleExt.prototype = Object.create(Example.prototype);
 ExampleExt.constructor = ExampleExt;
 
-ExampleExt.prototype.getExampleList = function () {
+ExampleExt.prototype.getRoot = function () {
     let exampleList = [];
     let samplePath;
     if (BOARD.thirdPartyBoard) {
@@ -84,7 +84,7 @@ ExampleExt.prototype.getExampleList = function () {
     return exampleList;
 }
 
-ExampleExt.prototype.getExamples = function (inPath) {
+ExampleExt.prototype.getChildren = function (inPath) {
     return this.getExamplesByPath(inPath, '.mix');
 }
 

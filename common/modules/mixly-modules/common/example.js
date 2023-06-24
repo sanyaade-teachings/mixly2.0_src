@@ -7,6 +7,7 @@ goog.require('Mixly.Title');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Env');
 goog.provide('Mixly.Example');
 
 const {
@@ -14,7 +15,8 @@ const {
     Title,
     XML,
     Editor,
-    Msg
+    Msg,
+    Env
 } = Mixly;
 
 const { dropdown, tree } = layui;
@@ -24,38 +26,29 @@ Mixly.Example = function (containerId, exampleBtnId) {
     this.containerId_ = containerId;
     this.exampleBtnId_ = exampleBtnId;
     this.$container_ = $(`#${containerId}`);
-    this.$container_.children().first().prepend(`
-        <button
-            id="${exampleBtnId}"
-            type="button"
-            m-title="${Msg.Lang['例程']}"
-            class="layui-btn layui-btn-xs layui-btn-primary m-btn"
-            style="cursor:pointer;border:none;margin-left:7px;padding:3px;display:inline-flex;align-items:center;"
-        >
-            <a
-                class="icon-doc-text"
-                style="color:#fff;font-size:12px;line-height:12px;"
-            >${Msg.Lang['例程']}</a>
-        </button>
-    `);
-    _this = this;
-    _this.menuHTML = XML.render(XML.TEMPLATE_STR['EXAMPLE_MENU_DIV'], {
-        id: _this.exampleBtnId_,
+    this.CTRL_BTN_TEMPLATE = goog.get(Env.templatePath + '/example-ctrl-btn.html');
+    const template = XML.render(this.CTRL_BTN_TEMPLATE, {
+        id: exampleBtnId,
+        name: Msg.Lang['例程']
+    });
+    this.$container_.children().first().prepend(template);
+    this.menuHTML = XML.render(XML.TEMPLATE_STR['EXAMPLE_MENU_DIV'], {
+        id: this.exampleBtnId_,
         close: Msg.Lang['关闭窗口']
     });
-    $('#' + _this.exampleBtnId_).off().click(function() {
-        if (_this.menu
-         && _this.menu.length
-         && !_this.menu[0].state.isDestroyed) {
-            if (_this.menu[0].state.isShown) {
-                _this.menu[0].destroy();
-                _this.menu = null;
+    $('#' + this.exampleBtnId_).off().click(() => {
+        if (this.menu
+         && this.menu.length
+         && !this.menu[0].state.isDestroyed) {
+            if (this.menu[0].state.isShown) {
+                this.menu[0].destroy();
+                this.menu = null;
             } else {
-                _this.menu[0].show();
+                this.menu[0].show();
             }
         } else {
-            _this.render();
-            _this.menu[0].show();
+            this.render();
+            this.menu[0].show();
         }
     });
 }
@@ -77,13 +70,13 @@ Mixly.Example.prototype.render = function () {
             });
             _this.examplesTree_ = tree.render({
                 elem: `#${_this.exampleBtnId_}-tree-body`,
-                data: _this.getExampleList(),
+                data: _this.getRoot(),
                 id: `${_this.exampleBtnId_}-tree-dom`,
                 accordion: true,
                 anim: false,
                 icon: [ 'icon-folder-empty', 'icon-folder-open-empty-1', 'icon-file-code' ],
                 getChildren: function(obj) {
-                    return _this.getExamples(obj.data.id);
+                    return _this.getChildren(obj.data.id);
                 },
                 click: function(obj) {
                     if (obj.data.children)
@@ -99,11 +92,11 @@ Mixly.Example.prototype.render = function () {
     });
 }
 
-Mixly.Example.prototype.getExampleList = function () {
+Mixly.Example.prototype.getRoot = function () {
     
 }
 
-Mixly.Example.prototype.getExamples = function (inPath) {
+Mixly.Example.prototype.getChildren = function (inPath) {
 
 }
 

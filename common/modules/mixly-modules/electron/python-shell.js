@@ -2,7 +2,6 @@ goog.loadJs('electron', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
-goog.require('Mixly.StatusBar');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Electron');
@@ -12,7 +11,6 @@ const {
     Electron,
     Modules,
     MFile,
-    StatusBar,
     Env,
     Msg
 } = Mixly;
@@ -52,9 +50,11 @@ function message_decode(s) {
 * @return void
 */
 PythonShell.run = function () {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     const cursorCallback = PythonShell.addEvent();
-    StatusBar.show(1);
-    StatusBar.setValue(Msg.Lang["程序正在运行"] + "...\n");
+    mainStatusBarTab.show();
+    statusBarTerminal.setValue(Msg.Lang["程序正在运行"] + "...\n");
     var code = Mixly.MFile.getCode();
     code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) { return decodeURIComponent(s.replace(/_/g, '%')); });
     try {
@@ -76,15 +76,15 @@ PythonShell.run = function () {
             layer.msg(Msg.Lang['写文件出错了，错误是：'] + err, {
                 time: 1000
             });
-            StatusBar.setValue(Msg.Lang['写文件出错了，错误是：'] + err + '\n');
-            StatusBar.show(1);
+            statusBarTerminal.setValue(Msg.Lang['写文件出错了，错误是：'] + err + '\n');
+            statusBarTerminal.show();
         } else {
             shell = new Modules.PythonShell(Env.pyFilePath, options);
             let iconv = Modules.iconvLite;
             var startTime = Number(new Date());
             //程序运行完成时执行
             shell.childProcess.on('exit', (code) => {
-                StatusBar.Ace.getSession().selection.removeEventListener('changeCursor', cursorCallback);
+                statusBarTerminal.ace.getSession().selection.removeEventListener('changeCursor', cursorCallback);
                 //var timeCost = parseInt((Number(new Date()) - startTime) / 1000);
                 var timeCost = Number(new Date()) - startTime;
                 var timeCostSecond = timeCost % 60;
@@ -92,11 +92,11 @@ PythonShell.run = function () {
                 //var timeCostStr = (timeCostMinute ? timeCostMinute + "m" : "") + timeCostSecond + "s";
                 var timeCostStr = timeCost + "ms";
                 //if (code == 0) {
-                if (StatusBar.getValue().lastIndexOf("\n") == StatusBar.getValue().length - 1)
-                    StatusBar.addValue("==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
+                if (statusBarTerminal.getValue().lastIndexOf("\n") == statusBarTerminal.getValue().length - 1)
+                    statusBarTerminal.addValue("==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 else
-                    StatusBar.addValue("\n==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
-                StatusBar.scrollToTheBottom();
+                    statusBarTerminal.addValue("\n==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
+                statusBarTerminal.scrollToBottom();
                 shell = null;
                 //}
             });
@@ -115,14 +115,14 @@ PythonShell.run = function () {
                 } catch (e) {
                     console.log(e);
                 }
-                StatusBar.addValue(data);
+                statusBarTerminal.addValue(data);
 
                 if (data.lastIndexOf(">>>") != -1 && shell) {
                     input_prompt_message = data.substring(data.lastIndexOf(">>>"));
-                    input_prompt_message_line = StatusBar.Ace.session.getLength();
-                    StatusBar.Ace.selection.moveCursorLineEnd();
-                    input_prompt_position_row = StatusBar.Ace.selection.getCursor().row;
-                    input_prompt_position_column = StatusBar.Ace.selection.getCursor().column;
+                    input_prompt_message_line = statusBarTerminal.ace.session.getLength();
+                    statusBarTerminal.ace.selection.moveCursorLineEnd();
+                    input_prompt_position_row = statusBarTerminal.ace.selection.getCursor().row;
+                    input_prompt_position_column = statusBarTerminal.ace.selection.getCursor().column;
                 }
             });
 
@@ -137,16 +137,16 @@ PythonShell.run = function () {
                 }
                 try {
                     if (Env.currentPlatform === 'darwin') {
-                        StatusBar.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'utf-8'));
+                        statusBarTerminal.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'utf-8'));
                     } else {
-                        StatusBar.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'gbk'));
+                        statusBarTerminal.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'gbk'));
                     }
                     err = message_decode(err);
                 } catch (e) {
                     err = message_decode(err);
-                    StatusBar.addValue(err);
+                    statusBarTerminal.addValue(err);
                 }
-                StatusBar.scrollToTheBottom();
+                statusBarTerminal.scrollToBottom();
                 shell = null;
             });
         }
@@ -160,7 +160,9 @@ PythonShell.run = function () {
 * @return void
 */
 PythonShell.stop = function () {
-    StatusBar.show(1);
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.show();
     if (shell) {
         shell.terminate('SIGKILL');
         //shell.stdout.end();
@@ -168,9 +170,9 @@ PythonShell.stop = function () {
         //StatusBar.addValue("\n==" + Msg.Lang["程序运行完成"] + "==\n", false);
         shell = null;
     } else {
-        StatusBar.addValue("\n==" + Msg.Lang["无程序在运行"] + "==\n");
+        statusBarTerminal.addValue("\n==" + Msg.Lang["无程序在运行"] + "==\n");
     }
-    StatusBar.scrollToTheBottom();
+    statusBarTerminal.scrollToBottom();
 }
 
 /**
@@ -179,23 +181,27 @@ PythonShell.stop = function () {
 * @return void
 */
 PythonShell.clearOutput = function () {
-    StatusBar.setValue("");
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.setValue("");
 }
 
 PythonShell.addEvent = () => {
-    return StatusBar.Ace.getSession().selection.on('changeCursor', function (e) {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    return statusBarTerminal.ace.getSession().selection.on('changeCursor', function (e) {
         if (shell && input_prompt_message_line != -1) {
-            if (StatusBar.Ace.selection.getCursor().row < input_prompt_position_row) {
-                StatusBar.Ace.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
+            if (statusBarTerminal.ace.selection.getCursor().row < input_prompt_position_row) {
+                statusBarTerminal.ace.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
             }
-            else if (StatusBar.Ace.selection.getCursor().row <= input_prompt_position_row
-                && StatusBar.Ace.selection.getCursor().column <= input_prompt_position_column) {
-                StatusBar.Ace.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
+            else if (statusBarTerminal.ace.selection.getCursor().row <= input_prompt_position_row
+                && statusBarTerminal.ace.selection.getCursor().column <= input_prompt_position_column) {
+                statusBarTerminal.ace.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
             }
-            last_row_data = StatusBar.Ace.session.getLine(input_prompt_message_line - 1);
+            last_row_data = statusBarTerminal.ace.session.getLine(input_prompt_message_line - 1);
             if (last_row_data.indexOf(">>>") != -1
-                && StatusBar.Ace.selection.getCursor().row == input_prompt_message_line
-                && StatusBar.Ace.selection.getCursor().column == 0) {
+                && statusBarTerminal.ace.selection.getCursor().row == input_prompt_message_line
+                && statusBarTerminal.ace.selection.getCursor().column == 0) {
                 //shell.stdin.setEncoding('utf-8'); 
                 if (last_row_data.indexOf(input_prompt_message) == -1) {
                     last_row_data = last_row_data.replace(">>> ", "");

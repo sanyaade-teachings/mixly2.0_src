@@ -5,8 +5,7 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
+goog.require('Mixly.StatusBarTab');
 goog.require('Mixly.Title');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
@@ -20,8 +19,7 @@ const {
     Modules,
     Env,
     LayerExt,
-    StatusBar,
-    StatusBarPort,
+    StatusBarTab,
     Title,
     Boards,
     MFile,
@@ -57,11 +55,13 @@ ArduShell.initCompile = () => {
 * @return void
 */
 ArduShell.compile = () => {
-    StatusBarPort.tabChange("output");
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.changeTo('output');
     ArduShell.compiling = true;
     ArduShell.uploading = false;
     const boardType = Boards.getSelectedBoardCommandParam();
-    StatusBar.show(1);
+    mainStatusBarTab.show();
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["编译中"] + "...",
@@ -76,7 +76,7 @@ ArduShell.compile = () => {
                 layer.title(Msg.Lang['编译终止中'] + '...', index);
                 ArduShell.cancel();
             });
-            StatusBar.setValue(Msg.Lang["编译中"] + "...\n");
+            statusBarTerminal.setValue(Msg.Lang["编译中"] + "...\n");
             const code = MFile.getCode();
             Socket.sendCommand({
                 obj: 'ArduShell',
@@ -130,7 +130,9 @@ ArduShell.initUpload = () => {
 * @return void
 */
 ArduShell.upload = (boardType, port) => {
-    StatusBarPort.tabChange("output");
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.changeTo("output");
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["上传中"] + "...",
@@ -145,8 +147,8 @@ ArduShell.upload = (boardType, port) => {
                 layer.title(Msg.Lang['上传终止中'] + '...', index);
                 ArduShell.cancel();
             });
-            StatusBar.show(1);
-            StatusBar.setValue(Msg.Lang["上传中"] + "...\n");
+            statusBarTerminal.show();
+            statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
             const code = MFile.getCode();
             Socket.sendCommand({
                 obj: 'ArduShell',
@@ -164,15 +166,17 @@ ArduShell.upload = (boardType, port) => {
 }
 
 ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     layer.close(layerNum);
-    const value = StatusBar.getValue();
+    const value = statusBarTerminal.getValue();
     let prefix = '';
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix);
+    statusBarTerminal.addValue(prefix);
     const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
-    StatusBar.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
+    statusBarTerminal.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
     layer.msg(message + '！', {
         time: 1000
     });
@@ -184,20 +188,24 @@ ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
 }
 
 ArduShell.operateOnError = (type, layerNum, error) => {
-    StatusBar.addValue(error);
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.addValue(error);
 }
 
 ArduShell.operateEndError = (type, layerNum, error) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     layer.close(layerNum);
-    const value = StatusBar.getValue();
+    const value = statusBarTerminal.getValue();
     let prefix = '';
     if (value.lastIndexOf('\n') !== value.length - 1) {
         prefix = '\n';
     }
-    StatusBar.addValue(prefix);
-    error && StatusBar.addValue(error + '\n');
+    statusBarTerminal.addValue(prefix);
+    error && statusBarTerminal.addValue(error + '\n');
     const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
-    StatusBar.addValue("==" + message + "==\n");
+    statusBarTerminal.addValue("==" + message + "==\n");
     ArduShell.compiling = false;
     ArduShell.uploading = false;
 }

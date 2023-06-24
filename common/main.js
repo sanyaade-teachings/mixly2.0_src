@@ -82,6 +82,10 @@ goog.DEPENDENCIES = [
         "provide": ['LexicalVariables'],
         "require": ['Blockly']
     }, {
+        "path": '/../../blockly-core/plugins/disable_top_blocks.js',
+        "provide": ['DisableTopBlocks'],
+        "require": ['Blockly']
+    }, {
         "path": '/../web-modules/lazyload.js',
         "provide": ['LazyLoad'],
         "require": []
@@ -268,19 +272,11 @@ goog.initDependencies = () => {
 
 goog.initDependencies();
 
-goog.require('Blockly');
 goog.require('Mixly.Loading');
 goog.require('Mixly.JSFuncs');
 goog.require('Mixly.Interface');
-goog.require('Blockly.FieldGridDropdown');
-goog.require('Blockly.FieldSlider');
-goog.require('Blockly.FieldBitmap');
-goog.require('Blockly.FieldColourHsvSliders');
-goog.require('Blockly.FieldDate');
 goog.require('select2');
 goog.require('XScrollbar');
-goog.require('ace');
-goog.require('ace.ExtLanguageTools');
 goog.require('PouchDB');
 goog.require('d3');
 goog.require('Mixly.Electron.Events');

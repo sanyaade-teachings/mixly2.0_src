@@ -6,8 +6,6 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Title');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
@@ -21,8 +19,6 @@ const {
     Env,
     Electron,
     LayerExt,
-    StatusBar,
-    StatusBarPort,
     Title,
     Boards,
     MFile,
@@ -161,11 +157,13 @@ ArduShell.compile = (doFunc = () => {}) => {
     if (!ArduShell.shellPath) {
         ArduShell.shellPath = '';
     }
-    StatusBarPort.tabChange("output");
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.changeTo("output");
     ArduShell.compiling = true;
     ArduShell.uploading = false;
     const boardType = Boards.getSelectedBoardCommandParam();
-    StatusBar.show(1);
+    mainStatusBarTab.show();
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["编译中"] + "...",
@@ -189,7 +187,7 @@ ArduShell.compile = (doFunc = () => {}) => {
         }
     });
     setTimeout(() => {
-        StatusBar.setValue(Msg.Lang["编译中"] + "...\n");
+        statusBarTerminal.setValue(Msg.Lang["编译中"] + "...\n");
 
         let myLibPath = Env.indexDirPath + "/libraries/myLib/";
         if (fs_extend.isdir(myLibPath))
@@ -266,7 +264,9 @@ ArduShell.upload = (boardType, port) => {
     if (!ArduShell.shellPath) {
         ArduShell.shellPath = '';
     }
-    StatusBarPort.tabChange("output");
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.changeTo("output");
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["上传中"] + "...",
@@ -289,8 +289,8 @@ ArduShell.upload = (boardType, port) => {
             $("#mixly-loader-btn").css('display', 'inline-block');
         }
     });
-    StatusBar.show(1);
-    StatusBar.setValue(Msg.Lang["上传中"] + "...\n");
+    statusBarTerminal.show();
+    statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
     const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),
     buildPath = path.resolve(Env.clientPath, './mixlyBuild'),
@@ -344,7 +344,7 @@ ArduShell.upload = (boardType, port) => {
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {
             const code = MFile.getCode();
-            StatusBar.show(1);
+            statusBarTerminal.show();
             const portObj = Serial.portsOperator[port];
             if (!portObj) return;
             const { toolConfig } = portObj;
@@ -498,6 +498,8 @@ ArduShell.writeLibFiles = (inPath) => {
 * @return void
 */
 ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     const code = MFile.getCode();
     const testArduinoDirPath = path.resolve(Env.clientPath, 'testArduino');
     const codePath = path.resolve(testArduinoDirPath, 'testArduino.ino');
@@ -521,7 +523,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
 
         ArduShell.shell.stdout.on('data', (data) => {
             if (data.length < 1000) {
-                StatusBar.addValue(data);
+                statusBarTerminal.addValue(data);
             }
         });
 
@@ -531,7 +533,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             } catch (error) {
                 console.log(error);
             }
-            StatusBar.addValue(data);
+            statusBarTerminal.addValue(data);
         });
 
         ArduShell.shell.on('close', (code) => {
@@ -542,7 +544,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             timeCostStr = (timeCostMinute ? timeCostMinute + "m" : "") + timeCostSecond + "s";
             if (code === 0) {
                 const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
-                StatusBar.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
+                statusBarTerminal.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 layer.msg(message + '！', {
                         time: 1000
                     });
@@ -550,16 +552,16 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             } else {
                 // code = 1 用户终止运行
                 const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
-                StatusBar.addValue("==" + message + "==\n");
+                statusBarTerminal.addValue("==" + message + "==\n");
             }
-            StatusBar.scrollToTheBottom();
+            statusBarTerminal.scrollToBottom();
         });
     })
     .catch((error) => {
         console.log(error);
         layer.close(layerNum);
         const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
-        StatusBar.addValue("==" + message + "==\n");
+        statusBarTerminal.addValue("==" + message + "==\n");
     });
 }
 
@@ -568,6 +570,8 @@ ArduShell.saveBinOrHex = function (writePath) {
 }
 
 ArduShell.writeFile = function (readPath, writePath) {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     ArduShell.compile(function () {
         window.setTimeout(function () {
             const layerNum = layer.open({
@@ -627,7 +631,7 @@ ArduShell.writeFile = function (readPath, writePath) {
                             });
                         } catch (e) {
                             console.log(e);
-                            StatusBar.addValue(e + "\n");
+                            statusBarTerminal.addValue(e + "\n");
                         }
                         layer.close(layerNum);
                     }, 500);

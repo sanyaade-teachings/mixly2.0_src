@@ -1,7 +1,6 @@
 goog.loadJs('web', () => {
 
 goog.require('Mixly.MString');
-goog.require('Mixly.StatusBar');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
 goog.require('Mixly.Web');
@@ -9,7 +8,6 @@ goog.provide('Mixly.Web.Ampy');
 
 const {
     Web,
-    StatusBar,
     MString,
     Msg,
     Env
@@ -123,6 +121,8 @@ class Ampy {
 
     put(fileName, code, moduleInfo = null) {
         return new Promise(async (resolve, reject) => {
+            const { mainStatusBarTab } = Mixly;
+            const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
             try {
                 await this.operator_.writeCtrlB();
                 if (!await this.interrupt()) {
@@ -142,7 +142,7 @@ class Ampy {
                         const libCode = goog.get(moduleInfo[name]);
                         if (!libCode 
                          || new TextEncoder('utf8').encode(libCode).length === fileInfo[name + '.py']) {
-                            StatusBar.addValue('Skip ' + name + '.py\n');
+                            statusBarTerminal.addValue('Skip ' + name + '.py\n');
                             continue;
                         }
                         await this.writeFile(name + '.py', libCode);
@@ -188,7 +188,9 @@ class Ampy {
             }
             return unicode;
         }
-        StatusBar.addValue(`Writing ${fileName} `);
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        statusBarTerminal.addValue(`Writing ${fileName} `);
         let str = `file = open('${fileName}', 'w')\n`;
         const buffer = this.encoder_.encode(data);
         const len = Math.ceil(buffer.length / 500);
@@ -206,7 +208,7 @@ class Ampy {
         }
         str += `file.close()\n`;
         await this.exec(str);
-        StatusBar.addValue('Done!\n');
+        statusBarTerminal.addValue('Done!\n');
     }
 
     async exec(str) {

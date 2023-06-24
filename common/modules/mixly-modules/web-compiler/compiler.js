@@ -1,8 +1,6 @@
 goog.loadJs('web', () => {
 
 goog.require('Mixly.Url');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Config');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Url');
@@ -18,8 +16,6 @@ const {
     Url,
     Boards,
     MFile,
-    StatusBar,
-    StatusBarPort,
     Config,
     LayerExt,
     Msg,
@@ -46,8 +42,10 @@ Compiler.protocol = protocol;
 Compiler.URL = Compiler.protocol + '//' + hostname + port + '/compile';
 
 Compiler.compile = () => {
-    StatusBar.show(1);
-    StatusBar.setValue('');
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.show();
+    statusBarTerminal.setValue('');
     Compiler.generateCommand('compile', (error, obj, layerNum) => {
         layer.close(layerNum);
         let message = Msg.Lang["编译成功"];
@@ -55,13 +53,15 @@ Compiler.compile = () => {
             message = Msg.Lang["编译失败"];
         }
         layer.msg(message, { time: 1000 });
-        StatusBar.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + obj.timeCost + ")==\n");
+        statusBarTerminal.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + obj.timeCost + ")==\n");
     });
 }
 
 Compiler.upload = async () => {
-    StatusBar.show(1);
-    StatusBar.setValue('');
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    mainStatusBarTab.show();
+    statusBarTerminal.setValue('');
     BU.burning = false;
     BU.uploading = true;
     const board = Boards.getSelectedBoardCommandParam();
@@ -85,12 +85,12 @@ Compiler.upload = async () => {
                 break;
         }
         Serial.portClose(portName, async () => {
-            StatusBarPort.tabChange('output');
+            mainStatusBarTab.changeTo('output');
             try {
                 await AvrUploader.connect(boardUpload, {});
                 Compiler.generateCommand('upload', BU.uploadWithAvrUploader);
             } catch (error) {
-                StatusBar.addValue(error.toString() + '\n');
+                statusBarTerminal.addValue(error.toString() + '\n');
             }
         });
     } else {
@@ -99,7 +99,7 @@ Compiler.upload = async () => {
                 layer.msg(Msg.Lang['已取消连接'], { time: 1000 });
                 return;
             }
-            StatusBarPort.tabChange('output');
+            mainStatusBarTab.changeTo('output');
             Compiler.generateCommand('upload', BU.uploadWithEsptool);
         });
     }
@@ -115,9 +115,11 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
         visitorId: BOARD.visitorId.str32CRC32b,
         operate
     };
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     let commandStr = Compiler.URL + '?' + Url.jsonToUrl(command);
     // StatusBar.setValue('send -> ' + commandStr + '\n');
-    StatusBar.setValue(Msg.Lang['编译中'] + '...\n');
+    statusBarTerminal.setValue(Msg.Lang['编译中'] + '...\n');
     console.log('send -> ', commandStr);
     const compileLayer = layer.open({
         type: 1,
@@ -155,6 +157,8 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
         console.log('There has been a problem with your fetch operation: ', error.message);
     });
     */
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     let req = new Request(command);
     fetch(req, {
         credentials: 'omit', // 设置不传递cookie
@@ -165,15 +169,15 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
         const dataObj = JSON.parse(data);
         console.log(dataObj);
         if (dataObj.error) {
-            StatusBar.addValue(decodeURIComponent(dataObj.error));
+            statusBarTerminal.addValue(decodeURIComponent(dataObj.error));
             endFunc(true, null, layerType);
         } else {
-            StatusBar.addValue(decodeURIComponent(dataObj.compileMessage));
+            statusBarTerminal.addValue(decodeURIComponent(dataObj.compileMessage));
             endFunc(false, {
                 data: dataObj.data,
                 timeCost: decodeURIComponent(dataObj.timeCost)
             }, layerType);
-        } 
+        }
     })
     .catch((error) => {
         endFunc(true, error.toString(), layerType);

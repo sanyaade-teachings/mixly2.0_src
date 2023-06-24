@@ -49,6 +49,7 @@ MArray.equals = (x, y) => {
 }
 
 MArray.remove = (arr, data) => {
+    arr = [ ...arr ];
     let index = arr.indexOf(data);
     arr.splice(index, 1);
     return arr;

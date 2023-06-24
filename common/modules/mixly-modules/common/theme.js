@@ -1,12 +1,11 @@
 goog.loadJs('common', () => {
 
 goog.require('Blockly');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
+goog.require('Mixly.StatusBarTab');
 goog.require('Mixly.Editor');
 goog.provide('Mixly.Theme');
 
-const { Theme, StatusBar, StatusBarPort, Editor } = Mixly;
+const { Theme, StatusBarTab, Editor } = Mixly;
 
 Theme.changeTo = function (type) {
     const { blockEditor, codeEditor } = Editor;

@@ -1,14 +1,15 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly.Editor');
 goog.require('Mixly.Config');
 goog.provide('Mixly.Drag');
+goog.provide('Mixly.DragH');
+goog.provide('Mixly.DragV');
 
-const { Editor, Config, Drag } = Mixly;
+const { Editor, Config } = Mixly;
 
 const { BOARD } = Config;
 
-class MDrag {
+class Drag {
     constructor(container, config) {
         const DEFAULT_CONFIG = {
             type: 'h', // 'h' - 水平拖拽，'v' - 垂直拖拽
@@ -239,11 +240,16 @@ class MDrag {
         else
             this.changeSize('70%');
     }
+
+    hide() {
+        this.full('POSITIVE');
+    }
 }
+
 
 Drag.elems = {};
 
-class HorizontalDrag extends MDrag {
+class DragH extends Drag {
     constructor(elem, config) {
         super(elem, {
             ...config,
@@ -252,7 +258,7 @@ class HorizontalDrag extends MDrag {
     }
 }
 
-class VerticalDrag extends MDrag {
+class DragV extends Drag {
     constructor(elem, config) {
         super(elem, {
             ...config,
@@ -261,180 +267,9 @@ class VerticalDrag extends MDrag {
     }
 }
 
-Drag.HorizontalDrag = HorizontalDrag;/*(elem, config) => {
-    Drag.elems[elem] = new MDrag(elem, {
-        ...config,
-        type: 'h'
-    });
-}*/
+Mixly.DragH = DragH;
+Mixly.DragV = DragV;
 
-Drag.VerticalDrag = VerticalDrag;/*(elem, config) => {
-    Drag.elems[elem] = new MDrag(elem, {
-        ...config,
-        type: 'v'
-    });
-}*/
-
-Drag.init = () => {
-    Drag.items = {
-        vDrag: Drag.EditorBarInit(),
-        hDrag: Drag.statusBarInit()
-    };
-    Editor.items = { ...Drag.items };
-    Drag.addBtnClickEvent();
-}
-
-Drag.EditorBarInit = () => {
-    const { blockEditor, codeEditor } = Editor;
-    const $vBar = $('#nav').find('button[m-id="v-bar"]').children('a');
-    const $codeArea = $('#nav').find('button[m-id="code-area"]').children('a');
-    const vDrag = new Drag.VerticalDrag('v-container', {
-        min: '200px',
-        full: [true, true],
-        sizeChanged: function() {
-            // 重新调整编辑器尺寸
-            $(blockEditor.getParentSvg()).attr({
-                width: $('#' + Editor.DIV_NAME.BLOCK).width(),
-                height: $('#' + Editor.DIV_NAME.BLOCK).height()
-            });
-
-            codeEditor.resize();
-            Blockly.fireUiEvent(window, 'resize');
-        },
-        onfull: function(type) {
-            switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：左→右 完全显示块编辑器
-                    $vBar.removeClass('icon-hide-bar-e').addClass('icon-show-bar-e');
-                    codeEditor.setReadOnly(true);
-                    Editor.codeEditorHideBtn();
-                    Editor.selected = 'BLOCK';
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
-                    $codeArea.removeClass('icon-code-1').addClass('icon-block');
-                    $codeArea.parent().attr('m-id', 'block-area');
-                    codeEditor.setReadOnly(false);
-                    Editor.codeEditorShowBtn();
-                    Editor.selected = 'CODE';
-                    const { py2BlockEditor } = Editor;
-                    if (py2BlockEditor && BOARD.pythonToBlockly) {
-                        py2BlockEditor.fromCode = true;
-                    }
-                    break;
-            }
-            Editor.codeEditorMenuRender();
-        },
-        exitfull: function(type) {
-            codeEditor.setReadOnly(true);
-            Editor.selected = 'BLOCK';
-            Editor.codeEditorMenuRender();
-            Editor.codeEditorHideBtn();
-            switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：左→右 退出代码编辑器，进入块编辑器
-                    $codeArea.removeClass('icon-block').addClass('icon-code-1');
-                    $codeArea.parent().attr('m-id', 'code-area');
-                    const { py2BlockEditor } = Editor;
-                    if (py2BlockEditor 
-                        && BOARD.pythonToBlockly 
-                        && typeof py2BlockEditor.updateBlock === 'function') {
-                        py2BlockEditor.updateBlock();
-                    }
-                    Editor.blockEditorUpdateCode();
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：右→左 侧边代码栏开始显示
-                    $vBar.removeClass('icon-show-bar-e').addClass('icon-hide-bar-e');
-                    break;
-            }
-            return true;
-        }
-    });
-    return vDrag;
-}
-
-Drag.statusBarInit = () => {
-    const { blockEditor, codeEditor } = Editor;
-    const $hBar = $('#nav').find('button[m-id="h-bar"]').children('a');
-    const hDrag = new Drag.HorizontalDrag('h-container', {
-        min: '50px',
-        sizeChanged: function() {
-            // 重新调整编辑器尺寸
-            $(blockEditor.getParentSvg()).attr({
-                width: $('#' + Editor.DIV_NAME.BLOCK).width(),
-                height: $('#' + Editor.DIV_NAME.BLOCK).height()
-            });
-
-            codeEditor.resize();
-            Blockly.fireUiEvent(window, 'resize');
-        },
-        onfull: function(type) {
-            switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：上→下
-                    $hBar.removeClass('icon-hide-bar-s').addClass('icon-show-bar-s');
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：下→上
-                    break;
-            }
-        },
-        exitfull: function(type) {
-            switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：上→下
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：下→上
-                    $hBar.removeClass('icon-show-bar-s').addClass('icon-hide-bar-s');
-                    break;
-            }
-            return true;
-        }
-    });
-    return hDrag;
-}
-
-Drag.addBtnClickEvent = () => {
-    const { vDrag, hDrag } = Drag.items;
-    const $vBar = $('#nav').find('button[m-id="v-bar"]').children('a');
-    const $buttons = $('#nav').find('button');
-    for (let i = 0; $buttons[i]; i++) {
-        const $button = $($buttons[i]);
-        $button.click(function() {
-            const $a = $button.children('a');
-            const mId = $button.attr('m-id');
-            switch($button.attr('m-id')) {
-                case 'h-bar':
-                    if ($a.hasClass('icon-hide-bar-s')) {
-                        $a.removeClass('icon-hide-bar-s');
-                        $a.addClass('icon-show-bar-s');
-                        hDrag.full('POSITIVE');
-                    } else {
-                        $a.removeClass('icon-show-bar-s');
-                        $a.addClass('icon-hide-bar-s');
-                        hDrag.show();
-                    }
-                    break;
-                case 'v-bar':
-                    if ($a.hasClass('icon-hide-bar-e')) {
-                        $a.removeClass('icon-hide-bar-e');
-                        $a.addClass('icon-show-bar-e');
-                        vDrag.full('POSITIVE');
-                    } else {
-                        $a.removeClass('icon-show-bar-e');
-                        $a.addClass('icon-hide-bar-e');
-                        vDrag.show();
-                    }
-                    break;
-                case 'code-area':
-                    $button.attr('m-id', 'block-area');
-                    $a.removeClass('icon-code-1').addClass('icon-block');
-                    $vBar.removeClass('icon-show-bar-e').addClass('icon-hide-bar-e');
-                    vDrag.full('NEGATIVE');
-                    break;
-                case 'block-area':
-                    $button.attr('m-id', 'code-area');
-                    $a.removeClass('icon-block').addClass('icon-code-1');
-                    $vBar.removeClass('icon-hide-bar-e').addClass('icon-show-bar-e');
-                    vDrag.full('POSITIVE');
-                    break;
-            }
-        });
-    }
-}
+Mixly.Drag = Drag;
 
 });

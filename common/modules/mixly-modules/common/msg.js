@@ -43,7 +43,7 @@ Msg.getLang = (str) => {
 }
 
 Msg.changeTo = (lang) => {
-    Mixly.Msg.Lang = Msg.LANG[lang ?? 'zh-hans'];
+    Msg.Lang = Msg.LANG[lang ?? 'zh-hans'];
     let newMsg;
     switch (lang) {
     case 'zh-hant':

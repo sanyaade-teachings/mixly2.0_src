@@ -2,8 +2,6 @@ goog.loadJs('web', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
-goog.require('Mixly.StatusBar');
-goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Config');
 goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
@@ -17,8 +15,6 @@ goog.provide('Mixly.WebSocket.Serial');
 const {
     Modules,
     Charts,
-    StatusBar,
-    StatusBarPort,
     Config,
     Tools,
     Env,
@@ -729,7 +725,7 @@ Serial.receiveBoxGetValue = (port) => {
     return receiveDom.val();
 }
 
-Serial.receiveBoxScrollToTheBottom = () => {
+Serial.receiveBoxscrollToBottom = () => {
     const portObj = Serial.portsOperator[port];
     const { dom } = portObj;
     if (dom) {
@@ -739,7 +735,7 @@ Serial.receiveBoxScrollToTheBottom = () => {
     }
 }
 
-Serial.receiveBoxScrollToTheTop = () => {
+Serial.receiveBoxscrollToTop = () => {
     
 }
 

@@ -23,7 +23,7 @@ class ExampleExt extends Example {
         this.render();
     }
 
-    getExampleList() {
+    getRoot() {
         const { DIR_TREE } = ExampleExt;
         let exampleList = [];
         if ((DIR_TREE instanceof Object) && DIR_TREE[BOARD.boardType]) {
@@ -36,7 +36,7 @@ class ExampleExt extends Example {
         return exampleList;
     }
 
-    getExamples(inPath) {
+    getChildren(inPath) {
         const { DIR_TREE } = ExampleExt;
         const pathList = inPath.split('/');
         let obj = DIR_TREE;

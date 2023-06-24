@@ -1,5 +1,25 @@
 [
     {
+        "path": "/common/block-editor.js",
+        "require": [
+            "Blockly",
+            "WorkspaceSearch",
+            "Backpack",
+            "ContentHighlight",
+            "ZoomToFitControl",
+            "Blockly.FieldGridDropdown",
+            "Blockly.FieldSlider",
+            "Blockly.FieldBitmap",
+            "Blockly.FieldColourHsvSliders",
+            "Blockly.FieldDate",
+            "Mixly.Config",
+            "Mixly.ToolboxSearcher"
+        ],
+        "provide": [
+            "Mixly.BlockEditor"
+        ]
+    },
+    {
         "path": "/common/board-config-item.js",
         "require": [
             "Mixly.Env",
@@ -46,6 +66,18 @@
         ],
         "provide": [
             "Mixly.Boards"
+        ]
+    },
+    {
+        "path": "/common/code-editor.js",
+        "require": [
+            "ace",
+            "ace.ExtLanguageTools",
+            "Mixly.Config",
+            "Mixly.XML"
+        ],
+        "provide": [
+            "Mixly.CodeEditor"
         ]
     },
     {
@@ -107,20 +139,21 @@
     {
         "path": "/common/drag.js",
         "require": [
-            "Mixly.Editor",
             "Mixly.Config"
         ],
         "provide": [
-            "Mixly.Drag"
+            "Mixly.Drag",
+            "Mixly.DragH",
+            "Mixly.DragV"
         ]
     },
     {
         "path": "/common/editor.js",
         "require": [
             "Blockly",
-            "Mixly.Config",
-            "Mixly.Nav",
-            "Mixly.XML",
+            "Mixly.DragH",
+            "Mixly.MixedEditor",
+            "Mixly.StatusBarTab",
             "Mixly.Msg"
         ],
         "provide": [
@@ -145,7 +178,8 @@
             "Mixly.Title",
             "Mixly.XML",
             "Mixly.Editor",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.Env"
         ],
         "provide": [
             "Mixly.Example"
@@ -179,20 +213,14 @@
             "Mixly.Url",
             "Mixly.Config",
             "Mixly.NavEvents",
-            "Mixly.StatusBar",
             "Mixly.XML",
             "Mixly.Nav",
             "Mixly.Env",
             "Mixly.Boards",
             "Mixly.Modules",
-            "Mixly.ToolboxSearcher",
-            "Mixly.Drag",
             "Mixly.Editor",
+            "Mixly.Msg",
             "Mixly.LevelSelector",
-            "WorkspaceSearch",
-            "Backpack",
-            "ContentHighlight",
-            "ZoomToFitControl",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.ExampleExt",
@@ -311,6 +339,22 @@
         ]
     },
     {
+        "path": "/common/mixed-editor.js",
+        "require": [
+            "layui",
+            "Blockly",
+            "Mixly.BlockEditor",
+            "Mixly.CodeEditor",
+            "Mixly.DragV",
+            "Mixly.XML",
+            "Mixly.Msg",
+            "Mixly.Config"
+        ],
+        "provide": [
+            "Mixly.MixedEditor"
+        ]
+    },
+    {
         "path": "/common/mixly.js",
         "require": [],
         "provide": [
@@ -410,23 +454,45 @@
         ]
     },
     {
-        "path": "/common/status-bar-port.js",
+        "path": "/common/statusbar-serial.js",
         "require": [
-            "Mixly.StatusBar",
-            "Mixly.Config",
-            "layui"
+            "Mixly.StatusBar"
         ],
         "provide": [
-            "Mixly.StatusBarPort"
+            "Mixly.StatusBarSerial"
         ]
     },
     {
-        "path": "/common/status-bar.js",
+        "path": "/common/statusbar-tab.js",
         "require": [
-            "Mixly.Env",
-            "Mixly.XML",
+            "layui",
+            "tippy",
+            "Mixly.StatusBarSerial",
+            "Mixly.StatusBarTerminal",
+            "Mixly.Drag",
             "Mixly.Config",
-            "Mixly.Drag"
+            "Mixly.XML",
+            "Mixly.MArray",
+            "Mixly.Env"
+        ],
+        "provide": [
+            "Mixly.StatusBarTab"
+        ]
+    },
+    {
+        "path": "/common/statusbar-terminal.js",
+        "require": [
+            "Mixly.StatusBar"
+        ],
+        "provide": [
+            "Mixly.StatusBarTerminal"
+        ]
+    },
+    {
+        "path": "/common/statusbar.js",
+        "require": [
+            "Mixly.Config",
+            "Mixly.CodeEditor"
         ],
         "provide": [
             "Mixly.StatusBar"
@@ -446,8 +512,7 @@
         "path": "/common/theme.js",
         "require": [
             "Blockly",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
+            "Mixly.StatusBarTab",
             "Mixly.Editor"
         ],
         "provide": [
@@ -468,7 +533,6 @@
         "require": [
             "Blockly",
             "Mixly.XML",
-            "Mixly.Editor",
             "Mixly.Msg"
         ],
         "provide": [
@@ -494,6 +558,17 @@
         ]
     },
     {
+        "path": "/common/workspace-manager.js",
+        "require": [
+            "Blockly",
+            "DisableTopBlocks",
+            "Mixly.Editor"
+        ],
+        "provide": [
+            "Mixly.WorkspaceManager"
+        ]
+    },
+    {
         "path": "/common/xml.js",
         "require": [
             "layui",
@@ -516,8 +591,6 @@
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.Config",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Title",
             "Mixly.Boards",
             "Mixly.MFile",
@@ -534,8 +607,6 @@
         "require": [
             "layui",
             "Mixly.Config",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Modules",
             "Mixly.LayerExt",
             "Mixly.Env",
@@ -660,7 +731,6 @@
         "require": [
             "Mixly.Modules",
             "Mixly.MFile",
-            "Mixly.StatusBar",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Electron"
@@ -675,8 +745,6 @@
             "layui",
             "Mixly.Modules",
             "Mixly.Charts",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Config",
             "Mixly.Tools",
             "Mixly.Env",
@@ -707,7 +775,6 @@
         "path": "/web/ampy.js",
         "require": [
             "Mixly.MString",
-            "Mixly.StatusBar",
             "Mixly.Msg",
             "Mixly.Env",
             "Mixly.Web"
@@ -728,8 +795,6 @@
     {
         "path": "/web/burn-upload.js",
         "require": [
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.LayerExt",
             "Mixly.Config",
             "Mixly.MFile",
@@ -843,8 +908,6 @@
         "path": "/web-compiler/compiler.js",
         "require": [
             "Mixly.Url",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Config",
             "Mixly.LayerExt",
             "Mixly.Boards",
@@ -874,8 +937,7 @@
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.Config",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
+            "Mixly.StatusBarTab",
             "Mixly.Title",
             "Mixly.Boards",
             "Mixly.MFile",
@@ -893,8 +955,6 @@
         "require": [
             "layui",
             "Mixly.Config",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.LayerExt",
             "Mixly.Env",
             "Mixly.Boards",
@@ -930,8 +990,6 @@
         "require": [
             "Mixly.Modules",
             "Mixly.Charts",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Config",
             "Mixly.Tools",
             "Mixly.Env",
@@ -952,10 +1010,9 @@
             "Mixly.Config",
             "Mixly.Boards",
             "Mixly.Charts",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Command",
             "Mixly.MJSON",
+            "Mixly.MArray",
             "Mixly.LayerExt",
             "Mixly.WebSocket"
         ],

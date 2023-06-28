@@ -24,6 +24,7 @@ var MSG = {
     catME_GO:"ME GO",
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
+    catCE_G6:"CE G6",
     catAIOT:"智能物聯",
     catAIsensor:"MixGo AI感測器",
     catSensor: "感測器",
@@ -94,6 +95,7 @@ var MSG = {
     catEvents: "事件",
     catExtend: "外接元件",
     catMixIO: "MixIO",
+    catCommunicate: "網路請求",
     catBlynk: "Blynk IoT",
     undo: "撤銷",
     redo: "重做",
@@ -3671,3 +3673,4 @@ Blockly.MIXLY_MIXBOT_SERVO_ABSOLUTE_ANGLE_TOOLTIP = "絕對角度運行模式角
 Blockly.MIXLY_MIXBOT_SERVO_RELATIVE_ANGLE_TOOLTIP = "相對角度運行模式角度範圍-8388607~8388607";
 Blockly.MIXLY_MIXBOT_EXTERN_GET_ADDR = "掃描序號";
 Blockly.MIXLY_MIXBOT_EXTERN_SET_ADDR = "修改序號";
+Blockly.MIXPY_REQUESTS_GET_RESULT = '並獲取相應結果';

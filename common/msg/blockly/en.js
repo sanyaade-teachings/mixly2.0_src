@@ -31,6 +31,7 @@ En.MSG = {
     catME_GO:"ME GO",
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
+    catCE_G6:"CE G6",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
     catSensor: "Sensor",
@@ -101,6 +102,7 @@ En.MSG = {
     catEvents: "Events",
     catExtend: "Extend",
     catMixIO: "MixIO",
+    catCommunicate: "requests",
     catBlynk: "Blynk IoT",
     undo: "Undo",
     redo: "Redo",
@@ -3498,5 +3500,6 @@ En.MIXLY_MIXBOT_SERVO_ABSOLUTE_ANGLE_TOOLTIP = "Absolute mode angle range 0~359"
 En.MIXLY_MIXBOT_SERVO_RELATIVE_ANGLE_TOOLTIP = "Relative mode angle range -8388607~8388607";
 En.MIXLY_MIXBOT_EXTERN_GET_ADDR = "get address";
 En.MIXLY_MIXBOT_EXTERN_SET_ADDR = "set address";
+En.MIXPY_REQUESTS_GET_RESULT = 'and get result';
 
 })();

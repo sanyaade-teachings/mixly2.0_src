@@ -338,10 +338,10 @@ Blockly.Python.mixbot_stop=function(){
     var v = this.getFieldValue('VAR');
     Blockly.Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     if(v=='N'){
-        var code = 'motor.move("N",motor.STOP_MODE)'
+        var code = 'motor.move("N",motor.STOP_MODE)\n'
     }
     if(v=='P'){
-        var code = 'motor.move("P",motor.BRAKE_MODE)'
+        var code = 'motor.move("P",motor.BRAKE_MODE)\n'
     }
     return code;
 };

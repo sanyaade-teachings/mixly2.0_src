@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.communicate');
 goog.require('Blockly.Python');
 
-Blockly.Python.forBlock['requests_get'] = function() {
+Blockly.Python.forBlock['requests_get_old'] = function() {
   Blockly.Python.definitions_.import_requests = "import requests";
   var dropdown_type = this.getFieldValue('TYPE');
   var varName = Blockly.Python.variableDB_.getName(this.getFieldValue('VAR'),
@@ -12,6 +12,25 @@ Blockly.Python.forBlock['requests_get'] = function() {
   var code=varName+'= '+ 'requests.get(' + str + ')\n';
 
   return code;
+ 
+};
+
+Blockly.Python.forBlock['requests_get'] = function() {
+  Blockly.Python.definitions_.import_requests = "import requests";
+  var dropdown_type = this.getFieldValue('TYPE');
+  var str =Blockly.Python.valueToCode(this, 'URL', Blockly.Python.ORDER_ATOMIC) ;
+  var code= 'requests.'+dropdown_type+'(' + str + ')';
+  return [code,Blockly.Python.ORDER_ATOMIC];
+ 
+};
+
+Blockly.Python.forBlock['requests_post'] = function() {
+  Blockly.Python.definitions_.import_requests = "import requests";
+  var dropdown_type = this.getFieldValue('TYPE');
+  var str =Blockly.Python.valueToCode(this, 'URL', Blockly.Python.ORDER_ATOMIC) ;
+  var data =Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC) ;
+  var code= 'requests.'+dropdown_type+'(' + str +',data='+data+ ')';
+  return [code,Blockly.Python.ORDER_ATOMIC];
  
 };
 

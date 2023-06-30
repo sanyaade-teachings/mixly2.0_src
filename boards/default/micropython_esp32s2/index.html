@@ -45,6 +45,7 @@
   <script src="../micropython_common/blocks/actuator_extern.js"></script>
   <script src="../micropython_common/blocks/display_onboard.js"></script>
   <script src="../micropython_common/blocks/display_extern.js"></script>
+  <script src="../micropython_common/blocks/pe_g1.js"></script>
   <script src="../python/blocks/procedures.js"></script>
   <script src="../micropython_common/blocks/factory.js"></script>
   <script src="../micropython_common/blocks/blynk.js"></script>
@@ -69,6 +70,7 @@
   <script src="../micropython_common/generators/sensor_onboard.js"></script>
   <script src="../micropython_common/generators/sensor_extern.js"></script>
   <script src="../micropython_common/generators/ai_sensor.js"></script>
+  <script src="../micropython_common/generators/pe_g1.js"></script>
   <script src="../python/generators/storage.js"></script>
   <script src="../micropython_common/generators/actuator_onboard.js"></script>
   <script src="../micropython_common/generators/actuator_extern.js"></script>
@@ -1920,7 +1922,132 @@
       <block type="ce_go_pin_light"></block>
       <block type="sensor_mixgome_eulerangles"></block>
     </category>
-    
+    <category id="catCE_G6" colour="100">
+      <block type="communicate_i2c_init">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">i2c_extend</field>
+          </shadow>
+        </value>
+        <value name="TX">
+          <shadow type="pins_digital_pin">
+            <field name="PIN">17</field>
+          </shadow>
+        </value>
+        <value name="RX">
+          <shadow type="pins_digital_pin">
+            <field name="PIN">18</field>
+          </shadow>
+        </value>
+        <value name="freq">
+          <shadow type="math_number">
+            <field name="NUM">400000</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="pe_g1_use_i2c_init">
+            <value name="SUB">
+              <shadow type="variables_get">
+                <field name="VAR">g6</field>
+              </shadow>
+            </value>
+            <value name="I2CSUB">
+              <shadow type="variables_get">
+                <field name="VAR">i2c_extend</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+        </block>
+      <block type="pe_g1_battery_left">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pe_g1_servo_set_angle">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>
+        <value name="PIN">
+            <shadow type="number5">
+            </shadow>
+          </value>
+        <value name="NUM">
+          <shadow type="math_number">
+           <field name="NUM">100</field>
+          </shadow>
+         </value>
+       </block>
+       <block type="pe_g1_servo_get_angle">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>
+        <value name="PIN">
+            <shadow type="number5">
+            </shadow>
+          </value>
+       </block>
+       <block type="pe_g1_servo_set_speed">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>
+        <value name="PIN">
+            <shadow type="number5">
+            </shadow>
+          </value>
+        <value name="NUM">
+          <shadow type="math_number">
+           <field name="NUM">100</field>
+          </shadow>
+         </value>
+       </block>       
+       <block type="pe_g1_servo_get_speed">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>     
+        <value name="PIN">
+            <shadow type="number5">
+            </shadow>
+          </value>  
+       </block>
+      <block type="pe_g1_dc_motor">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>
+        <value name="PIN">
+            <shadow type="number4">
+            </shadow>
+          </value>
+        <value name="speed">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pe_g1_dc_motor_speed">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">g6</field>
+          </shadow>
+        </value>
+         <value name="PIN">
+            <shadow type="number4">
+            </shadow>
+          </value>
+      </block>
+    </category>
       <category id="catIot" colour="#2FAD7A">
       <category id="catBlynk" colour="#2FAD7A">
         <block type="iot_wifi_connect">

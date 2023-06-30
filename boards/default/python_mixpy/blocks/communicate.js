@@ -3,9 +3,9 @@
 goog.provide('Blockly.Blocks.communicate');
 goog.require('Blockly.Blocks');
 
-Blockly.Msg['COMMUNICATE_HUE'] = 0//'#3288dd';
+Blockly.Msg['COMMUNICATE_HUE'] = '#3288dd'//'#3288dd';
 
-Blockly.Blocks['requests_get'] = {
+Blockly.Blocks['requests_get_old'] = {
   init: function() {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendValueInput("DOMAIN")
@@ -31,6 +31,43 @@ Blockly.Blocks['requests_get'] = {
  
 }
 
+Blockly.Blocks['requests_get'] = {
+  init: function() {
+    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.appendValueInput("URL")
+      .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+      .setCheck(String);
+  this.appendDummyInput("")  
+      .appendField(Blockly.Msg.blockpy_CONDUCT)
+      .appendField(new Blockly.FieldDropdown([["get", "get"], ["head", "head"], ["delete", "delete"]]), 'TYPE')
+      .appendField(Blockly.Msg.blockpy_REQUESTS)      
+      .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
+  this.setInputsInline(true);
+   this.setOutput(true);
+  this.setTooltip("");
+  }, 
+}
+
+Blockly.Blocks['requests_post'] = {
+  init: function() {
+    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.appendValueInput("URL")
+      .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+      .setCheck(String);
+  this.appendDummyInput("")  
+      .appendField(Blockly.Msg.blockpy_CONDUCT)
+      .appendField(new Blockly.FieldDropdown([["post", "post"], ["put", "put"], ["patch", "patch"]]), 'TYPE')
+      .appendField(Blockly.Msg.blockpy_REQUESTS)     
+  this.appendValueInput("data")
+      .appendField(Blockly.Msg.blockpy_REQUESTS+Blockly.OLED_STRING)    
+  this.appendDummyInput("")     
+      .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
+  this.setInputsInline(true);
+   this.setOutput(true);
+  this.setTooltip("");
+  }, 
+}
+
 
 Blockly.Blocks['requests_attribute'] = {
   init: function() {
@@ -38,25 +75,15 @@ Blockly.Blocks['requests_attribute'] = {
 
   var attr =
         [[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_STATUS_CODE, 'status_code'],[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_TEXT, 'text']
-        ,[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_COOKIES, 'cookies'],[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']];
+        ,[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_COOKIES, 'cookies'],[Blockly.Msg.blockpy_REQUESTS_GET_ATTR_CONTENT, 'content']
+        ,[Blockly.Msg.MIXPY_TEXT_ENCODE, 'encoding']];
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendDummyInput("")
         .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET)
-        .appendField(new Blockly.FieldDropdown(attr), 'ATTR')
-        
+        .appendField(new Blockly.FieldDropdown(attr), 'ATTR')        
 
   this.setInputsInline(true);
-   this.setOutput(true, String);
-  var thisBlock = this;
-    this.setTooltip(function() {
-      var mode = thisBlock.getFieldValue('DIR');
-      var TOOLTIPS = {
-        'clear': Blockly.Msg.MIXLY_TOOLTIP_TURTEL_CLEAR,
-        'reset': Blockly.Msg.MIXLY_TOOLTIP_TURTEL_RESET,
-        'home': Blockly.Msg.MIXLY_TOOLTIP_TURTEL_HOME
-      };
-      return TOOLTIPS[mode];
-    });
+   this.setOutput(true, String);  
   }
 };
 

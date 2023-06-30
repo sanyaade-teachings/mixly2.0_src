@@ -80,7 +80,7 @@ LevelSelector.xmlToWorkspace = (level) => {
     const xmlStr =  LevelSelector.XML_STR[--level];
     try {
         Editor.blockEditor.clear();
-        const xmlDom = Blockly.Xml.textToDom(xmlStr);
+        const xmlDom = Blockly.utils.xml.textToDom(xmlStr);
         Blockly.Xml.domToWorkspace(xmlDom, Editor.blockEditor);
         Editor.blockEditor.scrollCenter();
     } catch (e) {

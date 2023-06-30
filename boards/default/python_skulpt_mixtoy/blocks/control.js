@@ -307,7 +307,7 @@ Blockly.Blocks['controls_if'] = {
     elseStatementConnection) {
     for (var i = 1; i <= this.elseifCount_; i++) {
       valueConnections[i] && valueConnections[i].reconnect(this, 'IF' + i);
-      statementConnections[i] && statementConnections[i]reconnect(this, 'DO' + i);
+      statementConnections[i] && statementConnections[i].reconnect(this, 'DO' + i);
     }
     elseStatementConnection && elseStatementConnection.reconnect(this, 'ELSE');
   }

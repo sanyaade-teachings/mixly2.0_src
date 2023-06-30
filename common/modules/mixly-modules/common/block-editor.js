@@ -53,12 +53,6 @@ class BlockEditor {
             Blockly.Procedures.flyoutCategory
         );
 
-        this.editor.configureContextMenu = (menuOptions, e) => {
-            menuOptions.push(
-                Blockly.ContextMenu.workspaceCommentOption(this.editor, e)
-            );
-        }
-
         this.addPlugins();
 
         if (USER.theme === 'dark') {
@@ -107,6 +101,11 @@ class BlockEditor {
 
     addPlugins() {
         const { editor } = this;
+        editor.configureContextMenu = (menuOptions, e) => {
+            menuOptions.push(
+                Blockly.ContextMenu.workspaceCommentOption(editor, e)
+            );
+        }
         const zoomToFit = new ZoomToFitControl(editor);
         zoomToFit.init();
         ToolboxSearcher.init(editor);

@@ -101,7 +101,7 @@ function restore_blocks() {
             Blockly.Xml.domToWorkspace(xml, Editor.blockEditor);
             Editor.blockEditor.scrollCenter();
         } catch (e) {
-            blockEditor.clear();
+            Editor.blockEditor.clear();
             console.log(e);
             clear_blocks_from_storage();
         }

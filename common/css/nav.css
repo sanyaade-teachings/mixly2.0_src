@@ -823,10 +823,6 @@ body[class="light"] {
     font-size: 16px;
 }
 
-.blocklyMainBackground {
-    stroke-width: 0;
-}
-
 .dark .layui-layer-msg {
     background-color: #746f6f;
 }
@@ -838,25 +834,6 @@ body[class="light"] {
 
 .dark .examples-dropdown {
     background-color: #615959;
-}
-
-#block-editor .blocklyToolboxContents {
-    padding-top: 3px;
-}
-
-#catSearch.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background: url('../../common/media/mark/search.png') no-repeat;
-    background-size: 100% auto;
-}
-#catSearch.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background: url('../../common/media/mark/search2.png') no-repeat;
-    background-size: 100% auto;
-}
-
-.blocklyTreeRow > .blocklyTreeRowContentContainer {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .light .layui-table-tips-main {

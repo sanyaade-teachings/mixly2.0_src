@@ -773,27 +773,27 @@ body[class="light"] {
     color: #fff;
 }
 
-#mixly-examples-tree * {
+#mixly-example-menu-tree * {
     box-sizing: unset;
 }
 
-.light #mixly-examples-tree .layui-tree-txt {
+.light #mixly-example-menu-tree .layui-tree-txt {
     color: #000;
 }
 
-.light #mixly-examples-tree .layui-tree-icon .layui-icon {
+.light #mixly-example-menu-tree .layui-tree-icon .layui-icon {
     color: #000;
 }
 
-.dark #mixly-examples-tree .layui-tree-txt {
+.dark #mixly-example-menu-tree .layui-tree-txt {
     color: #fff;
 }
 
-.dark #mixly-examples-tree .layui-tree-icon .layui-icon {
+.dark #mixly-example-menu-tree .layui-tree-icon .layui-icon {
     color: #fff;
 }
 
-#mixly-examples-tree .layui-tree-icon {
+#mixly-example-menu-tree .layui-tree-icon {
     border: none;
     width: 16px !important;
     height: 16px !important;
@@ -801,25 +801,25 @@ body[class="light"] {
     margin: 0 10px !important;
 }
 
-#mixly-examples-tree .layui-tree-icon .layui-icon {
+#mixly-example-menu-tree .layui-tree-icon .layui-icon {
     font-size: 16px;
 }
 
-#mixly-examples-tree .layui-tree-iconClick {
+#mixly-example-menu-tree .layui-tree-iconClick {
     height: 16px;
     line-height: 16px;
     margin: 0 3px 0 10px;
 }
 
-.light #mixly-examples-tree .layui-tree-iconClick {
+.light #mixly-example-menu-tree .layui-tree-iconClick {
     color: #000;
 }
 
-.dark #mixly-examples-tree .layui-tree-iconClick {
+.dark #mixly-example-menu-tree .layui-tree-iconClick {
     color: #fff;
 }
 
-#mixly-examples-tree .layui-tree-iconClick .layui-icon {
+#mixly-example-menu-tree .layui-tree-iconClick .layui-icon {
     font-size: 16px;
 }
 

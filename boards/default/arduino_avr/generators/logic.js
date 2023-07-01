@@ -7,7 +7,7 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino.forBlock['logic_compare'] = function () {
     // Comparison operator.
     var mode = this.getFieldValue('OP');
-    var operator = Blockly.Arduino.logic_compare.OPERATORS[mode];
+    var operator = Blockly.Arduino.forBlock.logic_compare.OPERATORS[mode];
     var order = (operator == '==' || operator == '!=') ?
         Blockly.Arduino.ORDER_EQUALITY : Blockly.Arduino.ORDER_RELATIONAL;
     var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '0';

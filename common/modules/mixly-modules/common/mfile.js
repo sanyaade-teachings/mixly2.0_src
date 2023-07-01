@@ -10,7 +10,6 @@ goog.require('Mixly.XML');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.MicrobitFs');
 goog.require('Mixly.Editor');
-goog.require('Mixly.Drag');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.MFile');
 
@@ -24,7 +23,6 @@ const {
     LayerExt,
     MicrobitFs,
     Editor,
-    Drag,
     Msg,
     MFile
 } = Mixly;
@@ -325,7 +323,7 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
             layer.msg(Msg.Lang['未找到有效数据'], { time: 1000 });
             return;
         }
-        Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+        Editor.mainEditor.drag.full('NEGATIVE'); // 完全显示代码编辑器
         Editor.codeEditor.setValue(code, -1);
         Editor.blockEditor.clear();
         endFunc('USE_CODE');
@@ -362,13 +360,13 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
     if (!useIncompleteBlocks && codeDom) {
         const workspaceCode = MFile.getCode();
         if (workspaceCode !== code) {
-            Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+            Editor.mainEditor.drag.full('NEGATIVE'); // 完全显示代码编辑器
             Editor.codeEditor.setValue(code, -1);
         }
         endFunc();
         return;
     }
-    Drag.items.vDrag.full('POSITIVE'); // 完全显示块编辑器
+    Editor.mainEditor.drag.full('POSITIVE'); // 完全显示块编辑器
     if (useIncompleteBlocks)
         endFunc('USE_INCOMPLETE_BLOCKS');
     else

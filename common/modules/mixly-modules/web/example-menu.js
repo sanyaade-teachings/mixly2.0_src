@@ -3,24 +3,25 @@ goog.loadJs('web', () => {
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.MJSON');
-goog.require('Mixly.Example');
+goog.require('Mixly.ExampleMenu');
 goog.require('Mixly.Boards');
-goog.provide('Mixly.Web.ExampleExt');
+goog.provide('Mixly.Web.ExampleMenu');
 
 const {
     Config,
     Env,
-    Example,
+    ExampleMenu,
     MJSON,
     Boards
 } = Mixly;
 
 const { BOARD } = Config;
 
-class ExampleExt extends Example {
-    constructor(containerId, exampleBtnId) {
-        super(containerId, exampleBtnId);
-        this.render();
+class ExampleMenuExt extends ExampleMenu {
+    static DIR_TREE = MJSON.get(`../../../sample/${Boards.getType()}.json`) ?? [];
+
+    constructor(exampleBtnId) {
+        super(exampleBtnId);
     }
 
     getRoot() {
@@ -70,15 +71,11 @@ class ExampleExt extends Example {
     }
 }
 
-Object.defineProperty(Mixly.Web, 'ExampleExt', {
-    value: ExampleExt,
+Object.defineProperty(Mixly.Web, 'ExampleMenu', {
+    value: ExampleMenuExt,
     writable: true,
     enumerable: true,
     configurable: true,
 });
-
-if (!Env.isElectron) {
-    ExampleExt.DIR_TREE = MJSON.get(`../../../sample/${Boards.getType()}.json`) ?? [];
-}
 
 });

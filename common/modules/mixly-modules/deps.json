@@ -170,7 +170,7 @@
         ]
     },
     {
-        "path": "/common/example.js",
+        "path": "/common/example-menu.js",
         "require": [
             "tippy",
             "layui",
@@ -179,10 +179,11 @@
             "Mixly.XML",
             "Mixly.Editor",
             "Mixly.Msg",
-            "Mixly.Env"
+            "Mixly.Env",
+            "Mixly.FooterLayer"
         ],
         "provide": [
-            "Mixly.Example"
+            "Mixly.ExampleMenu"
         ]
     },
     {
@@ -223,10 +224,10 @@
             "Mixly.LevelSelector",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
-            "Mixly.Electron.ExampleExt",
+            "Mixly.Electron.ExampleMenu",
             "Mixly.Electron.Serial",
             "Mixly.WebSocket.Socket",
-            "Mixly.Web.ExampleExt",
+            "Mixly.Web.ExampleMenu",
             "Mixly.Electron.Loader"
         ],
         "provide": [
@@ -310,7 +311,6 @@
             "Mixly.LayerExt",
             "Mixly.MicrobitFs",
             "Mixly.Editor",
-            "Mixly.Drag",
             "Mixly.Msg"
         ],
         "provide": [
@@ -451,6 +451,13 @@
         ],
         "provide": [
             "Mixly.Charts"
+        ]
+    },
+    {
+        "path": "/common/serial.js",
+        "require": [],
+        "provide": [
+            "Mixly.Serial"
         ]
     },
     {
@@ -654,7 +661,7 @@
         ]
     },
     {
-        "path": "/electron/example-ext.js",
+        "path": "/electron/example-menu.js",
         "require": [
             "layui",
             "Mixly.Env",
@@ -663,12 +670,11 @@
             "Mixly.MFile",
             "Mixly.Title",
             "Mixly.XML",
-            "Mixly.Example",
-            "Mixly.Electron.BU",
+            "Mixly.ExampleMenu",
             "Mixly.Electron.File"
         ],
         "provide": [
-            "Mixly.Electron.ExampleExt"
+            "Mixly.Electron.ExampleMenu"
         ]
     },
     {
@@ -823,16 +829,16 @@
         ]
     },
     {
-        "path": "/web/example-ext.js",
+        "path": "/web/example-menu.js",
         "require": [
             "Mixly.Config",
             "Mixly.Env",
             "Mixly.MJSON",
-            "Mixly.Example",
+            "Mixly.ExampleMenu",
             "Mixly.Boards"
         ],
         "provide": [
-            "Mixly.Web.ExampleExt"
+            "Mixly.Web.ExampleMenu"
         ]
     },
     {

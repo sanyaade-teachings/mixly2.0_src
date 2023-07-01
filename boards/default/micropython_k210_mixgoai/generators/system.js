@@ -155,7 +155,7 @@ Blockly.Python.forBlock['system_ticks_diff'] = function () {
 
 
 
-Blockly.Python.system_timer_init=function(){
+Blockly.Python.forBlock['system_timer_init']=function(){
 	Blockly.Python.definitions_['from machine import Timer'] = 'from machine import Timer';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
 	var Timer=v%3
@@ -164,7 +164,7 @@ Blockly.Python.system_timer_init=function(){
     return code;
 };
 
-Blockly.Python.Timer_init=Blockly.Python.system_timer_init;
-Blockly.Python.timer2=Blockly.Python.system_timer;
-Blockly.Python.time_ticks_diff=Blockly.Python.system_ticks_diff;
-Blockly.Python.base_delay=Blockly.Python.controls_delay;
+Blockly.Python.forBlock['Timer_init']=Blockly.Python.forBlock['system_timer_init'];
+Blockly.Python.forBlock['timer2']=Blockly.Python.forBlock['system_timer'];
+Blockly.Python.forBlock['time_ticks_diff']=Blockly.Python.forBlock['system_ticks_diff'];
+Blockly.Python.forBlock['base_delay']=Blockly.Python.forBlock['controls_delay'];

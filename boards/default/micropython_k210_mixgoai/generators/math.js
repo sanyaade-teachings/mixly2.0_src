@@ -161,7 +161,7 @@ Blockly.Python.forBlock['math_single'] = function (a) {
 };
 
 
-Blockly.Python.math_trig = Blockly.Python.math_single;
+Blockly.Python.forBlock['math_trig'] = Blockly.Python.forBlock['math_single'];
 
 
 Blockly.Python.forBlock['math_to_int'] = function() {
@@ -378,4 +378,4 @@ Blockly.Python.forBlock['math_indexer_number'] = function () {
 }
 
 
-Blockly.Python.base_map = Blockly.Python.math_map
+Blockly.Python.forBlock['base_map'] = Blockly.Python.forBlock['math_map'];

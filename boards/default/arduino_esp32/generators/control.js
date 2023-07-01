@@ -66,4 +66,4 @@ Blockly.Arduino.forBlock['esp32_deep_sleep'] = function () {
     var code = 'esp_sleep_enable_timer_wakeup('+time+' * 1000000);\nesp_deep_sleep_start();\n';
     return code;
 };
-Blockly.Arduino.base_delay=Blockly.Arduino.controls_delay;
+Blockly.Arduino.forBlock['base_delay']=Blockly.Arduino.forBlock['controls_delay'];

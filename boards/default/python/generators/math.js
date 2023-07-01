@@ -168,7 +168,7 @@ Blockly.Python.forBlock['math_single'] = function (a) {
 };
 
 
-Blockly.Python.math_trig = Blockly.Python.math_single;
+Blockly.Python.forBlock['math_trig'] = Blockly.Python.forBlock['math_single'];
 
 Blockly.Python.forBlock['math_dec'] = function (a) {
   var argument0 = Blockly.Python.valueToCode(this, 'NUM',Blockly.Python.ORDER_NONE) || '0';
@@ -304,4 +304,4 @@ Blockly.Python.forBlock['math_round'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.base_map = Blockly.Python.math_map
+Blockly.Python.forBlock['base_map'] = Blockly.Python.forBlock['math_map']

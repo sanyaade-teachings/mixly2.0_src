@@ -183,7 +183,7 @@ Blockly.Arduino.forBlock['controls_interrupts'] = function () {
 Blockly.Arduino.forBlock['controls_nointerrupts'] = function () {
     return 'noInterrupts();\n';
 };
-Blockly.Arduino.base_delay = Blockly.Arduino.controls_delay;
+Blockly.Arduino.forBlock['base_delay'] = Blockly.Arduino.forBlock['controls_delay'];
 //简单定时器
 Blockly.Arduino.forBlock['simple_timer'] = function () {
     var NO = this.getFieldValue('NO');

@@ -149,7 +149,7 @@ Blockly.Arduino.forBlock['math_single'] = function () {
     return [code, Blockly.Arduino.ORDER_MULTIPLICATIVE];
 };
 
-Blockly.Arduino.math_trig = Blockly.Arduino.math_single;
+Blockly.Arduino.forBlock['math_trig'] = Blockly.Arduino.forBlock['math_single'];
 
 Blockly.Arduino.forBlock['math_to_int'] = function () {
     var argument0 = Blockly.Arduino.valueToCode(this, 'A', Blockly.Arduino.ORDER_NONE) || '0';

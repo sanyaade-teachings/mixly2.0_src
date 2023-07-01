@@ -163,40 +163,40 @@ Blockly.Python.forBlock['system_ticks_diff'] = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.system_timer_init=function(){
+Blockly.Python.forBlock['system_timer_init']=function(){
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var code = v + ' = machine.Timer(-1)\n';
     return code;
 };
 
-Blockly.Python.c3_system_timer_init=function(){
+Blockly.Python.forBlock['c3_system_timer_init']=function(){
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var code = v + ' = machine.Timer(0)\n';
     return code;
 };
 
-Blockly.Python.system_wdt_init=function(){
+Blockly.Python.forBlock['system_wdt_init']=function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var period = Blockly.Python.valueToCode(this, "period", Blockly.Python.ORDER_NONE) || "0";
     var code ='wdt = machine.WDT(timeout= '+ period +')\n';
     return code;
 };
 
-Blockly.Python.system_wdt_feed=function(){
+Blockly.Python.forBlock['system_wdt_feed']=function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var code ='wdt.feed()\n';
     return code;
 };
 
-Blockly.Python.system_machine_reset=function(){
+Blockly.Python.forBlock['system_machine_reset']=function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var code ='machine.reset()\n';
     return code;
 };
 
-Blockly.Python.Timer_init=Blockly.Python.system_timer_init;
-Blockly.Python.timer2=Blockly.Python.system_timer;
-Blockly.Python.time_ticks_diff=Blockly.Python.system_ticks_diff;
-Blockly.Python.base_delay=Blockly.Python.controls_delay;
+Blockly.Python.forBlock['Timer_init']=Blockly.Python.forBlock['system_timer_init'];
+Blockly.Python.forBlock['timer2']=Blockly.Python.forBlock['system_timer'];
+Blockly.Python.forBlock['time_ticks_diff']=Blockly.Python.forBlock['system_ticks_diff'];
+Blockly.Python.forBlock['base_delay']=Blockly.Python.forBlock['controls_delay'];

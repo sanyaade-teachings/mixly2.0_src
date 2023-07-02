@@ -117,6 +117,10 @@
   --lay-color-gray-9: #AAAAAA;
   --lay-color-gray-10: #939393;
 
+  --lay-color-gray-11: #858585;
+  --lay-color-gray-12: #7b7b7b;
+  --lay-color-gray-13: #686868;
+
   /* =====语义===== */
   /* 主色 */
   --lay-color-primary: var(--lay-color-green-6); 
@@ -500,7 +504,8 @@ html[data-bs-theme=dark] .layui-textarea:hover {
 }
 html[data-bs-theme=dark] .layui-input:focus,
 html[data-bs-theme=dark] .layui-textarea:focus {
-  border-color: var(--lay-color-border-2) !important;
+  border-color: var(--lay-color-secondary-hover) !important;
+  box-shadow: 0 0 0 3px rgba(22, 183, 119, 0.08);
 }
 html[data-bs-theme=dark] .layui-input:hover[disabled],
 html[data-bs-theme=dark] .layui-textarea:hover[disabled] {
@@ -510,9 +515,15 @@ html[data-bs-theme=dark] .layui-input:focus[disabled],
 html[data-bs-theme=dark] .layui-textarea:focus[disabled] {
   border-color: var(--lay-color-border-1) !important;
 }
+html[data-bs-theme=dark] .layui-input:focus.layui-disabled,
+html[data-bs-theme=dark] .layui-textarea:focus.layui-disabled {
+  border-color: var(--lay-color-border-1) !important;
+  box-shadow: 0 0 0 0;
+}
 html[data-bs-theme=dark] .layui-form-danger + .layui-form-select .layui-input,
 html[data-bs-theme=dark] .layui-form-danger:focus {
   border-color: var(--lay-color-danger) !important;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.08);
 }
 html[data-bs-theme=dark] .layui-input-prefix .layui-icon,
 html[data-bs-theme=dark] .layui-input-split .layui-icon,
@@ -520,7 +531,7 @@ html[data-bs-theme=dark] .layui-input-suffix .layui-icon {
   color: var(--lay-color-gray-8);
 }
 html[data-bs-theme=dark] .layui-input-wrap .layui-input:focus + .layui-input-split {
-  border-color: var(--lay-color-border-2);
+  border-color: var(--lay-color-secondary-hover);
 }
 html[data-bs-theme=dark] .layui-input-affix .layui-icon {
   color: var(--lay-color-text-2);
@@ -791,12 +802,12 @@ html[data-bs-theme=dark] .layui-table[lay-even] tbody tr:nth-child(even) {
   background-color: var(--lay-color-bg-2);
 }
 html[data-bs-theme=dark] .layui-table-checked {
-  background-color: var(--lay-color-green-6);
+  background-color: var(--lay-color-gray-13);
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-table-checked.layui-table-hover,
 html[data-bs-theme=dark] .layui-table-checked.layui-table-click {
-  background-color: var(--lay-color-green-7);
+  background-color: var(--lay-color-gray-12);
 }
 html[data-bs-theme=dark] .layui-table td,
 html[data-bs-theme=dark] .layui-table th,

@@ -59,7 +59,7 @@ Blockly.Arduino.forBlock['NTC_TEMP'] = function () {
   var code = 'thermistor'+PIN+'.read()/10.0';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
-Blockly.Arduino.controls_tone=function(){
+Blockly.Arduino.forBlock['controls_tone'] = function(){
   Blockly.Arduino.definitions_['include_ESP32Tone'] = '#include <ESP32Tone.h>';
   var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
   var fre = Blockly.Arduino.valueToCode(this, 'FREQUENCY',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -69,7 +69,7 @@ Blockly.Arduino.controls_tone=function(){
   code = " tone("+dropdown_pin+", "+fre+", "+DELAY_TIME+", "+channel+");\n";
   return code;
 };
-Blockly.Arduino.onboard_tone=function(){
+Blockly.Arduino.forBlock['onboard_tone'] = function(){
   Blockly.Arduino.definitions_['include_ESP32Tone'] = '#include <ESP32Tone.h>';
   var fre = Blockly.Arduino.valueToCode(this, 'FREQUENCY',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   var channel = Blockly.Arduino.valueToCode(this, 'CHANNEL',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -140,7 +140,7 @@ Blockly.Arduino.forBlock['MPU9250_update'] = function() {
  return code;
 };
 
-Blockly.Arduino.Pocket_rgb=function(){
+Blockly.Arduino.forBlock['Pocket_rgb'] = function(){
   var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
   COLOR=COLOR.replace(/#/g,"0x");
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
@@ -150,7 +150,7 @@ Blockly.Arduino.Pocket_rgb=function(){
   return code;
 };
 
-Blockly.Arduino.Pocket_rgb2=function(){
+Blockly.Arduino.forBlock['Pocket_rgb2'] = function(){
  var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR1', Blockly.Arduino.ORDER_ATOMIC);
  COLOR=COLOR.replace(/#/g,"0x");
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
@@ -160,7 +160,7 @@ Blockly.Arduino.Pocket_rgb2=function(){
  return code;
 };
 
-Blockly.Arduino.Pocket_rgb_Brightness=function(){
+Blockly.Arduino.forBlock['Pocket_rgb_Brightness'] = function(){
   var Brightness = Blockly.Arduino.valueToCode(this, 'Brightness',Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display12'] = 'Adafruit_NeoPixel rgb_display_12= Adafruit_NeoPixel(1,12,NEO_GRB + NEO_KHZ800);';

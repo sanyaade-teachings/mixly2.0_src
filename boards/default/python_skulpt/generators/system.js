@@ -16,7 +16,7 @@ Blockly.Python.forBlock['controls_end_program'] = function () {
     return 'exit()\n';
 };
 
-Blockly.Python.time_localtime= function() {
+Blockly.Python.forBlock['time_localtime'] = function() {
     Blockly.Python.definitions_.import_time = "import time";    
     var op=this.getFieldValue('op');
     var code="time.localtime()["+op+"]";

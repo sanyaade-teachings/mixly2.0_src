@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.iot');
 goog.require('Blockly.Python');
 
-Blockly.Python.iot_mixio_connect = function(block) {
+Blockly.Python.forBlock['iot_mixio_connect'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   var server =  Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC) ;
   var username =  Blockly.Python.valueToCode(this, 'USERNAME', Blockly.Python.ORDER_ATOMIC) ;
@@ -15,7 +15,7 @@ Blockly.Python.iot_mixio_connect = function(block) {
   return code;
 };
 
-Blockly.Python.IOT_MIXIO_PUBLISH = function(block) {
+Blockly.Python.forBlock['IOT_MIXIO_PUBLISH'] = function(block) {
   var topic = Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC);
   var msg = Blockly.Python.valueToCode(this, 'MSG', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
@@ -23,7 +23,7 @@ Blockly.Python.IOT_MIXIO_PUBLISH = function(block) {
   return code;
 };
 
-Blockly.Python.IOT_MIXIO_SUBSCRIBE = function (block) {
+Blockly.Python.forBlock['IOT_MIXIO_SUBSCRIBE'] = function (block) {
     var topic = Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC);
     var method = Blockly.Python.valueToCode(this, 'METHOD', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
@@ -32,42 +32,42 @@ Blockly.Python.IOT_MIXIO_SUBSCRIBE = function (block) {
     return code;
 };
 
-Blockly.Python.iot_mixio_disconnect = function(block) {
+Blockly.Python.forBlock['iot_mixio_disconnect'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code= 'mqtt_client.disconnect(MQTT_USR_PRJ)\n';  
   return code;
 };
 
-Blockly.Python.iot_mixio_connect_only = function(block) {
+Blockly.Python.forBlock['iot_mixio_connect_only'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code= 'mqtt_client.connect()\n';  
   return code;
 };
 
-Blockly.Python.iot_mixio_check = function(block) {
+Blockly.Python.forBlock['iot_mixio_check'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code='mqtt_client.check_msg()\n';  
   return code;
 };
 
-Blockly.Python.iot_mixio_format_topic = function(block) {
+Blockly.Python.forBlock['iot_mixio_format_topic'] = function(block) {
   var code='mqtt_client.decode("utf-8").split("/")[-1]';  
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.iot_mixio_format_msg = function(block) {
+Blockly.Python.forBlock['iot_mixio_format_msg'] = function(block) {
   var code='mqtt_client.decode("utf-8")';  
   return [code,Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.IOT_FORMATTING = function(block) {
+Blockly.Python.forBlock['IOT_FORMATTING'] = function(block) {
   Blockly.Python.definitions_['import_mixpy'] = "import mixpy"; 
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
   var code = 'mixpy.format_content('+ v +', mqtt_client.client_id)';  
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.IOT_FORMAT_STRING = function(block) {
+Blockly.Python.forBlock['IOT_FORMAT_STRING'] = function(block) {
   Blockly.Python.definitions_['import_mixpy'] = "import mixpy"; 
   var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
   var code = 'mixpy.format_str('+ v +')';  
@@ -75,7 +75,7 @@ Blockly.Python.IOT_FORMAT_STRING = function(block) {
 };
 
 
-Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function(block) {
+Blockly.Python.forBlock['IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE'] = function(block) {
   var server = Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC);
   var port = '1883';
   var share_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
@@ -93,13 +93,13 @@ Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function(block) {
   return code;
 };
 
-Blockly.Python.iot_mixly_key = function() {
+Blockly.Python.forBlock['iot_mixly_key'] = function() {
   var code =  this.getFieldValue('VISITOR_ID') ;
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 
-Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = function(block) {
+Blockly.Python.forBlock['IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   Blockly.Python.definitions_['import_machine'] = "import machine";
   Blockly.Python.definitions_['import_ubinascii_hexlify'] = "from ubinascii import hexlify";
@@ -116,13 +116,13 @@ Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = function(block) {
   return code;
 };
 
-Blockly.Python.IOT_EMQX_PING = function(block) {
+Blockly.Python.forBlock['IOT_EMQX_PING'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var code ='mqtt_client.pingSync()';  
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.IOT_MIXIO_NTP = function(block) {
+Blockly.Python.forBlock['IOT_MIXIO_NTP'] = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot"; 
   var addr =  Blockly.Python.valueToCode(this, 'addr', Blockly.Python.ORDER_ATOMIC) ; 
   var code ='mixiot.ntp(' + addr + ')';  

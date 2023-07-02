@@ -3,7 +3,7 @@
 goog.provide('Blockly.Python.pe_g1');
 goog.require('Blockly.Python');
 
-Blockly.Python.pe_g1_use_i2c_init=function(){
+Blockly.Python.forBlock['pe_g1_use_i2c_init'] = function(){
     Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var iv = Blockly.Python.valueToCode(this, 'I2CSUB', Blockly.Python.ORDER_ATOMIC);
@@ -18,7 +18,7 @@ Blockly.Python.forBlock['pe_g1_battery_left'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pe_g1_dc_motor=function(){
+Blockly.Python.forBlock['pe_g1_dc_motor'] = function(){
     Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
     var s = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
     var wheel = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC); 
@@ -28,7 +28,7 @@ Blockly.Python.pe_g1_dc_motor=function(){
     return code;
 };
 
-Blockly.Python.pe_g1_dc_motor_speed=function(){
+Blockly.Python.forBlock['pe_g1_dc_motor_speed'] = function(){
     Blockly.Python.definitions_['import_pe_g1'] = 'import pe_g1';
     var s = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC); 
     var wheel = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC); 

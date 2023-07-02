@@ -95,7 +95,7 @@ Blockly.Python['display_matrix_extern_get_pixel'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_matrix_extern_bright_point= function() {
+Blockly.Python.forBlock['display_matrix_extern_bright_point'] = function() {
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
@@ -110,7 +110,7 @@ Blockly.Python['display_matrix_extern_get_screen_pixel'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_matrix_extern_bright_screen= function() {
+Blockly.Python.forBlock['display_matrix_extern_bright_screen'] = function() {
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var code = v+'.set_brightness(' + x + ')\n';
@@ -173,7 +173,7 @@ Blockly.Python.forBlock['display_draw_4strings'] = function(){
   return code;
 };
 
-Blockly.Python.display_line_arbitrarily=function(){
+Blockly.Python.forBlock['display_line_arbitrarily'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -185,7 +185,7 @@ Blockly.Python.display_line_arbitrarily=function(){
   return code;
 };
 
-Blockly.Python.display_rect=function(){
+Blockly.Python.forBlock['display_rect'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -210,7 +210,7 @@ Blockly.Python.display_rect=function(){
 };
 
 
-Blockly.Python.display_line=function(){
+Blockly.Python.forBlock['display_line'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -236,7 +236,7 @@ Blockly.Python['image_shift'] = function(a) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_fill=function(){
+Blockly.Python.forBlock['display_fill'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   Blockly.Python.definitions_['import_machine'] = 'import machine';
@@ -257,7 +257,7 @@ Blockly.Python.forBlock['display_animate'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_circle=function(){
+Blockly.Python.forBlock['display_circle'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
@@ -280,7 +280,7 @@ Blockly.Python.display_circle=function(){
      }
 };
 
-Blockly.Python.display_triangle=function(){
+Blockly.Python.forBlock['display_triangle'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
@@ -306,7 +306,7 @@ Blockly.Python.display_triangle=function(){
      }
 };
 
-Blockly.Python.display_oled_showBitmap=function(){
+Blockly.Python.forBlock['display_oled_showBitmap'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -319,7 +319,7 @@ Blockly.Python.display_oled_showBitmap=function(){
   return code;
 };
 
-Blockly.Python.display_oled_drawPixel=function(){
+Blockly.Python.forBlock['display_oled_drawPixel'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -379,7 +379,7 @@ Blockly.Python.forBlock['display_tm1650_set_brightness'] = function () {
     return code;
 };
 
-Blockly.Python.tft_use_spi_init=function(){
+Blockly.Python.forBlock['tft_use_spi_init'] = function(){
     Blockly.Python.definitions_['import_st7789'] = 'import st7789';
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[1]
     if(version=='esp32'){var addr = '0x700000'}
@@ -454,7 +454,7 @@ Blockly.Python.forBlock['tft_scroll_string_delay'] = function() {
      return code;
 }
 
-Blockly.Python.tft_fill=function(){
+Blockly.Python.forBlock['tft_fill'] = function(){
   Blockly.Python.definitions_['import_st7789'] = 'import st7789';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -462,7 +462,7 @@ Blockly.Python.tft_fill=function(){
   return code;
 };
 
-Blockly.Python.tft_line_arbitrarily=function(){
+Blockly.Python.forBlock['tft_line_arbitrarily'] = function(){
   Blockly.Python.definitions_['import_st7789'] = 'import st7789';
   var varName =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   var location_x1 = Blockly.Python.valueToCode(this, 'x1', Blockly.Python.ORDER_ATOMIC);
@@ -508,7 +508,7 @@ Blockly.Python.forBlock['lcd_print_string'] = function() {
     return code;
 }
 
-Blockly.Python.lcd_backlight=function(){
+Blockly.Python.forBlock['lcd_backlight'] = function(){
   Blockly.Python.definitions_['import_i2clcd'] = 'import i2clcd';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   var key = this.getFieldValue('key');
@@ -646,7 +646,7 @@ Blockly.Python['extern_oled_get_pixel'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.extern_oled_bright_point= function() {
+Blockly.Python.forBlock['extern_oled_bright_point'] = function() {
   Blockly.Python.definitions_['import_oled128x64'] = 'import oled128x64';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);

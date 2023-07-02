@@ -13,16 +13,16 @@ Blockly.Python.forBlock['system_run_in_background'] = function() {
     var branch = Blockly.Python.statementToCode(this, 'do');
     return 'control.inBackground(() => {\n' + branch + '})\n';
 };
-Blockly.Python.system_reset= function() {
+Blockly.Python.forBlock['system_reset'] = function() {
     return 'control.reset()\n';
 }
 
-Blockly.Python.system_wait= function() {
+Blockly.Python.forBlock['system_wait'] = function() {
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC) || profile.default.serial;
     return 'control.waitMicros('  + data +  ')\n';
 }
 
-Blockly.Python.system_raise_event= function() {
+Blockly.Python.forBlock['system_raise_event'] = function() {
     var source = Blockly.Python.valueToCode(this, 'system_event_bus_source', Blockly.Python.ORDER_ATOMIC) || profile.default.serial;
     var value = Blockly.Python.valueToCode(this, 'system_event_bus_value', Blockly.Python.ORDER_ATOMIC) || profile.default.serial;
     return 'control.raiseEvent('  + source + ', ' + value +  ')\n';

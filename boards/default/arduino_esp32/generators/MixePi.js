@@ -38,11 +38,11 @@ Blockly.Arduino.forBlock['mixePi_button_is_pressed'] = function(){
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.mixepi_light= function(){
+Blockly.Arduino.forBlock['mixepi_light'] = function(){
   return ['analogRead(39)', Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.mixepi_sound= function(){
+Blockly.Arduino.forBlock['mixepi_sound'] = function(){
   return ['analogRead(36)', Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -64,7 +64,7 @@ Blockly.Arduino.forBlock['RGB_color_seclet'] = function() {
   return [colour, Blockly.Arduino.ORDER_NONE];
 };
 
-Blockly.Arduino.RGB_color_rgb=function(){
+Blockly.Arduino.forBlock['RGB_color_rgb'] = function(){
   var R = Blockly.Arduino.valueToCode(this, 'R', Blockly.Arduino.ORDER_ATOMIC);
   var G = Blockly.Arduino.valueToCode(this, 'G', Blockly.Arduino.ORDER_ATOMIC);
   var B = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_ATOMIC);
@@ -86,7 +86,7 @@ return [colour, Blockly.Arduino.ORDER_NONE];
 };
 
 
-Blockly.Arduino.mixepi_rgb=function(){
+Blockly.Arduino.forBlock['mixepi_rgb'] = function(){
   var value_led = Blockly.Arduino.valueToCode(this, '_LED_', Blockly.Arduino.ORDER_ATOMIC);
   var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
   COLOR=COLOR.replace(/#/g,"0x");
@@ -98,7 +98,7 @@ Blockly.Arduino.mixepi_rgb=function(){
   return code;
 };
 
-Blockly.Arduino.mixepi_rgb2=function(){
+Blockly.Arduino.forBlock['mixepi_rgb2'] = function(){
  var COLOR1 = Blockly.Arduino.valueToCode(this, 'COLOR1', Blockly.Arduino.ORDER_ATOMIC);
  var COLOR2 = Blockly.Arduino.valueToCode(this, 'COLOR2', Blockly.Arduino.ORDER_ATOMIC);
  var COLOR3 = Blockly.Arduino.valueToCode(this, 'COLOR3', Blockly.Arduino.ORDER_ATOMIC);
@@ -115,7 +115,7 @@ Blockly.Arduino.mixepi_rgb2=function(){
  return code;
 };
 
-Blockly.Arduino.mixepi_rgb_Brightness=function(){
+Blockly.Arduino.forBlock['mixepi_rgb_Brightness'] = function(){
   var Brightness = Blockly.Arduino.valueToCode(this, 'Brightness',Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_RGB + NEO_KHZ800);';
@@ -125,7 +125,7 @@ Blockly.Arduino.mixepi_rgb_Brightness=function(){
   return code;
 };
 
-Blockly.Arduino.mixepi_rgb_rainbow1=function(){
+Blockly.Arduino.forBlock['mixepi_rgb_rainbow1'] = function(){
  Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
  Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_RGB + NEO_KHZ800);';
  var wait_time=Blockly.Arduino.valueToCode(this, 'WAIT',Blockly.Arduino.ORDER_ATOMIC);
@@ -149,7 +149,7 @@ Blockly.Arduino.mixepi_rgb_rainbow1=function(){
  return code;
 };
 
-Blockly.Arduino.mixepi_rgb_rainbow3=function(){
+Blockly.Arduino.forBlock['mixepi_rgb_rainbow3'] = function(){
   Blockly.Arduino.definitions_['include_Adafruit_NeoPixel'] = '#include <Adafruit_NeoPixel.h>';
   Blockly.Arduino.definitions_['var_declare_rgb_display17'] = 'Adafruit_NeoPixel rgb_display_17= Adafruit_NeoPixel(3,17,NEO_RGB + NEO_KHZ800);';
   var rainbow_color = Blockly.Arduino.valueToCode(this, 'rainbow_color',Blockly.Arduino.ORDER_ATOMIC);

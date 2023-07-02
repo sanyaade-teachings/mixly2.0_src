@@ -4,7 +4,7 @@ goog.provide('Blockly.Blocks.game');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.game_init=function(block) {
+Blockly.Python.forBlock['game_init'] = function(block) {
     Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
     var code=Blockly.Python.statementToCode(block, "DO0" )+'blocklygame.initMap(\'block_id=' + block.id + '\');\n'
 

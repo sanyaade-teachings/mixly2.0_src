@@ -50,11 +50,11 @@ Blockly.Arduino.forBlock['ESP32_temprature'] = function() {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensor_light= function(){
+Blockly.Arduino.forBlock['sensor_light'] = function(){
   return ['analogRead(LIGHT)', Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensor_sound= function(){
+Blockly.Arduino.forBlock['sensor_sound'] = function(){
   return ['analogRead(SOUND)', Blockly.Arduino.ORDER_ATOMIC];
 };
 

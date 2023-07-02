@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.ai_sensor');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.ai_sensor_use_uart_init=function(){
+Blockly.Python.forBlock['ai_sensor_use_uart_init'] = function(){
   Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');

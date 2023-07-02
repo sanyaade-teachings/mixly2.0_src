@@ -81,7 +81,7 @@ Blockly.Python.forBlock['microbit_music_get_tempo'] = function(block) {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.tone_set_tempo=function(){
+Blockly.Python.forBlock['tone_set_tempo'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var bpm = Blockly.Python.valueToCode(this, 'BPM', Blockly.Python.ORDER_ASSIGNMENT);
     var ticks = Blockly.Python.valueToCode(this, 'TICKS', Blockly.Python.ORDER_ASSIGNMENT);
@@ -89,7 +89,7 @@ Blockly.Python.tone_set_tempo=function(){
     return code;
 };
 
-Blockly.Python.speech_translate=function(){
+Blockly.Python.forBlock['speech_translate'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_speech'] = 'import speech';
     var text = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -97,7 +97,7 @@ Blockly.Python.speech_translate=function(){
     return code
 };
 
-Blockly.Python.speech_say=function(){
+Blockly.Python.forBlock['speech_say'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_speech'] = 'import speech';
     var mode = this.getFieldValue("MODE");
@@ -110,7 +110,7 @@ Blockly.Python.speech_say=function(){
     return code
 };
 
-// Blockly.Python.speech_sing=function(){
+// Blockly.Python.forBlock['speech_sing'] = function(){
 //   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
 //   Blockly.Python.definitions_['import_speech'] = 'import speech';
 //   var text = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -123,7 +123,7 @@ Blockly.Python.speech_say=function(){
 // };
 
 
-// Blockly.Python.speech_prenounce=function(){
+// Blockly.Python.forBlock['speech_prenounce'] = function(){
 //   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
 //   Blockly.Python.definitions_['import_speech'] = 'import speech';
 //   var text = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -135,7 +135,7 @@ Blockly.Python.speech_say=function(){
 //   return code
 // };
 
-Blockly.Python.speech_say_easy=function(){
+Blockly.Python.forBlock['speech_say_easy'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_speech'] = 'import speech';
     var text = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -143,7 +143,7 @@ Blockly.Python.speech_say_easy=function(){
     return code
 };
 
-Blockly.Python.speech_sing_easy=function(){
+Blockly.Python.forBlock['speech_sing_easy'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_speech'] = 'import speech';
     var text = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -152,7 +152,7 @@ Blockly.Python.speech_sing_easy=function(){
 };
 
 
-Blockly.Python.speech_pronounce_easy=function(){
+Blockly.Python.forBlock['speech_pronounce_easy'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     Blockly.Python.definitions_['import_speech'] = 'import speech';
     var text = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
@@ -184,7 +184,7 @@ Blockly.Python.forBlock['bit_motor_control'] = function() {
     return code;
 };
 
-Blockly.Python.display_rgb_init=function(){
+Blockly.Python.forBlock['display_rgb_init'] = function(){
     var dropdown_rgbpin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var value_ledcount = Blockly.Python.valueToCode(this, 'LEDCOUNT', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
@@ -195,7 +195,7 @@ Blockly.Python.display_rgb_init=function(){
     // Blockly.Python.setups_['setup_rgb_display_setpin' + dropdown_rgbpin] = 'rgb_display_' + dropdown_rgbpin + '.setPin(' + dropdown_rgbpin + ');';
     return '';
 };
-Blockly.Python.display_rgb=function(){
+Blockly.Python.forBlock['display_rgb'] = function(){
 
   var value_led = Blockly.Python.valueToCode(this, '_LED_', Blockly.Python.ORDER_ATOMIC);
   var value_rvalue = Blockly.Python.valueToCode(this, 'RVALUE', Blockly.Python.ORDER_ATOMIC);
@@ -207,7 +207,7 @@ Blockly.Python.display_rgb=function(){
   return code;
 };
 
-Blockly.Python.display_rgb2=function(){
+Blockly.Python.forBlock['display_rgb2'] = function(){
   var value_led = Blockly.Python.valueToCode(this, '_LED_', Blockly.Python.ORDER_ATOMIC);
   var colour_rgb_led_color = this.getFieldValue('RGB_LED_COLOR');
   var color = goog.color.hexToRgb(colour_rgb_led_color);

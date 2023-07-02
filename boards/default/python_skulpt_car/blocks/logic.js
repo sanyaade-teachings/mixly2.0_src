@@ -46,7 +46,7 @@ Blockly.Msg["LOGIC_HUE"] = 210;
                 this.setHelpUrl('');
             }
         };
-        Blockly.Python.forBlock[blockName] = function () {
+        Blockly.Python.forBlock['forBlock[blockName]'] = function () {
             var code = '';
             return [code, Blockly.Python.ORDER_ATOMIC];
         };

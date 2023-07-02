@@ -81,7 +81,7 @@ Blockly.Python.forBlock['i2c_slave_onreceive'] = function () {
     Blockly.Python.definitions_[funcName] = code2;
     return '';
 }
-Blockly.Python.communicate_spi_init= function(block) {
+Blockly.Python.forBlock['communicate_spi_init'] = function(block) {
 	Blockly.Python.definitions_['import_machine'] = 'import machine';	
     var name=Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var freq=Blockly.Python.valueToCode(this, 'freq', Blockly.Python.ORDER_ATOMIC);

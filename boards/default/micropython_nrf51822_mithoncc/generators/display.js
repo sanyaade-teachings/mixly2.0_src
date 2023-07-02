@@ -25,7 +25,7 @@ Blockly.Python['microbit_display_set_pixel'] = function(block) {
   var code = 'display.set_pixel(int(' + value_x + '), int(' + value_y + '), ' + value_value + ')\n';
   return code;
 };
-Blockly.Python.monitor_bright_point= function() {
+Blockly.Python.forBlock['monitor_bright_point'] = function() {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
@@ -269,7 +269,7 @@ Blockly.Python['display_image_size'] = function() {
   return code;
 };
 
-Blockly.Python.display_fill=function(){
+Blockly.Python.forBlock['display_fill'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
   Blockly.Python.definitions_['import_oled'] = 'import oled';

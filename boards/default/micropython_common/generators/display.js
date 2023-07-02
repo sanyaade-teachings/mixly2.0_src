@@ -201,7 +201,7 @@ Blockly.Python['display_get_pixel'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_bright_point= function() {
+Blockly.Python.forBlock['display_bright_point'] = function() {
     Blockly.Python.definitions_['import_matrix'] = 'import matrix';
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
@@ -223,7 +223,7 @@ Blockly.Python['display_get_screen_image'] = function() {
 };
 
 
-Blockly.Python.display_bright_screen= function() {
+Blockly.Python.forBlock['display_bright_screen'] = function() {
     Blockly.Python.definitions_['import_matrix'] = 'import matrix';
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var code = 'matrix.set_brightness(' + x + ')\n';
@@ -231,7 +231,7 @@ Blockly.Python.display_bright_screen= function() {
 };
 
 
-Blockly.Python.display_blink_rate= function() {
+Blockly.Python.forBlock['display_blink_rate'] = function() {
     Blockly.Python.definitions_['import_matrix'] = 'import matrix';
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var code = 'matrix.blink_rate(' + x + ')\n';
@@ -267,7 +267,7 @@ Blockly.Python.forBlock['display_draw_4strings'] = function(){
   return code;
 };
 
-Blockly.Python.display_line_arbitrarily=function(){
+Blockly.Python.forBlock['display_line_arbitrarily'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -279,7 +279,7 @@ Blockly.Python.display_line_arbitrarily=function(){
   return code;
 };
 
-Blockly.Python.display_rect=function(){
+Blockly.Python.forBlock['display_rect'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -318,7 +318,7 @@ Blockly.Python['image_arithmetic'] = function(a) {
 };
 
 
-Blockly.Python.display_line=function(){
+Blockly.Python.forBlock['display_line'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -344,7 +344,7 @@ Blockly.Python['image_shift'] = function(a) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_fill=function(){
+Blockly.Python.forBlock['display_fill'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   Blockly.Python.definitions_['import_machine'] = 'import machine';
@@ -405,7 +405,7 @@ Blockly.Python.forBlock['display_animate'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.display_circle=function(){
+Blockly.Python.forBlock['display_circle'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
@@ -428,7 +428,7 @@ Blockly.Python.display_circle=function(){
      }
 };
 
-Blockly.Python.display_triangle=function(){
+Blockly.Python.forBlock['display_triangle'] = function(){
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
@@ -454,7 +454,7 @@ Blockly.Python.display_triangle=function(){
      }
 };
 
-Blockly.Python.display_oled_showBitmap=function(){
+Blockly.Python.forBlock['display_oled_showBitmap'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
@@ -467,7 +467,7 @@ Blockly.Python.display_oled_showBitmap=function(){
   return code;
 };
 
-Blockly.Python.display_oled_drawPixel=function(){
+Blockly.Python.forBlock['display_oled_drawPixel'] = function(){
   Blockly.Python.definitions_['import_machine'] = 'import machine';
   Blockly.Python.definitions_['import_ssd1306'] = 'import ssd1306';
   var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);

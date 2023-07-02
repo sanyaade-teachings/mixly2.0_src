@@ -98,7 +98,7 @@ Blockly.Python.forBlock['i2c_write'] = function(){
     return "i2c.write("+ address + ", " + data + ", " + is_repeated + ")\n";
 };
 
-Blockly.Python.spi_init= function(block) {
+Blockly.Python.forBlock['spi_init'] = function(block) {
     var freq=block.getFieldValue('freq');
     var bits=block.getFieldValue('bits');
     var mode=block.getFieldValue('mode');

@@ -9,7 +9,7 @@ Blockly.Arduino.forBlock['inout_touchRead'] = function(){
    var code =  'touchRead('+pin+')';
    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-Blockly.Arduino.ledcSetup= function () {
+Blockly.Arduino.forBlock['ledcSetup'] = function () {
     var FREQ = Blockly.Arduino.valueToCode(this, 'FREQ', Blockly.Arduino.ORDER_ATOMIC);
     var RESOLUTION = Blockly.Arduino.valueToCode(this, 'PWM_RESOLUTION', Blockly.Arduino.ORDER_ATOMIC)||'8';
     var channel = Blockly.Arduino.valueToCode(this, 'CHANNEL',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -17,18 +17,18 @@ Blockly.Arduino.ledcSetup= function () {
     return "";
 };
 
-Blockly.Arduino.ledcAttachPin= function () {
+Blockly.Arduino.forBlock['ledcAttachPin'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var channel = Blockly.Arduino.valueToCode(this, 'CHANNEL',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
     var code = 'ledcAttachPin('+dropdown_pin+', '+channel+');\n';
     return code;
 };
-Blockly.Arduino.ledcDetachPin= function () {
+Blockly.Arduino.forBlock['ledcDetachPin'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var code = 'ledcDetachPin('+dropdown_pin+');\n';
     return code;
 };
-Blockly.Arduino.ledcWrite= function () {
+Blockly.Arduino.forBlock['ledcWrite'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Arduino'] = '#include <Arduino.h>';
@@ -43,7 +43,7 @@ Blockly.Arduino.ledcWrite= function () {
     var code = 'analogWrite('+dropdown_pin+', '+value_num+');\n';
     return code;
 };
-Blockly.Arduino.inout_pwm_analog_write= function () {
+Blockly.Arduino.forBlock['inout_pwm_analog_write'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var FREQ = Blockly.Arduino.valueToCode(this, 'FREQ', Blockly.Arduino.ORDER_ATOMIC);
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);

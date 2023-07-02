@@ -111,6 +111,6 @@ Blockly.Python.forBlock['game_resume'] = function() {
     return "game.resume();\n";
 }
 
-Blockly.Python.game_pause= function() {
+Blockly.Python.forBlock['game_pause'] = function() {
     return "game.pause();\n";
 }

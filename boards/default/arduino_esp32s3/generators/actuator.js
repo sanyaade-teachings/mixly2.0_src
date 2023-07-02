@@ -42,7 +42,7 @@ Blockly.Arduino.forBlock['servo_read_degrees'] = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.controls_tone=function(){
+Blockly.Arduino.forBlock['controls_tone'] = function() {
   Blockly.Arduino.definitions_['include_ESP32Tone'] = '#include <ESP32Tone.h>';
   var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
   var fre = Blockly.Arduino.valueToCode(this, 'FREQUENCY',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -53,14 +53,14 @@ Blockly.Arduino.controls_tone=function(){
   return code;
 };
 
-Blockly.Arduino.controls_notone=function(){
+Blockly.Arduino.forBlock['controls_notone'] = function() {
   var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN',Blockly.Arduino.ORDER_ATOMIC);
   var channel = Blockly.Arduino.valueToCode(this, 'CHANNEL',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   var code = ""; 
   code = " noTone("+dropdown_pin+", "+channel+");\n";
   return code;
 };
-Blockly.Arduino.onboard_tone=function(){
+Blockly.Arduino.forBlock['onboard_tone'] = function() {
   Blockly.Arduino.definitions_['include_ESP32Tone'] = '#include <ESP32Tone.h>';
   var fre = Blockly.Arduino.valueToCode(this, 'FREQUENCY',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   var channel = Blockly.Arduino.valueToCode(this, 'CHANNEL',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
@@ -70,7 +70,7 @@ Blockly.Arduino.onboard_tone=function(){
   return code;
 };
 
-Blockly.Arduino.onboard_notone=function(){
+Blockly.Arduino.forBlock['onboard_notone'] = function() {
  var channel = Blockly.Arduino.valueToCode(this, 'CHANNEL',Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
  var code = ""; 
  code = " noTone(BUZZER, "+channel+");\n";

@@ -117,7 +117,7 @@ Blockly.Python.forBlock['sensor_mpu9250_get_gyro'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mpu9250_calibrate_compass= function(){
+Blockly.Python.forBlock['sensor_mpu9250_calibrate_compass'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     Blockly.Python.definitions_['import_mixgo_compass'] = 'from mixgo import compass';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -131,7 +131,7 @@ Blockly.Python.forBlock['sensor_mpu9250_temperature'] = function(){
         Blockly.Python.definitions_['import_mixgo_mpu'] = 'from mixgo import mpu';    
     return [v+'.mpu9250_get_temperature()', Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_mpu9250_field_strength= function(){
+Blockly.Python.forBlock['sensor_mpu9250_field_strength'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -157,7 +157,7 @@ Blockly.Python.forBlock['sensor_compass_reset'] = function(block) {
 };
 
 
-Blockly.Python.sensor_use_i2c_init=function(){
+Blockly.Python.forBlock['sensor_use_i2c_init'] = function(){
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var iv = Blockly.Python.valueToCode(this, 'I2CSUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
@@ -178,7 +178,7 @@ Blockly.Python.sensor_use_i2c_init=function(){
     return code;
 };
 
-Blockly.Python.sensor_bmp=function(){
+Blockly.Python.forBlock['sensor_bmp'] = function(){
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_bmp280'] = 'import bmp280';
@@ -186,7 +186,7 @@ Blockly.Python.sensor_bmp=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_sht=function(){
+Blockly.Python.forBlock['sensor_sht'] = function(){
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_sht20'] = 'import sht20';

@@ -40,7 +40,7 @@ Blockly.Python.forBlock['ce_go_led_brightness'] = function() {
     return code;
 };
 
-Blockly.Python.ce_go_stepper_keep=function(){
+Blockly.Python.forBlock['ce_go_stepper_keep'] = function(){
     var v = this.getFieldValue('VAR');
     Blockly.Python.definitions_['import_ce_go_car'] = 'from ce_go import car';
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
@@ -48,14 +48,14 @@ Blockly.Python.ce_go_stepper_keep=function(){
     return code;
 };
 
-Blockly.Python.ce_go_stepper_stop=function(){
+Blockly.Python.forBlock['ce_go_stepper_stop'] = function(){
     var v = this.getFieldValue('VAR');
     Blockly.Python.definitions_['import_ce_go_car'] = 'from ce_go import car';
     var code = 'car.move("'+ v + '")\n';
     return code;
 };
 
-Blockly.Python.ce_go_dc_motor=function(){
+Blockly.Python.forBlock['ce_go_dc_motor'] = function(){
     var wheel = this.getFieldValue('wheel');
     Blockly.Python.definitions_['import_ce_go_car'] = 'from ce_go import car';
     var v = this.getFieldValue('direction');
@@ -124,7 +124,7 @@ Blockly.Python.forBlock['ce_go_pin_near_state_change'] = function(){
 };
 
 
-Blockly.Python.sensor_mixgome_eulerangles=function(){
+Blockly.Python.forBlock['sensor_mixgome_eulerangles'] = function(){
     Blockly.Python.definitions_['import_mixgo_ce_onboard_mxc6655xa'] = "from mixgo_ce import onboard_mxc6655xa";
     var angle = this.getFieldValue('angle');
     var code = 'onboard_mxc6655xa.eulerangles(upright=True)'+angle;

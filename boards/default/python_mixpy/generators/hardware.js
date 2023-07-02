@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.hardware');
 
 goog.require('Blockly.Python');
 
-Blockly.Python.hardware_arduino_start=function(){
+Blockly.Python.forBlock['hardware_arduino_start'] = function(){
   Blockly.Python.definitions_['import_s4alib'] = 'import s4alib';
   var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
   // var code= v + '.start()\n';  

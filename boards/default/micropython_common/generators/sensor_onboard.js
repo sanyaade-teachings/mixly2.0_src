@@ -86,7 +86,7 @@ Blockly.Python.forBlock['HCSR04'] = function () {
 
 
 
-Blockly.Python.sensor_mixgo_light= function(){
+Blockly.Python.forBlock['sensor_mixgo_light'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == "mixgo"){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
@@ -104,7 +104,7 @@ Blockly.Python.sensor_mixgo_light= function(){
     
 };
 
-Blockly.Python.sensor_mixgo_sound= function(){
+Blockly.Python.forBlock['sensor_mixgo_sound'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == "mixgo"){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
@@ -158,7 +158,7 @@ Blockly.Python.forBlock['sensor_mixgo_pin_near_double'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_ds18x20=function(){
+Blockly.Python.forBlock['sensor_ds18x20'] = function(){
     Blockly.Python.definitions_['import_ds18x20x'] = 'import ds18x20x';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
     var code ='ds18x20x.get_ds18x20_temperature('+dropdown_pin+')';
@@ -195,7 +195,7 @@ Blockly.Python.forBlock['sensor_sound'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_hp203=function(){
+Blockly.Python.forBlock['sensor_hp203'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
@@ -204,7 +204,7 @@ Blockly.Python.sensor_hp203=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_aht11=function(){
+Blockly.Python.forBlock['sensor_aht11'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
@@ -213,7 +213,7 @@ Blockly.Python.sensor_aht11=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.rfid_readid=function(){
+Blockly.Python.forBlock['rfid_readid'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_'+version+'_onboard_rc522'] = "from "+version+" import onboard_rc522";
@@ -221,7 +221,7 @@ Blockly.Python.rfid_readid=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.rfid_readcontent=function(){    
+Blockly.Python.forBlock['rfid_readcontent'] = function(){    
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
@@ -230,7 +230,7 @@ Blockly.Python.rfid_readcontent=function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.rfid_write=function(){
+Blockly.Python.forBlock['rfid_write'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
     var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
@@ -343,7 +343,7 @@ Blockly.Python.forBlock['sensor_mpu9250_get_gyro'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mpu9250_calibrate_compass= function(){
+Blockly.Python.forBlock['sensor_mpu9250_calibrate_compass'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_mixgo_compass'] = 'from mixgo import compass';
@@ -359,7 +359,7 @@ Blockly.Python.forBlock['sensor_mpu9250_temperature'] = function(){
         Blockly.Python.definitions_['import_mixgo_mpu'] = 'from mixgo import mpu';    
     return [v+'.mpu9250_get_temperature()', Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_mpu9250_field_strength= function(){
+Blockly.Python.forBlock['sensor_mpu9250_field_strength'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
@@ -416,7 +416,7 @@ Blockly.Python.forBlock['sensor_onboard_mpu9250_get_gyro'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_onboard_mpu9250_calibrate_compass= function(){
+Blockly.Python.forBlock['sensor_onboard_mpu9250_calibrate_compass'] = function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_mixgo_onboard_compass'] = 'from mixgo import onboard_compass';    
     return ''+'onboard_compass.calibrate()\n';
@@ -427,7 +427,7 @@ Blockly.Python.forBlock['sensor_onboard_mpu9250_temperature'] = function(){
     Blockly.Python.definitions_['import_mixgo_onboard_mpu'] = 'from mixgo import onboard_mpu';
     return ['onboard_mpu.mpu9250_get_temperature()', Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_onboard_mpu9250_field_strength= function(){
+Blockly.Python.forBlock['sensor_onboard_mpu9250_field_strength'] = function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_mixgo_onboard_compass'] = 'from mixgo import onboard_compass';     
     var compass = this.getFieldValue('compass');
@@ -448,7 +448,7 @@ Blockly.Python.forBlock['sensor_onboard_compass_reset'] = function(block) {
 };
 
 
-Blockly.Python.onboard_RTC_set_datetime= function () {
+Blockly.Python.forBlock['onboard_RTC_set_datetime'] = function () {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
   Blockly.Python.definitions_['import_'+version+'rtc_clock'] = 'from '+version + ' import rtc_clock';  
@@ -464,7 +464,7 @@ Blockly.Python.onboard_RTC_set_datetime= function () {
   return code;
 };
 
-Blockly.Python.onboard_RTC_settime_string=function(){
+Blockly.Python.forBlock['onboard_RTC_settime_string'] = function(){
     var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_ntptime'] = "import ntptime";
     var code = 'ntptime.settime('+cnt+')\n';
@@ -502,7 +502,7 @@ Blockly.Python.forBlock['sensor_mixgo_cc_mmc5603_get_angle'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mixgo_cc_mmc5603_calibrate_compass= function(){
+Blockly.Python.forBlock['sensor_mixgo_cc_mmc5603_calibrate_compass'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
     var code = 'onboard_mmc5603.calibrate()\n';
@@ -513,14 +513,14 @@ Blockly.Python.sensor_mixgo_cc_mmc5603_calibrate_compass= function(){
 
 
 
-Blockly.Python.sensor_mixgome_temperature=function(){
+Blockly.Python.forBlock['sensor_mixgome_temperature'] = function(){
     Blockly.Python.definitions_['import_mixgo_me_onboard_mxc6655xa'] = "from mixgo_me import onboard_mxc6655xa";
     var code = 'onboard_mxc6655xa.temperature()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 //mixgo_ce onboard_sensor generators:
-Blockly.Python.sensor_mixgoce_temperature=function(){
+Blockly.Python.forBlock['sensor_mixgoce_temperature'] = function(){
     Blockly.Python.definitions_['import_mixgo_ce'] = "import mixgo_ce";
     var code = 'mixgo_ce.get_temperature()';
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -632,7 +632,7 @@ Blockly.Python.forBlock['sensor_mixbot_patrol_value'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_mixbot_temperature=function(){
+Blockly.Python.forBlock['sensor_mixbot_temperature'] = function(){
     Blockly.Python.definitions_['import_mixbot_acc_gyr'] = "from mixbot import acc_gyr";
     var code = 'acc_gyr.temperature()';
     return [code, Blockly.Python.ORDER_ATOMIC];

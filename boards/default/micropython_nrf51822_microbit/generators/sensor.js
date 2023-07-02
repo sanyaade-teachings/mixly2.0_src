@@ -70,7 +70,7 @@ Blockly.Python.forBlock['controls_attachGestureInterrupt2'] = function(){
     return code;
 }
 
-Blockly.Python.sensor_get_gestures= function(){
+Blockly.Python.forBlock['sensor_get_gestures'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('GES');
     var a;
@@ -83,7 +83,7 @@ Blockly.Python.sensor_get_gestures= function(){
     return [a, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_current_gesture= function(){
+Blockly.Python.forBlock['sensor_current_gesture'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return ['accelerometer.current_gesture()', Blockly.Python.ORDER_ATOMIC];
 };
@@ -102,21 +102,21 @@ Blockly.Python.forBlock['sensor_set_acceleration'] = function(){
     return code;
 };
 //undefined?!?!?!?!
-Blockly.Python.sensor_light_level= function(){
+Blockly.Python.forBlock['sensor_light_level'] = function(){
     return ['input.lightLevel()', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_calibrate_compass= function(){
+Blockly.Python.forBlock['sensor_calibrate_compass'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return 'compass.calibrate()\n';
 };
 
-Blockly.Python.sensor_is_compass_calibrated= function(){
+Blockly.Python.forBlock['sensor_is_compass_calibrated'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return ['compass.is_calibrated()', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_compass_heading= function(){
+Blockly.Python.forBlock['sensor_compass_heading'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return ['compass.heading()', Blockly.Python.ORDER_ATOMIC];
 };
@@ -125,7 +125,7 @@ Blockly.Python.forBlock['sensor_temperature'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return ['temperature()', Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_field_strength= function(){
+Blockly.Python.forBlock['sensor_field_strength'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var compass = this.getFieldValue('compass');
     var code = 'compass.'+compass+'()'
@@ -136,12 +136,12 @@ Blockly.Python.forBlock['sensor_rotation'] = function(){
     var code = 'input.rotation(' + key  + ')';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_magnetic= function(){
+Blockly.Python.forBlock['sensor_magnetic'] = function(){
     var key = this.getFieldValue('key')
     var code = 'input.magneticForce(' + key  + ')';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
-Blockly.Python.sensor_distance_hrsc04= function(){
+Blockly.Python.forBlock['sensor_distance_hrsc04'] = function(){
     var Trig= this.getFieldValue('Trig');
     var Echo= this.getFieldValue('Echo');
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
@@ -149,7 +149,7 @@ Blockly.Python.sensor_distance_hrsc04= function(){
     return ['ultrasonic.distance_cm(t_pin=pin'+Trig+', e_pin=pin'+Echo+')', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_distance_hrsc04_= function(){
+Blockly.Python.forBlock['sensor_distance_hrsc04_'] = function(){
     var Trig= this.getFieldValue('Trig');
     var Echo= this.getFieldValue('Echo');
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
@@ -288,12 +288,12 @@ Blockly.Python.forBlock['sensor_compass_reset'] = function(block) {
 };
 
 
-Blockly.Python.sensor_light= function(){
+Blockly.Python.forBlock['sensor_light'] = function(){
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     return ['display.read_light_level()', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.sensor_hrsc04_init= function(){
+Blockly.Python.forBlock['sensor_hrsc04_init'] = function(){
     var Trig= this.getFieldValue('Trig');
     var Echo= this.getFieldValue('Echo');
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';

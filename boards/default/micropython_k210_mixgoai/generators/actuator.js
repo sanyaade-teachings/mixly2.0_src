@@ -113,7 +113,7 @@ Blockly.Python.forBlock['PID_init'] = function () {
   return code;  
 };
 //-新20211221------PID算法，暂时放此处------------------------------------------//
-Blockly.Python.PID_get_pid= function() {
+Blockly.Python.forBlock['PID_get_pid'] = function() {
     Blockly.Python.definitions_['import pid'] = 'import pid';	
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
 	var error = Blockly.Python.valueToCode(this, 'error',Blockly.Python.ORDER_ATOMIC);

@@ -12,7 +12,7 @@ goog.require('Mixly.MString');
 goog.require('Mixly.Editor');
 goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
-goog.require('Mixly.BoardConfigMenu');
+goog.require('Mixly.FooterLayerBoardConfig');
 goog.require('Mixly.BoardConfigItem');
 goog.require('Mixly.FooterBar');
 goog.provide('Mixly.Boards');
@@ -30,7 +30,7 @@ const {
     Msg,
     Boards,
     BoardConfigItem,
-    BoardConfigMenu
+    FooterLayerBoardConfig
 } = Mixly;
 
 const { form } = layui;
@@ -67,7 +67,7 @@ Boards.init = () => {
         Boards.dict[BOARD.boardType] = new BoardConfigItem(BOARD.boardType, BOARD.boardType);
     }
     Boards.NAME = Object.keys(Boards.dict);
-    Boards.configMenu = new BoardConfigMenu('mixly-board-config', Boards.dict);
+    Boards.configMenu = new FooterLayerBoardConfig('mixly-board-config', Boards.dict);
     const $boards = $('#boards-type');
     if ($boards.length) {
         $boards.empty();

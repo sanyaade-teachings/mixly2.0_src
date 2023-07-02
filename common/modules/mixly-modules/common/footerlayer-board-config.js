@@ -7,7 +7,7 @@ goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
-goog.provide('Mixly.BoardConfigMenu');
+goog.provide('Mixly.FooterLayerBoardConfig');
 
 const {
     FooterLayer,
@@ -19,7 +19,7 @@ const {
 
 const { dropdown } = layui;
 
-class BoardConfigMenu extends FooterLayer {
+class FooterLayerBoardConfig extends FooterLayer {
     /**
      * @param domId { string } 绑定dom的id
      * @param boardsInfo { obj } 板卡配置信息
@@ -27,7 +27,7 @@ class BoardConfigMenu extends FooterLayer {
             "xxx板卡": BoardConfigItem,
             ...
         }
-     * @return { BoardConfigMenu obj }
+     * @return { FooterLayerBoardConfig obj }
      **/
     constructor(domId, boardsInfo) {
         super(domId, {
@@ -186,6 +186,6 @@ class BoardConfigMenu extends FooterLayer {
     }
 }
 
-Mixly.BoardConfigMenu = BoardConfigMenu;
+Mixly.FooterLayerBoardConfig = FooterLayerBoardConfig;
 
 });

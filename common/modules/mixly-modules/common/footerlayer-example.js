@@ -9,7 +9,7 @@ goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
 goog.require('Mixly.FooterLayer');
-goog.provide('Mixly.ExampleMenu');
+goog.provide('Mixly.FooterLayerExample');
 
 const {
     MFile,
@@ -23,7 +23,7 @@ const {
 
 const { dropdown, tree } = layui;
 
-class ExampleMenu extends FooterLayer {
+class FooterLayerExample extends FooterLayer {
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
@@ -108,6 +108,6 @@ class ExampleMenu extends FooterLayer {
     }
 }
 
-Mixly.ExampleMenu = ExampleMenu;
+Mixly.FooterLayerExample = FooterLayerExample;
 
 });

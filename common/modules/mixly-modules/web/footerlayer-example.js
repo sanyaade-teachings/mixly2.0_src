@@ -3,21 +3,21 @@ goog.loadJs('web', () => {
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.MJSON');
-goog.require('Mixly.ExampleMenu');
+goog.require('Mixly.FooterLayerExample');
 goog.require('Mixly.Boards');
-goog.provide('Mixly.Web.ExampleMenu');
+goog.provide('Mixly.Web.FooterLayerExample');
 
 const {
     Config,
     Env,
-    ExampleMenu,
+    FooterLayerExample,
     MJSON,
     Boards
 } = Mixly;
 
 const { BOARD } = Config;
 
-class ExampleMenuExt extends ExampleMenu {
+class FooterLayerExampleExt extends FooterLayerExample {
     static DIR_TREE = MJSON.get(`../../../sample/${Boards.getType()}.json`) ?? [];
 
     constructor(exampleBtnId) {
@@ -71,8 +71,8 @@ class ExampleMenuExt extends ExampleMenu {
     }
 }
 
-Object.defineProperty(Mixly.Web, 'ExampleMenu', {
-    value: ExampleMenuExt,
+Object.defineProperty(Mixly.Web, 'FooterLayerExample', {
+    value: FooterLayerExampleExt,
     writable: true,
     enumerable: true,
     configurable: true,

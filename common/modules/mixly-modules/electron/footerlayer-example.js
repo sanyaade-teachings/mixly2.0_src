@@ -7,9 +7,9 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
 goog.require('Mixly.XML');
-goog.require('Mixly.ExampleMenu');
+goog.require('Mixly.FooterLayerExample');
 goog.require('Mixly.Electron.File');
-goog.provide('Mixly.Electron.ExampleMenu');
+goog.provide('Mixly.Electron.FooterLayerExample');
 
 const {
     Env,
@@ -18,7 +18,7 @@ const {
     MFile,
     Title,
     XML,
-    ExampleMenu,
+    FooterLayerExample,
     Electron
 } = Mixly;
 
@@ -36,7 +36,7 @@ const {
     app
 } = Modules;
 
-class ExampleMenuExt extends ExampleMenu {
+class FooterLayerExampleExt extends FooterLayerExample {
     constructor(exampleBtnId) {
         super(exampleBtnId);
     }
@@ -114,6 +114,6 @@ class ExampleMenuExt extends ExampleMenu {
     }
 }
 
-Electron.ExampleMenu = ExampleMenuExt;
+Electron.FooterLayerExample = FooterLayerExampleExt;
 
 });

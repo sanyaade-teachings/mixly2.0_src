@@ -31,21 +31,6 @@
         ]
     },
     {
-        "path": "/common/board-config-menu.js",
-        "require": [
-            "layui",
-            "tippy",
-            "Mixly.FooterLayer",
-            "Mixly.MArray",
-            "Mixly.Env",
-            "Mixly.XML",
-            "Mixly.Msg"
-        ],
-        "provide": [
-            "Mixly.BoardConfigMenu"
-        ]
-    },
-    {
         "path": "/common/boards.js",
         "require": [
             "tippy",
@@ -60,7 +45,7 @@
             "Mixly.Editor",
             "Mixly.FooterLayer",
             "Mixly.Msg",
-            "Mixly.BoardConfigMenu",
+            "Mixly.FooterLayerBoardConfig",
             "Mixly.BoardConfigItem",
             "Mixly.FooterBar"
         ],
@@ -170,7 +155,34 @@
         ]
     },
     {
-        "path": "/common/example-menu.js",
+        "path": "/common/footerbar.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.Msg",
+            "Mixly.FooterLayer"
+        ],
+        "provide": [
+            "Mixly.FooterBar"
+        ]
+    },
+    {
+        "path": "/common/footerlayer-board-config.js",
+        "require": [
+            "layui",
+            "tippy",
+            "Mixly.FooterLayer",
+            "Mixly.MArray",
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.Msg"
+        ],
+        "provide": [
+            "Mixly.FooterLayerBoardConfig"
+        ]
+    },
+    {
+        "path": "/common/footerlayer-example.js",
         "require": [
             "tippy",
             "layui",
@@ -183,23 +195,11 @@
             "Mixly.FooterLayer"
         ],
         "provide": [
-            "Mixly.ExampleMenu"
+            "Mixly.FooterLayerExample"
         ]
     },
     {
-        "path": "/common/footer-bar.js",
-        "require": [
-            "Mixly.Env",
-            "Mixly.XML",
-            "Mixly.Msg",
-            "Mixly.FooterLayer"
-        ],
-        "provide": [
-            "Mixly.FooterBar"
-        ]
-    },
-    {
-        "path": "/common/footer-layer.js",
+        "path": "/common/footerlayer.js",
         "require": [
             "tippy",
             "Mixly"
@@ -224,10 +224,10 @@
             "Mixly.LevelSelector",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
-            "Mixly.Electron.ExampleMenu",
+            "Mixly.Electron.FooterLayerExample",
             "Mixly.Electron.Serial",
             "Mixly.WebSocket.Socket",
-            "Mixly.Web.ExampleMenu",
+            "Mixly.Web.FooterLayerExample",
             "Mixly.Electron.Loader"
         ],
         "provide": [
@@ -661,23 +661,6 @@
         ]
     },
     {
-        "path": "/electron/example-menu.js",
-        "require": [
-            "layui",
-            "Mixly.Env",
-            "Mixly.Config",
-            "Mixly.Modules",
-            "Mixly.MFile",
-            "Mixly.Title",
-            "Mixly.XML",
-            "Mixly.ExampleMenu",
-            "Mixly.Electron.File"
-        ],
-        "provide": [
-            "Mixly.Electron.ExampleMenu"
-        ]
-    },
-    {
         "path": "/electron/file.js",
         "require": [
             "Mixly.Modules",
@@ -695,6 +678,23 @@
         ],
         "provide": [
             "Mixly.Electron.File"
+        ]
+    },
+    {
+        "path": "/electron/footerlayer-example.js",
+        "require": [
+            "layui",
+            "Mixly.Env",
+            "Mixly.Config",
+            "Mixly.Modules",
+            "Mixly.MFile",
+            "Mixly.Title",
+            "Mixly.XML",
+            "Mixly.FooterLayerExample",
+            "Mixly.Electron.File"
+        ],
+        "provide": [
+            "Mixly.Electron.FooterLayerExample"
         ]
     },
     {
@@ -829,19 +829,6 @@
         ]
     },
     {
-        "path": "/web/example-menu.js",
-        "require": [
-            "Mixly.Config",
-            "Mixly.Env",
-            "Mixly.MJSON",
-            "Mixly.ExampleMenu",
-            "Mixly.Boards"
-        ],
-        "provide": [
-            "Mixly.Web.ExampleMenu"
-        ]
-    },
-    {
         "path": "/web/file.js",
         "require": [
             "Blockly",
@@ -853,6 +840,19 @@
         ],
         "provide": [
             "Mixly.Web.File"
+        ]
+    },
+    {
+        "path": "/web/footerlayer-example.js",
+        "require": [
+            "Mixly.Config",
+            "Mixly.Env",
+            "Mixly.MJSON",
+            "Mixly.FooterLayerExample",
+            "Mixly.Boards"
+        ],
+        "provide": [
+            "Mixly.Web.FooterLayerExample"
         ]
     },
     {

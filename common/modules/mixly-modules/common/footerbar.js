@@ -97,6 +97,7 @@ FooterBar.init = () => {
             instance.setProps({});
         }
     });
+    FooterBar.messageLayer = messageLayer;
 }
 
 FooterBar.add = () => {

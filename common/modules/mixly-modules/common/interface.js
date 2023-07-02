@@ -13,10 +13,10 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.LevelSelector');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
-goog.require('Mixly.Electron.ExampleMenu');
+goog.require('Mixly.Electron.FooterLayerExample');
 goog.require('Mixly.Electron.Serial');
 goog.require('Mixly.WebSocket.Socket');
-goog.require('Mixly.Web.ExampleMenu');
+goog.require('Mixly.Web.FooterLayerExample');
 goog.require('Mixly.Electron.Loader');
 goog.provide('Mixly.Interface');
 
@@ -40,9 +40,9 @@ const { BOARD, USER } = Config;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
-    const { ExampleMenu } = Env.isElectron? Mixly.Electron : Mixly.Web;
-    if (ExampleMenu instanceof Object) {
-        ExampleMenu.obj = new ExampleMenu('mixly-example-menu');
+    const { FooterLayerExample } = Env.isElectron? Mixly.Electron : Mixly.Web;
+    if (FooterLayerExample instanceof Object) {
+        FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
     Nav.init();
     Code.init();

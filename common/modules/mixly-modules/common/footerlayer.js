@@ -35,7 +35,7 @@ class FooterLayer {
 
     createLayer() {
         const { onShown, onAfterUpdate } = this.config;
-        this.layer = tippy('#' + this.domId, { ...this.config })[0];
+        this.layer = tippy(`#${this.domId}`, { ...this.config })[0];
         this.layer.props.onShown = (instance) => {
             if (typeof onShown === 'function') {
                 onShown(instance);

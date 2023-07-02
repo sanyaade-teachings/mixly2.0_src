@@ -4,7 +4,8 @@
     "scripts": {
         "static": "node ./static-server/server.js",
         "build": "gulp script",
-        "test": "node build.js && npm run static"
+        "test": "npm run deps && npm run static",
+        "deps": "node build.js"
     },
     "author": "Mixly",
     "license": "MIT",

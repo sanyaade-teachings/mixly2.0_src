@@ -343,6 +343,21 @@ Blockly.Blocks["IOT_MIXIO_SUBSCRIBE"] = {
     }
 };
 
+Blockly.Blocks["IOT_MIXIO_UNSUBSCRIBE"] = {
+    init: function () {
+        this.setColour(Blockly.Msg['IOT_HUE']);
+        this.appendDummyInput()
+            .appendField("MixIO")
+        this.appendValueInput('TOPIC')
+            .appendField(MSG.stop+Blockly.MIXLY_EMQX_SUBSCRIBE)
+            .appendField(Blockly.MIXLY_EMQX_PUBLISH_TOPIC);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.MIXLY_ESP32_IOT_EMQX_SUBSCRIBE_TOOLTIP);
+    }
+};
+
 Blockly.Blocks['iot_mixio_disconnect'] = {
    init: function() {
     this.setColour(Blockly.Msg['IOT_HUE']);

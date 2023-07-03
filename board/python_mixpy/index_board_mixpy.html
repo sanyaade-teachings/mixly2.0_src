@@ -1573,7 +1573,7 @@
     </category>
     <category id="catIot" colour="#2FAD7A">
     <category id="catMixIO" colour="#526FC3">        
-        <!-- <block type="IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE">
+        <block type="IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE">
           <value name="SERVER">
             <shadow type="text">
               <field name="TEXT">mixio.mixly.cn</field>
@@ -1596,7 +1596,7 @@
               <field name="VALUE">A1B2C3</field>
             </shadow>
           </value>
-        </block> -->
+        </block>
         <block type="iot_mixio_connect">
           <value name="SERVER">
             <shadow type="text">
@@ -1643,6 +1643,13 @@
             </shadow>
           </value>
         </block>
+        <block type="IOT_MIXIO_UNSUBSCRIBE">
+          <value name="TOPIC">
+            <shadow type="text">
+              <field name="TEXT">topic</field>
+            </shadow>
+          </value>
+        </block>
         <block type="procedures_defnoreturn">
           <mutation>
             <arg name="client"></arg>
@@ -1668,8 +1675,8 @@
                 </block>
           </statement>
         </block>
-        <!-- <block type="iot_mixio_check"></block>
-        <block type="iot_client_onboard"></block> -->
+        <block type="iot_mixio_check"></block>
+        <!-- <block type="iot_client_onboard"></block> -->
         <block type="IOT_FORMATTING">
           <value name="VAR">
             <block type="dicts_create_with_noreturn" inline="true">
@@ -1723,8 +1730,8 @@
           </value>
         </block>
         <block type="iot_mixio_connect_only"></block>
-        <!-- <block type="iot_mixio_disconnect"></block>
-        <block type="IOT_EMQX_PING"></block> -->
+        <block type="iot_mixio_disconnect"></block>
+        <!-- <block type="IOT_EMQX_PING"></block> -->
         <!-- <block type="IOT_MIXIO_NTP">
           <value name="addr">
             <shadow type="text">

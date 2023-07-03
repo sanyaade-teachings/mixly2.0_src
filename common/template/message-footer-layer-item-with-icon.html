@@ -1,0 +1,10 @@
+<div class="toast show text-bg-{{ d.style }}" role="alert" aria-live="assertive" aria-atomic="true" style="margin-bottom: 8px;">
+    <div class="toast-header">
+        <img src="{{ d.src }}" width="22" height="22" class="rounded me-2">
+        <strong class="me-auto">{{ d.name }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ d.message }}
+    </div>
+</div>

@@ -1,7 +1,6 @@
 goog.loadJs('common', () => {
 
 goog.require('layui');
-goog.require('tippy');
 goog.require('Mixly.FooterLayer');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
@@ -20,6 +19,9 @@ const {
 const { dropdown } = layui;
 
 class FooterLayerBoardConfig extends FooterLayer {
+    // 弹层模板
+    static MENU_TEMPLATE = goog.get(Env.templatePath + '/board-config-menu-div.html');
+
     /**
      * @param domId { string } 绑定dom的id
      * @param boardsInfo { obj } 板卡配置信息
@@ -49,7 +51,6 @@ class FooterLayerBoardConfig extends FooterLayer {
         this.containerId = domId;
         this.boardsInfo = boardsInfo;
         this.boardName = null;
-        this.template = goog.get(Env.templatePath + '/board-config-menu-div.html');
         this.dropdownItems = {};
     }
 
@@ -160,7 +161,7 @@ class FooterLayerBoardConfig extends FooterLayer {
     }
 
     renderTemplate(options) {
-        const xmlStr = XML.render(this.template, {
+        const xmlStr = XML.render(FooterLayerBoardConfig.MENU_TEMPLATE, {
             options,
             reset: Msg.Lang['使用默认配置'],
             close: Msg.Lang['关闭窗口']

@@ -1,6 +1,5 @@
 goog.loadJs('common', () => {
 
-goog.require('tippy');
 goog.require('layui');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
@@ -24,6 +23,9 @@ const {
 const { dropdown, tree } = layui;
 
 class FooterLayerExample extends FooterLayer {
+    // 弹层模板
+    static MENU_TEMPLATE = goog.get(Env.templatePath + '/example-menu-div.html');
+
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
@@ -32,7 +34,7 @@ class FooterLayerExample extends FooterLayer {
         });
         this.DEPTH = 5;
         this.containerId = domId;
-        this.menuHTML = XML.render(XML.TEMPLATE_STR['EXAMPLE_MENU_DIV'], {
+        this.menuHTML = XML.render(FooterLayerExample.MENU_TEMPLATE, {
             id: this.containerId,
             close: Msg.Lang['关闭窗口']
         });

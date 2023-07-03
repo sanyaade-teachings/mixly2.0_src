@@ -11,6 +11,7 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.require('Mixly.LevelSelector');
+goog.require('Mixly.FooterBar');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
 goog.require('Mixly.Electron.FooterLayerExample');
@@ -33,7 +34,8 @@ const {
     ToolboxSearcher,
     Editor,
     Msg,
-    LevelSelector
+    LevelSelector,
+    FooterBar
 } = Mixly;
 
 const { BOARD, USER } = Config;
@@ -63,6 +65,7 @@ Interface.init = () => {
     } else {
         Env.defaultXML = $('#toolbox').html();
     }
+    FooterBar.init();
     const selectedBoardName = Boards.getSelectedBoardName();
     Boards.changeTo(selectedBoardName);
     Boards.updateCategories(selectedBoardName);

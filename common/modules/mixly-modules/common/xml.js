@@ -101,11 +101,6 @@ XML.TEMPLATE_CONFIG = [
         path: '/board-config-menu-div.html',
         config: {},
         appendToBody: false
-    }, {
-        type: 'EXAMPLE_MENU_DIV',
-        path: '/example-menu-div.html',
-        config: {},
-        appendToBody: false
     }
 ];
 
@@ -121,8 +116,7 @@ XML.TEMPLATE_ENV = {
     PROGRESS_BAR_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
     LIB_MANAGER_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
     APP_DIV: true,
-    BOARD_CONFIG_MENU_DIV: true,
-    EXAMPLE_MENU_DIV: true
+    BOARD_CONFIG_MENU_DIV: true
 };
 
 XML.TEMPLATE_STR = {};

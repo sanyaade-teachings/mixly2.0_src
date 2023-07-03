@@ -46,8 +46,7 @@
             "Mixly.FooterLayer",
             "Mixly.Msg",
             "Mixly.FooterLayerBoardConfig",
-            "Mixly.BoardConfigItem",
-            "Mixly.FooterBar"
+            "Mixly.BoardConfigItem"
         ],
         "provide": [
             "Mixly.Boards"
@@ -160,7 +159,10 @@
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg",
-            "Mixly.FooterLayer"
+            "Mixly.FooterLayer",
+            "Mixly.FooterLayerExample",
+            "Mixly.FooterLayerBoardConfig",
+            "Mixly.FooterLayerMessage"
         ],
         "provide": [
             "Mixly.FooterBar"
@@ -170,7 +172,6 @@
         "path": "/common/footerlayer-board-config.js",
         "require": [
             "layui",
-            "tippy",
             "Mixly.FooterLayer",
             "Mixly.MArray",
             "Mixly.Env",
@@ -184,7 +185,6 @@
     {
         "path": "/common/footerlayer-example.js",
         "require": [
-            "tippy",
             "layui",
             "Mixly.MFile",
             "Mixly.Title",
@@ -196,6 +196,18 @@
         ],
         "provide": [
             "Mixly.FooterLayerExample"
+        ]
+    },
+    {
+        "path": "/common/footerlayer-message.js",
+        "require": [
+            "Mixly.XML",
+            "Mixly.Msg",
+            "Mixly.Env",
+            "Mixly.FooterLayer"
+        ],
+        "provide": [
+            "Mixly.FooterLayerMessage"
         ]
     },
     {
@@ -222,6 +234,7 @@
             "Mixly.Editor",
             "Mixly.Msg",
             "Mixly.LevelSelector",
+            "Mixly.FooterBar",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.FooterLayerExample",

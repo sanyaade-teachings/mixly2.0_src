@@ -14,7 +14,6 @@ goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
 goog.require('Mixly.FooterLayerBoardConfig');
 goog.require('Mixly.BoardConfigItem');
-goog.require('Mixly.FooterBar');
 goog.provide('Mixly.Boards');
 
 const {
@@ -76,7 +75,6 @@ Boards.init = () => {
         }
         form.render('select', 'boards-type-filter');
     }
-    Mixly.FooterBar.init();
 }
 
 Boards.getType = () => {

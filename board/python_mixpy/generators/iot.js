@@ -82,6 +82,7 @@ Blockly.Python.IOT_FORMAT_STRING = function(block) {
 
 
 Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = function(block) {
+  Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   var server = Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC);
   var share_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
   var a = "f'python-mqtt-" + share_code.replace("'","").replace("'","") + "'"; 
@@ -96,6 +97,7 @@ Blockly.Python.iot_mixly_key = function() {
 
 
 Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function(block) {  
+  Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   var server =  Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC) ; 
   var mixly_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
  var a = "f'python-mqtt-" + mixly_code.replace("'","").replace("'","") + "'"; 

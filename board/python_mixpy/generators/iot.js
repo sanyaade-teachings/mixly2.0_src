@@ -9,8 +9,9 @@ Blockly.Python.iot_mixio_connect = function(block) {
   var username =  Blockly.Python.valueToCode(this, 'USERNAME', Blockly.Python.ORDER_ATOMIC) ;
   var password =  Blockly.Python.valueToCode(this, 'PASSWORD', Blockly.Python.ORDER_ATOMIC) ;
   var project =  Blockly.Python.valueToCode(this, 'PROJECT', Blockly.Python.ORDER_ATOMIC) ;
+  var timestamp = Math.round(new Date()).toString();
   //var subscribe = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT) || '0';
-  var a = "f'python-mqtt-" + username.replace("'","").replace("'","") + "'"; 
+  var a = "f'python-mqtt-" + username.replace("'","").replace("'","") + timestamp.replace("'","").replace("'","") + "'"; 
   var code= 'mixio_client_id = '+ a +'\n' + 'mqtt_client = mixiot.MixIO(' + server + ', 1883 ,'+ username + ', ' + password+', '+ project  + ', mixio_client_id)\nmqtt_client.connect()\n';
   return code;
 };
@@ -85,7 +86,8 @@ Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   var server = Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC);
   var share_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
-  var a = "f'python-mqtt-" + share_code.replace("'","").replace("'","") + "'"; 
+  var timestamp = Math.round(new Date()).toString();
+  var a = "f'python-mqtt-" + share_code.replace("'","").replace("'","") + timestamp.replace("'","").replace("'","")+ "'"; 
   var code= 'mixio_client_id = '+ a +'\n' + 'mqtt_client = mixiot.MixIO.from_mixly_key(' + server + ', 1883 ,"'+ share_code  + '", mixio_client_id)\nmqtt_client.connect()\n';
   return code;
 };
@@ -100,7 +102,8 @@ Blockly.Python.IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function(block) {
   Blockly.Python.definitions_['import_mixiot'] = "import mixiot";
   var server =  Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC) ; 
   var mixly_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
- var a = "f'python-mqtt-" + mixly_code.replace("'","").replace("'","") + "'"; 
+  var timestamp = Math.round(new Date()).toString();
+  var a = "f'python-mqtt-" + mixly_code.replace("'","").replace("'","") + timestamp.replace("'","").replace("'","")+ "'"; 
   var code= 'mixio_client_id = '+ a +'\n' + 'mqtt_client = mixiot.MixIO.from_share_key(' + server + ', 1883 ,"'+ mixly_code  + '", mixio_client_id)\nmqtt_client.connect()\n';
   return code;
 };

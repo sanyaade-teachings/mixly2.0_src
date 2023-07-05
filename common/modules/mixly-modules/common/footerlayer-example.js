@@ -5,7 +5,6 @@ goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
-goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
 goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerExample');
@@ -15,7 +14,6 @@ const {
     Title,
     XML,
     Editor,
-    Msg,
     Env,
     FooterLayer
 } = Mixly;
@@ -24,28 +22,25 @@ const { dropdown, tree } = layui;
 
 class FooterLayerExample extends FooterLayer {
     // 弹层模板
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/example-menu-div.html');
+    static MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-example.html');
 
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
-                this.render(instance);
+                this.setContent(FooterLayerExample.MENU_TEMPLATE);
+                this.render();
             }
         });
+        this.$content.addClass('footer-layer-example');
         this.DEPTH = 5;
         this.containerId = domId;
-        this.menuHTML = XML.render(FooterLayerExample.MENU_TEMPLATE, {
-            id: this.containerId,
-            close: Msg.Lang['关闭窗口']
-        });
     }
 
-    render(instance) {
-        this.setContent(this.menuHTML);
+    render() {
+        this.$body = this.$content.find('.example-tree-body');
         this.examplesTree = tree.render({
-            elem: `#${this.containerId}-tree-body`,
+            elem: this.$body[0],
             data: this.getRoot(),
-            id: `${this.containerId}-tree-dom`,
             accordion: true,
             anim: false,
             icon: [ 'icon-folder-empty', 'icon-folder-open-empty-1', 'icon-file-code' ],
@@ -59,7 +54,7 @@ class FooterLayerExample extends FooterLayer {
                 this.dataToWorkspace(obj.data.id);
             },
             statusChange: () => {
-                instance.setProps({});
+                this.setProps({});
             }
         });
         this.examplesTree.config.statusChange();

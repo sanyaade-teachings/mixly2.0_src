@@ -1,0 +1,77 @@
+<style type="text/css">
+    /* 板卡配置 */
+    .footer-layer-board-config button {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer-layer-board-config .footer-layer-btn.reset {
+        font-size: 14px;
+        line-height: 13px;
+    }
+
+    .board-config-menu > .layui-dropdown-menu {
+        max-height: 150px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+</style>
+<div
+    style="
+        display: flex;
+        flex-direction: column;
+    "
+>
+    {{# layui.each(d.options, function(index, item){ }}
+    <p
+        style="
+            white-space: nowrap;
+            text-align: right;
+            margin: 3.2px 0px;
+        "
+    >
+        {{ item.name }}
+    </p>
+    {{# }); }}
+</div>
+<div
+    style="
+        display: flex;
+        flex-direction: column;
+    "
+>
+    {{# layui.each(d.options, function(index, item){ }}
+    <p
+        style="
+            white-space: nowrap;
+            text-align: center;
+            margin: 3.2px 0px;
+        "
+    >
+        &nbsp:&nbsp
+    </p>
+    {{# }); }}
+</div>
+<div
+    style="
+        display: flex;
+        flex-direction: column;
+    "
+>
+    {{# layui.each(d.options, function(index, item){ }}
+    <button
+        id="board-config-{{ item.key }}"
+        class="
+            layui-btn
+            layui-btn-normal
+            layui-btn-fluid
+            layui-btn-xs
+        "
+        style="margin: 2px 0px;"
+    >
+        <p style="font-size: 13px;">{{ item.label }}</p>
+        <i class="layui-icon layui-icon-triangle-d"></i>
+    </button>
+    {{# }); }}
+</div>

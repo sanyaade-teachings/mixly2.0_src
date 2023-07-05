@@ -96,11 +96,6 @@ XML.TEMPLATE_CONFIG = [
             example: Msg.Lang['例程']
         },
         appendToBody: false
-    }, {
-        type: 'BOARD_CONFIG_MENU_DIV',
-        path: '/board-config-menu-div.html',
-        config: {},
-        appendToBody: false
     }
 ];
 
@@ -115,8 +110,7 @@ XML.TEMPLATE_ENV = {
     SEARCH_DIV: true,
     PROGRESS_BAR_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
     LIB_MANAGER_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
-    APP_DIV: true,
-    BOARD_CONFIG_MENU_DIV: true
+    APP_DIV: true
 };
 
 XML.TEMPLATE_STR = {};

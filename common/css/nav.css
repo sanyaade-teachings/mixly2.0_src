@@ -773,56 +773,6 @@ body[class="light"] {
     color: #fff;
 }
 
-#mixly-example-menu-tree * {
-    box-sizing: unset;
-}
-
-.light #mixly-example-menu-tree .layui-tree-txt {
-    color: #000;
-}
-
-.light #mixly-example-menu-tree .layui-tree-icon .layui-icon {
-    color: #000;
-}
-
-.dark #mixly-example-menu-tree .layui-tree-txt {
-    color: #fff;
-}
-
-.dark #mixly-example-menu-tree .layui-tree-icon .layui-icon {
-    color: #fff;
-}
-
-#mixly-example-menu-tree .layui-tree-icon {
-    border: none;
-    width: 16px !important;
-    height: 16px !important;
-    font-size: 16px !important;
-    margin: 0 10px !important;
-}
-
-#mixly-example-menu-tree .layui-tree-icon .layui-icon {
-    font-size: 16px;
-}
-
-#mixly-example-menu-tree .layui-tree-iconClick {
-    height: 16px;
-    line-height: 16px;
-    margin: 0 3px 0 10px;
-}
-
-.light #mixly-example-menu-tree .layui-tree-iconClick {
-    color: #000;
-}
-
-.dark #mixly-example-menu-tree .layui-tree-iconClick {
-    color: #fff;
-}
-
-#mixly-example-menu-tree .layui-tree-iconClick .layui-icon {
-    font-size: 16px;
-}
-
 .dark .layui-layer-msg {
     background-color: #746f6f;
 }

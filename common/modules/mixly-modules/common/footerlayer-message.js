@@ -15,36 +15,46 @@ const {
 
 class FooterLayerMessage extends FooterLayer {
     // 弹层模板
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/message-footer-layer.html');
-    static MENU_ITEM = goog.get(Env.templatePath + '/message-footer-layer-item.html');
-    static MENU_ITEM_WITH_ICON = goog.get(Env.templatePath + '/message-footer-layer-item-with-icon.html');
+    static MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-message.html');
+    static MENU_ITEM = goog.get(Env.templatePath + '/footerlayer-message-item.html');
+    static MENU_ITEM_WITH_ICON = goog.get(Env.templatePath + '/footerlayer-message-item-with-icon.html');
     static STYLES = [ 'primary', 'secondary', 'success', 'danger', 'warning' ];
 
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
                 if (this.$container.length) {
+                    this.$body.scrollTop(this.$container.parent().prop('scrollHeight'));
                     return;
                 }
                 const { MENU_TEMPLATE } = FooterLayerMessage;
-                const xmlStr = XML.render(MENU_TEMPLATE, {
-                    close: Msg.Lang['关闭窗口'],
-                    list: []
-                });
-                instance.setContent(xmlStr);
-                instance.setProps({});
+                this.setContent(XML.render(MENU_TEMPLATE, {
+                    noMessage: Msg.Lang['无消息']
+                }));
                 this.$container = this.$content.find('.toast-container');
                 this.$body = this.$container.parent();
-                this.$body.css('width', '100px');
+                this.clear();
                 for (let config of this.messageQuery) {
                     this.add_(config);
                 }
                 this.messageQuery = [];
             },
             onShown: (instance) => {
-                let $container = this.$content.find('.toast-container');
-                $container.parent().scrollTop(this.$container.parent().prop('scrollHeight'));
-            }
+                $(instance.popper).find('.footer-layer-clear')
+                .off().click(() => {
+                    this.clear();
+                });
+            },
+            btns: [
+                {
+                    class: 'clear',
+                    title: Msg.Lang['清空'],
+                    icon: 'layui-icon-delete',
+                    onclick: () => {
+                        this.clear();
+                    }
+                }
+            ]
         });
         this.DEFALUT_ITEM_CONFIG = {
             type: 0,
@@ -55,7 +65,7 @@ class FooterLayerMessage extends FooterLayer {
             onDestroy: () => {}
         };
         this.messageQuery = [];
-        this.$content = $(this.layer.popper).find('.tippy-content');
+        this.$content.addClass('footer-layer-message');
         this.$container = this.$content.find('.toast-container');
         this.$body = this.$container.parent();
     }
@@ -104,9 +114,7 @@ class FooterLayerMessage extends FooterLayer {
             $template.find('.btn-close[data-bs-dismiss="toast"]').off().click(() => {
                 $template.remove();
                 if (!this.$container.children('div').length) {
-                    this.$container.html('无消息');
-                    this.$body.css('width', '100px');
-                    this.setProps({});
+                    this.clear();
                 }
                 config.onDestroy();
             });
@@ -121,7 +129,9 @@ class FooterLayerMessage extends FooterLayer {
     }
 
     clear() {
-        this.$container.html('无消息');
+        this.$container.html(Msg.Lang['无消息']);
+        this.$body.css('width', '100px');
+        this.setProps({});
     }
 
     genItemTemplate(items) {

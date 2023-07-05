@@ -173,7 +173,6 @@
         "require": [
             "layui",
             "Mixly.FooterLayer",
-            "Mixly.MArray",
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg"
@@ -214,7 +213,9 @@
         "path": "/common/footerlayer.js",
         "require": [
             "tippy",
-            "Mixly"
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.FooterLayer"

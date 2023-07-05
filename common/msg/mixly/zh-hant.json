@@ -201,5 +201,6 @@
     "中断失败": "中斷失敗",
     "无法进入Raw REPL": "無法進入Raw REPL",
     "无法退出Raw REPL": "無法退出Raw REPL",
-    "无法退出REPL": "無法退出REPL"
+    "无法退出REPL": "無法退出REPL",
+    "无消息": "無消息"
 }

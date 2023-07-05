@@ -1,16 +1,14 @@
 goog.loadJs('common', () => {
 
 goog.require('layui');
-goog.require('Mixly.FooterLayer');
-goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
+goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerBoardConfig');
 
 const {
     FooterLayer,
-    MArray,
     Env,
     XML,
     Msg
@@ -20,7 +18,7 @@ const { dropdown } = layui;
 
 class FooterLayerBoardConfig extends FooterLayer {
     // 弹层模板
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/board-config-menu-div.html');
+    static MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-board-config.html');
 
     /**
      * @param domId { string } 绑定dom的id
@@ -39,15 +37,20 @@ class FooterLayerBoardConfig extends FooterLayer {
             onMount: (instance) => {
                 this.renderMenu(instance);
             },
-            onShown: (instance) => {
-                $(instance.popper).find('.footer-layer-reset')
-                .off().click(() => {
-                    const selectedBoardName = this.boardName;
-                    let { defaultOptions } = this.boardsInfo[selectedBoardName];
-                    this.setSelectedOptions(instance, defaultOptions);
-                });
-            }
+            btns: [
+                {
+                    class: 'reset',
+                    title: Msg.Lang['使用默认配置'],
+                    icon: 'layui-icon-refresh-1',
+                    onclick: () => {
+                        const selectedBoardName = this.boardName;
+                        let { defaultOptions } = this.boardsInfo[selectedBoardName];
+                        this.setSelectedOptions(defaultOptions);
+                    }
+                }
+            ]
         });
+        this.$content.addClass('footer-layer-board-config');
         this.containerId = domId;
         this.boardsInfo = boardsInfo;
         this.boardName = null;
@@ -84,15 +87,15 @@ class FooterLayerBoardConfig extends FooterLayer {
         return '';
     }
 
-    renderMenu(instance) {
+    renderMenu() {
         const selectedBoardName = this.boardName;
         let { options, selectedOptions } = this.boardsInfo[selectedBoardName];
         this.renderTemplate(options);
-        this.setSelectedOptions(instance, selectedOptions);
-        this.renderOptions(instance, options);
+        this.setSelectedOptions(selectedOptions);
+        this.renderOptions(options);
     }
 
-    setSelectedOptions(instance, selectedOptions) {
+    setSelectedOptions(selectedOptions) {
         // 每次打开板卡设置窗口时设置其默认选中项
         const selectedBoardName = this.boardName;
         const boardsInfo = this.boardsInfo[selectedBoardName];
@@ -106,10 +109,10 @@ class FooterLayerBoardConfig extends FooterLayer {
             boardsInfo.setSelectedOption(i, selectedOptions[i]);
         }
         // 重新计算窗口的位置
-        instance.setProps({});
+        this.setProps({});
     }
 
-    renderOptions(instance, options) {
+    renderOptions(options) {
         const boardName = this.boardName;
         const _this = this;
         for (let item of options) {
@@ -149,7 +152,7 @@ class FooterLayerBoardConfig extends FooterLayer {
                         key: data.id,
                         label: data.title
                     });
-                    instance.setProps({});
+                    _this.setProps({});
                 }
             };
             if (this.dropdownItems[item.key]) {
@@ -161,11 +164,7 @@ class FooterLayerBoardConfig extends FooterLayer {
     }
 
     renderTemplate(options) {
-        const xmlStr = XML.render(FooterLayerBoardConfig.MENU_TEMPLATE, {
-            options,
-            reset: Msg.Lang['使用默认配置'],
-            close: Msg.Lang['关闭窗口']
-        });
+        const xmlStr = XML.render(FooterLayerBoardConfig.MENU_TEMPLATE, { options });
         this.setContent(xmlStr);
     }
 

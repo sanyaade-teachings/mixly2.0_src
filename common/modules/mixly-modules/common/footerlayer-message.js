@@ -25,12 +25,6 @@ class FooterLayerMessage extends FooterLayer {
             onMount: (instance) => {
                 this.$body.scrollTop(this.$container.parent().prop('scrollHeight'));
             },
-            onShown: (instance) => {
-                $(instance.popper).find('.footer-layer-clear')
-                .off().click(() => {
-                    this.clear();
-                });
-            },
             btns: [
                 {
                     class: 'clear',
@@ -50,15 +44,12 @@ class FooterLayerMessage extends FooterLayer {
             onCreate: (obj) => {},
             onDestroy: () => {}
         };
-        this.$container = this.$content.find('.toast-container');
         const { MENU_TEMPLATE } = FooterLayerMessage;
-        this.updateContent(XML.render(MENU_TEMPLATE, {
-            noMessage: Msg.Lang['无消息']
-        }));
+        this.updateContent(MENU_TEMPLATE);
         this.messageQuery = [];
         this.$content.addClass('footer-layer-message');
         this.$container = this.$content.find('.toast-container');
-        this.$body = this.$container.parent();
+        this.clear();
     }
 
     append(config) {

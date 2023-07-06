@@ -172,10 +172,10 @@
         "path": "/common/footerlayer-board-config.js",
         "require": [
             "layui",
-            "Mixly.FooterLayer",
             "Mixly.Env",
             "Mixly.XML",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.FooterLayer"
         ],
         "provide": [
             "Mixly.FooterLayerBoardConfig"
@@ -189,7 +189,6 @@
             "Mixly.Title",
             "Mixly.XML",
             "Mixly.Editor",
-            "Mixly.Msg",
             "Mixly.Env",
             "Mixly.FooterLayer"
         ],

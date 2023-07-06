@@ -11,7 +11,7 @@ const {
     FooterLayer,
     Env,
     XML,
-    Msg
+    Msg,
 } = Mixly;
 
 const { dropdown } = layui;
@@ -152,7 +152,8 @@ class FooterLayerBoardConfig extends FooterLayer {
                 for (let i = 0; $lis[i]; i++) {
                     const $div = $($lis[i]).children('div');
                     if ($div.text() === $p.text()) {
-                        $($lis[i]).css('background-color', '#5FB878');
+                        let $li = $($lis[i]);
+                        $li.addClass('selected');
                         $div.css('color', '#fff');
                     }
                 }

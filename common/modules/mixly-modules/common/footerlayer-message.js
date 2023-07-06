@@ -23,21 +23,7 @@ class FooterLayerMessage extends FooterLayer {
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
-                if (this.$container.length) {
-                    this.$body.scrollTop(this.$container.parent().prop('scrollHeight'));
-                    return;
-                }
-                const { MENU_TEMPLATE } = FooterLayerMessage;
-                this.setContent(XML.render(MENU_TEMPLATE, {
-                    noMessage: Msg.Lang['无消息']
-                }));
-                this.$container = this.$content.find('.toast-container');
-                this.$body = this.$container.parent();
-                this.clear();
-                for (let config of this.messageQuery) {
-                    this.add_(config);
-                }
-                this.messageQuery = [];
+                this.$body.scrollTop(this.$container.parent().prop('scrollHeight'));
             },
             onShown: (instance) => {
                 $(instance.popper).find('.footer-layer-clear')
@@ -61,9 +47,14 @@ class FooterLayerMessage extends FooterLayer {
             style: 'primary',
             src: '../../../common/media/mixly.png',
             name: '',
-            onMount: (obj) => {},
+            onCreate: (obj) => {},
             onDestroy: () => {}
         };
+        this.$container = this.$content.find('.toast-container');
+        const { MENU_TEMPLATE } = FooterLayerMessage;
+        this.updateContent(XML.render(MENU_TEMPLATE, {
+            noMessage: Msg.Lang['无消息']
+        }));
         this.messageQuery = [];
         this.$content.addClass('footer-layer-message');
         this.$container = this.$content.find('.toast-container');
@@ -107,8 +98,8 @@ class FooterLayerMessage extends FooterLayer {
         this.$container.append($template);
         this.scrollToBottom();
         this.setProps({});
-        if (typeof config.onMount === 'function') {
-            config.onMount($template);
+        if (typeof config.onCreate === 'function') {
+            config.onCreate($template);
         }
         if (typeof config.onDestroy === 'function') {
             $template.find('.btn-close[data-bs-dismiss="toast"]').off().click(() => {

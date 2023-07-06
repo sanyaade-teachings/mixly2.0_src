@@ -38,27 +38,21 @@ class FooterLayer {
         this.domId = domId;
         this.layer = null;
         this.createLayer();
-        this.$content = $(this.layer.popper).find('.tippy-content');
         this.addSharedMethod();
-        this.createBtnsClickEvent();
+        this.setContent(XML.render(FooterLayer.TEMPLATE, {
+            content: '',
+            btns: this.btns,
+            close: Msg.Lang['关闭窗口']
+        }));
+        this.$content = $(this.layer.popper).find('.tippy-content');
+        this.$body = this.$content.find('.footer-layer-body');
         this.addContainerOnclickEvent();
+        this.createBtnsClickEvent();
+        this.addBtnsClickEvent();
     }
 
     createLayer() {
-        const { onShown, onAfterUpdate } = this.config;
-        this.layer = tippy(`#${this.domId}`, { ...this.config })[0];
-        this.layer.props.onShown = (instance) => {
-            if (typeof onShown === 'function') {
-                onShown(instance);
-            }
-            this.addBtnsClickEvent();
-        }
-        this.layer.props.onAfterUpdate = (instance) => {
-            this.layer.props.onShown(instance);
-            if (typeof onAfterUpdate === 'function') {
-                onAfterUpdate(instance);
-            }
-        }
+        this.layer = tippy(`#${this.domId}`, this.config)[0];
     }
 
     createBtnsClickEvent() {
@@ -84,13 +78,12 @@ class FooterLayer {
         }
     }
 
-    setContent(content) {
-        content = XML.render(FooterLayer.TEMPLATE, {
-            content,
-            btns: this.btns,
-            close: Msg.Lang['关闭窗口']
-        });
-        this.layer.setContent(content);
+    updateContent(content) {
+        if (this.$body.length) {
+            this.$body.html(content);
+            return;
+        }
+        this.setContent(content);
     }
 
     addBtnOnclickEvent() {
@@ -101,7 +94,7 @@ class FooterLayer {
     }
 
     addSharedMethod() {
-        let sharedMethod = ['hide', 'show', 'destroy', 'setProps'];
+        let sharedMethod = ['hide', 'show', 'destroy', 'setProps', 'setContent'];
         for (let type of sharedMethod) {
             this[type] = this.layer[type];
         }

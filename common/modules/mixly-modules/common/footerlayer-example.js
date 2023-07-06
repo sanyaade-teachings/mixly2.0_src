@@ -27,19 +27,20 @@ class FooterLayerExample extends FooterLayer {
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
-                this.setContent(FooterLayerExample.MENU_TEMPLATE);
-                this.render();
+                this.examplesTree.reload([]);
             }
         });
         this.$content.addClass('footer-layer-example');
+        this.updateContent(FooterLayerExample.MENU_TEMPLATE);
+        this.$treeBody = this.$body.children('.example-tree-body');
         this.DEPTH = 5;
         this.containerId = domId;
+        this.render();
     }
 
     render() {
-        this.$body = this.$content.find('.example-tree-body');
         this.examplesTree = tree.render({
-            elem: this.$body[0],
+            elem: this.$treeBody[0],
             data: this.getRoot(),
             accordion: true,
             anim: false,

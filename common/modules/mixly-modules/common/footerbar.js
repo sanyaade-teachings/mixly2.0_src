@@ -21,7 +21,6 @@ const {
 } = Mixly;
 
 FooterBar.init = () => {
-    let template = goog.get(Env.templatePath + '/footer-layer.html');
     let messageLayer = new FooterLayerMessage('mixly-message');
     FooterBar.messageLayer = messageLayer;
 }

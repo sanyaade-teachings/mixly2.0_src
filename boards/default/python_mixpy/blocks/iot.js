@@ -349,7 +349,7 @@ Blockly.Blocks["IOT_MIXIO_UNSUBSCRIBE"] = {
         this.appendDummyInput()
             .appendField("MixIO")
         this.appendValueInput('TOPIC')
-            .appendField(MSG.stop+Blockly.Msg.MIXLY_EMQX_SUBSCRIBE)
+            .appendField(Blockly.Msg.MSG.stop + Blockly.Msg.MIXLY_EMQX_SUBSCRIBE)
             .appendField(Blockly.Msg.MIXLY_EMQX_PUBLISH_TOPIC);
         this.setInputsInline(true);
         this.setPreviousStatement(true);

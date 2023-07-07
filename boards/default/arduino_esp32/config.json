@@ -1,0 +1,714 @@
+{
+    "board": {
+        "ESP32 Dev Module": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:esp32",
+            "config": [
+                {
+                    "label": "PSRAM",
+                    "key": "PSRAM",
+                    "options": [
+                        {
+                            "key": "disabled",
+                            "label": "Disabled"
+                        }, {
+                            "key": "enabled",
+                            "label": "Enabled"
+                        }
+                    ]
+                }, {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)"
+                        }, {
+                            "key": "defaultffat",
+                            "label": "Default 4MB with ffat (1.2MB APP/1.5MB FATFS)"
+                        }, {
+                            "key": "default_8MB",
+                            "label": "8M Flash (3MB APP/1.5MB FAT)"
+                        }, {
+                            "key": "minimal",
+                            "label": "Minimal (1.3MB APP/700KB SPIFFS)"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (2MB APP/2MB SPIFFS)"
+                        }, {
+                            "key": "noota_3g",
+                            "label": "No OTA (1MB APP/3MB SPIFFS)"
+                        }, {
+                            "key": "noota_ffat",
+                            "label": "No OTA (2MB APP/2MB FATFS)"
+                        }, {
+                            "key": "noota_3gffat",
+                            "label": "No OTA (1MB APP/3MB FATFS)"
+                        }, {
+                            "key": "huge_app",
+                            "label": "Huge APP (3MB No OTA/1MB SPIFFS)"
+                        }, {
+                            "key": "min_spiffs",
+                            "label": "Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)"
+                        }, {
+                            "key": "fatflash",
+                            "label": "16M Flash (2MB APP/12.5MB FAT)"
+                        }, {
+                            "key": "app3M_fat9M_16MB",
+                            "label": "16M Flash (3MB APP/9MB FATFS)"
+                        }, {
+                            "key": "rainmaker",
+                            "label": "RainMaker"
+                        }
+                    ]
+                }, {
+                    "label": "CPU Frequency",
+                    "key": "CPUFreq",
+                    "options": [
+                        {
+                            "key": "240",
+                            "label": "240MHz (WiFi/BT)"
+                        }, {
+                            "key": "160",
+                            "label": "160MHz (WiFi/BT)"
+                        }, {
+                            "key": "80",
+                            "label": "80MHz (WiFi/BT)"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz (40MHz XTAL)"
+                        }, {
+                            "key": "26",
+                            "label": "26MHz (26MHz XTAL)"
+                        }, {
+                            "key": "20",
+                            "label": "20MHz (40MHz XTAL)"
+                        }, {
+                            "key": "13",
+                            "label": "13MHz (26MHz XTAL)"
+                        }, {
+                            "key": "10",
+                            "label": "10MHz (40MHz XTAL)"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Mode",
+                    "key": "FlashMode",
+                    "options": [
+                        {
+                            "key": "qio",
+                            "label": "QIO"
+                        }, {
+                            "key": "dio",
+                            "label": "DIO"
+                        }, {
+                            "key": "qout",
+                            "label": "QOUT"
+                        }, {
+                            "key": "dout",
+                            "label": "DOUT"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Frequency",
+                    "key": "FlashFreq",
+                    "options": [
+                        {
+                            "key": "80",
+                            "label": "80MHz"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Size",
+                    "key": "FlashSize",
+                    "options": [
+                        {
+                            "key": "4M",
+                            "label": "4MB (32Mb)"
+                        }, {
+                            "key": "8M",
+                            "label": "8MB (64Mb)"
+                        }, {
+                            "key": "2M",
+                            "label": "2MB (16Mb)"
+                        }, {
+                            "key": "16M",
+                            "label": "16MB (128Mb)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }, {
+                    "label": "Arduino Runs On",
+                    "key": "LoopCore",
+                    "options": [
+                        {
+                            "key": "1",
+                            "label": "Core 1"
+                        }, {
+                            "key": "0",
+                            "label": "Core 0"
+                        }
+                    ]
+                }, {
+                    "label": "Events Run On",
+                    "key": "EventsCore",
+                    "options": [
+                        {
+                            "key": "1",
+                            "label": "Core 1"
+                        }, {
+                            "key": "0",
+                            "label": "Core 0"
+                        }
+                    ]
+                }
+            ]
+        },
+        "ESP32 Pico Kit": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:pico32",
+            "config": [
+                {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (Large APP)"
+                        }, {
+                            "key": "min_spiffs",
+                            "label": "Minimal SPIFFS (Large APPS with OTA)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Node32s": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:node32s",
+            "config": [
+                {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (Large APP)"
+                        }, {
+                            "key": "min_spiffs",
+                            "label": "Minimal SPIFFS (Large APPS with OTA)"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Frequency",
+                    "key": "FlashFreq",
+                    "options": [
+                        {
+                            "key": "80",
+                            "label": "80MHz"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        },
+        "NodeMCU-32S": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:nodemcu-32s",
+            "config": [
+                {
+                    "label": "Flash Frequency",
+                    "key": "FlashFreq",
+                    "options": [
+                        {
+                            "key": "80",
+                            "label": "80MHz"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        },
+        "M5Stick-C": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:m5stick-c",
+            "config": [
+                {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (Large APP)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "1500000",
+                            "label": "1500000"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        "M5Stack-CORE": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:m5stack-core2",
+            "config": [
+                {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (Large APP)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "1500000",
+                            "label": "1500000"
+                        }
+                    ]
+                }
+            ]
+        },                
+        "M5Stack-FIRE": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:m5stack-fire",
+            "config": [
+                {
+                    "label": "PSRAM",
+                    "key": "PSRAM",
+                    "options": [
+                        {
+                            "key": "disabled",
+                            "label": "Disabled"
+                        }, {
+                            "key": "enabled",
+                            "label": "Enabled"
+                        }
+                    ]
+                }, {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "PartitionScheme": [
+                        {
+                            "key": "default",
+                            "label": "Default (2 x 6.5 MB app, 3.6 MB SPIFFS)"
+                        }, {
+                            "key": "large_spiffs",
+                            "label": "Large SPIFFS (7 MB)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        },
+        "BPI-BIT": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:bpi-bit",
+            "config": [
+                {
+                    "label": "Flash Frequency",
+                    "key": "FlashFreq",
+                    "options": [
+                        {
+                            "key": "80",
+                            "label": "80MHz"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        },
+        "AI Thinker ESP32-CAM": {
+            "xmlPath": "./xml/esp32.xml",
+            "key": "esp32:esp32:esp32cam",
+            "config": [
+                {
+                    "label": "CPU Frequency",
+                    "key": "CPUFreq",
+                    "options": [
+                        {
+                            "key": "240",
+                            "label": "240MHz (WiFi/BT)"
+                        }, {
+                            "key": "160",
+                            "label": "160MHz (WiFi/BT)"
+                        }, {
+                            "key": "80",
+                            "label": "80MHz (WiFi/BT)"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz (40MHz XTAL)"
+                        }, {
+                            "key": "26",
+                            "label": "26MHz (26MHz XTAL)"
+                        }, {
+                            "key": "20",
+                            "label": "20MHz (40MHz XTAL)"
+                        }, {
+                            "key": "13",
+                            "label": "13MHz (26MHz XTAL)"
+                        }, {
+                            "key": "10",
+                            "label": "10MHz (40MHz XTAL)"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Mode",
+                    "key": "FlashMode",
+                    "options": [
+                        {
+                            "key": "qio",
+                            "label": "QIO"
+                        }, {
+                            "key": "dio",
+                            "label": "DIO"
+                        }, {
+                            "key": "qout",
+                            "label": "QOUT"
+                        }, {
+                            "key": "dout",
+                            "label": "DOUT"
+                        }
+                    ]
+                }, {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Regular 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)"
+                        }, {
+                            "key": "huge_app",
+                            "label": "Huge APP (3MB No OTA/1MB SPIFFS)"
+                        }, {
+                            "key": "min_spiffs",
+                            "label": "Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)"
+                        }, {
+                            "key": "defaultffat",
+                            "label": "Regular 4MB with ffat (1.2MB APP/1.5MB FATFS)"
+                        }, {
+                            "key": "minimal",
+                            "label": "Minimal (1.3MB APP/700KB SPIFFS)"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (2MB APP/2MB SPIFFS)"
+                        }, {
+                            "key": "noota_3g",
+                            "label": "No OTA (1MB APP/3MB SPIFFS)"
+                        }, {
+                            "key": "noota_ffat",
+                            "label": "No OTA (2MB APP/2MB FATFS)"
+                        }, {
+                            "key": "noota_3gffat",
+                            "label": "No OTA (1MB APP/3MB FATFS)"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Frequency",
+                    "key": "FlashFreq",
+                    "options": [
+                        {
+                            "key": "80",
+                            "label": "80MHz"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }
+                    ]
+                }
+            ]
+        },
+        "mPython": {
+            "xmlPath": "./xml/mpython.xml",
+            "key": "esp32:esp32:mPython",
+            "config": [
+                {
+                    "label": "PSRAM",
+                    "key": "PSRAM",
+                    "options": [
+                        {
+                            "key": "disabled",
+                            "label": "Disabled"
+                        }, {
+                            "key": "enabled",
+                            "label": "Enabled"
+                        }
+                    ]
+                }, {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)"
+                        }, {
+                            "key": "huge_app",
+                            "label": "Huge APP (3MB No OTA/1MB SPIFFS)"
+                        }, {
+                            "key": "defaultffat",
+                            "label": "Default 4MB with ffat (1.2MB APP/1.5MB FATFS)"
+                        }, {
+                            "key": "minimal",
+                            "label": "Minimal (1.3MB APP/700KB SPIFFS)"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (2MB APP/2MB SPIFFS)"
+                        }, {
+                            "key": "noota_3g",
+                            "label": "No OTA (1MB APP/3MB SPIFFS)"
+                        }, {
+                            "key": "noota_ffat",
+                            "label": "No OTA (2MB APP/2MB FATFS)"
+                        }, {
+                            "key": "noota_3gffat",
+                            "label": "No OTA (1MB APP/3MB FATFS)"
+                        }, {
+                            "key": "min_spiffs",
+                            "label": "Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)"
+                        }, {
+                            "key": "fatflash",
+                            "label": "16M Flash (2MB APP/12.5MB FAT)"
+                        }
+                    ]
+                }, {
+                    "label": "CPU Frequency",
+                    "key": "CPUFreq",
+                    "options": [
+                        {
+                            "key": "240",
+                            "label": "240MHz (WiFi/BT)"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Mode",
+                    "key": "FlashMode",
+                    "options": [
+                        {
+                            "key": "qio",
+                            "label": "QIO"
+                        }, {
+                            "key": "dio",
+                            "label": "DIO"
+                        }, {
+                            "key": "qout",
+                            "label": "QOUT"
+                        }, {
+                            "key": "dout",
+                            "label": "DOUT"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Frequency",
+                    "key": "FlashFreq",
+                    "options": [
+                        {
+                            "key": "80",
+                            "label": "80MHz"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Size",
+                    "key": "FlashSize",
+                    "options": [
+                        {
+                            "key": "8M",
+                            "label": "8MB (64Mb)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "language": "C/C++",
+    "burn": "None",
+    "upload": {
+        "portSelect": "all"
+    },
+    "nav": {
+        "compile": true,
+        "upload": true,
+        "save": {
+            "img": true,
+            "ino": true,
+            "bin": true
+        },
+        "setting": {
+            "thirdPartyLibrary": true
+        }
+    },
+    "serial": {
+        "ctrlCBtn": false,
+        "ctrlDBtn": false,
+        "baudRates": 9600,
+        "yMax": 100,
+        "yMin": 0,
+        "pointNum": 100
+    },
+    "lib": {
+        "mixly": {
+            "url": [
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/arduino_esp32/libs.json"
+            ]
+        }
+    },
+    "web": {
+        "com": "serial",
+        "upload": {
+            "reset": [
+                {
+                    "dtr": false,
+                    "rts": false
+                }, {
+                    "sleep": 500
+                }, {
+                    "dtr": false,
+                    "rts": true
+                }, {
+                    "sleep": 500
+                }, {
+                    "dtr": false,
+                    "rts": false
+                }, {
+                    "sleep": 500
+                }
+            ]
+        }
+    }
+}

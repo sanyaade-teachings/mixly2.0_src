@@ -1,0 +1,130 @@
+{
+    "board": {
+        "Mixbot-s1": "micropython:esp32:mixbot_s1",
+        "Mixbot-s2": "micropython:esp32:mixbot_s2",
+        "RoboMaster E1": "micropython:esp32:rm_e1"
+    },
+    "language": "MicroPython",
+    "burn": {
+        "type": "command",
+        "portSelect": "all",        
+        "micropython:esp32:generic": {
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixGo-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+        },
+        "micropython:esp32:rm_e1": {
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
+        },
+        "micropython:esp32:mixbot_s1": {
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
+        },
+        "micropython:esp32:mixbot_s2": {
+            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
+        },
+        "reset": [
+            {
+                "dtr": false,
+                "rts": false
+            }, {
+                "sleep": 500
+            }, {
+                "dtr": false,
+                "rts": true
+            }, {
+                "sleep": 500
+            }, {
+                "dtr": false,
+                "rts": false
+            }, {
+                "sleep": 500
+            }
+        ]
+    },
+    "upload": {
+        "type": "command",
+        "portSelect": "all",
+        "libPath": [
+            "{indexPath}/build/lib",
+            "{indexPath}/../micropython_common/build/lib"
+        ],
+        "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
+        "filePath": "{indexPath}/build/upload/main.py",
+        "copyLib": true,
+        "reset": []
+    },
+    "nav": {
+        "burn": true,
+        "upload": true,
+        "save": {
+            "img": true,
+            "py": true
+        },
+        "setting": {
+            "thirdPartyLibrary": true
+        }
+    },
+    "serial": {
+        "ctrlCBtn": true,
+        "ctrlDBtn": true,
+        "baudRates": 115200,
+        "yMax": 100,
+        "yMin": 0,
+        "pointNum": 100,
+        "rts": false,
+        "dtr": false
+    },
+    "lib": {
+        "mixly": {
+            "url": [
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/micropython_esp32/libs.json"
+            ]
+        }
+    },
+    "pythonToBlockly": false,
+    "web": {
+        "com": "serial",
+        "burn": {
+            "erase": true,            
+            "micropython:esp32:generic": {
+                "binFile": [
+                    {
+                        "offset": "0x1000",
+                        "path": "./build/MixGo-0x1000-V1.19.1-lib.bin"
+                    },
+                    {
+                        "offset": "0X3A0000",
+                        "path": "../micropython_common/build/HZK12.bin"
+                    }
+                ]
+            },
+            "micropython:esp32:rm_e1": {
+                "binFile": [
+                    {
+                        "offset": "0x1000",
+                        "path": "./build/RM_E1-0x1000-V1.19.1-Slib.bin"
+                    }
+                ]
+            },
+            "micropython:esp32:mixbot_s1": {
+                "binFile": [
+                    {
+                        "offset": "0x1000",
+                        "path": "./build/MixBot-0x1000-V1.19.1-lib.bin"
+                    }
+                ]
+            },
+            "micropython:esp32:mixbot_s2": {
+                "binFile": [
+                    {
+                        "offset": "0x1000",
+                        "path": "./build/MixBot-0x1000-V1.19.1-lib.bin"
+                    }
+                ]
+            }
+       
+        },
+        
+        "upload": {
+            "reset": []
+        }
+    }
+}

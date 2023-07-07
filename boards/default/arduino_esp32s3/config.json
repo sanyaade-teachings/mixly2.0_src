@@ -1,0 +1,283 @@
+{
+    "board": {
+        "ESP32S3 Dev Module": {
+            "key": "esp32:esp32:esp32s3",
+            "config": [
+                {
+                    "label": "PSRAM",
+                    "key": "PSRAM",
+                    "options": [
+                        {
+                            "key": "disabled",
+                            "label": "Disabled"
+                        }, {
+                            "key": "enabled",
+                            "label": "QSPI PSRAM"
+                        }, {
+                            "key": "opi",
+                            "label": "OPI PSRAM"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Mode",
+                    "key": "FlashMode",
+                    "options": [
+                        {
+                            "key": "qio",
+                            "label": "QIO 80MHz"
+                        }, {
+                            "key": "qio120",
+                            "label": "QIO 120MHz"
+                        }, {
+                            "key": "dio",
+                            "label": "DIO 80MHz"
+                        }, {
+                            "key": "opi",
+                            "label": "OPI 80MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Flash Size",
+                    "key": "FlashSize",
+                    "options": [
+                        {
+                            "key": "4M",
+                            "label": "4MB (32Mb)"
+                        }, {
+                            "key": "8M",
+                            "label": "8MB (64Mb)"
+                        }, {
+                            "key": "16M",
+                            "label": "16MB (128Mb)"
+                        }, {
+                            "key": "32M",
+                            "label": "32MB (256Mb)"
+                        }
+                    ]
+                }, {
+                    "label": "Arduino Runs On",
+                    "key": "LoopCore",
+                    "options": [
+                        {
+                            "key": "1",
+                            "label": "Core 1"
+                        }, {
+                            "key": "0",
+                            "label": "Core 0"
+                        }
+                    ]
+                }, {
+                    "label": "Events Run On",
+                    "key": "EventsCore",
+                    "options": [
+                        {
+                            "key": "1",
+                            "label": "Core 1"
+                        }, {
+                            "key": "0",
+                            "label": "Core 0"
+                        }
+                    ]
+                }, {
+                    "label": "USB Mode",
+                    "key": "USBMode",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "USB-OTG (TinyUSB)"
+                        }, {
+                            "key": "hwcdc",
+                            "label": "Hardware CDC and JTAG"
+                        }
+                    ]
+                }, {
+                    "label": "USB CDC On Boot",
+                    "key": "CDCOnBoot",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Disabled"
+                        }, {
+                            "key": "cdc",
+                            "label": "Enabled"
+                        }
+                    ]
+                }, {
+                    "label": "USB Firmware MSC On Boot",
+                    "key": "MSCOnBoot",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Disabled"
+                        }, {
+                            "key": "msc",
+                            "label": "Enabled (Requires USB-OTG Mode)"
+                        }
+                    ]
+                }, {
+                    "label": "USB DFU On Boot",
+                    "key": "DFUOnBoot",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Disabled"
+                        }, {
+                            "key": "dfu",
+                            "label": "Enabled (Requires USB-OTG Mode)"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Mode",
+                    "key": "UploadMode",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "UART0 / Hardware CDC"
+                        }, {
+                            "key": "cdc",
+                            "label": "USB-OTG CDC (TinyUSB)"
+                        }
+                    ]
+                }, {
+                    "label": "Partition Scheme",
+                    "key": "PartitionScheme",
+                    "options": [
+                        {
+                            "key": "default",
+                            "label": "Default 4MB with spiffs (1.2MB APP/1.5MB SPIFFS)"
+                        }, {
+                            "key": "defaultffat",
+                            "label": "Default 4MB with ffat (1.2MB APP/1.5MB FATFS)"
+                        }, {
+                            "key": "default_8MB",
+                            "label": "8M Flash (3MB APP/1.5MB FAT)"
+                        }, {
+                            "key": "minimal",
+                            "label": "Minimal (1.3MB APP/700KB SPIFFS)"
+                        }, {
+                            "key": "no_ota",
+                            "label": "No OTA (2MB APP/2MB SPIFFS)"
+                        }, {
+                            "key": "noota_3g",
+                            "label": "No OTA (1MB APP/3MB SPIFFS)"
+                        }, {
+                            "key": "noota_3gffat",
+                            "label": "No OTA (2MB APP/2MB FATFS)"
+                        }, {
+                            "key": "huge_app",
+                            "label": "Huge APP (3MB No OTA/1MB SPIFFS)"
+                        }, {
+                            "key": "min_spiffs",
+                            "label": "Minimal SPIFFS (1.9MB APP with OTA/190KB SPIFFS)"
+                        }, {
+                            "key": "fatflash",
+                            "label": "16M Flash (2MB APP/12.5MB FAT)"
+                        }, {
+                            "key": "app3M_fat9M_16MB",
+                            "label": "16M Flash (3MB APP/9MB FATFS)"
+                        }, {
+                            "key": "rainmaker",
+                            "label": "RainMaker"
+                        }
+                    ]
+                }, {
+                    "label": "CPU Frequency",
+                    "key": "CPUFreq",
+                    "options": [
+                        {
+                            "key": "240",
+                            "label": "240MHz (WiFi)"
+                        }, {
+                            "key": "160",
+                            "label": "160MHz (WiFi)"
+                        }, {
+                            "key": "80",
+                            "label": "80MHz (WiFi)"
+                        }, {
+                            "key": "40",
+                            "label": "40MHz"
+                        }, {
+                            "key": "20",
+                            "label": "20MHz"
+                        }, {
+                            "key": "10",
+                            "label": "10MHz"
+                        }
+                    ]
+                }, {
+                    "label": "Upload Speed",
+                    "key": "UploadSpeed",
+                    "options": [
+                        {
+                            "key": "921600",
+                            "label": "921600"
+                        }, {
+                            "key": "115200",
+                            "label": "115200"
+                        }, {
+                            "key": "230400",
+                            "label": "230400"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "language": "C/C++",
+    "burn": "None",
+    "upload": {
+        "portSelect": "all"
+    },
+    "nav": {
+        "compile": true,
+        "upload": true,
+        "save": {
+            "img": true,
+            "ino": true,
+            "bin": true
+        },
+        "setting": {
+            "thirdPartyLibrary": true
+        }
+    },
+    "serial": {
+        "ctrlCBtn": false,
+        "ctrlDBtn": false,
+        "baudRates": 9600,
+        "yMax": 100,
+        "yMin": 0,
+        "pointNum": 100,
+        "rts": true,
+        "dtr": true
+    },
+    "lib": {
+        "mixly": {
+            "url": [
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/arduino_esp32s3/libs.json"
+            ]
+        }
+    },
+    "web": {
+        "com": "serial",
+        "upload": {
+            "reset": [
+                {
+                    "dtr": false,
+                    "rts": false
+                }, {
+                    "sleep": 500
+                }, {
+                    "dtr": false,
+                    "rts": true
+                }, {
+                    "sleep": 500
+                }, {
+                    "dtr": false,
+                    "rts": false
+                }, {
+                    "sleep": 500
+                }
+            ]
+        }
+    }
+}

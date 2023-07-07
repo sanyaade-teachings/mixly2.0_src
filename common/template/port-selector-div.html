@@ -1,0 +1,22 @@
+<div
+    id="portSelector-div"
+    class="layui-form"
+    lay-filter="ports-type-filter"
+    style="
+        width: 100px;
+        margin-left: 5px;
+        margin-right: 3px;
+    "
+>
+    <div
+        id="portSelector"
+        class="layui-input-inline scrollbar1"
+        style="
+            position: absolute;
+            width: 100px;
+            top: 3.5px;
+        "
+    >
+        <select id="ports-type" placeholder="{{d.selectPort}}" no-options="{{d.noPort}}" spellcheck="false" lay-filter="ports-type"></select>
+    </div>
+</div>

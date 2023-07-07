@@ -1,0 +1,85 @@
+.select2-container {
+    padding: 0;
+}
+
+.select2-container--open {
+    z-index: 20000000;
+}
+
+/* 设置滚动条宽高 */
+.select2-container--open ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* 设置滚动条滑槽 */
+.select2-container--open ::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0px;
+}
+
+/* 设置滚动条滑块 */
+.light .select2-container--open ::-webkit-scrollbar-thumb {
+    background-color: #C3C1C1;
+    border-radius: 4px;
+}
+
+.light .select2-container--open ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.light .select2-container--open ::-webkit-scrollbar-thumb:active {
+    background-color: #989998;
+}
+
+.dark .select2-container--open ::-webkit-scrollbar-thumb {
+    background-color: #989998;
+    border-radius: 4px;
+}
+
+.dark .select2-container--open ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.dark .select2-container--open ::-webkit-scrollbar-thumb:active {
+    background-color: #C3C1C1;
+}
+
+.light .select2-container--default .select2-selection--single {
+    border: 1px solid #ece5e5;
+}
+
+.light .select2-dropdown {
+    border: 1px solid #ece5e5;
+}
+
+.dark .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+}
+
+.dark .select2-container--default .select2-selection--single {
+    background-color: #2a2a2b;
+    border: 1px solid #484646;
+}
+
+.dark .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #fff transparent transparent transparent;
+}
+
+.dark .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #fff transparent;
+}
+
+.dark .select2-dropdown {
+    background-color: #2a2a2b;
+    border: 1px solid #484646;
+}
+
+.dark .select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #3a3a3a;
+}
+
+.dark .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #5897fb;
+    color: white;
+}

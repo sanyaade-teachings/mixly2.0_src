@@ -1,173 +1,190 @@
 [
    {
-        "boardImg": "./board/micropython_esp32s2/media/mixgoce_compressed.png",
+        "boardImg": "./boards/default/micropython_esp32s2/media/mixgoce_compressed.png",
         "boardType": "MixGo CE",
-        "boardIndex": "./board/micropython_esp32s2/index.html",
+        "boardIndex": "./boards/default/micropython_esp32s2/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/micropython_esp32c3/media/esp32c3_compressed.png",
+        "boardImg": "./boards/default/micropython_esp32c3/media/esp32c3_compressed.png",
         "boardType": "Python ESP32-C3",
-        "boardIndex": "./board/micropython_esp32c3/index.html",
+        "boardIndex": "./boards/default/micropython_esp32c3/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/micropython_esp32/media/esp32_compressed.png",
+        "boardImg": "./boards/default/micropython_esp32/media/esp32_compressed.png",
         "boardType": "Python ESP32",
-        "boardIndex": "./board/micropython_esp32/index.html",
+        "boardIndex": "./boards/default/micropython_esp32/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/micropython_robot/media/mixbot.png",
+        "boardImg": "./boards/default/micropython_robot/media/mixbot.png",
         "boardType": "Python Robot",
-        "boardIndex": "./board/micropython_robot/index.html",
+        "boardIndex": "./boards/default/micropython_robot/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/arduino_avr/media/uno_compressed.png",
+        "boardImg": "./boards/default/arduino_avr/media/uno_compressed.png",
         "boardType": "Arduino AVR",
-        "boardIndex": "./board/arduino_avr/index.html",
+        "boardIndex": "./boards/default/arduino_avr/index.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "C/C++"
     }, {
-        "boardImg": "./board/python_mixpy/media/py.png",
+        "boardImg": "./boards/default/python_mixpy/media/py.png",
         "boardType": "Python 3",
-        "boardIndex": "./board/python_mixpy/index_board_mixpy.html",
+        "boardIndex": "./boards/default/python_mixpy/index_board_mixpy.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": false,
             "webSocket": false
-        }
+        },
+        "language": "Python"
     }, {
-        "boardImg": "./board/python_skulpt/media/webpy.png",
+        "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 Lite",
-        "boardIndex": "./board/python_skulpt/index_skulpt_board_mixpy.html",
+        "boardIndex": "./boards/default/python_skulpt/index_skulpt_board_mixpy.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "Python"
     }, {
-        "boardImg": "./board/python_skulpt/media/webpy.png",
+        "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 MixToy",
-        "boardIndex": "./board/python_skulpt_mixtoy/index_skulpt_board_mixpy.html",
+        "boardIndex": "./boards/default/python_skulpt_mixtoy/index_skulpt_board_mixpy.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "Python"
     }, {
-        "boardImg": "./board/python_skulpt/media/webpy.png",
+        "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 Car",
-        "boardIndex": "./board/python_skulpt_car/index_skulpt_board_mixpy.html",
+        "boardIndex": "./boards/default/python_skulpt_car/index_skulpt_board_mixpy.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "Python"
     }, {
-        "boardImg": "./board/micropython_k210_mixgoai/media/mixgoai_compressed.png",
+        "boardImg": "./boards/default/micropython_k210_mixgoai/media/mixgoai_compressed.png",
         "boardType": "MixGo AI",
-        "boardIndex": "./board/micropython_k210_mixgoai/index.html",
+        "boardIndex": "./boards/default/micropython_k210_mixgoai/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/micropython_nrf51822_mithoncc/media/mithon_compressed.png",
+        "boardImg": "./boards/default/micropython_nrf51822_mithoncc/media/mithon_compressed.png",
         "boardType": "Mithon CC",
-        "boardIndex": "./board/micropython_nrf51822_mithoncc/index.html",
+        "boardIndex": "./boards/default/micropython_nrf51822_mithoncc/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/micropython_nrf51822_microbit/media/microbit_compressed.png",
+        "boardImg": "./boards/default/micropython_nrf51822_microbit/media/microbit_compressed.png",
         "boardType": "BBC micro:bit",
-        "boardIndex": "./board/micropython_nrf51822_microbit/index.html",
+        "boardIndex": "./boards/default/micropython_nrf51822_microbit/index.html",
         "env": {
             "electron": true,
             "web": true,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "MicroPython"
     }, {
-        "boardImg": "./board/arduino_esp8266/media/esp8266_compressed.png",
+        "boardImg": "./boards/default/arduino_esp8266/media/esp8266_compressed.png",
         "boardType": "Arduino ESP8266",
-        "boardIndex": "./board/arduino_esp8266/index_board_Arduino_ESP8266.html",
+        "boardIndex": "./boards/default/arduino_esp8266/index_board_Arduino_ESP8266.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "C/C++"
     }, {
-        "boardImg": "./board/arduino_esp32/media/esp32_compressed.png",
+        "boardImg": "./boards/default/arduino_esp32/media/esp32_compressed.png",
         "boardType": "Arduino ESP32",
-        "boardIndex": "./board/arduino_esp32/index_board_Arduino_ESP32.html",
+        "boardIndex": "./boards/default/arduino_esp32/index_board_Arduino_ESP32.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "C/C++"
     }, {
-        "boardImg": "./board/arduino_esp32s2/media/esp32s2_compressed.png",
+        "boardImg": "./boards/default/arduino_esp32s2/media/esp32s2_compressed.png",
         "boardType": "Arduino ESP32S2",
-        "boardIndex": "./board/arduino_esp32s2/index.html",
+        "boardIndex": "./boards/default/arduino_esp32s2/index.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "C/C++"
     }, {
-        "boardImg": "./board/arduino_esp32s3/media/esp32s3_compressed.png",
+        "boardImg": "./boards/default/arduino_esp32s3/media/esp32s3_compressed.png",
         "boardType": "Arduino ESP32S3",
-        "boardIndex": "./board/arduino_esp32s3/index.html",
+        "boardIndex": "./boards/default/arduino_esp32s3/index.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "C/C++"
     }, {
-        "boardImg": "./board/arduino_esp32c3/media/esp32c3_compressed.png",
+        "boardImg": "./boards/default/arduino_esp32c3/media/esp32c3_compressed.png",
         "boardType": "Arduino ESP32C3",
-        "boardIndex": "./board/arduino_esp32c3/index.html",
+        "boardIndex": "./boards/default/arduino_esp32c3/index.html",
         "env": {
             "electron": true,
             "web": false,
             "webCompiler": true,
             "webSocket": true
-        }
+        },
+        "language": "C/C++"
     }
 ]

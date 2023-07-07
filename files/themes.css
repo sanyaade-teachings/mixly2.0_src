@@ -74,11 +74,6 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
 }
 
 .dark .layui-layer-title {
-    background-color: #7c7171;
-    color: #fff;
-}
-
-.dark .layui-layer-title {
     border-bottom: 1px solid #5d5a5a;
 }
 
@@ -102,11 +97,6 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
     border-color: #4d4848;
 }
 
-.dark .layui-table tbody tr:hover, .dark .layui-table thead tr, .dark .layui-table-click, .dark .layui-table-header, .dark .layui-table-hover, .dark .layui-table-mend, .dark .layui-table-patch, .dark .layui-table-tool, .dark .layui-table-total, .dark .layui-table-total tr, .dark .layui-table[lay-even] tr:nth-child(even) {
-    background-color: #5b5959;
-    color: #fff;
-}
-
 .dark .layui-table {
     background-color: #726c6c;
     color: #fff;
@@ -124,10 +114,6 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
     width: 5px !important;
     height: 10px !important;
     border-radius: 0px 0px 5px 0px;
-}
-
-.dark .layui-layer-resize {
-    background-color: #807b7b;
 }
 
 .light .layui-layer-resize {
@@ -192,11 +178,11 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
 }
 
 .dark .layui-carousel-arrow {
-    background-color: #555;
+    background-color: #555 !important;
 }
 
 .dark .layui-carousel-arrow:hover, .dark .layui-carousel-ind ul:hover {
-    background-color: rgba(119,119,119,.35);
+    background-color: rgba(119,119,119,.35) !important;
 }
 
 .dark .service-single {
@@ -218,6 +204,26 @@ body[class="dark"] {
 
 .mixly-board:hover .mixly-board-del-btn, .mixly-board:hover .mixly-board-ignore-btn {
     display: block;
+}
+
+/*.mixly-board:hover .service-single label {
+    opacity: 1;
+}
+
+.mixly-board .service-single label {
+    opacity: 0;
+}
+
+.mixly-board:hover .service-single h2 {
+    margin-bottom: 10px;
+}*/
+
+.dark .mixly-board .service-single label {
+    color: #ccc;
+}
+
+.light .mixly-board .service-single label {
+    color: #888;
 }
 
 .mixly-board-del-btn, .mixly-board-ignore-btn {

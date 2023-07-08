@@ -32,3 +32,11 @@
     justify-content: center;
     align-items: center;
 }
+
+.light .self-adaption-btn {
+    background-color: #009688 !important;
+}
+
+.dark .self-adaption-btn {
+    background-color: var(--lay-color-normal) !important;
+}

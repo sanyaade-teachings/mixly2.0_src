@@ -1,38 +1,46 @@
-.progress-blue {
+.progress1 {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     border: none;
     height: 15px;
     border-radius: 2px;
-    color: rgb(33, 150, 243);
-    background-color: rgba(33, 150, 243, 0.12);
     font-size: 16px;
 }
 
-.progress-blue::-webkit-progress-bar {
+.light .progress1 {
+    color: rgb(0, 150, 136);
+    background-color: rgba(0, 150, 136, 0.12);
+}
+
+.dark .progress1 {
+    color: rgb(33, 150, 243);
+    background-color: rgba(33, 150, 243, 0.12);
+}
+
+.progress1::-webkit-progress-bar {
     background-color: transparent;
 }
 /* Determinate */
 
-.progress-blue::-webkit-progress-value {
+.progress1::-webkit-progress-value {
     background-color: currentColor;
     transition: all 0.2s;
 }
 
-.progress-blue::-moz-progress-bar {
+.progress1::-moz-progress-bar {
     background-color: currentColor;
     transition: all 0.2s;
 }
 
-.progress-blue::-ms-fill {
+.progress1::-ms-fill {
     border: none;
     background-color: currentColor;
     transition: all 0.2s;
 }
 /* Indeterminate */
 
-.progress-blue:indeterminate {
+.progress1:indeterminate {
     background-size: 200% 100%;
     background-image: linear-gradient(
         to right,
@@ -45,18 +53,18 @@
         currentColor 84%,
         transparent 84%
     );
-    animation: progress-blue 2s infinite linear;
+    animation: progress1 2s infinite linear;
 }
 
-.progress-blue:indeterminate::-moz-progress-bar {
+.progress1:indeterminate::-moz-progress-bar {
     background-color: transparent;
 }
 
-.progress-blue:indeterminate::-ms-fill {
+.progress1:indeterminate::-ms-fill {
     animation-name: none;
 }
 
-@keyframes progress-blue {
+@keyframes progress1 {
     0% {
         background-size: 200% 100%;
         background-position: left -31.25% top 0%;

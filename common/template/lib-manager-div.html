@@ -81,12 +81,13 @@
             background-color: #e9e9e9 !important;
         }
 
-        .light #libs-menu .layui-nav .layui-nav-item a {
-            color: #333;
-        }
-
         .light #libs-menu .layui-nav .layui-this a {
             color: #fff;
+            background-color: #009688;
+        }
+
+        .light #libs-menu .layui-nav .layui-nav-item a {
+            color: #333;
         }
 
         .light #libs-menu .layui-nav-tree .layui-nav-item:hover {
@@ -98,12 +99,13 @@
             background-color: #4e4d4f !important;
         }
 
-        .dark #libs-menu .layui-nav .layui-nav-item a {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
         .dark #libs-menu .layui-nav .layui-this a {
             color: #fff;
+            background-color: var(--lay-color-normal);
+        }
+
+        .dark #libs-menu .layui-nav .layui-nav-item a {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .dark #libs-menu .layui-nav-tree .layui-nav-item:hover {
@@ -173,10 +175,10 @@
                             {{d.codeLib}}
                         </li>
                         <div class="layui-btn-group" style="float: right;padding: 5px;">
-                            <button type="button" class="layui-btn layui-btn-sm" title="{{d.cloudImport}}" m-id="cloud-import">
+                            <button type="button" class="layui-btn layui-btn-sm self-adaption-btn" title="{{d.cloudImport}}" m-id="cloud-import">
                                 <i class="icon-download-cloud-1"></i>
                             </button>
-                            <button type="button" class="layui-btn layui-btn-sm" title="{{d.localImport}}" m-id="local-import">
+                            <button type="button" class="layui-btn layui-btn-sm self-adaption-btn" title="{{d.localImport}}" m-id="local-import">
                                 <i class="icon-download-2"></i>
                             </button>
                         </div>
@@ -233,10 +235,10 @@
                             {{d.codeLib}}
                         </li>
                         <div class="layui-btn-group" style="float: right;padding: 5px;">
-                            <button type="button" class="layui-btn layui-btn-sm" title="{{d.openFolder}}" m-id="open-folder">
+                            <button type="button" class="layui-btn layui-btn-sm self-adaption-btn" title="{{d.openFolder}}" m-id="open-folder">
                                 <i class="icon-folder-open-empty"></i>
                             </button>
-                            <button type="button" class="layui-btn layui-btn-sm" title="{{d.del}}" m-id="del">
+                            <button type="button" class="layui-btn layui-btn-sm self-adaption-btn" title="{{d.del}}" m-id="del">
                                 <i class="icon-trash"></i>
                             </button>
                         </div>

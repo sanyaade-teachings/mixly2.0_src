@@ -19,17 +19,21 @@
         line-height: 13px;
     }
 
+    .dark .board-config-menu, .dark .board-config-menu > ul {
+        background-color: #252526 !important;
+    }
+
     .board-config-menu > .layui-dropdown-menu {
         max-height: 150px;
         overflow-x: hidden;
         overflow-y: auto;
     }
 
-    .light .board-config-menu li.selected {
+    .light .board-config-menu li.selected, .light .board-config-menu li.selected:hover {
         background-color: #0bc1af;
     }
 
-    .dark .board-config-menu li.selected {
+    .dark .board-config-menu li.selected, .dark .board-config-menu li.selected:hover {
         background-color: #005994;
     }
 </style>

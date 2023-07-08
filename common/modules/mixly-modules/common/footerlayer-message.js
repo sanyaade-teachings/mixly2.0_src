@@ -42,7 +42,8 @@ class FooterLayerMessage extends FooterLayer {
             src: '../../../common/media/mixly.png',
             name: '',
             onCreate: (obj) => {},
-            onDestroy: () => {}
+            onDestroy: () => {},
+            btns: []
         };
         const { MENU_TEMPLATE } = FooterLayerMessage;
         this.updateContent(MENU_TEMPLATE);
@@ -78,15 +79,27 @@ class FooterLayerMessage extends FooterLayer {
         if (!FooterLayerMessage.STYLES.includes(config.style)) {
             config.style = FooterLayerMessage.STYLES[0];
         }
+        let btnsFunc = [];
+        config.btns = config.btns ?? [];
+        for (let i in config.btns) {
+            if (!(config.btns[i] instanceof Object)) {
+                continue;
+            }
+            btnsFunc.push(config.btns[i].onclick);
+            delete config.btns[i].onclick;
+            config.btns[i].mId = i;
+        }
         let template = this.genItemTemplate({
             type: config.type,
             style: config.style,
             src: config.src,
             name: config.name,
-            message: config.message
+            message: config.message,
+            btns: config.btns
         });
         let $template = $(template);
         this.$container.append($template);
+        this.createBtnsClickEvent_($template, btnsFunc);
         this.scrollToBottom();
         this.setProps({});
         if (typeof config.onCreate === 'function') {
@@ -101,6 +114,16 @@ class FooterLayerMessage extends FooterLayer {
                 config.onDestroy();
             });
         }
+    }
+
+    createBtnsClickEvent_(container, btnsFunc) {
+        container.find('.btns').children('button').off().click((event) => {
+            let $target = $(event.target);
+            let mId = parseInt($target.attr('m-id'));
+            if (typeof btnsFunc[mId] === 'function') {
+                btnsFunc[mId](event);
+            }
+        });
     }
 
     remove() {

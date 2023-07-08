@@ -111,14 +111,14 @@ class Drag {
                     _this.onfullMark = 'POSITIVE';
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动
                     switch (_this.onfullMark) {
-                        case 'NEGATIVE':
-                            if (typeof exitfull === 'function' && !exitfull('POSITIVE'))
-                                return;
-                            break;
-                        case 'POSITIVE':
-                            if (typeof exitfull === 'function' && !exitfull('NEGATIVE'))
-                                return;
-                            break;
+                    case 'NEGATIVE':
+                        if (typeof exitfull === 'function' && !exitfull('POSITIVE'))
+                            return;
+                        break;
+                    case 'POSITIVE':
+                        if (typeof exitfull === 'function' && !exitfull('NEGATIVE'))
+                            return;
+                        break;
                     }
                     _this.onfullMark = null;
                     _this.changeSize(iT);
@@ -184,23 +184,23 @@ class Drag {
         const { exitfull, onfull } = this.config;
         if (typeof exitfull === 'function') {
             switch(this.onfullMark) {
-                case 'NEGATIVE':
-                    exitfull('POSITIVE');
-                    break;
-                case 'POSITIVE':
-                    exitfull('NEGATIVE');
-                    break;
+            case 'NEGATIVE':
+                exitfull('POSITIVE');
+                break;
+            case 'POSITIVE':
+                exitfull('NEGATIVE');
+                break;
             }
         }
         switch(direction) {
-            case 'NEGATIVE':
-                this.onfullMark = 'NEGATIVE';
-                this.changeSize('0%');
-                break;
-            case 'POSITIVE':
-            default:
-                this.onfullMark = 'POSITIVE';
-                this.changeSize('100%');
+        case 'NEGATIVE':
+            this.onfullMark = 'NEGATIVE';
+            this.changeSize('0%');
+            break;
+        case 'POSITIVE':
+        default:
+            this.onfullMark = 'POSITIVE';
+            this.changeSize('100%');
         }
         onfull(direction);
     }
@@ -210,12 +210,12 @@ class Drag {
         const { exitfull } = this.config;
         if (typeof exitfull === 'function') {
             switch(this.onfullMark) {
-                case 'NEGATIVE':
-                    exitfull('POSITIVE');
-                    break;
-                case 'POSITIVE':
-                    exitfull('NEGATIVE');
-                    break;
+            case 'NEGATIVE':
+                exitfull('POSITIVE');
+                break;
+            case 'POSITIVE':
+                exitfull('NEGATIVE');
+                break;
             }
         }
         this.onfullMark = null;
@@ -226,12 +226,12 @@ class Drag {
         const { exitfull } = this.config;
         if (typeof exitfull === 'function') {
             switch(this.onfullMark) {
-                case 'NEGATIVE':
-                    exitfull('POSITIVE');
-                    break;
-                case 'POSITIVE':
-                    exitfull('NEGATIVE');
-                    break;
+            case 'NEGATIVE':
+                exitfull('POSITIVE');
+                break;
+            case 'POSITIVE':
+                exitfull('NEGATIVE');
+                break;
             }
         }
         this.onfullMark = null;

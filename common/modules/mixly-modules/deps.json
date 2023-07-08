@@ -490,7 +490,6 @@
             "Mixly.StatusBarSerial",
             "Mixly.StatusBarTerminal",
             "Mixly.Drag",
-            "Mixly.Config",
             "Mixly.XML",
             "Mixly.MArray",
             "Mixly.Env"

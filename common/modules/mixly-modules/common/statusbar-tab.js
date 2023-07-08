@@ -5,7 +5,6 @@ goog.require('tippy');
 goog.require('Mixly.StatusBarSerial');
 goog.require('Mixly.StatusBarTerminal');
 goog.require('Mixly.Drag');
-goog.require('Mixly.Config');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
@@ -16,13 +15,10 @@ const {
     StatusBarSerial,
     StatusBarTerminal,
     Drag,
-    Config,
     XML,
     MArray,
     Env
 } = Mixly;
-
-const { USER } = Config;
 
 class StatusBarTab {
     static statusBarTabs = {};
@@ -181,13 +177,9 @@ class StatusBarTab {
     }
 
     addCtrlBtn() {
-        const btnTemplate = XML.render(StatusBarTab.CTRL_BTN_TEMPLATE, {
-            id: `${this.id}-ctrl-btn`
-        });
-        this.$ctrlBtn = $(btnTemplate);
-        USER.theme === 'dark' && this.$ctrlBtn.addClass('layui-btn-normal');
+        this.$ctrlBtn = $(StatusBarTab.CTRL_BTN_TEMPLATE);
         $(`.layui-tab[lay-filter="${this.id}"] > .layui-tab-title`).append(this.$ctrlBtn);
-        this.$menu = tippy(`#${this.id}-ctrl-btn`, {
+        this.$menu = tippy(this.$ctrlBtn[0], {
             allowHTML: true,
             content: '',
             trigger: 'click',
@@ -200,15 +192,15 @@ class StatusBarTab {
                 options.empty = options.empty ?? '无选项';
                 const menuTemplate = XML.render(StatusBarTab.MENU_TEMPLATE, options);
                 instance.setContent(menuTemplate);
-                $('.tab-ace-port-add-btn').off().click((event) => {
+                $(instance.popper).find('li').off().click((event) => {
                     this.menuOptionOnclick(event);
-                    this.$menu[0].hide(100);
+                    this.$menu.hide(100);
                 });
             }
         });
 
         $(window).on('resize', () => {
-            this.$menu[0].hide(100);
+            this.$menu.hide(100);
         });
     }
 

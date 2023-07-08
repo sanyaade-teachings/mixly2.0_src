@@ -1580,11 +1580,6 @@ html[data-bs-theme=dark] .layui-layer-btn a {
   background-color: var(--lay-color-bg-3);
   color: var(--lay-color-text-2);
 }
-html[data-bs-theme=dark] .layui-layer-btn .layui-layer-btn0 {
-  border-color: var(--lay-color-normal);
-  background-color: var(--lay-color-normal);
-  color: var(--lay-color-text-1);
-}
 html[data-bs-theme=dark] .layui-layer-dialog .layui-layer-content .layui-layer-face {
   color: var(--lay-color-gray-9);
 }

@@ -296,7 +296,8 @@
     {
         "path": "/common/local-storage.js",
         "require": [
-            "Mixly"
+            "store",
+            "Mixly.MArray"
         ],
         "provide": [
             "Mixly.LocalStorage"

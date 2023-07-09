@@ -49,10 +49,15 @@ MArray.equals = (x, y) => {
 }
 
 MArray.remove = (arr, data) => {
-    arr = [ ...arr ];
-    let index = arr.indexOf(data);
-    arr.splice(index, 1);
-    return arr;
+    let arrLen = arr.length;
+    for (let i = 0; i < arrLen; i++) {
+        if (arr[i] !== data) {
+            continue;
+        }
+        arr.splice(i, 1);
+        i--;
+        arrLen--;
+    }
 }
 
 //数组去除重复元素

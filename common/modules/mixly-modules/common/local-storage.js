@@ -1,41 +1,53 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly');
+goog.require('store');
+goog.require('Mixly.MArray');
 goog.provide('Mixly.LocalStorage');
 
-const { LocalStorage } = Mixly;
-const { localStorage } = window;
+const { MArray, LocalStorage } = Mixly;
 
-LocalStorage.write = (key, str) => {
-    if (localStorage)
-        localStorage[key] = str;
-}
-
-LocalStorage.read = (key) => {
-    if (localStorage && localStorage[key])
-        return localStorage[key];
-    return '';
-}
-
-LocalStorage.writeJson = (key, jsonObj, replace = true) => {
-    if (!replace)
-        jsonObj = { ...jsonObj, ...LocalStorage.readJson(key) };
-    try {
-        const jsonStr = JSON.stringify(jsonObj);
-        LocalStorage.write(key, jsonStr);
-    } catch (error) {
-        console.log(error);
+LocalStorage.set = function (path, value) {
+    let { first, last, firstKey, lastKey } = this.find(path);
+    if (!first) {
+        return;
     }
+    last[lastKey] = value;
+    store.set(firstKey, first);
 }
 
-LocalStorage.readJson = (key) => {
-    const jsonStr = LocalStorage.read(key);
-    try {
-        return JSON.parse(jsonStr);
-    } catch (error) {
-        console.log(error);
-        return null;
+LocalStorage.get = function (path) {
+    let { first, last, lastKey } = this.find(path);
+    if (!first) {
+        return undefined;
     }
+    return last[lastKey];
+}
+
+LocalStorage.getItems = function (path) {
+    let items = path.split('/');
+    MArray.remove(items, '');
+    return items;
+}
+
+LocalStorage.find = function (path) {
+    let items = this.getItems(path);
+    if (!items.length) {
+        return {};
+    }
+    let rootObj = {};
+    rootObj[items[0]] = store.get(items[0]);
+    let last = rootObj;
+    let value;
+    for (let i = 0; i < items.length - 1; i++) {
+        if (!(last[items[i]] instanceof Object)) {
+            last[items[i]] = {};
+        }
+        last = last[items[i]];
+    }
+    let first = rootObj[items[0]];
+    let firstKey = items[0];
+    let lastKey = items[items.length - 1];
+    return { first, last, firstKey, lastKey };
 }
 
 });

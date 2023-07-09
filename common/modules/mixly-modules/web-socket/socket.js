@@ -167,7 +167,8 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
         mainStatusBarTab.show();
         mainStatusBarTab.changeTo('output');
         statusBarTerminal.setValue(WS.url + '连接断开，请在设置中重新连接\n');
-        let ports = MArray.remove(mainStatusBarTab.statusBarIndexToIds, 'output');
+        let ports = [ ...mainStatusBarTab.statusBarIndexToIds ];
+        MArray.remove(ports, 'output');
         for (let i = 0; i < ports.length; i++) {
             const statusBarSerial = mainStatusBarTab.getStatusBarById(ports[i]);
             statusBarSerial.close(ports[i]);

@@ -177,16 +177,8 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
     color: #fff;
 }
 
-.dark .layui-carousel-arrow {
-    background-color: #555 !important;
-}
-
-.dark .layui-carousel-arrow:hover, .dark .layui-carousel-ind ul:hover {
-    background-color: rgba(119,119,119,.35) !important;
-}
-
 .dark .service-single {
-    background: #3F3E40;
+    background: #202020;
 }
 
 .dark .service-single h2 {

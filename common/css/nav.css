@@ -122,14 +122,14 @@
         height: 6px;
     }
 
-    .light #tab-ace-add-btn {
+    .light .tab-btn {
         width: 23px;
         height: 20px;
         line-height: 20px;
         padding: 0 3px;
     }
 
-    .dark #tab-ace-add-btn {
+    .dark .tab-btn {
         width: 23px;
         height: 20px;
         line-height: 20px;
@@ -137,12 +137,12 @@
     }
 }
 
-.light #tab-ace-add-btn {
+.light .tab-btn {
     color: #fff;
     margin-left: 3px;
 }
 
-.dark #tab-ace-add-btn {
+.dark .tab-btn {
     color: #fff;
     margin-left: 3px;
     border-color: #484444;

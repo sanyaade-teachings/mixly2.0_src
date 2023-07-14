@@ -18,13 +18,8 @@ Blockly.Blocks.pe_g1_use_i2c_init = {
             .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
             .setCheck("var");
         this.appendDummyInput("")
-<<<<<<<< HEAD:boards/default/micropython_esp32/blocks/pe_g1.js
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
-            .appendField('PE G1');
-========
-            .appendField(Blockly.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
             .appendField(name);
->>>>>>>> master:boards/default/micropython_common/blocks/pe_g1.js
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

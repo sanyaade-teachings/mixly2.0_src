@@ -560,7 +560,7 @@ Blockly.Blocks['tuple_create_with_noreturn'] = {
     this.updateShape_();
     this.setPreviousStatement(false);
     this.setNextStatement(false);
-	this.setOutput(true, "Tuple")
+	  this.setOutput(true, "Tuple")
     this.setMutator(new Blockly.icons.MutatorIcon(['tuple_create_with_item'], this));
     this.setTooltip(Blockly.Msg.TUPLE_CREATE_WITH_TOOLTIP);
   },

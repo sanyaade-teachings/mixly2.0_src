@@ -633,7 +633,7 @@ body[class="light"] {
 }
 
 .editor-dropdown-menu > .layui-menu > li {
-    padding: 1px 20px;
+    padding: 1px 10px;
 }
 
 .dark .editor-dropdown-menu {
@@ -646,6 +646,8 @@ body[class="light"] {
 
 .dark .editor-dropdown-menu > .layui-menu > li > div {
     color: rgb(255 255 255 / 80%);
+    padding: 0px;
+    margin: 0px;
 }
 
 .dark .layui-menu li:hover {

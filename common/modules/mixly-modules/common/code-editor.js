@@ -19,12 +19,12 @@ class CodeEditor {
         this.editor = ace.edit(id);
         this.resetFontSize();
         this.addDefaultCommand();
-        this.addCtrlBtns();
         this.destroyed = false;
         this.toCodeEditor();
     }
 
     toCodeEditor() {
+        this.addCtrlBtns();
         this.editor.setShowPrintMargin(false);
         this.editor.setReadOnly(true);
         this.editor.setScrollSpeed(0.8);

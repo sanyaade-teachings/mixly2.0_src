@@ -39,7 +39,7 @@ Msg.LANG = {
 Msg.nowLang = USER.language ?? 'zh-hans';
 
 Msg.getLang = (str) => {
-    return Msg.LANG[Msg.nowLang][str];
+    return Msg.LANG[Msg.nowLang][str] ?? '';
 }
 
 Msg.changeTo = (lang) => {

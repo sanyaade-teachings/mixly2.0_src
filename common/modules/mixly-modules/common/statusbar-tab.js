@@ -2,12 +2,14 @@ goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('tippy');
+goog.require('shortid');
 goog.require('Mixly.StatusBarSerial');
 goog.require('Mixly.StatusBarTerminal');
 goog.require('Mixly.Drag');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.StatusBarTab');
 
 const { element } = layui;
@@ -17,28 +19,14 @@ const {
     Drag,
     XML,
     MArray,
-    Env
+    Env,
+    Msg
 } = Mixly;
 
 class StatusBarTab {
     static statusBarTabs = {};
     static CTRL_BTN_TEMPLATE = goog.get(Env.templatePath + '/statusbar-tab-ctrl-btn.html');
     static MENU_TEMPLATE = goog.get(Env.templatePath + '/statusbar-tab-menu.html');
-    static addTab(tab) {
-        let id = tab.id;
-        this.statusBarTabs[id] = Tab; 
-    }
-
-    static removeTab(id) {
-        if (!this.statusBarTabs[id]) {
-            return;
-        }
-        delete this.statusBarTabs[id];
-    }
-
-    static getTab(id) {
-        return this.statusBarTabs[id] ?? null;
-    }
 
     constructor(id, drag) {
         this.id = id;
@@ -68,9 +56,9 @@ class StatusBarTab {
         }
 
         let config = {
-            tabId: `tab-${this.id}-ace-${aceId}`,
-            titleId: `tab-${this.id}-ace-${aceId}-title`,
-            contentId: `tab-${this.id}-ace-${aceId}-content`
+            tabId: shortid.generate(),
+            titleId: shortid.generate(),
+            contentId: shortid.generate()
         };
 
         element.tabAdd(this.id, {
@@ -189,7 +177,7 @@ class StatusBarTab {
             onMount: (instance) => {
                 let options = this.getMenuOptions() ?? {};
                 options.list = options.list ?? [];
-                options.empty = options.empty ?? '无选项';
+                options.empty = options.empty ?? Msg.Lang['无选项'];
                 const menuTemplate = XML.render(StatusBarTab.MENU_TEMPLATE, options);
                 instance.setContent(menuTemplate);
                 $(instance.popper).find('li').off().click((event) => {

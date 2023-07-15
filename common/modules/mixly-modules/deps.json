@@ -221,6 +221,15 @@
         ]
     },
     {
+        "path": "/common/id-generator.js",
+        "require": [
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.IdGenerator"
+        ]
+    },
+    {
         "path": "/common/interface.js",
         "require": [
             "Mixly.Url",
@@ -469,7 +478,11 @@
     },
     {
         "path": "/common/serial.js",
-        "require": [],
+        "require": [
+            "layui",
+            "Mixly.MArray",
+            "Mixly.StatusBarTab"
+        ],
         "provide": [
             "Mixly.Serial"
         ]
@@ -488,12 +501,14 @@
         "require": [
             "layui",
             "tippy",
+            "shortid",
             "Mixly.StatusBarSerial",
             "Mixly.StatusBarTerminal",
             "Mixly.Drag",
             "Mixly.XML",
             "Mixly.MArray",
-            "Mixly.Env"
+            "Mixly.Env",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.StatusBarTab"

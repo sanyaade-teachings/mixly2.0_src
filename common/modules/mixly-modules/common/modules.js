@@ -25,6 +25,8 @@ const loadNodeModules = () => {
     Modules.currentWindow = electron_remote.getCurrentWindow();
     Modules.lodash_fp = require('lodash/fp');
     Modules.node_downloader_helper = require('node-downloader-helper');
+    Modules.iconv_lite = require('iconv-lite');
+    Modules.python_shell = require('python-shell');
     Env.currentPlatform = Modules.os.platform();
     const { path, fs_extend, app } = Modules;
     if (Env.currentPlatform === "darwin") {

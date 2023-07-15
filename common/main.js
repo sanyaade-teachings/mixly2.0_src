@@ -285,46 +285,5 @@ goog.require('PouchDB');
 goog.require('d3');
 goog.require('Mixly.Electron.Events');
 goog.require('bootstrap');
-/*if (Env.isElectron) {
-    goog.require('Mixly.Electron.Loader');
-    goog.require('Mixly.Electron.File');
-    if (Env.hasSocketServer) {
-        goog.require('Mixly.WebSocket.BU');
-        goog.require('Mixly.WebSocket.ArduShell');
-        goog.require('Mixly.WebSocket.Serial');
-        goog.require('Mixly.WebSocket.File');
-    } else if (Env.hasCompiler) {
-        goog.require('Mixly.WebCompiler.Compiler');
-        goog.require('AvrUploader');
-    } else {
-        goog.require('Mixly.Electron.ArduShell');
-        goog.require('Mixly.Electron.Serial');
-        goog.require('Mixly.Electron.BU');
-        goog.require('Mixly.Electron.PythonShell');
-        goog.require('Mixly.Electron.Events');
-    }
-} else {
-    if (Env.hasSocketServer) {
-        goog.require('Mixly.WebSocket.BU');
-        goog.require('Mixly.WebSocket.ArduShell');
-        goog.require('Mixly.WebSocket.Serial');
-        goog.require('Mixly.WebSocket.File');
-    } else {
-        if (Env.hasCompiler) {
-            goog.require('Mixly.WebCompiler.Compiler');
-            goog.require('AvrUploader');
-        }
-        goog.require('Highcharts');
-        goog.require('Mixly.Web.Serial');
-        if (BOARD?.nav?.upload) {
-            goog.require('Mixly.Web.Utilities');
-            goog.require('Mixly.Web.Esptool');
-            goog.require('Mixly.Web.Ampy');
-            goog.require('Mixly.Web.BU');
-            goog.require('DAPjs');
-        }
-    }
-    goog.require('Mixly.Web.File');
-}*/
 
 })();

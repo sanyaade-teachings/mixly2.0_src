@@ -39,8 +39,8 @@ function backup_blocks() {
         //JSFuncs.saveToLocalStorageCache(xml);
     }
 
-    if ('localStorage' in window && window['localStorage'] != null && Mixly.selected === 'CODE') {
-        window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".code", Mixly.Editor.blockEditor.getValue());
+    if ('localStorage' in window && window['localStorage'] != null && Mixly.Editor.mainEditor.selected === 'CODE') {
+        window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".code", Mixly.Editor.codeEditor.getValue());
         window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".loadCode", "true");
     } else {
         window.localStorage.setItem(Mixly.Config.BOARD.boardType + ".loadCode", "false");
@@ -108,7 +108,7 @@ function restore_blocks() {
         if (window.localStorage[BOARD.boardType + ".loadCode"]
             && window.localStorage[BOARD.boardType + ".loadCode"] == "true") {
             if (window.localStorage[BOARD.boardType + ".code"]) {
-                Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+                Editor.mainEditor.drag.full('NEGATIVE');
                 Editor.codeEditor.setValue(window.localStorage[BOARD.boardType + ".code"], -1);
             }
         }

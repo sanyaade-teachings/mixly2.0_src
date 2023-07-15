@@ -239,9 +239,10 @@
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.FooterLayerExample",
             "Mixly.Electron.Serial",
+            "Mixly.Electron.Loader",
+            "Mixly.Electron.PythonShell",
             "Mixly.WebSocket.Socket",
-            "Mixly.Web.FooterLayerExample",
-            "Mixly.Electron.Loader"
+            "Mixly.Web.FooterLayerExample"
         ],
         "provide": [
             "Mixly.Interface"

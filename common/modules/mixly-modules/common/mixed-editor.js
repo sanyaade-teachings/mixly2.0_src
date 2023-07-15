@@ -200,7 +200,7 @@ class MixedEditor {
                     codeEditor.hideCtrlBtns();
                     this.selected = 'BLOCK';
                     this.codeEditor.shown = false;
-                    this.blockEditor.showm = true;
+                    this.blockEditor.shown = true;
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
                     $codeArea.removeClass('icon-code-1').addClass('icon-block');
@@ -209,7 +209,7 @@ class MixedEditor {
                     codeEditor.showCtrlBtns();
                     this.selected = 'CODE';
                     this.codeEditor.shown = true;
-                    this.blockEditor.showm = false;
+                    this.blockEditor.shown = false;
                     const { py2BlockEditor } = blockEditor;
                     if (py2BlockEditor && BOARD.pythonToBlockly) {
                         py2BlockEditor.fromCode = true;
@@ -220,7 +220,7 @@ class MixedEditor {
             },
             exitfull: (type) => {
                 this.codeEditor.shown = true;
-                this.blockEditor.showm = true;
+                this.blockEditor.shown = true;
                 aceEditor.setReadOnly(true);
                 this.selected = 'BLOCK';
                 this.codeEditorMenuRender();

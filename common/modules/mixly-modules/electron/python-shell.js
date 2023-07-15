@@ -17,8 +17,6 @@ const {
 
 const { PythonShell } = Electron;
 
-Modules.iconvLite = require('iconv-lite');
-Modules.PythonShell = require('python-shell').PythonShell;
 var input_prompt_message = "";
 var input_prompt_message_line = -1;
 var input_prompt_position_row = -1;
@@ -79,12 +77,12 @@ PythonShell.run = function () {
             statusBarTerminal.setValue(Msg.Lang['写文件出错了，错误是：'] + err + '\n');
             statusBarTerminal.show();
         } else {
-            shell = new Modules.PythonShell(Env.pyFilePath, options);
-            let iconv = Modules.iconvLite;
+            shell = new Modules.python_shell.PythonShell(Env.pyFilePath, options);
+            let iconv = Modules.iconv_lite;
             var startTime = Number(new Date());
             //程序运行完成时执行
             shell.childProcess.on('exit', (code) => {
-                statusBarTerminal.ace.getSession().selection.removeEventListener('changeCursor', cursorCallback);
+                statusBarTerminal.editor.getSession().selection.removeEventListener('changeCursor', cursorCallback);
                 //var timeCost = parseInt((Number(new Date()) - startTime) / 1000);
                 var timeCost = Number(new Date()) - startTime;
                 var timeCostSecond = timeCost % 60;
@@ -119,10 +117,10 @@ PythonShell.run = function () {
 
                 if (data.lastIndexOf(">>>") != -1 && shell) {
                     input_prompt_message = data.substring(data.lastIndexOf(">>>"));
-                    input_prompt_message_line = statusBarTerminal.ace.session.getLength();
-                    statusBarTerminal.ace.selection.moveCursorLineEnd();
-                    input_prompt_position_row = statusBarTerminal.ace.selection.getCursor().row;
-                    input_prompt_position_column = statusBarTerminal.ace.selection.getCursor().column;
+                    input_prompt_message_line = statusBarTerminal.editor.session.getLength();
+                    statusBarTerminal.editor.selection.moveCursorLineEnd();
+                    input_prompt_position_row = statusBarTerminal.editor.selection.getCursor().row;
+                    input_prompt_position_column = statusBarTerminal.editor.selection.getCursor().column;
                 }
             });
 
@@ -189,19 +187,19 @@ PythonShell.clearOutput = function () {
 PythonShell.addEvent = () => {
     const { mainStatusBarTab } = Mixly;
     const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    return statusBarTerminal.ace.getSession().selection.on('changeCursor', function (e) {
+    return statusBarTerminal.editor.getSession().selection.on('changeCursor', function (e) {
         if (shell && input_prompt_message_line != -1) {
-            if (statusBarTerminal.ace.selection.getCursor().row < input_prompt_position_row) {
-                statusBarTerminal.ace.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
+            if (statusBarTerminal.editor.selection.getCursor().row < input_prompt_position_row) {
+                statusBarTerminal.editor.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
             }
-            else if (statusBarTerminal.ace.selection.getCursor().row <= input_prompt_position_row
-                && statusBarTerminal.ace.selection.getCursor().column <= input_prompt_position_column) {
-                statusBarTerminal.ace.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
+            else if (statusBarTerminal.editor.selection.getCursor().row <= input_prompt_position_row
+                && statusBarTerminal.editor.selection.getCursor().column <= input_prompt_position_column) {
+                statusBarTerminal.editor.selection.moveCursorTo(input_prompt_position_row, input_prompt_position_column, true);
             }
-            last_row_data = statusBarTerminal.ace.session.getLine(input_prompt_message_line - 1);
+            last_row_data = statusBarTerminal.editor.session.getLine(input_prompt_message_line - 1);
             if (last_row_data.indexOf(">>>") != -1
-                && statusBarTerminal.ace.selection.getCursor().row == input_prompt_message_line
-                && statusBarTerminal.ace.selection.getCursor().column == 0) {
+                && statusBarTerminal.editor.selection.getCursor().row == input_prompt_message_line
+                && statusBarTerminal.editor.selection.getCursor().column == 0) {
                 //shell.stdin.setEncoding('utf-8'); 
                 if (last_row_data.indexOf(input_prompt_message) == -1) {
                     last_row_data = last_row_data.replace(">>> ", "");

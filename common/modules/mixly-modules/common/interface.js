@@ -16,9 +16,10 @@ goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
 goog.require('Mixly.Electron.FooterLayerExample');
 goog.require('Mixly.Electron.Serial');
+goog.require('Mixly.Electron.Loader');
+goog.require('Mixly.Electron.PythonShell');
 goog.require('Mixly.WebSocket.Socket');
 goog.require('Mixly.Web.FooterLayerExample');
-goog.require('Mixly.Electron.Loader');
 goog.provide('Mixly.Interface');
 
 const {

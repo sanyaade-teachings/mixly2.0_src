@@ -20,7 +20,7 @@ class StatusBarSerial extends StatusBar {
         if (this.isOpened()) {
             return;
         }
-        let $span = $(this.config.titleId);
+        let $span = $(`#${this.config.titleId}`);
         $span.removeClass('layui-bg-blue').addClass('layui-bg-orange');
         this.opened = true;
     }
@@ -29,7 +29,7 @@ class StatusBarSerial extends StatusBar {
         if (!this.isOpened()) {
             return;
         }
-        let $span = $(this.config.titleId);
+        let $span = $(`#${this.config.titleId}`);
         $span.removeClass('layui-bg-orange').addClass('layui-bg-blue');
         this.opened = false;
     }

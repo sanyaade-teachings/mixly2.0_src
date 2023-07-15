@@ -82,6 +82,9 @@ class StatusBarTab {
 
     changeTo(id) {
         let statusBar = this.getStatusBarById(id);
+        if (!statusBar) {
+            return;
+        }
         element.tabChange(this.id, statusBar.config.tabId);
     }
 
@@ -139,29 +142,20 @@ class StatusBarTab {
     addChangeListener() {
         element.on(`tabDelete(${this.id})`, (data) => {
             let statusBar = this.getStatusBarByIndex(data.index);
-            if (this.onRemove(statusBar)) {
-                return;
+            if (typeof statusBar.onRemove === 'function') {
+                statusBar.onRemove();
             }
+            statusBar.dispose();
             this.removeStatusBarByIndex(data.index);
         });
 
         element.on(`tab(${this.id})`, (data) => {
             let statusBar = this.getStatusBarByIndex(data.index);
-            if (this.onTab(statusBar)) {
-                return;
+            if (typeof statusBar.onTab === 'function') {
+                statusBar.onTab();
             }
             statusBar.scrollToBottom();
         });
-    }
-
-    // 可覆盖
-    onTab() {
-        return false;
-    }
-
-    // 可覆盖
-    onRemove() {
-        return false;
     }
 
     addCtrlBtn() {

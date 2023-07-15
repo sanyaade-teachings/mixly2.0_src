@@ -441,9 +441,9 @@ Mixly.Charts.drawLines = function (dom) {
     seriesData[0] = getCol(Mixly.Charts.data, 0);
     for (var i = 0; i < Mixly.Charts.chart.series.length; i++) {
         seriesData[1] = getCol(Mixly.Charts.data, i + 1);
-        Mixly.Charts.chart.series[i].setData(reverseMatrix(seriesData), true, false, false);
+        let data = reverseMatrix(seriesData);
+        Mixly.Charts.chart.series[i].setData(data, true, false, false);
     }
-    //Mixly.Charts.chart.series[0].setData(Mixly.Charts.data, true, false, false);
     Mixly.Charts.update(dom);
 }
 

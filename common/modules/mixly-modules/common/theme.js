@@ -28,41 +28,8 @@ Theme.changeTo = function (type) {
     }
     blockEditor.setTheme(blockEditorTheme);
     codeEditor.setOption("theme", codeEditorTheme);
-    if (StatusBar.Ace) {
-        StatusBar.Ace.setOption("theme", statusBarTheme);
-    }
-    if (StatusBarPort?.portsName) {
-        for (let i = 0, length = StatusBarPort.portsName.length; i < length; i++) {
-            StatusBarPort.portAce[StatusBarPort.portsName[i]].setOption("theme", statusBarTheme);
-        }
-    }
-}
-
-Theme.changeEditorTheme_dark = function () {
-    $("#nav").removeClass("layui-nav layui-bg-green");
-    $("#nav").addClass("layui-nav layui-bg-cyan");
-    $("body").removeClass("light");
-    $("body").addClass("dark");
-    
-    var theme = "ace/theme/dracula";
-    if (editor != null) {
-        editor.setOption("theme", theme);
-        $("#content_arduino").css("background-color", "#282a36");
-    }
-    try {
-        if (editor_side_code != null) {
-            editor_side_code.setOption("theme", theme);
-        }
-        if (StatusBar.Ace != null) {
-            StatusBar.Ace.setOption("theme", "ace/theme/terminal");
-        }
-        if (StatusBarPort?.portsName) {
-            for (let i = 0, length = StatusBarPort.portsName.length; i < length; i++) {
-                StatusBarPort.portAce[StatusBarPort.portsName[i]].setOption("theme", "ace/theme/terminal");
-            }
-        }
-    } catch (e) {
-
+    for (let statusBar of StatusBarTab.statusBars) {
+        statusBar.editor.setOption("theme", statusBarTheme);
     }
 }
 

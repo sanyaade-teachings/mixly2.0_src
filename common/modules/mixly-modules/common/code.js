@@ -520,27 +520,6 @@ Code.initLanguage = function (addToolboxitemid = false) {
 };
 
 /**
- * Execute the user's code.
- * Just a quick and dirty eval.  Catch infinite loops.
- */
-Code.runJS = function () {
-    Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
-    var timeouts = 0;
-    var checkTimeout = function () {
-        if (timeouts++ > 1000000) {
-            throw MSG['timeout'];
-        }
-    };
-    var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
-    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-    try {
-        eval(code);
-    } catch (e) {
-        alert(MSG['badCode'].replace('%1', e));
-    }
-};
-
-/**
  * Discard all blocks from the workspace.
  */
 Code.discard = function () {

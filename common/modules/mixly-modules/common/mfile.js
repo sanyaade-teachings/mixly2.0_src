@@ -110,7 +110,8 @@ MFile.getCode = (type) => {
     } else {
         blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
     }
-    if (Editor.selected === 'CODE')
+
+    if (Editor.mainEditor.selected === 'CODE')
         return Editor.codeEditor.getValue();
     else {
         let code = blocklyGenerator.workspaceToCode(Editor.blockEditor) || '';

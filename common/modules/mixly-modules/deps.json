@@ -221,15 +221,6 @@
         ]
     },
     {
-        "path": "/common/id-generator.js",
-        "require": [
-            "Mixly"
-        ],
-        "provide": [
-            "Mixly.IdGenerator"
-        ]
-    },
-    {
         "path": "/common/interface.js",
         "require": [
             "Mixly.Url",

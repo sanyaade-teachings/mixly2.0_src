@@ -59,7 +59,7 @@ class BoardConfigItem {
         this.name = boardName;
         this.config = { ...boardInfo.config };
         this.ignore = [];
-        if (boardInfo instanceof String) {
+        if (typeof boardInfo === 'string') {
             this.key = boardInfo;
         } else if (boardInfo instanceof Object) {
             this.key = boardInfo.key;

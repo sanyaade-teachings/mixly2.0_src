@@ -78,6 +78,10 @@ class SerialDomGenerator {
             pointNum: this.config.pointNum,
             ctrlCBtn: this.config.ctrlCBtn,
             ctrlDBtn: this.config.ctrlDBtn,
+            yMax: this.config.yMax,
+            yMin: this.config.yMin,
+            dtr: this.config.dtr ? 'checked' : '',
+            rts: this.config.rts ? 'checked' : '',
             Msg: {
                 monitor: Msg.Lang['串口监视器'],
                 visualization: Msg.Lang['串口可视化'],

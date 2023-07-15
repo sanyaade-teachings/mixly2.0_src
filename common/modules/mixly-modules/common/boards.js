@@ -147,6 +147,7 @@ Boards.changeTo = (boardName) => {
         profile['default'] = profile['default'] ?? {};
     }
     const boardKey = Boards.dict[boardName].key;
+    
     for (let i in SELECTED_BOARD) {
         delete SELECTED_BOARD[i];
     }
@@ -208,7 +209,7 @@ Boards.changeTo = (boardName) => {
         const pathObj = {
             path: Env.clientPath,
             indexPath: Env.indexDirPath,
-            srcPath: Env.srcPath
+            srcPath: Env.srcDirPath
         };
         switch (outObj.type) {
             case 'volume':

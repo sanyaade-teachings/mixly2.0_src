@@ -571,7 +571,7 @@ Serial.openTool = () => {
         return;
     }
     const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(selectedPort);
     let portObj = Serial.portsOperator[selectedPort];
     const { toolConfig } = portObj;
     const { baudRates } = toolConfig;
@@ -930,7 +930,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-tool-close`) {
                 portObj.dom.close();
             } else if (obj.id === `tab-${newPort}-ace-close`) {
-                StatusBarPort.tabDelete(port);
+                mainStatusBarTab.remove(port);
             } else if (obj.id === `tab-${newPort}-ace-empty`) {
                 // portAce[port].execCommand('Empty');
                 portObj.output = [];
@@ -1269,9 +1269,12 @@ Serial.terminalExitCallback = (port, commandList) => {
 }
 
 Serial.statusBarPortAddCommand = (port, command, withNewLine = true) => {
-    StatusBarPort.addValue(port, command + (withNewLine ? '\n' : ''), true);
-    if (withNewLine)
+    const { mainStatusBarTab } = Mixly;
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    statusBarSerial.addValue(port, command + (withNewLine ? '\n' : ''), true);
+    if (withNewLine) {
         Serial.refreshOutputBox(port);
+    }
 }
 
 /**
@@ -1282,9 +1285,13 @@ Serial.statusBarPortAddCommand = (port, command, withNewLine = true) => {
 * @return void
 */
 Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
-    if (!port)
+    if (!port) {
         return;
-    StatusBarPort.tabChange(port);
+    }
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    let statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    mainStatusBarTab.changeTo(port);
     const portObj = Serial.portsOperator[port];
     const { toolConfig } = portObj;
     if (!baud)
@@ -1315,27 +1322,26 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     portObj.serialport.pipe(parser);
     portObj.refreshOutputBoxTimer = null;
     portObj.serialport.open(function (error) {
-        StatusBarPort.tabAdd(port, true, (portName) => {
-            Serial.$menu[0].hide();
-            Serial.statusBarPortAddHotKey(portName);
-        }, (portName) => {
-            const newPortObj = Serial.portsOperator[portName];
+        mainStatusBarTab.add('serial', port);
+        statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+        statusBarSerial.onRemove = function() {
+            const newPortObj = Serial.portsOperator[this.id];
             if (newPortObj && newPortObj.serialport && newPortObj.serialport.isOpen) {
                 newPortObj.serialport.close();
-                StatusBarPort.tabChange("output");
-                if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
-                    StatusBar.addValue('\n' + Msg.Lang['已关闭串口'] + portName + '\n');
+                mainStatusBarTab.changeTo("output");
+                if (statusBarTerminal.getValue().lastIndexOf("\n") != statusBarTerminal.getValue().length - 1) {
+                    statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + this.id + '\n');
                 } else {
-                    StatusBar.addValue(Msg.Lang['已关闭串口'] + portName + '\n');
+                    statusBarTerminal.addValue(Msg.Lang['已关闭串口'] + this.id + '\n');
                 }
             }
-        });
-        StatusBarPort.tabChange(port);
+        }
+        mainStatusBarTab.changeTo(port);
         if (error) {
-            StatusBarPort.close(port);
+            statusBarSerial.close();
             console.log('failed to open: ' + error);
-            StatusBarPort.setValue(port, error + '\n', true);
-            Serial.receiveBoxAddValue(port, error + '\n', true);
+            statusBarSerial.setValue(error + '\n', true);
+            Serial.receiveBoxAddValue(error + '\n', true);
             portObj.serialport = null;
             Serial.refreshConnectStatus(port);
             portObj.portOpened = false;
@@ -1344,10 +1350,11 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
         } else {
             //Serial.statusBarPortRemoveCursorEvent(port);
             endFunc(1);
+            statusBarSerial.open();
             portObj.portOpened = true;
             Serial.refreshTerminalMenu(port);
             Serial.refreshConnectStatus(port);
-            StatusBarPort.setValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
+            statusBarSerial.setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
 
             Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
             portObj.output.push('');
@@ -1447,7 +1454,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     });
 
     portObj.serialport.on('error', function (error) {
-        StatusBarPort.tabChange("output");
+        mainStatusBarTab.changeTo("output");
         Serial.showErrorData(port, portObj.toolOpened, error);
     });
 
@@ -1458,10 +1465,8 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
 
     //串口结束使用时执行此函数
     portObj.serialport.on('close', () => {
-        //StatusBarPort.tabChange("output");
         portObj.portOpened = false;
-        //Serial.statusBarPortRemoveCursorEvent(port);
-        StatusBarPort.close(port);
+        statusBarSerial.close();
         Serial.refreshConnectStatus(port);
         Serial.refreshTerminalMenu(port);
         portObj.refreshOutputBoxTimer && clearInterval(portObj.refreshOutputBoxTimer);
@@ -1474,10 +1479,10 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             Serial.receiveBoxAddValue(port, Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
         }
 
-        if (StatusBarPort.getValue(port).lastIndexOf("\n") != StatusBarPort.getValue(port).length - 1) {
-            StatusBarPort.addValue(port, '\n' + Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
+        if (statusBarSerial.getValue(port).lastIndexOf("\n") != statusBarSerial.getValue(port).length - 1) {
+            statusBarSerial.addValue('\n' + Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
         } else {
-            StatusBarPort.addValue(port, Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
+            statusBarSerial.addValue(Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
         }
         portObj.serialport = null;
         portObj.output = [];
@@ -1494,13 +1499,14 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
 Serial.portOpenOrClose = function (port) {
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
+    const { mainStatusBarTab } = Mixly;
     const newSerialport = portObj.serialport;
     const { toolConfig } = portObj;
     if (newSerialport && (newSerialport.isOpen || newSerialport.opening)) {
         newSerialport.close();
     } else {
         Serial.connect(port, toolConfig.baudRates);
-        StatusBar.show(1);
+        mainStatusBarTab.show();
     }
 }
 
@@ -1528,6 +1534,8 @@ Serial.portClose = (port, endFunc = () => {}) => {
 Serial.showErrorData = function (port, select, data) {
     const portObj = Serial.portsOperator[port];
     const { toolOpened, dom, toolConfig } = portObj;
+    const { mainStatusBarTab } = Mixly;
+    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     if (!toolConfig.receiveStr) {
         data = Tools.uint8ArrayToStr(Tools.strToByte(data));
         data = data.replace(/^\s*/, "");
@@ -1536,7 +1544,7 @@ Serial.showErrorData = function (port, select, data) {
     if (toolOpened) {
         Serial.receiveBoxAddValue(port, data, toolConfig.scroll);
     } else {
-        StatusBarPort.addValue(port, data, true);
+        statusBarSerial.addValue(port, data, true);
     }
 }
 
@@ -1734,9 +1742,11 @@ Serial.sleep = async function(ms) {
 }
 
 Serial.getMenu = (ports) => {
+    const { mainStatusBarTab } = Mixly;
     let newPorts = [];
+    let tabsName = Object.keys(mainStatusBarTab.statusBars);
     for (let port of ports) {
-        if (StatusBarPort.portsName.includes(port.name)) {
+        if (tabsName.includes(port.name)) {
             continue;
         }
         newPorts.push(port.name);

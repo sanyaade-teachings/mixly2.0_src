@@ -42,7 +42,7 @@ const loadNodeModules = () => {
         }
     }
     
-    Env.srcPath = path.resolve(Env.indexDirPath, '../');
+    Env.srcDirPath = path.resolve(Env.indexDirPath, '../../../');
 }
 
 Env.isElectron && loadNodeModules();

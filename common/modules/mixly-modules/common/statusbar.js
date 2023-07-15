@@ -32,6 +32,14 @@ class StatusBar extends CodeEditor {
             enableLiveAutocompletion: false
         });
     }
+
+    // 可覆盖
+    onTab() {
+    }
+
+    // 可覆盖
+    onRemove() {
+    }
 }
 
 Mixly.StatusBar = StatusBar;

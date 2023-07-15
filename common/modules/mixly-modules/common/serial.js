@@ -11,10 +11,22 @@ const { MArray, StatusBarTab } = Mixly;
 class Serial {
     // {array} 已打开的串口号
     static openedPortsName = [];
+
     // {null|string} 上一次使用的烧录串口号
     static prevUsedBurnPortName = null;
+
     // {null|string} 上一次使用的上传串口号
     static prevUsedUploadPortName = null;
+
+    static obj = {};
+
+    static getSerial(portName) {
+        return obj[portName] ?? null;
+    }
+
+    static addSerial(portName, obj) {
+        obj[portName] = obj;
+    }
 
     /**
      * @function 重新渲染串口下拉框
@@ -97,6 +109,7 @@ class Serial {
             dtr: false,
             rts: false
         };
+        Serial.addSerial(port, this);
     }
 
     // 可覆盖

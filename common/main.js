@@ -154,6 +154,10 @@ goog.DEPENDENCIES = [
         "provide": ['d3'],
         "require": []
     }, {
+        "path": '/../web-modules/shortid.js',
+        "provide": ['shortid'],
+        "require": []
+    }, {
         "path": '/web/serialport.js',
         "provide": ['WebSerialPort'],
         "require": []

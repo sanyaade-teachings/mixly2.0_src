@@ -318,7 +318,7 @@ PyEngine.prototype.steprun = function(type) {
     }
 
     window.actionArrayRecord = [];     
-    // $("#blocklySVG").empty();
+    $("#blocklySVG").empty();
     $("#loading").css('display', "inline-block");
 
     // Reset everything

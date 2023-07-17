@@ -27,7 +27,7 @@ class FooterLayerExample extends FooterLayer {
     constructor(domId) {
         super(domId, {
             onMount: (instance) => {
-                this.examplesTree.reload([]);
+                this.examplesTree.reload({ data: this.getRoot() });
             }
         });
         this.$content.addClass('footer-layer-example');

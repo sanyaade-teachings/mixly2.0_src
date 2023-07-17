@@ -241,7 +241,7 @@ Boards.changeTo = (boardName) => {
                 let pyToolsPath = "{srcPath}/pyTools/";
                 let obj = {};
                 let pyTools = {
-                    'esptool': 'esptool.py',
+                    'esptool': 'esptool/__init__.py',
                     'kflash': 'kflash.py',
                     'stm32loader': 'stm32loader.py',
                     'stm32bl': 'stm32bl.py',

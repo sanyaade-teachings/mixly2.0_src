@@ -38,6 +38,20 @@ Msg.LANG = {
 
 Msg.nowLang = USER.language ?? 'zh-hans';
 
+Msg.prevBlocklyMsg = Blockly.Msg;
+
+Msg.prevBlocklyMsgKey = [
+    'DELETE_X_BLOCKS', 'REMOVE_COMMENT', 'DUPLICATE_COMMENT', 'WORKSPACE_COMMENT_DEFAULT_TEXT',
+    'ADD_COMMENT', 'UNDO', 'REDO', 'CLEAN_UP', 'COLLAPSE_ALL', 'EXPAND_ALL', 'DELETE_BLOCK',
+    'DELETE_ALL_BLOCKS', 'DUPLICATE_BLOCK', 'EXTERNAL_INPUTS', 'INLINE_INPUTS',
+    'EXPAND_BLOCK', 'COLLAPSE_BLOCK', 'DISABLE_BLOCK', 'ENABLE_BLOCK', 'HELP', 'CHANGE_VALUE_TITLE',
+    'RENAME_VARIABLE', 'DELETE_VARIABLE', 'WORKSPACE_ARIA_LABEL', 'UNNAMED_KEY',
+    'PROCEDURES_DEFNORETURN_PROCEDURE', 'PROCEDURES_DEFRETURN_PROCEDURE', 'NEW_VARIABLE_TITLE',
+    'VARIABLE_ALREADY_EXISTS', 'VARIABLE_ALREADY_EXISTS_FOR_ANOTHER_TYPE', 'RENAME_VARIABLE_TITLE',
+    'VARIABLE_ALREADY_EXISTS_FOR_A_PARAMETER', 'NEW_VARIABLE', 'NEW_STRING_VARIABLE', 'NEW_NUMBER_VARIABLE', 
+    'NEW_COLOUR_VARIABLE', 'CANNOT_DELETE_VARIABLE_PROCEDURE', 'DELETE_VARIABLE_CONFIRMATION'
+];
+
 Msg.getLang = (str) => {
     return Msg.LANG[Msg.nowLang][str] ?? '';
 }
@@ -55,8 +69,9 @@ Msg.changeTo = (lang) => {
     default:
         newMsg = ZhHans;
     }
-    for (let key in newMsg) {
-        Blockly.Msg[key] = newMsg[key];
+    Blockly.Msg = newMsg;
+    for (let key of Msg.prevBlocklyMsgKey) {
+        Msg.prevBlocklyMsg[key] = Blockly.Msg[key];
     }
 }
 

@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('FingerprintJS');
 goog.require('Mixly.Url');
 goog.provide('Mixly.Config');
 
@@ -72,9 +73,24 @@ Config.init = () => {
         Config.SOFTWARE = { ...Config.SOFTWARE, ...urlConfig };
     Config.pathPrefix = pathPrefix;
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
-    $.getScript('../../../common/modules/web-modules/fp.min.js', () => {
-        // Url.initFingerprintJS();
-    }).fail(() => {
+
+    FingerprintJS.load()
+    .then(fp => fp.get())
+    .then(result => {
+        let visitorId16 = result.visitorId;
+        let VisitorIdNum = parseInt(visitorId16, 16);
+        let visitorId32 = VisitorIdNum.toString(32);
+        Config.BOARD.visitorId = {
+            str16: visitorId16,
+            str32: visitorId32,
+            str16CRC32b: Url.CRC32(visitorId16, 16),
+            str32CRC32b: Url.CRC32(visitorId32, 16)
+        };
+        console.log(Config.BOARD);
+    })
+    .catch(error => {
+        console.error(error);
+        console.log(Config.BOARD);
     });
 }
 

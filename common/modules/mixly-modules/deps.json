@@ -91,6 +91,7 @@
     {
         "path": "/common/config.js",
         "require": [
+            "FingerprintJS",
             "Mixly.Url"
         ],
         "provide": [

@@ -158,6 +158,10 @@ goog.DEPENDENCIES = [
         "provide": ['shortid'],
         "require": []
     }, {
+        "path": '/../web-modules/fp.min.js',
+        "provide": ['FingerprintJS'],
+        "require": []
+    }, {
         "path": '/web/serialport.js',
         "provide": ['WebSerialPort'],
         "require": []

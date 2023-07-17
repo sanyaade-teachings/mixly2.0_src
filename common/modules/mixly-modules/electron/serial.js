@@ -937,6 +937,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-empty`) {
                 // statusBarSerial.editor.execCommand('Empty');
                 portObj.output = [];
+                Serial.refreshOutputBox(port);
             } else if (obj.id === `tab-${newPort}-serial-send-ctrlc`) {
                 Serial.writeCtrlC(port);
             } else if (obj.id === `tab-${newPort}-serial-send-ctrld`) {

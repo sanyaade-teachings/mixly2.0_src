@@ -184,36 +184,6 @@ Url.CRC32 = (str, radix = 10) => {
 };
 
 /**
- * @function 查询浏览器属性并从中计算出哈希访问者标识符
- * @return {void}
- **/
-Url.initFingerprintJS = () => {
-    // Initialize an agent at application startup.
-    const fpPromise = FingerprintJS.load();
-
-    // Get the visitor identifier when you need it.
-    fpPromise
-        .then(fp => fp.get())
-        .then(result => {
-            // This is the visitor identifier:
-            let visitorId16 = result.visitorId;
-            let VisitorIdNum = parseInt(visitorId16, 16);
-            let visitorId32 = VisitorIdNum.toString(32);
-            Config.BOARD.visitorId = {
-                str16: visitorId16,
-                str32: visitorId32,
-                str16CRC32b: Url.CRC32(visitorId16, 16),
-                str32CRC32b: Url.CRC32(visitorId32, 16)
-            };
-            console.log(Config.BOARD);
-        })
-        .catch(error => {
-            console.error(error);
-            console.log(Config.BOARD);
-        });
-}
-
-/**
  * @function 获取当前网页的IP地址
  * @return {string | null}
  **/

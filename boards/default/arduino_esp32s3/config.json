@@ -232,7 +232,6 @@
         "compile": true,
         "upload": true,
         "save": {
-            "img": true,
             "ino": true,
             "bin": true
         },
@@ -253,7 +252,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/arduino_esp32s3/libs.json"
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/develop/cloud-libs/arduino_esp32s3/libs.json"
             ]
         }
     },

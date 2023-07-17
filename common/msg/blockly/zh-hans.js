@@ -169,6 +169,9 @@ ZhHans.MSG = {
     wiki: "Wiki"
 };
 
+/* 下载模块图像 */
+ZhHans.DOWNLOAD_SCREENSHOT = '下载模块图像';
+
 /* 背包 */
 ZhHans.COPY_ALL_TO_BACKPACK = '复制所有图形块到背包';
 ZhHans.COPY_TO_BACKPACK = '加入背包';

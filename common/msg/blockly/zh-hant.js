@@ -163,6 +163,9 @@ ZhHant.MSG = {
     wiki: "Wiki"
 };
 
+/* 下载模块图像 */
+ZhHant.DOWNLOAD_SCREENSHOT = '下載模塊影像';
+
 /* 背包 */
 ZhHant.COPY_ALL_TO_BACKPACK = '複製所有圖形塊到背包';
 ZhHant.COPY_TO_BACKPACK = '加入背包';

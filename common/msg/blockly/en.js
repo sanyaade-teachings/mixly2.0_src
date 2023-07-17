@@ -167,6 +167,9 @@ En.MSG = {
     wiki: "Wiki"
 };
 
+/* 下载模块图像 */
+En.DOWNLOAD_SCREENSHOT = 'Download Screenshot';
+
 /* 背包 */
 En.COPY_ALL_TO_BACKPACK = 'Copy All Blocks to Backpack';
 En.COPY_TO_BACKPACK = 'Copy to Backpack';

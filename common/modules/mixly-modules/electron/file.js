@@ -160,22 +160,6 @@ File.saveAs = (endFunc = () => {}) => {
                         });
                     }
                     break;
-                case '.png':
-                    MFile.getBlocksPng()
-                    .then((data) => {
-                        return fs_extra.outputFile(filePath, data);
-                    })
-                    .then(() => {
-                        layer.msg(Msg.Lang['保存成功'], { time: 1000 });
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                        layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
-                    })
-                    .finally(() => {
-                        endFunc();
-                    });
-                    break;
                 case '.mil':
                     const milStr = MFile.getMil();
                     const $mil = $(milStr);

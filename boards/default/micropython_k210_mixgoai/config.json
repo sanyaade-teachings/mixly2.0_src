@@ -38,7 +38,6 @@
         "burn": true,
         "upload": true,
         "save": {
-            "img": true,
             "py": true
         }
     },

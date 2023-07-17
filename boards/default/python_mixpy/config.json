@@ -4,7 +4,6 @@
         "run": true,
         "cancel": true,
         "save": {
-            "img": true,
             "py": true
         },
         "setting": {
@@ -15,7 +14,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/python/libs.json"
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/develop/cloud-libs/python/libs.json"
             ]
         }
     },

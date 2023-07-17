@@ -2,7 +2,6 @@ goog.loadJs('electron', () => {
 
 goog.require('LazyLoad');
 goog.require('layui');
-goog.require('Code');
 goog.require('Mixly.Env');
 goog.require('Mixly.Modules');
 goog.require('Mixly.XML');
@@ -241,7 +240,6 @@ LibManager.reloadThirdPartyLibs = () => {
     }
     Env.thirdPartyJS = [];
     Env.thirdPartyCSS = [];
-    // Code.loadThirdPartyLanJs();
     $('#toolbox').html(Env.defaultXML);
     LibManager.loadLibsAndUpdateJsCssList(function() {
         // Blockly.fireUiEvent(window, 'resize');

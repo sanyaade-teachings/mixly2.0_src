@@ -1,6 +1,5 @@
 goog.loadJs('common', () => {
 
-goog.require('Code');
 goog.require('layui');
 goog.require('Blockly');
 goog.require('Mixly.Env');
@@ -830,8 +829,9 @@ Mixly.Nav.MsgById = {
     'socket-connect-btn': 'connect',
     'other-burn-btn': 'other_firmware',
     'wiki-btn': 'wiki',
-    'feedback-btn': 'feedback'
-}
+    'feedback-btn': 'feedback',
+    'copyright': 'copyright'
+};
 
 function showTag() {
     tagSelect('tab_blocks', 'tab_blocks');

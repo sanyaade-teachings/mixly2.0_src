@@ -330,7 +330,7 @@ Boards.updateCategories = (boardName, enforce = false) => {
         if (categoriesDom[i].hasAttribute('toolboxitemid')) continue;
         categoriesDom[i].setAttribute('toolboxitemid', categoriesDom[i].id);
     }
-    Code.initLanguage(false);
+    Msg.renderToolbox(false);
     if (Editor.blockEditor) {
         Editor.blockEditor.updateToolbox(toolboxDom[0]);
         ToolboxSearcher.restart();

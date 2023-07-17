@@ -66,20 +66,6 @@
         ]
     },
     {
-        "path": "/common/code.js",
-        "require": [
-            "Blockly",
-            "Mixly.Env",
-            "Mixly.Modules",
-            "Mixly.Config",
-            "Mixly.ScriptLoader",
-            "Mixly.Msg"
-        ],
-        "provide": [
-            "Code"
-        ]
-    },
-    {
         "path": "/common/command.js",
         "require": [
             "Mixly.Config",
@@ -264,7 +250,8 @@
         "require": [
             "layui",
             "Mixly.DomOperator",
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.LayerExt"
@@ -435,7 +422,6 @@
     {
         "path": "/common/nav.js",
         "require": [
-            "Code",
             "layui",
             "Blockly",
             "Mixly.Env",
@@ -604,8 +590,7 @@
             "Mixly.Tools",
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.Msg",
-            "Code"
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.XML"
@@ -725,7 +710,6 @@
         "require": [
             "LazyLoad",
             "layui",
-            "Code",
             "Mixly.Env",
             "Mixly.Modules",
             "Mixly.XML",
@@ -789,7 +773,6 @@
     {
         "path": "/electron/wiki-manager.js",
         "require": [
-            "Code",
             "Mixly.Modules",
             "Mixly.Config",
             "Mixly.Env",

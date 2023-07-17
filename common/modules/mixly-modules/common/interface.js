@@ -48,7 +48,6 @@ Interface.init = () => {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
     Nav.init();
-    Code.init();
     Boards.init();
     if (Env.isElectron) {
         const { Electron } = Mixly;
@@ -70,6 +69,7 @@ Interface.init = () => {
     const selectedBoardName = Boards.getSelectedBoardName();
     Boards.changeTo(selectedBoardName);
     Boards.updateCategories(selectedBoardName);
+    Msg.renderToolbox(true);
     Editor.init();
     if (Env.isElectron) {
         const { Electron } = Mixly;

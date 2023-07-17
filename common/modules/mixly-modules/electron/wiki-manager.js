@@ -1,6 +1,5 @@
 goog.loadJs('electron', () => {
 
-goog.require('Code');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -139,7 +138,7 @@ class WikiPage {
 
     updateContentFile() {
         const wikiContentPath = path.resolve(Env.indexDirPath, './wiki/content.md');
-        const defaultWikiPath = path.resolve(Env.indexDirPath, './wiki/wiki-libs/' + Code.LANG);
+        const defaultWikiPath = path.resolve(Env.indexDirPath, './wiki/wiki-libs/' + Msg.nowLang);
         const wikiHomePagePath = path.resolve(defaultWikiPath, './home');
         const thirdPartyLibsPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty/');
         const changelogPath = path.resolve(Env.clientPath, './CHANGELOG');
@@ -161,7 +160,7 @@ class WikiPage {
         if (fs_extend.isdir(thirdPartyLibsPath)) {
             const libsName = fs.readdirSync(thirdPartyLibsPath);
             for (let name of libsName) {
-                const libWikiPath = path.resolve(thirdPartyLibsPath, './' + name + '/wiki/' + Code.LANG);
+                const libWikiPath = path.resolve(thirdPartyLibsPath, './' + name + '/wiki/' + Msg.nowLang);
                 if (fs_extend.isdir(libWikiPath)) {
                     const childContentList = this.getContentJson(libWikiPath, name);
                     if (childContentList) {
@@ -244,7 +243,7 @@ class WikiPage {
 WikiManager.WikiPage = WikiPage;
 
 WikiManager.openWiki = (gotoInfo) => {
-    const goto = (gotoInfo && typeof gotoInfo === 'object') ? gotoInfo[Code.LANG] : null;
+    const goto = (gotoInfo && typeof gotoInfo === 'object') ? gotoInfo[Msg.nowLang] : null;
     if (!WikiManager.wiki || WikiManager.wiki.isDestroyed) {
         const wikiPath = path.resolve(Env.indexDirPath, '../../../common/wiki/index.html');
         if (fs_extend.isfile(wikiPath)) {
@@ -268,8 +267,8 @@ WikiManager.registerContextMenu = () => {
         preconditionFn: function(scope) {
             const { wiki } =  scope.block;
             if (typeof wiki === 'object') {
-                if (typeof wiki[Code.LANG] === 'object'
-                 && typeof wiki[Code.LANG].page === 'object') {
+                if (typeof wiki[Msg.nowLang] === 'object'
+                 && typeof wiki[Msg.nowLang].page === 'object') {
                     return 'enabled';
                 }
             }

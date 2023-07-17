@@ -5,7 +5,6 @@ goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Msg');
-goog.require('Code');
 goog.provide('Mixly.XML');
 
 const {

@@ -75,6 +75,29 @@ Msg.changeTo = (lang) => {
     }
 }
 
+Msg.renderToolbox = (addToolboxitemid = false) => {
+    let $categories = $('#toolbox').find('category');
+    for (let i = 0; i < $categories.length; i++) {
+        let { id } = $categories[i];
+        if (!Blockly.Msg.MSG[id]) {
+            continue;
+        }
+        let $category = $($categories[i]);
+        $category.attr('name', Blockly.Msg.MSG[id]);
+        if (addToolboxitemid) {
+            if ($category.attr('toolboxitemid')) {
+                continue;
+            }
+            $category.attr({
+                'toolboxitemid': id,
+                'name': Blockly.Msg.MSG[id]
+            });
+        } else {
+            $(`span[id="${id}.label"]`).html(Blockly.Msg.MSG[id]);
+        }
+    }
+}
+
 Msg.changeTo(Msg.nowLang);
 console.log('Msg.LANG', Msg.LANG);
 

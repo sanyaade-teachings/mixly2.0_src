@@ -118,7 +118,6 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
     const { mainStatusBarTab } = Mixly;
     const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     let commandStr = Compiler.URL + '?' + Url.jsonToUrl(command);
-    // StatusBar.setValue('send -> ' + commandStr + '\n');
     statusBarTerminal.setValue(Msg.Lang['编译中'] + '...\n');
     console.log('send -> ', commandStr);
     const compileLayer = layer.open({

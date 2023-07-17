@@ -165,7 +165,6 @@ PythonShell.stop = function () {
         shell.terminate('SIGKILL');
         //shell.stdout.end();
         //shell.stdin.end();
-        //StatusBar.addValue("\n==" + Msg.Lang["程序运行完成"] + "==\n", false);
         shell = null;
     } else {
         statusBarTerminal.addValue("\n==" + Msg.Lang["无程序在运行"] + "==\n");

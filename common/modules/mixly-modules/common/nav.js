@@ -239,14 +239,6 @@ Nav.LEFT_BTN_CONFIG = [
                 c: 'Mixly.WebSocket.Serial.openTool()'
             }
         }
-    }, {
-        //【状态栏】按钮
-        type: 'STATUS_BAR',
-        class: 'icon-window',
-        id: 'statusbar-btn',
-        title: '',
-        href: '#',
-        onclick: 'Mixly.StatusBar.show(0)'
     }
 ];
 
@@ -264,7 +256,6 @@ Nav.LEFT_BTN_ENV = {
     WEBPY_RUN: Nav.CONFIG.webrun,
     WEBPY_STOP: Nav.CONFIG.webcancel,
     SERIAL: codeEnv !== 'py' && codeEnv !== 'webpy',
-    //STATUS_BAR: codeEnv !== 'webpy'
 };
 
 Nav.RIGHT_BTN_CONFIG = [

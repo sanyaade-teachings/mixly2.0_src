@@ -312,13 +312,15 @@ Serial.openTool = () => {
         let portObj = Serial.portsOperator[selectedPort];
         const { toolConfig } = portObj;
         const { baudRates } = toolConfig;
+        const { mainStatusBarTab } = Mixly;
         let successFunc = (serialDom) => {
             if (!portObj.dom)
                 portObj.dom = serialDom;
+            
             Serial.refreshToolPortSelectBox();
             const { selectPortId } = serialDom.id;
             portObj.toolOpened = true;
-            StatusBar.show(1);
+            mainStatusBarTab.show();
             serialDom.nowPort = selectedPort;
             serialDom.prevPort = null;
             const element = layui.element;

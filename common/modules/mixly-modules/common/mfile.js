@@ -87,12 +87,8 @@ MFile.init = () => {
     let saveFilters = [], openFilters = [];
     for (let i in saveConfig)
         if (saveConfig[i]) {
-            if (i !== 'img') {
-                saveFilters.push(i);
-                openFilters.push(i);
-            } else {
-                saveFilters.push('png');
-            }
+            saveFilters.push(i);
+            openFilters.push(i);
         }
     if (BOARD?.nav?.setting?.thirdPartyLibrary)
         saveFilters.push('mil');

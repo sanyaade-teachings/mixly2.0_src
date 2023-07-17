@@ -2,18 +2,21 @@ goog.loadJs('electron', () => {
 
 goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
+goog.require('Mixly.MJSON');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.CloudDownload');
 
 const {
     Modules,
     Env,
+    MJSON,
     Electron
 } = Mixly;
 
 const { CloudDownload } = Electron;
 
 const {
+    fs,
     fs_extra,
     fs_extend,
     node_downloader_helper,
@@ -24,10 +27,21 @@ CloudDownload.getJson = (url, downloadDir, endFunc) => {
     if (url) {
         CloudDownload.download(url, downloadDir)
         .then((message) => {
-            if (message[0])
+            if (message[0]) {
                 throw message[0];
-            else
-                return fs_extra.readJson(message[1]);
+            } else {
+                let jsonObj = null;
+                if (fs_extend.isfile(message[1])) {
+                    let data = fs.readFileSync(message[1], 'utf-8');
+                    jsonObj = MJSON.parse(data);
+                }
+                if (jsonObj) {
+                    return jsonObj;
+                } else {
+                    throw('解析失败');
+                }
+            }
+
         })
         .then((configObj) => {
             endFunc([null, configObj]);

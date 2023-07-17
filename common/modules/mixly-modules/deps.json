@@ -654,6 +654,7 @@
         "require": [
             "Mixly.Modules",
             "Mixly.Env",
+            "Mixly.MJSON",
             "Mixly.Electron"
         ],
         "provide": [

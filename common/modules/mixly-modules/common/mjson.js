@@ -44,6 +44,7 @@ MJSON.encode = (jsonObj) => {
 MJSON.parse = (jsonStr) => {
     let jsonObj = null;
     try {
+        jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
         jsonObj = JSON.parse(jsonStr);
     } catch (error) {
         console.log(error);

@@ -12,6 +12,7 @@
             "Blockly.FieldBitmap",
             "Blockly.FieldColourHsvSliders",
             "Blockly.FieldDate",
+            "Blockly.Screenshot",
             "Mixly.Config",
             "Mixly.ToolboxSearcher"
         ],
@@ -840,7 +841,7 @@
     {
         "path": "/web/esptool.js",
         "require": [
-            "Mixly.StatusBar",
+            "Mixly.StatusBarTab",
             "Mixly.Msg",
             "Mixly.Web.Utilities",
             "Mixly.Web.SerialPort"

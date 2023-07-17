@@ -235,7 +235,7 @@ BU.burnWithEsptool = () => {
         statusBarTerminal.addValue("\n");
         for (let i of binFile) {
             if (i.path && i.offset) {
-                StatusBar.addValue(`${Msg.Lang['读取固件'] + ' ' + Msg.Lang['路径']}:${i.path}, ${Msg.Lang['偏移']}:${i.offset}\n`);
+                statusBarTerminal.addValue(`${Msg.Lang['读取固件'] + ' ' + Msg.Lang['路径']}:${i.path}, ${Msg.Lang['偏移']}:${i.offset}\n`);
                 firmwarePromise.push(readBinFile(i.path, i.offset));
             }
         }

@@ -86,6 +86,10 @@ goog.DEPENDENCIES = [
         "provide": ['DisableTopBlocks'],
         "require": ['Blockly']
     }, {
+        "path": '/../../blockly-core/plugins/screenshot.js',
+        "provide": ['Blockly.Screenshot'],
+        "require": ['Blockly']
+    }, {
         "path": '/../web-modules/lazyload.js',
         "provide": ['LazyLoad'],
         "require": []

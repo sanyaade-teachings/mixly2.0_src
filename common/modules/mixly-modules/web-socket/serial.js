@@ -524,6 +524,8 @@ Serial.refreshOutputBox = (port) => {
 * @return void
 **/
 Serial.openTool = () => {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     const selectedPort = Serial.getSelectedPortName();
     if (!selectedPort) {
         layer.msg(Msg.Lang["无可用设备"] + "!", {
@@ -540,7 +542,7 @@ Serial.openTool = () => {
         Serial.refreshToolPortSelectBox(Serial.uploadPorts);
         const { selectPortId } = serialDom.id;
         portObj.toolOpened = true;
-        StatusBar.show(1);
+        mainStatusBarTab.show();
         serialDom.nowPort = $('#' + selectPortId + ' option:selected').val();
         serialDom.prevPort = null;
         const element = layui.element;
@@ -1269,16 +1271,18 @@ Serial.connect = function (port = null, baud = null) {
 Serial.onopen = (port) => {
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     portObj.portOpened = true;
     StatusBarPort.tabAdd(port, true, Serial.statusBarPortAddHotKey, (portName) => {
         const newPortObj = Serial.portsOperator[portName];
         if (newPortObj && newPortObj.portOpened) {
             Serial.portClose(port);
             StatusBarPort.tabChange("output");
-            if (StatusBar.getValue().lastIndexOf("\n") != StatusBar.getValue().length - 1) {
-                StatusBar.addValue('\n' + Msg.Lang['已关闭串口'] + portName + '\n');
+            if (statusBarTerminal.getValue().lastIndexOf("\n") != statusBarTerminal.getValue().length - 1) {
+                statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + portName + '\n');
             } else {
-                StatusBar.addValue(Msg.Lang['已关闭串口'] + portName + '\n');
+                statusBarTerminal.addValue(Msg.Lang['已关闭串口'] + portName + '\n');
             }
         }
     });
@@ -1438,6 +1442,7 @@ Serial.onclose = (port) => {
 Serial.portOpenOrClose = function (port) {
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
+    const { mainStatusBarTab } = Mixly;
     const { toolConfig } = portObj;
     if (portObj.portOpened) {
         Socket.sendCommand({
@@ -1447,7 +1452,7 @@ Serial.portOpenOrClose = function (port) {
         });
     } else {
         Serial.connect(port, toolConfig.baudRates);
-        StatusBar.show(1);
+        mainStatusBarTab.show();
     }
 }
 

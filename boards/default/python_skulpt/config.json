@@ -4,7 +4,6 @@
         "webrun": true,
         "webcancel": true,
         "save": {
-            "img": true,
             "py": true
         }
     }

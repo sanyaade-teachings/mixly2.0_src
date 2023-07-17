@@ -24,7 +24,6 @@ const {
 } = Mixly;
 
 class StatusBarTab {
-    static statusBarTabs = {};
     static CTRL_BTN_TEMPLATE = goog.get(Env.templatePath + '/statusbar-tab-ctrl-btn.html');
     static MENU_TEMPLATE = goog.get(Env.templatePath + '/statusbar-tab-menu.html');
 
@@ -193,7 +192,7 @@ class StatusBarTab {
 
     // 可覆盖
     getMenuOptions() {
-        return { list: [], empty: '无选项' };
+        return { list: [], empty: Msg.Lang['无选项'] };
     }
 }
 

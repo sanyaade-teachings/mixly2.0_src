@@ -35,7 +35,6 @@
         "burn": true,
         "upload": true,
         "save": {
-            "img": true,
             "py": true
         },
         "setting": {
@@ -55,7 +54,7 @@
     "lib": {
         "mixly": {
             "url": [
-                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/master/cloud-libs/micropython_esp32c3/libs.json"
+                "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/develop/cloud-libs/micropython_esp32c3/libs.json"
             ]
         }
     },

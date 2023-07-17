@@ -133,16 +133,19 @@ PyEngine.prototype.filewrite = function(fileItem, str) {
 
 PyEngine.prototype.skInput = function(prompt) {
     return new Promise((resolve, reject) => {
-        var currText =  Mixly.StatusBar.getValue();
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        var currText =  statusBarTerminal.getValue();
         if (currText.lastIndexOf('\n') !== currText.length - 1)
-            Mixly.StatusBar.addValue('\n>>>' + prompt);
+            statusBarTerminal.addValue('\n>>>' + prompt);
         else
-            Mixly.StatusBar.addValue('>>>' + prompt);
-        const { Ace } = Mixly.StatusBar;
-        const { selection } = Ace;
-        const session = Ace.getSession();
+            statusBarTerminal.addValue('>>>' + prompt);
+        const { editor } = statusBarTerminal;
+        const { selection } = editor;
+        editor.setReadOnly(false);
+        const session = editor.getSession();
         const initRow = session.getLength();
-        Ace.gotoLine(initRow);
+        editor.gotoLine(initRow);
         selection.moveCursorLineEnd();
         const initCursor = selection.getCursor();
         const cursorCallback = session.selection.on('changeCursor', function (e) {
@@ -159,11 +162,13 @@ PyEngine.prototype.skInput = function(prompt) {
                 endRowStr = endRowStr.replace('>>>' + prompt, '');
                 session.selection.removeEventListener('changeCursor', cursorCallback);
                 selection.moveCursorLineEnd();
+                editor.setReadOnly(true);
                 resolve(endRowStr);
             } else {
                 const nowRow = session.getLength();
                 if (nowRow !== initRow) {
                     session.selection.removeEventListener('changeCursor', cursorCallback);
+                    editor.setReadOnly(true);
                     resolve('');
                 }
             }
@@ -324,8 +329,10 @@ var GLOBAL_VALUE;
  * Runs the given python code, resetting the console and Trace Table.
  */
 PyEngine.prototype.run = function(type) {
-    Mixly.StatusBar.setValue('');
-    Mixly.StatusBar.show(1);
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.setValue('');
+    mainStatusBarTab.show();
     if (!$('#skulpt-img').length) {
         $('body').append($(
             `<div id="skulpt-img" wrap="off" style="height:100%;display:none;">
@@ -390,7 +397,7 @@ PyEngine.prototype.run = function(type) {
             } catch (error) {
                 console.log(error);
             }
-            Mixly.StatusBar.addValue(lineText);
+            statusBarTerminal.addValue(lineText);
         },
         // Function to handle loading in new files
         read: this.readFile.bind(this),
@@ -416,7 +423,7 @@ PyEngine.prototype.run = function(type) {
     if(code === "") {
         engine.programStatus['running'] = false;
         $("#loading").css('display', "none");
-        Mixly.StatusBar.setValue('==无程序需运行==\n');
+        statusBarTerminal.setValue('==无程序需运行==\n');
         return;
     }
 
@@ -558,11 +565,11 @@ PyEngine.prototype.run = function(type) {
             engine.executionEnd_();
             */
             console.log('success');
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue('==程序运行完成==\n');
+            statusBarTerminal.addValue('==程序运行完成==\n');
         },
         function(error) {
             engine.programStatus['running'] = false;
@@ -581,11 +588,11 @@ PyEngine.prototype.run = function(type) {
             }
             engine.executionEnd_();
             console.log(error.toString());
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue(error.toString() + '\n==程序运行完成==\n');
+            statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
         }
 );
 

@@ -97,7 +97,6 @@ Interface.init = () => {
         auto_save_and_restore_blocks();
     }
     NavEvents.init();
-    // StatusBar.init();
     if (Env.hasSocketServer) {
         const { Socket } = Mixly.WebSocket;
         Socket.init();

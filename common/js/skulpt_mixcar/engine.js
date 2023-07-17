@@ -97,16 +97,19 @@ PyEngine.prototype.filewrite = function(fileItem, str) {
 
 PyEngine.prototype.skInput = function(prompt) {
     return new Promise((resolve, reject) => {
-        var currText =  Mixly.StatusBar.getValue();
+        const { mainStatusBarTab } = Mixly;
+        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        var currText = statusBarTerminal.getValue();
         if (currText.lastIndexOf('\n') !== currText.length - 1)
-            Mixly.StatusBar.addValue('\n>>>' + prompt);
+            statusBarTerminal.addValue('\n>>>' + prompt);
         else
-            Mixly.StatusBar.addValue('>>>' + prompt);
-        const { Ace } = Mixly.StatusBar;
-        const { selection } = Ace;
-        const session = Ace.getSession();
+            statusBarTerminal.addValue('>>>' + prompt);
+        const { editor } = statusBarTerminal;
+        const { selection } = editor;
+        editor.setReadOnly(false);
+        const session = editor.getSession();
         const initRow = session.getLength();
-        Ace.gotoLine(initRow);
+        editor.gotoLine(initRow);
         selection.moveCursorLineEnd();
         const initCursor = selection.getCursor();
         const cursorCallback = session.selection.on('changeCursor', function (e) {
@@ -123,11 +126,13 @@ PyEngine.prototype.skInput = function(prompt) {
                 endRowStr = endRowStr.replace('>>>' + prompt, '');
                 session.selection.removeEventListener('changeCursor', cursorCallback);
                 selection.moveCursorLineEnd();
+                editor.setReadOnly(true);
                 resolve(endRowStr);
             } else {
                 const nowRow = session.getLength();
                 if (nowRow !== initRow) {
                     session.selection.removeEventListener('changeCursor', cursorCallback);
+                    editor.setReadOnly(true);
                     resolve('');
                 }
             }
@@ -142,16 +147,18 @@ PyEngine.prototype.skInput = function(prompt) {
  *
  */
 PyEngine.prototype.reset = function() {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     //点击取消按钮发送数据     
     Sk.execLimit = 0;
     Sk.execLimit = Number.POSITIVE_INFINITY;    
     //$("#side_code").text('');
     //$("#blocklySVG").empty();
-    Mixly.StatusBar.setValue('');
+    statusBarTerminal.setValue('');
 }
 
 PyEngine.prototype.kill = function(type) {
-    event_save('kill');
+    // event_save('kill');
     //点击取消按钮发送数据     
     Sk.execLimit = 0;
     $("#loading").css('display', "none");
@@ -292,8 +299,10 @@ var GLOBAL_VALUE;
  * 分步调试代码
  */
 PyEngine.prototype.steprun = function(type) {
-    Mixly.StatusBar.setValue('');
-    Mixly.StatusBar.show(1);
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.setValue('');
+    mainStatusBarTab.show();
     if (!$('#skulpt-img').length) {
         $('body').append($(
             `<div id="skulpt-img" wrap="off" style="height:100%;display:none;">
@@ -318,7 +327,7 @@ PyEngine.prototype.steprun = function(type) {
     }
 
     window.actionArrayRecord = [];     
-    // $("#blocklySVG").empty();
+    $("#blocklySVG").empty();
     $("#loading").css('display', "inline-block");
 
     // Reset everything
@@ -331,7 +340,7 @@ PyEngine.prototype.steprun = function(type) {
     // Function to handle the text outputted by Skulpt
     //设置文本输出
         output: function(lineText){
-            Mixly.StatusBar.addValue(lineText);
+            statusBarTerminal.addValue(lineText);
         },
         // Function to handle loading in new files
         read: this.readFile.bind(this),
@@ -362,7 +371,7 @@ PyEngine.prototype.steprun = function(type) {
     if(code === "") {
         engine.programStatus['running'] = false;
         $("#loading").css('display', "none");
-        Mixly.StatusBar.setValue('==无程序需运行==\n');
+        statusBarTerminal.setValue('==无程序需运行==\n');
         return;
     }
 
@@ -466,7 +475,7 @@ PyEngine.prototype.steprun = function(type) {
         document.getElementById("blocklySVG").style.height='100%'
     }
 
-    event_save('steprun');
+    // event_save('steprun');
 
     if (ifpgzrun || ifbg_nonehl) {
         const _this = this;
@@ -501,7 +510,7 @@ PyEngine.prototype.steprun = function(type) {
             engine.check(code, execution.trace(), execution.output(), execution.ast, module.$d);
             engine.executionEnd_();
             */
-            Mixly.StatusBar.addValue('==程序运行完成==\n');
+            statusBarTerminal.addValue('==程序运行完成==\n');
             console.log('success');
         },
         function(error) {
@@ -517,7 +526,7 @@ PyEngine.prototype.steprun = function(type) {
 
             // var $errorE = $('<span />').addClass('errorMsg').html(original);
             // $("#side_code").append($errorE)
-            Mixly.StatusBar.addValue(original);
+            statusBarTerminal.addValue(original);
             var matchRet = /on line (\d+)/.exec(original);
             var lineNumber = -1;
             if(matchRet !== null && matchRet.length == 2){
@@ -527,11 +536,11 @@ PyEngine.prototype.steprun = function(type) {
             }
             engine.executionEnd_();
             console.log(error.toString());
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue(error.toString() + '\n==程序运行完成==\n');
+            statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
         }
 );
 
@@ -542,8 +551,10 @@ PyEngine.prototype.steprun = function(type) {
  * 直接运行，不分步高亮显示
  */
  PyEngine.prototype.run = function(type) {
-    Mixly.StatusBar.setValue('');
-    Mixly.StatusBar.show(1);
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.setValue('');
+    mainStatusBarTab.show();
     if (!$('#skulpt-img').length) {
         $('body').append($(
             `<div id="skulpt-img" wrap="off" style="height:100%;display:none;">
@@ -585,7 +596,7 @@ PyEngine.prototype.steprun = function(type) {
     // Function to handle the text outputted by Skulpt
     //设置文本输出
         output: function(lineText){
-            Mixly.StatusBar.addValue(lineText);
+            statusBarTerminal.addValue(lineText);
         },
         // Function to handle loading in new files
         read: this.readFile.bind(this),
@@ -603,13 +614,13 @@ PyEngine.prototype.steprun = function(type) {
     Sk.builtins.set_value = new Sk.builtin.func(function(v) {
         GLOBAL_VALUE = v.v;
     });
-    event_save('run'); 
+    // event_save('run'); 
     // Get the code
     var code = Mixly.MFile.getCode();
     if(code === "") {
         this.programStatus['running'] = false;
         $("#loading").css('display', "none");
-        Mixly.StatusBar.setValue('==无程序需运行==\n');
+        statusBarTerminal.setValue('==无程序需运行==\n');
         return;
     }
     //如果存在游戏模块，则只能读取模块代码
@@ -778,11 +789,11 @@ PyEngine.prototype.steprun = function(type) {
             engine.check(code, execution.trace(), execution.output(), execution.ast, module.$d);
             engine.executionEnd_();
             */
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue('==程序运行完成==\n');
+            statusBarTerminal.addValue('==程序运行完成==\n');
             console.log('success');
         },
         function(error) {
@@ -796,7 +807,7 @@ PyEngine.prototype.steprun = function(type) {
 
             var $errorE = $('<span />').addClass('errorMsg').html(original);
             // $("#side_code").append($errorE)
-            Mixly.StatusBar.addValue(original);
+            statusBarTerminal.addValue(original);
             var matchRet = /on line (\d+)/.exec(original);
             var lineNumber = -1;
             if(matchRet !== null && matchRet.length == 2){
@@ -806,11 +817,11 @@ PyEngine.prototype.steprun = function(type) {
             }
             engine.executionEnd_();
             console.log(error.toString());
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue(error.toString() + '\n==程序运行完成==\n');
+            statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
         }
 );
 
@@ -845,7 +856,7 @@ PyEngine.prototype.run2 = function(type) {
     // Function to handle the text outputted by Skulpt
     //设置文本输出
         output: function(lineText){
-                Mixly.StatusBar.addValue(lineText);
+                statusBarTerminal.addValue(lineText);
             },
         // Function to handle loading in new files
         read: this.readFile.bind(this),
@@ -1005,11 +1016,11 @@ PyEngine.prototype.run2 = function(type) {
             engine.check(code, execution.trace(), execution.output(), execution.ast, module.$d);
             engine.executionEnd_();
             */
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue('==程序运行完成==\n');
+            statusBarTerminal.addValue('==程序运行完成==\n');
             console.log('success');
         },
         function(error) {
@@ -1025,7 +1036,7 @@ PyEngine.prototype.run2 = function(type) {
 
             var $errorE = $('<span />').addClass('errorMsg').html(original);
             // $("#side_code").append($errorE)
-            Mixly.StatusBar.addValue(original);
+            statusBarTerminal.addValue(original);
             var matchRet = /on line (\d+)/.exec(original);
             var lineNumber = -1;
             if(matchRet !== null && matchRet.length == 2){
@@ -1035,11 +1046,11 @@ PyEngine.prototype.run2 = function(type) {
             }
             engine.executionEnd_();
             console.log(error.toString());
-            const nowValue = Mixly.StatusBar.getValue();
+            const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
-                Mixly.StatusBar.addValue('\n');
+                statusBarTerminal.addValue('\n');
             }
-            Mixly.StatusBar.addValue(error.toString() + '\n==程序运行完成==\n');
+            statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
         }
 );
 

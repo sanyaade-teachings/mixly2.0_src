@@ -10,6 +10,7 @@ goog.require('Blockly.FieldSlider');
 goog.require('Blockly.FieldBitmap');
 goog.require('Blockly.FieldColourHsvSliders');
 goog.require('Blockly.FieldDate');
+goog.require('Blockly.Screenshot');
 goog.require('Mixly.Config');
 goog.require('Mixly.ToolboxSearcher');
 goog.provide('Mixly.BlockEditor');
@@ -102,9 +103,23 @@ class BlockEditor {
     addPlugins() {
         const { editor } = this;
         editor.configureContextMenu = (menuOptions, e) => {
-            menuOptions.push(
-                Blockly.ContextMenu.workspaceCommentOption(editor, e)
-            );
+            menuOptions.push(Blockly.ContextMenu.workspaceCommentOption(editor, e));
+            const workspaceSearchOption = {
+                text: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
+                enabled: editor.getTopBlocks().length,
+                callback: function() {
+                    workspaceSearch.open();
+                }
+            };
+            menuOptions.push(workspaceSearchOption);
+            const screenshotOption = {
+                text: Blockly.Msg['DOWNLOAD_SCREENSHOT'],
+                enabled: editor.getTopBlocks().length,
+                callback: function() {
+                    Blockly.Screenshot.downloadScreenshot(editor);
+                },
+            };
+            menuOptions.push(screenshotOption);
         }
         const zoomToFit = new ZoomToFitControl(editor);
         zoomToFit.init();
@@ -117,23 +132,6 @@ class BlockEditor {
             const contentHighlight = new ContentHighlight(editor);
             contentHighlight.init();
         }
-        const workspaceSearchOpen = {
-            displayText: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
-            preconditionFn: function(scope) {
-                const blocks = editor.getAllBlocks();
-                if (blocks.length)
-                    return 'enabled';
-                else
-                    return 'hidden';
-            },
-            callback: function() {
-                workspaceSearch.open();
-            },
-            scopeType: Blockly.ContextMenuRegistry.ScopeType.WORKSPACE,
-            id: 'workspaceSearch_open',
-            weight: 200
-        };
-        Blockly.ContextMenuRegistry.registry.register(workspaceSearchOpen);
     }
 }
 

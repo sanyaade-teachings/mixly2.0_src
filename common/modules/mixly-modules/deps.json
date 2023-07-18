@@ -147,6 +147,7 @@
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg",
+            "Mixly.Config",
             "Mixly.FooterLayer",
             "Mixly.FooterLayerExample",
             "Mixly.FooterLayerBoardConfig",
@@ -794,7 +795,8 @@
             "PouchDB",
             "d3",
             "Mixly.Electron.Events",
-            "bootstrap"
+            "bootstrap",
+            "path"
         ],
         "provide": [
             "MixlyLoader"

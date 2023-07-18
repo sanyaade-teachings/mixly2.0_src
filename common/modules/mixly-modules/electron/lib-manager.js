@@ -159,31 +159,6 @@ LibManager.convertLibs = (libsDir) => {
                 console.log(e);
             }
         }
-        if (!fs_extend.isdir(blocksDir)) return;
-        // 将1.x版本block转化为2.0可用
-        const blockList = fs.readdirSync(blocksDir);
-        for (let block of blockList) {
-            const blockPath = path.resolve(blocksDir, './' + block);
-            if (fs_extend.isdir(blockPath)) {
-                continue;
-            }
-            let blockData = fs.readFileSync(blockPath, 'utf8');
-            try {
-                blockData = blockData.replace(/\.\.\/\.\.\/media\//g, "./libraries/ThirdParty/" + libName + "/media/");
-                blockData = blockData.replace(/Blockly\.Block\.obtain\([\s]*workspace[\s]*\,/g, "workspace.newBlock(");
-                blockData = blockData.replace(/Blockly\.FieldTextArea/g, "Blockly.FieldMultilineInput");
-                blockData = blockData.replace(/Blockly\.Blocks\.[\u4E00-\u9FA5A-Za-z0-9_]+\.[\u4E00-\u9FA5A-Za-z0-9_]+/g, function (s) {
-                    let strList = s.split('.');
-                    if (strList.length !== 4) {
-                        return s;
-                    }
-                    return `Blockly.Msg['${strList[2].toUpperCase()}_${strList[3].toUpperCase()}']`;
-                });
-                fs.writeFileSync(blockPath, blockData);
-            } catch (e) {
-                console.log(e);
-            }
-        }
     }
 }
 

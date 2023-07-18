@@ -166,6 +166,10 @@ goog.DEPENDENCIES = [
         "provide": ['FingerprintJS'],
         "require": []
     }, {
+        "path": '/../web-modules/path-browserify.js',
+        "provide": ['path'],
+        "require": []
+    }, {
         "path": '/web/serialport.js',
         "provide": ['WebSerialPort'],
         "require": []

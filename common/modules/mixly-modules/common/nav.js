@@ -70,7 +70,7 @@ Nav.LEFT_BTN_CONFIG = [
         id: 'undo-btn',
         title: 'undo(ctrl+z)',
         href: '#',
-        onclick: 'Mixly.Editor.undo()'
+        onclick: 'Mixly.Editor.mainEditor.undo()'
     }, {
         // 【重复】按钮
         type: 'REDO',
@@ -78,7 +78,7 @@ Nav.LEFT_BTN_CONFIG = [
         id: 'redo-btn',
         title: 'redo(ctrl+y)',
         href: '#',
-        onclick: 'Mixly.Editor.redo()'
+        onclick: 'Mixly.Editor.mainEditor.redo()'
     }, {
         // 网页版的【连接】按钮
         type: 'CONNECT',

@@ -19,7 +19,7 @@ const {
     Msg,
     Config
 } = Mixly;
-const { USER, BOARD } = Config;
+const { BOARD } = Config;
 
 class MixedEditor {
     constructor(editorConfig) {
@@ -28,9 +28,8 @@ class MixedEditor {
         this.codeEditor = new CodeEditor(codeEditorConfig.id);
         this.selected = 'BLOCK';
         this.drag = this.addDrag();
-        this.addBtnClickEvent();
+        this.addNavBtnClickEvent();
         this.codeEditorMenuRender();
-        this.codeEditorAddEvent();
         const blocklyWorkspace = this.blockEditor.editor;
         this.blockEditor.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.codeChangeEvent(event);
@@ -144,35 +143,6 @@ class MixedEditor {
         });
     }
 
-    codeEditorAddEvent() {
-        $('#mixly-footer-codelang').html(BOARD.language ?? '未知');
-        const { editor } = this.codeEditor;
-        $('#mixly-footer-cursor').hide();
-        editor.on('focus', function() {
-            $('#mixly-footer-cursor').show();
-        });
-        editor.on("blur", function() {
-            $('#mixly-footer-cursor').hide();
-        });
-        const { selection } = editor.getSession();
-        const { session } = editor;
-        selection.on('changeCursor', function () {
-            const cursor = selection.getCursor();
-            $('#mixly-footer-row').html(cursor.row + 1);
-            $('#mixly-footer-column').html(cursor.column + 1);
-        });
-        selection.on("changeSelection", function () {
-            if (selection.isEmpty()) {
-                $('#mixly-footer-selected').parent().hide();
-            } else {
-                const range = selection.getRange();
-                const text = session.getTextRange(range);
-                $('#mixly-footer-selected').parent().css('display', 'inline-flex');
-                $('#mixly-footer-selected').html(text.length); 
-            }
-        });
-    }
-
     addDrag() {
         const { blockEditor, codeEditor } = this;
         const blocklyWorkspace = blockEditor.editor;
@@ -247,7 +217,7 @@ class MixedEditor {
         return vDrag;
     }
 
-    addBtnClickEvent() {
+    addNavBtnClickEvent() {
         const $vBar = $('#nav').find('button[m-id="v-bar"]').children('a');
         const $buttons = $('#nav-right-btn-list').find('button[m-id!="h-bar"]');
         for (let i = 0; $buttons[i]; i++) {

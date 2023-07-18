@@ -21,6 +21,7 @@ class CodeEditor {
         this.addDefaultCommand();
         this.destroyed = false;
         this.toCodeEditor();
+        this.addCursorEvent();
     }
 
     toCodeEditor() {
@@ -163,6 +164,37 @@ class CodeEditor {
                 this.resetFontSize();
             }
         }]);
+    }
+
+    addCursorEvent() {
+        const { editor } = this;
+        $('#mixly-footer-cursor').hide();
+        editor.on('focus', function() {
+            const cursor = selection.getCursor();
+            $('#mixly-footer-row').html(cursor.row + 1);
+            $('#mixly-footer-column').html(cursor.column + 1);
+            $('#mixly-footer-cursor').show();
+        });
+        editor.on("blur", function() {
+            $('#mixly-footer-cursor').hide();
+        });
+        const { selection } = editor.getSession();
+        const { session } = editor;
+        selection.on('changeCursor', function () {
+            const cursor = selection.getCursor();
+            $('#mixly-footer-row').html(cursor.row + 1);
+            $('#mixly-footer-column').html(cursor.column + 1);
+        });
+        selection.on("changeSelection", function () {
+            if (selection.isEmpty()) {
+                $('#mixly-footer-selected').parent().hide();
+            } else {
+                const range = selection.getRange();
+                const text = session.getTextRange(range);
+                $('#mixly-footer-selected').parent().css('display', 'inline-flex');
+                $('#mixly-footer-selected').html(text.length); 
+            }
+        });
     }
 
     addCtrlBtns() {

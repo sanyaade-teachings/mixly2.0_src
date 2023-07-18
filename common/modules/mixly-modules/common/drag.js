@@ -5,7 +5,7 @@ goog.provide('Mixly.Drag');
 goog.provide('Mixly.DragH');
 goog.provide('Mixly.DragV');
 
-const { Editor, Config } = Mixly;
+const { Config } = Mixly;
 
 const { BOARD } = Config;
 

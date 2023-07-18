@@ -1,10 +1,8 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly.Config');
 goog.provide('Mixly.Env');
 
-const { Env, Config } = Mixly;
-const { SOFTWARE } = Config;
+const { Env } = Mixly;
 
 /**
   * 检测当前环境
@@ -16,13 +14,13 @@ Env.isElectron = true;
   * 检测是否启用node服务器
   * @type {Boolean}
   */
-Env.hasSocketServer = SOFTWARE?.webSocket?.enabled ? true : false;
+Env.hasSocketServer = false;
 
 /**
   * 检测是否启用node编译服务器
   * @type {Boolean}
   */
-Env.hasCompiler = SOFTWARE?.webCompiler?.enabled ? true : false;
+Env.hasCompiler = false;
 
 /**
   * 获取当前mixly2.0的路径

@@ -2,20 +2,33 @@ goog.loadJs('common', () => {
 
 goog.require('FingerprintJS');
 goog.require('Mixly.Url');
+goog.require('Mixly.Env');
+goog.require('Mixly.Modules');
 goog.provide('Mixly.Config');
 
-const { Config, Url } = Mixly;
+const { Config, Url, Env, Modules } = Mixly;
 
 // 被选中板卡的配置信息
 Config.SELECTED_BOARD = {};
+
 // 板卡页面的配置信息
 Config.BOARD = {};
+
 // 软件的配置信息
 Config.SOFTWARE = {};
+
+Config.USER = {
+    theme: 'light',
+    language: 'zh-hans',
+    winSize: 1,
+    blockRenderer: 'geras',
+    compileCAndH: 'true'
+};
 
 const URL_DEFAULT_CONFIG = {
     "thirdPartyBoard": false
 };
+
 const BOARD_DEFAULT_CONFIG = {
     "burn": "None",
     "upload": "None",
@@ -23,6 +36,7 @@ const BOARD_DEFAULT_CONFIG = {
     "serial": "None",
     "saveMixWithCode": true
 };
+
 const SOFTWARE_DEFAULT_CONFIG = {
     "version": "Mixly2.0"
 };
@@ -74,6 +88,48 @@ Config.init = () => {
     Config.pathPrefix = pathPrefix;
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
 
+    Env.hasSocketServer = Config.SOFTWARE?.webSocket?.enabled ? true : false;
+    Env.hasCompiler = Config.SOFTWARE?.webCompiler?.enabled ? true : false;
+
+    // 如果当前在electron环境下，则从本地setting文件夹下读取用户配置，
+    // 如果在Web下，则从window.localStorage.setting中读取用户配置
+    let userConfig = null;
+    if (Env.isElectron) {
+        const { fs_extra, path } = Modules;
+        const SETTING_FILE = path.resolve(Env.clientPath, './setting/config.json');
+        userConfig = fs_extra.readJsonSync(SETTING_FILE, { throws: false });
+    } else {
+        userConfig = store.get('mixly2.0-config');
+    }
+
+    if (userConfig)
+        Config.USER = {
+            ...Config.USER,
+            ...userConfig
+        };
+
+    if (Config.USER.themeAuto) {
+        const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+        Config.USER.theme = themeMedia.matches ? 'light' : 'dark';
+    }
+
+    if (Config.USER.languageAuto) {
+        switch (navigator.language) {
+        case 'zh-CN':
+            Config.USER.language = 'zh-hans';
+            break;
+        case 'zh-HK':
+        case 'zh-SG':
+        case 'zh-TW':
+            Config.USER.language = 'zh-hant';
+            break;
+        default:
+            Config.USER.language = 'en';
+        }
+    }
+
+    console.log('Config.USER', Config.USER);
+
     FingerprintJS.load()
     .then(fp => fp.get())
     .then(result => {
@@ -95,13 +151,5 @@ Config.init = () => {
 }
 
 Config.init();
-
-Config.USER = {
-    theme: 'light',
-    language: 'zh-hans',
-    winSize: 1,
-    blockRenderer: 'geras',
-    compileCAndH: 'true'
-};
 
 });

@@ -1,8 +1,6 @@
 goog.loadJs('web', () => {
 
 goog.require('Mixly.Charts');
-// goog.require('Mixly.StatusBar');
-// goog.require('Mixly.StatusBarPort');
 goog.require('Mixly.Config');
 goog.require('Mixly.Tools');
 goog.require('Mixly.Env');

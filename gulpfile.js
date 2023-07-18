@@ -16,26 +16,47 @@ const build_deps = require('./build/build-deps.js');
 const path = require('path');
 const fs_extra = require('fs-extra');
 
+const config = {
+    "workPath": __dirname,
+    "fileIgnore": [
+        path.resolve(__dirname, './common/modules/mixly-modules/mixly.min.js')
+    ],
+    "dirIgnore": [
+    ]
+};
+
 const NEED_BUILD_PATH = [
-    './common/modules/mixly-modules/common',
-    './common/modules/mixly-modules/electron',
-    './common/modules/mixly-modules/web',
-    './common/modules/mixly-modules/web-compiler',
-    './common/modules/mixly-modules/web-socket'
+    './common/modules/mixly-modules/'
 ];
 
 const OUPUT_DEPS_PATH = './common/modules/mixly-modules/deps.json';
 
-const genDeps = () => {
+const genDeps = (config) => {
+    let fileIgnore = [];
+    let dirIgnore = [];
+    if (typeof config.fileIgnore === 'object') {
+        for (let data of config.fileIgnore) {
+            fileIgnore.push(data);
+        }
+    }
+    if (typeof config.dirIgnore === 'object') {
+        for (let data of config.dirIgnore) {
+            dirIgnore.push(data);
+        }
+    }
+    const ignore = {
+        dir: dirIgnore,
+        file: fileIgnore
+    };
     let deps = [];
     for (let buildPath of NEED_BUILD_PATH) {
         buildPath = path.resolve(__dirname, buildPath);
-        deps = [ ...deps, ...build_deps.generate(buildPath) ];
+        deps = [ ...deps, ...build_deps.generate(buildPath, ignore) ];
     }
     return deps;
 }
 
-let deps = genDeps(NEED_BUILD_PATH);
+let deps = genDeps(config);
 let provideList = [],
     requireList = [],
     requireFromOthersList = [];

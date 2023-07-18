@@ -79,7 +79,9 @@
         "path": "/common/config.js",
         "require": [
             "FingerprintJS",
-            "Mixly.Url"
+            "Mixly.Url",
+            "Mixly.Env",
+            "Mixly.Modules"
         ],
         "provide": [
             "Mixly.Config"
@@ -134,9 +136,7 @@
     },
     {
         "path": "/common/env.js",
-        "require": [
-            "Mixly.Config"
-        ],
+        "require": [],
         "provide": [
             "Mixly.Env"
         ]
@@ -784,6 +784,23 @@
         ]
     },
     {
+        "path": "/mixly-loader.js",
+        "require": [
+            "Mixly.Loading",
+            "Mixly.JSFuncs",
+            "Mixly.Interface",
+            "select2",
+            "XScrollbar",
+            "PouchDB",
+            "d3",
+            "Mixly.Electron.Events",
+            "bootstrap"
+        ],
+        "provide": [
+            "MixlyLoader"
+        ]
+    },
+    {
         "path": "/web/ampy.js",
         "require": [
             "Mixly.MString",
@@ -865,8 +882,6 @@
         "path": "/web/serial.js",
         "require": [
             "Mixly.Charts",
-            "Mixly.StatusBar",
-            "Mixly.StatusBarPort",
             "Mixly.Config",
             "Mixly.Tools",
             "Mixly.Env",

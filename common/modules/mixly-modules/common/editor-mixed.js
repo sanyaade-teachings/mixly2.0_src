@@ -154,13 +154,7 @@ class EditorMixed {
             full: [true, true],
             sizeChanged: () => {
                 // 重新调整编辑器尺寸
-                $(blocklyWorkspace.getParentSvg()).attr({
-                    width: blockEditor.$div.width(),
-                    height: blockEditor.$div.height()
-                });
-
-                codeEditor.resize();
-                blockEditor.resize();
+                Blockly.fireUiEvent(window, 'resize');
             },
             onfull: (type) => {
                 switch(type) {

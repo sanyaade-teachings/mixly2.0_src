@@ -829,11 +829,11 @@ Mixly.Nav.MsgById = {
     'socket-connect-btn': 'connect',
     'other-burn-btn': 'other_firmware',
     'wiki-btn': 'wiki',
-    'feedback-btn': 'feedback',
-    'copyright': 'copyright'
+    'feedback-btn': 'feedback'
 };
 
 function showTag() {
+    tagSelect('copyright', 'copyright');
     tagSelect('tab_blocks', 'tab_blocks');
     tagSelect('tab_arduino', 'tab_arduino');
     if ($('#changemod-btn').attr('value') === '1') {

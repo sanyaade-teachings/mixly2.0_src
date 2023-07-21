@@ -1,26 +1,5 @@
 [
     {
-        "path": "/common/block-editor.js",
-        "require": [
-            "Blockly",
-            "WorkspaceSearch",
-            "Backpack",
-            "ContentHighlight",
-            "ZoomToFitControl",
-            "Blockly.FieldGridDropdown",
-            "Blockly.FieldSlider",
-            "Blockly.FieldBitmap",
-            "Blockly.FieldColourHsvSliders",
-            "Blockly.FieldDate",
-            "Blockly.Screenshot",
-            "Mixly.Config",
-            "Mixly.ToolboxSearcher"
-        ],
-        "provide": [
-            "Mixly.BlockEditor"
-        ]
-    },
-    {
         "path": "/common/board-config-item.js",
         "require": [
             "Mixly.Env",
@@ -51,18 +30,6 @@
         ],
         "provide": [
             "Mixly.Boards"
-        ]
-    },
-    {
-        "path": "/common/code-editor.js",
-        "require": [
-            "ace",
-            "ace.ExtLanguageTools",
-            "Mixly.Config",
-            "Mixly.XML"
-        ],
-        "provide": [
-            "Mixly.CodeEditor"
         ]
     },
     {
@@ -122,13 +89,75 @@
         ]
     },
     {
+        "path": "/common/editor-ace.js",
+        "require": [
+            "ace",
+            "ace.ExtLanguageTools",
+            "Mixly.XML"
+        ],
+        "provide": [
+            "Mixly.EditorAce"
+        ]
+    },
+    {
+        "path": "/common/editor-blockly.js",
+        "require": [
+            "Blockly",
+            "WorkspaceSearch",
+            "Backpack",
+            "ContentHighlight",
+            "ZoomToFitControl",
+            "Blockly.FieldGridDropdown",
+            "Blockly.FieldSlider",
+            "Blockly.FieldBitmap",
+            "Blockly.FieldColourHsvSliders",
+            "Blockly.FieldDate",
+            "Blockly.Screenshot",
+            "Mixly.Config",
+            "Mixly.ToolboxSearcher"
+        ],
+        "provide": [
+            "Mixly.EditorBlockly"
+        ]
+    },
+    {
+        "path": "/common/editor-code.js",
+        "require": [
+            "ace",
+            "ace.ExtLanguageTools",
+            "Mixly.Config",
+            "Mixly.XML",
+            "Mixly.EditorAce"
+        ],
+        "provide": [
+            "Mixly.EditorCode"
+        ]
+    },
+    {
+        "path": "/common/editor-mixed.js",
+        "require": [
+            "layui",
+            "Blockly",
+            "Mixly.DragV",
+            "Mixly.XML",
+            "Mixly.Msg",
+            "Mixly.Config",
+            "Mixly.EditorBlockly",
+            "Mixly.EditorCode"
+        ],
+        "provide": [
+            "Mixly.EditorMixed"
+        ]
+    },
+    {
         "path": "/common/editor.js",
         "require": [
             "Blockly",
             "Mixly.DragH",
-            "Mixly.MixedEditor",
+            "Mixly.EditorMixed",
             "Mixly.StatusBarTab",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.Config"
         ],
         "provide": [
             "Mixly.Editor"
@@ -344,22 +373,6 @@
         ]
     },
     {
-        "path": "/common/mixed-editor.js",
-        "require": [
-            "layui",
-            "Blockly",
-            "Mixly.BlockEditor",
-            "Mixly.CodeEditor",
-            "Mixly.DragV",
-            "Mixly.XML",
-            "Mixly.Msg",
-            "Mixly.Config"
-        ],
-        "provide": [
-            "Mixly.MixedEditor"
-        ]
-    },
-    {
         "path": "/common/mixly.js",
         "require": [],
         "provide": [
@@ -508,7 +521,7 @@
         "path": "/common/statusbar.js",
         "require": [
             "Mixly.Config",
-            "Mixly.CodeEditor"
+            "Mixly.EditorAce"
         ],
         "provide": [
             "Mixly.StatusBar"

@@ -2,18 +2,18 @@ goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Blockly');
-goog.require('Mixly.BlockEditor');
-goog.require('Mixly.CodeEditor');
 goog.require('Mixly.DragV');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
-goog.provide('Mixly.MixedEditor');
+goog.require('Mixly.EditorBlockly');
+goog.require('Mixly.EditorCode');
+goog.provide('Mixly.EditorMixed');
 
 const { dropdown } = layui;
 const {
-    BlockEditor,
-    CodeEditor,
+    EditorBlockly,
+    EditorCode,
     DragV,
     XML,
     Msg,
@@ -21,11 +21,11 @@ const {
 } = Mixly;
 const { BOARD } = Config;
 
-class MixedEditor {
+class EditorMixed {
     constructor(editorConfig) {
         const { blockEditorConfig, codeEditorConfig } = editorConfig;
-        this.blockEditor = new BlockEditor(blockEditorConfig.id, blockEditorConfig.toolboxId);
-        this.codeEditor = new CodeEditor(codeEditorConfig.id);
+        this.blockEditor = new EditorBlockly(blockEditorConfig.id, blockEditorConfig.toolboxId);
+        this.codeEditor = new EditorCode(codeEditorConfig.id);
         this.selected = 'BLOCK';
         this.drag = this.addDrag();
         this.addNavBtnClickEvent();
@@ -159,8 +159,8 @@ class MixedEditor {
                     height: blockEditor.$div.height()
                 });
 
-                aceEditor.resize();
-                Blockly.fireUiEvent(window, 'resize');
+                codeEditor.resize();
+                blockEditor.resize();
             },
             onfull: (type) => {
                 switch(type) {
@@ -169,8 +169,9 @@ class MixedEditor {
                     aceEditor.setReadOnly(true);
                     codeEditor.hideCtrlBtns();
                     this.selected = 'BLOCK';
-                    this.codeEditor.shown = false;
-                    this.blockEditor.shown = true;
+                    codeEditor.shown = false;
+                    blockEditor.shown = true;
+                    blocklyWorkspace.scrollCenter();
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
                     $codeArea.removeClass('icon-code-1').addClass('icon-block');
@@ -178,8 +179,8 @@ class MixedEditor {
                     aceEditor.setReadOnly(false);
                     codeEditor.showCtrlBtns();
                     this.selected = 'CODE';
-                    this.codeEditor.shown = true;
-                    this.blockEditor.shown = false;
+                    codeEditor.shown = true;
+                    blockEditor.shown = false;
                     const { py2BlockEditor } = blockEditor;
                     if (py2BlockEditor && BOARD.pythonToBlockly) {
                         py2BlockEditor.fromCode = true;
@@ -189,8 +190,8 @@ class MixedEditor {
                 this.codeEditorMenuRender();
             },
             exitfull: (type) => {
-                this.codeEditor.shown = true;
-                this.blockEditor.shown = true;
+                codeEditor.shown = true;
+                blockEditor.shown = true;
                 aceEditor.setReadOnly(true);
                 this.selected = 'BLOCK';
                 this.codeEditorMenuRender();
@@ -273,6 +274,6 @@ class MixedEditor {
     }
 }
 
-Mixly.MixedEditor = MixedEditor;
+Mixly.EditorMixed = EditorMixed;
 
 });

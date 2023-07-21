@@ -2,14 +2,12 @@ goog.loadJs('common', () => {
 
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
-goog.require('Mixly.Config');
 goog.require('Mixly.XML');
-goog.provide('Mixly.CodeEditor');
+goog.provide('Mixly.EditorAce');
 
-const { Config, XML } = Mixly;
-const { USER, BOARD } = Config;
+const { XML } = Mixly;
 
-class CodeEditor {
+class EditorAce {
     static CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
     static CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
     static MENU_TEMPLATE = '<div style="float:left;">{{d.name}}&nbsp</div><div style="float:right;">&nbsp{{d.hotKey}}</div>';
@@ -20,39 +18,7 @@ class CodeEditor {
         this.resetFontSize();
         this.addDefaultCommand();
         this.destroyed = false;
-        this.toCodeEditor();
         this.addCursorEvent();
-    }
-
-    toCodeEditor() {
-        this.addCtrlBtns();
-        this.editor.setShowPrintMargin(false);
-        this.editor.setReadOnly(true);
-        this.editor.setScrollSpeed(0.8);
-        this.editor.setOptions({
-            enableBasicAutocompletion: true,
-            enableSnippets: true,
-            enableLiveAutocompletion: true
-        });
-        const session = this.editor.getSession();
-        const language = BOARD.language.toLowerCase();
-        switch (language) {
-        case 'python':
-        case 'circuitpython':
-        case 'micropython':
-            session.setTabSize(4);
-            session.setMode('ace/mode/python');
-            this.editor.setTheme('ace/theme/' + 
-                (USER.theme === 'dark' ? 'dracula' : 'crimson_editor'));
-            break;
-        case 'c/c++':
-        default:
-            session.setTabSize(2);
-            session.setMode('ace/mode/c_cpp');
-            this.editor.setTheme('ace/theme/' + 
-                (USER.theme === 'dark' ? 'dracula' : 'xcode'));
-            break;
-        }
     }
 
     dispose() {
@@ -198,8 +164,8 @@ class CodeEditor {
     }
 
     addCtrlBtns() {
-        for (let mId of CodeEditor.CTRL_BTNS) {
-            this.$div.append(XML.render(CodeEditor.CTRL_BTN_TEMPLATE, { mId }));
+        for (let mId of EditorAce.CTRL_BTNS) {
+            this.$div.append(XML.render(EditorAce.CTRL_BTN_TEMPLATE, { mId }));
         }
         this.$ctrlBtns = this.$div.children('.code-editor-btn');
         this.$ctrlBtns.off().click((event) => {
@@ -238,13 +204,17 @@ class CodeEditor {
         this.editor.redo();
     }
 
+    resize() {
+    	this.editor.resize();
+    }
+
     generateMenu(options) {
         let data = [];
         for (let option of options) {
             let item = {};
             const { id, name, hotKey } = option;
             if (id && name) {
-                item.title = XML.render(CodeEditor.MENU_TEMPLATE, { name, hotKey });
+                item.title = XML.render(EditorAce.MENU_TEMPLATE, { name, hotKey });
                 item.id = id;
             } else {
                 item.type = '-';
@@ -299,6 +269,6 @@ class CodeEditor {
     }
 }
 
-Mixly.CodeEditor = CodeEditor;
+Mixly.EditorAce = EditorAce;
 
 });

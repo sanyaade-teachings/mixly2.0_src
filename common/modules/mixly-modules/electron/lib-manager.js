@@ -304,7 +304,7 @@ LibManager.menuAddEvent = (layero) => {
                 if (libList.length > 0) {
                     LibManager.showCloudImportProgress(libList);
                 } else {
-                    layer.msg(Msg.Lang['请选择至少一个库'] + '!', { time: 1000 });
+                    layer.msg(Msg.Lang['请选择至少一个库'], { time: 1000 });
                 }
                 break;
             case 'local-import':
@@ -323,7 +323,7 @@ LibManager.menuAddEvent = (layero) => {
                         LibManager.delLibs(delType, libPathList, index);
                     });
                 } else {
-                    layer.msg(Msg.Lang['请选择至少一个库'] + '!', { time: 1000 });
+                    layer.msg(Msg.Lang['请选择至少一个库'], { time: 1000 });
                 }
                 break;
             case 'open-folder':

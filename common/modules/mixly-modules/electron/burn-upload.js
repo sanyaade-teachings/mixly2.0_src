@@ -177,7 +177,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     .then(() => {
         layer.close(layerNum);
         const message = (type === 'burn'? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']);
-        layer.msg(message + '!', {
+        layer.msg(message, {
             time: 1000
         });
         statusBarTerminal.setValue(`==${message}==`);
@@ -269,7 +269,7 @@ BU.getDisksWithVolumesName = function (type, volumeName, startPath) {
             if (err || stderr) {
                 $('#mixly-loader-div').css('display', 'none');
                 console.log("root path open failed" + err + stderr);
-                layer.msg(Msg.Lang['无可用设备'] + '!', {
+                layer.msg(Msg.Lang['无可用设备'], {
                     time: 1000
                 });
                 BU.burning = false;
@@ -304,7 +304,7 @@ BU.getDisksWithVolumesName = function (type, volumeName, startPath) {
             }
         }
         if (deviceNum === 0) {
-            layer.msg(Msg.Lang['无可用设备'] + '!', {
+            layer.msg(Msg.Lang['无可用设备'], {
                 time: 1000
             });
             BU.burning = false;
@@ -563,10 +563,10 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             }
             statusBarTerminal.addValue(error + "\n");
         } else {
-            layer.msg((type === 'burn' ? Msg.Lang['烧录成功'] + '！' : Msg.Lang['上传成功'] + '！'), {
+            layer.msg((type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']), {
                 time: 1000
             });
-            statusBarTerminal.addValue((type === 'burn' ? Msg.Lang['烧录成功'] + '！' : Msg.Lang['上传成功'] + '！') + '\n');
+            statusBarTerminal.addValue((type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']) + '\n');
             if (type === 'upload') {
                 mainStatusBarTab.show();
                 if (USER.autoOpenPort === 'no') {
@@ -669,7 +669,7 @@ BU.burnWithSpecialBin = () => {
  **/
 BU.operateWithPort = (type, port, command) => {
     if (!port) {
-        layer.msg(Msg.Lang['无可用设备'] + '!', {
+        layer.msg(Msg.Lang['无可用设备'], {
             time: 1000
         });
         BU.burning = false;

@@ -1,13 +1,13 @@
 goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
-goog.require('Mixly.CodeEditor');
+goog.require('Mixly.EditorAce');
 goog.provide('Mixly.StatusBar');
 
-const { Config, CodeEditor } = Mixly;
+const { Config, EditorAce } = Mixly;
 const { USER } = Config;
 
-class StatusBar extends CodeEditor {
+class StatusBar extends EditorAce {
     constructor(id) {
         super(id);
         this.id = id;

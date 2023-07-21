@@ -13,12 +13,12 @@ goog.require('Blockly.FieldDate');
 goog.require('Blockly.Screenshot');
 goog.require('Mixly.Config');
 goog.require('Mixly.ToolboxSearcher');
-goog.provide('Mixly.BlockEditor');
+goog.provide('Mixly.EditorBlockly');
 
 const { Config, ToolboxSearcher } = Mixly;
 const { USER, BOARD } = Config;
 
-class BlockEditor {
+class EditorBlockly {
     constructor(id, toolboxId) {
         this.id = id;
         this.$div = $(`#${this.id}`);
@@ -100,6 +100,17 @@ class BlockEditor {
         this.editor.undo(1);
     }
 
+    resize() {
+        // 重新调整编辑器尺寸
+        $(this.editor.getParentSvg()).attr({
+            width: this.$div.width(),
+            height: this.$div.height()
+        });
+        this.editor.hideComponents(true);
+        Blockly.common.svgResize(this.editor);
+        Blockly.bumpObjects.bumpTopObjectsIntoBounds(this.editor);
+    }
+
     addPlugins() {
         const { editor } = this;
         editor.configureContextMenu = (menuOptions, e) => {
@@ -135,6 +146,6 @@ class BlockEditor {
     }
 }
 
-Mixly.BlockEditor = BlockEditor;
+Mixly.EditorBlockly = EditorBlockly;
 
 });

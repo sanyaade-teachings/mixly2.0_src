@@ -955,7 +955,7 @@ BoardManager.onclickImportBoards = () => {
                 if (boardList.length > 0) {
                     BoardManager.showCloudImportProgress(boardList);
                 } else {
-                    layer.msg(Msg.getLang('请选择至少一块云端板卡') + '!', { time: 2000 });
+                    layer.msg(Msg.getLang('请选择至少一块云端板卡'), { time: 2000 });
                 }
                 break;
             case 'local-import':

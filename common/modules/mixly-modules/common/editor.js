@@ -2,21 +2,25 @@ goog.loadJs('common', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.DragH');
-goog.require('Mixly.MixedEditor');
+goog.require('Mixly.EditorMixed');
 goog.require('Mixly.StatusBarTab');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Config');
 goog.provide('Mixly.Editor');
 
 const {
     DragH,
-    MixedEditor,
+    EditorMixed,
     StatusBarTab,
     Msg,
+    Config,
     Editor
 } = Mixly;
 
+const { BOARD } = Config;
+
 Editor.init = () => {
-    const mainEditor = new MixedEditor({
+    const mainEditor = new EditorMixed({
         blockEditorConfig: {
             id: 'block-editor',
             toolboxId: 'toolbox'
@@ -43,13 +47,8 @@ Editor.addDrag = () => {
         min: '50px',
         sizeChanged: () => {
             // 重新调整编辑器尺寸
-            $(blockEditor.editor.getParentSvg()).attr({
-                width: blockEditor.$div.width(),
-                height: blockEditor.$div.height()
-            });
-
-            codeEditor.editor.resize();
-            Blockly.fireUiEvent(window, 'resize');
+            codeEditor.resize();
+            blockEditor.resize();
         },
         onfull: (type) => {
             const { mainStatusBarTab } = Mixly;
@@ -88,6 +87,20 @@ Editor.addBtnClickEvent = () => {
             Editor.drag.show();
         }
     });
+}
+
+Editor.py2BlockEditorChangeStatus = () => {
+    const pythonToBlocklyDom = $('#python-to-blockly-btn');
+    const status = BOARD.pythonToBlockly ?? false;
+    if (status) {
+        pythonToBlocklyDom.html(Blockly.Msg.MSG['enablePythonToBlockly'])
+                          .attr('class', 'icon-toggle-off-1');
+        BOARD.pythonToBlockly = false;
+    } else {
+        pythonToBlocklyDom.html(Blockly.Msg.MSG['disablePythonToBlockly'])
+                          .attr('class', 'icon-toggle-on-1');
+        BOARD.pythonToBlockly = true;
+    }
 }
 
 });

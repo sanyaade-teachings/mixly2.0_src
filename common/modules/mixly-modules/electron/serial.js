@@ -565,7 +565,7 @@ Serial.refreshOutputBox = (port) => {
 Serial.openTool = () => {
     const selectedPort = Serial.getSelectedPortName();
     if (!selectedPort) {
-        layer.msg(Msg.Lang["无可用设备"] + "!", {
+        layer.msg(Msg.Lang["无可用设备"], {
             time: 1000
         });
         return;

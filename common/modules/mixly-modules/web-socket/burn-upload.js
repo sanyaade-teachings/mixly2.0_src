@@ -136,7 +136,7 @@ BU.operateSuccess = (type, layerNum, port) => {
     const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     layer.close(layerNum);
     const message = (type === 'burn'? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']);
-    layer.msg(message + '!', {
+    layer.msg(message, {
         time: 1000
     });
     const value = statusBarTerminal.getValue();
@@ -168,7 +168,7 @@ BU.operateError = (type, layerNum, error) => {
 }
 
 BU.noDevice = () => {
-    layer.msg(Msg.Lang['无可用设备'] + '!', {
+    layer.msg(Msg.Lang['无可用设备'], {
         time: 1000
     });
     BU.burning = false;
@@ -427,7 +427,7 @@ BU.burnWithSpecialBin = () => {
  **/
 BU.operateWithPort = (type, port, command) => {
     if (!port) {
-        layer.msg(Msg.Lang['无可用设备'] + '!', {
+        layer.msg(Msg.Lang['无可用设备'], {
             time: 1000
         });
         BU.burning = false;

@@ -249,7 +249,7 @@ ArduShell.initUpload = () => {
             ArduShell.upload(boardType, port);
         });
     } else {
-        layer.msg(Msg.Lang["无可用设备"] + "!", {
+        layer.msg(Msg.Lang["无可用设备"], {
             time: 1000
         });
     }
@@ -545,7 +545,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
             if (code === 0) {
                 const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
                 statusBarTerminal.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
-                layer.msg(message + '！', {
+                layer.msg(message, {
                         time: 1000
                     });
                 sucFunc();
@@ -626,7 +626,7 @@ ArduShell.writeFile = function (readPath, writePath) {
                                     fs.writeFileSync(writeFilePath, binData);
                                 }
                             }
-                            layer.msg(Msg.Lang['保存成功'] + '！', {
+                            layer.msg(Msg.Lang['保存成功'], {
                                 time: 1000
                             });
                         } catch (e) {

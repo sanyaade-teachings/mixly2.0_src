@@ -117,7 +117,7 @@ ArduShell.initUpload = () => {
         if (port) {
             ArduShell.upload(boardType, port);
         } else {
-            layer.msg(Msg.Lang["无可用设备"] + "!", {
+            layer.msg(Msg.Lang["无可用设备"], {
                 time: 1000
             });
         }
@@ -177,7 +177,7 @@ ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
     statusBarTerminal.addValue(prefix);
     const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
     statusBarTerminal.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
-    layer.msg(message + '！', {
+    layer.msg(message, {
         time: 1000
     });
     if (type === 'upload' && port) {

@@ -7,6 +7,7 @@
                 {
                     "label": "PSRAM",
                     "key": "PSRAM",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PSRAM",
                     "options": [
                         {
                             "key": "disabled",
@@ -19,6 +20,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -64,6 +66,7 @@
                 }, {
                     "label": "CPU Frequency",
                     "key": "CPUFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
                     "options": [
                         {
                             "key": "240",
@@ -94,6 +97,7 @@
                 }, {
                     "label": "Flash Mode",
                     "key": "FlashMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "qio",
@@ -112,6 +116,7 @@
                 }, {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -124,6 +129,7 @@
                 }, {
                     "label": "Flash Size",
                     "key": "FlashSize",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_SIZE",
                     "options": [
                         {
                             "key": "4M",
@@ -142,6 +148,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -157,6 +164,7 @@
                 }, {
                     "label": "Arduino Runs On",
                     "key": "LoopCore",
+                    "messageId": "ESP32_CONFIG_MESSAGE_LOOP_CORE",
                     "options": [
                         {
                             "key": "1",
@@ -169,6 +177,7 @@
                 }, {
                     "label": "Events Run On",
                     "key": "EventsCore",
+                    "messageId": "ESP32_CONFIG_MESSAGE_EVENTS_CORE",
                     "options": [
                         {
                             "key": "1",
@@ -188,6 +197,7 @@
                 {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -203,6 +213,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -225,6 +236,7 @@
                 {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -240,6 +252,7 @@
                 }, {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -252,6 +265,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -274,6 +288,7 @@
                 {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -286,6 +301,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -308,6 +324,7 @@
                 {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -320,6 +337,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "1500000",
@@ -336,6 +354,7 @@
                 {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -348,6 +367,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "1500000",
@@ -364,6 +384,7 @@
                 {
                     "label": "PSRAM",
                     "key": "PSRAM",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PSRAM",
                     "options": [
                         {
                             "key": "disabled",
@@ -376,6 +397,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "PartitionScheme": [
                         {
                             "key": "default",
@@ -388,6 +410,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -410,6 +433,7 @@
                 {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -422,6 +446,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -444,6 +469,7 @@
                 {
                     "label": "CPU Frequency",
                     "key": "CPUFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
                     "options": [
                         {
                             "key": "240",
@@ -474,6 +500,7 @@
                 }, {
                     "label": "Flash Mode",
                     "key": "FlashMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "qio",
@@ -492,6 +519,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -525,6 +553,7 @@
                 }, {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -544,6 +573,7 @@
                 {
                     "label": "PSRAM",
                     "key": "PSRAM",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PSRAM",
                     "options": [
                         {
                             "key": "disabled",
@@ -556,6 +586,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -592,6 +623,7 @@
                 }, {
                     "label": "CPU Frequency",
                     "key": "CPUFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
                     "options": [
                         {
                             "key": "240",
@@ -601,6 +633,7 @@
                 }, {
                     "label": "Flash Mode",
                     "key": "FlashMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "qio",
@@ -619,6 +652,7 @@
                 }, {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -631,6 +665,7 @@
                 }, {
                     "label": "Flash Size",
                     "key": "FlashSize",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_SIZE",
                     "options": [
                         {
                             "key": "8M",
@@ -640,6 +675,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",

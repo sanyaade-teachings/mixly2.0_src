@@ -6,6 +6,7 @@
                 {
                     "label": "PSRAM",
                     "key": "PSRAM",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PSRAM",
                     "options": [
                         {
                             "key": "disabled",
@@ -21,6 +22,7 @@
                 }, {
                     "label": "Flash Mode",
                     "key": "FlashMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "qio",
@@ -39,6 +41,7 @@
                 }, {
                     "label": "Flash Size",
                     "key": "FlashSize",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_SIZE",
                     "options": [
                         {
                             "key": "4M",
@@ -57,6 +60,7 @@
                 }, {
                     "label": "Arduino Runs On",
                     "key": "LoopCore",
+                    "messageId": "ESP32_CONFIG_MESSAGE_LOOP_CORE",
                     "options": [
                         {
                             "key": "1",
@@ -69,6 +73,7 @@
                 }, {
                     "label": "Events Run On",
                     "key": "EventsCore",
+                    "messageId": "ESP32_CONFIG_MESSAGE_EVENTS_CORE",
                     "options": [
                         {
                             "key": "1",
@@ -81,6 +86,7 @@
                 }, {
                     "label": "USB Mode",
                     "key": "USBMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_USB_MODE",
                     "options": [
                         {
                             "key": "default",
@@ -93,6 +99,7 @@
                 }, {
                     "label": "USB CDC On Boot",
                     "key": "CDCOnBoot",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CDC_ON_BOOT",
                     "options": [
                         {
                             "key": "default",
@@ -105,6 +112,7 @@
                 }, {
                     "label": "USB Firmware MSC On Boot",
                     "key": "MSCOnBoot",
+                    "messageId": "ESP32_CONFIG_MESSAGE_MSC_ON_BOOT",
                     "options": [
                         {
                             "key": "default",
@@ -117,6 +125,7 @@
                 }, {
                     "label": "USB DFU On Boot",
                     "key": "DFUOnBoot",
+                    "messageId": "ESP32_CONFIG_MESSAGE_DFU_ON_BOOT",
                     "options": [
                         {
                             "key": "default",
@@ -129,6 +138,7 @@
                 }, {
                     "label": "Upload Mode",
                     "key": "UploadMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_MODE",
                     "options": [
                         {
                             "key": "default",
@@ -141,6 +151,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -183,6 +194,7 @@
                 }, {
                     "label": "CPU Frequency",
                     "key": "CPUFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
                     "options": [
                         {
                             "key": "240",
@@ -207,6 +219,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",

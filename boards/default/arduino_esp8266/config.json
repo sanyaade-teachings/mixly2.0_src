@@ -6,6 +6,7 @@
                 {
                     "key": "xtal",
                     "label": "CPU Frequency",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_XTAL",
                     "options": [
                         {
                             "key": "80",
@@ -18,6 +19,7 @@
                 }, {
                     "key": "vt",
                     "label": "VTables",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_VT",
                     "options": [
                         {
                             "key": "flash",
@@ -33,6 +35,7 @@
                 }, {
                     "key": "exception",
                     "label": "C++ Exceptions",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EXCEPTION",
                     "options": [
                         {
                             "key": "disabled",
@@ -45,6 +48,7 @@
                 }, {
                     "key": "stacksmash",
                     "label": "Stack Protection",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_STACKSMASH",
                     "options": [
                         {
                             "key": "disabled",
@@ -57,6 +61,7 @@
                 }, {
                     "key": "ssl",
                     "label": "SSL Support",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_SSL",
                     "options": [
                         {
                             "key": "all",
@@ -69,6 +74,7 @@
                 }, {
                     "key": "mmu",
                     "label": "MMU",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_MMU",
                     "options": [
                         {
                             "key": "3232",
@@ -93,6 +99,7 @@
                 }, {
                     "key": "non32xfer",
                     "label": "Non-32-Bit Access",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_NON32XFER",
                     "options": [
                         {
                             "key": "fast",
@@ -105,6 +112,7 @@
                 }, {
                     "key": "ResetMethod",
                     "label": "Reset Method",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_RESET_METHOD",
                     "options": [
                         {
                             "key": "nodemcu",
@@ -120,6 +128,7 @@
                 }, {
                     "key": "CrystalFreq",
                     "label": "Crystal Frequency",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_CRYSTAL_FREQ",
                     "options": [
                         {
                             "key": "26",
@@ -132,6 +141,7 @@
                 }, {
                     "key": "FlashFreq",
                     "label": "Flash Frequency",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "40",
@@ -150,6 +160,7 @@
                 }, {
                     "key": "FlashMode",
                     "label": "Flash Mode",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "dout",
@@ -168,6 +179,7 @@
                 }, {
                     "key": "eesz",
                     "label": "Flash Size",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EESZ",
                     "options": [
                         {
                             "key": "1M64",
@@ -252,6 +264,7 @@
                 }, {
                     "key": "led",
                     "label": "Builtin Led",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_LED",
                     "options": [
                         {
                             "key": "2",
@@ -309,6 +322,7 @@
                 }, {
                     "key": "sdk",
                     "label": "NONOS SDK Version",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_SDK",
                     "options": [
                         {
                             "key": "nonosdk_190703",
@@ -330,6 +344,7 @@
                 }, {
                     "key": "ip",
                     "label": "lwIP Variant",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_IP",
                     "options": [
                         {
                             "key": "lm2f",
@@ -354,6 +369,7 @@
                 }, {
                     "key": "dbg",
                     "label": "Debug port",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_DBG",
                     "options": [
                         {
                             "key": "Disabled",
@@ -369,6 +385,7 @@
                 }, {
                     "key": "wipe",
                     "label": "Erase Flash",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_WIPE",
                     "options": [
                         {
                             "key": "none",
@@ -384,6 +401,7 @@
                 }, {
                     "key": "baud",
                     "label": "Upload Speed",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_BAUD",
                     "options": [
                         {
                             "key": "115200",
@@ -408,6 +426,7 @@
                 {
                     "key": "xtal",
                     "label": "CPU Frequency",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_XTAL",
                     "options": [
                         {
                             "key": "80",
@@ -420,6 +439,7 @@
                 }, {
                     "key": "vt",
                     "label": "VTables",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_VT",
                     "options": [
                         {
                             "key": "flash",
@@ -435,6 +455,7 @@
                 }, {
                     "key": "exception",
                     "label": "C++ Exceptions",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EXCEPTION",
                     "options": [
                         {
                             "key": "disabled",
@@ -447,6 +468,7 @@
                 }, {
                     "key": "stacksmash",
                     "label": "Stack Protection",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_STACKSMASH",
                     "options": [
                         {
                             "key": "disabled",
@@ -459,6 +481,7 @@
                 }, {
                     "key": "ssl",
                     "label": "SSL Support",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_SSL",
                     "options": [
                         {
                             "key": "all",
@@ -471,6 +494,7 @@
                 }, {
                     "key": "mmu",
                     "label": "MMU",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_MMU",
                     "options": [
                         {
                             "key": "3232",
@@ -495,6 +519,7 @@
                 }, {
                     "key": "non32xfer",
                     "label": "Non-32-Bit Access",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_NON32XFER",
                     "options": [
                         {
                             "key": "fast",
@@ -507,6 +532,7 @@
                 }, {
                     "key": "eesz",
                     "label": "Flash Size",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EESZ",
                     "options": [
                         {
                             "key": "4M2M",
@@ -525,6 +551,7 @@
                 }, {
                     "key": "ip",
                     "label": "lwIP Variant",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_IP",
                     "options": [
                         {
                             "key": "lm2f",
@@ -549,6 +576,7 @@
                 }, {
                     "key": "dbg",
                     "label": "Debug port",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_DBG",
                     "options": [
                         {
                             "key": "Disabled",
@@ -564,6 +592,7 @@
                 }, {
                     "key": "wipe",
                     "label": "Erase Flash",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_WIPE",
                     "options": [
                         {
                             "key": "none",
@@ -579,6 +608,7 @@
                 }, {
                     "key": "baud",
                     "label": "Upload Speed",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_BAUD",
                     "options": [
                         {
                             "key": "115200",
@@ -603,6 +633,7 @@
                 {
                     "key": "xtal",
                     "label": "CPU Frequency",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_XTAL",
                     "options": [
                         {
                             "key": "80",
@@ -615,6 +646,7 @@
                 }, {
                     "key": "vt",
                     "label": "VTables",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_VT",
                     "options": [
                         {
                             "key": "flash",
@@ -630,6 +662,7 @@
                 }, {
                     "key": "exception",
                     "label": "C++ Exceptions",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EXCEPTION",
                     "options": [
                         {
                             "key": "disabled",
@@ -642,6 +675,7 @@
                 }, {
                     "key": "stacksmash",
                     "label": "Stack Protection",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_STACKSMASH",
                     "options": [
                         {
                             "key": "disabled",
@@ -654,6 +688,7 @@
                 }, {
                     "key": "ssl",
                     "label": "SSL Support",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_SSL",
                     "options": [
                         {
                             "key": "all",
@@ -666,6 +701,7 @@
                 }, {
                     "key": "mmu",
                     "label": "MMU",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_MMU",
                     "options": [
                         {
                             "key": "3232",
@@ -690,6 +726,7 @@
                 }, {
                     "key": "non32xfer",
                     "label": "Non-32-Bit Access",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_NON32XFER",
                     "options": [
                         {
                             "key": "fast",
@@ -702,6 +739,7 @@
                 }, {
                     "key": "eesz",
                     "label": "Flash Size",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EESZ",
                     "options": [
                         {
                             "key": "4M2M",
@@ -720,6 +758,7 @@
                 }, {
                     "key": "led",
                     "label": "Builtin Led",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_LED",
                     "options": [
                         {
                             "key": "2",
@@ -732,6 +771,7 @@
                 }, {
                     "key": "ip",
                     "label": "lwIP Variant",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_IP",
                     "options": [
                         {
                             "key": "lm2f",
@@ -756,6 +796,7 @@
                 }, {
                     "key": "dbg",
                     "label": "Debug port",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_DBG",
                     "options": [
                         {
                             "key": "Disabled",
@@ -771,6 +812,7 @@
                 }, {
                     "key": "wipe",
                     "label": "Erase Flash",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_WIPE",
                     "options": [
                         {
                             "key": "none",
@@ -786,6 +828,7 @@
                 }, {
                     "key": "baud",
                     "label": "Upload Speed",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_BAUD",
                     "options": [
                         {
                             "key": "115200",
@@ -810,6 +853,7 @@
                 {
                     "key": "xtal",
                     "label": "CPU Frequency",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_XTAL",
                     "options": [
                         {
                             "key": "80",
@@ -822,6 +866,7 @@
                 }, {
                     "key": "vt",
                     "label": "VTables",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_VT",
                     "options": [
                         {
                             "key": "flash",
@@ -837,6 +882,7 @@
                 }, {
                     "key": "exception",
                     "label": "C++ Exceptions",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EXCEPTION",
                     "options": [
                         {
                             "key": "disabled",
@@ -849,6 +895,7 @@
                 }, {
                     "key": "stacksmash",
                     "label": "Stack Protection",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_STACKSMASH",
                     "options": [
                         {
                             "key": "disabled",
@@ -861,6 +908,7 @@
                 }, {
                     "key": "ssl",
                     "label": "SSL Support",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_SSL",
                     "options": [
                         {
                             "key": "all",
@@ -873,6 +921,7 @@
                 }, {
                     "key": "mmu",
                     "label": "MMU",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_MMU",
                     "options": [
                         {
                             "key": "3232",
@@ -897,6 +946,7 @@
                 }, {
                     "key": "eesz",
                     "label": "Flash Size",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_EESZ",
                     "options": [
                         {
                             "key": "4M2M",
@@ -915,6 +965,7 @@
                 }, {
                     "key": "ip",
                     "label": "lwIP Variant",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_IP",
                     "options": [
                         {
                             "key": "lm2f",
@@ -939,6 +990,7 @@
                 }, {
                     "key": "dbg",
                     "label": "Debug port",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_DBG",
                     "options": [
                         {
                             "key": "Disabled",
@@ -954,6 +1006,7 @@
                 }, {
                     "key": "wipe",
                     "label": "Erase Flash",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_WIPE",
                     "options": [
                         {
                             "key": "none",
@@ -969,6 +1022,7 @@
                 }, {
                     "key": "baud",
                     "label": "Upload Speed",
+                    "messageId": "ESP8266_CONFIG_MESSAGE_BAUD",
                     "options": [
                         {
                             "key": "115200",

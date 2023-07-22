@@ -3,9 +3,10 @@ goog.loadJs('common', () => {
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('Mixly.XML');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.EditorAce');
 
-const { XML } = Mixly;
+const { XML, Msg } = Mixly;
 
 class EditorAce {
     static CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
@@ -16,9 +17,10 @@ class EditorAce {
         this.$div = $(`#${this.id}`);
         this.editor = ace.edit(id);
         this.resetFontSize();
+        this.addCursorLayer();
+        this.addCursorEvent();
         this.addDefaultCommand();
         this.destroyed = false;
-        this.addCursorEvent();
     }
 
     dispose() {
@@ -129,29 +131,64 @@ class EditorAce {
             exec: (editor) => {
                 this.resetFontSize();
             }
+        }, {
+            name: "mixly-message",
+            bindKey: "backspace|delete|enter",
+            readOnly: true,
+            exec: (editor) => {
+                if (!editor.getReadOnly()) {
+                    return false;
+                }
+                this.cursorLayer.show();
+                return false;
+            }
         }]);
+    }
+
+    addCursorLayer() {
+        this.cursorLayer = tippy(this.$div.find('.ace_cursor')[0], {
+            content: Msg.Lang['此视图只读'],
+            trigger: 'manual',
+            hideOnClick: true,
+            delay: 0,
+            duration: [ 0, 0 ],
+            placement: 'right',
+            offset: [ 0, 0 ],
+            popperOptions: {
+                strategy: 'fixed',
+                modifiers: [
+                    {
+                        name: 'flip',
+                        options: {
+                            fallbackPlacements: ['top-end', 'right']
+                        }
+                    }
+                ]
+            }
+        });
     }
 
     addCursorEvent() {
         const { editor } = this;
         $('#mixly-footer-cursor').hide();
-        editor.on('focus', function() {
+        editor.on('focus', () => {
             const cursor = selection.getCursor();
             $('#mixly-footer-row').html(cursor.row + 1);
             $('#mixly-footer-column').html(cursor.column + 1);
             $('#mixly-footer-cursor').show();
         });
-        editor.on("blur", function() {
+        editor.on("blur", () => {
+            this.cursorLayer.hide();
             $('#mixly-footer-cursor').hide();
         });
         const { selection } = editor.getSession();
         const { session } = editor;
-        selection.on('changeCursor', function () {
+        selection.on('changeCursor', () => {
             const cursor = selection.getCursor();
             $('#mixly-footer-row').html(cursor.row + 1);
             $('#mixly-footer-column').html(cursor.column + 1);
         });
-        selection.on("changeSelection", function () {
+        selection.on("changeSelection", () => {
             if (selection.isEmpty()) {
                 $('#mixly-footer-selected').parent().hide();
             } else {
@@ -160,6 +197,9 @@ class EditorAce {
                 $('#mixly-footer-selected').parent().css('display', 'inline-flex');
                 $('#mixly-footer-selected').html(text.length); 
             }
+        });
+        session.on("changeScrollTop", () => {
+            this.cursorLayer.hide();
         });
     }
 

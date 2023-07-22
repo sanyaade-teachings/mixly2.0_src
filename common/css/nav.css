@@ -474,9 +474,12 @@
     color: #fff;
 }
 
+.light .layui-form-select dl dd.layui-this {
+    background-color: #009688 !important;
+}
+
 .dark .layui-form-select dl dd.layui-this {
-    background-color: #5FB878 !important;
-    color: #000;
+    background-color: #007acc !important;
 }
 
 .dark .layui-nav-child {
@@ -668,6 +671,8 @@ body[class="light"] {
 
 .light .editor-dropdown-menu > .layui-menu > li > div {
     color: rgb(0 0 0 / 80%);
+    padding: 0px;
+    margin: 0px;
 }
 
 .light .layui-menu li:hover {

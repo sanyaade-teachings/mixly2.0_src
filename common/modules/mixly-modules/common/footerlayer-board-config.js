@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('Blockly');
 goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
@@ -122,11 +123,29 @@ class FooterLayerBoardConfig extends FooterLayer {
         const _this = this;
         for (let item of options) {
             this.createDropdownMenu(item.key, item.options);
+            this.createMessageLayer(item.key, item.messageId);
         }
     }
 
+    createMessageLayer(mId, messageId) {
+        if (!messageId) {
+            return;
+        }
+        if (!Blockly.Msg[messageId]) {
+            return;
+        }
+        let $container = this.$body.find(`[mid="${mId}-label"]`);
+        tippy($container[0], {
+            content: Blockly.Msg[messageId],
+            allowHTML: true,
+            interactive: true,
+            placement: 'left',
+            offset: [ 0, 21 ]
+        });
+    }
+
     createDropdownMenu(mId, options) {
-        let $container = this.$body.find(`[mid=${mId}]`);
+        let $container = this.$body.find(`[mid="${mId}"]`);
         if (!$container.length) {
             return;
         }

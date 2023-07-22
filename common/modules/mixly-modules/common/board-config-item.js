@@ -78,6 +78,14 @@ class BoardConfigItem {
             {
                 "name": "Flash Mode",
                 "key": "FlashMode",
+                --------------
+                "message": {
+                    "zh-hans": "",
+                    "zh-hant": "",
+                    "en": ""
+                },
+                "message": "",
+                --------------
                 "options": [
                     {
                         "title": "QIO",
@@ -164,6 +172,7 @@ class BoardConfigItem {
             this.options.push({
                 name: child.label,
                 key: child.key,
+                messageId: child.messageId,
                 options: childOptions
             })
         }

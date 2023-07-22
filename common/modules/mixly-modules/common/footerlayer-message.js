@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('shortid');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
@@ -43,7 +44,8 @@ class FooterLayerMessage extends FooterLayer {
             name: '',
             onCreate: (obj) => {},
             onDestroy: () => {},
-            btns: []
+            btns: [],
+            checkbox: false
         };
         const { MENU_TEMPLATE } = FooterLayerMessage;
         this.updateContent(MENU_TEMPLATE);
@@ -79,6 +81,7 @@ class FooterLayerMessage extends FooterLayer {
         if (!FooterLayerMessage.STYLES.includes(config.style)) {
             config.style = FooterLayerMessage.STYLES[0];
         }
+
         let btnsFunc = [];
         config.btns = config.btns ?? [];
         for (let i in config.btns) {
@@ -89,17 +92,30 @@ class FooterLayerMessage extends FooterLayer {
             delete config.btns[i].onclick;
             config.btns[i].mId = i;
         }
+        
+        let checkbox = {
+            checked: '',
+            show: false,
+            title: ''
+        };
+        if (config.checkbox instanceof Object) {
+            checkbox.id = shortid.generate();
+            checkbox.show = true;
+            checkbox.title = config.checkbox.title;
+            checkbox.checked = config.checkbox.checked ? 'checked' : '';
+        }
         let template = this.genItemTemplate({
             type: config.type,
             style: config.style,
             src: config.src,
             name: config.name,
             message: config.message,
-            btns: config.btns
+            btns: config.btns,
+            checkbox
         });
         let $template = $(template);
         this.$container.append($template);
-        this.createBtnsClickEvent_($template, btnsFunc);
+        this.createBtnsClickEvent_($template, config.checkbox, btnsFunc);
         this.scrollToBottom();
         this.setProps({});
         if (typeof config.onCreate === 'function') {
@@ -116,12 +132,19 @@ class FooterLayerMessage extends FooterLayer {
         }
     }
 
-    createBtnsClickEvent_(container, btnsFunc) {
+    createBtnsClickEvent_(container, checkbox, btnsFunc) {
         container.find('.btns').children('button').off().click((event) => {
             let $target = $(event.target);
             let mId = parseInt($target.attr('m-id'));
+            let checkboxValue = null;
+            if (checkbox) {
+                checkboxValue = container.find('input[class="form-check-input"]').prop('checked');
+            }
             if (typeof btnsFunc[mId] === 'function') {
-                btnsFunc[mId](event);
+                btnsFunc[mId](event, container, checkboxValue);
+            }
+            if (!this.$container.children('div').length) {
+                this.clear();
             }
         });
     }

@@ -54,13 +54,13 @@ class EditorBlockly {
             Blockly.Procedures.flyoutCategory
         );
 
-        this.addPlugins();
-
         if (USER.theme === 'dark') {
             this.editor.setTheme(Blockly.Themes.Dark);
         } else {
             this.editor.setTheme(Blockly.Themes.Classic);
         }
+
+        this.addPlugins();
 
         switch (BOARD.language) {
         case 'Python':

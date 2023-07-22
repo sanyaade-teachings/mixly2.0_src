@@ -6,12 +6,34 @@
         justify-content: space-between;
     }
 
-    .light .footer-layer-board-config button {
+    .light .footer-layer-board-config button.option {
         background-color: #009688;
     }
 
-    .dark .footer-layer-board-config button {
+    .dark .footer-layer-board-config button.option {
         background-color: #007ACC;
+    }
+
+    .light .footer-layer-board-config button.title {
+        background-color: #ffffff;
+        border: 1px #fff;
+        color: #000;
+        font-size: 14px;
+    }
+
+    .light .footer-layer-board-config button.title:hover {
+        color: #a5a5a5;
+    }
+
+    .dark .footer-layer-board-config button.title {
+        background-color: #353535;
+        border: 1px #353535;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .dark .footer-layer-board-config button.title:hover {
+        color: var(--lay-color-text-2);
     }
 
     .footer-layer-board-config .footer-layer-btn.reset {
@@ -44,15 +66,22 @@
     "
 >
     {{# layui.each(d.options, function(index, item){ }}
-    <p
+    <button
+        mid="{{ item.key }}-label"
+        class="
+            layui-btn
+            layui-btn-fluid
+            layui-btn-xs
+            title
+        "
         style="
             white-space: nowrap;
-            text-align: right;
-            margin: 3.2px 0px;
+            margin: 2px 0px;
+            padding: 0px;
         "
     >
-        {{ item.name }}
-    </p>
+        <p style="width: 100%; text-align: right;">{{ item.name }}</p>
+    </button>
     {{# }); }}
 </div>
 <div
@@ -86,6 +115,7 @@
             layui-btn
             layui-btn-fluid
             layui-btn-xs
+            option
         "
         style="margin: 2px 0px;"
     >

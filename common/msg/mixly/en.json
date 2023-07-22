@@ -203,5 +203,7 @@
     "无法退出Raw REPL": "Unable to exit Raw REPL",
     "无法退出REPL": "Unable to exit REPL",
     "无消息": "No message",
-    "无选项": "No options"
+    "无选项": "No options",
+    "消息": "Message",
+    "此视图只读": "This view is read-only"
 }

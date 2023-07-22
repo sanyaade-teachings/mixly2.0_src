@@ -157,6 +157,10 @@ Interface.onbeforeunload = (reload = false) => {
 
 Interface.feedback = () => {
     const href = 'https://gitee.com/mixly2/mixly2.0_src/issues';
+    Interface.open(href);
+}
+
+Interface.open = (href) => {
     if (Env.isElectron) {
         const { electron } = Modules;
         const { shell } = electron;

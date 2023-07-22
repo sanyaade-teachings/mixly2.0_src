@@ -6,6 +6,7 @@
                 {
                     "label": "USB CDC On Boot",
                     "key": "CDCOnBoot",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CDC_ON_BOOT",
                     "options": [
                         {
                             "key": "default",
@@ -18,6 +19,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -63,6 +65,7 @@
                 }, {
                     "label": "CPU Frequency",
                     "key": "CPUFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
                     "options": [
                         {
                             "key": "160",
@@ -84,6 +87,7 @@
                 }, {
                     "label": "Flash Mode",
                     "key": "FlashMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "qio",
@@ -102,6 +106,7 @@
                 }, {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -114,6 +119,7 @@
                 }, {
                     "label": "Flash Size",
                     "key": "FlashSize",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_SIZE",
                     "options": [
                         {
                             "key": "4M",
@@ -132,6 +138,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",
@@ -153,6 +160,7 @@
                 {
                     "label": "USB CDC On Boot",
                     "key": "CDCOnBoot",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CDC_ON_BOOT",
                     "options": [
                         {
                             "key": "default",
@@ -165,6 +173,7 @@
                 }, {
                     "label": "Partition Scheme",
                     "key": "PartitionScheme",
+                    "messageId": "ESP32_CONFIG_MESSAGE_PARTITION_SCHEME",
                     "options": [
                         {
                             "key": "default",
@@ -192,6 +201,7 @@
                 }, {
                     "label": "CPU Frequency",
                     "key": "CPUFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_CPU_FREQ",
                     "options": [
                         {
                             "key": "160",
@@ -201,6 +211,7 @@
                 }, {
                     "label": "Flash Mode",
                     "key": "FlashMode",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_MODE",
                     "options": [
                         {
                             "key": "dio",
@@ -210,6 +221,7 @@
                 }, {
                     "label": "Flash Frequency",
                     "key": "FlashFreq",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_FREQ",
                     "options": [
                         {
                             "key": "80",
@@ -222,6 +234,7 @@
                 }, {
                     "label": "Flash Size",
                     "key": "FlashSize",
+                    "messageId": "ESP32_CONFIG_MESSAGE_FLASH_SIZE",
                     "options": [
                         {
                             "key": "4M",
@@ -231,6 +244,7 @@
                 }, {
                     "label": "Upload Speed",
                     "key": "UploadSpeed",
+                    "messageId": "ESP32_CONFIG_MESSAGE_UPLOAD_SPEED",
                     "options": [
                         {
                             "key": "921600",

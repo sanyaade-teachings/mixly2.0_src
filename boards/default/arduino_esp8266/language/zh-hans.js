@@ -1,41 +1,4 @@
 (() => {
-// goog.require('Mixly.FooterBar');
-// goog.require('Mixly.Config');
-// goog.require('Mixly.LocalStorage');
-// const { BOARD } = Config;
-
-/*window.addEventListener('load', () => {
-    const { messageLayer } = FooterBar;
-    if (LocalStorage.get(`mixly/${BOARD.boardType}/default/messageNeverShow`)) {
-        return;
-    }
-    messageLayer.append({
-        type: 1,
-        style: 'success',
-        message: 'Mixly是一款面向初学者、硬件编程爱好者的图形化编程工具。<br/>它完美地支持了Arduino、MicroPython，Python等语言的图形化编程。<br/>提供了图形化界面和代码界面对比显示的支持。<br/>Mixly还支持自定义第三方扩展库，可以拓展出丰富的功能。',
-        name: 'Mixly介绍',
-        onCreate: (obj) => {
-            console.log('已创建');
-        },
-        onDestroy: () => {
-            console.log('已销毁');
-        },
-        checkbox: {
-            checked: true,
-            title: '不再显示'
-        },
-        btns: [
-            {
-                text: '关闭',
-                style: 'primary',
-                onclick: (event, container, checked) => {
-                    LocalStorage.set(`mixly/${BOARD.boardType}/default/messageNeverShow`, checked);
-                    container.remove();
-                }
-            }
-        ]
-    });
-});*/
 
 goog.require('Blockly.Lang.ZhHans');
 goog.require('Mixly.XML');

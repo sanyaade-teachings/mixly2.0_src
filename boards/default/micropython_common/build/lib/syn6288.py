@@ -54,7 +54,7 @@ class SYN6288:
 
     def synthesis(self, data, music=0, blocking=True):
         """Support uincode coded speech synthesis"""
-        self._wreg(REG_PLAY_SST,muisc,3,self._volume+str(data))
+        self._wreg(REG_PLAY_SST,music,3,self._volume+str(data))
         time.sleep(0.1)
         while blocking :
             if not self.status():

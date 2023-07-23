@@ -42,7 +42,7 @@ Mixly.CssLoader.commonCss = [
     "common/ui/bootstrap/css/bootstrap.min.css",
     "common/ui/layui/css/layui.css",
     "common/ui/layui/css/layui-theme-dark.css",
-    "common/css/ACEfont.css",
+    "common/css/interface.css",
     "common/css/fontello.css",
     "common/css/nav.css",
     "common/css/library.css",
@@ -55,7 +55,8 @@ Mixly.CssLoader.commonCss = [
     "common/css/select2-ext.css",
     "common/css/xterm.css",
     "common/css/footer-layer.css",
-    "common/css/progress.css"
+    "common/css/progress.css",
+    "common/css/blockly.css"
 ];
 
 /* 客户端css */

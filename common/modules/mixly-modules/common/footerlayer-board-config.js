@@ -156,7 +156,7 @@ class FooterLayerBoardConfig extends FooterLayer {
             align: 'right',
             data: options,
             anywhereClose: true,
-            className: 'scrollbar1 editor-dropdown-menu board-config-menu',
+            className: 'mixly-scrollbar editor-dropdown-menu board-config-menu',
             style: 'display:inline-block;box-shadow:1px 1px 30px rgb(0 0 0 / 12%);',
             ready: (elemPanel, elem) => {
                 const $elemPanel = $(elemPanel);

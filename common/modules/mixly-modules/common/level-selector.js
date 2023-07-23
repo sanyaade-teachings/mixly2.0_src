@@ -46,7 +46,7 @@ LevelSelector.init = () => {
     $('#nav-right-btn-list').prepend(`
         <div
             id="level-selector"
-            class="layui-form scrollbar1"
+            class="layui-form mixly-scrollbar"
             lay-filter="level-selector-filter"
             style="
                 width: 90px;

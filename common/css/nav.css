@@ -560,30 +560,11 @@ dd > button {
     border-bottom-color: #646363;
 }
 
-.blocklyToolboxDiv {
-    overflow-x: hidden;
-    overflow-y: scroll;
-    padding: 0px;
-}
-
-.dark .blocklyMainBackground {
-    stroke: #000;
-}
-
 /*
 .layui-layer-shade {
     height: 48px;
 }
 */
-
-body[class="dark"] {
-    background-color: #181818 !important;
-    color: #fff;
-}
-
-body[class="light"] {
-    background-color: #fff !important;
-}
 
 .dark .layui-input:hover, .dark .layui-select:hover {
     border-color: #1f1f1f !important;

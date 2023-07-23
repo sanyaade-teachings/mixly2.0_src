@@ -9,7 +9,7 @@ div.layui-form.layui-border-box.layui-table-view {
 	border-width: 2px;
 }*/
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-tool {
+div.layui-form > div.layui-table-tool {
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -18,7 +18,7 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-tool {
 	left: 0px;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box {
+div.layui-form > div.layui-table-box {
 	position: absolute;
 	overflow-y: hidden;
 	overflow-x: hidden;
@@ -28,11 +28,11 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box {
 	top: 1px;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-tool + div.layui-table-box {
+div.layui-form > div.layui-table-tool + div.layui-table-box {
 	top: 50px;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-header {
+div.layui-form > div.layui-table-box > div.layui-table-header {
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -42,15 +42,15 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
 	border-right-width: 17px;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-tool > div.layui-table-tool-temp {
+div.layui-form > div.layui-table-tool > div.layui-table-tool-temp {
 	padding-right: 0px !important;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-header > table {
+div.layui-form > div.layui-table-box > div.layui-table-header > table {
 	width: 100%;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-body.layui-table-main {
+div.layui-form > div.layui-table-box > div.layui-table-body.layui-table-main {
 	overflow-x: auto;
 	overflow-y: scroll;
 	position: absolute;
@@ -60,15 +60,15 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
 	width: 100%;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div > table > thead > tr > th > div > div {
+div.layui-form > div.layui-table-box > div > table > thead > tr > th > div > div {
 	top: 1px !important;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div > table > tbody > tr > td > div > div {
+div.layui-form > div.layui-table-box > div > table > tbody > tr > td > div > div {
 	top: 1px !important;
 }
 
-div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.layui-table-body.layui-table-main > table {
+div.layui-form > div.layui-table-box > div.layui-table-body > table {
 	width: 100% !important;
 }
 

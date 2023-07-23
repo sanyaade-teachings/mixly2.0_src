@@ -129,7 +129,7 @@ LayerExt.open = (toolConfig) => {
             layer.style(index, { borderRadius });
             const { max, min, success } = toolConfig;
             const pageBody = $('#' + id);
-            pageBody.addClass('scrollbar1');
+            pageBody.addClass('mixly-scrollbar');
             if (typeof max === 'object') {
                 layero.css({
                     'maxWidth': max[0],

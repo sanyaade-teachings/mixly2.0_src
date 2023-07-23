@@ -269,7 +269,6 @@ class DragV extends Drag {
 
 Mixly.DragH = DragH;
 Mixly.DragV = DragV;
-
 Mixly.Drag = Drag;
 
 });

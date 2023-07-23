@@ -165,7 +165,9 @@ class EditorMixed {
                     this.selected = 'BLOCK';
                     codeEditor.shown = false;
                     blockEditor.shown = true;
-                    blocklyWorkspace.scrollCenter();
+                    blockEditor.resize();
+                    codeEditor.resize();
+                    blockEditor.editor.scrollCenter();
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
                     $codeArea.removeClass('icon-code-1').addClass('icon-block');

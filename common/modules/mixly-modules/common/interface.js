@@ -130,7 +130,7 @@ Interface.onresize = (event) => {
         }
         Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
     }
-    const { codeEditor, blockEditor } = Editor.mainEditor;
+    const { codeEditor, blockEditor } = Editor;
     codeEditor.resize();
     blockEditor.resize();
 }

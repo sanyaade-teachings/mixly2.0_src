@@ -14,6 +14,7 @@ SerialPort.refreshInputBuffer = false;
 SerialPort.refreshOutputBuffer = true;
 SerialPort.obj = null;
 SerialPort.onDataLine = null;
+SerialPort.keepReading = false;
 
 SerialPort.encoder = new TextEncoder('utf8');
 SerialPort.decoder = new TextDecoder('utf8');
@@ -76,7 +77,7 @@ SerialPort.close = async () => {
 }
 
 SerialPort.isConnected = () => {
-    return SerialPort.obj;
+    return SerialPort.obj ? true : false;
 }
 
 SerialPort.readLine = () => {

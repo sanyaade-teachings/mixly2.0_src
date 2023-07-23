@@ -126,16 +126,18 @@ class EditorMixed {
                 case 'cut':
                 case 'copy':
                 case 'paste':
-                    editor[obj.id]();
+                    codeEditor[obj.id]();
                     break;
                 case 'openCodeEditor':
-                    if (this.selected === 'CODE')
+                    if (this.selected === 'CODE') {
                         break;
+                    }
                     this.drag.full('NEGATIVE');
                     break;
                 case 'exitCodeEditor':
-                    if (this.selected === 'BLOCK')
+                    if (this.selected === 'BLOCK') {
                         break;
+                    }
                     this.drag.show();
                     break;
                 }

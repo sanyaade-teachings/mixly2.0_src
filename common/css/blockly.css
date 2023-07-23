@@ -24,39 +24,31 @@
     stroke: #000;
 }
 
-div.injectionDiv.classic-theme div.blocklyTreeRow > div > span.blocklyTreeLabel {
+.blocklyTreeLabel {
+    font-size: 17px;
+} 
+
+.injectionDiv.classic-theme .blocklyTreeRow .blocklyTreeLabel {
     color: #000 !important;
-    font-size: 17px;
 }
 
-div.injectionDiv.classic-theme div.blocklyTreeRow.blocklyTreeSelected > div > span.blocklyTreeLabel {
+.injectionDiv.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel {
     color: #fff !important;
-    font-size: 17px;
 }
 
-div.injectionDiv.dark-theme div.blocklyTreeRow > div > span.blocklyTreeLabel {
+.injectionDiv.dark-theme .blocklyTreeRow .blocklyTreeLabel {
     color: #fff !important;
-    font-size: 17px;
 }
 
-div.injectionDiv.dark-theme div.blocklyTreeRow.blocklyTreeSelected > div > span.blocklyTreeLabel {
+.injectionDiv.dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel {
     color: #000 !important;
-    font-size: 17px;
 }
 
-.blocklyMainBackground {
-    stroke-width: 0;
-}
-
-#block-editor .blocklyToolboxContents {
-    padding-top: 3px;
-}
-
-#catSearch.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+#catSearch.blocklyTreeRow .blocklyTreeIcon {
     background: url('../../common/media/mark/search.png') no-repeat;
     background-size: 100% auto;
 }
-#catSearch.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+#catSearch.blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon {
     background: url('../../common/media/mark/search2.png') no-repeat;
     background-size: 100% auto;
 }
@@ -68,7 +60,7 @@ div.injectionDiv.dark-theme div.blocklyTreeRow.blocklyTreeSelected > div > span.
     height: 36px;
 }
 
-div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon { 
+.blocklyTreeRow .blocklyTreeIcon { 
     width: 20px;
     height: 20px;
     float: left;
@@ -77,112 +69,74 @@ div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon {
     background-size: 100% auto; 
 }
 
-div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon { 
+.blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon { 
     background: url('../../common/media/mark/default2.png') no-repeat;
     background-size: 100% auto; 
 }
 
-div.injectionDiv.classic-theme div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconOpen {
-    background-image: url('../../common/media/sprites.png') !important;
+.blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen,
+.blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed {
     height: 16px;
     vertical-align: middle;
     width: 16px;
     margin: 10px;
     background-size: auto !important;
+}
+
+.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen {
+    background-image: url('../../common/media/sprites.png') !important;
     background-position: -16px -17px !important;
 }
 
-div.injectionDiv.classic-theme div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconClosed {
+.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -32px -17px !important;
 }
 
-div.injectionDiv.classic-theme div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconOpen {
+.classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -16px -1px !important;
 }
 
-div.injectionDiv.classic-theme div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconClosed {
+.classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -32px -1px !important;
 }
 
-div.injectionDiv.dark-theme div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconOpen {
+.dark-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -16px -17px !important;
 }
 
-div.injectionDiv.dark-theme div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconClosed {
+.dark-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -32px -17px !important;
 }
 
-div.injectionDiv.dark-theme div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconOpen {
+.dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -16px -1px !important;
 }
 
-div.injectionDiv.dark-theme div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon.blocklyTreeIconClosed {
+.dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed {
     background-image: url('../../common/media/sprites.png') !important;
-    height: 16px;
-    vertical-align: middle;
-    width: 16px;
-    margin: 10px;
-    background-size: auto !important;
     background-position: -32px -1px !important;
 }
 
-.blocklyDropDownDiv.dark-theme {
+.blocklyDropDownDiv.dark-theme,
+.blocklyWidgetDiv.dark-theme .blocklyMenu {
     border-color: #000000;
     background-color: #353535;
 }
 
-.blocklyDropDownDiv.dark-theme .blocklyMenuItem {
+.dark-theme .blocklyMenu > .blocklyMenuItem {
     color: #fff;
 }
 
-.blocklyWidgetDiv.dark-theme > .blocklyMenu {
-    background: #353535;
-}
-
-.blocklyWidgetDiv.dark-theme > .blocklyMenu > .blocklyMenuItemDisabled {
+.dark-theme .blocklyMenu > .blocklyMenuItemDisabled {
     color: #919191;
 }
 
-.blocklyWidgetDiv.dark-theme > .blocklyMenu > .blocklyMenuItemHighlight {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-.blocklyWidgetDiv.dark-theme > .blocklyMenu > div {
-    color: #fff;
+.dark-theme .blocklyMenu > .blocklyMenuItemHighlight {
+    background-color: rgba(255, 255, 255, 0.1);
 }

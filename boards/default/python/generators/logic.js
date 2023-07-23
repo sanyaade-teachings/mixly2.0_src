@@ -7,7 +7,7 @@ goog.require('Blockly.Python');
 Blockly.Python.forBlock['logic_compare'] = function() {
   // Comparison operator.
   var mode = this.getFieldValue('OP');
-  var operator = Blockly.Python.logic_compare.OPERATORS[mode];
+  var operator = Blockly.Python.forBlock.logic_compare.OPERATORS[mode];
   var order = (operator == '==' || operator == '!=') ?
       Blockly.Python.ORDER_EQUALITY : Blockly.Python.ORDER_RELATIONAL;
   var argument0 = Blockly.Python.valueToCode(this, 'A', order) || '0';
@@ -21,7 +21,7 @@ Blockly.Python.forBlock['logic_compare_continous'] = function() {
   var mode1 = this.getFieldValue('OP1');
   var operator1 = Blockly.Python.forBlock.logic_compare.OPERATORS[mode1];
   var mode2 = this.getFieldValue('OP2');
-  var operator2 = Blockly.Python.logic_compare.OPERATORS[mode2];  
+  var operator2 = Blockly.Python.forBlock.logic_compare.OPERATORS[mode2];  
   var argument0 = Blockly.Python.valueToCode(this, 'A', Blockly.Python.ORDER_RELATIONAL) || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'B', Blockly.Python.ORDER_RELATIONAL) || '0';
   var argument2 = Blockly.Python.valueToCode(this, 'C', Blockly.Python.ORDER_RELATIONAL) || '0';

@@ -1,7 +1,7 @@
 var externalLibs = {//外部引入的第三方库
     "./blocklygame/__init__.js": "../common/js/skulpt_mixtoy/bg_highlight1.js",
     "./blocktool/__init__.js": "../common/js/skulpt_mixtoy/inittool.js",
-    "./bg_nonehl/__init__.js":"../common/js/skulpt_mixtoy/bg_nonehl1.js",
+    "./bg_nonehl/__init__.js":"../common/js/skulpt_mixtoy/bg_nonehl2.js",
     "./bg_noanimation/__init__.js":"../common/js/skulpt_mixtoy/bg_noanimation1.js"
 };
 // document.write("<script language=JavaScript src='./js/skulpt/pyodide.js'></script>");

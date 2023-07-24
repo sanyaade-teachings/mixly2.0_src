@@ -34,6 +34,10 @@ LevelSelector.XML_STR = [
     `<xml xmlns="https://developers.google.com/blockly/xml">
         <block type="initSettedMap_6">
         </block>
+    </xml>`,
+    `<xml xmlns="https://developers.google.com/blockly/xml">
+        <block type="initSettedMap_7">
+        </block>
     </xml>`
 ];
 
@@ -55,7 +59,7 @@ LevelSelector.init = () => {
 
     const $level = $('#level-type');
     $level.empty();
-    for (let i = 1; i < 7; i++) {
+    for (let i = 1; i < 8; i++) {
         $level.append(`<option value="${i}">${indexText['关卡']} ${i}</option>`);
     }
     form.render('select', 'level-selector-filter');
@@ -69,7 +73,7 @@ LevelSelector.init = () => {
 }
 
 LevelSelector.xmlToWorkspace = (level) => {
-    if (level < 1 || level > 6) {
+    if (level < 1 || level > 7) {
         return;
     }
     const xmlStr =  LevelSelector.XML_STR[--level];

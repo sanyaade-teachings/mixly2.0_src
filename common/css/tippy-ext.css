@@ -27,3 +27,19 @@
 .dark .tippy-arrow {
     color: #353535;
 }
+
+.light .tippy-content .m-btn {
+    color: #000;
+}
+
+.light .tippy-content .m-btn:hover {
+    background-color: #f6f6f6;
+}
+
+.dark .tippy-content .m-btn {
+    color: #fff;
+}
+
+.dark .tippy-content .m-btn:hover {
+    background-color: #41464b;
+}

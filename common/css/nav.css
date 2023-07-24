@@ -382,28 +382,6 @@
     -webkit-line-clamp: 2;
 }
 
-/*.layui-icon-file:before {
-    display: none;
-}*/
-
-/*.layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
-    text-decoration: none;
-     color: #ffe604;
-}
-
-.layui-tree-line .layui-tree-set:hover {
-    background-color: #f6f6f6;
-    transition: 0.5s all;
-}
-
-.layui-tree-txt {
-    color: rgba(0, 0, 0, 0.85);
-}*/
-
-.layui-tab-card {
-    border-width: 0px 1px 0px 1px;
-}
-
 .layui-nav .layui-nav-item a {
     position: relative;
     overflow: hidden;
@@ -448,32 +426,6 @@
     background-color: #fff;
 }
 
-.dark .layui-tab-card>.layui-tab-title .layui-this {
-    background-color: #c2bebe;
-}
-
-.dark .layui-tab-card>.layui-tab-title {
-    background-color: #6c6969;
-}
-
-.dark .layui-tab-title li .layui-tab-close {
-    color: #fff;
-}
-
-.dark .layui-layer {
-    background-color: #6c6969;
-}
-
-.dark .layui-layer-title {
-    border-bottom: 1px solid #5d5a5a;
-}
-
-.dark .layui-form-select dl {
-    background-color: #656464;
-    border: 1px solid #4c4a4a;
-    color: #fff;
-}
-
 .light .layui-form-select dl dd.layui-this {
     background-color: #009688 !important;
 }
@@ -482,31 +434,11 @@
     background-color: #007acc !important;
 }
 
-.dark .layui-nav-child {
-    background-color: #646363;
-    border: 1px solid #646363;
-}
-
 .dark .layui-layer-btn a {
     color: #fff;
     border: 1px solid #765454;
     background-color: #575353;
 }
-
-/* 窗口尺寸调整框 */
-.dark #slider_winsize > div.layui-slider-input.layui-input > div.layui-slider-input-txt > input {
-    height: 38px;
-}
-
-/*
-.layui-form-select dl dd:hover > button {
-    display: inline;
-}
-
-dd > button {
-    display: none;
-}
-*/
 
 #boardSelector > div.layui-unselect.layui-form-select > dl {
     overflow-y: auto;
@@ -560,33 +492,6 @@ dd > button {
     border-bottom-color: #646363;
 }
 
-/*
-.layui-layer-shade {
-    height: 48px;
-}
-*/
-
-.dark .layui-input:hover, .dark .layui-select:hover {
-    border-color: #1f1f1f !important;
-}
-
-.dark .layui-panel {
-    background-color: #615959;
-}
-
-.dark .layui-card-header {
-    color: #fff;
-    border-bottom: 1px solid #484040;
-}
-
-.dark .layui-progress-text {
-    color: #fff;
-}
-
-.dark .layui-layer-page {
-    background-color: #7d7979;
-}
-
 .layui-table-fixed-r > .layui-table-header {
     border-bottom-width: 0px;
 }
@@ -600,14 +505,6 @@ dd > button {
 }
 
 .dark .layui-form-checkbox[lay-skin=primary] span {
-    color: #fff;
-}
-
-.dark .layui-layer {
-    box-shadow: none !important;
-}
-
-.dark .layui-panel {
     color: #fff;
 }
 
@@ -632,14 +529,6 @@ dd > button {
     color: rgb(255 255 255 / 80%);
     padding: 0px;
     margin: 0px;
-}
-
-.dark .layui-menu li:hover {
-    background-color: #afa7a7;
-}
-
-.dark .layui-menu .layui-menu-item-divider {
-    border-bottom: 1px solid #979797;
 }
 
 .light .editor-dropdown-menu {
@@ -761,19 +650,6 @@ dd > button {
     color: #fff;
 }
 
-.dark .layui-layer-msg {
-    background-color: #746f6f;
-}
-
-/* 下拉菜单 */
-.light .examples-dropdown {
-    background-color: #f2f2f2;
-}
-
-.dark .examples-dropdown {
-    background-color: #615959;
-}
-
 .light .layui-table-tips-main {
     background-color: #fff;
     color: #5f5f5f;
@@ -781,46 +657,6 @@ dd > button {
 
 .dark .layui-table-tips-main {
     background-color: #8d8888;
-    color: #fff;
-}
-
-.light span.layui-layer-close1 {
-    color: #777;
-}
-
-.dark span.layui-layer-close1 {
-    color: #fff;
-}
-
-.dark .dropdown-menu {
-    background-color: #615959;
-    color: #fff;
-    min-width: 50px;
-}
-
-.light .tab-ace-port-add-btn {
-    color: #000;
-}
-
-.light .tab-ace-port-add-btn:hover {
-    background-color: #f6f6f6;
-}
-
-.dark .tab-ace-port-add-btn {
-    color: #fff;
-}
-
-.dark .tab-ace-port-add-btn:hover {
-    background-color: #41464b;
-}
-
-/* 折叠卡片 */
-.dark .layui-colla-title {
-    color: #fff;
-    background-color: #656161;
-}
-
-.dark .layui-colla-content {
     color: #fff;
 }
 

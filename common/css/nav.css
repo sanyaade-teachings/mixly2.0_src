@@ -27,15 +27,7 @@
 
 @media screen and (min-width: 1701px) {
     #td_middle > div > div {
-        padding-bottom: 5px;
-        padding-right: 0px;
-        padding-top: 0px;
-        padding-left: 0px;
-        position: absolute;
-        left: 0px;
-        right: 0px;
         top: 25px;
-        bottom: 0px;
     }
 
     #td_middle > div > ul {
@@ -76,15 +68,7 @@
 
 @media screen and (max-width: 1700px) {
     #td_middle > div > div {
-        padding-bottom: 0px;
-        padding-right: 0px;
-        padding-top: 0px;
-        padding-left: 0px;
-        position: absolute;
-        left: 0px;
-        right: 0px;
         top: 20px;
-        bottom: 0px;
     }
 
     #td_middle > div > ul {
@@ -137,23 +121,20 @@
     }
 }
 
-.light .tab-btn {
-    color: #fff;
-    margin-left: 3px;
-}
-
-.dark .tab-btn {
-    color: #fff;
-    margin-left: 3px;
-    border-color: #484444;
+#td_middle > div > div {
+    padding: 0px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 
 .tab-ace {
     width: auto;
     height: 100%;
     border: solid #ddd;
-    border-width: 0px 0px 0px 0px;
-    border-radius: 0px 0px 0px 0px;
+    border-width: 0px;
+    border-radius: 0px;
     /*overflow-x: auto;
     overflow-y: scroll;*/
     word-break: normal;

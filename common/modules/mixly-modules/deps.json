@@ -4,7 +4,7 @@
         "require": [
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.Modules"
+            "Mixly.Storage"
         ],
         "provide": [
             "Mixly.BoardConfigItem"
@@ -48,7 +48,8 @@
             "FingerprintJS",
             "Mixly.Url",
             "Mixly.Env",
-            "Mixly.Modules"
+            "Mixly.Modules",
+            "Mixly.LocalStorage"
         ],
         "provide": [
             "Mixly.Config"
@@ -320,6 +321,7 @@
         "path": "/common/local-storage.js",
         "require": [
             "store",
+            "path",
             "Mixly.MArray"
         ],
         "provide": [
@@ -533,8 +535,10 @@
     {
         "path": "/common/storage.js",
         "require": [
-            "PouchDB",
-            "Mixly"
+            "path",
+            "layui",
+            "Mixly.LocalStorage",
+            "Mixly.Config"
         ],
         "provide": [
             "Mixly.Storage"
@@ -563,21 +567,14 @@
     {
         "path": "/common/toolbox-searcher.js",
         "require": [
+            "path",
             "Blockly",
+            "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg"
         ],
         "provide": [
             "Mixly.ToolboxSearcher"
-        ]
-    },
-    {
-        "path": "/common/tools.js",
-        "require": [
-            "Mixly.Config"
-        ],
-        "provide": [
-            "Mixly.Tools"
         ]
     },
     {
@@ -604,7 +601,6 @@
         "path": "/common/xml.js",
         "require": [
             "layui",
-            "Mixly.Tools",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Msg"
@@ -776,11 +772,11 @@
             "Mixly.Modules",
             "Mixly.Charts",
             "Mixly.Config",
-            "Mixly.Tools",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.XML",
             "Mixly.MArray",
+            "Mixly.MString",
             "Mixly.Msg"
         ],
         "provide": [
@@ -901,11 +897,11 @@
         "require": [
             "Mixly.Charts",
             "Mixly.Config",
-            "Mixly.Tools",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.XML",
             "Mixly.MArray",
+            "Mixly.MString",
             "Mixly.Msg",
             "Mixly.Web.USB",
             "Mixly.Web.SerialPort",
@@ -1036,11 +1032,11 @@
             "Mixly.Modules",
             "Mixly.Charts",
             "Mixly.Config",
-            "Mixly.Tools",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.XML",
             "Mixly.MArray",
+            "Mixly.MString",
             "Mixly.Msg",
             "Mixly.WebSocket.Socket"
         ],

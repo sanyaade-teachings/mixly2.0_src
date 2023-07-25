@@ -8,8 +8,8 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.BoardManager');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
-goog.require('Mixly.Modules');
 goog.require('Mixly.MJSON');
+goog.require('Mixly.Storage');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.Setting');
 
@@ -22,12 +22,12 @@ const {
     Env,
     Modules,
     MJSON,
+    Storage,
     Setting
 } = Mixly;
 
 const { LANG } = Msg;
 const { element, form, loading, layer } = layui;
-const { fs_extra, path } = Modules;
 const { USER, SOFTWARE } = Config;
 
 Setting.ID = 'setting-menu';
@@ -50,17 +50,7 @@ Setting.init = () => {
                  .addClass(USER.theme);
         $('html').attr('data-bs-theme', USER.theme);
         LayerExt.updateShade();
-        if (Env.isElectron) {
-            try {
-                fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
-                    spaces: '    '
-                });
-            } catch(error) {
-                console.log(error);
-            }
-        } else {
-            store.set('mixly2.0-config', USER);
-        }
+        Storage.user('/', USER);
     });
 
     form.on('submit(open-setting-dialog-filter)', function(data) {
@@ -161,17 +151,7 @@ Setting.onclick = () => {
                     BoardManager.screenHeightLevel = -1;
                     BoardManager.updateBoardsCard();
                 }
-                if (Env.isElectron) {
-                    try {
-                        fs_extra.outputJsonSync(path.resolve(Env.clientPath, './setting/config.json'), USER, {
-                            spaces: '    '
-                        });
-                    } catch(error) {
-                        console.log(error);
-                    }
-                } else {
-                    store.set('mixly2.0-config', USER);
-                }
+                Storage.user('/', USER);
                 layer.closeAll(() => {
                     XML.renderAllTemplete();
                     layer.msg(Msg.getLang('配置更新成功'), { time: 1000 });

@@ -3,11 +3,11 @@ goog.loadJs('web', () => {
 goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
 goog.require('Mixly.Config');
-goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
+goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
 goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.Serial');
@@ -16,11 +16,11 @@ const {
     Modules,
     Charts,
     Config,
-    Tools,
     Env,
     LayerExt,
     XML,
     MArray,
+    MString,
     Msg
 } = Mixly;
 
@@ -1350,13 +1350,13 @@ Serial.onbytes = (port, data) => {
                 if (dataArr && dataArr.length > 0) {
                     portObj.chineseStr += String.fromCharCode(data);
                 } else {
-                    Serial.outputBoxAdd(port, Tools.messageDecode(portObj.chineseStr));
+                    Serial.outputBoxAdd(port, MString.decode(portObj.chineseStr));
                     Serial.outputBoxAdd(port, String.fromCharCode(data));
                     portObj.chineseStr = "";
                 }
             } catch(e) {
                 console.log(e);
-                Serial.outputBoxAdd(port, Tools.messageDecode(portObj.chineseStr));
+                Serial.outputBoxAdd(port, MString.decode(portObj.chineseStr));
                 Serial.outputBoxAdd(port, data);
                 portObj.chineseStr = "";
             }
@@ -1479,7 +1479,7 @@ Serial.showErrorData = function (port, select, data) {
     const portObj = Serial.portsOperator[port];
     const { toolOpened, dom, toolConfig } = portObj;
     if (!toolConfig.receiveStr) {
-        data = Tools.uint8ArrayToStr(Tools.strToByte(data));
+        data = MString.uint8ArrayToStr(MString.strToByte(data));
         data = data.replace(/^\s*/, "");
         data += "\n";
     }

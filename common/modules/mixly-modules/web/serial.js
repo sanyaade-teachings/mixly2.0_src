@@ -2,11 +2,11 @@ goog.loadJs('web', () => {
 
 goog.require('Mixly.Charts');
 goog.require('Mixly.Config');
-goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
+goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.SerialPort');
@@ -17,11 +17,11 @@ const {
     Web,
     Charts,
     Config,
-    Tools,
     Env,
     LayerExt,
     XML,
     MArray,
+    MString,
     Msg
 } = Mixly;
 
@@ -1182,7 +1182,7 @@ Serial.showErrorData = function (port, select, data) {
     const portObj = Serial.portsOperator[port];
     const { toolOpened, dom, toolConfig } = portObj;
     if (!toolConfig.receiveStr) {
-        data = Tools.uint8ArrayToStr(Tools.strToByte(data));
+        data = MString.uint8ArrayToStr(MString.strToByte(data));
         data = data.replace(/^\s*/, "");
         data += "\n";
     }
@@ -1213,7 +1213,7 @@ Serial.writeByteArr = function (port, sendDataStr, sendDataTail) {
     var sendDataNum = [];
     for (var i = 0; i < sendDataArr.length; i++) {
         if (isNaN(sendDataArr[i])) {
-            sendDataNum = [...sendDataNum, ...Tools.strToByte(sendDataArr[i])];
+            sendDataNum = [...sendDataNum, ...MString.strToByte(sendDataArr[i])];
         } else {
             sendDataArr[i] = sendDataArr[i].toLowerCase();
             if (sendDataArr[i].length > 2 && sendDataArr[i].substring(0, 2) === '0o') {

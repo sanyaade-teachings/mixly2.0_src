@@ -11,6 +11,7 @@
             "Mixly.Config",
             "Mixly.MArray",
             "Mixly.Url",
+            "Mixly.Storage",
             "Mixly.Electron.CloudDownload",
             "Mixly.Electron.PythonShell"
         ],
@@ -77,7 +78,8 @@
             "Mixly.Env",
             "Mixly.LocalStorage",
             "Mixly.Modules",
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Storage"
         ],
         "provide": [
             "Mixly.Loading"
@@ -111,8 +113,8 @@
             "Mixly.BoardManager",
             "Mixly.Config",
             "Mixly.Env",
-            "Mixly.Modules",
             "Mixly.MJSON",
+            "Mixly.Storage",
             "Mixly.WebSocket.Socket"
         ],
         "provide": [

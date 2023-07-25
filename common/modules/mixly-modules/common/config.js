@@ -4,9 +4,16 @@ goog.require('FingerprintJS');
 goog.require('Mixly.Url');
 goog.require('Mixly.Env');
 goog.require('Mixly.Modules');
+goog.require('Mixly.LocalStorage');
 goog.provide('Mixly.Config');
 
-const { Config, Url, Env, Modules } = Mixly;
+const {
+    Config,
+    Url,
+    Env,
+    Modules,
+    LocalStorage
+} = Mixly;
 
 // 被选中板卡的配置信息
 Config.SELECTED_BOARD = {};
@@ -25,16 +32,13 @@ Config.USER = {
     compileCAndH: 'true'
 };
 
-const URL_DEFAULT_CONFIG = {
-    "thirdPartyBoard": false
-};
-
 const BOARD_DEFAULT_CONFIG = {
     "burn": "None",
     "upload": "None",
     "nav": "None",
     "serial": "None",
-    "saveMixWithCode": true
+    "saveMixWithCode": true,
+    "thirdPartyBoard": false
 };
 
 const SOFTWARE_DEFAULT_CONFIG = {
@@ -46,45 +50,16 @@ const SOFTWARE_DEFAULT_CONFIG = {
  * @return {void}
  **/
 Config.init = () => {
-    const urlConfig = {
-        ...URL_DEFAULT_CONFIG,
+    Config.BOARD = {
+        ...goog.getJSON('./config.json', BOARD_DEFAULT_CONFIG),
         ...Url.getConfig()
     };
-    Config.BOARD = goog.getJSON('./config.json', BOARD_DEFAULT_CONFIG);
-    if (typeof urlConfig === 'object') {
-        let {
-            thirdPartyBoard,
-            boardImg,
-            boardIndex,
-            boardType,
-            boardName,
-            filePath
-        } = urlConfig;
-        thirdPartyBoard = thirdPartyBoard ?? false;
-        Config.BOARD = {
-            ...Config.BOARD,
-            thirdPartyBoard,
-            boardImg,
-            boardIndex,
-            boardType,
-            boardName,
-            filePath
-        };
-        delete urlConfig.thirdPartyBoard;
-        delete urlConfig.boardImg;
-        delete urlConfig.boardIndex;
-        delete urlConfig.boardType;
-        delete urlConfig.boardName;
-        delete urlConfig.filePath;
-    }
 
     console.log('Config.BOARD:', Config.BOARD);
 
     let pathPrefix = '../../../';
 
     Config.SOFTWARE = goog.getJSON(pathPrefix + 'sw-config.json', SOFTWARE_DEFAULT_CONFIG);
-    if (typeof urlConfig === 'object')
-        Config.SOFTWARE = { ...Config.SOFTWARE, ...urlConfig };
     Config.pathPrefix = pathPrefix;
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
 
@@ -93,20 +68,19 @@ Config.init = () => {
 
     // 如果当前在electron环境下，则从本地setting文件夹下读取用户配置，
     // 如果在Web下，则从window.localStorage.setting中读取用户配置
-    let userConfig = null;
+    /*let userConfig = null;
     if (Env.isElectron) {
         const { fs_extra, path } = Modules;
         const SETTING_FILE = path.resolve(Env.clientPath, './setting/config.json');
         userConfig = fs_extra.readJsonSync(SETTING_FILE, { throws: false });
     } else {
         userConfig = store.get('mixly2.0-config');
-    }
+    }*/
 
-    if (userConfig)
-        Config.USER = {
-            ...Config.USER,
-            ...userConfig
-        };
+    Config.USER = {
+        ...Config.USER,
+        ...LocalStorage.get(LocalStorage.PATH['USER']) ?? {}
+    };
 
     if (Config.USER.themeAuto) {
         const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
@@ -129,7 +103,6 @@ Config.init = () => {
     }
 
     console.log('Config.USER', Config.USER);
-
     FingerprintJS.load()
     .then(fp => fp.get())
     .then(result => {

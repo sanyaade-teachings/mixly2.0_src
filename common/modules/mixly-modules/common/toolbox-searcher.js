@@ -1,15 +1,20 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('Blockly');
+goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.ToolboxSearcher');
 
 const {
+    Env,
     XML,
     Msg,
     ToolboxSearcher
 } = Mixly;
+
+ToolboxSearcher.TEMPLATE = goog.get(path.join(Env.templatePath, './search-div.html'));
 
 ToolboxSearcher.init = function (editor) {
     this.editor = editor;
@@ -17,7 +22,9 @@ ToolboxSearcher.init = function (editor) {
         toolbox: ''
     }));
 
-    const serachDom = XML.TEMPLATE_DOM['SEARCH_DIV'];
+    const serachDom = XML.getDom(ToolboxSearcher.TEMPLATE, {
+        search: Msg.Lang['查找']
+    });
     $('.blocklyToolboxDiv').append(serachDom);
     this.btnDom = serachDom.find('button');
     this.inputDom = serachDom.find('input');

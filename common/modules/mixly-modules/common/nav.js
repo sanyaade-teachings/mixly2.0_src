@@ -425,22 +425,6 @@ Nav.RIGHT_BTN_CONFIG = [
                     }
                 }
             }, {
-                //【保存img】按钮
-                type: 'SAVE_IMG',
-                class: 'icon-floppy',
-                id: 'save-img-btn',
-                title: '',
-                href: '#',
-                onclick: {
-                    web: 'mixlyjs.saveBlockImg()',
-                    websocket: {
-                        web: 'mixlyjs.saveBlockImg()'
-                    },
-                    webcompiler: {
-                        web: 'mixlyjs.saveBlockImg()'
-                    }
-                }
-            }, {
                 //【导出库】按钮
                 type: 'EXPORT_LIB',
                 class: 'icon-export',

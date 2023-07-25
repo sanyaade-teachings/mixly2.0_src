@@ -4,11 +4,11 @@ goog.require('layui');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
 goog.require('Mixly.Config');
-goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
+goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.Electron.Serial');
 
@@ -19,11 +19,11 @@ const {
     Modules,
     Charts,
     Config,
-    Tools,
     Env,
     LayerExt,
     XML,
     MArray,
+    MString,
     Msg
 } = Mixly;
 
@@ -1405,13 +1405,13 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
                     if (dataArr && dataArr.length > 0) {
                         chineseStr += data;
                     } else {
-                        Serial.outputBoxAdd(port, Tools.messageDecode(chineseStr));
+                        Serial.outputBoxAdd(port, MString.decode(chineseStr));
                         Serial.outputBoxAdd(port, String.fromCharCode(data[0]));
                         chineseStr = "";
                     }
                 } catch(e) {
                     console.log(e);
-                    Serial.outputBoxAdd(port, Tools.messageDecode(chineseStr));
+                    Serial.outputBoxAdd(port, MString.decode(chineseStr));
                     Serial.outputBoxAdd(port, data[0]);
                     chineseStr = "";
                 }
@@ -1544,7 +1544,7 @@ Serial.showErrorData = function (port, select, data) {
     const { mainStatusBarTab } = Mixly;
     const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     if (!toolConfig.receiveStr) {
-        data = Tools.uint8ArrayToStr(Tools.strToByte(data));
+        data = MString.uint8ArrayToStr(MString.strToByte(data));
         data = data.replace(/^\s*/, "");
         data += "\n";
     }
@@ -1575,7 +1575,7 @@ Serial.writeByteArr = function (port, sendDataStr, sendDataTail) {
     var sendDataNum = [];
     for (var i = 0; i < sendDataArr.length; i++) {
         if (isNaN(sendDataArr[i])) {
-            sendDataNum = [...sendDataNum, ...Tools.strToByte(sendDataArr[i])];
+            sendDataNum = [...sendDataNum, ...MString.strToByte(sendDataArr[i])];
         } else {
             sendDataArr[i] = sendDataArr[i].toLowerCase();
             if (sendDataArr[i].length > 2 && sendDataArr[i].substring(0, 2) === '0o') {

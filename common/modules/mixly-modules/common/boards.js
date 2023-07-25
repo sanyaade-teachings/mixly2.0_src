@@ -158,6 +158,7 @@ Boards.changeTo = (boardName) => {
             SELECTED_BOARD[i] = BOARD[i];
         }
     }
+    SELECTED_BOARD['boardName'] = boardName;
     if (BOARD.web instanceof Object) {
         for (let value of [{
                 type: 'burn',

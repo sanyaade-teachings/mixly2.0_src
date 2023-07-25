@@ -1,14 +1,12 @@
 goog.loadJs('common', () => {
 
 goog.require('layui');
-goog.require('Mixly.Tools');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.XML');
 
 const {
-    Tools,
     Env,
     Config,
     Msg,
@@ -36,11 +34,6 @@ XML.TEMPLATE_CONFIG = [
         },
         appendToBody: true
     }, {
-        type: 'SIMULATOR_DIV',
-        path: '/simulator-div.html',
-        config: {},
-        appendToBody: true
-    }, {
         type: 'BOARD_SELECTOR',
         path: '/board-selector-div.html',
         config: {},
@@ -62,13 +55,6 @@ XML.TEMPLATE_CONFIG = [
         type: 'READ_BITMAP_DIV',
         path: '/read-bitmap-div.html',
         config: {},
-        appendToBody: false
-    }, {
-        type: 'SEARCH_DIV',
-        path: '/search-div.html',
-        config: {
-            search: Msg.Lang['查找']
-        },
         appendToBody: false
     }, {
         type: 'PROGRESS_BAR_DIV',
@@ -101,12 +87,10 @@ XML.TEMPLATE_CONFIG = [
 XML.TEMPLATE_ENV = {
     LOADER_DIV: true,
     SELECTOR_DIV: true,
-    SIMULATOR_DIV: Env.isElectron && BOARD?.nav?.compile,
     BOARD_SELECTOR: true,
     PORT_SELECTOR: !(BOARD?.nav?.run || BOARD?.nav?.cancel || BOARD?.nav?.webrun || BOARD?.nav?.webcancel || (!Env.isElectron && !Env.hasSocketServer)),
     PARSE_MIX_ERROR_DIV: true,
     READ_BITMAP_DIV: true,
-    SEARCH_DIV: true,
     PROGRESS_BAR_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
     LIB_MANAGER_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
     APP_DIV: true

@@ -2,13 +2,13 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
-goog.require('Mixly.Modules');
+goog.require('Mixly.Storage');
 goog.provide('Mixly.BoardConfigItem');
 
 const {
     Env,
     Config,
-    Modules
+    Storage
 } = Mixly;
 
 const { USER, BOARD } = Config;
@@ -244,22 +244,12 @@ class BoardConfigItem {
      * @return {void}
      **/
     writeSelectedOptions = () => {
-        if (!Env.isElectron) {
-            return;
-        }
         USER.board = USER.board ?? {};
         const { board } = USER;
         board[BOARD.boardType] = board[BOARD.boardType] ?? {};
         board[BOARD.boardType].key = this.key;
         board[BOARD.boardType].default = { ...this.selectedOptions };
-        const { fs_extra, path } = Modules;
-        try {
-            fs_extra.outputJsonSync(path.resolve(Env.clientPath, 'setting/config.json'), USER, {
-                spaces: '    '
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        Storage.user('/', USER);
     }
 
     getCommandParam() {

@@ -39,7 +39,7 @@ goog.DEPENDENCIES = [
     }, {
         "path": '/../../common/modules/mixly-modules/common/local-storage.js',
         "provide": ['Mixly.LocalStorage'],
-        "require": ['Mixly']
+        "require": ['Mixly.MArray']
     }, {
         "path": '/../../common/modules/mixly-modules/common/marray.js',
         "provide": ['Mixly.MArray'],
@@ -65,6 +65,10 @@ goog.DEPENDENCIES = [
         "provide": ['Mixly.Url'],
         "require": ['Mixly']
     }, {
+        "path": '/../../common/modules/mixly-modules/common/storage.js',
+        "provide": ['Mixly.Storage'],
+        "require": ['path', 'layui', 'Mixly.LocalStorage', 'Mixly.Config']
+    }, {
         "path": '/../../common/modules/mixly-modules/electron/cloud-download.js',
         "provide": ['Mixly.Electron.CloudDownload'],
         "require": ['Mixly.Env', 'Mixly.Modules', 'Mixly.Electron']
@@ -79,6 +83,10 @@ goog.DEPENDENCIES = [
     }, {
         "path": '/../../common/modules/web-modules/xterm.min.js',
         "provide": ['Terminal'],
+        "require": []
+    }, {
+        "path": '/../../common/modules/web-modules/path-browserify.js',
+        "provide": ['path'],
         "require": []
     }
 ];

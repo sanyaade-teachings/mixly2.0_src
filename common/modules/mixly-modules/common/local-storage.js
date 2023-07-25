@@ -1,10 +1,17 @@
 goog.loadJs('common', () => {
 
 goog.require('store');
+goog.require('path')
 goog.require('Mixly.MArray');
 goog.provide('Mixly.LocalStorage');
 
 const { MArray, LocalStorage } = Mixly;
+
+LocalStorage.PATH = {
+    USER: 'mixly2.0/user',
+    BOARD: 'mixly2.0/boards/{{d.boardType}}/{{d.boardName}}/user',
+    THIRD_PARTY: 'mixly2.0/boards/{{d.boardType}}/third_party/{{d.thirdPartyName}}'
+};
 
 LocalStorage.set = function (path, value) {
     let { first, last, firstKey, lastKey } = this.find(path);

@@ -9,6 +9,7 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Url');
+goog.require('Mixly.Storage');
 goog.require('Mixly.Electron.CloudDownload');
 goog.require('Mixly.Electron.PythonShell');
 goog.provide('Mixly.BoardManager');
@@ -22,6 +23,7 @@ const {
     Config,
     MArray,
     Url,
+    Storage,
     Electron,
     BoardManager
 } = Mixly;
@@ -236,28 +238,14 @@ BoardManager.delBoard = (boardDir, endFunc) => {
 BoardManager.ignoreBoard = (boardType, endFunc) => {
     USER.boardIgnore = USER.boardIgnore ?? [];
     USER.boardIgnore.push(boardType);
-    if (Env.isElectron) {
-        const settingPath = path.resolve(Env.clientPath, './setting/config.json');
-        fs_extra.outputJson(settingPath, USER, {
-            spaces: '    '
-        }, endFunc);
-    } else {
-        store.set('mixly2.0-config', USER);
-        endFunc();
-    }
+    Storage.user('/', USER);
+    endFunc();
 }
 
 BoardManager.resetBoard = (endFunc) => {
     USER.boardIgnore = [];
-    if (Env.isElectron) {
-        const settingPath = path.resolve(Env.clientPath, './setting/config.json');
-        fs_extra.outputJson(settingPath, USER, {
-            spaces: '    '
-        }, endFunc);
-    } else {
-        store.set('mixly2.0-config', USER);
-        endFunc();
-    }
+    Storage.user('/', USER);
+    endFunc();
 }
 
 BoardManager.showDelBoardProgress = () => {

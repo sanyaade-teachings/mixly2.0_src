@@ -6,6 +6,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.LocalStorage');
 goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
+goog.require('Mixly.Storage');
 goog.provide('Mixly.Loading');
 
 const {
@@ -13,39 +14,14 @@ const {
     Env,
     LocalStorage,
     Modules,
-    Config
+    Config,
+    Storage
 } = Mixly;
 
-// 如果当前在electron环境下，则从本地setting文件夹下读取用户配置，
-// 如果在Web下，则从window.localStorage.setting中读取用户配置
-let userConfig = null;
-if (Env.isElectron) {
-    const { fs_extra, path } = Modules;
-    const SETTING_FILE = path.resolve(Env.clientPath, './setting/config.json');
-    userConfig = fs_extra.readJsonSync(SETTING_FILE, { throws: false });
-} else {
-    userConfig = store.get('mixly2.0-config');
-}
-
-if (userConfig)
-    Config.USER = {
-        ...Config.USER,
-        ...userConfig
-    };
-
-/*if (!Env.isElectron || Config.USER.themeAuto) {
-    const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
-    themeMedia.addListener(e => {
-        if (Env.isElectron && !Config.USER.themeAuto) {
-            return;
-        }
-        if (e.matches) {
-            $('body').removeClass('dark').addClass('light');
-        } else {
-            $('body').removeClass('light').addClass('dark');
-        }
-    });
-}*/
+Config.USER = {
+    ...Config.USER,
+    ...Storage.user('/') ?? {}
+};
 
 if (Config.USER.themeAuto) {
     const themeMedia = window.matchMedia("(prefers-color-scheme: light)");

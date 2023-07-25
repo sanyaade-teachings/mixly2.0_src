@@ -289,7 +289,7 @@ ArduShell.upload = (boardType, port) => {
             $("#mixly-loader-btn").css('display', 'inline-block');
         }
     });
-    statusBarTerminal.show();
+    mainStatusBarTab.show();
     statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
     const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),

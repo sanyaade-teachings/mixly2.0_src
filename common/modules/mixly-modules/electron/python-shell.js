@@ -75,7 +75,7 @@ PythonShell.run = function () {
                 time: 1000
             });
             statusBarTerminal.setValue(Msg.Lang['写文件出错了，错误是：'] + err + '\n');
-            statusBarTerminal.show();
+            mainStatusBarTab.show();
         } else {
             shell = new Modules.python_shell.PythonShell(Env.pyFilePath, options);
             let iconv = Modules.iconv_lite;

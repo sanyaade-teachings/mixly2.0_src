@@ -147,7 +147,7 @@ ArduShell.upload = (boardType, port) => {
                 layer.title(Msg.Lang['上传终止中'] + '...', index);
                 ArduShell.cancel();
             });
-            statusBarTerminal.show();
+            mainStatusBarTab.show();
             statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
             const code = MFile.getCode();
             Socket.sendCommand({

@@ -344,7 +344,7 @@ ArduShell.upload = (boardType, port) => {
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {
             const code = MFile.getCode();
-            statusBarTerminal.show();
+            mainStatusBarTab.show();
             const portObj = Serial.portsOperator[port];
             if (!portObj) return;
             const { toolConfig } = portObj;

@@ -1,7 +1,6 @@
 goog.loadJs('common', () => {
 
 goog.require('store');
-goog.require('path')
 goog.require('Mixly.MArray');
 goog.provide('Mixly.LocalStorage');
 

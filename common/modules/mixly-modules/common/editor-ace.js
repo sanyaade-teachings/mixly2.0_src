@@ -223,7 +223,8 @@ class EditorAce {
     }
 
     resetFontSize() {
-        this.editor.setFontSize(Math.max($('body').width() / 85, $('body').height() / 85, 12));
+        const size = parseInt(Math.max(window.screen.width / 85, window.screen.height / 85, 12));
+        this.editor.setFontSize(size);
     }
 
     increaseFontSize() {

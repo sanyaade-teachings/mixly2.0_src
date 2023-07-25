@@ -21,7 +21,6 @@ class StatusBar extends EditorAce {
             this.editor.setOption("theme", "ace/theme/xcode");
         }
         this.editor.getSession().setMode("ace/mode/python");
-        this.editor.setFontSize(document.body.clientWidth / 95);
         this.editor.setReadOnly(true);
         this.editor.setScrollSpeed(0.3);
         this.editor.setShowPrintMargin(false);

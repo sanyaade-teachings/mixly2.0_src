@@ -321,7 +321,6 @@
         "path": "/common/local-storage.js",
         "require": [
             "store",
-            "path",
             "Mixly.MArray"
         ],
         "provide": [
@@ -807,8 +806,7 @@
             "PouchDB",
             "d3",
             "Mixly.Electron.Events",
-            "bootstrap",
-            "path"
+            "bootstrap"
         ],
         "provide": [
             "MixlyLoader"

@@ -107,11 +107,11 @@ LibManager.getLibs = (libsDir) => {
                             const reSrcThirdDir = path.relative(Env.indexDirPath, path.resolve(nowPath, reSrcIndexDir));
                             const srcIndexDir = path.resolve(Env.indexDirPath, reSrcIndexDir);
                             const srcThirdDir = path.resolve(Env.indexDirPath, reSrcThirdDir);
-                            if (fs_extend.isfile(srcIndexDir)) {
-                                loader.push(reSrcIndexDir);
-                            } else if (fs_extend.isfile(srcThirdDir)) {
+                            if (fs_extend.isfile(srcThirdDir)) {
                                 loader.push(reSrcThirdDir);
-                            }
+                            } else if (fs_extend.isfile(srcIndexDir)) {
+                                loader.push(reSrcIndexDir);
+                            } 
                         } catch (error) {
                             console.log(error);
                         }

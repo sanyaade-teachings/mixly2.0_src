@@ -72,8 +72,9 @@
     "LATEST": "latest",
     "UPDATE": "Update",
     "INFO": "The page will be automatically reloaded after the update is in progress.<br/>if the page has not been reloaded for a long time,<br/>try to reload the page manually.",
-    "WORKSPACE_HIGHLIGHT": "Highlights the content on the workspace",
-    "WORKSPACE_GRID": "Show grid on the workspace",
+    "WORKSPACE_HIGHLIGHT": "Workspace highlight",
+    "WORKSPACE_GRID": "Workspace grid",
+    "WORKSPACE_MINIMAP": "Workspace minimap",
     "CODE_LANG": "Code language",
     "ENABLE": "Enable",
     "DISABLE": "Disable"

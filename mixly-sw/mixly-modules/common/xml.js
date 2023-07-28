@@ -113,7 +113,7 @@ XML.TEMPLATE_CONFIG = [
                 return Msg.getLang('WORKSPACE_GRID');
             },
             blocklyShowMinimap: () => {
-                return '工作区小地图';
+                return Msg.getLang('WORKSPACE_MINIMAP');
             }
 
         },

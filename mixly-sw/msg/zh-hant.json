@@ -74,6 +74,7 @@
     "INFO": "正在更新中，更新結束後將會自動重載頁面，<br/>若頁面長時間未重載請嘗試手動重載頁面。",
     "WORKSPACE_HIGHLIGHT": "工作區高亮",
     "WORKSPACE_GRID": "工作區網格",
+    "WORKSPACE_MINIMAP": "工作區縮略圖",
     "CODE_LANG": "程式碼語言",
     "ENABLE": "開啟",
     "DISABLE": "關閉"

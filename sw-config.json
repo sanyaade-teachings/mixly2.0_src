@@ -1,5 +1,5 @@
 {
-    "version": "Mixly 2.0 rc3",
+    "version": "Mixly 2.0 rc4",
     "board": {
         "url": "http://mixlylibs.cloud:8099/mixly2/cloud-libraries/raw/develop/cloud-boards/boards.json"
     },

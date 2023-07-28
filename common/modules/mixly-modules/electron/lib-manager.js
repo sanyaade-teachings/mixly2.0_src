@@ -105,13 +105,10 @@ LibManager.getLibs = (libsDir) => {
                             src = decodeURIComponent(src.replace('file:///', ''));
                             const reSrcIndexDir = path.relative(Env.indexDirPath, src);
                             const reSrcThirdDir = path.relative(Env.indexDirPath, path.resolve(nowPath, reSrcIndexDir));
-                            const srcIndexDir = path.resolve(Env.indexDirPath, reSrcIndexDir);
                             const srcThirdDir = path.resolve(Env.indexDirPath, reSrcThirdDir);
                             if (fs_extend.isfile(srcThirdDir)) {
                                 loader.push(reSrcThirdDir);
-                            } else if (fs_extend.isfile(srcIndexDir)) {
-                                loader.push(reSrcIndexDir);
-                            } 
+                            }
                         } catch (error) {
                             console.log(error);
                         }
@@ -205,8 +202,6 @@ LibManager.init = () => {
 }
 
 LibManager.reloadThirdPartyLibs = () => {
-    // 遍历第三方库文件夹，将一些不兼容库转为2.0可用
-    LibManager.convertLibs(path.resolve(Env.indexDirPath, './libraries/ThirdParty/'));
     for (let i = 0; i < Env.thirdPartyJS.length; i++) {
         ScriptLoader.removeScript(Env.thirdPartyJS[i]);
     }
@@ -724,49 +719,10 @@ LibManager.importFromLocalWithFile = (type, filePath, endFunc) => {
     let copyPromiseList = [];
     switch (extname) {
         case '.xml':
-            const NEED_COPY = {
-                FILE: ["CHANGELOG.md", "README.md", 'config.json', basename],
-                DIR: [
-                    "block",
-                    "generator",
-                    "converter",
-                    "css",
-                    "media",
-                    "language",
-                    "companypin",
-                    "examples",
-                    "wiki",
-                    "libraries"
-                ]
-            }
             const dirPath = path.dirname(filePath);
             const dirName = path.basename(dirPath);
-            const dataList = fs.readdirSync(dirPath);
-            for (let data of dataList) {
-                const dataPath = path.resolve(dirPath, './' + data);
-                if (fs_extend.isfile(dataPath)) {
-                    if (NEED_COPY.FILE.includes(data)) {
-                        const desPath = path.resolve(thirdPartyPath, dirName, data);
-                        copyPromiseList.push(LibManager.copyFile(dataPath, desPath));
-                    }
-                } else {
-                    if (NEED_COPY.DIR.includes(data)) {
-                        const desPath = path.resolve(thirdPartyPath, dirName, data);
-                        copyPromiseList.push(LibManager.copyDir(dataPath, desPath));
-                    }
-                }
-            }
-            /*const libsPath = path.resolve(dirPath, 'libraries');
-            if (fs_extend.isdir(libsPath)) {
-                const libList = fs.readdirSync(libsPath);
-                const myLibPath = path.resolve(Env.indexDirPath, 'libraries/myLib');
-                for (let lib of libList) {
-                    const libPath = path.resolve(libsPath, lib);
-                    if (fs_extend.isfile(libPath)) continue;
-                    const desPath = path.resolve(myLibPath, lib);
-                    copyPromiseList.push(LibManager.copyDir(libPath, desPath));
-                }
-            }*/
+            const desPath = path.resolve(thirdPartyPath, dirName)
+            copyPromiseList.push(LibManager.copyDir(dirPath, desPath));
             break;
         case '.mil':
             const milPath = path.resolve(thirdPartyPath, path.basename(filePath));

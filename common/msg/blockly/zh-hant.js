@@ -167,8 +167,8 @@ ZhHant.MSG = {
 ZhHant.DOWNLOAD_SCREENSHOT = '下載模塊影像';
 
 /* 小地图 */
-ZhHant.MINIMAP_OPEN = '展開小地圖';
-ZhHant.MINIMAP_CLOSE = '折疊小地圖';
+ZhHant.MINIMAP_OPEN = '展開縮略圖';
+ZhHant.MINIMAP_CLOSE = '折疊縮略圖';
 
 /* 背包 */
 ZhHant.COPY_ALL_TO_BACKPACK = '複製所有圖形塊到背包';

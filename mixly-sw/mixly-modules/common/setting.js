@@ -91,7 +91,7 @@ Setting.onclick = () => {
     element.render('collapse', 'menu-user-collapse-filter');
     Setting.nowIndex = 0;
     LayerExt.open({
-        title: [Msg.getLang('设置'), '36px'],
+        title: [Msg.getLang('SETTING'), '36px'],
         id: 'setting-menu-layer',
         content: $('#' + Setting.ID),
         shade: LayerExt.SHADE_ALL,
@@ -154,7 +154,7 @@ Setting.onclick = () => {
                 Storage.user('/', USER);
                 layer.closeAll(() => {
                     XML.renderAllTemplete();
-                    layer.msg(Msg.getLang('配置更新成功'), { time: 1000 });
+                    layer.msg(Msg.getLang('CONFIG_UPDATE_SUCC'), { time: 1000 });
                 });
                 break;
             case 'reset':
@@ -251,7 +251,7 @@ Setting.refreshUpdateMenuStatus = (config) => {
         $btnDiv.css('display', 'flex');
         $btnDiv.children('button').off().click((event) => {
             LayerExt.open({
-                title: Msg.getLang('进度'),
+                title: Msg.getLang('PROGRESS'),
                 id: 'setting-menu-update-layer',
                 shade: LayerExt.SHADE_ALL,
                 area: ['40%', '60%'],

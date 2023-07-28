@@ -107,6 +107,8 @@
             "Blockly",
             "WorkspaceSearch",
             "Backpack",
+            "Minimap",
+            "PositionedMinimap",
             "ContentHighlight",
             "ZoomToFitControl",
             "Blockly.FieldGridDropdown",

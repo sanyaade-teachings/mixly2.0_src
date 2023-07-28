@@ -166,6 +166,10 @@ ZhHant.MSG = {
 /* 下载模块图像 */
 ZhHant.DOWNLOAD_SCREENSHOT = '下載模塊影像';
 
+/* 小地图 */
+ZhHant.MINIMAP_OPEN = '展開小地圖';
+ZhHant.MINIMAP_CLOSE = '折疊小地圖';
+
 /* 背包 */
 ZhHant.COPY_ALL_TO_BACKPACK = '複製所有圖形塊到背包';
 ZhHant.COPY_TO_BACKPACK = '加入背包';

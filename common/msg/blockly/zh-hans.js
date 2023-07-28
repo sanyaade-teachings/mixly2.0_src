@@ -172,6 +172,10 @@ ZhHans.MSG = {
 /* 下载模块图像 */
 ZhHans.DOWNLOAD_SCREENSHOT = '下载模块图像';
 
+/* 小地图 */
+ZhHans.MINIMAP_OPEN = '展开小地图';
+ZhHans.MINIMAP_CLOSE = '折叠小地图';
+
 /* 背包 */
 ZhHans.COPY_ALL_TO_BACKPACK = '复制所有图形块到背包';
 ZhHans.COPY_TO_BACKPACK = '加入背包';

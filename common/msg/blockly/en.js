@@ -170,6 +170,10 @@ En.MSG = {
 /* 下载模块图像 */
 En.DOWNLOAD_SCREENSHOT = 'Download Screenshot';
 
+/* 小地图 */
+En.MINIMAP_OPEN = 'Expand Mini Map';
+En.MINIMAP_CLOSE = 'Collapse Mini Map';
+
 /* 背包 */
 En.COPY_ALL_TO_BACKPACK = 'Copy All Blocks to Backpack';
 En.COPY_TO_BACKPACK = 'Copy to Backpack';

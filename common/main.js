@@ -70,6 +70,10 @@ goog.DEPENDENCIES = [
         "provide": ['Backpack'],
         "require": ['Blockly']
     }, {
+        "path": '/../../blockly-core/plugins/workspace_minimap.js',
+        "provide": ['Minimap', 'PositionedMinimap'],
+        "require": ['Blockly']
+    }, {
         "path": '/../../blockly-core/plugins/content_highlight.js',
         "provide": ['ContentHighlight'],
         "require": ['Blockly']

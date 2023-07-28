@@ -79,14 +79,14 @@ BoardManager.showLocalImportDialog = () => {
     Env.currentWindow.focus();
     const { dialog } = electron_remote;
     dialog.showOpenDialog(Env.currentWindow, {
-        title: Msg.getLang('导入板卡'),
+        title: Msg.getLang('IMPORT_BOARD'),
         // 默认打开的路径，比如这里默认打开下载文件夹
         defaultPath: Env.clientPath,
-        buttonLabel: Msg.getLang('确认'),
+        buttonLabel: Msg.getLang('CONFIRM'),
         // 限制能够选择的文件类型
         filters: BoardManager.LOCAL_IMPORT_FILTERS,
         properties: ['openFile', 'showHiddenFiles'],
-        message: Msg.getLang('导入板卡')
+        message: Msg.getLang('IMPORT_BOARD')
     }).then(result => {
         const selectedPath = result.filePaths[0];
 
@@ -100,7 +100,7 @@ BoardManager.showLocalImportDialog = () => {
             layerNum = layer.open({
                 type: 1,
                 id: "import-local-board-layer",
-                title: Msg.getLang("板卡导入中") + "...",
+                title: Msg.getLang("IMPORTING_BOARD") + "...",
                 content: $('#mixly-loader-div'),
                 shade: LayerExt.SHADE_ALL,
                 resize: false,
@@ -120,9 +120,9 @@ BoardManager.showLocalImportDialog = () => {
             layer.close(layerNum);
             if (error) {
                 console.log(error);
-                layer.msg(Msg.getLang('导入失败'), { time: 1000 });
+                layer.msg(Msg.getLang('IMPORT_FAILED'), { time: 1000 });
             } else {
-                layer.msg(Msg.getLang('导入成功'), { time: 1000 });
+                layer.msg(Msg.getLang('IMPORT_SUCC'), { time: 1000 });
                 BoardManager.onclickImportBoards();
                 BoardManager.screenWidthLevel = -1;
                 BoardManager.screenHeightLevel = -1;
@@ -132,7 +132,7 @@ BoardManager.showLocalImportDialog = () => {
         });
     }).catch(err => {
         console.log(err);
-        layer.msg(Msg.getLang('导入失败'), { time: 1000 });
+        layer.msg(Msg.getLang('IMPORT_FAILED'), { time: 1000 });
     });
 }
 
@@ -252,7 +252,7 @@ BoardManager.showDelBoardProgress = () => {
     return layerNum = layer.open({
         type: 1,
         id: "del-local-board-layer",
-        title: Msg.getLang("板卡删除中") + "...",
+        title: Msg.getLang("DELETING_BOARD") + "...",
         content: $('#mixly-loader-div'),
         shade: LayerExt.SHADE_ALL,
         resize: false,
@@ -273,7 +273,7 @@ BoardManager.importFromLocal = (inPath, sucFunc, errorFunc, endFunc) => {
         switch (extname) {
             case '.json':
                 if (path.resolve(inPath, '../../') === Env.thirdPartyBoardPath) {
-                    errorFunc(Msg.getLang('此板卡已导入'));
+                    errorFunc(Msg.getLang('BOARD_IMPORTED'));
                     return;
                 }
                 sucFunc();
@@ -284,10 +284,10 @@ BoardManager.importFromLocal = (inPath, sucFunc, errorFunc, endFunc) => {
                 BoardManager.importFromLocalWithZip(inPath, endFunc);
                 break;
             default:
-                errorFunc(Msg.getLang('所选文件非配置文件'));
+                errorFunc(Msg.getLang('SELECT_CONFIG_FILE_ERR'));
         }
     } else {
-        errorFunc(Msg.getLang('文件不存在'));
+        errorFunc(Msg.getLang('FILE_NOT_EXIST'));
     }
 }
 
@@ -354,8 +354,8 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
             }
         }
     } else {
-        console.log(Msg.getLang('配置文件解析失败'));
-        endFunc(Msg.getLang('配置文件解析失败'));
+        console.log(Msg.getLang('CONFIG_FILE_DECODE_ERR'));
+        endFunc(Msg.getLang('CONFIG_FILE_DECODE_ERR'));
     }
 }
 
@@ -423,7 +423,7 @@ BoardManager.showCloudImportProgress = (boardList, endFunc = (errorMessages) => 
     $('body').append(parentDom);
     element.render('progress');
     LayerExt.open({
-        title: Msg.getLang('板卡导入中') + '...',
+        title: Msg.getLang('IMPORTING_BOARD') + '...',
         id: 'setting-menu-layer1',
         content: parentDom,
         shade: LayerExt.SHADE_ALL,
@@ -458,22 +458,22 @@ BoardManager.importBoardsFromCloud = (boardList, layero, layerIndex) => {
             progressStatusDom.removeClass('layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop');
             if (i.error) {
                 progressStatusDom.addClass('layui-icon-close-fill');
-                cardHeadDom.html(i.name + ' - ' + Msg.getLang('导入失败'));
+                cardHeadDom.html(i.name + ' - ' + Msg.getLang('IMPORT_FAILED'));
                 failedTimes++;
                 console.log(i.error);
             } else {
                 progressStatusDom.addClass('layui-icon-ok-circle');
-                cardHeadDom.html(i.name + ' - ' + Msg.getLang('导入完成'));
+                cardHeadDom.html(i.name + ' - ' + Msg.getLang('IMPORT_COMPLETE'));
                 sucTimes++;
                 BoardManager.writePackageConfig(i);
             }
         }
         const sucIcon = `<i class="layui-icon layui-icon-ok" style="font-size:13px;color:#41ce28;"></i>`;
         const errIcon = `<i class="layui-icon layui-icon-close" style="font-size:13px;color:#b9063b;"></i>`;
-        layer.title(Msg.getLang('导入完成') + ' ' + sucTimes + sucIcon + ' ' + failedTimes + errIcon, layerIndex);
+        layer.title(Msg.getLang('IMPORT_COMPLETE') + ' ' + sucTimes + sucIcon + ' ' + failedTimes + errIcon, layerIndex);
     })
     .catch((error) => {
-        layer.title(Msg.getLang('导入失败'), layerIndex);
+        layer.title(Msg.getLang('IMPORT_FAILED'), layerIndex);
     })
     .finally(() => {
         layero.find('.layui-layer-setwin').css('display', 'block');
@@ -557,16 +557,16 @@ BoardManager.writePackageConfig = (boardInfo) => {
 BoardManager.importBoardWithUrl = (boardInfo) => {
     return new Promise((resolve, reject) => {
         if (!boardInfo.url) {
-            boardInfo.error = Msg.getLang('板卡url读取出错');
+            boardInfo.error = Msg.getLang('BOARD_URL_READ_ERR');
             resolve(boardInfo);
         }
         // 下载板卡文件
         BoardManager.downloadPromise(boardInfo, {
             desPath: path.resolve(Env.clientPath, './download'),
             url: boardInfo.downloadBoardIndex ? boardInfo.url : 'None',
-            startMessage: Msg.getLang('板卡文件下载中') + '...',
-            endMessage: Msg.getLang('板卡文件下载完成'),
-            errorMessage: Msg.getLang('板卡文件下载失败')
+            startMessage: Msg.getLang('BOARD_FILE_DOWNLOADING') + '...',
+            endMessage: Msg.getLang('BOARD_FILE_DOWNLOAD_COMPLETE'),
+            errorMessage: Msg.getLang('BOARD_FILE_DOWNLOAD_FAILED')
         })
         .then((newBoardInfo) => {
             if (newBoardInfo.error)
@@ -576,9 +576,9 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
                 return BoardManager.unZipPromise(newBoardInfo, {
                     desPath: Env.thirdPartyBoardPath,
                     zipPath: newBoardInfo.downloadPath,
-                    startMessage: Msg.getLang('板卡文件解压中') + '...',
-                    endMessage: Msg.getLang('板卡文件解压完成'),
-                    errorMessage: Msg.getLang('板卡文件解压失败')
+                    startMessage: Msg.getLang('BOARD_FILE_UNZIPPING') + '...',
+                    endMessage: Msg.getLang('BOARD_FILE_UNZIP_COMPLETE'),
+                    errorMessage: Msg.getLang('BOARD_FILE_UNZIP_FAILED')
                 });
         })
         .then((newBoardInfo) => {
@@ -591,9 +591,9 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
                 return BoardManager.downloadPromise(newBoardInfo, {
                     desPath: packageIndexDirPath,
                     url: boardInfo.downloadPackage ? packageIndexUrl : 'None',
-                    startMessage: Msg.getLang('板卡包索引下载中') + '...',
-                    endMessage: Msg.getLang('板卡包索引下载完成'),
-                    errorMessage: Msg.getLang('板卡包索引下载失败')
+                    startMessage: Msg.getLang('BOARD_PACKAGE_INDEX_DOWNLOADING') + '...',
+                    endMessage: Msg.getLang('BOARD_PACKAGE_INDEX_DOWNLOAD_COMPLETE'),
+                    errorMessage: Msg.getLang('BOARD_PACKAGE_INDEX_DOWNLOAD_FAILED')
                 });
             }
         })
@@ -611,9 +611,9 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
                 return BoardManager.downloadPromise(newBoardInfo, {
                     desPath: path.resolve(Env.clientPath, './download'),
                     url: boardInfo.downloadPackage ? packageUrl : 'None',
-                    startMessage: Msg.getLang('板卡包下载中') + '...',
-                    endMessage: Msg.getLang('板卡包下载完成'),
-                    errorMessage: Msg.getLang('板卡包下载失败')
+                    startMessage: Msg.getLang('BOARD_PACKAGE_DOWNLOADING') + '...',
+                    endMessage: Msg.getLang('BOARD_PACKAGE_DOWNLOAD_COMPLETE'),
+                    errorMessage: Msg.getLang('BOARD_PACKAGE_DOWNLOAD_FAILED')
                 });
             }
         })
@@ -625,9 +625,9 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
                 return BoardManager.unZipPromise(newBoardInfo, {
                     desPath: packageDirPath,
                     zipPath: newBoardInfo.downloadPath,
-                    startMessage: Msg.getLang('板卡包解压中') + '...',
-                    endMessage: Msg.getLang('板卡包解压完成'),
-                    errorMessage: Msg.getLang('板卡包解压失败')
+                    startMessage: Msg.getLang('BOARD_PACKAGE_UNZIPPING') + '...',
+                    endMessage: Msg.getLang('BOARD_PACKAGE_UNZIP_COMPLETE'),
+                    errorMessage: Msg.getLang('BOARD_PACKAGE_UNZIP_FAILED')
                 });
             }
         })
@@ -637,7 +637,7 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
             const progressStatusDom = $('#board-' + newBoardInfo.index + '-progress-status-id');
             if (!newBoardInfo.downloadPackage && !newBoardInfo.downloadBoardIndex) {
                 progressStatusDom.removeClass('layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop');
-                cardHeadDom.html(newBoardInfo.name + ' - ' + Msg.getLang('已是最新版'));
+                cardHeadDom.html(newBoardInfo.name + ' - ' + Msg.getLang('ALREADY_THE_LATEST_VERSION'));
                 progressStatusDom.addClass('layui-icon-ok-circle');
                 element.progress('board-' + newBoardInfo.index + '-progress-filter', '100%');
                 element.render('progress', 'board-' + newBoardInfo.index + '-progress-filter');
@@ -656,9 +656,9 @@ BoardManager.downloadPromise = (boardInfo, config) => {
         const DEFAULT_CONFIG = {
             desPath: path.resolve(Env.clientPath, './download'),
             url: null,
-            startMessage: Msg.getLang('下载中') + '...',
-            endMessage: Msg.getLang('下载完成'),
-            errorMessage: Msg.getLang('下载失败')
+            startMessage: Msg.getLang('DOWNLOADING') + '...',
+            endMessage: Msg.getLang('DOWNLOAD_COMPLETE'),
+            errorMessage: Msg.getLang('DOWNLOAD_FAILED')
         };
         if (typeof config !== 'object')
             config = DEFAULT_CONFIG
@@ -748,9 +748,9 @@ BoardManager.unZipPromise = (boardInfo, config) => {
         const DEFAULT_CONFIG = {
             desPath: path.resolve(Env.clientPath, './download'),
             zipPath: null,
-            startMessage: Msg.getLang('解压中') + '...',
-            endMessage: Msg.getLang('解压完成'),
-            errorMessage: Msg.getLang('解压失败'),
+            startMessage: Msg.getLang('UNZIPPING') + '...',
+            endMessage: Msg.getLang('UNZIP_COMPLETE'),
+            errorMessage: Msg.getLang('UNZIP_FAILED'),
             delZip: true
         };
         if (typeof config !== 'object')
@@ -867,11 +867,11 @@ BoardManager.compareBoardConfig = (cloudConfig) => {
             }
         }
         if (cloudConfig.downloadPackage || cloudConfig.downloadBoardIndex)
-            cloudConfig.status = Msg.getLang('待更新');
+            cloudConfig.status = Msg.getLang('TO_BE_UPDATED');
         else
-            cloudConfig.status = Msg.getLang('已安装');
+            cloudConfig.status = Msg.getLang('INSTALLED');
     } else {
-        cloudConfig.status = Msg.getLang('待安装');
+        cloudConfig.status = Msg.getLang('TO_BE_INSTALLED');
     }
     return cloudConfig;
 }
@@ -883,18 +883,18 @@ BoardManager.onclickImportBoards = () => {
         data: [],
         toolbar: `<script type="text/html" id="import-board-toolbar">
                     <div class="layui-btn-container" style="text-align: center;">
-                        <button class="layui-btn layui-btn-sm" lay-event="cloud-import">${Msg.getLang("云端导入")}</button>
-                        <button class="layui-btn layui-btn-sm" lay-event="local-import">${Msg.getLang("本地导入")}</button>
+                        <button class="layui-btn layui-btn-sm" lay-event="cloud-import">${Msg.getLang("CLOUD_IMPORT")}</button>
+                        <button class="layui-btn layui-btn-sm" lay-event="local-import">${Msg.getLang("LOCAL_IMPORT")}</button>
                     </div>
                 </script>`,
         defaultToolbar: [],
-        title: Msg.getLang('云端板卡'),
+        title: Msg.getLang('CLOUD_BOARD'),
         cols: [[
             { type: 'checkbox', unresize: false, align: "center" },
-            { field: 'status', title: Msg.getLang('状态'), unresize: false, align: "center", minWidth: 100 },
-            { field: 'name', title: Msg.getLang('名称'), sort: true, unresize: false, align: "center", minWidth: 200 },
-            { field: 'version', title: Msg.getLang('版本'), unresize: false, align: "center", minWidth: 80 },
-            { field: 'desc', title: Msg.getLang('介绍'), unresize: false, align: "center", minWidth: 250 }
+            { field: 'status', title: Msg.getLang('STATUS'), unresize: false, align: "center", minWidth: 100 },
+            { field: 'name', title: Msg.getLang('NAME'), sort: true, unresize: false, align: "center", minWidth: 200 },
+            { field: 'version', title: Msg.getLang('VERSION'), unresize: false, align: "center", minWidth: 80 },
+            { field: 'desc', title: Msg.getLang('INTRODUCTION'), unresize: false, align: "center", minWidth: 250 }
         ]],
         limit: 1000,
         skin: 'line',
@@ -912,7 +912,7 @@ BoardManager.onclickImportBoards = () => {
     table.render({
         ...tableConfig,
         text: {
-            none: Msg.getLang('云端板卡JSON下载中') + '...'
+            none: Msg.getLang('CLOUD_BOARD_JSON_DOWNLOADING') + '...'
         }
     });
     const downloadDir = path.resolve(Env.clientPath, './download');
@@ -943,7 +943,7 @@ BoardManager.onclickImportBoards = () => {
                 if (boardList.length > 0) {
                     BoardManager.showCloudImportProgress(boardList);
                 } else {
-                    layer.msg(Msg.getLang('请选择至少一块云端板卡'), { time: 2000 });
+                    layer.msg(Msg.getLang('SELECT_AT_LEAST_ONE_CLOUD_BOARD'), { time: 2000 });
                 }
                 break;
             case 'local-import':
@@ -1077,7 +1077,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <a href="${boardsList[i]['boardIndex']}?${configUrl}">
                         <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
                         <h2>${boardsList[i]['boardType']}</h2>
-                        <label style="letter-spacing:1.5px;">${Msg.getLang('编程语言')}: ${language}</label>
+                        <label style="letter-spacing:1.5px;">${Msg.getLang('CODE_LANG')}: ${language}</label>
                     </a>
                 </div>
             </div>
@@ -1095,7 +1095,7 @@ BoardManager.showBoardsCard = (row, col) => {
                         <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
                             <img src="${boardImg}" alt="service image" class="tiltimage">
                             <h2>${boardType}</h2>
-                            <label style="letter-spacing:1.5px;">${Msg.getLang('编程语言')}: ${language}</label>
+                            <label style="letter-spacing:1.5px;">${Msg.getLang('CODE_LANG')}: ${language}</label>
                         </a>
                     </div>
                 </div>

@@ -3,6 +3,8 @@ goog.loadJs('common', () => {
 goog.require('Blockly');
 goog.require('WorkspaceSearch');
 goog.require('Backpack');
+goog.require('Minimap');
+goog.require('PositionedMinimap');
 goog.require('ContentHighlight');
 goog.require('ZoomToFitControl');
 goog.require('Blockly.FieldGridDropdown');
@@ -137,8 +139,16 @@ class EditorBlockly {
         ToolboxSearcher.init(editor);
         const workspaceSearch = new WorkspaceSearch(editor);
         workspaceSearch.init();
-        const backpack = new Backpack(editor);
+        const backpack = new Backpack(editor, {
+            useFilledBackpackImage: true
+        });
         backpack.init();
+        
+        if (USER.blocklyShowMinimap === 'yes') {
+            const minimap = new PositionedMinimap(editor);
+            minimap.init();
+        }
+        
         if (USER.blocklyContentHighlight === 'yes') {
             const contentHighlight = new ContentHighlight(editor);
             contentHighlight.init();

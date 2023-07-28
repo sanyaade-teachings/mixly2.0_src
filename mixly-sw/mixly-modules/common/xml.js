@@ -29,88 +29,91 @@ XML.TEMPLATE_CONFIG = [
         config: {
             env,
             personalise: () => {
-                return Msg.getLang('个性化');
+                return Msg.getLang('PERSONAL');
             },
             theme: () => {
-                return Msg.getLang('主题');
+                return Msg.getLang('THEME');
             },
             light: () => {
-                return Msg.getLang('浅色');
+                return Msg.getLang('LIGHT');
             },
             dark: () => {
-                return Msg.getLang('深色');
+                return Msg.getLang('DARK');
             },
             language: () => {
-                return Msg.getLang('语言');
+                return Msg.getLang('LANGUAGE');
             },
             autoUpdate: () => {
-                return Msg.getLang('自动检查更新');
+                return Msg.getLang('AUTO_CHECK_UPDATE');
             },
             blockRenderer: () => {
-                return Msg.getLang('块渲染器');
+                return Msg.getLang('BLOCKS_RENDER');
             },
             apply: () => {
-                return Msg.getLang('应用');
+                return Msg.getLang('APPLY');
             },
             reset: () => {
-                return Msg.getLang('重置');
+                return Msg.getLang('RESET');
             },
             compileCAndH: () => {
-                return Msg.getLang('同时编译同目录.c和.h');
+                return Msg.getLang('COMPILE_WITH_OTHERS');
             },
             autoOpenPort: () => {
-                return Msg.getLang('上传结束后自动打开串口');
+                return Msg.getLang('AUTO_OPEN_SERIAL_PORT');
             },
             autoWithSys: () => {
-                return Msg.getLang('跟随系统');
+                return Msg.getLang('FOLLOW_SYS');
             },
             yes: () => {
-                return Msg.getLang('是');
+                return Msg.getLang('ENABLE');
             },
             no: () => {
-                return Msg.getLang('否');
+                return Msg.getLang('DISABLE');
             },
             manageBoard: () => {
-                return Msg.getLang('管理板卡');
+                return Msg.getLang('MANAGE_BOARD');
             },
             resetBoard: () => {
-                return Msg.getLang('复位板卡');
+                return Msg.getLang('RESET_BOARD');
             },
             importBoard: () => {
-                return Msg.getLang('导入板卡');
+                return Msg.getLang('IMPORT_BOARD');
             },
             softwareSettings: () => {
-                return Msg.getLang('软件');
+                return Msg.getLang('SOFTWARE');
             },
             boardSettings: () => {
-                return Msg.getLang('板卡');
+                return Msg.getLang('BOARD');
             },
             checkForUpdates: () => {
-                return Msg.getLang('检查更新');
+                return Msg.getLang('UPDATE');
             },
             server: () => {
-                return Msg.getLang('服务器');
+                return Msg.getLang('SERVER');
             },
             client: () => {
-                return Msg.getLang('客户端');
+                return Msg.getLang('CLIENT');
             },
             version: () => {
-                return Msg.getLang('版本');
+                return Msg.getLang('VERSION');
             },
             latest: () => {
-                return Msg.getLang('已最新');
+                return Msg.getLang('LATEST');
             },
             obsolete: () => {
-                return Msg.getLang('待更新');
+                return Msg.getLang('TO_BE_UPDATED');
             },
             update: () => {
-                return Msg.getLang('更新');
+                return Msg.getLang('UPDATE');
             },
             blocklyContentHighlight: () => {
-                return Msg.getLang('工作区高亮显示所有块');
+                return Msg.getLang('WORKSPACE_HIGHLIGHT');
             },
             blocklyShowGrid: () => {
-                return Msg.getLang('工作区显示网格');
+                return Msg.getLang('WORKSPACE_GRID');
+            },
+            blocklyShowMinimap: () => {
+                return '工作区小地图';
             }
 
         },
@@ -129,7 +132,7 @@ XML.TEMPLATE_CONFIG = [
         path: '/loader-div.html',
         config: {
             btnName: () => {
-                return Msg.getLang('取消');
+                return Msg.getLang('CANCEL');
             }
         },
         appendToBody: true,

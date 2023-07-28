@@ -7,7 +7,7 @@ goog.require('Blockly.Python');
 
 
 
-Blockly.Python['lists_get_sublist'] = function(block) {
+Blockly.Python.forBlock['lists_get_sublist'] = function(block) {
   // Get sublist.
   var list = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || 'mylist';
   var at1 =  Blockly.Python.valueToCode(this, 'AT1', Blockly.Python.ORDER_ADDITIVE) ;
@@ -203,7 +203,7 @@ case 'STD_DEV':
 };
 
 
-Blockly.Python['lists_sort'] = function(block) {
+Blockly.Python.forBlock['lists_sort'] = function(block) {
   // Block for sorting a list.
   Blockly.Python.definitions_['import_mixpy_lists_sort'] = "from mixpy import lists_sort";
   var list = (Blockly.Python.valueToCode(block, 'LIST',
@@ -262,13 +262,13 @@ Blockly.Python.forBlock['lists_del_general'] = function() {
 
 
 
-Blockly.Python['lists_create_with2'] = Blockly.Python['lists_create_with']
-Blockly.Python['lists_create_with_text2'] = Blockly.Python['lists_create_with_text']
-Blockly.Python['lists_getIndex3'] = Blockly.Python['lists_get_index']
-Blockly.Python['lists_getSublist3'] = Blockly.Python['lists_get_sublist']
-Blockly.Python['lists_setIndex3'] = Blockly.Python['lists_set_index']
-Blockly.Python['lists_insert_value2'] = Blockly.Python['lists_insert_value']
-Blockly.Python['lists_remove_at2'] = Blockly.Python['lists_remove_at']
+Blockly.Python.forBlock['lists_create_with2'] = Blockly.Python.forBlock['lists_create_with']
+Blockly.Python.forBlock['lists_create_with_text2'] = Blockly.Python.forBlock['lists_create_with_text']
+Blockly.Python.forBlock['lists_getIndex3'] = Blockly.Python.forBlock['lists_get_index']
+Blockly.Python.forBlock['lists_getSublist3'] = Blockly.Python.forBlock['lists_get_sublist']
+Blockly.Python.forBlock['lists_setIndex3'] = Blockly.Python.forBlock['lists_set_index']
+Blockly.Python.forBlock['lists_insert_value2'] = Blockly.Python.forBlock['lists_insert_value']
+Blockly.Python.forBlock['lists_remove_at2'] = Blockly.Python.forBlock['lists_remove_at']
 
 Blockly.Python.forBlock['lists_zip'] = function() {    
   var dropdown_type = this.getFieldValue('TYPE');  

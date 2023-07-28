@@ -4,7 +4,7 @@ goog.provide('Blockly.Python.sensor');
 
 goog.require('Blockly.Python');
 
-Blockly.Python['microbit_image_create'] = function (block) {
+Blockly.Python.forBlock['microbit_image_create'] = function (block) {
     Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var colours = {
         "#000000": "0",

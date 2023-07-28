@@ -183,7 +183,7 @@ Blockly.Python.forBlock['controls_nointerrupts'] = function () {
 };
 
 
-Blockly.Python['controls_forEach'] = function(block) {
+Blockly.Python.forBlock['controls_forEach'] = function(block) {
   // For each loop.
   var variable0 = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC) || '\'\'';
   var argument0 = Blockly.Python.valueToCode(block, 'LIST',

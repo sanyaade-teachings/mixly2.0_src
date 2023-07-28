@@ -208,7 +208,7 @@ case 'STD_DEV':
   
 };
 
-Blockly.Python['tuple_getSublist'] = function(block) {
+Blockly.Python.forBlock['tuple_getSublist'] = function(block) {
   // Get sublist.
   var list = Blockly.Python.valueToCode(block, 'LIST',
       Blockly.Python.ORDER_MEMBER) || '[]';
@@ -280,7 +280,7 @@ Blockly.Python.forBlock['tuple_create_with_noreturn'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['tuple_get_sublist'] = function(block) {
+Blockly.Python.forBlock['tuple_get_sublist'] = function(block) {
   // Get sublist.
   var list = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ADDITIVE) || '0';
   var at1 =  Blockly.Python.valueToCode(this, 'AT1', Blockly.Python.ORDER_ADDITIVE) || '0';

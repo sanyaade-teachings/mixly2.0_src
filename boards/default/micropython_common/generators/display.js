@@ -40,7 +40,7 @@ Blockly.Python.forBlock['display_scroll_string_delay'] = function() {
      return code;
 }
 
-Blockly.Python['display_image_create'] = function(block) {
+Blockly.Python.forBlock['display_image_create'] = function(block) {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var colours = {
     "#000000": "0",
@@ -186,14 +186,14 @@ var code = 'matrix.Image("'+ colour_00 + colour_01 + colour_02 + colour_03 + col
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['display_image_builtins'] = function(block) {
+Blockly.Python.forBlock['display_image_builtins'] = function(block) {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var dropdown_image = block.getFieldValue('image');
   var code = 'matrix.Image.' + dropdown_image;
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['display_get_pixel'] = function(block) {
+Blockly.Python.forBlock['display_get_pixel'] = function(block) {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var value_x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
   var value_y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
@@ -210,13 +210,13 @@ Blockly.Python.forBlock['display_bright_point'] = function() {
     return code;
 }
 
-Blockly.Python['display_get_screen_pixel'] = function() {
+Blockly.Python.forBlock['display_get_screen_pixel'] = function() {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var code = 'matrix.get_brightness()';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['display_get_screen_image'] = function() {
+Blockly.Python.forBlock['display_get_screen_image'] = function() {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var code = 'matrix.get_screenimage()';
   return [code, Blockly.Python.ORDER_ATOMIC];
@@ -238,7 +238,7 @@ Blockly.Python.forBlock['display_blink_rate'] = function() {
     return code;
 }
 
-Blockly.Python['display_clear'] = function(block) {
+Blockly.Python.forBlock['display_clear'] = function(block) {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var code = 'matrix.clear()\n';
   return code;
@@ -303,7 +303,7 @@ Blockly.Python.forBlock['display_rect'] = function(){
      }
 };
 
-Blockly.Python['image_arithmetic'] = function(a) {
+Blockly.Python.forBlock['image_arithmetic'] = function(a) {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var op = a.getFieldValue("OP");
   var imga = Blockly.Python.valueToCode(a, 'A', Blockly.Python.ORDER_ATOMIC);
@@ -335,7 +335,7 @@ Blockly.Python.forBlock['display_onoff'] = function () {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['image_shift'] = function(a) {
+Blockly.Python.forBlock['image_shift'] = function(a) {
   Blockly.Python.definitions_['import_matrix'] = 'import matrix';
   var op = a.getFieldValue("OP");
   var image = Blockly.Python.valueToCode(a, 'img', Blockly.Python.ORDER_ATOMIC);

@@ -103,7 +103,7 @@ Blockly.Python.forBlock['controls_flow_statements'] = function (a) {
 
 
 
-Blockly.Python['controls_forEach'] = function(block) {
+Blockly.Python.forBlock['controls_forEach'] = function(block) {
   // For each loop.
   var variable0 = Blockly.Python.variableDB_.getName(
       block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);

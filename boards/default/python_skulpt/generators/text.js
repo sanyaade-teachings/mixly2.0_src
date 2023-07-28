@@ -114,7 +114,7 @@ Blockly.Python.forBlock['text_compare_to'] = function() {
   return ['cmp('+str1+','+str2+')', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['text_substring2'] = function(block) {
+Blockly.Python.forBlock['text_substring2'] = function(block) {
   // Get sublist.
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
   var where1 = block.getFieldValue('WHERE1');
@@ -161,7 +161,7 @@ Blockly.Python['text_substring2'] = function(block) {
   return [code, Blockly.Python.ORDER_MEMBER];
 };
 
-Blockly.Python['text_substring'] = function(block) {
+Blockly.Python.forBlock['text_substring'] = function(block) {
     // Get sublist.
     var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '\"\"';
     var at1 = Blockly.Python.valueToCode(this, 'AT1', Blockly.Python.ORDER_ATOMIC);

@@ -5,7 +5,7 @@ goog.require('Blockly.Python');
 
 // Blynk 第二版
 // Blynk 自定义终端部件 Terminal
-Blockly.Python['mpython_blynk_terminal_widget_vpin'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_terminal_widget_vpin'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
 
@@ -45,7 +45,7 @@ def write_handler(pin, _values):
 };
 
 // Blynk 同步虚拟管脚的状态
-Blockly.Python['mpython_blynk_sync_virtual'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_sync_virtual'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
 
@@ -54,7 +54,7 @@ Blockly.Python['mpython_blynk_sync_virtual'] = function (block) {
 };
 
 // 斷開连接 Blynk
-Blockly.Python['mpython_blynk_on_disconnected'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_on_disconnected'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
 
     var branch = Blockly.Python.statementToCode(block, 'DO');
@@ -69,7 +69,7 @@ Blockly.Python['mpython_blynk_on_disconnected'] = function (block) {
 };
 
 // 连接上 Blynk
-Blockly.Python['mpython_blynk_on_connected'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_on_connected'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
 
     var branch = Blockly.Python.statementToCode(block, 'DO');
@@ -84,7 +84,7 @@ Blockly.Python['mpython_blynk_on_connected'] = function (block) {
 };
 
 // Blynk 定时器的进程生效并运行
-Blockly.Python['mpython_blynktimer_run'] = function (block) {
+Blockly.Python.forBlock['mpython_blynktimer_run'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     // Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
 
@@ -93,7 +93,7 @@ Blockly.Python['mpython_blynktimer_run'] = function (block) {
 };
 
 // Blynk 进程生效并运行
-Blockly.Python['mpython_blynk_run'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_run'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
 
     var code = 'blynk.run()\n';
@@ -101,7 +101,7 @@ Blockly.Python['mpython_blynk_run'] = function (block) {
 };
 
 // Blynk APP 显示通知
-Blockly.Python['mpython_blynk_app_notify'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_app_notify'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     var notification = Blockly.Python.valueToCode(block, 'notification', Blockly.Python.ORDER_ATOMIC);
 
@@ -110,7 +110,7 @@ Blockly.Python['mpython_blynk_app_notify'] = function (block) {
 };
 
 // 停止 Blynk 定时器 %1
-Blockly.Python['mpython_blynk_stop_timers'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_stop_timers'] = function (block) {
     Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
     Blockly.Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
 
@@ -121,7 +121,7 @@ Blockly.Python['mpython_blynk_stop_timers'] = function (block) {
 };
 
 // 可用的 Blynk 定时器
-Blockly.Python['mpython_blynk_get_timers'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_get_timers'] = function (block) {
     Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
     Blockly.Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
 
@@ -130,7 +130,7 @@ Blockly.Python['mpython_blynk_get_timers'] = function (block) {
 };
 
 //blynk定时器
-Blockly.Python['mpython_blynktimer'] = function (block) {
+Blockly.Python.forBlock['mpython_blynktimer'] = function (block) {
     Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
 
     var Num = Blockly.Python.valueToCode(block, 'Num', Blockly.Python.ORDER_ATOMIC);
@@ -153,7 +153,7 @@ def blynk_timer${Num}():
 };
 
 // 发送数据 %1 到 Bylnk APP 的虚拟管脚 %2
-Blockly.Python['mpython_blynk_sensor_data_to_app'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_sensor_data_to_app'] = function (block) {
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     var sensor_data = Blockly.Python.valueToCode(block, 'sensor_data', Blockly.Python.ORDER_ATOMIC);
     var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
@@ -162,7 +162,7 @@ Blockly.Python['mpython_blynk_sensor_data_to_app'] = function (block) {
 };
 
 // 从 Bylnk APP 获取虚拟管脚 %1 的值
-Blockly.Python['mpython_blynk_app_data'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_app_data'] = function (block) {
 
     // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
@@ -183,7 +183,7 @@ Blockly.Python['mpython_blynk_app_data'] = function (block) {
 };
 
 // 向 %1 发邮件  主题 %2 正文 %3
-Blockly.Python['mpython_blynk_email'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_email'] = function (block) {
     var body = Blockly.Python.valueToCode(block, 'body', Blockly.Python.ORDER_ATOMIC);
     var subject = Blockly.Python.valueToCode(block, 'subject', Blockly.Python.ORDER_ATOMIC);
     var TargetEmail = Blockly.Python.valueToCode(block, 'TargetEmail', Blockly.Python.ORDER_ATOMIC);
@@ -193,7 +193,7 @@ Blockly.Python['mpython_blynk_email'] = function (block) {
 };
 
 // 给虚拟管脚添加   属性 %1 值 %2
-Blockly.Python['mpython_blynk_set_property'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_set_property'] = function (block) {
     var attribute_value = Blockly.Python.valueToCode(block, 'attribute_value', Blockly.Python.ORDER_ATOMIC);
     var attribute_name = Blockly.Python.valueToCode(block, 'attribute_name', Blockly.Python.ORDER_ATOMIC);
 
@@ -203,7 +203,7 @@ Blockly.Python['mpython_blynk_set_property'] = function (block) {
 };
 
 // Bylnk设置
-Blockly.Python['mpython_blynk_setup'] = function (block) {
+Blockly.Python.forBlock['mpython_blynk_setup'] = function (block) {
     Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
     var server = Blockly.Python.valueToCode(block, 'server', Blockly.Python.ORDER_ATOMIC);
     var auth = Blockly.Python.valueToCode(block, 'auth', Blockly.Python.ORDER_ATOMIC);

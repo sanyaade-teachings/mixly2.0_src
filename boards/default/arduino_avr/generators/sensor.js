@@ -668,7 +668,7 @@ Blockly.Arduino.forBlock['get_keypad_num'] = function () {
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino['arduino_keypad_event'] = function () {
+Blockly.Arduino.forBlock['arduino_keypad_event'] = function () {
     var text_keypad_name = this.getFieldValue('keypad_name');
     var value_keypad_event_input = Blockly.Arduino.valueToCode(this, 'keypad_event_input', Blockly.Arduino.ORDER_ATOMIC);
     var text_keypad_start_event_delay = this.getFieldValue('keypad_start_event_delay');

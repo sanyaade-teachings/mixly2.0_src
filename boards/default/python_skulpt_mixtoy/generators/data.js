@@ -249,7 +249,7 @@ Blockly.Python.forBlock['pl_subplot'] = function () {
     return code
 };
 
-Blockly.Python['pandas_readcsv'] = function(block) {
+Blockly.Python.forBlock['pandas_readcsv'] = function(block) {
   // For each loop.
   Blockly.Python.definitions_.import_pandas = "import pandas";
   var fn = Blockly.Python.valueToCode(this, 'FILENAME', Blockly.Python.ORDER_ATOMIC);

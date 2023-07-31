@@ -681,7 +681,7 @@ Nav.RIFHT_BTN_DOM_STR = '';
 for (let i = 0; i < rightBtnList.length; i++) {
     Nav.RIFHT_BTN_DOM_STR += `<li class="layui-nav-item" style="float:right" lay-unselect>
                                 <a href="javascript:;" id="${rightBtnList[i].id}" style="white-space: nowrap;"></a>
-                                <dl class="layui-nav-child">`;
+                                <dl class="layui-nav-child layui-nav-child-r">`;
     for (let j = 0; j < rightBtnList[i].children.length; j++) {
         let {
             id,

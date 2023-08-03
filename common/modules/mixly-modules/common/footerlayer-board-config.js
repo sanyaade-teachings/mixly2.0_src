@@ -197,9 +197,6 @@ class FooterLayerBoardConfig extends FooterLayer {
     }
 
     changeTo(boardName) {
-        if (this.boardName === boardName) {
-            return;
-        }
         if (this.boardsInfo[boardName]?.options.length) {
             this.$footerContainer.css('display', 'inline-flex');
         } else {
@@ -208,9 +205,7 @@ class FooterLayerBoardConfig extends FooterLayer {
         }
         this.boardName = boardName;
         this.boardKey = this.boardsInfo[boardName].key;
-        if (this.layer.state.isShown) {
-            this.renderMenu(this.layer);
-        }
+        this.renderMenu(this.layer);
     }
 }
 

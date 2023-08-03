@@ -110,11 +110,9 @@ Boards.setSelectedBoard = (name, userConfig) => {
     if (!Boards.NAME.includes(name))
         return;
     const boardInfo = Boards.dict[name];
-    if (boardInfo && boardInfo.key) {
-        $("#boards-type").val(boardInfo.key);
-        boardInfo.setSelectedOptions(userConfig);
-        form.render('select', 'boards-type-filter');
-    }
+    $("#boards-type").val(boardInfo.key);
+    form.render('select', 'boards-type-filter');
+    boardInfo.setSelectedOptions(userConfig);
     Boards.changeTo(name);
     Boards.updateCategories(name);
     if (typeof profile === 'object' && profile[name]) 
@@ -140,6 +138,7 @@ Boards.getSelectedBoardConfigParam = (name) => {
  * @return {void}
  **/
 Boards.changeTo = (boardName) => {
+    Boards.configMenu.changeTo(boardName);
     profile = typeof profile === 'object' ? profile : {};
     if (profile[boardName]) {
         profile['default'] = profile[boardName];
@@ -311,7 +310,6 @@ Boards.updateCategories = (boardName, enforce = false) => {
     if (Boards.selected === boardName && !enforce) return;
     Boards.selected = boardName;
     $('#mixly-footer-boardname').html(boardName);
-    Boards.configMenu.changeTo(boardName);
     let thirdPartyStr = '';
     if (Env.isElectron) {
         thirdPartyStr = Env.thirdPartyXML.join('');

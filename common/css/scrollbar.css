@@ -109,3 +109,54 @@
 .dark ::-webkit-scrollbar-corner {
     background-color: #404041;
 }
+
+
+/* 修改Blockly工作区中滚动条样式 */
+
+/* 设置滚动条宽高 */
+.blocklyDropDownDiv ::-webkit-scrollbar,
+.blocklyWidgetDiv ::-webkit-scrollbar
+ {
+    width: 5px;
+    height: 5px;
+}
+
+/* 设置滚动条滑槽 */
+.blocklyDropDownDiv ::-webkit-scrollbar-track,
+.blocklyWidgetDiv ::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0px;
+}
+
+/* 设置滚动条滑块 */
+.light .blocklyDropDownDiv ::-webkit-scrollbar-thumb,
+.light .blocklyWidgetDiv ::-webkit-scrollbar-thumb {
+    background-color: #C3C1C1;
+    border-radius: 4px;
+}
+
+.light .blocklyDropDownDiv ::-webkit-scrollbar-thumb:hover,
+.light .blocklyWidgetDiv ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.light .blocklyDropDownDiv ::-webkit-scrollbar-thumb:active,
+.light .blocklyWidgetDiv ::-webkit-scrollbar-thumb:active {
+    background-color: #989998;
+}
+
+.dark .blocklyDropDownDiv ::-webkit-scrollbar-thumb,
+.dark .blocklyWidgetDiv ::-webkit-scrollbar-thumb {
+    background-color: #989998;
+    border-radius: 4px;
+}
+
+.dark .blocklyDropDownDiv ::-webkit-scrollbar-thumb:hover,
+.dark .blocklyWidgetDiv ::-webkit-scrollbar-thumb:hover {
+    background-color: #AEB2AF;
+}
+
+.dark .blocklyDropDownDiv ::-webkit-scrollbar-thumb:active,
+.dark .blocklyWidgetDiv ::-webkit-scrollbar-thumb:active {
+    background-color: #C3C1C1;
+}

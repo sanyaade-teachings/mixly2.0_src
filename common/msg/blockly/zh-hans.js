@@ -169,6 +169,12 @@ ZhHans.MSG = {
     wiki: "Wiki"
 };
 
+/* 多重选择 */
+ZhHans.CROSS_TAB_COPY = '跨页面复制';
+// ZhHans.CROSS_TAB_COPY_X_BLOCKS = '跨页面复制 %1 块';
+ZhHans.CROSS_TAB_PASTE = '跨页面粘贴';
+ZhHans.SELECT_ALL = '选中所有块';
+
 /* 下载模块图像 */
 ZhHans.DOWNLOAD_SCREENSHOT = '下载模块图像';
 
@@ -177,10 +183,10 @@ ZhHans.MINIMAP_OPEN = '展开缩略图';
 ZhHans.MINIMAP_CLOSE = '折叠缩略图';
 
 /* 背包 */
-ZhHans.COPY_ALL_TO_BACKPACK = '复制所有图形块到背包';
+ZhHans.COPY_ALL_TO_BACKPACK = '复制所有块到背包';
 ZhHans.COPY_TO_BACKPACK = '加入背包';
 ZhHans.EMPTY_BACKPACK = '清空';
-ZhHans.PASTE_ALL_FROM_BACKPACK = '提取背包中的所有图形块';
+ZhHans.PASTE_ALL_FROM_BACKPACK = '提取背包中所有块';
 ZhHans.REMOVE_FROM_BACKPACK = '从背包中移除';
 
 /* 工作区块查找 */
@@ -208,8 +214,21 @@ ZhHans.AUTH = "请授权这个应用程序以保存您的作品并共享。";
 ZhHans.CHANGE_VALUE_TITLE = "更改值：";
 ZhHans.CHAT = "通过在此框输入与您的合作者沟通！";
 ZhHans.CLEAN_UP = "整理块";
-ZhHans.COLLAPSE_ALL = "折叠块";
+ZhHans.COLLAPSE_ALL = "折叠所有块";
 ZhHans.COLLAPSE_BLOCK = "折叠块";
+// ZhHans.COLLAPSE_X_BLOCKS = "折叠 %1 块";
+ZhHans.DELETE_ALL_BLOCKS = '删除所有 %1 个块吗？';
+ZhHans.DELETE_BLOCK = "删除块";
+// ZhHans.DELETE_X_BLOCKS = "删除 %1 块";
+ZhHans.DISABLE_BLOCK = "禁用块";
+// ZhHans.DISABLE_X_BLOCKS = "禁用 %1 块";
+ZhHans.DUPLICATE_BLOCK = "复制";
+// ZhHans.DUPLICATE_X_BLOCKS = "复制 %1 块";
+ZhHans.ENABLE_BLOCK = "启用块";
+// ZhHans.ENABLE_X_BLOCKS = "启用 %1 块";
+ZhHans.EXPAND_ALL = "展开所有块";
+ZhHans.EXPAND_BLOCK = "展开块";
+// ZhHans.EXPAND_X_BLOCKS = "展开 %1 块";
 ZhHans.COLOUR_BLEND_COLOUR1 = "颜色1";
 ZhHans.COLOUR_BLEND_COLOUR2 = "颜色2";
 ZhHans.COLOUR_BLEND_HELPURL = "http://meyerweb.com/eric/tools/color-blend/";  // untranslated
@@ -264,13 +283,6 @@ ZhHans.CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = "重复直到";
 ZhHans.CONTROLS_WHILEUNTIL_OPERATOR_WHILE = "重复当";
 ZhHans.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = "只要值为假，执行一些语句";
 ZhHans.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = "只要值为真，执行一些语句";
-ZhHans.DELETE_BLOCK = "删除块";
-ZhHans.DELETE_X_BLOCKS = "删除 %1 块";
-ZhHans.DISABLE_BLOCK = "禁用块";
-ZhHans.DUPLICATE_BLOCK = "复制";
-ZhHans.ENABLE_BLOCK = "启用块";
-ZhHans.EXPAND_ALL = "展开块";
-ZhHans.EXPAND_BLOCK = "展开块";
 ZhHans.EXTERNAL_INPUTS = "外部输入";
 ZhHans.HELP = "帮助";
 ZhHans.INLINE_INPUTS = "单行输入";

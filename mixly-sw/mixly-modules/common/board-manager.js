@@ -883,8 +883,8 @@ BoardManager.onclickImportBoards = () => {
         data: [],
         toolbar: `<script type="text/html" id="import-board-toolbar">
                     <div class="layui-btn-container" style="text-align: center;">
-                        <button class="layui-btn layui-btn-sm" lay-event="cloud-import">${Msg.getLang("CLOUD_IMPORT")}</button>
-                        <button class="layui-btn layui-btn-sm" lay-event="local-import">${Msg.getLang("LOCAL_IMPORT")}</button>
+                        <button class="layui-btn self-adaption-btn layui-btn-sm" lay-event="cloud-import">${Msg.getLang("CLOUD_IMPORT")}</button>
+                        <button class="layui-btn self-adaption-btn layui-btn-sm" lay-event="local-import">${Msg.getLang("LOCAL_IMPORT")}</button>
                     </div>
                 </script>`,
         defaultToolbar: [],
@@ -1128,7 +1128,7 @@ BoardManager.showBoardsCard = (row, col) => {
                                     <div class="layui-col-md12" style="text-align: center;">
                                         <button 
                                         type="button"
-                                        class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal"
+                                        class="layui-btn layui-btn-xs layui-btn-radius self-adaption-btn"
                                         lay-submit
                                         lay-filter="open-setting-dialog-filter">
                                             <i class="layui-icon layui-icon-set-fill"></i>
@@ -1139,7 +1139,7 @@ BoardManager.showBoardsCard = (row, col) => {
                                     <div class="layui-col-md12" style="text-align: center;">
                                         <button
                                         type="button"
-                                        class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal"
+                                        class="layui-btn layui-btn-xs layui-btn-radius self-adaption-btn"
                                         lay-submit
                                         lay-filter="board-reset-filter">
                                             <i class="layui-icon layui-icon-refresh"></i>

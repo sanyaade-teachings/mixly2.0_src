@@ -75,7 +75,9 @@
     "WORKSPACE_HIGHLIGHT": "Workspace highlight",
     "WORKSPACE_GRID": "Workspace grid",
     "WORKSPACE_MINIMAP": "Workspace minimap",
+    "WORKSPACE_MULTISELECT": "Workspace multiselect",
     "CODE_LANG": "Code language",
     "ENABLE": "Enable",
-    "DISABLE": "Disable"
+    "DISABLE": "Disable",
+    "EXPERIMENTAL": "Experimental. Expected behavior may change in the future."
 }

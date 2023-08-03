@@ -75,7 +75,9 @@
     "WORKSPACE_HIGHLIGHT": "工作区高亮",
     "WORKSPACE_GRID": "工作区网格",
     "WORKSPACE_MINIMAP": "工作区缩略图",
+    "WORKSPACE_MULTISELECT": "工作区多重选择",
     "CODE_LANG": "编程语言",
     "ENABLE": "开启",
-    "DISABLE": "关闭"
+    "DISABLE": "关闭",
+    "EXPERIMENTAL": "实验性。预期行为可能会在未来发生变更。"
 }

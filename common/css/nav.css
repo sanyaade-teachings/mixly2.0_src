@@ -214,10 +214,6 @@
     height: var(--nav-select-height) !important;
 }
 
-#nav .layui-input-inline {
-    top: calc((var(--nav-height) - var(--nav-select-height)) / 2);
-}
-
 .light #nav input {
     background-color: #009f90;
     border-color: #009f90;

@@ -74,6 +74,10 @@ goog.DEPENDENCIES = [
         "provide": ['Minimap', 'PositionedMinimap'],
         "require": ['Blockly']
     }, {
+        "path": '/../../blockly-core/plugins/workspace_multiselect.js',
+        "provide": ['Multiselect'],
+        "require": ['Blockly']
+    }, {
         "path": '/../../blockly-core/plugins/content_highlight.js',
         "provide": ['ContentHighlight'],
         "require": ['Blockly']

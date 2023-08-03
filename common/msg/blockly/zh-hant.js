@@ -163,6 +163,12 @@ ZhHant.MSG = {
     wiki: "Wiki"
 };
 
+/* 多重选择 */
+ZhHant.CROSS_TAB_COPY = '跨頁面複製';
+// ZhHant.CROSS_TAB_COPY_X_BLOCKS = '跨頁面複製 %1 塊';
+ZhHant.CROSS_TAB_PASTE = '跨頁面粘貼';
+ZhHant.SELECT_ALL = '選中所有塊';
+
 /* 下载模块图像 */
 ZhHant.DOWNLOAD_SCREENSHOT = '下載模塊影像';
 
@@ -171,10 +177,10 @@ ZhHant.MINIMAP_OPEN = '展開縮略圖';
 ZhHant.MINIMAP_CLOSE = '折疊縮略圖';
 
 /* 背包 */
-ZhHant.COPY_ALL_TO_BACKPACK = '複製所有圖形塊到背包';
+ZhHant.COPY_ALL_TO_BACKPACK = '複製所有塊到背包';
 ZhHant.COPY_TO_BACKPACK = '加入背包';
 ZhHant.EMPTY_BACKPACK = '清空';
-ZhHant.PASTE_ALL_FROM_BACKPACK = '提取背包中的所有圖形塊';
+ZhHant.PASTE_ALL_FROM_BACKPACK = '提取背包中所有塊';
 ZhHant.REMOVE_FROM_BACKPACK = '從背包中移除';
 
 /* 工作区块查找 */
@@ -202,8 +208,21 @@ ZhHant.AUTH = "請授權這個應用程式以保存您的作品並共用。";
 ZhHant.CHANGE_VALUE_TITLE = "更改值：";
 ZhHant.CHAT = "通過在此框輸入與您的合作者溝通！";
 ZhHant.CLEAN_UP = "整理塊";
-ZhHant.COLLAPSE_ALL = "折疊塊";
+ZhHant.COLLAPSE_ALL = "折疊所有塊";
 ZhHant.COLLAPSE_BLOCK = "折疊塊";
+// ZhHant.COLLAPSE_X_BLOCKS = "折疊 %1 塊";
+ZhHant.DELETE_ALL_BLOCKS = '刪除全部 %1 個區塊？';
+ZhHant.DELETE_BLOCK = "刪除塊";
+// ZhHant.DELETE_X_BLOCKS = "刪除 %1 塊";
+ZhHant.DISABLE_BLOCK = "禁用塊";
+// ZhHant.DISABLE_X_BLOCKS = "禁用 %1 塊";
+ZhHant.DUPLICATE_BLOCK = "複製";
+// ZhHant.DUPLICATE_X_BLOCKS = "複製 %1 塊";
+ZhHant.ENABLE_BLOCK = "啟用塊";
+// ZhHant.ENABLE_X_BLOCKS = "啟用 %1 塊";
+ZhHant.EXPAND_ALL = "展開所有塊";
+ZhHant.EXPAND_BLOCK = "展開塊";
+// ZhHant.EXPAND_X_BLOCKS = "展開 %1 塊";
 ZhHant.COLOUR_BLEND_COLOUR1 = "顏色1";
 ZhHant.COLOUR_BLEND_COLOUR2 = "顏色2";
 ZhHant.COLOUR_BLEND_HELPURL = "http://meyerweb.com/eric/tools/color-blend/";  // untranslated
@@ -258,13 +277,6 @@ ZhHant.CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = "重複直到";
 ZhHant.CONTROLS_WHILEUNTIL_OPERATOR_WHILE = "重複當";
 ZhHant.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = "只要值為假，執行一些語句";
 ZhHant.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = "只要值為真，執行一些語句";
-ZhHant.DELETE_BLOCK = "刪除塊";
-ZhHant.DELETE_X_BLOCKS = "刪除 %1 塊";
-ZhHant.DISABLE_BLOCK = "禁用塊";
-ZhHant.DUPLICATE_BLOCK = "複製";
-ZhHant.ENABLE_BLOCK = "啟用塊";
-ZhHant.EXPAND_ALL = "展開塊";
-ZhHant.EXPAND_BLOCK = "展開塊";
 ZhHant.EXTERNAL_INPUTS = "外部輸入";
 ZhHant.HELP = "幫助";
 ZhHant.INLINE_INPUTS = "單行輸入";

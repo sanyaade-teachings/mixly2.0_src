@@ -167,6 +167,12 @@ En.MSG = {
     wiki: "Wiki"
 };
 
+/* 多重选择 */
+En.CROSS_TAB_COPY = 'Cross tab Copy';
+// En.CROSS_TAB_COPY_X_BLOCKS = 'Cross tab copy %1 Blocks';
+En.CROSS_TAB_PASTE = 'Cross tab Paste';
+En.SELECT_ALL = 'Select all Blocks';
+
 /* 下载模块图像 */
 En.DOWNLOAD_SCREENSHOT = 'Download Screenshot';
 
@@ -208,6 +214,19 @@ En.CHAT = "Chat with your collaborator by typing in this box!";
 En.CLEAN_UP = "Clean up Blocks";
 En.COLLAPSE_ALL = "Collapse Blocks";
 En.COLLAPSE_BLOCK = "Collapse Block";
+// En.COLLAPSE_X_BLOCKS = "Collapse %1 Blocks";
+En.DELETE_ALL_BLOCKS = 'Delete all %1 blocks?';
+En.DELETE_BLOCK = "Delete Block";
+// En.DELETE_X_BLOCKS = "Delete %1 Blocks";
+En.DISABLE_BLOCK = "Disable Block";
+// En.DISABLE_X_BLOCKS = "Disable %1 Blocks";
+En.DUPLICATE_BLOCK = "Duplicate";
+// En.DUPLICATE_X_BLOCKS = "Duplicate %1 Blocks";
+En.ENABLE_BLOCK = "Enable Block";
+// En.ENABLE_X_BLOCKS = "Enable %1 Blocks";
+En.EXPAND_ALL = "Expand Blocks";
+En.EXPAND_BLOCK = "Expand Block";
+// En.EXPAND_X_BLOCKS = "Expand %1 Blocks";
 En.COLOUR_BLEND_COLOUR1 = "colour 1";
 En.COLOUR_BLEND_COLOUR2 = "colour 2";
 En.COLOUR_BLEND_HELPURL = "http://meyerweb.com/eric/tools/color-blend/";
@@ -262,13 +281,6 @@ En.CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = "repeat until";
 En.CONTROLS_WHILEUNTIL_OPERATOR_WHILE = "repeat while";
 En.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = "While a value is false, then do some statements.";
 En.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = "While a value is true, then do some statements.";
-En.DELETE_BLOCK = "Delete Block";
-En.DELETE_X_BLOCKS = "Delete %1 Blocks";
-En.DISABLE_BLOCK = "Disable Block";
-En.DUPLICATE_BLOCK = "Duplicate";
-En.ENABLE_BLOCK = "Enable Block";
-En.EXPAND_ALL = "Expand Blocks";
-En.EXPAND_BLOCK = "Expand Block";
 En.EXTERNAL_INPUTS = "External Inputs";
 En.HELP = "Help";
 En.INLINE_INPUTS = "Inline Inputs";

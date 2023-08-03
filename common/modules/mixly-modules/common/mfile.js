@@ -160,15 +160,15 @@ MFile.getMil = () => {
     let xmlDom, configDom, codeDom;
     for (let i = 0; mixDom[i]; i++) {
         switch (mixDom[i].nodeName) {
-            case 'XML':
-                xmlDom = $(mixDom[i]);
-                break;
-            case 'CONFIG':
-                configDom = $(mixDom[i]);
-                break;
-            case 'CODE':
-                codeDom = $(mixDom[i]);
-                break;
+        case 'XML':
+            xmlDom = $(mixDom[i]);
+            break;
+        case 'CONFIG':
+            configDom = $(mixDom[i]);
+            break;
+        case 'CODE':
+            codeDom = $(mixDom[i]);
+            break;
         }
     }
     if (!xmlDom) return '';
@@ -193,15 +193,15 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
     let xmlDom, configDom, codeDom;
     for (let i = 0; mixDom[i]; i++) {
         switch (mixDom[i].nodeName) {
-            case 'XML':
-                xmlDom = $(mixDom[i]);
-                break;
-            case 'CONFIG':
-                configDom = $(mixDom[i]);
-                break;
-            case 'CODE':
-                codeDom = $(mixDom[i]);
-                break;
+        case 'XML':
+            xmlDom = $(mixDom[i]);
+            break;
+        case 'CONFIG':
+            configDom = $(mixDom[i]);
+            break;
+        case 'CODE':
+            codeDom = $(mixDom[i]);
+            break;
         }
     }
     if (!xmlDom && !codeDom) {
@@ -276,9 +276,12 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
             blocks.push(shadowType);
     }
     const blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
-    for (let i of blocks)
-        if (!Blockly.Blocks[i] || !blocklyGenerator.forBlock[i])
-            undefinedBlocks.push(i);
+    for (let i of blocks) {
+        if (Blockly.Blocks[i] && blocklyGenerator.forBlock[i]) {
+            continue;
+        }
+        undefinedBlocks.push(i);
+    }
     if (undefinedBlocks.length) {
         MFile.showParseMixErrorDialog(mixDom, undefinedBlocks, endFunc);
         return;

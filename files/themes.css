@@ -70,44 +70,7 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
 
 .layui-table-body {
     margin-right: 0px;
-    /margin-bottom: 0px;
-}
-
-.dark .layui-layer-title {
-    border-bottom: 1px solid #5d5a5a;
-}
-
-.dark .layui-tab-title {
-    background-color: #6c6969;
-}
-
-.dark .layui-tab-title .layui-this {
-    color: #fff;
-}
-
-.dark .layui-tab-title li {
-    color: #fff;
-}
-
-.dark .layui-tab-content {
-    border-color: #6c6969;
-}
-
-.dark .layui-table td, .dark .layui-table th, .dark .layui-table-col-set, .dark .layui-table-fixed-r, .dark .layui-table-grid-down, .dark .layui-table-header, .dark .layui-table-page, .dark .layui-table-tips-main, .dark .layui-table-tool, .dark .layui-table-total, .dark .layui-table-view, .dark .layui-table[lay-skin=line], .dark .layui-table[lay-skin=row] {
-    border-color: #4d4848;
-}
-
-.dark .layui-table {
-    background-color: #726c6c;
-    color: #fff;
-}
-
-.dark .layui-layer-dialog .layui-layer-content {
-    color: #fff;
-}
-
-.dark.layui-layer-page {
-    background-color: #726c6c;
+    margin-bottom: 0px;
 }
 
 .layui-layer-resize {
@@ -122,18 +85,6 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
 
 .layui-table-body {
     margin: 0px;
-}
-
-/*
-.layui-btn:hover {
-    box-shadow: 2px 2px 5px #888;
-}
-*/
-
-.dark .layui-input, .dark .layui-select, .dark .layui-textarea {
-    background-color: #4c4a4a;
-    color: #fff;
-    /*height: 40px;*/
 }
 
 .dark .layui-form-pane .layui-form-label {
@@ -239,38 +190,6 @@ body[class="dark"] {
     opacity: 1;
 }
 
-.dark .layui-badge-rim, .layui-border,
-.dark .layui-colla-content,
-.dark .layui-colla-item,
-.dark .layui-collapse, .layui-elem-field,
-.dark .layui-form-pane .layui-form-item[pane],
-.dark .layui-form-pane .layui-form-label,
-.dark .layui-input, .layui-layedit,
-.dark .layui-layedit-tool,
-.dark .layui-panel,
-.dark .layui-quote-nm,
-.dark .layui-select,
-.dark .layui-tab-bar,
-.dark .layui-tab-card,
-.dark .layui-tab-title,
-.dark .layui-tab-title .layui-this:after,
-.dark .layui-textarea {
-    border-color: #493e3e;
-}
-
-.dark .layui-panel {
-    background-color: #615959;
-}
-
-.dark .layui-card-header {
-    color: #fff;
-    border-bottom: 1px solid #484040;
-}
-
-.dark .layui-card-body {
-    color: #fff;
-}
-
 .dark .layui-progress-text {
     color: #fff;
 }
@@ -291,10 +210,6 @@ body[class="dark"] {
     color: #fff;
 }
 
-.dark .layui-form-checkbox[lay-skin=primary] span {
-    color: #fff;
-}
-
 .light .layui-layer-setwin span {
     color: #777;
 }
@@ -303,30 +218,11 @@ body[class="dark"] {
     color: #fff;
 }
 
-/* 折叠卡片 */
-.dark .layui-colla-title {
-    color: #fff;
-    background-color: #656161;
-}
-
-.dark .layui-colla-content {
-    color: #fff;
-}
-
-.dark .layui-layer-dialog {
-    background-color: #807b7b;
-}
-
-.dark .layui-layer-btn a {
-    color: #fff;
-    border: 1px solid #765454;
-    background-color: #575353;
-}
-
 .dark .layui-carousel-arrow {
     background-color: #2d2c2c !important;
 }
 
-.dark .layui-carousel-arrow:hover, .dark .layui-carousel-ind ul:hover {
+.dark .layui-carousel-arrow:hover,
+.dark .layui-carousel-ind ul:hover {
     background-color: rgba(119,119,119,.35) !important;
 }

@@ -111,6 +111,7 @@
             "PositionedMinimap",
             "ContentHighlight",
             "ZoomToFitControl",
+            "Multiselect",
             "Blockly.FieldGridDropdown",
             "Blockly.FieldSlider",
             "Blockly.FieldBitmap",

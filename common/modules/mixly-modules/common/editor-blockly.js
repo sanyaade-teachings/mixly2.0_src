@@ -7,6 +7,7 @@ goog.require('Minimap');
 goog.require('PositionedMinimap');
 goog.require('ContentHighlight');
 goog.require('ZoomToFitControl');
+goog.require('Multiselect');
 goog.require('Blockly.FieldGridDropdown');
 goog.require('Blockly.FieldSlider');
 goog.require('Blockly.FieldBitmap');
@@ -134,15 +135,32 @@ class EditorBlockly {
             };
             menuOptions.push(screenshotOption);
         }
-        const zoomToFit = new ZoomToFitControl(editor);
-        zoomToFit.init();
+
         ToolboxSearcher.init(editor);
         const workspaceSearch = new WorkspaceSearch(editor);
         workspaceSearch.init();
+
+        const zoomToFit = new ZoomToFitControl(editor);
+        zoomToFit.init();
         const backpack = new Backpack(editor, {
             useFilledBackpackImage: true
         });
         backpack.init();
+
+        if (USER.blocklyMultiselect === 'yes') {
+            const multiselectPlugin = new Multiselect(editor);
+            multiselectPlugin.init({
+                useDoubleClick: false,
+                bumpNeighbours: false,
+                multiselectIcon: {
+                    hideIcon: true
+                },
+                multiselectCopyPaste: {
+                    crossTab: true,
+                    menu: true
+                }
+            });
+        }
         
         if (USER.blocklyShowMinimap === 'yes') {
             const minimap = new PositionedMinimap(editor);

@@ -106,6 +106,9 @@ XML.TEMPLATE_CONFIG = [
             update: () => {
                 return Msg.getLang('UPDATE');
             },
+            experimental: () => {
+                return Msg.getLang('EXPERIMENTAL');
+            },
             blocklyContentHighlight: () => {
                 return Msg.getLang('WORKSPACE_HIGHLIGHT');
             },
@@ -114,8 +117,10 @@ XML.TEMPLATE_CONFIG = [
             },
             blocklyShowMinimap: () => {
                 return Msg.getLang('WORKSPACE_MINIMAP');
+            },
+            blocklyMultiselect: () => {
+                return Msg.getLang('WORKSPACE_MULTISELECT');
             }
-
         },
         appendToBody: true,
         generateDom: false,

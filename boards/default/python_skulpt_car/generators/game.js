@@ -54,7 +54,7 @@ Blockly.Python.forBlock['initSettedMap_3'] = function(block) {
 
 Blockly.Python.forBlock['initSettedMap_4'] = function(block) {
   Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
-  return 'blocklygame.settedMap(3,\'block_id=' + block.id + '\');\n'+'actor=blocklygame.Actor(\'car\',2);\n';;
+  return 'blocklygame.settedMap(3,\'block_id=' + block.id + '\');\n'+'actor=blocklygame.Actor(\'car\',2);\n'+'actor.randomOil(\'block_id=' + block.id + '\');\n';
 };
 
 Blockly.Python.forBlock['initSettedMap_5'] = function(block) {
@@ -66,7 +66,12 @@ Blockly.Python.forBlock['initSettedMap_6'] = function(block) {
   Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
   return 'blocklygame.settedMap(5,\'block_id=' + block.id + '\');\n'+'actor=blocklygame.Actor(\'car\',2);\n';;
 };
-// Blockly.Python.forBlock['move_forward'] = function(block) {
+
+Blockly.Python.forBlock['initSettedMap_7'] = function(block) {
+  Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
+  return 'blocklygame.settedMap(6,\'block_id=' + block.id + '\');\n'+'actor=blocklygame.Actor(\'car\',2);\n';;
+};
+// Blockly.Python.forBlock.move_forward = function(block) {
 //   Blockly.Python.definitions_.import_blocklygame = "import blocklygame";
 //   return 'actor.moveForward(\'block_id=' + block.id + '\');\n';
 // };

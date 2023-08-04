@@ -63,7 +63,8 @@ var $builtinmodule = function (name) {
         marker_num:0,
         oil:1,//表示小车有充足的油量（为了适应教材而新增的变量）
         traffic_light:22,//表示红绿灯为绿灯
-        circulation_num:0//小车在赛道中循环的次数
+        circulation_num:0,//小车在赛道中循环的次数
+        invisible_mark:0//在地图中不可显示的标记数目，用于检测小车是否沿着特定路线走。规定不可见的标记点INVIMAKER=24
     };
     //迷宫变量
     var maze_SQUARE_SIZE = 50;
@@ -84,7 +85,8 @@ var $builtinmodule = function (name) {
             OPEN: 1,
             START: 2,
             FINISH: 3,
-            AWARD:4//金币奖励
+            AWARD:4,//金币奖励
+            INVIMAKER:24
         },
         //迷宫部分参数指定
         MAZE_WIDTH : maze_SQUARE_SIZE * maze_COLS,
@@ -92,7 +94,8 @@ var $builtinmodule = function (name) {
         PATH_WIDTH : maze_SQUARE_SIZE / 3,
         result :  ResultType.UNSET,
         finish : {x:0,y:0},
-        type:1//类型为用户自定义的
+        type:1,//类型为用户自定义的
+        INVIMNUM : 0
     };
     
     //已经设置好的关卡的map
@@ -105,7 +108,7 @@ var $builtinmodule = function (name) {
             [0, 1, 1, 9, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
-            [0, 0, 0, 1, 0, 0, 1, 0],
+            [0, 0, 0, 1, 0, 0, 1, 0], 
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
@@ -123,6 +126,7 @@ var $builtinmodule = function (name) {
                 MARKER3:12,
                 MARKER4:13,
                 S_F: 9,//既是起点又是终点
+                INVIMAKER:24
             },
             //迷宫部分参数指定
             MAZE_WIDTH : maze_SQUARE_SIZE * 8,
@@ -130,7 +134,8 @@ var $builtinmodule = function (name) {
             PATH_WIDTH : maze_SQUARE_SIZE / 3,
             result :  ResultType.UNSET,
             finish : {x:0,y:0},
-            type:0//类型为非用户自定义的
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 0
         },
         //第二关
         {   
@@ -160,6 +165,7 @@ var $builtinmodule = function (name) {
                 MARKER3:12,
                 MARKER4:13,
                 S_F: 9,//既是起点又是终点
+                INVIMAKER:24
             },
             //迷宫部分参数指定
             MAZE_WIDTH : maze_SQUARE_SIZE * 8,
@@ -167,18 +173,19 @@ var $builtinmodule = function (name) {
             PATH_WIDTH : maze_SQUARE_SIZE / 3,
             result :  ResultType.UNSET,
             finish : {x:0,y:0},
-            type:0//类型为非用户自定义的
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 0
         },
         //第三关
         {   mlevel:3,
             map:[
-            [0, 1, 1, 13, 1, 1, 1, 0],
+            [0, 1, 1, 13, 24, 1, 24, 0],
             [0, 1, 0, Math.random()>0.5?1:5, 0, 0, 1, 0],
             [0, 1, 1, 9, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
-            [0, 0, 0, 1, 1, 1, 1, 0],
+            [0, 0, 0, 24, 1, 1, 24, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
             marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
@@ -193,6 +200,7 @@ var $builtinmodule = function (name) {
                 BARRIER:5,
                 MARKER4:13,
                 S_F: 9,//既是起点又是终点
+                INVIMAKER: 24
             },
             //迷宫部分参数指定
             MAZE_WIDTH : maze_SQUARE_SIZE * 8,
@@ -200,18 +208,19 @@ var $builtinmodule = function (name) {
             PATH_WIDTH : maze_SQUARE_SIZE / 3,
             result :  ResultType.UNSET,
             finish : {x:0,y:0},
-            type:0//类型为非用户自定义的
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 4
         },
         //第四关
         {   mlevel:4,
             map:[
-            [0, 1, 1, 13, 1, 1, 1, 0],
+            [0, 1, 1, 13, 24, 1, 24, 0],
             [20, 1, 0, Math.random()>0.5?1:5, 0, 0, 1, 0],
             [0, 1, 1, 9, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 0, 0, 1, 0],
-            [0, 0, 0, 1, 1, 1, 1, 0],
+            [0, 0, 0, 24, 1, 1, 24, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
             tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
             marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
@@ -226,7 +235,8 @@ var $builtinmodule = function (name) {
                 BARRIER:5,
                 MARKER4:13,
                 S_F: 9,//既是起点又是终点
-                OIL_STATION:20//加油站
+                OIL_STATION:20,//加油站
+                INVIMAKER:24
             },
             //迷宫部分参数指定
             MAZE_WIDTH : maze_SQUARE_SIZE * 8,
@@ -234,7 +244,8 @@ var $builtinmodule = function (name) {
             PATH_WIDTH : maze_SQUARE_SIZE / 3,
             result :  ResultType.UNSET,
             finish : {x:0,y:0},
-            type:0//类型为非用户自定义的
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 4
         },
         //第五关
         {   mlevel:5,
@@ -259,7 +270,46 @@ var $builtinmodule = function (name) {
                 OPEN: 1,
                 START: 2,
                 S_F: 9,//既是起点又是终点
-                TRAFFIC_LIGHT:21//红绿灯
+                TRAFFIC_LIGHT:21,//红绿灯
+                INVIMAKER:24
+            },
+            //迷宫部分参数指定
+            MAZE_WIDTH : maze_SQUARE_SIZE * 8,
+            MAZE_HEIGHT : maze_SQUARE_SIZE * 8,
+            PATH_WIDTH : maze_SQUARE_SIZE / 3,
+            result :  ResultType.UNSET,
+            finish : {x:3,y:2},
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 0
+        },
+        //第六关
+        {   mlevel:6,
+            map:[
+            [0, 1, 1, 13, 1, 1, 12, 0],
+            [0, 1, 0, 1, 0, 0, 1, 0],
+            [0, 1, 1, 2, 0, 0, 1, 0],
+            [0, 0, 0, 1, 0, 0, 1, 0],
+            [0, 0, 0, 1, 0, 0, 1, 0],
+            [0, 0, 0, 1, 0, 0, 1, 0], 
+            [0, 0, 0, 10, 1, 1, 11, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]],
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
+            wall:'',
+            award:'',
+            barrier:'',
+            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
+            SquareType :{//迷宫中方块的类型
+                WALL: 0,
+                OPEN: 1,
+                START: 2,
+                MARKER1:10,
+                MARKER2:11,
+                MARKER3:12,
+                MARKER4:13,
+                S_F: 9,//既是起点又是终点
+                INVIMAKER:24
             },
             //迷宫部分参数指定
             MAZE_WIDTH : maze_SQUARE_SIZE * 8,
@@ -267,10 +317,11 @@ var $builtinmodule = function (name) {
             PATH_WIDTH : maze_SQUARE_SIZE / 3,
             result :  ResultType.UNSET,
             finish : {x:0,y:0},
-            type:0//类型为非用户自定义的
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 0
         },
-        //第六关
-        {   mlevel:6,
+        //第七关
+        {   mlevel:7,
             map:[
             [0, 1, 1, 1, 1, 1, 1, 0],
             [0, 1, 0, 0, 0, 0, 1, 0],
@@ -293,15 +344,17 @@ var $builtinmodule = function (name) {
                 START: 2,
                 S_F: 9,//既是起点又是终点
                 LIGHT_GREEN:22,//红绿灯中的绿灯
-                LIGHT_RED:23//红绿灯中的红灯
+                LIGHT_RED:23,//红绿灯中的红灯
+                INVIMAKER:24
             },
             //迷宫部分参数指定
             MAZE_WIDTH : maze_SQUARE_SIZE * 8,
             MAZE_HEIGHT : maze_SQUARE_SIZE * 8,
             PATH_WIDTH : maze_SQUARE_SIZE / 3,
             result :  ResultType.UNSET,
-            finish : {x:0,y:0},
-            type:0//类型为非用户自定义的
+            finish : {x:3,y:2},
+            type:0,//类型为非用户自定义的
+            INVIMNUM : 0
         }
     ]
 
@@ -523,11 +576,16 @@ var $builtinmodule = function (name) {
             if(maze.type==1){
                 return true
             }else{
-                if(actor.marker_num==maze_marker_num){
+                if(maze.mlevel==5 || maze.mlevel==7 ||maze.mlevel==6){
+                    console.log(11)
                     return true
                 }else{
-                    return "error2"
-                }
+                    if(actor.marker_num==maze_marker_num){
+                        if(actor.invisible_mark>=maze.INVIMNUM){
+                            return true
+                        }else{return "error3"}
+                    }else{return "error2"}
+                }   
             }
         }else{
             return false
@@ -673,6 +731,17 @@ var $builtinmodule = function (name) {
       var hasMarker=function(x , y) {
         if((map[y][x]==maze.SquareType.MARKER1)||(map[y][x]==maze.SquareType.MARKER2)||(map[y][x]==maze.SquareType.MARKER3)||(map[y][x]==maze.SquareType.MARKER4)){//如果此处是标记
             actor.marker_num+=1
+        }
+     }
+
+    /**
+     * 检查精灵在移动的过程中是否走到不可见的标记点（INVIMAKER）处
+     * @param {<number>} x 当前精灵的横坐标.
+     * @param {<number>} y 当前精灵的纵坐标.
+     */
+    var hasInviMarker=function(x , y) {
+        if(map[y][x]==maze.SquareType.INVIMAKER){//如果此处是标记
+            actor.invisible_mark+=1
         }
      }
 
@@ -872,7 +941,7 @@ var $builtinmodule = function (name) {
                         if((map[actor.y][actor.x])==maze.SquareType.START){  
                             actor.circulation_num+=1;
                         }
-                    }else if(maze.mlevel==6){//如果是第六关，则需要判断红绿灯是否为绿灯的问题
+                    }else if(maze.mlevel==7){//如果是第七关，则需要判断红绿灯是否为绿灯的问题
                         if(actor.traffic_light==maze.SquareType.LIGHT_RED){  
                                 alert("挑战失败:小车在红灯亮时还未停止！");
                                 throw new Sk.builtin.TypeError("挑战失败:小车在红灯亮时还未停止！");
@@ -903,7 +972,8 @@ var $builtinmodule = function (name) {
                     }
                     hasCoin(actor.x,actor.y)
                     hasMarker(actor.x,actor.y)
-                    if(maze.mlevel==6){//如果是第六关，则需要随机改变红绿灯的颜色
+                    hasInviMarker(actor.x,actor.y)
+                    if(maze.mlevel==7){//如果是第七关，则需要随机改变红绿灯的颜色
                         if((map[actor.y][actor.x+1])==maze.SquareType.LIGHT_RED || (map[actor.y][actor.x+1])==maze.SquareType.LIGHT_GREEN){  
                             map[actor.y][actor.x+1]=Math.random()>0.5? maze.SquareType.LIGHT_RED:maze.SquareType.LIGHT_GREEN;//随机刷新红绿灯的状态
                             actor.traffic_light=map[actor.y][actor.x+1];
@@ -916,16 +986,14 @@ var $builtinmodule = function (name) {
                     }
 
                     var state=checkFinish()
-                    if(state==true){
-                        setTimeout(function() {
-                            alert("挑战成功！");
-                        },1000)
-                        resolve(Sk.builtin.none.none$);
-                    }else if(state=="error2"){
+                    if(state=="error2"){
                         maze.result=ResultType.FAILURE
                         alert("挑战失败，请检查是否通过所有标记点！")
                         throw new Sk.builtin.TypeError("挑战失败，请检查是否通过所有标记点！");
-                    } 
+                    }else if(state=="error3"){
+                        alert("挑战失败,请修改后重新尝试！")
+                        throw new Sk.builtin.TypeError("挑战失败!请修改后重新尝试");
+                    }
                     resolve(Sk.builtin.none.none$);
                 }, 800);
             }));
@@ -1070,7 +1138,7 @@ var $builtinmodule = function (name) {
                     case 5://第五关
                     state=actor.circulation_num==3?true:false;
                     break;
-                    case 6://第六关
+                    case 7://第七关
                     if(actor.traffic_light==maze.SquareType.LIGHT_GREEN){//如果是绿灯，则怎么都算失败
                         state=false;
                     }else if(actor.traffic_light==maze.SquareType.LIGHT_RED){//如果是红灯
@@ -1086,18 +1154,34 @@ var $builtinmodule = function (name) {
                     }
                     break;
                 }
+                if(state==false){
+                    maze.result=ResultType.FAILURE
+                    alert("挑战失败，请检查循环次数是否正确！")
+                    throw new Sk.builtin.TypeError("挑战失败，请检查循环次数是否正确！");
+                }else{
+                    maze.result=ResultType.SUCCESS
+                    resolve(Sk.builtin.none.none$);
+                }
+            }))
+        });
+        //检查是否挑战成功
+        $loc.isSuccess=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("isSuccess", arguments, 1,1);
+            return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
+                var state=checkFinish()
+                console.log(state)
                 if(state==true){
                     setTimeout(function() {
                         alert("挑战成功！");
                     },1000)
                     resolve(Sk.builtin.none.none$);
-                }else{
+                }else if(state==false){//没有到达终点就游戏结束，或者超过了终点
                     maze.result=ResultType.FAILURE
-                    alert("挑战失败，请检查循环次数是否正确！")
-                    throw new Sk.builtin.TypeError("挑战失败，请检查循环次数是否正确！");
-                } 
+                    alert("挑战失败，请检查是否到达终点！")
+                    throw new Sk.builtin.TypeError("挑战失败，请检查是否到达终点！");
+                }
             }))
-        });
+        })
 
     }, "Actor")
 

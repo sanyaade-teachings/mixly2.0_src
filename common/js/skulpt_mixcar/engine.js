@@ -496,6 +496,22 @@ PyEngine.prototype.steprun = function(type) {
             }
         });
     }
+
+    //如果是第五关、第七关，则需要把检查循环次数的代码加进去
+    if(code.indexOf("settedMap(4")!=-1 | code.indexOf("settedMap(6")!=-1){
+        if(code.indexOf("moveDirection")!=-1){//初始化的时候不加这行代码
+            code=code+"actor.isCirculationRight();\n"
+        }
+    }
+
+    //除了第六关，其他把检查是否成功代码加进去
+    if(code.indexOf("settedMap(5)")==-1){
+        if(code.indexOf("moveDirection")!=-1){//初始化的时候不加这行代码
+            code=code+"actor.isSuccess();\n"
+        }
+    }
+    console.log(code)
+
     //已经读取了代码：code
     // Actually run the python code
     var executionPromise = Sk.misceval.asyncToPromise(function() {
@@ -717,7 +733,22 @@ PyEngine.prototype.steprun = function(type) {
         //console.log(code_new)
         code=code_new    
     }
-  
+
+    //如果是第五关、第七关，则需要把检查循环次数的代码加进去
+    if(code.indexOf("settedMap(4)")!=-1 | code.indexOf("settedMap(6)")!=-1){
+        if(code.indexOf("moveDirection")!=-1){//初始化的时候不加这行代码
+            code=code+"actor.isCirculationRight();\n"
+        }
+    }
+
+    //除了第六关，其他把检查是否成功代码加进去
+    if(code.indexOf("settedMap(5)")==-1){
+        if(code.indexOf("moveDirection")!=-1){//初始化的时候不加这行代码
+            code=code+"actor.isSuccess();\n"
+        }
+    }
+
+    console.log(code)
     if(code_pack_list.includes('matplotlib')){
         document.getElementById("mat_div").style.height='100%'
         document.getElementById("output_img").style.height='0%'

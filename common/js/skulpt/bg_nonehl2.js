@@ -14,12 +14,11 @@ const defineProperty = function(obj, property) {
         self[obj][property] = val.v;
       }
     }))
-}
+} 
     
   
-//这一版加入了所有延时和高亮效果，用以适应分布调试
 var $builtinmodule = function (name) {
-	let mod= {__name__: new Sk.builtin.str("blocklygame")};
+	let mod= {__name__: new Sk.builtin.str("bg_nonehl")};
     
     var svg = d3.select('#blocklySVG').append('svg');
     
@@ -105,7 +104,7 @@ var $builtinmodule = function (name) {
             START: 2,
             FINISH: 3,
             AWARD:4,//金币奖励
-            BARRIER:5,
+            BARRIER:5,//障碍物
             MARKER1:10,
             MARKER2:11,
             MARKER3:12,
@@ -119,14 +118,13 @@ var $builtinmodule = function (name) {
         finish : {x:0,y:0},
         type:1//类型为用户自定义的
     };
-    
     //简单的迷宫任务，不是小车的迷宫场景
     var simple_map_para={
         tiles: '../common/js/skulpt_mixtoy/pic/tiles_astro.png',//地图路径图片
         marker: '../common/js/skulpt_mixtoy/pic/marker.png',//终点图标图片
         background: '../common/js/skulpt_mixtoy/pic/bg_astro.jpg',//地图背景图片
         wall:'',
-        state_num:0
+        state_num:1//为0就是未使用，为1就是已经使用（激活）
     }
     var simple_Maze=[
         //第一关
@@ -208,7 +206,7 @@ var $builtinmodule = function (name) {
             map:[
             [0, 0, 1, 1, 1],
             [0, 0, 1, 0, 1],
-            [2, 1, 1, Math.random()>0.5?1:5, 3]]
+            [2, 1, 1, Math.random()>0.5?1:5, 3]],
             // tiles: '../common/js/skulpt_mixtoy/pic/maze_path.png',//地图路径图片
             // marker: '../common/js/skulpt_mixtoy/pic/marker.png',//终点图标图片
             // background: '',//地图背景图片
@@ -221,7 +219,7 @@ var $builtinmodule = function (name) {
             [0, 0, 1, 0, 0, 1],
             [0, 1, 1, Math.random()>0.5?1:5, 1, 1],
             [0, 1, 0, 0, 0, 1],
-            [2, 1, Math.random()>0.5?1:5, 1, 1, 3]]
+            [2, 1, Math.random()>0.5?1:5, 1, 1, 3]],
             // tiles: '../common/js/skulpt_mixtoy/pic/maze_path.png',//地图路径图片
             // marker: '../common/js/skulpt_mixtoy/pic/marker.png',//终点图标图片
             // background: '',//地图背景图片
@@ -331,6 +329,7 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 0, 0, 0]]
         }
     ]
+
 
     //已经设置好的关卡的map
     var MAZE_setted=[
@@ -552,7 +551,7 @@ var $builtinmodule = function (name) {
     var displayPegman = function(x, y, d, opt_angle) {
         var pegmanIcon = $('#pegman');
         if(actor.type=='animate'){
-            if(maze.type==0 || actor.img=='https://cdn.jsdelivr.net/gh/LIAO-wanting/skulpt_pj@latest/pic/book/actor_car.png'){
+            if(maze.type==0 || actor.img=='https://cdn.jsdelivr.net/gh/LIAO-wanting/skulpt_pj@latest/pic/book/actor_car.png' ){
                 pegmanIcon.attr('x', x * maze_SQUARE_SIZE - d * actor.width+ 1);
                 pegmanIcon.attr('y', maze_SQUARE_SIZE * (y + 0.5) - actor.height / 2 );
             }else{
@@ -581,7 +580,7 @@ var $builtinmodule = function (name) {
         d3.select("#pegmanClipPath").append('rect').attr('id','clipRect').attr('width', actor.width).attr('height', actor.height)
 
         if(actor.type=="animate"){
-            if(maze.type==0 || actor.img=='https://cdn.jsdelivr.net/gh/LIAO-wanting/skulpt_pj@latest/pic/book/actor_car.png' ){
+            if(maze.type==0 || actor.img=='https://cdn.jsdelivr.net/gh/LIAO-wanting/skulpt_pj@latest/pic/book/actor_car.png'){
                 //绘制精灵.
                 svg.append('image').attr('id','pegman').attr('width', actor.width * 16).attr('height',  actor.height).attr('clip-path', 'url(#pegmanClipPath)')
                 .attr('xlink:href',actor.img)
@@ -906,7 +905,7 @@ var $builtinmodule = function (name) {
      }
     
      /**
-     * 检查精灵在移动的过程中是否走到了标记处分别统计经过的每种标记的数目
+     * 检查精灵在移动的过程中是否走到了标记处,并分别统计没种不同类型的标记的数目
      * @param {<number>} x 当前精灵的横坐标.
      * @param {<number>} y 当前精灵的纵坐标.
      */
@@ -930,12 +929,6 @@ var $builtinmodule = function (name) {
         }
      }
 
-     //高亮辅助函数
-     var highlight = function(id) {
-        id=Sk.ffi.remapToJs(id)
-        Blockly.mainWorkspace.highlightBlock(id);
-    };
-
     /**
      * 设置地图属性.
      * @param {string} block_id 高亮块的ID
@@ -944,66 +937,51 @@ var $builtinmodule = function (name) {
      * @param {number} startPos_x 起点位置的横坐标.
      * @param {number} endPos_x 终点位置的横坐标.
      * @param {number} endPos_y 终点位置的纵坐标.
-     * @param {string} block_id 高亮图形块的ID
      */
-     var setMap_f=function( M_x , M_y , startPos_x ,startPos_y , endPos_x , endPos_y , block_id) {
-        Sk.builtin.pyCheckArgs("setMap", arguments, 7, 7);
+     var setMap_f=function( M_x , M_y , startPos_x ,startPos_y , endPos_x , endPos_y ) {
+        Sk.builtin.pyCheckArgs("setMap", arguments, 6, 6);
         map=[]
+        if((M_x<3) || (M_x>20) || (M_y<3) || (M_y>20)){
+            throw Error("错误！超出地图可设置范围，请设置横纵方格数大于等于3，小于等于20")
+        }
+        M_x = Sk.ffi.remapToJs(M_x);
+        M_y = Sk.ffi.remapToJs(M_y);
+        maze_COLS=M_x;
+        maze_ROWS=M_y;
+        maze.MAZE_WIDTH= maze_SQUARE_SIZE * maze_COLS;
+        maze.MAZE_HEIGHT=maze_SQUARE_SIZE * maze_ROWS;
 
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                } 
+        startPos_x =Sk.ffi.remapToJs(startPos_x)+1
+        startPos_y =Sk.ffi.remapToJs(startPos_y)+1
+        endPos_x =Sk.ffi.remapToJs(endPos_x)+1
+        endPos_y =Sk.ffi.remapToJs(endPos_y)+1
 
-                if((M_x<3) || (M_x>20) || (M_y<3) || (M_y>20)){
-                    throw Error("错误！超出地图可设置范围，请设置横纵方格数大于等于3，小于等于20")
-                }
-                M_x = Sk.ffi.remapToJs(M_x);
-                M_y = Sk.ffi.remapToJs(M_y);
-                maze_COLS=M_x;
-                maze_ROWS=M_y;
-                maze.MAZE_WIDTH= maze_SQUARE_SIZE * maze_COLS;
-                maze.MAZE_HEIGHT=maze_SQUARE_SIZE * maze_ROWS;
+        if((startPos_x>M_x) || (startPos_x<1) || (startPos_y>M_y) || (startPos_y<1)){
+            throw Error("错误！起点坐标超出地图范围！")
+        }
+        if((endPos_x>M_x) || (endPos_x<1) || (endPos_y>M_y) || (endPos_y<1)){
+            throw Error("错误！终点坐标超出地图范围！")
+        }
 
-                startPos_x =Sk.ffi.remapToJs(startPos_x)+1
-                startPos_y =Sk.ffi.remapToJs(startPos_y)+1
-                endPos_x =Sk.ffi.remapToJs(endPos_x)+1
-                endPos_y =Sk.ffi.remapToJs(endPos_y)+1
-
-                if((startPos_x>M_x) || (startPos_x<1) || (startPos_y>M_y) || (startPos_y<1)){
-                    throw Error("错误！起点坐标超出地图范围！")
-                }
-                if((endPos_x>M_x) || (endPos_x<1) || (endPos_y>M_y) || (endPos_y<1)){
-                    throw Error("错误！终点坐标超出地图范围！")
-                }
-
-                for (var i=0; i<M_y; i++){ 
-                    var b = [];  //辅助数组
-                    for(var j=0; j<M_x; j++){ 
-                        if( (j==(startPos_x-1)) && (i==(startPos_y-1))){
-                            if((startPos_x==endPos_x) && (startPos_y==endPos_y)){//如果起点坐标和终点坐标重合，应优先把map坐标设置为终点，然后直接设置角色初始坐标
-                                b[j]=maze.SquareType.FINISH;
-                                actor.x= startPos_x-1;
-                                actor.y= startPos_y-1;
-                            }else{
-                                b[j]=maze.SquareType.START;
-                            }
-                        }else if((j==(endPos_x-1)) && (i==(endPos_y-1))){
-                            b[j]=maze.SquareType.FINISH;
-                        }else{
-                            b[j]=maze.SquareType.OPEN;
-                        }
+        for (var i=0; i<M_y; i++){ 
+            var b = [];  //辅助数组
+            for(var j=0; j<M_x; j++){ 
+                if( (j==(startPos_x-1)) && (i==(startPos_y-1))){
+                    if((startPos_x==endPos_x) && (startPos_y==endPos_y)){//如果起点坐标和终点坐标重合，应优先把map坐标设置为终点，然后直接设置角色初始坐标
+                        b[j]=maze.SquareType.FINISH;
+                        actor.x= startPos_x-1;
+                        actor.y= startPos_y-1;
+                    }else{
+                        b[j]=maze.SquareType.START;
                     }
-                    map[i]=b;
+                }else if((j==(endPos_x-1)) && (i==(endPos_y-1))){
+                    b[j]=maze.SquareType.FINISH;
+                }else{
+                    b[j]=maze.SquareType.OPEN;
                 }
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
-
+            }
+            map[i]=b;
+        }
     }
 	mod.setMap = new Sk.builtin.func(setMap_f);
 
@@ -1011,131 +989,91 @@ var $builtinmodule = function (name) {
      * 设置路径类型，如果不对路径形状进行设置，则默认为方格.
      * 
      * @param {string} path_type代表可通行路径的样式，默认为null
-     * @param {string} block_id 高亮图形块的ID
      */
-     var setPathType_f=function(path_type,block_id) { 
-        Sk.builtin.pyCheckArgs("setPathType", arguments, 2, 2);
+    var setPathType_f=function(path_type) { 
+        Sk.builtin.pyCheckArgs("setPathType", arguments, 1, 1);
         path_type = Sk.ffi.remapToJs(path_type);
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {  
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }  
-
-                switch (path_type){
-                    case "default":
-                        maze.tiles='../common/js/skulpt_mixtoy/pic/maze_path.png';//默认为方格
-                        break;
-                    case "pipeline":
-                        maze.tiles='../common/js/skulpt_mixtoy/pic/tiles_astro.png';//设置为管道
-                        break;
-                    case "bamboo":
-                        maze.tiles='../common/js/skulpt_mixtoy/pic/tiles_panda.png';//设置为竹子
-                        break;
-                }
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+        switch (path_type){
+            case "default":
+                maze.tiles='../common/js/skulpt_mixtoy/pic/maze_path.png';//默认为方格
+                break;
+            case "pipeline":
+                maze.tiles='../common/js/skulpt_mixtoy/pic/tiles_astro.png';//设置为管道
+                break;
+            case "bamboo":
+                maze.tiles='../common/js/skulpt_mixtoy/pic/tiles_panda.png';//设置为竹子
+                break;
+        }
     }
 	mod.setPathType = new Sk.builtin.func(setPathType_f);
 
-
     /**
      * 设置地图背景.
-     * 
      * @param {string} bg_pic代表地图背景对应的名称
-     * @param {string} block_id 高亮图形块的ID
      */
-    var set_map_bg_f=function(bg_pic,block_id) { 
-        Sk.builtin.pyCheckArgs("set_map_bg", arguments, 2, 2);
+    var set_map_bg_f=function(bg_pic) { 
+        Sk.builtin.pyCheckArgs("set_map_bg", arguments, 1, 1);
         bg_pic=Sk.ffi.remapToJs(bg_pic);
         if(bg_pic=='无可用地图'){
             bg_pic=""
         }
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {  
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }  
-
-                switch(bg_pic){
-                    case "bg_default":
-                        maze.background ='../common/js/skulpt_mixtoy/pic/bg_default.png';//默认为方格
-                        break;
-                    case "bg_astro":
-                        maze.background ='../common/js/skulpt_mixtoy/pic/bg_astro.jpg';//设置为管道
-                        break;
-                    case "bg_panda":
-                        maze.background ='../common/js/skulpt_mixtoy/pic/bg_panda.jpg';//设置为竹子
-                        break;
-                }
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+        switch(bg_pic){
+            case "bg_default":
+                maze.background ='../common/js/skulpt_mixtoy/pic/bg_default.png';//默认为方格
+                break;
+            case "bg_astro":
+                maze.background ='../common/js/skulpt_mixtoy/pic/bg_astro.jpg';//设置为管道
+                break;
+            case "bg_panda":
+                maze.background ='../common/js/skulpt_mixtoy/pic/bg_panda.jpg';//设置为竹子
+                break;
+        }
     }
     mod.set_map_bg = new Sk.builtin.func(set_map_bg_f);
+
 
     /**
      * 在某处放置障碍或者金币.
      * 
-     * @param {string} block_id 高亮块的ID
      * @param {number} Pos_x 放置物的x坐标位置.
      * @param {number} Pos_y 放置物的y坐标位置.
-     * @param {string} type 放置物的类型：障碍或是金币
+     * @param {string} type 放置物的类型：墙、障碍或是金币
      */
-     var placeItem_f=function(Pos_x , Pos_y , type,block_id) { 
-        Sk.builtin.pyCheckArgs("placeItem", arguments, 4, 4);
+    var placeItem_f=function(Pos_x , Pos_y , type) { 
+        Sk.builtin.pyCheckArgs("placeItem", arguments, 3, 3);
         Pos_x = Sk.ffi.remapToJs(Pos_x);
         Pos_y = Sk.ffi.remapToJs(Pos_y);
         type=Sk.ffi.remapToJs(type);
 
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {  
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                } 
+        if((Pos_x+1>(map[0].length)) || (Pos_x< 0) || (Pos_y+1>(map.length)) || (Pos_y< 0)){
+            throw new Sk.builtin.TypeError("错误！放置物坐标超过地图范围");
+        }else if((map[Pos_y][Pos_x]==2)||(map[Pos_y][Pos_x]==3)){
+            throw new Sk.builtin.TypeError("错误！不能将放置物位置设置在起点或终点坐标！");
+        }
 
-                if((Pos_x+1>(map[0].length)) || (Pos_x< 0) || (Pos_y+1>(map.length)) || (Pos_y< 0)){
-                    throw new Sk.builtin.TypeError("错误！放置物坐标超过地图范围");
-                }else if((map[Pos_y][Pos_x]==2)||(map[Pos_y][Pos_x]==3)){
-                    throw new Sk.builtin.TypeError("错误！不能将放置物位置设置在起点或终点坐标！");
-                }
-  
-                switch(type){
-                    case "wall"://墙
-                        map[Pos_y][Pos_x]=maze.SquareType.WALL;
-                        break;
-                    case "coin":
-                        map[Pos_y][Pos_x]=maze.SquareType.AWARD;
-                        break;
-                    case "barrier":
-                        map[Pos_y][Pos_x]=maze.SquareType.BARRIER;
-                        break;
-                    case "redmarker":
-                        map[Pos_y][Pos_x]=maze.SquareType.MARKER1;
-                        break;
-                    case "yellowmarker":
-                        map[Pos_y][Pos_x]=maze.SquareType.MARKER2;
-                        break;
-                    case "bluemarker":
-                        map[Pos_y][Pos_x]=maze.SquareType.MARKER3;
-                        break;
-                    case "greenmarker":
-                        map[Pos_y][Pos_x]=maze.SquareType.MARKER4;
-                        break;
-                }
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+        switch(type){
+            case "wall"://墙
+                map[Pos_y][Pos_x]=maze.SquareType.WALL;
+                break;
+            case "coin":
+                map[Pos_y][Pos_x]=maze.SquareType.AWARD;
+                break;
+            case "barrier":
+                map[Pos_y][Pos_x]=maze.SquareType.BARRIER;
+                break;
+            case "redmarker":
+                map[Pos_y][Pos_x]=maze.SquareType.MARKER1;
+                break;
+            case "yellowmarker":
+                map[Pos_y][Pos_x]=maze.SquareType.MARKER2;
+                break;
+            case "bluemarker":
+                map[Pos_y][Pos_x]=maze.SquareType.MARKER3;
+                break;
+            case "greenmarker":
+                map[Pos_y][Pos_x]=maze.SquareType.MARKER4;
+                break;
+        }
     }
 	mod.placeItem = new Sk.builtin.func(placeItem_f);
 
@@ -1144,303 +1082,66 @@ var $builtinmodule = function (name) {
      * 
      * @param {number} Pos_x 放置物的x坐标位置.
      * @param {number} Pos_y 放置物的y坐标位置.
-     * @param {string} block_id 高亮块的ID
-     * 
      */
-    var randomPlaceBarrier_f=function(Pos_x , Pos_y,block_id) { 
-        Sk.builtin.pyCheckArgs("randomPlaceBarrier", arguments, 3, 3);
+     var randomPlaceBarrier_f=function(Pos_x , Pos_y) { 
+        Sk.builtin.pyCheckArgs("randomPlaceBarrier", arguments, 2, 2);
         Pos_x = Sk.ffi.remapToJs(Pos_x)+1;
         Pos_y = Sk.ffi.remapToJs(Pos_y)+1;
 
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {  
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                } 
+        if((Pos_x>(map[0].length)) || (Pos_x< 1) || (Pos_y>(map.length)) || (Pos_y< 1)){
+            throw new Sk.builtin.TypeError("错误！放置物坐标超过地图范围");
+        }else if((map[Pos_y-1][Pos_x-1]==2)||(map[Pos_y-1][Pos_x-1]==3)){
+            throw new Sk.builtin.TypeError("错误！不能将放置物位置设置在起点或终点坐标！");        
+        }
 
-                if((Pos_x>(map[0].length)) || (Pos_x< 1) || (Pos_y>(map.length)) || (Pos_y< 1)){
-                    throw new Sk.builtin.TypeError("错误！放置物坐标超过地图范围");
-                }else if((map[Pos_y-1][Pos_x-1]==2)||(map[Pos_y-1][Pos_x-1]==3)){
-                    throw new Sk.builtin.TypeError("错误！不能将放置物位置设置在起点或终点坐标！");        
-                }
-        
-                var numType=Math.random()>0.5?maze.SquareType.OPEN:maze.SquareType.BARRIER;
-                map[Pos_y-1][Pos_x-1]=numType;
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+        var numType=Math.random()>0.5?maze.SquareType.OPEN:maze.SquareType.BARRIER;
+        map[Pos_y-1][Pos_x-1]=numType;
+
     }
-    mod.randomPlaceBarrier = new Sk.builtin.func(randomPlaceBarrier_f);
+	mod.randomPlaceBarrier = new Sk.builtin.func(randomPlaceBarrier_f);
 
-    var initMap_f=function(block_id) {
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {  
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }   
-                drawMap()
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+    /**
+     * 初始化地图
+     */
+    var initMap_f=function() { 
+        drawMap()
     }
 	mod.initMap = new Sk.builtin.func(initMap_f);
 
 
-    var isDone = function(block_id) {
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id)
-                var isdone= Sk.ffi.remapToPy(checkFinish()); 
-                resolve(isdone);
-            }, 800);
-        })
-    }
-
-    var isPathCheck=function(direction,block_id) {
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var state=false;
-                var square=0;
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id);
-                switch (direction) {
-                    case DirectionType.NORTH:
-                        if(map[actor.y - 1]){
-                            square = map[actor.y - 1][actor.x];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                    case DirectionType.EAST:
-                        if(map[actor.y][actor.x + 1]){
-                            square = map[actor.y][actor.x + 1];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                    case DirectionType.SOUTH:
-                        if(map[actor.y + 1]){
-                            square = map[actor.y + 1][actor.x];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                    case DirectionType.WEST:
-                        if(map[actor.y][actor.x - 1]){
-                            square = map[actor.y][actor.x - 1];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                };
-                state= (square != maze.SquareType.BARRIER) && (square != maze.SquareType.WALL);
-                resolve(Sk.ffi.remapToPy(state));
-            }, 800);
-        })
-    }
-
-    var isBarrierCheck=function(direction,block_id) {
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var state=false;
-                var square=0;
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id);
-                switch (direction) {
-                    case DirectionType.NORTH:
-                        if(map[actor.y - 1]){
-                            square = map[actor.y - 1][actor.x];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                    case DirectionType.EAST:
-                        if(map[actor.y][actor.x + 1]){
-                            square = map[actor.y][actor.x + 1];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                    case DirectionType.SOUTH:
-                        if(map[actor.y + 1]){
-                            square = map[actor.y + 1][actor.x];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                    case DirectionType.WEST:
-                        if(map[actor.y][actor.x - 1]){
-                            square = map[actor.y][actor.x - 1];
-                        }else{
-                            square = 0
-                        }
-                        break;
-                };
-                state= square == maze.SquareType.BARRIER;
-                resolve(Sk.ffi.remapToPy(state));
-            }, 800);
-        })
-    }
-
-    var isOilFullCheck=function(block_id) {
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var state=false;
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id);
-                if(actor.oil==0){//没油了，返回需要加油为True
-                    resolve(Sk.ffi.remapToPy(true));
-                }else if(actor.oil==1){//还有油，返回需要加油为False
-                    resolve(Sk.ffi.remapToPy(false));
-                }
-            }, 800);
-        })
-    }
-
-    var getpoint= function(block_id){
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id)
-                var point= actor.coin_point; 
-                resolve(Sk.ffi.remapToPy(point));
-            }, 800);
-        })
-    }
-
-    var checkLightGreen=function(block_id){
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id)
-                if(actor.traffic_light==maze.SquareType.LIGHT_GREEN){//绿灯，返回 true
-                    resolve(Sk.ffi.remapToPy(true));
-                }else if(actor.traffic_light==maze.SquareType.LIGHT_RED){//红灯，返回false
-                    resolve(Sk.ffi.remapToPy(false));
-                }    
-            }, 800);
-        })
-    }
-
-    var helpCheckMarker=function(marker,block_id){
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id)
-                var marker_num=actor.apart_markers[marker];
-                if(marker_num==0){
-                    resolve(Sk.ffi.remapToPy(false));
-                }else{
-                    resolve(Sk.ffi.remapToPy(true));
-                }
-            }, 800);
-        })
-    }
-
-    var helpGetMNum=function(marker,block_id){
-        return new Promise((resolve) => {
-            // Do things
-            setTimeout( () => {   
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                }
-                highlight(block_id)
-                var marker_num=actor.apart_markers[marker];
-                resolve(Sk.ffi.remapToPy(marker_num));
-            }, 800);
-        })
-    }
-
     mod.Actor = Sk.misceval.buildClass(mod, function($gbl, $loc) {
-        $loc.__init__ = new Sk.builtin.func(function(self,img , direction ,block_id) {
-            return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-                Sk.setTimeout(function() {
-                    img= Sk.ffi.remapToJs(img) || 'pegman';
-                    if(img=='无可用角色'){
-                        img='pegman';
-                    }
-                    switch (img){
-                        case "pegman":
-                            actor.img='../common/js/skulpt_mixtoy/pic/pegman.png';//默认为方格
-                            actor.type="animate"
-                            break;
-                        case "panda":
-                            actor.img='../common/js/skulpt_mixtoy/pic/panda.png';//设置为管道
-                            actor.type="animate"
-                            break;
-                        case "astro":
-                            actor.img='../common/js/skulpt_mixtoy/pic/astro.png';//设置为竹子
-                            actor.type="animate"
-                            break;
-                        case "robot":
-                            actor.img='../common/js/skulpt_mixtoy/pic/robot.png';//设置为机器人
-                            actor.type="still"
-                            break;
-                        case "car":
-                            actor.img='https://cdn.jsdelivr.net/gh/LIAO-wanting/skulpt_pj@latest/pic/book/actor_car.png';//设置为小车
-                            actor.type="animate"
-                            break;
-                    }
+        $loc.__init__ = new Sk.builtin.func(function(self,img , direction) {
+            img= Sk.ffi.remapToJs(img) || 'pegman';
+            if(img=='无可用角色'){
+                img='pegman';
+            }
+            switch (img){
+                case "pegman":
+                    actor.img='../common/js/skulpt_mixtoy/pic/pegman.png';//默认为方格
+                    actor.type="animate"
+                    break;
+                case "panda":
+                    actor.img='../common/js/skulpt_mixtoy/pic/panda.png';//设置为管道
+                    actor.type="animate"
+                    break;
+                case "astro":
+                    actor.img='../common/js/skulpt_mixtoy/pic/astro.png';//设置为竹子
+                    actor.type="animate"
+                    break;
+                case "robot":
+                    actor.img='../common/js/skulpt_mixtoy/pic/robot.png';//设置为机器人
+                    actor.type="still"
+                    break;
+                case "car":
+                    actor.img='https://cdn.jsdelivr.net/gh/LIAO-wanting/skulpt_pj@latest/pic/book/actor_car.png';//设置为小车
+                    actor.type="animate"
+                    break;
+            }
 
-                    actor.direction =  Sk.ffi.remapToJs(direction) || DirectionType.NORTH;
-                    size=[52,49]//[height,width]//size需要根据方格的数目来确定
-                    actor.coin_point=0
-
-                    //高亮效果
-                    var re=/block_id=([\s\S]*)/.exec(block_id)
-                    if(re!=null){
-                        block_id=re[1];
-                        highlight(block_id)
-                    }
-                    initPegman()     
-                    resolve(Sk.builtin.none.none$);
-                }, 800);
-            }));
-
+            actor.direction =  Sk.ffi.remapToJs(direction) || DirectionType.NORTH;
+            size=[52,49]//[height,width]//size需要根据方格的数目来确定
+            actor.coin_point=0
+            initPegman()     
         });
         //get & set:Actor.direction新增函数，获取或设置精灵的方向
         $loc.direction = defineProperty(
@@ -1454,8 +1155,8 @@ var $builtinmodule = function (name) {
         //向某个方向移动移动
         //暂时只实现了移动一步
         //func: Actor.moveDirection()
-        $loc.moveDirection=new Sk.builtin.func(function(self,direction,block_id) {
-            Sk.builtin.pyCheckArgs("moveDirection", arguments, 3,3);
+        $loc.moveDirection=new Sk.builtin.func(function(self,direction) {
+            Sk.builtin.pyCheckArgs("moveDirection", arguments, 2,2);
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 Sk.setTimeout(function() {
                     actor.direction =  parseInt(Sk.ffi.remapToJs(direction));
@@ -1464,7 +1165,7 @@ var $builtinmodule = function (name) {
                         maze.result=ResultType.FAILURE
                         alert("挑战失败!请修改后重新尝试")
                         console.log("错误")
-                        // document.getElementById("side_code").innerText='错误'
+                        document.getElementById("side_code").innerText='错误'
                         throw new Sk.builtin.TypeError("挑战失败!请修改后重新尝试");
                     }
 
@@ -1513,14 +1214,6 @@ var $builtinmodule = function (name) {
                             actor.x--;
                             break;
                     }
-
-                     //高亮效果
-                     var re=/block_id=([\s\S]*)/.exec(block_id)
-                     if(re!=null){
-                         block_id=re[1];
-                         highlight(block_id)
-                     }
-
                     hasCoin(actor.x,actor.y)
                     hasMarker(actor.x,actor.y)
                     if(maze.mlevel==6){//如果是第六关，则需要随机改变红绿灯的颜色
@@ -1537,22 +1230,19 @@ var $builtinmodule = function (name) {
 
                     var state=checkFinish()
                     if(state==true){
-                        // setTimeout(function() {
-                        //     alert("挑战成功！");
-                        // },1000)
                         resolve(Sk.builtin.none.none$);
-                        // throw Error("挑战成功！");
                     }else if(state=="error2"){
                         maze.result=ResultType.FAILURE
                         alert("挑战失败，请检查是否通过所有标记点！")
+                        console.log("失败")
                         throw new Sk.builtin.TypeError("挑战失败，请检查是否通过所有标记点！");
                     } 
                     resolve(Sk.builtin.none.none$);
                 }, 800);
             }));
         });
-        $loc.turn=new Sk.builtin.func(function(self,direction,block_id){
-            Sk.builtin.pyCheckArgs("turn", arguments, 3, 3);
+        $loc.turn=new Sk.builtin.func(function(self,direction){
+            Sk.builtin.pyCheckArgs("turn", arguments, 2, 2);
             Sk.builtin.pyCheckType("direction", "string", Sk.builtin.checkString(direction));
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 Sk.setTimeout(function() {
@@ -1568,145 +1258,198 @@ var $builtinmodule = function (name) {
                             actor.direction = constrainDirection4(actor.direction + 1);
                             break;
                     }
-                    var re=/block_id=([\s\S]*)/.exec(block_id)
-                    if(re!=null){
-                        block_id=re[1];
-                        highlight(block_id)
-                    }
                     resolve(Sk.builtin.none.none$);
                 }, 800);
             }));
         });
-        $loc.isDone=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("isDone", arguments, 2, 2);
-            return new Sk.misceval.promiseToSuspension(isDone(block_id).then((r) => Sk.ffi.remapToPy(r)));
+        $loc.isDone=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("isDone", arguments, 1, 1);
+            var isdone= Sk.ffi.remapToPy(checkFinish()); 
+            return new Sk.ffi.remapToPy(isdone);
         });
-        $loc.isPath=new Sk.builtin.func(function(self,direction,block_id){
-            Sk.builtin.pyCheckArgs("isPath", arguments, 3, 3);
-            Sk.builtin.pyCheckType("direction","number", Sk.builtin.checkNumber(direction));
-            direction=Sk.ffi.remapToJs(direction)
-            return new Sk.misceval.promiseToSuspension(isPathCheck(direction,block_id).then((r) => Sk.ffi.remapToPy(r)));
-        });
-        //判断某个方向是否存在障碍物
-        $loc.isBarrier=new Sk.builtin.func(function(self,direction,block_id){
-            Sk.builtin.pyCheckArgs("isBarrier", arguments, 3, 3);
+        $loc.isPath=new Sk.builtin.func(function(self,direction){
+            Sk.builtin.pyCheckArgs("isPath", arguments, 2, 2);
             Sk.builtin.pyCheckType("direction", "number", Sk.builtin.checkNumber(direction));
             direction=Sk.ffi.remapToJs(direction)
-            return new Sk.misceval.promiseToSuspension(isBarrierCheck(direction,block_id).then((r) => Sk.ffi.remapToPy(r)));
+            var state=false;
+            var square=0;
+            switch (direction) {
+                case DirectionType.NORTH:
+                    if(map[actor.y - 1]){
+                        square = map[actor.y - 1][actor.x];
+                    }else{
+                        square = 0
+                    }
+                    break;
+                case DirectionType.EAST:
+                    if(map[actor.y][actor.x + 1]){
+                        square = map[actor.y][actor.x + 1];
+                    }else{
+                        square = 0
+                    }
+                    break;
+                case DirectionType.SOUTH:
+                    if(map[actor.y + 1]){
+                        square = map[actor.y + 1][actor.x];
+                    }else{
+                        square = 0
+                    }
+                    break;
+                case DirectionType.WEST:
+                    if(map[actor.y][actor.x - 1]){
+                        square = map[actor.y][actor.x - 1];
+                    }else{
+                        square = 0
+                    }
+                    break;
+            };
+            state= (square != maze.SquareType.BARRIER) && (square != maze.SquareType.WALL);
+            return Sk.ffi.remapToPy(state);
+        });
+        //判断某个方向是否存在障碍物
+        $loc.isBarrier=new Sk.builtin.func(function(self,direction){
+            Sk.builtin.pyCheckArgs("isBarrier", arguments, 2, 2);
+            Sk.builtin.pyCheckType("direction", "number", Sk.builtin.checkNumber(direction));
+            direction=Sk.ffi.remapToJs(direction)
+            var state=false;
+            var square=0;
+            switch (direction) {
+                case DirectionType.NORTH:
+                    if(map[actor.y - 1]){
+                        square = map[actor.y - 1][actor.x];
+                    }else{
+                        square = 0
+                    }
+                    break;
+                case DirectionType.EAST:
+                    if(map[actor.y][actor.x + 1]){
+                        square = map[actor.y][actor.x + 1];
+                    }else{
+                        square = 0
+                    }
+                    break;
+                case DirectionType.SOUTH:
+                    if(map[actor.y + 1]){
+                        square = map[actor.y + 1][actor.x];
+                    }else{
+                        square = 0
+                    }
+                    break;
+                case DirectionType.WEST:
+                    if(map[actor.y][actor.x - 1]){
+                        square = map[actor.y][actor.x - 1];
+                    }else{
+                        square = 0
+                    }
+                    break;
+            };
+            state= square == maze.SquareType.BARRIER;
+            return Sk.ffi.remapToPy(state);
         });
         //随机生成小车油量
-        $loc.randomOil=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("randomOil", arguments, 2, 2);
-            return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-                Sk.setTimeout(function() {
-                    actor.oil=Math.random()>0.5?1:0;//随机初始化汽车的油量
-                    if(actor.oil==0){//没油(呈现少量油的图片)
-                        svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                        .attr('xlink:href','../common/js/skulpt_mixtoy/pic/book/none_oil.png')
-                    }else if(actor.oil==1){//油量充足（呈现油量充足的图片）
-                        svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                        .attr('xlink:href','../common/js/skulpt_mixtoy/pic/book/full_oil.png')
-                    }
-                    var re=/block_id=([\s\S]*)/.exec(block_id)
-                    if(re!=null){
-                        block_id=re[1];
-                        highlight(block_id)
-                    }
-                    resolve(Sk.builtin.none.none$);
-                }, 800);
-            }));
+        $loc.randomOil=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("randomOil", arguments, 1, 1);
+            actor.oil=Math.random()>0.5?1:0;//随机初始化汽车的油量
+            if(actor.oil==0){//没油(呈现少量油的图片)
+                svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
+                .attr('xlink:href','../common/js/skulpt_mixtoy/pic/book/none_oil.png')
+            }else if(actor.oil==1){//油量充足（呈现油量充足的图片）
+                svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
+                .attr('xlink:href','../common/js/skulpt_mixtoy/pic/book/full_oil.png')
+            }
         });
         //判断是否需要加油
-        $loc.isOilFull=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("isOilFull", arguments, 2, 2);
-            return new Sk.misceval.promiseToSuspension(isOilFullCheck(block_id).then((r) => Sk.ffi.remapToPy(r)));
+        $loc.isOilFull=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("isOilFull", arguments, 1, 1);
+            if(actor.oil==0){//没油了，返回需要加油为True
+                return Sk.ffi.remapToPy(true);
+            }else if(actor.oil==1){//还有油，返回需要加油为False
+                return Sk.ffi.remapToPy(false);
+            }
         });
         //进加油站加油
-        $loc.addOil=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("addOil", arguments, 2, 2);
+        $loc.addOil=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("addOil", arguments, 1, 1);
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 Sk.setTimeout(function() {
                     svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
                     .attr('xlink:href','../common/js/skulpt_mixtoy/pic/book/full_oil.png')
                     actor.oil=1//油量充足
-                    var re=/block_id=([\s\S]*)/.exec(block_id)
-                    if(re!=null){
-                        block_id=re[1];
-                        highlight(block_id)
-                    }
                     resolve(Sk.builtin.none.none$);
                 }, 800);
             }));
         });
-        //获取角色当前的分数
-        $loc.getPoint=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("getPoint", arguments, 2, 2);
-            return new Sk.misceval.promiseToSuspension(getpoint(block_id).then((r) => Sk.ffi.remapToPy(r)));
+        $loc.getPoint=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("getPoint", arguments, 1, 1);
+            var point= actor.coin_point; 
+            return Sk.ffi.remapToPy(point);
         });
         //判断信号灯是否为绿灯？
-        $loc.isLightGreen=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("isLightGreen", arguments, 2, 2);
-            return new Sk.misceval.promiseToSuspension(checkLightGreen(block_id).then((r) => Sk.ffi.remapToPy(r)));
+        $loc.isLightGreen=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("isLightGreen", arguments, 1, 1);
+            if(actor.traffic_light==maze.SquareType.LIGHT_GREEN){//绿灯，返回 true
+                return Sk.ffi.remapToPy(true);
+            }else if(actor.traffic_light==maze.SquareType.LIGHT_RED){//红灯，返回false
+                return Sk.ffi.remapToPy(false);
+            }
         });
         //检查循环的次数是否正确
-        $loc.isCirculationRight=new Sk.builtin.func(function(self,block_id){
-            Sk.builtin.pyCheckArgs("isCirculationRight", arguments, 2, 2);
+        $loc.isCirculationRight=new Sk.builtin.func(function(self){
+            Sk.builtin.pyCheckArgs("isCirculationRight", arguments, 1, 1);
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-                Sk.setTimeout(function() {
-                    var mlevel=maze.mlevel;//获取当前关卡序数
-                    var state=false;
-                    switch (mlevel){
-                        case 5://第五关
-                        state=actor.circulation_num==3?true:false;
-                        break;
-                        case 6://第六关
-                        if(actor.traffic_light==maze.SquareType.LIGHT_GREEN){//如果是绿灯，则怎么都算失败
-                            state=false;
-                        }else if(actor.traffic_light==maze.SquareType.LIGHT_RED){//如果是红灯
-                            for (var y = 0; y < maze.map.length; y++) {
-                                for (var x = 0; x <  maze.map[0].length; x++) {
-                                    if(maze.map[y][x]==maze.SquareType.LIGHT_RED){
-                                        if((actor.x+1)==x|| (actor.y)==y){//如果小车停的位置在红绿灯的左边，则挑战成功
-                                            state=true;
-                                        }
+                var mlevel=maze.mlevel;//获取当前关卡序数
+                var state=false;
+                switch (mlevel){
+                    case 5://第五关
+                    state=actor.circulation_num==3?true:false;
+                    break;
+                    case 6://第六关
+                    if(actor.traffic_light==maze.SquareType.LIGHT_GREEN){//如果是绿灯，则怎么都算失败
+                        state=false;
+                    }else if(actor.traffic_light==maze.SquareType.LIGHT_RED){//如果是红灯
+                        for (var y = 0; y < maze.map.length; y++) {
+                            for (var x = 0; x <  maze.map[0].length; x++) {
+                                if(maze.map[y][x]==maze.SquareType.LIGHT_RED){
+                                    if((actor.x+1)==x|| (actor.y)==y){//如果小车停的位置在红绿灯的左边，则挑战成功
+                                        state=true;
                                     }
                                 }
                             }
                         }
-                        break;
                     }
-                    //高亮效果
-                    var re=/block_id=([\s\S]*)/.exec(block_id)
-                    if(re!=null){
-                        block_id=re[1];
-                        highlight(block_id)
-                    }
-
-                    if(state==true){
-                        // setTimeout(function() {
-                        //     alert("挑战成功！");
-                        // },1000)
-                        // resolve(Sk.builtin.none.none$);
-                    }else{
-                        maze.result=ResultType.FAILURE
-                        alert("挑战失败，请检查循环次数是否正确！")
-                        throw new Sk.builtin.TypeError("挑战失败，请检查循环次数是否正确！");
-                    } 
-                    resolve(Sk.builtin.none.none$);
-                }, 800);
+                    break;
+                }
+                if(state==true){
+                    // setTimeout(function() {
+                    //     alert("挑战成功！");
+                    // },1000)
+                    // getFinishState_f(state)
+                    // resolve(Sk.builtin.none.none$);
+                }else{
+                    maze.result=ResultType.FAILURE
+                    alert("挑战失败，请检查循环次数是否正确！")
+                    console.log("失败")
+                    throw new Sk.builtin.TypeError("挑战失败，请检查循环次数是否正确！");
+                } 
             }))
         });
         //判断是否经过某种颜色的标记
-        $loc.checkMarker=new Sk.builtin.func(function(self,marker,block_id){
-            Sk.builtin.pyCheckArgs("checkMarker", arguments, 3, 3);
+        $loc.checkMarker=new Sk.builtin.func(function(self,marker){
+            Sk.builtin.pyCheckArgs("checkMarker", arguments, 2, 2);
             marker=Sk.ffi.remapToJs(marker);
-            return new Sk.misceval.promiseToSuspension(helpCheckMarker(marker,block_id).then((r) => Sk.ffi.remapToPy(r)));
+            var marker_num=actor.apart_markers[marker];
+            if(marker_num==0){
+                return Sk.ffi.remapToPy(false);
+            }else{
+                return Sk.ffi.remapToPy(true);
+            }
         });
         //返回经过某种颜色标记的数目
-        $loc.getMarkerNum=new Sk.builtin.func(function(self,marker,block_id){
-            Sk.builtin.pyCheckArgs("getMarkerNum", arguments, 3, 3);
+        $loc.getMarkerNum=new Sk.builtin.func(function(self,marker){
+            Sk.builtin.pyCheckArgs("getMarkerNum", arguments, 2, 2);
             marker=Sk.ffi.remapToJs(marker);
-            return new Sk.misceval.promiseToSuspension(helpGetMNum(marker,block_id).then((r) => Sk.ffi.remapToPy(r)));
+            var marker_num=actor.apart_markers[marker];
+            return Sk.ffi.remapToPy(marker_num);
         })
     }, "Actor")
 
@@ -1714,59 +1457,35 @@ var $builtinmodule = function (name) {
      * 初始化为设定好的地图
      * 
      * @param {number} level 初始化地图，level为地图的等级.
-     * @param {string} block_id 图形块ID.
      */
-     var settedMap_f=function(level,block_id) { 
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                } 
-                level=Sk.ffi.remapToJs(level)
-                maze=MAZE_setted[level]
-                map=MAZE_setted[level].map
-                drawMap()
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+     var settedMap_f=function(level) { 
+        level=Sk.ffi.remapToJs(level)
+        maze=MAZE_setted[level]
+        map=MAZE_setted[level].map
+        drawMap()
     }
 	mod.settedMap = new Sk.builtin.func(settedMap_f);
 
     /**
-         * 初始化为设定好的简单的迷宫地图
-         * 
-         * @param {number} level 初始化地图，level为地图的等级.
-         * @param {string} block_id 图形块ID.
-         */
-    var settedSimpleMap_f=function(level, block_id) { 
-        return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
-            Sk.setTimeout(function() {
-                //高亮效果
-                var re=/block_id=([\s\S]*)/.exec(block_id)
-                if(re!=null){
-                    block_id=re[1];
-                    highlight(block_id)
-                } 
-                level=Sk.ffi.remapToJs(level)
-                map=simple_Maze[level].map
-                maze_ROWS=map.length;
-                maze_COLS=map[0].length;
-                // if(level==6 || level==7){
-                //     maze.tiles=simple_Maze[level].tiles
-                //     maze.background=simple_Maze[level].background
-                // }else{
-                    maze.tiles=simple_map_para.tiles
-                    maze.wall=simple_map_para.wall
-                    maze.background=simple_map_para.background
-                // }
-                simple_map_para.state_num=1
-                drawMap()
-                resolve(Sk.builtin.none.none$);
-            }, 800);
-        }));
+     * 初始化为设定好的简单的迷宫地图
+     * 
+     * @param {number} level 初始化地图，level为地图的等级.
+     */
+    var settedSimpleMap_f=function(level) { 
+        level=Sk.ffi.remapToJs(level)
+        map=simple_Maze[level].map
+        maze_ROWS=map.length;
+        maze_COLS=map[0].length;
+        // if(level==6 || level==7){
+        //     maze.tiles=simple_Maze[level].tiles
+        //     maze.background=simple_Maze[level].background
+        // }else{
+            maze.tiles=simple_map_para.tiles
+            maze.wall=simple_map_para.wall
+            maze.background=simple_map_para.background
+        // }
+        simple_map_para.state_num=1
+        drawMap()
     }
     mod.settedSimpleMap = new Sk.builtin.func(settedSimpleMap_f);
 
@@ -1775,7 +1494,7 @@ var $builtinmodule = function (name) {
      * 
      * @return {boolean} 检测小人执行最后一个指令后是否到达终点,如果到达终点,返回True,否则返回False.
      */
-     var getFinishState_f=function(state){
+    var getFinishState_f=function(state){
         var state=checkFinish()
         var state_str=""
         return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {

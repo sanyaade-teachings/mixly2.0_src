@@ -84,6 +84,18 @@ Blockly.Blocks['initSettedMap_6'] = {
   }
 };
 
+//初始化地图为第7关
+Blockly.Blocks['initSettedMap_7'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("初始化地图为第七关")
+    this.setInputsInline(true);
+    this.setNextStatement(true);
+    this.setColour(290);
+    this.setTooltip('');
+  }
+};
+
 Blockly.Blocks['game_init'] = {
   init: function () {
     this.setNextStatement(true);

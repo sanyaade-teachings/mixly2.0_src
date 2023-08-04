@@ -1298,4 +1298,4 @@ Blockly.Arduino.forBlock['display_TM1637_Brightness_32'] = function () {
     return code;
 };
 
-Blockly.Arduino.group_lcd_init = Blockly.Arduino.group_lcd_init2;
+Blockly.Arduino.forBlock.group_lcd_init = Blockly.Arduino.forBlock.group_lcd_init2;

@@ -88,7 +88,7 @@ Blockly.Python.forBlock['method_procedures_defreturn'] = function() {
   return code;
 };
 
-Blockly.Python.method_procedures_defnoreturn = Blockly.Python.method_procedures_defreturn;
+Blockly.Python.forBlock.method_procedures_defnoreturn = Blockly.Python.forBlock.method_procedures_defreturn;
 
 Blockly.Python.forBlock['method_procedures_callreturn'] = function() {
   var argument1 = Blockly.Python.valueToCode(this, 'DATA',Blockly.Python.ORDER_ASSIGNMENT) || 'None';

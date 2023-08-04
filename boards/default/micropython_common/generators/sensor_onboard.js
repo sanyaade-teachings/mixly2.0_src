@@ -648,12 +648,12 @@ Blockly.Python.forBlock['sensor_mixbot_get_gyro'] = function(){
 
 
 
-Blockly.Python.sensor_button_is_pressed=Blockly.Python.sensor_mixgo_button_is_pressed;
-Blockly.Python.sensor_button_was_pressed=Blockly.Python.sensor_mixgo_button_was_pressed;
-Blockly.Python.sensor_button_get_presses=Blockly.Python.sensor_mixgo_button_get_presses;
-Blockly.Python.sensor_pin_pressed=Blockly.Python.sensor_mixgo_pin_pressed;
-Blockly.Python.sensor_pin_near=Blockly.Python.sensor_mixgo_pin_near;
-Blockly.Python.sensor_light=Blockly.Python.sensor_mixgo_light;
-//Blockly.Python.sensor_sound=Blockly.Python.sensor_mixgo_sound;
-//Blockly.Python.sensor_get_acceleration=Blockly.Python.sensor_mixgo_get_acceleration;
-Blockly.Python.dht11=Blockly.Python.sensor_dht11
+Blockly.Python.forBlock.sensor_button_is_pressed=Blockly.Python.forBlock.sensor_mixgo_button_is_pressed;
+Blockly.Python.forBlock.sensor_button_was_pressed=Blockly.Python.forBlock.sensor_mixgo_button_was_pressed;
+Blockly.Python.forBlock.sensor_button_get_presses=Blockly.Python.forBlock.sensor_mixgo_button_get_presses;
+Blockly.Python.forBlock.sensor_pin_pressed=Blockly.Python.forBlock.sensor_mixgo_pin_pressed;
+Blockly.Python.forBlock.sensor_pin_near=Blockly.Python.forBlock.sensor_mixgo_pin_near;
+Blockly.Python.forBlock.sensor_light=Blockly.Python.forBlock.sensor_mixgo_light;
+//Blockly.Python.forBlock.sensor_sound=Blockly.Python.forBlock.sensor_mixgo_sound;
+//Blockly.Python.forBlock.sensor_get_acceleration=Blockly.Python.forBlock.sensor_mixgo_get_acceleration;
+Blockly.Python.forBlock.dht11=Blockly.Python.forBlock.sensor_dht11

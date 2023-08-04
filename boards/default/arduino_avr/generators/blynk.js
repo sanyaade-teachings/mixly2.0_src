@@ -523,7 +523,7 @@ Blockly.Arduino.forBlock['blynk_gravity'] = function () {
 };
 
 //加速度传感器
-Blockly.Arduino.blynk_acc = Blockly.Arduino.blynk_gravity;
+Blockly.Arduino.forBlock.blynk_acc = Blockly.Arduino.forBlock.blynk_gravity;
 
 //时间输入
 Blockly.Arduino.forBlock['blynk_time_input_1'] = function () {

@@ -117,7 +117,7 @@ Blockly.Python.forBlock['controls_for_range'] = function (block) {
 };
 
 //ok
-Blockly.Python.controls_repeat = Blockly.Python.controls_repeat_ext;
+Blockly.Python.forBlock.controls_repeat = Blockly.Python.forBlock.controls_repeat_ext;
 Blockly.Python.forBlock['controls_whileUntil'] = function (a) {
     var b = "UNTIL" == a.getFieldValue("MODE"),
     c = Blockly.Python.valueToCode(a, "BOOL", Blockly.Python.ORDER_NONE) || "False",
@@ -250,8 +250,8 @@ Blockly.Python.forBlock['do_while'] = function() {
     return code;
 };
 
-Blockly.Python.base_type=Blockly.Python.controls_type;
-Blockly.Python.controls_TypeLists=Blockly.Python.controls_typeLists;
+Blockly.Python.forBlock.base_type=Blockly.Python.forBlock.controls_type;
+Blockly.Python.forBlock.controls_TypeLists=Blockly.Python.forBlock.controls_typeLists;
 
 Blockly.Python.forBlock['controls_repeat_ext'] = function (a) {
     var times = Blockly.Python.valueToCode(this, 'TIMES', Blockly.Python.ORDER_ATOMIC);

@@ -216,6 +216,6 @@ Blockly.Python.forBlock['actuator_onboard_neopixel_rgb_all'] = function(){
   return code;
 };
 
-Blockly.Python.led_light=Blockly.Python.actuator_led_bright;
-Blockly.Python.get_led_bright=Blockly.Python.actuator_get_led_bright;
-Blockly.Python.led_brightness=Blockly.Python.actuator_led_brightness;
+Blockly.Python.forBlock.led_light=Blockly.Python.forBlock.actuator_led_bright;
+Blockly.Python.forBlock.get_led_bright=Blockly.Python.forBlock.actuator_get_led_bright;
+Blockly.Python.forBlock.led_brightness=Blockly.Python.forBlock.actuator_led_brightness;

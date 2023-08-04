@@ -76,7 +76,7 @@ Blockly.Python.forBlock['controls_for'] = function (a) {
 };
 
 //ok
-Blockly.Python.controls_repeat = Blockly.Python.controls_repeat_ext;
+Blockly.Python.forBlock.controls_repeat = Blockly.Python.forBlock.controls_repeat_ext;
 
 
 Blockly.Python.forBlock['controls_whileUntil'] = function (a) {

@@ -587,16 +587,16 @@ Blockly.Arduino.forBlock['tool_modulus'] = function () {
 Blockly.Arduino.forBlock['nano_pin'] = function () {
     return "";
 };
-Blockly.Arduino.promini_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.leonardo_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.uno_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.mega_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.esp8266_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.wemos_d1_mini_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.stm32f103c8t6_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.esp32s2_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.esp32c3_pin = Blockly.Arduino.nano_pin;
-Blockly.Arduino.core_esp32c3_pin = Blockly.Arduino.nano_pin;
+Blockly.Arduino.forBlock.promini_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.leonardo_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.uno_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.mega_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.esp8266_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.wemos_d1_mini_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.stm32f103c8t6_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.esp32s2_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.esp32c3_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.core_esp32c3_pin = Blockly.Arduino.forBlock.nano_pin;
 
 //获取两个日期差值
 Blockly.Arduino.forBlock['get_the_number_of_days_between_the_two_dates'] = function () {

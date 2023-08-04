@@ -7,7 +7,7 @@ Blockly.Python.forBlock['pins_digital'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.pins_digital_write=Blockly.Python.pins_digital;
-Blockly.Python.pins_digital_read=Blockly.Python.pins_digital;
-Blockly.Python.pins_analog_write=Blockly.Python.pins_digital;
-Blockly.Python.pins_analog_read=Blockly.Python.pins_digital;
+Blockly.Python.forBlock.pins_digital_write=Blockly.Python.forBlock.pins_digital;
+Blockly.Python.forBlock.pins_digital_read=Blockly.Python.forBlock.pins_digital;
+Blockly.Python.forBlock.pins_analog_write=Blockly.Python.forBlock.pins_digital;
+Blockly.Python.forBlock.pins_analog_read=Blockly.Python.forBlock.pins_digital;

@@ -260,7 +260,7 @@ Blockly.Python.forBlock['lists_create_with_noreturn'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.lists_change_to_general = Blockly.Python.lists_change_to;
+Blockly.Python.forBlock.lists_change_to_general = Blockly.Python.forBlock.lists_change_to;
 
 Blockly.Python.forBlock['lists_del_general'] = function() {
   var varName = Blockly.Python.valueToCode(this, 'TUP', Blockly.Python.ORDER_ASSIGNMENT) || '0';

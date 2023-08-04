@@ -11,9 +11,9 @@ Blockly.Arduino.forBlock['handbit_button_is_pressed'] = function () {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.handbit_light =Blockly.Arduino.sensor_light;
+Blockly.Arduino.forBlock.handbit_light =Blockly.Arduino.sensor_light;
 
-Blockly.Arduino.handbit_sound =Blockly.Arduino.sensor_sound;
+Blockly.Arduino.forBlock.handbit_sound =Blockly.Arduino.sensor_sound;
 
 //传感器_重力感应块
 Blockly.Arduino.forBlock['handbit_MSA300'] = function () {

@@ -60,4 +60,4 @@ Blockly.Arduino.forBlock['controls_interrupts'] = function () {
 Blockly.Arduino.forBlock['controls_nointerrupts'] = function () {
     return 'noInterrupts();\n';
 };
-Blockly.Arduino.base_delay=Blockly.Arduino.controls_delay;
+Blockly.Arduino.forBlock.base_delay=Blockly.Arduino.controls_delay;

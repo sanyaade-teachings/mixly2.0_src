@@ -125,9 +125,9 @@ Blockly.Arduino.forBlock['HT16K33_show_image'] = function() {
 
 
 
-Blockly.Arduino.sensor_mixgo_light= Blockly.Arduino.sensor_light;
+Blockly.Arduino.forBlock.sensor_mixgo_light= Blockly.Arduino.forBlock.sensor_light;
 
-Blockly.Arduino.sensor_mixgo_sound=Blockly.Arduino.sensor_sound; 
+Blockly.Arduino.forBlock.sensor_mixgo_sound=Blockly.Arduino.forBlock.sensor_sound; 
 
 Blockly.Arduino.forBlock['mixgo_touch_pin'] = function(){
   var touch_pin = this.getFieldValue('touch_pin');

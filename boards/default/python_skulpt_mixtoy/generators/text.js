@@ -256,9 +256,9 @@ Blockly.Python.forBlock['text_format_noreturn'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.text_substring3 = Blockly.Python.text_substring 
-Blockly.Python.text_compareTo = Blockly.Python.text_compare_to
-Blockly.Python.text_char_at3 = Blockly.Python.text_char_at
+Blockly.Python.forBlock.text_substring3 = Blockly.Python.forBlock.text_substring 
+Blockly.Python.forBlock.text_compareTo = Blockly.Python.forBlock.text_compare_to
+Blockly.Python.forBlock.text_char_at3 = Blockly.Python.forBlock.text_char_at
 
 Blockly.Python.forBlock['text_encode'] = function() {
   var code = this.getFieldValue('DIR');

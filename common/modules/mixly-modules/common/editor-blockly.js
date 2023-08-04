@@ -143,7 +143,16 @@ class EditorBlockly {
         const zoomToFit = new ZoomToFitControl(editor);
         zoomToFit.init();
         const backpack = new Backpack(editor, {
-            useFilledBackpackImage: true
+            useFilledBackpackImage: true,
+            skipSerializerRegistration: false,
+            contextMenu: {
+                emptyBackpack: true,
+                removeFromBackpack: true,
+                copyToBackpack: true,
+                copyAllToBackpack: true,
+                pasteAllToBackpack: true,
+                disablePreconditionChecks: false
+            }
         });
         backpack.init();
 

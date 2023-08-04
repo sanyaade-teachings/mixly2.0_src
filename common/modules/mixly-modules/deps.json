@@ -113,6 +113,7 @@
             "ZoomToFitControl",
             "Multiselect",
             "Blockly.FieldGridDropdown",
+            "Blockly.FieldDependentDropdown",
             "Blockly.FieldSlider",
             "Blockly.FieldBitmap",
             "Blockly.FieldColourHsvSliders",

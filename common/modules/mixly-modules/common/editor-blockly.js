@@ -9,6 +9,7 @@ goog.require('ContentHighlight');
 goog.require('ZoomToFitControl');
 goog.require('Multiselect');
 goog.require('Blockly.FieldGridDropdown');
+goog.require('Blockly.FieldDependentDropdown');
 goog.require('Blockly.FieldSlider');
 goog.require('Blockly.FieldBitmap');
 goog.require('Blockly.FieldColourHsvSliders');

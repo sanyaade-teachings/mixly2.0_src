@@ -782,41 +782,22 @@ function getCitysByProvince(a) {
     return b;
 }
 
+var citysByProvince = {};
+for (key of PROVINCES) {
+    citysByProvince[key[0]] = getCitysByProvince(key[0]);
+}
+
 Blockly.Blocks.china_city = {
     init: function () {
-        this.citys = [["-", "-"]];
-        var input = this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(PROVINCES), "province");
-        input.appendField(new Blockly.FieldDropdown(this.generateOptions()), "city");
-
+        const defaultOptions = [["-", "-"]];
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown(PROVINCES), "province")
+            .appendField(new Blockly.FieldDependentDropdown("province", citysByProvince, defaultOptions), "city");
         this.setInputsInline(true);
         this.setOutput(true, null);
         this.setColour("#27b6ac");
         this.setHelpUrl("");
         this.preProvince = null;
-    },
-    onchange: function () {
-        var getProvince = this.getFieldValue("province");
-        if (this.preProvince !== getProvince) {
-            this.citys = getCitysByProvince(getProvince);
-            var cityField = this.getField("city");
-            cityField.menuGenerator_ = this.citys;
-            if (!this.checkCity(cityField.getValue(), this.citys)) {
-                this.setFieldValue(this.citys[0][0], "city");
-            }
-        }
-        this.preProvince = getProvince;
-    },
-    generateOptions: function () {
-        return this.citys;
-    },
-    checkCity: function (newCityName, cityArr) {
-        for (var i = 0; i < cityArr.length; i++) {
-            if (cityArr[i][0] == newCityName) {
-                return true;
-            }
-        }
-        return false;
     }
 };
 

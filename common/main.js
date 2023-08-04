@@ -42,6 +42,10 @@ goog.DEPENDENCIES = [
         "provide": ['Blockly.FieldGridDropdown'],
         "require": ['Blockly']
     }, {
+        "path": '/../../blockly-core/plugins/field_dependent_dropdown.js',
+        "provide": ['Blockly.FieldDependentDropdown'],
+        "require": ['Blockly']
+    }, {
         "path": '/../../blockly-core/plugins/field_slider.js',
         "provide": ['Blockly.FieldSlider'],
         "require": ['Blockly']

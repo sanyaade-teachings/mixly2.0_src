@@ -1,5 +1,45 @@
 ### 更新日志
 
+#### 2.0 rc4 2023-08-06
+
+- 修复 Arduino ESP32C3 板载 WS2812 RGB灯编译出错. [\#I5P20N](https://gitee.com/mixly2/mixly2.0_src/issues/I5P20N)
+- 修复 win7 32位 gcc版本不匹配. [#I5QOQO](https://gitee.com/mixly2/mixly2.0-win32-ia32/issues/I5QOQO)
+- 修复 mac 下使用 Python ESP32-C3 初始化固件或上传时报错. [\#I5V5S3](https://gitee.com/mixly2/mixly2.0_src/issues/I5V5S3)
+- 修复 Arduino AVR 板卡下 RGB 输入框和取色器 R、B 颜色反了. [\#I63AJJ](https://gitee.com/mixly2/mixly2.0_src/issues/I63AJJ)
+- 修复 Arduino ESP32 板卡下当变量类型设置为布尔时上传错误. [\#I672R5](https://gitee.com/mixly2/mixly2.0_src/issues/I672R5)
+- 修复 Arduino ESP32 硬件定时器导致系统不断重启. [\#I6B5WZ](https://gitee.com/mixly2/mixly2.0_src/issues/I6B5WZ)
+- 修复 python3 语音技术运行报错. [\#I6B7AH](https://gitee.com/mixly2/mixly2.0-win32-x64/issues/I6B7AH)
+- 修复 Arduino ESP32C3 下 串口图形块bug. [\#I6HUWN](https://gitee.com/mixly2/mixly2.0_src/issues/I6HUWN)
+- 修复 代码区编辑代码后存本地，再打开后不会显示之前已编辑的代码. [\#I6JIM0](https://gitee.com/mixly2/mixly2.0_src/issues/I6JIM0)
+- 修复 mac 下一键更新安装，Arduino编译提示 "bad CPU type in executable". [\#I6MNUY](https://gitee.com/mixly2/mixly2.0_src/issues/I6MNUY)
+- 修复 mac Mixly2.0文本内容复制粘贴不了. [\#I6Z21S](https://gitee.com/mixly2/mixly2.0_src/issues/I6Z21S)
+- 修复 windows Arduino ESP8266代码区无代码，无法编译. [\#I710YW](https://gitee.com/mixly2/mixly2.0_src/issues/I710YW)
+- 更新 Arduino ESP32C3 GPIO添加11引脚. [\#I6X4L6](https://gitee.com/mixly2/mixly2.0_src/issues/I6X4L6)
+- 更新 Blockly  ( version: 10.0.2 )
+  - `Blockly.Blocks.xxx.HUE` → `Blockly.Msg['xxx_HUE']`
+  - `Blockly.xxx` → `Blockly.Msg['xxx']`
+  - `Blockly.Mutator` → `Blockly.icons.MutatorIcon`
+  - `generator.xxx` → `generator.forBlock['xxx']`
+
+- 更新 XPython板卡和Arduino板卡
+- 更新 板卡管理工具和库管理工具
+- 更新 xpython板卡烧录所用python工具
+- 更新 `导出PNG` 选项移动到 Blockly 工作区右键菜单
+- 添加 右键菜单选项项 `添加注释`在 Blockly 工作区
+- 添加 墨水屏模块在 Arduino 板卡. [\#I670FM](https://gitee.com/mixly2/mixly2.0_src/issues/I670FM)
+- 添加 用户配置项
+  - 上传结束后自动打开串口. [\#I605PY](https://gitee.com/mixly2/mixly2.0_src/issues/I605PY)
+  - 主题调整为 "跟随系统"、"深色"、"浅色". [\#I692QN](https://gitee.com/mixly2/mixly2.0_src/issues/I692QN)
+- 添加 消息栏在板卡页面
+- 添加 配置项说明在配置板卡栏
+- 添加 `此视图只读` 提示在状态栏和右侧代码预览区 ( `Enter`、`Del`、`Backspace` 触发 )
+- 添加 新功能在Blockly
+  - 工作区高亮
+  - 工作区网格
+  - 工作区缩略图 ( `实验性` )
+  - 工作区多重选择 ( `实验性` - `Shift` + `鼠标左键` 触发 )
+  - 渲染器切换
+
 #### 2.0 rc3 2022-08-10
 
 - 修复自代码区切换至模块区颜色选择模块尺寸改变

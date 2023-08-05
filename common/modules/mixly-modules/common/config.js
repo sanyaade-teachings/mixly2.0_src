@@ -103,24 +103,31 @@ Config.init = () => {
     }
 
     console.log('Config.USER', Config.USER);
-    FingerprintJS.load()
-    .then(fp => fp.get())
-    .then(result => {
-        let visitorId16 = result.visitorId;
-        let VisitorIdNum = parseInt(visitorId16, 16);
-        let visitorId32 = VisitorIdNum.toString(32);
-        Config.BOARD.visitorId = {
-            str16: visitorId16,
-            str32: visitorId32,
-            str16CRC32b: Url.CRC32(visitorId16, 16),
-            str32CRC32b: Url.CRC32(visitorId32, 16)
-        };
-        console.log(Config.BOARD);
-    })
-    .catch(error => {
-        console.error(error);
-        console.log(Config.BOARD);
-    });
+    if (Config.USER.visitorId) {
+        Config.BOARD.visitorId = { ...Config.USER.visitorId };
+    } else {
+        FingerprintJS.load()
+        .then(fp => fp.get())
+        .then(result => {
+            let visitorId16 = result.visitorId;
+            let VisitorIdNum = parseInt(visitorId16, 16);
+            let visitorId32 = VisitorIdNum.toString(32);
+            let visitorId = {
+                str16: visitorId16,
+                str32: visitorId32,
+                str16CRC32b: Url.CRC32(visitorId16, 16),
+                str32CRC32b: Url.CRC32(visitorId32, 16)
+            };
+            LocalStorage.set(LocalStorage.PATH['USER'] + '/visitorId', visitorId);
+            Config.BOARD.visitorId = visitorId;
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .finally(() => {
+            console.log(Config.BOARD);
+        });
+    }
 }
 
 Config.init();

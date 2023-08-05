@@ -65,20 +65,17 @@ class FooterLayerBoardConfig extends FooterLayer {
         this.dropdownItems = {};
     }
 
-    getSelectedOptions() {
-        const selectedBoardName = this.boardName;
-        let { selectedOptions } = this.boardsInfo[selectedBoardName];
-        return selectedOptions;
-    }
-
     getSelectedParams() {
-        let options = this.getSelectedOptions();
         let paramList = [];
-        for (let i in options) {
-            paramList.push(i + '=' + options[i].key);
+        let { ignore, selectedOptions } = this.boardsInfo[this.boardName];
+        for (let i in selectedOptions) {
+            if (ignore.includes(i)) {
+                continue;
+            }
+            paramList.push(i + '=' + selectedOptions[i].key);
         }
         let { boardKey } = this;
-        const index = key.indexOf('@');
+        const index = boardKey.indexOf('@');
         if (index !== -1) {
             boardKey = boardKey.substring(0, index);
         }
@@ -86,8 +83,8 @@ class FooterLayerBoardConfig extends FooterLayer {
     }
 
     getSelectedParamByName(name) {
-        let options = this.getSelectedOptions();
-        for (let i in options) {
+        let { selectedOptions } = this.boardsInfo[this.boardName];
+        for (let i in selectedOptions) {
             if (i === name) {
                 return options[i].key;
             }

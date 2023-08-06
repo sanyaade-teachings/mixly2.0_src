@@ -647,7 +647,7 @@ BU.burnWithSpecialBin = () => {
             if (initBtnClicked) {
                 let selectedFirmwareName = $('#mixly-selector-type option:selected').val();
                 statusBarTerminal.setValue('');
-                mainStatusBarTab.tabChange('output');
+                mainStatusBarTab.changeTo('output');
                 mainStatusBarTab.show();
                 BU.burning = true;
                 BU.uploading = false;

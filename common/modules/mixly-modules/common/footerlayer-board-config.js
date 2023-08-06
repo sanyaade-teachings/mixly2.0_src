@@ -86,7 +86,7 @@ class FooterLayerBoardConfig extends FooterLayer {
         let { selectedOptions } = this.boardsInfo[this.boardName];
         for (let i in selectedOptions) {
             if (i === name) {
-                return options[i].key;
+                return selectedOptions[i].key;
             }
         }
         return '';

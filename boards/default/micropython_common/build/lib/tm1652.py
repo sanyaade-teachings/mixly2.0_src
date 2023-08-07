@@ -11,7 +11,7 @@ Micropython	library for the TM1652 Matrix8x5
 import time
 import uframebuf
 from machine import Pin
-from micropython import const, schedule 
+from micropython import const
 
 _TM1652_REG_ADD	     = const(0x08)		#Display address command
 _TM1652_REG_CMD	     = const(0x18)		#Display control command
@@ -68,11 +68,11 @@ class TM1652(uframebuf.FrameBuffer_Ascall):
 
 	def show(self):
 		"""Refresh the display and show the changes."""
-		#for _ in range(2):
-		schedule(self._write_cmd, _TM1652_REG_ADD)
-		for i in range(5):
-			schedule(self._write_cmd,self._buffer[i])
-		time.sleep_ms(3)
-		schedule(self._write_cmd,_TM1652_REG_CMD)
-		schedule(self._write_cmd,self._brightness)
-		time.sleep_ms(3)
+		for _ in range(2):
+			self._write_cmd(_TM1652_REG_ADD)
+			for i in range(5):
+				self._write_cmd(self._buffer[i])
+			time.sleep_ms(3)
+			self._write_cmd(_TM1652_REG_CMD)
+			self._write_cmd(self._brightness)
+			time.sleep_ms(3)

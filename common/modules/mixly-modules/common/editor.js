@@ -48,8 +48,7 @@ Editor.addDrag = () => {
         sizeChanged: () => {
             // 重新调整编辑器尺寸
             blockEditor.editor.hideChaff(false);
-            blockEditor.resize();
-            codeEditor.resize();
+            Blockly.fireUiEvent(window, 'resize');
         },
         onfull: (type) => {
             const { mainStatusBarTab } = Mixly;

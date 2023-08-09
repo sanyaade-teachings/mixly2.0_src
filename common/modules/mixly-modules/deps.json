@@ -268,7 +268,8 @@
             "Mixly.Electron.Loader",
             "Mixly.Electron.PythonShell",
             "Mixly.WebSocket.Socket",
-            "Mixly.Web.FooterLayerExample"
+            "Mixly.Web.FooterLayerExample",
+            "Mixly.Web.BU"
         ],
         "provide": [
             "Mixly.Interface"

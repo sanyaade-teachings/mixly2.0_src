@@ -12,7 +12,8 @@ const {
     Env,
     FooterLayerExample,
     MJSON,
-    Boards
+    Boards,
+    Web
 } = Mixly;
 
 const { BOARD } = Config;
@@ -25,7 +26,7 @@ class FooterLayerExampleExt extends FooterLayerExample {
     }
 
     getRoot() {
-        const { DIR_TREE } = ExampleExt;
+        const { DIR_TREE } = FooterLayerExampleExt;
         let exampleList = [];
         if ((DIR_TREE instanceof Object) && DIR_TREE[BOARD.boardType]) {
             exampleList = [{
@@ -38,7 +39,7 @@ class FooterLayerExampleExt extends FooterLayerExample {
     }
 
     getChildren(inPath) {
-        const { DIR_TREE } = ExampleExt;
+        const { DIR_TREE } = FooterLayerExampleExt;
         const pathList = inPath.split('/');
         let obj = DIR_TREE;
         for (let key of pathList) {
@@ -71,11 +72,6 @@ class FooterLayerExampleExt extends FooterLayerExample {
     }
 }
 
-Object.defineProperty(Mixly.Web, 'FooterLayerExample', {
-    value: FooterLayerExampleExt,
-    writable: true,
-    enumerable: true,
-    configurable: true,
-});
+Web.FooterLayerExample = FooterLayerExampleExt;
 
 });

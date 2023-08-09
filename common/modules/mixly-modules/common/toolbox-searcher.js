@@ -14,7 +14,7 @@ const {
     ToolboxSearcher
 } = Mixly;
 
-ToolboxSearcher.TEMPLATE = goog.get(path.join(Env.templatePath, './search-div.html'));
+ToolboxSearcher.TEMPLATE = goog.get(Env.templatePath + '/search-div.html');
 
 ToolboxSearcher.init = function (editor) {
     this.editor = editor;

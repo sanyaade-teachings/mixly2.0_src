@@ -20,6 +20,7 @@ goog.require('Mixly.Electron.Loader');
 goog.require('Mixly.Electron.PythonShell');
 goog.require('Mixly.WebSocket.Socket');
 goog.require('Mixly.Web.FooterLayerExample');
+goog.require('Mixly.Web.BU');
 goog.provide('Mixly.Interface');
 
 const {

@@ -157,7 +157,8 @@ class EditorMixed {
             sizeChanged: () => {
                 // 重新调整编辑器尺寸
                 blocklyWorkspace.hideChaff(false);
-                Blockly.fireUiEvent(window, 'resize');
+                blockEditor.resize();
+                codeEditor.resize();
             },
             onfull: (type) => {
                 switch(type) {

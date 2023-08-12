@@ -38,6 +38,12 @@ class EditorCode extends EditorAce {
             this.editor.setTheme('ace/theme/' + 
                 (USER.theme === 'dark' ? 'dracula' : 'crimson_editor'));
             break;
+        case 'lua':
+            session.setTabSize(4);
+            session.setMode('ace/mode/lua');
+            this.editor.setTheme('ace/theme/' + 
+                (USER.theme === 'dark' ? 'dracula' : 'xcode'));
+            break;
         case 'c/c++':
         default:
             session.setTabSize(2);

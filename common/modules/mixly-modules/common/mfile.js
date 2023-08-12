@@ -99,25 +99,13 @@ MFile.init = () => {
 MFile.init();
 
 MFile.getCode = (type) => {
-    let blocklyGenerator;
-    if (type) {
-        blocklyGenerator = (type === 'py' ? Blockly.Python : Blockly.Arduino);
-    } else {
-        blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
-    }
-
-    if (Editor.mainEditor.selected === 'CODE')
-        return Editor.codeEditor.getValue();
+    const { mainEditor } = Editor;
+    const { codeEditor, blockEditor } = mainEditor;
+    const { editor, generator } = blockEditor;
+    if (mainEditor.selected === 'CODE')
+        return codeEditor.getValue();
     else {
-        let code = blocklyGenerator.workspaceToCode(Editor.blockEditor) || '';
-        /*try {
-            code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
-                return decodeURIComponent(s.replace(/_/g, '%'));
-            });
-        } catch (error) {
-            console.log(error);
-        }*/
-        return code;
+        return generator.workspaceToCode(editor) || '';
     }
 }
 

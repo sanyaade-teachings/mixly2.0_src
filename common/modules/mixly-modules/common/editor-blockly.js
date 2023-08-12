@@ -65,14 +65,17 @@ class EditorBlockly {
         }
 
         this.addPlugins();
-
-        switch (BOARD.language) {
-        case 'Python':
-        case 'CircuitPython':
-        case 'MicroPython':
+        const language = BOARD.language.toLowerCase();
+        switch (language) {
+        case 'python':
+        case 'circuitpython':
+        case 'micropython':
             this.generator = Blockly.Python;
             break;
-        case 'C/C++':
+        case 'lua':
+            this.generator = Blockly.Lua;
+            break;
+        case 'c/c++':
             this.generator = Blockly.Arduino;
             break;
         default:

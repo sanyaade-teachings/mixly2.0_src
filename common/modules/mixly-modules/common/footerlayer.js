@@ -37,8 +37,8 @@ class FooterLayer {
         this.btnsClickEvent = {};
         this.domId = domId;
         this.layer = null;
-        this.createLayer();
-        this.addSharedMethod();
+        this.create();
+        this.addSharedMethod_();
         this.setContent(XML.render(FooterLayer.TEMPLATE, {
             content: '',
             btns: this.btns,
@@ -46,16 +46,23 @@ class FooterLayer {
         }));
         this.$content = $(this.layer.popper).find('.tippy-content');
         this.$body = this.$content.find('.footer-layer-body');
-        this.addContainerOnclickEvent();
-        this.createBtnsClickEvent();
-        this.addBtnsClickEvent();
+        this.addContainerClickEvent_();
+        this.addBtnsClickEvent_();
     }
 
-    createLayer() {
+    create() {
         this.layer = tippy(`#${this.domId}`, this.config)[0];
     }
 
-    createBtnsClickEvent() {
+    updateContent(content) {
+        if (this.$body.length) {
+            this.$body.html(content);
+            return;
+        }
+        this.setContent(content);
+    }
+
+    addBtnsClickEvent_() {
         for (let i of this.btns) {
             if (!(i instanceof Object)) {
                 continue;
@@ -67,9 +74,6 @@ class FooterLayer {
             delete i.onclick;
         }
         this.btnsClickEvent['close'] = this.hide;
-    }
-
-    addBtnsClickEvent() {
         for (let key in this.btnsClickEvent) {
             $(this.layer.popper).find('.layui-layer-title').children(`.${key}`)
             .off().click(() => {
@@ -78,22 +82,7 @@ class FooterLayer {
         }
     }
 
-    updateContent(content) {
-        if (this.$body.length) {
-            this.$body.html(content);
-            return;
-        }
-        this.setContent(content);
-    }
-
-    addBtnOnclickEvent() {
-        $(instance.popper).find('.layui-layer-title').children('.close')
-        .off().click(() => {
-            instance.hide();
-        });
-    }
-
-    addSharedMethod() {
+    addSharedMethod_() {
         let sharedMethod = ['hide', 'show', 'destroy', 'setProps', 'setContent'];
         for (let type of sharedMethod) {
             this[type] = this.layer[type];
@@ -104,7 +93,7 @@ class FooterLayer {
      * @method 为绑定的元素添加鼠标单击事件
      * @return {void}
      **/
-    addContainerOnclickEvent() {
+    addContainerClickEvent_() {
         $(`#${this.domId}`).off().click(() => {
             if (this.layer.state.isShown) {
                 this.hide();

@@ -374,15 +374,6 @@ function resetClick() {
 
 'use strict';
 
-/** Create a namespace for the application. */
-
-goog.require('Blockly.Generator');
-try {
-    goog.require('Blockly.Python');
-} catch (e) {
-    goog.require('Blockly.Arduino');
-}
-
 var mixlyjs = mixlyjs || {};
 mixlyjs.hex = "";
 

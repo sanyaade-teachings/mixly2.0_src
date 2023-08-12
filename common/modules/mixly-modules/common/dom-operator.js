@@ -72,7 +72,7 @@ class SerialDomGenerator {
         return laytpl(this.htmlTemplate).render({
             ...this.id,
             ...this.filter,
-            baudRates: [ 9600, 19200, 28800, 38400, 57600, 115200 ],
+            baudRates: [ 9600, 19200, 28800, 38400, 57600, 115200, 230400, 256000, 460800, 512000, 921600, 1000000 ],
             selectedBaud: this.config.baudRates,
             pointList: [ 50, 100, 150, 200, 250, 300 ],
             pointNum: this.config.pointNum,

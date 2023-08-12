@@ -61,7 +61,7 @@ Serial.TOOL_DEFAULT_CONFIG = {
     ...BOARD?.serial ?? {}
 };
 
-Serial.DEFAULT_BAUD = [9600, 19200, 28800, 38400, 57600, 115200];
+Serial.DEFAULT_BAUD = [9600, 19200, 28800, 38400, 57600, 115200, 230400, 256000, 460800, 512000, 921600, 1000000];
 
 Serial.DEFAULT_SEND_WITH = ['\\r\\n', '\\r', '\\n', 'no'];
 
@@ -96,12 +96,7 @@ Serial.MAX_OUTPUT_LINE = 500;
 Serial.REFRESH_OUTPUT_TIME = 100;
 
 Serial.BAUDRATES = [
-    9600,
-    19200,
-    28800,
-    38400,
-    57600,
-    115200
+    9600, 19200, 28800, 38400, 57600, 115200, 230400, 256000, 460800, 512000, 921600, 1000000
 ];
 
 Serial.TERMINAL_COMMAND = {
@@ -1720,7 +1715,7 @@ Serial.setDtrAndRts = function(port, dtr, rts) {
     return new Promise((resolve, reject) => {
         const portObj = Serial.portsOperator[port];
         const nowSerialport = portObj.serialport;
-        console.log('dtr:' + dtr, 'rts:' + rts);
+        // console.log('dtr:' + dtr, 'rts:' + rts);
         nowSerialport.set({
             brk: false,
             cts: false,

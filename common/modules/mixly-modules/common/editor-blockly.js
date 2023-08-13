@@ -81,6 +81,8 @@ class EditorBlockly {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
+
+        this.resize();
     }
 
     py2BlockEditorInit(codeEditor) {

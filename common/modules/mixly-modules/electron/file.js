@@ -103,16 +103,16 @@ File.save = (endFunc = () => {}) => {
         const extname = path.extname(File.openedFilePath);
         let data = '';
         switch (extname) {
-            case '.mix':
-                data = MFile.getMix();
-                break;
-            case '.py':
-            case '.ino':
-                data = MFile.getCode();
-                break;
-            default:
-                layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
-                return;
+        case '.mix':
+            data = MFile.getMix();
+            break;
+        case '.py':
+        case '.ino':
+            data = MFile.getCode();
+            break;
+        default:
+            layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+            return;
         }
         fs_extra.outputFile(File.openedFilePath, data)
         .then(() => {
@@ -141,32 +141,15 @@ File.saveAs = (endFunc = () => {}) => {
             File.save(endFunc);
         } else {
             switch (extname) {
-                case '.bin':
-                case '.hex':
-                    if (BOARD?.nav?.compile) {
-                        ArduShell.saveBinOrHex(filePath);
-                    } else {
-                        const hexStr = MFile.getHex();
-                        fs_extra.outputFile(filePath, hexStr)
-                        .then(() => {
-                            layer.msg(Msg.Lang['保存成功'], { time: 1000 });
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                            layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
-                        })
-                        .finally(() => {
-                            endFunc();
-                        });
-                    }
-                    break;
-                case '.mil':
-                    const milStr = MFile.getMil();
-                    const $mil = $(milStr);
-                    $mil.attr('name', path.basename(filePath, '.mil'));
-                    fs_extra.outputFile(filePath, $mil[0].outerHTML)
+            case '.bin':
+            case '.hex':
+                if (BOARD?.nav?.compile) {
+                    ArduShell.saveBinOrHex(filePath);
+                } else {
+                    const hexStr = MFile.getHex();
+                    fs_extra.outputFile(filePath, hexStr)
                     .then(() => {
-                        layer.msg('库导出成功', { time: 1000 });
+                        layer.msg(Msg.Lang['保存成功'], { time: 1000 });
                     })
                     .catch((error) => {
                         console.log(error);
@@ -175,10 +158,27 @@ File.saveAs = (endFunc = () => {}) => {
                     .finally(() => {
                         endFunc();
                     });
-                    break;
-                default:
-                    layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+                }
+                break;
+            case '.mil':
+                const milStr = MFile.getMil();
+                const $mil = $(milStr);
+                $mil.attr('name', path.basename(filePath, '.mil'));
+                fs_extra.outputFile(filePath, $mil[0].outerHTML)
+                .then(() => {
+                    layer.msg('库导出成功', { time: 1000 });
+                })
+                .catch((error) => {
+                    console.log(error);
+                    layer.msg(Msg.Lang['写文件出错'], { time: 1000 });
+                })
+                .finally(() => {
                     endFunc();
+                });
+                break;
+            default:
+                layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+                endFunc();
             }
         }
     });
@@ -204,12 +204,13 @@ File.exportLib = (endFunc = () => {}) => {
 }
 
 File.newFile = () => {
-    const blocksList = Editor.blockEditor.getAllBlocks();
-    const { blockEditor, codeEditor, selected } = Editor;
-    const blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
+    const { blockEditor, codeEditor, mainEditor } = Editor;
+    const { selected } = mainEditor;
+    const { generator } = mainEditor.blockEditor;
+    const blocksList = blockEditor.getAllBlocks();
     if (selected === 'CODE') {
         const code = codeEditor.getValue(),
-        workspaceToCode = blocklyGenerator.workspaceToCode(blockEditor) || '';
+        workspaceToCode = generator.workspaceToCode(blockEditor) || '';
         if (!blocksList.length && workspaceToCode === code) {
             layer.msg(Msg.Lang['代码区已清空'], { time: 1000 });
             File.openedFilePath = null;
@@ -241,7 +242,7 @@ File.newFile = () => {
         blockEditor.clear();
         blockEditor.scrollCenter();
         Blockly.hideChaff();
-        codeEditor.setValue(blocklyGenerator.workspaceToCode(blockEditor) || '', -1);
+        codeEditor.setValue(generator.workspaceToCode(blockEditor) || '', -1);
         File.openedFilePath = null;
         Title.updateTitle(Title.title);
     });
@@ -269,55 +270,55 @@ File.openFile = (filePath) => {
         return;
     }
     switch (extname) {
-        case '.mix':
-        case '.xml':
-            try {
-                data = XML.convert(data, true);
-                data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
-                    return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
-                });
-            } catch (error) {
-                console.log(error);
-            }
-            MFile.parseMix($(data), false, false, (message) => {
-                if (message) {
-                    switch (message) {
-                        case 'USE_CODE':
-                            // console.log('已从code标签中读取代码');
-                            break;
-                        case 'USE_INCOMPLETE_BLOCKS':
-                            // console.log('一些块已被忽略');
-                            break;
-                    }
-                    Editor.blockEditor.scrollCenter();
-                    Blockly.hideChaff();
-                    File.openedFilePath = null;
-                    Title.updateTitle(Title.title);
-                } else {
-                    File.openedFilePath = filePath;
-                    File.workingPath = path.dirname(filePath);
-                    Title.updeteFilePath(File.openedFilePath);
-                }
+    case '.mix':
+    case '.xml':
+        try {
+            data = XML.convert(data, true);
+            data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
+                return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
             });
-            break;
-        case '.ino':
-        case '.py':
-            Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
-            Editor.codeEditor.setValue(data, -1);
-            File.openedFilePath = filePath;
-            File.workingPath = path.dirname(filePath);
-            Title.updeteFilePath(File.openedFilePath);
-            break;
-        case '.bin':
-        case '.hex':
-            if (BOARD?.nav?.compile) {
-                ArduShell.showUploadBox(filePath);
+        } catch (error) {
+            console.log(error);
+        }
+        MFile.parseMix($(data), false, false, (message) => {
+            if (message) {
+                switch (message) {
+                    case 'USE_CODE':
+                        // console.log('已从code标签中读取代码');
+                        break;
+                    case 'USE_INCOMPLETE_BLOCKS':
+                        // console.log('一些块已被忽略');
+                        break;
+                }
+                Editor.blockEditor.scrollCenter();
+                Blockly.hideChaff();
+                File.openedFilePath = null;
+                Title.updateTitle(Title.title);
             } else {
-                MFile.loadHex(data);
+                File.openedFilePath = filePath;
+                File.workingPath = path.dirname(filePath);
+                Title.updeteFilePath(File.openedFilePath);
             }
-            break;
-        default:
-            layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+        });
+        break;
+    case '.ino':
+    case '.py':
+        Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+        Editor.codeEditor.setValue(data, -1);
+        File.openedFilePath = filePath;
+        File.workingPath = path.dirname(filePath);
+        Title.updeteFilePath(File.openedFilePath);
+        break;
+    case '.bin':
+    case '.hex':
+        if (BOARD?.nav?.compile) {
+            ArduShell.showUploadBox(filePath);
+        } else {
+            MFile.loadHex(data);
+        }
+        break;
+    default:
+        layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
     }
 }
 

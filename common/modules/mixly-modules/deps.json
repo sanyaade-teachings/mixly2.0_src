@@ -273,7 +273,8 @@
             "Mixly.WebSocket.ArduShell",
             "Mixly.WebSocket.File",
             "Mixly.Web.FooterLayerExample",
-            "Mixly.Web.BU"
+            "Mixly.Web.BU",
+            "Mixly.Web.File"
         ],
         "provide": [
             "Mixly.Interface"

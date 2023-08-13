@@ -25,6 +25,7 @@ goog.require('Mixly.WebSocket.ArduShell');
 goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.Web.FooterLayerExample');
 goog.require('Mixly.Web.BU');
+goog.require('Mixly.Web.File');
 goog.provide('Mixly.Interface');
 
 const {

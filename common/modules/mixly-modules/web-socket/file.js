@@ -51,16 +51,16 @@ File.saveToCloud = () => {
             }
             let data;
             switch (extname) {
-                case '.mix':
-                    data = MFile.getMix();
-                    break;
-                case '.ino':
-                case '.py':
-                    data = MFile.getCode();
-                default:
-                    layer.msg(Msg.Lang['文件后缀错误'], {
-                        time: 1000
-                    });
+            case '.mix':
+                data = MFile.getMix();
+                break;
+            case '.ino':
+            case '.py':
+                data = MFile.getCode();
+            default:
+                layer.msg(Msg.Lang['文件后缀错误'], {
+                    time: 1000
+                });
             }
             if (!data) {
                 return;
@@ -145,27 +145,27 @@ File.showOpenDialog = (filesObj) => {
 
 File.open = (extname, data) => {
     switch (extname) {
-        case '.mix':
-        case '.xml':
-            Editor.items.vDrag.full('POSITIVE');
-            try {
-                data = XML.convert(data, true);
-                data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
-                    return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
-                });
-            } catch (error) {
-                console.log(error);
-            }
-            MFile.parseMix($(data), false, false, (message) => {
-                Editor.blockEditor.scrollCenter();
-                Blockly.hideChaff();
+    case '.mix':
+    case '.xml':
+        Editor.items.vDrag.full('POSITIVE');
+        try {
+            data = XML.convert(data, true);
+            data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
+                return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
             });
-            break;
-        case '.ino':
-        case '.py':
-            Editor.items.vDrag.full('NEGATIVE');
-            Editor.codeEditor.setValue(data, -1);
-            break;
+        } catch (error) {
+            console.log(error);
+        }
+        MFile.parseMix($(data), false, false, (message) => {
+            Editor.blockEditor.scrollCenter();
+            Blockly.hideChaff();
+        });
+        break;
+    case '.ino':
+    case '.py':
+        Editor.items.vDrag.full('NEGATIVE');
+        Editor.codeEditor.setValue(data, -1);
+        break;
     }
 }
 

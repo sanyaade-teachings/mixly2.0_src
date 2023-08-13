@@ -70,42 +70,42 @@ File.open = async () => {
 
 File.parseData = (ext, text) => {
     switch (ext) {
-        case '.mix':
-        case '.xml':
-            try {
-                text = text.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
-                    return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
-                });
-            } catch (error) {
-                console.log(error);
-            }
-            MFile.parseMix($(text), false, false, (message) => {
-                if (message) {
-                    switch (message) {
-                        case 'USE_CODE':
-                            // console.log('已从code标签中读取代码');
-                            break;
-                        case 'USE_INCOMPLETE_BLOCKS':
-                            // console.log('一些块已被忽略');
-                            break;
-                    }
-                    Editor.blockEditor.scrollCenter();
-                    Blockly.hideChaff();
-                }
+    case '.mix':
+    case '.xml':
+        try {
+            text = text.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
+                return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
             });
-            break;
-        case '.ino':
-        case '.py':
-            Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
-            Editor.codeEditor.setValue(text, -1);
-            break;
-        case '.bin':
-        case '.hex':
-            MFile.loadHex(text);
-            break;
-        default:
-            layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
-            File.obj = null;
+        } catch (error) {
+            console.log(error);
+        }
+        MFile.parseMix($(text), false, false, (message) => {
+            if (message) {
+                switch (message) {
+                    case 'USE_CODE':
+                        // console.log('已从code标签中读取代码');
+                        break;
+                    case 'USE_INCOMPLETE_BLOCKS':
+                        // console.log('一些块已被忽略');
+                        break;
+                }
+                Editor.blockEditor.scrollCenter();
+                Blockly.hideChaff();
+            }
+        });
+        break;
+    case '.ino':
+    case '.py':
+        Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+        Editor.codeEditor.setValue(text, -1);
+        break;
+    case '.bin':
+    case '.hex':
+        MFile.loadHex(text);
+        break;
+    default:
+        layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
+        File.obj = null;
     }
 }
 
@@ -117,22 +117,22 @@ File.save = async () => {
     let text = '';
     const ext = File.obj.name.substring(File.obj.name.lastIndexOf('.'));
     switch (ext) {
-        case '.mix':
-        case '.xml':
-            text = MFile.getMix();
-            break;
-        case '.ino':
-        case '.py':
-            text = MFile.getCode();
-            break;
-        default:
-            return;
+    case '.mix':
+    case '.xml':
+        text = MFile.getMix();
+        break;
+    case '.ino':
+    case '.py':
+        text = MFile.getCode();
+        break;
+    default:
+        return;
     }
     try {
         const writer = await File.obj.createWritable();
         await writer.write(text);
-        layer.msg('写入新数据到' + File.obj.name, { time: 1000 });
         await writer.close();
+        layer.msg('写入新数据到' + File.obj.name, { time: 1000 });
     } catch (error) {
         console.log(error);
     }
@@ -164,6 +164,25 @@ File.saveAs = async () => {
 }
 
 File.new = async () => {
+    const { blockEditor, codeEditor, mainEditor } = Editor;
+    const { selected } = mainEditor;
+    const { generator } = mainEditor.blockEditor;
+    const blocksList = blockEditor.getAllBlocks();
+    if (selected === 'CODE') {
+        const code = codeEditor.getValue(),
+        workspaceToCode = generator.workspaceToCode(blockEditor) || '';
+        if (!blocksList.length && workspaceToCode === code) {
+            layer.msg(Msg.Lang['代码区已清空'], { time: 1000 });
+            File.obj = null;
+            return;
+        }
+    } else {
+        if (!blocksList.length) {
+            layer.msg(Msg.Lang['工作区已清空'], { time: 1000 });
+            File.obj = null;
+            return;
+        }
+    }
     layer.confirm(MSG['confirm_newfile'], {
         title: false,
         shade: LayerExt.SHADE_ALL,
@@ -173,12 +192,15 @@ File.new = async () => {
             layero[0].childNodes[1].childNodes[0].classList.add('layui-layer-close1');
         },
         btn: [MSG['newfile_yes'], MSG['newfile_no']],
-        btn2: function (index, layero) {
+        btn2: (index, layero) => {
             layer.close(index);
         }
-    }, async function (index, layero) {
-        mixlyjs.createFn();
+    }, (index, layero) => {
         layer.close(index);
+        blockEditor.clear();
+        blockEditor.scrollCenter();
+        Blockly.hideChaff();
+        codeEditor.setValue(generator.workspaceToCode(blockEditor) || '', -1);
         File.obj = null;
     });
 }

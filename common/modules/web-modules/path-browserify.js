@@ -33,6 +33,18 @@ function assertPath(path) {
 
 // Resolves . and .. elements in a path with directory names
 function normalizeStringPosix(path, allowAboveRoot) {
+  var ignore = '';
+  var ignoreList = [ 'http://', 'https://' ];
+  if (path.length) {
+    for (var value of ignoreList) {
+      if (path.indexOf(value) !== 0) {
+        continue;
+      }
+      ignore = value;
+      path = path.substring(value.length);
+      break;
+    }
+  }
   var res = '';
   var lastSegmentLength = 0;
   var lastSlash = -1;
@@ -94,7 +106,7 @@ function normalizeStringPosix(path, allowAboveRoot) {
       dots = -1;
     }
   }
-  return res;
+  return ignore + res;
 }
 
 function _format(sep, pathObject) {

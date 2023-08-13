@@ -30,7 +30,7 @@ File.saveToCloud = () => {
         layer.closeAll();
     }, () => {
         layer.prompt({
-            title: MSG['save_ser'],
+            title: Blockly.Msg.MSG['save_ser'],
             shade: LayerExt.SHADE_ALL,
             value: 'main.mix',
             success: function(layero, index) {

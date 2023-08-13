@@ -311,6 +311,18 @@ Nav.RIGHT_BTN_CONFIG = [
                     }
                 }
             }, {
+                //【保存到云端】按钮
+                type: 'SAVE_TO_CLOUD',
+                class: 'icon-upload-cloud-1',
+                id: 'save-to-cloud-btn',
+                title: '',
+                href: '#',
+                onclick: {
+                    websocket: {
+                        web: 'Mixly.WebSocket.File.saveToCloud()'
+                    }
+                }
+            }, {
                 //【保存】按钮
                 type: 'SAVE_FILE',
                 class: 'icon-floppy',
@@ -347,18 +359,6 @@ Nav.RIGHT_BTN_CONFIG = [
                         web: 'Mixly.Web.File.saveAs()'
                     },
                     web: 'Mixly.Web.File.saveAs()'
-                }
-            }, {
-                //【保存到云端】按钮
-                type: 'SAVE_TO_CLOUD',
-                class: 'icon-upload-cloud-1',
-                id: 'save-to-cloud-btn',
-                title: '',
-                href: '#',
-                onclick: {
-                    websocket: {
-                        web: 'Mixly.WebSocket.File.saveToCloud()'
-                    }
                 }
             }, {
                 //【保存xml】按钮

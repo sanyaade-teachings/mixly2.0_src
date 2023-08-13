@@ -2,6 +2,7 @@
     "name": "Mixly",
     "description": "Mixly",
     "scripts": {
+        "start": "npm run test",
         "static": "node ./static-server/server.js",
         "build": "gulp script",
         "test": "npm run deps && npm run static",

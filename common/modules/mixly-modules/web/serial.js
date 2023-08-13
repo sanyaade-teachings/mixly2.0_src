@@ -1098,6 +1098,7 @@ Serial.onConnect = (port) => {
     portObj.portOpened = true;
     mainStatusBarTab.add('serial', port);
     let statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    statusBarSerial.open();
     Serial.statusBarPortAddHotKey(port);
     statusBarSerial.onRemove = function() {
         const newPortObj = Serial.portsOperator[this.id];

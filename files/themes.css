@@ -87,11 +87,6 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
     margin: 0px;
 }
 
-.dark .layui-form-pane .layui-form-label {
-    background-color: #5f5d5d;
-    color: #fff;
-}
-
 .layui-table-header {
     border-right-width: 10px !important;
 }
@@ -192,10 +187,6 @@ body[class="dark"] {
 
 .dark .layui-progress-text {
     color: #fff;
-}
-
-.dark .layui-layer-page {
-    background-color: #7d7979;
 }
 
 .layui-table-fixed-r > .layui-table-header {

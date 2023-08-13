@@ -1,23 +1,20 @@
 :root[data-bs-theme=dark] {
-   /* =====色板===== */
+  /* =====色板===== */
   /*常量,不随明暗主题变化*/
   --color-white: #FFFFFF;
   --color-black: #000000;
-
   --lay-color-white: #FAFAFA;
   --lay-color-black: #333333;
-
-  --lay-color-red-1: #FFF1E8; 
-  --lay-color-red-2: #FFD7C0; 
-  --lay-color-red-3: #FFBB99; 
-  --lay-color-red-4: #FF9C71; 
-  --lay-color-red-5: #FF7A4A; 
-  --lay-color-red-6: #FF5722; 
-  --lay-color-red-7: #D23B15; 
-  --lay-color-red-8: #A6250B; 
-  --lay-color-red-9: #791404; 
+  --lay-color-red-1: #FFF1E8;
+  --lay-color-red-2: #FFD7C0;
+  --lay-color-red-3: #FFBB99;
+  --lay-color-red-4: #FF9C71;
+  --lay-color-red-5: #FF7A4A;
+  --lay-color-red-6: #FF5722;
+  --lay-color-red-7: #D23B15;
+  --lay-color-red-8: #A6250B;
+  --lay-color-red-9: #791404;
   --lay-color-red-10: #4D0800;
-
   --lay-color-blue-1: #E8F9FF;
   --lay-color-blue-2: #C0ECFF;
   --lay-color-blue-3: #97DCFF;
@@ -28,7 +25,6 @@
   --lay-color-blue-8: #0A58A6;
   --lay-color-blue-9: #043A79;
   --lay-color-blue-10: #00214D;
-
   --lay-color-lightblue-1: #E8FDFF;
   --lay-color-lightblue-2: #C1F4FB;
   --lay-color-lightblue-3: #9CEAF7;
@@ -39,29 +35,26 @@
   --lay-color-lightblue-8: #10709C;
   --lay-color-lightblue-9: #064E74;
   --lay-color-lightblue-10: #002F4D;
-
-  --lay-color-green-1: #E8FFF9;
-  --lay-color-green-2: #B5F1E3;
-  --lay-color-green-3: #87E3D1;
-  --lay-color-green-4: #5DD6C1;
-  --lay-color-green-5: #37C8B5;
-  --lay-color-green-6: #009688;
-  --lay-color-green-7: #0E9F95;
-  --lay-color-green-8: #08837F;
-  --lay-color-green-9: #036868;
-  --lay-color-green-10: #004A4D;
-
-  --lay-color-lightgreen-1: #E8FFF2;
-  --lay-color-lightgreen-2: #B5F1D1;
-  --lay-color-lightgreen-3: #86E2B4;
-  --lay-color-lightgreen-4: #5CD49C;
-  --lay-color-lightgreen-5: #37C588;
-  --lay-color-lightgreen-6: #16B777;
-  --lay-color-lightgreen-7: #0E9C68;
-  --lay-color-lightgreen-8: #088259;
-  --lay-color-lightgreen-9: #036749;
-  --lay-color-lightgreen-10: #004D38;
-
+  --lay-color-layuigreen-1: #E8FFF9;
+  --lay-color-layuigreen-2: #B5F1E3;
+  --lay-color-layuigreen-3: #87E3D1;
+  --lay-color-layuigreen-4: #5DD6C1;
+  --lay-color-layuigreen-5: #37C8B5;
+  --lay-color-layuigreen-6: #16BAAA;
+  --lay-color-layuigreen-7: #0E9F95;
+  --lay-color-layuigreen-8: #08837F;
+  --lay-color-layuigreen-9: #036868;
+  --lay-color-layuigreen-10: #004A4D;
+  --lay-color-green-1: #E8FFF2;
+  --lay-color-green-2: #B5F1D1;
+  --lay-color-green-3: #86E2B4;
+  --lay-color-green-4: #5CD49C;
+  --lay-color-green-5: #37C588;
+  --lay-color-green-6: #16B777;
+  --lay-color-green-7: #0E9C68;
+  --lay-color-green-8: #088259;
+  --lay-color-green-9: #036749;
+  --lay-color-green-10: #004D38;
   --lay-color-orange-1: #FFFCE8;
   --lay-color-orange-2: #FFF5BA;
   --lay-color-orange-3: #FFEA8B;
@@ -72,7 +65,6 @@
   --lay-color-orange-8: #A66C00;
   --lay-color-orange-9: #794B00;
   --lay-color-orange-10: #4D2D00;
-
   --lay-color-cyan-1: #E8F6FF;
   --lay-color-cyan-2: #B9CEDD;
   --lay-color-cyan-3: #8FA7BB;
@@ -83,7 +75,6 @@
   --lay-color-cyan-8: #162C51;
   --lay-color-cyan-9: #0B214F;
   --lay-color-cyan-10: #00174D;
-
   --lay-color-purple-1: #FDE8FF;
   --lay-color-purple-2: #EDBEF4;
   --lay-color-purple-3: #DC97E8;
@@ -94,7 +85,6 @@
   --lay-color-purple-8: #631289;
   --lay-color-purple-9: #48076B;
   --lay-color-purple-10: #2F004D;
-
   --lay-color-black-1: #E8F8FF;
   --lay-color-black-2: #BFD0D8;
   --lay-color-black-3: #98A8B1;
@@ -105,7 +95,6 @@
   --lay-color-black-8: #18293C;
   --lay-color-black-9: #0C213C;
   --lay-color-black-10: #00183C;
-
   --lay-color-gray-1: #FAFAFA;
   --lay-color-gray-2: #F6F6F6;
   --lay-color-gray-3: #EEEEEE;
@@ -116,85 +105,94 @@
   --lay-color-gray-8: #C2C2C2;
   --lay-color-gray-9: #AAAAAA;
   --lay-color-gray-10: #939393;
-
   --lay-color-gray-11: #858585;
   --lay-color-gray-12: #7b7b7b;
   --lay-color-gray-13: #686868;
-
   /* =====语义===== */
   /* 主色 */
-  --lay-color-primary: var(--lay-color-green-6); 
-  --lay-color-primary-hover: var(--lay-color-green-5);
-  --lay-color-primary-active: var(--lay-color-green-7);
-  --lay-color-primary-disabled: var(--lay-color-green-3);
-  --lay-color-primary-light: var(--lay-color-green-4);
-
+  --lay-color-primary: var(--lay-color-layuigreen-6);
+  --lay-color-primary-hover: var(--lay-color-layuigreen-5);
+  --lay-color-primary-active: var(--lay-color-layuigreen-7);
+  --lay-color-primary-disabled: var(--lay-color-layuigreen-3);
+  --lay-color-primary-light: var(--lay-color-layuigreen-4);
   /* 次色 */
-  --lay-color-secondary: var(--lay-color-lightgreen-6);
-  --lay-color-secondary-hover: var(--lay-color-lightgreen-5);
-  --lay-color-secondary-active: var(--lay-color-lightgreen-7);
-  --lay-color-secondary-disabled: var(--lay-color-lightgreen-3);
-  --lay-color-secondary-light: var(--lay-color-lightgreen-4);
-
+  --lay-color-secondary: var(--lay-color-green-6);
+  --lay-color-secondary-hover: var(--lay-color-green-5);
+  --lay-color-secondary-active: var(--lay-color-green-7);
+  --lay-color-secondary-disabled: var(--lay-color-green-3);
+  --lay-color-secondary-light: var(--lay-color-green-4);
   /* 引导 */
   --lay-color-info: var(--lay-color-lightblue-6);
   --lay-color-info-hover: var(--lay-color-lightblue-5);
   --lay-color-info-active: var(--lay-color-lightblue-7);
   --lay-color-info-disabled: var(--lay-color-lightblue-3);
   --lay-color-info-light: var(--lay-color-lightblue-4);
-
   /* 百搭 */
   --lay-color-normal: var(--lay-color-blue-6);
   --lay-color-normal-hover: var(--lay-color-blue-5);
   --lay-color-normal-active: var(--lay-color-blue-7);
   --lay-color-normal-disabled: var(--lay-color-blue-3);
   --lay-color-normal-light: var(--lay-color-blue-4);
-
   /* 警示 */
   --lay-color-warning: var(--lay-color-orange-6);
   --lay-color-warning-hover: var(--lay-color-orange-5);
   --lay-color-warning-active: var(--lay-color-orange-7);
   --lay-color-warning-disabled: var(--lay-color-orange-3);
   --lay-color-warning-light: var(--lay-color-orange-4);
-
   /* 成功 */
-  --lay-color-success: var(--lay-color-lightgreen-6);
-  --lay-color-success-hover: var(--lay-color-lightgreen-5);
-  --lay-color-success-active: var(--lay-color-lightgreen-7);
-  --lay-color-success-disabled: var(--lay-color-lightgreen-3);
-  --lay-color-success-light: var(--lay-color-lightgreen-4);
-
+  --lay-color-success: var(--lay-color-green-6);
+  --lay-color-success-hover: var(--lay-color-green-5);
+  --lay-color-success-active: var(--lay-color-green-7);
+  --lay-color-success-disabled: var(--lay-color-green-3);
+  --lay-color-success-light: var(--lay-color-green-4);
   /* 错误 */
   --lay-color-danger: var(--lay-color-red-6);
   --lay-color-danger-hover: var(--lay-color-red-5);
   --lay-color-danger-active: var(--lay-color-red-7);
   --lay-color-danger-disabled: var(--lay-color-red-3);
   --lay-color-danger-light: var(--lay-color-red-4);
-
-  --lay-color-bg-1: #17171A; /*整体背景*/
-  --lay-color-bg-2: #232324; /*一级容器背景,卡片,面板*/
-  --lay-color-bg-3: #2a2a2b; /*二级容器背景*/
-  --lay-color-bg-4: #313132; /*三级容器背景*/
-  --lay-color-bg-5: #373739; /*下拉弹出框、Tooltip 背景颜色*/
-  --lay-color-bg-white: #f6f6f6; /*白色背景*/
-
-  --lay-color-text-1: rgba(255,255,255,.9); /*强调/正文标题*/
-  --lay-color-text-2: rgba(255,255,255,.7); /*次强调/语句*/
-  --lay-color-text-3: rgba(255,255,255,.5); /*次要信息*/
-  --lay-color-text-4: rgba(255,255,255,.3);/*禁用状态文字 */
-
+  --lay-color-bg-1: #17171A;
+  /*整体背景*/
+  --lay-color-bg-2: #232324;
+  /*一级容器背景,卡片,面板*/
+  --lay-color-bg-3: #2a2a2b;
+  /*二级容器背景*/
+  --lay-color-bg-4: #313132;
+  /*三级容器背景*/
+  --lay-color-bg-5: #373739;
+  /*下拉弹出框、Tooltip 背景颜色*/
+  --lay-color-bg-white: #f6f6f6;
+  /*白色背景*/
+  --lay-color-text-1: rgba(255, 255, 255, 0.9);
+  /*强调/正文标题*/
+  --lay-color-text-2: rgba(255, 255, 255, 0.7);
+  /*次强调/语句*/
+  --lay-color-text-3: rgba(255, 255, 255, 0.5);
+  /*次要信息*/
+  --lay-color-text-4: rgba(255, 255, 255, 0.3);
+  /*禁用状态文字 */
   --lay-color-border-1: #2e2e30;
   --lay-color-border-2: #484849;
   --lay-color-border-3: #5f5f60;
   --lay-color-border-4: #929293;
-
-  --lay-color-fill-1: rgba(255,255,255,.04);/*浅/禁用*/
-  --lay-color-fill-2: rgba(255,255,255,.08);/*常规/白底悬浮*/
-  --lay-color-fill-3: rgba(255,255,255,.12); /*深/灰底悬浮*/
-  --lay-color-fill-4: rgba(255,255,255,.16);/*重/特殊场景*/
-
-  --lay-color-hover: var(--lay-color-fill-3); /*bg*/
-  --lay-color-active: var(--lay-color-fill-3); /*bg*/
+  --lay-color-fill-1: rgba(255, 255, 255, 0.04);
+  /*浅/禁用*/
+  --lay-color-fill-2: rgba(255, 255, 255, 0.08);
+  /*常规/白底悬浮*/
+  --lay-color-fill-3: rgba(255, 255, 255, 0.12);
+  /*深/灰底悬浮*/
+  --lay-color-fill-4: rgba(255, 255, 255, 0.16);
+  /*重/特殊场景*/
+  --lay-color-hover: var(--lay-color-fill-3);
+  /*bg*/
+  --lay-color-active: var(--lay-color-fill-3);
+  /*bg*/
+  --lay-shadow-1: 0 4px 6px rgba(0, 0, 0, 0.06), 0 1px 10px rgba(0, 0, 0, 8%), 0 2px 4px rgba(0, 0, 0, 12%);
+  /*基础/下层投影 卡片面板*/
+  --lay-shadow-2: 0 8px 10px rgba(0, 0, 0, 0.12), 0 3px 14px rgba(0, 0, 0, 10%), 0 5px 5px rgba(0, 0, 0, 16%);
+  /*中层投影 下拉菜单,选择器*/
+  --lay-shadow-3: 0 16px 24px rgba(0, 0, 0, 0.14), 0 6px 30px rgba(0, 0, 0, 12%), 0 8px 10px rgba(0, 0, 0, 20%);
+  /*上层投影 弹窗*/
 }
 html[data-bs-theme=dark] blockquote,
 html[data-bs-theme=dark] body,
@@ -270,7 +268,10 @@ html[data-bs-theme=dark] .layui-layout-admin .layui-logo {
 }
 html[data-bs-theme=dark] .layui-elem-quote {
   border-left: 5px solid var(--lay-color-secondary);
-  background-color: var(--lay-color-bg-2);
+  background-color: var(--lay-color-fill-1);
+}
+html[data-bs-theme=dark] .layui-quote-nm {
+  border-color: var(--lay-color-fill-1);
 }
 html[data-bs-theme=dark] .layui-progress {
   background-color: var(--lay-color-bg-3);
@@ -293,16 +294,19 @@ html[data-bs-theme=dark] .layui-colla-content {
 }
 html[data-bs-theme=dark] .layui-card {
   background-color: var(--lay-color-bg-2);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: var(--lay-shadow-1);
 }
 html[data-bs-theme=dark] .layui-card-header {
   border-bottom: 1px solid var(--lay-color-border-2);
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-panel {
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--lay-shadow-1);
   background-color: var(--lay-color-bg-2);
   color: var(--lay-color-text-1);
+}
+html[data-bs-theme=dark] .layui-menu-body-panel {
+  box-shadow: var(--lay-shadow-2);
 }
 html[data-bs-theme=dark] .layui-panel-window {
   border-top: 5px solid var(--lay-color-border-2);
@@ -317,7 +321,7 @@ html[data-bs-theme=dark] .layui-bg-orange {
   color: var(--lay-color-white) !important;
 }
 html[data-bs-theme=dark] .layui-bg-green {
-  background-color: var(--lay-color-green-6) !important;
+  background-color: var(--lay-color-layuigreen-6) !important;
   color: var(--lay-color-white) !important;
 }
 html[data-bs-theme=dark] .layui-bg-cyan {
@@ -351,7 +355,6 @@ html[data-bs-theme=dark] .layui-form-pane .layui-form-label,
 html[data-bs-theme=dark] .layui-input,
 html[data-bs-theme=dark] .layui-input-split,
 html[data-bs-theme=dark] .layui-panel,
-html[data-bs-theme=dark] .layui-quote-nm,
 html[data-bs-theme=dark] .layui-select,
 html[data-bs-theme=dark] .layui-tab-bar,
 html[data-bs-theme=dark] .layui-tab-card,
@@ -372,8 +375,8 @@ html[data-bs-theme=dark] .layui-border-orange {
   color: var(--lay-color-orange-6) !important;
 }
 html[data-bs-theme=dark] .layui-border-green {
-  border-color: var(--lay-color-green-6) !important;
-  color: var(--lay-color-green-6) !important;
+  border-color: var(--lay-color-layuigreen-6) !important;
+  color: var(--lay-color-layuigreen-6) !important;
 }
 html[data-bs-theme=dark] .layui-border-cyan {
   border-color: var(--lay-color-cyan-6) !important;
@@ -422,7 +425,7 @@ html[data-bs-theme=dark] .layui-font-orange {
   color: var(--lay-color-orange-6) !important;
 }
 html[data-bs-theme=dark] .layui-font-green {
-  color: var(--lay-color-green-6) !important;
+  color: var(--lay-color-layuigreen-6) !important;
 }
 html[data-bs-theme=dark] .layui-font-cyan {
   color: var(--lay-color-cyan-6) !important;
@@ -491,13 +494,6 @@ html[data-bs-theme=dark] .layui-textarea {
   background-color: var(--lay-color-fill-2);
   color: var(--lay-color-text-2);
 }
-html[data-bs-theme=dark] .layui-input[disabled],
-html[data-bs-theme=dark] .layui-select[disabled],
-html[data-bs-theme=dark] .layui-textarea[disabled] {
-  background-color: var(--lay-color-fill-1);
-  color: var(--lay-color-text-4);
-  border-color: var(--lay-color-border-1) !important;
-}
 html[data-bs-theme=dark] .layui-input:hover,
 html[data-bs-theme=dark] .layui-textarea:hover {
   border-color: var(--lay-color-border-2) !important;
@@ -507,16 +503,13 @@ html[data-bs-theme=dark] .layui-textarea:focus {
   border-color: var(--lay-color-secondary-hover) !important;
   box-shadow: 0 0 0 3px rgba(22, 183, 119, 0.08);
 }
-html[data-bs-theme=dark] .layui-input:hover[disabled],
-html[data-bs-theme=dark] .layui-textarea:hover[disabled] {
-  border-color: var(--lay-color-border-1) !important;
-}
-html[data-bs-theme=dark] .layui-input:focus[disabled],
-html[data-bs-theme=dark] .layui-textarea:focus[disabled] {
-  border-color: var(--lay-color-border-1) !important;
-}
-html[data-bs-theme=dark] .layui-input:focus.layui-disabled,
-html[data-bs-theme=dark] .layui-textarea:focus.layui-disabled {
+html[data-bs-theme=dark] .layui-input[disabled],
+html[data-bs-theme=dark] .layui-select[disabled],
+html[data-bs-theme=dark] .layui-textarea[disabled],
+html[data-bs-theme=dark] .layui-input.layui-disabled,
+html[data-bs-theme=dark] .layui-textarea.layui-disabled {
+  background-color: var(--lay-color-fill-1);
+  color: var(--lay-color-text-4);
   border-color: var(--lay-color-border-1) !important;
   box-shadow: 0 0 0 0;
 }
@@ -530,6 +523,12 @@ html[data-bs-theme=dark] .layui-input-split .layui-icon,
 html[data-bs-theme=dark] .layui-input-suffix .layui-icon {
   color: var(--lay-color-gray-8);
 }
+html[data-bs-theme=dark] .layui-input-wrap .layui-input:hover + .layui-input-split {
+  border-color: var(--lay-color-border-2);
+}
+html[data-bs-theme=dark] .layui-input-wrap .layui-input[disabled]:hover + .layui-input-split {
+  border-color: var(--lay-color-border-1);
+}
 html[data-bs-theme=dark] .layui-input-wrap .layui-input:focus + .layui-input-split {
   border-color: var(--lay-color-secondary-hover);
 }
@@ -542,6 +541,9 @@ html[data-bs-theme=dark] .layui-input-affix .layui-icon-clear {
 html[data-bs-theme=dark] .layui-input-affix .layui-icon:hover {
   color: var(--lay-color-text-3);
 }
+html[data-bs-theme=dark] .layui-input-wrap .layui-input-number .layui-icon:first-child {
+  border-bottom-color: var(--lay-color-border-1);
+}
 html[data-bs-theme=dark] .layui-form-select {
   color: var(--lay-color-text-2);
 }
@@ -551,7 +553,7 @@ html[data-bs-theme=dark] .layui-form-select .layui-edge {
 html[data-bs-theme=dark] .layui-form-select dl {
   border: 1px solid var(--lay-color-border-2);
   background-color: var(--lay-color-bg-5);
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--lay-shadow-2);
 }
 html[data-bs-theme=dark] .layui-form-select dl dt {
   color: var(--lay-color-gray-8);
@@ -650,13 +652,14 @@ html[data-bs-theme=dark] .layui-form-checked.layui-checkbox-disabled[lay-skin=pr
 html[data-bs-theme=dark] .layui-checkbox-disabled[lay-skin=primary]:hover > i {
   border-color: var(--lay-color-border-1);
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] > .layui-icon-subtraction:before {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] > .layui-icon-indeterminate:before {
+  background-color: var(--lay-color-secondary-hover);
   opacity: 1;
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"]:hover > .layui-icon-subtraction:before {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"]:hover > .layui-icon-indeterminate:before {
   opacity: 1;
 }
-html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] > .layui-icon-subtraction {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin="primary"] > .layui-icon-indeterminate {
   border-color: var(--lay-color-secondary-hover);
 }
 html[data-bs-theme=dark] .layui-form-switch {
@@ -667,7 +670,7 @@ html[data-bs-theme=dark] .layui-form-switch > i {
   background-color: var(--lay-color-gray-4);
 }
 html[data-bs-theme=dark] .layui-form-switch.layui-checkbox-disabled > i {
-  background-color: var(--lay-color-gray-4);
+  background-color: var(--lay-color-gray-7);
 }
 html[data-bs-theme=dark] .layui-form-switch > div {
   color: var(--lay-color-gray-8) !important;
@@ -697,6 +700,7 @@ html[data-bs-theme=dark] .layui-checkbox-disabled:hover > i {
 }
 html[data-bs-theme=dark] .layui-form-switch.layui-checkbox-disabled > div {
   background-color: initial!important;
+  color: var(--lay-color-text-3) !important;
 }
 html[data-bs-theme=dark] .layui-form-checkbox > i:before {
   opacity: 0;
@@ -799,15 +803,15 @@ html[data-bs-theme=dark] .layui-table-mend {
 html[data-bs-theme=dark] .layui-table-click,
 html[data-bs-theme=dark] .layui-table-hover,
 html[data-bs-theme=dark] .layui-table[lay-even] tbody tr:nth-child(even) {
-  background-color: var(--lay-color-bg-2);
+  background-color: var(--lay-color-fill-3);
 }
 html[data-bs-theme=dark] .layui-table-checked {
-  background-color: var(--lay-color-gray-13);
+  background-color: var(--lay-color-fill-2);
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-table-checked.layui-table-hover,
 html[data-bs-theme=dark] .layui-table-checked.layui-table-click {
-  background-color: var(--lay-color-gray-12);
+  background-color: var(--lay-color-fill-3);
 }
 html[data-bs-theme=dark] .layui-table td,
 html[data-bs-theme=dark] .layui-table th,
@@ -851,7 +855,7 @@ html[data-bs-theme=dark] .layui-table-tool-panel {
   color: var(--lay-color-text-1);
   border: 1px solid var(--lay-color-border-2);
   background-color: var(--lay-color-bg-5);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--lay-shadow-2);
 }
 html[data-bs-theme=dark] .layui-table-tool-panel li:hover {
   background-color: var(--lay-color-active);
@@ -860,22 +864,22 @@ html[data-bs-theme=dark] .layui-table-col-set {
   background-color: var(--lay-color-white);
 }
 html[data-bs-theme=dark] .layui-table-sort .layui-table-sort-asc {
-  border-bottom-color: var(--lay-color-border-4);
+  border-bottom-color: var(--lay-color-gray-8);
 }
 html[data-bs-theme=dark] .layui-table-sort .layui-table-sort-asc:hover {
-  border-bottom-color: var(--lay-color-border-3);
+  border-bottom-color: var(--lay-color-gray-11);
 }
 html[data-bs-theme=dark] .layui-table-sort .layui-table-sort-desc {
-  border-top-color: var(--lay-color-border-4);
+  border-top-color: var(--lay-color-gray-8);
 }
 html[data-bs-theme=dark] .layui-table-sort .layui-table-sort-desc:hover {
-  border-top-color: var(--lay-color-border-3);
+  border-top-color: var(--lay-color-gray-11);
 }
 html[data-bs-theme=dark] .layui-table-sort[lay-sort=asc] .layui-table-sort-asc {
-  border-bottom-color: var(--lay-color-bg-5);
+  border-bottom-color: var(--lay-color-gray-13);
 }
 html[data-bs-theme=dark] .layui-table-sort[lay-sort=desc] .layui-table-sort-desc {
-  border-top-color: var(--lay-color-bg-5);
+  border-top-color: var(--lay-color-gray-13);
 }
 html[data-bs-theme=dark] .layui-table-cell .layui-table-link {
   color: var(--lay-color-lightblue-5);
@@ -890,7 +894,7 @@ html[data-bs-theme=dark] .layui-table-fixed-r {
   box-shadow: -1px 0 8px #000000;
 }
 html[data-bs-theme=dark] .layui-table-edit {
-  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--lay-shadow-1);
   background-color: var(--lay-color-bg-2);
 }
 html[data-bs-theme=dark] .layui-table-edit:focus {
@@ -907,18 +911,18 @@ html[data-bs-theme=dark] .layui-table-grid-down:hover {
   background-color: var(--lay-color-bg-5);
 }
 html[data-bs-theme=dark] body .layui-table-tips .layui-layer-content {
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--lay-shadow-3);
 }
 html[data-bs-theme=dark] .layui-table-tips-main {
   background-color: var(--lay-color-bg-5);
   color: var(--lay-color-text-3);
 }
 html[data-bs-theme=dark] .layui-table-tips-c {
-  background-color: var(--lay-color-gray-7);
+  background-color: var(--lay-color-gray-13);
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-table-tips-c:hover {
-  background-color: var(--lay-color-gray-8);
+  background-color: var(--lay-color-gray-10);
 }
 html[data-bs-theme=dark] .layui-upload-choose {
   color: var(--lay-color-gray-8);
@@ -988,6 +992,7 @@ html[data-bs-theme=dark] .layui-dropdown {
 html[data-bs-theme=dark] .layui-dropdown.layui-panel,
 html[data-bs-theme=dark] .layui-dropdown .layui-panel {
   background-color: var(--lay-color-bg-5);
+  box-shadow: var(--lay-shadow-2);
 }
 html[data-bs-theme=dark] .layui-dropdown.layui-panel .layui-menu {
   background-color: var(--lay-color-bg-5);
@@ -1008,7 +1013,7 @@ html[data-bs-theme=dark] .layui-nav .layui-this a {
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-nav-child {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--lay-shadow-2);
   border: 1px solid var(--lay-color-border-2);
   background-color: var(--lay-color-bg-5);
 }
@@ -1049,15 +1054,23 @@ html[data-bs-theme=dark] .layui-nav-tree .layui-nav-child a:hover {
 html[data-bs-theme=dark] .layui-nav-itemed > .layui-nav-child {
   background-color: rgba(0, 0, 0, 0.3) !important;
 }
+html[data-bs-theme=dark] .layui-nav.layui-bg-gray,
+html[data-bs-theme=dark] .layui-nav-tree.layui-bg-gray {
+  background-color: var(--lay-color-bg-2) !important;
+  color: var(--lay-color-text-1);
+}
+html[data-bs-theme=dark] .layui-nav-tree.layui-bg-gray .layui-nav-itemed > .layui-nav-child {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
 html[data-bs-theme=dark] .layui-nav-tree.layui-bg-gray a,
 html[data-bs-theme=dark] .layui-nav.layui-bg-gray .layui-nav-item a {
-  color: var(--lay-color-black-4);
+  color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-nav.layui-bg-gray .layui-nav-child {
-  background-color: var(--lay-color-gray-1);
+  background-color: var(--lay-color-bg-5);
 }
 html[data-bs-theme=dark] .layui-nav-tree.layui-bg-gray .layui-nav-itemed > a {
-  color: #333 !important;
+  color: var(--lay-color-text-1) !important;
 }
 html[data-bs-theme=dark] .layui-nav.layui-bg-gray .layui-this a {
   color: var(--lay-color-secondary);
@@ -1113,7 +1126,7 @@ html[data-bs-theme=dark] .layui-tab-brief > .layui-tab-title .layui-this:after {
   border-bottom: 2px solid var(--lay-color-secondary);
 }
 html[data-bs-theme=dark] .layui-tab-card {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: var(--lay-shadow-1);
 }
 html[data-bs-theme=dark] .layui-tab-card > .layui-tab-title {
   background-color: var(--lay-color-bg-2);
@@ -1192,7 +1205,7 @@ html[data-bs-theme=dark] body .layui-util-face .layui-layer-content {
 html[data-bs-theme=dark] .layui-util-face ul {
   border: 1px solid var(--lay-color-border-3);
   background-color: var(--lay-color-bg-5);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--lay-shadow-2);
 }
 html[data-bs-theme=dark] .layui-util-face ul li {
   border: 1px solid var(--lay-color-border-2);
@@ -1240,13 +1253,13 @@ html[data-bs-theme=dark] .layui-rate li i.layui-icon {
   color: var(--lay-color-orange-6);
 }
 html[data-bs-theme=dark] .layui-colorpicker {
-  border: 1px solid var(--lay-color-border-2);
+  border: 1px solid var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-colorpicker:hover {
   border-color: var(--lay-color-border-2);
 }
 html[data-bs-theme=dark] .layui-colorpicker-trigger-span {
-  border: 1px solid var(--lay-color-black);
+  border: 1px solid var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-colorpicker-trigger-i {
   color: var(--lay-color-white);
@@ -1257,7 +1270,7 @@ html[data-bs-theme=dark] .layui-colorpicker-trigger-i.layui-icon-close {
 html[data-bs-theme=dark] .layui-colorpicker-main {
   background: var(--lay-color-bg-2);
   border: 1px solid var(--lay-color-border-2);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--lay-shadow-2);
 }
 html[data-bs-theme=dark] .layui-colorpicker-basis-white {
   background: linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
@@ -1272,17 +1285,20 @@ html[data-bs-theme=dark] .layui-colorpicker-side {
   background: linear-gradient(linear-gradient(#F00, #FF0, #0F0, #0FF, #00F, #F0F, #F00));
 }
 html[data-bs-theme=dark] .layui-colorpicker-side-slider {
-  box-shadow: 0 0 1px #888;
+  box-shadow: var(--lay-shadow-1);
   background: var(--lay-color-white);
   border: 1px solid var(--lay-color-gray-2);
 }
 html[data-bs-theme=dark] .layui-colorpicker-alpha-slider {
-  box-shadow: 0 0 1px #888;
+  box-shadow: var(--lay-shadow-1);
   background: var(--lay-color-white);
   border: 1px solid var(--lay-color-gray-2);
 }
 html[data-bs-theme=dark] .layui-colorpicker-pre.layui-this {
-  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--lay-shadow-1);
+}
+html[data-bs-theme=dark] .layui-colorpicker-pre.selected {
+  box-shadow: var(--lay-shadow-1);
 }
 html[data-bs-theme=dark] .layui-colorpicker-main-input input.layui-input {
   color: var(--lay-color-text-2);
@@ -1299,21 +1315,22 @@ html[data-bs-theme=dark] .layui-slider-wrap-btn {
 html[data-bs-theme=dark] .layui-slider-tips {
   color: var(--lay-color-text-1);
   background: var(--lay-color-black);
+  box-shadow: var(--lay-shadow-3);
 }
 html[data-bs-theme=dark] .layui-slider-tips:after {
   border-color: var(--lay-color-black) transparent transparent transparent;
 }
 html[data-bs-theme=dark] .layui-slider-input {
-  border: 1px solid var(--lay-color-border-2);
+  border: 1px solid var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-slider-input-btn {
-  border-left: 1px solid var(--lay-color-border-2);
+  border-left: 1px solid var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-slider-input-btn i {
   color: var(--lay-color-gray-9);
 }
 html[data-bs-theme=dark] .layui-slider-input-btn i:first-child {
-  border-bottom: 1px solid var(--lay-color-border-2);
+  border-bottom: 1px solid var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-slider-input-btn i:hover {
   color: var(--lay-color-primary);
@@ -1427,9 +1444,15 @@ html[data-bs-theme=dark] .layui-laydate-range .laydate-main-list-1 .layui-laydat
 html[data-bs-theme=dark] .layui-laydate,
 html[data-bs-theme=dark] .layui-laydate-hint {
   border: 1px solid var(--lay-color-border-2);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--lay-shadow-3);
   background-color: var(--lay-color-bg-5);
   color: var(--lay-color-text-1);
+}
+html[data-bs-theme=dark] .layui-laydate {
+  box-shadow: var(--lay-shadow-2);
+}
+html[data-bs-theme=dark] .layui-laydate-hint {
+  border-color: var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-laydate-header {
   border-bottom: 1px solid var(--lay-color-border-2);
@@ -1454,7 +1477,7 @@ html[data-bs-theme=dark] .layui-laydate-linkage .layui-laydate-content td.laydat
   background-color: var(--lay-color-secondary-light);
 }
 html[data-bs-theme=dark] .layui-laydate-linkage .laydate-selected:hover > div {
-  background-color: var(--lay-color-lightgreen-4) !important;
+  background-color: var(--lay-color-green-4) !important;
 }
 html[data-bs-theme=dark] .layui-laydate-content td > div:hover,
 html[data-bs-theme=dark] .layui-laydate-list li:hover,
@@ -1462,12 +1485,19 @@ html[data-bs-theme=dark] .layui-laydate-shortcut > li:hover {
   background-color: var(--lay-color-fill-2);
   color: var(--lay-color-text-2);
 }
+html[data-bs-theme=dark] .layui-laydate-content td.laydate-disabled > div:hover {
+  background-color: var(--lay-color-bg-5);
+  color: var(--lay-color-text-4);
+}
 html[data-bs-theme=dark] .laydate-time-list li ol {
   border: 1px solid var(--lay-color-border-2);
 }
+html[data-bs-theme=dark] .laydate-time-list > li:hover {
+  background: 0 0;
+}
 html[data-bs-theme=dark] .layui-laydate-content .laydate-day-next,
 html[data-bs-theme=dark] .layui-laydate-content .laydate-day-prev {
-  color: var(--lay-color-text-4);
+  color: var(--lay-color-text-3);
 }
 html[data-bs-theme=dark] .layui-laydate-linkage .laydate-selected.laydate-day-next > div,
 html[data-bs-theme=dark] .layui-laydate-linkage .laydate-selected.laydate-day-prev > div {
@@ -1531,11 +1561,11 @@ html[data-bs-theme=dark] .layui-laydate.laydate-theme-circle .layui-laydate-cont
 }
 html[data-bs-theme=dark] .layui-layer {
   background-color: var(--lay-color-bg-3);
-  box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--lay-shadow-3);
 }
 html[data-bs-theme=dark] .layui-layer-border {
   border: 1px solid var(--lay-color-border-2);
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--lay-shadow-3);
 }
 html[data-bs-theme=dark] .layui-layer-move {
   background-color: var(--lay-color-bg-5);
@@ -1610,7 +1640,7 @@ html[data-bs-theme=dark] .layui-layer-rim {
   border: 6px solid var(--lay-color-border-2);
 }
 html[data-bs-theme=dark] .layui-layer-msg {
-  border: 1px solid var(--lay-color-border-2);
+  border: 1px solid var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-layer-hui {
   background-color: var(--lay-color-bg-3);
@@ -1631,7 +1661,7 @@ html[data-bs-theme=dark] .layui-layer-loading-2:after {
   border-left-color: var(--lay-color-normal);
 }
 html[data-bs-theme=dark] .layui-layer-tips .layui-layer-content {
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--lay-shadow-3);
   background-color: var(--lay-color-bg-5);
   color: var(--lay-color-text-1);
 }
@@ -1662,12 +1692,12 @@ html[data-bs-theme=dark] .layui-layer-lan .layui-layer-btn .layui-layer-btn1 {
   background: var(--lay-color-gray-7);
 }
 html[data-bs-theme=dark] .layui-layer-molv .layui-layer-title {
-  background: var(--lay-color-green-6);
+  background: var(--lay-color-layuigreen-6);
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-layer-molv .layui-layer-btn a {
-  background: var(--lay-color-green-6);
-  border-color: var(--lay-color-green-6);
+  background: var(--lay-color-layuigreen-6);
+  border-color: var(--lay-color-layuigreen-6);
 }
 html[data-bs-theme=dark] .layui-layer-molv .layui-layer-btn .layui-layer-btn1 {
   background: var(--lay-color-gray-7);
@@ -1677,7 +1707,7 @@ html[data-bs-theme=dark] .layui-layer-prompt .layui-layer-input {
   color: var(--lay-color-text-2);
 }
 html[data-bs-theme=dark] .layui-layer-tab {
-  box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--lay-shadow-3);
 }
 html[data-bs-theme=dark] .layui-layer-tab .layui-layer-title span.layui-this {
   border-left: 1px solid var(--lay-color-border-2);
@@ -1721,6 +1751,7 @@ html[data-bs-theme=dark] .layui-layer-prompt .layui-layer-input:focus {
 }
 html[data-bs-theme=dark] .layui-layer-loading {
   background: 0 0;
+  box-shadow: 0 0;
 }
 html[data-bs-theme=dark] .layui-btn-primary {
   border-color: transparent;
@@ -1757,10 +1788,8 @@ html[data-bs-theme=dark] .layui-form-select dl dd.layui-this {
 html[data-bs-theme=dark] .layui-laypage button {
   color: var(--lay-color-text-1);
 }
-html[data-bs-theme=dark] .layui-table-click,
-html[data-bs-theme=dark] .layui-table-hover,
 html[data-bs-theme=dark] .layui-table[lay-even] tbody tr:nth-child(even) {
-  background-color: var(--lay-color-fill-3);
+  background-color: var(--lay-color-fill-4);
 }
 html[data-bs-theme=dark] .layui-menu .layui-menu-item-checked,
 html[data-bs-theme=dark] .layui-menu .layui-menu-item-checked2 {
@@ -1768,6 +1797,15 @@ html[data-bs-theme=dark] .layui-menu .layui-menu-item-checked2 {
 }
 html[data-bs-theme=dark] .layui-input-split {
   background-color: var(--lay-color-bg-2);
+}
+html[data-bs-theme=dark] .layui-input-wrap .layui-input-prefix.layui-input-split {
+  border-width: 1px;
+}
+html[data-bs-theme=dark] .layui-input-wrap .layui-input-split:has(+.layui-input:hover) {
+  border-color: var(--lay-color-border-2);
+}
+html[data-bs-theme=dark] .layui-input-wrap .layui-input-split:has(+.layui-input:focus) {
+  border-color: var(--lay-color-secondary-hover);
 }
 html[data-bs-theme=dark] .layui-layer-tab .layui-layer-title span:first-child {
   border-left: none !important;

@@ -267,7 +267,11 @@
             "Mixly.Electron.Serial",
             "Mixly.Electron.Loader",
             "Mixly.Electron.PythonShell",
+            "Mixly.WebCompiler.Compiler",
             "Mixly.WebSocket.Socket",
+            "Mixly.WebSocket.BU",
+            "Mixly.WebSocket.ArduShell",
+            "Mixly.WebSocket.File",
             "Mixly.Web.FooterLayerExample",
             "Mixly.Web.BU"
         ],
@@ -841,6 +845,7 @@
     {
         "path": "/web/burn-upload.js",
         "require": [
+            "AvrUploader",
             "Mixly.LayerExt",
             "Mixly.Config",
             "Mixly.MFile",
@@ -850,7 +855,8 @@
             "Mixly.Web.Esptool",
             "Mixly.Web.USB",
             "Mixly.Web.SerialPort",
-            "Mixly.Web.Ampy"
+            "Mixly.Web.Ampy",
+            "Mixly.WebCompiler.Compiler"
         ],
         "provide": [
             "Mixly.Web.BU"
@@ -926,6 +932,7 @@
     {
         "path": "/web/usb.js",
         "require": [
+            "DAPjs",
             "Mixly.Web"
         ],
         "provide": [

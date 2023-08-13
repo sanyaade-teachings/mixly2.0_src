@@ -497,4 +497,10 @@ BU.uploadWithPort = (port, command) => {
     BU.operateWithPort('upload', port, command);
 }
 
+BU.addValue = function (data) {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.addValue(data);
+}
+
 });

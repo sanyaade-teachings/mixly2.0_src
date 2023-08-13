@@ -1,5 +1,6 @@
 goog.loadJs('web', () => {
 
+goog.require('DAPjs');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.USB');
 

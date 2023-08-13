@@ -268,10 +268,10 @@ Socket.disconnect = () => {
 Socket.toggleUIToolbar = (connected) => {
     try {
         if (connected) {
-            $('#socket-connect-btn').html(MSG['disconnect']);
+            $('#socket-connect-btn').html(Blockly.Msg.MSG['disconnect']);
             $('#socket-connect-btn').removeClass('icon-link').addClass('icon-unlink');
         } else {
-            $('#socket-connect-btn').html(MSG['connect']);
+            $('#socket-connect-btn').html(Blockly.Msg.MSG['connect']);
             $('#socket-connect-btn').removeClass('icon-unlink').addClass('icon-link');
         }
     } catch (e) {

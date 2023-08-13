@@ -186,10 +186,6 @@ goog.DEPENDENCIES = [
         "provide": ['WebSerialPort'],
         "require": []
     }, {
-        "path": '/web-compiler/avr-uploader.js',
-        "provide": ['AvrUploader'],
-        "require": []
-    }, {
         "path": '/../../msg/blockly/lang.js',
         "provide": ['Blockly.Lang'],
         "require": ['Blockly']

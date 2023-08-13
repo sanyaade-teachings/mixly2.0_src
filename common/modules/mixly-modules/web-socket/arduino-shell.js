@@ -223,4 +223,10 @@ ArduShell.cancel = function () {
     });
 }
 
+ArduShell.addValue = function (data) {
+    const { mainStatusBarTab } = Mixly;
+    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    statusBarTerminal.addValue(data);
+}
+
 });

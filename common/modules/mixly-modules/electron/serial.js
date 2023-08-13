@@ -548,7 +548,7 @@ Serial.refreshOutputBox = (port) => {
         }
         statusBarSerial.setValue(outputStr, toolConfig.scroll);
         portObj.endPos = statusBarSerial.getEndPos();
-        statusBarSerial.ace && statusBarSerial.ace.setReadOnly(false);
+        statusBarSerial.editor && statusBarSerial.editor.setReadOnly(false);
     }
 }
 
@@ -904,7 +904,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-terminal-open`) {
                 Serial.statusBarPortEnterTerminal(port);
             } else if (obj.id === `tab-${newPort}-ace-terminal-close`) {
-                statusBarSerial.tabDelete(port);
+                mainStatusBarTab.remove(port);
             } else if (obj.id === `tab-${newPort}-ace-terminal-help`) {
                 Serial.statusBarPortAddCommand(port, 'config port send -h');
             } else if (obj.id === `tab-${newPort}-ace-fontsize-decrease`) {

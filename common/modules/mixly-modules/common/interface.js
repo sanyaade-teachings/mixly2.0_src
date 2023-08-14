@@ -86,7 +86,6 @@ Interface.init = () => {
     }
     window.addEventListener('resize', Interface.onresize, false);
     Interface.onresize();
-    // Drag.init();
     if (BOARD.nav.levelSelector) {
         LevelSelector.init();
         const $loading = $('.loading');
@@ -136,17 +135,17 @@ Interface.onresize = (event) => {
         }
         Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
     }
-    const { codeEditor, blockEditor } = Editor;
+    const { codeEditor, blockEditor } = Editor.mainEditor;
     codeEditor.resize();
     blockEditor.resize();
 }
 
 window.addEventListener('load', () => {
-    
+    Interface.init();
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-    Interface.init();
+    
 });
 
 Interface.onbeforeunload = (reload = false) => {

@@ -81,8 +81,6 @@ class EditorBlockly {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
-
-        this.resize();
     }
 
     py2BlockEditorInit(codeEditor) {
@@ -111,6 +109,7 @@ class EditorBlockly {
 
     resize() {
         // 重新调整编辑器尺寸
+        this.editor.hideChaff(false);
         $(this.editor.getParentSvg()).attr({
             width: this.$div.width(),
             height: this.$div.height()

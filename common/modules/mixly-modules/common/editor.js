@@ -47,7 +47,6 @@ Editor.addDrag = () => {
         min: '50px',
         sizeChanged: () => {
             // 重新调整编辑器尺寸
-            blockEditor.editor.hideChaff(false);
             blockEditor.resize();
             codeEditor.resize();
         },

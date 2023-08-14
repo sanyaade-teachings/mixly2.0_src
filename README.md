@@ -20,6 +20,10 @@ http://mixly.org
 
 http://wiki.mixly.org
 
+### 在线预览地址
+
+[Mixly2.0在线版](https://smilebrightly.gitee.io/mixly2.0_src)
+
 ### 图片预览
 
 ---

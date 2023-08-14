@@ -48,7 +48,7 @@ MicrobitFs.loadHex = (filename, hexStr) => {
     } else {
         alert('no ' + filename);
     }
-    Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+    Editor.mainEditor.drag.full('NEGATIVE'); // 完全显示代码编辑器
     Editor.codeEditor.setValue(code, -1);
 }
 

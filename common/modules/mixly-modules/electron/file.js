@@ -303,7 +303,7 @@ File.openFile = (filePath) => {
         break;
     case '.ino':
     case '.py':
-        Drag.items.vDrag.full('NEGATIVE'); // 完全显示代码编辑器
+        Editor.mainEditor.drag.full('NEGATIVE'); // 完全显示代码编辑器
         Editor.codeEditor.setValue(data, -1);
         File.openedFilePath = filePath;
         File.workingPath = path.dirname(filePath);

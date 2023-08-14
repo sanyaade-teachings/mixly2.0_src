@@ -147,7 +147,7 @@ File.open = (extname, data) => {
     switch (extname) {
     case '.mix':
     case '.xml':
-        Editor.items.vDrag.full('POSITIVE');
+        Editor.mainEditor.drag.full('POSITIVE');
         try {
             data = XML.convert(data, true);
             data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
@@ -163,7 +163,7 @@ File.open = (extname, data) => {
         break;
     case '.ino':
     case '.py':
-        Editor.items.vDrag.full('NEGATIVE');
+        Editor.mainEditor.drag.full('NEGATIVE');
         Editor.codeEditor.setValue(data, -1);
         break;
     }

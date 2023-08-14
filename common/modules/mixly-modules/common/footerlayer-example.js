@@ -90,7 +90,7 @@ class FooterLayerExample extends FooterLayer {
             }
             // 如果当前在代码区则先切换到模块区
             if (Editor.selected === 'CODE') {
-                Editor.items.vDrag.full('POSITIVE');
+                Editor.mainEditor.drag.full('POSITIVE');
             }
             MFile.parseMix($(data), false, false, (message) => {
                 Editor.blockEditor.scrollCenter();

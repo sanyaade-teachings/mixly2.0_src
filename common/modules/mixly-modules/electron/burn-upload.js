@@ -557,7 +557,8 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
         }
         if (error) {
             try {
-                error = decode(iconv_lite.decode(iconv_lite.encode(error, "iso-8859-1"), 'gbk'));
+                error = MString.decode(iconv_lite.decode(iconv_lite.encode(error, "iso-8859-1"), 'gbk'));
+
             } catch (e) {
                 console.log(e);
             }
@@ -584,7 +585,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
     BU.shell.stdout.on('data', function (data) {
         if (BU.uploading || BU.burning) {
             try {
-                data = decode(iconv_lite.decode(iconv_lite.encode(data, "iso-8859-1"), 'gbk'));
+                data = MString.decode(iconv_lite.decode(iconv_lite.encode(data, "iso-8859-1"), 'gbk'));
             } catch (e) {
                 console.log(e);
             }

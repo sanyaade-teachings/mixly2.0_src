@@ -58,7 +58,7 @@ http://wiki.mixly.org
 
 ### 更新说明
 
-https://gitee.com/mixly2/mixly2.0-win32-x64/blob/master/CHANGELOG.md
+[更新日志](https://gitee.com/mixly2/mixly2.0_src/blob/master/CHANGELOG.md)
 
 ### 官方交流群
 

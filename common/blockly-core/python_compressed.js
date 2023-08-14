@@ -7,13 +7,12 @@ goog.provide('Blockly.Python');
 goog.require('Blockly.utils.string');
 goog.require('Blockly.Generator');
 
-Blockly.Generator.prototype.INDENT="    ";
-
 /**
  * Python code generator.
  * @type {!Blockly.Generator}
  */
 Blockly.Python = new Blockly.Generator('Python');
+Blockly.Python.INDENT="    ";
 
 /**
  * List of illegal variable names.

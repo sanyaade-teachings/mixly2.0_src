@@ -632,6 +632,7 @@
             "Mixly.MFile",
             "Mixly.MArray",
             "Mixly.Msg",
+            "Mixly.MString",
             "Mixly.Electron.Serial"
         ],
         "provide": [

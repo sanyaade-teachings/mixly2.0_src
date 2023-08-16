@@ -11,6 +11,7 @@ goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Msg');
+goog.require('Mixly.MString');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.ArduShell');
 
@@ -24,6 +25,7 @@ const {
     MFile,
     MArray,
     Msg,
+    MString,
     Config
 } = Mixly;
 
@@ -528,11 +530,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
         });
 
         ArduShell.shell.stderr.on('data', (data) => {
-            try {
-                data = data.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) { return decodeURIComponent(s.replace(/_/g, '%')); });
-            } catch (error) {
-                console.log(error);
-            }
+            data = MString.decode(data);
             statusBarTerminal.addValue(data);
         });
 

@@ -556,12 +556,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             statusBarTerminal.addValue('\n');
         }
         if (error) {
-            try {
-                error = MString.decode(iconv_lite.decode(iconv_lite.encode(error, "iso-8859-1"), 'gbk'));
-
-            } catch (e) {
-                console.log(e);
-            }
+            error = MString.decode(error);
             statusBarTerminal.addValue(error + "\n");
         } else {
             layer.msg((type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']), {
@@ -583,12 +578,9 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
     })
 
     BU.shell.stdout.on('data', function (data) {
+        console.log(data);
         if (BU.uploading || BU.burning) {
-            try {
-                data = MString.decode(iconv_lite.decode(iconv_lite.encode(data, "iso-8859-1"), 'gbk'));
-            } catch (e) {
-                console.log(e);
-            }
+            data = MString.decode(data);
             statusBarTerminal.addValue(data);
         }
     });

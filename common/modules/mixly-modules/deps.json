@@ -769,6 +769,7 @@
             "Mixly.MFile",
             "Mixly.Env",
             "Mixly.Msg",
+            "Mixly.MString",
             "Mixly.Electron"
         ],
         "provide": [

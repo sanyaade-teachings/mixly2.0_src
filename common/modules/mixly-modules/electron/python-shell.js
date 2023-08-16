@@ -4,6 +4,7 @@ goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
+goog.require('Mixly.MString');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.PythonShell');
 
@@ -12,10 +13,17 @@ const {
     Modules,
     MFile,
     Env,
-    Msg
+    Msg,
+    MString
 } = Mixly;
 
 const { PythonShell } = Electron;
+
+const {
+    fs,
+    iconv_lite,
+    python_shell
+} = Modules;
 
 var input_prompt_message = "";
 var input_prompt_message_line = -1;
@@ -31,16 +39,7 @@ var options = {
 
 let shell = null;
 
-function message_decode(s) {
-    if (s) {
-        try {
-            return unescape(s.replace(/_([0-9a-fA-F]{3})/gm, '%$1'));
-        } catch (e) {
-            return s;
-        }
-    }
-    return s;
-}
+PythonShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
 
 /**
 * @function 运行python
@@ -53,7 +52,7 @@ PythonShell.run = function () {
     const cursorCallback = PythonShell.addEvent();
     mainStatusBarTab.show();
     statusBarTerminal.setValue(Msg.Lang["程序正在运行"] + "...\n");
-    var code = Mixly.MFile.getCode();
+    var code = MFile.getCode();
     code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) { return decodeURIComponent(s.replace(/_/g, '%')); });
     try {
         var inputArr = code.match(/(?<![\w+])input\(/g);
@@ -67,18 +66,15 @@ PythonShell.run = function () {
     if (code.indexOf("import turtle") != -1) code += "\nturtle.done()\n";
     if (shell)
         shell.terminate('SIGKILL');
-    Modules.fs.writeFile(Env.pyFilePath, code, 'utf8', function (err) {
-        //如果err=null，表示文件使用成功，否则，表示希尔文件失败
-        err = message_decode(err);
-        if (err) {
-            layer.msg(Msg.Lang['写文件出错了，错误是：'] + err, {
+    fs.writeFile(Env.pyFilePath, code, 'utf8', function (error) {
+        if (error) {
+            layer.msg(Msg.Lang['写文件出错了，错误是：'] + error, {
                 time: 1000
             });
-            statusBarTerminal.setValue(Msg.Lang['写文件出错了，错误是：'] + err + '\n');
+            statusBarTerminal.setValue(Msg.Lang['写文件出错了，错误是：'] + error + '\n');
             mainStatusBarTab.show();
         } else {
-            shell = new Modules.python_shell.PythonShell(Env.pyFilePath, options);
-            let iconv = Modules.iconv_lite;
+            shell = new python_shell.PythonShell(Env.pyFilePath, options);
             var startTime = Number(new Date());
             //程序运行完成时执行
             shell.childProcess.on('exit', (code) => {
@@ -102,17 +98,9 @@ PythonShell.run = function () {
             //有数据输出时执行
             shell.stdout.setEncoding('binary');
             shell.stdout.on('data', function (data) {
-                try {
-                    if (Env.currentPlatform === 'darwin') {
-                        data = decode(iconv.decode(iconv.encode(data, "iso-8859-1"), 'utf-8'));
-                    } else {
-                        data = decode(iconv.decode(iconv.encode(data, "iso-8859-1"), 'gbk'));
-                    }
-                    data = message_decode(data);
-                    data = data.replace(/(?<![\w+])pyinput.input\(/g, "input(");
-                } catch (e) {
-                    console.log(e);
-                }
+                 data = iconv_lite.decode(Buffer.from(data, 'binary'), PythonShell.ERROR_ENCODING);
+                 data = MString.decode(data);
+                 data = data.replace(/(?<![\w+])pyinput.input\(/g, "input(");
                 statusBarTerminal.addValue(data);
 
                 if (data.lastIndexOf(">>>") != -1 && shell) {
@@ -128,22 +116,10 @@ PythonShell.run = function () {
             shell.stderr.setEncoding('binary');
             shell.stderr.on('data', function (err) {
                 console.log('stderr: ' + err);
-                try {
-                    err = err.replace(/(?<![\w+])pyinput.input\(/g, "input(");
-                } catch (e) {
-                    console.log(e);
-                }
-                try {
-                    if (Env.currentPlatform === 'darwin') {
-                        statusBarTerminal.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'utf-8'));
-                    } else {
-                        statusBarTerminal.addValue(iconv.decode(iconv.encode(err, "iso-8859-1"), 'gbk'));
-                    }
-                    err = message_decode(err);
-                } catch (e) {
-                    err = message_decode(err);
-                    statusBarTerminal.addValue(err);
-                }
+                err = iconv_lite.decode(Buffer.from(err.message, 'binary'), PythonShell.ERROR_ENCODING);
+                err = MString.decode(err);
+                err = err.replace(/(?<![\w+])pyinput.input\(/g, "input(");
+                statusBarTerminal.addValue(err);
                 statusBarTerminal.scrollToBottom();
                 shell = null;
             });

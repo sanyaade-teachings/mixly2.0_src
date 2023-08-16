@@ -37,7 +37,8 @@ const {
     fs_extra,
     path,
     lodash_fp,
-    child_process
+    child_process,
+    iconv_lite
 } = Modules;
 
 const { 
@@ -79,6 +80,8 @@ ArduShell.binFilePath = '';
 ArduShell.shellPath = null;
 
 ArduShell.shell = null;
+
+ArduShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
 
 ArduShell.updateShellPath = () => {
     let shellPath = path.resolve(Env.clientPath, './arduino-cli');
@@ -517,7 +520,10 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     })
     .then(() => {
         let startTime = Number(new Date());
-        ArduShell.shell = child_process.exec(cmd, { maxBuffer: 4096 * 1000000 }, (error, stdout, stderr) => {
+        ArduShell.shell = child_process.exec(cmd, {
+            maxBuffer: 4096 * 1000000,
+            encoding: 'binary'
+        }, (error, stdout, stderr) => {
             if (error !== null) {
                 console.log("exec error" + error);
             }
@@ -525,11 +531,21 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
 
         ArduShell.shell.stdout.on('data', (data) => {
             if (data.length < 1000) {
+                data = iconv_lite.decode(Buffer.from(data, 'binary'), 'utf-8');
                 statusBarTerminal.addValue(data);
             }
         });
 
         ArduShell.shell.stderr.on('data', (data) => {
+            let lines = data.split('\n');
+            for (let i in lines) {
+                let encoding = 'utf-8';
+                if (lines[i].indexOf('can\'t open device') !== -1) {
+                    encoding = ArduShell.ERROR_ENCODING;
+                }
+                lines[i] = iconv_lite.decode(Buffer.from(lines[i], 'binary'), encoding);
+            }
+            data = lines.join('\n');
             data = MString.decode(data);
             statusBarTerminal.addValue(data);
         });

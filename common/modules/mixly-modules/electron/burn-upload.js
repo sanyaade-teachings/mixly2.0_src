@@ -29,8 +29,6 @@ const { BOARD, SELECTED_BOARD, USER } = Config;
 
 var downloadShell = null;
 
-Modules.iconv_lite = require('iconv-lite');
-
 const { form } = layui;
 
 const {
@@ -49,6 +47,8 @@ BU.uploading = false;
 BU.burning = false;
 
 BU.shell = null;
+
+BU.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
 
 /**
  * @function 根据传入的stdout判断磁盘数量并选择对应操作
@@ -546,7 +546,8 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
     const { mainStatusBarTab } = Mixly;
     const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     let nowCommand = MString.tpl(command, { com: port });
-    BU.shell = child_process.exec(nowCommand, function (error, stdout, stderr) {
+
+    BU.shell = child_process.exec(nowCommand, { encoding: 'binary' }, function (error, stdout, stderr) {
         layer.close(layerNum);
         BU.burning = false;
         BU.uploading = false;
@@ -556,6 +557,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             statusBarTerminal.addValue('\n');
         }
         if (error) {
+            error = iconv_lite.decode(Buffer.from(error.message, 'binary'), BU.ERROR_ENCODING);
             error = MString.decode(error);
             statusBarTerminal.addValue(error + "\n");
         } else {
@@ -578,8 +580,8 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
     })
 
     BU.shell.stdout.on('data', function (data) {
-        console.log(data);
         if (BU.uploading || BU.burning) {
+            data = iconv_lite.decode(Buffer.from(data, 'binary'), 'utf-8');
             data = MString.decode(data);
             statusBarTerminal.addValue(data);
         }

@@ -34,10 +34,7 @@ Blockly.Blocks.AI_client = {
                                                     ]),'CTYPE')
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_Client)
-            .setAlign(Blockly.ALIGN_RIGHT);            
-        this.appendValueInput('APP_ID')
-            .appendField('APP_ID')
-            .setAlign(Blockly.ALIGN_RIGHT);            
+            .setAlign(Blockly.ALIGN_RIGHT);  
         this.appendValueInput('API_KEY')
             .appendField('API_KEY')
             .setAlign(Blockly.ALIGN_RIGHT);            

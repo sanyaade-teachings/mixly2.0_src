@@ -160,7 +160,7 @@ class RC522:
 		self._wreg(0x2C, 0)
 		self._wreg(0x15, 0x40)
 		self._wreg(0x11, 0x3D)
-		self._wreg(0x26, 0x78)
+		self._wreg(0x26, 0x68)
 		self.antenna_on()
 
 	def reset(self):

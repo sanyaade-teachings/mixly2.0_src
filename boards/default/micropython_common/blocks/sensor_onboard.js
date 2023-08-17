@@ -611,7 +611,23 @@ Blockly.Blocks['sensor_get_acceleration'] = {
     }
 };
 
-
+Blockly.Blocks['sensor_eulerangles'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_GET_GESTURE_ALL)   
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.ME_GO_PITCH,'[0]'],
+                [Blockly.Msg.ME_GO_ROLL,'[1]'],
+                [Blockly.Msg.ME_GO_PITCH+', '+Blockly.Msg.ME_GO_ROLL,'']
+                ]),'angle');         
+            
+        this.appendDummyInput("")        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        
+    }
+};
 
 Blockly.Blocks.sensor_onboard_mpu9250_gesture = {
     init: function() {
@@ -1225,6 +1241,41 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     }
 };
 
+Blockly.Blocks['sensor_bitbot_LTR308'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.DIGITAL+Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT)
+            .appendField(Blockly.Msg.MIXLY_GET_LIGHT_INTENSITY+"(lux)");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['sensor_bitbot_ALS'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ANALOG+Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT)
+        this.appendValueInput('mode')
+            .setCheck(Number)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.LCD_NUMBERING); 
+        this.appendDummyInput()     
+            .appendField(Blockly.Msg.MIXLY_GET_LIGHT_INTENSITY+"(%)");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['bitbot_als_num'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['MATH_HUE']);
+    this.appendDummyInput("")
+        .appendField(new Blockly.FieldDropdown(profile.default.als_num), 'PIN');
+    this.setOutput(true, Number);
+  }
+};
 
 
 Blockly.Blocks['sensor_button_is_pressed']=Blockly.Blocks['sensor_mixgo_button_is_pressed'];

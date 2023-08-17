@@ -3378,6 +3378,7 @@ En.ME_GO_PITCH = 'pitch';
 En.ME_GO_ROLL = 'roll';
 En.BOARD_DIRECTION = 'board condition';
 En.MIXLY_GET_GESTURE = 'get car gesture';
+En.MIXLY_GET_GESTURE_ALL = 'get gesture';
 En.MIXLY_SET_VOLUME = 'set volume';
 En.MIXLY_SET_VOLUME_TOOLTIP = 'volume range 0-16';
 En.MIXLY_GET_VOLUME = 'get volume';
@@ -3521,5 +3522,9 @@ En.MIXLY_MIXBOT_EXTERN_GET_ADDR = "get address";
 En.MIXLY_MIXBOT_EXTERN_SET_ADDR = "set address";
 En.MIXPY_REQUESTS_GET_RESULT = 'and get result';
 En.MIXLY_TOOLTIP_MOTOR_SETUP = 'Dual PWM motor drive (HR8833) initialization';
+En.SHUTDOWN = 'shut down';
+En.DIGITAL = 'digital';
+En.ANALOG = 'analog';
+En.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = 'Shut down and disconnected under battery power. Only the motor output is turned off under USB power supply.';
 
 })();

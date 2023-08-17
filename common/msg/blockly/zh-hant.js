@@ -3350,6 +3350,7 @@ ZhHant.ME_GO_PITCH = '俯仰角';
 ZhHant.ME_GO_ROLL = '橫滾角';
 ZhHant.BOARD_DIRECTION = '主機板狀態';
 ZhHant.MIXLY_GET_GESTURE = '獲取小車姿態';
+ZhHant.MIXLY_GET_GESTURE_ALL = '獲取姿態';
 ZhHant.MIXLY_SET_VOLUME = '設置音量';
 ZhHant.MIXLY_SET_VOLUME_TOOLTIP = '音量範圍0-16';
 ZhHant.MIXLY_GET_VOLUME = '獲取音量';
@@ -3493,5 +3494,9 @@ ZhHant.MIXLY_MIXBOT_EXTERN_GET_ADDR = "掃描序號";
 ZhHant.MIXLY_MIXBOT_EXTERN_SET_ADDR = "修改序號";
 ZhHant.MIXPY_REQUESTS_GET_RESULT = '並獲取相應結果';
 ZhHant.MIXLY_TOOLTIP_MOTOR_SETUP = '雙路PWM電機驅動(HR8833)初始化';
+ZhHant.SHUTDOWN = '關機';
+ZhHant.DIGITAL = '數字';
+ZhHant.ANALOG = '模擬';
+ZhHant.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '僅電池供電下，將關機斷電。USB供電下，只是關閉電機輸出。';
 
 })();

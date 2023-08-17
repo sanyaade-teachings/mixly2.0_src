@@ -3476,6 +3476,7 @@ ZhHans.ME_GO_PITCH = '俯仰角';
 ZhHans.ME_GO_ROLL = '横滚角';
 ZhHans.BOARD_DIRECTION = '主板状态';
 ZhHans.MIXLY_GET_GESTURE = '获取小车姿态';
+ZhHans.MIXLY_GET_GESTURE_ALL = '获取姿态';
 ZhHans.MIXLY_SET_VOLUME = '设置音量';
 ZhHans.MIXLY_SET_VOLUME_TOOLTIP = '音量范围0-16';
 ZhHans.MIXLY_GET_VOLUME = '获取音量';
@@ -3657,5 +3658,9 @@ ZhHans.MIXLY_MIXBOT_EXTERN_GET_ADDR = "扫描序号";
 ZhHans.MIXLY_MIXBOT_EXTERN_SET_ADDR = "修改序号";
 ZhHans.MIXPY_REQUESTS_GET_RESULT = '并获取相应结果';
 ZhHans.MIXLY_TOOLTIP_MOTOR_SETUP = '双路PWM电机驱动(HR8833)初始化';
+ZhHans.SHUTDOWN = '关机';
+ZhHans.DIGITAL = '数字';
+ZhHans.ANALOG = '模拟';
+ZhHans.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '仅电池供电下，将关机断电。USB供电下，只是关闭电机输出。';
 
 })();

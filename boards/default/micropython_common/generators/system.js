@@ -196,6 +196,12 @@ Blockly.Python.forBlock['system_machine_reset']=function(){
     return code;
 };
 
+Blockly.Python.forBlock['system_bitbot_shutdown']=function(){
+    Blockly.Python.definitions_['import_bitbot_onboard_bot51'] = 'from bitbot import onboard_bot51';
+    var code ='onboard_bot51.shutdown()\n';
+    return code;
+};
+
 Blockly.Python.forBlock['Timer_init']=Blockly.Python.forBlock['system_timer_init'];
 Blockly.Python.forBlock['timer2']=Blockly.Python.forBlock['system_timer'];
 Blockly.Python.forBlock['time_ticks_diff']=Blockly.Python.forBlock['system_ticks_diff'];

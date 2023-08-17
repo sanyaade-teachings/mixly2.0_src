@@ -1,5 +1,6 @@
 {
     "board": {
+        "元控": "micropython:esp32c3:bitbot",
         "Mixbot-s1": "micropython:esp32:mixbot_s1",
         "Mixbot-s2": "micropython:esp32:mixbot_s2",
         "RoboMaster E1": "micropython:esp32:rm_e1"
@@ -8,8 +9,8 @@
     "burn": {
         "type": "command",
         "portSelect": "all",        
-        "micropython:esp32:generic": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixGo-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+        "micropython:esp32c3:bitbot": {
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_C3-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32:rm_e1": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
@@ -49,7 +50,22 @@
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
         "copyLib": true,
-        "reset": []
+        "reset": [{
+                "dtr": false,
+                "rts": true
+            }, {
+                "sleep": 300
+            }, {
+                "dtr": false,
+                "rts": false
+            }, {
+                "sleep": 300
+            }, {
+                "dtr": false,
+                "rts": true
+            }, {
+                "sleep": 300
+            }]
     },
     "nav": {
         "burn": true,
@@ -68,7 +84,7 @@
         "yMax": 100,
         "yMin": 0,
         "pointNum": 100,
-        "rts": false,
+        "rts": true,
         "dtr": false
     },
     "lib": {
@@ -83,11 +99,11 @@
         "com": "serial",
         "burn": {
             "erase": true,            
-            "micropython:esp32:generic": {
+            "micropython:esp32c3:bitbot": {
                 "binFile": [
                     {
                         "offset": "0x1000",
-                        "path": "./build/MixGo-0x1000-V1.19.1-lib.bin"
+                        "path": "./build/MixGo_C3-0x0-V1.19.1-lib.bin"
                     },
                     {
                         "offset": "0X3A0000",

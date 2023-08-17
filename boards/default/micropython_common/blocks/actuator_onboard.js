@@ -867,3 +867,72 @@ Blockly.Blocks['actuator_mixbot_buzzer_on_off'] = {
         this.setInputsInline(true);
     }
 };
+
+//bitbot onboard_motor below:
+Blockly.Blocks.bitbot_move = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.appendDummyInput()
+          .appendField("Bitbot")
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.blockpy_forward, "F"],
+            [Blockly.Msg.blockpy_backward, "B"],
+            [Blockly.Msg.blockpy_left, "L"],
+            [Blockly.Msg.blockpy_right, "R"]            
+            ]), "VAR");         
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_SPEED);
+      this.appendDummyInput("")
+    .appendField("%")         
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.bitbot_stop = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.appendDummyInput()
+          .appendField("Bitbot")
+          .appendField(new Blockly.FieldDropdown([           
+            [Blockly.Msg.MOTOR_P, "P"],
+            [Blockly.Msg.MOTOR_N, "N"]
+            ]), "VAR");      
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}
+
+Blockly.Blocks.bitbot_motor = {
+    init: function () {
+      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.appendDummyInput()
+          .appendField("Bitbot")
+          .appendField(Blockly.Msg.MIXLY_MOTOR)
+          .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.TEXT_TRIM_LEFT, "0"],
+            [Blockly.Msg.TEXT_TRIM_RIGHT, "1"]
+            ]), "wheel");   
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_MICROBIT_Direction)
+                  .appendField(new Blockly.FieldDropdown([
+            [Blockly.Msg.CLOCKWISE, "CW"],
+            [Blockly.Msg.ANTI_CLOCKWISE, "CCW"],
+            [Blockly.Msg.MOTOR_P, "P"],
+            [Blockly.Msg.MOTOR_N, "N"]
+            ]), "direction");  
+      this.appendValueInput('speed')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.MIXLY_SPEED);    
+      this.appendDummyInput("")
+    .appendField("%")       
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}

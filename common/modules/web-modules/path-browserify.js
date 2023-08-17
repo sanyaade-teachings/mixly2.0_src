@@ -33,6 +33,7 @@ function assertPath(path) {
 
 // Resolves . and .. elements in a path with directory names
 function normalizeStringPosix(path, allowAboveRoot) {
+  path = path.replaceAll('\\', '/');
   var ignore = '';
   var ignoreList = [ 'http://', 'https://' ];
   if (path.length) {
@@ -534,10 +535,7 @@ var posix = {
   sep: '/',
   delimiter: ':',
   win32: null,
-  posix: null
 };
-
-posix.posix = posix;
 
 window.path = posix;
 

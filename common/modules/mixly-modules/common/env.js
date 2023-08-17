@@ -5,10 +5,8 @@ goog.require('Mixly');
 goog.provide('Mixly.Env');
 
 const os = Mixly.require('os');
-const path = Mixly.require('path') ?? path;
 const fs_plus = Mixly.require('fs-plus');
 const electron_remote = Mixly.require('@electron/remote');
-
 const { Env } = Mixly;
 
 /**
@@ -97,23 +95,23 @@ Env.msgPath = path.join(goog.basePath, '../msg/');
 
 if (goog.isElectron) {
     const { app } = electron_remote;
-    Env.indexDirPath = __dirname;
+    Env.indexDirPath = path.join(__dirname);
     Env.currentPlatform = os.platform();
     if (Env.currentPlatform === "darwin") {
-        Env.clientPath = path.resolve(app.getPath("exe"), '../../../../');
+        Env.clientPath = path.join(app.getPath("exe"), '../../../../');
     } else {
-        Env.clientPath = path.resolve(app.getPath("exe"), '../');
+        Env.clientPath = path.join(app.getPath("exe"), '../');
     }
-    Env.pyFilePath = path.resolve(Env.clientPath, 'mixpyBuild/mixly.py');
+    Env.pyFilePath = path.join(Env.clientPath, 'mixpyBuild/mixly.py');
     if (Env.currentPlatform === 'win32') {
-        Env.python3Path = path.resolve(Env.clientPath, 'mixpyBuild/win_python3/python3.exe');
+        Env.python3Path = path.join(Env.clientPath, 'mixpyBuild/win_python3/python3.exe');
     } else {
         Env.python3Path = '/usr/bin/python3';
         if (fs_plus.isFileSync('/usr/local/bin/python3')) {
             Env.python3Path = '/usr/local/bin/python3';
         }
     }
-    Env.srcDirPath = path.resolve(Env.indexDirPath, '../../../');
+    Env.srcDirPath = path.join(Env.indexDirPath, '../../../');
 }
 
 });

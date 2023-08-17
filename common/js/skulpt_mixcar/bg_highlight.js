@@ -1082,7 +1082,7 @@ var $builtinmodule = function (name) {
                     var command= move(direction) //向某个方向移动
                     if(command==false){
                         maze.result=ResultType.FAILURE
-                        alert("挑战失败!请修改后重新尝试")
+                        layer.alert("挑战失败!请修改后重新尝试", { shade: false })
                         throw new Sk.builtin.TypeError("挑战失败!请修改后重新尝试");
                     }
 
@@ -1094,7 +1094,7 @@ var $builtinmodule = function (name) {
                                 maze.result=ResultType.FAILURE
                                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
                                 .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/no_oil.png')
-                                alert("挑战失败!小车没有油了")
+                                layer.alert("挑战失败!小车没有油了", { shade: false })
                                 throw new Sk.builtin.TypeError("挑战失败!小车没有油了");
                             }
                         }
@@ -1104,7 +1104,7 @@ var $builtinmodule = function (name) {
                         }
                     }else if(maze.mlevel==7){//如果是第七关，则需要判断红绿灯是否为绿灯的问题
                         if(actor.traffic_light==maze.SquareType.LIGHT_RED){  
-                                alert("挑战失败:小车在红灯亮时还未停止！");
+                                layer.alert("挑战失败:小车在红灯亮时还未停止！", { shade: false });
                                 throw new Sk.builtin.TypeError("挑战失败:小车在红灯亮时还未停止！");
                         }
                     }
@@ -1157,10 +1157,10 @@ var $builtinmodule = function (name) {
                     var state=checkFinish()
                     if(state=="error2"){
                         maze.result=ResultType.FAILURE
-                        alert("挑战失败，请检查是否通过所有标记点！")
+                        layer.alert("挑战失败，请检查是否通过所有标记点！", { shade: false })
                         throw new Sk.builtin.TypeError("挑战失败，请检查是否通过所有标记点！");
                     }else if(state=="error3"){
-                        alert("挑战失败,请修改后重新尝试！")
+                        layer.alert("挑战失败,请修改后重新尝试！", { shade: false })
                         throw new Sk.builtin.TypeError("挑战失败!请修改后重新尝试");
                     }
                     resolve(Sk.builtin.none.none$);
@@ -1293,7 +1293,7 @@ var $builtinmodule = function (name) {
                     }
                     if(state==false){
                         maze.result=ResultType.FAILURE
-                        alert("挑战失败，请检查循环次数是否正确！")
+                        layer.alert("挑战失败，请检查循环次数是否正确！", { shade: false })
                         throw new Sk.builtin.TypeError("挑战失败，请检查循环次数是否正确！");
                     }else{
                         maze.result=ResultType.SUCCESS
@@ -1310,12 +1310,12 @@ var $builtinmodule = function (name) {
                 console.log(state)
                 if(state==true){
                     setTimeout(function() {
-                        alert("挑战成功！");
+                        layer.alert("挑战成功！", { shade: false });
                     },1000)
                     resolve(Sk.builtin.none.none$);
                 }else if(state==false){//没有到达终点就游戏结束，或者超过了终点
                     maze.result=ResultType.FAILURE
-                    alert("挑战失败，请检查是否到达终点！")
+                    layer.alert("挑战失败，请检查是否到达终点！", { shade: false })
                     throw new Sk.builtin.TypeError("挑战失败，请检查是否到达终点！");
                 }
             }))

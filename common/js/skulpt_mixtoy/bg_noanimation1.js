@@ -1408,13 +1408,13 @@ var $builtinmodule = function (name) {
                 }
                 if(state==true){
                     // setTimeout(function() {
-                    //     alert("挑战成功！");
+                    //     layer.alert("挑战成功！", { shade: false });
                     // },1000)
                     // getFinishState_f(state)
                     // resolve(Sk.builtin.none.none$);
                 }else{
                     maze.result=ResultType.FAILURE
-                    alert("挑战失败，请检查循环次数是否正确！")
+                    layer.alert("挑战失败，请检查循环次数是否正确！", { shade: false })
                     console.log("失败")
                     throw new Sk.builtin.TypeError("挑战失败，请检查循环次数是否正确！");
                 } 

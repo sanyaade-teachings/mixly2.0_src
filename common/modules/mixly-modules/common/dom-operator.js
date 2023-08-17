@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('Mixly.Config');
 goog.require('Mixly.XML');
@@ -39,7 +40,7 @@ class SerialDomGenerator {
         this.lang = lang;
         this.shade = shade;
         this.config = this.getConfig(serialConfig);
-        this.htmlTemplatePath = Env.templatePath + '/serial-tool.html';
+        this.htmlTemplatePath = path.join(Env.templatePath, '/serial-tool.html');
         this.htmlStr = this.getHtmlStr();
         this.generateDom();
         this.destroyed = false;

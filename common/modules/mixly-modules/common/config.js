@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('FingerprintJS');
 goog.require('Mixly.Url');
 goog.require('Mixly.Env');
@@ -57,7 +58,7 @@ Config.init = () => {
 
     let pathPrefix = '../../../';
 
-    Config.SOFTWARE = goog.getJSON(pathPrefix + 'sw-config.json', SOFTWARE_DEFAULT_CONFIG);
+    Config.SOFTWARE = goog.getJSON(path.join(pathPrefix, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
     Config.pathPrefix = pathPrefix;
     console.log('Config.SOFTWARE:', Config.SOFTWARE);
 

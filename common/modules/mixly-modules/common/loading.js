@@ -2,9 +2,9 @@ goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('store');
+goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
-goog.require('Mixly.Modules');
 goog.require('Mixly.LocalStorage');
 goog.require('Mixly.CssLoader');
 goog.provide('Mixly.Loading');
@@ -12,7 +12,6 @@ goog.provide('Mixly.Loading');
 const {
     Env,
     Config,
-    Modules,
     LocalStorage,
     CssLoader,
     Loading
@@ -46,12 +45,9 @@ Loading.CSS_CONFIG = {
     }
 };
 
-Loading.TEMPLATE_RAW = goog.get(Env.templatePath + '/skeleton.html');
+Loading.TEMPLATE_RAW = goog.get(path.join(Env.templatePath, 'skeleton.html'));
 Loading.TEMPLATE_RENDER = laytpl(Loading.TEMPLATE_RAW).render(Loading.CSS_CONFIG[USER.theme]);
-
-const nowWindow = Modules.currentWindow;
 const winTheme = USER.theme;
-nowWindow && nowWindow.setBackgroundColor(windowBackgroundColor);
 
 $('html').append(Loading.TEMPLATE_RENDER);
 

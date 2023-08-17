@@ -1,7 +1,6 @@
 (() => {
 
 goog.require('layui');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.XML');
@@ -15,7 +14,6 @@ goog.require('Mixly.Electron.PythonShell');
 goog.provide('Mixly.BoardManager');
 
 const {
-    Modules,
     Env,
     Msg,
     XML,
@@ -36,16 +34,13 @@ const {
     form
 } = layui;
 
-const {
-    fs,
-    fs_extra,
-    fs_plus,
-    path,
-    adm_zip_iconv,
-    compressing,
-    os,
-    electron_remote
-} = Modules;
+const fs = Mixly.require('fs');
+const fs_extra = Mixly.require('fs-extra');
+const fs_plus = Mixly.require('fs-plus');
+const path = Mixly.require('path');
+const os = Mixly.require('os');
+const compressing = Mixly.require('compressing');
+const electron_remote = Mixly.require('@electron/remote');
 
 const {
     SOFTWARE,
@@ -76,9 +71,10 @@ BoardManager.LOCAL_IMPORT_FILTERS = [
 ];
 
 BoardManager.showLocalImportDialog = () => {
-    Env.currentWindow.focus();
+    const currentWindow = electron_remote.getCurrentWindow();
+    currentWindow.focus();
     const { dialog } = electron_remote;
-    dialog.showOpenDialog(Env.currentWindow, {
+    dialog.showOpenDialog(currentWindow, {
         title: Msg.getLang('IMPORT_BOARD'),
         // 默认打开的路径，比如这里默认打开下载文件夹
         defaultPath: Env.clientPath,

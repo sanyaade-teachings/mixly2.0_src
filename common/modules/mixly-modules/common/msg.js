@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('Mixly.MJSON');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -25,9 +26,9 @@ const {
 } = Blockly.Lang;
 
 Msg.PATH = {
-    "zh-hans": Env.msgPath + "./mixly/zh-hans.json",
-    "zh-hant": Env.msgPath + "./mixly/zh-hant.json",
-    "en": Env.msgPath + "./mixly/en.json"
+    "zh-hans": path.join(Env.msgPath, "mixly/zh-hans.json"),
+    "zh-hant": path.join(Env.msgPath, "./mixly/zh-hant.json"),
+    "en": path.join(Env.msgPath, "mixly/en.json")
 }
 
 Msg.LANG = {

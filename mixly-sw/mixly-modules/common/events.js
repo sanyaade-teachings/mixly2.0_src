@@ -1,7 +1,6 @@
 goog.loadJs('electron', () => {
 
 goog.require('Mixly.BoardManager');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Url');
@@ -9,14 +8,15 @@ goog.provide('Mixly.Events');
 
 const {
     BoardManager,
-    Modules,
     Env,
     Config,
     Url,
     Events
 } = Mixly;
 
-const { electron, fs } = Modules;
+const fs = Mixly.require('fs');
+const electron = Mixly.require('electron');
+const electron_remote = Mixly.require('@electron/remote');
 const { ipcRenderer } = electron;
 const { USER } = Config;
 
@@ -136,7 +136,8 @@ ipcRenderer.on('command', (event, command) => {
         ...commandObj
     }
     if (commandObj.obj === 'Mixly.Electron.Loader' && commandObj.func === 'reload') {
-        Env.currentWindow.reload();
+        const currentWindow = electron_remote.getCurrentWindow();
+        currentWindow.reload();
     }
 });
 

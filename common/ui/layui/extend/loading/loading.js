@@ -36,10 +36,11 @@
 
 (() => {
     'use strict';
+    goog.require('path');
     goog.require('layui');
     goog.provide('layui.loading');
     const { loading } = layui;
-    loading.IMG_PATH = goog.normalizePath_(goog.basePath + '../ui/layui/extend/loading/images');
+    loading.IMG_PATH = path.join(goog.basePath, '../ui/layui/extend/loading/images');
     var _ = $.extend
     , W = window // BOM/DOM
     , fnName = {}

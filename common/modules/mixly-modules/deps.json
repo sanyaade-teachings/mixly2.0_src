@@ -45,6 +45,7 @@
     {
         "path": "/common/config.js",
         "require": [
+            "path",
             "FingerprintJS",
             "Mixly.Url",
             "Mixly.Env",
@@ -67,6 +68,7 @@
     {
         "path": "/common/dom-operator.js",
         "require": [
+            "path",
             "layui",
             "Mixly.Config",
             "Mixly.XML",
@@ -170,7 +172,10 @@
     },
     {
         "path": "/common/env.js",
-        "require": [],
+        "require": [
+            "path",
+            "Mixly"
+        ],
         "provide": [
             "Mixly.Env"
         ]
@@ -194,6 +199,7 @@
     {
         "path": "/common/footerlayer-board-config.js",
         "require": [
+            "path",
             "Blockly",
             "layui",
             "Mixly.Env",
@@ -208,6 +214,7 @@
     {
         "path": "/common/footerlayer-example.js",
         "require": [
+            "path",
             "layui",
             "Mixly.MFile",
             "Mixly.Title",
@@ -257,7 +264,6 @@
             "Mixly.Nav",
             "Mixly.Env",
             "Mixly.Boards",
-            "Mixly.Modules",
             "Mixly.Editor",
             "Mixly.Msg",
             "Mixly.LevelSelector",
@@ -318,9 +324,9 @@
         "require": [
             "layui",
             "store",
+            "path",
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.Modules",
             "Mixly.LocalStorage",
             "Mixly.CssLoader"
         ],
@@ -404,17 +410,9 @@
         ]
     },
     {
-        "path": "/common/modules.js",
-        "require": [
-            "Mixly.Env"
-        ],
-        "provide": [
-            "Mixly.Modules"
-        ]
-    },
-    {
         "path": "/common/msg.js",
         "require": [
+            "path",
             "Mixly.MJSON",
             "Mixly.Config",
             "Mixly.Env",
@@ -507,6 +505,7 @@
     {
         "path": "/common/statusbar-tab.js",
         "require": [
+            "path",
             "layui",
             "tippy",
             "shortid",
@@ -609,6 +608,7 @@
     {
         "path": "/common/xml.js",
         "require": [
+            "path",
             "layui",
             "Mixly.Env",
             "Mixly.Config",
@@ -623,7 +623,6 @@
         "require": [
             "layui",
             "Blockly",
-            "Mixly.Modules",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.Config",
@@ -644,7 +643,6 @@
         "require": [
             "layui",
             "Mixly.Config",
-            "Mixly.Modules",
             "Mixly.LayerExt",
             "Mixly.Env",
             "Mixly.Boards",
@@ -660,7 +658,6 @@
     {
         "path": "/electron/cloud-download.js",
         "require": [
-            "Mixly.Modules",
             "Mixly.Env",
             "Mixly.MJSON",
             "Mixly.Electron"
@@ -672,8 +669,7 @@
     {
         "path": "/electron/electron.js",
         "require": [
-            "Mixly.Url",
-            "Mixly.Modules"
+            "Mixly.Url"
         ],
         "provide": [
             "Mixly.Electron"
@@ -683,7 +679,6 @@
         "path": "/electron/events.js",
         "require": [
             "Mixly.Command",
-            "Mixly.Modules",
             "Mixly.Config",
             "Mixly.Electron"
         ],
@@ -694,7 +689,6 @@
     {
         "path": "/electron/file.js",
         "require": [
-            "Mixly.Modules",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.Config",
@@ -717,7 +711,6 @@
             "layui",
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.Modules",
             "Mixly.MFile",
             "Mixly.Title",
             "Mixly.XML",
@@ -734,7 +727,6 @@
             "LazyLoad",
             "layui",
             "Mixly.Env",
-            "Mixly.Modules",
             "Mixly.XML",
             "Mixly.ScriptLoader",
             "Mixly.CssLoader",
@@ -754,7 +746,6 @@
         "require": [
             "Mixly.Url",
             "Mixly.Config",
-            "Mixly.Modules",
             "Mixly.Env",
             "Mixly.Electron.Serial"
         ],
@@ -763,19 +754,8 @@
         ]
     },
     {
-        "path": "/electron/modules.js",
-        "require": [
-            "Mixly.Env",
-            "Mixly.Electron"
-        ],
-        "provide": [
-            "Mixly.Electron.Modules"
-        ]
-    },
-    {
         "path": "/electron/python-shell.js",
         "require": [
-            "Mixly.Modules",
             "Mixly.MFile",
             "Mixly.Env",
             "Mixly.Msg",
@@ -790,7 +770,6 @@
         "path": "/electron/serial.js",
         "require": [
             "layui",
-            "Mixly.Modules",
             "Mixly.Charts",
             "Mixly.Config",
             "Mixly.Env",
@@ -807,7 +786,6 @@
     {
         "path": "/electron/wiki-manager.js",
         "require": [
-            "Mixly.Modules",
             "Mixly.Config",
             "Mixly.Env",
             "Mixly.Msg",
@@ -1068,6 +1046,7 @@
     {
         "path": "/web-socket/socket.js",
         "require": [
+            "path",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Boards",

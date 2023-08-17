@@ -6,7 +6,7 @@
     }, {
         "path": "ui/layui/extend/loading/loading.js",
         "provide": ["layui.loading"],
-        "require": ["layui"]
+        "require": ["layui", "path"]
     }, {
         "path": "ui/bootstrap/bootstrap.min.js",
         "provide": ["bootstrap"],

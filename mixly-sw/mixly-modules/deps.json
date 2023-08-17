@@ -3,7 +3,6 @@
         "path": "/common/board-manager.js",
         "require": [
             "layui",
-            "Mixly.Modules",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.XML",
@@ -22,7 +21,8 @@
     {
         "path": "/common/config.js",
         "require": [
-            "Mixly.Url"
+            "Mixly.Url",
+            "Mixly.LocalStorage"
         ],
         "provide": [
             "Mixly.Config"
@@ -35,15 +35,13 @@
             "Mixly.Config"
         ],
         "provide": [
-            "Mixly.Env",
-            "Mixly.Modules"
+            "Mixly.Env"
         ]
     },
     {
         "path": "/common/events.js",
         "require": [
             "Mixly.BoardManager",
-            "Mixly.Modules",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Url"
@@ -73,23 +71,10 @@
     {
         "path": "/common/loading.js",
         "require": [
-            "store",
-            "Mixly",
-            "Mixly.Env",
-            "Mixly.LocalStorage",
-            "Mixly.Modules",
-            "Mixly.Config",
-            "Mixly.Storage"
+            "Mixly.Config"
         ],
         "provide": [
             "Mixly.Loading"
-        ]
-    },
-    {
-        "path": "/common/mixly.js",
-        "require": [],
-        "provide": [
-            "Mixly"
         ]
     },
     {
@@ -136,19 +121,9 @@
         ]
     },
     {
-        "path": "/electron/electron.js",
-        "require": [
-            "Mixly"
-        ],
-        "provide": [
-            "Mixly.Electron"
-        ]
-    },
-    {
         "path": "/electron/python-shell.js",
         "require": [
             "Mixly.Env",
-            "Mixly.Modules",
             "Mixly.Electron"
         ],
         "provide": [
@@ -180,15 +155,6 @@
         ],
         "provide": [
             "Mixly.WebSocket.Socket"
-        ]
-    },
-    {
-        "path": "/web-socket/web-socket.js",
-        "require": [
-            "Mixly"
-        ],
-        "provide": [
-            "Mixly.WebSocket"
         ]
     }
 ]

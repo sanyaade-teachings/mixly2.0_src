@@ -54,7 +54,6 @@ function restore_blocks() {
         Config,
         Electron = {},
         Web = {},
-        Modules,
         Env,
         Drag,
         Editor,
@@ -104,7 +103,6 @@ function restore_blocks() {
             && goog.isElectron) {
             const filePath = window.localStorage[BOARD.boardType + ".openedPath"];
             const { File } = Electron;
-            const { path } = Modules;
             File.openedFilePath = filePath;
             File.workingPath = path.dirname(filePath);
             Title.updeteFilePath(File.openedFilePath);

@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
@@ -15,7 +16,7 @@ const {
 const { BOARD } = Config;
 const { laytpl } = layui;
 
-XML.TEMPLATE_DIR_PATH = goog.normalizePath_(goog.basePath + '../template/');
+XML.TEMPLATE_DIR_PATH = path.join(goog.basePath, '../template/');
 
 XML.TEMPLATE_CONFIG = [
     {

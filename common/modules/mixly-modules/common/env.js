@@ -1,6 +1,13 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
+goog.require('Mixly');
 goog.provide('Mixly.Env');
+
+const os = Mixly.require('os');
+const path = Mixly.require('path') ?? path;
+const fs_plus = Mixly.require('fs-plus');
+const electron_remote = Mixly.require('@electron/remote');
 
 const { Env } = Mixly;
 
@@ -76,9 +83,37 @@ Env.thirdPartyCSS = [];
   */
 Env.thirdPartyJS = [];
 
-Env.templatePath = goog.normalizePath_(goog.basePath + '../template/');
-Env.msgPath = goog.normalizePath_(goog.basePath + '../msg/');
+/**
+  * 默认模板路径
+  * @type {String}
+  */
+Env.templatePath = path.join(goog.basePath, '../template/');
 
-Env.indexDirPath = __dirname;
+/**
+  * 语言文件路径
+  * @type {String}
+  */
+Env.msgPath = path.join(goog.basePath, '../msg/');
+
+if (goog.isElectron) {
+    const { app } = electron_remote;
+    Env.indexDirPath = __dirname;
+    Env.currentPlatform = os.platform();
+    if (Env.currentPlatform === "darwin") {
+        Env.clientPath = path.resolve(app.getPath("exe"), '../../../../');
+    } else {
+        Env.clientPath = path.resolve(app.getPath("exe"), '../');
+    }
+    Env.pyFilePath = path.resolve(Env.clientPath, 'mixpyBuild/mixly.py');
+    if (Env.currentPlatform === 'win32') {
+        Env.python3Path = path.resolve(Env.clientPath, 'mixpyBuild/win_python3/python3.exe');
+    } else {
+        Env.python3Path = '/usr/bin/python3';
+        if (fs_plus.isFileSync('/usr/local/bin/python3')) {
+            Env.python3Path = '/usr/local/bin/python3';
+        }
+    }
+    Env.srcDirPath = path.resolve(Env.indexDirPath, '../../../');
+}
 
 });

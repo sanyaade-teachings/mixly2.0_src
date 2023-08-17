@@ -3,7 +3,6 @@ goog.loadJs('electron', () => {
 goog.require('LazyLoad');
 goog.require('layui');
 goog.require('Mixly.Env');
-goog.require('Mixly.Modules');
 goog.require('Mixly.XML');
 goog.require('Mixly.ScriptLoader');
 goog.require('Mixly.CssLoader');
@@ -17,7 +16,6 @@ goog.provide('Mixly.Electron.LibManager');
 
 const {
     Env,
-    Modules,
     Electron,
     XML,
     ScriptLoader,
@@ -29,21 +27,16 @@ const {
     Msg
 } = Mixly;
 
-const {
-    fs,
-    fs_extra,
-    fs_plus,
-    path,
-    compressing,
-    electron_remote
-} = Modules;
+const fs = Mixly.require('fs');
+const fs_plus = Mixly.require('fs-plus');
+const fs_extra = Mixly.require('fs-extra');
+const path = Mixly.require('path');
+const electron_remote = Mixly.require('@electron/remote');
+const compressing = Mixly.require('compressing');
 
 const { BOARD, USER } = Config;
-
 const { CloudDownload, LibManager } = Electron;
-
 const { table, element } = layui;
-
 const { dialog, shell } = electron_remote;
 
 LibManager.URL = {
@@ -615,9 +608,10 @@ LibManager.onclickManageLibs = () => {
 }
 
 LibManager.showLocalImportDialog = (type) => {
-    Modules.currentWindow.focus();
+    const currentWindow = electron_remote.getCurrentWindow();
+    currentWindow.focus();
     let layerNum;
-    dialog.showOpenDialog(Modules.currentWindow, {
+    dialog.showOpenDialog(currentWindow, {
         title: Msg.Lang['导入库'],
         defaultPath: Env.clientPath,
         buttonLabel: Msg.Lang['确定'],

@@ -3,7 +3,6 @@ goog.loadJs('electron', () => {
 goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
-goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
 goog.require('Mixly.XML');
@@ -14,7 +13,6 @@ goog.provide('Mixly.Electron.FooterLayerExample');
 const {
     Env,
     Config,
-    Modules,
     MFile,
     Title,
     XML,
@@ -28,13 +26,12 @@ const { File } = Electron;
 
 const { BOARD } = Config;
 
-const {
-    fs,
-    fs_plus,
-    fs_extra,
-    path,
-    app
-} = Modules;
+const fs = Mixly.require('fs');
+const fs_plus = Mixly.require('fs-plus');
+const fs_extra = Mixly.require('fs-extra');
+const path = Mixly.require('path');
+const electron_remote = Mixly.require('@electron/remote');
+const { app } = electron_remote;
 
 class FooterLayerExampleExt extends FooterLayerExample {
     constructor(exampleBtnId) {

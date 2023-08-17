@@ -1,6 +1,5 @@
 goog.loadJs('electron', () => {
 
-goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
@@ -15,7 +14,6 @@ goog.require('Mixly.Electron.BU');
 goog.provide('Mixly.Electron.File');
 
 const {
-    Modules,
     Env,
     LayerExt,
     Config,
@@ -32,23 +30,17 @@ const { BOARD } = Config;
 
 const { File, ArduShell, BU } = Electron;
 
-const {
-    fs_extra,
-    fs_plus,
-    fs,
-    path,
-    electron_remote,
-    app
-} = Modules;
-
-const { dialog } = electron_remote;
+const fs = Mixly.require('fs');
+const fs_plus = Mixly.require('fs-plus');
+const fs_extra = Mixly.require('fs-extra');
+const path = Mixly.require('path');
+const electron_remote = Mixly.require('@electron/remote');
+const { dialog, app } = electron_remote;
 
 const { MSG } = Blockly.Msg;
 
 File.DEFAULT_PATH = path.resolve(app.getAppPath(), 'src/sample');
-
 File.workingPath = File.DEFAULT_PATH;
-
 File.openedFilePath = null;
 
 File.userPath = {
@@ -59,7 +51,7 @@ File.userPath = {
 }
 
 File.showSaveDialog = (title, filters, endFunc) => {
-    const { currentWindow } = Modules;
+    const currentWindow = electron_remote.getCurrentWindow();
     currentWindow.focus();
     dialog.showSaveDialog(currentWindow, {
         title,
@@ -79,7 +71,7 @@ File.showSaveDialog = (title, filters, endFunc) => {
 }
 
 File.showOpenDialog = (title, filters, endFunc) => {
-    const { currentWindow } = Modules;
+    const currentWindow = electron_remote.getCurrentWindow();
     currentWindow.focus();
     dialog.showOpenDialog(currentWindow, {
         title,
@@ -283,12 +275,12 @@ File.openFile = (filePath) => {
         MFile.parseMix($(data), false, false, (message) => {
             if (message) {
                 switch (message) {
-                    case 'USE_CODE':
-                        // console.log('已从code标签中读取代码');
-                        break;
-                    case 'USE_INCOMPLETE_BLOCKS':
-                        // console.log('一些块已被忽略');
-                        break;
+                case 'USE_CODE':
+                    // console.log('已从code标签中读取代码');
+                    break;
+                case 'USE_INCOMPLETE_BLOCKS':
+                    // console.log('一些块已被忽略');
+                    break;
                 }
                 Editor.blockEditor.scrollCenter();
                 Blockly.hideChaff();

@@ -1,5 +1,6 @@
 goog.loadJs('web', () => {
 
+goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Boards');
@@ -285,7 +286,7 @@ Socket.updateSelectedBoardConfig = (info) => {
     Env.clientPath = info.clientPath;
     info.appPath = info.appPath.replaceAll('\\', '/');
     Env.srcDirPath = info.appPath;
-    Env.indexDirPath = goog.normalizePath_(Env.srcDirPath + '/' + BOARD.boardIndex + '/../');
+    Env.indexDirPath = path.join(Env.srcDirPath, BOARD.boardIndex, '../');
     Env.python3Path = info.python3Path;
     const boardType = Boards.getSelectedBoardName();
     Boards.changeTo(boardType);

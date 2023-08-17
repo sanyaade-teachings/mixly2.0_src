@@ -1,6 +1,5 @@
 goog.loadJs('electron', () => {
 
-goog.require('Mixly.Modules');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -10,7 +9,6 @@ goog.provide('Mixly.Electron.PythonShell');
 
 const {
     Electron,
-    Modules,
     MFile,
     Env,
     Msg,
@@ -19,11 +17,9 @@ const {
 
 const { PythonShell } = Electron;
 
-const {
-    fs,
-    iconv_lite,
-    python_shell
-} = Modules;
+const fs = Mixly.require('fs');
+const iconv_lite = Mixly.require('iconv-lite');
+const python_shell = Mixly.require('python-shell');
 
 var input_prompt_message = "";
 var input_prompt_message_line = -1;

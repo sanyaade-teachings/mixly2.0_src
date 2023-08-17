@@ -1,13 +1,30 @@
 (() => {
 
+const scriptUrl = new URL(document.currentScript.src);
+/**
+  * 当前视图
+  * @type {string} 主页面 home | 板卡页面 board
+  */
+goog.VIEW = scriptUrl.searchParams.get('view') || 'board';
+
+/**
+  * 当前环境
+  * @type {string} electron | web
+  */
 goog.NOW_ENV = window?.process?.versions?.electron ? 'electron' : 'web';
 
 /**
   * 检测当前环境
-  * @type {Boolean}，true - mixly Client; false - mixly Web
+  * @type {boolean} true - mixly Client; false - mixly Web
   */
 goog.isElectron = goog.NOW_ENV === 'electron' ? true : false;
 
+/**
+  * @function 根据当前环境执行对应函数
+  * @param type {string} 目标环境，electron | web | common
+  * @param func {function} 需要在目标环境下执行的函数
+  * @return {void}
+  */
 goog.loadJs = (type, func) => {
     if (type !== goog.NOW_ENV && type !== 'common') {
         return;
@@ -15,22 +32,18 @@ goog.loadJs = (type, func) => {
     func();
 }
 
-
 /**
   * mixly文件夹相对于base.js的路径
   * @type {string}
   */
-goog.MIXLY_DIR_PATH = [];
-goog.MIXLY_DIR_PATH.push('../');
-goog.MIXLY_DIR_PATH.push('../modules/mixly-modules');
-const scriptUrl = new URL(document.currentScript.src);
-if (scriptUrl.searchParams.get('view') === 'home') {
+goog.MIXLY_DIR_PATH = [ '../', '../modules/mixly-modules' ];
+if (goog.VIEW === 'home') {
     goog.MIXLY_DIR_PATH.push('../../mixly-sw/mixly-modules');
 }
 
 /**
   * 所有模块的信息所构成的列表，其中模块路径为其相对于blockly-core目录的相对路径
-  * @type {list}
+  * @type {array}
   */
 goog.DEPENDENCIES = [];
 
@@ -114,6 +127,10 @@ goog.addDependencies = (dependencies) => {
     }
 }
 
+/**
+ * @function 将已有依赖加入到goog模块的依赖列表中，用于后续模块的加载
+ * @return {void}
+ **/
 goog.initDependencies = () => {
     for (let path of goog.MIXLY_DIR_PATH) {
         const depsJson = goog.getJSON(goog.normalizePath_(goog.basePath + path + '/deps.json'), {});
@@ -128,7 +145,6 @@ goog.initDependencies = () => {
 }
 
 goog.initDependencies();
-
 goog.require('MixlyLoader');
 
 })();

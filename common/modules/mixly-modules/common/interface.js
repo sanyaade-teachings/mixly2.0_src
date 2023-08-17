@@ -7,7 +7,6 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.require('Mixly.LevelSelector');
@@ -35,7 +34,6 @@ const {
     XML,
     Nav,
     Boards,
-    Modules,
     Interface,
     Env,
     ToolboxSearcher,
@@ -46,6 +44,7 @@ const {
 } = Mixly;
 
 const { BOARD, USER } = Config;
+const electron = Mixly.require('electron');
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
@@ -167,7 +166,6 @@ Interface.feedback = () => {
 
 Interface.open = (href) => {
     if (goog.isElectron) {
-        const { electron } = Modules;
         const { shell } = electron;
         shell.openExternal(href);
     } else {

@@ -2,7 +2,6 @@ goog.loadJs('electron', () => {
 
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.Loader');
@@ -10,7 +9,6 @@ goog.provide('Mixly.Electron.Loader');
 const {
     Url,
     Config,
-    Modules,
     Electron,
     Env
 } = Mixly;

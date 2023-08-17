@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
@@ -23,7 +24,7 @@ const { dropdown, tree } = layui;
 class FooterLayerExample extends FooterLayer {
     static {
         // 弹层模板
-        this.MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-example.html');
+        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer-example.html'));
     }
 
     constructor(domId) {

@@ -1,20 +1,16 @@
 goog.loadJs('electron', () => {
 
 goog.require('Mixly.Url');
-goog.require('Mixly.Modules');
 goog.provide('Mixly.Electron');
 
 const {
     Url,
-    Modules,
     Env,
     Electron
 } = Mixly;
 
-const {
-    electron_remote,
-    path
-} = Modules;
+const electron_remote = Mixly.require('@electron/remote');
+const path = Mixly.require('path');
 
 const {
     Menu,

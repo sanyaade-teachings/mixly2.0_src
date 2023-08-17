@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('Blockly');
 goog.require('layui');
 goog.require('Mixly.Env');
@@ -20,7 +21,7 @@ const { dropdown } = layui;
 class FooterLayerBoardConfig extends FooterLayer {
     static {
         // 弹层模板
-        this.MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-board-config.html');
+        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer-board-config.html'));
     }
 
     /**

@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('tippy');
 goog.require('shortid');
@@ -24,8 +25,8 @@ const {
 } = Mixly;
 
 class StatusBarTab {
-    static CTRL_BTN_TEMPLATE = goog.get(Env.templatePath + '/statusbar-tab-ctrl-btn.html');
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/statusbar-tab-menu.html');
+    static CTRL_BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-ctrl-btn.html'));
+    static MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-menu.html'));
 
     constructor(id, drag) {
         this.id = id;

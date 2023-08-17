@@ -2,9 +2,14 @@
 goog.require('Mixly');
 goog.require('Mixly.Config');
 goog.provide('Mixly.Env');
-goog.provide('Mixly.Modules');
 
-const { Env, Config, Modules } = Mixly;
+const os = Mixly.require('os');
+const path = Mixly.require('path');
+const fs_extra = Mixly.require('fs-extra');
+const fs_plus = Mixly.require('fs-plus');
+const electron_remote = Mixly.require('@electron/remote');
+
+const { Env, Config } = Mixly;
 
 const { SOFTWARE } = Config;
 
@@ -35,26 +40,6 @@ Env.hasCompiler = SOFTWARE?.webCompiler?.enabled ? true : false;
 Env.thirdPartyBoardPath = './boards/extend';
 
 if (goog.isElectron) {
-    Modules.fs = require('fs');
-    Modules.fs_extra = require('fs-extra');
-    Modules.fs_plus = require('fs-plus');
-    Modules.path = require('path');
-    Modules.os = require('os');
-    Modules.electron = require('electron');
-    Modules.electron_remote = require('@electron/remote');
-    Modules.node_downloader_helper = require('node-downloader-helper');
-    Modules.adm_zip_iconv = require('adm-zip-iconv');
-    Modules.compressing = require('compressing');
-    Modules.json2md = require('json2md');
-
-    const {
-        fs_extra,
-        fs_plus,
-        path,
-        os,
-        electron_remote
-    } = Modules;
-
     Env.currentPlatform = os.platform();
     Env.currentWindow = electron_remote.getCurrentWindow();
     const { app } = electron_remote;

@@ -1,21 +1,17 @@
 (() => {
 
 goog.require('Mixly.Env');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.PythonShell');
 
 const {
     Env,
-    Modules,
     Electron
 } = Mixly;
 
-const {
-    fs_extra,
-    fs_plus,
-    python_shell
-} = Modules;
+const fs_extra = Mixly.require('fs-extra');
+const fs_plus = Mixly.require('fs-plus');
+const python_shell = Mixly.require('python-shell');
 
 const { PythonShell } = Electron;
 

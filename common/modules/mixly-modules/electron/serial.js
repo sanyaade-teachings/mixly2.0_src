@@ -1,7 +1,6 @@
 goog.loadJs('electron', () => {
 
 goog.require('layui');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -16,7 +15,6 @@ const { laytpl } = layui;
 
 const { 
     Electron,
-    Modules,
     Charts,
     Config,
     Env,
@@ -31,15 +29,10 @@ const { Serial } = Electron;
 
 const { BOARD, USER } = Config;
 
-Modules.serialport = require('serialport');
-Modules.minimist = require('minimist');
-
-const {
-    serialport,
-    lodash_fp,
-    child_process,
-    minimist
-} = Modules;
+const lodash_fp = Mixly.require('lodash/fp');
+const child_process = Mixly.require('child_process');
+const minimist = Mixly.require('minimist');
+const serialport = Mixly.require('serialport');
 
 const { SerialPort } = serialport;
 

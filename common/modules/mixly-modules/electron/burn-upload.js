@@ -2,7 +2,6 @@ goog.loadJs('electron', () => {
 
 goog.require('layui');
 goog.require('Mixly.Config');
-goog.require('Mixly.Modules');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
@@ -15,7 +14,6 @@ goog.provide('Mixly.Electron.BU');
 const {
     Electron,
     Config,
-    Modules,
     LayerExt,
     Env,
     Boards,
@@ -31,16 +29,14 @@ var downloadShell = null;
 
 const { form } = layui;
 
-const {
-    fs,
-    fs_extra,
-    fs_plus,
-    iconv_lite,
-    os,
-    lodash_fp,
-    child_process,
-    path
-} = Modules;
+const fs = Mixly.require('fs');
+const fs_plus = Mixly.require('fs-plus');
+const fs_extra = Mixly.require('fs-extra');
+const path = Mixly.require('path');
+const lodash_fp = Mixly.require('lodash/fp');
+const child_process = Mixly.require('child_process');
+const iconv_lite = Mixly.require('iconv-lite');
+const os = Mixly.require('os');
 
 BU.uploading = false;
 

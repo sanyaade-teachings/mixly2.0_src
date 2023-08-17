@@ -281,11 +281,7 @@ Boards.changeTo = (boardName) => {
                 }
                 outObj.libPath = libPath;
             } else {
-                if (goog.isElectron) {
-                    outObj.libPath = [ path.resolve(Env.indexDirPath, 'build/lib/') ];
-                } else {
-                    outObj.libPath = goog.normalizePath_(Env.indexDirPath + '/build/lib/');
-                }
+                outObj.libPath = [ path.join(Env.indexDirPath, 'build/lib/') ];
             }
         }
         if (goog.isElectron || Env.hasSocketServer) {
@@ -293,7 +289,7 @@ Boards.changeTo = (boardName) => {
                 outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             } else {
                 if (goog.isElectron) {
-                    outObj.filePath = path.resolve(Env.indexDirPath, 'build/main.py');
+                    outObj.filePath = path.join(Env.indexDirPath, 'build/main.py');
                 } else {
                     outObj.filePath = goog.normalizePath_(Env.indexDirPath + '/build/main.py');
                 }

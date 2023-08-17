@@ -22,7 +22,6 @@ const {
     BoardManager,
     Config,
     Env,
-    Modules,
     MJSON,
     Storage,
     Setting

@@ -1,6 +1,5 @@
 goog.loadJs('electron', () => {
 
-goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -8,7 +7,6 @@ goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.WikiManager');
 
 const {
-    Modules,
     Config,
     Env,
     Msg,
@@ -19,16 +17,13 @@ const { WikiManager } = Electron;
 
 const { BOARD } = Config;
 
-const {
-    path,
-    fs,
-    fs_extra,
-    fs_plus,
-    json2md,
-    electron_remote,
-    electron_localshortcut
-} = Modules;
-
+const fs = Mixly.require('fs');
+const fs_plus = Mixly.require('fs-plus');
+const fs_extra = Mixly.require('fs-extra');
+const path = Mixly.require('path');
+const json2md = Mixly.require('json2md');
+const electron_localshortcut = Mixly.require('electron-localshortcut');
+const electron_remote = Mixly.require('@electron/remote');
 const { ipcMain } = electron_remote;
 
 

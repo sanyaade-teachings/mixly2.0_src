@@ -5,12 +5,6 @@ goog.provide('Mixly.Env');
 const { Env } = Mixly;
 
 /**
-  * 检测当前环境
-  * @type {Boolean}，true - mixly Client; false - mixly Web
-  */
-Env.isElectron = true;
-
-/**
   * 检测是否启用node服务器
   * @type {Boolean}
   */
@@ -85,10 +79,6 @@ Env.thirdPartyJS = [];
 Env.templatePath = goog.normalizePath_(goog.basePath + '../template/');
 Env.msgPath = goog.normalizePath_(goog.basePath + '../msg/');
 
-Env.isElectron = window?.process?.versions?.electron ? true : false;
-
-if (Env.isElectron) {
-    Env.indexDirPath = __dirname;
-}
+Env.indexDirPath = __dirname;
 
 });

@@ -34,7 +34,7 @@ const { form } = layui;
 const {
     fs,
     fs_extra,
-    fs_extend,
+    fs_plus,
     iconv_lite,
     os,
     lodash_fp,
@@ -170,7 +170,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
         startPath = path.dirname(startPath);
     }
     // 如果需要拷贝的是文件，则在目的路径后要加上文件名
-    if (fs_extend.isfile(startPath)) {
+    if (fs_plus.isFileSync(startPath)) {
         desPath = path.resolve(desPath, path.basename(startPath));
     }
     fs_extra.copy(startPath, desPath)
@@ -292,10 +292,10 @@ BU.getDisksWithVolumesName = function (type, volumeName, startPath) {
         for (var i = 0; i < result.length; i++) {
             if (result[i] === '') continue;
             for (var j = 0; ; j++) {
-                if (fs_extend.isdir(diskPath + result[i] + (j == 0 ? '' : (addChar + j)))) {
+                if (fs_plus.isDirectorySync(diskPath + result[i] + (j == 0 ? '' : (addChar + j)))) {
                     stdout += diskPath + result[i] + (j == 0 ? '' : (addChar + j)) + ':';
                     deviceNum++;
-                } else if (fs_extend.isdir(diskPath + os.userInfo().username + '/' + result[i] + (j == 0 ? '' : (addChar + j)))) {
+                } else if (fs_plus.isDirectorySync(diskPath + os.userInfo().username + '/' + result[i] + (j == 0 ? '' : (addChar + j)))) {
                     stdout += diskPath + os.userInfo().username + '/' + result[i] + (j == 0 ? '' : (addChar + j)) + ':';
                     deviceNum++;
                 } else {
@@ -465,10 +465,10 @@ BU.searchLibs = function (dirPath, code, libArr) {
                     for (let nowDirPath of upload.libPath) {
                         const nowMpyFilePath = path.resolve(nowDirPath, moduleArr[j] + '.mpy');
                         const nowPyFilePath = path.resolve(nowDirPath, moduleArr[j] + '.py');
-                        if (fs_extend.isfile(nowMpyFilePath)) {
+                        if (fs_plus.isFileSync(nowMpyFilePath)) {
                             oldLibPath = nowMpyFilePath;
                             break;
-                        } else if (fs_extend.isfile(nowPyFilePath)) {
+                        } else if (fs_plus.isFileSync(nowPyFilePath)) {
                             oldLibPath = nowPyFilePath;
                         }
                     }

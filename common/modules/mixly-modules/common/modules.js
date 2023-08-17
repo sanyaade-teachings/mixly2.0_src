@@ -10,12 +10,11 @@ const loadNodeModules = () => {
     Modules.child_process = require("child_process");
     Modules.fs = require('fs');
     Modules.fs_extra = require('fs-extra');
-    Modules.fs_extend = require('../../../common/modules/node-modules/fsExtend.js');
+    Modules.fs_plus = require('fs-plus');
     Modules.compressing = require('compressing');
     Modules.json2md = require('json2md');
     Modules.electron = require('electron');
     Modules.chokidar = require('chokidar');
-    Modules.clipboard = Modules.electron.clipboard;
     Modules.electron_localshortcut = require('electron-localshortcut');
     Modules.os = require('os');
     Modules.electron_remote = require('@electron/remote');
@@ -28,7 +27,7 @@ const loadNodeModules = () => {
     Modules.iconv_lite = require('iconv-lite');
     Modules.python_shell = require('python-shell');
     Env.currentPlatform = Modules.os.platform();
-    const { path, fs_extend, app } = Modules;
+    const { path, fs_plus, app } = Modules;
     if (Env.currentPlatform === "darwin") {
         Env.clientPath = path.resolve(app.getPath("exe"), '../../../../');
     } else {
@@ -39,7 +38,7 @@ const loadNodeModules = () => {
         Env.python3Path = path.resolve(Env.clientPath, 'mixpyBuild/win_python3/python3.exe');
     } else {
         Env.python3Path = '/usr/bin/python3';
-        if (fs_extend.isfile('/usr/local/bin/python3')) {
+        if (fs_plus.isFileSync('/usr/local/bin/python3')) {
             Env.python3Path = '/usr/local/bin/python3';
         }
     }
@@ -47,6 +46,6 @@ const loadNodeModules = () => {
     Env.srcDirPath = path.resolve(Env.indexDirPath, '../../../');
 }
 
-Env.isElectron && loadNodeModules();
+goog.isElectron && loadNodeModules();
 
 });

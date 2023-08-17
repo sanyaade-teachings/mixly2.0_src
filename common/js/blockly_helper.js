@@ -2,19 +2,6 @@
 'use strict'
 
 /**
- * Execute the user's code.
- * Just a quick and dirty eval.  No checks for infinite loops, etc.
- */
-function runJS() {
-    var code = Blockly.Generator.workspaceToCode('JavaScript');
-    try {
-        eval(code);
-    } catch (e) {
-        alert('Program error:\n' + e);
-    }
-}
-
-/**
  * Backup code blocks to localStorage.
  */
 function backup_blocks() {
@@ -78,7 +65,7 @@ function restore_blocks() {
     if (!('localStorage' in window && window['localStorage'] != null)) {
         return;
     }
-    if (window.localStorage[BOARD.boardType + '.filePath'] && Env.isElectron) {
+    if (window.localStorage[BOARD.boardType + '.filePath'] && goog.isElectron) {
         const { File } = Electron;
         File.openFile(window.localStorage[BOARD.boardType + '.filePath']);
         window.localStorage[BOARD.boardType + '.filePath'] = '';
@@ -114,7 +101,7 @@ function restore_blocks() {
         }
         if (window.localStorage[BOARD.boardType + ".openedPath"]
             && window.localStorage[BOARD.boardType + ".openedPath"] !== 'null'
-            && Env.isElectron) {
+            && goog.isElectron) {
             const filePath = window.localStorage[BOARD.boardType + ".openedPath"];
             const { File } = Electron;
             const { path } = Modules;

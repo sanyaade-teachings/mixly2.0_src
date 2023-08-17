@@ -1,6 +1,6 @@
 const fs = require('fs');
 const fs_extra = require('fs-extra');
-const fs_extend = require('./common/modules/node-modules/fsExtend.js');
+const fs_plus = require('fs-plus');
 const build_deps = require('./build/build-deps.js');
 const path = require('path');
 

@@ -81,7 +81,7 @@ Mixly.ScriptLoader.load = function () {
         }
     }
 
-    if (Mixly.Env.isElectron) {
+    if (Mixly.goog.isElectron) {
         loadJsArr(Mixly.ScriptLoader.clientJs);
     } else {
         loadJsArr(Mixly.ScriptLoader.webJs);

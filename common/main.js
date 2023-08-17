@@ -1,9 +1,15 @@
 (() => {
 
-const NOW_ENV = window?.process?.versions?.electron ? 'electron' : 'web';
+goog.NOW_ENV = window?.process?.versions?.electron ? 'electron' : 'web';
+
+/**
+  * 检测当前环境
+  * @type {Boolean}，true - mixly Client; false - mixly Web
+  */
+goog.isElectron = goog.NOW_ENV === 'electron' ? true : false;
 
 goog.loadJs = (type, func) => {
-    if (type !== NOW_ENV && type !== 'common') {
+    if (type !== goog.NOW_ENV && type !== 'common') {
         return;
     }
     func();
@@ -14,195 +20,19 @@ goog.loadJs = (type, func) => {
   * mixly文件夹相对于base.js的路径
   * @type {string}
   */
-goog.MIXLY_DIR_PATH = '../modules/mixly-modules';
+goog.MIXLY_DIR_PATH = [];
+goog.MIXLY_DIR_PATH.push('../');
+goog.MIXLY_DIR_PATH.push('../modules/mixly-modules');
+const scriptUrl = new URL(document.currentScript.src);
+if (scriptUrl.searchParams.get('view') === 'home') {
+    goog.MIXLY_DIR_PATH.push('../../mixly-sw/mixly-modules');
+}
 
 /**
-  * 所有模块的信息所构成的列表，其中模块路径为其相对于mixly目录的相对路径
+  * 所有模块的信息所构成的列表，其中模块路径为其相对于blockly-core目录的相对路径
   * @type {list}
   */
-goog.DEPENDENCIES = [
-    {
-        "path": '/../../ui/layui/layui.js',
-        "provide": ['layui'],
-        "require": []
-    }, {
-        "path": '/../../ui/layui/extend/loading/loading.js',
-        "provide": ['layui.loading'],
-        "require": ['layui']
-    }, {
-        "path": '/../../ui/bootstrap/bootstrap.min.js',
-        "provide": ['bootstrap'],
-        "require": ['Popper']
-    }, {
-        "path": '/../../blockly-core/blockly_compressed.js',
-        "provide": ['Blockly'],
-        "require": []
-    }, {
-        "path": '/../../blockly-core/plugins/field_grid_dropdown.js',
-        "provide": ['Blockly.FieldGridDropdown'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/field_dependent_dropdown.js',
-        "provide": ['Blockly.FieldDependentDropdown'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/field_slider.js',
-        "provide": ['Blockly.FieldSlider'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/field_bitmap.js',
-        "provide": ['Blockly.FieldBitmap'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/field_colour_hsv_sliders.js',
-        "provide": ['Blockly.FieldColourHsvSliders'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/field_date.js',
-        "provide": ['Blockly.FieldDate'],
-        "require": ['Blockly']
-    }/*, {
-        "path": '/../blockly-core/continuous_toolbox.js',
-        "provide": ['ContinuousToolbox', 'ContinuousFlyout', 'ContinuousMetrics'],
-        "require": ['Blockly']
-    }*/, {
-        "path": '/../../blockly-core/plugins/workspace_search.js',
-        "provide": ['WorkspaceSearch'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/workspace_backpack.js',
-        "provide": ['Backpack'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/workspace_minimap.js',
-        "provide": ['Minimap', 'PositionedMinimap'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/workspace_multiselect.js',
-        "provide": ['Multiselect'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/content_highlight.js',
-        "provide": ['ContentHighlight'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/zoom_to_fit.js',
-        "provide": ['ZoomToFitControl'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/lexical_variables.js',
-        "provide": ['LexicalVariables'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/disable_top_blocks.js',
-        "provide": ['DisableTopBlocks'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../blockly-core/plugins/screenshot.js',
-        "provide": ['Blockly.Screenshot'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../web-modules/lazyload.js',
-        "provide": ['LazyLoad'],
-        "require": []
-    }, {
-        "path": '/../web-modules/microbit-fs.umd.min.js',
-        "provide": ['microbitFs'],
-        "require": []
-    }, {
-        "path": '/../web-modules/base64.min.js',
-        "provide": ['Base64'],
-        "require": []
-    }, {
-        "path": '/../web-modules/sortable.min.js',
-        "provide": ['Sortable'],
-        "require": []
-    }, {
-        "path": '/../web-modules/store.modern.min.js',
-        "provide": ['store'],
-        "require": []
-    }, {
-        "path": '/../web-modules/xscrollbar.js',
-        "provide": ['XScrollbar'],
-        "require": []
-    }, {
-        "path": '/../web-modules/popper.min.js',
-        "provide": ['Popper'],
-        "require": []
-    }, {
-        "path": '/../web-modules/tippy-bundle.umd.min.js',
-        "provide": ['tippy'],
-        "require": ['Popper']
-    }, {
-        "path": '/../web-modules/select2.min.js',
-        "provide": ['select2'],
-        "require": []
-    }, {
-        "path": '/../web-modules/xterm.min.js',
-        "provide": ['Terminal'],
-        "require": []
-    }, {
-        "path": '/../web-modules/highcharts.min.js',
-        "provide": ['Highcharts'],
-        "require": []
-    }, {
-        "path": '/../web-modules/pouchdb.min.js',
-        "provide": ['PouchDB'],
-        "require": []
-    }, {
-        "path": '/../web-modules/avr-uploader.min.js',
-        "provide": ['AvrUploader'],
-        "require": []
-    }, {
-        "path": '/../web-modules/ace/ace.js',
-        "provide": ['ace'],
-        "require": []
-    }, {
-        "path": '/../web-modules/ace/ext-language_tools.js',
-        "provide": ['ace.ExtLanguageTools'],
-        "require": ['ace']
-    }, {
-        "path": '/../web-modules/dap.umd.js',
-        "provide": ['DAPjs'],
-        "require": []
-    }, {
-        "path": '/../web-modules/d3.min.js',
-        "provide": ['d3'],
-        "require": []
-    }, {
-        "path": '/../web-modules/shortid.js',
-        "provide": ['shortid'],
-        "require": []
-    }, {
-        "path": '/../web-modules/fp.min.js',
-        "provide": ['FingerprintJS'],
-        "require": []
-    }, {
-        "path": '/../web-modules/path-browserify.js',
-        "provide": ['path'],
-        "require": []
-    }, {
-        "path": '/web/serialport.js',
-        "provide": ['WebSerialPort'],
-        "require": []
-    }, {
-        "path": '/../../msg/blockly/lang.js',
-        "provide": ['Blockly.Lang'],
-        "require": ['Blockly']
-    }, {
-        "path": '/../../msg/blockly/zh-hans.js',
-        "provide": ['Blockly.Lang.ZhHans'],
-        "require": ['Blockly.Lang']
-    }, {
-        "path": '/../../msg/blockly/zh-hant.js',
-        "provide": ['Blockly.Lang.ZhHant'],
-        "require": ['Blockly.Lang']
-    }, {
-        "path": '/../../msg/blockly/en.js',
-        "provide": ['Blockly.Lang.En'],
-        "require": ['Blockly.Lang']
-    }
-];
+goog.DEPENDENCIES = [];
 
 /**
   * 缓存已请求成功的文本数据，防止重复请求
@@ -280,15 +110,18 @@ goog.addDependencies = (dependencies) => {
         if (!googPath || !googProvide || !googRequire) {
             continue;
         }
-        goog.addDependency(goog.MIXLY_DIR_PATH + googPath, googProvide, googRequire);
+        goog.addDependency(googPath, googProvide, googRequire);
     }
 }
 
 goog.initDependencies = () => {
-    const depsJson = goog.getJSON(goog.normalizePath_(goog.basePath + goog.MIXLY_DIR_PATH + '/deps.json'), {});
-    if (depsJson && typeof depsJson === 'object') {
-        for (let i in depsJson) {
-            goog.DEPENDENCIES.push(depsJson[i]);
+    for (let path of goog.MIXLY_DIR_PATH) {
+        const depsJson = goog.getJSON(goog.normalizePath_(goog.basePath + path + '/deps.json'), {});
+        if (depsJson && typeof depsJson === 'object') {
+            for (let i in depsJson) {
+                depsJson[i].path = path + depsJson[i].path;
+                goog.DEPENDENCIES.push(depsJson[i]);
+            }
         }
     }
     goog.addDependencies(goog.DEPENDENCIES);

@@ -49,13 +49,13 @@ const { BOARD, USER } = Config;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
-    const { FooterLayerExample } = Env.isElectron? Mixly.Electron : Mixly.Web;
+    const { FooterLayerExample } = goog.isElectron? Mixly.Electron : Mixly.Web;
     if (FooterLayerExample instanceof Object) {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
     Nav.init();
     Boards.init();
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         const { Electron } = Mixly;
         const {
             LibManager = undefined,
@@ -77,7 +77,7 @@ Interface.init = () => {
     Boards.updateCategories(selectedBoardName);
     Msg.renderToolbox(true);
     Editor.init();
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         const { Electron } = Mixly;
         const { Serial = undefined } = Electron;
         if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
@@ -166,7 +166,7 @@ Interface.feedback = () => {
 }
 
 Interface.open = (href) => {
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         const { electron } = Modules;
         const { shell } = electron;
         shell.openExternal(href);

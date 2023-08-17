@@ -52,10 +52,10 @@ codeEnv = Nav.CONFIG.compile ? 'c' : (Nav.CONFIG.run || Nav.CONFIG.webrun ? (Nav
 
 if (Env.hasSocketServer) workingEnv = 'websocket';
 else if (Env.hasCompiler) workingEnv = 'webcompiler';
-else if (Env.isElectron) workingEnv = 'electron';
+else if (goog.isElectron) workingEnv = 'electron';
 else workingEnv = 'web';
 
-if (Env.isElectron) operatingEnv = 'electron';
+if (goog.isElectron) operatingEnv = 'electron';
 else operatingEnv = 'web';
 
 Nav.codeEnv = codeEnv;
@@ -244,8 +244,8 @@ Nav.LEFT_BTN_CONFIG = [
 Nav.LEFT_BTN_ENV = {
     UNDO: true,
     REDO: true,
-    CONNECT: !Env.isElectron && (codeEnv !== 'py' && codeEnv !== 'webpy'),
-    BURN: Nav.CONFIG.burn && !(!Env.isElectron && BOARD?.boardType === "MixGo AI" && !Env.hasSocketServer),
+    CONNECT: !goog.isElectron && (codeEnv !== 'py' && codeEnv !== 'webpy'),
+    BURN: Nav.CONFIG.burn && !(!goog.isElectron && BOARD?.boardType === "MixGo AI" && !Env.hasSocketServer),
     COMPILE: Nav.CONFIG.compile,
     UPLOAD: Nav.CONFIG.upload,
     SIMULATE: Nav.CONFIG.simulate,
@@ -507,26 +507,26 @@ Nav.RIGHT_BTN_CONFIG = [
 
 Nav.RIGHT_BTN_ENV = {
     SETTING: true,
-    EXPORT_LIB: Env.isElectron && Nav.CONFIG.setting.thirdPartyLibrary,
-    MANAGE_LIB: Env.isElectron && Nav.CONFIG.setting.thirdPartyLibrary,
+    EXPORT_LIB: goog.isElectron && Nav.CONFIG.setting.thirdPartyLibrary,
+    MANAGE_LIB: goog.isElectron && Nav.CONFIG.setting.thirdPartyLibrary,
     OTHER_BIN: Nav.CONFIG.burn && typeof BOARD?.burn?.special === 'object',
     WS_CONNECT: workingEnv === 'websocket',
     FILE: true,
     NEW_FILE: true,
     OPEN_FILE: true,
-    OPEN_FROM_CLOUD: !Env.isElectron && Env.hasSocketServer,
+    OPEN_FROM_CLOUD: !goog.isElectron && Env.hasSocketServer,
     SAVE_FILE: true,
     SAVE_AS_FILE: true,
-    // SAVE_FILE: Env.isElectron /*!(!Env.isElectron && location.protocol !== 'https:')*/,
-    // SAVE_AS_FILE: Env.isElectron /*!(!Env.isElectron && location.protocol !== 'https:')*/,
-    // SAVE_XML: !Env.isElectron /*&& location.protocol !== 'https:'*/,
-    // SAVE_PY: !Env.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.py,
-    // SAVE_INO: !Env.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.ino,
-    // SAVE_HEX: !Env.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.py && Nav.CONFIG.save.hex,
-    // SAVE_IMG: !Env.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.img,
-    SAVE_TO_CLOUD: !Env.isElectron && Env.hasSocketServer,
+    // SAVE_FILE: goog.isElectron /*!(!goog.isElectron && location.protocol !== 'https:')*/,
+    // SAVE_AS_FILE: goog.isElectron /*!(!goog.isElectron && location.protocol !== 'https:')*/,
+    // SAVE_XML: !goog.isElectron /*&& location.protocol !== 'https:'*/,
+    // SAVE_PY: !goog.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.py,
+    // SAVE_INO: !goog.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.ino,
+    // SAVE_HEX: !goog.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.py && Nav.CONFIG.save.hex,
+    // SAVE_IMG: !goog.isElectron /*&& location.protocol !== 'https:'*/ && Nav.CONFIG.save.img,
+    SAVE_TO_CLOUD: !goog.isElectron && Env.hasSocketServer,
     PYTHON_TO_BLOCKLY: Nav.CONFIG?.setting?.pythonToBlockly && ['mpy', 'py', 'webpy'].includes(codeEnv),
-    OPEN_WIKI: Env.isElectron && Nav.CONFIG.setting.wiki,
+    OPEN_WIKI: goog.isElectron && Nav.CONFIG.setting.wiki,
     FEED_BACK: true
 };
 

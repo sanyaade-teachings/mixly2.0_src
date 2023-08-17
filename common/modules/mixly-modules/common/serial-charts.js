@@ -78,12 +78,9 @@ const regression = new Regression();
 
 goog.require('Highcharts');
 goog.require('Mixly.Env');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Config');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.Charts');
-
-Mixly.Modules.highcharts = Highcharts;
 
 Mixly.Charts.startTime = 0;
 Mixly.Charts.oldTime = 0;
@@ -333,16 +330,16 @@ Mixly.Charts.lightTheme = {
     }
 };
 
-Mixly.Modules.highcharts.setOptions(Mixly.Charts.lightTheme);
+Highcharts.setOptions(Mixly.Charts.lightTheme);
 
-Mixly.Charts.lightTheme = $.extend(true, {}, Mixly.Modules.highcharts.getOptions(), {});
+Mixly.Charts.lightTheme = $.extend(true, {}, Highcharts.getOptions(), {});
 
 function resetOptions() {
-    var defaultOptions = Mixly.Modules.highcharts.getOptions();
+    var defaultOptions = Highcharts.getOptions();
     for (var prop in defaultOptions) {
         if (typeof defaultOptions[prop] !== 'function') delete defaultOptions[prop];
     }
-    Mixly.Modules.highcharts.setOptions(Mixly.Charts.lightTheme);
+    Highcharts.setOptions(Mixly.Charts.lightTheme);
 }
 
 Mixly.Charts.chart = null;
@@ -353,7 +350,7 @@ Mixly.Charts.addData = null;
 Mixly.Charts.init = function (serialOpened, dom) {
     const { USER } = Mixly.Config;
     if (USER.theme === 'dark') {
-        Mixly.Modules.highcharts.setOptions(Mixly.Charts.darkTheme);
+        Highcharts.setOptions(Mixly.Charts.darkTheme);
     } else {
         resetOptions();
     }
@@ -367,7 +364,7 @@ Mixly.Charts.init = function (serialOpened, dom) {
     const { dataDrawId, yMinId, yMaxId } = dom.id;
     const yMinDom = $('#' + yMinId),
         yMaxDom = $('#' + yMaxId);
-    Mixly.Charts.chart = Mixly.Modules.highcharts.chart(dataDrawId, {
+    Mixly.Charts.chart = Highcharts.chart(dataDrawId, {
         chart: {
             type: 'line'
         },

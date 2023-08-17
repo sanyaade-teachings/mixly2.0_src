@@ -1,5 +1,7 @@
 (() => {
 
+goog.require('ace');
+goog.require('ace.ExtLanguageTools');
 goog.require('layui');
 goog.require('store');
 goog.require('Mixly.XML');
@@ -170,7 +172,7 @@ Setting.addOnchangeOptionListener = () => {
         let index = $li.attr('lay-id') - 0;
         if (index === 1) {
             if (data.index !== Setting.nowIndex) {
-                Env.isElectron && BoardManager.onclickImportBoards();
+                goog.isElectron && BoardManager.onclickImportBoards();
             } else {
                 layui.table.resize('cloud-boards-table');
             }

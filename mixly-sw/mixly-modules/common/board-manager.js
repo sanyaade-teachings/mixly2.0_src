@@ -39,7 +39,7 @@ const {
 const {
     fs,
     fs_extra,
-    fs_extend,
+    fs_plus,
     path,
     adm_zip_iconv,
     compressing,
@@ -140,14 +140,14 @@ BoardManager.importBoardPackageWithConfig = (configPath) => {
     return new Promise((resolve, reject) => {
         const dirPath = path.resolve(configPath, '../');
         const hardwarePath = path.resolve(dirPath, './hardware');
-        if (fs_extend.isdir(dirPath) && fs_extend.isdir(hardwarePath)) {
+        if (fs_plus.isDirectorySync(dirPath) && fs_plus.isDirectorySync(hardwarePath)) {
             const packageList = fs.readdirSync(hardwarePath);
             const packagePath = [];
             let copyPromiseList = [];
             fs_extra.ensureDirSync(path.resolve(Env.arduinoCliPath, './Arduino15/'));
             for (let i of packageList) {
                 const startPath = path.resolve(hardwarePath, './' + i);
-                if (fs_extend.isdir(startPath)) {
+                if (fs_plus.isDirectorySync(startPath)) {
                     const endPath = path.resolve(Env.arduinoCliPath, './Arduino15/packages/' + i);
                     copyPromiseList.push(BoardManager.copyDir(startPath, endPath));
                 } else {
@@ -269,7 +269,7 @@ BoardManager.showDelBoardProgress = () => {
 
 BoardManager.importFromLocal = (inPath, sucFunc, errorFunc, endFunc) => {
     const extname = path.extname(inPath);
-    if (fs_extend.isfile(inPath)) {
+    if (fs_plus.isFileSync(inPath)) {
         switch (extname) {
             case '.json':
                 if (path.resolve(inPath, '../../') === Env.thirdPartyBoardPath) {
@@ -331,7 +331,7 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
                 endFunc(error);
             });
         } else {
-            if (fs_extend.isdir(hardwarePath)) {
+            if (fs_plus.isDirectorySync(hardwarePath)) {
                 BoardManager.importBoardPackageWithConfig(inPath)
                 .then((message) => {
                     if (message) {
@@ -500,7 +500,7 @@ BoardManager.writePackageConfig = (boardInfo) => {
     } = boardInfo;
     if (!boardDirName) return;
     const boardDir = path.resolve(Env.thirdPartyBoardPath, './' + boardDirName);
-    if (fs_extend.isdir(boardDir)) {
+    if (fs_plus.isDirectorySync(boardDir)) {
         const { currentPlatform } = Env,
         arch = os.arch();
         let packageUrl, packageIndexUrl, packageName, packageIndexName;
@@ -821,11 +821,11 @@ BoardManager.readBoardConfig = (inPath) => {
 
 BoardManager.getThirdPartyBoardsConfig = () => {
     const thirdPartyBoardsConfig = [];
-    if (fs_extend.isdir(Env.thirdPartyBoardPath)) {
+    if (fs_plus.isDirectorySync(Env.thirdPartyBoardPath)) {
         const nameList = fs.readdirSync(Env.thirdPartyBoardPath);
         for (let i of nameList) {
             const namePath = path.resolve(Env.thirdPartyBoardPath, './' + i);
-            if (!fs_extend.isdir(namePath)) {
+            if (!fs_plus.isDirectorySync(namePath)) {
                 continue;
             }
             const configPath = path.resolve(namePath, './config.json');
@@ -838,9 +838,9 @@ BoardManager.getThirdPartyBoardsConfig = () => {
             const srcThirdDir = path.resolve(namePath, boardImg);
             const reSrcIndexDir = path.relative(Env.indexPath, srcIndexDir);
             const reSrcThirdDir = path.relative(Env.indexPath, srcThirdDir);
-            if (fs_extend.isfile(srcIndexDir)) {
+            if (fs_plus.isFileSync(srcIndexDir)) {
                 boardConfig.boardImg = reSrcIndexDir;
-            } else if (fs_extend.isfile(srcThirdDir)) {
+            } else if (fs_plus.isFileSync(srcThirdDir)) {
                 boardConfig.boardImg = reSrcThirdDir;
             }
             thirdPartyBoardsConfig.push(boardConfig);
@@ -856,7 +856,7 @@ BoardManager.compareBoardConfig = (cloudConfig) => {
     cloudConfig.downloadBoardIndex = true;
     cloudConfig.downloadPackage = true;
     const boardDir = path.resolve(Env.thirdPartyBoardPath, './' + boardDirName);
-    if (fs_extend.isdir(boardDir)) {
+    if (fs_plus.isDirectorySync(boardDir)) {
         const localConfigPath = path.resolve(boardDir, './config.json');
         const localConfig = fs_extra.readJsonSync(localConfigPath, { throws: false });
         if (localConfig !== null) {
@@ -979,8 +979,8 @@ BoardManager.loadBoards = () => {
             let show = false;
             if ((Env.hasSocketServer && env.webSocket)
              || (Env.hasCompiler && env.webCompiler)
-             || (Env.isElectron && env.electron)
-             || (!Env.isElectron && env.web)) {
+             || (goog.isElectron && env.electron)
+             || (!goog.isElectron && env.web)) {
                 show = true;
             } else {
                 show = false;
@@ -988,9 +988,9 @@ BoardManager.loadBoards = () => {
             if (!show) {
                 continue;
             }
-            if (Env.isElectron) {
+            if (goog.isElectron) {
                 const indexPath = path.resolve(__dirname, config.boardIndex);
-                if (fs_extend.isfile(indexPath))
+                if (fs_plus.isFileSync(indexPath))
                     newBoardsList.push({ ...BOARDS_INFO[i], thirdPartyBoard: false });
             } else {
                 newBoardsList.push({ ...BOARDS_INFO[i], thirdPartyBoard: false });
@@ -998,12 +998,12 @@ BoardManager.loadBoards = () => {
         }
     }
 
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         const tpBoardsConfig = BoardManager.getThirdPartyBoardsConfig();
         for (let i = 0; i < tpBoardsConfig.length; i++) {
             const config = tpBoardsConfig[i];
             const indexPath = path.resolve(__dirname, config.boardIndex);
-            if (fs_extend.isfile(indexPath)) {
+            if (fs_plus.isFileSync(indexPath)) {
                 const boardInfo = {
                     boardImg: config.boardImg ?? './files/default.png',
                     boardType: config.boardType ?? 'Unknown board',

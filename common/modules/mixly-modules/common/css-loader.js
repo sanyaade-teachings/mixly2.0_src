@@ -80,7 +80,7 @@ Mixly.CssLoader.load = function () {
 
     loadCssArr(Mixly.CssLoader.commonCss);
 
-    if (Mixly.Env.isElectron) {
+    if (goog.isElectron) {
         loadCssArr(Mixly.CssLoader.clientCss);
     } else {
         loadCssArr(Mixly.CssLoader.webCss);

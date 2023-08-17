@@ -1,6 +1,6 @@
 const fs = require('fs');
 const fs_extra = require('fs-extra');
-const fs_extend = require('../common/modules/node-modules/fsExtend.js');
+const fs_plus = require('fs-plus');
 const path = require('path');
 
 const scanDir = (dirPath, ignore, rootPath) => {
@@ -8,14 +8,14 @@ const scanDir = (dirPath, ignore, rootPath) => {
     const dirName = path.basename(dirPath);
     const dirIgnore = ignore?.dir ?? [];
     const fileIgnore = ignore?.file ?? [];
-    if (!fs_extend.isdir(dirPath) || dirIgnore.includes(dirPath)) {
+    if (!fs_plus.isDirectorySync(dirPath) || dirIgnore.includes(dirPath)) {
         return googList;
     }
 
     let nameList = fs.readdirSync(dirPath);
     for (let i = 0; i < nameList.length; i++) {
         let childPath = path.join(dirPath, nameList[i]);
-        if (fs_extend.isfile(childPath)) {
+        if (fs_plus.isFileSync(childPath)) {
             let googObj = scanFile(childPath, ignore, rootPath);
             if (!googObj) {
                 continue;

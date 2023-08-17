@@ -29,7 +29,7 @@ Loader.onbeforeunload = function(reload = false) {
     let href = Config.pathPrefix + 'index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
     Serial?.refreshPortsTimer && clearInterval(Serial?.refreshPortsTimer);
     const portsObj = Serial?.portsOperator ?? null;
-    if (Env.isElectron && portsObj && typeof portsObj === 'object') {
+    if (goog.isElectron && portsObj && typeof portsObj === 'object') {
         if (Object.keys(portsObj).length) {
             let portsClosePromise = [];
             for (let i in portsObj) {

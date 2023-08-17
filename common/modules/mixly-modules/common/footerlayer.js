@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('tippy');
+goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
@@ -8,18 +9,19 @@ goog.provide('Mixly.FooterLayer');
 
 const { Env, XML, Msg } = Mixly;
 
-const DEFAULT_CONFIG_TIPPY = {
-    allowHTML: true,
-    trigger: 'manual',
-    interactive: true,
-    hideOnClick: false,
-    maxWidth: 'none',
-    offset: [ 0, 6 ]
-};
-
 class FooterLayer {
-    // 弹层模板
-    static TEMPLATE = goog.get(Env.templatePath + '/footerlayer.html');
+    static {
+        // 弹层模板和一些默认配置项
+        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer.html'));
+        this.DEFAULT_CONFIG_TIPPY = {
+            allowHTML: true,
+            trigger: 'manual',
+            interactive: true,
+            hideOnClick: false,
+            maxWidth: 'none',
+            offset: [ 0, 6 ]
+        };
+    }
 
     /**
      * @param domId 被绑定元素的ID
@@ -30,15 +32,15 @@ class FooterLayer {
      **/
     constructor(domId, config) {
         this.config = {
-            ...DEFAULT_CONFIG_TIPPY,
+            ...FooterLayer.DEFAULT_CONFIG_TIPPY,
             ...(config ?? {})
         };
         this.btns = config.btns ?? [];
         this.btnsClickEvent = {};
         this.domId = domId;
         this.layer = null;
-        this.create();
-        this.addSharedMethod_();
+        this.#create_();
+        this.#addSharedMethod_();
         this.setContent(XML.render(FooterLayer.TEMPLATE, {
             content: '',
             btns: this.btns,
@@ -46,11 +48,11 @@ class FooterLayer {
         }));
         this.$content = $(this.layer.popper).find('.tippy-content');
         this.$body = this.$content.find('.footer-layer-body');
-        this.addContainerClickEvent_();
-        this.addBtnsClickEvent_();
+        this.#addContainerClickEvent_();
+        this.#addBtnsClickEvent_();
     }
 
-    create() {
+    #create_() {
         this.layer = tippy(`#${this.domId}`, this.config)[0];
     }
 
@@ -62,7 +64,7 @@ class FooterLayer {
         this.setContent(content);
     }
 
-    addBtnsClickEvent_() {
+    #addBtnsClickEvent_() {
         for (let i of this.btns) {
             if (!(i instanceof Object)) {
                 continue;
@@ -82,8 +84,8 @@ class FooterLayer {
         }
     }
 
-    addSharedMethod_() {
-        let sharedMethod = ['hide', 'show', 'destroy', 'setProps', 'setContent'];
+    #addSharedMethod_() {
+        let sharedMethod = [ 'hide', 'show', 'destroy', 'setProps', 'setContent' ];
         for (let type of sharedMethod) {
             this[type] = this.layer[type];
         }
@@ -93,7 +95,7 @@ class FooterLayer {
      * @method 为绑定的元素添加鼠标单击事件
      * @return {void}
      **/
-    addContainerClickEvent_() {
+    #addContainerClickEvent_() {
         $(`#${this.domId}`).off().click(() => {
             if (this.layer.state.isShown) {
                 this.hide();

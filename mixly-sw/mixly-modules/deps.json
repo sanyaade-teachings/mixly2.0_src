@@ -105,6 +105,8 @@
     {
         "path": "/common/setting.js",
         "require": [
+            "ace",
+            "ace.ExtLanguageTools",
             "layui",
             "store",
             "Mixly.XML",
@@ -151,6 +153,19 @@
         ],
         "provide": [
             "Mixly.Electron.PythonShell"
+        ]
+    },
+    {
+        "path": "/mixly-loader.js",
+        "require": [
+            "Mixly.Loading",
+            "select2",
+            "Mixly.Interface",
+            "PouchDB",
+            "Mixly.Events"
+        ],
+        "provide": [
+            "MixlyLoader"
         ]
     },
     {

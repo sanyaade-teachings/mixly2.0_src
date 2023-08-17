@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('shortid');
+goog.require('path');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
@@ -16,10 +17,12 @@ const {
 
 class FooterLayerMessage extends FooterLayer {
     // 弹层模板
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-message.html');
-    static MENU_ITEM = goog.get(Env.templatePath + '/footerlayer-message-item.html');
-    static MENU_ITEM_WITH_ICON = goog.get(Env.templatePath + '/footerlayer-message-item-with-icon.html');
-    static STYLES = [ 'primary', 'secondary', 'success', 'danger', 'warning' ];
+    static {
+        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer-message.html'));
+        this.MENU_ITEM = goog.get(path.join(Env.templatePath, 'footerlayer-message-item.html'));
+        this.MENU_ITEM_WITH_ICON = goog.get(path.join(Env.templatePath, 'footerlayer-message-item-with-icon.html'));
+        this.STYLES = [ 'primary', 'secondary', 'success', 'danger', 'warning' ];
+    }
 
     constructor(domId) {
         super(domId, {

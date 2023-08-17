@@ -23,7 +23,7 @@ const {
     path,
     fs,
     fs_extra,
-    fs_extend,
+    fs_plus,
     json2md,
     electron_remote,
     electron_localshortcut
@@ -143,7 +143,7 @@ class WikiPage {
         const thirdPartyLibsPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty/');
         const changelogPath = path.resolve(Env.clientPath, './CHANGELOG');
         const wikiList = [];
-        if (fs_extend.isfile(wikiHomePagePath + '.md'))
+        if (fs_plus.isFileSync(wikiHomePagePath + '.md'))
             wikiList.push({
                 h4: {
                     link: {
@@ -152,16 +152,16 @@ class WikiPage {
                     }
                 }
             });
-        if (fs_extend.isdir(defaultWikiPath)) {
+        if (fs_plus.isDirectorySync(defaultWikiPath)) {
             const childContentList = this.getContentJson(defaultWikiPath, BOARD.boardType);
             if (childContentList)
                 wikiList.push(childContentList);
         }
-        if (fs_extend.isdir(thirdPartyLibsPath)) {
+        if (fs_plus.isDirectorySync(thirdPartyLibsPath)) {
             const libsName = fs.readdirSync(thirdPartyLibsPath);
             for (let name of libsName) {
                 const libWikiPath = path.resolve(thirdPartyLibsPath, './' + name + '/wiki/' + Msg.nowLang);
-                if (fs_extend.isdir(libWikiPath)) {
+                if (fs_plus.isDirectorySync(libWikiPath)) {
                     const childContentList = this.getContentJson(libWikiPath, name);
                     if (childContentList) {
                         wikiList.push(childContentList);
@@ -223,7 +223,7 @@ class WikiPage {
         const keyList = fs.readdirSync(dirPath);
         for (let key of keyList) {
             const nowPath = path.resolve(dirPath, './' + key);
-            if (fs_extend.isdir(nowPath)) {
+            if (fs_plus.isDirectorySync(nowPath)) {
                 const childContentList = this.getContentJson(nowPath);
                 if (childContentList && childContentList[1].ul.length)
                     ul.push(childContentList);
@@ -246,7 +246,7 @@ WikiManager.openWiki = (gotoInfo) => {
     const goto = (gotoInfo && typeof gotoInfo === 'object') ? gotoInfo[Msg.nowLang] : null;
     if (!WikiManager.wiki || WikiManager.wiki.isDestroyed) {
         const wikiPath = path.resolve(Env.indexDirPath, '../../../common/wiki/index.html');
-        if (fs_extend.isfile(wikiPath)) {
+        if (fs_plus.isFileSync(wikiPath)) {
             WikiManager.wiki = new WikiPage(wikiPath, goto);
         } else {
             layer.msg(Msg.Lang['未找到Wiki页'], { time: 1000 });

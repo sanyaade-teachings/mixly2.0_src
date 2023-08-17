@@ -88,11 +88,11 @@ XML.TEMPLATE_ENV = {
     LOADER_DIV: true,
     SELECTOR_DIV: true,
     BOARD_SELECTOR: true,
-    PORT_SELECTOR: !(BOARD?.nav?.run || BOARD?.nav?.cancel || BOARD?.nav?.webrun || BOARD?.nav?.webcancel || (!Env.isElectron && !Env.hasSocketServer)),
+    PORT_SELECTOR: !(BOARD?.nav?.run || BOARD?.nav?.cancel || BOARD?.nav?.webrun || BOARD?.nav?.webcancel || (!goog.isElectron && !Env.hasSocketServer)),
     PARSE_MIX_ERROR_DIV: true,
     READ_BITMAP_DIV: true,
-    PROGRESS_BAR_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
-    LIB_MANAGER_DIV: Env.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
+    PROGRESS_BAR_DIV: goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
+    LIB_MANAGER_DIV: goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
     APP_DIV: true
 };
 

@@ -10,8 +10,8 @@ const { Config } = Mixly;
 const { BOARD } = Config;
 
 class Drag {
-    constructor(container, config) {
-        const DEFAULT_CONFIG = {
+    static {
+        this.DEFAULT_CONFIG = {
             type: 'h', // 'h' - 水平拖拽，'v' - 垂直拖拽
             elem: null, // 由于拖拽而产生尺寸改变的元素
             min: null, // 元素由于拖拽产生尺寸改变时可以减小到的最小值,
@@ -21,8 +21,10 @@ class Drag {
             onfull: null,
             exitfull: null,
             sizeChanged: null
-        }
-        this.config = { ...DEFAULT_CONFIG, ...config };
+        };
+    }
+    constructor(container, config) {
+        this.config = { ...Drag.DEFAULT_CONFIG, ...config };
         this.$container = $('#' + container);
         if (!this.config.elem) {
             this.config.elem = [];

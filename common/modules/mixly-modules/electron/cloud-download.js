@@ -18,7 +18,7 @@ const { CloudDownload } = Electron;
 const {
     fs,
     fs_extra,
-    fs_extend,
+    fs_plus,
     node_downloader_helper,
     path
 } = Modules;
@@ -31,7 +31,7 @@ CloudDownload.getJson = (url, downloadDir, endFunc) => {
                 throw message[0];
             } else {
                 let jsonObj = null;
-                if (fs_extend.isfile(message[1])) {
+                if (fs_plus.isFileSync(message[1])) {
                     let data = fs.readFileSync(message[1], 'utf-8');
                     jsonObj = MJSON.parse(data);
                 }
@@ -69,7 +69,7 @@ CloudDownload.download = (url, downloadDir, options = {}) => {
             fs_extra.ensureDirSync(downloadDir);
             const fileName = path.basename(url);
             const filePath = path.resolve(downloadDir, './' + fileName);
-            if (fs_extend.isfile(filePath))
+            if (fs_plus.isFileSync(filePath))
                 fs_extra.removeSync(filePath);
         } catch (error) {
             resolve([error, url]);

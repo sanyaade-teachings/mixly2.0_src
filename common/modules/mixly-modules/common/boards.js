@@ -2,12 +2,12 @@ goog.loadJs('common', () => {
 
 goog.require('tippy');
 goog.require('layui');
+goog.require('path');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.ToolboxSearcher');
-goog.require('Mixly.Modules');
 goog.require('Mixly.MString');
 goog.require('Mixly.Editor');
 goog.require('Mixly.FooterLayer');
@@ -22,7 +22,6 @@ const {
     XML,
     Env,
     ToolboxSearcher,
-    Modules,
     MString,
     Editor,
     FooterLayer,
@@ -274,8 +273,7 @@ Boards.changeTo = (boardName) => {
                 }
                 break;
         }
-        if (value.type === 'upload' && (Env.isElectron || Env.hasSocketServer) && outObj.copyLib) {
-            const { path } = Modules;
+        if (value.type === 'upload' && (goog.isElectron || Env.hasSocketServer) && outObj.copyLib) {
             if (outObj.libPath) {
                 let libPath = [];
                 for (let dirPath of outObj.libPath) {
@@ -283,19 +281,18 @@ Boards.changeTo = (boardName) => {
                 }
                 outObj.libPath = libPath;
             } else {
-                if (Env.isElectron) {
+                if (goog.isElectron) {
                     outObj.libPath = [ path.resolve(Env.indexDirPath, 'build/lib/') ];
                 } else {
                     outObj.libPath = goog.normalizePath_(Env.indexDirPath + '/build/lib/');
                 }
             }
         }
-        if (Env.isElectron || Env.hasSocketServer) {
-            const { path } = Modules;
+        if (goog.isElectron || Env.hasSocketServer) {
             if (outObj.filePath) {
                 outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             } else {
-                if (Env.isElectron) {
+                if (goog.isElectron) {
                     outObj.filePath = path.resolve(Env.indexDirPath, 'build/main.py');
                 } else {
                     outObj.filePath = goog.normalizePath_(Env.indexDirPath + '/build/main.py');
@@ -311,7 +308,7 @@ Boards.updateCategories = (boardName, enforce = false) => {
     Boards.selected = boardName;
     $('#mixly-footer-boardname').html(boardName);
     let thirdPartyStr = '';
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         thirdPartyStr = Env.thirdPartyXML.join('');
     }
     const searchCategoryStr = '<category id="catSearch" hidden="true" colour="#ff6666"><label text="'

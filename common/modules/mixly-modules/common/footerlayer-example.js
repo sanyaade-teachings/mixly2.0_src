@@ -21,8 +21,10 @@ const {
 const { dropdown, tree } = layui;
 
 class FooterLayerExample extends FooterLayer {
-    // 弹层模板
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-example.html');
+    static {
+        // 弹层模板
+        this.MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-example.html');
+    }
 
     constructor(domId) {
         super(domId, {

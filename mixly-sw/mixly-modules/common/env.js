@@ -21,12 +21,6 @@ Env.clientPath = null;
 Env.indexPath = null;
 
 /**
-  * 检测当前环境
-  * @type {Boolean}，true - mixly Client; false - mixly Web
-  */
-Env.isElectron = window?.process?.versions?.electron ? true : false;
-
-/**
   * 检测是否启用node服务器
   * @type {Boolean}
   */
@@ -40,10 +34,10 @@ Env.hasCompiler = SOFTWARE?.webCompiler?.enabled ? true : false;
 
 Env.thirdPartyBoardPath = './boards/extend';
 
-if (Env.isElectron) {
+if (goog.isElectron) {
     Modules.fs = require('fs');
     Modules.fs_extra = require('fs-extra');
-    Modules.fs_extend = require('./common/modules/node-modules/fsExtend.js');
+    Modules.fs_plus = require('fs-plus');
     Modules.path = require('path');
     Modules.os = require('os');
     Modules.electron = require('electron');
@@ -55,7 +49,7 @@ if (Env.isElectron) {
 
     const {
         fs_extra,
-        fs_extend,
+        fs_plus,
         path,
         os,
         electron_remote
@@ -81,7 +75,7 @@ if (Env.isElectron) {
 
     Env.arduinoCliPath = path.resolve(Env.clientPath, './arduino-cli/');
     const cliFilePath = path.resolve(Env.arduinoCliPath, './arduino-cli' + (currentPlatform === 'win32'? '.exe':''));
-    if (!fs_extend.isfile(cliFilePath)) {
+    if (!fs_plus.isFileSync(cliFilePath)) {
         const defaultPath = SOFTWARE?.defaultPath[currentPlatform] ?? null;
         if (defaultPath?.arduinoCli) {
             Env.arduinoCliPath = path.resolve(Env.clientPath, defaultPath.arduinoCli, '../');

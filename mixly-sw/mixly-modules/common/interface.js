@@ -31,7 +31,7 @@ const { PythonShell } = Electron;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_STR['INTERFACE']);
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         PythonShell.init();
     }
     if (Env.hasSocketServer) {
@@ -53,7 +53,7 @@ Interface.init = () => {
         });
     }, 100);
 
-    if (Env.isElectron) {
+    if (goog.isElectron) {
         (function (window, document) {
             var url = 'http://mixly.org/assets/app20.html';
             function detect() {

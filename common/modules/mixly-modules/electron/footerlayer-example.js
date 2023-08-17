@@ -30,7 +30,7 @@ const { BOARD } = Config;
 
 const {
     fs,
-    fs_extend,
+    fs_plus,
     fs_extra,
     path,
     app
@@ -58,14 +58,14 @@ class FooterLayerExampleExt extends FooterLayerExample {
             });
         }
         const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
-        if (fs_extend.isdir(thirdPartyPath)) {
+        if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);
             for (let lib of libList) {
                 const libPath = path.resolve(thirdPartyPath, lib);
-                if (fs_extend.isfile(libPath))
+                if (fs_plus.isFileSync(libPath))
                     continue;
                 const examplesPath = path.resolve(libPath, 'examples');
-                if (fs_extend.isfile(examplesPath))
+                if (fs_plus.isFileSync(examplesPath))
                     continue;
                 const thirdPartyList = this.getExamplesByPath(examplesPath, '.mix');
                 if (thirdPartyList.length) {
@@ -85,7 +85,7 @@ class FooterLayerExampleExt extends FooterLayerExample {
     }
 
     dataToWorkspace(inPath) {
-        if (!fs_extend.isfile(inPath)) {
+        if (!fs_plus.isFileSync(inPath)) {
             return;
         }
         const data = fs.readFileSync(inPath, 'utf8');
@@ -96,11 +96,11 @@ class FooterLayerExampleExt extends FooterLayerExample {
 
     getExamplesByPath(inPath, fileExtname) {
         let exampleList = [];
-        if (fs_extend.isdir(inPath)) {
+        if (fs_plus.isDirectorySync(inPath)) {
             const dataList = fs.readdirSync(inPath);
             for (let data of dataList) {
                 const dataPath = path.resolve(inPath, data);
-                if (fs_extend.isdir(dataPath)) {
+                if (fs_plus.isDirectorySync(dataPath)) {
                     exampleList.push({ title: data, id: dataPath, children: [] });
                 } else {
                     const extname = path.extname(data);

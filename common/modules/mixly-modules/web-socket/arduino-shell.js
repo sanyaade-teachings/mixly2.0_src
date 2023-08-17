@@ -1,7 +1,6 @@
 goog.loadJs('web', () => {
 
 goog.require('layui');
-goog.require('Mixly.Modules');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
@@ -16,7 +15,6 @@ goog.require('Mixly.WebSocket.Serial');
 goog.provide('Mixly.WebSocket.ArduShell');
 
 const {
-    Modules,
     Env,
     LayerExt,
     StatusBarTab,

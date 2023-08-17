@@ -9,9 +9,12 @@ goog.provide('Mixly.EditorAce');
 const { XML, Msg } = Mixly;
 
 class EditorAce {
-    static CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
-    static CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
-    static MENU_TEMPLATE = '<div style="float:left;">{{d.name}}&nbsp</div><div style="float:right;">&nbsp{{d.hotKey}}</div>';
+    static {
+        this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
+        this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
+        this.MENU_TEMPLATE = '<div style="float:left;">{{d.name}}&nbsp</div><div style="float:right;">&nbsp{{d.hotKey}}</div>';
+    }
+
     constructor(id) {
         this.id = id;
         this.$div = $(`#${this.id}`);

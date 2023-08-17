@@ -34,7 +34,7 @@ const { File, ArduShell, BU } = Electron;
 
 const {
     fs_extra,
-    fs_extend,
+    fs_plus,
     fs,
     path,
     electron_remote,
@@ -259,7 +259,7 @@ File.open = () => {
 File.openFile = (filePath) => {
     const extname = path.extname(filePath);
     let data;
-    if (!fs_extend.isfile(filePath)) {
+    if (!fs_plus.isFileSync(filePath)) {
         console.log(filePath + '不存在');
         return;
     }

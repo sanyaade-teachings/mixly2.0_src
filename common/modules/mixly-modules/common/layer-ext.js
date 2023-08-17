@@ -82,23 +82,7 @@ LayerExt.open = (toolConfig) => {
             ...toolConfig
         };
 
-    const {
-        id,
-        area,
-        title,
-        content,
-        resize,
-        shade,
-        end,
-        cancel,
-        resizing,
-        offset,
-        fixed,
-        borderRadius,
-        maxmin,
-        zIndex
-    } = toolConfig;
-
+    const { title } = toolConfig;
     let layerOffset = 42;
     let layerTitle = null;
     if (title) {
@@ -113,21 +97,13 @@ LayerExt.open = (toolConfig) => {
         layerTitle = false;
     }
     return layer.open({
+        ...toolConfig,
         type: 1,
-        id,
         title: layerTitle,
-        area,
-        content,
-        shade,
         closeBtn: 1,
-        resize,
-        fixed,
-        offset,
-        maxmin,
-        zIndex,
         success: function (layero, index) {
+            const { borderRadius, id, max, min, success } = toolConfig;
             layer.style(index, { borderRadius });
-            const { max, min, success } = toolConfig;
             const pageBody = $('#' + id);
             pageBody.addClass('mixly-scrollbar');
             if (typeof max === 'object') {
@@ -180,14 +156,16 @@ LayerExt.open = (toolConfig) => {
         },
         end: function () {
             const { end } = toolConfig;
-            if (typeof end === 'function')
+            if (typeof end === 'function') {
                 end();
+            }
         },
         cancel: function (index, layero) {
             $('#layui-layer-shade' + index).remove();
             const { cancel } = toolConfig;
-            if (typeof cancel === 'function')
+            if (typeof cancel === 'function') {
                 cancel(index, layero);
+            }
         },
         resizing: function (layero) {
             const winHeight = $(window).height();
@@ -195,6 +173,7 @@ LayerExt.open = (toolConfig) => {
             const width = layero.width()/winWidth*100 + "%";
             const height = layero.height()/winHeight*100 + "%";
             layero.css({ width, height });
+            const { resizing } = toolConfig;
             if (typeof resizing === 'function') {
                 const $content = layero.children('.layui-layer-content');
                 resizing({

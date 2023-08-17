@@ -18,7 +18,7 @@ if (Env.hasSocketServer) {
 } else if (Env.hasCompiler) {
     env = 'web-compiler';
 }
-if (env === 'electron' && !Env.isElectron) {
+if (env === 'electron' && !goog.isElectron) {
     env = 'web';
 }
 

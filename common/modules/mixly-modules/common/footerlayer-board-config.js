@@ -18,8 +18,10 @@ const {
 const { dropdown } = layui;
 
 class FooterLayerBoardConfig extends FooterLayer {
-    // 弹层模板
-    static MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-board-config.html');
+    static {
+        // 弹层模板
+        this.MENU_TEMPLATE = goog.get(Env.templatePath + '/footerlayer-board-config.html');
+    }
 
     /**
      * @param domId { string } 绑定dom的id

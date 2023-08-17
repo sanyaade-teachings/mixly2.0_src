@@ -3,7 +3,6 @@ goog.loadJs('common', () => {
 goog.require('FingerprintJS');
 goog.require('Mixly.Url');
 goog.require('Mixly.Env');
-goog.require('Mixly.Modules');
 goog.require('Mixly.LocalStorage');
 goog.provide('Mixly.Config');
 
@@ -11,7 +10,6 @@ const {
     Config,
     Url,
     Env,
-    Modules,
     LocalStorage
 } = Mixly;
 
@@ -65,17 +63,6 @@ Config.init = () => {
 
     Env.hasSocketServer = Config.SOFTWARE?.webSocket?.enabled ? true : false;
     Env.hasCompiler = Config.SOFTWARE?.webCompiler?.enabled ? true : false;
-
-    // 如果当前在electron环境下，则从本地setting文件夹下读取用户配置，
-    // 如果在Web下，则从window.localStorage.setting中读取用户配置
-    /*let userConfig = null;
-    if (Env.isElectron) {
-        const { fs_extra, path } = Modules;
-        const SETTING_FILE = path.resolve(Env.clientPath, './setting/config.json');
-        userConfig = fs_extra.readJsonSync(SETTING_FILE, { throws: false });
-    } else {
-        userConfig = store.get('mixly2.0-config');
-    }*/
 
     Config.USER = {
         ...Config.USER,

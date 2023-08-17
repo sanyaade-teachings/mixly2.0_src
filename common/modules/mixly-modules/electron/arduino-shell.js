@@ -33,7 +33,7 @@ const { BOARD, SOFTWARE, USER } = Config;
 
 const {
     fs,
-    fs_extend,
+    fs_plus,
     fs_extra,
     path,
     lodash_fp,
@@ -89,12 +89,12 @@ ArduShell.updateShellPath = () => {
         shellPath = path.resolve(shellPath, './arduino-cli.exe');
     else
         shellPath = path.resolve(shellPath, './arduino-cli');
-    if (!fs_extend.isfile(shellPath)) {
+    if (!fs_plus.isFileSync(shellPath)) {
         const { defaultPath = {} } = SOFTWARE;
         if (typeof defaultPath[Env.currentPlatform] === 'object') {
             let defaultShellPath = defaultPath[Env.currentPlatform].arduinoCli ?? '';
             defaultShellPath = path.resolve(Env.clientPath, defaultShellPath);
-            if (fs_extend.isfile(defaultShellPath))
+            if (fs_plus.isFileSync(defaultShellPath))
                 shellPath = defaultShellPath;
             else
                 shellPath = null;
@@ -195,16 +195,16 @@ ArduShell.compile = (doFunc = () => {}) => {
         statusBarTerminal.setValue(Msg.Lang["编译中"] + "...\n");
 
         let myLibPath = Env.indexDirPath + "/libraries/myLib/";
-        if (fs_extend.isdir(myLibPath))
+        if (fs_plus.isDirectorySync(myLibPath))
             myLibPath += '\",\"';
         else
             myLibPath = '';
         const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
-        if (fs_extend.isdir(thirdPartyPath)) {
+        if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);
             for (let libName of libList) {
                 const libPath = path.resolve(thirdPartyPath, libName, 'libraries');
-                if (!fs_extend.isdir(libPath)) continue;
+                if (!fs_plus.isDirectorySync(libPath)) continue;
                 myLibPath += libPath + ',';
             }
         }
@@ -316,16 +316,16 @@ ArduShell.upload = (boardType, port) => {
         ArduShell.binFilePath = '';
     } else {
         let myLibPath = Env.indexDirPath + "/libraries/myLib/";
-        if (fs_extend.isdir(myLibPath))
+        if (fs_plus.isDirectorySync(myLibPath))
             myLibPath += '\",\"';
         else
             myLibPath = '';
         const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
-        if (fs_extend.isdir(thirdPartyPath)) {
+        if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);
             for (let libName of libList) {
                 const libPath = path.resolve(thirdPartyPath, libName, 'libraries');
-                if (!fs_extend.isdir(libPath)) continue;
+                if (!fs_plus.isDirectorySync(libPath)) continue;
                 myLibPath += libPath + ',';
             }
         }
@@ -429,7 +429,7 @@ ArduShell.isMixOrIno = (fileName) => {
 * @return void
 */
 ArduShell.clearDirCppAndHppFiles = (dir) => {
-    if (fs_extend.isdir(dir)) {
+    if (fs_plus.isDirectorySync(dir)) {
         let libDir = fs.readdirSync(dir);
         for (let i = 0; i < libDir.length; i++) {
             if (ArduShell.isCppOrHpp(libDir[i])) {
@@ -448,7 +448,7 @@ ArduShell.clearDirCppAndHppFiles = (dir) => {
 * @return void
 */
 ArduShell.copyHppAndCppFiles = (oldDir, newDir) => {
-    if (fs_extend.isdir(oldDir) && fs_extend.isdir(newDir)) {
+    if (fs_plus.isDirectorySync(oldDir) && fs_plus.isDirectorySync(newDir)) {
         let oldLibDir = fs.readdirSync(oldDir);
         for (let i = 0; i < oldLibDir.length; i++) {
             if (ArduShell.isCppOrHpp(oldLibDir[i])) {
@@ -510,7 +510,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const codePath = path.resolve(testArduinoDirPath, 'testArduino.ino');
     ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
     const nowFilePath = Title.getFilePath();
-    if (USER.compileCAndH === 'yes' && fs_extend.isfile(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
+    if (USER.compileCAndH === 'yes' && fs_plus.isFileSync(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
         const nowDirPath = path.dirname(nowFilePath);
         ArduShell.copyHppAndCppFiles(nowDirPath, testArduinoDirPath);
     }
@@ -663,7 +663,7 @@ ArduShell.writeFile = function (readPath, writePath) {
 ArduShell.showUploadBox = function (filePath) {
     const dirPath = path.dirname(filePath);
     const fileName = path.basename(filePath, path.extname(filePath));
-    if (fs_extend.isdir(path.resolve(dirPath, fileName))) {
+    if (fs_plus.isDirectorySync(path.resolve(dirPath, fileName))) {
         filePath = path.resolve(dirPath, fileName, path.basename(filePath));
     }
     const layerNum = layer.msg(Msg.Lang['所打开文件可直接上传'], {

@@ -1,6 +1,5 @@
 goog.loadJs('web', () => {
 
-goog.require('Mixly.Modules');
 goog.require('Mixly.Charts');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -13,7 +12,6 @@ goog.require('Mixly.WebSocket.Socket');
 goog.provide('Mixly.WebSocket.Serial');
 
 const {
-    Modules,
     Charts,
     Config,
     Env,
@@ -27,18 +25,6 @@ const {
 const { Socket, Serial } = Mixly.WebSocket;
 
 const { BOARD, SELECTED_BOARD } = Config;
-
-/*Modules.serialport = require('serialport');
-Modules.minimist = require('minimist');
-
-const {
-    serialport,
-    lodash_fp,
-    child_process,
-    minimist
-} = Modules;*/
-
-/*const { SerialPort } = serialport;*/
 
 Serial.TOOL_DEFAULT_CONFIG = {
     "ctrlCBtn": false,

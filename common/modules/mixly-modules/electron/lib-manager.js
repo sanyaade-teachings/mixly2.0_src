@@ -32,7 +32,7 @@ const {
 const {
     fs,
     fs_extra,
-    fs_extend,
+    fs_plus,
     path,
     compressing,
     electron_remote
@@ -73,7 +73,7 @@ LibManager.getLibs = (libsDir) => {
     let thirdPartyXML = [];
     let loadJs = [];
     let loadCss = [];
-    if (!fs_extend.isdir(libsDir))
+    if (!fs_plus.isDirectorySync(libsDir))
         return {
             xml: thirdPartyXML,
             js: loadJs,
@@ -82,7 +82,7 @@ LibManager.getLibs = (libsDir) => {
     const libList = fs.readdirSync(libsDir);
     for (let libName of libList) {
         const nowPath = path.resolve(libsDir, './' + libName);
-        if (fs_extend.isdir(nowPath)) {
+        if (fs_plus.isDirectorySync(nowPath)) {
             const dataList = fs.readdirSync(nowPath);
             for (let dataName of dataList) {
                 const extname = path.extname(dataName);
@@ -106,7 +106,7 @@ LibManager.getLibs = (libsDir) => {
                             const reSrcIndexDir = path.relative(Env.indexDirPath, src);
                             const reSrcThirdDir = path.relative(Env.indexDirPath, path.resolve(nowPath, reSrcIndexDir));
                             const srcThirdDir = path.resolve(Env.indexDirPath, reSrcThirdDir);
-                            if (fs_extend.isfile(srcThirdDir)) {
+                            if (fs_plus.isFileSync(srcThirdDir)) {
                                 loader.push(reSrcThirdDir);
                             }
                         } catch (error) {
@@ -135,11 +135,11 @@ LibManager.getLibs = (libsDir) => {
 }
 
 LibManager.convertLibs = (libsDir) => {
-    if (!fs_extend.isdir(libsDir)) return;
+    if (!fs_plus.isDirectorySync(libsDir)) return;
     const libList = fs.readdirSync(libsDir);
     for (let libName of libList) {
         const libDir = path.resolve(libsDir, './' + libName);
-        if (!fs_extend.isdir(libDir)) continue;
+        if (!fs_plus.isDirectorySync(libDir)) continue;
         const dataList = fs.readdirSync(libDir);
         const blocksDir = path.resolve(libDir, './block');
         // 将1.x版本xml转化为2.0可用
@@ -374,7 +374,7 @@ LibManager.compareLibConfig = (cloudConfig) => {
     const { version, url } = cloudConfig;
     cloudConfig.downloadIndex = true;
     const libDir = path.resolve(Env.indexDirPath, 'libraries/ThirdParty', path.basename(url, '.zip'));
-    if (fs_extend.isdir(libDir)) {
+    if (fs_plus.isDirectorySync(libDir)) {
         const localConfigPath = path.resolve(libDir, './config.json');
         const localConfig = fs_extra.readJsonSync(localConfigPath, { throws: false });
         if (localConfig !== null) {
@@ -569,7 +569,7 @@ LibManager.onclickManageLibs = () => {
         tableConfig: codeTableConfig
     }];
     for (let needRead of needReadPathList) {
-        if (fs_extend.isdir(needRead.path)) {
+        if (fs_plus.isDirectorySync(needRead.path)) {
             fs.readdir(needRead.path, (error, readList) => {
                 if (error) {
                     console.log(error);
@@ -671,7 +671,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
     const extname = path.extname(inPath);
     const pyLibPath = path.resolve(Env.indexDirPath, './build/lib');
     const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
-    if (fs_extend.isfile(inPath)) {
+    if (fs_plus.isFileSync(inPath)) {
         switch (extname) {
             case '.py':
                 var dirPath = path.resolve(inPath, '../');
@@ -971,7 +971,7 @@ LibManager.writeLibConfig = (info) => {
     } = info;
     if (!name) return;
     const libDir = path.resolve(desPath, path.basename(url, '.zip'));
-    if (fs_extend.isdir(libDir)) {
+    if (fs_plus.isDirectorySync(libDir)) {
         const configPath = path.resolve(libDir, 'config.json');
         const libConfig = {
             version

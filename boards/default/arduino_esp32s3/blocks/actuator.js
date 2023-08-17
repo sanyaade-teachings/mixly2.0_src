@@ -97,12 +97,11 @@ Blockly.Blocks['motor_id'] = {
     init: function() {
         this.setColour(Blockly.Msg['ACTUATOR_HUE']);
         this.appendDummyInput("")
-        .appendField(new Blockly.FieldDropdown([
-           ["1","1"],["2","2"],["3","3"],["4","4"]
-           ]), "CHANNEL");
+            .appendField(new Blockly.FieldDropdown([
+                ["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]
+            ]), "CHANNEL");
         this.setOutput(true);
-   // this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
-}
+    }
 };
 
 
@@ -125,6 +124,7 @@ Blockly.Blocks.HR8833_Motor_Setup= {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_MOTOR_SETUP);
 }
 };
 

@@ -3520,5 +3520,6 @@ En.MIXLY_MIXBOT_SERVO_RELATIVE_ANGLE_TOOLTIP = "Relative mode angle range -83886
 En.MIXLY_MIXBOT_EXTERN_GET_ADDR = "get address";
 En.MIXLY_MIXBOT_EXTERN_SET_ADDR = "set address";
 En.MIXPY_REQUESTS_GET_RESULT = 'and get result';
+En.MIXLY_TOOLTIP_MOTOR_SETUP = 'Dual PWM motor drive (HR8833) initialization';
 
 })();

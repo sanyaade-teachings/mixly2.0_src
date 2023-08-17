@@ -290,13 +290,13 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0], 
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
+            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../../../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
-            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
+            markers:['../../../common/js/skulpt_mixcar/pic/red.png','../../../common/js/skulpt_mixcar/pic/yellow.png','../../../common/js/skulpt_mixcar/pic/blue.png','../../../common/js/skulpt_mixcar/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,

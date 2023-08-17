@@ -3350,6 +3350,7 @@ ZhHant.ME_GO_PITCH = '俯仰角';
 ZhHant.ME_GO_ROLL = '橫滾角';
 ZhHant.BOARD_DIRECTION = '主機板狀態';
 ZhHant.MIXLY_GET_GESTURE = '獲取小車姿態';
+ZhHant.MIXLY_GET_GESTURE_ALL = '獲取姿態';
 ZhHant.MIXLY_SET_VOLUME = '設置音量';
 ZhHant.MIXLY_SET_VOLUME_TOOLTIP = '音量範圍0-16';
 ZhHant.MIXLY_GET_VOLUME = '獲取音量';

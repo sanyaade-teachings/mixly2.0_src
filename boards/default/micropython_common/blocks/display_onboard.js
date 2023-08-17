@@ -30,7 +30,7 @@ Blockly.Blocks.display_show_image = {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendValueInput('data')
         .setCheck(String)
-        .appendField(Blockly.OLED_DRAWSTR);
+        .appendField(Blockly.Msg.OLED_DRAWSTR);
     this.appendValueInput("space")
         .setCheck(Number)
         .appendField(Blockly.Msg.MICROPYTHON_DISPLAY_FONT_SPACE);   
@@ -944,10 +944,10 @@ Blockly.Blocks.mixbot_display_bright_screen = {
 Blockly.Blocks['mixbot_display_rotate'] = {
   init: function() {
     var OPERATORS =
-        [[Blockly.mixpy_PL_PIE_SHADOW_N, '0'],
-         [Blockly.Msg.CLOCKWISE+'90'+Blockly.blockpy_setheading_degree, '1'],
-         [Blockly.Msg.CLOCKWISE+'180'+Blockly.blockpy_setheading_degree, '2'],
-         [Blockly.Msg.CLOCKWISE+'270'+Blockly.blockpy_setheading_degree, '3']];
+        [[Blockly.Msg.mixpy_PL_PIE_SHADOW_N, '0'],
+         [Blockly.Msg.CLOCKWISE+'90'+Blockly.Msg.blockpy_setheading_degree, '1'],
+         [Blockly.Msg.CLOCKWISE+'180'+Blockly.Msg.blockpy_setheading_degree, '2'],
+         [Blockly.Msg.CLOCKWISE+'270'+Blockly.Msg.blockpy_setheading_degree, '3']];
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
     this.appendDummyInput()
         .appendField(Blockly.Msg.MIXLY_MIXBOT_SCREEN_ROTATE)

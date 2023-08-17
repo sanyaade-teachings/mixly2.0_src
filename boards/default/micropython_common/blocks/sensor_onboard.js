@@ -611,7 +611,23 @@ Blockly.Blocks['sensor_get_acceleration'] = {
     }
 };
 
-
+Blockly.Blocks['sensor_eulerangles'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_GET_GESTURE_ALL)   
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.ME_GO_PITCH,'[0]'],
+                [Blockly.Msg.ME_GO_ROLL,'[1]'],
+                [Blockly.Msg.ME_GO_PITCH+', '+Blockly.Msg.ME_GO_ROLL,'']
+                ]),'angle');         
+            
+        this.appendDummyInput("")        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        
+    }
+};
 
 Blockly.Blocks.sensor_onboard_mpu9250_gesture = {
     init: function() {

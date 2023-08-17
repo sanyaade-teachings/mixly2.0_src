@@ -3378,6 +3378,7 @@ En.ME_GO_PITCH = 'pitch';
 En.ME_GO_ROLL = 'roll';
 En.BOARD_DIRECTION = 'board condition';
 En.MIXLY_GET_GESTURE = 'get car gesture';
+En.MIXLY_GET_GESTURE_ALL = 'get gesture';
 En.MIXLY_SET_VOLUME = 'set volume';
 En.MIXLY_SET_VOLUME_TOOLTIP = 'volume range 0-16';
 En.MIXLY_GET_VOLUME = 'get volume';

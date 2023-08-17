@@ -256,6 +256,14 @@ Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['sensor_eulerangles'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";
+    var angle = this.getFieldValue('angle');
+    var code = 'onboard_mxc6655xa.eulerangles()'+angle;
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['sensor_mpu9250_gesture'] = function(){
     Blockly.Python.definitions_['import_mpu9250'] = 'import mpu9250';
     Blockly.Python.definitions_['import_machine'] = 'import machine';
@@ -570,10 +578,17 @@ Blockly.Python.forBlock['sensor_rm_pin_near_double'] = function(){
 
 Blockly.Python.forBlock['sensor_rm_battery_left'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if(version=='bitbot'){
+        Blockly.Python.definitions_['import_bitbot_onboard_bot51'] = 'from bitbot import onboard_bot51';
+        var code =  'onboard_bot51.read_bat()';
+        return [code, Blockly.Python.ORDER_ATOMIC];
+    }
+    else{
     if (version=='mixbot_s1' || version=='mixbot_s2'){version='mixbot'}
     Blockly.Python.definitions_['import_'+version+'_battery'] = 'from '+version+' import battery';
     var code =  'battery.voltage()';
     return [code, Blockly.Python.ORDER_ATOMIC];
+    }
 };
 
 Blockly.Python.forBlock['sensor_rm_acc'] = function(){    

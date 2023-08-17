@@ -3476,6 +3476,7 @@ ZhHans.ME_GO_PITCH = '俯仰角';
 ZhHans.ME_GO_ROLL = '横滚角';
 ZhHans.BOARD_DIRECTION = '主板状态';
 ZhHans.MIXLY_GET_GESTURE = '获取小车姿态';
+ZhHans.MIXLY_GET_GESTURE_ALL = '获取姿态';
 ZhHans.MIXLY_SET_VOLUME = '设置音量';
 ZhHans.MIXLY_SET_VOLUME_TOOLTIP = '音量范围0-16';
 ZhHans.MIXLY_GET_VOLUME = '获取音量';

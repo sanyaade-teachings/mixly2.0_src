@@ -3657,5 +3657,10 @@ ZhHans.MIXLY_MIXBOT_SERVO_RELATIVE_ANGLE_TOOLTIP = "相对角度运行模式角�
 ZhHans.MIXLY_MIXBOT_EXTERN_GET_ADDR = "扫描序号";
 ZhHans.MIXLY_MIXBOT_EXTERN_SET_ADDR = "修改序号";
 ZhHans.MIXPY_REQUESTS_GET_RESULT = '并获取相应结果';
+ZhHans.SHUTDOWN = '关机';
+ZhHans.DIGITAL = '数字';
+ZhHans.ANALOG = '模拟';
+ZhHans.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '仅电池供电下，将关机断电。USB供电下，只是关闭电机输出。';
+
 
 })();

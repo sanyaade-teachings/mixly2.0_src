@@ -958,3 +958,20 @@ Blockly.Blocks['mixbot_display_rotate'] = {
     
   }
 };
+
+Blockly.Blocks['bitbot_display_image_create']= {
+  init: function() {
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_CREATE_IMAGE)    
+    for (let i = 0; i < 12; i++) {
+      let dummyInputObj = this.appendDummyInput();
+      for (let j = 0; j < 12; j++) {
+        dummyInputObj.appendField(new Blockly.FieldColour("#000000"), i + '-' + j);
+      }
+    }
+    this.setOutput(true);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Create_image1);
+  }
+};
+

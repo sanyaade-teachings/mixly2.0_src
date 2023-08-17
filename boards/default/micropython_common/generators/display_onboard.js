@@ -556,3 +556,35 @@ Blockly.Python.forBlock['mixbot_display_rotate'] = function(a) {
   var code = 'onboard_matrix.direction(' +  op + ')\n';  
   return code;
 };
+
+Blockly.Python.forBlock['bitbot_display_image_create'] = function(block) {
+  var colours = {
+    "#000000": "0",
+    "#ff0000": "1"
+  }
+  function pad(num) {
+    
+    if(num.length==1){
+      return '\\x0' + num+'\\x00';
+    }
+    if(num.length==2){
+      return '\\x' + num+'\\x00';
+    }
+    if(num.length==3){
+      return '\\x' + num[1]+num[2]+'\\x0'+num[0];
+    }
+  }
+  let colorList = [];
+  for (let i = 0; i < 12; i++) {
+    let colorRow = '';
+    let colorNum = 0;
+    for (let j = 0; j < 12; j++) {
+      colorNum += Number(colours[block.getFieldValue((11-i) + '-' + j)]) * Math.pow(2, j);
+    }
+    colorRow += pad(colorNum.toString(16));
+    colorList.unshift(colorRow);
+  }
+
+  var code = "b'" + colorList.join('') + "'";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};

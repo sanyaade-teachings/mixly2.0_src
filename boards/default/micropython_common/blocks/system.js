@@ -261,6 +261,20 @@ Blockly.Blocks.system_machine_reset = {
     }
 };
 
+Blockly.Blocks.system_bitbot_shutdown = {
+    init: function () {
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.appendDummyInput("")
+            .appendField("Bitbot")
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.SHUTDOWN)
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setTooltip(Blockly.Msg.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP);
+    }
+};
+
 Blockly.Blocks.Timer_init=Blockly.Blocks.system_timer_init;
 Blockly.Blocks.timer2=Blockly.Blocks.system_timer;
 Blockly.Blocks.time_ticks_diff=Blockly.Blocks.system_ticks_diff;

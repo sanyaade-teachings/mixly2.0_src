@@ -386,6 +386,8 @@
           </shadow>
         </value>
       </block>
+      <block type="system_bitbot_shutdown" m-show="micropython:esp32c3:bitbot">
+      </block>
       <block type="system_wdt_init">
         <value name="period">
           <shadow type="math_number">
@@ -1502,7 +1504,13 @@
         <block type="sensor_get_acceleration" m-show='micropython:esp32:mixbot_s2'></block>
         <block type="sensor_mixbot_get_gyro" m-show='micropython:esp32:mixbot_s2'></block>  
         <block type="sensor_mixgo_pin_near" m-show="micropython:esp32c3:bitbot"></block>
-        <block type="sensor_LTR308" m-show="micropython:esp32c3:bitbot"></block>
+        <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:bitbot"></block>
+        <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:bitbot">
+          <value name="mode">
+          <shadow type="bitbot_als_num">
+          </shadow>
+        </value>
+        </block>
       <block type="sensor_sound" m-show="micropython:esp32c3:bitbot"></block>     
       <block type="sensor_hp203" m-show="micropython:esp32c3:bitbot"></block>
       <block type="sensor_aht11" m-show="micropython:esp32c3:bitbot"></block>
@@ -1829,6 +1837,7 @@
       </block>
            
       <block type="mixbot_display_image_create" m-show="micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2"></block>
+      <block type="bitbot_display_image_create" m-show="micropython:esp32c3:bitbot"></block>
       <block type="display_image_builtins_all"></block>
       <block type="image_arithmetic">
         <value name="A">
@@ -1872,7 +1881,7 @@
           </shadow>
         </value>
       </block>
-      <block type="mixbot_display_rotate" m-show="micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2"></block>
+      <block type="mixbot_display_rotate" m-show="micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot"></block>
       <block type="mixbot_display_bright_screen" m-show="micropython:esp32:mixbot_s1 micropython:esp32:mixbot_s2">
 
         <value name="x">

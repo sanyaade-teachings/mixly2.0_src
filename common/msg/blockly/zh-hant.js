@@ -3493,5 +3493,10 @@ ZhHant.MIXLY_MIXBOT_SERVO_RELATIVE_ANGLE_TOOLTIP = "相對角度運行模式角�
 ZhHant.MIXLY_MIXBOT_EXTERN_GET_ADDR = "掃描序號";
 ZhHant.MIXLY_MIXBOT_EXTERN_SET_ADDR = "修改序號";
 ZhHant.MIXPY_REQUESTS_GET_RESULT = '並獲取相應結果';
+ZhHant.SHUTDOWN = '關機';
+ZhHant.DIGITAL = '數字';
+ZhHant.ANALOG = '模擬';
+ZhHant.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '僅電池供電下，將關機斷電。USB供電下，只是關閉電機輸出。';
+
 
 })();

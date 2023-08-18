@@ -48,6 +48,7 @@ PythonShell.run = function () {
     const cursorCallback = PythonShell.addEvent();
     mainStatusBarTab.show();
     statusBarTerminal.setValue(Msg.Lang["程序正在运行"] + "...\n");
+    statusBarTerminal.editor.setReadOnly(false);
     var code = MFile.getCode();
     code = code.replace(/(_[0-9A-F]{2}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) { return decodeURIComponent(s.replace(/_/g, '%')); });
     try {
@@ -75,20 +76,17 @@ PythonShell.run = function () {
             //程序运行完成时执行
             shell.childProcess.on('exit', (code) => {
                 statusBarTerminal.editor.getSession().selection.removeEventListener('changeCursor', cursorCallback);
-                //var timeCost = parseInt((Number(new Date()) - startTime) / 1000);
                 var timeCost = Number(new Date()) - startTime;
                 var timeCostSecond = timeCost % 60;
                 var timeCostMinute = parseInt(timeCost / 60);
-                //var timeCostStr = (timeCostMinute ? timeCostMinute + "m" : "") + timeCostSecond + "s";
                 var timeCostStr = timeCost + "ms";
-                //if (code == 0) {
                 if (statusBarTerminal.getValue().lastIndexOf("\n") == statusBarTerminal.getValue().length - 1)
                     statusBarTerminal.addValue("==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 else
                     statusBarTerminal.addValue("\n==" + Msg.Lang["程序运行完成"]  + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
                 statusBarTerminal.scrollToBottom();
                 shell = null;
-                //}
+                statusBarTerminal.editor.setReadOnly(true);
             });
 
             //有数据输出时执行

@@ -61,8 +61,7 @@ PythonShell.run = function () {
         console.log(e);
     }
     if (code.indexOf("import turtle") != -1) code += "\nturtle.done()\n";
-    if (shell)
-        shell.terminate('SIGKILL');
+    shell && shell.terminate('SIGINT');
     fs.writeFile(Env.pyFilePath, code, 'utf8', function (error) {
         if (error) {
             layer.msg(Msg.Lang['写文件出错了，错误是：'] + error, {
@@ -74,7 +73,10 @@ PythonShell.run = function () {
             shell = new python_shell.PythonShell(Env.pyFilePath, options);
             var startTime = Number(new Date());
             //程序运行完成时执行
-            shell.childProcess.on('exit', (code) => {
+            shell.childProcess.on('exit', (code, signal) => {
+                if (signal === 'SIGINT') {
+                    return;
+                }
                 statusBarTerminal.editor.getSession().selection.removeEventListener('changeCursor', cursorCallback);
                 var timeCost = Number(new Date()) - startTime;
                 var timeCostSecond = timeCost % 60;

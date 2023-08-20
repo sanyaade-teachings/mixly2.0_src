@@ -33,10 +33,10 @@
     align-items: center;
 }
 
-.light .self-adaption-btn {
+html[data-bs-theme=light] .self-adaption-btn {
     background-color: #009688 !important;
 }
 
-.dark .self-adaption-btn {
+html[data-bs-theme=dark] .self-adaption-btn {
     background-color: var(--lay-color-normal) !important;
 }

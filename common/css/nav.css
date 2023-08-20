@@ -106,14 +106,14 @@
         height: 6px;
     }
 
-    .light .tab-btn {
+    html[data-bs-theme=light] .tab-btn {
         width: 23px;
         height: 20px;
         line-height: 20px;
         padding: 0 3px;
     }
 
-    .dark .tab-btn {
+    html[data-bs-theme=dark] .tab-btn {
         width: 23px;
         height: 20px;
         line-height: 20px;
@@ -214,19 +214,19 @@
     height: var(--nav-select-height) !important;
 }
 
-.light #nav input {
+html[data-bs-theme=light] #nav input {
     background-color: #009f90;
     border-color: #009f90;
     color: #fff;
 }
 
-.light #nav input:hover,
-.light #nav input:focus {
+html[data-bs-theme=light] #nav input:hover,
+html[data-bs-theme=light] #nav input:focus {
     border-color: #037a6f !important;
 }
 
-.dark #nav input:hover,
-.dark #nav input:focus {
+html[data-bs-theme=dark] #nav input:hover,
+html[data-bs-theme=dark] #nav input:focus {
     border-color: #1f1f1f !important;
 }
 
@@ -256,23 +256,23 @@
     align-items: center;
 }
 
-.light #nav .layui-anim > dd {
+html[data-bs-theme=light] #nav .layui-anim > dd {
     color: rgba(0, 0, 0, 0.8);
 }
 
-.light #nav .layui-anim > dd.layui-this {
+html[data-bs-theme=light] #nav .layui-anim > dd.layui-this {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.dark #nav .layui-anim > dd {
+html[data-bs-theme=dark] #nav .layui-anim > dd {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.dark #nav .layui-anim > dd.layui-this {
+html[data-bs-theme=dark] #nav .layui-anim > dd.layui-this {
     color: rgba(0, 0, 0, 0.8);
 }
 
-.dark #nav .layui-anim > dd > button {
+html[data-bs-theme=dark] #nav .layui-anim > dd > button {
     border-color: #5a6778;
 }
 
@@ -340,47 +340,41 @@
     transition: 0s;
 }
 
-.dark .content {
+html[data-bs-theme=dark] .content {
     background-color: #181818;
 }
 
-.light .content {
+html[data-bs-theme=light] .content {
     background-color: #fff;
 }
 
-.dark #table_whole {
+html[data-bs-theme=dark] #table_whole {
     background-color: #181818 !important;
 }
 
-.light #table_whole {
+html[data-bs-theme=light] #table_whole {
     background-color: #fff;
 }
 
-.light .layui-form-select dl dd.layui-this {
+html[data-bs-theme=light] .layui-form-select dl dd.layui-this {
     background-color: #009688 !important;
 }
 
-.dark .layui-form-select dl dd.layui-this {
+html[data-bs-theme=dark] .layui-form-select dl dd.layui-this {
     background-color: #007acc !important;
-}
-
-.dark .layui-layer-btn a {
-    color: #fff;
-    border: 1px solid #765454;
-    background-color: #575353;
 }
 
 #boardSelector > div.layui-unselect.layui-form-select > dl {
     overflow-y: auto;
 }
 
-.light .layui-layer-tips .layui-layer-content {
+html[data-bs-theme=light] .layui-layer-tips .layui-layer-content {
     background-color: #f2f2f2;
     color: #000;
     box-shadow: 1px 1px 3px rgb(0 0 0 / 20%);
 }
 
-.dark .layui-layer-tips .layui-layer-content {
+html[data-bs-theme=dark] .layui-layer-tips .layui-layer-content {
     background-color: #646363;
     color: #fff;
     box-shadow: 1px 1px 3px rgb(0 0 0 / 20%);
@@ -390,35 +384,35 @@
     padding: 3px 12px;
 }
 
-.light .layui-layer-tips i.layui-layer-TipsL {
+html[data-bs-theme=light] .layui-layer-tips i.layui-layer-TipsL {
     border-left-color: #f2f2f2;
 }
 
-.dark .layui-layer-tips i.layui-layer-TipsL {
+html[data-bs-theme=dark] .layui-layer-tips i.layui-layer-TipsL {
     border-left-color: #646363;
 }
 
-.light .layui-layer-tips i.layui-layer-TipsR {
+html[data-bs-theme=light] .layui-layer-tips i.layui-layer-TipsR {
     border-right-color: #f2f2f2;
 }
 
-.dark .layui-layer-tips i.layui-layer-TipsR {
+html[data-bs-theme=dark] .layui-layer-tips i.layui-layer-TipsR {
     border-right-color: #646363;
 }
 
-.light .layui-layer-tips i.layui-layer-TipsT {
+html[data-bs-theme=light] .layui-layer-tips i.layui-layer-TipsT {
     border-top-color: #f2f2f2;
 }
 
-.dark .layui-layer-tips i.layui-layer-TipsT {
+html[data-bs-theme=dark] .layui-layer-tips i.layui-layer-TipsT {
     border-top-color: #646363;
 }
 
-.light .layui-layer-tips i.layui-layer-TipsB {
+html[data-bs-theme=light] .layui-layer-tips i.layui-layer-TipsB {
     border-bottom-color: #f2f2f2;
 }
 
-.dark .layui-layer-tips i.layui-layer-TipsB {
+html[data-bs-theme=dark] .layui-layer-tips i.layui-layer-TipsB {
     border-bottom-color: #646363;
 }
 
@@ -430,11 +424,11 @@
     width: 100%;
 }
 
-.dark .layui-table-body .layui-none {
+html[data-bs-theme=dark] .layui-table-body .layui-none {
     color: #fff;
 }
 
-.dark .layui-form-checkbox[lay-skin=primary] span {
+html[data-bs-theme=dark] .layui-form-checkbox[lay-skin=primary] span {
     color: #fff;
 }
 
@@ -447,39 +441,39 @@
     padding: 1px 10px;
 }
 
-.dark .editor-dropdown-menu {
+html[data-bs-theme=dark] .editor-dropdown-menu {
     background-color: #615959;
 }
 
-.dark .editor-dropdown-menu > .layui-menu {
+html[data-bs-theme=dark] .editor-dropdown-menu > .layui-menu {
     background-color: #615959;
 }
 
-.dark .editor-dropdown-menu > .layui-menu > li > div {
+html[data-bs-theme=dark] .editor-dropdown-menu > .layui-menu > li > div {
     color: rgb(255 255 255 / 80%);
     padding: 0px;
     margin: 0px;
 }
 
-.light .editor-dropdown-menu {
+html[data-bs-theme=light] .editor-dropdown-menu {
     background-color: #fff;
 }
 
-.light .editor-dropdown-menu > .layui-menu {
+html[data-bs-theme=light] .editor-dropdown-menu > .layui-menu {
     background-color: #fff;
 }
 
-.light .editor-dropdown-menu > .layui-menu > li > div {
+html[data-bs-theme=light] .editor-dropdown-menu > .layui-menu > li > div {
     color: rgb(0 0 0 / 80%);
     padding: 0px;
     margin: 0px;
 }
 
-.light .layui-menu li:hover {
+html[data-bs-theme=light] .layui-menu li:hover {
     background-color: #e9e9e9;
 }
 
-.dark #div_top, .dark #mid_td {
+html[data-bs-theme=dark] #div_top, html[data-bs-theme=dark] #mid_td {
     background: #979292 !important;
 }
 
@@ -516,19 +510,19 @@
     justify-content: center;
 }
 
-.light #nav button {
+html[data-bs-theme=light] #nav button {
     border-color: #009688;
 }
 
-.dark #nav button {
+html[data-bs-theme=dark] #nav button {
     border-color: #2f4056;
 }
 
-.light #nav button:active {
+html[data-bs-theme=light] #nav button:active {
     border: 1px solid #009688 !important;
 }
 
-.dark #nav button:active {
+html[data-bs-theme=dark] #nav button:active {
     border: 1px solid #2f4056 !important;
 }
 
@@ -536,13 +530,13 @@
     opacity: 1;
 }
 
-.light #nav button:hover {
+html[data-bs-theme=light] #nav button:hover {
     box-shadow: inset 2px 0px 5px #169084;
     /*box-shadow: none;*/
     border-color: #19897f;
 }
 
-.dark #nav button:hover {
+html[data-bs-theme=dark] #nav button:hover {
     box-shadow: 2px 0px 5px #263549;
     /*box-shadow: none;*/
     border-color: #384455;
@@ -557,7 +551,7 @@
     -webkit-transition: all .3s;
 }
 
-.light #nav button > a:hover {
+html[data-bs-theme=light] #nav button > a:hover {
     color: #fff;
 }
 
@@ -580,21 +574,21 @@
     color: #fff;
 }
 
-.light .layui-table-tips-main {
+html[data-bs-theme=light] .layui-table-tips-main {
     background-color: #fff;
     color: #5f5f5f;
 }
 
-.dark .layui-table-tips-main {
+html[data-bs-theme=dark] .layui-table-tips-main {
     background-color: #8d8888;
     color: #fff;
 }
 
-.light input[m-id="search-area"] {
+html[data-bs-theme=light] input[m-id="search-area"] {
     background-color: #f3efef;
     border-color: #ddd;
 }
 
-.light input[m-id="search-area"] + button.layui-btn-disabled {
+html[data-bs-theme=light] input[m-id="search-area"] + button.layui-btn-disabled {
     background-color: #f3efef !important;
 }

@@ -1,6 +1,5 @@
 (() => {
 
-goog.require('Mixly.Loading');
 goog.require('Mixly.JSFuncs');
 goog.require('Mixly.Interface');
 goog.require('select2');

@@ -43,7 +43,7 @@ class FooterLayerMessage extends FooterLayer {
         this.DEFALUT_ITEM_CONFIG = {
             type: 0,
             style: 'primary',
-            src: '../../../common/media/mixly.png',
+            src: '../common/media/mixly.png',
             name: '',
             onCreate: (obj) => {},
             onDestroy: () => {},

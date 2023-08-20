@@ -11,7 +11,7 @@ Blockly.Blocks.blynk_usb_server = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 25, 25))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 25, 25))
             .appendField(Blockly.Msg.blynk_USB_SERVER_INFO);
         this.appendValueInput("auth_key", String)
             .appendField(Blockly.Msg.blynk_IOT_AUTH)
@@ -47,7 +47,7 @@ Blockly.Blocks.blynk_server = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.Msg.blynk_SERVER_INFO);
         this.appendValueInput("server_add")
             .appendField(Blockly.Msg.blynk_SERVER_ADD)
@@ -138,7 +138,7 @@ Blockly.Blocks.blynk_iot_push_data = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.Msg.blynk_IOT_PUSH_DATA);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -161,7 +161,7 @@ Blockly.Blocks.blynk_iot_get_data = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.Msg.blynk_IOT_GET_DATA);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -528,7 +528,7 @@ Blockly.Blocks.blynk_iot_syncVirtual = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/iot.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/iot.png", 20, 20))
             .appendField(Blockly.Msg.blynk_IOT_syncVirtual);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -545,7 +545,7 @@ Blockly.Blocks.blynk_iot_WidgetLED_COLOR = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_led.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_led.png", 20, 20))
             .appendField(Blockly.Msg.blynk_IOT_WidgetLED);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -569,7 +569,7 @@ Blockly.Blocks.blynk_iot_WidgetLED_VALUE = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_led.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_led.png", 20, 20))
             .appendField(Blockly.Msg.blynk_IOT_WidgetLED);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -674,7 +674,7 @@ Blockly.Blocks.blynk_email = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_email.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_email.png", 20, 20))
             .appendField(Blockly.Msg.blynk_EMAIL);
         this.appendValueInput("email_add")
             .appendField(Blockly.Msg.blynk_EMAIL_ADD)
@@ -697,7 +697,7 @@ Blockly.Blocks.blynk_notify = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_push_notifications.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_push_notifications.png", 20, 20))
             .appendField(Blockly.Msg.blynk_NOTIFY);
         this.appendValueInput("content")
             .appendField(Blockly.Msg.OLED_STRING)
@@ -715,7 +715,7 @@ Blockly.Blocks.blynk_terminal = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_terminal.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_terminal.png", 20, 20))
             .appendField(Blockly.Msg.blynk_terminal)
             .appendField(Blockly.Msg.BLYNK_VIRTUALPIN)
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin")
@@ -736,7 +736,7 @@ Blockly.Blocks.blynk_videourl = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_video.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_video.png", 20, 20))
             .appendField(Blockly.Msg.BLYNK_VIRTUALPIN)
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
         this.appendValueInput("url")
@@ -756,7 +756,7 @@ Blockly.Blocks.blynk_bridge_auth = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_bridge.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20))
             .appendField(Blockly.Msg.BLYNK_BRIDGE_VIRTUALPIN)
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
         this.appendValueInput("auth")
@@ -776,7 +776,7 @@ Blockly.Blocks.blynk_bridge_digitalWrite = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_bridge.png", 20, 20));
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20));
         this.appendDummyInput("")
             .appendField(Blockly.Msg.BLYNK_BRIDGE_VIRTUALPIN);
         this.appendDummyInput("")
@@ -800,7 +800,7 @@ Blockly.Blocks.blynk_bridge_AnaloglWrite = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_bridge.png", 20, 20));
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20));
         this.appendDummyInput("")
             .appendField(Blockly.Msg.BLYNK_BRIDGE_VIRTUALPIN);
         this.appendDummyInput("")
@@ -824,7 +824,7 @@ Blockly.Blocks.blynk_bridge_VPin = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_bridge.png", 20, 20));
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_bridge.png", 20, 20));
         this.appendDummyInput("")
             .appendField(Blockly.Msg.BLYNK_BRIDGE_VIRTUALPIN);
         this.appendDummyInput("")
@@ -847,7 +847,7 @@ Blockly.Blocks.blynk_WidgetRTC_init = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_rtc.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_rtc.png", 20, 20))
             .appendField(Blockly.Msg.blynk_WidgetRTC_init);
         this.appendValueInput("NUM", Number)
             .appendField(Blockly.Msg.blynk_WidgetRTC_setSyncInterval)
@@ -878,7 +878,7 @@ Blockly.Blocks.blynk_WidgetRTC_get_time = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_rtc.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_rtc.png", 20, 20))
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.blynk_WidgetRTC_get_time);
 
@@ -895,7 +895,7 @@ Blockly.Blocks.blynk_iot_playmusic = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_player.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_player.png", 20, 20))
             .appendField(Blockly.Msg.blynk_iot_playmusic);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -911,7 +911,7 @@ Blockly.Blocks.blynk_iot_terminal_get = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_terminal.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_terminal.png", 20, 20))
             .appendField(Blockly.Msg.blynk_IOT_terminal_get);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -927,7 +927,7 @@ Blockly.Blocks.blynk_light = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_light_sensor.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_light_sensor.png", 20, 20))
             .appendField(Blockly.Msg.blynk_LIGHT);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -943,7 +943,7 @@ Blockly.Blocks.blynk_gravity = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_gravity_sensor.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_gravity_sensor.png", 20, 20))
             .appendField(Blockly.Msg.blynk_GRAVITY);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -959,7 +959,7 @@ Blockly.Blocks.blynk_acc = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_accelerometer_sensor.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_accelerometer_sensor.png", 20, 20))
             .appendField(Blockly.Msg.blynk_ACC);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");
@@ -975,7 +975,7 @@ Blockly.Blocks.blynk_time_input_1 = {
     init: function () {
         this.setColour(Blockly.Msg['BLYNK1_HUE']);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldImage("../../../common/media/blynk/widget_timeinput.png", 20, 20))
+            .appendField(new Blockly.FieldImage("../common/media/blynk/widget_timeinput.png", 20, 20))
             .appendField(Blockly.Msg.blynk_time_input_1);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BLYNK_VIRTUALPIN_SELECT), "Vpin");

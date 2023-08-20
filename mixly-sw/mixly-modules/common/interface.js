@@ -19,6 +19,7 @@ const {
     Config,
     BoardManager,
     XML,
+    Setting,
     Electron,
     Interface
 } = Mixly;
@@ -40,6 +41,7 @@ Interface.init = () => {
     }
     BoardManager.loadBoards();
     BoardManager.updateBoardsCard();
+    Setting.init();
     window.addEventListener('resize', BoardManager.updateBoardsCard, false);
     carousel.on('change(board-switch-filter)', function (obj) {
         const boardType = obj.item.find('.mixly-board').find('h2').html() ?? 'Add';
@@ -47,11 +49,9 @@ Interface.init = () => {
         BOARD_PAGE.boardType = boardType;
     });
 
-    setTimeout(() => {
-        $("#loading").fadeOut("normal", () => {
-            $('#loading').remove();
-        });
-    }, 100);
+    $("#loading").fadeOut("normal", () => {
+        $('#loading').remove();
+    });
 
     if (goog.isElectron) {
         (function (window, document) {

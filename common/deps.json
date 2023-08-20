@@ -12,7 +12,7 @@
         "provide": ["bootstrap"],
         "require": ["Popper"]
     }, {
-        "path": "/blockly-core/blockly_compressed.js",
+        "path": "blockly-core/blockly_compressed.js",
         "provide": ["Blockly"],
         "require": []
     }, {
@@ -164,19 +164,19 @@
         "provide": ["WebSerialPort"],
         "require": []
     }, {
-        "path": "/msg/blockly/lang.js",
+        "path": "msg/blockly/lang.js",
         "provide": ["Blockly.Lang"],
         "require": ["Blockly"]
     }, {
-        "path": "/msg/blockly/zh-hans.js",
+        "path": "msg/blockly/zh-hans.js",
         "provide": ["Blockly.Lang.ZhHans"],
         "require": ["Blockly.Lang"]
     }, {
-        "path": "/msg/blockly/zh-hant.js",
+        "path": "msg/blockly/zh-hant.js",
         "provide": ["Blockly.Lang.ZhHant"],
         "require": ["Blockly.Lang"]
     }, {
-        "path": "/msg/blockly/en.js",
+        "path": "msg/blockly/en.js",
         "provide": ["Blockly.Lang.En"],
         "require": ["Blockly.Lang"]
     }

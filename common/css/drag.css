@@ -93,16 +93,16 @@
     cursor: w-resize;
 }
 
-.light .horizontal-line,
-.light .vertical-line,
-.light .drag-s-elem,
-.light .drag-w-elem {
+html[data-bs-theme=light] .horizontal-line,
+html[data-bs-theme=light] .vertical-line,
+html[data-bs-theme=light] .drag-s-elem,
+html[data-bs-theme=light] .drag-w-elem {
     background-color: rgb(5 214 195);
 }
 
-.dark .horizontal-line,
-.dark .vertical-line,
-.dark .drag-s-elem,
-.dark .drag-w-elem {
+html[data-bs-theme=dark] .horizontal-line,
+html[data-bs-theme=dark] .vertical-line,
+html[data-bs-theme=dark] .drag-s-elem,
+html[data-bs-theme=dark] .drag-w-elem {
     background-color: rgb(8 105 170);
 }

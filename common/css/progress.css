@@ -8,12 +8,12 @@
     font-size: 16px;
 }
 
-.light .mixly-progress {
+html[data-bs-theme=light] .mixly-progress {
     color: rgb(0, 150, 136);
     background-color: rgba(0, 150, 136, 0.12);
 }
 
-.dark .mixly-progress {
+html[data-bs-theme=dark] .mixly-progress {
     color: rgb(33, 150, 243);
     background-color: rgba(33, 150, 243, 0.12);
 }

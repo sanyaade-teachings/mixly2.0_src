@@ -170,7 +170,7 @@ if (layui._typeof(BOARD.board) === 'object') {
         const boardConfig = BOARD.board[i];
         if (layui._typeof(boardConfig) === 'object'
          && layui._typeof(boardConfig.xmlPath) === 'string') {
-            const categoriesStr = goog.get(boardConfig.xmlPath);
+            const categoriesStr = goog.get(path.join(Env.boardDirPath, boardConfig.xmlPath));
             if (categoriesStr)
                 XML.CATEGORIES_STR[i] = categoriesStr;
         }

@@ -6,33 +6,33 @@
         justify-content: space-between;
     }
 
-    .light .footer-layer-board-config button.option {
+    html[data-bs-theme=light] .footer-layer-board-config button.option {
         background-color: #009688;
     }
 
-    .dark .footer-layer-board-config button.option {
+    html[data-bs-theme=dark] .footer-layer-board-config button.option {
         background-color: #007ACC;
     }
 
-    .light .footer-layer-board-config button.title {
+    html[data-bs-theme=light] .footer-layer-board-config button.title {
         background-color: #ffffff;
         border: 1px #fff;
         color: #000;
         font-size: 14px;
     }
 
-    .light .footer-layer-board-config button.title:hover {
+    html[data-bs-theme=light] .footer-layer-board-config button.title:hover {
         color: #a5a5a5;
     }
 
-    .dark .footer-layer-board-config button.title {
+    html[data-bs-theme=dark] .footer-layer-board-config button.title {
         background-color: #353535;
         border: 1px #353535;
         color: #fff;
         font-size: 14px;
     }
 
-    .dark .footer-layer-board-config button.title:hover {
+    html[data-bs-theme=dark] .footer-layer-board-config button.title:hover {
         color: var(--lay-color-text-2);
     }
 
@@ -41,7 +41,7 @@
         line-height: 13px;
     }
 
-    .dark .board-config-menu, .dark .board-config-menu > ul {
+    html[data-bs-theme=dark] .board-config-menu, html[data-bs-theme=dark] .board-config-menu > ul {
         background-color: #252526 !important;
     }
 
@@ -51,11 +51,11 @@
         overflow-y: auto;
     }
 
-    .light .board-config-menu li.selected, .light .board-config-menu li.selected:hover {
+    html[data-bs-theme=light] .board-config-menu li.selected, html[data-bs-theme=light] .board-config-menu li.selected:hover {
         background-color: #0bc1af;
     }
 
-    .dark .board-config-menu li.selected, .dark .board-config-menu li.selected:hover {
+    html[data-bs-theme=dark] .board-config-menu li.selected, html[data-bs-theme=dark] .board-config-menu li.selected:hover {
         background-color: #005994;
     }
 </style>

@@ -2,12 +2,13 @@ goog.loadJs('common', () => {
 
 goog.require('path');
 goog.require('Mixly');
+goog.require('Mixly.Url');
 goog.provide('Mixly.Env');
 
 const os = Mixly.require('os');
 const fs_plus = Mixly.require('fs-plus');
 const electron_remote = Mixly.require('@electron/remote');
-const { Env } = Mixly;
+const { Env, Url } = Mixly;
 
 /**
   * 检测是否启用node服务器
@@ -49,13 +50,13 @@ Env.pyFilePath = null;
   * 获取板卡index或主页面index的路径
   * @type {String} 
   */
-Env.indexDirPath = null;
+Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
 
 /**
   * 资源文件夹所在路径
   * @type {String} 
   */
-Env.srcDirPath = null;
+Env.srcDirPath = path.join(Env.indexDirPath, '../');
 
 /**
   * 获取板卡index或主页面index的缩放比例
@@ -93,9 +94,21 @@ Env.templatePath = path.join(goog.basePath, '../template/');
   */
 Env.msgPath = path.join(goog.basePath, '../msg/');
 
+/**
+  * 模板index所在路径
+  * @type {String}
+  */
+const urlConfig = Url.getConfig() ?? {};
+Env.boardIndexPath = path.join(Env.indexDirPath, '../', urlConfig.boardIndex ?? '');
+
+/**
+  * 模板index所在目录路径
+  * @type {String}
+  */
+Env.boardDirPath = path.join(Env.boardIndexPath, '../');
+
 if (goog.isElectron) {
     const { app } = electron_remote;
-    Env.indexDirPath = path.join(__dirname);
     Env.currentPlatform = os.platform();
     if (Env.currentPlatform === "darwin") {
         Env.clientPath = path.join(app.getPath("exe"), '../../../../');
@@ -111,7 +124,6 @@ if (goog.isElectron) {
             Env.python3Path = '/usr/local/bin/python3';
         }
     }
-    Env.srcDirPath = path.join(Env.indexDirPath, '../../../');
 }
 
 });

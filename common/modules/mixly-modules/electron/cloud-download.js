@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.MJSON');
 goog.require('Mixly.Electron');
@@ -16,7 +17,6 @@ const { CloudDownload } = Electron;
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
 const fs_extra = Mixly.require('fs-extra');
-const path = Mixly.require('path');
 const node_downloader_helper = Mixly.require('node-downloader-helper');
 
 CloudDownload.getJson = (url, downloadDir, endFunc) => {

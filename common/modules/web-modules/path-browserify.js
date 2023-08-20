@@ -35,7 +35,7 @@ function assertPath(path) {
 function normalizeStringPosix(path, allowAboveRoot) {
   path = path.replaceAll('\\', '/');
   var ignore = '';
-  var ignoreList = [ 'http://', 'https://' ];
+  var ignoreList = [ 'http://', 'https://', 'file://' ];
   if (path.length) {
     for (var value of ignoreList) {
       if (path.indexOf(value) !== 0) {

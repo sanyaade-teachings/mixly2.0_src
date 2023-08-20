@@ -79,7 +79,7 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
     border-radius: 0px 0px 5px 0px;
 }
 
-.light .layui-layer-resize {
+html[data-bs-theme=light] .layui-layer-resize {
     background-color: #fff;
 }
 
@@ -91,43 +91,43 @@ div.layui-form.layui-border-box.layui-table-view > div.layui-table-box > div.lay
     border-right-width: 10px !important;
 }
 
-.dark .layui-carousel[lay-indicator=outside] .layui-carousel-ind ul {
+html[data-bs-theme=dark] .layui-carousel[lay-indicator=outside] .layui-carousel-ind ul {
     background-color: rgb(141 135 135 / 50%);
 }
 
-.light .layui-carousel[lay-indicator=outside] .layui-carousel-ind ul {
+html[data-bs-theme=light] .layui-carousel[lay-indicator=outside] .layui-carousel-ind ul {
     background-color: rgb(130 129 129 / 50%);
 }
 
-.light #footer > div > p {
+html[data-bs-theme=light] #footer > div > p {
     color: #888;
 }
 
-.light .layui-carousel-arrow {
+html[data-bs-theme=light] .layui-carousel-arrow {
     background-color: rgba(0,0,0,.2);
 }
 
-.light .layui-carousel-arrow:hover, .light .layui-carousel-ind ul:hover {
+html[data-bs-theme=light] .layui-carousel-arrow:hover, html[data-bs-theme=light] .layui-carousel-ind ul:hover {
     background-color: rgba(0,0,0,.35);
 }
 
-.light .service-single {
+html[data-bs-theme=light] .service-single {
     background: #fff;
 }
 
-.light .service-single h2 {
+html[data-bs-theme=light] .service-single h2 {
     color: #232323;
 }
 
-.dark #footer > div > p {
+html[data-bs-theme=dark] #footer > div > p {
     color: #fff;
 }
 
-.dark .service-single {
+html[data-bs-theme=dark] .service-single {
     background: #2d2c2c;
 }
 
-.dark .service-single h2 {
+html[data-bs-theme=dark] .service-single h2 {
     color: #fff;
 }
 
@@ -156,11 +156,11 @@ body[class="dark"] {
     margin-bottom: 10px;
 }*/
 
-.dark .mixly-board .service-single label {
+html[data-bs-theme=dark] .mixly-board .service-single label {
     color: #ccc;
 }
 
-.light .mixly-board .service-single label {
+html[data-bs-theme=light] .mixly-board .service-single label {
     color: #888;
 }
 
@@ -177,7 +177,7 @@ body[class="dark"] {
     color: #666;
 }
 
-.dark .mixly-board-del-btn, .dark .mixly-board-ignore-btn {
+html[data-bs-theme=dark] .mixly-board-del-btn, html[data-bs-theme=dark] .mixly-board-ignore-btn {
     color: #ccc;
 }
 
@@ -185,7 +185,7 @@ body[class="dark"] {
     opacity: 1;
 }
 
-.dark .layui-progress-text {
+html[data-bs-theme=dark] .layui-progress-text {
     color: #fff;
 }
 
@@ -197,24 +197,24 @@ body[class="dark"] {
     width: 100%;
 }
 
-.dark .layui-table-body .layui-none {
+html[data-bs-theme=dark] .layui-table-body .layui-none {
     color: #fff;
 }
 
-.light .layui-layer-setwin span {
+html[data-bs-theme=light] .layui-layer-setwin span {
     color: #777;
 }
 
-.dark .layui-layer-setwin span {
+html[data-bs-theme=dark] .layui-layer-setwin span {
     color: #fff;
 }
 
-.dark .layui-carousel-arrow {
+html[data-bs-theme=dark] .layui-carousel-arrow {
     background-color: #2d2c2c !important;
 }
 
-.dark .layui-carousel-arrow:hover,
-.dark .layui-carousel-ind ul:hover {
+html[data-bs-theme=dark] .layui-carousel-arrow:hover,
+html[data-bs-theme=dark] .layui-carousel-ind ul:hover {
     background-color: rgba(119,119,119,.35) !important;
 }
 

@@ -1,4 +1,4 @@
-.light .tippy-box {
+html[data-bs-theme=light] .tippy-box {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.1);
@@ -7,11 +7,11 @@
     border-radius: 0.25rem;
 }
 
-.light .tippy-arrow {
+html[data-bs-theme=light] .tippy-arrow {
     color: rgba(255,255,255,.85);
 }
 
-.dark .tippy-box {
+html[data-bs-theme=dark] .tippy-box {
     background-color: #353535;
     background-clip: padding-box;
     border: 1px solid rgba(255,255,255,.1);
@@ -20,26 +20,26 @@
     border-radius: 0.25rem;
 }
 
-.dark .tippy-box .layui-layer-title {
+html[data-bs-theme=dark] .tippy-box .layui-layer-title {
     background-color: #353535;
 }
 
-.dark .tippy-arrow {
+html[data-bs-theme=dark] .tippy-arrow {
     color: #353535;
 }
 
-.light .tippy-content .m-btn {
+html[data-bs-theme=light] .tippy-content .m-btn {
     color: #000;
 }
 
-.light .tippy-content .m-btn:hover {
+html[data-bs-theme=light] .tippy-content .m-btn:hover {
     background-color: #f6f6f6;
 }
 
-.dark .tippy-content .m-btn {
+html[data-bs-theme=dark] .tippy-content .m-btn {
     color: #fff;
 }
 
-.dark .tippy-content .m-btn:hover {
+html[data-bs-theme=dark] .tippy-content .m-btn:hover {
     background-color: #41464b;
 }

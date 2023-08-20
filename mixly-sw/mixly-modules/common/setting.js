@@ -315,8 +315,4 @@ Setting.createAceEditor = (container, language = 'txt', tabSize = 4) => {
     return codeEditor;
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    Setting.init();
-});
-
 })();

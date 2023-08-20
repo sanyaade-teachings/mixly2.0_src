@@ -2,6 +2,7 @@
     {
         "path": "/common/board-manager.js",
         "require": [
+            "path",
             "layui",
             "Mixly.Env",
             "Mixly.Msg",
@@ -69,15 +70,6 @@
         ]
     },
     {
-        "path": "/common/loading.js",
-        "require": [
-            "Mixly.Config"
-        ],
-        "provide": [
-            "Mixly.Loading"
-        ]
-    },
-    {
         "path": "/common/msg.js",
         "require": [
             "Mixly.MJSON",
@@ -133,7 +125,6 @@
     {
         "path": "/mixly-loader.js",
         "require": [
-            "Mixly.Loading",
             "select2",
             "Mixly.Interface",
             "PouchDB",

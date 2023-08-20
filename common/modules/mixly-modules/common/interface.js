@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
 goog.require('Mixly.NavEvents');
@@ -53,6 +54,8 @@ Interface.init = () => {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
     Nav.init();
+    FooterBar.init();
+    Editor.init();
     Boards.init();
     if (goog.isElectron) {
         const { Electron } = Mixly;
@@ -70,12 +73,10 @@ Interface.init = () => {
     } else {
         Env.defaultXML = $('#toolbox').html();
     }
-    FooterBar.init();
     const selectedBoardName = Boards.getSelectedBoardName();
     Boards.changeTo(selectedBoardName);
     Boards.updateCategories(selectedBoardName);
     Msg.renderToolbox(true);
-    Editor.init();
     if (goog.isElectron) {
         const { Electron } = Mixly;
         const { Serial = undefined } = Electron;
@@ -140,7 +141,32 @@ Interface.onresize = (event) => {
 }
 
 window.addEventListener('load', () => {
-    Interface.init();
+    const $xml = $(goog.get(Env.boardIndexPath));
+    let scrpitPathList = [];
+    let cssPathList = [];
+    let $categories = null;
+    for (let i = 0; i < $xml.length; i++) {
+        const $xmli = $($xml[i]);
+        switch ($xml[i].nodeName) {
+        case 'SCRIPT':
+            $xmli.attr('src') && scrpitPathList.push(path.join(Env.boardDirPath, $xmli.attr('src')));
+            break;
+        case 'LINK':
+            $xmli.attr('href') && cssPathList.push(path.join(Env.boardDirPath, $xmli.attr('href')));
+            break;
+        case 'XML':
+            $categories = $xmli;
+            break;
+        }
+    }
+    if (!$categories.children('category').length) {
+        $categories.html('<category></category>');
+    }
+    $('#toolbox').html($categories.html());
+    LazyLoad.css(cssPathList);
+    LazyLoad.js(scrpitPathList, () => {
+        Interface.init();
+    });
 });
 
 window.addEventListener('DOMContentLoaded', () => {

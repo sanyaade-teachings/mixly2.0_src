@@ -1,6 +1,5 @@
 goog.loadJs('electron', () => {
 
-goog.require('LazyLoad');
 goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
@@ -74,13 +73,13 @@ LibManager.getLibs = (libsDir) => {
         };
     const libList = fs.readdirSync(libsDir);
     for (let libName of libList) {
-        const nowPath = path.resolve(libsDir, './' + libName);
+        const nowPath = path.join(libsDir, './' + libName);
         if (fs_plus.isDirectorySync(nowPath)) {
             const dataList = fs.readdirSync(nowPath);
             for (let dataName of dataList) {
                 const extname = path.extname(dataName);
                 if (extname !== '.xml') continue;
-                let text = fs.readFileSync(path.resolve(nowPath, './' + dataName), 'utf8');
+                let text = fs.readFileSync(path.join(nowPath, './' + dataName), 'utf8');
                 const $xml = XML.getDom(text, {
                     libPath: nowPath
                 });
@@ -89,21 +88,14 @@ LibManager.getLibs = (libsDir) => {
                         let loader, src;
                         if ($xml[i].nodeName == 'SCRIPT') {
                             loader = loadJs;
-                            src = $xml[i].src;
+                            src = $($xml[i]).attr('src');
                         } else {
                             loader = loadCss;
-                            src = $xml[i].href;
+                            src = $($xml[i]).attr('href');
                         }
-                        try {
-                            src = decodeURIComponent(src.replace('file:///', ''));
-                            const reSrcIndexDir = path.relative(Env.indexDirPath, src);
-                            const reSrcThirdDir = path.relative(Env.indexDirPath, path.resolve(nowPath, reSrcIndexDir));
-                            const srcThirdDir = path.resolve(Env.indexDirPath, reSrcThirdDir);
-                            if (fs_plus.isFileSync(srcThirdDir)) {
-                                loader.push(reSrcThirdDir);
-                            }
-                        } catch (error) {
-                            console.log(error);
+                        const srcThirdDir = path.join(nowPath, src);
+                        if (fs_plus.isFileSync(srcThirdDir)) {
+                            loader.push(srcThirdDir);
                         }
                     } else if ($xml[i].nodeName == 'CATEGORY') {
                         thirdPartyXML.push($xml[i].outerHTML);
@@ -131,15 +123,15 @@ LibManager.convertLibs = (libsDir) => {
     if (!fs_plus.isDirectorySync(libsDir)) return;
     const libList = fs.readdirSync(libsDir);
     for (let libName of libList) {
-        const libDir = path.resolve(libsDir, './' + libName);
+        const libDir = path.join(libsDir, './' + libName);
         if (!fs_plus.isDirectorySync(libDir)) continue;
         const dataList = fs.readdirSync(libDir);
-        const blocksDir = path.resolve(libDir, './block');
+        const blocksDir = path.join(libDir, './block');
         // 将1.x版本xml转化为2.0可用
         for (let data of dataList) {
             const extname = path.extname(data);
             if (extname !== '.xml') continue;
-            const xmlPath = path.resolve(libDir, './' + data);
+            const xmlPath = path.join(libDir, './' + data);
             let xmlData = fs.readFileSync(xmlPath, 'utf8');
             try {
                 xmlData = xmlData.replace(/\.\.\/\.\.\/blocks\/company\//g, "libraries/ThirdParty/" + libName + "/block/");
@@ -157,7 +149,7 @@ LibManager.loadLibsAndUpdateJsCssList = (doFunc = () => {}) => {
         js,
         css,
         xml
-    } = LibManager.getLibs(path.resolve(Env.indexDirPath, './libraries/ThirdParty/'));
+    } = LibManager.getLibs(path.join(Env.boardDirPath, './libraries/ThirdParty/'));
     Env.thirdPartyXML = xml;
     let loadPromise = [];
     if (js.length) {
@@ -213,7 +205,7 @@ LibManager.reloadThirdPartyLibs = () => {
 }
 
 LibManager.menuAddEvent = (layero) => {
-    const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
+    const thirdPartyPath = path.join(Env.boardDirPath, './libraries/ThirdParty');
     // 左侧菜单状态, 右侧菜单状态×2
     let menuStatus = [0, 0, 0];
     element.tab({
@@ -315,8 +307,8 @@ LibManager.menuAddEvent = (layero) => {
                 }
                 break;
             case 'open-folder':
-                const arduinoLibPath = path.resolve(Env.indexDirPath, 'libraries/myLib');
-                const pyLibPath = path.resolve(Env.indexDirPath, 'build/lib');
+                const arduinoLibPath = path.join(Env.boardDirPath, 'libraries/myLib');
+                const pyLibPath = path.join(Env.boardDirPath, 'build/lib');
                 let needOpenedPath;
                 switch (delType) {
                     case 'ARDUINO':
@@ -366,9 +358,9 @@ LibManager.showManageDialog = () => {
 LibManager.compareLibConfig = (cloudConfig) => {
     const { version, url } = cloudConfig;
     cloudConfig.downloadIndex = true;
-    const libDir = path.resolve(Env.indexDirPath, 'libraries/ThirdParty', path.basename(url, '.zip'));
+    const libDir = path.join(Env.boardDirPath, 'libraries/ThirdParty', path.basename(url, '.zip'));
     if (fs_plus.isDirectorySync(libDir)) {
-        const localConfigPath = path.resolve(libDir, './config.json');
+        const localConfigPath = path.join(libDir, './config.json');
         const localConfig = fs_extra.readJsonSync(localConfigPath, { throws: false });
         if (localConfig !== null) {
             if (localConfig.version === version)
@@ -442,7 +434,7 @@ LibManager.onclickImportLibs = () => {
         });
     });
 
-    const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
+    const thirdPartyPath = path.join(Env.boardDirPath, './libraries/ThirdParty');
     if (LibManager.URL.mixly) {
         CloudDownload.getJson(LibManager.URL.mixly, thirdPartyPath, (message) => {
             if (message[0]) {
@@ -472,10 +464,10 @@ LibManager.onclickImportLibs = () => {
     }
     let codeLibPath, codeLibUrl;
     if (Nav.codeEnv === 'c') {
-        codeLibPath = path.resolve(Env.indexDirPath, './libraries/myLib');
+        codeLibPath = path.join(Env.boardDirPath, './libraries/myLib');
         codeLibUrl = LibManager.URL.arduino;
     } else {
-        codeLibPath = path.resolve(Env.indexDirPath, './build/lib');
+        codeLibPath = path.join(Env.boardDirPath, './build/lib');
         codeLibUrl = LibManager.URL.python;
     }
     if (codeLibUrl) {
@@ -550,9 +542,9 @@ LibManager.onclickManageLibs = () => {
             none: Msg.Lang['本地库读取中'] + '...'
         }
     });
-    const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
-    const arduinoLibPath = path.resolve(Env.indexDirPath, 'libraries/myLib');
-    const pythonLibPath = path.resolve(Env.indexDirPath, 'build/lib');
+    const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
+    const arduinoLibPath = path.join(Env.boardDirPath, 'libraries/myLib');
+    const pythonLibPath = path.join(Env.boardDirPath, 'build/lib');
     let codeLibPath = Nav.codeEnv === 'c' ? arduinoLibPath : pythonLibPath;
     let needReadPathList = [{
         path: thirdPartyPath,
@@ -580,7 +572,7 @@ LibManager.onclickManageLibs = () => {
                     if (extname === '.json') continue;
                     data.push({
                         name: read,
-                        path: path.resolve(needRead.path, read)
+                        path: path.join(needRead.path, read)
                     });
                 }
                 if (data.length)
@@ -663,12 +655,12 @@ LibManager.showLocalImportDialog = (type) => {
 
 LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
     const extname = path.extname(inPath);
-    const pyLibPath = path.resolve(Env.indexDirPath, './build/lib');
-    const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
+    const pyLibPath = path.join(Env.boardDirPath, './build/lib');
+    const thirdPartyPath = path.join(Env.boardDirPath, './libraries/ThirdParty');
     if (fs_plus.isFileSync(inPath)) {
         switch (extname) {
             case '.py':
-                var dirPath = path.resolve(inPath, '../');
+                var dirPath = path.join(inPath, '../');
                 if (pyLibPath === dirPath) {
                     errorFunc(Msg.Lang['此库已导入']);
                     return;
@@ -677,7 +669,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
                 LibManager.importFromLocalWithFile(type, inPath, endFunc);
                 break;
             case '.mil':
-                var dirPath = path.resolve(inPath, '../');
+                var dirPath = path.join(inPath, '../');
                 if (thirdPartyPath === dirPath) {
                     errorFunc(Msg.Lang['此库已导入']);
                     return;
@@ -686,7 +678,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
                 LibManager.importFromLocalWithFile(type, inPath, endFunc);
                 break;
             case '.xml':
-                var dirPath = path.resolve(inPath, '../../');
+                var dirPath = path.join(inPath, '../../');
                 if (dirPath === thirdPartyPath) {
                     errorFunc(Msg.Lang['此库已导入']);
                     return;
@@ -707,7 +699,7 @@ LibManager.importFromLocal = (type, inPath, sucFunc, errorFunc, endFunc) => {
 }
 
 LibManager.importFromLocalWithFile = (type, filePath, endFunc) => {
-    const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty');
+    const thirdPartyPath = path.join(Env.boardDirPath, './libraries/ThirdParty');
     const extname = path.extname(filePath);
     const basename = path.basename(filePath);
     let copyPromiseList = [];
@@ -715,15 +707,15 @@ LibManager.importFromLocalWithFile = (type, filePath, endFunc) => {
         case '.xml':
             const dirPath = path.dirname(filePath);
             const dirName = path.basename(dirPath);
-            const desPath = path.resolve(thirdPartyPath, dirName)
+            const desPath = path.join(thirdPartyPath, dirName)
             copyPromiseList.push(LibManager.copyDir(dirPath, desPath));
             break;
         case '.mil':
-            const milPath = path.resolve(thirdPartyPath, path.basename(filePath));
+            const milPath = path.join(thirdPartyPath, path.basename(filePath));
             copyPromiseList.push(LibManager.copyFile(filePath, milPath));
             break;
         case '.py':
-            const pyPath = path.resolve(Env.indexDirPath, 'build/lib', path.basename(filePath));
+            const pyPath = path.join(Env.boardDirPath, 'build/lib', path.basename(filePath));
             copyPromiseList.push(LibManager.copyFile(filePath, pyPath));
             break;
         default:
@@ -745,8 +737,8 @@ LibManager.importFromLocalWithFile = (type, filePath, endFunc) => {
 }
 
 LibManager.importFromLocalWithZip = (type, filePath, endFunc) => {
-    const thirdPartyPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty/');
-    const myLibPath = path.resolve(Env.indexDirPath, './libraries/myLib/');
+    const thirdPartyPath = path.join(Env.boardDirPath, './libraries/ThirdParty/');
+    const myLibPath = path.join(Env.boardDirPath, './libraries/myLib/');
     let desPath;
     switch (type) {
         case 'MIXLY':
@@ -811,7 +803,7 @@ LibManager.showDelLibsProgress = (sucFunc) => {
 
 LibManager.unZip = (inPath, desPath, delZip, endFunc = (errorMessage) => {}) => {
     const dirName = path.basename(inPath, '.zip');
-    const unZipPath = path.resolve(desPath, dirName);
+    const unZipPath = path.join(desPath, dirName);
     compressing.zip.uncompress(inPath, desPath, {
         zipFileNameEncoding: 'GBK'
     })
@@ -964,9 +956,9 @@ LibManager.writeLibConfig = (info) => {
         url
     } = info;
     if (!name) return;
-    const libDir = path.resolve(desPath, path.basename(url, '.zip'));
+    const libDir = path.join(desPath, path.basename(url, '.zip'));
     if (fs_plus.isDirectorySync(libDir)) {
-        const configPath = path.resolve(libDir, 'config.json');
+        const configPath = path.join(libDir, 'config.json');
         const libConfig = {
             version
         };
@@ -997,7 +989,7 @@ LibManager.importWithUrl = (info) => {
         }
         // 下载板卡文件
         LibManager.downloadPromise(info, {
-            desPath: path.resolve(Env.clientPath, './download'),
+            desPath: path.join(Env.clientPath, './download'),
             url: info.downloadIndex ? info.url : 'None',
             startMessage: Msg.Lang['下载中'] + '...',
             endMessage: Msg.Lang['下载完成'],
@@ -1043,7 +1035,7 @@ LibManager.importWithUrl = (info) => {
 LibManager.downloadPromise = (info, config) => {
     return new Promise((resolve, reject) => {
         const DEFAULT_CONFIG = {
-            desPath: path.resolve(Env.clientPath, './download'),
+            desPath: path.join(Env.clientPath, './download'),
             url: null,
             startMessage: Msg.Lang['下载中'] + '...',
             endMessage: Msg.Lang['下载完成'],
@@ -1137,7 +1129,7 @@ LibManager.downloadPromise = (info, config) => {
 LibManager.unZipPromise = (info, config) => {
     return new Promise((resolve, reject) => {
         const DEFAULT_CONFIG = {
-            desPath: path.resolve(Env.clientPath, './download'),
+            desPath: path.join(Env.clientPath, './download'),
             zipPath: null,
             startMessage: Msg.Lang['解压中'] + '...',
             endMessage: Msg.Lang['解压完成'],

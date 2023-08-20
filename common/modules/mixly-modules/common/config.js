@@ -49,14 +49,15 @@ const SOFTWARE_DEFAULT_CONFIG = {
  * @return {void}
  **/
 Config.init = () => {
+    const urlConfig = Url.getConfig();
     Config.BOARD = {
-        ...goog.getJSON('./config.json', BOARD_DEFAULT_CONFIG),
-        ...Url.getConfig()
+        ...goog.getJSON(path.join(Env.boardDirPath, 'config.json'), BOARD_DEFAULT_CONFIG),
+        ...urlConfig
     };
 
     console.log('Config.BOARD:', Config.BOARD);
 
-    let pathPrefix = '../../../';
+    let pathPrefix = '../';
 
     Config.SOFTWARE = goog.getJSON(path.join(pathPrefix, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
     Config.pathPrefix = pathPrefix;

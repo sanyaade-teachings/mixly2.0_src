@@ -174,7 +174,8 @@
         "path": "/common/env.js",
         "require": [
             "path",
-            "Mixly"
+            "Mixly",
+            "Mixly.Url"
         ],
         "provide": [
             "Mixly.Env"
@@ -257,6 +258,7 @@
     {
         "path": "/common/interface.js",
         "require": [
+            "path",
             "Mixly.Url",
             "Mixly.Config",
             "Mixly.NavEvents",
@@ -317,21 +319,6 @@
         ],
         "provide": [
             "Mixly.LevelSelector"
-        ]
-    },
-    {
-        "path": "/common/loading.js",
-        "require": [
-            "layui",
-            "store",
-            "path",
-            "Mixly.Env",
-            "Mixly.Config",
-            "Mixly.LocalStorage",
-            "Mixly.CssLoader"
-        ],
-        "provide": [
-            "Mixly.Loading"
         ]
     },
     {
@@ -658,6 +645,7 @@
     {
         "path": "/electron/cloud-download.js",
         "require": [
+            "path",
             "Mixly.Env",
             "Mixly.MJSON",
             "Mixly.Electron"
@@ -724,7 +712,6 @@
     {
         "path": "/electron/lib-manager.js",
         "require": [
-            "LazyLoad",
             "layui",
             "Mixly.Env",
             "Mixly.XML",
@@ -798,7 +785,6 @@
     {
         "path": "/mixly-loader.js",
         "require": [
-            "Mixly.Loading",
             "Mixly.JSFuncs",
             "Mixly.Interface",
             "select2",

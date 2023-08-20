@@ -104,7 +104,7 @@ Blockly.Blocks.tool_modulus = {
 Blockly.Blocks['uno_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/uno.png", 525, 372, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/uno.png", 525, 372, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -113,7 +113,7 @@ Blockly.Blocks['uno_pin'] = {
 Blockly.Blocks['nano_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/nano.png", 525, 368, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/nano.png", 525, 368, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -122,7 +122,7 @@ Blockly.Blocks['nano_pin'] = {
 Blockly.Blocks['mega_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/mega.png", 525, 736, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/mega.png", 525, 736, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -131,7 +131,7 @@ Blockly.Blocks['mega_pin'] = {
 Blockly.Blocks['promini_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/ProMini.png", 525, 371, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/ProMini.png", 525, 371, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -140,7 +140,7 @@ Blockly.Blocks['promini_pin'] = {
 Blockly.Blocks['leonardo_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/leonardo.png", 525, 371, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/leonardo.png", 525, 371, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -150,7 +150,7 @@ Blockly.Blocks['leonardo_pin'] = {
 Blockly.Blocks['esp32s2_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/ESP32s2.jpg", 525, 376, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP32s2.jpg", 525, 376, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -160,7 +160,7 @@ Blockly.Blocks['esp32s2_pin'] = {
 Blockly.Blocks['esp32c3_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/ESP32c3.jpg", 525, 376, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP32c3.jpg", 525, 376, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -170,7 +170,7 @@ Blockly.Blocks['esp32c3_pin'] = {
 Blockly.Blocks['core_esp32c3_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/core_esp32c3_pin.png", 500, 376, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/core_esp32c3_pin.png", 500, 376, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -180,7 +180,7 @@ Blockly.Blocks['core_esp32c3_pin'] = {
 Blockly.Blocks['esp8266_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/ESP8266-NodeMCU.png", 525, 346, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP8266-NodeMCU.png", 525, 346, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -190,7 +190,7 @@ Blockly.Blocks['esp8266_pin'] = {
 Blockly.Blocks['wemos_d1_mini_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/ESP8266-WeMos-D1-Mini.png", 525, 264, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/ESP8266-WeMos-D1-Mini.png", 525, 264, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -200,7 +200,7 @@ Blockly.Blocks['wemos_d1_mini_pin'] = {
 Blockly.Blocks['stm32f103c8t6_pin'] = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../../../common/media/board_pin/STM32F103C8T6.png", 525, 376, "*"));
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/STM32F103C8T6.png", 525, 376, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl("https://blog.csdn.net/xatsoft/article/details/90687016?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6.nonecase");

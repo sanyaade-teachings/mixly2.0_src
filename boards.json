@@ -2,7 +2,7 @@
    {
         "boardImg": "./boards/default/micropython_esp32s2/media/mixgoce_compressed.png",
         "boardType": "MixGo CE",
-        "boardIndex": "./boards/default/micropython_esp32s2/index.html",
+        "boardIndex": "./boards/default/micropython_esp32s2/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -13,7 +13,7 @@
     }, {
         "boardImg": "./boards/default/micropython_esp32c3/media/esp32c3_compressed.png",
         "boardType": "Python ESP32-C3",
-        "boardIndex": "./boards/default/micropython_esp32c3/index.html",
+        "boardIndex": "./boards/default/micropython_esp32c3/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -24,7 +24,7 @@
     }, {
         "boardImg": "./boards/default/micropython_esp32/media/esp32_compressed.png",
         "boardType": "Python ESP32",
-        "boardIndex": "./boards/default/micropython_esp32/index.html",
+        "boardIndex": "./boards/default/micropython_esp32/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -35,7 +35,7 @@
     }, {
         "boardImg": "./boards/default/micropython_robot/media/mixbot.png",
         "boardType": "Python Robot",
-        "boardIndex": "./boards/default/micropython_robot/index.html",
+        "boardIndex": "./boards/default/micropython_robot/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -46,7 +46,7 @@
     }, {
         "boardImg": "./boards/default/arduino_avr/media/uno_compressed.png",
         "boardType": "Arduino AVR",
-        "boardIndex": "./boards/default/arduino_avr/index.html",
+        "boardIndex": "./boards/default/arduino_avr/index.xml",
         "env": {
             "electron": true,
             "web": false,
@@ -57,7 +57,7 @@
     }, {
         "boardImg": "./boards/default/python_mixpy/media/py.png",
         "boardType": "Python 3",
-        "boardIndex": "./boards/default/python_mixpy/index_board_mixpy.html",
+        "boardIndex": "./boards/default/python_mixpy/index.xml",
         "env": {
             "electron": true,
             "web": false,
@@ -68,7 +68,7 @@
     }, {
         "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 Lite",
-        "boardIndex": "./boards/default/python_skulpt/index_skulpt_board_mixpy.html",
+        "boardIndex": "./boards/default/python_skulpt/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -79,7 +79,7 @@
     }, {
         "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 MixToy",
-        "boardIndex": "./boards/default/python_skulpt_mixtoy/index_skulpt_board_mixpy.html",
+        "boardIndex": "./boards/default/python_skulpt_mixtoy/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -90,7 +90,7 @@
     }, {
         "boardImg": "./boards/default/python_skulpt/media/webpy.png",
         "boardType": "Python 3 Car",
-        "boardIndex": "./boards/default/python_skulpt_car/index_skulpt_board_mixpy.html",
+        "boardIndex": "./boards/default/python_skulpt_car/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -101,7 +101,7 @@
     }, {
         "boardImg": "./boards/default/micropython_k210_mixgoai/media/mixgoai_compressed.png",
         "boardType": "MixGo AI",
-        "boardIndex": "./boards/default/micropython_k210_mixgoai/index.html",
+        "boardIndex": "./boards/default/micropython_k210_mixgoai/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -112,7 +112,7 @@
     }, {
         "boardImg": "./boards/default/micropython_nrf51822_mithoncc/media/mithon_compressed.png",
         "boardType": "Mithon CC",
-        "boardIndex": "./boards/default/micropython_nrf51822_mithoncc/index.html",
+        "boardIndex": "./boards/default/micropython_nrf51822_mithoncc/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -123,7 +123,7 @@
     }, {
         "boardImg": "./boards/default/micropython_nrf51822_microbit/media/microbit_compressed.png",
         "boardType": "BBC micro:bit",
-        "boardIndex": "./boards/default/micropython_nrf51822_microbit/index.html",
+        "boardIndex": "./boards/default/micropython_nrf51822_microbit/index.xml",
         "env": {
             "electron": true,
             "web": true,
@@ -134,7 +134,7 @@
     }, {
         "boardImg": "./boards/default/arduino_esp8266/media/esp8266_compressed.png",
         "boardType": "Arduino ESP8266",
-        "boardIndex": "./boards/default/arduino_esp8266/index_board_Arduino_ESP8266.html",
+        "boardIndex": "./boards/default/arduino_esp8266/index.xml",
         "env": {
             "electron": true,
             "web": false,
@@ -145,7 +145,7 @@
     }, {
         "boardImg": "./boards/default/arduino_esp32/media/esp32_compressed.png",
         "boardType": "Arduino ESP32",
-        "boardIndex": "./boards/default/arduino_esp32/index_board_Arduino_ESP32.html",
+        "boardIndex": "./boards/default/arduino_esp32/index.xml",
         "env": {
             "electron": true,
             "web": false,
@@ -156,7 +156,7 @@
     }, {
         "boardImg": "./boards/default/arduino_esp32s2/media/esp32s2_compressed.png",
         "boardType": "Arduino ESP32S2",
-        "boardIndex": "./boards/default/arduino_esp32s2/index.html",
+        "boardIndex": "./boards/default/arduino_esp32s2/index.xml",
         "env": {
             "electron": true,
             "web": false,
@@ -167,7 +167,7 @@
     }, {
         "boardImg": "./boards/default/arduino_esp32s3/media/esp32s3_compressed.png",
         "boardType": "Arduino ESP32S3",
-        "boardIndex": "./boards/default/arduino_esp32s3/index.html",
+        "boardIndex": "./boards/default/arduino_esp32s3/index.xml",
         "env": {
             "electron": true,
             "web": false,
@@ -178,7 +178,7 @@
     }, {
         "boardImg": "./boards/default/arduino_esp32c3/media/esp32c3_compressed.png",
         "boardType": "Arduino ESP32C3",
-        "boardIndex": "./boards/default/arduino_esp32c3/index.html",
+        "boardIndex": "./boards/default/arduino_esp32c3/index.xml",
         "env": {
             "electron": true,
             "web": false,

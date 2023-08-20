@@ -20,7 +20,7 @@
     padding: 0px;
 }
 
-.dark .blocklyMainBackground {
+html[data-bs-theme=dark] .blocklyMainBackground {
     stroke: #000;
 }
 

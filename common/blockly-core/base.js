@@ -240,13 +240,7 @@ goog.addDependency = function(relPath, provides, requires) {
 goog.require = function(namespace) {
   // If the object already exists we do not need to do anything.
   if (!goog.isProvided_(namespace)) {
-    var moduleLoaderState = goog.moduleLoaderState_;
-    goog.moduleLoaderState_ = null;
-    try {
-      goog.debugLoader_.load_(namespace);
-    } finally {
-      goog.moduleLoaderState_ = moduleLoaderState;
-    }
+    goog.debugLoader_.load_(namespace);
   }
 
   return null;
@@ -352,7 +346,7 @@ goog.findBasePath_ = function() {
     var qmark = src.lastIndexOf('?');
     var l = qmark == -1 ? src.length : qmark;
     if (src.substr(l - 7, 7) == 'base.js') {
-      goog.basePath = src.substr(0, l - 7);
+      goog.basePath = src.substr(0, l - 7).replace(/file:\/+/g, '');
       return;
     }
   }
@@ -435,21 +429,20 @@ goog.DebugLoader_.prototype.load_ = function(namespace) {
  *
  * @private
  */
-goog.DebugLoader_.prototype.loadDeps_ = function() {
+goog.DebugLoader_.prototype.loadDeps_ = async function() {
   var loader = this;
-
-  while (this.depsToLoad_.length) {
-    (function() {
-      var loadCallDone = false;
-      var dep = loader.depsToLoad_.shift();
-
-      try {
-        dep.load();
-      } finally {
-        loadCallDone = true;
-      }
-    })();
+  var depsPath = [];
+  var namespacePath = '';
+  if (!this.depsToLoad_.length) {
+    return;
   }
+  for (var dep of this.depsToLoad_) {
+    depsPath.push(dep.path);
+  }
+  namespacePath = depsPath.pop();
+  LazyLoad.js(depsPath, function() {
+    LazyLoad.js(namespacePath);
+  });
 };
 
 

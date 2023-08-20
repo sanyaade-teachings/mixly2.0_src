@@ -1,5 +1,6 @@
 (() => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -37,7 +38,6 @@ const {
 const fs = Mixly.require('fs');
 const fs_extra = Mixly.require('fs-extra');
 const fs_plus = Mixly.require('fs-plus');
-const path = Mixly.require('path');
 const os = Mixly.require('os');
 const compressing = Mixly.require('compressing');
 const electron_remote = Mixly.require('@electron/remote');
@@ -134,20 +134,20 @@ BoardManager.showLocalImportDialog = () => {
 
 BoardManager.importBoardPackageWithConfig = (configPath) => {
     return new Promise((resolve, reject) => {
-        const dirPath = path.resolve(configPath, '../');
-        const hardwarePath = path.resolve(dirPath, './hardware');
+        const dirPath = path.join(configPath, '../');
+        const hardwarePath = path.join(dirPath, './hardware');
         if (fs_plus.isDirectorySync(dirPath) && fs_plus.isDirectorySync(hardwarePath)) {
             const packageList = fs.readdirSync(hardwarePath);
             const packagePath = [];
             let copyPromiseList = [];
-            fs_extra.ensureDirSync(path.resolve(Env.arduinoCliPath, './Arduino15/'));
+            fs_extra.ensureDirSync(path.join(Env.arduinoCliPath, './Arduino15/'));
             for (let i of packageList) {
-                const startPath = path.resolve(hardwarePath, './' + i);
+                const startPath = path.join(hardwarePath, './' + i);
                 if (fs_plus.isDirectorySync(startPath)) {
-                    const endPath = path.resolve(Env.arduinoCliPath, './Arduino15/packages/' + i);
+                    const endPath = path.join(Env.arduinoCliPath, './Arduino15/packages/' + i);
                     copyPromiseList.push(BoardManager.copyDir(startPath, endPath));
                 } else {
-                    const endPath = path.resolve(Env.arduinoCliPath, './Arduino15/' + i);
+                    const endPath = path.join(Env.arduinoCliPath, './Arduino15/' + i);
                     if (path.extname(i) === '.json') {
                         fs_extra.copy(startPath, endPath);
                     }
@@ -200,7 +200,7 @@ BoardManager.importPyPackage = () => {
 
 BoardManager.delBoard = (boardDir, endFunc) => {
     const layerIndex = BoardManager.showDelBoardProgress();
-    const configPath = path.resolve(boardDir, './config.json');
+    const configPath = path.join(boardDir, './config.json');
     const boardConfig = BoardManager.readBoardConfig(configPath);
     if (boardConfig) {
         let removePromise = [];
@@ -268,7 +268,7 @@ BoardManager.importFromLocal = (inPath, sucFunc, errorFunc, endFunc) => {
     if (fs_plus.isFileSync(inPath)) {
         switch (extname) {
             case '.json':
-                if (path.resolve(inPath, '../../') === Env.thirdPartyBoardPath) {
+                if (path.join(inPath, '../../') === Env.thirdPartyBoardPath) {
                     errorFunc(Msg.getLang('BOARD_IMPORTED'));
                     return;
                 }
@@ -289,7 +289,7 @@ BoardManager.importFromLocal = (inPath, sucFunc, errorFunc, endFunc) => {
 
 BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {}) => {
     const boardConfig = BoardManager.readBoardConfig(inPath);
-    const hardwarePath = path.resolve(inPath, '../hardware');
+    const hardwarePath = path.join(inPath, '../hardware');
     const filterFunc = (src, dest) => {
         if (src.indexOf(hardwarePath) !== -1)
             return false;
@@ -298,7 +298,7 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
     if (boardConfig) {
         const dirPath = path.dirname(inPath);
         const dirName = path.basename(dirPath);
-        const finalDir = path.resolve(Env.thirdPartyBoardPath, './' + dirName);
+        const finalDir = path.join(Env.thirdPartyBoardPath, './' + dirName);
         if (dirPath !== finalDir) {
             fs_extra.ensureDir(Env.thirdPartyBoardPath)
             .then(() => {
@@ -313,11 +313,11 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
             .then((message) => {
                 if (message) {
                     boardConfig.packagePath = message;
-                    fs_extra.writeJsonSync(path.resolve(finalDir, './config.json'), boardConfig, {
+                    fs_extra.writeJsonSync(path.join(finalDir, './config.json'), boardConfig, {
                         spaces: '    '
                     });
                 }
-                return fs_extra.remove(path.resolve(finalDir, './hardware'));
+                return fs_extra.remove(path.join(finalDir, './hardware'));
             })
             .then(() => {
                 endFunc(null);
@@ -332,11 +332,11 @@ BoardManager.importFromLocalWithConfig = (inPath, endFunc = (errorMessages) => {
                 .then((message) => {
                     if (message) {
                         boardConfig.packagePath = message;
-                        fs_extra.writeJsonSync(path.resolve(finalDir, './config.json'), boardConfig, {
+                        fs_extra.writeJsonSync(path.join(finalDir, './config.json'), boardConfig, {
                             spaces: '    '
                         });
                     }
-                    return fs_extra.remove(path.resolve(finalDir, './hardware'));
+                    return fs_extra.remove(path.join(finalDir, './hardware'));
                 })
                 .then(() => {
                     endFunc(null);
@@ -361,7 +361,7 @@ BoardManager.importFromLocalWithZip = (inPath, endFunc = (errorMessages) => {}) 
             endFunc(error);
         } else {
             const fileName = path.basename(inPath, '.zip');
-            const configPath = path.resolve(Env.thirdPartyBoardPath, './' + fileName + '/config.json');
+            const configPath = path.join(Env.thirdPartyBoardPath, './' + fileName + '/config.json');
             BoardManager.importFromLocalWithConfig(configPath, endFunc);
         }
     });
@@ -369,7 +369,7 @@ BoardManager.importFromLocalWithZip = (inPath, endFunc = (errorMessages) => {}) 
 
 BoardManager.unZip = (inPath, desPath, delZip, endFunc = (errorMessage) => {}) => {
     const fileName = path.basename(inPath, '.zip');
-    const unZipPath = path.resolve(desPath, './' + fileName);
+    const unZipPath = path.join(desPath, './' + fileName);
     compressing.zip.uncompress(inPath, desPath, {
         zipFileNameEncoding: 'GBK'
     })
@@ -495,7 +495,7 @@ BoardManager.writePackageConfig = (boardInfo) => {
         boardDirName
     } = boardInfo;
     if (!boardDirName) return;
-    const boardDir = path.resolve(Env.thirdPartyBoardPath, './' + boardDirName);
+    const boardDir = path.join(Env.thirdPartyBoardPath, './' + boardDirName);
     if (fs_plus.isDirectorySync(boardDir)) {
         const { currentPlatform } = Env,
         arch = os.arch();
@@ -506,17 +506,17 @@ BoardManager.writePackageConfig = (boardInfo) => {
             packageName = path.basename(packageUrl, '.zip');
             packageIndexName = path.basename(packageIndexUrl);
         }
-        const configPath = path.resolve(boardDir, './config.json');
+        const configPath = path.join(boardDir, './config.json');
         const boardConfig = BoardManager.readBoardConfig(configPath) ?? {};
         boardConfig.version = version;
         boardConfig.package = package;
         boardConfig.packagePath = [];
         if (packageName) {
-            const packagePath = path.resolve(Env.arduinoCliPath, './Arduino15/packages/' + packageName);
+            const packagePath = path.join(Env.arduinoCliPath, './Arduino15/packages/' + packageName);
             boardConfig.packagePath.push(packagePath);
         }
         if (packageIndexName) {
-            const packageIndexPath = path.resolve(Env.arduinoCliPath, './Arduino15/' + packageIndexName);
+            const packageIndexPath = path.join(Env.arduinoCliPath, './Arduino15/' + packageIndexName);
             boardConfig.packagePath.push(packageIndexPath);
         }
         try {
@@ -558,7 +558,7 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
         }
         // 下载板卡文件
         BoardManager.downloadPromise(boardInfo, {
-            desPath: path.resolve(Env.clientPath, './download'),
+            desPath: path.join(Env.clientPath, './download'),
             url: boardInfo.downloadBoardIndex ? boardInfo.url : 'None',
             startMessage: Msg.getLang('BOARD_FILE_DOWNLOADING') + '...',
             endMessage: Msg.getLang('BOARD_FILE_DOWNLOAD_COMPLETE'),
@@ -583,7 +583,7 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
             else {
                 const packageIndexUrl = boardInfo?.package?.index ?? null;
                 // 如果package-index有的话，下载板卡所需要的package-index
-                const packageIndexDirPath = Env.arduinoCliPath ? path.resolve(Env.arduinoCliPath, './Arduino15') : null;
+                const packageIndexDirPath = Env.arduinoCliPath ? path.join(Env.arduinoCliPath, './Arduino15') : null;
                 return BoardManager.downloadPromise(newBoardInfo, {
                     desPath: packageIndexDirPath,
                     url: boardInfo.downloadPackage ? packageIndexUrl : 'None',
@@ -605,7 +605,7 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
                     packageUrl = package[platform + '-' + arch] ?? null;
                 // 如果package有的话，下载板卡所需要的package
                 return BoardManager.downloadPromise(newBoardInfo, {
-                    desPath: path.resolve(Env.clientPath, './download'),
+                    desPath: path.join(Env.clientPath, './download'),
                     url: boardInfo.downloadPackage ? packageUrl : 'None',
                     startMessage: Msg.getLang('BOARD_PACKAGE_DOWNLOADING') + '...',
                     endMessage: Msg.getLang('BOARD_PACKAGE_DOWNLOAD_COMPLETE'),
@@ -617,7 +617,7 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
             if (newBoardInfo.error)
                 throw newBoardInfo;
             else {
-                const packageDirPath = Env.arduinoCliPath ? path.resolve(Env.arduinoCliPath, './Arduino15/packages') : null;
+                const packageDirPath = Env.arduinoCliPath ? path.join(Env.arduinoCliPath, './Arduino15/packages') : null;
                 return BoardManager.unZipPromise(newBoardInfo, {
                     desPath: packageDirPath,
                     zipPath: newBoardInfo.downloadPath,
@@ -650,7 +650,7 @@ BoardManager.importBoardWithUrl = (boardInfo) => {
 BoardManager.downloadPromise = (boardInfo, config) => {
     return new Promise((resolve, reject) => {
         const DEFAULT_CONFIG = {
-            desPath: path.resolve(Env.clientPath, './download'),
+            desPath: path.join(Env.clientPath, './download'),
             url: null,
             startMessage: Msg.getLang('DOWNLOADING') + '...',
             endMessage: Msg.getLang('DOWNLOAD_COMPLETE'),
@@ -742,7 +742,7 @@ BoardManager.downloadPromise = (boardInfo, config) => {
 BoardManager.unZipPromise = (boardInfo, config) => {
     return new Promise((resolve, reject) => {
         const DEFAULT_CONFIG = {
-            desPath: path.resolve(Env.clientPath, './download'),
+            desPath: path.join(Env.clientPath, './download'),
             zipPath: null,
             startMessage: Msg.getLang('UNZIPPING') + '...',
             endMessage: Msg.getLang('UNZIP_COMPLETE'),
@@ -803,7 +803,7 @@ BoardManager.readBoardConfig = (inPath) => {
         const { boardType, boardImg, boardName } = boardConfig;
 
         if ((boardType || boardName) && boardImg) {
-            const boardIndexPath = path.resolve(inPath, '../index.html');
+            const boardIndexPath = path.join(inPath, '../index.xml');
             boardConfig.boardIndex = path.relative(Env.indexPath, boardIndexPath);
             if (!boardType && boardName) {
                 boardConfig.boardType = boardName;
@@ -820,18 +820,18 @@ BoardManager.getThirdPartyBoardsConfig = () => {
     if (fs_plus.isDirectorySync(Env.thirdPartyBoardPath)) {
         const nameList = fs.readdirSync(Env.thirdPartyBoardPath);
         for (let i of nameList) {
-            const namePath = path.resolve(Env.thirdPartyBoardPath, './' + i);
+            const namePath = path.join(Env.thirdPartyBoardPath, './' + i);
             if (!fs_plus.isDirectorySync(namePath)) {
                 continue;
             }
-            const configPath = path.resolve(namePath, './config.json');
+            const configPath = path.join(namePath, './config.json');
             const boardConfig = BoardManager.readBoardConfig(configPath);
             if (!boardConfig) {
                 continue;
             }
             const { boardImg = '' } = boardConfig;
-            const srcIndexDir = path.resolve(Env.indexPath, boardImg);
-            const srcThirdDir = path.resolve(namePath, boardImg);
+            const srcIndexDir = path.join(Env.indexPath, boardImg);
+            const srcThirdDir = path.join(namePath, boardImg);
             const reSrcIndexDir = path.relative(Env.indexPath, srcIndexDir);
             const reSrcThirdDir = path.relative(Env.indexPath, srcThirdDir);
             if (fs_plus.isFileSync(srcIndexDir)) {
@@ -851,9 +851,9 @@ BoardManager.compareBoardConfig = (cloudConfig) => {
     cloudConfig.boardDirName = boardDirName;
     cloudConfig.downloadBoardIndex = true;
     cloudConfig.downloadPackage = true;
-    const boardDir = path.resolve(Env.thirdPartyBoardPath, './' + boardDirName);
+    const boardDir = path.join(Env.thirdPartyBoardPath, './' + boardDirName);
     if (fs_plus.isDirectorySync(boardDir)) {
-        const localConfigPath = path.resolve(boardDir, './config.json');
+        const localConfigPath = path.join(boardDir, './config.json');
         const localConfig = fs_extra.readJsonSync(localConfigPath, { throws: false });
         if (localConfig !== null) {
             if (localConfig.version === version)
@@ -911,7 +911,7 @@ BoardManager.onclickImportBoards = () => {
             none: Msg.getLang('CLOUD_BOARD_JSON_DOWNLOADING') + '...'
         }
     });
-    const downloadDir = path.resolve(Env.clientPath, './download');
+    const downloadDir = path.join(Env.clientPath, './download');
     CloudDownload.getJson(BoardManager.URL, downloadDir, (message) => {
         if (message[0]) {
             console.log(message[0]);
@@ -985,7 +985,7 @@ BoardManager.loadBoards = () => {
                 continue;
             }
             if (goog.isElectron) {
-                const indexPath = path.resolve(__dirname, config.boardIndex);
+                const indexPath = path.join(__dirname, config.boardIndex);
                 if (fs_plus.isFileSync(indexPath))
                     newBoardsList.push({ ...BOARDS_INFO[i], thirdPartyBoard: false });
             } else {
@@ -998,7 +998,7 @@ BoardManager.loadBoards = () => {
         const tpBoardsConfig = BoardManager.getThirdPartyBoardsConfig();
         for (let i = 0; i < tpBoardsConfig.length; i++) {
             const config = tpBoardsConfig[i];
-            const indexPath = path.resolve(__dirname, config.boardIndex);
+            const indexPath = path.join(__dirname, config.boardIndex);
             if (fs_plus.isFileSync(indexPath)) {
                 const boardInfo = {
                     boardImg: config.boardImg ?? './files/default.png',
@@ -1049,10 +1049,10 @@ BoardManager.showBoardsCard = (row, col) => {
             boardType,
             boardName,
             boardImg,
-            pyFilePath,
             language
         } = boardsList[i];
-        if (boardIndex !== 'javascript:;' && !pyFilePath) {
+        const indexPath = './boards/index.html';
+        if (boardIndex !== 'javascript:;') {
             let configObj = {
                 thirdPartyBoard,
                 boardIndex,
@@ -1070,7 +1070,7 @@ BoardManager.showBoardsCard = (row, col) => {
                     <i class="icon-${thirdPartyBoard? 'cancel-outline' : 'eye-off'}"></i>
                 </button>
                 <div class="service-single">
-                    <a href="${boardsList[i]['boardIndex']}?${configUrl}">
+                    <a href="${indexPath}?${configUrl}">
                         <img src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
                         <h2>${boardsList[i]['boardType']}</h2>
                         <label style="letter-spacing:1.5px;">${Msg.getLang('CODE_LANG')}: ${language}</label>
@@ -1079,75 +1079,56 @@ BoardManager.showBoardsCard = (row, col) => {
             </div>
             `;
         } else {
-            if (boardsList[i]['pyFilePath']) {
-                const indexPath = encodeURIComponent(path.resolve(Env.indexPath, boardIndex, '../'));
-                const newPyFilePath = encodeURIComponent(path.resolve(Env.indexPath, pyFilePath));
-                rowStr += `
-                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 mixly-board" id="board-${i}">
-                    <button id="board-${i}-button" index="${i}" type="button" class="layui-btn layui-btn-sm layui-btn-primary mixly-board-${thirdPartyBoard? 'del-btn' : 'ignore-btn'}">
-                        <i class="icon-${thirdPartyBoard? 'cancel-outline' : 'eye-off'}"></i>
-                    </button>
-                    <div class="service-single">
-                        <a href="javascript:;" onclick="Mixly.BoardManager.enterBoardIndexWithPyShell('${indexPath}', '${newPyFilePath}')">
-                            <img src="${boardImg}" alt="service image" class="tiltimage">
-                            <h2>${boardType}</h2>
-                            <label style="letter-spacing:1.5px;">${Msg.getLang('CODE_LANG')}: ${language}</label>
-                        </a>
-                    </div>
+            rowStr += `
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 setting-card">
+                <div class="service-single">
+                    <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
+                        <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
+                        <h2></h2>
+                        <label></label>
+                    </a>
                 </div>
-                `;
-            } else {
-                rowStr += `
-                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 setting-card">
-                    <div class="service-single">
-                        <a href="${boardsList[i]['boardIndex']}" onclick="Mixly.Setting.onclick()">
-                            <img id="add-board" src="${boardsList[i]['boardImg']}" alt="service image" class="tiltimage">
-                            <h2></h2>
-                            <label></label>
-                        </a>
-                    </div>
+                <div>
                     <div>
-                        <div>
-                            <form class="layui-form" lay-filter="setting-card-filter">
-                                <div class="layui-form-item layui-form-text" style="display: ${USER.themeAuto? 'none':'block'};">
-                                    <div class="layui-col-md12" style="text-align: center;">
-                                        <input 
-                                        lay-filter="setting-theme-filter"
-                                        type="checkbox"
-                                        name="close"
-                                        lay-skin="switch"
-                                        lay-text="&#xf186|&#xf185"
-                                        ${USER.theme === 'dark'? ' checked' : ''}>
-                                    </div>
+                        <form class="layui-form" lay-filter="setting-card-filter">
+                            <div class="layui-form-item layui-form-text" style="display: ${USER.themeAuto? 'none':'block'};">
+                                <div class="layui-col-md12" style="text-align: center;">
+                                    <input 
+                                    lay-filter="setting-theme-filter"
+                                    type="checkbox"
+                                    name="close"
+                                    lay-skin="switch"
+                                    lay-text="&#xf186|&#xf185"
+                                    ${USER.theme === 'dark'? ' checked' : ''}>
                                 </div>
-                                <div class="layui-form-item layui-form-text">
-                                    <div class="layui-col-md12" style="text-align: center;">
-                                        <button 
-                                        type="button"
-                                        class="layui-btn layui-btn-xs layui-btn-radius self-adaption-btn"
-                                        lay-submit
-                                        lay-filter="open-setting-dialog-filter">
-                                            <i class="layui-icon layui-icon-set-fill"></i>
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <div class="layui-col-md12" style="text-align: center;">
+                                    <button 
+                                    type="button"
+                                    class="layui-btn layui-btn-xs layui-btn-radius self-adaption-btn"
+                                    lay-submit
+                                    lay-filter="open-setting-dialog-filter">
+                                        <i class="layui-icon layui-icon-set-fill"></i>
+                                    </button>
                                 </div>
-                                <div class="layui-form-item layui-form-text">
-                                    <div class="layui-col-md12" style="text-align: center;">
-                                        <button
-                                        type="button"
-                                        class="layui-btn layui-btn-xs layui-btn-radius self-adaption-btn"
-                                        lay-submit
-                                        lay-filter="board-reset-filter">
-                                            <i class="layui-icon layui-icon-refresh"></i>
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <div class="layui-col-md12" style="text-align: center;">
+                                    <button
+                                    type="button"
+                                    class="layui-btn layui-btn-xs layui-btn-radius self-adaption-btn"
+                                    lay-submit
+                                    lay-filter="board-reset-filter">
+                                        <i class="layui-icon layui-icon-refresh"></i>
+                                    </button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                `;
-            }
+            </div>
+            `;
         }
         boardNum++;
         if (boardNum % (col * row) === 0 && rowStr) {
@@ -1193,7 +1174,7 @@ BoardManager.showBoardsCard = (row, col) => {
     $(".mixly-board-del-btn").off("click").click((event) => {
         const index = $(event.currentTarget).attr('index');
         const config = BoardManager.boardsList[index];
-        const dirPath = path.resolve(Env.indexPath, config.boardIndex, '../');
+        const dirPath = path.join(Env.indexPath, config.boardIndex, '../');
         BoardManager.delBoard(dirPath, endFunc);
     });
 

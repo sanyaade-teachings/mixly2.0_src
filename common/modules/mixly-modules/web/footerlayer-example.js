@@ -19,7 +19,7 @@ const {
 const { BOARD } = Config;
 
 class FooterLayerExampleExt extends FooterLayerExample {
-    static DIR_TREE = MJSON.get(`../../../sample/${Boards.getType()}.json`) ?? [];
+    static DIR_TREE = MJSON.get(Env.indexDirPath, `../sample/${Boards.getType()}.json`) ?? [];
 
     constructor(exampleBtnId) {
         super(exampleBtnId);

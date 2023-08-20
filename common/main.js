@@ -116,7 +116,7 @@ LazyLoad.js([
      * @return {object | null} 当对应路径下文件不存在时将返回null
      **/
     goog.getJSON = (inPath, defaultValue = {}) => {
-        let jsonStr = goog.get(inPath);
+        let jsonStr = goog.get(inPath) ?? '';
         try {
             // 去除JSON字符串中的注释
             jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);

@@ -1,6 +1,7 @@
 goog.loadJs('web', () => {
 
 goog.require('AvrUploader');
+goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
 goog.require('Mixly.MFile');
@@ -15,6 +16,7 @@ goog.require('Mixly.WebCompiler.Compiler');
 goog.provide('Mixly.Web.BU');
 
 const {
+    Env,
     Web,
     LayerExt,
     Config,
@@ -237,8 +239,10 @@ BU.burnWithEsptool = () => {
         statusBarTerminal.addValue("\n");
         for (let i of binFile) {
             if (i.path && i.offset) {
-                statusBarTerminal.addValue(`${Msg.Lang['读取固件'] + ' ' + Msg.Lang['路径']}:${i.path}, ${Msg.Lang['偏移']}:${i.offset}\n`);
-                firmwarePromise.push(readBinFile(i.path, i.offset));
+                let absolutePath = path.join(Env.boardDirPath, i.path);
+                statusBarTerminal.addValue(`${Msg.Lang['读取固件'] + ' '
+                    + Msg.Lang['路径']}:${absolutePath}, ${Msg.Lang['偏移']}:${i.offset}\n`);
+                firmwarePromise.push(readBinFile(absolutePath, i.offset));
             }
         }
         Promise.all(firmwarePromise)

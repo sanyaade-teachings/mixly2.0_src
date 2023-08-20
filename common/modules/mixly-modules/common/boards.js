@@ -211,67 +211,67 @@ Boards.changeTo = (boardName) => {
             srcPath: Env.srcDirPath
         };
         switch (outObj.type) {
-            case 'volume':
-                if (Env.currentPlatform == "win32") {
-                    if (typeof outObj.volumeName == "string") {
-                        outObj.volume = "VolumeName='" + outObj.volumeName + "'";
-                    } else if (typeof outObj.volumeName == "object") {
-                        outObj.volume = "VolumeName='" + outObj.volumeName[0] + "'";
-                        for (let i = 1; i < outObj.volumeName.length; i++) {
-                            outObj.volume += " or VolumeName='" + outObj.volumeName[i] + "'";
-                        }
-                    } else {
-                        outObj.volume = "VolumeName='CIRCUITPY'";
+        case 'volume':
+            if (Env.currentPlatform == "win32") {
+                if (typeof outObj.volumeName == "string") {
+                    outObj.volume = "VolumeName='" + outObj.volumeName + "'";
+                } else if (typeof outObj.volumeName == "object") {
+                    outObj.volume = "VolumeName='" + outObj.volumeName[0] + "'";
+                    for (let i = 1; i < outObj.volumeName.length; i++) {
+                        outObj.volume += " or VolumeName='" + outObj.volumeName[i] + "'";
                     }
                 } else {
-                    if (typeof outObj.volumeName == "string") {
-                        outObj.volume = outObj.volumeName;
-                    } else if (typeof outObj.volumeName == "object") {
-                        outObj.volume = outObj.volumeName[0];
-                        for (var i = 1; i < outObj.volumeName.length; i++) {
-                            outObj.volume += "/" + outObj.volumeName[i];
-                        }
-                    } else {
-                        outObj.volume = "CIRCUITPY";
+                    outObj.volume = "VolumeName='CIRCUITPY'";
+                }
+            } else {
+                if (typeof outObj.volumeName == "string") {
+                    outObj.volume = outObj.volumeName;
+                } else if (typeof outObj.volumeName == "object") {
+                    outObj.volume = outObj.volumeName[0];
+                    for (var i = 1; i < outObj.volumeName.length; i++) {
+                        outObj.volume += "/" + outObj.volumeName[i];
                     }
+                } else {
+                    outObj.volume = "CIRCUITPY";
                 }
-                break;
-            case 'command':
-                let pyToolsPath = "{srcPath}/pyTools/";
-                let obj = {};
-                let pyTools = {
-                    'esptool': 'esptool/__init__.py',
-                    'kflash': 'kflash.py',
-                    'stm32loader': 'stm32loader.py',
-                    'stm32bl': 'stm32bl.py',
-                    'ampy': 'ampy/cli.py'
-                };
-                for (let key in pyTools) {
-                    obj[key] = Env.python3Path + "\" \"" + pyToolsPath + pyTools[key];
+            }
+            break;
+        case 'command':
+            let pyToolsPath = "{srcPath}/pyTools/";
+            let obj = {};
+            let pyTools = {
+                'esptool': 'esptool/__init__.py',
+                'kflash': 'kflash.py',
+                'stm32loader': 'stm32loader.py',
+                'stm32bl': 'stm32bl.py',
+                'ampy': 'ampy/cli.py'
+            };
+            for (let key in pyTools) {
+                obj[key] = Env.python3Path + "\" \"" + pyToolsPath + pyTools[key];
+            }
+            if (outObj.reset) {
+                let resetStr = '{}';
+                try {
+                    resetStr = JSON.stringify(outObj.reset);
+                    resetStr = resetStr.replaceAll('\"', '\\\"');
+                    obj.reset = resetStr;
+                } catch (e) {
+                    console.log(e);
                 }
-                if (outObj.reset) {
-                    let resetStr = '{}';
-                    try {
-                        resetStr = JSON.stringify(outObj.reset);
-                        resetStr = resetStr.replaceAll('\"', '\\\"');
-                        obj.reset = resetStr;
-                    } catch (e) {
-                        console.log(e);
+            }
+            outObj.command = MString.tpl(outObj.command, obj);
+            outObj.command = MString.tpl(outObj.command, pathObj);
+            if (outObj.special && outObj.special instanceof Array) {
+                for (let key in outObj.special) {
+                    if (!outObj.special[key]?.name
+                     || !outObj.special[key]?.command) {
+                        continue;
                     }
+                    outObj.special[key].command = MString.tpl(outObj.special[key].command, obj);
+                    outObj.special[key].command = MString.tpl(outObj.special[key].command, pathObj);
                 }
-                outObj.command = MString.tpl(outObj.command, obj);
-                outObj.command = MString.tpl(outObj.command, pathObj);
-                if (outObj.special && outObj.special instanceof Array) {
-                    for (let key in outObj.special) {
-                        if (!outObj.special[key]?.name
-                         || !outObj.special[key]?.command) {
-                            continue;
-                        }
-                        outObj.special[key].command = MString.tpl(outObj.special[key].command, obj);
-                        outObj.special[key].command = MString.tpl(outObj.special[key].command, pathObj);
-                    }
-                }
-                break;
+            }
+            break;
         }
         if (value.type === 'upload' && (goog.isElectron || Env.hasSocketServer) && outObj.copyLib) {
             if (outObj.libPath) {

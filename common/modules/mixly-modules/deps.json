@@ -874,6 +874,7 @@
     {
         "path": "/web/footerlayer-example.js",
         "require": [
+            "path",
             "Mixly.Config",
             "Mixly.Env",
             "Mixly.MJSON",

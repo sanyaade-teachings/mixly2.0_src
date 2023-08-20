@@ -401,7 +401,7 @@ BU.burnWithSpecialBin = () => {
                     }
                 }
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.clientPath, "path");
-                firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.indexDirPath, "indexPath");
+                firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.boardDirPath, "indexPath");
                 const { mainStatusBarTab } = Mixly;
                 const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
                 statusBarTerminal.setValue('');

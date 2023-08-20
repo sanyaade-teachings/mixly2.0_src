@@ -64,7 +64,7 @@ CloudDownload.download = (url, downloadDir, options = {}) => {
         try {
             fs_extra.ensureDirSync(downloadDir);
             const fileName = path.basename(url);
-            const filePath = path.resolve(downloadDir, './' + fileName);
+            const filePath = path.join(downloadDir, './' + fileName);
             if (fs_plus.isFileSync(filePath))
                 fs_extra.removeSync(filePath);
         } catch (error) {

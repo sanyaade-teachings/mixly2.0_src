@@ -171,7 +171,7 @@ class EditorBlockly {
                 },
                 multiselectCopyPaste: {
                     crossTab: true,
-                    menu: true
+                    menu: false
                 }
             });
         }

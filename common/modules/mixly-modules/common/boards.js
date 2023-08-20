@@ -207,7 +207,7 @@ Boards.changeTo = (boardName) => {
         }
         const pathObj = {
             path: Env.clientPath,
-            indexPath: Env.indexDirPath,
+            indexPath: Env.boardDirPath,
             srcPath: Env.srcDirPath
         };
         switch (outObj.type) {
@@ -281,18 +281,14 @@ Boards.changeTo = (boardName) => {
                 }
                 outObj.libPath = libPath;
             } else {
-                outObj.libPath = [ path.join(Env.indexDirPath, 'build/lib/') ];
+                outObj.libPath = [ path.join(Env.boardDirPath, 'build/lib/') ];
             }
         }
         if (goog.isElectron || Env.hasSocketServer) {
             if (outObj.filePath) {
                 outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             } else {
-                if (goog.isElectron) {
-                    outObj.filePath = path.join(Env.indexDirPath, 'build/main.py');
-                } else {
-                    outObj.filePath = goog.normalizePath_(Env.indexDirPath + '/build/main.py');
-                }
+                outObj.filePath = path.join(Env.boardDirPath, 'build/main.py');
             }
         }
         SELECTED_BOARD[value.type] = outObj;

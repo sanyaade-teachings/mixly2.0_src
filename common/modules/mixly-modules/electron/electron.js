@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('Mixly.Url');
 goog.provide('Mixly.Electron');
 
@@ -10,7 +11,6 @@ const {
 } = Mixly;
 
 const electron_remote = Mixly.require('@electron/remote');
-const path = Mixly.require('path');
 
 const {
     Menu,
@@ -26,7 +26,7 @@ Electron.newBrowserWindow = (indexPath, config = {}) => {
             minWidth: 700,
             width: 0,
             height: 0,
-            icon: path.resolve(Env.indexDirPath, '../../../files/mixly.ico'),
+            icon: path.join(Env.indexDirPath, '../files/mixly.ico'),
             webPreferences: {
                 nodeIntegration: true,
                 enableRemoteModule: true,

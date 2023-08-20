@@ -286,7 +286,8 @@ Socket.updateSelectedBoardConfig = (info) => {
     Env.clientPath = info.clientPath;
     info.appPath = info.appPath.replaceAll('\\', '/');
     Env.srcDirPath = info.appPath;
-    Env.indexDirPath = path.join(Env.srcDirPath, BOARD.boardIndex, '../');
+    Env.indexDirPath = path.join(Env.srcDirPath, 'boards');
+    Env.boardDirPath = path.join(Env.srcDirPath, BOARD.boardIndex, '../');
     Env.python3Path = info.python3Path;
     const boardType = Boards.getSelectedBoardName();
     Boards.changeTo(boardType);

@@ -608,6 +608,7 @@
     {
         "path": "/electron/arduino-shell.js",
         "require": [
+            "path",
             "layui",
             "Blockly",
             "Mixly.Env",
@@ -657,6 +658,7 @@
     {
         "path": "/electron/electron.js",
         "require": [
+            "path",
             "Mixly.Url"
         ],
         "provide": [
@@ -677,6 +679,7 @@
     {
         "path": "/electron/file.js",
         "require": [
+            "path",
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.Config",
@@ -696,6 +699,7 @@
     {
         "path": "/electron/footerlayer-example.js",
         "require": [
+            "path",
             "layui",
             "Mixly.Env",
             "Mixly.Config",
@@ -773,6 +777,7 @@
     {
         "path": "/electron/wiki-manager.js",
         "require": [
+            "path",
             "Mixly.Config",
             "Mixly.Env",
             "Mixly.Msg",

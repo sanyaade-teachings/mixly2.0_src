@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
@@ -33,13 +34,12 @@ const { File, ArduShell, BU } = Electron;
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
 const fs_extra = Mixly.require('fs-extra');
-const path = Mixly.require('path');
 const electron_remote = Mixly.require('@electron/remote');
 const { dialog, app } = electron_remote;
 
 const { MSG } = Blockly.Msg;
 
-File.DEFAULT_PATH = path.resolve(app.getAppPath(), 'src/sample');
+File.DEFAULT_PATH = path.join(app.getAppPath(), 'src/sample');
 File.workingPath = File.DEFAULT_PATH;
 File.openedFilePath = null;
 

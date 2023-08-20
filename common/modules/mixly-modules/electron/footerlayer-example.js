@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
@@ -29,7 +30,6 @@ const { BOARD } = Config;
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
 const fs_extra = Mixly.require('fs-extra');
-const path = Mixly.require('path');
 const electron_remote = Mixly.require('@electron/remote');
 const { app } = electron_remote;
 
@@ -42,9 +42,9 @@ class FooterLayerExampleExt extends FooterLayerExample {
         let exampleList = [];
         let samplePath;
         if (BOARD.thirdPartyBoard) {
-            samplePath = path.resolve(Env.indexDirPath, 'examples');
+            samplePath = path.join(Env.boardDirPath, 'examples');
         } else {
-            samplePath = path.resolve(app.getAppPath(), 'src/sample', BOARD.boardType);
+            samplePath = path.join(app.getAppPath(), 'src/sample', BOARD.boardType);
         }
         const sampleList = this.getExamplesByPath(samplePath, '.mix');
         if (sampleList.length) {
@@ -54,14 +54,14 @@ class FooterLayerExampleExt extends FooterLayerExample {
                 children: []
             });
         }
-        const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
+        const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
         if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);
             for (let lib of libList) {
-                const libPath = path.resolve(thirdPartyPath, lib);
+                const libPath = path.join(thirdPartyPath, lib);
                 if (fs_plus.isFileSync(libPath))
                     continue;
-                const examplesPath = path.resolve(libPath, 'examples');
+                const examplesPath = path.join(libPath, 'examples');
                 if (fs_plus.isFileSync(examplesPath))
                     continue;
                 const thirdPartyList = this.getExamplesByPath(examplesPath, '.mix');
@@ -96,7 +96,7 @@ class FooterLayerExampleExt extends FooterLayerExample {
         if (fs_plus.isDirectorySync(inPath)) {
             const dataList = fs.readdirSync(inPath);
             for (let data of dataList) {
-                const dataPath = path.resolve(inPath, data);
+                const dataPath = path.join(inPath, data);
                 if (fs_plus.isDirectorySync(dataPath)) {
                     exampleList.push({ title: data, id: dataPath, children: [] });
                 } else {

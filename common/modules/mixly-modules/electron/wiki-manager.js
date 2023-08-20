@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -132,11 +133,11 @@ class WikiPage {
     }
 
     updateContentFile() {
-        const wikiContentPath = path.resolve(Env.indexDirPath, './wiki/content.md');
-        const defaultWikiPath = path.resolve(Env.indexDirPath, './wiki/wiki-libs/' + Msg.nowLang);
-        const wikiHomePagePath = path.resolve(defaultWikiPath, './home');
-        const thirdPartyLibsPath = path.resolve(Env.indexDirPath, './libraries/ThirdParty/');
-        const changelogPath = path.resolve(Env.clientPath, './CHANGELOG');
+        const wikiContentPath = path.join(Env.boardDirPath, 'wiki/content.md');
+        const defaultWikiPath = path.join(Env.boardDirPath, 'wiki/wiki-libs/' + Msg.nowLang);
+        const wikiHomePagePath = path.join(defaultWikiPath, 'home');
+        const thirdPartyLibsPath = path.join(Env.boardDirPath, 'libraries/ThirdParty/');
+        const changelogPath = path.join(Env.clientPath, 'CHANGELOG');
         const wikiList = [];
         if (fs_plus.isFileSync(wikiHomePagePath + '.md'))
             wikiList.push({
@@ -155,7 +156,7 @@ class WikiPage {
         if (fs_plus.isDirectorySync(thirdPartyLibsPath)) {
             const libsName = fs.readdirSync(thirdPartyLibsPath);
             for (let name of libsName) {
-                const libWikiPath = path.resolve(thirdPartyLibsPath, './' + name + '/wiki/' + Msg.nowLang);
+                const libWikiPath = path.join(thirdPartyLibsPath, name , 'wiki', Msg.nowLang);
                 if (fs_plus.isDirectorySync(libWikiPath)) {
                     const childContentList = this.getContentJson(libWikiPath, name);
                     if (childContentList) {
@@ -186,9 +187,9 @@ class WikiPage {
     updateWiki() {
         const args = [
             {
-                default: path.resolve(Env.indexDirPath, './wiki/wiki-libs/'),
-                thirdParty: path.resolve(Env.indexDirPath, './libraries/ThirdParty/'),
-                content: path.resolve(Env.indexDirPath, './wiki/content.md')
+                default: path.join(Env.boardDirPath, 'wiki/wiki-libs/'),
+                thirdParty: path.join(Env.boardDirPath, 'libraries/ThirdParty/'),
+                content: path.join(Env.boardDirPath, 'wiki/content.md')
             }
         ];
         if (this.gotoInfo) {
@@ -217,7 +218,7 @@ class WikiPage {
         const { ul } = contentList[1];
         const keyList = fs.readdirSync(dirPath);
         for (let key of keyList) {
-            const nowPath = path.resolve(dirPath, './' + key);
+            const nowPath = path.join(dirPath, key);
             if (fs_plus.isDirectorySync(nowPath)) {
                 const childContentList = this.getContentJson(nowPath);
                 if (childContentList && childContentList[1].ul.length)
@@ -227,7 +228,7 @@ class WikiPage {
                 if (extname !== '.md') continue;
                 const fileNameList = path.basename(key, '.md').split('-');
                 if (fileNameList.length !== 2) continue;
-                const newPath = path.resolve(path.dirname(nowPath), './' + path.basename(key, '.md'));
+                const newPath = path.join(path.dirname(nowPath), path.basename(key, '.md'));
                 ul.push({ link: { title: fileNameList[1], source: '?file=' + encodeURIComponent(newPath) + ' \"' + fileNameList[1] + '\"' } });
             }
         }
@@ -240,7 +241,7 @@ WikiManager.WikiPage = WikiPage;
 WikiManager.openWiki = (gotoInfo) => {
     const goto = (gotoInfo && typeof gotoInfo === 'object') ? gotoInfo[Msg.nowLang] : null;
     if (!WikiManager.wiki || WikiManager.wiki.isDestroyed) {
-        const wikiPath = path.resolve(Env.indexDirPath, '../../../common/wiki/index.html');
+        const wikiPath = path.join(Env.indexDirPath, '../common/wiki/index.html');
         if (fs_plus.isFileSync(wikiPath)) {
             WikiManager.wiki = new WikiPage(wikiPath, goto);
         } else {

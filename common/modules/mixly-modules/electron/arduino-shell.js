@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('layui');
 goog.require('Blockly');
 goog.require('Mixly.Env');
@@ -32,7 +33,6 @@ const { BOARD, SOFTWARE, USER } = Config;
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
 const fs_extra = Mixly.require('fs-extra');
-const path = Mixly.require('path');
 const lodash_fp = Mixly.require('lodash/fp');
 const child_process = Mixly.require('child_process');
 const iconv_lite = Mixly.require('iconv-lite');
@@ -80,16 +80,16 @@ ArduShell.shell = null;
 ArduShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
 
 ArduShell.updateShellPath = () => {
-    let shellPath = path.resolve(Env.clientPath, './arduino-cli');
+    let shellPath = path.join(Env.clientPath, 'arduino-cli');
     if (Env.currentPlatform === 'win32')
-        shellPath = path.resolve(shellPath, './arduino-cli.exe');
+        shellPath = path.join(shellPath, 'arduino-cli.exe');
     else
-        shellPath = path.resolve(shellPath, './arduino-cli');
+        shellPath = path.join(shellPath, 'arduino-cli');
     if (!fs_plus.isFileSync(shellPath)) {
         const { defaultPath = {} } = SOFTWARE;
         if (typeof defaultPath[Env.currentPlatform] === 'object') {
             let defaultShellPath = defaultPath[Env.currentPlatform].arduinoCli ?? '';
-            defaultShellPath = path.resolve(Env.clientPath, defaultShellPath);
+            defaultShellPath = path.join(Env.clientPath, defaultShellPath);
             if (fs_plus.isFileSync(defaultShellPath))
                 shellPath = defaultShellPath;
             else
@@ -101,7 +101,7 @@ ArduShell.updateShellPath = () => {
 
 ArduShell.updateConfig = (config) => {
     if (!ArduShell.shellPath) return;
-    const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json');
+    const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json');
     let nowConfig = fs_extra.readJsonSync(configPath, { throws: false }) ?? { ...ArduShell.DEFAULT_CONFIG };
     if (typeof config === 'object') {
         if (MArray.equals(nowConfig.directories, config.directories))
@@ -127,9 +127,9 @@ ArduShell.init = () => {
     if (!ArduShell.shellPath) return;
     ArduShell.updateConfig({
         directories: {
-            data: path.resolve(ArduShell.shellPath, '../Arduino15'),
-            downloads: path.resolve(ArduShell.shellPath, '../staging'),
-            user: path.resolve(ArduShell.shellPath, '../Arduino')
+            data: path.join(ArduShell.shellPath, '../Arduino15'),
+            downloads: path.join(ArduShell.shellPath, '../staging'),
+            user: path.join(ArduShell.shellPath, '../Arduino')
         }
     });
 }
@@ -190,25 +190,25 @@ ArduShell.compile = (doFunc = () => {}) => {
     setTimeout(() => {
         statusBarTerminal.setValue(Msg.Lang["编译中"] + "...\n");
 
-        let myLibPath = Env.indexDirPath + "/libraries/myLib/";
+        let myLibPath = path.join(Env.boardDirPath, "/libraries/myLib/");
         if (fs_plus.isDirectorySync(myLibPath))
             myLibPath += '\",\"';
         else
             myLibPath = '';
-        const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
+        const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
         if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);
             for (let libName of libList) {
-                const libPath = path.resolve(thirdPartyPath, libName, 'libraries');
+                const libPath = path.join(thirdPartyPath, libName, 'libraries');
                 if (!fs_plus.isDirectorySync(libPath)) continue;
                 myLibPath += libPath + ',';
             }
         }
-        const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
-        defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),
-        buildPath = path.resolve(Env.clientPath, './mixlyBuild'),
-        buildCachePath = path.resolve(Env.clientPath, './mixlyBuildCache'),
-        codePath = path.resolve(Env.clientPath, './testArduino/testArduino.ino');
+        const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
+        defaultLibPath = path.join(ArduShell.shellPath, '../libraries'),
+        buildPath = path.join(Env.clientPath, './mixlyBuild'),
+        buildCachePath = path.join(Env.clientPath, './mixlyBuildCache'),
+        codePath = path.join(Env.clientPath, './testArduino/testArduino.ino');
         const cmdStr = '\"'
                      + ArduShell.shellPath
                      + '\" compile -b '
@@ -292,11 +292,11 @@ ArduShell.upload = (boardType, port) => {
     });
     mainStatusBarTab.show();
     statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
-    const configPath = path.resolve(ArduShell.shellPath, '../arduino-cli.json'),
-    defaultLibPath = path.resolve(ArduShell.shellPath, '../libraries'),
-    buildPath = path.resolve(Env.clientPath, './mixlyBuild'),
-    buildCachePath = path.resolve(Env.clientPath, './mixlyBuildCache'),
-    codePath = path.resolve(Env.clientPath, './testArduino/testArduino.ino');
+    const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
+    defaultLibPath = path.join(ArduShell.shellPath, '../libraries'),
+    buildPath = path.join(Env.clientPath, './mixlyBuild'),
+    buildCachePath = path.join(Env.clientPath, './mixlyBuildCache'),
+    codePath = path.join(Env.clientPath, './testArduino/testArduino.ino');
     let cmdStr = '';
     if (ArduShell.binFilePath !== '') {
         cmdStr = '\"'
@@ -311,16 +311,16 @@ ArduShell.upload = (boardType, port) => {
             + '-i \"' + ArduShell.binFilePath + '\" --no-color';
         ArduShell.binFilePath = '';
     } else {
-        let myLibPath = Env.indexDirPath + "/libraries/myLib/";
+        let myLibPath = path.join(Env.boardDirPath, "/libraries/myLib/");
         if (fs_plus.isDirectorySync(myLibPath))
             myLibPath += '\",\"';
         else
             myLibPath = '';
-        const thirdPartyPath = path.resolve(Env.indexDirPath, 'libraries/ThirdParty');
+        const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
         if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);
             for (let libName of libList) {
-                const libPath = path.resolve(thirdPartyPath, libName, 'libraries');
+                const libPath = path.join(thirdPartyPath, libName, 'libraries');
                 if (!fs_plus.isDirectorySync(libPath)) continue;
                 myLibPath += libPath + ',';
             }
@@ -429,7 +429,7 @@ ArduShell.clearDirCppAndHppFiles = (dir) => {
         let libDir = fs.readdirSync(dir);
         for (let i = 0; i < libDir.length; i++) {
             if (ArduShell.isCppOrHpp(libDir[i])) {
-                const nowPath = path.resolve(dir, libDir[i]);
+                const nowPath = path.join(dir, libDir[i]);
                 fs.unlinkSync(nowPath);
             }
         }
@@ -448,8 +448,8 @@ ArduShell.copyHppAndCppFiles = (oldDir, newDir) => {
         let oldLibDir = fs.readdirSync(oldDir);
         for (let i = 0; i < oldLibDir.length; i++) {
             if (ArduShell.isCppOrHpp(oldLibDir[i])) {
-                const oldPath = path.resolve(oldDir, oldLibDir[i]);
-                const newPath = path.resolve(newDir, oldLibDir[i]);
+                const oldPath = path.join(oldDir, oldLibDir[i]);
+                const newPath = path.join(newDir, oldLibDir[i]);
                 try {
                     fs.copyFileSync(oldPath, newPath);
                 } catch (e) {
@@ -471,7 +471,7 @@ ArduShell.writeLibFiles = (inPath) => {
         const promiseList = [];
         for (let name in Blockly.Arduino.libs_) {
             const data = Blockly.Arduino.libs_[name];
-            const codePath = path.resolve(inPath, name + '.h');
+            const codePath = path.join(inPath, name + '.h');
             promiseList.push(
                 new Promise((childResolve, childReject) => {
                     fs_extra.outputFile(codePath, data)
@@ -502,8 +502,8 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const { mainStatusBarTab } = Mixly;
     const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
     const code = MFile.getCode();
-    const testArduinoDirPath = path.resolve(Env.clientPath, 'testArduino');
-    const codePath = path.resolve(testArduinoDirPath, 'testArduino.ino');
+    const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
+    const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
     ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
     const nowFilePath = Title.getFilePath();
     if (USER.compileCAndH === 'yes' && fs_plus.isFileSync(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
@@ -659,8 +659,8 @@ ArduShell.writeFile = function (readPath, writePath) {
 ArduShell.showUploadBox = function (filePath) {
     const dirPath = path.dirname(filePath);
     const fileName = path.basename(filePath, path.extname(filePath));
-    if (fs_plus.isDirectorySync(path.resolve(dirPath, fileName))) {
-        filePath = path.resolve(dirPath, fileName, path.basename(filePath));
+    if (fs_plus.isDirectorySync(path.join(dirPath, fileName))) {
+        filePath = path.join(dirPath, fileName, path.basename(filePath));
     }
     const layerNum = layer.msg(Msg.Lang['所打开文件可直接上传'], {
         time: -1,

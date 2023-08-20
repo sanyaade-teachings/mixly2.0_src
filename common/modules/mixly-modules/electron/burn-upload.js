@@ -167,7 +167,7 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     }
     // 如果需要拷贝的是文件，则在目的路径后要加上文件名
     if (fs_plus.isFileSync(startPath)) {
-        desPath = path.resolve(desPath, path.basename(startPath));
+        desPath = path.join(desPath, path.basename(startPath));
     }
     fs_extra.copy(startPath, desPath)
     .then(() => {
@@ -398,7 +398,7 @@ BU.copyLib = function (filePath, code) {
         const libFiles = fs.readdirSync(dirPath);
         for (let value of libFiles) {
             if (value !== fileName) {
-                fs.unlinkSync(path.resolve(dirPath, value));
+                fs.unlinkSync(path.join(dirPath, value));
             }
         }
     } catch (e) {
@@ -459,8 +459,8 @@ BU.searchLibs = function (dirPath, code, libArr) {
                     if (!(upload.libPath && upload.libPath.length))
                         return;
                     for (let nowDirPath of upload.libPath) {
-                        const nowMpyFilePath = path.resolve(nowDirPath, moduleArr[j] + '.mpy');
-                        const nowPyFilePath = path.resolve(nowDirPath, moduleArr[j] + '.py');
+                        const nowMpyFilePath = path.join(nowDirPath, moduleArr[j] + '.mpy');
+                        const nowPyFilePath = path.join(nowDirPath, moduleArr[j] + '.py');
                         if (fs_plus.isFileSync(nowMpyFilePath)) {
                             oldLibPath = nowMpyFilePath;
                             break;
@@ -470,7 +470,7 @@ BU.searchLibs = function (dirPath, code, libArr) {
                     }
                     if (oldLibPath) {
                         const extname = path.extname(oldLibPath);
-                        const newLibPath = path.resolve(dirPath, moduleArr[j] + extname);
+                        const newLibPath = path.join(dirPath, moduleArr[j] + extname);
                         statusBarTerminal.addValue(Msg.Lang['拷贝库'] + ' ' + moduleArr[j] + '\n');
                         fs.copyFileSync(oldLibPath, newLibPath);
                         libArr.push(moduleArr[j] + extname);

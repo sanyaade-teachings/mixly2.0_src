@@ -1,9 +1,8 @@
 {
     "board": {
-        "元控": "micropython:esp32c3:bitbot",
-        "Mixbot-s1": "micropython:esp32:mixbot_s1",
-        "Mixbot-s2": "micropython:esp32:mixbot_s2",
-        "RoboMaster E1": "micropython:esp32:rm_e1"
+        "元控•白泽": "micropython:esp32c3:bitbot",
+        "超霸大师": "micropython:esp32:mixbot_s2",
+        "机器人大师": "micropython:esp32:rm_e1"
     },
     "language": "MicroPython",
     "burn": {

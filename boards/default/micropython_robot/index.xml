@@ -95,7 +95,7 @@
 <script src="../../../common/js/skulpt/dist/skulpt.min.js" type="application/javascript"></script>
 <script src="../../../common/js/skulpt/dist/skulpt-stdlib.js" type="application/javascript"></script>
 <link rel="stylesheet" type="text/css" href="css/color_esp32_mixgo.css" />
-<xml id="toolbox" style="display: none">
+<xml>
   <category name="" id="catInOut" colour="20">
     <block type="inout_highlow"></block>
     <block type="inout_digital_init">

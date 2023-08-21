@@ -3525,6 +3525,7 @@ En.MIXLY_TOOLTIP_MOTOR_SETUP = 'Dual PWM motor drive (HR8833) initialization';
 En.SHUTDOWN = 'shut down';
 En.DIGITAL = 'digital';
 En.ANALOG = 'analog';
+En.BITBOT = 'MixGo•Baize';
 En.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = 'Shut down and disconnected under battery power. Only the motor output is turned off under USB power supply.';
 
 })();

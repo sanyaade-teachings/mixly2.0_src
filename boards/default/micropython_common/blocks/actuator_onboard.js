@@ -873,7 +873,7 @@ Blockly.Blocks.bitbot_move = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
-          .appendField("Bitbot")
+          .appendField(Blockly.Msg.BITBOT)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.blockpy_forward, "F"],
             [Blockly.Msg.blockpy_backward, "B"],
@@ -896,7 +896,7 @@ Blockly.Blocks.bitbot_stop = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
-          .appendField("Bitbot")
+          .appendField(Blockly.Msg.BITBOT)
           .appendField(new Blockly.FieldDropdown([           
             [Blockly.Msg.MOTOR_P, "P"],
             [Blockly.Msg.MOTOR_N, "N"]
@@ -911,7 +911,7 @@ Blockly.Blocks.bitbot_motor = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
       this.appendDummyInput()
-          .appendField("Bitbot")
+          .appendField(Blockly.Msg.BITBOT)
           .appendField(Blockly.Msg.MIXLY_MOTOR)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.TEXT_TRIM_LEFT, "0"],

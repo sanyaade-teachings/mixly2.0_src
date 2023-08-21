@@ -1510,7 +1510,7 @@ Blockly.Blocks.bitbot_infrared_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Bitbot")
+          .appendField(Blockly.Msg.BITBOT)
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR)
       this.appendValueInput('mode')
           .setCheck(Number)

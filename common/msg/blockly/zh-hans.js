@@ -3661,6 +3661,7 @@ ZhHans.MIXLY_TOOLTIP_MOTOR_SETUP = '双路PWM电机驱动(HR8833)初始化';
 ZhHans.SHUTDOWN = '关机';
 ZhHans.DIGITAL = '数字';
 ZhHans.ANALOG = '模拟';
+ZhHans.BITBOT = '元控•白泽';
 ZhHans.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '仅电池供电下，将关机断电。USB供电下，只是关闭电机输出。';
 
 })();

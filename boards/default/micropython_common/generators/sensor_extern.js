@@ -664,14 +664,14 @@ Blockly.Python.forBlock['mixbot_touch_extern_get_value'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['mixbot_infrared_extern_get_value'] = function(){
+Blockly.Python.forBlock['bitbot_infrared_extern_get_value'] = function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_bitbot_onboard_bot51'] = 'from bitbot import onboard_bot51';
+    Blockly.Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
     var code = 'onboard_bot51.read_ps('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['bitbot_infrared_extern_get_value'] = function(){
+Blockly.Python.forBlock['mixbot_infrared_extern_get_value'] = function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_mixbot_ext_ext_infrared'] = 'from mixbot_ext import ext_infrared';
     var code = 'ext_infrared.value('+ mode +")";

@@ -386,7 +386,7 @@
           </shadow>
         </value>
       </block>
-      <block type="system_bitbot_shutdown" m-show="micropython:esp32c3:bitbot">
+      <block type="system_bitbot_shutdown" m-show="micropython:esp32c3:mixgo_baize">
       </block>
       <block type="system_wdt_init">
         <value name="period">
@@ -1495,7 +1495,7 @@
 
         <block type="sensor_mixbot_patrol_calibrate" m-show='micropython:esp32:mixbot_s2'></block>
         <block type="sensor_mixbot_patrol_value" m-show='micropython:esp32:mixbot_s2'></block>
-        <block type="sensor_rm_pin_near_double" m-hide="micropython:esp32c3:bitbot"></block>
+        <block type="sensor_rm_pin_near_double" m-hide="micropython:esp32c3:mixgo_baize"></block>
         <block type="sensor_rm_battery_left"></block>
         
         <block type="sensor_rm_acc" m-show="micropython:esp32:rm_e1"></block>   
@@ -1503,37 +1503,37 @@
         <block type="sensor_mixbot_temperature" m-show='micropython:esp32:mixbot_s2'></block>
         <block type="sensor_get_acceleration" m-show='micropython:esp32:mixbot_s2'></block>
         <block type="sensor_mixbot_get_gyro" m-show='micropython:esp32:mixbot_s2'></block>  
-        <block type="sensor_mixgo_pin_near" m-show="micropython:esp32c3:bitbot"></block>
-        <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:bitbot"></block>
-        <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:bitbot">
+        <block type="sensor_mixgo_pin_near" m-show="micropython:esp32c3:mixgo_baize"></block>
+        <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:mixgo_baize"></block>
+        <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:mixgo_baize">
           <value name="mode">
           <shadow type="bitbot_als_num">
           </shadow>
         </value>
         </block>
-      <block type="sensor_sound" m-show="micropython:esp32c3:bitbot"></block>     
-      <block type="sensor_hp203" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="sensor_aht11" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="sensor_get_acceleration" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="sensor_eulerangles" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c3:bitbot"></block>
-        <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="rfid_readid" m-show="micropython:esp32c3:bitbot">
+      <block type="sensor_sound" m-show="micropython:esp32c3:mixgo_baize"></block>     
+      <block type="sensor_hp203" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="sensor_aht11" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="sensor_get_acceleration" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="sensor_eulerangles" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c3:mixgo_baize"></block>
+        <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="rfid_readid" m-show="micropython:esp32c3:mixgo_baize">
         <value name="SUB">
           <shadow type="variables_get">
             <field name="VAR">rfid</field>
           </shadow>
         </value>
       </block>
-      <block type="rfid_readcontent" m-show="micropython:esp32c3:bitbot">
+      <block type="rfid_readcontent" m-show="micropython:esp32c3:mixgo_baize">
         <value name="SECTOR">
           <shadow type="math_number">
             <field name="NUM">0</field>
           </shadow>
         </value>
       </block>
-      <block type="rfid_write" m-show="micropython:esp32c3:bitbot">
+      <block type="rfid_write" m-show="micropython:esp32c3:mixgo_baize">
         <value name="SECTOR">
           <shadow type="math_number">
             <field name="NUM">0</field>
@@ -1614,44 +1614,44 @@
           </shadow>
         </value>
       </block>
-      <block type="bitbot_move" m-show="micropython:esp32c3:bitbot">
+      <block type="bitbot_move" m-show="micropython:esp32c3:mixgo_baize">
         <value name="speed">
           <shadow type="math_number">
             <field name="NUM">100</field>
           </shadow>
         </value>
       </block>
-      <block type="bitbot_stop" m-show="micropython:esp32c3:bitbot"></block>
-      <block type="bitbot_motor" m-show="micropython:esp32c3:bitbot">
+      <block type="bitbot_stop" m-show="micropython:esp32c3:mixgo_baize"></block>
+      <block type="bitbot_motor" m-show="micropython:esp32c3:mixgo_baize">
         <value name="speed">
           <shadow type="math_number">
             <field name="NUM">100</field>
           </shadow>
         </value>
       </block>
-        <block type="rm_actuator_led_bright" m-hide="micropython:esp32c3:bitbot">
+        <block type="rm_actuator_led_bright" m-hide="micropython:esp32c3:mixgo_baize">
         <value name="bright">
           <shadow type="ledswitch">
           </shadow>
         </value>
       </block>
-      <block type="rm_actuator_get_led_state" m-hide="micropython:esp32c3:bitbot"></block>
-      <block type="rm_actuator_led_brightness" m-hide="micropython:esp32c3:bitbot">
+      <block type="rm_actuator_get_led_state" m-hide="micropython:esp32c3:mixgo_baize"></block>
+      <block type="rm_actuator_led_brightness" m-hide="micropython:esp32c3:mixgo_baize">
         <value name="bright">
           <shadow type="math_number">
             <field name="NUM">100</field>
           </shadow>
         </value>
       </block>
-      <block type="rm_actuator_get_led_bright" m-hide="micropython:esp32c3:bitbot"></block>      
-       <block type="esp32_onboard_music_pitch" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'>
+      <block type="rm_actuator_get_led_bright" m-hide="micropython:esp32c3:mixgo_baize"></block>      
+       <block type="esp32_onboard_music_pitch" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'>
         <value name="pitch">
           <shadow type="pins_tone_notes">
             <field name="PIN">440</field>
           </shadow>
         </value>
       </block>
-      <block type="esp32_onboard_music_pitch_with_time" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'>
+      <block type="esp32_onboard_music_pitch_with_time" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'>
         <value name="pitch">
           <shadow type="pins_tone_notes">
             <field name="PIN">440</field>
@@ -1663,14 +1663,14 @@
           </shadow>
         </value>
       </block>
-      <block type="esp32_onboard_music_stop" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'>
+      <block type="esp32_onboard_music_stop" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'>
         <value name="PIN">
           <shadow type="pins_pwm_pin">
             <field name="PIN">0</field>
           </shadow>
         </value>
       </block>
-      <block type="esp32_onboard_music_play_list" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'>
+      <block type="esp32_onboard_music_play_list" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'>
         <value name="LIST">
           <shadow type="pins_playlist"></shadow>
         </value>
@@ -1680,7 +1680,7 @@
           </shadow>
         </value>
       </block>
-      <block type="esp32_music_set_tempo" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'>
+      <block type="esp32_music_set_tempo" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'>
         <value name="TICKS">
           <shadow type="math_number">
             <field name="NUM">4</field>
@@ -1692,8 +1692,8 @@
           </shadow>
         </value>
       </block>
-      <block type="esp32_music_get_tempo" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'></block>
-      <block type="esp32_music_reset" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot'></block>
+      <block type="esp32_music_get_tempo" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'></block>
+      <block type="esp32_music_reset" m-show='micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize'></block>
       <block type="actuator_mixbot_buzzer_on_off" m-show='micropython:esp32:mixbot_s2'></block>      
       <block type="actuator_onboard_neopixel_rgb">
         <value name="_LED_">
@@ -1774,7 +1774,7 @@
       </block>
       
       </category>
-      <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot">
+      <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize">
         <block type="display_show_image">
         <value name="data">
           <shadow type="pins_builtinimg"></shadow>
@@ -1837,7 +1837,7 @@
       </block>
            
       <block type="mixbot_display_image_create" m-show="micropython:esp32:mixbot_s2"></block>
-      <block type="bitbot_display_image_create" m-show="micropython:esp32c3:bitbot"></block>
+      <block type="bitbot_display_image_create" m-show="micropython:esp32c3:mixgo_baize"></block>
       <block type="display_image_builtins_all"></block>
       <block type="image_arithmetic">
         <value name="A">
@@ -1881,7 +1881,7 @@
           </shadow>
         </value>
       </block>
-      <block type="mixbot_display_rotate" m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot"></block>
+      <block type="mixbot_display_rotate" m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize"></block>
       <block type="mixbot_display_bright_screen" m-show="micropython:esp32:mixbot_s2">
 
         <value name="x">
@@ -1892,7 +1892,7 @@
       </block>
       <block type="mixbot_display_get_screen_pixel" m-show="micropython:esp32:mixbot_s2"></block>
       <block type="mixbot_display_get_ambientbright" m-show="micropython:esp32:mixbot_s2"></block>
-       <block type="display_bright_screen" m-show="micropython:esp32c3:bitbot">
+       <block type="display_bright_screen" m-show="micropython:esp32c3:mixgo_baize">
 
         <value name="x">
           <shadow type="math_number">
@@ -1900,7 +1900,7 @@
           </shadow>
         </value>
       </block>
-      <block type="display_get_screen_pixel" m-show="micropython:esp32c3:bitbot">
+      <block type="display_get_screen_pixel" m-show="micropython:esp32c3:mixgo_baize">
       <block type="display_clear"></block>
       <!-- </category> -->
     </category>
@@ -3183,8 +3183,8 @@
         </block>
       </category>
     </category>
-     <category id="catExternSensor" colour='#A58C5B' m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:bitbot">
-      <block type="bitbot_infrared_extern_get_value" m-show="micropython:esp32c3:bitbot">
+     <category id="catExternSensor" colour='#A58C5B' m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize">
+      <block type="bitbot_infrared_extern_get_value" m-show="micropython:esp32c3:mixgo_baize">
         <value name="mode">
           <shadow type="mixbot_addr_extern">
           </shadow>

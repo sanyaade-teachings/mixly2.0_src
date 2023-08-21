@@ -3497,6 +3497,7 @@ ZhHant.MIXLY_TOOLTIP_MOTOR_SETUP = '雙路PWM電機驅動(HR8833)初始化';
 ZhHant.SHUTDOWN = '關機';
 ZhHant.DIGITAL = '數字';
 ZhHant.ANALOG = '模擬';
+ZhHant.BITBOT = '元控•白澤';
 ZhHant.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '僅電池供電下，將關機斷電。USB供電下，只是關閉電機輸出。';
 
 })();

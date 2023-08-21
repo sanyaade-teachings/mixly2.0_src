@@ -578,8 +578,8 @@ Blockly.Python.forBlock['sensor_rm_pin_near_double'] = function(){
 
 Blockly.Python.forBlock['sensor_rm_battery_left'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='bitbot'){
-        Blockly.Python.definitions_['import_bitbot_onboard_bot51'] = 'from bitbot import onboard_bot51';
+    if(version=='mixgo_baize'){
+        Blockly.Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
         var code =  'onboard_bot51.read_bat()';
         return [code, Blockly.Python.ORDER_ATOMIC];
     }
@@ -669,7 +669,7 @@ Blockly.Python.forBlock['sensor_bitbot_LTR308'] = function(){
 };
 
 Blockly.Python.forBlock['sensor_bitbot_ALS'] = function(){
-    Blockly.Python.definitions_['import_bitbot_onboard_bot51'] = 'from bitbot import onboard_bot51';
+    Blockly.Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var code = 'onboard_bot51.'+'read_als('+mode+')';
     return [code, Blockly.Python.ORDER_ATOMIC];

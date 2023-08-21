@@ -189,6 +189,9 @@ Boards.changeTo = (boardName) => {
         }, {
             type: 'upload',
             obj: BOARD.upload
+        }, {
+            type: 'serial',
+            obj: BOARD.serial
         }]) {
         if (!(value.obj instanceof Object)) {
             continue;
@@ -284,7 +287,7 @@ Boards.changeTo = (boardName) => {
                 outObj.libPath = [ path.join(Env.indexDirPath, 'build/lib/') ];
             }
         }
-        if (goog.isElectron || Env.hasSocketServer) {
+        if (value.type === 'upload' && (goog.isElectron || Env.hasSocketServer)) {
             if (outObj.filePath) {
                 outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             } else {

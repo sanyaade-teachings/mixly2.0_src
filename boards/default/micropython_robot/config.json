@@ -14,30 +14,9 @@
         "micropython:esp32:rm_e1": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
         },
-        "micropython:esp32:mixbot_s1": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
-        },
         "micropython:esp32:mixbot_s2": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
-        },
-        "reset": [
-            {
-                "dtr": false,
-                "rts": false
-            }, {
-                "sleep": 500
-            }, {
-                "dtr": false,
-                "rts": true
-            }, {
-                "sleep": 500
-            }, {
-                "dtr": false,
-                "rts": false
-            }, {
-                "sleep": 500
-            }
-        ]
+        }
     },
     "upload": {
         "type": "command",
@@ -49,22 +28,26 @@
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
         "copyLib": true,
-        "reset": [{
-                "dtr": false,
-                "rts": true
-            }, {
-                "sleep": 300
-            }, {
-                "dtr": false,
-                "rts": false
-            }, {
-                "sleep": 300
-            }, {
-                "dtr": false,
-                "rts": true
-            }, {
-                "sleep": 300
-            }]
+        "micropython:esp32c3:bitbot": {
+            "reset": [
+                {
+                    "dtr": false,
+                    "rts": true
+                }, {
+                    "sleep": 300
+                }, {
+                    "dtr": false,
+                    "rts": false
+                }, {
+                    "sleep": 300
+                }, {
+                    "dtr": false,
+                    "rts": true
+                }, {
+                    "sleep": 300
+                }
+            ]
+        }
     },
     "nav": {
         "burn": true,
@@ -84,7 +67,11 @@
         "yMin": 0,
         "pointNum": 100,
         "rts": true,
-        "dtr": false
+        "dtr": false,
+        "micropython:esp32c3:bitbot": {
+            "rts": false,
+            "dtr": false
+        }
     },
     "lib": {
         "mixly": {

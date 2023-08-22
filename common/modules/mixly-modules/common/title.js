@@ -4,12 +4,11 @@ goog.require('Mixly.Config');
 
 let { Url, Config, Title } = Mixly;
 let { BOARD, SOFTWARE } = Config;
+
 if (SOFTWARE?.version && BOARD?.boardType) {
-    Title.title = SOFTWARE.version + " For " + BOARD.boardType;
-    document.title = Title.title;
-} else {
-    Title.title = document.title;
+    document.title = SOFTWARE.version + " For " + BOARD.boardType;
 }
+Title.title = document.title;
 Title.NOWTITLE = Title.title;
 
 Title.updeteVersionNumber = (newVersionNumber) => {

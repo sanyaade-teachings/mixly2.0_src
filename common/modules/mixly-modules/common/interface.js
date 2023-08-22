@@ -61,8 +61,7 @@ Interface.init = () => {
         const { Electron } = Mixly;
         const {
             LibManager = undefined,
-            WikiManager = undefined,
-            Serial = undefined
+            WikiManager = undefined
         } = Electron;
         if (typeof LibManager === 'object') {
             LibManager.init();
@@ -82,6 +81,10 @@ Interface.init = () => {
         const { Serial = undefined } = Electron;
         if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
             Serial.addStatusbarTabExtFunc();
+            Serial.refreshPorts();
+            Serial.refreshPortsTimer = setInterval(() => {
+               Serial.refreshPorts();
+            }, 10000);
         }
     }
     window.addEventListener('resize', Interface.onresize, false);

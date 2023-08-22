@@ -462,7 +462,6 @@ Serial.refreshPortOperator = (ports) => {
                 serialport: null,
                 output: []
             }
-            console.log(SELECTED_BOARD?.serial);
             Serial.portsOperator[port.name] = defaultPortConfig;
         }
         Serial.refreshTerminalMenu(port.name);

@@ -1,10 +1,10 @@
 var externalLibs = {//外部引入的第三方库
-  "./numpy/__init__.js": "../../../common/js/skulpt_libs/numpy/__init__.js",
-  "./pygal/__init__.js": "../../../common/js/skulpt_libs/pygal/__init__.js",
+  "./numpy/__init__.js": "../common/js/skulpt_libs/numpy/__init__.js",
+  "./pygal/__init__.js": "../common/js/skulpt_libs/pygal/__init__.js",
   // "./numpy/random/__init__.js" : 'https://cdn.jsdelivr.net/gh/ebertmi/skulpt_numpy@master/numpy/random/__init__.js',
-  "./matplotlib/__init__.js" : '../../../common/js/skulpt_libs/matplotlib/__init__.js',
-  "./matplotlib/pyplot/__init__.js" : "../../../common/js/skulpt_libs/pyplot/__init__.js",
-  './pgzhelper/__init__.js':"../../../common/js/skulpt_libs/pgzhelper/pgzhelper.js"
+  "./matplotlib/__init__.js" : '../common/js/skulpt_libs/matplotlib/__init__.js',
+  "./matplotlib/pyplot/__init__.js" : "../common/js/skulpt_libs/pyplot/__init__.js",
+  './pgzhelper/__init__.js':"../common/js/skulpt_libs/pgzhelper/pgzhelper.js"
 };
 
 // document.write("<script language=JavaScript src='./js/skulpt/pyodide.js'></script>");

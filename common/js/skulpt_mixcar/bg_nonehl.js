@@ -51,7 +51,7 @@ var $builtinmodule = function (name) {
     }
     // 角色变量
     var actor={
-        img : "../../../common/js/skulpt_mixcar/pic/pegman.png",
+        img : "../common/js/skulpt_mixcar/pic/pegman.png",
         height : 52,
         width : 49,
         direction : DirectionType.EAST,
@@ -73,11 +73,11 @@ var $builtinmodule = function (name) {
     var maze_marker_num=0;//迷宫中标记点的数目
     var maze={
         mlevel:0,
-        tiles: '../../../common/js/skulpt_mixcar/pic/maze_path.png',//地图路径图片
-        marker: '../../../common/js/skulpt_mixcar/pic/marker.png',//终点图标图片
-        background: '../../../common/js/skulpt_mixcar/pic/bg_astro.jpg',//地图背景图片
-        wall:'../../../common/js/skulpt_mixcar/pic/roadblock.png',
-        award:'../../../common/js/skulpt_mixcar/pic/award.png',
+        tiles: '../common/js/skulpt_mixcar/pic/maze_path.png',//地图路径图片
+        marker: '../common/js/skulpt_mixcar/pic/marker.png',//终点图标图片
+        background: '../common/js/skulpt_mixcar/pic/bg_astro.jpg',//地图背景图片
+        wall:'../common/js/skulpt_mixcar/pic/roadblock.png',
+        award:'../common/js/skulpt_mixcar/pic/award.png',
         barrier:'',
         markers:[],
         SquareType :{//迷宫中方块的类型
@@ -111,13 +111,13 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0], 
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
-            markers:['../../../common/js/skulpt_mixcar/pic/red.png','../../../common/js/skulpt_mixcar/pic/yellow.png','../../../common/js/skulpt_mixcar/pic/blue.png','../../../common/js/skulpt_mixcar/pic/green.png'],
+            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -149,13 +149,13 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg2.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg2.jpg',//地图背景图片
             wall:'',
             award:'',
-            barrier:'../../../common/js/skulpt_mixcar/pic/barrier.png',
-            markers:['../../../common/js/skulpt_mixcar/pic/red.png','../../../common/js/skulpt_mixcar/pic/yellow.png','../../../common/js/skulpt_mixcar/pic/blue.png','../../../common/js/skulpt_mixcar/pic/green.png'],
+            barrier:'../common/js/skulpt_mixcar/pic/barrier.png',
+            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -187,13 +187,13 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 24, 1, 1, 24, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg2.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg2.jpg',//地图背景图片
             wall:'',
             award:'',
-            barrier:'../../../common/js/skulpt_mixcar/pic/barrier.png',
-            markers:['../../../common/js/skulpt_mixcar/pic/red.png','../../../common/js/skulpt_mixcar/pic/yellow.png','../../../common/js/skulpt_mixcar/pic/blue.png','../../../common/js/skulpt_mixcar/pic/green.png'],
+            barrier:'../common/js/skulpt_mixcar/pic/barrier.png',
+            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -222,13 +222,13 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 24, 1, 1, 24, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg3.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg3.jpg',//地图背景图片
             wall:'',
             award:'',
-            barrier:'../../../common/js/skulpt_mixcar/pic/barrier.png',
-            markers:['../../../common/js/skulpt_mixcar/pic/red.png','../../../common/js/skulpt_mixcar/pic/yellow.png','../../../common/js/skulpt_mixcar/pic/blue.png','../../../common/js/skulpt_mixcar/pic/green.png'],
+            barrier:'../common/js/skulpt_mixcar/pic/barrier.png',
+            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -258,9 +258,9 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg4.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg4.jpg',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
@@ -293,13 +293,13 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0], 
             [0, 0, 0, 10, 1, 1, 11, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg1.jpg',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
-            markers:['../../../common/js/skulpt_mixcar/pic/red.png','../../../common/js/skulpt_mixcar/pic/yellow.png','../../../common/js/skulpt_mixcar/pic/blue.png','../../../common/js/skulpt_mixcar/pic/green.png'],
+            markers:['../common/js/skulpt_mixcar/pic/red.png','../common/js/skulpt_mixcar/pic/yellow.png','../common/js/skulpt_mixcar/pic/blue.png','../common/js/skulpt_mixcar/pic/green.png'],
             SquareType :{//迷宫中方块的类型
                 WALL: 0,
                 OPEN: 1,
@@ -331,9 +331,9 @@ var $builtinmodule = function (name) {
             [0, 0, 0, 1, 0, 0, 1, 0],
             [0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]],
-            tiles: '../../../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
-            marker: '../../../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
-            background: '../../../common/js/skulpt_mixcar/pic/bg4.jpg',//地图背景图片
+            tiles: '../common/js/skulpt_mixcar/pic/tiles_road.png',//地图路径图片
+            marker: '../common/js/skulpt_mixcar/pic/Start_final.png',//终点图标图片
+            background: '../common/js/skulpt_mixcar/pic/bg4.jpg',//地图背景图片
             wall:'',
             award:'',
             barrier:'',
@@ -547,16 +547,16 @@ var $builtinmodule = function (name) {
                         maze.finish={x:x,y:y}
                     }else if(map[y][x]==20){//当地图中此处标记为20——加油站时
                         svg.append('image').attr('id','station').attr('x',x * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.8/2)).attr('y',y * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.8/2)).attr('width',maze_SQUARE_SIZE*2*0.8).attr('height',maze_SQUARE_SIZE*0.8)
-                        .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/oilstation.png')
+                        .attr('xlink:href','../common/js/skulpt_mixcar/pic/oilstation.png')
                     }else if(map[y][x]==21){//当地图中此处标记为21——红绿灯时
                         svg.append('image').attr('id','trafficlight').attr('x',x * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('y',y * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('width',maze_SQUARE_SIZE*0.7).attr('height',maze_SQUARE_SIZE*0.7)
-                        .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/trafficlight.png')
+                        .attr('xlink:href','../common/js/skulpt_mixcar/pic/trafficlight.png')
                     }else if(map[y][x]==22){//当地图中此处标记为22——红绿灯中的绿灯时
                         svg.append('image').attr('id','lightgreen').attr('x',x * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('y',y * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('width',maze_SQUARE_SIZE*0.7).attr('height',maze_SQUARE_SIZE*0.7)
-                        .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/greenlight.png')
+                        .attr('xlink:href','../common/js/skulpt_mixcar/pic/greenlight.png')
                     }else if(map[y][x]==23){//当地图中此处标记为23——红绿灯中的红灯时
                         svg.append('image').attr('id','lightred').attr('x',x * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('y',y * maze_SQUARE_SIZE+ (maze_SQUARE_SIZE/2 - maze_SQUARE_SIZE*0.7/2)).attr('width',maze_SQUARE_SIZE*0.7).attr('height',maze_SQUARE_SIZE*0.7)
-                        .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/redlight.png')
+                        .attr('xlink:href','../common/js/skulpt_mixcar/pic/redlight.png')
                     }else if(map[y][x]==2){//当地图中此处标记为起点时，画上和“既是起点又是终点”一样的图标
                         actor.x= x;
                         actor.y= y;
@@ -775,13 +775,13 @@ var $builtinmodule = function (name) {
 
         switch (Sk.ffi.remapToJs(bg_pic)){
             case "bg_default":
-                maze.background ='../../../common/js/skulpt_mixcar/pic/bg_default.png';//默认为方格
+                maze.background ='../common/js/skulpt_mixcar/pic/bg_default.png';//默认为方格
                 break;
             case "bg_astro":
-                maze.background ='../../../common/js/skulpt_mixcar/pic/bg_astro.jpg';//设置为管道
+                maze.background ='../common/js/skulpt_mixcar/pic/bg_astro.jpg';//设置为管道
                 break;
             case "bg_panda":
-                maze.background ='../../../common/js/skulpt_mixcar/pic/bg_panda.jpg';//设置为竹子
+                maze.background ='../common/js/skulpt_mixcar/pic/bg_panda.jpg';//设置为竹子
                 break;
         }
 
@@ -825,13 +825,13 @@ var $builtinmodule = function (name) {
         path_type = Sk.ffi.remapToJs(path_type);
         switch (path_type){
             case "default":
-                maze.tiles='../../../common/js/skulpt_mixcar/pic/maze_path.png';//默认为方格
+                maze.tiles='../common/js/skulpt_mixcar/pic/maze_path.png';//默认为方格
                 break;
             case "pipeline":
-                maze.tiles='../../../common/js/skulpt_mixcar/pic/tiles_astro.png';//设置为管道
+                maze.tiles='../common/js/skulpt_mixcar/pic/tiles_astro.png';//设置为管道
                 break;
             case "bamboo":
-                maze.tiles='../../../common/js/skulpt_mixcar/pic/tiles_panda.png';//设置为竹子
+                maze.tiles='../common/js/skulpt_mixcar/pic/tiles_panda.png';//设置为竹子
                 break;
         }
     }
@@ -884,23 +884,23 @@ var $builtinmodule = function (name) {
             }
             switch (img){
                 case "pegman":
-                    actor.img='../../../common/js/skulpt_mixcar/pic/pegman.png';//默认为方格
+                    actor.img='../common/js/skulpt_mixcar/pic/pegman.png';//默认为方格
                     actor.type="animate"
                     break;
                 case "panda":
-                    actor.img='../../../common/js/skulpt_mixcar/pic/panda.png';//设置为管道
+                    actor.img='../common/js/skulpt_mixcar/pic/panda.png';//设置为管道
                     actor.type="animate"
                     break;
                 case "astro":
-                    actor.img='../../../common/js/skulpt_mixcar/pic/astro.png';//设置为竹子
+                    actor.img='../common/js/skulpt_mixcar/pic/astro.png';//设置为竹子
                     actor.type="animate"
                     break;
                 case "robot":
-                    actor.img='../../../common/js/skulpt_mixcar/pic/robot.png';//设置为机器人
+                    actor.img='../common/js/skulpt_mixcar/pic/robot.png';//设置为机器人
                     actor.type="still"
                     break;
                 case "car":
-                    actor.img='../../../common/js/skulpt_mixcar/pic/actor_car3.png';//设置为小车
+                    actor.img='../common/js/skulpt_mixcar/pic/actor_car3.png';//设置为小车
                     actor.type="animate"
                     break;
             }
@@ -932,7 +932,7 @@ var $builtinmodule = function (name) {
                             if(actor.oil==0){//在加油站处，如果没有油还想继续往前面走
                                 maze.result=ResultType.FAILURE
                                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                                .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/no_oil.png')
+                                .attr('xlink:href','../common/js/skulpt_mixcar/pic/no_oil.png')
                                 layer.alert("挑战失败!小车没有油了", { shade: false })
                                 throw new Sk.builtin.TypeError("挑战失败!小车没有油了");
                             }
@@ -980,7 +980,7 @@ var $builtinmodule = function (name) {
                             if(actor.traffic_light==maze.SquareType.LIGHT_RED){//图像变为红灯
                                 d3.select("#lightgreen").remove();
                                 svg.append('image').attr('id','lightred').attr('x',(actor.x+1) * maze_SQUARE_SIZE-5).attr('y',actor.y * maze_SQUARE_SIZE+5).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                                .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/redlight.png')
+                                .attr('xlink:href','../common/js/skulpt_mixcar/pic/redlight.png')
                             }   
                         }
                     }
@@ -1087,10 +1087,10 @@ var $builtinmodule = function (name) {
             actor.oil=Math.random()>0.5?1:0;//随机初始化汽车的油量
             if(actor.oil==0){//没油(呈现少量油的图片)
                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/none_oil.png')
+                .attr('xlink:href','../common/js/skulpt_mixcar/pic/none_oil.png')
             }else if(actor.oil==1){//油量充足（呈现油量充足的图片）
                 svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/full_oil.png')
+                .attr('xlink:href','../common/js/skulpt_mixcar/pic/full_oil.png')
             }
         });
         //判断是否需要加油
@@ -1108,7 +1108,7 @@ var $builtinmodule = function (name) {
             return new Sk.misceval.promiseToSuspension(new Promise(function(resolve) {
                 Sk.setTimeout(function() {
                     svg.append('image').attr('id','caroil').attr('x',maze_SQUARE_SIZE).attr('y',3.5 * maze_SQUARE_SIZE).attr('width',maze_SQUARE_SIZE).attr('height',maze_SQUARE_SIZE)
-                    .attr('xlink:href','../../../common/js/skulpt_mixcar/pic/full_oil.png')
+                    .attr('xlink:href','../common/js/skulpt_mixcar/pic/full_oil.png')
                     actor.oil=1//油量充足
                     resolve(Sk.builtin.none.none$);
                 }, 800);

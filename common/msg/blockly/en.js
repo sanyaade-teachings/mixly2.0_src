@@ -3526,6 +3526,7 @@ En.SHUTDOWN = 'shut down';
 En.DIGITAL = 'digital';
 En.ANALOG = 'analog';
 En.BITBOT = 'MixGo•Baize';
+En.MIXBOT = 'MixBot';
 En.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = 'Shut down and disconnected under battery power. Only the motor output is turned off under USB power supply.';
 
 })();

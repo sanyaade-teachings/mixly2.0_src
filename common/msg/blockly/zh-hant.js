@@ -3498,6 +3498,7 @@ ZhHant.SHUTDOWN = '關機';
 ZhHant.DIGITAL = '數字';
 ZhHant.ANALOG = '模擬';
 ZhHant.BITBOT = '元控•白澤';
+ZhHant.MIXBOT = '超霸大師';
 ZhHant.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '僅電池供電下，將關機斷電。USB供電下，只是關閉電機輸出。';
 
 })();

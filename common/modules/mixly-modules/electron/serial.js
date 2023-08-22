@@ -50,8 +50,7 @@ Serial.TOOL_DEFAULT_CONFIG = {
     "sendStr": true,
     "receiveStr": true,
     "sendWith": "\\r\\n",
-    "tabIndex": 0,
-    ...BOARD?.serial ?? {}
+    "tabIndex": 0
 };
 
 Serial.DEFAULT_BAUD = [9600, 19200, 28800, 38400, 57600, 115200, 230400, 256000, 460800, 512000, 921600, 1000000];
@@ -66,13 +65,6 @@ Serial.PORT_SELECT = {
     "BURN": BOARD?.burn?.portSelect ?? 'all',
     "UPLOAD": BOARD?.upload?.portSelect ?? 'all'
 };
-
-/**
- * 用户配置的上传和连接前的复位操作
- * @type { Object }
- * 
- **/
-Serial.UPLOAD_RESET = BOARD?.upload?.reset ?? {};
 
 /**
  * 检测配置文件中是否具有烧录和上传操作，如果没有则不需要筛选出对应串口
@@ -447,6 +439,7 @@ Serial.refreshToolPortSelectBox = (ports) => {
 
 Serial.refreshPortOperator = (ports) => {
     const oldPortOperator = { ...Serial.portsOperator };
+    const { SELECTED_BOARD } = Config;
     Serial.portsOperator = {};
     let portsName = [];
     for (let i = 0; i < ports.length; i++) {
@@ -460,7 +453,7 @@ Serial.refreshPortOperator = (ports) => {
             Serial.refreshToolPortSelectBox(port.name);
         } else {
             const defaultPortConfig = {
-                toolConfig: { ...Serial.TOOL_DEFAULT_CONFIG },
+                toolConfig: { ...Serial.TOOL_DEFAULT_CONFIG, ...SELECTED_BOARD?.serial ?? {} },
                 toolOpened: false,
                 portOpened: false,
                 vendorId: port.vendorId,
@@ -469,6 +462,7 @@ Serial.refreshPortOperator = (ports) => {
                 serialport: null,
                 output: []
             }
+            console.log(SELECTED_BOARD?.serial);
             Serial.portsOperator[port.name] = defaultPortConfig;
         }
         Serial.refreshTerminalMenu(port.name);
@@ -494,13 +488,6 @@ Serial.refreshPortOperator = (ports) => {
         }
     }
 }
-
-window.addEventListener('DOMContentLoaded', () => {
-    Serial.refreshPorts();
-    Serial.refreshPortsTimer = setInterval(() => {
-       Serial.refreshPorts();
-    }, 10000);
-});
 
 Serial.getOpenedPortsName = () => {
     let newPorts = [];
@@ -552,6 +539,7 @@ Serial.refreshOutputBox = (port) => {
 **/
 Serial.openTool = () => {
     const selectedPort = Serial.getSelectedPortName();
+    const { SELECTED_BOARD } = Config;
     if (!selectedPort) {
         layer.msg(Msg.Lang["无可用设备"], {
             time: 1000
@@ -562,6 +550,8 @@ Serial.openTool = () => {
     const statusBarSerial = mainStatusBarTab.getStatusBarById(selectedPort);
     let portObj = Serial.portsOperator[selectedPort];
     const { toolConfig } = portObj;
+    toolConfig.dtr = SELECTED_BOARD.dtr ?? toolConfig.dtr;
+    toolConfig.rts = SELECTED_BOARD.rts ?? toolConfig.rts;
     const { baudRates } = toolConfig;
     let successFunc = (serialDom) => {
         if (!portObj.dom) {
@@ -609,13 +599,13 @@ Serial.openTool = () => {
 
     toolDom.onClickSetDtr((port, data) => {
         const newPortObj = Serial.portsOperator[port];
-        newPortObj.toolConfig.dtr = data.elem.checked;
+        // newPortObj.toolConfig.dtr = data.elem.checked;
         Serial.updateDtrAndRts(port);
     });
 
     toolDom.onClickSetRts((port, data) => {
         const newPortObj = Serial.portsOperator[port];
-        newPortObj.toolConfig.rts = data.elem.checked;
+        // newPortObj.toolConfig.rts = data.elem.checked;
         Serial.updateDtrAndRts(port);
     });
 
@@ -1673,16 +1663,21 @@ Serial.clearContent = function (port) {
 }
 
 Serial.updateDtrAndRts = function (port) {
+    const { SELECTED_BOARD } = Config;
+    const {
+        dtr = false,
+        rts = false
+    } = SELECTED_BOARD?.serial ?? {};
     const portObj = Serial.portsOperator[port];
-    const { toolConfig } = portObj;
     const nowSerialport = portObj.serialport;
     if (nowSerialport && nowSerialport.isOpen) {
-        nowSerialport.set({ dtr: toolConfig.dtr, rts: toolConfig.rts });
+        nowSerialport.set({ dtr, rts });
     }
 }
 
 Serial.reset = async function (port) {
-    const reset = Serial.UPLOAD_RESET;
+    const { SELECTED_BOARD } = Config;
+    const reset = SELECTED_BOARD?.upload?.reset ?? {};
     if (typeof reset !== 'object') return;
     let len = reset.length;
     for (var i = 0; i < len; i++) {

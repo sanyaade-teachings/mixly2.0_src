@@ -44,8 +44,6 @@ BU.burning = false;
 
 BU.shell = null;
 
-BU.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
-
 /**
  * @function 根据传入的stdout判断磁盘数量并选择对应操作
  * @param type {string} 值为'burn' | 'upload'
@@ -553,7 +551,18 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             statusBarTerminal.addValue('\n');
         }
         if (error) {
-            error = iconv_lite.decode(Buffer.from(error.message, 'binary'), BU.ERROR_ENCODING);
+            if (Env.currentPlatform === 'win32') {
+                error = iconv_lite.decode(Buffer.from(error.message, 'binary'), 'cp936');
+            } else {
+                let lines = error.message.split('\n');
+                for (let i in lines) {
+                    if (lines[i].indexOf('Command failed') !== -1) {
+                        continue;
+                    }
+                    lines[i] = iconv_lite.decode(Buffer.from(lines[i], 'binary'), 'utf-8');
+                }
+                error = lines.join('\n');
+            }
             error = MString.decode(error);
             statusBarTerminal.addValue(error + "\n");
         } else {

@@ -5,7 +5,6 @@ goog.require('Mixly');
 goog.require('Mixly.Url');
 goog.provide('Mixly.Env');
 
-const os = Mixly.require('os');
 const fs_plus = Mixly.require('fs-plus');
 const electron_remote = Mixly.require('@electron/remote');
 const { Env, Url } = Mixly;
@@ -32,7 +31,7 @@ Env.clientPath = null;
   * 检测当前系统
   * @type {String} win32、darwin、linux
   */
-Env.currentPlatform = null;
+Env.currentPlatform = goog.platform();
 
 /**
   * 对于win系统，获取免安装python3的路径，对于mac与linux，则此变量值为python3
@@ -51,7 +50,9 @@ Env.pyFilePath = null;
   * @type {String} 
   */
 Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
-
+if (Env.currentPlatform !== 'win32') {
+  Env.indexDirPath = '/' + Env.indexDirPath;
+}
 /**
   * 资源文件夹所在路径
   * @type {String} 
@@ -109,7 +110,6 @@ Env.boardDirPath = path.join(Env.boardIndexPath, '../');
 
 if (goog.isElectron) {
     const { app } = electron_remote;
-    Env.currentPlatform = os.platform();
     if (Env.currentPlatform === "darwin") {
         Env.clientPath = path.join(app.getPath("exe"), '../../../../');
     } else {

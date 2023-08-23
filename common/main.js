@@ -76,6 +76,15 @@ LazyLoad.js([
       */
     goog.files = {};
 
+    goog.platform = () => {
+        const userAgent = navigator.userAgent;
+        if (userAgent.indexOf("Windows NT") !== -1) return "win32";
+        if (userAgent.indexOf("Mac") !== -1) return "darwin";
+        if (userAgent.indexOf("X11") !== -1) return "linux";
+        if (userAgent.indexOf("Linux") !== -1) return "linux";
+        return "other";
+  }
+
     /**
      * @function 根据传入的相对路径获取文件数据
      * @param inPath {string} 文件所在的相对路径

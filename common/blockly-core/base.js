@@ -346,7 +346,7 @@ goog.findBasePath_ = function() {
     var qmark = src.lastIndexOf('?');
     var l = qmark == -1 ? src.length : qmark;
     if (src.substr(l - 7, 7) == 'base.js') {
-      goog.basePath = src.substr(0, l - 7).replace(/file:\/+/g, '');
+      goog.basePath = src.substr(0, l - 7);
       return;
     }
   }

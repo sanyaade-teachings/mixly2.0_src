@@ -4,8 +4,9 @@
     const commonDirPath = href.substring(0, href.lastIndexOf('/'));
     window.COMMON_DIR_PATH = commonDirPath;
     window.VIEW = scriptUrl.searchParams.get('view') || 'board';
+    let config = {};
     try {
-        const config = JSON.parse(localStorage.getItem('mixly2.0') ?? '{}');
+        config = JSON.parse(localStorage.getItem('mixly2.0') ?? '{}');
     } catch (error) {
         console.log(error);
     }

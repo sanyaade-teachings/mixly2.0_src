@@ -4,7 +4,11 @@
     const commonDirPath = href.substring(0, href.lastIndexOf('/'));
     window.COMMON_DIR_PATH = commonDirPath;
     window.VIEW = scriptUrl.searchParams.get('view') || 'board';
-    const config = JSON.parse(localStorage.getItem('mixly2.0') ?? {});
+    try {
+        const config = JSON.parse(localStorage.getItem('mixly2.0') ?? '{}');
+    } catch (error) {
+        console.log(error);
+    }
     const html = document.getElementsByTagName('html')[0];
     let { theme = 'light' } = config?.user ?? {};
     if (theme === 'auto') {

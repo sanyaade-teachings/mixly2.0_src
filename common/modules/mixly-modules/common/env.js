@@ -50,9 +50,11 @@ Env.pyFilePath = null;
   * @type {String} 
   */
 Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
+Env.indexDirPath = decodeURIComponent(Env.indexDirPath);
 if (Env.currentPlatform !== 'win32') {
   Env.indexDirPath = '/' + Env.indexDirPath;
 }
+
 /**
   * 资源文件夹所在路径
   * @type {String} 

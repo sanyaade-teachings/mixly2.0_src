@@ -27,6 +27,7 @@
 <!--载入arduino_esp32 generators-->
 <script type="text/javascript" src="../arduino_esp32/generators/serial.js"></script>
 <!--载入arduino_common generators-->
+<script type="text/javascript" src="../arduino_common/generators/text.js"></script>
 <script type="text/javascript" src="../arduino_common/generators/ethernet.js"></script>
 <!--载入此板卡 generators-->
 <script type="text/javascript" src="generators/ethernet.js"></script>
@@ -67,6 +68,7 @@
 <!--载入arduino_esp32 blocks-->
 <script type="text/javascript" src="../arduino_esp32/blocks/serial.js"></script>
 <!--载入arduino_common blocks-->
+<script type="text/javascript" src="../arduino_common/blocks/text.js"></script>
 <script type="text/javascript" src="../arduino_common/blocks/ethernet.js"></script>
 <!--载入此板卡 blocks-->
 <script type="text/javascript" src="blocks/actuator.js"></script>
@@ -653,6 +655,13 @@
       </shadow>
     </value>
     <value name="STR2">
+      <shadow type="text">
+        <field name="TEXT"></field>
+      </shadow>
+    </value>
+  </block>
+  <block type="text_base64_url_codec">
+    <value name="VALUE">
       <shadow type="text">
         <field name="TEXT"></field>
       </shadow>

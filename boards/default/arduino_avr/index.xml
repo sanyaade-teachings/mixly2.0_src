@@ -1,9 +1,12 @@
+<!--载入generator-->
 <script type="text/javascript" src="../../../common/blockly-core/names.js"></script>
 <script type="text/javascript" src="../../../common/blockly-core/variables.js"></script>
 <script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
 <script type="text/javascript" src="../../../common/blockly-core/arduino.js"></script>
-
 <script type="text/javascript" src="libraries/digitalPinToInterrupt.js"></script>
+<!--载入arduino_common generators-->
+<script type="text/javascript" src="../arduino_common/generators/text.js"></script>
+<!--载入此板卡 generators-->
 <script type="text/javascript" src="generators/factory.js"></script>
 <script type="text/javascript" src="generators/blynk.js"></script>
 <script type="text/javascript" src="generators/pins.js"></script>
@@ -24,6 +27,9 @@
 <script type="text/javascript" src="generators/actuator.js"></script>
 <script type="text/javascript" src="generators/scoop.js"></script>
 <script type="text/javascript" src="generators/tools.js"></script>
+<!--载入arduino_common blocks-->
+<script type="text/javascript" src="../arduino_common/blocks/text.js"></script>
+<!--载入此板卡 blocks-->
 <script type="text/javascript" src="blocks/factory.js"></script>
 <script type="text/javascript" src="blocks/blynk.js"></script>
 <script type="text/javascript" src="blocks/pins.js"></script>
@@ -44,6 +50,7 @@
 <script type="text/javascript" src="blocks/actuator.js"></script>
 <script type="text/javascript" src="blocks/scoop.js"></script>
 <script type="text/javascript" src="blocks/tools.js"></script>
+<!--载入此板卡 css-->
 <link rel="stylesheet" type="text/css" href="css/color.css" />
 <xml>
   <category name="" id="catInOut" colour="20">
@@ -528,11 +535,11 @@
       </value>
     </block>
     <block type="String_to_Long_Integer">
-     <value name="data">
-      <shadow type="text">
-       <field name="TEXT">0xff0000</field>
-      </shadow>
-     </value>
+      <value name="data">
+        <shadow type="text">
+          <field name="TEXT">0xff0000</field>
+        </shadow>
+      </value>
     </block>
     <block type="ascii_to_char">
       <value name="VAR">
@@ -589,6 +596,13 @@
         </shadow>
       </value>
       <value name="STR2">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_base64_url_codec">
+      <value name="VALUE">
         <shadow type="text">
           <field name="TEXT"></field>
         </shadow>
@@ -854,13 +868,11 @@
     </block>
     <block type="mlx90614_get_data">
     </block>
-
     <!-- 改用DF TCS34725 颜色识别传感器库 -->
     <!-- <block type="TCS34725_Get_RGB">
     </block> -->
     <block type="TCS34725_Get_RGB">
     </block>
-
     <block type="tcs230_init">
       <value name="tcs230_s0">
         <shadow type="pins_digital">
@@ -1235,7 +1247,7 @@
             <field name="NUM">0</field>
           </shadow>
         </value>
-      </block>        
+      </block>
       <block type="servo_writeMicroseconds1">
         <field name="PIN">2</field>
         <value name="DEGREE">
@@ -1458,7 +1470,6 @@
           </shadow>
         </value>
       </block>
-
       <block type="arduino_dfplayer_mini_volume_up_down">
       </block>
       <block type="arduino_dfplayer_mini_EQ">
@@ -2210,12 +2221,9 @@
           </block>
         </next>
       </block>
-
       <sep gap="50"></sep>
-
       <block type="oled_set_EN_Font">
       </block>
-
       <block type="procedures_defnoreturn">
         <field name="NAME">page1</field>
         <statement name="STACK">
@@ -2660,7 +2668,7 @@
       </block>
     </category>
     <category id="catI2C" colour="140">
-      <block type="i2c_master_Init"> </block>
+      <block type="i2c_master_Init"></block>
       <block type="i2c_slave_Init">
         <value name="i2c_address">
           <shadow type="math_number">
@@ -2899,36 +2907,36 @@
           </shadow>
         </value>
       </block>
-      <block type="sd_card_type"> </block>
-      <block type="sd_card_root_files"> </block>
+      <block type="sd_card_type"></block>
+      <block type="sd_card_root_files"></block>
       <block type="sd_volume"></block>
       <block type="sd_exist">
-       <value name="FileName">
-        <shadow type="text">
-         <field name="TEXT">fileName.txt</field>
-        </shadow>
-       </value>  
+        <value name="FileName">
+          <shadow type="text">
+            <field name="TEXT">fileName.txt</field>
+          </shadow>
+        </value>
       </block>
       <block type="sd_DelFile">
-       <value name="FileName">
-        <shadow type="text">
-         <field name="TEXT">fileName.txt</field>
-        </shadow>
-       </value> 
+        <value name="FileName">
+          <shadow type="text">
+            <field name="TEXT">fileName.txt</field>
+          </shadow>
+        </value>
       </block>
       <block type="sd_read">
-       <value name="FileName">
-        <shadow type="text">
-         <field name="TEXT">fileName.txt</field>
-        </shadow>
-       </value> 
+        <value name="FileName">
+          <shadow type="text">
+            <field name="TEXT">fileName.txt</field>
+          </shadow>
+        </value>
       </block>
       <block type="store_sd_write">
-       <value name="FILE">
-        <shadow type="text">
-         <field name="TEXT">fileName.txt</field>
-        </shadow>
-       </value> 
+        <value name="FILE">
+          <shadow type="text">
+            <field name="TEXT">fileName.txt</field>
+          </shadow>
+        </value>
         <value name="DATA">
           <shadow type="text">
             <field name="TEXT">hello world</field>
@@ -2969,7 +2977,7 @@
     </category>
   </category>
   <category id="catNetwork" colour="0">
-  <!--       <category id="catEthernet" colour="0">
+    <!--       <category id="catEthernet" colour="0">
       <block type="ethernet_init_begin">
         <value name="MAC">
           <block type="ethernet_mac_address"></block>
@@ -3225,7 +3233,6 @@
           </shadow>
         </value>
       </block>
-
       <block type="blynk_table_add_data">
         <value name="name">
           <shadow type="text">
@@ -3238,7 +3245,6 @@
           </shadow>
         </value>
       </block>
-
       <block type="blynk_table_click">
         <field name="Vpin">V0</field>
         <statement name="function">
@@ -3262,7 +3268,6 @@
           </block>
         </statement>
       </block>
-
       <block type="blynk_table_order">
         <field name="Vpin">V0</field>
         <statement name="function">
@@ -3286,7 +3291,6 @@
           </block>
         </statement>
       </block>
-
       <block type="blynk_table">
         <value name="id">
           <shadow type="math_number">
@@ -3632,39 +3636,39 @@
       <block type="Blynk_iot_CONNECT_STATE">
         <statement name="DO"></statement>
       </block>
-      </block>
-      <block type="Blynk_iot_BLYNK_syncAll">
-      </block>
-      <block type="blynk_iot_syncVirtual">
-        <field name="Vpin">V0</field>
-      </block>
-    </category>
+    </block>
+    <block type="Blynk_iot_BLYNK_syncAll">
+    </block>
+    <block type="blynk_iot_syncVirtual">
+      <field name="Vpin">V0</field>
+    </block>
   </category>
-  <sep></sep>
-  <category id="catFactory" name="catFactory" colour="#777777">
-    <block type="factory_include"></block>
-    <block type="factory_function_noreturn"></block>
-    <block type="factory_function_return"></block>
-    <block type="factory_declare"></block>
-    <block type="factory_declare2"></block>
-    <block type="factory_define"></block>
-    <block type="factory_callMethod_noreturn"></block>
-    <block type="factory_callMethod_return"></block>
-    <block type="factory_static_method_noreturn"></block>
-    <block type="factory_static_method_return"></block>
-    <block type="factory_block"></block>
-    <block type="factory_block_return"></block>
-    <block type="factory_block_with_textarea"></block>
-    <block type="factory_block_return_with_textarea"></block>
-  </category>
-  <category id="catTools" name="catTools" colour="#555555">
-    <block type="IICSCAN"></block>
-    <block type="factory_notes"></block>
-    <block type="folding_block"></block>
-    <block type="uno_pin" m-show="arduino:avr:uno"></block>
-    <block type="nano_pin" m-show="arduino:avr:nano"></block>
-    <block type="mega_pin" m-show="arduino:avr:mega"></block>
-    <block type="promini_pin" m-show="arduino:avr:pro"></block>
-    <block type="leonardo_pin" m-show="arduino:avr:leonardo"></block>
-  </category>
+</category>
+<sep></sep>
+<category id="catFactory" name="catFactory" colour="#777777">
+  <block type="factory_include"></block>
+  <block type="factory_function_noreturn"></block>
+  <block type="factory_function_return"></block>
+  <block type="factory_declare"></block>
+  <block type="factory_declare2"></block>
+  <block type="factory_define"></block>
+  <block type="factory_callMethod_noreturn"></block>
+  <block type="factory_callMethod_return"></block>
+  <block type="factory_static_method_noreturn"></block>
+  <block type="factory_static_method_return"></block>
+  <block type="factory_block"></block>
+  <block type="factory_block_return"></block>
+  <block type="factory_block_with_textarea"></block>
+  <block type="factory_block_return_with_textarea"></block>
+</category>
+<category id="catTools" name="catTools" colour="#555555">
+  <block type="IICSCAN"></block>
+  <block type="factory_notes"></block>
+  <block type="folding_block"></block>
+  <block type="uno_pin" m-show="arduino:avr:uno"></block>
+  <block type="nano_pin" m-show="arduino:avr:nano"></block>
+  <block type="mega_pin" m-show="arduino:avr:mega"></block>
+  <block type="promini_pin" m-show="arduino:avr:pro"></block>
+  <block type="leonardo_pin" m-show="arduino:avr:leonardo"></block>
+</category>
 </xml>

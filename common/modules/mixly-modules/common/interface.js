@@ -55,55 +55,6 @@ Interface.init = () => {
     }
     Nav.init();
     FooterBar.init();
-    Editor.init();
-    Boards.init();
-    if (goog.isElectron) {
-        const { Electron } = Mixly;
-        const {
-            LibManager = undefined,
-            WikiManager = undefined
-        } = Electron;
-        if (typeof LibManager === 'object') {
-            LibManager.init();
-        }
-        if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki) {
-            WikiManager.registerContextMenu();
-        }
-    } else {
-        Env.defaultXML = $('#toolbox').html();
-    }
-    const selectedBoardName = Boards.getSelectedBoardName();
-    Boards.changeTo(selectedBoardName);
-    Boards.updateCategories(selectedBoardName);
-    Msg.renderToolbox(true);
-    if (goog.isElectron) {
-        const { Electron } = Mixly;
-        const { Serial = undefined } = Electron;
-        if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
-            Serial.addStatusbarTabExtFunc();
-            Serial.refreshPorts();
-            Serial.refreshPortsTimer = setInterval(() => {
-               Serial.refreshPorts();
-            }, 10000);
-        }
-    }
-    window.addEventListener('resize', Interface.onresize, false);
-    Interface.onresize();
-    if (BOARD.nav.levelSelector) {
-        LevelSelector.init();
-        const $loading = $('.loading');
-        const toolboxWidth = $('.blocklyToolboxDiv').width();
-        $loading.children('.left-div').animate({
-          width: toolboxWidth + 'px'
-        }, () => {
-            $loading.fadeOut("fast", () => {
-                $loading.remove();
-            });
-        });
-        LevelSelector.xmlToWorkspace(1);
-    } else {
-        auto_save_and_restore_blocks();
-    }
     NavEvents.init();
     if (Env.hasSocketServer) {
         const { Socket } = Mixly.WebSocket;
@@ -165,10 +116,59 @@ window.addEventListener('load', () => {
     if (!$categories.children('category').length) {
         $categories.html('<category></category>');
     }
+    Interface.init();
     $('#toolbox').html($categories.html());
     LazyLoad.css(cssPathList);
     LazyLoad.js(scrpitPathList, () => {
-        Interface.init();
+        Editor.init();
+        Boards.init();
+        if (goog.isElectron) {
+            const { Electron } = Mixly;
+            const {
+                LibManager = undefined,
+                WikiManager = undefined
+            } = Electron;
+            if (typeof LibManager === 'object') {
+                LibManager.init();
+            }
+            if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki) {
+                WikiManager.registerContextMenu();
+            }
+        } else {
+            Env.defaultXML = $('#toolbox').html();
+        }
+        const selectedBoardName = Boards.getSelectedBoardName();
+        Boards.changeTo(selectedBoardName);
+        Boards.updateCategories(selectedBoardName);
+        Msg.renderToolbox(true);
+        if (goog.isElectron) {
+            const { Electron } = Mixly;
+            const { Serial = undefined } = Electron;
+            if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
+                Serial.addStatusbarTabExtFunc();
+                Serial.refreshPorts();
+                Serial.refreshPortsTimer = setInterval(() => {
+                   Serial.refreshPorts();
+                }, 10000);
+            }
+        }
+        window.addEventListener('resize', Interface.onresize, false);
+        Interface.onresize();
+        if (BOARD.nav.levelSelector) {
+            LevelSelector.init();
+            const $loading = $('.loading');
+            const toolboxWidth = $('.blocklyToolboxDiv').width();
+            $loading.children('.left-div').animate({
+              width: toolboxWidth + 'px'
+            }, () => {
+                $loading.fadeOut("fast", () => {
+                    $loading.remove();
+                });
+            });
+            LevelSelector.xmlToWorkspace(1);
+        } else {
+            auto_save_and_restore_blocks();
+        }
     });
 });
 

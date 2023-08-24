@@ -507,7 +507,7 @@ Serial.refreshOutputBox = (port) => {
     const { mainStatusBarTab } = Mixly;
     const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
-    if (!portObj) return;
+    if (!portObj || !statusBarSerial) return;
     const { dom, toolConfig, toolOpened, output, endPos } = portObj;
     for (let i = output.length; i > Serial.MAX_OUTPUT_LINE; i--) {
         output.shift();

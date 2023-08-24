@@ -22,8 +22,8 @@ Blockly.Screenshot.svgToPng_ = function (data, width, height, callback) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     const img = new Image();
-
-    const pixelDensity = 10;
+    const maxSize = Math.max(width, height);
+    const pixelDensity = Math.max(Math.min(10, 15000 / maxSize), window.devicePixelRatio || 1);
     canvas.width = width * pixelDensity;
     canvas.height = height * pixelDensity;
     img.onload = function () {
@@ -49,6 +49,29 @@ Blockly.Screenshot.svgToPng_ = function (data, width, height, callback) {
     img.src = data;
 }
 
+Blockly.Screenshot.getBase64Image_ = function(image) {
+    return new Promise(resolve => {
+        const img = new Image();
+        img.crossOrigin = '';
+        const href = image.getAttribute('xlink:href') ?? '';
+        if (!href || href.indexOf('file://') === -1) {
+            resolve();
+        }
+        img.src = href;
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx?.drawImage(img, 0, 0, img.width, img.height);
+            const ext = img.src.substring(img.src.lastIndexOf('.') + 1).toLowerCase();
+            const dataURL = canvas.toDataURL('image/' + ext);
+            image.setAttribute('xlink:href', dataURL);
+            resolve();
+        }
+    });
+}
+
 /**
  * Create an SVG of the blocks on the workspace.
  * @param {!Blockly.WorkspaceSvg} workspace The workspace.
@@ -71,40 +94,48 @@ Blockly.Screenshot.workspaceToSvg_ = function (workspace, callback, customCss) {
     const blockCanvas = workspace.getCanvas();
     const clone = blockCanvas.cloneNode(true);
     clone.removeAttribute('transform');
+    const $images = $(clone).find('image');
+    let resolveList = [];
+    for (let i = 0; i < $images.length; i++) {
+        resolveList.push(this.getBase64Image_($images[i]));
+    }
 
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svg.appendChild(clone);
-    svg.setAttribute('viewBox', x + ' ' + y + ' ' + width + ' ' + height);
+    Promise.all(resolveList)
+    .then(() => {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        svg.appendChild(clone);
+        svg.setAttribute('viewBox', x + ' ' + y + ' ' + width + ' ' + height);
 
-    svg.setAttribute(
-        'class',
-        'blocklySvg ' +
-        (workspace.options.renderer || 'geras') +
-        '-renderer ' +
-        (workspace.getTheme ? workspace.getTheme().name + '-theme' : '')
-    );
-    svg.setAttribute('width', width);
-    svg.setAttribute('height', height);
-    svg.setAttribute('style', 'background-color: transparent');
+        svg.setAttribute(
+            'class',
+            'blocklySvg ' +
+            (workspace.options.renderer || 'geras') +
+            '-renderer ' +
+            (workspace.getTheme ? workspace.getTheme().name + '-theme' : '')
+        );
+        svg.setAttribute('width', width);
+        svg.setAttribute('height', height);
+        svg.setAttribute('style', 'background-color: transparent');
 
-    const css = [].slice
-        .call(document.head.querySelectorAll('style'))
-        .filter(
-            (el) =>
-                /\.blocklySvg/.test(el.innerText) || el.id.indexOf('blockly-') === 0
-        )
-        .map((el) => el.innerText)
-        .join('\n');
-    const style = document.createElement('style');
-    style.innerHTML = css + '\n' + customCss;
-    svg.insertBefore(style, svg.firstChild);
+        const css = [].slice
+            .call(document.head.querySelectorAll('style'))
+            .filter(
+                (el) =>
+                    /\.blocklySvg/.test(el.innerText) || el.id.indexOf('blockly-') === 0
+            )
+            .map((el) => el.innerText)
+            .join('\n');
+        const style = document.createElement('style');
+        style.innerHTML = css + '\n' + customCss;
+        svg.insertBefore(style, svg.firstChild);
 
-    let svgAsXML = new XMLSerializer().serializeToString(svg);
-    svgAsXML = svgAsXML.replace(/&nbsp/g, '&#160');
-    const data = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
+        let svgAsXML = new XMLSerializer().serializeToString(svg);
+        svgAsXML = svgAsXML.replace(/&nbsp/g, '&#160');
+        const data = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
 
-    Blockly.Screenshot.svgToPng_(data, width, height, callback);
+        Blockly.Screenshot.svgToPng_(data, width, height, callback);
+    });
 }
 
 /* eslint-disable no-unused-vars */

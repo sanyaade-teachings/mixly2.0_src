@@ -66,8 +66,7 @@ BoardManager.boardsList = [];
 BoardManager.URL = SOFTWARE?.board?.url ?? null;
 
 BoardManager.LOCAL_IMPORT_FILTERS = [
-    { name: 'JSON File', extensions: ['json'] },
-    { name: 'ZIP File', extensions: ['zip'] }
+    { name: 'Lib File', extensions: ['json', 'zip'] }
 ];
 
 BoardManager.showLocalImportDialog = () => {
@@ -140,14 +139,14 @@ BoardManager.importBoardPackageWithConfig = (configPath) => {
             const packageList = fs.readdirSync(hardwarePath);
             const packagePath = [];
             let copyPromiseList = [];
-            fs_extra.ensureDirSync(path.join(Env.arduinoCliPath, './Arduino15/'));
+            fs_extra.ensureDirSync(path.join(Env.arduinoCliPath, 'Arduino15/'));
             for (let i of packageList) {
-                const startPath = path.join(hardwarePath, './' + i);
+                const startPath = path.join(hardwarePath, i);
                 if (fs_plus.isDirectorySync(startPath)) {
-                    const endPath = path.join(Env.arduinoCliPath, './Arduino15/packages/' + i);
+                    const endPath = path.join(Env.arduinoCliPath, 'Arduino15/packages/', i);
                     copyPromiseList.push(BoardManager.copyDir(startPath, endPath));
                 } else {
-                    const endPath = path.join(Env.arduinoCliPath, './Arduino15/' + i);
+                    const endPath = path.join(Env.arduinoCliPath, 'Arduino15/', i);
                     if (path.extname(i) === '.json') {
                         fs_extra.copy(startPath, endPath);
                     }
@@ -267,20 +266,20 @@ BoardManager.importFromLocal = (inPath, sucFunc, errorFunc, endFunc) => {
     const extname = path.extname(inPath);
     if (fs_plus.isFileSync(inPath)) {
         switch (extname) {
-            case '.json':
-                if (path.join(inPath, '../../') === Env.thirdPartyBoardPath) {
-                    errorFunc(Msg.getLang('BOARD_IMPORTED'));
-                    return;
-                }
-                sucFunc();
-                BoardManager.importFromLocalWithConfig(inPath, endFunc);
-                break;
-            case '.zip':
-                sucFunc();
-                BoardManager.importFromLocalWithZip(inPath, endFunc);
-                break;
-            default:
-                errorFunc(Msg.getLang('SELECT_CONFIG_FILE_ERR'));
+        case '.json':
+            if (path.join(inPath, '../../') === Env.thirdPartyBoardPath) {
+                errorFunc(Msg.getLang('BOARD_IMPORTED'));
+                return;
+            }
+            sucFunc();
+            BoardManager.importFromLocalWithConfig(inPath, endFunc);
+            break;
+        case '.zip':
+            sucFunc();
+            BoardManager.importFromLocalWithZip(inPath, endFunc);
+            break;
+        default:
+            errorFunc(Msg.getLang('SELECT_CONFIG_FILE_ERR'));
         }
     } else {
         errorFunc(Msg.getLang('FILE_NOT_EXIST'));
@@ -361,7 +360,7 @@ BoardManager.importFromLocalWithZip = (inPath, endFunc = (errorMessages) => {}) 
             endFunc(error);
         } else {
             const fileName = path.basename(inPath, '.zip');
-            const configPath = path.join(Env.thirdPartyBoardPath, './' + fileName + '/config.json');
+            const configPath = path.join(Env.thirdPartyBoardPath, fileName, 'config.json');
             BoardManager.importFromLocalWithConfig(configPath, endFunc);
         }
     });
@@ -804,7 +803,7 @@ BoardManager.readBoardConfig = (inPath) => {
 
         if ((boardType || boardName) && boardImg) {
             const boardIndexPath = path.join(inPath, '../index.xml');
-            boardConfig.boardIndex = path.relative(Env.indexPath, boardIndexPath);
+            boardConfig.boardIndex = path.relative(Env.indexDirPath, boardIndexPath);
             if (!boardType && boardName) {
                 boardConfig.boardType = boardName;
                 delete boardConfig.boardName;
@@ -830,10 +829,10 @@ BoardManager.getThirdPartyBoardsConfig = () => {
                 continue;
             }
             const { boardImg = '' } = boardConfig;
-            const srcIndexDir = path.join(Env.indexPath, boardImg);
+            const srcIndexDir = path.join(Env.indexDirPath, boardImg);
             const srcThirdDir = path.join(namePath, boardImg);
-            const reSrcIndexDir = path.relative(Env.indexPath, srcIndexDir);
-            const reSrcThirdDir = path.relative(Env.indexPath, srcThirdDir);
+            const reSrcIndexDir = path.relative(Env.indexDirPath, srcIndexDir);
+            const reSrcThirdDir = path.relative(Env.indexDirPath, srcThirdDir);
             if (fs_plus.isFileSync(srcIndexDir)) {
                 boardConfig.boardImg = reSrcIndexDir;
             } else if (fs_plus.isFileSync(srcThirdDir)) {
@@ -1174,7 +1173,7 @@ BoardManager.showBoardsCard = (row, col) => {
     $(".mixly-board-del-btn").off("click").click((event) => {
         const index = $(event.currentTarget).attr('index');
         const config = BoardManager.boardsList[index];
-        const dirPath = path.join(Env.indexPath, config.boardIndex, '../');
+        const dirPath = path.join(Env.indexDirPath, config.boardIndex, '../');
         BoardManager.delBoard(dirPath, endFunc);
     });
 

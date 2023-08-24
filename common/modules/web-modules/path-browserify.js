@@ -33,7 +33,6 @@ function assertPath(path) {
 
 // Resolves . and .. elements in a path with directory names
 function normalizeStringPosix(path, allowAboveRoot) {
-  path = path.replaceAll('\\', '/');
   var ignore = '';
   var ignoreList = [ 'http://', 'https://', 'file:///', 'file://' ];
   if (path.length) {
@@ -140,6 +139,7 @@ var posix = {
       }
 
       assertPath(path);
+      path = path.replaceAll('\\', '/');
 
       // Skip empty entries
       if (path.length === 0) {
@@ -170,6 +170,7 @@ var posix = {
 
   normalize: function normalize(path) {
     assertPath(path);
+    path = path.replaceAll('\\', '/');
 
     if (path.length === 0) return '.';
 
@@ -198,6 +199,8 @@ var posix = {
     for (var i = 0; i < arguments.length; ++i) {
       var arg = arguments[i];
       assertPath(arg);
+      arg = arg.replaceAll('\\', '/');
+
       if (arg.length > 0) {
         if (joined === undefined)
           joined = arg;
@@ -212,7 +215,9 @@ var posix = {
 
   relative: function relative(from, to) {
     assertPath(from);
+    from = from.replaceAll('\\', '/');
     assertPath(to);
+    to = to.replaceAll('\\', '/');
 
     if (from === to) return '';
 
@@ -306,6 +311,7 @@ var posix = {
 
   dirname: function dirname(path) {
     assertPath(path);
+    path = path.replaceAll('\\', '/');
     if (path.length === 0) return '.';
     var code = path.charCodeAt(0);
     var hasRoot = code === 47 /*/*/;
@@ -332,7 +338,7 @@ var posix = {
   basename: function basename(path, ext) {
     if (ext !== undefined && typeof ext !== 'string') throw new TypeError('"ext" argument must be a string');
     assertPath(path);
-
+    path = path.replaceAll('\\', '/');
     var start = 0;
     var end = -1;
     var matchedSlash = true;
@@ -402,6 +408,7 @@ var posix = {
 
   extname: function extname(path) {
     assertPath(path);
+    path = path.replaceAll('\\', '/');
     var startDot = -1;
     var startPart = 0;
     var end = -1;
@@ -458,7 +465,7 @@ var posix = {
 
   parse: function parse(path) {
     assertPath(path);
-
+    path = path.replaceAll('\\', '/');
     var ret = { root: '', dir: '', base: '', ext: '', name: '' };
     if (path.length === 0) return ret;
     var code = path.charCodeAt(0);

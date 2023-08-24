@@ -15,31 +15,6 @@ Blockly.Arduino.forBlock['WIFI_info'] = function () {
     return "";
 };
 
-//GET请求
-Blockly.Arduino.forBlock['http_get'] = function () {
-    var api = Blockly.Arduino.valueToCode(this, 'api', Blockly.Arduino.ORDER_ATOMIC);
-    var branch = Blockly.Arduino.statementToCode(this, 'success');
-    branch = branch.replace(/(^\s*)|(\s*$)/g, "");
-    var branch1 = Blockly.Arduino.statementToCode(this, 'failure');
-    branch1 = branch1.replace(/(^\s*)|(\s*$)/g, "");
-    Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-    Blockly.Arduino.definitions_['include_HTTPClient'] = '#include <HTTPClient.h>';
-    var code = 'if (WiFi.status() == WL_CONNECTED) {\n'
-        + '  HTTPClient http;\n'
-        + '  http.begin(' + api + ');\n'
-        + '  int httpCode = http.GET();\n'
-        + '  if (httpCode > 0) {\n'
-        + '    String Request_result = http.getString();\n'
-        + '    ' + branch + '\n'
-        + '  }\n'
-        + '  else {\n'
-        + '    ' + branch1 + '\n'
-        + '  }\n'
-        + '  http.end();\n'
-        + '}\n';
-    return code;
-};
-
 //esp_now发送数据
 Blockly.Arduino.forBlock['esp_now_send'] = function () {
     var mac = Blockly.Arduino.valueToCode(this, 'mac', Blockly.Arduino.ORDER_ATOMIC);

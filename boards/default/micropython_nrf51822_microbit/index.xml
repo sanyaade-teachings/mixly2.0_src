@@ -84,7 +84,7 @@
 <script src="../python/blocks/utility.js"></script>
 <script src="../python/generators/utility.js"></script>
 <link rel="stylesheet" type="text/css" href="css/color_microbit_python_advance.css" />
-<xml id="toolbox" style="display: none">
+<xml>
   <category name="" id="catInOut" colour="20">
     <block type="inout_highlow"></block>
     <block type="inout_digital_write">

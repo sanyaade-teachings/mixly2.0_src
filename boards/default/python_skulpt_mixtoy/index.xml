@@ -67,7 +67,7 @@
 <script src="../../../common/js/skulpt_mixtoy/pygame_zero_main.js" type="application/javascript"></script>
 <link rel="stylesheet" type="text/css" href="css/color_mixpy_python_skulpt.css" />
 <script src="./others/pyengine.js" type="application/javascript"></script>
-<xml id="toolbox" style="display: none">
+<xml>
   <category name="" id="catInOut" colour="20">
     <block type="inout_type_input">
       <value name="VAR">

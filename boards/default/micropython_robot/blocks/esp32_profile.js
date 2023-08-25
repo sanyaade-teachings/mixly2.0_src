@@ -94,7 +94,7 @@ profile["元控•白泽"] = {
     one_more:[["ONE_SHOT", "ONE_SHOT"], ["PERIODIC", "PERIODIC"]],
     digital_dot:[["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]],
     extern_addr: profile.generate([ '0-1' ]),
-    als_num: profile.generate([ '0-3' ]),
+    als_num: profile.generate([ '0-1' ]),
 };
 
 profile["超霸大师"] = {

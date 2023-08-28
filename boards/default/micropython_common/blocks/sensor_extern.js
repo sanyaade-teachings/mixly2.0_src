@@ -1445,12 +1445,11 @@ Blockly.Blocks['gnss_get_data'] = {
     }
 };
 
-//mixbot extern below:
-Blockly.Blocks.mixbot_button_extern_get_value = {
+//mixbot/baize extern below:
+Blockly.Blocks.robot_button_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_BUTTON)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -1472,11 +1471,10 @@ Blockly.Blocks.mixbot_button_extern_get_value = {
     }
 }
 
-Blockly.Blocks.mixbot_touch_extern_get_value = {
+Blockly.Blocks.robot_touch_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH+Blockly.Msg.MSG.catSensor)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -1489,11 +1487,10 @@ Blockly.Blocks.mixbot_touch_extern_get_value = {
     }
 }
 
-Blockly.Blocks.mixbot_infrared_extern_get_value = {
+Blockly.Blocks.robot_infrared_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
-      this.appendDummyInput()
-          .appendField("Mixbot")
+      this.appendDummyInput()          
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -1506,28 +1503,10 @@ Blockly.Blocks.mixbot_infrared_extern_get_value = {
     }
 }
 
-Blockly.Blocks.bitbot_infrared_extern_get_value = {
+Blockly.Blocks.robot_potentiometer_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField(Blockly.Msg.BITBOT)
-          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);                   
-      this.appendDummyInput()
-          .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_DATA)       
-      this.setOutput(true,Boolean);
-      this.setInputsInline(true);
-    }
-}
-
-Blockly.Blocks.mixbot_potentiometer_extern_get_value = {
-    init: function () {
-      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
-      this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_KNOB_POTENTIOMETER)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -1540,11 +1519,10 @@ Blockly.Blocks.mixbot_potentiometer_extern_get_value = {
     }
 }
 
-Blockly.Blocks.mixbot_color_extern_get_value = {
+Blockly.Blocks.robot_color_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.HTML_COLOUR+Blockly.Msg.MSG.catSensor)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -1568,7 +1546,7 @@ Blockly.Blocks.mixbot_sensor_extern_get_addr = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
+          .appendField(Blockly.Msg.MIXBOT)
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.MIXLY_BUTTON, 'ext_button'],
@@ -1588,7 +1566,7 @@ Blockly.Blocks.mixbot_sensor_extern_set_addr = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
+          .appendField(Blockly.Msg.MIXBOT)
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.MIXLY_BUTTON, 'ext_button'],
@@ -1612,3 +1590,5 @@ Blockly.Blocks.mixbot_sensor_extern_set_addr = {
       this.setInputsInline(true);
     }
 }
+
+

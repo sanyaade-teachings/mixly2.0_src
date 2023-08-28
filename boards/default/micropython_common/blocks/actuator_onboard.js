@@ -649,7 +649,7 @@ Blockly.Blocks.esp32_onboard_music_play_list = {
 
 Blockly.Blocks.rm_motor = {
     init: function () {
-      this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+      this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.MOTOR_DC)
           .appendField(new Blockly.FieldDropdown([

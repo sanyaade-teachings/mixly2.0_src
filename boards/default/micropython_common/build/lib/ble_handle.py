@@ -12,7 +12,7 @@ from ble_peripheral import BLESimplePeripheral
 
 class Handle(BLESimplePeripheral):
 	def __init__(self):
-		super().__init__(name="TUDAO_MA")
+		super().__init__(name="TUDAO_MASTER")
 		self._buffer=bytearray(14)
 
 	def _receive_cb(self, data):

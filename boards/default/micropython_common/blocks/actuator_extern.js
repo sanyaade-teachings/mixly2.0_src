@@ -599,11 +599,10 @@ Blockly.Blocks['mixbot_addr_extern'] = {
   }
 };
 
-Blockly.Blocks.mixbot_motor_extern = {
+Blockly.Blocks.robot_motor_extern = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MOTOR)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -622,11 +621,10 @@ Blockly.Blocks.mixbot_motor_extern = {
     }
 }
 
-Blockly.Blocks.mixbot_motor_extern_get_speed = {
+Blockly.Blocks.robot_motor_extern_get_speed = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MOTOR)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -640,11 +638,10 @@ Blockly.Blocks.mixbot_motor_extern_get_speed = {
     }
 }
 
-Blockly.Blocks.mixbot_traffic_light_extern = {
+Blockly.Blocks.robot_traffic_light_extern = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_TRAFFIC_LIGHT)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -668,11 +665,10 @@ Blockly.Blocks.mixbot_traffic_light_extern = {
     }
 }
 
-Blockly.Blocks.mixbot_led_extern = {
+Blockly.Blocks.robot_led_extern = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.COLOUR_RGB_WHITE, 'W'],
@@ -698,11 +694,10 @@ Blockly.Blocks.mixbot_led_extern = {
     }
 }
 
-Blockly.Blocks.mixbot_led_extern_get_value = {
+Blockly.Blocks.robot_led_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.COLOUR_RGB_WHITE, 'W'],
@@ -723,11 +718,10 @@ Blockly.Blocks.mixbot_led_extern_get_value = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_get_status = {
+Blockly.Blocks.robot_servo_extern_get_status = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -749,11 +743,10 @@ Blockly.Blocks.mixbot_servo_extern_get_status = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_stop_mode = {
+Blockly.Blocks.robot_servo_extern_stop_mode = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -772,11 +765,10 @@ Blockly.Blocks.mixbot_servo_extern_stop_mode = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_stop = {
+Blockly.Blocks.robot_servo_extern_stop = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
       this.appendValueInput('mode')
           .setCheck(Number)
@@ -790,11 +782,10 @@ Blockly.Blocks.mixbot_servo_extern_stop = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_absolute_run = {
+Blockly.Blocks.robot_servo_extern_absolute_run = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MATH_SINGLE_OP_ABSOLUTE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
       this.appendValueInput('mode')
@@ -834,11 +825,10 @@ Blockly.Blocks.mixbot_servo_extern_absolute_run = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_relative_origin = {
+Blockly.Blocks.robot_servo_extern_relative_origin = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
       this.appendValueInput('mode')
@@ -853,11 +843,10 @@ Blockly.Blocks.mixbot_servo_extern_relative_origin = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_relative_run = {
+Blockly.Blocks.robot_servo_extern_relative_run = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
           .appendField("("+Blockly.Msg.MIXLY_MIXBOT_SERVO_LIKE_ENCODING_MOTOR+")")
@@ -890,11 +879,10 @@ Blockly.Blocks.mixbot_servo_extern_relative_run = {
     }
 }
 
-Blockly.Blocks.mixbot_servo_extern_relative_continue = {
+Blockly.Blocks.robot_servo_extern_relative_continue = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
           .appendField("("+Blockly.Msg.MIXLY_MIXBOT_SERVO_LIKE_ORDINARY_MOTOR+")")
@@ -933,7 +921,7 @@ Blockly.Blocks.mixbot_actuator_extern_get_addr = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
+          .appendField(Blockly.Msg.MIXBOT)
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.MIXLY_MOTOR, 'ext_motor'],
@@ -956,7 +944,7 @@ Blockly.Blocks.mixbot_actuator_extern_set_addr = {
     init: function () {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
-          .appendField("Mixbot")
+          .appendField(Blockly.Msg.MIXBOT)
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN)
           .appendField(new Blockly.FieldDropdown([
             [Blockly.Msg.MIXLY_MOTOR, 'ext_motor'],

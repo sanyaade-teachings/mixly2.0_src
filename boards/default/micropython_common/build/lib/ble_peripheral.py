@@ -23,7 +23,7 @@ _FLAG_WRITE_NO_RESPONSE = const(0x0004)
 _FLAG_WRITE = const(0x0008)
 _FLAG_NOTIFY = const(0x0010)
 
-_UART_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+_UART_UUID = bluetooth.UUID(0x1101)
 _UART_TX = (bluetooth.UUID("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"),_FLAG_READ | _FLAG_NOTIFY,)
 _UART_RX = (bluetooth.UUID("6E400002-B5A3-F393-E0A9-E50E24DCCA9E"),_FLAG_WRITE | _FLAG_WRITE_NO_RESPONSE,)
 _UART_SERVICE = (_UART_UUID,(_UART_TX, _UART_RX),)
@@ -38,8 +38,10 @@ class BLESimplePeripheral:
 		self._write_callback = None
 		self._write_data = None
 		if (name is '') or (name is None):
-			name = "Mixgo" + self.mac[-3:].upper()
+			name = "Mixgo_" + self.mac[-6:].upper()
 			print("Bluetooth name:", name)
+		else:
+			name = name + "_" +self.mac[-6:].upper()
 		self._payload = advertising_payload(name=name, services=[_UART_UUID])
 		self._advertise()
 

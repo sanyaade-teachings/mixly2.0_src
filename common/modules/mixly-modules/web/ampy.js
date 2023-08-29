@@ -154,10 +154,11 @@ class Ampy {
                     reject(Msg.Lang['无法退出Raw REPL']);
                     return;
                 }
-                if (! await this.exitREPL()) {
+                /*if (! await this.exitREPL()) {
                     reject(Msg.Lang['无法退出REPL']);
                     return;
-                }
+                }*/
+                await this.operator_.writeString('exec(open(\'main.py\').read())\r\n');
                 resolve();
             } catch (error) {
                 reject(error.toString());

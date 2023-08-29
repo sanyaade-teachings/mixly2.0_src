@@ -233,11 +233,11 @@ Blockly.Arduino.forBlock['blynk_iot_syncVirtual'] = function () {
 Blockly.Arduino.forBlock['blynk_iot_WidgetLED_COLOR'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
-    COLOR = "#" + COLOR.substring(2);
+    COLOR = COLOR.replace(/\#/g,"").replace(/\(/g,"").replace(/\)/g,"").replace(/0x/g, '');
     var dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
     var colour_rgb_led_color = this.getFieldValue('RGB_LED_COLOR');
     Blockly.Arduino.definitions_['var_declare_WidgetLED' + Vpin] = 'WidgetLED led' + Vpin + '(' + Vpin + ');';
-    var code = 'led' + Vpin + '.setColor("' + COLOR + '");\n';
+    var code = 'led' + Vpin + '.setColor("#' + COLOR + '");\n';
     if (dropdown_stat == "HIGH")
         code += 'led' + Vpin + '.on();\n';
     else if (dropdown_stat == "LOW")
@@ -249,10 +249,10 @@ Blockly.Arduino.forBlock['blynk_iot_WidgetLED_COLOR'] = function () {
 Blockly.Arduino.forBlock['blynk_iot_WidgetLED_VALUE'] = function () {
     var Vpin = this.getFieldValue('Vpin');
     var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
-    COLOR = COLOR.replace(/#/g, "#");
+    COLOR = COLOR.replace(/\#/g,"").replace(/\(/g,"").replace(/\)/g,"").replace(/0x/g, '');
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['var_declare_WidgetLED' + Vpin] = 'WidgetLED led' + Vpin + '(' + Vpin + ');';
-    var code = 'led' + Vpin + '.setColor("' + COLOR + '");\n';
+    var code = 'led' + Vpin + '.setColor("#' + COLOR + '");\n';
     code += 'led' + Vpin + '.setValue(' + value_num + ');';
     return code;
 };

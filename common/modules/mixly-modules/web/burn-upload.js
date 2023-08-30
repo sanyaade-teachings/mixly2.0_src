@@ -12,7 +12,6 @@ goog.require('Mixly.Web.Esptool');
 goog.require('Mixly.Web.USB');
 goog.require('Mixly.Web.SerialPort');
 goog.require('Mixly.Web.Ampy');
-goog.require('Mixly.WebCompiler.Compiler');
 goog.provide('Mixly.Web.BU');
 
 const {

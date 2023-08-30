@@ -3,7 +3,6 @@ goog.loadJs('web', () => {
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
 goog.require('Mixly.LayerExt');
-goog.require('Mixly.Url');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Msg');

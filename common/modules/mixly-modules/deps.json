@@ -838,8 +838,7 @@
             "Mixly.Web.Esptool",
             "Mixly.Web.USB",
             "Mixly.Web.SerialPort",
-            "Mixly.Web.Ampy",
-            "Mixly.WebCompiler.Compiler"
+            "Mixly.Web.Ampy"
         ],
         "provide": [
             "Mixly.Web.BU"

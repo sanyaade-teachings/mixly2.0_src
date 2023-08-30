@@ -143,6 +143,11 @@ Blockly.Python.forBlock['number5'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['number6'] = function(){
+    var code = this.getFieldValue('op');
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['sensor_mixgo_pin_near'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_ltr553als'] = "from "+version+" import onboard_ltr553als";

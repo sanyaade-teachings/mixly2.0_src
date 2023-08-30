@@ -1454,7 +1454,7 @@
     </block>
     <block type="sensor_mixgo_button_attachInterrupt">
       <value name="btn">
-        <shadow type="pins_button">
+        <shadow type="pins_buttonB">
         </shadow>
       </value>
       <value name="DO">
@@ -1474,7 +1474,7 @@
     </block>
     <block type="sensor_mixgoce_pin_pressed">
         <value name="button">
-          <shadow type="number2">
+          <shadow type="number6">
           </shadow>
         </value>
       </block>
@@ -2799,7 +2799,169 @@
     </category>
   </category>
   <category id="catGroup" colour="140">
-    
+    <category id="catBLE" colour="140">
+      <block type="communicate_bluetooth_central_init">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_c</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_peripheral_init">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_p</field>
+          </shadow>
+        </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_scan">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_c</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_connect">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_c</field>
+          </shadow>
+        </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_disconnect">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_c</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_mac">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_x</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_is_connected">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_x</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_send">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_x</field>
+          </shadow>
+        </value>
+        <value name="data">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_bluetooth_recv_only">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_x</field>
+          </shadow>
+        </value>          
+      </block>
+      <block type="communicate_bluetooth_recv">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">ble_x</field>
+          </shadow>
+        </value>
+        <value name="METHOD">
+          <shadow type="factory_block_return">
+            <field name="VALUE">ble_method</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="procedures_defnoreturn">
+        <mutation>
+          <arg name="data"></arg>
+        </mutation>
+        <field name="NAME">ble_method</field>
+        <statement name="STACK">
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">data</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text">
+                    <field name="TEXT">Mixly</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+      <block type="communicate_bluetooth_handle">
+        <value name="VAR">
+          <shadow type="variables_get">
+            <field name="VAR">handle</field>
+          </shadow>
+        </value>
+        <value name="METHOD">
+          <shadow type="factory_block_return">
+            <field name="VALUE">handle_method</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="procedures_defnoreturn">
+        <mutation>
+          <arg name="key1"></arg>
+          <arg name="key2"></arg>
+          <arg name="key3"></arg>
+          <arg name="keyx"></arg>
+        </mutation>
+        <field name="NAME">handle_method</field>
+        <statement name="STACK">
+          <block type="system_print_many">
+            <mutation items="4"></mutation>
+            <value name="ADD0">
+              <block type="variables_get">
+                <field name="VAR">key1</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="variables_get">
+                <field name="VAR">key2</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="variables_get">
+                <field name="VAR">key3</field>
+              </block>
+            </value>
+            <value name="ADD3">
+              <block type="variables_get">
+                <field name="VAR">keyx</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </category>
     <category id="catIR" colour="140">
       <block type="communicate_ir_send">
         <value name="PIN">

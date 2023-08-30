@@ -75,6 +75,7 @@ onboard_rgb = NeoPixel(Pin(38), 4)
 '''5KEY_Sensor'''
 class KEYSensor:
 	def __init__(self, pin, range):
+		self.pin = pin
 		self.adc = ADC(Pin(pin))
 		self.adc.atten(ADC.ATTN_11DB) 
 		self.range = range
@@ -107,16 +108,17 @@ class KEYSensor:
 				return False
 
 	def irq(self, handler, trigger):
-		Pin(pin, Pin.IN).irq(handler = handler, trigger = trigger)
+		Pin(self.pin, Pin.IN).irq(handler = handler, trigger = trigger)
 
 '''1KEY_Button'''
 class Button(KEYSensor):
 	def __init__(self, pin):
-		self.pin = Pin(pin, Pin.IN)
+		self.pin = pin
+		self.key = Pin(pin, Pin.IN)
 		self.flag = True
 
 	def _value(self):
-		return not self.pin.value()
+		return not self.key.value()
 
 B1key = Button(0)
 B2key = KEYSensor(17,0)

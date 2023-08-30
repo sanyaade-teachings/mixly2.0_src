@@ -19,7 +19,8 @@ const fs_extra = require('fs-extra');
 const config = {
     "workPath": __dirname,
     "fileIgnore": [
-        path.resolve(__dirname, './common/modules/mixly-modules/mixly.min.js')
+        path.resolve(__dirname, './common/modules/mixly-modules/mixly.min.js'),
+        path.resolve(__dirname, './common/modules/mixly-modules/mixly-loader.js')
     ],
     "dirIgnore": [
     ]
@@ -117,20 +118,6 @@ const getNodes = (obj) => {
             load
         });
     }
-    /*const children = getNodes({
-        hasProvide,
-        nodes: nowNodes,
-        load
-    });
-    if (children) {
-        return children;
-    } else {
-        return {
-            hasProvide,
-            load,
-            nodes: nowNodes
-        }
-    }*/
 }
 
 let { load, hasProvide } = getNodes({

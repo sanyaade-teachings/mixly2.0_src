@@ -4,7 +4,8 @@
 <script type="text/javascript" src="../../../common/blockly-core/variables.js"></script>
 <script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
 <script type="text/javascript" src="libraries/digitalPinToInterrupt.js"></script>
-<!--载入arduino_avr generators-->
+<!--载入arduino_avr
+generators-->
 <script type="text/javascript" src="../arduino_avr/generators/factory.js"></script>
 <script type="text/javascript" src="../arduino_avr/generators/blynk.js"></script>
 <script type="text/javascript" src="../arduino_avr/generators/pins.js"></script>
@@ -24,10 +25,12 @@
 <script type="text/javascript" src="../arduino_avr/generators/serial.js"></script>
 <script type="text/javascript" src="../arduino_avr/generators/actuator.js"></script>
 <script type="text/javascript" src="../arduino_avr/generators/tools.js"></script>
-<!--载入arduino_common generators-->
+<!--载入arduino_common
+generators-->
 <script type="text/javascript" src="../arduino_common/generators/text.js"></script>
 <script type="text/javascript" src="../arduino_common/generators/ethernet.js"></script>
-<!--载入此板卡 generators-->
+<!--载入此板卡
+generators-->
 <script type="text/javascript" src="generators/ethernet.js"></script>
 <script type="text/javascript" src="generators/pins.js"></script>
 <script type="text/javascript" src="generators/inout.js"></script>
@@ -44,7 +47,8 @@
 <script type="text/javascript" src="generators/serial.js"></script>
 <script type="text/javascript" src="generators/actuator.js"></script>
 <script type="text/javascript" src="generators/Handbit.js"></script>
-<!--载入arduino_avr blocks-->
+<!--载入arduino_avr
+blocks-->
 <script type="text/javascript" src="../arduino_avr/blocks/blynk.js"></script>
 <script type="text/javascript" src="../arduino_avr/blocks/factory.js"></script>
 <script type="text/javascript" src="../arduino_avr/blocks/pins.js"></script>
@@ -64,10 +68,12 @@
 <script type="text/javascript" src="../arduino_avr/blocks/serial.js"></script>
 <script type="text/javascript" src="../arduino_avr/blocks/actuator.js"></script>
 <script type="text/javascript" src="../arduino_avr/blocks/tools.js"></script>
-<!--载入arduino_common blocks-->
+<!--载入arduino_common
+blocks-->
 <script type="text/javascript" src="../arduino_common/blocks/text.js"></script>
 <script type="text/javascript" src="../arduino_common/blocks/ethernet.js"></script>
-<!--载入此板卡 blocks-->
+<!--载入此板卡
+blocks-->
 <script type="text/javascript" src="blocks/actuator.js"></script>
 <script type="text/javascript" src="blocks/pins.js"></script>
 <script type="text/javascript" src="blocks/inout.js"></script>
@@ -86,11 +92,13 @@
 <script type="text/javascript" src="blocks/display.js"></script>
 <script type="text/javascript" src="blocks/Handbit.js"></script>
 <script type="text/javascript" src="blocks/tools.js"></script>
-<!--载入此板卡 language-->
+<!--载入此板卡
+language-->
 <script type="text/javascript" src="./language/zh-hans.js"></script>
 <script type="text/javascript" src="./language/zh-hant.js"></script>
 <script type="text/javascript" src="./language/en.js"></script>
-<!--载入此板卡 css-->
+<!--载入此板卡
+css-->
 <link rel="stylesheet" type="text/css" href="css/color_esp32_arduino.css" />
 <xml>
 </xml>

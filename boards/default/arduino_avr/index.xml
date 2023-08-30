@@ -4,9 +4,11 @@
 <script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
 <script type="text/javascript" src="../../../common/blockly-core/arduino.js"></script>
 <script type="text/javascript" src="libraries/digitalPinToInterrupt.js"></script>
-<!--载入arduino_common generators-->
+<!--载入arduino_common
+generators-->
 <script type="text/javascript" src="../arduino_common/generators/text.js"></script>
-<!--载入此板卡 generators-->
+<!--载入此板卡
+generators-->
 <script type="text/javascript" src="generators/factory.js"></script>
 <script type="text/javascript" src="generators/blynk.js"></script>
 <script type="text/javascript" src="generators/pins.js"></script>
@@ -27,9 +29,11 @@
 <script type="text/javascript" src="generators/actuator.js"></script>
 <script type="text/javascript" src="generators/scoop.js"></script>
 <script type="text/javascript" src="generators/tools.js"></script>
-<!--载入arduino_common blocks-->
+<!--载入arduino_common
+blocks-->
 <script type="text/javascript" src="../arduino_common/blocks/text.js"></script>
-<!--载入此板卡 blocks-->
+<!--载入此板卡
+blocks-->
 <script type="text/javascript" src="blocks/factory.js"></script>
 <script type="text/javascript" src="blocks/blynk.js"></script>
 <script type="text/javascript" src="blocks/pins.js"></script>
@@ -50,7 +54,8 @@
 <script type="text/javascript" src="blocks/actuator.js"></script>
 <script type="text/javascript" src="blocks/scoop.js"></script>
 <script type="text/javascript" src="blocks/tools.js"></script>
-<!--载入此板卡 css-->
+<!--载入此板卡
+css-->
 <link rel="stylesheet" type="text/css" href="css/color.css" />
 <xml>
   <category name="" id="catInOut" colour="20">
@@ -3015,8 +3020,7 @@
       <block type="blynk_usb_server">
         <value name="auth_key">
           <shadow type="text">
-            <field name="TEXT">d9efdd0413ec4b74ab0057a0b8675654</field>n
-          </shadow>
+            <field name="TEXT">d9efdd0413ec4b74ab0057a0b8675654</field>n </shadow>
         </value>
       </block>
       <block type="blynk_server">
@@ -3636,39 +3640,39 @@
       <block type="Blynk_iot_CONNECT_STATE">
         <statement name="DO"></statement>
       </block>
-    </block>
-    <block type="Blynk_iot_BLYNK_syncAll">
-    </block>
-    <block type="blynk_iot_syncVirtual">
-      <field name="Vpin">V0</field>
-    </block>
+      </block>
+      <block type="Blynk_iot_BLYNK_syncAll">
+      </block>
+      <block type="blynk_iot_syncVirtual">
+        <field name="Vpin">V0</field>
+      </block>
+    </category>
   </category>
-</category>
-<sep></sep>
-<category id="catFactory" name="catFactory" colour="#777777">
-  <block type="factory_include"></block>
-  <block type="factory_function_noreturn"></block>
-  <block type="factory_function_return"></block>
-  <block type="factory_declare"></block>
-  <block type="factory_declare2"></block>
-  <block type="factory_define"></block>
-  <block type="factory_callMethod_noreturn"></block>
-  <block type="factory_callMethod_return"></block>
-  <block type="factory_static_method_noreturn"></block>
-  <block type="factory_static_method_return"></block>
-  <block type="factory_block"></block>
-  <block type="factory_block_return"></block>
-  <block type="factory_block_with_textarea"></block>
-  <block type="factory_block_return_with_textarea"></block>
-</category>
-<category id="catTools" name="catTools" colour="#555555">
-  <block type="IICSCAN"></block>
-  <block type="factory_notes"></block>
-  <block type="folding_block"></block>
-  <block type="uno_pin" m-show="arduino:avr:uno"></block>
-  <block type="nano_pin" m-show="arduino:avr:nano"></block>
-  <block type="mega_pin" m-show="arduino:avr:mega"></block>
-  <block type="promini_pin" m-show="arduino:avr:pro"></block>
-  <block type="leonardo_pin" m-show="arduino:avr:leonardo"></block>
-</category>
+  <sep></sep>
+  <category id="catFactory" name="catFactory" colour="#777777">
+    <block type="factory_include"></block>
+    <block type="factory_function_noreturn"></block>
+    <block type="factory_function_return"></block>
+    <block type="factory_declare"></block>
+    <block type="factory_declare2"></block>
+    <block type="factory_define"></block>
+    <block type="factory_callMethod_noreturn"></block>
+    <block type="factory_callMethod_return"></block>
+    <block type="factory_static_method_noreturn"></block>
+    <block type="factory_static_method_return"></block>
+    <block type="factory_block"></block>
+    <block type="factory_block_return"></block>
+    <block type="factory_block_with_textarea"></block>
+    <block type="factory_block_return_with_textarea"></block>
+  </category>
+  <category id="catTools" name="catTools" colour="#555555">
+    <block type="IICSCAN"></block>
+    <block type="factory_notes"></block>
+    <block type="folding_block"></block>
+    <block type="uno_pin" m-show="arduino:avr:uno"></block>
+    <block type="nano_pin" m-show="arduino:avr:nano"></block>
+    <block type="mega_pin" m-show="arduino:avr:mega"></block>
+    <block type="promini_pin" m-show="arduino:avr:pro"></block>
+    <block type="leonardo_pin" m-show="arduino:avr:leonardo"></block>
+  </category>
 </xml>

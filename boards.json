@@ -10,7 +10,20 @@
             "webSocket": true
         },
         "language": "MicroPython"
-    }, {
+    }, 
+    {
+        "boardImg": "./boards/default/micropython_esp32s3/media/yuankong_zi.png",
+        "boardType": "MixGo Zi",
+        "boardIndex": "./boards/default/micropython_esp32s3/index.xml",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        },
+        "language": "MicroPython"
+    },
+    {
         "boardImg": "./boards/default/micropython_esp32c3/media/esp32c3_compressed.png",
         "boardType": "Python ESP32-C3",
         "boardIndex": "./boards/default/micropython_esp32c3/index.xml",
@@ -21,18 +34,8 @@
             "webSocket": true
         },
         "language": "MicroPython"
-    }, {
-        "boardImg": "./boards/default/micropython_esp32/media/esp32_compressed.png",
-        "boardType": "Python ESP32",
-        "boardIndex": "./boards/default/micropython_esp32/index.xml",
-        "env": {
-            "electron": true,
-            "web": true,
-            "webCompiler": true,
-            "webSocket": true
-        },
-        "language": "MicroPython"
-    }, {
+    },
+     {
         "boardImg": "./boards/default/micropython_robot/media/mixbot.png",
         "boardType": "Python Robot",
         "boardIndex": "./boards/default/micropython_robot/index.xml",
@@ -43,7 +46,20 @@
             "webSocket": true
         },
         "language": "MicroPython"
-    }, {
+    }, 
+     {
+        "boardImg": "./boards/default/micropython_esp32/media/esp32_compressed.png",
+        "boardType": "Python ESP32",
+        "boardIndex": "./boards/default/micropython_esp32/index.xml",
+        "env": {
+            "electron": true,
+            "web": true,
+            "webCompiler": true,
+            "webSocket": true
+        },
+        "language": "MicroPython"
+    },
+     {
         "boardImg": "./boards/default/arduino_avr/media/uno_compressed.png",
         "boardType": "Arduino AVR",
         "boardIndex": "./boards/default/arduino_avr/index.xml",

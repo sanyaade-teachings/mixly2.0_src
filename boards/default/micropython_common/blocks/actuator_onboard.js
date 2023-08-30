@@ -92,7 +92,7 @@ Blockly.Blocks.actuator_led_brightness = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.MIXLY_SETTING+Blockly.Msg.MIXLY_BUILDIN_LED+Blockly.Msg.MIXLY_BRIGHTNESS+'(0-10)');
+    this.setTooltip(Blockly.Msg.MIXLY_SETTING+Blockly.Msg.MIXLY_BUILDIN_LED+Blockly.Msg.MIXLY_BRIGHTNESS+'(0-100%)');
   }
 };
 

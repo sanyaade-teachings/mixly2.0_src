@@ -181,7 +181,7 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background-size: 100% auto;
 }
 #catlcd.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
-    background:url('../../../../common/media/mark/oled.png') no-repeat;
+    background:url('../../../../common/media/mark/oled2.png') no-repeat;
     background-size: 100% auto;
 }
 #cat4Digitdisplay.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{

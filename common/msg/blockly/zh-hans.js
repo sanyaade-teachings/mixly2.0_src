@@ -132,6 +132,7 @@ ZhHans.MSG = {
     newfile_yes: "残忍清除",
     newfile_no: "我再想想",
     burn: "初始化固件",
+    submit:"保存到平台",
     upload_to_board: "上传到板卡",
     statusbar: "状态栏",
     operate: "操作",
@@ -3664,5 +3665,8 @@ ZhHans.ANALOG = '模拟';
 ZhHans.BITBOT = '元控•白泽';
 ZhHans.MIXBOT = '超霸大师';
 ZhHans.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '仅电池供电下，将关机断电。USB供电下，只是关闭电机输出。';
+ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_RECT_MESSAGE0 = '绘制 %1 矩形 %2 x %3 y %4 宽 %5 高 %6 颜色 %7';
+ZhHans.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = '绘制 %1 线 %2 x %3 y %4 长度%5 颜色 %6';
+ZhHans.mpython_display_line_MESSAGE0 ='绘制 线条%1 x1%2 y1 %3 到 x2 %4 y2 %5 颜色 %6';
 
 })();

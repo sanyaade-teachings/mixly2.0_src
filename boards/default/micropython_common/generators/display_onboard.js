@@ -588,3 +588,124 @@ Blockly.Python.forBlock['bitbot_display_image_create'] = function(block) {
   var code = "b'" + colorList.join('') + "'";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+//mixgo_zi onboard tft below:
+Blockly.Python.forBlock['onboard_tft_show_image'] = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = "onboard_tft.image(" + data + ",color=0xffff)\n";
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_show_image_xy'] = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    var code = "onboard_tft.image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size+ ',color=' + color + ")\n";
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_show_string'] = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = "onboard_tft.shows(" + data + ",color=0xffff)\n";
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_show_image_or_string_delay'] = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+    var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
+    var op = this.getFieldValue('center');
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    var code = "onboard_tft.shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op + ',color=' + color + ")\n";
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_show_frame_string'] = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = "onboard_tft.frame(" + data + ",color=0xffff)\n";
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_show_frame_string_delay'] = function() {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+    var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    var code = "onboard_tft.frame(" + data +',size = ' + size + ',delay = ' + time + ',color=' + color+ ")\n";
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_scroll_string'] = function() {
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+     var code = "onboard_tft.scroll("+ data +",color=0xffff)\n";
+     return code;
+}
+
+
+Blockly.Python.forBlock['onboard_tft_scroll_string_delay'] = function() {  
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
+     var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
+     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+     var code = "onboard_tft.scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=' + color+ ")\n";
+     return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_display_shape_rect'] = function (block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
+  var w = Blockly.Python.valueToCode(block, 'w', Blockly.Python.ORDER_ATOMIC);
+  var h = Blockly.Python.valueToCode(block, 'h', Blockly.Python.ORDER_ATOMIC);
+  var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+  var shape = block.getFieldValue('shape');
+  var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  return code;
+};
+
+Blockly.Python.forBlock['onboard_tft_display_hvline'] = function (block) { //水平线
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
+  var var_length = Blockly.Python.valueToCode(block, 'length', Blockly.Python.ORDER_ATOMIC);
+  var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+  var hv = block.getFieldValue('dir_h_v');
+  var code = 'onboard_tft.' + (('0' == hv) ? 'v': 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  return code;
+};
+
+Blockly.Python.forBlock['onboard_tft_display_line'] = function (block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var x1 = Blockly.Python.valueToCode(block, 'x1', Blockly.Python.ORDER_ATOMIC);
+  var y1 = Blockly.Python.valueToCode(block, 'y1', Blockly.Python.ORDER_ATOMIC);
+  var x2 = Blockly.Python.valueToCode(block, 'x2', Blockly.Python.ORDER_ATOMIC);
+  var y2 = Blockly.Python.valueToCode(block, 'y2', Blockly.Python.ORDER_ATOMIC);
+  var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+  var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  return code;
+};

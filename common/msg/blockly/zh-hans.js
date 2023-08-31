@@ -3668,5 +3668,7 @@ ZhHans.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '仅电池供电下，将关机断�
 ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_RECT_MESSAGE0 = '绘制 %1 矩形 %2 x %3 y %4 宽 %5 高 %6 颜色 %7';
 ZhHans.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = '绘制 %1 线 %2 x %3 y %4 长度%5 颜色 %6';
 ZhHans.mpython_display_line_MESSAGE0 ='绘制 线条%1 x1%2 y1 %3 到 x2 %4 y2 %5 颜色 %6';
+ZhHans.MIXLY_TOUCH_SLIDE = "滑动触摸";
+ZhHans.MIXLY_TOUCH_SLIDE_TOOLTIP = "触摸值，默认接近0，往IO3方向触摸滑动值变大，往IO4方向触摸滑动值变小。";
 
 })();

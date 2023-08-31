@@ -3528,5 +3528,10 @@ En.ANALOG = 'analog';
 En.BITBOT = 'MixGo•Baize';
 En.MIXBOT = 'MixBot';
 En.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = 'Shut down and disconnected under battery power. Only the motor output is turned off under USB power supply.';
+En.ONBOARD_TFT_DISPLAY_SHAPE_RECT_MESSAGE0 = 'draw %1 rectangle %2 x %3 y %4 width %5 height %6 color %7';
+En.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = 'draw %1 line %2 x %3 y %4 length %5 color %6';
+En.mpython_display_line_MESSAGE0 ='draw line %1 x1 %2 y1 %3 to x2 %4 y2 %5 color %6';
+En.MIXLY_TOUCH_SLIDE = "slide touch";
+En.MIXLY_TOUCH_SLIDE_TOOLTIP = "The touch value is close to 0 by default, increases when touching in the direction of IO3, and decreases when touching in the direction of IO4.";
 
 })();

@@ -168,6 +168,19 @@ Blockly.Blocks['sensor_mpython_pin_pressed'] = {
     }
 };
 
+Blockly.Blocks['sensor_mixgo_touch_slide'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TOUCH_SLIDE);       
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_VALUE);     
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOUCH_SLIDE_TOOLTIP);
+    }
+};
+
 
 Blockly.Blocks['sensor_distance_hrsc04'] = {
     init: function(){
@@ -383,6 +396,30 @@ Blockly.Blocks['sensor_mixgo_pin_near_double'] = {
             var TOOLTIPS = {
                 'left':Blockly.Msg.TEXT_TRIM_LEFT,
                 'right':Blockly.Msg.TEXT_TRIM_RIGHT,
+            };
+            return mode0 +TOOLTIPS[mode] + mode1
+        });
+    }
+};
+
+Blockly.Blocks['sensor_mixgo_pin_near_triple'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.OLED_UP_R, "onboard_psa"], [Blockly.Msg.OLED_LOW_R, "onboard_psb"],[Blockly.Msg.TEXT_TRIM_LEFT, "onboard_ltr553als"]]), "direction")
+        .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
+        this.setOutput(true,Number);
+        this.setInputsInline(true);
+        var thisBlock = this;
+        this.setTooltip(function() {
+            var mode = thisBlock.getFieldValue('direction');
+            var mode0 = Blockly.Msg.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
+            var mode1 = Blockly.Msg.MIXLY_ESP32_NEAR;
+            var TOOLTIPS = {
+                'onboard_ltr553als':Blockly.Msg.TEXT_TRIM_LEFT,
+                "onboard_psa":Blockly.Msg.OLED_UP_R, 
+                "onboard_psb":Blockly.Msg.OLED_LOW_R 
             };
             return mode0 +TOOLTIPS[mode] + mode1
         });

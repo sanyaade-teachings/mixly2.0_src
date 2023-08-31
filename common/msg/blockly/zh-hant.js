@@ -3500,5 +3500,10 @@ ZhHant.ANALOG = '模擬';
 ZhHant.BITBOT = '元控•白澤';
 ZhHant.MIXBOT = '超霸大師';
 ZhHant.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '僅電池供電下，將關機斷電。USB供電下，只是關閉電機輸出。';
+ZhHant.ONBOARD_TFT_DISPLAY_SHAPE_RECT_MESSAGE0 = '繪製 %1 矩形 %2 x %3 y %4 寬 %5 高 %6 顏色 %7';
+ZhHant.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = '繪製 %1 線 %2 x %3 y %4 長度%5 顏色 %6';
+ZhHant.mpython_display_line_MESSAGE0 ='繪製 線條%1 x1%2 y1 %3 到 x2 %4 y2 %5 顏色 %6';
+ZhHant.MIXLY_TOUCH_SLIDE = "滑動觸摸";
+ZhHant.MIXLY_TOUCH_SLIDE_TOOLTIP = "觸摸值，默認接近0，往IO3方向觸摸滑動值變大，往IO4方向觸摸滑動值變小。";
 
 })();

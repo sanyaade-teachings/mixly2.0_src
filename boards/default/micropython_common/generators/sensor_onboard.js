@@ -163,6 +163,14 @@ Blockly.Python.forBlock['sensor_mixgo_pin_near_double'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['sensor_mixgo_pin_near_triple'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var direction = this.getFieldValue('direction');
+    Blockly.Python.definitions_['import_'+version+'_'+direction] = 'from '+version+' import '+direction;
+    var code = direction +'.ps_nl()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['sensor_ds18x20'] = function(){
     Blockly.Python.definitions_['import_ds18x20x'] = 'import ds18x20x';
     var dropdown_pin = Blockly.Python.valueToCode(this, 'PIN', Blockly.Python.ORDER_ATOMIC);
@@ -298,6 +306,13 @@ Blockly.Python.forBlock['sensor_mixgoce_pin_pressed'] = function(){
     Blockly.Python.definitions_['import_'+version] = 'import '+version;
     var pin = Blockly.Python.valueToCode(this, 'button', Blockly.Python.ORDER_ATOMIC);
     var code = version+'.touched('+pin+')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['sensor_mixgo_touch_slide'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version] = 'import '+version;
+    var code = version+'.touch_slide(3,4)';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

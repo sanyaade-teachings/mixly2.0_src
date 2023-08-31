@@ -431,7 +431,6 @@ BU.initUpload = () => {
     if (!navigator.serial || !navigator.usb) {
         portName = 'web-bluetooth';
     }
-    portName = 'web-bluetooth';
     BU.uploadWithAmpy(portName);
 }
 

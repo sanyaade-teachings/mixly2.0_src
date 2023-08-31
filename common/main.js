@@ -78,6 +78,7 @@ LazyLoad.js([
 
     goog.platform = () => {
         const userAgent = navigator.userAgent;
+        if (userAgent.indexOf("Mobile") !== -1) return "mobile";
         if (userAgent.indexOf("Windows NT") !== -1) return "win32";
         if (userAgent.indexOf("Mac") !== -1) return "darwin";
         if (userAgent.indexOf("X11") !== -1) return "linux";

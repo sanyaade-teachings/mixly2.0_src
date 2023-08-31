@@ -51,7 +51,7 @@ Env.pyFilePath = null;
   */
 Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
 Env.indexDirPath = decodeURIComponent(Env.indexDirPath);
-if (!['win32', 'mobile'].includes(Env.currentPlatform)) {
+if (Env.currentPlatform === 'darwin') {
   Env.indexDirPath = '/' + Env.indexDirPath;
 }
 

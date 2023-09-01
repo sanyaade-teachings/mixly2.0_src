@@ -173,6 +173,7 @@ class EditorMixed {
                     blockEditor.editor.scrollCenter();
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
+                    blocklyWorkspace.setVisible(false);
                     $codeArea.removeClass('icon-code-1').addClass('icon-block');
                     $codeArea.parent().attr('m-id', 'block-area');
                     aceEditor.setReadOnly(false);
@@ -189,6 +190,7 @@ class EditorMixed {
                 this.codeEditorMenuRender();
             },
             exitfull: (type) => {
+                blocklyWorkspace.setVisible(true);
                 codeEditor.shown = true;
                 blockEditor.shown = true;
                 aceEditor.setReadOnly(true);
@@ -222,7 +224,8 @@ class EditorMixed {
         const $buttons = $('#nav-right-btn-list').find('button[m-id!="h-bar"]');
         for (let i = 0; $buttons[i]; i++) {
             const $button = $($buttons[i]);
-            $button.click(() => {
+            $button.click((event) => {
+                event.stopPropagation();
                 const $a = $button.children('a');
                 const mId = $button.attr('m-id');
                 switch($button.attr('m-id')) {

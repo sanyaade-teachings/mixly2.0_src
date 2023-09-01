@@ -58,6 +58,7 @@ Editor.addDrag = () => {
                 mainStatusBarTab.shown = false;
                 break;
             case 'NEGATIVE': // 拖拽元素移动方向：下→上
+                blockEditor.editor.setVisible(false);
                 break;
             }
         },
@@ -65,6 +66,7 @@ Editor.addDrag = () => {
             const { mainStatusBarTab } = Mixly;
             switch(type) {
             case 'POSITIVE': // 拖拽元素移动方向：上→下
+                blockEditor.editor.setVisible(true);
                 break;
             case 'NEGATIVE': // 拖拽元素移动方向：下→上
                 $hBar.removeClass('icon-show-bar-s').addClass('icon-hide-bar-s');

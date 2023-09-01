@@ -92,21 +92,36 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(11) > div.blo
   background:url('../../../../common/media/mark/func2.png') no-repeat;
   background-size: 100% auto; 
 }
-
-
 div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/mixio.png') no-repeat;
+    background-size: 100% auto; 
+}
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/mixio2.png') no-repeat;
+    background-size: 100% auto; 
+}
+#catMixIO.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/mixio.png') no-repeat;
+    background-size: 100% auto;
+}
+#catMixIO.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/mixio2.png') no-repeat;
+    background-size: 100% auto;
+}
+
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(13) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
   background:url('../../../../common/media/mark/turtle.png') no-repeat;
   background-size: 100% auto; 
 }
-div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(13) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
   background:url('../../../../common/media/mark/turtle2.png') no-repeat;
   background-size: 100% auto; 
 }
-div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(13) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(14) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
   background:url('../../../../common/media/mark/data.png') no-repeat;
   background-size: 100% auto; 
 }
-div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(13) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(14) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
   background:url('../../../../common/media/mark/data2.png') no-repeat;
   background-size: 100% auto; 
 }
@@ -118,11 +133,11 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(14) > div.blo
   background:url('../../../../common/media/mark/machine_learning2.png') no-repeat;
   background-size: 100% auto; 
 }*/
-div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(14) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(15) > div.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
   background:url('../../../../common/media/mark/algorithm.png') no-repeat;
   background-size: 100% auto; 
 }
-div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(14) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(15) > div.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
   background:url('../../../../common/media/mark/algorithm2.png') no-repeat;
   background-size: 100% auto; 
 }

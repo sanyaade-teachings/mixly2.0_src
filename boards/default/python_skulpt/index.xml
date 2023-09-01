@@ -19,6 +19,7 @@
 <script src="../python/blocks/set.js"></script>
 <script src="./blocks/turtle.js"></script>
 <script src="./blocks/data.js"></script>
+<script src="./blocks/iot.js"></script>
 <script src="../python/blocks/tuple.js"></script>
 <script src="../python/blocks/procedures.js"></script>
 <script src="../python_mixpy/blocks/algorithm.js"></script>
@@ -35,6 +36,7 @@
 <script src="../python/generators/set.js"></script>
 <script src="./generators/turtle.js"></script>
 <script src="./generators/data.js"></script>
+<script src="./generators/iot.js"></script>
 <script src="../python/generators/tuple.js"></script>
 <script src="../python/generators/procedures.js"></script>
 <script src="../python_mixpy/generators/algorithm.js"></script>
@@ -62,6 +64,7 @@
   <script src="../../../common/js/skulpt/dist/version_1.0.0/skulpt-stdlib.js" type="application/javascript"></script> -->
 <script src="../../../common/modules/web-modules/axios.min.js" type="text/javascript"></script>
 <script src="../../../common/modules/web-modules/mqtt.min.js" type="text/javascript"></script>
+<script src="../../../common/modules/web-modules/mixio_init.js" type="text/javascript"></script>
 <script src="../../../common/js/skulpt/dist/new/skulpt.min.js" type="text/javascript"></script>
 <script src="../../../common/js/skulpt/dist/new/skulpt-stdlib.js" type="text/javascript"></script>
 
@@ -1254,6 +1257,169 @@
   <category id="catVar" colour="330" custom="VARIABLE">
   </category>
   <category id="catFun" custom="PROCEDURE" colour="290"></category>
+  <category id="catIot" colour="#2FAD7A">
+  <category id="catMixIO" colour="#526FC3">        
+      <block type="IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE">
+        <value name="SERVER">
+          <shadow type="text">
+            <field name="TEXT">mixio.mixly.cn</field>
+          </shadow>
+        </value>
+        <value name="KEY">
+          <shadow type="iot_mixly_key">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE">
+        <value name="SERVER">
+          <shadow type="text">
+            <field name="TEXT">mixio.mixly.cn</field>
+          </shadow>
+        </value>
+        <value name="KEY">
+          <shadow type="factory_block_return">
+            <field name="VALUE">A1B2C3</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="iot_mixio_connect">
+        <value name="SERVER">
+          <shadow type="text">
+            <field name="TEXT">mixio.mixly.cn</field>
+          </shadow>
+        </value>
+        <value name="USERNAME">
+          <shadow type="text">
+            <field name="TEXT">username</field>
+          </shadow>
+        </value>
+        <value name="PASSWORD">
+          <shadow type="text">
+            <field name="TEXT">password</field>
+          </shadow>
+        </value>
+        <value name="PROJECT">
+          <shadow type="text">
+            <field name="TEXT">MyProject</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="IOT_MIXIO_PUBLISH">
+        <value name="TOPIC">
+          <shadow type="text">
+            <field name="TEXT">topic</field>
+          </shadow>
+        </value>
+        <value name="MSG">
+          <shadow type="text">
+            <field name="TEXT">msg</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="IOT_MIXIO_SUBSCRIBE">
+        <value name="TOPIC">
+          <shadow type="text">
+            <field name="TEXT">topic</field>
+          </shadow>
+        </value>
+        <value name="METHOD">
+          <shadow type="factory_block_return">
+            <field name="VALUE">method</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="IOT_MIXIO_UNSUBSCRIBE">
+        <value name="TOPIC">
+          <shadow type="text">
+            <field name="TEXT">topic</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="procedures_defnoreturn">
+        <mutation>
+          <arg name="client"></arg>
+          <arg name="topic"></arg>
+          <arg name="msg"></arg>
+        </mutation>
+        <field name="NAME">method</field>
+        <statement name="STACK">
+          <block type="controls_if">
+            <value name="IF0">
+              <block type="logic_compare">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get">
+                    <field name="VAR">msg</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="text">
+                    <field name="TEXT">1</field>
+                  </block>
+                </value>
+              </block>
+        </statement>
+      </block>
+      <block type="iot_mixio_check"></block>
+      <!-- <block type="iot_client_onboard"></block> -->
+      <block type="IOT_FORMATTING">
+        <value name="VAR">
+          <block type="dicts_create_with_noreturn" inline="true">
+            <field name="VAR">content</field>
+            <mutation items="3"></mutation>
+            <field name="KEY0">'long'</field>
+            <field name="KEY1">'lat'</field>
+            <field name="KEY2">'message'</field>
+            <value name="ADD0">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="math_number">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+      <block type="IOT_FORMAT_STRING">
+        <value name="VAR">
+          <block type="dicts_create_with_noreturn" inline="true">
+            <field name="VAR">content</field>
+            <mutation items="3"></mutation>
+            <field name="KEY0">'key1'</field>
+            <field name="KEY1">'key2'</field>
+            <field name="KEY2">'key3'</field>
+            <value name="ADD0">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="math_number">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>     
+      <block type="iot_mixio_disconnect"></block>  
+
+       
+     </category>
+    </category>
   <category id="catTurtle" colour="180">
     <block type="turtle_create"></block>
     <block type="turtle_move">

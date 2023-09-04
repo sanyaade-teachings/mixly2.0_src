@@ -1553,7 +1553,8 @@ Blockly.Blocks.mixbot_sensor_extern_get_addr = {
             [Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH+Blockly.Msg.MSG.catSensor, 'ext_collision'],
             [Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR, 'ext_infrared'],
             [Blockly.Msg.MIXLY_KNOB_POTENTIOMETER, 'ext_potentiometer'],
-            [Blockly.Msg.HTML_COLOUR+Blockly.Msg.MSG.catSensor, 'ext_color']
+            [Blockly.Msg.HTML_COLOUR+Blockly.Msg.MSG.catSensor, 'ext_color'],
+            [Blockly.Msg.MIXLY_EXTERN_SONAR, 'ext_sonar']
             ]), "name")       
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MIXBOT_EXTERN_GET_ADDR)       
@@ -1573,7 +1574,8 @@ Blockly.Blocks.mixbot_sensor_extern_set_addr = {
             [Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH+Blockly.Msg.MSG.catSensor, 'ext_collision'],
             [Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR, 'ext_infrared'],
             [Blockly.Msg.MIXLY_KNOB_POTENTIOMETER, 'ext_potentiometer'],
-            [Blockly.Msg.HTML_COLOUR+Blockly.Msg.MSG.catSensor, 'ext_color']
+            [Blockly.Msg.HTML_COLOUR+Blockly.Msg.MSG.catSensor, 'ext_color'],
+            [Blockly.Msg.MIXLY_EXTERN_SONAR, 'ext_sonar']
             ]), "name")        
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MIXBOT_EXTERN_SET_ADDR)    
@@ -1591,4 +1593,41 @@ Blockly.Blocks.mixbot_sensor_extern_set_addr = {
     }
 }
 
+Blockly.Blocks.robot_sonar_extern_get_value = {
+    init: function () {
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+      this.appendDummyInput()          
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_EXTERN_SONAR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);                   
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_DATA+'(cm)')       
+      this.setOutput(true,Boolean);
+      this.setInputsInline(true);
+    }
+}
 
+Blockly.Blocks.robot_sonar_extern_led = {
+    init: function () {
+      this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+      this.appendDummyInput()          
+          .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_EXTERN_SONAR)
+      this.appendValueInput('mode')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);   
+      this.appendDummyInput()          
+          .appendField(Blockly.Msg.MIXLY_EXTERN_INDICATOR_LIGHT)    
+      this.appendValueInput('light')
+          .setCheck(Number)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.LCD_NUMBERING);                     
+      this.appendValueInput('bright')
+          .appendField(Blockly.Msg.MIXLY_PULSEIN_STAT)       
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setInputsInline(true);
+    }
+}

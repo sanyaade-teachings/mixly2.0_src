@@ -3205,6 +3205,25 @@
         </shadow>
       </value>
     </block>
+    <block type="robot_sonar_extern_get_value" m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize">
+      <value name="mode">
+        <shadow type="mixbot_addr_extern">
+        </shadow>
+      </value>
+    </block>
+     <block type="robot_sonar_extern_led" m-show="micropython:esp32:mixbot_s2 micropython:esp32c3:mixgo_baize">
+      <value name="mode">
+        <shadow type="mixbot_addr_extern">
+        </shadow>
+      </value>
+      <value name="light">
+        <shadow type="pins_digital_dot"></shadow>
+      </value>   
+      <value name="bright">
+        <shadow type="ledswitch">
+        </shadow>
+      </value>   
+    </block>
   </category>
   
   <category id="catExternActuator" colour='#74A55B'>   

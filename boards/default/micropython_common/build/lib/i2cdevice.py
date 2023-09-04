@@ -149,6 +149,31 @@ class Infrared(Base):
 		except Exception as e:
 			raise RuntimeError("Cannot find a Infrared sensor", e)
 
+'''ultrasonic sensor'''
+class Sonar(Base):
+	_addrs = [0x24, 0x25, 0x26, 0x27]
+	_state = 0x00
+	def value(self, naddr=0):
+		'''超声波测距返回 距离数值cm'''
+		try:
+			value = self._i2c.read_device(self._addrs[naddr], 0x10, 2)
+			return  value[0] << 8 | value[1]
+		except Exception as e:
+			raise RuntimeError("Cannot find a Ultrasonic sensor", e)
+
+	def led(self, naddr=0, num=0, value=0):
+		'''超声波指示灯参数 num:序号0~3,value:0灭,1亮,-1反转 '''
+		try:
+			if value > 0:
+				self._state |= 1 << num 
+			elif value < 0:
+				self._state ^= 1 << num
+			else:
+				 self._state &= ~ (1 << num)
+			self._i2c.write_device(self._addrs[naddr], 0xA0, bytearray([self._state & 0xff, 0x00]))
+		except Exception as e:
+			raise RuntimeError("Cannot find a Ultrasonic sensor", e)
+
 '''Potentiometer'''
 class Dimmer(Base):
 	_addrs = [0x2C, 0x2D, 0x2E, 0x2F]

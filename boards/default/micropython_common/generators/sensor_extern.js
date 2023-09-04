@@ -768,6 +768,58 @@ Blockly.Python.forBlock['robot_color_extern_get_value'] = function(){
     }
 };
 
+Blockly.Python.forBlock['robot_sonar_extern_get_value'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    if (version=='mixbot_s2'){
+    Blockly.Python.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
+    var code = 'ext_sonar.value('+ mode +")";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+    }
+    else if (version=='mixgo_baize'){
+    Blockly.Python.definitions_['import_machine'] = 'import machine';
+    Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
+    if(mode=="0"){
+    Blockly.Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+    Blockly.Python.definitions_['import_left_sonar']='ext_sonar_left = i2cdevice.Sonar(ext_i2c_left)';
+    var code = 'ext_sonar_left.value()';
+    }
+    else if(mode=="1"){
+    Blockly.Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+    Blockly.Python.definitions_['import_right_sonar']='ext_sonar_right = i2cdevice.Sonar(ext_i2c_right)';
+    var code = 'ext_sonar_right.value()';
+    }
+    return [code, Blockly.Python.ORDER_ATOMIC];
+    }
+};
+
+Blockly.Python.forBlock['robot_sonar_extern_led'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
+    var light = Blockly.Python.valueToCode(this, 'light', Blockly.Python.ORDER_ATOMIC);
+    var op = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
+    if (version=='mixbot_s2'){
+    Blockly.Python.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
+    var code = 'ext_sonar.led('+ mode+','+light+','+op +")\n";
+    return code;
+    }
+    else if (version=='mixgo_baize'){
+    Blockly.Python.definitions_['import_machine'] = 'import machine';
+    Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
+    if(mode=="0"){
+    Blockly.Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+    Blockly.Python.definitions_['import_left_sonar']='ext_sonar_left = i2cdevice.Sonar(ext_i2c_left)';
+    var code = 'ext_sonar_left.led(0,'+light+','+op+')\n';
+    }
+    else if(mode=="1"){
+    Blockly.Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+    Blockly.Python.definitions_['import_right_sonar']='ext_sonar_right = i2cdevice.Sonar(ext_i2c_right)';
+    var code = 'ext_sonar_right.led(0,'+light+','+op+')\n';
+    }
+    return code;
+    }
+};
+
 Blockly.Python.forBlock['mixbot_sensor_extern_get_addr'] = function(){
     var name = this.getFieldValue('name');    
     Blockly.Python.definitions_['import_mixbot_ext_'+name] = 'from mixbot_ext import '+name;

@@ -3533,5 +3533,7 @@ En.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = 'draw %1 line %2 x %3 y %4 length %5 co
 En.mpython_display_line_MESSAGE0 ='draw line %1 x1 %2 y1 %3 to x2 %4 y2 %5 color %6';
 En.MIXLY_TOUCH_SLIDE = "slide touch";
 En.MIXLY_TOUCH_SLIDE_TOOLTIP = "The touch value is close to 0 by default, increases when touching in the direction of IO3, and decreases when touching in the direction of IO4.";
+En.MIXLY_EXTERN_SONAR = "ultrasonic sensor";
+En.MIXLY_EXTERN_INDICATOR_LIGHT = "pilot light";
 
 })();

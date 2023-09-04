@@ -3670,5 +3670,7 @@ ZhHans.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = '绘制 %1 线 %2 x %3 y %4 长度%
 ZhHans.mpython_display_line_MESSAGE0 ='绘制 线条%1 x1%2 y1 %3 到 x2 %4 y2 %5 颜色 %6';
 ZhHans.MIXLY_TOUCH_SLIDE = "滑动触摸";
 ZhHans.MIXLY_TOUCH_SLIDE_TOOLTIP = "触摸值，默认接近0，往IO3方向触摸滑动值变大，往IO4方向触摸滑动值变小。";
+ZhHans.MIXLY_EXTERN_SONAR = "超声波传感器";
+ZhHans.MIXLY_EXTERN_INDICATOR_LIGHT = "指示灯";
 
 })();

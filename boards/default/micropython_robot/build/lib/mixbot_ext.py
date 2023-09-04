@@ -16,11 +16,11 @@ ext_motor = i2cdevice.Motor(ext_i2c)
 ext_traffic = i2cdevice.Traffic_LED(ext_i2c)
 
 '''LED /RGBYW'''
-ext_rled = i2cdevice.R_LED(ext_i2c)
-ext_gled = i2cdevice.G_LED(ext_i2c)
-ext_bled = i2cdevice.B_LED(ext_i2c)
-ext_yled = i2cdevice.Y_LED(ext_i2c)
-ext_wled = i2cdevice.W_LED(ext_i2c)
+R_LED = i2cdevice.R_LED(ext_i2c)
+G_LED = i2cdevice.G_LED(ext_i2c)
+B_LED = i2cdevice.B_LED(ext_i2c)
+Y_LED = i2cdevice.Y_LED(ext_i2c)
+W_LED = i2cdevice.W_LED(ext_i2c)
 
 '''button*5'''
 ext_button = i2cdevice.Buttonx5(ext_i2c)
@@ -39,3 +39,6 @@ ext_color = i2cdevice.Color_ID(ext_i2c)
 
 '''Servo Motor'''
 ext_servo = i2cdevice.Motor_servo(ext_i2c)
+
+'''Sonar'''
+ext_sonar = i2cdevice.Sonar(ext_i2c)

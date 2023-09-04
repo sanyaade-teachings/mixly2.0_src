@@ -3505,5 +3505,7 @@ ZhHant.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = '繪製 %1 線 %2 x %3 y %4 長度%
 ZhHant.mpython_display_line_MESSAGE0 ='繪製 線條%1 x1%2 y1 %3 到 x2 %4 y2 %5 顏色 %6';
 ZhHant.MIXLY_TOUCH_SLIDE = "滑動觸摸";
 ZhHant.MIXLY_TOUCH_SLIDE_TOOLTIP = "觸摸值，默認接近0，往IO3方向觸摸滑動值變大，往IO4方向觸摸滑動值變小。";
+ZhHant.MIXLY_EXTERN_SONAR = "超聲波感測器";
+ZhHant.MIXLY_EXTERN_INDICATOR_LIGHT = "指示燈";
 
 })();

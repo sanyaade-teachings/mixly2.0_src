@@ -51,7 +51,7 @@ Env.pyFilePath = null;
   */
 Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
 Env.indexDirPath = decodeURIComponent(Env.indexDirPath);
-if (Env.currentPlatform === 'darwin') {
+if (goog.isElectron && ['darwin', 'linux'].includes(Env.currentPlatform)) {
   Env.indexDirPath = '/' + Env.indexDirPath;
 }
 

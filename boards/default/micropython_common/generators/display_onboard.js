@@ -592,7 +592,7 @@ Blockly.Python.forBlock['bitbot_display_image_create'] = function(block) {
 //mixgo_zi onboard tft below:
 Blockly.Python.forBlock['onboard_tft_show_image'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "onboard_tft.image(" + data + ",color=0xffff)\n";
     return code;
@@ -600,7 +600,7 @@ Blockly.Python.forBlock['onboard_tft_show_image'] = function() {
 
 Blockly.Python.forBlock['onboard_tft_show_image_xy'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
@@ -612,7 +612,7 @@ Blockly.Python.forBlock['onboard_tft_show_image_xy'] = function() {
 
 Blockly.Python.forBlock['onboard_tft_show_string'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "onboard_tft.shows(" + data + ",color=0xffff)\n";
     return code;
@@ -620,7 +620,7 @@ Blockly.Python.forBlock['onboard_tft_show_string'] = function() {
 
 Blockly.Python.forBlock['onboard_tft_show_image_or_string_delay'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
@@ -642,7 +642,7 @@ Blockly.Python.forBlock['onboard_tft_show_frame_string'] = function() {
 
 Blockly.Python.forBlock['onboard_tft_show_frame_string_delay'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+     Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
@@ -662,7 +662,7 @@ Blockly.Python.forBlock['onboard_tft_scroll_string'] = function() {
 
 Blockly.Python.forBlock['onboard_tft_scroll_string_delay'] = function() {  
      var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-     Blockly.Python.definitions_['import_'+version+'_onboard_oled'] = "from "+version+" import onboard_tft";
+     Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
      var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
      var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
      var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
@@ -708,4 +708,64 @@ Blockly.Python.forBlock['onboard_tft_display_line'] = function (block) {
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ')\n'+'onboard_tft.show()\n';
   return code;
+};
+
+Blockly.Python.forBlock['onboard_tft_clear'] = function(block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var code = 'onboard_tft.fill(0)\n'+'onboard_tft.show()\n';
+  return code;
+};
+
+Blockly.Python.forBlock['onboard_tft_shift'] = function(a) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var op = a.getFieldValue("OP");
+  var value = Blockly.Python.valueToCode(a, 'val', Blockly.Python.ORDER_ATOMIC);
+  var code = 'onboard_tft.' + op + '(' + value + ')\n';
+  return code;
+};
+
+Blockly.Python.forBlock['onboard_tft_get_pixel'] = function(block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var value_x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
+  var value_y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
+  var code = 'hex(onboard_tft.pixel(int(' + value_x + '), int(' + value_y + ')))';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['onboard_tft_bright_point'] = function() {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var color = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
+    var code ='onboard_tft.pixel(int(' + x + '), int(' + y + '), '+ color + ")\n"+'onboard_tft.show()\n';
+    return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_get_screen_pixel'] = function() {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var code = 'onboard_tft.get_brightness()';
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+
+
+Blockly.Python.forBlock['onboard_tft_bright_screen'] = function() {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = 'onboard_tft.set_brightness(' + x + ')\n';
+    return code;
+};
+
+Blockly.Python.forBlock['onboard_tft_fill'] = function() {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+    var color = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT);
+    var code = 'onboard_tft.fill(' + color + ')\nonboard_tft.show()\n';
+    return code;
 };

@@ -3535,5 +3535,6 @@ En.MIXLY_TOUCH_SLIDE = "slide touch";
 En.MIXLY_TOUCH_SLIDE_TOOLTIP = "The touch value is close to 0 by default, increases when touching in the direction of IO3, and decreases when touching in the direction of IO4.";
 En.MIXLY_EXTERN_SONAR = "ultrasonic sensor";
 En.MIXLY_EXTERN_INDICATOR_LIGHT = "pilot light";
+En.MIXLY_SCREEN_FILL = "screen fill";
 
 })();

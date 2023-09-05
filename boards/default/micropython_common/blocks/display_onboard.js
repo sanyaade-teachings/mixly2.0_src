@@ -1272,3 +1272,131 @@ Blockly.Blocks['onboard_tft_display_line'] = {
     });
   }
 };
+
+Blockly.Blocks['onboard_tft_shift'] = {
+  init: function() {
+    var OPERATORS =
+        [[Blockly.Msg.MIXLY_UP, 'shift_up'],
+         [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
+         [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
+         [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
+        ];
+    //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    // this.setOutput(true);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_LET)
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
+        .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
+    this.appendValueInput('val')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_SHIFT)
+        .setCheck(Number);
+    this.appendDummyInput('')
+        .appendField(Blockly.Msg.DISPLAY_IMAGE_UNIT)
+    var thisBlock = this;
+        this.setTooltip(function() {
+        var mode = thisBlock.getFieldValue('OP');
+        var mode0 = Blockly.Msg.DISPLAY_IMAGE_LET;
+        var mode1 = Blockly.Msg.DISPLAY_IMAGE_LET2;
+        var mode2 = Blockly.Msg.DISPLAY_IMAGE_LET3;
+        var TOOLTIPS = {
+        'up': Blockly.Msg.MIXLY_UP,
+        'down':Blockly.Msg.MIXLY_DOWN,
+        'left':Blockly.Msg.MIXLY_LEFT,
+        'right':Blockly.Msg.MIXLY_RIGHT
+      };
+      return mode0 + mode1 +TOOLTIPS[mode]+mode2;
+    });
+  }
+};
+
+Blockly.Blocks.onboard_tft_get_pixel = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+     this.appendDummyInput('')
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+      this.appendValueInput('x')
+        .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
+      this.appendValueInput('y')
+          .setCheck(Number)
+          .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_PLOT_POINT_Y);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.HTML_COLOUR);
+    this.setInputsInline(true);
+      this.setOutput(true, Number);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_JS_MONITOR_BRIGHTNESS);
+  }
+};
+
+Blockly.Blocks.onboard_tft_bright_point = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.appendValueInput('x')
+        .setCheck(Number)
+        .appendField(Blockly.Msg.MIXLY_LCD_SETCOLOR)
+          .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_GET_POINT_X);
+    this.appendValueInput('y')
+        .setCheck(Number)
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_PLOT_POINT_Y);
+    this.appendValueInput('VAR')
+        .appendField(Blockly.Msg.HTML_COLOUR);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_DISPLAY_SETPIXEL);
+  }
+};
+
+
+
+Blockly.Blocks.onboard_tft_clear = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+  this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_Clear_display);
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_Clear_display);
+  }
+};
+
+Blockly.Blocks.onboard_tft_get_screen_pixel = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_ESP32_JS_MONITOR_GET_SCREEN_BRIGHTNESS);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_JS_MONITOR_GET_SCREEN_BRIGHTNESS);
+  }
+};
+
+Blockly.Blocks.onboard_tft_bright_screen = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+  this.appendValueInput('x')
+      .setCheck(Number)
+      .appendField(Blockly.Msg.MIXLY_ESP32_JS_MONITOR_SET_SCREEN_BRIGHTNESS)
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  this.setTooltip(Blockly.Msg.MIXLY_ESP32_JS_MONITOR_SET_SCREEN_BRIGHTNESS + ' 0.0-1.0');
+  }
+};
+
+Blockly.Blocks.onboard_tft_fill = {
+  init: function() {
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+  this.appendValueInput('VAR')
+      .appendField(Blockly.Msg.MIXLY_SCREEN_FILL)
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setInputsInline(true);
+  }
+};

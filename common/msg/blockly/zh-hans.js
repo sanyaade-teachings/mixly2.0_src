@@ -3672,5 +3672,6 @@ ZhHans.MIXLY_TOUCH_SLIDE = "滑动触摸";
 ZhHans.MIXLY_TOUCH_SLIDE_TOOLTIP = "触摸值，默认接近0，往IO3方向触摸滑动值变大，往IO4方向触摸滑动值变小。";
 ZhHans.MIXLY_EXTERN_SONAR = "超声波传感器";
 ZhHans.MIXLY_EXTERN_INDICATOR_LIGHT = "指示灯";
+ZhHans.MIXLY_SCREEN_FILL = "屏幕填充";
 
 })();

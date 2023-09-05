@@ -83,16 +83,6 @@ class EditorBlockly {
         }
     }
 
-    py2BlockEditorInit(codeEditor) {
-        if (typeof Sk === 'object'
-            && typeof PythonToBlocks === 'function'
-            && typeof Py2blockEditor === 'function') {
-            const py2blockConverter = new PythonToBlocks();
-            this.py2BlockEditor = new Py2blockEditor(py2blockConverter, tcodeEditor);
-            Sk.python3 = true;
-        }
-    }
-
     updateCode() {
         if (typeof this.codeChangeListener  === 'function') {
             this.editor.fireChangeListener(this.codeChangeListener);

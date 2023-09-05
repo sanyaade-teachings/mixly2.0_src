@@ -120,11 +120,11 @@ Py2blockEditor.prototype.setBlocks = function(python_code){
         }
     }
     var error_code = this.convert.convertSourceToCodeBlock(python_code);
-    var errorXml = Blockly.Xml.textToDom(error_code);
+    var errorXml = Blockly.utils.xml.textToDom(error_code);
     if (python_code == '' || python_code == undefined || python_code.trim() == '') {
         Mixly.Editor.blockEditor.clear();
     } else if (xml_code !== '' && xml_code !== undefined) {
-        var blocklyXml = Blockly.Xml.textToDom(xml_code);
+        var blocklyXml = Blockly.utils.xml.textToDom(xml_code);
         try {
             this.setBlocksFromXml(blocklyXml);
         } catch (e) {
@@ -137,9 +137,8 @@ Py2blockEditor.prototype.setBlocks = function(python_code){
 }
 
 Py2blockEditor.prototype.setBlocksFromXml = function(xml){
-    //Mixly.Editor.blockEditor.clear();
-    //Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
-    Blockly.Xml.domToWorkspaceDestructive(xml, Mixly.Editor.blockEditor);
+    Mixly.Editor.blockEditor.clear();
+    Blockly.Xml.domToWorkspace(xml, Mixly.Editor.blockEditor);
     Mixly.Editor.blockEditor.scrollCenter();
 }
 

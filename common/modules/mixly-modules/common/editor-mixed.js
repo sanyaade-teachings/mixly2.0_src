@@ -34,6 +34,7 @@ class EditorMixed {
         this.blockEditor.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.codeChangeEvent(event);
         });
+        this.py2BlockEditorInit();
     }
 
     py2BlockEditorInit() {
@@ -41,7 +42,7 @@ class EditorMixed {
             && typeof PythonToBlocks === 'function'
             && typeof Py2blockEditor === 'function') {
             const py2blockConverter = new PythonToBlocks();
-            this.py2BlockEditor = new Py2blockEditor(py2blockConverter, this.editor);
+            this.py2BlockEditor = new Py2blockEditor(py2blockConverter, this.codeEditor.editor);
             Sk.python3 = true;
         }
     }
@@ -181,9 +182,8 @@ class EditorMixed {
                     this.selected = 'CODE';
                     codeEditor.shown = true;
                     blockEditor.shown = false;
-                    const { py2BlockEditor } = blockEditor;
-                    if (py2BlockEditor && BOARD.pythonToBlockly) {
-                        py2BlockEditor.fromCode = true;
+                    if (this.py2BlockEditor && BOARD.pythonToBlockly) {
+                        this.py2BlockEditor.fromCode = true;
                     }
                     break;
                 }
@@ -201,11 +201,10 @@ class EditorMixed {
                 case 'POSITIVE': // 拖拽元素移动方向：左→右 退出代码编辑器，进入块编辑器
                     $codeArea.removeClass('icon-block').addClass('icon-code-1');
                     $codeArea.parent().attr('m-id', 'code-area');
-                    const { py2BlockEditor } = blockEditor;
-                    if (py2BlockEditor 
+                    if (this.py2BlockEditor 
                         && BOARD.pythonToBlockly 
-                        && typeof py2BlockEditor.updateBlock === 'function') {
-                        py2BlockEditor.updateBlock();
+                        && typeof this.py2BlockEditor.updateBlock === 'function') {
+                        this.py2BlockEditor.updateBlock();
                     }
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 侧边代码栏开始显示
@@ -251,6 +250,11 @@ class EditorMixed {
                     $a.removeClass('icon-block').addClass('icon-code-1');
                     $vBar.removeClass('icon-hide-bar-e').addClass('icon-show-bar-e');
                     this.drag.full('POSITIVE');
+                    if (this.py2BlockEditor 
+                        && BOARD.pythonToBlockly 
+                        && typeof this.py2BlockEditor.updateBlock === 'function') {
+                        this.py2BlockEditor.updateBlock();
+                    }
                     break;
                 }
             });

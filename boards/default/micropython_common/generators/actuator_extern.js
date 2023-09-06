@@ -280,7 +280,7 @@ Blockly.Python.forBlock['robot_motor_extern'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_motor'] = 'from mixbot_ext import ext_motor';    
     var code = 'ext_motor.run('+ mode + ',' + speed +")\n";
     return code;
@@ -305,7 +305,7 @@ Blockly.Python.forBlock['robot_motor_extern'] = function(){
 Blockly.Python.forBlock['robot_motor_extern_get_speed'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     var code = 'ext_motor.run('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
@@ -330,7 +330,7 @@ Blockly.Python.forBlock['robot_traffic_light_extern'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var light = this.getFieldValue('light');
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_traffic'] = 'from mixbot_ext import ext_traffic';
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var light = this.getFieldValue('light');
@@ -373,7 +373,7 @@ Blockly.Python.forBlock['robot_led_extern'] = function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var color = this.getFieldValue('color');  
     var value = Blockly.Python.valueToCode(this, 'value', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_'+color+'_LED'] = 'from mixbot_ext import '+color+'_LED';    
     var code = color+'_LED.brightness('+ mode + ',' + value +")\n";
     return code;
@@ -399,7 +399,7 @@ Blockly.Python.forBlock['robot_led_extern_get_value'] = function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var color = this.getFieldValue('color');    
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_'+color+'_LED'] = 'from mixbot_ext import '+color+'_LED';
     var code = color+'_LED.brightness('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -425,7 +425,7 @@ Blockly.Python.forBlock['robot_servo_extern_get_status'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var status = this.getFieldValue('status');
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
     var code = 'ext_servo.state('+ mode +")"+status;
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -451,7 +451,7 @@ Blockly.Python.forBlock['robot_servo_extern_stop_mode'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var status = this.getFieldValue('status');
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';    
     var code = 'ext_servo.stop_mode('+ mode+ "," + status +")\n";
     return code;
@@ -476,7 +476,7 @@ Blockly.Python.forBlock['robot_servo_extern_stop_mode'] = function(){
 Blockly.Python.forBlock['robot_servo_extern_stop'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';    
     var code = 'ext_servo.stop('+ mode +")\n";
     return code;
@@ -505,7 +505,7 @@ Blockly.Python.forBlock['robot_servo_extern_absolute_run'] = function(){
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
     var direction = this.getFieldValue('direction');
     var angle = Blockly.Python.valueToCode(this, 'angle', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
     var code = 'ext_servo.absolute_run('+ mode+ "," + status+ ","+ speed + "," + direction + "," +angle +")\n";
     return code;
@@ -531,7 +531,7 @@ Blockly.Python.forBlock['robot_servo_extern_absolute_run'] = function(){
 Blockly.Python.forBlock['robot_servo_extern_relative_origin'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';    
     var code = 'ext_servo.relative_origin('+ mode +")\n";
     return code;
@@ -559,7 +559,7 @@ Blockly.Python.forBlock['robot_servo_extern_relative_run'] = function(){
     var status = this.getFieldValue('status');
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
     var angle = Blockly.Python.valueToCode(this, 'angle', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
     var code = 'ext_servo.relative_run('+ mode+ "," + status+ ","+ speed + ","  +angle +")\n";
     return code;
@@ -587,7 +587,7 @@ Blockly.Python.forBlock['robot_servo_extern_relative_continue'] = function(){
     var status = this.getFieldValue('status');
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
     var direction = this.getFieldValue('direction');
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
     var code = 'ext_servo.relative_continue('+ mode+ "," + status+ ","+ speed + ","  +direction +")\n";
     return code;

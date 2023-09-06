@@ -653,7 +653,7 @@ Blockly.Python.forBlock['robot_button_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var num = this.getFieldValue('num');    
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_button'] = 'from mixbot_ext import ext_button';
     var code = 'ext_button.value('+ mode +")"+num;
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -678,7 +678,7 @@ Blockly.Python.forBlock['robot_button_extern_get_value'] = function(){
 Blockly.Python.forBlock['robot_touch_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){    
+    if (version=='mixbot'){    
     Blockly.Python.definitions_['import_mixbot_ext_ext_collision'] = 'from mixbot_ext import ext_collision';
     var code = 'ext_collision.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -703,7 +703,7 @@ Blockly.Python.forBlock['robot_touch_extern_get_value'] = function(){
 
 Blockly.Python.forBlock['robot_infrared_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_mixbot_ext_ext_infrared'] = 'from mixbot_ext import ext_infrared';
     var code = 'ext_infrared.value('+ mode +")";
@@ -720,7 +720,7 @@ Blockly.Python.forBlock['robot_infrared_extern_get_value'] = function(){
 Blockly.Python.forBlock['robot_potentiometer_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_potentiometer'] = 'from mixbot_ext import ext_potentiometer';
     var code = 'ext_potentiometer.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -746,7 +746,7 @@ Blockly.Python.forBlock['robot_color_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var color = this.getFieldValue('color');
-    if (version=='mixbot_s2'){        
+    if (version=='mixbot'){        
     Blockly.Python.definitions_['import_mixbot_ext_ext_color'] = 'from mixbot_ext import ext_color';
     var code = 'ext_color.recognition('+ mode +")"+color;
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -771,7 +771,7 @@ Blockly.Python.forBlock['robot_color_extern_get_value'] = function(){
 Blockly.Python.forBlock['robot_sonar_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
     var code = 'ext_sonar.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
@@ -798,7 +798,7 @@ Blockly.Python.forBlock['robot_sonar_extern_led'] = function(){
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
     var light = Blockly.Python.valueToCode(this, 'light', Blockly.Python.ORDER_ATOMIC);
     var op = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
-    if (version=='mixbot_s2'){
+    if (version=='mixbot'){
     Blockly.Python.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
     var code = 'ext_sonar.led('+ mode+','+light+','+op +")\n";
     return code;

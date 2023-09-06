@@ -18,7 +18,7 @@ Blockly.Blocks.display_show_image = {
     this.setNextStatement(true, null);
     this.setInputsInline(true);
     var version = Mixly.Boards.getSelectedBoardKey()
-    if(version=='micropython:esp32:mixbot_s1' || version=='micropython:esp32:mixbot_s2'){
+    if(version=='micropython:esp32:mixbot'){
       this.setTooltip(Blockly.Msg.MIXLY_MIXBOT_SHOW_SCROLL_STRING_TOOLTIP);
     }
     

@@ -1,7 +1,7 @@
 {
     "board": {
         "元控•白泽": "micropython:esp32c3:mixgo_baize",
-        "超霸大师": "micropython:esp32:mixbot_s2",
+        "超霸大师": "micropython:esp32:mixbot",
         "机器人大师": "micropython:esp32:rm_e1"
     },
     "language": "MicroPython",
@@ -14,7 +14,7 @@
         "micropython:esp32:rm_e1": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
         },
-        "micropython:esp32:mixbot_s2": {
+        "micropython:esp32:mixbot": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/MixBot-0x1000-V1.19.1.bin\""
         }
     },
@@ -106,7 +106,7 @@
                     }
                 ]
             },
-            "micropython:esp32:mixbot_s2": {
+            "micropython:esp32:mixbot": {
                 "binFile": [
                     {
                         "offset": "0x1000",

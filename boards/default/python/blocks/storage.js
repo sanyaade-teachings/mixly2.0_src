@@ -460,3 +460,37 @@ Blockly.Blocks['storage_file_write'] = {
    }
  };
 
+Blockly.Blocks.sdcard_use_spi_init = {
+    init: function () {
+        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.appendValueInput('SPISUB')
+            .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH+"SPI")
+            .setCheck("var");
+        this.appendValueInput('PINSUB')
+            .appendField("CS")
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_MAKE)
+            .setCheck("var");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.LISTS_SET_INDEX_INPUT_TO)
+            .appendField(Blockly.Msg.MIXLY_SD_CARD);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+    }
+};
+
+Blockly.Blocks['sdcard_mount'] = {
+    init:function(){
+        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.appendValueInput('VAR')            
+            .appendField(Blockly.Msg.MIXLY_SD_CARD);
+        this.appendValueInput("DIR")
+            .setCheck(String)
+            .appendField(Blockly.Msg.MIXLY_SDCARD_MOUNT);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip();
+    }
+}

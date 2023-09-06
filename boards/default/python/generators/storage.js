@@ -163,3 +163,22 @@ Blockly.Python.forBlock['storage_is_file'] = function () {
     var code = "os."+ mode + "(" + file + ")";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.forBlock['sdcard_use_spi_init'] = function(){
+    Blockly.Python.definitions_['import_os'] = 'import os';
+    Blockly.Python.definitions_['import_sdcard'] = 'import sdcard';
+    var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var sv = Blockly.Python.valueToCode(this, 'SPISUB', Blockly.Python.ORDER_ATOMIC);
+    var pv = Blockly.Python.valueToCode(this, 'PINSUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = v + ' = sdcard.SDCard('+ sv + ','+ pv +')\n';     
+    return code;
+};
+
+Blockly.Python.forBlock['sdcard_mount'] = function () {
+    Blockly.Python.definitions_['import_os'] = 'import os';
+    Blockly.Python.definitions_['import_sdcard'] = 'import sdcard';
+    var sd = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
+    var dir = Blockly.Python.valueToCode(this, 'DIR', Blockly.Python.ORDER_ATOMIC);
+    return "os.mount(" + sd+','+dir + ")\n";
+}

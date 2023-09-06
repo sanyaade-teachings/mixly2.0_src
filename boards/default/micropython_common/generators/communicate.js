@@ -5,8 +5,15 @@ goog.require('Blockly.Python');
 
 Blockly.Python.forBlock['communicate_i2c_onboard'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version] = 'import '+version;
-    var code = version+'.onboard_i2c';
+    Blockly.Python.definitions_['import_'+version+'_onboard_i2c'] = 'from '+version+' import onboard_i2c';
+    var code = 'onboard_i2c';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['communicate_spi_onboard'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_i2c'] = 'from '+version+' import onboard_spi';
+    var code = 'onboard_spi';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

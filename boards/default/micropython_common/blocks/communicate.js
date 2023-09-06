@@ -15,6 +15,16 @@ Blockly.Blocks['communicate_i2c_onboard'] = {
     }
 };
 
+Blockly.Blocks['communicate_spi_onboard'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_LED_ON_BOARD+"SPI");
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
 Blockly.Blocks['communicate_i2c_init'] = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);

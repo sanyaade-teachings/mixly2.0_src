@@ -3045,7 +3045,7 @@
       </block>
     </category>
     <category id="catI2C" colour="140">
-      <block type="communicate_i2c_onboard" m-hide='micropython:esp32s2:generic'></block>
+      <block type="communicate_i2c_onboard"></block>
       <block type="communicate_i2c_init">
         <value name="SUB">
           <shadow type="variables_get">
@@ -3125,6 +3125,7 @@
       </block>
     </category>
     <category id="catSPI" colour="140">
+      <block type="communicate_spi_onboard"></block>
       <block type="communicate_spi_init">
         <value name="VAR">
           <shadow type="variables_get">
@@ -5717,7 +5718,38 @@
     </value>
   </block>
   </category>
-  <category id="catFile" colour="0">      
+  <category id="catFile" colour="0">     
+    <block type="sdcard_use_spi_init">
+      <value name="SPISUB">
+        <block type="communicate_spi_onboard"></block>
+        <shadow type="variables_get">
+          <field name="VAR">spi</field>
+        </shadow>
+      </value>
+      <value name="PINSUB">
+        <shadow type="pins_output_pin">
+          <field name="PIN">46</field>
+        </shadow>
+      </value>
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">sd</field>
+        </shadow>
+      </value>
+    </block> 
+    <block type="sdcard_mount">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">sd</field>
+        </shadow>
+      </value>
+      <value name="DIR">
+        <shadow type="text">
+          <field name="TEXT">/sd</field>
+        </shadow>
+      </value>
+      
+    </block>
     <block type="storage_fileopen">
       <value name="FILENAME">
         <shadow type="text">

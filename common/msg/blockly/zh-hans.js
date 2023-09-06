@@ -3673,5 +3673,6 @@ ZhHans.MIXLY_TOUCH_SLIDE_TOOLTIP = "触摸值，默认接近0，往IO3方向触�
 ZhHans.MIXLY_EXTERN_SONAR = "超声波传感器";
 ZhHans.MIXLY_EXTERN_INDICATOR_LIGHT = "指示灯";
 ZhHans.MIXLY_SCREEN_FILL = "屏幕填充";
+ZhHans.MIXLY_SDCARD_MOUNT = "挂载到目录";
 
 })();

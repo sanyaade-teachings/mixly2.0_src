@@ -6181,7 +6181,14 @@
         </shadow>
       </value>
     </block>
-    <block type="ntptime_time"></block>
+    <block type="ntptime_time">
+      <value name="data">
+        <block type="ntptime_address"></block>
+          <shadow type="text">
+            <field name="TEXT">ntp.aliyun.com</field>
+          </shadow>
+        </value>
+    </block>
   </category>
   
   <category id="catFactory" name="Factory" colour="#777777">

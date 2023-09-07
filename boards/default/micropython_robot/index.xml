@@ -5234,14 +5234,14 @@
         <block type="tuple_create_with_noreturn" inline="true">
           <mutation items="2"></mutation>
           <value name="ADD0">
-            <shadow type="text">
+            <block type="text">
               <field name="TEXT">127.0.0.1</field>
-            </shadow>
+            </block>
           </value>
           <value name="ADD1">
-            <shadow type="math_number">
+            <block type="math_number">
               <field name="NUM">80</field>
-            </shadow>
+            </block>
           </value>
         </block>
       </value>
@@ -5253,7 +5253,14 @@
         </shadow>
       </value>
     </block>
-    <block type="ntptime_time"></block>
+    <block type="ntptime_time">
+      <value name="data">
+        <block type="ntptime_address"></block>
+          <shadow type="text">
+            <field name="TEXT">ntp.aliyun.com</field>
+          </shadow>
+        </value>
+    </block>
   </category>
   
   <category id="catFactory" name="Factory" colour="#777777">

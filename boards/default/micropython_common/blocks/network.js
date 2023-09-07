@@ -489,8 +489,17 @@ Blockly.Blocks['ntptime_time'] = {
         this.setColour(Blockly.Msg['NETWORK_HUE']);        
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GET_NTP+'(NTP)')
-        this.appendDummyInput()
+        this.appendValueInput("data")
             .appendField(Blockly.Msg.blynk_SERVER_ADD)
+        this.setOutput(true, 'Tuple');
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['ntptime_address'] = {
+    init: function() {
+        this.setColour(Blockly.Msg['NETWORK_HUE']);
+        this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([
                 ['ntp.aliyun.com', "ntp.aliyun.com"],
                 ['ntp1.aliyun.com', "ntp1.aliyun.com"],
@@ -505,8 +514,7 @@ Blockly.Blocks['ntptime_time'] = {
                 ['time3.cloud.tencent.com', "time3.cloud.tencent.com"],
                 ['time4.cloud.tencent.com', "time4.cloud.tencent.com"],
                 ['time5.cloud.tencent.com', "time5.cloud.tencent.com"]
-            ]), "mode");
-        this.setOutput(true, 'Tuple');
-        this.setInputsInline(true);
+            ]), 'op')
+        this.setOutput(true);
     }
 };

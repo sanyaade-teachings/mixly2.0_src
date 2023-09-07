@@ -233,7 +233,12 @@ Blockly.Python.forBlock['requests_method'] = function() {
 
 Blockly.Python.forBlock['ntptime_time'] = function() {
     Blockly.Python.definitions_['import_ntptime'] = "import ntptime";
-    var mode=this.getFieldValue('mode');
-    var code= "ntptime.time(host='"+mode+"')";
+    var str =Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ATOMIC) ;
+    var code= "ntptime.time(host="+str+")";
     return [code,Blockly.Python.ORDER_ATOMIC];
 }
+
+Blockly.Python.forBlock['ntptime_address'] = function () {
+    var code = "'"+this.getFieldValue('op')+"'";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

@@ -77,20 +77,8 @@ Boards.init = () => {
 }
 
 Boards.getType = () => {
-    let str = BOARD.boardIndex ?? '';
-    str = str.replaceAll('\\', '/');
-    if (BOARD.thirdPartyBoard) {
-        let results = str.match(/(?<=boards\/extend\/)[^?\/\\、*\"><|]+/g);
-        if (results instanceof Array) {
-            return results[0];
-        }
-    } else {
-        let results = str.match(/(?<=boards\/default\/)[^?\/\\、*\"><|]+/g);
-        if (results instanceof Array) {
-            return results[0];
-        }
-    }
-    return BOARD.boardType;
+    const { boardIndex = '' } = BOARD;
+    return path.basename(path.dirname(boardIndex)) ?? BOARD.boardType;
 }
 
 Boards.getSelectedBoardName = () => {

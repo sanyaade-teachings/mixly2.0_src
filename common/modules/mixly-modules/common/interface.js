@@ -41,19 +41,37 @@ const {
     Editor,
     Msg,
     LevelSelector,
-    FooterBar
+    FooterBar,
+    Electron,
+    Web
 } = Mixly;
 
 const { BOARD, USER } = Config;
 const electron = Mixly.require('electron');
 
 Interface.init = () => {
+    Nav.register({
+        id: 'home-btn',
+        preconditionFn: () => {
+            return true;
+        },
+        callback: () => {
+            if (goog.isElectron) {
+                Electron.Loader.onbeforeunload();
+            } else {
+                Interface.onbeforeunload();
+            }
+        },
+        scopeType: Nav.Scope.LEFT,
+        weight: -1
+    });
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
-    const { FooterLayerExample } = goog.isElectron? Mixly.Electron : Mixly.Web;
+    const { FooterLayerExample } = goog.isElectron? Electron : Web;
     if (FooterLayerExample instanceof Object) {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
-    Nav.init();
+    // Nav.init();
+    Nav.init_();
     FooterBar.init();
     NavEvents.init();
     if (Env.hasSocketServer) {
@@ -63,7 +81,7 @@ Interface.init = () => {
 }
 
 Interface.onresize = (event) => {
-    const $nav = $('#nav');
+    /*const $nav = $('#nav');
     const $navLeftBtnList = $('#nav-left-btn-list');
     const $navRightBtnList = $('#nav-right-btn-list');
     const $liOperate = $('#li_operate');
@@ -88,7 +106,7 @@ Interface.onresize = (event) => {
             $navItem.css('display', 'inline-block');
         }
         Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
-    }
+    }*/
     const { codeEditor, blockEditor } = Editor.mainEditor;
     codeEditor.resize();
     blockEditor.resize();
@@ -123,7 +141,6 @@ window.addEventListener('load', () => {
         Editor.init();
         Boards.init();
         if (goog.isElectron) {
-            const { Electron } = Mixly;
             const {
                 LibManager = undefined,
                 WikiManager = undefined
@@ -142,7 +159,6 @@ window.addEventListener('load', () => {
         Boards.updateCategories(selectedBoardName);
         Msg.renderToolbox(true);
         if (goog.isElectron) {
-            const { Electron } = Mixly;
             const { Serial = undefined } = Electron;
             if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
                 Serial.addStatusbarTabExtFunc();
@@ -154,6 +170,7 @@ window.addEventListener('load', () => {
         }
         window.addEventListener('resize', Interface.onresize, false);
         Interface.onresize();
+        Nav.resize();
         if (BOARD.nav.levelSelector) {
             LevelSelector.init();
             const $loading = $('.loading');

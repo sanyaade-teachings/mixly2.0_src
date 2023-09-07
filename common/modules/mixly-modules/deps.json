@@ -164,7 +164,8 @@
             "Mixly.EditorMixed",
             "Mixly.StatusBarTab",
             "Mixly.Msg",
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Nav"
         ],
         "provide": [
             "Mixly.Editor"
@@ -253,6 +254,16 @@
         ],
         "provide": [
             "Mixly.FooterLayer"
+        ]
+    },
+    {
+        "path": "/common/id-generator.js",
+        "require": [
+            "shortid",
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.IdGenerator"
         ]
     },
     {
@@ -441,10 +452,21 @@
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Command",
-            "Mixly.XML"
+            "Mixly.XML",
+            "Mixly.IdGenerator",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.Nav"
+        ]
+    },
+    {
+        "path": "/common/regression.js",
+        "require": [
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.Regression"
         ]
     },
     {
@@ -461,7 +483,7 @@
         "path": "/common/serial-charts.js",
         "require": [
             "Highcharts",
-            "Mixly.Env",
+            "Mixly.Regression",
             "Mixly.Config",
             "Mixly.Msg"
         ],
@@ -620,6 +642,7 @@
             "Mixly.MArray",
             "Mixly.Msg",
             "Mixly.MString",
+            "Mixly.Nav",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -637,6 +660,7 @@
             "Mixly.MFile",
             "Mixly.MString",
             "Mixly.Msg",
+            "Mixly.Nav",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -834,6 +858,7 @@
             "Mixly.MFile",
             "Mixly.Boards",
             "Mixly.Msg",
+            "Mixly.Nav",
             "Mixly.Web.Serial",
             "Mixly.Web.Esptool",
             "Mixly.Web.USB",

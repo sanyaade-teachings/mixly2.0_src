@@ -6,6 +6,7 @@ goog.require('Mixly.EditorMixed');
 goog.require('Mixly.StatusBarTab');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
+goog.require('Mixly.Nav');
 goog.provide('Mixly.Editor');
 
 const {
@@ -14,6 +15,7 @@ const {
     StatusBarTab,
     Msg,
     Config,
+    Nav,
     Editor
 } = Mixly;
 
@@ -38,6 +40,30 @@ Editor.init = () => {
     mainStatusBarTab.changeTo('output');
     Mixly.mainStatusBarTab = mainStatusBarTab;
     Editor.addBtnClickEvent();
+    Nav.register({
+        icon: 'icon-ccw',
+        title: 'undo(ctrl+z)',
+        id: 'undo-btn',
+        displayText: Blockly.Msg.MSG['undo'],
+        preconditionFn: () => {
+            return true;
+        },
+        callback: () => mainEditor.undo(),
+        scopeType: Nav.Scope.LEFT,
+        weight: 0
+    });
+    Nav.register({
+        icon: 'icon-cw',
+        title: 'redo(ctrl+y)',
+        id: 'redo-btn',
+        displayText: Blockly.Msg.MSG['redo'],
+        preconditionFn: () => {
+            return true;
+        },
+        callback: () => mainEditor.redo(),
+        scopeType: Nav.Scope.LEFT,
+        weight: 1
+    });
 }
 
 Editor.addDrag = () => {

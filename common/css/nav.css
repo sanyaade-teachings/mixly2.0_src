@@ -298,7 +298,7 @@ html[data-bs-theme=dark] #nav .layui-anim > dd > button {
     user-select: none;
 }
 
-#copyright {
+/*#copyright {
     font-family: "YaHei Consolas Hybrid", "Microsoft Yahei Light", "Arial";
     font-size: 12px;
     color: #fff;
@@ -310,7 +310,7 @@ html[data-bs-theme=dark] #nav .layui-anim > dd > button {
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-}
+}*/
 
 .layui-nav .layui-nav-item a {
     position: relative;
@@ -555,23 +555,9 @@ html[data-bs-theme=light] #nav button > a:hover {
     color: #fff;
 }
 
-#nav-left-btn-list > button {
-    margin-left: 5px;
-}
-
+#nav-left-btn-list > button,
 #nav-right-btn-list > button {
-    margin-left: 5px;
-}
-
-#mixly-path {
-    color: #eee;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 18px;
-}
-
-#mixly-path:hover {
-    color: #fff;
+    margin: 2px;
 }
 
 html[data-bs-theme=light] .layui-table-tips-main {

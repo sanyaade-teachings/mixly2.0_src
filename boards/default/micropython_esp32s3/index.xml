@@ -6154,7 +6154,7 @@
     <block type="network_socket_receive">
       <value name="VAR">
         <shadow type="variables_get">
-          <field name="VAR">conn</field>
+          <field name="VAR">s</field>
         </shadow>
       </value>
       <value name="size">
@@ -6166,10 +6166,18 @@
     <block type="network_socket_send">
       <value name="VAR">
         <shadow type="variables_get">
-          <field name="VAR">conn</field>
+          <field name="VAR">s</field>
         </shadow>
       </value>
       <value name="content">
+        <block type="text_to_number">
+          <field name="TOWHAT">b</field>
+            <value name="VAR">
+              <shadow type="text">
+                <field name="TEXT">Mixly</field>
+              </shadow>
+            </value>
+          </block>
         <shadow type="variables_get">
           <field name="VAR">response</field>
         </shadow>
@@ -6178,7 +6186,7 @@
     <block type="network_socket_receive_from">
       <value name="VAR">
         <shadow type="variables_get">
-          <field name="VAR">conn</field>
+          <field name="VAR">s</field>
         </shadow>
       </value>
       <value name="size">
@@ -6190,16 +6198,24 @@
     <block type="network_socket_send_to">
       <value name="VAR">
         <shadow type="variables_get">
-          <field name="VAR">conn</field>
+          <field name="VAR">s</field>
         </shadow>
       </value>
       <value name="content">
+        <block type="text_to_number">
+          <field name="TOWHAT">b</field>
+            <value name="VAR">
+              <shadow type="text">
+                <field name="TEXT">Mixly</field>
+              </shadow>
+            </value>
+          </block>
         <shadow type="variables_get">
           <field name="VAR">response</field>
         </shadow>
       </value>
       <value name="address">
-        <shadow type="tuple_create_with_noreturn" inline="true">
+        <block type="tuple_create_with_noreturn" inline="true">
           <mutation items="2"></mutation>
           <value name="ADD0">
             <shadow type="text">
@@ -6211,13 +6227,13 @@
               <field name="NUM">80</field>
             </shadow>
           </value>
-        </shadow>
+        </block>
       </value>
     </block>
     <block type="network_socket_close">
       <value name="VAR">
         <shadow type="variables_get">
-          <field name="VAR">conn</field>
+          <field name="VAR">s</field>
         </shadow>
       </value>
     </block>

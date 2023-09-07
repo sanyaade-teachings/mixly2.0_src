@@ -121,7 +121,7 @@ Blockly.Python.forBlock['network_socket_init'] = function() {
     else if (mode=='TCP'){
       mode = 'socket.SOCK_STREAM'
     }
-    return ""+varName+" = socket.socket("+mode+")\n";
+    return ""+varName+" = socket.socket(socket.AF_INET,"+mode+")\n";
 }
 
 Blockly.Python.forBlock['network_socket_bind'] = function() {
@@ -137,7 +137,7 @@ Blockly.Python.forBlock['network_socket_connect'] = function() {
     Blockly.Python.definitions_['import_socket'] = "import socket";
     var varName =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
     var address = Blockly.Python.valueToCode(this, 'address', Blockly.Python.ORDER_ATOMIC);
-    return ""+varName+".connect("+address+")\n";
+    return ""+varName+".connect(socket.getaddrinfo"+address+"[0][-1])\n";
 }
 
 Blockly.Python.forBlock['network_socket_listen'] = function() {

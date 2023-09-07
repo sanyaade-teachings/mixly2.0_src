@@ -127,7 +127,8 @@ Blockly.Blocks['variables_change'] = {
           [Blockly.Msg.MIXLY_MICROBIT_TYPE_LIST, "list"],
           [Blockly.Msg.MIXLY_MICROBIT_TYPE_TUPLE, "tuple"],
           [Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT,"dict"],
-          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD,"set"]
+          [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD,"set"],
+          [Blockly.Msg.LANG_MATH_BYTE,"bytes"]
           ];
         this.appendValueInput('MYVALUE')
             .appendField(new Blockly.FieldDropdown(DATATYPES), 'OP');
@@ -177,6 +178,7 @@ Blockly.Blocks.controls_typeLists = {
               [Blockly.Msg.MIXLY_MICROBIT_TYPE_TUPLE, "tuple"],
               [Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT,"dict"],
               [Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD,"set"],
+              [Blockly.Msg.LANG_MATH_BYTE,"bytes"],
               // [Blockly.Msg.MIXLY_MICROBIT_IMAGE,"image"],
               [Blockly.Msg.LOGIC_NULL,"type(None)"]]), "type");
             //整数、浮点数、字符串、列表、元组、字典、集合、图像不太对, unfinished
@@ -195,6 +197,7 @@ Blockly.Blocks.controls_typeLists = {
         'dict': Blockly.Msg.MIXLY_MICROBIT_TYPE_DICT,
         'set': Blockly.Msg.blockpy_SET_CREATE_WITH_CONTAINER_TITLE_ADD,
         'image':Blockly.Msg.MIXLY_MICROBIT_IMAGE,
+        'bytes':Blockly.Msg.LANG_MATH_BYTE,
         'NoneType': Blockly.Msg.LOGIC_NULL
       };
       return mode0 + TOOLTIPS[mode];

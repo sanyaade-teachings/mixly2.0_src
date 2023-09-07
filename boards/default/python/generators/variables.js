@@ -56,7 +56,8 @@ Blockly.Python.forBlock['variables_change'] = function () {
     // Variable setter.
     var operator = this.getFieldValue('OP');
     var varName = Blockly.Python.valueToCode(this, 'MYVALUE', Blockly.Python.ORDER_ATOMIC) || 'None';
-    var code = operator + '(' + varName + ')';
+    if(operator=='bytes'){var code = operator + '(' + varName + ',"UTF-8")';}
+    else{var code = operator + '(' + varName + ')';}
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

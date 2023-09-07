@@ -9,16 +9,23 @@ MicroPython library for the CE GO (Smart Car base for MixGo CE)
 dahanzimin From the Mixly Team
 """
 
-import time,gc,math
+import time, gc, math
 from tm1931 import TM1931
-from machine import Pin,SoftI2C,ADC
+from machine import Pin, SoftI2C, ADC
 
 '''i2c-onboard'''
 i2c = SoftI2C(scl = Pin(4, pull=Pin.PULL_UP), sda = Pin(5, pull=Pin.PULL_UP), freq = 400000)
+i2c_scan = i2c.scan()
+
+'''Version judgment'''
+if 0x50 in i2c_scan:
+    version = 1
+else:
+    version = 0
 
 '''Judging the type of external motor'''
 Mi2c = 0
-for addr in i2c.scan():
+for addr in i2c_scan:
     if addr in [0x30, 0x31, 0x32, 0x33]:
         Mi2c = addr
         break
@@ -48,19 +55,14 @@ class CAR(TM1931):
 
     def __init__(self, i2c_bus):
         super().__init__(i2c_bus)
-        self._mode=self.CL
-        
-        self.adc0 = ADC(Pin(9))
-        self.adc1 = ADC(Pin(10))
-        self.adc2 = ADC(Pin(1))
-        self.adc3 = ADC(Pin(2))
-        
-        self.adc0.atten(ADC.ATTN_11DB)
-        self.adc1.atten(ADC.ATTN_11DB)
-        self.adc2.atten(ADC.ATTN_11DB)
-        self.adc3.atten(ADC.ATTN_11DB)        
-        
-    def ir_mode(self,select=0):
+        self._mode = self.CL
+        self.atten = 0.82 if version else 1
+        self.adc0 = ADC(Pin(9), atten=ADC.ATTN_11DB)
+        self.adc1 = ADC(Pin(10), atten=ADC.ATTN_11DB)
+        self.adc2 = ADC(Pin(1), atten=ADC.ATTN_11DB)
+        self.adc3 = ADC(Pin(2), atten=ADC.ATTN_11DB)
+
+    def ir_mode(self, select=0):
         '''Infrared line patrol obstacle avoidance mode'''
         self._mode=select
         if select==self.CL:
@@ -118,7 +120,7 @@ class CAR(TM1931):
             raise ValueError('Mode selection error, light seeking data cannot be read')
 
     def motor(self, index, action, speed=0):
-        speed = max(min(speed, 100), -100)
+        speed = round(max(min(speed, 100), -100) * self.atten)
         if action=="N":
             if (index == [1, 2]) and Mi2c:
                 i2c_motor(0)
@@ -201,13 +203,13 @@ class CAR(TM1931):
 try :
     car=CAR(i2c) #Including LED,motor,patrol,obstacle
 except Exception as e:
-    print("Warning: Failed to communicate with TM1931 or",e)
+    print("Warning: Failed to communicate with TM1931 (ME GO CAR) or", e)
 
 '''2Hall_HEP'''
 class HALL:
 
-    _pulse_turns=1/400
-    _pulse_distance=1/400*math.pi*4.4
+    _pulse_turns=1/480 if version else 1/400    #圈数= 1/(减速比*磁极)
+    _pulse_distance=_pulse_turns*math.pi*4.4    #距离= 圈数*π*轮胎直径
 
     def __init__(self, pin):
         self.turns = 0 

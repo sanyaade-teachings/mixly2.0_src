@@ -304,7 +304,7 @@ Blockly.Blocks.game_get_local_img = {
         var imgDirArr=["bg_default.png","bg_astro.png","bg_panda.jpg"]
         for(var i=0; i<imgDirArr.length; i++){
           var dropdownItem = {};
-          dropdownItem.src="./media/mixpyBuild/maps/"+imgDirArr[i];
+          dropdownItem.src=path.join(Mixly.Env.boardDirPath, "media/mixpyBuild/maps", imgDirArr[i]);
           dropdownItem.width = 40;
           dropdownItem.height = 45;
           if(imgDirArr[i]==""){
@@ -417,7 +417,7 @@ Blockly.Blocks.game_get_path_img = {
         var imgDirArr=["default.png","bamboo.png","pipeline.png"]
         for(var i=0; i<imgDirArr.length; i++){
           var dropdownItem = {};
-          dropdownItem.src="./media/mixpyBuild/path/"+imgDirArr[i];
+          dropdownItem.src=path.join(Mixly.Env.boardDirPath, "media/mixpyBuild/path", imgDirArr[i]);
           dropdownItem.width = 40;
           dropdownItem.height = 45;
           dropdownItem.alt = "*";
@@ -505,36 +505,10 @@ Blockly.Blocks.game_get_character_img = {
     getLocalImg: function() {
       let imgArr = [];
       try {
-        // let imgDirPath = MixlyEnv.clientPath + "/mixpyBuild/characters/";///改图片路径
-        // let imgDirPath = "../media/mixpyBuild/characters/";///改图片路径
-        // console.log(imgDirPath)
-        // if (nodeFs.existsSync(imgDirPath)) {
-        //   let imgDirArr = nodeFs.readdirSync(imgDirPath);
-        //   for (let i = 0; i < imgDirArr.length; i++) {
-        //     let imgPathToLowerCase = imgDirArr[i].toLowerCase();
-        //     if (imgPathToLowerCase.indexOf(".png") != -1 
-        //      || imgPathToLowerCase.indexOf(".jpg") != -1
-        //      || imgPathToLowerCase.indexOf(".ico") != -1) {
-        //       let dropdownItem = {};
-        //       // dropdownItem.src = MixlyEnv.clientPath + "/mixpyBuild/characters/" + imgDirArr[i];
-        //       dropdownItem.src = "../media/mixpyBuild/characters/" + imgDirArr[i];
-        //       let dimensions = imagesize("mixpyBuild/characters/" + imgDirArr[i]);
-        //       dropdownItem.width = 40;
-        //       dropdownItem.height = dimensions.height*40/dimensions.width;
-        //       dropdownItem.alt = "*";
-        //       let dropdownArr = [];
-        //       dropdownArr.push(dropdownItem);
-        //       let dropdownData = imgDirArr[i].substring(0, imgDirArr[i].lastIndexOf("."));
-        //       dropdownData = '\'' + dropdownData + '\'';
-        //       dropdownArr.push(dropdownData);
-        //       imgArr.push(dropdownArr);
-        //     }
-        //   }
-        // }
         var imgDirArr=["pegman.png","astro.png","panda.png","robot.png",'car.png']
         for(var i=0; i<imgDirArr.length; i++){
           var dropdownItem = {};
-          dropdownItem.src="./media/mixpyBuild/characters/"+imgDirArr[i];
+          dropdownItem.src=path.join(Mixly.Env.boardDirPath, "media/mixpyBuild/characters", imgDirArr[i]);
           dropdownItem.width = 40;
           dropdownItem.height = 45;
           dropdownItem.alt = "*";

@@ -17,7 +17,7 @@ var externalLibs = {//外部引入的第三方库
  * @param {HTMLElement} tag - The HTML object this is attached to.
  */ 
 var PyEngine = function(programStatus, mixpyProject) {
-     this.loadEngine();
+    this.loadEngine();
     this.programStatus = programStatus;
     this.mixpyProject = mixpyProject;
 }
@@ -405,8 +405,8 @@ PyEngine.prototype.run = function(type) {
         inputfunTakesPrompt: true,
         execLimit:Number.POSITIVE_INFINITY,
         fileread:this.fileread.bind(this),
-        filewrite:this.filewrite.bind(this)
-        // __future__: Sk.python3,//python3已成默认值，要使用python2需要单独设置
+        filewrite:this.filewrite.bind(this),
+        __future__: Sk.python3,//python3已成默认值，要使用python2需要单独设置
     });
    
     Sk.builtins.value = new Sk.builtin.func(function() {

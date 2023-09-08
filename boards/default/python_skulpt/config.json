@@ -5,6 +5,9 @@
         "webcancel": true,
         "save": {
             "py": true
+        },
+        "setting": {
+            "pythonToBlockly": true
         }
     }
 }

@@ -350,7 +350,7 @@ PyEngine.prototype.steprun = function(type) {
         execLimit:Number.POSITIVE_INFINITY,
         fileread:this.fileread.bind(this),
         filewrite:this.filewrite.bind(this),
-        __future__: Sk.python2,//python3已成默认值，要使用python2需要单独设置
+        __future__: Sk.python3,//python3已成默认值，要使用python2需要单独设置
     });
    
     Sk.builtins.value = new Sk.builtin.func(function() {
@@ -392,37 +392,6 @@ PyEngine.prototype.steprun = function(type) {
     var ifpgzrun=false;
     if ((code.indexOf("import "+pyzrun_pack)!=-1)||(code.indexOf("from "+pyzrun_pack+" import")!=-1)){
         ifpgzrun=true;
-    }
-
-    if(code.indexOf("print") >= 0){//处理print函数中的end
-        var code_piece=[];
-        code_piece=code.split("\n");
-        for(var i=0;i<code_piece.length;i++){
-            if(code_piece[i].indexOf("print") >= 0 ){
-                if(code_piece[i].indexOf(",end") >= 0 ){
-                    var target="";
-                    var re=/,end =([\s\S]*)\)$/.exec(code_piece[i])
-                    if(re!=null){
-                        target=re[0];
-                        target=/['"]([\s\S]*)['"]/.exec(target)[0]
-                        code_piece[i]=code_piece[i].replace(/,end =([\s\S]*)\)$/,")" + ";print("+target+");");
-                    }
-                    //console.log(code_piece[i])
-                }else{
-                    var target="";
-                    var re=/\)$/.exec(code_piece[i])
-                    if(re!=null){
-                        target=re[0];
-                        code_piece[i]=code_piece[i].replace(/\)$/,"\);print('\\n');")
-                        // code_piece[i]=code_piece[i].replace(/\)$/,target+";");
-                    }
-                    //console.log(code_piece[i])
-                }
-            }  
-        }
-        code_new=code_piece.join("\n");
-        // console.log(code_new)
-        code=code_new
     }
 
     if (this.layerNum && this.layerSize) {

@@ -9,9 +9,9 @@ Blockly.Msg['MATH_HUE'] = 230//'#e49f16';
 
 Blockly.FieldTextInput.math_number_validator = function(text) {
   //return window.isNaN(text) ? null : String(text);
-  var pattern = /^-?(0X|0x|0O|0o|0B|0b)?[a-fA-F0-9]{1,}(\.[a-fA-F0-9]+)?$/;
-  return pattern.test(text) ? String(text) : null;//校验，二 八 十 十六进制匹配
-  // return String(text);//不再校验
+  // var pattern = /^-?(0X|0x|0O|0o|0B|0b)?[a-fA-F0-9]{1,}(\.[a-fA-F0-9]+)?$/;
+  // return pattern.test(text) ? String(text) : null;//校验，二 八 十 十六进制匹配
+  return String(text);//不再校验
 };
 
 Blockly.FieldTextInput.math_number_validator_include_blank = function(text) {

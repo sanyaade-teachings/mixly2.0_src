@@ -66,6 +66,7 @@
 <script src="converters/py2block_config.js" type="application/javascript"></script>
 <script src="converters/inout.js" type="application/javascript"></script>
 <script src="converters/cv.js" type="application/javascript"></script>
+<script src="converters/iot.js" type="application/javascript"></script>
 <script src="converters/system.js" type="application/javascript"></script>
 <script src="../python/converters/control.js" type="application/javascript"></script>
 <script src="../python/converters/math.js" type="application/javascript"></script>
@@ -1558,7 +1559,7 @@
           </shadow>
         </value>
         <value name="KEY">
-          <shadow type="iot_mixly_key">
+          <shadow type="iot_mixly_key_py">
             <field name="TEXT"></field>
           </shadow>
         </value>
@@ -1570,8 +1571,8 @@
           </shadow>
         </value>
         <value name="KEY">
-          <shadow type="factory_block_return">
-            <field name="VALUE">A1B2C3</field>
+          <shadow type="text">
+            <field name="TEXT">A1B2C3</field>
           </shadow>
         </value>
       </block>

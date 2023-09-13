@@ -56,6 +56,10 @@ PythonToBlocks.prototype.convertSource = function(python_source) {
     if (python_source.trim() === "") {
         return {"xml": xmlToString(xml), "error": null};
     }
+    else{        
+        python_source=python_source.replace(/f'/g,"'")
+        python_source=python_source.replace(/f"/g,'"')
+    }
     this.source = python_source.split("\n");
     var filename = 'user_code.py';
     // Attempt parsing - might fail!

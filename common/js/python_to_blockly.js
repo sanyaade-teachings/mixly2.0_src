@@ -1652,6 +1652,7 @@ PythonToBlocks.KNOWN_MODULES = {
 PythonToBlocks.prototype.KNOWN_FUNCTIONS = ["append", "strip", "rstrip", "lstrip"];
 PythonToBlocks.KNOWN_ATTR_FUNCTIONS = {};
 PythonToBlocks.prototype.CallAttribute = function(func, args, keywords, starargs, kwargs, node) {
+    args = args ?? [];
     var name = this.identifier(func.attr);
     if (func.value._astname == "Name" || func.value._astname == "Attribute") {
         var module = null;

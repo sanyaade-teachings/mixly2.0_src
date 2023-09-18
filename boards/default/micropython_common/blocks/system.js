@@ -265,7 +265,7 @@ Blockly.Blocks.system_bitbot_shutdown = {
     init: function () {
         this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendDummyInput("")
-            .appendField("Bitbot")
+            .appendField(Blockly.Msg.BITBOT)
         this.appendDummyInput("")
             .appendField(Blockly.Msg.SHUTDOWN)
         this.setInputsInline(true);

@@ -57,6 +57,7 @@
 <script src="../python/converters/set.js" type="application/javascript"></script>
 <script src="./converters/data.js" type="application/javascript"></script>
 <script src="./converters/turtle.js" type="application/javascript"></script>
+<script src="./converters/iot.js" type="application/javascript"></script>
 <script src="../../../common/js/python_to_blockly.js" type="application/javascript"></script>
 <script src="../../../common/js/mixpyProject.js" type="application/javascript"></script>
 <!-- 使用最新版本的skulpt V1.3 -->
@@ -1266,7 +1267,7 @@
           </shadow>
         </value>
         <value name="KEY">
-          <shadow type="iot_mixly_key">
+          <shadow type="iot_mixly_key_py">
             <field name="TEXT"></field>
           </shadow>
         </value>
@@ -1278,8 +1279,8 @@
           </shadow>
         </value>
         <value name="KEY">
-          <shadow type="factory_block_return">
-            <field name="VALUE">A1B2C3</field>
+          <shadow type="text">
+            <field name="TEXT">A1B2C3</field>
           </shadow>
         </value>
       </block>

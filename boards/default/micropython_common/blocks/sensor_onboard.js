@@ -637,7 +637,8 @@ Blockly.Blocks['sensor_get_acceleration'] = {
             ["x", "[0]"],
             ["y", "[1]"],
             ["z", "[2]"],
-            ["(x,y,z)", ""]
+            ["(x,y,z)", ""],
+            [Blockly.Msg.MIXLY_STRENGTH, "strength"]
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);

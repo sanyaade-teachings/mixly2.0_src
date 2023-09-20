@@ -76,7 +76,11 @@ class MXC6655XA:
 
 	def acceleration(self): 
 		return self.getdata[0:3]
-	
+
+	def strength(self): 
+		from math import sqrt
+		return sqrt(self.getdata[0]**2+self.getdata[1]**2+self.getdata[2]**2)
+
 	def temperature(self): 
 		return self.getdata[3]
 

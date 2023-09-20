@@ -3537,5 +3537,6 @@ En.MIXLY_EXTERN_SONAR = "ultrasonic sensor";
 En.MIXLY_EXTERN_INDICATOR_LIGHT = "pilot light";
 En.MIXLY_SCREEN_FILL = "screen fill";
 En.MIXLY_SDCARD_MOUNT = "mount to directory";
+En.MIXLY_STRENGTH = "strength";
 
 })();

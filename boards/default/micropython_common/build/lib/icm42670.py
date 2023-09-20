@@ -83,6 +83,10 @@ class ICM42670:
 	def accelerometer(self):
 		return self.getdata()[0]
 
+	def strength(self): 
+		from math import sqrt
+		return sqrt(self.accelerometer()[0]**2+self.accelerometer()[1]**2+self.accelerometer()[2]**2)	
+
 	def gyroscope(self):
 		return self.getdata()[1]
 

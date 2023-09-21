@@ -750,3 +750,63 @@ Blockly.Python.forBlock['onboard_tft_fill'] = function() {
     var code = 'onboard_tft.fill(' + color + ')\nonboard_tft.show()\n';
     return code;
 };
+
+Blockly.Python.forBlock['onboard_tft_clock_init'] = function() {  
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+     var code = sub + "=Clock("+ x +',' + y +',' + size+ ',' + color+ ")\n";
+     return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_clock_get_rtctime'] = function() {  
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+     var code = sub + ".set_rtctime()\n";
+     return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_clock_set_time'] = function() {  
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+     var h = Blockly.Python.valueToCode(this, 'h', Blockly.Python.ORDER_ASSIGNMENT);
+     var m = Blockly.Python.valueToCode(this, 'm', Blockly.Python.ORDER_ASSIGNMENT);
+     var s = Blockly.Python.valueToCode(this, 's', Blockly.Python.ORDER_ASSIGNMENT);
+     var code = sub + ".set_time("+ h +',' + m +',' + s+ ")\n";
+     return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_clock_draw'] = function() {  
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+     var code = sub + ".draw_clock()\n";
+     return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_clock_clear'] = function() {  
+     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+     var code = sub + ".clear("+color+")\n";
+     return code;
+}
+
+Blockly.Python.forBlock['onboard_tft_display_shape_circle'] = function (block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+  var x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
+  var y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
+  var r = Blockly.Python.valueToCode(block, 'r', Blockly.Python.ORDER_ATOMIC);
+  var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+  var shape = block.getFieldValue('shape');
+  var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + r + ', ' + r + ', ' + color + ',' + shape +')\n'+'onboard_tft.show()\n';
+  return code;
+};

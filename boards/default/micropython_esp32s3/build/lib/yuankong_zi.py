@@ -10,7 +10,7 @@ Micropython    library for the Yuankong Zi Onboard resources
 dahanzimin From the Mixly Team
 """
 
-import time, gc, st7735, sdcard
+import time, gc, st7735, sdcard, math
 from machine import Pin, I2C, SPI, ADC, PWM, RTC, Timer
 
 '''RTC'''
@@ -240,7 +240,79 @@ onboard_psa = Proximity(21, 15)
 onboard_psb = Proximity(21, 13)
 
 
+class Clock:
+    def __init__(self, x, y, radius, color, oled=onboard_tft):  #定义时钟中心点和半径
+        self.display = oled
+        self.xc = x
+        self.yc = y
+        self.r = radius
+        self.color= color
+        self.hour = 0
+        self.min = 0
+        self.sec = 0
 
+    def set_time(self, h, m, s):  #设定时间
+        self.hour = h
+        self.min = m
+        self.sec = s
+
+    def set_rtctime(self):  #设定时间
+        t = rtc_clock.datetime()
+        self.hour = t[4]
+        self.min = t[5]
+        self.sec = t[6]
+
+    def drawDial(self,color):  #画钟表刻度
+        r_tic1 = self.r - 1
+        r_tic2 = self.r - 2
+
+        self.display.ellipse(self.xc, self.yc, self.r,self.r, self.color)
+        self.display.ellipse(self.xc, self.yc, 2, 2, self.color,True)
+
+        for h in range(12):
+            at = math.pi * 2.0 * h / 12.0
+            x1 = round(self.xc + r_tic1 * math.sin(at))
+            x2 = round(self.xc + r_tic2 * math.sin(at))
+            y1 = round(self.yc - r_tic1 * math.cos(at))
+            y2 = round(self.yc - r_tic2 * math.cos(at))
+            self.display.line(x1, y1, x2, y2, color)
+
+    def drawHour(self,color):  #画时针
+
+        r_hour = int(self.r / 10.0 * 5)
+        ah = math.pi * 2.0 * ((self.hour % 12) + self.min / 60.0) / 12.0
+        xh = int(self.xc + r_hour * math.sin(ah))
+        yh = int(self.yc - r_hour * math.cos(ah))
+        self.display.line(self.xc, self.yc, xh, yh, color)
+
+    def drawMin(self,color):  #画分针
+
+        r_min = int(self.r / 10.0 * 7)
+        am = math.pi * 2.0 * self.min / 60.0
+
+        xm = round(self.xc + r_min * math.sin(am))
+        ym = round(self.yc - r_min * math.cos(am))
+        self.display.line(self.xc, self.yc, xm, ym, color)
+
+    def drawSec(self,color):  #画秒针
+
+        r_sec = int(self.r / 10.0 * 9)
+        asec = math.pi * 2.0 * self.sec / 60.0
+        xs = round(self.xc + r_sec * math.sin(asec))
+        ys = round(self.yc - r_sec * math.cos(asec))
+        self.display.line(self.xc, self.yc, xs, ys, color)
+
+    def draw_clock(self):  #画完整钟表
+        self.drawDial(self.color)
+        self.drawHour(self.color)
+        self.drawMin(self.color)
+        self.drawSec(self.color)
+        self.display.show()
+
+    def clear(self,color=0):  #清除
+        self.drawHour(color)
+        self.drawMin(color)
+        self.drawSec(color)
 
 
 '''Reclaim memory'''

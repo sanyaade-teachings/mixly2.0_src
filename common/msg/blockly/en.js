@@ -3538,5 +3538,12 @@ En.MIXLY_EXTERN_INDICATOR_LIGHT = "pilot light";
 En.MIXLY_SCREEN_FILL = "screen fill";
 En.MIXLY_SDCARD_MOUNT = "mount to directory";
 En.MIXLY_STRENGTH = "strength";
+En.MIXLY_INIT_CLOCK = "Initialize clock";
+En.MIXLY_CENTER_POS = "Center coordinate";
+En.GET_RTCTIME = "Read RTC Time";
+En.SET_TIME = "Set Time";
+En.DRAW_CLOCK = "Draw Clock";
+En.CLEAR_CLOCK = "Clear pointer";
+En.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = 'draw %1 circle %2 x %3 y %4 radius %5 color %6';
 
 })();

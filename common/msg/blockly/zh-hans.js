@@ -3675,5 +3675,12 @@ ZhHans.MIXLY_EXTERN_INDICATOR_LIGHT = "指示灯";
 ZhHans.MIXLY_SCREEN_FILL = "屏幕填充";
 ZhHans.MIXLY_SDCARD_MOUNT = "挂载到目录";
 ZhHans.MIXLY_STRENGTH = "强度";
+ZhHans.MIXLY_INIT_CLOCK = "初始化时钟";
+ZhHans.MIXLY_CENTER_POS = "中心坐标";
+ZhHans.GET_RTCTIME = "读取RTC时间";
+ZhHans.SET_TIME = "设置时间";
+ZhHans.DRAW_CLOCK = "绘制时钟";
+ZhHans.CLEAR_CLOCK = "清除指针";
+ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '绘制 %1 圆形 %2 x %3 y %4 半径 %5 颜色 %6';
 
 })();

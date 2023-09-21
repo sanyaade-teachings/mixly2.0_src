@@ -6,7 +6,7 @@
         "static": "node ./static-server/server.js",
         "build": "gulp script",
         "test": "npm run deps && npm run static",
-        "deps": "node build.js"
+        "deps": "node deps-gen.js"
     },
     "author": "Mixly",
     "license": "MIT",

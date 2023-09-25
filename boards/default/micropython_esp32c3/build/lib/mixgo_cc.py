@@ -109,9 +109,9 @@ onboard_sound = MICSensor(pin=4 if version else 3)
 '''4,5KEY_Sensor'''
 class KEYSensor:
     def __init__(self, pin, range):
-        self.adc=ADC(Pin(pin))
-        self.adc.atten(ADC.ATTN_11DB) 
-        self.range=range
+        self.adc = ADC(Pin(pin), atten=ADC.ATTN_11DB)
+        self.pin = pin
+        self.range = range
         self.flag = True
     
     def _value(self):
@@ -141,7 +141,7 @@ class KEYSensor:
                 return False
 
     def irq(self, handler, trigger):
-        Pin(pin, Pin.IN).irq(handler = handler, trigger = trigger)
+        Pin(self.pin, Pin.IN).irq(handler = handler, trigger = trigger)
 
 '''2,1KEY_Button'''
 class Button:

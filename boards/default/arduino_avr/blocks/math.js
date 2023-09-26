@@ -45,10 +45,10 @@ Blockly.Blocks['math_arithmetic'] = {
         this.setColour(Blockly.Msg['MATH_HUE']);
         this.setOutput(true, Number);
         this.appendValueInput('A')
-            .setCheck(Number);
+            .setCheck(null);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/04.Mathematics.html#id4");
         this.appendValueInput('B')
-            .setCheck(Number)
+            .setCheck(null)
             .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
         this.setInputsInline(true);
         // Assign 'this' to a variable for use in the tooltip closure below.

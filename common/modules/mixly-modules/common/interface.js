@@ -154,21 +154,21 @@ window.addEventListener('load', () => {
         }
         window.addEventListener('resize', Interface.onresize, false);
         Interface.onresize();
-        if (BOARD.nav.levelSelector) {
-            LevelSelector.init();
-            const $loading = $('.loading');
-            const toolboxWidth = $('.blocklyToolboxDiv').width();
-            $loading.children('.left-div').animate({
-              width: toolboxWidth + 'px'
-            }, () => {
-                $loading.fadeOut("fast", () => {
-                    $loading.remove();
-                });
+        const $loading = $('.loading');
+        const toolboxWidth = $('.blocklyToolboxDiv').width();
+        $loading.children('.left-div').animate({
+          width: toolboxWidth + 'px'
+        }, 'slow', () => {
+            $loading.fadeOut("fast", () => {
+                $loading.remove();
+                if (BOARD.nav.levelSelector) {
+                    LevelSelector.init();
+                    LevelSelector.xmlToWorkspace(1);
+                } else {
+                    auto_save_and_restore_blocks();
+                }
             });
-            LevelSelector.xmlToWorkspace(1);
-        } else {
-            auto_save_and_restore_blocks();
-        }
+        });
     });
 });
 

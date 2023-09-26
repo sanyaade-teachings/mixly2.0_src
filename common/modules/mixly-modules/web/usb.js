@@ -16,6 +16,7 @@ USB.decoder = new TextDecoder('utf8');
 
 USB.obj = null;
 USB.onDataLine = null;
+USB.name = 'usb';
 
 USB.connect = (baud = 115200, onDataLine = (message) => {}) => {
     return new Promise((resolve, reject) => {

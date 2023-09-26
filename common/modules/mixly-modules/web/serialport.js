@@ -20,6 +20,7 @@ SerialPort.encoder = new TextEncoder('utf8');
 SerialPort.decoder = new TextDecoder('utf8');
 SerialPort.dtr = false;
 SerialPort.rts = false;
+SerialPort.name = 'serialport';
 
 SerialPort.connect = (baud = 115200, onDataLine = (message) => {}) => {
     return new Promise((resolve, reject) => {

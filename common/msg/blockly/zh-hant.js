@@ -3509,5 +3509,13 @@ ZhHant.MIXLY_EXTERN_SONAR = "超聲波感測器";
 ZhHant.MIXLY_EXTERN_INDICATOR_LIGHT = "指示燈";
 ZhHant.MIXLY_SCREEN_FILL = "螢幕填充";
 ZhHant.MIXLY_SDCARD_MOUNT = "掛載到目錄";
+ZhHant.MIXLY_STRENGTH = "强度";
+ZhHant.MIXLY_INIT_CLOCK = "初始化時鐘";
+ZhHant.MIXLY_CENTER_POS = "中心座標";
+ZhHant.GET_RTCTIME = "讀取RTC時間";
+ZhHant.SET_TIME = "設置時間";
+ZhHant.DRAW_CLOCK = "繪製時鐘";
+ZhHant.CLEAR_CLOCK = "清除指針";
+ZhHant.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '繪製 %1 圓形 %2 x %3 y %4 半徑 %5 顏色 %6';
 
 })();

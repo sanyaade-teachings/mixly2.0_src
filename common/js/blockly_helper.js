@@ -108,15 +108,6 @@ function restore_blocks() {
             Title.updeteFilePath(File.openedFilePath);
         }
     }
-    const $loading = $('.loading');
-    const toolboxWidth = $('.blocklyToolboxDiv').width();
-    $loading.children('.left-div').animate({
-      width: toolboxWidth + 'px'
-    }, () => {
-        $loading.fadeOut("fast", () => {
-            $loading.remove();
-        });
-    });
 }
 
 /*

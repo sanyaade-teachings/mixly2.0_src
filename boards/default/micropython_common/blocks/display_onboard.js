@@ -1400,3 +1400,133 @@ Blockly.Blocks.onboard_tft_fill = {
   this.setInputsInline(true);
   }
 };
+
+Blockly.Blocks.onboard_tft_clock_init = {
+   init: function() {
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+     this.appendValueInput('SUB')
+        .appendField(Blockly.Msg.MIXLY_INIT_CLOCK); 
+     this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_CENTER_POS);   
+     this.appendValueInput("x")
+        .setCheck(Number)
+        .appendField('x');  
+     this.appendValueInput("y")
+        .setCheck(Number)
+        .appendField('y');  
+     this.appendValueInput("size")
+        .setCheck(Number)
+        .appendField(Blockly.Msg.OLED_CIRCLE_RADIUS);       
+     this.appendValueInput('VAR')
+        .appendField(Blockly.Msg.HTML_COLOUR);    
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+   }
+ };
+
+ Blockly.Blocks.onboard_tft_clock_get_rtctime = {
+   init: function() {
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+     this.appendValueInput('SUB')
+     this.appendDummyInput()
+        .appendField(Blockly.Msg.GET_RTCTIME);
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+   }
+ };
+
+ Blockly.Blocks.onboard_tft_clock_set_time = {
+   init: function() {
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+     this.appendValueInput('SUB')
+     this.appendDummyInput()
+        .appendField(Blockly.Msg.SET_TIME);   
+     this.appendValueInput("h")
+        .setCheck(Number)
+        .appendField(Blockly.Msg.MIXLY_HOUR);  
+     this.appendValueInput("m")
+        .setCheck(Number)
+        .appendField(Blockly.Msg.MIXLY_MINUTE);  
+     this.appendValueInput("s")
+        .setCheck(Number)
+        .appendField(Blockly.Msg.MIXLY_SECOND);    
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+   }
+ };
+
+  Blockly.Blocks.onboard_tft_clock_draw = {
+   init: function() {
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+     this.appendValueInput('SUB')
+     this.appendDummyInput()
+        .appendField(Blockly.Msg.DRAW_CLOCK);
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+   }
+ };
+
+   Blockly.Blocks.onboard_tft_clock_clear = {
+   init: function() {
+     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+     this.appendValueInput('SUB')
+     this.appendDummyInput()
+        .appendField(Blockly.Msg.CLEAR_CLOCK);
+     this.appendValueInput('VAR')
+        .appendField(Blockly.Msg.MIXLY_STM32_TFT_BACKGROUND_COLOR);    
+     this.setPreviousStatement(true, null);
+     this.setNextStatement(true, null);
+     this.setInputsInline(true);
+   }
+ };
+
+ Blockly.Blocks['onboard_tft_display_shape_circle'] = {
+  init: function () {
+    this.jsonInit({
+      "colour": Blockly.Msg['DISPLAY_ONBOARD_HUE'],
+      "args0": [        
+        {
+          "name": "shape",
+          "options": [
+            [Blockly.Msg.MPYTHON_DISPLAY_HOLLOW, 'False'],
+            [Blockly.Msg.MPYTHON_DISPLAY_SOLID, 'True']
+          ],
+          "type": "field_dropdown"
+        },
+        {
+          "type": "input_dummy"
+        },
+        {
+          "name": "x",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "y",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "r",
+          "type": "input_value",
+          //"check": "Number"
+        },
+        {
+          "name": "VAR",
+          "type": "input_value",
+          //"check": "Number"
+        }
+
+      ],
+      "inputsInline": true,
+      "helpUrl": Blockly.Msg.mpython_HELPURL,      
+      "message0": Blockly.Msg.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0,
+      "nextStatement": null,
+      "previousStatement": null
+    });
+  }
+};

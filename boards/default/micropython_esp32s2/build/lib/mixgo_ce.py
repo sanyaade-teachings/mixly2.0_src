@@ -73,6 +73,7 @@ B2key = Button(35)
 
 '''4-TouchPad'''
 class Touch_Pad:
+    _pins = [4, 5, 6, 7]
     __species = {}
     __first_init = True
     def __new__(cls, pin, *args, **kwargs):
@@ -85,7 +86,7 @@ class Touch_Pad:
         if self.__first_init:
             self.__first_init = False
             from machine import TouchPad
-            self._pin = TouchPad(Pin(pin))
+            self._pin = TouchPad(Pin(self._pins[pin]))
         
     def is_touched(self,value):
         return self._pin.read() > value

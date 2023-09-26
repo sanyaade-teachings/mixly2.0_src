@@ -43,7 +43,6 @@ class EditorMixed {
             && typeof Py2blockEditor === 'function') {
             const py2blockConverter = new PythonToBlocks();
             this.py2BlockEditor = new Py2blockEditor(py2blockConverter, this.codeEditor.editor);
-            Sk.python3 = true;
         }
     }
 

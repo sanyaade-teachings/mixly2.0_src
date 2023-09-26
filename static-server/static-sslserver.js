@@ -13,7 +13,7 @@ SSLStaticServer.run = (port) => {
         cert: fs.readFileSync(CRT_PATH)
     };
     const app = express();
-    app.use(express.static('./'));
+    app.use(express.static(path.resolve(__dirname, '../')));
     const httpsServer = https.createServer(options, app);
     httpsServer.listen(port);
     console.log('Static服务器正在运行 [端口 - ' + port + ', https]...');

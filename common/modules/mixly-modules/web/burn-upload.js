@@ -144,7 +144,7 @@ BU.burnByUSB = () => {
         }
         const { web } = SELECTED_BOARD;
         const { burn } = web;
-        const hexStr = goog.get(burn.filePath);
+        const hexStr = goog.get(path.join(Env.boardDirPath, burn.filePath));
         const hex2Blob = new Blob([ hexStr ], { type: 'text/plain' });
         const buffer = await hex2Blob.arrayBuffer();
         if (!buffer) {

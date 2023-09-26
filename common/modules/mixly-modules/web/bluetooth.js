@@ -18,6 +18,7 @@ Bluetooth.server = null;
 Bluetooth.service = null;
 Bluetooth.uartRxCharacteristic = null;
 Bluetooth.uartTxCharacteristic = null;
+Bluetooth.name = 'bluetooth';
 
 Bluetooth.connect = (baud = 115200, onDataLine = (message) => {}) => {
     return new Promise((resolve, reject) => {

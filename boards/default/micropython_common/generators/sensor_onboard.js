@@ -250,6 +250,18 @@ Blockly.Python.forBlock['rfid_write'] = function(){
 Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');
+    if (key=='strength'){
+        if (version=='mixbot'){
+        Blockly.Python.definitions_['import_'+version+'_acc_gyr'] = 'from '+version+' import acc_gyr';
+        var code = 'acc_gyr.strength()';
+    }
+    else{
+        Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";
+        var code = 'onboard_mxc6655xa.strength()';
+    }  
+    return [code, Blockly.Python.ORDER_ATOMIC];     
+    }
+    else{
     if (version=='mixbot'){
         Blockly.Python.definitions_['import_'+version+'_acc_gyr'] = 'from '+version+' import acc_gyr';
         var code = 'acc_gyr.accelerometer()' + key ;
@@ -257,10 +269,10 @@ Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
     else{
         Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";
         var code = 'onboard_mxc6655xa.acceleration()' + key ;
-    }   
-    
+    }       
    
     return [code, Blockly.Python.ORDER_ATOMIC];
+    }
 };
 
 Blockly.Python.forBlock['sensor_eulerangles'] = function(){

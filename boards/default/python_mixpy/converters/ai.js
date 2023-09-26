@@ -7,7 +7,7 @@ pbc.assignD.get('AipImageClassify')['check_assign'] = function(py2block, node, t
     }
     var funcName = py2block.identifier(value.func.attr);
     var moduleName = py2block.Name_str(value.func.value);
-    if(moduleName === "aip" && funcName === "AipImageClassify" && value.args.length === 3)
+    if(moduleName === "aip" && funcName === "AipImageClassify" && value.args.length === 2)
         return true;
     return false;
 }
@@ -17,9 +17,9 @@ pbc.assignD.get('AipImageClassify')['create_block'] = function(py2block, node, t
     return block("AI_client", node.lineno, {
         "CTYPE":"AipImageClassify"
     }, {
-        "APP_ID":py2block.convert(value.args[0]),
-        "API_KEY":py2block.convert(value.args[1]),
-        "SECRET_KEY":py2block.convert(value.args[2]),
+        //"APP_ID":py2block.convert(value.args[0]),
+        "API_KEY":py2block.convert(value.args[0]),
+        "SECRET_KEY":py2block.convert(value.args[1]),
         "SUB":py2block.convert(targets[0])
     });
 }
@@ -30,7 +30,7 @@ pbc.assignD.get('AipSpeech')['check_assign'] = function(py2block, node, targets,
     }
     var funcName = py2block.identifier(value.func.attr);
     var moduleName = py2block.Name_str(value.func.value);
-    if(moduleName === "aip" && funcName === "AipSpeech" && value.args.length === 3)
+    if(moduleName === "aip" && funcName === "AipSpeech" && value.args.length === 2)
         return true;
     return false;
 }
@@ -40,9 +40,9 @@ pbc.assignD.get('AipSpeech')['create_block'] = function(py2block, node, targets,
     return block("AI_client", node.lineno, {
         "CTYPE":"AipSpeech"
     }, {
-        "APP_ID":py2block.convert(value.args[0]),
-        "API_KEY":py2block.convert(value.args[1]),
-        "SECRET_KEY":py2block.convert(value.args[2]),
+        //"APP_ID":py2block.convert(value.args[0]),
+        "API_KEY":py2block.convert(value.args[0]),
+        "SECRET_KEY":py2block.convert(value.args[1]),
         "SUB":py2block.convert(targets[0])
     });
 }
@@ -53,7 +53,7 @@ pbc.assignD.get('AipImageCensor')['check_assign'] = function(py2block, node, tar
     }
     var funcName = py2block.identifier(value.func.attr);
     var moduleName = py2block.Name_str(value.func.value);
-    if(moduleName === "aip" && funcName === "AipImageCensor" && value.args.length === 3)
+    if(moduleName === "aip" && funcName === "AipImageCensor" && value.args.length === 2)
         return true;
     return false;
 }
@@ -63,9 +63,9 @@ pbc.assignD.get('AipImageCensor')['create_block'] = function(py2block, node, tar
     return block("AI_client", node.lineno, {
         "CTYPE":"AipImageCensor"
     }, {
-        "APP_ID":py2block.convert(value.args[0]),
-        "API_KEY":py2block.convert(value.args[1]),
-        "SECRET_KEY":py2block.convert(value.args[2]),
+        //"APP_ID":py2block.convert(value.args[0]),
+        "API_KEY":py2block.convert(value.args[0]),
+        "SECRET_KEY":py2block.convert(value.args[1]),
         "SUB":py2block.convert(targets[0])
     });
 }
@@ -76,7 +76,7 @@ pbc.assignD.get('AipOcr')['check_assign'] = function(py2block, node, targets, va
     }
     var funcName = py2block.identifier(value.func.attr);
     var moduleName = py2block.Name_str(value.func.value);
-    if(moduleName === "aip" && funcName === "AipOcr" && value.args.length === 3)
+    if(moduleName === "aip" && funcName === "AipOcr" && value.args.length === 2)
         return true;
     return false;
 }
@@ -86,9 +86,9 @@ pbc.assignD.get('AipOcr')['create_block'] = function(py2block, node, targets, va
     return block("AI_client", node.lineno, {
         "CTYPE":"AipOcr"
     }, {
-        "APP_ID":py2block.convert(value.args[0]),
-        "API_KEY":py2block.convert(value.args[1]),
-        "SECRET_KEY":py2block.convert(value.args[2]),
+        //"APP_ID":py2block.convert(value.args[0]),
+        "API_KEY":py2block.convert(value.args[0]),
+        "SECRET_KEY":py2block.convert(value.args[1]),
         "SUB":py2block.convert(targets[0])
     });
 }
@@ -99,7 +99,7 @@ pbc.assignD.get('AipNlp')['check_assign'] = function(py2block, node, targets, va
     }
     var funcName = py2block.identifier(value.func.attr);
     var moduleName = py2block.Name_str(value.func.value);
-    if(moduleName === "aip" && funcName === "AipNlp" && value.args.length === 3)
+    if(moduleName === "aip" && funcName === "AipNlp" && value.args.length === 2)
         return true;
     return false;
 }
@@ -109,9 +109,9 @@ pbc.assignD.get('AipNlp')['create_block'] = function(py2block, node, targets, va
     return block("AI_client", node.lineno, {
         "CTYPE":"AipNlp"
     }, {
-        "APP_ID":py2block.convert(value.args[0]),
-        "API_KEY":py2block.convert(value.args[1]),
-        "SECRET_KEY":py2block.convert(value.args[2]),
+        //"APP_ID":py2block.convert(value.args[0]),
+        "API_KEY":py2block.convert(value.args[0]),
+        "SECRET_KEY":py2block.convert(value.args[1]),
         "SUB":py2block.convert(targets[0])
     });
 }
@@ -122,7 +122,7 @@ pbc.assignD.get('AipFace')['check_assign'] = function(py2block, node, targets, v
     }
     var funcName = py2block.identifier(value.func.attr);
     var moduleName = py2block.Name_str(value.func.value);
-    if(moduleName === "aip" && funcName === "AipFace" && value.args.length === 3)
+    if(moduleName === "aip" && funcName === "AipFace" && value.args.length === 2)
         return true;
     return false;
 }
@@ -132,9 +132,9 @@ pbc.assignD.get('AipFace')['create_block'] = function(py2block, node, targets, v
     return block("AI_client", node.lineno, {
         "CTYPE":"AipFace"
     }, {
-        "APP_ID":py2block.convert(value.args[0]),
-        "API_KEY":py2block.convert(value.args[1]),
-        "SECRET_KEY":py2block.convert(value.args[2]),
+        //"APP_ID":py2block.convert(value.args[0]),
+        "API_KEY":py2block.convert(value.args[0]),
+        "SECRET_KEY":py2block.convert(value.args[1]),
         "SUB":py2block.convert(targets[0])
     });
 }

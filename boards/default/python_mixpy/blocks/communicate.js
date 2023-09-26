@@ -59,7 +59,7 @@ Blockly.Blocks['requests_post'] = {
       .appendField(new Blockly.FieldDropdown([["post", "post"], ["put", "put"], ["patch", "patch"]]), 'TYPE')
       .appendField(Blockly.Msg.blockpy_REQUESTS)     
   this.appendValueInput("data")
-      .appendField(Blockly.Msg.blockpy_REQUESTS+Blockly.OLED_STRING)    
+      .appendField(Blockly.Msg.blockpy_REQUESTS+Blockly.Msg.OLED_STRING)    
   this.appendDummyInput("")     
       .appendField(Blockly.Msg.MIXPY_REQUESTS_GET_RESULT)                 
   this.setInputsInline(true);

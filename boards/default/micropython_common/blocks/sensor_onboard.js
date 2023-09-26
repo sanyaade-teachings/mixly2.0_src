@@ -319,7 +319,7 @@ Blockly.Blocks['number2'] = {
    init: function() {
     this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
     this.appendDummyInput("")
-    .appendField(new Blockly.FieldDropdown([["0", "4"], ["1", "5"],["2", "6"], ["3", "7"]]), 'op')
+    .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"],["2", "2"], ["3", "3"]]), 'op')
     this.setOutput(true);
     this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
 }
@@ -637,7 +637,8 @@ Blockly.Blocks['sensor_get_acceleration'] = {
             ["x", "[0]"],
             ["y", "[1]"],
             ["z", "[2]"],
-            ["(x,y,z)", ""]
+            ["(x,y,z)", ""],
+            [Blockly.Msg.MIXLY_STRENGTH, "strength"]
             ]), "key");
         this.setOutput(true, Number);
         this.setInputsInline(true);

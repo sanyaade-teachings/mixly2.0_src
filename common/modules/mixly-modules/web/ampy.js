@@ -154,11 +154,14 @@ class Ampy {
                     reject(Msg.Lang['无法退出Raw REPL']);
                     return;
                 }
-                /*if (! await this.exitREPL()) {
-                    reject(Msg.Lang['无法退出REPL']);
-                    return;
-                }*/
-                await this.operator_.writeString('exec(open(\'main.py\').read())\r\n');
+                if (this.operator_.name === 'bluetooth') {
+                    await this.operator_.writeString('exec(open(\'main.py\').read())\r\n');
+                } else {
+                    if (! await this.exitREPL()) {
+                        reject(Msg.Lang['无法退出REPL']);
+                        return;
+                    }
+                }
                 resolve();
             } catch (error) {
                 reject(error.toString());

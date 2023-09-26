@@ -1,11 +1,12 @@
 const http = require('http');
 const express = require('express');
+const path = require('path');
 
 const StaticServer = {};
 
 StaticServer.run = (port) => {
     const app = express();
-    app.use(express.static('./'));
+    app.use(express.static(path.resolve(__dirname, '../')));
     const httpServer = http.createServer(app);
     httpServer.listen(port);
     console.log('Static服务器正在运行 [端口 - ' + port + ', http]...');

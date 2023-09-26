@@ -12,7 +12,7 @@ Blockly.Python.forBlock['iot_mixio_connect'] = function(block) {
   var timestamp = Math.round(new Date()).toString();
   //var subscribe = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT) || '0';
   var a = "f'python-mqtt-" + username.replace("'","").replace("'","") + timestamp.replace("'","").replace("'","") + "'"; 
-  var code= 'mixio_client_id = '+ a +'\n' + 'mqtt_client = mixiot.MixIO(' + server + ', 8084 ,'+ username + ', ' + password+', '+ project  + ', mixio_client_id)\n';
+  var code= 'mqtt_client = mixiot.MixIO(' + server + ', 8084 ,'+ username + ', ' + password+', '+ project  + ','+a+')\n';
   return code;
 };
 
@@ -87,7 +87,7 @@ Blockly.Python.forBlock['IOT_EMQX_INIT_AND_CONNECT_BY_MIXLY_CODE'] = function(bl
   var share_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
   var timestamp = Math.round(new Date()).toString();
   var a = "f'python-mqtt-" + share_code.replace("'","").replace("'","") + timestamp.replace("'","").replace("'","")+ "'"; 
-  var code= 'mixio_client_id = '+ a +'\n' + 'mqtt_client = mixiot.MixIO_init_by_mixly_key(' + server + ', 8084 ,"'+ share_code  + '", mixio_client_id)\n';
+  var code= 'mqtt_client = mixiot.MixIO_init_by_mixly_key(' + server + ', 8084 ,'+ share_code  + ','+a+')\n';
   return code;
 };
 
@@ -103,7 +103,7 @@ Blockly.Python.forBlock['IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE'] = function(bl
   var mixly_code = Blockly.Python.valueToCode(this, 'KEY', Blockly.Python.ORDER_ATOMIC);
   var timestamp = Math.round(new Date()).toString();
   var a = "f'python-mqtt-" + mixly_code.replace("'","").replace("'","") + timestamp.replace("'","").replace("'","")+ "'"; 
-  var code= 'mixio_client_id = '+ a +'\n' + 'mqtt_client = mixiot.MixIO_init_by_share_key(' + server + ', 8084 ,"'+ mixly_code  + '", mixio_client_id)\ntime.sleep(2)\n';
+  var code= 'mqtt_client = mixiot.MixIO_init_by_share_key(' + server + ', 8084 ,'+ mixly_code  + ','+a+')\ntime.sleep(2)\n';
   return code;
 };
 
@@ -113,3 +113,7 @@ Blockly.Python.forBlock['IOT_EMQX_PING'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['iot_mixly_key_py'] = function() {
+  var code =  this.getFieldValue('VISITOR_ID') ;
+  return ["'"+code+"'", Blockly.Python.ORDER_ATOMIC];
+};

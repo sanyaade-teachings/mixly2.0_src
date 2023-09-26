@@ -1963,6 +1963,31 @@
           </shadow>
         </value>
     </block>
+    <block type="onboard_tft_display_shape_circle">
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">60</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">60</field>
+        </shadow>
+      </value>
+      <value name="r">
+        <shadow type="math_number">
+          <field name="NUM">40</field>
+        </shadow>
+      </value>      
+      <value name="VAR">
+          <block type="display_color_seclet">
+            <field name="COLOR">#ffffff</field>
+          </block>
+          <shadow type="tuple_create_with_text_return">
+            <field name="TEXT">255,255,0</field>
+          </shadow>
+        </value>
+    </block>
     <block type="onboard_tft_shift">
 
       <value name="val">
@@ -2025,6 +2050,87 @@
         </value>
     </block>
     <block type="onboard_tft_clear"></block>
+    <block type="onboard_tft_clock_init">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">new_clock</field>
+        </shadow>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">80</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">64</field>
+        </shadow>
+      </value>
+      <value name="size">
+        <shadow type="math_number">
+          <field name="NUM">40</field>
+        </shadow>
+      </value>      
+      <value name="VAR">
+          <block type="display_color_seclet">
+            <field name="COLOR">#ffffff</field>
+          </block>
+          <shadow type="tuple_create_with_text_return">
+            <field name="TEXT">255,255,0</field>
+          </shadow>
+        </value>
+    </block>
+    <block type="onboard_tft_clock_get_rtctime">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">new_clock</field>
+        </shadow>
+      </value>      
+    </block>
+    <block type="onboard_tft_clock_set_time">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">new_clock</field>
+        </shadow>
+      </value>
+      <value name="h">
+        <shadow type="math_number">
+          <field name="NUM">8</field>
+        </shadow>
+      </value>
+      <value name="m">
+        <shadow type="math_number">
+          <field name="NUM">20</field>
+        </shadow>
+      </value>
+      <value name="s">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>      
+    </block>
+    <block type="onboard_tft_clock_draw">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">new_clock</field>
+        </shadow>
+      </value>      
+    </block>
+    <block type="onboard_tft_clock_clear">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">new_clock</field>
+        </shadow>
+      </value>   
+      <value name="VAR">
+          <block type="display_color_seclet">
+            <field name="COLOR">0x000000</field>
+          </block>
+          <shadow type="tuple_create_with_text_return">
+            <field name="TEXT">0,0,0</field>
+          </shadow>
+        </value>   
+    </block>
   </category>
   <!-- <category id="catME_GO" colour="100">
     <block type="ce_go_led_bright">

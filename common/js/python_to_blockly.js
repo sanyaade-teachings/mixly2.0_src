@@ -56,6 +56,10 @@ PythonToBlocks.prototype.convertSource = function(python_source) {
     if (python_source.trim() === "") {
         return {"xml": xmlToString(xml), "error": null};
     }
+    else{        
+        python_source=python_source.replace(/f'/g,"'")
+        python_source=python_source.replace(/f"/g,'"')
+    }
     this.source = python_source.split("\n");
     var filename = 'user_code.py';
     // Attempt parsing - might fail!
@@ -1648,6 +1652,7 @@ PythonToBlocks.KNOWN_MODULES = {
 PythonToBlocks.prototype.KNOWN_FUNCTIONS = ["append", "strip", "rstrip", "lstrip"];
 PythonToBlocks.KNOWN_ATTR_FUNCTIONS = {};
 PythonToBlocks.prototype.CallAttribute = function(func, args, keywords, starargs, kwargs, node) {
+    args = args ?? [];
     var name = this.identifier(func.attr);
     if (func.value._astname == "Name" || func.value._astname == "Attribute") {
         var module = null;

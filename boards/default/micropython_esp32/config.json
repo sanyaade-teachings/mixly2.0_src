@@ -2,7 +2,6 @@
     "board": {
         "MixGo": "micropython:esp32:mixgo",
         "MixGo PE": "micropython:esp32:mixgo_pe",
-        "RoboMaster E1": "micropython:esp32:rm_e1",
         "mPython": "micropython:esp32:mpython",
         "ESP32 Generic(4MB)": "micropython:esp32:generic"
     },
@@ -18,9 +17,6 @@
         },
         "micropython:esp32:generic": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/Generic_ESP32-0x1000-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
-        },
-        "micropython:esp32:rm_e1": {
-            "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
         },
         "micropython:esp32:mpython": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/mPython-0x1000-V1.19.1.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
@@ -121,14 +117,6 @@
                     {
                         "offset": "0X3A0000",
                         "path": "../micropython_common/build/HZK12.bin"
-                    }
-                ]
-            },
-            "micropython:esp32:rm_e1": {
-                "binFile": [
-                    {
-                        "offset": "0x1000",
-                        "path": "./build/RM_E1-0x1000-V1.19.1-Slib.bin"
                     }
                 ]
             },

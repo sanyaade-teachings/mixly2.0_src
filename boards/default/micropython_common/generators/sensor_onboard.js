@@ -247,6 +247,15 @@ Blockly.Python.forBlock['rfid_write'] = function(){
     return code;
 };
 
+Blockly.Python.forBlock['rfid_write_return'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
+    var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_'+version+'_onboard_rc522'] = "from "+version+" import onboard_rc522";
+    var code = 'onboard_rc522.write_card('+cnt+','+sector+')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');

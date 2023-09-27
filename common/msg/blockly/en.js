@@ -3545,5 +3545,6 @@ En.SET_TIME = "Set Time";
 En.DRAW_CLOCK = "Draw Clock";
 En.CLEAR_CLOCK = "Clear pointer";
 En.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = 'draw %1 circle %2 x %3 y %4 radius %5 color %6';
+En.RETURN_SUCCESS_OR_NOT = "return success or not";
 
 })();

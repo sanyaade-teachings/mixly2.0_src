@@ -384,6 +384,15 @@ Blockly.Python.forBlock['extern_rfid_write'] = function(){
     return code;
 };
 
+Blockly.Python.forBlock['extern_rfid_write_return'] = function(){
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
+    var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_rc522'] = 'import rc522';
+    var code = sub + '.write_card('+cnt+','+sector+')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['extern_rfid_status'] = function(){
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');

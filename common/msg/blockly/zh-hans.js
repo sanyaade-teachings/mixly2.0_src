@@ -3682,5 +3682,6 @@ ZhHans.SET_TIME = "设置时间";
 ZhHans.DRAW_CLOCK = "绘制时钟";
 ZhHans.CLEAR_CLOCK = "清除指针";
 ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '绘制 %1 圆形 %2 x %3 y %4 半径 %5 颜色 %6';
+ZhHans.RETURN_SUCCESS_OR_NOT = "返回是否成功";
 
 })();

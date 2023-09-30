@@ -74,10 +74,6 @@ Interface.init = () => {
     Nav.init_();
     FooterBar.init();
     NavEvents.init();
-    if (Env.hasSocketServer) {
-        const { Socket } = Mixly.WebSocket;
-        Socket.init();
-    }
 }
 
 Interface.onresize = (event) => {
@@ -140,6 +136,10 @@ window.addEventListener('load', () => {
     LazyLoad.js(scrpitPathList, () => {
         Editor.init();
         Boards.init();
+        if (Env.hasSocketServer) {
+            const { Socket } = Mixly.WebSocket;
+            Socket.init();
+        }
         if (goog.isElectron) {
             const {
                 LibManager = undefined,

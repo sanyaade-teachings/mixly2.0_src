@@ -415,9 +415,6 @@ html[data-bs-theme=dark] .layui-text a:not(.layui-btn) {
 html[data-bs-theme=dark] .layui-text blockquote:not(.layui-elem-quote) {
   border-left: 5px solid var(--lay-color-border-4);
 }
-html[data-bs-theme=dark] .layui-text pre > code:not(.layui-code) {
-  background-color: var(--lay-color-bg-white);
-}
 html[data-bs-theme=dark] .layui-font-red {
   color: var(--lay-color-red-6) !important;
 }
@@ -501,6 +498,7 @@ html[data-bs-theme=dark] .layui-textarea:hover {
 html[data-bs-theme=dark] .layui-input:focus,
 html[data-bs-theme=dark] .layui-textarea:focus {
   border-color: var(--lay-color-secondary-hover) !important;
+  /*background-color: var(--lay-color-bg-2);*/
   box-shadow: 0 0 0 3px rgba(22, 183, 119, 0.08);
 }
 html[data-bs-theme=dark] .layui-input[disabled],
@@ -541,7 +539,7 @@ html[data-bs-theme=dark] .layui-input-affix .layui-icon-clear {
 html[data-bs-theme=dark] .layui-input-affix .layui-icon:hover {
   color: var(--lay-color-text-3);
 }
-html[data-bs-theme=dark] .layui-input-wrap .layui-input-number .layui-icon:first-child {
+html[data-bs-theme=dark] .layui-input-wrap .layui-input-number .layui-icon-up {
   border-bottom-color: var(--lay-color-border-1);
 }
 html[data-bs-theme=dark] .layui-form-select {
@@ -910,6 +908,14 @@ html[data-bs-theme=dark] .layui-table-grid-down {
 html[data-bs-theme=dark] .layui-table-grid-down:hover {
   background-color: var(--lay-color-bg-5);
 }
+html[data-bs-theme=dark] .layui-table-cell-c {
+  background-color: var(--lay-color-gray-13);
+  color: var(--lay-color-text-1);
+  border-color: var(--lay-color-border-3);
+}
+html[data-bs-theme=dark] .layui-table-cell-c:hover {
+  border-color: var(--lay-color-secondary-hover);
+}
 html[data-bs-theme=dark] body .layui-table-tips .layui-layer-content {
   box-shadow: var(--lay-shadow-3);
 }
@@ -1217,7 +1223,7 @@ html[data-bs-theme=dark] .layui-util-face ul li:hover {
 html[data-bs-theme=dark] .layui-code {
   border: 1px solid var(--lay-color-border-2);
   background-color: var(--lay-color-bg-white);
-  color: var(--lay-color-black-5);
+  color: var(--lay-color-text-2);
 }
 html[data-bs-theme=dark] .layui-transfer-box,
 html[data-bs-theme=dark] .layui-transfer-header,
@@ -1376,32 +1382,47 @@ html[data-bs-theme=dark] .layui-tree-emptyText {
 }
 html[data-bs-theme=dark] .layui-code-view {
   border: 1px solid var(--lay-color-border-1);
+}
+html[data-bs-theme=dark] .layui-code-view:not(.layui-code-hl) {
   background-color: var(--lay-color-bg-2);
   color: var(--lay-color-text-2);
-  border-left-width: 6px;
 }
-html[data-bs-theme=dark] .layui-code-title {
-  border-bottom: 1px solid var(--lay-color-border-2);
-}
-html[data-bs-theme=dark] .layui-code-title > .layui-code-about {
-  color: #c5c5c5;
-}
-html[data-bs-theme=dark] .layui-code-view > .layui-code-ol > li {
-  border-left: 1px solid var(--lay-color-border-2);
+html[data-bs-theme=dark] .layui-code-header {
+  border-bottom: 1px solid var(--lay-color-border-1);
   background-color: var(--lay-color-bg-2);
 }
-html[data-bs-theme=dark] .layui-code-view > .layui-code-ul > li {
+html[data-bs-theme=dark] .layui-code-header > .layui-code-header-about {
+  color: var(--lay-color-text-2);
+}
+html[data-bs-theme=dark] .layui-code-view:not(.layui-code-hl) .layui-code-ln-side {
+  border-color: var(--lay-color-border-1);
   background-color: var(--lay-color-bg-2);
 }
-html[data-bs-theme=dark] .layui-code-dark {
-  border: 1px solid #3d3d3d;
-  border-left-color: #656565;
-  background-color: #3d3d3d;
-  color: var(--lay-color-gray-8);
+html[data-bs-theme=dark] .layui-code-nowrap > .layui-code-ln-side {
+  background: none !important;
 }
-html[data-bs-theme=dark] .layui-code-dark > .layui-code-ol > li,
-html[data-bs-theme=dark] .layui-code-dark > .layui-code-ul > li {
-  background-color: #3f3f3f;
+html[data-bs-theme=dark] .layui-code-fixbar > span {
+  color: var(--lay-color-text-3);
+}
+html[data-bs-theme=dark] .layui-code-fixbar > span:hover {
+  color: var(--lay-color-secondary-hover);
+}
+html[data-bs-theme=dark] .layui-code-theme-dark {
+  border-color: rgba(126, 122, 122, 0.15);
+  background-color: #1f1f1f;
+  color: #ccc;
+}
+html[data-bs-theme=dark] .layui-code-theme-dark > .layui-code-ln-side {
+  border-right-color: #2a2a2a;
+  background: none;
+  color: #6e7681;
+}
+html[data-bs-theme=dark] .layui-code-view.layui-code-hl > .layui-code-ln-side {
+  background-color: transparent;
+}
+html[data-bs-theme=dark] .layui-code-theme-dark.layui-code-hl,
+html[data-bs-theme=dark] .layui-code-theme-dark.layui-code-hl > .layui-code-ln-side {
+  border-color: rgba(126, 122, 122, 0.15);
 }
 html[data-bs-theme=dark] .layui-code-full {
   background-color: var(--lay-color-bg-1);
@@ -1578,10 +1599,10 @@ html[data-bs-theme=dark] .layui-layer-setwin span {
   color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-min:before {
-  background-color: var(--lay-color-text-3);
+  border-bottom-color: var(--lay-color-text-1);
 }
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-min:hover:before {
-  background-color: var(--lay-color-info-hover);
+  border-bottom-color: var(--lay-color-info-hover);
 }
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-max:after,
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-max:before {
@@ -1590,9 +1611,6 @@ html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-max:before {
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-max:hover:after,
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-max:hover:before {
   border-color: var(--lay-color-info-hover);
-}
-html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-min:hover:before {
-  background-color: var(--lay-color-info-hover);
 }
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-maxmin:after,
 html[data-bs-theme=dark] .layui-layer-setwin .layui-layer-maxmin:before {
@@ -1714,24 +1732,31 @@ html[data-bs-theme=dark] .layui-layer-tab .layui-layer-title span.layui-this {
   border-right: 1px solid var(--lay-color-border-2);
   background-color: var(--lay-color-bg-3);
 }
-html[data-bs-theme=dark] .layui-layer-imgnext,
-html[data-bs-theme=dark] .layui-layer-imgprev {
+html[data-bs-theme=dark] .layui-layer-photos {
+  background: none;
+  box-shadow: none;
+}
+html[data-bs-theme=dark] .layui-layer-photos-prev,
+html[data-bs-theme=dark] .layui-layer-photos-next {
   color: var(--lay-color-gray-9);
 }
-html[data-bs-theme=dark] .layui-layer-imgnext:hover,
-html[data-bs-theme=dark] .layui-layer-imgprev:hover {
-  color: var(--lay-color-gray-8);
+html[data-bs-theme=dark] .layui-layer-photos-prev:hover,
+html[data-bs-theme=dark] .layui-layer-photos-next:hover {
+  color: var(--lay-color-text-1);
 }
-html[data-bs-theme=dark] .layui-layer-imgbar {
+html[data-bs-theme=dark] .layui-layer-photos-toolbar {
   background-color: #333 \9;
   background-color: var(--lay-color-bg-5);
   color: var(--lay-color-text-1);
 }
-html[data-bs-theme=dark] .layui-layer-imgtit * {
+html[data-bs-theme=dark] .layui-layer-photos-toolbar * {
   color: var(--lay-color-text-1);
 }
-html[data-bs-theme=dark] .layui-layer-imgtit a:hover {
+html[data-bs-theme=dark] .layui-layer-photos-toolbar a:hover {
   color: var(--lay-color-text-2);
+}
+html[data-bs-theme=dark] .layui-layer-photos-header > span:hover {
+  background-color: var(--lay-color-fill-2);
 }
 html[data-bs-theme=dark] .layui-layer-tips i.layui-layer-TipsB,
 html[data-bs-theme=dark] .layui-layer-tips i.layui-layer-TipsT {
@@ -1812,12 +1837,5 @@ html[data-bs-theme=dark] .layui-layer-tab .layui-layer-title span:first-child {
 }
 html[data-bs-theme=dark] .layui-slider-input.layui-input,
 html[data-bs-theme=dark] .layui-slider-input .layui-input {
-  background-color: var(--lay-color-bg-2);
-}
-html[data-bs-theme=dark] a {
-  color: var(--lay-color-text-1);
-}
-html[data-bs-theme=dark] .layui-code,
-html[data-bs-theme=dark] pre > code {
   background-color: var(--lay-color-bg-2);
 }

@@ -837,6 +837,24 @@ Blockly.Blocks['extern_rfid_write'] = {
     }
 };
 
+Blockly.Blocks['extern_rfid_write_return'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_WRITE);
+        this.appendValueInput('SUB')
+            .setCheck("var")
+        this.appendValueInput('SECTOR')
+            .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
+        this.appendValueInput('CONTENT')
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_WRITE_NUM)
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.RETURN_SUCCESS_OR_NOT);    
+        this.setInputsInline(true);
+        this.setOutput(true, Boolean);
+    }
+};
+
 Blockly.Blocks['extern_rfid_status'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);

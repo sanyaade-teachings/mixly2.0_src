@@ -1506,6 +1506,18 @@
         </shadow>
       </value>
     </block>
+    <block type="rfid_write_return" m-show='micropython:esp32c3:mixgo_cc'>
+      <value name="SECTOR">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="CONTENT">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
     <block type="onboard_RTC_set_datetime">          
         <value name="year">
           <shadow type="math_number">
@@ -3515,6 +3527,23 @@
         </value>
       </block>
       <block type="extern_rfid_write" m-hide='micropython:esp32c3:mixgocar_c3'>
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ysensor</field>
+          </shadow>
+        </value>
+        <value name="SECTOR">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="CONTENT">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="extern_rfid_write_return" m-hide='micropython:esp32c3:mixgocar_c3'>
         <value name="SUB">
           <shadow type="variables_get">
             <field name="VAR">ysensor</field>

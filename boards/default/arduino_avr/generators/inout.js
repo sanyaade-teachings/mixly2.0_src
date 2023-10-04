@@ -95,7 +95,7 @@ Blockly.Arduino.forBlock['inout_analog_read'] = function () {
     if (typeof analog === 'object') {
         for (let i of analog)
             if (dropdown_pin === i[1]) {
-                Blockly.Arduino.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+                //Blockly.Arduino.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
                 break;
             }
     }

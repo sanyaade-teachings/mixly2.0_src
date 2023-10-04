@@ -157,7 +157,6 @@ class EditorMixed {
             sizeChanged: () => {
                 // 重新调整编辑器尺寸
                 blockEditor.resize();
-                codeEditor.resize();
             },
             onfull: (type) => {
                 switch(type) {

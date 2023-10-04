@@ -56,7 +56,12 @@ Mixly.CssLoader.commonCss = [
     "common/css/xterm.css",
     "common/css/footer-layer.css",
     "common/css/progress.css",
-    "common/css/blockly.css"
+    "common/css/blockly.css",
+    "common/css/chrome-tabs.css",
+    "common/css/chrome-tabs-dark-theme.css",
+    "common/css/jstree/default/style.css",
+    "common/css/jstree/default-dark/style.css",
+    "common/css/jstree/jstree-ext.css"
 ];
 
 /* 客户端css */

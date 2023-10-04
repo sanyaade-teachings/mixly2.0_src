@@ -978,7 +978,6 @@ Nav.init_ = function() {
     this.$moreLeftBtnContainer = this.$container.find(
         `[m-id=${this.CONTAINER_IDS.MORE_LEFT_BTN_CONTAINER}]`
     );
-    console.log(this.$moreLeftBtnContainer)
     this.$dropdownContainer = this.$container.find(
         `[m-id=${this.CONTAINER_IDS.DROPDOWN_CONTAINER}]`
     );

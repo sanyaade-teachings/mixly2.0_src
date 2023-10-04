@@ -49,7 +49,7 @@ Env.pyFilePath = null;
   * 获取板卡index或主页面index的路径
   * @type {String} 
   */
-Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
+Env.indexDirPath = path.join((new URL($('html')[0].baseURI)).href, '../').replace(/file:\/+/g, '');
 Env.indexDirPath = decodeURIComponent(Env.indexDirPath);
 if (goog.isElectron && ['darwin', 'linux'].includes(Env.currentPlatform)) {
   Env.indexDirPath = '/' + Env.indexDirPath;

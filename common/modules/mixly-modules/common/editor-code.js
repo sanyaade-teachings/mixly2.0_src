@@ -25,7 +25,9 @@ class EditorCode extends EditorAce {
         this.editor.setOptions({
             enableBasicAutocompletion: true,
             enableSnippets: true,
-            enableLiveAutocompletion: true
+            enableLiveAutocompletion: true,
+            autoScrollEditorIntoView: true,
+            // customScrollbar: true,
         });
         const session = this.editor.getSession();
         const language = BOARD.language.toLowerCase();
@@ -50,6 +52,11 @@ class EditorCode extends EditorAce {
             session.setMode('ace/mode/c_cpp');
             this.editor.setTheme('ace/theme/' + 
                 (USER.theme === 'dark' ? 'dracula' : 'xcode'));
+        }
+        if (USER.theme === "dark") {
+            this.editor.setOption("theme", "ace/theme/twilight");
+        } else {
+            this.editor.setOption("theme", "ace/theme/xcode");
         }
     }
 }

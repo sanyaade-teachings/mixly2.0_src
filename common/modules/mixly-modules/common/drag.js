@@ -25,26 +25,39 @@ class Drag {
     }
     constructor(container, config) {
         this.config = { ...Drag.DEFAULT_CONFIG, ...config };
-        this.$container = $('#' + container);
+        this.$container = $(`#${container}`);
         if (!this.config.elem) {
             this.config.elem = [];
             const $children = this.$container.children();
-            this.config.elem.push([ $($children.get(0)) ], [ $($children.get(1)) ]);
+            this.config.elem.push($($children.get(0)), $($children.get(1)));
         }
         let $dragElem = $('<div></div>'), $dragElemContainer = $('<div></div>');
         const dragType = this.config.type === 'h'? 's' : 'w';
-        this.$container.addClass('drag-' + dragType + '-container');
-        $dragElemContainer.addClass('drag-' + dragType + '-elem-container');
+        this.$container.addClass(`drag-${dragType}-container`);
+        $dragElemContainer.addClass(`drag-${dragType}-elem-container`);
         if (this.config.type === 'h') {
-            $dragElemContainer.css({
-                'height': 100 * this.config.elem[0][0].height() / this.$container.height() + '%',
-            });
+            const height = 100 * this.config.elem[0].height() / this.$container.height();
+            if (height) {
+                $dragElemContainer.css({
+                    'height': height + '%',
+                });
+            } else {
+                $dragElemContainer.css({
+                    'height': '4px',
+                });
+            }
             $dragElem.addClass('drag-s-elem horizontal-line');
         } else {
-            $dragElemContainer.css({
-                'width': 100 * this.config.elem[0][0].width() / this.$container.width() + '%',
-            });
-            $dragElem = $('<div></div>');
+            const width = 100 * this.config.elem[0].width() / this.$container.width();
+            if (width) {
+                $dragElemContainer.css({
+                    'width': width + '%',
+                });
+            } else {
+                $dragElemContainer.css({
+                    'width': '4px',
+                });
+            }
             $dragElem.addClass('drag-w-elem vertical-line');
         }
         $dragElemContainer.append($dragElem);
@@ -71,7 +84,6 @@ class Drag {
             onfull,
             exitfull
         } = this.config;
-        let movedElemList1 = elem[0], movedElemList2 = elem[1];
         dragElem.onmousedown = function (elemEvent) {
             let dis;
             if (type === 'h') {
@@ -131,23 +143,29 @@ class Drag {
                 return false;
             };
             document.onmouseup = function () {
-                if (type === 'h')
+                if (type === 'h') {
                     $('body').removeClass('drag-s-resize');
-                else
+                } else {
                     $('body').removeClass('drag-w-resize');
+                }
                 document.onmousemove = null;
                 document.onmouseup = null;
             };
-            if (_this.end)
-            return false;
+            if (_this.end) {
+                return false;
+            }
         };
     }
 
     changeSize(part) {
         const { type, elem, sizeChanged } = this.config,
         cssType = type === 'h'? 'height' : 'width';
-        let elem1Size, elem2Size,
-        [ elem1List, elem2List ] = elem;
+        let elem1Size,
+        elem2Size,
+        elem1List = [],
+        elem2List = [];
+        elem1List.push(elem[0]);
+        elem2List.push(elem[1]);
         if (typeof part === 'string' && part.indexOf('%') !== -1) {
             elem1Size = part;
             elem2Size = (100 - parseFloat(elem1Size)) + '%';
@@ -164,10 +182,11 @@ class Drag {
         this.prevSize = this.size;
         this.size = [elem1Size, elem2Size];
         if (!parseFloat(elem1Size)) {
-            if (type === 'h')
+            if (type === 'h') {
                 this.$dragElemContainer.css('height', '4px');
-            else
+            } else {
                 this.$dragElemContainer.css('width', '4px');
+            }
         } else {
             elem1List = [ this.$dragElemContainer, ...elem1List ];
         }

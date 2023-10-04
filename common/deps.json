@@ -156,6 +156,18 @@
         "provide": ["FingerprintJS"],
         "require": []
     }, {
+        "path": "modules/web-modules/chrome-tabs.js",
+        "provide": ["ChromeTabs"],
+        "require": ["Draggabilly"]
+    }, {
+        "path": "modules/web-modules/draggabilly.min.js",
+        "provide": ["Draggabilly"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/jstree.min.js",
+        "provide": ["jstree"],
+        "require": []
+    }, {
         "path": "modules/web-modules/path-browserify.js",
         "provide": ["path"],
         "require": []

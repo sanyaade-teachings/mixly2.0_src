@@ -103,8 +103,7 @@ Interface.onresize = (event) => {
         }
         Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
     }*/
-    const { codeEditor, blockEditor } = Editor.mainEditor;
-    codeEditor.resize();
+    const { blockEditor } = Editor.mainEditor;
     blockEditor.resize();
 }
 
@@ -172,7 +171,7 @@ window.addEventListener('load', () => {
         Interface.onresize();
         Nav.resize();
         const $loading = $('.loading');
-        const toolboxWidth = $('.blocklyToolboxDiv').width();
+        const toolboxWidth = $('.blocklyToolboxDiv').outerWidth(true);
         $loading.children('.left-div').animate({
           width: toolboxWidth + 'px'
         }, 'slow', () => {

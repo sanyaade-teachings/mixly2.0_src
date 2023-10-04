@@ -165,7 +165,9 @@
             "Mixly.StatusBarTab",
             "Mixly.Msg",
             "Mixly.Config",
-            "Mixly.Nav"
+            "Mixly.Nav",
+            "ChromeTabs",
+            "jstree"
         ],
         "provide": [
             "Mixly.Editor"

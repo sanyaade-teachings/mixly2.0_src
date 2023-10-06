@@ -19,15 +19,13 @@
   height: 100%;
 }
 .chrome-tabs .chrome-tab {
-  position: absolute;
-  left: 0;
-  top: 0px;
-  bottom: 0px;
-  width: 240px;
+  position: relative;
   border: 0;
   margin: 0;
   z-index: 1;
   pointer-events: none;
+  height: 100%;
+  display: inline-flex;
 }
 .chrome-tabs .chrome-tab,
 .chrome-tabs .chrome-tab * {
@@ -36,10 +34,10 @@
 }
 .chrome-tabs .chrome-tab .chrome-tab-dividers {
   position: absolute;
-  top: 5px;
-  bottom: 5px;
-  left: var(--tab-content-margin);
-  right: var(--tab-content-margin);
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  right: 0;
 }
 .chrome-tabs .chrome-tab .chrome-tab-dividers,
 .chrome-tabs .chrome-tab .chrome-tab-dividers::before,
@@ -53,26 +51,27 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 1px;
+  width: 0.5px;
   background: #a9adb0;
   opacity: 1;
-  transition: opacity 0.2s ease;
 }
-.chrome-tabs .chrome-tab .chrome-tab-dividers::before {
-  left: 0;
-}
+.chrome-tabs .chrome-tab .chrome-tab-dividers::before,
 .chrome-tabs .chrome-tab .chrome-tab-dividers::after {
+  left: 0;
   right: 0;
 }
 .chrome-tabs .chrome-tab:first-child .chrome-tab-dividers::before,
-.chrome-tabs .chrome-tab:last-child .chrome-tab-dividers::after {
+.chrome-tabs .chrome-tab:first-child .chrome-tab-dividers::after {
   opacity: 0;
 }
+/*.chrome-tabs .chrome-tab:last-child .chrome-tab-dividers::after {
+
+}*/
 .chrome-tabs .chrome-tab .chrome-tab-background {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 1;
+  right: 1;
   height: 100%;
   overflow: hidden;
   pointer-events: none;
@@ -112,8 +111,8 @@
   animation: chrome-tab-was-just-added 120ms forwards ease-in-out;
 }
 .chrome-tabs .chrome-tab .chrome-tab-content {
-  position: absolute;
-  display: flex;
+  position: relative;
+  display: inline-flex;
   top: 0;
   bottom: 0;
   left: var(--tab-content-margin);
@@ -127,7 +126,7 @@
   align-items: center;
 }
 .chrome-tabs .chrome-tab .chrome-tab-content:hover .chrome-tab-close {
-  display: block;
+  opacity: 1;
 }
 .chrome-tabs .chrome-tab[is-mini] .chrome-tab-content {
   padding-left: 2px;
@@ -160,15 +159,13 @@
   white-space: nowrap;
   margin-left: 4px;
   color: #5f6368;
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
-  mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent);
 }
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-title {
   margin-left: 0;
 }
 .chrome-tabs .chrome-tab .chrome-tab-favicon + .chrome-tab-title,
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-favicon + .chrome-tab-title {
-  margin-left: 8px;
+  margin: 0 4px;
 }
 .chrome-tabs .chrome-tab[is-smaller] .chrome-tab-favicon + .chrome-tab-title,
 .chrome-tabs .chrome-tab[is-mini] .chrome-tab-title {
@@ -198,24 +195,32 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 8px 8px;
-  display: none;
+  display: block;
+  opacity: 0;
+  margin-top: 2px;
+}
+.chrome-tabs .chrome-tab[active] .chrome-tab-close {
+  opacity: 1;
 }
 @media (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:hover {
     background-color: #e8eaed;
+    opacity: 1;
   }
   .chrome-tabs .chrome-tab .chrome-tab-close:hover:active {
     background-color: #dadce0;
+    opacity: 1;
   }
 }
 @media not all and (hover: hover) {
   .chrome-tabs .chrome-tab .chrome-tab-close:active {
     background-color: #dadce0;
+    opacity: 1;
   }
 }
 @media (hover: hover) {
   .chrome-tabs .chrome-tab:not([active]) .chrome-tab-close:not(:hover):not(:active) {
-    opacity: 0.8;
+/*    opacity: 0;*/
   }
 }
 .chrome-tabs .chrome-tab[is-smaller] .chrome-tab-close {

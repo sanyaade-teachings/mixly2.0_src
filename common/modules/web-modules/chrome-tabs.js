@@ -69,11 +69,13 @@
       this.el.setAttribute('data-chrome-tabs-instance-id', this.instanceId)
       instanceId += 1
 
+      $(document).on('pointerdown', '.chrome-tab', (event) => {
+        this.setCurrentTab(event.currentTarget)
+      })
+
       this.setupCustomProperties()
       this.setupStyleEl()
       this.setupEvents()
-      this.layoutTabs()
-      this.setupDraggabilly()
     }
 
     emit(eventName, data) {
@@ -90,14 +92,9 @@
     }
 
     setupEvents() {
-      window.addEventListener('resize', _ => {
-        this.cleanUpPreviouslyDraggedTabs()
-        this.layoutTabs()
-      })
-
-      this.el.addEventListener('dblclick', event => {
+      /*this.el.addEventListener('dblclick', event => {
         if ([this.el, this.tabContentEl].includes(event.target)) this.addTab()
-      })
+      })*/
 
       this.tabEls.forEach((tabEl) => this.setTabCloseEventListener(tabEl))
     }
@@ -155,35 +152,6 @@
       return positions
     }
 
-    layoutTabs() {
-      const tabContentWidths = this.tabContentWidths
-
-      this.tabEls.forEach((tabEl, i) => {
-        const contentWidth = tabContentWidths[i]
-        const width = contentWidth + (2 * TAB_CONTENT_MARGIN)
-
-        tabEl.style.width = width + 'px'
-        tabEl.removeAttribute('is-small')
-        tabEl.removeAttribute('is-smaller')
-        tabEl.removeAttribute('is-mini')
-
-        if (contentWidth < TAB_SIZE_SMALL) tabEl.setAttribute('is-small', '')
-        if (contentWidth < TAB_SIZE_SMALLER) tabEl.setAttribute('is-smaller', '')
-        if (contentWidth < TAB_SIZE_MINI) tabEl.setAttribute('is-mini', '')
-      })
-
-      let styleHTML = ''
-      this.tabPositions.forEach((position, i) => {
-        styleHTML += `
-          .chrome-tabs[data-chrome-tabs-instance-id="${ this.instanceId }"] .chrome-tab:nth-child(${ i + 1 }) {
-            transform: translate3d(${ position }px, 0, 0)
-          }
-        `
-        this.tabEls[i].setAttribute('m-left', position)
-      })
-      this.styleEl.innerHTML = styleHTML
-    }
-
     createNewTabEl() {
       const div = document.createElement('div')
       div.innerHTML = tabTemplate
@@ -202,11 +170,8 @@
       this.tabContentEl.appendChild(tabEl)
       this.setTabCloseEventListener(tabEl)
       this.updateTab(tabEl, tabProperties)
-      this.cleanUpPreviouslyDraggedTabs()
-      this.layoutTabs()
       this.emit('tabAdd', { tabEl })
       if (!background) this.setCurrentTab(tabEl)
-      this.setupDraggabilly()
       return tabEl;
     }
 
@@ -239,10 +204,7 @@
         }
       }
       tabEl.parentNode.removeChild(tabEl)
-      this.cleanUpPreviouslyDraggedTabs()
-      this.layoutTabs()
       this.emit('tabRemove', { tabEl })
-      this.setupDraggabilly()
     }
 
     updateTab(tabEl, tabProperties) {
@@ -264,103 +226,6 @@
       if (tabProperties.title) {
         tabEl.setAttribute('title', tabProperties.title)
       }
-    }
-
-    cleanUpPreviouslyDraggedTabs() {
-      this.tabEls.forEach((tabEl) => tabEl.classList.remove('chrome-tab-was-just-dragged'))
-    }
-
-    setupDraggabilly() {
-      const tabEls = this.tabEls
-      const tabPositions = this.tabPositions
-
-      if (this.isDragging) {
-        this.isDragging = false
-        this.el.classList.remove('chrome-tabs-is-sorting')
-        this.draggabillyDragging.element.classList.remove('chrome-tab-is-dragging')
-        this.draggabillyDragging.element.style.transform = ''
-        this.draggabillyDragging.dragEnd()
-        this.draggabillyDragging.isDragging = false
-        this.draggabillyDragging.positionDrag = noop // Prevent Draggabilly from updating tabEl.style.transform in later frames
-        this.draggabillyDragging.destroy()
-        this.draggabillyDragging = null
-      }
-
-      this.draggabillies.forEach(d => d.destroy())
-
-      tabEls.forEach((tabEl, originalIndex) => {
-        const originalTabPositionX = tabPositions[originalIndex]
-        const draggabilly = new Draggabilly(tabEl, {
-          axis: 'x',
-          handle: '.chrome-tab-drag-handle',
-          containment: this.tabContentEl
-        })
-
-        this.draggabillies.push(draggabilly)
-
-        draggabilly.on('pointerDown', _ => {
-          this.setCurrentTab(tabEl)
-        })
-
-        draggabilly.on('dragStart', _ => {
-          this.emit('dragStart')
-          this.isDragging = true
-          this.draggabillyDragging = draggabilly
-          tabEl.classList.add('chrome-tab-is-dragging')
-          this.el.classList.add('chrome-tabs-is-sorting')
-        })
-
-        draggabilly.on('dragEnd', _ => {
-          this.emit('dragEnd')
-          this.isDragging = false
-          const finalTranslateX = parseFloat(tabEl.style.left, 10)
-          tabEl.style.transform = `translate3d(0, 0, 0)`
-
-          // Animate dragged tab back into its place
-          requestAnimationFrame(_ => {
-            tabEl.style.left = '0'
-            tabEl.style.transform = `translate3d(${ finalTranslateX }px, 0, 0)`
-            // tabEl.setAttribute('m-left', finalTranslateX)
-            requestAnimationFrame(_ => {
-              tabEl.classList.remove('chrome-tab-is-dragging')
-              this.el.classList.remove('chrome-tabs-is-sorting')
-
-              tabEl.classList.add('chrome-tab-was-just-dragged')
-
-              requestAnimationFrame(_ => {
-                tabEl.style.transform = ''
-
-                this.layoutTabs()
-                this.setupDraggabilly()
-              })
-            })
-          })
-        })
-
-        draggabilly.on('dragMove', (event, pointer, moveVector) => {
-          // Current index be computed within the event since it can change during the dragMove
-          const tabEls = this.tabEls
-          const currentIndex = tabEls.indexOf(tabEl)
-
-          const currentTabPositionX = originalTabPositionX + moveVector.x
-          const destinationIndexTarget = closest(currentTabPositionX, tabPositions)
-          const destinationIndex = Math.max(0, Math.min(tabEls.length, destinationIndexTarget))
-
-          if (currentIndex !== destinationIndex) {
-            this.animateTabMove(tabEl, currentIndex, destinationIndex)
-          }
-        })
-      })
-    }
-
-    animateTabMove(tabEl, originIndex, destinationIndex) {
-      if (destinationIndex < originIndex) {
-        tabEl.parentNode.insertBefore(tabEl, this.tabEls[destinationIndex])
-      } else {
-        tabEl.parentNode.insertBefore(tabEl, this.tabEls[destinationIndex + 1])
-      }
-      this.emit('tabReorder', { tabEl, originIndex, destinationIndex })
-      this.layoutTabs()
     }
   }
 

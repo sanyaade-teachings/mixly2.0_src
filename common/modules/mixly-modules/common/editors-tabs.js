@@ -3,6 +3,7 @@ goog.loadJs('common', () => {
 goog.require('path');
 goog.require('ChromeTabs');
 goog.require('XScrollbar');
+goog.require('Sortable');
 goog.require('Mixly.Env');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
@@ -47,6 +48,11 @@ class EditorsTabs {
             trackBackground,
             thumbBackground
         });
+        this.sortable = new Sortable(this.chromeTabs.tabContentEl, {
+            animation: 150,
+            ghostClass: 'blue-background-class',
+            direction: 'horizontal'
+        });
         $parentsContainer.empty();
         $parentsContainer.append(this.$content);
         this.#addEvents_();
@@ -73,12 +79,6 @@ class EditorsTabs {
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
-        });
-        container.addEventListener('dragStart', () => {
-            this.scrollbar.disabled = true;
-        });
-        container.addEventListener('dragEnd', () => {
-            this.scrollbar.disabled = false;
         });
     }
 

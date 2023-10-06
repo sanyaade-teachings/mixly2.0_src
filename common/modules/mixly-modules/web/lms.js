@@ -51,7 +51,7 @@ Lms.save2moodle = function() {
     var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     data = Blockly.Xml.domToText(xml);
     type = 'xml';
-    $.post('../../../post_server_js.php', { unionid: id, hash: hash, userid: userid, content: data, type: type }, function (result) {
+    $.post('../../post_server_js.php', { unionid: id, hash: hash, userid: userid, content: data, type: type }, function (result) {
         var json = eval('(' + result + ')');
         alert(json.result);
     });
@@ -78,7 +78,7 @@ Lms.loadfrommoodle = function() {
         // alert('参数有误，请检查');
         return false;
     }
-    $.post('../../../get_content_microbitpy.php', { unionid: id, hash: hash, userid: userid, content: data }, function (result) {
+    $.post('../../get_content_microbitpy.php', { unionid: id, hash: hash, userid: userid, content: data }, function (result) {
         const { blockEditor } = Editor;
         if (result == '') {
             return;

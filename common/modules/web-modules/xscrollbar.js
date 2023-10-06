@@ -162,6 +162,9 @@ class XScrollbar {
     });
 
     document.addEventListener('mousemove', (e) => {
+      if (this.disabled) {
+        return;
+      }
       if (!(this.thumbXActive || this.thumbYActive)) return;
       e.preventDefault();
 
@@ -193,6 +196,9 @@ class XScrollbar {
     };
 
     this.$container.addEventListener('wheel', (e) => {
+      if (this.disabled) {
+        return;
+      }
       // 仅响应 y 滚动 => 作用于 x
       if (!this.hasXScrollbar) return;
       if (e.deltaY && !e.shiftKey) {
@@ -236,6 +242,9 @@ class XScrollbar {
    */
   bindScroll() {
     this.$container.addEventListener('scroll', () => {
+      if (this.disabled) {
+        return;
+      }
       if (this.thumbXActive || this.thumbYActive || this.innerScroll) return;
       if (this.hasXScrollbar) {
         this.$thumbX.style.left = this.$container.scrollLeft / this.maxScrollLeft * this.thumbXMaxLeft + 'px';
@@ -264,6 +273,9 @@ class XScrollbar {
    * 在 容器大小 或 内容大小 发生改变时调用
    */
   update() {
+    if (this.disabled) {
+      return;
+    }
     this.setThumbSize();
     if (this.hasXScrollbar) {
       this.$thumbX.style.left = this.$container.scrollLeft / this.maxScrollLeft * this.thumbXMaxLeft + 'px';

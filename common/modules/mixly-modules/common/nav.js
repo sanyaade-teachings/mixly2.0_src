@@ -1181,7 +1181,7 @@ Nav.resize = function() {
         if (!config) {
             continue;
         }
-        if (navWidth < nowWidth + 150) {
+        if (navWidth < nowWidth + 200) {
             config.$btn.css('display', 'none');
             config.$moreBtn.css('display', 'block');
             showMoreBtnContainer = true;

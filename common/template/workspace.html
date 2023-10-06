@@ -1,0 +1,222 @@
+<div style="height: 100%;width: 100%;">
+    <style type="text/css">
+        div[m-id="{{d.mId}}"] {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            height: 100%;
+            width: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] > .left-tabs {
+            width: 40px;
+            margin: 0;
+            z-index: 3;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .left-tabs {
+            background-color: #ddd;
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .left-tabs {
+            background-color: #434343;
+        }
+
+        div[m-id="{{d.mId}}"] > .drag-v {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container {
+            position: relative;
+            width: 0%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container > .sidebar {
+            overflow: hidden;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            border: 1px solid;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container > .sidebar {
+            border-color: #e5e5e5;
+            background-color: rgb(248, 248, 248);
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container > .sidebar {
+            border-color: var(--lay-color-border-1);
+            background-color: rgb(37, 37, 38);
+        }
+
+        div[m-id="{{d.mId}}"] > .drag-v > .drag-h {
+            width: 100%;
+            height: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] > .drag-v > .drag-h > .editor {
+            width: 100%;
+            height: 100%;
+        }
+
+        .statusbar-tabs {
+            position: relative;
+            width: 100%;
+            height: 0%;
+        }
+
+        .statusbar-tabs > .layui-tab {
+            margin: 0px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        .statusbar-tabs > div > ul > li:nth-child(1) > i {
+            display: none;
+        }
+
+        @media screen and (min-width: 1701px) {
+            .statusbar-tabs > div > div {
+                top: 25px;
+            }
+
+            .statusbar-tabs > div > ul {
+                height: 25px;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+            }
+
+            .statusbar-tabs > div > ul li {
+                line-height: 25px;
+                font-size: 14px;
+                padding-right: 13px;
+                padding-left: 13px;
+            }
+
+            .statusbar-tabs > div > ul .layui-this:after {
+                height: 25px;
+            }
+
+            .statusbar-tabs > div > ul li .layui-tab-close {
+                width: 15px;
+                height: 15px;
+                line-height: 15px;
+                font-size: 14px;
+                margin-left: 7px;
+                top: 0px;
+            }
+
+            .layui-badge-dot {
+                left: 4px !important;
+                top: -1px !important;
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media screen and (max-width: 1700px) {
+            .statusbar-tabs > div > div {
+                top: 20px;
+            }
+
+            .statusbar-tabs > div > ul {
+                height: 20px;
+                position: absolute;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+            }
+
+            .statusbar-tabs > div > ul li {
+                line-height: 20px;
+                font-size: 12px;
+                padding-right: 7px;
+                padding-left: 7px;
+            }
+
+            .statusbar-tabs > div > ul .layui-this:after {
+                height: 20px;
+            }
+
+            .statusbar-tabs > div > ul li .layui-tab-close {
+                width: 13px;
+                height: 13px;
+                line-height: 15px;
+                font-size: 10px;
+                margin-left: 6px;
+                top: 0px;
+            }
+
+            .layui-badge-dot {
+                left: 2px !important;
+                top: -1.5px !important;
+                width: 6px;
+                height: 6px;
+            }
+
+            html[data-bs-theme=light] .tab-btn {
+                width: 23px;
+                height: 20px;
+                line-height: 20px;
+                padding: 0 3px;
+            }
+
+            html[data-bs-theme=dark] .tab-btn {
+                width: 23px;
+                height: 20px;
+                line-height: 20px;
+                padding: 0 3px;
+            }
+        }
+
+        .statusbar-tabs > div > div {
+            padding: 0px;
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        .tab-ace {
+            width: auto;
+            height: 100%;
+            border: solid #ddd;
+            border-width: 0px;
+            border-radius: 0px;
+            word-break: normal;
+            text-align: left;
+            resize: none;
+        }
+    </style>
+    <div m-id="{{d.mId}}">
+        <div class="left-tabs"></div>
+        <div class="drag-v">
+            <div class="sidebar-container">
+                <div class="sidebar"></div>
+            </div>
+            <div class="drag-h">
+                <div class="editor"></div>
+                <div class="statusbar-tabs">
+                    <div class="layui-tab layui-tab-card" lay-allowclose="true" lay-filter="{{d.statusBarTabsFilter}}">
+                        <ul class="layui-tab-title">
+                        </ul>
+                        <div class="layui-tab-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

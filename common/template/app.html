@@ -50,6 +50,7 @@
         "
     ></div>
     <div
+        id="mixly-body"
         style="
             width: 100%;
             height: calc(100vh - var(--nav-height) - var(--footer-height));
@@ -61,7 +62,7 @@
             justify-content: space-around;
         "
     >
-        <div
+        <!-- <div
             style="
                 width: 40px;
                 margin: 0;
@@ -91,8 +92,6 @@
                         position: relative;
                     "
                 >
-                    <!-- <i class="layui-icon layui-icon-down layui-font-26" style="line-height: 22px;">
-                    </i> -->
                     <svg t="1696333297484" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4048" width="64" height="64"><path d="M912 208H427.872l-50.368-94.176A63.936 63.936 0 0 0 321.056 80H112c-35.296 0-64 28.704-64 64v736c0 35.296 28.704 64 64 64h800c35.296 0 64-28.704 64-64v-608c0-35.296-28.704-64-64-64z m-800-64h209.056l68.448 128H912v97.984c-0.416 0-0.8-0.128-1.216-0.128H113.248c-0.416 0-0.8 0.128-1.248 0.128V144z m0 736v-96l1.248-350.144 798.752 1.216V784h0.064v96H112z" fill="#ffffff" p-id="4049"></path></svg>
                     <a style="
                         height: 20px;
@@ -105,16 +104,11 @@
                     </div>
                 </button>
             </div>
-            <!-- <div class="demo-tab-body" id="tabBody">
-                <div class="layui-show">内容-1</div>
-                <div>内容-2</div>
-                <div>内容-3</div>
-            </div> -->
         </div>
         <div id="test-left" style="width: 100%;height: 100%;position: relative;">
             <div style="width: 0%;z-index: 1;position: relative;">
                 <div id="test-tree" style="
-                    overflow: auto;
+                    overflow: hidden;
                     position: absolute;
                     border: 1px solid rgb(81, 80, 80);
                     background-color: rgb(37, 37, 38);
@@ -125,21 +119,6 @@
                 "></div>
             </div>
             <div style="width: 100%;height: 100%; display: flex;flex-direction: column;">
-                <div id="tab-test" class="chrome-tabs" style="height: 35px;z-index: 3;background-color: #252526;">
-                    <div class="chrome-tabs-content">
-                        <div class="chrome-tab" active>
-                          <div class="chrome-tab-dividers"></div>
-                          <div class="chrome-tab-background">
-                          </div>
-                          <div class="chrome-tab-content">
-                            <!-- <div class="chrome-tab-favicon" style="background-image: url('demo/images/facebook-favicon.ico')"></div> -->
-                            <div class="chrome-tab-title">Facebook</div>
-                            <div class="chrome-tab-drag-handle"></div>
-                            <div class="chrome-tab-close"></div>
-                          </div>
-                        </div>
-                      </div>
-                </div>
                 <div
                     id="h-container"
                     style="
@@ -156,39 +135,6 @@
                             position: relative;
                         "
                     >
-                        <div
-                            style="
-                                width: 100%;
-                                height: 100%;
-                                position: relative;
-                                display: flex;
-                                flex-direction: row;
-                                flex-wrap: nowrap;
-                                justify-content: flex-end;
-                            "
-                        >
-                            <div
-                                id="block-editor"
-                                style="
-                                    right: 0px;
-                                    bottom: 0px;
-                                    position: absolute;
-                                    left: 0px;
-                                    top: 0px;
-                                "
-                            >
-                            </div>
-                        </div>
-                        <div
-                            id="code-editor"
-                            style="
-                                width: 0%;
-                                height: 100%;
-                                position: relative;
-                            "
-                        >
-                        
-                        </div>
                     </div>
                     <div
                         id="td_middle"
@@ -212,7 +158,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div
         id="mixly-footer"

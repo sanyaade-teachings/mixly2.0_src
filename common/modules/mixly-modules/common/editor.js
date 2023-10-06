@@ -2,23 +2,27 @@ goog.loadJs('common', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.DragH');
-goog.require('Mixly.EditorMixed');
+goog.require('Mixly.EditorMix');
 goog.require('Mixly.StatusBarTab');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
 goog.require('ChromeTabs');
 goog.require('jstree');
+goog.require('Mixly.EditorsManager');
+goog.require('Mixly.Workspace');
 goog.provide('Mixly.Editor');
 
 const {
     DragH,
     DragV,
-    EditorMixed,
+    EditorMix,
     StatusBarTab,
     Msg,
     Config,
     Nav,
+    EditorsManager,
+    Workspace,
     Editor
 } = Mixly;
 
@@ -157,24 +161,13 @@ const getPath = function (inPath) {
 }
 
 Editor.init = () => {
-    const mainEditor = new EditorMixed({
-        blockEditorConfig: {
-            id: 'block-editor',
-            toolboxId: 'toolbox'
-        },
-        codeEditorConfig: {
-            id: 'code-editor'
-        }
-    });
-    Editor.mainEditor = mainEditor;
-    Editor.blockEditor = mainEditor.blockEditor.editor;
-    Editor.codeEditor = mainEditor.codeEditor.editor;
-    Editor.drag = Editor.addDrag();
-    const mainStatusBarTab = new StatusBarTab('status-bar-ace', Editor.drag);
-    mainStatusBarTab.add('terminal', 'output', Msg.Lang['输出']);
-    mainStatusBarTab.changeTo('output');
-    Mixly.mainStatusBarTab = mainStatusBarTab;
-    Editor.addBtnClickEvent();
+    Editor.mainEditor = new EditorMix($('<div></div>')[0]);
+    Editor.mainEditor.init();
+    Editor.blockEditor = Editor.mainEditor.blockEditor.editor;
+    Editor.codeEditor = Editor.mainEditor.codeEditor.editor;
+    Editor.workspace = new Workspace($('#mixly-body')[0]);
+    // Editor.addBtnClickEvent();
+    Mixly.mainStatusBarTab = Editor.workspace.statusBarTabs;
     Nav.register({
         icon: 'icon-ccw',
         title: 'undo(ctrl+z)',
@@ -183,7 +176,7 @@ Editor.init = () => {
         preconditionFn: () => {
             return true;
         },
-        callback: () => mainEditor.undo(),
+        callback: () => Editor.mainEditor.undo(),
         scopeType: Nav.Scope.LEFT,
         weight: 0
     });
@@ -195,27 +188,11 @@ Editor.init = () => {
         preconditionFn: () => {
             return true;
         },
-        callback: () => mainEditor.redo(),
+        callback: () => Editor.mainEditor.redo(),
         scopeType: Nav.Scope.LEFT,
         weight: 1
     });
 
-    const test = new DragV('test-left', {
-        min: '100px',
-        full: [true, false],
-        sizeChanged: () => {
-            mainEditor.blockEditor.resize();
-        },
-        onfull: (type) => {
-        },
-        exitfull: (type) => {
-            return true;
-        }
-    });
-
-    var chromeTabs = new ChromeTabs();
-    const el = $('#tab-test')[0];
-    chromeTabs.init(el);
     if (USER.theme === 'dark') {
         trackBackground = '#222';
         thumbBackground = '#b0b0b0';
@@ -223,19 +200,9 @@ Editor.init = () => {
         trackBackground = '#ddd';
         thumbBackground = '#5f5f5f';
     }
-    const viewerScrollbar = new XScrollbar($('#tab-test > .chrome-tabs-content')[0], {
-        onlyHorizontal: true,
-        thumbSize: 1.5,
-        thumbRadius: 1,
-        trackBackground,
-        thumbBackground
-    });
 
-    el.addEventListener('activeTabChange', ({ detail }) => console.log('Active tab changed', detail.tabEl))
-    el.addEventListener('tabAdd', ({ detail }) => viewerScrollbar.update())
-    el.addEventListener('tabRemove', ({ detail }) => viewerScrollbar.update())
-    let rootPath = 'D:/';
-    const $tree = $('#test-tree')
+    let rootPath = 'D:/gitee/mixly2.0-win32-x64/resources/app/src/sample';
+    const $tree = Editor.workspace.$sidebar
       .on('click.jstree', '.jstree-open>a', ({ target }) => {
         setTimeout(() => $tree.jstree(true).close_node(target));
       })
@@ -248,16 +215,16 @@ Editor.init = () => {
       .jstree({
         core: {
             multiple: false,
-            animation: 50,
+            animation: 0,
             worker: false,
             data: function (node, cb) {
                 if(node.id === "#") {
                   cb([{
-                    text: `<div style="font-weight: bold;display: unset;">D:</div>`,
-                    id: "D:/",
+                    text: `<div style="font-weight: bold;display: unset;">SAMPLE</div>`,
+                    id: 'D:/gitee/mixly2.0-win32-x64/resources/app/src/sample',
                     children: true,
                     li_attr: {
-                        title: "D:/"
+                        title: "D:/gitee/mixly2.0-win32-x64/resources/app/src/sample"
                     },
                     icon: 'icon-folder'
                 }]);
@@ -270,12 +237,12 @@ Editor.init = () => {
                 name: 'default-dark',
                 responsive: false,
                 ellipsis: true
-            },
-            // dblclick_toggle: false
+            }
         },
-        plugins: ['wholerow', 'search', 'truncate', 'state'],
+        // plugins: ['wholerow', 'search', 'truncate', 'state'],
+        plugins: ['wholerow']
     });
-    const scrollbar = new XScrollbar($('#test-tree')[0], {
+    const scrollbar = new XScrollbar(Editor.workspace.$sidebar[0], {
         onlyHorizontal: false,
         thumbSize: 4,
         thumbRadius: 2,
@@ -288,18 +255,26 @@ Editor.init = () => {
         if (!selected.length) {
             return;
         }
-        console.log(selected[0]);
+        if (['icon-folder', 'icon-folder-empty'].includes(selected[0].icon)) {
+            return;
+        }
+        Editor.workspace.editorManager.editorTabs.addTab({
+            name: selected[0].text,
+            favicon: false,
+            title: selected[0].id
+        });
     });
 }
 
 Editor.addDrag = () => {
     const { blockEditor, codeEditor } = Editor.mainEditor;
     const $hBar = $('#nav').find('button[m-id="h-bar"]').children('a');
-    const hDrag = new DragH('h-container', {
+    const hDrag = new DragH($('#h-container')[0], {
         min: '50px',
+        startSize: '100%',
         sizeChanged: () => {
             // 重新调整编辑器尺寸
-            blockEditor.resize();
+            Editor.editorManager.resize();
         },
         onfull: (type) => {
             const { mainStatusBarTab } = Mixly;

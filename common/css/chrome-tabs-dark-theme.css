@@ -10,7 +10,7 @@ html[data-bs-theme=dark] .chrome-tabs .chrome-tab .chrome-tab-background {
   background-color: #292b2e;
 }
 html[data-bs-theme=dark] .chrome-tabs .chrome-tab[active] .chrome-tab-background {
-  background-color: #323639;
+  background-color: #1e1e1e;
 }
 html[data-bs-theme=dark] .chrome-tabs .chrome-tab .chrome-tab-title {
   color: #9ca1a7;
@@ -31,4 +31,7 @@ html[data-bs-theme=dark] .chrome-tabs .chrome-tab .chrome-tab-close:hover:active
 }
 html[data-bs-theme=dark] .chrome-tabs .chrome-tabs-bottom-bar {
   background: #323639;
+}
+html[data-bs-theme=dark] .chrome-tabs .chrome-tab[active] .chrome-tab-background {
+  border-color: #007acc;
 }

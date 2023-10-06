@@ -12,8 +12,8 @@
 
   const TAB_OVERLAP_DISTANCE = (TAB_CONTENT_MARGIN * 2) + TAB_CONTENT_OVERLAP_DISTANCE
 
-  const TAB_CONTENT_MIN_WIDTH = 100
-  const TAB_CONTENT_MAX_WIDTH = 140
+  const TAB_CONTENT_MIN_WIDTH = 140
+  const TAB_CONTENT_MAX_WIDTH = 160
 
   const TAB_SIZE_SMALL = 84
   const TAB_SIZE_SMALLER = 60
@@ -39,7 +39,6 @@
     <div class="chrome-tab">
       <div class="chrome-tab-dividers"></div>
       <div class="chrome-tab-background">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="chrome-tab-geometry-left" viewBox="0 0 214 36"><path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z"/></symbol><symbol id="chrome-tab-geometry-right" viewBox="0 0 214 36"><use xlink:href="#chrome-tab-geometry-left"/></symbol><clipPath id="crop"><rect class="mask" width="100%" height="100%" x="0"/></clipPath></defs><svg width="52%" height="100%"><use xlink:href="#chrome-tab-geometry-left" width="214" height="36" class="chrome-tab-geometry"/></svg><g transform="scale(-1, 1)"><svg width="52%" height="100%" x="-100%" y="0"><use xlink:href="#chrome-tab-geometry-right" width="214" height="36" class="chrome-tab-geometry"/></svg></g></svg>
       </div>
       <div class="chrome-tab-content">
         <div class="chrome-tab-favicon"></div>
@@ -51,6 +50,7 @@
   `
 
   const defaultTapProperties = {
+    name: 'New tab',
     title: 'New tab',
     favicon: false
   }
@@ -107,7 +107,7 @@
     }
 
     get tabContentEl() {
-      return this.el.querySelector('.chrome-tabs-content')
+      return this.el.querySelector('.x-scrollbar__content') ?? this.el.querySelector('.chrome-tabs-content')
     }
 
     get tabContentWidths() {
@@ -128,7 +128,6 @@
         widths.push(flooredClampedTargetWidth + extraWidth)
         if (extraWidthRemaining > 0) extraWidthRemaining -= 1
       }
-
       return widths
     }
 
@@ -180,6 +179,7 @@
             transform: translate3d(${ position }px, 0, 0)
           }
         `
+        this.tabEls[i].setAttribute('m-left', position)
       })
       this.styleEl.innerHTML = styleHTML
     }
@@ -190,7 +190,7 @@
       return div.firstElementChild
     }
 
-    addTab(tabProperties, { animate = true, background = false } = {}) {
+    addTab(tabProperties, { animate = false, background = false } = {}) {
       const tabEl = this.createNewTabEl()
 
       if (animate) {
@@ -202,11 +202,12 @@
       this.tabContentEl.appendChild(tabEl)
       this.setTabCloseEventListener(tabEl)
       this.updateTab(tabEl, tabProperties)
-      this.emit('tabAdd', { tabEl })
-      if (!background) this.setCurrentTab(tabEl)
       this.cleanUpPreviouslyDraggedTabs()
       this.layoutTabs()
+      this.emit('tabAdd', { tabEl })
+      if (!background) this.setCurrentTab(tabEl)
       this.setupDraggabilly()
+      return tabEl;
     }
 
     setTabCloseEventListener(tabEl) {
@@ -238,14 +239,14 @@
         }
       }
       tabEl.parentNode.removeChild(tabEl)
-      this.emit('tabRemove', { tabEl })
       this.cleanUpPreviouslyDraggedTabs()
       this.layoutTabs()
+      this.emit('tabRemove', { tabEl })
       this.setupDraggabilly()
     }
 
     updateTab(tabEl, tabProperties) {
-      tabEl.querySelector('.chrome-tab-title').textContent = tabProperties.title
+      tabEl.querySelector('.chrome-tab-title').textContent = tabProperties.name
 
       const faviconEl = tabEl.querySelector('.chrome-tab-favicon')
       if (tabProperties.favicon) {
@@ -258,6 +259,10 @@
 
       if (tabProperties.id) {
         tabEl.setAttribute('data-tab-id', tabProperties.id)
+      }
+
+      if (tabProperties.title) {
+        tabEl.setAttribute('title', tabProperties.title)
       }
     }
 
@@ -298,6 +303,7 @@
         })
 
         draggabilly.on('dragStart', _ => {
+          this.emit('dragStart')
           this.isDragging = true
           this.draggabillyDragging = draggabilly
           tabEl.classList.add('chrome-tab-is-dragging')
@@ -305,6 +311,7 @@
         })
 
         draggabilly.on('dragEnd', _ => {
+          this.emit('dragEnd')
           this.isDragging = false
           const finalTranslateX = parseFloat(tabEl.style.left, 10)
           tabEl.style.transform = `translate3d(0, 0, 0)`
@@ -313,7 +320,7 @@
           requestAnimationFrame(_ => {
             tabEl.style.left = '0'
             tabEl.style.transform = `translate3d(${ finalTranslateX }px, 0, 0)`
-
+            // tabEl.setAttribute('m-left', finalTranslateX)
             requestAnimationFrame(_ => {
               tabEl.classList.remove('chrome-tab-is-dragging')
               this.el.classList.remove('chrome-tabs-is-sorting')

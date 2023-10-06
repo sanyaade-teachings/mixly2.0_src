@@ -316,6 +316,13 @@
     font-size: 13px !important;
     font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
     opacity: 0.8;
+}
+
+html[data-bs-theme=light] .jstree-anchor {
+    color: rgb(50, 50, 50) !important;
+}
+
+html[data-bs-theme=dark] .jstree-anchor {
     color: rgb(204, 204, 204) !important;
 }
 

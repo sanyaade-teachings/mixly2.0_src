@@ -15,15 +15,17 @@ class EditorAce {
         this.MENU_TEMPLATE = '<div style="float:left;">{{d.name}}&nbsp</div><div style="float:right;">&nbsp{{d.hotKey}}</div>';
     }
 
-    constructor(id) {
-        this.id = id;
-        this.$div = $(`#${this.id}`);
-        this.editor = ace.edit(id);
+    constructor(dom) {
+        this.$container = $(dom);
+        this.destroyed = false;
+    }
+
+    init() {
+        this.editor = ace.edit(this.$container[0]);
         this.resetFontSize();
         this.addCursorLayer();
         this.addCursorEvent();
         this.addDefaultCommand();
-        this.destroyed = false;
     }
 
     dispose() {
@@ -149,7 +151,7 @@ class EditorAce {
     }
 
     addCursorLayer() {
-        this.cursorLayer = tippy(this.$div.find('.ace_cursor')[0], {
+        this.cursorLayer = tippy(this.$container.find('.ace_cursor')[0], {
             content: Msg.Lang['此视图只读'],
             trigger: 'manual',
             hideOnClick: true,
@@ -208,9 +210,9 @@ class EditorAce {
 
     addCtrlBtns() {
         for (let mId of EditorAce.CTRL_BTNS) {
-            this.$div.append(XML.render(EditorAce.CTRL_BTN_TEMPLATE, { mId }));
+            this.$container.append(XML.render(EditorAce.CTRL_BTN_TEMPLATE, { mId }));
         }
-        this.$ctrlBtns = this.$div.children('.code-editor-btn');
+        this.$ctrlBtns = this.$container.children('.code-editor-btn');
         this.$ctrlBtns.off().click((event) => {
             const mId = $(event.target).attr('m-id');
             this[mId]();

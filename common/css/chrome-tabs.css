@@ -21,7 +21,8 @@
 .chrome-tabs .chrome-tab {
   position: absolute;
   left: 0;
-  height: 27px;
+  top: 0px;
+  bottom: 0px;
   width: 240px;
   border: 0;
   margin: 0;
@@ -89,6 +90,7 @@
 .chrome-tabs .chrome-tab[active] .chrome-tab-background {
   border-width: 2px 0 0 0;
   border-style: solid;
+  border-color: #009688;
 }
 .chrome-tabs .chrome-tab[active] .chrome-tab-background {
   background-color: #fff;
@@ -154,6 +156,7 @@
   flex: 1;
   vertical-align: top;
   overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   margin-left: 4px;
   color: #5f6368;

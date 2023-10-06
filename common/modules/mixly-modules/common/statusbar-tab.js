@@ -25,12 +25,13 @@ const {
 } = Mixly;
 
 class StatusBarTab {
-    static CTRL_BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-ctrl-btn.html'));
-    static MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-menu.html'));
+    static {
+        this.CTRL_BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-ctrl-btn.html'));
+        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-menu.html'));
+    }
 
-    constructor(id, drag) {
+    constructor(id) {
         this.id = id;
-        this.drag = drag;
         this.shown = false;
         this.statusBars = {};
         this.statusBarIndexToIds = [];
@@ -115,22 +116,24 @@ class StatusBarTab {
         this.removeStatusBarById(id);
     }
 
+    // 可覆盖
     show() {
-        if (this.isShown()) {
+        /*if (this.isShown()) {
             return;
         }
         this.drag.show();
-        this.shown = true;
+        this.shown = true;*/
     }
 
+    // 可覆盖
     hide() {
-        if (!this.shown) {
+        /*if (!this.shown) {
             return;
         }
         this.drag.hide();
-        this.shown = false;
+        this.shown = false;*/
     }
-
+    
     toggle() {
         this.isShown() ? this.hide() : this.show();
     }

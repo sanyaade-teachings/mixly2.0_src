@@ -76,37 +76,6 @@ Interface.init = () => {
     NavEvents.init();
 }
 
-Interface.onresize = (event) => {
-    /*const $nav = $('#nav');
-    const $navLeftBtnList = $('#nav-left-btn-list');
-    const $navRightBtnList = $('#nav-right-btn-list');
-    const $liOperate = $('#li_operate');
-    if ($navRightBtnList.offset().left < Nav.leftWidth + 70 || $nav[0].scrollWidth > $nav[0].offsetWidth) {
-        for (let i = 0; i < Nav.navItemId.length; i++) {
-            const $navItem = $('#' + Nav.navItemId[i]);
-            $navItem.css('display', 'none');
-        }
-        $liOperate.css('display', 'inline-block');
-        const nowLeftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
-        const gap = $navRightBtnList.offset().left - nowLeftWidth;
-        if (gap < 70) {
-            $('#copyright').css('display', 'none');
-        } else {
-            $('#copyright').css('display', '-webkit-box');
-        }
-    } else {
-        $('#copyright').css('display', '-webkit-box');
-        $liOperate.css('display', 'none');
-        for (let i = 0; i < Nav.navItemId.length; i++) {
-            const $navItem = $('#' + Nav.navItemId[i]);
-            $navItem.css('display', 'inline-block');
-        }
-        Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
-    }*/
-    const { blockEditor } = Editor.mainEditor;
-    blockEditor.resize();
-}
-
 window.addEventListener('load', () => {
     const $xml = $(goog.get(Env.boardIndexPath));
     let scrpitPathList = [];
@@ -167,11 +136,19 @@ window.addEventListener('load', () => {
                 }, 10000);
             }
         }
-        window.addEventListener('resize', Interface.onresize, false);
-        Interface.onresize();
         Nav.resize();
-        const $loading = $('.loading');
-        const toolboxWidth = $('.blocklyToolboxDiv').outerWidth(true);
+        if (BOARD.nav.levelSelector) {
+            LevelSelector.init();
+            LevelSelector.xmlToWorkspace(1);
+        } else {
+            auto_save_and_restore_blocks();
+        }
+        setTimeout(() => {
+            const $loading = $('.loading');
+            $loading.fadeOut("fast", () => {
+            });
+        }, 1000);
+        /*const toolboxWidth = $('.blocklyToolboxDiv').outerWidth(true);
         $loading.children('.left-div').animate({
           width: toolboxWidth + 'px'
         }, 'slow', () => {
@@ -184,7 +161,7 @@ window.addEventListener('load', () => {
                     auto_save_and_restore_blocks();
                 }
             });
-        });
+        });*/
     });
 });
 

@@ -16,19 +16,41 @@ goog.require('Blockly.FieldColourHsvSliders');
 goog.require('Blockly.FieldDate');
 goog.require('Blockly.Screenshot');
 goog.require('Mixly.Config');
+goog.require('Mixly.Env');
+goog.require('Mixly.XML');
+goog.require('Mixly.IdGenerator');
 goog.require('Mixly.ToolboxSearcher');
 goog.provide('Mixly.EditorBlockly');
 
-const { Config, ToolboxSearcher } = Mixly;
+const {
+    Config,
+    Env,
+    XML,
+    IdGenerator,
+    ToolboxSearcher
+} = Mixly;
 const { USER, BOARD } = Config;
 
 class EditorBlockly {
-    constructor(id, toolboxId) {
-        this.id = id;
-        this.$div = $(`#${this.id}`);
+    static {
+        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
+    }
+
+    constructor(dom) {
+        const $parentContainer = $(dom);
+        this.id = IdGenerator.generate();
+        this.$content = $(XML.render(EditorBlockly.TEMPLATE, {
+            mId: this.id
+        }));
+        this.$loading = this.$content.find('.loading');
+        this.$editorContainer = this.$content.find('.editor');
+        $parentContainer.append(this.$content);
         this.codeChangeListener = null;
+    }
+
+    init() {
         const media = Config.pathPrefix + 'common/media/';
-        const $toolbox = $(`#${toolboxId}`);
+        this.$toolbox = $('#toolbox');
         const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
         const grid = USER.blocklyShowGrid ==='yes' ? {
                 spacing: 20,
@@ -36,9 +58,9 @@ class EditorBlockly {
                 colour: '#ccc',
                 snap: true
             } : {};
-        this.editor = Blockly.inject(this.$div[0], {
+        this.editor = Blockly.inject(this.$editorContainer[0], {
             media,
-            toolbox: $toolbox[0],
+            toolbox: this.$toolbox[0],
             renderer,
             zoom: {
                 controls: true,
@@ -81,6 +103,19 @@ class EditorBlockly {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
+        this.onMount();
+        const toolboxWidth = this.$editorContainer.find('.blocklyToolboxDiv').outerWidth(true);
+        this.$loading.children('.left').animate({
+          width: toolboxWidth + 'px'
+        }, 'fast', () => {
+            this.$loading.fadeOut("fast", () => {
+                this.$loading.remove();
+            });
+        });
+    }
+
+    getContainer() {
+        return this.$content;
     }
 
     updateCode() {
@@ -101,8 +136,8 @@ class EditorBlockly {
         // 重新调整编辑器尺寸
         this.editor.hideChaff(false);
         $(this.editor.getParentSvg()).attr({
-            width: this.$div.width(),
-            height: this.$div.height()
+            width: this.$content.width(),
+            height: this.$content.height()
         });
         this.editor.hideComponents(true);
         Blockly.common.svgResize(this.editor);
@@ -131,7 +166,7 @@ class EditorBlockly {
             menuOptions.push(screenshotOption);
         }
 
-        ToolboxSearcher.init(editor);
+        // ToolboxSearcher.init(editor);
         const workspaceSearch = new WorkspaceSearch(editor);
         workspaceSearch.init();
 
@@ -175,6 +210,24 @@ class EditorBlockly {
             const contentHighlight = new ContentHighlight(editor);
             contentHighlight.init();
         }
+    }
+
+    updateToolbox() {
+        this.editor.updateToolbox(this.$toolbox[0]);
+    }
+
+    dispose() {
+        this.editor.dispose();
+    }
+
+    onMount() {
+        this.updateToolbox();
+        this.resize();
+        this.editor.scrollCenter();
+    }
+
+    updateValue(data, ext) {
+
     }
 }
 

@@ -6,9 +6,11 @@ goog.require('Mixly.DragV');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
+goog.require('Mixly.Env');
+goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
-goog.provide('Mixly.EditorMixed');
+goog.provide('Mixly.EditorMix');
 
 const { dropdown } = layui;
 const {
@@ -17,15 +19,33 @@ const {
     DragV,
     XML,
     Msg,
-    Config
+    Config,
+    Env,
+    IdGenerator
 } = Mixly;
 const { BOARD } = Config;
 
-class EditorMixed {
-    constructor(editorConfig) {
-        const { blockEditorConfig, codeEditorConfig } = editorConfig;
-        this.blockEditor = new EditorBlockly(blockEditorConfig.id, blockEditorConfig.toolboxId);
-        this.codeEditor = new EditorCode(codeEditorConfig.id);
+class EditorMix {
+    static {
+        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix.html'));
+    }
+
+    constructor(dom) {
+        const $parentContainer = $(dom);
+        this.id = IdGenerator.generate();
+        this.$content = $(XML.render(EditorMix.TEMPLATE, {
+            mId: this.id
+        }));
+        this.$blocklyContainer = this.$content.find('.editor-blockly');
+        this.$codeContainer = this.$content.find('.editor-code');
+        this.blockEditor = new EditorBlockly(this.$blocklyContainer[0]);
+        this.codeEditor = new EditorCode(this.$codeContainer[0]);
+        $parentContainer.append(this.$content);
+    }
+
+    init() {
+        this.blockEditor.init();
+        this.codeEditor.init();
         this.selected = 'BLOCK';
         this.drag = this.addDrag();
         this.addNavBtnClickEvent();
@@ -35,6 +55,11 @@ class EditorMixed {
             this.codeChangeEvent(event);
         });
         this.py2BlockEditorInit();
+        this.onMount();
+    }
+
+    getContainer() {
+        return this.$content;
     }
 
     py2BlockEditorInit() {
@@ -78,7 +103,7 @@ class EditorMixed {
     }
 
     codeEditorMenuRender() {
-        const { codeEditor } = this;
+        /*const { codeEditor } = this;
         let data = [];
         if (this.selected === 'CODE') {
             const options = [
@@ -110,7 +135,7 @@ class EditorMixed {
         const { selection } = editor;
         
         dropdown.render({
-            elem: `#${codeEditor.id}`,
+            elem: codeEditor.$div[0],
             trigger: 'contextmenu',
             data,
             className: 'editor-dropdown-menu',
@@ -142,7 +167,7 @@ class EditorMixed {
                     break;
                 }
             }
-        });
+        });*/
     }
 
     addDrag() {
@@ -151,12 +176,13 @@ class EditorMixed {
         const aceEditor = codeEditor.editor;
         const $vBar = $('#nav').find('button[m-id="v-bar"]').children('a');
         const $codeArea = $('#nav').find('button[m-id="code-area"]').children('a');
-        const vDrag = new DragV('v-container', {
+        const vDrag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
+            startSize: '100%',
             sizeChanged: () => {
                 // 重新调整编辑器尺寸
-                blockEditor.resize();
+                this.resize();
             },
             onfull: (type) => {
                 switch(type) {
@@ -276,8 +302,27 @@ class EditorMixed {
             codeEditor.redo();
         }
     }
+
+    resize() {
+        this.blockEditor.resize();
+        this.codeEditor.resize();
+    }
+
+    dispose() {
+        this.blockEditor.dispose();
+        this.codeEditor.dispose();
+    }
+
+    onMount() {
+        this.blockEditor.onMount && this.blockEditor.onMount();
+        this.codeEditor.onMount && this.codeEditor.onMount();
+    }
+
+    updateValue(data, ext) {
+
+    }
 }
 
-Mixly.EditorMixed = EditorMixed;
+Mixly.EditorMix = EditorMix;
 
 });

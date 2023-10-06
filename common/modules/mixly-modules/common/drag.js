@@ -20,12 +20,13 @@ class Drag {
             ondragEnd: null,
             onfull: null,
             exitfull: null,
-            sizeChanged: null
+            sizeChanged: null,
+            startSize: '100%'
         };
     }
-    constructor(container, config) {
+    constructor(dom, config) {
         this.config = { ...Drag.DEFAULT_CONFIG, ...config };
-        this.$container = $(`#${container}`);
+        this.$container = $(dom);
         if (!this.config.elem) {
             this.config.elem = [];
             const $children = this.$container.children();
@@ -36,7 +37,7 @@ class Drag {
         this.$container.addClass(`drag-${dragType}-container`);
         $dragElemContainer.addClass(`drag-${dragType}-elem-container`);
         if (this.config.type === 'h') {
-            const height = 100 * this.config.elem[0].height() / this.$container.height();
+            /*const height = 100 * this.config.elem[0].height() / this.$container.height();
             if (height) {
                 $dragElemContainer.css({
                     'height': height + '%',
@@ -45,10 +46,17 @@ class Drag {
                 $dragElemContainer.css({
                     'height': '4px',
                 });
+            }*/
+            const height = this.config.startSize;
+            if (parseInt(height)) {
+                $dragElemContainer.css({ height });
+            } else {
+                $dragElemContainer.css({ height: '4px' });
             }
+            
             $dragElem.addClass('drag-s-elem horizontal-line');
         } else {
-            const width = 100 * this.config.elem[0].width() / this.$container.width();
+            /*const width = 100 * this.config.elem[0].width() / this.$container.width();
             if (width) {
                 $dragElemContainer.css({
                     'width': width + '%',
@@ -57,6 +65,12 @@ class Drag {
                 $dragElemContainer.css({
                     'width': '4px',
                 });
+            }*/
+            const width = this.config.startSize;
+            if (parseInt(width)) {
+                $dragElemContainer.css({ width });
+            } else {
+                $dragElemContainer.css({ width: '4px' });
             }
             $dragElem.addClass('drag-w-elem vertical-line');
         }

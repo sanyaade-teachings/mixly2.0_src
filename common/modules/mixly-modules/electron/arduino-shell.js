@@ -81,6 +81,22 @@ ArduShell.shell = null;
 
 ArduShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
 
+ArduShell.MESSAGE = `
+=====================================================================================
+|问题描述：ESP板卡下报错: No such file or directory -> #include <bits/c++config.h>  |
+|-----------------------------------------------------------------------------------|
+|问题原因：此问题是由于软件存放路径过长导致的gcc编译器问题                          |
+| >相关问题讨论见：                                                                 |
+| 1. https://github.com/arduino/arduino-cli/issues/1892                             |
+| 2. https://github.com/espressif/arduino-esp32/issues/7925                         |
+| 3. https://github.com/espressif/arduino-esp32/issues/6593                         |
+|-----------------------------------------------------------------------------------|
+|其它注意事项:                                                                      |
+| 1. 建议把Mixly缩短安装路径放到D盘，或其他盘根目录下！！！！                       |
+| 2. 初学者务必查看mixly2.0中AVR板卡左下角例程中的Mixly2.0简明教程                  |
+=====================================================================================
+`;
+
 ArduShell.updateShellPath = () => {
     let shellPath = path.join(Env.clientPath, 'arduino-cli');
     if (Env.currentPlatform === 'win32')
@@ -524,6 +540,9 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
         }, (error, stdout, stderr) => {
             if (error !== null) {
                 console.log("exec error" + error);
+                if (String(error).indexOf('#include <bits/c++config.h>') !== -1) {
+                    statusBarTerminal.addValue(ArduShell.MESSAGE);
+                }
             }
         })
 

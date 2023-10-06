@@ -1122,6 +1122,10 @@ Serial.onConnect = (port) => {
     portObj.refreshOutputBoxTimer = setInterval(() => {
         Serial.refreshOutputBox(port);
     }, Serial.REFRESH_OUTPUT_TIME);
+    $('#operate-connect-btn').html(Blockly.Msg.MSG['disconnect']);
+    $('#operate-connect-btn').removeClass('icon-link').addClass('icon-unlink');
+    $('#connect-btn').html(Blockly.Msg.MSG['disconnect']);
+    $('#connect-btn').removeClass('icon-link').addClass('icon-unlink');
 }
 
 Serial.onDisconnect = (port) => {
@@ -1159,6 +1163,10 @@ Serial.onDisconnect = (port) => {
         serialport.output = [];
         portObj.serialport = null;
     }
+    $('#operate-connect-btn').html(Blockly.Msg.MSG['connect']);
+    $('#operate-connect-btn').removeClass('icon-unlink').addClass('icon-link');
+    $('#connect-btn').html(Blockly.Msg.MSG['connect']);
+    $('#connect-btn').removeClass('icon-unlink').addClass('icon-link');
 }
 
 Serial.portClose = (port, endFunc = () => {}) => {

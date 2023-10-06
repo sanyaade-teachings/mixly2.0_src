@@ -26,6 +26,7 @@ goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.Web.FooterLayerExample');
 goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.File');
+goog.require('Mixly.Web.Lms');
 goog.provide('Mixly.Interface');
 
 const {
@@ -41,21 +42,34 @@ const {
     Editor,
     Msg,
     LevelSelector,
-    FooterBar
+    FooterBar,
+    Electron = {},
+    Web = {},
+    WebSocket = {}
 } = Mixly;
 
-const { BOARD, USER } = Config;
 const electron = Mixly.require('electron');
+
+const { BOARD, USER } = Config;
+const {
+    FooterLayerExample,
+    LibManager,
+    WikiManager,
+    Lms
+} = goog.isElectron? Electron : Web;
+const { Socket } = WebSocket;
 
 Interface.init = () => {
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
-    const { FooterLayerExample } = goog.isElectron? Mixly.Electron : Mixly.Web;
     if (FooterLayerExample instanceof Object) {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
     Nav.init();
     FooterBar.init();
     NavEvents.init();
+    if (!goog.isElectron) {
+        Lms.changeState();
+    }
 }
 
 Interface.onresize = (event) => {
@@ -119,15 +133,9 @@ window.addEventListener('load', () => {
         Editor.init();
         Boards.init();
         if (Env.hasSocketServer) {
-            const { Socket } = Mixly.WebSocket;
             Socket.init();
         }
         if (goog.isElectron) {
-            const { Electron } = Mixly;
-            const {
-                LibManager = undefined,
-                WikiManager = undefined
-            } = Electron;
             if (typeof LibManager === 'object') {
                 LibManager.init();
             }
@@ -142,7 +150,6 @@ window.addEventListener('load', () => {
         Boards.updateCategories(selectedBoardName);
         Msg.renderToolbox(true);
         if (goog.isElectron) {
-            const { Electron } = Mixly;
             const { Serial = undefined } = Electron;
             if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
                 Serial.addStatusbarTabExtFunc();

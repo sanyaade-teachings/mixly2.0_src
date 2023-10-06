@@ -283,7 +283,8 @@
             "Mixly.WebSocket.File",
             "Mixly.Web.FooterLayerExample",
             "Mixly.Web.BU",
-            "Mixly.Web.File"
+            "Mixly.Web.File",
+            "Mixly.Web.Lms"
         ],
         "provide": [
             "Mixly.Interface"
@@ -882,6 +883,23 @@
         ],
         "provide": [
             "Mixly.Web.FooterLayerExample"
+        ]
+    },
+    {
+        "path": "/web/lms.js",
+        "require": [
+            "saveAs",
+            "Blob",
+            "Blockly",
+            "Mixly.MFile",
+            "Mixly.Editor",
+            "Mixly.Config",
+            "Mixly.MicrobitFs",
+            "Mixly.LocalStorage",
+            "Mixly.Web.File"
+        ],
+        "provide": [
+            "Mixly.Web.Lms"
         ]
     },
     {

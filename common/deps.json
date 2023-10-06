@@ -160,6 +160,14 @@
         "provide": ["path"],
         "require": []
     }, {
+        "path": "modules/web-modules/FileSaver.min.js",
+        "provide": ["saveAs"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/Blob.js",
+        "provide": ["Blob"],
+        "require": []
+    }, {
         "path": "modules/mixly-modules/web/serialport.js",
         "provide": ["WebSerialPort"],
         "require": []

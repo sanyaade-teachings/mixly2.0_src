@@ -26,6 +26,7 @@ goog.require('Mixly.WebSocket.File');
 goog.require('Mixly.Web.FooterLayerExample');
 goog.require('Mixly.Web.BU');
 goog.require('Mixly.Web.File');
+goog.require('Mixly.Web.Lms');
 goog.provide('Mixly.Interface');
 
 const {
@@ -42,12 +43,21 @@ const {
     Msg,
     LevelSelector,
     FooterBar,
-    Electron,
-    Web
+    Electron = {},
+    Web = {},
+    WebSocket = {}
 } = Mixly;
 
-const { BOARD, USER } = Config;
 const electron = Mixly.require('electron');
+
+const { BOARD, USER } = Config;
+const {
+    FooterLayerExample,
+    LibManager,
+    WikiManager,
+    Lms
+} = goog.isElectron? Electron : Web;
+const { Socket } = WebSocket;
 
 Interface.init = () => {
     Nav.register({
@@ -66,7 +76,6 @@ Interface.init = () => {
         weight: -1
     });
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
-    const { FooterLayerExample } = goog.isElectron? Electron : Web;
     if (FooterLayerExample instanceof Object) {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
@@ -74,6 +83,9 @@ Interface.init = () => {
     Nav.init_();
     FooterBar.init();
     NavEvents.init();
+    if (!goog.isElectron) {
+        Lms.changeState();
+    }
 }
 
 window.addEventListener('load', () => {
@@ -105,14 +117,9 @@ window.addEventListener('load', () => {
         Editor.init();
         Boards.init();
         if (Env.hasSocketServer) {
-            const { Socket } = Mixly.WebSocket;
             Socket.init();
         }
         if (goog.isElectron) {
-            const {
-                LibManager = undefined,
-                WikiManager = undefined
-            } = Electron;
             if (typeof LibManager === 'object') {
                 LibManager.init();
             }
@@ -144,24 +151,8 @@ window.addEventListener('load', () => {
             auto_save_and_restore_blocks();
         }
         setTimeout(() => {
-            const $loading = $('.loading');
-            $loading.fadeOut("fast", () => {
-            });
+            $('.loading').fadeOut('fast');
         }, 1000);
-        /*const toolboxWidth = $('.blocklyToolboxDiv').outerWidth(true);
-        $loading.children('.left-div').animate({
-          width: toolboxWidth + 'px'
-        }, 'slow', () => {
-            $loading.fadeOut("fast", () => {
-                $loading.remove();
-                if (BOARD.nav.levelSelector) {
-                    LevelSelector.init();
-                    LevelSelector.xmlToWorkspace(1);
-                } else {
-                    auto_save_and_restore_blocks();
-                }
-            });
-        });*/
     });
 });
 

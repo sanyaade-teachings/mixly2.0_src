@@ -176,6 +176,14 @@
         "provide": ["Blob"],
         "require": []
     }, {
+        "path": "modules/web-modules/jquery.contextMenu.min.js",
+        "provide": ["$.contextMenu"],
+        "require": ["$.ui"]
+    }, {
+        "path": "modules/web-modules/jquery.ui.position.min.js",
+        "provide": ["$.ui"],
+        "require": []
+    }, {
         "path": "modules/mixly-modules/web/serialport.js",
         "provide": ["WebSerialPort"],
         "require": []

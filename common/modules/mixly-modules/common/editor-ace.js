@@ -12,7 +12,6 @@ class EditorAce {
     static {
         this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
         this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
-        this.MENU_TEMPLATE = '<div style="float:left;">{{d.name}}&nbsp</div><div style="float:right;">&nbsp{{d.hotKey}}</div>';
     }
 
     constructor(dom) {
@@ -252,23 +251,6 @@ class EditorAce {
 
     resize() {
     	this.editor.resize();
-    }
-
-    generateMenu(options) {
-        let data = [];
-        for (let option of options) {
-            let item = {};
-            const { id, name, hotKey } = option;
-            if (id && name) {
-                item.title = XML.render(EditorAce.MENU_TEMPLATE, { name, hotKey });
-                item.id = id;
-            } else {
-                item.type = '-';
-                item.title = '';
-            }
-            data.push(item);
-        }
-        return data;
     }
 
     cut() {

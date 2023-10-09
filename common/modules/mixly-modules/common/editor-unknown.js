@@ -17,7 +17,7 @@ class EditorUnknown {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-unknown.html'));
     }
 
-    constructor(dom) {
+    constructor(dom, extname) {
         const $parentContainer = $(dom);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorUnknown.TEMPLATE, {

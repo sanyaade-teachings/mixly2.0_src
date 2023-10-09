@@ -135,10 +135,12 @@
         "require": [
             "ace",
             "ace.ExtLanguageTools",
+            "$.contextMenu",
             "Mixly.Config",
             "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
+            "Mixly.Msg",
             "Mixly.EditorAce"
         ],
         "provide": [

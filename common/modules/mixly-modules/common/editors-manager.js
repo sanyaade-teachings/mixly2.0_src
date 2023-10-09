@@ -118,7 +118,7 @@ class EditorsManager {
         if (!editor) {
             editor = EditorUnknown;
         }
-        this.editors[tabId] = new editor(this.$editorContainer[0]);
+        this.editors[tabId] = new editor(this.$editorContainer[0], extname);
         if (Object.keys(this.editors).length && this.page === 'welcome') {
             this.$welcomePage.replaceWith(this.$container);
             this.page = 'editor';

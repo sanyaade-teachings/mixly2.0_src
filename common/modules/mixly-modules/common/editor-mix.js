@@ -30,36 +30,72 @@ class EditorMix {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix.html'));
     }
 
-    constructor(dom) {
+    constructor(dom, extname) {
         const $parentContainer = $(dom);
         this.id = IdGenerator.generate();
-        this.$content = $(XML.render(EditorMix.TEMPLATE, {
-            mId: this.id
-        }));
+        this.$content = $(XML.render(EditorMix.TEMPLATE, { mId: this.id }));
+        this.drag = null;
+        this.selected = 'BLOCK';
+        this.blocklyContextMenuItems = null;
+        this.codeContextMenuItems = null;
         this.$blocklyContainer = this.$content.find('.editor-blockly');
         this.$codeContainer = this.$content.find('.editor-code');
-        this.blockEditor = new EditorBlockly(this.$blocklyContainer[0]);
-        this.codeEditor = new EditorCode(this.$codeContainer[0]);
+        this.blockEditor = new EditorBlockly(this.$blocklyContainer[0], extname);
+        this.codeEditor = new EditorCode(this.$codeContainer[0], this.#getCodeExtname_());
         $parentContainer.append(this.$content);
     }
 
     init() {
+        this.codeEditor.getContextMenuItems = this.getContextMenuItems.bind(this);
         this.blockEditor.init();
         this.codeEditor.init();
-        this.selected = 'BLOCK';
-        this.drag = this.addDrag();
+        this.addDrag();
         this.addNavBtnClickEvent();
-        this.codeEditorMenuRender();
         const blocklyWorkspace = this.blockEditor.editor;
         this.blockEditor.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.codeChangeEvent(event);
         });
         this.py2BlockEditorInit();
         this.onMount();
+        this.blocklyContextMenuItems = {
+            code: {
+                isHtmlName: false,
+                name: Msg.Lang['打开代码编辑器'],
+                callback: (key, opt) => this.drag.full('NEGATIVE')
+            }
+        };
+        this.codeContextMenuItems = {
+            ...this.codeEditor.defaultContextMenuItems,
+            sep2: '---------',
+            block: {
+                isHtmlName: false,
+                name: Msg.Lang['退出代码编辑器'],
+                callback: (key, opt) => this.drag.exitfull('POSITIVE')
+            }
+        };
     }
 
     getContainer() {
         return this.$content;
+    }
+
+    #getCodeExtname_() {
+        let extname = '.c';
+        const language = BOARD.language.toLowerCase();
+        switch (language) {
+        case 'python':
+        case 'circuitpython':
+        case 'micropython':
+            extname = '.py';
+            break;
+        case 'lua':
+            extname = '.lua';
+            break;
+        case 'c/c++':
+        default:
+            extname = '.c';
+        }
+        return extname;
     }
 
     py2BlockEditorInit() {
@@ -102,72 +138,12 @@ class EditorMix {
         codeEditor.setValue(code, false);
     }
 
-    codeEditorMenuRender() {
-        /*const { codeEditor } = this;
-        let data = [];
-        if (this.selected === 'CODE') {
-            const options = [
-                { name: Msg.Lang['剪切'], hotKey: 'Ctrl+X', id: 'cut' },
-                { name: Msg.Lang['复制'], hotKey: 'Ctrl+C', id: 'copy' },
-                { name: Msg.Lang['粘贴'], hotKey: 'Ctrl+V', id: 'paste' },
-                { type:'-' },
-                { name: Msg.Lang['全选'], hotKey: 'Ctrl+A', id: 'selectall' },
-                { name: Msg.Lang['查找'], hotKey: 'Ctrl+F', id: 'find' },
-                { type:'-' },
-                { name: Msg.Lang['切换行注释'], hotKey: 'Ctrl+/', id: 'togglecomment' },
-                { name: Msg.Lang['切换块注释'], hotKey: 'Ctrl+Shift+/', id: 'toggleBlockComment' },
-                { type:'-' },
-                // { name: Msg.Lang['命令面板'], hotKey: 'F1', id: 'openCommandPallete' },
-                // { type:'-' },
-                { name: Msg.Lang['退出代码编辑器'], hotKey: 'Ctrl+E', id: 'exitCodeEditor' }
-            ];
-            data = this.codeEditor.generateMenu(options);
-            const language = BOARD.language.toLowerCase();
-            if ([ 'python', 'circuitpython', 'micropython' ].includes(language)) {
-                data.splice(8, 1);
-            }
+    getContextMenuItems() {
+        if (this.selected === 'BLOCK') {
+            return this.blocklyContextMenuItems;
         } else {
-            const options = [{ name: Msg.Lang['打开代码编辑器'], hotKey: '', id: 'openCodeEditor'} ]
-            data = this.codeEditor.generateMenu(options);
+            return this.codeContextMenuItems;
         }
-
-        const { editor } = codeEditor;
-        const { selection } = editor;
-        
-        dropdown.render({
-            elem: codeEditor.$div[0],
-            trigger: 'contextmenu',
-            data,
-            className: 'editor-dropdown-menu',
-            click: (obj, othis) => {
-                switch (obj.id) {
-                case 'selectall':
-                case 'find':
-                case 'togglecomment':
-                case 'toggleBlockComment':
-                case 'openCommandPallete':
-                    editor.execCommand(obj.id);
-                    break;
-                case 'cut':
-                case 'copy':
-                case 'paste':
-                    codeEditor[obj.id]();
-                    break;
-                case 'openCodeEditor':
-                    if (this.selected === 'CODE') {
-                        break;
-                    }
-                    this.drag.full('NEGATIVE');
-                    break;
-                case 'exitCodeEditor':
-                    if (this.selected === 'BLOCK') {
-                        break;
-                    }
-                    this.drag.show();
-                    break;
-                }
-            }
-        });*/
     }
 
     addDrag() {
@@ -176,7 +152,7 @@ class EditorMix {
         const aceEditor = codeEditor.editor;
         const $vBar = $('#nav').find('button[m-id="v-bar"]').children('a');
         const $codeArea = $('#nav').find('button[m-id="code-area"]').children('a');
-        const vDrag = new DragV(this.$content.children('div')[0], {
+        this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
             startSize: '100%',
@@ -193,8 +169,7 @@ class EditorMix {
                     this.selected = 'BLOCK';
                     codeEditor.shown = false;
                     blockEditor.shown = true;
-                    blockEditor.resize();
-                    codeEditor.resize();
+                    this.resize();
                     blockEditor.editor.scrollCenter();
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
@@ -211,7 +186,6 @@ class EditorMix {
                     }
                     break;
                 }
-                this.codeEditorMenuRender();
             },
             exitfull: (type) => {
                 blocklyWorkspace.setVisible(true);
@@ -219,7 +193,6 @@ class EditorMix {
                 blockEditor.shown = true;
                 aceEditor.setReadOnly(true);
                 this.selected = 'BLOCK';
-                this.codeEditorMenuRender();
                 codeEditor.hideCtrlBtns();
                 switch(type) {
                 case 'POSITIVE': // 拖拽元素移动方向：左→右 退出代码编辑器，进入块编辑器
@@ -239,7 +212,6 @@ class EditorMix {
                 return true;
             }
         });
-        return vDrag;
     }
 
     addNavBtnClickEvent() {

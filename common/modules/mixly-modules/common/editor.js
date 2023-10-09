@@ -201,7 +201,7 @@ Editor.init = () => {
         thumbBackground = '#5f5f5f';
     }
 
-    let rootPath = 'D:/gitee/mixly2.0-win32-x64/resources/app/src/sample';
+    let rootPath = 'D:/Mixly/mixly2.0-win32-x64/resources/app/src/sample';
     const $tree = Editor.workspace.$sidebar
       .on('click.jstree', '.jstree-open>a', ({ target }) => {
         setTimeout(() => $tree.jstree(true).close_node(target));
@@ -221,10 +221,10 @@ Editor.init = () => {
                 if(node.id === "#") {
                   cb([{
                     text: `<div style="font-weight: bold;display: unset;">SAMPLE</div>`,
-                    id: 'D:/gitee/mixly2.0-win32-x64/resources/app/src/sample',
+                    id: 'D:/Mixly/mixly2.0-win32-x64/resources/app/src/sample',
                     children: true,
                     li_attr: {
-                        title: "D:/gitee/mixly2.0-win32-x64/resources/app/src/sample"
+                        title: "D:/Mixly/mixly2.0-win32-x64/resources/app/src/sample"
                     },
                     icon: 'icon-folder'
                 }]);

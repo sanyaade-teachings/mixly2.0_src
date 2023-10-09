@@ -2481,9 +2481,9 @@
           <block type="dicts_create_with_noreturn" inline="true">
             <field name="VAR">content</field>
             <mutation items="3"></mutation>
-            <field name="KEY0">'long'</field>
-            <field name="KEY1">'lat'</field>
-            <field name="KEY2">'message'</field>
+            <field name="KEY0">"long"</field>
+            <field name="KEY1">"lat"</field>
+            <field name="KEY2">"message"</field>
             <value name="ADD0">
               <block type="math_number">
                 <field name="NUM">0</field>
@@ -2507,9 +2507,9 @@
           <block type="dicts_create_with_noreturn" inline="true">
             <field name="VAR">content</field>
             <mutation items="3"></mutation>
-            <field name="KEY0">'key1'</field>
-            <field name="KEY1">'key2'</field>
-            <field name="KEY2">'key3'</field>
+            <field name="KEY0">"key1"</field>
+            <field name="KEY1">"key2"</field>
+            <field name="KEY2">"key3"</field>
             <value name="ADD0">
               <block type="math_number">
                 <field name="NUM">0</field>

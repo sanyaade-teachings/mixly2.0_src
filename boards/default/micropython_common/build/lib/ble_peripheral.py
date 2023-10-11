@@ -40,8 +40,6 @@ class BLESimplePeripheral:
 		if (name is '') or (name is None):
 			name = "Mixgo_" + self.mac[-6:].upper()
 			print("Bluetooth name:", name)
-		else:
-			name = name + "_" +self.mac[-6:].upper()
 		self._payload = advertising_payload(name=name, services=[_UART_UUID])
 		self._advertise()
 

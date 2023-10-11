@@ -276,7 +276,7 @@ Serial.initPorts = (endFunc = (data) => {}) => {
         endFunc(newPorts);
     }).catch(error => {
         console.log(error);
-        child_process.exec('ls /dev/ttyACM* /dev/ttyUSB*', (err, stdout, stderr) => {
+        child_process.exec('ls /dev/ttyACM* /dev/ttyUSB* /dev/tty*USB*', (err, stdout, stderr) => {
             let portsName = stdout.split('\n');
             let newPorts = [];
             for (let i = 0; i < portsName.length; i++)

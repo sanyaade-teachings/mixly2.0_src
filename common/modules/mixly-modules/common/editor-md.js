@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('marked');
+goog.require('markedKatex');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.DragV');
@@ -20,7 +21,11 @@ const {
 class EditorMd extends EditorCode {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-md.html'));
+        marked.use(markedKatex({ throwOnError: false }));
     }
+
+    // 私有属性
+    #prevCode_ = '';
 
     constructor(dom, extname='.md') {
         const id = IdGenerator.generate();
@@ -87,6 +92,11 @@ class EditorMd extends EditorCode {
     }
 
     updatePreview() {
+        const code = this.getValue();
+        if (code === this.#prevCode_) {
+            return;
+        }
+        this.#prevCode_ = code;
         const $dom = $(marked.parse(this.getValue()));
         const $as = $dom.find('a');
         $as.attr('target', '_blank');

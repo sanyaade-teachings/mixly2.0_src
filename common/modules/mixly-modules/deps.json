@@ -151,6 +151,7 @@
         "path": "/common/editor-md.js",
         "require": [
             "marked",
+            "markedKatex",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.DragV",
@@ -222,7 +223,7 @@
             "Mixly.Config",
             "Mixly.Nav",
             "ChromeTabs",
-            "jstree",
+            "$.jstree",
             "Mixly.EditorsManager",
             "Mixly.Workspace"
         ],
@@ -917,7 +918,6 @@
         "require": [
             "Mixly.JSFuncs",
             "Mixly.Interface",
-            "select2",
             "XScrollbar",
             "PouchDB",
             "d3",

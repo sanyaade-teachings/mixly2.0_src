@@ -4,6 +4,7 @@ goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('layui');
 goog.require('store');
+goog.require('$.select2');
 goog.require('Mixly.XML');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');

@@ -8,7 +8,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
 goog.require('ChromeTabs');
-goog.require('jstree');
+goog.require('$.jstree');
 goog.require('Mixly.EditorsManager');
 goog.require('Mixly.Workspace');
 goog.provide('Mixly.Editor');
@@ -201,7 +201,7 @@ Editor.init = () => {
         thumbBackground = '#5f5f5f';
     }
 
-    let rootPath = 'D:/gitee/mixly2.0-win32-x64/resources/app/src/sample';
+    let rootPath = 'D:/gitee/mixly/mixly2.0-win32-x64/resources/app/src/sample';
     const $tree = Editor.workspace.$sidebar
       .on('click.jstree', '.jstree-open>a', ({ target }) => {
         setTimeout(() => $tree.jstree(true).close_node(target));

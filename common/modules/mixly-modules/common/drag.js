@@ -119,7 +119,9 @@ class Drag {
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动
                     if (['NEGATIVE', 'POSITIVE'].includes(this.onfullMark)
                         && typeof exitfull === 'function'
-                        && !exitfull(this.onfullMark)) {
+                        && !exitfull(
+                            this.onfullMark === 'POSITIVE'? 'NEGATIVE' : 'POSITIVE'
+                        )) {
                         return;
                     }
                     if (this.onfullMark) {

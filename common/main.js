@@ -21,7 +21,7 @@
 
 LazyLoad.js([
     COMMON_DIR_PATH + '/blockly-core/base.js',
-    COMMON_DIR_PATH + '/modules/web-modules/jquery-3.7.1.min.js'
+    COMMON_DIR_PATH + '/modules/web-modules/jquery/jquery-3.7.1.min.js'
 ], function() {
     
     /**

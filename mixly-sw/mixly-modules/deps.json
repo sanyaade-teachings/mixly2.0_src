@@ -87,6 +87,7 @@
             "ace.ExtLanguageTools",
             "layui",
             "store",
+            "$.select2",
             "Mixly.XML",
             "Mixly.LayerExt",
             "Mixly.Msg",
@@ -126,7 +127,6 @@
     {
         "path": "/mixly-loader.js",
         "require": [
-            "select2",
             "Mixly.Interface",
             "PouchDB",
             "Mixly.Events"

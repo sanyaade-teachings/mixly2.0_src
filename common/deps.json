@@ -112,10 +112,6 @@
         "provide": ["tippy"],
         "require": ["Popper"]
     }, {
-        "path": "modules/web-modules/select2.min.js",
-        "provide": ["select2"],
-        "require": []
-    }, {
         "path": "modules/web-modules/xterm.min.js",
         "provide": ["Terminal"],
         "require": []
@@ -160,10 +156,6 @@
         "provide": ["ChromeTabs"],
         "require": []
     }, {
-        "path": "modules/web-modules/jstree.min.js",
-        "provide": ["jstree"],
-        "require": []
-    }, {
         "path": "modules/web-modules/path-browserify.js",
         "provide": ["path"],
         "require": []
@@ -176,17 +168,29 @@
         "provide": ["Blob"],
         "require": []
     }, {
-        "path": "modules/web-modules/jquery.contextMenu.min.js",
+        "path": "modules/web-modules/jquery/select2.min.js",
+        "provide": ["$.select2"],
+        "require": ["$"]
+    }, {
+        "path": "modules/web-modules/jquery/jstree.min.js",
+        "provide": ["$.jstree"],
+        "require": ["$"]
+    }, {
+        "path": "modules/web-modules/jquery/jquery.contextMenu.min.js",
         "provide": ["$.contextMenu"],
         "require": ["$.ui"]
     }, {
-        "path": "modules/web-modules/jquery.ui.position.min.js",
+        "path": "modules/web-modules/jquery/jquery.ui.position.min.js",
         "provide": ["$.ui"],
-        "require": []
+        "require": ["$"]
     }, {
-        "path": "modules/web-modules/marked.min.js",
+        "path": "modules/web-modules/marked/marked.min.js",
         "provide": ["marked"],
         "require": []
+    }, {
+        "path": "modules/web-modules/marked/marked-katex-extension.min.js",
+        "provide": ["markedKatex"],
+        "require": ["marked"]
     }, {
         "path": "modules/web-modules/editorjs/editorjs.min.js",
         "provide": ["EditorJS"],

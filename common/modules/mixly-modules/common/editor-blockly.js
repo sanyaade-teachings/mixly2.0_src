@@ -36,7 +36,7 @@ class EditorBlockly {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
     }
 
-    constructor(dom, extname) {
+    constructor(dom, extname='.mix') {
         const $parentContainer = $(dom);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorBlockly.TEMPLATE, {

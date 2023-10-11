@@ -132,6 +132,10 @@ class EditorCode extends EditorAce {
             tabSize = 4;
             mode = 'javascript';
             break;
+        case '.md':
+            tabSize = 2;
+            mode = 'markdown';
+            break;
         default:
             tabSize = 4;
             mode = this.extname.substring(1);

@@ -6,6 +6,8 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.EditorMix');
 goog.require('Mixly.EditorCode');
+goog.require('Mixly.EditorMd');
+goog.require('Mixly.EditorMixbook');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorUnknown');
 goog.require('Mixly.EditorsTabs');
@@ -17,6 +19,8 @@ const {
     Env,
     EditorMix,
     EditorCode,
+    EditorMd,
+    EditorMixbook,
     EditorBlockly,
     EditorUnknown,
     EditorsTabs
@@ -55,8 +59,9 @@ class EditorsManager {
             mId: IdGenerator.generate()
         }));
         this.$container = this.$content.children('div');
-        this.editorTabs = new EditorsTabs(this.$container[0]);
-        this.$editorContainer = $('<div style="width: 100%; height: 100%;"></div>');
+        this.$tabsContainer = this.$container.children('.editor-manager-tabs');
+        this.$editorContainer = this.$container.children('.editor-manager-body');
+        this.editorTabs = new EditorsTabs(this.$tabsContainer[0]);
         this.$container.append(this.$editorContainer);
         $parentContainer.empty();
         $parentContainer.append(this.$content);
@@ -170,6 +175,16 @@ EditorsManager.register({
 EditorsManager.register({
     ext: ['.xml', '.txt', '.ino', '.json'],
     editor: EditorCode
+});
+
+EditorsManager.register({
+    ext: ['.md'],
+    editor: EditorMd
+});
+
+EditorsManager.register({
+    ext: ['.mixbook'],
+    editor: EditorMixbook
 });
 
 Mixly.EditorsManager = EditorsManager;

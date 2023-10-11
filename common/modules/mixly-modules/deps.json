@@ -148,6 +148,20 @@
         ]
     },
     {
+        "path": "/common/editor-md.js",
+        "require": [
+            "marked",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.DragV",
+            "Mixly.IdGenerator",
+            "Mixly.EditorCode"
+        ],
+        "provide": [
+            "Mixly.EditorMd"
+        ]
+    },
+    {
         "path": "/common/editor-mix.js",
         "require": [
             "layui",
@@ -163,6 +177,26 @@
         ],
         "provide": [
             "Mixly.EditorMix"
+        ]
+    },
+    {
+        "path": "/common/editor-mixbook.js",
+        "require": [
+            "EditorJS",
+            "Paragraph",
+            "Header",
+            "Quote",
+            "Warning",
+            "Delimiter",
+            "Alert",
+            "ToggleBlock",
+            "List",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.IdGenerator"
+        ],
+        "provide": [
+            "Mixly.EditorMixbook"
         ]
     },
     {
@@ -205,6 +239,8 @@
             "Mixly.Env",
             "Mixly.EditorMix",
             "Mixly.EditorCode",
+            "Mixly.EditorMd",
+            "Mixly.EditorMixbook",
             "Mixly.EditorBlockly",
             "Mixly.EditorUnknown",
             "Mixly.EditorsTabs"

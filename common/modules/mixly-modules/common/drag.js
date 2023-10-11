@@ -13,7 +13,6 @@ class Drag {
     static {
         this.DEFAULT_CONFIG = {
             type: 'h', // 'h' - 水平拖拽，'v' - 垂直拖拽
-            elem: null, // 由于拖拽而产生尺寸改变的元素
             min: null, // 元素由于拖拽产生尺寸改变时可以减小到的最小值,
             full: [true, true], // 允许元素拖拽直至占满整个容器
             ondragStart: null,
@@ -27,56 +26,33 @@ class Drag {
     constructor(dom, config) {
         this.config = { ...Drag.DEFAULT_CONFIG, ...config };
         this.$container = $(dom);
-        if (!this.config.elem) {
-            this.config.elem = [];
-            const $children = this.$container.children();
-            this.config.elem.push($($children.get(0)), $($children.get(1)));
-        }
-        let $dragElem = $('<div></div>'), $dragElemContainer = $('<div></div>');
+        const $children = this.$container.children();
+        this.$first = $($children[0]);
+        this.$last = $($children[1]);
+        this.config.elem = [ this.$first, this.$last ];
+        this.firstDisplay = this.$first.css('display');
+        this.lastDisplay = this.$last.css('display');
+        let $dragElem = $('<div></div>');
         const dragType = this.config.type === 'h'? 's' : 'w';
         this.$container.addClass(`drag-${dragType}-container`);
-        $dragElemContainer.addClass(`drag-${dragType}-elem-container`);
+        $dragElem.addClass('drag-elem');
+        let dragCssType;
         if (this.config.type === 'h') {
-            /*const height = 100 * this.config.elem[0].height() / this.$container.height();
-            if (height) {
-                $dragElemContainer.css({
-                    'height': height + '%',
-                });
-            } else {
-                $dragElemContainer.css({
-                    'height': '4px',
-                });
-            }*/
-            const height = this.config.startSize;
-            if (parseInt(height)) {
-                $dragElemContainer.css({ height });
-            } else {
-                $dragElemContainer.css({ height: '4px' });
-            }
-            
             $dragElem.addClass('drag-s-elem horizontal-line');
+            dragCssType = 'top';
         } else {
-            /*const width = 100 * this.config.elem[0].width() / this.$container.width();
-            if (width) {
-                $dragElemContainer.css({
-                    'width': width + '%',
-                });
-            } else {
-                $dragElemContainer.css({
-                    'width': '4px',
-                });
-            }*/
-            const width = this.config.startSize;
-            if (parseInt(width)) {
-                $dragElemContainer.css({ width });
-            } else {
-                $dragElemContainer.css({ width: '4px' });
-            }
             $dragElem.addClass('drag-w-elem vertical-line');
+            dragCssType = 'left';
         }
-        $dragElemContainer.append($dragElem);
-        this.$container.prepend($dragElemContainer);
-        this.$dragElemContainer = $dragElemContainer;
+        const size = parseFloat(this.config.startSize);
+        if (size >= 100) {
+            $dragElem.css(dragCssType, 'calc(100% - 4px)');
+        } else if (size > 0) {
+            $dragElem.css(dragCssType, `calc(${size}% - 2px)`);
+        } else {
+            $dragElem.css(dragCssType, '0px');
+        }
+        this.$container.prepend($dragElem);
         this.$dragElem = $dragElem;
         this.size = ['100%', '0%'];
         this.onfullMark = 'POSITIVE';
@@ -85,10 +61,9 @@ class Drag {
     }
 
     addEventListener() {
-        const dragElem = this.$dragElem[0],
-        _this = this,
-        container = this.$container[0],
-        {
+        const dragElem = this.$dragElem[0];
+        const container = this.$container[0];
+        const {
             type,
             min,
             elem,
@@ -98,7 +73,7 @@ class Drag {
             onfull,
             exitfull
         } = this.config;
-        dragElem.onmousedown = function (elemEvent) {
+        dragElem.onmousedown = (elemEvent) => {
             let dis;
             if (type === 'h') {
                 dis = elemEvent.clientY;
@@ -110,7 +85,7 @@ class Drag {
                 $('body').addClass('drag-w-resize');
             }
 
-            document.onmousemove = function (docEvent) {
+            document.onmousemove = (docEvent) => {
                 if (typeof ondragStart === 'function') {
                     ondragStart();
                 }
@@ -126,30 +101,33 @@ class Drag {
                 }
                 iT += 4;
                 if (full[0] && movement < 0 && iT < (minT - minT * 0.6)) { // 向上移动或向左移动
-                    _this.changeSize('0%');
+                    this.changeSize('0%');
+                    this.$first.css('display', 'none');
+                    this.$last.css('display', this.lastDisplay);
                     if (typeof onfull === 'function') {
                         onfull('NEGATIVE');
                     }
-                    _this.onfullMark = 'NEGATIVE';
+                    this.onfullMark = 'NEGATIVE';
                 } else if (full[1] && movement > 0 && iT > (maxT + minT * 0.8)) { // 向下移动或向右移动
-                    _this.changeSize('100%');
+                    this.changeSize('100%');
+                    this.$first.css('display', this.firstDisplay);
+                    this.$last.css('display', 'none');
                     if (typeof onfull === 'function') {
                         onfull('POSITIVE');
                     }
-                    _this.onfullMark = 'POSITIVE';
+                    this.onfullMark = 'POSITIVE';
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动
-                    switch (_this.onfullMark) {
-                    case 'NEGATIVE':
-                        if (typeof exitfull === 'function' && !exitfull('POSITIVE'))
-                            return;
-                        break;
-                    case 'POSITIVE':
-                        if (typeof exitfull === 'function' && !exitfull('NEGATIVE'))
-                            return;
-                        break;
+                    if (['NEGATIVE', 'POSITIVE'].includes(this.onfullMark)
+                        && typeof exitfull === 'function'
+                        && !exitfull(this.onfullMark)) {
+                        return;
                     }
-                    _this.onfullMark = null;
-                    _this.changeSize(iT);
+                    if (this.onfullMark) {
+                        this.$first.css('display', this.firstDisplay);
+                        this.$last.css('display', this.lastDisplay);
+                    }
+                    this.onfullMark = null;
+                    this.changeSize(iT);
                 }
                 if (typeof ondragEnd === 'function') {
                     ondragEnd();
@@ -165,24 +143,19 @@ class Drag {
                 document.onmousemove = null;
                 document.onmouseup = null;
             };
-            if (_this.end) {
+            if (this.end) {
                 return false;
             }
         };
     }
 
     changeSize(part) {
-        const { type, elem, sizeChanged } = this.config,
-        cssType = type === 'h'? 'height' : 'width';
-        let elem1Size,
-        elem2Size,
-        elem1List = [],
-        elem2List = [];
-        elem1List.push(elem[0]);
-        elem2List.push(elem[1]);
+        const { type, elem, sizeChanged } = this.config;
+        const elemCssType = type === 'h'? 'height' : 'width';
+        const dragCssType = type === 'h'? 'top' : 'left';
+        let elem1Size, elem2Size, precent;
         if (typeof part === 'string' && part.indexOf('%') !== -1) {
-            elem1Size = part;
-            elem2Size = (100 - parseFloat(elem1Size)) + '%';
+            precent = parseFloat(part);
         } else {
             let all;
             if (type === 'h') {
@@ -190,26 +163,21 @@ class Drag {
             } else {
                 all = this.$container.width();
             }
-            elem1Size = (100 * parseFloat(part) / all) + '%';
-            elem2Size = (100 * (1 - parseFloat(part) / all)) + '%';
+            precent = 100 * parseFloat(part) / all;
         }
+        elem1Size = `${precent}%`;
+        elem2Size = `${(100 - precent)}%`;
         this.prevSize = this.size;
         this.size = [elem1Size, elem2Size];
-        if (!parseFloat(elem1Size)) {
-            if (type === 'h') {
-                this.$dragElemContainer.css('height', '4px');
-            } else {
-                this.$dragElemContainer.css('width', '4px');
-            }
+        if (!precent) {
+            this.$dragElem.css(dragCssType, '0px');
+        } else if (precent >= 100) {
+            this.$dragElem.css(dragCssType, 'calc(100% - 4px)');
         } else {
-            elem1List = [ this.$dragElemContainer, ...elem1List ];
+            this.$dragElem.css(dragCssType, `calc(${elem1Size} - 2px)`);
         }
-        for (let $elem1 of elem1List) {
-            $elem1.css(cssType, elem1Size);
-        }
-        for (let $elem2 of elem2List) {
-            $elem2.css(cssType, elem2Size);
-        }
+        elem[0].css(elemCssType, elem1Size);
+        elem[1].css(elemCssType, elem2Size);
         if (typeof sizeChanged === 'function') {
             sizeChanged();
         }

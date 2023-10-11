@@ -184,6 +184,46 @@
         "provide": ["$.ui"],
         "require": []
     }, {
+        "path": "modules/web-modules/marked.min.js",
+        "provide": ["marked"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs.min.js",
+        "provide": ["EditorJS"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_paragraph.min.js",
+        "provide": ["Paragraph"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_header.min.js",
+        "provide": ["Header"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_quote.min.js",
+        "provide": ["Quote"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_warning.min.js",
+        "provide": ["Warning"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_delimiter.min.js",
+        "provide": ["Delimiter"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_alert.min.js",
+        "provide": ["Alert"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_toggle_block.min.js",
+        "provide": ["ToggleBlock"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_list.min.js",
+        "provide": ["List"],
+        "require": ["EditorJS"]
+    }, {
         "path": "modules/mixly-modules/web/serialport.js",
         "provide": ["WebSerialPort"],
         "require": []

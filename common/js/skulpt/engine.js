@@ -5,7 +5,7 @@ var externalLibs = {//外部引入的第三方库
   "./matplotlib/__init__.js" : '../common/js/skulpt_libs/matplotlib/__init__.js',
   "./matplotlib/pyplot/__init__.js" : "../common/js/skulpt_libs/pyplot/__init__.js",
   './pgzhelper/__init__.js':"../common/js/skulpt_libs/pgzhelper/pgzhelper.js",
-  "./sprite/__init__.js": "../../../common/js/skulpt_libs/sprite/basic.js"
+  "./sprite/__init__.js": "../common/js/skulpt_libs/sprite/basic.js"
 };
 
 // document.write("<script language=JavaScript src='./js/skulpt/pyodide.js'></script>");

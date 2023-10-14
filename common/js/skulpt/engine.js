@@ -558,6 +558,7 @@ PyEngine.prototype.run = function(type) {
     }
 
     var executionPromise = Sk.misceval.asyncToPromise(function() {
+        engine.programStatus['running'] = true;
         return Sk.importMainWithBody("<stdin>", false, code, true);
     });
     executionPromise.then(

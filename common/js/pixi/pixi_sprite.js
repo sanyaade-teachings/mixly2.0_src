@@ -54,7 +54,7 @@ SPRITE.animate = (currentTime)=>{
 SPRITE.CreateBackground = (img, mode=0)=>{
 	var player;
 	if(mode==0) {
-		player = new PIXI.Sprite.fromImage(`./media/spriteimg/${img}.png`);
+		player = new PIXI.Sprite.fromImage(`.common/media/spriteimg/${img}.png`);
 	}
 	player.name = 'background';
 	player.anchor.set(0.5);
@@ -103,7 +103,7 @@ SPRITE.CreateASprite = (img, x = SPRITE.canvasWidth/2, y = SPRITE.canvasHeight/2
 	}
 	var player;
 	if(mode==0) {
-		player = new PIXI.Sprite.fromImage(`./media/spriteimg/${img}.png`);
+		player = new PIXI.Sprite.fromImage(`.common/media/spriteimg/${img}.png`);
 	}
 	if (!SPRITE.sprites[name]&&!SPRITE.texts[name]) {
 		player.name = name;

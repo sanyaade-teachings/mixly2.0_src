@@ -20,7 +20,7 @@ html[data-bs-theme=dark] .loading {
     left: 0px;
     top: var(--nav-height);
     bottom: var(--footer-height);
-    width: 160px;
+    width: 40px;
     border-radius: 2px;
     opacity: 0.9;
 }
@@ -30,7 +30,7 @@ html[data-bs-theme=light] .loading .left-div {
 }
 
 html[data-bs-theme=dark] .loading .left-div {
-    background-color: #333333;
+    background-color: #434343;
 }
 
 .loading .top-div {
@@ -48,7 +48,7 @@ html[data-bs-theme=light] .loading .top-div {
 }
 
 html[data-bs-theme=dark] .loading .top-div {
-    background-color: #2F4056;
+    background-color: #3c3c3c;
 }
 
 .loading .bottom-div {

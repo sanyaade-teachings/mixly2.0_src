@@ -27,20 +27,20 @@ Url.urlToJson = (url) => {
             if (isNaN(decodeValue)) {
                 const decodeValueLower = decodeValue.toLowerCase();
                 switch (decodeValueLower) {
-                    case 'true':
-                        obj[decodeKey] = true;
-                        break;
-                    case 'false':
-                        obj[decodeKey] = false;
-                        break;
-                    case 'undefined':
-                        obj[decodeKey] = undefined;
-                        break;
-                    case 'null':
-                        obj[decodeKey] = null;
-                        break;
-                    default:
-                        obj[decodeKey] = decodeValue;
+                case 'true':
+                    obj[decodeKey] = true;
+                    break;
+                case 'false':
+                    obj[decodeKey] = false;
+                    break;
+                case 'undefined':
+                    obj[decodeKey] = undefined;
+                    break;
+                case 'null':
+                    obj[decodeKey] = null;
+                    break;
+                default:
+                    obj[decodeKey] = decodeValue;
                 }
             } else {
                 obj[decodeKey] = decodeValue-0;

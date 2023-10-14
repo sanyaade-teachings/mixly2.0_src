@@ -77,20 +77,8 @@ Boards.init = () => {
 }
 
 Boards.getType = () => {
-    let str = BOARD.boardIndex ?? '';
-    str = str.replaceAll('\\', '/');
-    if (BOARD.thirdPartyBoard) {
-        let results = str.match(/(?<=boards\/extend\/)[^?\/\\、*\"><|]+/g);
-        if (results instanceof Array) {
-            return results[0];
-        }
-    } else {
-        let results = str.match(/(?<=boards\/default\/)[^?\/\\、*\"><|]+/g);
-        if (results instanceof Array) {
-            return results[0];
-        }
-    }
-    return BOARD.boardType;
+    const { boardIndex = '' } = BOARD;
+    return path.basename(path.dirname(boardIndex)) ?? BOARD.boardType;
 }
 
 Boards.getSelectedBoardName = () => {
@@ -322,12 +310,18 @@ Boards.updateCategories = (boardName, enforce = false) => {
         categoriesDom[i].setAttribute('toolboxitemid', categoriesDom[i].id);
     }
     Msg.renderToolbox(false);
-    if (Editor.blockEditor) {
+    /*for (let i in Editor.editorManager.editors) {
+        if (Editor.editorManager.editors[i] instanceof Mixly.EditorMix) {
+            Editor.editorManager.editors[i].blockEditor.updateToolbox();
+        }
+    }*/
+    // Editor.editorManager.resize();
+    /*if (Editor.blockEditor) {
         Editor.blockEditor.updateToolbox(toolboxDom[0]);
-        ToolboxSearcher.restart();
+        // ToolboxSearcher.restart();
         Editor.blockEditor.scrollCenter();
         Blockly.hideChaff();
-    }
+    }*/
 }
 
 Boards.selectCategories = (boardName, categoriesStr) => {

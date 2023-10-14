@@ -112,10 +112,6 @@
         "provide": ["tippy"],
         "require": ["Popper"]
     }, {
-        "path": "modules/web-modules/select2.min.js",
-        "provide": ["select2"],
-        "require": []
-    }, {
         "path": "modules/web-modules/xterm.min.js",
         "provide": ["Terminal"],
         "require": []
@@ -156,6 +152,10 @@
         "provide": ["FingerprintJS"],
         "require": []
     }, {
+        "path": "modules/web-modules/chrome-tabs.js",
+        "provide": ["ChromeTabs"],
+        "require": []
+    }, {
         "path": "modules/web-modules/path-browserify.js",
         "provide": ["path"],
         "require": []
@@ -167,6 +167,66 @@
         "path": "modules/web-modules/Blob.js",
         "provide": ["Blob"],
         "require": []
+    }, {
+        "path": "modules/web-modules/jquery/select2.min.js",
+        "provide": ["$.select2"],
+        "require": ["$"]
+    }, {
+        "path": "modules/web-modules/jquery/jstree.min.js",
+        "provide": ["$.jstree"],
+        "require": ["$"]
+    }, {
+        "path": "modules/web-modules/jquery/jquery.contextMenu.min.js",
+        "provide": ["$.contextMenu"],
+        "require": ["$.ui"]
+    }, {
+        "path": "modules/web-modules/jquery/jquery.ui.position.min.js",
+        "provide": ["$.ui"],
+        "require": ["$"]
+    }, {
+        "path": "modules/web-modules/marked/marked.min.js",
+        "provide": ["marked"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/marked/marked-katex-extension.min.js",
+        "provide": ["markedKatex"],
+        "require": ["marked"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs.min.js",
+        "provide": ["EditorJS"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_paragraph.min.js",
+        "provide": ["Paragraph"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_header.min.js",
+        "provide": ["Header"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_quote.min.js",
+        "provide": ["Quote"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_warning.min.js",
+        "provide": ["Warning"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_delimiter.min.js",
+        "provide": ["Delimiter"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_alert.min.js",
+        "provide": ["Alert"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_toggle_block.min.js",
+        "provide": ["ToggleBlock"],
+        "require": ["EditorJS"]
+    }, {
+        "path": "modules/web-modules/editorjs/editorjs_list.min.js",
+        "provide": ["List"],
+        "require": ["EditorJS"]
     }, {
         "path": "modules/mixly-modules/web/serialport.js",
         "provide": ["WebSerialPort"],

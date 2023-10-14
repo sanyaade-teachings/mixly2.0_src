@@ -244,7 +244,7 @@ class BoardConfigItem {
      * @method 储存新的配置项设置
      * @return {void}
      **/
-    writeSelectedOptions = () => {
+    writeSelectedOptions() {
         USER.board = USER.board ?? {};
         const { board } = USER;
         board[BOARD.boardType] = board[BOARD.boardType] ?? {};

@@ -1,0 +1,55 @@
+<div>
+    <style type="text/css">
+        div[m-id="{{d.mId}}"] {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        div[m-id="{{d.mId}}"] > .loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .loading {
+            background-color: #fff;
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .loading {
+            background-color: #181818;
+        }
+
+        div[m-id="{{d.mId}}"] > .loading > .left {
+            position: absolute;
+            left: 0px;
+            top: 0;
+            bottom: 0;
+            width: 160px;
+            border-radius: 2px;
+            opacity: 0.9;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .loading > .left {
+            background-color: #ddd;
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .loading > .left {
+            background-color: #333333;
+        }
+
+        div[m-id="{{d.mId}}"] > .editor {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <div m-id="{{d.mId}}">
+        <div class="loading">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="editor"></div>
+    </div>
+</div>

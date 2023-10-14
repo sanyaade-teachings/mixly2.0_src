@@ -70,6 +70,13 @@ function restore_blocks() {
         window.localStorage[BOARD.boardType + '.filePath'] = '';
     } else if (window.localStorage[BOARD.boardType]) {
         let xml;
+        if (window.localStorage[BOARD.boardType + ".loadCode"]
+            && window.localStorage[BOARD.boardType + ".loadCode"] == "true") {
+            if (window.localStorage[BOARD.boardType + ".code"]) {
+                Editor.mainEditor.drag.full('NEGATIVE');
+                Editor.codeEditor.setValue(window.localStorage[BOARD.boardType + ".code"], -1);
+            }
+        }
         try {
             xml = $(window.localStorage[BOARD.boardType])[0];
             if ($("#boards-type").length) {
@@ -90,13 +97,6 @@ function restore_blocks() {
             Editor.blockEditor.clear();
             console.log(e);
             clear_blocks_from_storage();
-        }
-        if (window.localStorage[BOARD.boardType + ".loadCode"]
-            && window.localStorage[BOARD.boardType + ".loadCode"] == "true") {
-            if (window.localStorage[BOARD.boardType + ".code"]) {
-                Editor.mainEditor.drag.full('NEGATIVE');
-                Editor.codeEditor.setValue(window.localStorage[BOARD.boardType + ".code"], -1);
-            }
         }
         if (window.localStorage[BOARD.boardType + ".openedPath"]
             && window.localStorage[BOARD.boardType + ".openedPath"] !== 'null'

@@ -55,9 +55,9 @@ const scanFile = (filePath, ignore, rootPath) => {
 const match = (type, jsStr) => {
     let list = [];
     if (type === 'goog.require') {
-        list = jsStr.match(/(?<=goog.require[\s]*\(["|'])[\w-.]+(?=["|'][\s]*\))/g);
+        list = jsStr.match(/(?<=goog.require[\s]*\(["|'])[^"|']+(?=["|'][\s]*\))/g);
     } else {
-        list = jsStr.match(/(?<=goog.provide[\s]*\(["|'])[\w-.]+(?=["|'][\s]*\))/g);
+        list = jsStr.match(/(?<=goog.provide[\s]*\(["|'])[^"|']+(?=["|'][\s]*\))/g);
     }
     if (list) {
         list = unique(list);

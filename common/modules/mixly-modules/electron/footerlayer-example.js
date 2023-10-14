@@ -29,7 +29,6 @@ const { BOARD } = Config;
 
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
-const fs_extra = Mixly.require('fs-extra');
 const electron_remote = Mixly.require('@electron/remote');
 const { app } = electron_remote;
 

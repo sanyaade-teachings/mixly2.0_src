@@ -7,6 +7,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Boards');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Nav');
 goog.require('Mixly.Web.Serial');
 goog.require('Mixly.Web.Esptool');
 goog.require('Mixly.Web.USB');
@@ -21,7 +22,8 @@ const {
     Config,
     MFile,
     Boards,
-    Msg
+    Msg,
+    Nav
 } = Mixly;
 
 const {
@@ -613,5 +615,21 @@ BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
         statusBarTerminal.addValue(`==${Msg.Lang['上传失败']}==\n`);
     });
 }
+
+Nav.register({
+    icon: 'icon-link',
+    title: '',
+    id: 'connect-btn',
+    displayText: Blockly.Msg.MSG['connect'],
+    preconditionFn: () => {
+        if (goog.isElectron || Env.hasSocketServer) {
+            return false;
+        }
+        return true;
+    },
+    callback: () => BU.clickConnect(),
+    scopeType: Nav.Scope.LEFT,
+    weight: 3
+});
 
 });

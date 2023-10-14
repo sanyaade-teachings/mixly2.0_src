@@ -1,0 +1,95 @@
+<style type="text/css">
+    #copyright {
+        font-family: "YaHei Consolas Hybrid", "Microsoft Yahei Light", "Arial";
+        font-size: 12px;
+        color: #fff;
+        text-align: center;
+        display: -webkit-box;
+        flex-direction: row;
+        align-items: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    #nav div[m-id="{{d.id.leftBtnContainer}}"] button {
+        height: var(--nav-left-btn-height);
+        line-height: var(--nav-left-btn-height);
+        font-size: calc(var(--nav-left-btn-font-size) + 4px);
+        margin: 0px;
+    }
+</style>
+<ul
+    class="layui-nav{{= d.theme === 'light' ? ' layui-bg-green' : ' layui-bg-cyan'}}"
+    lay-filter="nav-filter"
+    id="nav"
+    style="width: 100vw;display: flex;flex-direction: row;justify-content: space-between;height: 100%;"
+>
+    <div
+        style="display: flex;flex-direction: row;justify-content: flex-start;align-items: center;"
+    >
+        <!--自适应时显示的按钮-->
+        <div m-id="{{d.id.leftBtnContainer}}" style="display: inline-flex;">
+            <!--返回主页面按钮-->
+            <button
+                type="button"
+                m-id="home-btn"
+                class="layui-btn layui-btn-xs layui-btn-primary mixly-nav"
+            >Mixly</button>
+        </div>
+        <!--自适应时的更多按钮-->
+        <li class="layui-nav-item mixly-scrollbar" style="display:none;" lay-unselect>
+            <a href="javascript:;" style="white-space: nowrap;">更多</a>
+            <dl class="layui-nav-child" m-id="{{d.id.moreLeftBtnContainer}}">
+                <!-- 二级菜单 -->
+            </dl>
+        </li>
+    </div>
+    <div style="display: inline-flex;flex-direction: row;align-items: center;">
+        <a id="copyright">{{d.msg.copyright}}</a>
+    </div>
+    <div
+        id="nav-right-area"
+        style="display: inline-flex;flex-direction: row;justify-content: flex-end;align-items: center;"
+    >
+        <div id="nav-right-btn-list" style="display: flex;">
+            <button
+                title='状态栏'
+                m-id="h-bar"
+                class="layui-btn layui-btn-xs layui-btn-primary mixly-nav"
+                style="padding: 0;margin: 2px;"
+            >
+                <a
+                    href="javascript:;"
+                    class="icon-show-bar-s"
+                ></a>
+            </button>
+            <button
+                m-id="v-bar"
+                title='侧边栏'
+                class="layui-btn layui-btn-xs layui-btn-primary mixly-nav"
+                style="padding: 0;margin: 2px;"
+            >
+                <a
+                    href="javascript:;"
+                    class="icon-show-bar-e"
+                ></a>
+            </button>
+            <button
+                m-id="code-area"
+                title='模式切换'
+                class="layui-btn layui-btn-xs layui-btn-primary mixly-nav"
+                style="padding: 0;margin: 2px;"
+            >
+                <a
+                    href="javascript:;"
+                    class="icon-code-1"
+                    style="font-size: 16px;"
+                ></a>
+            </button>
+        </div>
+        <div m-id="{{d.id.dropdownContainer}}" style="display: flex;"></div>
+        <div m-id="{{d.id.rightBtnContainer}}"></div>
+    </div>
+</ul>

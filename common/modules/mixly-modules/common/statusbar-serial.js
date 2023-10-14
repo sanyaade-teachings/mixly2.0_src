@@ -10,7 +10,7 @@ class StatusBarSerial extends StatusBar {
     static TITLE = '{{d.title}}<span id="{{d.id}}" class="layui-badge-dot layui-bg-orange"></span>';
 
     constructor(id, config) {
-        super(config.contentId);
+        super($(`#${config.contentId}`)[0]);
         this.id = id;
         this.opened = true;
         this.config = config;

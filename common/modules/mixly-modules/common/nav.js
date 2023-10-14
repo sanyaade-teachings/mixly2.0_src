@@ -6,6 +6,8 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Command');
 goog.require('Mixly.XML');
+goog.require('Mixly.IdGenerator');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.Nav');
 
 const {
@@ -13,7 +15,9 @@ const {
     Config,
     Command,
     Nav,
-    XML
+    XML,
+    IdGenerator,
+    Msg
 } = Mixly;
 
 const { BOARD, USER } = Config;
@@ -64,22 +68,6 @@ Nav.operatingEnv = operatingEnv;
 
 Nav.LEFT_BTN_CONFIG = [
     {
-        // 【撤销】按钮
-        type: 'UNDO',
-        class: 'icon-ccw',
-        id: 'undo-btn',
-        title: 'undo(ctrl+z)',
-        href: '#',
-        onclick: 'Mixly.Editor.mainEditor.undo()'
-    }, {
-        // 【重复】按钮
-        type: 'REDO',
-        class: 'icon-cw',
-        id: 'redo-btn',
-        title: 'redo(ctrl+y)',
-        href: '#',
-        onclick: 'Mixly.Editor.mainEditor.redo()'
-    }, {
         // 网页版的【连接】按钮
         type: 'CONNECT',
         class: 'icon-link',
@@ -152,18 +140,6 @@ Nav.LEFT_BTN_CONFIG = [
             websocket: {
                 c: 'Mixly.WebSocket.ArduShell.initUpload()',
                 mpy: 'Mixly.WebSocket.BU.initUpload()'
-            }
-        }
-    }, {
-        //【仿真】按钮
-        type: 'SIMULATE',
-        class: 'icon-play-circled',
-        id: 'simulate_btn',
-        title: '',
-        href: '#',
-        onclick: {
-            electron: {
-                c: 'Mixly.AvrSimulate.initSimulate()'
             }
         }
     }, {
@@ -919,6 +895,305 @@ Nav.init = () => {
             $navItem.css('display', 'none');
         }
         $liOperate.css('display', '-webkit-box');
+    }
+}
+
+Nav.CONTAINER_IDS = IdGenerator.generate([
+    'LEFT_BTN_CONTAINER',
+    'MORE_LEFT_BTN_CONTAINER',
+    'DROPDOWN_CONTAINER',
+    'RIGHT_BTN_CONTAINER'
+]);
+
+/**
+  * nav容器html片段
+  * @type {String}
+  */
+Nav.CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav.html'));
+
+/**
+  * nav按钮html片段
+  * @type {String}
+  */
+Nav.BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav-btn.html'));
+
+/**
+  * nav子元素容器html片段
+  * @type {String}
+  */
+Nav.ITEM_CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav-item-container.html'));
+
+/**
+  * nav子元素html片段
+  * @type {String}
+  */
+Nav.ITEM_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav-item.html'));
+
+/**
+  * 板卡选择器html片段
+  * @type {String}
+  */
+Nav.BOARD_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'board-selector-div.html'));
+
+/**
+  * 端口选择器html片段
+  * @type {String}
+  */
+Nav.PORT_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'port-selector-div.html'));
+
+Nav.Scope = {
+    'LEFT': -1,
+    'CENTER': 0,
+    'RIGHT': 1,
+    '-1': 'LEFT',
+    '0': 'CENTER',
+    '1': 'RIGHT'
+};
+
+Nav.$container = null;
+Nav.$leftBtnContainer = null;
+Nav.$moreLeftBtnContainer = null;
+Nav.$dropdownContainer = null;
+Nav.$rightBtnContainer = null;
+Nav.btns = {};
+Nav.weightsInfo = [];
+Nav.registerQueue = [];
+
+Nav.init_ = function() {
+    this.$container = $(XML.render(this.CONTAINER_TEMPLATE, {
+        theme: USER.theme,
+        msg: {
+            copyright: Blockly.Msg.MSG['copyright']
+        },
+        id: {
+            leftBtnContainer: this.CONTAINER_IDS.LEFT_BTN_CONTAINER,
+            moreLeftBtnContainer: this.CONTAINER_IDS.MORE_LEFT_BTN_CONTAINER,
+            dropdownContainer: this.CONTAINER_IDS.DROPDOWN_CONTAINER,
+            rightBtnContainer: this.CONTAINER_IDS.RIGHT_BTN_CONTAINER
+        }
+    }));
+    this.$leftBtnContainer = this.$container.find(
+        `[m-id=${this.CONTAINER_IDS.LEFT_BTN_CONTAINER}]`
+    );
+    this.$moreLeftBtnContainer = this.$container.find(
+        `[m-id=${this.CONTAINER_IDS.MORE_LEFT_BTN_CONTAINER}]`
+    );
+    this.$dropdownContainer = this.$container.find(
+        `[m-id=${this.CONTAINER_IDS.DROPDOWN_CONTAINER}]`
+    );
+    this.$rightBtnContainer = this.$container.find(
+        `[m-id=${this.CONTAINER_IDS.RIGHT_BTN_CONTAINER}]`
+    );
+    this.$dropdownContainer.append(Nav.BOARD_SELECTOR_TEMPLATE);
+    this.$dropdownContainer.append(XML.render(Nav.PORT_SELECTOR_TEMPLATE, {
+        selectPort: Msg.Lang['选择串口'],
+        noPort: Msg.Lang['无可用串口']
+    }));
+    $('#nav-container').append(this.$container);
+    element.render('nav', 'nav-filter');
+    form.render('select', 'boards-type-filter');
+    form.render('select', 'ports-type-filter');
+    Nav.addClickEvent();
+    for (let options of this.registerQueue) {
+        this.register(options);
+    }
+    /*for (let i = 0; i < 10; i++)
+        Nav.register({
+            icon: 'icon-ccw',
+            title: '测试(Ctrl + A)',
+            id: IdGenerator.generate(),
+            displayText: '测试' + i,
+            preconditionFn: () => {
+                return goog.isElectron;
+            },
+            callback: (elem) => console.log(elem),
+            scopeType: this.Scope.LEFT,
+            weight: 10 - i
+        });*/
+    $(window).resize(() => {
+        this.resize();
+    });
+}
+
+/**
+ * @function 注册函数
+ * @param options 选项
+ *  {
+ *      icon: String,
+ *      title: String,
+ *      id: String | Array,
+ *      displayText: String,
+ *      preconditionFn: Function,
+ *      callback: Function,
+ *      scopeType: Nav.SCOPE_TYPE,
+ *      weight: Number
+ *  }
+ * @return {void}
+ **/
+Nav.register = function(options) {
+    if (!this.$container) {
+        this.registerQueue.push(options);
+        return;
+    }
+    const { scopeType = this.ScopeType.LEFT } = options;
+    const newOptions = { ...options };
+    switch (scopeType) {
+    case this.Scope.LEFT:
+        if (newOptions.id === 'home-btn') {
+            this.btns[newOptions.id] = newOptions;
+        } else {
+            this.addLeftBtn_(newOptions);
+        }
+        break;
+    }
+    element.render('nav', 'nav-filter');
+}
+
+/**
+ * @function 取消注册函数
+ * @param options 选项
+ *  {
+ *      id: String | Array,
+ *      scopeType: Nav.SCOPE_TYPE
+ *  }
+ * @return {void}
+ **/
+Nav.unregister = function(options) {
+
+}
+
+Nav.getElemWidth = function(elem) {
+    const display = elem.css('display');
+    if (display !== 'none') {
+        return elem.outerWidth(true);
+    }
+    const visibility = elem.css('visibility');
+    const position = elem.css('position');
+    elem.css({
+        display: 'block',
+        visibility: 'hidden',
+        position: 'absolute'
+    });
+    const width = elem.outerWidth(true);
+    elem.css({ display, visibility, position });
+    return width;
+}
+
+Nav.addClickEvent = function() {
+    $(document).off('click', '.mixly-nav')
+    .on('click', '.mixly-nav', function() {
+        const $this = $(this);
+        const mId = $this.attr('m-id');
+        if (Nav.btns[mId]
+            && typeof Nav.btns[mId].callback === 'function') {
+            Nav.btns[mId].callback(this);
+        }
+    });
+}
+
+Nav.addLeftBtn_ = function(options) {
+    const {
+        id = '',
+        title = '',
+        icon = '',
+        displayText = '',
+        weight = 0
+    } = options;
+    options.$btn = $(XML.render(Nav.BTN_TEMPLATE, {
+        title,
+        mId: id,
+        icon,
+        text: displayText
+    }));
+    options.$moreBtn = $(XML.render(Nav.ITEM_TEMPLATE, {
+        mId: id,
+        icon,
+        text: displayText
+    }));
+    if (Object.keys(this.btns).includes(id)) {
+        this.btns[id].$btn.remove();
+        this.btns[id].$moreBtn.remove();
+        delete this.btns[id];
+    }
+    let $btn = null;
+    let $moreBtn = null;
+    const $btns = this.$leftBtnContainer.children('button');
+    for (let i = 0; $btns[i]; i++) {
+        const mId = $($btns[i]).attr('m-id');
+        if (!this.btns[mId]) {
+            continue;
+        }
+        if (weight < this.btns[mId].weight) {
+            $btn = this.btns[mId].$btn;
+            $moreBtn = this.btns[mId].$moreBtn;
+            break;
+        }
+    }
+    if ($btn) {
+        $btn.before(options.$btn);
+        $moreBtn.before(options.$moreBtn);
+    } else {
+        this.$leftBtnContainer.append(options.$btn);
+        this.$moreLeftBtnContainer.append(options.$moreBtn);
+    }
+    options.width = this.getElemWidth(options.$btn);
+    this.btns[id] = options;
+    this.resize();
+}
+
+Nav.removeLeftBtn_ = function(str) {
+
+}
+
+Nav.addRightBtn_ = function(str) {
+
+}
+
+Nav.removeRightBtn_ = function(str) {
+
+}
+
+Nav.resize = function() {
+    const navRightWidth = this.getElemWidth($('#nav-right-area'));
+    const navWidth = this.getElemWidth($('#nav'));
+    const $btns = this.$leftBtnContainer.children('button');
+    let nowWidth = navRightWidth;
+    let showMoreBtnContainer = false;
+    for (let i = 0; $btns[i]; i++) {
+        const mId = $($btns[i]).attr('m-id');
+        if (mId === 'home-btn') {
+            continue;
+        }
+        const config = this.btns[mId];
+        let width = 0;
+        if (config) {
+            const { preconditionFn } = config;
+            if (!preconditionFn()) {
+                config.$btn.css('display', 'none');
+                config.$moreBtn.css('display', 'none');
+                continue;
+            }
+            width = config.width;
+        } else {
+            width = this.getElemWidth($($btns[i]));
+        }
+        nowWidth += width;
+        if (!config) {
+            continue;
+        }
+        if (navWidth < nowWidth + 200) {
+            config.$btn.css('display', 'none');
+            config.$moreBtn.css('display', 'block');
+            showMoreBtnContainer = true;
+        } else {
+            config.$btn.css('display', 'block');
+            config.$moreBtn.css('display', 'none');
+        }
+    }
+    if (showMoreBtnContainer) {
+        this.$moreLeftBtnContainer.parent().css('display', 'block');
+    } else {
+        this.$moreLeftBtnContainer.parent().css('display', 'none');
     }
 }
 

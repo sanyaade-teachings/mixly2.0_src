@@ -8,9 +8,9 @@ const { Config, EditorAce } = Mixly;
 const { USER } = Config;
 
 class StatusBar extends EditorAce {
-    constructor(id) {
-        super(id);
-        this.id = id;
+    constructor(dom) {
+        super(dom);
+        super.init();
         this.toStatusBar();
     }
 

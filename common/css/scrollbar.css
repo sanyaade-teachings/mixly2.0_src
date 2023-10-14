@@ -2,20 +2,20 @@
 
 /* 设置滚动条宽高 */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 /* 设置滚动条滑槽 */
 ::-webkit-scrollbar-track {
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 /* 设置滚动条滑块 */
 ::-webkit-scrollbar-thumb {
     background-color: #C3C1C1;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -29,7 +29,7 @@
 /* 设置滚动条滑块 */
 html[data-bs-theme=light] ::-webkit-scrollbar-thumb {
     background-color: #C3C1C1;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 html[data-bs-theme=light] ::-webkit-scrollbar-thumb:hover {
@@ -42,7 +42,7 @@ html[data-bs-theme=light] ::-webkit-scrollbar-thumb:active {
 
 html[data-bs-theme=dark] ::-webkit-scrollbar-thumb {
     background-color: #989998;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 html[data-bs-theme=dark] ::-webkit-scrollbar-thumb:hover {

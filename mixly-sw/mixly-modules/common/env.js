@@ -29,7 +29,7 @@ Env.currentPlatform = goog.platform();
   * 获取板卡index或主页面index的路径
   * @type {String} 
   */
-Env.indexDirPath = path.join((new URL($('html').context.baseURI)).href, '../').replace(/file:\/+/g, '');
+Env.indexDirPath = path.join((new URL($('html')[0].baseURI)).href, '../').replace(/file:\/+/g, '');
 Env.indexDirPath = decodeURIComponent(Env.indexDirPath);
 if (Env.currentPlatform !== 'win32') {
   Env.indexDirPath = '/' + Env.indexDirPath;

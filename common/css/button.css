@@ -40,3 +40,22 @@ html[data-bs-theme=light] .self-adaption-btn {
 html[data-bs-theme=dark] .self-adaption-btn {
     background-color: var(--lay-color-normal) !important;
 }
+
+.statusbar-btn {
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.statusbar-btn:hover {
+    background-color: rgba(90, 93, 94, 0.31) !important;
+}
+
+html[data-bs-theme=light] .statusbar-btn {
+    background-color: #f2f2f2;
+    color: #000;
+}
+
+html[data-bs-theme=dark] .statusbar-btn {
+    background-color: #232324;
+    color: #fff;
+}

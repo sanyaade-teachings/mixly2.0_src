@@ -121,6 +121,9 @@
             "Blockly.FieldDate",
             "Blockly.Screenshot",
             "Mixly.Config",
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.IdGenerator",
             "Mixly.ToolboxSearcher"
         ],
         "provide": [
@@ -132,8 +135,12 @@
         "require": [
             "ace",
             "ace.ExtLanguageTools",
+            "$.contextMenu",
             "Mixly.Config",
+            "Mixly.IdGenerator",
             "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.Msg",
             "Mixly.EditorAce"
         ],
         "provide": [
@@ -141,7 +148,22 @@
         ]
     },
     {
-        "path": "/common/editor-mixed.js",
+        "path": "/common/editor-md.js",
+        "require": [
+            "marked",
+            "markedKatex",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.DragV",
+            "Mixly.IdGenerator",
+            "Mixly.EditorCode"
+        ],
+        "provide": [
+            "Mixly.EditorMd"
+        ]
+    },
+    {
+        "path": "/common/editor-mix.js",
         "require": [
             "layui",
             "Blockly",
@@ -149,11 +171,45 @@
             "Mixly.XML",
             "Mixly.Msg",
             "Mixly.Config",
+            "Mixly.Env",
+            "Mixly.IdGenerator",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode"
         ],
         "provide": [
-            "Mixly.EditorMixed"
+            "Mixly.EditorMix"
+        ]
+    },
+    {
+        "path": "/common/editor-mixbook.js",
+        "require": [
+            "EditorJS",
+            "Paragraph",
+            "Header",
+            "Quote",
+            "Warning",
+            "Delimiter",
+            "Alert",
+            "ToggleBlock",
+            "List",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.IdGenerator"
+        ],
+        "provide": [
+            "Mixly.EditorMixbook"
+        ]
+    },
+    {
+        "path": "/common/editor-unknown.js",
+        "require": [
+            "path",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.IdGenerator"
+        ],
+        "provide": [
+            "Mixly.EditorUnknown"
         ]
     },
     {
@@ -161,13 +217,53 @@
         "require": [
             "Blockly",
             "Mixly.DragH",
-            "Mixly.EditorMixed",
+            "Mixly.EditorMix",
             "Mixly.StatusBarTab",
             "Mixly.Msg",
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Nav",
+            "ChromeTabs",
+            "$.jstree",
+            "Mixly.EditorsManager",
+            "Mixly.Workspace"
         ],
         "provide": [
             "Mixly.Editor"
+        ]
+    },
+    {
+        "path": "/common/editors-manager.js",
+        "require": [
+            "path",
+            "Mixly.IdGenerator",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.EditorMix",
+            "Mixly.EditorCode",
+            "Mixly.EditorMd",
+            "Mixly.EditorMixbook",
+            "Mixly.EditorBlockly",
+            "Mixly.EditorUnknown",
+            "Mixly.EditorsTabs"
+        ],
+        "provide": [
+            "Mixly.EditorsManager"
+        ]
+    },
+    {
+        "path": "/common/editors-tabs.js",
+        "require": [
+            "path",
+            "ChromeTabs",
+            "XScrollbar",
+            "Sortable",
+            "Mixly.Env",
+            "Mixly.IdGenerator",
+            "Mixly.XML",
+            "Mixly.Config"
+        ],
+        "provide": [
+            "Mixly.EditorsTabs"
         ]
     },
     {
@@ -253,6 +349,16 @@
         ],
         "provide": [
             "Mixly.FooterLayer"
+        ]
+    },
+    {
+        "path": "/common/id-generator.js",
+        "require": [
+            "shortid",
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.IdGenerator"
         ]
     },
     {
@@ -442,10 +548,21 @@
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Command",
-            "Mixly.XML"
+            "Mixly.XML",
+            "Mixly.IdGenerator",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.Nav"
+        ]
+    },
+    {
+        "path": "/common/regression.js",
+        "require": [
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.Regression"
         ]
     },
     {
@@ -462,7 +579,7 @@
         "path": "/common/serial-charts.js",
         "require": [
             "Highcharts",
-            "Mixly.Env",
+            "Mixly.Regression",
             "Mixly.Config",
             "Mixly.Msg"
         ],
@@ -583,14 +700,20 @@
         ]
     },
     {
-        "path": "/common/workspace-manager.js",
+        "path": "/common/workspace.js",
         "require": [
-            "Blockly",
-            "DisableTopBlocks",
-            "Mixly.Editor"
+            "path",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.Msg",
+            "Mixly.DragH",
+            "Mixly.DragV",
+            "Mixly.IdGenerator",
+            "Mixly.EditorsManager",
+            "Mixly.StatusBarTab"
         ],
         "provide": [
-            "Mixly.WorkspaceManager"
+            "Mixly.Workspace"
         ]
     },
     {
@@ -621,6 +744,7 @@
             "Mixly.MArray",
             "Mixly.Msg",
             "Mixly.MString",
+            "Mixly.Nav",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -638,6 +762,7 @@
             "Mixly.MFile",
             "Mixly.MString",
             "Mixly.Msg",
+            "Mixly.Nav",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -793,7 +918,6 @@
         "require": [
             "Mixly.JSFuncs",
             "Mixly.Interface",
-            "select2",
             "XScrollbar",
             "PouchDB",
             "d3",
@@ -835,6 +959,7 @@
             "Mixly.MFile",
             "Mixly.Boards",
             "Mixly.Msg",
+            "Mixly.Nav",
             "Mixly.Web.Serial",
             "Mixly.Web.Esptool",
             "Mixly.Web.USB",

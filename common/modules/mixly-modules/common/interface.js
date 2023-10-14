@@ -60,48 +60,32 @@ const {
 const { Socket } = WebSocket;
 
 Interface.init = () => {
+    Nav.register({
+        id: 'home-btn',
+        preconditionFn: () => {
+            return true;
+        },
+        callback: () => {
+            if (goog.isElectron) {
+                Electron.Loader.onbeforeunload();
+            } else {
+                Interface.onbeforeunload();
+            }
+        },
+        scopeType: Nav.Scope.LEFT,
+        weight: -1
+    });
     $('body').append(XML.TEMPLATE_DOM['APP_DIV']);
     if (FooterLayerExample instanceof Object) {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
-    Nav.init();
+    // Nav.init();
+    Nav.init_();
     FooterBar.init();
     NavEvents.init();
     if (!goog.isElectron) {
         Lms.changeState();
     }
-}
-
-Interface.onresize = (event) => {
-    const $nav = $('#nav');
-    const $navLeftBtnList = $('#nav-left-btn-list');
-    const $navRightBtnList = $('#nav-right-btn-list');
-    const $liOperate = $('#li_operate');
-    if ($navRightBtnList.offset().left < Nav.leftWidth + 70 || $nav[0].scrollWidth > $nav[0].offsetWidth) {
-        for (let i = 0; i < Nav.navItemId.length; i++) {
-            const $navItem = $('#' + Nav.navItemId[i]);
-            $navItem.css('display', 'none');
-        }
-        $liOperate.css('display', 'inline-block');
-        const nowLeftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
-        const gap = $navRightBtnList.offset().left - nowLeftWidth;
-        if (gap < 70) {
-            $('#copyright').css('display', 'none');
-        } else {
-            $('#copyright').css('display', '-webkit-box');
-        }
-    } else {
-        $('#copyright').css('display', '-webkit-box');
-        $liOperate.css('display', 'none');
-        for (let i = 0; i < Nav.navItemId.length; i++) {
-            const $navItem = $('#' + Nav.navItemId[i]);
-            $navItem.css('display', 'inline-block');
-        }
-        Nav.leftWidth = $navLeftBtnList.offset().left + $navLeftBtnList.width();
-    }
-    const { codeEditor, blockEditor } = Editor.mainEditor;
-    codeEditor.resize();
-    blockEditor.resize();
 }
 
 window.addEventListener('load', () => {
@@ -159,23 +143,16 @@ window.addEventListener('load', () => {
                 }, 10000);
             }
         }
-        window.addEventListener('resize', Interface.onresize, false);
-        Interface.onresize();
-        const $loading = $('.loading');
-        const toolboxWidth = $('.blocklyToolboxDiv').width();
-        $loading.children('.left-div').animate({
-          width: toolboxWidth + 'px'
-        }, 'slow', () => {
-            $loading.fadeOut("fast", () => {
-                $loading.remove();
-                if (BOARD.nav.levelSelector) {
-                    LevelSelector.init();
-                    LevelSelector.xmlToWorkspace(1);
-                } else {
-                    auto_save_and_restore_blocks();
-                }
-            });
-        });
+        Nav.resize();
+        if (BOARD.nav.levelSelector) {
+            LevelSelector.init();
+            LevelSelector.xmlToWorkspace(1);
+        } else {
+            auto_save_and_restore_blocks();
+        }
+        setTimeout(() => {
+            $('.loading').fadeOut('fast');
+        }, 1000);
     });
 });
 

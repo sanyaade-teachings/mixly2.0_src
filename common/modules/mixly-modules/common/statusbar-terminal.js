@@ -10,7 +10,7 @@ class StatusBarTerminal extends StatusBar {
     static TITLE = '{{d.title}}';
 
     constructor(id, config) {
-        super(config.contentId);
+        super($(`#${config.contentId}`)[0]);
         this.id = id;
         this.config = config;
     }

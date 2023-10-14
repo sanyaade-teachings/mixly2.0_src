@@ -4,6 +4,7 @@ goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('layui');
 goog.require('store');
+goog.require('$.select2');
 goog.require('Mixly.XML');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
@@ -104,71 +105,70 @@ Setting.onclick = () => {
     $('#setting-menu-user button').off().click((event) => {
         const type = $(event.currentTarget).attr('value');
         switch (type) {
-            case 'apply':
-                let oldTheme = USER.themeAuto? 'auto' : USER.theme;
-                let oldLanglage = USER.languageAuto? 'auto' : USER.language;
-                let updateTheme = false, updateLanguage = false;
-                let value = Setting.configMenuGetValue(obj);
-                for (let i in value) {
-                    USER[i] = value[i];
+        case 'apply':
+            let oldTheme = USER.themeAuto? 'auto' : USER.theme;
+            let oldLanglage = USER.languageAuto? 'auto' : USER.language;
+            let updateTheme = false, updateLanguage = false;
+            let value = Setting.configMenuGetValue(obj);
+            for (let i in value) {
+                USER[i] = value[i];
+            }
+            updateTheme = oldTheme !== USER.theme;
+            updateLanguage = oldLanglage !== USER.language;
+            if (updateTheme) {
+                if (USER.theme === 'auto') {
+                    const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+                    USER.theme = themeMedia.matches ? 'light' : 'dark';
+                    USER.themeAuto = true;
+                } else {
+                    USER.themeAuto = false;
                 }
-                updateTheme = oldTheme !== USER.theme;
-                updateLanguage = oldLanglage !== USER.language;
-                if (updateTheme) {
-                    if (USER.theme === 'auto') {
-                        const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
-                        USER.theme = themeMedia.matches ? 'light' : 'dark';
-                        USER.themeAuto = true;
-                    } else {
-                        USER.themeAuto = false;
+                $('body').removeClass('dark light')
+                         .addClass(USER.theme);
+                $('html').attr('data-bs-theme', USER.theme);
+            }
+            if (updateLanguage) {
+                if (USER.language === 'auto') {
+                    switch (navigator.language) {
+                        case 'zh-CN':
+                            USER.language = 'zh-hans';
+                            break;
+                        case 'zh-HK':
+                        case 'zh-SG':
+                        case 'zh-TW':
+                            USER.language = 'zh-hant';
+                            break;
+                        default:
+                            USER.language = 'en';
                     }
-                    $('body').removeClass('dark light')
-                             .addClass(USER.theme);
-                    $('html').attr('data-bs-theme', USER.theme);
+                    USER.languageAuto = true;
+                } else {
+                    USER.languageAuto = false;
                 }
-                if (updateLanguage) {
-                    if (USER.language === 'auto') {
-                        switch (navigator.language) {
-                            case 'zh-CN':
-                                USER.language = 'zh-hans';
-                                break;
-                            case 'zh-HK':
-                            case 'zh-SG':
-                            case 'zh-TW':
-                                USER.language = 'zh-hant';
-                                break;
-                            default:
-                                USER.language = 'en';
-                        }
-                        USER.languageAuto = true;
-                    } else {
-                        USER.languageAuto = false;
-                    }
-                    Msg.nowLang = USER.language ?? 'zh-hans';
-                    LayerExt.updateShade();
-                }
-                if (updateTheme || updateLanguage) {
-                    BoardManager.screenWidthLevel = -1;
-                    BoardManager.screenHeightLevel = -1;
-                    BoardManager.updateBoardsCard();
-                }
-                Storage.user('/', USER);
-                layer.closeAll(() => {
-                    XML.renderAllTemplete();
-                    layer.msg(Msg.getLang('CONFIG_UPDATE_SUCC'), { time: 1000 });
-                });
-                break;
-            case 'reset':
-                Setting.configMenuReset(obj);
-                break;
+                Msg.nowLang = USER.language ?? 'zh-hans';
+                LayerExt.updateShade();
+            }
+            if (updateTheme || updateLanguage) {
+                BoardManager.screenWidthLevel = -1;
+                BoardManager.screenHeightLevel = -1;
+                BoardManager.updateBoardsCard();
+            }
+            Storage.user('/', USER);
+            layer.closeAll(() => {
+                XML.renderAllTemplete();
+                layer.msg(Msg.getLang('CONFIG_UPDATE_SUCC'), { time: 1000 });
+            });
+            break;
+        case 'reset':
+            Setting.configMenuReset(obj);
+            break;
         }
     }); 
 }
 
 Setting.addOnchangeOptionListener = () => {
     element.on('tab(setting-menu-filter)', function(data) {
-        let $li = $(data.elem.context);
-        let index = $li.attr('lay-id') - 0;
+        const { index } = data;
         if (index === 1) {
             if (data.index !== Setting.nowIndex) {
                 goog.isElectron && BoardManager.onclickImportBoards();
@@ -192,7 +192,7 @@ Setting.addOnchangeOptionListener = () => {
                 });
             }
         }
-        Setting.nowIndex = data.index;
+        Setting.nowIndex = index;
     });
 }
 

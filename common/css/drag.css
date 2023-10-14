@@ -63,33 +63,20 @@
 }
 
 /* 拖拽元素的容器 */
-.drag-s-elem-container {
-    width: 100%;
+.drag-elem {
     position: absolute;
-    display: flex;
-    flex-direction: column-reverse;
-    flex-wrap: nowrap;
-}
-
-.drag-w-elem-container {
-    height: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
+    opacity: 0;
 }
 
 .drag-s-elem {
     width: 100%;
     height: 4px;
-    opacity: 0;
     cursor: s-resize;
 }
 
 .drag-w-elem {
-    height: 100%;
     width: 4px;
-    opacity: 0;
+    height: 100%;
     cursor: w-resize;
 }
 

@@ -190,6 +190,9 @@ PyEngine.prototype.reset = function() {
 }
 
 PyEngine.prototype.kill = function(type) {
+    // 新增了sprite相关内容
+	SPRITE.kill();
+
     //点击取消按钮发送数据     
     Sk.execLimit = 0;
     $("#loading").css('display', "none");
@@ -345,6 +348,7 @@ PyEngine.prototype.run = function(type) {
                 <div id="pggame_stage" wrap="off" readonly
                     style="position: relative;height:0%;background:#f9f9f9;outline: none;overflow:auto"></div>
                 <div id="blocklySVG" wrap="off" readonly style="position: relative;height:0%;background:#f9f9f9;outline:none;overflow:auto"></div>
+                <div id="spriteContainer" wrap="off" readonly style="position: relative;height:0%;background:#f9f9f9;outline:none;overflow:auto"></div>
             </div>`
       ));
     }
@@ -375,9 +379,11 @@ PyEngine.prototype.run = function(type) {
     $("#matplot_img").css('height','');
     $("#matplot_img").empty();
     $("#pggame_stage").empty();
+    $("#spriteContainer").empty();
     document.getElementById("output_img").style.height='100%'
     document.getElementById("mat_div").style.height='0%'
     document.getElementById("pggame_stage").style.height='0%'
+    document.getElementById("spriteContainer").style.height='0%'
     $("#loading").css('display', "inline-block");
 
     // Reset everything
@@ -445,6 +451,13 @@ PyEngine.prototype.run = function(type) {
         ifpgzrun=true;
     }
 
+    //检验是否存在sprite模块
+	var sprite_pack="sprite"
+	var ifsprite=false;
+	if ((code.indexOf("import "+sprite_pack)!=-1)||(code.indexOf("from "+sprite_pack+" import")!=-1)){
+	    ifsprite=true;
+	}
+
     let showSkulptImg = false;
 
     if (this.layerNum && this.layerSize) {
@@ -459,6 +472,7 @@ PyEngine.prototype.run = function(type) {
         document.getElementById("mat_div").style.height='0%';
         document.getElementById("output_img").style.height='100%';
         document.getElementById("pggame_stage").style.height='0%';
+        document.getElementById("spriteContainer").style.height='0%';
         // const Sk = window.Sk;
         Sk.TurtleGraphics.reset && Sk.TurtleGraphics.reset();
         Sk.TurtleGraphics.target = "output_img";
@@ -471,6 +485,7 @@ PyEngine.prototype.run = function(type) {
         document.getElementById("mat_div").style.height='100%';
         document.getElementById("output_img").style.height='0%';
         document.getElementById("pggame_stage").style.height='0%';
+        document.getElementById("spriteContainer").style.height='0%';
         $("#matplot_img").css('width', this?.layerSize?.content[0] ?? ($('body').width() / 2 + 'px'));
         $("#matplot_img").css('height',this?.layerSize?.content[1] ?? ($('body').height() * 0.7 - 40 + 'px'));
         showSkulptImg = true;
@@ -481,6 +496,7 @@ PyEngine.prototype.run = function(type) {
         document.getElementById("mat_div").style.height='0%';
         document.getElementById("output_img").style.height='0%';
         document.getElementById("pggame_stage").style.height='100%';
+        document.getElementById("spriteContainer").style.height='0%';
         
         const Sk = window.Sk;
         Sk.TurtleGraphics.reset && Sk.TurtleGraphics.reset()
@@ -499,6 +515,25 @@ PyEngine.prototype.run = function(type) {
         showSkulptImg = true;
 
     }
+
+    //如果存在sprite，则进行相关的配置
+	if(ifsprite){
+	    document.getElementById("mat_div").style.height='0%';
+	    document.getElementById("output_img").style.height='0%';
+	    document.getElementById("pggame_stage").style.height='0%';
+		document.getElementById("spriteContainer").style.height='100%';
+	    
+	    const Sk = window.Sk;
+	    Sk.TurtleGraphics.reset && Sk.TurtleGraphics.reset()
+	    Sk.TurtleGraphics.target = "spriteContainer";
+	    Sk.TurtleGraphics.width = (this?.layerSize?.content[0] ?? ($('body').width() / 2) - 30) - 5;
+	    Sk.TurtleGraphics.height = (this?.layerSize?.content[1] ?? ($('body').height() * 0.7 - 40)) - 5;
+		
+		SPRITE.runit();
+		
+		showSkulptImg = true;
+	}
+
     //已经读取了代码：code
     // Actually run the python code
     if (showSkulptImg && !this.layerNum) {

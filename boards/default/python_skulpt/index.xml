@@ -2186,61 +2186,69 @@
 
   </category>
   <category id="catAlgorithm" colour="#526FC3">
-    <block type="algorithm_prepare"></block>
-    <block type="algorithm_prepare2"></block>
-    <block type="algorithm_prepare3"></block>
-    <block type="algorithm_add_school"></block>
-    <block type="algorithm_find_path"></block>
-    <block type="algorithm_move_recent"></block>
-    <block type="algorithm_current_school"></block>
-    <block type="algorithm_not_home"></block>
-    <block type="algorithm_new_path"></block>
-    <block type="algorithm_void_path"></block>
-    <block type="algorithm_no_path"></block>
-    <block type="algorithm_set_path"></block>
-    <block type="algorithm_add_path"></block>      
-    <block type="algorithm_del_path"></block>
-    <block type="algorithm_return_path"></block>
-    <block type="algorithm_no_left"></block>
-    <block type="algorithm_print_path"></block>、
-    <block type="algorithm_print_path2"></block>
-    <block type="algorithm_all_books"></block>
-    <block type="algorithm_all_books_sequence"></block>
-    <block type="algorithm_first_book"></block>
-    <!-- <block type="algorithm_no_ring"></block> -->
-    <block type="algorithm_no_ring2"></block>
-    <block type="algorithm_next_book"></block>
-    <!-- <block type="algorithm_print_book"></block> -->
-    <block type="algorithm_print_book2"></block>
-    <block type="algorithm_number_zero"></block>
-    <block type="algorithm_number_add"></block>
-    <block type="algorithm_print_number"></block>       
-    <block type="algorithm_two_left"></block>
-    <block type="algorithm_divide_books"></block>
-    <block type="algorithm_get_half_books"></block>
-    <block type="algorithm_check_half_books"></block>
-    <block type="algorithm_delete_books"></block>
-    <block type="algorithm_delete_books2"></block>
-    <block type="algorithm_get_book_num"></block>
-    <block type="algorithm_use_sequence"></block>
-    <block type="algorithm_print_sequence"></block>
-    <block type="algorithm_use_divide"></block>
-    <block type="algorithm_print_divide"></block>
-    <block type="hanoi_init">
-    </block>
-    <block type="hanoi_move">
-      <value name="FROM_NUM">
-        <shadow type="variables_get">
-          <field name="VAR">A</field>
-        </shadow>
-      </value>
-      <value name="TO_NUM">
-        <shadow type="variables_get">
-          <field name="VAR">B</field>
-        </shadow>
-      </value>
-    </block>
-  </category>  
+      <block type="algorithm_prepare"></block>
+      <block type="algorithm_prepare2"></block>
+      <block type="algorithm_prepare3"></block>
+      <block type="algorithm_add_school"></block>
+      <block type="algorithm_find_path"></block>
+      <block type="algorithm_move_recent"></block>
+      <block type="algorithm_current_school"></block>
+      <block type="algorithm_not_home"></block>
+      <block type="algorithm_new_path"></block>
+      <block type="algorithm_void_path"></block>
+      <block type="algorithm_no_path"></block>
+      <block type="algorithm_set_path"></block>
+      <block type="algorithm_add_path"></block>      
+      <block type="algorithm_del_path"></block>
+      <block type="algorithm_return_path"></block>
+      <block type="algorithm_no_left"></block>
+      <block type="algorithm_print_path"></block>
+      <block type="algorithm_print_path2"></block>
+      <block type="algorithm_all_books"></block>
+      <block type="algorithm_all_books_sequence"></block>
+      <block type="algorithm_first_book"></block>
+      <!-- <block type="algorithm_no_ring"></block> -->
+      <block type="algorithm_no_ring2"></block>
+      <block type="algorithm_next_book"></block>
+      <!-- <block type="algorithm_print_book"></block> -->
+      <block type="algorithm_print_book2"></block>
+      <block type="algorithm_number_zero"></block>
+      <block type="algorithm_number_add"></block>
+      <block type="algorithm_print_number"></block>  
+      <block type="algorithm_two_left"></block>
+      <block type="algorithm_divide_books"></block>
+      <block type="algorithm_get_half_books"></block>
+      <block type="algorithm_check_half_books"></block>
+      <block type="algorithm_delete_books"></block>
+      <block type="algorithm_delete_books2"></block>
+      <block type="algorithm_get_book_num"></block>
+      <block type="algorithm_use_sequence"></block>
+      <block type="algorithm_print_sequence"></block>
+      <block type="algorithm_use_divide"></block>
+      <block type="algorithm_print_divide"></block>
+       <block type="hanoi_init_offline">
+        <value name="VAR">
+          <block type="algorithm_color_seclet">
+            <field name="COLOR">#ff6600</field>
+          </block>
+          <shadow type="text">
+            <field name="TEXT">#FF6600</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="hanoi_move">
+        <value name="FROM_NUM">
+          <shadow type="variables_get">
+            <field name="VAR">A</field>
+          </shadow>
+        </value>
+        <value name="TO_NUM">
+          <shadow type="variables_get">
+            <field name="VAR">B</field>
+          </shadow>
+        </value>
+      </block>
+    </category>  
   <!--
   <category id="catsklearn" colour="80">
     <block type="sklearn_make_classification">

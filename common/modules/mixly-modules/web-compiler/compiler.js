@@ -41,9 +41,9 @@ Compiler.protocol = protocol;
 Compiler.URL = Compiler.protocol + '//' + hostname + port + '/compile';
 
 Compiler.compile = () => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.show();
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.show();
     statusBarTerminal.setValue('');
     Compiler.generateCommand('compile', (error, obj, layerNum) => {
         layer.close(layerNum);
@@ -57,9 +57,9 @@ Compiler.compile = () => {
 }
 
 Compiler.upload = async () => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.show();
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.show();
     statusBarTerminal.setValue('');
     BU.burning = false;
     BU.uploading = true;
@@ -84,7 +84,7 @@ Compiler.upload = async () => {
                 break;
         }
         Serial.portClose(portName, async () => {
-            mainStatusBarTab.changeTo('output');
+            mainStatusBarTabs.changeTo('output');
             try {
                 await AvrUploader.connect(boardUpload, {});
                 Compiler.generateCommand('upload', BU.uploadWithAvrUploader);
@@ -98,7 +98,7 @@ Compiler.upload = async () => {
                 layer.msg(Msg.Lang['已取消连接'], { time: 1000 });
                 return;
             }
-            mainStatusBarTab.changeTo('output');
+            mainStatusBarTabs.changeTo('output');
             Compiler.generateCommand('upload', BU.uploadWithEsptool);
         });
     }
@@ -114,8 +114,8 @@ Compiler.generateCommand = (operate, endFunc = (errorMessage, data, layerNum) =>
         visitorId: BOARD.visitorId.str32CRC32b,
         operate
     };
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     let commandStr = Compiler.URL + '?' + Url.jsonToUrl(command);
     statusBarTerminal.setValue(Msg.Lang['编译中'] + '...\n');
     console.log('send -> ', commandStr);
@@ -155,8 +155,8 @@ Compiler.sendCommand = (layerType, command, endFunc = (errorMessage, data, layer
         console.log('There has been a problem with your fetch operation: ', error.message);
     });
     */
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     let req = new Request(command);
     fetch(req, {
         credentials: 'omit', // 设置不传递cookie

@@ -144,8 +144,9 @@ class EditorCode extends EditorAce {
         session.setTabSize(tabSize);
     }
 
-    updateValue(data, ext) {
+    updateValue(data) {
         this.setValue(data);
+        this.scrollToTop();
     }
 
     // 可覆盖

@@ -64,9 +64,6 @@ class EditorsTabs {
         const container = $container[0];
         container.addEventListener('activeTabChange', (event) => {
             this.activeTabChange && this.activeTabChange(event);
-            /*let left = $(event.detail.tabEl).attr('m-left');
-            this.scrollbar.$container.scrollLeft = left;
-            this.scrollbar.update();*/
         });
         container.addEventListener('tabAdd', (event) => {
             this.tabAdd && this.tabAdd(event);
@@ -107,6 +104,9 @@ class EditorsTabs {
         } else {
             this.tabs[title] = this.chromeTabs.addTab(tabProperties, others);
         }
+        let { left } = $(this.tabs[title]).position();
+        this.scrollbar.$container.scrollLeft = left;
+        this.scrollbar.update();
     }
 
     removeTab(tabEl) {

@@ -58,10 +58,10 @@ BU.clickConnect = async function () {
         Serial.portClose(portName);
     } else {
         Serial.connect(portName, 115200, (port) => {
-            const { mainStatusBarTab } = Mixly;
-            const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+            const { mainStatusBarTabs } = Mixly;
+            const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
             if (port) {
-                mainStatusBarTab.show();
+                mainStatusBarTabs.show();
             } else {
                 layer.msg(Msg.Lang['已取消连接'], { time: 1000 });
             }
@@ -153,11 +153,11 @@ BU.burnByUSB = () => {
         }
         BU.burning = true;
         BU.uploading = false;
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         statusBarTerminal.setValue(Msg.Lang['烧录中'] + '...\n');
-        mainStatusBarTab.show();
-        mainStatusBarTab.changeTo('output');
+        mainStatusBarTabs.show();
+        mainStatusBarTabs.changeTo('output');
         const layerNum = layer.open({
             type: 1,
             title: Msg.Lang['烧录中'] + '...',
@@ -227,8 +227,8 @@ BU.burnWithEsptool = () => {
         }
         const { web } = SELECTED_BOARD;
         const { burn } = web;
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         statusBarTerminal.setValue(Msg.Lang["固件读取中"] + "...");
         if (typeof burn.binFile !== 'object') {
             statusBarTerminal.addValue(" Failed!\n" + Msg.Lang["配置文件读取出错"] + "！\n");
@@ -265,8 +265,8 @@ BU.burnWithEsptool = () => {
             BU.burning = true;
             BU.uploading = false;
             statusBarTerminal.addValue(Msg.Lang['烧录中'] + '...\n');
-            mainStatusBarTab.show();
-            mainStatusBarTab.changeTo('output');
+            mainStatusBarTabs.show();
+            mainStatusBarTabs.changeTo('output');
             const layerNum = layer.open({
                 type: 1,
                 title: Msg.Lang['烧录中'] + '...',
@@ -322,8 +322,8 @@ BU.burnWithEsptool = () => {
 
 async function clickSync() {
     if (await espTool.sync()) {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         statusBarTerminal.addValue(Msg.Lang["正在连接"] + " " + await espTool.chipName() + "\n");
         statusBarTerminal.addValue(Msg.Lang["MAC地址"] + "：" + formatMacAddr(espTool.macAddr()) + "\n");
         stubLoader = await espTool.runStub();
@@ -341,8 +341,8 @@ function sleep(ms) {
  * Click handler for the erase button.
  */
 async function clickErase() {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.addValue(Msg.Lang["正在擦除闪存，请稍等"] + "..." + "\n");
     let stamp = Date.now();
     await stubLoader.eraseFlash();
@@ -355,8 +355,8 @@ async function clickErase() {
  * Click handler for the program button.
  */
 async function clickProgram(binFileOffset, binFile = null) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.addValue(Msg.Lang["正在烧录固件"] + "\n");
     let binOffset = parseInt(binFileOffset, 16);
     await stubLoader.flashData(binFile, binOffset);
@@ -410,8 +410,8 @@ BU.searchLibs = (moduleList, libList = []) => {
     if (!(lib instanceof Object)) {
         return [];
     }
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     for (let name of moduleList) {
         if (!libList.includes(name)) {
             if (!lib[name]) {
@@ -442,8 +442,8 @@ BU.uploadWithAmpy = (port) => {
             layer.msg(Msg.Lang['已取消连接'], { time: 1000 });
             return;
         }
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         const portObj = Serial.portsOperator[port];
         const { serialport, toolConfig } = portObj;
         const prevBaud = toolConfig.baudRates;
@@ -454,8 +454,8 @@ BU.uploadWithAmpy = (port) => {
         BU.burning = false;
         BU.uploading = true;
         statusBarTerminal.setValue(Msg.Lang['上传中'] + '...\n');
-        mainStatusBarTab.show();
-        mainStatusBarTab.changeTo('output');
+        mainStatusBarTabs.show();
+        mainStatusBarTabs.changeTo('output');
         const layerNum = layer.open({
             type: 1,
             title: Msg.Lang['上传中'] + '...',
@@ -483,8 +483,8 @@ BU.uploadWithAmpy = (port) => {
                     layer.close(index);
                     layer.msg(Msg.Lang['上传成功'], { time: 1000 });
                     statusBarTerminal.addValue(`==${Msg.Lang['上传成功']}==\n`);
-                    mainStatusBarTab.changeTo(port);
-                    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+                    mainStatusBarTabs.changeTo(port);
+                    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
                     statusBarSerial.scrollToBottom(port);
                 })
                 .catch((error) => {
@@ -529,8 +529,8 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         toolConfig.baudRates = 115200;
         await serialport.setBaudRate(toolConfig.baudRates);
     }
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     let firmwareData = obj.data;
     if (endType || typeof firmwareData !== 'object') {
         statusBarTerminal.addValue(Msg.Lang["固件获取失败"] + "！\n");
@@ -554,8 +554,8 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
     BU.burning = true;
     BU.uploading = false;
     statusBarTerminal.addValue(Msg.Lang['上传中'] + '...\n');
-    mainStatusBarTab.show();
-    mainStatusBarTab.changeTo('output');
+    mainStatusBarTabs.show();
+    mainStatusBarTabs.changeTo('output');
     try {
         SerialPort.refreshOutputBuffer = false;
         SerialPort.refreshInputBuffer = true;
@@ -570,7 +570,7 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
         layer.msg(Msg.Lang['上传成功'], { time: 1000 });
         statusBarTerminal.addValue(`==${Msg.Lang['上传成功']}==\n`);
         Serial.reset(portName, 'upload');
-        mainStatusBarTab.changeTo(portName);
+        mainStatusBarTabs.changeTo(portName);
     } catch (error) {
         console.log(error);
         layer.close(layerType);
@@ -592,8 +592,8 @@ BU.uploadWithEsptool = async (endType, obj, layerType) => {
 
 BU.uploadWithAvrUploader = async (endType, obj, layerType) => {
     let firmwareData = obj.data;
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     if (endType || typeof firmwareData !== 'object') {
         statusBarTerminal.addValue(Msg.Lang["固件获取失败"] + "！\n");
         layer.close(layerType);

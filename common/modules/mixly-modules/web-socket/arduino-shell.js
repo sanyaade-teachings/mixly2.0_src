@@ -4,7 +4,7 @@ goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
-goog.require('Mixly.StatusBarTab');
+goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Title');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
@@ -17,7 +17,7 @@ goog.provide('Mixly.WebSocket.ArduShell');
 const {
     Env,
     LayerExt,
-    StatusBarTab,
+    StatusBarTabs,
     Title,
     Boards,
     MFile,
@@ -53,13 +53,13 @@ ArduShell.initCompile = () => {
 * @return void
 */
 ArduShell.compile = () => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.changeTo('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.changeTo('output');
     ArduShell.compiling = true;
     ArduShell.uploading = false;
     const boardType = Boards.getSelectedBoardCommandParam();
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["编译中"] + "...",
@@ -128,9 +128,9 @@ ArduShell.initUpload = () => {
 * @return void
 */
 ArduShell.upload = (boardType, port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.changeTo("output");
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.changeTo("output");
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["上传中"] + "...",
@@ -145,7 +145,7 @@ ArduShell.upload = (boardType, port) => {
                 layer.title(Msg.Lang['上传终止中'] + '...', index);
                 ArduShell.cancel();
             });
-            mainStatusBarTab.show();
+            mainStatusBarTabs.show();
             statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
             const code = MFile.getCode();
             Socket.sendCommand({
@@ -164,8 +164,8 @@ ArduShell.upload = (boardType, port) => {
 }
 
 ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     layer.close(layerNum);
     const value = statusBarTerminal.getValue();
     let prefix = '';
@@ -186,14 +186,14 @@ ArduShell.operateSuccess = (type, layerNum, port, baud, timeCostStr) => {
 }
 
 ArduShell.operateOnError = (type, layerNum, error) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.addValue(error);
 }
 
 ArduShell.operateEndError = (type, layerNum, error) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     layer.close(layerNum);
     const value = statusBarTerminal.getValue();
     let prefix = '';
@@ -222,8 +222,8 @@ ArduShell.cancel = function () {
 }
 
 ArduShell.addValue = function (data) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.addValue(data);
 }
 

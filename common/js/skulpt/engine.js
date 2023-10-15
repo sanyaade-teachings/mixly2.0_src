@@ -133,8 +133,8 @@ PyEngine.prototype.filewrite = function(fileItem, str) {
 
 PyEngine.prototype.skInput = function(prompt) {
     return new Promise((resolve, reject) => {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         var currText =  statusBarTerminal.getValue();
         if (currText.lastIndexOf('\n') !== currText.length - 1)
             statusBarTerminal.addValue('\n>>>' + prompt);
@@ -329,10 +329,10 @@ var GLOBAL_VALUE;
  * Runs the given python code, resetting the console and Trace Table.
  */
 PyEngine.prototype.run = function(type) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     if (!$('#skulpt-img').length) {
         $('body').append($(
             `<div id="skulpt-img" wrap="off" style="height:100%;display:none;">

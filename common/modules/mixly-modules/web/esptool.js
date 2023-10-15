@@ -1,13 +1,13 @@
 goog.loadJs('web', () => {
 
-goog.require('Mixly.StatusBarTab');
+goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Web.Utilities');
 goog.require('Mixly.Web.SerialPort');
 goog.provide('Mixly.Web.Esptool');
 
 const {
-    StatusBarTab,
+    StatusBarTabs,
     Msg,
     Web
 } = Mixly;
@@ -530,8 +530,8 @@ class EspLoader {
     };
 
     async reset() {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         const signals = await SerialPort.obj.getSignals();
         this.logMsg("尝试复位");
         statusBarTerminal.addValue(Msg.Lang["尝试复位"] + "\n", true);
@@ -695,8 +695,8 @@ class EspLoader {
     }
 
     async setBaudrate(baud) {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         if (this._chipfamily == ESP8266) {
             this.logMsg("Baud rate can only change on ESP32 and ESP32-S2");
             statusBarTerminal.addValue(Msg.Lang["只能在ESP32和ESP32-S2上修改波特率"] + '\n');
@@ -779,8 +779,8 @@ class EspLoader {
      *   ROM
      */
     async flashData(binaryData, offset = 0, part = 0) {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         let filesize = binaryData.byteLength;
         this.logMsg("\nWriting data with filesize:" + filesize);
         statusBarTerminal.addValue(Msg.Lang["写入数据，文件大小："] + filesize + "\n");
@@ -1225,8 +1225,8 @@ class EspLoader {
     }
 
     async runStub(stub = null) {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         if (stub === null) {
             stub = await this.getStubCode();
         }

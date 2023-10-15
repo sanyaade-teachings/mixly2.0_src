@@ -26,6 +26,8 @@ const {
     EditorsTabs
 } = Mixly;
 
+const fs = Mixly.require('fs');
+
 class EditorsManager {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-manager.html'));
@@ -70,31 +72,11 @@ class EditorsManager {
         this.#addEvents_();
         this.editors = {};
         this.shownEditorName = null;
-        /*this.editorTabs.addTab({
-            name: '测试1.mix',
-            favicon: false,
-            title: 'D:/测试1.mix'
-        });
-        this.editorTabs.addTab({
-            name: '测试2.mix',
-            favicon: false,
-            title: 'D:/测试2.mix'
-        });
-        this.editorTabs.addTab({
-            name: '测试3.mix',
-            favicon: false,
-            title: 'D:/测试3.mix'
-        });
-        this.editorTabs.addTab({
-            name: '未知文件.txt',
-            favicon: false,
-            title: 'D:/测试1.txt'
-        }, { background: true });
-        this.editorTabs.addTab({
-            name: '未知文件.test',
-            favicon: false,
-            title: 'D:/测试1.test'
-        }, { background: true });*/
+        this.events = [];
+    }
+
+    addEventListener(name, func) {
+        this.events[name] = func;
     }
 
     #addEvents_() {
@@ -104,6 +86,7 @@ class EditorsManager {
     }
 
     activeTabChange(event) {
+        this.events['activeTabChange'] && this.events['activeTabChange'](event);
         const { tabEl } = event.detail;
         const tabId = $(tabEl).attr('data-tab-id');
         const editor = this.editors[tabId];
@@ -116,6 +99,7 @@ class EditorsManager {
     }
 
     tabAdd(event) {
+        this.events['tabAdd'] && this.events['tabAdd'](event);
         const { tabEl } = event.detail;
         const tabId = $(tabEl).attr('data-tab-id');
         const extname = path.extname(tabId);
@@ -131,10 +115,12 @@ class EditorsManager {
         setTimeout(() => {
             this.editors[tabId].init();
             this.editors[tabId].inited = true;
+            this.editors[tabId].updateValue(fs.readFileSync(tabId, 'utf-8'));
         }, 500);
     }
 
     tabRemove(event) {
+        this.events['tabRemove'] && this.events['tabRemove'](event);
         const { tabEl } = event.detail;
         const tabId = $(tabEl).attr('data-tab-id');
         if (!this.editors[tabId]) {
@@ -160,6 +146,8 @@ class EditorsManager {
         }
         return this.editors[this.shownEditorName];
     }
+
+
 }
 
 EditorsManager.register({

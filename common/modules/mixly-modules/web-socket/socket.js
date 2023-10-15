@@ -118,11 +118,11 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     let WS = Socket;
     WS.obj = new WebSocket(WS.url);
     WS.obj.onopen = () => {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         console.log('已连接' + WS.url);
-        mainStatusBarTab.show();
-        mainStatusBarTab.changeTo('output');
+        mainStatusBarTabs.show();
+        mainStatusBarTabs.changeTo('output');
         statusBarTerminal.setValue(WS.url + '连接成功\n');
         WS.connected = true;
         Socket.toggleUIToolbar(true);
@@ -160,17 +160,17 @@ Socket.init = (onopenFunc = (data) => {}, doFunc = () => {}) => {
     };
 
     WS.obj.onclose = (event) => {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         WS.connected = false;
         console.log('已断开' + WS.url);
-        mainStatusBarTab.show();
-        mainStatusBarTab.changeTo('output');
+        mainStatusBarTabs.show();
+        mainStatusBarTabs.changeTo('output');
         statusBarTerminal.setValue(WS.url + '连接断开，请在设置中重新连接\n');
-        let ports = [ ...mainStatusBarTab.statusBarIndexToIds ];
+        let ports = [ ...mainStatusBarTabs.statusBarIndexToIds ];
         MArray.remove(ports, 'output');
         for (let i = 0; i < ports.length; i++) {
-            const statusBarSerial = mainStatusBarTab.getStatusBarById(ports[i]);
+            const statusBarSerial = mainStatusBarTabs.getStatusBarById(ports[i]);
             statusBarSerial.close(ports[i]);
         }
         Socket.toggleUIToolbar(false);

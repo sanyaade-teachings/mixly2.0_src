@@ -54,8 +54,8 @@ BU.shell = null;
  * @return {void}
  **/
 BU.checkNumOfDisks = function (type, stdout, startPath) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     let wmicResult = stdout;
     wmicResult = wmicResult.replace(/\s+/g, "");
     wmicResult = wmicResult.replace("DeviceID", "");
@@ -157,8 +157,8 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
  * @param desPath {string} 文件的目的路径
  **/
 BU.copyFiles = (type, layerNum, startPath, desPath) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { burn, upload } = SELECTED_BOARD;
     if (type === 'upload' && upload.copyLib) {
         let startLibPath = path.dirname(upload.filePath);
@@ -209,8 +209,8 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
 * @return {void}
 */
 BU.initWithDropdownBox = function (type, startPath) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const layerNum = layer.open({
         type: 1,
         title: (type === 'burn'? Msg.Lang['烧录中'] : Msg.Lang['上传中']) + '...',
@@ -346,12 +346,12 @@ BU.cancel = function () {
 */
 BU.initBurn = function () {
     if (BU.burning) return;
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { burn } = SELECTED_BOARD;
     statusBarTerminal.setValue('');
-    mainStatusBarTab.changeTo("output");
-    mainStatusBarTab.show();
+    mainStatusBarTabs.changeTo("output");
+    mainStatusBarTabs.show();
     BU.burning = true;
     BU.uploading = false;
     if (burn.type === 'volume') {
@@ -369,11 +369,11 @@ BU.initBurn = function () {
 BU.initUpload = function () {
     if (BU.uploading) return;
     const { upload } = SELECTED_BOARD;
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
-    mainStatusBarTab.changeTo('output');
-    mainStatusBarTab.show();
+    mainStatusBarTabs.changeTo('output');
+    mainStatusBarTabs.show();
     BU.burning = false;
     BU.uploading = true;
     if (upload.type === "volume") {
@@ -418,8 +418,8 @@ BU.copyLib = function (filePath, code) {
  * @return {array} 库列表
  **/
 BU.searchLibs = function (dirPath, code, libArr) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { upload } = SELECTED_BOARD;
     let arrayObj = new Array();
     code.trim().split("\n").forEach(function (v, i) {
@@ -508,8 +508,8 @@ BU.burnByCmd = function (layerNum, port, command) {
 * @return {void}
 */
 BU.uploadByCmd = async function (layerNum, port, command) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { upload } = SELECTED_BOARD;
     const code = MFile.getCode();
     if (upload.copyLib) {
@@ -539,8 +539,8 @@ BU.uploadByCmd = async function (layerNum, port, command) {
 * @return {void}
 */
 BU.runCmd = function (layerNum, type, port, command, sucFunc) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     let nowCommand = MString.tpl(command, { com: port });
 
     BU.shell = child_process.exec(nowCommand, { encoding: 'binary' }, function (error, stdout, stderr) {
@@ -573,7 +573,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             });
             statusBarTerminal.addValue('==' + (type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']) + '==\n');
             if (type === 'upload') {
-                mainStatusBarTab.show();
+                mainStatusBarTabs.show();
                 if (USER.autoOpenPort === 'no') {
                     return;
                 }
@@ -600,8 +600,8 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
  * @return {void}
  **/
 BU.burnWithSpecialBin = () => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const $selector = $('#mixly-selector-type');
     let oldOption = $('#mixly-selector-type option:selected').val();
     $selector.empty();
@@ -649,8 +649,8 @@ BU.burnWithSpecialBin = () => {
             if (initBtnClicked) {
                 let selectedFirmwareName = $('#mixly-selector-type option:selected').val();
                 statusBarTerminal.setValue('');
-                mainStatusBarTab.changeTo('output');
-                mainStatusBarTab.show();
+                mainStatusBarTabs.changeTo('output');
+                mainStatusBarTabs.show();
                 BU.burning = true;
                 BU.uploading = false;
                 const port = Serial.getSelectedPortName();

@@ -43,10 +43,10 @@ PythonShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
 * @return void
 */
 PythonShell.run = function () {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const cursorCallback = PythonShell.addEvent();
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     statusBarTerminal.setValue(Msg.Lang["程序正在运行"] + "...\n");
     statusBarTerminal.editor.setReadOnly(false);
     var code = MFile.getCode();
@@ -68,7 +68,7 @@ PythonShell.run = function () {
                 time: 1000
             });
             statusBarTerminal.setValue(Msg.Lang['写文件出错了，错误是：'] + error + '\n');
-            mainStatusBarTab.show();
+            mainStatusBarTabs.show();
         } else {
             shell = new python_shell.PythonShell(Env.pyFilePath, options);
             var startTime = Number(new Date());
@@ -130,9 +130,9 @@ PythonShell.run = function () {
 * @return void
 */
 PythonShell.stop = function () {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.show();
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.show();
     if (shell) {
         shell.terminate('SIGKILL');
         //shell.stdout.end();
@@ -150,14 +150,14 @@ PythonShell.stop = function () {
 * @return void
 */
 PythonShell.clearOutput = function () {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue("");
 }
 
 PythonShell.addEvent = () => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     return statusBarTerminal.editor.getSession().selection.on('changeCursor', function (e) {
         if (shell && input_prompt_message_line != -1) {
             if (statusBarTerminal.editor.selection.getCursor().row < input_prompt_position_row) {

@@ -98,8 +98,8 @@ PyEngine.prototype.filewrite = function(fileItem, str) {
 
 PyEngine.prototype.skInput = function(prompt) {
     return new Promise((resolve, reject) => {
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         var currText = statusBarTerminal.getValue();
         if (currText.lastIndexOf('\n') !== currText.length - 1)
             statusBarTerminal.addValue('\n>>>' + prompt);
@@ -148,8 +148,8 @@ PyEngine.prototype.skInput = function(prompt) {
  *
  */
 PyEngine.prototype.reset = function() {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     //点击取消按钮发送数据     
     Sk.execLimit = 0;
     Sk.execLimit = Number.POSITIVE_INFINITY;    
@@ -300,10 +300,10 @@ var GLOBAL_VALUE;
  * 分步调试代码
  */
 PyEngine.prototype.steprun = function(type) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     if (!$('#skulpt-img').length) {
         $('body').append($(
             `<div id="skulpt-img" wrap="off" style="height:100%;display:none;">
@@ -521,10 +521,10 @@ PyEngine.prototype.steprun = function(type) {
  * 直接运行，不分步高亮显示
  */
  PyEngine.prototype.run = function(type) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     if (!$('#skulpt-img').length) {
         $('body').append($(
             `<div id="skulpt-img" wrap="off" style="height:100%;display:none;">
@@ -799,8 +799,8 @@ PyEngine.prototype.steprun = function(type) {
 
 //提交代码：先运行代码，返回运行结果，然后提交
 PyEngine.prototype.run2 = function(type) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     var xml = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var data = Blockly.Xml.domToText(xml);
     if (document.getElementById("boardSelector").value == ""){

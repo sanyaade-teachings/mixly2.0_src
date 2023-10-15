@@ -1,11 +1,11 @@
 goog.loadJs('common', () => {
 
 goog.require('Blockly');
-goog.require('Mixly.StatusBarTab');
+goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Editor');
 goog.provide('Mixly.Theme');
 
-const { Theme, StatusBarTab, Editor } = Mixly;
+const { Theme, StatusBarTabs, Editor } = Mixly;
 
 Theme.changeTo = function (type) {
     const { blockEditor, codeEditor } = Editor;
@@ -28,7 +28,7 @@ Theme.changeTo = function (type) {
     }
     blockEditor.setTheme(blockEditorTheme);
     codeEditor.setOption("theme", codeEditorTheme);
-    for (let statusBar of StatusBarTab.statusBars) {
+    for (let statusBar of StatusBarTabs.statusBars) {
         statusBar.editor.setOption("theme", statusBarTheme);
     }
 }

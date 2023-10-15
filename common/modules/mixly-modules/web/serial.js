@@ -257,8 +257,8 @@ Serial.refreshPortOperator = (ports) => {
 }
 
 Serial.refreshOutputBox = (port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
     if (portObj.busy) {
@@ -310,7 +310,7 @@ Serial.openTool = () => {
         let portObj = Serial.portsOperator[selectedPort];
         const { toolConfig } = portObj;
         const { baudRates } = toolConfig;
-        const { mainStatusBarTab } = Mixly;
+        const { mainStatusBarTabs } = Mixly;
         let successFunc = (serialDom) => {
             if (!portObj.dom)
                 portObj.dom = serialDom;
@@ -318,7 +318,7 @@ Serial.openTool = () => {
             Serial.refreshToolPortSelectBox();
             const { selectPortId } = serialDom.id;
             portObj.toolOpened = true;
-            mainStatusBarTab.show();
+            mainStatusBarTabs.show();
             serialDom.nowPort = selectedPort;
             serialDom.prevPort = null;
             const element = layui.element;
@@ -529,8 +529,8 @@ Serial.receiveBoxscrollToTop = () => {
 }
 
 Serial.statusBarPortAddHotKey = (port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const session = statusBarSerial.editor.getSession();
     statusBarSerial.editor.commands.addCommands([
         {
@@ -630,8 +630,8 @@ Serial.statusBarPortEnterTerminal = (port) => {
 }
 
 Serial.refreshTerminalMenu = (port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
     let newPort = port;
     try {
@@ -653,7 +653,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-terminal-open`) {
                 Serial.statusBarPortEnterTerminal(port);
             } else if (obj.id === `tab-${newPort}-ace-terminal-close`) {
-                mainStatusBarTab.remove(port);
+                mainStatusBarTabs.remove(port);
             } else if (obj.id === `tab-${newPort}-ace-terminal-help`) {
                 Serial.statusBarPortAddCommand(port, 'config port send -h');
             } else if (obj.id === `tab-${newPort}-ace-fontsize-decrease`) {
@@ -677,7 +677,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-tool-close`) {
                 portObj.dom.close();
             } else if (obj.id === `tab-${newPort}-ace-close`) {
-                mainStatusBarTab.remove(port);
+                mainStatusBarTabs.remove(port);
             } else if (obj.id === `tab-${newPort}-ace-empty`) {
                 Serial.clearContent(port);
             } else if (obj.id === `tab-${newPort}-serial-send-ctrlc`) {
@@ -799,8 +799,8 @@ Serial.statusBarPortAddCursorEvent = (port) => {
     Serial.refreshOutputBox(port);
     portObj.terminalOpend = true;
     Serial.refreshTerminalMenu(port);
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const nowPortAce = statusBarSerial.editor;
     const { selection } = nowPortAce;
     const session = nowPortAce.getSession();
@@ -833,8 +833,8 @@ Serial.statusBarPortAddCursorEvent = (port) => {
 }
 
 Serial.statusBarPortRemoveCursorEvent = (port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const nowPortAce = statusBarSerial.editor;
     const portObj = Serial.portsOperator[port];
     if (!portObj || !nowPortAce) return;
@@ -1020,8 +1020,8 @@ Serial.terminalExitCallback = (port, commandList) => {
 }
 
 Serial.statusBarPortAddCommand = (port, command, withNewLine = true) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     statusBarSerial.addValue(command + (withNewLine ? '\n' : ''), true);
     if (withNewLine) {
         Serial.refreshOutputBox(port);
@@ -1040,10 +1040,10 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
         endFunc(null);
         return;
     }
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    let statusBarSerial = mainStatusBarTab.getStatusBarById(port);
-    mainStatusBarTab.changeTo(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    let statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+    mainStatusBarTabs.changeTo(port);
     Serial.refreshPortOperator([{
             name: port,
             vendorId: 'None',
@@ -1091,20 +1091,20 @@ Serial.connect = function (port = null, baud = null, endFunc = (data) => {}) {
 }
 
 Serial.onConnect = (port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const portObj = Serial.portsOperator[port];
     const { serialport } = portObj;
     portObj.portOpened = true;
-    mainStatusBarTab.add('serial', port);
-    let statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    mainStatusBarTabs.add('serial', port);
+    let statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     statusBarSerial.open();
     Serial.statusBarPortAddHotKey(port);
     statusBarSerial.onRemove = function() {
         const newPortObj = Serial.portsOperator[this.id];
         if (newPortObj && newPortObj.serialport && newPortObj.portOpened) {
             Serial.portClose(this.id);
-            mainStatusBarTab.changeTo("output");
+            mainStatusBarTabs.changeTo("output");
             if (statusBarTerminal.getValue().lastIndexOf("\n") != statusBarTerminal.getValue().length - 1) {
                 statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + this.id + '\n');
             } else {
@@ -1112,7 +1112,7 @@ Serial.onConnect = (port) => {
             }
         }
     }
-    mainStatusBarTab.changeTo(port);
+    mainStatusBarTabs.changeTo(port);
     Serial.refreshTerminalMenu(port);
     statusBarSerial.setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
     Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
@@ -1130,8 +1130,8 @@ Serial.onConnect = (port) => {
 
 Serial.onDisconnect = (port) => {
     layer.closeAll();
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
     const { serialport } = portObj;
     if (USB.DAPLink && USB.DAPLink.connected) {
@@ -1189,8 +1189,8 @@ Serial.portClose = (port, endFunc = () => {}) => {
 * @return void
 */
 Serial.showErrorData = function (port, select, data) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
     const { toolOpened, dom, toolConfig } = portObj;
     if (!toolConfig.receiveStr) {
@@ -1331,8 +1331,8 @@ Serial.writeCtrlD = function (port) {
 * @return void
 */
 Serial.clearContent = function (port) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     Serial.receiveBoxSetValue(port, '');
     const portObj = Serial.portsOperator[port] ?? {};
     const { serialport } = portObj;

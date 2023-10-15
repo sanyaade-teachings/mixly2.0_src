@@ -121,8 +121,8 @@ class Ampy {
 
     put(fileName, code, moduleInfo = null) {
         return new Promise(async (resolve, reject) => {
-            const { mainStatusBarTab } = Mixly;
-            const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+            const { mainStatusBarTabs } = Mixly;
+            const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
             try {
                 await this.operator_.writeCtrlB();
                 if (!await this.interrupt()) {
@@ -192,8 +192,8 @@ class Ampy {
             }
             return unicode;
         }
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         statusBarTerminal.addValue(`Writing ${fileName} `);
         let str = `file = open('${fileName}', 'w')\n`;
         const buffer = this.encoder_.encode(data);

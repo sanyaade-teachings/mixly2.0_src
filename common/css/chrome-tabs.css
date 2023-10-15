@@ -127,6 +127,7 @@
 }
 .chrome-tabs .chrome-tab .chrome-tab-content:hover .chrome-tab-close {
   opacity: 1;
+  cursor: pointer;
 }
 .chrome-tabs .chrome-tab[is-mini] .chrome-tab-content {
   padding-left: 2px;

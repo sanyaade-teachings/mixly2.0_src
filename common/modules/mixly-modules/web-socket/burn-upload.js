@@ -132,8 +132,8 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
 }
 
 BU.operateSuccess = (type, layerNum, port) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     layer.close(layerNum);
     const message = (type === 'burn'? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']);
     layer.msg(message, {
@@ -153,8 +153,8 @@ BU.operateSuccess = (type, layerNum, port) => {
 }
 
 BU.operateError = (type, layerNum, error) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     layer.close(layerNum);
     const value = statusBarTerminal.getValue();
     let prefix = '';
@@ -237,12 +237,12 @@ BU.initBurn = function () {
         layer.closeAll();
     }, () => {
         if (BU.burning) return;
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         const { burn } = SELECTED_BOARD;
         statusBarTerminal.setValue('');
-        mainStatusBarTab.changeTo("output");
-        mainStatusBarTab.show();
+        mainStatusBarTabs.changeTo("output");
+        mainStatusBarTabs.show();
         BU.burning = true;
         BU.uploading = false;
         if (burn.type === 'volume') {
@@ -268,11 +268,11 @@ BU.initUpload = function () {
     }, () => {
         if (BU.uploading) return;
         const { upload } = SELECTED_BOARD;
-        const { mainStatusBarTab } = Mixly;
-        const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+        const { mainStatusBarTabs } = Mixly;
+        const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         statusBarTerminal.setValue('');
-        mainStatusBarTab.changeTo("output");
-        mainStatusBarTab.show();
+        mainStatusBarTabs.changeTo("output");
+        mainStatusBarTabs.show();
         BU.burning = false;
         BU.uploading = true;
         if (upload.type === "volume") {
@@ -312,8 +312,8 @@ BU.burnByCmd = function (layerNum, port, command) {
 * @return {void}
 */
 BU.uploadByCmd = function (layerNum, port, command) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const newCommand = MString.tpl(command, { com: port });
     const { upload } = SELECTED_BOARD;
     const {
@@ -402,11 +402,11 @@ BU.burnWithSpecialBin = () => {
                 }
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.clientPath, "path");
                 firmwareObj[selectedFirmwareName] = replaceWithReg(firmwareObj[selectedFirmwareName], Env.boardDirPath, "indexPath");
-                const { mainStatusBarTab } = Mixly;
-                const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+                const { mainStatusBarTabs } = Mixly;
+                const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
                 statusBarTerminal.setValue('');
-                mainStatusBarTab.changeTo("output");
-                mainStatusBarTab.show();
+                mainStatusBarTabs.changeTo("output");
+                mainStatusBarTabs.show();
                 BU.burning = true;
                 BU.uploading = false;
                 const port = Serial.getSelectedPortName();
@@ -498,8 +498,8 @@ BU.uploadWithPort = (port, command) => {
 }
 
 BU.addValue = function (data) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.addValue(data);
 }
 

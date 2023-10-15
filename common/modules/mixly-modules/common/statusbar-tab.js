@@ -3,7 +3,7 @@ goog.loadJs('common', () => {
 goog.require('path');
 goog.require('layui');
 goog.require('tippy');
-goog.require('shortid');
+goog.require('Mixly.IdGenerator');
 goog.require('Mixly.StatusBarSerial');
 goog.require('Mixly.StatusBarTerminal');
 goog.require('Mixly.Drag');
@@ -11,10 +11,11 @@ goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
-goog.provide('Mixly.StatusBarTab');
+goog.provide('Mixly.StatusBarTabs');
 
 const { element } = layui;
 const {
+    IdGenerator,
     StatusBarSerial,
     StatusBarTerminal,
     Drag,
@@ -24,7 +25,7 @@ const {
     Msg
 } = Mixly;
 
-class StatusBarTab {
+class StatusBarTabs {
     static {
         this.CTRL_BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-ctrl-btn.html'));
         this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-menu.html'));
@@ -40,6 +41,9 @@ class StatusBarTab {
 
     add(type, id, name = null) {
         let aceId = id;
+        let statusBar;
+        let config = IdGenerator.generate(['tabId', 'titleId', 'contentId']);
+        
         try {
             aceId = aceId.replaceAll('/', '-')
                          .replaceAll('.', '-');
@@ -49,18 +53,12 @@ class StatusBarTab {
         if (this.getStatusBarById(id)) {
             return;
         }
-        let statusBar;
+        
         if (type === 'serial') {
             statusBar = StatusBarSerial;
         } else {
             statusBar = StatusBarTerminal;
         }
-
-        let config = {
-            tabId: shortid.generate(),
-            titleId: shortid.generate(),
-            contentId: shortid.generate()
-        };
 
         element.tabAdd(this.id, {
             title: XML.render(statusBar.TITLE, {
@@ -118,20 +116,10 @@ class StatusBarTab {
 
     // 可覆盖
     show() {
-        /*if (this.isShown()) {
-            return;
-        }
-        this.drag.show();
-        this.shown = true;*/
     }
 
     // 可覆盖
     hide() {
-        /*if (!this.shown) {
-            return;
-        }
-        this.drag.hide();
-        this.shown = false;*/
     }
     
     toggle() {
@@ -162,7 +150,7 @@ class StatusBarTab {
     }
 
     addCtrlBtn() {
-        this.$ctrlBtn = $(StatusBarTab.CTRL_BTN_TEMPLATE);
+        this.$ctrlBtn = $(StatusBarTabs.CTRL_BTN_TEMPLATE);
         $(`.layui-tab[lay-filter="${this.id}"] > .layui-tab-title`).append(this.$ctrlBtn);
         this.$menu = tippy(this.$ctrlBtn[0], {
             allowHTML: true,
@@ -175,7 +163,7 @@ class StatusBarTab {
                 let options = this.getMenuOptions() ?? {};
                 options.list = options.list ?? [];
                 options.empty = options.empty ?? Msg.Lang['无选项'];
-                const menuTemplate = XML.render(StatusBarTab.MENU_TEMPLATE, options);
+                const menuTemplate = XML.render(StatusBarTabs.MENU_TEMPLATE, options);
                 instance.setContent(menuTemplate);
                 $(instance.popper).find('li').off().click((event) => {
                     this.menuOptionOnclick(event);
@@ -200,6 +188,6 @@ class StatusBarTab {
     }
 }
 
-Mixly.StatusBarTab = StatusBarTab;
+Mixly.StatusBarTabs = StatusBarTabs;
 
 });

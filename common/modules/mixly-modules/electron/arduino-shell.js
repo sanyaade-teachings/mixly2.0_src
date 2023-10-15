@@ -176,13 +176,13 @@ ArduShell.compile = (doFunc = () => {}) => {
     if (!ArduShell.shellPath) {
         ArduShell.shellPath = '';
     }
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.changeTo("output");
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.changeTo("output");
     ArduShell.compiling = true;
     ArduShell.uploading = false;
     const boardType = Boards.getSelectedBoardCommandParam();
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["编译中"] + "...",
@@ -283,9 +283,9 @@ ArduShell.upload = (boardType, port) => {
     if (!ArduShell.shellPath) {
         ArduShell.shellPath = '';
     }
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    mainStatusBarTab.changeTo("output");
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    mainStatusBarTabs.changeTo("output");
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["上传中"] + "...",
@@ -308,7 +308,7 @@ ArduShell.upload = (boardType, port) => {
             $("#mixly-loader-btn").css('display', 'inline-block');
         }
     });
-    mainStatusBarTab.show();
+    mainStatusBarTabs.show();
     statusBarTerminal.setValue(Msg.Lang["上传中"] + "...\n");
     const configPath = path.join(ArduShell.shellPath, '../arduino-cli.json'),
     defaultLibPath = path.join(ArduShell.shellPath, '../libraries'),
@@ -363,7 +363,7 @@ ArduShell.upload = (boardType, port) => {
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {
             const code = MFile.getCode();
-            mainStatusBarTab.show();
+            mainStatusBarTabs.show();
             const portObj = Serial.portsOperator[port];
             if (!portObj) return;
             const { toolConfig } = portObj;
@@ -517,8 +517,8 @@ ArduShell.writeLibFiles = (inPath) => {
 * @return void
 */
 ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const code = MFile.getCode();
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
     const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
@@ -601,8 +601,8 @@ ArduShell.saveBinOrHex = function (writePath) {
 }
 
 ArduShell.writeFile = function (readPath, writePath) {
-    const { mainStatusBarTab } = Mixly;
-    const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     ArduShell.compile(function () {
         window.setTimeout(function () {
             const layerNum = layer.open({

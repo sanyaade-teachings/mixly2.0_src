@@ -226,8 +226,8 @@ class EditorBlockly {
         this.editor.scrollCenter();
     }
 
-    updateValue(data, ext) {
-
+    updateValue(data) {
+        
     }
 }
 

@@ -2,11 +2,11 @@ goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Mixly.MArray');
-goog.require('Mixly.StatusBarTab');
+goog.require('Mixly.StatusBarTabs');
 goog.provide('Mixly.Serial');
 
 const { form } = layui;
-const { MArray, StatusBarTab } = Mixly;
+const { MArray, StatusBarTabs } = Mixly;
 
 class Serial {
     // {array} 已打开的串口号
@@ -65,9 +65,9 @@ class Serial {
     }
 
     getMenu = (portsName) => {
-        const { mainStatusBarTab } = Mixly;
+        const { mainStatusBarTabs } = Mixly;
         let newPortsName = [];
-        let tabsName = Object.keys(mainStatusBarTab.statusBars);
+        let tabsName = Object.keys(mainStatusBarTabs.statusBars);
         for (let portName of portsName) {
             if (tabsName.includes(portName)) {
                 continue;
@@ -78,15 +78,15 @@ class Serial {
     }
 
     static addStatusbarTabExtFunc() {
-        const { mainStatusBarTab } = Mixly;
-        mainStatusBarTab.addCtrlBtn();
-        mainStatusBarTab.menuOptionOnclick = (event) => {
+        const { mainStatusBarTabs } = Mixly;
+        mainStatusBarTabs.addCtrlBtn();
+        mainStatusBarTabs.menuOptionOnclick = (event) => {
             const port = $(event.currentTarget).attr('value');
             const serialObj = new this(port, {});
             serialObj.open();
         }
 
-        mainStatusBarTab.getMenuOptions = () => {
+        mainStatusBarTabs.getMenuOptions = () => {
             const ports = this.getMenu(this.uploadPortsName);
             let menu = { list: ports };
             if (!ports.length) {
@@ -123,8 +123,8 @@ class Serial {
     }
 
     onOpen() {
-        StatusBarTab.add('serial', this.port);
-        this.statusBar = StatusBarTab.getStatusBarById(this.port);
+        StatusBarTabs.add('serial', this.port);
+        this.statusBar = StatusBarTabs.getStatusBarById(this.port);
         this.statusBar.open();
         if (Serial.openedPortsName.indexOf(this.port) === -1) {
             Serial.openedPortsName.push(this.port);

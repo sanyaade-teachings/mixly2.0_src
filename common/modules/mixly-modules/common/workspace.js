@@ -8,7 +8,8 @@ goog.require('Mixly.DragH');
 goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorsManager');
-goog.require('Mixly.StatusBarTab');
+goog.require('Mixly.StatusBarTabs');
+goog.require('Mixly.Electron.FileTree');
 goog.provide('Mixly.Workspace');
 
 const {
@@ -19,8 +20,11 @@ const {
     DragV,
     IdGenerator,
     EditorsManager,
-    StatusBarTab
+    StatusBarTabs,
+    Electron = {}
 } = Mixly;
+
+const { FileTree } = goog.isElectron? Electron : Web;
 
 class Workspace {
     static {
@@ -42,12 +46,40 @@ class Workspace {
         this.$dragV = this.$content.find('.drag-v');
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
-        this.statusBarTabs = new StatusBarTab(this.statusBarTabsFilter);
+        this.statusBarTabs = new StatusBarTabs(this.statusBarTabsFilter);
         this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
         this.addDrag();
+        this.addFuncForFileTree();
+        this.addFuncForEditorManager();
         this.addFuncForStatusbarTabs();
+    }
+
+    addFuncForFileTree() {
+        this.fileTree = new FileTree(this.$sidebar[0]);
+        this.fileTree.onClickLeaf = (selected) => {
+            this.editorManager.editorTabs.addTab({
+                name: selected[0].text,
+                favicon: false,
+                title: selected[0].id
+            });
+        }
+        this.fileTree.setDirPath('D:/gitee/mixly2.0-win32-x64/resources/app/src/sample');
+    }
+
+    addFuncForEditorManager() {
+        this.editorManager.addEventListener('activeTabChange', (event) => {
+            const { tabEl } = event.detail;
+            const tabId = $(tabEl).attr('data-tab-id');
+            this.fileTree.select(tabId);
+        });
+
+        this.editorManager.addEventListener('tabRemove', (event) => {
+            const { tabEl } = event.detail;
+            const tabId = $(tabEl).attr('data-tab-id');
+            this.fileTree.deselect(tabId);
+        });
     }
 
     addFuncForStatusbarTabs() {
@@ -70,6 +102,7 @@ class Workspace {
     }
 
     addDrag() {
+        // 编辑器(上)+状态栏(下)
         this.dragH = new DragH(this.$dragH[0], {
             min: '50px',
             startSize: '100%',
@@ -98,6 +131,7 @@ class Workspace {
             }
         });
 
+        // 侧边栏(左)+[编辑器(上)+状态栏(下)]
         this.dragV = new DragV(this.$dragV[0], {
             min: '100px',
             full: [true, false],

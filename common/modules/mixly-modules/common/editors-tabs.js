@@ -4,17 +4,20 @@ goog.require('path');
 goog.require('ChromeTabs');
 goog.require('XScrollbar');
 goog.require('Sortable');
+goog.require('$.contextMenu');
 goog.require('Mixly.Env');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Config');
+goog.require('Mixly.Events');
 goog.provide('Mixly.EditorsTabs');
 
 const {
     Env,
     IdGenerator,
     XML,
-    Config
+    Config,
+    Events
 } = Mixly;
 
 const { USER } = Config;
@@ -43,7 +46,7 @@ class EditorsTabs {
         }
         this.scrollbar = new XScrollbar(this.$content.find('.chrome-tabs-content')[0], {
             onlyHorizontal: true,
-            thumbSize: 1.5,
+            thumbSize: 1.7,
             thumbRadius: 1,
             trackBackground,
             thumbBackground
@@ -57,41 +60,33 @@ class EditorsTabs {
         $parentsContainer.append(this.$content);
         this.#addEvents_();
         this.tabs = {};
+        this.events = new Events([ 'activeTabChange', 'tabAdd', 'tabRemove' ]);
     }
 
     #addEvents_() {
         const { $container } = this;
         const container = $container[0];
+
+        // active Tab被改变时触发
         container.addEventListener('activeTabChange', (event) => {
-            this.activeTabChange && this.activeTabChange(event);
+            this.events.run('activeTabChange', event);
         });
+
+        // 添加新Tab时触发
         container.addEventListener('tabAdd', (event) => {
-            this.tabAdd && this.tabAdd(event);
+            this.events.run('tabAdd', event);
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
         });
+
+        // 移除已有Tab时触发
         container.addEventListener('tabRemove', (event) => {
-            this.tabRemove && this.tabRemove(event);
+            this.events.run('tabRemove', event);
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
         });
-    }
-
-    // 可覆盖
-    activeTabChange(event) {
-
-    }
-
-    // 可覆盖
-    tabAdd(event) {
-
-    }
-
-    // 可覆盖
-    tabRemove(event) {
-
     }
 
     addTab(tabProperties, others = {}) {

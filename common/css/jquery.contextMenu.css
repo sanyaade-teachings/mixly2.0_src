@@ -225,7 +225,7 @@
 .context-menu-item.context-menu-hover {
   color: #fff !important;
   cursor: pointer; 
-  background-color: #2980b9 !important;
+  background-color: #009688 !important;
 }
 
 .context-menu-item.context-menu-disabled {
@@ -319,6 +319,10 @@ html[data-bs-theme=dark] .context-menu-list {
 html[data-bs-theme=dark] .context-menu-item {
   color: #c1c1c1;
   background-color: #1f1f1f;
+}
+
+html[data-bs-theme=dark] .context-menu-item.context-menu-hover {
+  background-color: #2980b9 !important;
 }
 
 html[data-bs-theme=dark] .context-menu-separator {

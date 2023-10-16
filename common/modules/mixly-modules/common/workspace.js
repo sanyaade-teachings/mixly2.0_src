@@ -65,17 +65,18 @@ class Workspace {
                 title: selected[0].id
             });
         }
-        this.fileTree.setDirPath('D:/gitee/mixly2.0-win32-x64/resources/app/src/sample');
+        this.fileTree.setDirPath('D:/gitee/mixly/mixly2.0-win32-x64/resources/app/src/sample');
     }
 
     addFuncForEditorManager() {
-        this.editorManager.addEventListener('activeTabChange', (event) => {
+        const { events } = this.editorManager.editorTabs;
+        events.bind('activeTabChange', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.fileTree.select(tabId);
         });
 
-        this.editorManager.addEventListener('tabRemove', (event) => {
+        events.bind('tabRemove', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.fileTree.deselect(tabId);

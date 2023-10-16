@@ -54,16 +54,23 @@ class FileTree {
             // plugins: ['wholerow', 'search', 'truncate', 'state'],
             plugins: ['wholerow']
         });
-        this.#addListener_();
+        this.selected = null;
+        this.#addEventsListener_();
     }
 
-    #addListener_() {
+    #addEventsListener_() {
         this.$fileTree
         .on('click.jstree', '.jstree-open>a', ({ target }) => {
             setTimeout(() => this.$fileTree.jstree(true).close_node(target));
         })
         .on('click.jstree', '.jstree-closed>a', ({ target }) => {
             setTimeout(() => this.$fileTree.jstree(true).open_node(target));
+        })
+        .on('after_open.jstree', (e, data) => {
+            this.select(this.selected);
+        })
+        .on('after_close.jstree', (e, data) => {
+            this.select(this.selected);
         })
         .on("changed.jstree", (e, data) => {
             const selected = data.instance.get_selected(true);
@@ -73,6 +80,7 @@ class FileTree {
             if (['icon-folder', 'icon-folder-empty'].includes(selected[0].icon)) {
                 return;
             }
+            this.selected = selected[0].id;
             this.onClickLeaf(selected);
         });
     }
@@ -85,21 +93,26 @@ class FileTree {
     select(inPath) {
         this.$fileTree.jstree(true).deselect_all();
         let node = document.getElementById(inPath);
-        if (node) {
-            this.$fileTree.jstree(true).select_node(node, true, true);
+        if (!node) {
+            return;
         }
+        this.$fileTree.jstree(true).select_node(node, true, true);
+        $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+        this.selected = inPath;
     }
 
     deselect(inPath) {
         let node = document.getElementById(inPath);
         if (node) {
-            this.$fileTree.jstree(true).deselect_node(node, true);
+            return;
         }
+        this.$fileTree.jstree(true).deselect_node(node, true);
     }
 
     #getRoot_() {
+        const rootNodeName = path.basename(this.dirPath).toUpperCase();
         return [{
-            text: `<div style="font-weight:bold;display:unset;">${path.basename(this.dirPath).toUpperCase()}</div>`,
+            text: `<div style="font-weight:bold;display:unset;">${rootNodeName}</div>`,
             id: this.dirPath,
             children: true,
             li_attr: {

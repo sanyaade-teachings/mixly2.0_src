@@ -20,6 +20,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.ToolboxSearcher');
+goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorBlockly');
 
 const {
@@ -27,16 +28,18 @@ const {
     Env,
     XML,
     IdGenerator,
-    ToolboxSearcher
+    ToolboxSearcher,
+    EditorBase
 } = Mixly;
 const { USER, BOARD } = Config;
 
-class EditorBlockly {
+class EditorBlockly extends EditorBase {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
     }
 
     constructor(dom, extname='.mix') {
+        super();
         const $parentContainer = $(dom);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorBlockly.TEMPLATE, {
@@ -103,7 +106,7 @@ class EditorBlockly {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
-        this.onMount();
+        this.onMounted();
         const toolboxWidth = this.$editorContainer.find('.blocklyToolboxDiv').outerWidth(true);
         this.$loading.children('.left').animate({
           width: toolboxWidth + 'px'
@@ -112,10 +115,6 @@ class EditorBlockly {
                 this.$loading.remove();
             });
         });
-    }
-
-    getContainer() {
-        return this.$content;
     }
 
     updateCode() {
@@ -220,7 +219,7 @@ class EditorBlockly {
         this.editor.dispose();
     }
 
-    onMount() {
+    onMounted() {
         this.updateToolbox();
         this.resize();
         this.editor.scrollCenter();
@@ -228,6 +227,18 @@ class EditorBlockly {
 
     updateValue(data) {
         
+    }
+
+    getValue() {
+        let code = this.generator.workspaceToCode(this.editor) || '';
+        code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
+            try {
+                return decodeURIComponent(s.replace(/_/g, '%'));
+            } catch (error) {
+                return s;
+            }
+        });
+        return code;
     }
 }
 

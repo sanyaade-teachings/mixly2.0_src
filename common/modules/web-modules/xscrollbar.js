@@ -1,6 +1,6 @@
 /*!
  * x-scrollbar 自定义滚动条插件
- * 版本: v3.1.0
+ * 版本: v3.1.1
  * 作者: 清晨的阳光(QQ:765550360)
  * 许可: MIT
  * https://gitee.com/xujz520/x-scrollbar
@@ -8,12 +8,13 @@
 
 class XScrollbar {
   constructor(dom, options) {
+    // 移动端检测
+    this.isMobile = window.navigator.userAgent.toLowerCase().indexOf('mobile') != -1;
+    if (this.isMobile) return;
+
     this.$dom = dom;
     if (this.$dom.classList.contains('x-scrollbar')) return;
     this.$dom.classList.add('x-scrollbar');
-
-    // 移动端检测
-    this.isMobile = window.navigator.userAgent.toLowerCase().indexOf('mobile') != -1;
 
     // 合并配置
     let defaultOptions = {
@@ -58,7 +59,7 @@ class XScrollbar {
     // 处理内边距
     let styleObj = getComputedStyle(this.$dom);
     let padding = `${styleObj.paddingTop} ${styleObj.paddingRight} ${styleObj.paddingBottom} ${styleObj.paddingLeft}`;
-    if(padding != '0px 0px 0px 0px') {
+    if (padding != '0px 0px 0px 0px') {
       this.$dom.style.padding = '0px 0px 0px 0px';
       this.$container.style.padding = padding;
     }
@@ -70,8 +71,6 @@ class XScrollbar {
     if (this.preventDefault) {
       this.$container.classList.add('x-scrollbar__container--preventDefault');
     }
-
-    if (this.isMobile) return;
 
     this.$dom.appendChild(this.$trackX);
     this.$dom.appendChild(this.$trackY);
@@ -97,7 +96,6 @@ class XScrollbar {
     } else {
       this.update();
     }
-
   }
 
   /**
@@ -141,30 +139,26 @@ class XScrollbar {
     // 上一次的拖动位置
     let screenX = null;
     let screenY = null;
-
     this.$thumbX.addEventListener('mousedown', (e) => {
       this.$trackX.classList.add('x-scrollbar__track--draging');
       this.thumbXActive = true;
       screenX = e.screenX;
     });
-
     this.$thumbY.addEventListener('mousedown', (e) => {
       this.$trackY.classList.add('x-scrollbar__track--draging');
       this.thumbYActive = true;
       screenY = e.screenY;
     });
-
-    document.addEventListener('mouseup', (e) => {
+    this.onMouseup = ((e) => {
       this.$trackX.classList.remove('x-scrollbar__track--draging');
       this.$trackY.classList.remove('x-scrollbar__track--draging');
       this.thumbXActive = false;
       this.thumbYActive = false;
-    });
-
-    document.addEventListener('mousemove', (e) => {
+    }).bind(this);
+    document.addEventListener('mouseup', this.onMouseup);
+    this.onMousemove = ((e) => {
       if (!(this.thumbXActive || this.thumbYActive)) return;
       e.preventDefault();
-
       requestAnimationFrame(() => {
         if (this.thumbXActive) {
           let offset = e.screenX - screenX;
@@ -180,7 +174,8 @@ class XScrollbar {
           this.$container.scrollTop = top / this.thumbYMaxTop * this.maxScrollTop;
         }
       });
-    });
+    }).bind(this);
+    document.addEventListener('mousemove', this.onMousemove);
   }
 
   /**
@@ -191,27 +186,22 @@ class XScrollbar {
       if (Math.abs(end - start) <= 1) return end;
       return start + (end - start) / 4;
     };
-
-    this.$container.addEventListener('wheel', (e) => {
+    this.onWheel = ((e) => {
       // 仅响应 y 滚动 => 作用于 x
       if (!this.hasXScrollbar) return;
       if (e.deltaY && !e.shiftKey) {
         // 结束值
         this.scrollLeft = Math.max(Math.min((this.scrollLeft || this.$container.scrollLeft) + (e.deltaY > 0 ? 100 : -100), this.maxScrollLeft), 0);
         this.left = this.scrollLeft / this.maxScrollLeft * this.thumbXMaxLeft;
-
         // 阻止向上传递 || !(终点)
         if (this.preventDefault || !(this.scrollLeft == 0 || this.scrollLeft == this.maxScrollLeft)) {
           e.preventDefault();
           e.stopPropagation();
         }
-
         if (this.reqId) return;
-
         // 起始值
         let scrollLeft = this.$container.scrollLeft;
         let left = parseFloat(this.$thumbX.style.left || 0);
-
         let animate = () => {
           scrollLeft = easeout(scrollLeft, this.scrollLeft);
           left = easeout(left, this.left);
@@ -228,14 +218,15 @@ class XScrollbar {
         };
         animate();
       }
-    });
+    }).bind(this);
+    this.$container.addEventListener('wheel', this.onWheel);
   }
 
   /**
    * 滚动事件 => 修正滑块位置
    */
   bindScroll() {
-    this.$container.addEventListener('scroll', () => {
+    this.onScroll = (() => {
       if (this.thumbXActive || this.thumbYActive || this.innerScroll) return;
       if (this.hasXScrollbar) {
         this.$thumbX.style.left = this.$container.scrollLeft / this.maxScrollLeft * this.thumbXMaxLeft + 'px';
@@ -243,7 +234,8 @@ class XScrollbar {
       if (this.hasYScrollbar) {
         this.$thumbY.style.top = this.$container.scrollTop / this.maxScrollTop * this.thumbYMaxTop + 'px';
       }
-    });
+    }).bind(this);
+    this.$container.addEventListener('scroll', this.onScroll);
   }
 
   /**
@@ -270,6 +262,36 @@ class XScrollbar {
     }
     if (this.hasYScrollbar) {
       this.$thumbY.style.top = this.$container.scrollTop / this.maxScrollTop * this.thumbYMaxTop + 'px';
+    }
+  }
+
+  /**
+   * 销毁
+   */
+  destroy() {
+    if (this.isMobile) return;
+    if (!this.$dom.classList.contains('x-scrollbar')) return;
+
+    if (this.$resizeObserver) {
+      this.$resizeObserver.disconnect();
+    }
+
+    document.removeEventListener('mouseup', this.onMouseup);
+    document.removeEventListener('mousemove', this.onMousemove);
+    this.$container.removeEventListener('wheel', this.onWheel);
+    this.$container.removeEventListener('scroll', this.onScroll);
+
+    this.$dom.classList.remove('x-scrollbar');
+    this.$dom.classList.remove('x-scrollbar-keep');
+
+    [...this.$content.childNodes].forEach(node => this.$dom.appendChild(node));
+
+    this.$dom.removeChild(this.$container);
+    this.$dom.removeChild(this.$trackX);
+    this.$dom.removeChild(this.$trackY);
+    if (this.$style) {
+      document.querySelector('head').removeChild(this.$style);
+      this.$dom.removeAttribute(this.key);
     }
   }
 
@@ -339,11 +361,11 @@ class XScrollbar {
 
     this.key = 'x-scrollbar-' + Math.abs(((1 + Math.random()) * Date.now()) | 0).toString(16);
     this.$dom.setAttribute(this.key, '');
-    let style = this.html2dom(`<style ${this.key}></style>`);
+    this.$style = this.html2dom(`<style ${this.key}></style>`);
     content = content.replaceAll('\n.x-scrollbar', `\n[${this.key}] > .x-scrollbar`);
     content = content.replaceAll(';', ' !important;');
-    style.innerHTML = content;
-    document.querySelector('head').appendChild(style);
+    this.$style.innerHTML = content;
+    document.querySelector('head').appendChild(this.$style);
   }
 }
 

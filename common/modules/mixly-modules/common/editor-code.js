@@ -2,12 +2,12 @@ goog.loadJs('common', () => {
 
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
-goog.require('$.contextMenu');
 goog.require('Mixly.Config');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
+goog.require('Mixly.ContextMenu');
 goog.require('Mixly.EditorAce');
 goog.provide('Mixly.EditorCode');
 
@@ -17,6 +17,7 @@ const {
     XML,
     Env,
     Msg,
+    ContextMenu,
     EditorAce
 } = Mixly;
 const { USER, BOARD } = Config;
@@ -24,7 +25,6 @@ const { USER, BOARD } = Config;
 class EditorCode extends EditorAce {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-code.html'));
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-context-menu.html'));
     }
 
     constructor(dom, extname='.c') {
@@ -41,31 +41,31 @@ class EditorCode extends EditorAce {
         this.$loading = this.$content.find('.loading');
         this.$editorContainer = $editorContainer;
         $parentContainer.append(this.$content);
-        this.defaultContextMenuItems = {
+        this.defaultContextMenu = {
             cut: {
                 isHtmlName: true,
-                name: this.getItemName(Msg.Lang['剪切'], 'Ctrl+X'),
+                name: ContextMenu.getItem(Msg.Lang['剪切'], 'Ctrl+X'),
                 callback: (key, opt) => this.cut()
             },
             copy: {
                 isHtmlName: true,
-                name: this.getItemName(Msg.Lang['复制'], 'Ctrl+C'),
+                name: ContextMenu.getItem(Msg.Lang['复制'], 'Ctrl+C'),
                 callback: (key, opt) => this.copy()
             },
             paste: {
                 isHtmlName: true,
-                name: this.getItemName(Msg.Lang['粘贴'], 'Ctrl+V'),
+                name: ContextMenu.getItem(Msg.Lang['粘贴'], 'Ctrl+V'),
                 callback: (key, opt) => this.paste()
             },
             sep1: '---------',
             togglecomment: {
                 isHtmlName: true,
-                name: this.getItemName(Msg.Lang['切换行注释'], 'Ctrl+/'),
+                name: ContextMenu.getItem(Msg.Lang['切换行注释'], 'Ctrl+/'),
                 callback: (key, opt) => this.editor.execCommand('togglecomment')
             },
             toggleBlockComment: {
                 isHtmlName: true,
-                name: this.getItemName(Msg.Lang['切换块注释'], 'Ctrl+Shift+/'),
+                name: ContextMenu.getItem(Msg.Lang['切换块注释'], 'Ctrl+Shift+/'),
                 callback: (key, opt) => this.editor.execCommand('toggleBlockComment')
             }
         };
@@ -75,17 +75,11 @@ class EditorCode extends EditorAce {
         super.init();
         this.toCodeEditor();
         this.$loading.remove();
-        $.contextMenu({
-            selector: `div[m-id="${this.id}"] .editor`,
-            build: ($trigger, e) => { 
-                return { items: this.getContextMenuItems() }
-            },
-            animation: { duration: 0, show: 'show', hide: 'hide' }
+        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .editor`);
+        const { events } = this.contextMenu;
+        events.bind('getMenu', () => {
+            return this.defaultContextMenu;
         });
-    }
-
-    getContainer() {
-        return this.$content;
     }
 
     toCodeEditor() {
@@ -149,13 +143,9 @@ class EditorCode extends EditorAce {
         this.scrollToTop();
     }
 
-    // 可覆盖
-    getContextMenuItems() {
-        return this.defaultContextMenuItems;
-    }
-
-    getItemName(name, hotKey) {
-        return XML.render(EditorCode.MENU_TEMPLATE, { name, hotKey });
+    dispose() {
+        super.dispose();
+        this.contextMenu.dispose();
     }
 }
 

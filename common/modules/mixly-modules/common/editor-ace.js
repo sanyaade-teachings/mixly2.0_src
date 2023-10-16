@@ -4,19 +4,26 @@ goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
+goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorAce');
 
-const { XML, Msg } = Mixly;
+const {
+    XML,
+    Msg,
+    EditorBase
+} = Mixly;
 
-class EditorAce {
+class EditorAce extends EditorBase {
     static {
         this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
         this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
     }
 
     constructor(dom) {
+        super();
         this.$container = $(dom);
         this.destroyed = false;
+        this.$content = this.$container;
     }
 
     init() {

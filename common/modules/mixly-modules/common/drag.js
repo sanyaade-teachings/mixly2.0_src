@@ -32,29 +32,34 @@ class Drag {
         this.config.elem = [ this.$first, this.$last ];
         this.firstDisplay = this.$first.css('display');
         this.lastDisplay = this.$last.css('display');
-        let $dragElem = $('<div></div>');
+        this.$dragElem = $('<div></div>');
         const dragType = this.config.type === 'h'? 's' : 'w';
         this.$container.addClass(`drag-${dragType}-container`);
-        $dragElem.addClass('drag-elem');
+        this.$dragElem.addClass('drag-elem');
+        this.shown = 'POSITIVE';
         let dragCssType;
         if (this.config.type === 'h') {
-            $dragElem.addClass('drag-s-elem horizontal-line');
+            this.$dragElem.addClass('drag-s-elem horizontal-line');
             dragCssType = 'top';
         } else {
-            $dragElem.addClass('drag-w-elem vertical-line');
+            this.$dragElem.addClass('drag-w-elem vertical-line');
             dragCssType = 'left';
         }
-        const size = parseFloat(this.config.startSize);
+        let size = parseFloat(this.config.startSize);
         if (size >= 100) {
-            $dragElem.css(dragCssType, 'calc(100% - 4px)');
+            this.$dragElem.css(dragCssType, 'calc(100% - 4px)');
+            size = 100;
+            this.shown = 'POSITIVE';
         } else if (size > 0) {
-            $dragElem.css(dragCssType, `calc(${size}% - 2px)`);
+            this.$dragElem.css(dragCssType, `calc(${size}% - 2px)`);
+            this.shown = 'BOTH';
         } else {
-            $dragElem.css(dragCssType, '0px');
+            this.$dragElem.css(dragCssType, '0px');
+            size = 0;
+            this.shown = 'NEGATIVE';
         }
-        this.$container.prepend($dragElem);
-        this.$dragElem = $dragElem;
-        this.size = ['100%', '0%'];
+        this.$container.prepend(this.$dragElem);
+        this.size = [`${size}%`, '0%'];
         this.onfullMark = 'POSITIVE';
         this.prevSize = this.size;
         this.addEventListener();
@@ -173,10 +178,13 @@ class Drag {
         this.size = [elem1Size, elem2Size];
         if (!precent) {
             this.$dragElem.css(dragCssType, '0px');
+            this.shown = 'NEGATIVE';
         } else if (precent >= 100) {
             this.$dragElem.css(dragCssType, 'calc(100% - 4px)');
+            this.shown = 'POSITIVE';
         } else {
             this.$dragElem.css(dragCssType, `calc(${elem1Size} - 2px)`);
+            this.shown = 'BOTH';
         }
         elem[0].css(elemCssType, elem1Size);
         elem[1].css(elemCssType, elem2Size);

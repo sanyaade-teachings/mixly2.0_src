@@ -61,20 +61,8 @@ class EditorMixbook {
         });
     }
 
-    getContainer() {
-        return this.$content;
-    }
-
-    resize() {
-
-    }
-
     dispose() {
         this.editor.destroy();
-    }
-
-    onMount() {
-
     }
 }
 

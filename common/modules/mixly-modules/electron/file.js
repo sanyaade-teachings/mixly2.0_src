@@ -29,15 +29,90 @@ const {
 
 const { BOARD } = Config;
 
-const { File, ArduShell, BU } = Electron;
+const { ArduShell, BU } = Electron;
 
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
 const fs_extra = Mixly.require('fs-extra');
+const fs_promise = Mixly.require('node:fs/promises');
 const electron_remote = Mixly.require('@electron/remote');
 const { dialog, app } = electron_remote;
 
 const { MSG } = Blockly.Msg;
+
+class File {
+    static {
+        this.showOpenFilePicker = async () => {
+            return new Promise((resolve, reject) => {
+                const currentWindow = electron_remote.getCurrentWindow();
+                currentWindow.focus();
+                dialog.showOpenDialog(currentWindow, {
+                    title: '打开文件',
+                    defaultPath: File.workingPath,
+                    filters,
+                    properties: ['openFile', 'showHiddenFiles'],
+                    message: '打开文件'
+                })
+                .then(result => {
+                    const filePath = result.filePaths[0];
+                    if (filePath) {
+                        resolve(new File(filePath));
+                    } else {
+                        reject('dir not found');
+                    }
+                })
+                .catch(error => {
+                    reject(error);
+                });
+            });
+        }
+
+        this.showDirectoryPicker = async () => {
+            return new Promise((resolve, reject) => {
+                const currentWindow = electron_remote.getCurrentWindow();
+                currentWindow.focus();
+                dialog.showOpenDialog(currentWindow, {
+                    title: '打开文件夹',
+                    defaultPath: File.workingPath,
+                    filters,
+                    properties: ['openDirectory', 'createDirectory'],
+                    message: '打开文件夹'
+                })
+                .then(result => {
+                    const filePath = result.filePaths[0];
+                    if (filePath) {
+                        resolve(filePath);
+                    } else {
+                        reject('file not found');
+                    }
+                })
+                .catch(error => {
+                    reject(error);
+                });
+            });
+        }
+
+        this.showSaveFilePicker = async () => {
+            return new Promise((resolve, reject) => {
+                
+            });
+        }
+    }
+
+    constructor(filePath) {
+        this.path = filePath;
+    }
+
+    async readFile() {
+        return fs_promise.readFile({ encoding: 'utf8' });
+    }
+
+    async writeFile(data) {
+        return fs.writeFile(data, { encoding: 'utf8' });
+    }
+}
+
+Electron.File = File;
 
 File.DEFAULT_PATH = path.join(app.getAppPath(), 'src/sample');
 File.workingPath = File.DEFAULT_PATH;

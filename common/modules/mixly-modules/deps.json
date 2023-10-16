@@ -56,6 +56,18 @@
         ]
     },
     {
+        "path": "/common/context-menu.js",
+        "require": [
+            "$.contextMenu",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.Events"
+        ],
+        "provide": [
+            "Mixly.ContextMenu"
+        ]
+    },
+    {
         "path": "/common/css-loader.js",
         "require": [
             "Mixly.Config",
@@ -96,7 +108,8 @@
             "ace",
             "ace.ExtLanguageTools",
             "Mixly.XML",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.EditorBase"
         ],
         "provide": [
             "Mixly.EditorAce"
@@ -131,7 +144,8 @@
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.IdGenerator",
-            "Mixly.ToolboxSearcher"
+            "Mixly.ToolboxSearcher",
+            "Mixly.EditorBase"
         ],
         "provide": [
             "Mixly.EditorBlockly"
@@ -142,12 +156,12 @@
         "require": [
             "ace",
             "ace.ExtLanguageTools",
-            "$.contextMenu",
             "Mixly.Config",
             "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
+            "Mixly.ContextMenu",
             "Mixly.EditorAce"
         ],
         "provide": [
@@ -179,9 +193,11 @@
             "Mixly.Msg",
             "Mixly.Config",
             "Mixly.Env",
+            "Mixly.ContextMenu",
             "Mixly.IdGenerator",
             "Mixly.EditorBlockly",
-            "Mixly.EditorCode"
+            "Mixly.EditorCode",
+            "Mixly.EditorBase"
         ],
         "provide": [
             "Mixly.EditorMix"
@@ -213,7 +229,8 @@
             "path",
             "Mixly.XML",
             "Mixly.Env",
-            "Mixly.IdGenerator"
+            "Mixly.IdGenerator",
+            "Mixly.EditorBase"
         ],
         "provide": [
             "Mixly.EditorUnknown"
@@ -264,10 +281,12 @@
             "ChromeTabs",
             "XScrollbar",
             "Sortable",
+            "$.contextMenu",
             "Mixly.Env",
             "Mixly.IdGenerator",
             "Mixly.XML",
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Events"
         ],
         "provide": [
             "Mixly.EditorsTabs"
@@ -285,6 +304,16 @@
         ]
     },
     {
+        "path": "/common/events.js",
+        "require": [
+            "Mixly.IdGenerator",
+            "Mixly.MArray"
+        ],
+        "provide": [
+            "Mixly.Events"
+        ]
+    },
+    {
         "path": "/common/file-tree.js",
         "require": [
             "path",
@@ -294,6 +323,13 @@
         ],
         "provide": [
             "Mixly.FileTree"
+        ]
+    },
+    {
+        "path": "/common/file.js",
+        "require": [],
+        "provide": [
+            "Mixly.File"
         ]
     },
     {
@@ -627,7 +663,7 @@
         ]
     },
     {
-        "path": "/common/statusbar-tab.js",
+        "path": "/common/statusbar-tabs.js",
         "require": [
             "path",
             "layui",

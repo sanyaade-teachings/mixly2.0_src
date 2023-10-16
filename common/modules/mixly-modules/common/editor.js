@@ -62,45 +62,6 @@ Editor.init = () => {
     });
 }
 
-Editor.addDrag = () => {
-    const { blockEditor, codeEditor } = Editor.mainEditor;
-    const $hBar = $('#nav').find('button[m-id="h-bar"]').children('a');
-    const hDrag = new DragH($('#h-container')[0], {
-        min: '50px',
-        startSize: '100%',
-        sizeChanged: () => {
-            // 重新调整编辑器尺寸
-            Editor.editorManager.resize();
-        },
-        onfull: (type) => {
-            const { mainStatusBarTabs } = Mixly;
-            switch(type) {
-            case 'POSITIVE': // 拖拽元素移动方向：上→下
-                $hBar.removeClass('icon-hide-bar-s').addClass('icon-show-bar-s');
-                mainStatusBarTabs.shown = false;
-                break;
-            case 'NEGATIVE': // 拖拽元素移动方向：下→上
-                blockEditor.editor.setVisible(false);
-                break;
-            }
-        },
-        exitfull: (type) => {
-            const { mainStatusBarTabs } = Mixly;
-            switch(type) {
-            case 'POSITIVE': // 拖拽元素移动方向：上→下
-                blockEditor.editor.setVisible(true);
-                break;
-            case 'NEGATIVE': // 拖拽元素移动方向：下→上
-                $hBar.removeClass('icon-show-bar-s').addClass('icon-hide-bar-s');
-                mainStatusBarTabs.shown = true;
-                break;
-            }
-            return true;
-        }
-    });
-    return hDrag;
-}
-
 Editor.addBtnClickEvent = () => {
     const $button = $('#nav').find('button[m-id="h-bar"]');
     const $a = $button.children('a');

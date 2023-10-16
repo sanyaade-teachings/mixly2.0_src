@@ -34,7 +34,6 @@
 
 .horizontal-line:active,
 .vertical-line:active {
-    opacity: 1 !important;
     -webkit-animation-name: drag-fadein;
     animation-duration: 0.2s;
     animation-delay: .3s;

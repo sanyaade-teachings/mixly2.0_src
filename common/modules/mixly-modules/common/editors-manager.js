@@ -71,80 +71,73 @@ class EditorsManager {
         this.page = 'welcome';
         this.#addEvents_();
         this.editors = {};
-        this.shownEditorName = null;
-        this.events = [];
-    }
-
-    addEventListener(name, func) {
-        this.events[name] = func;
+        this.activeEditorName = null;
     }
 
     #addEvents_() {
-        this.editorTabs.activeTabChange = this.activeTabChange.bind(this);
-        this.editorTabs.tabAdd = this.tabAdd.bind(this);
-        this.editorTabs.tabRemove = this.tabRemove.bind(this);
-    }
+        const { events } = this.editorTabs;
+        // active Tab被改变时触发
+        events.bind('activeTabChange', (event) => {
+            const { tabEl } = event.detail;
+            const tabId = $(tabEl).attr('data-tab-id');
+            const editor = this.editors[tabId];
+            this.activeEditorName = tabId;
+            this.$editorContainer.empty();
+            this.$editorContainer.append(editor.getContainer());
+            if (this.editors[tabId].inited) {
+                editor.onMount && editor.onMount();
+            }
+        });
 
-    activeTabChange(event) {
-        this.events['activeTabChange'] && this.events['activeTabChange'](event);
-        const { tabEl } = event.detail;
-        const tabId = $(tabEl).attr('data-tab-id');
-        const editor = this.editors[tabId];
-        this.shownEditorName = tabId;
-        this.$editorContainer.empty();
-        this.$editorContainer.append(editor.getContainer());
-        if (this.editors[tabId].inited) {
-            editor.onMount && editor.onMount();
-        }
-    }
+        // 添加新Tab时触发
+        events.bind('tabAdd', (event) => {
+            const { tabEl } = event.detail;
+            const tabId = $(tabEl).attr('data-tab-id');
+            const extname = path.extname(tabId);
+            let editor = EditorsManager.config[extname];
+            if (!editor) {
+                editor = EditorUnknown;
+            }
+            this.editors[tabId] = new editor(this.$editorContainer[0], extname);
+            if (Object.keys(this.editors).length && this.page === 'welcome') {
+                this.$welcomePage.replaceWith(this.$container);
+                this.page = 'editor';
+            }
+            setTimeout(() => {
+                this.editors[tabId].init();
+                this.editors[tabId].inited = true;
+                this.editors[tabId].onMounted();
+                this.editors[tabId].updateValue(fs.readFileSync(tabId, 'utf-8'));
+            }, 500);
+        });
 
-    tabAdd(event) {
-        this.events['tabAdd'] && this.events['tabAdd'](event);
-        const { tabEl } = event.detail;
-        const tabId = $(tabEl).attr('data-tab-id');
-        const extname = path.extname(tabId);
-        let editor = EditorsManager.config[extname];
-        if (!editor) {
-            editor = EditorUnknown;
-        }
-        this.editors[tabId] = new editor(this.$editorContainer[0], extname);
-        if (Object.keys(this.editors).length && this.page === 'welcome') {
-            this.$welcomePage.replaceWith(this.$container);
-            this.page = 'editor';
-        }
-        setTimeout(() => {
-            this.editors[tabId].init();
-            this.editors[tabId].inited = true;
-            this.editors[tabId].updateValue(fs.readFileSync(tabId, 'utf-8'));
-        }, 500);
-    }
-
-    tabRemove(event) {
-        this.events['tabRemove'] && this.events['tabRemove'](event);
-        const { tabEl } = event.detail;
-        const tabId = $(tabEl).attr('data-tab-id');
-        if (!this.editors[tabId]) {
-            return;
-        }
-        this.editors[tabId].dispose();
-        delete this.editors[tabId];
-        delete this.editorTabs.tabs[tabId];
-        if (!Object.keys(this.editors).length && this.page !== 'welcome') {
-            this.$container.replaceWith(this.$welcomePage);
-            this.page = 'welcome';
-        }
+        // 移除已有Tab时触发
+        events.bind('tabRemove', (event) => {
+            const { tabEl } = event.detail;
+            const tabId = $(tabEl).attr('data-tab-id');
+            if (!this.editors[tabId]) {
+                return;
+            }
+            this.editors[tabId].dispose();
+            delete this.editors[tabId];
+            delete this.editorTabs.tabs[tabId];
+            if (!Object.keys(this.editors).length && this.page !== 'welcome') {
+                this.$container.replaceWith(this.$welcomePage);
+                this.page = 'welcome';
+            }
+        });
     }
 
     resize() {
-        const editor = this.getCurrentEditor();
+        const editor = this.getActiveEditor();
         editor && editor.resize();
     }
 
-    getCurrentEditor() {
-        if (!this.shownEditorName) {
+    getActiveEditor() {
+        if (!this.activeEditorName) {
             return null;
         }
-        return this.editors[this.shownEditorName];
+        return this.editors[this.activeEditorName];
     }
 
 

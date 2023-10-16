@@ -16,19 +16,23 @@ class EditorBase {
     }
 
     resize() {
-
+        
     }
 
     dispose() {
-
+        
     }
 
-    onMount() {
+    onMounted() {
+        
+    }
 
+    onUnmounted() {
+        
     }
 
     updateValue(data, ext) {
-
+        
     }
 }
 

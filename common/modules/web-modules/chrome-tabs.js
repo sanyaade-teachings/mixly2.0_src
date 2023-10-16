@@ -1,12 +1,12 @@
 ((window, factory) => {
   if (typeof define == 'function' && define.amd) {
-    define(['draggabilly'], Draggabilly => factory(window, Draggabilly))
+    define([], () => factory(window))
   } else if (typeof module == 'object' && module.exports) {
-    module.exports = factory(window, require('draggabilly'))
+    module.exports = factory(window)
   } else {
-    window.ChromeTabs = factory(window, window.Draggabilly)
+    window.ChromeTabs = factory(window)
   }
-})(window, (window, Draggabilly) => {
+})(window, (window) => {
   const TAB_CONTENT_MARGIN = 0
   const TAB_CONTENT_OVERLAP_DISTANCE = 1
 
@@ -59,7 +59,6 @@
 
   class ChromeTabs {
     constructor() {
-      this.draggabillies = []
     }
 
     init(el) {
@@ -69,7 +68,7 @@
       this.el.setAttribute('data-chrome-tabs-instance-id', this.instanceId)
       instanceId += 1
 
-      $(document).on('pointerdown', '.chrome-tab', (event) => {
+      $(document).on('click', '.chrome-tab', (event) => {
         this.setCurrentTab(event.currentTarget)
       })
 
@@ -107,51 +106,6 @@
       return this.el.querySelector('.x-scrollbar__content') ?? this.el.querySelector('.chrome-tabs-content')
     }
 
-    get tabContentWidths() {
-      const numberOfTabs = this.tabEls.length
-      const tabsContentWidth = this.tabContentEl.clientWidth
-      const tabsCumulativeOverlappedWidth = (numberOfTabs - 1) * TAB_CONTENT_OVERLAP_DISTANCE
-      const targetWidth = (tabsContentWidth - (2 * TAB_CONTENT_MARGIN) + tabsCumulativeOverlappedWidth) / numberOfTabs
-      const clampedTargetWidth = Math.max(TAB_CONTENT_MIN_WIDTH, Math.min(TAB_CONTENT_MAX_WIDTH, targetWidth))
-      const flooredClampedTargetWidth = Math.floor(clampedTargetWidth)
-      const totalTabsWidthUsingTarget = (flooredClampedTargetWidth * numberOfTabs) + (2 * TAB_CONTENT_MARGIN) - tabsCumulativeOverlappedWidth
-      const totalExtraWidthDueToFlooring = tabsContentWidth - totalTabsWidthUsingTarget
-
-      // TODO - Support tabs with different widths / e.g. "pinned" tabs
-      const widths = []
-      let extraWidthRemaining = totalExtraWidthDueToFlooring
-      for (let i = 0; i < numberOfTabs; i += 1) {
-        const extraWidth = flooredClampedTargetWidth < TAB_CONTENT_MAX_WIDTH && extraWidthRemaining > 0 ? 1 : 0
-        widths.push(flooredClampedTargetWidth + extraWidth)
-        if (extraWidthRemaining > 0) extraWidthRemaining -= 1
-      }
-      return widths
-    }
-
-    get tabContentPositions() {
-      const positions = []
-      const tabContentWidths = this.tabContentWidths
-
-      let position = TAB_CONTENT_MARGIN
-      tabContentWidths.forEach((width, i) => {
-        const offset = i * TAB_CONTENT_OVERLAP_DISTANCE
-        positions.push(position - offset)
-        position += width
-      })
-
-      return positions
-    }
-
-    get tabPositions() {
-      const positions = []
-
-      this.tabContentPositions.forEach((contentPosition) => {
-        positions.push(contentPosition - TAB_CONTENT_MARGIN)
-      })
-
-      return positions
-    }
-
     createNewTabEl() {
       const div = document.createElement('div')
       div.innerHTML = tabTemplate
@@ -176,7 +130,10 @@
     }
 
     setTabCloseEventListener(tabEl) {
-      tabEl.querySelector('.chrome-tab-close').addEventListener('click', _ => this.removeTab(tabEl))
+      tabEl.querySelector('.chrome-tab-close').addEventListener('click', event => {
+        this.removeTab(tabEl)
+        event.stopPropagation()
+      })
     }
 
     get activeTabEl() {

@@ -34,7 +34,6 @@ class EditorMd extends EditorCode {
         const $codeContainer = $content.find('.editor-code');
         super($codeContainer, extname);
         this.drag = null;
-        this.shown = 'CODE';
         this.codeContextMenuItems = null;
         this.PreviewContextMenuItems = null;
         this.$content = $content;
@@ -54,28 +53,10 @@ class EditorMd extends EditorCode {
             min: '200px',
             full: [true, true],
             startSize: '100%',
-            sizeChanged: () => {
-                // 重新调整编辑器尺寸
-                this.resize();
-            },
-            onfull: (type) => {
-                switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：左→右 完全显示md编辑器
-                    this.shown = 'CODE';
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示预览框
-                    this.shown = 'PREVIEW';
-                    break;
-                }
-            },
+            sizeChanged: () => this.resize(),
             exitfull: (type) => {
-                this.shown = 'BOTH';
-                switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：左→右 退出侧边预览框，进入md编辑器
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：右→左 侧边预览框开始显示
+                if (type === 'NEGATIVE') {
                     this.updatePreview();
-                    break;
                 }
                 return true;
             }
@@ -84,7 +65,7 @@ class EditorMd extends EditorCode {
 
     addChangeListener() {
         this.editor.on('change', () => {
-            if (this.shown === 'CODE') {
+            if (this.drag.shown === 'NEGATIVE') {
                 return;
             }
             this.updatePreview();

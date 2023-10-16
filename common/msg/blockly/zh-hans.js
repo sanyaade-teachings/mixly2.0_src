@@ -62,6 +62,15 @@ ZhHans.MSG = {
     catSet: "集合",
     catData: "数据分析",
     catAlgorithm: "算法",
+    sub_algorithm_1: "送同学回家1",
+	sub_algorithm_2: "送同学回家2",
+	sub_algorithm_3: "贪心算法",
+	sub_algorithm_4: "汉诺塔",
+	sub_algorithm_5: "找书问题1",
+	sub_algorithm_6: "找书问题2",
+	sub_algorithm_7: "鸡兔同笼问题",
+	sub_algorithm_8: "分治算法",
+	sub_algorithm_9: "韩信点兵",
     catCv: "图像处理",
     catHardware: "硬件交互",
     catAI: "人工智能",
@@ -3555,11 +3564,13 @@ ZhHans.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_TOOLTIP = '利用摄像头读取SD卡中�
 ZhHans.MIXLY_AI_SENSOR_YOLO_RECOGNIZE_RESULT_TOOLTIP = '获取外部模型加载结果对象的相应信息';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PREPARE = '加载地图';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PREPARE2 = '加载施工后的地图';
-ZhHans.MIXLY_MIXPY_ALGORITHM_PREPARE3 = '加载路线图';
+ZhHans.MIXLY_MIXPY_ALGORITHM_PREPARE_2_1 = '加载路线图';
+ZhHans.MIXLY_MIXPY_ALGORITHM_PREPARE_2_2 = '加载路线图2';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ADD_SCHOOL = '将当前位置设为学校并加入路线';
 ZhHans.MIXLY_MIXPY_ALGORITHM_GET_CURRENT_LOCATION = '获取当前位置';
 ZhHans.MIXLY_MIXPY_ALGORITHM_CURRENT_SCHOOL = '当前位置是学校';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NOT_HOME = '没到小科家';
+ZhHans.MIXLY_MIXPY_ALGORITHM_NOT_SCHOOL = '没到学校';
 ZhHans.MIXLY_MIXPY_ALGORITHM_MOVE_RECENT = '移动到距离当前位置最近的岔路口';
 ZhHans.MIXLY_MIXPY_ALGORITHM_FIND_PATH = '查找从当前位置是否有路直接通向未送走的同学家，并且这条路之前没有尝试过';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NEW_PATH = '有这样的位置和路';
@@ -3573,7 +3584,7 @@ ZhHans.MIXLY_MIXPY_ALGORITHM_NO_LEFT = '所有同学都被送回家了';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH = '显示路线';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH2 = '显示路径';
 ZhHans.MIXLY_MIXPY_ALGORITHM_FIRST_BOOK = '取第一本书';
-ZhHans.MIXLY_MIXPY_ALGORITHM_NO_RING = '门铃没响';
+ZhHans.MIXLY_MIXPY_ALGORITHM_NO_RING = '门禁没响';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NEXT_BOOK = '取下一本书';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_BOOK = '输出书号';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NUMBER_ZERO = '计数器赋值为0';
@@ -3581,16 +3592,16 @@ ZhHans.MIXLY_MIXPY_ALGORITHM_NUMBER_ADD = '计数器+1';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_NUMBER = '输出计数器大小';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ALL_BOOKS = '二分法开始';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ALL_BOOKS2 = '顺序法开始';
-ZhHans.MIXLY_MIXPY_ALGORITHM_TWO_LEFT= '书架剩余书籍≥2本';
+ZhHans.MIXLY_MIXPY_ALGORITHM_TWO_LEFT= '书架上剩余两本及以上';
 ZhHans.MIXLY_MIXPY_ALGORITHM_DIVIDE_BOOKS = '把书堆分成两半';
 ZhHans.MIXLY_MIXPY_ALGORITHM_GET_HALF_BOOKS = '取出前一堆书';
-ZhHans.MIXLY_MIXPY_ALGORITHM_CHECK_HALF_BOOKS = '检查前一堆书是否会使得门铃响起';
-ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS = '去除前一堆书';
-ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS2 = '去除后一堆书';
-ZhHans.MIXLY_MIXPY_ALGORITHM_USE_SEQUENCE = '开始计算顺序查找法次数';
-ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_SEQUENCE = '输出顺序法查找次数';
-ZhHans.MIXLY_MIXPY_ALGORITHM_USE_DIVIDE = '开始计算二分查找次数';
-ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_DIVIDE = '输出二分查找次数';
+// ZhHans.MIXLY_MIXPY_ALGORITHM_CHECK_HALF_BOOKS = '检查前一堆书是否会使得门禁响起';
+ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS = '删除前一堆书';
+ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS2 = '删除后一堆书';
+ZhHans.MIXLY_MIXPY_ALGORITHM_USE_SEQUENCE = '顺序法开始';
+// ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_SEQUENCE = '输出顺序法查找次数';
+ZhHans.MIXLY_MIXPY_ALGORITHM_USE_DIVIDE = '二分法开始';
+// ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_DIVIDE = '输出二分查找次数';
 ZhHans.MPYTHON_DISPLAY_HVLINE_MESSAGE1 = 'OLED显示屏 %1 %2 %3 线 %4 x %5 y %6 长度 %7';
 ZhHans.MPYTHON_DISPLAY_SHAPE_RECT_MESSAGE1 = 'OLED显示屏 %1 %2 %3 矩形 %4 x %5 y %6 宽 %7 高 %8';
 ZhHans.mpython_display_line_MESSAGE1 ='OLED显示屏 %1 %2 线%3 x1 %4  y1 %5 到  x2 %6 y2 %7';

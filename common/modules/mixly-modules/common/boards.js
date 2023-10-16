@@ -226,6 +226,7 @@ Boards.changeTo = (boardName) => {
                     outObj.volume = "CIRCUITPY";
                 }
             }
+            outObj.filePath = MString.tpl(outObj.filePath, pathObj);
             break;
         case 'command':
             let pyToolsPath = "{srcPath}/pyTools/";

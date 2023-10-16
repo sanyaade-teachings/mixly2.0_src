@@ -261,21 +261,7 @@ Serial.uploadPorts = [];
  * @return void
  **/
 Serial.initPorts = (endFunc = (data) => {}) => {
-    SerialPort.list().then(ports => {
-        let newPorts = [];
-        for (let i = 0; i < ports.length; i++) {
-            let port = ports[i];
-            if (Env.currentPlatform === 'linux' && port.path.indexOf('ttyS') !== -1)
-                continue;
-            newPorts.push({
-                vendorId: port.vendorId,
-                productId: port.productId,
-                name: port.path
-            });
-        }
-        endFunc(newPorts);
-    }).catch(error => {
-        console.log(error);
+    if (Env.currentPlatform === 'linux') {
         child_process.exec('ls /dev/ttyACM* /dev/ttyUSB* /dev/tty*USB*', (err, stdout, stderr) => {
             let portsName = stdout.split('\n');
             let newPorts = [];
@@ -289,7 +275,23 @@ Serial.initPorts = (endFunc = (data) => {}) => {
                 }
             endFunc(newPorts);
         });
-    });
+    } else {
+        SerialPort.list().then(ports => {
+            let newPorts = [];
+            for (let i = 0; i < ports.length; i++) {
+                let port = ports[i];
+                newPorts.push({
+                    vendorId: port.vendorId,
+                    productId: port.productId,
+                    name: port.path
+                });
+            }
+            endFunc(newPorts);
+        }).catch(error => {
+            console.log(error);
+            endFunc([]);
+        });
+    }
 }
 
 /**

@@ -89,7 +89,7 @@
             "micropython:esp32c3:mixgo_baize": {
                 "binFile": [
                     {
-                        "offset": "0x1000",
+                        "offset": "0x0000",
                         "path": "./build/MixGo_BaiZe-0x0-V1.19.1-lib.bin"
                     },
                     {

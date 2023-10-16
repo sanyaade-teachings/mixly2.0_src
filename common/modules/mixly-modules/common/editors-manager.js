@@ -85,7 +85,7 @@ class EditorsManager {
             this.$editorContainer.empty();
             this.$editorContainer.append(editor.getContainer());
             if (this.editors[tabId].inited) {
-                editor.onMount && editor.onMount();
+                editor.onMounted && editor.onMounted();
             }
         });
 

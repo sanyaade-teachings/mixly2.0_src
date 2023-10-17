@@ -24,13 +24,13 @@ class ContextMenu {
         $.contextMenu({
             selector,
             build: ($trigger, e) => {
-                return { items: this.getMenu() }
+                return { items: this.#getMenu_() }
             },
             animation: { duration: 0, show: 'show', hide: 'hide' }
         });
     }
 
-    getMenu() {
+    #getMenu_() {
         const outputs = this.events.run('getMenu');
         if (!outputs.length) {
             return {};

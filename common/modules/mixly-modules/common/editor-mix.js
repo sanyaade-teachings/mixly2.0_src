@@ -2,6 +2,7 @@ goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('Blockly');
+goog.require('Mixly.Drag');
 goog.require('Mixly.DragV');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
@@ -19,6 +20,7 @@ const {
     EditorBlockly,
     EditorCode,
     EditorBase,
+    Drag,
     DragV,
     XML,
     Msg,
@@ -147,45 +149,42 @@ class EditorMix extends EditorBase {
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
-            startSize: '100%',
-            sizeChanged: () => {
-                // 重新调整编辑器尺寸
-                this.resize();
-            },
-            onfull: (type) => {
-                switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：左→右 完全显示块编辑器
-                    aceEditor.setReadOnly(true);
-                    codeEditor.hideCtrlBtns();
-                    blockEditor.editor.scrollCenter();
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：右→左 完全显示代码编辑器
-                    blocklyWorkspace.setVisible(false);
-                    aceEditor.setReadOnly(false);
-                    codeEditor.showCtrlBtns();
-                    if (this.py2BlockEditor && BOARD.pythonToBlockly) {
-                        this.py2BlockEditor.fromCode = true;
-                    }
-                    break;
-                }
-            },
-            exitfull: (type) => {
-                blocklyWorkspace.setVisible(true);
+            startSize: '100%'
+        });
+        const { events } = this.drag;
+        events.bind('sizeChanged', () => this.resize());
+        events.bind('onfull', (type) => {
+            switch(type) {
+            case Drag.Extend.POSITIVE: // 拖拽元素移动方向：左→右 完全显示块编辑器
                 aceEditor.setReadOnly(true);
                 codeEditor.hideCtrlBtns();
-                switch(type) {
-                case 'POSITIVE': // 拖拽元素移动方向：左→右 退出代码编辑器，进入块编辑器
-                    if (this.py2BlockEditor 
-                        && BOARD.pythonToBlockly 
-                        && typeof this.py2BlockEditor.updateBlock === 'function') {
-                        this.py2BlockEditor.updateBlock();
-                    }
-                    break;
-                case 'NEGATIVE': // 拖拽元素移动方向：右→左 侧边代码栏开始显示
-                    this.updateCode();
-                    break;
+                blockEditor.editor.scrollCenter();
+                break;
+            case Drag.Extend.NEGATIVE: // 拖拽元素移动方向：右→左 完全显示代码编辑器
+                blocklyWorkspace.setVisible(false);
+                aceEditor.setReadOnly(false);
+                codeEditor.showCtrlBtns();
+                if (this.py2BlockEditor && BOARD.pythonToBlockly) {
+                    this.py2BlockEditor.fromCode = true;
                 }
-                return true;
+                break;
+            }
+        });
+        events.bind('exitfull', (type) => {
+            blocklyWorkspace.setVisible(true);
+            aceEditor.setReadOnly(true);
+            codeEditor.hideCtrlBtns();
+            switch(type) {
+            case Drag.Extend.POSITIVE: // 拖拽元素移动方向：左→右 退出代码编辑器，进入块编辑器
+                if (this.py2BlockEditor 
+                    && BOARD.pythonToBlockly 
+                    && typeof this.py2BlockEditor.updateBlock === 'function') {
+                    this.py2BlockEditor.updateBlock();
+                }
+                break;
+            case Drag.Extend.NEGATIVE: // 拖拽元素移动方向：右→左 侧边代码栏开始显示
+                this.updateCode();
+                break;
             }
         });
     }

@@ -94,7 +94,8 @@
     {
         "path": "/common/drag.js",
         "require": [
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Events"
         ],
         "provide": [
             "Mixly.Drag",
@@ -175,6 +176,7 @@
             "markedKatex",
             "Mixly.XML",
             "Mixly.Env",
+            "Mixly.Drag",
             "Mixly.DragV",
             "Mixly.IdGenerator",
             "Mixly.EditorCode"
@@ -188,6 +190,7 @@
         "require": [
             "layui",
             "Blockly",
+            "Mixly.Drag",
             "Mixly.DragV",
             "Mixly.XML",
             "Mixly.Msg",
@@ -320,7 +323,8 @@
             "path",
             "$.jstree",
             "XScrollbar",
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Events"
         ],
         "provide": [
             "Mixly.FileTree"
@@ -762,6 +766,7 @@
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
+            "Mixly.Drag",
             "Mixly.DragH",
             "Mixly.DragV",
             "Mixly.IdGenerator",

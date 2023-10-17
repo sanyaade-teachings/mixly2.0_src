@@ -4,10 +4,12 @@ goog.require('path');
 goog.require('$.jstree');
 goog.require('XScrollbar');
 goog.require('Mixly.Config');
+goog.require('Mixly.Events');
 goog.provide('Mixly.FileTree');
 
 const {
-    Config
+    Config,
+    Events
 } = Mixly;
 
 const { USER } = Config;
@@ -54,6 +56,7 @@ class FileTree {
             // plugins: ['wholerow', 'search', 'truncate', 'state'],
             plugins: ['wholerow']
         });
+        this.events = new Events([ 'selectLeaf' ]);
         this.selected = null;
         this.#addEventsListener_();
     }
@@ -89,7 +92,7 @@ class FileTree {
                 return;
             }
             this.selected = selected[0].id;
-            this.onClickLeaf(selected);
+            this.events.run('selectLeaf', selected);
         });
     }
 
@@ -158,11 +161,6 @@ class FileTree {
     // 可覆盖
     getContent(inPath) {
 
-    }
-
-    // 可覆盖
-    onClickLeaf() {
-        
     }
 
     #getFileType_(suffix) {

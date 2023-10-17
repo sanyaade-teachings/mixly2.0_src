@@ -4,6 +4,7 @@ goog.require('marked');
 goog.require('markedKatex');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
+goog.require('Mixly.Drag');
 goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorCode');
@@ -12,6 +13,7 @@ goog.provide('Mixly.EditorMd');
 const {
     XML,
     Env,
+    Drag,
     DragV,
     IdGenerator,
     EditorCode
@@ -52,13 +54,13 @@ class EditorMd extends EditorCode {
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
-            startSize: '100%',
-            sizeChanged: () => this.resize(),
-            exitfull: (type) => {
-                if (type === 'NEGATIVE') {
-                    this.updatePreview();
-                }
-                return true;
+            startSize: '100%'
+        });
+        const { events } = this.drag;
+        events.bind('sizeChanged', () => this.resize());
+        events.bind('exitfull', (type) => {
+            if (type === Drag.Extend.NEGATIVE) {
+                this.updatePreview();
             }
         });
     }

@@ -67,7 +67,7 @@ class EditorMix extends EditorBase {
             code: {
                 isHtmlName: false,
                 name: Msg.Lang['打开代码编辑器'],
-                callback: (key, opt) => this.drag.full('NEGATIVE')
+                callback: (key, opt) => this.drag.full(Drag.Extend.NEGATIVE)
             }
         };
         this.codeContextMenu = {
@@ -76,7 +76,7 @@ class EditorMix extends EditorBase {
             block: {
                 isHtmlName: false,
                 name: Msg.Lang['退出代码编辑器'],
-                callback: (key, opt) => this.drag.exitfull('POSITIVE')
+                callback: (key, opt) => this.drag.exitfull(Drag.Extend.POSITIVE)
             }
         };
         $parentContainer.append(this.$content);
@@ -93,7 +93,7 @@ class EditorMix extends EditorBase {
         this.py2BlockEditorInit();
         const { events } = this.codeEditor.contextMenu;
         events.off('getMenu').bind('getMenu', () => {
-            if (this.drag.shown !== 'NEGATIVE') {
+            if (this.drag.shown !== Drag.Extend.NEGATIVE) {
                 return this.blocklyContextMenu;
             } else {
                 return this.codeContextMenu;
@@ -130,13 +130,14 @@ class EditorMix extends EditorBase {
     }
 
     updateCode() {
-        this.blockEditor.editor.fireChangeListener(this.codeChangeListener);
+        const { blockEditor, codeEditor } = this;
+        codeEditor.setValue(blockEditor.getValue(), false);
     }
 
     workspaceChangeEvent(event) {
         const { blockEditor, codeEditor } = this;
         if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)
-            || ['POSITIVE', 'NEGATIVE'].includes(this.drag.shown)) {
+            || this.drag.shown !== Drag.Extend.BOTH) {
            return;
         }
         codeEditor.setValue(blockEditor.getValue(), false);
@@ -155,12 +156,12 @@ class EditorMix extends EditorBase {
         events.bind('sizeChanged', () => this.resize());
         events.bind('onfull', (type) => {
             switch(type) {
-            case Drag.Extend.POSITIVE: // 拖拽元素移动方向：左→右 完全显示块编辑器
+            case Drag.Extend.POSITIVE:
                 aceEditor.setReadOnly(true);
                 codeEditor.hideCtrlBtns();
                 blockEditor.editor.scrollCenter();
                 break;
-            case Drag.Extend.NEGATIVE: // 拖拽元素移动方向：右→左 完全显示代码编辑器
+            case Drag.Extend.NEGATIVE:
                 blocklyWorkspace.setVisible(false);
                 aceEditor.setReadOnly(false);
                 codeEditor.showCtrlBtns();
@@ -175,29 +176,36 @@ class EditorMix extends EditorBase {
             aceEditor.setReadOnly(true);
             codeEditor.hideCtrlBtns();
             switch(type) {
-            case Drag.Extend.POSITIVE: // 拖拽元素移动方向：左→右 退出代码编辑器，进入块编辑器
+            case Drag.Extend.NEGATIVE:
                 if (this.py2BlockEditor 
                     && BOARD.pythonToBlockly 
                     && typeof this.py2BlockEditor.updateBlock === 'function') {
                     this.py2BlockEditor.updateBlock();
                 }
                 break;
-            case Drag.Extend.NEGATIVE: // 拖拽元素移动方向：右→左 侧边代码栏开始显示
+            case Drag.Extend.POSITIVE:
                 this.updateCode();
                 break;
             }
         });
     }
 
-    undo() {
+    getCurrentEditor() {
         const { blockEditor, codeEditor } = this;
-        const editor = this.drag.shown !== 'NEGATIVE'? blockEditor : codeEditor;
+        if (this.drag.shown === Drag.Extend.NEGATIVE) {
+            return codeEditor;
+        } else {
+            return blockEditor;
+        }
+    }
+
+    undo() {
+        const editor = this.getCurrentEditor();
         editor.undo();
     }
 
     redo() {
-        const { blockEditor, codeEditor } = this;
-        const editor = this.drag.shown !== 'NEGATIVE'? blockEditor : codeEditor;
+        const editor = this.getCurrentEditor();
         editor.redo();
     }
 

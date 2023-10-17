@@ -98,31 +98,22 @@ class Drag {
                 }
                 iT += 4;
                 if (full[0] && movement < 0 && iT < (minT - minT * 0.6)) { // 向上移动或向左移动
-                    this.changeTo('0%');
                     this.$first.css('display', 'none');
                     this.$last.css('display', this.lastDisplay);
+                    this.changeTo('0%');
                     this.events.run('onfull', Drag.Extend.NEGATIVE);
                 } else if (full[1] && movement > 0 && iT > (maxT + minT * 0.8)) { // 向下移动或向右移动
-                    this.changeTo('100%');
                     this.$first.css('display', this.firstDisplay);
                     this.$last.css('display', 'none');
+                    this.changeTo('100%');
                     this.events.run('onfull', Drag.Extend.POSITIVE);
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动
                     if (this.shown !== Drag.Extend.BOTH) {
                         this.$first.css('display', this.firstDisplay);
                         this.$last.css('display', this.lastDisplay);
+                        this.events.run('exitfull', this.shown);
                     }
-                    const prevStatus = this.shown;
                     this.changeTo(iT);
-                    if (this.prevStatus !== Drag.Extend.BOTH) {
-                        switch(this.prevStatus) {
-                        case Drag.Extend.POSITIVE:
-                            this.events.run('exitfull', Drag.Extend.NEGATIVE);
-                            break;
-                        case Drag.Extend.NEGATIVE:
-                            this.events.run('exitfull', Drag.Extend.POSITIVE);
-                        }
-                    }
                 }
                 this.events.run('ondragEnd');
                 return false;
@@ -175,10 +166,12 @@ class Drag {
     }
 
     full(type) {
-        if (this.shown === type || type === Drag.Extend.BOTH) {
+        if ([this.shown, Drag.Extend.BOTH].includes(type)) {
             return;
         }
-        this.exitfull();
+        if (this.shown !== Drag.Extend.BOTH) {
+            this.events.run('exitfull', this.shown);
+        }
         switch(type) {
         case Drag.Extend.NEGATIVE:
             this.changeTo('0%');
@@ -193,16 +186,9 @@ class Drag {
         if (this.shown === Drag.Extend.BOTH) {
             return;
         }
+        this.events.run('exitfull', this.shown);
         this.changeTo(this.prevSize[0]);
-        switch(this.shown) {
-        case Drag.Extend.NEGATIVE:
-            this.events.run('exitfull', Drag.Extend.POSITIVE);
-            break;
-        case Drag.Extend.POSITIVE:
-            this.events.run('exitfull', Drag.Extend.NEGATIVE);
-            break;
-        }
-        this.onfullMark = null;
+        
     }
 
     show(type) {
@@ -210,21 +196,6 @@ class Drag {
             return;
         }
         this.exitfull();
-        /*if (this.prevSize
-            && parseInt(this.prevSize[0]) < 100 
-            && parseInt(this.prevSize[0]) > 0) {
-            this.changeTo(this.prevSize[0]);
-        } else {
-            this.changeTo('50%');
-        }
-        switch(this.shown) {
-        case Drag.Extend.NEGATIVE:
-            this.events.run('exitfull', Drag.Extend.POSITIVE);
-            break;
-        case Drag.Extend.POSITIVE:
-            this.events.run('exitfull', Drag.Extend.NEGATIVE);
-            break;
-        }*/
     }
 
     hide(type) {

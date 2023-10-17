@@ -59,7 +59,7 @@ class EditorMd extends EditorCode {
         const { events } = this.drag;
         events.bind('sizeChanged', () => this.resize());
         events.bind('exitfull', (type) => {
-            if (type === Drag.Extend.NEGATIVE) {
+            if (type === Drag.Extend.POSITIVE) {
                 this.updatePreview();
             }
         });

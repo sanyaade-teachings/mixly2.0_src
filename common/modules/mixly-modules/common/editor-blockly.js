@@ -117,12 +117,6 @@ class EditorBlockly extends EditorBase {
         });
     }
 
-    updateCode() {
-        if (typeof this.codeChangeListener  === 'function') {
-            this.editor.fireChangeListener(this.codeChangeListener);
-        }
-    }
-
     undo() {
         this.editor.undo(0);
     }

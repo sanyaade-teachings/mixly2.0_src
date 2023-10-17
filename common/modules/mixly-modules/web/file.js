@@ -23,10 +23,6 @@ const { File } = Web;
 
 File.obj = null;
 
-/*File.open = () => {
-    
-}*/
-
 File.open = async () => {
     if (window.location.protocol === 'https:') {
         let filters = [];

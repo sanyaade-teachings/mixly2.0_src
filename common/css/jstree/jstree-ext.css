@@ -63,7 +63,7 @@ html[data-bs-theme=dark] .jstree-anchor {
 }
 
 .jstree-default-dark {
-    background-color: #181818;
+    background-color: #252526;
 }
 
 .jstree-default-dark .jstree-clicked {
@@ -71,5 +71,9 @@ html[data-bs-theme=dark] .jstree-anchor {
 }
 
 .jstree-default-dark .jstree-wholerow-clicked {
-    background: #37373b;
+    background: #474748;
+}
+
+.jstree-default .jstree-wholerow-clicked {
+    background: #e4e6f1;
 }

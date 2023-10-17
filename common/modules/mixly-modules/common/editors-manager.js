@@ -78,6 +78,10 @@ class EditorsManager {
         const { events } = this.editorTabs;
         // active Tab被改变时触发
         events.bind('activeTabChange', (event) => {
+            const prevEditor = this.getActiveEditor();
+            if (prevEditor) {
+                prevEditor.onUnmounted();
+            }
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             const editor = this.editors[tabId];
@@ -85,7 +89,7 @@ class EditorsManager {
             this.$editorContainer.empty();
             this.$editorContainer.append(editor.getContainer());
             if (this.editors[tabId].inited) {
-                editor.onMounted && editor.onMounted();
+                editor.onMounted();
             }
         });
 

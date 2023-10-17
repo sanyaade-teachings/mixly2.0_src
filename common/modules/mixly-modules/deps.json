@@ -217,7 +217,8 @@
             "List",
             "Mixly.XML",
             "Mixly.Env",
-            "Mixly.IdGenerator"
+            "Mixly.IdGenerator",
+            "Mixly.EditorBase"
         ],
         "provide": [
             "Mixly.EditorMixbook"

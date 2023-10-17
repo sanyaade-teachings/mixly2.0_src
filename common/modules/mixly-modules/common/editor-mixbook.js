@@ -12,21 +12,24 @@ goog.require('List');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.IdGenerator');
+goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorMixbook');
 
 const {
     XML,
     Env,
-    IdGenerator
+    IdGenerator,
+    EditorBase
 } = Mixly;
 
 
-class EditorMixbook {
+class EditorMixbook extends EditorBase {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mixbook.html'));
     }
 
     constructor(dom, extname='.mixbook') {
+        super();
         const $parentContainer = $(dom);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorMixbook.TEMPLATE, {

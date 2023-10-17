@@ -85,7 +85,7 @@ class EditorMix extends EditorBase {
         this.codeEditor.init();
         this.addDrag();
         const blocklyWorkspace = this.blockEditor.editor;
-        this.blockEditor.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
+        this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.workspaceChangeEvent(event);
         });
         this.py2BlockEditorInit();
@@ -125,6 +125,10 @@ class EditorMix extends EditorBase {
             const py2blockConverter = new PythonToBlocks();
             this.py2BlockEditor = new Py2blockEditor(py2blockConverter, this.codeEditor.editor);
         }
+    }
+
+    updateCode() {
+        this.blockEditor.editor.fireChangeListener(this.codeChangeListener);
     }
 
     workspaceChangeEvent(event) {
@@ -178,9 +182,9 @@ class EditorMix extends EditorBase {
                     }
                     break;
                 case 'NEGATIVE': // 拖拽元素移动方向：右→左 侧边代码栏开始显示
+                    this.updateCode();
                     break;
                 }
-                blockEditor.updateCode();
                 return true;
             }
         });
@@ -214,7 +218,188 @@ class EditorMix extends EditorBase {
     }
 
     updateValue(data, ext) {
+        try {
+            data = XML.convert(data, true);
+            data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
+                return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
+            });
+        } catch (error) {
+            console.log(error);
+        }
+        this.parseMix($(data), false, false, (message) => {
+            if (message) {
+                switch (message) {
+                case 'USE_CODE':
+                    // console.log('已从code标签中读取代码');
+                    break;
+                case 'USE_INCOMPLETE_BLOCKS':
+                    // console.log('一些块已被忽略');
+                    break;
+                }
+                this.blockEditor.scrollCenter();
+                Blockly.hideChaff();
+            } else {
+            }
+        });
+    }
 
+    parseMix(xml, useCode = false, useIncompleteBlocks = false, endFunc = (message) => {}) {
+        const mixDom = xml;
+        let xmlDom, configDom, codeDom;
+        for (let i = 0; mixDom[i]; i++) {
+            switch (mixDom[i].nodeName) {
+            case 'XML':
+                xmlDom = $(mixDom[i]);
+                break;
+            case 'CONFIG':
+                configDom = $(mixDom[i]);
+                break;
+            case 'CODE':
+                codeDom = $(mixDom[i]);
+                break;
+            }
+        }
+        if (!xmlDom && !codeDom) {
+            layer.msg(Msg.Lang['未找到有效数据'], { time: 1000 });
+            return;
+        }
+        for (let i of ['version', 'id', 'type', 'varid', 'name', 'x', 'y', 'items']) {
+            const nowDom = xmlDom.find('*[' + i + ']');
+            if (nowDom.length) {
+                for (let j = 0; nowDom[j]; j++) {
+                    let attr = $(nowDom[j]).attr(i);
+                    try {
+                        attr = attr.replaceAll('\\\"', '');
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    $(nowDom[j]).attr(i, attr);
+                }
+            }
+        }
+        let config, configStr = configDom && configDom.html();
+        try {
+            if (configStr)
+                config = JSON.parse(configStr);
+        } catch (error) {
+            console.log(error);
+        }
+        let boardName = xmlDom.attr('board') ?? '';
+        // Boards.setSelectedBoard(boardName, config);
+        let code = codeDom ? codeDom.html() : '';
+        if (Base64.isValid(code)) {
+            code = Base64.decode(code);
+        } else {
+            try {
+                code = util.unescape(code);
+                code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
+                    try {
+                        return decodeURIComponent(s.replace(/_/g, '%'));
+                    } catch (error) {
+                        return s;
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (useCode) {
+            if (!codeDom) {
+                layer.msg(Msg.Lang['未找到有效数据'], { time: 1000 });
+                return;
+            }
+            this.drag.full('NEGATIVE'); // 完全显示代码编辑器
+            this.codeEditor.setValue(code, -1);
+            this.blockEditor.clear();
+            endFunc('USE_CODE');
+            return;
+        }
+        const blockDom = mixDom.find('block');
+        const shadowDom = mixDom.find('shadow');
+        blockDom.removeAttr('id varid');
+        shadowDom.removeAttr('id varid');
+        let blocks = [];
+        let undefinedBlocks = [];
+        for (let i = 0; blockDom[i]; i++) {
+            const blockType = $(blockDom[i]).attr('type');
+            if (blockType && !blocks.includes(blockType))
+                blocks.push(blockType);
+        }
+        for (let i = 0; shadowDom[i]; i++) {
+            const shadowType = $(shadowDom[i]).attr('type');
+            if (shadowType && !blocks.includes(shadowType))
+                blocks.push(shadowType);
+        }
+        const blocklyGenerator = this.blockEditor.generator;
+        for (let i of blocks) {
+            if (Blockly.Blocks[i] && blocklyGenerator.forBlock[i]) {
+                continue;
+            }
+            undefinedBlocks.push(i);
+        }
+        if (undefinedBlocks.length) {
+            this.showParseMixErrorDialog(mixDom, undefinedBlocks, endFunc);
+            return;
+        }
+        this.blockEditor.editor.clear();
+        Blockly.Xml.domToWorkspace(xmlDom[0], this.blockEditor.editor);
+        this.blockEditor.editor.scrollCenter();
+        Blockly.hideChaff();
+        if (!useIncompleteBlocks && codeDom) {
+            const workspaceCode = MFile.getCode();
+            if (workspaceCode !== code) {
+                this.drag.full('NEGATIVE'); // 完全显示代码编辑器
+                this.codeEditor.setValue(code, -1);
+            }
+            endFunc();
+            return;
+        }
+        this.drag.full('POSITIVE'); // 完全显示块编辑器
+        if (useIncompleteBlocks)
+            endFunc('USE_INCOMPLETE_BLOCKS');
+        else
+            endFunc();
+    }
+
+    showParseMixErrorDialog(xml, undefinedBlocks, endFunc = () => {}) {
+        const { PARSE_MIX_ERROR_DIV } = XML.TEMPLATE_STR;
+        const renderStr = XML.render(PARSE_MIX_ERROR_DIV, {
+            text: undefinedBlocks.join('<br/>'),
+            btn1Name: Msg.Lang['取消'],
+            btn2Name: Msg.Lang['忽略未定义块'],
+            btn3Name: Msg.Lang['读取代码']
+        })
+        Mixly.LayerExt.open({
+            title: Msg.Lang['一些图形化模块尚未定义'],
+            id: 'parse-mix-error-layer',
+            area: ['50%', '250px'],
+            max: ['500px', '250px'],
+            min: ['350px', '100px'],
+            shade: Mixly.LayerExt.SHADE_ALL,
+            content: renderStr,
+            borderRadius: '5px',
+            success: (layero, index) => {
+                $('#parse-mix-error-layer').css('overflow', 'hidden');
+                form.render(null, 'parse-mix-error-filter');
+                layero.find('button').click((event) => {
+                    layer.close(index);
+                    const mId = $(event.currentTarget).attr('m-id');
+                    switch (mId) {
+                    case '0':
+                        break;
+                    case '1':
+                        for (let i of undefinedBlocks) {
+                            xml.find('*[type='+i+']').remove();
+                        }
+                        this.parseMix(xml, false, true, endFunc);
+                        break;
+                    case '2':
+                        this.parseMix(xml, true, false, endFunc);
+                        break;
+                    }
+                });
+            }
+        });
     }
 }
 

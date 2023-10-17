@@ -67,10 +67,18 @@ class FileTree {
             setTimeout(() => this.$fileTree.jstree(true).open_node(target));
         })
         .on('after_open.jstree', (e, data) => {
-            this.select(this.selected);
+            let node = document.getElementById(this.selected);
+            if (!node) {
+                return;
+            }
+            $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
         })
         .on('after_close.jstree', (e, data) => {
-            this.select(this.selected);
+            let node = document.getElementById(this.selected);
+            if (!node) {
+                return;
+            }
+            $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
         })
         .on("changed.jstree", (e, data) => {
             const selected = data.instance.get_selected(true);
@@ -103,10 +111,11 @@ class FileTree {
 
     deselect(inPath) {
         let node = document.getElementById(inPath);
-        if (node) {
+        if (!node) {
             return;
         }
         this.$fileTree.jstree(true).deselect_node(node, true);
+        $(node).children('.jstree-wholerow').removeClass('jstree-wholerow-clicked');
     }
 
     #getRoot_() {

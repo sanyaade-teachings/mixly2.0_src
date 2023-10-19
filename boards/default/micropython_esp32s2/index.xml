@@ -1815,7 +1815,7 @@
     </block>
     <block type="display_clear"></block>
   </category>
-  <category id="catME_GO" colour="100">
+  <category id="catME_GO" colour="100" m-hide='micropython:esp32s2:generic'>
     <block type="ce_go_led_bright">
       <value name="led">
         <shadow type="ce_go_light_number">
@@ -1908,7 +1908,7 @@
     <block type="ce_go_pin_light"></block>
     <block type="sensor_mixgome_eulerangles"></block>
   </category>
-  <category id="catCE_G6" colour="100">
+  <category id="catCE_G6" colour="100" m-hide='micropython:esp32s2:generic'>
     <block type="communicate_i2c_init">
       <value name="SUB">
         <shadow type="variables_get">

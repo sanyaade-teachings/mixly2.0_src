@@ -145,8 +145,6 @@ class EditorMix extends EditorBase {
 
     addDrag() {
         const { blockEditor, codeEditor } = this;
-        const blocklyWorkspace = blockEditor.editor;
-        const aceEditor = codeEditor.editor;
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
@@ -157,13 +155,11 @@ class EditorMix extends EditorBase {
         events.bind('onfull', (type) => {
             switch(type) {
             case Drag.Extend.POSITIVE:
-                aceEditor.setReadOnly(true);
-                codeEditor.hideCtrlBtns();
-                blockEditor.editor.scrollCenter();
+                blockEditor.scrollCenter();
                 break;
             case Drag.Extend.NEGATIVE:
-                blocklyWorkspace.setVisible(false);
-                aceEditor.setReadOnly(false);
+                blockEditor.setVisible(false);
+                codeEditor.setReadOnly(false);
                 codeEditor.showCtrlBtns();
                 if (this.py2BlockEditor && BOARD.pythonToBlockly) {
                     this.py2BlockEditor.fromCode = true;
@@ -172,11 +168,11 @@ class EditorMix extends EditorBase {
             }
         });
         events.bind('exitfull', (type) => {
-            blocklyWorkspace.setVisible(true);
-            aceEditor.setReadOnly(true);
-            codeEditor.hideCtrlBtns();
             switch(type) {
             case Drag.Extend.NEGATIVE:
+                blockEditor.setVisible(true);
+                codeEditor.setReadOnly(true);
+                codeEditor.hideCtrlBtns();
                 if (this.py2BlockEditor 
                     && BOARD.pythonToBlockly 
                     && typeof this.py2BlockEditor.updateBlock === 'function') {

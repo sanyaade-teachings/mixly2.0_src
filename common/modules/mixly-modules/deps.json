@@ -228,6 +228,18 @@
         ]
     },
     {
+        "path": "/common/editor-monaco.js",
+        "require": [
+            "monaco",
+            "Mixly.XML",
+            "Mixly.Msg",
+            "Mixly.EditorBase"
+        ],
+        "provide": [
+            "Mixly.EditorMonaco"
+        ]
+    },
+    {
         "path": "/common/editor-unknown.js",
         "require": [
             "path",

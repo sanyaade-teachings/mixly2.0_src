@@ -228,8 +228,8 @@
         "provide": ["List"],
         "require": ["EditorJS"]
     }, {
-        "path": "modules/mixly-modules/web/serialport.js",
-        "provide": ["WebSerialPort"],
+        "path": "modules/web-modules/monaco-editor/main.bundle.js",
+        "provide": ["monaco"],
         "require": []
     }, {
         "path": "msg/blockly/lang.js",

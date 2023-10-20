@@ -34,6 +34,14 @@ class EditorBase {
     updateValue(data, ext) {
         
     }
+
+    undo() {
+        
+    }
+
+    redo() {
+
+    }
 }
 
 Mixly.EditorBase = EditorBase;

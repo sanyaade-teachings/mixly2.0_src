@@ -192,12 +192,17 @@ html[data-bs-theme=dark] .markdown-body hr::after {
 }
 
 html[data-bs-theme=dark] .markdown-body table {
-  border-spacing: 0;
+  /*border-spacing: 0;
   border-collapse: collapse;
   display: block;
   width: max-content;
   max-width: 100%;
+  overflow: auto;*/
+  display: table;
+  width: 100%;
   overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
 }
 
 html[data-bs-theme=dark] .markdown-body td,
@@ -1004,4 +1009,8 @@ html[data-bs-theme=dark] .markdown-body .contains-task-list:focus-within .task-l
 
 html[data-bs-theme=dark] .markdown-body ::-webkit-calendar-picker-indicator {
   filter: invert(50%);
+}
+
+html[data-bs-theme=dark] .markdown-body li {
+  list-style: unset;
 }

@@ -260,6 +260,10 @@ class EditorAce extends EditorBase {
     	this.editor.resize();
     }
 
+    setReadOnly(status) {
+        this.editor.setReadOnly(status);
+    }
+
     cut() {
         const { selection, session } = this.editor;
         const cutLine = selection.isEmpty();

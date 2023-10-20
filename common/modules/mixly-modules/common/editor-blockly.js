@@ -125,6 +125,14 @@ class EditorBlockly extends EditorBase {
         this.editor.undo(1);
     }
 
+    setVisible(status) {
+        this.editor.setVisible(status);
+    }
+
+    scrollCenter() {
+        this.editor.scrollCenter();
+    }
+
     resize() {
         // 重新调整编辑器尺寸
         this.editor.hideChaff(false);

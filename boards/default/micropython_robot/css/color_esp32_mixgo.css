@@ -304,6 +304,14 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background:url('../../../../common/media/mark/mixio2.png') no-repeat;
     background-size: 100% auto;
 }
+#catAIOT.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/ai.png') no-repeat;
+    background-size: 100% auto;
+}
+#catAIOT.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/ai2.png') no-repeat;
+    background-size: 100% auto;
+}
 #catweather.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
     background:url('../../../../common/media/mark/weather.png') no-repeat;
     background-size: 100% auto;

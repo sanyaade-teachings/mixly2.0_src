@@ -159,11 +159,19 @@ Blockly.Python.forBlock['sensor_mixgo_pin_near_double'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_mixgo_pin_near_triple'] = function(){
+Blockly.Python.forBlock['sensor_yuankongzi_pin_near'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var direction = this.getFieldValue('direction');
-    Blockly.Python.definitions_['import_'+version+'_'+direction] = 'from '+version+' import '+direction;
-    var code = direction +'.ps_nl()';
+    Blockly.Python.definitions_['import_'+version+'_'+direction] = 'from '+version+' import onboard_ltr553als_'+direction;
+    var code = 'onboard_ltr553als_'+direction +'.ps_nl()';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['sensor_yuankongzi_LTR308'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var direction = this.getFieldValue('direction');
+    Blockly.Python.definitions_['import_'+version+'_'+direction] = 'from '+version+' import onboard_ltr553als_'+direction;
+    var code = 'onboard_ltr553als_'+direction +'.als_vis()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

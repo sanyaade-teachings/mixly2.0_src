@@ -2925,7 +2925,7 @@
       </block>
       <block type="espnow_radio_rec">
       </block>
-      <block type="espnow_radio_recv">
+      <block type="espnow_radio_recv_new">
         <statement name="DO">
           <block type="system_print">
             <value name="VAR">
@@ -2934,7 +2934,7 @@
           </block>
         </statement>
       </block>
-      <block type="espnow_radio_recv_certain_msg"></block>
+      <block type="espnow_radio_recv_certain_msg_new"></block>
     </category>
       <category id="catOneWire" colour="140">
       <block type="communicate_ow_init">

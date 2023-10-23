@@ -22,7 +22,6 @@ class ESPNow(espnow.ESPNow):
         self._nic.active(True)
         self._nic.config(hidden=True,channel=self._channel,txpower=txpower)
 
-        
     def send(self,peer,msg):
         '''Send data after error reporting and effective processing'''    
         try:
@@ -60,12 +59,19 @@ class ESPNow(espnow.ESPNow):
     def _cb_handle(self, event_code,data):
         '''Callback processing conversion'''
         if self._on_handle:
-            self._on_handle(hexlify(data[0]).decode(),data[1].decode())
+            for func in self._on_handle:
+                cmd = func.__name__.rfind('__')
+                if cmd != -1:
+                    cmd=func.__name__[cmd+2:]
+                    if cmd == str(data[1].decode()):
+                        func(hexlify(data[0]).decode(),data[1].decode())
+                else:
+                    func(hexlify(data[0]).decode(),data[1].decode())
 
-    def recv_cb(self,recv_cb):
+    def recv_cb(self, recv_cbs):
         '''Receive callback'''
-        self._on_handle = recv_cb
-        if recv_cb:
+        self._on_handle = recv_cbs
+        if recv_cbs:
             self.irq(self._cb_handle)
 
     def info(self):

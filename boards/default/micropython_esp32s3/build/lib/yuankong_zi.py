@@ -121,6 +121,7 @@ class Button(KEYSensor):
 	def __init__(self, pin):
 		self.pin = pin
 		self.key = Pin(pin, Pin.IN)
+		self.flag = True
 
 	def _value(self):
 		return not self.key.value()

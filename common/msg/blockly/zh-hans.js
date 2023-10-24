@@ -62,7 +62,7 @@ ZhHans.MSG = {
     catSet: "集合",
     catData: "数据分析",
     catAlgorithm: "算法",
-    sub_algorithm_1: "送同学回家1",
+	sub_algorithm_1: "送同学回家1",
 	sub_algorithm_2: "送同学回家2",
 	sub_algorithm_3: "贪心算法",
 	sub_algorithm_4: "汉诺塔",
@@ -71,6 +71,7 @@ ZhHans.MSG = {
 	sub_algorithm_7: "鸡兔同笼问题",
 	sub_algorithm_8: "分治算法",
 	sub_algorithm_9: "韩信点兵",
+	catSprite: "角色",
     catCv: "图像处理",
     catHardware: "硬件交互",
     catAI: "人工智能",
@@ -141,7 +142,6 @@ ZhHans.MSG = {
     newfile_yes: "残忍清除",
     newfile_no: "我再想想",
     burn: "初始化固件",
-    submit:"保存到平台",
     upload_to_board: "上传到板卡",
     statusbar: "状态栏",
     operate: "操作",
@@ -2286,7 +2286,7 @@ ZhHans.MIXLY_PYTHON_TEXT_JOIN_SEQ_SEQ = '将序列';
 ZhHans.MIXLY_PYTHON_TEXT_JOIN_SEQ_GET_STR = '连接成一个字符串';
 ZhHans.MIXLY_PYTHON_TEXT_JOIN_SEQ_TOOLTIP = '第二个参数必须是可迭代的且迭代的每一项类型都是字符串；结果返回一个字符串';
 ZhHans.MIXLY_PYTHON_TURTLE_EXITONCLICK = '设置点击屏幕结束海龟画图';
-ZhHans.MIXLY_MICROPYTHON_SOCKET_CONNECT_TO_ADDRESS = '连接到域名/IP';
+ZhHans.MIXLY_MICROPYTHON_SOCKET_CONNECT_TO_ADDRESS = '连接到地址';
 ZhHans.MIXLY_ESP32_NETWORK_SOCKET_CONNECT_TOOLTIP = "将套接字连接到网络地址";
 ZhHans.MIXLY_NETWORK_WIFI_IS_ACTIVE = "获取激活状态";
 ZhHans.MIXLY_NETWORK_WIFI_IS_ACTIVE_TOOLTIP = "获取指定网络的激活状态";
@@ -3582,7 +3582,7 @@ ZhHans.MIXLY_MIXPY_ALGORITHM_DEL_PATH = '将当前位置从路线中删除';
 ZhHans.MIXLY_MIXPY_ALGORITHM_RETURN_PATH = '回退到上一个位置';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NO_LEFT = '所有同学都被送回家了';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH = '显示路线';
-ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH2 = '显示路径';
+ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH2 = '显示路线';
 ZhHans.MIXLY_MIXPY_ALGORITHM_FIRST_BOOK = '取第一本书';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NO_RING = '门禁没响';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NEXT_BOOK = '取下一本书';
@@ -3592,12 +3592,12 @@ ZhHans.MIXLY_MIXPY_ALGORITHM_NUMBER_ADD = '计数器+1';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_NUMBER = '输出计数器大小';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ALL_BOOKS = '二分法开始';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ALL_BOOKS2 = '顺序法开始';
-ZhHans.MIXLY_MIXPY_ALGORITHM_TWO_LEFT= '书架上剩余两本及以上';
+ZhHans.MIXLY_MIXPY_ALGORITHM_TWO_LEFT= '书架剩余书籍≥2本';
 ZhHans.MIXLY_MIXPY_ALGORITHM_DIVIDE_BOOKS = '把书堆分成两半';
 ZhHans.MIXLY_MIXPY_ALGORITHM_GET_HALF_BOOKS = '取出前一堆书';
 // ZhHans.MIXLY_MIXPY_ALGORITHM_CHECK_HALF_BOOKS = '检查前一堆书是否会使得门禁响起';
-ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS = '删除前一堆书';
-ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS2 = '删除后一堆书';
+ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS = '去除前一堆书';
+ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS2 = '去除后一堆书';
 ZhHans.MIXLY_MIXPY_ALGORITHM_USE_SEQUENCE = '顺序法开始';
 // ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_SEQUENCE = '输出顺序法查找次数';
 ZhHans.MIXLY_MIXPY_ALGORITHM_USE_DIVIDE = '二分法开始';
@@ -3676,23 +3676,5 @@ ZhHans.ANALOG = '模拟';
 ZhHans.BITBOT = '元控•白泽';
 ZhHans.MIXBOT = '超霸大师';
 ZhHans.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = '仅电池供电下，将关机断电。USB供电下，只是关闭电机输出。';
-ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_RECT_MESSAGE0 = '绘制 %1 矩形 %2 x %3 y %4 宽 %5 高 %6 颜色 %7';
-ZhHans.ONBOARD_TFT_DISPLAY_HVLINE_MESSAGE0 = '绘制 %1 线 %2 x %3 y %4 长度%5 颜色 %6';
-ZhHans.mpython_display_line_MESSAGE0 ='绘制 线条%1 x1%2 y1 %3 到 x2 %4 y2 %5 颜色 %6';
-ZhHans.MIXLY_TOUCH_SLIDE = "滑动触摸";
-ZhHans.MIXLY_TOUCH_SLIDE_TOOLTIP = "触摸值，默认接近0，往IO3方向触摸滑动值变大，往IO4方向触摸滑动值变小。";
-ZhHans.MIXLY_EXTERN_SONAR = "超声波传感器";
-ZhHans.MIXLY_EXTERN_INDICATOR_LIGHT = "指示灯";
-ZhHans.MIXLY_SCREEN_FILL = "屏幕填充";
-ZhHans.MIXLY_SDCARD_MOUNT = "挂载到目录";
-ZhHans.MIXLY_STRENGTH = "强度";
-ZhHans.MIXLY_INIT_CLOCK = "初始化时钟";
-ZhHans.MIXLY_CENTER_POS = "中心坐标";
-ZhHans.GET_RTCTIME = "读取RTC时间";
-ZhHans.SET_TIME = "设置时间";
-ZhHans.DRAW_CLOCK = "绘制时钟";
-ZhHans.CLEAR_CLOCK = "清除指针";
-ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '绘制 %1 圆形 %2 x %3 y %4 半径 %5 颜色 %6';
-ZhHans.RETURN_SUCCESS_OR_NOT = "返回是否成功";
 
 })();

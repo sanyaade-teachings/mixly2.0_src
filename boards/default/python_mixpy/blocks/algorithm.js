@@ -375,6 +375,26 @@ Blockly.Blocks['algorithm_print_book2'] = {
 
 // sub_algorithm_6
 
+Blockly.Blocks.algorithm_book_scale = {
+    init: function () {
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_LEFT)
+            .appendField("设置待查书总数 N=")
+            .appendField(new Blockly.FieldDropdown([
+                ["5", "5"],
+                ["10", "10"],
+                ["20", "20"],
+                ["50", "50"]
+            ]), "NUM");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+        this.setTooltip('');
+        this.setHelpUrl('');
+    }
+};
+
 Blockly.Blocks['algorithm_number_zero'] = {
   init: function() {
     this.setColour(Blockly.Msg['ALGORITHM_HUE']);
@@ -400,26 +420,6 @@ Blockly.Blocks['algorithm_print_number'] = {
     this.setColour(Blockly.Msg['ALGORITHM_HUE']);
     this.appendDummyInput()
     .appendField(Blockly.Msg.MIXLY_MIXPY_ALGORITHM_PRINT_NUMBER);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);    
-  }
-};
-
-Blockly.Blocks['algorithm_use_divide'] = {
-  init: function() {
-    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
-    this.appendDummyInput()
-    .appendField(Blockly.Msg.MIXLY_MIXPY_ALGORITHM_USE_DIVIDE);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);    
-  }
-};
-
-Blockly.Blocks['algorithm_use_sequence'] = {
-  init: function() {
-    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
-    this.appendDummyInput()
-    .appendField(Blockly.Msg.MIXLY_MIXPY_ALGORITHM_USE_SEQUENCE);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);    
   }

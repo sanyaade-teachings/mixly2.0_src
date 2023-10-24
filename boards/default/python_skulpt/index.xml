@@ -2189,7 +2189,7 @@
     -->
 
   </category>
-      <category id="catAlgorithm" colour="#526FC3">
+          <category id="catAlgorithm" colour="#526FC3">
 		<category id="sub_algorithm_1">
 			<block type="algorithm_prepare"></block>
 			<block type="algorithm_add_school"></block>
@@ -2238,6 +2238,15 @@
 			    </shadow>
 			  </value>
 			</block>
+			<block type="variables_get">
+				<field name="VAR">A</field>
+			</block>
+			<block type="variables_get">
+				<field name="VAR">B</field>
+			</block>
+			<block type="variables_get">
+				<field name="VAR">C</field>
+			</block>
 		</category>
 		<category id="sub_algorithm_5">
 			<block type="algorithm_all_books"></block>
@@ -2256,29 +2265,20 @@
 			<block type="algorithm_print_book2"></block>    
 		</category>
 		<category id="sub_algorithm_6">
-		
-			<block type="algorithm_use_divide"></block>
-			<block type="algorithm_use_sequence"></block>
-			<!-- <block type="algorithm_get_book_num"></block> -->
-			
-			<block type="algorithm_first_book"></block>
-			<!-- <block type="algorithm_no_ring"></block> -->
+			<block type="algorithm_book_scale"></block>
+<!-- 		<block type="algorithm_first_book"></block>
 			<block type="algorithm_no_ring2"></block>
 			<block type="algorithm_next_book"></block>
 			
 			<block type="algorithm_two_left"></block>
 			<block type="algorithm_divide_books"></block>
 			<block type="algorithm_get_half_books"></block>
-			<!-- <block type="algorithm_check_half_books"></block> -->
 			<block type="algorithm_delete_books"></block>
 			<block type="algorithm_delete_books2"></block>
-			<!-- <block type="algorithm_print_book"></block> -->
-			<block type="algorithm_print_book2"></block>
+			<block type="algorithm_print_book2"></block> -->
 			<block type="algorithm_number_zero"></block>
 			<block type="algorithm_number_add"></block>
 			<block type="algorithm_print_number"></block>
-<!-- 			<block type="algorithm_print_sequence"></block>
-			<block type="algorithm_print_divide"></block> -->
 		</category>
 		<category id="sub_algorithm_7">
 			<block type="algorithm_init_jttl"></block>

@@ -381,8 +381,8 @@ Blockly.Python.forBlock['display_tm1650_set_brightness'] = function () {
 
 Blockly.Python.forBlock['tft_use_spi_init'] = function(){
     Blockly.Python.definitions_['import_st7789'] = 'import st7789';
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[1]
-    if(version=='esp32'){var addr = '0x700000'}
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if(version=='mixgo_pe'||version=='mpython'){var addr = '0x700000'}
       else{var addr = '0x3A0000'}
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var sv = Blockly.Python.valueToCode(this, 'SPISUB', Blockly.Python.ORDER_ATOMIC);
@@ -529,7 +529,7 @@ Blockly.Python.forBlock['display_oled_use_i2c_init'] = function () {
     var addr = Blockly.Python.valueToCode(this, 'ADDR', Blockly.Python.ORDER_ATOMIC);
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var font = '';
-    if (['mpython','mixgope'].indexOf(version)>=0){
+    if (['mpython','mixgo_pe'].indexOf(version)>=0){
       font = '0x700000'
     }
     else {

@@ -335,7 +335,7 @@ for i in range(0, _n, 1):
     _HanoiBlock[i].setScale(25, 30*i+30)
     _Hanoi[0].insert(0, _HanoiBlock[i])
 _steptext = sprite.Text('步数：0', 30, 30)
-_steps = 0
+_steps = {'steps' : 0}
 time.sleep(1)\n`
   }
   return code;
@@ -358,8 +358,8 @@ Blockly.Python.forBlock['hanoi_move'] = function() {
     _HanoiBlockMoved.slideTo(${toNum}*200+200, 180, 0.5)
     _HanoiBlockMoved.slideTo(${toNum}*200+200, 400-len(_Hanoi[${toNum}])*27, 0.2)
     _Hanoi[${toNum}].append(_HanoiBlockMoved)
-    _steps += 1
-    _steptext.changeText('步数：'+str(_steps))
+    _steps['steps'] += 1
+    _steptext.changeText('步数：'+str(_steps['steps']))
 else :
     print('非法移动！程序有误！')
     exit()
@@ -377,7 +377,7 @@ Blockly.Python.forBlock['algorithm_all_books_sequence'] = function() {
     ring=[0,0,0,0,0,0,0,0,0,0]
     n=5
     ring[5]=1
-    name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']\n
+    name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
     Books = []
     for i in range(1, 11, 1):
         Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
@@ -393,7 +393,9 @@ Blockly.Python.forBlock['algorithm_all_books'] = function() {
   var code = `if 'ring' not in globals():
     sprite.clearAllSprites()
     ring=[0,0,0,0,0,0,0,0,0,0]
-    name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']\n
+    n=5
+    ring[5]=1
+    name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
     Books = []
     for i in range(1, 11, 1):
         Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))

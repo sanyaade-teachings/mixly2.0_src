@@ -529,7 +529,7 @@ Blockly.Python.forBlock['display_oled_use_i2c_init'] = function () {
     var addr = Blockly.Python.valueToCode(this, 'ADDR', Blockly.Python.ORDER_ATOMIC);
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var font = '';
-    if (['mpython','mixgope'].indexOf(version)>=0){
+    if (['mpython','mixgo_pe'].indexOf(version)>=0){
       font = '0x700000'
     }
     else {

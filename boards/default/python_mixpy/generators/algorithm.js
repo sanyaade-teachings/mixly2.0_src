@@ -394,11 +394,13 @@ Blockly.Python.forBlock['algorithm_all_books'] = function() {
     sprite.clearAllSprites()
     ring=[0,0,0,0,0,0,0,0,0,0]
     n=5
-    ring[5]=1
     name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
     Books = []
     for i in range(1, 11, 1):
         Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
+else:
+    n=len(ring)-1
+ring[n]=1
 left = 0
 right = len(ring)-1
 time.sleep(1)\n`;

@@ -66,7 +66,7 @@
             "micropython:esp32s3:yuankong_zi": {
                 "binFile": [
                     {
-                        "offset": "0x1000",
+                        "offset": "0x0000",
                         "path": "./build/YuanKong_ZI_S3-v1.21.0.bin"
                     }, {
                         "offset": "0x3A0000",
@@ -77,7 +77,7 @@
             "micropython:esp32s3:generic": {
                 "binFile": [
                     {
-                        "offset": "0x1000",
+                        "offset": "0x0000",
                         "path": "./build/YuanKong_ZI_S3-v1.21.0.bin"
                     }
                 ]

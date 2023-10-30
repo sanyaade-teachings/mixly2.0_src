@@ -55,7 +55,7 @@ Blockly.Arduino.forBlock['serial_available'] = function () {
     } else {
         Blockly.Arduino.setups_['setup_serial_' + serial_select] = serial_select + '.begin(' + profile.default.serial + ');';
     }
-    var code = serial_select + ".available() > 0";
+    var code = serial_select + ".available()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

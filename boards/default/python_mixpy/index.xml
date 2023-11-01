@@ -84,8 +84,9 @@
 <script src="converters/serial.js" type="application/javascript"></script>
 <script src="../../../common/js/python_to_blockly.js" type="application/javascript"></script>
 <script src="../../../common/js/mixpyProject.js" type="application/javascript"></script>
-<script src="../../../common/js/skulpt/dist/skulpt.min.js" type="application/javascript"></script>
-<script src="../../../common/js/skulpt/dist/skulpt-stdlib.js" type="application/javascript"></script>
+<script src="../../../common/js/skulpt/dist/new/skulpt.min.js" type="text/javascript"></script>
+<script src="../../../common/js/skulpt/dist/new/skulpt-stdlib.js" type="text/javascript"></script>
+<script src="./others/pyengine.js" type="application/javascript"></script>
 <link rel="stylesheet" type="text/css" href="css/color_mixpy_python_advance.css" />
 <xml>
   <category name="" id="catInOut" colour="20">

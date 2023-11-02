@@ -12,6 +12,7 @@ goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.require('Mixly.LevelSelector');
 goog.require('Mixly.FooterBar');
+goog.require('Mixly.UserEvents');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
 goog.require('Mixly.Electron.FooterLayerExample');
@@ -43,6 +44,7 @@ const {
     Msg,
     LevelSelector,
     FooterBar,
+    UserEvents,
     Electron = {},
     Web = {},
     WebSocket = {}
@@ -132,6 +134,9 @@ window.addEventListener('load', () => {
     LazyLoad.js(scrpitPathList, () => {
         Editor.init();
         Boards.init();
+        if (window.frames.length != parent.frames.length) {
+            window.userEvents = new UserEvents(Editor.blockEditor);
+        }
         if (Env.hasSocketServer) {
             Socket.init();
         }

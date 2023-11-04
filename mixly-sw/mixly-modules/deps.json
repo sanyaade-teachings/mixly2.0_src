@@ -86,6 +86,7 @@
             "ace",
             "ace.ExtLanguageTools",
             "layui",
+            "layui.loading",
             "store",
             "Mixly.XML",
             "Mixly.LayerExt",

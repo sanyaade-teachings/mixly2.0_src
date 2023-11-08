@@ -44,6 +44,12 @@ class EditorCode extends EditorAce {
             this.editor.setTheme('ace/theme/' + 
                 (USER.theme === 'dark' ? 'dracula' : 'xcode'));
             break;
+        case 'javascript':
+            session.setTabSize(4);
+            session.setMode('ace/mode/javascript');
+            this.editor.setTheme('ace/theme/' + 
+                (USER.theme === 'dark' ? 'dracula' : 'xcode'));
+            break;
         case 'c/c++':
         default:
             session.setTabSize(2);

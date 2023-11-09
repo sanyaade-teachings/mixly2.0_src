@@ -66,7 +66,7 @@ ZhHans.MSG = {
 	sub_algorithm_2: "送同学回家2",
 	sub_algorithm_3: "贪心算法",
 	sub_algorithm_4: "汉诺塔",
-	sub_algorithm_5: "找书问题1",
+	sub_algorithm_5: "找书问题",
 	sub_algorithm_6: "韩信点兵",
 	sub_algorithm_7: "鸡兔同笼问题",
 	sub_algorithm_8: "分治算法",

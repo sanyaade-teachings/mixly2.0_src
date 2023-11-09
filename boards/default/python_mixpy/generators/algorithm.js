@@ -491,7 +491,7 @@ res = right\n`
 
 Blockly.Python.forBlock['algorithm_print_book2'] = function() {  
   var code = `Books[res].filterBrighter()
-print('未消磁的书籍是第'+str(res+1)+'本《'+name[(res-1)%10]+'》。')\n`;
+print('未消磁的书籍是第'+str(res+1)+'本《'+name[res%10]+'》。')\n`;
   code += `if res!=n:
     print('答案错误！请检查程序！')\n`
   return code;

@@ -2638,6 +2638,7 @@ css-->
         </statement>
       </block>
       <block type="ir_send_nec">
+        <field name="PIN">3</field>
         <value name="data">
           <shadow type="math_number">
             <field name="NUM">0x89ABCDEF</field>
@@ -2660,6 +2661,7 @@ css-->
         </value>
       </block>
       <block type="ir_send_raw">
+        <field name="PIN">3</field>
         <value name="length">
           <shadow type="math_number">
             <field name="NUM">3</field>

@@ -41,7 +41,7 @@ Blockly.Blocks.ir_send_nec = {
             .appendField(Blockly.Msg.MIXLY_IR_SEND_NEC1)
             .appendField(new Blockly.FieldDropdown(TYPE), 'TYPE')
             .appendField(Blockly.Msg.MIXLY_IR_SEND_NEC2)
-            .appendField(new Blockly.FieldDropdown([["3", "3"]]), "PIN");
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
         this.appendValueInput('data')
             .setCheck(Number)
             .appendField(' ' + Blockly.Msg.MIXLY_DATA);
@@ -88,7 +88,7 @@ Blockly.Blocks.ir_send_raw = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_IR_SEND_RAW)
-            .appendField(new Blockly.FieldDropdown([["3", "3"]]), "PIN");
+            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
         this.appendDummyInput("")
             .appendField(' ' + Blockly.Msg.MIXLY_I2C_SLAVE_WRITE_ARRAY_ARRAYNAME)
             .appendField(new Blockly.FieldTextInput('0,0,0'), 'TEXT');

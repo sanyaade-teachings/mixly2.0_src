@@ -80,20 +80,13 @@ Blockly.Arduino.forBlock['ir_recv_enable'] = function () {
 }
 
 Blockly.Arduino.forBlock['ir_send_nec'] = function () {
+    var pin = this.getFieldValue('PIN');
     Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
-    Blockly.Arduino.definitions_['var_declare_ir_send'] = 'IRsend irsend;\n';
+    Blockly.Arduino.definitions_['var_declare_ir_send_' + pin] = `IRsend irsend_${pin}(${pin});`;
     var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var bits = Blockly.Arduino.valueToCode(this, 'bits', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var type = this.getFieldValue('TYPE');
-    var code = 'irsend.send' + type + '(' + data + ',' + bits + ');\n';
-    /*
-      for (var name in Blockly.Arduino.definitions_) {
-          var def = Blockly.Arduino.definitions_[name];
-          if (def.match(/^IRrecv irrecv_/)) {
-              var tmp=def.substring(7,def.indexOf('('));
-              code=code+tmp+'.enableIRIn();\n';
-          }
-      }*/
+    var code = `irsend_${pin}.send${type}(${data},${bits});\n`;
     return code;
 }
 
@@ -136,13 +129,14 @@ Blockly.Arduino.forBlock['ir_recv_raw'] = function () {
 };
 
 Blockly.Arduino.forBlock['ir_send_raw'] = function () {
+    var pin = this.getFieldValue('PIN');
     Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
-    Blockly.Arduino.definitions_['var_declare_ir_send'] = 'IRsend irsend;\n';
+    Blockly.Arduino.definitions_['var_declare_ir_send_' + pin] = `IRsend irsend_${pin}(${pin});`;
     var length = Blockly.Arduino.valueToCode(this, 'length', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var freq = Blockly.Arduino.valueToCode(this, 'freq', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var text = this.getFieldValue('TEXT');
     var code = 'unsigned int buf_raw[' + length + ']={' + text + '};\n'
-    code = code + 'irsend.sendRaw(buf_raw,' + length + ',' + freq + ');\n';
+    code = code + `irsend_${pin}.sendRaw(buf_raw,${length},${freq});\n`;
     return code;
 }
 

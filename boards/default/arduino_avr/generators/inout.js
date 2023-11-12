@@ -146,10 +146,10 @@ Blockly.Arduino.forBlock['controls_detachInterrupt'] = function () {
 Blockly.Arduino.forBlock['controls_attachPinInterrupt'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    Blockly.Arduino.definitions_['include_PinChangeInt'] = '#include <PinChangeInt.h>';
+    Blockly.Arduino.definitions_['include_PinChangeInterrupt'] = '#include <PinChangeInterrupt.h>';
     Blockly.Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
-    var code = 'PCintPort::attachInterrupt' + '(' + dropdown_pin + ',' + 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ',' + dropdown_mode + ');\n'
+    var code = 'attachPCINT(digitalPinToPCINT(' + dropdown_pin + '),' + 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ',' + dropdown_mode + ');\n'
     var funcName = 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin;
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
@@ -161,7 +161,7 @@ Blockly.Arduino.forBlock['controls_detachPinInterrupt'] = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
-    var code = 'PCintPort::detachInterrupt' + '(' + dropdown_pin + ');\n'
+    var code = 'detachPCINT(digitalPinToPCINT(' + dropdown_pin + '));\n'
     return code;
 };
 

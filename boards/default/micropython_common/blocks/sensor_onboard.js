@@ -1363,6 +1363,16 @@ Blockly.Blocks['bitbot_als_num'] = {
   }
 };
 
+Blockly.Blocks['sensor_yuankongzi_sound'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
+    }
+};
 
 Blockly.Blocks['sensor_button_is_pressed']=Blockly.Blocks['sensor_mixgo_button_is_pressed'];
 Blockly.Blocks['sensor_button_was_pressed']=Blockly.Blocks['sensor_mixgo_button_was_pressed'];

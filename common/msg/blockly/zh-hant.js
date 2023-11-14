@@ -3518,5 +3518,9 @@ ZhHant.DRAW_CLOCK = "繪製時鐘";
 ZhHant.CLEAR_CLOCK = "清除指針";
 ZhHant.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '繪製 %1 圓形 %2 x %3 y %4 半徑 %5 顏色 %6';
 ZhHant.RETURN_SUCCESS_OR_NOT = "返回是否成功";
+ZhHant.MIXLY_MIXBOT_SOUND_SET_LOUDNESS = '設置麥克風音量';
+ZhHant.MIXLY_RECORD_AUDIO = '錄製音訊';
+ZhHant.MIXLY_PLAY_AUDIO = '播放音訊';
+ZhHant.MIXLY_PLAY_ONLINE_AUDIO = '播放網路音訊';
 
 })();

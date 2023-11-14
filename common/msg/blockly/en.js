@@ -3546,5 +3546,10 @@ En.DRAW_CLOCK = "Draw Clock";
 En.CLEAR_CLOCK = "Clear pointer";
 En.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = 'draw %1 circle %2 x %3 y %4 radius %5 color %6';
 En.RETURN_SUCCESS_OR_NOT = "return success or not";
+ZhHans.MIXLY_MIXBOT_SOUND_SET_LOUDNESS = 'Set microphone volume';
+ZhHans.MIXLY_RECORD_AUDIO = 'Recorde audio';
+ZhHans.MIXLY_PLAY_AUDIO = 'Play audio';
+ZhHans.MIXLY_PLAY_ONLINE_AUDIO = 'Play online audio';
+
 
 })();

@@ -717,6 +717,12 @@ Blockly.Python.forBlock['bitbot_als_num'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['sensor_yuankongzi_sound'] = function(){
+    var code = 'sound_level()';
+    Blockly.Python.definitions_['import_yuankong_zi_voice_sound_level'] = "from yuankong_zi_voice import sound_level";
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock.sensor_button_is_pressed=Blockly.Python.forBlock.sensor_mixgo_button_is_pressed;
 Blockly.Python.forBlock.sensor_button_was_pressed=Blockly.Python.forBlock.sensor_mixgo_button_was_pressed;
 Blockly.Python.forBlock.sensor_button_get_presses=Blockly.Python.forBlock.sensor_mixgo_button_get_presses;

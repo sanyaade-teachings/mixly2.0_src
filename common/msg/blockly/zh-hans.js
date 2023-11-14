@@ -3693,5 +3693,9 @@ ZhHans.DRAW_CLOCK = "绘制时钟";
 ZhHans.CLEAR_CLOCK = "清除指针";
 ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '绘制 %1 圆形 %2 x %3 y %4 半径 %5 颜色 %6';
 ZhHans.RETURN_SUCCESS_OR_NOT = "返回是否成功";
+ZhHans.MIXLY_MIXBOT_SOUND_SET_LOUDNESS = '设置麦克风音量';
+ZhHans.MIXLY_RECORD_AUDIO = '录制音频';
+ZhHans.MIXLY_PLAY_AUDIO = '播放音频';
+ZhHans.MIXLY_PLAY_ONLINE_AUDIO = '播放网络音频';
 
 })();

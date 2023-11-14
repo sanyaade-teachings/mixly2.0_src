@@ -1481,6 +1481,7 @@
       <block type="sensor_mixgo_touch_slide"></block>
     <block type="sensor_yuankongzi_pin_near"></block>
     <block type="sensor_yuankongzi_LTR308"></block>
+    <block type="sensor_yuankongzi_sound"></block>
     <block type="sensor_hp203"></block>
     <block type="sensor_aht11"></block>
     <block type="sensor_get_acceleration"></block>
@@ -1610,6 +1611,53 @@
     <block type="actuator_get_led_bright">
       <value name="led">
         <shadow type="number">
+        </shadow>
+      </value>
+    </block>
+    <block type="actuator_yuankongzi_mic_set">
+      <value name="bright">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="actuator_yuankongzi_mic_get"></block>
+    <block type="actuator_yuankongzi_voice_set">
+      <value name="bright">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="actuator_yuankongzi_voice_get"></block>
+    <block type="actuator_yuankongzi_music_play_list">
+      <value name="LIST">
+        <shadow type="pins_playlist"></shadow>
+      </value>
+    </block>
+    <block type="actuator_yuankongzi_record_audio">
+      <value name="PATH">
+        <shadow type="text">
+          <field name="TEXT">/sd/1.wav</field>
+        </shadow>
+      </value>
+      <value name="TIME">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="actuator_yuankongzi_play_audio">
+      <value name="PATH">
+        <shadow type="text">
+          <field name="TEXT">/sd/1.wav</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="actuator_yuankongzi_play_online_audio">
+      <value name="PATH">
+        <shadow type="text">
+          <field name="TEXT">https://gitee.com/dahanzimin/test/raw/master/wav/8.wav</field>
         </shadow>
       </value>
     </block>

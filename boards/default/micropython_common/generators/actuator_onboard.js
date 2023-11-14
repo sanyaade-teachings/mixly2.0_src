@@ -427,3 +427,24 @@ Blockly.Python.forBlock['actuator_yuankongzi_play_online_audio'] = function(){
     var code = "play_audio_url("+ path +")\n";
     return code;
 };
+
+Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_pitch'] = function(block) {
+  Blockly.Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+  var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
+  var code = 'spk_midi.pitch(' + number_pitch + ')\n';
+  return code;
+};
+
+Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_pitch_with_time'] = function(block) {
+  Blockly.Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+  var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
+  var number_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+  var code = 'spk_midi.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
+  return code;
+};
+
+Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_stop'] = function(block) {
+  Blockly.Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+  var code = 'spk_midi.stop('+')\n';
+  return code;
+};

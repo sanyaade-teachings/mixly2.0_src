@@ -1038,3 +1038,47 @@ Blockly.Blocks.actuator_yuankongzi_play_online_audio = {
         this.setInputsInline(true);
     }
 }
+
+Blockly.Blocks.actuator_yuankongzi_onboard_music_pitch = {
+    init: function() {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TONE);  
+        this.appendValueInput('pitch')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_TONE);
+    }
+};
+
+Blockly.Blocks.actuator_yuankongzi_onboard_music_pitch_with_time = {
+    init: function() {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);        
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TONE);    
+        this.appendValueInput('pitch')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
+        this.appendValueInput('time')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_DURATION);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_TONE2);
+    }
+};
+
+Blockly.Blocks.actuator_yuankongzi_onboard_music_stop = {
+    init: function() {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_NOTONE); 
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};

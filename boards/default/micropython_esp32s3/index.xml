@@ -1630,13 +1630,13 @@
       </value>
     </block>
     <block type="actuator_yuankongzi_voice_get"></block>
-    <block type="actuator_yuankongzi_onboard_music_pitch">
+    <!-- <block type="actuator_yuankongzi_onboard_music_pitch">
       <value name="pitch">
         <shadow type="pins_tone_notes">
           <field name="PIN">440</field>
         </shadow>
       </value>
-    </block>
+    </block> -->
     <block type="actuator_yuankongzi_onboard_music_pitch_with_time">
       <value name="pitch">
         <shadow type="pins_tone_notes">
@@ -1649,13 +1649,13 @@
         </shadow>
       </value>
     </block>
-    <block type="actuator_yuankongzi_onboard_music_stop">
+    <!-- <block type="actuator_yuankongzi_onboard_music_stop">
       <value name="PIN">
         <shadow type="pins_pwm_pin">
           <field name="PIN">0</field>
         </shadow>
       </value>
-    </block>
+    </block> -->
     <block type="actuator_yuankongzi_music_play_list">
       <value name="LIST">
         <shadow type="pins_playlist"></shadow>

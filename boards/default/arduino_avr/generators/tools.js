@@ -596,6 +596,7 @@ Blockly.Arduino.forBlock.wemos_d1_mini_pin = Blockly.Arduino.forBlock.nano_pin;
 Blockly.Arduino.forBlock.stm32f103c8t6_pin = Blockly.Arduino.forBlock.nano_pin;
 Blockly.Arduino.forBlock.esp32s2_pin = Blockly.Arduino.forBlock.nano_pin;
 Blockly.Arduino.forBlock.esp32c3_pin = Blockly.Arduino.forBlock.nano_pin;
+Blockly.Arduino.forBlock.esp32s3_pin = Blockly.Arduino.forBlock.nano_pin;
 Blockly.Arduino.forBlock.core_esp32c3_pin = Blockly.Arduino.forBlock.nano_pin;
 
 //获取两个日期差值

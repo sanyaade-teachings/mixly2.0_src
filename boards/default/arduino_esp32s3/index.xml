@@ -3262,6 +3262,6 @@ css-->
     <block type="factory_notes"></block>
     <block type="folding_block"></block>
     <block type="asyncelegantota"></block>
-    <!-- <block type="esp32s2_pin"></block> -->
+    <block type="esp32s3_pin"></block>
   </category>
 </xml>

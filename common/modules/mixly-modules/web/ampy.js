@@ -13,7 +13,7 @@ const {
     Env
 } = Mixly;
 
-const GET_FILES_INFO_COMMAND = goog.get(Env.templatePath + '/get-files-info.py');
+const GET_FILES_INFO_COMMAND = goog.get(Env.templatePath + '/python/get-files-info.py');
 
 class Ampy {
     constructor(operator, writeBuffer = true) {

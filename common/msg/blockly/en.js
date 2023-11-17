@@ -3550,6 +3550,8 @@ En.MIXLY_MIXBOT_SOUND_SET_LOUDNESS = 'Set microphone volume';
 En.MIXLY_RECORD_AUDIO = 'Recorde audio';
 En.MIXLY_PLAY_AUDIO = 'Play audio';
 En.MIXLY_PLAY_ONLINE_AUDIO = 'Play online audio';
-
+En.MIXLY_DISPLAY_MATRIX_WRITE_NOW = 'show';
+En.MIXLY_DISPLAY_MATRIX_DONT_WRITE = 'hide';
+En.MIXLY_DISPLAY_MATRIX_WRITE = 'show';
 
 })();

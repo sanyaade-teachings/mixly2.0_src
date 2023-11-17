@@ -369,6 +369,11 @@ Blockly.Blocks.display_Matrix_DrawPixel = {
         this.appendValueInput("STAT")
             .appendField(Blockly.Msg.MIXLY_STAT)
             .setCheck([Number, Boolean]);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_WRITE_NOW, "ON"],
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_DONT_WRITE, "OFF"]
+            ]), "WRITE");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -491,6 +496,11 @@ Blockly.Blocks.display_Matrix_print = {
             .setCheck([Number, String])
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.texttodisplay);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_WRITE_NOW, "ON"],
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_DONT_WRITE, "OFF"]
+            ]), "WRITE");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -504,7 +514,11 @@ Blockly.Blocks.display_Matrix_DisplayChar = {
         this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
-            .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE');
+            .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE')
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_WRITE_NOW, "ON"],
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_DONT_WRITE, "OFF"]
+            ]), "WRITE");
         // this.appendDummyInput("")
         //   .appendField(Blockly.Msg.MIXLY_MATRIX_NAME)
         //   .appendField(new Blockly.FieldTextInput('myMatrix'), 'matrixName');
@@ -676,6 +690,11 @@ Blockly.Blocks.display_Matrix_fillScreen = {
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(new Blockly.FieldDropdown(MAX7219_FILLSCREEN_SELECT), "FILLSCREEN_TYPE");
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_WRITE_NOW, "ON"],
+                [Blockly.Msg.MIXLY_DISPLAY_MATRIX_DONT_WRITE, "OFF"]
+            ]), "WRITE");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -733,6 +752,20 @@ Blockly.Blocks.Matrix_img = {
         this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.setTooltip(Blockly.Msg.MIXLY_TOOPTIP_Matrix_MAX7219_PREDEFARR);
         this.setHelpUrl('');
+    }
+};
+
+//点阵屏 设置生效
+Blockly.Blocks.display_Matrix_write = {
+    init: function () {
+        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
+            .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE')
+            .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_WRITE);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
     }
 };
 

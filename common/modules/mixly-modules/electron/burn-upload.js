@@ -569,17 +569,13 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             layer.msg((type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']), {
                 time: 1000
             });
-            statusBarTerminal.addValue((type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']) + '\n');
+            statusBarTerminal.addValue('==' + (type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']) + '==\n');
             if (type === 'upload') {
                 mainStatusBarTab.show();
                 if (USER.autoOpenPort === 'no') {
                     return;
                 }
-                Serial.connect(port, null, (opened) => {
-                    if (opened) {
-                        Serial.writeCtrlD(port);
-                    }
-                });
+                Serial.connect(port);
             }
         }
     })

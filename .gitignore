@@ -8,8 +8,14 @@ boards/default/**/libraries/cloudLibsUrl.json
 boards/default/**/wiki/content.md
 boards/default/**/build/lib/libs.json
 boards/default/**/build/upload/
+boards/default_src/**/libraries/ThirdParty/
+boards/default_src/**/libraries/myLib/
+boards/default_src/**/libraries/cloudLibsUrl.json
+boards/default_src/**/wiki/content.md
+boards/default_src/**/build/lib/libs.json
+boards/default_src/**/build/upload/
 boards/extend/
-node_modules/
+node_modules
 package-lock.json
-.idea/
+.idea
 yarn.lock

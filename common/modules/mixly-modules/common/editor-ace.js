@@ -256,10 +256,6 @@ class EditorAce extends EditorBase {
         this.editor.redo();
     }
 
-    resize() {
-    	this.editor.resize();
-    }
-
     setReadOnly(status) {
         this.editor.setReadOnly(status);
     }

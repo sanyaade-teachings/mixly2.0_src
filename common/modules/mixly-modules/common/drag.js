@@ -148,6 +148,9 @@ class Drag {
         }
         elem1Size = `${precent}%`;
         elem2Size = `${(100 - precent)}%`;
+        if (this.size[0] === elem1Size && this.size[1] === elem2Size) {
+            return;
+        }
         this.prevSize = this.size;
         this.size = [elem1Size, elem2Size];
         if (!precent) {

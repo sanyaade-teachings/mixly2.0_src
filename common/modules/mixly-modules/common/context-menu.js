@@ -21,12 +21,13 @@ class ContextMenu {
     constructor(selector) {
         this.selector = selector;
         this.events = new Events([ 'getMenu' ]);
-        $.contextMenu({
+        this.menu = $.contextMenu({
             selector,
             build: ($trigger, e) => {
                 return { items: this.#getMenu_() }
             },
-            animation: { duration: 0, show: 'show', hide: 'hide' }
+            animation: { duration: 0, show: 'show', hide: 'hide' },
+            autoHide: true
         });
     }
 
@@ -40,6 +41,10 @@ class ContextMenu {
 
     dispose() {
         $.contextMenu('destroy', this.selector);
+    }
+
+    hide() {
+        $(this.selector).contextMenu('hide');
     }
 }
 

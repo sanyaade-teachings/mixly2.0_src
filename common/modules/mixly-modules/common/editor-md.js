@@ -54,7 +54,7 @@ class EditorMd extends EditorCode {
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
-            startSize: '100%'
+            startSize: '0%'
         });
         const { events } = this.drag;
         events.bind('sizeChanged', () => this.resize());

@@ -8,6 +8,13 @@
     --footer-height: 22px;
 }
 
+@font-face {
+  font-family: 'ravie';
+  src: url('../font/ravie.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*@media screen and (max-width: 1920px) {
     :root {
         --nav-height: 35px;

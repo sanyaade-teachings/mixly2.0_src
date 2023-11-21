@@ -76,7 +76,7 @@ class EditorMix extends EditorBase {
             block: {
                 isHtmlName: false,
                 name: Msg.Lang['退出代码编辑器'],
-                callback: (key, opt) => this.drag.exitfull(Drag.Extend.POSITIVE)
+                callback: (key, opt) => this.drag.exitfull(Drag.Extend.NEGATIVE)
             }
         };
         $parentContainer.append(this.$content);

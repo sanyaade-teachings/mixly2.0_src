@@ -1,0 +1,9 @@
+{
+    "name": "arduino_esp32",
+    "version": "1.0.0",
+    "scripts": {
+        "build:dev": "webpack --config=../../../webpack.dev.js",
+        "build:prod": "webpack --config=../../../webpack.prod.js"
+    },
+    "license": "MIT"
+}

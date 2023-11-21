@@ -169,38 +169,5 @@
             "webSocket": true
         },
         "language": "C/C++"
-    }, {
-        "boardImg": "./boards/default/arduino_esp32s2/media/esp32s2_compressed.png",
-        "boardType": "Arduino ESP32S2",
-        "boardIndex": "./boards/default/arduino_esp32s2/index.xml",
-        "env": {
-            "electron": true,
-            "web": false,
-            "webCompiler": true,
-            "webSocket": true
-        },
-        "language": "C/C++"
-    }, {
-        "boardImg": "./boards/default/arduino_esp32s3/media/esp32s3_compressed.png",
-        "boardType": "Arduino ESP32S3",
-        "boardIndex": "./boards/default/arduino_esp32s3/index.xml",
-        "env": {
-            "electron": true,
-            "web": false,
-            "webCompiler": true,
-            "webSocket": true
-        },
-        "language": "C/C++"
-    }, {
-        "boardImg": "./boards/default/arduino_esp32c3/media/esp32c3_compressed.png",
-        "boardType": "Arduino ESP32C3",
-        "boardIndex": "./boards/default/arduino_esp32c3/index.xml",
-        "env": {
-            "electron": true,
-            "web": false,
-            "webCompiler": true,
-            "webSocket": true
-        },
-        "language": "C/C++"
     }
 ]

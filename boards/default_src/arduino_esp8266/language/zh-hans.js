@@ -1,15 +1,11 @@
-(() => {
-
-goog.require('Blockly.Lang.ZhHans');
-goog.require('Mixly.XML');
-goog.require('path');
-    
-const templateDirPath = path.join(document.currentScript.src, '../../template/');
+import * as Blockly from 'blockly/core';
+import * as Mixly from 'mixly';
+import TEMPLATE from '../template/board-config-message.html';
 
 const { XML } = Mixly;
 const { ZhHans } = Blockly.Lang;
 
-ZhHans.ESP8266_CONFIG_TEMPLATE = goog.get(path.join(templateDirPath, 'board-config-message.html'));
+ZhHans.ESP8266_CONFIG_TEMPLATE = TEMPLATE;
 
 ZhHans.ESP8266_CONFIG_INTRODUCE = '详细介绍请参考';
 
@@ -139,51 +135,4 @@ ZhHans.ESP8266_CONFIG_MESSAGE_BAUD = XML.render(ZhHans.ESP8266_CONFIG_TEMPLATE, 
     name: '无'
 });
 
-goog.require('Mixly.FooterBar');
-goog.require('Mixly.Storage');
-
-const { FooterBar, Storage } = Mixly;
-const BASE64_PIC = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA'+
-    '1VJREFUeF7tmz1y2kAUx3clxiQV4JkkZSh8D2YMZwixCygU41OEwjmF7VBAYRufwXhG90iBy6QI4CYGS/sym'+
-    '6B4hrG03yvhrOr9er/973v78YQRQj76jz/sAOSggMrFp4bvex3AqIEA7jDC0zgmo8Xh19C2GK0qoHLarXvVn'+
-    'QHCuPGsoQAhma+CxfFwaguEVQC18dEk1fgni6dktmzZgmANQPXqqI893OeZWSBwMv94fsJTVrWMNQC1614kM'+
-    'lgyW+7ZUIEVACKzn0CiKoDFamQagjEA1OH51fJnwKgrMvObZTGgYTxffjEFwgiA6mXQxb4/UDF8sy7EcQD3U'+
-    'agbhHYAnJ5ejo2BMKkNADPGy5n8XC2tYVILgD/G18rf9NnIbEkbBC0AjMo+nYUWCMoAdse9gaqnZ853SgEdG'+
-    'yYlAPRQ45W8iawBOuqpbpiUANSue3Td13UYotCG0lKQBiCzu1MwMrMq3SPMDwZDmfalARRk9v/aDBDO2udNa'+
-    'wByCHtM22R9gZQCiiT/f4cnyWUgBSCnuJ+pAnpo+tk+C5hS2SggB0DwbC86KNnysw9nJdG6LwqAjB8QBlBEB'+
-    '5jMugMgcY0mroACbH/T1jmJSFP0bcEBEH0aK8IByCkghYBbAs4HOCfoooALg4I5Bm4f4PYBgikybiPkzgL5v'+
-    'wXkuhUu4n2gyr0gdxRYG94pwENI9q0XQAiEjHhzCbgAFPESlHn3x5lLwASwlcY/0WE+m2UCKPJ6ZypgXYD1g'+
-    'pwKoMiXn7zG81yWpgMocLwXBpBxT5AK4CXInyc8pgMwkOomOnO6ymc9n2c6QeoHdA0iz3aycguZYTDPgdvo2'+
-    'wiAXxf7jbLvcWWG8xoZETTaObiRygLJ6sMIgMerZr/EmRrPC4AADP32RPj5m9X+1gB4jFGwNQr4frpff1vzt'+
-    'GaO/piRvXfHt9p/pTGiACo7Mm5NMP0pSsNnSv50aMYAUEf4SlMS5UNEmq8Pb438UWYMAKWrwxmanH2jCqCNU'+
-    '1/wpuoNZJcCAAq99o1U/h/vyjOqgATCbgV3RMOi6ZlPABkHkHS0umx1Sx7qsNUA04cIAlNrflMZ1gAkHVPnW'+
-    'PJww1//PYoxvAfAdzFAGBEIbRluXQG8a9J2OesKsG0gq7/f1Pn8EOxwSVgAAAAASUVORK5CYII=';
-
-window.addEventListener('load', () => {
-    const { messageLayer } = FooterBar;
-    const STATUS = Storage.user('third/key1');
-    !STATUS && messageLayer.append({
-        type: 1,
-        style: 'success',
-        src: BASE64_PIC,
-        name: '通知',
-        message: 'message支持html文本<br/><a href="https://gitee.com/mixly2/mixly2.0_src" target="_blank">一段测试链接</a>',
-        btns: [
-            {
-                style: 'secondary',
-                text: '确定',
-                onclick: (event, container, checked) => {
-                    container.remove();
-                    Storage.user('third/key1', checked);
-                }
-            }
-        ],
-        checkbox: {
-            checked: false,
-            show: true,
-            title: '不再显示'
-        }
-    })
-});
-
-})();
+export default ZhHans;

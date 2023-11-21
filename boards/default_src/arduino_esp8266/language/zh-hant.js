@@ -1,15 +1,11 @@
-(() => {
-
-goog.require('Blockly.Lang.ZhHant');
-goog.require('Mixly.XML');
-goog.require('path');
-    
-const templateDirPath = path.join(document.currentScript.src, '../../template/');
+import * as Blockly from 'blockly/core';
+import * as Mixly from 'mixly';
+import TEMPLATE from '../template/board-config-message.html';
 
 const { XML } = Mixly;
 const { ZhHant } = Blockly.Lang;
 
-ZhHant.ESP8266_CONFIG_TEMPLATE = goog.get(path.join(templateDirPath, 'board-config-message.html'));
+ZhHant.ESP8266_CONFIG_TEMPLATE = TEMPLATE;
 
 ZhHant.ESP8266_CONFIG_INTRODUCE = '詳細介紹請參攷';
 
@@ -139,4 +135,4 @@ ZhHant.ESP8266_CONFIG_MESSAGE_BAUD = XML.render(ZhHant.ESP8266_CONFIG_TEMPLATE, 
     name: '無'
 });
 
-})();
+export default ZhHant;

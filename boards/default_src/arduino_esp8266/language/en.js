@@ -1,15 +1,11 @@
-(() => {
-
-goog.require('Blockly.Lang.En');
-goog.require('Mixly.XML');
-goog.require('path');
-    
-const templateDirPath = path.join(document.currentScript.src, '../../template/');
+import * as Blockly from 'blockly/core';
+import * as Mixly from 'mixly';
+import TEMPLATE from '../template/board-config-message.html';
 
 const { XML } = Mixly;
 const { En } = Blockly.Lang;
 
-En.ESP8266_CONFIG_TEMPLATE = goog.get(path.join(templateDirPath, 'board-config-message.html'));
+En.ESP8266_CONFIG_TEMPLATE = TEMPLATE;
 
 En.ESP8266_CONFIG_INTRODUCE = 'For more information, please visit';
 
@@ -139,4 +135,4 @@ En.ESP8266_CONFIG_MESSAGE_BAUD = XML.render(En.ESP8266_CONFIG_TEMPLATE, {
     name: 'None'
 });
 
-})();
+export default En;

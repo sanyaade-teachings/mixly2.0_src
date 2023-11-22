@@ -85,7 +85,8 @@ class EditorMix extends EditorBase {
     init() {
         this.blockEditor.init();
         this.codeEditor.init();
-        this.addDrag();
+        this.codeEditor.setReadOnly(true);
+        this.addDragEvents();
         const blocklyWorkspace = this.blockEditor.editor;
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.workspaceChangeEvent(event);
@@ -143,7 +144,7 @@ class EditorMix extends EditorBase {
         codeEditor.setValue(blockEditor.getValue(), false);
     }
 
-    addDrag() {
+    addDragEvents() {
         const { blockEditor, codeEditor } = this;
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',

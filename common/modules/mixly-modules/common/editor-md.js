@@ -46,11 +46,11 @@ class EditorMd extends EditorCode {
 
     init() {
         super.init();
-        this.addDrag();
+        this.addDragEvents();
         this.addChangeListener();
     }
 
-    addDrag() {
+    addDragEvents() {
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],

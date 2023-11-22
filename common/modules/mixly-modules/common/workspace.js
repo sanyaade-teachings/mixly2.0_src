@@ -43,23 +43,27 @@ class Workspace {
         }));
         $parentContainer.append(this.$content);
         this.$leftTabs = this.$content.find('.left-tabs');
-        this.$sidebar = this.$content.find('.sidebar');
+        this.$leftSidebar = this.$content.find('.left-sidebar');
+        this.$rightSidebar = this.$content.find('.right-sidebar');
         this.$editor = this.$content.find('.editor');
-        this.$dragV = this.$content.find('.drag-v');
+        this.$dragVLeft = this.$content.find('.drag-v-left');
+        this.$dragVRight = this.$content.find('.drag-v-right');
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
         this.statusBarTabs = new StatusBarTabs(this.statusBarTabsFilter);
         this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
-        this.addDrag();
-        this.addFuncForFileTree();
-        this.addFuncForEditorManager();
+        this.dragH = null;
+        this.dragV = null;
+        this.addDragEvents();
+        this.addEventsForFileTree();
+        this.addEventsForEditorManager();
         this.addFuncForStatusbarTabs();
     }
 
-    addFuncForFileTree() {
-        this.fileTree = new FileTree(this.$sidebar[0]);
+    addEventsForFileTree() {
+        this.fileTree = new FileTree(this.$leftSidebar[0]);
         const { events } = this.fileTree;
         events.bind('selectLeaf', (selected) => {
             this.editorManager.editorTabs.addTab({
@@ -71,7 +75,7 @@ class Workspace {
         this.fileTree.setDirPath('D:/gitee/mixly/mixly2.0-win32-x64/resources/app/src/sample');
     }
 
-    addFuncForEditorManager() {
+    addEventsForEditorManager() {
         const { events } = this.editorManager.editorTabs;
         events.bind('activeTabChange', (event) => {
             const { tabEl } = event.detail;
@@ -87,17 +91,11 @@ class Workspace {
     }
 
     addFuncForStatusbarTabs() {
-        const _this = this;
-        this.statusBarTabs.show = function() {
-            _this.dragH.show();
-        }
-
-        this.statusBarTabs.hide = function() {
-            _this.dragH.hide();
-        }
+        this.statusBarTabs.show = () => this.dragH.show();
+        this.statusBarTabs.hide = () => this.dragH.hide();
     }
 
-    addDrag() {
+    addDragEvents() {
         // 编辑器(上)+状态栏(下)
         this.dragH = new DragH(this.$dragH[0], {
             min: '50px',
@@ -110,14 +108,26 @@ class Workspace {
         });
 
         // 侧边栏(左)+[编辑器(上)+状态栏(下)]
-        this.dragV = new DragV(this.$dragV[0], {
+        this.dragVLeft = new DragV(this.$dragVLeft[0], {
             min: '100px',
             full: [true, false],
             startSize: '0%'
         });
 
-        const eventsV = this.dragV.events;
-        eventsV.bind('sizeChanged', () => {
+        const eventsVLeft = this.dragVLeft.events;
+        eventsVLeft.bind('sizeChanged', () => {
+            this.resize();
+        });
+
+        // 侧边栏(右)+[编辑器(上)+状态栏(下)]
+        this.dragVRight = new DragV(this.$dragVRight[0], {
+            min: '100px',
+            full: [false, true],
+            startSize: '100%'
+        });
+
+        const eventsVRight = this.dragVRight.events;
+        eventsVRight.bind('sizeChanged', () => {
             this.resize();
         });
     }

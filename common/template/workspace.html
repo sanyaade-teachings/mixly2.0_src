@@ -24,13 +24,25 @@
             background-color: #434343;
         }
 
-        div[m-id="{{d.mId}}"] > .drag-v {
+        div[m-id="{{d.mId}}"] .drag-item {
             position: relative;
             width: 100%;
             height: 100%;
         }
 
-        div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container {
+        div[m-id="{{d.mId}}"] .drag-v-left {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] .drag-v-right {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] .sidebar-container {
             position: relative;
             width: 0%;
             height: 100%;
@@ -38,7 +50,7 @@
             z-index: 3;
         }
 
-        div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container > .sidebar {
+        div[m-id="{{d.mId}}"] .sidebar-container > .sidebar {
             overflow: hidden;
             position: absolute;
             top: 0px;
@@ -48,22 +60,23 @@
             border: 1px solid;
         }
 
-        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container > .sidebar {
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] .sidebar-container > .sidebar {
             border-color: #c9c9c9;
             background-color: #f8f8f8;
         }
 
-        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .drag-v > .sidebar-container > .sidebar {
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .sidebar-container > .sidebar {
             border-color: var(--lay-color-border-1);
             background-color: #252526;
         }
 
-        div[m-id="{{d.mId}}"] > .drag-v > .drag-h {
+        div[m-id="{{d.mId}}"] .drag-h {
             width: 100%;
             height: 100%;
+            position: absolute;
         }
 
-        div[m-id="{{d.mId}}"] > .drag-v > .drag-h > .editor {
+        div[m-id="{{d.mId}}"] .drag-h > .editor {
             width: 100%;
             height: 100%;
         }
@@ -205,18 +218,25 @@
     <div m-id="{{d.mId}}">
         <div class="left-tabs">
         </div>
-        <div class="drag-v">
+        <div class="drag-v-left">
             <div class="sidebar-container">
-                <div class="sidebar"></div>
+                <div class="sidebar left-sidebar"></div>
             </div>
-            <div class="drag-h">
-                <div class="editor"></div>
-                <div class="statusbar-tabs">
-                    <div class="layui-tab layui-tab-card" lay-allowclose="true" lay-unauto lay-filter="{{d.statusBarTabsFilter}}">
-                        <ul class="layui-tab-title">
-                        </ul>
-                        <div class="layui-tab-content">
+            <div class="drag-item">
+                <div class="drag-v-right">
+                    <div class="drag-item">
+                        <div class="drag-h">
+                            <div class="editor"></div>
+                            <div class="statusbar-tabs">
+                                <div class="layui-tab layui-tab-card" lay-allowclose="true" lay-unauto lay-filter="{{d.statusBarTabsFilter}}">
+                                    <ul class="layui-tab-title"></ul>
+                                    <div class="layui-tab-content"></div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="sidebar-container">
+                        <div class="sidebar right-sidebar"></div>
                     </div>
                 </div>
             </div>

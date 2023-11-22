@@ -123,9 +123,9 @@ window.addEventListener('load', () => {
             if (typeof LibManager === 'object') {
                 LibManager.init();
             }
-            if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki) {
+            /*if (typeof WikiManager === 'object' && Nav.CONFIG.setting.wiki) {
                 WikiManager.registerContextMenu();
-            }
+            }*/
         } else {
             Env.defaultXML = $('#toolbox').html();
         }
@@ -135,7 +135,7 @@ window.addEventListener('load', () => {
         Msg.renderToolbox(true);
         if (goog.isElectron) {
             const { Serial = undefined } = Electron;
-            if (typeof Serial === 'object' && !Nav.CONFIG.run && !Nav.CONFIG.webrun) {
+            if (typeof Serial === 'object') {
                 Serial.addStatusbarTabExtFunc();
                 Serial.refreshPorts();
                 Serial.refreshPortsTimer = setInterval(() => {

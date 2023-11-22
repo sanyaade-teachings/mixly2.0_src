@@ -64,7 +64,9 @@ Mixly.CssLoader.commonCss = [
     "common/css/jquery.contextMenu.css",
     "common/css/markdown/github-markdown-light.css",
     "common/css/markdown/github-markdown-dark.css",
-    "common/css/katex.min.css"
+    "common/css/katex.min.css",
+    "common/css/codicon.css",
+    "common/css/files/files.css"
 ];
 
 /* 客户端css */

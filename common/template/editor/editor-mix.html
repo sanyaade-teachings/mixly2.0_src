@@ -17,6 +17,16 @@
             width: 0%;
             height: 100%;
         }
+
+        div[m-id="{{d.mId}}"] > .layui-btn-group {
+            position: absolute;
+            left: 50%;
+            top: 3px;
+            z-index: 100;
+            background-color: #000;
+        }
+
+
     </style>
     <div m-id="{{d.mId}}">
         <div class="editor-blockly"></div>

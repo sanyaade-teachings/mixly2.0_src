@@ -141,12 +141,21 @@ html[data-bs-theme=dark] .blocklyMainBackground {
 }
 
 .classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
-    background-color: #009688 !important;
+    background-color: #009688;
     color: #fff;
 }
 
 .classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemDisabled {
     color: #ccc;
+}
+
+.classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected {
+    background-color: rgb(0 150 136 / 60%);
+    color: #fff;
+}
+
+.classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
+    display: none;
 }
 
 .dark-theme.blocklyDropDownDiv,
@@ -167,9 +176,17 @@ html[data-bs-theme=dark] .blocklyMainBackground {
 }
 
 .dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
-    background-color: #2980b9 !important;
+    background-color: #2980b9;
 }
 
 .dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemDisabled {
     color: #919191;
+}
+
+.dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected {
+    background-color: rgb(41 128 185 / 60%);
+}
+
+.dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
+    display: none;
 }

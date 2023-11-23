@@ -110,7 +110,7 @@ class EditorBlockly extends EditorBase {
         const toolboxWidth = this.$editorContainer.find('.blocklyToolboxDiv').outerWidth(true);
         this.$loading.children('.left').animate({
           width: toolboxWidth + 'px'
-        }, 'fast', () => {
+        }, 'normal', () => {
             this.$loading.fadeOut("fast", () => {
                 this.$loading.remove();
             });

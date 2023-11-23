@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('layui');
+goog.require('tippy');
 goog.require('Blockly');
 goog.require('Mixly.Drag');
 goog.require('Mixly.DragV');
@@ -34,6 +35,8 @@ const { BOARD } = Config;
 class EditorMix extends EditorBase {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix.html'));
+        this.BREADCRUMBS_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-toolbar-breadcrumbs.html'));
+        this.BREADCRUMBS_MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-toolbar-breadcrumbs-menu.html'));
         this.BLOCKLY_IGNORE_EVENTS = [
             Blockly.Events.UI,
             Blockly.Events.VIEWPORT_CHANGE,
@@ -61,6 +64,8 @@ class EditorMix extends EditorBase {
         this.codeContextMenuItems = null;
         this.$blocklyContainer = this.$content.find('.editor-blockly');
         this.$codeContainer = this.$content.find('.editor-code');
+        this.$breadcrumbs = this.$content.find('.breadcrumbs');
+        this.$btns = this.$content.find('.operate-btns > button');
         this.blockEditor = new EditorBlockly(this.$blocklyContainer[0], extname);
         this.codeEditor = new EditorCode(this.$codeContainer[0], this.#getCodeExtname_());
         this.blocklyContextMenu = {
@@ -79,14 +84,17 @@ class EditorMix extends EditorBase {
                 callback: (key, opt) => this.drag.exitfull(Drag.Extend.NEGATIVE)
             }
         };
+        this.breadcrumbsMenu = [];
         $parentContainer.append(this.$content);
     }
 
     init() {
+        this.addDragEvents();
+        this.addBtnEvents();
         this.blockEditor.init();
         this.codeEditor.init();
         this.codeEditor.setReadOnly(true);
-        this.addDragEvents();
+        this.updateBreadcrumbsMenu();
         const blocklyWorkspace = this.blockEditor.editor;
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.workspaceChangeEvent(event);
@@ -137,6 +145,9 @@ class EditorMix extends EditorBase {
 
     workspaceChangeEvent(event) {
         const { blockEditor, codeEditor } = this;
+        if ([Blockly.Events.SELECTED, Blockly.Events.BLOCK_DRAG].includes(event.type)) {
+            this.updateBreadcrumbsMenu();
+        }
         if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)
             || this.drag.shown !== Drag.Extend.BOTH) {
            return;
@@ -144,9 +155,105 @@ class EditorMix extends EditorBase {
         codeEditor.setValue(blockEditor.getValue(), false);
     }
 
+    updateBreadcrumbsMenu() {
+        const { editor } = this.blockEditor;
+        let block = Blockly.getSelected();
+        let breadcrumbs = [];
+        if (block) {
+            do {
+                breadcrumbs.unshift({
+                    id: block.id,
+                    name: block.type
+                });
+            } while (block = block.getSurroundParent());
+        }
+        breadcrumbs.unshift({
+            id: editor.id,
+            name: '工作区'
+        });
+        this.$breadcrumbs.html(XML.render(EditorMix.BREADCRUMBS_TEMPLATE, {
+            list: breadcrumbs
+        }));
+        this.disposeBreadcrumbsMenu();
+        const btns = this.$breadcrumbs[0].querySelectorAll('button');
+        this.breadcrumbsMenu = tippy(btns, {
+            allowHTML: true,
+            trigger: 'click',
+            interactive: true,
+            maxWidth: 'none',
+            offset: [ 0, 6 ],
+            placement: 'bottom',
+            onMount: (instance) => {
+                let options = this.getMenuOptions($(instance.reference).attr('m-id')) ?? {};
+                options.list = options.list ?? [];
+                options.empty = options.empty ?? Msg.Lang['无选项'];
+                const menuTemplate = XML.render(EditorMix.BREADCRUMBS_MENU_TEMPLATE, options);
+                instance.setContent(menuTemplate);
+                $(instance.popper).find('li').off().click((event) => {
+                    this.menuOptionOnclick(event);
+                    instance.hide(100);
+                });
+            }
+        });
+    }
+
+    getMenuOptions(id) {
+        const { editor } = this.blockEditor;
+        const selectedBlock = Blockly.getSelected();
+        const selectedBlockId = selectedBlock && selectedBlock.id;
+        let menu = [];
+        let children = [];
+        let nextBlock = null;
+        if (id === editor.id) {
+            children = editor.getTopBlocks(); 
+        } else {
+            const block = editor.getBlockById(id);
+            children = block.getChildren();
+            nextBlock = block.getNextBlock();
+        }
+        for (let child of children) {
+            if (child.isShadow()) {
+                continue;
+            }
+            if (nextBlock && nextBlock.id === child.id) {
+                continue;
+            }
+            let menuItem = { id: child.id };
+            if (typeof child.getDescription === 'function') {
+                menuItem.name = child.getDescription();
+            } else {
+                menuItem.name = child.type;
+            }
+            if (selectedBlockId === child.id) {
+                menuItem.selected = true;
+            }
+            menu.push(menuItem);
+        }
+        if (menu.length) {
+            return { list: menu };
+        }
+        return { list: [], empty: Msg.Lang['无选项'] };
+    }
+
+    menuOptionOnclick(event) {
+        const { editor } = this.blockEditor;
+        const $li = $(event.currentTarget);
+        const id = $li.attr('value');
+        // editor.zoomToFit();
+        editor.centerOnBlock(id);
+        let block = Blockly.getSelected();
+        Blockly.Events.disable();
+        if (block) {
+            block.unselect();
+        }
+        Blockly.Events.enable();
+        block = editor.getBlockById(id);
+        block.select();
+    }
+
     addDragEvents() {
         const { blockEditor, codeEditor } = this;
-        this.drag = new DragV(this.$content.children('div')[0], {
+        this.drag = new DragV(this.$content.find('.editor')[0], {
             min: '200px',
             full: [true, true],
             startSize: '100%'
@@ -187,6 +294,25 @@ class EditorMix extends EditorBase {
         });
     }
 
+    addBtnEvents() {
+        this.$btns.on('click', (event) => {
+            const $btn = $(event.currentTarget);
+            const mId = $btn.attr('m-id');
+            switch (mId) {
+            case 'block':
+                this.drag.full(Drag.Extend.POSITIVE);
+                break;
+            case 'mixture':
+                this.drag.exitfull(Drag.Extend.POSITIVE);
+                this.drag.exitfull(Drag.Extend.NEGATIVE);
+                break;
+            case 'code':
+                this.drag.full(Drag.Extend.NEGATIVE);
+                break;
+            }
+        })
+    }
+
     getCurrentEditor() {
         const { blockEditor, codeEditor } = this;
         if (this.drag.shown === Drag.Extend.NEGATIVE) {
@@ -211,7 +337,14 @@ class EditorMix extends EditorBase {
         this.codeEditor.resize();
     }
 
+    disposeBreadcrumbsMenu() {
+        for (let item of this.breadcrumbsMenu) {
+            item.destroy();
+        }
+    }
+
     dispose() {
+        this.disposeBreadcrumbsMenu();
         this.blockEditor.dispose();
         this.codeEditor.dispose();
     }

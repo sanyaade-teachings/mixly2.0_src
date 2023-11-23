@@ -1,0 +1,7 @@
+{{#  if(d.list.length) { }}
+    <button class="layui-btn layui-btn-xs layui-btn-primary m-btn breadcrumb-btn" m-id="{{d.list[0].id}}">{{d.list[0].name}}</button>
+{{#  } }}
+{{#  for (let i = 1; i < d.list.length; i++) { }}
+    <i class="codicon-chevron-right"></i>
+    <button class="layui-btn layui-btn-xs layui-btn-primary m-btn breadcrumb-btn" m-id="{{d.list[i].id}}">{{d.list[i].name}}</button>
+{{#  } }}

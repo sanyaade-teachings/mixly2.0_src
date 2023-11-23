@@ -12,8 +12,15 @@
 
         div[m-id="{{d.mId}}"] > .mixly-font {
             font-family: 'ravie';
-            color: #3c3c3c;
             font-size: 80px;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .mixly-font {
+            color: #b1b1b1;
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .mixly-font {
+            color: #3c3c3c;
         }
     </style>
     <div m-id="{{d.mId}}">

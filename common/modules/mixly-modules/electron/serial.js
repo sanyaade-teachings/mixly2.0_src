@@ -1337,13 +1337,11 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             return;
         } else {
             //Serial.statusBarPortRemoveCursorEvent(port);
-            endFunc(1);
             statusBarSerial.open();
             portObj.portOpened = true;
             Serial.refreshTerminalMenu(port);
             Serial.refreshConnectStatus(port);
             statusBarSerial.setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
-
             Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
             portObj.output.push('');
             Serial.outputBoxAdd(port, Msg.Lang['已打开串口'] + ': ' + port);
@@ -1449,6 +1447,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     portObj.serialport.on('open', async () => {
         await Serial.reset(port);
         Serial.updateDtrAndRts(port);
+        endFunc(1);
     });
 
     //串口结束使用时执行此函数

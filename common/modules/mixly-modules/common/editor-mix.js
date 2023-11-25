@@ -183,6 +183,8 @@ class EditorMix extends EditorBase {
             maxWidth: 'none',
             offset: [ 0, 6 ],
             placement: 'bottom',
+            zIndex: 1000,
+            appendTo: document.body,
             onMount: (instance) => {
                 let options = this.getMenuOptions($(instance.reference).attr('m-id')) ?? {};
                 options.list = options.list ?? [];

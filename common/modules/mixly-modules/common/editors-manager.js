@@ -87,6 +87,7 @@ class EditorsManager {
             const tabId = $(tabEl).attr('data-tab-id');
             const editor = this.editors[tabId];
             this.activeEditorName = tabId;
+            this.$editorContainer.empty();
             this.$editorContainer.append(editor.getContainer());
             if (this.editors[tabId].inited) {
                 editor.onMounted();

@@ -99,11 +99,11 @@ class EditorsManager {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             const extname = path.extname(tabId);
-            let editor = EditorsManager.config[extname];
-            if (!editor) {
-                editor = EditorUnknown;
+            let Editor = EditorsManager.config[extname];
+            if (!Editor) {
+                Editor = EditorUnknown;
             }
-            this.editors[tabId] = new editor(this.$editorContainer[0], extname);
+            this.editors[tabId] = new Editor(this.$editorContainer[0], extname);
             if (Object.keys(this.editors).length && this.page === 'welcome') {
                 this.$welcomePage.replaceWith(this.$container);
                 this.page = 'editor';
@@ -112,7 +112,7 @@ class EditorsManager {
                 this.editors[tabId].init();
                 this.editors[tabId].inited = true;
                 this.editors[tabId].onMounted();
-                this.editors[tabId].updateValue(fs.readFileSync(tabId, 'utf-8'));
+                this.editors[tabId].setValue(fs.readFileSync(tabId, 'utf-8'));
             }, 500);
         });
 

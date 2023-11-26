@@ -7,41 +7,25 @@ class EditorBase {
         this.$content = null;
     }
 
-    init() {
-        
-    }
+    init() {}
 
     getContainer() {
         return this.$content;
     }
 
-    resize() {
-        
-    }
+    resize() {}
 
-    dispose() {
-        
-    }
+    dispose() {}
 
-    onMounted() {
-        
-    }
+    onMounted() {}
 
-    onUnmounted() {
-        
-    }
+    onUnmounted() {}
 
-    updateValue(data, ext) {
-        
-    }
+    setValue(data, ext) {}
 
-    undo() {
-        
-    }
+    undo() {}
 
-    redo() {
-
-    }
+    redo() {}
 }
 
 Mixly.EditorBase = EditorBase;

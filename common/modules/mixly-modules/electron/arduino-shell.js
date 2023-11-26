@@ -13,6 +13,7 @@ goog.require('Mixly.MArray');
 goog.require('Mixly.Msg');
 goog.require('Mixly.MString');
 goog.require('Mixly.Nav');
+goog.require('Mixly.Workspace');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.ArduShell');
 
@@ -27,6 +28,7 @@ const {
     Msg,
     MString,
     Nav,
+    Workspace,
     Config
 } = Mixly;
 
@@ -178,6 +180,7 @@ ArduShell.compile = (doFunc = () => {}) => {
     }
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    statusBarTerminal.setValue('');
     mainStatusBarTabs.changeTo("output");
     ArduShell.compiling = true;
     ArduShell.uploading = false;
@@ -285,6 +288,7 @@ ArduShell.upload = (boardType, port) => {
     }
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    statusBarTerminal.setValue('');
     mainStatusBarTabs.changeTo("output");
     const layerNum = layer.open({
         type: 1,
@@ -519,7 +523,9 @@ ArduShell.writeLibFiles = (inPath) => {
 ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    const code = MFile.getCode();
+    const mainWorkspace = Workspace.getMain();
+    const editor = mainWorkspace.editorManager.getActiveEditor();
+    const code = editor.getValue();
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
     const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
     ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);

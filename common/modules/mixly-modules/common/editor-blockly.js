@@ -227,7 +227,7 @@ class EditorBlockly extends EditorBase {
         this.editor.scrollCenter();
     }
 
-    updateValue(data) {
+    setValue(data) {
         
     }
 

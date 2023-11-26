@@ -822,6 +822,7 @@
             "Mixly.Msg",
             "Mixly.MString",
             "Mixly.Nav",
+            "Mixly.Workspace",
             "Mixly.Electron.Serial"
         ],
         "provide": [

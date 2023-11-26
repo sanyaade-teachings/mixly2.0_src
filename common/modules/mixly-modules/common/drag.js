@@ -16,7 +16,8 @@ class Drag {
             type: 'h',  // 'h' - 水平拖拽，'v' - 垂直拖拽
             min: '100px',  // 元素由于拖拽产生尺寸改变时可以减小到的最小值,
             full: [true, true],  // 允许元素拖拽直至占满整个容器
-            startSize: '100%'
+            startSize: '100%',
+            startExitFullSize: '30%'
         };
 
         this.Extend = {
@@ -61,7 +62,12 @@ class Drag {
         }
         this.$container.prepend(this.$dragElem);
         this.size = [`${size}%`, `${100 - size}%`];
-        this.prevSize = this.size;
+        if (size >=100 || size <=0) {
+            const startExitFullSize = parseFloat(this.config.startExitFullSize);
+            this.prevSize = [`${startExitFullSize}%`, `${100 - startExitFullSize}%`];
+        } else {
+            this.prevSize = this.size;
+        }
         this.firstDisplay = this.$first.css('display');
         this.lastDisplay = this.$last.css('display');
         this.events = new Events(['ondragStart', 'ondragEnd', 'onfull', 'exitfull', 'sizeChanged']);
@@ -192,9 +198,9 @@ class Drag {
         this.events.run('exitfull', this.shown);
         let prevSize = this.prevSize[0];
         if (prevSize === '100%') {
-            prevSize = '85%';
+            prevSize = '70%';
         } else if (prevSize === '0%') {
-            prevSize = '15%';
+            prevSize = '30%';
         }
         this.changeTo(prevSize);
     }

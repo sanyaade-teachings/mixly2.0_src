@@ -138,8 +138,8 @@ class EditorCode extends EditorAce {
         session.setTabSize(tabSize);
     }
 
-    updateValue(data) {
-        this.setValue(data);
+    setValue(data, ext) {
+        super.setValue(data);
         this.scrollToTop();
     }
 

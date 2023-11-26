@@ -31,6 +31,32 @@ const { FileTree } = goog.isElectron? Electron : Web;
 class Workspace {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'workspace.html'));
+        this.workspaces = [];
+
+        this.getAll = () => {
+            return this.workspaces;
+        }
+
+        this.add = (workspace) => {
+            this.remove(workspace);
+            this.workspaces.push(workspace);
+        }
+
+        this.remove = (workspace) => {
+            for (let i in this.workspaces) {
+                if (this.workspaces[i].id !== workspace.id) {
+                    continue;
+                }
+                this.workspaces.slice(i, 1);
+            }
+        }
+
+        this.getMain = () => {
+            if (this.workspaces.length) {
+                return this.workspaces[0];
+            }
+            return null;
+        }
     }
 
     constructor(dom) {
@@ -56,6 +82,7 @@ class Workspace {
         this.editorManager = new EditorsManager(this.$editor[0]);
         this.dragH = null;
         this.dragV = null;
+        Workspace.add(this);
         this.addDragEvents();
         this.addEventsForFileTree();
         this.addEventsForEditorManager();
@@ -99,7 +126,8 @@ class Workspace {
         // 编辑器(上)+状态栏(下)
         this.dragH = new DragH(this.$dragH[0], {
             min: '50px',
-            startSize: '100%'
+            startSize: '100%',
+            startExitFullSize: '70%'
         });
 
         const eventsH = this.dragH.events;
@@ -111,7 +139,8 @@ class Workspace {
         this.dragVLeft = new DragV(this.$dragVLeft[0], {
             min: '100px',
             full: [true, false],
-            startSize: '0%'
+            startSize: '0%',
+            startExitFullSize: '15%'
         });
 
         const eventsVLeft = this.dragVLeft.events;
@@ -123,7 +152,8 @@ class Workspace {
         this.dragVRight = new DragV(this.$dragVRight[0], {
             min: '100px',
             full: [false, true],
-            startSize: '100%'
+            startSize: '100%',
+            startExitFullSize: '85%'
         });
 
         const eventsVRight = this.dragVRight.events;
@@ -134,6 +164,10 @@ class Workspace {
 
     resize() {
         this.editorManager.resize();
+    }
+
+    dispose() {
+        Workspace.remove(this);
     }
 }
 

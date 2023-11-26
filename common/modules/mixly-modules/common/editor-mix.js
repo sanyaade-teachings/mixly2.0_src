@@ -138,11 +138,6 @@ class EditorMix extends EditorBase {
         }
     }
 
-    updateCode() {
-        const { blockEditor, codeEditor } = this;
-        codeEditor.setValue(blockEditor.getValue(), false);
-    }
-
     workspaceChangeEvent(event) {
         const { blockEditor, codeEditor } = this;
         if ([Blockly.Events.SELECTED, Blockly.Events.BLOCK_DRAG].includes(event.type)) {
@@ -258,7 +253,8 @@ class EditorMix extends EditorBase {
         this.drag = new DragV(this.$content.find('.editor')[0], {
             min: '200px',
             full: [true, true],
-            startSize: '100%'
+            startSize: '100%',
+            startExitFullSize: '70%'
         });
         const { events } = this.drag;
         events.bind('sizeChanged', () => this.resize());
@@ -290,7 +286,7 @@ class EditorMix extends EditorBase {
                 }
                 break;
             case Drag.Extend.POSITIVE:
-                this.updateCode();
+                codeEditor.setValue(blockEditor.getValue(), false);
                 break;
             }
         });
@@ -356,7 +352,7 @@ class EditorMix extends EditorBase {
         this.codeEditor.onMounted();
     }
 
-    updateValue(data, ext) {
+    setValue(data, ext) {
         try {
             data = XML.convert(data, true);
             data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
@@ -380,6 +376,10 @@ class EditorMix extends EditorBase {
             } else {
             }
         });
+    }
+
+    getValue() {
+        return this.getCurrentEditor().getValue();
     }
 
     parseMix(xml, useCode = false, useIncompleteBlocks = false, endFunc = (message) => {}) {

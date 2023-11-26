@@ -1532,7 +1532,7 @@
         </shadow>
       </value>
     </block>
-    <block type="rfid_write_return">
+    <block type="rfid_write_return" m-show="micropython:esp32c3:mixgo_baize">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>

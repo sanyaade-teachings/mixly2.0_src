@@ -164,9 +164,15 @@ Blockly.Python.forBlock['system_ticks_diff'] = function () {
 };
 
 Blockly.Python.forBlock['system_timer_init']=function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_machine'] = 'import machine';
+    if(version=='mixgo_baize'){
+      var code = v + ' = machine.Timer(0)\n';
+    }
+    else{
     var code = v + ' = machine.Timer(-1)\n';
+  }
     return code;
 };
 

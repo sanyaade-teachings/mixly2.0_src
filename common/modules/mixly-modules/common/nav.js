@@ -91,6 +91,7 @@ Nav.init_ = function() {
     this.$rightBtnContainer = this.$container.find('.right-btn-container');
     this.$dropdownContainer = this.$container.find('.dropdown-container');
     this.$rightMenuContainer = this.$container.find('.right-menu-container');
+    this.$rightArea = this.$container.find('.right-area');
     this.$dropdownContainer.append(Nav.BOARD_SELECTOR_TEMPLATE);
     this.$dropdownContainer.append(XML.render(Nav.PORT_SELECTOR_TEMPLATE, {
         selectPort: Msg.Lang['选择串口'],
@@ -101,8 +102,8 @@ Nav.init_ = function() {
     form.render('select', 'boards-type-filter');
     form.render('select', 'ports-type-filter');
     Nav.addClickEvent();
-    for (let options of this.registerQueue) {
-        this.register(options);
+    for (let config of this.registerQueue) {
+        this.register(config);
     }
     /*for (let i = 0; i < 10; i++)
         Nav.register({
@@ -117,6 +118,74 @@ Nav.init_ = function() {
             scopeType: this.Scope.LEFT,
             weight: 10 - i
         });*/
+    Nav.register({
+        id: 'file',
+        displayText: '文件',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
+        scopeType: this.Scope.RIGHT,
+        weight: 1
+    });
+
+    Nav.register({
+        icon: 'icon-doc-new',
+        id: ['file', 'new-file'],
+        displayText: '新建文件',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
+        callback: (elem) => console.log(elem),
+        scopeType: this.Scope.RIGHT,
+        weight: 1
+    });
+
+    Nav.register({
+        icon: 'icon-folder-open-empty',
+        id: ['file', 'open-file'],
+        displayText: '打开文件',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
+        callback: (elem) => console.log(elem),
+        scopeType: this.Scope.RIGHT,
+        weight: 2
+    });
+
+    Nav.register({
+        icon: 'icon-folder-open-empty',
+        id: ['file', 'open-dir'],
+        displayText: '打开文件夹',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
+        callback: (elem) => console.log(elem),
+        scopeType: this.Scope.RIGHT,
+        weight: 3
+    });
+
+    Nav.register({
+        id: 'setting',
+        displayText: '设置',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
+        scopeType: this.Scope.RIGHT,
+        weight: 1
+    });
+
+    Nav.register({
+        icon: 'icon-comment-1',
+        id: ['setting', 'feedback'],
+        displayText: '反馈',
+        preconditionFn: () => {
+            return goog.isElectron;
+        },
+        callback: (elem) => console.log(elem),
+        scopeType: this.Scope.RIGHT,
+        weight: 1
+    });
+    
     $(window).resize(() => {
         this.resize();
     });
@@ -124,7 +193,7 @@ Nav.init_ = function() {
 
 /**
  * @function 注册函数
- * @param options 选项
+ * @param config 选项
  *  {
  *      icon: String,
  *      title: String,
@@ -137,56 +206,75 @@ Nav.init_ = function() {
  *  }
  * @return {void}
  **/
-Nav.register = function(options) {
-    const { scopeType = this.ScopeType.LEFT } = options;
-    options = { ...options };
+Nav.register = function(config) {
+    const { scopeType = this.ScopeType.LEFT } = config;
+    config = { ...config };
     const {
         id = '',
         title = '',
         icon = '',
         displayText = ''
-    } = options;
-    options.$btn = $(XML.render(Nav.BTN_TEMPLATE, {
-        title,
-        mId: id,
-        icon,
-        text: displayText
-    }));
+    } = config;
     switch (scopeType) {
     case this.Scope.LEFT:
-        options.$moreBtn = $(XML.render(Nav.ITEM_TEMPLATE, {
+        config.$moreBtn = $(XML.render(this.ITEM_TEMPLATE, {
+            mId: id,
+            icon,
+            text: displayText
+        }));
+    case this.Scope.CENTER:
+        config.$btn = $(XML.render(this.BTN_TEMPLATE, {
+            title,
             mId: id,
             icon,
             text: displayText
         }));
         break;
-    case this.Scope.CENTER:
-        break;
     case this.Scope.RIGHT:
+        if (typeof id === 'string') {
+            config.$btn = $(XML.render(this.ITEM_CONTAINER_TEMPLATE, {
+                mId: id,
+                text: displayText
+            }));
+        } else {
+            config.$btn = $(XML.render(this.ITEM_TEMPLATE, {
+                mId: id[1],
+                icon,
+                text: displayText
+            }));
+        }
         break;
     }
     if (!this.$container) {
-        this.registerQueue.push(options);
-        return options;
+        this.registerQueue.push(config);
+        return config;
     }
-    Nav.add_(options);
-    return options;
+    this.add_(config);
+    return config;
 }
 
-Nav.add_ = function(options) {
-    const { scopeType = this.ScopeType.LEFT } = options;
+Nav.add_ = function(config) {
+    const {
+        scopeType = this.ScopeType.LEFT,
+        id = ''
+    } = config;
     switch (scopeType) {
     case this.Scope.LEFT:
-        if (options.id === 'home-btn') {
-            this.btns[options.id] = options;
+        if (id === 'home-btn') {
+            this.btns[config.id] = config;
         } else {
-            this.addLeftBtn_(options);
+            this.addLeftBtn_(config);
         }
         break;
     case this.Scope.CENTER:
-        this.addRightBtn_(options);
+        this.addCenterBtn_(config);
         break;
     case this.Scope.RIGHT:
+        if (typeof id === 'string') {
+            this.addRightMenu_(config);
+        } else {
+            this.addRightMenuItem_(config);
+        }
         break;
     }
     element.render('nav', 'nav-filter');
@@ -194,14 +282,14 @@ Nav.add_ = function(options) {
 
 /**
  * @function 取消注册函数
- * @param options 选项
+ * @param config 选项
  *  {
  *      id: String | Array,
  *      scopeType: Nav.SCOPE_TYPE
  *  }
  * @return {void}
  **/
-Nav.unregister = function(options) {
+Nav.unregister = function(config) {
 
 }
 
@@ -234,8 +322,8 @@ Nav.addClickEvent = function() {
     });
 }
 
-Nav.addLeftBtn_ = function(options) {
-    const { id = '', weight = 0 } = options;
+Nav.addLeftBtn_ = function(config) {
+    const { id = '', weight = 0 } = config;
     if (Object.keys(this.btns).includes(id)) {
         this.btns[id].$btn.remove();
         this.btns[id].$moreBtn.remove();
@@ -256,23 +344,23 @@ Nav.addLeftBtn_ = function(options) {
         }
     }
     if ($btn) {
-        $btn.before(options.$btn);
-        $moreBtn.before(options.$moreBtn);
+        $btn.before(config.$btn);
+        $moreBtn.before(config.$moreBtn);
     } else {
-        this.$leftBtnContainer.append(options.$btn);
-        this.$leftBtnExtContainer.append(options.$moreBtn);
+        this.$leftBtnContainer.append(config.$btn);
+        this.$leftBtnExtContainer.append(config.$moreBtn);
     }
-    options.width = this.getElemWidth(options.$btn);
-    this.btns[id] = options;
+    config.width = this.getElemWidth(config.$btn);
+    this.btns[id] = config;
     this.resize();
 }
 
-Nav.removeLeftBtn_ = function(str) {
+Nav.removeLeftBtn_ = function(config) {
 
 }
 
-Nav.addRightBtn_ = function(options) {
-    const { id = '', weight = 0 } = options;
+Nav.addCenterBtn_ = function(config) {
+    const { id = '', weight = 0 } = config;
     let $btn = null;
     const $btns = this.$rightBtnContainer.children('button');
     for (let i = 0; $btns[i]; i++) {
@@ -286,22 +374,82 @@ Nav.addRightBtn_ = function(options) {
         }
     }
     if ($btn) {
-        $btn.before(options.$btn);
+        $btn.before(config.$btn);
     } else {
-        this.$rightBtnContainer.append(options.$btn);
+        this.$rightBtnContainer.append(config.$btn);
     }
-    options.width = this.getElemWidth(options.$btn);
-    this.btns[id] = options;
+    config.width = this.getElemWidth(config.$btn);
+    this.btns[id] = config;
     this.resize();
 }
 
-Nav.removeRightBtn_ = function(str) {
+Nav.removeCenterBtn_ = function(config) {
+
+}
+
+Nav.addRightMenu_ = function(config) {
+    const { id = '', weight = 0 } = config;
+    const $btns = this.$rightMenuContainer.children('li');
+    let $btn = null;
+    for (let i = 0; $btns[i]; i++) {
+        const mId = $($btns[i]).attr('m-id');
+        if (!this.btns[mId]) {
+            continue;
+        }
+        if (weight < this.btns[mId].weight) {
+            $btn = this.btns[mId].$btn;
+            break;
+        }
+    }
+    if ($btn) {
+        $btn.before(config.$btn);
+    } else {
+        this.$rightMenuContainer.append(config.$btn);
+    }
+    config.width = this.getElemWidth(config.$btn);
+    this.btns[id] = config;
+    this.resize();
+}
+
+Nav.removeRightMenu_ = function(config) {
+
+}
+
+Nav.addRightMenuItem_ = function(config) {
+    const { id = [], weight = 0 } = config;
+    const $li = this.$rightMenuContainer.children(`[m-id="${id[0]}"]`);
+    let $btn = null;
+    if (!$li.length) {
+        return;
+    }
+    const $container = $li.find('.layui-nav-child');
+    const $btns = $container.find('dd');
+    for (let i = 0; $btns[i]; i++) {
+        const mId = $($btns[i]).attr('m-id');
+        if (!this.btns[mId]) {
+            continue;
+        }
+        if (weight < this.btns[mId].weight) {
+            $btn = this.btns[mId].$btn;
+            break;
+        }
+    }
+    if ($btn) {
+        $btn.before(config.$btn);
+    } else {
+        $container.append(config.$btn);
+    }
+    config.width = this.getElemWidth(config.$btn);
+    this.btns[id[1]] = config;
+}
+
+Nav.removeRightMenuItem_ = function(config) {
 
 }
 
 Nav.resize = function() {
-    const navRightWidth = this.getElemWidth($('#nav-right-area'));
-    const navWidth = this.getElemWidth($('#nav'));
+    const navRightWidth = this.getElemWidth(this.$rightArea);
+    const navWidth = this.getElemWidth(this.$container);
     const $btns = this.$leftBtnContainer.children('button');
     let nowWidth = navRightWidth;
     let showMoreBtnContainer = false;

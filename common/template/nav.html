@@ -192,7 +192,7 @@
         ul[m-id="{{d.mId}}"] .copyright {
             font-family: "YaHei Consolas Hybrid", "Microsoft Yahei Light", "Arial";
             font-size: 12px;
-            color: #fff;
+            color: #fff !important;
             text-align: center;
             display: -webkit-box;
             flex-direction: row;
@@ -221,7 +221,8 @@
             margin: 0px;
         }
 
-        ul[m-id="{{d.mId}}"] .right-area {
+        ul[m-id="{{d.mId}}"] .right-area,
+        ul[m-id="{{d.mId}}"] .right-menu-container {
             display: inline-flex;
             flex-direction: row;
             justify-content: flex-end;
@@ -243,7 +244,7 @@
             padding: 2px;
         }
     </style>
-    <ul class="layui-nav" lay-filter="nav-filter" m-id="{{d.mId}}">
+    <ul class="layui-nav" lay-filter="nav-filter" m-id="{{d.mId}}" lay-bar="disabled">
         <div>
             <!--自适应时显示的按钮-->
             <div class="left-btn-container">

@@ -143,8 +143,11 @@ class EditorMix extends EditorBase {
         if ([Blockly.Events.SELECTED, Blockly.Events.BLOCK_DRAG].includes(event.type)) {
             this.updateBreadcrumbsMenu();
         }
-        if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)
-            || this.drag.shown !== Drag.Extend.BOTH) {
+        if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)) {
+            return;
+        }
+        this.addDirty();
+        if (this.drag.shown !== Drag.Extend.BOTH) {
            return;
         }
         codeEditor.setValue(blockEditor.getValue(), false);
@@ -376,6 +379,7 @@ class EditorMix extends EditorBase {
             } else {
             }
         });
+        super.setValue(data, ext);
     }
 
     getValue() {

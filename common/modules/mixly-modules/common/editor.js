@@ -37,13 +37,21 @@ Editor.init = () => {
     Editor.codeEditor = Editor.mainEditor.codeEditor.editor;
     Editor.workspace = new Workspace($('#mixly-body')[0]);
     Mixly.mainStatusBarTabs = Editor.workspace.statusBarTabs;
+    const { editorManager } = Editor.workspace;
+    const { events } = editorManager.editorTabs;
+    events.bind('activeTabChange', (event) => {
+        Nav.resize();
+    });
+    events.bind('tabRemove', (event) => {
+        !editorManager.getActiveEditor() && Nav.resize();
+    });
     Nav.register({
         icon: 'icon-ccw',
         title: 'undo(ctrl+z)',
         id: 'undo-btn',
         displayText: Blockly.Msg.MSG['undo'],
         preconditionFn: () => {
-            return true;
+            return !!editorManager.getActiveEditor();
         },
         callback: () => Editor.mainEditor.undo(),
         scopeType: Nav.Scope.LEFT,
@@ -55,11 +63,16 @@ Editor.init = () => {
         id: 'redo-btn',
         displayText: Blockly.Msg.MSG['redo'],
         preconditionFn: () => {
-            return true;
+            return !!editorManager.getActiveEditor();
         },
         callback: () => Editor.mainEditor.redo(),
         scopeType: Nav.Scope.LEFT,
         weight: 1
+    });
+
+    editorManager.editorTabs.addTab({
+        name: 'Untitled-1.mix',
+        title: 'Untitled-1.mix'
     });
 
     const leftSideBarOption = Nav.register({

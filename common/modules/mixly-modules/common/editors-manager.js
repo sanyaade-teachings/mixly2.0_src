@@ -27,6 +27,7 @@ const {
 } = Mixly;
 
 const fs = Mixly.require('fs');
+const fs_plus = Mixly.require('fs-plus');
 
 class EditorsManager {
     static {
@@ -104,6 +105,23 @@ class EditorsManager {
                 Editor = EditorUnknown;
             }
             this.editors[tabId] = new Editor(this.$editorContainer[0], extname);
+            this.editors[tabId].setTab($(tabEl));
+            this.editors[tabId].events.bind('onAddDirty', ($tab) => {
+                const name = $tab.attr('data-tab-id');
+                const title = $tab.attr('title');
+                this.editorTabs.updateTab($tab[0], {
+                    name,
+                    title: title + ' - 未保存'
+                });
+            });
+            this.editors[tabId].events.bind('onRemoveDirty', ($tab) => {
+                const name = $tab.attr('data-tab-id');
+                const title = $tab.attr('title');
+                this.editorTabs.updateTab($tab[0], {
+                    name,
+                    title: title.split(' - ')[0]
+                });
+            });
             if (Object.keys(this.editors).length && this.page === 'welcome') {
                 this.$welcomePage.replaceWith(this.$container);
                 this.page = 'editor';
@@ -112,7 +130,9 @@ class EditorsManager {
                 this.editors[tabId].init();
                 this.editors[tabId].inited = true;
                 this.editors[tabId].onMounted();
-                this.editors[tabId].setValue(fs.readFileSync(tabId, 'utf-8'));
+                if (fs_plus.isFileSync(tabId)) {
+                    this.editors[tabId].setValue(fs.readFileSync(tabId, 'utf-8'));
+                }
             }, 500);
         });
 

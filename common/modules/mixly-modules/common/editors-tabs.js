@@ -60,7 +60,7 @@ class EditorsTabs {
         $parentsContainer.append(this.$content);
         this.#addEvents_();
         this.tabs = {};
-        this.events = new Events([ 'activeTabChange', 'tabAdd', 'tabRemove' ]);
+        this.events = new Events(['activeTabChange', 'tabAdd', 'tabRemove']);
     }
 
     #addEvents_() {

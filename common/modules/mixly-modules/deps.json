@@ -118,7 +118,9 @@
     },
     {
         "path": "/common/editor-base.js",
-        "require": [],
+        "require": [
+            "Mixly.Events"
+        ],
         "provide": [
             "Mixly.EditorBase"
         ]
@@ -823,6 +825,7 @@
             "Mixly.MString",
             "Mixly.Nav",
             "Mixly.Workspace",
+            "Mixly.EditorMix",
             "Mixly.Electron.Serial"
         ],
         "provide": [

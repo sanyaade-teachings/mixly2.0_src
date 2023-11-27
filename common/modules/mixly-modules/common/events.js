@@ -13,7 +13,7 @@ class Events {
     }
 
     addType(eventsType) {
-        this.eventsType = MArray.unique([ this.eventsType, ...eventsType ]);
+        this.eventsType = MArray.unique([this.eventsType, ...eventsType]);
     }
 
     exist(type) {

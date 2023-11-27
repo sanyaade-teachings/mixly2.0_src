@@ -62,7 +62,7 @@ class FileTree {
             // plugins: ['wholerow', 'search', 'truncate', 'state'],
             plugins: ['wholerow']
         });
-        this.events = new Events([ 'selectLeaf' ]);
+        this.events = new Events(['selectLeaf']);
         this.selected = null;
         this.#addEventsListener_();
     }
@@ -108,6 +108,7 @@ class FileTree {
     }
 
     select(inPath) {
+        this.selected = inPath;
         this.$fileTree.jstree(true).deselect_all();
         let node = document.getElementById(inPath);
         if (!node) {
@@ -115,7 +116,6 @@ class FileTree {
         }
         this.$fileTree.jstree(true).select_node(node, true, true);
         $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
-        this.selected = inPath;
     }
 
     deselect(inPath) {

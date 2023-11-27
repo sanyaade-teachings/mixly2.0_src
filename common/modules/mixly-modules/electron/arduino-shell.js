@@ -14,6 +14,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.MString');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Workspace');
+goog.require('Mixly.EditorMix');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.ArduShell');
 
@@ -29,6 +30,7 @@ const {
     MString,
     Nav,
     Workspace,
+    EditorMix,
     Config
 } = Mixly;
 
@@ -724,7 +726,19 @@ Nav.register({
     displayText: Blockly.Msg.MSG['compile'],
     preconditionFn: () => {
         const { SELECTED_BOARD } = Config;
-        return goog.isElectron && SELECTED_BOARD?.nav?.compile;
+        if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile) {
+            return false;
+        }
+        const workspace = Workspace.getMain();
+        const { editorManager } = workspace;
+        const editor = editorManager.getActiveEditor();
+        if (!editor) {
+            return false;
+        }
+        if (editor instanceof EditorMix) {
+            return true;
+        }
+        return false;
     },
     callback: () => ArduShell.initCompile(),
     scopeType: Nav.Scope.LEFT,
@@ -738,7 +752,19 @@ Nav.register({
     displayText: Blockly.Msg.MSG['upload'],
     preconditionFn: () => {
         const { SELECTED_BOARD } = Config;
-        return goog.isElectron && SELECTED_BOARD?.nav?.upload && SELECTED_BOARD?.nav?.compile;
+        if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
+            return false;
+        }
+        const workspace = Workspace.getMain();
+        const { editorManager } = workspace;
+        const editor = editorManager.getActiveEditor();
+        if (!editor) {
+            return false;
+        }
+        if (editor instanceof EditorMix) {
+            return true;
+        }
+        return false;
     },
     callback: () => ArduShell.initUpload(),
     scopeType: Nav.Scope.LEFT,

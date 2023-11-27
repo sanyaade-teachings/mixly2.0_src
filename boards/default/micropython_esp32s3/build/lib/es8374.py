@@ -15,7 +15,7 @@ _LCLK_DIV           = const(256)
 _MCLK_DIV           = const(0x04)  
 
 class ES8374:
-    def __init__(self, i2c_bus=None, i2c_addr=0x10, gain=8, pga_en=1):
+    def __init__(self, i2c_bus=None, i2c_addr=0x10, gain=5, pga_en=1):
         self.i2c_bus = i2c_bus
         self.i2c_addr = i2c_addr
         self.stop()

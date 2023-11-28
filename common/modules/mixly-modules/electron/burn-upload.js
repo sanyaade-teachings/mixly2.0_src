@@ -391,6 +391,7 @@ BU.initUpload = function () {
 BU.copyLib = function (filePath, code) {
     const dirPath = path.dirname(filePath);
     const fileName = path.basename(filePath);
+    const { upload } = SELECTED_BOARD;
     fs_extra.ensureDirSync(dirPath);
     try {
         const libFiles = fs.readdirSync(dirPath);
@@ -403,7 +404,21 @@ BU.copyLib = function (filePath, code) {
         console.log(e);
     }
     var pyFileArr = [];
-    pyFileArr = BU.searchLibs(dirPath, code, pyFileArr);
+    const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
+    let libsPathArr = [];
+    if (fs_plus.isDirectorySync(thirdPartyPath)) {
+        const names = fs.readdirSync(thirdPartyPath);
+        for (let name of names) {
+            const libPath = path.join(thirdPartyPath, name, 'libraries');
+            if (fs_plus.isDirectorySync(libPath)) {
+                libsPathArr.push(libPath);
+            }
+        }
+    }
+    if (upload?.libPath instanceof Array) {
+        libsPathArr = [...libsPathArr, ...upload.libPath];
+    }
+    pyFileArr = BU.searchLibs(dirPath, code, pyFileArr, libsPathArr);
     return pyFileArr;
 }
 
@@ -413,12 +428,12 @@ BU.copyLib = function (filePath, code) {
  * @param dirPath {string} 主代码文件所在目录的路径
  * @param code {string} 主代码数据
  * @param libArr {array} 当前已查找出的库列表
+ * @param libsPathArr {array} 需要搜索的库路径
  * @return {array} 库列表
  **/
-BU.searchLibs = function (dirPath, code, libArr) {
+BU.searchLibs = function (dirPath, code, libArr, libsPathArr) {
     const { mainStatusBarTab } = Mixly;
     const statusBarTerminal = mainStatusBarTab.getStatusBarById('output');
-    const { upload } = SELECTED_BOARD;
     let arrayObj = new Array();
     code.trim().split("\n").forEach(function (v, i) {
         arrayObj.push(v);
@@ -454,9 +469,7 @@ BU.searchLibs = function (dirPath, code, libArr) {
             if (!libArr.includes(moduleArr[j] + '.py') && !libArr.includes(moduleArr[j] + '.mpy')) {
                 try {
                     let oldLibPath = null;
-                    if (!(upload.libPath && upload.libPath.length))
-                        return;
-                    for (let nowDirPath of upload.libPath) {
+                    for (let nowDirPath of libsPathArr) {
                         const nowMpyFilePath = path.join(nowDirPath, moduleArr[j] + '.mpy');
                         const nowPyFilePath = path.join(nowDirPath, moduleArr[j] + '.py');
                         if (fs_plus.isFileSync(nowMpyFilePath)) {
@@ -475,7 +488,7 @@ BU.searchLibs = function (dirPath, code, libArr) {
                         if (extname === '.py') {
                             pyFileArr.push(moduleArr[j] + extname);
                             code = fs.readFileSync(oldLibPath, 'utf8');
-                            libArr = BU.searchLibs(dirPath, code, libArr);
+                            libArr = BU.searchLibs(dirPath, code, libArr, libsPathArr);
                         }
                     }
                 } catch (e) {

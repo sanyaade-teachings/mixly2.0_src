@@ -826,7 +826,8 @@
             "Mixly.Nav",
             "Mixly.Workspace",
             "Mixly.EditorMix",
-            "Mixly.Electron.Serial"
+            "Mixly.Electron.Serial",
+            "Mixly.Electron.Shell"
         ],
         "provide": [
             "Mixly.Electron.ArduShell"
@@ -990,6 +991,17 @@
         ],
         "provide": [
             "Mixly.Electron.Serial"
+        ]
+    },
+    {
+        "path": "/electron/shell.js",
+        "require": [
+            "Mixly.Env",
+            "Mixly.MString",
+            "Mixly.Electron"
+        ],
+        "provide": [
+            "Mixly.Electron.Shell"
         ]
     },
     {

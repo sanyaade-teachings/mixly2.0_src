@@ -16,6 +16,7 @@ goog.require('Mixly.Nav');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.EditorMix');
 goog.require('Mixly.Electron.Serial');
+goog.require('Mixly.Electron.Shell');
 goog.provide('Mixly.Electron.ArduShell');
 
 const {
@@ -45,7 +46,8 @@ const iconv_lite = Mixly.require('iconv-lite');
 
 const { 
     ArduShell,
-    Serial
+    Serial,
+    Shell
 } = Electron;
 
 ArduShell.DEFAULT_CONFIG = {
@@ -84,22 +86,6 @@ ArduShell.shellPath = null;
 ArduShell.shell = null;
 
 ArduShell.ERROR_ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
-
-ArduShell.MESSAGE = `
-=====================================================================================
-|问题描述：ESP板卡下报错: No such file or directory -> #include <bits/c++config.h>  |
-|-----------------------------------------------------------------------------------|
-|问题原因：此问题是由于软件存放路径过长导致的gcc编译器问题                          |
-| >相关问题讨论见：                                                                 |
-| 1. https://github.com/arduino/arduino-cli/issues/1892                             |
-| 2. https://github.com/espressif/arduino-esp32/issues/7925                         |
-| 3. https://github.com/espressif/arduino-esp32/issues/6593                         |
-|-----------------------------------------------------------------------------------|
-|其它注意事项:                                                                      |
-| 1. 建议把Mixly缩短安装路径放到D盘，或其他盘根目录下！！！！                       |
-| 2. 初学者务必查看mixly2.0中AVR板卡左下角例程中的Mixly2.0简明教程                  |
-=====================================================================================
-`;
 
 ArduShell.updateShellPath = () => {
     let shellPath = path.join(Env.clientPath, 'arduino-cli');
@@ -391,16 +377,8 @@ ArduShell.upload = (boardType, port) => {
 * @return void
 */
 ArduShell.cancel = function () {
-    if (ArduShell.shell) {
-        ArduShell.shell.stdin.end();
-        ArduShell.shell.stdout.end();
-        if (Env.currentPlatform === 'win32') {
-            child_process.exec('taskkill /pid ' + ArduShell.shell.pid + ' /f /t');
-        } else {
-            ArduShell.shell.kill("SIGTERM");
-        }
-        ArduShell.shell = null;
-    }
+    ArduShell.shell && ArduShell.shell.kill();
+    ArduShell.shell = null;
 }
 
 /**
@@ -530,8 +508,8 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const code = editor.getValue();
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
     const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
-    ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
     const nowFilePath = Title.getFilePath();
+    ArduShell.clearDirCppAndHppFiles(testArduinoDirPath);
     if (USER.compileCAndH === 'yes' && fs_plus.isFileSync(nowFilePath) && ArduShell.isMixOrIno(nowFilePath)) {
         const nowDirPath = path.dirname(nowFilePath);
         ArduShell.copyHppAndCppFiles(nowDirPath, testArduinoDirPath);
@@ -541,66 +519,24 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
         return fs_extra.outputFile(codePath, code);
     })
     .then(() => {
-        let startTime = Number(new Date());
-        ArduShell.shell = child_process.exec(cmd, {
-            maxBuffer: 4096 * 1000000,
-            encoding: 'binary'
-        }, (error, stdout, stderr) => {
-            if (error !== null) {
-                console.log("exec error" + error);
-                if (String(error).indexOf('#include <bits/c++config.h>') !== -1) {
-                    statusBarTerminal.addValue(ArduShell.MESSAGE);
-                }
-            }
-        })
-
-        ArduShell.shell.stdout.on('data', (data) => {
-            if (data.length < 1000) {
-                data = iconv_lite.decode(Buffer.from(data, 'binary'), 'utf-8');
-                statusBarTerminal.addValue(data);
-            }
-        });
-
-        ArduShell.shell.stderr.on('data', (data) => {
-            let lines = data.split('\n');
-            for (let i in lines) {
-                let encoding = 'utf-8';
-                if (lines[i].indexOf('can\'t open device') !== -1) {
-                    encoding = ArduShell.ERROR_ENCODING;
-                }
-                lines[i] = iconv_lite.decode(Buffer.from(lines[i], 'binary'), encoding);
-            }
-            data = lines.join('\n');
-            data = MString.decode(data);
-            statusBarTerminal.addValue(data);
-        });
-
-        ArduShell.shell.on('close', (code) => {
-            layer.close(layerNum);
-            let timeCost = parseInt((Number(new Date()) - startTime) / 1000),
-            timeCostSecond = timeCost % 60,
-            timeCostMinute = parseInt(timeCost / 60),
-            timeCostStr = (timeCostMinute ? timeCostMinute + "m" : "") + timeCostSecond + "s";
-            if (code === 0) {
-                const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
-                statusBarTerminal.addValue("==" + message + "(" + Msg.Lang["用时"] + " " + timeCostStr + ")==\n");
-                layer.msg(message, {
-                        time: 1000
-                    });
-                sucFunc();
-            } else {
-                // code = 1 用户终止运行
-                const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
-                statusBarTerminal.addValue("==" + message + "==\n");
-            }
-            statusBarTerminal.scrollToBottom();
-        });
+        ArduShell.shell = new Shell(cmd);
+        return ArduShell.shell.exec(cmd);
+    })
+    .then((info) => {
+        layer.close(layerNum);
+        const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
+        statusBarTerminal.addValue(`==${message}(${Msg.Lang["用时"]} ${info.time})==\n`);
+        layer.msg(message, { time: 1000 });
+        sucFunc();
     })
     .catch((error) => {
-        console.log(error);
         layer.close(layerNum);
         const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
         statusBarTerminal.addValue("==" + message + "==\n");
+        layer.msg(message, { time: 1000 });
+    })
+    .finally(() => {
+        statusBarTerminal.scrollToBottom();
     });
 }
 

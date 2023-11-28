@@ -20,7 +20,7 @@ class ContextMenu {
 
     constructor(selector) {
         this.selector = selector;
-        this.events = new Events([ 'getMenu' ]);
+        this.events = new Events(['getMenu']);
         this.menu = $.contextMenu({
             selector,
             build: ($trigger, e) => {

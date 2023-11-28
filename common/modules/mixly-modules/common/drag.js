@@ -89,6 +89,7 @@ class Drag {
                 dragElem.left = dragElem.offsetLeft;
                 $('body').addClass('drag-w-resize');
             }
+            const prevSize = this.size;
 
             document.onmousemove = (docEvent) => {
                 this.events.run('ondragStart');
@@ -118,12 +119,13 @@ class Drag {
                 this.events.run('ondragEnd');
                 return false;
             };
-            document.onmouseup = function () {
+            document.onmouseup = () => {
                 if (type === 'h') {
                     $('body').removeClass('drag-s-resize');
                 } else {
                     $('body').removeClass('drag-w-resize');
                 }
+                this.prevSize = prevSize;
                 document.onmousemove = null;
                 document.onmouseup = null;
             };
@@ -223,9 +225,6 @@ class Drag {
         }
     }
 }
-
-
-Drag.elems = {};
 
 class DragH extends Drag {
     constructor(elem, config) {

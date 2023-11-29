@@ -64,13 +64,6 @@ module.exports = {
     ],
     externals: {
         'blockly/core': 'Blockly',
-        'blockly/javascript': 'Blockly.JavaScript',
-        'blockly/python': 'Blockly.Python',
-        'blockly/dart': 'Blockly.Dart',
-        'blockly/php': 'Blockly.PHP',
-        'blockly/lua': 'Blockly.Lua',
-        'blockly/arduino': 'Blockly.Arduino',
-        'profile': 'profile',
         'mixly': 'Mixly',
         'layui': 'layui',
         'path': 'path',

@@ -21,9 +21,10 @@ Blockly.Arduino.forBlock['esp_now_send'] = function () {
   const macName = macList.join('');
   Blockly.Arduino.definitions_['var_declare_PEER_' + macName] = 'uint8_t PEER_' + macName + '[] = {' + mac + '};\n';
   Blockly.Arduino.definitions_['function_sendMessage'] = 'bool sendMessage(String _data) {\n'
-    + '  char _msg[100];\n'
-    + '  uint8_t _len = snprintf(_msg, 100, "%s", _data);\n'
-    + '  return WifiEspNow.send(PEER_' + macName + ', reinterpret_cast<const uint8_t*>(_msg), _len);\n'
+    + '  uint16_t length = _data.length();\n'
+    + '  char _msg[length];\n'
+    + '  strcpy(_msg, _data.c_str());\n'
+    + '  return WifiEspNow.send(PEER_' + macName + ', reinterpret_cast<const uint8_t*>(_msg), length);\n'
     + '}\n';
   Blockly.Arduino.setups_['setup_esp_now'] = `
   WiFi.persistent(false);

@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['ACTUATOR_HUE'] = 100;
 
@@ -9,7 +9,7 @@ export const servo_move = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendValueInput("DEGREE", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -31,7 +31,7 @@ export const servo_writeMicroseconds = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendValueInput("DEGREE", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -50,7 +50,7 @@ export const servo_read_degrees = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_READ_DEGREES)
@@ -70,7 +70,7 @@ export const servo_move1 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendValueInput("DEGREE", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -95,7 +95,7 @@ export const servo_writeMicroseconds1 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendValueInput("DEGREE", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -117,7 +117,7 @@ export const servo_read_degrees1 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SERVO)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_READ_DEGREES)
@@ -335,7 +335,7 @@ export const display_rgb_init = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB + Blockly.Msg.MIXLY_SETUP)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_TYPE)
@@ -358,7 +358,7 @@ export const display_rgb_Brightness = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("Brightness")
             .setCheck(Number)
@@ -379,7 +379,7 @@ export const display_rgb = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("_LED_")
             .setCheck(Number)
@@ -403,7 +403,7 @@ export const display_rgb_show = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB_SHOW)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -423,7 +423,7 @@ export const display_rgb_rainbow1 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("WAIT")
             .setCheck(Number)
@@ -441,7 +441,7 @@ export const display_rgb_rainbow2 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("WAIT")
             .setCheck(Number)
@@ -460,7 +460,7 @@ export const display_rgb_rainbow3 = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(DISPLAY_RAINBOW_TYPE), "TYPE");
@@ -481,7 +481,7 @@ export const RGB_color_HSV = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .setAlign(Blockly.ALIGN_RIGHT);
         this.appendValueInput("_LED_")
             .setCheck(Number)

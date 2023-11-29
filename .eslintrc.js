@@ -18,7 +18,7 @@ module.exports = {
         "indent": [2, 4], // 缩进风格
         "strict": 2,
         "use-isnan": 2,
-        "no-redeclare": 2, // 禁止重复声明变量
+        "no-redeclare": 0, // 禁止重复声明变量
         "no-trailing-spaces": 1, // 一行结束后面不要有空格
         "no-this-before-super": 2, // 在调用super()之前不能使用this或super
         "no-unneeded-ternary": 2, // 禁止不必要的嵌套 var isYes = answer === 1 ? true : false;

@@ -1,5 +1,7 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
+
+import pins from './pins/pins';
 
 import * as CommonEthernetBlocks from '../arduino_common/blocks/ethernet';
 import * as CommonTextBlocks from '../arduino_common/blocks/text';
@@ -51,7 +53,9 @@ import * as AvrVariablesGenerators from './generators/variables';
 
 import './css/color.css';
 
-Object.assign(profile.default, profile['Arduino/Genuino Uno']);
+Profile.default = {};
+Object.assign(Profile, pins);
+Object.assign(Profile.default, pins.arduino_standard);
 
 Object.assign(
     Blockly.Blocks,

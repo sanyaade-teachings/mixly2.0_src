@@ -1,5 +1,7 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
+
+import pins from './pins/pins';
 
 import * as CommonEthernetBlocks from '../arduino_common/blocks/ethernet';
 import * as CommonTextBlocks from '../arduino_common/blocks/text';
@@ -84,7 +86,9 @@ import Esp32En from './language/en';
 
 import './css/color_esp32_arduino.css';
 
-Object.assign(profile.default, profile['arduino_esp32']);
+Profile.default = {};
+Object.assign(Profile, pins);
+Object.assign(Profile.default, pins.arduino_esp32);
 
 Object.assign(Blockly.Lang.ZhHans, Esp32ZhHans);
 Object.assign(Blockly.Lang.ZhHant, Esp32ZhHant);

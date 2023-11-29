@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const BLOCKS_PATH = path.resolve(__dirname, '../python/blocks');
-const GENERATORS_PATH = path.resolve(__dirname, '../python/generators');
+const BLOCKS_PATH = path.resolve(__dirname, '../micropython_esp32/blocks');
+const GENERATORS_PATH = path.resolve(__dirname, '../micropython_esp32/generators');
 
 const blocksDir = fs.readdirSync(BLOCKS_PATH);
 const generatorDir = fs.readdirSync(GENERATORS_PATH);

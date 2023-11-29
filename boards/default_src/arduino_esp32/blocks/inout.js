@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 import { inout_analog_write } from '../../arduino_avr/blocks/inout';
 
 Blockly.Msg['BASE_HUE'] = 20//'#ae3838';//40;
@@ -90,7 +90,7 @@ export const inout_esp32_dac = {
         this.appendValueInput("value")
             .setCheck(null)
             .appendField(Blockly.Msg.inout_esp32_dac)
-            .appendField(new Blockly.FieldDropdown(profile.default.dac), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.dac), "PIN")
             .appendField(Blockly.Msg.MIXLY_VALUE2);
         this.appendDummyInput();
         this.setPreviousStatement(true, null);

@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['HANDBIT_HUE'] = 65;
 
@@ -9,7 +9,7 @@ export const handbit_button_is_pressed = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(profile.default.button), 'btn');
+            .appendField(new Blockly.FieldDropdown(Profile.default.button), 'btn');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_IS_PRESSED);
         this.setOutput(true, Boolean);

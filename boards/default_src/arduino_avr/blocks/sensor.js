@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['SENSOR_HUE'] = 40;
 
@@ -73,9 +73,9 @@ export const chaoshengbo2 = {
             .appendField(Blockly.Msg.MIXLY_CHAOSHENGBO);
         this.appendDummyInput("")
             .appendField('Trig#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "Trig")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "Trig")
             .appendField('Echo#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "Echo");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "Echo");
         this.setInputsInline(true);
         this.setOutput(true, Number);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_CHAOSHENGBO);
@@ -92,7 +92,7 @@ export const DHT = {
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([['DHT11', '11'], ['DHT21', '21'], ['DHT22', '22']]), 'TYPE')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .appendField(new Blockly.FieldDropdown(WHAT), "WHAT");
         this.setOutput(true, Number);
         var thisBlock = this;
@@ -128,7 +128,7 @@ export const ds18b20 = {
         this.setColour(Blockly.Msg['SENSOR_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DS18B20)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
             .appendField(Blockly.Msg.MIXLY_GETTEMPERATUE)
             .appendField(new Blockly.FieldDropdown(UNIT), "UNIT");
         this.setOutput(true, Number);
@@ -178,9 +178,9 @@ export const weightSensor = {
             .appendField(Blockly.Msg.MIXLY_WEIGHTSENSOR);
         this.appendDummyInput("")
             .appendField('Dout#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DOUT")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DOUT")
             .appendField('SCK#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SCK");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SCK");
         this.appendValueInput("scale")
             .setCheck(Number)
             .appendField(Blockly.Msg.HX711_scale);
@@ -519,10 +519,10 @@ export const encoder_init = {
         this.appendDummyInput("")
             .appendField('DT')
             .appendField(new Blockly
-                .FieldDropdown(profile.default.digital), "DT")
+                .FieldDropdown(Profile.default.digital), "DT")
             .appendField('CLK')
             .appendField(new Blockly
-                .FieldDropdown(profile.default.digital), "CLK");
+                .FieldDropdown(Profile.default.digital), "CLK");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -578,10 +578,10 @@ export const encoder_init1 = {
         this.appendDummyInput("")
             .appendField('DT')
             .appendField(new Blockly
-                .FieldDropdown(profile.default.digital), "DT")
+                .FieldDropdown(Profile.default.digital), "DT")
             .appendField('CLK')
             .appendField(new Blockly
-                .FieldDropdown(profile.default.digital), "CLK");
+                .FieldDropdown(Profile.default.digital), "CLK");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -740,13 +740,13 @@ export const PS2_init = {
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.PS2);
         this.appendDummyInput("")
             .appendField('DAT#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PS2_DAT")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PS2_DAT")
             .appendField('CMD#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PS2_CMD")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PS2_CMD")
             .appendField('SEL#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PS2_SEL")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PS2_SEL")
             .appendField('CLK#')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PS2_CLK");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PS2_CLK");
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2_setRumble)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ON, "true"], [Blockly.Msg.MIXLY_OFF, "false"]]), "rumble");
@@ -1072,7 +1072,7 @@ export const NTC_TEMP = {
             .appendField(Blockly.Msg.MIXLY_TEMP);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.appendValueInput("NominalResistance")
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_NominalResistance);

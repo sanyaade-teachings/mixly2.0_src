@@ -1,6 +1,6 @@
 import * as Mixly from 'mixly';
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 export const group_lcd_init2 = function () {
     var varName = this.getFieldValue('VAR');
@@ -9,7 +9,7 @@ export const group_lcd_init2 = function () {
     var SDA = this.getFieldValue('SDA');
     var board_type = Mixly.JSFuncs.getPlatform();
     var device = Blockly.Arduino.valueToCode(this, 'device', Blockly.Arduino.ORDER_ATOMIC) || '0x27';
-    if (SDA == profile.default.SDA[0][1] && SCL == profile.default.SCL[0][1]) {
+    if (SDA == Profile.default.SDA[0][1] && SCL == Profile.default.SCL[0][1]) {
         Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
         Blockly.Arduino.definitions_['include_LiquidCrystal_I2C'] = '#include <LiquidCrystal_I2C.h>';
         Blockly.Arduino.definitions_['var_declare_LiquidCrystal_I2C_' + varName] = 'LiquidCrystal_I2C ' + varName + '(' + device + ',' + TYPE + ');';
@@ -400,13 +400,13 @@ export const oled_init = function () {
     //var board_type ="ESP8266";
     Blockly.Arduino.definitions_['include_U8g2lib'] = '#include <U8g2lib.h>';
     if (board_type.match(RegExp(/AVR/))) {
-        if (SDA == profile.default.SDA[0][1] && SCL == profile.default.SCL[0][1])
+        if (SDA == Profile.default.SDA[0][1] && SCL == Profile.default.SCL[0][1])
             Blockly.Arduino.definitions_['var_declare_U8G2' + NAME] = 'U8G2_' + OLED_TYPE + '_1_HW_I2C ' + NAME + '(' + ROTATION + ', U8X8_PIN_NONE);';
         else
             Blockly.Arduino.definitions_['var_declare_U8G2' + NAME] = 'U8G2_' + OLED_TYPE + '_1_SW_I2C ' + NAME + '(' + ROTATION + ',  ' + SCL + ', ' + SDA + ', U8X8_PIN_NONE);';
     }
     else {
-        if (SDA == profile.default.SDA[0][1] && SCL == profile.default.SCL[0][1])
+        if (SDA == Profile.default.SDA[0][1] && SCL == Profile.default.SCL[0][1])
             Blockly.Arduino.definitions_['var_declare_U8G2' + NAME] = 'U8G2_' + OLED_TYPE + '_F_HW_I2C ' + NAME + '(' + ROTATION + ', U8X8_PIN_NONE);';
         else
             Blockly.Arduino.definitions_['var_declare_U8G2' + NAME] = 'U8G2_' + OLED_TYPE + '_F_SW_I2C ' + NAME + '(' + ROTATION + ',  ' + SCL + ', ' + SDA + ', U8X8_PIN_NONE);';

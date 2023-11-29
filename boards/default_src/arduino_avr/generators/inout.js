@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 export const inout_highlow = function () {
     // Boolean values HIGH and LOW.
@@ -68,7 +68,7 @@ export const inout_analog_write = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     //var dropdown_stat = this.getFieldValue('STAT');
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
-    const { pwm } = profile.default;
+    const { pwm } = Profile.default;
     if (typeof pwm === 'object') {
         for (let i of pwm)
             if (dropdown_pin === i[1]) {
@@ -82,7 +82,7 @@ export const inout_analog_write = function () {
 
 export const inout_analog_read = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    const { analog } = profile.default;
+    const { analog } = Profile.default;
     if (typeof analog === 'object') {
         for (let i of analog)
             if (dropdown_pin === i[1]) {

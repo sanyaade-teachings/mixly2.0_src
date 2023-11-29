@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['BASE_HUE'] = 20;//'#ae3838';//40;
 
@@ -62,7 +62,7 @@ export const inout_digital_read = {
         this.setColour(Blockly.Msg['BASE_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DIGITALREAD_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
         this.setOutput(true, [Boolean, Number]);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_DIGITAL_READ);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/02.Input-Output.html#id7");

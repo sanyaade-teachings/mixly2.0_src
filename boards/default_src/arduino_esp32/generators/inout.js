@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 export const inout_touchRead = function () {
     var pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
@@ -29,7 +29,7 @@ export const ledcWrite = function () {
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_Arduino'] = '#include <Arduino.h>';
-    const { analog } = profile.default;
+    const { analog } = Profile.default;
     if (typeof analog === 'object') {
         for (let i of analog)
             if (dropdown_pin === i[1]) {

@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
 import * as layui from 'layui';
 import * as Mixly from 'mixly';
+import { Profile } from 'mixly';
 import $ from 'jquery';
 
 const {
@@ -33,16 +33,16 @@ export const group_lcd_init2 = {
         this.appendDummyInput("")
             .appendField('SCL')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SCL")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SCL")
             .appendField('SDA')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SDA");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SDA");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_LCD_INIT2);
-        this.setFieldValue(profile.default.SCL[0][1], "SCL");
-        this.setFieldValue(profile.default.SDA[0][1], "SDA");
+        this.setFieldValue(Profile.default.SCL[0][1], "SCL");
+        this.setFieldValue(Profile.default.SDA[0][1], "SDA");
     }
 };
 
@@ -58,17 +58,17 @@ export const group_lcd_init3 = {
             .setAlign(Blockly.ALIGN_LEFT);
         this.appendDummyInput()
             .appendField('RS')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "RS")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "RS")
             .appendField('EN')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "EN")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "EN")
             .appendField('D4')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "D4")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "D4")
             .appendField('D5')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "D5")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "D5")
             .appendField('D6')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "D6")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "D6")
             .appendField('D7')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "D7");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "D7");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -198,10 +198,10 @@ export const display_TM1637_init = {
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField('CLK')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "CLK")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "CLK")
             .appendField('DIO')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DIO");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DIO");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -299,16 +299,16 @@ export const HT16K33_Init = {
             // .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_TM1637_INIT)
             .appendField('SCL')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SCL")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SCL")
             .appendField('SDA')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SDA");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SDA");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOPTIP_Matrix_HK16T33_INIT);
-        this.setFieldValue(profile.default.SCL[0][1], "SCL");
-        this.setFieldValue(profile.default.SDA[0][1], "SDA");
+        this.setFieldValue(Profile.default.SCL[0][1], "SCL");
+        this.setFieldValue(Profile.default.SDA[0][1], "SDA");
     }
 };
 
@@ -1116,17 +1116,17 @@ export const oled_init = {
             .appendField(" " + Blockly.Msg.MIXLY_MICROBIT_monitor)
             .appendField(new Blockly.FieldDropdown(ROTATION_TYPE), "ROTATION")
             .appendField(' SCL')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SCL")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SCL")
             .appendField('SDA')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SDA");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SDA");
         this.appendValueInput("ADDRESS")
             .appendField(Blockly.Msg.MIXLY_LCD_ADDRESS);
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.OLED_INIT2_TOOLTIP);
-        this.setFieldValue(profile.default.SCL[0][1], "SCL");
-        this.setFieldValue(profile.default.SDA[0][1], "SDA");
+        this.setFieldValue(Profile.default.SCL[0][1], "SCL");
+        this.setFieldValue(Profile.default.SDA[0][1], "SDA");
     }
 };
 export const u8g2_spi_init = {
@@ -1140,16 +1140,16 @@ export const u8g2_spi_init = {
             .appendField(new Blockly.FieldDropdown(ROTATION_TYPE), "ROTATION");
         this.appendDummyInput()
             .appendField('CLK')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "CLK")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "CLK")
             .appendField('MOSI')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "MOSI");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "MOSI");
         this.appendDummyInput()
             .appendField('CS')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "CS")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "CS")
             .appendField('DC')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DC")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DC")
             .appendField('RST')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "RST");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "RST");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
@@ -1158,8 +1158,8 @@ export const u8g2_spi_init = {
             + "MOSI - SDA(SSD1306) - DIN(NOKIA5110)"
         );
         this.setHelpUrl("");
-        this.setFieldValue(profile.default.SCK[0][1], "CLK");
-        this.setFieldValue(profile.default.MOSI[0][1], "MOSI");
+        this.setFieldValue(Profile.default.SCK[0][1], "CLK");
+        this.setFieldValue(Profile.default.MOSI[0][1], "MOSI");
     }
 };
 export const u8g2_LCD12864_spi_init = {
@@ -1178,9 +1178,9 @@ export const u8g2_LCD12864_spi_init = {
             .appendField("MOSI");
         this.appendDummyInput()
             .appendField('RS')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DC");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DC");
         //.appendField(' RST'+Blockly.Msg.MIXLY_PIN)
-        //.appendField(new Blockly.FieldDropdown(profile.default.digital), "RST");
+        //.appendField(new Blockly.FieldDropdown(Profile.default.digital), "RST");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip("PSB = 0");
@@ -1197,27 +1197,27 @@ export const u8g2_LCD12864_8080_init = {
             .appendField(new Blockly.FieldDropdown(ROTATION_TYPE), "ROTATION");
         this.appendDummyInput()
             .appendField('D0')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB0")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB0")
             .appendField('D1')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB1")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB1")
             .appendField('D2')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB2")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB2")
             .appendField('D3')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB3")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB3")
             .appendField('D4')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB4")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB4")
             .appendField('D5')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB5")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB5")
             .appendField('D6')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB6")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB6")
             .appendField('D7')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DB7")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DB7")
             .appendField('E')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "ENABLE")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "ENABLE")
             .appendField('RS')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DC");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DC");
         //.appendField(' RST'+Blockly.Msg.MIXLY_PIN)
-        //.appendField(new Blockly.FieldDropdown(profile.default.digital), "RST");
+        //.appendField(new Blockly.FieldDropdown(Profile.default.digital), "RST");
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -1855,11 +1855,11 @@ export const TFT_init_with_pin = {
             .appendField("SDA");
         this.appendDummyInput()
             .appendField('CS')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "CS")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "CS")
             .appendField('DC')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DC")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DC")
             .appendField('RST')
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "RST");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "RST");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -2599,10 +2599,10 @@ export const display_TM1637_init_32 = {
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField('CLK')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "CLK")
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "CLK")
             .appendField('DIO')
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "DIO");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "DIO");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);

@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['COMMUNICATE_HUE'] = 140;
 
@@ -377,16 +377,16 @@ export const RFID_init = {
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_INITIAL);
         this.appendDummyInput("")
             .appendField("SDA")
-            .appendField(new Blockly.FieldDropdown(profile.default.digital), "SDA");
+            .appendField(new Blockly.FieldDropdown(Profile.default.digital), "SDA");
         this.appendDummyInput("")
             .appendField("SCK")
-            .appendField(new Blockly.FieldDropdown(profile.default.SCK), "SCK");
+            .appendField(new Blockly.FieldDropdown(Profile.default.SCK), "SCK");
         this.appendDummyInput("")
             .appendField("MOSI")
-            .appendField(new Blockly.FieldDropdown(profile.default.MOSI), "MOSI");
+            .appendField(new Blockly.FieldDropdown(Profile.default.MOSI), "MOSI");
         this.appendDummyInput("")
             .appendField("MISO")
-            .appendField(new Blockly.FieldDropdown(profile.default.MISO), "MISO");
+            .appendField(new Blockly.FieldDropdown(Profile.default.MISO), "MISO");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -426,7 +426,7 @@ export const RFID_readcardnum = {
    init: function() {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendDummyInput("")
-        .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+        .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
         .appendField('打印RFID卡号');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -486,7 +486,7 @@ export const RFID_serialprintcarddata = {
    init: function() {
     this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
     this.appendValueInput("address")
-        .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+        .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
         .appendField("打印RFID数据块");
     this.appendDummyInput("")
         .appendField("内容")

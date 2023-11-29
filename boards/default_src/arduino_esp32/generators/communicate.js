@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 export const spi_transfer = function () {
     Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
@@ -14,7 +14,7 @@ export const spi_transfer = function () {
 };
 
 export const serialBT_Init = function () {
-    var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || profile.default.serial;
+    var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || Profile.default.serial;
     Blockly.Arduino.definitions_['include_BluetoothSerial'] = '#include "BluetoothSerial.h"';
     Blockly.Arduino.definitions_['var_declare_BluetoothSerial'] = 'BluetoothSerial SerialBT;';
     Blockly.Arduino.setups_['setup_serial_BT'] = 'SerialBT.begin(' + content + ');';

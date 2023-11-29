@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 import { sensor_mixgo_pin_near } from './MixGo';
 
 Blockly.Msg['ACTUATOR_HUE'] = 100;
@@ -10,7 +10,7 @@ export const mixgo_button_is_pressed = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(profile.default.button), 'PIN');
+            .appendField(new Blockly.FieldDropdown(Profile.default.button), 'PIN');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_IS_PRESSED);
         this.setOutput(true, Boolean);
@@ -36,7 +36,7 @@ export const mixgo_touch_pin = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.touch), 'touch_pin');
+            .appendField(new Blockly.FieldDropdown(Profile.default.touch), 'touch_pin');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_IS_TOUCHED);
         this.setOutput(true, Boolean);

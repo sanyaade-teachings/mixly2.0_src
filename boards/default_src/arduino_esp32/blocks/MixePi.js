@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['DISPLAY_HUE'] = 180;
 
@@ -31,7 +31,7 @@ export const mixePi_button_is_pressed = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(profile.default.button), 'btn');
+            .appendField(new Blockly.FieldDropdown(Profile.default.button), 'btn');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_IS_PRESSED);
         this.setOutput(true, Boolean);
@@ -68,7 +68,7 @@ export const mixepi_inout_touchRead = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
             .appendField(Blockly.Msg.MIXLY_PIN)
-            .appendField(new Blockly.FieldDropdown(profile.default.touch), 'touch_pin');
+            .appendField(new Blockly.FieldDropdown(Profile.default.touch), 'touch_pin');
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_MACHINE_VALUE)
         this.setOutput(true, Number);

@@ -1,6 +1,6 @@
 import * as Mixly from 'mixly';
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 export const gps_init = function () {
     Blockly.Arduino.definitions_['include_TinyGPS++'] = '#include <TinyGPS++.h>';
@@ -149,7 +149,7 @@ export const DS1307_init = function () {
     var RTCType = this.getFieldValue('RTCType');
     Blockly.Arduino.definitions_['include_' + RTCType] = '#include <' + RTCType + '.h>';
     //Blockly.Arduino.definitions_['var_declare_RtcDateTime_dt'] = 'const RtcDateTime dt;';
-    if (SDA != profile.default.SDA[0][1] || SCL != profile.default.SCL[0][1]) {
+    if (SDA != Profile.default.SDA[0][1] || SCL != Profile.default.SCL[0][1]) {
         Blockly.Arduino.definitions_['include_SoftwareWire'] = '#include <SoftwareWire.h>';
         Blockly.Arduino.definitions_['var_declare_SoftwareWire'] = 'SoftwareWire myWire(' + SDA + ',' + SCL + ');';
         Blockly.Arduino.definitions_['var_declare_' + RTCType] = RTCType + '<SoftwareWire> Rtc(myWire);';

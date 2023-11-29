@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['SERIAL_HUE'] = 65;
 
@@ -7,7 +7,7 @@ export const serial_begin = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", Number)
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)
             .setCheck(Number);
         this.setPreviousStatement(true, null);
@@ -21,7 +21,7 @@ export const serial_write = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", String)
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_WRITE);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -33,7 +33,7 @@ export const serial_print = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", String)
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line");
         this.setPreviousStatement(true, null);
@@ -46,7 +46,7 @@ export const serial_println = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", String)
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"], [Blockly.Msg.MIXLY_PRINT_INLINE, "print"]]), "new_line");
         this.setPreviousStatement(true, null);
@@ -60,7 +60,7 @@ export const serial_print_num = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_PRINT_INLINE, "print"], [Blockly.Msg.TEXT_PRINT_Huanhang_TOOLTIP, "println"]]), "new_line")
             .appendField(Blockly.Msg.MIXLY_NUMBER);
@@ -80,7 +80,7 @@ export const serial_available = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_AVAILABLE);
         this.setOutput(true, Boolean);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_AVAILABLE);
@@ -91,7 +91,7 @@ export const serial_readstr = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR);
         this.setOutput(true, String);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_SERIAL_READ_STR);
@@ -102,7 +102,7 @@ export const serial_readstr_until = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendValueInput("CONTENT", Number)
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR_UNTIL)
             .setCheck(Number);
         this.setInputsInline(true);
@@ -115,7 +115,7 @@ export const serial_parseInt_Float = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             //.appendField(Blockly.Msg.MIXLY_SERIAL_READ)
             .appendField(new Blockly.FieldDropdown([["read", "read"], ["peek", "peek"], ["parseInt", "parseInt"], ["parseFloat", "parseFloat"]]), "STAT");
         this.setOutput(true, Number);
@@ -135,7 +135,7 @@ export const serial_flush = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_FLUSH);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -147,7 +147,7 @@ export const serial_softserial = {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP)
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select");
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select");
         this.appendValueInput("RX", Number)
             .setCheck(Number)
             .appendField("RX#")
@@ -168,7 +168,7 @@ export const serial_event = {
     init: function () {
         this.setColour(Blockly.Msg['SERIAL_HUE']);
         this.appendDummyInput()
-            .appendField(new Blockly.FieldDropdown(profile.default.serial_select), "serial_select")
+            .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_EVENT);
         this.appendStatementInput('DO')
             .appendField(Blockly.Msg.MIXLY_DO);

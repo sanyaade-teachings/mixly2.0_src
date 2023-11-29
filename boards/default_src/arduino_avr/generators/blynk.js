@@ -1,5 +1,5 @@
-import * as Mixly from 'mixly';
 import * as Blockly from 'blockly/core';
+import * as Mixly from 'mixly';
 
 
 //物联网-授权码

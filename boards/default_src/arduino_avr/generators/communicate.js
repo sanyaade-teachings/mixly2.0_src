@@ -1,6 +1,6 @@
-import * as Mixly from 'mixly';
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import * as Mixly from 'mixly';
+import { Profile } from 'mixly';
 
 export const ir_recv = function () {
     var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
@@ -109,7 +109,7 @@ export const ir_recv_raw = function () {
     Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
     Blockly.Arduino.definitions_['var_declare_ir_recv' + dropdown_pin] = 'IRrecv irrecv_' + dropdown_pin + '(' + dropdown_pin + ');\ndecode_results results_' + dropdown_pin + ';\n';
     if (!Blockly.Arduino.setups_['setup_serial_Serial']) {
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(' + profile.default.serial + ');';
+        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(' + Profile.default.serial + ');';
     }
     Blockly.Arduino.setups_['setup_ir_recv_' + dropdown_pin] = 'irrecv_' + dropdown_pin + '.enableIRIn();\n';
     var code = "if (irrecv_" + dropdown_pin + ".decode(&results_" + dropdown_pin + ")) {\n"

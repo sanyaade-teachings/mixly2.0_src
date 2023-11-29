@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly/core';
-import * as profile from 'profile';
+import { Profile } from 'mixly';
 
 Blockly.Msg['SENSOR_HUE'] = 40;
 
@@ -33,7 +33,7 @@ export const OneButton = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT);
         this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(profile.default.button), 'PIN');
+            .appendField(new Blockly.FieldDropdown(Profile.default.button), 'PIN');
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_CLICK, "attachClick"], [Blockly.Msg.MIXLY_DOUBLE_CLICK, "attachDoubleClick"], [Blockly.Msg.MIXLY_LONG_PRESS_START, "attachLongPressStart"], [Blockly.Msg.MIXLY_DURING_LONG_PRESS, "attachDuringLongPress"], [Blockly.Msg.MIXLY_LONG_PRESS_END, "attachLongPressStop"]]), "mode");

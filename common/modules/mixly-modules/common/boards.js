@@ -14,6 +14,7 @@ goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
 goog.require('Mixly.FooterLayerBoardConfig');
 goog.require('Mixly.BoardConfigItem');
+goog.require('Mixly.Profile');
 goog.provide('Mixly.Boards');
 
 const {
@@ -27,8 +28,9 @@ const {
     FooterLayer,
     Msg,
     Boards,
+    FooterLayerBoardConfig,
     BoardConfigItem,
-    FooterLayerBoardConfig
+    Profile
 } = Mixly;
 
 const { form } = layui;
@@ -102,8 +104,9 @@ Boards.setSelectedBoard = (name, userConfig) => {
     boardInfo.setSelectedOptions(userConfig);
     Boards.changeTo(name);
     Boards.updateCategories(name);
-    if (typeof profile === 'object' && profile[name]) 
-        profile['default'] = profile[name];
+    if (Profile[name]) {
+        Profile['default'] = Profile[name];
+    }
 }
 
 Boards.getSelectedBoardConfig = () => {
@@ -126,11 +129,10 @@ Boards.getSelectedBoardConfigParam = (name) => {
  **/
 Boards.changeTo = (boardName) => {
     Boards.configMenu.changeTo(boardName);
-    profile = typeof profile === 'object' ? profile : {};
-    if (profile[boardName]) {
-        profile['default'] = profile[boardName];
+    if (Profile[boardName]) {
+        Profile['default'] = Profile[boardName];
     } else {
-        profile['default'] = profile['default'] ?? {};
+        Profile['default'] = Profile['default'] ?? {};
     }
     const boardKey = Boards.dict[boardName].key;
     

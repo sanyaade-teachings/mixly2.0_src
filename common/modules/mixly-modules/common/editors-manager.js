@@ -107,19 +107,15 @@ class EditorsManager {
             this.editors[tabId] = new Editor(this.$editorContainer[0], extname);
             this.editors[tabId].setTab($(tabEl));
             this.editors[tabId].events.bind('onAddDirty', ($tab) => {
-                const name = $tab.attr('data-tab-id');
-                const title = $tab.attr('title');
+                const id = $tab.attr('data-tab-id');
                 this.editorTabs.updateTab($tab[0], {
-                    name,
-                    title: title + ' - 未保存'
+                    title: id + ' - 未保存'
                 });
             });
             this.editors[tabId].events.bind('onRemoveDirty', ($tab) => {
-                const name = $tab.attr('data-tab-id');
-                const title = $tab.attr('title');
+                const id = $tab.attr('data-tab-id');
                 this.editorTabs.updateTab($tab[0], {
-                    name,
-                    title: title.split(' - ')[0]
+                    title: id
                 });
             });
             if (Object.keys(this.editors).length && this.page === 'welcome') {

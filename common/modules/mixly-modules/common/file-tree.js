@@ -6,12 +6,14 @@ goog.require('XScrollbar');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Events');
+goog.require('Mixly.ContextMenu');
 goog.provide('Mixly.FileTree');
 
 const {
     Env,
     Config,
-    Events
+    Events,
+    ContextMenu
 } = Mixly;
 
 const { USER } = Config;
@@ -45,6 +47,14 @@ class FileTree {
                 multiple: false,
                 animation: 0,
                 worker: false,
+                check_callback: function(operation, node, parent, position, more) {
+                    if(operation === 'copy_node' || operation === 'move_node') {
+                        if(parent.id === '#') {
+                            return false;
+                        }
+                    }
+                    return true;
+                },
                 data: (node, cb) => {
                     if(node.id === "#") {
                         cb(this.#getRoot_());
@@ -59,8 +69,7 @@ class FileTree {
                     ellipsis: true
                 }
             },
-            // plugins: ['wholerow', 'search', 'truncate', 'state'],
-            plugins: ['wholerow']
+            plugins: ['wholerow', 'dnd', 'sort', 'unique', 'state']
         });
         this.events = new Events(['selectLeaf']);
         this.selected = null;

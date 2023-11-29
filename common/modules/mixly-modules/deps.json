@@ -26,7 +26,8 @@
             "Mixly.FooterLayer",
             "Mixly.Msg",
             "Mixly.FooterLayerBoardConfig",
-            "Mixly.BoardConfigItem"
+            "Mixly.BoardConfigItem",
+            "Mixly.Profile"
         ],
         "provide": [
             "Mixly.Boards"
@@ -341,7 +342,8 @@
             "XScrollbar",
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.Events"
+            "Mixly.Events",
+            "Mixly.ContextMenu"
         ],
         "provide": [
             "Mixly.FileTree"
@@ -631,6 +633,15 @@
         ],
         "provide": [
             "Mixly.Nav"
+        ]
+    },
+    {
+        "path": "/common/profile.js",
+        "require": [
+            "Mixly"
+        ],
+        "provide": [
+            "Mixly.Profile"
         ]
     },
     {

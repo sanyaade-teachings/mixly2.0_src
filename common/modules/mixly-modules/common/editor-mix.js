@@ -356,6 +356,7 @@ class EditorMix extends EditorBase {
     }
 
     setValue(data, ext) {
+        Blockly.Events.disable();
         try {
             data = XML.convert(data, true);
             data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
@@ -379,7 +380,7 @@ class EditorMix extends EditorBase {
             } else {
             }
         });
-        super.setValue(data, ext);
+        Blockly.Events.enable();
     }
 
     getValue() {

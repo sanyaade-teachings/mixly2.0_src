@@ -95,8 +95,8 @@ class Workspace {
         events.bind('selectLeaf', (selected) => {
             this.editorManager.editorTabs.addTab({
                 name: selected[0].text,
-                favicon: false,
-                title: selected[0].id
+                title: selected[0].id,
+                id: selected[0].id
             });
         });
         this.fileTree.setDirPath('D:/gitee/mixly/mixly2.0-win32-x64/resources/app/src/sample');

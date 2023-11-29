@@ -24,7 +24,7 @@ class Shell {
         this.shell = null;
     }
 
-    #addEvents_() {
+    #addEventsListener_() {
         const { mainStatusBarTabs } = Mixly;
         const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
         const { stdout, stderr } = this.shell;
@@ -50,7 +50,7 @@ class Shell {
         });
     }
 
-    exec = (command) => {
+    exec(command) {
         return new Promise((resolve, reject) => {
             const { mainStatusBarTabs } = Mixly;
             const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
@@ -59,7 +59,7 @@ class Shell {
                 maxBuffer: 4096 * 1000000,
                 encoding: 'binary'
             });
-            this.#addEvents_();
+            this.#addEventsListener_();
             this.shell.on('close', (code) => {
                 const endTime = Number(new Date());
                 let timeDiff, second, minute;

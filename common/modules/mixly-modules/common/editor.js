@@ -31,10 +31,6 @@ const {
 const { USER, BOARD } = Config;
 
 Editor.init = () => {
-    Editor.mainEditor = new EditorMix($('<div></div>')[0]);
-    Editor.mainEditor.init();
-    Editor.blockEditor = Editor.mainEditor.blockEditor.editor;
-    Editor.codeEditor = Editor.mainEditor.codeEditor.editor;
     Editor.workspace = new Workspace($('#mixly-body')[0]);
     Mixly.mainStatusBarTabs = Editor.workspace.statusBarTabs;
     const { editorManager } = Editor.workspace;

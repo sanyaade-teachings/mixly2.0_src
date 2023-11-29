@@ -147,8 +147,6 @@ window.addEventListener('load', () => {
         if (BOARD.nav.levelSelector) {
             LevelSelector.init();
             LevelSelector.xmlToWorkspace(1);
-        } else {
-            auto_save_and_restore_blocks();
         }
         setTimeout(() => {
             $('.loading').fadeOut('fast');

@@ -6,10 +6,6 @@ import Variables from '../micropython_common/others/variables';
 
 import pins from './blocks/esp32_profile';
 
-import Esp32ZhHans from './language/zh-hans';
-import Esp32ZhHant from './language/zh-hant';
-import Esp32En from './language/en';
-
 import * as PythonVariablesBlocks from '../python/blocks/variables';
 import * as PythonControlBlocks from '../python/blocks/control';
 import * as PythonMathBlocks from '../python/blocks/math';
@@ -33,7 +29,6 @@ import * as MicroPythonWeatherBlocks from '../micropython_common/blocks/weather'
 import * as MicroPythonAISensorBlocks from '../micropython_common/blocks/ai_sensor';
 import * as MicroPythonSensorOnboardBlocks from '../micropython_common/blocks/sensor_onboard';
 import * as MicroPythonSensorExternBlocks from '../micropython_common/blocks/sensor_extern';
-import * as MicroPythonPeG1Blocks from '../micropython_common/blocks/pe_g1';
 import * as MicroPythonNetworkBlocks from '../micropython_common/blocks/network';
 import * as MicroPythonAIBlocks from '../micropython_common/blocks/ai';
 import * as MicroPythonActuatorOnboardBlocks from '../micropython_common/blocks/actuator_onboard';
@@ -43,6 +38,9 @@ import * as MicroPythonDisplayExternBlocks from '../micropython_common/blocks/di
 import * as MicroPythonFactoryBlocks from '../micropython_common/blocks/factory';
 import * as MicroPythonBlynkBlocks from '../micropython_common/blocks/blynk';
 
+import * as InoutBlocks from './blocks/inout';
+import * as MeG1Blocks from './blocks/me_g1';
+import * as MeGoBlocks from './blocks/me_go';
 import * as PinsBlocks from './blocks/pins';
 
 import * as PythonVariablesGenerators from '../python/generators/variables';
@@ -68,7 +66,6 @@ import * as MicroPythonWeatherGenerators from '../micropython_common/generators/
 import * as MicroPythonAISensorGenerators from '../micropython_common/generators/ai_sensor';
 import * as MicroPythonSensorOnboardGenerators from '../micropython_common/generators/sensor_onboard';
 import * as MicroPythonSensorExternGenerators from '../micropython_common/generators/sensor_extern';
-import * as MicroPythonPeG1Generators from '../micropython_common/generators/pe_g1';
 import * as MicroPythonNetworkGenerators from '../micropython_common/generators/network';
 import * as MicroPythonAIGenerators from '../micropython_common/generators/ai';
 import * as MicroPythonActuatorOnboardGenerators from '../micropython_common/generators/actuator_onboard';
@@ -78,20 +75,19 @@ import * as MicroPythonDisplayExternGenerators from '../micropython_common/gener
 import * as MicroPythonFactoryGenerators from '../micropython_common/generators/factory';
 import * as MicroPythonBlynkGenerators from '../micropython_common/generators/blynk';
 
-import * as PinsGenerators from './blocks/pins';
+import * as InoutGenerators from './generators/inout';
+import * as MeG1Generators from './generators/me_g1';
+import * as MeGoGenerators from './generators/me_go';
+import * as PinsGenerators from './generators/pins';
 
-import './css/color_esp32_mixgo.css';
+import './css/color_esp32c3_mixgocc.css';
 
 Object.assign(Blockly.Names, Names);
 Object.assign(Blockly.Variables, Variables);
 
 Profile.default = {};
 Object.assign(Profile, pins);
-Object.assign(Profile.default, pins['ESP32 Generic']);
-
-Object.assign(Blockly.Lang.ZhHans, Esp32ZhHans);
-Object.assign(Blockly.Lang.ZhHant, Esp32ZhHant);
-Object.assign(Blockly.Lang.En, Esp32En);
+Object.assign(Profile.default, pins['MixGo CC']);
 
 Object.assign(
     Blockly.Blocks,
@@ -117,7 +113,6 @@ Object.assign(
     MicroPythonAISensorBlocks,
     MicroPythonSensorOnboardBlocks,
     MicroPythonSensorExternBlocks,
-    MicroPythonPeG1Blocks,
     MicroPythonNetworkBlocks,
     MicroPythonAIBlocks,
     MicroPythonActuatorOnboardBlocks,
@@ -126,6 +121,9 @@ Object.assign(
     MicroPythonDisplayExternBlocks,
     MicroPythonFactoryBlocks,
     MicroPythonBlynkBlocks,
+    InoutBlocks,
+    MeG1Blocks,
+    MeGoBlocks,
     PinsBlocks
 );
 
@@ -153,7 +151,6 @@ Object.assign(
     MicroPythonAISensorGenerators,
     MicroPythonSensorOnboardGenerators,
     MicroPythonSensorExternGenerators,
-    MicroPythonPeG1Generators,
     MicroPythonNetworkGenerators,
     MicroPythonAIGenerators,
     MicroPythonActuatorOnboardGenerators,
@@ -162,5 +159,8 @@ Object.assign(
     MicroPythonDisplayExternGenerators,
     MicroPythonFactoryGenerators,
     MicroPythonBlynkGenerators,
+    InoutGenerators,
+    MeG1Generators,
+    MeGoGenerators,
     PinsGenerators
 );

@@ -1329,7 +1329,7 @@ export const sensor_bitbot_ALS = {
 
 export const bitbot_als_num = {
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(SENSOR_ONBOARD_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(Profile.default.als_num), 'PIN');
         this.setOutput(true, Number);

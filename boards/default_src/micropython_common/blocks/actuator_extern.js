@@ -589,7 +589,7 @@ export const syn6288_tts_play = {
 //mixbot extern
 export const mixbot_addr_extern = {
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(ACTUATOR_EXTERN_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(Profile.default.extern_addr), 'PIN');
         this.setOutput(true, Number);

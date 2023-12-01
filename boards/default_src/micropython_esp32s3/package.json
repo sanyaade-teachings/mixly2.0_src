@@ -1,5 +1,5 @@
 {
-    "name": "arduino_avr",
+    "name": "micropython_esp32s3",
     "version": "1.0.0",
     "scripts": {
         "build:dev": "webpack --config=../../../webpack.dev.js",

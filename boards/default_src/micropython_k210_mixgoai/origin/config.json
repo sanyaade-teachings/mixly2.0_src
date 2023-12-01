@@ -1,0 +1,61 @@
+{
+    "board": {
+        "MixGo AI": "MixGo AI",
+        "MixGo AI sensor": "MixGo AI sensor"
+    },
+    "language": "MicroPython",
+    "burn": {
+        "type": "command",
+        "portSelect": "all",
+        "MixGo AI": {
+            "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-ASR_V2.0.kfpkg\""
+        },
+        "MixGo AI sensor":{
+            "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-Sensor_V1.0.kfpkg\""
+        }
+    },
+    "upload": {
+        "type": "command",
+        "portSelect": "all",
+        "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
+        "filePath": "{indexPath}/build/upload/main.py",
+        "copyLib": true,
+        "reset": [
+            {
+                "dtr": false,
+                "rts": true
+            },{
+                "sleep": 100
+            },{
+                "dtr": false,
+                "rts": false
+            },{
+                "sleep": 100
+            }
+        ]
+    },
+    "nav": {
+        "burn": true,
+        "upload": true,
+        "save": {
+            "py": true
+        }
+    },
+    "serial": {
+        "ctrlCBtn": true,
+        "ctrlDBtn": true,
+        "baudRates": 115200,
+        "yMax": 100,
+        "yMin": 0,
+        "pointNum": 100,
+        "rts": false,
+        "dtr": false
+    },
+    "pythonToBlockly": false,
+    "web": {
+        "com": "serial",
+        "upload": {
+            "reset": []
+        }
+    }
+}

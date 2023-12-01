@@ -524,16 +524,20 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     })
     .then((info) => {
         layer.close(layerNum);
-        const message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
-        statusBarTerminal.addValue(`==${message}(${Msg.Lang["用时"]} ${info.time})==\n`);
+        let message = '';
+        if (info.code) {
+            message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
+            statusBarTerminal.addValue("==" + message + "==\n");
+        } else {
+            message = (type === 'compile' ? Msg.Lang["编译成功"] : Msg.Lang["上传成功"]);
+            statusBarTerminal.addValue(`==${message}(${Msg.Lang["用时"]} ${info.time})==\n`);
+            sucFunc();
+        }
         layer.msg(message, { time: 1000 });
-        sucFunc();
     })
     .catch((error) => {
         layer.close(layerNum);
-        const message = (type === 'compile' ? Msg.Lang["编译失败"] : Msg.Lang["上传失败"]);
-        statusBarTerminal.addValue("==" + message + "==\n");
-        layer.msg(message, { time: 1000 });
+        console.log(error);
     })
     .finally(() => {
         statusBarTerminal.scrollToBottom();

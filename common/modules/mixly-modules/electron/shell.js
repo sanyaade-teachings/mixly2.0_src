@@ -68,11 +68,7 @@ class Shell {
                 second = timeDiff % 60;
                 const time = `${(minute ? `${minute}` : '')}${second}s`;
                 const info = { code, time };
-                if (code) {
-                    reject(info);
-                } else {
-                    resolve(info);
-                }
+                resolve(info);
             });
         });
     }

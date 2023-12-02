@@ -3041,7 +3041,7 @@
   <category id="catAlgorithm" colour="#526FC3">
     <block type="algorithm_prepare"></block>
     <block type="algorithm_prepare2"></block>
-    <block type="algorithm_prepare3"></block>
+    <!-- <block type="algorithm_prepare3"></block> -->
     <block type="algorithm_add_school"></block>
     <block type="algorithm_find_path"></block>
     <block type="algorithm_move_recent"></block>
@@ -3071,15 +3071,15 @@
     <block type="algorithm_two_left"></block>
     <block type="algorithm_divide_books"></block>
     <block type="algorithm_get_half_books"></block>
-    <block type="algorithm_check_half_books"></block>
+    <!-- <block type="algorithm_check_half_books"></block> -->
     <block type="algorithm_delete_books"></block>
     <block type="algorithm_delete_books2"></block>
     <block type="algorithm_get_book_num"></block>
-    <block type="algorithm_use_sequence"></block>
-    <block type="algorithm_print_sequence"></block>
-    <block type="algorithm_use_divide"></block>
-    <block type="algorithm_print_divide"></block>
-     <block type="hanoi_init_offline">
+    <!-- <block type="algorithm_use_sequence"></block> -->
+    <!-- <block type="algorithm_print_sequence"></block> -->
+    <!-- <block type="algorithm_use_divide"></block> -->
+    <!-- <block type="algorithm_print_divide"></block> -->
+    <block type="hanoi_init_offline">
       <value name="VAR">
         <block type="algorithm_color_seclet">
           <field name="COLOR">#ff6600</field>

@@ -1,3 +1,0 @@
-var profile = {};
-
-profile["default"] = {};

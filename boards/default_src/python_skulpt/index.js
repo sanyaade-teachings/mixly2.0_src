@@ -26,7 +26,6 @@ import * as DataBlocks from './blocks/data';
 import * as InoutBlocks from './blocks/inout';
 import * as IotBlocks from './blocks/iot';
 import * as SystemBlocks from './blocks/system';
-import * as TextBlocks from './blocks/text';
 import * as TurtleBlocks from './blocks/turtle';
 
 import * as PythonVariablesGenerators from '../python/generators/variables';
@@ -50,7 +49,6 @@ import * as DataGenerators from './generators/data';
 import * as InoutGenerators from './generators/inout';
 import * as IotGenerators from './generators/iot';
 import * as SystemGenerators from './generators/system';
-import * as TextGenerators from './generators/text';
 import * as TurtleGenerators from './generators/turtle';
 
 import './css/color_mixpy_python_skulpt.css';
@@ -82,7 +80,6 @@ Object.assign(
     InoutBlocks,
     IotBlocks,
     SystemBlocks,
-    TextBlocks,
     TurtleBlocks
 );
 
@@ -107,6 +104,5 @@ Object.assign(
     InoutGenerators,
     IotGenerators,
     SystemGenerators,
-    TextGenerators,
     TurtleGenerators
 );

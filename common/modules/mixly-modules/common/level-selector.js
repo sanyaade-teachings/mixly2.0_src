@@ -78,7 +78,7 @@ LevelSelector.init = () => {
 }
 
 LevelSelector.xmlToWorkspace = (level) => {
-    if (level < 1 || level > 7) {
+    /*if (level < 1 || level > 7) {
         return;
     }
     const xmlStr =  LevelSelector.XML_STR[--level];
@@ -90,7 +90,7 @@ LevelSelector.xmlToWorkspace = (level) => {
     } catch (e) {
         Editor.blockEditor.clear();
         console.log(e);
-    }
+    }*/
 }
 
 });

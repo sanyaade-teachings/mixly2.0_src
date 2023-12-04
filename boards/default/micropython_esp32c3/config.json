@@ -35,19 +35,14 @@
         "reset": [
             {
                 "dtr": false,
-                "rts": true
-            }, {
-                "sleep": 300
-            }, {
-                "dtr": false,
                 "rts": false
             }, {
-                "sleep": 300
+                "sleep": 100
             }, {
                 "dtr": false,
                 "rts": true
             }, {
-                "sleep": 300
+                "sleep": 100
             }
         ]
     },

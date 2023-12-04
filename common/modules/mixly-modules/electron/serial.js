@@ -600,14 +600,16 @@ Serial.openTool = () => {
 
     toolDom.onClickSetDtr((port, data) => {
         const newPortObj = Serial.portsOperator[port];
-        // newPortObj.toolConfig.dtr = data.elem.checked;
-        Serial.updateDtrAndRts(port);
+        newPortObj.toolConfig.dtr = data.elem.checked;
+        const { dtr, rts } = newPortObj.toolConfig;
+        Serial.setDtrAndRts(port, dtr, rts);
     });
 
     toolDom.onClickSetRts((port, data) => {
         const newPortObj = Serial.portsOperator[port];
-        // newPortObj.toolConfig.rts = data.elem.checked;
-        Serial.updateDtrAndRts(port);
+        newPortObj.toolConfig.rts = data.elem.checked;
+        const { dtr, rts } = newPortObj.toolConfig;
+        Serial.setDtrAndRts(port, dtr, rts);
     });
 
     toolDom.onClickSendType((port, data) => {
@@ -1297,7 +1299,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
         parity: 'none',  //奇偶校验
         stopBits: 1,  //停止位
         flowControl: false,
-        autoOpen: false //不自动打开1
+        autoOpen: false //不自动打开
     }, false);
     const ReadLine = serialport.ReadlineParser;
     const ByteLength = serialport.ByteLengthParser;
@@ -1335,13 +1337,11 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             return;
         } else {
             //Serial.statusBarPortRemoveCursorEvent(port);
-            endFunc(1);
             statusBarSerial.open();
             portObj.portOpened = true;
             Serial.refreshTerminalMenu(port);
             Serial.refreshConnectStatus(port);
             statusBarSerial.setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
-
             Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
             portObj.output.push('');
             Serial.outputBoxAdd(port, Msg.Lang['已打开串口'] + ': ' + port);
@@ -1447,7 +1447,8 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     portObj.serialport.on('open', async () => {
         await Serial.reset(port);
         Serial.updateDtrAndRts(port);
-    })
+        endFunc(1);
+    });
 
     //串口结束使用时执行此函数
     portObj.serialport.on('close', () => {

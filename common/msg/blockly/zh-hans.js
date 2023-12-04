@@ -66,11 +66,10 @@ ZhHans.MSG = {
 	sub_algorithm_2: "送同学回家2",
 	sub_algorithm_3: "贪心算法",
 	sub_algorithm_4: "汉诺塔",
-	sub_algorithm_5: "找书问题1",
-	sub_algorithm_6: "找书问题2",
+	sub_algorithm_5: "找书问题",
+	sub_algorithm_6: "韩信点兵",
 	sub_algorithm_7: "鸡兔同笼问题",
 	sub_algorithm_8: "分治算法",
-	sub_algorithm_9: "韩信点兵",
     catCv: "图像处理",
     catHardware: "硬件交互",
     catAI: "人工智能",
@@ -3582,7 +3581,7 @@ ZhHans.MIXLY_MIXPY_ALGORITHM_DEL_PATH = '将当前位置从路线中删除';
 ZhHans.MIXLY_MIXPY_ALGORITHM_RETURN_PATH = '回退到上一个位置';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NO_LEFT = '所有同学都被送回家了';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH = '显示路线';
-ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH2 = '显示路径';
+ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_PATH2 = '显示路线';
 ZhHans.MIXLY_MIXPY_ALGORITHM_FIRST_BOOK = '取第一本书';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NO_RING = '门禁没响';
 ZhHans.MIXLY_MIXPY_ALGORITHM_NEXT_BOOK = '取下一本书';
@@ -3592,12 +3591,12 @@ ZhHans.MIXLY_MIXPY_ALGORITHM_NUMBER_ADD = '计数器+1';
 ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_NUMBER = '输出计数器大小';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ALL_BOOKS = '二分法开始';
 ZhHans.MIXLY_MIXPY_ALGORITHM_ALL_BOOKS2 = '顺序法开始';
-ZhHans.MIXLY_MIXPY_ALGORITHM_TWO_LEFT= '书架上剩余两本及以上';
+ZhHans.MIXLY_MIXPY_ALGORITHM_TWO_LEFT= '书架剩余书籍≥2本';
 ZhHans.MIXLY_MIXPY_ALGORITHM_DIVIDE_BOOKS = '把书堆分成两半';
 ZhHans.MIXLY_MIXPY_ALGORITHM_GET_HALF_BOOKS = '取出前一堆书';
 // ZhHans.MIXLY_MIXPY_ALGORITHM_CHECK_HALF_BOOKS = '检查前一堆书是否会使得门禁响起';
-ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS = '删除前一堆书';
-ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS2 = '删除后一堆书';
+ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS = '去除前一堆书';
+ZhHans.MIXLY_MIXPY_ALGORITHM_DELETE_BOOKS2 = '去除后一堆书';
 ZhHans.MIXLY_MIXPY_ALGORITHM_USE_SEQUENCE = '顺序法开始';
 // ZhHans.MIXLY_MIXPY_ALGORITHM_PRINT_SEQUENCE = '输出顺序法查找次数';
 ZhHans.MIXLY_MIXPY_ALGORITHM_USE_DIVIDE = '二分法开始';
@@ -3694,5 +3693,12 @@ ZhHans.DRAW_CLOCK = "绘制时钟";
 ZhHans.CLEAR_CLOCK = "清除指针";
 ZhHans.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = '绘制 %1 圆形 %2 x %3 y %4 半径 %5 颜色 %6';
 ZhHans.RETURN_SUCCESS_OR_NOT = "返回是否成功";
+ZhHans.MIXLY_MIXBOT_SOUND_SET_LOUDNESS = '设置麦克风音量';
+ZhHans.MIXLY_RECORD_AUDIO = '录制音频';
+ZhHans.MIXLY_PLAY_AUDIO = '播放音频';
+ZhHans.MIXLY_PLAY_ONLINE_AUDIO = '播放网络音频';
+ZhHans.MIXLY_DISPLAY_MATRIX_WRITE_NOW = '立即生效';
+ZhHans.MIXLY_DISPLAY_MATRIX_DONT_WRITE = '暂不生效';
+ZhHans.MIXLY_DISPLAY_MATRIX_WRITE = '设置生效';
 
 })();

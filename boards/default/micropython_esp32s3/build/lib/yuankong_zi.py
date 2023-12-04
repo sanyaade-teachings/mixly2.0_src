@@ -4,90 +4,96 @@ Yuankong Zi Onboard resources
 Micropython    library for the Yuankong Zi Onboard resources
 =======================================================
 
-#Preliminary composition                   20230818
+#Preliminary composition                   20231020
 #S3定时器ID(-1,0,1,2,3(led))
 
 dahanzimin From the Mixly Team
 """
 
-import time, gc, st7735, sdcard, math
-from machine import Pin, I2C, SPI, ADC, PWM, RTC, Timer
+from machine import *
+import time, gc, st7735, math
 
 '''RTC'''
 rtc_clock = RTC()
 
 '''I2C-onboard'''
-onboard_i2c = I2C(0)
+#onboard_i2c = I2C(0)
+onboard_i2c = SoftI2C(scl=Pin(36), sda=Pin(37), freq=400000)
+onboard_i2c_soft = SoftI2C(scl=Pin(13), sda=Pin(15), freq=400000)
 
 '''SPI-onboard'''
 onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
 
 '''TFT/128*160'''
-onboard_tft = st7735.ST7735(onboard_spi, 160, 128, dc_pin=18, cs_pin=45, bl_pin=14, font_address=0x3A0000)
+onboard_tft = st7735.ST7735(onboard_spi, 160, 128, dc_pin=18, cs_pin=45, bl_pin=14, font_address=0x700000)
 
 '''ACC-Sensor'''
 try :
 	import mxc6655xa
 	onboard_mxc6655xa = mxc6655xa.MXC6655XA(onboard_i2c)     
 except Exception as e:
-	print("Warning: Failed to communicate with MXC6655XA (ACC Sensor) or",e)
+	print("Warning: Failed to communicate with MXC6655XA (ACC) or",e)
 
-'''ALS_PS-Sensor'''
+'''ALS_PS-Sensor *2'''
 try :
 	import ltr553als
-	onboard_ltr553als = ltr553als.LTR_553ALS(onboard_i2c)     
+	onboard_ltr553als_l = ltr553als.LTR_553ALS(onboard_i2c)     
 except Exception as e:
-	print("Warning: Failed to communicate with TR_553ALS (ALS&PS Sensor) or",e)
+	print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
+
+try :
+	import ltr553als
+	onboard_ltr553als_r = ltr553als.LTR_553ALS(onboard_i2c_soft)     
+except Exception as e:
+	print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
 
 '''BPS-Sensor'''
 try :
 	import hp203x
-	onboard_hp203x = hp203x.HP203X(onboard_i2c)     
+	onboard_hp203x = hp203x.HP203X(onboard_i2c_soft)     
 except Exception as e:
-	print("Warning: Failed to communicate with HP203X (BPS Sensor) or",e)
+	print("Warning: Failed to communicate with HP203X (BPS) or",e)
 
 '''THS-Sensor'''
 try :
 	import ahtx0
 	onboard_ahtx0 = ahtx0.AHTx0(onboard_i2c)     
 except Exception as e:
-	print("Warning: Failed to communicate with AHTx0 (THS Sensor) or",e)
+	print("Warning: Failed to communicate with AHTx0 (THS) or",e)
 
 '''RFID-Sensor'''
 try :
 	import rc522
 	onboard_rc522 = rc522.RC522(onboard_i2c)     
 except Exception as e:
-	print("Warning: Failed to communicate with RC522 (RFID Sensor) or",e)
+	print("Warning: Failed to communicate with RC522 (RFID) or",e)
 
 '''MGS-Sensor'''
 try :
 	import mmc5603
 	onboard_mmc5603 = mmc5603.MMC5603(onboard_i2c)
 except Exception as e:
-	print("Warning: Failed to communicate with MMC5603 (MGS Sensor) or",e)
+	print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
 
 '''2RGB_WS2812'''    
 from ws2812 import NeoPixel
 onboard_rgb = NeoPixel(Pin(38), 4)
 
-
 '''5KEY_Sensor'''
 class KEYSensor:
 	def __init__(self, pin, range):
 		self.pin = pin
-		self.adc = ADC(Pin(pin))
-		self.adc.atten(ADC.ATTN_11DB) 
+		self.adc = ADC(Pin(pin), atten=ADC.ATTN_0DB)
 		self.range = range
 		self.flag = True
 	
 	def _value(self):
 		values = []
-		for _ in range(20):
+		for _ in range(50):
 			values.append(self.adc.read())
-			time.sleep_ms(1)
-		return (self.range-300) < (sum(sorted(values)[5:15])//10) < (self.range+300)
-	
+			time.sleep_us(2)
+		return (self.range-200) < min(values) < (self.range+200)
+
 	def get_presses(self, delay = 1):
 		last_time,presses = time.time(), 0
 		while time.time() < last_time + delay:
@@ -122,10 +128,10 @@ class Button(KEYSensor):
 
 B1key = Button(0)
 B2key = KEYSensor(17,0)
-A1key = KEYSensor(17,650)
-A2key = KEYSensor(17,1370)
-A3key = KEYSensor(17,2200)
-A4key = KEYSensor(17,3100)
+A1key = KEYSensor(17,2900)
+A2key = KEYSensor(17,2300)
+A3key = KEYSensor(17,1650)
+A4key = KEYSensor(17,850)
 
 '''2-TouchPad'''
 class Touch_Pad:
@@ -213,33 +219,6 @@ class LED:
 
 onboard_led=LED(42, timer_id=3)
 
-'''2 Proximity Sensor'''
-class Proximity:
-	def __init__(self, pin_t, pin_r):
-		self._ir_r = ADC(Pin(pin_r))
-		self._ir_r.atten(ADC.ATTN_11DB) 
-		self._ir_t = Pin(pin_t, Pin.OUT)
-
-	def _samlpe(self):
-		values = []
-		for _ in range(20):
-			values.append(self._ir_r.read_u16())
-			time.sleep_us(100)
-		return sum(sorted(values)[5:15])//10
-	
-	def ps_nl(self):
-		self._ir_t.value(1)
-		time.sleep_ms(1)
-		value_on = self._samlpe()
-		self._ir_t.value(0)
-		time.sleep_ms(1)
-		value_off = self._samlpe()
-		return value_on - value_off
-
-onboard_psa = Proximity(21, 15)
-onboard_psb = Proximity(21, 13)
-
-
 class Clock:
     def __init__(self, x, y, radius, color, oled=onboard_tft):  #定义时钟中心点和半径
         self.display = oled
@@ -313,7 +292,6 @@ class Clock:
         self.drawHour(color)
         self.drawMin(color)
         self.drawSec(color)
-
 
 '''Reclaim memory'''
 gc.collect()

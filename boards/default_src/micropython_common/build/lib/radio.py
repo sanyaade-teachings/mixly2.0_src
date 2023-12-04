@@ -4,12 +4,14 @@ Radio-ESP-NOW
 Micropython library for the Radio-ESP-NOW 
 =======================================================
 #Preliminary composition            20220228
-#Upgrade synchronization            20220701
 
 dahanzimin From the Mixly Team 
 """
 
-from esp import espnow
+try:
+    from esp import espnow
+except:
+    import espnow
 from ubinascii import hexlify,unhexlify
 import network
 
@@ -22,7 +24,6 @@ class ESPNow(espnow.ESPNow):
         self._nic.active(True)
         self._nic.config(hidden=True,channel=self._channel,txpower=txpower)
 
-        
     def send(self,peer,msg):
         '''Send data after error reporting and effective processing'''    
         try:
@@ -44,7 +45,7 @@ class ESPNow(espnow.ESPNow):
                 raise OSError("invalid argument")                 
             else:
                 raise err  
-                
+
     def recv(self):
         '''Receive data'''
         if self.any():
@@ -60,12 +61,22 @@ class ESPNow(espnow.ESPNow):
     def _cb_handle(self, event_code,data):
         '''Callback processing conversion'''
         if self._on_handle:
-            self._on_handle(hexlify(data[0]).decode(),data[1].decode())
+            if isinstance(self._on_handle, list):
+                for func in self._on_handle:
+                    cmd = func.__name__.rfind('__')
+                    if cmd != -1:
+                        cmd=func.__name__[cmd+2:]
+                        if cmd == str(data[1].decode()):
+                            func(hexlify(data[0]).decode(),data[1].decode())
+                    else:
+                        func(hexlify(data[0]).decode(),data[1].decode())
+            else:
+                self._on_handle(hexlify(data[0]).decode(),data[1].decode())
 
-    def recv_cb(self,recv_cb):
+    def recv_cb(self, recv_cbs):
         '''Receive callback'''
-        self._on_handle = recv_cb
-        if recv_cb:
+        self._on_handle = recv_cbs
+        if recv_cbs:
             self.irq(self._cb_handle)
 
     def info(self):

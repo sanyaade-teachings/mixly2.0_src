@@ -3546,5 +3546,12 @@ En.DRAW_CLOCK = "Draw Clock";
 En.CLEAR_CLOCK = "Clear pointer";
 En.ONBOARD_TFT_DISPLAY_SHAPE_CIRCLE_MESSAGE0 = 'draw %1 circle %2 x %3 y %4 radius %5 color %6';
 En.RETURN_SUCCESS_OR_NOT = "return success or not";
+En.MIXLY_MIXBOT_SOUND_SET_LOUDNESS = 'Set microphone volume';
+En.MIXLY_RECORD_AUDIO = 'Recorde audio';
+En.MIXLY_PLAY_AUDIO = 'Play audio';
+En.MIXLY_PLAY_ONLINE_AUDIO = 'Play online audio';
+En.MIXLY_DISPLAY_MATRIX_WRITE_NOW = 'show';
+En.MIXLY_DISPLAY_MATRIX_DONT_WRITE = 'hide';
+En.MIXLY_DISPLAY_MATRIX_WRITE = 'show';
 
 })();

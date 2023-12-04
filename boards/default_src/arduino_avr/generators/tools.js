@@ -575,6 +575,7 @@ export const tool_modulus = function () {
 export const nano_pin = function () {
     return "";
 };
+
 export const promini_pin = nano_pin;
 export const leonardo_pin = nano_pin;
 export const uno_pin = nano_pin;
@@ -584,6 +585,7 @@ export const wemos_d1_mini_pin = nano_pin;
 export const stm32f103c8t6_pin = nano_pin;
 export const esp32s2_pin = nano_pin;
 export const esp32c3_pin = nano_pin;
+export const esp32s3_pin = nano_pin;
 export const core_esp32c3_pin = nano_pin;
 
 //获取两个日期差值

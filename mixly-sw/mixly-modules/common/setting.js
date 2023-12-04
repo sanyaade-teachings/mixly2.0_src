@@ -3,6 +3,7 @@
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('layui');
+goog.require('layui.loading');
 goog.require('store');
 goog.require('$.select2');
 goog.require('Mixly.XML');

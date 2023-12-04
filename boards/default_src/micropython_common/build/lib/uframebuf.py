@@ -164,6 +164,7 @@ class FrameBuffer_Base(FrameBuffer):
 		self.width = width
 		self.height = height
 		self._buffer = buf
+		self.auto_show = True
 
 	def __getitem__(self, key):
 		x, y = key
@@ -206,7 +207,7 @@ class FrameBuffer_Base(FrameBuffer):
 					for row in range(0, self.height - 1):
 						self[col, row] = self[col, row + 1]
 					self[col, self.height - 1] = last_pixel
-		self.show()
+		if self.auto_show: self.show()
 
 	def shift_right(self, num, rotate=False):
 		"""Shift all pixels right"""
@@ -279,28 +280,28 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 
 	def shows(self, data, space=0, center=True):
 		"""Display character"""
-		if data:
+		if data is not None:
 			self.fill(0)
 			if type(data) in [list, bytes, tuple, bytearray]:
 				self.set_buffer(data)
-				self.show()	
+				if self.auto_show: self.show()
 			else:
 				data=str(data)
 				x = (self.width - len(data) * (self._font.font_width + space) + space) // 2 if center else 0
 				for char in data:
 					self.bitmap(self._font.chardata(char), x) 
 					x=self._font.font_width + x + space
-				self.show()
+				if self.auto_show: self.show()
 
 	def frame(self, data, delay=500):
 		"""Display one frame per character"""
-		if data:
+		if data is not None:
 			if type(data) in [list,tuple]:
 				for dat in data:
 					if type(dat) in [list,bytes,tuple,bytearray]:
 						self.fill(0)
 						self.set_buffer(dat)
-						self.show()	
+						self.show()
 						time.sleep_ms(delay)
 			else:
 				data=str(data)
@@ -313,7 +314,7 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 
 	def scroll(self, data, space=0, speed=100):
 		"""Scrolling characters"""
-		if data:
+		if data is not None:
 			data = str(data)
 			str_len = len(data) * (self._font.font_width + space) - space
 			for i in range(str_len + self.width + 1):	
@@ -322,7 +323,7 @@ class FrameBuffer_Ascall(FrameBuffer_Base):
 				for char in data:
 					self.bitmap(self._font.chardata(char),x)
 					x = self._font.font_width + x + space
-				self.show() 
+				self.show()
 				time.sleep_ms(speed)
 
 class FrameBuffer_Uincode(FrameBuffer_Base):
@@ -343,7 +344,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		if width > self.width or height > self.height:
 			raise ValueError("Image must be less than display ({0}x{1}).".format(self.width, self.height))
 		self.bitmap((buffer_info,(width, height)), x, y, size, color)    
-		self.show()
+		if self.auto_show: self.show()
 
 	def bitmap(self, buffer, x=0, y=0, size=1, color=1):
 		"""Graphic model display(buffer,(width,height))"""    
@@ -368,11 +369,11 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 
 	def shows(self, data, space=0, center=True, x=0, y=0, size=1, color=1):
 		"""Display character"""
-		if data:
+		if data is not None:
 			if type(data) in [list, bytes, tuple, bytearray]:
 				self.fill(0)
 				self.set_buffer(data)
-				self.show()    
+				if self.auto_show: self.show()
 			else:
 				size = max(round(size), 1)
 				font_len, font_buffer = self._take_buffer(str(data), space, size)
@@ -381,17 +382,17 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				for buffer in font_buffer:    #Display character
 					self.bitmap(buffer, x, y, size, color)
 					x = buffer[1][0] * size + x + space
-				self.show()
+				if self.auto_show: self.show()
 
 	def frame(self, data, delay=500, size=1, color=1):
 		"""Display one frame per character"""
-		if data:
+		if data is not None:
 			if type(data) in [list, tuple]:
 				for dat in data:
 					if type(dat) in [list, bytes, tuple,  bytearray]:
 						self.fill(0)
 						self.set_buffer(dat)
-						self.show()    
+						self.show()
 						time.sleep_ms(delay)
 			else:
 				size = max(round(size), 1)
@@ -406,7 +407,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 
 	def scroll(self, data, space=0, speed=50, y=0, size=1, color=1):
 		"""Scrolling characters"""
-		if data:
+		if data is not None:
 			size = max(round(size), 1)
 			font_len, font_buffer = self._take_buffer(str(data), space, size)
 			for i in range(font_len - space + self.width):    
@@ -415,5 +416,5 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				for buffer in font_buffer:
 					self.bitmap(buffer, x, y, size, color)
 					x = buffer[1][0] * size + x + space
-				self.show() 
+				self.show()
 				time.sleep_ms(speed)

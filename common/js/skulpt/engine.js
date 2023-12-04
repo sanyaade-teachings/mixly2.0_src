@@ -86,6 +86,8 @@ PyEngine.prototype.loadEngine = function() {
         });
         return $('#output_img').append(html).children().last();
     };
+
+    Sk.builtinFiles.files['./mixpy.py'] = goog.get(Mixly.Env.templatePath + '/python/mixpy.py');
 }
 
 /**

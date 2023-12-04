@@ -48,7 +48,7 @@ export const serial_available = function () {
     if (!Blockly.Arduino.setups_['setup_serial_' + serial_select]) {
         Blockly.Arduino.setups_['setup_serial_' + serial_select] = serial_select + '.begin(' + Profile.default.serial + ');';
     }
-    var code = serial_select + ".available() > 0";
+    var code = serial_select + ".available()";
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

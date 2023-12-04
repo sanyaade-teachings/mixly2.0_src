@@ -263,7 +263,7 @@ MFile.parseMix = (xml, useCode = false, useIncompleteBlocks = false, endFunc = (
         if (shadowType && !blocks.includes(shadowType))
             blocks.push(shadowType);
     }
-    const blocklyGenerator = Blockly?.Python ?? Blockly.Arduino;
+    const blocklyGenerator = Editor.mainEditor.blockEditor.generator;
     for (let i of blocks) {
         if (Blockly.Blocks[i] && blocklyGenerator.forBlock[i]) {
             continue;

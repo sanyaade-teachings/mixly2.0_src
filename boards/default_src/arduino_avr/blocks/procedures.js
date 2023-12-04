@@ -366,9 +366,10 @@ export const procedures_defnoreturn = {
      */
     displayRenamedVar_: function (oldName, newName) {
         this.updateParams_();
+        const mutator = this.getIcon(Blockly.icons.MutatorIcon.TYPE);
         // Update the mutator's variables if the mutator is open.
-        if (this.mutator && this.mutator.isVisible()) {
-            var blocks = this.mutator.workspace_.getAllBlocks(false);
+        if (mutator && mutator.bubbleIsVisible()) {
+            var blocks = mutator.getWorkspace().getAllBlocks(false);
             for (var i = 0, block; (block = blocks[i]); i++) {
                 if (block.type == 'procedures_mutatorarg' &&
                     Blockly.Names.equals(oldName, block.getFieldValue('NAME'))) {
@@ -902,8 +903,7 @@ export const procedures_callnoreturn = {
             // an empty definition block with the correct signature.
             var name = this.getProcedureCall();
             var def = Blockly.Procedures.getDefinition(name, this.workspace);
-            if (def && (def.type != this.defType_ ||
-                JSON.stringify(def.getVars()) != JSON.stringify(this.arguments_))) {
+            if (def && (def.type != this.defType_)) {
                 // The signatures don't match.
                 def = null;
             }
@@ -943,6 +943,25 @@ export const procedures_callnoreturn = {
                 xml.appendChild(block);
                 Blockly.Xml.domToWorkspace(xml, this.workspace);
                 Blockly.Events.setGroup(false);
+            } else {
+                if (JSON.stringify(def.getVars()) != JSON.stringify(this.arguments_)) {
+                    let paramNames = def.arguments_;
+                    let paramIds = [];
+                    const mutator = this.getIcon();
+                    for (var i = 0; i < this.arguments_.length; i++) {
+                        var input = this.getInput('ARG' + i);
+                        if (!input) {
+                            continue;
+                        }
+                        var connection = input.connection.targetConnection;
+                        if (!connection) {
+                            paramIds.push(null);
+                            continue;
+                        }
+                        paramIds.push(connection.sourceBlock_.id);
+                    }
+                    this.setProcedureParameters_(paramNames, paramIds);
+                }
             }
         } else if (event.type == Blockly.Events.BLOCK_DELETE) {
             // Look for the case where a procedure definition has been deleted,

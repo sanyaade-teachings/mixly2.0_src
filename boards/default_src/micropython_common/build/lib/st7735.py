@@ -39,20 +39,14 @@ _CMD_VMCTR1 	= const(0xC5)
 _CMD_GMCTRP1 	= const(0xE0)
 _CMD_GMCTRN1 	= const(0xE1)
 
-def color(red, green=None, blue=None):
-	"""	Convert red, green and blue values (0-255) into a 16-bit 565 encoding."""
-	if green is None or blue is None:
-		return red
-	else:
-		return (red & 0xf8) << 8 | (green & 0xfc) << 3 | blue >> 3
-
 class ST7735(uframebuf.FrameBuffer_Uincode):
-	def __init__(self, spi, width, height, dc_pin=None, cs_pin=None, bl_pin=None, font_address=0x3A0000):
+	def __init__(self, spi, width, height, dc_pin=None, cs_pin=None, bl_pin=None, font_address=0x700000):
 		self.spi = spi
 		self.dc = Pin(dc_pin, Pin.OUT, value=1)
 		self.cs = Pin(cs_pin, Pin.OUT, value=1)
 		self._buffer = bytearray(width * height * 2)
-		super().__init__(self._buffer, width, height, uframebuf.RGB565LH)
+		self._bufbgr = bytearray(width * height * 2)
+		super().__init__(self._buffer, width, height, uframebuf.RGB565)
 		self.font(font_address)
 		self._init()
 		self.fill(0)
@@ -107,14 +101,23 @@ class ST7735(uframebuf.FrameBuffer_Uincode):
 		self._brightness = brightness
 		self.bl_led.duty_u16(int(brightness*60000))
 
+	def color(self, red, green=None, blue=None):
+		"""	Convert red, green and blue values (0-255) into a 16-bit 565 encoding."""
+		if green is None or blue is None:
+			return red
+		else:
+			return (red & 0xf8) << 8 | (green & 0xfc) << 3 | blue >> 3
+
 	def show(self):
 		"""Refresh the display and show the changes."""
 		#uframebuf的width, height也得对应
+		for i in range(1, len(self._buffer), 2):  #对偶数字节和奇数字节进行置换
+			self._bufbgr[i], self._bufbgr[i - 1] = self._buffer[i - 1], self._buffer[i]
 
 		#正常显示_CMD_MADCTL=0xa0, 180显示_CMD_MADCTL=0x60
 		self._write(_CMD_CASET, b'\x01\x01\x01\xa0')
 		self._write(_CMD_RASET, b'\x02\x02\x02\x81')
-		self._write(_CMD_RAMWR, self._buffer)
+		self._write(_CMD_RAMWR, self._bufbgr)
 
 		#90显示_CMD_MADCTL=0x00, 180显示_CMD_MADCTL=0xc0
 		#self._write(_CMD_CASET, b'\x02\x02\x02\x81')

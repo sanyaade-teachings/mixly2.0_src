@@ -176,6 +176,16 @@ export const core_esp32c3_pin = {
     }
 };
 
+export const esp32s3_pin = {
+    init: function () {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("../common/media/board_pin/esp32s3.jpg", 500, 350, "*"));
+        this.setColour(Blockly.Msg['TOOLS_HUE']);
+        this.setTooltip();
+        this.setHelpUrl();
+    }
+};
+
 export const esp8266_pin = {
     init: function () {
         this.appendDummyInput()

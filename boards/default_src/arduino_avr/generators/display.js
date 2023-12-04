@@ -185,6 +185,7 @@ export const MAX7219_init = function () {
 //点阵屏画点
 export const display_Matrix_DrawPixel = function () {
     var matrixType = this.getFieldValue('TYPE');
+    var write = this.getFieldValue('WRITE');
     var pos_x = Blockly.Arduino.valueToCode(this, 'XVALUE', Blockly.Arduino.ORDER_ASSIGNMENT);
     var pos_y = Blockly.Arduino.valueToCode(this, 'YVALUE', Blockly.Arduino.ORDER_ASSIGNMENT);
     //var matrixName = this.getFieldValue('matrixName');
@@ -196,7 +197,9 @@ export const display_Matrix_DrawPixel = function () {
     else {
         var code = matrixName + '.drawPixel(' + pos_x + ',' + pos_y + ',' + dropdown_type + ');\n'
     }
-    code += matrixName + '.write();\n';
+    if (write !== 'OFF') {
+        code += matrixName + '.write();\n';
+    }
     return code;
 };
 
@@ -212,10 +215,13 @@ export const display_Matrix_TEXT = function () {
 //点阵屏显示文本
 export const display_Matrix_print = function () {
     var matrixName = "myMatrix";
+    var write = this.getFieldValue('WRITE');
     var textString = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ASSIGNMENT);
-    var code = matrixName + '.setCursor(0, 0);\n'
-    code += matrixName + '.print(' + textString + ');\n'
-    code += matrixName + '.write();\n'
+    var code = matrixName + '.setCursor(0, 0);\n';
+    code += matrixName + '.print(' + textString + ');\n';
+    if (write !== 'OFF') {
+        code += matrixName + '.write();\n';
+    }
     return code;
 };
 
@@ -224,6 +230,7 @@ export const display_Matrix_DisplayChar = function () {
     var matrixType = this.getFieldValue('TYPE');
     //var matrixName = this.getFieldValue('matrixName');
     var matrixName = "myMatrix";
+    var write = this.getFieldValue('WRITE');
     var NO = Blockly.Arduino.valueToCode(this, 'NO', Blockly.Arduino.ORDER_ATOMIC);
     var dotMatrixArray = Blockly.Arduino.valueToCode(this, 'LEDArray', Blockly.Arduino.ORDER_ASSIGNMENT);
     Blockly.Arduino.definitions_['var_declare_LEDArray'] = 'uint8_t  LEDArray[8];';
@@ -245,9 +252,11 @@ export const display_Matrix_DisplayChar = function () {
         code += '    else\n      ' + matrixName + '.drawPixel(index_j, 7-index_i,0);\n';
     }
     code += '    LEDArray[index_i] = LEDArray[index_i]>>1;\n';
-    code += '  }  \n'
-    code += '}\n'
-    code += matrixName + '.write();\n'
+    code += '  }  \n';
+    code += '}\n';
+    if (write !== 'OFF') {
+        code += matrixName + '.write();\n';
+    }
     return code;
 };
 
@@ -313,11 +322,15 @@ export const display_Matrix_Brightness = function () {
 
 //点阵 全亮/全灭/关闭/开启
 export const display_Matrix_fillScreen = function () {
+    var matrixType = this.getFieldValue('TYPE');
+    var write = this.getFieldValue('WRITE');
     //var matrixName = this.getFieldValue('matrixName');
     var matrixName = "myMatrix";
     var FILLSCREEN_TYPE = this.getFieldValue('FILLSCREEN_TYPE');
     var code = matrixName + '.' + FILLSCREEN_TYPE + ';\n'
-    code += matrixName + '.write();\n';
+    if (write !== 'OFF') {
+        code += matrixName + '.write();\n';
+    }
     return code;
 };
 
@@ -387,6 +400,11 @@ export const Matrix_img = function () {
     code += '};\n';
     Blockly.Arduino.definitions_['matrix_img_' + dropdown_img_] = "const uint8_t " + 'matrix_img_' + dropdown_img_ + "[8] PROGMEM=" + code;
     return ['matrix_img_' + dropdown_img_, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//点阵屏 设置生效
+export const display_Matrix_write = function () {
+    return 'myMatrix.write();\n';
 };
 
 export const oled_init = function () {

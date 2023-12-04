@@ -100,6 +100,9 @@ class EditorBlockly extends EditorBase {
         case 'lua':
             this.generator = Blockly.Lua;
             break;
+        case 'javascript':
+            this.generator = Blockly.Javascript;
+            break;
         case 'c/c++':
             this.generator = Blockly.Arduino;
             break;

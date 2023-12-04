@@ -19,13 +19,12 @@ import * as PythonSetBlocks from '../python/blocks/set';
 import * as PythonHtmlBlocks from '../python/blocks/html';
 import * as PythonUtilityBlocks from '../python/blocks/utility';
 
-import * as ControlBlocks from './blocks/data';
-import * as DataBlocks from './blocks/data';
+import * as SkulptPyDataBlocks from '../python_skulpt/blocks/data';
+import * as SkulptPyInoutBlocks from '../python_skulpt/blocks/inout';
+import * as SkulptPySystemBlocks from '../python_skulpt/blocks/system';
+import * as SkulptPyTurtleBlocks from '../python_skulpt/blocks/turtle';
+
 import * as GameBlocks from './blocks/game';
-import * as InoutBlocks from './blocks/inout';
-import * as SystemBlocks from './blocks/system';
-import * as TextBlocks from './blocks/text';
-import * as TurtleBlocks from './blocks/turtle';
 
 import * as PythonVariablesGenerators from '../python/generators/variables';
 import * as PythonControlGenerators from '../python/generators/control';
@@ -41,13 +40,12 @@ import * as PythonSetGenerators from '../python/generators/set';
 import * as PythonHtmlGenerators from '../python/generators/html';
 import * as PythonUtilityGenerators from '../python/generators/utility';
 
-import * as ControlGenerators from './generators/data';
-import * as DataGenerators from './generators/data';
+import * as SkulptPyDataGenerators from '../python_skulpt/generators/data';
+import * as SkulptPyInoutGenerators from '../python_skulpt/generators/inout';
+import * as SkulptPySystemGenerators from '../python_skulpt/generators/system';
+import * as SkulptPyTurtleGenerators from '../python_skulpt/generators/turtle';
+
 import * as GameGenerators from './generators/game';
-import * as InoutGenerators from './generators/inout';
-import * as SystemGenerators from './generators/system';
-import * as TextGenerators from './generators/text';
-import * as TurtleGenerators from './generators/turtle';
 
 import './css/color_mixpy_python_skulpt.css';
 
@@ -72,13 +70,11 @@ Object.assign(
     PythonSetBlocks,
     PythonHtmlBlocks,
     PythonUtilityBlocks,
-    ControlBlocks,
-    DataBlocks,
+    SkulptPyDataBlocks,
+    SkulptPyInoutBlocks,
+    SkulptPySystemBlocks,
+    SkulptPyTurtleBlocks,
     GameBlocks,
-    InoutBlocks,
-    SystemBlocks,
-    TextBlocks,
-    TurtleBlocks
 );
 
 Object.assign(
@@ -96,11 +92,9 @@ Object.assign(
     PythonSetGenerators,
     PythonHtmlGenerators,
     PythonUtilityGenerators,
-    ControlGenerators,
-    DataGenerators,
-    GameGenerators,
-    InoutGenerators,
-    SystemGenerators,
-    TextGenerators,
-    TurtleGenerators
+    SkulptPyDataGenerators,
+    SkulptPyInoutGenerators,
+    SkulptPySystemGenerators,
+    SkulptPyTurtleGenerators,
+    GameGenerators
 );

@@ -1,8 +1,9 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-import Names from '../micropython_common/others/names';
-import Variables from '../micropython_common/others/variables';
+import Variables from '../python/others/variables';
+import Procedures from '../python/others/procedures';
+import Python from '../python/python_generator';
 
 import pins from './blocks/k210_profile';
 
@@ -86,8 +87,9 @@ import * as UpdataGenerators from './generators/updata';
 
 import './css/color_k210_mixgoai.css';
 
-Object.assign(Blockly.Names, Names);
 Object.assign(Blockly.Variables, Variables);
+Object.assign(Blockly.Procedures, Procedures);
+Blockly.Python = Python;
 
 Profile.default = {};
 Object.assign(Profile, pins);

@@ -1,15 +1,16 @@
 import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 import { controls_repeat_ext } from '../../python/generators/control';
 
 export const base_setup = function () {
-    var branch = Blockly.Python.statementToCode(this, 'DO');
+    var branch = Python.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "").replace(/\n {4}/g, '\n');//去除两端空格
     if (branch) {
         if (branch.endsWith('\n')) {
-            Blockly.Python.setups_['setup_setup'] = branch;
+            Python.setups_['setup_setup'] = branch;
         }
         else {
-            Blockly.Python.setups_['setup_setup'] = branch + '\n';
+            Python.setups_['setup_setup'] = branch + '\n';
         }
     }
     return '';
@@ -22,27 +23,27 @@ export const controls_if = function (a) {
         d,
         e;
     do
-        e = Blockly.Python.valueToCode(a, "IF" + b, Blockly.Python.ORDER_NONE) || "False", d = Blockly.Python.statementToCode(a, "DO" + b) || Blockly.Python.PASS, c += (0 == b ? "if " : "elif ") + e + ":\n" + d, ++b;
+        e = Python.valueToCode(a, "IF" + b, Python.ORDER_NONE) || "False", d = Python.statementToCode(a, "DO" + b) || Python.PASS, c += (0 == b ? "if " : "elif ") + e + ":\n" + d, ++b;
     while (a.getInput("IF" + b));
-    a.getInput("ELSE") && (d = Blockly.Python.statementToCode(a, "ELSE") || Blockly.Python.PASS, c += "else:\n" + d);
+    a.getInput("ELSE") && (d = Python.statementToCode(a, "ELSE") || Python.PASS, c += "else:\n" + d);
     return c
 };
 
 //ok
 export const controls_for = function (a) {
-    var b = Blockly.Python.variableDB_.getName(a.getFieldValue("VAR"), Blockly.Variables.NAME_TYPE),
-        //var b = Blockly.Python.valueToCode(a, "VAR", Blockly.Python.ORDER_MEMBER) || "''",
-        c = Blockly.Python.valueToCode(a, "FROM", Blockly.Python.ORDER_NONE) || "0",
-        d = Blockly.Python.valueToCode(a, "TO", Blockly.Python.ORDER_NONE) || "0",
-        e = Blockly.Python.valueToCode(a, "STEP", Blockly.Python.ORDER_NONE) || "1",
-        f = Blockly.Python.addLoopTrap(Blockly.Python.statementToCode(a, "DO"), a.id) || Blockly.Python.PASS,
+    var b = Python.variableDB_.getName(a.getFieldValue("VAR"), Blockly.Variables.NAME_TYPE),
+        //var b = Python.valueToCode(a, "VAR", Python.ORDER_MEMBER) || "''",
+        c = Python.valueToCode(a, "FROM", Python.ORDER_NONE) || "0",
+        d = Python.valueToCode(a, "TO", Python.ORDER_NONE) || "0",
+        e = Python.valueToCode(a, "STEP", Python.ORDER_NONE) || "1",
+        f = Python.addLoopTrap(Python.statementToCode(a, "DO"), a.id) || Python.PASS,
         g = "",
         h = function () {
-            return Blockly.Python.provideFunction_("upRange",
-                ["def " + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + "(start, stop, step):", "  while start <= stop:", "    yield start", "    start += abs(step)"])
+            return Python.provideFunction_("upRange",
+                ["def " + Python.FUNCTION_NAME_PLACEHOLDER_ + "(start, stop, step):", "  while start <= stop:", "    yield start", "    start += abs(step)"])
         },
         k = function () {
-            return Blockly.Python.provideFunction_("downRange", ["def " + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + "(start, stop, step):", "  while start >= stop:", "    yield start", "    start -= abs(step)"])
+            return Python.provideFunction_("downRange", ["def " + Python.FUNCTION_NAME_PLACEHOLDER_ + "(start, stop, step):", "  while start >= stop:", "    yield start", "    start -= abs(step)"])
         };
     a = function (a, b, c) {
         return "(" + a + " <= " + b + ") and " + h() + "(" + a + ", " + b + ", " + c + ") or " + k() + "(" + a + ", " + b + ", " + c + ")"
@@ -55,7 +56,7 @@ export const controls_for = function (a) {
             if (Blockly.isNumber(a))
                 a = parseFloat(a);
             else {
-                var d = Blockly.Python.variableDB_.getDistinctName(b + c, Blockly.Variables.NAME_TYPE);
+                var d = Python.variableDB_.getDistinctName(b + c, Blockly.Variables.NAME_TYPE);
                 g += d + " = " + a + "\n";
                 a = d
             }
@@ -75,8 +76,8 @@ export const controls_repeat = controls_repeat_ext;
 
 export const controls_whileUntil = function (a) {
     var b = "UNTIL" == a.getFieldValue("MODE"),
-        c = Blockly.Python.valueToCode(a, "BOOL", b ? Blockly.Python.ORDER_LOGICAL_NOT : Blockly.Python.ORDER_NONE) || "False",
-        d = Blockly.Python.addLoopTrap(Blockly.Python.statementToCode(a, "DO"), a.id) || Blockly.Python.PASS;
+        c = Python.valueToCode(a, "BOOL", b ? Python.ORDER_LOGICAL_NOT : Python.ORDER_NONE) || "False",
+        d = Python.addLoopTrap(Python.statementToCode(a, "DO"), a.id) || Python.PASS;
     b && (c = "not " + c);
     return "while " + c + ":\n" + d
 };
@@ -98,28 +99,28 @@ export const controls_flow_statements = function (a) {
 
 export const controls_forEach = function (block) {
     // For each loop.
-    var variable0 = Blockly.Python.variableDB_.getName(
+    var variable0 = Python.variableDB_.getName(
         block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-    var argument0 = Blockly.Python.valueToCode(block, 'LIST',
-        Blockly.Python.ORDER_RELATIONAL) || '[]';
-    var branch = Blockly.Python.statementToCode(block, 'DO');
-    branch = Blockly.Python.addLoopTrap(branch, block.id) ||
-        Blockly.Python.PASS;
+    var argument0 = Python.valueToCode(block, 'LIST',
+        Python.ORDER_RELATIONAL) || '[]';
+    var branch = Python.statementToCode(block, 'DO');
+    branch = Python.addLoopTrap(branch, block.id) ||
+        Python.PASS;
     var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch;
     return code;
 };
 
 //ok
 export const controls_type = function () {
-    var data = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ATOMIC) || '1000'
+    var data = Python.valueToCode(this, 'DATA', Python.ORDER_ATOMIC) || '1000'
     var code = 'type(' + data + ')';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const controls_typeLists = function () {
-    Blockly.Python.definitions_['import_microbit_*'] = 'from microbit import *';
+    Python.definitions_['import_microbit_*'] = 'from microbit import *';
     var type = this.getFieldValue('type');
-    // Blockly.Python.definitions_['func_type' + type] = code;
-    return [type, Blockly.Python.ORDER_ATOMIC];
+    // Python.definitions_['func_type' + type] = code;
+    return [type, Python.ORDER_ATOMIC];
 }
 

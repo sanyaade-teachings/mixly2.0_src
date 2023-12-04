@@ -1,12 +1,12 @@
-import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 
 // Blynk 第二版
 // Blynk 自定义终端部件 Terminal
 export const mpython_blynk_terminal_widget_vpin = function (block) {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    var virtual_pin = Python.valueToCode(block, 'virtual_pin', Python.ORDER_ATOMIC);
 
-    Blockly.Python.functions_['terminal_widget_vpin_' + virtual_pin] =
+    Python.functions_['terminal_widget_vpin_' + virtual_pin] =
         `
 ALLOWED_COMMANDS_LIST = ['ls', 'lsusb', 'ip a', 'ip abc']
 
@@ -43,8 +43,8 @@ def write_handler(pin, _values):
 
 // Blynk 同步虚拟管脚的状态
 export const mpython_blynk_sync_virtual = function (block) {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    var virtual_pin = Python.valueToCode(block, 'virtual_pin', Python.ORDER_ATOMIC);
 
     var code = 'blynk.virtual_sync(' + virtual_pin + ')\n';
     return code;
@@ -52,12 +52,12 @@ export const mpython_blynk_sync_virtual = function (block) {
 
 // 斷開连接 Blynk
 export const mpython_blynk_on_disconnected = function (block) {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
 
-    var branch = Blockly.Python.statementToCode(block, 'DO');
-    branch = Blockly.Python.addLoopTrap(branch, block.id) || Blockly.Python.PASS;
+    var branch = Python.statementToCode(block, 'DO');
+    branch = Python.addLoopTrap(branch, block.id) || Python.PASS;
 
-    Blockly.Python.definitions_['blynk_on_disconnected'] =
+    Python.definitions_['blynk_on_disconnected'] =
         '@blynk.handle_event("disconnect")\n' +
         'def connect_handler():\n' +
         "    print('Blynk disconnected')\n" + branch;
@@ -67,12 +67,12 @@ export const mpython_blynk_on_disconnected = function (block) {
 
 // 连接上 Blynk
 export const mpython_blynk_on_connected = function (block) {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
 
-    var branch = Blockly.Python.statementToCode(block, 'DO');
-    branch = Blockly.Python.addLoopTrap(branch, block.id) || Blockly.Python.PASS;
+    var branch = Python.statementToCode(block, 'DO');
+    branch = Python.addLoopTrap(branch, block.id) || Python.PASS;
 
-    Blockly.Python.definitions_['blynk_on_connected'] =
+    Python.definitions_['blynk_on_connected'] =
         '@blynk.handle_event("connect")\n' +
         'def connect_handler():\n' +
         "    print('Blynk connected')\n" + branch;
@@ -82,8 +82,8 @@ export const mpython_blynk_on_connected = function (block) {
 
 // Blynk 定时器的进程生效并运行
 export const mpython_blynktimer_run = function () {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    // Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    // Python.definitions_['import_blynktimer'] = 'import blynktimer';
 
     var code = 'blynk_timer.run()\n';
     return code;
@@ -91,7 +91,7 @@ export const mpython_blynktimer_run = function () {
 
 // Blynk 进程生效并运行
 export const mpython_blynk_run = function () {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
 
     var code = 'blynk.run()\n';
     return code;
@@ -99,8 +99,8 @@ export const mpython_blynk_run = function () {
 
 // Blynk APP 显示通知
 export const mpython_blynk_app_notify = function (block) {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    var notification = Blockly.Python.valueToCode(block, 'notification', Blockly.Python.ORDER_ATOMIC);
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    var notification = Python.valueToCode(block, 'notification', Python.ORDER_ATOMIC);
 
     var code = 'blynk.notify(' + notification + ')\n';
     return code;
@@ -108,10 +108,10 @@ export const mpython_blynk_app_notify = function (block) {
 
 // 停止 Blynk 定时器 %1
 export const mpython_blynk_stop_timers = function (block) {
-    Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
-    Blockly.Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
+    Python.definitions_['import_blynktimer'] = 'import blynktimer';
+    Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
 
-    var timer_num = Blockly.Python.valueToCode(block, 'timer_num', Blockly.Python.ORDER_ATOMIC);
+    var timer_num = Python.valueToCode(block, 'timer_num', Python.ORDER_ATOMIC);
     var code = `blynk_timer.stop('${timer_num}_blynk_timer${timer_num}')` + '\n';
 
     return code;
@@ -119,27 +119,27 @@ export const mpython_blynk_stop_timers = function (block) {
 
 // 可用的 Blynk 定时器
 export const mpython_blynk_get_timers = function () {
-    Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
-    Blockly.Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
+    Python.definitions_['import_blynktimer'] = 'import blynktimer';
+    Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
 
     var code = `blynk_timer.get_timers()`;
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 //blynk定时器
 export const mpython_blynktimer = function (block) {
-    Blockly.Python.definitions_['import_blynktimer'] = 'import blynktimer';
+    Python.definitions_['import_blynktimer'] = 'import blynktimer';
 
-    var Num = Blockly.Python.valueToCode(block, 'Num', Blockly.Python.ORDER_ATOMIC);
-    var period = Blockly.Python.valueToCode(block, 'period', Blockly.Python.ORDER_ATOMIC);
+    var Num = Python.valueToCode(block, 'Num', Python.ORDER_ATOMIC);
+    var period = Python.valueToCode(block, 'period', Python.ORDER_ATOMIC);
     var Timer_mode = block.getFieldValue('Timer_mode');
 
-    var branch = Blockly.Python.statementToCode(block, 'DO');
-    branch = Blockly.Python.addLoopTrap(branch, block.id) || Blockly.Python.PASS;
+    var branch = Python.statementToCode(block, 'DO');
+    branch = Python.addLoopTrap(branch, block.id) || Python.PASS;
 
-    Blockly.Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
+    Python.definitions_['def_blynktimer'] = 'blynk_timer = blynktimer.Timer(no_timers_err=False)';
 
-    Blockly.Python.definitions_['blynktimer_event' + Num] =
+    Python.definitions_['blynktimer_event' + Num] =
         `
 @blynk_timer.register(interval=${period}, run_once=${Timer_mode})
 def blynk_timer${Num}():
@@ -151,9 +151,9 @@ def blynk_timer${Num}():
 
 // 发送数据 %1 到 Bylnk APP 的虚拟管脚 %2
 export const mpython_blynk_sensor_data_to_app = function (block) {
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    var sensor_data = Blockly.Python.valueToCode(block, 'sensor_data', Blockly.Python.ORDER_ATOMIC);
-    var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    var sensor_data = Python.valueToCode(block, 'sensor_data', Python.ORDER_ATOMIC);
+    var virtual_pin = Python.valueToCode(block, 'virtual_pin', Python.ORDER_ATOMIC);
     var code = 'blynk.virtual_write(' + virtual_pin + ', ' + sensor_data + ')\n';
     return code;
 };
@@ -161,13 +161,13 @@ export const mpython_blynk_sensor_data_to_app = function (block) {
 // 从 Bylnk APP 获取虚拟管脚 %1 的值
 export const mpython_blynk_app_data = function (block) {
 
-    // Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    var virtual_pin = Blockly.Python.valueToCode(block, 'virtual_pin', Blockly.Python.ORDER_ATOMIC);
+    // Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    var virtual_pin = Python.valueToCode(block, 'virtual_pin', Python.ORDER_ATOMIC);
 
-    var branch = Blockly.Python.statementToCode(block, 'DO');
-    branch = Blockly.Python.addLoopTrap(branch, block.id) || Blockly.Python.PASS;
+    var branch = Python.statementToCode(block, 'DO');
+    branch = Python.addLoopTrap(branch, block.id) || Python.PASS;
 
-    Blockly.Python.definitions_['blynk_VIRTUAL_WRITE_' + virtual_pin] =
+    Python.definitions_['blynk_VIRTUAL_WRITE_' + virtual_pin] =
         "@blynk.handle_event('write V" + virtual_pin + "')\n" +
         'def write_virtual_pin_handler(pin, _value):\n' +
         '    for i in range(0, len(_value)):\n' +
@@ -181,9 +181,9 @@ export const mpython_blynk_app_data = function (block) {
 
 // 向 %1 发邮件  主题 %2 正文 %3
 export const mpython_blynk_email = function (block) {
-    var body = Blockly.Python.valueToCode(block, 'body', Blockly.Python.ORDER_ATOMIC);
-    var subject = Blockly.Python.valueToCode(block, 'subject', Blockly.Python.ORDER_ATOMIC);
-    var TargetEmail = Blockly.Python.valueToCode(block, 'TargetEmail', Blockly.Python.ORDER_ATOMIC);
+    var body = Python.valueToCode(block, 'body', Python.ORDER_ATOMIC);
+    var subject = Python.valueToCode(block, 'subject', Python.ORDER_ATOMIC);
+    var TargetEmail = Python.valueToCode(block, 'TargetEmail', Python.ORDER_ATOMIC);
 
     var code = `blynk.email(${TargetEmail}, ${subject}, ${body})` + '\n';
     return code;
@@ -191,8 +191,8 @@ export const mpython_blynk_email = function (block) {
 
 // 给虚拟管脚添加   属性 %1 值 %2
 export const mpython_blynk_set_property = function (block) {
-    var attribute_value = Blockly.Python.valueToCode(block, 'attribute_value', Blockly.Python.ORDER_ATOMIC);
-    var attribute_name = Blockly.Python.valueToCode(block, 'attribute_name', Blockly.Python.ORDER_ATOMIC);
+    var attribute_value = Python.valueToCode(block, 'attribute_value', Python.ORDER_ATOMIC);
+    var attribute_name = Python.valueToCode(block, 'attribute_name', Python.ORDER_ATOMIC);
 
     var code = `blynk.set_property(pin, ${attribute_name}, ${attribute_value})` + '\n';
 
@@ -201,22 +201,22 @@ export const mpython_blynk_set_property = function (block) {
 
 // Bylnk设置
 export const mpython_blynk_setup = function (block) {
-    Blockly.Python.definitions_['import_BlynkLib'] = 'import blynklib';
-    var server = Blockly.Python.valueToCode(block, 'server', Blockly.Python.ORDER_ATOMIC);
-    var auth = Blockly.Python.valueToCode(block, 'auth', Blockly.Python.ORDER_ATOMIC);
-    var port = Blockly.Python.valueToCode(block, 'port', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_BlynkLib'] = 'import blynklib';
+    var server = Python.valueToCode(block, 'server', Python.ORDER_ATOMIC);
+    var auth = Python.valueToCode(block, 'auth', Python.ORDER_ATOMIC);
+    var port = Python.valueToCode(block, 'port', Python.ORDER_ATOMIC);
 
-    Blockly.Python.definitions_['mpython_blynk_setup'] =
+    Python.definitions_['mpython_blynk_setup'] =
         "blynk = blynklib.Blynk(" + auth + ", server=" + server + ", port=" + port + ")";
 
-    Blockly.Python.definitions_['blynk_on_connected'] =
+    Python.definitions_['blynk_on_connected'] =
         `
 @blynk.handle_event("connect")
 def connect_handler():
     print('Blynk connected')
 `
 
-    Blockly.Python.definitions_['blynk_on_disconnected'] =
+    Python.definitions_['blynk_on_disconnected'] =
         `
 @blynk.handle_event("disconnect")
 def connect_handler():

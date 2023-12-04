@@ -22,14 +22,8 @@
  * @fileoverview Utility functions for handling class_test.
  * @author fraser@google.com (Neil Fraser)
  */
-'use strict';
 
-
-goog.provide('Blockly.Class');
-
-// TODO(scr): Fix circular dependencies
-goog.require('Blockly.Workspace');
-//goog.require('goog.string');
+import * as Blockly from 'blockly/core';
 
 //类
 Blockly.Block.prototype.class_getVars = function () { for (var a = [], b = 0, c; c = this.inputList[b]; b++)for (var d = 0, e; e = c.fieldRow[d]; d++)e instanceof Blockly.FieldVariable && a.push(e.getValue()); return a }; Blockly.Block.prototype.class_renameVar = function (a, b) { for (var c = 0, d; d = this.inputList[c]; c++)for (var e = 0, f; f = d.fieldRow[e]; e++)f instanceof Blockly.FieldVariable && Blockly.Names.equals(a, f.getValue()) && f.setValue(b) };

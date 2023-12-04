@@ -1,15 +1,15 @@
-import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 
 export const factory_from_import = function () {
     var path = this.getFieldValue('path');
     var module = this.getFieldValue('module');
-    Blockly.Python.definitions_['import_' + path + '_' + module] = 'from ' + path + ' import ' + module;
+    Python.definitions_['import_' + path + '_' + module] = 'from ' + path + ' import ' + module;
     return '';
 };
 
 export const factory_import = function () {
     var module = this.getFieldValue('module');
-    Blockly.Python.definitions_['import_' + module] = 'import ' + module;
+    Python.definitions_['import_' + module] = 'import ' + module;
     return '';
 };
 
@@ -17,8 +17,8 @@ export const factory_function_noreturn = function () {
     var NAME = this.getFieldValue('NAME');
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
-            Blockly.Python.ORDER_NONE) || '';
+        code[n] = Python.valueToCode(this, 'ADD' + n,
+            Python.ORDER_NONE) || '';
     }
     return NAME + '(' + code.join(', ') + ')\n';
 };
@@ -27,10 +27,10 @@ export const factory_function_return = function () {
     var NAME = this.getFieldValue('NAME');
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
-            Blockly.Python.ORDER_NONE) || '';
+        code[n] = Python.valueToCode(this, 'ADD' + n,
+            Python.ORDER_NONE) || '';
     }
-    return [NAME + '(' + code.join(', ') + ')', Blockly.Python.ORDER_ATOMIC];
+    return [NAME + '(' + code.join(', ') + ')', Python.ORDER_ATOMIC];
 };
 
 export const factory_declare = function () {
@@ -45,8 +45,8 @@ export const factory_callMethod_noreturn = function () {
     var METHOD = this.getFieldValue('METHOD');
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
-            Blockly.Python.ORDER_NONE) || '';
+        code[n] = Python.valueToCode(this, 'ADD' + n,
+            Python.ORDER_NONE) || '';
     }
     return NAME + '.' + METHOD + '(' + code.join(', ') + ')\n';
 };
@@ -56,10 +56,10 @@ export const factory_callMethod_return = function () {
     var METHOD = this.getFieldValue('METHOD');
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
-            Blockly.Python.ORDER_NONE) || '';
+        code[n] = Python.valueToCode(this, 'ADD' + n,
+            Python.ORDER_NONE) || '';
     }
-    return [NAME + '.' + METHOD + '(' + code.join(', ') + ')', Blockly.Python.ORDER_ATOMIC];
+    return [NAME + '.' + METHOD + '(' + code.join(', ') + ')', Python.ORDER_ATOMIC];
 };
 
 export const factory_block = function () {
@@ -72,7 +72,7 @@ export const factory_block = function () {
 
 export const factory_block_return = function () {
     var VALUE = this.getFieldValue('VALUE');
-    return [VALUE, Blockly.Python.ORDER_ATOMIC];
+    return [VALUE, Python.ORDER_ATOMIC];
 };
 
 export const factory_block_with_textarea = function () {
@@ -85,13 +85,13 @@ export const factory_block_with_textarea = function () {
 
 export const factory_block_return_with_textarea = function () {
     var VALUE = this.getFieldValue('VALUE');
-    return [VALUE, Blockly.Python.ORDER_ATOMIC];
+    return [VALUE, Python.ORDER_ATOMIC];
 };
 
 export const folding_block = function () {
     var comment = this.getFieldValue('peien');
     comment = "#" + comment;
-    var branch = Blockly.Python.statementToCode(this, 'DO');
+    var branch = Python.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     branch = branch.replace(/(\n\s\s\s\s)/g, "\n");//去除换行时空格
     return comment + '\n' + branch + '\n';

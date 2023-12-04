@@ -1,46 +1,47 @@
 import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 
 export const iot_wifi_connect = function () {
-    // Blockly.Python.definitions_['import_simple'] = "import simple";
-    Blockly.Python.definitions_['import_miot'] = "import miot_no";
-    var username = Blockly.Python.valueToCode(this, 'WIFINAME', Blockly.Python.ORDER_ATOMIC);
-    var password = Blockly.Python.valueToCode(this, 'PASSWORD', Blockly.Python.ORDER_ATOMIC);
+    // Python.definitions_['import_simple'] = "import simple";
+    Python.definitions_['import_miot'] = "import miot_no";
+    var username = Python.valueToCode(this, 'WIFINAME', Python.ORDER_ATOMIC);
+    var password = Python.valueToCode(this, 'PASSWORD', Python.ORDER_ATOMIC);
     var code = 'miot_no.do_connect(' + username + ',' + password + ')\n';
     return code;
 };
 
 export const iot_onenet_connect = function () {
-    Blockly.Python.definitions_['import_miot'] = "import miot_no";
-    var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
-    var client = Blockly.Python.valueToCode(this, 'CLIENT', Blockly.Python.ORDER_ATOMIC);
-    var server = Blockly.Python.valueToCode(this, 'SERVER', Blockly.Python.ORDER_ATOMIC);
-    var username = Blockly.Python.valueToCode(this, 'USERNAME', Blockly.Python.ORDER_ATOMIC);
-    var password = Blockly.Python.valueToCode(this, 'PASSWORD', Blockly.Python.ORDER_ATOMIC);
-    var topic = Blockly.Python.valueToCode(this, 'TOPIC', Blockly.Python.ORDER_ATOMIC);
-    var subscribe = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT) || '0';
+    Python.definitions_['import_miot'] = "import miot_no";
+    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    var client = Python.valueToCode(this, 'CLIENT', Python.ORDER_ATOMIC);
+    var server = Python.valueToCode(this, 'SERVER', Python.ORDER_ATOMIC);
+    var username = Python.valueToCode(this, 'USERNAME', Python.ORDER_ATOMIC);
+    var password = Python.valueToCode(this, 'PASSWORD', Python.ORDER_ATOMIC);
+    var topic = Python.valueToCode(this, 'TOPIC', Python.ORDER_ATOMIC);
+    var subscribe = Python.valueToCode(this, 'SUB', Python.ORDER_ASSIGNMENT) || '0';
     var code = v + ' = miot_no.init_MQTT_client(' + client + ', ' + server + ', ' + username + ', ' + password + ', ' + topic + ', ' + subscribe + ')\n';
     return code;
 };
 
 export const iot_onenet_disconnect = function () {
-    var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_simple'] = "import simple";
+    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    Python.definitions_['import_simple'] = "import simple";
     var code = v + '.do_disconnect()\n';
     return code;
 };
 
 export const iot_onenet_publish_dict = function () {
-    var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
-    var d = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ATOMIC);
+    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    var d = Python.valueToCode(this, 'DICT', Python.ORDER_ATOMIC);
     var check = this.getFieldValue("is_print") == 'TRUE' ? 'True' : 'False';
-    Blockly.Python.definitions_['import_simple'] = "import simple";
+    Python.definitions_['import_simple'] = "import simple";
     var code = v + '.publish(' + d + ', is_print = ' + check + ')\n';
     return code;
 };
 
 export const iot_onenet_check = function () {
-    var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_simple'] = "import simple";
+    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    Python.definitions_['import_simple'] = "import simple";
     var code = v + '.check_msg()\n';
     return code;
 };
@@ -49,21 +50,21 @@ export const iot_onenet_publish = function () {
     // Create a list with any number of elements of any type.
 
     //var size=window.parseFloat(this.getFieldValue('SIZE'));
-    Blockly.Python.definitions_['import_miot'] = "import miot_no";
+    Python.definitions_['import_miot'] = "import miot_no";
     var ck = new Array(this.itemCount_);
     var cv = new Array(this.itemCount_);
     var ct = new Array(this.itemCount_);
 
     var default_value = '0';
-    var v = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
+    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
 
     for (var n = 0; n < this.itemCount_; n++) {
         var keyName = this.getFieldValue('KEY' + n);
         ck[n] = keyName
     }
     for (var n = 0; n < this.itemCount_; n++) {
-        cv[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
-            Blockly.Python.ORDER_NONE) || default_value;
+        cv[n] = Python.valueToCode(this, 'ADD' + n,
+            Python.ORDER_NONE) || default_value;
     }
     var code = v + ".publish({";
     for (var n = 0; n < this.itemCount_; n++) {
@@ -71,7 +72,7 @@ export const iot_onenet_publish = function () {
     }
     //var code = "c.publish('$dp', pubData("+ '{' + code.join(', ') + '})\n';
     //var code =''+varName+'['+size+"]"+'='+ '{' + code.join(', ') + '};\n';
-    //Blockly.Python.setups_['setup_lists'+varName] = code;
+    //Python.setups_['setup_lists'+varName] = code;
     code = code + ct.join(', ') + "})\n";
     return code;
 };

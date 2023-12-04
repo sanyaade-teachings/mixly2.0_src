@@ -22,7 +22,7 @@
  * @fileoverview Generating Python for utility blocks.
  * @author acbart@vt.edu (Austin Cory Bart)
  */
-import * as Blockly from 'blockly/core';
+import Python from '../python_generator';
 
 export const raw_block = function (block) {
     var code = block.getFieldValue('TEXT') + "\n";
@@ -31,12 +31,12 @@ export const raw_block = function (block) {
 
 export const raw_expression = function (block) {
     var code = block.getFieldValue('TEXT');
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const raw_empty = function (block) {
-    var code = Blockly.Python.valueToCode(block, 'VALUE',
-        Blockly.Python.ORDER_ATOMIC) || '';
+    var code = Python.valueToCode(block, 'VALUE',
+        Python.ORDER_ATOMIC) || '';
     return code + "\n";
 };
 
@@ -46,10 +46,10 @@ export const raw_table = function () {
 };
 
 export const type_check = function (block) {
-    var value = Blockly.Python.valueToCode(block, 'VALUE',
-        Blockly.Python.ORDER_MEMBER) || '___';
+    var value = Python.valueToCode(block, 'VALUE',
+        Python.ORDER_MEMBER) || '___';
     var code = 'type(' + value + ')';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const function_call = function (block) {
@@ -57,23 +57,23 @@ export const function_call = function (block) {
     var hasReturn = block.hasReturn_;
     var args = new Array(block.itemCount_);
     for (var n = 0; n < block.itemCount_; n++) {
-        args[n] = Blockly.Python.valueToCode(block, 'ARGUMENT' + n,
-            Blockly.Python.ORDER_NONE) || '___';
+        args[n] = Python.valueToCode(block, 'ARGUMENT' + n,
+            Python.ORDER_NONE) || '___';
     }
     var code = name + '(' + args.join(', ') + ')';
     if (hasReturn) {
-        return [code, Blockly.Python.ORDER_ATOMIC];
+        return [code, Python.ORDER_ATOMIC];
     }
     return code + '\n';
 };
 
 export const attribute_access = function (block) {
-    var value_module = Blockly.Python.valueToCode(block, 'MODULE', Blockly.Python.ORDER_ATOMIC);
-    var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+    var value_module = Python.valueToCode(block, 'MODULE', Python.ORDER_ATOMIC);
+    var value_name = Python.valueToCode(block, 'NAME', Python.ORDER_ATOMIC);
     //去除掉两端的括号，如(val()) --> val()
     value_name = value_name.substring(1, value_name.length - 1);
     // TODO: Assemble JavaScript into code variable.
     var code = value_module + '.' + value_name;
     // TODO: Change ORDER_NONE to the correct strength.
-    return [code, Blockly.Python.ORDER_NONE];
+    return [code, Python.ORDER_NONE];
 };

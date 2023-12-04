@@ -1,4 +1,5 @@
 import * as Blockly from 'blockly/core';
+import Names from '../others/names';
 
 const VARIABLES_HUE = 330//'#af5180'//330;
 
@@ -22,7 +23,7 @@ const VARIABLES_HUE = 330//'#af5180'//330;
 //     return [this.getFieldValue('VAR')];
 //   },
 //   renameVar: function(oldName, newName) {
-//     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+//     if (Names.equals(oldName, this.getFieldValue('VAR'))) {
 //       this.setTitleValue(newName, 'VAR');
 //     }
 //   }
@@ -41,7 +42,7 @@ export const variables_get = {
         return [this.getFieldValue('VAR')];
     },
     renameVar: function (oldName, newName) {
-        if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+        if (Names.equals(oldName, this.getFieldValue('VAR'))) {
             this.setFieldValue(newName, 'VAR');
         }
     }/*,
@@ -69,7 +70,7 @@ export const variables_get = {
 //     return [this.getFieldValue('VAR')];
 //   },
 //   renameVar: function(oldName, newName) {
-//     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+//     if (Names.equals(oldName, this.getFieldValue('VAR'))) {
 //       this.setFieldValue(newName, 'VAR');
 //     }
 //   }/*,
@@ -100,7 +101,7 @@ export const variables_set = {
         return varValue.split(",");
     },
     renameVar: function (oldName, newName) {
-        if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+        if (Names.equals(oldName, this.getFieldValue('VAR'))) {
             this.setFieldValue(newName, 'VAR');
         }
     }

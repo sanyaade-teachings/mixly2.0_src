@@ -1,16 +1,17 @@
 import * as Blockly from 'blockly/core';
+import Python from '../python_generator';
 
 export const class_make = function () {
     var text_name = this.getFieldValue('VAR') || 'None';
-    var statements_data = Blockly.Python.statementToCode(this, 'data');
+    var statements_data = Python.statementToCode(this, 'data');
     var code = 'class ' + text_name + ':\n' + statements_data;
     return code;
 };
 
 export const class_make_with_base = function () {
     var text_name = this.getFieldValue('VAR') || 'None';
-    var name = Blockly.Python.valueToCode(this, 'NAME', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
-    var statements_data = Blockly.Python.statementToCode(this, 'data');
+    var name = Python.valueToCode(this, 'NAME', Python.ORDER_ASSIGNMENT) || 'None';
+    var statements_data = Python.statementToCode(this, 'data');
     var code = '';
     if (name == 'None')
         code = 'class ' + text_name + ':\n' + statements_data;
@@ -21,20 +22,20 @@ export const class_make_with_base = function () {
 
 export const class_get = function () {
     var code = this.getFieldValue('VAR') || 'None';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const property_set = function () {
-    var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
-    var argument1 = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
+    var argument0 = Python.valueToCode(this, 'VALUE', Python.ORDER_ASSIGNMENT) || 'None';
+    var argument1 = Python.valueToCode(this, 'DATA', Python.ORDER_ASSIGNMENT) || 'None';
     var varName = this.getFieldValue('VAR') || 'None';
     return argument0 + '.' + varName + ' = ' + argument1 + '\n';
 };
 
 export const property_get = function () {
-    var argument0 = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
+    var argument0 = Python.valueToCode(this, 'VALUE', Python.ORDER_ASSIGNMENT) || 'None';
     var code = this.getFieldValue('VAR') || 'None';
-    return [argument0 + '.' + code, Blockly.Python.ORDER_ATOMIC];
+    return [argument0 + '.' + code, Python.ORDER_ATOMIC];
 };
 
 export const object_set = function () {
@@ -42,7 +43,7 @@ export const object_set = function () {
     var text_new_name = this.getFieldValue('VAR11') || 'None';
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Blockly.Python.valueToCode(this, 'ADD' + n, Blockly.Python.ORDER_NONE) || 'None';
+        code[n] = Python.valueToCode(this, 'ADD' + n, Python.ORDER_NONE) || 'None';
     }
     var code = text_new_name + ' = ' + text_name + '(' + code.join(',') + ')\n';
     return code;
@@ -50,21 +51,21 @@ export const object_set = function () {
 
 export const object_get = function () {
     var code = this.getFieldValue('VAR') || 'None';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const method_procedures_defreturn = function () {
     // Define a procedure with a return value.
-    //var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
+    //var funcName = Python.variableDB_.getName(this.getFieldValue('NAME'),
     //    Blockly.Class_Test.NAME_TYPE);
     var funcName = this.getFieldValue('NAME') || 'None';
-    var branch = Blockly.Python.statementToCode(this, 'STACK') || '    pass\n';
-    if (Blockly.Python.INFINITE_LOOP_TRAP) {
-        branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+    var branch = Python.statementToCode(this, 'STACK') || '    pass\n';
+    if (Python.INFINITE_LOOP_TRAP) {
+        branch = Python.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
     }
-    var returnValue = Blockly.Python.valueToCode(this, 'RETURN',
-        Blockly.Python.ORDER_NONE) || '';
+    var returnValue = Python.valueToCode(this, 'RETURN',
+        Python.ORDER_NONE) || '';
     //var type=this.getFieldValue('TYPE');
     if (returnValue) {
         returnValue = '    return ' + returnValue + '\n';
@@ -72,45 +73,45 @@ export const method_procedures_defreturn = function () {
     //var returnType = returnValue ? type : 'void';
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        var varName = Blockly.Python.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+        var varName = Python.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
         args[x] = varName;
     }
     var code = '';
     //if(this.arguments_.length)
     code = 'def ' + funcName + '(' + args.join(', ') + '):\n' +
         branch + returnValue + '\n';
-    //code = Blockly.Python.scrub_(this, code);
-    //Blockly.Python.setups_[funcName] = code;
+    //code = Python.scrub_(this, code);
+    //Python.setups_[funcName] = code;
     return code;
 };
 
 export const method_procedures_defnoreturn = method_procedures_defreturn;
 
 export const method_procedures_callreturn = function () {
-    var argument1 = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
+    var argument1 = Python.valueToCode(this, 'DATA', Python.ORDER_ASSIGNMENT) || 'None';
     // Call a procedure with a return value.
-    //var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
+    //var funcName = Python.variableDB_.getName(this.getFieldValue('NAME'),
     //    Blockly.Class_Test.NAME_TYPE);
     var funcName = this.getFieldValue('NAME');
     var args = [];
     for (var x = 0; x < this.arguments_.length - 1; x++) {
-        args[x] = Blockly.Python.valueToCode(this, 'ARG' + (x + 1),
-            Blockly.Python.ORDER_NONE) || 'null';
+        args[x] = Python.valueToCode(this, 'ARG' + (x + 1),
+            Python.ORDER_NONE) || 'null';
     }
     var code = argument1 + '.' + funcName + '(' + args.join(', ') + ')';
-    return [code, Blockly.Python.ORDER_UNARY_POSTFIX];
+    return [code, Python.ORDER_UNARY_POSTFIX];
 };
 
 export const method_procedures_callnoreturn = function () {
-    var argument1 = Blockly.Python.valueToCode(this, 'DATA', Blockly.Python.ORDER_ASSIGNMENT) || 'None';
+    var argument1 = Python.valueToCode(this, 'DATA', Python.ORDER_ASSIGNMENT) || 'None';
     // Call a procedure with no return value.
-    //var funcName = Blockly.Python.variableDB_.getName(this.getFieldValue('NAME'),
+    //var funcName = Python.variableDB_.getName(this.getFieldValue('NAME'),
     //    Blockly.Class_Test.NAME_TYPE);
     var funcName = this.getFieldValue('NAME');
     var args = [];
     for (var x = 0; x < this.arguments_.length - 1; x++) {
-        args[x] = Blockly.Python.valueToCode(this, 'ARG' + (x + 1),
-            Blockly.Python.ORDER_NONE) || 'null';
+        args[x] = Python.valueToCode(this, 'ARG' + (x + 1),
+            Python.ORDER_NONE) || 'null';
     }
     var code = argument1 + '.' + funcName + '(' + args.join(', ') + ')\n';
     return code;
@@ -118,12 +119,12 @@ export const method_procedures_callnoreturn = function () {
 
 export const method_procedures_ifreturn = function () {
     // Conditionally return value from a procedure.
-    var condition = Blockly.Python.valueToCode(this, 'CONDITION',
-        Blockly.Python.ORDER_NONE) || 'False';
+    var condition = Python.valueToCode(this, 'CONDITION',
+        Python.ORDER_NONE) || 'False';
     var code = 'if (' + condition + ') :\n';
     if (this.hasReturnValue_) {
-        var value = Blockly.Python.valueToCode(this, 'VALUE',
-            Blockly.Python.ORDER_NONE) || 'None';
+        var value = Python.valueToCode(this, 'VALUE',
+            Python.ORDER_NONE) || 'None';
         code += '    return ' + value;
     } else {
         code += '    return None';
@@ -136,8 +137,8 @@ export const method_procedures_return = function () {
     // Conditionally return value from a procedure.
     var code = ""
     if (this.hasReturnValue_) {
-        var value = Blockly.Python.valueToCode(this, 'VALUE',
-            Blockly.Python.ORDER_NONE) || 'None';
+        var value = Python.valueToCode(this, 'VALUE',
+            Python.ORDER_NONE) || 'None';
         code += 'return ' + value;
     } else {
         code += 'return None';

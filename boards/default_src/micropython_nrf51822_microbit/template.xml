@@ -1,33 +1,4 @@
-<script type="text/javascript" src="../../../common/blockly-core/python_compressed.js"></script>
-<script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
 <%= htmlWebpackPlugin.tags.headTags.join('\n') %>
-<!-- converters file -->
-<!--
-<script src="../../../common/js/py2block_editor.js" type="application/javascript"></script>
-<script src="../python_mixpy/converters/py2block_config.js" type="application/javascript"></script>
-<script src="converters/py2block_config.js" type="application/javascript"></script>
-<script src="converters/inout.js" type="application/javascript"></script>
-<script src="converters/system.js" type="application/javascript"></script>
-<script src="converters/serial.js" type="application/javascript"></script>
-<script src="converters/communicate.js" type="application/javascript"></script>
-<script src="converters/sensor.js" type="application/javascript"></script>
-<script src="converters/actuator.js" type="application/javascript"></script>
-<script src="converters/display.js" type="application/javascript"></script>
-<script src="../mithon/converters/mithon.js" type="application/javascript"></script>
-<script src="../python/converters/control.js" type="application/javascript"></script>
-<script src="../python/converters/math.js" type="application/javascript"></script>
-<script src="../python/converters/logic.js" type="application/javascript"></script>
-<script src="../python/converters/text.js" type="application/javascript"></script>
-<script src="../python/converters/lists.js" type="application/javascript"></script>
-<script src="../python/converters/tuple.js" type="application/javascript"></script>
-<script src="../python/converters/set.js" type="application/javascript"></script>
-<script src="../python/converters/dicts.js" type="application/javascript"></script>
-<script src="../python/converters/storage.js" type="application/javascript"></script>
-<script src="../../../common/js/python_to_blockly.js" type="application/javascript"></script>
-<script src="../../../common/js/skulpt/dist/skulpt.min.js" type="application/javascript"></script>
-<script src="../../../common/js/skulpt/dist/skulpt-stdlib.js"
-type="application/javascript"></script>
--->
 <xml>
   <category name="" id="catInOut" colour="20">
     <block type="inout_highlow"></block>

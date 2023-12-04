@@ -1,63 +1,63 @@
-import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 
 export const UART_SELET = function () {
     var code = this.getFieldValue('UART');
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const serial_print = function () {
-    Blockly.Python.definitions_['from machine import UART'] = 'from machine import UART';
+    Python.definitions_['from machine import UART'] = 'from machine import UART';
     var dropdown_uart = this.getFieldValue('mode');
-    var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC) || '""'
+    var content = Python.valueToCode(this, 'CONTENT', Python.ORDER_ATOMIC) || '""'
     var code = "uart" + dropdown_uart + ".write(str(" + content + "))\n";
     return code;
 };
 
 export const serial_println = function () {
-    Blockly.Python.definitions_['from machine import UART'] = 'from machine import UART';
+    Python.definitions_['from machine import UART'] = 'from machine import UART';
     var dropdown_uart = this.getFieldValue('mode');
-    var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC) || '""'
+    var content = Python.valueToCode(this, 'CONTENT', Python.ORDER_ATOMIC) || '""'
     var code = "uart" + dropdown_uart + ".write(str(" + content + ")+'\\r\\n')\n";
     return code;
 };
 
 export const serial_print_hex = function () {
-    Blockly.Python.definitions_['import_machine'] = 'import machine';
+    Python.definitions_['import_machine'] = 'import machine';
     var dropdown_uart = this.getFieldValue('mode');
     var dropdown_stat = this.getFieldValue('STAT');
-    var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC) || '0';
+    var content = Python.valueToCode(this, 'CONTENT', Python.ORDER_ATOMIC) || '0';
     var code = "uart" + dropdown_uart + ".write(str(" + dropdown_stat + "(" + content + "))+'\\r\\n')\n";
     return code;
 };
 export const serial_any = function () {
-    Blockly.Python.definitions_['from machine import UART'] = 'from machine import UART';
+    Python.definitions_['from machine import UART'] = 'from machine import UART';
     var dropdown_uart = this.getFieldValue('mode');
     var code = "uart" + dropdown_uart + ".any()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const serial_readstr = function () {
-    Blockly.Python.definitions_['from machine import UART'] = 'from machine import UART';
+    Python.definitions_['from machine import UART'] = 'from machine import UART';
     var dropdown_uart = this.getFieldValue('mode');
     var code = "uart" + dropdown_uart + ".read()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const serial_readline = function () {
-    Blockly.Python.definitions_['from machine import UART'] = 'from machine import UART';
+    Python.definitions_['from machine import UART'] = 'from machine import UART';
     var dropdown_uart = this.getFieldValue('mode');
     var code = "uart" + dropdown_uart + ".readline()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 
 export const serial_softserial1 = function () {
-    Blockly.Python.definitions_['from machine import UART'] = 'from machine import UART';
-    Blockly.Python.definitions_['import board'] = 'import board';
+    Python.definitions_['from machine import UART'] = 'from machine import UART';
+    Python.definitions_['import board'] = 'import board';
     var dropdown_uart = this.getFieldValue('mode');
     var baudrate = this.getFieldValue('baudrate');
-    var TX = Blockly.Python.valueToCode(this, 'TX', Blockly.Python.ORDER_ATOMIC);
-    var RX = Blockly.Python.valueToCode(this, 'RX', Blockly.Python.ORDER_ATOMIC);
+    var TX = Python.valueToCode(this, 'TX', Python.ORDER_ATOMIC);
+    var RX = Python.valueToCode(this, 'RX', Python.ORDER_ATOMIC);
     var code1 = "board.register(" + TX + ",board.FPIOA.UART" + dropdown_uart + "_TX)\n";
     var code2 = "board.register(" + RX + ",board.FPIOA.UART" + dropdown_uart + "_RX)\n";
     var code3 = "uart" + dropdown_uart + "=UART(UART.UART" + dropdown_uart + ", " + baudrate + ", timeout=1000, read_buf_len=4096)\n";
@@ -67,44 +67,44 @@ export const serial_softserial1 = function () {
 
 
 export const system_input = function () {
-    // Blockly.Python.definitions_['import machine'] = 'import machine';
-    var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '""';
-    return ['input(' + str + ')', Blockly.Python.ORDER_ATOMIC];
+    // Python.definitions_['import machine'] = 'import machine';
+    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC) || '""';
+    return ['input(' + str + ')', Python.ORDER_ATOMIC];
 };
 
 
 export const system_print = function () {
-    // Blockly.Python.definitions_['import machine'] = 'import machine';
-    var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '""';
+    // Python.definitions_['import machine'] = 'import machine';
+    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC) || '""';
     var code = "print(" + str + ")\n";
     return code;
 };
 
 export const system_print_inline = function () {
-    // Blockly.Python.definitions_['import machine'] = 'import machine';
-    var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '""';
+    // Python.definitions_['import machine'] = 'import machine';
+    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC) || '""';
     var code = "print(" + str + ',end ="")\n';
     return code;
 };
 
 export const system_print_end = function () {
-    // Blockly.Python.definitions_['import machine'] = 'import machine';
-    var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '""';
-    var end = Blockly.Python.valueToCode(this, 'END', Blockly.Python.ORDER_ATOMIC) || '""';
+    // Python.definitions_['import machine'] = 'import machine';
+    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC) || '""';
+    var end = Python.valueToCode(this, 'END', Python.ORDER_ATOMIC) || '""';
     var code = "print(" + str + ',end =' + end + ')\n';
     return code;
 };
 
 export const system_print_many = function () {
-    // Blockly.Python.definitions_['import machine'] = 'import machine';
+    // Python.definitions_['import machine'] = 'import machine';
     var code = new Array(this.itemCount_);
     var default_value = '0';
 
 
     for (var n = 0; n < this.itemCount_; n++) {
 
-        code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
-            Blockly.Python.ORDER_NONE) || default_value;
+        code[n] = Python.valueToCode(this, 'ADD' + n,
+            Python.ORDER_NONE) || default_value;
     }
 
     var code = 'print(' + code.join(', ') + ')\n';
@@ -112,19 +112,19 @@ export const system_print_many = function () {
 };
 
 export const serial_send_to_mixgoce = function () {
-    Blockly.Python.definitions_['import_machine'] = 'import machine';
-    Blockly.Python.definitions_['import_ce_com'] = 'import ce_com';
+    Python.definitions_['import_machine'] = 'import machine';
+    Python.definitions_['import_ce_com'] = 'import ce_com';
     var dropdown_uart = this.getFieldValue('mode');
     var dropdown_stat = this.getFieldValue('STAT');
-    var content = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC) || '0';
+    var content = Python.valueToCode(this, 'CONTENT', Python.ORDER_ATOMIC) || '0';
     var code = "ce_com.uart_tx(uart" + dropdown_uart + ", " + content + ", repeat=" + dropdown_stat + ")\n";
     return code;
 };
 
 export const serial_read_from_mixgoce = function () {
-    Blockly.Python.definitions_['import_machine'] = 'import machine';
-    Blockly.Python.definitions_['import_ce_com'] = 'import ce_com';
+    Python.definitions_['import_machine'] = 'import machine';
+    Python.definitions_['import_ce_com'] = 'import ce_com';
     var dropdown_uart = this.getFieldValue('mode');
     var code = "ce_com.uart_rx(uart" + dropdown_uart + ")";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };

@@ -1,4 +1,4 @@
-import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 
 function rgb565(colour) {
     colour = colour.substr(1);
@@ -21,13 +21,13 @@ function rgb565(colour) {
 export const lists_create_with_text1 = function () {
     var text = this.getFieldValue('TEXT');
     var code = '[' + text + ']';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const tuple_create_with_text3 = function () {
     var text = this.getFieldValue('TEXT');
     var code = '(' + text + ')';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const LCD_color_seclet1 = function () {
@@ -38,11 +38,11 @@ export const LCD_color_seclet1 = function () {
     G = "0x" + colour.substr(2, 2);
     B = "0x" + colour.substr(4, 2);
     var code = '(' + R + ',' + G + ',' + B + ')';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const LCD_color_seclet = function () {
     var colour = this.getFieldValue('COLOR');
     colour = rgb565(colour);
-    return [colour, Blockly.Python.ORDER_ATOMIC];
+    return [colour, Python.ORDER_ATOMIC];
 };

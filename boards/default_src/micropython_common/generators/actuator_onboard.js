@@ -1,50 +1,50 @@
-import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 import * as Mixly from 'mixly';
 
 export const esp32_music_set_tempo = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
-    var bpm = Blockly.Python.valueToCode(this, 'BPM', Blockly.Python.ORDER_ASSIGNMENT);
-    var ticks = Blockly.Python.valueToCode(this, 'TICKS', Blockly.Python.ORDER_ASSIGNMENT);
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    var bpm = Python.valueToCode(this, 'BPM', Python.ORDER_ASSIGNMENT);
+    var ticks = Python.valueToCode(this, 'TICKS', Python.ORDER_ASSIGNMENT);
     var code = "onboard_music.set_tempo(" + ticks + ", " + bpm + ")\n";
     return code;
 };
 
 export const esp32_music_get_tempo = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
     var code = "onboard_music.get_tempo()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const esp32_onboard_music_pitch = function (block) {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
-    var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    var number_pitch = Python.valueToCode(block, 'pitch', Python.ORDER_ATOMIC);
     var code = 'onboard_music.pitch(' + number_pitch + ')\n';
     return code;
 };
 
 export const esp32_onboard_music_pitch_with_time = function (block) {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
-    var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
-    var number_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    var number_pitch = Python.valueToCode(block, 'pitch', Python.ORDER_ATOMIC);
+    var number_time = Python.valueToCode(block, 'time', Python.ORDER_ATOMIC);
     var code = 'onboard_music.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
     return code;
 };
 
 export const esp32_onboard_music_stop = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
     var code = 'onboard_music.stop(' + ')\n';
     return code;
 };
 
 export const esp32_onboard_music_play_list = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
-    var lst = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT);
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    var lst = Python.valueToCode(this, 'LIST', Python.ORDER_ASSIGNMENT);
     var code = "onboard_music.play(" + lst + ")\n";
     return code;
 };
@@ -52,89 +52,89 @@ export const esp32_onboard_music_play_list = function () {
 
 export const esp32_music_reset = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
+    Python.definitions_['import_' + version + '_onboard_music'] = 'from ' + version + ' import onboard_music';
     return "onboard_music.reset()\n";
 };
 
 export const number = function () {
     var code = this.getFieldValue('op');
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const ledswitch = function () {
     var code = this.getFieldValue('flag');
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const actuator_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
-    var bright = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+    var bright = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = "onboard_led.setonoff(" + op + "," + bright + ")\n";
     return code;
 };
 
 export const actuator_get_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
     var code = "onboard_led.getbrightness(" + op + ")";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const actuator_get_led_state = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
     var code = "onboard_led.getonoff(" + op + ")";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const actuator_led_brightness = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
-    var flag = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+    var flag = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = "onboard_led.setbrightness(" + op + "," + flag + ")\n";
     return code;
 };
 
 export const cc_number = function () {
     var code = this.getFieldValue('op');
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const mixgo_cc_actuator_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version] = 'import ' + version;
-    var bright = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version] = 'import ' + version;
+    var bright = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = version + ".ledonoff(" + op + "," + bright + ")\n";
     return code;
 };
 
 export const mixgo_cc_actuator_get_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version] = 'import ' + version;
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version] = 'import ' + version;
     var code = version + ".ledbrightness(" + op + ")";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const mixgo_cc_actuator_get_led_state = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version] = 'import ' + version;
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version] = 'import ' + version;
     var code = version + ".ledonoff(" + op + ")";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const mixgo_cc_actuator_led_brightness = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version] = 'import ' + version;
-    var flag = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version] = 'import ' + version;
+    var flag = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = version + ".ledbrightness(" + op + "," + flag + ")\n";
     return code;
 };
@@ -142,34 +142,34 @@ export const mixgo_cc_actuator_led_brightness = function () {
 
 export const mixgo_actuator_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
-    var bright = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
+    var bright = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = "led" + op + ".setonoff(" + bright + ")\n";
     return code;
 };
 
 export const mixgo_actuator_get_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
     var code = "led" + op + ".getbrightness()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const mixgo_actuator_get_led_state = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
     var code = "led" + op + ".getonoff()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const mixgo_actuator_led_brightness = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
-    Blockly.Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
-    var flag = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led' + op] = 'from ' + version + ' import led' + op;
+    var flag = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = "led" + op + ".setbrightness(" + flag + ")\n";
     return code;
 };
@@ -177,8 +177,8 @@ export const mixgo_actuator_led_brightness = function () {
 export const rm_actuator_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = this.getFieldValue('color');
-    Blockly.Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
-    var bright = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
+    var bright = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = op + "led.setonoff(" + bright + ")\n";
     return code;
 };
@@ -186,71 +186,71 @@ export const rm_actuator_led_bright = function () {
 export const rm_actuator_get_led_bright = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = this.getFieldValue('color');
-    Blockly.Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
+    Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
     var code = op + "led.getbrightness()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const rm_actuator_get_led_state = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = this.getFieldValue('color');
-    Blockly.Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
+    Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
     var code = op + "led.getonoff()";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const rm_actuator_led_brightness = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = this.getFieldValue('color');
-    Blockly.Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
-    var flag = Blockly.Python.valueToCode(this, 'bright', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_' + op + 'led'] = 'from ' + version + ' import ' + op + 'led';
+    var flag = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = op + "led.setbrightness(" + flag + ")\n";
     return code;
 };
 
 export const actuator_onboard_neopixel_write = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
+    Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
     var code = 'onboard_rgb.write()\n';
     return code;
 };
 
 export const actuator_onboard_neopixel_rgb = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var value_led = Blockly.Python.valueToCode(this, '_LED_', Blockly.Python.ORDER_ATOMIC);
-    var value_rvalue = Blockly.Python.valueToCode(this, 'RVALUE', Blockly.Python.ORDER_ATOMIC);
-    var value_gvalue = Blockly.Python.valueToCode(this, 'GVALUE', Blockly.Python.ORDER_ATOMIC);
-    var value_bvalue = Blockly.Python.valueToCode(this, 'BVALUE', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
+    var value_led = Python.valueToCode(this, '_LED_', Python.ORDER_ATOMIC);
+    var value_rvalue = Python.valueToCode(this, 'RVALUE', Python.ORDER_ATOMIC);
+    var value_gvalue = Python.valueToCode(this, 'GVALUE', Python.ORDER_ATOMIC);
+    var value_bvalue = Python.valueToCode(this, 'BVALUE', Python.ORDER_ATOMIC);
     var code = 'onboard_rgb[' + value_led + '] = (' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + ')\n';
     return code;
 };
 
 export const actuator_onboard_neopixel_rgb_all = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var value_rvalue = Blockly.Python.valueToCode(this, 'RVALUE', Blockly.Python.ORDER_ATOMIC);
-    var value_gvalue = Blockly.Python.valueToCode(this, 'GVALUE', Blockly.Python.ORDER_ATOMIC);
-    var value_bvalue = Blockly.Python.valueToCode(this, 'BVALUE', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
+    var value_rvalue = Python.valueToCode(this, 'RVALUE', Python.ORDER_ATOMIC);
+    var value_gvalue = Python.valueToCode(this, 'GVALUE', Python.ORDER_ATOMIC);
+    var value_bvalue = Python.valueToCode(this, 'BVALUE', Python.ORDER_ATOMIC);
     var code = 'onboard_rgb.fill((' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + '))\n';
     return code;
 };
 
 export const actuator_onboard_neopixel_rgb_show_all_chase = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var value_rvalue = Blockly.Python.valueToCode(this, 'RVALUE', Blockly.Python.ORDER_ATOMIC);
-    var value_gvalue = Blockly.Python.valueToCode(this, 'GVALUE', Blockly.Python.ORDER_ATOMIC);
-    var value_bvalue = Blockly.Python.valueToCode(this, 'BVALUE', Blockly.Python.ORDER_ATOMIC);
-    var number_time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
+    var value_rvalue = Python.valueToCode(this, 'RVALUE', Python.ORDER_ATOMIC);
+    var value_gvalue = Python.valueToCode(this, 'GVALUE', Python.ORDER_ATOMIC);
+    var value_bvalue = Python.valueToCode(this, 'BVALUE', Python.ORDER_ATOMIC);
+    var number_time = Python.valueToCode(this, 'time', Python.ORDER_ATOMIC);
     var code = 'onboard_rgb.color_chase(' + value_rvalue + ', ' + value_gvalue + ', ' + value_bvalue + ', ' + number_time + ')\n';
     return code;
 };
 
 export const actuator_onboard_neopixel_rgb_show_all_rainbow = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
-    var number_time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_rgb'] = 'from ' + version + ' import onboard_rgb';
+    var number_time = Python.valueToCode(this, 'time', Python.ORDER_ATOMIC);
     var code = 'onboard_rgb.rainbow_cycle(' + number_time + ')\n';
     return code;
 };
@@ -259,9 +259,9 @@ export const actuator_onboard_neopixel_rgb_show_all_rainbow = function () {
 
 export const rm_motor = function () {
     var wheel = this.getFieldValue('wheel');
-    Blockly.Python.definitions_['import_rm_e1_motor' + wheel] = 'from rm_e1 import motor' + wheel;
+    Python.definitions_['import_rm_e1_motor' + wheel] = 'from rm_e1 import motor' + wheel;
     var v = this.getFieldValue('direction');
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var code = "motor" + wheel + '.motion("' + v + '",' + speed + ")\n";
     return code;
 };
@@ -269,31 +269,31 @@ export const rm_motor = function () {
 //c3 motor onboard
 export const actuator_stepper_keep = function () {
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
+    Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ASSIGNMENT);
     var code = 'car.motor_move("' + v + '",' + speed + ")\n";
     return code;
 };
 
 export const actuator_stepper_stop = function () {
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
     var code = 'car.motor_move("' + v + '"' + ")\n";
     return code;
 };
 
 export const actuator_dc_motor = function () {
     var wheel = this.getFieldValue('wheel');
-    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
     var v = this.getFieldValue('direction');
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var code = "car.motor(car.MOTO_" + wheel + ',"' + v + '",' + speed + ")\n";
     return code;
 };
 
 export const actuator_dc_motor_stop = function () {
     var wheel = this.getFieldValue('wheel');
-    Blockly.Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
+    Python.definitions_['import_mixgocar_c3_car'] = 'from mixgocar_c3 import car';
     var v = this.getFieldValue('direction');
     var code = "car.motor(car.MOTO_" + wheel + ',"' + v + '"' + ")\n";
     return code;
@@ -302,23 +302,23 @@ export const actuator_dc_motor_stop = function () {
 //mixbot onboard_motor below:
 
 export const mixbot_motor_status = function () {
-    Blockly.Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
+    Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     var code = 'motor.status()';
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const mixbot_move = function () {
     var v = this.getFieldValue('VAR');
     var mode = this.getFieldValue('mode');
-    Blockly.Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
+    Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ASSIGNMENT);
     var code = 'motor.move("' + v + '",motor.' + mode + '_MODE,' + speed + ")\n";
     return code;
 };
 
 export const mixbot_stop = function () {
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
+    Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     if (v == 'N') {
         var code = 'motor.move("N",motor.STOP_MODE)\n'
     }
@@ -330,16 +330,16 @@ export const mixbot_stop = function () {
 
 export const mixbot_motor = function () {
     var wheel = this.getFieldValue('wheel');
-    Blockly.Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
+    Python.definitions_['import_mixbot_motor'] = 'from mixbot import motor';
     var mode = this.getFieldValue('mode');
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var code = 'motor.run(' + wheel + ',motor.' + mode + '_MODE,' + speed + ")\n";
     return code;
 };
 
 export const actuator_mixbot_buzzer_on_off = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_' + version + '_spk_en'] = 'from ' + version + ' import spk_en';
+    Python.definitions_['import_' + version + '_spk_en'] = 'from ' + version + ' import spk_en';
     var op = this.getFieldValue('on_off');
     var code = "spk_en.value(" + op + ")\n";
     return code;
@@ -348,15 +348,15 @@ export const actuator_mixbot_buzzer_on_off = function () {
 //bitbot onboard_motor below:
 export const bitbot_move = function () {
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
+    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ASSIGNMENT);
     var code = 'onboard_bot51.move("' + v + '",' + speed + ")\n";
     return code;
 };
 
 export const bitbot_stop = function () {
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
     var code = 'onboard_bot51.move("' + v + '"' + ")\n";
     return code;
 };
@@ -364,8 +364,8 @@ export const bitbot_stop = function () {
 export const bitbot_motor = function () {
     var wheel = this.getFieldValue('wheel');
     var direction = this.getFieldValue('direction');
-    Blockly.Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
-    var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
+    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var code = 'onboard_bot51.motor(' + wheel + ',"' + direction + '",' + speed + ")\n";
     return code;
 };

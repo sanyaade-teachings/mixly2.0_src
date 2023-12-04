@@ -1,8 +1,8 @@
-import * as Blockly from 'blockly/core';
+import Python from '../../python/python_generator';
 
 export const pins_digital = function () {
     var code = this.getFieldValue('PIN');
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const pins_button = pins_digital;

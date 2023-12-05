@@ -455,6 +455,7 @@
             "Mixly.Msg",
             "Mixly.LevelSelector",
             "Mixly.FooterBar",
+            "Mixly.UserEvents",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.FooterLayerExample",
@@ -785,6 +786,19 @@
         ],
         "provide": [
             "Mixly.Url"
+        ]
+    },
+    {
+        "path": "/common/user-events.js",
+        "require": [
+            "Blockly",
+            "Mixly.MFile",
+            "Mixly.Config",
+            "Mixly.Boards",
+            "Mixly.LocalStorage"
+        ],
+        "provide": [
+            "Mixly.UserEvents"
         ]
     },
     {

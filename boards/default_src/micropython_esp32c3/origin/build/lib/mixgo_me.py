@@ -57,8 +57,7 @@ onboard_music =MIDI(10)
 '''MIC_Sensor'''
 class MICSensor:
     def __init__(self):
-        self.adc=ADC(Pin(4))
-        self.adc.atten(ADC.ATTN_11DB) 
+        self.adc=ADC(Pin(4), atten=ADC.ATTN_11DB)
         
     def read(self):
         maxloudness = 0
@@ -80,26 +79,25 @@ onboard_sound = MICSensor()
 '''5KEY_Sensor'''
 class KEYSensor:
     def __init__(self,range):
-        self.adc=ADC(Pin(5))
-        self.adc.atten(ADC.ATTN_11DB) 
+        self.adc=ADC(Pin(5), atten=ADC.ATTN_11DB)
         self.range=range
         self.flag = True
     
     def _value(self):
         values = []
-        for _ in range(20):
+        for _ in range(50):
             values.append(self.adc.read())
-            time.sleep(0.001)
-        return (self.range-300) < (sum(sorted(values)[5:15])//10) < (self.range+300)
+            time.sleep_us(2)
+        return (self.range - 300) < min(values) < (self.range + 300)
     
     def get_presses(self, delay = 1):
         last_time,presses = time.time(), 0
         while time.time() < last_time + delay:
-            time.sleep(0.05)
+            time.sleep_ms(50)
             if self.was_pressed():
                 presses += 1
         return presses
-
+    
     def is_pressed(self):
         return self._value()
 

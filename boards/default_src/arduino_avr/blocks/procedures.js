@@ -947,7 +947,6 @@ export const procedures_callnoreturn = {
                 if (JSON.stringify(def.getVars()) != JSON.stringify(this.arguments_)) {
                     let paramNames = def.arguments_;
                     let paramIds = [];
-                    const mutator = this.getIcon();
                     for (var i = 0; i < this.arguments_.length; i++) {
                         var input = this.getInput('ARG' + i);
                         if (!input) {

@@ -2107,6 +2107,8 @@
         </shadow>
       </value>
     </block>
+    <block type="display_Matrix_write">
+    </block>
   </category>
 </category>
 <category id="catGroup" colour="140">

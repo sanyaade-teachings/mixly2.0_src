@@ -42,7 +42,9 @@ export const serial_print_num = function () {
     var code = serial_select + '.' + new_line + '(' + content + ',' + Decimal + ');\n';
     return code;
 };
+
 export const serial_print_hex = serial_print_num;
+
 export const serial_available = function () {
     var serial_select = this.getFieldValue('serial_select');
     if (!Blockly.Arduino.setups_['setup_serial_' + serial_select]) {

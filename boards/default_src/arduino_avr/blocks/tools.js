@@ -109,6 +109,7 @@ export const uno_pin = {
         this.setHelpUrl();
     }
 };
+
 export const nano_pin = {
     init: function () {
         this.appendDummyInput()
@@ -118,6 +119,7 @@ export const nano_pin = {
         this.setHelpUrl();
     }
 };
+
 export const mega_pin = {
     init: function () {
         this.appendDummyInput()
@@ -127,6 +129,7 @@ export const mega_pin = {
         this.setHelpUrl();
     }
 };
+
 export const promini_pin = {
     init: function () {
         this.appendDummyInput()
@@ -136,6 +139,7 @@ export const promini_pin = {
         this.setHelpUrl();
     }
 };
+
 export const leonardo_pin = {
     init: function () {
         this.appendDummyInput()
@@ -179,7 +183,7 @@ export const core_esp32c3_pin = {
 export const esp32s3_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage("../common/media/board_pin/esp32s3.jpg", 500, 350, "*"));
+            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/esp32s3.jpg'), 500, 350, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -189,7 +193,7 @@ export const esp32s3_pin = {
 export const esp8266_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require("../../../../common/media/board_pin/ESP8266-NodeMCU.png"), 525, 346, "*"));
+            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP8266-NodeMCU.png'), 525, 346, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();
@@ -199,7 +203,7 @@ export const esp8266_pin = {
 export const wemos_d1_mini_pin = {
     init: function () {
         this.appendDummyInput()
-            .appendField(new Blockly.FieldImage(require("../../../../common/media/board_pin/ESP8266-WeMos-D1-Mini.png"), 525, 264, "*"));
+            .appendField(new Blockly.FieldImage(require('../../../../common/media/board_pin/ESP8266-WeMos-D1-Mini.png'), 525, 264, "*"));
         this.setColour(Blockly.Msg['TOOLS_HUE']);
         this.setTooltip();
         this.setHelpUrl();

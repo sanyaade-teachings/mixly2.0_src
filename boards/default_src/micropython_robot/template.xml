@@ -1441,7 +1441,7 @@
         </shadow>
       </value>
     </block>
-    <block type="rfid_write_return">
+    <block type="rfid_write_return" m-show="micropython:esp32c3:mixgo_baize">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
@@ -2232,11 +2232,9 @@
         <field name="VAR">iot_dict</field>
         <field name="KEY0">"tc"</field>
         <value name="ADD0">
-          <block type="inout_pin_pressed">
-            <value name="pin">
-              <shadow type="pins_touch">
-                <field name="PIN">tc0</field>
-              </shadow>
+          <block type="inout_analog_read">
+            <value name="PIN">
+              <shadow type="pins_analog"></shadow>
             </value>
           </block>
         </value>
@@ -2269,60 +2267,66 @@
         </value>
       </block>
     </category>
-    <!-- <category id="catAI" colour="205">      
-    <block type="MICROPYTHON_AI_client">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">client</field>
-        </shadow>
-      </value>
-      <value name="APP_ID">
-        <shadow type="text">
-          <field name="TEXT">Enter Your APP_ID</field>
-        </shadow>
-      </value>
-      <value name="API_KEY">
-        <shadow type="text">
-          <field name="TEXT">Enter Your API_KEY</field>
-        </shadow>
-      </value>
-      <value name="SECRET_KEY">
-        <shadow type="text">
-          <field name="TEXT">Enter Your SECRET_KEY</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="MICROPYTHON_AI_Speech_synthesis">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">client</field>
-        </shadow>
-      </value>
-      <value name="STR">
-        <shadow type="text">
-          <field name="TEXT">今天天气真好</field>
-        </shadow>
-      </value>
-      <value name="ATTR">
-        <block type="dicts_create_with_noreturn">
-          <mutation items="0"></mutation>
-        </block>
-      </value>
-    </block>
-    <block type="MICROPYTHON_AI_Speech_asr">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">client</field>
-        </shadow>
-      </value>
-      <value name="FILE"></value>
-      <value name="ATTR">
-        <block type="dicts_create_with_noreturn">
-          <mutation items="0"></mutation>
-        </block>
-      </value>
-    </block>
-    </category> -->
+    <category id="catAIOT" colour="205" m-show="micropython:esp32c3:mixgo_baize">
+      <block type="iot_wifi_connect">
+        <value name="WIFINAME">
+          <shadow type="text">
+            <field name="TEXT">wifiname</field>
+          </shadow>
+        </value>
+        <value name="PASSWORD">
+          <shadow type="text">
+            <field name="TEXT">wifipassword</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="MICROPYTHON_AI_client">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">client</field>
+          </shadow>
+        </value>
+        <value name="API_KEY">
+          <shadow type="text">
+            <field name="TEXT">Enter Your API_KEY</field>
+          </shadow>
+        </value>
+        <value name="SECRET_KEY">
+          <shadow type="text">
+            <field name="TEXT">Enter Your SECRET_KEY</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="MICROPYTHON_AI_Speech_asr">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">client</field>
+          </shadow>
+        </value>
+        <value name="FILE">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="MICROPYTHON_AI_Speech_unit">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">client</field>
+          </shadow>
+        </value>
+        <value name="ID">
+          <shadow type="text">
+            <field name="TEXT">S72099</field>
+          </shadow>
+        </value>
+        <value name="STR">
+          <shadow type="text">
+            <field name="TEXT">北京今天天气如何？</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
     <category id="catweather" colour="#27b6ac">
       <block type="iot_wifi_connect">
         <value name="WIFINAME">
@@ -2838,7 +2842,7 @@
       </block>
       <block type="espnow_radio_rec">
       </block>
-      <block type="espnow_radio_recv">
+      <block type="espnow_radio_recv_new">
         <statement name="DO">
           <block type="system_print">
             <value name="VAR">
@@ -2847,7 +2851,7 @@
           </block>
         </statement>
       </block>
-      <block type="espnow_radio_recv_certain_msg"></block>
+      <block type="espnow_radio_recv_certain_msg_new"></block>
     </category>
     <category id="catOneWire" colour="140">
       <block type="communicate_ow_init">

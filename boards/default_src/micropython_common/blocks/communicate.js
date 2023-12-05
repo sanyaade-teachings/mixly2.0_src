@@ -817,27 +817,27 @@ export const espnow_radio_recv_certain_msg = {
 };
 
 export const espnow_radio_recv_new = {
-    init: function() {
-        this.setColour(COMMUNICATE_HUE);        
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_RADIO_MSG_RECEIVED);  
+            .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_RADIO_MSG_RECEIVED);
         this.appendStatementInput('DO')
-            .appendField(Blockly.Msg.MIXLY_DO);          
+            .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     }
 };
 
 export const espnow_radio_recv_certain_msg_new = {
-    init: function() {
-        this.setColour(COMMUNICATE_HUE);        
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_RADIO_MSG_RECEIVED_CERTAIN)
             .appendField('"')
-            .appendField(new Blockly.FieldTextInput('on'), 'msg') 
+            .appendField(new Blockly.FieldTextInput('on'), 'msg')
             .appendField('"')
         this.appendStatementInput('DO')
-            .appendField(Blockly.Msg.MIXLY_DO);          
+            .appendField(Blockly.Msg.MIXLY_DO);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
     }

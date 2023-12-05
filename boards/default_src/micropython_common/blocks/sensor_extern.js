@@ -423,7 +423,7 @@ export const sensor_ltr381_extern = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.HTML_COLOUR + Blockly.Msg.MSG.catSensor + " LTR308RGB")
+            .appendField(Blockly.Msg.HTML_COLOUR + Blockly.Msg.MSG.catSensor + " LTR381RGB")
             .setCheck("var");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([

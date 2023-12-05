@@ -272,25 +272,34 @@ Procedures.getCallers = function (name, workspace) {
  * @param {!Blockly.Block} defBlock Procedure definition block.
  */
 Procedures.mutateCallers = function (defBlock) {
-    var oldRecordUndo = Blockly.Events.recordUndo;
-    var name = defBlock.getProcedureDef()[0];
-    var xmlElement = defBlock.mutationToDom(true);
-    var callers = Procedures.getCallers(name, defBlock.workspace);
-    for (var i = 0; callers[i]; i++) {
-        let caller = callers[i];
-        var oldMutationDom = caller.mutationToDom();
-        var oldMutation = oldMutationDom && Blockly.Xml.domToText(oldMutationDom);
-        caller.domToMutation(xmlElement);
-        var newMutationDom = caller.mutationToDom();
-        var newMutation = newMutationDom && Blockly.Xml.domToText(newMutationDom);
-        if (oldMutation != newMutation) {
+    const oldRecordUndo = Blockly.Events.getRecordUndo();
+    const procedureBlock = defBlock;
+    const name = procedureBlock.getProcedureDef()[0];
+    const xmlElement = defBlock.mutationToDom(true);
+    const callers = Blockly.Procedures.getCallers(name, defBlock.workspace);
+    for (let i = 0, caller; (caller = callers[i]); i++) {
+        const oldMutationDom = caller.mutationToDom();
+        const oldMutation = oldMutationDom && Blockly.utils.xml.domToText(oldMutationDom);
+        if (caller.domToMutation) {
+            caller.domToMutation(xmlElement);
+        }
+        const newMutationDom = caller.mutationToDom();
+        const newMutation = newMutationDom && Blockly.utils.xml.domToText(newMutationDom);
+        if (oldMutation !== newMutation) {
             // Fire a mutation on every caller block.  But don't record this as an
             // undo action since it is deterministically tied to the procedure's
             // definition mutation.
-            Blockly.Events.recordUndo = false;
-            Blockly.Events.fire(new Blockly.Events.BlockChange(
-                caller, 'mutation', null, oldMutation, newMutation));
-            Blockly.Events.recordUndo = oldRecordUndo;
+            Blockly.Events.setRecordUndo(false);
+            Blockly.Events.fire(
+                new (Blockly.Events.get(Blockly.Events.BLOCK_CHANGE))(
+                    caller,
+                    'mutation',
+                    null,
+                    oldMutation,
+                    newMutation,
+                ),
+            );
+            Blockly.Events.setRecordUndo(oldRecordUndo);
         }
     }
 };

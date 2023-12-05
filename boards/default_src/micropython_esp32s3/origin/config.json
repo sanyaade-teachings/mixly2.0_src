@@ -7,10 +7,10 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32s3:yuankong_zi": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong_Zi_S3-0x0-V1.20.0.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong_ZI_S3-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32s3:generic": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset write_flash 0x0 \"{indexPath}/build/YuanKong_Zi_S3-0x0-V1.20.0.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset write_flash 0x0 \"{indexPath}/build/YuanKong_ZI_S3-v1.21.0.bin\""
         },
         "special": [
             {
@@ -66,8 +66,8 @@
             "micropython:esp32s3:yuankong_zi": {
                 "binFile": [
                     {
-                        "offset": "0x1000",
-                        "path": "./build/YuanKong_Zi_S3-0x0-V1.20.0.bin"
+                        "offset": "0x0000",
+                        "path": "./build/YuanKong_ZI_S3-v1.21.0.bin"
                     }, {
                         "offset": "0x3A0000",
                         "path": "../micropython_common/build/HZK12.bin"
@@ -77,8 +77,8 @@
             "micropython:esp32s3:generic": {
                 "binFile": [
                     {
-                        "offset": "0x1000",
-                        "path": "./build/YuanKong_Zi_S3-0x0-V1.20.0.bin"
+                        "offset": "0x0000",
+                        "path": "./build/YuanKong_ZI_S3-v1.21.0.bin"
                     }
                 ]
             }

@@ -327,10 +327,11 @@ export const sensor_use_spi_init = function () {
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
         Python.definitions_['import_' + version] = 'import ' + version;
         Python.definitions_['import_ws_lora'] = 'import ws_lora';
-        if (version == 'mixgo_pe') {
+        if (version === 'mixgo_pe') {
             code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ')\n';
-        }
-        else {
+        } else if (version ==='yuankong_zi'){
+            code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c_soft'+')\n';
+        } else {
             code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c' + ')\n';
         }
     }

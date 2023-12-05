@@ -1,4 +1,5 @@
 import Python from '../../python/python_generator';
+import * as Mixly from 'mixly';
 import { Profile } from 'mixly';
 
 export const system_run_in_background = function () {
@@ -153,9 +154,15 @@ export const system_ticks_diff = function () {
 };
 
 export const system_timer_init = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
     var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
     Python.definitions_['import_machine'] = 'import machine';
-    var code = v + ' = machine.Timer(-1)\n';
+    var code = '';
+    if(version === 'mixgo_baize') {
+        code = v + ' = machine.Timer(0)\n';
+    } else{
+        code = v + ' = machine.Timer(-1)\n';
+    }
     return code;
 };
 

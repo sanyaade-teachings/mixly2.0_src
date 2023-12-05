@@ -364,9 +364,9 @@ export const display_tm1650_set_brightness = function () {
 
 export const tft_use_spi_init = function () {
     Python.definitions_['import_st7789'] = 'import st7789';
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[1];
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
     var addr = '';
-    if (version == 'esp32') {
+    if (version === 'mixgo_pe' || version === 'mpython') {
         addr = '0x700000';
     } else {
         addr = '0x3A0000';
@@ -516,7 +516,7 @@ export const display_oled_use_i2c_init = function () {
     var addr = Python.valueToCode(this, 'ADDR', Python.ORDER_ATOMIC);
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var font = '';
-    if (['mpython', 'mixgope'].indexOf(version) >= 0) {
+    if (['mpython', 'mixgo_pe'].indexOf(version) >= 0) {
         font = '0x700000'
     }
     else {

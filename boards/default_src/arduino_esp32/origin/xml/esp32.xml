@@ -1979,6 +1979,8 @@
         </shadow>
       </value>
     </block>
+    <block type="display_Matrix_write">
+    </block>
   </category>
 </category>
 <category id="catGroup" colour="140">
@@ -3341,4 +3343,5 @@
   <block type="esp32c3_pin" m-show="esp32c3"></block>
   <block type="core_esp32c3_pin" m-show="esp32c3@core"></block>
   <block type="esp32s2_pin" m-show="esp32s2"></block>
+  <block type="esp32s3_pin" m-show="esp32s3"></block>
 </category>

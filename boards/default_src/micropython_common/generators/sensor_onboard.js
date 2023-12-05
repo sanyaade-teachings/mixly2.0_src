@@ -156,11 +156,19 @@ export const sensor_mixgo_pin_near_double = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const sensor_mixgo_pin_near_triple = function () {
+export const sensor_yuankongzi_pin_near = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var direction = this.getFieldValue('direction');
-    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import ' + direction;
-    var code = direction + '.ps_nl()';
+    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_ltr553als_' + direction;
+    var code = 'onboard_ltr553als_' + direction + '.ps_nl()';
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const sensor_yuankongzi_LTR308 = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var direction = this.getFieldValue('direction');
+    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_ltr553als_' + direction;
+    var code = 'onboard_ltr553als_' + direction + '.als_vis()';
     return [code, Python.ORDER_ATOMIC];
 };
 
@@ -696,6 +704,12 @@ export const sensor_bitbot_ALS = function () {
 
 export const bitbot_als_num = function () {
     var code = this.getFieldValue('PIN');
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const sensor_yuankongzi_sound = function () {
+    var code = 'sound_level()';
+    Python.definitions_['import_yuankong_zi_voice_sound_level'] = "from yuankong_zi_voice import sound_level";
     return [code, Python.ORDER_ATOMIC];
 };
 

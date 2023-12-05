@@ -161,7 +161,7 @@ export const IOT_EMQX_INIT_AND_CONNECT_BY_SHARE_CODE = function () {
     // var mac_address = 'str(binascii.hexlify(wifi.radio.mac_address))[2:14]'
     // var socket_pool = 'socketpool.SocketPool(wifi.radio)'
     // var ssl_context = 'ssl.create_default_context()'
-    var code = 'sk = analyse_sharekey(\'http://mixio.mixly.cn/mixio-php/sharekey.php?sk=' + share_code + '\')\n' +
+    var code = 'sk = analyse_sharekey(\'http://'+server.substring(1, server.length-1)+'/mixio-php/sharekey.php?sk=' + share_code + '\')\n'+
         'MQTT_USR_PRJ = sk[0]+\'/\'+sk[1]+\'/\'\n' +
         'mqtt_client = mixiot.init_MQTT_client(' + server + ', sk[0], sk[2]' + ', MQTT_USR_PRJ)\n';
     return code;

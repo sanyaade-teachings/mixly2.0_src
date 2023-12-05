@@ -934,3 +934,149 @@ export const bitbot_motor = {
         this.setInputsInline(true);
     }
 }
+
+export const actuator_yuankongzi_mic_set = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendValueInput('bright')
+            .appendField(Blockly.Msg.MIXLY_MIXBOT_SOUND_SET_LOUDNESS)
+        this.appendDummyInput()
+            .appendField('%');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_LED_SETONOFF);
+    }
+};
+
+export const actuator_yuankongzi_mic_get = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MIXBOT_SOUND_LOUDNESS + '(%)');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_LED_GETONOFF);
+    }
+};
+
+export const actuator_yuankongzi_voice_set = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendValueInput('bright')
+            .appendField(Blockly.Msg.MIXLY_SETTING + Blockly.Msg.MIXLY_MIXBOT_BUZZER + Blockly.Msg.MIXLY_MP3_VOL)
+        this.appendDummyInput()
+            .appendField('%');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_LED_SETONOFF);
+    }
+};
+
+export const actuator_yuankongzi_voice_get = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_MIXBOT_BUZZER + Blockly.Msg.MIXLY_MP3_VOL + '(%)');
+        this.setOutput(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_LED_GETONOFF);
+    }
+};
+
+export const actuator_yuankongzi_music_play_list = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendValueInput('LIST')
+            .appendField(Blockly.Msg.MIXLY_ESP32_MUSIC_PLAY_LISTS)
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_ESP32_MUSIC_PLAY_LISTS);
+
+    }
+}
+
+export const actuator_yuankongzi_record_audio = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendValueInput('PATH')
+            .appendField(Blockly.Msg.MIXLY_RECORD_AUDIO)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
+        this.appendValueInput('TIME')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_GET_PRESSES_TIME);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const actuator_yuankongzi_play_audio = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendValueInput('PATH')
+            .appendField(Blockly.Msg.MIXLY_PLAY_AUDIO)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const actuator_yuankongzi_play_online_audio = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendValueInput('PATH')
+            .appendField(Blockly.Msg.MIXLY_PLAY_ONLINE_AUDIO)
+            .appendField('URL');
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+}
+
+export const actuator_yuankongzi_onboard_music_pitch = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TONE);
+        this.appendValueInput('pitch')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_TONE);
+    }
+};
+
+export const actuator_yuankongzi_onboard_music_pitch_with_time = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_TONE);
+        this.appendValueInput('pitch')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
+        this.appendValueInput('time')
+            .setCheck(Number)
+            .appendField(Blockly.Msg.MIXLY_DURATION);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_TONE2);
+    }
+};
+
+export const actuator_yuankongzi_onboard_music_stop = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_NOTONE);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};

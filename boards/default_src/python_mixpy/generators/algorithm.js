@@ -154,8 +154,8 @@ export const algorithm_prepare_2_1 = function () {
 position = [[0, 0], [60, 320], [510, 390], [240, 200], [750, 330], [410, 90], [540, 190], [550, 30], [720, 120]]
 sprite.clearAllSprites()
 sprite.createBackground('map_si_ke')
-bear = sprite.Sprite('mixbear', 60, 320)
-bear.enlargeTo(100)
+stu = sprite.Sprite('girl', 60, 320)
+stu.enlargeTo(100)
 time.sleep(1)\n
 `
     return code;
@@ -171,8 +171,8 @@ export const algorithm_prepare_2_2 = function () {
 position = [[0, 0], [70, 340], [70, 90], [550, 310], [420, 70], [730, 250], [650, 130]]
 sprite.clearAllSprites()
 sprite.createBackground('map_zhi_xue')
-bear = sprite.Sprite('mixbear', 70, 340)
-bear.enlargeTo(100)
+stu = sprite.Sprite('boy', 70, 340)
+stu.enlargeTo(100)
 time.sleep(1)\n
 `
     return code;
@@ -182,7 +182,7 @@ export const algorithm_move_recent = function () {
     Python.definitions_.import_time = "import time";
     Python.definitions_.import_sprite = "import sprite";
     var line1 = 'tmp=10000\nfor i in range(0, len(g), 1):\n' + '    if g[now][i]<tmp and i!=last:\n' + '        next=i\n' + '        tmp=g[now][i]\n'
-        + 'bear.slideTo(position[next][0], position[next][1], 1)\ntime.sleep(0.5)\n'
+        + 'stu.slideTo(position[next][0], position[next][1], 1)\ntime.sleep(0.5)\n'
         + 'path.append(next)\n' + 'last=now\n' + 'now=next\n'
         + 'if len(path)>6:\n    print("路线错乱！程序有误！")\n    exit()\n';
     var code = line1;
@@ -329,6 +329,8 @@ for i in range(0, _n, 1):
     _HanoiBlock.append(sprite.Sprite(_Hanoicolor[i], 200, 400-(_n-i-1)*27))
     _HanoiBlock[i].setScale(25, 30*i+30)
     _Hanoi[0].insert(0, _HanoiBlock[i])
+_steptext = sprite.Text('步数：0', 30, 30)
+_steps = {'steps' : 0}
 time.sleep(1)\n`
     }
     return code;
@@ -351,6 +353,8 @@ export const hanoi_move = function () {
     _HanoiBlockMoved.slideTo(${toNum}*200+200, 180, 0.5)
     _HanoiBlockMoved.slideTo(${toNum}*200+200, 400-len(_Hanoi[${toNum}])*27, 0.2)
     _Hanoi[${toNum}].append(_HanoiBlockMoved)
+    _steps['steps'] += 1
+    _steptext.changeText('步数：'+str(_steps['steps']))
 else :
     print('非法移动！程序有误！')
     exit()
@@ -363,32 +367,45 @@ else :
 export const algorithm_all_books_sequence = function () {
     Python.definitions_.import_time = "import time";
     Python.definitions_.import_sprite = "import sprite";
-    var code = 'ring=[0,0,0,0,0,0,0,0,0,0]\nn=6\nring[6]=1\n';
-    code += `sprite.clearAllSprites()
-Books = [0]
-for i in range(1, 11, 1):
-    Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
-time.sleep(1)\n`
+    var code = `if 'ring' not in globals():
+    sprite.clearAllSprites()
+    ring=[0,0,0,0,0,0,0,0,0,0]
+    n=5
+    ring[5]=1
+    name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
+    Books = []
+    for i in range(1, 11, 1):
+        Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
+else:
+    n=len(ring)-1\nring[n]=1
+time.sleep(1)\n`;
     return code;
 };
 
 export const algorithm_all_books = function () {
     Python.definitions_.import_time = "import time";
     Python.definitions_.import_sprite = "import sprite";
-    var line1 = 'ring=[0,0,0,0,0,0,0,0,0,0]\nn=6\nring[6]=1\n';
-    var code = line1 + "left=1\n" + "right=10\n";
-    code += `sprite.clearAllSprites()
-Books = [0]
-for i in range(1, 11, 1):
-    Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
-time.sleep(1)\n`
+    var code = `if 'ring' not in globals():
+    sprite.clearAllSprites()
+    ring=[0,0,0,0,0,0,0,0,0,0]
+    n=5
+    name=['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
+    Books = []
+    for i in range(1, 11, 1):
+        Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
+else:
+    n=len(ring)-1
+ring[n]=1
+left = 0
+right = len(ring)-1
+time.sleep(1)\n`;
     return code;
 };
 
 export const algorithm_first_book = function () {
     Python.definitions_.import_time = "import time";
     Python.definitions_.import_sprite = "import sprite";
-    var line1 = 'res=1\n';
+    var line1 = 'res=0\n';
     var code = line1 + "flag=ring[res]\n";
     code += `Books[res].filterBrighter()\ntime.sleep(0.1)\nBooks[res].filterOrigin()\n`;
     return code;
@@ -444,7 +461,7 @@ export const algorithm_delete_books = function () {
     Python.definitions_.import_time = "import time";
     Python.definitions_.import_sprite = "import sprite";
     var code = "left = res+1\n";
-    code += `for i in range(1, left, 1):
+    code += `for i in range(0, left, 1):
     Books[i].filterGray()
 time.sleep(0.5)
 res = left\n`
@@ -468,13 +485,38 @@ res = right\n`
 // };
 
 export const algorithm_print_book2 = function () {
-    var code = "print('书号为：'+str(res))\n";
+    var code = `Books[res].filterBrighter()
+print('未消磁的书籍是第'+str(res+1)+'本《'+name[res%10]+'》。')\n`;
     code += `if res!=n:
     print('答案错误！请检查程序！')\n`
     return code;
 };
 
 // sub_algorithm_6
+
+export const algorithm_book_scale = function () {
+    var FIELD_NUM = this.getFieldValue("NUM");
+    const pos = {
+        5: '130*i, 120',
+        10: '(130*i-650) if i>5 else 130*i, 320 if i>5 else 120',
+        20: '(65*i-650)+30 if i>10 else 65*i+30, 320 if i>10 else 120',
+        50: '(26*i-650)+50 if i>25 else 26*i+50, 320 if i>25 else 120'
+    };
+    Python.definitions_.import_time = "import time";
+    Python.definitions_.import_sprite = "import sprite";
+    var code = `sprite.clearAllSprites()
+  ring = []
+  name = ['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
+  Books = []
+  for i in range(${FIELD_NUM}):
+      ring.append(0)
+  for i in range(1, ${FIELD_NUM}+1, 1):
+      Books.append(sprite.Sprite('books/book'+str(i%10 if i%10!=0 else 10), ${pos[FIELD_NUM]}))
+  scaletag = 1
+  time.sleep(1)
+  `;
+    return code;
+};
 
 export const algorithm_number_zero = function () {
     Python.definitions_.import_sprite = "import sprite";
@@ -491,33 +533,8 @@ export const algorithm_number_add = function () {
 };
 
 export const algorithm_print_number = function () {
+    Python.definitions_.import_sprite = "import sprite";
     var code = "print('计数器大小：'+str(cnt))\n";
-    return code;
-};
-
-export const algorithm_use_divide = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
-    var line1 = 'ring=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]\n';
-    var code = line1 + `n=23\nleft=1\nright=len(ring)\nring[n]=1\n`;
-    code += `sprite.clearAllSprites()
-Books=[0]
-for i in range(1, len(ring)+1, 1):
-    Books.append(sprite.Sprite('books/book'+str(i%10 if i%10!=0 else 10), (20*i+60-660) if i>33 else 20*i+60, 320 if i>33 else 120))
-time.sleep(1)\n`;
-    return code;
-};
-
-export const algorithm_use_sequence = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
-    var line1 = 'ring=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]\n';
-    var code = line1 + "n=23\nring[n]=1\n";
-    code += `sprite.clearAllSprites()
-Books=[0]
-for i in range(1, len(ring)+1, 1):
-    Books.append(sprite.Sprite('books/book'+str(i%10 if i%10!=0 else 10), (20*i+60-660) if i>33 else 20*i+60, 320 if i>33 else 120))
-time.sleep(1)\n`;
     return code;
 };
 

@@ -6,11 +6,16 @@
         "static": "node ./static-server/server.js",
         "build": "gulp script",
         "test": "npm run deps && npm run static",
-        "deps": "node deps-gen.js"
+        "deps": "node deps-gen.js",
+        "build:boards:all": "node scripts/build-boards.js --type all",
+        "build:boards:arduino": "node scripts/build-boards.js --type arduino",
+        "build:boards:micropython": "node scripts/build-boards.js --type micropython",
+        "build:boards:python": "node scripts/build-boards.js --type python"
     },
     "author": "Mixly",
     "license": "MIT",
     "devDependencies": {
+        "commander": "^11.1.0",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.8.1",
         "eslint": "^8.51.0",
@@ -22,14 +27,13 @@
         "html-webpack-plugin": "^5.5.3",
         "mini-css-extract-plugin": "^2.7.6",
         "minimist": "^1.2.5",
-        "optimize-css-assets-webpack-plugin": "^6.0.1",
         "postcss-loader": "^7.3.3",
+        "shelljs": "^0.8.5",
         "style-loader": "^3.3.3",
         "webpack": "^5.89.0",
         "webpack-bundle-analyzer": "^4.9.1",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^4.15.1",
         "webpack-merge": "^5.10.0"
-    },
-    "dependencies": {}
+    }
 }

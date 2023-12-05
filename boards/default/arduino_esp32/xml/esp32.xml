@@ -3343,4 +3343,5 @@
   <block type="esp32c3_pin" m-show="esp32c3"></block>
   <block type="core_esp32c3_pin" m-show="esp32c3@core"></block>
   <block type="esp32s2_pin" m-show="esp32s2"></block>
+  <block type="esp32s3_pin" m-show="esp32s3"></block>
 </category>

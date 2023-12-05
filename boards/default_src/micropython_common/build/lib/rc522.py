@@ -1,45 +1,22 @@
 """
 RC522
 
-CircuitPython library for the RC522 RFID (I2C&SPI)
+Micropython library for the RC522 RFID (I2C&SPI)
 =======================================================
-#Preliminary composition						20211008
-#Optimized integration, merging I2C and SPI     20220808
+#Preliminary composition						20231204
 
 dahanzimin From the Mixly Team
-
 """
 import machine
 from micropython import const
 
-RC_OK          = 0
-RC_NOTAGERR    = 1
-RC_ERR         = 2
-
+RC_OK          = True
+RC_NOTAGERR    = None
+RC_ERR         = False
 RC_REQIDL      = const(0x26)
 RC_REQALL      = const(0x52)
 RC_AUTHENT1A   = const(0x60)
 RC_AUTHENT1B   = const(0x61)
-
-def myencode(s):
-	a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-	i = 0
-	if len(s) > 16:
-		raise AttributeError("String length must be less than 16")
-	else:
-		for c in s:
-			a[i] = ord(c)
-			i += 1
-		return a
-
-def mydecode(a):
-	r = ""
-	if a:
-		if len(a) >=16:
-			for i in a:
-				if i > 0:
-					r = r + chr(i)
-			return " " if sum(a)==0 else r
 
 class RC522:
 	def __init__(self, drive_bus,cs_pin=None,addr=0x28):
@@ -221,9 +198,9 @@ class RC522:
 		if not (stat == RC_OK) or not (bits == 4) or not ((recv[0] & 0x0F) == 0x0A):
 			stat = RC_ERR
 		else:
-			buf = []
-			for i in range(16):
-				buf.append(data[i])
+			buf = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+			for i in range(len(data)):
+				buf[i]=data[i]
 			buf += self._crc(buf)
 			(stat, recv, bits) = self._tocard(0x0C, buf)
 			if not (stat == RC_OK) or not (bits == 4) or not ((recv[0] & 0x0F) == 0x0A):
@@ -242,7 +219,11 @@ class RC522:
 				if self.select_tag(raw_uid) == RC_OK:
 					key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
 					if self.auth(RC_AUTHENT1A, self.add_list[add], key, raw_uid) == RC_OK:
-						card = mydecode(self.read(self.add_list[add]))
+						card = self.read(self.add_list[add])
+						try:
+							card = bytes(card).decode().replace("\x00", '') if card else None
+						except:
+							card = bytes(card) if card else None
 						self.stop_crypto1()
 						if x == "ALL":
 							return int('{}{}{}{}'.format(raw_uid[0], raw_uid[1], raw_uid[2], raw_uid[3])), card
@@ -263,7 +244,12 @@ class RC522:
 				if self.select_tag(raw_uid) == RC_OK:
 					key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
 					if self.auth(RC_AUTHENT1A, self.add_list[add], key, raw_uid) == RC_OK:
-						data = myencode(data)
+						try:
+							data =list(data.encode())
+						except:
+							data =list(data)
+						if len(data)>16:
+							raise AttributeError("Input must be less than 16 bytes")
 						stat = self.write(self.add_list[add], data)
 						self.stop_crypto1()
 						if stat == RC_OK:

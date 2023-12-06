@@ -217,10 +217,10 @@ class Drag {
     hide(type) {
         switch (type) {
         case Drag.Extend.NEGATIVE:
-            this.full('POSITIVE');
+            this.full(Drag.Extend.POSITIVE);
             break;
         case Drag.Extend.POSITIVE:
-            this.full('NEGATIVE');
+            this.full(Drag.Extend.NEGATIVE);
             break;
         }
     }

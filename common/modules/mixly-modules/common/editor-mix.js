@@ -262,11 +262,15 @@ class EditorMix extends EditorBase {
         const { events } = this.drag;
         events.bind('sizeChanged', () => this.resize());
         events.bind('onfull', (type) => {
+            this.$btns.removeClass('self-adaption-btn');
+            let $btn = null;
             switch(type) {
             case Drag.Extend.POSITIVE:
+                $btn = this.$btns.filter('[m-id="block"]');
                 blockEditor.scrollCenter();
                 break;
             case Drag.Extend.NEGATIVE:
+                $btn = this.$btns.filter('[m-id="code"]');
                 blockEditor.setVisible(false);
                 codeEditor.setReadOnly(false);
                 codeEditor.showCtrlBtns();
@@ -275,8 +279,12 @@ class EditorMix extends EditorBase {
                 }
                 break;
             }
+            $btn.addClass('self-adaption-btn');
         });
         events.bind('exitfull', (type) => {
+            this.$btns.removeClass('self-adaption-btn');
+            const $btn = this.$btns.filter('[m-id="mixture"]');
+            $btn.addClass('self-adaption-btn');
             switch(type) {
             case Drag.Extend.NEGATIVE:
                 blockEditor.setVisible(true);
@@ -292,12 +300,17 @@ class EditorMix extends EditorBase {
                 codeEditor.setValue(blockEditor.getValue(), false);
                 break;
             }
+            blockEditor.scrollCenter();
         });
     }
 
     addBtnEvents() {
         this.$btns.on('click', (event) => {
             const $btn = $(event.currentTarget);
+            if (!$btn.hasClass('self-adaption-btn')) {
+                this.$btns.removeClass('self-adaption-btn');
+                $btn.addClass('self-adaption-btn');
+            }
             const mId = $btn.attr('m-id');
             switch (mId) {
             case 'block':
@@ -452,7 +465,7 @@ class EditorMix extends EditorBase {
                 layer.msg(Msg.Lang['未找到有效数据'], { time: 1000 });
                 return;
             }
-            this.drag.full('NEGATIVE'); // 完全显示代码编辑器
+            this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
             this.codeEditor.setValue(code, -1);
             this.blockEditor.clear();
             endFunc('USE_CODE');
@@ -492,13 +505,13 @@ class EditorMix extends EditorBase {
         if (!useIncompleteBlocks && codeDom) {
             const workspaceCode = MFile.getCode();
             if (workspaceCode !== code) {
-                this.drag.full('NEGATIVE'); // 完全显示代码编辑器
+                this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
                 this.codeEditor.setValue(code, -1);
             }
             endFunc();
             return;
         }
-        this.drag.full('POSITIVE'); // 完全显示块编辑器
+        this.drag.full(Drag.Extend.POSITIVE); // 完全显示块编辑器
         if (useIncompleteBlocks)
             endFunc('USE_INCOMPLETE_BLOCKS');
         else

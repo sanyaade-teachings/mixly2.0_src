@@ -61,6 +61,10 @@
             line-height: 20px;
         }
 
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .toolbar > .group > button.self-adaption-btn {
+            color: #fff;
+        }
+
         html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .toolbar > .group > button {
             background-color: #313132;
             border-color: #484849;
@@ -81,7 +85,7 @@
         <div class="toolbar mixly-scrollbar">
             <div class="group breadcrumbs"></div>
             <div class="group operate-btns">
-                <button m-id="block" class="layui-btn layui-btn-xs layui-btn-primary m-btn">
+                <button m-id="block" class="layui-btn layui-btn-xs layui-btn-primary m-btn self-adaption-btn">
                     <i class="icon-puzzle"></i>模块
                 </button>
                 <button m-id="mixture" class="layui-btn layui-btn-xs layui-btn-primary m-btn">

@@ -69,7 +69,7 @@ class FileTree {
                     ellipsis: true
                 }
             },
-            plugins: ['wholerow', 'dnd', 'sort', 'unique', 'state']
+            plugins: ['wholerow', 'dnd', 'sort', 'unique']
         });
         this.events = new Events(['selectLeaf']);
         this.selected = null;

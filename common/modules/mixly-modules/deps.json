@@ -211,27 +211,6 @@
         ]
     },
     {
-        "path": "/common/editor-mixbook.js",
-        "require": [
-            "EditorJS",
-            "Paragraph",
-            "Header",
-            "Quote",
-            "Warning",
-            "Delimiter",
-            "Alert",
-            "ToggleBlock",
-            "List",
-            "Mixly.XML",
-            "Mixly.Env",
-            "Mixly.IdGenerator",
-            "Mixly.EditorBase"
-        ],
-        "provide": [
-            "Mixly.EditorMixbook"
-        ]
-    },
-    {
         "path": "/common/editor-monaco.js",
         "require": [
             "monaco",
@@ -286,7 +265,6 @@
             "Mixly.EditorMix",
             "Mixly.EditorCode",
             "Mixly.EditorMd",
-            "Mixly.EditorMixbook",
             "Mixly.EditorBlockly",
             "Mixly.EditorUnknown",
             "Mixly.EditorsTabs"
@@ -814,7 +792,9 @@
             "Mixly.IdGenerator",
             "Mixly.EditorsManager",
             "Mixly.StatusBarTabs",
-            "Mixly.Electron.FileTree"
+            "Mixly.Electron.FileTree",
+            "Mixly.Electron",
+            "Mixly.Web"
         ],
         "provide": [
             "Mixly.Workspace"

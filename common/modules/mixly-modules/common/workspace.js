@@ -11,6 +11,8 @@ goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorsManager');
 goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Electron.FileTree');
+goog.require('Mixly.Electron');
+goog.require('Mixly.Web');
 goog.provide('Mixly.Workspace');
 
 const {
@@ -23,7 +25,8 @@ const {
     IdGenerator,
     EditorsManager,
     StatusBarTabs,
-    Electron = {}
+    Electron = {},
+    Web = {}
 } = Mixly;
 
 const { FileTree } = goog.isElectron? Electron : Web;

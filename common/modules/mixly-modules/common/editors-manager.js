@@ -7,7 +7,6 @@ goog.require('Mixly.Env');
 goog.require('Mixly.EditorMix');
 goog.require('Mixly.EditorCode');
 goog.require('Mixly.EditorMd');
-goog.require('Mixly.EditorMixbook');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorUnknown');
 goog.require('Mixly.EditorsTabs');
@@ -20,7 +19,6 @@ const {
     EditorMix,
     EditorCode,
     EditorMd,
-    EditorMixbook,
     EditorBlockly,
     EditorUnknown,
     EditorsTabs
@@ -182,11 +180,6 @@ EditorsManager.register({
 EditorsManager.register({
     ext: ['.md'],
     editor: EditorMd
-});
-
-EditorsManager.register({
-    ext: ['.mixbook'],
-    editor: EditorMixbook
 });
 
 Mixly.EditorsManager = EditorsManager;

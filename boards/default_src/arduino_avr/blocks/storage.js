@@ -186,7 +186,7 @@ export const store_sd_write = {
     init: function () {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.MIXLY_WRITE_SPIFFS_FILE)
+            .appendField(Blockly.Msg.MIXLY_WRITE_SD_FILE)
             .appendField(this.newQuote_(true));
         this.appendDummyInput()
             .appendField(this.newQuote_(false));
@@ -336,7 +336,7 @@ export const simple_spiffs_store_spiffs_write = {
     init: function () {
         this.setColour(Blockly.Msg['STORAGE_HUE']);
         this.appendValueInput("FILE")
-            .appendField(Blockly.Msg.MIXLY_WRITE_SD_FILE)
+            .appendField(Blockly.Msg.MIXLY_WRITE_SPIFFS_FILE)
             .appendField(this.newQuote_(true));
         this.appendValueInput("DATA", String)
             .setCheck([String, Number])

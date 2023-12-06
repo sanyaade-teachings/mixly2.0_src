@@ -19,6 +19,7 @@ def wlan_connect(ssid='MYSSID', password='MYPASS'):
         while not wlan.isconnected():
             pass
     print('network config:', wlan.ifconfig())
+    return wlan
 
 def ntp(url='mixio.mixly.cn'):
     import urequests
@@ -236,7 +237,8 @@ class MQTTClient:
             i += 1
         pkt[i] = sz
         #print(hex(str_len(pkt)), hexlify(pkt, ":"))
-        self.sock.setblocking(True)
+        self.sock.settimeout(0.05)
+        #self.sock.setblocking(True)
         self.sock.write(pkt, i + 1)
         self._send_str(topic)
         if qos > 0:
@@ -283,7 +285,8 @@ class MQTTClient:
     def wait_msg(self):
         res = self.sock.read(1)
         time.sleep_ms(50)
-        self.sock.setblocking(True)
+        self.sock.settimeout(0.05)
+        #self.sock.setblocking(True)
         if res is None:
             return None
         if res == b"":

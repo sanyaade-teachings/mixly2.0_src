@@ -578,9 +578,13 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
                     return;
                 }
                 Serial.connect(port, null, (opened) => {
-                    if (opened) {
-                        Serial.writeCtrlD(port);
+                    if (!opened) {
+                        return;
                     }
+                    setTimeout(() => {
+                        Serial.clearContent(port);
+                        Serial.writeCtrlD(port);
+                    }, 1000);
                 });
             }
         }

@@ -27,8 +27,8 @@ Blockly.Blocks.base_setup = {
 Blockly.Blocks.controls_delay = {
     init: function () {
         var UNIT =
-            [[Blockly.Msg.MIXLY_MILLIS, 'delay'],
-            [Blockly.Msg.MIXLY_MILLISECOND, 'delayMicroseconds']];
+            [[Blockly.Msg.MIXLY_mSecond, 'delay'],
+            [Blockly.Msg.MIXLY_uSecond, 'delayMicroseconds']];
         this.setColour(Blockly.Msg['LOOPS_HUE']);
         this.appendValueInput("DELAY_TIME", Number)
             .appendField(Blockly.Msg.MIXLY_DELAY)

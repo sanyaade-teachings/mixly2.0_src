@@ -84,18 +84,6 @@ html[data-bs-theme=light] #table_whole {
     background-color: #fff;
 }
 
-html[data-bs-theme=light] .layui-form-select dl dd.layui-this {
-    background-color: #009688 !important;
-}
-
-html[data-bs-theme=dark] .layui-form-select dl dd.layui-this {
-    background-color: #007acc !important;
-}
-
-#boardSelector > div.layui-unselect.layui-form-select > dl {
-    overflow-y: auto;
-}
-
 html[data-bs-theme=light] .layui-layer-tips .layui-layer-content {
     background-color: #f2f2f2;
     color: #000;

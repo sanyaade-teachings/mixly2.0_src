@@ -148,30 +148,6 @@
             padding: 3px 0;
         }
 
-        ul[m-id="{{d.mId}}"] .layui-form dl > dd {
-            line-height: 30px;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-anim > dd {
-            color: rgba(0, 0, 0, 0.8);
-        }
-
-        html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-anim > dd.layui-this {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-anim > dd {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-anim > dd.layui-this {
-            color: rgba(0, 0, 0, 0.8);
-        }
-
         html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-anim > dd > button {
             border-color: #5a6778;
         }
@@ -242,6 +218,64 @@
         ul[m-id="{{d.mId}}"] .right-btn-container button > a {
             font-size: 18px;
             padding: 2px;
+        }
+
+        ul[m-id="{{d.mId}}"] .layui-nav-item dd {
+            margin: 0;
+        }
+
+        ul[m-id="{{d.mId}}"] .layui-nav-item dd > a,
+        ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd {
+            font-size: 14px;
+            line-height: 14px;
+            border-radius: 5px;
+            box-sizing: content-box;
+            padding: 5px 10px !important;
+            margin: 2px 5px;
+            border-radius: 5px;
+            min-width: 60px;
+        }
+
+        ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-this {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        ul[m-id="{{d.mId}}"] .layui-nav-item dd > a {
+            transition: none;
+            -webkit-transition: none;
+        }
+
+        ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
+        ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
+            transition: none;
+            -webkit-transition: none;
+            color: #fff;
+        }
+
+        ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-disabled:hover {
+            background-color: unset !important;
+        }
+
+        html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
+        html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
+            background-color: #009688;
+        }
+
+        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
+        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
+            background-color: #2980b9;
+        }
+
+        html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-this {
+            background-color: rgb(0 150 136 / 60%) !important;
+        }
+
+        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-this {
+            background-color: rgb(41 128 185 / 60%) !important;
+        }
+
+        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-form-select > dl {
+            overflow-y: auto;
         }
     </style>
     <ul class="layui-nav" lay-filter="nav-filter" m-id="{{d.mId}}" lay-bar="disabled">

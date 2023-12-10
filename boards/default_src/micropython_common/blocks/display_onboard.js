@@ -357,9 +357,9 @@ export const mixgo_display_image_create_new = {
 export const mixgome_display_font = {
     init: function () {
         var OPERATORS = [
-            ['4x5' + Blockly.MIXGO_ME_DISPLAY_HORIZONTAL, "'4x5'"],
-            ['5x5' + Blockly.MIXGO_ME_DISPLAY_HORIZONTAL, "'5x5'"],
-            ['5x8' + Blockly.MIXGO_ME_DISPLAY_VERTICAL, "'5x8'"]
+            ['4x5' + Blockly.Msg.MIXGO_ME_DISPLAY_HORIZONTAL, "'4x5'"],
+            ['5x5' + Blockly.Msg.MIXGO_ME_DISPLAY_HORIZONTAL, "'5x5'"],
+            ['5x8' + Blockly.Msg.MIXGO_ME_DISPLAY_VERTICAL, "'5x8'"]
         ];
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()

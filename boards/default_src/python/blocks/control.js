@@ -24,6 +24,28 @@ export const base_setup = {
     }
 };
 
+export const controls_delay = {
+    init: function () {
+        var UNIT =
+            [[Blockly.Msg.MIXLY_mSecond, 'delay'],
+            [Blockly.Msg.MIXLY_uSecond, 'delayMicroseconds']];
+        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.appendValueInput("DELAY_TIME", Number)
+            .appendField(Blockly.Msg.MIXLY_DELAY)
+            .appendField(new Blockly.FieldDropdown(UNIT), 'UNIT')
+            .setCheck(Number);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_CONTROL_DELAY);
+        this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#id9");
+        this.wiki = {
+            'zh-hans': {
+                page: ['Arduino AVR', '控制', '延时']
+            }
+        };
+    }
+};
 
 export const controls_end_program = {
     init: function () {

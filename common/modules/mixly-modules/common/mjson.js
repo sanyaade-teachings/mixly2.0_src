@@ -29,15 +29,13 @@ MJSON.operate = (jsonObj, optFunc) => {
 
 MJSON.decode = (jsonObj) => {
     // 深度拷贝对象，防止解码或编码时篡改原有对象
-    let newJsonObj = {};
-    $.extend(true, newJsonObj, jsonObj);
+    let newJsonObj = structuredClone(jsonObj);
     return MJSON.operate(newJsonObj, decodeURIComponent);
 }
 
 MJSON.encode = (jsonObj) => {
     // 深度拷贝对象，防止解码或编码时篡改原有对象
-    let newJsonObj = {};
-    $.extend(true, newJsonObj, jsonObj);
+    let newJsonObj = structuredClone(jsonObj);
     return MJSON.operate(newJsonObj, encodeURIComponent);;
 }
 

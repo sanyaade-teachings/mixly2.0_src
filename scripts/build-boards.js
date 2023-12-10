@@ -19,6 +19,8 @@ let ignore = ['arduino', 'micropython', 'python'];
 
 if (ignore.includes(options.type)) {
     ignore.splice(ignore.indexOf(options.type), 1);
+} else if (options.type === 'all') {
+    ignore = [];
 }
 
 const ORIGIN_DIR = process.cwd();

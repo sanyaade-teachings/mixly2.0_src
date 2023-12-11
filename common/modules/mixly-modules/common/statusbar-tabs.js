@@ -142,6 +142,9 @@ class StatusBarTabs {
 
         element.on(`tab(${this.id})`, (data) => {
             let statusBar = this.getStatusBarByIndex(data.index);
+            if (!statusBar) {
+                return;
+            }
             if (typeof statusBar.onTab === 'function') {
                 statusBar.onTab();
             }

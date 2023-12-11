@@ -41,7 +41,8 @@
         line-height: 13px;
     }
 
-    html[data-bs-theme=dark] .board-config-menu, html[data-bs-theme=dark] .board-config-menu > ul {
+    html[data-bs-theme=dark] .board-config-menu,
+    html[data-bs-theme=dark] .board-config-menu > ul {
         background-color: #252526 !important;
     }
 
@@ -51,12 +52,37 @@
         overflow-y: auto;
     }
 
-    html[data-bs-theme=light] .board-config-menu li.selected, html[data-bs-theme=light] .board-config-menu li.selected:hover {
-        background-color: #0bc1af;
+    .board-config-menu > .layui-dropdown-menu > li {
+        font-size: 14px;
+        line-height: 14px;
+        border-radius: 5px;
+        box-sizing: content-box;
+        padding: 5px 10px !important;
+        margin: 2px 5px;
+        border-radius: 5px !important;
+        transition: none;
+        -webkit-transition: none;
     }
 
-    html[data-bs-theme=dark] .board-config-menu li.selected, html[data-bs-theme=dark] .board-config-menu li.selected:hover {
-        background-color: #005994;
+    .board-config-menu li.selected > div,
+    .board-config-menu li:hover > div {
+        color: #fff;
+    }
+
+    html[data-bs-theme=light] .board-config-menu li.selected {
+        background-color: rgb(0 150 136 / 60%) !important;
+    }
+
+    html[data-bs-theme=light] .board-config-menu li:hover {
+        background-color: #009688;
+    }
+
+    html[data-bs-theme=dark] .board-config-menu li.selected {
+        background-color: rgb(41 128 185 / 60%) !important;
+    }
+
+    html[data-bs-theme=dark] .board-config-menu li:hover {
+        background-color: #2980b9;
     }
 </style>
 <div

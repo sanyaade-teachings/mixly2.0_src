@@ -28,12 +28,26 @@ html[data-bs-theme=dark] .tippy-arrow {
     color: #353535;
 }
 
+.tippy-content .m-btn {
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 5px;
+    box-sizing: content-box;
+    padding: 4px 0px !important;
+    margin: 2px 5px;
+    border-radius: 5px;
+}
+
+.tippy-content .m-btn:hover {
+    color: #fff;
+}
+
 html[data-bs-theme=light] .tippy-content .m-btn {
     color: #000;
 }
 
 html[data-bs-theme=light] .tippy-content .m-btn:hover {
-    background-color: #f6f6f6;
+    background-color: #009688;
 }
 
 html[data-bs-theme=dark] .tippy-content .m-btn {
@@ -41,5 +55,5 @@ html[data-bs-theme=dark] .tippy-content .m-btn {
 }
 
 html[data-bs-theme=dark] .tippy-content .m-btn:hover {
-    background-color: #41464b;
+    background-color: #2980b9;
 }

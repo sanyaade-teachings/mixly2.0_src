@@ -848,3 +848,37 @@ Blockly.Python.forBlock['mixbot_sensor_extern_set_addr'] = function(){
     return code;
 };
 
+Blockly.Python.sensor_weather_solo_init= function(block) {
+    Blockly.Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var wd = Blockly.Python.valueToCode(this, 'wd', Blockly.Python.ORDER_ATOMIC);
+    var ws = Blockly.Python.valueToCode(this, 'ws', Blockly.Python.ORDER_ATOMIC);
+    var rain = Blockly.Python.valueToCode(this, 'rain', Blockly.Python.ORDER_ATOMIC);
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var code = sub + ' = ws_solo.Weather_Solo('+wd+', '+ws+', '+rain+')\n';  
+    return code;
+};
+
+Blockly.Python.sensor_weather_solo_wd=function(){
+    Blockly.Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.wind_direction()'+key+'';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_weather_solo_ws=function(){
+    Blockly.Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.wind_speed()'+key+'';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_weather_solo_rain=function(){
+    Blockly.Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.rain_count('+time+')'+key+'';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};

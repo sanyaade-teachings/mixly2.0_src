@@ -3700,5 +3700,9 @@ ZhHans.MIXLY_PLAY_ONLINE_AUDIO = '播放网络音频';
 ZhHans.MIXLY_DISPLAY_MATRIX_WRITE_NOW = '立即生效';
 ZhHans.MIXLY_DISPLAY_MATRIX_DONT_WRITE = '暂不生效';
 ZhHans.MIXLY_DISPLAY_MATRIX_WRITE = '设置生效';
+ZhHans.weather_solo = '分体式气象站';
+ZhHans.MIXLY_ABBR = '缩写';
+ZhHans.MIXLY_ACCUMULATED = '累积';
+ZhHans.MIXLY_AVERAGE = '平均';
 
 })();

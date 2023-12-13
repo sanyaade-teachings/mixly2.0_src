@@ -84,6 +84,18 @@ class FileTree {
         .on('click.jstree', '.jstree-closed>a', ({ target }) => {
             setTimeout(() => this.$fileTree.jstree(true).open_node(target));
         })
+        .on('open_node.jstree', (e, data) => {
+            const { id } = data.node;
+            let node = document.getElementById(id);
+            let $i = $(node).children('.jstree-anchor').children('.jstree-icon');
+            $i.removeClass('icon-folder').addClass('icon-folder-open');
+        })
+        .on('close_node.jstree', (e, data) => {
+            const { id } = data.node;
+            let node = document.getElementById(id);
+            let $i = $(node).children('.jstree-anchor').children('.jstree-icon');
+            $i.removeClass('icon-folder-open').addClass('icon-folder');
+        })
         .on('after_open.jstree', (e, data) => {
             let node = document.getElementById(this.selected);
             if (!node) {

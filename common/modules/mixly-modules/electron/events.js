@@ -20,4 +20,8 @@ ipcRenderer.on('command', (event, message) => {
     Command.run(commandObj);
 });
 
+setInterval(() => {
+    ipcRenderer.send('heartbeat', 'Heartbeat from renderer process');
+}, 1000 * 30);
+
 });

@@ -9,6 +9,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorBlockly');
@@ -28,9 +29,12 @@ const {
     Config,
     Env,
     ContextMenu,
-    IdGenerator
+    IdGenerator,
+    LayerExt
 } = Mixly;
 const { BOARD } = Config;
+
+const { form } = layui;
 
 class EditorMix extends EditorBase {
     static {
@@ -157,7 +161,7 @@ class EditorMix extends EditorBase {
         const { editor } = this.blockEditor;
         let block = Blockly.getSelected();
         let breadcrumbs = [];
-        if (block) {
+        if (block && !block.isComment) {
             do {
                 breadcrumbs.unshift({
                     id: block.id,
@@ -526,13 +530,13 @@ class EditorMix extends EditorBase {
             btn2Name: Msg.Lang['忽略未定义块'],
             btn3Name: Msg.Lang['读取代码']
         })
-        Mixly.LayerExt.open({
+        LayerExt.open({
             title: Msg.Lang['一些图形化模块尚未定义'],
             id: 'parse-mix-error-layer',
             area: ['50%', '250px'],
             max: ['500px', '250px'],
             min: ['350px', '100px'],
-            shade: Mixly.LayerExt.SHADE_ALL,
+            shade: LayerExt.SHADE_ALL,
             content: renderStr,
             borderRadius: '5px',
             success: (layero, index) => {

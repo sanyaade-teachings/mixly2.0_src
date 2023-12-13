@@ -190,3 +190,7 @@ html[data-bs-theme=dark] .blocklyMainBackground {
 .dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
     display: none;
 }
+
+.blocklyToolboxDelete > .blocklyToolboxContents > .blocklyToolboxCategory > .blocklyTreeRow {
+    background-color: unset;
+}

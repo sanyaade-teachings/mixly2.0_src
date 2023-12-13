@@ -168,6 +168,10 @@
         "provide": ["Blob"],
         "require": []
     }, {
+        "path": "modules/web-modules/lodash.min.js",
+        "provide": ["_"],
+        "require": []
+    }, {
         "path": "modules/web-modules/jquery/select2.min.js",
         "provide": ["$.select2"],
         "require": ["$"]

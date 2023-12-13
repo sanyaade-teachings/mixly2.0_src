@@ -33,9 +33,11 @@ html[data-bs-theme=dark] .tippy-arrow {
     line-height: 12px;
     border-radius: 5px;
     box-sizing: content-box;
-    padding: 4px 0px !important;
-    margin: 2px 5px;
+    padding: 4px 10px !important;
+    margin: 2px 0px;
     border-radius: 5px;
+    min-width: unset;
+    cursor: pointer;
 }
 
 .tippy-content .m-btn:hover {
@@ -50,10 +52,18 @@ html[data-bs-theme=light] .tippy-content .m-btn:hover {
     background-color: #009688;
 }
 
+html[data-bs-theme=light] .tippy-content .m-btn.selected {
+    background-color: rgb(0 150 136 / 60%);
+}
+
 html[data-bs-theme=dark] .tippy-content .m-btn {
     color: #fff;
 }
 
 html[data-bs-theme=dark] .tippy-content .m-btn:hover {
     background-color: #2980b9;
+}
+
+html[data-bs-theme=dark] .tippy-content .m-btn.selected {
+    background-color: rgb(41 128 185 / 60%);
 }

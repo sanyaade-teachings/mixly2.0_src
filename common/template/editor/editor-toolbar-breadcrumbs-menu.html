@@ -2,9 +2,9 @@
     <div style="max-height: 300px; overflow-x: hidden; overflow-y: auto; padding: 0 2px;line-height: 20px;font-size: 12px;">
         {{#  for (let i = 0; i < d.list.length; i++) { }}
             {{#  if (d.list[i].selected) { }}
-                <li class="m-btn" value="{{ d.list[i].id }}" lay-unselect style="display: block;padding: 0 3px;color: #1e9fff;">{{ d.list[i].name }}</li>
+                <li class="m-btn selected" value="{{ d.list[i].id }}" lay-unselect style="display: block;">{{ d.list[i].name }}</li>
             {{#  } else { }}
-                <li class="m-btn" value="{{ d.list[i].id }}" lay-unselect style="display: block;padding: 0 3px;">{{ d.list[i].name }}</li>
+                <li class="m-btn" value="{{ d.list[i].id }}" lay-unselect style="display: block;">{{ d.list[i].name }}</li>
             {{#  } }}
         {{#  } }}
         {{#  if(d.list.length === 0){ }}

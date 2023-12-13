@@ -145,6 +145,15 @@ class EditorsManager {
                 this.page = 'welcome';
             }
         });
+
+        events.bind('beforeRemoveTab', (event) => {
+            const { tabEl } = event.detail;
+            const tabId = $(tabEl).attr('data-tab-id');
+            if (!this.editors[tabId]) {
+                return;
+            }
+            return !this.editors[tabId].dirty;
+        });
     }
 
     resize() {

@@ -131,8 +131,11 @@
 
     setTabCloseEventListener(tabEl) {
       tabEl.querySelector('.chrome-tab-close').addEventListener('click', event => {
-        this.removeTab(tabEl)
         event.stopPropagation()
+        if (!this.beforeRemoveTab({ detail: { tabEl } })) {
+          return
+        }
+        this.removeTab(tabEl)
       })
     }
 
@@ -185,6 +188,10 @@
       if (tabProperties.title) {
         tabEl.setAttribute('title', tabProperties.title)
       }
+    }
+
+    beforeRemoveTab(event) {
+      return true
     }
   }
 

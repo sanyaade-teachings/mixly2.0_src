@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('_');
 goog.require('path');
 goog.require('ChromeTabs');
 goog.require('XScrollbar');
@@ -60,12 +61,17 @@ class EditorsTabs {
         $parentsContainer.append(this.$content);
         this.#addEvents_();
         this.tabs = {};
-        this.events = new Events(['activeTabChange', 'tabAdd', 'tabRemove']);
+        this.events = new Events(['activeTabChange', 'tabAdd', 'tabRemove', 'beforeRemoveTab']);
     }
 
     #addEvents_() {
         const { $container } = this;
         const container = $container[0];
+
+        this.chromeTabs.beforeRemoveTab = (event) => {
+            const status = this.events.run('beforeRemoveTab', event);
+            return _.sum(status) == status.length;
+        }
 
         // active Tab被改变时触发
         container.addEventListener('activeTabChange', (event) => {

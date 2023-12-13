@@ -200,6 +200,7 @@
             "Mixly.Msg",
             "Mixly.Config",
             "Mixly.Env",
+            "Mixly.LayerExt",
             "Mixly.ContextMenu",
             "Mixly.IdGenerator",
             "Mixly.EditorBlockly",
@@ -276,6 +277,7 @@
     {
         "path": "/common/editors-tabs.js",
         "require": [
+            "_",
             "path",
             "ChromeTabs",
             "XScrollbar",

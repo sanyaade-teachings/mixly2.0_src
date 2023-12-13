@@ -105,19 +105,6 @@ Nav.init_ = function() {
     for (let config of this.registerQueue) {
         this.register(config);
     }
-    /*for (let i = 0; i < 10; i++)
-        Nav.register({
-            icon: 'icon-ccw',
-            title: '测试(Ctrl + A)',
-            id: IdGenerator.generate(),
-            displayText: '测试' + i,
-            preconditionFn: () => {
-                return goog.isElectron;
-            },
-            callback: (elem) => console.log(elem),
-            scopeType: this.Scope.LEFT,
-            weight: 10 - i
-        });*/
     Nav.register({
         id: 'file',
         displayText: '文件',
@@ -153,6 +140,12 @@ Nav.init_ = function() {
     });
 
     Nav.register({
+        id: ['file', 'hr'],
+        scopeType: this.Scope.RIGHT,
+        weight: 3
+    });
+
+    Nav.register({
         icon: 'icon-folder-open-empty',
         id: ['file', 'open-dir'],
         displayText: '打开文件夹',
@@ -161,7 +154,7 @@ Nav.init_ = function() {
         },
         callback: (elem) => console.log(elem),
         scopeType: this.Scope.RIGHT,
-        weight: 3
+        weight: 4
     });
 
     Nav.register({
@@ -237,11 +230,15 @@ Nav.register = function(config) {
                 text: displayText
             }));
         } else {
-            config.$btn = $(XML.render(this.ITEM_TEMPLATE, {
-                mId: id[1],
-                icon,
-                text: displayText
-            }));
+            if (displayText) {
+                config.$btn = $(XML.render(this.ITEM_TEMPLATE, {
+                    mId: id[1],
+                    icon,
+                    text: displayText
+                }));
+            } else {
+                config.$btn = $('<hr>');
+            }
         }
         break;
     }

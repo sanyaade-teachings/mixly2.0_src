@@ -27,20 +27,6 @@ export const text_join = function () {
     return [a + ' + ' + b, Python.ORDER_ADDITIVE];
 };
 
-export const text_to_number = function () {
-    var towhat = this.getFieldValue('TOWHAT');
-    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    if (towhat == 'b') return ['' + str + '.encode("utf-8")', Python.ORDER_ATOMIC];
-    return [towhat + "(" + str + ')', Python.ORDER_ATOMIC];
-};
-
-export const text_to_number_skulpt = function () {
-    var towhat = this.getFieldValue('TOWHAT');
-    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    if (towhat == 'b') return ['' + str + '.encode("utf-8")', Python.ORDER_ATOMIC];
-    return [towhat + "(" + str + ')', Python.ORDER_ATOMIC];
-};
-
 export const ascii_to_char = function () {
     var asciivalue = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC) || '0'
     return ['chr(' + asciivalue + ')', Python.ORDER_ATOMIC];

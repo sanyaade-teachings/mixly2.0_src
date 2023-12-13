@@ -297,4 +297,18 @@ export const math_round = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
+export const text_to_number = function () {
+    var towhat = this.getFieldValue('TOWHAT');
+    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    if (towhat == 'b') return ['' + str + '.encode("utf-8")', Python.ORDER_ATOMIC];
+    return [towhat + "(" + str + ')', Python.ORDER_ATOMIC];
+};
+
+export const text_to_number_skulpt = function () {
+    var towhat = this.getFieldValue('TOWHAT');
+    var str = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    if (towhat == 'b') return ['' + str + '.encode("utf-8")', Python.ORDER_ATOMIC];
+    return [towhat + "(" + str + ')', Python.ORDER_ATOMIC];
+};
+
 export const base_map = math_map

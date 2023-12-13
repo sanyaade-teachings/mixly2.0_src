@@ -121,47 +121,6 @@ export const text_join = {
     }
 };
 
-export const text_to_number = {
-    init: function () {
-        var TO_INT_FLOAT =
-            [[Blockly.Msg.MIXLY_TO_INT, 'int'], [Blockly.Msg.MIXLY_TO_FLOAT, 'float'], [Blockly.Msg.MIXLY_TO_BITES, 'b']];
-        this.setColour(TEXTS_HUE);
-        this.appendValueInput('VAR')
-            .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
-        this.setOutput(true, Number);
-        var thisBlock = this;
-        this.setTooltip(function () {
-            var mode = thisBlock.getFieldValue('TOWHAT');
-            var TOOLTIPS = {
-                'int': Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOINT,
-                'float': Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TOFLOAT,
-                'b': Blockly.Msg.MIXLY_TOOLTIP_TEXT_TOBYTE
-            };
-            return TOOLTIPS[mode];
-        });
-    }
-};
-
-export const text_to_number_skulpt = {
-    init: function () {
-        var TO_INT_FLOAT =
-            [[Blockly.Msg.MIXLY_TO_INT, 'int'], [Blockly.Msg.MIXLY_TO_FLOAT, 'float']];
-        this.setColour(TEXTS_HUE);
-        this.appendValueInput('VAR')
-            .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
-        this.setOutput(true, Number);
-        var thisBlock = this;
-        this.setTooltip(function () {
-            var mode = thisBlock.getFieldValue('TOWHAT');
-            var TOOLTIPS = {
-                'int': Blockly.Msg.MIXLY_TOOLTIP_TEXT_TOINT,
-                'float': Blockly.Msg.MIXLY_TOOLTIP_TEXT_TOFLOAT
-            };
-            return TOOLTIPS[mode];
-        });
-    }
-};
-
 export const ascii_to_char = {
     init: function () {
         this.setColour(TEXTS_HUE);

@@ -15,12 +15,12 @@ from machine import Pin, ADC
 class Weather_WS:
 
 	def __init__(self, pin, leaf=0.09, pulse=2):
-		Pin(pin, Pin.IN).irq(handler=self._irq_func, trigger=Pin.IRQ_FALLING)
-		self._time = time.ticks_ms()
+		Pin(pin, Pin.IN).irq(handler=self._ws_func, trigger=Pin.IRQ_FALLING)
+		self._wtime = time.ticks_ms()
 		self._distance = 2 * math.pi * leaf / pulse
 		self._pulse = 0
 
-	def _irq_func(self, pin):
+	def _ws_func(self, pin):
 		if pin.value() == 0:
 			self._pulse += self._distance
 
@@ -49,24 +49,14 @@ class Weather_WS:
 			grade=10
 		elif speed <=32.6:
 			grade=11
-		elif speed <=36.9:
-			grade=12
-		elif speed <=41.4:
-			grade=13
-		elif speed <=46.1:
-			grade=14			
-		elif speed <=50.9:
-			grade=15
-		elif speed <=56.0:
-			grade=16
 		else:
-			grade=17
+			grade=12
 		return grade
 
 	def wind_speed(self):
 		time.sleep_ms(100)
-		speed = self._pulse / time.ticks_diff(time.ticks_ms(), self._time) * 1000 if self._pulse > 0 else 0
-		self._time = time.ticks_ms()
+		speed = self._pulse / time.ticks_diff(time.ticks_ms(), self._wtime) * 1000 if self._pulse > 0 else 0
+		self._wtime = time.ticks_ms()
 		self._pulse = 0
 		return round(speed, 2), self._grade(speed) 
 
@@ -122,19 +112,27 @@ class Weather_WD:
 class Weather_Rain:
 
 	def __init__(self, pin, capacity=0.2794):
-		Pin(pin, Pin.IN).irq(handler=self._irq_func, trigger=Pin.IRQ_FALLING)
-		self._time = time.ticks_ms()
+		Pin(pin, Pin.IN).irq(handler=self._rain_func, trigger=Pin.IRQ_FALLING)
+		self._rtime = time.ticks_ms()
 		self._load = capacity
 		self._mean = 0
 		self._count = 0
 
-	def _irq_func(self, pin):
+	def _rain_func(self, pin):
 		if pin.value() == 0:
 			self._count += self._load
 
 	def rain_count(self, time_s=3600):
-		if time.ticks_diff(time.ticks_ms(), self._time) // 1000 >= time_s:
-			self._mean = self._count / time.ticks_diff(time.ticks_ms(), self._time) * 1000 if self._count > 0 else 0
-			self._time = time.ticks_ms()
+		if time.ticks_diff(time.ticks_ms(), self._rtime) // 1000 >= time_s:
+			self._mean = self._count / time.ticks_diff(time.ticks_ms(), self._rtime) * time_s * 1000 if self._count > 0 else 0
+			self._rtime = time.ticks_ms()
 			self._count = 0
 		return round(self._count, 2), round(self._mean, 4)
+
+#integration
+class Weather_Solo(Weather_WD, Weather_WS, Weather_Rain):
+
+	def __init__(self, pin_wd, pin_ws, pin_rain):
+		Weather_WD.__init__(self, pin_wd)
+		Weather_WS.__init__(self, pin_ws)
+		Weather_Rain.__init__(self, pin_rain)

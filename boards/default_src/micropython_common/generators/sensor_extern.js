@@ -329,8 +329,8 @@ export const sensor_use_spi_init = function () {
         Python.definitions_['import_ws_lora'] = 'import ws_lora';
         if (version === 'mixgo_pe') {
             code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ')\n';
-        } else if (version ==='yuankong_zi'){
-            code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c_soft'+')\n';
+        } else if (version === 'yuankong_zi') {
+            code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c_soft' + ')\n';
         } else {
             code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c' + ')\n';
         }
@@ -823,3 +823,37 @@ export const mixbot_sensor_extern_set_addr = function () {
     return code;
 };
 
+export const sensor_weather_solo_init = function () {
+    Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var wd = Python.valueToCode(this, 'wd', Python.ORDER_ATOMIC);
+    var ws = Python.valueToCode(this, 'ws', Python.ORDER_ATOMIC);
+    var rain = Python.valueToCode(this, 'rain', Python.ORDER_ATOMIC);
+    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var code = sub + ' = ws_solo.Weather_Solo(' + wd + ', ' + ws + ', ' + rain + ')\n';
+    return code;
+};
+
+export const sensor_weather_solo_wd = function () {
+    Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.wind_direction()' + key + '';
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const sensor_weather_solo_ws = function () {
+    Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.wind_speed()' + key + '';
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const sensor_weather_solo_rain = function () {
+    Python.definitions_['import_ws_solo'] = 'import ws_solo';
+    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var time = Python.valueToCode(this, 'time', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.rain_count(' + time + ')' + key + '';
+    return [code, Python.ORDER_ATOMIC];
+};

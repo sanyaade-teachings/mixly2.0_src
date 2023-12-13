@@ -1645,3 +1645,73 @@ export const robot_sonar_extern_led = {
         this.setInputsInline(true);
     }
 }
+
+export const sensor_weather_solo_init = {
+    init: function () {
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.weather_solo);
+        this.appendValueInput('wd')
+            .appendField('W-D#');
+        this.appendValueInput('ws')
+            .appendField('W-S#');
+        this.appendValueInput('rain')
+            .appendField('Rain#');
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setTooltip('');
+    }
+};
+
+export const sensor_weather_solo_wd = {
+    init: function () {
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.weather_solo);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET + Blockly.Msg.ForecastFx)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ABBR, "[0]"],
+                [Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE, "[1]"]
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+export const sensor_weather_solo_ws = {
+    init: function () {
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.weather_solo);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET + Blockly.Msg.MIXLY_WIND_SPEED)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_SPEED + 'm/s', "[0]"],
+                [Blockly.Msg.MIXLY_WIND_RATING, "[1]"]
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+export const sensor_weather_solo_rain = {
+    init: function () {
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.weather_solo);
+        this.appendValueInput('time')
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RAIN_TIME)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_ACCUMULATED, "[0]"],
+                [Blockly.Msg.MIXLY_AVERAGE, "[1]"]
+            ]), "key");
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_RAIN + '(mm)');
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};

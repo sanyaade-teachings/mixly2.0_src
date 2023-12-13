@@ -363,7 +363,7 @@ export const mixgome_display_font = {
         ];
         this.setColour(DISPLAY_ONBOARD_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.OLED_SET_FONT)
+            .appendField(Blockly.Msg.OLED_SET_FONT)
             .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);

@@ -3553,5 +3553,9 @@ En.MIXLY_PLAY_ONLINE_AUDIO = 'Play online audio';
 En.MIXLY_DISPLAY_MATRIX_WRITE_NOW = 'show';
 En.MIXLY_DISPLAY_MATRIX_DONT_WRITE = 'hide';
 En.MIXLY_DISPLAY_MATRIX_WRITE = 'show';
+En.weather_solo = 'Split-type Weather Station';
+En.MIXLY_ABBR = 'abbreviation';
+En.MIXLY_ACCUMULATED = 'accumulate';
+En.MIXLY_AVERAGE = 'average';
 
 })();

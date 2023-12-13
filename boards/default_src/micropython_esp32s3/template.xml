@@ -4011,6 +4011,54 @@
         </shadow>
       </value>
     </block>
+    <block type="sensor_weather_solo_init">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ws_wr</field>
+        </shadow>
+      </value>
+      <value name="wd">
+        <shadow type="pins_digital_pin">
+          <field name="PIN">1</field>
+        </shadow>
+      </value>
+      <value name="ws">
+        <shadow type="pins_digital_pin">
+          <field name="PIN">2</field>
+        </shadow>
+      </value>
+      <value name="rain">
+        <shadow type="pins_digital_pin">
+          <field name="PIN">3</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_weather_solo_wd">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ws_wr</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_weather_solo_ws">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ws_wr</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_weather_solo_rain">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ws_wr</field>
+        </shadow>
+      </value>
+      <value name="time">
+        <shadow type="math_number">
+          <field name="NUM">3600</field>
+        </shadow>
+      </value>
+    </block>
     <block type="serial_softserial_new">
       <value name="RX">
         <shadow type="pins_digital_pin">

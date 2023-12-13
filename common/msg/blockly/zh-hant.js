@@ -3525,5 +3525,9 @@ ZhHant.MIXLY_PLAY_ONLINE_AUDIO = '播放網路音訊';
 ZhHant.MIXLY_DISPLAY_MATRIX_WRITE_NOW = '立即生效';
 ZhHant.MIXLY_DISPLAY_MATRIX_DONT_WRITE = '暫不生效';
 ZhHant.MIXLY_DISPLAY_MATRIX_WRITE = '設定生效';
+ZhHant.weather_solo = '分體式氣象站';
+ZhHant.MIXLY_ABBR = '縮寫';
+ZhHant.MIXLY_ACCUMULATED = '累積';
+ZhHant.MIXLY_AVERAGE = '平均';
 
 })();

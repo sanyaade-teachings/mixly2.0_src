@@ -206,6 +206,12 @@ function createWindow(filePath = null, indexUrl = null) {
         win.webContents.send('command', commandStr);
     });
 
+    // 监听来自渲染进程的心跳消息
+    ipcMain.on('heartbeat', (event, arg) => {
+        // 收到心跳消息后，回复一个确认消息
+        event.sender.send('heartbeat-reply', 'Main process received heartbeat');
+    });
+
     win.once('ready-to-show', () => {
         win.maximize();
         win.show();
@@ -215,7 +221,7 @@ function createWindow(filePath = null, indexUrl = null) {
     });
 
     win.on('close', function () {
-        
+
     });
 
     // 记得在页面被关闭后清除该变量，防止内存泄漏

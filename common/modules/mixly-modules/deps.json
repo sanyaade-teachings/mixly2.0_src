@@ -603,6 +603,7 @@
     {
         "path": "/common/nav.js",
         "require": [
+            "BrowserFS",
             "layui",
             "Blockly",
             "Mixly.Env",
@@ -795,8 +796,7 @@
             "Mixly.EditorsManager",
             "Mixly.StatusBarTabs",
             "Mixly.Electron.FileTree",
-            "Mixly.Electron",
-            "Mixly.Web"
+            "Mixly.Web.FileTree"
         ],
         "provide": [
             "Mixly.Workspace"
@@ -896,7 +896,7 @@
         "require": [
             "path",
             "Mixly.FileTree",
-            "Mixly.Electron"
+            "Mixly.Electron.FS"
         ],
         "provide": [
             "Mixly.Electron.FileTree"
@@ -937,6 +937,15 @@
         ],
         "provide": [
             "Mixly.Electron.FooterLayerExample"
+        ]
+    },
+    {
+        "path": "/electron/fs.js",
+        "require": [
+            "Mixly.Electron"
+        ],
+        "provide": [
+            "Mixly.Electron.FS"
         ]
     },
     {
@@ -1094,6 +1103,17 @@
         ]
     },
     {
+        "path": "/web/file-tree.js",
+        "require": [
+            "path",
+            "Mixly.FileTree",
+            "Mixly.Web.FS"
+        ],
+        "provide": [
+            "Mixly.Web.FileTree"
+        ]
+    },
+    {
         "path": "/web/file.js",
         "require": [
             "Blockly",
@@ -1119,6 +1139,16 @@
         ],
         "provide": [
             "Mixly.Web.FooterLayerExample"
+        ]
+    },
+    {
+        "path": "/web/fs.js",
+        "require": [
+            "workerpool",
+            "Mixly.Web"
+        ],
+        "provide": [
+            "Mixly.Web.FS"
         ]
     },
     {

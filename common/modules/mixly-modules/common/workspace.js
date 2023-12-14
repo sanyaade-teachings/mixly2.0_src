@@ -11,8 +11,7 @@ goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorsManager');
 goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Electron.FileTree');
-goog.require('Mixly.Electron');
-goog.require('Mixly.Web');
+goog.require('Mixly.Web.FileTree');
 goog.provide('Mixly.Workspace');
 
 const {
@@ -29,7 +28,7 @@ const {
     Web = {}
 } = Mixly;
 
-const { FileTree } = goog.isElectron? Electron : Web;
+const { FileTree } = !goog.isElectron? Electron : Web;
 
 class Workspace {
     static {
@@ -102,7 +101,7 @@ class Workspace {
                 id: selected[0].id
             });
         });
-        this.fileTree.setDirPath('D:/gitee/mixly/mixly2.0-win32-x64/resources/app/src/sample');
+        this.fileTree.setDirPath('/test');
     }
 
     addEventsForEditorManager() {

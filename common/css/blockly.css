@@ -191,6 +191,8 @@ html[data-bs-theme=dark] .blocklyMainBackground {
     display: none;
 }
 
-.blocklyToolboxDelete > .blocklyToolboxContents > .blocklyToolboxCategory > .blocklyTreeRow {
-    background-color: unset;
+.drag-s-resize .blocklyToolboxDiv .blocklyTreeRow,
+.drag-w-resize .blocklyToolboxDiv .blocklyTreeRow,
+.blocklyToolboxDiv.blocklyToolboxDelete .blocklyTreeRow {
+    background-color: unset !important;
 }

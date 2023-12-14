@@ -2,11 +2,11 @@ goog.loadJs('electron', () => {
 
 goog.require('path');
 goog.require('Mixly.FileTree');
-goog.require('Mixly.Electron.FS');
-goog.provide('Mixly.Electron.FileTree');
+goog.require('Mixly.Web.FS');
+goog.provide('Mixly.Web.FileTree');
 
-const { FileTree, Electron } = Mixly;
-const { FS } = Electron;
+const { FileTree, Web } = Mixly;
+const { FS } = Web;
 
 class FileTreeExt extends FileTree {
     constructor(dom) {
@@ -14,16 +14,18 @@ class FileTreeExt extends FileTree {
     }
 
     async getContent(inPath) {
-        const status = await FS.isDirectory(inPath);
+        const rePath = '/' + path.relative('/test', inPath);
+        const status = await FS.isDirectory(rePath);
         if (!status) {
             return output;
         }
         let output = [];
-        const children = await FS.readDirectory(inPath);
+        const children = await FS.readDirectory(rePath);
         for (let data of children) {
             const dataPath = path.join(inPath, data);
-            if (await FS.isDirectory(dataPath)) {
-                const hasChildren = !!(await FS.readDirectory(dataPath)).length;
+            const reDataPath = path.join(rePath, data);
+            if (await FS.isDirectory(reDataPath)) {
+                const hasChildren = !!((await FS.readDirectory(reDataPath)) ?? []).length;
                 output.push({
                     type: 'dir',
                     id: dataPath,
@@ -41,6 +43,6 @@ class FileTreeExt extends FileTree {
     }
 }
 
-Electron.FileTree = FileTreeExt;
+Web.FileTree = FileTreeExt;
 
 });

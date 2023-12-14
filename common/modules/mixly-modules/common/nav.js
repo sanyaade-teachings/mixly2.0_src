@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('BrowserFS');
 goog.require('layui');
 goog.require('Blockly');
 goog.require('Mixly.Env');
@@ -152,7 +153,17 @@ Nav.init_ = function() {
         preconditionFn: () => {
             return goog.isElectron;
         },
-        callback: (elem) => console.log(elem),
+        callback: (elem) => {
+            window.showDirectoryPicker({
+                mode: 'readwrite'
+            })
+            .then((filesystem) => {
+                return Mixly.Web.FS.pool.exec('addFileSystemHandler', [filesystem]);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        },
         scopeType: this.Scope.RIGHT,
         weight: 4
     });

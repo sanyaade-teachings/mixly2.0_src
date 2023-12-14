@@ -168,6 +168,14 @@
         "provide": ["Blob"],
         "require": []
     }, {
+        "path": "modules/web-modules/browserfs.min.js",
+        "provide": ["BrowserFS"],
+        "require": []
+    }, {
+        "path": "modules/web-modules/workerpool.min.js",
+        "provide": ["workerpool"],
+        "require": []
+    }, {
         "path": "modules/web-modules/lodash.min.js",
         "provide": ["_"],
         "require": []

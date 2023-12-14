@@ -59,7 +59,11 @@ class FileTree {
                     if(node.id === "#") {
                         cb(this.#getRoot_());
                     } else {
-                        cb(this.#getChildren_(node.id));
+                        this.#getChildren_(node.id)
+                        .then((data) => {
+                            cb(data);
+                        })
+                        .catch(console.log);
                     }
                 },
                 themes: {
@@ -162,32 +166,37 @@ class FileTree {
     }
 
     #getChildren_(inPath) {
-        let output = [];
-        for (let item of this.getContent(inPath)) {
-            const { type, id, children } = item;
-            const text = path.basename(id);
-            let icon = 'icon-doc';
-            if (type === 'dir') {
-                icon = children? 'icon-folder' : 'icon-folder-empty';
-            } else {
-                icon = this.#getFileIcon_(text);
+        return new Promise(async (resolve, reject) => {
+            let output = [];
+            const content = await this.getContent(inPath);
+            for (let item of content) {
+                const { type, id, children } = item;
+                const text = path.basename(id);
+                let icon = 'icon-doc';
+                if (type === 'dir') {
+                    icon = children? 'icon-folder' : 'icon-folder-empty';
+                } else {
+                    icon = this.#getFileIcon_(text);
+                }
+                output.push({
+                    text,
+                    id,
+                    children,
+                    li_attr: {
+                        title: id
+                    },
+                    icon
+                });
             }
-            output.push({
-                text,
-                id,
-                children,
-                li_attr: {
-                    title: id
-                },
-                icon
-            });
-        }
-        return output;
+            resolve(output);
+        });
     }
 
     // 可覆盖
     getContent(inPath) {
-
+        return new Promise((resolve, reject) => {
+            resolve([]);
+        });
     }
 
     #getFileIcon_(filename) {

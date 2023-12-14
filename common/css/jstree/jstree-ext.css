@@ -40,8 +40,12 @@
     content: '\E829';
 }
 
-.jstree-node {
-    margin-left: 10px !important;
+.jstree-container-ul .jstree-node {
+    margin-left: 10px;
+}
+
+.jstree-container-ul > .jstree-node {
+    margin-left: 0px;
 }
 
 .jstree-anchor {

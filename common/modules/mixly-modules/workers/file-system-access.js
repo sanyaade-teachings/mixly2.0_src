@@ -1,5 +1,5 @@
 importScripts('../../web-modules/workerpool.min.js');
-importScripts('D:/github/BrowserFS/dist/browserfs.min.js');
+importScripts('../../web-modules/browserfs.min.js');
 
 let fs = null;
 

@@ -28,26 +28,21 @@ html[data-bs-theme=dark] .blocklyMainBackground {
     font-size: 17px;
 } 
 
-.injectionDiv.classic-theme .blocklyTreeRow .blocklyTreeLabel {
-    color: #000 !important;
-}
-
-.injectionDiv.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel {
-    color: #fff !important;
-}
-
-.injectionDiv.dark-theme .blocklyTreeRow .blocklyTreeLabel {
-    color: #fff !important;
-}
-
+.injectionDiv.classic-theme .blocklyTreeRow .blocklyTreeLabel,
 .injectionDiv.dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel {
     color: #000 !important;
+}
+
+.injectionDiv.dark-theme .blocklyTreeRow .blocklyTreeLabel,
+.injectionDiv.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel {
+    color: #fff !important;
 }
 
 #catSearch.blocklyTreeRow .blocklyTreeIcon {
     background: url('../../common/media/mark/search.png') no-repeat;
     background-size: 100% auto;
 }
+
 #catSearch.blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon {
     background: url('../../common/media/mark/search2.png') no-repeat;
     background-size: 100% auto;
@@ -83,61 +78,48 @@ html[data-bs-theme=dark] .blocklyMainBackground {
     background-size: auto !important;
 }
 
-.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen {
-    background-image: url('../../common/media/sprites.png') !important;
-    background-position: -16px -17px !important;
-}
-
-.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed {
-    background-image: url('../../common/media/sprites.png') !important;
-    background-position: -32px -17px !important;
-}
-
-.classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen {
-    background-image: url('../../common/media/sprites.png') !important;
-    background-position: -16px -1px !important;
-}
-
-.classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed {
-    background-image: url('../../common/media/sprites.png') !important;
-    background-position: -32px -1px !important;
-}
-
+.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen,
 .dark-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen {
     background-image: url('../../common/media/sprites.png') !important;
     background-position: -16px -17px !important;
 }
 
+.classic-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed,
 .dark-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed {
     background-image: url('../../common/media/sprites.png') !important;
     background-position: -32px -17px !important;
 }
 
+.classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconOpen,
 .dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconOpen {
     background-image: url('../../common/media/sprites.png') !important;
     background-position: -16px -1px !important;
 }
 
+.classic-theme .blocklyTreeRow .blocklyTreeIcon.blocklyTreeIconClosed,
 .dark-theme .blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon.blocklyTreeIconClosed {
     background-image: url('../../common/media/sprites.png') !important;
     background-position: -32px -1px !important;
 }
 
-.classic-theme.blocklyDropDownDiv,
-.classic-theme.blocklyWidgetDiv .blocklyMenu {
+.blocklyDropDownDiv.classic-theme,
+.blocklyWidgetDiv.classic-theme .blocklyMenu {
     background: #fff;
     border: 1px solid #bebebe;
 }
 
-.classic-theme .blocklyMenu > .blocklyMenuItem {
+.classic-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
     background-color: #fff;
-    margin: 2px 5px;
-    border-radius: 5px;
-    box-sizing: content-box;
-    padding: 0.2em 1em;
-    font-size: 14px;
     color: #000;
-    min-width: 9em;
+}
+
+.classic-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem {
+    background-color: unset;
+    color: #000;
+}
+
+.blocklyDropDownDiv.classic-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
+    background-color: rgb(0 0 0 / 20%);
 }
 
 .classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
@@ -154,8 +136,8 @@ html[data-bs-theme=dark] .blocklyMainBackground {
     color: #fff;
 }
 
-.classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
-    display: none;
+.blocklyDropDownDiv.classic-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected {
+    background-color: rgb(0 0 0 / 30%);
 }
 
 .dark-theme.blocklyDropDownDiv,
@@ -164,19 +146,22 @@ html[data-bs-theme=dark] .blocklyMainBackground {
     border: 1px solid #3b3b3b;
 }
 
-.dark-theme .blocklyMenu > .blocklyMenuItem {
+.dark-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
     background-color: #1f1f1f;
-    margin: 2px 5px;
-    border-radius: 5px;
-    box-sizing: content-box;
-    padding: 0.2em 1em;
-    font-size: 14px;
     color: #eee;
-    min-width: 9em;
+}
+
+.dark-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem {
+    background-color: unset;
+    color: #eee;
 }
 
 .dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
     background-color: #2980b9;
+}
+
+.blocklyDropDownDiv.dark-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
+    background-color: rgb(255 255 255 / 20%);
 }
 
 .dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemDisabled {
@@ -187,7 +172,20 @@ html[data-bs-theme=dark] .blocklyMainBackground {
     background-color: rgb(41 128 185 / 60%);
 }
 
-.dark-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
+.blocklyDropDownDiv.dark-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected {
+    background-color: rgb(255 255 255 / 30%);
+}
+
+.blocklyMenu > .blocklyMenuItem {
+    margin: 2px 5px;
+    border-radius: 5px;
+    box-sizing: content-box;
+    padding: 0.2em 1em;
+    font-size: 14px;
+    min-width: 9em;
+}
+
+.blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
     display: none;
 }
 

@@ -28,7 +28,7 @@ const {
     Web = {}
 } = Mixly;
 
-const { FileTree } = !goog.isElectron? Electron : Web;
+const { FileTree } = goog.isElectron? Electron : Web;
 
 class Workspace {
     static {
@@ -101,7 +101,7 @@ class Workspace {
                 id: selected[0].id
             });
         });
-        this.fileTree.setDirPath('/test');
+        this.fileTree.setDirPath('D:/gitee');
     }
 
     addEventsForEditorManager() {

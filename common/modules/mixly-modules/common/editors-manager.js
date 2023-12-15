@@ -4,6 +4,7 @@ goog.require('path');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
+goog.require('Mixly.Nav');
 goog.require('Mixly.EditorMix');
 goog.require('Mixly.EditorCode');
 goog.require('Mixly.EditorMd');
@@ -16,6 +17,7 @@ const {
     IdGenerator,
     XML,
     Env,
+    Nav,
     EditorMix,
     EditorCode,
     EditorMd,
@@ -77,10 +79,15 @@ class EditorsManager {
         const { events } = this.editorTabs;
         // active Tab被改变时触发
         events.bind('activeTabChange', (event) => {
+            const $btnsContainer = Nav.getEditorBtnsContainer();
             const prevEditor = this.getActiveEditor();
             if (prevEditor) {
                 prevEditor.onUnmounted();
                 prevEditor.getContainer().detach();
+                const $prevBtns = prevEditor.getBtnsContainer();
+                if ($prevBtns && $prevBtns.length) {
+                    $prevBtns.detach();
+                }
             }
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
@@ -88,6 +95,10 @@ class EditorsManager {
             this.activeEditorName = tabId;
             this.$editorContainer.empty();
             this.$editorContainer.append(editor.getContainer());
+            const $btns = editor.getBtnsContainer();
+            if ($btns && $btns.length) {
+                $btnsContainer.append($btns);
+            }
             if (this.editors[tabId].inited) {
                 editor.onMounted();
             }

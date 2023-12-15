@@ -263,6 +263,7 @@
             "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
+            "Mixly.Nav",
             "Mixly.EditorMix",
             "Mixly.EditorCode",
             "Mixly.EditorMd",

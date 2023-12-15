@@ -9,6 +9,7 @@ class EditorBase {
     constructor() {
         this.events = new Events(['onAddDirty', 'onRemoveDirty']);
         this.$content = null;
+        this.$btnsGroup = null;
         this.$tab = null;
         this.dirty = false;
     }
@@ -17,6 +18,10 @@ class EditorBase {
 
     getContainer() {
         return this.$content;
+    }
+
+    getBtnsContainer() {
+        return this.$btnsContent;
     }
 
     resize() {}

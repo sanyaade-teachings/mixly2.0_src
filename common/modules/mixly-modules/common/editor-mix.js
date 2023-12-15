@@ -39,6 +39,7 @@ const { form } = layui;
 class EditorMix extends EditorBase {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix.html'));
+        this.BTNS_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix-btns.html'));
         this.BREADCRUMBS_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-toolbar-breadcrumbs.html'));
         this.BREADCRUMBS_MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-toolbar-breadcrumbs-menu.html'));
         this.BLOCKLY_IGNORE_EVENTS = [
@@ -63,13 +64,13 @@ class EditorMix extends EditorBase {
         const $parentContainer = $(dom);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorMix.TEMPLATE, { mId: this.id }));
+        this.$btnsContent = $(EditorMix.BTNS_TEMPLATE);
         this.drag = null;
         this.blocklyContextMenuItems = null;
         this.codeContextMenuItems = null;
         this.$blocklyContainer = this.$content.find('.editor-blockly');
         this.$codeContainer = this.$content.find('.editor-code');
-        this.$breadcrumbs = this.$content.find('.breadcrumbs');
-        this.$btns = this.$content.find('.operate-btns > button');
+        this.$btns = this.$btnsContent.find('button');
         this.blockEditor = new EditorBlockly(this.$blocklyContainer[0], extname);
         this.codeEditor = new EditorCode(this.$codeContainer[0], this.#getCodeExtname_());
         this.blocklyContextMenu = {
@@ -98,7 +99,6 @@ class EditorMix extends EditorBase {
         this.blockEditor.init();
         this.codeEditor.init();
         this.codeEditor.setReadOnly(true);
-        this.updateBreadcrumbsMenu();
         const blocklyWorkspace = this.blockEditor.editor;
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.workspaceChangeEvent(event);
@@ -144,9 +144,6 @@ class EditorMix extends EditorBase {
 
     workspaceChangeEvent(event) {
         const { blockEditor, codeEditor } = this;
-        if ([Blockly.Events.SELECTED, Blockly.Events.BLOCK_DRAG].includes(event.type)) {
-            this.updateBreadcrumbsMenu();
-        }
         if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)) {
             return;
         }
@@ -155,104 +152,6 @@ class EditorMix extends EditorBase {
            return;
         }
         codeEditor.setValue(blockEditor.getValue(), false);
-    }
-
-    updateBreadcrumbsMenu() {
-        const { editor } = this.blockEditor;
-        let block = Blockly.getSelected();
-        let breadcrumbs = [];
-        if (block && !block.isComment) {
-            do {
-                breadcrumbs.unshift({
-                    id: block.id,
-                    name: block.type
-                });
-            } while (block = block.getSurroundParent());
-        }
-        breadcrumbs.unshift({
-            id: editor.id,
-            name: '工作区'
-        });
-        this.$breadcrumbs.html(XML.render(EditorMix.BREADCRUMBS_TEMPLATE, {
-            list: breadcrumbs
-        }));
-        this.disposeBreadcrumbsMenu();
-        const btns = this.$breadcrumbs[0].querySelectorAll('button');
-        this.breadcrumbsMenu = tippy(btns, {
-            allowHTML: true,
-            trigger: 'click',
-            interactive: true,
-            maxWidth: 'none',
-            offset: [ 0, 6 ],
-            placement: 'bottom',
-            zIndex: 1000,
-            appendTo: document.body,
-            onMount: (instance) => {
-                let options = this.getMenuOptions($(instance.reference).attr('m-id')) ?? {};
-                options.list = options.list ?? [];
-                options.empty = options.empty ?? Msg.Lang['无选项'];
-                const menuTemplate = XML.render(EditorMix.BREADCRUMBS_MENU_TEMPLATE, options);
-                instance.setContent(menuTemplate);
-                $(instance.popper).find('li').off().click((event) => {
-                    this.menuOptionOnclick(event);
-                    instance.hide(100);
-                });
-            }
-        });
-    }
-
-    getMenuOptions(id) {
-        const { editor } = this.blockEditor;
-        const selectedBlock = Blockly.getSelected();
-        const selectedBlockId = selectedBlock && selectedBlock.id;
-        let menu = [];
-        let children = [];
-        let nextBlock = null;
-        if (id === editor.id) {
-            children = editor.getTopBlocks(); 
-        } else {
-            const block = editor.getBlockById(id);
-            children = block.getChildren();
-            nextBlock = block.getNextBlock();
-        }
-        for (let child of children) {
-            if (child.isShadow()) {
-                continue;
-            }
-            if (nextBlock && nextBlock.id === child.id) {
-                continue;
-            }
-            let menuItem = { id: child.id };
-            if (typeof child.getDescription === 'function') {
-                menuItem.name = child.getDescription();
-            } else {
-                menuItem.name = child.type;
-            }
-            if (selectedBlockId === child.id) {
-                menuItem.selected = true;
-            }
-            menu.push(menuItem);
-        }
-        if (menu.length) {
-            return { list: menu };
-        }
-        return { list: [], empty: Msg.Lang['无选项'] };
-    }
-
-    menuOptionOnclick(event) {
-        const { editor } = this.blockEditor;
-        const $li = $(event.currentTarget);
-        const id = $li.attr('value');
-        // editor.zoomToFit();
-        editor.centerOnBlock(id);
-        let block = Blockly.getSelected();
-        Blockly.Events.disable();
-        if (block) {
-            block.unselect();
-        }
-        Blockly.Events.enable();
-        block = editor.getBlockById(id);
-        block.select();
     }
 
     addDragEvents() {
@@ -311,11 +210,14 @@ class EditorMix extends EditorBase {
     addBtnEvents() {
         this.$btns.on('click', (event) => {
             const $btn = $(event.currentTarget);
+            const mId = $btn.attr('m-id');
+            if (mId === 'deps') {
+                return;
+            }
             if (!$btn.hasClass('self-adaption-btn')) {
                 this.$btns.removeClass('self-adaption-btn');
                 $btn.addClass('self-adaption-btn');
             }
-            const mId = $btn.attr('m-id');
             switch (mId) {
             case 'block':
                 this.drag.full(Drag.Extend.POSITIVE);
@@ -355,14 +257,8 @@ class EditorMix extends EditorBase {
         this.codeEditor.resize();
     }
 
-    disposeBreadcrumbsMenu() {
-        for (let item of this.breadcrumbsMenu) {
-            item.destroy();
-        }
-    }
-
     dispose() {
-        this.disposeBreadcrumbsMenu();
+        this.$btnsContent.remove();
         this.blockEditor.dispose();
         this.codeEditor.dispose();
     }

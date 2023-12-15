@@ -3,102 +3,23 @@
         div[m-id="{{d.mId}}"] {
             position: relative;
             display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-        }
-
-        div[m-id="{{d.mId}}"] > .editor {
-            position: relative;
-            display: flex;
             flex-direction: row;
             width: 100%;
             height: 100%;
         }
 
-        div[m-id="{{d.mId}}"] > .editor > .editor-blockly {
+        div[m-id="{{d.mId}}"] > .editor-blockly {
             width: 100%;
             height: 100%;
         }
 
-        div[m-id="{{d.mId}}"] > .editor > .editor-code {
+        div[m-id="{{d.mId}}"] > .editor-code {
             width: 0%;
             height: 100%;
         }
-
-        div[m-id="{{d.mId}}"] > .toolbar {
-            height: 22px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 3;
-        }
-
-        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .toolbar {
-            background-color: #ffffff;
-            border: 1px solid #c9c9c9;
-        }
-
-        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .toolbar {
-            background-color: #252526;
-            border: 1px solid #2e2e30;
-        }
-
-        div[m-id="{{d.mId}}"] > .toolbar > .group {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            line-height: 22px;
-            font-size: 16px;
-        }
-
-        div[m-id="{{d.mId}}"] > .toolbar > .group > button {
-            border-radius: 2px;
-            padding: 0 2px;
-            margin: 0 2px;
-            height: 20px;
-            line-height: 20px;
-        }
-
-        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .toolbar > .group > button.self-adaption-btn {
-            color: #fff;
-        }
-
-        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .toolbar > .group > button {
-            background-color: #313132;
-            border-color: #484849;
-        }
-
-        div[m-id="{{d.mId}}"] > .toolbar > .group > label {
-            width: 10px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        div[m-id="{{d.mId}}"] > .toolbar > .breadcrumbs {
-            overflow-y: hidden;
-            overflow-x: auto;
-        }
     </style>
-    <div m-id="{{d.mId}}">
-        <div class="toolbar mixly-scrollbar">
-            <div class="group breadcrumbs"></div>
-            <div class="group operate-btns">
-                <button m-id="block" class="layui-btn layui-btn-xs layui-btn-primary m-btn self-adaption-btn">
-                    <i class="icon-puzzle"></i>模块
-                </button>
-                <button m-id="mixture" class="layui-btn layui-btn-xs layui-btn-primary m-btn">
-                    <i class="icon-cube"></i>混合
-                </button>
-                <button m-id="code" class="layui-btn layui-btn-xs layui-btn-primary m-btn">
-                    <i class="icon-code"></i>代码
-                </button>
-            </div>
-        </div>
-        <div class="editor">
-            <div class="editor-blockly"></div>
-            <div class="editor-code"></div>
-        </div>
+    <div m-id="{{d.mId}}" class="editor">
+        <div class="editor-blockly"></div>
+        <div class="editor-code"></div>
     </div>
 </div>

@@ -45,8 +45,9 @@ class FileTree {
         this.$fileTree.jstree({
             core: {
                 multiple: false,
-                animation: 0,
+                animation: false,
                 worker: false,
+                dblclick_toggle: false,
                 check_callback: function(operation, node, parent, position, more) {
                     if(operation === 'copy_node' || operation === 'move_node') {
                         if(parent.id === '#') {
@@ -59,6 +60,9 @@ class FileTree {
                     if(node.id === "#") {
                         cb(this.#getRoot_());
                     } else {
+                        let $li = this.$fileTree.jstree(true).get_node(node, true);
+                        let $i = $li.find('.jstree-anchor > .jstree-icon');
+                        $i.addClass('layui-anim layui-anim-fadein layui-anim-fadeout layui-anim-loop');
                         this.#getChildren_(node.id)
                         .then((data) => {
                             cb(data);

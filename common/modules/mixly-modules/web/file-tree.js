@@ -1,4 +1,4 @@
-goog.loadJs('electron', () => {
+goog.loadJs('web', () => {
 
 goog.require('path');
 goog.require('Mixly.FileTree');
@@ -25,11 +25,11 @@ class FileTreeExt extends FileTree {
             const dataPath = path.join(inPath, data);
             const reDataPath = path.join(rePath, data);
             if (await FS.isDirectory(reDataPath)) {
-                const hasChildren = !!((await FS.readDirectory(reDataPath)) ?? []).length;
+                const isDirEmpty = await FS.isDirectoryEmpty(reDataPath);
                 output.push({
                     type: 'dir',
                     id: dataPath,
-                    children: hasChildren
+                    children: !isDirEmpty
                 });
             } else {
                 output.push({

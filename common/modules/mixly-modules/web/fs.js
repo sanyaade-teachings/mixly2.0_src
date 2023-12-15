@@ -61,4 +61,8 @@ FS.isDirectory = (path) => {
     });
 }
 
+FS.isDirectoryEmpty = async (path) => {
+    return !(await FS.readDirectory(path) ?? []).length;
+}
+
 });

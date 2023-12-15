@@ -930,7 +930,6 @@
     ".cfm": "cfm",
     ".clojure": "clojure",
     ".clojurescript": "clojurescript",
-    ".yml": "springbootpropertiesyaml",
     ".cmake": "cmake",
     ".CMakeCache.txt": "cmakecache",
     ".cbl": "cobol",
@@ -1112,7 +1111,7 @@
     ".scss": "scss",
     ".sdl": "sdlang",
     ".shader": "shaderlab",
-    ".sh": "shellscript",
+    ".sh": "shell",
     ".slang": "slang",
     ".ice": "slice",
     ".slim": "slim",
@@ -1179,5 +1178,7 @@
     ".zig": "zig",
     ".mix": "mix",
     ".mil": "mil",
+    ".cmd": "bat",
+    "LICENSE": "license",
     "default": "default"
 }

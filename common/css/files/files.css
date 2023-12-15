@@ -2662,30 +2662,6 @@
     background: url(./icons/file_type_powershell2.svg) no-repeat;
 }
 
-.fileicon-powershell:before {
-    background: url(./icons/file_type_powershell.svg) no-repeat;
-}
-
-.fileicon-powershell:before {
-    background: url(./icons/file_type_powershell.svg) no-repeat;
-}
-
-.fileicon-powershell:before {
-    background: url(./icons/file_type_powershell.svg) no-repeat;
-}
-
-.fileicon-powershell:before {
-    background: url(./icons/file_type_powershell.svg) no-repeat;
-}
-
-.fileicon-powershell:before {
-    background: url(./icons/file_type_powershell.svg) no-repeat;
-}
-
-.fileicon-powershell:before {
-    background: url(./icons/file_type_powershell.svg) no-repeat;
-}
-
 .fileicon-preact:before {
     background: url(./icons/file_type_preact.svg) no-repeat;
 }
@@ -3702,4 +3678,12 @@
     width: 17px;
     height: 17px;
     top: 4px;
+}
+
+.fileicon-shell:before {
+    background: url(./icons/file_type_shell.svg) no-repeat;
+}
+
+.fileicon-api_extractor:before {
+    background: url(./icons/file_type_api_extractor.svg) no-repeat;
 }

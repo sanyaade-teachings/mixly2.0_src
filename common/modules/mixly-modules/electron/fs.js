@@ -11,7 +11,7 @@ const fs_promise = Mixly.require('node:fs/promises');
 const electron_remote = Mixly.require('@electron/remote');
 const { dialog, app } = electron_remote;
 
-FS.showOpenFilePicker = async () => {
+FS.showOpenFilePicker = () => {
     return new Promise((resolve, reject) => {
         const currentWindow = electron_remote.getCurrentWindow();
         currentWindow.focus();
@@ -36,7 +36,7 @@ FS.showOpenFilePicker = async () => {
     });
 }
 
-FS.showDirectoryPicker = async () => {
+FS.showDirectoryPicker = () => {
     return new Promise((resolve, reject) => {
         const currentWindow = electron_remote.getCurrentWindow();
         currentWindow.focus();
@@ -61,7 +61,7 @@ FS.showDirectoryPicker = async () => {
     });
 }
 
-FS.showSaveFilePicker = async () => {
+FS.showSaveFilePicker = () => {
     return new Promise((resolve, reject) => {
         resolve();
     });
@@ -85,6 +85,10 @@ FS.isDirectory = (path) => {
             resolve(status);
         });
     });
+}
+
+FS.isDirectoryEmpty = async (path) => {
+    return !(await FS.readDirectory(path)).length;
 }
 
 });

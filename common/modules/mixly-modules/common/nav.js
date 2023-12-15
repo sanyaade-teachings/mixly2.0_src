@@ -93,6 +93,7 @@ Nav.init_ = function() {
     this.$dropdownContainer = this.$container.find('.dropdown-container');
     this.$rightMenuContainer = this.$container.find('.right-menu-container');
     this.$rightArea = this.$container.find('.right-area');
+    this.$editorBtnsContainer = this.$container.find('.editor-btn-container');
     this.$dropdownContainer.append(Nav.BOARD_SELECTOR_TEMPLATE);
     this.$dropdownContainer.append(XML.render(Nav.PORT_SELECTOR_TEMPLATE, {
         selectPort: Msg.Lang['选择串口'],
@@ -193,6 +194,10 @@ Nav.init_ = function() {
     $(window).resize(() => {
         this.resize();
     });
+}
+
+Nav.getEditorBtnsContainer = function() {
+    return this.$editorBtnsContainer;
 }
 
 /**
@@ -467,6 +472,7 @@ Nav.resize = function() {
             continue;
         }
         const config = this.btns[mId];
+        let newWidth = nowWidth;
         if (config) {
             const { preconditionFn } = config;
             if (!preconditionFn()) {
@@ -474,19 +480,23 @@ Nav.resize = function() {
                 config.$moreBtn.css('display', 'none');
                 continue;
             }
-            nowWidth += config.width;
+            newWidth += config.width;
         } else {
-            nowWidth += this.getElemWidth($($btns[i]));
+            newWidth += this.getElemWidth($($btns[i]));
             continue;
         }
-        if (navWidth < nowWidth + 200) {
+        if (navWidth < newWidth + this.$editorBtnsContainer.outerWidth(true) + 130) {
             config.$btn.css('display', 'none');
             config.$moreBtn.css('display', 'block');
             showMoreBtnContainer = true;
         } else {
             config.$btn.css('display', 'block');
             config.$moreBtn.css('display', 'none');
+            nowWidth = newWidth;
         }
+    }
+    if (navWidth < nowWidth + this.$editorBtnsContainer.outerWidth(true) + 130) {
+        showMoreBtnContainer = false;
     }
     const parent = this.$leftBtnExtContainer.parent();
     parent.css('display', showMoreBtnContainer? 'block' : 'none');

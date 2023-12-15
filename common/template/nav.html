@@ -283,6 +283,45 @@
             border-bottom: 1px solid #ffffff !important;
             margin: 4px 0;
         }
+
+        ul[m-id="{{d.mId}}"] > .editor-btn-container {
+            line-height: 22px;
+            font-size: 16px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+            margin: 4px;
+            padding: 0 2px;
+            border: 1px solid rgba(204, 204, 204, 0.2);
+        }
+
+        ul[m-id="{{d.mId}}"] > .editor-btn-container:empty {
+            display: none;
+        }
+
+        ul[m-id="{{d.mId}}"] > .editor-btn-container .group {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        ul[m-id="{{d.mId}}"] > .editor-btn-container .group > .line {
+            height: 12px;
+            width: 1px;
+            background-color: #fff;
+        }
+
+        ul[m-id="{{d.mId}}"] > .editor-btn-container .group > button {
+            border-radius: 2px;
+            padding: 0 2px;
+            margin: 0 4px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        ul[m-id="{{d.mId}}"] > .editor-btn-container .group > .self-adaption-btn {
+            color: #fff;
+        }
     </style>
     <ul class="layui-nav" lay-filter="nav-filter" m-id="{{d.mId}}" lay-bar="disabled">
         <div>
@@ -303,9 +342,7 @@
                 </dl>
             </li>
         </div>
-        <div style="display: inline-flex;flex-direction: row;align-items: center;">
-            <a class="copyright">{{d.msg.copyright}}</a>
-        </div>
+        <div class="editor-btn-container"></div>
         <div class="right-area">
             <div class="right-btn-container"></div>
             <div class="dropdown-container"></div>

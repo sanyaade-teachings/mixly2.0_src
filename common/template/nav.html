@@ -45,7 +45,7 @@
         }
 
         html[data-bs-theme=light] ul[m-id="{{d.mId}}"] button:hover {
-            box-shadow: inset 2px 0px 5px #169084;
+            box-shadow: 2px 0px 5px #7b7171;
             /*box-shadow: none;*/
             border-color: #19897f;
         }
@@ -195,7 +195,7 @@
             height: var(--nav-left-btn-height);
             line-height: var(--nav-left-btn-height);
             font-size: calc(var(--nav-left-btn-font-size) + 4px);
-            margin: 0px;
+            margin: 2px;
         }
 
         ul[m-id="{{d.mId}}"] .right-area,
@@ -311,7 +311,7 @@
         }
 
         ul[m-id="{{d.mId}}"] > .editor-btn-container .group > button {
-            border-radius: 2px;
+            border-radius: 4px;
             padding: 0 2px;
             margin: 0 4px;
             height: 20px;
@@ -321,6 +321,16 @@
 
         ul[m-id="{{d.mId}}"] > .editor-btn-container .group > .self-adaption-btn {
             color: #fff;
+        }
+
+        html[data-bs-theme=light] ul[m-id="{{d.mId}}"] > .editor-btn-container .group > .self-adaption-btn {
+            background-color: #118d81 !important;
+            border-color: #22857b;
+            box-shadow: 2px 0px 5px #7b7171;
+        }
+
+        html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] > .editor-btn-container .group > .self-adaption-btn {
+            box-shadow: 2px 0px 5px #303030;
         }
     </style>
     <ul class="layui-nav" lay-filter="nav-filter" m-id="{{d.mId}}" lay-bar="disabled">

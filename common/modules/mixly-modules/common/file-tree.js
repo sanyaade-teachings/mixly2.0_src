@@ -23,9 +23,9 @@ class FileTree {
         this.FILE_ICON_MAP = goog.getJSON(path.join(Env.templatePath, 'json/file-icons.json'));
     }
 
-    constructor(dom) {
+    constructor(element) {
         this.dirPath = '';
-        this.$content = $(dom);
+        this.$content = $(element);
         let trackBackground, thumbBackground;
         if (USER.theme === 'dark') {
             trackBackground = '#222';
@@ -34,7 +34,7 @@ class FileTree {
             trackBackground = '#ddd';
             thumbBackground = '#5f5f5f';
         }
-        this.scrollbar = new XScrollbar(dom, {
+        this.scrollbar = new XScrollbar(element, {
             onlyHorizontal: false,
             thumbSize: 3,
             thumbRadius: 1,

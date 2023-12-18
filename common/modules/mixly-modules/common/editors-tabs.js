@@ -28,8 +28,8 @@ class EditorsTabs {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-tab.html'));
     }
 
-    constructor(dom) {
-        const $parentsContainer = $(dom);
+    constructor(element) {
+        const $parentsContainer = $(element);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorsTabs.TEMPLATE, {
             mId: this.id

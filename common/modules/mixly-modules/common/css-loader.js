@@ -66,7 +66,8 @@ Mixly.CssLoader.commonCss = [
     "common/css/markdown/github-markdown-dark.css",
     "common/css/katex.min.css",
     "common/css/codicon.css",
-    "common/css/files/files.css"
+    "common/css/files/files.css",
+    "common/css/mprogress.min.css"
 ];
 
 /* 客户端css */

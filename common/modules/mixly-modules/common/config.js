@@ -55,13 +55,10 @@ Config.init = () => {
         ...urlConfig
     };
 
-    console.log('Config.BOARD:', Config.BOARD);
-
     let pathPrefix = '../';
 
     Config.SOFTWARE = goog.getJSON(path.join(pathPrefix, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);
     Config.pathPrefix = pathPrefix;
-    console.log('Config.SOFTWARE:', Config.SOFTWARE);
 
     Env.hasSocketServer = Config.SOFTWARE?.webSocket?.enabled ? true : false;
     Env.hasCompiler = Config.SOFTWARE?.webCompiler?.enabled ? true : false;
@@ -90,8 +87,6 @@ Config.init = () => {
             Config.USER.language = 'en';
         }
     }
-
-    console.log('Config.USER', Config.USER);
     if (Config.USER.visitorId) {
         Config.BOARD.visitorId = { ...Config.USER.visitorId };
     } else {

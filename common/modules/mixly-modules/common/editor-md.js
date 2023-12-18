@@ -30,9 +30,9 @@ class EditorMd extends EditorCode {
     // 私有属性
     #prevCode_ = '';
 
-    constructor(dom, extname='.md') {
+    constructor(element, extname='.md') {
         const id = IdGenerator.generate();
-        const $parentContainer = $(dom);
+        const $parentContainer = $(element);
         const $content = $(XML.render(EditorMd.TEMPLATE, { mId: id }));
         const $codeContainer = $content.find('.editor-code');
         super($codeContainer, extname);

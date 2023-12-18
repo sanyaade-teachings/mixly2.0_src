@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('Blockly');
 goog.require('WorkspaceSearch');
 goog.require('Backpack');
@@ -38,9 +39,9 @@ class EditorBlockly extends EditorBase {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
     }
 
-    constructor(dom, extname='.mix') {
+    constructor(element, extname='.mix') {
         super();
-        const $parentContainer = $(dom);
+        const $parentContainer = $(element);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorBlockly.TEMPLATE, {
             mId: this.id
@@ -52,15 +53,9 @@ class EditorBlockly extends EditorBase {
     }
 
     init() {
-        const media = Config.pathPrefix + 'common/media/';
+        const media = path.join(Config.pathPrefix, 'common/media/');
         this.$toolbox = $('#toolbox');
         const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
-        const grid = USER.blocklyShowGrid ==='yes' ? {
-                spacing: 20,
-                length: 3,
-                colour: '#ccc',
-                snap: true
-            } : {};
         this.editor = Blockly.inject(this.$editorContainer[0], {
             media,
             toolbox: this.$toolbox[0],
@@ -70,7 +65,12 @@ class EditorBlockly extends EditorBase {
                 wheel: true,
                 scaleSpeed: 1.03
             },
-            grid
+            grid: USER.blocklyShowGrid ==='yes' ? {
+                spacing: 20,
+                length: 3,
+                colour: '#ccc',
+                snap: true
+            } : {}
         });
 
         this.editor.registerToolboxCategoryCallback(
@@ -121,10 +121,12 @@ class EditorBlockly extends EditorBase {
     }
 
     undo() {
+        super.undo();
         this.editor.undo(0);
     }
 
     redo() {
+        super.redo();
         this.editor.undo(1);
     }
 
@@ -146,6 +148,7 @@ class EditorBlockly extends EditorBase {
         this.editor.hideComponents(true);
         Blockly.common.svgResize(this.editor);
         Blockly.bumpObjects.bumpTopObjectsIntoBounds(this.editor);
+        super.resize();
     }
 
     addPlugins() {
@@ -221,10 +224,12 @@ class EditorBlockly extends EditorBase {
     }
 
     dispose() {
+        super.dispose();
         this.editor.dispose();
     }
 
     onMounted() {
+        super.onMounted();
         this.updateToolbox();
         this.resize();
         this.editor.scrollCenter();

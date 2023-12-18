@@ -129,6 +129,7 @@
     {
         "path": "/common/editor-blockly.js",
         "require": [
+            "path",
             "Blockly",
             "WorkspaceSearch",
             "Backpack",
@@ -672,6 +673,7 @@
     {
         "path": "/common/statusbar-serial.js",
         "require": [
+            "Mixly.XML",
             "Mixly.StatusBar"
         ],
         "provide": [
@@ -691,7 +693,8 @@
             "Mixly.XML",
             "Mixly.MArray",
             "Mixly.Env",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.Events"
         ],
         "provide": [
             "Mixly.StatusBarTabs"
@@ -700,6 +703,11 @@
     {
         "path": "/common/statusbar-terminal.js",
         "require": [
+            "path",
+            "Mprogress",
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.IdGenerator",
             "Mixly.StatusBar"
         ],
         "provide": [

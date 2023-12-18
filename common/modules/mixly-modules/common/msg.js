@@ -100,6 +100,5 @@ Msg.renderToolbox = (addToolboxitemid = false) => {
 }
 
 Msg.changeTo(Msg.nowLang);
-console.log('Msg.LANG', Msg.LANG);
 
 });

@@ -466,7 +466,7 @@ Serial.refreshPortOperator = (ports) => {
             }
             Serial.portsOperator[port.name] = defaultPortConfig;
         }
-        Serial.refreshTerminalMenu(port.name);
+        // Serial.refreshTerminalMenu(port.name);
     }
     for (let i in oldPortOperator) {
         if (!portsName.includes(i)) {
@@ -485,7 +485,7 @@ Serial.refreshPortOperator = (ports) => {
                     dom.destroy();
                 }
             }
-            Serial.refreshTerminalMenu(i);
+            // Serial.refreshTerminalMenu(i);
         }
     }
 }
@@ -588,7 +588,7 @@ Serial.openTool = () => {
             deadPortObj.dom.destroy();
             delete Serial.deadPortsOperator[port];
         }
-        Serial.refreshTerminalMenu(port);
+        // Serial.refreshTerminalMenu(port);
     }
     let toolDom = portObj.dom;
     if (!portObj.dom) {
@@ -848,7 +848,7 @@ Serial.statusBarPortAddHotKey = (port) => {
 
     const portObj = Serial.portsOperator[port];
     if (!portObj) return;
-    Serial.refreshTerminalMenu(port);
+    // Serial.refreshTerminalMenu(port);
 }
 
 Serial.statusBarPortEnterTerminal = (port) => {
@@ -1339,7 +1339,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             //Serial.statusBarPortRemoveCursorEvent(port);
             statusBarSerial.open();
             portObj.portOpened = true;
-            Serial.refreshTerminalMenu(port);
+            // Serial.refreshTerminalMenu(port);
             Serial.refreshConnectStatus(port);
             statusBarSerial.setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
             Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
@@ -1455,7 +1455,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
         portObj.portOpened = false;
         statusBarSerial.close();
         Serial.refreshConnectStatus(port);
-        Serial.refreshTerminalMenu(port);
+        // Serial.refreshTerminalMenu(port);
         portObj.refreshOutputBoxTimer && clearInterval(portObj.refreshOutputBoxTimer);
         portObj.refreshOutputBoxTimer = null;
         Charts.stopRefresh();

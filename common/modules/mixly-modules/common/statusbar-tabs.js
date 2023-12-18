@@ -11,6 +11,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Events');
 goog.provide('Mixly.StatusBarTabs');
 
 const { element } = layui;
@@ -22,27 +23,56 @@ const {
     XML,
     MArray,
     Env,
-    Msg
+    Msg,
+    Events
 } = Mixly;
 
 class StatusBarTabs {
     static {
         this.CTRL_BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-ctrl-btn.html'));
         this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar-tab-menu.html'));
+
+        /**
+         * {
+         *      "type": Array | String
+         *      "statusBar": Class
+         * }
+         **/
+        this.config = {};
+
+        this.register = function(config) {
+            if (config.type instanceof Array) {
+                for (let i of config.type) {
+                    this.config[i] = config.statusBar;
+                }
+            } else {
+                this.config[config.type] = config.statusBar;
+            }
+        }
     }
 
-    constructor(id) {
-        this.id = id;
+    constructor(element) {
+        this.$content = $(element);
+        this.$container = this.$content.children();
+        this.id = IdGenerator.generate();
+        this.$container.attr('lay-filter', this.id);
         this.shown = false;
         this.statusBars = {};
         this.statusBarIndexToIds = [];
+        this.events = new Events(['show', 'hide']);
         this.addChangeListener();
     }
 
     add(type, id, name = null) {
+        if (this.getStatusBarById(id) || !StatusBarTabs.config[type]) {
+            return;
+        }
+
         let aceId = id;
         let statusBar;
-        let config = IdGenerator.generate(['tabId', 'titleId', 'contentId']);
+        let $title = $('<div></div>');
+        let $content = $('<div></div>');
+        let tabId = IdGenerator.generate();
         
         try {
             aceId = aceId.replaceAll('/', '-')
@@ -50,27 +80,20 @@ class StatusBarTabs {
         } catch (error) {
             console.log(error);
         }
-        if (this.getStatusBarById(id)) {
-            return;
-        }
         
-        if (type === 'serial') {
-            statusBar = StatusBarSerial;
-        } else {
-            statusBar = StatusBarTerminal;
-        }
+        statusBar = StatusBarTabs.config[type];
 
         element.tabAdd(this.id, {
-            title: XML.render(statusBar.TITLE, {
-                title: name ?? id,
-                id: config.titleId
-            }),
-            content: XML.render(statusBar.CONTENT, {
-                id: config.contentId
-            }),
-            id: config.tabId
+            title: $title[0],
+            content: $content[0],
+            id
         });
-        this.statusBars[id] = new statusBar(id, config);
+        this.statusBars[id] = new statusBar({
+            id,
+            title: name ?? id,
+            titleElement: $title[0],
+            contentElement: $content[0]
+        });
         this.statusBarIndexToIds.push(id);
     }
 
@@ -84,7 +107,7 @@ class StatusBarTabs {
         if (!statusBar) {
             return;
         }
-        element.tabChange(this.id, statusBar.config.tabId);
+        element.tabChange(this.id, statusBar.id);
     }
 
     getStatusBarById(id) {
@@ -114,12 +137,13 @@ class StatusBarTabs {
         this.removeStatusBarById(id);
     }
 
-    // 可覆盖
     show() {
+        this.events.run('show');
     }
 
     // 可覆盖
     hide() {
+        this.events.run('hide');
     }
     
     toggle() {
@@ -190,6 +214,16 @@ class StatusBarTabs {
         return { list: [], empty: Msg.Lang['无选项'] };
     }
 }
+
+StatusBarTabs.register({
+    type: ['terminal'],
+    statusBar: StatusBarTerminal
+});
+
+StatusBarTabs.register({
+    type: ['serial'],
+    statusBar: StatusBarSerial
+});
 
 Mixly.StatusBarTabs = StatusBarTabs;
 

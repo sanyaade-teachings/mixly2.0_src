@@ -61,13 +61,11 @@ class Workspace {
         }
     }
 
-    constructor(dom) {
-        const $parentContainer = $(dom);
+    constructor(element) {
+        const $parentContainer = $(element);
         this.id = IdGenerator.generate();
-        this.statusBarTabsFilter = IdGenerator.generate();
         this.$content = $(XML.render(Workspace.TEMPLATE, {
-            mId: this.id,
-            statusBarTabsFilter: this.statusBarTabsFilter
+            mId: this.id
         }));
         $parentContainer.append(this.$content);
         this.$leftTabs = this.$content.find('.left-tabs');
@@ -78,7 +76,7 @@ class Workspace {
         this.$dragVRight = this.$content.find('.drag-v-right');
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
-        this.statusBarTabs = new StatusBarTabs(this.statusBarTabsFilter);
+        this.statusBarTabs = new StatusBarTabs(this.$statusBarTabs[0]);
         this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
@@ -120,8 +118,9 @@ class Workspace {
     }
 
     addFuncForStatusbarTabs() {
-        this.statusBarTabs.show = () => this.dragH.show();
-        this.statusBarTabs.hide = () => this.dragH.hide();
+        const { events } = this.statusBarTabs;
+        events.bind('show', () => this.dragH.show());
+        events.bind('hide', () => this.dragH.hide());
     }
 
     addDragEvents() {

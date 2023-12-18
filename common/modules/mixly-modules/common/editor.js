@@ -78,8 +78,8 @@ Editor.init = () => {
         preconditionFn: () => {
             return true;
         },
-        callback: (dom) => {
-            const $a = $(dom).children('a');
+        callback: (element) => {
+            const $a = $(element).children('a');
             const drag = Editor.workspace.dragVLeft;
             if (drag.shown === Drag.Extend.NEGATIVE) {
                 drag.exitfull(Drag.Extend.NEGATIVE);
@@ -119,8 +119,8 @@ Editor.init = () => {
         preconditionFn: () => {
             return true;
         },
-        callback: (dom) => {
-            const $a = $(dom).children('a');
+        callback: (element) => {
+            const $a = $(element).children('a');
             const drag = Editor.workspace.dragVRight;
             if (drag.shown === Drag.Extend.POSITIVE) {
                 drag.exitfull(Drag.Extend.POSITIVE);
@@ -160,8 +160,8 @@ Editor.init = () => {
         preconditionFn: () => {
             return true;
         },
-        callback: (dom) => {
-            const $a = $(dom).children('a');
+        callback: (element) => {
+            const $a = $(element).children('a');
             const drag = Editor.workspace.dragH;
             if (drag.shown === Drag.Extend.POSITIVE) {
                 drag.exitfull(Drag.Extend.POSITIVE);

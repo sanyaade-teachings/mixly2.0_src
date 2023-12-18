@@ -180,6 +180,10 @@
         "provide": ["_"],
         "require": []
     }, {
+        "path": "modules/web-modules/mprogress.min.js",
+        "provide": ["Mprogress"],
+        "require": []
+    }, {
         "path": "modules/web-modules/jquery/select2.min.js",
         "provide": ["$.select2"],
         "require": ["$"]

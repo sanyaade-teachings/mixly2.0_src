@@ -59,9 +59,9 @@ class EditorMix extends EditorBase {
         ];
     }
 
-    constructor(dom, extname='.mix') {
+    constructor(element, extname='.mix') {
         super();
-        const $parentContainer = $(dom);
+        const $parentContainer = $(element);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorMix.TEMPLATE, { mId: this.id }));
         this.$btnsContent = $(EditorMix.BTNS_TEMPLATE);
@@ -94,6 +94,7 @@ class EditorMix extends EditorBase {
     }
 
     init() {
+        super.init();
         this.addDragEvents();
         this.addBtnEvents();
         this.blockEditor.init();
@@ -243,27 +244,32 @@ class EditorMix extends EditorBase {
     }
 
     undo() {
+        super.undo();
         const editor = this.getCurrentEditor();
         editor.undo();
     }
 
     redo() {
+        super.redo();
         const editor = this.getCurrentEditor();
         editor.redo();
     }
 
     resize() {
+        super.resize();
         this.blockEditor.resize();
         this.codeEditor.resize();
     }
 
     dispose() {
+        super.dispose();
         this.$btnsContent.remove();
         this.blockEditor.dispose();
         this.codeEditor.dispose();
     }
 
     onMounted() {
+        super.onMounted();
         this.blockEditor.onMounted();
         this.codeEditor.onMounted();
     }

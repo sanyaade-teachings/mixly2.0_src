@@ -52,8 +52,8 @@ class EditorsManager {
         }
     }
 
-    constructor(dom) {
-        const $parentContainer = $(dom);
+    constructor(element) {
+        const $parentContainer = $(element);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorsManager.TEMPLATE, {
             mId: this.id

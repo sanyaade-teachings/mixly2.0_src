@@ -27,9 +27,9 @@ class Drag {
         };
     }
 
-    constructor(dom, config) {
+    constructor(element, config) {
         this.config = { ...Drag.DEFAULT_CONFIG, ...config };
-        this.$container = $(dom);
+        this.$container = $(element);
         const $children = this.$container.children();
         this.$first = $($children[0]);
         this.$last = $($children[1]);
@@ -70,6 +70,12 @@ class Drag {
         }
         this.firstDisplay = this.$first.css('display');
         this.lastDisplay = this.$last.css('display');
+        if (this.firstDisplay === 'none') {
+            this.firstDisplay = 'unset';
+        }
+        if (this.lastDisplay === 'none') {
+            this.lastDisplay = 'unset';
+        }
         this.events = new Events(['ondragStart', 'ondragEnd', 'onfull', 'exitfull', 'sizeChanged']);
         this.addEventListener();
     }

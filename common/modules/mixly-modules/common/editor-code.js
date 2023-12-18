@@ -27,8 +27,8 @@ class EditorCode extends EditorAce {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-code.html'));
     }
 
-    constructor(dom, extname='.c') {
-        const $parentContainer = $(dom);
+    constructor(element, extname='.c') {
+        const $parentContainer = $(element);
         const id = IdGenerator.generate();
         const $content = $(XML.render(EditorCode.TEMPLATE, {
             mId: id

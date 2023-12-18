@@ -19,9 +19,9 @@ class EditorUnknown extends EditorBase {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-unknown.html'));
     }
 
-    constructor(dom, extname) {
+    constructor(element, extname) {
         super();
-        const $parentContainer = $(dom);
+        const $parentContainer = $(element);
         this.id = IdGenerator.generate();
         this.$content = $(XML.render(EditorUnknown.TEMPLATE, {
             mId: this.id

@@ -1,27 +1,46 @@
 goog.loadJs('common', () => {
 
+goog.require('Mixly.XML');
 goog.require('Mixly.StatusBar');
 goog.provide('Mixly.StatusBarSerial');
 
-const { StatusBar } = Mixly;
+const { XML, StatusBar } = Mixly;
 
 class StatusBarSerial extends StatusBar {
-    static CONTENT = '<pre class="tab-ace" id="{{d.id}}" align="center"></pre>';
-    static TITLE = '{{d.title}}<span id="{{d.id}}" class="layui-badge-dot layui-bg-orange"></span>';
+    static CONTENT = '<pre class="tab-ace" align="center"></pre>';
+    static TITLE = '<div>{{d.title}}<span class="layui-badge-dot layui-bg-orange"></span><div>';
 
-    constructor(id, config) {
-        super($(`#${config.contentId}`)[0]);
-        this.id = id;
+    /**
+     * config = {
+     *      id: string,
+     *      title: string,
+     *      titleElement: Element,
+     *      contentElement: Element
+     * }
+     **/
+    constructor(config) {
+        let $parentTitleContainer = $(config.titleElement);
+        let $parentContentContainer = $(config.contentElement);
+        let $title = $(XML.render(StatusBarSerial.TITLE, {
+            title: config.title
+        }));
+        let $content = $(StatusBarSerial.CONTENT);
+        $parentTitleContainer.append($title);
+        $parentContentContainer.append($content);
+        super({
+            ...config,
+            titleElement: $title[0],
+            contentElement: $content[0]
+        });
         this.opened = true;
-        this.config = config;
+        this.$span = $title.children('span');
     }
 
     open() {
         if (this.isOpened()) {
             return;
         }
-        let $span = $(`#${this.config.titleId}`);
-        $span.removeClass('layui-bg-blue').addClass('layui-bg-orange');
+        this.$span.removeClass('layui-bg-blue').addClass('layui-bg-orange');
         this.opened = true;
     }
 
@@ -29,8 +48,7 @@ class StatusBarSerial extends StatusBar {
         if (!this.isOpened()) {
             return;
         }
-        let $span = $(`#${this.config.titleId}`);
-        $span.removeClass('layui-bg-orange').addClass('layui-bg-blue');
+        this.$span.removeClass('layui-bg-orange').addClass('layui-bg-blue');
         this.opened = false;
     }
 

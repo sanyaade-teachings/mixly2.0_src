@@ -19,9 +19,9 @@ class EditorAce extends EditorBase {
         this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
     }
 
-    constructor(dom) {
+    constructor(element) {
         super();
-        this.$container = $(dom);
+        this.$container = $(element);
         this.destroyed = false;
         this.$content = this.$container;
     }
@@ -35,6 +35,7 @@ class EditorAce extends EditorBase {
     }
 
     dispose() {
+        super.dispose();
         this.editor.destroy();
         this.destroyed = true;
     }
@@ -249,10 +250,12 @@ class EditorAce extends EditorBase {
     }
 
     undo() {
+        super.undo();
         this.editor.undo();
     }
 
     redo() {
+        super.redo();
         this.editor.redo();
     }
 

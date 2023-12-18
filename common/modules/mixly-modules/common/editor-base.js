@@ -12,6 +12,7 @@ class EditorBase {
         this.$btnsGroup = null;
         this.$tab = null;
         this.dirty = false;
+        this.isActivated = true;
     }
 
     init() {}
@@ -28,9 +29,13 @@ class EditorBase {
 
     dispose() {}
 
-    onMounted() {}
+    onMounted() {
+        this.isActivated = true;
+    }
 
-    onUnmounted() {}
+    onUnmounted() {
+        this.isActivated = false;
+    }
 
     addDirty() {
         if (!this.$tab || this.dirty) {

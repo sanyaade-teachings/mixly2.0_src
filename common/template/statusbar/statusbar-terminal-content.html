@@ -1,0 +1,36 @@
+<style type="text/css">
+    div[m-id="{{d.mId}}"] {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    div[m-id="{{d.mId}}"] > .progress {
+        height: 3px;
+        border-radius: 0;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .progress .bar-bg {
+        background-color: #fff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .progress .bar-bg {
+        background-color: #000;
+    }
+
+    div[m-id="{{d.mId}}"] > .terminal {
+        width: auto;
+        height: 100%;
+        border: solid #ddd;
+        border-width: 0px;
+        border-radius: 0px;
+        word-break: normal;
+        text-align: left;
+        resize: none;
+    }
+</style>
+<div m-id="{{d.mId}}">
+    <div class="progress"></div>
+    <pre class="terminal" align="center"></pre>
+<div>

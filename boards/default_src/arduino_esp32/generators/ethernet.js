@@ -31,11 +31,13 @@ export const esp_now_send = function () {
     Blockly.Arduino.definitions_['include_WifiEspNow'] = '#include <WifiEspNow.h>';
     const macName = macList.join('');
     Blockly.Arduino.definitions_['var_declare_PEER_' + macName] = 'uint8_t PEER_' + macName + '[] = {' + mac + '};\n';
-    Blockly.Arduino.definitions_['function_sendMessage'] = 'bool sendMessage(String _data) {\n'
+    Blockly.Arduino.definitions_['function_sendMessage'] = 'bool sendMessage(uint8_t *macAddress, String _data) {\n'
+        + '  bool ok = WifiEspNow.addPeer(macAddress, 0, nullptr, WIFI_IF_STA);\n'
+        + '  if (!ok) return false;\n'
         + '  uint16_t length = _data.length();\n'
         + '  char _msg[length];\n'
         + '  strcpy(_msg, _data.c_str());\n'
-        + '  return WifiEspNow.send(PEER_' + macName + ', reinterpret_cast<const uint8_t*>(_msg), length);\n'
+        + '  return WifiEspNow.send(macAddress, reinterpret_cast<const uint8_t*>(_msg), length);\n'
         + '}\n';
     Blockly.Arduino.setups_['setup_esp_now'] = `
   WiFi.mode(WIFI_STA);
@@ -48,13 +50,7 @@ export const esp_now_send = function () {
     Serial.println("WifiEspNow初始化失败");
     ESP.restart();
   }`;
-    Blockly.Arduino.setups_['setup_esp_now_send_' + macName] = `
-  ok = WifiEspNow.addPeer(PEER_${macName}, 0, nullptr, WIFI_IF_STA);
-  if (!ok) {
-    Serial.println("WifiEspNow.addPeer() failed");
-    ESP.restart();
-  }`;
-    var code = 'if (sendMessage(' + data + ')) {\n'
+    var code = `if (sendMessage(PEER_${macName}, ${data})) {\n`
         + branch
         + '} else {\n'
         + branch1

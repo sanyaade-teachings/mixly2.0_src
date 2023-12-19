@@ -46,7 +46,7 @@ class UserEvents {
             recordLine.currentCode = currentCode;
             recordLine.file_name = LocalStorage.get('file_name') ?? '';
             recordLine.mid = LocalStorage.get('module_id') ?? '';
-            recordLine.time = (new Date()).toISOString();
+            recordLine.time = (new Date()).toLocaleString();
             let actionType = 1;
             switch (event.type) {
             case Blockly.Events.BLOCK_MOVE:

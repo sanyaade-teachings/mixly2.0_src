@@ -1,14 +1,24 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
+goog.require('Mixly.Env');
 goog.require('Mixly.XML');
+goog.require('Mixly.IdGenerator');
 goog.require('Mixly.StatusBar');
 goog.provide('Mixly.StatusBarSerial');
 
-const { XML, StatusBar } = Mixly;
+const {
+    Env,
+    XML,
+    IdGenerator,
+    StatusBar
+} = Mixly;
 
 class StatusBarSerial extends StatusBar {
-    static CONTENT = '<pre class="tab-ace" align="center"></pre>';
-    static TITLE = '<div>{{d.title}}<span class="layui-badge-dot layui-bg-orange"></span><div>';
+    static {
+        this.TITLE = '<div>{{d.title}}<span class="layui-badge-dot layui-bg-orange"></span><div>';
+        this.CONTENT = goog.get(path.join(Env.templatePath, 'statusbar/statusbar-serial-content.html'));
+    }
 
     /**
      * config = {
@@ -24,13 +34,14 @@ class StatusBarSerial extends StatusBar {
         let $title = $(XML.render(StatusBarSerial.TITLE, {
             title: config.title
         }));
-        let $content = $(StatusBarSerial.CONTENT);
+        let mId = IdGenerator.generate();
+        let $content = $(XML.render(StatusBarSerial.CONTENT, { mId }));
         $parentTitleContainer.append($title);
         $parentContentContainer.append($content);
         super({
             ...config,
             titleElement: $title[0],
-            contentElement: $content[0]
+            contentElement: $content.find('.serial')[0]
         });
         this.opened = true;
         this.$span = $title.children('span');

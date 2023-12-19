@@ -1,0 +1,22 @@
+<style type="text/css">
+    div[m-id="{{d.mId}}"] {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    div[m-id="{{d.mId}}"] > .serial {
+        width: auto;
+        height: 100%;
+        border: solid #ddd;
+        border-width: 0px;
+        border-radius: 0px;
+        word-break: normal;
+        text-align: left;
+        resize: none;
+    }
+</style>
+<div m-id="{{d.mId}}">
+    <pre class="serial" align="center"></pre>
+<div>

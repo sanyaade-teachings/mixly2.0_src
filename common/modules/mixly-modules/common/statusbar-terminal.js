@@ -44,11 +44,12 @@ class StatusBarTerminal extends StatusBar {
             titleElement: $title[0],
             contentElement: $content.find('.terminal')[0]
         });
-        var mprogress3 = new Mprogress({
+        /*var mprogress3 = new Mprogress({
+            speed: 1000,
             template: 3,
             parent: `[m-id="${mId}"] > .progress`
         });
-        mprogress3.start();
+        mprogress3.start();*/
     }
 }
 

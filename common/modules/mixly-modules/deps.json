@@ -673,7 +673,10 @@
     {
         "path": "/common/statusbar-serial.js",
         "require": [
+            "path",
+            "Mixly.Env",
             "Mixly.XML",
+            "Mixly.IdGenerator",
             "Mixly.StatusBar"
         ],
         "provide": [

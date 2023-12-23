@@ -504,7 +504,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const mainWorkspace = Workspace.getMain();
-    const editor = mainWorkspace.editorManager.getActiveEditor();
+    const editor = mainWorkspace.editorManager.getActive();
     const code = editor.getValue();
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
     const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
@@ -671,7 +671,7 @@ Nav.register({
         }
         const workspace = Workspace.getMain();
         const { editorManager } = workspace;
-        const editor = editorManager.getActiveEditor();
+        const editor = editorManager.getActive();
         if (!editor) {
             return false;
         }
@@ -697,7 +697,7 @@ Nav.register({
         }
         const workspace = Workspace.getMain();
         const { editorManager } = workspace;
-        const editor = editorManager.getActiveEditor();
+        const editor = editorManager.getActive();
         if (!editor) {
             return false;
         }

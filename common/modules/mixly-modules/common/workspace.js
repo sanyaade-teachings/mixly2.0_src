@@ -9,9 +9,9 @@ goog.require('Mixly.DragH');
 goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorsManager');
-goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Electron.FileTree');
 goog.require('Mixly.Web.FileTree');
+goog.require('Mixly.StatusBarsManager')
 goog.provide('Mixly.Workspace');
 
 const {
@@ -23,7 +23,7 @@ const {
     DragV,
     IdGenerator,
     EditorsManager,
-    StatusBarTabs,
+    StatusBarsManager,
     Electron = {},
     Web = {}
 } = Mixly;
@@ -76,7 +76,7 @@ class Workspace {
         this.$dragVRight = this.$content.find('.drag-v-right');
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
-        this.statusBarTabs = new StatusBarTabs(this.$statusBarTabs[0]);
+        this.statusBarTabs = new StatusBarsManager(this.$statusBarTabs[0]);
         this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
@@ -93,24 +93,25 @@ class Workspace {
         this.fileTree = new FileTree(this.$leftSidebar[0]);
         const { events } = this.fileTree;
         events.bind('selectLeaf', (selected) => {
-            this.editorManager.editorTabs.addTab({
+            this.editorManager.tabs.addTab({
                 name: selected[0].text,
                 title: selected[0].id,
-                id: selected[0].id
+                id: selected[0].id,
+                type: path.extname(selected[0].id)
             });
         });
         this.fileTree.setDirPath('D:/gitee');
     }
 
     addEventsForEditorManager() {
-        const { events } = this.editorManager.editorTabs;
-        events.bind('activeTabChange', (event) => {
+        const { events } = this.editorManager.tabs;
+        events.bind('activeChange', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.fileTree.select(tabId);
         });
 
-        events.bind('tabRemove', (event) => {
+        events.bind('destroyed', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.fileTree.deselect(tabId);

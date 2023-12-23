@@ -1,13 +1,11 @@
 goog.loadJs('web', () => {
 
-goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Web.Utilities');
 goog.require('Mixly.Web.SerialPort');
 goog.provide('Mixly.Web.Esptool');
 
 const {
-    StatusBarTabs,
     Msg,
     Web
 } = Mixly;

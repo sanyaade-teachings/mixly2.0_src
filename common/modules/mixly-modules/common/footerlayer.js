@@ -12,7 +12,7 @@ const { Env, XML, Msg } = Mixly;
 class FooterLayer {
     static {
         // 弹层模板和一些默认配置项
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer.html'));
+        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer.html'));
         this.DEFAULT_CONFIG_TIPPY = {
             allowHTML: true,
             trigger: 'manual',
@@ -85,7 +85,7 @@ class FooterLayer {
     }
 
     #addSharedMethod_() {
-        let sharedMethod = [ 'hide', 'show', 'destroy', 'setProps', 'setContent' ];
+        let sharedMethod = ['hide', 'show', 'destroy', 'setProps', 'setContent'];
         for (let type of sharedMethod) {
             this[type] = this.layer[type];
         }

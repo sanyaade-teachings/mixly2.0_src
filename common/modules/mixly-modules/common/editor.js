@@ -3,7 +3,6 @@ goog.loadJs('common', () => {
 goog.require('Blockly');
 goog.require('Mixly.DragH');
 goog.require('Mixly.EditorMix');
-goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
@@ -18,7 +17,6 @@ const {
     DragH,
     DragV,
     EditorMix,
-    StatusBarTabs,
     Msg,
     Config,
     Nav,
@@ -34,12 +32,12 @@ Editor.init = () => {
     Editor.workspace = new Workspace($('#mixly-body')[0]);
     Mixly.mainStatusBarTabs = Editor.workspace.statusBarTabs;
     const { editorManager } = Editor.workspace;
-    const { events } = editorManager.editorTabs;
-    events.bind('activeTabChange', (event) => {
+    const { events } = editorManager.tabs;
+    events.bind('activeChange', (event) => {
         Nav.resize();
     });
-    events.bind('tabRemove', (event) => {
-        !editorManager.getActiveEditor() && Nav.resize();
+    events.bind('destroyed', (event) => {
+        !editorManager.getActive() && Nav.resize();
     });
     Nav.register({
         icon: 'icon-ccw',
@@ -47,7 +45,7 @@ Editor.init = () => {
         id: 'undo-btn',
         displayText: Blockly.Msg.MSG['undo'],
         preconditionFn: () => {
-            return !!editorManager.getActiveEditor();
+            return !!editorManager.getActive();
         },
         callback: () => Editor.mainEditor.undo(),
         scopeType: Nav.Scope.LEFT,
@@ -59,16 +57,17 @@ Editor.init = () => {
         id: 'redo-btn',
         displayText: Blockly.Msg.MSG['redo'],
         preconditionFn: () => {
-            return !!editorManager.getActiveEditor();
+            return !!editorManager.getActive();
         },
         callback: () => Editor.mainEditor.redo(),
         scopeType: Nav.Scope.LEFT,
         weight: 1
     });
 
-    editorManager.editorTabs.addTab({
+    editorManager.tabs.addTab({
         name: 'Untitled-1.mix',
-        title: 'Untitled-1.mix'
+        title: 'Untitled-1.mix',
+        type: '.mix'
     });
 
     const leftSideBarOption = Nav.register({

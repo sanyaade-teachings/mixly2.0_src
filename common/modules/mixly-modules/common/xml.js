@@ -35,19 +35,6 @@ XML.TEMPLATE_CONFIG = [
         },
         appendToBody: true
     }, {
-        type: 'BOARD_SELECTOR',
-        path: '/board-selector-div.html',
-        config: {},
-        appendToBody: false
-    }, {
-        type: 'PORT_SELECTOR',
-        path: '/port-selector-div.html',
-        config: {
-            selectPort: Msg.Lang['选择串口'],
-            noPort: Msg.Lang['无可用串口']
-        },
-        appendToBody: false
-    }, {
         type: 'PARSE_MIX_ERROR_DIV',
         path: '/parse-mix-error-div.html',
         config: {},

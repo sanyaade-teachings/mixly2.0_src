@@ -27,7 +27,7 @@ class EditorCode extends EditorAce {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-code.html'));
     }
 
-    constructor(element, extname='.c') {
+    constructor(element) {
         const $parentContainer = $(element);
         const id = IdGenerator.generate();
         const $content = $(XML.render(EditorCode.TEMPLATE, {
@@ -36,7 +36,7 @@ class EditorCode extends EditorAce {
         const $editorContainer = $content.find('.editor');
         super($editorContainer[0]);
         this.id = id;
-        this.extname = extname.toLowerCase();
+        this.extname = '.c';
         this.$content = $content;
         this.$loading = this.$content.find('.loading');
         this.$editorContainer = $editorContainer;

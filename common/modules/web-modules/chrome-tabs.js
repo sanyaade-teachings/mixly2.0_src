@@ -68,10 +68,6 @@
       this.el.setAttribute('data-chrome-tabs-instance-id', this.instanceId)
       instanceId += 1
 
-      $(document).on('click', '.chrome-tab', (event) => {
-        this.setCurrentTab(event.currentTarget)
-      })
-
       this.setupCustomProperties()
       this.setupStyleEl()
       this.setupEvents()
@@ -122,17 +118,24 @@
 
       tabProperties = Object.assign({}, defaultTapProperties, tabProperties)
       this.tabContentEl.appendChild(tabEl)
+      this.setTabClickEventListener(tabEl)
       this.setTabCloseEventListener(tabEl)
       this.updateTab(tabEl, tabProperties)
-      this.emit('tabAdd', { tabEl })
+      this.emit('created', { tabEl })
       if (!background) this.setCurrentTab(tabEl)
       return tabEl;
+    }
+
+    setTabClickEventListener(tabEl) {
+      tabEl.addEventListener('click', event => {
+        this.setCurrentTab(tabEl)
+      });
     }
 
     setTabCloseEventListener(tabEl) {
       tabEl.querySelector('.chrome-tab-close').addEventListener('click', event => {
         event.stopPropagation()
-        if (!this.beforeRemoveTab({ detail: { tabEl } })) {
+        if (!this.checkDestroy({ detail: { tabEl } })) {
           return
         }
         this.removeTab(tabEl)
@@ -152,7 +155,7 @@
       if (activeTabEl === tabEl) return
       if (activeTabEl) activeTabEl.removeAttribute('active')
       tabEl.setAttribute('active', '')
-      this.emit('activeTabChange', { tabEl })
+      this.emit('activeChange', { tabEl })
     }
 
     removeTab(tabEl) {
@@ -163,8 +166,9 @@
           this.setCurrentTab(tabEl.previousElementSibling)
         }
       }
+      this.emit('beforeDestroy', { tabEl })
       tabEl.parentNode.removeChild(tabEl)
-      this.emit('tabRemove', { tabEl })
+      this.emit('destroyed', { tabEl })
     }
 
     updateTab(tabEl, tabProperties) {
@@ -188,9 +192,13 @@
       if (tabProperties.title) {
         tabEl.setAttribute('title', tabProperties.title)
       }
+
+      if (tabProperties.type) {
+        tabEl.setAttribute('data-tab-type', tabProperties.type)
+      }
     }
 
-    beforeRemoveTab(event) {
+    checkDestroy(event) {
       return true
     }
   }

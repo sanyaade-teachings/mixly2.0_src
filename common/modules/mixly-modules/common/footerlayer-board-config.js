@@ -21,7 +21,7 @@ const { dropdown } = layui;
 class FooterLayerBoardConfig extends FooterLayer {
     static {
         // 弹层模板
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer-board-config.html'));
+        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-board-config.html'));
     }
 
     /**

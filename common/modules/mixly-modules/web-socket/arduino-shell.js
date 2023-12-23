@@ -4,7 +4,6 @@ goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
-goog.require('Mixly.StatusBarTabs');
 goog.require('Mixly.Title');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MFile');
@@ -17,7 +16,6 @@ goog.provide('Mixly.WebSocket.ArduShell');
 const {
     Env,
     LayerExt,
-    StatusBarTabs,
     Title,
     Boards,
     MFile,

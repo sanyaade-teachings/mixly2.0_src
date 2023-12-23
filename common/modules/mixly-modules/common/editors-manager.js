@@ -10,7 +10,9 @@ goog.require('Mixly.EditorCode');
 goog.require('Mixly.EditorMd');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorUnknown');
-goog.require('Mixly.EditorsTabs');
+goog.require('Mixly.EditorWelcome');
+goog.require('Mixly.Registry');
+goog.require('Mixly.PagesManager');
 goog.provide('Mixly.EditorsManager');
 
 const {
@@ -23,184 +25,100 @@ const {
     EditorMd,
     EditorBlockly,
     EditorUnknown,
-    EditorsTabs
+    EditorWelcome,
+    Registry,
+    PagesManager
 } = Mixly;
 
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
 
-class EditorsManager {
+class EditorsManager extends PagesManager {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-manager.html'));
-        this.WELCOME_PAGE = goog.get(path.join(Env.templatePath, 'editor/welcome-page.html'));
-        /**
-         * {
-         *      "ext": Array | String
-         *      "editor": Class
-         * }
-         **/
-        this.config = {};
-
-        this.register = function(config) {
-            if (config.ext instanceof Array) {
-                for (let i of config.ext) {
-                    this.config[i] = config.editor;
-                }
-            } else {
-                this.config[config.ext] = config.editor;
-            }
-        }
+        this.TAB_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-tab.html'));
+        this.typesRegistry = new Registry();
+        this.typesRegistry.register(['.mix', '.mil'], EditorMix);
+        this.typesRegistry.register('.test', EditorBlockly);
+        this.typesRegistry.register(['.xml', '.txt', '.ino', '.json'], EditorCode);
+        this.typesRegistry.register('.md', EditorMd);
+        this.typesRegistry.register('#default', EditorUnknown);
+        this.typesRegistry.register('#welcome', EditorWelcome);
     }
 
     constructor(element) {
-        const $parentContainer = $(element);
-        this.id = IdGenerator.generate();
-        this.$content = $(XML.render(EditorsManager.TEMPLATE, {
-            mId: this.id
+        const ids = IdGenerator.generate(['managerId', 'tabId']);
+        const $manager = $(XML.render(EditorsManager.TEMPLATE, {
+            mId: ids.managerId
         }));
-        this.$welcomePage = $(XML.render(EditorsManager.WELCOME_PAGE, {
-            mId: IdGenerator.generate()
+        const $tab = $(XML.render(EditorsManager.TAB_TEMPLATE, {
+            mId: ids.tabId
         }));
-        this.$container = this.$content.children('div');
-        this.$tabsContainer = this.$container.children('.editor-manager-tabs');
-        this.$editorContainer = this.$container.children('.editor-manager-body');
-        this.editorTabs = new EditorsTabs(this.$tabsContainer[0]);
-        this.$container.append(this.$editorContainer);
-        $parentContainer.empty();
-        $parentContainer.append(this.$content);
-        this.$container.replaceWith(this.$welcomePage);
-        this.page = 'welcome';
-        this.#addEvents_();
-        this.editors = {};
-        this.activeEditorName = null;
+        super({
+            parentElem: element,
+            managerId: ids.managerId,
+            managerContentElem: $manager[0],
+            bodyElem: $manager.find('.body')[0],
+            tabElem: $manager.find('.tabs')[0],
+            tabId: ids.tabId,
+            tabContentElem: $tab[0],
+            typesRegistry: EditorsManager.typesRegistry
+        });
+        this.#addEventsListenerExt_();
     }
 
-    #addEvents_() {
-        const { events } = this.editorTabs;
+    #addEventsListenerExt_() {
+        const editorTabs = this.getTabs();
+        
         // active Tab被改变时触发
-        events.bind('activeTabChange', (event) => {
+        editorTabs.bind('activeChange', (event) => {
             const $btnsContainer = Nav.getEditorBtnsContainer();
-            const prevEditor = this.getActiveEditor();
-            if (prevEditor) {
-                prevEditor.onUnmounted();
-                prevEditor.getContainer().detach();
-                const $prevBtns = prevEditor.getBtnsContainer();
-                if ($prevBtns && $prevBtns.length) {
-                    $prevBtns.detach();
-                }
-            }
+            $btnsContainer.children().detach();
             const { tabEl } = event.detail;
-            const tabId = $(tabEl).attr('data-tab-id');
-            const editor = this.editors[tabId];
-            this.activeEditorName = tabId;
-            this.$editorContainer.empty();
-            this.$editorContainer.append(editor.getContainer());
+            const id = $(tabEl).attr('data-tab-id');
+            const editor = this.pagesRegistry.getItem(id);
             const $btns = editor.getBtnsContainer();
             if ($btns && $btns.length) {
                 $btnsContainer.append($btns);
             }
-            if (this.editors[tabId].inited) {
-                editor.onMounted();
-            }
         });
 
         // 添加新Tab时触发
-        events.bind('tabAdd', (event) => {
+        editorTabs.bind('created', (event) => {
             const { tabEl } = event.detail;
-            const tabId = $(tabEl).attr('data-tab-id');
-            const extname = path.extname(tabId);
-            let Editor = EditorsManager.config[extname];
-            if (!Editor) {
-                Editor = EditorUnknown;
-            }
-            this.editors[tabId] = new Editor(this.$editorContainer[0], extname);
-            this.editors[tabId].setTab($(tabEl));
-            this.editors[tabId].events.bind('onAddDirty', ($tab) => {
-                const id = $tab.attr('data-tab-id');
-                this.editorTabs.updateTab($tab[0], {
+            const id = $(tabEl).attr('data-tab-id');
+            const editor = this.pagesRegistry.getItem(id);
+            editor.events.bind('onAddDirty', ($tab) => {
+                this.tabs.updateTab($tab[0], {
                     title: id + ' - 未保存'
                 });
             });
-            this.editors[tabId].events.bind('onRemoveDirty', ($tab) => {
-                const id = $tab.attr('data-tab-id');
-                this.editorTabs.updateTab($tab[0], {
+            editor.events.bind('onRemoveDirty', ($tab) => {
+                this.tabs.updateTab($tab[0], {
                     title: id
                 });
             });
-            if (Object.keys(this.editors).length && this.page === 'welcome') {
-                this.$welcomePage.replaceWith(this.$container);
-                this.page = 'editor';
+        });
+
+        editorTabs.bind('checkDestroy', (event) => {
+            const { tabEl } = event.detail;
+            const id = $(tabEl).attr('data-tab-id');
+            const editor = this.pagesRegistry.getItem(id);
+            if (!editor) {
+                return;
             }
-            setTimeout(() => {
-                this.editors[tabId].init();
-                this.editors[tabId].inited = true;
-                this.editors[tabId].onMounted();
-                if (fs_plus.isFileSync(tabId)) {
-                    this.editors[tabId].setValue(fs.readFileSync(tabId, 'utf-8'));
-                }
-            }, 500);
+            return !editor.dirty;
         });
 
         // 移除已有Tab时触发
-        events.bind('tabRemove', (event) => {
-            const { tabEl } = event.detail;
-            const tabId = $(tabEl).attr('data-tab-id');
-            if (!this.editors[tabId]) {
-                return;
-            }
-            this.editors[tabId].dispose();
-            delete this.editors[tabId];
-            delete this.editorTabs.tabs[tabId];
-            if (!Object.keys(this.editors).length && this.page !== 'welcome') {
-                this.$container.replaceWith(this.$welcomePage);
-                this.page = 'welcome';
+        editorTabs.bind('destroyed', (event) => {
+            if (!this.pagesRegistry.length()) {
+                const $btnsContainer = Nav.getEditorBtnsContainer();
+                $btnsContainer.children().detach();
             }
         });
-
-        events.bind('beforeRemoveTab', (event) => {
-            const { tabEl } = event.detail;
-            const tabId = $(tabEl).attr('data-tab-id');
-            if (!this.editors[tabId]) {
-                return;
-            }
-            return !this.editors[tabId].dirty;
-        });
     }
-
-    resize() {
-        const editor = this.getActiveEditor();
-        editor && editor.resize();
-    }
-
-    getActiveEditor() {
-        if (!this.activeEditorName) {
-            return null;
-        }
-        return this.editors[this.activeEditorName];
-    }
-
-
 }
-
-EditorsManager.register({
-    ext: ['.mix', '.mil'],
-    editor: EditorMix
-});
-
-EditorsManager.register({
-    ext: ['.test'],
-    editor: EditorBlockly
-});
-
-EditorsManager.register({
-    ext: ['.xml', '.txt', '.ino', '.json'],
-    editor: EditorCode
-});
-
-EditorsManager.register({
-    ext: ['.md'],
-    editor: EditorMd
-});
 
 Mixly.EditorsManager = EditorsManager;
 

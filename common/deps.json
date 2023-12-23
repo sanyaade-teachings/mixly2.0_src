@@ -192,12 +192,20 @@
         "provide": ["$.jstree"],
         "require": ["$"]
     }, {
-        "path": "modules/web-modules/jquery/jquery.contextMenu.min.js",
-        "provide": ["$.contextMenu"],
-        "require": ["$.ui"]
+        "path": "ui/jquery-ui/jquery-ui.min.js",
+        "provide": ["$.ui"],
+        "require": ["$"]
     }, {
         "path": "modules/web-modules/jquery/jquery.ui.position.min.js",
-        "provide": ["$.ui"],
+        "provide": ["$.ui.position"],
+        "require": ["$.ui"]
+    }, {
+        "path": "modules/web-modules/jquery/jquery.contextMenu.min.js",
+        "provide": ["$.contextMenu"],
+        "require": ["$.ui.position"]
+    }, {
+        "path": "modules/web-modules/jquery/jquery.flot.min.js",
+        "provide": ["$.flot"],
         "require": ["$"]
     }, {
         "path": "modules/web-modules/marked/marked.min.js",

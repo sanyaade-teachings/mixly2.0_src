@@ -39,7 +39,7 @@ class EditorBlockly extends EditorBase {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
     }
 
-    constructor(element, extname='.mix') {
+    constructor(element) {
         super();
         const $parentContainer = $(element);
         this.id = IdGenerator.generate();
@@ -109,7 +109,6 @@ class EditorBlockly extends EditorBase {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
-        this.onMounted();
         const toolboxWidth = this.$editorContainer.find('.blocklyToolboxDiv').outerWidth(true);
         this.$loading.children('.left').animate({
           width: toolboxWidth + 'px'

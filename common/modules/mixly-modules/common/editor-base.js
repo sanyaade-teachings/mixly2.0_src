@@ -1,62 +1,39 @@
 goog.loadJs('common', () => {
 
 goog.require('Mixly.Events');
+goog.require('Mixly.PageBase');
 goog.provide('Mixly.EditorBase');
 
-const { Events } = Mixly;
+const { Events, PageBase } = Mixly;
 
-class EditorBase {
+class EditorBase extends PageBase {
     constructor() {
+        super();
         this.events = new Events(['onAddDirty', 'onRemoveDirty']);
-        this.$content = null;
         this.$btnsGroup = null;
-        this.$tab = null;
         this.dirty = false;
-        this.isActivated = true;
-    }
-
-    init() {}
-
-    getContainer() {
-        return this.$content;
     }
 
     getBtnsContainer() {
         return this.$btnsContent;
     }
 
-    resize() {}
-
-    dispose() {}
-
-    onMounted() {
-        this.isActivated = true;
-    }
-
-    onUnmounted() {
-        this.isActivated = false;
-    }
-
     addDirty() {
-        if (!this.$tab || this.dirty) {
+        super.addDirty();
+        const $tab = this.getTab();
+        if (!$tab || this.isDirty()) {
             return;
         }
-        this.events.run('onAddDirty', this.$tab);
-        this.$tab.addClass('dirty');
-        this.dirty = true;
+        this.events.run('onAddDirty', $tab);
     }
 
     removeDirty() {
-        if (!this.$tab || !this.dirty) {
+        super.removeDirty();
+        const $tab = this.getTab();
+        if (!$tab || !this.isDirty()) {
             return;
         }
-        this.events.run('onRemoveDirty', this.$tab);
-        this.$tab.removeClass('dirty');
-        this.dirty = false;
-    }
-
-    setTab($tab) {
-        this.$tab = $tab;
+        this.events.run('onRemoveDirty', $tab);
     }
 
     setValue(data, ext) {

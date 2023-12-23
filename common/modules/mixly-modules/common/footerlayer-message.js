@@ -18,10 +18,10 @@ const {
 class FooterLayerMessage extends FooterLayer {
     // 弹层模板
     static {
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer-message.html'));
-        this.MENU_ITEM = goog.get(path.join(Env.templatePath, 'footerlayer-message-item.html'));
-        this.MENU_ITEM_WITH_ICON = goog.get(path.join(Env.templatePath, 'footerlayer-message-item-with-icon.html'));
-        this.STYLES = [ 'primary', 'secondary', 'success', 'danger', 'warning' ];
+        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message.html'));
+        this.MENU_ITEM = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message-item.html'));
+        this.MENU_ITEM_WITH_ICON = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message-item-with-icon.html'));
+        this.STYLES = ['primary', 'secondary', 'success', 'danger', 'warning'];
     }
 
     constructor(domId) {

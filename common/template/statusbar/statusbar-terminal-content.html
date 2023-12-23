@@ -30,8 +30,31 @@
         text-align: left;
         resize: none;
     }
+
+    div[m-id="{{d.mId}}"] > .draw-container {
+        height: 500px;
+        padding: 20px 15px 15px 15px;
+    }
+
+    div[m-id="{{d.mId}}"] > .draw-container > .draw {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    div[m-id="{{d.mId}}"] > .draw-container > .draw .flot-y-axis {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div[m-id="{{d.mId}}"] > .draw-container > .draw .flot-y-axis > text {
+        position: relative;
+    }
 </style>
 <div m-id="{{d.mId}}">
     <div class="progress"></div>
     <pre class="terminal" align="center"></pre>
+    <div class="draw-container">
+        <div class="draw"></div>
+    </div>
 <div>

@@ -81,8 +81,7 @@ Interface.init = () => {
     if (FooterLayerExample instanceof Object) {
         FooterLayerExample.obj = new FooterLayerExample('mixly-example-menu');
     }
-    // Nav.init();
-    Nav.init_();
+    Nav.init();
     FooterBar.init();
     NavEvents.init();
     if (!goog.isElectron) {
@@ -116,7 +115,6 @@ window.addEventListener('load', () => {
     $('#toolbox').html($categories.html());
     LazyLoad.css(cssPathList);
     LazyLoad.js(scrpitPathList, () => {
-        Editor.init();
         Boards.init();
         if (window.frames.length != parent.frames.length) {
             window.userEvents = new UserEvents(Editor.blockEditor);
@@ -138,6 +136,7 @@ window.addEventListener('load', () => {
         Boards.changeTo(selectedBoardName);
         Boards.updateCategories(selectedBoardName);
         Msg.renderToolbox(true);
+        Editor.init();
         if (goog.isElectron) {
             const { Serial = undefined } = Electron;
             if (typeof Serial === 'object') {

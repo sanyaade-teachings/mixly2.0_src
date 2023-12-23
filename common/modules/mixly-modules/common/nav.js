@@ -29,37 +29,37 @@ const { element, form } = layui;
   * nav容器html片段
   * @type {String}
   */
-Nav.CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav.html'));
+Nav.CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav.html'));
 
 /**
   * nav按钮html片段
   * @type {String}
   */
-Nav.BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav-btn.html'));
+Nav.BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav-btn.html'));
 
 /**
   * nav子元素容器html片段
   * @type {String}
   */
-Nav.ITEM_CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav-item-container.html'));
+Nav.ITEM_CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav-item-container.html'));
 
 /**
   * nav子元素html片段
   * @type {String}
   */
-Nav.ITEM_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav-item.html'));
+Nav.ITEM_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav-item.html'));
 
 /**
   * 板卡选择器html片段
   * @type {String}
   */
-Nav.BOARD_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'board-selector-div.html'));
+Nav.BOARD_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/board-selector-div.html'));
 
 /**
   * 端口选择器html片段
   * @type {String}
   */
-Nav.PORT_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'port-selector-div.html'));
+Nav.PORT_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/port-selector-div.html'));
 
 Nav.Scope = {
     'LEFT': -1,
@@ -80,7 +80,7 @@ Nav.btns = {};
 Nav.weightsInfo = [];
 Nav.registerQueue = [];
 
-Nav.init_ = function() {
+Nav.init = function() {
     this.$container = $(XML.render(this.CONTAINER_TEMPLATE, {
         msg: {
             copyright: Blockly.Msg.MSG['copyright']

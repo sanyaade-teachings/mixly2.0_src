@@ -41,7 +41,7 @@ html[data-bs-theme=dark] .tippy-arrow {
 }
 
 .tippy-content .m-btn:hover {
-    color: #fff;
+    color: #fff !important;
 }
 
 html[data-bs-theme=light] .tippy-content .m-btn {

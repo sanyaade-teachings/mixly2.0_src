@@ -1311,16 +1311,17 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     portObj.serialport.open(function (error) {
         mainStatusBarTabs.add('serial', port);
         statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-        Serial.statusBarPortAddHotKey(port);
+        // Serial.statusBarPortAddHotKey(port);
         statusBarSerial.onRemove = function() {
-            const newPortObj = Serial.portsOperator[this.id];
+            let port = this.getPort();
+            const newPortObj = Serial.portsOperator[port];
             if (newPortObj && newPortObj.serialport && newPortObj.serialport.isOpen) {
                 newPortObj.serialport.close();
                 mainStatusBarTabs.changeTo("output");
                 if (statusBarTerminal.getValue().lastIndexOf("\n") != statusBarTerminal.getValue().length - 1) {
-                    statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + this.id + '\n');
+                    statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + port + '\n');
                 } else {
-                    statusBarTerminal.addValue(Msg.Lang['已关闭串口'] + this.id + '\n');
+                    statusBarTerminal.addValue(Msg.Lang['已关闭串口'] + port + '\n');
                 }
             }
         }
@@ -1736,7 +1737,7 @@ Serial.sleep = async function(ms) {
 Serial.getMenu = (ports) => {
     const { mainStatusBarTabs } = Mixly;
     let newPorts = [];
-    let tabsName = Object.keys(mainStatusBarTabs.statusBars);
+    let tabsName = mainStatusBarTabs.keys();
     for (let port of ports) {
         if (tabsName.includes(port.name)) {
             continue;
@@ -1748,21 +1749,21 @@ Serial.getMenu = (ports) => {
 
 Serial.addStatusbarTabExtFunc = () => {
     const { mainStatusBarTabs } = Mixly;
-    mainStatusBarTabs.addCtrlBtn();
-    mainStatusBarTabs.menuOptionOnclick = (event) => {
+    
+    mainStatusBarTabs.bind('onSelectMenu', (event) => {
         const port = $(event.currentTarget).attr('value');
         const portObj = Serial.portsOperator[port];
         Serial.connect(port, portObj.toolConfig.baudRates);
-    }
+    });
 
-    mainStatusBarTabs.getMenuOptions = () => {
+    mainStatusBarTabs.bind('getMenu', () => {
         const ports = Serial.getMenu(Serial.uploadPorts);
         let menu = { list: ports };
         if (!ports.length) {
             menu.empty = Msg.Lang['无可用串口'];
         }
         return menu;
-    }
+    });
 }
 
 });

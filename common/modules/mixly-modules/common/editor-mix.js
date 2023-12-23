@@ -59,7 +59,7 @@ class EditorMix extends EditorBase {
         ];
     }
 
-    constructor(element, extname='.mix') {
+    constructor(element) {
         super();
         const $parentContainer = $(element);
         this.id = IdGenerator.generate();
@@ -71,8 +71,8 @@ class EditorMix extends EditorBase {
         this.$blocklyContainer = this.$content.find('.editor-blockly');
         this.$codeContainer = this.$content.find('.editor-code');
         this.$btns = this.$btnsContent.find('button');
-        this.blockEditor = new EditorBlockly(this.$blocklyContainer[0], extname);
-        this.codeEditor = new EditorCode(this.$codeContainer[0], this.#getCodeExtname_());
+        this.blockEditor = new EditorBlockly(this.$blocklyContainer[0]);
+        this.codeEditor = new EditorCode(this.$codeContainer[0]);
         this.blocklyContextMenu = {
             code: {
                 isHtmlName: false,

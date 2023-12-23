@@ -1,27 +1,40 @@
 goog.loadJs('common', () => {
 
+goog.require('Mixly.IdGenerator');
+goog.require('Mixly.XML');
+goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.EditorAce');
 goog.provide('Mixly.StatusBar');
 
-const { Config, EditorAce } = Mixly;
+const {
+    IdGenerator,
+    XML,
+    Env,
+    Config,
+    EditorAce
+} = Mixly;
 const { USER } = Config;
 
 class StatusBar extends EditorAce {
-    /**
-     * config = {
-     *      id: string,
-     *      title: string,
-     *      titleElement: Element,
-     *      contentElement: Element
-     * }
-     **/
-    constructor(config) {
-        super(config.contentElement);
+    static {
+        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar/statusbar.html'));
+    }
+
+    constructor(element) {
+        const $parentContainer = $(element);
+        const id = IdGenerator.generate();
+        const $content = $(XML.render(StatusBar.TEMPLATE, {
+            mId: id
+        }));
+        super($content.children('div')[0]);
+        this.id = id;
+        this.$content = $content;
+        $parentContainer.append(this.$content);
+    }
+
+    init() {
         super.init();
-        this.id = config.id;
-        this.$title = $(config.titleElement);
-        this.$content =$(config.contentElement);
         this.toStatusBar();
     }
 

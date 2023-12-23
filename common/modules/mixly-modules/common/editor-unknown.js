@@ -19,7 +19,7 @@ class EditorUnknown extends EditorBase {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-unknown.html'));
     }
 
-    constructor(element, extname) {
+    constructor(element) {
         super();
         const $parentContainer = $(element);
         this.id = IdGenerator.generate();

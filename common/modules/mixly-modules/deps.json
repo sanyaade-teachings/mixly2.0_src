@@ -618,7 +618,7 @@
     {
         "path": "/common/page-base.js",
         "require": [
-            "Mixly"
+            "Mixly.Events"
         ],
         "provide": [
             "Mixly.PageBase"

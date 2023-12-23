@@ -133,11 +133,12 @@ class PagesTab {
     }
 
     updateTab(id, tabProperties) {
+        const elem = this.tabsRegistry.getItem(id);
         const newId = tabProperties.id || id;
-        this.chromeTabs.updateTab(tabEl, tabProperties);
+        this.chromeTabs.updateTab(elem, tabProperties);
         if (id !== newId) {
             this.tabsRegistry.unregister(id);
-            this.tabsRegistry.register(id, tabEl);
+            this.tabsRegistry.register(id, elem);
         }
     }
 

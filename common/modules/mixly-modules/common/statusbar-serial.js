@@ -10,12 +10,16 @@ class StatusBarSerial extends StatusBar {
         super(element);
         this.opened = false;
         this.$close = null;
+        this.addEventsType(['reconnect']);
     }
 
     init() {
         super.init();
         this.addDirty();
         const $tab = this.getTab();
+        $tab.dblclick(() => {
+            this.runEvent('reconnect');
+        });
         this.$close = $tab.find('.chrome-tab-close');
         this.$close.addClass('layui-badge-dot layui-bg-blue');
     }

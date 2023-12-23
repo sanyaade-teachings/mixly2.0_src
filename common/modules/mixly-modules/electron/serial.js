@@ -1309,22 +1309,28 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
     portObj.serialport.pipe(parser);
     portObj.refreshOutputBoxTimer = null;
     portObj.serialport.open(function (error) {
-        mainStatusBarTabs.add('serial', port);
-        statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-        // Serial.statusBarPortAddHotKey(port);
-        statusBarSerial.onRemove = function() {
-            let port = this.getPort();
-            const newPortObj = Serial.portsOperator[port];
-            if (newPortObj && newPortObj.serialport && newPortObj.serialport.isOpen) {
-                newPortObj.serialport.close();
-                mainStatusBarTabs.changeTo("output");
-                if (statusBarTerminal.getValue().lastIndexOf("\n") != statusBarTerminal.getValue().length - 1) {
-                    statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + port + '\n');
-                } else {
-                    statusBarTerminal.addValue(Msg.Lang['已关闭串口'] + port + '\n');
+        if (!statusBarSerial) {
+            mainStatusBarTabs.add('serial', port);
+            statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+            statusBarSerial.bind('destroyed', function() {
+                let port = statusBarSerial.getPort();
+                const newPortObj = Serial.portsOperator[port];
+                if (newPortObj && newPortObj.serialport && newPortObj.serialport.isOpen) {
+                    newPortObj.serialport.close();
+                    mainStatusBarTabs.changeTo("output");
+                    if (statusBarTerminal.getValue().lastIndexOf("\n") != statusBarTerminal.getValue().length - 1) {
+                        statusBarTerminal.addValue('\n' + Msg.Lang['已关闭串口'] + port + '\n');
+                    } else {
+                        statusBarTerminal.addValue(Msg.Lang['已关闭串口'] + port + '\n');
+                    }
                 }
-            }
+            });
+            statusBarSerial.bind('reconnect', function() {
+                let port = statusBarSerial.getPort();
+                Serial.portOpenOrClose(port);
+            });
         }
+        // Serial.statusBarPortAddHotKey(port);
         mainStatusBarTabs.changeTo(port);
         if (error) {
             statusBarSerial.close();

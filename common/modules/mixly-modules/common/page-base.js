@@ -1,7 +1,9 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly');
+goog.require('Mixly.Events');
 goog.provide('Mixly.PageBase');
+
+const { Events } = Mixly;
 
 class PageBase {
     #dirty = false;
@@ -11,9 +13,12 @@ class PageBase {
         this.$tab = null;
         this.inited = false;
         this.isActivated = true;
+        this.events = new Events(['addDirty', 'removeDirty', 'destroyed', 'created', 'active']);
     }
 
-    init() {}
+    init() {
+        this.events.run('created');
+    }
 
     getContainer() {
         return this.$content;
@@ -21,10 +26,13 @@ class PageBase {
 
     resize() {}
 
-    dispose() {}
+    dispose() {
+        this.events.run('destroyed');
+    }
 
     onMounted() {
         this.isActivated = true;
+        this.events.run('active');
     }
 
     onUnmounted() {
@@ -45,7 +53,8 @@ class PageBase {
         if (!$tab || this.isDirty()) {
             return;
         }
-        $tab.addClass('dirty');
+        this.events.run('addDirty');
+        $tab.addClass('dirty', $tab);
         this.#dirty = true;
     }
 
@@ -54,12 +63,33 @@ class PageBase {
         if (!$tab || !this.isDirty()) {
             return;
         }
+        this.events.run('removeDirty', $tab);
         $tab.removeClass('dirty');
         this.#dirty = false;
     }
 
     isDirty() {
         return this.#dirty;
+    }
+
+    bind(type, func) {
+        return this.events.bind(type, func);
+    }
+
+    unbind(id) {
+        this.events.unbind(id);
+    }
+
+    addEventsType(eventsType) {
+        this.events.addType(eventsType);
+    }
+
+    runEvent(eventsType) {
+        this.events.run(eventsType);
+    }
+
+    offEvent(eventsType) {
+        this.events.off(eventsType);
     }
 }
 

@@ -64,7 +64,10 @@ class PagesManager {
             }
             this.$editorContainer.empty();
             this.$editorContainer.append(page.getContainer());
-            page.inited && page.onMounted();
+            if (!page.inited) {
+                return;
+            }
+            page.onMounted();
         });
 
         // 添加新Tab时触发

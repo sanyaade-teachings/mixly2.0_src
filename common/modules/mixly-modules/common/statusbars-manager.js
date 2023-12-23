@@ -73,34 +73,7 @@ class StatusBarsManager extends PagesManager {
         this.shown = false;
         this.events = new Events(['show', 'hide', 'onSelectMenu', 'getMenu']);
         this.#addMenuBtn_();
-        this.#addEventsListenerExt_();
         StatusBarsManager.add(this);
-    }
-
-    #addEventsListenerExt_() {
-        const statusbarTabs = this.getTabs();
-
-        // 添加新Tab时触发
-        statusbarTabs.bind('created', (event) => {
-            const { tabEl } = event.detail;
-            const id = $(tabEl).attr('data-tab-id');
-            const statusbar = this.pagesRegistry.getItem(id);
-            if (!statusbar) {
-                return;
-            }
-            statusbar.onTab && statusbar.onTab();
-        });
-
-        // 移除已有Tab时触发
-        statusbarTabs.bind('beforeDestroy', (event) => {
-            const { tabEl } = event.detail;
-            const id = $(tabEl).attr('data-tab-id');
-            const statusbar = this.pagesRegistry.getItem(id);
-            if (!statusbar) {
-                return;
-            }
-            statusbar.onRemove && statusbar.onRemove();
-        });
     }
 
     getStatusBarById(id) {

@@ -27,7 +27,7 @@ FS.showOpenFilePicker = () => {
             if (filePath) {
                 resolve(new File(filePath));
             } else {
-                reject('dir not found');
+                reject('file not found');
             }
         })
         .catch(error => {
@@ -52,7 +52,7 @@ FS.showDirectoryPicker = () => {
             if (filePath) {
                 resolve(filePath);
             } else {
-                reject('file not found');
+                reject('dir not found');
             }
         })
         .catch(error => {

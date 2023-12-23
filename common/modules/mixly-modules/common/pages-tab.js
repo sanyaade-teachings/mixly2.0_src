@@ -142,7 +142,10 @@ class PagesTab {
     }
 
     dispose() {
-
+        this.chromeTabs.dispose();
+        this.$content.remove();
+        this.$container.remove();
+        this.tabsRegistry.reset();
     }
 
     bind(type, func) {

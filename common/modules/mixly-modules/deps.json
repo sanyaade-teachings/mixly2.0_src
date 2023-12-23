@@ -305,7 +305,8 @@
         "path": "/common/events.js",
         "require": [
             "Mixly.IdGenerator",
-            "Mixly.MArray"
+            "Mixly.MArray",
+            "Mixly.Registry"
         ],
         "provide": [
             "Mixly.Events"
@@ -723,7 +724,6 @@
     {
         "path": "/common/statusbar-terminal.js",
         "require": [
-            "path",
             "Mprogress",
             "$.ui",
             "$.flot",

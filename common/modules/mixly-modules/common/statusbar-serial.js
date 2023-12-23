@@ -9,21 +9,32 @@ class StatusBarSerial extends StatusBar {
     constructor(element) {
         super(element);
         this.opened = false;
+        this.$close = null;
+    }
+
+    init() {
+        super.init();
+        this.addDirty();
+        const $tab = this.getTab();
+        this.$close = $tab.find('.chrome-tab-close');
+        this.$close.addClass('layui-badge-dot layui-bg-blue');
     }
 
     open() {
         if (this.isOpened()) {
             return;
         }
-        this.addDirty();
+        this.$close.removeClass('layui-bg-blue');
+        this.$close.addClass('layui-bg-orange');
         this.opened = true;
     }
 
     close() {
-        if (!this.isOpened()) {
+        if (!this.isOpened() || !this.$close) {
             return;
         }
-        this.removeDirty();
+        this.$close.removeClass('layui-bg-orange');
+        this.$close.addClass('layui-bg-blue');
         this.opened = false;
     }
 
@@ -33,6 +44,11 @@ class StatusBarSerial extends StatusBar {
 
     getPort() {
         return this.$tab.attr('data-tab-id');
+    }
+
+    dispose() {
+        super.dispose();
+        this.$close = null;
     }
 }
 

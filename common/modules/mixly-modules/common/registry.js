@@ -53,6 +53,10 @@ class Registry {
     keys() {
         return [...this.#registry_.keys()];
     }
+
+    getAllItem() {
+        return this.#registry_;
+    }
 }
 
 Mixly.Registry = Registry;

@@ -121,10 +121,6 @@ class StatusBarsManager extends PagesManager {
                 });
             }
         });
-
-        $(window).on('resize', () => {
-            this.$menu.hide(100);
-        });
     }
 
     #onSelectMenu_(event) {

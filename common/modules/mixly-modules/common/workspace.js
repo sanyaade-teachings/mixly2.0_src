@@ -93,7 +93,8 @@ class Workspace {
         this.fileTree = new FileTree(this.$leftSidebar[0]);
         const { events } = this.fileTree;
         events.bind('selectLeaf', (selected) => {
-            this.editorManager.tabs.addTab({
+            const tabs = this.editorManager.getTabs();
+            tabs.addTab({
                 name: selected[0].text,
                 title: selected[0].id,
                 id: selected[0].id,

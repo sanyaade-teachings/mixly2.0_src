@@ -53,8 +53,8 @@ class PageBase {
         if (!$tab || this.isDirty()) {
             return;
         }
+        $tab.addClass('dirty');
         this.events.run('addDirty');
-        $tab.addClass('dirty', $tab);
         this.#dirty = true;
     }
 

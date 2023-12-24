@@ -111,8 +111,8 @@ class PagesTab {
         tabProperties.id = title ?? IdGenerator.generate();
         let tab = this.tabsRegistry.getItem(title);
         if (tab) {
-            this.updateTab(tab, tabProperties);
-            this.setCurrentTab(tab);
+            this.updateTab(tabProperties.id, tabProperties);
+            this.setCurrentTab(tabProperties.id);
         } else {
             tab = this.chromeTabs.addTab(tabProperties, others);
         }

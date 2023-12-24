@@ -54,7 +54,7 @@ class PageBase {
             return;
         }
         $tab.addClass('dirty');
-        this.events.run('addDirty', $tab);
+        this.events.run('addDirty');
         this.#dirty = true;
     }
 
@@ -63,7 +63,7 @@ class PageBase {
         if (!$tab || !this.isDirty()) {
             return;
         }
-        this.events.run('removeDirty', $tab);
+        this.events.run('removeDirty');
         $tab.removeClass('dirty');
         this.#dirty = false;
     }

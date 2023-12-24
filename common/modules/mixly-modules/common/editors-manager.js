@@ -89,13 +89,13 @@ class EditorsManager extends PagesManager {
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
             const tabs = this.getTabs();
-            editor.events.bind('addDirty', ($tab) => {
-                tabs.updateTab($tab[0], {
+            editor.bind('addDirty', () => {
+                tabs.updateTab(id, {
                     title: id + ' - 未保存'
                 });
             });
-            editor.events.bind('removeDirty', ($tab) => {
-                tabs.updateTab($tab[0], {
+            editor.bind('removeDirty', () => {
+                tabs.updateTab(id, {
                     title: id
                 });
             });

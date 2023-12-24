@@ -800,17 +800,38 @@ Blockly.Arduino.forBlock['TFT_init_with_pin'] = function () {
     const PIN_RST = this.getFieldValue('RST');
     const TYPE = this.getFieldValue('TYPE');
     let icType = 'ST7735';
-    if (TYPE.indexOf('ST7796') !== -1)
+    let initParam = '';
+    if (TYPE.indexOf('ST7796') !== -1) {
         icType = 'ST7796';
-    else if (TYPE.indexOf('INITR') !== -1)
+    } else if (TYPE.indexOf('INITR') !== -1) {
         icType = 'ST7735';
-    else
+    } else {
         icType = 'ST7789';
+    }
+    if (TYPE === 'INITR_GREENTAB') {
+        initParam = 'INITR_GREENTAB';
+    } else if (TYPE === 'INITR_REDTAB') {
+        initParam = 'INITR_REDTAB';
+    } else if (TYPE === 'INITR_BLACKTAB') {
+        initParam = 'INITR_BLACKTAB';
+    } else if (TYPE === '160×80') {
+        initParam = 'INITR_MINI160x80';
+    } else if (TYPE === '160×128') {
+        initParam = '128, 160';
+    } else if (TYPE === '240×135') {
+        initParam = '135, 240';
+    } else if (TYPE === '240×240') {
+        initParam = '240, 240';
+    } else if (TYPE === '320×240') {
+        initParam = '240, 320';
+    } else if (TYPE === '480×320') {
+        initParam = '';
+    }
     Blockly.Arduino.definitions_["include_Adafruit_GFX"] = '#include <Adafruit_GFX.h>';
     Blockly.Arduino.definitions_["include_Adafruit_tft"] = '#include <Adafruit_' + icType + '.h>';
     Blockly.Arduino.definitions_["include_SPI"] = '#include <SPI.h>';
     Blockly.Arduino.definitions_['var_declare_Adafruit_tft'] = 'Adafruit_' + icType + ' tft = Adafruit_' + icType + '(' + PIN_CS + ', ' + PIN_DC + ', ' + PIN_RST + ');';
-    Blockly.Arduino.setups_["setup_tft_init"] = 'tft.' + (icType === 'ST7735' ? 'initR' : 'init') + '(' + TYPE + ');';
+    Blockly.Arduino.setups_["setup_tft_init"] = 'tft.' + (icType === 'ST7735' ? 'initR' : 'init') + '(' + initParam + ');';
     Blockly.Arduino.setups_["setup_tft_fillScreen"] = 'tft.fillScreen(0x0000);';
     Blockly.Arduino.definitions_["include_U8g2_for_Adafruit_GFX"] = '#include <U8g2_for_Adafruit_GFX.h>';
     Blockly.Arduino.definitions_['var_declare_U8G2_FOR_ADAFRUIT_GFX'] = 'U8G2_FOR_ADAFRUIT_GFX u8g2_for_adafruit_gfx;';

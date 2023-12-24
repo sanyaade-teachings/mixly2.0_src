@@ -54,7 +54,7 @@ class PageBase {
             return;
         }
         $tab.addClass('dirty');
-        this.events.run('addDirty');
+        this.events.run('addDirty', $tab);
         this.#dirty = true;
     }
 

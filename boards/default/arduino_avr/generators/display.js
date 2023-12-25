@@ -799,32 +799,25 @@ Blockly.Arduino.forBlock['TFT_init_with_pin'] = function () {
     const PIN_DC = this.getFieldValue('DC');
     const PIN_RST = this.getFieldValue('RST');
     const TYPE = this.getFieldValue('TYPE');
-    let icType = 'ST7735';
+    let icType = TYPE.split('_')[0];
     let initParam = '';
-    if (TYPE.indexOf('ST7796') !== -1) {
-        icType = 'ST7796';
-    } else if (TYPE.indexOf('INITR') !== -1) {
-        icType = 'ST7735';
-    } else {
-        icType = 'ST7789';
-    }
-    if (TYPE === 'INITR_GREENTAB') {
+    if (TYPE === 'ST7735_INITR_GREENTAB') {
         initParam = 'INITR_GREENTAB';
-    } else if (TYPE === 'INITR_REDTAB') {
+    } else if (TYPE === 'ST7735_INITR_REDTAB') {
         initParam = 'INITR_REDTAB';
-    } else if (TYPE === 'INITR_BLACKTAB') {
+    } else if (TYPE === 'ST7735_INITR_BLACKTAB') {
         initParam = 'INITR_BLACKTAB';
-    } else if (TYPE === '160×80') {
+    } else if (TYPE === 'ST7735_160×80') {
         initParam = 'INITR_MINI160x80';
-    } else if (TYPE === '160×128') {
+    } else if (TYPE === 'ST7735_160×128') {
         initParam = '128, 160';
-    } else if (TYPE === '240×135') {
+    } else if (TYPE === 'ST7789_240×135') {
         initParam = '135, 240';
-    } else if (TYPE === '240×240') {
+    } else if (TYPE === 'ST7789_240×240') {
         initParam = '240, 240';
-    } else if (TYPE === '320×240') {
+    } else if (TYPE === 'ST7789_320×240') {
         initParam = '240, 320';
-    } else if (TYPE === '480×320') {
+    } else if (TYPE === 'ST7796_480×320') {
         initParam = '';
     }
     Blockly.Arduino.definitions_["include_Adafruit_GFX"] = '#include <Adafruit_GFX.h>';

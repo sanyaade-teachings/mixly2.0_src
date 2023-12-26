@@ -177,7 +177,7 @@ class EditorMix extends EditorBase {
                 $btn = this.$btns.filter('[m-id="code"]');
                 blockEditor.setVisible(false);
                 codeEditor.setReadOnly(false);
-                codeEditor.showCtrlBtns();
+                codeEditor.focus();
                 if (this.py2BlockEditor && BOARD.pythonToBlockly) {
                     this.py2BlockEditor.fromCode = true;
                 }
@@ -193,17 +193,19 @@ class EditorMix extends EditorBase {
             case Drag.Extend.NEGATIVE:
                 blockEditor.setVisible(true);
                 codeEditor.setReadOnly(true);
-                codeEditor.hideCtrlBtns();
                 if (this.py2BlockEditor 
                     && BOARD.pythonToBlockly 
                     && typeof this.py2BlockEditor.updateBlock === 'function') {
                     this.py2BlockEditor.updateBlock();
+                } else {
+                    codeEditor.setValue(blockEditor.getValue(), false);
                 }
                 break;
             case Drag.Extend.POSITIVE:
                 codeEditor.setValue(blockEditor.getValue(), false);
                 break;
             }
+            blockEditor.resize();
             blockEditor.scrollCenter();
         });
     }

@@ -30,12 +30,12 @@ class EditorMd extends EditorCode {
     // 私有属性
     #prevCode_ = '';
 
-    constructor(element, extname='.md') {
+    constructor(element) {
         const id = IdGenerator.generate();
         const $parentContainer = $(element);
         const $content = $(XML.render(EditorMd.TEMPLATE, { mId: id }));
         const $codeContainer = $content.find('.editor-code');
-        super($codeContainer, extname);
+        super($codeContainer);
         this.$btnsContent = $(EditorMd.BTNS_TEMPLATE);
         this.drag = null;
         this.codeContextMenuItems = null;
@@ -110,12 +110,12 @@ class EditorMd extends EditorCode {
     }
 
     addChangeListener() {
-        this.editor.on('change', () => {
+        /*this.editor.on('change', () => {
             if (this.drag.shown === 'NEGATIVE') {
                 return;
             }
             this.updatePreview();
-        });
+        });*/
     }
 
     updatePreview() {

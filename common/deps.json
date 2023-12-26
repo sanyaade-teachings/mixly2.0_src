@@ -136,6 +136,10 @@
         "provide": ["ace.ExtLanguageTools"],
         "require": ["ace"]
     }, {
+        "path": "modules/web-modules/monaco-editor/main.bundle.js",
+        "provide": ["monaco"],
+        "require": []
+    }, {
         "path": "modules/web-modules/dap.umd.js",
         "provide": ["DAPjs"],
         "require": []

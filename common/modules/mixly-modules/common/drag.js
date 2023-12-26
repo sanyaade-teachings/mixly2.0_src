@@ -117,10 +117,11 @@ class Drag {
                     this.changeTo('100%');
                     this.events.run('onfull', Drag.Extend.POSITIVE);
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动
-                    if (this.shown !== Drag.Extend.BOTH) {
-                        this.events.run('exitfull', this.shown);
-                    }
+                    let shown = this.shown;
                     this.changeTo(iT);
+                    if (shown !== Drag.Extend.BOTH) {
+                        this.events.run('exitfull', shown);
+                    }
                 }
                 this.events.run('ondragEnd');
                 return false;
@@ -203,14 +204,15 @@ class Drag {
         if (this.shown === Drag.Extend.BOTH) {
             return;
         }
-        this.events.run('exitfull', this.shown);
         let prevSize = this.prevSize[0];
         if (prevSize === '100%') {
             prevSize = '70%';
         } else if (prevSize === '0%') {
             prevSize = '30%';
         }
+        let shown = this.shown;
         this.changeTo(prevSize);
+        this.events.run('exitfull', shown);
     }
 
     show(type) {

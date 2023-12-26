@@ -7,6 +7,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Nav');
 goog.require('Mixly.EditorMix');
 goog.require('Mixly.EditorCode');
+goog.require('Mixly.EditorMonaco');
 goog.require('Mixly.EditorMd');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorUnknown');
@@ -22,6 +23,7 @@ const {
     Nav,
     EditorMix,
     EditorCode,
+    EditorMonaco,
     EditorMd,
     EditorBlockly,
     EditorUnknown,
@@ -40,7 +42,7 @@ class EditorsManager extends PagesManager {
         this.typesRegistry = new Registry();
         this.typesRegistry.register(['.mix', '.mil'], EditorMix);
         this.typesRegistry.register('.test', EditorBlockly);
-        this.typesRegistry.register(['.xml', '.txt', '.ino', '.json'], EditorCode);
+        this.typesRegistry.register(['.xml', '.txt', '.ino', '.json'], EditorMonaco);
         this.typesRegistry.register('.md', EditorMd);
         this.typesRegistry.register('#default', EditorUnknown);
         this.typesRegistry.register('#welcome', EditorWelcome);

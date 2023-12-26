@@ -13,28 +13,40 @@ const {
 } = Mixly;
 
 class EditorMonaco extends EditorBase {
-    static {
-        this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
-        this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
-    }
-
+    #readOnly = false;
     constructor(element) {
         super();
         this.$container = $(element);
         this.destroyed = false;
-        this.$content = this.$container;
     }
 
     init() {
         this.editor = monaco.editor.create(this.$container[0], {
-            language: 'javascript',
-            theme: 'vs-dark'
+            theme: "vs-dark",
+            disableLayerHinting: true, // 等宽优化
+            emptySelectionClipboard: false, // 空选择剪切板
+            selectionClipboard: false, // 选择剪切板
+            codeLens: true, // 代码镜头
+            scrollBeyondLastLine: false, // 滚动完最后一行后再滚动一屏幕
+            colorDecorators: true, // 颜色装饰器
+            accessibilitySupport: "off", // 辅助功能支持  "auto" | "off" | "on"
+            lineNumbers: "on", // 行号 取值： "on" | "off" | "relative" | "interval" | function
+            lineNumbersMinChars: 5, // 行号最小字符   number
+            enableSplitViewResizing: false,
+            contextmenu: false,
+            fontSize: 17,
+            automaticLayout: false,
+            scrollbar: {
+                vertical: 'visible',
+                horizontal: 'visible'
+            }
         });
-        this.addCursorLayer();
-        /*this.resetFontSize();
-        this.addCursorLayer();
-        this.addCursorEvent();
-        this.addDefaultCommand();*/
+    }
+
+    onMounted() {
+        if (!this.#readOnly) {
+            this.focus();
+        }
     }
 
     dispose() {
@@ -42,22 +54,17 @@ class EditorMonaco extends EditorBase {
         this.destroyed = true;
     }
 
+    setTheme(mode) {
+        this.editor.updateOptions({
+            theme: `vs-${mode}`
+        });
+    }
+
     setValue(data, scroll = true) {
-        if (this.destroyed) {
+        if (this.destroyed || this.getValue() === data) {
             return;
         }
-        this.editor.updateSelectionMarkers();
-        const { selection } = this.editor;
-        const initCursor = selection.getCursor();
-        if (this.getValue() !== data) {
-            this.editor.setValue(data);
-        }
-        if (scroll) {
-            this.scrollToBottom();
-        } else {
-            selection.moveCursorTo(initCursor.row, initCursor.column, true);
-            selection.clearSelection();
-        }
+        this.editor.setValue(data);
     }
 
     addValue(data) {
@@ -77,63 +84,82 @@ class EditorMonaco extends EditorBase {
         if (this.destroyed) {
             return;
         }
+        this.editor.setScrollTop(this.editor.getScrollHeight());
     }
 
     scrollToTop() {
         if (this.destroyed) {
             return;
         }
-    }
-
-    addCursorLayer() {
-        this.cursorLayer = tippy(this.$container.find('.monaco-mouse-cursor-text')[0], {
-            content: Msg.Lang['此视图只读'],
-            trigger: 'manual',
-            hideOnClick: true,
-            delay: 0,
-            duration: [ 0, 0 ],
-            placement: 'right',
-            offset: [ 0, 0 ],
-            popperOptions: {
-                strategy: 'fixed',
-                modifiers: [
-                    {
-                        name: 'flip',
-                        options: {
-                            fallbackPlacements: ['top-end', 'right']
-                        }
-                    }
-                ]
-            }
-        });
-    }
-
-    addCursorEvent() {
-        
+        this.editor.setScrollTop(0);
     }
 
     undo() {
-        test.editor.getModel().undo();
+        this.editor.getModel().undo();
     }
 
     redo() {
-        test.editor.getModel().redo();
+        this.editor.getModel().redo();
     }
 
     resize() {
-    	this.editor.layout();
+        this.editor.layout();
     }
 
     cut() {
-        
+        let selection = this.editor.getSelection();
+        let selectedText = this.editor.getModel().getValueInRange(selection);
+        if (selection) {
+            this.editor.executeEdits("cut", [{ range: selection, text: '' }]);
+            navigator.clipboard.writeText(selectedText);
+        }
+        this.focus();
     }
 
     copy() {
-        
+        this.editor.trigger('source', 'editor.action.clipboardCopyWithSyntaxHighlightingAction');
     }
 
     paste() {
-        
+        navigator.clipboard.readText()
+        .then((clipboardText) => {
+            this.editor.trigger('source', 'type', { text: clipboardText });
+            this.focus();
+        })
+        .catch(console.log);
+    }
+
+    getEditor() {
+        return this.editor;
+    }
+
+    setReadOnly(readOnly) {
+        this.editor.updateOptions({ readOnly });
+        this.#readOnly = readOnly;
+    }
+
+    setLanguage(language) {
+        monaco.editor.setModelLanguage(this.editor.getModel(), language);
+    }
+
+    setTabSize(tabSize) {
+        this.editor.updateOptions({ tabSize });
+    }
+
+    setFontSize(fontSize) {
+        this.editor.updateOptions({ fontSize });
+    }
+
+    focus() {
+        this.editor.focus();
+    }
+
+    commentLine() {
+        this.editor.trigger('source', 'editor.action.commentLine');
+    }
+
+    blockComment() {
+        this.editor.trigger('source', 'editor.action.blockComment');
     }
 }
 

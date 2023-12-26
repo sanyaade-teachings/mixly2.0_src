@@ -192,6 +192,10 @@ Editor.init = () => {
         $a.removeClass('codicon-layout-panel-off');
         $a.addClass('codicon-layout-panel');
     });
+
+    $(window).resize(() => {
+        editorManager.resize();
+    });
 }
 
 });

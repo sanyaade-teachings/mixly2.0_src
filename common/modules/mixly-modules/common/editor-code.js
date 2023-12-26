@@ -8,7 +8,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.ContextMenu');
-goog.require('Mixly.EditorAce');
+goog.require('Mixly.EditorMonaco');
 goog.provide('Mixly.EditorCode');
 
 const {
@@ -18,11 +18,11 @@ const {
     Env,
     Msg,
     ContextMenu,
-    EditorAce
+    EditorMonaco
 } = Mixly;
 const { USER, BOARD } = Config;
 
-class EditorCode extends EditorAce {
+class EditorCode extends EditorMonaco {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-code.html'));
     }
@@ -36,7 +36,6 @@ class EditorCode extends EditorAce {
         const $editorContainer = $content.find('.editor');
         super($editorContainer[0]);
         this.id = id;
-        this.extname = '.c';
         this.$content = $content;
         this.$loading = this.$content.find('.loading');
         this.$editorContainer = $editorContainer;
@@ -61,86 +60,55 @@ class EditorCode extends EditorAce {
             togglecomment: {
                 isHtmlName: true,
                 name: ContextMenu.getItem(Msg.Lang['切换行注释'], 'Ctrl+/'),
-                callback: (key, opt) => this.editor.execCommand('togglecomment')
+                callback: (key, opt) => this.commentLine()
             },
             toggleBlockComment: {
                 isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['切换块注释'], 'Ctrl+Shift+/'),
-                callback: (key, opt) => this.editor.execCommand('toggleBlockComment')
+                name: ContextMenu.getItem(Msg.Lang['切换块注释'], 'Shift+Alt+A'),
+                callback: (key, opt) => this.blockComment()
             }
         };
     }
 
     init() {
         super.init();
-        this.toCodeEditor();
+        let language = 'cpp';
+        let tabSize = 4;
+        let type = (BOARD.language || '').toLowerCase();
+        switch(type) {
+        case 'python':
+            tabSize = 4;
+            language = 'python';
+            break;
+        case 'c/c++':
+            tabSize = 2;
+            language = 'cpp';
+            break;
+        case 'javascript':
+            tabSize = 4;
+            language = 'javascript';
+            break;
+        case 'markdown':
+            tabSize = 2;
+            language = 'markdown';
+            break;
+        default:
+            tabSize = 4;
+            language = 'text';
+        }
+        this.setTabSize(tabSize);
+        this.setLanguage(language);
         this.$loading.remove();
         this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .editor`);
         const { events } = this.contextMenu;
         events.bind('getMenu', () => {
             return this.defaultContextMenu;
         });
-    }
-
-    toCodeEditor() {
-        this.addCtrlBtns();
-        this.editor.setShowPrintMargin(false);
-        this.editor.setReadOnly(false);
-        this.editor.setScrollSpeed(0.8);
-        this.editor.setOptions({
-            enableBasicAutocompletion: true,
-            enableSnippets: true,
-            enableLiveAutocompletion: true,
-            autoScrollEditorIntoView: true,
-            // customScrollbar: true,
-        });
-        this.setMode();
-        this.setTheme();
-    }
-
-    setTheme() {
-        if (USER.theme === "dark") {
-            this.editor.setOption("theme", "ace/theme/twilight");
-        } else {
-            this.editor.setOption("theme", "ace/theme/xcode");
-        }
-    }
-
-    setMode() {
-        const session = this.editor.getSession();
-        let mode = 'c_cpp';
-        let tabSize = 4;
-        switch(this.extname) {
-        case '.py':
-            tabSize = 4;
-            mode = 'python';
-            break;
-        case '.c':
-        case '.cpp':
-        case '.h':
-        case '.hpp':
-            tabSize = 2;
-            mode = 'c_cpp';
-            break;
-        case '.js':
-            tabSize = 4;
-            mode = 'javascript';
-            break;
-        case '.md':
-            tabSize = 2;
-            mode = 'markdown';
-            break;
-        default:
-            tabSize = 4;
-            mode = this.extname.substring(1);
-        }
-        session.setMode(`ace/mode/${mode}`);
-        session.setTabSize(tabSize);
+        this.setTheme(USER.theme);
     }
 
     setValue(data, ext) {
         super.setValue(data);
-        this.scrollToTop();
     }
 
     dispose() {

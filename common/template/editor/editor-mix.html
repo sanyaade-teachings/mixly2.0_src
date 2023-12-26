@@ -17,6 +17,16 @@
             display: none;
             width: 0%;
             height: 100%;
+            border-left: 1px;
+            border-left-style: solid;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .editor-code {
+            border-color: #c9c9c9;
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .editor-code {
+            border-color: var(--lay-color-border-1);
         }
     </style>
     <div m-id="{{d.mId}}" class="editor">

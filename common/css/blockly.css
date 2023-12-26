@@ -20,10 +20,6 @@
     padding: 0px;
 }
 
-html[data-bs-theme=dark] .blocklyMainBackground {
-    stroke: #000;
-}
-
 .blocklyTreeLabel {
     font-size: 17px;
 } 

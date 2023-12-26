@@ -1,3 +1,35 @@
+@import "../ui/jquery-ui/jquery-ui.min.css";
+@import "../ui/bootstrap/css/bootstrap.min.css";
+@import "../ui/layui/css/layui.css";
+@import "../ui/layui/css/layui-theme-dark.css";
+@import "./interface.css";
+@import "./fontello.css";
+@import "./nav.css";
+@import "./library.css";
+@import "./drag.css";
+@import "./button.css";
+@import "./xscrollbar.css";
+@import "./tippy-ext.css";
+@import "./scrollbar.css";
+@import "./select2.min.css";
+@import "./select2-ext.css";
+@import "./xterm.css";
+@import "./footer-layer.css";
+@import "./progress.css";
+@import "./blockly.css";
+@import "./chrome-tabs.css";
+@import "./jstree/default/style.css";
+@import "./jstree/default-dark/style.css";
+@import "./jstree/jstree-ext.css";
+@import "./jquery.contextMenu.css";
+@import "./markdown/github-markdown-light.css";
+@import "./markdown/github-markdown-dark.css";
+@import "./katex.min.css";
+@import "./codicon.css";
+@import "./files/files.css";
+@import "./mprogress.min.css";
+@import "./skeleton.css";
+
 :root {
     --nav-height: 35px;
     --nav-left-btn-height: 28px;
@@ -9,28 +41,8 @@
 }
 
 @font-face {
-  font-family: 'ravie';
-  src: url('../font/ravie.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'ravie';
+    src: url('../font/ravie.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
-
-/*@media screen and (max-width: 1920px) {
-    :root {
-        --nav-height: 35px;
-        --nav-left-btn-height: 28px;
-        --nav-right-btn-height: 26px;
-        --nav-select-height: 28px;
-        --footer-height: 22px;
-    }
-}
-
-@media screen and (min-width: 1920px) {
-    :root {
-        --nav-height: 45px;
-        --nav-left-btn-height: 35px;
-        --nav-right-btn-height: 32px;
-        --nav-select-height: 35px;
-        --footer-height: 30px;
-    }
-}*/

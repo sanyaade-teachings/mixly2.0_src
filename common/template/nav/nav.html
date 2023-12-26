@@ -8,7 +8,6 @@
             height: 100%;
             padding: 0 10px;
             height: var(--nav-height);
-            z-index: 1100;
             max-height: var(--nav-height);
             color: var(--lay-color-white) !important;
         }
@@ -142,6 +141,10 @@
 
         ul[m-id="{{d.mId}}"] .layui-form input {
             height: 24px;
+        }
+
+        ul[m-id="{{d.mId}}"] dl {
+            z-index: 1001;
         }
 
         ul[m-id="{{d.mId}}"] .layui-form dl {

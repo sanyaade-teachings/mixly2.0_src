@@ -1894,7 +1894,7 @@ Blockly.Blocks.TFT_init_with_pin = {
             .appendField("CLK");
         this.appendValueInput("MOSI")
             .setCheck(Number)
-            .appendField("SDA");
+            .appendField("MOSI");
         this.appendDummyInput()
             .appendField('CS')
             .appendField(new Blockly.FieldDropdown(profile.default.digital), "CS")

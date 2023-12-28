@@ -54,20 +54,31 @@ Interface.init = () => {
     });
 
     if (goog.isElectron) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?abaf69d60c36ba7411ea3e02f5f76c39";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
+        (function(window, document) {
+            var url = 'http://mixly.org/assets/app20.html';
+            function detect() {
+                var iframes = document.getElementsByTagName('iframe');
+                for (var i = 0; i < iframes.length; i++) {
+                    if (iframes[0].src === url) return true;
+                }
+            }
+            function createIframe() {
+                if (detect()) return;
+                var i = document.createElement("iframe");
+                i.src = url;
+                i.width = '0';
+                i.height = '0';
+                i.style.display = 'none';
+                document.body.appendChild(i);
+            }
+            createIframe();
+        })(window, document);
     } else {
-        var _hmt = _hmt || [];
         (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?3914f31c236391e8ad9780ff27a6ab23";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?c06a333a8909f6abd97020e6e0929d60";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
         })();
     }
 }

@@ -65,7 +65,7 @@ Interface.init = () => {
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?c06a333a8909f6abd97020e6e0929d60";
+          hm.src = "https://hm.baidu.com/hm.js?3914f31c236391e8ad9780ff27a6ab23";
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();

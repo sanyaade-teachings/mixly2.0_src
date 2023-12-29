@@ -85,7 +85,7 @@ class Drag {
         const container = this.$container[0];
         const { type, min, elem, full } = this.config;
         dragElem.onmousedown = (elemEvent) => {
-            let dis;
+            let dis, prev;
             if (type === 'h') {
                 dis = elemEvent.clientY;
                 dragElem.top = dragElem.offsetTop;
@@ -109,11 +109,15 @@ class Drag {
                     maxT = container.clientWidth - minT;
                     movement = docEvent.movementX;
                 }
-                iT += 4;
-                if (full[0] && movement < 0 && iT < (minT - minT * 0.6)) { // 向上移动或向左移动
+                iT += 1;
+                if (prev === iT) {
+                    return false;
+                }
+                prev = iT;
+                if (full[0] && movement < 0 && iT < minT * 0.4) { // 向上移动或向左移动
                     this.changeTo('0%');
                     this.events.run('onfull', Drag.Extend.NEGATIVE);
-                } else if (full[1] && movement > 0 && iT > (maxT + minT * 0.8)) { // 向下移动或向右移动
+                } else if (full[1] && movement > 0 && iT > (maxT + minT * 0.6)) { // 向下移动或向右移动
                     this.changeTo('100%');
                     this.events.run('onfull', Drag.Extend.POSITIVE);
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动

@@ -25,11 +25,10 @@ class FileTreeExt extends FileTree {
             const dataPath = path.join(inPath, data);
             const reDataPath = path.join(rePath, data);
             if (await FS.isDirectory(reDataPath)) {
-                const isDirEmpty = await FS.isDirectoryEmpty(reDataPath);
                 output.push({
                     type: 'dir',
                     id: dataPath,
-                    children: !isDirEmpty
+                    children: true
                 });
             } else {
                 output.push({

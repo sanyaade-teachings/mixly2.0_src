@@ -21,6 +21,7 @@ const { USER } = Config;
 class FileTree {
     static {
         this.FILE_ICON_MAP = goog.getJSON(path.join(Env.templatePath, 'json/file-icons.json'));
+        this.FOLDER_ICON_MAP = goog.getJSON(path.join(Env.templatePath, 'json/folder-icons.json'));
     }
 
     constructor(element) {
@@ -96,13 +97,13 @@ class FileTree {
             const { id } = data.node;
             let node = document.getElementById(id);
             let $i = $(node).children('.jstree-anchor').children('.jstree-icon');
-            $i.removeClass('icon-folder').addClass('icon-folder-open');
+            $i.addClass('opened');
         })
         .on('close_node.jstree', (e, data) => {
             const { id } = data.node;
             let node = document.getElementById(id);
             let $i = $(node).children('.jstree-anchor').children('.jstree-icon');
-            $i.removeClass('icon-folder-open').addClass('icon-folder');
+            $i.removeClass('opened');
         })
         .on('after_open.jstree', (e, data) => {
             let node = document.getElementById(this.selected);
@@ -123,7 +124,7 @@ class FileTree {
             if (!selected.length) {
                 return;
             }
-            if (['icon-folder', 'icon-folder-empty'].includes(selected[0].icon)) {
+            if (selected[0].icon.indexOf('foldericon') !== -1) {
                 return;
             }
             this.selected = selected[0].id;
@@ -165,7 +166,7 @@ class FileTree {
             li_attr: {
                 title: this.dirPath
             },
-            icon: 'icon-folder'
+            icon: 'foldericon-root-default'
         }];
     }
 
@@ -178,7 +179,7 @@ class FileTree {
                 const text = path.basename(id);
                 let icon = 'icon-doc';
                 if (type === 'dir') {
-                    icon = children? 'icon-folder' : 'icon-folder-empty';
+                    icon = this.#getFolderIcon_(text);
                 } else {
                     icon = this.#getFileIcon_(text);
                 }
@@ -213,6 +214,14 @@ class FileTree {
             return prefix + FileTree.FILE_ICON_MAP[extname];
         }
         return prefix + FileTree.FILE_ICON_MAP['default'];
+    }
+
+    #getFolderIcon_(foldername) {
+        const prefix = 'foldericon-';
+        if (FileTree.FOLDER_ICON_MAP[foldername]) {
+            return prefix + FileTree.FOLDER_ICON_MAP[foldername];
+        }
+        return prefix + FileTree.FOLDER_ICON_MAP['default'];
     }
 }
 

@@ -77,7 +77,7 @@ class Workspace {
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
         this.statusBarTabs = new StatusBarsManager(this.$statusBarTabs[0]);
-        this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
+        this.statusBarTabs.add('terminal', Msg.Lang['输出'], Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
         this.dragH = null;

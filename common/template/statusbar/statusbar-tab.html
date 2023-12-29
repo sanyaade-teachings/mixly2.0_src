@@ -8,16 +8,18 @@
             height: 23px;
             z-index: 3;
             padding: 0px;
+            border-width: 1px 0px;
+            border-style: solid;
         }
 
         html[data-bs-theme=light] div[m-id="{{d.mId}}"] {
             background-color: #f8f8f8;
-            border: 1px solid #c9c9c9;
+            border-color: #c9c9c9;
         }
 
         html[data-bs-theme=dark] div[m-id="{{d.mId}}"] {
             background-color: #252526;
-            border: 1px solid #2e2e30;
+            border-color: #2e2e30;
         }
 
         div[m-id="{{d.mId}}"] > .chrome-tabs-content {

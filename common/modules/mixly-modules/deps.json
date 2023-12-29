@@ -279,7 +279,6 @@
             "Mixly.Nav",
             "Mixly.EditorMix",
             "Mixly.EditorCode",
-            "Mixly.EditorMonaco",
             "Mixly.EditorMd",
             "Mixly.EditorBlockly",
             "Mixly.EditorUnknown",

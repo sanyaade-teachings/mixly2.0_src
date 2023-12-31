@@ -30,6 +30,7 @@ ZhHant.MSG = {
     catCE_G6:"CE G6",
     catAIOT:"智能物聯",
     catAIsensor:"MixGo AI感測器",
+    catAIsensor2:"MixGo AI車牌識別",
     catSensor: "感測器",
     catActuator: "執行器",
     catExternSensor: "外接感測器",
@@ -3529,5 +3530,17 @@ ZhHant.weather_solo = '分體式氣象站';
 ZhHant.MIXLY_ABBR = '縮寫';
 ZhHant.MIXLY_ACCUMULATED = '累積';
 ZhHant.MIXLY_AVERAGE = '平均';
+ZhHant.MIXLY_AI_SENSOR_LICENSEPLATE_RECOGNTITION_TOOLTIP = '使用MixGo AI攝像頭識別車牌，返回包含所有識別結果物件的清單';
+ZhHant.MIXLY_AI_SENSOR_LICENSEPLATE_TOOLTIP = '獲取車牌物件的相應資訊';
+ZhHant.MIXLY_LICENSEPLATE = '車牌';
+ZhHant.MIXLY_FACE = '人臉';
+ZhHant.MIXLY_FACE_CLASSIFIER = '人臉檢測';
+ZhHant.MIXLY_AI_SENSOR_FACE_TOOLTIP = '獲取人臉物件的相應資訊';
+ZhHant.MIXLY_AI_SENSOR_BAR_FACE_CLASSIFIER_TOOLTIP = '使用MixGo AI攝像頭檢測人臉，返回包含所有識別結果物件的清單';
+ZhHant.MIXLY_20OBJECTS = '20物體';
+ZhHant.MIXLY_FIND_20OBJECTS = '20物體識別';
+ZhHant.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = '獲取20物體物件的相應資訊';
+ZhHant.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = '使用MixGo AI攝像頭檢測20物體，返回包含所有識別結果物件的清單';
+
 
 })();

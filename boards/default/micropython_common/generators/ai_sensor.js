@@ -257,3 +257,48 @@ Blockly.Python.forBlock['ai_sensor_asr_recognize'] = function () {
   var code = v+'.asr_recognize('+v1+',threshold='+v2+')';
   return [code, Blockly.Python.ORDER_ATOMIC]; 
 };
+
+Blockly.Python.forBlock['ai_sensor_licenseplate'] = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
+  var key = this.getFieldValue('key');
+  var code = sub+'.'+key;
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};
+
+Blockly.Python.forBlock['ai_sensor_find_licenseplates'] = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var code = v+'.find_licenseplate()';
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};
+
+Blockly.Python.forBlock['ai_sensor_face'] = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
+  var key = this.getFieldValue('key');
+  var code = sub+'.'+key;
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};
+
+Blockly.Python.forBlock['ai_sensor_classifier_faces'] = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var code = v+'.face_detect()';
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};
+
+Blockly.Python.forBlock['ai_sensor_20object'] = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var sub =Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
+  var key = this.getFieldValue('key');
+  var code = sub+'.'+key;
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};
+
+Blockly.Python.forBlock['ai_sensor_find_20objects'] = function () {
+  Blockly.Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+  var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+  var code = v+'.find_20object()';
+  return [code, Blockly.Python.ORDER_ATOMIC]; 
+};

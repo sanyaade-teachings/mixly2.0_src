@@ -34,6 +34,7 @@ En.MSG = {
     catCE_G6:"CE G6",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
+    catAIsensor2:"MixGo AI LPR",
     catSensor: "Sensor",
     catActuator: "Actuator",
     catExternSensor: "External Sensor",
@@ -3557,5 +3558,17 @@ En.weather_solo = 'Split-type Weather Station';
 En.MIXLY_ABBR = 'abbreviation';
 En.MIXLY_ACCUMULATED = 'accumulate';
 En.MIXLY_AVERAGE = 'average';
+En.MIXLY_AI_SENSOR_LICENSEPLATE_RECOGNTITION_TOOLTIP = 'Use MixGo AI sensor to recognize license plates and return a list containing all recognition result objects';
+En.MIXLY_AI_SENSOR_LICENSEPLATE_TOOLTIP = 'Obtain the corresponding information of the license plate object';
+En.MIXLY_LICENSEPLATE = 'License Plate';
+En.MIXLY_FACE = 'Face';
+En.MIXLY_FACE_CLASSIFIER = 'Face detection';
+En.MIXLY_AI_SENSOR_FACE_TOOLTIP = 'Obtain corresponding information of face objects';
+En.MIXLY_AI_SENSOR_BAR_FACE_CLASSIFIER_TOOLTIP = 'Use MixGo AI sensor to detect faces and return a list of objects containing all recognition results';
+En.MIXLY_20OBJECTS = '20 objects';
+En.MIXLY_FIND_20OBJECTS = '20 object recognition';
+En.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = 'Obtain the corresponding information of 20 objects';
+En.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = 'Use MixGo AI sensor to detect 20 objects and return a list containing all recognition result objects';
+
 
 })();

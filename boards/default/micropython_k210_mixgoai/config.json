@@ -1,7 +1,8 @@
 {
     "board": {
         "MixGo AI": "MixGo AI",
-        "MixGo AI sensor": "MixGo AI sensor"
+        "MixGo AI传感器": "MixGo AI sensor",
+        "MixGo AI车牌识别": "MixGo AI sensor2"
     },
     "language": "MicroPython",
     "burn": {
@@ -12,6 +13,9 @@
         },
         "MixGo AI sensor":{
             "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-Sensor_V1.0.kfpkg\""
+        },
+        "MixGo AI sensor2":{
+            "command": "\"{kflash}\" --port {com} --baudrate 1500000 -n \"{indexPath}/build/MixGo_AI-Sensor_V1.2.kfpkg\""
         }
     },
     "upload": {

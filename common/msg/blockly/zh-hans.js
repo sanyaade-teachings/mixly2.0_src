@@ -33,6 +33,7 @@ ZhHans.MSG = {
     catCE_G6:"CE G6",
     catAIOT:"智能物联",
     catAIsensor:"MixGo AI传感器",
+    catAIsensor2:"MixGo AI车牌识别",
     catSensor: "传感器",
     catActuator: "执行器",
     catExternSensor: "外接传感",
@@ -3704,5 +3705,16 @@ ZhHans.weather_solo = '分体式气象站';
 ZhHans.MIXLY_ABBR = '缩写';
 ZhHans.MIXLY_ACCUMULATED = '累积';
 ZhHans.MIXLY_AVERAGE = '平均';
+ZhHans.MIXLY_AI_SENSOR_LICENSEPLATE_RECOGNTITION_TOOLTIP = '使用MixGo AI摄像头识别车牌，返回包含所有识别结果对象的列表';
+ZhHans.MIXLY_AI_SENSOR_LICENSEPLATE_TOOLTIP = '获取车牌对象的相应信息';
+ZhHans.MIXLY_LICENSEPLATE = '车牌';
+ZhHans.MIXLY_FACE = '人脸';
+ZhHans.MIXLY_FACE_CLASSIFIER = '人脸检测';
+ZhHans.MIXLY_AI_SENSOR_FACE_TOOLTIP = '获取人脸对象的相应信息';
+ZhHans.MIXLY_AI_SENSOR_BAR_FACE_CLASSIFIER_TOOLTIP = '使用MixGo AI摄像头检测人脸，返回包含所有识别结果对象的列表';
+ZhHans.MIXLY_20OBJECTS = '20物体';
+ZhHans.MIXLY_FIND_20OBJECTS = '20物体识别';
+ZhHans.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = '获取20物体对象的相应信息';
+ZhHans.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = '使用MixGo AI摄像头检测20物体，返回包含所有识别结果对象的列表';
 
 })();

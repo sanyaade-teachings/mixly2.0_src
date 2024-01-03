@@ -41,6 +41,7 @@
 <script src="../python/blocks/tuple.js"></script>
 <script src="../python/blocks/set.js"></script>
 <script src="../python/blocks/html.js"></script>
+<script src="../micropython_common/blocks/cc_g1.js"></script>
 <!-- generator file -->
 <script src="generators/pins.js"></script>
 <script src="generators/ce_go.js"></script>
@@ -73,6 +74,7 @@
 <script src="../python/generators/set.js"></script>
 <script src="../python/generators/tuple.js"></script>
 <script src="../python/generators/html.js"></script>
+<script src="../micropython_common/generators/cc_g1.js"></script>
 <!-- ace file -->
   <script src="../python/blocks/utility.js"></script>
 <script src="../python/generators/utility.js"></script>
@@ -2034,6 +2036,12 @@
         </value>
     </block>
   </category>
+  <category id="catCC_G1" colour="40" m-show='micropython:esp32s2:mixgo_ce'>
+      <block type="cc_g1_read_bat"></block>   
+      <block type="cc_g1_read_joystick"></block>
+      <block type="cc_g1_read_key"></block>
+      <block type="cc_g1_turnoff"></block>
+  </category> 
     <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
       <block type="iot_wifi_connect">

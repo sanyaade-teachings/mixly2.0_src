@@ -31,6 +31,7 @@ ZhHans.MSG = {
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
+    catCC_G1:"CC G1",
     catAIOT:"智能物联",
     catAIsensor:"MixGo AI传感器",
     catAIsensor2:"MixGo AI车牌识别",
@@ -3716,5 +3717,9 @@ ZhHans.MIXLY_20OBJECTS = '20物体';
 ZhHans.MIXLY_FIND_20OBJECTS = '20物体识别';
 ZhHans.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = '获取20物体对象的相应信息';
 ZhHans.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = '使用MixGo AI摄像头检测20物体，返回包含所有识别结果对象的列表';
-
+ZhHans.MIXLY_BUTTON = '按键';
+ZhHans.WHETHER_IS_PRESSED = '是否被按着';
+ZhHans.MIXLY_GET_BATTERY = '获取电池电量（v）';
+ZhHans.MIXLY_GET_JOYSTICK = '获取摇杆';
+ZhHans.MIXLY_HANDLE_SHUTDOWN ='设置手柄关机';
 })();

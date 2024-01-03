@@ -9,14 +9,15 @@ Micropython	library for the CC_G1(Remote control handle)
 @dahanzimin From the Mixly Team
 """
 from micropython import const
+from machine import Pin,SoftI2C
 
 _CC_G1_ADDRESS			= const(0x27)
-_CC_G1_ID   			= const(0x00)
-_CC_G1_VBAT   			= const(0x01)
+_CC_G1_ID				= const(0x00)
+_CC_G1_VBAT				= const(0x01)
 _CC_G1_ADC				= const(0x03)
 _CC_G1_KEY				= const(0x07)
 
-class CC_G1:
+class Handle:
 	def __init__(self, i2c_bus, addr=_CC_G1_ADDRESS):
 		self._i2c=i2c_bus
 		self._addr = addr
@@ -58,3 +59,12 @@ class CC_G1:
 			self._wreg(_CC_G1_KEY, (self._rreg(_CC_G1_KEY)) & 0XBF)
 		else:
 			self._wreg(_CC_G1_KEY, (self._rreg(_CC_G1_KEY)) | 0X40)
+
+'''Select instantiation objects'''
+ext_i2c = SoftI2C(scl=Pin(0), sda=Pin(1), freq=100000)
+if _CC_G1_ADDRESS in ext_i2c.scan():
+	handle = Handle(ext_i2c)
+else:
+	ext_i2c = SoftI2C(scl=Pin(17), sda=Pin(18), freq=100000)
+	if _CC_G1_ADDRESS in ext_i2c.scan():
+		handle = Handle(ext_i2c)

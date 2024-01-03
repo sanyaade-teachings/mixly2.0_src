@@ -115,8 +115,7 @@ html[data-bs-theme=dark] ::-webkit-scrollbar-corner {
 
 /* 设置滚动条宽高 */
 .blocklyDropDownDiv ::-webkit-scrollbar,
-.blocklyWidgetDiv ::-webkit-scrollbar
- {
+.blocklyWidgetDiv ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
 }

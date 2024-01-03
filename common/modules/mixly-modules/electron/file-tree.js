@@ -14,11 +14,11 @@ class FileTreeExt extends FileTree {
     }
 
     async getContent(inPath) {
+        let output = [];
         const status = await FS.isDirectory(inPath);
         if (!status) {
             return output;
         }
-        let output = [];
         const children = await FS.readDirectory(inPath);
         for (let data of children) {
             const dataPath = path.join(inPath, data);

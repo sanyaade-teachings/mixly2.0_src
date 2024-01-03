@@ -1,8 +1,8 @@
 goog.loadJs('common', () => {
 
+goog.require('XScrollbar');
 goog.require('path');
 goog.require('$.jstree');
-goog.require('XScrollbar');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Events');
@@ -80,6 +80,7 @@ class FileTree {
             },
             plugins: ['wholerow', 'dnd', 'sort', 'unique']
         });
+        this.jstree = this.$fileTree.jstree(true);
         this.events = new Events(['selectLeaf']);
         this.selected = null;
         this.#addEventsListener_();
@@ -88,10 +89,10 @@ class FileTree {
     #addEventsListener_() {
         this.$fileTree
         .on('click.jstree', '.jstree-open>a', ({ target }) => {
-            setTimeout(() => this.$fileTree.jstree(true).close_node(target));
+            setTimeout(() => this.jstree.close_node(target));
         })
         .on('click.jstree', '.jstree-closed>a', ({ target }) => {
-            setTimeout(() => this.$fileTree.jstree(true).open_node(target));
+            setTimeout(() => this.jstree.open_node(target));
         })
         .on('open_node.jstree', (e, data) => {
             const { id } = data.node;
@@ -134,17 +135,17 @@ class FileTree {
 
     setDirPath(dirPath) {
         this.dirPath = dirPath;
-        this.$fileTree.jstree(true).refresh();
+        this.jstree.refresh();
     }
 
     select(inPath) {
         this.selected = inPath;
-        this.$fileTree.jstree(true).deselect_all();
+        this.jstree.deselect_all();
         let node = document.getElementById(inPath);
         if (!node) {
             return;
         }
-        this.$fileTree.jstree(true).select_node(node, true, true);
+        this.jstree.select_node(node, true, true);
         $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
     }
 
@@ -153,7 +154,7 @@ class FileTree {
         if (!node) {
             return;
         }
-        this.$fileTree.jstree(true).deselect_node(node, true);
+        this.jstree.deselect_node(node, true);
         $(node).children('.jstree-wholerow').removeClass('jstree-wholerow-clicked');
     }
 
@@ -222,6 +223,14 @@ class FileTree {
             return prefix + FileTree.FOLDER_ICON_MAP[foldername];
         }
         return prefix + FileTree.FOLDER_ICON_MAP['default'];
+    }
+
+    resize() {
+    }
+
+    dispose() {
+        this.jstree.destroy();
+        this.scrollbar.destroy();
     }
 }
 

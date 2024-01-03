@@ -81,3 +81,25 @@ html[data-bs-theme=dark] .jstree-anchor {
 .jstree-default .jstree-wholerow-clicked {
     background: #e4e6f1;
 }
+/*
+.jstree,
+.jstree > .jstree-container-ul {
+    width: 100%;
+    height: 100%;
+}
+
+.jstree > .jstree-container-ul > .jstree-open {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.jstree > .jstree-container-ul > .jstree-open > .jstree-children {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 24px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}*/

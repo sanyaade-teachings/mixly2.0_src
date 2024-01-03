@@ -38,8 +38,7 @@
   const tabTemplate = `
     <div class="chrome-tab">
       <div class="chrome-tab-dividers"></div>
-      <div class="chrome-tab-background">
-      </div>
+      <div class="chrome-tab-background"></div>
       <div class="chrome-tab-content">
         <div class="chrome-tab-favicon"></div>
         <div class="chrome-tab-title"></div>

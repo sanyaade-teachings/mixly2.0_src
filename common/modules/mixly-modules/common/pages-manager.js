@@ -59,6 +59,7 @@ class PagesManager {
             const id = $(tabEl).attr('data-tab-id');
             const page = this.pagesRegistry.getItem(id);
             this.activeId = id;
+            this.$editorContainer.children().detach();
             if (prevEditor) {
                 prevEditor.onUnmounted();
             }
@@ -115,6 +116,7 @@ class PagesManager {
     resize() {
         const page = this.getActive();
         page && page.resize();
+        this.tabs.resize();
     }
 
     getActive() {

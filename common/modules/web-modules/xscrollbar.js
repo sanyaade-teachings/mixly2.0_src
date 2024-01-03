@@ -98,6 +98,10 @@ class XScrollbar {
     }
   }
 
+  getContent() {
+    return this.$content[0];
+  }
+
   /**
    * 设置滑块大小
    */

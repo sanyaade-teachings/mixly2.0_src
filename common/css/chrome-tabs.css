@@ -70,9 +70,9 @@
 .chrome-tabs .chrome-tab .chrome-tab-background {
   position: absolute;
   top: 0;
-  left: 1;
-  right: 1;
-  height: 100%;
+  bottom: 0px;
+  left: 1px;
+  right: 1px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -288,7 +288,6 @@ html[data-bs-theme=dark] .chrome-tabs {
 }
 html[data-bs-theme=dark] .chrome-tabs .chrome-tab .chrome-tab-dividers::before,
 html[data-bs-theme=dark] .chrome-tabs .chrome-tab .chrome-tab-dividers::after {
-/*  background: #4a4d51;*/
   background-color: #989998;
 }
 html[data-bs-theme=dark] .chrome-tabs .chrome-tab .chrome-tab-background {

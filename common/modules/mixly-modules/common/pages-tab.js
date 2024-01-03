@@ -142,6 +142,9 @@ class PagesTab {
         }
     }
 
+    resize() {
+    }
+
     dispose() {
         this.chromeTabs.dispose();
         this.$content.remove();

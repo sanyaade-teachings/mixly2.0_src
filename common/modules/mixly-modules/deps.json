@@ -317,7 +317,6 @@
         "require": [
             "path",
             "$.jstree",
-            "XScrollbar",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Events",
@@ -713,6 +712,38 @@
         ]
     },
     {
+        "path": "/common/sidebar-local-storage.js",
+        "require": [
+            "OverlayScrollbarsGlobal",
+            "Mixly.IdGenerator",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.PageBase",
+            "Mixly.Electron.FileTree",
+            "Mixly.Web.FileTree"
+        ],
+        "provide": [
+            "Mixly.SideBarLocalStorage"
+        ]
+    },
+    {
+        "path": "/common/sidebars-manager.js",
+        "require": [
+            "path",
+            "Mixly.IdGenerator",
+            "Mixly.XML",
+            "Mixly.Env",
+            "Mixly.Msg",
+            "Mixly.Registry",
+            "Mixly.Events",
+            "Mixly.SideBarLocalStorage",
+            "Mixly.PagesManager"
+        ],
+        "provide": [
+            "Mixly.SideBarsManager"
+        ]
+    },
+    {
         "path": "/common/statusbar-serial.js",
         "require": [
             "Mixly.StatusBar"
@@ -843,9 +874,8 @@
             "Mixly.DragV",
             "Mixly.IdGenerator",
             "Mixly.EditorsManager",
-            "Mixly.Electron.FileTree",
-            "Mixly.Web.FileTree",
-            "Mixly.StatusBarsManager"
+            "Mixly.StatusBarsManager",
+            "Mixly.SideBarsManager"
         ],
         "provide": [
             "Mixly.Workspace"

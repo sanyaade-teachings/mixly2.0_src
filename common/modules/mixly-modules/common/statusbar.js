@@ -55,14 +55,6 @@ class StatusBar extends EditorAce {
             enableLiveAutocompletion: false
         });
     }
-
-    // 可覆盖
-    onTab() {
-    }
-
-    // 可覆盖
-    onRemove() {
-    }
 }
 
 Mixly.StatusBar = StatusBar;

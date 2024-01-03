@@ -28,6 +28,7 @@ class PageBase {
 
     dispose() {
         this.events.run('destroyed');
+        this.getContainer().remove();
     }
 
     onMounted() {
@@ -37,7 +38,6 @@ class PageBase {
 
     onUnmounted() {
         this.isActivated = false;
-        this.getContainer()?.detach();
     }
 
     setTab($tab) {

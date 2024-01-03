@@ -9,9 +9,8 @@ goog.require('Mixly.DragH');
 goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorsManager');
-goog.require('Mixly.Electron.FileTree');
-goog.require('Mixly.Web.FileTree');
-goog.require('Mixly.StatusBarsManager')
+goog.require('Mixly.StatusBarsManager');
+goog.require('Mixly.SideBarsManager');
 goog.provide('Mixly.Workspace');
 
 const {
@@ -24,11 +23,9 @@ const {
     IdGenerator,
     EditorsManager,
     StatusBarsManager,
-    Electron = {},
-    Web = {}
+    SideBarsManager
 } = Mixly;
 
-const { FileTree } = goog.isElectron? Electron : Web;
 
 class Workspace {
     static {
@@ -77,45 +74,45 @@ class Workspace {
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
         this.statusBarTabs = new StatusBarsManager(this.$statusBarTabs[0]);
-        this.statusBarTabs.add('terminal', Msg.Lang['输出'], Msg.Lang['输出']);
+        this.statusBarTabs.add('terminal', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
+        this.sideBarManager = new SideBarsManager(this.$leftSidebar[0]);
+        this.sideBarManager.add('local_storage', '本地空间');
         this.dragH = null;
         this.dragV = null;
         Workspace.add(this);
         this.addDragEvents();
-        this.addEventsForFileTree();
         this.addEventsForEditorManager();
         this.addFuncForStatusbarTabs();
     }
 
-    addEventsForFileTree() {
-        this.fileTree = new FileTree(this.$leftSidebar[0]);
-        const { events } = this.fileTree;
-        events.bind('selectLeaf', (selected) => {
-            const tabs = this.editorManager.getTabs();
-            tabs.addTab({
-                name: selected[0].text,
-                title: selected[0].id,
-                id: selected[0].id,
-                type: path.extname(selected[0].id)
-            });
-        });
-        this.fileTree.setDirPath('D:/gitee');
-    }
+    // addEventsForFileTree() {
+    //     const { events } = this.fileTree;
+    //     events.bind('selectLeaf', (selected) => {
+    //         const tabs = this.editorManager.getTabs();
+    //         tabs.addTab({
+    //             name: selected[0].text,
+    //             title: selected[0].id,
+    //             id: selected[0].id,
+    //             type: path.extname(selected[0].id)
+    //         });
+    //     });
+    //     this.fileTree.setDirPath('D:/gitee');
+    // }
 
     addEventsForEditorManager() {
         const { events } = this.editorManager.tabs;
         events.bind('activeChange', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
-            this.fileTree.select(tabId);
+            // this.fileTree.select(tabId);
         });
 
         events.bind('destroyed', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
-            this.fileTree.deselect(tabId);
+            // this.fileTree.deselect(tabId);
         });
     }
 
@@ -167,6 +164,8 @@ class Workspace {
 
     resize() {
         this.editorManager.resize();
+        this.sideBarManager.resize();
+        this.statusBarTabs.resize();
     }
 
     dispose() {

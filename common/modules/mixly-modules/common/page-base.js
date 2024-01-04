@@ -17,6 +17,7 @@ class PageBase {
     }
 
     init() {
+        this.inited = true;
         this.events.run('created');
     }
 
@@ -70,6 +71,10 @@ class PageBase {
 
     isDirty() {
         return this.#dirty;
+    }
+
+    isInited() {
+        return this.inited;
     }
 
     bind(type, func) {

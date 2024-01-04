@@ -74,45 +74,51 @@ class Workspace {
         this.$dragH = this.$content.find('.drag-h');
         this.$statusBarTabs = this.$content.find('.statusbar-tabs');
         this.statusBarTabs = new StatusBarsManager(this.$statusBarTabs[0]);
-        this.statusBarTabs.add('terminal', Msg.Lang['输出']);
+        this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
         this.sideBarManager = new SideBarsManager(this.$leftSidebar[0]);
-        this.sideBarManager.add('local_storage', '本地空间');
+        this.sideBarManager.add('local_storage', 'local_storage', '本地');
         this.dragH = null;
         this.dragV = null;
         Workspace.add(this);
+        this.addEventsForFileTree();
         this.addDragEvents();
         this.addEventsForEditorManager();
         this.addFuncForStatusbarTabs();
     }
 
-    // addEventsForFileTree() {
-    //     const { events } = this.fileTree;
-    //     events.bind('selectLeaf', (selected) => {
-    //         const tabs = this.editorManager.getTabs();
-    //         tabs.addTab({
-    //             name: selected[0].text,
-    //             title: selected[0].id,
-    //             id: selected[0].id,
-    //             type: path.extname(selected[0].id)
-    //         });
-    //     });
-    //     this.fileTree.setDirPath('D:/gitee');
-    // }
+    addEventsForFileTree() {
+        const sideBarLocalStorage = this.sideBarManager.get('local_storage');
+        const fileTree = sideBarLocalStorage.getFileTree();
+        fileTree.bind('selectLeaf', (selected) => {
+            const tabs = this.editorManager.getTabs();
+            tabs.addTab({
+                name: selected[0].text,
+                title: selected[0].id,
+                id: selected[0].id,
+                type: path.extname(selected[0].id)
+            });
+        });
+        sideBarLocalStorage.setFolderPath('D:/gitee');
+    }
 
     addEventsForEditorManager() {
         const { events } = this.editorManager.tabs;
         events.bind('activeChange', (event) => {
+            const sideBarLocalStorage = this.sideBarManager.get('local_storage');
+            const fileTree = sideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
-            // this.fileTree.select(tabId);
+            fileTree.select(tabId);
         });
 
         events.bind('destroyed', (event) => {
+            const sideBarLocalStorage = this.sideBarManager.get('local_storage');
+            const fileTree = sideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
-            // this.fileTree.deselect(tabId);
+            fileTree.deselect(tabId);
         });
     }
 

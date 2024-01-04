@@ -59,7 +59,12 @@ class FileTree {
                 },
                 data: (node, cb) => {
                     if(node.id === "#") {
-                        cb(this.#getRoot_());
+                        this.#getChildren_(this.dirPath)
+                        .then((data) => {
+                            cb(data);
+                        })
+                        .catch(console.log);
+                        // cb(this.#getRoot_());
                     } else {
                         let $li = this.$fileTree.jstree(true).get_node(node, true);
                         let $i = $li.find('.jstree-anchor > .jstree-icon');
@@ -133,7 +138,7 @@ class FileTree {
         });
     }
 
-    setDirPath(dirPath) {
+    setFolderPath(dirPath) {
         this.dirPath = dirPath;
         this.jstree.refresh();
     }
@@ -231,6 +236,26 @@ class FileTree {
     dispose() {
         this.jstree.destroy();
         this.scrollbar.destroy();
+    }
+
+    bind(type, func) {
+        return this.events.bind(type, func);
+    }
+
+    unbind(id) {
+        this.events.unbind(id);
+    }
+
+    addEventsType(eventsType) {
+        this.events.addType(eventsType);
+    }
+
+    runEvent(eventsType) {
+        this.events.run(eventsType);
+    }
+
+    offEvent(eventsType) {
+        this.events.off(eventsType);
     }
 }
 

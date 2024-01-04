@@ -27,6 +27,7 @@ class EditorAce extends EditorBase {
     }
 
     init() {
+        super.init();
         this.editor = ace.edit(this.$container[0]);
         this.resetFontSize();
         this.addCursorLayer();

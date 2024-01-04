@@ -65,7 +65,7 @@ class PagesManager {
             }
             this.$editorContainer.empty();
             this.$editorContainer.append(page.getContainer());
-            if (!page.inited) {
+            if (!page.isInited()) {
                 return;
             }
             page.onMounted();
@@ -89,9 +89,10 @@ class PagesManager {
                     this.page = 'editor';
                 }
             }
-            page.inited = true;
-            page.init();
-            page.onMounted();
+            setTimeout(() => {
+                page.init();
+                page.onMounted();
+            }, 100);
         });
 
         // 移除已有Tab时触发

@@ -315,6 +315,7 @@
     {
         "path": "/common/file-tree.js",
         "require": [
+            "XScrollbar",
             "path",
             "$.jstree",
             "Mixly.Env",
@@ -714,7 +715,7 @@
     {
         "path": "/common/sidebar-local-storage.js",
         "require": [
-            "OverlayScrollbarsGlobal",
+            "path",
             "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",

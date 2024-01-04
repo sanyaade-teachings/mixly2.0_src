@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
@@ -35,14 +36,41 @@ class SideBarLocalStorage extends PageBase {
         this.id = id;
         this.$content = $content;
         $parentContainer.append(this.$content);
-        this.fileTree = new FileTree(this.$content.children('div')[0]);
-        this.fileTree.setDirPath('D:/gitee');
+        this.$folder = this.$content.find('button.folder');
+        this.$iconTriangle = this.$folder.children('.triangle');
+        this.$iconFolder = this.$folder.children('.folder');
+        this.$name = this.$folder.children('.name');
+        this.$children = this.$content.find('.children');
+        this.fileTree = new FileTree(this.$children[0]);
+        this.folderOpened = false;
+        this.hasFolder = false;
+        this.addEventsListener();
     }
 
     init() {
         super.init();
         const $coseBtn = this.getTab().find('.chrome-tab-close');
         $coseBtn.css('display', 'none');
+    }
+
+    addEventsListener() {
+        this.$folder.click(() => {
+            if (!this.hasFolder) {
+                return;
+            }
+            if (this.folderOpened) {
+                this.$iconTriangle.removeClass('codicon-chevron-down');
+                this.$iconTriangle.addClass('codicon-chevron-right');
+                this.$iconFolder.removeClass('opened');
+                this.$children.hide();
+            } else {
+                this.$iconTriangle.removeClass('codicon-chevron-right');
+                this.$iconTriangle.addClass('codicon-chevron-down');
+                this.$iconFolder.addClass('opened');
+                this.$children.show();
+            }
+            this.folderOpened = !this.folderOpened;
+        });
     }
 
     getFileTree() {
@@ -56,6 +84,13 @@ class SideBarLocalStorage extends PageBase {
 
     dispose() {
         this.fileTree.dispose();
+    }
+
+    setFolderPath(folderPath) {
+        const rootNodeName = path.basename(folderPath).toUpperCase();
+        this.$name.text(rootNodeName);
+        this.fileTree.setFolderPath(folderPath);
+        this.hasFolder = true;
     }
 }
 

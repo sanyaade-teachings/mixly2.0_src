@@ -5,7 +5,76 @@
             height: 100%;
             position: relative;
         }
+
+        div[m-id="{{d.mId}}"] > .folder {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 24px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            border: unset;
+            padding: 0 1px;
+        }
+
+        html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .folder:focus {
+            background: #d7daeb;
+        }
+
+        html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder:focus {
+            background: #5a5959;
+        }
+
+        div[m-id="{{d.mId}}"] > .folder > * {
+            line-height: 24px;
+            opacity: 0.8;
+        }
+
+        div[m-id="{{d.mId}}"] > .folder > .icon.triangle {
+            font-size: 15px !important;
+        }
+
+        div[m-id="{{d.mId}}"] > .folder > .icon.folder:before {
+            margin: 0 0.2em;
+        }
+
+        div[m-id="{{d.mId}}"] > .folder > .name {
+            font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
+            font-size: 12px !important;
+            padding-left: 2px;
+            font-weight: bold;
+        }
+
+        div[m-id="{{d.mId}}"] > .children {
+            position: absolute;
+            top: 24px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            display: none;
+        }
+
+        div[m-id="{{d.mId}}"] > .children .jstree {
+            width: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] > .children .jstree-container-ul {
+            width: 100%;
+        }
+
+        div[m-id="{{d.mId}}"] > .children .jstree-container-ul > .jstree-node {
+            margin-left: 8px;
+        }
     </style>
     <div m-id="{{d.mId}}">
+        <button class="folder layui-btn layui-btn-xs layui-btn-primary">
+            <i class="icon triangle codicon-chevron-right"></i>
+            <i class="icon folder foldericon-root-default"></i>
+            <p class="name"></p>
+        </button>
+        <div class="children"></div>
     </div>
 </div>

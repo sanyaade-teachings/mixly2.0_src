@@ -578,6 +578,11 @@ PyEngine.prototype.run = function(type) {
                 statusBarTerminal.addValue('\n');
             }
             statusBarTerminal.addValue('==程序运行完成==\n');
+            if (window.userOpEvents) {
+                window.userOpEvents.addRecord({
+                    operation: 'run-success'
+                });
+            }
         },
         function(error) {
             engine.programStatus['running'] = false;
@@ -601,6 +606,11 @@ PyEngine.prototype.run = function(type) {
                 statusBarTerminal.addValue('\n');
             }
             statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
+            if (window.userOpEvents) {
+                window.userOpEvents.addRecord({
+                    operation: 'run-error'
+                });
+            }
         }
 );
 

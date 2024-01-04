@@ -271,6 +271,7 @@
             "Mixly.LevelSelector",
             "Mixly.FooterBar",
             "Mixly.UserEvents",
+            "Mixly.UserOPEvents",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.FooterLayerExample",
@@ -594,6 +595,17 @@
         ],
         "provide": [
             "Mixly.UserEvents"
+        ]
+    },
+    {
+        "path": "/common/user-op-events.js",
+        "require": [
+            "Mixly.MFile",
+            "Mixly.Config",
+            "Mixly.Boards"
+        ],
+        "provide": [
+            "Mixly.UserOPEvents"
         ]
     },
     {

@@ -58,9 +58,11 @@ class UserOPEvents {
            data[key] =  this.#DEFAULT_DATA[key]();
         }
         return new Promise((resolve, reject) => {
-            $.post('https://cc.mixly.cn:7777/api/behaviorrecord', data, function (result) {
-                console.log(result)
-                resolve(result);
+            $.post('https://cc.mixly.cn/api/behaviorrecord', data, function() {
+                resolve();
+            })
+            .fail(function() {
+                resolve();
             });
         });
     }

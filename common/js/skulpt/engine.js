@@ -577,12 +577,12 @@ PyEngine.prototype.run = function(type) {
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
                 statusBarTerminal.addValue('\n');
             }
-            statusBarTerminal.addValue('==程序运行完成==\n');
             if (window.userOpEvents) {
                 window.userOpEvents.addRecord({
                     operation: 'run-success'
                 });
             }
+            statusBarTerminal.addValue('==程序运行完成==\n');
         },
         function(error) {
             engine.programStatus['running'] = false;
@@ -605,12 +605,13 @@ PyEngine.prototype.run = function(type) {
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
                 statusBarTerminal.addValue('\n');
             }
-            statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
+            statusBarTerminal.addValue(error.toString() + '\n');
             if (window.userOpEvents) {
                 window.userOpEvents.addRecord({
                     operation: 'run-error'
                 });
             }
+            statusBarTerminal.addValue('==程序运行完成==\n');
         }
 );
 

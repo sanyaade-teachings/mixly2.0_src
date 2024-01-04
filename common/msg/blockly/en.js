@@ -32,6 +32,7 @@ En.MSG = {
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
+    catCC_G1:"CC G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
     catAIsensor2:"MixGo AI LPR",
@@ -3569,6 +3570,10 @@ En.MIXLY_20OBJECTS = '20 objects';
 En.MIXLY_FIND_20OBJECTS = '20 object recognition';
 En.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = 'Obtain the corresponding information of 20 objects';
 En.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = 'Use MixGo AI sensor to detect 20 objects and return a list containing all recognition result objects';
-
+En.MIXLY_BUTTON = 'button';
+En.WHETHER_IS_PRESSED = 'whether be held down';
+En.MIXLY_GET_BATTERY = 'get battery power（v）';
+En.MIXLY_GET_JOYSTICK = 'get the value of Joystick';
+En.MIXLY_HANDLE_SHUTDOWN ='set handle off';
 
 })();

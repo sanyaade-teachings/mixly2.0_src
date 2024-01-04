@@ -14,10 +14,7 @@ Blockly.Python.forBlock['cc_g1_read_joystick'] = function(){
 	var v = this.getFieldValue('VAR');
     Blockly.Python.definitions_['import_cc_g1'] = 'from cc_g1 import handle';
     var code = 'handle.read_joystick()'+v+'';
-
-    // var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
-    // var code = 'car.move("'+ v + '",' + speed +")\n";
-    return code;
+    return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.forBlock['cc_g1_read_key'] = function(){

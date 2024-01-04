@@ -28,6 +28,7 @@ ZhHant.MSG = {
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
+    catCC_G1:"CC G1",
     catAIOT:"智能物聯",
     catAIsensor:"MixGo AI感測器",
     catAIsensor2:"MixGo AI車牌識別",
@@ -3541,6 +3542,10 @@ ZhHant.MIXLY_20OBJECTS = '20物體';
 ZhHant.MIXLY_FIND_20OBJECTS = '20物體識別';
 ZhHant.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = '獲取20物體物件的相應資訊';
 ZhHant.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = '使用MixGo AI攝像頭檢測20物體，返回包含所有識別結果物件的清單';
-
+ZhHant.MIXLY_BUTTON = '按鍵';
+ZhHant.WHETHER_IS_PRESSED = '是否被按著';
+ZhHant.MIXLY_GET_BATTERY = '獲取電池電量（v）';
+ZhHant.MIXLY_GET_JOYSTICK = '獲取搖桿';
+ZhHant.MIXLY_HANDLE_SHUTDOWN ='設置手柄關機';
 
 })();

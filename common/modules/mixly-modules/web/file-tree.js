@@ -14,7 +14,7 @@ class FileTreeExt extends FileTree {
     }
 
     async getContent(inPath) {
-        const rePath = '/' + path.relative('/test', inPath);
+        const rePath = '/' + path.relative(this.getFolderPath(), inPath);
         const status = await FS.isDirectory(rePath);
         if (!status) {
             return output;

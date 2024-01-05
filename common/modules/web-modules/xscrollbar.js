@@ -31,7 +31,7 @@ class XScrollbar {
       // 滑块大小
       thumbSize: '5px',
       // 轨道颜色
-      trackBackground: '#ddd',
+      trackBackground: 'transparent',
       // 滑块颜色
       thumbBackground: '#5f5f5f',
       // 滑块圆角大小

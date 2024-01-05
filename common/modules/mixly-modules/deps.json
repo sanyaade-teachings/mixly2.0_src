@@ -321,7 +321,8 @@
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Events",
-            "Mixly.ContextMenu"
+            "Mixly.ContextMenu",
+            "Mixly.Registry"
         ],
         "provide": [
             "Mixly.FileTree"
@@ -682,8 +683,7 @@
     {
         "path": "/common/script-loader.js",
         "require": [
-            "Mixly.Env",
-            "Mixly.Config"
+            "Mixly"
         ],
         "provide": [
             "Mixly.ScriptLoader"
@@ -721,7 +721,9 @@
             "Mixly.Env",
             "Mixly.PageBase",
             "Mixly.Electron.FileTree",
-            "Mixly.Web.FileTree"
+            "Mixly.Web.FileTree",
+            "Mixly.Electron.FS",
+            "Mixly.Web.FS"
         ],
         "provide": [
             "Mixly.SideBarLocalStorage"
@@ -741,7 +743,9 @@
             "Mixly.PagesManager"
         ],
         "provide": [
-            "Mixly.SideBarsManager"
+            "Mixly.SideBarsManager",
+            "Mixly.LeftSideBarsManager",
+            "Mixly.RightSideBarsManager"
         ]
     },
     {
@@ -876,7 +880,8 @@
             "Mixly.IdGenerator",
             "Mixly.EditorsManager",
             "Mixly.StatusBarsManager",
-            "Mixly.SideBarsManager"
+            "Mixly.LeftSideBarsManager",
+            "Mixly.RightSideBarsManager"
         ],
         "provide": [
             "Mixly.Workspace"
@@ -1022,6 +1027,7 @@
     {
         "path": "/electron/fs.js",
         "require": [
+            "path",
             "Mixly.Electron"
         ],
         "provide": [

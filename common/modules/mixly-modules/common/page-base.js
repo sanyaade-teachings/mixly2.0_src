@@ -21,6 +21,10 @@ class PageBase {
         this.events.run('created');
     }
 
+    updateContainer($elem) {
+        this.$content = $elem;
+    }
+
     getContainer() {
         return this.$content;
     }

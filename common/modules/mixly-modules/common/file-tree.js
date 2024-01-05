@@ -7,13 +7,15 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Events');
 goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Registry');
 goog.provide('Mixly.FileTree');
 
 const {
     Env,
     Config,
     Events,
-    ContextMenu
+    ContextMenu,
+    Registry
 } = Mixly;
 
 const { USER } = Config;
@@ -25,21 +27,18 @@ class FileTree {
     }
 
     constructor(element) {
-        this.dirPath = '';
+        this.folderPath = '';
         this.$content = $(element);
-        let trackBackground, thumbBackground;
+        let thumbBackground;
         if (USER.theme === 'dark') {
-            trackBackground = '#222';
             thumbBackground = '#b0b0b0';
         } else {
-            trackBackground = '#ddd';
             thumbBackground = '#5f5f5f';
         }
         this.scrollbar = new XScrollbar(element, {
             onlyHorizontal: false,
-            thumbSize: 3,
-            thumbRadius: 1,
-            trackBackground,
+            thumbSize: '4px',
+            thumbRadius: 0,
             thumbBackground
         });
         this.$fileTree = $(this.scrollbar.$content);
@@ -58,26 +57,23 @@ class FileTree {
                     return true;
                 },
                 data: (node, cb) => {
-                    if(node.id === "#") {
-                        this.#getChildren_(this.dirPath)
-                        .then((data) => {
-                            cb(data);
-                        })
-                        .catch(console.log);
-                        // cb(this.#getRoot_());
+                    let folderPath = '';
+                    if(node.id === '#') {
+                        folderPath = this.folderPath;
                     } else {
                         let $li = this.$fileTree.jstree(true).get_node(node, true);
                         let $i = $li.find('.jstree-anchor > .jstree-icon');
                         $i.addClass('layui-anim layui-anim-fadein layui-anim-fadeout layui-anim-loop');
-                        this.#getChildren_(node.id)
-                        .then((data) => {
-                            cb(data);
-                        })
-                        .catch(console.log);
+                        folderPath = node.id;
                     }
+                    this.#getChildren_(folderPath)
+                    .then((data) => {
+                        cb(data);
+                    })
+                    .catch(console.log);
                 },
                 themes: {
-                    dots: false,
+                    dots: true,
                     name: USER.theme === 'light'? 'default' : 'default-dark',
                     responsive: false,
                     ellipsis: true
@@ -89,6 +85,7 @@ class FileTree {
         this.events = new Events(['selectLeaf']);
         this.selected = null;
         this.#addEventsListener_();
+        this.nodeAliveRegistry = new Registry();
     }
 
     #addEventsListener_() {
@@ -101,29 +98,33 @@ class FileTree {
         })
         .on('open_node.jstree', (e, data) => {
             const { id } = data.node;
-            let node = document.getElementById(id);
-            let $i = $(node).children('.jstree-anchor').children('.jstree-icon');
+            let elem = document.getElementById(id);
+            let $i = $(elem).children('.jstree-anchor').children('.jstree-icon');
             $i.addClass('opened');
         })
         .on('close_node.jstree', (e, data) => {
             const { id } = data.node;
-            let node = document.getElementById(id);
-            let $i = $(node).children('.jstree-anchor').children('.jstree-icon');
+            let elem = document.getElementById(id);
+            let $i = $(elem).children('.jstree-anchor').children('.jstree-icon');
             $i.removeClass('opened');
         })
         .on('after_open.jstree', (e, data) => {
-            let node = document.getElementById(this.selected);
-            if (!node) {
+            const { id } = data.node;
+            if (!this.nodeAliveRegistry.getItem(id)) {
+                this.nodeAliveRegistry.register(id, Date.now());
+            }
+            let elem = document.getElementById(this.selected);
+            if (!elem) {
                 return;
             }
-            $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+            $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
         })
         .on('after_close.jstree', (e, data) => {
-            let node = document.getElementById(this.selected);
-            if (!node) {
+            let elem = document.getElementById(this.selected);
+            if (!elem) {
                 return;
             }
-            $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+            $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
         })
         .on("changed.jstree", (e, data) => {
             const selected = data.instance.get_selected(true);
@@ -138,39 +139,44 @@ class FileTree {
         });
     }
 
-    setFolderPath(dirPath) {
-        this.dirPath = dirPath;
+    setFolderPath(folderPath) {
+        this.folderPath = folderPath;
+        this.nodeAliveRegistry.reset();
         this.jstree.refresh();
+    }
+
+    getFolderPath() {
+        return this.folderPath;
     }
 
     select(inPath) {
         this.selected = inPath;
         this.jstree.deselect_all();
-        let node = document.getElementById(inPath);
-        if (!node) {
+        let elem = document.getElementById(inPath);
+        if (!elem) {
             return;
         }
-        this.jstree.select_node(node, true, true);
-        $(node).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+        this.jstree.select_node(elem, true, true);
+        $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
     }
 
     deselect(inPath) {
-        let node = document.getElementById(inPath);
-        if (!node) {
+        let elem = document.getElementById(inPath);
+        if (!elem) {
             return;
         }
-        this.jstree.deselect_node(node, true);
-        $(node).children('.jstree-wholerow').removeClass('jstree-wholerow-clicked');
+        this.jstree.deselect_node(elem, true);
+        $(elem).children('.jstree-wholerow').removeClass('jstree-wholerow-clicked');
     }
 
     #getRoot_() {
-        const rootNodeName = path.basename(this.dirPath).toUpperCase();
+        const rootNodeName = path.basename(this.folderPath).toUpperCase();
         return [{
             text: `<div style="font-weight:bold;display:unset;">${rootNodeName}</div>`,
-            id: this.dirPath,
+            id: this.folderPath,
             children: true,
             li_attr: {
-                title: this.dirPath
+                title: this.folderPath
             },
             icon: 'foldericon-root-default'
         }];

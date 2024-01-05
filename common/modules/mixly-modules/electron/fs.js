@@ -1,5 +1,6 @@
 goog.loadJs('electron', () => {
 
+goog.require('path');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.FS');
 
@@ -42,15 +43,15 @@ FS.showDirectoryPicker = () => {
         currentWindow.focus();
         dialog.showOpenDialog(currentWindow, {
             title: '打开文件夹',
-            defaultPath: File.workingPath,
-            filters,
+            // defaultPath: File.workingPath,
+            // filters,
             properties: ['openDirectory', 'createDirectory'],
             message: '打开文件夹'
         })
         .then(result => {
-            const filePath = result.filePaths[0];
-            if (filePath) {
-                resolve(filePath);
+            const folderPath = result.filePaths[0];
+            if (folderPath) {
+                resolve(folderPath);
             } else {
                 reject('dir not found');
             }

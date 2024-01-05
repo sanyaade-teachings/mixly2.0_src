@@ -10,7 +10,8 @@ goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorsManager');
 goog.require('Mixly.StatusBarsManager');
-goog.require('Mixly.SideBarsManager');
+goog.require('Mixly.LeftSideBarsManager');
+goog.require('Mixly.RightSideBarsManager');
 goog.provide('Mixly.Workspace');
 
 const {
@@ -23,7 +24,8 @@ const {
     IdGenerator,
     EditorsManager,
     StatusBarsManager,
-    SideBarsManager
+    LeftSideBarsManager,
+    RightSideBarsManager
 } = Mixly;
 
 
@@ -77,8 +79,10 @@ class Workspace {
         this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
         this.statusBarTabs.changeTo('output');
         this.editorManager = new EditorsManager(this.$editor[0]);
-        this.sideBarManager = new SideBarsManager(this.$leftSidebar[0]);
-        this.sideBarManager.add('local_storage', 'local_storage', '本地');
+        this.leftSideBarManager = new LeftSideBarsManager(this.$leftSidebar[0]);
+        this.leftSideBarManager.add('local_storage', 'local_storage', '本地');
+        this.rightSideBarManager = new RightSideBarsManager(this.$rightSidebar[0]);
+        // this.rightSideBarManager.add('local_storage', 'local_storage', '本地');
         this.dragH = null;
         this.dragV = null;
         Workspace.add(this);
@@ -89,8 +93,8 @@ class Workspace {
     }
 
     addEventsForFileTree() {
-        const sideBarLocalStorage = this.sideBarManager.get('local_storage');
-        const fileTree = sideBarLocalStorage.getFileTree();
+        const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
+        const fileTree = leftSideBarLocalStorage.getFileTree();
         fileTree.bind('selectLeaf', (selected) => {
             const tabs = this.editorManager.getTabs();
             tabs.addTab({
@@ -100,22 +104,21 @@ class Workspace {
                 type: path.extname(selected[0].id)
             });
         });
-        sideBarLocalStorage.setFolderPath('D:/gitee');
     }
 
     addEventsForEditorManager() {
         const { events } = this.editorManager.tabs;
         events.bind('activeChange', (event) => {
-            const sideBarLocalStorage = this.sideBarManager.get('local_storage');
-            const fileTree = sideBarLocalStorage.getFileTree();
+            const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
+            const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             fileTree.select(tabId);
         });
 
         events.bind('destroyed', (event) => {
-            const sideBarLocalStorage = this.sideBarManager.get('local_storage');
-            const fileTree = sideBarLocalStorage.getFileTree();
+            const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
+            const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             fileTree.deselect(tabId);
@@ -170,7 +173,8 @@ class Workspace {
 
     resize() {
         this.editorManager.resize();
-        this.sideBarManager.resize();
+        this.leftSideBarManager.resize();
+        this.rightSideBarManager.resize();
         this.statusBarTabs.resize();
     }
 

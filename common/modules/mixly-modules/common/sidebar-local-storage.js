@@ -7,6 +7,8 @@ goog.require('Mixly.Env');
 goog.require('Mixly.PageBase');
 goog.require('Mixly.Electron.FileTree');
 goog.require('Mixly.Web.FileTree');
+goog.require('Mixly.Electron.FS');
+goog.require('Mixly.Web.FS');
 goog.provide('Mixly.SideBarLocalStorage');
 
 const {
@@ -18,58 +20,74 @@ const {
     Web = {}
 } = Mixly;
 
-const { FileTree } = goog.isElectron? Electron : Web;
-
+const {
+    FileTree,
+    FS
+} = goog.isElectron? Electron : Web;
 
 class SideBarLocalStorage extends PageBase {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage.html'));
+        this.OPEN_FOLDER_TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage-open-folder.html'));
     }
 
     constructor(element) {
         const $parentContainer = $(element);
         const id = IdGenerator.generate();
-        const $content = $(XML.render(SideBarLocalStorage.TEMPLATE, {
+        const $folderContent = $(XML.render(SideBarLocalStorage.TEMPLATE, {
+            mId: id
+        }));
+        const $openFolderContent = $(XML.render(SideBarLocalStorage.OPEN_FOLDER_TEMPLATE, {
             mId: id
         }));
         super();
         this.id = id;
-        this.$content = $content;
+        this.$openFolderContent = $openFolderContent;
+        this.$folderContent = $folderContent;
+        this.$content = $openFolderContent;
         $parentContainer.append(this.$content);
-        this.$folder = this.$content.find('button.folder');
-        this.$iconTriangle = this.$folder.children('.triangle');
-        this.$iconFolder = this.$folder.children('.folder');
-        this.$name = this.$folder.children('.name');
-        this.$children = this.$content.find('.children');
+        this.$folder = $folderContent.find('.folder-title');
+        this.$iconTriangle = this.$folder.find('.triangle');
+        this.$iconFolder = this.$folder.find('.folder');
+        this.$name = this.$folder.find('.name');
+        this.$children = $folderContent.find('.children');
         this.fileTree = new FileTree(this.$children[0]);
         this.folderOpened = false;
-        this.hasFolder = false;
         this.addEventsListener();
     }
 
     init() {
         super.init();
-        const $coseBtn = this.getTab().find('.chrome-tab-close');
-        $coseBtn.css('display', 'none');
+        const $closeBtn = this.getTab().find('.chrome-tab-close');
+        $closeBtn.css('display', 'none');
     }
 
     addEventsListener() {
         this.$folder.click(() => {
-            if (!this.hasFolder) {
-                return;
-            }
             if (this.folderOpened) {
                 this.$iconTriangle.removeClass('codicon-chevron-down');
                 this.$iconTriangle.addClass('codicon-chevron-right');
                 this.$iconFolder.removeClass('opened');
+                this.$folder.removeClass('opened');
                 this.$children.hide();
             } else {
                 this.$iconTriangle.removeClass('codicon-chevron-right');
                 this.$iconTriangle.addClass('codicon-chevron-down');
                 this.$iconFolder.addClass('opened');
+                this.$folder.addClass('opened');
                 this.$children.show();
             }
             this.folderOpened = !this.folderOpened;
+        });
+
+        this.$openFolderContent.find('button').click(() => {
+            FS.showDirectoryPicker()
+            .then((folderPath) => {
+                this.setFolderPath(folderPath);
+                this.$content.replaceWith(this.$folderContent);
+                this.$openFolderContent.remove();
+            })
+            .catch(console.log);
         });
     }
 
@@ -90,7 +108,6 @@ class SideBarLocalStorage extends PageBase {
         const rootNodeName = path.basename(folderPath).toUpperCase();
         this.$name.text(rootNodeName);
         this.fileTree.setFolderPath(folderPath);
-        this.hasFolder = true;
     }
 }
 

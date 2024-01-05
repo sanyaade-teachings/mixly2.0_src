@@ -1,6 +1,5 @@
+goog.require('Mixly');
 goog.provide('Mixly.ScriptLoader');
-goog.require('Mixly.Env');
-goog.require('Mixly.Config');
 
 /**
  * 加载 script 文件
@@ -57,35 +56,3 @@ Mixly.ScriptLoader.loadLangJs = function (oldLang, newLang, doFunc) {
         doFunc();
     });
 }
-
-/* 公共js */
-
-Mixly.ScriptLoader.commonJs = [
-];
-
-
-/* 客户端js */
-Mixly.ScriptLoader.clientJs = [
-];
-
-/* 网页端js */
-Mixly.ScriptLoader.webJs = [
-];
-
-Mixly.ScriptLoader.load = function () {
-    var filePath = Mixly.Config.pathPrefix;
-
-    function loadJsArr(arr) {
-        for (let i = 0; i < arr.length; i++) {
-            Mixly.ScriptLoader.loadScript(filePath + arr[i]);
-        }
-    }
-
-    if (Mixly.goog.isElectron) {
-        loadJsArr(Mixly.ScriptLoader.clientJs);
-    } else {
-        loadJsArr(Mixly.ScriptLoader.webJs);
-    }
-}
-
-//Mixly.ScriptLoader.load();

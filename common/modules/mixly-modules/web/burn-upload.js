@@ -484,12 +484,22 @@ BU.uploadWithAmpy = (port) => {
                     mainStatusBarTab.changeTo(port);
                     const statusBarSerial = mainStatusBarTab.getStatusBarById(port);
                     statusBarSerial.scrollToBottom(port);
+                    if (window.userOpEvents) {
+                        window.userOpEvents.addRecord({
+                            operation: 'upload-success'
+                        });
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                     layer.close(index);
                     statusBarTerminal.addValue(`[Error] ${error}\n`);
                     statusBarTerminal.addValue(`==${Msg.Lang['上传失败']}==\n`);
+                    if (window.userOpEvents) {
+                        window.userOpEvents.addRecord({
+                            operation: 'upload-error'
+                        });
+                    }
                 })
                 .finally(async () => {
                     portObj.busy = false;

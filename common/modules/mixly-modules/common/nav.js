@@ -1,8 +1,6 @@
 goog.loadJs('common', () => {
 
-goog.require('BrowserFS');
 goog.require('layui');
-goog.require('Blockly');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Command');
@@ -82,9 +80,6 @@ Nav.registerQueue = [];
 
 Nav.init = function() {
     this.$container = $(XML.render(this.CONTAINER_TEMPLATE, {
-        msg: {
-            copyright: Blockly.Msg.MSG['copyright']
-        },
         mId: IdGenerator.generate()
     }));
     this.$leftBtnContainer = this.$container.find('.left-btn-container');
@@ -154,17 +149,7 @@ Nav.init = function() {
         preconditionFn: () => {
             return goog.isElectron;
         },
-        callback: (elem) => {
-            window.showDirectoryPicker({
-                mode: 'readwrite'
-            })
-            .then((filesystem) => {
-                return Mixly.Web.FS.pool.exec('addFileSystemHandler', [filesystem]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        },
+        callback: (elem) => console.log(elem),
         scopeType: this.Scope.RIGHT,
         weight: 4
     });

@@ -602,9 +602,7 @@
     {
         "path": "/common/nav.js",
         "require": [
-            "BrowserFS",
             "layui",
-            "Blockly",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Command",

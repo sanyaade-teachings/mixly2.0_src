@@ -77,6 +77,8 @@ class EditorCode extends EditorMonaco {
         let type = (BOARD.language || '').toLowerCase();
         switch(type) {
         case 'python':
+        case 'micropython':
+        case 'circuitpython':
             tabSize = 4;
             language = 'python';
             break;

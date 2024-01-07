@@ -60,6 +60,10 @@ class FileTree {
                         $i.addClass('layui-anim layui-anim-fadein layui-anim-fadeout layui-anim-loop');
                         folderPath = node.id;
                     }
+                    if (!folderPath) {
+                        cb([]);
+                        return;
+                    }
                     this.#getChildren_(folderPath)
                     .then((data) => {
                         cb(data);

@@ -1,7 +1,7 @@
 importScripts('../../web-modules/workerpool.min.js');
 importScripts('../../web-modules/browserfs.min.js');
 
-let fs = null;
+let fs = BrowserFS.fs;
 
 const createPromise = function(func, ...args) {
     return new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ const addFileSystemHandler = function(filesystem) {
                 return;
             }
             fs = BrowserFS.fs;
-            resolve();
+            resolve('/' + filesystem.name);
         });
     });
 }

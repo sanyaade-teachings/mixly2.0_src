@@ -1,4 +1,4 @@
-goog.loadJs('electron', () => {
+goog.loadJs('web', () => {
 
 goog.require('workerpool');
 goog.require('Mixly.Web');
@@ -21,13 +21,24 @@ FS.showOpenFilePicker = async () => {
 
 FS.showDirectoryPicker = async () => {
     return new Promise((resolve, reject) => {
-        resolve();
+        window.showDirectoryPicker({
+            mode: 'readwrite'
+        })
+        .then((filesystem) => {
+            return FS.pool.exec('addFileSystemHandler', [filesystem]);
+        })
+        .then((folderPath) => {
+            resolve(folderPath);
+        })
+        .catch((error) => {
+            reject(error);
+        });
     });
 }
 
 FS.showSaveFilePicker = async () => {
     return new Promise((resolve, reject) => {
-        resolve();
+        
     });
 }
 

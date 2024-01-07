@@ -46,7 +46,7 @@ class Events {
 
     unbind(id) {
         for (let [_, value] of this.events.getAllItem()) {
-            let typeEvent = this.events.getItem(value);
+            let typeEvent = value;
             if (!typeEvent.getItem(id)) {
                 continue;
             }
@@ -80,7 +80,15 @@ class Events {
     }
 
     reset() {
-        this.events = [];
+        this.events.reset();
+    }
+
+    length(type) {
+        const typeEvent = this.events.getItem(type);
+        if (typeEvent) {
+            return typeEvent.length();
+        }
+        return 0;
     }
 }
 

@@ -981,6 +981,8 @@
         "require": [
             "path",
             "Mixly.FileTree",
+            "Mixly.Events",
+            "Mixly.Registry",
             "Mixly.Electron.FS"
         ],
         "provide": [

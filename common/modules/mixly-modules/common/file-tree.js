@@ -29,17 +29,11 @@ class FileTree {
     constructor(element) {
         this.folderPath = '';
         this.$content = $(element);
-        let thumbBackground;
-        if (USER.theme === 'dark') {
-            thumbBackground = '#b0b0b0';
-        } else {
-            thumbBackground = '#5f5f5f';
-        }
         this.scrollbar = new XScrollbar(element, {
             onlyHorizontal: false,
             thumbSize: '4px',
-            thumbRadius: 0,
-            thumbBackground
+            thumbRadius: '1px',
+            thumbBackground: USER.theme === 'dark'? '#b0b0b0' : '#5f5f5f'
         });
         this.$fileTree = $(this.scrollbar.$content);
         this.$fileTree.jstree({
@@ -82,10 +76,11 @@ class FileTree {
             plugins: ['wholerow', 'dnd', 'sort', 'unique']
         });
         this.jstree = this.$fileTree.jstree(true);
-        this.events = new Events(['selectLeaf']);
+        this.events = new Events(['selectLeaf', 'afterOpenNode', 'afterCloseNode']);
         this.selected = null;
         this.#addEventsListener_();
         this.nodeAliveRegistry = new Registry();
+        this.refreshRegistry = new Registry();
     }
 
     #addEventsListener_() {
@@ -110,21 +105,28 @@ class FileTree {
         })
         .on('after_open.jstree', (e, data) => {
             const { id } = data.node;
-            if (!this.nodeAliveRegistry.getItem(id)) {
-                this.nodeAliveRegistry.register(id, Date.now());
+            const eventId = this.nodeAliveRegistry.getItem(id);
+            if (eventId) {
+                clearTimeout(eventId);
+                this.nodeAliveRegistry.unregister(id);
+            } else {
+                this.watchFolder(id);
             }
-            let elem = document.getElementById(this.selected);
-            if (!elem) {
-                return;
-            }
-            $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+            this.runEvent('afterOpenNode', data);
+            this.reselect();
         })
         .on('after_close.jstree', (e, data) => {
-            let elem = document.getElementById(this.selected);
-            if (!elem) {
-                return;
+            const { id } = data.node;
+            const eventId = setTimeout(() => {
+                this.unwatchFolder(id);
+                this.clearFolderTemp(id);
+                this.nodeAliveRegistry.unregister(id);
+            }, 60 * 1000);
+            if (!this.nodeAliveRegistry.getItem(id)) {
+                this.nodeAliveRegistry.register(id, eventId);
             }
-            $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+            this.runEvent('afterCloseNode', data);
+            this.reselect();
         })
         .on("changed.jstree", (e, data) => {
             const selected = data.instance.get_selected(true);
@@ -140,24 +142,73 @@ class FileTree {
     }
 
     setFolderPath(folderPath) {
-        this.folderPath = folderPath;
+        if (this.folderPath && this.folderPath !== folderPath) {
+            this.unwatchFolder(folderPath);
+        }
+        this.folderPath = path.join(folderPath);
         this.nodeAliveRegistry.reset();
         this.jstree.refresh();
+        this.watchFolder(folderPath);
     }
 
     getFolderPath() {
         return this.folderPath;
     }
 
+    refreshFolder(folderPath) {
+        let eventId = this.refreshRegistry.getItem(folderPath);
+        if (eventId) {
+            clearTimeout(eventId);
+            this.refreshRegistry.unregister(folderPath);
+        }
+        eventId = setTimeout(() => {
+            if (folderPath === this.folderPath) {
+                this.jstree.refresh();
+                return;
+            }
+            if (this.jstree.is_closed(folderPath)) {
+                this.unwatchFolder(folderPath);
+                this.clearFolderTemp(folderPath);
+                this.nodeAliveRegistry.unregister(folderPath);
+                let keys = this.nodeAliveRegistry.keys();
+                for (let key of keys) {
+                    if (key.indexOf(folderPath) === -1) {
+                        continue;
+                    }
+                    this.nodeAliveRegistry.unregister(key);
+                }
+            } else {
+                this.jstree.refresh_node(folderPath);
+            }
+        }, 500);
+        this.refreshRegistry.register(folderPath, eventId);
+    }
+
+    clearFolderTemp(folderPath) {
+        const node = this.jstree.get_node(folderPath);
+        node.state.loaded = false;
+    }
+
+    watchFolder(folderPath) {}
+
+    unwatchFolder(folderPath) {}
+
+    watchFile(filePath) {}
+
+    unbindFile(filePath) {}
+
     select(inPath) {
         this.selected = inPath;
-        this.jstree.deselect_all();
         let elem = document.getElementById(inPath);
         if (!elem) {
             return;
         }
-        this.jstree.select_node(elem, true, true);
+        this.jstree.select_node(inPath, true, true);
         $(elem).children('.jstree-wholerow').addClass('jstree-wholerow-clicked');
+    }
+
+    reselect() {
+        this.select(this.selected);
     }
 
     deselect(inPath) {
@@ -169,17 +220,8 @@ class FileTree {
         $(elem).children('.jstree-wholerow').removeClass('jstree-wholerow-clicked');
     }
 
-    #getRoot_() {
-        const rootNodeName = path.basename(this.folderPath).toUpperCase();
-        return [{
-            text: `<div style="font-weight:bold;display:unset;">${rootNodeName}</div>`,
-            id: this.folderPath,
-            children: true,
-            li_attr: {
-                title: this.folderPath
-            },
-            icon: 'foldericon-root-default'
-        }];
+    deselectAll() {
+        this.jstree.deselect_all();
     }
 
     #getChildren_(inPath) {
@@ -209,7 +251,6 @@ class FileTree {
         });
     }
 
-    // 可覆盖
     getContent(inPath) {
         return new Promise((resolve, reject) => {
             resolve([]);

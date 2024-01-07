@@ -2,18 +2,80 @@ goog.loadJs('electron', () => {
 
 goog.require('path');
 goog.require('Mixly.FileTree');
+goog.require('Mixly.Events');
+goog.require('Mixly.Registry');
 goog.require('Mixly.Electron.FS');
 goog.provide('Mixly.Electron.FileTree');
 
-const { FileTree, Electron } = Mixly;
+const {
+    FileTree,
+    Events,
+    Registry,
+    Electron
+} = Mixly;
 const { FS } = Electron;
 
 const chokidar = Mixly.require('chokidar');
 
 class FileTreeExt extends FileTree {
+    static {
+        this.worker = new Worker('../common/modules/mixly-modules/workers/node-file-watcher.js', {
+            name: 'nodeFileWatcher'
+        });
+        this.watcherEventsRegistry = new Registry();
+        this.worker.addEventListener('message', (event) => {
+            const { data } = event;
+            const events = this.watcherEventsRegistry.getItem(data.watcher);
+            if (!events) {
+                return;
+            }
+            events.run('change', data);
+        });
+        this.worker.addEventListener('error', (event) => {
+            console.log(event);
+        });
+
+        this.addEventListener = function(folderPath, func) {
+            FileTreeExt.watch(folderPath);
+            let events = this.watcherEventsRegistry.getItem(folderPath);
+            if (!events) {
+                events = new Events(['change']);
+                this.watcherEventsRegistry.register(folderPath, events);
+            }
+            return events.bind('change', func);
+        }
+
+        this.removeEventListener = function(folderPath, eventId) {
+            let events = this.watcherEventsRegistry.getItem(folderPath);
+            if (!events) {
+                return;
+            }
+            events.unbind(eventId);
+            if (!events.length('change')) {
+                this.watcherEventsRegistry.unregister(folderPath);
+                this.unwatch(folderPath);
+            }
+        }
+
+        this.watch = function(folderPath) {
+            FileTreeExt.worker.postMessage({
+                func: 'watch',
+                args: [folderPath]
+            });
+        }
+
+        this.unwatch = function(folderPath) {
+            FileTreeExt.worker.postMessage({
+                func: 'unwatch',
+                args: [folderPath]
+            });
+        }
+    }
+
     constructor(element) {
         super(element);
         this.watcher = null;
+        this.watcherEventsListenerIdRegistry = new Registry();
     }
 
     async getContent(inPath) {
@@ -43,41 +105,24 @@ class FileTreeExt extends FileTree {
         return output;
     }
 
-    setFolderPath(folderPath) {
-        if (this.watcher) {
-            this.watcher.close().then(() => {
-                this.watcher = null;
-                super.setFolderPath(folderPath);
-                this.watchFolder(folderPath);
-            });
+    watchFolder(folderPath) {
+        let id = this.watcherEventsListenerIdRegistry.getItem(folderPath);
+        if (id) {
             return;
         }
-        super.setFolderPath(folderPath);
-        this.watchFolder(folderPath);
+        id = FileTreeExt.addEventListener(folderPath, (data) => {
+            this.refreshFolder(path.join(data.watcher));
+        });
+        this.watcherEventsListenerIdRegistry.register(folderPath, id);
     }
 
-    watchFolder(folderPath) {
-        this.watcher = chokidar.watch(path.join(folderPath), {
-            persistent: true,
-            // ignored: /(^|[\/\\])\../,
-            depth: 0,
-            ignoreInitial: true,
-        });
-        this.watcher.on('add', (path, stats) => {
-            console.log('add', path, stats);
-        });
-
-        this.watcher.on('addDir', (path, stats) => {
-            console.log('addDir', path, stats);
-        });
-
-        this.watcher.on('unlink', (path, stats) => {
-            console.log('unlink', path, stats);
-        });
-
-        this.watcher.on('unlinkDir', (path, stats) => {
-            console.log('unlinkDir', path, stats);
-        });
+    unwatchFolder(folderPath) {
+        const id = this.watcherEventsListenerIdRegistry.getItem(folderPath);
+        if (!id) {
+            return;
+        }
+        FileTreeExt.removeEventListener(folderPath, id);
+        this.watcherEventsListenerIdRegistry.unregister(folderPath);
     }
 }
 

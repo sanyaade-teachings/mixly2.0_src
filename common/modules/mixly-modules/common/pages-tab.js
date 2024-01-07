@@ -36,17 +36,11 @@ class PagesTab {
         this.$container = this.$content.children('div');
         this.chromeTabs = new ChromeTabs();
         this.chromeTabs.init(this.$container[0]);
-        let thumbBackground;
-        if (USER.theme === 'dark') {
-            thumbBackground = '#b0b0b0';
-        } else {
-            thumbBackground = '#5f5f5f';
-        }
         this.scrollbar = new XScrollbar(this.$content.find('.chrome-tabs-content')[0], {
             onlyHorizontal: true,
             thumbSize: 1.7,
             thumbRadius: 0,
-            thumbBackground
+            thumbBackground: USER.theme === 'dark'? '#b0b0b0' : '#5f5f5f'
         });
         this.sortable = new Sortable(this.chromeTabs.tabContentEl, {
             animation: 150,

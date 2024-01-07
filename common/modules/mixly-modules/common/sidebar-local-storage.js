@@ -70,6 +70,8 @@ class SideBarLocalStorage extends PageBase {
                 this.$iconFolder.removeClass('opened');
                 this.$folder.removeClass('opened');
                 this.$children.hide();
+                this.fileTree.deselectAll();
+                this.fileTree.reselect();
             } else {
                 this.$iconTriangle.removeClass('codicon-chevron-right');
                 this.$iconTriangle.addClass('codicon-chevron-down');
@@ -83,9 +85,13 @@ class SideBarLocalStorage extends PageBase {
         this.$openFolderContent.find('button').click(() => {
             FS.showDirectoryPicker()
             .then((folderPath) => {
+                if (!folderPath) {
+                    return;
+                }
                 this.setFolderPath(folderPath);
                 this.$content.replaceWith(this.$folderContent);
                 this.$openFolderContent.remove();
+                this.$content = this.$folderContent;
             })
             .catch(console.log);
         });

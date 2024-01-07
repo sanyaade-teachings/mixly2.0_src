@@ -348,11 +348,13 @@ class XScrollbar {
 .x-scrollbar__track-x:hover > .x-scrollbar__thumb-x,
 .x-scrollbar__track--draging > .x-scrollbar__thumb-x {
   height: ${parseInt(this.thumbSize) * 2}px;
+  border-radius: ${(parseInt(this.thumbRadius || 0) != 5 ? parseInt(this.thumbRadius || 0) : parseInt(this.thumbSize)) * 2}px;
 }
 
 .x-scrollbar__track-y:hover > .x-scrollbar__thumb-y,
 .x-scrollbar__track--draging > .x-scrollbar__thumb-y {
   width: ${parseInt(this.thumbSize) * 2}px;
+  border-radius: ${(parseInt(this.thumbRadius || 0) != 5 ? parseInt(this.thumbRadius || 0) : parseInt(this.thumbSize)) * 2}px;
 }
 
 /* 鼠标移入轨道 || 拖动过程中 => 显示轨道 & 高亮滑块 */

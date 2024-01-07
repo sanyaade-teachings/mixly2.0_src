@@ -81,6 +81,8 @@ class Workspace {
         this.editorManager = new EditorsManager(this.$editor[0]);
         this.leftSideBarManager = new LeftSideBarsManager(this.$leftSidebar[0]);
         this.leftSideBarManager.add('local_storage', 'local_storage', '本地');
+        this.leftSideBarManager.add('local_storage', 'examples', '例程');
+        this.leftSideBarManager.add('local_storage', 'wiki', '文档');
         this.rightSideBarManager = new RightSideBarsManager(this.$rightSidebar[0]);
         // this.rightSideBarManager.add('local_storage', 'local_storage', '本地');
         this.dragH = null;
@@ -113,6 +115,7 @@ class Workspace {
             const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
+            fileTree.deselectAll();
             fileTree.select(tabId);
         });
 

@@ -53,7 +53,7 @@ FS.showDirectoryPicker = () => {
             if (folderPath) {
                 resolve(folderPath);
             } else {
-                reject('dir not found');
+                resolve(null);
             }
         })
         .catch(error => {

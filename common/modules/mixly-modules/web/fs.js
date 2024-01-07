@@ -8,7 +8,7 @@ const { FS } = Mixly.Web;
 
 FS.pool = workerpool.pool('../common/modules/mixly-modules/workers/file-system-access.js', {
     workerOpts: {
-        name: 'NamedWorker'
+        name: 'fileSystemAccess'
     },
     workerType: 'web'
 });

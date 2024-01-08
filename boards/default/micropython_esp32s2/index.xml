@@ -303,7 +303,7 @@
                 </block>
               </value>
               <next>
-                <block type="controls_delay">
+                <block type="controls_delay_new">
                   <field name="Time">ms</field>
                   <value name="DELAY_TIME">
                     <block type="math_number">

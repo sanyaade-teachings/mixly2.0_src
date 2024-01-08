@@ -215,10 +215,10 @@
       </value>
     </block>
 
-    <block type="controls_delay">
+    <block type="controls_delay_new">
       <value name="DELAY_TIME">
         <shadow type="math_number">
-          <field name="NUM">1000</field>
+          <field name="NUM">1</field>
         </shadow>
       </value>
     </block>
@@ -321,7 +321,7 @@
                 </block>
               </value>
               <next>
-                <block type="controls_delay">
+                <block type="controls_delay_new">
                   <field name="Time">ms</field>
                   <value name="DELAY_TIME">
                     <block type="math_number">

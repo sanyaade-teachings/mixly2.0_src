@@ -295,7 +295,8 @@ pbc.assignD.get('HCSR04')['check_assign'] = function (py2block, node, targets, v
         return false;
     }
     var funcName = py2block.identifier(value.func.id);
-    if (value._astname === "Call" && funcName === "HCSR04" && value.args.length === 0)
+    value.args = value.args || [];
+    if (value._astname === "Call" && funcName === "HCSR04" && !value.args.length)
         return true;
     return false;
 }

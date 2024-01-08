@@ -165,7 +165,8 @@ pbc.assignD.get('socket')['check_assign'] = function(py2block, node, targets, va
 }
 
 pbc.assignD.get('socket')['create_block'] = function(py2block, node, targets, value){
-    if (value.args.length === 0){
+    value.args = value.args || [];
+    if (!value.args.length){
         var mode="TCP"
     }
     else {

@@ -67,7 +67,8 @@ Editor.init = () => {
     editorManager.tabs.addTab({
         name: 'Untitled-1.mix',
         title: 'Untitled-1.mix',
-        type: '.mix'
+        type: '.mix',
+        favicon: 'fileicon-mix'
     });
 
     const leftSideBarOption = Nav.register({

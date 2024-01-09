@@ -137,8 +137,7 @@
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
-  height: 16px;
-  width: 16px;
+  height: fit-content;
   background-size: 16px;
   margin-left: 4px;
 }
@@ -160,6 +159,8 @@
   white-space: nowrap;
   margin-left: 4px;
   color: #5f6368;
+  height: fit-content;
+  line-height: 14px;
 }
 .chrome-tabs .chrome-tab[is-small] .chrome-tab-title {
   margin-left: 0;
@@ -334,6 +335,11 @@ html[data-bs-theme=dark] .chrome-tabs .chrome-tab[active] .chrome-tab-background
   height: 16px;
   margin: 0px;
   margin-top: 2px;
+}
+
+.chrome-tabs .chrome-tab .chrome-tab-content .chrome-tab-favicon:before {
+  width: 14px;
+  height: 14px;
 }
 
 html[data-bs-theme=light] .chrome-tabs .chrome-tab.dirty .chrome-tab-close:hover {

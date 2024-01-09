@@ -180,7 +180,7 @@
 
       const faviconEl = tabEl.querySelector('.chrome-tab-favicon')
       if (tabProperties.favicon) {
-        faviconEl.style.backgroundImage = `url('${ tabProperties.favicon }')`
+        $(faviconEl).addClass(tabProperties.favicon)
         faviconEl.removeAttribute('hidden', '')
       } else {
         faviconEl.setAttribute('hidden', '')

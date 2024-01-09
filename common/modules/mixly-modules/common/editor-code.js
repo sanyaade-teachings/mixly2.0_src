@@ -33,11 +33,8 @@ class EditorCode extends EditorMonaco {
     constructor(element) {
         const $parentContainer = $(element);
         const $content = $(HTMLTemplate.get('editor/editor-code.html').render());
-        const $editorContainer = $content.find('.editor');
-        super($editorContainer[0]);
+        super($content[0]);
         this.$content = $content;
-        this.$loading = this.$content.find('.loading');
-        this.$editorContainer = $editorContainer;
         $parentContainer.append(this.$content);
         this.defaultContextMenu = {
             cut: {
@@ -99,7 +96,6 @@ class EditorCode extends EditorMonaco {
         }
         this.setTabSize(tabSize);
         this.setLanguage(language);
-        this.$loading.remove();
         this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .editor`);
         const { events } = this.contextMenu;
         events.bind('getMenu', () => {

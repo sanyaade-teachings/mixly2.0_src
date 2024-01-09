@@ -68,7 +68,7 @@
       instanceId += 1
 
       this.setupCustomProperties()
-      this.setupStyleEl()
+      // this.setupStyleEl()
       this.setupEvents()
     }
 

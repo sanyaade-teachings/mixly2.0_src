@@ -19,7 +19,7 @@ goog.require('Blockly.Screenshot');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
-goog.require('Mixly.IdGenerator');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.ToolboxSearcher');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorBlockly');
@@ -28,7 +28,7 @@ const {
     Config,
     Env,
     XML,
-    IdGenerator,
+    HTMLTemplate,
     ToolboxSearcher,
     EditorBase
 } = Mixly;
@@ -36,17 +36,24 @@ const { USER, BOARD } = Config;
 
 class EditorBlockly extends EditorBase {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
-        this.DEFAULT_CATEGORIES = goog.get(path.join(Env.templatePath, 'xml/default-categories.xml'));
+        HTMLTemplate.add(
+            'editor/editor-blockly.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html')))
+        );
+        HTMLTemplate.add(
+            'xml/default-categories.xml',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'xml/default-categories.xml')))
+        );
         this.blocklyElem = null;
         this.blockEditor = null;
         this.initBlockly = () => {
+            const DEFAULT_CATEGORIES = HTMLTemplate.get('xml/default-categories.xml').render();
             const media = path.join(Config.pathPrefix, 'common/media/');
             const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
             this.blocklyElem = $('<div class="page-item"></div>')[0];
             this.editor = Blockly.inject(this.blocklyElem, {
                 media,
-                toolbox: this.DEFAULT_CATEGORIES,
+                toolbox: DEFAULT_CATEGORIES,
                 renderer,
                 zoom: {
                     controls: true,
@@ -152,11 +159,7 @@ class EditorBlockly extends EditorBase {
     constructor(element) {
         super();
         const $parentContainer = $(element);
-        this.id = IdGenerator.generate();
-        this.$content = $(XML.render(EditorBlockly.TEMPLATE, {
-            mId: this.id
-        }));
-        this.$editorContainer = this.$content.children('div');
+        this.$content = $(HTMLTemplate.get('editor/editor-blockly.html').render({}));
         $parentContainer.append(this.$content);
         this.editor = EditorBlockly.getEditor();
         this.$toolbox = null;
@@ -236,14 +239,14 @@ class EditorBlockly extends EditorBase {
         super.dispose();
         if (this.isActive()) {
             $(EditorBlockly.getContent()).detach();
-            this.$editorContainer.empty();
+            this.$content.empty();
         }
-        this.$editorContainer.remove();
+        this.$content.remove();
     }
 
     onMounted() {
         super.onMounted();
-        this.$editorContainer.append(EditorBlockly.getContent());
+        this.$content.append(EditorBlockly.getContent());
         this.updateToolbox();
         Blockly.Events.disable();
         if (this.workspaceState) {
@@ -272,7 +275,7 @@ class EditorBlockly extends EditorBase {
         this.editor.clearUndo();
         Blockly.Events.enable();
         $(EditorBlockly.getContent()).detach();
-        this.$editorContainer.empty();
+        this.$content.empty();
     }
 
     setValue(data) {

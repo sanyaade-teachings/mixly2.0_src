@@ -1,24 +1,24 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Registry');
 goog.require('Mixly.Events');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.StatusBarTerminal');
 goog.require('Mixly.StatusBarSerial');
 goog.require('Mixly.PagesManager');
 goog.provide('Mixly.StatusBarsManager');
 
 const {
-    IdGenerator,
     XML,
     Env,
     Msg,
     Registry,
     Events,
+    HTMLTemplate,
     StatusBarTerminal,
     StatusBarSerial,
     PagesManager
@@ -26,9 +26,18 @@ const {
 
 class StatusBarsManager extends PagesManager {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar/statusbar-manager.html'));
-        this.TAB_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar/statusbar-tab.html'));
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar/statusbar-manager-menu.html'));
+        HTMLTemplate.add(
+            'statusbar/statusbar-manager.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'statusbar/statusbar-manager.html')))
+        );
+        HTMLTemplate.add(
+            'statusbar/statusbar-tab.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'statusbar/statusbar-tab.html')))
+        );
+        HTMLTemplate.add(
+            'statusbar/statusbar-manager-menu.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'statusbar/statusbar-manager-menu.html')))
+        );
         this.typesRegistry = new Registry();
         this.managersRegistry = new Registry();
         this.typesRegistry.register(['#default', 'terminal'], StatusBarTerminal);
@@ -52,20 +61,17 @@ class StatusBarsManager extends PagesManager {
     }
 
     constructor(element) {
-        const ids = IdGenerator.generate(['managerId', 'tabId']);
-        const $manager = $(XML.render(StatusBarsManager.TEMPLATE, {
-            mId: ids.managerId
-        }));
-        const $tab = $(XML.render(StatusBarsManager.TAB_TEMPLATE, {
-            mId: ids.tabId
-        }));
+        const managerHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-manager.html');
+        const tabHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-tab.html');
+        const $manager = $(managerHTMLTemplate.render());
+        const $tab = $(tabHTMLTemplate.render());
         super({
             parentElem: element,
-            managerId: ids.managerId,
+            managerId: managerHTMLTemplate.id,
             managerContentElem: $manager[0],
             bodyElem: $manager.find('.body')[0],
             tabElem: $manager.find('.tabs')[0],
-            tabId: ids.tabId,
+            tabId: tabHTMLTemplate.id,
             tabContentElem: $tab[0],
             typesRegistry: StatusBarsManager.typesRegistry
         });
@@ -113,8 +119,8 @@ class StatusBarsManager extends PagesManager {
                 let options = this.#getMenu_() ?? {};
                 options.list = options.list ?? [];
                 options.empty = options.empty ?? Msg.Lang['无选项'];
-                const menuTemplate = XML.render(StatusBarsManager.MENU_TEMPLATE, options);
-                instance.setContent(menuTemplate);
+                const menuHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-manager-menu.html');
+                instance.setContent(menuHTMLTemplate.render(options));
                 $(instance.popper).find('li').off().click((event) => {
                     this.#onSelectMenu_(event);
                     this.$menu.hide(100);

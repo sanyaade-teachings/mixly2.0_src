@@ -4,6 +4,7 @@ goog.require('path');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.PageBase');
 goog.require('Mixly.Electron.FileTree');
 goog.require('Mixly.Web.FileTree');
@@ -15,6 +16,7 @@ const {
     IdGenerator,
     XML,
     Env,
+    HTMLTemplate,
     PageBase,
     Electron = {},
     Web = {}
@@ -27,21 +29,21 @@ const {
 
 class SideBarLocalStorage extends PageBase {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage.html'));
-        this.OPEN_FOLDER_TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage-open-folder.html'));
+        HTMLTemplate.add(
+            'sidebar/sidebar-local-storage.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage.html')))
+        );
+        HTMLTemplate.add(
+            'sidebar/sidebar-local-storage-open-folder.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage-open-folder.html')))
+        );
     }
 
     constructor(element) {
         const $parentContainer = $(element);
-        const id = IdGenerator.generate();
-        const $folderContent = $(XML.render(SideBarLocalStorage.TEMPLATE, {
-            mId: id
-        }));
-        const $openFolderContent = $(XML.render(SideBarLocalStorage.OPEN_FOLDER_TEMPLATE, {
-            mId: id
-        }));
+        const $folderContent = $(HTMLTemplate.get('sidebar/sidebar-local-storage.html').render());
+        const $openFolderContent = $(HTMLTemplate.get('sidebar/sidebar-local-storage-open-folder.html').render());
         super();
-        this.id = id;
         this.$openFolderContent = $openFolderContent;
         this.$folderContent = $folderContent;
         this.$content = $openFolderContent;

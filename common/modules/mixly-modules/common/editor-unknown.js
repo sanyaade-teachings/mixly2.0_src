@@ -3,30 +3,29 @@ goog.loadJs('common', () => {
 goog.require('path');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
-goog.require('Mixly.IdGenerator');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorUnknown');
 
 const {
     XML,
     Env,
-    IdGenerator,
+    HTMLTemplate,
     EditorBase
 } = Mixly;
 
 class EditorUnknown extends EditorBase {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-unknown.html'));
+        HTMLTemplate.add(
+            'editor/editor-unknown.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-unknown.html')))
+        );
     }
 
     constructor(element) {
         super();
         const $parentContainer = $(element);
-        this.id = IdGenerator.generate();
-        this.$content = $(XML.render(EditorUnknown.TEMPLATE, {
-            mId: this.id
-        }));
-        this.$container = this.$content.children('div');
+        this.$content = $(HTMLTemplate.get('editor/editor-unknown.html').render());
         $parentContainer.append(this.$content);
     }
 }

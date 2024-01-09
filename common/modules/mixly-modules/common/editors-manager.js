@@ -13,6 +13,7 @@ goog.require('Mixly.EditorUnknown');
 goog.require('Mixly.EditorWelcome');
 goog.require('Mixly.Registry');
 goog.require('Mixly.PagesManager');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.Electron.FS');
 goog.require('Mixly.Web.FS');
 goog.provide('Mixly.EditorsManager');
@@ -30,6 +31,7 @@ const {
     EditorWelcome,
     Registry,
     PagesManager,
+    HTMLTemplate,
     Electron = {},
     Web = {}
 } = Mixly;
@@ -38,8 +40,14 @@ const { FS } = goog.isElectron? Electron : Web;
 
 class EditorsManager extends PagesManager {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-manager.html'));
-        this.TAB_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-tab.html'));
+        HTMLTemplate.add(
+            'editor/editor-manager.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-manager.html')))
+        );
+        HTMLTemplate.add(
+            'editor/editor-tab.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-tab.html')))
+        );
         this.typesRegistry = new Registry();
         this.typesRegistry.register(['.mix', '.mil'], EditorMix);
         this.typesRegistry.register('.test', EditorBlockly);
@@ -51,19 +59,17 @@ class EditorsManager extends PagesManager {
 
     constructor(element) {
         const ids = IdGenerator.generate(['managerId', 'tabId']);
-        const $manager = $(XML.render(EditorsManager.TEMPLATE, {
-            mId: ids.managerId
-        }));
-        const $tab = $(XML.render(EditorsManager.TAB_TEMPLATE, {
-            mId: ids.tabId
-        }));
+        const managerHTMLTemplate = HTMLTemplate.get('editor/editor-manager.html');
+        const tabHTMLTemplate = HTMLTemplate.get('editor/editor-tab.html');
+        const $manager = $(managerHTMLTemplate.render());
+        const $tab = $(tabHTMLTemplate.render());
         super({
             parentElem: element,
-            managerId: ids.managerId,
+            managerId: managerHTMLTemplate.id,
             managerContentElem: $manager[0],
             bodyElem: $manager.find('.body')[0],
             tabElem: $manager.find('.tabs')[0],
-            tabId: ids.tabId,
+            tabId: tabHTMLTemplate.id,
             tabContentElem: $tab[0],
             typesRegistry: EditorsManager.typesRegistry
         });

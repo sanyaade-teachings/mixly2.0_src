@@ -49,12 +49,12 @@ class PagesTab {
         });
         $parentsContainer.empty();
         $parentsContainer.append(this.$content);
-        this.#addEvents_();
+        this.#addEventsListener_();
         this.tabsRegistry = new Registry();
         this.events = new Events(['activeChange', 'created', 'destroyed', 'checkDestroy', 'beforeDestroy']);
     }
 
-    #addEvents_() {
+    #addEventsListener_() {
         const { $container } = this;
         const container = $container[0];
 

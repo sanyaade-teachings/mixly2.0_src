@@ -7,7 +7,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Drag');
 goog.require('Mixly.DragH');
 goog.require('Mixly.DragV');
-goog.require('Mixly.IdGenerator');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorsManager');
 goog.require('Mixly.StatusBarsManager');
 goog.require('Mixly.LeftSideBarsManager');
@@ -21,7 +21,7 @@ const {
     Drag,
     DragH,
     DragV,
-    IdGenerator,
+    HTMLTemplate,
     EditorsManager,
     StatusBarsManager,
     LeftSideBarsManager,
@@ -31,7 +31,10 @@ const {
 
 class Workspace {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'workspace.html'));
+        HTMLTemplate.add(
+            'workspace.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'workspace.html')))
+        );
         this.workspaces = [];
 
         this.getAll = () => {
@@ -62,10 +65,7 @@ class Workspace {
 
     constructor(element) {
         const $parentContainer = $(element);
-        this.id = IdGenerator.generate();
-        this.$content = $(XML.render(Workspace.TEMPLATE, {
-            mId: this.id
-        }));
+        this.$content = $(HTMLTemplate.get('workspace.html').render());
         $parentContainer.append(this.$content);
         this.$leftTabs = this.$content.find('.left-tabs');
         this.$leftSidebar = this.$content.find('.left-sidebar');

@@ -1,12 +1,12 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Registry');
 goog.require('Mixly.Events');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.SideBarLocalStorage');
 goog.require('Mixly.PagesManager');
 goog.provide('Mixly.SideBarsManager');
@@ -14,22 +14,34 @@ goog.provide('Mixly.LeftSideBarsManager');
 goog.provide('Mixly.RightSideBarsManager');
 
 const {
-    IdGenerator,
     XML,
     Env,
     Msg,
     Registry,
     Events,
+    HTMLTemplate,
     SideBarLocalStorage,
     PagesManager
 } = Mixly;
 
 class SideBarsManager extends PagesManager {
     static {
-        this.LEFT_MANAGER_TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/left-sidebar-manager.html'));
-        this.LEFT_TAB_TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/left-sidebar-tab.html'));
-        this.RIGHT_MANAGER_TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/right-sidebar-manager.html'));
-        this.RIGHT_TAB_TEMPLATE = goog.get(path.join(Env.templatePath, 'sidebar/right-sidebar-tab.html'));
+        HTMLTemplate.add(
+            'sidebar/left-sidebar-manager.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/left-sidebar-manager.html')))
+        );
+        HTMLTemplate.add(
+            'sidebar/left-sidebar-tab.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/left-sidebar-tab.html')))
+        );
+        HTMLTemplate.add(
+            'sidebar/right-sidebar-manager.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/right-sidebar-manager.html')))
+        );
+        HTMLTemplate.add(
+            'sidebar/right-sidebar-tab.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/right-sidebar-tab.html')))
+        );
         this.typesRegistry = new Registry();
         this.managersRegistry = new Registry();
         this.typesRegistry.register(['#default', 'local_storage'], SideBarLocalStorage);
@@ -60,26 +72,21 @@ class SideBarsManager extends PagesManager {
     constructor(element, align = SideBarsManager.Align.LEFT) {
         let managerTemplate = '', tabTemplate = '';
         if (align === SideBarsManager.Align.RIGHT) {
-            managerTemplate = SideBarsManager.RIGHT_MANAGER_TEMPLATE;
-            tabTemplate = SideBarsManager.RIGHT_TAB_TEMPLATE;
+            managerTemplate = HTMLTemplate.get('sidebar/right-sidebar-manager.html');
+            tabTemplate = HTMLTemplate.get('sidebar/right-sidebar-tab.html');
         } else {
-            managerTemplate = SideBarsManager.LEFT_MANAGER_TEMPLATE;
-            tabTemplate = SideBarsManager.LEFT_TAB_TEMPLATE;
+            managerTemplate = HTMLTemplate.get('sidebar/left-sidebar-manager.html');
+            tabTemplate = HTMLTemplate.get('sidebar/left-sidebar-tab.html');
         }
-        const ids = IdGenerator.generate(['managerId', 'tabId']);
-        const $manager = $(XML.render(managerTemplate, {
-            mId: ids.managerId
-        }));
-        const $tab = $(XML.render(tabTemplate, {
-            mId: ids.tabId
-        }));
+        const $manager = $(managerTemplate.render());
+        const $tab = $(tabTemplate.render());
         super({
             parentElem: element,
-            managerId: ids.managerId,
+            managerId: managerTemplate.id,
             managerContentElem: $manager[0],
             bodyElem: $manager.find('.body')[0],
             tabElem: $manager.find('.tabs')[0],
-            tabId: ids.tabId,
+            tabId: tabTemplate.id,
             tabContentElem: $tab[0],
             typesRegistry: SideBarsManager.typesRegistry
         });

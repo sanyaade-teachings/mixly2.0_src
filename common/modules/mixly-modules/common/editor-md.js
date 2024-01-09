@@ -7,6 +7,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Drag');
 goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorCode');
 goog.provide('Mixly.EditorMd');
 
@@ -16,14 +17,21 @@ const {
     Drag,
     DragV,
     IdGenerator,
+    HTMLTemplate,
     EditorCode
 } = Mixly;
 
 
 class EditorMd extends EditorCode {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-md.html'));
-        this.BTNS_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-md-btns.html'));
+        HTMLTemplate.add(
+            'editor/editor-md.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-md.html')))
+        );
+        HTMLTemplate.add(
+            'editor/editor-md-btns.html',
+            goog.get(path.join(Env.templatePath, 'editor/editor-md-btns.html'))
+        );
         marked.use(markedKatex({ throwOnError: false }));
     }
 
@@ -31,12 +39,11 @@ class EditorMd extends EditorCode {
     #prevCode_ = '';
 
     constructor(element) {
-        const id = IdGenerator.generate();
         const $parentContainer = $(element);
-        const $content = $(XML.render(EditorMd.TEMPLATE, { mId: id }));
+        const $content = $(HTMLTemplate.get('editor/editor-md.html').render());
         const $codeContainer = $content.find('.editor-code');
         super($codeContainer);
-        this.$btnsContent = $(EditorMd.BTNS_TEMPLATE);
+        this.$btnsContent = $(HTMLTemplate.get('editor/editor-md-btns.html'));
         this.drag = null;
         this.codeContextMenuItems = null;
         this.PreviewContextMenuItems = null;

@@ -1,34 +1,33 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorAce');
 goog.provide('Mixly.StatusBar');
 
 const {
-    IdGenerator,
     XML,
     Env,
     Config,
+    HTMLTemplate,
     EditorAce
 } = Mixly;
 const { USER } = Config;
 
 class StatusBar extends EditorAce {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'statusbar/statusbar.html'));
+        HTMLTemplate.add(
+            'statusbar/statusbar.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'statusbar/statusbar.html')))
+        );
     }
 
     constructor(element) {
         const $parentContainer = $(element);
-        const id = IdGenerator.generate();
-        const $content = $(XML.render(StatusBar.TEMPLATE, {
-            mId: id
-        }));
-        super($content.children('div')[0]);
-        this.id = id;
+        const $content = $(HTMLTemplate.get('statusbar/statusbar.html').render());
+        super($content[0]);
         this.$content = $content;
         $parentContainer.append(this.$content);
     }

@@ -11,7 +11,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.ContextMenu');
-goog.require('Mixly.IdGenerator');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
 goog.require('Mixly.EditorBase');
@@ -29,7 +29,7 @@ const {
     Config,
     Env,
     ContextMenu,
-    IdGenerator,
+    HTMLTemplate,
     LayerExt
 } = Mixly;
 const { BOARD } = Config;
@@ -38,10 +38,14 @@ const { form } = layui;
 
 class EditorMix extends EditorBase {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix.html'));
-        this.BTNS_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-mix-btns.html'));
-        this.BREADCRUMBS_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-toolbar-breadcrumbs.html'));
-        this.BREADCRUMBS_MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-toolbar-breadcrumbs-menu.html'));
+        HTMLTemplate.add(
+            'editor/editor-mix.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-mix.html')))
+        );
+        HTMLTemplate.add(
+            'editor/editor-mix-btns.html',
+            goog.get(path.join(Env.templatePath, 'editor/editor-mix-btns.html'))
+        );
         this.BLOCKLY_IGNORE_EVENTS = [
             Blockly.Events.UI,
             Blockly.Events.VIEWPORT_CHANGE,
@@ -62,9 +66,8 @@ class EditorMix extends EditorBase {
     constructor(element) {
         super();
         const $parentContainer = $(element);
-        this.id = IdGenerator.generate();
-        this.$content = $(XML.render(EditorMix.TEMPLATE, { mId: this.id }));
-        this.$btnsContent = $(EditorMix.BTNS_TEMPLATE);
+        this.$content = $(HTMLTemplate.get('editor/editor-mix.html').render());
+        this.$btnsContent = $(HTMLTemplate.get('editor/editor-mix-btns.html'));
         this.drag = null;
         this.blocklyContextMenuItems = null;
         this.codeContextMenuItems = null;
@@ -153,7 +156,7 @@ class EditorMix extends EditorBase {
 
     addDragEventsListener() {
         const { blockEditor, codeEditor } = this;
-        this.drag = new DragV(this.$content.find('.editor')[0], {
+        this.drag = new DragV(this.$content, {
             min: '200px',
             full: [true, true],
             startSize: '100%',

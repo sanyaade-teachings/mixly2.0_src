@@ -2,25 +2,6 @@
     height: calc(100vh - 2.6em) !important;
 }
 
-:root {
-    --app-top-height: 30px;
-    --app-bottom-height: 22px;
-}
-
-/*@media screen and (max-width: 1920px) {
-    :root {
-        --app-top-height: 30px;
-        --app-bottom-height: 22px;
-    }
-}
-
-@media screen and (min-width: 1920px) {
-    :root {
-        --app-top-height: 40px;
-        --app-bottom-height: 32px;
-    }
-}*/
-
 .layui-form-label > .layui-unselect.layui-form-checkbox > span {
     height: 25px;
 }
@@ -29,15 +10,6 @@
     position: absolute !important;
     left: 0px;
     top: 0;
-}
-
-* {
-    -moz-user-select: none;
-    -o-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .layui-nav .layui-nav-item a {

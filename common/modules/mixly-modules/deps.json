@@ -149,7 +149,7 @@
             "Mixly.Config",
             "Mixly.Env",
             "Mixly.XML",
-            "Mixly.IdGenerator",
+            "Mixly.HTMLTemplate",
             "Mixly.ToolboxSearcher",
             "Mixly.EditorBase"
         ],
@@ -163,11 +163,11 @@
             "ace",
             "ace.ExtLanguageTools",
             "Mixly.Config",
-            "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.ContextMenu",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorMonaco"
         ],
         "provide": [
@@ -184,6 +184,7 @@
             "Mixly.Drag",
             "Mixly.DragV",
             "Mixly.IdGenerator",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorCode"
         ],
         "provide": [
@@ -204,7 +205,7 @@
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.ContextMenu",
-            "Mixly.IdGenerator",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",
             "Mixly.EditorBase"
@@ -231,7 +232,7 @@
             "path",
             "Mixly.XML",
             "Mixly.Env",
-            "Mixly.IdGenerator",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -243,7 +244,7 @@
         "require": [
             "Mixly.XML",
             "Mixly.Env",
-            "Mixly.IdGenerator",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -285,6 +286,7 @@
             "Mixly.EditorWelcome",
             "Mixly.Registry",
             "Mixly.PagesManager",
+            "Mixly.HTMLTemplate",
             "Mixly.Electron.FS",
             "Mixly.Web.FS"
         ],
@@ -409,6 +411,17 @@
         ],
         "provide": [
             "Mixly.FooterLayer"
+        ]
+    },
+    {
+        "path": "/common/html-template.js",
+        "require": [
+            "Mixly.XML",
+            "Mixly.Registry",
+            "Mixly.IdGenerator"
+        ],
+        "provide": [
+            "Mixly.HTMLTemplate"
         ]
     },
     {
@@ -719,6 +732,7 @@
             "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
+            "Mixly.HTMLTemplate",
             "Mixly.PageBase",
             "Mixly.Electron.FileTree",
             "Mixly.Web.FileTree",
@@ -733,12 +747,12 @@
         "path": "/common/sidebars-manager.js",
         "require": [
             "path",
-            "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Registry",
             "Mixly.Events",
+            "Mixly.HTMLTemplate",
             "Mixly.SideBarLocalStorage",
             "Mixly.PagesManager"
         ],
@@ -773,10 +787,10 @@
     {
         "path": "/common/statusbar.js",
         "require": [
-            "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Config",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorAce"
         ],
         "provide": [
@@ -787,12 +801,12 @@
         "path": "/common/statusbars-manager.js",
         "require": [
             "path",
-            "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Registry",
             "Mixly.Events",
+            "Mixly.HTMLTemplate",
             "Mixly.StatusBarTerminal",
             "Mixly.StatusBarSerial",
             "Mixly.PagesManager"
@@ -877,7 +891,7 @@
             "Mixly.Drag",
             "Mixly.DragH",
             "Mixly.DragV",
-            "Mixly.IdGenerator",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorsManager",
             "Mixly.StatusBarsManager",
             "Mixly.LeftSideBarsManager",

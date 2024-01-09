@@ -3,39 +3,38 @@ goog.loadJs('common', () => {
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('Mixly.Config');
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.ContextMenu');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorMonaco');
 goog.provide('Mixly.EditorCode');
 
 const {
     Config,
-    IdGenerator,
     XML,
     Env,
     Msg,
     ContextMenu,
+    HTMLTemplate,
     EditorMonaco
 } = Mixly;
 const { USER, BOARD } = Config;
 
 class EditorCode extends EditorMonaco {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-code.html'));
+        HTMLTemplate.add(
+            'editor/editor-code.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-code.html')))
+        );
     }
 
     constructor(element) {
         const $parentContainer = $(element);
-        const id = IdGenerator.generate();
-        const $content = $(XML.render(EditorCode.TEMPLATE, {
-            mId: id
-        }));
+        const $content = $(HTMLTemplate.get('editor/editor-code.html').render());
         const $editorContainer = $content.find('.editor');
         super($editorContainer[0]);
-        this.id = id;
         this.$content = $content;
         this.$loading = this.$content.find('.loading');
         this.$editorContainer = $editorContainer;

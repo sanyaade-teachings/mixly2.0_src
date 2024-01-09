@@ -13,11 +13,9 @@ class PagesManager {
     /**
      * config = {
      *      parentElem: element,
-     *      managerId: string,
      *      managerContentElem: element,
      *      bodyElem: element,
      *      tabElem: element,
-     *      tabId: string,
      *      tabContentElem: element,
      *      typesRegistry: Mixly.Registry
      * }
@@ -26,23 +24,20 @@ class PagesManager {
         const $parentContainer = $(config.parentElem);
         this.$content = $(config.managerContentElem);
         this.typesRegistry = config.typesRegistry;
-        this.$container = this.$content.children('div');
         this.$tabsContainer = $(config.tabElem);
         this.$editorContainer = $(config.bodyElem);
-        this.id = config.managerId;
         this.tabs = new PagesTab({
-            id: config.tabId,
             parentElem: config.tabElem,
             contentElem: config.tabContentElem
         });
-        this.$container.append(this.$editorContainer);
+        this.$content.append(this.$editorContainer);
         this.$welcomePage = null;
         $parentContainer.empty();
         $parentContainer.append(this.$content);
         let PageType = this.typesRegistry.getItem('#welcome');
         if (PageType) {
-            this.$welcomePage = $((new PageType()).getContent());
-            this.$container.replaceWith(this.$welcomePage);
+            this.$welcomePage = (new PageType()).getContent();
+            this.$content.replaceWith(this.$welcomePage);
         }
         this.page = 'welcome';
         this.#addEventsListener_();
@@ -82,7 +77,7 @@ class PagesManager {
             page.setTab($(tabEl));
             if (this.$welcomePage) {
                 if (this.pagesRegistry.length() && this.page === 'welcome') {
-                    this.$welcomePage.replaceWith(this.$container);
+                    this.$welcomePage.replaceWith(this.$content);
                     this.page = 'editor';
                 }
             }
@@ -101,7 +96,7 @@ class PagesManager {
             this.pagesRegistry.unregister(id);
             if (this.$welcomePage) {
                 if (!this.pagesRegistry.length() && this.page !== 'welcome') {
-                    this.$container.replaceWith(this.$welcomePage);
+                    this.$content.replaceWith(this.$welcomePage);
                     this.page = 'welcome';
                 }
             }

@@ -16,12 +16,12 @@ class EditorMonaco extends EditorBase {
     #readOnly = false;
     constructor(element) {
         super();
-        this.$container = $(element);
+        this.setContent($(element));
         this.destroyed = false;
     }
 
     init() {
-        this.editor = monaco.editor.create(this.$container[0], {
+        this.editor = monaco.editor.create(this.getContent()[0], {
             theme: "vs-dark",
             disableLayerHinting: true, // 等宽优化
             emptySelectionClipboard: false, // 空选择剪切板

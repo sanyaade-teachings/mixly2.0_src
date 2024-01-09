@@ -67,14 +67,13 @@ class StatusBarsManager extends PagesManager {
         const $tab = $(tabHTMLTemplate.render());
         super({
             parentElem: element,
-            managerId: managerHTMLTemplate.id,
             managerContentElem: $manager[0],
             bodyElem: $manager.find('.body')[0],
             tabElem: $manager.find('.tabs')[0],
-            tabId: tabHTMLTemplate.id,
             tabContentElem: $tab[0],
             typesRegistry: StatusBarsManager.typesRegistry
         });
+        this.id = managerHTMLTemplate.id;
         this.$btn = $tab.find('.operation > button');
         this.shown = false;
         this.events = new Events(['show', 'hide', 'onSelectMenu', 'getMenu']);

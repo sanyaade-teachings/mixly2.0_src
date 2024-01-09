@@ -21,14 +21,13 @@ class EditorAce extends EditorBase {
 
     constructor(element) {
         super();
-        this.$container = $(element);
+        this.setContent($(element));
         this.destroyed = false;
-        this.$content = this.$container;
     }
 
     init() {
         super.init();
-        this.editor = ace.edit(this.$container[0]);
+        this.editor = ace.edit(this.getContent()[0]);
         this.resetFontSize();
         this.addCursorLayer();
         this.addCursorEventsListener();
@@ -159,7 +158,7 @@ class EditorAce extends EditorBase {
     }
 
     addCursorLayer() {
-        this.cursorLayer = tippy(this.$container.find('.ace_cursor')[0], {
+        this.cursorLayer = tippy(this.getContent().find('.ace_cursor')[0], {
             content: Msg.Lang['此视图只读'],
             trigger: 'manual',
             hideOnClick: true,
@@ -217,10 +216,11 @@ class EditorAce extends EditorBase {
     }
 
     addCtrlBtns() {
+        const $content = this.getContent();
         for (let mId of EditorAce.CTRL_BTNS) {
-            this.$container.append(XML.render(EditorAce.CTRL_BTN_TEMPLATE, { mId }));
+            $content.append(XML.render(EditorAce.CTRL_BTN_TEMPLATE, { mId }));
         }
-        this.$ctrlBtns = this.$container.children('.code-editor-btn');
+        this.$ctrlBtns = $content.children('.code-editor-btn');
         this.$ctrlBtns.off().click((event) => {
             const mId = $(event.target).attr('m-id');
             this[mId]();

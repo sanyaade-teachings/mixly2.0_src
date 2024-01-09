@@ -25,8 +25,10 @@ class EditorUnknown extends EditorBase {
     constructor(element) {
         super();
         const $parentContainer = $(element);
-        this.$content = $(HTMLTemplate.get('editor/editor-unknown.html').render());
-        $parentContainer.append(this.$content);
+        this.setContent(
+            $(HTMLTemplate.get('editor/editor-unknown.html').render())
+        );
+        $parentContainer.append(this.getContent());
     }
 }
 

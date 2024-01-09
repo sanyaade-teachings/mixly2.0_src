@@ -70,26 +70,25 @@ class SideBarsManager extends PagesManager {
     }
 
     constructor(element, align = SideBarsManager.Align.LEFT) {
-        let managerTemplate = '', tabTemplate = '';
+        let managerHTMLTemplate = '', tabHTMLTemplate = '';
         if (align === SideBarsManager.Align.RIGHT) {
-            managerTemplate = HTMLTemplate.get('sidebar/right-sidebar-manager.html');
-            tabTemplate = HTMLTemplate.get('sidebar/right-sidebar-tab.html');
+            managerHTMLTemplate = HTMLTemplate.get('sidebar/right-sidebar-manager.html');
+            tabHTMLTemplate = HTMLTemplate.get('sidebar/right-sidebar-tab.html');
         } else {
-            managerTemplate = HTMLTemplate.get('sidebar/left-sidebar-manager.html');
-            tabTemplate = HTMLTemplate.get('sidebar/left-sidebar-tab.html');
+            managerHTMLTemplate = HTMLTemplate.get('sidebar/left-sidebar-manager.html');
+            tabHTMLTemplate = HTMLTemplate.get('sidebar/left-sidebar-tab.html');
         }
-        const $manager = $(managerTemplate.render());
-        const $tab = $(tabTemplate.render());
+        const $manager = $(managerHTMLTemplate.render());
+        const $tab = $(tabHTMLTemplate.render());
         super({
             parentElem: element,
-            managerId: managerTemplate.id,
             managerContentElem: $manager[0],
             bodyElem: $manager.find('.body')[0],
             tabElem: $manager.find('.tabs')[0],
-            tabId: tabTemplate.id,
             tabContentElem: $tab[0],
             typesRegistry: SideBarsManager.typesRegistry
         });
+        this.id = managerHTMLTemplate.id;
         this.shown = false;
         this.events = new Events(['show', 'hide']);
         SideBarsManager.add(this);

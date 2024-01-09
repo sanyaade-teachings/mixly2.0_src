@@ -44,14 +44,14 @@ class EditorBlockly extends EditorBase {
             'xml/default-categories.xml',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'xml/default-categories.xml')))
         );
-        this.blocklyElem = null;
+        this.$blockly = null;
         this.blockEditor = null;
         this.initBlockly = () => {
             const DEFAULT_CATEGORIES = HTMLTemplate.get('xml/default-categories.xml').render();
             const media = path.join(Config.pathPrefix, 'common/media/');
             const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
-            this.blocklyElem = $('<div class="page-item"></div>')[0];
-            this.editor = Blockly.inject(this.blocklyElem, {
+            this.$blockly = $('<div class="page-item"></div>');
+            this.editor = Blockly.inject(this.$blockly[0], {
                 media,
                 toolbox: DEFAULT_CATEGORIES,
                 renderer,
@@ -150,7 +150,7 @@ class EditorBlockly extends EditorBase {
         }
 
         this.getContent = () => {
-            return this.blocklyElem;
+            return this.$blockly;
         }
 
         this.initBlockly();
@@ -159,8 +159,10 @@ class EditorBlockly extends EditorBase {
     constructor(element) {
         super();
         const $parentContainer = $(element);
-        this.$content = $(HTMLTemplate.get('editor/editor-blockly.html').render({}));
-        $parentContainer.append(this.$content);
+        this.setContent(
+            $(HTMLTemplate.get('editor/editor-blockly.html').render())
+        );
+        $parentContainer.append(this.getContent());
         this.editor = EditorBlockly.getEditor();
         this.$toolbox = null;
         this.workspaceState = null;
@@ -238,7 +240,7 @@ class EditorBlockly extends EditorBase {
     dispose() {
         super.dispose();
         if (this.isActive()) {
-            $(EditorBlockly.getContent()).detach();
+            EditorBlockly.getContent().detach();
             this.$content.empty();
         }
         this.$content.remove();
@@ -274,7 +276,7 @@ class EditorBlockly extends EditorBase {
         this.editor.clear();
         this.editor.clearUndo();
         Blockly.Events.enable();
-        $(EditorBlockly.getContent()).detach();
+        EditorBlockly.getContent().detach();
         this.$content.empty();
     }
 

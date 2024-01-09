@@ -28,8 +28,8 @@ class StatusBar extends EditorAce {
         const $parentContainer = $(element);
         const $content = $(HTMLTemplate.get('statusbar/statusbar.html').render());
         super($content[0]);
-        this.$content = $content;
-        $parentContainer.append(this.$content);
+        this.setContent($content);
+        $parentContainer.append($content);
     }
 
     init() {

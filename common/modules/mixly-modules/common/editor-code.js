@@ -34,8 +34,8 @@ class EditorCode extends EditorMonaco {
         const $parentContainer = $(element);
         const $content = $(HTMLTemplate.get('editor/editor-code.html').render());
         super($content[0]);
-        this.$content = $content;
-        $parentContainer.append(this.$content);
+        this.setContent($content);
+        $parentContainer.append(this.getContent());
         this.defaultContextMenu = {
             cut: {
                 isHtmlName: true,

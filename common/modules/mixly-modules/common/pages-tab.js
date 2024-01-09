@@ -24,14 +24,12 @@ const { USER } = Config;
 class PagesTab {
     /**
      * config = {
-     *      id: sring, 
      *      parentElem: element,
      *      contentElem: element
      * }
      **/
     constructor(config) {
         const $parentsContainer = $(config.parentElem);
-        this.id = config.id;
         this.$content = $(config.contentElem);
         this.$container = this.$content.children('div');
         this.chromeTabs = new ChromeTabs();

@@ -1,7 +1,6 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Nav');
@@ -19,7 +18,6 @@ goog.require('Mixly.Web.FS');
 goog.provide('Mixly.EditorsManager');
 
 const {
-    IdGenerator,
     XML,
     Env,
     Nav,
@@ -58,18 +56,15 @@ class EditorsManager extends PagesManager {
     }
 
     constructor(element) {
-        const ids = IdGenerator.generate(['managerId', 'tabId']);
         const managerHTMLTemplate = HTMLTemplate.get('editor/editor-manager.html');
         const tabHTMLTemplate = HTMLTemplate.get('editor/editor-tab.html');
         const $manager = $(managerHTMLTemplate.render());
         const $tab = $(tabHTMLTemplate.render());
         super({
             parentElem: element,
-            managerId: managerHTMLTemplate.id,
             managerContentElem: $manager[0],
             bodyElem: $manager.find('.body')[0],
             tabElem: $manager.find('.tabs')[0],
-            tabId: tabHTMLTemplate.id,
             tabContentElem: $tab[0],
             typesRegistry: EditorsManager.typesRegistry
         });

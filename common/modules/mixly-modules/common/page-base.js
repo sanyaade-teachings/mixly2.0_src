@@ -21,12 +21,12 @@ class PageBase {
         this.events.run('created');
     }
 
-    updateContent(elem) {
-        this.$content = $(elem);
+    setContent(jqElem) {
+        this.$content = jqElem;
     }
 
     getContent() {
-        return this.$content[0];
+        return this.$content;
     }
 
     resize() {}

@@ -274,7 +274,6 @@
         "path": "/common/editors-manager.js",
         "require": [
             "path",
-            "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Nav",

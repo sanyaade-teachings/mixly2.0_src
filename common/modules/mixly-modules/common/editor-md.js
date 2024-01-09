@@ -47,11 +47,11 @@ class EditorMd extends EditorCode {
         this.drag = null;
         this.codeContextMenuItems = null;
         this.PreviewContextMenuItems = null;
-        this.$content = $content;
+        this.setContent($content);
         this.$codeContainer = $codeContainer;
         this.$previewContainer = this.$content.find('.markdown-body');
         this.$btns = this.$btnsContent.find('button');
-        $parentContainer.append(this.$content);
+        $parentContainer.append(this.getContent());
     }
 
     init() {

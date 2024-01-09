@@ -46,8 +46,8 @@ class SideBarLocalStorage extends PageBase {
         super();
         this.$openFolderContent = $openFolderContent;
         this.$folderContent = $folderContent;
-        this.$content = $openFolderContent;
-        $parentContainer.append(this.$content);
+        this.setContent($openFolderContent);
+        $parentContainer.append($openFolderContent);
         this.$folder = $folderContent.find('.folder-title');
         this.$iconTriangle = this.$folder.find('.triangle');
         this.$iconFolder = this.$folder.find('.folder');

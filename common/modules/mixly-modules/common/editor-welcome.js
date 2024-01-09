@@ -23,8 +23,9 @@ class EditorWelcome extends EditorBase {
 
     constructor() {
         super();
-        this.$content = $(HTMLTemplate.get('editor/editor-welcome.html').render());
-        this.$container = this.$content.children('div');
+        this.setContent(
+            $(HTMLTemplate.get('editor/editor-welcome.html').render())
+        );
     }
 }
 

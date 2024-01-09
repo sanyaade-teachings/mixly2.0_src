@@ -88,11 +88,10 @@ class FileTreeExt extends FileTree {
         for (let data of children) {
             const dataPath = path.join(inPath, data);
             if (await FS.isDirectory(dataPath)) {
-                const isDirEmtpy = await FS.isDirectoryEmpty(dataPath);
                 output.push({
                     type: 'dir',
                     id: dataPath,
-                    children: !isDirEmtpy
+                    children: true
                 });
             } else {
                 output.push({

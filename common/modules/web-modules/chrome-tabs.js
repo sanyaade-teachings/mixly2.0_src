@@ -158,16 +158,19 @@
     }
 
     removeTab(tabEl) {
+      const isActive = tabEl === this.activeTabEl
+      let needActiveElem = null
       if (tabEl === this.activeTabEl) {
         if (tabEl.nextElementSibling) {
-          this.setCurrentTab(tabEl.nextElementSibling)
+          needActiveElem = tabEl.nextElementSibling;
         } else if (tabEl.previousElementSibling) {
-          this.setCurrentTab(tabEl.previousElementSibling)
+          needActiveElem = tabEl.previousElementSibling
         }
       }
       this.emit('beforeDestroy', { tabEl })
       tabEl.parentNode.removeChild(tabEl)
       this.emit('destroyed', { tabEl })
+      this.setCurrentTab(needActiveElem)
     }
 
     updateTab(tabEl, tabProperties) {

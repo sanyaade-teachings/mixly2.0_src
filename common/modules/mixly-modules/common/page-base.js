@@ -12,7 +12,7 @@ class PageBase {
         this.$content = null;
         this.$tab = null;
         this.inited = false;
-        this.isActivated = true;
+        this.active = true;
         this.events = new Events(['addDirty', 'removeDirty', 'destroyed', 'created', 'active']);
     }
 
@@ -21,28 +21,28 @@ class PageBase {
         this.events.run('created');
     }
 
-    updateContainer($elem) {
-        this.$content = $elem;
+    updateContent(elem) {
+        this.$content = $(elem);
     }
 
-    getContainer() {
-        return this.$content;
+    getContent() {
+        return this.$content[0];
     }
 
     resize() {}
 
     dispose() {
         this.events.run('destroyed');
-        this.getContainer().remove();
+        this.$content.remove();
     }
 
     onMounted() {
-        this.isActivated = true;
+        this.active = true;
         this.events.run('active');
     }
 
     onUnmounted() {
-        this.isActivated = false;
+        this.active = false;
     }
 
     setTab($tab) {
@@ -79,6 +79,10 @@ class PageBase {
 
     isInited() {
         return this.inited;
+    }
+
+    isActive() {
+        return this.active;
     }
 
     bind(type, func) {

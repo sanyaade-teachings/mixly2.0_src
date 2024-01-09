@@ -23,7 +23,7 @@ class Registry {
     register(keys, value) {
         keys = this.validate(keys);
         for (let key of keys) {
-           if (this.#registry_.has(key)) {
+            if (this.#registry_.has(key)) {
                 console.warn(`${key}已存在，不可重复注册`);
                 continue;
             }

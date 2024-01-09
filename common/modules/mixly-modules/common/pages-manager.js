@@ -41,7 +41,7 @@ class PagesManager {
         $parentContainer.append(this.$content);
         let PageType = this.typesRegistry.getItem('#welcome');
         if (PageType) {
-            this.$welcomePage = (new PageType()).getContainer();
+            this.$welcomePage = $((new PageType()).getContent());
             this.$container.replaceWith(this.$welcomePage);
         }
         this.page = 'welcome';
@@ -64,10 +64,7 @@ class PagesManager {
                 prevEditor.onUnmounted();
             }
             this.$editorContainer.empty();
-            this.$editorContainer.append(page.getContainer());
-            if (!page.isInited()) {
-                return;
-            }
+            this.$editorContainer.append(page.getContent());
             page.onMounted();
         });
 
@@ -89,10 +86,7 @@ class PagesManager {
                     this.page = 'editor';
                 }
             }
-            setTimeout(() => {
-                page.init();
-                page.onMounted();
-            }, 100);
+            page.init();
         });
 
         // 移除已有Tab时触发

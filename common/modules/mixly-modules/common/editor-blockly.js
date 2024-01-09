@@ -37,6 +37,116 @@ const { USER, BOARD } = Config;
 class EditorBlockly extends EditorBase {
     static {
         this.TEMPLATE = goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html'));
+        this.DEFAULT_CATEGORIES = goog.get(path.join(Env.templatePath, 'xml/default-categories.xml'));
+        this.blocklyElem = null;
+        this.blockEditor = null;
+        this.initBlockly = () => {
+            const media = path.join(Config.pathPrefix, 'common/media/');
+            const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
+            this.blocklyElem = $('<div class="page-item"></div>')[0];
+            this.editor = Blockly.inject(this.blocklyElem, {
+                media,
+                toolbox: this.DEFAULT_CATEGORIES,
+                renderer,
+                zoom: {
+                    controls: true,
+                    wheel: true,
+                    scaleSpeed: 1.03
+                },
+                grid: USER.blocklyShowGrid ==='yes' ? {
+                    spacing: 20,
+                    length: 3,
+                    colour: '#ccc',
+                    snap: true
+                } : {}
+            });
+
+            if (USER.theme === 'dark') {
+                this.editor.setTheme(Blockly.Themes.Dark);
+            } else {
+                this.editor.setTheme(Blockly.Themes.Classic);
+            }
+
+            this.addPlugins();
+        }
+
+        this.addPlugins = () => {
+            const { editor } = this;
+            editor.configureContextMenu = (menuOptions, e) => {
+                menuOptions.push(Blockly.ContextMenu.workspaceCommentOption(editor, e));
+                const workspaceSearchOption = {
+                    text: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
+                    enabled: editor.getTopBlocks().length,
+                    callback: function() {
+                        workspaceSearch.open();
+                    }
+                };
+                menuOptions.push(workspaceSearchOption);
+                const screenshotOption = {
+                    text: Blockly.Msg['DOWNLOAD_SCREENSHOT'],
+                    enabled: editor.getTopBlocks().length,
+                    callback: function() {
+                        Blockly.Screenshot.downloadScreenshot(editor);
+                    },
+                };
+                menuOptions.push(screenshotOption);
+            }
+
+            // ToolboxSearcher.init(editor);
+            const workspaceSearch = new WorkspaceSearch(editor);
+            workspaceSearch.init();
+
+            const zoomToFit = new ZoomToFitControl(editor);
+            zoomToFit.init();
+            const backpack = new Backpack(editor, {
+                useFilledBackpackImage: true,
+                skipSerializerRegistration: false,
+                contextMenu: {
+                    emptyBackpack: true,
+                    removeFromBackpack: true,
+                    copyToBackpack: true,
+                    copyAllToBackpack: true,
+                    pasteAllToBackpack: true,
+                    disablePreconditionChecks: false
+                }
+            });
+            backpack.init();
+
+            if (USER.blocklyMultiselect === 'yes') {
+                const multiselectPlugin = new Multiselect(editor);
+                multiselectPlugin.init({
+                    useDoubleClick: false,
+                    bumpNeighbours: false,
+                    multiselectIcon: {
+                        hideIcon: true
+                    },
+                    multiselectCopyPaste: {
+                        crossTab: true,
+                        menu: false
+                    }
+                });
+            }
+            
+            if (USER.blocklyShowMinimap === 'yes') {
+                const minimap = new PositionedMinimap(editor);
+                minimap.init();
+            }
+            
+            if (USER.blocklyContentHighlight === 'yes') {
+                const contentHighlight = new ContentHighlight(editor);
+                contentHighlight.init();
+            }
+        }
+
+        this.getEditor = () => {
+            return this.editor;
+        }
+
+        this.getContent = () => {
+            return this.blocklyElem;
+        }
+
+        this.initBlockly();
     }
 
     constructor(element) {
@@ -46,50 +156,17 @@ class EditorBlockly extends EditorBase {
         this.$content = $(XML.render(EditorBlockly.TEMPLATE, {
             mId: this.id
         }));
-        this.$loading = this.$content.find('.loading');
-        this.$editorContainer = this.$content.find('.editor');
+        this.$editorContainer = this.$content.children('div');
         $parentContainer.append(this.$content);
-        this.codeChangeListener = null;
+        this.editor = EditorBlockly.getEditor();
+        this.$toolbox = null;
+        this.workspaceState = null;
+        this.undoStack = null;
+        this.redoStack = null;
     }
 
     init() {
-        const media = path.join(Config.pathPrefix, 'common/media/');
         this.$toolbox = $('#toolbox');
-        const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
-        this.editor = Blockly.inject(this.$editorContainer[0], {
-            media,
-            toolbox: this.$toolbox[0],
-            renderer,
-            zoom: {
-                controls: true,
-                wheel: true,
-                scaleSpeed: 1.03
-            },
-            grid: USER.blocklyShowGrid ==='yes' ? {
-                spacing: 20,
-                length: 3,
-                colour: '#ccc',
-                snap: true
-            } : {}
-        });
-
-        this.editor.registerToolboxCategoryCallback(
-            Blockly.Variables.CATEGORY_NAME,
-            Blockly.Variables.flyoutCategory
-        );
-
-        this.editor.registerToolboxCategoryCallback(
-            Blockly.Procedures.CATEGORY_NAME,
-            Blockly.Procedures.flyoutCategory
-        );
-
-        if (USER.theme === 'dark') {
-            this.editor.setTheme(Blockly.Themes.Dark);
-        } else {
-            this.editor.setTheme(Blockly.Themes.Classic);
-        }
-
-        this.addPlugins();
         const language = BOARD.language.toLowerCase();
         switch (language) {
         case 'python':
@@ -109,14 +186,15 @@ class EditorBlockly extends EditorBase {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
-        const toolboxWidth = this.$editorContainer.find('.blocklyToolboxDiv').outerWidth(true);
-        this.$loading.children('.left').animate({
-          width: toolboxWidth + 'px'
-        }, 'normal', () => {
-            this.$loading.fadeOut("fast", () => {
-                this.$loading.remove();
-            });
-        });
+        this.editor.registerToolboxCategoryCallback(
+            Blockly.Variables.CATEGORY_NAME,
+            Blockly.Variables.flyoutCategory
+        );
+
+        this.editor.registerToolboxCategoryCallback(
+            Blockly.Procedures.CATEGORY_NAME,
+            Blockly.Procedures.flyoutCategory
+        );
     }
 
     undo() {
@@ -150,88 +228,51 @@ class EditorBlockly extends EditorBase {
         super.resize();
     }
 
-    addPlugins() {
-        const { editor } = this;
-        editor.configureContextMenu = (menuOptions, e) => {
-            menuOptions.push(Blockly.ContextMenu.workspaceCommentOption(editor, e));
-            const workspaceSearchOption = {
-                text: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
-                enabled: editor.getTopBlocks().length,
-                callback: function() {
-                    workspaceSearch.open();
-                }
-            };
-            menuOptions.push(workspaceSearchOption);
-            const screenshotOption = {
-                text: Blockly.Msg['DOWNLOAD_SCREENSHOT'],
-                enabled: editor.getTopBlocks().length,
-                callback: function() {
-                    Blockly.Screenshot.downloadScreenshot(editor);
-                },
-            };
-            menuOptions.push(screenshotOption);
-        }
-
-        // ToolboxSearcher.init(editor);
-        const workspaceSearch = new WorkspaceSearch(editor);
-        workspaceSearch.init();
-
-        const zoomToFit = new ZoomToFitControl(editor);
-        zoomToFit.init();
-        const backpack = new Backpack(editor, {
-            useFilledBackpackImage: true,
-            skipSerializerRegistration: false,
-            contextMenu: {
-                emptyBackpack: true,
-                removeFromBackpack: true,
-                copyToBackpack: true,
-                copyAllToBackpack: true,
-                pasteAllToBackpack: true,
-                disablePreconditionChecks: false
-            }
-        });
-        backpack.init();
-
-        if (USER.blocklyMultiselect === 'yes') {
-            const multiselectPlugin = new Multiselect(editor);
-            multiselectPlugin.init({
-                useDoubleClick: false,
-                bumpNeighbours: false,
-                multiselectIcon: {
-                    hideIcon: true
-                },
-                multiselectCopyPaste: {
-                    crossTab: true,
-                    menu: false
-                }
-            });
-        }
-        
-        if (USER.blocklyShowMinimap === 'yes') {
-            const minimap = new PositionedMinimap(editor);
-            minimap.init();
-        }
-        
-        if (USER.blocklyContentHighlight === 'yes') {
-            const contentHighlight = new ContentHighlight(editor);
-            contentHighlight.init();
-        }
-    }
-
     updateToolbox() {
         this.editor.updateToolbox(this.$toolbox[0]);
     }
 
     dispose() {
         super.dispose();
-        this.editor.dispose();
+        if (this.isActive()) {
+            $(EditorBlockly.getContent()).detach();
+            this.$editorContainer.empty();
+        }
+        this.$editorContainer.remove();
     }
 
     onMounted() {
         super.onMounted();
+        this.$editorContainer.append(EditorBlockly.getContent());
         this.updateToolbox();
+        Blockly.Events.disable();
+        if (this.workspaceState) {
+            Blockly.serialization.workspaces.load(this.workspaceState, this.editor, {
+                recordUndo: false
+            });
+        }
+        if (this.undoStack) {
+            this.editor.undoStack_ = [...this.undoStack];
+        }
+        if (this.redoStack) {
+            this.editor.redoStack_ = [...this.redoStack];
+        }
+        Blockly.Events.enable();
         this.resize();
         this.editor.scrollCenter();
+    }
+
+    onUnmounted() {
+        super.onUnmounted();
+        this.workspaceState = Blockly.serialization.workspaces.save(this.editor);
+        this.undoStack = [...this.editor.undoStack_];
+        this.redoStack = [...this.editor.redoStack_];
+        Blockly.Events.disable();
+        this.editor.clear();
+        this.editor.clearUndo();
+        Blockly.Events.enable();
+        $(EditorBlockly.getContent()).detach();
+        this.$editorContainer.empty();
     }
 
     setValue(data) {

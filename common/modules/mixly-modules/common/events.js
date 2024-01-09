@@ -25,9 +25,8 @@ class Events {
         if (!this.eventsType.includes(type)) {
             console.warn(`${type} event does not exist under the class`);
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     bind(type, func) {

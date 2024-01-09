@@ -31,7 +31,7 @@ class EditorAce extends EditorBase {
         this.editor = ace.edit(this.$container[0]);
         this.resetFontSize();
         this.addCursorLayer();
-        this.addCursorEvents();
+        this.addCursorEventsListener();
         this.addDefaultCommand();
     }
 
@@ -181,7 +181,7 @@ class EditorAce extends EditorBase {
         });
     }
 
-    addCursorEvents() {
+    addCursorEventsListener() {
         const { editor } = this;
         $('#mixly-footer-cursor').hide();
         editor.on('focus', () => {

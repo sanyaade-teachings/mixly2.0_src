@@ -294,7 +294,7 @@ app.on('window-all-closed', () => {
 app.on('render-process-gone', async (e, w, d) => {
     let title;
     if(d.reason == "crashed") {
-        nodeFs.appendFileSync('./log.txt', `${new Date()}渲染进程崩溃${d.reason}\n`);
+        nodeFs.appendFileSync('./log.txt', `${new Date()}渲染进程崩溃${d.reason}\n, ${JSON.stringify(d)}\n\n`);
         title = '渲染进程崩溃';
     } else {
         nodeFs.appendFileSync('./log.txt', `${new Date()}渲染进程被杀死${d.reason}\n`);

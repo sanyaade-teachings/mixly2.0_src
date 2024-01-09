@@ -142,9 +142,9 @@ window.addEventListener('load', () => {
             if (typeof Serial === 'object') {
                 Serial.addStatusbarTabExtFunc();
                 Serial.refreshPorts();
-                Serial.refreshPortsTimer = setInterval(() => {
+                /*Serial.refreshPortsTimer = setInterval(() => {
                    Serial.refreshPorts();
-                }, 10000);
+                }, 10000);*/
             }
         }
         Nav.resize();

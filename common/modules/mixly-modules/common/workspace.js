@@ -88,13 +88,13 @@ class Workspace {
         this.dragH = null;
         this.dragV = null;
         Workspace.add(this);
-        this.addEventsForFileTree();
-        this.addDragEvents();
-        this.addEventsForEditorManager();
+        this.addEventsListenerForFileTree();
+        this.addDragEventsListener();
+        this.addEventsListenerForEditorManager();
         this.addFuncForStatusbarTabs();
     }
 
-    addEventsForFileTree() {
+    addEventsListenerForFileTree() {
         const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
         const fileTree = leftSideBarLocalStorage.getFileTree();
         fileTree.bind('selectLeaf', (selected) => {
@@ -108,7 +108,7 @@ class Workspace {
         });
     }
 
-    addEventsForEditorManager() {
+    addEventsListenerForEditorManager() {
         const { events } = this.editorManager.tabs;
         events.bind('activeChange', (event) => {
             const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
@@ -134,7 +134,7 @@ class Workspace {
         events.bind('hide', () => this.dragH.hide());
     }
 
-    addDragEvents() {
+    addDragEventsListener() {
         // 编辑器(上)+状态栏(下)
         this.dragH = new DragH(this.$dragH[0], {
             min: '50px',

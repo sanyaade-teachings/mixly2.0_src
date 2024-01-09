@@ -49,12 +49,12 @@ class EditorMd extends EditorCode {
 
     init() {
         super.init();
-        this.addDragEvents();
-        this.addBtnEvents();
+        this.addDragEventsListener();
+        this.addBtnEventsListener();
         this.addChangeListener();
     }
 
-    addDragEvents() {
+    addDragEventsListener() {
         this.drag = new DragV(this.$content.children('div')[0], {
             min: '200px',
             full: [true, true],
@@ -86,7 +86,7 @@ class EditorMd extends EditorCode {
         });
     }
 
-    addBtnEvents() {
+    addBtnEventsListener() {
         this.$btns.on('click', (event) => {
             const $btn = $(event.currentTarget);
             const mId = $btn.attr('m-id');

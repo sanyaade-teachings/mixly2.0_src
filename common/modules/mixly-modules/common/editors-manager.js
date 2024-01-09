@@ -13,6 +13,8 @@ goog.require('Mixly.EditorUnknown');
 goog.require('Mixly.EditorWelcome');
 goog.require('Mixly.Registry');
 goog.require('Mixly.PagesManager');
+goog.require('Mixly.Electron.FS');
+goog.require('Mixly.Web.FS');
 goog.provide('Mixly.EditorsManager');
 
 const {
@@ -27,11 +29,12 @@ const {
     EditorUnknown,
     EditorWelcome,
     Registry,
-    PagesManager
+    PagesManager,
+    Electron = {},
+    Web = {}
 } = Mixly;
 
-const fs = Mixly.require('fs');
-const fs_plus = Mixly.require('fs-plus');
+const { FS } = goog.isElectron? Electron : Web;
 
 class EditorsManager extends PagesManager {
     static {
@@ -88,6 +91,17 @@ class EditorsManager extends PagesManager {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
+            FS.isFile(id)
+            .then((isFile) => {
+                if (!isFile) {
+                    return;
+                }
+                return FS.readFile(id);
+            })
+            .then((data) => {
+                data && editor.setValue(data, path.extname(id));
+            })
+            .catch(console.log);
             const tabs = this.getTabs();
             editor.bind('addDirty', () => {
                 tabs.updateTab(id, {

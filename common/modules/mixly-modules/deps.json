@@ -284,7 +284,9 @@
             "Mixly.EditorUnknown",
             "Mixly.EditorWelcome",
             "Mixly.Registry",
-            "Mixly.PagesManager"
+            "Mixly.PagesManager",
+            "Mixly.Electron.FS",
+            "Mixly.Web.FS"
         ],
         "provide": [
             "Mixly.EditorsManager"

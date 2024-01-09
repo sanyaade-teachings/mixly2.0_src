@@ -50,6 +50,12 @@ FS.writeFile = (data) => {
     // return fs_promise.writeFile(data, { encoding: 'utf8' });
 }
 
+FS.isFile = (path) => {
+    return new Promise((resolve, reject) => {
+        resolve(true);
+    });
+}
+
 FS.readDirectory = (path) => {
     return new Promise(async (resolve, reject) => {
         const [error, entries] = await FS.pool.exec('readdir', [path]);

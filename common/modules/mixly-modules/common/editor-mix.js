@@ -95,15 +95,11 @@ class EditorMix extends EditorBase {
 
     init() {
         super.init();
-        this.addDragEvents();
-        this.addBtnEvents();
+        this.addDragEventsListener();
+        this.addBtnEventsListener();
         this.blockEditor.init();
         this.codeEditor.init();
         this.codeEditor.setReadOnly(true);
-        const blocklyWorkspace = this.blockEditor.editor;
-        this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
-            this.workspaceChangeEvent(event);
-        });
         this.py2BlockEditorInit();
         const { events } = this.codeEditor.contextMenu;
         events.off('getMenu').bind('getMenu', () => {
@@ -155,7 +151,7 @@ class EditorMix extends EditorBase {
         codeEditor.setValue(blockEditor.getValue(), false);
     }
 
-    addDragEvents() {
+    addDragEventsListener() {
         const { blockEditor, codeEditor } = this;
         this.drag = new DragV(this.$content.find('.editor')[0], {
             min: '200px',
@@ -175,7 +171,6 @@ class EditorMix extends EditorBase {
                 break;
             case Drag.Extend.NEGATIVE:
                 $btn = this.$btns.filter('[m-id="code"]');
-                blockEditor.setVisible(false);
                 codeEditor.setReadOnly(false);
                 codeEditor.focus();
                 if (this.py2BlockEditor && BOARD.pythonToBlockly) {
@@ -191,7 +186,6 @@ class EditorMix extends EditorBase {
             $btn.addClass('self-adaption-btn');
             switch(type) {
             case Drag.Extend.NEGATIVE:
-                blockEditor.setVisible(true);
                 codeEditor.setReadOnly(true);
                 if (this.py2BlockEditor 
                     && BOARD.pythonToBlockly 
@@ -210,7 +204,7 @@ class EditorMix extends EditorBase {
         });
     }
 
-    addBtnEvents() {
+    addBtnEventsListener() {
         this.$btns.on('click', (event) => {
             const $btn = $(event.currentTarget);
             const mId = $btn.attr('m-id');
@@ -274,6 +268,18 @@ class EditorMix extends EditorBase {
         super.onMounted();
         this.blockEditor.onMounted();
         this.codeEditor.onMounted();
+        const blocklyWorkspace = this.blockEditor.editor;
+        this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
+            this.workspaceChangeEvent(event);
+        });
+    }
+
+    onUnmounted() {
+        super.onUnmounted();
+        const blocklyWorkspace = this.blockEditor.editor;
+        blocklyWorkspace.removeChangeListener(this.codeChangeListener);
+        this.blockEditor.onUnmounted();
+        this.codeEditor.onUnmounted();
     }
 
     setValue(data, ext) {

@@ -76,6 +76,12 @@ FS.writeFile = (data) => {
     return fs_promise.writeFile(data, { encoding: 'utf8' });
 }
 
+FS.isFile = (path) => {
+    return new Promise((resolve, reject) => {
+        resolve(fs_plus.isFileSync(path));
+    });
+}
+
 FS.readDirectory = (path) => {
     return fs_promise.readdir(path);
 }

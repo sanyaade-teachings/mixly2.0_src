@@ -26,12 +26,18 @@ class Handle:
 
 	def _wreg(self, reg, val):
 		'''Write memory address'''
-		self._i2c.writeto_mem(self._addr, reg, val.to_bytes(1, 'little'))
+		try:
+			self._i2c.writeto_mem(self._addr, reg, val.to_bytes(1, 'little'))
+		except:
+			return 0 
 
 	def _rreg(self, reg, nbytes=1):
 		'''Read memory address'''
-		self._i2c.writeto(self._addr, reg.to_bytes(1, 'little'))
-		return  self._i2c.readfrom(self._addr, nbytes)[0] if nbytes<=1 else self._i2c.readfrom(self._addr, nbytes)[0:nbytes]
+		try:
+			self._i2c.writeto(self._addr, reg.to_bytes(1, 'little'))
+			return  self._i2c.readfrom(self._addr, nbytes)[0] if nbytes<=1 else self._i2c.readfrom(self._addr, nbytes)[0:nbytes]
+		except:
+			return 0
 
 	def read_bat(self, ratio=5/1023):
 		'''Read battery power'''

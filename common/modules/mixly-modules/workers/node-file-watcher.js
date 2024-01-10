@@ -1,5 +1,4 @@
 const chokidar = require('chokidar');
-const path = require('path');
 
 let watchedPath = {};
 
@@ -13,38 +12,38 @@ const watch = function(inPath) {
         ignoreInitial: true
     });
 
-    watchedPath[inPath].on('add', (path, stats) => {
+    watchedPath[inPath].on('add', (actionPath, stats) => {
         self.postMessage({
             watcher: inPath,
             event: 'add',
-            path,
+            path: actionPath,
             stats
         });
     });
 
-    watchedPath[inPath].on('addDir', (path, stats) => {
+    watchedPath[inPath].on('addDir', (actionPath, stats) => {
         self.postMessage({
             watcher: inPath,
             event: 'addDir',
-            path,
+            path: actionPath,
             stats
         });
     });
 
-    watchedPath[inPath].on('unlink', (path, stats) => {
+    watchedPath[inPath].on('unlink', (actionPath, stats) => {
         self.postMessage({
             watcher: inPath,
             event: 'unlink',
-            path,
+            path: actionPath,
             stats
         });
     });
 
-    watchedPath[inPath].on('unlinkDir', (path, stats) => {
+    watchedPath[inPath].on('unlinkDir', (actionPath, stats) => {
         self.postMessage({
             watcher: inPath,
             event: 'unlinkDir',
-            path,
+            path: actionPath,
             stats
         });
     });

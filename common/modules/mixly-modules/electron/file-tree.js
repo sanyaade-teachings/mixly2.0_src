@@ -94,6 +94,9 @@ class FileTreeExt extends FileTree {
                     id: dataPath,
                     children: !isDirEmtpy
                 });
+                if (isDirEmtpy) {
+                    this.watchEmptyFolder(dataPath);
+                }
             } else {
                 output.push({
                     type: 'file',
@@ -118,6 +121,24 @@ class FileTreeExt extends FileTree {
             const watcherPath = path.join(data.watcher);
             if (this.isWatched(watcherPath)) {
                 this.refreshFolder(watcherPath);
+            }
+        });
+        this.watcherEventsListenerIdRegistry.register(folderPath, id);
+    }
+
+    watchEmptyFolder(folderPath) {
+        super.watchFolder(folderPath);
+        let id = this.watcherEventsListenerIdRegistry.getItem(folderPath);
+        if (id) {
+            return;
+        }
+        id = FileTreeExt.addEventListener(folderPath, (data) => {
+            const watcherPath = path.join(data.watcher);
+            if (this.isWatched(watcherPath)) {
+                this.refreshFolder(watcherPath);
+            }
+            if (this.isClosed(watcherPath)) {
+                this.unwatchFolder(watcherPath);
             }
         });
         this.watcherEventsListenerIdRegistry.register(folderPath, id);

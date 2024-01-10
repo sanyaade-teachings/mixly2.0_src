@@ -64,7 +64,6 @@ class FileTree {
                         $i.addClass('layui-anim layui-anim-fadein layui-anim-fadeout layui-anim-loop');
                         folderPath = node.id;
                     }
-
                     this.#getChildren_(folderPath)
                     .then((data) => {
                         cb(data);
@@ -80,7 +79,7 @@ class FileTree {
                     ellipsis: true
                 }
             },
-            plugins: ['wholerow', 'dnd', 'unique']
+            plugins: ['wholerow', 'unique']
         });
         this.jstree = this.$fileTree.jstree(true);
         this.events = new Events(['selectLeaf', 'afterOpenNode', 'afterCloseNode', 'afterRefreshNode']);
@@ -180,7 +179,7 @@ class FileTree {
                 return;
             }
             const node = this.jstree.get_node(folderPath);
-            const nodeIsOpened = node && !this.jstree.is_closed(folderPath);
+            const nodeIsOpened = node && !this.isClosed(folderPath);
             if (nodeIsOpened) {
                 if (this.isWatched(folderPath)) {
                     this.jstree.refresh_node(folderPath);
@@ -232,6 +231,10 @@ class FileTree {
 
     isWatched(inPath) {
         return !!this.watchRegistry.getItem(inPath);
+    }
+
+    isClosed(inPath) {
+        return this.jstree.is_closed(inPath);
     }
 
     select(inPath) {
@@ -531,6 +534,7 @@ class FileTree {
         pastePromise
         .catch(console.log)
         .finally(() => {
+            this.jstree.refresh_node(folderPath);
             this.openNode(folderPath);
             this.mprogress.end();
         });

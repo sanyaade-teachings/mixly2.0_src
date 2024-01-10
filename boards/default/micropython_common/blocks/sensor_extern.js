@@ -1521,6 +1521,22 @@ Blockly.Blocks.robot_infrared_extern_get_value = {
     }
 }
 
+Blockly.Blocks.robot_infrared_extern_grey_get_value = {
+    init: function () {
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_ESP32_EXTERN_GRAY_NEAR)
+        this.appendValueInput('mode')
+            .setCheck(Number)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.LCD_NUMBERING);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
+        this.setOutput(true, Boolean);
+        this.setInputsInline(true);
+    }
+}
+
 Blockly.Blocks.robot_potentiometer_extern_get_value = {
     init: function () {
       this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);

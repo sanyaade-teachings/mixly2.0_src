@@ -729,6 +729,20 @@ Blockly.Python.forBlock['robot_infrared_extern_get_value'] = function(){
     }
 };
 
+Blockly.Python.forBlock['robot_infrared_extern_grey_get_value'] = function () {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+  var mode = '[' + Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC) + ']';
+  if (version == 'mixgo_baize') {
+    Blockly.Python.definitions_['import_machine'] = 'import machine';
+    Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
+    Blockly.Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+    Blockly.Python.definitions_['import_left_button'] = 'ext_grey_near = i2cdevice.Infrared(ext_i2c_left)';
+    var code = 'ext_grey_near.value()' + mode;
+    
+    return [code, Blockly.Python.ORDER_ATOMIC];
+  }
+};
+
 Blockly.Python.forBlock['robot_potentiometer_extern_get_value'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);

@@ -3722,4 +3722,5 @@ ZhHans.WHETHER_IS_PRESSED = '是否被按着';
 ZhHans.MIXLY_GET_BATTERY = '获取电池电量（v）';
 ZhHans.MIXLY_GET_JOYSTICK = '获取摇杆';
 ZhHans.MIXLY_HANDLE_SHUTDOWN ='设置手柄关机';
+ZhHans.MIXLY_ESP32_EXTERN_GRAY_NEAR = "红外灰度传感器";
 })();

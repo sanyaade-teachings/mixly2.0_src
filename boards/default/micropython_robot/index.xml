@@ -3208,6 +3208,12 @@
         </shadow>
       </value>
     </block>
+    <block type="robot_infrared_extern_grey_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+      <value name="mode">
+        <shadow type="mixbot_addr_extern">
+        </shadow>
+      </value>
+    </block>
     <block type="robot_potentiometer_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
       <value name="mode">
         <shadow type="mixbot_addr_extern">

@@ -109,8 +109,11 @@ class EditorCode extends EditorMonaco {
     }
 
     dispose() {
-        super.dispose();
         this.contextMenu.dispose();
+        this.events.reset();
+        this.contextMenu = null;
+        this.defaultContextMenu = null;
+        super.dispose();
     }
 }
 

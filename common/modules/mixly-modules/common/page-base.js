@@ -34,6 +34,8 @@ class PageBase {
     dispose() {
         this.events.run('destroyed');
         this.$content.remove();
+        this.$tab && this.$tab.remove();
+        this.events.reset();
     }
 
     onMounted() {

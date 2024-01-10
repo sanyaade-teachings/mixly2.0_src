@@ -41,6 +41,9 @@ class ContextMenu {
 
     dispose() {
         $.contextMenu('destroy', this.selector);
+        this.events.reset();
+        this.menu = null;
+        this.selector = null;
     }
 
     hide() {

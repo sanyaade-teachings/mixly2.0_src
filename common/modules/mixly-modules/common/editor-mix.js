@@ -72,8 +72,6 @@ class EditorMix extends EditorBase {
         const $content = this.getContent();
         this.$btnsContent = $(HTMLTemplate.get('editor/editor-mix-btns.html'));
         this.drag = null;
-        this.blocklyContextMenuItems = null;
-        this.codeContextMenuItems = null;
         this.$blocklyContainer = $content.find('.editor-blockly');
         this.$codeContainer = $content.find('.editor-code');
         this.$btns = this.$btnsContent.find('button');
@@ -95,7 +93,6 @@ class EditorMix extends EditorBase {
                 callback: (key, opt) => this.drag.exitfull(Drag.Extend.NEGATIVE)
             }
         };
-        this.breadcrumbsMenu = [];
         $parentContainer.append(this.getContent());
     }
 
@@ -264,10 +261,18 @@ class EditorMix extends EditorBase {
     }
 
     dispose() {
-        super.dispose();
+        this.drag.dispose();
         this.$btnsContent.remove();
         this.blockEditor.dispose();
         this.codeEditor.dispose();
+        super.dispose();
+        this.$blocklyContainer = null;
+        this.$codeContainer = null;
+        this.blockEditor = null;
+        this.codeEditor = null;
+        this.drag = null;
+        this.blocklyContextMenu = null;
+        this.codeContextMenu = null;
     }
 
     onMounted() {

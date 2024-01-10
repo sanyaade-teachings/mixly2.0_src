@@ -236,6 +236,11 @@ class Drag {
             break;
         }
     }
+
+    dispose() {
+        this.events.reset();
+        this.$dragElem.remove();
+    }
 }
 
 class DragH extends Drag {

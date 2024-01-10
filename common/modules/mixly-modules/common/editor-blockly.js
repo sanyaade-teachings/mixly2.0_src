@@ -241,9 +241,12 @@ class EditorBlockly extends EditorBase {
         super.dispose();
         if (this.isActive()) {
             EditorBlockly.getContent().detach();
-            this.$content.empty();
         }
-        this.$content.remove();
+        this.$toolbox = null;
+        this.undoStack = null;
+        this.redoStack = null;
+        this.editor = null;
+        this.getContent().remove();
     }
 
     onMounted() {

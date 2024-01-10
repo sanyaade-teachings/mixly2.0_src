@@ -51,6 +51,8 @@ class EditorMonaco extends EditorBase {
 
     dispose() {
         this.editor.dispose();
+        super.dispose();
+        this.editor = null;
         this.destroyed = true;
     }
 

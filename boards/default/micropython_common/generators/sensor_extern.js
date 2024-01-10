@@ -731,14 +731,20 @@ Blockly.Python.forBlock['robot_infrared_extern_get_value'] = function(){
 
 Blockly.Python.forBlock['robot_infrared_extern_grey_get_value'] = function () {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-  var mode = '[' + Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC) + ']';
+  var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);
   if (version == 'mixgo_baize') {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
-    Blockly.Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
-    Blockly.Python.definitions_['import_left_button'] = 'ext_grey_near = i2cdevice.Infrared(ext_i2c_left)';
-    var code = 'ext_grey_near.value()' + mode;
-    
+    if (mode == "0") {
+      Blockly.Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+      Blockly.Python.definitions_['import_left_grey_near'] = 'ext_grey_near_left = i2cdevice.Infrared(ext_i2c_left)';
+      var code = 'ext_grey_near_left.value()';
+    }
+    else if (mode == "1") {
+      Blockly.Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+      Blockly.Python.definitions_['import_right_grey_near'] = 'ext_grey_near_right = i2cdevice.Infrared(ext_i2c_right)';
+      var code = 'ext_grey_near_right.value()';
+    }
     return [code, Blockly.Python.ORDER_ATOMIC];
   }
 };

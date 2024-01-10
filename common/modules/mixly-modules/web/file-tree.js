@@ -9,8 +9,8 @@ const { FileTree, Web } = Mixly;
 const { FS } = Web;
 
 class FileTreeExt extends FileTree {
-    constructor(element) {
-        super(element);
+    constructor(element, mprogress) {
+        super(element, mprogress, FS);
     }
 
     async getContent(inPath) {
@@ -25,10 +25,11 @@ class FileTreeExt extends FileTree {
             const dataPath = path.join(inPath, data);
             const reDataPath = path.join(rePath, data);
             if (await FS.isDirectory(reDataPath)) {
+                const isDirEmpty = await FS.isDirectoryEmpty(reDataPath);
                 output.push({
-                    type: 'dir',
+                    type: 'folder',
                     id: dataPath,
-                    children: true
+                    children: !isDirEmpty
                 });
             } else {
                 output.push({

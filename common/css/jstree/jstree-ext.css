@@ -81,6 +81,18 @@ html[data-bs-theme=dark] .jstree-anchor {
 .jstree-default .jstree-wholerow-clicked {
     background: #e4e6f1;
 }
+
+.jstree .jstree-node > .jstree-anchor > input {
+    width: calc(100% - 30px) !important;
+}
+
+html[data-bs-theme=light] .jstree .jstree-node > .jstree-anchor > input {
+    border-color: #009688 !important;
+}
+
+html[data-bs-theme=dark] .jstree .jstree-node > .jstree-anchor > input {
+    border-color: #007acc !important;
+}
 /*
 .jstree,
 .jstree > .jstree-container-ul {

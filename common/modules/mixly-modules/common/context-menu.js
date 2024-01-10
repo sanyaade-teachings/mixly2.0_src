@@ -18,21 +18,21 @@ class ContextMenu {
         this.getItem = (name, hotKey) => XML.render(ContextMenu.TEMPLATE, { name, hotKey });
     }
 
-    constructor(selector) {
+    constructor(selector, config = {}) {
         this.selector = selector;
         this.events = new Events(['getMenu']);
         this.menu = $.contextMenu({
             selector,
             build: ($trigger, e) => {
-                return { items: this.#getMenu_() }
+                return { items: this.#getMenu_($trigger, e) }
             },
             animation: { duration: 0, show: 'show', hide: 'hide' },
-            autoHide: true
+            ...config
         });
     }
 
-    #getMenu_() {
-        const outputs = this.events.run('getMenu');
+    #getMenu_($trigger, e) {
+        const outputs = this.events.run('getMenu', $trigger, e);
         if (!outputs.length) {
             return {};
         }
@@ -48,6 +48,26 @@ class ContextMenu {
 
     hide() {
         $(this.selector).contextMenu('hide');
+    }
+
+    bind(type, func) {
+        return this.events.bind(type, func);
+    }
+
+    unbind(id) {
+        this.events.unbind(id);
+    }
+
+    addEventsType(eventsType) {
+        this.events.addType(eventsType);
+    }
+
+    runEvent(eventsType) {
+        this.events.run(eventsType);
+    }
+
+    offEvent(eventsType) {
+        this.events.off(eventsType);
     }
 }
 

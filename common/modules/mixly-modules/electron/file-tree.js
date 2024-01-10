@@ -72,8 +72,8 @@ class FileTreeExt extends FileTree {
         }
     }
 
-    constructor(element) {
-        super(element);
+    constructor(element, mprogress) {
+        super(element, mprogress, FS);
         this.watcher = null;
         this.watcherEventsListenerIdRegistry = new Registry();
     }
@@ -88,10 +88,11 @@ class FileTreeExt extends FileTree {
         for (let data of children) {
             const dataPath = path.join(inPath, data);
             if (await FS.isDirectory(dataPath)) {
+                const isDirEmtpy = await FS.isDirectoryEmpty(dataPath);
                 output.push({
-                    type: 'dir',
+                    type: 'folder',
                     id: dataPath,
-                    children: true
+                    children: !isDirEmtpy
                 });
             } else {
                 output.push({
@@ -105,23 +106,42 @@ class FileTreeExt extends FileTree {
     }
 
     watchFolder(folderPath) {
+        super.watchFolder(folderPath);
         let id = this.watcherEventsListenerIdRegistry.getItem(folderPath);
         if (id) {
             return;
         }
         id = FileTreeExt.addEventListener(folderPath, (data) => {
-            this.refreshFolder(path.join(data.watcher));
+            if (data.event === 'unlinkDir') {
+                this.unwatchFolder(path.join(data.path));
+            }
+            const watcherPath = path.join(data.watcher);
+            if (this.isWatched(watcherPath)) {
+                this.refreshFolder(watcherPath);
+            }
         });
         this.watcherEventsListenerIdRegistry.register(folderPath, id);
     }
 
     unwatchFolder(folderPath) {
-        const id = this.watcherEventsListenerIdRegistry.getItem(folderPath);
-        if (!id) {
-            return;
+        const keys = this.watchRegistry.keys();
+        for (let key of keys) {
+            if (key.indexOf(folderPath) === -1) {
+                continue;
+            }
+            const type = this.watchRegistry.getItem(key);
+            if (type === 'file') {
+                this.unwatchFile(key);
+            } else {
+                super.unwatchFolder(key);
+            }
+            const id = this.watcherEventsListenerIdRegistry.getItem(key);
+            if (!id) {
+                continue;
+            }
+            FileTreeExt.removeEventListener(key, id);
+            this.watcherEventsListenerIdRegistry.unregister(key);
         }
-        FileTreeExt.removeEventListener(folderPath, id);
-        this.watcherEventsListenerIdRegistry.unregister(folderPath);
     }
 }
 

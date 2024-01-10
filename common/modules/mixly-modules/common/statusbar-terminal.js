@@ -134,8 +134,8 @@ class StatusBarTerminal extends StatusBar {
 
     init() {
         super.init();
-        const $coseBtn = this.getTab().find('.chrome-tab-close');
-        $coseBtn.css('display', 'none');
+        const $closeBtn = this.getTab().find('.chrome-tab-close');
+        $closeBtn.css('display', 'none');
     }
 }
 

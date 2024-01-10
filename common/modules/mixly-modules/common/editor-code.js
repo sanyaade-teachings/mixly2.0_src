@@ -32,8 +32,10 @@ class EditorCode extends EditorMonaco {
 
     constructor(element) {
         const $parentContainer = $(element);
-        const $content = $(HTMLTemplate.get('editor/editor-code.html').render());
+        const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
+        const $content = $(editorHTMLTemplate.render());
         super($content[0]);
+        this.id = editorHTMLTemplate.id;
         this.setContent($content);
         $parentContainer.append(this.getContent());
         this.defaultContextMenu = {
@@ -96,12 +98,16 @@ class EditorCode extends EditorMonaco {
         }
         this.setTabSize(tabSize);
         this.setLanguage(language);
-        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .editor`);
+        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"]`);
         const { events } = this.contextMenu;
         events.bind('getMenu', () => {
             return this.defaultContextMenu;
         });
         this.setTheme(USER.theme);
+    }
+
+    setContextMenu(menu) {
+        this.defaultContextMenu = menu;
     }
 
     setValue(data, ext) {

@@ -183,11 +183,11 @@
   padding: .25em 0;
   margin: .3em;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 13px;
   list-style-type: none;
   background: #fff;
   border: 1px solid #bebebe;
-  border-radius: .2em;
+  border-radius: 5px;
   -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
           box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
 }

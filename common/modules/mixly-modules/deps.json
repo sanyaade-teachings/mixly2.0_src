@@ -325,7 +325,8 @@
             "Mixly.Config",
             "Mixly.Events",
             "Mixly.ContextMenu",
-            "Mixly.Registry"
+            "Mixly.Registry",
+            "Mixly.IdGenerator"
         ],
         "provide": [
             "Mixly.FileTree"
@@ -728,10 +729,12 @@
         "path": "/common/sidebar-local-storage.js",
         "require": [
             "path",
+            "Mprogress",
             "Mixly.IdGenerator",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.HTMLTemplate",
+            "Mixly.ContextMenu",
             "Mixly.PageBase",
             "Mixly.Electron.FileTree",
             "Mixly.Web.FileTree",

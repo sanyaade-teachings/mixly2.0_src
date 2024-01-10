@@ -8,6 +8,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.Events');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Registry');
+goog.require('Mixly.IdGenerator');
 goog.provide('Mixly.FileTree');
 
 const {
@@ -15,7 +16,8 @@ const {
     Config,
     Events,
     ContextMenu,
-    Registry
+    Registry,
+    IdGenerator
 } = Mixly;
 
 const { USER } = Config;
@@ -26,7 +28,9 @@ class FileTree {
         this.FOLDER_ICON_MAP = goog.getJSON(path.join(Env.templatePath, 'json/folder-icons.json'));
     }
 
-    constructor(element) {
+    constructor(element, mprogress, fs) {
+        this.mprogress = mprogress;
+        this.fs = fs;
         this.folderPath = '';
         this.$content = $(element);
         this.scrollbar = new XScrollbar(element, {
@@ -60,15 +64,14 @@ class FileTree {
                         $i.addClass('layui-anim layui-anim-fadein layui-anim-fadeout layui-anim-loop');
                         folderPath = node.id;
                     }
-                    if (!folderPath) {
-                        cb([]);
-                        return;
-                    }
+
                     this.#getChildren_(folderPath)
                     .then((data) => {
                         cb(data);
                     })
-                    .catch(console.log);
+                    .catch((error) => {
+                        console.log(error);
+                    });
                 },
                 themes: {
                     dots: true,
@@ -77,23 +80,30 @@ class FileTree {
                     ellipsis: true
                 }
             },
-            plugins: ['wholerow', 'dnd', 'sort', 'unique']
+            plugins: ['wholerow', 'dnd', 'unique']
         });
         this.jstree = this.$fileTree.jstree(true);
-        this.events = new Events(['selectLeaf', 'afterOpenNode', 'afterCloseNode']);
+        this.events = new Events(['selectLeaf', 'afterOpenNode', 'afterCloseNode', 'afterRefreshNode']);
         this.selected = null;
         this.#addEventsListener_();
         this.nodeAliveRegistry = new Registry();
-        this.refreshRegistry = new Registry();
+        this.delayRefreshRegistry = new Registry();
+        this.watchRegistry = new Registry();
     }
 
     #addEventsListener_() {
         this.$fileTree
         .on('click.jstree', '.jstree-open>a', ({ target }) => {
-            setTimeout(() => this.jstree.close_node(target));
+            setTimeout(() => {
+                $(target).parent().removeClass('jstree-leaf').addClass('jstree-opened');
+                this.jstree.close_node(target);
+            });
         })
         .on('click.jstree', '.jstree-closed>a', ({ target }) => {
-            setTimeout(() => this.jstree.open_node(target));
+            setTimeout(() => {
+                $(target).parent().removeClass('jstree-leaf').addClass('jstree-closed');
+                this.jstree.open_node(target);
+            });
         })
         .on('open_node.jstree', (e, data) => {
             const { id } = data.node;
@@ -123,8 +133,6 @@ class FileTree {
             const { id } = data.node;
             const eventId = setTimeout(() => {
                 this.unwatchFolder(id);
-                this.clearFolderTemp(id);
-                this.nodeAliveRegistry.unregister(id);
             }, 60 * 1000);
             if (!this.nodeAliveRegistry.getItem(id)) {
                 this.nodeAliveRegistry.register(id, eventId);
@@ -137,7 +145,7 @@ class FileTree {
             if (!selected.length) {
                 return;
             }
-            if (selected[0].icon.indexOf('foldericon') !== -1) {
+            if ((selected[0].icon || '').indexOf('foldericon') !== -1) {
                 return;
             }
             this.selected = selected[0].id;
@@ -152,7 +160,7 @@ class FileTree {
         this.folderPath = path.join(folderPath);
         this.nodeAliveRegistry.reset();
         this.jstree.refresh();
-        this.watchFolder(folderPath);
+        this.watchFolder(this.folderPath);
     }
 
     getFolderPath() {
@@ -160,46 +168,71 @@ class FileTree {
     }
 
     refreshFolder(folderPath) {
-        let eventId = this.refreshRegistry.getItem(folderPath);
+        // 延迟刷新节点，防止过于频繁的IO操作
+        let eventId = this.delayRefreshRegistry.getItem(folderPath);
         if (eventId) {
             clearTimeout(eventId);
-            this.refreshRegistry.unregister(folderPath);
+            this.delayRefreshRegistry.unregister(folderPath);
         }
         eventId = setTimeout(() => {
             if (folderPath === this.folderPath) {
                 this.jstree.refresh();
                 return;
             }
-            if (this.jstree.is_closed(folderPath)) {
-                this.unwatchFolder(folderPath);
-                this.clearFolderTemp(folderPath);
-                this.nodeAliveRegistry.unregister(folderPath);
-                let keys = this.nodeAliveRegistry.keys();
-                for (let key of keys) {
-                    if (key.indexOf(folderPath) === -1) {
-                        continue;
-                    }
-                    this.nodeAliveRegistry.unregister(key);
+            const node = this.jstree.get_node(folderPath);
+            const nodeIsOpened = node && !this.jstree.is_closed(folderPath);
+            if (nodeIsOpened) {
+                if (this.isWatched(folderPath)) {
+                    this.jstree.refresh_node(folderPath);
                 }
             } else {
-                this.jstree.refresh_node(folderPath);
+                this.unwatchFolder(folderPath);
             }
         }, 500);
-        this.refreshRegistry.register(folderPath, eventId);
+        this.delayRefreshRegistry.register(folderPath, eventId);
     }
 
     clearFolderTemp(folderPath) {
         const node = this.jstree.get_node(folderPath);
+        if (!node) {
+            return;
+        }
         node.state.loaded = false;
     }
 
-    watchFolder(folderPath) {}
+    watchFolder(folderPath) {
+        if (this.isWatched(folderPath)) {
+            return;
+        }
+        this.watchRegistry.register(folderPath, 'folder');
+    }
 
-    unwatchFolder(folderPath) {}
+    unwatchFolder(folderPath) {
+        if (!this.isWatched(folderPath)) {
+            return;
+        }
+        this.clearFolderTemp(folderPath);
+        const keys = this.nodeAliveRegistry.keys();
+        for (let key of keys) {
+            if (key.indexOf(folderPath) === -1) {
+                continue;
+            }
+            const eventId = this.nodeAliveRegistry.getItem(key);
+            if (eventId) {
+                clearTimeout(eventId);
+                this.nodeAliveRegistry.unregister(key);
+            }
+        }
+        this.watchRegistry.unregister(folderPath);
+    }
 
     watchFile(filePath) {}
 
-    unbindFile(filePath) {}
+    unwatchFile(filePath) {}
+
+    isWatched(inPath) {
+        return !!this.watchRegistry.getItem(inPath);
+    }
 
     select(inPath) {
         this.selected = inPath;
@@ -236,7 +269,7 @@ class FileTree {
                 const { type, id, children } = item;
                 const text = path.basename(id);
                 let icon = 'icon-doc';
-                if (type === 'dir') {
+                if (type === 'folder') {
                     icon = this.#getFolderIcon_(text);
                 } else {
                     icon = this.#getFileIcon_(text);
@@ -246,6 +279,8 @@ class FileTree {
                     id,
                     children,
                     li_attr: {
+                        type,
+                        name: text,
                         title: id
                     },
                     icon
@@ -279,6 +314,234 @@ class FileTree {
             return prefix + FileTree.FOLDER_ICON_MAP[foldername];
         }
         return prefix + FileTree.FOLDER_ICON_MAP['default'];
+    }
+
+    createRootChildNode(type) {
+        this.mprogress.start();
+        const node = this.jstree.get_node('#');
+        const children = false;
+        const text = IdGenerator.generate();
+        let icon = 'foldericon-default';
+        if (type === 'file') {
+            icon = 'fileicon-mix';
+        }
+        const folderPath = this.folderPath;
+        const id = path.join(folderPath, text);
+        this.jstree.create_node(node, {
+            li_attr: {
+                type,
+                title: id,
+                name: text
+            },
+            children,
+            text,
+            id,
+            icon,
+        }, 'first', (childNode) => {
+            this.jstree.edit(childNode, '', (newNode) => {
+                const desPath = path.join(folderPath, newNode.text);
+                this.jstree.delete_node(newNode);
+                const oldNode = this.jstree.get_node(desPath);
+                if (oldNode) {
+                    this.mprogress.end();
+                    return;
+                }
+                let createPromise = null;
+                if (type === 'file') {
+                    createPromise = this.fs.createFile(desPath);
+                } else {
+                    createPromise = this.fs.createDirectory(desPath);
+                }
+                createPromise
+                .catch(console.log)
+                .finally(() => {
+                    this.mprogress.end();
+                });
+            });
+        });
+    }
+
+    createRootChildFileNode() {
+        this.createRootChildNode('file');
+    }
+
+    createRootChildFolderNode() {
+        this.createNode('folder');
+    }
+
+    createNode(type, folderPath) {
+        this.mprogress.start();
+        const node = this.jstree.get_node(folderPath);
+        const children = false;
+        const text = IdGenerator.generate();
+        let icon = 'foldericon-default';
+        if (type === 'file') {
+            icon = 'fileicon-mix';
+        }
+        if (folderPath === '#') {
+            folderPath = this.folderPath;
+        }
+        const id = path.join(folderPath, text);
+        this.jstree.open_node(node, () => {
+            this.jstree.create_node(node, {
+                li_attr: {
+                    type,
+                    title: id,
+                    name: text
+                },
+                children,
+                text,
+                id,
+                icon,
+            }, 'first', (childNode) => {
+                this.jstree.edit(childNode, '', (newNode) => {
+                    const desPath = path.join(folderPath, newNode.text);
+                    this.jstree.delete_node(newNode);
+                    const oldNode = this.jstree.get_node(desPath);
+                    if (oldNode) {
+                        this.mprogress.end();
+                        return;
+                    }
+                    let createPromise = null;
+                    if (type === 'file') {
+                        createPromise = this.fs.createFile(desPath);
+                    } else {
+                        createPromise = this.fs.createDirectory(desPath);
+                    }
+                    createPromise
+                    .catch(console.log)
+                    .finally(() => {
+                        this.mprogress.end();
+                    });
+                });
+            });
+        });
+    }
+
+    createFileNode(folderPath) {
+        this.createNode('file', folderPath);
+    }
+
+    createFolderNode(folderPath) {
+        this.createNode('folder', folderPath);
+    }
+
+    renameNode(type, inPath) {
+        this.mprogress.start();
+        const node = this.jstree.get_node(inPath);
+        const oldNodeName = node.text;
+        this.jstree.edit(node, oldNodeName, (newNode) => {
+            const desPath = path.join(inPath, '../', newNode.text);
+            this.jstree.close_node(newNode);
+            this.jstree.rename_node(newNode, oldNodeName);
+            const oldNode = this.jstree.get_node(desPath);
+            if (oldNode) {
+                this.mprogress.end();
+                return;
+            }
+            let renamePromise = null;
+            if (type === 'file') {
+                renamePromise = this.fs.renameFile(inPath, desPath);
+            } else {
+                renamePromise = this.fs.renameDirectory(inPath, desPath);
+            }
+            renamePromise
+            .catch(console.log)
+            .finally(() => {
+                this.mprogress.end();
+            });
+        });
+    }
+
+    renameFileNode(filePath) {
+        this.renameNode('file', filePath);
+    }
+
+    renameFolderNode(folderPath) {
+        this.renameNode('folder', folderPath);
+    }
+
+    deleteNode(type, inPath) {
+        this.mprogress.start();
+        let deletePromise = null;
+        if (type === 'file') {
+            deletePromise = this.fs.deleteFile(inPath);
+        } else {
+            deletePromise = this.fs.deleteDirectory(inPath);
+        }
+        deletePromise
+        .catch(console.log)
+        .finally(() => {
+            this.mprogress.end();
+        });
+    }
+
+    deleteFileNode(filePath) {
+        this.deleteNode('file', filePath);
+    }
+
+    deleteFolderNode(folderPath) {
+        this.deleteNode('folder', folderPath);
+    }
+
+    copyNode(inPath) {
+        const node = this.jstree.get_node(inPath);
+        this.jstree.copy(node);
+    }
+
+    cutNode(inPath) {
+        const node = this.jstree.get_node(inPath);
+        this.jstree.cut(node);
+    }
+
+    pasteNode(folderPath) {
+        if (!this.jstree.can_paste()) {
+            return;
+        }
+        this.mprogress.start();
+        const oldNodes = this.jstree.get_buffer();
+        const oldNode = oldNodes.node[0];
+        const { mode } = oldNodes;
+        const { type } = oldNode.li_attr;
+        let pastePromise = null;
+        let startPath = oldNode.id;
+        let endPath = path.join(folderPath, oldNode.text);
+        if (mode === 'move_node') {
+            if (type === 'file') {
+                pastePromise = this.fs.moveFile(startPath, endPath);
+            } else {
+                pastePromise = this.fs.createDirectory(endPath)
+                    .then(() => {
+                        return this.fs.moveDirectory(startPath, endPath);
+                    })
+                    .then(() => {
+                        return this.fs.deleteDirectory(startPath);
+                    });
+            }
+        } else if (mode === 'copy_node') {
+            if (type === 'file') {
+                pastePromise = this.fs.copyFile(startPath, endPath);
+            } else {
+                pastePromise = this.fs.createDirectory(endPath)
+                    .then(() => {
+                        return this.fs.copyDirectory(startPath, endPath);
+                    });
+            }
+        }
+        pastePromise
+        .catch(console.log)
+        .finally(() => {
+            this.openNode(folderPath);
+            this.mprogress.end();
+        });
+    }
+
+    openNode(folderPath) {
+        const node = this.jstree.get_node(folderPath);
+        if (!node) {
+            return;
+        }
+        this.jstree.open_node(node);
     }
 
     resize() {

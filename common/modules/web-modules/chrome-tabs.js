@@ -40,7 +40,7 @@
       <div class="chrome-tab-dividers"></div>
       <div class="chrome-tab-background"></div>
       <div class="chrome-tab-content">
-        <div class="chrome-tab-favicon"></div>
+        <div class="chrome-tab-favicon" hidden></div>
         <div class="chrome-tab-title"></div>
         <div class="chrome-tab-drag-handle"></div>
         <div class="chrome-tab-close"></div>
@@ -184,9 +184,6 @@
       if (tabProperties.favicon) {
         $(faviconEl).addClass(tabProperties.favicon)
         faviconEl.removeAttribute('hidden', '')
-      } else {
-        faviconEl.setAttribute('hidden', '')
-        faviconEl.removeAttribute('style')
       }
 
       if (tabProperties.id) {

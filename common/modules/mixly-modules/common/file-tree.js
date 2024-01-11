@@ -182,6 +182,7 @@ class FileTree {
             const nodeIsOpened = node && !this.isClosed(folderPath);
             if (nodeIsOpened) {
                 if (this.isWatched(folderPath)) {
+                    this.clearFolderTemp(folderPath);
                     this.jstree.refresh_node(folderPath);
                 }
             } else {
@@ -510,6 +511,7 @@ class FileTree {
         pastePromise
         .catch(console.log)
         .finally(() => {
+            this.clearFolderTemp(folderPath);
             this.jstree.refresh_node(folderPath);
             this.openNode(folderPath);
             this.mprogress.end();

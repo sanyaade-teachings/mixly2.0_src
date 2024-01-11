@@ -70,38 +70,16 @@ class EditorCode extends EditorMonaco {
                 callback: (key, opt) => this.blockComment()
             }
         };
+        this.tabSize = null;
+        this.language = null;
     }
 
     init() {
         super.init();
-        let language = 'cpp';
-        let tabSize = 4;
-        let type = (BOARD.language || '').toLowerCase();
-        switch(type) {
-        case 'python':
-        case 'micropython':
-        case 'circuitpython':
-            tabSize = 4;
-            language = 'python';
-            break;
-        case 'c/c++':
-            tabSize = 2;
-            language = 'cpp';
-            break;
-        case 'javascript':
-            tabSize = 4;
-            language = 'javascript';
-            break;
-        case 'markdown':
-            tabSize = 2;
-            language = 'markdown';
-            break;
-        default:
-            tabSize = 4;
-            language = 'text';
-        }
-        this.setTabSize(tabSize);
-        this.setLanguage(language);
+        this.language = this.getDefaultLanguage();
+        this.tabSize = this.getDefaultTabSize();
+        this.setLanguage(this.language);
+        this.setTabSize(this.tabSize);
         this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`);
         const { events } = this.contextMenu;
         events.bind('getMenu', () => {
@@ -116,6 +94,81 @@ class EditorCode extends EditorMonaco {
 
     setValue(data, ext) {
         super.setValue(data);
+        this.language = this.getLanguageByExt(ext);
+        this.setLanguage(this.language);
+    }
+
+    getLanguageByExt(ext) {
+        let language = this.getDefaultLanguage();
+        switch(ext) {
+        case '.json':
+            language = 'json';
+            break;
+        case '.c':
+        case '.cpp':
+        case '.h':
+        case '.hpp':
+            language = 'cpp';
+            break;
+        case '.js':
+            language = 'javascript';
+            break;
+        case '.py':
+            language = 'python';
+            break;
+        case '.md':
+        case '.mdx':
+            language = 'markdown';
+        }
+        return language;
+    }
+
+    getDefaultLanguage() {
+        let language = 'javascript';
+        let type = (BOARD.language || '').toLowerCase();
+        switch(type) {
+        case 'python':
+        case 'micropython':
+        case 'circuitpython':
+            language = 'python';
+            break;
+        case 'c/c++':
+            language = 'cpp';
+            break;
+        case 'javascript':
+            language = 'javascript';
+            break;
+        case 'markdown':
+            language = 'markdown';
+            break;
+        default:
+            language = 'text';
+        }
+        return language;
+    }
+
+    getDefaultTabSize() {
+        let tabSize = 4;
+        let type = (BOARD.language || '').toLowerCase();
+        switch(type) {
+        case 'python':
+        case 'micropython':
+        case 'circuitpython':
+            tabSize = 4;
+            break;
+        case 'c/c++':
+            tabSize = 2;
+            break;
+        case 'javascript':
+            tabSize = 4;
+            break;
+        case 'markdown':
+            tabSize = 2;
+            break;
+        default:
+            tabSize = 4;
+        }
+        return tabSize;
     }
 
     dispose() {

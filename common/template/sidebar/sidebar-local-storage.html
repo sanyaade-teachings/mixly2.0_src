@@ -16,12 +16,20 @@
 
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .progress,
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .progress .bar-bg {
-        background-color: #1e1e1e;
+        background-color: #ffffff;
     }
 
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .progress,
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .progress .bar-bg {
         background-color: #1e1e1e;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .progress > .ui-mprogress > .indeter-bar {
+        background-color: #009688;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .progress > .ui-mprogress > .indeter-bar {
+        background-color: #007acc;
     }
 
     div[m-id="{{d.mId}}"] > .folder-title {
@@ -43,16 +51,8 @@
         background: #d7daeb;
     }
 
-    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .folder-title.active {
-        border-color: #009688;
-    }
-
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title:focus {
         background: #5a5959;
-    }
-
-    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title.active {
-        border-color: #007acc;
     }
 
     div[m-id="{{d.mId}}"] > .folder-title > * {
@@ -96,10 +96,12 @@
         margin-left: 8px;
     }
 
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .folder-title.active,
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
         border-color: #009688 !important;
     }
 
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title.active,
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
         border-color: #007acc !important;
     }

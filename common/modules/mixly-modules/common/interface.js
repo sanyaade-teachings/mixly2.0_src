@@ -152,9 +152,10 @@ window.addEventListener('load', () => {
             LevelSelector.init();
             LevelSelector.xmlToWorkspace(1);
         }
+        $('.loading').addClass('skeleton-fadeout');
         setTimeout(() => {
-            $('.loading').fadeOut('fast');
-        }, 1000);
+            $('.loading').remove();
+        }, 500);
     });
 });
 

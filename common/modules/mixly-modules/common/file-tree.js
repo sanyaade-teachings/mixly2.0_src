@@ -323,24 +323,12 @@ class FileTree {
         this.mprogress.start();
         const node = this.jstree.get_node('#');
         const children = false;
-        const text = IdGenerator.generate();
         let icon = 'foldericon-default';
         if (type === 'file') {
             icon = 'fileicon-mix';
         }
         const folderPath = this.folderPath;
-        const id = path.join(folderPath, text);
-        this.jstree.create_node(node, {
-            li_attr: {
-                type,
-                title: id,
-                name: text
-            },
-            children,
-            text,
-            id,
-            icon,
-        }, 'first', (childNode) => {
+        this.jstree.create_node(node, { children, icon }, 'first', (childNode) => {
             this.jstree.edit(childNode, '', (newNode) => {
                 const desPath = path.join(folderPath, newNode.text);
                 this.jstree.delete_node(newNode);
@@ -376,7 +364,6 @@ class FileTree {
         this.mprogress.start();
         const node = this.jstree.get_node(folderPath);
         const children = false;
-        const text = IdGenerator.generate();
         let icon = 'foldericon-default';
         if (type === 'file') {
             icon = 'fileicon-mix';
@@ -384,19 +371,8 @@ class FileTree {
         if (folderPath === '#') {
             folderPath = this.folderPath;
         }
-        const id = path.join(folderPath, text);
         this.jstree.open_node(node, () => {
-            this.jstree.create_node(node, {
-                li_attr: {
-                    type,
-                    title: id,
-                    name: text
-                },
-                children,
-                text,
-                id,
-                icon,
-            }, 'first', (childNode) => {
+            this.jstree.create_node(node, { children, icon }, 'first', (childNode) => {
                 this.jstree.edit(childNode, '', (newNode) => {
                     const desPath = path.join(folderPath, newNode.text);
                     this.jstree.delete_node(newNode);

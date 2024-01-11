@@ -261,6 +261,8 @@ class EditorMix extends EditorBase {
     }
 
     dispose() {
+        const blocklyWorkspace = this.blockEditor.editor;
+        blocklyWorkspace.removeChangeListener(this.codeChangeListener);
         this.drag.dispose();
         this.$btnsContent.remove();
         this.blockEditor.dispose();

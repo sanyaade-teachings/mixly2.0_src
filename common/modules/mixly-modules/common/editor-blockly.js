@@ -266,7 +266,6 @@ class EditorBlockly extends EditorBase {
             this.editor.redoStack_ = [...this.redoStack];
         }
         Blockly.Events.enable();
-        this.resize();
         this.editor.scrollCenter();
     }
 

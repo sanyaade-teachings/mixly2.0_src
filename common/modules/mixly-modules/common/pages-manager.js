@@ -60,6 +60,7 @@ class PagesManager {
             }
             this.$editorContainer.empty();
             this.$editorContainer.append(page.getContent());
+            page.resize();
             page.onMounted();
         });
 

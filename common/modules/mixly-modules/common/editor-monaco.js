@@ -41,6 +41,7 @@ class EditorMonaco extends EditorBase {
                 horizontal: 'visible'
             }
         });
+        this.#addCursorEventsListener_();
     }
 
     onMounted() {
@@ -162,6 +163,45 @@ class EditorMonaco extends EditorBase {
 
     blockComment() {
         this.editor.trigger('source', 'editor.action.blockComment');
+    }
+
+    #addCursorEventsListener_() {
+        const { editor } = this;
+        $('#mixly-footer-cursor').hide();
+
+        editor.onDidBlurEditorText(() => {
+            $('#mixly-footer-cursor').hide();
+        });
+
+        editor.onDidFocusEditorText(() => {
+            const position = editor.getPosition();
+            $('#mixly-footer-row').html(position.lineNumber);
+            $('#mixly-footer-column').html(position.column);
+            const selection = editor.getSelection();
+            if (selection.isEmpty()) {
+                $('#mixly-footer-selected').parent().hide();
+            } else {
+                const text = editor.getModel().getValueInRange(selection);
+                $('#mixly-footer-selected').parent().css('display', 'inline-flex');
+                $('#mixly-footer-selected').html(text.length);
+            }
+            $('#mixly-footer-cursor').show();
+        });
+
+        editor.onDidChangeCursorPosition((e) => {
+            $('#mixly-footer-row').html(e.position.lineNumber);
+            $('#mixly-footer-column').html(e.position.column);
+        });
+
+        editor.onDidChangeCursorSelection((e) => {
+            if (e.selection.isEmpty()) {
+                $('#mixly-footer-selected').parent().hide();
+            } else {
+                const text = editor.getModel().getValueInRange(e.selection);
+                $('#mixly-footer-selected').parent().css('display', 'inline-flex');
+                $('#mixly-footer-selected').html(text.length);
+            }
+        });
     }
 }
 

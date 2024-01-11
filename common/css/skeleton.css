@@ -15,27 +15,8 @@ html[data-bs-theme=dark] .loading {
     background-color: #181818;
 }
 
-.loading .left-div {
+.loading > .top-div {
     position: absolute;
-    left: 0px;
-    top: var(--nav-height);
-    bottom: var(--footer-height);
-    width: 40px;
-    border-radius: 2px;
-    opacity: 0.9;
-}
-
-html[data-bs-theme=light] .loading .left-div {
-    background-color: #ddd;
-}
-
-html[data-bs-theme=dark] .loading .left-div {
-    background-color: #434343;
-}
-
-.loading .top-div {
-    position: absolute;
-    left: 0px;
     top: 0px;
     width: 100%;
     height: var(--nav-height);
@@ -43,17 +24,42 @@ html[data-bs-theme=dark] .loading .left-div {
     opacity: 0.9;
 }
 
-html[data-bs-theme=light] .loading .top-div {
+html[data-bs-theme=light] .loading > .top-div {
     background-color: #009688;
 }
 
-html[data-bs-theme=dark] .loading .top-div {
+html[data-bs-theme=dark] .loading > .top-div {
     background-color: #3c3c3c;
 }
 
-.loading .bottom-div {
+.loading > .center-div {
     position: absolute;
-    left: 0px;
+    top: var(--nav-height);
+    bottom: var(--footer-height);
+    width: 100%;
+    border-radius: 2px;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    overflow: auto;
+    font-family: 'ravie';
+    font-size: 80px;
+}
+
+html[data-bs-theme=light] .loading > .center-div {
+    background-color: #fff;
+    color: #b1b1b1;
+}
+
+html[data-bs-theme=dark] .loading > .center-div {
+    background-color: #181818;
+    color: #3c3c3c;
+}
+
+.loading > .bottom-div {
+    position: absolute;
     bottom: 0px;
     height: var(--footer-height);
     width: 100%;
@@ -61,11 +67,11 @@ html[data-bs-theme=dark] .loading .top-div {
     opacity: 0.9;
 }
 
-html[data-bs-theme=light] .loading .bottom-div {
+html[data-bs-theme=light] .loading > .bottom-div {
     background-color: #009688;
 }
 
-html[data-bs-theme=dark] .loading .bottom-div {
+html[data-bs-theme=dark] .loading > .bottom-div {
     background-color: #007acc;
 }
 
@@ -75,4 +81,32 @@ html[data-bs-theme=light] > body {
 
 html[data-bs-theme=dark] > body {
     background-color: #181818 !important;
+}
+
+/* 骨架渐隐 */
+@-webkit-keyframes mixly-skeleton-fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes mixly-skeleton-fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.skeleton-fadeout {
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-fill-mode: forwards;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    -webkit-animation-name: mixly-skeleton-fadeout;
+    animation-name: mixly-skeleton-fadeout;
 }

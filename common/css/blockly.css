@@ -138,12 +138,12 @@
 
 .dark-theme.blocklyDropDownDiv,
 .dark-theme.blocklyWidgetDiv .blocklyMenu {
-    background: #1f1f1f;
-    border: 1px solid #3b3b3b;
+    background: #252525;
+    border: 1px solid #454545;
 }
 
 .dark-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
-    background-color: #1f1f1f;
+    background-color: #252525;
     color: #eee;
 }
 

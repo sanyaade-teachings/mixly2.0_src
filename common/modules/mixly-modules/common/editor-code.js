@@ -8,6 +8,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.IdGenerator');
 goog.require('Mixly.EditorMonaco');
 goog.provide('Mixly.EditorCode');
 
@@ -18,6 +19,7 @@ const {
     Msg,
     ContextMenu,
     HTMLTemplate,
+    IdGenerator,
     EditorMonaco
 } = Mixly;
 const { USER, BOARD } = Config;
@@ -35,6 +37,8 @@ class EditorCode extends EditorMonaco {
         const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
         const $content = $(editorHTMLTemplate.render());
         super($content[0]);
+        this.contextMenuId = IdGenerator.generate();
+        $content.attr('content-menu-id', this.contextMenuId);
         this.id = editorHTMLTemplate.id;
         this.setContent($content);
         $parentContainer.append(this.getContent());
@@ -98,7 +102,7 @@ class EditorCode extends EditorMonaco {
         }
         this.setTabSize(tabSize);
         this.setLanguage(language);
-        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"]`);
+        this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`);
         const { events } = this.contextMenu;
         events.bind('getMenu', () => {
             return this.defaultContextMenu;

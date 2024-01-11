@@ -168,6 +168,7 @@
             "Mixly.Msg",
             "Mixly.ContextMenu",
             "Mixly.HTMLTemplate",
+            "Mixly.IdGenerator",
             "Mixly.EditorMonaco"
         ],
         "provide": [

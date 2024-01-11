@@ -235,11 +235,11 @@ class SideBarLocalStorage extends PageBase {
             events: {
                 hide: (options) => {
                     const { $trigger } = options;
-                    $trigger.css('border', 'unset');
+                    $trigger.removeClass('active');
                 },
                 activated: (options) => {
                     const { $trigger } = options;
-                    $trigger.css('border', '1px solid');
+                    $trigger.addClass('active');
                 }
             }
         });

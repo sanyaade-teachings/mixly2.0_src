@@ -312,13 +312,13 @@
 
 /* 深色主题 */
 html[data-bs-theme=dark] .context-menu-list {
-  background: #1f1f1f;
-  border: 1px solid #3b3b3b;
+  background: #252525;
+  border: 1px solid #454545;
 }
 
 html[data-bs-theme=dark] .context-menu-item {
   color: #c1c1c1;
-  background-color: #1f1f1f;
+  background-color: #252525;
 }
 
 html[data-bs-theme=dark] .context-menu-item.context-menu-hover {
@@ -326,5 +326,5 @@ html[data-bs-theme=dark] .context-menu-item.context-menu-hover {
 }
 
 html[data-bs-theme=dark] .context-menu-separator {
-  border-bottom: 1px solid #3b3b3b;
+  border-bottom: 1px solid #454545;
 }

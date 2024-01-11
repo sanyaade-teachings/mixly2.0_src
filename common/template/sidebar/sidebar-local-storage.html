@@ -34,7 +34,8 @@
         flex-direction: row;
         align-items: center;
         text-align: left;
-        border: unset;
+        border: 1px solid;
+        border-color: transparent;
         padding: 0 1px;
     }
 
@@ -42,8 +43,16 @@
         background: #d7daeb;
     }
 
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .folder-title.active {
+        border-color: #009688;
+    }
+
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title:focus {
         background: #5a5959;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title.active {
+        border-color: #007acc;
     }
 
     div[m-id="{{d.mId}}"] > .folder-title > * {
@@ -87,12 +96,10 @@
         margin-left: 8px;
     }
 
-    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > button,
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
         border-color: #009688 !important;
     }
 
-    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > button,
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
         border-color: #007acc !important;
     }

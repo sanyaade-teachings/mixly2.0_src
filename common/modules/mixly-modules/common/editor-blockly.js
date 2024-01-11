@@ -44,13 +44,12 @@ class EditorBlockly extends EditorBase {
             'xml/default-categories.xml',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'xml/default-categories.xml')))
         );
-        this.$blockly = null;
-        this.blockEditor = null;
+        this.$blockly = $('<div class="page-item"></div>');
+        this.editor = null;
         this.initBlockly = () => {
             const DEFAULT_CATEGORIES = HTMLTemplate.get('xml/default-categories.xml').render();
             const media = path.join(Config.pathPrefix, 'common/media/');
             const renderer = ['geras', 'zelos'].includes(USER.blockRenderer) ? USER.blockRenderer : 'geras';
-            this.$blockly = $('<div class="page-item"></div>');
             this.editor = Blockly.inject(this.$blockly[0], {
                 media,
                 toolbox: DEFAULT_CATEGORIES,
@@ -251,7 +250,7 @@ class EditorBlockly extends EditorBase {
 
     onMounted() {
         super.onMounted();
-        this.$content.append(EditorBlockly.getContent());
+        this.getContent().append(EditorBlockly.getContent());
         this.updateToolbox();
         Blockly.Events.disable();
         if (this.workspaceState) {
@@ -279,7 +278,7 @@ class EditorBlockly extends EditorBase {
         this.editor.clearUndo();
         Blockly.Events.enable();
         EditorBlockly.getContent().detach();
-        this.$content.empty();
+        this.getContent().empty();
     }
 
     setValue(data) {

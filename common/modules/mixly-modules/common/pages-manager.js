@@ -60,8 +60,8 @@ class PagesManager {
             }
             this.$editorContainer.empty();
             this.$editorContainer.append(page.getContent());
-            page.resize();
             page.onMounted();
+            page.resize();
         });
 
         // 添加新Tab时触发

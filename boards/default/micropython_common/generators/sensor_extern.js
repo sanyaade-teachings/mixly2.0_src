@@ -342,7 +342,7 @@ Blockly.Python.forBlock['sensor_use_spi_init'] = function(){
       if (version=='mixgo_pe'){
         var code = v + ' = ws_lora.Weather('+ sv + ','+ pv +')\n';
       }
-      else if (version=='yuankong_zi'){
+      else if (version=='yuankong_nova'){
         var code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c_soft'+')\n';
       }
       else{

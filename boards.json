@@ -12,8 +12,8 @@
         "language": "MicroPython"
     }, 
     {
-        "boardImg": "./boards/default/micropython_esp32s3/media/yuankong_zi.png",
-        "boardType": "MixGo Zi",
+        "boardImg": "./boards/default/micropython_esp32s3/media/yuankong_nova.png",
+        "boardType": "MixGo YuanKong",
         "boardIndex": "./boards/default/micropython_esp32s3/index.xml",
         "env": {
             "electron": true,

@@ -285,7 +285,7 @@ Blockly.Python.forBlock['robot_motor_extern'] = function(){
     var code = 'ext_motor.run('+ mode + ',' + speed +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -309,7 +309,7 @@ Blockly.Python.forBlock['robot_motor_extern_get_speed'] = function(){
     var code = 'ext_motor.run('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -344,7 +344,7 @@ Blockly.Python.forBlock['robot_traffic_light_extern'] = function(){
     code+=")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -378,7 +378,7 @@ Blockly.Python.forBlock['robot_led_extern'] = function(){
     var code = color+'_LED.brightness('+ mode + ',' + value +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -404,7 +404,7 @@ Blockly.Python.forBlock['robot_led_extern_get_value'] = function(){
     var code = color+'_LED.brightness('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -430,7 +430,7 @@ Blockly.Python.forBlock['robot_servo_extern_get_status'] = function(){
     var code = 'ext_servo.state('+ mode +")"+status;
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -456,7 +456,7 @@ Blockly.Python.forBlock['robot_servo_extern_stop_mode'] = function(){
     var code = 'ext_servo.stop_mode('+ mode+ "," + status +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -481,7 +481,7 @@ Blockly.Python.forBlock['robot_servo_extern_stop'] = function(){
     var code = 'ext_servo.stop('+ mode +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -510,7 +510,7 @@ Blockly.Python.forBlock['robot_servo_extern_absolute_run'] = function(){
     var code = 'ext_servo.absolute_run('+ mode+ "," + status+ ","+ speed + "," + direction + "," +angle +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -536,7 +536,7 @@ Blockly.Python.forBlock['robot_servo_extern_relative_origin'] = function(){
     var code = 'ext_servo.relative_origin('+ mode +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -564,7 +564,7 @@ Blockly.Python.forBlock['robot_servo_extern_relative_run'] = function(){
     var code = 'ext_servo.relative_run('+ mode+ "," + status+ ","+ speed + ","  +angle +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -592,7 +592,7 @@ Blockly.Python.forBlock['robot_servo_extern_relative_continue'] = function(){
     var code = 'ext_servo.relative_continue('+ mode+ "," + status+ ","+ speed + ","  +direction +")\n";
     return code;
     }
-    else if (version=='mixgo_baize'){
+    else if (version=='mixgo_feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){

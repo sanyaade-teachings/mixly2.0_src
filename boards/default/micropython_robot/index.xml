@@ -158,13 +158,13 @@
         </shadow>
       </value>
     </block>
-    <block type="inout_pin_pressed_init" m-hide="micropython:esp32c3:mixgo_baize">
+    <block type="inout_pin_pressed_init" m-hide="micropython:esp32c3:mixgo_feiyi">
       <value name="PIN">
         <shadow type="pins_touch_pin">
         </shadow>
       </value>
     </block>
-    <block type="inout_pin_pressed" m-hide="micropython:esp32c3:mixgo_baize">
+    <block type="inout_pin_pressed" m-hide="micropython:esp32c3:mixgo_feiyi">
       <value name="pin">
         <shadow type="pins_touch">
         </shadow>
@@ -373,7 +373,7 @@
         </shadow>
       </value>
     </block>
-    <block type="system_bitbot_shutdown" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="system_bitbot_shutdown" m-show="micropython:esp32c3:mixgo_feiyi">
     </block>
     <block type="system_wdt_init">
       <value name="period">
@@ -1482,7 +1482,7 @@
 
       <block type="sensor_mixbot_patrol_calibrate" m-show='micropython:esp32:mixbot'></block>
       <block type="sensor_mixbot_patrol_value" m-show='micropython:esp32:mixbot'></block>
-      <block type="sensor_rm_pin_near_double" m-hide="micropython:esp32c3:mixgo_baize"></block>
+      <block type="sensor_rm_pin_near_double" m-hide="micropython:esp32c3:mixgo_feiyi"></block>
       <block type="sensor_rm_battery_left"></block>
       
       <block type="sensor_rm_acc" m-show="micropython:esp32:rm_e1"></block>   
@@ -1490,37 +1490,37 @@
       <block type="sensor_mixbot_temperature" m-show='micropython:esp32:mixbot'></block>
       <block type="sensor_get_acceleration" m-show='micropython:esp32:mixbot'></block>
       <block type="sensor_mixbot_get_gyro" m-show='micropython:esp32:mixbot'></block>  
-      <block type="sensor_mixgo_pin_near" m-show="micropython:esp32c3:mixgo_baize"></block>
-      <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:mixgo_baize"></block>
-      <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:mixgo_baize">
+      <block type="sensor_mixgo_pin_near" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+      <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+      <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:mixgo_feiyi">
         <value name="mode">
         <shadow type="bitbot_als_num">
         </shadow>
       </value>
       </block>
-    <block type="sensor_sound" m-show="micropython:esp32c3:mixgo_baize"></block>     
-    <block type="sensor_hp203" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="sensor_aht11" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="sensor_get_acceleration" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="sensor_eulerangles" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c3:mixgo_baize"></block>
-      <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="rfid_readid" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="sensor_sound" m-show="micropython:esp32c3:mixgo_feiyi"></block>     
+    <block type="sensor_hp203" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="sensor_aht11" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="sensor_get_acceleration" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="sensor_eulerangles" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+      <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="rfid_readid" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">rfid</field>
         </shadow>
       </value>
     </block>
-    <block type="rfid_readcontent" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="rfid_readcontent" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
         </shadow>
       </value>
     </block>
-    <block type="rfid_write" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="rfid_write" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
@@ -1532,7 +1532,7 @@
         </shadow>
       </value>
     </block>
-    <block type="rfid_write_return" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="rfid_write_return" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="SECTOR">
         <shadow type="math_number">
           <field name="NUM">0</field>
@@ -1612,44 +1612,44 @@
         </shadow>
       </value>
     </block>
-    <block type="bitbot_move" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="bitbot_move" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-    <block type="bitbot_stop" m-show="micropython:esp32c3:mixgo_baize"></block>
-    <block type="bitbot_motor" m-show="micropython:esp32c3:mixgo_baize">
+    <block type="bitbot_stop" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="bitbot_motor" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-      <block type="rm_actuator_led_bright" m-hide="micropython:esp32c3:mixgo_baize">
+      <block type="rm_actuator_led_bright" m-hide="micropython:esp32c3:mixgo_feiyi">
       <value name="bright">
         <shadow type="ledswitch">
         </shadow>
       </value>
     </block>
-    <block type="rm_actuator_get_led_state" m-hide="micropython:esp32c3:mixgo_baize"></block>
-    <block type="rm_actuator_led_brightness" m-hide="micropython:esp32c3:mixgo_baize">
+    <block type="rm_actuator_get_led_state" m-hide="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="rm_actuator_led_brightness" m-hide="micropython:esp32c3:mixgo_feiyi">
       <value name="bright">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-    <block type="rm_actuator_get_led_bright" m-hide="micropython:esp32c3:mixgo_baize"></block>      
-     <block type="esp32_onboard_music_pitch" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'>
+    <block type="rm_actuator_get_led_bright" m-hide="micropython:esp32c3:mixgo_feiyi"></block>      
+     <block type="esp32_onboard_music_pitch" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'>
       <value name="pitch">
         <shadow type="pins_tone_notes">
           <field name="PIN">440</field>
         </shadow>
       </value>
     </block>
-    <block type="esp32_onboard_music_pitch_with_time" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'>
+    <block type="esp32_onboard_music_pitch_with_time" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'>
       <value name="pitch">
         <shadow type="pins_tone_notes">
           <field name="PIN">440</field>
@@ -1661,14 +1661,14 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_onboard_music_stop" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'>
+    <block type="esp32_onboard_music_stop" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'>
       <value name="PIN">
         <shadow type="pins_pwm_pin">
           <field name="PIN">0</field>
         </shadow>
       </value>
     </block>
-    <block type="esp32_onboard_music_play_list" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'>
+    <block type="esp32_onboard_music_play_list" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'>
       <value name="LIST">
         <shadow type="pins_playlist"></shadow>
       </value>
@@ -1678,7 +1678,7 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_set_tempo" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'>
+    <block type="esp32_music_set_tempo" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'>
       <value name="TICKS">
         <shadow type="math_number">
           <field name="NUM">4</field>
@@ -1690,8 +1690,8 @@
         </shadow>
       </value>
     </block>
-    <block type="esp32_music_get_tempo" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'></block>
-    <block type="esp32_music_reset" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_baize'></block>
+    <block type="esp32_music_get_tempo" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'></block>
+    <block type="esp32_music_reset" m-show='micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi'></block>
     <block type="actuator_mixbot_buzzer_on_off" m-show='micropython:esp32:mixbot'></block>      
     <block type="actuator_onboard_neopixel_rgb">
       <value name="_LED_">
@@ -1765,7 +1765,7 @@
     </block>   
     
     </category>
-    <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <block type="display_show_image">
       <value name="data">
         <shadow type="pins_builtinimg"></shadow>
@@ -1828,7 +1828,7 @@
     </block>
          
     <block type="mixbot_display_image_create" m-show="micropython:esp32:mixbot"></block>
-    <block type="bitbot_display_image_create" m-show="micropython:esp32c3:mixgo_baize"></block>
+    <block type="bitbot_display_image_create" m-show="micropython:esp32c3:mixgo_feiyi"></block>
     <block type="display_image_builtins_all"></block>
     <block type="image_arithmetic">
       <value name="A">
@@ -1872,7 +1872,7 @@
         </shadow>
       </value>
     </block>
-    <block type="mixbot_display_rotate" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize"></block>
+    <block type="mixbot_display_rotate" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi"></block>
     <block type="mixbot_display_bright_screen" m-show="micropython:esp32:mixbot">
 
       <value name="x">
@@ -1883,7 +1883,7 @@
     </block>
     <block type="mixbot_display_get_screen_pixel" m-show="micropython:esp32:mixbot"></block>
     <block type="mixbot_display_get_ambientbright" m-show="micropython:esp32:mixbot"></block>
-     <block type="display_bright_screen" m-show="micropython:esp32c3:mixgo_baize">
+     <block type="display_bright_screen" m-show="micropython:esp32c3:mixgo_feiyi">
 
       <value name="x">
         <shadow type="math_number">
@@ -1891,7 +1891,7 @@
         </shadow>
       </value>
     </block>
-    <block type="display_get_screen_pixel" m-show="micropython:esp32c3:mixgo_baize"></block>
+    <block type="display_get_screen_pixel" m-show="micropython:esp32c3:mixgo_feiyi"></block>
     <block type="display_clear"></block>
     <!-- </category> -->
   </category>
@@ -2350,7 +2350,7 @@
         </value>
       </block>
     </category>
-    <category id="catAIOT" colour="205" m-show="micropython:esp32c3:mixgo_baize">      
+    <category id="catAIOT" colour="205" m-show="micropython:esp32c3:mixgo_feiyi">      
     <block type="iot_wifi_connect">
         <value name="WIFINAME">
           <shadow type="text">
@@ -3178,7 +3178,7 @@
       </block>
     </category>
   </category>
-   <category id="catExternSensor" colour='#A58C5B' m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize"> 
+   <category id="catExternSensor" colour='#A58C5B' m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi"> 
     <block type="mixbot_sensor_extern_get_addr" m-show="micropython:esp32:mixbot"></block>
     <block type="mixbot_sensor_extern_set_addr" m-show="micropython:esp32:mixbot">
       <value name="old">
@@ -3190,49 +3190,49 @@
         </shadow>
       </value>
     </block>
-    <block type="robot_button_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_button_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_touch_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_touch_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_infrared_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_infrared_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_infrared_extern_grey_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_infrared_extern_grey_get_value" m-show="micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_potentiometer_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_potentiometer_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_color_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_color_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_sonar_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_sonar_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-     <block type="robot_sonar_extern_led" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+     <block type="robot_sonar_extern_led" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
@@ -3259,7 +3259,7 @@
         </shadow>
       </value>
     </block>
-     <block type="robot_motor_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+     <block type="robot_motor_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
@@ -3270,19 +3270,19 @@
         </shadow>
       </value>
     </block>
-    <block type="robot_motor_extern_get_speed" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_motor_extern_get_speed" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_traffic_light_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_traffic_light_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_led_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_led_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="value">
         <shadow type="math_number">
           <field name="NUM">100</field>
@@ -3293,31 +3293,31 @@
         </shadow>
       </value>
     </block>
-     <block type="robot_led_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+     <block type="robot_led_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
        <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
      </block>
-     <block type="robot_servo_extern_get_status" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+     <block type="robot_servo_extern_get_status" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_servo_extern_stop_mode" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_servo_extern_stop_mode" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_servo_extern_stop" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_servo_extern_stop" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-     <block type="robot_servo_extern_absolute_run" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+     <block type="robot_servo_extern_absolute_run" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
        <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
@@ -3333,13 +3333,13 @@
         </shadow>
       </value>
     </block>
-    <block type="robot_servo_extern_relative_origin" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_servo_extern_relative_origin" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
       </value>
     </block>
-    <block type="robot_servo_extern_relative_run" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_servo_extern_relative_run" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
        <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>
@@ -3355,7 +3355,7 @@
         </shadow>
       </value>
     </block>
-    <block type="robot_servo_extern_relative_continue" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_baize">
+    <block type="robot_servo_extern_relative_continue" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
        <value name="mode">
         <shadow type="mixbot_addr_extern">
         </shadow>

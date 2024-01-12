@@ -3191,52 +3191,28 @@
       </value>
     </block>
     <block type="robot_button_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_touch_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_infrared_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_infrared_extern_grey_get_value" m-show="micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_potentiometer_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_color_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_sonar_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
      <block type="robot_sonar_extern_led" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
       <value name="light">
         <shadow type="pins_digital_dot"></shadow>
       </value>   
@@ -3265,22 +3241,12 @@
           <field name="NUM">100</field>
         </shadow>
       </value>
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
     </block>
     <block type="robot_motor_extern_get_speed" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_traffic_light_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_led_extern" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
       <value name="value">
@@ -3288,40 +3254,22 @@
           <field name="NUM">100</field>
         </shadow>
       </value>
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
      <block type="robot_led_extern_get_value" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-       <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+ 
      </block>
      <block type="robot_servo_extern_get_status" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_servo_extern_stop_mode" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_servo_extern_stop" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
      <block type="robot_servo_extern_absolute_run" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-       <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+ 
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
@@ -3334,16 +3282,10 @@
       </value>
     </block>
     <block type="robot_servo_extern_relative_origin" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-      <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+
     </block>
     <block type="robot_servo_extern_relative_run" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-       <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+ 
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
@@ -3356,10 +3298,7 @@
       </value>
     </block>
     <block type="robot_servo_extern_relative_continue" m-show="micropython:esp32:mixbot micropython:esp32c3:mixgo_feiyi">
-       <value name="mode">
-        <shadow type="mixbot_addr_extern">
-        </shadow>
-      </value>
+ 
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>

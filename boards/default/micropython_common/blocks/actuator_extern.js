@@ -604,10 +604,8 @@ Blockly.Blocks.robot_motor_extern = {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MOTOR)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);       
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");      
       this.appendValueInput('speed')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
@@ -626,10 +624,8 @@ Blockly.Blocks.robot_motor_extern_get_speed = {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_MOTOR)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.MIXLY_SPEED);   
@@ -643,10 +639,8 @@ Blockly.Blocks.robot_traffic_light_extern = {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_TRAFFIC_LIGHT)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);   
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");  
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField(Blockly.Msg.LISTS_SET_INDEX_SET)
@@ -678,10 +672,8 @@ Blockly.Blocks.robot_led_extern = {
             [Blockly.Msg.COLOUR_RGB_BLUE, 'B']
             ]), "color")
           .appendField("LED")
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);
+          .appendField(Blockly.Msg.PIN_NUMBERING)
+          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
       this.appendValueInput('value')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
@@ -707,10 +699,8 @@ Blockly.Blocks.robot_led_extern_get_value = {
             [Blockly.Msg.COLOUR_RGB_BLUE, 'B']
             ]), "color")
           .appendField("LED")
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING); 
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_GET+Blockly.Msg.BRIGHTNESS)       
       this.setOutput(true,Number);
@@ -723,10 +713,8 @@ Blockly.Blocks.robot_servo_extern_get_status = {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_GET)   
           .appendField(new Blockly.FieldDropdown([
@@ -748,10 +736,8 @@ Blockly.Blocks.robot_servo_extern_stop_mode = {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MIXBOT_SERVO_SET_STOP_MODE)   
           .appendField(new Blockly.FieldDropdown([
@@ -770,10 +756,8 @@ Blockly.Blocks.robot_servo_extern_stop = {
       this.setColour(Blockly.Msg['ACTUATOR_EXTERN_HUE']);
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_STOP)          
       this.setPreviousStatement(true, null);
@@ -788,10 +772,8 @@ Blockly.Blocks.robot_servo_extern_absolute_run = {
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MATH_SINGLE_OP_ABSOLUTE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MODE)  
           .setAlign(Blockly.ALIGN_RIGHT) 
@@ -831,10 +813,8 @@ Blockly.Blocks.robot_servo_extern_relative_origin = {
       this.appendDummyInput()
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MIXBOT_SERVO_RELATIVE_ORIGIN_PATH)          
       this.setPreviousStatement(true, null);
@@ -850,10 +830,8 @@ Blockly.Blocks.robot_servo_extern_relative_run = {
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
           .appendField("("+Blockly.Msg.MIXLY_MIXBOT_SERVO_LIKE_ENCODING_MOTOR+")")
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MODE)  
           .setAlign(Blockly.ALIGN_RIGHT) 
@@ -886,10 +864,8 @@ Blockly.Blocks.robot_servo_extern_relative_continue = {
           .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN+Blockly.Msg.MIXLY_SERVO_MOTOR)
           .appendField(Blockly.Msg.MIXLY_RELATIVE+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE+Blockly.Msg.MSG.run)
           .appendField("("+Blockly.Msg.MIXLY_MIXBOT_SERVO_LIKE_ORDINARY_MOTOR+")")
-      this.appendValueInput('mode')
-          .setCheck(Number)
-          .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(Blockly.Msg.LCD_NUMBERING);    
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");   
       this.appendDummyInput()
           .appendField(Blockly.Msg.MIXLY_MODE)  
           .setAlign(Blockly.ALIGN_RIGHT) 

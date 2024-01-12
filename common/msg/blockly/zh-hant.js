@@ -3548,4 +3548,5 @@ ZhHant.MIXLY_GET_BATTERY = '獲取電池電量（v）';
 ZhHant.MIXLY_GET_JOYSTICK = '獲取搖桿';
 ZhHant.MIXLY_HANDLE_SHUTDOWN ='設置手柄關機';
 ZhHant.MIXLY_ESP32_EXTERN_GRAY_NEAR = "紅外灰度傳感器";
+ZhHant.PIN_NUMBERING = '端口';
 })();

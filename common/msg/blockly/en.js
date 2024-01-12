@@ -3576,4 +3576,5 @@ En.MIXLY_GET_BATTERY = 'get battery power（v）';
 En.MIXLY_GET_JOYSTICK = 'get the value of Joystick';
 En.MIXLY_HANDLE_SHUTDOWN ='set handle off';
 En.MIXLY_ESP32_EXTERN_GRAY_NEAR = "Infrared grayscale sensor";
+En.PIN_NUMBERING = 'Port';
 })();

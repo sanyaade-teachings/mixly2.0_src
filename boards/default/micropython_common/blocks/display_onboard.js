@@ -975,7 +975,7 @@ Blockly.Blocks['bitbot_display_image_create']= {
   }
 };
 
-//mixgo_zi onboard tft below:
+//mixgo_nova onboard tft below:
 Blockly.Blocks.onboard_tft_show_image = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);

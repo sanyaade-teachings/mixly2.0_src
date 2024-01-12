@@ -570,7 +570,7 @@ Blockly.Python.forBlock['bitbot_display_image_create'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-//mixgo_zi onboard tft below:
+//mixgo_nova onboard tft below:
 Blockly.Python.forBlock['onboard_tft_show_image'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";

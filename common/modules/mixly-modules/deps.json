@@ -27,7 +27,8 @@
             "Mixly.Msg",
             "Mixly.FooterLayerBoardConfig",
             "Mixly.BoardConfigItem",
-            "Mixly.Profile"
+            "Mixly.Profile",
+            "Mixly.EditorBlockly"
         ],
         "provide": [
             "Mixly.Boards"
@@ -608,8 +609,7 @@
         "require": [
             "layui",
             "Mixly.LayerExt",
-            "Mixly.Boards",
-            "Mixly.Editor"
+            "Mixly.Boards"
         ],
         "provide": [
             "Mixly.NavEvents"
@@ -856,7 +856,8 @@
             "Blockly",
             "Mixly.Env",
             "Mixly.XML",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.HTMLTemplate"
         ],
         "provide": [
             "Mixly.ToolboxSearcher"

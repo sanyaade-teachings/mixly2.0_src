@@ -15,6 +15,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.FooterLayerBoardConfig');
 goog.require('Mixly.BoardConfigItem');
 goog.require('Mixly.Profile');
+goog.require('Mixly.EditorBlockly');
 goog.provide('Mixly.Boards');
 
 const {
@@ -27,10 +28,11 @@ const {
     Editor,
     FooterLayer,
     Msg,
-    Boards,
     FooterLayerBoardConfig,
     BoardConfigItem,
-    Profile
+    Profile,
+    EditorBlockly,
+    Boards
 } = Mixly;
 
 const { form } = layui;
@@ -134,6 +136,7 @@ Boards.changeTo = (boardName) => {
     } else {
         Profile['default'] = Profile['default'] ?? {};
     }
+    EditorBlockly.reloadWorkspace();
     const boardKey = Boards.dict[boardName].key;
     
     for (let i in SELECTED_BOARD) {
@@ -313,18 +316,7 @@ Boards.updateCategories = (boardName, enforce = false) => {
         categoriesDom[i].setAttribute('toolboxitemid', categoriesDom[i].id);
     }
     Msg.renderToolbox(false);
-    /*for (let i in Editor.editorManager.editors) {
-        if (Editor.editorManager.editors[i] instanceof Mixly.EditorMix) {
-            Editor.editorManager.editors[i].blockEditor.updateToolbox();
-        }
-    }*/
-    // Editor.editorManager.resize();
-    /*if (Editor.blockEditor) {
-        Editor.blockEditor.updateToolbox(toolboxDom[0]);
-        // ToolboxSearcher.restart();
-        Editor.blockEditor.scrollCenter();
-        Blockly.hideChaff();
-    }*/
+    EditorBlockly.updateToolbox();
 }
 
 Boards.selectCategories = (boardName, categoriesStr) => {

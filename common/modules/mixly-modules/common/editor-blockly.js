@@ -97,8 +97,8 @@ class EditorBlockly extends EditorBase {
                 };
                 menuOptions.push(screenshotOption);
             }
-
-            // ToolboxSearcher.init(editor);
+            
+            const toolboxSeacher = new ToolboxSearcher(editor);
             const workspaceSearch = new WorkspaceSearch(editor);
             workspaceSearch.init();
 
@@ -152,6 +152,23 @@ class EditorBlockly extends EditorBase {
             return this.$blockly;
         }
 
+        this.updateToolbox = () => {
+            this.editor.updateToolbox($('#toolbox')[0]);
+        }
+
+        this.reloadWorkspace = () => {
+            Blockly.Events.disable();
+            let workspaceState = Blockly.serialization.workspaces.save(this.editor);
+            let undoStack = [...this.editor.undoStack_];
+            let redoStack = [...this.editor.redoStack_];
+            Blockly.serialization.workspaces.load(workspaceState, this.editor, {
+                recordUndo: false
+            });
+            this.editor.undoStack_ = [...undoStack];
+            this.editor.redoStack_ = [...redoStack];
+            Blockly.Events.enable();
+        }
+
         this.initBlockly();
     }
 
@@ -163,14 +180,12 @@ class EditorBlockly extends EditorBase {
         );
         $parentContainer.append(this.getContent());
         this.editor = EditorBlockly.getEditor();
-        this.$toolbox = null;
         this.workspaceState = null;
         this.undoStack = null;
         this.redoStack = null;
     }
 
     init() {
-        this.$toolbox = $('#toolbox');
         const language = BOARD.language.toLowerCase();
         switch (language) {
         case 'python':
@@ -232,16 +247,11 @@ class EditorBlockly extends EditorBase {
         super.resize();
     }
 
-    updateToolbox() {
-        this.editor.updateToolbox(this.$toolbox[0]);
-    }
-
     dispose() {
         super.dispose();
         if (this.isActive()) {
             EditorBlockly.getContent().detach();
         }
-        this.$toolbox = null;
         this.undoStack = null;
         this.redoStack = null;
         this.editor = null;
@@ -251,7 +261,6 @@ class EditorBlockly extends EditorBase {
     onMounted() {
         super.onMounted();
         this.getContent().append(EditorBlockly.getContent());
-        this.updateToolbox();
         Blockly.Events.disable();
         if (this.workspaceState) {
             Blockly.serialization.workspaces.load(this.workspaceState, this.editor, {

@@ -6,13 +6,15 @@ goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.ToolboxSearcher');
 
 const {
     Env,
     XML,
     Msg,
-    HTMLTemplate
+    HTMLTemplate,
+    Debug
 } = Mixly;
 
 class ToolboxSearcher {
@@ -33,7 +35,7 @@ class ToolboxSearcher {
         }));
         this.$btn = this.$search.find('button');
         this.$input = this.$search.find('input');
-        this.preKeyText = '';
+        this.prevText = '';
         $(this.mainToolbox.HtmlDiv).append(this.$search);
         this.addEventsListener();
     }
@@ -58,7 +60,7 @@ class ToolboxSearcher {
                 searchCategory.show();
             }
             this.scrollTop();
-            if (keyText === this.preKeyText) {
+            if (keyText === this.prevText) {
                 this.$btn.addClass('layui-btn-disabled');
             } else {
                 this.$btn.removeClass('layui-btn-disabled');
@@ -71,10 +73,43 @@ class ToolboxSearcher {
         $(HtmlDiv).scrollTop(HtmlDiv.scrollHeight);
     }
 
-    searchBlocks(keyList) {
+    checkBlock(blockxml, keys) {
+        this.searchWorkspace.clear();
+        try {
+            Blockly.Xml.domToBlock(blockxml, this.searchWorkspace);
+        } catch (error) {
+            Debug.error(error);
+            return false;
+        }
+        const blocks = this.searchWorkspace.getAllBlocks(true);
+        let select = false;
+        for (let block of blocks) {
+            const { inputList } = block;
+            for (let input of inputList) {
+                const { fieldRow } = input;
+                for (let field of fieldRow) {
+                    const fieldText = field.getText().toLowerCase();
+                    let times = 0;
+                    for (let key = 0; key < keys.length; key++) {
+                        if (fieldText.indexOf(keys[key]) === -1) {
+                            continue;
+                        }
+                        times++;
+                    }
+                    if (keys.length === times) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    searchBlocks(keys) {
         return new Promise((resolve, reject) => {
             const searchCategory = this.mainToolbox.getToolboxItemById('catSearch');
             let outputXML = [];
+            let selectedBlocksLen = 0;
             const categories = this.mainToolbox.getToolboxItems();
             for (let j = 0; categories[j]; j++) {
                 const category = categories[j];
@@ -87,72 +122,32 @@ class ToolboxSearcher {
                     if (kind !== 'BLOCK') {
                         continue;
                     }
-                    this.searchWorkspace.clear();
-                    try {
-                        Blockly.Xml.domToBlock(blockxml, this.searchWorkspace);
-                    } catch (error) {
-                        console.log(error);
+                    if (!this.checkBlock(blockxml, keys)) {
                         continue;
                     }
-                    const blocks = this.searchWorkspace.getAllBlocks(true);
-                    let select = false;
-                    for (let block of blocks) {
-                        let searchKeyList = [ ...keyList ];
-                        const { inputList } = block;
-                        for (let input of inputList) {
-                            const { fieldRow } = input;
-                            for (let field of fieldRow) {
-                                const fieldText = field.getText().toLowerCase();
-                                for (let key = 0; key < searchKeyList.length; key++) {
-                                    if (fieldText.indexOf(searchKeyList[key]) === -1) {
-                                        continue;
-                                    }
-                                    searchKeyList.splice(key, 1);
-                                    key--;
-                                    if (searchKeyList.length) {
-                                        continue;
-                                    }
-                                    if (addLabel) {
-                                        const categoryPath = this.getCategoryPath(category);
-                                        outputXML.push({
-                                            kind: 'LABEL',
-                                            text: categoryPath
-                                        });
-                                        addLabel = false;
-                                    }
-                                    outputXML.push(blockDef);
-                                    select = true;
-                                    break;
-                                }
-                                if (select) break;
-                            }
-                            if (select) break;
-                        }
-                        if (select) break;
+                    if (addLabel) {
+                        const categoryPath = this.getCategoryPath(category);
+                        outputXML.push({
+                            kind: 'LABEL',
+                            text: categoryPath
+                        });
+                        addLabel = false;
+                    }
+                    outputXML.push(blockDef);
+                    selectedBlocksLen++;
+                    if (selectedBlocksLen > 30) {
+                        break;
                     }
                 }
-            }
-
-            this.searchWorkspace.clear();
-
-            if (outputXML.length > 30) {
-                let hideNum = 0;
-                while (!(outputXML.length <= 30 && outputXML[outputXML.length - 1].kind === 'LABEL')) {
-                    if (outputXML[outputXML.length - 1].kind === 'BLOCK')
-                        hideNum++;
-                    outputXML.pop();
+                if (selectedBlocksLen > 30) {
+                    outputXML.unshift({
+                        kind: 'LABEL',
+                        text: '匹配图形块数量过多, 仅展示前30个, 请添加关键词以全部显示。例如：管脚 数字'
+                    });
+                    break;
                 }
-                outputXML.pop();
-                let showNum = 0;
-                for (let elem of outputXML)
-                    if (elem.kind === 'BLOCK')
-                        showNum++;
-                outputXML.unshift({
-                    kind: 'LABEL',
-                    text: Msg.Lang['共搜索到图形块'] + ': ' + (hideNum + showNum) + ', ' + Msg.Lang['显示'] + ': ' + showNum + ', ' + Msg.Lang['请添加关键词以显示全部。例如：管脚 数字']
-                });
             }
-            
+            this.searchWorkspace.clear();
             searchCategory.updateFlyoutContents(
                 outputXML.length ? 
                 outputXML : [{
@@ -183,29 +178,26 @@ class ToolboxSearcher {
         if (this.$btn.hasClass('layui-btn-disabled')) {
             return
         };
-        let keyText = this.$input.val();
-        this.preKeyText = keyText;
+        let text = this.$input.val();
+        this.prevText = text;
         this.$btn.addClass('layui-btn-disabled');
         try {
-            if (!keyText.replaceAll(' ', '')) {
+            if (!text.replaceAll(' ', '')) {
                 return;
             }
         } catch(error) {
-            console.log(error);
+            Debug.error(error);
         }
         this.$input.attr('disabled', true);
         const $i = this.$btn.children('i');
         $i.removeClass('layui-icon-search');
-        $i.addClass('layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop');
+        $i.addClass('layui-icon-loading layui-anim-rotate layui-anim-loop');
         setTimeout(() => {
-            let rawkeyList = keyText.split(' ');
-            let keyList = [];
-            for (let i in rawkeyList)
-                rawkeyList[i] && keyList.push(rawkeyList[i].toLowerCase());
-            this.searchBlocks(keyList)
-            .catch(console.log)
+            let keys = text.toLowerCase().split(' ');
+            this.searchBlocks(keys)
+            .catch(Debug.error)
             .finally(() => {
-                $i.removeClass('layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop');
+                $i.removeClass('layui-icon-loading layui-anim-rotate layui-anim-loop');
                 $i.addClass('layui-icon-search');
                 this.$input.removeAttr('disabled');
             });
@@ -213,13 +205,13 @@ class ToolboxSearcher {
     }
 
     restart() {
-        this.preKeyText = '';
+        this.prevText = '';
         const searchCategory = this.mainToolbox.getToolboxItemById('catSearch');
         this.$input.val('');
         searchCategory.hide();
     }
 }
 
-Mixly.ToolboxSearcher =ToolboxSearcher;
+Mixly.ToolboxSearcher = ToolboxSearcher;
 
 });

@@ -3,12 +3,14 @@ goog.loadJs('common', () => {
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.Events');
 
 const {
     IdGenerator,
     MArray,
-    Registry
+    Registry,
+    Debug
 } = Mixly;
 
 class Events {
@@ -23,7 +25,7 @@ class Events {
 
     exist(type) {
         if (!this.eventsType.includes(type)) {
-            console.warn(`${type} event does not exist under the class`);
+            Debug.warn(`${type} event does not exist under the class`);
             return false;
         }
         return true;

@@ -1,9 +1,9 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.MJSON');
 
-const { MJSON } = Mixly;
+const { Debug, MJSON } = Mixly;
 
 MJSON.operate = (jsonObj, optFunc) => {
     // 循环所有键
@@ -19,7 +19,8 @@ MJSON.operate = (jsonObj, optFunc) => {
             if (typeof (element) === 'string') {
                 try {
                     jsonObj[key] = optFunc(jsonObj[key]);
-                } catch (e) {
+                } catch (error) {
+                    Debug.error(error);
                 }
             }
         }
@@ -45,7 +46,7 @@ MJSON.parse = (jsonStr) => {
         jsonStr = jsonStr.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m);
         jsonObj = JSON.parse(jsonStr);
     } catch (error) {
-        console.log(error);
+        Debug.error(error);
     }
     return jsonObj;
 }
@@ -55,7 +56,7 @@ MJSON.stringify = (jsonObj) => {
     try {
         jsonStr = JSON.stringify(jsonObj);
     } catch (error) {
-        console.log(error);
+        Debug.error(error);
     }
     return jsonStr;
 }

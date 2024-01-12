@@ -7,6 +7,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Debug');
 goog.require('Mixly.PageBase');
 goog.require('Mixly.Electron.FileTree');
 goog.require('Mixly.Web.FileTree');
@@ -20,6 +21,7 @@ const {
     Env,
     HTMLTemplate,
     ContextMenu,
+    Debug,
     PageBase,
     Electron = {},
     Web = {}
@@ -91,8 +93,16 @@ class SideBarLocalStorage extends PageBase {
                 callback: () => {
                     navigator.clipboard.writeText(this.folderPath)
                     .catch((error) => {
-                        console.logg(error);
+                        Debug.log(error);
                     });
+                }
+            },
+            sep2: '---------',
+            open_new_folder: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('打开新文件夹', ''),
+                callback: () => {
+                    this.showDirectoryPicker();
                 }
             }
         };
@@ -140,7 +150,7 @@ class SideBarLocalStorage extends PageBase {
                 callback: () => {
                     navigator.clipboard.writeText(this.triggerId)
                     .catch((error) => {
-                        console.logg(error);
+                        Debug.log(error);
                     });
                 }
             },
@@ -181,7 +191,7 @@ class SideBarLocalStorage extends PageBase {
                 callback: () => {
                     navigator.clipboard.writeText(this.triggerId)
                     .catch((error) => {
-                        console.logg(error);
+                        Debug.log(error);
                     });
                 }
             },
@@ -258,18 +268,22 @@ class SideBarLocalStorage extends PageBase {
         });
 
         this.$openFolderContent.find('button').click(() => {
-            FS.showDirectoryPicker()
-            .then((folderPath) => {
-                if (!folderPath) {
-                    return;
-                }
-                this.setFolderPath(folderPath);
-                this.$content.replaceWith(this.$folderContent);
-                this.$openFolderContent.remove();
-                this.$content = this.$folderContent;
-            })
-            .catch(console.log);
+            this.showDirectoryPicker();
         });
+    }
+
+    showDirectoryPicker() {
+        FS.showDirectoryPicker()
+        .then((folderPath) => {
+            if (!folderPath) {
+                return;
+            }
+            this.setFolderPath(folderPath);
+            this.$content.replaceWith(this.$folderContent);
+            this.$openFolderContent.remove();
+            this.$content = this.$folderContent;
+        })
+        .catch(Debug.log);
     }
 
     openFolder() {

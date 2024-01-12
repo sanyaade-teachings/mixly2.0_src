@@ -21,6 +21,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.ToolboxSearcher');
+goog.require('Mixly.Debug');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorBlockly');
 
@@ -30,6 +31,7 @@ const {
     XML,
     HTMLTemplate,
     ToolboxSearcher,
+    Debug,
     EditorBase
 } = Mixly;
 const { USER, BOARD } = Config;
@@ -97,14 +99,16 @@ class EditorBlockly extends EditorBase {
                 };
                 menuOptions.push(screenshotOption);
             }
-            
-            const toolboxSeacher = new ToolboxSearcher(editor);
-            const workspaceSearch = new WorkspaceSearch(editor);
-            workspaceSearch.init();
 
-            const zoomToFit = new ZoomToFitControl(editor);
-            zoomToFit.init();
-            const backpack = new Backpack(editor, {
+            this.toolboxSeacher = new ToolboxSearcher(editor);
+
+            this.workspaceSearch = new WorkspaceSearch(editor);
+            this.workspaceSearch.init();
+
+            this.zoomToFit = new ZoomToFitControl(editor);
+            this.zoomToFit.init();
+
+            this.backpack = new Backpack(editor, {
                 useFilledBackpackImage: true,
                 skipSerializerRegistration: false,
                 contextMenu: {
@@ -116,11 +120,11 @@ class EditorBlockly extends EditorBase {
                     disablePreconditionChecks: false
                 }
             });
-            backpack.init();
+            this.backpack.init();
 
             if (USER.blocklyMultiselect === 'yes') {
-                const multiselectPlugin = new Multiselect(editor);
-                multiselectPlugin.init({
+                this.multiselectPlugin = new Multiselect(editor);
+                this.multiselectPlugin.init({
                     useDoubleClick: false,
                     bumpNeighbours: false,
                     multiselectIcon: {
@@ -134,13 +138,13 @@ class EditorBlockly extends EditorBase {
             }
             
             if (USER.blocklyShowMinimap === 'yes') {
-                const minimap = new PositionedMinimap(editor);
-                minimap.init();
+                this.minimap = new PositionedMinimap(editor);
+                this.minimap.init();
             }
             
             if (USER.blocklyContentHighlight === 'yes') {
-                const contentHighlight = new ContentHighlight(editor);
-                contentHighlight.init();
+                this.contentHighlight = new ContentHighlight(editor);
+                this.contentHighlight.init();
             }
         }
 
@@ -300,6 +304,7 @@ class EditorBlockly extends EditorBase {
             try {
                 return decodeURIComponent(s.replace(/_/g, '%'));
             } catch (error) {
+                Debug.error(error);
                 return s;
             }
         });

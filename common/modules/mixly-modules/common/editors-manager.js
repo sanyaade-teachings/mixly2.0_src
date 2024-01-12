@@ -11,6 +11,7 @@ goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorUnknown');
 goog.require('Mixly.EditorWelcome');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Debug');
 goog.require('Mixly.PagesManager');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.Electron.FS');
@@ -28,6 +29,7 @@ const {
     EditorUnknown,
     EditorWelcome,
     Registry,
+    Debug,
     PagesManager,
     HTMLTemplate,
     Electron = {},
@@ -102,7 +104,7 @@ class EditorsManager extends PagesManager {
             .then((data) => {
                 data && editor.setValue(data, path.extname(id));
             })
-            .catch(console.log);
+            .catch(Debug.error);
             const tabs = this.getTabs();
             editor.bind('addDirty', () => {
                 tabs.updateTab(id, {

@@ -5,8 +5,8 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Config');
 goog.require('Mixly.Command');
 goog.require('Mixly.XML');
-goog.require('Mixly.IdGenerator');
 goog.require('Mixly.Msg');
+goog.require('Mixly.HTMLTemplate');
 goog.provide('Mixly.Nav');
 
 const {
@@ -15,8 +15,8 @@ const {
     Command,
     Nav,
     XML,
-    IdGenerator,
-    Msg
+    Msg,
+    HTMLTemplate
 } = Mixly;
 
 const { BOARD, USER } = Config;
@@ -27,37 +27,49 @@ const { element, form } = layui;
   * nav容器html片段
   * @type {String}
   */
-Nav.CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav.html'));
+Nav.containerHTMLTemplate = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'nav/nav.html'))
+);
 
 /**
   * nav按钮html片段
   * @type {String}
   */
-Nav.BTN_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav-btn.html'));
+Nav.btnHTMLTemplate = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'nav/nav-btn.html'))
+);
 
 /**
   * nav子元素容器html片段
   * @type {String}
   */
-Nav.ITEM_CONTAINER_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav-item-container.html'));
+Nav.itemContainerHTMLTemplate = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'nav/nav-item-container.html'))
+);
 
 /**
   * nav子元素html片段
   * @type {String}
   */
-Nav.ITEM_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/nav-item.html'));
+Nav.itemHTMLTemplate = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'nav/nav-item.html'))
+);
 
 /**
   * 板卡选择器html片段
   * @type {String}
   */
-Nav.BOARD_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/board-selector-div.html'));
+Nav.boardSelectorHTMLTemplate = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'nav/board-selector-div.html'))
+);
 
 /**
   * 端口选择器html片段
   * @type {String}
   */
-Nav.PORT_SELECTOR_TEMPLATE = goog.get(path.join(Env.templatePath, 'nav/port-selector-div.html'));
+Nav.portSelectorHTMLTemplate = new HTMLTemplate(
+    goog.get(path.join(Env.templatePath, 'nav/port-selector-div.html'))
+);
 
 Nav.Scope = {
     'LEFT': -1,
@@ -79,9 +91,7 @@ Nav.weightsInfo = [];
 Nav.registerQueue = [];
 
 Nav.init = function() {
-    this.$container = $(XML.render(this.CONTAINER_TEMPLATE, {
-        mId: IdGenerator.generate()
-    }));
+    this.$container = $(this.containerHTMLTemplate.render());
     this.$leftBtnContainer = this.$container.find('.left-btn-container');
     this.$leftBtnExtContainer = this.$container.find('.left-btn-ext-container');
     this.$rightBtnContainer = this.$container.find('.right-btn-container');
@@ -89,11 +99,13 @@ Nav.init = function() {
     this.$rightMenuContainer = this.$container.find('.right-menu-container');
     this.$rightArea = this.$container.find('.right-area');
     this.$editorBtnsContainer = this.$container.find('.editor-btn-container');
-    this.$dropdownContainer.append(Nav.BOARD_SELECTOR_TEMPLATE);
-    this.$dropdownContainer.append(XML.render(Nav.PORT_SELECTOR_TEMPLATE, {
-        selectPort: Msg.Lang['选择串口'],
-        noPort: Msg.Lang['无可用串口']
-    }));
+    this.$dropdownContainer.append(this.boardSelectorHTMLTemplate.render());
+    this.$dropdownContainer.append(
+        this.portSelectorHTMLTemplate.render({
+            selectPort: Msg.Lang['选择串口'],
+            noPort: Msg.Lang['无可用串口']
+        }
+    ));
     $('#nav-container').append(this.$container);
     element.render('nav', 'nav-filter');
     form.render('select', 'boards-type-filter');
@@ -211,13 +223,13 @@ Nav.register = function(config) {
     } = config;
     switch (scopeType) {
     case this.Scope.LEFT:
-        config.$moreBtn = $(XML.render(this.ITEM_TEMPLATE, {
+        config.$moreBtn = $(this.itemHTMLTemplate.render({
             mId: id,
             icon,
             text: displayText
         }));
     case this.Scope.CENTER:
-        config.$btn = $(XML.render(this.BTN_TEMPLATE, {
+        config.$btn = $(this.btnHTMLTemplate.render({
             title,
             mId: id,
             icon,
@@ -226,13 +238,13 @@ Nav.register = function(config) {
         break;
     case this.Scope.RIGHT:
         if (typeof id === 'string') {
-            config.$btn = $(XML.render(this.ITEM_CONTAINER_TEMPLATE, {
+            config.$btn = $(this.itemContainerHTMLTemplate.render({
                 mId: id,
                 text: displayText
             }));
         } else {
             if (displayText) {
-                config.$btn = $(XML.render(this.ITEM_TEMPLATE, {
+                config.$btn = $(this.itemHTMLTemplate.render({
                     mId: id[1],
                     icon,
                     text: displayText

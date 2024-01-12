@@ -4,6 +4,7 @@ goog.require('path');
 goog.require('Mixly.FileTree');
 goog.require('Mixly.Events');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Debug');
 goog.require('Mixly.Electron.FS');
 goog.provide('Mixly.Electron.FileTree');
 
@@ -11,6 +12,7 @@ const {
     FileTree,
     Events,
     Registry,
+    Debug,
     Electron
 } = Mixly;
 const { FS } = Electron;
@@ -32,7 +34,7 @@ class FileTreeExt extends FileTree {
             events.run('change', data);
         });
         this.worker.addEventListener('error', (event) => {
-            console.log(event);
+            Debug.error(event);
         });
 
         this.addEventListener = function(folderPath, func) {
@@ -50,7 +52,6 @@ class FileTreeExt extends FileTree {
             if (!events) {
                 return;
             }
-            events.unbind(eventId);
             if (!events.length('change')) {
                 this.watcherEventsRegistry.unregister(folderPath);
                 this.unwatch(folderPath);
@@ -153,8 +154,6 @@ class FileTreeExt extends FileTree {
             const type = this.watchRegistry.getItem(key);
             if (type === 'file') {
                 this.unwatchFile(key);
-            } else {
-                super.unwatchFolder(key);
             }
             const id = this.watcherEventsListenerIdRegistry.getItem(key);
             if (!id) {
@@ -163,6 +162,7 @@ class FileTreeExt extends FileTree {
             FileTreeExt.removeEventListener(key, id);
             this.watcherEventsListenerIdRegistry.unregister(key);
         }
+        super.unwatchFolder(folderPath);
     }
 }
 

@@ -7,6 +7,7 @@ goog.require('Mixly.Title');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Env');
+goog.require('Mixly.Debug');
 goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerExample');
 
@@ -16,6 +17,7 @@ const {
     XML,
     Editor,
     Env,
+    Debug,
     FooterLayer
 } = Mixly;
 
@@ -89,7 +91,7 @@ class FooterLayerExample extends FooterLayer {
                     return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
                 });
             } catch (error) {
-                console.log(error);
+                Debug.error(error);
             }
             // 如果当前在代码区则先切换到模块区
             if (Editor.selected === 'CODE') {

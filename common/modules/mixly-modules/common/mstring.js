@@ -1,9 +1,9 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.MString');
 
-const { MString } = Mixly;
+const { Debug, MString } = Mixly;
 
 /**
  * @function 使用传入值替换字符串中{xxx}
@@ -33,7 +33,8 @@ MString.decode = (str) => {
             let newStr = decodeURIComponent(str.replace(/_([0-9a-fA-F]{2})/gm, '%$1'));
             newStr = unescape(newStr.replace(/\\(u[0-9a-fA-F]{4})/gm, '%$1'));
             return newStr;
-        } catch (e) {
+        } catch (error) {
+            Debug.error(error);
         }
     }
     return str;

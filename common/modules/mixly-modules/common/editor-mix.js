@@ -11,6 +11,7 @@ goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
@@ -29,6 +30,7 @@ const {
     Config,
     Env,
     ContextMenu,
+    Debug,
     HTMLTemplate,
     LayerExt
 } = Mixly;
@@ -303,16 +305,16 @@ class EditorMix extends EditorBase {
                 return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
             });
         } catch (error) {
-            console.log(error);
+            Debug.error(error);
         }
         this.parseMix($(data), false, false, (message) => {
             if (message) {
                 switch (message) {
                 case 'USE_CODE':
-                    // console.log('已从code标签中读取代码');
+                    Debug.log('已从code标签中读取代码');
                     break;
                 case 'USE_INCOMPLETE_BLOCKS':
-                    // console.log('一些块已被忽略');
+                    Debug.log('一些块已被忽略');
                     break;
                 }
                 this.blockEditor.scrollCenter();
@@ -355,7 +357,7 @@ class EditorMix extends EditorBase {
                     try {
                         attr = attr.replaceAll('\\\"', '');
                     } catch (error) {
-                        console.log(error);
+                        Debug.error(error);
                     }
                     $(nowDom[j]).attr(i, attr);
                 }
@@ -366,7 +368,7 @@ class EditorMix extends EditorBase {
             if (configStr)
                 config = JSON.parse(configStr);
         } catch (error) {
-            console.log(error);
+            Debug.error(error);
         }
         let boardName = xmlDom.attr('board') ?? '';
         // Boards.setSelectedBoard(boardName, config);
@@ -384,7 +386,7 @@ class EditorMix extends EditorBase {
                     }
                 });
             } catch (error) {
-                console.log(error);
+                Debug.error(error);
             }
         }
         if (useCode) {

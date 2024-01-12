@@ -1,8 +1,14 @@
 goog.loadJs('common', () => {
-goog.provide('Mixly.Title');
-goog.require('Mixly.Config');
 
-let { Url, Config, Title } = Mixly;
+goog.require('Mixly.Config');
+goog.require('Mixly.Debug');
+goog.provide('Mixly.Title');
+
+let {
+    Config,
+    Debug,
+    Title
+} = Mixly;
 let { BOARD, SOFTWARE } = Config;
 
 if (SOFTWARE?.version && BOARD?.boardType) {
@@ -15,8 +21,8 @@ Title.updeteVersionNumber = (newVersionNumber) => {
     try {
         Title.NOWTITLE = document.title.replace(/Mixly[\s]?[\d.]+/g, "Mixly " + newVersionNumber);
         document.title = Title.NOWTITLE;
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        Debug.error(error);
     }
 }
 
@@ -24,9 +30,9 @@ Title.getVersionNumber = () => {
     try {
         Title.NOWTITLE = document.title.match(/Mixly[\s]?[\d.]+/g);
         return Title.NOWTITLE;
-    } catch (e) {
-        console.log(e);
-        return "";
+    } catch (error) {
+        Debug.error(error);
+        return '';
     }
 }
 
@@ -40,8 +46,8 @@ Title.updeteFilePath = function (newPath) {
             Title.NOWTITLE = document.title + " (" + newPath + ")";
             document.title = Title.NOWTITLE;
         }
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        Debug.error(error);
     }
 }
 
@@ -51,8 +57,8 @@ Title.getFilePath = () => {
         if (filePathArr && filePathArr.length > 0) {
             return filePathArr[0];
         }
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        Debug.error(error);
     }
     return null;
 }

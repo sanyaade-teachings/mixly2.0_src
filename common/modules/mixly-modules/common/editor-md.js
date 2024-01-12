@@ -117,12 +117,12 @@ class EditorMd extends EditorCode {
     }
 
     addChangeListener() {
-        /*this.editor.on('change', () => {
+        this.editor.on('change', () => {
             if (this.drag.shown === 'NEGATIVE') {
                 return;
             }
             this.updatePreview();
-        });*/
+        });
     }
 
     updatePreview() {

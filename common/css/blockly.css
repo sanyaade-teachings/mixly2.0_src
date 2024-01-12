@@ -145,6 +145,7 @@
 .dark-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
     background-color: #252525;
     color: #eee;
+    font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
 }
 
 .dark-theme.zelos-renderer .blocklyMenu > .blocklyMenuItem {

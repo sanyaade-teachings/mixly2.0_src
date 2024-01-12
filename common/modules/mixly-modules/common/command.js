@@ -2,9 +2,15 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
 goog.require('Mixly.MJSON')
+goog.require('Mixly.Debug');
 goog.provide('Mixly.Command');
 
-const { Config, Command, MJSON } = Mixly;
+const {
+    Config,
+    Command,
+    MJSON,
+    Debug
+} = Mixly;
 
 const { SOFTWARE } = Config;
 
@@ -19,8 +25,7 @@ Command.parse = (commandStr) => {
 }
 
 Command.run = (commandObj) => {
-    if (SOFTWARE?.debug)
-        console.log('收到指令：', commandObj);
+    Debug.log('收到指令：', commandObj);
     if (typeof commandObj !== 'object') return;
     commandObj = {
         ...Command.DEFAULT,
@@ -39,8 +44,8 @@ Command.run = (commandObj) => {
     try {
         if (nowObj[func])
             nowObj[func](...args);
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        Debug.error(error);
     }
 }
 

@@ -1,7 +1,9 @@
 goog.loadJs('common', () => {
 
-goog.require('Mixly');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.Registry');
+
+const { Debug } = Mixly;
 
 class Registry {
     #registry_ = new Map();
@@ -24,7 +26,7 @@ class Registry {
         keys = this.validate(keys);
         for (let key of keys) {
             if (this.#registry_.has(key)) {
-                console.warn(`${key}已存在，不可重复注册`);
+                Debug.warn(`${key}已存在，不可重复注册`);
                 continue;
             }
             this.#registry_.set(key, value);
@@ -35,7 +37,7 @@ class Registry {
         keys = this.validate(keys);
         for (let key of keys) {
             if (!this.#registry_.has(key)) {
-                console.warn(`${key}不存在，无需取消注册`);
+                Debug.warn(`${key}不存在，无需取消注册`);
                 continue;
             }
             this.#registry_.delete(key);

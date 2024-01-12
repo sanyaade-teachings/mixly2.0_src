@@ -3,12 +3,14 @@ goog.loadJs('common', () => {
 goog.require('monaco');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Debug');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorMonaco');
 
 const {
     XML,
     Msg,
+    Debug,
     EditorBase
 } = Mixly;
 
@@ -211,7 +213,7 @@ class EditorMonaco extends EditorBase {
             editor.trigger('source', 'type', { text: clipboardText });
             this.focus();
         })
-        .catch(console.log);
+        .catch(Debug.error);
     }
 
     getEditor() {

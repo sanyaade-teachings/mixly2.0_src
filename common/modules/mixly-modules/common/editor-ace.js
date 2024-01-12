@@ -4,12 +4,14 @@ goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Debug');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorAce');
 
 const {
     XML,
     Msg,
+    Debug,
     EditorBase
 } = Mixly;
 
@@ -273,9 +275,9 @@ class EditorAce extends EditorBase {
             const copyText = session.getTextRange(range);
             navigator.clipboard.writeText(copyText)
             .then((message) => {
-                // console.log('clipboard：复制成功');
+                Debug.log('clipboard：复制成功', message);
             }).catch((error) => {
-                // console.log('clipboard：复制失败');
+                Debug.error('clipboard：复制失败', error);
             });
             session.remove(range);
         }
@@ -290,9 +292,9 @@ class EditorAce extends EditorBase {
         }
         navigator.clipboard.writeText(copyText)
         .then((message) => {
-            // console.log('clipboard：复制成功');
+            Debug.log('clipboard：复制成功', message);
         }).catch((error) => {
-            // console.log('clipboard：复制失败');
+            Debug.error('clipboard：复制失败', error);
         });
     }
 
@@ -300,11 +302,16 @@ class EditorAce extends EditorBase {
         navigator.clipboard.readText()
         .then((message) => {
             this.editor.execCommand('paste', message);
-            // console.log('clipboard：粘贴成功');
+            Debug.log('clipboard：粘贴成功', message);
         })
         .catch((error) => {
-            // console.log('clipboard：粘贴失败');
+            Debug.error('clipboard：粘贴失败', error);
         });
+    }
+
+    resize() {
+        this.editor.resize();
+        super.resize();
     }
 }
 

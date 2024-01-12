@@ -28,7 +28,8 @@
             "Mixly.FooterLayerBoardConfig",
             "Mixly.BoardConfigItem",
             "Mixly.Profile",
-            "Mixly.EditorBlockly"
+            "Mixly.EditorBlockly",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.Boards"
@@ -38,7 +39,8 @@
         "path": "/common/command.js",
         "require": [
             "Mixly.Config",
-            "Mixly.MJSON"
+            "Mixly.MJSON",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.Command"
@@ -80,6 +82,15 @@
         ]
     },
     {
+        "path": "/common/debug.js",
+        "require": [
+            "Mixly.Config"
+        ],
+        "provide": [
+            "Mixly.Debug"
+        ]
+    },
+    {
         "path": "/common/dom-operator.js",
         "require": [
             "path",
@@ -112,6 +123,7 @@
             "ace.ExtLanguageTools",
             "Mixly.XML",
             "Mixly.Msg",
+            "Mixly.Debug",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -152,6 +164,7 @@
             "Mixly.XML",
             "Mixly.HTMLTemplate",
             "Mixly.ToolboxSearcher",
+            "Mixly.Debug",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -207,6 +220,7 @@
             "Mixly.Env",
             "Mixly.LayerExt",
             "Mixly.ContextMenu",
+            "Mixly.Debug",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",
@@ -222,6 +236,7 @@
             "monaco",
             "Mixly.XML",
             "Mixly.Msg",
+            "Mixly.Debug",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -286,6 +301,7 @@
             "Mixly.EditorUnknown",
             "Mixly.EditorWelcome",
             "Mixly.Registry",
+            "Mixly.Debug",
             "Mixly.PagesManager",
             "Mixly.HTMLTemplate",
             "Mixly.Electron.FS",
@@ -311,7 +327,8 @@
         "require": [
             "Mixly.IdGenerator",
             "Mixly.MArray",
-            "Mixly.Registry"
+            "Mixly.Registry",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.Events"
@@ -328,7 +345,8 @@
             "Mixly.Events",
             "Mixly.ContextMenu",
             "Mixly.Registry",
-            "Mixly.IdGenerator"
+            "Mixly.IdGenerator",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.FileTree"
@@ -382,6 +400,7 @@
             "Mixly.XML",
             "Mixly.Editor",
             "Mixly.Env",
+            "Mixly.Debug",
             "Mixly.FooterLayer"
         ],
         "provide": [
@@ -573,7 +592,7 @@
     {
         "path": "/common/mjson.js",
         "require": [
-            "Mixly"
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.MJSON"
@@ -598,7 +617,7 @@
     {
         "path": "/common/mstring.js",
         "require": [
-            "Mixly"
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.MString"
@@ -623,8 +642,8 @@
             "Mixly.Config",
             "Mixly.Command",
             "Mixly.XML",
-            "Mixly.IdGenerator",
-            "Mixly.Msg"
+            "Mixly.Msg",
+            "Mixly.HTMLTemplate"
         ],
         "provide": [
             "Mixly.Nav"
@@ -679,7 +698,7 @@
     {
         "path": "/common/registry.js",
         "require": [
-            "Mixly"
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.Registry"
@@ -736,6 +755,7 @@
             "Mixly.Env",
             "Mixly.HTMLTemplate",
             "Mixly.ContextMenu",
+            "Mixly.Debug",
             "Mixly.PageBase",
             "Mixly.Electron.FileTree",
             "Mixly.Web.FileTree",
@@ -843,7 +863,8 @@
     {
         "path": "/common/title.js",
         "require": [
-            "Mixly.Config"
+            "Mixly.Config",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.Title"
@@ -857,7 +878,8 @@
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg",
-            "Mixly.HTMLTemplate"
+            "Mixly.HTMLTemplate",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.ToolboxSearcher"
@@ -1001,6 +1023,7 @@
             "Mixly.FileTree",
             "Mixly.Events",
             "Mixly.Registry",
+            "Mixly.Debug",
             "Mixly.Electron.FS"
         ],
         "provide": [

@@ -9,6 +9,7 @@ goog.require('Mixly.Events');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Registry');
 goog.require('Mixly.IdGenerator');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.FileTree');
 
 const {
@@ -17,7 +18,8 @@ const {
     Events,
     ContextMenu,
     Registry,
-    IdGenerator
+    IdGenerator,
+    Debug
 } = Mixly;
 
 const { USER } = Config;
@@ -68,9 +70,7 @@ class FileTree {
                     .then((data) => {
                         cb(data);
                     })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                    .catch(Debug.error);
                 },
                 themes: {
                     dots: true,
@@ -153,8 +153,12 @@ class FileTree {
     }
 
     setFolderPath(folderPath) {
-        if (this.folderPath && this.folderPath !== folderPath) {
-            this.unwatchFolder(folderPath);
+        let newFolderPath = path.join(folderPath);
+        if (newFolderPath === this.folderPath) {
+            return;
+        }
+        if (this.folderPath) {
+            this.unwatchFolder(this.folderPath);
         }
         this.folderPath = path.join(folderPath);
         this.nodeAliveRegistry.reset();
@@ -345,7 +349,7 @@ class FileTree {
                     createPromise = this.fs.createDirectory(desPath);
                 }
                 createPromise
-                .catch(console.log)
+                .catch(Debug.error)
                 .finally(() => {
                     this.mprogress.end();
                 });
@@ -389,7 +393,7 @@ class FileTree {
                         createPromise = this.fs.createDirectory(desPath);
                     }
                     createPromise
-                    .catch(console.log)
+                    .catch(Debug.error)
                     .finally(() => {
                         this.mprogress.end();
                     });
@@ -426,7 +430,7 @@ class FileTree {
                 renamePromise = this.fs.renameDirectory(inPath, desPath);
             }
             renamePromise
-            .catch(console.log)
+            .catch(Debug.error)
             .finally(() => {
                 this.mprogress.end();
             });
@@ -450,7 +454,7 @@ class FileTree {
             deletePromise = this.fs.deleteDirectory(inPath);
         }
         deletePromise
-        .catch(console.log)
+        .catch(Debug.error)
         .finally(() => {
             this.mprogress.end();
         });
@@ -509,7 +513,7 @@ class FileTree {
             }
         }
         pastePromise
-        .catch(console.log)
+        .catch(Debug.error)
         .finally(() => {
             this.clearFolderTemp(folderPath);
             this.jstree.refresh_node(folderPath);

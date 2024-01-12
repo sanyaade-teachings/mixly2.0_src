@@ -44,7 +44,9 @@ class HTMLTemplate {
     }
 
     render(config = {}) {
-        config.mId = this.id;
+        if (!config.mId) {
+            config.mId = this.id;
+        }
         return XML.render(this.#html, config);
     }
 

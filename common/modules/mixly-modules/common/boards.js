@@ -16,6 +16,7 @@ goog.require('Mixly.FooterLayerBoardConfig');
 goog.require('Mixly.BoardConfigItem');
 goog.require('Mixly.Profile');
 goog.require('Mixly.EditorBlockly');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.Boards');
 
 const {
@@ -32,6 +33,7 @@ const {
     BoardConfigItem,
     Profile,
     EditorBlockly,
+    Debug,
     Boards
 } = Mixly;
 
@@ -252,8 +254,8 @@ Boards.changeTo = (boardName) => {
                     resetStr = JSON.stringify(outObj.reset);
                     resetStr = resetStr.replaceAll('\"', '\\\"');
                     obj.reset = resetStr;
-                } catch (e) {
-                    console.log(e);
+                } catch (error) {
+                    Debug.error(error);
                 }
             }
             outObj.command = MString.tpl(outObj.command, obj);

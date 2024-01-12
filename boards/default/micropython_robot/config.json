@@ -9,7 +9,7 @@
         "type": "command",
         "portSelect": "all",        
         "micropython:esp32c3:mixgo_feiyi": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Mixgo_Feiyi-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_Feiyi-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32:rm_e1": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
@@ -90,7 +90,7 @@
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/Mixgo_Feiyi-0x0-V1.19.1-lib.bin"
+                        "path": "./build/MixGo_Feiyi-0x0-V1.19.1-lib.bin"
                     },
                     {
                         "offset": "0X3A0000",

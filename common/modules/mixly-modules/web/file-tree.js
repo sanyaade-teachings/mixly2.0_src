@@ -41,6 +41,8 @@ class FileTreeExt extends FileTree {
         }
         return output;
     }
+
+    
 }
 
 Web.FileTree = FileTreeExt;

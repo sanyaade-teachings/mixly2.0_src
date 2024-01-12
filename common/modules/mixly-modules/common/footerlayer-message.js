@@ -5,6 +5,7 @@ goog.require('path');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Env');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerMessage');
 
@@ -12,15 +13,25 @@ const {
     XML,
     Msg,
     Env,
+    HTMLTemplate,
     FooterLayer
 } = Mixly;
 
 class FooterLayerMessage extends FooterLayer {
     // 弹层模板
     static {
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message.html'));
-        this.MENU_ITEM = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message-item.html'));
-        this.MENU_ITEM_WITH_ICON = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message-item-with-icon.html'));
+        this.menuHTMLTemplate = new HTMLTemplate(
+            goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message.html'))
+        );
+
+        this.menuItemHTMLTemplate = new HTMLTemplate(
+            goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message-item.html'))
+        );
+
+        this.menuItemWithIconHTMLTemplate = new HTMLTemplate(
+            goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-message-item-with-icon.html'))
+        );
+
         this.STYLES = ['primary', 'secondary', 'success', 'danger', 'warning'];
     }
 
@@ -50,8 +61,8 @@ class FooterLayerMessage extends FooterLayer {
             btns: [],
             checkbox: false
         };
-        const { MENU_TEMPLATE } = FooterLayerMessage;
-        this.updateContent(MENU_TEMPLATE);
+        const { menuHTMLTemplate } = FooterLayerMessage;
+        this.updateContent(menuHTMLTemplate.render());
         this.messageQuery = [];
         this.$content.addClass('footer-layer-message');
         this.$container = this.$content.find('.toast-container');
@@ -167,16 +178,16 @@ class FooterLayerMessage extends FooterLayer {
 
     genItemTemplate(items) {
         const {
-            MENU_ITEM_WITH_ICON,
-            MENU_ITEM
+            menuItemWithIconHTMLTemplate,
+            menuItemHTMLTemplate
         } = FooterLayerMessage;
-        let template = '';
+        let htmlTemplate;
         if (items.type === 1) {
-            template = MENU_ITEM_WITH_ICON;
+            htmlTemplate = menuItemWithIconHTMLTemplate;
         } else {
-            template = MENU_ITEM;
+            htmlTemplate = menuItemHTMLTemplate;
         }
-        return XML.render(template, items);
+        return htmlTemplate.render(items);
     }
 
     scrollToTop() {

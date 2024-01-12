@@ -60,6 +60,15 @@
         ]
     },
     {
+        "path": "/common/context-menu-items.js",
+        "require": [
+            "Mixly.Registry"
+        ],
+        "provide": [
+            "Mixly.ContextMenuItems"
+        ]
+    },
+    {
         "path": "/common/context-menu.js",
         "require": [
             "$.contextMenu",
@@ -384,6 +393,7 @@
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg",
+            "Mixly.HTMLTemplate",
             "Mixly.FooterLayer"
         ],
         "provide": [
@@ -401,6 +411,7 @@
             "Mixly.Editor",
             "Mixly.Env",
             "Mixly.Debug",
+            "Mixly.HTMLTemplate",
             "Mixly.FooterLayer"
         ],
         "provide": [
@@ -415,6 +426,7 @@
             "Mixly.XML",
             "Mixly.Msg",
             "Mixly.Env",
+            "Mixly.HTMLTemplate",
             "Mixly.FooterLayer"
         ],
         "provide": [

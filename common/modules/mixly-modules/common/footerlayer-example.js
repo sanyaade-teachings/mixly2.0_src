@@ -8,6 +8,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
 goog.require('Mixly.Env');
 goog.require('Mixly.Debug');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerExample');
 
@@ -18,6 +19,7 @@ const {
     Editor,
     Env,
     Debug,
+    HTMLTemplate,
     FooterLayer
 } = Mixly;
 
@@ -26,7 +28,9 @@ const { dropdown, tree } = layui;
 class FooterLayerExample extends FooterLayer {
     static {
         // 弹层模板
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-example.html'));
+        this.menuHTMLTemplate = new HTMLTemplate(
+            goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-example.html'))
+        );
     }
 
     constructor(domId) {
@@ -36,7 +40,7 @@ class FooterLayerExample extends FooterLayer {
             }
         });
         this.$content.addClass('footer-layer-example');
-        this.updateContent(FooterLayerExample.MENU_TEMPLATE);
+        this.updateContent(FooterLayerExample.menuHTMLTemplate.render());
         this.$treeBody = this.$body.children('.example-tree-body');
         this.DEPTH = 5;
         this.containerId = domId;

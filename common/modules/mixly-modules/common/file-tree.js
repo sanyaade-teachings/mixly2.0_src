@@ -57,11 +57,13 @@ class FileTree {
                     return true;
                 },
                 data: (node, cb) => {
-                    let folderPath = '';
-                    if(node.id === '#') {
-                        folderPath = this.folderPath;
-                    } else {
-                        let $li = this.$fileTree.jstree(true).get_node(node, true);
+                    if (!this.folderPath) {
+                        cb([]);
+                        return;
+                    }
+                    let folderPath = this.folderPath;
+                    if(node.id !== '#') {
+                        let $li = this.jstree.get_node(node, true);
                         let $i = $li.find('.jstree-anchor > .jstree-icon');
                         $i.addClass('layui-anim layui-anim-fadein layui-anim-fadeout layui-anim-loop');
                         folderPath = node.id;

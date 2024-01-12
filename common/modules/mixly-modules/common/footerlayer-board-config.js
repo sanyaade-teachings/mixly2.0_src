@@ -6,6 +6,7 @@ goog.require('layui');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerBoardConfig');
 
@@ -14,6 +15,7 @@ const {
     Env,
     XML,
     Msg,
+    HTMLTemplate
 } = Mixly;
 
 const { dropdown } = layui;
@@ -21,7 +23,9 @@ const { dropdown } = layui;
 class FooterLayerBoardConfig extends FooterLayer {
     static {
         // 弹层模板
-        this.MENU_TEMPLATE = goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-board-config.html'));
+        this.menuHTMLTemplate = new HTMLTemplate(
+            goog.get(path.join(Env.templatePath, 'footerlayer/footerlayer-board-config.html'))
+        );
     }
 
     /**
@@ -192,7 +196,7 @@ class FooterLayerBoardConfig extends FooterLayer {
     }
 
     renderTemplate(options) {
-        const xmlStr = XML.render(FooterLayerBoardConfig.MENU_TEMPLATE, { options });
+        const xmlStr = FooterLayerBoardConfig.menuHTMLTemplate.render({ options });
         this.updateContent(xmlStr);
     }
 

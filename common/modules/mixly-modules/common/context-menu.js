@@ -39,6 +39,10 @@ class ContextMenu {
         return outputs[0] ?? {};
     }
 
+    setMenu(menuItems) {
+        
+    }
+
     dispose() {
         $.contextMenu('destroy', this.selector);
         this.events.reset();

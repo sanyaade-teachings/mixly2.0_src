@@ -1,31 +1,31 @@
 """
-Yuankong Zi Onboard resources
+Yuankong Onboard resources
 
-Micropython    library for the Yuankong Zi Onboard resources
+Micropython library for the Yuankong Onboard resources
 =======================================================
 
-#Preliminary composition                   20231020
-#S3定时器ID(-1,0,1,2,3(led))
+#Preliminary composition                   20240110
+#S3定时器ID(-1,0,1,2,3)
 
-dahanzimin From the Mixly Team
+@dahanzimin From the Mixly Team
 """
-
 from machine import *
-import time, gc, st7735, math
+import time, gc, st7789_bf, math
 
 '''RTC'''
 rtc_clock = RTC()
 
 '''I2C-onboard'''
 #onboard_i2c = I2C(0)
-onboard_i2c = SoftI2C(scl=Pin(36), sda=Pin(37), freq=400000)
-onboard_i2c_soft = SoftI2C(scl=Pin(13), sda=Pin(15), freq=400000)
+onboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(48), freq=400000)
+onboard_i2c_1 = SoftI2C(scl=Pin(47), sda=Pin(21), freq=400000)
 
 '''SPI-onboard'''
 onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
+#onboard_spi = SoftSPI(baudrate=5000000, sck=Pin(17), mosi=Pin(16), miso=Pin(15), polarity=0, phase=0)
 
-'''TFT/128*160'''
-onboard_tft = st7735.ST7735(onboard_spi, 160, 128, dc_pin=18, cs_pin=45, bl_pin=14, font_address=0x700000)
+'''TFT/320*240'''
+onboard_tft = st7789_bf.ST7789(onboard_spi, 320, 240, dc_pin=18, cs_pin=45, bl_pin=46, font_address=0xE00000)
 
 '''ACC-Sensor'''
 try :
@@ -43,23 +43,23 @@ except Exception as e:
 
 try :
 	import ltr553als
-	onboard_als_r = ltr553als.LTR_553ALS(onboard_i2c_soft)     
+	onboard_als_r = ltr553als.LTR_553ALS(onboard_i2c_1)     
 except Exception as e:
 	print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
 
 '''BPS-Sensor'''
 try :
-	import hp203x
-	onboard_bps = hp203x.HP203X(onboard_i2c_soft)     
+	import spl06_001
+	onboard_bps = spl06_001.SPL06(onboard_i2c)     
 except Exception as e:
-	print("Warning: Failed to communicate with HP203X (BPS) or",e)
+	print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
 
 '''THS-Sensor'''
 try :
-	import ahtx0
-	onboard_ths = ahtx0.AHTx0(onboard_i2c)     
+	import shtc3
+	onboard_ths = shtc3.SHTC3(onboard_i2c)     
 except Exception as e:
-	print("Warning: Failed to communicate with AHTx0 (THS) or",e)
+	print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
 
 '''RFID-Sensor'''
 try :
@@ -77,7 +77,7 @@ except Exception as e:
 
 '''2RGB_WS2812'''    
 from ws2812 import NeoPixel
-onboard_rgb = NeoPixel(Pin(38), 4)
+onboard_rgb = NeoPixel(Pin(0), 6, multiplex=True, leds=2)
 
 '''5KEY_Sensor'''
 class KEYSensor:
@@ -127,11 +127,11 @@ class Button(KEYSensor):
 		return not self.key.value()
 
 B1key = Button(0)
-B2key = KEYSensor(17,0)
-A1key = KEYSensor(17,2900)
-A2key = KEYSensor(17,2300)
-A3key = KEYSensor(17,1650)
-A4key = KEYSensor(17,850)
+B2key = KEYSensor(13,0)
+A1key = KEYSensor(13,2900)
+A2key = KEYSensor(13,2300)
+A3key = KEYSensor(13,1650)
+A4key = KEYSensor(13,850)
 
 '''2-TouchPad'''
 class Touch_Pad:
@@ -162,62 +162,45 @@ def touched(pin,value=60000):
 def touch_slide(pina, pinb):
 	return ((Touch_Pad(pina).touch() - Touch_Pad(pina).raw) - (Touch_Pad(pinb).touch() - Touch_Pad(pinb).raw)) // 10
 
-'''2LED-Tristate'''
+'''2LED-WS2812'''
 class LED:
-	def __init__(self, pin, timer_id=3):
-		self._pin = pin
-		self._pwm = -1 
-		self.flag = True
-		self._index_pwm = [0,0]
-		Timer(timer_id, freq = 6000, mode = Timer.PERIODIC, callback = self.tim_callback)
+	def __init__(self, rgb):
+		self._rgb = rgb
+		self._color = ((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (0, 1, 1), (1, 0, 1), (1, 1, 1))
 
-	def _cutonoff(self,val):
-		if val == 0:
-			Pin(self._pin, Pin.IN)
-		elif val == 1:
-			Pin(self._pin, Pin.OUT).value(1)
-		elif val == -1:
-			Pin(self._pin, Pin.OUT).value(0)
-		
-	def tim_callback(self,tim):
-		self._pwm +=1
-		if self._pwm > 100:
-			self._pwm = 0
-		if self.flag:
-			if self._pwm < self._index_pwm[0]: 
-				self._cutonoff(1)
+	def setbrightness(self, index, value, color):
+		self._rgb.led_set(index - 1, (value if self._color[color][0] else 0,
+												value if self._color[color][1] else 0,
+												value if self._color[color][2] else 0))
+		self._rgb.write()
+
+	def getbrightness(self, index):
+		color = self._rgb.led_get(index - 1)
+		for c in self._color:
+			if (bool(c[0]) == bool(color[0])) & (bool(c[1]) == bool(color[1])) & (bool(c[2]) == bool(color[2])):
+				return color[0] | color[1] | color[2], self._color.index(c)
+
+	def setonoff(self, index, value, color):
+		if value == -1:
+			if self.getbrightness(index)[0] < 50:
+				self.setbrightness(index, 100, color)
 			else:
-				self._cutonoff(0)
-		else:
-			if self._pwm < self._index_pwm[1]: 
-				self._cutonoff(-1)
-			else:
-				self._cutonoff(0)		
-		self.flag = not self.flag
+				self.setbrightness(index, 0, color)
+		elif value == 1:
+			self.setbrightness(index, 100, color)
+		elif value == 0:
+			self.setbrightness(index, 0, color)
 
-	def setbrightness(self,index,val):
-		if not 0 <= val <= 100:
-			raise ValueError("Brightness must be in the range: 0~100%")
-		self._index_pwm[index-1] = val
-		
-	def getbrightness(self,index):
-		return self._index_pwm[index-1]
+	def getonoff(self, index):
+		return True if self.getbrightness(index)[0] > 0 else False
 
-	def setonoff(self,index,val):
-		if(val == -1):
-			if self._index_pwm[index-1] < 50:
-				self._index_pwm[index-1] = 100
-			else:
-				self._index_pwm[index-1] = 0
-		elif(val == 1):
-			self._index_pwm[index-1] = 100 
-		elif(val == 0):
-			self._index_pwm[index-1] = 0 
+	def setcolor(self, index, r, g, b, color):
+		self._rgb.led_set(index - 1, (r if self._color[color][0] else 0,
+										g if self._color[color][1] else 0,
+										b if self._color[color][2] else 0))
+		self._rgb.write()
 
-	def getonoff(self,index):
-		return True if self._index_pwm[index-1] > 0 else False
-
-onboard_led=LED(42, timer_id=3)
+onboard_led=LED(onboard_rgb)
 
 class Clock:
     def __init__(self, x, y, radius, color, oled=onboard_tft):  #定义时钟中心点和半径

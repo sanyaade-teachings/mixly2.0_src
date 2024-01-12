@@ -102,6 +102,17 @@ Blockly.Python.forBlock['actuator_led_brightness'] = function() {
     return code;
 };
 
+Blockly.Python.forBlock['actuator_yuankong_led_color'] = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
+    Blockly.Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+    var r = Blockly.Python.valueToCode(this, 'RVALUE', Blockly.Python.ORDER_ATOMIC);
+    var g = Blockly.Python.valueToCode(this, 'GVALUE', Blockly.Python.ORDER_ATOMIC);
+    var b = Blockly.Python.valueToCode(this, 'BVALUE', Blockly.Python.ORDER_ATOMIC);
+    var code = "onboard_led.setcolor(" + op + "," + r + "," + g + "," + b + ")\n";
+    return code;
+};
+
 Blockly.Python.forBlock['cc_number'] = function () {
     var code = this.getFieldValue('op');
     return [code, Blockly.Python.ORDER_ATOMIC];

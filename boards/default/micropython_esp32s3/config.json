@@ -1,6 +1,7 @@
 {
     "board": {
-        "MixGo Zi": "micropython:esp32s3:yuankong_zi"
+        "元控青春": "micropython:esp32s3:yuankong_zi",
+        "元控": "micropython:esp32s3:yuankong"
     },
     "language": "MicroPython",
     "burn": {

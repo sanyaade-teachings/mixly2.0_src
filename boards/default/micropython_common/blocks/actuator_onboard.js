@@ -96,6 +96,32 @@ Blockly.Blocks.actuator_led_brightness = {
   }
 };
 
+Blockly.Blocks.actuator_yuankong_led_color = {
+    init: function () {
+        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SETTING);
+        this.appendValueInput('led')
+            .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
+        this.appendValueInput("RVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_R);
+        this.appendValueInput("GVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_G);
+        this.appendValueInput("BVALUE")
+            .setCheck(Number)
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.MIXLY_RGB_B);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip();
+    }
+};
+
 Blockly.Blocks.mixgo_actuator_led_bright = {
   init: function() {
     this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);

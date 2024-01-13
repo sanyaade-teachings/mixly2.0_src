@@ -1,0 +1,64 @@
+goog.loadJs('common', () => {
+
+goog.require('Mixly.Debug');
+goog.require('Mixly.IdGenerator');
+goog.provide('Mixly.Menu');
+
+const {
+    Debug,
+    IdGenerator
+} = Mixly;
+
+class Menu {
+    #menuItems_ = [];
+    #ids_ = {};
+    constructor(sort) {
+        this.#ids_ = {};
+        this.#menuItems_ = [];
+    }
+
+    add(item) {
+        if (!item.id) {
+            item.id = IdGenerator.generate();
+        }
+        if (!item.weight) {
+            item.weight = 0;
+        }
+        const { id, weight } = item;
+        if (this.#ids_[id]) {
+            this.unregister(id);
+        }
+        let i = 0;
+        for (; i < this.#menuItems_.length; i++) {
+            if (this.#menuItems_[i].weight <= weight) {
+                continue;
+            }
+            break;
+        }
+        this.#menuItems_.splice(i, 0, item);
+        this.#ids_[id] = true;
+        return id;
+    }
+
+    remove(id) {
+        if (!this.#ids_[id]) {
+            return;
+        }
+        delete this.#ids_[id];
+        for (let i in this.#menuItems_) {
+            if (this.#menuItems_[i].id !== id) {
+                continue;
+            }
+            this.#menuItems_.splice(i, 1);
+            break;
+        }
+    }
+
+    getAllItems() {
+        return this.#menuItems_;
+    }
+}
+
+Mixly.Menu = Menu;
+
+});

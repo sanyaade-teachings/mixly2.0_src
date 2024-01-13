@@ -9,6 +9,7 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.IdGenerator');
+goog.require('Mixly.Menu');
 goog.require('Mixly.EditorMonaco');
 goog.provide('Mixly.EditorCode');
 
@@ -20,6 +21,7 @@ const {
     ContextMenu,
     HTMLTemplate,
     IdGenerator,
+    Menu,
     EditorMonaco
 } = Mixly;
 const { USER, BOARD } = Config;
@@ -42,34 +44,6 @@ class EditorCode extends EditorMonaco {
         this.id = editorHTMLTemplate.id;
         this.setContent($content);
         $parentContainer.append(this.getContent());
-        this.defaultContextMenu = {
-            cut: {
-                isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['剪切'], 'Ctrl+X'),
-                callback: (key, opt) => this.cut()
-            },
-            copy: {
-                isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['复制'], 'Ctrl+C'),
-                callback: (key, opt) => this.copy()
-            },
-            paste: {
-                isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['粘贴'], 'Ctrl+V'),
-                callback: (key, opt) => this.paste()
-            },
-            sep1: '---------',
-            togglecomment: {
-                isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['切换行注释'], 'Ctrl+/'),
-                callback: (key, opt) => this.commentLine()
-            },
-            toggleBlockComment: {
-                isHtmlName: true,
-                name: ContextMenu.getItem(Msg.Lang['切换块注释'], 'Shift+Alt+A'),
-                callback: (key, opt) => this.blockComment()
-            }
-        };
         this.tabSize = null;
         this.language = null;
     }
@@ -80,16 +54,75 @@ class EditorCode extends EditorMonaco {
         this.tabSize = this.getDefaultTabSize();
         this.setLanguage(this.language);
         this.setTabSize(this.tabSize);
-        this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`);
-        const { events } = this.contextMenu;
-        events.bind('getMenu', () => {
-            return this.defaultContextMenu;
-        });
+        this.#addContextMenu_();
         this.setTheme(USER.theme);
     }
 
-    setContextMenu(menu) {
-        this.defaultContextMenu = menu;
+    #addContextMenu_() {
+        this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`, {
+            events: {
+                activated: () => {
+                    this.focus();
+                }
+            }
+        });
+        let menu = new Menu();
+        menu.add({
+            weight: 0,
+            type: 'cut',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['剪切'], 'Ctrl+X'),
+                callback: (key, opt) => this.cut()
+            }
+        });
+        menu.add({
+            weight: 1,
+            type: 'copy',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['复制'], 'Ctrl+C'),
+                callback: (key, opt) => this.copy()
+            }
+        });
+        menu.add({
+            weight: 2,
+            type: 'paste',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['粘贴'], 'Ctrl+V'),
+                callback: (key, opt) => this.paste()
+            }
+        });
+        menu.add({
+            weight: 3,
+            type: 'sep1',
+            data: '---------'
+        });
+        menu.add({
+            weight: 3,
+            type: 'togglecomment',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['切换行注释'], 'Ctrl+/'),
+                callback: (key, opt) => this.commentLine()
+            }
+        });
+        menu.add({
+            weight: 3,
+            type: 'toggleBlockComment',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['切换块注释'], 'Shift+Alt+A'),
+                callback: (key, opt) => this.blockComment()
+            }
+        });
+        this.contextMenu.register('code', menu);
+        this.contextMenu.bind('getMenu', () => 'code');
+    }
+
+    getContextMenu() {
+        return this.contextMenu;
     }
 
     setValue(data, ext) {

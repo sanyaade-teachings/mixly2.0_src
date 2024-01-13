@@ -56,7 +56,7 @@ class Registry {
         return [...this.#registry_.keys()];
     }
 
-    getAllItem() {
+    getAllItems() {
         return this.#registry_;
     }
 }

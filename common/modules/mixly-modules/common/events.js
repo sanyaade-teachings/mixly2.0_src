@@ -46,7 +46,7 @@ class Events {
     }
 
     unbind(id) {
-        for (let [_, value] of this.events.getAllItem()) {
+        for (let [_, value] of this.events.getAllItems()) {
             let typeEvent = value;
             if (!typeEvent.getItem(id)) {
                 continue;
@@ -74,7 +74,7 @@ class Events {
             return outputs;
         }
         args.shift();
-        for (let [_, func] of eventsFunc.getAllItem()) {
+        for (let [_, func] of eventsFunc.getAllItems()) {
             outputs.push(func(...args));
         }
         return outputs;

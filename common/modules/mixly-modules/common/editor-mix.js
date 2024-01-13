@@ -12,6 +12,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
+goog.require('Mixly.Menu');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
@@ -31,6 +32,7 @@ const {
     Env,
     ContextMenu,
     Debug,
+    Menu,
     HTMLTemplate,
     LayerExt
 } = Mixly;
@@ -79,22 +81,6 @@ class EditorMix extends EditorBase {
         this.$btns = this.$btnsContent.find('button');
         this.blockEditor = new EditorBlockly(this.$blocklyContainer[0]);
         this.codeEditor = new EditorCode(this.$codeContainer[0]);
-        this.blocklyContextMenu = {
-            code: {
-                isHtmlName: false,
-                name: Msg.Lang['打开代码编辑器'],
-                callback: (key, opt) => this.drag.full(Drag.Extend.NEGATIVE)
-            }
-        };
-        this.codeContextMenu = {
-            ...this.codeEditor.defaultContextMenu,
-            sep2: '---------',
-            block: {
-                isHtmlName: false,
-                name: Msg.Lang['退出代码编辑器'],
-                callback: (key, opt) => this.drag.exitfull(Drag.Extend.NEGATIVE)
-            }
-        };
         $parentContainer.append(this.getContent());
     }
 
@@ -106,12 +92,39 @@ class EditorMix extends EditorBase {
         this.codeEditor.init();
         this.codeEditor.setReadOnly(true);
         this.py2BlockEditorInit();
-        const { events } = this.codeEditor.contextMenu;
-        events.off('getMenu').bind('getMenu', () => {
+        const contextMenu = this.codeEditor.getContextMenu();
+        let codeMenu = contextMenu.getItem('code');
+        codeMenu.add({
+            weight: 4,
+            type: 'sep2',
+            data: '---------'
+        });
+        codeMenu.add({
+            weight: 5,
+            type: 'block',
+            data: {
+                isHtmlName: false,
+                name: Msg.Lang['退出代码编辑器'],
+                callback: (key, opt) => this.drag.exitfull(Drag.Extend.NEGATIVE)
+            }
+        });
+        let blockMenu = new Menu();
+        blockMenu.add({
+            weight: 0,
+            type: 'code',
+            data: {
+                isHtmlName: false,
+                name: Msg.Lang['打开代码编辑器'],
+                callback: (key, opt) => this.drag.full(Drag.Extend.NEGATIVE)
+            }
+        });
+        contextMenu.register('block', blockMenu);
+        contextMenu.offEvent('getMenu');
+        contextMenu.bind('getMenu', () => {
             if (this.drag.shown !== Drag.Extend.NEGATIVE) {
-                return this.blocklyContextMenu;
+                return 'block';
             } else {
-                return this.codeContextMenu;
+                return 'code';
             }
         });
     }
@@ -275,8 +288,6 @@ class EditorMix extends EditorBase {
         this.blockEditor = null;
         this.codeEditor = null;
         this.drag = null;
-        this.blocklyContextMenu = null;
-        this.codeContextMenu = null;
     }
 
     onMounted() {

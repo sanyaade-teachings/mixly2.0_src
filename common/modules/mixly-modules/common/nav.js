@@ -148,7 +148,7 @@ Nav.init = function() {
         weight: 2
     });
 
-    Nav.register({
+    /*Nav.register({
         id: ['file', 'hr'],
         scopeType: this.Scope.RIGHT,
         weight: 3
@@ -164,7 +164,7 @@ Nav.init = function() {
         callback: (elem) => console.log(elem),
         scopeType: this.Scope.RIGHT,
         weight: 4
-    });
+    });*/
 
     Nav.register({
         id: 'setting',

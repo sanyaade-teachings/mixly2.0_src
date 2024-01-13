@@ -8,6 +8,7 @@ goog.require('Mixly.Env');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
+goog.require('Mixly.Menu');
 goog.require('Mixly.PageBase');
 goog.require('Mixly.Electron.FileTree');
 goog.require('Mixly.Web.FileTree');
@@ -22,6 +23,7 @@ const {
     HTMLTemplate,
     ContextMenu,
     Debug,
+    Menu,
     PageBase,
     Electron = {},
     Web = {}
@@ -67,195 +69,231 @@ class SideBarLocalStorage extends PageBase {
         this.fileTree = new FileTree(this.$children[0], this.mprogress);
         this.folderOpened = false;
         this.contextMenu = null;
-        this.triggerId = null;
         this.folderPath = null;
-        this.rootFolderContextMenu = {
-            new_folder: {
+        this.#addEventsListener_();
+    }
+
+    init() {
+        super.init();
+        this.#addContextMenu_();
+        const $closeBtn = this.getTab().find('.chrome-tab-close');
+        $closeBtn.css('display', 'none');
+    }
+
+    #addContextMenu_() {
+        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .jstree-node, div[m-id="${this.id}"] > button`, {
+            events: {
+                hide: ({ $trigger }) => {
+                    let type = $trigger.attr('type');
+                    if (type === 'root') {
+                        $trigger.removeClass('active');
+                    } else {
+                        $trigger.children('.jstree-wholerow').css('border', 'unset');
+                    }
+                },
+                activated: ({ $trigger }) => {
+                    let type = $trigger.attr('type');
+                    if (type === 'root') {
+                        $trigger.addClass('active');
+                    } else {
+                        $trigger.children('.jstree-wholerow').css('border', '1px solid');
+                    }
+                }
+            }
+        });
+
+        this.#addFileContextMenuItems_();
+        
+        this.contextMenu.bind('getMenu', () => 'menu');
+    }
+
+    #addFileContextMenuItems_() {
+        let menu = new Menu();
+        menu.add({
+            weight: 0,
+            type: 'new_folder',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['root', 'folder'].includes(type);
+            },
+            data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem('新建文件夹', ''),
-                callback: () => {
-                    this.openFolder();
-                    this.fileTree.createRootChildNode();
+                callback: (_, { $trigger }) => {
+                    let type = $trigger.attr('type');
+                    if (type === 'root') {
+                        this.openFolder();
+                        this.fileTree.createRootChildNode();
+                    } else {
+                        let id = $trigger.attr('id');
+                        this.fileTree.createFolderNode(id);
+                    }
                 }
+            }
+        });
+        menu.add({
+            weight: 1,
+            type: 'new_file',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['root', 'folder'].includes(type);
             },
-            new_file: {
+            data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem('新建文件', ''),
-                callback: () => {
-                    this.openFolder();
-                    this.fileTree.createRootChildFileNode();
+                callback: (_, { $trigger }) => {
+                    let type = $trigger.attr('type');
+                    if (type === 'root') {
+                        this.openFolder();
+                        this.fileTree.createRootChildFileNode();
+                    } else {
+                        let id = $trigger.attr('id');
+                        this.fileTree.createFileNode(id);
+                    }
                 }
+            }
+        });
+        menu.add({
+            weight: 2,
+            type: 'sep1',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['file', 'folder'].includes(type);
             },
-            sep1: '---------',
-            copy_path: {
+            data: '---------'
+        });
+        menu.add({
+            weight: 3,
+            type: 'cut',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['file', 'folder'].includes(type);
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('剪切', ''),
+                callback: (_, { $trigger }) => {
+                    let id = $trigger.attr('id');
+                    this.fileTree.cutNode(id);
+                }
+            }
+        });
+        menu.add({
+            weight: 4,
+            type: 'copy',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['file', 'folder'].includes(type);
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('复制', ''),
+                callback: (_, { $trigger }) => {
+                    let id = $trigger.attr('id');
+                    this.fileTree.copyNode(id);
+                }
+            }
+        });
+        menu.add({
+            weight: 5,
+            type: 'paste',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['folder'].includes(type);
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('粘贴', ''),
+                callback: (_, { $trigger }) => {
+                    let id = $trigger.attr('id');
+                    this.fileTree.pasteNode(id);
+                }
+            }
+        });
+        menu.add({
+            weight: 6,
+            type: 'sep2',
+            data: '---------'
+        });
+        menu.add({
+            weight: 7,
+            type: 'copy_path',
+            data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem('复制路径', ''),
-                callback: () => {
-                    navigator.clipboard.writeText(this.folderPath)
+                callback: (_, { $trigger }) => {
+                    let outPath = null;
+                    let type = $trigger.attr('type');
+                    if (type === 'root') {
+                        outPath = this.folderPath;
+                    } else {
+                        outPath = $trigger.attr('id');
+                    }
+                    navigator.clipboard.writeText(outPath)
                     .catch((error) => {
                         Debug.log(error);
                     });
                 }
+            }
+        });
+        menu.add({
+            weight: 8,
+            type: 'rename',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['file', 'folder'].includes(type);
             },
-            sep2: '---------',
-            open_new_folder: {
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('重命名', ''),
+                callback: (_, { $trigger }) => {
+                    let type = $trigger.attr('type');
+                    let id = $trigger.attr('id');
+                    if (type === 'folder') {
+                        this.fileTree.renameFolderNode(id);
+                    } else {
+                        this.fileTree.renameFileNode(id);
+                    }
+                }
+            }
+        });
+        menu.add({
+            weight: 9,
+            type: 'del',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['file', 'folder'].includes(type);
+            },
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem('删除', ''),
+                callback: (_, { $trigger }) => {
+                    let type = $trigger.attr('type');
+                    let id = $trigger.attr('id');
+                    if (type === 'folder') {
+                        this.fileTree.deleteFolderNode(id);
+                    } else {
+                        this.fileTree.deleteFileNode(id);
+                    }
+                }
+            }
+        });
+        menu.add({
+            weight: 10,
+            type: 'open_new_folder',
+            preconditionFn: ($trigger) => {
+                let type = $trigger.attr('type');
+                return ['root'].includes(type);
+            },
+            data: {
                 isHtmlName: true,
                 name: ContextMenu.getItem('打开新文件夹', ''),
                 callback: () => {
                     this.showDirectoryPicker();
                 }
             }
-        };
-        this.folderContextMenu = {
-            new_folder: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('新建文件夹', ''),
-                callback: () => {
-                    this.fileTree.createFolderNode(this.triggerId);
-                }
-            },
-            new_file: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('新建文件', ''),
-                callback: () => {
-                    this.fileTree.createFileNode(this.triggerId);
-                }
-            },
-            sep1: '---------',
-            cut: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('剪切', ''),
-                callback: (key, opt) => {
-                    this.fileTree.cutNode(this.triggerId);
-                }
-            },
-            copy: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('复制', ''),
-                callback: (key, opt) => {
-                    this.fileTree.copyNode(this.triggerId);
-                }
-            },
-            paste: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('粘贴', ''),
-                callback: (key, opt) => {
-                    this.fileTree.pasteNode(this.triggerId);
-                }
-            },
-            sep2: '---------',
-            copy_path: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('复制路径', ''),
-                callback: () => {
-                    navigator.clipboard.writeText(this.triggerId)
-                    .catch((error) => {
-                        Debug.log(error);
-                    });
-                }
-            },
-            rename: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('重命名', ''),
-                callback: () => {
-                    this.fileTree.renameFolderNode(this.triggerId);
-                }
-            },
-            del: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('删除', ''),
-                callback: () => {
-                    this.fileTree.deleteFolderNode(this.triggerId);
-                }
-            }
-        };
-        this.fileContextMenu = {
-            cut: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('剪切', ''),
-                callback: () => {
-                    this.fileTree.cutNode(this.triggerId);
-                }
-            },
-            copy: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('复制', ''),
-                callback: () => {
-                    this.fileTree.copyNode(this.triggerId);
-                }
-            },
-            sep2: '---------',
-            copy_path: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('复制路径', ''),
-                callback: () => {
-                    navigator.clipboard.writeText(this.triggerId)
-                    .catch((error) => {
-                        Debug.log(error);
-                    });
-                }
-            },
-            rename: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('重命名', ''),
-                callback: () => {
-                    this.fileTree.renameFileNode(this.triggerId);
-                }
-            },
-            del: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('删除', ''),
-                callback: () => {
-                    this.fileTree.deleteFileNode(this.triggerId);
-                }
-            }
-        };
-        this.#addContextMenu_();
-        this.#addEventsListener_();
-    }
-
-    init() {
-        super.init();
-        const $closeBtn = this.getTab().find('.chrome-tab-close');
-        $closeBtn.css('display', 'none');
-    }
-
-    #addContextMenu_() {
-        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .jstree-node`, {
-            events: {
-                hide: (options) => {
-                    const { $trigger } = options;
-                    $trigger.children('.jstree-wholerow').css('border', 'unset');
-                    this.triggerId = null;
-                },
-                activated: (options) => {
-                    const { $trigger } = options;
-                    $trigger.children('.jstree-wholerow').css('border', '1px solid');
-                    this.triggerId = $trigger.attr('id') || '#';
-                }
-            }
         });
-        this.contextMenu.bind('getMenu', ($trigger) => {
-            if ($trigger.attr('type') === 'file') {
-                return this.fileContextMenu;
-            }
-            return this.folderContextMenu;
-        });
-        this.rootContextMenu = new ContextMenu(`div[m-id="${this.id}"] > button`, {
-            events: {
-                hide: (options) => {
-                    const { $trigger } = options;
-                    $trigger.removeClass('active');
-                },
-                activated: (options) => {
-                    const { $trigger } = options;
-                    $trigger.addClass('active');
-                }
-            }
-        });
-        this.rootContextMenu.bind('getMenu', ($trigger) => {
-            return this.rootFolderContextMenu;
-        });
+        this.contextMenu.register('menu', menu);
     }
 
     #addEventsListener_() {

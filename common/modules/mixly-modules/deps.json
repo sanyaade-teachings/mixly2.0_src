@@ -60,21 +60,13 @@
         ]
     },
     {
-        "path": "/common/context-menu-items.js",
-        "require": [
-            "Mixly.Registry"
-        ],
-        "provide": [
-            "Mixly.ContextMenuItems"
-        ]
-    },
-    {
         "path": "/common/context-menu.js",
         "require": [
             "$.contextMenu",
             "Mixly.XML",
             "Mixly.Env",
-            "Mixly.Events"
+            "Mixly.Events",
+            "Mixly.Registry"
         ],
         "provide": [
             "Mixly.ContextMenu"
@@ -192,6 +184,7 @@
             "Mixly.ContextMenu",
             "Mixly.HTMLTemplate",
             "Mixly.IdGenerator",
+            "Mixly.Menu",
             "Mixly.EditorMonaco"
         ],
         "provide": [
@@ -230,6 +223,7 @@
             "Mixly.LayerExt",
             "Mixly.ContextMenu",
             "Mixly.Debug",
+            "Mixly.Menu",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",
@@ -555,6 +549,16 @@
         ]
     },
     {
+        "path": "/common/menu.js",
+        "require": [
+            "Mixly.Debug",
+            "Mixly.IdGenerator"
+        ],
+        "provide": [
+            "Mixly.Menu"
+        ]
+    },
+    {
         "path": "/common/mfile.js",
         "require": [
             "layui",
@@ -768,6 +772,7 @@
             "Mixly.HTMLTemplate",
             "Mixly.ContextMenu",
             "Mixly.Debug",
+            "Mixly.Menu",
             "Mixly.PageBase",
             "Mixly.Electron.FileTree",
             "Mixly.Web.FileTree",

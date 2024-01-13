@@ -84,20 +84,10 @@ class SideBarLocalStorage extends PageBase {
         this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .jstree-node, div[m-id="${this.id}"] > button`, {
             events: {
                 hide: ({ $trigger }) => {
-                    let type = $trigger.attr('type');
-                    if (type === 'root') {
-                        $trigger.removeClass('active');
-                    } else {
-                        $trigger.children('.jstree-wholerow').css('border', 'unset');
-                    }
+                    $trigger.removeClass('active');
                 },
                 activated: ({ $trigger }) => {
-                    let type = $trigger.attr('type');
-                    if (type === 'root') {
-                        $trigger.addClass('active');
-                    } else {
-                        $trigger.children('.jstree-wholerow').css('border', '1px solid');
-                    }
+                    $trigger.addClass('active');
                 }
             }
         });
@@ -158,7 +148,7 @@ class SideBarLocalStorage extends PageBase {
             type: 'sep1',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
-                return ['file', 'folder'].includes(type);
+                return ['folder'].includes(type);
             },
             data: '---------'
         });

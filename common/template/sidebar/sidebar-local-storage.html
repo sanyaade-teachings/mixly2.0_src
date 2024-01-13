@@ -96,13 +96,18 @@
         margin-left: 8px;
     }
 
+    div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
+        border: 1px solid;
+        border-color: transparent;
+    }
+
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .folder-title.active,
-    html[data-bs-theme=light] div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] .jstree-node.active > .jstree-wholerow {
         border-color: #009688 !important;
     }
 
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title.active,
-    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .jstree-node > .jstree-wholerow {
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .jstree-node.active > .jstree-wholerow {
         border-color: #007acc !important;
     }
 </style>

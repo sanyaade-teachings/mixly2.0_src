@@ -204,14 +204,16 @@
       -ms-user-select: none;
           user-select: none; 
   background-color: #fff;
-  margin: 2px 5px;
+  margin: 0px 5px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .context-menu-separator {
   padding: 0; 
   margin: .35em 0;
   border-bottom: 1px solid #e6e6e6;
+  cursor: default;
 }
 
 .context-menu-item > label > input,

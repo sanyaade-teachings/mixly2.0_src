@@ -57,7 +57,15 @@
         left: 0px;
         right: 0px;
         bottom: 0px;
-        border: 1px solid;
+        border-style: solid;
+    }
+
+    div[m-id="{{d.mId}}"] .sidebar-container > .left-sidebar {
+        border-width: 0px 1px 0px 0px;
+    }
+
+    div[m-id="{{d.mId}}"] .sidebar-container > .right-sidebar {
+        border-width: 0px 0px 0px 1px;
     }
 
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] .sidebar-container > .sidebar {
@@ -66,7 +74,7 @@
     }
 
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .sidebar-container > .sidebar {
-        border-color: var(--lay-color-border-1);
+        border-color: rgba(128, 128, 128, 0.35);
         background-color: #252526;
     }
 

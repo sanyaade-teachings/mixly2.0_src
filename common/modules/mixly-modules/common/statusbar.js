@@ -39,7 +39,7 @@ class StatusBar extends EditorAce {
 
     toStatusBar() {
         if (USER.theme === "dark") {
-            this.editor.setOption("theme", "ace/theme/terminal");
+            this.editor.setOption("theme", "ace/theme/tomorrow_night");
         } else {
             this.editor.setOption("theme", "ace/theme/xcode");
         }

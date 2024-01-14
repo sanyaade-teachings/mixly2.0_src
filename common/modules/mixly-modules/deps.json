@@ -202,6 +202,8 @@
             "Mixly.DragV",
             "Mixly.IdGenerator",
             "Mixly.HTMLTemplate",
+            "Mixly.EditorBase",
+            "Mixly.EditorMonaco",
             "Mixly.EditorCode"
         ],
         "provide": [

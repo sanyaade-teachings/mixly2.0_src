@@ -53,6 +53,7 @@ class StatusBar extends EditorAce {
             enableSnippets: false,
             enableLiveAutocompletion: false
         });
+        this.editor.setHighlightActiveLine(false);
     }
 }
 

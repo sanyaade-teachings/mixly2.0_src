@@ -141,7 +141,7 @@ class EditorMonaco extends EditorBase {
         });
     }
 
-    setValue(data, scroll = true) {
+    setValue(data, ext) {
         if (this.destroyed || this.getValue() === data) {
             return;
         }

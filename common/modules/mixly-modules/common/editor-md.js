@@ -8,6 +8,8 @@ goog.require('Mixly.Drag');
 goog.require('Mixly.DragV');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.EditorBase');
+goog.require('Mixly.EditorMonaco');
 goog.require('Mixly.EditorCode');
 goog.provide('Mixly.EditorMd');
 
@@ -18,11 +20,13 @@ const {
     DragV,
     IdGenerator,
     HTMLTemplate,
+    EditorBase,
+    EditorMonaco,
     EditorCode
 } = Mixly;
 
 
-class EditorMd extends EditorCode {
+class EditorMd extends EditorBase {
     static {
         HTMLTemplate.add(
             'editor/editor-md.html',
@@ -37,32 +41,47 @@ class EditorMd extends EditorCode {
 
     // 私有属性
     #prevCode_ = '';
-
+    #listener_ = null;
     constructor(element) {
+        super();
         const $parentContainer = $(element);
         const $content = $(HTMLTemplate.get('editor/editor-md.html').render());
-        const $codeContainer = $content.find('.editor-code');
-        super($codeContainer);
+        this.$codeContainer = $content.find('.editor-code');
+        this.$previewContainer = $content.find('.markdown-body');
+        this.codeEditor = new EditorCode(this.$codeContainer);
         this.$btnsContent = $(HTMLTemplate.get('editor/editor-md-btns.html'));
-        this.drag = null;
-        this.codeContextMenuItems = null;
-        this.PreviewContextMenuItems = null;
-        this.setContent($content);
-        this.$codeContainer = $codeContainer;
-        this.$previewContainer = this.$content.find('.markdown-body');
         this.$btns = this.$btnsContent.find('button');
+        this.drag = null;
+        this.setContent($content);
         $parentContainer.append(this.getContent());
     }
 
     init() {
         super.init();
-        this.addDragEventsListener();
-        this.addBtnEventsListener();
-        this.addChangeListener();
+        this.codeEditor.init();
+        this.#addDragEventsListener_();
+        this.#addBtnEventsListener_();
     }
 
-    addDragEventsListener() {
-        this.drag = new DragV(this.$content.children('div')[0], {
+    onMounted() {
+        super.onMounted();
+        this.codeEditor.onMounted();
+        this.#addChangeEventListener_();
+    }
+
+    onUnmounted() {
+        super.onUnmounted();
+        this.codeEditor.onUnmounted();
+        this.#removeChangeEventListener_();
+    }
+
+    resize() {
+        super.resize();
+        this.codeEditor.resize();
+    }
+
+    #addDragEventsListener_() {
+        this.drag = new DragV(this.getContent()[0], {
             min: '200px',
             full: [true, true],
             startSize: '0%',
@@ -93,7 +112,7 @@ class EditorMd extends EditorCode {
         });
     }
 
-    addBtnEventsListener() {
+    #addBtnEventsListener_() {
         this.$btns.on('click', (event) => {
             const $btn = $(event.currentTarget);
             const mId = $btn.attr('m-id');
@@ -116,8 +135,9 @@ class EditorMd extends EditorCode {
         })
     }
 
-    addChangeListener() {
-        this.editor.on('change', () => {
+    #addChangeEventListener_() {
+        const editor = EditorMonaco.getEditor();
+        this.#listener_ = editor.onDidChangeModelContent(() => {
             if (this.drag.shown === 'NEGATIVE') {
                 return;
             }
@@ -125,16 +145,30 @@ class EditorMd extends EditorCode {
         });
     }
 
+    #removeChangeEventListener_() {
+        this.#listener_.dispose();
+    }
+
     updatePreview() {
-        const code = this.getValue();
+        const code = this.codeEditor.getValue();
         if (code === this.#prevCode_) {
             return;
         }
         this.#prevCode_ = code;
-        const $dom = $(marked.parse(this.getValue()));
+        const $dom = $(marked.parse(this.codeEditor.getValue()));
         const $as = $dom.find('a');
         $as.attr('target', '_blank');
         this.$previewContainer.html($dom);
+    }
+
+    setValue(data, ext) {
+        this.codeEditor.setValue(data, ext);
+    }
+
+    dispose() {
+        this.codeEditor.dispose();
+        this.drag.dispose();
+        super.dispose();
     }
 }
 

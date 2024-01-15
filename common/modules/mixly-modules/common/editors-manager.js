@@ -79,13 +79,18 @@ class EditorsManager extends PagesManager {
         // active Tab被改变时触发
         editorTabs.bind('activeChange', (event) => {
             const $btnsContainer = Nav.getEditorBtnsContainer();
-            $btnsContainer.children().detach();
+            $btnsContainer.children('div').detach();
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
             const $btns = editor.getBtnsContainer();
             if ($btns && $btns.length) {
+                $btnsContainer.removeClass('empty');
+                $btnsContainer.children('a').css('display', 'none');
                 $btnsContainer.append($btns);
+            } else {
+                $btnsContainer.addClass('empty');
+                $btnsContainer.children('a').css('display', 'block');
             }
         });
 
@@ -132,7 +137,9 @@ class EditorsManager extends PagesManager {
         editorTabs.bind('destroyed', (event) => {
             if (!this.pagesRegistry.length()) {
                 const $btnsContainer = Nav.getEditorBtnsContainer();
-                $btnsContainer.children().detach();
+                $btnsContainer.children('div').detach();
+                $btnsContainer.children('a').css('display', 'block');
+                $btnsContainer.addClass('empty');
             }
         });
     }

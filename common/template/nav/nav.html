@@ -168,20 +168,6 @@
         padding: 0 17px !important;
     }
 
-    ul[m-id="{{d.mId}}"] .copyright {
-        font-family: "YaHei Consolas Hybrid", "Microsoft Yahei Light", "Arial";
-        font-size: 12px;
-        color: #fff !important;
-        text-align: center;
-        display: -webkit-box;
-        flex-direction: row;
-        align-items: center;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
-
     ul[m-id="{{d.mId}}"] > div {
         display: flex;
         flex-direction: row;
@@ -300,8 +286,27 @@
         border: 1px solid rgba(204, 204, 204, 0.2);
     }
 
-    ul[m-id="{{d.mId}}"] > .editor-btn-container:empty {
-        display: none;
+    ul[m-id="{{d.mId}}"] > .editor-btn-container > .copyright {
+        font-family: "YaHei Consolas Hybrid", "Microsoft Yahei Light", "Arial";
+        font-size: 12px;
+        color: #fff !important;
+        text-align: center;
+        display: -webkit-box;
+        flex-direction: row;
+        align-items: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    ul[m-id="{{d.mId}}"] > .editor-btn-container.empty {
+        border: none;
+        background-color: transparent;
+        line-height: unset;
+        font-size: unset;
+        margin: unset;
+        padding: unset;
     }
 
     ul[m-id="{{d.mId}}"] > .editor-btn-container .group {
@@ -358,7 +363,9 @@
             </dl>
         </li>
     </div>
-    <div class="editor-btn-container"></div>
+    <div class="editor-btn-container">
+        <a class="copyright">Copyright © Mixly Team@BNU, CHINA</a>
+    </div>
     <div class="right-area">
         <div class="right-btn-container"></div>
         <div class="dropdown-container"></div>

@@ -254,6 +254,9 @@ class EditorBlockly extends EditorBase {
     dispose() {
         super.dispose();
         if (this.isActive()) {
+            Blockly.Events.disable();
+            this.editor.clear();
+            Blockly.Events.enable();
             EditorBlockly.getContent().detach();
         }
         this.undoStack = null;

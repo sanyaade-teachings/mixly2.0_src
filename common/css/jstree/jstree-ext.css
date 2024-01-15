@@ -93,25 +93,3 @@ html[data-bs-theme=light] .jstree .jstree-node > .jstree-anchor > input {
 html[data-bs-theme=dark] .jstree .jstree-node > .jstree-anchor > input {
     border-color: #007acc !important;
 }
-/*
-.jstree,
-.jstree > .jstree-container-ul {
-    width: 100%;
-    height: 100%;
-}
-
-.jstree > .jstree-container-ul > .jstree-open {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.jstree > .jstree-container-ul > .jstree-open > .jstree-children {
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: absolute;
-    top: 24px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-}*/

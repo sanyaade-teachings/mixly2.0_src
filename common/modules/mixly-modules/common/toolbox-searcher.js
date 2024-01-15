@@ -33,7 +33,7 @@ class ToolboxSearcher {
         this.$search = $(ToolboxSearcher.searchHtmlTemplate.render({
             search: Msg.Lang['查找']
         }));
-        this.$btn = this.$search.find('button');
+        this.$i = this.$search.find('i');
         this.$input = this.$search.find('input');
         this.prevText = '';
         $(this.mainToolbox.HtmlDiv).append(this.$search);
@@ -41,29 +41,22 @@ class ToolboxSearcher {
     }
 
     addEventsListener() {
-        this.$btn.click(() => {
-            this.startSearch();
-        });
-
-        this.$input.change((event) => {
-            this.startSearch();
-        });
-
+        this.$input.change(() => this.startSearch());
         this.$input.bind('input propertychange', (event) => {
             const searchCategory = this.mainToolbox.getToolboxItemById('catSearch');
             const keyText = event.target.value;
             if (!keyText.replaceAll(' ', '')) {
                 searchCategory.hide();
-                this.$btn.addClass('layui-btn-disabled');
+                this.$i.addClass('disabled');
                 return;
             } else {
                 searchCategory.show();
             }
             this.scrollTop();
             if (keyText === this.prevText) {
-                this.$btn.addClass('layui-btn-disabled');
+                this.$i.addClass('disabled');
             } else {
-                this.$btn.removeClass('layui-btn-disabled');
+                this.$i.removeClass('disabled');
             }
         });
     }
@@ -175,12 +168,11 @@ class ToolboxSearcher {
     }
 
     startSearch() {
-        if (this.$btn.hasClass('layui-btn-disabled')) {
+        if (this.$i.hasClass('disabled')) {
             return
         };
         let text = this.$input.val();
         this.prevText = text;
-        this.$btn.addClass('layui-btn-disabled');
         try {
             if (!text.replaceAll(' ', '')) {
                 return;
@@ -189,16 +181,15 @@ class ToolboxSearcher {
             Debug.error(error);
         }
         this.$input.attr('disabled', true);
-        const $i = this.$btn.children('i');
-        $i.removeClass('layui-icon-search');
-        $i.addClass('layui-icon-loading layui-anim-rotate layui-anim-loop');
+        this.$i.removeClass('codicon-search-fuzzy');
+        this.$i.addClass('codicon-loading layui-anim-rotate layui-anim-loop');
         setTimeout(() => {
             let keys = text.toLowerCase().split(' ');
             this.searchBlocks(keys)
             .catch(Debug.error)
             .finally(() => {
-                $i.removeClass('layui-icon-loading layui-anim-rotate layui-anim-loop');
-                $i.addClass('layui-icon-search');
+                this.$i.removeClass('codicon-loading layui-anim-rotate layui-anim-loop');
+                this.$i.addClass('codicon-search-fuzzy disabled');
                 this.$input.removeAttr('disabled');
             });
         }, 100);

@@ -23,7 +23,6 @@ class NeoPixel:
 		self.led_buf = bytearray(self.leds * bpp)
 		self.timing = (((350, 850, 800, 400) if timing else (800, 1700, 1600, 900))	if isinstance(timing, int) else timing)
 		if not self.multiplex: self.pin.init(self.pin.OUT,value=default)
-		
 		self.write()
 
 	def __len__(self):
@@ -53,6 +52,7 @@ class NeoPixel:
 	def write(self):
 		if self.multiplex: self.pin.init(self.pin.OUT)
 		bitstream(self.pin, 0, self.timing, self.rgb_buf + self.led_buf)
+		sleep(0.00001)
 		if self.multiplex: self.pin.init(self.pin.IN)
 
 	def color_chase(self,R, G, B, wait):

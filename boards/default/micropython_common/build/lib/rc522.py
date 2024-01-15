@@ -17,6 +17,7 @@ RC_REQIDL      = const(0x26)
 RC_REQALL      = const(0x52)
 RC_AUTHENT1A   = const(0x60)
 RC_AUTHENT1B   = const(0x61)
+RC_Version     = const(0x37)
 
 class RC522:
 	def __init__(self, drive_bus,cs_pin=None,addr=0x28):
@@ -137,13 +138,14 @@ class RC522:
 		self._wreg(0x2C, 0)
 		self._wreg(0x15, 0x40)
 		self._wreg(0x11, 0x3D)
-		self._wreg(0x12, 0x0)
-		self._wreg(0x13, 0x0)
-		self._wreg(0x14, 0x84)
-		self._wreg(0x15, 0x40)
-		self._wreg(0x18, 0x33)
 		self._wreg(0x26, 0x68)
-		self._wreg(0x0c, 0x10)
+		#A32NQ32C3 Additional Register Configuration
+		if self._rreg(RC_Version) == 0x82:
+			self._wreg(0x12, 0x0)
+			self._wreg(0x13, 0x0)
+			self._wreg(0x14, 0x84)
+			self._wreg(0x18, 0x33)
+			self._wreg(0x0c, 0x10)
 		self.antenna_on()
 
 	def reset(self):

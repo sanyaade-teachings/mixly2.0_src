@@ -13,9 +13,9 @@ _TOKEN_STOP_TRAN    = const(0xFD)
 _TOKEN_DATA         = const(0xFE)
 
 class SDCard:
-    def __init__(self, spi, cs_pin, baudrate=50000000):
+    def __init__(self, spi, cs_pin=None, baudrate=50000000):
         self.spi = spi
-        self.cs = Pin(cs_pin, Pin.OUT, value=1)
+        self.cs = Pin(cs_pin, Pin.OUT, value=1) if cs_pin else None
         self.cmdbuf = bytearray(6)
         self.dummybuf = bytearray(512)
         self.tokenbuf = bytearray(1)
@@ -99,7 +99,7 @@ class SDCard:
         raise OSError("timeout waiting for v2 card")
 
     def cmd(self, cmd, arg, crc, final=0, release=True, skip1=False):
-        self.cs(0)
+        if self.cs: self.cs(0)
 
         # create and send the command
         buf = self.cmdbuf
@@ -124,22 +124,22 @@ class SDCard:
                 for j in range(final):
                     self.spi.write(b"\xff")
                 if release:
-                    self.cs(1)
+                    if self.cs: self.cs(1)
                     self.spi.write(b"\xff")
                 return response
-        self.cs(1)
+        if self.cs: self.cs(1)
         self.spi.write(b"\xff")
         return -1
 
     def readinto(self, buf):
-        self.cs(0)
+        if self.cs: self.cs(0)
         for i in range(_CMD_TIMEOUT):
             self.spi.readinto(self.tokenbuf, 0xFF)
             if self.tokenbuf[0] == _TOKEN_DATA:
                 break
             time.sleep_ms(1)
         else:
-            self.cs(1)
+            if self.cs: self.cs(1)
             raise OSError("timeout waiting for response")
         mv = self.dummybuf_memoryview
         if len(buf) != len(mv):
@@ -147,31 +147,31 @@ class SDCard:
         self.spi.write_readinto(mv, buf)
         self.spi.write(b"\xff")
         self.spi.write(b"\xff")
-        self.cs(1)
+        if self.cs: self.cs(1)
         self.spi.write(b"\xff")
 
     def write(self, token, buf):
-        self.cs(0)
+        if self.cs: self.cs(0)
         self.spi.read(1, token)
         self.spi.write(buf)
         self.spi.write(b"\xff")
         self.spi.write(b"\xff")
         if (self.spi.read(1, 0xFF)[0] & 0x1F) != 0x05:
-            self.cs(1)
+            if self.cs: self.cs(1)
             self.spi.write(b"\xff")
             return
         while self.spi.read(1, 0xFF)[0] == 0:
             pass
-        self.cs(1)
+        if self.cs: self.cs(1)
         self.spi.write(b"\xff")
 
     def write_token(self, token):
-        self.cs(0)
+        if self.cs: self.cs(0)
         self.spi.read(1, token)
         self.spi.write(b"\xff")
         while self.spi.read(1, 0xFF)[0] == 0x00:
             pass
-        self.cs(1)
+        if self.cs: self.cs(1)
         self.spi.write(b"\xff")
 
     def readblocks(self, block_num, buf):
@@ -184,14 +184,14 @@ class SDCard:
             # CMD17: set read address for single block
             if self.cmd(17, block_num * self.cdv, 0, release=False) != 0:
                 # release the card
-                self.cs(1)
+                if self.cs: self.cs(1)
                 raise OSError(5)  # EIO
             # receive the data and release card
             self.readinto(buf)
         else:
             # CMD18: set read address for multiple blocks
             if self.cmd(18, block_num * self.cdv, 0, release=False) != 0:
-                self.cs(1)
+                if self.cs: self.cs(1)
                 raise OSError(5)  # EIO
             offset = 0
             mv = memoryview(buf)

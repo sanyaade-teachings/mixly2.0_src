@@ -8,7 +8,7 @@
         "type": "command",
         "portSelect": "all",
         "micropython:esp32s3:yuankong": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong_Nova_S3-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong-v1.21.0.bin\" 0xE00000 \"{indexPath}/../micropython_common/build/HZK16.bin\""
         },
         "micropython:esp32s3:yuankong_nova": {
             "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong_Nova_S3-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
@@ -67,13 +67,24 @@
         "com": "serial",
         "burn": {
             "erase": true,
+            "micropython:esp32s3:yuankong": {
+                "binFile": [
+                    {
+                        "offset": "0x0000",
+                        "path": "./build/YuanKong-v1.21.0.bin"
+                    }, {
+                        "offset": "0xE00000",
+                        "path": "../micropython_common/build/HZK16.bin"
+                    }
+                ]
+            },
             "micropython:esp32s3:yuankong_nova": {
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/YuanKong_ZI_S3-v1.21.0.bin"
+                        "path": "./build/YuanKong_Nova_S3-v1.21.0.bin"
                     }, {
-                        "offset": "0x3A0000",
+                        "offset": "0x700000",
                         "path": "../micropython_common/build/HZK12.bin"
                     }
                 ]
@@ -82,7 +93,7 @@
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/YuanKong_ZI_S3-v1.21.0.bin"
+                        "path": "./build/YuanKong_Nova_S3-v1.21.0.bin"
                     }
                 ]
             }

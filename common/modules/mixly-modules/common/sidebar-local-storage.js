@@ -315,20 +315,26 @@ class SideBarLocalStorage extends PageBase {
     }
 
     openFolder() {
+        if (this.isFolderOpened()) {
+            return;
+        }
         this.$iconTriangle.removeClass('codicon-chevron-right');
         this.$iconTriangle.addClass('codicon-chevron-down');
         this.$iconFolder.addClass('opened');
         this.$folder.addClass('opened');
-        this.$children.show();
+        this.$children.css('display', 'block');
         this.folderOpened = true;
     }
 
     closeFolder() {
+        if (!this.isFolderOpened()) {
+            return;
+        }
         this.$iconTriangle.removeClass('codicon-chevron-down');
         this.$iconTriangle.addClass('codicon-chevron-right');
         this.$iconFolder.removeClass('opened');
         this.$folder.removeClass('opened');
-        this.$children.hide();
+        this.$children.css('display', 'none');
         this.fileTree.deselectAll();
         this.fileTree.reselect();
         this.folderOpened = false;
@@ -356,6 +362,8 @@ class SideBarLocalStorage extends PageBase {
         this.$name.text(rootNodeName);
         this.fileTree.setFolderPath(folderPath);
         this.folderPath = this.fileTree.getFolderPath();
+        this.$folder.attr('title', this.folderPath);
+        this.openFolder();
     }
 }
 

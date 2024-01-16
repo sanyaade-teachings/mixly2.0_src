@@ -751,7 +751,7 @@ Blockly.Python.forBlock['bitbot_als_num'] = function() {
 
 Blockly.Python.forBlock['sensor_yuankongzi_sound'] = function(){
     var code = 'sound_level()';
-    Blockly.Python.definitions_['import_yuankong_nova_voice_sound_level'] = "from yuankong_nova_voice import sound_level";
+    Blockly.Python.definitions_['import_yuankong_voice_sound_level'] = "from yuankong_voice import sound_level";
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

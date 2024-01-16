@@ -407,7 +407,7 @@ Blockly.Blocks['sensor_yuankongzi_pin_near'] = {
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
         .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "l"], [Blockly.Msg.TEXT_TRIM_RIGHT, "r"]]), "direction")
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.mixpy_PL_TEXT_TOP, "l"], [Blockly.Msg.mixpy_PL_TEXT_BOTTOM, "r"]]), "direction")
         .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
         this.setOutput(true,Number);
         this.setInputsInline(true);
@@ -417,8 +417,8 @@ Blockly.Blocks['sensor_yuankongzi_pin_near'] = {
             var mode0 = Blockly.Msg.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
             var mode1 = Blockly.Msg.MIXLY_ESP32_NEAR;
             var TOOLTIPS = {
-                'l':Blockly.Msg.TEXT_TRIM_LEFT,
-                'r':Blockly.Msg.TEXT_TRIM_RIGHT,
+                'l':Blockly.Msg.mixpy_PL_TEXT_TOP,
+                'r':Blockly.Msg.mixpy_PL_TEXT_BOTTOM,
             };
             return mode0 +TOOLTIPS[mode] + mode1
         });
@@ -430,7 +430,7 @@ Blockly.Blocks['sensor_yuankongzi_LTR308'] = {
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "l"], [Blockly.Msg.TEXT_TRIM_RIGHT, "r"]]), "direction")
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.mixpy_PL_TEXT_TOP, "l"], [Blockly.Msg.mixpy_PL_TEXT_BOTTOM, "r"]]), "direction")
             .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT+Blockly.Msg.MIXLY_DATA);
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -440,8 +440,8 @@ Blockly.Blocks['sensor_yuankongzi_LTR308'] = {
             var mode0 = Blockly.Msg.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
             var mode1 = Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT;
             var TOOLTIPS = {
-                'l':Blockly.Msg.TEXT_TRIM_LEFT,
-                'r':Blockly.Msg.TEXT_TRIM_RIGHT,
+                'l':Blockly.Msg.mixpy_PL_TEXT_TOP,
+                'r':Blockly.Msg.mixpy_PL_TEXT_BOTTOM,
             };
             return mode0 +TOOLTIPS[mode] + mode1
         });

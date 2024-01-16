@@ -194,11 +194,17 @@ class LED:
 	def getonoff(self, index):
 		return True if self.getbrightness(index)[0] > 0 else False
 
-	def setcolor(self, index, r, g, b, color):
-		self._rgb.led_set(index - 1, (r if self._color[color][0] else 0,
-										g if self._color[color][1] else 0,
-										b if self._color[color][2] else 0))
+	def setcolor(self, index, value):
+		self._rgb.led_set(index - 1, self._color[value])
+
 		self._rgb.write()
+
+
+	# def setcolor(self, index, r, g, b, color):
+	# 	self._rgb.led_set(index - 1, (r if self._color[color][0] else 0,
+	# 									g if self._color[color][1] else 0,
+	# 									b if self._color[color][2] else 0))
+	# 	self._rgb.write()
 
 onboard_led=LED(onboard_rgb)
 

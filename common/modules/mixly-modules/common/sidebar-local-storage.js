@@ -231,7 +231,11 @@ class SideBarLocalStorage extends PageBase {
             type: 'rename',
             preconditionFn: ($trigger) => {
                 let type = $trigger.attr('type');
-                return ['file', 'folder'].includes(type);
+                if (goog.isElectron) {
+                    return ['file', 'folder'].includes(type);
+                } else {
+                    return ['file'].includes(type);
+                }
             },
             data: {
                 isHtmlName: true,
@@ -360,7 +364,11 @@ class SideBarLocalStorage extends PageBase {
     setFolderPath(folderPath) {
         const rootNodeName = path.basename(folderPath).toUpperCase();
         this.$name.text(rootNodeName);
-        this.fileTree.setFolderPath(folderPath);
+        if (goog.isElectron) {
+            this.fileTree.setFolderPath(folderPath);
+        } else {
+            this.fileTree.setFolderPath('/');
+        }
         this.folderPath = this.fileTree.getFolderPath();
         this.$folder.attr('title', this.folderPath);
         this.openFolder();

@@ -14,18 +14,16 @@ class FileTreeExt extends FileTree {
     }
 
     async getContent(inPath) {
-        const rePath = '/' + path.relative(this.getFolderPath(), inPath);
-        const status = await FS.isDirectory(rePath);
+        const status = await FS.isDirectory(inPath);
         let output = [];
         if (!status) {
             return output;
         }
-        const children = await FS.readDirectory(rePath);
+        const children = await FS.readDirectory(inPath);
         for (let data of children) {
             const dataPath = path.join(inPath, data);
-            const reDataPath = path.join(rePath, data);
-            if (await FS.isDirectory(reDataPath)) {
-                const isDirEmpty = await FS.isDirectoryEmpty(reDataPath);
+            if (await FS.isDirectory(dataPath)) {
+                const isDirEmpty = await FS.isDirectoryEmpty(dataPath);
                 output.push({
                     type: 'folder',
                     id: dataPath,

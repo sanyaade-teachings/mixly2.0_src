@@ -14,6 +14,7 @@ const {
     EditorBase
 } = Mixly;
 
+
 class EditorMonaco extends EditorBase {
     static {
         this.$monaco = $('<div class="page-item"></div>');

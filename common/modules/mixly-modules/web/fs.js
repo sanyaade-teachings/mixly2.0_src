@@ -105,4 +105,27 @@ FS.isDirectoryEmpty = async (path) => {
     return !(await FS.readDirectory(path) ?? []).length;
 }
 
+FS.moveDirectory = (oldFolderPath, newFolderPath) => {
+    return new Promise(async (resolve, reject) => {
+        resolve();
+    });
+}
+
+FS.copyDirectory = (oldFolderPath, newFolderPath) => {
+    return new Promise(async (resolve, reject) => {
+        resolve();
+    });
+}
+
+FS.deleteDirectory = (folderPath) => {
+    return new Promise(async (resolve, reject) => {
+        const [error] = await FS.pool.exec('rmdir', [folderPath]);
+        if (!error) {
+            resolve();
+        } else {
+            reject();
+        }
+    });
+}
+
 });

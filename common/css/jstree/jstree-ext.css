@@ -82,6 +82,10 @@ html[data-bs-theme=dark] .jstree-anchor {
     background: #e4e6f1;
 }
 
+.jstree {
+    cursor: pointer;
+}
+
 .jstree .jstree-node > .jstree-anchor > input {
     width: calc(100% - 30px) !important;
 }

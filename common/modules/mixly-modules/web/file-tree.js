@@ -16,10 +16,10 @@ class FileTreeExt extends FileTree {
     async getContent(inPath) {
         const rePath = '/' + path.relative(this.getFolderPath(), inPath);
         const status = await FS.isDirectory(rePath);
+        let output = [];
         if (!status) {
             return output;
         }
-        let output = [];
         const children = await FS.readDirectory(rePath);
         for (let data of children) {
             const dataPath = path.join(inPath, data);
@@ -41,8 +41,6 @@ class FileTreeExt extends FileTree {
         }
         return output;
     }
-
-    
 }
 
 Web.FileTree = FileTreeExt;

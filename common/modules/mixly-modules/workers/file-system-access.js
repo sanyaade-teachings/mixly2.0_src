@@ -68,7 +68,7 @@ const truncate = function(p, len) {
 }
 
 const readFile = function(fname, encoding, flag) {
-    return createPromise(fs.readFile, fname, encoding, flag);
+    return createPromise(fs.readFile, fname, encoding);
 }
 
 const writeFile = function(fname, data, encoding, flag, mode) {

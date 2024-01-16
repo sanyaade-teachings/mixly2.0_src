@@ -99,12 +99,17 @@ class EditorsManager extends PagesManager {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
-            FS.isFile(id)
+            let filePath = id;
+            if (!goog.isElectron) {
+                filePath = filePath.substring(1);
+                filePath = filePath.substring(filePath.indexOf('/'));
+            }
+            FS.isFile(filePath)
             .then((isFile) => {
                 if (!isFile) {
                     return;
                 }
-                return FS.readFile(id);
+                return FS.readFile(filePath);
             })
             .then((data) => {
                 data && editor.setValue(data, path.extname(id));

@@ -43,16 +43,35 @@ FS.showSaveFilePicker = async () => {
 }
 
 FS.readFile = (path) => {
-    // return fs_promise.readFile(path, { encoding: 'utf8' });
+    return new Promise(async (resolve, reject) => {
+        const [data] = await FS.pool.exec('readFile', [path, 'utf8']);
+        resolve(data);
+    });
 }
 
-FS.writeFile = (data) => {
-    // return fs_promise.writeFile(data, { encoding: 'utf8' });
+FS.writeFile = (path, data) => {
+    return new Promise(async (resolve, reject) => {
+        const [error, entries] = await FS.pool.exec('writeFile', [path, data, 'utf8']);
+        if (error) {
+            reject(error);
+        } else {
+            resolve(entries);
+        }
+    });
 }
 
 FS.isFile = (path) => {
-    return new Promise((resolve, reject) => {
-        resolve(true);
+    return new Promise(async (resolve, reject) => {
+        const [_, stats] = await FS.pool.exec('stat', [path]);
+        if (!stats) {
+            resolve(false);
+            return;
+        }
+        if (stats.mode === 33188) {
+            resolve(true);
+        } else {
+            resolve(false);
+        }
     });
 }
 
@@ -70,6 +89,10 @@ FS.readDirectory = (path) => {
 FS.isDirectory = (path) => {
     return new Promise(async (resolve, reject) => {
         const [_, stats] = await FS.pool.exec('stat', [path]);
+        if (!stats) {
+            resolve(false);
+            return;
+        }
         if (stats.mode === 33188) {
             resolve(false);
         } else {

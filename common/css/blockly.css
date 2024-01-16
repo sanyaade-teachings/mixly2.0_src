@@ -191,7 +191,3 @@
 .blocklyToolboxDiv.blocklyToolboxDelete .blocklyTreeRow {
     background-color: unset !important;
 }
-
-.blocklyMainBackground {
-    stroke-width: 0;
-}

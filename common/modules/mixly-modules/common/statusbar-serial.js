@@ -63,7 +63,8 @@ class StatusBarSerial extends StatusBar {
     }
 
     getPort() {
-        return this.$tab.attr('data-tab-id');
+        const $tab = this.getTab();
+        return $tab.attr('data-tab-id');
     }
 
     dispose() {

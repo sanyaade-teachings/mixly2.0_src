@@ -47,9 +47,7 @@ class EditorCode extends EditorMonaco {
     #addContextMenu_() {
         this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`, {
             events: {
-                activated: () => {
-                    this.focus();
-                }
+                activated: () => this.focus()
             }
         });
         let menu = new Menu();

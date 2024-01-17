@@ -32,52 +32,45 @@ class EditorMd extends EditorBase {
             'editor/editor-md.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-md.html')))
         );
+
         HTMLTemplate.add(
             'editor/editor-md-btns.html',
             goog.get(path.join(Env.templatePath, 'editor/editor-md-btns.html'))
         );
+
         marked.use(markedKatex({ throwOnError: false }));
     }
 
-    // 私有属性
     #prevCode_ = '';
     #listener_ = null;
-    constructor(element) {
+
+    constructor() {
         super();
-        const $parentContainer = $(element);
         const $content = $(HTMLTemplate.get('editor/editor-md.html').render());
+        const $btnsContent = $(HTMLTemplate.get('editor/editor-md-btns.html'));
         this.$codeContainer = $content.find('.editor-code');
         this.$previewContainer = $content.find('.markdown-body');
-        this.codeEditor = new EditorCode(this.$codeContainer);
-        this.$btnsContent = $(HTMLTemplate.get('editor/editor-md-btns.html'));
-        this.$btns = this.$btnsContent.find('button');
+        this.addPage(this.$codeContainer, 'code', new EditorCode());
+        this.$btns = $btnsContent.find('button');
         this.drag = null;
         this.setContent($content);
-        $parentContainer.append(this.getContent());
+        this.setBtnsContent($btnsContent);
     }
 
     init() {
         super.init();
-        this.codeEditor.init();
         this.#addDragEventsListener_();
         this.#addBtnEventsListener_();
     }
 
     onMounted() {
         super.onMounted();
-        this.codeEditor.onMounted();
         this.#addChangeEventListener_();
     }
 
     onUnmounted() {
         super.onUnmounted();
-        this.codeEditor.onUnmounted();
         this.#removeChangeEventListener_();
-    }
-
-    resize() {
-        super.resize();
-        this.codeEditor.resize();
     }
 
     #addDragEventsListener_() {
@@ -150,23 +143,22 @@ class EditorMd extends EditorBase {
     }
 
     updatePreview() {
-        const code = this.codeEditor.getValue();
+        const code = this.getPage('code').getValue();
         if (code === this.#prevCode_) {
             return;
         }
         this.#prevCode_ = code;
-        const $dom = $(marked.parse(this.codeEditor.getValue()));
+        const $dom = $(marked.parse(this.getPage('code').getValue()));
         const $as = $dom.find('a');
         $as.attr('target', '_blank');
         this.$previewContainer.html($dom);
     }
 
     setValue(data, ext) {
-        this.codeEditor.setValue(data, ext);
+        this.getPage('code').setValue(data, ext);
     }
 
     dispose() {
-        this.codeEditor.dispose();
         this.drag.dispose();
         super.dispose();
     }

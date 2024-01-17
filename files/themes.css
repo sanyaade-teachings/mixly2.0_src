@@ -1,3 +1,8 @@
+:root {
+    --app-light-color: #009688;
+    --app-dark-color: #007acc;
+}
+
 div.layui-form.layui-border-box.layui-table-view {
     margin:0px !important;
 }

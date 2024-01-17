@@ -7,13 +7,18 @@ goog.provide('Mixly.EditorBase');
 const { Events, PageBase } = Mixly;
 
 class EditorBase extends PageBase {
+    #$btnsContent_ = null;
+
     constructor() {
         super();
-        this.$btnsContent = null;
     }
 
-    getBtnsContainer() {
-        return this.$btnsContent;
+    getBtnsContent() {
+        return this.#$btnsContent_;
+    }
+
+    setBtnsContent($elem) {
+        this.#$btnsContent_ = $elem;
     }
 
     setValue(data, ext) {

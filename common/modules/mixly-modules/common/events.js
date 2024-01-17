@@ -14,17 +14,19 @@ const {
 } = Mixly;
 
 class Events {
+    #events_ = new Registry();
+    #eventsType_ = null;
+
     constructor(eventsType = []) {
-        this.events = new Registry();
-        this.eventsType = eventsType;
+        this.#eventsType_ = eventsType;
     }
 
     addType(eventsType) {
-        this.eventsType = MArray.unique([...this.eventsType, ...eventsType]);
+        this.#eventsType_ = MArray.unique([...this.#eventsType_, ...eventsType]);
     }
 
     exist(type) {
-        if (!this.eventsType.includes(type)) {
+        if (!this.#eventsType_.includes(type)) {
             Debug.warn(`${type} event does not exist under the class`);
             return false;
         }
@@ -36,17 +38,17 @@ class Events {
             return this;
         }
         const id = IdGenerator.generate();
-        let typeEvent = this.events.getItem(type);
+        let typeEvent = this.#events_.getItem(type);
         if (!typeEvent) {
             typeEvent = new Registry();
-            this.events.register(type, typeEvent);
+            this.#events_.register(type, typeEvent);
         }
         typeEvent.register(id, func);
         return id;
     }
 
     unbind(id) {
-        for (let [_, value] of this.events.getAllItems()) {
+        for (let [_, value] of this.#events_.getAllItems()) {
             let typeEvent = value;
             if (!typeEvent.getItem(id)) {
                 continue;
@@ -57,8 +59,8 @@ class Events {
     }
 
     off(type) {
-        if (this.events.getItem(type)) {
-            this.events.unregister(type);
+        if (this.#events_.getItem(type)) {
+            this.#events_.unregister(type);
         }
         return this;
     }
@@ -69,7 +71,7 @@ class Events {
         if (!this.exist(type)) {
             return outputs;
         }
-        const eventsFunc = this.events.getItem(type);
+        const eventsFunc = this.#events_.getItem(type);
         if (!eventsFunc) {
             return outputs;
         }
@@ -81,11 +83,11 @@ class Events {
     }
 
     reset() {
-        this.events.reset();
+        this.#events_.reset();
     }
 
     length(type) {
-        const typeEvent = this.events.getItem(type);
+        const typeEvent = this.#events_.getItem(type);
         if (typeEvent) {
             return typeEvent.length();
         }

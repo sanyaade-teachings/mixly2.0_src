@@ -3,15 +3,19 @@ goog.loadJs('common', () => {
 goog.require('ace');
 goog.require('ace.ExtLanguageTools');
 goog.require('Mixly.XML');
+goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Debug');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorAce');
 
 const {
     XML,
+    Env,
     Msg,
     Debug,
+    HTMLTemplate,
     EditorBase
 } = Mixly;
 
@@ -19,12 +23,20 @@ class EditorAce extends EditorBase {
     static {
         this.CTRL_BTNS = ['resetFontSize', 'increaseFontSize', 'decreaseFontSize'];
         this.CTRL_BTN_TEMPLATE = '<div m-id="{{d.mId}}" class="code-editor-btn setFontSize"></div>';
+        
+        HTMLTemplate.add(
+            'editor/editor-code.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-code.html')))
+        );
     }
 
-    constructor(element) {
+    constructor() {
         super();
-        this.setContent($(element));
+        const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
+        this.setContent($(editorHTMLTemplate.render()));
+        this.id = editorHTMLTemplate.id;
         this.destroyed = false;
+        this.editor = null;
     }
 
     init() {
@@ -34,6 +46,10 @@ class EditorAce extends EditorBase {
         this.addCursorLayer();
         this.addCursorEventsListener();
         this.addDefaultCommand();
+    }
+
+    getEditor() {
+        return this.editor;
     }
 
     dispose() {

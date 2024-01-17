@@ -2,21 +2,30 @@ goog.loadJs('common', () => {
 
 goog.require('monaco');
 goog.require('Mixly.XML');
+goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Debug');
+goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorMonaco');
 
 const {
     XML,
+    Env,
     Msg,
     Debug,
+    HTMLTemplate,
     EditorBase
 } = Mixly;
 
 
 class EditorMonaco extends EditorBase {
     static {
+        HTMLTemplate.add(
+            'editor/editor-code.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-code.html')))
+        );
+
         this.$monaco = $('<div class="page-item"></div>');
         this.editor = null;
 
@@ -97,18 +106,23 @@ class EditorMonaco extends EditorBase {
     }
 
     #readOnly = false;
-    constructor(element) {
+
+    constructor() {
         super();
-        this.setContent($(element));
+        const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
+        this.setContent($(editorHTMLTemplate.render()));
+        this.editor = null;
         this.destroyed = false;
         this.state = null;
     }
 
     init() {
+        super.init();
         this.editor = monaco.editor.createModel('');
     }
 
     onMounted() {
+        super.onMounted();
         const editor = EditorMonaco.getEditor();
         editor.setModel(this.editor);
         if (this.state) {
@@ -122,6 +136,7 @@ class EditorMonaco extends EditorBase {
     }
 
     onUnmounted() {
+        super.onUnmounted();
         const editor = EditorMonaco.getEditor();
         this.state = editor.saveViewState();
         EditorMonaco.getContent().detach();
@@ -179,6 +194,7 @@ class EditorMonaco extends EditorBase {
     }
 
     resize() {
+        super.resize();
         const editor = EditorMonaco.getEditor();
         editor.layout(null, true);
     }

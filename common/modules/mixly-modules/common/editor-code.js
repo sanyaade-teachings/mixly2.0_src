@@ -7,7 +7,6 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.ContextMenu');
-goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.IdGenerator');
 goog.require('Mixly.Menu');
 goog.require('Mixly.EditorMonaco');
@@ -19,7 +18,6 @@ const {
     Env,
     Msg,
     ContextMenu,
-    HTMLTemplate,
     IdGenerator,
     Menu,
     EditorMonaco
@@ -27,25 +25,13 @@ const {
 const { USER, BOARD } = Config;
 
 class EditorCode extends EditorMonaco {
-    static {
-        HTMLTemplate.add(
-            'editor/editor-code.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-code.html')))
-        );
-    }
-
-    constructor(element) {
-        const $parentContainer = $(element);
-        const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
-        const $content = $(editorHTMLTemplate.render());
-        super($content[0]);
+    constructor() {
+        super();
         this.contextMenuId = IdGenerator.generate();
-        $content.attr('content-menu-id', this.contextMenuId);
-        this.id = editorHTMLTemplate.id;
-        this.setContent($content);
-        $parentContainer.append(this.getContent());
+        this.getContent().attr('content-menu-id', this.contextMenuId);
         this.tabSize = null;
         this.language = null;
+        this.contextMenu = null;
     }
 
     init() {
@@ -206,7 +192,6 @@ class EditorCode extends EditorMonaco {
 
     dispose() {
         this.contextMenu.dispose();
-        this.events.reset();
         this.contextMenu = null;
         this.defaultContextMenu = null;
         super.dispose();

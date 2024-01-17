@@ -13,8 +13,8 @@ const {
 } = Mixly;
 
 class StatusBarTerminal extends StatusBar {
-    constructor(element) {
-        super(element);
+    constructor() {
+        super();
 
         const regression = new Regression();
 

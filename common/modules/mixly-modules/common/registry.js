@@ -7,6 +7,7 @@ const { Debug } = Mixly;
 
 class Registry {
     #registry_ = new Map();
+    
     constructor() {
         this.reset();
     }

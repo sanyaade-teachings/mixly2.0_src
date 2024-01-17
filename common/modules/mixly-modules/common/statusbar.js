@@ -3,7 +3,6 @@ goog.loadJs('common', () => {
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Config');
-goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorAce');
 goog.provide('Mixly.StatusBar');
 
@@ -11,49 +10,38 @@ const {
     XML,
     Env,
     Config,
-    HTMLTemplate,
     EditorAce
 } = Mixly;
 const { USER } = Config;
 
 class StatusBar extends EditorAce {
-    static {
-        HTMLTemplate.add(
-            'statusbar/statusbar.html',
-            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'statusbar/statusbar.html')))
-        );
-    }
-
-    constructor(element) {
-        const $parentContainer = $(element);
-        const $content = $(HTMLTemplate.get('statusbar/statusbar.html').render());
-        super($content[0]);
-        this.setContent($content);
-        $parentContainer.append($content);
+    constructor() {
+        super();
     }
 
     init() {
         super.init();
-        this.toStatusBar();
+        this.#toStatusBar_();
     }
 
-    toStatusBar() {
+    #toStatusBar_() {
+        const editor = this.getEditor();
         if (USER.theme === "dark") {
-            this.editor.setOption("theme", "ace/theme/tomorrow_night");
+            editor.setOption("theme", "ace/theme/tomorrow_night");
         } else {
-            this.editor.setOption("theme", "ace/theme/xcode");
+            editor.setOption("theme", "ace/theme/xcode");
         }
-        this.editor.getSession().setMode("ace/mode/python");
-        this.editor.setReadOnly(true);
-        this.editor.setScrollSpeed(0.3);
-        this.editor.setShowPrintMargin(false);
-        this.editor.renderer.setShowGutter(false);
-        this.editor.setOptions({
+        editor.getSession().setMode("ace/mode/python");
+        editor.setReadOnly(true);
+        editor.setScrollSpeed(0.3);
+        editor.setShowPrintMargin(false);
+        editor.renderer.setShowGutter(false);
+        editor.setOptions({
             enableBasicAutocompletion: false,
             enableSnippets: false,
             enableLiveAutocompletion: false
         });
-        this.editor.setHighlightActiveLine(false);
+        editor.setHighlightActiveLine(false);
     }
 }
 

@@ -46,10 +46,12 @@ class EditorMix extends EditorBase {
             'editor/editor-mix.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-mix.html')))
         );
+
         HTMLTemplate.add(
             'editor/editor-mix-btns.html',
             goog.get(path.join(Env.templatePath, 'editor/editor-mix-btns.html'))
         );
+
         this.BLOCKLY_IGNORE_EVENTS = [
             Blockly.Events.UI,
             Blockly.Events.VIEWPORT_CHANGE,
@@ -67,32 +69,28 @@ class EditorMix extends EditorBase {
         ];
     }
 
-    constructor(element) {
+    constructor() {
         super();
-        const $parentContainer = $(element);
-        this.setContent(
-            $(HTMLTemplate.get('editor/editor-mix.html').render())
-        );
-        const $content = this.getContent();
-        this.$btnsContent = $(HTMLTemplate.get('editor/editor-mix-btns.html'));
+        const $content = $(HTMLTemplate.get('editor/editor-mix.html').render());
+        const $btnsContent = $(HTMLTemplate.get('editor/editor-mix-btns.html'));
         this.drag = null;
         this.$blocklyContainer = $content.find('.editor-blockly');
         this.$codeContainer = $content.find('.editor-code');
-        this.$btns = this.$btnsContent.find('button');
-        this.blockEditor = new EditorBlockly(this.$blocklyContainer[0]);
-        this.codeEditor = new EditorCode(this.$codeContainer[0]);
-        $parentContainer.append(this.getContent());
+        this.$btns = $btnsContent.find('button');
+        this.setContent($content);
+        this.setBtnsContent($btnsContent);
+        this.addPage(this.$blocklyContainer, 'block', new EditorBlockly());
+        this.addPage(this.$codeContainer, 'code', new EditorCode());
     }
 
     init() {
         super.init();
-        this.addDragEventsListener();
-        this.addBtnEventsListener();
-        this.blockEditor.init();
-        this.codeEditor.init();
-        this.codeEditor.setReadOnly(true);
-        this.py2BlockEditorInit();
-        const contextMenu = this.codeEditor.getContextMenu();
+        this.#addDragEventsListener_();
+        this.#addBtnEventsListener_();
+        const codePage = this.getPage('code');
+        codePage.setReadOnly(true);
+        this.#py2BlockEditorInit_();
+        const contextMenu = codePage.getContextMenu();
         let codeMenu = contextMenu.getItem('code');
         codeMenu.add({
             weight: 4,
@@ -148,17 +146,19 @@ class EditorMix extends EditorBase {
         return extname;
     }
 
-    py2BlockEditorInit() {
+    #py2BlockEditorInit_() {
+        const codePage = this.getPage('code');
         if (typeof Sk === 'object'
             && typeof PythonToBlocks === 'function'
             && typeof Py2blockEditor === 'function') {
             const py2blockConverter = new PythonToBlocks();
-            this.py2BlockEditor = new Py2blockEditor(py2blockConverter, this.codeEditor.editor);
+            this.py2BlockEditor = new Py2blockEditor(py2blockConverter, codePage.getEditor());
         }
     }
 
-    workspaceChangeEvent(event) {
-        const { blockEditor, codeEditor } = this;
+    #workspaceChangeEvent_(event) {
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
         if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)) {
             return;
         }
@@ -166,12 +166,13 @@ class EditorMix extends EditorBase {
         if (this.drag.shown !== Drag.Extend.BOTH) {
            return;
         }
-        codeEditor.setValue(blockEditor.getValue(), false);
+        codePage.setValue(blockPage.getValue(), false);
     }
 
-    addDragEventsListener() {
-        const { blockEditor, codeEditor } = this;
-        this.drag = new DragV(this.$content, {
+    #addDragEventsListener_() {
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
+        this.drag = new DragV(this.getContent()[0], {
             min: '200px',
             full: [true, true],
             startSize: '100%',
@@ -185,12 +186,12 @@ class EditorMix extends EditorBase {
             switch(type) {
             case Drag.Extend.POSITIVE:
                 $btn = this.$btns.filter('[m-id="block"]');
-                blockEditor.scrollCenter();
+                blockPage.scrollCenter();
                 break;
             case Drag.Extend.NEGATIVE:
                 $btn = this.$btns.filter('[m-id="code"]');
-                codeEditor.setReadOnly(false);
-                codeEditor.focus();
+                codePage.setReadOnly(false);
+                codePage.focus();
                 if (this.py2BlockEditor && BOARD.pythonToBlockly) {
                     this.py2BlockEditor.fromCode = true;
                 }
@@ -204,25 +205,25 @@ class EditorMix extends EditorBase {
             $btn.addClass('self-adaption-btn');
             switch(type) {
             case Drag.Extend.NEGATIVE:
-                codeEditor.setReadOnly(true);
+                codePage.setReadOnly(true);
                 if (this.py2BlockEditor 
                     && BOARD.pythonToBlockly 
                     && typeof this.py2BlockEditor.updateBlock === 'function') {
                     this.py2BlockEditor.updateBlock();
                 } else {
-                    codeEditor.setValue(blockEditor.getValue(), false);
+                    codePage.setValue(blockPage.getValue(), false);
                 }
                 break;
             case Drag.Extend.POSITIVE:
-                codeEditor.setValue(blockEditor.getValue(), false);
+                codePage.setValue(blockPage.getValue(), false);
                 break;
             }
-            blockEditor.resize();
-            blockEditor.scrollCenter();
+            blockPage.resize();
+            blockPage.scrollCenter();
         });
     }
 
-    addBtnEventsListener() {
+    #addBtnEventsListener_() {
         this.$btns.on('click', (event) => {
             const $btn = $(event.currentTarget);
             const mId = $btn.attr('m-id');
@@ -249,11 +250,12 @@ class EditorMix extends EditorBase {
     }
 
     getCurrentEditor() {
-        const { blockEditor, codeEditor } = this;
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
         if (this.drag.shown === Drag.Extend.NEGATIVE) {
-            return codeEditor;
+            return codePage;
         } else {
-            return blockEditor;
+            return blockPage;
         }
     }
 
@@ -269,46 +271,37 @@ class EditorMix extends EditorBase {
         editor.redo();
     }
 
-    resize() {
-        super.resize();
-        this.blockEditor.resize();
-        this.codeEditor.resize();
-    }
-
     dispose() {
-        const blocklyWorkspace = this.blockEditor.editor;
+        const blockPage = this.getPage('block');
+        const blocklyWorkspace = blockPage.getEditor();
         blocklyWorkspace.removeChangeListener(this.codeChangeListener);
         this.drag.dispose();
         this.$btnsContent.remove();
-        this.blockEditor.dispose();
-        this.codeEditor.dispose();
         super.dispose();
         this.$blocklyContainer = null;
         this.$codeContainer = null;
-        this.blockEditor = null;
-        this.codeEditor = null;
         this.drag = null;
     }
 
     onMounted() {
         super.onMounted();
-        this.blockEditor.onMounted();
-        this.codeEditor.onMounted();
-        const blocklyWorkspace = this.blockEditor.editor;
+        const blockPage = this.getPage('block');
+        const blocklyWorkspace = blockPage.getEditor();
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
-            this.workspaceChangeEvent(event);
+            this.#workspaceChangeEvent_(event);
         });
     }
 
     onUnmounted() {
         super.onUnmounted();
-        const blocklyWorkspace = this.blockEditor.editor;
+        const blockPage = this.getPage('block');
+        const blocklyWorkspace = blockPage.getEditor();
         blocklyWorkspace.removeChangeListener(this.codeChangeListener);
-        this.blockEditor.onUnmounted();
-        this.codeEditor.onUnmounted();
     }
 
     setValue(data, ext) {
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
         Blockly.Events.disable();
         try {
             data = XML.convert(data, true);
@@ -328,7 +321,7 @@ class EditorMix extends EditorBase {
                     Debug.log('一些块已被忽略');
                     break;
                 }
-                this.blockEditor.scrollCenter();
+                blockPage.scrollCenter();
                 Blockly.hideChaff();
             } else {
             }
@@ -341,6 +334,8 @@ class EditorMix extends EditorBase {
     }
 
     parseMix(xml, useCode = false, useIncompleteBlocks = false, endFunc = (message) => {}) {
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
         const mixDom = xml;
         let xmlDom, configDom, codeDom;
         for (let i = 0; mixDom[i]; i++) {
@@ -406,8 +401,8 @@ class EditorMix extends EditorBase {
                 return;
             }
             this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
-            this.codeEditor.setValue(code, -1);
-            this.blockEditor.clear();
+            codePage.setValue(code, -1);
+            blockPage.clear();
             endFunc('USE_CODE');
             return;
         }
@@ -427,7 +422,7 @@ class EditorMix extends EditorBase {
             if (shadowType && !blocks.includes(shadowType))
                 blocks.push(shadowType);
         }
-        const blocklyGenerator = this.blockEditor.generator;
+        const blocklyGenerator = blockPage.generator;
         for (let i of blocks) {
             if (Blockly.Blocks[i] && blocklyGenerator.forBlock[i]) {
                 continue;
@@ -438,15 +433,15 @@ class EditorMix extends EditorBase {
             this.showParseMixErrorDialog(mixDom, undefinedBlocks, endFunc);
             return;
         }
-        this.blockEditor.editor.clear();
-        Blockly.Xml.domToWorkspace(xmlDom[0], this.blockEditor.editor);
-        this.blockEditor.editor.scrollCenter();
+        blockPage.getEditor().clear();
+        Blockly.Xml.domToWorkspace(xmlDom[0], blockPage.getEditor());
+        blockPage.getEditor().scrollCenter();
         Blockly.hideChaff();
         if (!useIncompleteBlocks && codeDom) {
             const workspaceCode = MFile.getCode();
             if (workspaceCode !== code) {
                 this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
-                this.codeEditor.setValue(code, -1);
+                codePage.setValue(code, -1);
             }
             endFunc();
             return;

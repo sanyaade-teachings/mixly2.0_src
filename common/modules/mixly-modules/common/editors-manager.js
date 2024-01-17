@@ -83,7 +83,7 @@ class EditorsManager extends PagesManager {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
-            const $btns = editor.getBtnsContainer();
+            const $btns = editor.getBtnsContent();
             if ($btns && $btns.length) {
                 $btnsContainer.removeClass('empty');
                 $btnsContainer.children('a').css('display', 'none');

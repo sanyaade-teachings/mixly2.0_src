@@ -176,13 +176,11 @@ class EditorBlockly extends EditorBase {
         this.initBlockly();
     }
 
-    constructor(element) {
+    constructor() {
         super();
-        const $parentContainer = $(element);
         this.setContent(
             $(HTMLTemplate.get('editor/editor-blockly.html').render())
         );
-        $parentContainer.append(this.getContent());
         this.editor = EditorBlockly.getEditor();
         this.workspaceState = null;
         this.undoStack = null;
@@ -220,6 +218,10 @@ class EditorBlockly extends EditorBase {
         );
     }
 
+    getEditor() {
+        return this.editor;
+    }
+
     undo() {
         super.undo();
         this.editor.undo(0);
@@ -240,10 +242,11 @@ class EditorBlockly extends EditorBase {
 
     resize() {
         // 重新调整编辑器尺寸
+        const $content = this.getContent();
         this.editor.hideChaff(false);
         $(this.editor.getParentSvg()).attr({
-            width: this.$content.width(),
-            height: this.$content.height()
+            width: $content.width(),
+            height: $content.height()
         });
         this.editor.hideComponents(true);
         Blockly.common.svgResize(this.editor);

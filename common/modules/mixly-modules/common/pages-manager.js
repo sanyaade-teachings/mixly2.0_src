@@ -73,7 +73,7 @@ class PagesManager {
             if (!PageType) {
                 PageType = this.typesRegistry.getItem('#default');
             }
-            let page = new PageType(this.$editorContainer[0]);
+            let page = new PageType();
             this.pagesRegistry.register(id, page);
             page.setTab($(tabEl));
             if (this.$welcomePage) {

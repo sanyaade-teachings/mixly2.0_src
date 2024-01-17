@@ -124,8 +124,10 @@
             "ace",
             "ace.ExtLanguageTools",
             "Mixly.XML",
+            "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Debug",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -183,7 +185,6 @@
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.ContextMenu",
-            "Mixly.HTMLTemplate",
             "Mixly.IdGenerator",
             "Mixly.Menu",
             "Mixly.EditorMonaco"
@@ -241,8 +242,10 @@
         "require": [
             "monaco",
             "Mixly.XML",
+            "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Debug",
+            "Mixly.HTMLTemplate",
             "Mixly.EditorBase"
         ],
         "provide": [
@@ -671,7 +674,8 @@
     {
         "path": "/common/page-base.js",
         "require": [
-            "Mixly.Events"
+            "Mixly.Events",
+            "Mixly.Registry"
         ],
         "provide": [
             "Mixly.PageBase"
@@ -765,6 +769,16 @@
         ]
     },
     {
+        "path": "/common/sidebar-libs.js",
+        "require": [
+            "Mixly.Debug",
+            "Mixly.PageBase"
+        ],
+        "provide": [
+            "Mixly.SideBarLibs"
+        ]
+    },
+    {
         "path": "/common/sidebar-local-storage.js",
         "require": [
             "path",
@@ -833,7 +847,6 @@
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Config",
-            "Mixly.HTMLTemplate",
             "Mixly.EditorAce"
         ],
         "provide": [

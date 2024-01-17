@@ -6,8 +6,8 @@ goog.provide('Mixly.StatusBarSerial');
 const { StatusBar } = Mixly;
 
 class StatusBarSerial extends StatusBar {
-    constructor(element) {
-        super(element);
+    constructor() {
+        super();
         this.opened = false;
         this.$close = null;
         this.addEventsType(['reconnect']);

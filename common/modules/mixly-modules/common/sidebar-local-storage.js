@@ -40,23 +40,22 @@ class SideBarLocalStorage extends PageBase {
             'sidebar/sidebar-local-storage.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage.html')))
         );
+
         HTMLTemplate.add(
             'sidebar/sidebar-local-storage-open-folder.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/sidebar-local-storage-open-folder.html')))
         );
     }
 
-    constructor(element) {
-        const $parentContainer = $(element);
+    constructor() {
+        super();
         const localStorageHTMLTemplate = HTMLTemplate.get('sidebar/sidebar-local-storage.html');
         const $folderContent = $(localStorageHTMLTemplate.render());
         const $openFolderContent = $(HTMLTemplate.get('sidebar/sidebar-local-storage-open-folder.html').render());
-        super();
         this.id = localStorageHTMLTemplate.id;
         this.$openFolderContent = $openFolderContent;
         this.$folderContent = $folderContent;
         this.setContent($openFolderContent);
-        $parentContainer.append($openFolderContent);
         this.$folder = $folderContent.find('.folder-title');
         this.$iconTriangle = this.$folder.find('.triangle');
         this.$iconFolder = this.$folder.find('.folder');
@@ -220,9 +219,7 @@ class SideBarLocalStorage extends PageBase {
                         outPath = $trigger.attr('id');
                     }
                     navigator.clipboard.writeText(outPath)
-                    .catch((error) => {
-                        Debug.log(error);
-                    });
+                    .catch(Debug.error);
                 }
             }
         });
@@ -311,11 +308,10 @@ class SideBarLocalStorage extends PageBase {
                 return;
             }
             this.setFolderPath(folderPath);
-            this.$content.replaceWith(this.$folderContent);
+            this.setContent(this.$folderContent);
             this.$openFolderContent.remove();
-            this.$content = this.$folderContent;
         })
-        .catch(Debug.log);
+        .catch(Debug.error);
     }
 
     openFolder() {

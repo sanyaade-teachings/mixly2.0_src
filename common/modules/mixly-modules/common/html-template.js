@@ -16,6 +16,9 @@ class HTMLTemplate {
         this.templateRegistry = new Registry();
 
         this.add = function(id, htmlTemplate) {
+            if (this.get(id)) {
+                return;
+            }
             this.templateRegistry.register(id, htmlTemplate);
         }
 

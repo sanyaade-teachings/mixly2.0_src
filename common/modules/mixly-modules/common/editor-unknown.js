@@ -22,13 +22,11 @@ class EditorUnknown extends EditorBase {
         );
     }
 
-    constructor(element) {
+    constructor() {
         super();
-        const $parentContainer = $(element);
         this.setContent(
             $(HTMLTemplate.get('editor/editor-unknown.html').render())
         );
-        $parentContainer.append(this.getContent());
     }
 }
 

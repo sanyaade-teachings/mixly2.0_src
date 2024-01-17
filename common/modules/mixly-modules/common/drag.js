@@ -70,10 +70,10 @@ class Drag {
         }
         this.firstDisplay = this.$first.css('display');
         this.lastDisplay = this.$last.css('display');
-        if (this.firstDisplay === 'none') {
+        if (!this.firstDisplay || this.firstDisplay === 'none') {
             this.firstDisplay = 'unset';
         }
-        if (this.lastDisplay === 'none') {
+        if (!this.lastDisplay || this.lastDisplay === 'none') {
             this.lastDisplay = 'unset';
         }
         this.events = new Events(['ondragStart', 'ondragEnd', 'onfull', 'exitfull', 'sizeChanged']);

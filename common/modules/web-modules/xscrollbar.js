@@ -223,7 +223,7 @@ class XScrollbar {
         animate();
       }
     }).bind(this);
-    this.$container.addEventListener('wheel', this.onWheel, { passive: true });
+    this.$container.addEventListener('wheel', this.onWheel);
   }
 
   /**

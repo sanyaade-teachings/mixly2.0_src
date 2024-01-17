@@ -119,7 +119,7 @@
 }
 
 .classic-theme .blocklyMenu > .blocklyMenuItem.blocklyMenuItemHighlight {
-    background-color: #009688;
+    background-color: var(--app-light-color);
     color: #fff;
 }
 

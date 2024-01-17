@@ -22,7 +22,7 @@
     }
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] button {
-        border-color: #009688;
+        border-color: var(--app-light-color);
         color: #fff;
     }
 
@@ -31,7 +31,7 @@
     }
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] button:active {
-        border: 1px solid #009688 !important;
+        border: 1px solid var(--app-light-color) !important;
     }
 
     html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] button:active {
@@ -74,7 +74,7 @@
     }
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] {
-        background-color: #009688 !important;
+        background-color: var(--app-light-color) !important;
     }
 
     html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] {
@@ -248,7 +248,7 @@
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
-        background-color: #009688;
+        background-color: var(--app-light-color);
     }
 
     html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,

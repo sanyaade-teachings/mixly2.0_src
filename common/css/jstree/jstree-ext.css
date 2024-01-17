@@ -91,9 +91,9 @@ html[data-bs-theme=dark] .jstree-anchor {
 }
 
 html[data-bs-theme=light] .jstree .jstree-node > .jstree-anchor > input {
-    border-color: #009688 !important;
+    border-color: var(--app-light-color) !important;
 }
 
 html[data-bs-theme=dark] .jstree .jstree-node > .jstree-anchor > input {
-    border-color: #007acc !important;
+    border-color: var(--app-dark-color) !important;
 }

@@ -25,7 +25,7 @@ html[data-bs-theme=dark] .loading {
 }
 
 html[data-bs-theme=light] .loading > .top-div {
-    background-color: #009688;
+    background-color: var(--app-light-color);
 }
 
 html[data-bs-theme=dark] .loading > .top-div {
@@ -68,11 +68,11 @@ html[data-bs-theme=dark] .loading > .center-div {
 }
 
 html[data-bs-theme=light] .loading > .bottom-div {
-    background-color: #009688;
+    background-color: var(--app-light-color);
 }
 
 html[data-bs-theme=dark] .loading > .bottom-div {
-    background-color: #007acc;
+    background-color: var(--app-dark-color);
 }
 
 html[data-bs-theme=light] > body {

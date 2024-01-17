@@ -89,7 +89,7 @@
 .chrome-tabs .chrome-tab[active] .chrome-tab-background {
   border-width: 2px 0 0 0;
   border-style: solid;
-  border-color: #009688;
+  border-color: var(--app-light-color);
 }
 .chrome-tabs .chrome-tab[active] .chrome-tab-background {
   background-color: #fff;
@@ -318,7 +318,7 @@ html[data-bs-theme=dark] .chrome-tabs .chrome-tabs-bottom-bar {
   background: #323639;
 }
 html[data-bs-theme=dark] .chrome-tabs .chrome-tab[active] .chrome-tab-background {
-  border-color: #007acc;
+  border-color: var(--app-dark-color);
 }
 
 .chrome-tabs .chrome-tab.dirty .chrome-tab-close {

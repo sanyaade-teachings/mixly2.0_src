@@ -34,11 +34,11 @@
 }
 
 html[data-bs-theme=light] .self-adaption-btn {
-    background-color: #009688 !important;
+    background-color: var(--app-light-color) !important;
 }
 
 html[data-bs-theme=dark] .self-adaption-btn {
-    background-color: var(--lay-color-normal) !important;
+    background-color: var(--app-dark-color) !important;
 }
 
 .statusbar-btn {

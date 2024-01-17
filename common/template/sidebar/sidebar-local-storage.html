@@ -25,11 +25,11 @@
     }
 
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .progress > .ui-mprogress > .indeter-bar {
-        background-color: #009688;
+        background-color: var(--app-light-color);
     }
 
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .progress > .ui-mprogress > .indeter-bar {
-        background-color: #007acc;
+        background-color: var(--app-dark-color);
     }
 
     div[m-id="{{d.mId}}"] > .folder-title {
@@ -103,12 +103,12 @@
 
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .folder-title.active,
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] .jstree-node.active > .jstree-wholerow {
-        border-color: #009688 !important;
+        border-color: var(--app-light-color) !important;
     }
 
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .folder-title.active,
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] .jstree-node.active > .jstree-wholerow {
-        border-color: #007acc !important;
+        border-color: var(--app-dark-color) !important;
     }
 </style>
 <div m-id="{{d.mId}}">

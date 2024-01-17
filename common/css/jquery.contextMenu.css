@@ -227,7 +227,7 @@
 .context-menu-item.context-menu-hover {
   color: #fff !important;
   cursor: pointer; 
-  background-color: #009688 !important;
+  background-color: var(--app-light-color) !important;
 }
 
 .context-menu-item.context-menu-disabled {

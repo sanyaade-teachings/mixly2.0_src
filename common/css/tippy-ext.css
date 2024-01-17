@@ -49,7 +49,7 @@ html[data-bs-theme=light] .tippy-content .m-btn {
 }
 
 html[data-bs-theme=light] .tippy-content .m-btn:hover {
-    background-color: #009688;
+    background-color: var(--app-light-color);
 }
 
 html[data-bs-theme=light] .tippy-content .m-btn.selected {

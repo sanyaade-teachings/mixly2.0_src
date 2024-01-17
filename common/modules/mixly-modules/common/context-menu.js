@@ -5,19 +5,25 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Events');
 goog.require('Mixly.Registry');
+goog.require('Mixly.HTMLTemplate');
 goog.provide('Mixly.ContextMenu');
 
 const {
     XML,
     Env,
     Events,
-    Registry
+    Registry,
+    HTMLTemplate
 } = Mixly;
 
 class ContextMenu {
     static {
-        this.TEMPLATE = goog.get(path.join(Env.templatePath, 'context-menu-item.html'));
-        this.getItem = (name, hotKey) => XML.render(ContextMenu.TEMPLATE, { name, hotKey });
+        HTMLTemplate.add(
+            'context-menu-item.html',
+            new HTMLTemplate(goog.get(path.join(Env.templatePath, 'context-menu-item.html')))
+        );
+
+        this.getItem = (name, hotKey) => HTMLTemplate.get('context-menu-item.html').render({ name, hotKey });
 
         this.generate = (menu, $trigger) => {
             let menuItems = {};

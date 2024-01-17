@@ -1,9 +1,25 @@
-<div style="display: flex;flex-direction: row;justify-content: space-between;align-items: center;">
-    <label style="cursor: pointer;">
+<style>
+    div[m-id="{{d.mId}}"] {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    div[m-id="{{d.mId}}"] > label {
+        cursor: pointer;
+    }
+
+    div[m-id="{{d.mId}}"] > div {
+        width: 20px;
+    }
+</style>
+<div m-id="{{d.mId}}">
+    <label>
         {{d.name}}
     </label>
-    <div style="width: 20px;"></div>
-    <label style="padding: 3px 0 0 0;cursor: pointer;">
+    <div></div>
+    <label>
         {{d.hotKey}}
     </label>
 </div>

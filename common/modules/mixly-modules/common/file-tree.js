@@ -44,6 +44,9 @@ class FileTree {
         this.$fileTree = $(this.scrollbar.$content);
         this.$fileTree.jstree({
             core: {
+                strings: {
+                    'Loading ...': '正在加载中...'
+                },
                 multiple: false,
                 animation: false,
                 worker: false,

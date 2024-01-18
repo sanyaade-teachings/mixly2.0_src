@@ -692,6 +692,7 @@
             ]
         },
         "ESP32C3 Dev Module": {
+            "xmlPath": "./xml/esp32.xml",
             "key": "esp32:esp32:esp32c3",
             "config": [
                 {
@@ -846,6 +847,7 @@
             ]
         },
         "CORE-ESP32-C3": {
+            "xmlPath": "./xml/esp32.xml",
             "key": "esp32:esp32:esp32c3@core",
             "config": [
                 {
@@ -952,6 +954,7 @@
             ]
         },
         "WiFiduinoV2": {
+            "xmlPath": "./xml/esp32.xml",
             "key": "esp32:esp32:wifiduino32c3",
             "config": [
                 {
@@ -1324,6 +1327,7 @@
             "key": "esp32:esp32:esp32s2@MixGo Car"
         },
         "ESP32S3 Dev Module": {
+            "xmlPath": "./xml/esp32.xml",
             "key": "esp32:esp32:esp32s3",
             "config": [
                 {
@@ -1559,6 +1563,7 @@
             ]
         },
         "WiFiduino32S3": {
+            "xmlPath": "./xml/esp32.xml",
             "key": "esp32:esp32:wifiduino32s3",
             "config": [
                 {

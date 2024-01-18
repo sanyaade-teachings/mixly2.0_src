@@ -188,6 +188,10 @@
         "provide": ["Mprogress"],
         "require": []
     }, {
+        "path": "modules/web-modules/ifvisible.min.js",
+        "provide": ["ifvisible"],
+        "require": []
+    }, {
         "path": "modules/web-modules/jquery/select2.min.js",
         "provide": ["$.select2"],
         "require": ["$"]
@@ -210,6 +214,10 @@
     }, {
         "path": "modules/web-modules/jquery/jquery.flot.min.js",
         "provide": ["$.flot"],
+        "require": ["$"]
+    }, {
+        "path": "ui/fomantic-ui/fomantic-ui.min.js",
+        "provide": ["$.fomanticUI"],
         "require": ["$"]
     }, {
         "path": "modules/web-modules/marked/marked.min.js",

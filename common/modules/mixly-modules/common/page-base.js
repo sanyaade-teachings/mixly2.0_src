@@ -110,6 +110,16 @@ class PageBase {
         this.#$tab_ = $tab;
     }
 
+    hideCloseBtn() {
+        const $closeBtn = this.getTab().find('.chrome-tab-close');
+        $closeBtn.css('display', 'none');
+    }
+
+    showCloseBtn() {
+        const $closeBtn = this.getTab().find('.chrome-tab-close');
+        $closeBtn.css('display', 'block');
+    }
+
     getTab() {
         return this.#$tab_;
     }

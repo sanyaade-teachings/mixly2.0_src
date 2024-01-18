@@ -42,10 +42,12 @@ class EditorBlockly extends EditorBase {
             'editor/editor-blockly.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-blockly.html')))
         );
+
         HTMLTemplate.add(
             'xml/default-categories.xml',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'xml/default-categories.xml')))
         );
+
         this.$blockly = $('<div class="page-item"></div>');
         this.editor = null;
         this.initBlockly = () => {

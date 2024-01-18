@@ -44,10 +44,12 @@ class EditorsManager extends PagesManager {
             'editor/editor-manager.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-manager.html')))
         );
+
         HTMLTemplate.add(
             'editor/editor-tab.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'editor/editor-tab.html')))
         );
+
         this.typesRegistry = new Registry();
         this.typesRegistry.register(['.mix', '.mil'], EditorMix);
         this.typesRegistry.register('.test', EditorBlockly);

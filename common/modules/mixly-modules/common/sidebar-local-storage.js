@@ -75,8 +75,7 @@ class SideBarLocalStorage extends PageBase {
     init() {
         super.init();
         this.#addContextMenu_();
-        const $closeBtn = this.getTab().find('.chrome-tab-close');
-        $closeBtn.css('display', 'none');
+        this.hideCloseBtn();
     }
 
     #addContextMenu_() {

@@ -44,6 +44,11 @@ class EditorCode extends EditorMonaco {
         this.setTheme(USER.theme);
     }
 
+    onMounted() {
+        super.onMounted();
+        this.#addChangeEventListenerExt_();
+    }
+
     #addContextMenu_() {
         this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`, {
             events: {
@@ -110,9 +115,11 @@ class EditorCode extends EditorMonaco {
     }
 
     setValue(data, ext) {
+        this.disableChangeEvent();
         super.setValue(data);
         this.language = this.getLanguageByExt(ext);
         this.setLanguage(this.language);
+        this.enableChangeEvent();
     }
 
     getLanguageByExt(ext) {
@@ -186,6 +193,11 @@ class EditorCode extends EditorMonaco {
             tabSize = 4;
         }
         return tabSize;
+    }
+
+    #addChangeEventListenerExt_() {
+        this.offEvent('change');
+        this.bind('change', () => this.addDirty());
     }
 
     dispose() {

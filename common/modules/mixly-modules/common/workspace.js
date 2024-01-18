@@ -35,6 +35,7 @@ class Workspace {
             'workspace.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'workspace.html')))
         );
+
         this.workspaces = [];
 
         this.getAll = () => {
@@ -83,6 +84,7 @@ class Workspace {
         this.leftSideBarManager.add('local_storage', 'local_storage', '本地');
         this.leftSideBarManager.add('local_storage', 'examples', '例程');
         this.leftSideBarManager.add('local_storage', 'wiki', '文档');
+        this.leftSideBarManager.add('libs', 'libs', '库管理');
         this.leftSideBarManager.changeTo('local_storage');
         this.rightSideBarManager = new RightSideBarsManager(this.$rightSidebar[0]);
         this.rightSideBarManager.add('local_storage', 'local_storage', '库管理');

@@ -8,6 +8,7 @@ goog.require('Mixly.Registry');
 goog.require('Mixly.Events');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.SideBarLocalStorage');
+goog.require('Mixly.SideBarLibs');
 goog.require('Mixly.PagesManager');
 goog.provide('Mixly.SideBarsManager');
 goog.provide('Mixly.LeftSideBarsManager');
@@ -21,6 +22,7 @@ const {
     Events,
     HTMLTemplate,
     SideBarLocalStorage,
+    SideBarLibs,
     PagesManager
 } = Mixly;
 
@@ -30,21 +32,26 @@ class SideBarsManager extends PagesManager {
             'sidebar/left-sidebar-manager.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/left-sidebar-manager.html')))
         );
+
         HTMLTemplate.add(
             'sidebar/left-sidebar-tab.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/left-sidebar-tab.html')))
         );
+
         HTMLTemplate.add(
             'sidebar/right-sidebar-manager.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/right-sidebar-manager.html')))
         );
+
         HTMLTemplate.add(
             'sidebar/right-sidebar-tab.html',
             new HTMLTemplate(goog.get(path.join(Env.templatePath, 'sidebar/right-sidebar-tab.html')))
         );
+
         this.typesRegistry = new Registry();
         this.managersRegistry = new Registry();
         this.typesRegistry.register(['#default', 'local_storage'], SideBarLocalStorage);
+        this.typesRegistry.register(['libs'], SideBarLibs);
         this.Align = {
             LEFT: 0,
             RIGHT: 1,

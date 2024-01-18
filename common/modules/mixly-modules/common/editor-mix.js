@@ -166,7 +166,7 @@ class EditorMix extends EditorBase {
         if (this.drag.shown !== Drag.Extend.BOTH) {
            return;
         }
-        codePage.setValue(blockPage.getValue(), false);
+        codePage.setValue(blockPage.getValue());
     }
 
     #addDragEventsListener_() {
@@ -249,6 +249,14 @@ class EditorMix extends EditorBase {
         })
     }
 
+    #addCodeChangeEventListener_() {
+        const codePage = this.getPage('code');
+        codePage.offEvent('change');
+        codePage.bind('change', () => {
+            this.addDirty();
+        });
+    }
+
     getCurrentEditor() {
         const blockPage = this.getPage('block');
         const codePage = this.getPage('code');
@@ -290,6 +298,7 @@ class EditorMix extends EditorBase {
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
             this.#workspaceChangeEvent_(event);
         });
+        this.#addCodeChangeEventListener_();
     }
 
     onUnmounted() {

@@ -1,4 +1,5 @@
 @import "./root.css";
+@import "../ui/fomantic-ui/semantic.min.css";
 @import "../ui/jquery-ui/jquery-ui.min.css";
 @import "../ui/bootstrap/css/bootstrap.min.css";
 @import "../ui/layui/css/layui.css";

@@ -5,6 +5,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Debug');
+goog.require('Mixly.Events');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBase');
 goog.provide('Mixly.EditorMonaco');
@@ -14,6 +15,7 @@ const {
     Env,
     Msg,
     Debug,
+    Events,
     HTMLTemplate,
     EditorBase
 } = Mixly;
@@ -28,8 +30,9 @@ class EditorMonaco extends EditorBase {
 
         this.$monaco = $('<div class="page-item"></div>');
         this.editor = null;
+        this.events = new Events(['change']);
 
-        this.addCursorEventsListener = () => {
+        this.addEventsListener = () => {
             const { editor } = this;
             $('#mixly-footer-cursor').hide();
 
@@ -66,6 +69,10 @@ class EditorMonaco extends EditorBase {
                     $('#mixly-footer-selected').html(text.length);
                 }
             });
+
+            editor.onDidChangeModelContent(() => {
+                this.events.run('change');
+            });
         }
 
         this.getEditor = () => {
@@ -99,18 +106,21 @@ class EditorMonaco extends EditorBase {
                     horizontal: 'visible'
                 }
             });
-            this.addCursorEventsListener();
+            this.addEventsListener();
         }
 
         this.initMonaco();
     }
 
     #readOnly = false;
+    #changeListener_ = null;
+    #enableChangeEvent_ = true;
 
     constructor() {
         super();
         const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
         this.setContent($(editorHTMLTemplate.render()));
+        this.addEventsType(['change']);
         this.editor = null;
         this.destroyed = false;
         this.state = null;
@@ -133,6 +143,26 @@ class EditorMonaco extends EditorBase {
         if (!this.#readOnly) {
             this.focus();
         }
+        this.#addChangeEventListener_();
+    }
+
+    disableChangeEvent() {
+        this.#enableChangeEvent_ = false;
+    }
+
+    enableChangeEvent() {
+        this.#enableChangeEvent_ = true;
+    }
+
+    #addChangeEventListener_() {
+        this.#changeListener_ = EditorMonaco.events.bind('change', () => {
+            this.#enableChangeEvent_ && this.runEvent('change');
+        });
+    }
+
+    #removeChangeEventListener_() {
+        EditorMonaco.events.unbind(this.#changeListener_);
+        this.offEvent('change');
     }
 
     onUnmounted() {
@@ -141,6 +171,7 @@ class EditorMonaco extends EditorBase {
         this.state = editor.saveViewState();
         EditorMonaco.getContent().detach();
         this.getContent().empty();
+        this.#removeChangeEventListener_();
     }
 
     dispose() {

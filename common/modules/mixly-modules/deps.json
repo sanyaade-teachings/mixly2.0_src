@@ -245,6 +245,7 @@
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Debug",
+            "Mixly.Events",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBase"
         ],
@@ -280,6 +281,7 @@
     {
         "path": "/common/editor.js",
         "require": [
+            "ifvisible",
             "Blockly",
             "Mixly.DragH",
             "Mixly.EditorMix",
@@ -771,6 +773,10 @@
     {
         "path": "/common/sidebar-libs.js",
         "require": [
+            "XScrollbar",
+            "Mixly.Env",
+            "Mixly.Config",
+            "Mixly.HTMLTemplate",
             "Mixly.Debug",
             "Mixly.PageBase"
         ],
@@ -811,6 +817,7 @@
             "Mixly.Events",
             "Mixly.HTMLTemplate",
             "Mixly.SideBarLocalStorage",
+            "Mixly.SideBarLibs",
             "Mixly.PagesManager"
         ],
         "provide": [

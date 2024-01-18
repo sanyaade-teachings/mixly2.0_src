@@ -102,6 +102,7 @@
 .blocklyWidgetDiv.classic-theme .blocklyMenu {
     background: #fff;
     border: 1px solid #bebebe;
+    box-sizing: unset;
 }
 
 .classic-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {
@@ -140,6 +141,7 @@
 .dark-theme.blocklyWidgetDiv .blocklyMenu {
     background: #252525;
     border: 1px solid #454545;
+    box-sizing: unset;
 }
 
 .dark-theme.geras-renderer .blocklyMenu > .blocklyMenuItem {

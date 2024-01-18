@@ -70,7 +70,6 @@ class EditorMd extends EditorBase {
 
     onUnmounted() {
         super.onUnmounted();
-        this.#removeChangeEventListener_();
     }
 
     #addDragEventsListener_() {
@@ -129,17 +128,15 @@ class EditorMd extends EditorBase {
     }
 
     #addChangeEventListener_() {
-        const editor = EditorMonaco.getEditor();
-        this.#listener_ = editor.onDidChangeModelContent(() => {
+        const codePage = this.getPage('code');
+        codePage.offEvent('change');
+        codePage.bind('change', () => {
+            this.addDirty();
             if (this.drag.shown === 'NEGATIVE') {
                 return;
             }
             this.updatePreview();
         });
-    }
-
-    #removeChangeEventListener_() {
-        this.#listener_.dispose();
     }
 
     updatePreview() {
@@ -148,14 +145,18 @@ class EditorMd extends EditorBase {
             return;
         }
         this.#prevCode_ = code;
-        const $dom = $(marked.parse(this.getPage('code').getValue()));
+        const $dom = $(marked.parse(code));
         const $as = $dom.find('a');
         $as.attr('target', '_blank');
         this.$previewContainer.html($dom);
     }
 
     setValue(data, ext) {
-        this.getPage('code').setValue(data, ext);
+        const codePage = this.getPage('code');
+        codePage.disableChangeEvent();
+        codePage.setValue(data, ext);
+        this.updatePreview();
+        codePage.enableChangeEvent();
     }
 
     dispose() {

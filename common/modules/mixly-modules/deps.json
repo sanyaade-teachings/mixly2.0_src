@@ -281,7 +281,6 @@
     {
         "path": "/common/editor.js",
         "require": [
-            "ifvisible",
             "Blockly",
             "Mixly.DragH",
             "Mixly.EditorMix",

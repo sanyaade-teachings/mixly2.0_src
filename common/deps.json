@@ -192,6 +192,10 @@
         "provide": ["ifvisible"],
         "require": []
     }, {
+        "path": "modules/web-modules/hotkeys.min.js",
+        "provide": ["hotkeys"],
+        "require": []
+    }, {
         "path": "modules/web-modules/jquery/select2.min.js",
         "provide": ["$.select2"],
         "require": ["$"]

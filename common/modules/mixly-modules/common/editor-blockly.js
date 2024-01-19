@@ -273,6 +273,7 @@ class EditorBlockly extends EditorBase {
     onMounted() {
         super.onMounted();
         this.getContent().append(EditorBlockly.getContent());
+        this.editor.scrollbar.setVisible(false);
         setTimeout(() => {
             Blockly.Events.disable();
             if (this.workspaceState) {
@@ -288,6 +289,7 @@ class EditorBlockly extends EditorBase {
             }
             Blockly.Events.enable();
             this.editor.scrollCenter();
+            this.editor.scrollbar.setVisible(true);
         }, 0);
     }
 

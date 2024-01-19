@@ -1,5 +1,16 @@
 [
     {
+        "path": "/common/app.js",
+        "require": [
+            "Mixly.Nav",
+            "Mixly.Workspace",
+            "Mixly.FooterBar"
+        ],
+        "provide": [
+            "Mixly.App"
+        ]
+    },
+    {
         "path": "/common/board-config-item.js",
         "require": [
             "Mixly.Env",
@@ -282,16 +293,11 @@
         "path": "/common/editor.js",
         "require": [
             "Blockly",
-            "Mixly.DragH",
-            "Mixly.EditorMix",
             "Mixly.Msg",
             "Mixly.Config",
             "Mixly.Nav",
-            "ChromeTabs",
-            "$.jstree",
-            "Mixly.EditorsManager",
-            "Mixly.Workspace",
-            "Mixly.Drag"
+            "Mixly.Drag",
+            "Mixly.Workspace"
         ],
         "provide": [
             "Mixly.Editor"
@@ -598,8 +604,7 @@
         "require": [
             "fsWrapper",
             "Mixly.Config",
-            "Mixly.Editor",
-            "Mixly.Drag"
+            "Mixly.Editor"
         ],
         "provide": [
             "Mixly.MicrobitFs"
@@ -1080,7 +1085,6 @@
             "Mixly.MFile",
             "Mixly.XML",
             "Mixly.Editor",
-            "Mixly.Drag",
             "Mixly.Msg",
             "Mixly.Electron.ArduShell",
             "Mixly.Electron.BU"
@@ -1286,7 +1290,6 @@
             "Blockly",
             "Mixly.MFile",
             "Mixly.Editor",
-            "Mixly.Drag",
             "Mixly.LayerExt",
             "Mixly.Msg"
         ],

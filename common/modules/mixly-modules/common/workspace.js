@@ -113,8 +113,8 @@ class Workspace {
     }
 
     addEventsListenerForEditorManager() {
-        const { events } = this.editorManager.tabs;
-        events.bind('activeChange', (event) => {
+        const { tabs } = this.editorManager;
+        tabs.bind('activeChange', (event) => {
             const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
             const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
@@ -122,8 +122,7 @@ class Workspace {
             fileTree.deselectAll();
             fileTree.select(tabId);
         });
-
-        events.bind('destroyed', (event) => {
+        tabs.bind('destroyed', (event) => {
             const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
             const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
@@ -133,9 +132,8 @@ class Workspace {
     }
 
     addFuncForStatusbarTabs() {
-        const { events } = this.statusBarTabs;
-        events.bind('show', () => this.dragH.show());
-        events.bind('hide', () => this.dragH.hide());
+        this.statusBarTabs.bind('show', () => this.dragH.show());
+        this.statusBarTabs.bind('hide', () => this.dragH.hide());
     }
 
     addDragEventsListener() {
@@ -146,8 +144,7 @@ class Workspace {
             startExitFullSize: '70%'
         });
 
-        const eventsH = this.dragH.events;
-        eventsH.bind('sizeChanged', () => {
+        this.dragH.bind('sizeChanged', () => {
             this.resize();
         });
 
@@ -159,8 +156,7 @@ class Workspace {
             startExitFullSize: '15%'
         });
 
-        const eventsVLeft = this.dragVLeft.events;
-        eventsVLeft.bind('sizeChanged', () => {
+        this.dragVLeft.bind('sizeChanged', () => {
             this.resize();
         });
 
@@ -172,8 +168,7 @@ class Workspace {
             startExitFullSize: '85%'
         });
 
-        const eventsVRight = this.dragVRight.events;
-        eventsVRight.bind('sizeChanged', () => {
+        this.dragVRight.bind('sizeChanged', () => {
             this.resize();
         });
     }

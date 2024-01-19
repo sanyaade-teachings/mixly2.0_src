@@ -25,6 +25,11 @@ class EditorBase extends PageBase {
         this.removeDirty();
     }
 
+    dispose() {
+        this.#$btnsContent_ && this.#$btnsContent_.remove();
+        super.dispose();
+    }
+
     undo() {}
 
     redo() {}

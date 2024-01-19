@@ -65,8 +65,7 @@ class Events {
         return this;
     }
 
-    run(...args) {
-        const type = args[0];
+    run(type, ...args) {
         let outputs = [];
         if (!this.exist(type)) {
             return outputs;
@@ -75,7 +74,6 @@ class Events {
         if (!eventsFunc) {
             return outputs;
         }
-        args.shift();
         for (let [_, func] of eventsFunc.getAllItems()) {
             outputs.push(func(...args));
         }

@@ -27,6 +27,8 @@ class Drag {
         };
     }
 
+    #events_ = null;
+
     constructor(element, config) {
         this.config = { ...Drag.DEFAULT_CONFIG, ...config };
         this.$container = $(element);
@@ -76,7 +78,7 @@ class Drag {
         if (!this.lastDisplay || this.lastDisplay === 'none') {
             this.lastDisplay = 'unset';
         }
-        this.events = new Events(['ondragStart', 'ondragEnd', 'onfull', 'exitfull', 'sizeChanged']);
+        this.#events_ = new Events(['ondragStart', 'ondragEnd', 'onfull', 'exitfull', 'sizeChanged']);
         this.addEventListener();
     }
 
@@ -98,7 +100,7 @@ class Drag {
             const prevSize = this.size;
 
             document.onmousemove = (docEvent) => {
-                this.events.run('ondragStart');
+                this.runEvent('ondragStart');
                 let iT, maxT, minT = parseInt(min), movement;
                 if (type === 'h') {
                     iT = dragElem.top + (docEvent.clientY - dis);
@@ -116,18 +118,18 @@ class Drag {
                 prev = iT;
                 if (full[0] && movement < 0 && iT < minT * 0.4) { // 向上移动或向左移动
                     this.changeTo('0%');
-                    this.events.run('onfull', Drag.Extend.NEGATIVE);
+                    this.runEvent('onfull', Drag.Extend.NEGATIVE);
                 } else if (full[1] && movement > 0 && iT > (maxT + minT * 0.6)) { // 向下移动或向右移动
                     this.changeTo('100%');
-                    this.events.run('onfull', Drag.Extend.POSITIVE);
+                    this.runEvent('onfull', Drag.Extend.POSITIVE);
                 } else if (iT < maxT && iT > minT) { // 在minT和maxT间移动
                     let shown = this.shown;
                     this.changeTo(iT);
                     if (shown !== Drag.Extend.BOTH) {
-                        this.events.run('exitfull', shown);
+                        this.runEvent('exitfull', shown);
                     }
                 }
-                this.events.run('ondragEnd');
+                this.runEvent('ondragEnd');
                 return false;
             };
             document.onmouseup = () => {
@@ -184,7 +186,7 @@ class Drag {
         }
         elem[0].css(elemCssType, elem1Size);
         elem[1].css(elemCssType, elem2Size);
-        this.events.run('sizeChanged');
+        this.runEvent('sizeChanged');
     }
 
     full(type) {
@@ -192,7 +194,7 @@ class Drag {
             return;
         }
         if (this.shown !== Drag.Extend.BOTH) {
-            this.events.run('exitfull', this.shown);
+            this.runEvent('exitfull', this.shown);
         }
         switch(type) {
         case Drag.Extend.NEGATIVE:
@@ -201,7 +203,7 @@ class Drag {
         case Drag.Extend.POSITIVE:
             this.changeTo('100%');
         }
-        this.events.run('onfull', type);
+        this.runEvent('onfull', type);
     }
 
     exitfull() {
@@ -216,7 +218,7 @@ class Drag {
         }
         let shown = this.shown;
         this.changeTo(prevSize);
-        this.events.run('exitfull', shown);
+        this.runEvent('exitfull', shown);
     }
 
     show(type) {
@@ -238,8 +240,32 @@ class Drag {
     }
 
     dispose() {
-        this.events.reset();
+        this.resetEvent();
         this.$dragElem.remove();
+    }
+
+    bind(type, func) {
+        return this.#events_.bind(type, func);
+    }
+
+    unbind(id) {
+        this.#events_.unbind(id);
+    }
+
+    addEventsType(eventsType) {
+        this.#events_.addType(eventsType);
+    }
+
+    runEvent(eventsType, ...args) {
+        this.#events_.run(eventsType, ...args);
+    }
+
+    offEvent(eventsType) {
+        this.#events_.off(eventsType);
+    }
+
+    resetEvent() {
+        this.#events_.reset();
     }
 }
 

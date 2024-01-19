@@ -22,6 +22,8 @@ const {
 const { USER } = Config;
 
 class PagesTab {
+    #events_ = null;
+    
     /**
      * config = {
      *      parentElem: element,
@@ -49,7 +51,7 @@ class PagesTab {
         $parentsContainer.append(this.$content);
         this.#addEventsListener_();
         this.tabsRegistry = new Registry();
-        this.events = new Events(['activeChange', 'created', 'destroyed', 'checkDestroy', 'beforeDestroy']);
+        this.#events_ = new Events(['activeChange', 'created', 'destroyed', 'checkDestroy', 'beforeDestroy']);
     }
 
     #addEventsListener_() {
@@ -57,13 +59,13 @@ class PagesTab {
         const container = $container[0];
 
         this.chromeTabs.checkDestroy = (event) => {
-            const status = this.events.run('checkDestroy', event);
+            const status = this.runEvent('checkDestroy', event);
             return _.sum(status) == status.length;
         }
 
         // active Tab被改变时触发
         container.addEventListener('activeChange', (event) => {
-            this.events.run('activeChange', event);
+            this.runEvent('activeChange', event);
         });
 
         // 添加新Tab时触发
@@ -71,7 +73,7 @@ class PagesTab {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.tabsRegistry.register(tabId, tabEl);
-            this.events.run('created', event);
+            this.runEvent('created', event);
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
@@ -79,7 +81,7 @@ class PagesTab {
 
         // 移除已有Tab之前触发
         container.addEventListener('beforeDestroy', (event) => {
-            this.events.run('beforeDestroy', event);
+            this.runEvent('beforeDestroy', event);
         });
 
         // 移除已有Tab时触发
@@ -87,7 +89,7 @@ class PagesTab {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.tabsRegistry.unregister(tabId);
-            this.events.run('destroyed', event);
+            this.runEvent('destroyed', event);
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
@@ -142,15 +144,27 @@ class PagesTab {
     }
 
     bind(type, func) {
-        return this.events.bind(type, func);
+        return this.#events_.bind(type, func);
     }
 
     unbind(id) {
-        this.events.unbind(id);
+        this.#events_.unbind(id);
     }
 
-    off(type) {
-        this.events.off(type);
+    addEventsType(eventsType) {
+        this.#events_.addType(eventsType);
+    }
+
+    runEvent(eventsType, ...args) {
+        this.#events_.run(eventsType, ...args);
+    }
+
+    offEvent(eventsType) {
+        this.#events_.off(eventsType);
+    }
+
+    resetEvent() {
+        this.#events_.reset();
     }
 }
 

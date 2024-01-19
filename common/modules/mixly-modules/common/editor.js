@@ -1,28 +1,19 @@
 goog.loadJs('common', () => {
 
 goog.require('Blockly');
-goog.require('Mixly.DragH');
-goog.require('Mixly.EditorMix');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Config');
 goog.require('Mixly.Nav');
-goog.require('ChromeTabs');
-goog.require('$.jstree');
-goog.require('Mixly.EditorsManager');
-goog.require('Mixly.Workspace');
 goog.require('Mixly.Drag');
+goog.require('Mixly.Workspace');
 goog.provide('Mixly.Editor');
 
 const {
-    DragH,
-    DragV,
-    EditorMix,
     Msg,
     Config,
     Nav,
-    EditorsManager,
-    Workspace,
     Drag,
+    Workspace,
     Editor
 } = Mixly;
 
@@ -32,11 +23,11 @@ Editor.init = () => {
     Editor.workspace = new Workspace($('#mixly-body')[0]);
     Mixly.mainStatusBarTabs = Editor.workspace.statusBarTabs;
     const { editorManager } = Editor.workspace;
-    const { events } = editorManager.tabs;
-    events.bind('activeChange', (event) => {
+    const { tabs } = editorManager;
+    tabs.bind('activeChange', (event) => {
         Nav.resize();
     });
-    events.bind('destroyed', (event) => {
+    tabs.bind('destroyed', (event) => {
         !editorManager.getActive() && Nav.resize();
     });
     Nav.register({
@@ -64,7 +55,7 @@ Editor.init = () => {
         weight: 1
     });
 
-    editorManager.tabs.addTab({
+    tabs.addTab({
         name: 'Untitled-1.mix',
         title: 'Untitled-1.mix',
         type: '.mix',
@@ -91,7 +82,7 @@ Editor.init = () => {
         weight: 1
     });
 
-    const leftSideBarEvents = Editor.workspace.dragVLeft.events;
+    const leftSideBarEvents = Editor.workspace.dragVLeft;
     leftSideBarEvents.bind('onfull', (type) => {
         const { $btn } = leftSideBarOption;
         const $a = $btn.children('a');
@@ -132,7 +123,7 @@ Editor.init = () => {
         weight: 3
     });
 
-    const rightSideBarEvents = Editor.workspace.dragVRight.events;
+    const rightSideBarEvents = Editor.workspace.dragVRight;
     rightSideBarEvents.bind('onfull', (type) => {
         const { $btn } = rightSideBarOption;
         const $a = $btn.children('a');
@@ -173,7 +164,7 @@ Editor.init = () => {
         weight: 2
     });
 
-    const bottomSideBarEvents = Editor.workspace.dragH.events;
+    const bottomSideBarEvents = Editor.workspace.dragH;
     bottomSideBarEvents.bind('onfull', (type) => {
         const { $btn } = bottomSideBarOption;
         const $a = $btn.children('a');

@@ -76,12 +76,12 @@ class PageBase {
     }
 
     dispose() {
-        this.#events_.run('destroyed');
+        this.runEvent('destroyed');
         this.#forward_('dispose');
         this.#pages_.reset();
         this.#$content_.remove();
         this.#$tab_ && this.#$tab_.remove();
-        this.#events_.reset();
+        this.resetEvent();
     }
 
     #forward_(type) {
@@ -97,7 +97,7 @@ class PageBase {
         this.#forward_('onMounted');
         this.#mounted_ = true;
         this.#active_ = true;
-        this.#events_.run('active');
+        this.runEvent('active');
     }
 
     onUnmounted() {
@@ -130,7 +130,7 @@ class PageBase {
             return;
         }
         $tab.addClass('dirty');
-        this.#events_.run('addDirty');
+        this.#events_.runEvent('addDirty');
         this.#dirty = true;
     }
 
@@ -139,7 +139,7 @@ class PageBase {
         if (!$tab || !this.isDirty()) {
             return;
         }
-        this.#events_.run('removeDirty');
+        this.runEvent('removeDirty');
         $tab.removeClass('dirty');
         this.#dirty = false;
     }
@@ -168,12 +168,16 @@ class PageBase {
         this.#events_.addType(eventsType);
     }
 
-    runEvent(eventsType) {
-        this.#events_.run(eventsType);
+    runEvent(eventsType, ...args) {
+        this.#events_.run(eventsType, ...args);
     }
 
     offEvent(eventsType) {
         this.#events_.off(eventsType);
+    }
+
+    resetEvent() {
+        this.#events_.reset();
     }
 }
 

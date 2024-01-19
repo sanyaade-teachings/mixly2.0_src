@@ -3,7 +3,6 @@ goog.loadJs('web', () => {
 goog.require('Blockly');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Editor');
-goog.require('Mixly.Drag');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.Web.File');
@@ -11,7 +10,6 @@ goog.provide('Mixly.Web.File');
 const {
     MFile,
     Editor,
-    Drag,
     Web,
     LayerExt,
     Msg

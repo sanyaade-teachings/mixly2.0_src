@@ -79,9 +79,8 @@ class EditorMd extends EditorBase {
             startSize: '0%',
             startExitFullSize: '70%'
         });
-        const { events } = this.drag;
-        events.bind('sizeChanged', () => this.resize());
-        events.bind('onfull', (type) => {
+        this.drag.bind('sizeChanged', () => this.resize());
+        this.drag.bind('onfull', (type) => {
             this.$btns.removeClass('self-adaption-btn');
             let $btn = null;
             switch(type) {
@@ -94,7 +93,7 @@ class EditorMd extends EditorBase {
             }
             $btn.addClass('self-adaption-btn');
         });
-        events.bind('exitfull', (type) => {
+        this.drag.bind('exitfull', (type) => {
             this.$btns.removeClass('self-adaption-btn');
             const $btn = this.$btns.filter('[m-id="mixture"]');
             $btn.addClass('self-adaption-btn');

@@ -8,7 +8,6 @@ goog.require('Mixly.Title');
 goog.require('Mixly.MFile');
 goog.require('Mixly.XML');
 goog.require('Mixly.Editor');
-goog.require('Mixly.Drag');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Electron.ArduShell');
 goog.require('Mixly.Electron.BU');
@@ -22,7 +21,6 @@ const {
     MFile,
     XML,
     Editor,
-    Drag,
     Msg,
     Electron
 } = Mixly;

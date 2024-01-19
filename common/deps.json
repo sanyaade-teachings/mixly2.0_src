@@ -220,7 +220,7 @@
         "provide": ["$.flot"],
         "require": ["$"]
     }, {
-        "path": "ui/fomantic-ui/fomantic-ui.min.js",
+        "path": "ui/fomantic-ui/semantic.min.js",
         "provide": ["$.fomanticUI"],
         "require": ["$"]
     }, {

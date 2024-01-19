@@ -273,7 +273,6 @@ class EditorBlockly extends EditorBase {
     onMounted() {
         super.onMounted();
         this.getContent().append(EditorBlockly.getContent());
-        this.editor.scrollbar.setVisible(false);
         setTimeout(() => {
             Blockly.Events.disable();
             if (this.workspaceState) {
@@ -289,7 +288,6 @@ class EditorBlockly extends EditorBase {
             }
             Blockly.Events.enable();
             this.editor.scrollCenter();
-            this.editor.scrollbar.setVisible(true);
         }, 0);
     }
 
@@ -299,7 +297,6 @@ class EditorBlockly extends EditorBase {
         this.undoStack = [...this.editor.undoStack_];
         this.redoStack = [...this.editor.redoStack_];
         Blockly.Events.disable();
-        this.editor.clear();
         this.editor.clearUndo();
         Blockly.Events.enable();
         EditorBlockly.getContent().detach();

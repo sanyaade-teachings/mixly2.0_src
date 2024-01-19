@@ -2,12 +2,10 @@ goog.loadJs('common', () => {
 
 goog.require('fsWrapper');
 goog.require('Mixly.Config');
-goog.require('Mixly.Editor');
 goog.provide('Mixly.MicrobitFs');
 
 const {
     Config,
-    Editor,
     MicrobitFs
 } = Mixly;
 

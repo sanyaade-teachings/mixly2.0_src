@@ -9,7 +9,6 @@ goog.require('Mixly.Boards');
 goog.require('Mixly.XML');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.MicrobitFs');
-goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.MFile');
 
@@ -22,7 +21,6 @@ const {
     XML,
     LayerExt,
     MicrobitFs,
-    Editor,
     Msg,
     MFile
 } = Mixly;

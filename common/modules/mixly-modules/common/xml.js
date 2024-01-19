@@ -54,34 +54,16 @@ XML.TEMPLATE_CONFIG = [
         path: '/lib-manager-div.html',
         config: {},
         appendToBody: false
-    }, {
-        type: 'APP_DIV',
-        path: '/app.html',
-        config: {
-            outputAceName: Msg.Lang['输出'],
-            row: Msg.Lang['行'],
-            column: Msg.Lang['列'],
-            unknown: Msg.Lang['未知'],
-            config: Msg.Lang['配置板卡'],
-            selected: Msg.Lang['已选择'],
-            on: Msg.Lang['在'],
-            message: Msg.Lang['消息'],
-            example: Msg.Lang['例程']
-        },
-        appendToBody: false
     }
 ];
 
 XML.TEMPLATE_ENV = {
     LOADER_DIV: true,
     SELECTOR_DIV: true,
-    BOARD_SELECTOR: true,
-    PORT_SELECTOR: !(BOARD?.nav?.run || BOARD?.nav?.cancel || BOARD?.nav?.webrun || BOARD?.nav?.webcancel || (!goog.isElectron && !Env.hasSocketServer)),
     PARSE_MIX_ERROR_DIV: true,
     READ_BITMAP_DIV: true,
     PROGRESS_BAR_DIV: goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
-    LIB_MANAGER_DIV: goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary,
-    APP_DIV: true
+    LIB_MANAGER_DIV: goog.isElectron && BOARD?.nav?.setting?.thirdPartyLibrary
 };
 
 XML.TEMPLATE_STR = {};
@@ -99,10 +81,11 @@ XML.getDom = (xmlStr, config = {}) => {
 XML.render = (xmlStr, config = {}) => {
     const newConfig = {};
     for (let i in config) {
-        if (typeof config[i] === 'function')
+        if (typeof config[i] === 'function') {
             newConfig[i] = config[i]();
-        else
+        } else {
             newConfig[i] = config[i];
+        }
     }
     return laytpl(xmlStr).render(newConfig);
 }

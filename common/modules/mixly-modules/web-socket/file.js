@@ -3,7 +3,6 @@ goog.loadJs('web', () => {
 goog.require('layui');
 goog.require('Blockly');
 goog.require('Mixly.XML');
-goog.require('Mixly.Editor');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Boards');
 goog.require('Mixly.LayerExt');
@@ -13,7 +12,6 @@ goog.provide('Mixly.WebSocket.File');
 
 const {
     XML,
-    Editor,
     MFile,
     Boards,
     LayerExt,

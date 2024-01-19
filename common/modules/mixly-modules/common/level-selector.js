@@ -1,12 +1,10 @@
 goog.loadJs('common', () => {
 
 goog.require('layui');
-goog.require('Mixly.Editor');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.LevelSelector');
 
 const {
-    Editor,
     Msg,
     LevelSelector
 } = Mixly;

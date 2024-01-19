@@ -9,7 +9,6 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.ToolboxSearcher');
 goog.require('Mixly.MString');
-goog.require('Mixly.Editor');
 goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
 goog.require('Mixly.FooterLayerBoardConfig');
@@ -26,7 +25,6 @@ const {
     Env,
     ToolboxSearcher,
     MString,
-    Editor,
     FooterLayer,
     Msg,
     FooterLayerBoardConfig,

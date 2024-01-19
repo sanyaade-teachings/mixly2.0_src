@@ -161,7 +161,7 @@ class EditorMonaco extends EditorBase {
     }
 
     #removeChangeEventListener_() {
-        EditorMonaco.events.unbind(this.#changeListener_);
+        this.#changeListener_ && EditorMonaco.events.unbind(this.#changeListener_);
         this.offEvent('change');
     }
 
@@ -175,6 +175,7 @@ class EditorMonaco extends EditorBase {
     }
 
     dispose() {
+        this.#removeChangeEventListener_();
         this.editor.dispose();
         super.dispose();
         this.editor = null;

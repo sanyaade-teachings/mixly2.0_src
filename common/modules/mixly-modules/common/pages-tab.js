@@ -10,20 +10,20 @@ goog.require('Mixly.IdGenerator');
 goog.require('Mixly.Config');
 goog.require('Mixly.Events');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Component');
 goog.provide('Mixly.PagesTab');
 
 const {
     IdGenerator,
     Config,
     Events,
-    Registry
+    Registry,
+    Component
 } = Mixly;
 
 const { USER } = Config;
 
-class PagesTab {
-    #events_ = null;
-    
+class PagesTab extends Component {
     /**
      * config = {
      *      parentElem: element,
@@ -31,12 +31,13 @@ class PagesTab {
      * }
      **/
     constructor(config) {
+        super();
         const $parentsContainer = $(config.parentElem);
-        this.$content = $(config.contentElem);
-        this.$container = this.$content.children('div');
+        const $content = $(config.contentElem);
+        this.$tabsContainer = $content.children('div');
         this.chromeTabs = new ChromeTabs();
-        this.chromeTabs.init(this.$container[0]);
-        this.scrollbar = new XScrollbar(this.$content.find('.chrome-tabs-content')[0], {
+        this.chromeTabs.init(this.$tabsContainer[0]);
+        this.scrollbar = new XScrollbar($content.find('.chrome-tabs-content')[0], {
             onlyHorizontal: true,
             thumbSize: 1.7,
             thumbRadius: 0,
@@ -47,25 +48,25 @@ class PagesTab {
             ghostClass: 'blue-background-class',
             direction: 'horizontal'
         });
-        $parentsContainer.empty();
-        $parentsContainer.append(this.$content);
+        this.setContent($content);
+        this.mountOn($parentsContainer);
         this.#addEventsListener_();
         this.tabsRegistry = new Registry();
-        this.#events_ = new Events(['activeChange', 'created', 'destroyed', 'checkDestroy', 'beforeDestroy']);
+        this.addEventsType(['activeTabChange', 'tabCreated', 'tabDestroyed', 'tabCheckDestroy', 'tabBeforeDestroy']);
     }
 
     #addEventsListener_() {
-        const { $container } = this;
-        const container = $container[0];
+        const { $tabsContainer } = this;
+        const container = $tabsContainer[0];
 
         this.chromeTabs.checkDestroy = (event) => {
-            const status = this.runEvent('checkDestroy', event);
+            const status = this.runEvent('tabCheckDestroy', event);
             return _.sum(status) == status.length;
         }
 
         // active Tab被改变时触发
         container.addEventListener('activeChange', (event) => {
-            this.runEvent('activeChange', event);
+            this.runEvent('activeTabChange', event);
         });
 
         // 添加新Tab时触发
@@ -73,7 +74,7 @@ class PagesTab {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.tabsRegistry.register(tabId, tabEl);
-            this.runEvent('created', event);
+            this.runEvent('tabCreated', event);
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
@@ -81,7 +82,7 @@ class PagesTab {
 
         // 移除已有Tab之前触发
         container.addEventListener('beforeDestroy', (event) => {
-            this.runEvent('beforeDestroy', event);
+            this.runEvent('tabBeforeDestroy', event);
         });
 
         // 移除已有Tab时触发
@@ -89,7 +90,7 @@ class PagesTab {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
             this.tabsRegistry.unregister(tabId);
-            this.runEvent('destroyed', event);
+            this.runEvent('tabDestroyed', event);
             setTimeout(() => {
                 this.scrollbar.update();
             }, 500);
@@ -133,38 +134,10 @@ class PagesTab {
         }
     }
 
-    resize() {
-    }
-
     dispose() {
         this.chromeTabs.dispose();
-        this.$content.remove();
-        this.$container.remove();
         this.tabsRegistry.reset();
-    }
-
-    bind(type, func) {
-        return this.#events_.bind(type, func);
-    }
-
-    unbind(id) {
-        this.#events_.unbind(id);
-    }
-
-    addEventsType(eventsType) {
-        this.#events_.addType(eventsType);
-    }
-
-    runEvent(eventsType, ...args) {
-        this.#events_.run(eventsType, ...args);
-    }
-
-    offEvent(eventsType) {
-        this.#events_.off(eventsType);
-    }
-
-    resetEvent() {
-        this.#events_.reset();
+        super.dispose();
     }
 }
 

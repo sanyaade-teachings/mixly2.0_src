@@ -1,35 +1,33 @@
 goog.loadJs('common', () => {
 
+goog.require('Mixly.Component');
 goog.require('Mixly.Events');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Component');
 goog.provide('Mixly.PageBase');
 
 const {
     Events,
-    Registry
+    Registry,
+    Component
 } = Mixly;
 
-class PageBase {
-    #dirty = false;
+class PageBase extends Component {
     #pages_ = new Registry();
-    #$content_ = null;
     #$tab_ = null;
+    #dirty_ = false;
     #active_ = true;
     #inited_ = false;
-    #mounted_ = false;
-    #events_ = new Events(['addDirty', 'removeDirty', 'destroyed', 'created', 'active']);
 
-    constructor() {}
+    constructor() {
+        super();
+        this.addEventsType(['addDirty', 'removeDirty', 'active']);
+    }
 
     init() {
         this.#forward_('init');
         this.#inited_ = true;
-        this.#events_.run('created');
-    }
-
-    mountOn($container) {
-        $container.append(this.getContent());
-        this.onMounted();
+        this.runEvent('created');
     }
 
     addPage($child, id, page) {
@@ -51,37 +49,23 @@ class PageBase {
     }
 
     mountPage($child, id, page) {
-        if (!this.#mounted_) {
+        if (!this.isMounted()) {
             return;
         }
         this.addPage($child, id, page);
         page.onMounted();
     }
 
-    setContent(jqElem) {
-        if (this.#$content_) {
-            this.#$content_.replaceWith(jqElem);
-            this.#$content_ = jqElem;
-        } else {
-            this.#$content_ = jqElem;
-        }
-    }
-
-    getContent() {
-        return this.#$content_;
-    }
-
     resize() {
+        super.resize();
         this.#forward_('resize');
     }
 
     dispose() {
-        this.runEvent('destroyed');
         this.#forward_('dispose');
         this.#pages_.reset();
-        this.#$content_.remove();
         this.#$tab_ && this.#$tab_.remove();
-        this.resetEvent();
+        super.dispose();
     }
 
     #forward_(type) {
@@ -94,15 +78,15 @@ class PageBase {
     }
 
     onMounted() {
+        super.onMounted();
         this.#forward_('onMounted');
-        this.#mounted_ = true;
         this.#active_ = true;
         this.runEvent('active');
     }
 
     onUnmounted() {
+        super.onUnmounted();
         this.#forward_('onUnmounted');
-        this.#mounted_ = false;
         this.#active_ = false;
     }
 
@@ -130,8 +114,8 @@ class PageBase {
             return;
         }
         $tab.addClass('dirty');
-        this.#events_.runEvent('addDirty');
-        this.#dirty = true;
+        this.runEvent('addDirty');
+        this.#dirty_ = true;
     }
 
     removeDirty() {
@@ -141,11 +125,11 @@ class PageBase {
         }
         this.runEvent('removeDirty');
         $tab.removeClass('dirty');
-        this.#dirty = false;
+        this.#dirty_ = false;
     }
 
     isDirty() {
-        return this.#dirty;
+        return this.#dirty_;
     }
 
     isInited() {
@@ -154,30 +138,6 @@ class PageBase {
 
     isActive() {
         return this.#active_;
-    }
-
-    bind(type, func) {
-        return this.#events_.bind(type, func);
-    }
-
-    unbind(id) {
-        this.#events_.unbind(id);
-    }
-
-    addEventsType(eventsType) {
-        this.#events_.addType(eventsType);
-    }
-
-    runEvent(eventsType, ...args) {
-        this.#events_.run(eventsType, ...args);
-    }
-
-    offEvent(eventsType) {
-        this.#events_.off(eventsType);
-    }
-
-    resetEvent() {
-        this.#events_.reset();
     }
 }
 

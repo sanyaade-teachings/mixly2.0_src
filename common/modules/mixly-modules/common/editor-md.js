@@ -68,10 +68,6 @@ class EditorMd extends EditorBase {
         this.#addChangeEventListener_();
     }
 
-    onUnmounted() {
-        super.onUnmounted();
-    }
-
     #addDragEventsListener_() {
         this.drag = new DragV(this.getContent()[0], {
             min: '200px',

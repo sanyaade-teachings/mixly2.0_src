@@ -2,14 +2,16 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.PagesTab');
 goog.require('Mixly.Registry');
+goog.require('Mixly.Component');
 goog.provide('Mixly.PagesManager');
 
 const {
     PagesTab,
-    Registry
+    Registry,
+    Component
 } = Mixly;
 
-class PagesManager {
+class PagesManager extends Component {
     /**
      * config = {
      *      parentElem: element,
@@ -21,8 +23,9 @@ class PagesManager {
      * }
      **/
     constructor(config) {
+        super();
         const $parentContainer = $(config.parentElem);
-        this.$content = $(config.managerContentElem);
+        const $content = $(config.managerContentElem);
         this.typesRegistry = config.typesRegistry;
         this.$tabsContainer = $(config.tabElem);
         this.$editorContainer = $(config.bodyElem);
@@ -30,14 +33,14 @@ class PagesManager {
             parentElem: config.tabElem,
             contentElem: config.tabContentElem
         });
-        this.$content.append(this.$editorContainer);
+        $content.append(this.$editorContainer);
         this.$welcomePage = null;
-        $parentContainer.empty();
-        $parentContainer.append(this.$content);
+        this.setContent($content);
+        this.mountOn($parentContainer);
         let PageType = this.typesRegistry.getItem('#welcome');
         if (PageType) {
             this.$welcomePage = (new PageType()).getContent();
-            this.$content.replaceWith(this.$welcomePage);
+            $content.replaceWith(this.$welcomePage);
         }
         this.page = 'welcome';
         this.#addEventsListener_();
@@ -48,7 +51,7 @@ class PagesManager {
     #addEventsListener_() {
         const pageTabs = this.getTabs();
         // active Tab被改变时触发
-        pageTabs.bind('activeChange', (event) => {
+        pageTabs.bind('activeTabChange', (event) => {
             const prevEditor = this.getActive();
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
@@ -65,7 +68,7 @@ class PagesManager {
         });
 
         // 添加新Tab时触发
-        pageTabs.bind('created', (event) => {
+        pageTabs.bind('tabCreated', (event) => {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const type = $(tabEl).attr('data-tab-type');
@@ -78,7 +81,7 @@ class PagesManager {
             page.setTab($(tabEl));
             if (this.$welcomePage) {
                 if (this.pagesRegistry.length() && this.page === 'welcome') {
-                    this.$welcomePage.replaceWith(this.$content);
+                    this.$welcomePage.replaceWith(this.getContent());
                     this.page = 'editor';
                 }
             }
@@ -86,7 +89,7 @@ class PagesManager {
         });
 
         // 移除已有Tab时触发
-        pageTabs.bind('destroyed', (event) => {
+        pageTabs.bind('tabDestroyed', (event) => {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const page = this.pagesRegistry.getItem(id);
@@ -97,7 +100,7 @@ class PagesManager {
             this.pagesRegistry.unregister(id);
             if (this.$welcomePage) {
                 if (!this.pagesRegistry.length() && this.page !== 'welcome') {
-                    this.$content.replaceWith(this.$welcomePage);
+                    this.getContent().replaceWith(this.$welcomePage);
                     this.page = 'welcome';
                 }
             }
@@ -105,6 +108,7 @@ class PagesManager {
     }
 
     resize() {
+        super.resize();
         const page = this.getActive();
         page && page.resize();
         this.tabs.resize();

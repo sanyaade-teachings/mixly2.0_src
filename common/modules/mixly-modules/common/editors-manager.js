@@ -79,7 +79,7 @@ class EditorsManager extends PagesManager {
         const editorTabs = this.getTabs();
         
         // active Tab被改变时触发
-        editorTabs.bind('activeChange', (event) => {
+        editorTabs.bind('activeTabChange', (event) => {
             const $btnsContainer = Nav.getEditorBtnsContainer();
             $btnsContainer.children('div').detach();
             const { tabEl } = event.detail;
@@ -97,7 +97,7 @@ class EditorsManager extends PagesManager {
         });
 
         // 添加新Tab时触发
-        editorTabs.bind('created', (event) => {
+        editorTabs.bind('tabCreated', (event) => {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
@@ -125,7 +125,7 @@ class EditorsManager extends PagesManager {
             });
         });
 
-        editorTabs.bind('checkDestroy', (event) => {
+        editorTabs.bind('tabCheckDestroy', (event) => {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const editor = this.pagesRegistry.getItem(id);
@@ -136,7 +136,7 @@ class EditorsManager extends PagesManager {
         });
 
         // 移除已有Tab时触发
-        editorTabs.bind('destroyed', (event) => {
+        editorTabs.bind('tabDestroyed', (event) => {
             if (!this.pagesRegistry.length()) {
                 const $btnsContainer = Nav.getEditorBtnsContainer();
                 $btnsContainer.children('div').detach();

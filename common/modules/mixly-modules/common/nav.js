@@ -90,7 +90,7 @@ Nav.btns = {};
 Nav.weightsInfo = [];
 Nav.registerQueue = [];
 
-Nav.init = function() {
+Nav.init = function(elem) {
     this.$container = $(this.containerHTMLTemplate.render());
     this.$leftBtnContainer = this.$container.find('.left-btn-container');
     this.$leftBtnExtContainer = this.$container.find('.left-btn-ext-container');
@@ -106,7 +106,7 @@ Nav.init = function() {
             noPort: Msg.Lang['无可用串口']
         }
     ));
-    $('#nav-container').append(this.$container);
+    $(elem).append(this.$container);
     element.render('nav', 'nav-filter');
     form.render('select', 'boards-type-filter');
     form.render('select', 'ports-type-filter');
@@ -186,10 +186,6 @@ Nav.init = function() {
         callback: (elem) => console.log(elem),
         scopeType: this.Scope.RIGHT,
         weight: 1
-    });
-    
-    $(window).resize(() => {
-        this.resize();
     });
 }
 

@@ -2,9 +2,18 @@
     {
         "path": "/common/app.js",
         "require": [
+            "Mixly.Msg",
+            "Mixly.Url",
+            "Mixly.Config",
+            "Mixly.Env",
+            "Mixly.Drag",
             "Mixly.Nav",
+            "Mixly.NavEvents",
             "Mixly.Workspace",
-            "Mixly.FooterBar"
+            "Mixly.FooterBar",
+            "Mixly.HTMLTemplate",
+            "Mixly.Electron.Loader",
+            "Mixly.Component"
         ],
         "provide": [
             "Mixly.App"
@@ -33,7 +42,6 @@
             "Mixly.Env",
             "Mixly.ToolboxSearcher",
             "Mixly.MString",
-            "Mixly.Editor",
             "Mixly.FooterLayer",
             "Mixly.Msg",
             "Mixly.FooterLayerBoardConfig",
@@ -55,6 +63,15 @@
         ],
         "provide": [
             "Mixly.Command"
+        ]
+    },
+    {
+        "path": "/common/component.js",
+        "require": [
+            "Mixly.Events"
+        ],
+        "provide": [
+            "Mixly.Component"
         ]
     },
     {
@@ -290,20 +307,6 @@
         ]
     },
     {
-        "path": "/common/editor.js",
-        "require": [
-            "Blockly",
-            "Mixly.Msg",
-            "Mixly.Config",
-            "Mixly.Nav",
-            "Mixly.Drag",
-            "Mixly.Workspace"
-        ],
-        "provide": [
-            "Mixly.Editor"
-        ]
-    },
-    {
         "path": "/common/editors-manager.js",
         "require": [
             "path",
@@ -383,9 +386,10 @@
             "Mixly.Msg",
             "Mixly.Config",
             "Mixly.FooterLayer",
-            "Mixly.FooterLayerExample",
             "Mixly.FooterLayerBoardConfig",
-            "Mixly.FooterLayerMessage"
+            "Mixly.FooterLayerMessage",
+            "Mixly.Electron.FooterLayerExample",
+            "Mixly.Web.FooterLayerExample"
         ],
         "provide": [
             "Mixly.FooterBar"
@@ -415,7 +419,6 @@
             "Mixly.MFile",
             "Mixly.Title",
             "Mixly.XML",
-            "Mixly.Editor",
             "Mixly.Env",
             "Mixly.Debug",
             "Mixly.HTMLTemplate",
@@ -478,30 +481,20 @@
         "path": "/common/interface.js",
         "require": [
             "path",
-            "Mixly.Url",
-            "Mixly.Config",
-            "Mixly.NavEvents",
-            "Mixly.XML",
-            "Mixly.Nav",
             "Mixly.Env",
             "Mixly.Boards",
-            "Mixly.Editor",
+            "Mixly.App",
             "Mixly.Msg",
-            "Mixly.LevelSelector",
-            "Mixly.FooterBar",
             "Mixly.UserEvents",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
-            "Mixly.Electron.FooterLayerExample",
             "Mixly.Electron.Serial",
-            "Mixly.Electron.Loader",
             "Mixly.Electron.PythonShell",
             "Mixly.WebCompiler.Compiler",
             "Mixly.WebSocket.Socket",
             "Mixly.WebSocket.BU",
             "Mixly.WebSocket.ArduShell",
             "Mixly.WebSocket.File",
-            "Mixly.Web.FooterLayerExample",
             "Mixly.Web.BU",
             "Mixly.Web.File",
             "Mixly.Web.Lms"
@@ -535,7 +528,6 @@
         "path": "/common/level-selector.js",
         "require": [
             "layui",
-            "Mixly.Editor",
             "Mixly.Msg"
         ],
         "provide": [
@@ -583,7 +575,6 @@
             "Mixly.XML",
             "Mixly.LayerExt",
             "Mixly.MicrobitFs",
-            "Mixly.Editor",
             "Mixly.Msg"
         ],
         "provide": [
@@ -603,8 +594,7 @@
         "path": "/common/microbit-fs.js",
         "require": [
             "fsWrapper",
-            "Mixly.Config",
-            "Mixly.Editor"
+            "Mixly.Config"
         ],
         "provide": [
             "Mixly.MicrobitFs"
@@ -680,6 +670,7 @@
     {
         "path": "/common/page-base.js",
         "require": [
+            "Mixly.Component",
             "Mixly.Events",
             "Mixly.Registry"
         ],
@@ -691,7 +682,8 @@
         "path": "/common/pages-manager.js",
         "require": [
             "Mixly.PagesTab",
-            "Mixly.Registry"
+            "Mixly.Registry",
+            "Mixly.Component"
         ],
         "provide": [
             "Mixly.PagesManager"
@@ -709,7 +701,8 @@
             "Mixly.IdGenerator",
             "Mixly.Config",
             "Mixly.Events",
-            "Mixly.Registry"
+            "Mixly.Registry",
+            "Mixly.Component"
         ],
         "provide": [
             "Mixly.PagesTab"
@@ -897,8 +890,7 @@
     {
         "path": "/common/theme.js",
         "require": [
-            "Blockly",
-            "Mixly.Editor"
+            "Blockly"
         ],
         "provide": [
             "Mixly.Theme"
@@ -965,7 +957,8 @@
             "Mixly.EditorsManager",
             "Mixly.StatusBarsManager",
             "Mixly.LeftSideBarsManager",
-            "Mixly.RightSideBarsManager"
+            "Mixly.RightSideBarsManager",
+            "Mixly.Component"
         ],
         "provide": [
             "Mixly.Workspace"
@@ -1084,7 +1077,6 @@
             "Mixly.Title",
             "Mixly.MFile",
             "Mixly.XML",
-            "Mixly.Editor",
             "Mixly.Msg",
             "Mixly.Electron.ArduShell",
             "Mixly.Electron.BU"
@@ -1289,7 +1281,6 @@
         "require": [
             "Blockly",
             "Mixly.MFile",
-            "Mixly.Editor",
             "Mixly.LayerExt",
             "Mixly.Msg"
         ],
@@ -1328,7 +1319,6 @@
             "Blob",
             "Blockly",
             "Mixly.MFile",
-            "Mixly.Editor",
             "Mixly.Config",
             "Mixly.MicrobitFs",
             "Mixly.LocalStorage",
@@ -1460,7 +1450,6 @@
             "layui",
             "Blockly",
             "Mixly.XML",
-            "Mixly.Editor",
             "Mixly.MFile",
             "Mixly.Boards",
             "Mixly.LayerExt",

@@ -5,7 +5,6 @@ goog.require('layui');
 goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
 goog.require('Mixly.XML');
-goog.require('Mixly.Editor');
 goog.require('Mixly.Env');
 goog.require('Mixly.Debug');
 goog.require('Mixly.HTMLTemplate');
@@ -16,7 +15,6 @@ const {
     MFile,
     Title,
     XML,
-    Editor,
     Env,
     Debug,
     HTMLTemplate,

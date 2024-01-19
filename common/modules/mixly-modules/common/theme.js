@@ -1,10 +1,9 @@
 goog.loadJs('common', () => {
 
 goog.require('Blockly');
-goog.require('Mixly.Editor');
 goog.provide('Mixly.Theme');
 
-const { Theme, Editor } = Mixly;
+const { Theme } = Mixly;
 
 Theme.changeTo = function (type) {
     const { blockEditor, codeEditor } = Editor;

@@ -2,14 +2,12 @@ goog.loadJs('web', () => {
 
 goog.require('Blockly');
 goog.require('Mixly.MFile');
-goog.require('Mixly.Editor');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.Web.File');
 
 const {
     MFile,
-    Editor,
     Web,
     LayerExt,
     Msg

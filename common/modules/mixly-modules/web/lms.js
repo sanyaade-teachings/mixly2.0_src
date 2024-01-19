@@ -4,7 +4,6 @@ goog.require('saveAs');
 goog.require('Blob');
 goog.require('Blockly');
 goog.require('Mixly.MFile');
-goog.require('Mixly.Editor');
 goog.require('Mixly.Config');
 goog.require('Mixly.MicrobitFs');
 goog.require('Mixly.LocalStorage');
@@ -14,7 +13,6 @@ goog.provide('Mixly.Web.Lms');
 const {
     Web,
     MFile,
-    Editor,
     Config,
     MicrobitFs,
     LocalStorage

@@ -106,15 +106,15 @@ Blockly.Blocks.actuator_yuankong_led_color = {
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_LCD_SETCOLOR)
             .appendField(new Blockly.FieldDropdown([
-                ["²»ÁÁ", "0"],
-                ["ºì", "1"],
-                ["ÂÌ","2"],
-                ["À¶","3"],
-                ["»Æ","4"],
-                ["Çà","5"],
-                ["×Ï","6"],
-                ["°×","7"]
-            ]), 'colorvalue');         
+                [Blockly.Msg.MIXLY_LIGHT_OFF, "0"],
+                [Blockly.Msg.MIXLY_LIGHT_RED, "1"],
+                [Blockly.Msg.MIXLY_LIGHT_GREEN,"2"],
+                [Blockly.Msg.MIXLY_LIGHT_BLUE ,"3"],
+                [Blockly.Msg.MIXLY_LIGHT_YELLOW,"4"],
+                [Blockly.Msg.MIXLY_LIGHT_CYAN,"5"],
+                [Blockly.Msg.MIXLY_LIGHT_PURPLE,"6"],
+                [Blockly.Msg.MIXLY_LIGHT_WHITE,"7"]
+            ]), 'colorvalue');       
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);

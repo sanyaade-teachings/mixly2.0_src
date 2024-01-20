@@ -593,6 +593,21 @@ Blockly.Blocks['sensor_aht11'] = {
     }
 };
 
+
+Blockly.Blocks['sensor_get_temperature'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GETTEMPERATUE);        
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+
+
+
+
 Blockly.Blocks['sensor_hp203'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);

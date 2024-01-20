@@ -3724,4 +3724,14 @@ ZhHans.MIXLY_GET_JOYSTICK = '获取摇杆';
 ZhHans.MIXLY_HANDLE_SHUTDOWN ='设置手柄关机';
 ZhHans.MIXLY_ESP32_EXTERN_GRAY_NEAR = "红外灰度传感器";
 ZhHans.PIN_NUMBERING = '端口';
+ZhHans.MIXLY_LIGHT_OFF = '不亮';
+ZhHans.MIXLY_LIGHT_RED = '红';
+ZhHans.MIXLY_LIGHT_GREEN = '绿';
+ZhHans.MIXLY_LIGHT_BLUE = '蓝';
+ZhHans.MIXLY_LIGHT_YELLOW = '黄';
+ZhHans.MIXLY_LIGHT_CYAN = '青';
+ZhHans.MIXLY_LIGHT_PURPLE = '紫';
+ZhHans.MIXLY_LIGHT_WHITE = '白';
+
+
 })();

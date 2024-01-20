@@ -1501,6 +1501,7 @@
     <block type="sensor_sound" m-show="micropython:esp32c3:mixgo_feiyi"></block>     
     <block type="sensor_hp203" m-show="micropython:esp32c3:mixgo_feiyi"></block>
     <block type="sensor_aht11" m-show="micropython:esp32c3:mixgo_feiyi"></block>
+    <block type="sensor_get_temperature" m-show="micropython:esp32c3:mixgo_feiyi"></block>
     <block type="sensor_get_acceleration" m-show="micropython:esp32c3:mixgo_feiyi"></block>
     <block type="sensor_eulerangles" m-show="micropython:esp32c3:mixgo_feiyi"></block>
     <block type="sensor_mixgo_cc_mmc5603_calibrate_compass" m-show="micropython:esp32c3:mixgo_feiyi"></block>

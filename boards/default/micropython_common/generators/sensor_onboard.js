@@ -239,6 +239,12 @@ Blockly.Python.forBlock['sensor_aht11'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['sensor_get_temperature'] = function(){
+    Blockly.Python.definitions_['import_mixgo_feiyi_onboard_mxc6655xa'] = 'from mixgo_feiyi import _onboard_mxc6655xa';
+    return ['onboard_mxc6655xa.temperature()', Blockly.Python.ORDER_ATOMIC];
+};
+
+
 Blockly.Python.forBlock['rfid_readid'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');

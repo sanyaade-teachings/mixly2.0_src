@@ -68,17 +68,15 @@ class App extends Component {
         this.#addEventsListenerForNav_();
         this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
-        Mixly.mainStatusBarTabs = this.#workspace_.statusBarTabs;
+        Mixly.mainStatusBarTabs = this.getWorkspace().statusBarTabs;
         this.setInterval = window.setInterval;
         this.setTimeout = window.setTimeout;
         ifvisible.on('blur', () => {
-            this.getContent().detach();
             window.setInterval = () => {};
             window.setTimeout = () => {};
         });
 
         ifvisible.on('focus', () => {
-            this.mountOn($(element));
             window.setInterval = this.setInterval;
             window.setTimeout = this.setTimeout;
         });

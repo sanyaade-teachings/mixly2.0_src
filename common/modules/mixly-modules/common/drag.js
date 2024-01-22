@@ -80,10 +80,10 @@ class Drag {
             this.lastDisplay = 'unset';
         }
         this.#events_ = new Events(['ondragStart', 'ondragEnd', 'onfull', 'exitfull', 'sizeChanged']);
-        this.addEventListener();
+        this.#addEventListener_();
     }
 
-    addEventListener() {
+    #addEventListener_() {
         const dragElem = this.$dragElem[0];
         const container = this.$container[0];
         const { type, min, elem, full } = this.config;
@@ -244,6 +244,7 @@ class Drag {
 
     dispose() {
         this.resetEvent();
+        this.$dragElem[0].onmousedown = null;
         this.$dragElem.remove();
         this.$dragElemShadow.remove();
     }

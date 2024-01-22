@@ -244,12 +244,7 @@ class EditorBlockly extends EditorBase {
 
     resize() {
         // 重新调整编辑器尺寸
-        const $content = this.getContent();
         this.editor.hideChaff(false);
-        $(this.editor.getParentSvg()).attr({
-            width: $content.width(),
-            height: $content.height()
-        });
         this.editor.hideComponents(true);
         Blockly.common.svgResize(this.editor);
         Blockly.bumpObjects.bumpTopObjectsIntoBounds(this.editor);

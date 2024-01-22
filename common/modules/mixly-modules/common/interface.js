@@ -90,7 +90,6 @@ window.addEventListener('load', () => {
         Boards.changeTo(selectedBoardName);
         Boards.updateCategories(selectedBoardName);
         Msg.renderToolbox(true);
-        // Interface.app.resize();
         if (goog.isElectron) {
             const { Serial = undefined } = Electron;
             if (typeof Serial === 'object') {

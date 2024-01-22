@@ -92,3 +92,7 @@ html[data-bs-theme=dark] .drag-s-elem,
 html[data-bs-theme=dark] .drag-w-elem {
     background-color: rgb(8 105 170);
 }
+
+.drag-disable * {
+    pointer-events: none !important;
+}

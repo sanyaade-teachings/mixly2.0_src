@@ -147,17 +147,20 @@ class XScrollbar {
       this.$trackX.classList.add('x-scrollbar__track--draging');
       this.thumbXActive = true;
       screenX = e.screenX;
+      $('body').addClass('drag-disable');
     });
     this.$thumbY.addEventListener('mousedown', (e) => {
       this.$trackY.classList.add('x-scrollbar__track--draging');
       this.thumbYActive = true;
       screenY = e.screenY;
+      $('body').addClass('drag-disable');
     });
     this.onMouseup = ((e) => {
       this.$trackX.classList.remove('x-scrollbar__track--draging');
       this.$trackY.classList.remove('x-scrollbar__track--draging');
       this.thumbXActive = false;
       this.thumbYActive = false;
+      $('body').removeClass('drag-disable');
     }).bind(this);
     document.addEventListener('mouseup', this.onMouseup);
     this.onMousemove = ((e) => {

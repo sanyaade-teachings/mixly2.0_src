@@ -197,6 +197,12 @@
       if (tabProperties.type) {
         tabEl.setAttribute('data-tab-type', tabProperties.type)
       }
+
+      if (tabProperties.attr) {
+        for (let i in tabProperties.attr) {
+          tabEl.setAttribute(i, tabProperties.attr[i])
+        }
+      }
     }
 
     checkDestroy(event) {

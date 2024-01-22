@@ -92,7 +92,8 @@ class Workspace extends Component {
         this.rightSideBarManager = new RightSideBarsManager(this.$rightSidebar[0]);
         this.rightSideBarManager.add('local_storage', 'local_storage', '库管理');
         this.dragH = null;
-        this.dragV = null;
+        this.dragVLeft = null;
+        this.dragVRight = null;
         Workspace.add(this);
         this.#addEventsListenerForFileTree_();
         this.#addDragEventsListener_();
@@ -110,7 +111,10 @@ class Workspace extends Component {
                 title: selected[0].id,
                 id: selected[0].id,
                 type: path.extname(selected[0].id),
-                favicon: selected[0].icon
+                favicon: selected[0].icon,
+                attr: {
+                    'data-link-file': 'true'
+                }
             });
         });
     }

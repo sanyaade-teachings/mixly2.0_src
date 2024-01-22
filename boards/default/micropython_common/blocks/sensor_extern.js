@@ -440,6 +440,19 @@ Blockly.Blocks['sensor_ltr381_extern'] = {
     }
 };
 
+Blockly.Blocks['sensor_yuankong_LTR390UV'] = {
+    init:function(){
+        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_EXTERN_LIGHTUV+ " LTR390UV")
+            .setCheck("var");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET_ENV_LIGHT);   
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
 Blockly.Blocks['sensor_VL530LX_extern'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);

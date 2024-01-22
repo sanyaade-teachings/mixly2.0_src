@@ -3577,4 +3577,16 @@ En.MIXLY_GET_JOYSTICK = 'get the value of Joystick';
 En.MIXLY_HANDLE_SHUTDOWN ='set handle off';
 En.MIXLY_ESP32_EXTERN_GRAY_NEAR = "Infrared grayscale sensor";
 En.PIN_NUMBERING = 'Port';
+En.MIXLY_LIGHT_OFF = 'Light off';
+En.MIXLY_LIGHT_RED = 'Red';
+En.MIXLY_LIGHT_GREEN = 'Green';
+En.MIXLY_LIGHT_BLUE = 'Blue';
+En.MIXLY_LIGHT_YELLOW = 'Yellow';
+En.MIXLY_LIGHT_CYAN = 'Cyan';
+En.MIXLY_LIGHT_PURPLE = 'Purple';
+En.MIXLY_LIGHT_WHITE = 'White';
+En.MIXLY_EXTERN_LIGHTUV = 'Ambient light sensor';
+En.MIXLY_GET_ENV_LIGHT = 'get ambient light';
+En.MIXLY_ESP32_EXTERN_LIGHT = 'light intensity sensor';
+
 })();

@@ -289,6 +289,15 @@ Blockly.Python.forBlock['sensor_ltr381_extern'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['sensor_yuankong_LTR390UV'] = function(){
+    Blockly.Python.definitions_['import_machine'] = 'import machine';
+    Blockly.Python.definitions_['import_time'] = 'import time';
+    Blockly.Python.definitions_['import_ltr390uv'] = 'import ltr390uv';
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
+    var code = sub + '.ambient_light()';
+    return [code, Blockly,Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['sensor_QMC5883L_extern'] = function(){
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');

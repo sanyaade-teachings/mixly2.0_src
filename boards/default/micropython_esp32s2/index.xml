@@ -3294,6 +3294,13 @@
           </shadow>
         </value>
       </block>
+      <block type="sensor_yuankong_LTR390UV" >
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">xsensor</field>
+          </shadow>
+        </value>  
+      </block>
       <block type="sensor_hp203_extern">
         <value name="SUB">
           <shadow type="variables_get">

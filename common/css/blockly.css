@@ -187,9 +187,3 @@
 .blocklyMenu > .blocklyMenuItem.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
     display: none;
 }
-
-.drag-s-resize .blocklyToolboxDiv .blocklyTreeRow,
-.drag-w-resize .blocklyToolboxDiv .blocklyTreeRow,
-.blocklyToolboxDiv.blocklyToolboxDelete .blocklyTreeRow {
-    background-color: unset !important;
-}

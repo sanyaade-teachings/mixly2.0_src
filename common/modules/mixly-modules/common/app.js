@@ -1,5 +1,6 @@
 goog.loadJs('common', () => {
 
+goog.require('ifvisible');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
@@ -68,6 +69,19 @@ class App extends Component {
         this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
         Mixly.mainStatusBarTabs = this.#workspace_.statusBarTabs;
+        this.setInterval = window.setInterval;
+        this.setTimeout = window.setTimeout;
+        ifvisible.on('blur', () => {
+            this.getContent().detach();
+            window.setInterval = () => {};
+            window.setTimeout = () => {};
+        });
+
+        ifvisible.on('focus', () => {
+            this.mountOn($(element));
+            window.setInterval = this.setInterval;
+            window.setTimeout = this.setTimeout;
+        });
     }
 
     #addEventsListenerForNav_() {
@@ -235,13 +249,6 @@ class App extends Component {
     #addEventsListenerForWorkspace_() {
         const { editorManager } = this.#workspace_;
         const { tabs } = editorManager;
-        tabs.bind('activeTabChange', (event) => {
-            Nav.resize();
-        });
-        tabs.bind('tabDestroyed', (event) => {
-            !editorManager.getActive() && Nav.resize();
-        });
-
         tabs.addTab({
             name: 'Untitled-1.mix',
             title: 'Untitled-1.mix',

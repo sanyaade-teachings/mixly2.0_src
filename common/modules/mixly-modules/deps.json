@@ -2,6 +2,7 @@
     {
         "path": "/common/app.js",
         "require": [
+            "ifvisible",
             "Mixly.Msg",
             "Mixly.Url",
             "Mixly.Config",

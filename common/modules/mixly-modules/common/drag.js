@@ -36,10 +36,10 @@ class Drag {
         this.$first = $($children[0]);
         this.$last = $($children[1]);
         this.config.elem = [ this.$first, this.$last ];
-        this.$dragElem = $('<div></div>');
+        this.$dragElem = $('<div class="drag-elem"></div>');
+        this.$dragElemShadow = $('<div class="drag-elem-shadow"></div>');
         const dragType = this.config.type === 'h'? 's' : 'w';
         this.$container.addClass(`drag-${dragType}-container`);
-        this.$dragElem.addClass('drag-elem');
         this.shown = Drag.Extend.POSITIVE;
         let dragCssType;
         if (this.config.type === 'h') {
@@ -63,6 +63,7 @@ class Drag {
             this.shown = Drag.Extend.NEGATIVE;
         }
         this.$container.prepend(this.$dragElem);
+        this.$container.prepend(this.$dragElemShadow);
         this.size = [`${size}%`, `${100 - size}%`];
         if (size >=100 || size <=0) {
             const startExitFullSize = parseFloat(this.config.startExitFullSize);
@@ -87,6 +88,7 @@ class Drag {
         const container = this.$container[0];
         const { type, min, elem, full } = this.config;
         dragElem.onmousedown = (elemEvent) => {
+            this.$dragElemShadow.addClass('active');
             let dis, prev;
             if (type === 'h') {
                 dis = elemEvent.clientY;
@@ -133,6 +135,7 @@ class Drag {
                 return false;
             };
             document.onmouseup = () => {
+                this.$dragElemShadow.removeClass('active');
                 if (type === 'h') {
                     $('body').removeClass('drag-s-resize');
                 } else {
@@ -242,6 +245,7 @@ class Drag {
     dispose() {
         this.resetEvent();
         this.$dragElem.remove();
+        this.$dragElemShadow.remove();
     }
 
     bind(type, func) {

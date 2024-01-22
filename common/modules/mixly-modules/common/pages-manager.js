@@ -57,8 +57,8 @@ class PagesManager extends Component {
             const id = $(tabEl).attr('data-tab-id');
             const page = this.pagesRegistry.getItem(id);
             this.activeId = id;
-            this.$editorContainer.children().detach();
             if (prevEditor) {
+                prevEditor.getContent().detach();
                 prevEditor.onUnmounted();
             }
             this.$editorContainer.empty();

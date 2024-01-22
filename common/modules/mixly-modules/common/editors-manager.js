@@ -94,6 +94,7 @@ class EditorsManager extends PagesManager {
                 $btnsContainer.addClass('empty');
                 $btnsContainer.children('a').css('display', 'block');
             }
+            Nav.resize();
         });
 
         // 添加新Tab时触发
@@ -137,12 +138,14 @@ class EditorsManager extends PagesManager {
 
         // 移除已有Tab时触发
         editorTabs.bind('tabDestroyed', (event) => {
-            if (!this.pagesRegistry.length()) {
-                const $btnsContainer = Nav.getEditorBtnsContainer();
-                $btnsContainer.children('div').detach();
-                $btnsContainer.children('a').css('display', 'block');
-                $btnsContainer.addClass('empty');
+            if (this.pagesRegistry.length()) {
+                return;
             }
+            const $btnsContainer = Nav.getEditorBtnsContainer();
+            $btnsContainer.children('div').detach();
+            $btnsContainer.children('a').css('display', 'block');
+            $btnsContainer.addClass('empty');
+            Nav.resize();
         });
     }
 }

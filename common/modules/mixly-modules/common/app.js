@@ -1,6 +1,5 @@
 goog.loadJs('common', () => {
 
-goog.require('ifvisible');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
@@ -69,17 +68,6 @@ class App extends Component {
         this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
         Mixly.mainStatusBarTabs = this.getWorkspace().statusBarTabs;
-        this.setInterval = window.setInterval;
-        this.setTimeout = window.setTimeout;
-        ifvisible.on('blur', () => {
-            window.setInterval = () => {};
-            window.setTimeout = () => {};
-        });
-
-        ifvisible.on('focus', () => {
-            window.setInterval = this.setInterval;
-            window.setTimeout = this.setTimeout;
-        });
     }
 
     #addEventsListenerForNav_() {

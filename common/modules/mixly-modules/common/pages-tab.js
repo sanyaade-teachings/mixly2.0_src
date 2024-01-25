@@ -116,7 +116,7 @@ class PagesTab extends Component {
     removeTab(id) {
         const elem = this.tabsRegistry.getItem(id);
         this.chromeTabs.removeTab(elem);
-        this.tabsRegistry.unregister(tabId);
+        this.tabsRegistry.unregister(id);
     }
 
     setCurrentTab(id) {

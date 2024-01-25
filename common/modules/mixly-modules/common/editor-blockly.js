@@ -268,34 +268,32 @@ class EditorBlockly extends EditorBase {
     onMounted() {
         super.onMounted();
         this.getContent().append(EditorBlockly.getContent());
-        setTimeout(() => {
-            Blockly.Events.disable();
-            if (this.workspaceState) {
-                Blockly.serialization.workspaces.load(this.workspaceState, this.editor, {
-                    recordUndo: false
-                });
-            }
-            if (this.undoStack) {
-                this.editor.undoStack_ = [...this.undoStack];
-            }
-            if (this.redoStack) {
-                this.editor.redoStack_ = [...this.redoStack];
-            }
-            Blockly.Events.enable();
-            this.editor.scrollCenter();
-        }, 0);
+        Blockly.Events.disable();
+        if (this.workspaceState) {
+            Blockly.serialization.workspaces.load(this.workspaceState, this.editor, {
+                recordUndo: false
+            });
+        }
+        if (this.undoStack) {
+            this.editor.undoStack_ = [...this.undoStack];
+        }
+        if (this.redoStack) {
+            this.editor.redoStack_ = [...this.redoStack];
+        }
+        Blockly.Events.enable();
+        this.scrollCenter();
     }
 
     onUnmounted() {
         super.onUnmounted();
+        EditorBlockly.getContent().detach();
+        this.getContent().empty();
         this.workspaceState = Blockly.serialization.workspaces.save(this.editor);
         this.undoStack = [...this.editor.undoStack_];
         this.redoStack = [...this.editor.redoStack_];
         Blockly.Events.disable();
         this.editor.clearUndo();
         Blockly.Events.enable();
-        EditorBlockly.getContent().detach();
-        this.getContent().empty();
     }
 
     setValue(data) {

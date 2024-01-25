@@ -52,7 +52,6 @@ Setting.init = () => {
         $('body').removeClass('dark light')
                  .addClass(USER.theme);
         $('html').attr('data-bs-theme', USER.theme);
-        LayerExt.updateShade();
         Storage.user('/', USER);
     });
 
@@ -147,7 +146,6 @@ Setting.onclick = () => {
                     USER.languageAuto = false;
                 }
                 Msg.nowLang = USER.language ?? 'zh-hans';
-                LayerExt.updateShade();
             }
             if (updateTheme || updateLanguage) {
                 BoardManager.screenWidthLevel = -1;

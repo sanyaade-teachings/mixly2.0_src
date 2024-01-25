@@ -55,7 +55,7 @@ class PagesManager extends Component {
             const prevEditor = this.getActive();
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
-            const page = this.pagesRegistry.getItem(id);
+            const page = this.get(id);
             this.activeId = id;
             if (prevEditor) {
                 prevEditor.getContent().detach();
@@ -92,7 +92,7 @@ class PagesManager extends Component {
         pageTabs.bind('tabDestroyed', (event) => {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
-            const page = this.pagesRegistry.getItem(id);
+            const page = this.get(id);
             if (!page) {
                 return;
             }

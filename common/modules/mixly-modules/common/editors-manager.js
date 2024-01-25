@@ -126,16 +126,6 @@ class EditorsManager extends PagesManager {
             });
         });
 
-        editorTabs.bind('tabCheckDestroy', (event) => {
-            const { tabEl } = event.detail;
-            const id = $(tabEl).attr('data-tab-id');
-            const editor = this.pagesRegistry.getItem(id);
-            if (!editor) {
-                return;
-            }
-            return !editor.isDirty();
-        });
-
         // 移除已有Tab时触发
         editorTabs.bind('tabDestroyed', (event) => {
             if (this.pagesRegistry.length()) {

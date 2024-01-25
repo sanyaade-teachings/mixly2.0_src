@@ -2,6 +2,8 @@
     {
         "path": "/common/app.js",
         "require": [
+            "path",
+            "layui",
             "Mixly.Msg",
             "Mixly.Url",
             "Mixly.Config",
@@ -12,8 +14,11 @@
             "Mixly.Workspace",
             "Mixly.FooterBar",
             "Mixly.HTMLTemplate",
+            "Mixly.LayerExt",
+            "Mixly.Component",
             "Mixly.Electron.Loader",
-            "Mixly.Component"
+            "Mixly.Electron.FS",
+            "Mixly.Web.FS"
         ],
         "provide": [
             "Mixly.App"

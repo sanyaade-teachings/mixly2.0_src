@@ -1,5 +1,7 @@
 goog.loadJs('common', () => {
 
+goog.require('path');
+goog.require('layui');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
@@ -10,8 +12,11 @@ goog.require('Mixly.NavEvents');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.FooterBar');
 goog.require('Mixly.HTMLTemplate');
-goog.require('Mixly.Electron.Loader');
+goog.require('Mixly.LayerExt');
 goog.require('Mixly.Component');
+goog.require('Mixly.Electron.Loader');
+goog.require('Mixly.Electron.FS');
+goog.require('Mixly.Web.FS');
 goog.provide('Mixly.App');
 
 const {
@@ -25,11 +30,16 @@ const {
     Workspace,
     FooterBar,
     HTMLTemplate,
+    LayerExt,
     Electron = {},
+    Web = {},
     Component
 } = Mixly;
 const { Loader } = Electron;
+const { FS } = goog.isElectron? Electron : Web;
 const { BOARD } = Config;
+
+const { layer } = layui;
 
 
 class App extends Component {
@@ -234,8 +244,50 @@ class App extends Component {
 
     #addEventsListenerForWorkspace_() {
         const { editorManager } = this.#workspace_;
-        const { tabs } = editorManager;
-        tabs.addTab({
+        const editorTabs = editorManager.getTabs();
+
+        editorTabs.bind('tabCheckDestroy', (event) => {
+            const { tabEl } = event.detail;
+            const id = $(tabEl).attr('data-tab-id');
+            const editor = editorManager.get(id);
+            if (!editor) {
+                return;
+            }
+            if (editor.isDirty()) {
+                layer.confirm(`是否保存对${path.basename(id)}的修改？`, {
+                    title: false,
+                    shade: LayerExt.SHADE_ALL,
+                    resize: false,
+                    btn: ['保存', '不保存', '取消'],
+                    closeBtn: 1,
+                    btn1: (index) => {
+                        const $tab = editor.getTab();
+                        if ($tab.attr('data-link-file') === 'true') {
+                            layer.msg('已保存文件');
+                        }
+                        editor.removeDirty();
+                        editorManager.remove(id);
+                        layer.close(index);
+                    },
+                    btn2: (index) => {
+                        editor.removeDirty();
+                        editorManager.remove(id);
+                        layer.close(index);
+                    },
+                    btn3: (index) => {
+                        layer.close(index);
+                    },
+                    success: (layero) => {
+                        const $close = layero.children('.layui-layer-setwin').children('.layui-layer-close');
+                        $close.removeClass('layui-layer-close2');
+                        $close.addClass('layui-layer-close1');
+                    }
+                });
+            }
+            return !editor.isDirty();
+        });
+
+        editorTabs.addTab({
             name: 'Untitled-1.mix',
             title: 'Untitled-1.mix',
             type: '.mix',

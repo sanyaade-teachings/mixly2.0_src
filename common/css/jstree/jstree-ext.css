@@ -94,6 +94,14 @@ html[data-bs-theme=light] .jstree .jstree-node > .jstree-anchor > input {
     border-color: var(--app-light-color) !important;
 }
 
+html[data-bs-theme=light] .jstree .jstree-node > .jstree-anchor > input::selection {
+    color: var(--app-light-color);
+}
+
 html[data-bs-theme=dark] .jstree .jstree-node > .jstree-anchor > input {
     border-color: var(--app-dark-color) !important;
+}
+
+html[data-bs-theme=dark] .jstree .jstree-node > .jstree-anchor > input::selection {
+    color: var(--app-dark-color);
 }

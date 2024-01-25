@@ -21,13 +21,9 @@
         justify-content: center;
     }
 
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] button {
-        border-color: var(--app-light-color);
-        color: #fff;
-    }
-
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] button {
-        border-color: #3c3c3c;
+    ul[m-id="{{d.mId}}"] button {
+        border-color: transparent;
+        color: #fff !important;
     }
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] button:active {

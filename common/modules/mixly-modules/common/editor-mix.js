@@ -367,6 +367,16 @@ class EditorMix extends EditorBase {
         return xml;
     }
 
+    getCode() {
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
+        if (this.drag.shown === Drag.Extend.POSITIVE) {
+            return blockPage.getCode();
+        } else {
+            return codePage.getCode();
+        }
+    }
+
     parseMix(xml, useCode = false, useIncompleteBlocks = false, endFunc = (message) => {}) {
         const blockPage = this.getPage('block');
         const codePage = this.getPage('code');

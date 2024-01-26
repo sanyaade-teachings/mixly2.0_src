@@ -21,8 +21,16 @@ class EditorBase extends PageBase {
         this.#$btnsContent_ = $elem;
     }
 
+    getValue() {
+        return '';
+    }
+
     setValue(data, ext) {
         this.removeDirty();
+    }
+
+    getCode() {
+        return this.getValue();
     }
 
     dispose() {

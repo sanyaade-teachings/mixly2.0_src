@@ -505,7 +505,7 @@ ArduShell.runCmd = (layerNum, type, cmd, sucFunc) => {
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const mainWorkspace = Workspace.getMain();
     const editor = mainWorkspace.editorManager.getActive();
-    const code = editor.getValue();
+    const code = editor.getCode();
     const testArduinoDirPath = path.join(Env.clientPath, 'testArduino');
     const codePath = path.join(testArduinoDirPath, 'testArduino.ino');
     const nowFilePath = Title.getFilePath();

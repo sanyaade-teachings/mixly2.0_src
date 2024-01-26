@@ -120,7 +120,7 @@ class Workspace extends Component {
     }
 
     #addEventsListenerForEditorManager_() {
-        const { tabs } = this.editorManager;
+        const tabs = this.editorManager.getTabs();
         tabs.bind('activeTabChange', (event) => {
             const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
             const fileTree = leftSideBarLocalStorage.getFileTree();

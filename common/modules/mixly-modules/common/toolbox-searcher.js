@@ -27,7 +27,7 @@ class ToolboxSearcher {
     constructor(mainWorkspace) {
         this.mainWorkspace = mainWorkspace;
         this.searchWorkspace = new Blockly.Workspace(new Blockly.Options({
-            toolbox: ''
+            toolbox: null
         }));
         this.mainToolbox = this.mainWorkspace.getToolbox();
         this.$search = $(ToolboxSearcher.searchHtmlTemplate.render({

@@ -2,6 +2,7 @@ goog.loadJs('common', () => {
 
 goog.require('layui');
 goog.require('tippy');
+goog.require('Base64');
 goog.require('Blockly');
 goog.require('Mixly.Drag');
 goog.require('Mixly.DragV');
@@ -13,6 +14,7 @@ goog.require('Mixly.LayerExt');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Menu');
+goog.require('Mixly.Boards');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
@@ -33,10 +35,11 @@ const {
     ContextMenu,
     Debug,
     Menu,
+    Boards,
     HTMLTemplate,
     LayerExt
 } = Mixly;
-const { BOARD } = Config;
+const { BOARD, SOFTWARE } = Config;
 
 const { form } = layui;
 
@@ -156,17 +159,12 @@ class EditorMix extends EditorBase {
         }
     }
 
-    #workspaceChangeEvent_(event) {
-        const blockPage = this.getPage('block');
+    #addCodeChangeEventListener_() {
         const codePage = this.getPage('code');
-        if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)) {
-            return;
-        }
-        this.addDirty();
-        if (this.drag.shown !== Drag.Extend.BOTH) {
-           return;
-        }
-        codePage.setValue(blockPage.getValue());
+        codePage.offEvent('change');
+        codePage.bind('change', () => {
+            this.addDirty();
+        });
     }
 
     #addDragEventsListener_() {
@@ -248,14 +246,6 @@ class EditorMix extends EditorBase {
         })
     }
 
-    #addCodeChangeEventListener_() {
-        const codePage = this.getPage('code');
-        codePage.offEvent('change');
-        codePage.bind('change', () => {
-            this.addDirty();
-        });
-    }
-
     getCurrentEditor() {
         const blockPage = this.getPage('block');
         const codePage = this.getPage('code');
@@ -294,7 +284,16 @@ class EditorMix extends EditorBase {
         const blockPage = this.getPage('block');
         const blocklyWorkspace = blockPage.getEditor();
         this.codeChangeListener = blocklyWorkspace.addChangeListener((event) => {
-            this.#workspaceChangeEvent_(event);
+            const blockPage = this.getPage('block');
+            const codePage = this.getPage('code');
+            if (EditorMix.BLOCKLY_IGNORE_EVENTS.includes(event.type)) {
+                return;
+            }
+            this.addDirty();
+            if (this.drag.shown !== Drag.Extend.BOTH) {
+               return;
+            }
+            codePage.setValue(blockPage.getCode());
         });
         this.#addCodeChangeEventListener_();
     }
@@ -337,7 +336,35 @@ class EditorMix extends EditorBase {
     }
 
     getValue() {
-        return this.getCurrentEditor().getValue();
+        const blockPage = this.getPage('block');
+        const codePage = this.getPage('code');
+        const mix = blockPage.getMix();
+        const $xml = $(mix.block);
+        const config = Boards.getSelectedBoardConfig();
+        const boardName = Boards.getSelectedBoardName();
+        const board = BOARD?.boardType ?? 'default';
+        let xml = '';
+        let code = '';
+        $xml.removeAttr('xmlns')
+            .attr('version', SOFTWARE?.version ?? 'Mixly 2.0')
+            .attr('board', board + '@' + boardName);
+        if (this.drag.shown !== Drag.Extend.NEGATIVE) {
+            $xml.attr('shown', 'block');
+            code = mix.code;
+        } else {
+            $xml.attr('shown', 'code');
+            code = codePage.getValue();
+        }
+        xml = $xml[0].outerHTML;
+        if (config) {
+            try {
+                xml += `<config>${JSON.stringify(config)}</config>`;
+            } catch (error) {
+                Debug.error(error);
+            }
+        }
+        xml += `<code>${Base64.encode(code)}</code>`;
+        return xml;
     }
 
     parseMix(xml, useCode = false, useIncompleteBlocks = false, endFunc = (message) => {}) {
@@ -384,7 +411,7 @@ class EditorMix extends EditorBase {
             Debug.error(error);
         }
         let boardName = xmlDom.attr('board') ?? '';
-        // Boards.setSelectedBoard(boardName, config);
+        Boards.setSelectedBoard(boardName, config);
         let code = codeDom ? codeDom.html() : '';
         if (Base64.isValid(code)) {
             code = Base64.decode(code);
@@ -444,12 +471,9 @@ class EditorMix extends EditorBase {
         Blockly.Xml.domToWorkspace(xmlDom[0], blockPage.getEditor());
         blockPage.getEditor().scrollCenter();
         Blockly.hideChaff();
-        if (!useIncompleteBlocks && codeDom) {
-            const workspaceCode = MFile.getCode();
-            if (workspaceCode !== code) {
-                this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
-                codePage.setValue(code, -1);
-            }
+        if (!useIncompleteBlocks && codeDom && xmlDom.attr('shown') === 'code') {
+            this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
+            codePage.setValue(code, -1);
             endFunc();
             return;
         }

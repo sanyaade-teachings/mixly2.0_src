@@ -12,6 +12,15 @@ const {
 } = Mixly;
 
 class PagesManager extends Component {
+    #tabs_ = null;
+    #$welcomePage_ = null;
+    #$editorContainer_ = null;
+    #$tabsContainer_ = null;
+    #pagesRegistry_ = new Registry();
+    #page_ = 'welcome';
+    #activeId_ = null;
+    #typesRegistry_ = null;
+
     /**
      * config = {
      *      parentElem: element,
@@ -26,26 +35,22 @@ class PagesManager extends Component {
         super();
         const $parentContainer = $(config.parentElem);
         const $content = $(config.managerContentElem);
-        this.typesRegistry = config.typesRegistry;
-        this.$tabsContainer = $(config.tabElem);
-        this.$editorContainer = $(config.bodyElem);
-        this.tabs = new PagesTab({
+        this.#typesRegistry_ = config.typesRegistry;
+        this.#$tabsContainer_ = $(config.tabElem);
+        this.#$editorContainer_ = $(config.bodyElem);
+        this.#tabs_ = new PagesTab({
             parentElem: config.tabElem,
             contentElem: config.tabContentElem
         });
-        $content.append(this.$editorContainer);
-        this.$welcomePage = null;
+        $content.append(this.#$editorContainer_);
         this.setContent($content);
         this.mountOn($parentContainer);
-        let PageType = this.typesRegistry.getItem('#welcome');
+        let PageType = this.#typesRegistry_.getItem('#welcome');
         if (PageType) {
-            this.$welcomePage = (new PageType()).getContent();
-            $content.replaceWith(this.$welcomePage);
+            this.#$welcomePage_ = (new PageType()).getContent();
+            $content.replaceWith(this.#$welcomePage_);
         }
-        this.page = 'welcome';
         this.#addEventsListener_();
-        this.pagesRegistry = new Registry();
-        this.activeId = null;
     }
 
     #addEventsListener_() {
@@ -56,13 +61,13 @@ class PagesManager extends Component {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const page = this.get(id);
-            this.activeId = id;
+            this.#activeId_ = id;
             if (prevEditor) {
                 prevEditor.getContent().detach();
                 prevEditor.onUnmounted();
             }
-            this.$editorContainer.empty();
-            this.$editorContainer.append(page.getContent());
+            this.#$editorContainer_.empty();
+            this.#$editorContainer_.append(page.getContent());
             page.onMounted();
             page.resize();
         });
@@ -72,17 +77,17 @@ class PagesManager extends Component {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
             const type = $(tabEl).attr('data-tab-type');
-            let PageType = this.typesRegistry.getItem(type);
+            let PageType = this.#typesRegistry_.getItem(type);
             if (!PageType) {
-                PageType = this.typesRegistry.getItem('#default');
+                PageType = this.#typesRegistry_.getItem('#default');
             }
             let page = new PageType();
-            this.pagesRegistry.register(id, page);
+            this.#pagesRegistry_.register(id, page);
             page.setTab($(tabEl));
-            if (this.$welcomePage) {
-                if (this.pagesRegistry.length() && this.page === 'welcome') {
-                    this.$welcomePage.replaceWith(this.getContent());
-                    this.page = 'editor';
+            if (this.#$welcomePage_) {
+                if (this.#pagesRegistry_.length() && this.#page_ === 'welcome') {
+                    this.#$welcomePage_.replaceWith(this.getContent());
+                    this.#page_ = 'editor';
                 }
             }
             page.init();
@@ -97,11 +102,11 @@ class PagesManager extends Component {
                 return;
             }
             page.dispose();
-            this.pagesRegistry.unregister(id);
-            if (this.$welcomePage) {
-                if (!this.pagesRegistry.length() && this.page !== 'welcome') {
-                    this.getContent().replaceWith(this.$welcomePage);
-                    this.page = 'welcome';
+            this.#pagesRegistry_.unregister(id);
+            if (this.#$welcomePage_) {
+                if (!this.#pagesRegistry_.length() && this.#page_ !== 'welcome') {
+                    this.getContent().replaceWith(this.#$welcomePage_);
+                    this.#page_ = 'welcome';
                 }
             }
         });
@@ -111,15 +116,15 @@ class PagesManager extends Component {
         super.resize();
         const page = this.getActive();
         page && page.resize();
-        this.tabs.resize();
+        this.#tabs_.resize();
     }
 
     getActive() {
-        return this.get(this.activeId);
+        return this.get(this.#activeId_);
     }
 
     add(type, id, name = null) {
-        this.tabs.addTab({
+        this.#tabs_.addTab({
             name: name ?? id,
             title: id,
             type: type
@@ -127,26 +132,30 @@ class PagesManager extends Component {
     }
 
     remove(id) {
-        this.tabs.removeTab(id);
+        this.#tabs_.removeTab(id);
     }
 
     changeTo(id) {
         if (!this.get(id)) {
             return;
         }
-        this.tabs.setCurrentTab(id);
+        this.#tabs_.setCurrentTab(id);
     }
 
     get(id) {
-        return this.pagesRegistry.getItem(id);
+        return this.#pagesRegistry_.getItem(id);
     }
 
     keys() {
-        return this.pagesRegistry.keys();
+        return this.#pagesRegistry_.keys();
+    }
+
+    length() {
+        return this.#pagesRegistry_.length();
     }
 
     getTabs() {
-        return this.tabs;
+        return this.#tabs_;
     }
 }
 

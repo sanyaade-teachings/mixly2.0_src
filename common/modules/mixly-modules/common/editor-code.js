@@ -25,21 +25,26 @@ const {
 const { USER, BOARD } = Config;
 
 class EditorCode extends EditorMonaco {
+    #tabSize_ = null;
+    #language_ = null;
+    #contextMenu_ = null;
+    #contextMenuId_ = null;
+
     constructor() {
         super();
-        this.contextMenuId = IdGenerator.generate();
-        this.getContent().attr('content-menu-id', this.contextMenuId);
-        this.tabSize = null;
-        this.language = null;
-        this.contextMenu = null;
+        this.#contextMenuId_ = IdGenerator.generate();
+        this.getContent().attr('content-menu-id', this.#contextMenuId_);
+        this.#tabSize_ = null;
+        this.#language_ = null;
+        this.#contextMenu_ = null;
     }
 
     init() {
         super.init();
-        this.language = this.getDefaultLanguage();
-        this.tabSize = this.getDefaultTabSize();
-        this.setLanguage(this.language);
-        this.setTabSize(this.tabSize);
+        this.#language_ = this.getDefaultLanguage();
+        this.#tabSize_ = this.getDefaultTabSize();
+        this.setLanguage(this.#language_);
+        this.setTabSize(this.#tabSize_);
         this.#addContextMenu_();
         this.setTheme(USER.theme);
     }
@@ -50,7 +55,7 @@ class EditorCode extends EditorMonaco {
     }
 
     #addContextMenu_() {
-        this.contextMenu = new ContextMenu(`div[content-menu-id="${this.contextMenuId}"]`);
+        this.#contextMenu_ = new ContextMenu(`div[content-menu-id="${this.#contextMenuId_}"]`);
         let menu = new Menu();
         menu.add({
             weight: 0,
@@ -102,19 +107,19 @@ class EditorCode extends EditorMonaco {
                 callback: (key, opt) => this.blockComment()
             }
         });
-        this.contextMenu.register('code', menu);
-        this.contextMenu.bind('getMenu', () => 'code');
+        this.#contextMenu_.register('code', menu);
+        this.#contextMenu_.bind('getMenu', () => 'code');
     }
 
     getContextMenu() {
-        return this.contextMenu;
+        return this.#contextMenu_;
     }
 
     setValue(data, ext) {
         this.disableChangeEvent();
         super.setValue(data);
-        this.language = this.getLanguageByExt(ext);
-        this.setLanguage(this.language);
+        this.#language_ = this.getLanguageByExt(ext);
+        this.setLanguage(this.#language_);
         this.enableChangeEvent();
     }
 
@@ -197,9 +202,8 @@ class EditorCode extends EditorMonaco {
     }
 
     dispose() {
-        this.contextMenu.dispose();
-        this.contextMenu = null;
-        this.defaultContextMenu = null;
+        this.#contextMenu_.dispose();
+        this.#contextMenu_ = null;
         super.dispose();
     }
 }

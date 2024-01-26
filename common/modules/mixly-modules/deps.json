@@ -250,6 +250,7 @@
         "require": [
             "layui",
             "tippy",
+            "Base64",
             "Blockly",
             "Mixly.Drag",
             "Mixly.DragV",
@@ -261,6 +262,7 @@
             "Mixly.ContextMenu",
             "Mixly.Debug",
             "Mixly.Menu",
+            "Mixly.Boards",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",

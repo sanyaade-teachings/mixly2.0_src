@@ -76,6 +76,8 @@ class SideBarsManager extends PagesManager {
         }
     }
 
+    #shown_ = false;
+
     constructor(element, align = SideBarsManager.Align.LEFT) {
         let managerHTMLTemplate = '', tabHTMLTemplate = '';
         if (align === SideBarsManager.Align.RIGHT) {
@@ -96,17 +98,16 @@ class SideBarsManager extends PagesManager {
             typesRegistry: SideBarsManager.typesRegistry
         });
         this.id = managerHTMLTemplate.id;
-        this.shown = false;
-        this.events = new Events(['show', 'hide']);
+        this.addEventsType(['show', 'hide']);
         SideBarsManager.add(this);
     }
 
     show() {
-        this.events.run('show');
+        this.runEvent('show');
     }
 
     hide() {
-        this.events.run('hide');
+        this.runEvent('hide');
     }
     
     toggle() {
@@ -114,23 +115,12 @@ class SideBarsManager extends PagesManager {
     }
 
     isShown() {
-        return this.shown;
+        return this.#shown_;
     }
 
     dispose() {
         SideBarsManager.remove(this);
-    }
-
-    bind(type, func) {
-        return this.events.bind(type, func);
-    }
-
-    unbind(id) {
-        this.events.unbind(id);
-    }
-
-    off(type) {
-        this.events.off(type);
+        super.dispose();
     }
 }
 

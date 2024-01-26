@@ -68,26 +68,31 @@ class PageBase extends Component {
         super.dispose();
     }
 
-    #forward_(type) {
+    #forward_(type, ...args) {
         this.#pages_.getAllItems().forEach((page) => {
             if (typeof page[type] !== 'function') {
                 return;
             }
-            page[type]();
+            page[type](...args);
         });
     }
 
     onMounted() {
         super.onMounted();
         this.#forward_('onMounted');
-        this.#active_ = true;
+        this.setActive(true);
         this.runEvent('active');
     }
 
     onUnmounted() {
         super.onUnmounted();
         this.#forward_('onUnmounted');
-        this.#active_ = false;
+        this.setActive(false);
+    }
+
+    setActive(status) {
+        this.#forward_('setActive', status);
+        this.#active_ = status;
     }
 
     setTab($tab) {
@@ -109,6 +114,7 @@ class PageBase extends Component {
     }
 
     addDirty() {
+        this.#forward_('addDirty');
         const $tab = this.getTab();
         if (!$tab || this.isDirty()) {
             return;
@@ -119,6 +125,7 @@ class PageBase extends Component {
     }
 
     removeDirty() {
+        this.#forward_('removeDirty');
         const $tab = this.getTab();
         if (!$tab || !this.isDirty()) {
             return;

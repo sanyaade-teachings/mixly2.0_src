@@ -24,6 +24,11 @@ const {
 const { USER } = Config;
 
 class PagesTab extends Component {
+    #chromeTabs_ = null;
+    #scrollbar_ = null;
+    #tabsRegistry_ = null;
+    #sortable_ = null;
+
     /**
      * config = {
      *      parentElem: element,
@@ -35,15 +40,15 @@ class PagesTab extends Component {
         const $parentsContainer = $(config.parentElem);
         const $content = $(config.contentElem);
         this.$tabsContainer = $content.children('div');
-        this.chromeTabs = new ChromeTabs();
-        this.chromeTabs.init(this.$tabsContainer[0]);
-        this.scrollbar = new XScrollbar($content.find('.chrome-tabs-content')[0], {
+        this.#chromeTabs_ = new ChromeTabs();
+        this.#chromeTabs_.init(this.$tabsContainer[0]);
+        this.#scrollbar_ = new XScrollbar($content.find('.chrome-tabs-content')[0], {
             onlyHorizontal: true,
             thumbSize: 1.7,
             thumbRadius: 0,
             thumbBackground: USER.theme === 'dark'? '#b0b0b0' : '#5f5f5f'
         });
-        this.sortable = new Sortable(this.chromeTabs.tabContentEl, {
+        this.#sortable_ = new Sortable(this.#chromeTabs_.tabContentEl, {
             animation: 150,
             ghostClass: 'blue-background-class',
             direction: 'horizontal'
@@ -51,7 +56,7 @@ class PagesTab extends Component {
         this.setContent($content);
         this.mountOn($parentsContainer);
         this.#addEventsListener_();
-        this.tabsRegistry = new Registry();
+        this.#tabsRegistry_ = new Registry();
         this.addEventsType(['activeTabChange', 'tabCreated', 'tabDestroyed', 'tabCheckDestroy', 'tabBeforeDestroy']);
     }
 
@@ -59,7 +64,7 @@ class PagesTab extends Component {
         const { $tabsContainer } = this;
         const container = $tabsContainer[0];
 
-        this.chromeTabs.checkDestroy = (event) => {
+        this.#chromeTabs_.checkDestroy = (event) => {
             const status = this.runEvent('tabCheckDestroy', event);
             return _.sum(status) == status.length;
         }
@@ -73,10 +78,10 @@ class PagesTab extends Component {
         container.addEventListener('created', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
-            this.tabsRegistry.register(tabId, tabEl);
+            this.#tabsRegistry_.register(tabId, tabEl);
             this.runEvent('tabCreated', event);
             setTimeout(() => {
-                this.scrollbar.update();
+                this.#scrollbar_.update();
             }, 500);
         });
 
@@ -89,10 +94,10 @@ class PagesTab extends Component {
         container.addEventListener('destroyed', (event) => {
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
-            this.tabsRegistry.unregister(tabId);
+            this.#tabsRegistry_.unregister(tabId);
             this.runEvent('tabDestroyed', event);
             setTimeout(() => {
-                this.scrollbar.update();
+                this.#scrollbar_.update();
             }, 500);
         });
     }
@@ -101,42 +106,55 @@ class PagesTab extends Component {
         tabProperties = { ...tabProperties };
         const { title } = tabProperties;
         tabProperties.id = title ?? IdGenerator.generate();
-        let tab = this.tabsRegistry.getItem(title);
+        let tab = this.#tabsRegistry_.getItem(title);
         if (tab) {
             this.updateTab(tabProperties.id, tabProperties);
             this.setCurrentTab(tabProperties.id);
         } else {
-            tab = this.chromeTabs.addTab(tabProperties, others);
+            tab = this.#chromeTabs_.addTab(tabProperties, others);
         }
         let { left } = $(tab).position();
-        this.scrollbar.$container.scrollLeft = left;
-        this.scrollbar.update();
+        this.#scrollbar_.$container.scrollLeft = left;
+        this.#scrollbar_.update();
     }
 
     removeTab(id) {
-        const elem = this.tabsRegistry.getItem(id);
-        this.chromeTabs.removeTab(elem);
-        this.tabsRegistry.unregister(id);
+        const elem = this.#tabsRegistry_.getItem(id);
+        this.#chromeTabs_.removeTab(elem);
     }
 
     setCurrentTab(id) {
-        const elem = this.tabsRegistry.getItem(id);
-        this.chromeTabs.setCurrentTab(elem);
+        const elem = this.#tabsRegistry_.getItem(id);
+        this.#chromeTabs_.setCurrentTab(elem);
     }
 
     updateTab(id, tabProperties) {
-        const elem = this.tabsRegistry.getItem(id);
+        const elem = this.#tabsRegistry_.getItem(id);
         const newId = tabProperties.id || id;
-        this.chromeTabs.updateTab(elem, tabProperties);
+        this.#chromeTabs_.updateTab(elem, tabProperties);
         if (id !== newId) {
-            this.tabsRegistry.unregister(id);
-            this.tabsRegistry.register(id, elem);
+            this.#tabsRegistry_.unregister(id);
+            this.#tabsRegistry_.register(id, elem);
         }
     }
 
+    getScrollbar() {
+        return this.#scrollbar_;
+    }
+
+    getSortable() {
+        return this.#sortable_;
+    }
+
     dispose() {
-        this.chromeTabs.dispose();
-        this.tabsRegistry.reset();
+        this.#chromeTabs_.dispose();
+        this.#chromeTabs_ = null;
+        this.#tabsRegistry_.reset();
+        this.#tabsRegistry_ = null;
+        this.#sortable_.destroy();
+        this.#sortable_ = null;
+        this.#scrollbar_.destroy();
+        this.#scrollbar_ = null;
         super.dispose();
     }
 }

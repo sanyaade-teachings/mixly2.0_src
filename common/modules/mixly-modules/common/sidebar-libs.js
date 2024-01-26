@@ -27,10 +27,12 @@ class SideBarLibs extends PageBase {
         );
     }
 
+    #scrollbar_ = null;
+
     constructor() {
         super();
         const $content = $(HTMLTemplate.get('sidebar/sidebar-libs.html').render());
-        this.scrollbar = new XScrollbar($content[0], {
+        this.#scrollbar_ = new XScrollbar($content[0], {
             onlyHorizontal: false,
             thumbSize: '4px',
             thumbRadius: '1px',
@@ -42,6 +44,11 @@ class SideBarLibs extends PageBase {
     init() {
         super.init();
         this.hideCloseBtn();
+    }
+
+    dispose() {
+        this.#scrollbar_.destroy();
+        super.dispose();
     }
 }
 

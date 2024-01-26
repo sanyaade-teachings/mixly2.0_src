@@ -263,6 +263,7 @@ class App extends Component {
                     btn1: (index) => {
                         const $tab = editor.getTab();
                         if ($tab.attr('data-link-file') === 'true') {
+                            FS.writeFile($tab.attr('data-tab-id'), editor.getValue());
                             layer.msg('已保存文件');
                         }
                         editor.removeDirty();

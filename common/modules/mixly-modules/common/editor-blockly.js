@@ -50,6 +50,7 @@ class EditorBlockly extends EditorBase {
 
         this.$blockly = $('<div class="page-item"></div>');
         this.editor = null;
+        this.workspace = null;
         this.initBlockly = () => {
             const DEFAULT_CATEGORIES = HTMLTemplate.get('xml/default-categories.xml').render();
             const media = path.join(Config.pathPrefix, 'common/media/');
@@ -78,6 +79,9 @@ class EditorBlockly extends EditorBase {
             }
 
             this.addPlugins();
+            this.workspace = new Blockly.Workspace(new Blockly.Options({
+                toolbox: null
+            }));
         }
 
         this.addPlugins = () => {
@@ -158,6 +162,24 @@ class EditorBlockly extends EditorBase {
             return this.$blockly;
         }
 
+        this.getXML = (workspace) => {
+            const $xml = $(Blockly.Xml.workspaceToDom(workspace));
+            return $xml[0].outerHTML;
+        }
+
+        this.getCode = (workspace, generator) => {
+            let code = generator.workspaceToCode(workspace) || '';
+            code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
+                try {
+                    return decodeURIComponent(s.replace(/_/g, '%'));
+                } catch (error) {
+                    Debug.error(error);
+                    return s;
+                }
+            });
+            return code;
+        }
+
         this.updateToolbox = () => {
             this.editor.updateToolbox($('#toolbox')[0]);
         }
@@ -178,15 +200,17 @@ class EditorBlockly extends EditorBase {
         this.initBlockly();
     }
 
+    #editor_ = null;
+    #workspaceState_ = null;
+    #undoStack_ = null;
+    #redoStack_ = null;
+
     constructor() {
         super();
         this.setContent(
             $(HTMLTemplate.get('editor/editor-blockly.html').render())
         );
-        this.editor = EditorBlockly.getEditor();
-        this.workspaceState = null;
-        this.undoStack = null;
-        this.redoStack = null;
+        this.#editor_ = EditorBlockly.getEditor();
     }
 
     init() {
@@ -209,45 +233,45 @@ class EditorBlockly extends EditorBase {
         default:
             this.generator = Blockly.Python ?? Blockly.Arduino;
         }
-        this.editor.registerToolboxCategoryCallback(
+        this.#editor_.registerToolboxCategoryCallback(
             Blockly.Variables.CATEGORY_NAME,
             Blockly.Variables.flyoutCategory
         );
 
-        this.editor.registerToolboxCategoryCallback(
+        this.#editor_.registerToolboxCategoryCallback(
             Blockly.Procedures.CATEGORY_NAME,
             Blockly.Procedures.flyoutCategory
         );
     }
 
     getEditor() {
-        return this.editor;
+        return this.#editor_;
     }
 
     undo() {
         super.undo();
-        this.editor.undo(0);
+        this.#editor_.undo(0);
     }
 
     redo() {
         super.redo();
-        this.editor.undo(1);
+        this.#editor_.undo(1);
     }
 
     setVisible(status) {
-        this.editor.setVisible(status);
+        this.#editor_.setVisible(status);
     }
 
     scrollCenter() {
-        this.editor.scrollCenter();
+        this.#editor_.scrollCenter();
     }
 
     resize() {
         // 重新调整编辑器尺寸
-        this.editor.hideChaff(false);
-        this.editor.hideComponents(true);
-        Blockly.common.svgResize(this.editor);
-        Blockly.bumpObjects.bumpTopObjectsIntoBounds(this.editor);
+        this.#editor_.hideChaff(false);
+        this.#editor_.hideComponents(true);
+        Blockly.common.svgResize(this.#editor_);
+        Blockly.bumpObjects.bumpTopObjectsIntoBounds(this.#editor_);
         super.resize();
     }
 
@@ -255,13 +279,13 @@ class EditorBlockly extends EditorBase {
         super.dispose();
         if (this.isActive()) {
             Blockly.Events.disable();
-            this.editor.clear();
+            this.#editor_.clear();
             Blockly.Events.enable();
             EditorBlockly.getContent().detach();
         }
-        this.undoStack = null;
-        this.redoStack = null;
-        this.editor = null;
+        this.#undoStack_ = null;
+        this.#redoStack_ = null;
+        this.#editor_ = null;
         this.getContent().remove();
     }
 
@@ -269,16 +293,16 @@ class EditorBlockly extends EditorBase {
         super.onMounted();
         this.getContent().append(EditorBlockly.getContent());
         Blockly.Events.disable();
-        if (this.workspaceState) {
-            Blockly.serialization.workspaces.load(this.workspaceState, this.editor, {
+        if (this.#workspaceState_) {
+            Blockly.serialization.workspaces.load(this.#workspaceState_, this.#editor_, {
                 recordUndo: false
             });
         }
-        if (this.undoStack) {
-            this.editor.undoStack_ = [...this.undoStack];
+        if (this.#undoStack_) {
+            this.#editor_.undoStack_ = [...this.#undoStack_];
         }
-        if (this.redoStack) {
-            this.editor.redoStack_ = [...this.redoStack];
+        if (this.#redoStack_) {
+            this.#editor_.redoStack_ = [...this.#redoStack_];
         }
         Blockly.Events.enable();
         this.scrollCenter();
@@ -288,29 +312,52 @@ class EditorBlockly extends EditorBase {
         super.onUnmounted();
         EditorBlockly.getContent().detach();
         this.getContent().empty();
-        this.workspaceState = Blockly.serialization.workspaces.save(this.editor);
-        this.undoStack = [...this.editor.undoStack_];
-        this.redoStack = [...this.editor.redoStack_];
+        this.#workspaceState_ = Blockly.serialization.workspaces.save(this.#editor_);
+        this.#undoStack_ = [...this.#editor_.undoStack_];
+        this.#redoStack_ = [...this.#editor_.redoStack_];
         Blockly.Events.disable();
-        this.editor.clearUndo();
+        this.#editor_.clearUndo();
         Blockly.Events.enable();
     }
 
-    setValue(data) {
+    setValue(data, ext) {
         
     }
 
-    getValue() {
-        let code = this.generator.workspaceToCode(this.editor) || '';
-        code = code.replace(/(_E[0-9A-F]{1}_[0-9A-F]{2}_[0-9A-F]{2})+/g, function (s) {
-            try {
-                return decodeURIComponent(s.replace(/_/g, '%'));
-            } catch (error) {
-                Debug.error(error);
-                return s;
+    #getTargetWorkspace_() {
+        let workspace = this.#editor_;
+        if (!this.isActive()) {
+            if (this.isDirty()) {
+                this.#workspaceState_ = Blockly.serialization.workspaces.save(this.#editor_);
             }
-        });
-        return code;
+            Blockly.serialization.workspaces.load(this.#workspaceState_, EditorBlockly.workspace, {
+                recordUndo: false
+            });
+            workspace = EditorBlockly.workspace;
+        }
+        return workspace;
+    }
+
+    getXML() {
+        const workspace = this.#getTargetWorkspace_();
+        return EditorBlockly.getXML(workspace);
+    }
+
+    getCode() {
+        const workspace = this.#getTargetWorkspace_();
+        return EditorBlockly.getCode(workspace, this.generator);
+    }
+
+    getMix() {
+        const workspace = this.#getTargetWorkspace_();
+        return {
+            block: EditorBlockly.getXML(workspace),
+            code: EditorBlockly.getCode(workspace, this.generator)
+        };
+    }
+
+    getValue() {
+        return this.getCode();
     }
 }
 

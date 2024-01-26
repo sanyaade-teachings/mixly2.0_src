@@ -47,28 +47,38 @@ class SideBarLocalStorage extends PageBase {
         );
     }
 
+    #$openFolderContent_ = null;
+    #$folderContent_ = null;
+    #$folder_ = null;
+    #$iconTriangle_ = null;
+    #$iconFolder_ = null;
+    #$name_ = null;
+    #$children_ = null;
+    #mprogress_ = null;
+    #fileTree_ = null;
+    #folderOpened_ = false;
+    #contextMenu_ = null;
+    #folderPath_ = null;
+
     constructor() {
         super();
         const localStorageHTMLTemplate = HTMLTemplate.get('sidebar/sidebar-local-storage.html');
         const $folderContent = $(localStorageHTMLTemplate.render());
         const $openFolderContent = $(HTMLTemplate.get('sidebar/sidebar-local-storage-open-folder.html').render());
         this.id = localStorageHTMLTemplate.id;
-        this.$openFolderContent = $openFolderContent;
-        this.$folderContent = $folderContent;
+        this.#$openFolderContent_ = $openFolderContent;
+        this.#$folderContent_ = $folderContent;
         this.setContent($openFolderContent);
-        this.$folder = $folderContent.find('.folder-title');
-        this.$iconTriangle = this.$folder.find('.triangle');
-        this.$iconFolder = this.$folder.find('.folder');
-        this.$name = this.$folder.find('.name');
-        this.$children = $folderContent.find('.children');
-        this.mprogress = new Mprogress({
+        this.#$folder_ = $folderContent.find('.folder-title');
+        this.#$iconTriangle_ = this.#$folder_.find('.triangle');
+        this.#$iconFolder_ = this.#$folder_.find('.folder');
+        this.#$name_ = this.#$folder_.find('.name');
+        this.#$children_ = $folderContent.find('.children');
+        this.#mprogress_ = new Mprogress({
             template: 3,
             parent: `[m-id="${this.id}"] > .progress`
         });
-        this.fileTree = new FileTree(this.$children[0], this.mprogress);
-        this.folderOpened = false;
-        this.contextMenu = null;
-        this.folderPath = null;
+        this.#fileTree_ = new FileTree(this.#$children_[0], this.#mprogress_);
         this.#addEventsListener_();
     }
 
@@ -79,7 +89,7 @@ class SideBarLocalStorage extends PageBase {
     }
 
     #addContextMenu_() {
-        this.contextMenu = new ContextMenu(`div[m-id="${this.id}"] .jstree-node, div[m-id="${this.id}"] > button`, {
+        this.#contextMenu_ = new ContextMenu(`div[m-id="${this.id}"] .jstree-node, div[m-id="${this.id}"] > button`, {
             events: {
                 hide: ({ $trigger }) => {
                     $trigger.removeClass('active');
@@ -89,10 +99,8 @@ class SideBarLocalStorage extends PageBase {
                 }
             }
         });
-
         this.#addFileContextMenuItems_();
-        
-        this.contextMenu.bind('getMenu', () => 'menu');
+        this.#contextMenu_.bind('getMenu', () => 'menu');
     }
 
     #addFileContextMenuItems_() {
@@ -111,10 +119,10 @@ class SideBarLocalStorage extends PageBase {
                     let type = $trigger.attr('type');
                     if (type === 'root') {
                         this.openFolder();
-                        this.fileTree.createRootChildNode();
+                        this.#fileTree_.createRootChildNode();
                     } else {
                         let id = $trigger.attr('id');
-                        this.fileTree.createFolderNode(id);
+                        this.#fileTree_.createFolderNode(id);
                     }
                 }
             }
@@ -133,10 +141,10 @@ class SideBarLocalStorage extends PageBase {
                     let type = $trigger.attr('type');
                     if (type === 'root') {
                         this.openFolder();
-                        this.fileTree.createRootChildFileNode();
+                        this.#fileTree_.createRootChildFileNode();
                     } else {
                         let id = $trigger.attr('id');
-                        this.fileTree.createFileNode(id);
+                        this.#fileTree_.createFileNode(id);
                     }
                 }
             }
@@ -162,7 +170,7 @@ class SideBarLocalStorage extends PageBase {
                 name: ContextMenu.getItem('剪切', ''),
                 callback: (_, { $trigger }) => {
                     let id = $trigger.attr('id');
-                    this.fileTree.cutNode(id);
+                    this.#fileTree_.cutNode(id);
                 }
             }
         });
@@ -178,7 +186,7 @@ class SideBarLocalStorage extends PageBase {
                 name: ContextMenu.getItem('复制', ''),
                 callback: (_, { $trigger }) => {
                     let id = $trigger.attr('id');
-                    this.fileTree.copyNode(id);
+                    this.#fileTree_.copyNode(id);
                 }
             }
         });
@@ -194,7 +202,7 @@ class SideBarLocalStorage extends PageBase {
                 name: ContextMenu.getItem('粘贴', ''),
                 callback: (_, { $trigger }) => {
                     let id = $trigger.attr('id');
-                    this.fileTree.pasteNode(id);
+                    this.#fileTree_.pasteNode(id);
                 }
             }
         });
@@ -213,7 +221,7 @@ class SideBarLocalStorage extends PageBase {
                     let outPath = null;
                     let type = $trigger.attr('type');
                     if (type === 'root') {
-                        outPath = this.folderPath;
+                        outPath = this.#folderPath_;
                     } else {
                         outPath = $trigger.attr('id');
                     }
@@ -240,9 +248,9 @@ class SideBarLocalStorage extends PageBase {
                     let type = $trigger.attr('type');
                     let id = $trigger.attr('id');
                     if (type === 'folder') {
-                        this.fileTree.renameFolderNode(id);
+                        this.#fileTree_.renameFolderNode(id);
                     } else {
-                        this.fileTree.renameFileNode(id);
+                        this.#fileTree_.renameFileNode(id);
                     }
                 }
             }
@@ -261,9 +269,9 @@ class SideBarLocalStorage extends PageBase {
                     let type = $trigger.attr('type');
                     let id = $trigger.attr('id');
                     if (type === 'folder') {
-                        this.fileTree.deleteFolderNode(id);
+                        this.#fileTree_.deleteFolderNode(id);
                     } else {
-                        this.fileTree.deleteFileNode(id);
+                        this.#fileTree_.deleteFileNode(id);
                     }
                 }
             }
@@ -283,11 +291,11 @@ class SideBarLocalStorage extends PageBase {
                 }
             }
         });
-        this.contextMenu.register('menu', menu);
+        this.#contextMenu_.register('menu', menu);
     }
 
     #addEventsListener_() {
-        this.$folder.click(() => {
+        this.#$folder_.click(() => {
             if (this.isFolderOpened()) {
                 this.closeFolder();
             } else {
@@ -295,7 +303,7 @@ class SideBarLocalStorage extends PageBase {
             }
         });
 
-        this.$openFolderContent.find('button').click(() => {
+        this.#$openFolderContent_.find('button').click(() => {
             this.showDirectoryPicker();
         });
     }
@@ -307,8 +315,8 @@ class SideBarLocalStorage extends PageBase {
                 return;
             }
             this.setFolderPath(folderPath);
-            this.setContent(this.$folderContent);
-            this.$openFolderContent.remove();
+            this.setContent(this.#$folderContent_);
+            this.#$openFolderContent_.remove();
         })
         .catch(Debug.error);
     }
@@ -317,55 +325,55 @@ class SideBarLocalStorage extends PageBase {
         if (this.isFolderOpened()) {
             return;
         }
-        this.$iconTriangle.removeClass('codicon-chevron-right');
-        this.$iconTriangle.addClass('codicon-chevron-down');
-        this.$iconFolder.addClass('opened');
-        this.$folder.addClass('opened');
-        this.$children.css('display', 'block');
-        this.folderOpened = true;
+        this.#$iconTriangle_.removeClass('codicon-chevron-right');
+        this.#$iconTriangle_.addClass('codicon-chevron-down');
+        this.#$iconFolder_.addClass('opened');
+        this.#$folder_.addClass('opened');
+        this.#$children_.css('display', 'block');
+        this.#folderOpened_ = true;
     }
 
     closeFolder() {
         if (!this.isFolderOpened()) {
             return;
         }
-        this.$iconTriangle.removeClass('codicon-chevron-down');
-        this.$iconTriangle.addClass('codicon-chevron-right');
-        this.$iconFolder.removeClass('opened');
-        this.$folder.removeClass('opened');
-        this.$children.css('display', 'none');
-        this.fileTree.deselectAll();
-        this.fileTree.reselect();
-        this.folderOpened = false;
+        this.#$iconTriangle_.removeClass('codicon-chevron-down');
+        this.#$iconTriangle_.addClass('codicon-chevron-right');
+        this.#$iconFolder_.removeClass('opened');
+        this.#$folder_.removeClass('opened');
+        this.#$children_.css('display', 'none');
+        this.#fileTree_.deselectAll();
+        this.#fileTree_.reselect();
+        this.#folderOpened_ = false;
     }
 
     isFolderOpened() {
-        return this.folderOpened;
+        return this.#folderOpened_;
     }
 
     getFileTree() {
-        return this.fileTree;
+        return this.#fileTree_;
     }
 
     resize() {
         super.resize();
-        this.fileTree && this.fileTree.resize();
+        this.#fileTree_ && this.#fileTree_.resize();
     }
 
     dispose() {
-        this.fileTree.dispose();
+        this.#fileTree_.dispose();
     }
 
     setFolderPath(folderPath) {
         const rootNodeName = path.basename(folderPath).toUpperCase();
-        this.$name.text(rootNodeName);
+        this.#$name_.text(rootNodeName);
         if (goog.isElectron) {
-            this.fileTree.setFolderPath(folderPath);
+            this.#fileTree_.setFolderPath(folderPath);
         } else {
-            this.fileTree.setFolderPath('/');
+            this.#fileTree_.setFolderPath('/');
         }
-        this.folderPath = this.fileTree.getFolderPath();
-        this.$folder.attr('title', this.folderPath);
+        this.#folderPath_ = this.#fileTree_.getFolderPath();
+        this.#$folder_.attr('title', this.#folderPath_);
         this.openFolder();
     }
 }

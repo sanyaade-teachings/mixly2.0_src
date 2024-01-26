@@ -43,6 +43,7 @@ class EditorMd extends EditorBase {
 
     #prevCode_ = '';
     #listener_ = null;
+    #drag_ = null;
 
     constructor() {
         super();
@@ -52,7 +53,7 @@ class EditorMd extends EditorBase {
         this.$previewContainer = $content.find('.markdown-body');
         this.addPage(this.$codeContainer, 'code', new EditorCode());
         this.$btns = $btnsContent.find('button');
-        this.drag = null;
+        this.#drag_ = null;
         this.setContent($content);
         this.setBtnsContent($btnsContent);
     }
@@ -69,14 +70,14 @@ class EditorMd extends EditorBase {
     }
 
     #addDragEventsListener_() {
-        this.drag = new DragV(this.getContent()[0], {
+        this.#drag_ = new DragV(this.getContent()[0], {
             min: '200px',
             full: [true, true],
             startSize: '0%',
             startExitFullSize: '70%'
         });
-        this.drag.bind('sizeChanged', () => this.resize());
-        this.drag.bind('onfull', (type) => {
+        this.#drag_.bind('sizeChanged', () => this.resize());
+        this.#drag_.bind('onfull', (type) => {
             this.$btns.removeClass('self-adaption-btn');
             let $btn = null;
             switch(type) {
@@ -89,7 +90,7 @@ class EditorMd extends EditorBase {
             }
             $btn.addClass('self-adaption-btn');
         });
-        this.drag.bind('exitfull', (type) => {
+        this.#drag_.bind('exitfull', (type) => {
             this.$btns.removeClass('self-adaption-btn');
             const $btn = this.$btns.filter('[m-id="mixture"]');
             $btn.addClass('self-adaption-btn');
@@ -109,14 +110,14 @@ class EditorMd extends EditorBase {
             }
             switch (mId) {
             case 'code':
-                this.drag.full(Drag.Extend.POSITIVE);
+                this.#drag_.full(Drag.Extend.POSITIVE);
                 break;
             case 'mixture':
-                this.drag.exitfull(Drag.Extend.POSITIVE);
-                this.drag.exitfull(Drag.Extend.NEGATIVE);
+                this.#drag_.exitfull(Drag.Extend.POSITIVE);
+                this.#drag_.exitfull(Drag.Extend.NEGATIVE);
                 break;
             case 'preview':
-                this.drag.full(Drag.Extend.NEGATIVE);
+                this.#drag_.full(Drag.Extend.NEGATIVE);
                 break;
             }
         })
@@ -127,7 +128,7 @@ class EditorMd extends EditorBase {
         codePage.offEvent('change');
         codePage.bind('change', () => {
             this.addDirty();
-            if (this.drag.shown === 'NEGATIVE') {
+            if (this.#drag_.shown === 'NEGATIVE') {
                 return;
             }
             this.updatePreview();
@@ -154,8 +155,13 @@ class EditorMd extends EditorBase {
         codePage.enableChangeEvent();
     }
 
+    getValue() {
+        const codePage = this.getPage('code');
+        return codePage.getValue();
+    }
+
     dispose() {
-        this.drag.dispose();
+        this.#drag_.dispose();
         super.dispose();
     }
 }

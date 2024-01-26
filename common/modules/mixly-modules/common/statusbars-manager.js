@@ -60,6 +60,10 @@ class StatusBarsManager extends PagesManager {
         }
     }
 
+    #$btn_ = null;
+    #shown_ = false;
+    #$menu_ = null;
+
     constructor(element) {
         const managerHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-manager.html');
         const tabHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-tab.html');
@@ -74,9 +78,8 @@ class StatusBarsManager extends PagesManager {
             typesRegistry: StatusBarsManager.typesRegistry
         });
         this.id = managerHTMLTemplate.id;
-        this.$btn = $tab.find('.operation > button');
-        this.shown = false;
-        this.events = new Events(['show', 'hide', 'onSelectMenu', 'getMenu']);
+        this.#$btn_ = $tab.find('.operation > button');
+        this.addEventsType(['show', 'hide', 'onSelectMenu', 'getMenu']);
         this.#addMenuBtn_();
         StatusBarsManager.add(this);
     }
@@ -90,11 +93,11 @@ class StatusBarsManager extends PagesManager {
     }
 
     show() {
-        this.events.run('show');
+        this.runEvent('show');
     }
 
     hide() {
-        this.events.run('hide');
+        this.runEvent('hide');
     }
     
     toggle() {
@@ -102,11 +105,11 @@ class StatusBarsManager extends PagesManager {
     }
 
     isShown() {
-        return this.shown;
+        return this.#shown_;
     }
 
     #addMenuBtn_() {
-        this.$menu = tippy(this.$btn[0], {
+        this.#$menu_ = tippy(this.#$btn_[0], {
             allowHTML: true,
             content: '',
             trigger: 'click',
@@ -122,18 +125,18 @@ class StatusBarsManager extends PagesManager {
                 instance.setContent(menuHTMLTemplate.render(options));
                 $(instance.popper).find('li').off().click((event) => {
                     this.#onSelectMenu_(event);
-                    this.$menu.hide(100);
+                    this.#$menu_.hide(100);
                 });
             }
         });
     }
 
     #onSelectMenu_(event) {
-        this.events.run('onSelectMenu', event);
+        this.runEvent('onSelectMenu', event);
     }
 
     #getMenu_() {
-        let menus = this.events.run('getMenu');
+        let menus = this.runEvent('getMenu');
         if (menus && menus.length) {
             return menus[0];
         }
@@ -142,18 +145,7 @@ class StatusBarsManager extends PagesManager {
 
     dispose() {
         StatusBarsManager.remove(this);
-    }
-
-    bind(type, func) {
-        return this.events.bind(type, func);
-    }
-
-    unbind(id) {
-        this.events.unbind(id);
-    }
-
-    off(type) {
-        this.events.off(type);
+        super.dispose();
     }
 }
 

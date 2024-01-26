@@ -6,13 +6,14 @@ goog.provide('Mixly.StatusBarSerial');
 const { StatusBar } = Mixly;
 
 class StatusBarSerial extends StatusBar {
+    #$close_ = null;
+    #opened_ = false;
+    #valueTemp_ = '';
+    #statusTemp_ = false;
+
     constructor() {
         super();
-        this.opened = false;
-        this.$close = null;
         this.addEventsType(['reconnect']);
-        this.valueTemp = '';
-        this.statusTemp = false;
     }
 
     init() {
@@ -22,44 +23,44 @@ class StatusBarSerial extends StatusBar {
         $tab.dblclick(() => {
             this.runEvent('reconnect');
         });
-        this.$close = $tab.find('.chrome-tab-close');
-        this.$close.addClass('layui-badge-dot layui-bg-blue');
-        if (this.statusTemp) {
+        this.#$close_ = $tab.find('.chrome-tab-close');
+        this.#$close_.addClass('layui-badge-dot layui-bg-blue');
+        if (this.#statusTemp_) {
             this.open();
         } else {
             this.close();
         }
-        this.setValue(this.valueTemp);
+        this.setValue(this.#valueTemp_);
     }
 
     open() {
         if (!this.isInited()) {
-            this.statusTemp = true;
+            this.#statusTemp_ = true;
             return;
         }
         if (this.isOpened()) {
             return;
         }
-        this.opened = true;
-        this.$close.removeClass('layui-bg-blue');
-        this.$close.addClass('layui-bg-orange');
+        this.#opened_ = true;
+        this.#$close_.removeClass('layui-bg-blue');
+        this.#$close_.addClass('layui-bg-orange');
     }
 
     close() {
         if (!this.isInited()) {
-            this.statusTemp = false;
+            this.#statusTemp_ = false;
             return;
         }
-        if (!this.isOpened() || !this.$close) {
+        if (!this.isOpened() || !this.#$close_) {
             return;
         }
-        this.opened = false;
-        this.$close.removeClass('layui-bg-orange');
-        this.$close.addClass('layui-bg-blue');
+        this.#opened_ = false;
+        this.#$close_.removeClass('layui-bg-orange');
+        this.#$close_.addClass('layui-bg-blue');
     }
 
     isOpened() {
-        return this.opened;
+        return this.#opened_;
     }
 
     getPort() {
@@ -69,12 +70,12 @@ class StatusBarSerial extends StatusBar {
 
     dispose() {
         super.dispose();
-        this.$close = null;
+        this.#$close_ = null;
     }
 
     setValue(data, scroll) {
         if (!this.isInited()) {
-            this.valueTemp = data;
+            this.#valueTemp_ = data;
             return;
         }
         super.setValue(data, scroll);
@@ -82,7 +83,7 @@ class StatusBarSerial extends StatusBar {
 
     addValue(data) {
         if (!this.isInited()) {
-            this.valueTemp += data;
+            this.#valueTemp_ += data;
             return;
         }
         super.addValue(data);

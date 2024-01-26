@@ -115,28 +115,27 @@ class EditorMonaco extends EditorBase {
     #readOnly = false;
     #changeListener_ = null;
     #enableChangeEvent_ = true;
+    #editor_ = null;
+    #state_ = null;
 
     constructor() {
         super();
         const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
         this.setContent($(editorHTMLTemplate.render()));
         this.addEventsType(['change']);
-        this.editor = null;
-        this.destroyed = false;
-        this.state = null;
     }
 
     init() {
         super.init();
-        this.editor = monaco.editor.createModel('');
+        this.#editor_ = monaco.editor.createModel('');
     }
 
     onMounted() {
         super.onMounted();
         const editor = EditorMonaco.getEditor();
-        editor.setModel(this.editor);
-        if (this.state) {
-            editor.restoreViewState(this.state);
+        editor.setModel(this.#editor_);
+        if (this.#state_) {
+            editor.restoreViewState(this.#state_);
         }
         this.setReadOnly(this.#readOnly);
         this.getContent().append(EditorMonaco.getContent());
@@ -168,7 +167,7 @@ class EditorMonaco extends EditorBase {
     onUnmounted() {
         super.onUnmounted();
         const editor = EditorMonaco.getEditor();
-        this.state = editor.saveViewState();
+        this.#state_ = editor.saveViewState();
         EditorMonaco.getContent().detach();
         this.getContent().empty();
         this.#removeChangeEventListener_();
@@ -176,10 +175,9 @@ class EditorMonaco extends EditorBase {
 
     dispose() {
         this.#removeChangeEventListener_();
-        this.editor.dispose();
+        this.#editor_.dispose();
         super.dispose();
-        this.editor = null;
-        this.destroyed = true;
+        this.#editor_ = null;
     }
 
     setTheme(mode) {
@@ -190,10 +188,10 @@ class EditorMonaco extends EditorBase {
     }
 
     setValue(data, ext) {
-        if (this.destroyed || this.getValue() === data) {
+        if (this.getValue() === data) {
             return;
         }
-        this.editor.setValue(data);
+        this.#editor_.setValue(data);
     }
 
     addValue(data) {
@@ -202,7 +200,7 @@ class EditorMonaco extends EditorBase {
     }
 
     getValue() {
-        return this.destroyed ? '' : this.editor.getValue();
+        return this.#editor_.getValue();
     }
 
     clear() {
@@ -210,17 +208,11 @@ class EditorMonaco extends EditorBase {
     }
 
     scrollToBottom() {
-        if (this.destroyed) {
-            return;
-        }
         const editor = EditorMonaco.getEditor();
         editor.setScrollTop(editor.getScrollHeight());
     }
 
     scrollToTop() {
-        if (this.destroyed) {
-            return;
-        }
         const editor = EditorMonaco.getEditor();
         editor.setScrollTop(0);
     }
@@ -232,17 +224,17 @@ class EditorMonaco extends EditorBase {
     }
 
     undo() {
-        this.editor.undo();
+        this.#editor_.undo();
     }
 
     redo() {
-        this.editor.redo();
+        this.#editor_.redo();
     }
 
     cut() {
         const editor = EditorMonaco.getEditor();
         let selection = editor.getSelection();
-        let selectedText = this.editor.getValueInRange(selection);
+        let selectedText = this.#editor_.getValueInRange(selection);
         if (selection) {
             editor.executeEdits("cut", [{ range: selection, text: '' }]);
             navigator.clipboard.writeText(selectedText);
@@ -266,7 +258,7 @@ class EditorMonaco extends EditorBase {
     }
 
     getEditor() {
-        return this.editor;
+        return this.#editor_;
     }
 
     setReadOnly(readOnly) {
@@ -276,11 +268,11 @@ class EditorMonaco extends EditorBase {
     }
 
     setLanguage(language) {
-        monaco.editor.setModelLanguage(this.editor, language);
+        monaco.editor.setModelLanguage(this.#editor_, language);
     }
 
     setTabSize(tabSize) {
-        this.editor.updateOptions({ tabSize });
+        this.#editor_.updateOptions({ tabSize });
     }
 
     setFontSize(fontSize) {

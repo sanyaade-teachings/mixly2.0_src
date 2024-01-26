@@ -30,43 +30,45 @@ class EditorAce extends EditorBase {
         );
     }
 
+    #editor_ = null;
+    #destroyed_ = null;
+    #cursorLayer_ = null;
+
     constructor() {
         super();
         const editorHTMLTemplate = HTMLTemplate.get('editor/editor-code.html');
         this.setContent($(editorHTMLTemplate.render()));
         this.id = editorHTMLTemplate.id;
-        this.destroyed = false;
-        this.editor = null;
     }
 
     init() {
         super.init();
-        this.editor = ace.edit(this.getContent()[0]);
+        this.#editor_ = ace.edit(this.getContent()[0]);
         this.resetFontSize();
-        this.addCursorLayer();
-        this.addCursorEventsListener();
-        this.addDefaultCommand();
+        this.#addCursorLayer_();
+        this.#addCursorEventsListener_();
+        this.#addDefaultCommand_();
     }
 
     getEditor() {
-        return this.editor;
+        return this.#editor_;
     }
 
     dispose() {
         super.dispose();
-        this.editor.destroy();
-        this.destroyed = true;
+        this.#editor_.destroy();
+        this.#destroyed_ = true;
     }
 
     setValue(data, scroll = true) {
-        if (this.destroyed) {
+        if (this.#destroyed_) {
             return;
         }
-        this.editor.updateSelectionMarkers();
-        const { selection } = this.editor;
+        this.#editor_.updateSelectionMarkers();
+        const { selection } = this.#editor_;
         const initCursor = selection.getCursor();
         if (this.getValue() !== data) {
-            this.editor.setValue(data);
+            this.#editor_.setValue(data);
         }
         if (scroll) {
             this.scrollToBottom();
@@ -77,14 +79,14 @@ class EditorAce extends EditorBase {
     }
 
     addValue(data) {
-        if (this.destroyed) {
+        if (this.#destroyed_) {
             return;
         }
-        this.editor.updateSelectionMarkers();
-        const { selection, session } = this.editor;
+        this.#editor_.updateSelectionMarkers();
+        const { selection, session } = this.#editor_;
         const initCursor = selection.getCursor();
         this.scrollToBottom();
-        this.editor.insert(data);
+        this.#editor_.insert(data);
         if (scroll) {
             this.scrollToBottom();
         } else {
@@ -93,15 +95,15 @@ class EditorAce extends EditorBase {
     }
 
     getValue() {
-        return this.destroyed ? '' : this.editor.getValue();
+        return this.#destroyed_ ? '' : this.#editor_.getValue();
     }
 
     getValueRange(startPos, endPos) {
-        if (this.destroyed || !startPos || !endPos 
+        if (this.#destroyed_ || !startPos || !endPos 
             || typeof startPos !== 'object' || typeof endPos !== 'object') {
             return "";
         }
-        const session = this.editor.getSession();
+        const session = this.#editor_.getSession();
         return session.getTextRange(new ace.Range(
             startPos.row,
             startPos.column,
@@ -111,10 +113,10 @@ class EditorAce extends EditorBase {
     }
 
     getEndPos() {
-        if (this.destroyed) {
+        if (this.#destroyed_) {
             return { row: 0, column: 0 };
         }
-        const session = this.editor.getSession();
+        const session = this.#editor_.getSession();
         const row = session.getLength() - 1;
         const column = session.getLine(row).length;
         return { row, column };
@@ -125,24 +127,24 @@ class EditorAce extends EditorBase {
     }
 
     scrollToBottom() {
-        if (this.destroyed) {
+        if (this.#destroyed_) {
             return;
         }
-        const { selection, session } = this.editor;
-        this.editor.updateSelectionMarkers();
-        this.editor.gotoLine(session.getLength());
+        const { selection, session } = this.#editor_;
+        this.#editor_.updateSelectionMarkers();
+        this.#editor_.gotoLine(session.getLength());
         selection.moveCursorLineEnd();
     }
 
     scrollToTop() {
-        if (this.destroyed) {
+        if (this.#destroyed_) {
             return;
         }
-        this.editor.gotoLine(0);
+        this.#editor_.gotoLine(0);
     }
 
-    addDefaultCommand() {
-        const { commands } = this.editor;
+    #addDefaultCommand_() {
+        const { commands } = this.#editor_;
         commands.addCommands([{
             name: "increaseFontSize",
             bindKey: "Ctrl-=|Ctrl-+",
@@ -169,14 +171,14 @@ class EditorAce extends EditorBase {
                 if (!editor.getReadOnly()) {
                     return false;
                 }
-                this.cursorLayer.show();
+                this.#cursorLayer_.show();
                 return false;
             }
         }]);
     }
 
-    addCursorLayer() {
-        this.cursorLayer = tippy(this.getContent().find('.ace_cursor')[0], {
+    #addCursorLayer_() {
+        this.#cursorLayer_ = tippy(this.getContent().find('.ace_cursor')[0], {
             content: Msg.Lang['此视图只读'],
             trigger: 'manual',
             hideOnClick: true,
@@ -198,8 +200,8 @@ class EditorAce extends EditorBase {
         });
     }
 
-    addCursorEventsListener() {
-        const { editor } = this;
+    #addCursorEventsListener_() {
+        const editor = this.getEditor();
         $('#mixly-footer-cursor').hide();
         editor.on('focus', () => {
             const cursor = selection.getCursor();
@@ -208,7 +210,7 @@ class EditorAce extends EditorBase {
             $('#mixly-footer-cursor').show();
         });
         editor.on("blur", () => {
-            this.cursorLayer.hide();
+            this.#cursorLayer_.hide();
             $('#mixly-footer-cursor').hide();
         });
         const { selection } = editor.getSession();
@@ -229,7 +231,7 @@ class EditorAce extends EditorBase {
             }
         });
         session.on("changeScrollTop", () => {
-            this.cursorLayer.hide();
+            this.#cursorLayer_.hide();
         });
     }
 
@@ -255,38 +257,38 @@ class EditorAce extends EditorBase {
 
     resetFontSize() {
         const size = parseInt(Math.max(window.screen.width / 85, window.screen.height / 85, 12));
-        this.editor.setFontSize(size);
+        this.#editor_.setFontSize(size);
     }
 
     increaseFontSize() {
-        const size = parseInt(this.editor.getFontSize(), 10) || 12;
-        this.editor.setFontSize(size + 1);
+        const size = parseInt(this.#editor_.getFontSize(), 10) || 12;
+        this.#editor_.setFontSize(size + 1);
     }
 
     decreaseFontSize() {
-        const size = parseInt(this.editor.getFontSize(), 10) || 12;
-        this.editor.setFontSize(Math.max(size - 1 || 1));
+        const size = parseInt(this.#editor_.getFontSize(), 10) || 12;
+        this.#editor_.setFontSize(Math.max(size - 1 || 1));
     }
 
     undo() {
         super.undo();
-        this.editor.undo();
+        this.#editor_.undo();
     }
 
     redo() {
         super.redo();
-        this.editor.redo();
+        this.#editor_.redo();
     }
 
     setReadOnly(status) {
-        this.editor.setReadOnly(status);
+        this.#editor_.setReadOnly(status);
     }
 
     cut() {
-        const { selection, session } = this.editor;
+        const { selection, session } = this.#editor_;
         const cutLine = selection.isEmpty();
         const range = cutLine ? selection.getLineRange() : selection.getRange();
-        this.editor._emit('cut', range);
+        this.#editor_._emit('cut', range);
         if (!range.isEmpty()) {
             const copyText = session.getTextRange(range);
             navigator.clipboard.writeText(copyText)
@@ -297,12 +299,12 @@ class EditorAce extends EditorBase {
             });
             session.remove(range);
         }
-        this.editor.clearSelection();
+        this.#editor_.clearSelection();
     }
 
     copy() {
-        const copyText = this.editor.getSelectedText();
-        this.editor.clearSelection();
+        const copyText = this.#editor_.getSelectedText();
+        this.#editor_.clearSelection();
         if (!copyText) {
             return;
         }
@@ -317,7 +319,7 @@ class EditorAce extends EditorBase {
     paste() {
         navigator.clipboard.readText()
         .then((message) => {
-            this.editor.execCommand('paste', message);
+            this.#editor_.execCommand('paste', message);
             Debug.log('clipboard：粘贴成功', message);
         })
         .catch((error) => {
@@ -326,7 +328,7 @@ class EditorAce extends EditorBase {
     }
 
     resize() {
-        this.editor.resize();
+        this.#editor_.resize();
         super.resize();
     }
 }

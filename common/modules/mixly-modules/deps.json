@@ -15,6 +15,7 @@
             "Mixly.FooterBar",
             "Mixly.HTMLTemplate",
             "Mixly.LayerExt",
+            "Mixly.Debug",
             "Mixly.Component",
             "Mixly.Electron.Loader",
             "Mixly.Electron.FS",

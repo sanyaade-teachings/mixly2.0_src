@@ -56,15 +56,30 @@ FS.showDirectoryPicker = () => {
                 resolve(null);
             }
         })
-        .catch(error => {
-            reject(error);
-        });
+        .catch(reject);
     });
 }
 
-FS.showSaveFilePicker = () => {
+FS.showSaveFilePicker = (fileName, ext) => {
     return new Promise((resolve, reject) => {
-        resolve();
+        const currentWindow = electron_remote.getCurrentWindow();
+        currentWindow.focus();
+        dialog.showSaveDialog(currentWindow, {
+            filters: [{
+                name: 'Mixly File',
+                extensions: [ext.substring(ext.lastIndexOf('.') + 1)]
+            }],
+            defaultPath: fileName,
+            showsTagField: true,
+            properties: ['showHiddenFiles']
+        }).then(result => {
+            let filePath = result.filePath;
+            if (filePath) {
+                resolve(filePath);
+            } else {
+                resolve(null);
+            }
+        }).catch(reject);
     });
 }
 

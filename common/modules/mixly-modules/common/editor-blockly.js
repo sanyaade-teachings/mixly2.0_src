@@ -292,20 +292,22 @@ class EditorBlockly extends EditorBase {
     onMounted() {
         super.onMounted();
         this.getContent().append(EditorBlockly.getContent());
-        Blockly.Events.disable();
-        if (this.#workspaceState_) {
-            Blockly.serialization.workspaces.load(this.#workspaceState_, this.#editor_, {
-                recordUndo: false
-            });
-        }
-        if (this.#undoStack_) {
-            this.#editor_.undoStack_ = [...this.#undoStack_];
-        }
-        if (this.#redoStack_) {
-            this.#editor_.redoStack_ = [...this.#redoStack_];
-        }
-        Blockly.Events.enable();
-        this.scrollCenter();
+        setTimeout(() => {
+            Blockly.Events.disable();
+            if (this.#workspaceState_) {
+                Blockly.serialization.workspaces.load(this.#workspaceState_, this.#editor_, {
+                    recordUndo: false
+                });
+            }
+            if (this.#undoStack_) {
+                this.#editor_.undoStack_ = [...this.#undoStack_];
+            }
+            if (this.#redoStack_) {
+                this.#editor_.redoStack_ = [...this.#redoStack_];
+            }
+            Blockly.Events.enable();
+            this.scrollCenter();
+        }, 0);
     }
 
     onUnmounted() {

@@ -13,6 +13,7 @@ goog.require('Mixly.Workspace');
 goog.require('Mixly.FooterBar');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.LayerExt');
+goog.require('Mixly.Debug');
 goog.require('Mixly.Component');
 goog.require('Mixly.Electron.Loader');
 goog.require('Mixly.Electron.FS');
@@ -31,6 +32,7 @@ const {
     FooterBar,
     HTMLTemplate,
     LayerExt,
+    Debug,
     Electron = {},
     Web = {},
     Component
@@ -263,12 +265,33 @@ class App extends Component {
                     btn1: (index) => {
                         const $tab = editor.getTab();
                         if ($tab.attr('data-link-file') === 'true') {
-                            FS.writeFile($tab.attr('data-tab-id'), editor.getValue());
-                            layer.msg('已保存文件');
+                            FS.writeFile($tab.attr('data-tab-id'), editor.getValue())
+                            .then(() => {
+                                editor.removeDirty();
+                                editorManager.remove(id);
+                                layer.close(index);
+                                layer.msg('已保存文件');
+                            })
+                            .catch(Debug.error);
+                        } else {
+                            FS.showSaveFilePicker(id, $tab.attr('data-tab-type'))
+                            .then((filePath) => {
+                                if (!filePath) {
+                                    return Promise.resolve(true);
+                                }
+                                return FS.writeFile(filePath, editor.getValue());
+                            })
+                            .then((status) => {
+                                if (status) {
+                                    return;
+                                }
+                                editor.removeDirty();
+                                editorManager.remove(id);
+                                layer.close(index);
+                                layer.msg('已保存文件');
+                            })
+                            .catch(Debug.error);
                         }
-                        editor.removeDirty();
-                        editorManager.remove(id);
-                        layer.close(index);
                     },
                     btn2: (index) => {
                         editor.removeDirty();

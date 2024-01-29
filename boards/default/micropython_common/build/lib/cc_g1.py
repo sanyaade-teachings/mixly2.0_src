@@ -67,10 +67,11 @@ class Handle:
 			self._wreg(_CC_G1_KEY, (self._rreg(_CC_G1_KEY)) | 0X40)
 
 '''Select instantiation objects'''
-ext_i2c = SoftI2C(scl=Pin(0), sda=Pin(1), freq=100000)
-if _CC_G1_ADDRESS in ext_i2c.scan():
+try:
+	#MixGo CC
+	ext_i2c = SoftI2C(scl=Pin(0), sda=Pin(1), freq=100000)
 	handle = Handle(ext_i2c)
-else:
+except:
+	#MixGo CE
 	ext_i2c = SoftI2C(scl=Pin(17), sda=Pin(18), freq=100000)
-	if _CC_G1_ADDRESS in ext_i2c.scan():
-		handle = Handle(ext_i2c)
+	handle = Handle(ext_i2c)

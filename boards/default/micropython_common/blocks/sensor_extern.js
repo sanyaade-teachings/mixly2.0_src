@@ -447,7 +447,10 @@ Blockly.Blocks['sensor_yuankong_LTR390UV'] = {
             .appendField(Blockly.Msg.MIXLY_EXTERN_LIGHTUV+ " LTR390UV")
             .setCheck("var");
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_GET_ENV_LIGHT);   
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_GET_ENV_LIGHT, "E"],
+                [Blockly.Msg.MIXLY_GET_ULTRAVIOLET, "U"],
+                ]), "key");  
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }

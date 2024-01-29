@@ -2012,7 +2012,7 @@ ZhHant.MIXLY_ESP32_NEAR_BOOL = "紅外反射接近感測器是否被遮擋";
 ZhHant.MIXLY_ESP32_INTERRUPT = "中斷";
 ZhHant.MIXLY_ESP32_PITCH = "音高";
 ZhHant.MIXLY_ESP32_DUTY = "音調";
-ZhHant.MIXLY_ESP32_LIGHT = "獲取强感測器的值";
+ZhHant.MIXLY_ESP32_LIGHT = "獲取光强感測器的值";
 ZhHant.MIXLY_ESP32_SOUND = "獲取聲音感測器的值";
 ZhHant.MIXLY_ESP32_MONITOR_SCROLL = '滾動';
 ZhHant.MIXLY_PYTHON_GLOBAL = '使用全域變數';
@@ -3560,5 +3560,6 @@ ZhHant.MIXLY_LIGHT_WHITE = '白';
 ZhHant.MIXLY_EXTERN_LIGHTUV = '環境光傳感器';
 ZhHant.MIXLY_GET_ENV_LIGHT = '獲取環境光';
 ZhHant.MIXLY_ESP32_EXTERN_LIGHT = "光强傳感器";
+ZhHant.MIXLY_GET_ULTRAVIOLET = "獲取紫外綫强度";
 
 })();

@@ -3734,6 +3734,6 @@ ZhHans.MIXLY_LIGHT_PURPLE = '紫';
 ZhHans.MIXLY_LIGHT_WHITE = '白';
 ZhHans.MIXLY_EXTERN_LIGHTUV = '环境光传感器';
 ZhHans.MIXLY_GET_ENV_LIGHT = '获取环境光';
-
+ZhHans.MIXLY_GET_ULTRAVIOLET = '获取紫外线强度';
 
 })();

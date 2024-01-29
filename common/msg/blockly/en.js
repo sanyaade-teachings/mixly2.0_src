@@ -3588,5 +3588,6 @@ En.MIXLY_LIGHT_WHITE = 'White';
 En.MIXLY_EXTERN_LIGHTUV = 'Ambient light sensor';
 En.MIXLY_GET_ENV_LIGHT = 'get ambient light';
 En.MIXLY_ESP32_EXTERN_LIGHT = 'light intensity sensor';
+En.MIXLY_GET_ULTRAVIOLET = 'get Ultraviolet intensity';
 
 })();

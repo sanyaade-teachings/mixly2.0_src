@@ -1086,14 +1086,10 @@ Blockly.Arduino.forBlock['tft_print'] = function () {
     var TEXT = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var colour = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
 
-    var code = "";
-    if ((!isNaN(POS_x) && POS_x < 129 && POS_x >= 0) || (isNaN(POS_x)))
-        code = 'u8g2_for_adafruit_gfx.setCursor(' + POS_x + ',';
-    if ((!isNaN(POS_y) && POS_y < 129 && POS_y >= 0) || (isNaN(POS_y)))
-        code += POS_y + "); \n";
+    var code = `u8g2_for_adafruit_gfx.setCursor(${POS_x}, ${POS_y});\n`;
     // code +='u8g2_for_adafruit_gfx.setFontMode(0);'
-    code += 'u8g2_for_adafruit_gfx.setForegroundColor' + '(' + colour + ');\n';
-    code += "u8g2_for_adafruit_gfx.print(" + TEXT + "); \n";
+    code += `u8g2_for_adafruit_gfx.setForegroundColor(${colour});\n`;
+    code += `u8g2_for_adafruit_gfx.print(${TEXT});\n`;
     return code;
 };
 

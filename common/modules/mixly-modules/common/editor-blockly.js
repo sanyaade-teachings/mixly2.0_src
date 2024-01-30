@@ -298,6 +298,8 @@ class EditorBlockly extends EditorBase {
                 Blockly.serialization.workspaces.load(this.#workspaceState_, this.#editor_, {
                     recordUndo: false
                 });
+            } else {
+                this.#editor_.clear();
             }
             if (this.#undoStack_) {
                 this.#editor_.undoStack_ = [...this.#undoStack_];
@@ -306,7 +308,6 @@ class EditorBlockly extends EditorBase {
                 this.#editor_.redoStack_ = [...this.#redoStack_];
             }
             Blockly.Events.enable();
-            this.scrollCenter();
         }, 0);
     }
 

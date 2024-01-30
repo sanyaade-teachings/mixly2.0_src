@@ -56,6 +56,6 @@ html[data-bs-theme=light] .statusbar-btn {
 }
 
 html[data-bs-theme=dark] .statusbar-btn {
-    background-color: #232324;
+    background-color: #252526;
     color: #fff;
 }

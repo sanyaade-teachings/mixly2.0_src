@@ -22,11 +22,9 @@ const {
     Menu,
     EditorMonaco
 } = Mixly;
-const { USER, BOARD } = Config;
+const { USER } = Config;
 
 class EditorCode extends EditorMonaco {
-    #tabSize_ = null;
-    #language_ = null;
     #contextMenu_ = null;
     #contextMenuId_ = null;
 
@@ -34,17 +32,12 @@ class EditorCode extends EditorMonaco {
         super();
         this.#contextMenuId_ = IdGenerator.generate();
         this.getContent().attr('content-menu-id', this.#contextMenuId_);
-        this.#tabSize_ = null;
-        this.#language_ = null;
-        this.#contextMenu_ = null;
     }
 
     init() {
         super.init();
-        this.#language_ = this.getDefaultLanguage();
-        this.#tabSize_ = this.getDefaultTabSize();
-        this.setLanguage(this.#language_);
-        this.setTabSize(this.#tabSize_);
+        this.setLanguage('text');
+        this.setTabSize(4);
         this.#addContextMenu_();
         this.setTheme(USER.theme);
     }
@@ -117,14 +110,13 @@ class EditorCode extends EditorMonaco {
 
     setValue(data, ext) {
         this.disableChangeEvent();
-        super.setValue(data);
-        this.#language_ = this.getLanguageByExt(ext);
-        this.setLanguage(this.#language_);
+        super.setValue(data, ext);
+        this.setLanguage(this.getLanguageByExt(ext));
         this.enableChangeEvent();
     }
 
     getLanguageByExt(ext) {
-        let language = this.getDefaultLanguage();
+        let language = 'text';
         switch(ext) {
         case '.json':
             language = 'json';
@@ -144,56 +136,11 @@ class EditorCode extends EditorMonaco {
         case '.md':
         case '.mdx':
             language = 'markdown';
-        }
-        return language;
-    }
-
-    getDefaultLanguage() {
-        let language = 'javascript';
-        let type = (BOARD.language || '').toLowerCase();
-        switch(type) {
-        case 'python':
-        case 'micropython':
-        case 'circuitpython':
-            language = 'python';
-            break;
-        case 'c/c++':
-            language = 'cpp';
-            break;
-        case 'javascript':
-            language = 'javascript';
-            break;
-        case 'markdown':
-            language = 'markdown';
             break;
         default:
             language = 'text';
         }
         return language;
-    }
-
-    getDefaultTabSize() {
-        let tabSize = 4;
-        let type = (BOARD.language || '').toLowerCase();
-        switch(type) {
-        case 'python':
-        case 'micropython':
-        case 'circuitpython':
-            tabSize = 4;
-            break;
-        case 'c/c++':
-            tabSize = 2;
-            break;
-        case 'javascript':
-            tabSize = 4;
-            break;
-        case 'markdown':
-            tabSize = 2;
-            break;
-        default:
-            tabSize = 4;
-        }
-        return tabSize;
     }
 
     #addChangeEventListenerExt_() {

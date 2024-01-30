@@ -112,11 +112,13 @@ class EditorMonaco extends EditorBase {
         this.initMonaco();
     }
 
-    #readOnly = false;
+    #readOnly_ = false;
     #changeListener_ = null;
     #enableChangeEvent_ = true;
     #editor_ = null;
     #state_ = null;
+    #tabSize_ = null;
+    #language_ = null;
 
     constructor() {
         super();
@@ -137,9 +139,9 @@ class EditorMonaco extends EditorBase {
         if (this.#state_) {
             editor.restoreViewState(this.#state_);
         }
-        this.setReadOnly(this.#readOnly);
+        this.setReadOnly(this.#readOnly_);
         this.getContent().append(EditorMonaco.getContent());
-        if (!this.#readOnly) {
+        if (!this.#readOnly_) {
             this.focus();
         }
         this.#addChangeEventListener_();
@@ -264,14 +266,22 @@ class EditorMonaco extends EditorBase {
     setReadOnly(readOnly) {
         const editor = EditorMonaco.getEditor();
         editor.updateOptions({ readOnly });
-        this.#readOnly = readOnly;
+        this.#readOnly_ = readOnly;
     }
 
     setLanguage(language) {
+        if (this.#language_ === language) {
+            return;
+        }
+        this.#language_ = language;
         monaco.editor.setModelLanguage(this.#editor_, language);
     }
 
     setTabSize(tabSize) {
+        if (this.#tabSize_ === tabSize) {
+            return;
+        }
+        this.#tabSize_ = tabSize;
         this.#editor_.updateOptions({ tabSize });
     }
 

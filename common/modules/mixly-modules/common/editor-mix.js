@@ -72,6 +72,9 @@ class EditorMix extends EditorBase {
         ];
     }
 
+    #language_ = null;
+    #tabSize_ = null;
+
     constructor() {
         super();
         const $content = $(HTMLTemplate.get('editor/editor-mix.html').render());
@@ -90,7 +93,11 @@ class EditorMix extends EditorBase {
         super.init();
         this.#addDragEventsListener_();
         this.#addBtnEventsListener_();
+        this.#language_ = this.getDefaultLanguageExt();
+        this.#tabSize_ = this.getDefaultTabSize();
         const codePage = this.getPage('code');
+        codePage.setLanguage(this.#language_);
+        codePage.setTabSize(this.#tabSize_);
         codePage.setReadOnly(true);
         this.#py2BlockEditorInit_();
         const contextMenu = codePage.getContextMenu();
@@ -208,11 +215,11 @@ class EditorMix extends EditorBase {
                     && typeof this.py2BlockEditor.updateBlock === 'function') {
                     this.py2BlockEditor.updateBlock();
                 } else {
-                    codePage.setValue(blockPage.getValue(), false);
+                    codePage.setValue(blockPage.getValue(), this.#language_);
                 }
                 break;
             case Drag.Extend.POSITIVE:
-                codePage.setValue(blockPage.getValue(), false);
+                codePage.setValue(blockPage.getValue(), this.#language_);
                 break;
             }
             blockPage.resize();
@@ -256,6 +263,48 @@ class EditorMix extends EditorBase {
         }
     }
 
+    getDefaultLanguageExt() {
+        let ext = '.txt';
+        let type = (BOARD.language || '').toLowerCase();
+        switch(type) {
+        case 'python':
+        case 'micropython':
+        case 'circuitpython':
+            ext = '.py';
+            break;
+        case 'c/c++':
+            ext = '.cpp';
+            break;
+        case 'javascript':
+            ext = '.js';
+            break;
+        case 'markdown':
+            ext = '.md';
+            break;
+        default:
+            ext = '.txt';
+        }
+        return ext;
+    }
+
+    getDefaultTabSize() {
+        let tabSize = 4;
+        let type = (BOARD.language || '').toLowerCase();
+        switch(type) {
+        case 'c/c++':
+        case 'markdown':
+            tabSize = 2;
+            break;
+        case 'python':
+        case 'micropython':
+        case 'circuitpython':
+        case 'javascript':
+        default:
+            tabSize = 4;
+        }
+        return tabSize;
+    }
+
     undo() {
         super.undo();
         const editor = this.getCurrentEditor();
@@ -293,7 +342,7 @@ class EditorMix extends EditorBase {
             if (this.drag.shown !== Drag.Extend.BOTH) {
                return;
             }
-            codePage.setValue(blockPage.getCode());
+            codePage.setValue(blockPage.getCode(), this.#language_);
         });
         this.#addCodeChangeEventListener_();
     }
@@ -445,7 +494,7 @@ class EditorMix extends EditorBase {
                 return;
             }
             this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
-            codePage.setValue(code, -1);
+            codePage.setValue(code, this.#language_);
             blockPage.clear();
             endFunc('USE_CODE');
             return;
@@ -483,7 +532,7 @@ class EditorMix extends EditorBase {
         Blockly.hideChaff();
         if (!useIncompleteBlocks && codeDom && xmlDom.attr('shown') === 'code') {
             this.drag.full(Drag.Extend.NEGATIVE); // 完全显示代码编辑器
-            codePage.setValue(code, -1);
+            codePage.setValue(code, this.#language_);
             endFunc();
             return;
         }

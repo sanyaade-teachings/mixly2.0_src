@@ -3735,5 +3735,9 @@ ZhHans.MIXLY_LIGHT_WHITE = '白';
 ZhHans.MIXLY_EXTERN_LIGHTUV = '环境光传感器';
 ZhHans.MIXLY_GET_ENV_LIGHT = '获取环境光';
 ZhHans.MIXLY_GET_ULTRAVIOLET = '获取紫外线强度';
+ZhHans.LOGIC_OPERATION_NOR = '同或';
+ZhHans.LOGIC_OPERATION_XOR = '异或';
+ZhHans.LOGIC_OPERATION_TOOLTIP_NOR = "如果两个输入结果相同，则返回真；如果两个输入结果不同，则返回假";
+ZhHans.LOGIC_OPERATION_TOOLTIP_XOR = "如果两个输入结果不同，则返回真；如果两个输入结果相同，则返回假";
 
 })();

@@ -126,7 +126,9 @@ Blockly.Blocks['logic_operation'] = {
   init: function() {
     var OPERATORS =
         [[Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
-         [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
+         [Blockly.Msg.LOGIC_OPERATION_OR, 'OR'],
+         [Blockly.Msg.LOGIC_OPERATION_NOR,'NOR'],
+         [Blockly.Msg.LOGIC_OPERATION_XOR,'XOR']];
     //this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
     this.setColour(Blockly.Msg['LOGIC_HUE']);
     this.setOutput(true, Boolean);
@@ -142,7 +144,9 @@ Blockly.Blocks['logic_operation'] = {
       var op = thisBlock.getFieldValue('OP');
       var TOOLTIPS = {
         'AND': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND,
-        'OR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR
+        'OR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR,
+        'NOR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_NOR,
+        'XOR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_XOR,
       };
       return TOOLTIPS[op];
     });

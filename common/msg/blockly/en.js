@@ -3589,5 +3589,9 @@ En.MIXLY_EXTERN_LIGHTUV = 'Ambient light sensor';
 En.MIXLY_GET_ENV_LIGHT = 'get ambient light';
 En.MIXLY_ESP32_EXTERN_LIGHT = 'light intensity sensor';
 En.MIXLY_GET_ULTRAVIOLET = 'get Ultraviolet intensity';
+En.LOGIC_OPERATION_NOR = 'NAND';
+En.LOGIC_OPERATION_XOR = 'NOR';
+En.LOGIC_OPERATION_TOOLTIP_NOR = "Return true if the input results are the same, false if the two input results are different";
+En.LOGIC_OPERATION_TOOLTIP_XOR = "Return true if the input results are different, false if the two input results are the same";
 
 })();

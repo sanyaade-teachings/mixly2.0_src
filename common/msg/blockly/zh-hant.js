@@ -3561,5 +3561,9 @@ ZhHant.MIXLY_EXTERN_LIGHTUV = '環境光傳感器';
 ZhHant.MIXLY_GET_ENV_LIGHT = '獲取環境光';
 ZhHant.MIXLY_ESP32_EXTERN_LIGHT = "光强傳感器";
 ZhHant.MIXLY_GET_ULTRAVIOLET = "獲取紫外綫强度";
+ZhHant.LOGIC_OPERATION_NOR = "同或";
+ZhHant.LOGIC_OPERATION_XOR = "異或";
+ZhHant.LOGIC_OPERATION_TOOLTIP_NOR = "如果兩個輸入結果相同，則返回真；如果兩個輸入結果不同，則返回假";
+ZhHant.LOGIC_OPERATION_TOOLTIP_XOR = "如果兩個輸入結果不同，則返回真；如果兩個輸入結果相同，則返回假";
 
 })();

@@ -74,19 +74,18 @@ class EditorMix extends EditorBase {
 
     #language_ = null;
     #tabSize_ = null;
+    #$btns_ = null;
 
     constructor() {
         super();
         const $content = $(HTMLTemplate.get('editor/editor-mix.html').render());
         const $btnsContent = $(HTMLTemplate.get('editor/editor-mix-btns.html'));
         this.drag = null;
-        this.$blocklyContainer = $content.find('.editor-blockly');
-        this.$codeContainer = $content.find('.editor-code');
-        this.$btns = $btnsContent.find('button');
+        this.#$btns_ = $btnsContent.find('button');
         this.setContent($content);
         this.setBtnsContent($btnsContent);
-        this.addPage(this.$blocklyContainer, 'block', new EditorBlockly());
-        this.addPage(this.$codeContainer, 'code', new EditorCode());
+        this.addPage($content.find('.editor-blockly'), 'block', new EditorBlockly());
+        this.addPage($content.find('.editor-code'), 'code', new EditorCode());
     }
 
     init() {
@@ -185,15 +184,15 @@ class EditorMix extends EditorBase {
         });
         this.drag.bind('sizeChanged', () => this.resize());
         this.drag.bind('onfull', (type) => {
-            this.$btns.removeClass('self-adaption-btn');
+            this.#$btns_.removeClass('self-adaption-btn');
             let $btn = null;
             switch(type) {
             case Drag.Extend.POSITIVE:
-                $btn = this.$btns.filter('[m-id="block"]');
+                $btn = this.#$btns_.filter('[m-id="block"]');
                 blockPage.scrollCenter();
                 break;
             case Drag.Extend.NEGATIVE:
-                $btn = this.$btns.filter('[m-id="code"]');
+                $btn = this.#$btns_.filter('[m-id="code"]');
                 codePage.setReadOnly(false);
                 codePage.focus();
                 if (this.py2BlockEditor && BOARD.pythonToBlockly) {
@@ -204,8 +203,8 @@ class EditorMix extends EditorBase {
             $btn.addClass('self-adaption-btn');
         });
         this.drag.bind('exitfull', (type) => {
-            this.$btns.removeClass('self-adaption-btn');
-            const $btn = this.$btns.filter('[m-id="mixture"]');
+            this.#$btns_.removeClass('self-adaption-btn');
+            const $btn = this.#$btns_.filter('[m-id="mixture"]');
             $btn.addClass('self-adaption-btn');
             switch(type) {
             case Drag.Extend.NEGATIVE:
@@ -228,14 +227,14 @@ class EditorMix extends EditorBase {
     }
 
     #addBtnEventsListener_() {
-        this.$btns.on('click', (event) => {
+        this.#$btns_.on('click', (event) => {
             const $btn = $(event.currentTarget);
             const mId = $btn.attr('m-id');
             if (mId === 'deps') {
                 return;
             }
             if (!$btn.hasClass('self-adaption-btn')) {
-                this.$btns.removeClass('self-adaption-btn');
+                this.#$btns_.removeClass('self-adaption-btn');
                 $btn.addClass('self-adaption-btn');
             }
             switch (mId) {
@@ -323,8 +322,6 @@ class EditorMix extends EditorBase {
         blocklyWorkspace.removeChangeListener(this.codeChangeListener);
         this.drag.dispose();
         super.dispose();
-        this.$blocklyContainer = null;
-        this.$codeContainer = null;
         this.drag = null;
     }
 

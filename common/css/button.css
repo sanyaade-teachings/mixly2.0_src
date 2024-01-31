@@ -51,7 +51,7 @@ html[data-bs-theme=dark] .self-adaption-btn {
 }
 
 html[data-bs-theme=light] .statusbar-btn {
-    background-color: #f2f2f2;
+    background-color: #f8f8f8;
     color: #000;
 }
 

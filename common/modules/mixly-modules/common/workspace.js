@@ -66,31 +66,34 @@ class Workspace extends Component {
         }
     }
 
+    #statusBarsManager_ = null;
+    #editorsManager_ = null;
+    #leftSideBarsManager_ = null;
+    #rightSideBarsManager_ = null;
+    #$dragVLeft_ = null;
+    #$dragVRight_ = null;
+    #$dragH_ = null;
+
     constructor(element) {
         super();
         const $content = $(HTMLTemplate.get('workspace.html').render());
         this.setContent($content);
         this.mountOn($(element));
-        this.$leftTabs = $content.find('.left-tabs');
-        this.$leftSidebar = $content.find('.left-sidebar');
-        this.$rightSidebar = $content.find('.right-sidebar');
-        this.$editor = $content.find('.editor');
-        this.$dragVLeft = $content.find('.drag-v-left');
-        this.$dragVRight = $content.find('.drag-v-right');
-        this.$dragH = $content.find('.drag-h');
-        this.$statusBarTabs = $content.find('.statusbar-tabs');
-        this.statusBarTabs = new StatusBarsManager(this.$statusBarTabs[0]);
-        this.statusBarTabs.add('terminal', 'output', Msg.Lang['输出']);
-        this.statusBarTabs.changeTo('output');
-        this.editorManager = new EditorsManager(this.$editor[0]);
-        this.leftSideBarManager = new LeftSideBarsManager(this.$leftSidebar[0]);
-        this.leftSideBarManager.add('local_storage', 'local_storage', '本地');
-        this.leftSideBarManager.add('local_storage', 'examples', '例程');
-        this.leftSideBarManager.add('local_storage', 'wiki', '文档');
-        this.leftSideBarManager.add('libs', 'libs', '库管理');
-        this.leftSideBarManager.changeTo('local_storage');
-        this.rightSideBarManager = new RightSideBarsManager(this.$rightSidebar[0]);
-        this.rightSideBarManager.add('local_storage', 'local_storage', '库管理');
+        this.#$dragVLeft_ = $content.find('.drag-v-left');
+        this.#$dragVRight_ = $content.find('.drag-v-right');
+        this.#$dragH_ = $content.find('.drag-h');
+        this.#statusBarsManager_ = new StatusBarsManager($content.find('.statusbars')[0]);
+        this.#statusBarsManager_.add('terminal', 'output', Msg.Lang['输出']);
+        this.#statusBarsManager_.changeTo('output');
+        this.#editorsManager_ = new EditorsManager($content.find('.editors')[0]);
+        this.#leftSideBarsManager_ = new LeftSideBarsManager($content.find('.left-sidebars')[0]);
+        this.#leftSideBarsManager_.add('local_storage', 'local_storage', '本地');
+        this.#leftSideBarsManager_.add('local_storage', 'examples', '例程');
+        this.#leftSideBarsManager_.add('local_storage', 'wiki', '文档');
+        this.#leftSideBarsManager_.add('libs', 'libs', '库管理');
+        this.#leftSideBarsManager_.changeTo('local_storage');
+        this.#rightSideBarsManager_ = new RightSideBarsManager($content.find('.right-sidebars')[0]);
+        this.#rightSideBarsManager_.add('local_storage', 'local_storage', '库管理');
         this.dragH = null;
         this.dragVLeft = null;
         this.dragVRight = null;
@@ -102,10 +105,10 @@ class Workspace extends Component {
     }
 
     #addEventsListenerForFileTree_() {
-        const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
+        const leftSideBarLocalStorage = this.getLeftSideBarsManager().get('local_storage');
         const fileTree = leftSideBarLocalStorage.getFileTree();
         fileTree.bind('selectLeaf', (selected) => {
-            const tabs = this.editorManager.getTabs();
+            const tabs = this.#editorsManager_.getTabs();
             tabs.addTab({
                 name: selected[0].text,
                 title: selected[0].id,
@@ -120,9 +123,9 @@ class Workspace extends Component {
     }
 
     #addEventsListenerForEditorManager_() {
-        const tabs = this.editorManager.getTabs();
+        const tabs = this.#editorsManager_.getTabs();
         tabs.bind('activeTabChange', (event) => {
-            const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
+            const leftSideBarLocalStorage = this.getLeftSideBarsManager().get('local_storage');
             const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
@@ -130,7 +133,7 @@ class Workspace extends Component {
             fileTree.select(tabId);
         });
         tabs.bind('tabDestroyed', (event) => {
-            const leftSideBarLocalStorage = this.leftSideBarManager.get('local_storage');
+            const leftSideBarLocalStorage = this.getLeftSideBarsManager().get('local_storage');
             const fileTree = leftSideBarLocalStorage.getFileTree();
             const { tabEl } = event.detail;
             const tabId = $(tabEl).attr('data-tab-id');
@@ -139,13 +142,13 @@ class Workspace extends Component {
     }
 
     #addFuncForStatusbarTabs_() {
-        this.statusBarTabs.bind('show', () => this.dragH.show());
-        this.statusBarTabs.bind('hide', () => this.dragH.hide());
+        this.#statusBarsManager_.bind('show', () => this.dragH.show());
+        this.#statusBarsManager_.bind('hide', () => this.dragH.hide());
     }
 
     #addDragEventsListener_() {
         // 编辑器(上)+状态栏(下)
-        this.dragH = new DragH(this.$dragH[0], {
+        this.dragH = new DragH(this.#$dragH_[0], {
             min: '50px',
             startSize: '100%',
             startExitFullSize: '70%'
@@ -156,7 +159,7 @@ class Workspace extends Component {
         });
 
         // 侧边栏(左)+[编辑器(上)+状态栏(下)]
-        this.dragVLeft = new DragV(this.$dragVLeft[0], {
+        this.dragVLeft = new DragV(this.#$dragVLeft_[0], {
             min: '100px',
             full: [true, false],
             startSize: '0%',
@@ -168,7 +171,7 @@ class Workspace extends Component {
         });
 
         // 侧边栏(右)+[编辑器(上)+状态栏(下)]
-        this.dragVRight = new DragV(this.$dragVRight[0], {
+        this.dragVRight = new DragV(this.#$dragVRight_[0], {
             min: '100px',
             full: [false, true],
             startSize: '100%',
@@ -180,16 +183,36 @@ class Workspace extends Component {
         });
     }
 
+    getEditorsManager() {
+        return this.#editorsManager_;
+    }
+
+    getLeftSideBarsManager() {
+        return this.#leftSideBarsManager_;
+    }
+
+    getRightSideBarsManager() {
+        return this.#rightSideBarsManager_;
+    }
+
+    getStatusBarsManager() {
+        return this.#statusBarsManager_;
+    }
+
     resize() {
         super.resize();
-        this.editorManager.resize();
-        this.leftSideBarManager.resize();
-        this.rightSideBarManager.resize();
-        this.statusBarTabs.resize();
+        this.getEditorsManager().resize();
+        this.getLeftSideBarsManager().resize();
+        this.getRightSideBarsManager().resize();
+        this.getStatusBarsManager().resize();
     }
 
     dispose() {
         Workspace.remove(this);
+        this.getEditorsManager().dispose();
+        this.getLeftSideBarsManager().dispose();
+        this.getRightSideBarsManager().dispose();
+        this.getStatusBarsManager().dispose();
         super.dispose();
     }
 }

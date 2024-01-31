@@ -74,16 +74,22 @@ class App extends Component {
         this.mountOn($(element));
         Nav.init($content.find('.mixly-nav')[0]);
         this.#workspace_ = new Workspace($content.find('.mixly-workspace')[0]);
+        this.#workspace_.getEditorsManager().getTabs().addTab({
+            name: 'Untitled-1.mix',
+            title: 'Untitled-1.mix',
+            type: '.mix',
+            favicon: 'fileicon-mix'
+        });
         NavEvents.init();
         FooterBar.init();
         this.#addEventsListenerForNav_();
         this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
-        Mixly.mainStatusBarTabs = this.getWorkspace().statusBarTabs;
+        Mixly.mainStatusBarTabs = this.#workspace_.getStatusBarsManager();
     }
 
     #addEventsListenerForNav_() {
-        const { editorManager } = this.#workspace_;
+        const editorsManager = this.#workspace_.getEditorsManager();
         Nav.register({
             id: 'home-btn',
             preconditionFn: () => {
@@ -101,9 +107,9 @@ class App extends Component {
             id: 'undo-btn',
             displayText: '撤销',
             preconditionFn: () => {
-                return !!editorManager.getActive();
+                return !!editorsManager.getActive();
             },
-            callback: () => editorManager.getActive().undo(),
+            callback: () => editorsManager.getActive().undo(),
             scopeType: Nav.Scope.LEFT,
             weight: 0
         });
@@ -113,9 +119,9 @@ class App extends Component {
             id: 'redo-btn',
             displayText: '重做',
             preconditionFn: () => {
-                return !!editorManager.getActive();
+                return !!editorsManager.getActive();
             },
-            callback: () => editorManager.getActive().redo(),
+            callback: () => editorsManager.getActive().redo(),
             scopeType: Nav.Scope.LEFT,
             weight: 1
         });
@@ -245,13 +251,13 @@ class App extends Component {
     }
 
     #addEventsListenerForWorkspace_() {
-        const { editorManager } = this.#workspace_;
-        const editorTabs = editorManager.getTabs();
+        const editorsManager = this.#workspace_.getEditorsManager();
+        const editorTabs = editorsManager.getTabs();
 
         editorTabs.bind('tabCheckDestroy', (event) => {
             const { tabEl } = event.detail;
             const id = $(tabEl).attr('data-tab-id');
-            const editor = editorManager.get(id);
+            const editor = editorsManager.get(id);
             if (!editor) {
                 return;
             }
@@ -268,7 +274,7 @@ class App extends Component {
                             FS.writeFile($tab.attr('data-tab-id'), editor.getValue())
                             .then(() => {
                                 editor.removeDirty();
-                                editorManager.remove(id);
+                                editorsManager.remove(id);
                                 layer.close(index);
                                 layer.msg('已保存文件');
                             })
@@ -286,7 +292,7 @@ class App extends Component {
                                     return;
                                 }
                                 editor.removeDirty();
-                                editorManager.remove(id);
+                                editorsManager.remove(id);
                                 layer.close(index);
                                 layer.msg('已保存文件');
                             })
@@ -295,7 +301,7 @@ class App extends Component {
                     },
                     btn2: (index) => {
                         editor.removeDirty();
-                        editorManager.remove(id);
+                        editorsManager.remove(id);
                         layer.close(index);
                     },
                     btn3: (index) => {
@@ -309,13 +315,6 @@ class App extends Component {
                 });
             }
             return !editor.isDirty();
-        });
-
-        editorTabs.addTab({
-            name: 'Untitled-1.mix',
-            title: 'Untitled-1.mix',
-            type: '.mix',
-            favicon: 'fileicon-mix'
         });
     }
 
@@ -356,9 +355,10 @@ class App extends Component {
 
     onMounted() {
         super.onMounted();
-        $('.loading').addClass('skeleton-fadeout');
+        const $appLoading = $('.mixly-app-loading');
+        $appLoading.addClass('skeleton-fadeout');
         setTimeout(() => {
-            $('.loading').remove();
+            $appLoading.remove();
         }, 500);
     }
 

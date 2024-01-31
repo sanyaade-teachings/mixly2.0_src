@@ -44,15 +44,16 @@ class EditorMd extends EditorBase {
     #prevCode_ = '';
     #listener_ = null;
     #drag_ = null;
+    #$preview_ = null;
+    #$btns_ = null;
 
     constructor() {
         super();
         const $content = $(HTMLTemplate.get('editor/editor-md.html').render());
         const $btnsContent = $(HTMLTemplate.get('editor/editor-md-btns.html'));
-        this.$codeContainer = $content.find('.editor-code');
-        this.$previewContainer = $content.find('.markdown-body');
-        this.addPage(this.$codeContainer, 'code', new EditorCode());
-        this.$btns = $btnsContent.find('button');
+        this.#$preview_ = $content.find('.markdown-body');
+        this.addPage($content.find('.editor-code'), 'code', new EditorCode());
+        this.#$btns_ = $btnsContent.find('button');
         this.#drag_ = null;
         this.setContent($content);
         this.setBtnsContent($btnsContent);
@@ -78,21 +79,21 @@ class EditorMd extends EditorBase {
         });
         this.#drag_.bind('sizeChanged', () => this.resize());
         this.#drag_.bind('onfull', (type) => {
-            this.$btns.removeClass('self-adaption-btn');
+            this.#$btns_.removeClass('self-adaption-btn');
             let $btn = null;
             switch(type) {
             case Drag.Extend.POSITIVE:
-                $btn = this.$btns.filter('[m-id="code"]');
+                $btn = this.#$btns_.filter('[m-id="code"]');
                 break;
             case Drag.Extend.NEGATIVE:
-                $btn = this.$btns.filter('[m-id="preview"]');
+                $btn = this.#$btns_.filter('[m-id="preview"]');
                 break;
             }
             $btn.addClass('self-adaption-btn');
         });
         this.#drag_.bind('exitfull', (type) => {
-            this.$btns.removeClass('self-adaption-btn');
-            const $btn = this.$btns.filter('[m-id="mixture"]');
+            this.#$btns_.removeClass('self-adaption-btn');
+            const $btn = this.#$btns_.filter('[m-id="mixture"]');
             $btn.addClass('self-adaption-btn');
             if (type === Drag.Extend.POSITIVE) {
                 this.updatePreview();
@@ -101,11 +102,11 @@ class EditorMd extends EditorBase {
     }
 
     #addBtnEventsListener_() {
-        this.$btns.on('click', (event) => {
+        this.#$btns_.on('click', (event) => {
             const $btn = $(event.currentTarget);
             const mId = $btn.attr('m-id');
             if (!$btn.hasClass('self-adaption-btn')) {
-                this.$btns.removeClass('self-adaption-btn');
+                this.#$btns_.removeClass('self-adaption-btn');
                 $btn.addClass('self-adaption-btn');
             }
             switch (mId) {
@@ -144,7 +145,7 @@ class EditorMd extends EditorBase {
         const $dom = $(marked.parse(code));
         const $as = $dom.find('a');
         $as.attr('target', '_blank');
-        this.$previewContainer.html($dom);
+        this.#$preview_.html($dom);
     }
 
     setValue(data, ext) {

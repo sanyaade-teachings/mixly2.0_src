@@ -9,6 +9,14 @@
         overflow: auto;
     }
 
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] {
+        background-color: #fff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] {
+        background-color: #1e1e1e;
+    }
+
     div[m-id="{{d.mId}}"] > .mixly-font {
         font-family: 'ravie';
         font-size: 80px;

@@ -164,47 +164,42 @@ def touch_slide(pina, pinb):
 
 '''2LED-WS2812'''
 class LED:
-	def __init__(self, rgb):
+	def __init__(self, rgb, num=2, color=3):
 		self._rgb = rgb
+		self._col = [color] * num
 		self._color = ((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (0, 1, 1), (1, 0, 1), (1, 1, 1))
 
-	def setbrightness(self, index, value, color):
-		self._rgb.led_set(index - 1, (value if self._color[color][0] else 0,
-												value if self._color[color][1] else 0,
-												value if self._color[color][2] else 0))
+	def setbrightness(self, index, value):
+		self._rgb.led_set(index - 1, (value if self._color[self._col[index-1]][0] else 0,
+									value if self._color[self._col[index-1]][1] else 0,
+									value if self._color[self._col[index-1]][2] else 0))
 		self._rgb.write()
 
 	def getbrightness(self, index):
 		color = self._rgb.led_get(index - 1)
 		for c in self._color:
 			if (bool(c[0]) == bool(color[0])) & (bool(c[1]) == bool(color[1])) & (bool(c[2]) == bool(color[2])):
-				return color[0] | color[1] | color[2], self._color.index(c)
+				return color[0] | color[1] | color[2]
 
-	def setonoff(self, index, value, color):
+	def setonoff(self, index, value):
 		if value == -1:
 			if self.getbrightness(index)[0] < 50:
-				self.setbrightness(index, 100, color)
+				self.setbrightness(index, 100)
 			else:
-				self.setbrightness(index, 0, color)
+				self.setbrightness(index, 0)
 		elif value == 1:
-			self.setbrightness(index, 100, color)
+			self.setbrightness(index, 100)
 		elif value == 0:
-			self.setbrightness(index, 0, color)
+			self.setbrightness(index, 0)
 
 	def getonoff(self, index):
 		return True if self.getbrightness(index)[0] > 0 else False
 
-	def setcolor(self, index, value):
-		self._rgb.led_set(index - 1, self._color[value])
+	def setcolor(self, index, color):
+		self._col[index-1] = color
 
-		self._rgb.write()
-
-
-	# def setcolor(self, index, r, g, b, color):
-	# 	self._rgb.led_set(index - 1, (r if self._color[color][0] else 0,
-	# 									g if self._color[color][1] else 0,
-	# 									b if self._color[color][2] else 0))
-	# 	self._rgb.write()
+	def getcolor(self, index):
+		return self._col[index-1]
 
 onboard_led=LED(onboard_rgb)
 

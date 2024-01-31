@@ -167,7 +167,7 @@ Blockly.Python.forBlock['system_timer_init']=function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_machine'] = 'import machine';
-    if(version=='mixgo_feiyi'){
+    if(version=='feiyi'){
       var code = v + ' = machine.Timer(0)\n';
     }
     else{

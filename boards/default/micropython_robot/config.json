@@ -1,6 +1,6 @@
 {
     "board": {
-        "元控•飞乙": "micropython:esp32c3:mixgo_feiyi",
+        "飞乙": "micropython:esp32c3:feiyi",
         "超霸大师": "micropython:esp32:mixbot",
         "机器人大师": "micropython:esp32:rm_e1"
     },
@@ -8,8 +8,8 @@
     "burn": {
         "type": "command",
         "portSelect": "all",        
-        "micropython:esp32c3:mixgo_feiyi": {
-            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/MixGo_Feiyi-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+        "micropython:esp32c3:feiyi": {
+            "command": "\"{esptool}\" --chip esp32c3 --port {com} --baud 460800 erase_flash && \"{esptool}\" --chip esp32c3 --port {com} --baud 460800 write_flash 0x0 \"{indexPath}/build/Feiyi-0x0-V1.19.1.bin\" 0X3A0000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32:rm_e1": {
             "command": "\"{esptool}\" --chip esp32 --port {com} --baud 460800 erase_flash && \"{esptool}\" --port {com} --baud 460800 write_flash 0x1000 \"{indexPath}/build/RM_E1-0x1000-V1.19.1.bin\""
@@ -29,7 +29,7 @@
         "filePath": "{indexPath}/build/upload/main.py",
         "copyLib": true,
         "reset": [],
-        "micropython:esp32c3:mixgo_feiyi": {
+        "micropython:esp32c3:feiyi": {
             "reset": [
                 {
                     "dtr": false,
@@ -69,7 +69,7 @@
         "pointNum": 100,
         "rts": false,
         "dtr": false,
-        "micropython:esp32c3:mixgo_feiyi": {
+        "micropython:esp32c3:feiyi": {
             "rts": true,
             "dtr": false
         }
@@ -86,11 +86,11 @@
         "com": "serial",
         "burn": {
             "erase": true,            
-            "micropython:esp32c3:mixgo_feiyi": {
+            "micropython:esp32c3:feiyi": {
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/MixGo_Feiyi-0x0-V1.19.1-lib.bin"
+                        "path": "./build/Feiyi-0x0-V1.19.1-lib.bin"
                     },
                     {
                         "offset": "0X3A0000",

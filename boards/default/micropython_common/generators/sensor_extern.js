@@ -686,7 +686,7 @@ Blockly.Python.forBlock['robot_button_extern_get_value'] = function(){
     var code = 'ext_button.value('+ mode +")"+num;
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -711,7 +711,7 @@ Blockly.Python.forBlock['robot_touch_extern_get_value'] = function(){
     var code = 'ext_collision.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -737,9 +737,9 @@ Blockly.Python.forBlock['robot_infrared_extern_get_value'] = function(){
     var code = 'ext_infrared.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     var mode = this.getFieldValue('mode');
-    Blockly.Python.definitions_['import_mixgo_feiyi_onboard_bot51'] = 'from mixgo_feiyi import onboard_bot51';
+    Blockly.Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var code = 'onboard_bot51.read_ps('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
@@ -748,7 +748,7 @@ Blockly.Python.forBlock['robot_infrared_extern_get_value'] = function(){
 Blockly.Python.forBlock['robot_infrared_extern_grey_get_value'] = function () {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
   var mode = this.getFieldValue('mode');
-  if (version == 'mixgo_feiyi') {
+  if (version == 'feiyi') {
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if (mode == "0") {
@@ -773,7 +773,7 @@ Blockly.Python.forBlock['robot_potentiometer_extern_get_value'] = function(){
     var code = 'ext_potentiometer.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -799,7 +799,7 @@ Blockly.Python.forBlock['robot_color_extern_get_value'] = function(){
     var code = 'ext_color.recognition('+ mode +")"+color;
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -824,7 +824,7 @@ Blockly.Python.forBlock['robot_sonar_extern_get_value'] = function(){
     var code = 'ext_sonar.value('+ mode +")";
     return [code, Blockly.Python.ORDER_ATOMIC];
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){
@@ -851,7 +851,7 @@ Blockly.Python.forBlock['robot_sonar_extern_led'] = function(){
     var code = 'ext_sonar.led('+ mode+','+light+','+op +")\n";
     return code;
     }
-    else if (version=='mixgo_feiyi'){
+    else if (version=='feiyi'){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
     if(mode=="0"){

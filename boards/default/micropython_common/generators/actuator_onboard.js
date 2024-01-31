@@ -358,7 +358,7 @@ Blockly.Python.forBlock['actuator_mixbot_buzzer_on_off'] = function () {var vers
 //bitbot onboard_motor below:
 Blockly.Python.forBlock['bitbot_move'] = function(){
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixgo_feiyi_onboard_bot51'] = 'from mixgo_feiyi import onboard_bot51';
+    Blockly.Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ASSIGNMENT);
     var code = 'onboard_bot51.move("'+ v +'",' + speed +")\n";
     return code;
@@ -366,7 +366,7 @@ Blockly.Python.forBlock['bitbot_move'] = function(){
 
 Blockly.Python.forBlock['bitbot_stop'] = function(){
     var v = this.getFieldValue('VAR');
-    Blockly.Python.definitions_['import_mixgo_feiyi_onboard_bot51'] = 'from mixgo_feiyi import onboard_bot51';
+    Blockly.Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var code = 'onboard_bot51.move("'+ v +'"'+")\n";
     return code;
 };
@@ -374,7 +374,7 @@ Blockly.Python.forBlock['bitbot_stop'] = function(){
 Blockly.Python.forBlock['bitbot_motor'] = function(){
     var wheel = this.getFieldValue('wheel');
     var direction = this.getFieldValue('direction');
-    Blockly.Python.definitions_['import_mixgo_feiyi_onboard_bot51'] = 'from mixgo_feiyi import onboard_bot51';
+    Blockly.Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var speed = Blockly.Python.valueToCode(this, 'speed', Blockly.Python.ORDER_ATOMIC);
     var code = 'onboard_bot51.motor('+ wheel + ',"' + direction + '",' + speed +")\n";
     return code;

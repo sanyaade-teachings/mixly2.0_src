@@ -20,6 +20,7 @@ rtc_clock = RTC()
 #onboard_i2c = I2C(0)
 onboard_i2c = SoftI2C(scl=Pin(36), sda=Pin(37), freq=400000)
 onboard_i2c_soft = SoftI2C(scl=Pin(13), sda=Pin(15), freq=400000)
+onboard_i2c_scan = onboard_i2c.scan()
 
 '''SPI-onboard'''
 onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
@@ -48,18 +49,26 @@ except Exception as e:
 	print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
 
 '''BPS-Sensor'''
-try :
-	import hp203x
-	onboard_bps = hp203x.HP203X(onboard_i2c_soft)     
-except Exception as e:
-	print("Warning: Failed to communicate with HP203X (BPS) or",e)
+if 0x76 in onboard_i2c_scan:
+	try :
+		import hp203x
+		onboard_bps = hp203x.HP203X(onboard_i2c_soft)     
+	except Exception as e:
+		print("Warning: Failed to communicate with HP203X (BPS) or",e)
 
 '''THS-Sensor'''
-try :
-	import ahtx0
-	onboard_ths = ahtx0.AHTx0(onboard_i2c)     
-except Exception as e:
-	print("Warning: Failed to communicate with AHTx0 (THS) or",e)
+if 0x38 in onboard_i2c_scan:
+	try :
+		import ahtx0
+		onboard_ths = ahtx0.AHTx0(onboard_i2c)     
+	except Exception as e:
+		print("Warning: Failed to communicate with AHTx0 (THS) or",e)
+if 0x70 in onboard_i2c_scan:
+	try :
+		import shtc3
+		onboard_ths = shtc3.SHTC3(onboard_i2c)     
+	except Exception as e:
+		print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
 
 '''RFID-Sensor'''
 try :

@@ -248,8 +248,14 @@ Blockly.Python.forBlock['sensor_get_temperature'] = function(){
 Blockly.Python.forBlock['rfid_readid'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');
+	if (version == 'yuankong_nova' || version == 'yuankong') {
     Blockly.Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
-    var code = 'onboard_rfid.read_card(0, x="id")';
+	var code = 'onboard_rfid.read_card(0, x="id")';
+    }
+    else {
+    Blockly.Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
+    var code = 'onboard_rc522.read_card(0, x="id")';
+	}
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -257,8 +263,14 @@ Blockly.Python.forBlock['rfid_readcontent'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
+	if (version == 'yuankong_nova' || version == 'yuankong') {
     Blockly.Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
     var code = 'onboard_rfid.read_card(' + sector + ', x="content")';
+    }
+    else {
+    Blockly.Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
+    var code = 'onboard_rc522.read_card(' + sector + ', x="content")';
+	}
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -266,8 +278,14 @@ Blockly.Python.forBlock['rfid_write'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
     var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
+	if (version == 'yuankong_nova' || version == 'yuankong') {
     Blockly.Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
     var code = 'onboard_rfid.write_card(' + cnt + ',' + sector + ')\n';
+    }
+    else {
+    Blockly.Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
+    var code = 'onboard_rc522.write_card(' + cnt + ',' + sector + ')\n';
+    }
     return code;
 };
 
@@ -275,8 +293,14 @@ Blockly.Python.forBlock['rfid_write_return'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
     var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
+	if (version == 'yuankong_nova' || version == 'yuankong') {
     Blockly.Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
     var code = 'onboard_rfid.write_card(' + cnt + ',' + sector + ')';
+    }
+    else {
+    Blockly.Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
+    var code = 'onboard_rc522.write_card(' + cnt + ',' + sector + ')';
+    }
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

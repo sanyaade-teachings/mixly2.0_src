@@ -14,7 +14,7 @@ import music_spk
 import es8374
 
 from machine import Pin, I2S
-from yuankong_zi import onboard_i2c
+from yuankong_nova import onboard_i2c
 
 sample_rate = 22050
 ob_code = es8374.ES8374(onboard_i2c)

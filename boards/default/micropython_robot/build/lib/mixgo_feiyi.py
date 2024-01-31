@@ -23,35 +23,36 @@ try :
     import mxc6655xa
     onboard_mxc6655xa = mxc6655xa.MXC6655XA(onboard_i2c)     
 except Exception as e:
-    print("Warning: Failed to communicate with MXC6655XA (ACC Sensor) or",e)
+    print("Warning: Failed to communicate with MXC6655XA (ACC) or",e)
 
 '''ALS_PS-Sensor'''
 try :
     import ltr553als
     onboard_ltr553als = ltr553als.LTR_553ALS(onboard_i2c)     
 except Exception as e:
-    print("Warning: Failed to communicate with TR_553ALS (ALS&PS Sensor) or",e)
+    print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
 
-'''BPS-Sensor'''
-try :
-    import hp203x
-    onboard_hp203x = hp203x.HP203X(onboard_i2c)     
-except Exception as e:
-    print("Warning: Failed to communicate with HP203X (BPS Sensor) or",e)
+#PS The previous version cancelled this feature
+# '''BPS-Sensor'''
+# try :
+#     import hp203x
+#     onboard_hp203x = hp203x.HP203X(onboard_i2c)     
+# except Exception as e:
+#     print("Warning: Failed to communicate with HP203X (BPS) or",e)
 
-'''THS-Sensor'''
-try :
-    import ahtx0
-    onboard_ahtx0 = ahtx0.AHTx0(onboard_i2c)     
-except Exception as e:
-    print("Warning: Failed to communicate with AHTx0 (THS Sensor) or",e)
+# '''THS-Sensor'''
+# try :
+#     import ahtx0
+#     onboard_ahtx0 = ahtx0.AHTx0(onboard_i2c)     
+# except Exception as e:
+#     print("Warning: Failed to communicate with AHTx0 (THS) or",e)
 
 '''RFID-Sensor'''
 try :
     import rc522
     onboard_rc522 = rc522.RC522(onboard_i2c)     
 except Exception as e:
-    print("Warning: Failed to communicate with RC522 (RFID Sensor) or",e)
+    print("Warning: Failed to communicate with RC522 (RFID) or",e)
 
 '''ADC*7, Motor*2*2, Matrix12x12'''
 try :
@@ -66,7 +67,7 @@ try :
     import mmc5603
     onboard_mmc5603 = mmc5603.MMC5603(onboard_i2c)
 except Exception as e:
-    print("Warning: Failed to communicate with MMC5603 (MGS Sensor) or",e)
+    print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
 
 '''2RGB_WS2812'''    
 from ws2812 import NeoPixel

@@ -12,7 +12,7 @@
         "language": "MicroPython"
     }, 
     {
-        "boardImg": "./boards/default/micropython_esp32s3/media/yuankong_nova.png",
+        "boardImg": "./boards/default/micropython_esp32s3/media/mixgo_nova.png",
         "boardType": "Python ESP32-S3",
         "boardIndex": "./boards/default/micropython_esp32s3/index.xml",
         "env": {

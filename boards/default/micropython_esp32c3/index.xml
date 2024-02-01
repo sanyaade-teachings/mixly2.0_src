@@ -3407,7 +3407,7 @@
           </shadow>
         </value>
       </block>
-      <block type="sensor_mixgo_zero_LTR390UV" m-hide='micropython:esp32c3:mixgocar_c3'>
+      <block type="sensor_LTR390UV_extern" m-hide='micropython:esp32c3:mixgocar_c3'>
         <value name="SUB">
           <shadow type="variables_get">
             <field name="VAR">xsensor</field>

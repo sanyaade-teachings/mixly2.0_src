@@ -289,7 +289,7 @@ Blockly.Python.forBlock['sensor_ltr381_extern'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_mixgo_zero_LTR390UV'] = function(){
+Blockly.Python.forBlock['sensor_LTR390UV_extern'] = function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_time'] = 'import time';
     Blockly.Python.definitions_['import_ltr390uv'] = 'import ltr390uv';

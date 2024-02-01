@@ -102,7 +102,7 @@ Blockly.Python.forBlock['actuator_led_brightness'] = function() {
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankong_led_color'] = function () {
+Blockly.Python.forBlock['actuator_mixgo_zero_led_color'] = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var op = Blockly.Python.valueToCode(this, 'led', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
@@ -380,13 +380,13 @@ Blockly.Python.forBlock['bitbot_motor'] = function(){
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_mic_set'] = function() {    
+Blockly.Python.forBlock['actuator_mixgo_nova_mic_set'] = function() {    
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_ob_code'] = "from yuankong_voice import ob_code";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_ob_code'] = "from yuankong_nova_voice import ob_code";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
     }
     
     var bright = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
@@ -394,64 +394,64 @@ Blockly.Python.forBlock['actuator_yuankongzi_mic_set'] = function() {
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_mic_get'] = function() {
+Blockly.Python.forBlock['actuator_mixgo_nova_mic_get'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_ob_code'] = "from yuankong_voice import ob_code";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_ob_code'] = "from yuankong_nova_voice import ob_code";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
     } 
     var code = "ob_code.mic_volume()";
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_voice_set'] = function() {    
+Blockly.Python.forBlock['actuator_mixgo_nova_voice_set'] = function() {    
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_ob_code'] = "from yuankong_voice import ob_code";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_ob_code'] = "from yuankong_nova_voice import ob_code";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
     }
     var bright = Blockly.Python.valueToCode(this,'bright', Blockly.Python.ORDER_ATOMIC);
     var code = "ob_code.voice_volume(" + bright+")\n";
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_voice_get'] = function() {
+Blockly.Python.forBlock['actuator_mixgo_nova_voice_get'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_ob_code'] = "from yuankong_voice import ob_code";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_ob_code'] = "from yuankong_nova_voice import ob_code";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
     }   
     var code = "ob_code.voice_volume()";
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_music_play_list'] = function(){
+Blockly.Python.forBlock['actuator_mixgo_nova_music_play_list'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_spk_midi'] = "from yuankong_voice import spk_midi";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_spk_midi'] = "from yuankong_nova_voice import spk_midi";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
     }
     var lst = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "spk_midi.play("+ lst +")\n";
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_record_audio'] = function(){
+Blockly.Python.forBlock['actuator_mixgo_nova_record_audio'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_record_audio'] = "from yuankong_voice import record_audio";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_record_audio'] = "from mixgo_zero_voice import record_audio";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_record_audio'] = "from yuankong_nova_voice import record_audio";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_record_audio'] = "from mixgo_nova_voice import record_audio";
     }
     var path = Blockly.Python.valueToCode(this, 'PATH', Blockly.Python.ORDER_ASSIGNMENT);
     var time = Blockly.Python.valueToCode(this, 'TIME', Blockly.Python.ORDER_ASSIGNMENT);
@@ -459,46 +459,46 @@ Blockly.Python.forBlock['actuator_yuankongzi_record_audio'] = function(){
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_play_audio'] = function(){
+Blockly.Python.forBlock['actuator_mixgo_nova_play_audio'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_play_audio'] = "from yuankong_voice import play_audio";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_play_audio'] = "from mixgo_zero_voice import play_audio";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_play_audio'] = "from yuankong_nova_voice import play_audio";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_play_audio'] = "from mixgo_nova_voice import play_audio";
     }
     var path = Blockly.Python.valueToCode(this, 'PATH', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "play_audio("+ path +")\n";
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_play_online_audio'] = function(){
+Blockly.Python.forBlock['actuator_mixgo_nova_play_online_audio'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_play_audio_url'] = "from yuankong_voice import play_audio_url";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_play_audio_url'] = "from mixgo_zero_voice import play_audio_url";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_play_audio_url'] = "from yuankong_nova_voice import play_audio_url";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_play_audio_url'] = "from mixgo_nova_voice import play_audio_url";
     }
     var path = Blockly.Python.valueToCode(this, 'PATH', Blockly.Python.ORDER_ASSIGNMENT);
     var code = "play_audio_url("+ path +")\n";
     return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_pitch'] = function(block) {
-  Blockly.Python.definitions_['import_yuankong_nova_voice_spk_midi'] = "from yuankong_nova_voice import spk_midi";
+Blockly.Python.forBlock['actuator_mixgo_nova_onboard_music_pitch'] = function(block) {
+  Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
   var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
   var code = 'spk_midi.pitch(' + number_pitch + ')\n';
   return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_pitch_with_time'] = function(block) {
+Blockly.Python.forBlock['actuator_mixgo_nova_onboard_music_pitch_with_time'] = function(block) {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='yuankong'){
-        Blockly.Python.definitions_['import_yuankong_voice_spk_midi'] = "from yuankong_voice import spk_midi";   
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";   
     }
     else{
-        Blockly.Python.definitions_['import_yuankong_nova_voice_spk_midi'] = "from yuankong_nova_voice import spk_midi";
+        Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
     }
   var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
   var number_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
@@ -506,8 +506,8 @@ Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_pitch_with_time'] = f
   return code;
 };
 
-Blockly.Python.forBlock['actuator_yuankongzi_onboard_music_stop'] = function(block) {
-  Blockly.Python.definitions_['import_yuankong_nova_voice_spk_midi'] = "from yuankong_nova_voice import spk_midi";
+Blockly.Python.forBlock['actuator_mixgo_nova_onboard_music_stop'] = function(block) {
+  Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
   var code = 'spk_midi.stop('+')\n';
   return code;
 };

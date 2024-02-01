@@ -1,7 +1,7 @@
 """
-Yuankong Onboard resources
+mixgo_zero Onboard resources
 
-Micropython library for the Yuankong Onboard resources
+Micropython library for the mixgo_zero Onboard resources
 =======================================================
 
 #Preliminary composition                   20240110

@@ -3634,7 +3634,7 @@
           </shadow>
         </value>
       </block>
-      <block type="sensor_yuankong_LTR390UV">
+      <block type="sensor_mixgo_zero_LTR390UV">
         <value name="SUB">
           <shadow type="variables_get">
             <field name="VAR">xsensor</field>

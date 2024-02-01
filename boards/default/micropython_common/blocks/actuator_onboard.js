@@ -96,7 +96,7 @@ Blockly.Blocks.actuator_led_brightness = {
   }
 };
 
-Blockly.Blocks.actuator_yuankong_led_color = {
+Blockly.Blocks.actuator_mixgo_zero_led_color = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
@@ -963,7 +963,7 @@ Blockly.Blocks.bitbot_motor = {
     }
 }
 
-Blockly.Blocks.actuator_yuankongzi_mic_set = {
+Blockly.Blocks.actuator_mixgo_nova_mic_set = {
   init: function() {
     this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendValueInput('bright')
@@ -977,7 +977,7 @@ Blockly.Blocks.actuator_yuankongzi_mic_set = {
   }
 };
 
-Blockly.Blocks.actuator_yuankongzi_mic_get = {
+Blockly.Blocks.actuator_mixgo_nova_mic_get = {
   init: function() {
     this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
@@ -988,7 +988,7 @@ Blockly.Blocks.actuator_yuankongzi_mic_get = {
   }
 };
 
-Blockly.Blocks.actuator_yuankongzi_voice_set = {
+Blockly.Blocks.actuator_mixgo_nova_voice_set = {
   init: function() {
     this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendValueInput('bright')
@@ -1002,7 +1002,7 @@ Blockly.Blocks.actuator_yuankongzi_voice_set = {
   }
 };
 
-Blockly.Blocks.actuator_yuankongzi_voice_get = {
+Blockly.Blocks.actuator_mixgo_nova_voice_get = {
   init: function() {
     this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
     this.appendDummyInput()
@@ -1013,7 +1013,7 @@ Blockly.Blocks.actuator_yuankongzi_voice_get = {
   }
 };
 
-Blockly.Blocks.actuator_yuankongzi_music_play_list = {
+Blockly.Blocks.actuator_mixgo_nova_music_play_list = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendValueInput('LIST')
@@ -1026,7 +1026,7 @@ Blockly.Blocks.actuator_yuankongzi_music_play_list = {
     }
 }
 
-Blockly.Blocks.actuator_yuankongzi_record_audio = {
+Blockly.Blocks.actuator_mixgo_nova_record_audio = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendValueInput('PATH')            
@@ -1041,7 +1041,7 @@ Blockly.Blocks.actuator_yuankongzi_record_audio = {
     }
 }
 
-Blockly.Blocks.actuator_yuankongzi_play_audio = {
+Blockly.Blocks.actuator_mixgo_nova_play_audio = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendValueInput('PATH')            
@@ -1053,7 +1053,7 @@ Blockly.Blocks.actuator_yuankongzi_play_audio = {
     }
 }
 
-Blockly.Blocks.actuator_yuankongzi_play_online_audio = {
+Blockly.Blocks.actuator_mixgo_nova_play_online_audio = {
     init: function () {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendValueInput('PATH')            
@@ -1065,7 +1065,7 @@ Blockly.Blocks.actuator_yuankongzi_play_online_audio = {
     }
 }
 
-Blockly.Blocks.actuator_yuankongzi_onboard_music_pitch = {
+Blockly.Blocks.actuator_mixgo_nova_onboard_music_pitch = {
     init: function() {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()
@@ -1080,7 +1080,7 @@ Blockly.Blocks.actuator_yuankongzi_onboard_music_pitch = {
     }
 };
 
-Blockly.Blocks.actuator_yuankongzi_onboard_music_pitch_with_time = {
+Blockly.Blocks.actuator_mixgo_nova_onboard_music_pitch_with_time = {
     init: function() {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);        
         this.appendDummyInput()
@@ -1098,7 +1098,7 @@ Blockly.Blocks.actuator_yuankongzi_onboard_music_pitch_with_time = {
     }
 };
 
-Blockly.Blocks.actuator_yuankongzi_onboard_music_stop = {
+Blockly.Blocks.actuator_mixgo_nova_onboard_music_stop = {
     init: function() {
         this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
         this.appendDummyInput()

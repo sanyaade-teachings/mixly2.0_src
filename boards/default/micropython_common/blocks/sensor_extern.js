@@ -440,7 +440,7 @@ Blockly.Blocks['sensor_ltr381_extern'] = {
     }
 };
 
-Blockly.Blocks['sensor_yuankong_LTR390UV'] = {
+Blockly.Blocks['sensor_mixgo_zero_LTR390UV'] = {
     init:function(){
         this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
         this.appendValueInput('SUB')

@@ -289,7 +289,7 @@ Blockly.Python.forBlock['sensor_ltr381_extern'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_yuankong_LTR390UV'] = function(){
+Blockly.Python.forBlock['sensor_mixgo_zero_LTR390UV'] = function(){
     Blockly.Python.definitions_['import_machine'] = 'import machine';
     Blockly.Python.definitions_['import_time'] = 'import time';
     Blockly.Python.definitions_['import_ltr390uv'] = 'import ltr390uv';
@@ -358,7 +358,7 @@ Blockly.Python.forBlock['sensor_use_spi_init'] = function(){
       if (version=='mixgo_pe'){
         var code = v + ' = ws_lora.Weather('+ sv + ','+ pv +')\n';
       }
-      else if (version=='yuankong_nova'){
+      else if (version=='mixgo_nova'){
         var code = v + ' = ws_lora.Weather('+ sv + ','+ pv + ',' + version+'.onboard_i2c_soft'+')\n';
       }
       else{

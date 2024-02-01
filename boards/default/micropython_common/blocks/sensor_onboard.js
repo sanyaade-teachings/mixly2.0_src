@@ -402,7 +402,7 @@ Blockly.Blocks['sensor_mixgo_pin_near_double'] = {
     }
 };
 
-Blockly.Blocks['sensor_yuankongzi_pin_near'] = {
+Blockly.Blocks['sensor_mixgo_nova_pin_near'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
@@ -425,7 +425,7 @@ Blockly.Blocks['sensor_yuankongzi_pin_near'] = {
     }
 };
 
-Blockly.Blocks['sensor_yuankongzi_LTR308'] = {
+Blockly.Blocks['sensor_mixgo_nova_LTR308'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
@@ -1378,7 +1378,7 @@ Blockly.Blocks['bitbot_als_num'] = {
   }
 };
 
-Blockly.Blocks['sensor_yuankongzi_sound'] = {
+Blockly.Blocks['sensor_mixgo_nova_sound'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()

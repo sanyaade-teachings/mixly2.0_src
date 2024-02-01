@@ -1,20 +1,20 @@
 {
     "board": {
-        "元控青春": "micropython:esp32s3:yuankong_nova",
-        "元控": "micropython:esp32s3:yuankong"
+        "元控青春": "micropython:esp32s3:mixgo_nova",
+        "元控": "micropython:esp32s3:mixgo_zero"
     },
     "language": "MicroPython",
     "burn": {
         "type": "command",
         "portSelect": "all",
-        "micropython:esp32s3:yuankong": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong-v1.21.0.bin\" 0xE00000 \"{indexPath}/../micropython_common/build/HZK16.bin\""
+        "micropython:esp32s3:mixgo_zero": {
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/mixgo_zero-v1.21.0.bin\" 0xE00000 \"{indexPath}/../micropython_common/build/HZK16.bin\""
         },
-        "micropython:esp32s3:yuankong_nova": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/YuanKong_Nova_S3-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
+        "micropython:esp32s3:mixgo_nova": {
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --before default_reset --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after hard_reset write_flash 0x0 \"{indexPath}/build/mixgo_nova_S3-v1.21.0.bin\" 0x700000 \"{indexPath}/../micropython_common/build/HZK12.bin\""
         },
         "micropython:esp32s3:generic": {
-            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset write_flash 0x0 \"{indexPath}/build/YuanKong_Nova_S3-v1.21.0.bin\""
+            "command": "\"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset_stub erase_flash && \"{esptool}\" --chip esp32s3 --port {com} --baud 460800 --after=no_reset write_flash 0x0 \"{indexPath}/build/mixgo_nova_S3-v1.21.0.bin\""
         },
         "special": [
             {
@@ -67,22 +67,22 @@
         "com": "serial",
         "burn": {
             "erase": true,
-            "micropython:esp32s3:yuankong": {
+            "micropython:esp32s3:mixgo_zero": {
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/YuanKong-v1.21.0.bin"
+                        "path": "./build/mixgo_zero-v1.21.0.bin"
                     }, {
                         "offset": "0xE00000",
                         "path": "../micropython_common/build/HZK16.bin"
                     }
                 ]
             },
-            "micropython:esp32s3:yuankong_nova": {
+            "micropython:esp32s3:mixgo_nova": {
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/YuanKong_Nova_S3-v1.21.0.bin"
+                        "path": "./build/mixgo_nova_S3-v1.21.0.bin"
                     }, {
                         "offset": "0x700000",
                         "path": "../micropython_common/build/HZK12.bin"
@@ -93,7 +93,7 @@
                 "binFile": [
                     {
                         "offset": "0x0000",
-                        "path": "./build/YuanKong_Nova_S3-v1.21.0.bin"
+                        "path": "./build/mixgo_nova_S3-v1.21.0.bin"
                     }
                 ]
             }

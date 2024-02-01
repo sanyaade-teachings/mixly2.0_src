@@ -125,6 +125,7 @@ class EditorCode extends EditorMonaco {
         case '.cpp':
         case '.h':
         case '.hpp':
+        case '.ino':
             language = 'cpp';
             break;
         case '.js':

@@ -52,8 +52,7 @@ class EditorsManager extends PagesManager {
 
         this.typesRegistry = new Registry();
         this.typesRegistry.register(['.mix', '.mil'], EditorMix);
-        this.typesRegistry.register('.test', EditorBlockly);
-        this.typesRegistry.register(['.xml', '.txt', '.ino', '.json'], EditorCode);
+        this.typesRegistry.register(['.txt', '.ino', '.json'], EditorCode);
         this.typesRegistry.register('.md', EditorMd);
         this.typesRegistry.register('#default', EditorUnknown);
         this.typesRegistry.register('#welcome', EditorWelcome);

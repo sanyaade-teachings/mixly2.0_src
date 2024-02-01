@@ -258,10 +258,16 @@ class FileTree {
     }
 
     reselect() {
+        if (!this.selected) {
+            return;
+        }
         this.select(this.selected);
     }
 
     deselect(inPath) {
+        if (this.selected === inPath) {
+            this.selected = null;
+        }
         let elem = document.getElementById(inPath);
         if (!elem) {
             return;

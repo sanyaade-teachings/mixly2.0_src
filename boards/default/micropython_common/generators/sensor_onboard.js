@@ -215,13 +215,10 @@ Blockly.Python.forBlock['sensor_hp203'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    if (version == 'mixgo_nova' || version == 'mixgo_zero') {
+    if (version == 'mixgo_zero') {
         Blockly.Python.definitions_['import_' + version + '_onboard_bps'] = "from " + version + " import onboard_bps";
         var code = 'onboard_bps.' + key;
-    } else {
-        Blockly.Python.definitions_['import_'+version+'_onboard_hp203x'] = "from "+version+" import onboard_hp203x";
-        var code = 'onboard_hp203x.' + key;
-    }
+    } 
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -780,9 +777,15 @@ Blockly.Python.forBlock['bitbot_als_num'] = function() {
 };
 
 Blockly.Python.forBlock['sensor_mixgo_nova_sound'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Blockly.Python.definitions_['import_mixgo_zero_voice_sound_level'] = "from mixgo_zero_voice import sound_level";
+    } 
+    else {
+        Blockly.Python.definitions_['import_mixgo_nova_voice_sound_level'] = "from mixgo_nova_voice import sound_level";
+    }
     var code = 'sound_level()';
-    Blockly.Python.definitions_['import_mixgo_zero_voice_sound_level'] = "from mixgo_zero_voice import sound_level";
-    return [code, Blockly.Python.ORDER_ATOMIC];
+    return [code, Blockly.Python.ORDER_ATOMIC];  
 };
 
 Blockly.Python.forBlock.sensor_button_is_pressed=Blockly.Python.forBlock.sensor_mixgo_button_is_pressed;

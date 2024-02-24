@@ -1240,10 +1240,10 @@ PythonToBlocks.prototype.Debugger = function() {
 }
 
 PythonToBlocks.prototype.booleanOperator = function(op) {
-    switch (op.name) {
+    switch (op.prototype._astname) {
         case "And": return "AND";
         case "Or": return "OR";
-        default: throw new Error("Operator not supported:"+op.name);
+        default: throw new Error("Operator not supported:"+op.prototype._astname);
     }
 }
 
@@ -1270,7 +1270,7 @@ PythonToBlocks.prototype.BoolOp = function(node) {
 }
 
 PythonToBlocks.prototype.binaryOperator = function(op) {
-    switch (op.name) {
+    switch (op.prototype._astname) {
         case "Add": return "ADD";
         case "Sub": return "MINUS";
         case "Div": return "DIVIDE";
@@ -1282,7 +1282,7 @@ PythonToBlocks.prototype.binaryOperator = function(op) {
         case "BitOr": return "|";
         case "RShift": return ">>";
         case "LShift": return "<<";
-        default: throw new Error("Operator not supported:"+op.name);
+        default: throw new Error("Operator not supported:"+op.prototype._astname);
     }
 }
 
@@ -1339,13 +1339,13 @@ PythonToBlocks.prototype.UnaryOp = function(node)
 {
     var op = node.op;
     var operand = node.operand;
-    if (op.name == "Not") {
+    if (op.prototype._astname == "Not") {
         return block("logic_negate", node.lineno, {}, {
             "BOOL": this.convert(operand)
         }, {
             "inline": "false"
         });
-    } else if(op.name == "USub"){
+    } else if(op.prototype._astname == "USub"){
         return block("math_trig", node.lineno, {
             'OP': '-'
         }, {
@@ -1481,19 +1481,19 @@ PythonToBlocks.prototype.Yield = function(node)
 
 
 PythonToBlocks.prototype.compareOperator = function(op) {
-    switch (op.name) {
+    switch (op.prototype._astname) {
         case "Eq": return "EQ";
         case "NotEq": return "NEQ";
         case "Lt": return "LT";
         case "Gt": return "GT";
         case "LtE": return "LTE";
         case "GtE": return "GTE";
-        case "In_": return "in";
+        case "In": return "in";
         case "NotIn": return "not in";
         case "Is": return "is";
         case "IsNot": return "is not";
         // Is, IsNot, In, NotIn
-        default: throw new Error("Operator not supported:"+op.name);
+        default: throw new Error("Operator not supported:"+op.prototype._astname);
     }
 }
 
@@ -1902,11 +1902,11 @@ PythonToBlocks.prototype.Call = function(node) {
                         }
                     }
 
-                    if (starargs !== null && starargs.length > 0) {
+                    if (starargs && starargs.length > 0) {
                         throw new Error("*args (variable arguments) are not implemented yet.");
-                    } else if (kwargs !== null && kwargs.length > 0) {
+                    } else if (kwargs && kwargs.length > 0) {
                         throw new Error("**args (keyword arguments) are not implemented yet.");
-                    } else if (keywords !== null && keywords.length > 0) {
+                    } else if (keywords && keywords.length > 0) {
                         throw new Error("**args (keyword arguments) are not implemented yet.");
                     }
                     var argumentsNormal = {};
@@ -2428,6 +2428,44 @@ PythonToBlocks.prototype.Name = function(node)
 
 }
 
+PythonToBlocks.prototype.NameConstant = function(node)
+{
+    var id = node.id;
+    var ctx = node.ctx;
+    var nodeName = node.value.v;
+
+    switch (nodeName) {
+        case 1:
+            return block("logic_boolean", node.lineno, {"BOOL": "TRUE"});
+        case 0:
+            return block("logic_boolean", node.lineno, {"BOOL": "FALSE"});
+        case null:
+            return block("logic_null", node.lineno);
+        case "___":
+            return null;
+        default:
+            if(py2block_config.pinType == "object_get")
+            {
+                return block('object_get', node.lineno, {
+                    "VAR": this.identifier(id)
+                });
+            }
+            else if(py2block_config.pinType == "class_get")
+            {
+                return block('class_get', node.lineno, {
+                    "VAR": this.identifier(id)
+                });
+            }
+            else
+            {
+                return block('variables_get', node.lineno, {
+                    "VAR": this.identifier(id)
+                });
+            }
+    }
+
+}
+
 /*
  * id: identifier
  * ctx: expr_context_ty
@@ -2638,7 +2676,7 @@ PythonToBlocks.prototype.ExceptHandler = function(node)
 }
 
 PythonToBlocks.prototype.argument_ = function(node) {
-    var id = node.id;
+    var id = node.arg;
     return this.identifier(id);
 }
 

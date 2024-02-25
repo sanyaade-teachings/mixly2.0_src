@@ -2099,7 +2099,7 @@
         </value>
     </block>
     <block type="onboard_tft_clear"></block>
-    <block type="onboard_tft_clock_init">
+    <block type="onboard_tft_clock_init" m-show= "micropython:esp32s3:mixgo_zero">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">new_clock</field>
@@ -2113,6 +2113,35 @@
       <value name="y">
         <shadow type="math_number">
           <field name="NUM">120</field>
+        </shadow>
+      </value>
+      <value name="size">
+        <shadow type="math_number">
+          <field name="NUM">40</field>
+        </shadow>
+      </value>      
+      <value name="VAR">
+          <block type="display_color_seclet">
+            <field name="COLOR">#ffffff</field>
+          </block>
+          <shadow type="tuple_create_with_text_return">
+            <field name="TEXT">255,255,0</field>
+          </shadow>
+        </value>
+    </block><block type="onboard_tft_clock_init" m-show= "micropython:esp32s3:mixgo_nova">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">new_clock</field>
+        </shadow>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM" >80</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">64</field>
         </shadow>
       </value>
       <value name="size">

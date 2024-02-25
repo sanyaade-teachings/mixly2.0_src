@@ -100,9 +100,9 @@ class Image:
 		self.invert = invert
 		image_type = name[0:2]
 		if image_type == b'P4':
-			buffer = self._pbm_decode(name)
+			buffer = self._pbm_decode(bytearray(name))
 		elif image_type == b'BM':
-			buffer = self._bmp_decode(name)
+			buffer = self._bmp_decode(bytearray(name))
 		else:
 			raise TypeError("Unsupported image format {}".format(image_type))
 		gc.collect()
@@ -332,9 +332,8 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		"""Font selection or externally defined font code"""
 		self._font = Font_Uincode(font_address)
 
-	def image(self, path, x=0, y=0, size=1, invert=0, color=1):
+	def image(self, path, x=None, y=None, size=None, invert=0, color=0xffff):
 		"""Set buffer to value of Python Imaging Library image"""
-		size=max(round(size), 1)
 		if type(path) is str :
 			buffer_info, (width, height) = Image().load(path, invert) 
 		elif type(path) in [bytes, bytearray]:
@@ -343,10 +342,14 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			raise ValueError("invalid input")
 		if width > self.width or height > self.height:
 			raise ValueError("Image must be less than display ({0}x{1}).".format(self.width, self.height))
+		size = min(self.height // height, self.width // width) if size is None else size
+		size = max(round(size), 1)
+		x =(self.width - width * size) // 2 if x is None else x
+		y =(self.height - height * size) // 2 if y is None else y
 		self.bitmap((buffer_info,(width, height)), x, y, size, color)    
 		if self.auto_show: self.show()
 
-	def bitmap(self, buffer, x=0, y=0, size=1, color=1):
+	def bitmap(self, buffer, x=0, y=0, size=1, color=0xffff):
 		"""Graphic model display(buffer,(width,height))"""    
 		buffer_info,(width,height)=buffer    
 		if x < -width*size or x >= self.width or y < -height*size or y >= self.height:        
@@ -367,7 +370,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 			font_len = font_len + buffer[1][0] * size + space
 		return font_len, font_buffer
 
-	def shows(self, data, space=0, center=True, x=0, y=0, size=1, color=1):
+	def shows(self, data, space=0, center=True, x=0, y=None, size=None, color=0xffff):
 		"""Display character"""
 		if data is not None:
 			if type(data) in [list, bytes, tuple, bytearray]:
@@ -375,16 +378,18 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				self.set_buffer(data)
 				if self.auto_show: self.show()
 			else:
+				size = self.height // (self._font.height * 3) if size is None else size
 				size = max(round(size), 1)
 				font_len, font_buffer = self._take_buffer(str(data), space, size)
 				x = (self.width - font_len + space) // 2 if center else x
+				y = (self.height - self._font.height * size) // 2 if y is None else y
 				self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, 0)
 				for buffer in font_buffer:    #Display character
 					self.bitmap(buffer, x, y, size, color)
 					x = buffer[1][0] * size + x + space
 				if self.auto_show: self.show()
 
-	def frame(self, data, delay=500, size=1, color=1):
+	def frame(self, data, delay=500, size=None, color=0xffff):
 		"""Display one frame per character"""
 		if data is not None:
 			if type(data) in [list, tuple]:
@@ -395,6 +400,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 						self.show()
 						time.sleep_ms(delay)
 			else:
+				size = self.height // (self._font.height * 3) if size is None else size
 				size = max(round(size), 1)
 				_, font_buffer = self._take_buffer(str(data), 0)
 				for buffer in font_buffer:
@@ -405,13 +411,15 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 					self.show()
 					time.sleep_ms(delay) 
 
-	def scroll(self, data, space=0, speed=50, y=0, size=1, color=1):
+	def scroll(self, data, space=0, speed=50, y=None, size=None, color=0xffff):
 		"""Scrolling characters"""
 		if data is not None:
+			size = self.height // (self._font.height * 3) if size is None else size
 			size = max(round(size), 1)
 			font_len, font_buffer = self._take_buffer(str(data), space, size)
 			for i in range(font_len - space + self.width):    
 				x = -i + self.width
+				y = (self.height - self._font.height * size) // 2 if y is None else y
 				self.fill_rect(x - 1 , y - 1 , self.width -x + 2, font_buffer[0][1][1] * size + 2, 0)
 				for buffer in font_buffer:
 					self.bitmap(buffer, x, y, size, color)

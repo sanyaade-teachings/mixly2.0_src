@@ -10,10 +10,8 @@ Blockly.Blocks.get_potential_num = {
         var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]
         if(version=="mixgo_nova"){var name='Nova G1'}
         this.setColour(Blockly.Msg['NOVAG1_HUE']);
-        this.appendValueInput('SUB')
-            .appendField(name)
-            .setCheck("var");
         this.appendDummyInput()
+            .appendField(name)
             .appendField(Blockly.Msg.MIXLY_MIXGO_NOVA_POTENTIAL_NUM);
         this.setOutput(true,Number);
         this.setInputsInline(true);
@@ -25,10 +23,8 @@ Blockly.Blocks.nova_g1_motor = {
       var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]
         if(version=="mixgo_nova"){var name='Nova G1'}
       this.setColour(Blockly.Msg['NOVAG1_HUE']);
-      this.appendValueInput('SUB')
-            .appendField(name)
-            .setCheck("var");
       this.appendValueInput('PIN')
+          .appendField(name)
           .appendField(Blockly.Msg.MOTOR_DC)
           .appendField(Blockly.Msg.LCD_NUMBERING)   
       this.appendDummyInput()
@@ -56,11 +52,9 @@ Blockly.Blocks.nova_g1_usb = {
       var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]
         if(version=="mixgo_nova"){var name='Nova G1'}
       this.setColour(Blockly.Msg['NOVAG1_HUE']);
-      this.appendValueInput('SUB')
-            .appendField(name)
-            .setCheck("var");
       this.appendValueInput('PIN')
-          .appendField(Blockly.Msg.SET_USB)   
+          .appendField(name)
+          .appendField(Blockly.Msg.SET_USB);  
       this.appendValueInput('percent')
           .setCheck(Number)
           .setAlign(Blockly.ALIGN_RIGHT)
@@ -78,10 +72,8 @@ Blockly.Blocks.nova_g1_spk_en = {
         var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]
         if(version=="mixgo_nova"){var name='Nova G1'}
         this.setColour(Blockly.Msg['NOVAG1_HUE']);
-        this.appendValueInput('SUB')
-            .appendField(name)
-            .setCheck("var");
         this.appendDummyInput()
+            .appendField(name)
             .appendField(Blockly.Msg.MIXLY_SPK_STATE)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_ON, "True"],

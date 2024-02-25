@@ -4517,18 +4517,8 @@
   </category>
   <category id="catNova_G1" colour='100' m-show="micropython:esp32s3:mixgo_nova">
     <block type="get_potential_num">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">nova</field>
-        </shadow>
-      </value>
     </block>
     <block type="nova_g1_motor">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">nova</field>
-        </shadow>
-      </value>
       <value name="PIN">
           <shadow type="number7">
           </shadow>
@@ -4540,11 +4530,6 @@
       </value>
     </block>
     <block type="nova_g1_usb">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">nova</field>
-        </shadow>
-      </value>
       <value name="PIN">
           <shadow type="number7">
           </shadow>
@@ -4554,15 +4539,8 @@
           <field name="NUM">100</field>
         </shadow>
       </value> 
-
     </block>
-    <block type="nova_g1_spk_en">
-      <value name="SUB">
-        <shadow type="variables_get">
-          <field name="VAR">nova</field>
-        </shadow>
-      </value>
-    </block>
+    <block type="nova_g1_spk_en"></block>
   </category>
   <category id="catExternMonitor" colour='5BA5A5'>
   <category id="catMatrix" colour='5BA5A5'>

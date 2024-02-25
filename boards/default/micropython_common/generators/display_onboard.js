@@ -575,7 +575,7 @@ Blockly.Python.forBlock['onboard_tft_show_image'] = function() {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
-    var code = "onboard_tft.image(" + data + ",x = 130, y = 90, color=0xffff)\n";
+    var code = "onboard_tft.image(" + data + ", color=0xffff)\n";
     return code;
 }
 

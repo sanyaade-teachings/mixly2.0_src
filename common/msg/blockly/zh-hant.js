@@ -29,6 +29,7 @@ ZhHant.MSG = {
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
     catCC_G1:"CC G1",
+    catNova_G1:"Nova G1",
     catAIOT:"智能物聯",
     catAIsensor:"MixGo AI感測器",
     catAIsensor2:"MixGo AI車牌識別",
@@ -3565,5 +3566,8 @@ ZhHant.LOGIC_OPERATION_NOR = "同或";
 ZhHant.LOGIC_OPERATION_XOR = "異或";
 ZhHant.LOGIC_OPERATION_TOOLTIP_NOR = "如果兩個輸入結果相同，則返回真；如果兩個輸入結果不同，則返回假";
 ZhHant.LOGIC_OPERATION_TOOLTIP_XOR = "如果兩個輸入結果不同，則返回真；如果兩個輸入結果相同，則返回假";
-
+ZhHant.MIXLY_MIXGO_NOVA_POTENTIAL_NUM = "獲取電位器數字";
+ZhHant.MIXLY_POWER_SUPPLY  = "供電量";
+ZhHant.SET_USB = "設置USB2.0接口";
+ZhHant.MIXLY_SPK_STATE = "設置喇叭使能";
 })();

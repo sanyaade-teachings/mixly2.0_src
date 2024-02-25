@@ -33,6 +33,7 @@ En.MSG = {
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
     catCC_G1:"CC G1",
+    catNova_G1:"Nova G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
     catAIsensor2:"MixGo AI LPR",
@@ -3593,5 +3594,8 @@ En.LOGIC_OPERATION_NOR = 'NAND';
 En.LOGIC_OPERATION_XOR = 'NOR';
 En.LOGIC_OPERATION_TOOLTIP_NOR = "Return true if the input results are the same, false if the two input results are different";
 En.LOGIC_OPERATION_TOOLTIP_XOR = "Return true if the input results are different, false if the two input results are the same";
-
+En.MIXLY_MIXGO_NOVA_POTENTIAL_NUM = "Get the potentiometer number";
+En.MIXLY_POWER_SUPPLY  = "power supply";
+En.SET_USB = "set the USB2.0 interface";
+En.MIXLY_SPK_STATE = "set the horn function";
 })();

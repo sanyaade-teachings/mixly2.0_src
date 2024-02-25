@@ -334,3 +334,10 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background:url('../../../../common/media/mark/factory4.png') no-repeat;
     background-size: 100% auto;
 }
+#catNova_G1.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/act.png') no-repeat;
+    background-size: 100% auto;
+}
+#catNova_G1.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+    background:url('../../../../common/media/mark/act2.png') no-repeat;
+    background-size: 100% auto;

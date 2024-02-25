@@ -40,6 +40,7 @@
 <script src="../python/blocks/tuple.js"></script>
 <script src="../python/blocks/set.js"></script>
 <script src="../python/blocks/html.js"></script>
+<script src="../micropython_common/blocks/nova_g1.js"></script>
 <!-- generator file -->
 <script src="generators/pins.js"></script>
 <script src="../micropython_common/generators/inout.js"></script>
@@ -71,6 +72,7 @@
 <script src="../python/generators/set.js"></script>
 <script src="../python/generators/tuple.js"></script>
 <script src="../python/generators/html.js"></script>
+<script src="../micropython_common/generators/nova_g1.js"></script>
 <!-- ace file -->
   <script src="../python/blocks/utility.js"></script>
 <script src="../python/generators/utility.js"></script>
@@ -4512,6 +4514,55 @@
         </value>          
       </block>
   </category>
+  </category>
+  <category id="catNova_G1" colour='100' m-show="micropython:esp32s3:mixgo_nova">
+    <block type="get_potential_num">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">nova</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="nova_g1_motor">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">nova</field>
+        </shadow>
+      </value>
+      <value name="PIN">
+          <shadow type="number7">
+          </shadow>
+        </value>
+      <value name="speed">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="nova_g1_usb">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">nova</field>
+        </shadow>
+      </value>
+      <value name="PIN">
+          <shadow type="number7">
+          </shadow>
+        </value>
+      <value name="percent">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value> 
+
+    </block>
+    <block type="nova_g1_spk_en">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">nova</field>
+        </shadow>
+      </value>
+    </block>
   </category>
   <category id="catExternMonitor" colour='5BA5A5'>
   <category id="catMatrix" colour='5BA5A5'>

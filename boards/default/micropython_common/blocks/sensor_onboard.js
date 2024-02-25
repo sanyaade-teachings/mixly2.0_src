@@ -365,6 +365,15 @@ Blockly.Blocks['number6'] = {
 }
 };
 
+Blockly.Blocks['number7'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+    this.appendDummyInput("")
+    .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"]]), 'op')
+    this.setOutput(true);
+    this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
+}
+};
 
 Blockly.Blocks['sensor_mixgo_pin_near'] = {
     init: function(){

@@ -175,10 +175,9 @@ def touch_slide(pina, pinb):
 class LED:
 	def __init__(self, pin, timer_id=3):
 		self._pin = pin
-		self._pwm = -1 
-		self.flag = True
+		self._pwm = 0 
 		self._index_pwm = [0,0]
-		Timer(timer_id, freq = 6000, mode = Timer.PERIODIC, callback = self.tim_callback)
+		Timer(timer_id, freq=2500, mode=Timer.PERIODIC, callback=self.tim_callback)
 
 	def _cutonoff(self,val):
 		if val == 0:
@@ -187,22 +186,19 @@ class LED:
 			Pin(self._pin, Pin.OUT).value(1)
 		elif val == -1:
 			Pin(self._pin, Pin.OUT).value(0)
-		
+
 	def tim_callback(self,tim):
-		self._pwm +=1
-		if self._pwm > 100:
-			self._pwm = 0
-		if self.flag:
-			if self._pwm < self._index_pwm[0]: 
+		if self._pwm <= 25:
+			if self._pwm * 4 < self._index_pwm[0]: 
 				self._cutonoff(1)
 			else:
 				self._cutonoff(0)
 		else:
-			if self._pwm < self._index_pwm[1]: 
+			if (self._pwm - 26) * 4 < self._index_pwm[1]: 
 				self._cutonoff(-1)
 			else:
-				self._cutonoff(0)		
-		self.flag = not self.flag
+				self._cutonoff(0)	
+		self._pwm = self._pwm + 1 if self._pwm <= 51 else 0
 
 	def setbrightness(self,index,val):
 		if not 0 <= val <= 100:

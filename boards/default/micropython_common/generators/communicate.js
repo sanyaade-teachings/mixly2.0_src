@@ -174,19 +174,75 @@ Blockly.Python.forBlock['communicate_ow_select'] = function () {
     return code;
 };
 
-Blockly.Python.forBlock['communicate_ir_recv'] = function(){
-    Blockly.Python.definitions_['import_ir_remote'] = 'import ir_remote';   
+Blockly.Python.forBlock['communicate_ir_recv_init'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote'; 
     var pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
+    var bit = this.getFieldValue('type');
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
-    return "ir_remote.IRrecv("+pin+", "+sub+")\n"
+    if (sub == ""&& bit == "RC5"){
+        var code = "ir_rx = irrmote.RC5_RX(" + pin +")\n";
+    }
+    else if(sub == ""){
+        var code = "ir_rx = irrmote.NEC_RX(" + pin + "," + bit  + ")\n";
+    }
+    else{
+        var code = "ir_rx = irrmote.NEC_RX(" + pin + "," + bit + "," + sub + ")\n";
+    }   
+    return code;
+
 };
 
-Blockly.Python.forBlock['communicate_ir_send'] = function(){
-    Blockly.Python.definitions_['import_ir_remote'] = 'import ir_remote';   
+Blockly.Python.forBlock['internal_variable'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote';
+    var index = this.getFieldValue('index');
+    var code = "ir_rx.code[" + index + "]";
+    return [code,Blockly.Python.ORDER_ATOMIC];
+};
+
+
+Blockly.Python.forBlock['recv_fun'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote'; 
+    var en = this.getFieldValue('en');
+    var code = "ir_rx.enable(" + en + ")\n";
+    return code;
+
+};
+
+Blockly.Python.forBlock['communicate_ir_send_init'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote'; 
     var pin = Blockly.Python.valueToCode(this, 'PIN',Blockly.Python.ORDER_ATOMIC);
-    var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
-    var addr = Blockly.Python.valueToCode(this, 'ADDR',Blockly.Python.ORDER_ATOMIC);
-    return "ir_remote.IRsend("+pin+", "+addr+", "+sub+")\n"
+    var sam = this.getFieldValue('type');
+    var power =Blockly.Python.valueToCode(this, 'power',Blockly.Python.ORDER_ATOMIC);
+    if (sam == "RC5") {
+        var code = "ir_tx =irrmote.RC5_TX("+ pin + "," + power + ")\n";
+    }
+    else{
+        var code = "ir_tx = irrmote.NEC_TX(" + pin + "," + sam + "," + power + ")\n"; 
+    }
+    return code;
+
+};
+
+Blockly.Python.forBlock['ir_transmit_conventional_data'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote';
+    var cmd = Blockly.Python.valueToCode(this, 'cmd',Blockly.Python.ORDER_ATOMIC);
+    var addr =Blockly.Python.valueToCode(this, 'addr',Blockly.Python.ORDER_ATOMIC);
+    var toggle =Blockly.Python.valueToCode(this, 'toggle',Blockly.Python.ORDER_ATOMIC);
+    var code = "ir_tx.transmit("+ cmd + "," + addr +"," + toggle +")\n";
+    return code;
+};
+
+Blockly.Python.forBlock['ir_transmit_study_code'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote';
+    var s_code = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
+    var code = "ir_tx.transmit("+ s_code +")\n";
+    return code;
+};
+       
+Blockly.Python.forBlock['ir_transmit_busy'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote';
+    var code = "ir_tx.busy()";
+    return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.forBlock['communicate_bluetooth_central_init'] = function(){

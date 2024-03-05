@@ -180,13 +180,13 @@ Blockly.Python.forBlock['communicate_ir_recv_init'] = function(){
     var bit = this.getFieldValue('type');
     var sub = Blockly.Python.valueToCode(this, 'SUB',Blockly.Python.ORDER_ATOMIC);
     if (sub == ""&& bit == "RC5"){
-        var code = "ir_rx = irrmote.RC5_RX(" + pin +")\n";
+        var code = "ir_rx = irremote.RC5_RX(" + pin +")\n";
     }
     else if(sub == ""){
-        var code = "ir_rx = irrmote.NEC_RX(" + pin + "," + bit  + ")\n";
+        var code = "ir_rx = irremote.NEC_RX(" + pin + "," + bit  + ")\n";
     }
     else{
-        var code = "ir_rx = irrmote.NEC_RX(" + pin + "," + bit + "," + sub + ")\n";
+        var code = "ir_rx = irremote.NEC_RX(" + pin + "," + bit + "," + sub + ")\n";
     }   
     return code;
 
@@ -214,10 +214,10 @@ Blockly.Python.forBlock['communicate_ir_send_init'] = function(){
     var sam = this.getFieldValue('type');
     var power =Blockly.Python.valueToCode(this, 'power',Blockly.Python.ORDER_ATOMIC);
     if (sam == "RC5") {
-        var code = "ir_tx =irrmote.RC5_TX("+ pin + "," + power + ")\n";
+        var code = "ir_tx = irremote.RC5_TX("+ pin + "," + power + ")\n";
     }
     else{
-        var code = "ir_tx = irrmote.NEC_TX(" + pin + "," + sam + "," + power + ")\n"; 
+        var code = "ir_tx = irremote.NEC_TX(" + pin + "," + sam + "," + power + ")\n"; 
     }
     return code;
 

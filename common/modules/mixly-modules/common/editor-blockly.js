@@ -91,8 +91,8 @@ class EditorBlockly extends EditorBase {
                 const workspaceSearchOption = {
                     text: Blockly.Msg['WORKSPACE_SEARCH_OPEN'],
                     enabled: editor.getTopBlocks().length,
-                    callback: function() {
-                        workspaceSearch.open();
+                    callback: () => {
+                        this.workspaceSearch.open();
                     }
                 };
                 menuOptions.push(workspaceSearchOption);

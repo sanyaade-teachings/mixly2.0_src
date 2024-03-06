@@ -23,7 +23,8 @@
         "portSelect": "all",
         "command": "\"{ampy}\" -p {com} -d 1 -r \"{reset}\" put \"{indexPath}/build/upload\"",
         "filePath": "{indexPath}/build/upload/main.py",
-        "copyLib": true
+        "copyLib": true,
+        "reset": []
     },
     "nav": {
         "burn": true,

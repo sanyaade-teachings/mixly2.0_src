@@ -2679,7 +2679,7 @@
           <arg name="cmd"></arg>
           <arg name="addr"></arg>
           <arg name="raw"></arg>
-          <arg name="data"></arg>
+          <arg name="pulses"></arg>
         </mutation>
         <field name="NAME">callback</field>
         <statement name="STACK">
@@ -2702,7 +2702,7 @@
             </value>
             <value name="ADD3">
               <block type="variables_get">
-                <field name="VAR">data</field>
+                <field name="VAR">pulses</field>
               </block>
             </value>
           </block>

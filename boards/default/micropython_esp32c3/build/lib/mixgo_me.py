@@ -88,7 +88,7 @@ class KEYSensor:
         for _ in range(50):
             values.append(self.adc.read())
             time.sleep_us(2)
-        return (self.range - 300) < min(values) < (self.range + 300)
+        return (self.range - 300) < min(sorted(values)[25:]) < (self.range + 300)
     
     def get_presses(self, delay = 1):
         last_time,presses = time.time(), 0

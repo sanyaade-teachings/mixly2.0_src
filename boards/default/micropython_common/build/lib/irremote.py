@@ -58,7 +58,7 @@ class NEC_RX(IR_RX):
 	def decode(self):
 		pulse_len = len(self._pulses)
 		if pulse_len < 3:
-			print("Warning: ", self.BADSTART)
+			print("Warning:", self.BADSTART)
 			return False
 		else:
 			start_i = 0
@@ -74,12 +74,11 @@ class NEC_RX(IR_RX):
 				value >>= 1
 				if self._pulses[edge + 1] > 1120:
 					value |= val
-			#print("---value--",hex(value))
 			#判读是8、16位解码
 			if self._bits == 8 or self._bits == 16:
 				cmd = value >> 16 & 0xff
 				if cmd != (value >> 24 ^ 0xff) and value != 0x0:
-					print("Warning: ", self.BADDATA)
+					print("Warning:", self.BADDATA)
 					return False
 				addr = value & 0xff if self._bits == 8 else  value & 0xffff
 				self.code[0:3] = cmd, addr, value
@@ -94,7 +93,7 @@ class RC5_RX(IR_RX):
 	def decode(self):
 		pulse_len = len(self._pulses)
 		if not 4 <= pulse_len <= 28:
-			print("Warning: ", self.BADSTART)
+			print("Warning:", self.BADSTART)
 			return False
 		else:
 			bits = 1
@@ -103,7 +102,7 @@ class RC5_RX(IR_RX):
 			num = 0
 			while bits < 14:
 				if not 500 < self._pulses[num] < 2100:
-					print("Warning: 2", self.BADDATA)
+					print("Warning:", self.BADDATA)
 					return False
 				short = self._pulses[num] < 1334
 				if not short:
@@ -112,7 +111,6 @@ class RC5_RX(IR_RX):
 				value |= bit
 				bits += 1
 				num += 1 + int(short)
-			#print("---value--",hex(value))
 			#判读解码
 			cmd = (value & 0x3f) | (0 if ((value >> 12) & 1) else 0x40)
 			addr = (value >> 6) & 0x1f
@@ -122,15 +120,14 @@ class RC5_RX(IR_RX):
 '''发射部分'''
 class IR_TX:
 	def __init__(self, pin, cfreq=38000, power=60):
-		self._rmt = RMT(0, pin=pin, clock_div=80, tx_carrier = (cfreq, round(power * 0.75), 1))
+		self._rmt = RMT(0, pin=Pin(pin), clock_div=80, tx_carrier = (cfreq, round(power * 0.75), 1))
 		self._pulses = array.array('H')
 		self.carrier = False
 
 	def transmit(self, cmd=None, addr=None, toggle=None, raw=None):
 		if raw is None:
 			self.carrier = False
-			self.tx(cmd, addr, toggle) 
-			print("----T---",len(self._pulses),self._pulses)
+			self.tx(cmd, addr, toggle)
 			self._rmt.write_pulses(tuple(self._pulses))
 			self._pulses = array.array('H')
 		else:

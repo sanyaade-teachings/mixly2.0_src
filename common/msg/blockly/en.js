@@ -3607,14 +3607,14 @@ En.MIXLY_RECOVER = "Recover";
 En.MIXLY_IR_SEND_samsung1 = "NEC";
 En.MIXLY_IR_SEND_samsung2 = "Samsung";
 En.MIXLY_TR_SEND_RC = "RC5";
-En.MIXLY_INTERNAL_VARIABLE = "variable of IRreceive";
+En.MIXLY_INTERNAL_VARIABLE = "variable";
 En.MIXLY_IR_SEND = "IRsend";
 En.MIXLY_CONTROL = "control bit";
 En.MIXLY_TRANSMIT_CONVEN_DATA = "While using NEC/Samsung，the range of command code is 0~255、the range of address code is 0~65535、the control bit includes -1，0，1；while using RC5，the range of command code is 0~63、the range of address code is 0~31、the control bit includes 0，1";
-En.MIXLY_IR_TRANSMIT_BUSY = "whether the ir_transmission is Complete";
+En.MIXLY_IR_TRANSMIT_DONE = "whether the ir_transmission is Complete";
 En.MIXLY_IR_CMD_CODE = "command code";
 En.MIXLY_IR_ADDR_CODE = "address code";
 En.MIXLY_IR_RAW_CODE = "raw code";
-En.MIXLY_IR_CODE = "impulse code";
+En.MIXLY_IR_PULSE = "pulses code";
 
 })();

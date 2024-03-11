@@ -2635,7 +2635,12 @@
           </shadow>
         </value>
       </block>
-      <block type="internal_variable"></block>
+      <block type="variables_set">
+        <field name="VAR">cmd code</field>
+          <value name="VALUE">
+            <block type="internal_variable"></block>
+          </value>
+      </block>
       <block type="recv_fun"></block>
       <block type="communicate_ir_send_init"> 
         <value name="PIN">
@@ -2667,10 +2672,10 @@
         </value>
       </block>
       <block type="ir_transmit_study_code">
-        <value type="VAR">
-          <shadow type="variables_get">
-              <field name="VAR">data</field>
-          </shadow>
+        <value name="LIST">
+            <shadow type="list_many_input">
+              <field name="CONTENT">9000,4500,563,563</field>
+            </shadow>
         </value>
       </block>
       <block type="ir_transmit_busy"></block>  

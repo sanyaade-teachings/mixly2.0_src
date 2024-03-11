@@ -427,7 +427,7 @@ Blockly.Blocks['internal_variable'] = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXlY_RECV_FUN);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_INTERNAL_VARIABLE)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_IR_CMD_CODE,"0"],
                 [Blockly.Msg.MIXLY_IR_ADDR_CODE, "1"],
@@ -501,14 +501,17 @@ Blockly.Blocks['ir_transmit_study_code'] = {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_IR_SEND);     
-        this.appendValueInput('VAR')
+        this.appendValueInput('LIST')
             .appendField(Blockly.Msg.MIXLY_IR_PULSE)
-            .setCheck("var");
+            .setAlign(Blockly.ALIGN_RIGHT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
 };
+
+
+
 
 Blockly.Blocks['ir_transmit_busy'] = {
     init:function(){

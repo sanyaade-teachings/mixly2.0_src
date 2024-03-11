@@ -3172,24 +3172,7 @@
       </block>
     </category>
     <category id="catIR" colour="140">
-      <block type="communicate_ir_send">
-        <value name="PIN">
-          <shadow type="pins_digital_pin">
-            <field name="PIN">39</field>
-          </shadow>
-        </value>
-         <value name="ADDR">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="SUB">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="communicate_ir_recv">
+<block type="communicate_ir_recv_init"> 
         <value name="PIN">
           <shadow type="pins_digital_pin">
             <field name="PIN">38</field>
@@ -3197,36 +3180,88 @@
         </value>
         <value name="SUB">
           <shadow type="factory_block_return">
-            <field name="VALUE">cb</field>
+            <field name="VALUE"></field>
           </shadow>
         </value>
-      </block>        
+      </block>
+      <block type="variables_set">
+        <field name="VAR">cmd code</field>
+          <value name="VALUE">
+            <block type="internal_variable"></block>
+          </value>
+      </block>
+      <block type="recv_fun"></block>
+      <block type="communicate_ir_send_init"> 
+        <value name="PIN">
+          <shadow type="pins_digital_pin">
+            <field name="PIN">39</field>
+          </shadow>
+        </value>
+        <value name="power">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_conventional_data">
+        <value name="cmd">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="addr">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="toggle">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_study_code">
+        <value name="LIST">
+            <shadow type="list_many_input">
+              <field name="CONTENT">9000,4500,563,563</field>
+            </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_busy"></block>  
       <block type="procedures_defnoreturn">
         <mutation>
+          <arg name="cmd"></arg>
           <arg name="addr"></arg>
-          <arg name="data"></arg>
+          <arg name="raw"></arg>
+          <arg name="pulses"></arg>
         </mutation>
-        <field name="NAME">cb</field>
+        <field name="NAME">callback</field>
         <statement name="STACK">
-          <block type="controls_if">
-            <value name="IF0">
-              <block type="logic_compare">
-                <field name="OP">EQ</field>
-                <value name="A">
-                  <block type="variables_get">
-                    <field name="VAR">data</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
+          <block type="system_print_many">
+            <mutation items="4"></mutation>
+            <value name="ADD0">
+              <block type="variables_get">
+                <field name="VAR">cmd</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="variables_get">
+                <field name="VAR">addr</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="variables_get">
+                <field name="VAR">raw</field>
+              </block>
+            </value>
+            <value name="ADD3">
+              <block type="variables_get">
+                <field name="VAR">pulses</field>
               </block>
             </value>
           </block>
         </statement>
-      </block>
+      </block>      
     </category>
     <category id="catI2C" colour="140">
       <block type="communicate_i2c_onboard"></block>

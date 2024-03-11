@@ -124,14 +124,14 @@ class IR_TX:
 		self._pulses = array.array('H')
 		self.carrier = False
 
-	def transmit(self, cmd=None, addr=None, toggle=None, raw=None):
-		if raw is None:
+	def transmit(self, cmd=None, addr=None, toggle=None, pulses=None):
+		if pulses is None:
 			self.carrier = False
 			self.tx(cmd, addr, toggle)
 			self._rmt.write_pulses(tuple(self._pulses))
 			self._pulses = array.array('H')
 		else:
-			self._rmt.write_pulses(tuple(raw))
+			self._rmt.write_pulses(tuple(pulses))
 
 	def busy(self):
 		return not self._rmt.wait_done()

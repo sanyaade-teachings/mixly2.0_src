@@ -53,7 +53,7 @@ class IR_RX:
 		self._callback = callback
 
 	def timeout(self, timeout=15000):
-		self.timeout = timeout
+		self._timeout = timeout
 
 	def any(self):
 		ready = self._ready

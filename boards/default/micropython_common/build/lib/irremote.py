@@ -1,58 +1,71 @@
 """
 IR-Remote
 
-Micropython library for the IR-Remote(IR_RX&TX)
+Micropython library for the IR-Remote/Timer(IR_RX&TX)
 ===============================================
-
 #Preliminary composition               20240302
 
 @dahanzimin From the Mixly Team
 """
-import array, time
+import array, time, gc
 from esp32 import RMT
-from machine import Pin, time_pulse_us
+from machine import Pin, Timer
 
 '''接收部分'''
 class IR_RX:
 	BADSTART = 'Invalid start pulse'
 	BADDATA = 'Invalid data'
-	def __init__(self, pin, callback=None, timeout_h=20000, timeout_l=15000):
-		self._hblock = timeout_h
-		self._lblock = timeout_l
-		self._enable = True
+	def __init__(self, pin, callback=None, timeout=15000, timer_id=1):
+		self._start = 0
+		self._ready = False
+		self._enable = False
+		self._timeout = timeout
 		self._callback = callback	
 		self._pulses = array.array('H')
-		self.code = [None, None, None, memoryview(self._pulses)] 	#存放[cmd, addr, data, raw]
-		Pin(pin, Pin.IN).irq(handler=self._irq_cb, trigger=Pin.IRQ_FALLING)
+		self.code = [None, None, None, memoryview(self._pulses)] 	#存放[cmd, addr, data, pulses]
+		Pin(pin, Pin.IN).irq(handler=self._irq_cb, trigger=(Pin.IRQ_FALLING | Pin.IRQ_RISING))
+		Timer(timer_id).init(period=5, mode=Timer.PERIODIC, callback=self._timer_cb)
 
 	def _irq_cb(self, pin):
-		if self._enable:
-			pulse_l = time_pulse_us(pin, 0, self._lblock)
-			pulse_h = time_pulse_us(pin, 1, self._hblock)
-			if pulse_l >=0 and pulse_h >= 0:
-				self._pulses.append(pulse_l)
-				self._pulses.append(pulse_h)
-			if pulse_h < 0 and pulse_l >= 0:
-				self._pulses.append(pulse_l)
-				#接收完成，开始解码
-				self.code[3] = memoryview(self._pulses)
-				if self._callback and self.decode() is None :
-					self._callback(self.code[0], self.code[1], self.code[2], self.code[3])
-				self._pulses = array.array('H')
+		if not self._enable:
+			_intime = time.ticks_us()
+			if self._start == 0:
+				self._start = _intime
+				return
+			self._pulses.append(time.ticks_diff(_intime, self._start))
+			self._start = _intime
+		else:
+			self._start = 0
+			self._pulses = array.array('H')
+
+	def _timer_cb(self, tim):
+		if len(self._pulses) >= 3 and time.ticks_diff(time.ticks_us(), self._start) > self._timeout:
+			#接收完成，开始解码
+			self.code[3] = memoryview(self._pulses)
+			if self.decode() is None and self._callback:
+				self._callback(self.code[0], self.code[1], self.code[2], self.code[3])
+			self._ready = True
+			self._start = 0
+			self._pulses = array.array('H')
+			gc.collect()
 
 	def recv_cb(self, callback):
 		self._callback = callback
 
-	def timeout(self, timeout_h=20000, timeout_l=15000):
-		self._hblock = timeout_h
-		self._lblock = timeout_l
+	def timeout(self, timeout=15000):
+		self.timeout = timeout
+
+	def any(self):
+		ready = self._ready
+		self._ready = False
+		return ready
 
 	def enable(self, onoff):
 		self._enable = onoff
 
 class NEC_RX(IR_RX):
 	def __init__(self, pin, bits=None, callback=None):
-		super().__init__(pin, callback, timeout_h=25000, timeout_l=15000)
+		super().__init__(pin, callback, timeout=15000)
 		self._bits = bits
 
 	def decode(self):
@@ -88,7 +101,7 @@ class NEC_RX(IR_RX):
 
 class RC5_RX(IR_RX):
 	def __init__(self, pin, callback=None):
-		super().__init__(pin, callback, timeout_h=15000, timeout_l=15000)
+		super().__init__(pin, callback, timeout=15000)
 
 	def decode(self):
 		pulse_len = len(self._pulses)

@@ -205,7 +205,19 @@ Blockly.Python.forBlock['recv_fun'] = function(){
     var en = this.getFieldValue('en');
     var code = "ir_rx.enable(" + en + ")\n";
     return code;
+};
 
+Blockly.Python.forBlock['ir_whether_recv'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote'; 
+    var code = "ir_rx.any()";
+    return [code,Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['ir_recv_timeout'] = function(){
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote'; 
+    var time = Blockly.Python.valueToCode(this, 'time',Blockly.Python.ORDER_ATOMIC);
+    var code = "ir_rx.timeout(" + time + ")\n";
+    return code;
 };
 
 Blockly.Python.forBlock['communicate_ir_send_init'] = function(){

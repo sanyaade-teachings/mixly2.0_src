@@ -3175,7 +3175,7 @@
 <block type="communicate_ir_recv_init"> 
         <value name="PIN">
           <shadow type="pins_digital_pin">
-            <field name="PIN">38</field>
+            <field name="PIN">16</field>
           </shadow>
         </value>
         <value name="SUB">
@@ -3184,17 +3184,20 @@
           </shadow>
         </value>
       </block>
-      <block type="variables_set">
-        <field name="VAR">cmd code</field>
-          <value name="VALUE">
-            <block type="internal_variable"></block>
-          </value>
-      </block>
+      <block type="internal_variable"></block>
       <block type="recv_fun"></block>
+      <block type="ir_whether_recv"></block>
+      <block type="ir_recv_timeout">
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">20000</field>
+          </shadow>
+        </value>
+      </block>
       <block type="communicate_ir_send_init"> 
         <value name="PIN">
           <shadow type="pins_digital_pin">
-            <field name="PIN">39</field>
+            <field name="PIN">21</field>
           </shadow>
         </value>
         <value name="power">

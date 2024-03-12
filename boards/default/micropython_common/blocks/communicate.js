@@ -454,6 +454,32 @@ Blockly.Blocks['recv_fun'] = {
     }
 }
 
+Blockly.Blocks['ir_whether_recv'] = {
+    init:function () {
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXlY_RECV_FUN);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IR_WHETHER_RECV);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['ir_recv_timeout'] = {
+    init:function(){
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.appendValueInput('time')
+            .appendField(Blockly.Msg.MIXlY_RECV_FUN)
+            .appendField(Blockly.Msg.MIXLY_IR_TIMEOUT);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MILLISECOND);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
 Blockly.Blocks['communicate_ir_send_init'] = {
     init:function(){
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
@@ -520,22 +546,6 @@ Blockly.Blocks['ir_transmit_busy'] = {
             .appendField(Blockly.Msg.MIXLY_IR_TRANSMIT_DONE);
         this.setOutput(true);
         this.setInputsInline(true);
-    }
-};
-
-Blockly.Blocks['communicate_ir_send'] = {
-    init: function() {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
-        this.appendValueInput('PIN')
-            .appendField(Blockly.Msg.blynk_IOT_IR_SEND);
-        this.appendValueInput('ADDR')
-            .appendField(Blockly.Msg.MQTT_SERVER_ADD);    
-        this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.OLED_STRING);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.blynk_IOT_IR_SEND_TOOLTIP);
     }
 };
 

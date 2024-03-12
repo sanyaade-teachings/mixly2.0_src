@@ -3762,4 +3762,6 @@ ZhHans.MIXLY_IR_CMD_CODE = "命令码";
 ZhHans.MIXLY_IR_ADDR_CODE = "地址码";
 ZhHans.MIXLY_IR_RAW_CODE = "原始码";
 ZhHans.MIXLY_IR_PULSE = "脉冲数组";
+ZhHans.MIXLY_IR_WHETHER_RECV = "是否有新数据";
+ZhHans.MIXLY_IR_TIMEOUT = "超时";
 })();

@@ -3588,4 +3588,6 @@ ZhHant.MIXLY_IR_CMD_CODE = "命令碼";
 ZhHant.MIXLY_IR_ADDR_CODE = "地址碼";
 ZhHant.MIXLY_IR_RAW_CODE = "原始碼";
 ZhHant.MIXLY_IR_PULSE = "脈衝數組";
+ZhHant.MIXLY_IR_WHETHER_RECV = "是否有新數據";
+ZhHant.MIXLY_IR_TIMEOUT = "超時";
 })();

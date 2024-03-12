@@ -220,10 +220,8 @@ Blockly.Python.forBlock['sensor_hp203'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
-    if (version == 'mixgo_zero') {
-        Blockly.Python.definitions_['import_' + version + '_onboard_bps'] = "from " + version + " import onboard_bps";
-        var code = 'onboard_bps.' + key;
-    } 
+    Blockly.Python.definitions_['import_' + version + '_onboard_bps'] = "from " + version + " import onboard_bps";
+    var code = 'onboard_bps.' + key;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -242,8 +240,8 @@ Blockly.Python.forBlock['sensor_aht11'] = function(){
 };
 
 Blockly.Python.forBlock['sensor_get_temperature'] = function(){
-    Blockly.Python.definitions_['import_feiyi_onboard_mxc6655xa'] = 'from feiyi import _onboard_mxc6655xa';
-    return ['onboard_mxc6655xa.temperature()', Blockly.Python.ORDER_ATOMIC];
+    Blockly.Python.definitions_['import_feiyi_onboard_acc'] = 'from feiyi import _onboard_acc';
+    return ['onboard_acc.temperature()', Blockly.Python.ORDER_ATOMIC];
 };
 
 
@@ -311,9 +309,9 @@ Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
 
 Blockly.Python.forBlock['sensor_eulerangles'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_mxc6655xa'] = "from "+version+" import onboard_mxc6655xa";
+    Blockly.Python.definitions_['import_'+version+'_onboard_acc'] = "from "+version+" import onboard_acc";
     var angle = this.getFieldValue('angle');
-    var code = 'onboard_mxc6655xa.eulerangles()'+angle;
+    var code = 'onboard_acc.eulerangles()'+angle;
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -718,8 +716,8 @@ Blockly.Python.forBlock['sensor_mixbot_get_gyro'] = function(){
 
 Blockly.Python.forBlock['sensor_bitbot_LTR308'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_ltr553als'] = "from "+version+" import onboard_ltr553als";
-    var code = 'onboard_ltr553als.als_vis()';
+    Blockly.Python.definitions_['import_'+version+'_onboard_als'] = "from "+version+" import onboard_als";
+    var code = 'onboard_als.als_vis()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

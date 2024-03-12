@@ -3616,5 +3616,7 @@ En.MIXLY_IR_CMD_CODE = "command code";
 En.MIXLY_IR_ADDR_CODE = "address code";
 En.MIXLY_IR_RAW_CODE = "raw code";
 En.MIXLY_IR_PULSE = "pulses code";
+En.MIXLY_IR_WHETHER_RECV = "wheteher receive new data";
+En.MIXLY_IR_TIMEOUT = "timeout";
 
 })();

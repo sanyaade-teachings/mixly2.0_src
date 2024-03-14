@@ -22,3 +22,8 @@
     margin: 0;
     border: none;
 }
+
+.statusbar-tab-menu .context-menu-list {
+    width: fit-content !important;
+    min-width: 5em;
+}

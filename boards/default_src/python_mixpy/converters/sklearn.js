@@ -97,8 +97,9 @@ function sklearn_load_check_assign(mode){
         }
         var moduleName = py2block.Name_str(value.func.value);
         var funcName = py2block.identifier(value.func.attr);
+        value.args = value.args || [];
         if (value._astname === "Call" && moduleName === "datasets"
-            && funcName === mode && value.args.length === 0)
+            && funcName === mode && !value.args.length)
             return true;
         return false;
     }
@@ -187,7 +188,8 @@ pbc.assignD.get('LinearRegression')['check_assign'] = function(py2block, node, t
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "LinearRegression" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "LinearRegression" && !value.args.length)
         return true;
     return false;
 }
@@ -211,7 +213,8 @@ pbc.assignD.get('Ridge')['check_assign'] = function(py2block, node, targets, val
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "Ridge" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "Ridge" && !value.args.length)
         return true;
     return false;
 }
@@ -239,7 +242,8 @@ pbc.assignD.get('DecisionTreeClassifier')['check_assign'] = function(py2block, n
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "DecisionTreeClassifier" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "DecisionTreeClassifier" && !value.args.length)
         return true;
     return false;
 }
@@ -262,7 +266,8 @@ pbc.assignD.get('DecisionTreeRegressor')['check_assign'] = function(py2block, no
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "DecisionTreeRegressor" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "DecisionTreeRegressor" && !value.args.length)
         return true;
     return false;
 }
@@ -285,7 +290,8 @@ pbc.assignD.get('RandomForestClassifier')['check_assign'] = function(py2block, n
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "RandomForestClassifier" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "RandomForestClassifier" && !value.args.length)
         return true;
     return false;
 }
@@ -312,7 +318,8 @@ pbc.assignD.get('RandomForestRegressor')['check_assign'] = function(py2block, no
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "RandomForestRegressor" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "RandomForestRegressor" && !value.args.length)
         return true;
     return false;
 }
@@ -339,7 +346,8 @@ pbc.assignD.get('KNeighborsClassifier')['check_assign'] = function(py2block, nod
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "KNeighborsClassifier" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "KNeighborsClassifier" && !value.args.length)
         return true;
     return false;
 }
@@ -362,7 +370,8 @@ pbc.assignD.get('KNeighborsRegressor')['check_assign'] = function(py2block, node
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "KNeighborsRegressor" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "KNeighborsRegressor" && !value.args.length)
         return true;
     return false;
 }
@@ -385,7 +394,8 @@ pbc.assignD.get('GaussianNB')['check_assign'] = function(py2block, node, targets
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "GaussianNB" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "GaussianNB" && !value.args.length)
         return true;
     return false;
 }
@@ -402,7 +412,8 @@ pbc.assignD.get('KMeans')['check_assign'] = function(py2block, node, targets, va
         return false;
     }
     var funcName = value.func.id.v;
-    if(funcName === "KMeans" && value.args.length === 0)
+    value.args = value.args || [];
+    if(funcName === "KMeans" && !value.args.length)
         return true;
     return false;
 }

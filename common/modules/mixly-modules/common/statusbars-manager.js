@@ -150,7 +150,7 @@ class StatusBarsManager extends PagesManager {
             children: serialChildMenu,
             data: {
                 isHtmlName: true,
-                name: '打开串口'
+                name: ContextMenu.getItem('打开串口', '')
             }
         });
         menu.add({
@@ -164,7 +164,7 @@ class StatusBarsManager extends PagesManager {
             children: toolChildMenu,
             data: {
                 isHtmlName: true,
-                name: '工具',
+                name: ContextMenu.getItem('工具', ''),
                 callback: (key, opt) => console.log(123)
             }
         });

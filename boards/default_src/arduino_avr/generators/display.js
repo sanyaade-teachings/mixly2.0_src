@@ -793,18 +793,32 @@ export const TFT_init_with_pin = function () {
     const PIN_DC = this.getFieldValue('DC');
     const PIN_RST = this.getFieldValue('RST');
     const TYPE = this.getFieldValue('TYPE');
-    let icType = 'ST7735';
-    if (TYPE.indexOf('ST7796') !== -1)
-        icType = 'ST7796';
-    else if (TYPE.indexOf('INITR') !== -1)
-        icType = 'ST7735';
-    else
-        icType = 'ST7789';
+    let icType = TYPE.split('_')[0];
+    let initParam = '';
+    if (TYPE === 'ST7735_INITR_GREENTAB') {
+        initParam = 'INITR_GREENTAB';
+    } else if (TYPE === 'ST7735_INITR_REDTAB') {
+        initParam = 'INITR_REDTAB';
+    } else if (TYPE === 'ST7735_INITR_BLACKTAB') {
+        initParam = 'INITR_BLACKTAB';
+    } else if (TYPE === 'ST7735_160×80') {
+        initParam = 'INITR_MINI160x80';
+    } else if (TYPE === 'ST7735_160×128') {
+        initParam = '128, 160';
+    } else if (TYPE === 'ST7789_240×135') {
+        initParam = '135, 240';
+    } else if (TYPE === 'ST7789_240×240') {
+        initParam = '240, 240';
+    } else if (TYPE === 'ST7789_320×240') {
+        initParam = '240, 320';
+    } else if (TYPE === 'ST7796_480×320') {
+        initParam = '';
+    }
     Blockly.Arduino.definitions_["include_Adafruit_GFX"] = '#include <Adafruit_GFX.h>';
     Blockly.Arduino.definitions_["include_Adafruit_tft"] = '#include <Adafruit_' + icType + '.h>';
     Blockly.Arduino.definitions_["include_SPI"] = '#include <SPI.h>';
     Blockly.Arduino.definitions_['var_declare_Adafruit_tft'] = 'Adafruit_' + icType + ' tft = Adafruit_' + icType + '(' + PIN_CS + ', ' + PIN_DC + ', ' + PIN_RST + ');';
-    Blockly.Arduino.setups_["setup_tft_init"] = 'tft.' + (icType === 'ST7735' ? 'initR' : 'init') + '(' + TYPE + ');';
+    Blockly.Arduino.setups_["setup_tft_init"] = 'tft.' + (icType === 'ST7735' ? 'initR' : 'init') + '(' + initParam + ');';
     Blockly.Arduino.setups_["setup_tft_fillScreen"] = 'tft.fillScreen(0x0000);';
     Blockly.Arduino.definitions_["include_U8g2_for_Adafruit_GFX"] = '#include <U8g2_for_Adafruit_GFX.h>';
     Blockly.Arduino.definitions_['var_declare_U8G2_FOR_ADAFRUIT_GFX'] = 'U8G2_FOR_ADAFRUIT_GFX u8g2_for_adafruit_gfx;';
@@ -1109,14 +1123,10 @@ export const tft_print = function () {
     var TEXT = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var colour = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
 
-    var code = "";
-    if ((!isNaN(POS_x) && POS_x < 129 && POS_x >= 0) || (isNaN(POS_x)))
-        code = 'u8g2_for_adafruit_gfx.setCursor(' + POS_x + ',';
-    if ((!isNaN(POS_y) && POS_y < 129 && POS_y >= 0) || (isNaN(POS_y)))
-        code += POS_y + "); \n";
+    var code = `u8g2_for_adafruit_gfx.setCursor(${POS_x}, ${POS_y});\n`;
     // code +='u8g2_for_adafruit_gfx.setFontMode(0);'
-    code += 'u8g2_for_adafruit_gfx.setForegroundColor' + '(' + colour + ');\n';
-    code += "u8g2_for_adafruit_gfx.print(" + TEXT + "); \n";
+    code += `u8g2_for_adafruit_gfx.setForegroundColor(${colour});\n`;
+    code += `u8g2_for_adafruit_gfx.print(${TEXT});\n`;
     return code;
 };
 

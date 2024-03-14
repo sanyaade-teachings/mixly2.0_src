@@ -8,8 +8,9 @@ pbc.assignD.get('Turtle')['check_assign'] = function (py2block, node, targets, v
     }
     var moduleName = py2block.Name_str(value.func.value);
     var funcName = py2block.identifier(value.func.attr);
+    value.args = value.args || [];
     if (value._astname === "Call" && moduleName === "turtle"
-        && (funcName === "Turtle" || funcName === "Pen")&& value.args.length === 0)
+        && (funcName === "Turtle" || funcName === "Pen")&& !value.args.length)
         return true;
     return false;
 }
@@ -34,8 +35,9 @@ pbc.assignD.get('getscreen')['check_assign'] = function (py2block, node, targets
     }
     var moduleName = py2block.Name_str(value.func.value);
     var funcName = py2block.identifier(value.func.attr);
+    value.args = value.args || [];
     if (value._astname === "Call" 
-        && funcName === "getscreen" && value.args.length === 0)
+        && funcName === "getscreen" && !value.args.length)
         return true;
     return false;
 }

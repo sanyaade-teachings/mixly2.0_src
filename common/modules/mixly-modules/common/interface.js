@@ -6,6 +6,7 @@ goog.require('Mixly.Boards');
 goog.require('Mixly.App');
 goog.require('Mixly.Msg');
 goog.require('Mixly.UserEvents');
+goog.require('Mixly.UserOPEvents');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
 goog.require('Mixly.Electron.Serial');
@@ -28,6 +29,7 @@ const {
     App,
     Msg,
     UserEvents,
+    UserOPEvents,
     Electron = {},
     Web = {},
     WebSocket = {}
@@ -73,8 +75,11 @@ window.addEventListener('load', () => {
     LazyLoad.js(scrpitPathList, () => {
         Interface.app = new App($('body')[0]);
         Boards.init();
-        if (window.frames.length != parent.frames.length) {
+        if (window.frames.length !== parent.frames.length) {
             window.userEvents = new UserEvents(Editor.blockEditor);
+        }
+        if (!goog.isElectron && window.location.host.indexOf('mixly.cn')) {
+            window.userOpEvents = new UserOPEvents();
         }
         if (Env.hasSocketServer) {
             Socket.init();

@@ -1868,15 +1868,15 @@ export const TFT_init_with_pin = {
             .appendField(Blockly.Msg.MIXLY_SETUP + " TFT " + Blockly.Msg.DISPLAY);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([
-                [Blockly.Msg.MIXLY_STM32_TFT_GREENTAB + "(ST7735)", "INITR_GREENTAB"],
-                [Blockly.Msg.MIXLY_STM32_TFT_REDTAB + "(ST7735)", "INITR_REDTAB"],
-                [Blockly.Msg.MIXLY_STM32_TFT_BLACKTAB + "(ST7735)", "INITR_BLACKTAB"],
-                ["160×80(ST7735)", "INITR_MINI160x80"],
-                ["160×128(ST7789)", "128, 160"],
-                ["240×135(ST7789)", "135, 240"],
-                ["240×240(ST7789)", "240, 240"],
-                ["320×240(ST7789)", "240, 320"],
-                ["480×320(ST7796)", "480×320(ST7796)"]
+                [Blockly.Msg.MIXLY_STM32_TFT_GREENTAB + "(ST7735)", "ST7735_INITR_GREENTAB"],
+                [Blockly.Msg.MIXLY_STM32_TFT_REDTAB + "(ST7735)", "ST7735_INITR_REDTAB"],
+                [Blockly.Msg.MIXLY_STM32_TFT_BLACKTAB + "(ST7735)", "ST7735_INITR_BLACKTAB"],
+                ["160×80(ST7735)", "ST7735_160×80"],
+                ["160×128(ST7789)", "ST7789_160×128"],
+                ["240×135(ST7789)", "ST7789_240×135"],
+                ["240×240(ST7789)", "ST7789_240×240"],
+                ["320×240(ST7789)", "ST7789_320×240"],
+                ["480×320(ST7796)", "ST7796_480×320"]
             ]), "TYPE");
         //.appendField(" "+Blockly.Msg.MIXLY_MICROBIT_monitor)
         //.appendField(new Blockly.FieldDropdown(ROTATION_TYPE), "ROTATION");
@@ -1885,7 +1885,7 @@ export const TFT_init_with_pin = {
             .appendField("CLK");
         this.appendValueInput("MOSI")
             .setCheck(Number)
-            .appendField("SDA");
+            .appendField("MOSI");
         this.appendDummyInput()
             .appendField('CS')
             .appendField(new Blockly.FieldDropdown(Profile.default.digital), "CS")

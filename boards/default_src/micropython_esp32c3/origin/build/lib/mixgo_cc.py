@@ -8,17 +8,17 @@ MicroPython library for the MixGo CC -Onboard resources
 
 dahanzimin From the Mixly Team
 """
-
-import time,gc
-from machine import Pin,SoftI2C,ADC,PWM,Timer,RTC
+import time, gc
+from machine import Pin, SoftI2C, ADC, PWM, RTC
 
 '''i2c-onboard'''
 onboard_i2c=SoftI2C(scl = Pin(7), sda = Pin(6), freq = 400000)
+onboard_i2c_scan = onboard_i2c.scan()
 
 '''Version judgment'''
-if 0x73 in onboard_i2c.scan():
+if 0x73 in onboard_i2c_scan:
     version=1
-elif 0x72 in onboard_i2c.scan():
+elif 0x72 in onboard_i2c_scan:
     version=0
 else:
     print("Warning: Mixgo CC board is not detected, which may cause usage errors")
@@ -29,37 +29,51 @@ rtc_clock=RTC()
 '''ACC-Sensor'''
 try :
     import mxc6655xa
-    onboard_mxc6655xa = mxc6655xa.MXC6655XA(onboard_i2c)     
+    onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c)     
 except Exception as e:
-    print("Warning: Failed to communicate with MXC6655XA or",e)
+    print("Warning: Failed to communicate with MXC6655XA (ACC) or",e)
 
 '''ALS_PS-Sensor'''
 try :
     import ltr553als
-    onboard_ltr553als = ltr553als.LTR_553ALS(onboard_i2c)     
+    onboard_als = ltr553als.LTR_553ALS(onboard_i2c)     
 except Exception as e:
-    print("Warning: Failed to communicate with TR_553ALS or",e)
+    print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
 
-'''Atmos_Sensor'''
-try :
-    import hp203x
-    onboard_hp203x = hp203x.HP203X(onboard_i2c)     
-except Exception as e:
-    print("Warning: Failed to communicate with HP203X or",e)
+'''BPS_Sensor'''
+if 0x76 in onboard_i2c_scan:
+    try :
+        import hp203x
+        onboard_bps = hp203x.HP203X(onboard_i2c)     
+    except Exception as e:
+        print("Warning: Failed to communicate with HP203X (BPS) or",e)
+if 0x77 in onboard_i2c_scan:
+    try :
+        import spl06_001
+        onboard_bps = spl06_001.SPL06(onboard_i2c)     
+    except Exception as e:
+        print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
 
 '''T&H_Sensor'''
-try :
-    import ahtx0
-    onboard_ahtx0 = ahtx0.AHTx0(onboard_i2c)     
-except Exception as e:
-    print("Warning: Failed to communicate with AHTx0 or",e)
+if 0x38 in onboard_i2c_scan:
+    try :
+        import ahtx0
+        onboard_ths = ahtx0.AHTx0(onboard_i2c)     
+    except Exception as e:
+        print("Warning: Failed to communicate with AHTx0 (THS) or",e)
+if 0x70 in onboard_i2c_scan:
+    try :
+        import shtc3
+        onboard_ths = shtc3.SHTC3(onboard_i2c)     
+    except Exception as e:
+        print("Warning: Failed to communicate with GXHTC3 (THS) or",e)
 
 '''RFID_Sensor'''
 try :
     import rc522
-    onboard_rc522 = rc522.RC522(onboard_i2c)     
+    onboard_rfid = rc522.RC522(onboard_i2c)     
 except Exception as e:
-    print("Warning: Failed to communicate with RC522 or",e)
+    print("Warning: Failed to communicate with RC522 (RFID) or",e)
 
 '''matrix32x12'''
 try :
@@ -71,9 +85,9 @@ except Exception as e:
 '''Magnetic'''
 try :
     import mmc5603
-    onboard_mmc5603 = mmc5603.MMC5603(onboard_i2c)
+    onboard_mgs = mmc5603.MMC5603(onboard_i2c)
 except Exception as e:
-    print("Warning: Failed to communicate with MMC5603 or",e)
+    print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
 
 '''2RGB_WS2812'''    
 from ws2812 import NeoPixel
@@ -86,9 +100,8 @@ onboard_music =MIDI(10)
 '''MIC_Sensor'''
 class MICSensor:
     def __init__(self,pin):
-        self.adc=ADC(Pin(pin))
-        self.adc.atten(ADC.ATTN_11DB) 
-        
+        self.adc=ADC(Pin(pin), atten=ADC.ATTN_11DB)
+
     def read(self):
         maxloudness = 0
         for i in range(5):
@@ -119,7 +132,7 @@ class KEYSensor:
         for _ in range(50):
             values.append(self.adc.read())
             time.sleep_us(2)
-        return (self.range - 300) < min(values) < (self.range + 300)
+        return (self.range - 300) < min(sorted(values)[25:]) < (self.range + 300)
     
     def get_presses(self, delay = 1):
         last_time,presses = time.time(), 0

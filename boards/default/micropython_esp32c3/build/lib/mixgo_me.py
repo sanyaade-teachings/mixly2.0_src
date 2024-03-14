@@ -21,14 +21,14 @@ rtc_clock=RTC()
 '''ACC-Sensor'''
 try :
     import mxc6655xa
-    onboard_mxc6655xa = mxc6655xa.MXC6655XA(onboard_i2c)     
+    onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c)     
 except Exception as e:
     print("Warning: Failed to communicate with MXC6655XA or",e)
 
 '''ALS_PS-Sensor'''
 try :
     import ltr553als
-    onboard_ltr553als = ltr553als.LTR_553ALS(onboard_i2c)     
+    onboard_als = ltr553als.LTR_553ALS(onboard_i2c)     
 except Exception as e:
     print("Warning: Failed to communicate with LTR_553ALS or",e)
 
@@ -42,7 +42,7 @@ except Exception as e:
 '''Magnetic'''
 try :
     import mmc5603
-    onboard_mmc5603 = mmc5603.MMC5603(onboard_i2c)
+    onboard_mgs = mmc5603.MMC5603(onboard_i2c)
 except Exception as e:
     print("Warning: Failed to communicate with MMC5603 or",e)
 
@@ -88,7 +88,7 @@ class KEYSensor:
         for _ in range(50):
             values.append(self.adc.read())
             time.sleep_us(2)
-        return (self.range - 300) < min(values) < (self.range + 300)
+        return (self.range - 300) < min(sorted(values)[25:]) < (self.range + 300)
     
     def get_presses(self, delay = 1):
         last_time,presses = time.time(), 0

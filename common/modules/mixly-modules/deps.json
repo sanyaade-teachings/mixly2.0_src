@@ -506,6 +506,7 @@
             "Mixly.App",
             "Mixly.Msg",
             "Mixly.UserEvents",
+            "Mixly.UserOPEvents",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
             "Mixly.Electron.Serial",
@@ -963,6 +964,17 @@
         ],
         "provide": [
             "Mixly.UserEvents"
+        ]
+    },
+    {
+        "path": "/common/user-op-events.js",
+        "require": [
+            "Mixly.MFile",
+            "Mixly.Config",
+            "Mixly.Boards"
+        ],
+        "provide": [
+            "Mixly.UserOPEvents"
         ]
     },
     {

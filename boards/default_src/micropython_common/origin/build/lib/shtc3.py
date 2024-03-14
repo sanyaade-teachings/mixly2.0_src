@@ -11,41 +11,17 @@ dahanzimin From the Mixly Team
 """
 
 from time import sleep
+from micropython import const
 from struct import unpack_from
 
-_SHTC3_DEFAULT_ADDR = 0x70  # SHTC3 I2C Address
-_SHTC3_NORMAL_MEAS_TFIRST_STRETCH = (
-	0x7CA2  # Normal measurement, temp first with Clock Stretch Enabled
-)
-_SHTC3_LOWPOW_MEAS_TFIRST_STRETCH = (
-	0x6458  # Low power measurement, temp first with Clock Stretch Enabled
-)
-_SHTC3_NORMAL_MEAS_HFIRST_STRETCH = (
-	0x5C24  # Normal measurement, hum first with Clock Stretch Enabled
-)
-_SHTC3_LOWPOW_MEAS_HFIRST_STRETCH = (
-	0x44DE  # Low power measurement, hum first with Clock Stretch Enabled
-)
-
-_SHTC3_NORMAL_MEAS_TFIRST = (
-	0x7866  # Normal measurement, temp first with Clock Stretch disabled
-)
-_SHTC3_LOWPOW_MEAS_TFIRST = (
-	0x609C  # Low power measurement, temp first with Clock Stretch disabled
-)
-_SHTC3_NORMAL_MEAS_HFIRST = (
-	0x58E0  # Normal measurement, hum first with Clock Stretch disabled
-)
-_SHTC3_LOWPOW_MEAS_HFIRST = (
-	0x401A  # Low power measurement, hum first with Clock Stretch disabled
-)
-
-_SHTC3_READID = 0xEFC8  # Read Out of ID Register
-_SHTC3_SOFTRESET = 0x805D  # Soft Reset
-_SHTC3_SLEEP = 0xB098  # Enter sleep mode
-_SHTC3_WAKEUP = 0x3517  # Wakeup mode
-_SHTC3_CHIP_ID = 0x807
-
+_SHTC3_DEFAULT_ADDR = const(0x70)	# SHTC3 I2C Address
+_SHTC3_READID 		= const(0xEFC8)	# Read Out of ID Register
+_SHTC3_SOFTRESET 	= const(0x805D)	# Soft Reset
+_SHTC3_SLEEP 		= const(0xB098)	# Enter sleep mode
+_SHTC3_WAKEUP 		= const(0x3517)	# Wakeup mode
+_SHTC3_CHIP_ID 		= const(0x807)
+_SHTC3_NORMAL_MEAS 	= const(0x7866)
+_SHTC3_LOWPOW_MEAS 	= const(0x609C)
 
 class SHTC3:
 	def __init__(self, i2c_bus, addr = _SHTC3_DEFAULT_ADDR):
@@ -96,8 +72,6 @@ class SHTC3:
 		sleep(0.001)
 		self._cached_sleep = sleep_enabled
 
-	# lowPowerMode(bool readmode) { _lpMode = readmode
-
 	@property
 	def low_power(self):
 		"""Enables the less accurate low power mode, trading accuracy for power consumption"""
@@ -120,51 +94,35 @@ class SHTC3:
 	@property
 	def measurements(self):
 		"""both `temperature` and `relative_humidity`, read simultaneously"""
-
 		self.sleeping = False
 		temperature = None
 		humidity = None
-		# send correct command for the current power state
 		if self.low_power:
-			self._write_command(_SHTC3_LOWPOW_MEAS_TFIRST)
+			self._write_command(_SHTC3_LOWPOW_MEAS)
 			sleep(0.001)
 		else:
-			self._write_command(_SHTC3_NORMAL_MEAS_TFIRST)
+			self._write_command(_SHTC3_NORMAL_MEAS)
 			sleep(0.013)
 
-		# read the measured data into our buffer
 		self._device.readfrom_into(self._address,self._buffer)
 
-		# separate the read data
 		temp_data = self._buffer[0:2]
 		temp_crc = self._buffer[2]
 		humidity_data = self._buffer[3:5]
 		humidity_crc = self._buffer[5]
 
-		# check CRC of bytes
-		if temp_crc != self._crc8(temp_data) or humidity_crc != self._crc8(
-			humidity_data
-		):
+		if temp_crc != self._crc8(temp_data) or humidity_crc != self._crc8(humidity_data):
 			return
 
-		# decode data into human values:
-		# convert bytes into 16-bit signed integer
-		# convert the LSB value to a human value according to the datasheet
 		raw_temp = unpack_from(">H", temp_data)[0]
 		raw_temp = ((4375 * raw_temp) >> 14) - 4500
 		temperature = raw_temp / 100.0
-
-		# repeat above steps for humidity data
 		raw_humidity = unpack_from(">H", humidity_data)[0]
 		raw_humidity = (625 * raw_humidity) >> 12
 		humidity = raw_humidity / 100.0
 
 		self.sleeping = True
 		return (temperature, humidity)
-
-	## CRC-8 formula from page 14 of SHTC3 datasheet
-	# https://media.digikey.com/pdf/Data%20Sheets/Sensirion%20PDFs/HT_DS_SHTC3_D1.pdf
-	# Test data [0xBE, 0xEF] should yield 0x92
 
 	@staticmethod
 	def _crc8(buffer):
@@ -178,3 +136,9 @@ class SHTC3:
 				else:
 					crc = crc << 1
 		return crc & 0xFF  # return the bottom 8 bits
+
+	def humidity(self):
+		return self.measurements[1]
+
+	def temperature(self):
+		return self.measurements[0]

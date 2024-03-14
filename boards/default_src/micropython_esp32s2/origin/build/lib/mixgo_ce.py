@@ -19,11 +19,12 @@ rtc_clock=RTC()
 
 '''i2c-onboard'''
 onboard_i2c=SoftI2C(scl = Pin(41), sda = Pin(42), freq = 400000)
+onboard_i2c_scan = onboard_i2c.scan()
 
 '''Version judgment'''
-if 0x15 in onboard_i2c.scan():
+if 0x15 in onboard_i2c_scan:
     version=1
-elif 0x26 in onboard_i2c.scan():
+elif 0x26 in onboard_i2c_scan:
     version=0
 else:
     print("Warning: Mixgo CE board is not detected, which may cause usage errors")
@@ -210,11 +211,11 @@ if version==1:
     '''ACC-Sensor'''
     try:
         import mxc6655xa
-        onboard_mxc6655xa = mxc6655xa.MXC6655XA(onboard_i2c,front=True) 
+        onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c,front=True) 
 
         '''temperature'''
         def get_temperature():
-            return onboard_mxc6655xa.temperature()
+            return onboard_acc.temperature()
 
     except Exception as e:
         print("Warning: Failed to communicate with MXC6655XA or",e)

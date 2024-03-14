@@ -195,3 +195,12 @@ class AI:
 			return info[0].info1,info[0].info2
 		else:
 			return None,None
+
+	def find_licenseplate(self):
+		return self.request('alpr')
+
+	def find_20object(self):
+		return self.request('voc20')
+
+	def face_detect(self):
+		return self.request('face_d')

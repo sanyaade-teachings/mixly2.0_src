@@ -4,76 +4,73 @@ WS2812 RGB
 Micropython library for the WS2812 NeoPixel-RGB
 =======================================================
 
-#Based on neopixel(Native library)			20220618
-#Change support end reuse					20220622
+#Preliminary composition                   20240110
 
 dahanzimin From the Mixly Team
 """
-
 from time import sleep
 from machine import bitstream
 
 class NeoPixel:
-	def __init__(self, pin, n, bpp=3, timing=1,ORDER=(1, 0, 2, 3),default=None,multiplex=0):
+	def __init__(self, pin, n, bpp=3, timing=1, ORDER=(1, 0, 2, 3), default=None, multiplex=False, leds=0):
 		self.pin = pin
-		self.n = n
 		self.bpp = bpp
-		self.ORDER=ORDER
-		self.multiplex=multiplex
-		self.buf = bytearray(n * bpp)
+		self.leds = leds
+		self.rgbs = n-leds
+		self.ORDER = ORDER
+		self.multiplex = multiplex
+		self.rgb_buf = bytearray(self.rgbs * bpp)
+		self.led_buf = bytearray(self.leds * bpp)
 		self.timing = (((350, 850, 800, 400) if timing else (800, 1700, 1600, 900))	if isinstance(timing, int) else timing)
-
-		if not self.multiplex:
-			self.pin.init(self.pin.OUT,value=default)
-
-		self.fill((0, 0, 0))
+		if not self.multiplex: self.pin.init(self.pin.OUT,value=default)
 		self.write()
 
 	def __len__(self):
-		return self.n
+		return self.rgbs
 
-	def __setitem__(self, i, v):
-		offset = i * self.bpp
+	def __setitem__(self, n, v):
 		for i in range(self.bpp):
-			self.buf[offset + self.ORDER[i]] = v[i] 
+			self.rgb_buf[n * self.bpp + self.ORDER[i]] = v[i] 
 
-	def __getitem__(self, i):
-		offset = i * self.bpp
-		return tuple(self.buf[offset + self.ORDER[i]] for i in range(self.bpp))
+	def __getitem__(self, n):
+		return tuple(self.rgb_buf[n* self.bpp + self.ORDER[i]] for i in range(self.bpp))
+
+	def led_set(self, n, v):
+		for i in range(self.bpp):
+			self.led_buf[n * self.bpp + self.ORDER[i]] = v[i] 
+
+	def led_get(self, n):
+		return tuple(self.led_buf[n * self.bpp + self.ORDER[i]] for i in range(self.bpp))
 
 	def fill(self, v):
-		b = self.buf
-		l = len(self.buf)
-		bpp = self.bpp
-		for i in range(bpp):
-			c = v[i] 
+		for i in range(self.bpp):
 			j = self.ORDER[i]
-			while j < l:
-				b[j] = c
-				j += bpp
+			while j < self.rgbs * self.bpp:
+				self.rgb_buf[j] = v[i]
+				j += self.bpp
 
 	def write(self):
-		if self.multiplex:
-			self.pin.init(self.pin.OUT)
-		bitstream(self.pin, 0, self.timing, self.buf)
-		if self.multiplex:
-			self.pin.init(self.pin.IN)
+		if self.multiplex: self.pin.init(self.pin.OUT)
+		bitstream(self.pin, 0, self.timing, self.rgb_buf + self.led_buf)
+		sleep(0.00001)
+		if self.multiplex: self.pin.init(self.pin.IN)
 
 	def color_chase(self,R, G, B, wait):
-		for i in range(self.n):
+		for i in range(self.rgbs):
 			self.__setitem__(i,(R, G, B))
 			self.write()
 			sleep(wait/1000)
 
-	def rainbow_cycle(self,wait):
+	def rainbow_cycle(self, wait, clear=True):
 		for j in range(255):
-			for i in range(self.n):
-				rc_index = (i * 256 // self.n) + j
+			for i in range(self.rgbs):
+				rc_index = (i * 256 // self.rgbs) + j
 				self.__setitem__(i,self.wheel(rc_index & 255))
 			self.write()
-			sleep(wait/1000/256)
-		self.fill((0, 0, 0))
-		self.write()
+			sleep(wait / 1000 / 256)
+		if clear:
+			self.fill((0, 0, 0)) 
+			self.write()
 
 	def wheel(self,pos):
 		if pos < 0 or pos > 255:

@@ -54,7 +54,7 @@ Interface.init = () => {
     });
 
     if (goog.isElectron) {
-        (function (window, document) {
+        (function(window, document) {
             var url = 'http://mixly.org/assets/app20.html';
             function detect() {
                 var iframes = document.getElementsByTagName('iframe');
@@ -74,8 +74,7 @@ Interface.init = () => {
             createIframe();
         })(window, document);
     } else {
-        var _hmt = _hmt || [];
-        (function () {
+        (function() {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?c06a333a8909f6abd97020e6e0929d60";
             var s = document.getElementsByTagName("script")[0];

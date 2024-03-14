@@ -2586,6 +2586,7 @@
         </statement>
       </block>
       <block type="ir_send_nec">
+        <field name="PIN">3</field>
         <value name="data">
           <shadow type="math_number">
             <field name="NUM">0x89ABCDEF</field>
@@ -2608,6 +2609,7 @@
         </value>
       </block>
       <block type="ir_send_raw">
+        <field name="PIN">3</field>
         <value name="length">
           <shadow type="math_number">
             <field name="NUM">3</field>
@@ -2974,7 +2976,7 @@
       <block type="blynk_server">
         <value name="server_add">
           <shadow type="text">
-            <field name="TEXT">blynk.mixly.org</field>
+            <field name="TEXT"></field>
           </shadow>
         </value>
         <value name="auth_key">

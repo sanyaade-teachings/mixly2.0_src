@@ -572,12 +572,16 @@ PyEngine.prototype.run = function(type) {
             engine.check(code, execution.trace(), execution.output(), execution.ast, module.$d);
             engine.executionEnd_();
             */
-            console.log('success');
             const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
                 statusBarTerminal.addValue('\n');
             }
-            statusBarTerminal.addValue('==程序运行完成==\n');
+            if (window.userOpEvents) {
+                window.userOpEvents.addRecord({
+                    operation: 'run-success'
+                });
+            }
+            statusBarTerminal.addValue(`==${Mixly.Msg.Lang['程序运行完成']}==\n`);
         },
         function(error) {
             engine.programStatus['running'] = false;
@@ -595,12 +599,17 @@ PyEngine.prototype.run = function(type) {
                 editor.hasMarker = true;
             }
             engine.executionEnd_();
-            console.log(error.toString());
             const nowValue = statusBarTerminal.getValue();
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
                 statusBarTerminal.addValue('\n');
             }
-            statusBarTerminal.addValue(error.toString() + '\n==程序运行完成==\n');
+            statusBarTerminal.addValue(error.toString() + '\n');
+            if (window.userOpEvents) {
+                window.userOpEvents.addRecord({
+                    operation: 'run-error'
+                });
+            }
+            statusBarTerminal.addValue(`==${Mixly.Msg.Lang['程序运行完成']}==\n`);
         }
 );
 

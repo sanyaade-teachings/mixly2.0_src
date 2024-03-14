@@ -2691,7 +2691,7 @@
     <block type="blynk_server">
       <value name="server_add">
         <shadow type="text">
-          <field name="TEXT">blynk.mixly.org</field>
+          <field name="TEXT"></field>
         </shadow>
       </value>
       <value name="auth_key">
@@ -2707,7 +2707,7 @@
           <
           <
           < HEAD
-          <field name="TEXT">blynk.mixly.org</field>
+          <field name="TEXT"></field>
           =======
           <field name="TEXT">wifi-ssid</field>
           >>>>>>> 99dec2be3373b98e44a30ad45c21ce3ebf67bbc0
@@ -2740,7 +2740,7 @@
     <block type="blynk_smartconfig">
       <value name="server_add">
         <shadow type="text">
-          <field name="TEXT">blynk.mixly.org</field>
+          <field name="TEXT"></field>
         </shadow>
       </value>
       <value name="auth_key">
@@ -2829,7 +2829,7 @@
     <block type="blynk_smartconfig">
       <value name="server_add">
         <shadow type="text">
-          <field name="TEXT">blynk.mixly.org</field>
+          <field name="TEXT"></field>
         </shadow>
       </value>
       <value name="auth_key">

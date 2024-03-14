@@ -31,8 +31,11 @@ ZhHans.MSG = {
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
+    catCC_G1:"CC G1",
+    catNova_G1:"Nova G1",
     catAIOT:"智能物联",
     catAIsensor:"MixGo AI传感器",
+    catAIsensor2:"MixGo AI车牌识别",
     catSensor: "传感器",
     catActuator: "执行器",
     catExternSensor: "外接传感",
@@ -2026,9 +2029,9 @@ ZhHans.MIXLY_ESP32_EXTERN_NEAR = "红外接近传感器";
 ZhHans.MIXLY_ESP32_INTERRUPT = "中断";
 ZhHans.MIXLY_ESP32_PITCH = "音高";
 ZhHans.MIXLY_ESP32_DUTY = "音调";
-ZhHans.MIXLY_ESP32_LIGHT = "获取光线传感器的值";
+ZhHans.MIXLY_ESP32_LIGHT = "获取光强传感器的值";
 ZhHans.MIXLY_ESP32_SOUND = "获取声音传感器的值";
-ZhHans.MIXLY_ESP32_EXTERN_LIGHT = "光线传感器";
+ZhHans.MIXLY_ESP32_EXTERN_LIGHT = "光强传感器";
 ZhHans.MIXLY_ESP32_EXTERN_SOUND = "声音传感器";
 ZhHans.MIXLY_ESP32_EXTERN_VALUE = "获取数值";
 ZhHans.MIXLY_ESP32_MONITOR_SCROLL = '滚动';
@@ -2184,7 +2187,7 @@ ZhHans.MIXLY_ESP32_NETWORK_SOCKET_RECEIVE_FROM_TOOLTIP = "利用UDP协议返回�
 ZhHans.MIXLY_ESP32_NETWORK_SOCKET_SEND_TO_TOOLTIP = "发送信息到指定的网络地址";
 ZhHans.MIXLY_ESP32_NETWORK_SOCKET_CLOSE_TOOLTIP = "关闭网络连接";
 ZhHans.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP = '返回';
-ZhHans.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP = '返回光线传感器的值（0~65535）';
+ZhHans.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP = '返回光强传感器的值（0~65535）';
 ZhHans.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP = '返回声音传感器的值（0~65535）';
 ZhHans.MIXLY_MICROBIT_SENSOR_BMP_temperature_TOOLTIP = "获取温度（-45~+85℃)";
 ZhHans.MIXLY_MICROBIT_SENSOR_BMP_press_TOOLTIP = "获取大气压强（0~20000hPa)";
@@ -2472,7 +2475,7 @@ ZhHans.MixGo_MPU9250 = '加速度传感器';
 ZhHans.MIXLY_HANBIT_SHOW_CIRCLE = " 圆心(x %1 ,y %2 ) 半径 %3 %4 填充 %5";
 ZhHans.MIXLY_HANBIT_SHOW_triangle = " 顶点(x0 %1 ,y0 %2 ) (x1 %3 ,y1 %4 ) (x2 %5 ,y2 %6 ) %7 填充 %8";
 ZhHans.MIXLY_HANBIT_DRAW_TRIANGLE = "三角形";
-ZhHans.MICROBIT_SENSOR_LIGHT_TOOLTIP = '返回光线传感器的值（0~255）';
+ZhHans.MICROBIT_SENSOR_LIGHT_TOOLTIP = '返回光强传感器的值（0~255）';
 ZhHans.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_HELPURL = '';
 ZhHans.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_MESSAGE0 = '自定义终端部件 Terminal 虚拟管脚 V %1';
 ZhHans.MPYTHON_BLYNK_TERMINAL_WIDGET_VPIN_TOOLTIP = '';
@@ -2515,7 +2518,7 @@ ZhHans.MPYTHON_BLYNK_SENSOR_DATA_TO_APP_TOOLTIP = '虚拟管脚：V0 ~ V255';
 ZhHans.MPYTHON_BLYNK_APP_DATA_TOOLTIP = '收到虚拟管脚的值后执行一些语句';
 ZhHans.MPYTHON_BLYNK_SETUP_HELPURL = '';
 ZhHans.MPYTHON_BLYNK_SETUP_MESSAGE0 = 'Blynk 设置 %1 服务器 %2 端口 %3 授权码 %4';
-ZhHans.MPYTHON_BLYNK_SETUP_TOOLTIP = '服务器默认为 blynk.mixly.org，端口默认为 8080，授权码默认为 AUTH TOKEN';
+ZhHans.MPYTHON_BLYNK_SETUP_TOOLTIP = '服务器默认为 ，端口默认为 8080，授权码默认为 AUTH TOKEN';
 ZhHans.MPYTHON_BLYNK_APP_DATA_HELPURL = '';
 ZhHans.MPYTHON_BLYNK_APP_DATA_MESSAGE0 = '当 从 Blynk App 收到 虚拟管脚 V %1 的值 %2';
 ZhHans.MIXLY_readTempC = '获取摄氏度';
@@ -3704,5 +3707,61 @@ ZhHans.weather_solo = '分体式气象站';
 ZhHans.MIXLY_ABBR = '缩写';
 ZhHans.MIXLY_ACCUMULATED = '累积';
 ZhHans.MIXLY_AVERAGE = '平均';
-
+ZhHans.MIXLY_AI_SENSOR_LICENSEPLATE_RECOGNTITION_TOOLTIP = '使用MixGo AI摄像头识别车牌，返回包含所有识别结果对象的列表';
+ZhHans.MIXLY_AI_SENSOR_LICENSEPLATE_TOOLTIP = '获取车牌对象的相应信息';
+ZhHans.MIXLY_LICENSEPLATE = '车牌';
+ZhHans.MIXLY_FACE = '人脸';
+ZhHans.MIXLY_FACE_CLASSIFIER = '人脸检测';
+ZhHans.MIXLY_AI_SENSOR_FACE_TOOLTIP = '获取人脸对象的相应信息';
+ZhHans.MIXLY_AI_SENSOR_BAR_FACE_CLASSIFIER_TOOLTIP = '使用MixGo AI摄像头检测人脸，返回包含所有识别结果对象的列表';
+ZhHans.MIXLY_20OBJECTS = '20物体';
+ZhHans.MIXLY_FIND_20OBJECTS = '20物体识别';
+ZhHans.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = '获取20物体对象的相应信息';
+ZhHans.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = '使用MixGo AI摄像头检测20物体，返回包含所有识别结果对象的列表';
+ZhHans.MIXLY_BUTTON = '按键';
+ZhHans.WHETHER_IS_PRESSED = '是否被按着';
+ZhHans.MIXLY_GET_BATTERY = '获取电池电量（v）';
+ZhHans.MIXLY_GET_JOYSTICK = '获取摇杆';
+ZhHans.MIXLY_HANDLE_SHUTDOWN ='设置手柄关机';
+ZhHans.MIXLY_ESP32_EXTERN_GRAY_NEAR = "红外灰度传感器";
+ZhHans.PIN_NUMBERING = '端口';
+ZhHans.MIXLY_LIGHT_OFF = '不亮';
+ZhHans.MIXLY_LIGHT_RED = '红';
+ZhHans.MIXLY_LIGHT_GREEN = '绿';
+ZhHans.MIXLY_LIGHT_BLUE = '蓝';
+ZhHans.MIXLY_LIGHT_YELLOW = '黄';
+ZhHans.MIXLY_LIGHT_CYAN = '青';
+ZhHans.MIXLY_LIGHT_PURPLE = '紫';
+ZhHans.MIXLY_LIGHT_WHITE = '白';
+ZhHans.MIXLY_EXTERN_LIGHTUV = '环境光传感器';
+ZhHans.MIXLY_GET_ENV_LIGHT = '获取环境光';
+ZhHans.MIXLY_GET_ULTRAVIOLET = '获取紫外线强度';
+ZhHans.LOGIC_OPERATION_NOR = '同或';
+ZhHans.LOGIC_OPERATION_XOR = '异或';
+ZhHans.LOGIC_OPERATION_TOOLTIP_NOR = "如果两个输入结果相同，则返回真；如果两个输入结果不同，则返回假";
+ZhHans.LOGIC_OPERATION_TOOLTIP_XOR = "如果两个输入结果不同，则返回真；如果两个输入结果相同，则返回假";
+ZhHans.MIXLY_MIXGO_NOVA_POTENTIAL_NUM = "获取电位器数值";
+ZhHans.MIXLY_POWER_SUPPLY  = "供电量";
+ZhHans.SET_USB = "设置USB2.0接口";
+ZhHans.MIXLY_SPK_STATE = "设置喇叭使能";
+ZhHans.MIXLY_IR_INPUT1 = "NEC_8";
+ZhHans.MIXLY_IR_INPUT2 = "NEC_16";
+ZhHans.MIXLY_IR_INPUT3 = "NEC_other";
+ZhHans.MIXlY_RECV_FUN = "红外接收";
+ZhHans.MILY_PAUSE = "暂停";
+ZhHans.MIXLY_RECOVER = "恢复";
+ZhHans.MIXLY_IR_SEND_samsung1 = "NEC";
+ZhHans.MIXLY_IR_SEND_samsung2 = "Samsung";
+ZhHans.MIXLY_TR_SEND_RC = "RC5";
+ZhHans.MIXLY_INTERNAL_VARIABLE = "变量";
+ZhHans.MIXLY_IR_SEND = "红外发射";
+ZhHans.MIXLY_CONTROL = "控制位";
+ZhHans.MIXLY_TRANSMIT_CONVEN_DATA = "当类型为NEC/Samsung时，命令码范围为0~255、地址码范围为0~65535、控制位包含-1，0，1；当类型为RC5时，命令码范围为0~63、地址码范围为0~31、控制位包含0，1";
+ZhHans.MIXLY_IR_TRANSMIT_DONE = "红外发射 是否发送完毕";
+ZhHans.MIXLY_IR_CMD_CODE = "命令码";
+ZhHans.MIXLY_IR_ADDR_CODE = "地址码";
+ZhHans.MIXLY_IR_RAW_CODE = "原始码";
+ZhHans.MIXLY_IR_PULSE = "脉冲数组";
+ZhHans.MIXLY_IR_WHETHER_RECV = "是否有新数据";
+ZhHans.MIXLY_IR_TIMEOUT = "超时";
 })();

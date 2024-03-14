@@ -32,8 +32,11 @@ En.MSG = {
     catME_G1:"ME G1",
     catPE_G1:"PE G1",
     catCE_G6:"CE G6",
+    catCC_G1:"CC G1",
+    catNova_G1:"Nova G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
+    catAIsensor2:"MixGo AI LPR",
     catSensor: "Sensor",
     catActuator: "Actuator",
     catExternSensor: "External Sensor",
@@ -3557,5 +3560,63 @@ En.weather_solo = 'Split-type Weather Station';
 En.MIXLY_ABBR = 'abbreviation';
 En.MIXLY_ACCUMULATED = 'accumulate';
 En.MIXLY_AVERAGE = 'average';
+En.MIXLY_AI_SENSOR_LICENSEPLATE_RECOGNTITION_TOOLTIP = 'Use MixGo AI sensor to recognize license plates and return a list containing all recognition result objects';
+En.MIXLY_AI_SENSOR_LICENSEPLATE_TOOLTIP = 'Obtain the corresponding information of the license plate object';
+En.MIXLY_LICENSEPLATE = 'License Plate';
+En.MIXLY_FACE = 'Face';
+En.MIXLY_FACE_CLASSIFIER = 'Face detection';
+En.MIXLY_AI_SENSOR_FACE_TOOLTIP = 'Obtain corresponding information of face objects';
+En.MIXLY_AI_SENSOR_BAR_FACE_CLASSIFIER_TOOLTIP = 'Use MixGo AI sensor to detect faces and return a list of objects containing all recognition results';
+En.MIXLY_20OBJECTS = '20 objects';
+En.MIXLY_FIND_20OBJECTS = '20 object recognition';
+En.MIXLY_AI_SENSOR_20OBJECTS_TOOLTIP = 'Obtain the corresponding information of 20 objects';
+En.MIXLY_AI_SENSOR_BAR_FIND_20OBJECTS_TOOLTIP = 'Use MixGo AI sensor to detect 20 objects and return a list containing all recognition result objects';
+En.MIXLY_BUTTON = 'button';
+En.WHETHER_IS_PRESSED = 'whether be held down';
+En.MIXLY_GET_BATTERY = 'get battery power（v）';
+En.MIXLY_GET_JOYSTICK = 'get the value of Joystick';
+En.MIXLY_HANDLE_SHUTDOWN ='set handle off';
+En.MIXLY_ESP32_EXTERN_GRAY_NEAR = "Infrared grayscale sensor";
+En.PIN_NUMBERING = 'Port';
+En.MIXLY_LIGHT_OFF = 'Light off';
+En.MIXLY_LIGHT_RED = 'Red';
+En.MIXLY_LIGHT_GREEN = 'Green';
+En.MIXLY_LIGHT_BLUE = 'Blue';
+En.MIXLY_LIGHT_YELLOW = 'Yellow';
+En.MIXLY_LIGHT_CYAN = 'Cyan';
+En.MIXLY_LIGHT_PURPLE = 'Purple';
+En.MIXLY_LIGHT_WHITE = 'White';
+En.MIXLY_EXTERN_LIGHTUV = 'Ambient light sensor';
+En.MIXLY_GET_ENV_LIGHT = 'get ambient light';
+En.MIXLY_ESP32_EXTERN_LIGHT = 'light intensity sensor';
+En.MIXLY_GET_ULTRAVIOLET = 'get Ultraviolet intensity';
+En.LOGIC_OPERATION_NOR = 'NAND';
+En.LOGIC_OPERATION_XOR = 'NOR';
+En.LOGIC_OPERATION_TOOLTIP_NOR = "Return true if the input results are the same, false if the two input results are different";
+En.LOGIC_OPERATION_TOOLTIP_XOR = "Return true if the input results are different, false if the two input results are the same";
+En.MIXLY_MIXGO_NOVA_POTENTIAL_NUM = "Get the potentiometer number";
+En.MIXLY_POWER_SUPPLY  = "power supply";
+En.SET_USB = "set the USB2.0 interface";
+En.MIXLY_SPK_STATE = "set the horn function";
+En.MIXLY_IR_INPUT1 = "NEC_8";
+En.MIXLY_IR_INPUT2 = "NEC_16";
+En.MIXLY_IR_INPUT3 = "NEC_other";
+En.MIXlY_RECV_FUN = "IRreceive";
+En.MILY_PAUSE = "Pause";
+En.MIXLY_RECOVER = "Recover";
+En.MIXLY_IR_SEND_samsung1 = "NEC";
+En.MIXLY_IR_SEND_samsung2 = "Samsung";
+En.MIXLY_TR_SEND_RC = "RC5";
+En.MIXLY_INTERNAL_VARIABLE = "variable";
+En.MIXLY_IR_SEND = "IRsend";
+En.MIXLY_CONTROL = "control bit";
+En.MIXLY_TRANSMIT_CONVEN_DATA = "While using NEC/Samsung，the range of command code is 0~255、the range of address code is 0~65535、the control bit includes -1，0，1；while using RC5，the range of command code is 0~63、the range of address code is 0~31、the control bit includes 0，1";
+En.MIXLY_IR_TRANSMIT_DONE = "whether the ir_transmission is Complete";
+En.MIXLY_IR_CMD_CODE = "command code";
+En.MIXLY_IR_ADDR_CODE = "address code";
+En.MIXLY_IR_RAW_CODE = "raw code";
+En.MIXLY_IR_PULSE = "pulses code";
+En.MIXLY_IR_WHETHER_RECV = "wheteher receive new data";
+En.MIXLY_IR_TIMEOUT = "timeout";
 
 })();

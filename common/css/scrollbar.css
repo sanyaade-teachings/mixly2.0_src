@@ -79,7 +79,7 @@ html[data-bs-theme=dark] body ::-webkit-scrollbar-thumb:active {
 /* 设置滚动条滑块 */
 html[data-bs-theme=light] .mixly-scrollbar ::-webkit-scrollbar-thumb {
     background-color: #C3C1C1;
-    border-radius: 4px;
+    border-radius: 1px;
 }
 
 html[data-bs-theme=light] .mixly-scrollbar ::-webkit-scrollbar-thumb:hover {
@@ -92,7 +92,7 @@ html[data-bs-theme=light] .mixly-scrollbar ::-webkit-scrollbar-thumb:active {
 
 html[data-bs-theme=dark] .mixly-scrollbar ::-webkit-scrollbar-thumb {
     background-color: #989998;
-    border-radius: 4px;
+    border-radius: 1px;
 }
 
 html[data-bs-theme=dark] .mixly-scrollbar ::-webkit-scrollbar-thumb:hover {

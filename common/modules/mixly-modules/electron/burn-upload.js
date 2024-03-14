@@ -5,10 +5,10 @@ goog.require('Mixly.Config');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
-goog.require('Mixly.MFile');
 goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Nav');
+goog.require('Mixly.Workspace');
 goog.require('Mixly.Electron.Serial');
 goog.provide('Mixly.Electron.BU');
 
@@ -18,10 +18,10 @@ const {
     LayerExt,
     Env,
     Boards,
-    MFile,
     MString,
     Msg,
-    Nav
+    Nav,
+    Workspace
 } = Mixly;
 
 const { BU, Serial } = Electron;
@@ -121,7 +121,10 @@ BU.checkNumOfDisks = function (type, stdout, startPath) {
                 if (type === 'burn') {
                     BU.copyFiles(type, index, startPath, result[0] + pathAdd + '/');
                 } else {
-                    fs_extra.outputFile(startPath, MFile.getCode())
+                    const mainWorkspace = Workspace.getMain();
+                    const editor = mainWorkspace.getEditorsManager().getActive();
+                    const code = editor.getCode();
+                    fs_extra.outputFile(startPath, code)
                     .then(() => {
                         BU.copyFiles(type, index, startPath, result[0] + pathAdd + '/');
                     })
@@ -161,8 +164,11 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { burn, upload } = SELECTED_BOARD;
     if (type === 'upload' && upload.copyLib) {
+        const mainWorkspace = Workspace.getMain();
+        const editor = mainWorkspace.getEditorsManager().getActive();
+        const code = editor.getCode();
         let startLibPath = path.dirname(upload.filePath);
-        let pyFileArr = BU.copyLib(startPath, MFile.getCode());
+        let pyFileArr = BU.copyLib(startPath, code);
         startPath = path.dirname(startPath);
     }
     // 如果需要拷贝的是文件，则在目的路径后要加上文件名
@@ -228,7 +234,10 @@ BU.initWithDropdownBox = function (type, startPath) {
             if (type === 'burn') {
                 BU.copyFiles(type, index, startPath, desPath);
             } else {
-                fs_extra.outputFile(startPath, MFile.getCode())
+                const mainWorkspace = Workspace.getMain();
+                const editor = mainWorkspace.getEditorsManager().getActive();
+                const code = editor.getCode();
+                fs_extra.outputFile(startPath, code)
                 .then(() => {
                     BU.copyFiles(type, index, startPath, desPath);
                 })
@@ -511,7 +520,9 @@ BU.uploadByCmd = async function (layerNum, port, command) {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { upload } = SELECTED_BOARD;
-    const code = MFile.getCode();
+    const mainWorkspace = Workspace.getMain();
+    const editor = mainWorkspace.getEditorsManager().getActive();
+    const code = editor.getCode();
     if (upload.copyLib) {
         BU.copyLib(upload.filePath, code);
     }

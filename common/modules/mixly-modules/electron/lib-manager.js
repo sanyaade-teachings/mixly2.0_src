@@ -8,7 +8,6 @@ goog.require('Mixly.CssLoader');
 goog.require('Mixly.Boards');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Config');
-goog.require('Mixly.Nav');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Electron.CloudDownload');
 goog.provide('Mixly.Electron.LibManager');
@@ -22,7 +21,6 @@ const {
     Boards,
     LayerExt,
     Config,
-    Nav,
     Msg
 } = Mixly;
 
@@ -252,7 +250,7 @@ LibManager.menuAddEvent = (layero) => {
         const mId = $this.attr('m-id');
         let importType, delType;
         if (menuStatus[1]) {
-            if (Nav.codeEnv === 'c') {
+            if (BOARD?.nav?.compile) {
                 importType = 'ARDUINO';
             } else {
                 importType = 'PYTHON';
@@ -261,7 +259,7 @@ LibManager.menuAddEvent = (layero) => {
             importType = 'MIXLY';
         }
         if (menuStatus[2]) {
-            if (Nav.codeEnv === 'c') {
+            if (BOARD?.nav?.compile) {
                 delType = 'ARDUINO';
             } else {
                 delType = 'PYTHON';
@@ -334,7 +332,7 @@ LibManager.showManageDialog = () => {
         importBoard: Msg.Lang['导入库'],
         delBoard: Msg.Lang['管理库'],
         mixlyLib: 'Mixly',
-        codeLib: Nav.codeEnv === 'c'? 'Arduino' : 'Python',
+        codeLib: BOARD?.nav?.compile? 'Arduino' : 'Python',
         cloudImport: Msg.Lang['云端导入'],
         localImport: Msg.Lang['本地导入'],
         openFolder: Msg.Lang['打开对应文件夹'],
@@ -463,7 +461,7 @@ LibManager.onclickImportLibs = () => {
         });
     }
     let codeLibPath, codeLibUrl;
-    if (Nav.codeEnv === 'c') {
+    if (BOARD?.nav?.compile) {
         codeLibPath = path.join(Env.boardDirPath, './libraries/myLib');
         codeLibUrl = LibManager.URL.arduino;
     } else {
@@ -545,7 +543,7 @@ LibManager.onclickManageLibs = () => {
     const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
     const arduinoLibPath = path.join(Env.boardDirPath, 'libraries/myLib');
     const pythonLibPath = path.join(Env.boardDirPath, 'build/lib');
-    let codeLibPath = Nav.codeEnv === 'c' ? arduinoLibPath : pythonLibPath;
+    let codeLibPath = BOARD?.nav?.compile ? arduinoLibPath : pythonLibPath;
     let needReadPathList = [{
         path: thirdPartyPath,
         tableConfig: mixlyTableConfig

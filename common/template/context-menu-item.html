@@ -1,20 +1,4 @@
-<style>
-    div[m-id="{{d.mId}}"] {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    div[m-id="{{d.mId}}"] > label {
-        cursor: pointer;
-    }
-
-    div[m-id="{{d.mId}}"] > div {
-        width: 20px;
-    }
-</style>
-<div m-id="{{d.mId}}">
+<div class="menu-line">
     <label>
         {{d.name}}
     </label>

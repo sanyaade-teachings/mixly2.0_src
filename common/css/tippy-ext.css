@@ -1,10 +1,10 @@
 html[data-bs-theme=light] .tippy-box {
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%);
+    border: 1px solid #bebebe;
     color: #000;
     border-radius: 0.25rem;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
 }
 
 html[data-bs-theme=light] .tippy-arrow {
@@ -12,20 +12,25 @@ html[data-bs-theme=light] .tippy-arrow {
 }
 
 html[data-bs-theme=dark] .tippy-box {
-    background-color: #353535;
+    background-color: #252525;
     background-clip: padding-box;
-    border: 1px solid rgba(255,255,255,.1);
-    box-shadow: 0 0.25rem 0.75rem rgb(255 255 255 / 10%);
+    border: 1px solid #454545;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 50%);
     color: #fff;
     border-radius: 0.25rem;
 }
 
 html[data-bs-theme=dark] .tippy-box .layui-layer-title {
-    background-color: #353535;
+    background-color: #252525;
 }
 
 html[data-bs-theme=dark] .tippy-arrow {
-    color: #353535;
+    color: #252525;
+}
+
+.tippy-content {
+    padding: 0;
+    margin: 0.3em;
 }
 
 .tippy-content .m-btn {

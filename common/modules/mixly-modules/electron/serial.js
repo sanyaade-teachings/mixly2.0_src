@@ -1756,8 +1756,7 @@ Serial.getMenu = (ports) => {
 Serial.addStatusbarTabExtFunc = () => {
     const { mainStatusBarTabs } = Mixly;
     
-    mainStatusBarTabs.bind('onSelectMenu', (event) => {
-        const port = $(event.currentTarget).attr('value');
+    mainStatusBarTabs.bind('onSelectMenu', (port) => {
         const portObj = Serial.portsOperator[port];
         Serial.connect(port, portObj.toolConfig.baudRates);
     });

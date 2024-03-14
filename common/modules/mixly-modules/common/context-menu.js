@@ -32,6 +32,9 @@ class ContextMenu {
                     && !item.preconditionFn($trigger)) {
                     continue;
                 }
+                if (item.children) {
+                    item.data.items = this.generate(item.children);
+                }
                 menuItems[item.type] = item.data;
             }
             return menuItems;
@@ -70,6 +73,10 @@ class ContextMenu {
         this.#menus_.reset();
         this.menu = null;
         this.selector = null;
+    }
+
+    show() {
+        $(this.selector).contextMenu();
     }
 
     hide() {

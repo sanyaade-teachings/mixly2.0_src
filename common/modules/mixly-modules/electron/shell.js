@@ -40,7 +40,7 @@ class Shell {
             for (let i in lines) {
                 let encoding = 'utf-8';
                 if (lines[i].indexOf('can\'t open device') !== -1) {
-                    encoding = Shell.ERROR_ENCODING;
+                    encoding = Shell.ENCODING;
                 }
                 lines[i] = iconv_lite.decode(Buffer.from(lines[i], 'binary'), encoding);
             }

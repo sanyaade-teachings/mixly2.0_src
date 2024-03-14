@@ -207,6 +207,11 @@
   margin: 0px 5px;
   border-radius: 5px;
   cursor: pointer;
+  white-space: nowrap;
+}
+
+.context-menu-item * {
+  cursor: pointer;
 }
 
 .context-menu-separator {
@@ -238,7 +243,7 @@
 
 .context-menu-input.context-menu-hover {
   color: #2f2f2f; 
-  cursor: default;
+  cursor: pointer;
 }
 
 .context-menu-submenu:after {
@@ -261,13 +266,13 @@
 /**
  * Inputs
  */
-.context-menu-item.context-menu-input {
+/*.context-menu-item.context-menu-input {
   padding: .3em .6em;
-}
+}*/
 
 /* vertically align inside labels */
 .context-menu-input > label > * {
-  vertical-align: top;
+  vertical-align: center;
 }
 
 /* position checkboxes and radios as icons */
@@ -329,4 +334,8 @@ html[data-bs-theme=dark] .context-menu-item.context-menu-hover {
 
 html[data-bs-theme=dark] .context-menu-separator {
   border-bottom: 1px solid #454545;
+}
+
+html[data-bs-theme=dark] .context-menu-submenu:after {
+  border-color: transparent transparent transparent #c1c1c1;
 }

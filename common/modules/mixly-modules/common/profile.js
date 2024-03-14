@@ -52,4 +52,6 @@ Profile.generate = function (pinMap, add1 = '', add2 = '') {
     return getPins(pinList);
 };
 
+window.profile = Profile;
+
 });

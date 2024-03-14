@@ -21,6 +21,90 @@ const {
 } = Mixly;
 
 
+/*monaco.editor.defineTheme("myCustomTheme", {
+    base: "vs-dark", // can also be vs-dark or hc-black
+    inherit: true, // can also be false to completely replace the builtin rules
+    rules: [
+        {
+            token: "comment",
+            foreground: "7f8c8d"
+        }, {
+            token: "storage",
+            foreground: "0ca1a6"
+        }, {
+            token: "support",
+            foreground: "0ca1a6"
+        }, {
+            token: "string.quoted.single",
+            foreground: "0ca1a6"
+        }, {
+            token: "meta.function",
+            foreground: "F39C12"
+        }, {
+            token: "entity.name.function",
+            foreground: "F39C12"
+        }, {
+            token: "meta.function-call",
+            foreground: "F39C12"
+        }, {
+            token: "variable.other",
+            foreground: "F39C12"
+        }, {
+            token: "punctuation.section",
+            foreground: "dae3e3"
+        }, {
+            token: "meta.function-call",
+            foreground: "dae3e3"
+        }, {
+            token: "meta.block",
+            foreground: "dae3e3"
+        }, {
+            token: "meta.function",
+            foreground: "dae3e3"
+        }, {
+            token: "variable",
+            foreground: "dae3e3"
+        }, {
+            token: "variable.name",
+            foreground: "dae3e3"
+        }, {
+            token: "entity.name.function.preprocessor",
+            foreground: "569CD6"
+        }, {
+            token: "meta.preprocessor.macro",
+            foreground: "569CD6"
+        }, {
+            token: "string.quoted.double",
+            foreground: "7fcbcd"
+        }, {
+            token: "string.quoted.other.lt-gt",
+            foreground: "7fcbcd"
+        }, {
+            token: "constant",
+            foreground: "7fcbcd"
+        }, {
+            token: "keyword.control",
+            foreground: "C586C0"
+        }, {
+            token: "meta.preprocessor",
+            foreground: "C586C0"
+        }, {
+            token: "meta.preprocessor.macro",
+            foreground: "434f54"
+        }, {
+            token: "constant.numeric.preprocessor",
+            foreground: "434f54"
+        }, {
+            token: "meta.preprocessor.macro",
+            foreground: "434f54"
+        }
+    ],
+    colors: {
+        "editor.foreground": "#dae3e3",
+    },
+});*/
+
+
 class EditorMonaco extends EditorBase {
     static {
         HTMLTemplate.add(
@@ -186,6 +270,7 @@ class EditorMonaco extends EditorBase {
         const editor = EditorMonaco.getEditor();
         editor.updateOptions({
             theme: `vs-${mode}`
+            // theme: 'myCustomTheme'
         });
     }
 

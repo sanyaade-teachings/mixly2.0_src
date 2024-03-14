@@ -58,10 +58,11 @@ MFile.updateSaveFilters = (config, priority = null) => {
     for (let i of config)
         if (MFile.SAVE_FILTER_TYPE[i] && !saveFilterType.includes(i)) {
             saveFilterType.push(i);
-            if (i === priority)
+            if (i === priority) {
                 MFile.saveFilters.unshift(MFile.SAVE_FILTER_TYPE[i]);
-            else
+            } else {
                 MFile.saveFilters.push(MFile.SAVE_FILTER_TYPE[i]);
+            }
         }
 }
 

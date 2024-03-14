@@ -24,6 +24,7 @@
 @import "./jstree/default-dark/style.css";
 @import "./jstree/jstree-ext.css";
 @import "./jquery.contextMenu.css";
+@import "./menu.css";
 @import "./markdown/github-markdown.css";
 @import "./markdown/github-markdown-light.css";
 @import "./markdown/github-markdown-dark.css";

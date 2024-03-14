@@ -84,8 +84,7 @@ class Serial {
         const { mainStatusBarTabs } = Mixly;
         const { events } = mainStatusBarTabs;
 
-        events.bind('onSelectMenu', (event) => {
-            const port = $(event.currentTarget).attr('value');
+        events.bind('onSelectMenu', (port) => {
             const serial = new this(port, {});
             serial.open();
         });

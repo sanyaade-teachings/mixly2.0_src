@@ -2,21 +2,19 @@ goog.loadJs('common', () => {
 
 goog.require('path');
 goog.require('layui');
-goog.require('Mixly.MFile');
 goog.require('Mixly.Title');
-goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Debug');
+goog.require('Mixly.Workspace');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.FooterLayer');
 goog.provide('Mixly.FooterLayerExample');
 
 const {
-    MFile,
     Title,
-    XML,
     Env,
     Debug,
+    Workspace,
     HTMLTemplate,
     FooterLayer
 } = Mixly;
@@ -69,46 +67,17 @@ class FooterLayerExample extends FooterLayer {
     }
 
     // 可覆盖
-    getRoot() {
-
-    }
+    getRoot() {}
 
     // 可覆盖
-    getChildren(inPath) {
-
-    }
+    getChildren(inPath) {}
 
     // 可覆盖
-    dataToWorkspace(inPath) {
+    dataToWorkspace(inPath) {}
 
-    }
-
-    updateCode(extname, data) {
-        switch (extname) {
-        case '.mix':
-        case '.xml':
-            try {
-                data = XML.convert(data, true);
-                data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
-                    return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
-                });
-            } catch (error) {
-                Debug.error(error);
-            }
-            // 如果当前在代码区则先切换到模块区
-            if (Editor.selected === 'CODE') {
-                Editor.mainEditor.drag.full('POSITIVE');
-            }
-            MFile.parseMix($(data), false, false, (message) => {
-                Editor.blockEditor.scrollCenter();
-                Blockly.hideChaff();
-            });
-            break;
-        case '.ino':
-        case '.py':
-            editor.setValue(data, -1);
-            break;
-        }
+    updateCode(ext, data) {
+        const editorMix = Workspace.getMain().getEditorsManager().getActive();
+        editorMix.setValue(data, ext);
         Title.updateTitle(Title.title);
     }
 }

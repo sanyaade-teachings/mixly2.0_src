@@ -19,7 +19,10 @@
             "Mixly.Component",
             "Mixly.Electron.Loader",
             "Mixly.Electron.FS",
-            "Mixly.Web.FS"
+            "Mixly.Electron.File",
+            "Mixly.Electron.LibManager",
+            "Mixly.Web.FS",
+            "Mixly.Web.File"
         ],
         "provide": [
             "Mixly.App"
@@ -210,6 +213,15 @@
         ]
     },
     {
+        "path": "/common/editor-code-segment.js",
+        "require": [
+            "Mixly.EditorBase"
+        ],
+        "provide": [
+            "Mixly.EditorCodeSegment"
+        ]
+    },
+    {
         "path": "/common/editor-code.js",
         "require": [
             "ace",
@@ -264,6 +276,7 @@
             "Mixly.Debug",
             "Mixly.Menu",
             "Mixly.Boards",
+            "Mixly.MJSON",
             "Mixly.HTMLTemplate",
             "Mixly.EditorBlockly",
             "Mixly.EditorCode",
@@ -424,11 +437,10 @@
         "require": [
             "path",
             "layui",
-            "Mixly.MFile",
             "Mixly.Title",
-            "Mixly.XML",
             "Mixly.Env",
             "Mixly.Debug",
+            "Mixly.Workspace",
             "Mixly.HTMLTemplate",
             "Mixly.FooterLayer"
         ],
@@ -877,7 +889,9 @@
             "Mixly.HTMLTemplate",
             "Mixly.StatusBarTerminal",
             "Mixly.StatusBarSerial",
-            "Mixly.PagesManager"
+            "Mixly.PagesManager",
+            "Mixly.ContextMenu",
+            "Mixly.Menu"
         ],
         "provide": [
             "Mixly.StatusBarsManager"
@@ -1018,10 +1032,10 @@
             "Mixly.LayerExt",
             "Mixly.Env",
             "Mixly.Boards",
-            "Mixly.MFile",
             "Mixly.MString",
             "Mixly.Msg",
             "Mixly.Nav",
+            "Mixly.Workspace",
             "Mixly.Electron.Serial"
         ],
         "provide": [
@@ -1086,6 +1100,7 @@
             "Mixly.MFile",
             "Mixly.XML",
             "Mixly.Msg",
+            "Mixly.Workspace",
             "Mixly.Electron.ArduShell",
             "Mixly.Electron.BU"
         ],
@@ -1131,7 +1146,6 @@
             "Mixly.Boards",
             "Mixly.LayerExt",
             "Mixly.Config",
-            "Mixly.Nav",
             "Mixly.Msg",
             "Mixly.Electron.CloudDownload"
         ],

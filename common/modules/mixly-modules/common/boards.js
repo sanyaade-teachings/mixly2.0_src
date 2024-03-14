@@ -113,7 +113,7 @@ Boards.setSelectedBoard = (name, userConfig) => {
 
 Boards.getSelectedBoardConfig = () => {
     const boardName = Boards.getSelectedBoardName();
-    return Boards.dict[boardName]?.selectedOptions ?? null;
+    return Boards.dict[boardName]?.selectedOptions ?? {};
 }
 
 Boards.getSelectedBoardCommandParam = () => {

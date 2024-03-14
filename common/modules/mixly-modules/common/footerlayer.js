@@ -19,7 +19,9 @@ class FooterLayer {
             interactive: true,
             hideOnClick: false,
             maxWidth: 'none',
-            offset: [ 0, 6 ]
+            offset: [ 0, 6 ],
+            delay: 0,
+            duration: [ 0, 0 ]
         };
     }
 

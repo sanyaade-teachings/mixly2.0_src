@@ -54,6 +54,15 @@ class Menu {
         }
     }
 
+    empty() {
+        this.#ids_ = {};
+        this.#menuItems_ = [];
+    }
+
+    getItem(id) {
+        return this.#ids_[id] ?? null;
+    }
+
     getAllItems() {
         return this.#menuItems_;
     }

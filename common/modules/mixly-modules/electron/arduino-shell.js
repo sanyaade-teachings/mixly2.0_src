@@ -248,11 +248,11 @@ ArduShell.initUpload = () => {
     const uploadType = Boards.getSelectedBoardConfigParam('upload_method');
     let port = Serial.getSelectedPortName();
     switch (uploadType) {
-        case 'STLinkMethod':
-        case 'jlinkMethod':
-        case 'usb':
-            port = 'None';
-            break;
+    case 'STLinkMethod':
+    case 'jlinkMethod':
+    case 'usb':
+        port = 'None';
+        break;
     }
     if (port) {
         Serial.portClose(port, () => {
@@ -277,7 +277,7 @@ ArduShell.upload = (boardType, port) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     statusBarTerminal.setValue('');
-    mainStatusBarTabs.changeTo("output");
+    mainStatusBarTabs.changeTo('output');
     const layerNum = layer.open({
         type: 1,
         title: Msg.Lang["上传中"] + "...",
@@ -322,10 +322,11 @@ ArduShell.upload = (boardType, port) => {
         ArduShell.binFilePath = '';
     } else {
         let myLibPath = path.join(Env.boardDirPath, "/libraries/myLib/");
-        if (fs_plus.isDirectorySync(myLibPath))
+        if (fs_plus.isDirectorySync(myLibPath)) {
             myLibPath += '\",\"';
-        else
+        } else {
             myLibPath = '';
+        }
         const thirdPartyPath = path.join(Env.boardDirPath, 'libraries/ThirdParty');
         if (fs_plus.isDirectorySync(thirdPartyPath)) {
             const libList = fs.readdirSync(thirdPartyPath);

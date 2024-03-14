@@ -17,7 +17,10 @@ goog.require('Mixly.Debug');
 goog.require('Mixly.Component');
 goog.require('Mixly.Electron.Loader');
 goog.require('Mixly.Electron.FS');
+goog.require('Mixly.Electron.File');
+goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Web.FS');
+goog.require('Mixly.Web.File');
 goog.provide('Mixly.App');
 
 const {
@@ -38,10 +41,12 @@ const {
     Component
 } = Mixly;
 const { Loader } = Electron;
-const { FS } = goog.isElectron? Electron : Web;
+const { FS, File, LibManager } = goog.isElectron? Electron : Web;
 const { BOARD } = Config;
 
 const { layer } = layui;
+
+const electron = Mixly.require('electron');
 
 
 class App extends Component {
@@ -126,7 +131,7 @@ class App extends Component {
             weight: 1
         });
 
-        const leftSideBarOption = Nav.register({
+        /*const leftSideBarOption = Nav.register({
             icon: 'codicon-layout-sidebar-left-off',
             title: '操作左侧边栏',
             id: 'left-sidebar-btn',
@@ -206,7 +211,7 @@ class App extends Component {
             }
             $a.removeClass('codicon-layout-sidebar-right-off');
             $a.addClass('codicon-layout-sidebar-right');
-        });
+        });*/
 
         const bottomSideBarOption = Nav.register({
             icon: 'codicon-layout-panel-off',
@@ -247,6 +252,130 @@ class App extends Component {
             }
             $a.removeClass('codicon-layout-panel-off');
             $a.addClass('codicon-layout-panel');
+        });
+
+        Nav.register({
+            id: 'file',
+            displayText: '文件',
+            preconditionFn: () => {
+                return goog.isElectron;
+            },
+            scopeType: Nav.Scope.RIGHT,
+            weight: 1
+        });
+
+        Nav.register({
+            icon: 'icon-doc-new',
+            id: ['file', 'new-file'],
+            displayText: '新建',
+            preconditionFn: () => {
+                return true;
+            },
+            callback: () => File.new(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 1
+        });
+
+        Nav.register({
+            icon: 'icon-doc',
+            id: ['file', 'open-file'],
+            displayText: '打开',
+            preconditionFn: () => {
+                return true;
+            },
+            callback: (elem) => File.open(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 2
+        });
+
+        Nav.register({
+            id: ['file', 'hr'],
+            scopeType: Nav.Scope.RIGHT,
+            weight: 3
+        });
+
+        Nav.register({
+            icon: 'icon-floppy',
+            id: ['file', 'save-file'],
+            displayText: '保存',
+            preconditionFn: () => {
+                return true;
+            },
+            callback: (elem) => File.save(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 4
+        });
+
+        Nav.register({
+            icon: 'icon-save-as',
+            id: ['file', 'save-as-file'],
+            displayText: '另存为',
+            preconditionFn: () => {
+                return true;
+            },
+            callback: () => File.saveAs(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 5
+        });
+
+        Nav.register({
+            id: ['file', 'hr'],
+            scopeType: Nav.Scope.RIGHT,
+            weight: 6
+        });
+
+        Nav.register({
+            icon: 'icon-export',
+            id: ['file', 'export-file'],
+            displayText: '导出库',
+            preconditionFn: () => {
+                return goog.isElectron;
+            },
+            callback: (elem) => File.exportLib(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 7
+        });
+
+        Nav.register({
+            id: 'setting',
+            displayText: '设置',
+            preconditionFn: () => {
+                return goog.isElectron;
+            },
+            scopeType: Nav.Scope.RIGHT,
+            weight: 1
+        });
+
+        Nav.register({
+            icon: 'icon-menu',
+            id: ['setting', 'manage-libs'],
+            displayText: '管理库',
+            preconditionFn: () => {
+                return goog.isElectron;
+            },
+            callback: () => LibManager.showManageDialog(),
+            scopeType: Nav.Scope.RIGHT,
+            weight: 1
+        });
+
+        Nav.register({
+            icon: 'icon-comment-1',
+            id: ['setting', 'feedback'],
+            displayText: '反馈',
+            preconditionFn: () => {
+                return true;
+            },
+            callback: (elem) => {
+                const href = 'https://gitee.com/mixly2/mixly2.0_src/issues';
+                if (goog.isElectron) {
+                    const { shell } = electron;
+                    shell.openExternal(href);
+                } else {
+                    window.open(href, '_blank');
+                }
+            },
+            scopeType: Nav.Scope.RIGHT,
+            weight: 2
         });
     }
 
@@ -308,9 +437,9 @@ class App extends Component {
                         layer.close(index);
                     },
                     success: (layero) => {
-                        const $close = layero.children('.layui-layer-setwin').children('.layui-layer-close');
-                        $close.removeClass('layui-layer-close2');
-                        $close.addClass('layui-layer-close1');
+                        const { classList } = layero[0].childNodes[1].childNodes[0];
+                        classList.remove('layui-layer-close2');
+                        classList.add('layui-layer-close1');
                     }
                 });
             }

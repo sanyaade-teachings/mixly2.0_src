@@ -10,6 +10,8 @@ goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.StatusBarTerminal');
 goog.require('Mixly.StatusBarSerial');
 goog.require('Mixly.PagesManager');
+goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Menu');
 goog.provide('Mixly.StatusBarsManager');
 
 const {
@@ -21,7 +23,9 @@ const {
     HTMLTemplate,
     StatusBarTerminal,
     StatusBarSerial,
-    PagesManager
+    PagesManager,
+    ContextMenu,
+    Menu
 } = Mixly;
 
 class StatusBarsManager extends PagesManager {
@@ -63,6 +67,7 @@ class StatusBarsManager extends PagesManager {
     #$btn_ = null;
     #shown_ = false;
     #$menu_ = null;
+    #tabMenu_ = null;
 
     constructor(element) {
         const managerHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-manager.html');
@@ -77,6 +82,7 @@ class StatusBarsManager extends PagesManager {
             tabContentElem: $tab[0],
             typesRegistry: StatusBarsManager.typesRegistry
         });
+        this.tabId = tabHTMLTemplate.id;
         this.id = managerHTMLTemplate.id;
         this.#$btn_ = $tab.find('.operation > button');
         this.addEventsType(['show', 'hide', 'onSelectMenu', 'getMenu']);
@@ -109,24 +115,129 @@ class StatusBarsManager extends PagesManager {
     }
 
     #addMenuBtn_() {
+        this.#tabMenu_ = new ContextMenu(`div[m-id="${this.tabId}"] .layui-btn`, {
+            trigger: 'none',
+            position: (opt) => {
+                opt.$menu.css({
+                    top: 0,
+                    left: 0,
+                    position: 'relative',
+                    margin: 0
+                });
+            },
+            events: {
+                show: (opt) => {
+                    opt.$menu.detach();
+                    $('.statusbar-tab-menu > .tippy-box > .tippy-content').empty().append(opt.$menu);
+                    this.#$menu_.setProps({});
+                    this.#tabMenu_.shown = true;
+                },
+                hide: (opt) => {
+                    this.#tabMenu_.shown = false;
+                    if (this.#$menu_.state.isShown) {
+                        this.#$menu_.hide();
+                    }
+                }
+            }
+        });
+
+        let menu = new Menu();
+        let serialChildMenu = new Menu();
+        let toolChildMenu = new Menu();
+        menu.add({
+            weight: 0,
+            type: 'serial',
+            children: serialChildMenu,
+            data: {
+                isHtmlName: true,
+                name: '打开串口'
+            }
+        });
+        menu.add({
+            weight: 1,
+            type: 'sep1',
+            data: '---------'
+        });
+        menu.add({
+            weight: 2,
+            type: 'tool',
+            children: toolChildMenu,
+            data: {
+                isHtmlName: true,
+                name: '工具',
+                callback: (key, opt) => console.log(123)
+            }
+        });
+        toolChildMenu.add({
+            weight: 0,
+            type: 'ampy-filesystem-tool',
+            data: {
+                isHtmlName: true,
+                name: 'Ampy板卡文件系统管理',
+                callback: (key, opt) => console.log(123)
+            }
+        });
+        toolChildMenu.add({
+            weight: 1,
+            type: 'esptool-filesystem-tool',
+            data: {
+                isHtmlName: true,
+                name: 'ESPTool板卡文件系统管理',
+                callback: (key, opt) => console.log(123)
+            }
+        });
+        
+        this.#tabMenu_.register('code', menu);
+        this.#tabMenu_.bind('getMenu', () => 'code');
+
         this.#$menu_ = tippy(this.#$btn_[0], {
             allowHTML: true,
             content: '',
             trigger: 'click',
             interactive: true,
             maxWidth: 'none',
-            offset: [ 0, 6 ],
+            offset: [ 0, 0 ],
             appendTo: document.body,
+            arrow: false,
+            placement: 'bottom-start',
+            delay: 0,
+            duration: [ 0, 0 ],
+            onCreate: (instance) => {
+                $(instance.popper).addClass('statusbar-tab-menu');
+            },
             onMount: (instance) => {
                 let options = this.#getMenu_() ?? {};
                 options.list = options.list ?? [];
                 options.empty = options.empty ?? Msg.Lang['无选项'];
-                const menuHTMLTemplate = HTMLTemplate.get('statusbar/statusbar-manager-menu.html');
-                instance.setContent(menuHTMLTemplate.render(options));
-                $(instance.popper).find('li').off().click((event) => {
-                    this.#onSelectMenu_(event);
-                    this.#$menu_.hide(100);
-                });
+                serialChildMenu.empty();
+                if (!options.list.length) {
+                    serialChildMenu.add({
+                        weight: 1,
+                        type: 'empty',
+                        data: {
+                            isHtmlName: true,
+                            name: options.empty,
+                            disabled: true
+                        }
+                    });
+                }
+                for (let i in options.list) {
+                    serialChildMenu.add({
+                        weight: 1,
+                        type: `serial${i}`,
+                        data: {
+                            isHtmlName: true,
+                            name: options.list[i],
+                            callback: (key, opt) => this.#onSelectMenu_(options.list[i])
+                        }
+                    });
+                }
+                this.#tabMenu_.show();
+            },
+            onHide: () => {
+                if (this.#tabMenu_.shown) {
+                    this.#tabMenu_.hide();
+                }
             }
         });
     }

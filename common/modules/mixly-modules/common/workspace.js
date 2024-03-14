@@ -158,7 +158,7 @@ class Workspace extends Component {
             this.resize();
         });
 
-        // 侧边栏(左)+[编辑器(上)+状态栏(下)]
+        /*// 侧边栏(左)+[编辑器(上)+状态栏(下)]
         this.dragVLeft = new DragV(this.#$dragVLeft_[0], {
             min: '100px',
             full: [true, false],
@@ -180,7 +180,7 @@ class Workspace extends Component {
 
         this.dragVRight.bind('sizeChanged', () => {
             this.resize();
-        });
+        });*/
     }
 
     getEditorsManager() {

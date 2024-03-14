@@ -15,6 +15,7 @@ goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Menu');
 goog.require('Mixly.Boards');
+goog.require('Mixly.MJSON');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.EditorCode');
@@ -36,6 +37,7 @@ const {
     Debug,
     Menu,
     Boards,
+    MJSON,
     HTMLTemplate,
     LayerExt
 } = Mixly;
@@ -118,6 +120,20 @@ class EditorMix extends EditorBase {
         let blockMenu = new Menu();
         blockMenu.add({
             weight: 0,
+            type: 'copy',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['复制'], 'Ctrl+C'),
+                callback: (key, opt) => codePage.copy()
+            }
+        });
+        blockMenu.add({
+            weight: 1,
+            type: 'sep1',
+            data: '---------'
+        });
+        blockMenu.add({
+            weight: 2,
             type: 'code',
             data: {
                 isHtmlName: false,
@@ -128,11 +144,7 @@ class EditorMix extends EditorBase {
         contextMenu.register('block', blockMenu);
         contextMenu.offEvent('getMenu');
         contextMenu.bind('getMenu', () => {
-            if (this.drag.shown !== Drag.Extend.NEGATIVE) {
-                return 'block';
-            } else {
-                return 'code';
-            }
+            return this.getPageType();
         });
     }
 
@@ -255,8 +267,8 @@ class EditorMix extends EditorBase {
     getCurrentEditor() {
         const blockPage = this.getPage('block');
         const codePage = this.getPage('code');
-        if (this.drag.shown === Drag.Extend.NEGATIVE) {
-            return codePage;
+        if (this.getPageType() === 'code') {
+            return codePage; 
         } else {
             return blockPage;
         }
@@ -302,6 +314,14 @@ class EditorMix extends EditorBase {
             tabSize = 4;
         }
         return tabSize;
+    }
+
+    getPageType() {
+        if (this.drag.shown !== Drag.Extend.NEGATIVE) {
+            return 'block';
+        } else {
+            return 'code';
+        }
     }
 
     undo() {
@@ -354,31 +374,39 @@ class EditorMix extends EditorBase {
     setValue(data, ext) {
         const blockPage = this.getPage('block');
         const codePage = this.getPage('code');
-        Blockly.Events.disable();
-        try {
-            data = XML.convert(data, true);
-            data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
-                return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
-            });
-        } catch (error) {
-            Debug.error(error);
-        }
-        this.parseMix($(data), false, false, (message) => {
-            if (message) {
-                switch (message) {
-                case 'USE_CODE':
-                    Debug.log('已从code标签中读取代码');
-                    break;
-                case 'USE_INCOMPLETE_BLOCKS':
-                    Debug.log('一些块已被忽略');
-                    break;
-                }
-                blockPage.scrollCenter();
-                Blockly.hideChaff();
-            } else {
+        switch (ext) {
+        case '.mix':
+        case '.xml':
+            Blockly.Events.disable();
+            try {
+                data = XML.convert(data, true);
+                data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
+                    return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
+                });
+            } catch (error) {
+                Debug.error(error);
             }
-        });
-        Blockly.Events.enable();
+            this.parseMix($(data), false, false, (message) => {
+                if (message) {
+                    switch (message) {
+                    case 'USE_CODE':
+                        Debug.log('已从code标签中读取代码');
+                        break;
+                    case 'USE_INCOMPLETE_BLOCKS':
+                        Debug.log('一些块已被忽略');
+                        break;
+                    }
+                    blockPage.scrollCenter();
+                    Blockly.hideChaff();
+                }
+            });
+            Blockly.Events.enable();
+            break;
+        default:
+            this.drag.full(Drag.Extend.NEGATIVE);
+            this.getPage('code').setValue(data, ext);
+            break;
+        }
     }
 
     getValue() {
@@ -403,6 +431,7 @@ class EditorMix extends EditorBase {
         }
         xml = $xml[0].outerHTML;
         if (config) {
+            config.pageType = this.getPageType();
             try {
                 xml += `<config>${JSON.stringify(config)}</config>`;
             } catch (error) {
@@ -421,6 +450,40 @@ class EditorMix extends EditorBase {
         } else {
             return codePage.getCode();
         }
+    }
+
+    getMil() {
+        const $mix = $(this.getValue());
+        let $xml, $config, $code;
+        for (let i = 0; $mix[i]; i++) {
+            switch ($mix[i].nodeName) {
+            case 'XML':
+                $xml = $($mix[i]);
+                break;
+            case 'CONFIG':
+                $config = $($mix[i]);
+                break;
+            case 'CODE':
+                $code = $($mix[i]);
+                break;
+            }
+        }
+        if (!$xml) return '';
+        $config && $config.remove();
+        $code && $code.remove();
+        $xml.attr('type', 'lib');
+        $xml.find('block,shadow').removeAttr('id varid x y');
+        const $blocks = $xml.children('block');
+        let blockXmlList = [];
+        for (let i = 0; $blocks[i]; i++) {
+            const outerHTML = $blocks[i].outerHTML;
+            if (!blockXmlList.includes(outerHTML)) {
+                blockXmlList.push(outerHTML);
+            } else {
+                $blocks[i].remove();
+            }
+        }
+        return $xml[0].outerHTML;
     }
 
     parseMix(xml, useCode = false, useIncompleteBlocks = false, endFunc = (message) => {}) {
@@ -460,11 +523,9 @@ class EditorMix extends EditorBase {
             }
         }
         let config, configStr = configDom && configDom.html();
-        try {
-            if (configStr)
-                config = JSON.parse(configStr);
-        } catch (error) {
-            Debug.error(error);
+        config = MJSON.parse(configStr);
+        if (config && config['pageType']) {
+            delete config['pageType'];
         }
         let boardName = xmlDom.attr('board') ?? '';
         Boards.setSelectedBoard(boardName, config);

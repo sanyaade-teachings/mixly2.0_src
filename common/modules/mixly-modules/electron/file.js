@@ -8,6 +8,7 @@ goog.require('Mixly.Title');
 goog.require('Mixly.MFile');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');
+goog.require('Mixly.Workspace');
 goog.require('Mixly.Electron.ArduShell');
 goog.require('Mixly.Electron.BU');
 goog.provide('Mixly.Electron.File');
@@ -20,12 +21,13 @@ const {
     MFile,
     XML,
     Msg,
+    Workspace,
     Electron
 } = Mixly;
 
 const { BOARD } = Config;
 
-const { ArduShell, BU } = Electron;
+const { ArduShell, BU, File } = Electron;
 
 const fs = Mixly.require('fs');
 const fs_plus = Mixly.require('fs-plus');
@@ -89,15 +91,17 @@ File.showOpenDialog = (title, filters, endFunc) => {
 
 File.save = (endFunc = () => {}) => {
     if (File.openedFilePath) {
+        const mainWorkspace = Workspace.getMain();
+        const editor = mainWorkspace.getEditorsManager().getActive();
         const extname = path.extname(File.openedFilePath);
         let data = '';
         switch (extname) {
         case '.mix':
-            data = MFile.getMix();
+            data = editor.getValue();
             break;
         case '.py':
         case '.ino':
-            data = MFile.getCode();
+            data = editor.getCode();
             break;
         default:
             layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
@@ -123,6 +127,8 @@ File.save = (endFunc = () => {}) => {
 
 File.saveAs = (endFunc = () => {}) => {
     File.showSaveDialog(Msg.Lang['另存为'], MFile.saveFilters, (filePath) => {
+        const mainWorkspace = Workspace.getMain();
+        const editor = mainWorkspace.getEditorsManager().getActive();
         const extname = path.extname(filePath);
         if (['.mix', '.py', '.ino'].includes(extname)) {
             File.openedFilePath = filePath;
@@ -150,7 +156,7 @@ File.saveAs = (endFunc = () => {}) => {
                 }
                 break;
             case '.mil':
-                const milStr = MFile.getMil();
+                const milStr = editor.getMil();
                 const $mil = $(milStr);
                 $mil.attr('name', path.basename(filePath, '.mil'));
                 fs_extra.outputFile(filePath, $mil[0].outerHTML)
@@ -175,7 +181,9 @@ File.saveAs = (endFunc = () => {}) => {
 
 File.exportLib = (endFunc = () => {}) => {
     File.showSaveDialog('导出库', [ MFile.SAVE_FILTER_TYPE.mil ], (filePath) => {
-        const milStr = MFile.getMil();
+        const mainWorkspace = Workspace.getMain();
+        const editor = mainWorkspace.getEditorsManager().getActive();
+        const milStr = editor.getMil();
         const $mil = $(milStr);
         $mil.attr('name', path.basename(filePath, '.mil'));
         fs_extra.outputFile(filePath, $mil[0].outerHTML)
@@ -192,12 +200,14 @@ File.exportLib = (endFunc = () => {}) => {
     });
 }
 
-File.newFile = () => {
-    const { blockEditor, codeEditor, mainEditor } = Editor;
-    const { selected } = mainEditor;
-    const { generator } = mainEditor.blockEditor;
+File.new = () => {
+    const mainWorkspace = Workspace.getMain();
+    const editor = mainWorkspace.getEditorsManager().getActive();
+    const blockEditor = editor.getPage('block').getEditor();
+    const codeEditor = editor.getPage('code').getEditor();
+    const { generator } = editor.getPage('block');
     const blocksList = blockEditor.getAllBlocks();
-    if (selected === 'CODE') {
+    if (editor.getPageType() === 'code') {
         const code = codeEditor.getValue(),
         workspaceToCode = generator.workspaceToCode(blockEditor) || '';
         if (!blocksList.length && workspaceToCode === code) {
@@ -219,8 +229,9 @@ File.newFile = () => {
         shade: LayerExt.SHADE_ALL,
         resize: false,
         success: (layero) => {
-            layero[0].childNodes[1].childNodes[0].classList.remove('layui-layer-close2');
-            layero[0].childNodes[1].childNodes[0].classList.add('layui-layer-close1');
+            const { classList } = layero[0].childNodes[1].childNodes[0];
+            classList.remove('layui-layer-close2');
+            classList.add('layui-layer-close1');
         },
         btn: [MSG['newfile_yes'], MSG['newfile_no']],
         btn2: (index, layero) => {
@@ -258,55 +269,20 @@ File.openFile = (filePath) => {
         console.log(error);
         return;
     }
-    switch (extname) {
-    case '.mix':
-    case '.xml':
-        try {
-            data = XML.convert(data, true);
-            data = data.replace(/\\(u[0-9a-fA-F]{4})/g, function (s) {
-                return unescape(s.replace(/\\(u[0-9a-fA-F]{4})/g, '%$1'));
-            });
-        } catch (error) {
-            console.log(error);
-        }
-        MFile.parseMix($(data), false, false, (message) => {
-            if (message) {
-                switch (message) {
-                case 'USE_CODE':
-                    // console.log('已从code标签中读取代码');
-                    break;
-                case 'USE_INCOMPLETE_BLOCKS':
-                    // console.log('一些块已被忽略');
-                    break;
-                }
-                Editor.blockEditor.scrollCenter();
-                Blockly.hideChaff();
-                File.openedFilePath = null;
-                Title.updateTitle(Title.title);
-            } else {
-                File.openedFilePath = filePath;
-                File.workingPath = path.dirname(filePath);
-                Title.updeteFilePath(File.openedFilePath);
-            }
-        });
-        break;
-    case '.ino':
-    case '.py':
-        Editor.mainEditor.drag.full('NEGATIVE'); // 完全显示代码编辑器
-        Editor.codeEditor.setValue(data, -1);
-        File.openedFilePath = filePath;
-        File.workingPath = path.dirname(filePath);
-        Title.updeteFilePath(File.openedFilePath);
-        break;
-    case '.bin':
-    case '.hex':
+    if (['.bin', '.hex'].includes(extname)) {
         if (BOARD?.nav?.compile) {
             ArduShell.showUploadBox(filePath);
         } else {
             MFile.loadHex(data);
         }
-        break;
-    default:
+    } else if (['.mix', '.xml', '.ino', '.py'].includes(extname)) {
+        const mainWorkspace = Workspace.getMain();
+        const editor = mainWorkspace.getEditorsManager().getActive();
+        editor.setValue(data, extname);
+        File.openedFilePath = filePath;
+        File.workingPath = path.dirname(filePath);
+        Title.updeteFilePath(File.openedFilePath);
+    } else {
         layer.msg(Msg.Lang['文件后缀错误'], { time: 1000 });
     }
 }

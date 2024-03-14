@@ -264,10 +264,10 @@ export const display_matrix_extern_clear = {
 
 export const display_matrix_extern_image_builtins = {
     init: function () {
-        var OPERATORS =
-            [["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"]
-                // ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
-            ];
+        var OPERATORS = [
+            ["HEART", "HEART"], ["HEART_SMALL", "HEART_SMALL"], ["HAPPY", "HAPPY"], ["SAD", "SAD"], ["SMILE", "SMILE"], ["SILLY", "SILLY"], ["FABULOUS", "FABULOUS"], ["SURPRISED", "SURPRISED"], ["ASLEEP", "ASLEEP"], ["ANGRY", "ANGRY"], ["CONFUSED", "CONFUSED"], ["NO", "NO"], ["YES", "YES"]
+            // ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
+        ];
         this.appendValueInput('SUB')
             .setCheck("var");
         this.setColour(DISPLAY_EXTERN_HUE);
@@ -395,10 +395,10 @@ export const display_draw_4strings = {
 
 export const display_image_size = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_HEIGHT, 'height'],
-            [Blockly.Msg.MIXLY_WIDTH, 'width']
-        ];
+        var OPERATORS =
+            [[Blockly.Msg.MIXLY_HEIGHT, 'height'],
+                [Blockly.Msg.MIXLY_WIDTH, 'width']
+            ];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET + Blockly.Msg.MIXLY_MICROBIT_IMAGE);
@@ -425,10 +425,10 @@ export const display_image_size = {
 
 export const display_rect = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
+        var brightness_or_not =
+            [[Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+                [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+            ];
         this.setColour(DISPLAY_EXTERN_HUE);
         // this.appendDummyInput()
         //     .appendField(Blockly.Msg.OLED)
@@ -614,20 +614,18 @@ export const display_onoff = {
     }
 };
 
-// export {
-//     switch: {
-//         init: function () {
-//             this.setColour(DISPLAY_EXTERN_HUE);
-//             this.appendDummyInput("")
-//                 .appendField(new Blockly.FieldDropdown([
-//                     [Blockly.Msg.MIXLY_ESP32_ON, "1"],
-//                     [Blockly.Msg.MIXLY_ESP32_OFF, "0"]
-//                 ]), "flag");
-//             this.setOutput(true);
-//             this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
-//         }
+// export const switch = {
+//     init: function () {
+//         this.setColour(DISPLAY_EXTERN_HUE);
+//         this.appendDummyInput("")
+//             .appendField(new Blockly.FieldDropdown([
+//                 [Blockly.Msg.MIXLY_ESP32_ON, "1"],
+//                 [Blockly.Msg.MIXLY_ESP32_OFF, "0"]
+//             ]), "flag");
+//         this.setOutput(true);
+//         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
 //     }
-// }
+// };
 
 export const display_fill = {
     init: function () {
@@ -655,29 +653,11 @@ export const display_fill = {
     }
 };
 
-export const display_tm1650_show_num = {
-    init: function () {
-        this.setColour(DISPLAY_EXTERN_HUE);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY)
-            .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
-        this.appendValueInput("VAR")
-        this.appendValueInput("VALUE")
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_SHOW_NUMBER);
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        // this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_4digitdisplay_displayString);
-    }
-};
-
 export const display_animate = {
     init: function () {
-        var ANIMATE = [
-            ["ALL_CLOCKS", 'ALL_CLOCKS'],
-            ["ALL_ARROWS", 'ALL_ARROWS']
-        ];
+        var ANIMATE =
+            [["ALL_CLOCKS", 'ALL_CLOCKS'],
+                ["ALL_ARROWS", 'ALL_ARROWS']];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.setOutput(true, 'Tuple');
         this.appendDummyInput()
@@ -689,10 +669,10 @@ export const display_animate = {
 
 export const display_circle = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
+        var brightness_or_not =
+            [[Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+                [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+            ];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.OLED)
@@ -733,10 +713,10 @@ export const display_circle = {
 
 export const display_triangle = {
     init: function () {
-        var brightness_or_not = [
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
-            [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
-        ];
+        var brightness_or_not =
+            [[Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, '1'],
+                [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, '0']
+            ];
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendValueInput('VAR')
             .appendField(Blockly.Msg.OLED)
@@ -892,6 +872,23 @@ export const display_tm1650_power = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_4digitdisplay_power);
+    }
+};
+
+export const display_tm1650_show_num = {
+    init: function () {
+        this.setColour(DISPLAY_EXTERN_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY)
+            .appendField(new Blockly.FieldDropdown([["TM1650", "tm1650"]]), "TYPE");
+        this.appendValueInput("VAR")
+        this.appendValueInput("VALUE")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_MONITOR_SHOW_NUMBER);
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        // this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_4digitdisplay_displayString);
     }
 };
 
@@ -1513,12 +1510,12 @@ export const extern_oled_show_frame_string_delay = {
 
 export const extern_oled_shift = {
     init: function () {
-        var OPERATORS = [
-            [Blockly.Msg.MIXLY_UP, 'shift_up'],
-            [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
-            [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
-            [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
-        ];
+        var OPERATORS =
+            [[Blockly.Msg.MIXLY_UP, 'shift_up'],
+                [Blockly.Msg.MIXLY_DOWN, 'shift_down'],
+                [Blockly.Msg.MIXLY_LEFT, 'shift_left'],
+                [Blockly.Msg.MIXLY_RIGHT, 'shift_right'],
+            ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
         this.setColour(DISPLAY_EXTERN_HUE);
         this.appendValueInput('SUB')

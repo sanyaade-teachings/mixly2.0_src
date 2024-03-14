@@ -397,32 +397,152 @@ export const communicate_ow_reset = {
     }
 };
 
-export const communicate_ir_recv = {
+export const communicate_ir_recv_init = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('PIN')
-            .appendField(Blockly.Msg.MIXLY_IR_RECEIVE);
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_IR_RECEIVE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_TYPE)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_IR_INPUT1, "8"],
+                [Blockly.Msg.MIXLY_IR_INPUT2, "16"],
+                [Blockly.Msg.MIXLY_IR_INPUT3, "0"],
+                [Blockly.Msg.MIXLY_TR_SEND_RC, "RC5"]
+            ]), "type");
         this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
+            .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO + Blockly.Msg.MIXLY_ESP32_ONENET_SUB);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
     }
 };
 
-export const communicate_ir_send = {
+export const internal_variable = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
-        this.appendValueInput('PIN')
-            .appendField(Blockly.Msg.blynk_IOT_IR_SEND);
-        this.appendValueInput('ADDR')
-            .appendField(Blockly.Msg.MQTT_SERVER_ADD);
-        this.appendValueInput('SUB')
-            .appendField(Blockly.Msg.OLED_STRING);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXlY_RECV_FUN);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_IR_CMD_CODE, "0"],
+                [Blockly.Msg.MIXLY_IR_ADDR_CODE, "1"],
+                [Blockly.Msg.MIXLY_IR_RAW_CODE, "2"],
+                [Blockly.Msg.MIXLY_IR_PULSE, "3"]
+            ]), "index");
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const recv_fun = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXlY_RECV_FUN)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MILY_PAUSE, "True"],
+                [Blockly.Msg.MIXLY_RECOVER, "False"]
+            ]), "en");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.blynk_IOT_IR_SEND_TOOLTIP);
+    }
+}
+
+export const ir_whether_recv = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXlY_RECV_FUN);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IR_WHETHER_RECV);
+        this.setOutput(true);
+        this.setInputsInline(true);
+    }
+};
+
+export const ir_recv_timeout = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendValueInput('time')
+            .appendField(Blockly.Msg.MIXlY_RECV_FUN)
+            .appendField(Blockly.Msg.MIXLY_IR_TIMEOUT);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MILLISECOND);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
+export const communicate_ir_send_init = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendValueInput('PIN')
+            .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_IR_SEND)
+            .appendField(Blockly.Msg.MIXLY_PIN);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_MICROPYTHON_SOCKET_TYPE)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_IR_SEND_samsung1, "False"],
+                [Blockly.Msg.MIXLY_IR_SEND_samsung2, "True"],
+                [Blockly.Msg.MIXLY_TR_SEND_RC, "RC5"]
+            ]), "type")
+            .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_BLE_POWER);
+        this.appendValueInput('power');
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MATH_QUYU_SYMBOL);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
+
+export const ir_transmit_conventional_data = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IR_SEND);
+        this.appendValueInput('cmd')
+            .appendField(Blockly.Msg.MIXLY_IR_CMD_CODE);
+        this.appendValueInput('addr')
+            .appendField(Blockly.Msg.MIXLY_IR_ADDR_CODE);
+        this.appendValueInput('toggle')
+            .appendField(Blockly.Msg.MIXLY_CONTROL);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TRANSMIT_CONVEN_DATA);
+    }
+};
+
+export const ir_transmit_study_code = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IR_SEND);
+        this.appendValueInput('LIST')
+            .appendField(Blockly.Msg.MIXLY_IR_PULSE)
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
+
+
+
+
+export const ir_transmit_busy = {
+    init: function () {
+        this.setColour(COMMUNICATE_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IR_TRANSMIT_DONE);
+        this.setOutput(true);
+        this.setInputsInline(true);
     }
 };
 
@@ -547,7 +667,7 @@ export const communicate_bluetooth_is_connected = {
     }
 }
 
-export const communicate_bluetooth_recv = {
+Blockly.Blocks["communicate_bluetooth_recv"] = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('VAR')
@@ -562,7 +682,7 @@ export const communicate_bluetooth_recv = {
     }
 };
 
-export const communicate_bluetooth_recv_only = {
+Blockly.Blocks["communicate_bluetooth_recv_only"] = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('VAR')
@@ -575,7 +695,7 @@ export const communicate_bluetooth_recv_only = {
     }
 };
 
-export const communicate_bluetooth_handle = {
+Blockly.Blocks["communicate_bluetooth_handle"] = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('VAR')
@@ -690,7 +810,7 @@ export const network_espnow_send = {
     }
 };
 
-export const network_espnow_recv_handle = {
+Blockly.Blocks["network_espnow_recv_handle"] = {
     init: function () {
         this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('VAR')
@@ -958,7 +1078,6 @@ export const urequests_get = {
 
 }
 
-
 export const urequests_attribute = {
     init: function () {
         this.appendValueInput('VAL')
@@ -987,19 +1106,14 @@ export const urequests_attribute = {
     }
 };
 
-
-
 export const urequests_method = {
     init: function () {
         this.appendValueInput("VAR")
             .appendField(Blockly.Msg.DISPLAY_IMAGE_LET2)
             .setCheck(String);
         var method = [
-            ['get', 'get'],
-            ['post', 'post'],
-            ['put', 'put'],
-            ['delete', 'delete'],
-            ['head', 'head'],
+            ['get', 'get'], ['post', 'post'], ['put', 'put'],
+            ['delete', 'delete'], ['head', 'head'],
             ['option', 'option']
         ];
         this.setColour(COMMUNICATE_HUE);
@@ -1013,7 +1127,6 @@ export const urequests_method = {
 
     }
 };
-
 
 export const i2c_init = communicate_i2c_init;
 export const i2c_read = communicate_i2c_read;

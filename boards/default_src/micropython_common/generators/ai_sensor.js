@@ -238,3 +238,48 @@ export const ai_sensor_asr_recognize = function () {
     var code = v + '.asr_recognize(' + v1 + ',threshold=' + v2 + ')';
     return [code, Python.ORDER_ATOMIC];
 };
+
+export const ai_sensor_licenseplate = function () {
+    Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+    var sub = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.' + key;
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const ai_sensor_find_licenseplates = function () {
+    Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var code = v + '.find_licenseplate()';
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const ai_sensor_face = function () {
+    Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+    var sub = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.' + key;
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const ai_sensor_classifier_faces = function () {
+    Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var code = v + '.face_detect()';
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const ai_sensor_20object = function () {
+    Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+    var sub = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    var code = sub + '.' + key;
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const ai_sensor_find_20objects = function () {
+    Python.definitions_['import_mixgo_ai'] = 'import mixgo_ai';
+    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var code = v + '.find_20object()';
+    return [code, Python.ORDER_ATOMIC];
+};

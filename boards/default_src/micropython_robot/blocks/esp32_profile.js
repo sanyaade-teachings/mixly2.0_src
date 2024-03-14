@@ -2,7 +2,7 @@ import { Profile } from 'mixly';
 
 const pins = {};
 
-pins["元控•白泽"] = {
+pins["飞乙"] = {
     description: "MicroPython[ESP32C3 Bitbot]",
     digital_pin: Profile.generate(['0-11', '18-21']),
     input_pin: Profile.generate(['0-11', '18-21']),
@@ -11,7 +11,7 @@ pins["元控•白泽"] = {
     analog_input: Profile.generate(['0-5'], 'adc', 'adc'),
     pwm_output: Profile.generate(['0-11', '18-21'], 'pwm', 'pwm'),
     analog_output: Profile.generate(['0-5'], 'adc', 'adc'),
-    espnow_channel: Profile.generate(['0-13']),
+    espnow_channel: Profile.generate(['1-13']),
     haskylens_model: Profile.generate(['0-4']),
     digital: Profile.generate(['0-11', '18-21'], 'pin', 'pin'),
     pwm_pin: Profile.generate(['0-11', '18-21']),
@@ -54,7 +54,7 @@ pins["超霸大师"] = {
     pwm: [["pwm0", "pwm0"], ["pwm2", "pwm2"], ["pwm4", "pwm4"], ["pwm5", "pwm5"], ["pwm12", "pwm12"], ["pwm13", "pwm13"], ["pwm14", "pwm14"], ["pwm15", "pwm15"], ["pwm16", "pwm16"], ["pwm17", "pwm17"], ["pwm18", "pwm18"], ["pwm19", "pwm19"], ["pwm20", "pwm20"], ["pwm21", "pwm21"], ["pwm22", "pwm22"], ["pwm23", "pwm23"], ["pwm25", "pwm25"], ["pwm26", "pwm26"], ["pwm27", "pwm27"], ["pwm32", "pwm32"]],
     analog_pin: [["32", "32"], ["33", "33"], ["34", "34"], ["35", "35"], ["36", "36"], ["37", "37"], ["38", "38"], ["39", "39"]],
     analog: [["adc32", "adc32"], ["adc33", "adc33"], ["adc34", "adc34"], ["adc35", "adc35"], ["adc36", "adc36"], ["adc37", "adc37"], ["adc38", "adc38"], ["adc39", "adc39"]],
-    espnow_channel: Profile.generate(['0-13']),
+    espnow_channel: Profile.generate(['1-13']),
     haskylens_model: Profile.generate(['0-4']),
     dac_pin: [["25", "25"], ["26", "26"]],
     dac: [["dac25", "dac25"], ["dac26", "dac26"]],
@@ -95,7 +95,7 @@ pins["ESP32 Generic"] = {
     pwm: [["pwm0", "pwm0"], ["pwm2", "pwm2"], ["pwm4", "pwm4"], ["pwm5", "pwm5"], ["pwm12", "pwm12"], ["pwm13", "pwm13"], ["pwm14", "pwm14"], ["pwm15", "pwm15"], ["pwm16", "pwm16"], ["pwm17", "pwm17"], ["pwm18", "pwm18"], ["pwm19", "pwm19"], ["pwm20", "pwm20"], ["pwm21", "pwm21"], ["pwm22", "pwm22"], ["pwm23", "pwm23"], ["pwm25", "pwm25"], ["pwm26", "pwm26"], ["pwm27", "pwm27"], ["pwm32", "pwm32"]],
     analog_pin: [["32", "32"], ["33", "33"], ["34", "34"], ["35", "35"], ["36", "36"], ["37", "37"], ["38", "38"], ["39", "39"]],
     analog: [["adc32", "adc32"], ["adc33", "adc33"], ["adc34", "adc34"], ["adc35", "adc35"], ["adc36", "adc36"], ["adc37", "adc37"], ["adc38", "adc38"], ["adc39", "adc39"]],
-    espnow_channel: Profile.generate(['0-13']),
+    espnow_channel: Profile.generate(['1-13']),
     haskylens_model: Profile.generate(['0-4']),
     dac_pin: [["25", "25"], ["26", "26"]],
     dac: [["dac25", "dac25"], ["dac26", "dac26"]],
@@ -134,7 +134,7 @@ pins["机器人大师"] = {
     output_pin: [["0", "0"], ["2", "2"], ["4", "4"], ["5", "5"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["18", "18"], ["19", "19"], ["21", "21"], ["22", "22"], ["23", "23"], ["25", "25"], ["26", "26"], ["27", "27"], ["32", "32"], ["33", "33"]],
     pwm_pin: [["0", "0"], ["2", "2"], ["4", "4"], ["5", "5"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"], ["20", "20"], ["21", "21"], ["22", "22"], ["23", "23"], ["25", "25"], ["26", "26"], ["27", "27"], ["32", "32"]],
     pwm: [["pwm0", "pwm0"], ["pwm2", "pwm2"], ["pwm4", "pwm4"], ["pwm5", "pwm5"], ["pwm12", "pwm12"], ["pwm13", "pwm13"], ["pwm14", "pwm14"], ["pwm15", "pwm15"], ["pwm16", "pwm16"], ["pwm17", "pwm17"], ["pwm18", "pwm18"], ["pwm19", "pwm19"], ["pwm20", "pwm20"], ["pwm21", "pwm21"], ["pwm22", "pwm22"], ["pwm23", "pwm23"], ["pwm25", "pwm25"], ["pwm26", "pwm26"], ["pwm27", "pwm27"], ["pwm32", "pwm32"]],
-    espnow_channel: Profile.generate(['0-13']),
+    espnow_channel: Profile.generate(['1-13']),
     haskylens_model: Profile.generate(['0-4']),
     analog_pin: [["32", "32"], ["33", "33"], ["34", "34"], ["35", "35"], ["36", "36"], ["37", "37"], ["38", "38"], ["39", "39"]],
     analog: [["adc32", "adc32"], ["adc33", "adc33"], ["adc34", "adc34"], ["adc35", "adc35"], ["adc36", "adc36"], ["adc37", "adc37"], ["adc38", "adc38"], ["adc39", "adc39"]],

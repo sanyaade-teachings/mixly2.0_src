@@ -976,7 +976,7 @@ export const bitbot_display_image_create = {
     }
 };
 
-//mixgo_zi onboard tft below:
+//mixgo_nova onboard tft below:
 export const onboard_tft_show_image = {
     init: function () {
         this.setColour(DISPLAY_ONBOARD_HUE);

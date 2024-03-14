@@ -568,12 +568,12 @@ export const bitbot_display_image_create = function (block) {
     return [code, Python.ORDER_ATOMIC];
 };
 
-//mixgo_zi onboard tft below:
+//mixgo_nova onboard tft below:
 export const onboard_tft_show_image = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Python.definitions_['import_' + version + '_onboard_tft'] = "from " + version + " import onboard_tft";
     var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
-    var code = "onboard_tft.image(" + data + ",color=0xffff)\n";
+    var code = "onboard_tft.image(" + data + ", color=0xffff)\n";
     return code;
 }
 

@@ -36,12 +36,22 @@ logic_compare.OPERATORS = {
 
 export const logic_operation = function () {
     // Operations 'and', 'or'.
-    var operator = (this.getFieldValue('OP') == 'AND') ? 'and' : 'or';
+    var operator = this.getFieldValue('OP');
     var order = (operator == '&&') ? Python.ORDER_LOGICAL_AND :
         Python.ORDER_LOGICAL_OR;
     var argument0 = Python.valueToCode(this, 'A', order) || 'False';
     var argument1 = Python.valueToCode(this, 'B', order) || 'False';
-    var code = argument0 + ' ' + operator + ' ' + argument1;
+    if (operator == 'AND') {
+        var code = argument0 + ' and ' + argument1;
+    } else if (operator == 'OR') {
+        var code = argument0 + ' or ' + argument1;
+    } else if (operator == 'NOR') {
+        // var code = '('+argument0+' and '+argument1+' ) or ((not '+argument0+') and (not '+argument1+'))';
+        var code = 'not(' + argument0 + '^' + argument1 + ')';
+    } else {
+        // var code = '((not '+argument0+') and '+argument1+' ) or ( '+argument0+' and (not '+argument1+'))';
+        var code = argument0 + '^' + argument1;
+    }
     return [code, order];
 };
 

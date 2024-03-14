@@ -1,11 +1,15 @@
 import * as Blockly from 'blockly/core';
+import * as Mixly from 'mixly';
 
 const MEG1_HUE = 40;
 
 export const me_g1_aht11 = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput("")
+            .appendField(name)
             .appendField(Blockly.Msg.MIXLY_TEM_HUM + " AHT21")
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_GETTEMPERATUE, "temperature"],
@@ -27,8 +31,11 @@ export const me_g1_aht11 = {
 
 export const me_g1_hp203 = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput("")
+            .appendField(name)
             .appendField(Blockly.Msg.MIXLY_Altitude + Blockly.Msg.MSG.catSensor + " HP203X")
             .appendField(new Blockly.FieldDropdown([
                 [Blockly.Msg.MIXLY_GETPRESSURE, "pressure()"],
@@ -42,11 +49,12 @@ export const me_g1_hp203 = {
 
 export const me_g1_varistor = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_POTENTIOMETER);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_VALUE);
+            .appendField(name)
+            .appendField(Blockly.Msg.MIXLY_MIXGO_NOVA_POTENTIAL_NUM);
         this.setOutput(true, Number);
         this.setInputsInline(true);
     }
@@ -54,8 +62,11 @@ export const me_g1_varistor = {
 
 export const me_g1_rfid_readid = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput()
+            .appendField(name)
             .appendField("RFID" + Blockly.Msg.MIXLY_RFID_READ_CARD);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RFID_READ_CARD_UID);
@@ -66,8 +77,11 @@ export const me_g1_rfid_readid = {
 
 export const me_g1_rfid_readcontent = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput()
+            .appendField(name)
             .appendField("RFID" + Blockly.Msg.MIXLY_RFID_READ_CARD);
         this.appendValueInput('SECTOR')
             .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
@@ -80,8 +94,11 @@ export const me_g1_rfid_readcontent = {
 
 export const me_g1_rfid_write = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput()
+            .appendField(name)
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_WRITE);
         this.appendValueInput('SECTOR')
             .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
@@ -95,8 +112,11 @@ export const me_g1_rfid_write = {
 
 export const me_g1_rfid_status = {
     init: function () {
+        var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if (version == "mixgo_me") { var name = 'ME G1' }
         this.setColour(MEG1_HUE);
         this.appendDummyInput()
+            .appendField(name)
             .appendField("RFID");
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([

@@ -436,6 +436,22 @@ export const sensor_ltr381_extern = {
     }
 };
 
+export const sensor_LTR390UV_extern = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendValueInput('SUB')
+            .appendField(Blockly.Msg.MIXLY_EXTERN_LIGHTUV + " LTR390UV")
+            .setCheck("var");
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_GET_ENV_LIGHT, "E"],
+                [Blockly.Msg.MIXLY_GET_ULTRAVIOLET, "U"],
+            ]), "key");
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
 export const sensor_VL530LX_extern = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
@@ -1459,16 +1475,14 @@ export const gnss_get_data = {
     }
 };
 
-//mixbot/baize extern below:
+//mixbot/feiyi extern below:
 export const robot_button_extern_get_value = {
     init: function () {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_BUTTON)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.TURTLE_POS)
             .appendField(new Blockly.FieldDropdown([
@@ -1490,10 +1504,8 @@ export const robot_touch_extern_get_value = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_MICROBIT_JS_INOUT_EVENT_TOUCH + Blockly.Msg.MSG.catSensor)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MIXBOT_EXTERN_TOUCHED + "?")
         this.setOutput(true, Boolean);
@@ -1506,10 +1518,22 @@ export const robot_infrared_extern_get_value = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_ESP32_EXTERN_NEAR)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
+        this.setOutput(true, Boolean);
+        this.setInputsInline(true);
+    }
+}
+
+export const robot_infrared_extern_grey_get_value = {
+    init: function () {
+        this.setColour(SENSOR_EXTERN_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_ESP32_EXTERN_GRAY_NEAR)
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
         this.setOutput(true, Boolean);
@@ -1522,10 +1546,8 @@ export const robot_potentiometer_extern_get_value = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_KNOB_POTENTIOMETER)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA)
         this.setOutput(true, Boolean);
@@ -1538,10 +1560,8 @@ export const robot_color_extern_get_value = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.HTML_COLOUR + Blockly.Msg.MSG.catSensor)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
@@ -1612,10 +1632,8 @@ export const robot_sonar_extern_get_value = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_EXTERN_SONAR)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DATA + '(cm)')
         this.setOutput(true, Boolean);
@@ -1628,10 +1646,8 @@ export const robot_sonar_extern_led = {
         this.setColour(SENSOR_EXTERN_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.ME_GO_MOTOR_EXTERN + Blockly.Msg.MIXLY_EXTERN_SONAR)
-        this.appendValueInput('mode')
-            .setCheck(Number)
-            .setAlign(Blockly.ALIGN_RIGHT)
-            .appendField(Blockly.Msg.LCD_NUMBERING);
+            .appendField(Blockly.Msg.PIN_NUMBERING)
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_LEFT, "0"], [Blockly.Msg.MIXLY_RIGHT, "1"]]), "mode");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_EXTERN_INDICATOR_LIGHT)
         this.appendValueInput('light')
@@ -1648,7 +1664,7 @@ export const robot_sonar_extern_led = {
 
 export const sensor_weather_solo_init = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.weather_solo);
         this.appendValueInput('wd')
@@ -1666,7 +1682,7 @@ export const sensor_weather_solo_init = {
 
 export const sensor_weather_solo_wd = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.weather_solo);
         this.appendDummyInput("")
@@ -1682,7 +1698,7 @@ export const sensor_weather_solo_wd = {
 
 export const sensor_weather_solo_ws = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.weather_solo);
         this.appendDummyInput("")
@@ -1698,7 +1714,7 @@ export const sensor_weather_solo_ws = {
 
 export const sensor_weather_solo_rain = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_EXTERN_HUE']);
+        this.setColour(SENSOR_EXTERN_HUE);
         this.appendValueInput('SUB')
             .appendField(Blockly.Msg.weather_solo);
         this.appendValueInput('time')

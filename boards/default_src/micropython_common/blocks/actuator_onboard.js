@@ -4,7 +4,7 @@ import * as Mixly from 'mixly';
 const ACTUATOR_ONBOARD_HUE = '#6C9858'
 
 //LED
-export const number = {
+Blockly.Blocks['number'] = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput("")
@@ -16,7 +16,7 @@ export const number = {
     }
 };
 
-export const ledswitch = {
+Blockly.Blocks['ledswitch'] = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput("")
@@ -91,6 +91,32 @@ export const actuator_led_brightness = {
         this.setNextStatement(true, null);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.MIXLY_SETTING + Blockly.Msg.MIXLY_BUILDIN_LED + Blockly.Msg.MIXLY_BRIGHTNESS + '(0-100%)');
+    }
+};
+
+export const actuator_mixgo_zero_led_color = {
+    init: function () {
+        this.setColour(ACTUATOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SETTING);
+        this.appendValueInput('led')
+            .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_LCD_SETCOLOR)
+            .appendField(new Blockly.FieldDropdown([
+                [Blockly.Msg.MIXLY_LIGHT_OFF, "0"],
+                [Blockly.Msg.MIXLY_LIGHT_RED, "1"],
+                [Blockly.Msg.MIXLY_LIGHT_GREEN, "2"],
+                [Blockly.Msg.MIXLY_LIGHT_BLUE, "3"],
+                [Blockly.Msg.MIXLY_LIGHT_YELLOW, "4"],
+                [Blockly.Msg.MIXLY_LIGHT_CYAN, "5"],
+                [Blockly.Msg.MIXLY_LIGHT_PURPLE, "6"],
+                [Blockly.Msg.MIXLY_LIGHT_WHITE, "7"]
+            ]), 'colorvalue');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+        this.setTooltip();
     }
 };
 
@@ -235,7 +261,7 @@ export const rm_actuator_led_brightness = {
     }
 };
 
-export const cc_number = {
+Blockly.Blocks['cc_number'] = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput("")
@@ -766,7 +792,7 @@ export const actuator_dc_motor_stop = {
 
 //mixbot onboard_motor below:
 
-export const mixbot_motor_status = {
+Blockly.Blocks['mixbot_motor_status'] = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
@@ -850,7 +876,7 @@ export const mixbot_motor = {
     }
 }
 
-export const actuator_mixbot_buzzer_on_off = {
+Blockly.Blocks['actuator_mixbot_buzzer_on_off'] = {
     init: function () {
         this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
@@ -935,9 +961,9 @@ export const bitbot_motor = {
     }
 }
 
-export const actuator_yuankongzi_mic_set = {
+export const actuator_mixgo_nova_mic_set = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput('bright')
             .appendField(Blockly.Msg.MIXLY_MIXBOT_SOUND_SET_LOUDNESS)
         this.appendDummyInput()
@@ -949,9 +975,9 @@ export const actuator_yuankongzi_mic_set = {
     }
 };
 
-export const actuator_yuankongzi_mic_get = {
+export const actuator_mixgo_nova_mic_get = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MIXBOT_SOUND_LOUDNESS + '(%)');
         this.setOutput(true);
@@ -960,9 +986,9 @@ export const actuator_yuankongzi_mic_get = {
     }
 };
 
-export const actuator_yuankongzi_voice_set = {
+export const actuator_mixgo_nova_voice_set = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput('bright')
             .appendField(Blockly.Msg.MIXLY_SETTING + Blockly.Msg.MIXLY_MIXBOT_BUZZER + Blockly.Msg.MIXLY_MP3_VOL)
         this.appendDummyInput()
@@ -974,9 +1000,9 @@ export const actuator_yuankongzi_voice_set = {
     }
 };
 
-export const actuator_yuankongzi_voice_get = {
+export const actuator_mixgo_nova_voice_get = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_MIXBOT_BUZZER + Blockly.Msg.MIXLY_MP3_VOL + '(%)');
         this.setOutput(true);
@@ -985,9 +1011,9 @@ export const actuator_yuankongzi_voice_get = {
     }
 };
 
-export const actuator_yuankongzi_music_play_list = {
+export const actuator_mixgo_nova_music_play_list = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput('LIST')
             .appendField(Blockly.Msg.MIXLY_ESP32_MUSIC_PLAY_LISTS)
         this.setPreviousStatement(true);
@@ -998,9 +1024,9 @@ export const actuator_yuankongzi_music_play_list = {
     }
 }
 
-export const actuator_yuankongzi_record_audio = {
+export const actuator_mixgo_nova_record_audio = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput('PATH')
             .appendField(Blockly.Msg.MIXLY_RECORD_AUDIO)
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
@@ -1013,9 +1039,9 @@ export const actuator_yuankongzi_record_audio = {
     }
 }
 
-export const actuator_yuankongzi_play_audio = {
+export const actuator_mixgo_nova_play_audio = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput('PATH')
             .appendField(Blockly.Msg.MIXLY_PLAY_AUDIO)
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_THE_PATH);
@@ -1025,9 +1051,9 @@ export const actuator_yuankongzi_play_audio = {
     }
 }
 
-export const actuator_yuankongzi_play_online_audio = {
+export const actuator_mixgo_nova_play_online_audio = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendValueInput('PATH')
             .appendField(Blockly.Msg.MIXLY_PLAY_ONLINE_AUDIO)
             .appendField('URL');
@@ -1037,9 +1063,9 @@ export const actuator_yuankongzi_play_online_audio = {
     }
 }
 
-export const actuator_yuankongzi_onboard_music_pitch = {
+export const actuator_mixgo_nova_onboard_music_pitch = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_TONE);
         this.appendValueInput('pitch')
@@ -1052,9 +1078,9 @@ export const actuator_yuankongzi_onboard_music_pitch = {
     }
 };
 
-export const actuator_yuankongzi_onboard_music_pitch_with_time = {
+export const actuator_mixgo_nova_onboard_music_pitch_with_time = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_TONE);
         this.appendValueInput('pitch')
@@ -1070,9 +1096,9 @@ export const actuator_yuankongzi_onboard_music_pitch_with_time = {
     }
 };
 
-export const actuator_yuankongzi_onboard_music_stop = {
+export const actuator_mixgo_nova_onboard_music_stop = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
+        this.setColour(ACTUATOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_NOTONE);
         this.setInputsInline(true);

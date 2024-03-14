@@ -100,6 +100,15 @@ export const actuator_led_brightness = function () {
     return code;
 };
 
+export const actuator_mixgo_zero_led_color = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var op = Python.valueToCode(this, 'led', Python.ORDER_ATOMIC);
+    Python.definitions_['import_' + version + '_onboard_led'] = 'from ' + version + ' import onboard_led';
+    var color = this.getFieldValue('colorvalue');
+    var code = "onboard_led.setcolor(" + op + "," + color + ")\n";
+    return code;
+};
+
 export const cc_number = function () {
     var code = this.getFieldValue('op');
     return [code, Python.ORDER_ATOMIC];
@@ -338,7 +347,7 @@ export const mixbot_motor = function () {
 };
 
 export const actuator_mixbot_buzzer_on_off = function () {
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var version = Mixly.Boards.getSelectedBoardKey().split(': ')[2]
     Python.definitions_['import_' + version + '_spk_en'] = 'from ' + version + ' import spk_en';
     var op = this.getFieldValue('on_off');
     var code = "spk_en.value(" + op + ")\n";
@@ -348,7 +357,7 @@ export const actuator_mixbot_buzzer_on_off = function () {
 //bitbot onboard_motor below:
 export const bitbot_move = function () {
     var v = this.getFieldValue('VAR');
-    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var speed = Python.valueToCode(this, 'speed', Python.ORDER_ASSIGNMENT);
     var code = 'onboard_bot51.move("' + v + '",' + speed + ")\n";
     return code;
@@ -356,7 +365,7 @@ export const bitbot_move = function () {
 
 export const bitbot_stop = function () {
     var v = this.getFieldValue('VAR');
-    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var code = 'onboard_bot51.move("' + v + '"' + ")\n";
     return code;
 };
@@ -364,85 +373,140 @@ export const bitbot_stop = function () {
 export const bitbot_motor = function () {
     var wheel = this.getFieldValue('wheel');
     var direction = this.getFieldValue('direction');
-    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var code = 'onboard_bot51.motor(' + wheel + ',"' + direction + '",' + speed + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_mic_set = function () {
-    Python.definitions_['import_yuankong_zi_voice_ob_code'] = "from yuankong_zi_voice import ob_code";
+export const actuator_mixgo_nova_mic_set = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
+    }
+
     var bright = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = "ob_code.mic_volume(" + bright + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_mic_get = function () {
-    Python.definitions_['import_yuankong_zi_voice_ob_code'] = "from yuankong_zi_voice import ob_code";
+export const actuator_mixgo_nova_mic_get = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
+    }
     var code = "ob_code.mic_volume()";
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const actuator_yuankongzi_voice_set = function () {
-
-    Python.definitions_['import_yuankong_zi_voice_ob_code'] = "from yuankong_zi_voice import ob_code";
+export const actuator_mixgo_nova_voice_set = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
+    }
     var bright = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
     var code = "ob_code.voice_volume(" + bright + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_voice_get = function () {
-    Python.definitions_['import_yuankong_zi_voice_ob_code'] = "from yuankong_zi_voice import ob_code";
+export const actuator_mixgo_nova_voice_get = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_ob_code'] = "from mixgo_zero_voice import ob_code";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_ob_code'] = "from mixgo_nova_voice import ob_code";
+    }
     var code = "ob_code.voice_volume()";
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const actuator_yuankongzi_music_play_list = function () {
-    Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+export const actuator_mixgo_nova_music_play_list = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
+    }
     var lst = Python.valueToCode(this, 'LIST', Python.ORDER_ASSIGNMENT);
     var code = "spk_midi.play(" + lst + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_record_audio = function () {
-    Python.definitions_['import_yuankong_zi_voice_record_audio'] = "from yuankong_zi_voice import record_audio";
+export const actuator_mixgo_nova_record_audio = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_record_audio'] = "from mixgo_zero_voice import record_audio";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_record_audio'] = "from mixgo_nova_voice import record_audio";
+    }
     var path = Python.valueToCode(this, 'PATH', Python.ORDER_ASSIGNMENT);
     var time = Python.valueToCode(this, 'TIME', Python.ORDER_ASSIGNMENT);
     var code = "record_audio(" + path + ", " + time + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_play_audio = function () {
-    Python.definitions_['import_yuankong_zi_voice_play_audio'] = "from yuankong_zi_voice import play_audio";
+export const actuator_mixgo_nova_play_audio = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_play_audio'] = "from mixgo_zero_voice import play_audio";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_play_audio'] = "from mixgo_nova_voice import play_audio";
+    }
     var path = Python.valueToCode(this, 'PATH', Python.ORDER_ASSIGNMENT);
     var code = "play_audio(" + path + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_play_online_audio = function () {
-    Python.definitions_['import_yuankong_zi_voice_play_audio_url'] = "from yuankong_zi_voice import play_audio_url";
+export const actuator_mixgo_nova_play_online_audio = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_play_audio_url'] = "from mixgo_zero_voice import play_audio_url";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_play_audio_url'] = "from mixgo_nova_voice import play_audio_url";
+    }
     var path = Python.valueToCode(this, 'PATH', Python.ORDER_ASSIGNMENT);
     var code = "play_audio_url(" + path + ")\n";
     return code;
 };
 
-export const actuator_yuankongzi_onboard_music_pitch = function (block) {
-    Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+export const actuator_mixgo_nova_onboard_music_pitch = function (block) {
+    Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
     var number_pitch = Python.valueToCode(block, 'pitch', Python.ORDER_ATOMIC);
     var code = 'spk_midi.pitch(' + number_pitch + ')\n';
     return code;
 };
 
-export const actuator_yuankongzi_onboard_music_pitch_with_time = function (block) {
-    Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+export const actuator_mixgo_nova_onboard_music_pitch_with_time = function (block) {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";
+    }
+    else {
+        Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
+    }
     var number_pitch = Python.valueToCode(block, 'pitch', Python.ORDER_ATOMIC);
     var number_time = Python.valueToCode(block, 'time', Python.ORDER_ATOMIC);
     var code = 'spk_midi.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
     return code;
 };
 
-export const actuator_yuankongzi_onboard_music_stop = function () {
-    Python.definitions_['import_yuankong_zi_voice_spk_midi'] = "from yuankong_zi_voice import spk_midi";
+export const actuator_mixgo_nova_onboard_music_stop = function () {
+    Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
     var code = 'spk_midi.stop(' + ')\n';
     return code;
 };

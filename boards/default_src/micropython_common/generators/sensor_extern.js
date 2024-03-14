@@ -8,7 +8,6 @@ export const sensor_mixgo_extern_button_is_pressed = function () {
     var code = 'mixgo.Button(' + pin + ').is_pressed(' + dropdown_stat + ')';
     return [code, Python.ORDER_ATOMIC];
 };
-
 //ok
 export const sensor_mixgo_extern_button_was_pressed = function () {
     Python.definitions_['import_mixgo'] = 'import mixgo';
@@ -91,23 +90,6 @@ export const sensor_distance_hrsc04 = function () {
         '\n' +
         'sonar=HCSR04()\n'
     return ['sonar.distance_mm()/10.0', Python.ORDER_ATOMIC];
-};
-
-
-export const RTC_set_datetime = function () {
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + 'rtc_clock'] = 'from ' + version + ' import rtc_clock';
-    var year = Python.valueToCode(this, "year", Python.ORDER_ASSIGNMENT);
-    var month = Python.valueToCode(this, "month", Python.ORDER_ASSIGNMENT);
-    var day = Python.valueToCode(this, "day", Python.ORDER_ASSIGNMENT);
-    var hour = Python.valueToCode(this, "hour", Python.ORDER_ASSIGNMENT);
-    var minute = Python.valueToCode(this, "minute", Python.ORDER_ASSIGNMENT);
-    var second = Python.valueToCode(this, "second", Python.ORDER_ASSIGNMENT);
-    var week = Python.valueToCode(this, "weekday", Python.ORDER_ASSIGNMENT);
-    var millisecond = Python.valueToCode(this, "millisecond", Python.ORDER_ASSIGNMENT);
-    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    var code = v + '.datetime((' + year + ',' + month + ',' + day + ',' + week + ',' + hour + ',' + minute + ',' + second + ',' + millisecond + '))\n';
-    return code;
 };
 
 export const RTC_set_time = function () {
@@ -278,6 +260,22 @@ export const sensor_ltr381_extern = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
+export const sensor_LTR390UV_extern = function () {
+    Python.definitions_['import_machine'] = 'import machine';
+    Python.definitions_['import_time'] = 'import time';
+    Python.definitions_['import_ltr390uv'] = 'import ltr390uv';
+    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    var key = this.getFieldValue('key');
+    if (key == 'E') {
+        var code = sub + '.ambient_light()';
+    }
+    else {
+        var code = sub + '.ultraviolet()';
+    }
+
+    return [code, Python.ORDER_ATOMIC];
+};
+
 export const sensor_QMC5883L_extern = function () {
     var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
@@ -290,11 +288,11 @@ export const sensor_shtc3_extern = function () {
     var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
     var key = this.getFieldValue('key');
     Python.definitions_['import_shtc3'] = 'import shtc3';
-    var code = '';
     if (key == 'ALL') {
-        code = sub + '.measurements';
-    } else {
-        code = sub + '.' + key;
+        var code = sub + '.measurements';
+    }
+    else {
+        var code = sub + '.' + key;
     }
     return [code, Python.ORDER_ATOMIC];
 };
@@ -322,17 +320,19 @@ export const sensor_use_spi_init = function () {
     var code;
     if (key == 'RFID') {
         Python.definitions_['import_rc522'] = 'import rc522';
-        code = v + ' = rc522.RC522(' + sv + ',' + pv + ')\n';
+        var code = v + ' = rc522.RC522(' + sv + ',' + pv + ')\n';
     } else if (key == 'Weather') {
         var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
         Python.definitions_['import_' + version] = 'import ' + version;
         Python.definitions_['import_ws_lora'] = 'import ws_lora';
-        if (version === 'mixgo_pe') {
-            code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ')\n';
-        } else if (version === 'yuankong_zi') {
-            code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c_soft' + ')\n';
-        } else {
-            code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c' + ')\n';
+        if (version == 'mixgo_pe') {
+            var code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ')\n';
+        }
+        else if (version == 'mixgo_nova') {
+            var code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c_soft' + ')\n';
+        }
+        else {
+            var code = v + ' = ws_lora.Weather(' + sv + ',' + pv + ',' + version + '.onboard_i2c' + ')\n';
         }
     }
     return code;
@@ -420,7 +420,7 @@ export const weather_set_label = function () {
         code[n] = Python.valueToCode(this, 'ADD' + n,
             Python.ORDER_NONE) || default_value;
     }
-    code = sub + '.label(' + code.join(', ') + ')\n';
+    var code = sub + '.label(' + code.join(', ') + ')\n';
     return code;
 };
 
@@ -466,12 +466,11 @@ export const esp32_s2_weather_rain = function () {
 export const esp32_s2_weather_ws = function () {
     Python.definitions_['import_weather'] = 'import weather';
     var key = this.getFieldValue('key');
-    var code = '';
     if (key == 'ALL') {
-        code = 'ws.wind_speed()';
+        var code = 'ws.wind_speed()';
     }
     else {
-        code = 'ws.wind_speed()[' + key + ']';
+        var code = 'ws.wind_speed()[' + key + ']';
     }
     return [code, Python.ORDER_ATOMIC];
 };
@@ -531,6 +530,23 @@ export const PS2_stk = function () {
     var stk = this.getFieldValue('psstk');
     var code = "mixgope_ps.PS2_keydata()[1][" + stk + "]";
     return [code, Python.ORDER_ATOMIC];
+};
+
+export const RTC_set_datetime = function () {
+    Python.definitions_['import_machine'] = 'import machine';
+    var year = Python.valueToCode(this, "year", Python.ORDER_ASSIGNMENT);
+    var month = Python.valueToCode(this, "month", Python.ORDER_ASSIGNMENT);
+    var day = Python.valueToCode(this, "day", Python.ORDER_ASSIGNMENT);
+    var hour = Python.valueToCode(this, "hour", Python.ORDER_ASSIGNMENT);
+    var minute = Python.valueToCode(this, "minute", Python.ORDER_ASSIGNMENT);
+    var second = Python.valueToCode(this, "second", Python.ORDER_ASSIGNMENT);
+    var week = Python.valueToCode(this, "weekday", Python.ORDER_ASSIGNMENT);
+    var millisecond = Python.valueToCode(this, "millisecond", Python.ORDER_ASSIGNMENT);
+    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
+    if (v == "rtc")
+        Python.definitions_['import_mixgo_rtc'] = 'from mixgo import rtc';
+    var code = v + '.datetime((' + year + ',' + month + ',' + day + ',' + week + ',' + hour + ',' + minute + ',' + second + ',' + millisecond + '))\n';
+    return code;
 };
 
 export const RTC_get_time = function () {
@@ -627,29 +643,28 @@ export const gnss_have_data = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
-//mixbot/baize extern below:
+//mixbot/feiyi extern below:
 export const robot_button_extern_get_value = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var num = this.getFieldValue('num');
-    var code = '';
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_button'] = 'from mixbot_ext import ext_button';
-        code = 'ext_button.value(' + mode + ")" + num;
+        var code = 'ext_button.value(' + mode + ")" + num;
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
             Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
             Python.definitions_['import_left_button'] = 'ext_button_left = i2cdevice.Buttonx5(ext_i2c_left)';
-            code = 'ext_button_left.value()' + num;
+            var code = 'ext_button_left.value()' + num;
         }
         else if (mode == "1") {
             Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
             Python.definitions_['import_right_button'] = 'ext_button_right = i2cdevice.Buttonx5(ext_i2c_right)';
-            code = 'ext_button_right.value()' + num;
+            var code = 'ext_button_right.value()' + num;
         }
         return [code, Python.ORDER_ATOMIC];
     }
@@ -657,25 +672,24 @@ export const robot_button_extern_get_value = function () {
 
 export const robot_touch_extern_get_value = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
-    var code = '';
+    var mode = this.getFieldValue('mode');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_collision'] = 'from mixbot_ext import ext_collision';
-        code = 'ext_collision.value(' + mode + ")";
+        var code = 'ext_collision.value(' + mode + ")";
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
             Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
             Python.definitions_['import_left_collision'] = 'ext_collision_left = i2cdevice.Button(ext_i2c_left)';
-            code = 'ext_collision_left.value()';
+            var code = 'ext_collision_left.value()';
         }
         else if (mode == "1") {
             Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
             Python.definitions_['import_right_collision'] = 'ext_collision_right = i2cdevice.Button(ext_i2c_right)';
-            code = 'ext_collision_right.value()';
+            var code = 'ext_collision_right.value()';
         }
         return [code, Python.ORDER_ATOMIC];
     }
@@ -683,44 +697,61 @@ export const robot_touch_extern_get_value = function () {
 };
 
 export const robot_infrared_extern_get_value = function () {
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
-    var mode = '';
-    var code = '';
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == 'mixbot') {
-        mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+        var mode = this.getFieldValue('mode');
         Python.definitions_['import_mixbot_ext_ext_infrared'] = 'from mixbot_ext import ext_infrared';
-        code = 'ext_infrared.value(' + mode + ")";
+        var code = 'ext_infrared.value(' + mode + ")";
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
-        mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
-        Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
-        code = 'onboard_bot51.read_ps(' + mode + ")";
+    else if (version == 'feiyi') {
+        var mode = this.getFieldValue('mode');
+        Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
+        var code = 'onboard_bot51.read_ps(' + mode + ")";
+        return [code, Python.ORDER_ATOMIC];
+    }
+};
+
+export const robot_infrared_extern_grey_get_value = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var mode = this.getFieldValue('mode');
+    if (version == 'feiyi') {
+        Python.definitions_['import_machine'] = 'import machine';
+        Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
+        if (mode == "0") {
+            Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
+            Python.definitions_['import_left_grey_near'] = 'ext_grey_near_left = i2cdevice.Infrared(ext_i2c_left)';
+            var code = 'ext_grey_near_left.value()';
+        }
+        else if (mode == "1") {
+            Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
+            Python.definitions_['import_right_grey_near'] = 'ext_grey_near_right = i2cdevice.Infrared(ext_i2c_right)';
+            var code = 'ext_grey_near_right.value()';
+        }
         return [code, Python.ORDER_ATOMIC];
     }
 };
 
 export const robot_potentiometer_extern_get_value = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
-    var code = '';
+    var mode = this.getFieldValue('mode');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_potentiometer'] = 'from mixbot_ext import ext_potentiometer';
-        code = 'ext_potentiometer.value(' + mode + ")";
+        var code = 'ext_potentiometer.value(' + mode + ")";
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
             Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
             Python.definitions_['import_left_potentiometer'] = 'ext_potentiometer_left = i2cdevice.Dimmer(ext_i2c_left)';
-            code = 'ext_potentiometer_left.value()';
+            var code = 'ext_potentiometer_left.value()';
         }
         else if (mode == "1") {
             Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
             Python.definitions_['import_right_potentiometer'] = 'ext_potentiometer_right = i2cdevice.Dimmer(ext_i2c_right)';
-            code = 'ext_potentiometer_right.value()';
+            var code = 'ext_potentiometer_right.value()';
         }
         return [code, Python.ORDER_ATOMIC];
     }
@@ -728,26 +759,25 @@ export const robot_potentiometer_extern_get_value = function () {
 
 export const robot_color_extern_get_value = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var color = this.getFieldValue('color');
-    var code = '';
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_color'] = 'from mixbot_ext import ext_color';
-        code = 'ext_color.recognition(' + mode + ")" + color;
+        var code = 'ext_color.recognition(' + mode + ")" + color;
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
             Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
             Python.definitions_['import_left_color'] = 'ext_color_left = i2cdevice.Color_ID(ext_i2c_left)';
-            code = 'ext_color_left.recognition()' + color;
+            var code = 'ext_color_left.recognition()' + color;
         }
         else if (mode == "1") {
             Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
             Python.definitions_['import_right_color'] = 'ext_color_right = i2cdevice.Color_ID(ext_i2c_right)';
-            code = 'ext_color_right.recognition()' + color;
+            var code = 'ext_color_right.recognition()' + color;
         }
         return [code, Python.ORDER_ATOMIC];
     }
@@ -755,25 +785,24 @@ export const robot_color_extern_get_value = function () {
 
 export const robot_sonar_extern_get_value = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
-    var code = '';
+    var mode = this.getFieldValue('mode');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
-        code = 'ext_sonar.value(' + mode + ")";
+        var code = 'ext_sonar.value(' + mode + ")";
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
             Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
             Python.definitions_['import_left_sonar'] = 'ext_sonar_left = i2cdevice.Sonar(ext_i2c_left)';
-            code = 'ext_sonar_left.value()';
+            var code = 'ext_sonar_left.value()';
         }
         else if (mode == "1") {
             Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
             Python.definitions_['import_right_sonar'] = 'ext_sonar_right = i2cdevice.Sonar(ext_i2c_right)';
-            code = 'ext_sonar_right.value()';
+            var code = 'ext_sonar_right.value()';
         }
         return [code, Python.ORDER_ATOMIC];
     }
@@ -781,27 +810,26 @@ export const robot_sonar_extern_get_value = function () {
 
 export const robot_sonar_extern_led = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var light = Python.valueToCode(this, 'light', Python.ORDER_ATOMIC);
     var op = Python.valueToCode(this, 'bright', Python.ORDER_ATOMIC);
-    var code = '';
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_sonar'] = 'from mixbot_ext import ext_sonar';
-        code = 'ext_sonar.led(' + mode + ',' + light + ',' + op + ")\n";
+        var code = 'ext_sonar.led(' + mode + ',' + light + ',' + op + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
             Python.definitions_['import_left_ext_i2c'] = 'ext_i2c_left = i2cdevice.I2C_device(scl = machine.Pin(0), sda = machine.Pin(1), freq = 10000)';
             Python.definitions_['import_left_sonar'] = 'ext_sonar_left = i2cdevice.Sonar(ext_i2c_left)';
-            code = 'ext_sonar_left.led(0,' + light + ',' + op + ')\n';
+            var code = 'ext_sonar_left.led(0,' + light + ',' + op + ')\n';
         }
         else if (mode == "1") {
             Python.definitions_['import_right_ext_i2c'] = 'ext_i2c_right = i2cdevice.I2C_device(scl = machine.Pin(2), sda = machine.Pin(3), freq = 10000)';
             Python.definitions_['import_right_sonar'] = 'ext_sonar_right = i2cdevice.Sonar(ext_i2c_right)';
-            code = 'ext_sonar_right.led(0,' + light + ',' + op + ')\n';
+            var code = 'ext_sonar_right.led(0,' + light + ',' + op + ')\n';
         }
         return code;
     }

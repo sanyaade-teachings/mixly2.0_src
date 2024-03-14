@@ -266,14 +266,14 @@ export const mixbot_addr_extern = function () {
 
 export const robot_motor_extern = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_motor'] = 'from mixbot_ext import ext_motor';
         var code = 'ext_motor.run(' + mode + ',' + speed + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -292,12 +292,12 @@ export const robot_motor_extern = function () {
 
 export const robot_motor_extern_get_speed = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     if (version == 'mixbot') {
         var code = 'ext_motor.run(' + mode + ")";
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -316,11 +316,11 @@ export const robot_motor_extern_get_speed = function () {
 
 export const robot_traffic_light_extern = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var light = this.getFieldValue('light');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_traffic'] = 'from mixbot_ext import ext_traffic';
-        var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+        var mode = this.getFieldValue('mode');
         var light = this.getFieldValue('light');
         var code = 'ext_traffic.led(' + mode + ',';
         if (light == '0' || light == '1' || light == '2') { code += '0' + ',' }
@@ -332,7 +332,7 @@ export const robot_traffic_light_extern = function () {
         code += ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -358,7 +358,7 @@ export const robot_traffic_light_extern = function () {
 
 export const robot_led_extern = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var color = this.getFieldValue('color');
     var value = Python.valueToCode(this, 'value', Python.ORDER_ATOMIC);
     if (version == 'mixbot') {
@@ -366,7 +366,7 @@ export const robot_led_extern = function () {
         var code = color + '_LED.brightness(' + mode + ',' + value + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -384,7 +384,7 @@ export const robot_led_extern = function () {
 };
 
 export const robot_led_extern_get_value = function () {
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var color = this.getFieldValue('color');
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == 'mixbot') {
@@ -392,7 +392,7 @@ export const robot_led_extern_get_value = function () {
         var code = color + '_LED.brightness(' + mode + ")";
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -411,14 +411,14 @@ export const robot_led_extern_get_value = function () {
 
 export const robot_servo_extern_get_status = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var status = this.getFieldValue('status');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
         var code = 'ext_servo.state(' + mode + ")" + status;
         return [code, Python.ORDER_ATOMIC];
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -437,14 +437,14 @@ export const robot_servo_extern_get_status = function () {
 
 export const robot_servo_extern_stop_mode = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var status = this.getFieldValue('status');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
         var code = 'ext_servo.stop_mode(' + mode + "," + status + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -463,13 +463,13 @@ export const robot_servo_extern_stop_mode = function () {
 
 export const robot_servo_extern_stop = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
         var code = 'ext_servo.stop(' + mode + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -488,7 +488,7 @@ export const robot_servo_extern_stop = function () {
 
 export const robot_servo_extern_absolute_run = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var status = this.getFieldValue('status');
     var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var direction = this.getFieldValue('direction');
@@ -498,7 +498,7 @@ export const robot_servo_extern_absolute_run = function () {
         var code = 'ext_servo.absolute_run(' + mode + "," + status + "," + speed + "," + direction + "," + angle + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -518,13 +518,13 @@ export const robot_servo_extern_absolute_run = function () {
 
 export const robot_servo_extern_relative_origin = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     if (version == 'mixbot') {
         Python.definitions_['import_mixbot_ext_ext_servo'] = 'from mixbot_ext import ext_servo';
         var code = 'ext_servo.relative_origin(' + mode + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -543,7 +543,7 @@ export const robot_servo_extern_relative_origin = function () {
 
 export const robot_servo_extern_relative_run = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var status = this.getFieldValue('status');
     var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var angle = Python.valueToCode(this, 'angle', Python.ORDER_ATOMIC);
@@ -552,7 +552,7 @@ export const robot_servo_extern_relative_run = function () {
         var code = 'ext_servo.relative_run(' + mode + "," + status + "," + speed + "," + angle + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {
@@ -571,7 +571,7 @@ export const robot_servo_extern_relative_run = function () {
 
 export const robot_servo_extern_relative_continue = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
+    var mode = this.getFieldValue('mode');
     var status = this.getFieldValue('status');
     var speed = Python.valueToCode(this, 'speed', Python.ORDER_ATOMIC);
     var direction = this.getFieldValue('direction');
@@ -580,7 +580,7 @@ export const robot_servo_extern_relative_continue = function () {
         var code = 'ext_servo.relative_continue(' + mode + "," + status + "," + speed + "," + direction + ")\n";
         return code;
     }
-    else if (version == 'mixgo_baize') {
+    else if (version == 'feiyi') {
         Python.definitions_['import_machine'] = 'import machine';
         Python.definitions_['import_i2cdevice'] = 'import i2cdevice';
         if (mode == "0") {

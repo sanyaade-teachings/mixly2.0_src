@@ -144,13 +144,6 @@ export const mixGo_led = function () {
     return code;
 };
 
-Blockly.Blocks.sensor_button_is_pressed = Blockly.Blocks.mixgo_button_is_pressed;
-Blockly.Blocks.sensor_pin_pressed = Blockly.Blocks.sensor_mixgo_pin_pressed;
-Blockly.Blocks.sensor_pin_near = Blockly.Blocks.sensor_mixgo_pin_near;
-Blockly.Blocks.sensor_light = Blockly.Blocks.sensor_mixgo_light;
-Blockly.Blocks.sensor_sound = Blockly.Blocks.sensor_mixgo_sound;
-
-
 export const MixGo_rgb = function () {
     var value_led = Blockly.Arduino.valueToCode(this, '_LED_', Blockly.Arduino.ORDER_ATOMIC);
     var COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
@@ -253,3 +246,7 @@ export const mixgo_button_is_pressed = function () {
     var code = 'digitalRead(' + btn + ')';
     return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+export const sensor_button_is_pressed = mixgo_button_is_pressed;
+// export const sensor_pin_pressed = sensor_mixgo_pin_pressed;
+export const sensor_pin_near = sensor_mixgo_pin_near;

@@ -223,7 +223,7 @@
                 </block>
               </value>
               <next>
-                <block type="controls_delay">
+                <block type="controls_delay_new">
                   <field name="Time">ms</field>
                   <value name="DELAY_TIME">
                     <block type="math_number">
@@ -1962,6 +1962,12 @@
       </value>
     </block>
   </category>
+  <category id="catCC_G1" colour="40" m-show='micropython:esp32s2:mixgo_ce'>
+    <block type="cc_g1_read_bat"></block>
+    <block type="cc_g1_read_joystick"></block>
+    <block type="cc_g1_read_key"></block>
+    <block type="cc_g1_turnoff"></block>
+  </category>
   <category id="catIot" colour="#2FAD7A">
     <category id="catBlynk" colour="#2FAD7A">
       <block type="iot_wifi_connect">
@@ -2544,24 +2550,7 @@
   <category id="catGroup" colour="140">
 
     <category id="catIR" colour="140">
-      <block type="communicate_ir_send">
-        <value name="PIN">
-          <shadow type="pins_digital_pin">
-            <field name="PIN">39</field>
-          </shadow>
-        </value>
-        <value name="ADDR">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="SUB">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="communicate_ir_recv">
+      <block type="communicate_ir_recv_init">
         <value name="PIN">
           <shadow type="pins_digital_pin">
             <field name="PIN">38</field>
@@ -2569,31 +2558,86 @@
         </value>
         <value name="SUB">
           <shadow type="factory_block_return">
-            <field name="VALUE">cb</field>
+            <field name="VALUE"></field>
           </shadow>
         </value>
       </block>
+      <block type="internal_variable"></block>
+      <block type="recv_fun"></block>
+      <block type="ir_whether_recv"></block>
+      <block type="ir_recv_timeout">
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">20000</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="communicate_ir_send_init">
+        <value name="PIN">
+          <shadow type="pins_digital_pin">
+            <field name="PIN">39</field>
+          </shadow>
+        </value>
+        <value name="power">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_conventional_data">
+        <value name="cmd">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="addr">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="toggle">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_study_code">
+        <value name="LIST">
+          <shadow type="list_many_input">
+            <field name="CONTENT">9000,4500,563,563</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_busy"></block>
       <block type="procedures_defnoreturn">
         <mutation>
+          <arg name="cmd"></arg>
           <arg name="addr"></arg>
-          <arg name="data"></arg>
+          <arg name="raw"></arg>
+          <arg name="pulses"></arg>
         </mutation>
-        <field name="NAME">cb</field>
+        <field name="NAME">callback</field>
         <statement name="STACK">
-          <block type="controls_if">
-            <value name="IF0">
-              <block type="logic_compare">
-                <field name="OP">EQ</field>
-                <value name="A">
-                  <block type="variables_get">
-                    <field name="VAR">data</field>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
+          <block type="system_print_many">
+            <mutation items="4"></mutation>
+            <value name="ADD0">
+              <block type="variables_get">
+                <field name="VAR">cmd</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="variables_get">
+                <field name="VAR">addr</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="variables_get">
+                <field name="VAR">raw</field>
+              </block>
+            </value>
+            <value name="ADD3">
+              <block type="variables_get">
+                <field name="VAR">pulses</field>
               </block>
             </value>
           </block>
@@ -2705,6 +2749,7 @@
         <value name="miso">
           <shadow type="pins_digital_pin">
             <field name="PIN">5</field>
+
           </shadow>
         </value>
       </block>
@@ -3209,6 +3254,13 @@
       </value>
     </block>
     <block type="sensor_LTR308_extern">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">xsensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="sensor_LTR390UV_extern">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">xsensor</field>
@@ -5323,7 +5375,7 @@
         </value>
         <value name="VAR4">
           <shadow type="text">
-            <field name="TEXT">自模型识别</field>
+            <field name="TEXT">外部模型加载</field>
           </shadow>
         </value>
       </block>
@@ -5335,6 +5387,407 @@
         </shadow>
       </value>
     </block>
+  </category>
+  <category id="catAIsensor2" colour="#90A244">
+    <block type="serial_softserial_new">
+      <value name="RX">
+        <shadow type="pins_digital_pin">
+          <field name="PIN">1</field>
+        </shadow>
+      </value>
+      <value name="TX">
+        <shadow type="pins_digital_pin">
+          <field name="PIN">2</field>
+        </shadow>
+      </value>
+      <next>
+        <block type="ai_sensor_use_uart_init">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </next>
+    </block>
+    <block type="ai_sensor_config">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ai_sensor</field>
+        </shadow>
+      </value>
+      <value name="RX">
+        <shadow type="math_number">
+          <field name="NUM">9</field>
+        </shadow>
+      </value>
+      <value name="TX">
+        <shadow type="math_number">
+          <field name="NUM">8</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="ai_sensor_rgb">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ai_sensor</field>
+        </shadow>
+      </value>
+      <value name="led1">
+        <shadow type="tuple_create_with_text_return">
+          <field name="TEXT">255,255,0</field>
+        </shadow>
+      </value>
+      <value name="led2">
+        <shadow type="tuple_create_with_text_return">
+          <field name="TEXT">0,0,255</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="ai_sensor_audio_record">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ai_sensor</field>
+        </shadow>
+      </value>
+      <value name="VAR1">
+        <shadow type="text">
+          <field name="TEXT">1.wav</field>
+        </shadow>
+      </value>
+      <value name="VAR2">
+        <shadow type="math_number">
+          <field name="NUM">5</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="ai_sensor_audio_play">
+      <value name="SUB">
+        <shadow type="variables_get">
+          <field name="VAR">ai_sensor</field>
+        </shadow>
+      </value>
+      <value name="VAR1">
+        <shadow type="text">
+          <field name="TEXT">1.wav</field>
+        </shadow>
+      </value>
+      <value name="VAR2">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_licenseplates">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="ai_sensor_licenseplate">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">licensePlate</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_classifier_faces">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="ai_sensor_face">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">face</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_20objects">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+    <block type="ai_sensor_20object">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">20objects</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="ai_sensor_qrcode_lite">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">ai_sensor</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_qrcodes">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_qrcode">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">qrcode</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_barcodes">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_barcode">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">barcode</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_tags">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_tag">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">tag</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_lines">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+          <value name="VAR1">
+            <shadow type="math_number">
+              <field name="NUM">2500</field>
+            </shadow>
+          </value>
+          <value name="VAR2">
+            <shadow type="math_number">
+              <field name="NUM">25</field>
+            </shadow>
+          </value>
+          <value name="VAR3">
+            <shadow type="math_number">
+              <field name="NUM">25</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_line">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">line</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_circles">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+          <value name="VAR1">
+            <shadow type="math_number">
+              <field name="NUM">3500</field>
+            </shadow>
+          </value>
+          <value name="VAR2">
+            <shadow type="math_number">
+              <field name="NUM">2</field>
+            </shadow>
+          </value>
+          <value name="VAR3">
+            <shadow type="math_number">
+              <field name="NUM">100</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_circle">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">circle</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_rects">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+          <value name="VAR1">
+            <shadow type="math_number">
+              <field name="NUM">10000</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_rect">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">rect</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_find_colors">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_color">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">info</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+        <block type="ai_sensor_color_chases">
+          <value name="SUB">
+            <shadow type="variables_get">
+              <field name="VAR">ai_sensor</field>
+            </shadow>
+          </value>
+          <value name="VAR1">
+            <shadow type="variables_get">
+              <field name="VAR">color_lab</field>
+            </shadow>
+          </value>
+          <value name="VAR2">
+            <shadow type="math_number">
+              <field name="NUM">10</field>
+            </shadow>
+          </value>
+          <value name="VAR3">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+      </value>
+    </block>
+
+    <block type="ai_sensor_color_chases_result">
+      <value name="VAR">
+        <shadow type="variables_get">
+          <field name="VAR">colors</field>
+        </shadow>
+      </value>
+    </block>
+
+    <!--   <block type="variables_set">
+      <field name="VAR">info</field>
+      <value name="VALUE">
+      <block type="ai_sensor_yolo_recognize">
+        <value name="SUB">
+          <shadow type="variables_get">
+            <field name="VAR">ai_sensor</field>
+          </shadow>
+        </value>
+        <value name="VAR1">
+          <shadow type="tuple_create_with_text_return">
+            <field name="TEXT">0.1606, 0.3562, 0.4712, 0.9568, 0.9877, 1.9108, 1.8761, 3.5310, 3.4423,
+    5.6823</field>
+          </shadow>
+        </value>
+        <value name="VAR2">
+          <shadow type="text">
+              <field name="TEXT">/sd/masks.kmodel</field>
+            </shadow>
+        </value>  
+        <value name="VAR4">
+          <shadow type="text">
+              <field name="TEXT">外部模型加载</field>
+            </shadow>
+        </value>      
+      </block>
+  </block>
+  <block type="ai_sensor_yolo_recognize_result">
+    <value name="VAR">
+      <shadow type="variables_get">
+        <field name="VAR">objects</field>
+      </shadow>
+    </value>
+  </block> -->
   </category>
   <category id="catFile" colour="0">
     <block type="storage_fileopen">
@@ -5833,6 +6286,7 @@
       </value>
     </block>
   </category>
+
   <category id="catFactory" name="Factory" colour="#777777">
     <block type="factory_import"></block>
     <block type="factory_from_import"></block>

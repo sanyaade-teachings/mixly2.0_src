@@ -11,8 +11,7 @@ export const display_matrix_use_i2c_init = function () {
         if (version == 'mixgo_ce') {
             Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
             code = v + ' = matrix32x12.Matrix(' + iv + ',font_address=0x3A0000)\n';
-        }
-        else {
+        } else {
             Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
             code = v + ' = matrix32x12.Matrix(' + iv + ',font_address=0x700000)\n';
         }
@@ -138,11 +137,6 @@ export const matrix_extern_image_invert = function (a) {
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const display_onoff = function () {
-    var code = (this.getFieldValue('ONOFF') == 'ON') ? '1' : '0';
-    return [code, Python.ORDER_ATOMIC];
-};
-
 //oled
 export const display_use_i2c_init = function () {
     Python.definitions_['import_machine'] = 'import machine';
@@ -189,16 +183,14 @@ export const display_rect = function () {
     var value_height = Python.valueToCode(this, 'height', Python.ORDER_ATOMIC);
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
-    var code = '';
     switch (checkbox_fill) {
     case "True":
-        code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
-        break;
+        var code = varName + '.show_fill_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+        return code;
     case "False":
-        code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
-        break;
+        var code = varName + '.show_rect(' + location_x + ', ' + location_y + ', ' + value_width + ', ' + value_height + ',' + size + ')\n';
+        return code;
     }
-    return code;
 };
 
 
@@ -212,6 +204,11 @@ export const display_line = function () {
     var value_direction = this.getFieldValue("direction");
     var code = varName + '.show_' + value_direction + '(' + location_x + ', ' + location_y + ', ' + value_length + ', 1)\n';
     return code;
+};
+
+export const display_onoff = function () {
+    var code = (this.getFieldValue('ONOFF') == 'ON') ? '1' : '0';
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const image_shift = function (a) {
@@ -253,16 +250,14 @@ export const display_circle = function () {
     var value_r = Python.valueToCode(this, 'r', Python.ORDER_ATOMIC);
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
-    var code = '';
     switch (checkbox_fill) {
     case "True":
-        code = varName + '.show_fill_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
-        break;
+        var code = varName + '.show_fill_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
+        return code;
     case "False":
-        code = varName + '.show_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
-        break;
+        var code = varName + '.show_circle(' + location_x + ', ' + location_y + ', ' + value_r + ', ' + size + ')\n';
+        return code;
     }
-    return code;
 };
 
 export const display_triangle = function () {
@@ -277,16 +272,14 @@ export const display_triangle = function () {
     var location_y2 = Python.valueToCode(this, 'y2', Python.ORDER_ATOMIC);
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
-    var code = '';
     switch (checkbox_fill) {
     case "True":
-        code = varName + '.show_fill_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
-        break;
+        var code = varName + '.show_fill_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
+        return code;
     case "False":
-        code = varName + '.show_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
-        break;
+        var code = varName + '.show_triangle(' + location_x0 + ', ' + location_y0 + ', ' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', ' + size + ')\n';
+        return code;
     }
-    return code;
 };
 
 export const display_oled_showBitmap = function () {
@@ -364,13 +357,9 @@ export const display_tm1650_set_brightness = function () {
 
 export const tft_use_spi_init = function () {
     Python.definitions_['import_st7789'] = 'import st7789';
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
-    var addr = '';
-    if (version === 'mixgo_pe' || version === 'mpython') {
-        addr = '0x700000';
-    } else {
-        addr = '0x3A0000';
-    }
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_pe' || version == 'mpython') { var addr = '0x700000' }
+    else { var addr = '0x3A0000' }
     var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
     var sv = Python.valueToCode(this, 'SPISUB', Python.ORDER_ATOMIC);
     var pv = Python.valueToCode(this, 'PINCS', Python.ORDER_ATOMIC);

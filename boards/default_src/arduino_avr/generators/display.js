@@ -322,7 +322,6 @@ export const display_Matrix_Brightness = function () {
 
 //点阵 全亮/全灭/关闭/开启
 export const display_Matrix_fillScreen = function () {
-    var matrixType = this.getFieldValue('TYPE');
     var write = this.getFieldValue('WRITE');
     //var matrixName = this.getFieldValue('matrixName');
     var matrixName = "myMatrix";
@@ -518,7 +517,7 @@ export const oled_icons = function () {
     var POS_y = Blockly.Arduino.valueToCode(this, 'POS_Y', Blockly.Arduino.ORDER_ATOMIC) || '0';
     var ICON_SIZE = this.getFieldValue('ICON_SIZE');
     var ICON_IMAGE = this.getFieldValue('ICON_IMAGE');
-    var code = NAME + ".setFontPosBottom();\n"+NAME + ".setFont(u8g2_font_open_iconic_all_" + ICON_SIZE + "x_t);\n"
+    var code = NAME + ".setFontPosBottom();\n" + NAME + ".setFont(u8g2_font_open_iconic_all_" + ICON_SIZE + "x_t);\n"
         + NAME + ".drawGlyph(" + POS_x + "," + POS_y + "+" + ICON_SIZE + "*8," + ICON_IMAGE + ");\n";
     return code;
 };

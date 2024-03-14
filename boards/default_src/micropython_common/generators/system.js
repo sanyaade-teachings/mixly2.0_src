@@ -158,7 +158,7 @@ export const system_timer_init = function () {
     var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
     Python.definitions_['import_machine'] = 'import machine';
     var code = '';
-    if(version === 'mixgo_baize') {
+    if(version === 'feiyi') {
         code = v + ' = machine.Timer(0)\n';
     } else{
         code = v + ' = machine.Timer(-1)\n';

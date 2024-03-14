@@ -195,5 +195,5 @@ export const communicate_ow_select = function () {
 // Blockly.Blocks['spi_readinto_output'] = Blockly.Blocks['communicate_spi_readinto_output'];
 // Blockly.Blocks['spi_write'] = Blockly.Blocks['communicate_spi_write'];
 // Blockly.Blocks['spi_write_readinto'] = Blockly.Blocks['communicate_spi_write_readinto'];
-// Blockly.Blocks.i2c_master_reader2 = Blockly.Blocks.communicate_i2c_master_read;
-// Blockly.Blocks.i2c_available = Blockly.Blocks.communicate_i2c_available;
+// export const i2c_master_reader2= communicate_i2c_master_read;
+// export const i2c_available= communicate_i2c_available;

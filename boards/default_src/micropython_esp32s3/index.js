@@ -39,6 +39,7 @@ import * as MicroPythonDisplayOnboardBlocks from '../micropython_common/blocks/d
 import * as MicroPythonDisplayExternBlocks from '../micropython_common/blocks/display_extern';
 import * as MicroPythonFactoryBlocks from '../micropython_common/blocks/factory';
 import * as MicroPythonBlynkBlocks from '../micropython_common/blocks/blynk';
+import * as MicroPythonNovaG1Blocks from '../micropython_common/blocks/nova_g1';
 
 import * as InputBlocks from './blocks/inout';
 import * as PinsBlocks from './blocks/pins';
@@ -75,6 +76,7 @@ import * as MicroPythonDisplayOnboardGenerators from '../micropython_common/gene
 import * as MicroPythonDisplayExternGenerators from '../micropython_common/generators/display_extern';
 import * as MicroPythonFactoryGenerators from '../micropython_common/generators/factory';
 import * as MicroPythonBlynkGenerators from '../micropython_common/generators/blynk';
+import * as MicroPythonNovaG1Generators from '../micropython_common/generators/nova_g1';
 
 import * as InputGenerators from './generators/inout';
 import * as PinsGenerators from './generators/pins';
@@ -122,6 +124,7 @@ Object.assign(
     MicroPythonDisplayExternBlocks,
     MicroPythonFactoryBlocks,
     MicroPythonBlynkBlocks,
+    MicroPythonNovaG1Blocks,
     InputBlocks,
     PinsBlocks
 );
@@ -159,6 +162,7 @@ Object.assign(
     MicroPythonDisplayExternGenerators,
     MicroPythonFactoryGenerators,
     MicroPythonBlynkGenerators,
+    MicroPythonNovaG1Generators,
     InputGenerators,
     PinsGenerators
 );

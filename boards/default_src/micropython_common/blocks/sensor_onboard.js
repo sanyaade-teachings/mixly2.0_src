@@ -195,17 +195,10 @@ export const sensor_distance_hrsc04 = {
     }
 };
 
-// var RTC_TIME_TYPE = [
-//     [Blockly.Msg.MIXLY_YEAR, "Year"],
-//     [Blockly.Msg.MIXLY_MONTH, "Month"],
-//     [Blockly.Msg.MIXLY_DAY, "Day"],
-//     [Blockly.Msg.MIXLY_HOUR, "Hour"],
-//     [Blockly.Msg.MIXLY_MINUTE, "Minute"],
-//     [Blockly.Msg.MIXLY_SECOND, "Second"],
-//     [Blockly.Msg.MIXLY_WEEK, "Week"],
-//     [Blockly.Msg.MIXLY_MIX1, "Mix1"],
-//     [Blockly.Msg.MIXLY_MIX2, "Mix2"],
-// ];
+
+
+
+
 
 export const RTC_set_time = {
     init: function () {
@@ -363,6 +356,15 @@ export const number6 = {
     }
 };
 
+export const number7 = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"]]), 'op')
+        this.setOutput(true);
+        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_INOUT_HIGHLOW);
+    }
+};
 
 export const sensor_mixgo_pin_near = {
     init: function () {
@@ -400,12 +402,12 @@ export const sensor_mixgo_pin_near_double = {
     }
 };
 
-export const sensor_yuankongzi_pin_near = {
+export const sensor_mixgo_nova_pin_near = {
     init: function () {
         this.setColour(SENSOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "l"], [Blockly.Msg.TEXT_TRIM_RIGHT, "r"]]), "direction")
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.mixpy_PL_TEXT_TOP, "l"], [Blockly.Msg.mixpy_PL_TEXT_BOTTOM, "r"]]), "direction")
             .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -415,20 +417,20 @@ export const sensor_yuankongzi_pin_near = {
             var mode0 = Blockly.Msg.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
             var mode1 = Blockly.Msg.MIXLY_ESP32_NEAR;
             var TOOLTIPS = {
-                'l': Blockly.Msg.TEXT_TRIM_LEFT,
-                'r': Blockly.Msg.TEXT_TRIM_RIGHT,
+                'l': Blockly.Msg.mixpy_PL_TEXT_TOP,
+                'r': Blockly.Msg.mixpy_PL_TEXT_BOTTOM,
             };
-            return mode0 + TOOLTIPS[mode] + mode1;
+            return mode0 + TOOLTIPS[mode] + mode1
         });
     }
 };
 
-Blockly.Blocks['sensor_yuankongzi_LTR308'] = {
+export const sensor_mixgo_nova_LTR308 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.setColour(SENSOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
-            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "l"], [Blockly.Msg.TEXT_TRIM_RIGHT, "r"]]), "direction")
+            .appendField(new Blockly.FieldDropdown([[Blockly.Msg.mixpy_PL_TEXT_TOP, "l"], [Blockly.Msg.mixpy_PL_TEXT_BOTTOM, "r"]]), "direction")
             .appendField(Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT + Blockly.Msg.MIXLY_DATA);
         this.setOutput(true, Number);
         this.setInputsInline(true);
@@ -438,10 +440,10 @@ Blockly.Blocks['sensor_yuankongzi_LTR308'] = {
             var mode0 = Blockly.Msg.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
             var mode1 = Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT;
             var TOOLTIPS = {
-                'l': Blockly.Msg.TEXT_TRIM_LEFT,
-                'r': Blockly.Msg.TEXT_TRIM_RIGHT,
+                'l': Blockly.Msg.mixpy_PL_TEXT_TOP,
+                'r': Blockly.Msg.mixpy_PL_TEXT_BOTTOM,
             };
-            return mode0 + TOOLTIPS[mode] + mode1;
+            return mode0 + TOOLTIPS[mode] + mode1
         });
     }
 };
@@ -590,6 +592,21 @@ export const sensor_aht11 = {
         });
     }
 };
+
+
+export const sensor_get_temperature = {
+    init: function () {
+        this.setColour(SENSOR_ONBOARD_HUE);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_GETTEMPERATUE);
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+    }
+};
+
+
+
+
 
 export const sensor_hp203 = {
     init: function () {
@@ -1358,9 +1375,9 @@ export const bitbot_als_num = {
     }
 };
 
-export const sensor_yuankongzi_sound = {
+export const sensor_mixgo_nova_sound = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.setColour(SENSOR_ONBOARD_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
         this.setOutput(true, Number);

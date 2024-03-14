@@ -761,7 +761,7 @@ export const Matrix_img = {
 };
 
 //点阵屏 设置生效
-Blockly.Blocks.display_Matrix_write = {
+export const display_Matrix_write = {
     init: function () {
         this.setColour(Blockly.Msg['DISPLAY_HUE']);
         this.appendDummyInput("")

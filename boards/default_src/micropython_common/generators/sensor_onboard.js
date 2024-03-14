@@ -78,8 +78,6 @@ export const HCSR04 = function () {
     return [code, Python.ORDER_ATOMIC];
 }
 
-
-
 export const sensor_mixgo_light = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == "mixgo") {
@@ -95,6 +93,7 @@ export const sensor_mixgo_light = function () {
         return ['onboard_light.brightness()', Python.ORDER_ATOMIC];
     }
     return ['', Python.ORDER_ATOMIC];
+
 };
 
 export const sensor_mixgo_sound = function () {
@@ -141,10 +140,15 @@ export const number6 = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
+export const number7 = function () {
+    var code = this.getFieldValue('op');
+    return [code, Python.ORDER_ATOMIC];
+};
+
 export const sensor_mixgo_pin_near = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_ltr553als'] = "from " + version + " import onboard_ltr553als";
-    var code = 'onboard_ltr553als.ps_nl()';
+    Python.definitions_['import_' + version + '_onboard_als'] = "from " + version + " import onboard_als";
+    var code = 'onboard_als.ps_nl()';
     return [code, Python.ORDER_ATOMIC];
 };
 
@@ -156,19 +160,19 @@ export const sensor_mixgo_pin_near_double = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const sensor_yuankongzi_pin_near = function () {
+export const sensor_mixgo_nova_pin_near = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var direction = this.getFieldValue('direction');
-    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_ltr553als_' + direction;
-    var code = 'onboard_ltr553als_' + direction + '.ps_nl()';
+    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_als_' + direction;
+    var code = 'onboard_als_' + direction + '.ps_nl()';
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const sensor_yuankongzi_LTR308 = function () {
+export const sensor_mixgo_nova_LTR308 = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var direction = this.getFieldValue('direction');
-    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_ltr553als_' + direction;
-    var code = 'onboard_ltr553als_' + direction + '.als_vis()';
+    Python.definitions_['import_' + version + '_' + direction] = 'from ' + version + ' import onboard_als_' + direction;
+    var code = 'onboard_als_' + direction + '.als_vis()';
     return [code, Python.ORDER_ATOMIC];
 };
 
@@ -188,21 +192,20 @@ export const sensor_lm35 = function () {
 
 export const sensor_LTR308 = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_ltr553als'] = "from " + version + " import onboard_ltr553als";
-    var code = 'onboard_ltr553als.als_vis()';
+    Python.definitions_['import_' + version + '_onboard_als'] = "from " + version + " import onboard_als";
+    var code = 'onboard_als.als_vis()';
     return [code, Python.ORDER_ATOMIC];
 };
 
 export const sensor_sound = function () {
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
-    var code = '';
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if (version == 'mixbot') {
         Python.definitions_['import_' + version + '_sound'] = 'from ' + version + ' import sound';
-        code = 'sound.loudness()';
+        var code = 'sound.loudness()';
     }
     else {
         Python.definitions_['import_' + version + '_onboard_sound'] = 'from ' + version + ' import onboard_sound';
-        code = 'onboard_sound.read()';
+        var code = 'onboard_sound.read()';
     }
     return [code, Python.ORDER_ATOMIC];
 };
@@ -210,31 +213,42 @@ export const sensor_sound = function () {
 export const sensor_hp203 = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');
-    Python.definitions_['import_' + version + '_onboard_hp203x'] = "from " + version + " import onboard_hp203x";
-    var code = 'onboard_hp203x.' + key;
+    Python.definitions_['import_' + version + '_onboard_bps'] = "from " + version + " import onboard_bps";
+    var code = 'onboard_bps.' + key;
     return [code, Python.ORDER_ATOMIC];
 };
 
 export const sensor_aht11 = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');
-    Python.definitions_['import_' + version + '_onboard_ahtx0'] = "from " + version + " import onboard_ahtx0";
-    var code = 'onboard_ahtx0.' + key + '()';
+    if (version == 'mixgo_nova' || version == 'mixgo_zero') {
+        Python.definitions_['import_' + version + '_onboard_ths'] = "from " + version + " import onboard_ths";
+        var code = 'onboard_ths.' + key + '()';
+    } else {
+        Python.definitions_['import_' + version + '_onboard_ths'] = "from " + version + " import onboard_ths";
+        var code = 'onboard_ths.' + key + '()';
+    }
     return [code, Python.ORDER_ATOMIC];
 };
 
+export const sensor_get_temperature = function () {
+    Python.definitions_['import_feiyi_onboard_acc'] = 'from feiyi import _onboard_acc';
+    return ['onboard_acc.temperature()', Python.ORDER_ATOMIC];
+};
+
+
 export const rfid_readid = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
-    var code = 'onboard_rc522.read_card(0, x="id")';
+    Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
+    var code = 'onboard_rfid.read_card(0, x="id")';
     return [code, Python.ORDER_ATOMIC];
 };
 
 export const rfid_readcontent = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Python.valueToCode(this, 'SECTOR', Python.ORDER_ATOMIC);
-    Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
-    var code = 'onboard_rc522.read_card(' + sector + ', x="content")';
+    Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
+    var code = 'onboard_rfid.read_card(' + sector + ', x="content")';
     return [code, Python.ORDER_ATOMIC];
 };
 
@@ -242,8 +256,8 @@ export const rfid_write = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Python.valueToCode(this, 'SECTOR', Python.ORDER_ATOMIC);
     var cnt = Python.valueToCode(this, 'CONTENT', Python.ORDER_ATOMIC);
-    Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
-    var code = 'onboard_rc522.write_card(' + cnt + ',' + sector + ')\n';
+    Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
+    var code = 'onboard_rfid.write_card(' + cnt + ',' + sector + ')\n';
     return code;
 };
 
@@ -251,42 +265,43 @@ export const rfid_write_return = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var sector = Python.valueToCode(this, 'SECTOR', Python.ORDER_ATOMIC);
     var cnt = Python.valueToCode(this, 'CONTENT', Python.ORDER_ATOMIC);
-    Python.definitions_['import_' + version + '_onboard_rc522'] = "from " + version + " import onboard_rc522";
-    var code = 'onboard_rc522.write_card(' + cnt + ',' + sector + ')';
+    Python.definitions_['import_' + version + '_onboard_rfid'] = "from " + version + " import onboard_rfid";
+    var code = 'onboard_rfid.write_card(' + cnt + ',' + sector + ')';
     return [code, Python.ORDER_ATOMIC];
 };
 
 export const sensor_get_acceleration = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var key = this.getFieldValue('key');
-    var code = '';
     if (key == 'strength') {
         if (version == 'mixbot') {
             Python.definitions_['import_' + version + '_acc_gyr'] = 'from ' + version + ' import acc_gyr';
-            code = 'acc_gyr.strength()';
+            var code = 'acc_gyr.strength()';
         }
         else {
-            Python.definitions_['import_' + version + '_onboard_mxc6655xa'] = "from " + version + " import onboard_mxc6655xa";
-            code = 'onboard_mxc6655xa.strength()';
+            Python.definitions_['import_' + version + '_onboard_acc'] = "from " + version + " import onboard_acc";
+            var code = 'onboard_acc.strength()';
         }
         return [code, Python.ORDER_ATOMIC];
     }
+
     if (version == 'mixbot') {
         Python.definitions_['import_' + version + '_acc_gyr'] = 'from ' + version + ' import acc_gyr';
-        code = 'acc_gyr.accelerometer()' + key;
+        var code = 'acc_gyr.accelerometer()' + key;
     }
     else {
-        Python.definitions_['import_' + version + '_onboard_mxc6655xa'] = "from " + version + " import onboard_mxc6655xa";
-        code = 'onboard_mxc6655xa.acceleration()' + key;
+        Python.definitions_['import_' + version + '_onboard_acc'] = "from " + version + " import onboard_acc";
+        var code = 'onboard_acc.acceleration()' + key;
     }
     return [code, Python.ORDER_ATOMIC];
+
 };
 
 export const sensor_eulerangles = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_mxc6655xa'] = "from " + version + " import onboard_mxc6655xa";
+    Python.definitions_['import_' + version + '_onboard_acc'] = "from " + version + " import onboard_acc";
     var angle = this.getFieldValue('angle');
-    var code = 'onboard_mxc6655xa.eulerangles()' + angle;
+    var code = 'onboard_acc.eulerangles()' + angle;
     return [code, Python.ORDER_ATOMIC];
 };
 
@@ -523,28 +538,29 @@ export const onboard_RTC_get_time = function () {
 export const sensor_mixgo_cc_mmc5603_get_magnetic = function () {
     var key = this.getFieldValue('key');
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_mmc5603'] = "from " + version + " import onboard_mmc5603";
     if (key == 'all') {
+        Python.definitions_['import_' + version + '_onboard_mmc5603'] = "from " + version + " import onboard_mmc5603";
         var code = 'onboard_mmc5603.getstrength()';
         return [code, Python.ORDER_ATOMIC];
     }
 
-    var code = 'onboard_mmc5603.getdata()' + key;
+    Python.definitions_['import_' + version + '_onboard_mgs'] = "from " + version + " import onboard_mgs";
+    var code = 'onboard_mgs.getdata()' + key;
     return [code, Python.ORDER_ATOMIC];
 
 };
 
 export const sensor_mixgo_cc_mmc5603_get_angle = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_mmc5603'] = "from " + version + " import onboard_mmc5603";
-    var code = 'onboard_mmc5603.getangle()';
+    Python.definitions_['import_' + version + '_onboard_mgs'] = "from " + version + " import onboard_mgs";
+    var code = 'onboard_mgs.getangle()';
     return [code, Python.ORDER_ATOMIC];
 };
 
 export const sensor_mixgo_cc_mmc5603_calibrate_compass = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_mmc5603'] = "from " + version + " import onboard_mmc5603";
-    var code = 'onboard_mmc5603.calibrate()\n';
+    Python.definitions_['import_' + version + '_onboard_mgs'] = "from " + version + " import onboard_mgs";
+    var code = 'onboard_mgs.calibrate()\n';
     return code;
 };
 //mixgo_me onboard_sensor generators:
@@ -553,8 +569,8 @@ export const sensor_mixgo_cc_mmc5603_calibrate_compass = function () {
 
 
 export const sensor_mixgome_temperature = function () {
-    Python.definitions_['import_mixgo_me_onboard_mxc6655xa'] = "from mixgo_me import onboard_mxc6655xa";
-    var code = 'onboard_mxc6655xa.temperature()';
+    Python.definitions_['import_mixgo_me_onboard_acc'] = "from mixgo_me import onboard_acc";
+    var code = 'onboard_acc.temperature()';
     return [code, Python.ORDER_ATOMIC];
 };
 
@@ -608,16 +624,14 @@ export const sensor_rm_pin_near_double = function () {
 
 export const sensor_rm_battery_left = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version == 'mixgo_baize') {
-        Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    if (version == 'feiyi') {
+        Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
         var code = 'onboard_bot51.read_bat()';
         return [code, Python.ORDER_ATOMIC];
     }
-
     Python.definitions_['import_' + version + '_battery'] = 'from ' + version + ' import battery';
     var code = 'battery.voltage()';
     return [code, Python.ORDER_ATOMIC];
-
 };
 
 export const sensor_rm_acc = function () {
@@ -690,13 +704,13 @@ export const sensor_mixbot_get_gyro = function () {
 
 export const sensor_bitbot_LTR308 = function () {
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Python.definitions_['import_' + version + '_onboard_ltr553als'] = "from " + version + " import onboard_ltr553als";
-    var code = 'onboard_ltr553als.als_vis()';
+    Python.definitions_['import_' + version + '_onboard_als'] = "from " + version + " import onboard_als";
+    var code = 'onboard_als.als_vis()';
     return [code, Python.ORDER_ATOMIC];
 };
 
 export const sensor_bitbot_ALS = function () {
-    Python.definitions_['import_mixgo_baize_onboard_bot51'] = 'from mixgo_baize import onboard_bot51';
+    Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var mode = Python.valueToCode(this, 'mode', Python.ORDER_ATOMIC);
     var code = 'onboard_bot51.' + 'read_als(' + mode + ')';
     return [code, Python.ORDER_ATOMIC];
@@ -707,9 +721,14 @@ export const bitbot_als_num = function () {
     return [code, Python.ORDER_ATOMIC];
 };
 
-export const sensor_yuankongzi_sound = function () {
+export const sensor_mixgo_nova_sound = function () {
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    if (version == 'mixgo_zero') {
+        Python.definitions_['import_mixgo_zero_voice_sound_level'] = "from mixgo_zero_voice import sound_level";
+    } else {
+        Python.definitions_['import_mixgo_nova_voice_sound_level'] = "from mixgo_nova_voice import sound_level";
+    }
     var code = 'sound_level()';
-    Python.definitions_['import_yuankong_zi_voice_sound_level'] = "from yuankong_zi_voice import sound_level";
     return [code, Python.ORDER_ATOMIC];
 };
 

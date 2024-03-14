@@ -39,6 +39,7 @@ import * as MicroPythonDisplayOnboardBlocks from '../micropython_common/blocks/d
 import * as MicroPythonDisplayExternBlocks from '../micropython_common/blocks/display_extern';
 import * as MicroPythonFactoryBlocks from '../micropython_common/blocks/factory';
 import * as MicroPythonBlynkBlocks from '../micropython_common/blocks/blynk';
+import * as MicroPythonCCG1Blocks from '../micropython_common/blocks/cc_g1';
 
 import * as CeGoBlocks from './blocks/ce_go';
 import * as InputBlocks from './blocks/inout';
@@ -76,6 +77,7 @@ import * as MicroPythonDisplayOnboardGenerators from '../micropython_common/gene
 import * as MicroPythonDisplayExternGenerators from '../micropython_common/generators/display_extern';
 import * as MicroPythonFactoryGenerators from '../micropython_common/generators/factory';
 import * as MicroPythonBlynkGenerators from '../micropython_common/generators/blynk';
+import * as MicroPythonCCG1Generators from '../micropython_common/generators/cc_g1';
 
 import * as CeGoGenerators from './generators/ce_go';
 import * as InputGenerators from './generators/inout';
@@ -124,6 +126,7 @@ Object.assign(
     MicroPythonDisplayExternBlocks,
     MicroPythonFactoryBlocks,
     MicroPythonBlynkBlocks,
+    MicroPythonCCG1Blocks,
     CeGoBlocks,
     InputBlocks,
     PinsBlocks
@@ -162,6 +165,7 @@ Object.assign(
     MicroPythonDisplayExternGenerators,
     MicroPythonFactoryGenerators,
     MicroPythonBlynkGenerators,
+    MicroPythonCCG1Generators,
     CeGoGenerators,
     InputGenerators,
     PinsGenerators

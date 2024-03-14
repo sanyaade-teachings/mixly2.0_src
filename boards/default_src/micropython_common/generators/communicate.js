@@ -173,19 +173,87 @@ export const communicate_ow_select = function () {
     return code;
 };
 
-export const communicate_ir_recv = function () {
-    Python.definitions_['import_ir_remote'] = 'import ir_remote';
+export const communicate_ir_recv_init = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
     var pin = Python.valueToCode(this, 'PIN', Python.ORDER_ATOMIC);
+    var bit = this.getFieldValue('type');
     var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    return "ir_remote.IRrecv(" + pin + ", " + sub + ")\n"
+    if (sub == "" && bit == "RC5") {
+        var code = "ir_rx = irremote.RC5_RX(" + pin + ")\n";
+    }
+    else if (sub == "") {
+        var code = "ir_rx = irremote.NEC_RX(" + pin + "," + bit + ")\n";
+    }
+    else {
+        var code = "ir_rx = irremote.NEC_RX(" + pin + "," + bit + "," + sub + ")\n";
+    }
+    return code;
+
 };
 
-export const communicate_ir_send = function () {
-    Python.definitions_['import_ir_remote'] = 'import ir_remote';
+export const internal_variable = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var index = this.getFieldValue('index');
+    var code = "ir_rx.code[" + index + "]";
+    return [code, Python.ORDER_ATOMIC];
+};
+
+
+export const recv_fun = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var en = this.getFieldValue('en');
+    var code = "ir_rx.enable(" + en + ")\n";
+    return code;
+};
+
+export const ir_whether_recv = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var code = "ir_rx.any()";
+    return [code, Python.ORDER_ATOMIC];
+};
+
+export const ir_recv_timeout = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var time = Python.valueToCode(this, 'time', Python.ORDER_ATOMIC);
+    var code = "ir_rx.timeout(" + time + ")\n";
+    return code;
+};
+
+export const communicate_ir_send_init = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
     var pin = Python.valueToCode(this, 'PIN', Python.ORDER_ATOMIC);
-    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    var addr = Python.valueToCode(this, 'ADDR', Python.ORDER_ATOMIC);
-    return "ir_remote.IRsend(" + pin + ", " + addr + ", " + sub + ")\n"
+    var sam = this.getFieldValue('type');
+    var power = Python.valueToCode(this, 'power', Python.ORDER_ATOMIC);
+    if (sam == "RC5") {
+        var code = "ir_tx = irremote.RC5_TX(" + pin + "," + power + ")\n";
+    }
+    else {
+        var code = "ir_tx = irremote.NEC_TX(" + pin + "," + sam + "," + power + ")\n";
+    }
+    return code;
+
+};
+
+export const ir_transmit_conventional_data = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var cmd = Python.valueToCode(this, 'cmd', Python.ORDER_ATOMIC);
+    var addr = Python.valueToCode(this, 'addr', Python.ORDER_ATOMIC);
+    var toggle = Python.valueToCode(this, 'toggle', Python.ORDER_ATOMIC);
+    var code = "ir_tx.transmit(" + cmd + "," + addr + "," + toggle + ")\n";
+    return code;
+};
+
+export const ir_transmit_study_code = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var s_code = Python.valueToCode(this, 'LIST', Python.ORDER_ATOMIC);
+    var code = "ir_tx.transmit(pulses=" + s_code + ")\n";
+    return code;
+};
+
+export const ir_transmit_busy = function () {
+    Python.definitions_['import_irremote'] = 'import irremote';
+    var code = "ir_tx.busy()";
+    return [code, Python.ORDER_ATOMIC];
 };
 
 export const communicate_bluetooth_central_init = function () {
@@ -442,6 +510,7 @@ export const espnow_radio_recv_new = function (block) {
     Python.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac,ESPNow_radio_msg):\n' + doCode;
     Python.definitions_['ESPNow_radio_handlelist_append'] = 'if not ESPNow_radio_recv in handle_list:\n    handle_list.append(ESPNow_radio_recv)';
     Python.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(handle_list)\n";
+
     return '';
 }
 
@@ -454,6 +523,7 @@ export const espnow_radio_recv_certain_msg_new = function (block) {
     Python.definitions_['def_ESPNow_radio_recv__' + message] = 'def ESPNow_radio_recv__' + message + '(mac,ESPNow_radio_msg):\n' + doCode;
     Python.definitions_['ESPNow_radio_handlelist_append__' + message] = 'if not ESPNow_radio_recv__' + message + ' in handle_list:\n    handle_list.append(ESPNow_radio_recv__' + message + ')';
     Python.definitions_['ESPNow_radio_recv_callback__' + message] = "ESPNow_radio.recv_cb(handle_list)\n";
+
     return '';
 }
 
@@ -499,9 +569,7 @@ export const urequests_get = function () {
         Blockly.Variables.NAME_TYPE);
     var str = Python.valueToCode(this, 'DOMAIN', Python.ORDER_ATOMIC);
     var code = varName + '= ' + 'urequests.get(' + str + ')\n';
-
     return code;
-
 };
 
 export const urequests_attribute = function () {
@@ -533,5 +601,5 @@ Blockly.Blocks['spi_readinto'] = Blockly.Blocks['communicate_spi_readinto'];
 Blockly.Blocks['spi_readinto_output'] = Blockly.Blocks['communicate_spi_readinto_output'];
 Blockly.Blocks['spi_write'] = Blockly.Blocks['communicate_spi_write'];
 Blockly.Blocks['spi_write_readinto'] = Blockly.Blocks['communicate_spi_write_readinto'];
-Blockly.Blocks.i2c_master_reader2 = Blockly.Blocks.communicate_i2c_master_read;
-Blockly.Blocks.i2c_available = Blockly.Blocks.communicate_i2c_available;
+export const i2c_master_reader2= communicate_i2c_master_read;
+export const i2c_available= communicate_i2c_available;

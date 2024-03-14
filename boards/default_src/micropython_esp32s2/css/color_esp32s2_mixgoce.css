@@ -182,11 +182,11 @@ div.blocklyToolboxDiv > div.blocklyToolboxContents > div:nth-child(12) > div.blo
     background:url('../../../../common/media/mark/oled2.png') no-repeat;
     background-size: 100% auto;
 }
-#catlcd.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+#catLCD.blocklyTreeRow > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
     background:url('../../../../common/media/mark/oled.png') no-repeat;
     background-size: 100% auto;
 }
-#catlcd.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
+#catLCD.blocklyTreeRow.blocklyTreeSelected > div.blocklyTreeRowContentContainer > span.blocklyTreeIcon{
     background:url('../../../../common/media/mark/oled2.png') no-repeat;
     background-size: 100% auto;
 }

@@ -128,7 +128,7 @@ class StatusBarsManager extends PagesManager {
             events: {
                 show: (opt) => {
                     opt.$menu.detach();
-                    $('.statusbar-tab-menu > .tippy-box > .tippy-content').empty().append(opt.$menu);
+                    $('.mixly-drapdown-menu > .tippy-box > .tippy-content').empty().append(opt.$menu);
                     this.#$menu_.setProps({});
                     this.#tabMenu_.shown = true;
                 },
@@ -164,7 +164,7 @@ class StatusBarsManager extends PagesManager {
             children: toolChildMenu,
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem('工具', ''),
+                name: ContextMenu.getItem('板卡文件系统管理', ''),
                 callback: (key, opt) => console.log(123)
             }
         });
@@ -173,7 +173,7 @@ class StatusBarsManager extends PagesManager {
             type: 'ampy-filesystem-tool',
             data: {
                 isHtmlName: true,
-                name: 'Ampy板卡文件系统管理',
+                name: 'Ampy',
                 callback: (key, opt) => console.log(123)
             }
         });
@@ -182,7 +182,7 @@ class StatusBarsManager extends PagesManager {
             type: 'esptool-filesystem-tool',
             data: {
                 isHtmlName: true,
-                name: 'ESPTool板卡文件系统管理',
+                name: 'ESPTool',
                 callback: (key, opt) => console.log(123)
             }
         });
@@ -203,7 +203,7 @@ class StatusBarsManager extends PagesManager {
             delay: 0,
             duration: [ 0, 0 ],
             onCreate: (instance) => {
-                $(instance.popper).addClass('statusbar-tab-menu');
+                $(instance.popper).addClass('mixly-drapdown-menu');
             },
             onMount: (instance) => {
                 let options = this.#getMenu_() ?? {};

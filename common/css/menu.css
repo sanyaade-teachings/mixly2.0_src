@@ -14,16 +14,16 @@
     cursor: inherit;
 }
 
-.statusbar-tab-menu > .tippy-box {
+.mixly-drapdown-menu > .tippy-box {
     border: none !important;
 }
 
-.statusbar-tab-menu > .tippy-box > .tippy-content {
+.mixly-drapdown-menu > .tippy-box > .tippy-content {
     margin: 0;
     border: none;
 }
 
-.statusbar-tab-menu .context-menu-list {
+.mixly-drapdown-menu .context-menu-list {
     width: fit-content !important;
     min-width: 5em;
 }

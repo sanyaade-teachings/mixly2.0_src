@@ -1,44 +1,75 @@
 <style>
-    /* 板卡配置 */
-    .footer-layer-board-config button {
+    div[m-id="{{d.mId}}"] {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        align-items: center;
+    }
+
+    div[m-id="{{d.mId}}"] button {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
 
-    html[data-bs-theme=light] .footer-layer-board-config button.option {
-        background-color: var(--app-light-color);
+    div[m-id="{{d.mId}}"] button.title {
+        white-space: nowrap;
+        margin: 2px 0px;
+        padding: 0px;
     }
 
-    html[data-bs-theme=dark] .footer-layer-board-config button.option {
-        background-color: #007ACC;
+    div[m-id="{{d.mId}}"] button.title > p {
+        width: 100%;
+        text-align: right;
+        font-size: 14px;
+        line-height: 14px;
     }
 
-    html[data-bs-theme=light] .footer-layer-board-config button.title {
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] button.title {
         background-color: #ffffff;
         border: 1px #fff;
         color: #000;
         font-size: 14px;
     }
 
-    html[data-bs-theme=light] .footer-layer-board-config button.title:hover {
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] button.title:hover {
         color: #a5a5a5;
     }
 
-    html[data-bs-theme=dark] .footer-layer-board-config button.title {
-        background-color: #353535;
-        border: 1px #353535;
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] button.title {
+        background-color: #252525;
+        border: 1px transparent;
         color: #fff;
         font-size: 14px;
     }
 
-    html[data-bs-theme=dark] .footer-layer-board-config button.title:hover {
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] button.title:hover {
         color: var(--lay-color-text-2);
     }
 
+    div[m-id="{{d.mId}}"] button.option {
+        margin: 2px 0px;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] button.option {
+        background-color: var(--app-light-color);
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] button.option {
+        background-color: #007ACC;
+    }
+
+
     .footer-layer-board-config .footer-layer-btn.reset {
-        font-size: 14px;
-        line-height: 13px;
+        font-size: 13px;
+        line-height: 12px;
+    }
+
+    .board-config-menu {
+        display: inline-block;
+        border: 1px solid #454545 !important;
+        box-shadow: 0 2px 5px rgb(0 0 0 / 50%) !important;
+        animation-name: unset;
     }
 
     html[data-bs-theme=dark] .board-config-menu,
@@ -85,66 +116,17 @@
         background-color: #2980b9;
     }
 </style>
-<div
-    style="
-        display: flex;
-        flex-direction: column;
-    "
->
+<div m-id="{{d.mId}}">
     {{# layui.each(d.options, function(index, item){ }}
     <button
         mid="{{ item.key }}-label"
-        class="
-            layui-btn
-            layui-btn-fluid
-            layui-btn-xs
-            title
-        "
-        style="
-            white-space: nowrap;
-            margin: 2px 0px;
-            padding: 0px;
-        "
-    >
-        <p style="width: 100%; text-align: right;">{{ item.name }}</p>
+        class="layui-btn layui-btn-fluid layui-btn-xs title">
+        <p>{{ item.name }}</p>
     </button>
-    {{# }); }}
-</div>
-<div
-    style="
-        display: flex;
-        flex-direction: column;
-    "
->
-    {{# layui.each(d.options, function(index, item){ }}
-    <p
-        style="
-            white-space: nowrap;
-            text-align: center;
-            margin: 3.2px 0px;
-        "
-    >
-        &nbsp:&nbsp
-    </p>
-    {{# }); }}
-</div>
-<div
-    style="
-        display: flex;
-        flex-direction: column;
-    "
->
-    {{# layui.each(d.options, function(index, item){ }}
+    <p>&nbsp:&nbsp</p>
     <button
         mid="{{ item.key }}"
-        class="
-            layui-btn
-            layui-btn-fluid
-            layui-btn-xs
-            option
-        "
-        style="margin: 2px 0px;"
-    >
+        class="layui-btn layui-btn-fluid layui-btn-xs option">
         <p style="font-size: 13px;">{{ item.label }}</p>
         <i class="layui-icon layui-icon-triangle-d"></i>
     </button>

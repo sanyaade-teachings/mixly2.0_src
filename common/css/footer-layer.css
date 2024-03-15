@@ -35,6 +35,7 @@ html[data-bs-theme=dark] .footer-layer > .footer-layer-content > .layui-layer-ti
     line-height: 16px;
     color: #000;
     cursor: pointer;
+    margin-right: 3px;
 }
 
 html[data-bs-theme=light] .footer-layer > .footer-layer-content .footer-layer-btn {

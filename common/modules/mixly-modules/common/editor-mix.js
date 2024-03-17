@@ -431,12 +431,7 @@ class EditorMix extends EditorBase {
         }
         xml = $xml[0].outerHTML;
         if (config) {
-            config.pageType = this.getPageType();
-            try {
-                xml += `<config>${JSON.stringify(config)}</config>`;
-            } catch (error) {
-                Debug.error(error);
-            }
+            xml += `<config>${MJSON.stringify(config)}</config>`;
         }
         xml += `<code>${Base64.encode(code)}</code>`;
         return xml;
@@ -524,9 +519,6 @@ class EditorMix extends EditorBase {
         }
         let config, configStr = configDom && configDom.html();
         config = MJSON.parse(configStr);
-        if (config && config['pageType']) {
-            delete config['pageType'];
-        }
         let boardName = xmlDom.attr('board') ?? '';
         Boards.setSelectedBoard(boardName, config);
         let code = codeDom ? codeDom.html() : '';

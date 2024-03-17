@@ -67,9 +67,17 @@
 
     .board-config-menu {
         display: inline-block;
+        animation-name: unset;
+    }
+
+    html[data-bs-theme=light] .board-config-menu {
+        border: 1px solid #bebebe !important;
+        box-shadow: 0 2px 5px rgb(0 0 0 / 50%) !important;
+    }
+
+    html[data-bs-theme=dark] .board-config-menu {
         border: 1px solid #454545 !important;
         box-shadow: 0 2px 5px rgb(0 0 0 / 50%) !important;
-        animation-name: unset;
     }
 
     html[data-bs-theme=dark] .board-config-menu,

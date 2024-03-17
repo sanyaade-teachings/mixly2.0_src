@@ -112,6 +112,9 @@ class FooterLayerBoardConfig extends FooterLayer {
         const boardsInfo = this.boardsInfo[this.boardName];
         let optionsType = Object.keys(boardsInfo.defaultOptions);
         for (let i in selectedOptions) {
+            if (!boardsInfo.defaultOptions[i]) {
+                continue;
+            }
             let label = boardsInfo.defaultOptions[i].label;
             if (boardsInfo.optionIsLegal(i, selectedOptions[i])) {
                 label = selectedOptions[i].label;

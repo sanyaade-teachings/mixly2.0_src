@@ -79,7 +79,7 @@ import * as MicroPythonDisplayExternGenerators from '../micropython_common/gener
 import * as MicroPythonFactoryGenerators from '../micropython_common/generators/factory';
 import * as MicroPythonBlynkGenerators from '../micropython_common/generators/blynk';
 
-import * as PinsGenerators from './blocks/pins';
+import * as PinsGenerators from './generators/pins';
 
 import './css/color_esp32_mixgo.css';
 

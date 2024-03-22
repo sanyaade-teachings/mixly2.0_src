@@ -3072,6 +3072,7 @@
     <block type="algorithm_divide_books"></block>
     <block type="algorithm_get_half_books"></block>
     <!-- <block type="algorithm_check_half_books"></block> -->
+	<block type="algorithm_delete_book"></block>
     <block type="algorithm_delete_books"></block>
     <block type="algorithm_delete_books2"></block>
     <block type="algorithm_get_book_num"></block>

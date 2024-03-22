@@ -284,6 +284,15 @@ Blockly.Blocks['algorithm_no_ring2']={
   }
 };
 
+Blockly.Blocks['algorithm_yes_ring2']={
+  init: function() {
+    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+    this.appendDummyInput()
+    .appendField(Blockly.Msg.MIXLY_MIXPY_ALGORITHM_YES_RING);
+    this.setOutput(true);
+  }
+};
+
 Blockly.Blocks['algorithm_next_book'] = {
   init: function() {
     this.setColour(Blockly.Msg['ALGORITHM_HUE']);
@@ -332,6 +341,16 @@ Blockly.Blocks['algorithm_get_half_books'] = {
 //     this.setNextStatement(true, null);    
 //   }
 // };
+
+Blockly.Blocks['algorithm_delete_book'] = {
+  init: function() {
+    this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+    this.appendDummyInput()
+    .appendField(Blockly.Msg.MIXLY_MIXPY_ALGORITHM_DELETE_BOOK);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);    
+  }
+};
 
 Blockly.Blocks['algorithm_delete_books'] = {
   init: function() {

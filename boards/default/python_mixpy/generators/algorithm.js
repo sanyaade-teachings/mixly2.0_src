@@ -400,9 +400,9 @@ Blockly.Python.forBlock['algorithm_all_books'] = function() {
         Books.append(sprite.Sprite('books/book'+str(i), (130*i-650) if i>5 else 130*i, 320 if i>5 else 120))
 else:
     n=len(ring)-1
-ring[n]=1
-left = 0
-right = len(ring)-1
+ring[n]=n
+list=ring
+temp=Books
 time.sleep(1)\n`;
   return code;
 };
@@ -426,6 +426,11 @@ Blockly.Python.forBlock['algorithm_no_ring2'] = function() {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['algorithm_yes_ring2'] = function() {
+  var code = "any(value > 0 for value in qian)";
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 Blockly.Python.forBlock['algorithm_next_book'] = function() {
   Blockly.Python.definitions_.import_time = "import time";
   Blockly.Python.definitions_.import_sprite = "import sprite";
@@ -436,24 +441,32 @@ Blockly.Python.forBlock['algorithm_next_book'] = function() {
 };
 
 Blockly.Python.forBlock['algorithm_two_left'] = function() {
-  var code = "right - left >= 1";
+  var code = "len(list)>=2";
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.forBlock['algorithm_divide_books'] = function() {  
-  var code = "res = int((left + right) / 2)\n";
+  var code = `mid = int(len(list)/2)
+qian = list[0:mid]
+hou = list[mid:]
+qiantemp = temp[0:mid]
+houtemp = temp[mid:]\n`;
   return code;
 };
 
 Blockly.Python.forBlock['algorithm_get_half_books'] = function() {
   Blockly.Python.definitions_.import_time = "import time";
   Blockly.Python.definitions_.import_sprite = "import sprite";
-  var code = "flag = sum(ring[left:res+1])\n";
-  code += `for i in range(left, res+1, 1):
-    Books[i].filterBrighter()\n
-time.sleep(0.3)
-for i in range(left, res+1, 1):
-    Books[i].filterOrigin()\n`;
+  var code = `quchu = qian
+list = hou
+quchutemp = qiantemp
+temp = houtemp
+for i in qiantemp:
+    i.filterBrighter()
+time.sleep(0.5)
+for i in qiantemp:
+    i.filterGray()
+time.sleep(0.5)\n`;
   return code;
 };
 
@@ -462,25 +475,22 @@ for i in range(left, res+1, 1):
 //   return code;
 // };
 
-Blockly.Python.forBlock['algorithm_delete_books'] = function() {
+Blockly.Python.forBlock['algorithm_delete_book'] = function() {
   Blockly.Python.definitions_.import_time = "import time";
   Blockly.Python.definitions_.import_sprite = "import sprite";
-  var code = "left = res+1\n";
-  code += `for i in range(0, left, 1):
-    Books[i].filterGray()
+  var code = `list = quchu
+temp = quchutemp
+for i in qiantemp:
+    i.filterBrighter()
 time.sleep(0.5)
-res = left\n`
-  return code;
-};
-
-Blockly.Python.forBlock['algorithm_delete_books2'] = function() {
-  Blockly.Python.definitions_.import_time = "import time";
-  Blockly.Python.definitions_.import_sprite = "import sprite";
-  var code = "right=res\n";
-  code += `for i in range(right+1, len(ring), 1):
-    Books[i].filterGray()
+for i in qiantemp:
+    i.filterOrigin()
+for i in houtemp:
+	i.filterBrighter()
 time.sleep(0.5)
-res = right\n`
+for i in houtemp:
+    i.filterGray()
+time.sleep(0.5)\n`;
   return code;
 };
 
@@ -490,10 +500,12 @@ res = right\n`
 // };
 
 Blockly.Python.forBlock['algorithm_print_book2'] = function() {  
-  var code = `Books[res].filterBrighter()
-print('未消磁的书籍是第'+str(res+1)+'本《'+name[res%10]+'》。')\n`;
-  code += `if res!=n:
-    print('答案错误！请检查程序！')\n`
+  var code = `if 'list' in globals():
+    res = list[0]
+Books[res].filterBrighter()
+print('未消磁的书籍是第'+str(res+1)+'本《'+name[res%10]+'》。')
+if res!=n:
+	print('答案错误！请检查程序！')\n`;
   return code;
 };
 

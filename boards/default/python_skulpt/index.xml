@@ -2254,13 +2254,13 @@
 			<block type="algorithm_first_book"></block>
 			<!-- <block type="algorithm_no_ring"></block> -->
 			<block type="algorithm_no_ring2"></block>
+			<block type="algorithm_yes_ring2"></block>
 			<block type="algorithm_next_book"></block>
 			<block type="algorithm_two_left"></block>
 			<block type="algorithm_divide_books"></block>
 			<block type="algorithm_get_half_books"></block>
 			<!-- <block type="algorithm_check_half_books"></block> -->
-			<block type="algorithm_delete_books"></block>
-			<block type="algorithm_delete_books2"></block>
+			<block type="algorithm_delete_book"></block>
 			<!-- <block type="algorithm_print_book"></block> -->
 			<block type="algorithm_print_book2"></block>    
 		<!-- </category>

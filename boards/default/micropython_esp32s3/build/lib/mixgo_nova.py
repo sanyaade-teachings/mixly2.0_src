@@ -249,7 +249,6 @@ class Clock:
     def drawDial(self,color):  #画钟表刻度
         r_tic1 = self.r - 1
         r_tic2 = self.r - 2
-
         self.display.ellipse(self.xc, self.yc, self.r,self.r, self.color)
         self.display.ellipse(self.xc, self.yc, 2, 2, self.color,True)
 
@@ -262,7 +261,6 @@ class Clock:
             self.display.line(x1, y1, x2, y2, color)
 
     def drawHour(self,color):  #画时针
-
         r_hour = int(self.r / 10.0 * 5)
         ah = math.pi * 2.0 * ((self.hour % 12) + self.min / 60.0) / 12.0
         xh = int(self.xc + r_hour * math.sin(ah))
@@ -270,16 +268,13 @@ class Clock:
         self.display.line(self.xc, self.yc, xh, yh, color)
 
     def drawMin(self,color):  #画分针
-
         r_min = int(self.r / 10.0 * 7)
         am = math.pi * 2.0 * self.min / 60.0
-
         xm = round(self.xc + r_min * math.sin(am))
         ym = round(self.yc - r_min * math.cos(am))
         self.display.line(self.xc, self.yc, xm, ym, color)
 
     def drawSec(self,color):  #画秒针
-
         r_sec = int(self.r / 10.0 * 9)
         asec = math.pi * 2.0 * self.sec / 60.0
         xs = round(self.xc + r_sec * math.sin(asec))
@@ -292,6 +287,7 @@ class Clock:
         self.drawMin(self.color)
         self.drawSec(self.color)
         self.display.show()
+        self.clear(0)
 
     def clear(self,color=0):  #清除
         self.drawHour(color)

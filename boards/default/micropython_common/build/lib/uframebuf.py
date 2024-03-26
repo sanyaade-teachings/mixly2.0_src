@@ -412,13 +412,14 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 					self.show()
 					time.sleep_ms(delay) 
 
-	def scroll(self, data, space=0, speed=50, y=None, size=None, color=0xffff):
+	def scroll(self, data, space=0, speed=20, y=None, size=None, step= None, color=0xffff):
 		"""Scrolling characters"""
 		if data is not None:
 			size = self.height // (self._font.height * 3) if size is None else size
 			size = max(round(size), 1)
+			step = max(self.width // 30, 1)if step is None else step
 			font_len, font_buffer = self._take_buffer(str(data), space, size)
-			for i in range(font_len - space + self.width):    
+			for i in range(0, font_len - space + self.width, step):
 				x = -i + self.width
 				y = (self.height - self._font.height * size) // 2 if y is None else y
 				self.fill_rect(x - 1 , y - 1 , self.width -x + 2, font_buffer[0][1][1] * size + 2, 0)

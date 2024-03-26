@@ -549,8 +549,8 @@ Blockly.Python.forBlock['sensor_mixgo_cc_mmc5603_get_magnetic'] = function(){
     var key = this.getFieldValue('key');
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if(key == 'all'){
-        Blockly.Python.definitions_['import_'+version+'_onboard_mmc5603'] = "from "+version+" import onboard_mmc5603";
-        var code = 'onboard_mmc5603.getstrength()';
+        Blockly.Python.definitions_['import_'+version+'onboard_mgs'] = "from "+version+" import onboard_mgs";
+        var code = 'onboard_mgs.getstrength()';
         return [code, Blockly.Python.ORDER_ATOMIC];
     }
     else{

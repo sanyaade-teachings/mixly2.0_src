@@ -346,6 +346,7 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 		size = max(round(size), 1)
 		x =(self.width - width * size) // 2 if x is None else x
 		y =(self.height - height * size) // 2 if y is None else y
+		self.fill_rect(x, y, width * size, height * size, 0)
 		self.bitmap((buffer_info,(width, height)), x, y, size, color)    
 		if self.auto_show: self.show()
 

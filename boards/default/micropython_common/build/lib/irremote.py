@@ -105,30 +105,28 @@ class RC5_RX(IR_RX):
 
 	def decode(self):
 		pulse_len = len(self._pulses)
-		if not 4 <= pulse_len <= 28:
+		if pulse_len < 3:
 			print("Warning:", self.BADSTART)
 			return False
 		else:
-			bits = 1
 			bit = 1
-			value = 1 
+			value = 0 
 			num = 0
-			while bits < 14:
-				if not 500 < self._pulses[num] < 2100:
-					print("Warning:", self.BADDATA)
-					return False
+			pnum = pulse_len
+			while True:
 				short = self._pulses[num] < 1334
 				if not short:
 					bit ^= 1
 				value <<= 1
 				value |= bit
-				bits += 1
 				num += 1 + int(short)
+				if num >= pulse_len:
+					value >>= 1
+					break
 			#判读解码
 			cmd = (value & 0x3f) | (0 if ((value >> 12) & 1) else 0x40)
 			addr = (value >> 6) & 0x1f
 			self.code[0:3] = cmd, addr, value
-
 
 '''发射部分'''
 class IR_TX:
@@ -137,10 +135,13 @@ class IR_TX:
 		self._pulses = array.array('H')
 		self.carrier = False
 
-	def transmit(self, cmd=None, addr=None, toggle=None, pulses=None):
+	def transmit(self, cmd=None, addr=None, toggle=None, pulses=None, raw=None):
 		if pulses is None:
 			self.carrier = False
-			self.tx(cmd, addr, toggle)
+			if raw is None:
+				self.tx(cmd, addr, toggle)
+			else:
+				self.tx_raw(raw)
 			self._rmt.write_pulses(tuple(self._pulses))
 			self._pulses = array.array('H')
 		else:
@@ -168,31 +169,33 @@ class NEC_TX(IR_TX):
 	def _bit(self, b):
 		self._append(_TBURST, _T_ONE if b else _TBURST)
 
-	def tx(self, cmd, addr, toggle=0):  #cmd:0~0xff, addr:0~0xffff, toggle:,-1,0,1
-		if toggle <= 0:
-			self._falg = True
-			if self._samsung:
-				self._append(4500, 4500)
-			else:
-				self._append(9000, 4500)
-			if addr < 256:  # Short address: append complement
-				if self._samsung:
-				  addr |= addr << 8
-				else:
-				  addr |= ((addr ^ 0xff) << 8)
-			for _ in range(16):
-				self._bit(addr & 1)
-				addr >>= 1
-			cmd |= ((cmd ^ 0xff) << 8)
-			for _ in range(16):
-				self._bit(cmd & 1)
-				cmd >>= 1
-			self._append(_TBURST) 
-			if toggle == 0:
-				self._append(30000, 9000, 2250, _TBURST) 
+	def tx(self, cmd, addr, toggle=0):  #cmd:0~0xff, addr:0~0xffff, toggle:0,1
+		if self._samsung:
+			self._append(4500, 4500)
 		else:
-			time.sleep_ms(30)
-			self._append(9000, 2250, _TBURST) 
+			self._append(9000, 4500)
+		if addr < 256:  # Short address: append complement
+			if self._samsung:
+			  addr |= addr << 8
+			else:
+			  addr |= ((addr ^ 0xff) << 8)
+		for _ in range(16):
+			self._bit(addr & 1)
+			addr >>= 1
+		cmd |= ((cmd ^ 0xff) << 8)
+		for _ in range(16):
+			self._bit(cmd & 1)
+			cmd >>= 1
+		self._append(_TBURST) 
+		if toggle == 1:
+			self._append(30000, 9000, 2250, _TBURST) 
+
+	def tx_raw(self, raw):
+		self._append(9000, 4500)
+		while raw:
+			self._bit(raw & 1)
+			raw >>= 1
+		self._append(_TBURST) 
 
 class RC5_TX(IR_TX):  
 	_T_RC5 = const(889)
@@ -213,3 +216,15 @@ class RC5_TX(IR_TX):
 				else:
 					self._append(_T_RC5, _T_RC5)
 			mask >>= 1
+
+	def tx_raw(self, raw):
+		self._append(_T_RC5)
+		mask = 1 << len(bin(raw)) - 3
+		while mask:
+			if bool(raw & mask) ^ self.carrier:
+				self._add(_T_RC5)
+				self._append(_T_RC5)
+			else:
+				self._append(_T_RC5, _T_RC5)
+			mask >>= 1
+		self._append(_T_RC5)

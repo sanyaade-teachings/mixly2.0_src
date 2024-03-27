@@ -577,7 +577,8 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
                 error = lines.join('\n');
             }
             error = MString.decode(error);
-            statusBarTerminal.addValue(error + "\n");
+            statusBarTerminal.addValue(error);
+            statusBarTerminal.addValue('==' + (type === 'burn' ? Msg.Lang['烧录失败'] : Msg.Lang['上传失败']) + '==\n');
         } else {
             layer.msg((type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']), {
                 time: 1000

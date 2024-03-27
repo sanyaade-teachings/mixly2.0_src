@@ -490,8 +490,13 @@ def reset(mode):
 
 
 if __name__ == "__main__":
+    error_exit = False
     try:
         cli()
+    except BaseException as e:
+        if getattr(e, 'code', True):
+            print('Error: {}'.format(e))
+            error_exit = True
     finally:
         # Try to ensure the board serial connection is always gracefully closed.
         if _board is not None:
@@ -502,3 +507,5 @@ if __name__ == "__main__":
                 # and shouldn't cause a new error or problem if the connection can't
                 # be closed.
                 pass
+        if error_exit:
+            sys.exit(1)

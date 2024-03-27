@@ -10,13 +10,15 @@ dahanzimin From the Mixly Team
 
 try:
     from esp import espnow
+    version = 0
 except:
     import espnow
+    version = 1
 from ubinascii import hexlify,unhexlify
 import network
 
 class ESPNow(espnow.ESPNow):
-    def __init__(self,channel=0,txpower=20):
+    def __init__(self,channel=1,txpower=20):
         super().__init__()
         self.active(True)
         self._channel=channel
@@ -58,7 +60,7 @@ class ESPNow(espnow.ESPNow):
         self._channel = channel   
         self._nic.config(hidden=True,channel=self._channel,txpower=txpower)        
 
-    def _cb_handle(self, event_code,data):
+    def _cb_handle0(self, event_code,data):
         '''Callback processing conversion'''
         if self._on_handle:
             if isinstance(self._on_handle, list):
@@ -73,11 +75,30 @@ class ESPNow(espnow.ESPNow):
             else:
                 self._on_handle(hexlify(data[0]).decode(),data[1].decode())
 
+    def _cb_handle1(self, ee):
+        '''Callback processing conversion'''
+        host, msg = super().recv() 
+        if self._on_handle:
+            if isinstance(self._on_handle, list):
+                for func in self._on_handle:
+                    cmd = func.__name__.rfind('__')
+                    if cmd != -1:
+                        cmd=func.__name__[cmd+2:]
+                        if cmd == str(data[1].decode()):
+                            func(hexlify(host).decode(), msg.decode())
+                    else:
+                        func(hexlify(host).decode(), msg.decode())
+            else:
+                self._on_handle(hexlify(host).decode(), msg.decode())
+
     def recv_cb(self, recv_cbs):
         '''Receive callback'''
         self._on_handle = recv_cbs
         if recv_cbs:
-            self.irq(self._cb_handle)
+            if version == 0:
+                self.irq(self._cb_handle0)
+            else:
+                self.irq(self._cb_handle1)
 
     def info(self):
         '''Get the paired Mac and rssi'''

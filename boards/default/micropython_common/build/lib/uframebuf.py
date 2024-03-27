@@ -379,12 +379,16 @@ class FrameBuffer_Uincode(FrameBuffer_Base):
 				self.set_buffer(data)
 				if self.auto_show: self.show()
 			else:
+				yy = y 
 				size = self.height // (self._font.height * 3) if size is None else size
 				size = max(round(size), 1)
 				font_len, font_buffer = self._take_buffer(str(data), space, size)
 				x = (self.width - font_len + space) // 2 if center else x
 				y = (self.height - self._font.height * size) // 2 if y is None else y
-				self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, 0)
+				if yy is None:
+					self.fill(0)
+				else:
+					self.fill_rect(x - 1, y - 1, font_len + 2, font_buffer[0][1][1] * size + 2, 0)
 				for buffer in font_buffer:    #Display character
 					self.bitmap(buffer, x, y, size, color)
 					x = buffer[1][0] * size + x + space

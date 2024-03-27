@@ -1482,7 +1482,8 @@
       </block>
       <block type="sensor_mixgo_touch_slide"></block>
     <block type="sensor_mixgo_nova_pin_near"></block>
-    <block type="sensor_mixgo_nova_LTR308"></block>
+    <block type="sensor_mixgo_LTR308" m-show='micropython:esp32s3:mixgo_zero'></block>
+    <block type="sensor_mixgo_nova_LTR308" m-show='micropython:esp32s3:mixgo_nova'></block>
     <block type="sensor_mixgo_nova_sound"></block>
     <block type="sensor_hp203" m-show='micropython:esp32s3:mixgo_zero'></block>
     <block type="sensor_aht11"></block>

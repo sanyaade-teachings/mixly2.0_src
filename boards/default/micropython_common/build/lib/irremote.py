@@ -112,7 +112,6 @@ class RC5_RX(IR_RX):
 			bit = 1
 			value = 0 
 			num = 0
-			pnum = pulse_len
 			while True:
 				short = self._pulses[num] < 1334
 				if not short:

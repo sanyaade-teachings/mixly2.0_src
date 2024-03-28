@@ -97,7 +97,7 @@ class EditorMix extends EditorBase {
         this.#language_ = this.getDefaultLanguageExt();
         this.#tabSize_ = this.getDefaultTabSize();
         const codePage = this.getPage('code');
-        codePage.setLanguage(this.#language_);
+        codePage.setLanguage(codePage.getLanguageByExt(this.#language_));
         codePage.setTabSize(this.#tabSize_);
         codePage.setReadOnly(true);
         this.#py2BlockEditorInit_();
@@ -159,6 +159,9 @@ class EditorMix extends EditorBase {
             break;
         case 'lua':
             extname = '.lua';
+            break;
+        case 'javascript':
+            extname = '.js';
             break;
         case 'c/c++':
         default:

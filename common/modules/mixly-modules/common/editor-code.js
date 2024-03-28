@@ -116,7 +116,7 @@ class EditorCode extends EditorMonaco {
     }
 
     getLanguageByExt(ext) {
-        let language = 'text';
+        let language = 'plaintext';
         switch(ext) {
         case '.json':
             language = 'json';
@@ -139,7 +139,7 @@ class EditorCode extends EditorMonaco {
             language = 'markdown';
             break;
         default:
-            language = 'text';
+            language = 'plaintext';
         }
         return language;
     }

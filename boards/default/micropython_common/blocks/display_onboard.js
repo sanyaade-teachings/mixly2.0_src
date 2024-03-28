@@ -1011,19 +1011,6 @@ Blockly.Blocks.onboard_tft_show_image_xy = {
   }
 };
 
-Blockly.Blocks.onboard_tft_show_string = {
-  init: function() {
-    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
-  this.appendValueInput('data')
-        .setCheck([String, "esp32_image","List",'Tuple'])
-        .appendField(Blockly.Msg.OLED_DRAWSTR);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setInputsInline(true);
-    this.setTooltip(Blockly.Msg.OLED_BITMAP_OR_STRING);
-  }
-};
-
  Blockly.Blocks.onboard_tft_show_image_or_string_delay = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);

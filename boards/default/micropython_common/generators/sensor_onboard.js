@@ -164,7 +164,7 @@ Blockly.Python.forBlock['sensor_mixgo_pin_near_double'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_mixgo_nova_pin_near'] = function(){
+Blockly.Python.forBlock['sensor_mixgo_nova_pin_near'] =Blockly.Python.forBlock['sensor_mixgo_pin_near'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     var direction = this.getFieldValue('direction');
     Blockly.Python.definitions_['import_'+version+'_'+direction] = 'from '+version+' import onboard_als_'+direction;

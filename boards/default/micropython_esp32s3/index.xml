@@ -1479,9 +1479,10 @@
           <shadow type="number6">
           </shadow>
         </value>
-      </block>
-      <block type="sensor_mixgo_touch_slide"></block>
-    <block type="sensor_mixgo_nova_pin_near"></block>
+    </block>
+    <block type="sensor_mixgo_touch_slide"></block>
+    <block type="sensor_mixgo_pin_near" m-show='micropython:esp32s3:mixgo_zero'></block>
+    <block type="sensor_mixgo_nova_pin_near" m-show='micropython:esp32s3:mixgo_nova'></block>
     <block type="sensor_mixgo_LTR308" m-show='micropython:esp32s3:mixgo_zero'></block>
     <block type="sensor_mixgo_nova_LTR308" m-show='micropython:esp32s3:mixgo_nova'></block>
     <block type="sensor_mixgo_nova_sound"></block>
@@ -1812,10 +1813,15 @@
           </shadow>
         </value>
     </block>      
-    <block type="onboard_tft_show_string">
+    <block type="display_show_image_or_string_delay">
       <value name="data">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+      <value name="space">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
         </shadow>
       </value>
     </block>

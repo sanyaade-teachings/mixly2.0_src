@@ -411,7 +411,7 @@ Blockly.Blocks['sensor_mixgo_pin_near_double'] = {
     }
 };
 
-Blockly.Blocks['sensor_mixgo_nova_pin_near'] = {
+Blockly.Blocks['sensor_mixgo_pin_near'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()
@@ -428,6 +428,30 @@ Blockly.Blocks['sensor_mixgo_nova_pin_near'] = {
             var TOOLTIPS = {
                 'l':Blockly.Msg.mixpy_PL_TEXT_TOP,
                 'r':Blockly.Msg.mixpy_PL_TEXT_BOTTOM,
+            };
+            return mode0 +TOOLTIPS[mode] + mode1
+        });
+    }
+};
+
+
+Blockly.Blocks['sensor_mixgo_nova_pin_near'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.TEXT_TRIM_LEFT, "l"], [Blockly.Msg.TEXT_TRIM_RIGHT, "r"]]), "direction")
+        .appendField(Blockly.Msg.MIXLY_ESP32_NEAR);
+        this.setOutput(true,Number);
+        this.setInputsInline(true);
+        var thisBlock = this;
+        this.setTooltip(function() {
+            var mode = thisBlock.getFieldValue('direction');
+            var mode0 = Blockly.Msg.MIXLY_ESP32_SENSOR_MIXGO_PIN_NEAR_TOOLTIP;
+            var mode1 = Blockly.Msg.MIXLY_ESP32_NEAR;
+            var TOOLTIPS = {
+                'l':Blockly.Msg.TEXT_TRIM_LEFT,
+                'r':Blockly.Msg.TEXT_TRIM_RIGHT,
             };
             return mode0 +TOOLTIPS[mode] + mode1
         });

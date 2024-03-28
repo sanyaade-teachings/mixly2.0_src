@@ -3618,5 +3618,11 @@ En.MIXLY_IR_RAW_CODE = "raw code";
 En.MIXLY_IR_PULSE = "pulses code";
 En.MIXLY_IR_WHETHER_RECV = "wheteher receive new data";
 En.MIXLY_IR_TIMEOUT = "timeout";
-
+En.MIXLY_RTCGETTIMESTAMP = "Get Timestamp";
+En.MIXLY_ESP32_RTC_GET_TIMESTAMP_TOOLTIP = "Timestamp to return real-time clock";
+En.MIXLY_RTC_TIMESTAMP = "Timestamp";
+En.MIXLY_TO_JSON = "convert dicts to json";
+En.MIXLY_TO_JSON_TOOLTIP = "Convert dicts to json string";
+En.MIXLY_CONVERT_TO_JSON = "convert json to dicts ";
+En.MIXLY_CONVERT_TO_JSON_TOOLTIP = "convert json string to dicts";
 })();

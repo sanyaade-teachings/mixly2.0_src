@@ -728,3 +728,27 @@ Blockly.Blocks['dicts_todict'] = {
     this.setTooltip(Blockly.Msg.MIXLY_PYTHON_TOOLTIP_TODICT);
   }
 };    
+
+Blockly.Blocks['dicts_to_json'] = {
+   init: function() {
+    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.appendValueInput('DICT')
+    .setCheck('Dict');
+    this.appendDummyInput("")
+    .appendField(Blockly.Msg.MIXLY_TO_JSON);    
+    this.setTooltip(Blockly.Msg.MIXLY_TO_JSON_TOOLTIP);
+    this.setOutput(true, Number);
+  }
+};
+
+Blockly.Blocks['json_to_dicts'] = {
+  init:function(){
+    this.setColour(Blockly.Msg['DICTS_HUE']);
+    this.appendValueInput('VAR');
+    this.appendDummyInput("")
+    .appendField(Blockly.Msg.MIXLY_CONVERT_TO_JSON);    
+    this.setTooltip(Blockly.Msg.MIXLY_CONVERT_TO_JSON_TOOLTIP);
+    this.setOutput(true, Number);
+
+  }
+};

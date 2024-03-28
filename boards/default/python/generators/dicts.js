@@ -206,3 +206,18 @@ Blockly.Python.forBlock['dicts_todict'] = function() {
   var str = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) || '0'
   return ['dict('+str+')', Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.forBlock['dicts_to_json'] = function () {
+  Blockly.Python.definitions_['import_json'] = 'import json';
+  var varName = Blockly.Python.valueToCode(this, 'DICT', Blockly.Python.ORDER_ASSIGNMENT) || '0';
+  var code='json.dumps(' +varName + ')';
+  return [code,Blockly.Python.ORDER_ATOMIC];
+ 
+};
+
+Blockly.Python.forBlock['json_to_dicts'] = function(){
+  Blockly.Python.definitions_['import_json'] = 'import json';
+  var varName = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT) || 'null';
+  var code='json.loads(' +varName + ')';
+  return [code,Blockly.Python.ORDER_ATOMIC];
+};

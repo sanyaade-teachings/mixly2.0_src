@@ -1111,6 +1111,20 @@
         </shadow>
       </value>
     </block>
+    <block type="dicts_to_json">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">mydict</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="json_to_dicts">
+      <value name="VAR">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
   </category>
   <category id="catSet" colour="100">
     <block type="set_create_with"></block>

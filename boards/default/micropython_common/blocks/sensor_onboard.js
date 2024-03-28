@@ -536,6 +536,29 @@ Blockly.Blocks.onboard_RTC_get_time = {
 }
 };
 
+Blockly.Blocks.onboard_RTC_get_timestamp = {
+init: function() {
+    this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);  
+    this.appendValueInput('LIST')
+    .appendField(Blockly.Msg.MIXLY_RTCGETTIMESTAMP);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_RTC_GET_TIMESTAMP_TOOLTIP);
+}
+};
+
+Blockly.Blocks.onboard_RTC_timestamp_totuple = {
+init:function(){
+    this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);   
+    this.appendValueInput('VAR')
+        .appendField(Blockly.Msg.MIXLY_RTC_TIMESTAMP);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.LISTS_TO_TUPLE);
+    this.setInputsInline(true);
+    this.setOutput(true, Number);
+}
+};
+
 Blockly.Blocks['onboard_RTC_settime_string'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);

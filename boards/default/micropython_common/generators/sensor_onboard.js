@@ -543,6 +543,24 @@ Blockly.Python.forBlock['onboard_RTC_get_time'] = function () {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
+Blockly.Python.forBlock['onboard_RTC_get_timestamp'] = function(){
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'rtc_clock'] = 'from '+version + ' import rtc_clock';  
+    Blockly.Python.definitions_['import_time'] = 'import time';  
+    var time = Blockly.Python.valueToCode(this, 'LIST',Blockly.Python.ORDER_ATOMIC);
+    var code = 'time.mktime(' + time + ')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['onboard_RTC_timestamp_totuple'] = function () {
+   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'rtc_clock'] = 'from '+version + ' import rtc_clock';  
+    Blockly.Python.definitions_['import_time'] = 'import time';
+    var ts = Blockly.Python.valueToCode(this, 'VAR',Blockly.Python.ORDER_ATOMIC);
+    var code = 'time.localtime(' + ts + ')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
 //mixgo_cc onboard_sensor generators:
 
 Blockly.Python.forBlock['sensor_mixgo_cc_mmc5603_get_magnetic'] = function(){   

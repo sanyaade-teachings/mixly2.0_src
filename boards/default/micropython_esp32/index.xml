@@ -1245,7 +1245,21 @@
         </shadow>
       </value>
     </block>
-  </category>
+    <block type="dicts_to_json">
+      <value name="DICT">
+        <shadow type="variables_get">
+          <field name="VAR">mydict</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="json_to_dicts">
+      <value name="VAR">
+        <shadow type="text">
+          <field name="TEXT">Mixly</field>
+        </shadow>
+      </value>
+    </block>
+  </category>  
   <category id="catSet" colour="100">
     <block type="set_create_with"></block>
     <block type="variables_set">
@@ -1582,6 +1596,18 @@
         </value>
       </block>
       <block type="onboard_RTC_get_time" m-hide="micropython:esp32:mixgo_pe"></block>
+      <block type="onboard_RTC_get_timestamp" m-hide="micropython:esp32:mixgo_pe">
+        <value name="LIST">
+          <block type="onboard_RTC_get_time"></block>
+        </value>
+      </block>
+      <block type="onboard_RTC_timestamp_totuple" m-hide="micropython:esp32:mixgo_pe">
+        <value name="VAR">
+          <shadow type="math_number">
+            <field name="NUM">18029</field>
+          </shadow>
+        </value>
+      </block>
     </category>
     <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858"  m-show="micropython:esp32:mixgo micropython:esp32:rm_e1 micropython:esp32:mpython">
       <block type="rm_actuator_led_bright" m-show='micropython:esp32:rm_e1'>
@@ -3023,6 +3049,13 @@
             <shadow type="list_many_input">
               <field name="CONTENT">9000,4500,563,563</field>
             </shadow>
+        </value>
+      </block>
+      <block type="ir_transmit_raw_code">
+        <value name="raw">
+          <shadow type="math_number">
+            <field name="NUM">0x1234</field>
+          </shadow>
         </value>
       </block>
       <block type="ir_transmit_busy"></block>  

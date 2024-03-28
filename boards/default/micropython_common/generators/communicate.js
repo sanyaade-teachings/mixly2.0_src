@@ -250,6 +250,13 @@ Blockly.Python.forBlock['ir_transmit_study_code'] = function(){
     var code = "ir_tx.transmit(pulses="+ s_code +")\n";
     return code;
 };
+
+Blockly.Python.forBlock['ir_transmit_raw_code'] = function() {
+    Blockly.Python.definitions_['import_irremote'] = 'import irremote';
+    var raw = Blockly.Python.valueToCode(this, 'raw',Blockly.Python.ORDER_ATOMIC);
+    var code = "ir_tx.transmit(raw="+ raw +")\n";
+    return code;
+};
        
 Blockly.Python.forBlock['ir_transmit_busy'] = function(){
     Blockly.Python.definitions_['import_irremote'] = 'import irremote';

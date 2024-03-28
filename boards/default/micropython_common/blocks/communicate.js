@@ -536,7 +536,19 @@ Blockly.Blocks['ir_transmit_study_code'] = {
     }
 };
 
-
+Blockly.Blocks['ir_transmit_raw_code'] = {
+    init:function () {
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_IR_SEND);     
+        this.appendValueInput('raw')
+            .appendField(Blockly.Msg.MIXLY_IR_RAW_CODE)
+            .setAlign(Blockly.ALIGN_RIGHT);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setInputsInline(true);
+    }
+};
 
 
 Blockly.Blocks['ir_transmit_busy'] = {

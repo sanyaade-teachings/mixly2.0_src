@@ -521,7 +521,7 @@ class EditorMix extends EditorBase {
             }
         }
         let config, configStr = configDom && configDom.html();
-        config = MJSON.parse(configStr);
+        config = MJSON.parse(configStr ?? '');
         let boardName = xmlDom.attr('board') ?? '';
         Boards.setSelectedBoard(boardName, config);
         let code = codeDom ? codeDom.html() : '';

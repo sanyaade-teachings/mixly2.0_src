@@ -1235,7 +1235,7 @@
     <block type="json_to_dicts">
       <value name="VAR">
         <shadow type="text">
-          <field name="TEXT">Mixly</field>
+          <field name="TEXT">{"name":"Mixly","color":"green"}</field>
         </shadow>
       </value>
     </block>

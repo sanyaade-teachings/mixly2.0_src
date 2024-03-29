@@ -375,7 +375,7 @@ Blockly.Blocks['number7'] = {
 }
 };
 
-Blockly.Blocks['sensor_mixgo_pin_near'] = {
+Blockly.Blocks['sensor_mixgo_pin_near_single'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
         this.appendDummyInput()

@@ -1211,7 +1211,7 @@
     <block type="json_to_dicts">
       <value name="VAR">
         <shadow type="text">
-          <field name="TEXT">Mixly</field>
+          <field name="TEXT">{"name":"Mixly","color":"green"}</field>
         </shadow>
       </value>
     </block>  
@@ -1485,7 +1485,7 @@
     <block type="sensor_mixgocar_pin_near" m-show='micropython:esp32c3:mixgocar_c3'></block>
     <block type="sensor_mixgocar_pin_near_state_change" m-show='micropython:esp32c3:mixgocar_c3'></block>
     <block type="sensor_mixgocar_battery_left" m-show='micropython:esp32c3:mixgocar_c3'></block>
-    <block type="sensor_mixgo_pin_near" m-hide='micropython:esp32c3:mixgocar_c3'></block>
+    <block type="sensor_mixgo_pin_near_single" m-hide='micropython:esp32c3:mixgocar_c3'></block>
     <block type="sensor_LTR308" m-hide='micropython:esp32c3:mixgocar_c3'></block>
     <block type="sensor_sound" m-hide='micropython:esp32c3:mixgocar_c3'></block>
     <!-- MixGo Me Onboard_sensor: -->

@@ -149,7 +149,7 @@ Blockly.Python.forBlock['number7'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_mixgo_pin_near'] = function(){
+Blockly.Python.forBlock['sensor_mixgo_pin_near_single'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_als'] = "from "+version+" import onboard_als";
     var code = 'onboard_als.ps_nl()';

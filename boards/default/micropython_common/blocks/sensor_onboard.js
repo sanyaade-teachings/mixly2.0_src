@@ -588,10 +588,6 @@ Blockly.Blocks.onboard_RTC_set_datetime = {
     this.appendValueInput('day')
     .setCheck(Number)
     .appendField("         "+Blockly.Msg.MIXLY_DAY);   
-    this.appendValueInput('weekday')
-    .setCheck(Number)
-    .appendField("         "+
-        Blockly.Msg.MIXLY_WEEK2);   
     this.appendValueInput('hour')
     .setCheck(Number)
     .appendField("         "+Blockly.Msg.MIXLY_HOUR);                       
@@ -601,9 +597,6 @@ Blockly.Blocks.onboard_RTC_set_datetime = {
     this.appendValueInput('second')
     .setCheck(Number)
     .appendField("         "+Blockly.Msg.MIXLY_SECOND);
-    this.appendValueInput('millisecond')
-    .setCheck(Number)
-    .appendField("         "+Blockly.Msg.MIXLY_MILLISECOND);
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

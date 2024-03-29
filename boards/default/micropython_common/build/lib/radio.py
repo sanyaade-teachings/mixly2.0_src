@@ -84,7 +84,7 @@ class ESPNow(espnow.ESPNow):
                     cmd = func.__name__.rfind('__')
                     if cmd != -1:
                         cmd=func.__name__[cmd+2:]
-                        if cmd == str(data[1].decode()):
+                        if cmd == str(msg.decode()):
                             func(hexlify(host).decode(), msg.decode())
                     else:
                         func(hexlify(host).decode(), msg.decode())

@@ -139,7 +139,7 @@ window.addEventListener('load', () => {
         if (window.frames.length !== parent.frames.length) {
             window.userEvents = new UserEvents(Editor.blockEditor);
         }
-        if (!goog.isElectron && window.location.host.indexOf('mixly.cn')) {
+        if (!goog.isElectron && window.location.host.indexOf('mixly.cn') !== -1) {
             window.userOpEvents = new UserOPEvents();
         }
         if (Env.hasSocketServer) {

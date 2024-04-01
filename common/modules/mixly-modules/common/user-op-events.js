@@ -3,12 +3,14 @@ goog.loadJs('common', () => {
 goog.require('Mixly.MFile');
 goog.require('Mixly.Config');
 goog.require('Mixly.Boards');
+goog.require('Mixly.Editor');
 goog.provide('Mixly.UserOPEvents');
 
 const {
     MFile,
     Boards,
-    Config
+    Config,
+    Editor
 } = Mixly;
 const { USER } = Config;
 
@@ -72,7 +74,9 @@ class UserOPEvents {
     }
 
     addRecord(data) {
-        this.#actionArrayRecord.push(data);
+        if (Editor.mainEditor.selected === 'BLOCK') {
+            this.#actionArrayRecord.push(data);
+        }
     }
 }
 

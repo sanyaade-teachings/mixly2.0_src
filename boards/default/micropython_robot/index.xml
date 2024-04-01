@@ -1504,7 +1504,7 @@
       <block type="sensor_mixbot_temperature" m-show='micropython:esp32:mixbot'></block>
       <block type="sensor_get_acceleration" m-show='micropython:esp32:mixbot'></block>
       <block type="sensor_mixbot_get_gyro" m-show='micropython:esp32:mixbot'></block>  
-      <block type="sensor_mixgo_pin_near" m-show="micropython:esp32c3:feiyi"></block>
+      <block type="sensor_mixgo_pin_near_single" m-show="micropython:esp32c3:feiyi"></block>
       <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:feiyi"></block>
       <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:feiyi">
         <value name="mode">
@@ -1513,8 +1513,8 @@
       </value>
       </block>
     <block type="sensor_sound" m-show="micropython:esp32c3:feiyi"></block>     
-    <block type="sensor_hp203" m-show="micropython:esp32c3:feiyi"></block>
-    <block type="sensor_aht11" m-show="micropython:esp32c3:feiyi"></block>
+    <block type="sensor_hp203" m-hide="micropython:esp32c3:feiyi micropython:esp32:mixbot micropython:esp32:rm_e1"></block>
+    <block type="sensor_aht11" m-hide="micropython:esp32c3:feiyi micropython:esp32:mixbot micropython:esp32:rm_e1"></block>
     <block type="sensor_get_temperature" m-show="micropython:esp32c3:feiyi"></block>
     <block type="sensor_get_acceleration" m-show="micropython:esp32c3:feiyi"></block>
     <block type="sensor_eulerangles" m-show="micropython:esp32c3:feiyi"></block>

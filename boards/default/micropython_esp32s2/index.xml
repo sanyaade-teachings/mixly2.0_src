@@ -1518,11 +1518,6 @@
             <field name="NUM">1</field>
           </shadow>
         </value>
-        <value name="weekday">
-          <shadow type="math_number">
-            <field name="NUM">5</field>
-          </shadow>
-        </value>
         <value name="hour">
           <shadow type="math_number">
             <field name="NUM">14</field>
@@ -1538,16 +1533,11 @@
             <field name="NUM">45</field>
           </shadow>
         </value>
-        <value name="millisecond">
-          <shadow type="math_number">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
       </block>
       <block type="onboard_RTC_settime_string">        
         <value name="CONTENT">
           <shadow type="text">
-            <field name="TEXT">2023,1,1,12,0,0,6</field>
+            <field name="TEXT">2023,1,1,12,0,0</field>
           </shadow>
         </value>
       </block>

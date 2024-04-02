@@ -3773,5 +3773,4 @@ ZhHans.MIXLY_TO_JSON = "json 序列化";
 ZhHans.MIXLY_TO_JSON_TOOLTIP = "将字典转化为json字符串";
 ZhHans.MIXLY_CONVERT_TO_JSON = "json 反序列化";
 ZhHans.MIXLY_CONVERT_TO_JSON_TOOLTIP = "将json字符串转化为字典";
-ZhHans.MIXLY_MP_ESPNOW_RADIO_TXPOWER = "设置无线广播发射功率为";
 })();

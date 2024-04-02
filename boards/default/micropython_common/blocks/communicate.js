@@ -736,9 +736,9 @@ Blockly.Blocks['communicate_espnow_init'] = {
         this.appendValueInput('CHNL')
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_CHANNEL);
-        this.appendValueInput('POWER')
-            .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_TX_POWER);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_TX_POWER)
+            .appendField(new Blockly.FieldDropdown([["20", "20"],["19","19"],["18","18"],["17","17"],["16","16"],["15","15"],["14","14"],["13", "13"],["12", "12"], ["11", "11"], ["10", "10"],["9", "9"], ["8", "8"], ["7", "7"],["6","6"],["5","5"],["4","4"],["3","2"],["2","2"],["1","1"],["0","0"]]), 'op');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);
@@ -847,9 +847,12 @@ Blockly.Blocks['espnow_radio_channel'] = {
     init: function() {
         this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_RADIO_TXPOWER);
-        this.appendValueInput('POWER')
+            .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_RADIO_INIT);
+        this.appendValueInput('CHNL')
             .setCheck(Number);
+        this.appendDummyInput("")
+            .appendField(Blockly.Msg.MIXLY_TX_POWER)
+            .appendField(new Blockly.FieldDropdown([["20", "20"],["19","19"],["18","18"],["17","17"],["16","16"],["15","15"],["14","14"],["13", "13"],["12", "12"], ["11", "11"], ["10", "10"],["9", "9"], ["8", "8"], ["7", "7"],["6","6"],["5","5"],["4","4"],["3","2"],["2","2"],["1","1"],["0","0"]]), 'op');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setInputsInline(true);

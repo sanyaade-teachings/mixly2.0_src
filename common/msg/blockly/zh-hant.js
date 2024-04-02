@@ -3597,5 +3597,4 @@ ZhHant.MIXLY_TO_JSON = "json 序列化";
 ZhHant.MIXLY_TO_JSON_TOOLTIP = "將字典轉化為json字符串";
 ZhHant.MIXLY_CONVERT_TO_JSON = "json 反序列化";
 ZhHant.MIXLY_CONVERT_TO_JSON_TOOLTIP = "將json字符串轉化爲字典";
-ZhHant.MIXLY_MP_ESPNOW_RADIO_TXPOWER = "設置無綫廣播發射功率為";
 })();

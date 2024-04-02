@@ -2970,9 +2970,9 @@
       <category id="catRadio" colour="140">
       
       <block type="espnow_radio_channel">
-        <value name="POWER">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
+        <value name="CHNL">
+          <shadow type="espnow_channel">
+            <field name="NUM">1</field>
           </shadow>
         </value>
       </block>
@@ -3066,11 +3066,6 @@
         </value>
         <value name="CHNL">
           <shadow type="espnow_channel">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="POWER">
-          <shadow type="math_number">
             <field name="NUM">0</field>
           </shadow>
         </value>

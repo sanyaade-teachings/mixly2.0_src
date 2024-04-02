@@ -3625,6 +3625,5 @@ En.MIXLY_TO_JSON = "convert dicts to json";
 En.MIXLY_TO_JSON_TOOLTIP = "Convert dicts to json string";
 En.MIXLY_CONVERT_TO_JSON = "convert json to dicts ";
 En.MIXLY_CONVERT_TO_JSON_TOOLTIP = "convert json string to dicts";
-En.MIXLY_MP_ESPNOW_RADIO_TXPOWER= 'set the radio txpower（v） to';
 
 })();

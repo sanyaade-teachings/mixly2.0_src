@@ -343,7 +343,7 @@ Blockly.Python.forBlock['communicate_espnow_init'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
-    var power =Blockly.Python.valueToCode(this, 'POWER',Blockly.Python.ORDER_ATOMIC);
+    var power = this.getFieldValue('op');
     var code = ""+name+"=radio.ESPNow(channel="+varName+",txpower="+power+")\n";
     return code;
 };
@@ -397,9 +397,10 @@ Blockly.Python.forBlock['network_espnow_recv_handle'] = function (block) {
 //radio
 Blockly.Python.forBlock['espnow_radio_channel'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
-    var varName =Blockly.Python.valueToCode(this, 'POWER',Blockly.Python.ORDER_ATOMIC);
-    var code = "ESPNow_radio.set_channel(1,txpower="+varName+")\n";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
+    var power = this.getFieldValue('op');
+    var code = "ESPNow_radio.set_channel(channel="+varName+",txpower="+power+")\n";
     return code;
 };
 
@@ -414,7 +415,7 @@ Blockly.Python.forBlock['espnow_radio_channel_new'] = function () {
 
 Blockly.Python.forBlock['espnow_radio_on_off'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     var op = this.getFieldValue('on_off');
     var code = "ESPNow_radio.active("+op+")\n";
     return code;
@@ -422,7 +423,7 @@ Blockly.Python.forBlock['espnow_radio_on_off'] = function () {
 
 Blockly.Python.forBlock['espnow_radio_send'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     var varName =Blockly.Python.valueToCode(this, 'send',Blockly.Python.ORDER_ATOMIC);
     var code = 'ESPNow_radio.send("ffffffffffff",'+varName+")\n";
     return code;
@@ -430,7 +431,7 @@ Blockly.Python.forBlock['espnow_radio_send'] = function () {
 
 Blockly.Python.forBlock['espnow_radio_rec'] = function() {
     Blockly.Python.definitions_['import_radio'] = "import radio";
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     var code = "ESPNow_radio.recv()";
     return [code, Blockly.Python.ORDER_ATOMIC];
 }
@@ -443,7 +444,7 @@ Blockly.Python.forBlock['espnow_radio_recv_msg'] = function() {
 Blockly.Python.forBlock['espnow_radio_recv'] = function(block) {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     Blockly.Python.definitions_['import_ubinascii'] = 'import ubinascii';
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     var doCode = Blockly.Python.statementToCode(block, 'DO') || Blockly.Python.PASS;
     Blockly.Python.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac,ESPNow_radio_msg):\n' + doCode;
     Blockly.Python.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n'+'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n'+'    global _radio_msg_list\n'+'    try: ESPNow_radio_recv(mac,ESPNow_radio_msg)\n'+'    except: pass\n'+'    if str(ESPNow_radio_msg) in _radio_msg_list:\n'+"        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
@@ -501,7 +502,7 @@ Blockly.Python.forBlock['espnow_radio_recv_certain_msg'] = function(block) {
     var text=this.getFieldValue('msg');
     Blockly.Python.definitions_['import_radio'] = "import radio";
     Blockly.Python.definitions_['import_ubinascii'] = 'import ubinascii';
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     var doCode = Blockly.Python.statementToCode(block, 'DO') || Blockly.Python.PASS;
     Blockly.Python.definitions_['def_ESPNow_radio_recv_all'] = '_radio_msg_list = []\n'+'def ESPNow_radio_recv_callback(mac,ESPNow_radio_msg):\n'+'    global _radio_msg_list\n'+'    try: ESPNow_radio_recv(mac,ESPNow_radio_msg)\n'+'    except: pass\n'+'    if str(ESPNow_radio_msg) in _radio_msg_list:\n'+"        eval('radio_recv_' + bytes.decode(ubinascii.hexlify(ESPNow_radio_msg)) + '()')\n";
     Blockly.Python.definitions_['ESPNow_radio_recv_callback'] = "ESPNow_radio.recv_cb(ESPNow_radio_recv_callback)\n";
@@ -515,7 +516,7 @@ Blockly.Python.forBlock['espnow_radio_recv_certain_msg'] = function(block) {
 
 Blockly.Python.forBlock['espnow_radio_recv_new'] = function(block) {
     Blockly.Python.definitions_['import_radio'] = "import radio";        
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     Blockly.Python.definitions_['ESPNow_radio_handlelist'] = "handle_list=[]";
     var doCode = Blockly.Python.statementToCode(block, 'DO') || Blockly.Python.PASS;
     Blockly.Python.definitions_['def_ESPNow_radio_recv'] = 'def ESPNow_radio_recv(mac,ESPNow_radio_msg):\n' + doCode;
@@ -528,7 +529,7 @@ Blockly.Python.forBlock['espnow_radio_recv_new'] = function(block) {
 Blockly.Python.forBlock['espnow_radio_recv_certain_msg_new'] = function(block) {
     var text=this.getFieldValue('msg');
     Blockly.Python.definitions_['import_radio'] = "import radio";
-    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     Blockly.Python.definitions_['ESPNow_radio_handlelist'] = "handle_list=[]";
     var doCode = Blockly.Python.statementToCode(block, 'DO') || Blockly.Python.PASS;
     var message = block.getFieldValue('msg');

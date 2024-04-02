@@ -3521,9 +3521,9 @@
       <category id="catRadio" colour="140">
       
       <block type="espnow_radio_channel">
-        <value name="POWER">
-          <shadow type="math_number">
-            <field name="NUM">20</field>
+        <value name="CHNL">
+          <shadow type="espnow_channel">
+            <field name="NUM">1</field>
           </shadow>
         </value>
       </block>
@@ -3609,7 +3609,7 @@
       </block>
     </category>
     <category id="catESPNow" colour="140">
-      <block type="communicate_espnow_init">
+            <block type="communicate_espnow_init">
         <value name="VAR">
           <shadow type="variables_get">
             <field name="VAR">my_now</field>
@@ -3617,11 +3617,6 @@
         </value>
         <value name="CHNL">
           <shadow type="espnow_channel">
-            <field name="NUM">0</field>
-          </shadow>
-        </value>
-        <value name="POWER">
-          <shadow type="math_number">
             <field name="NUM">0</field>
           </shadow>
         </value>

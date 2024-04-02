@@ -141,7 +141,7 @@ class BOT51(uframebuf.FrameBuffer_Uincode):
 		'''Read proximity sensor values'''
 		if not 0 <= index <= 1:
 			raise ValueError("Proximity sensor port must be a number in the range: 0,1")
-		vps= self._rreg(_BOT51_PS + index * 2) << 2 | self._rreg(_BOT51_PS + index * 2 + 1) >> 6
+		vps= self._rreg(_BOT51_PS + (1 - index) * 2) << 2 | self._rreg(_BOT51_PS + (1 - index) * 2 + 1) >> 6
 		return round(vps * ratio, 2)
 
 	def read_als(self, index, ratio=100/255):

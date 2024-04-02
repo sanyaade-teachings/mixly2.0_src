@@ -3528,7 +3528,7 @@ En.MIXLY_TOOLTIP_MOTOR_SETUP = 'Dual PWM motor drive (HR8833) initialization';
 En.SHUTDOWN = 'shut down';
 En.DIGITAL = 'digital';
 En.ANALOG = 'analog';
-En.BITBOT = 'MixGo•Baize';
+En.BITBOT = 'Feiyi';
 En.MIXBOT = 'MixBot';
 En.MICROPYTHON_BITBOT_SHUTDOWN_TOOLTIP = 'Shut down and disconnected under battery power. Only the motor output is turned off under USB power supply.';
 En.ONBOARD_TFT_DISPLAY_SHAPE_RECT_MESSAGE0 = 'draw %1 rectangle %2 x %3 y %4 width %5 height %6 color %7';
@@ -3625,4 +3625,6 @@ En.MIXLY_TO_JSON = "convert dicts to json";
 En.MIXLY_TO_JSON_TOOLTIP = "Convert dicts to json string";
 En.MIXLY_CONVERT_TO_JSON = "convert json to dicts ";
 En.MIXLY_CONVERT_TO_JSON_TOOLTIP = "convert json string to dicts";
+En.MIXLY_MP_ESPNOW_RADIO_TXPOWER= 'set the radio txpower（v） to';
+
 })();

@@ -343,7 +343,8 @@ Blockly.Python.forBlock['communicate_espnow_init'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     var name = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
     var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
-    var code = ""+name+"=radio.ESPNow(channel="+varName+")\n";
+    var power =Blockly.Python.valueToCode(this, 'POWER',Blockly.Python.ORDER_ATOMIC);
+    var code = ""+name+"=radio.ESPNow(channel="+varName+",txpower="+power+")\n";
     return code;
 };
 
@@ -397,8 +398,8 @@ Blockly.Python.forBlock['network_espnow_recv_handle'] = function (block) {
 Blockly.Python.forBlock['espnow_radio_channel'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow(channel=1)";
-    var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
-    var code = "ESPNow_radio.set_channel("+varName+")\n";
+    var varName =Blockly.Python.valueToCode(this, 'POWER',Blockly.Python.ORDER_ATOMIC);
+    var code = "ESPNow_radio.set_channel(1,txpower="+varName+")\n";
     return code;
 };
 

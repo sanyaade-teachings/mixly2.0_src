@@ -1222,9 +1222,10 @@
     {
         "path": "/electron/wiki-generator.js",
         "require": [
+            "path",
             "Blockly",
+            "Mustache",
             "Mixly.Env",
-            "Mixly.XML",
             "Mixly.IdGenerator",
             "Mixly.Electron"
         ],

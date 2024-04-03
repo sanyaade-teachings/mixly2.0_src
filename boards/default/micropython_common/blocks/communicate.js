@@ -850,8 +850,17 @@ Blockly.Blocks['espnow_radio_channel'] = {
             .appendField(Blockly.Msg.MIXLY_MP_ESPNOW_RADIO_INIT);
         this.appendValueInput('CHNL')
             .setCheck(Number);
-        this.appendDummyInput("")
-            .appendField(Blockly.Msg.MIXLY_TX_POWER)
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setInputsInline(true);
+    }
+};
+
+Blockly.Blocks['espnow_radio_txpower'] = {
+    init:function(){
+        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.MIXLY_SETTING+Blockly.Msg.MIXLY_MP_ESPNOW_RADIO+Blockly.Msg.MIXLY_TX_POWER)
             .appendField(new Blockly.FieldDropdown([["20", "20"],["18", "18"], ["16", "16"], ["15", "15"],["14","14"],["13","13"],["11","11"],["8","8"],["7","7"],["5","5"],["2","2"]]), 'op');
         this.setPreviousStatement(true);
         this.setNextStatement(true);

@@ -399,10 +399,17 @@ Blockly.Python.forBlock['espnow_radio_channel'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";
     Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
     var varName =Blockly.Python.valueToCode(this, 'CHNL',Blockly.Python.ORDER_ATOMIC);
-    var power = this.getFieldValue('op');
-    var code = "ESPNow_radio.set_channel(channel="+varName+",txpower="+power+")\n";
+    var code = "ESPNow_radio.set_channel(channel="+varName+")\n";
     return code;
 };
+
+Blockly.Python.forBlock['espnow_radio_txpower'] = function(){
+    Blockly.Python.definitions_['import_radio'] = "import radio";
+    Blockly.Python.definitions_['ESPNow_radio_initialize'] = "ESPNow_radio=radio.ESPNow()";
+    var power = this.getFieldValue('op');
+    var code = "ESPNow_radio.set_channel(txpower="+power+")\n";
+    return code;   
+}
 
 Blockly.Python.forBlock['espnow_radio_channel_new'] = function () {
     Blockly.Python.definitions_['import_radio'] = "import radio";

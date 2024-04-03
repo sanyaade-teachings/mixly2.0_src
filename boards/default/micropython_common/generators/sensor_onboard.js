@@ -240,7 +240,7 @@ Blockly.Python.forBlock['sensor_aht11'] = function(){
 };
 
 Blockly.Python.forBlock['sensor_get_temperature'] = function(){
-    Blockly.Python.definitions_['import_feiyi_onboard_acc'] = 'from feiyi import _onboard_acc';
+    Blockly.Python.definitions_['import_feiyi_onboard_acc'] = 'from feiyi import onboard_acc';
     return ['onboard_acc.temperature()', Blockly.Python.ORDER_ATOMIC];
 };
 

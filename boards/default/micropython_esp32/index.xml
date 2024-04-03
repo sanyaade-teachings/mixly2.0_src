@@ -3313,6 +3313,7 @@
           </shadow>
         </value>
       </block>
+      <block type="espnow_radio_txpower"></block>
       <block type="espnow_radio_on_off">
       </block>
       <block type="espnow_radio_send">

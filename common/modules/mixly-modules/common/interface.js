@@ -9,6 +9,7 @@ goog.require('Mixly.UserEvents');
 goog.require('Mixly.UserOPEvents');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.WikiManager');
+goog.require('Mixly.Electron.WikiGenerator');
 goog.require('Mixly.Electron.Serial');
 goog.require('Mixly.Electron.PythonShell');
 goog.require('Mixly.WebCompiler.Compiler');

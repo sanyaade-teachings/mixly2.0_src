@@ -509,6 +509,7 @@
             "Mixly.UserOPEvents",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.WikiManager",
+            "Mixly.Electron.WikiGenerator",
             "Mixly.Electron.Serial",
             "Mixly.Electron.PythonShell",
             "Mixly.WebCompiler.Compiler",
@@ -1216,6 +1217,19 @@
         ],
         "provide": [
             "Mixly.Electron.Shell"
+        ]
+    },
+    {
+        "path": "/electron/wiki-generator.js",
+        "require": [
+            "Blockly",
+            "Mixly.Env",
+            "Mixly.XML",
+            "Mixly.IdGenerator",
+            "Mixly.Electron"
+        ],
+        "provide": [
+            "Mixly.Electron.WikiGenerator"
         ]
     },
     {

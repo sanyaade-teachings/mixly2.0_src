@@ -515,7 +515,7 @@ Blockly.Blocks.onboard_RTC_get_time = {
     .appendField(Blockly.Msg.MIXLY_RTCGETTIME);
     this.setInputsInline(true);
     this.setOutput(true, Number);
-    this.setTooltip(Blockly.Msg.MIXLY_ESP32_RTC_GET_TIME_TOOLTIP);
+    this.setTooltip(Blockly.Msg.MIXLY_ESP32_RTC_GET_TIME_TOOLTIP+' (year, month, mday, hour, minute, second, weekday, yearday)');
     // var thisBlock = this;
     //     this.setTooltip(function() {
     //     var mode = thisBlock.getFieldValue('TIME_TYPE');

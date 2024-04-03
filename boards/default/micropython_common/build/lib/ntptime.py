@@ -34,7 +34,7 @@ def settime(times):
         except:
             raise ValueError("Clock information format error, use ',' to separate at least 6 numerical values")
     if isinstance(times, tuple):
-        if len(times) == 8:
-            RTC().datetime((times[0], times[1], times[2], times[6], times[3], times[4], times[5], 0))
+        if 6 <= len(times) <= 8:
+            RTC().datetime((times[0], times[1], times[2], 0, times[3], times[4], times[5], 0))
         else:
-            raise ValueError("Settime needs a tuple of length 8")
+            raise ValueError("Settime needs a tuple of length 6~8")

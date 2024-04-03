@@ -88,14 +88,14 @@ export const tone_notes = function () {
 };
 
 export const controls_tone = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
+    /*var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"ir_recv\"") == -1 && xmlText.indexOf("type=\"ir_recv_enable\"") == -1 && xmlText.indexOf("type=\"ir_recv_raw\"") == -1) {
         this.setWarningText(null);
     }
     else {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
-    }
+    }*/
 
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var fre = Blockly.Arduino.valueToCode(this, 'FREQUENCY',
@@ -111,14 +111,14 @@ export const controls_tone = function () {
 };
 
 export const controls_notone = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
+    /*var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"ir_recv\"") == -1 && xmlText.indexOf("type=\"ir_recv_enable\"") == -1 && xmlText.indexOf("type=\"ir_recv_raw\"") == -1) {
         this.setWarningText(null);
     }
     else {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
-    }
+    }*/
 
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var code = '';

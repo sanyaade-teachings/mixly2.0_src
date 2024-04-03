@@ -1,5 +1,4 @@
 import * as Blockly from 'blockly/core';
-import * as Mixly from 'mixly';
 
 export const SCoopTask = function () {
     var _tasknum = this.getFieldValue('_tasknum');

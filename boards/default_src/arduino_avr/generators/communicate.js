@@ -1,15 +1,15 @@
 import * as Blockly from 'blockly/core';
-import * as Mixly from 'mixly';
+// import * as Mixly from 'mixly';
 import { Profile } from 'mixly';
 
 export const ir_recv = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
+    /*var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"controls_tone\"") === -1 && xmlText.indexOf("type=\"controls_notone\"") === -1) {
         this.setWarningText(null);
     } else {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
-    }
+    }*/
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     var branch = Blockly.Arduino.statementToCode(this, 'DO');
     var branch2 = Blockly.Arduino.statementToCode(this, 'DO2');
@@ -62,14 +62,14 @@ ${branch2}
 
 
 export const ir_recv_enable = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
+    /*var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"controls_tone\"") == -1 && xmlText.indexOf("type=\"controls_notone\"") == -1) {
         this.setWarningText(null);
     }
     else {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
-    }
+    }*/
 
     Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>';
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
@@ -89,14 +89,14 @@ export const ir_send_nec = function () {
 }
 
 export const ir_recv_raw = function () {
-    var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
+    /*var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     if (xmlText.indexOf("type=\"controls_tone\"") == -1 && xmlText.indexOf("type=\"controls_notone\"") == -1) {
         this.setWarningText(null);
     }
     else {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
-    }
+    }*/
 
     var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
     Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';

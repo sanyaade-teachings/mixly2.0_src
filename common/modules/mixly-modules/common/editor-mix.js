@@ -295,6 +295,9 @@ class EditorMix extends EditorBase {
         case 'markdown':
             ext = '.md';
             break;
+        case 'lua':
+            ext = '.lua';
+            break;
         default:
             ext = '.txt';
         }

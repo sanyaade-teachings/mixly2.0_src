@@ -593,7 +593,7 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
                         return;
                     }
                     setTimeout(() => {
-                        Serial.clearContent(port);
+                        // Serial.clearContent(port);
                         Serial.writeCtrlD(port);
                     }, 1000);
                 });

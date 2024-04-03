@@ -134,6 +134,9 @@ class EditorCode extends EditorMonaco {
         case '.py':
             language = 'python';
             break;
+        case '.lua':
+            language = 'lua';
+            break;
         case '.md':
         case '.mdx':
             language = 'markdown';

@@ -30,7 +30,7 @@ MString.tpl = (str, obj) => {
 MString.decode = (str) => {
     if (str) {
         try {
-            let newStr = decodeURIComponent(str.replace(/_([0-9a-fA-F]{2})/gm, '%$1'));
+            let newStr = unescape(str.replace(/_([0-9a-fA-F]{2})/gm, '%$1'));
             newStr = unescape(newStr.replace(/\\(u[0-9a-fA-F]{4})/gm, '%$1'));
             return newStr;
         } catch (error) {

@@ -1,9 +1,10 @@
 goog.loadJs('web', () => {
 
+goog.require('Mixly.MString');
 goog.require('Mixly.Web');
 goog.provide('Mixly.Web.SerialPort');
 
-const { Web } = Mixly;
+const { MString, Web } = Mixly;
 
 const { SerialPort } = Web;
 
@@ -163,6 +164,7 @@ SerialPort.startReadLine = (onDataLine = (message) => {}) => {
             SerialPort.output.push((SerialPort.output.length? SerialPort.output.pop() : '') + text);
             if (endWithLF) {
                 const len = SerialPort.output.length;
+                SerialPort.output[len - 1] = MString.decode(SerialPort.output[len - 1]);
                 if (len) {
                     onDataLine(SerialPort.output[len - 1]);
                 }

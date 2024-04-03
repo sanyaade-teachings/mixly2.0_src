@@ -951,6 +951,7 @@
     {
         "path": "/web/serialport.js",
         "require": [
+            "Mixly.MString",
             "Mixly.Web"
         ],
         "provide": [

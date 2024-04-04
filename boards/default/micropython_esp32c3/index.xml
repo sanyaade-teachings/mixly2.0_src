@@ -292,7 +292,7 @@
         </block>
       </statement>
     </block>
-    <block type="c3_system_timer_init">
+    <block type="system_timer_init">
       <value name="SUB">
         <shadow type="variables_get">
           <field name="VAR">tim</field>

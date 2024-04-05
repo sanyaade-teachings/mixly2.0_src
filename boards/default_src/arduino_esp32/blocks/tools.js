@@ -5,19 +5,25 @@ let toolsGenerators = {};
 
 const BOARDS_PIN_DEF = {
     esp32_pin: {
-        path: require("../../../../common/media/board_pin/ESP32.png")
+        path: require("../../../../common/media/board_pin/ESP32.png"),
+        height: 270
     },
     handbit_A: {
-        path: require("../../../../common/media/board_pin/handbit_A.jpg")
+        path: require("../../../../common/media/board_pin/handbit_A.jpg"),
+        height: 260
     },
     handbit_B: {
-        path: require("../../../../common/media/board_pin/handbit_B.jpg")
+        path: require("../../../../common/media/board_pin/handbit_B.jpg"),
+        height: 260,
+        width: 460
     },
     handbit_pin_A: {
-        path: require("../../../../common/media/board_pin/handbit_pin_A.jpg")
+        path: require("../../../../common/media/board_pin/handbit_pin_A.jpg"),
+        width: 270
     },
     handbit_pin_B: {
-        path: require("../../../../common/media/board_pin/handbit_pin_B.jpg")
+        path: require("../../../../common/media/board_pin/handbit_pin_B.jpg"),
+        width: 290
     },
     mixgo_pin_A: {
         path: require("../../../../common/media/board_pin/MixGo_pin_A.png")

@@ -2,7 +2,7 @@ import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 import { sensor_mixgo_pin_near } from './MixGo';
 
-Blockly.Msg['ACTUATOR_HUE'] = 100;
+const ACTUATOR_HUE = 100;
 
 export const mixgo_button_is_pressed = {
     init: function () {
@@ -82,7 +82,7 @@ export const MPU9250_update = {
 };
 export const Pocket_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
 
@@ -99,7 +99,7 @@ export const Pocket_rgb = {
 
 export const Pocket_rgb2 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -114,7 +114,7 @@ export const Pocket_rgb2 = {
 
 export const Pocket_rgb_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("Brightness")
@@ -129,7 +129,7 @@ export const Pocket_rgb_Brightness = {
 };
 export const Pocket_rgb_show = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB_SHOW)
         this.setPreviousStatement(true, null);
@@ -138,7 +138,7 @@ export const Pocket_rgb_show = {
 };
 export const pocket_RGB_color_HSV = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("H")

@@ -1,4 +1,5 @@
-import * as Blockly from 'blockly/core';
+import { Arduino } from '../../arduino_common/arduino_generator';
+import Variables from '../../arduino_common/others/variables';
 
 export const factory_notes = function () {
     var content = this.getFieldValue('VALUE');
@@ -22,16 +23,16 @@ export const factory_notes = function () {
 }
 
 export const folding_block = function () {
-    var branch = Blockly.Arduino.statementToCode(this, 'DO');
+    var branch = Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     return '' + branch + '\n';
 };
 
 export const IICSCAN = function () {
-    Blockly.Arduino.definitions_['include_WIRE'] = '#include <Wire.h>';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    Blockly.Arduino.setups_['setup_Serial.println("I2C Scanner")'] = 'Serial.println("I2C Scanner");';
+    Arduino.definitions_['include_WIRE'] = '#include <Wire.h>';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    Arduino.setups_['setup_Serial.println("I2C Scanner")'] = 'Serial.println("I2C Scanner");';
     var code = 'byte error, address;\n'
         + 'int nDevices;\n'
         + 'Serial.println("Scanning...");\n'
@@ -184,10 +185,9 @@ function myAtoi(str) {
 
 //取模工具显示数据部分
 export const tool_modulus_show = function () {
-    var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-        Blockly.Variables.NAME_TYPE);
+    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'), Variables.NAME_TYPE);
     var checkbox_save_hz = this.getFieldValue('save_hz') == 'TRUE';
-    var value_input = Blockly.Arduino.valueToCode(this, 'input_data', Blockly.Arduino.ORDER_ATOMIC);
+    var value_input = Arduino.valueToCode(this, 'input_data', Arduino.ORDER_ATOMIC);
 
     var X_1 = 0;
     for (var i of value_input) {
@@ -199,9 +199,9 @@ export const tool_modulus_show = function () {
     this.setFieldValue(X_1, "x");
 
     if (checkbox_save_hz)
-        Blockly.Arduino.libs_[varName] = 'static const unsigned char PROGMEM ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
+        Arduino.libs_[varName] = 'static const unsigned char PROGMEM ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
     else
-        Blockly.Arduino.libs_[varName] = 'unsigned char ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
+        Arduino.libs_[varName] = 'unsigned char ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
     var code = '';
     return code;
 };
@@ -566,10 +566,10 @@ export const tool_modulus = function () {
     modulus_data = modulus_data.substring(0, modulus_data.length - 3);
 
     if (checkbox_show_hz)
-        Blockly.Arduino.definitions_['var_declare_tool_modulus_data_' + dropdown_hz_sharp + '_' + text_hz_line_height + 'px' + encodeUnicode(text_input_data)] = '//' + hz_sharp;
+        Arduino.definitions_['var_declare_tool_modulus_data_' + dropdown_hz_sharp + '_' + text_hz_line_height + 'px' + encodeUnicode(text_input_data)] = '//' + hz_sharp;
 
     var code = modulus_data;
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const nano_pin = function () {
@@ -590,19 +590,19 @@ export const core_esp32c3_pin = nano_pin;
 
 //获取两个日期差值
 export const get_the_number_of_days_between_the_two_dates = function () {
-    var year_start = Blockly.Arduino.valueToCode(this, 'year_start', Blockly.Arduino.ORDER_ATOMIC);
-    var month_start = Blockly.Arduino.valueToCode(this, 'month_start', Blockly.Arduino.ORDER_ATOMIC);
-    var day_start = Blockly.Arduino.valueToCode(this, 'day_start', Blockly.Arduino.ORDER_ATOMIC);
-    var year_end = Blockly.Arduino.valueToCode(this, 'year_end', Blockly.Arduino.ORDER_ATOMIC);
-    var month_end = Blockly.Arduino.valueToCode(this, 'month_end', Blockly.Arduino.ORDER_ATOMIC);
-    var day_end = Blockly.Arduino.valueToCode(this, 'day_end', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['get_the_number_of_days_between_the_two_dates'] = 'int day_diff(int year_start, int month_start, int day_start, int year_end, int month_end, int day_end)\n{\n  int y2, m2, d2;\n  int y1, m1, d1;\n  m1 = (month_start + 9) % 12;\n  y1 = year_start - m1/10;\n  d1 = 365*y1 + y1/4 - y1/100 + y1/400 + (m1*306 + 5)/10 + (day_start - 1);\n  m2 = (month_end + 9) % 12;\n  y2 = year_end - m2/10;\n  d2 = 365*y2 + y2/4 - y2/100 + y2/400 + (m2*306 + 5)/10 + (day_end - 1);\n  return (d2 - d1);\n}';
+    var year_start = Arduino.valueToCode(this, 'year_start', Arduino.ORDER_ATOMIC);
+    var month_start = Arduino.valueToCode(this, 'month_start', Arduino.ORDER_ATOMIC);
+    var day_start = Arduino.valueToCode(this, 'day_start', Arduino.ORDER_ATOMIC);
+    var year_end = Arduino.valueToCode(this, 'year_end', Arduino.ORDER_ATOMIC);
+    var month_end = Arduino.valueToCode(this, 'month_end', Arduino.ORDER_ATOMIC);
+    var day_end = Arduino.valueToCode(this, 'day_end', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['get_the_number_of_days_between_the_two_dates'] = 'int day_diff(int year_start, int month_start, int day_start, int year_end, int month_end, int day_end)\n{\n  int y2, m2, d2;\n  int y1, m1, d1;\n  m1 = (month_start + 9) % 12;\n  y1 = year_start - m1/10;\n  d1 = 365*y1 + y1/4 - y1/100 + y1/400 + (m1*306 + 5)/10 + (day_start - 1);\n  m2 = (month_end + 9) % 12;\n  y2 = year_end - m2/10;\n  d2 = 365*y2 + y2/4 - y2/100 + y2/400 + (m2*306 + 5)/10 + (day_end - 1);\n  return (d2 - d1);\n}';
     var code = 'day_diff(' + year_start + ', ' + month_start + ', ' + day_start + ', ' + year_end + ', ' + month_end + ', ' + day_end + ')';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const esp8266_board_pin = function () {
     var pin = this.getFieldValue('pin');
     var code = '' + pin + '';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };

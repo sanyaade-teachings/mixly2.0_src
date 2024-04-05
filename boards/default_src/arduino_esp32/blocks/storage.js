@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['STORAGE_HUE'] = 0;
+const STORAGE_HUE = 0;
 
 //初始化SPIFFS
 export const initialize_spiffs = {
@@ -9,7 +9,7 @@ export const initialize_spiffs = {
             .appendField(Blockly.Msg.MIXLY_SETUP + "SPIFFS");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -37,7 +37,7 @@ export const spiffs_open_file = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -52,7 +52,7 @@ export const spiffs_close_file = {
             .appendField(new Blockly.FieldTextInput("myFile"), "file_var");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setInputsInline(true);
         this.setTooltip("");
         this.setHelpUrl("");
@@ -72,7 +72,7 @@ export const spiffs_write_data = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -86,7 +86,7 @@ export const spiffs_read_available = {
             .appendField(new Blockly.FieldTextInput("myFile"), "file_var");
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_AVAILABLE);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setOutput(true, null);
         this.setInputsInline(true);
         this.setTooltip("");
@@ -105,7 +105,7 @@ export const spiffs_read_data = {
             .appendField(Blockly.Msg.OLED_STRING);
         this.setOutput(true, null);
         this.setInputsInline(true);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -122,7 +122,7 @@ export const spiffs_file_size = {
             .appendField(Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_SIZE);
         this.setOutput(true, null);
         this.setInputsInline(true);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -139,7 +139,7 @@ export const spiffs_delete_file = {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setInputsInline(true);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

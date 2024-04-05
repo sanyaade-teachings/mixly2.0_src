@@ -1,7 +1,3 @@
-<script type="text/javascript" src="../../../common/blockly-core/names.js"></script>
-<script type="text/javascript" src="../../../common/blockly-core/variables.js"></script>
-<script type="text/javascript" src="../../../common/blockly-core/procedures.js"></script>
-<script type="text/javascript" src="../../../common/blockly-core/arduino.js"></script>
 <%= htmlWebpackPlugin.tags.headTags.join('\n') %>
 <xml>
   <category name="" id="catInOut" colour="20">

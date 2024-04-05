@@ -1,5 +1,6 @@
-import * as Blockly from 'blockly/core';
-import * as Mixly from 'mixly';
+import { JSFuncs } from 'mixly';
+import { Arduino } from '../../arduino_common/arduino_generator';
+import Variables from '../../arduino_common/others/variables';
 
 
 //物联网-授权码
@@ -9,17 +10,17 @@ export const blynk_iot_auth = function () {
 
 //物联网-一键配网
 export const blynk_smartconfig = function () {
-    let auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
-    let server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
+    let auth_key = Arduino.valueToCode(this, 'auth_key', Arduino.ORDER_ATOMIC);
+    let server_add = Arduino.valueToCode(this, 'server_add', Arduino.ORDER_ATOMIC);
     if (!isNaN(server_add.charAt(2))) {
         server_add = server_add.replace(/"/g, "").replace(/\./g, ",");
         server_add = 'IPAddress(' + server_add + ')';
     }
-    let board_type = Mixly.JSFuncs.getPlatform();
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_smartconfig'] = 'WiFi.mode(WIFI_STA);\n'
+    let board_type = JSFuncs.getPlatform();
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_smartconfig'] = 'WiFi.mode(WIFI_STA);\n'
         + '  int cnt = 0;\n'
         + '  while (WiFi.status() != WL_CONNECTED) {\n'
         + '    delay(500); \n'
@@ -39,60 +40,60 @@ export const blynk_smartconfig = function () {
         + '  }\n'
         + '  WiFi.printDiag(Serial);\n';
     if (board_type.match(RegExp(/ESP8266/))) {
-        Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
+        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
     }
     else if (board_type.match(RegExp(/ESP32/))) {
-        Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-        Blockly.Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
+        Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
+        Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
     }
-    Blockly.Arduino.setups_['setup_smartconfig'] += 'Blynk.config(auth,' + server_add + ',8080);';
+    Arduino.setups_['setup_smartconfig'] += 'Blynk.config(auth,' + server_add + ',8080);';
     let code = "Blynk.run();\n";
     return code;
 };
 
 //物联网-wifi信息
 export const blynk_server = function () {
-    let wifi_ssid = Blockly.Arduino.valueToCode(this, 'wifi_ssid', Blockly.Arduino.ORDER_ATOMIC);
-    let wifi_pass = Blockly.Arduino.valueToCode(this, 'wifi_pass', Blockly.Arduino.ORDER_ATOMIC);
-    let auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
-    let server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
-    let board_type = Mixly.JSFuncs.getPlatform();
+    let wifi_ssid = Arduino.valueToCode(this, 'wifi_ssid', Arduino.ORDER_ATOMIC);
+    let wifi_pass = Arduino.valueToCode(this, 'wifi_pass', Arduino.ORDER_ATOMIC);
+    let auth_key = Arduino.valueToCode(this, 'auth_key', Arduino.ORDER_ATOMIC);
+    let server_add = Arduino.valueToCode(this, 'server_add', Arduino.ORDER_ATOMIC);
+    let board_type = JSFuncs.getPlatform();
     //let board_type ="ESP8266";
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
-    Blockly.Arduino.definitions_['var_declare_wifi_ssid'] = 'char ssid[] = ' + wifi_ssid + ';';
-    Blockly.Arduino.definitions_['var_declare_wifi_pass'] = 'char pass[] = ' + wifi_pass + ';';
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
+    Arduino.definitions_['var_declare_wifi_ssid'] = 'char ssid[] = ' + wifi_ssid + ';';
+    Arduino.definitions_['var_declare_wifi_pass'] = 'char pass[] = ' + wifi_pass + ';';
     if (board_type.match(RegExp(/AVR/))) {
-        Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266_Lib.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleShieldEsp8266.h>';
-        Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define ESP8266_BAUD 115200';
-        Blockly.Arduino.definitions_['var_declare_ESP8266'] = 'ESP8266 wifi(&Serial);';
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(115200);';
-        Blockly.Arduino.setups_['delay_10_1'] = 'delay(10);';
-        Blockly.Arduino.setups_['wifi.setOprToStation'] = 'wifi.setOprToStation(2, 2);';
-        Blockly.Arduino.setups_['delay_10_2'] = 'delay(10);';
-        Blockly.Arduino.setups_['wifi.enableMUX'] = 'wifi.enableMUX();';
-        Blockly.Arduino.setups_['delay_10_3'] = 'delay(10);';
-        Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(auth, wifi,ssid, pass,' + server_add + ',8080);';
+        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266_Lib.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleShieldEsp8266.h>';
+        Arduino.definitions_['define_BLYNK_PRINT'] = '#define ESP8266_BAUD 115200';
+        Arduino.definitions_['var_declare_ESP8266'] = 'ESP8266 wifi(&Serial);';
+        Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(115200);';
+        Arduino.setups_['delay_10_1'] = 'delay(10);';
+        Arduino.setups_['wifi.setOprToStation'] = 'wifi.setOprToStation(2, 2);';
+        Arduino.setups_['delay_10_2'] = 'delay(10);';
+        Arduino.setups_['wifi.enableMUX'] = 'wifi.enableMUX();';
+        Arduino.setups_['delay_10_3'] = 'delay(10);';
+        Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(auth, wifi,ssid, pass,' + server_add + ',8080);';
     }
     if (!isNaN(server_add.charAt(2))) {
         server_add = server_add.replace(/"/g, "").replace(/\./g, ",");
         server_add = 'IPAddress(' + server_add + ')';
     }
     if (board_type.match(RegExp(/ESP8266/))) {
-        Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-        Blockly.Arduino.setups_['setup_Blynk.begin'] = ' Blynk.begin(auth, ssid, pass,' + server_add + ',8080);';
+        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
+        Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+        Arduino.setups_['setup_Blynk.begin'] = ' Blynk.begin(auth, ssid, pass,' + server_add + ',8080);';
     }
     else if (board_type.match(RegExp(/ESP32/))) {
-        Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-        Blockly.Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-        Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(auth, ssid, pass,' + server_add + ',8080);';
+        Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
+        Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
+        Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+        Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(auth, ssid, pass,' + server_add + ',8080);';
     }
     let code = "Blynk.run();\n";
     return code;
@@ -100,15 +101,15 @@ export const blynk_server = function () {
 
 //物联网-wifi信息
 export const blynk_usb_server = function () {
-    //Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT DebugSerial';
-    Blockly.Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
-    Blockly.Arduino.definitions_['include_BlynkSimpleStream'] = '#include <BlynkSimpleStream.h>';
-    Blockly.Arduino.definitions_['var_declare_SoftwareSerial'] = 'SoftwareSerial DebugSerial(2, 3);';
-    let auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(Serial, auth);';
-    Blockly.Arduino.setups_['setup_DebugSerial'] = 'DebugSerial.begin(9600);';
+    //Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT DebugSerial';
+    Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
+    Arduino.definitions_['include_BlynkSimpleStream'] = '#include <BlynkSimpleStream.h>';
+    Arduino.definitions_['var_declare_SoftwareSerial'] = 'SoftwareSerial DebugSerial(2, 3);';
+    let auth_key = Arduino.valueToCode(this, 'auth_key', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(Serial, auth);';
+    Arduino.setups_['setup_DebugSerial'] = 'DebugSerial.begin(9600);';
     let code = "Blynk.run();\n";
     return code;
 };
@@ -116,7 +117,7 @@ export const blynk_usb_server = function () {
 //物联网-发送数据到app
 export const blynk_iot_push_data = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
+    let data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
     let code = 'Blynk.virtualWrite(' + Vpin + ', ' + data + ');\n';
     return code;
 };
@@ -126,20 +127,20 @@ export const blynk_iot_get_data = function () {
     let Vpin = this.getFieldValue('Vpin');
     let args = [];
     for (let x = 0; x < this.arguments_.length; x++) {
-        args[x] = Blockly.Arduino.valueToCode(this, 'ARG' + x, Blockly.Arduino.ORDER_NONE) || 'null';
+        args[x] = Arduino.valueToCode(this, 'ARG' + x, Arduino.ORDER_NONE) || 'null';
     }
     let code = '(a' + args.join(', ') + ');\n';
-    let branch = Blockly.Arduino.statementToCode(this, 'STACK');
-    if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
-        branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
+    let branch = Arduino.statementToCode(this, 'STACK');
+    if (Arduino.INFINITE_LOOP_TRAP) {
+        branch = Arduino.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
     }
     args = [];
     for (let x = 0; x < this.arguments_.length; x++) {
-        args[x] = this.argumentstype_[x] + ' ' + Blockly.Arduino.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+        args[x] = this.argumentstype_[x] + ' ' + Arduino.variableDB_.getName(this.arguments_[x], Variables.NAME_TYPE);
     }
     let GetDataCode = "";
     if (this.arguments_.length == 1) {
-        GetDataCode = Blockly.Arduino.variableDB_.getName(this.arguments_[0], Blockly.Variables.NAME_TYPE);
+        GetDataCode = Arduino.variableDB_.getName(this.arguments_[0], Variables.NAME_TYPE);
         if (this.argumentstype_[0] == "int")
             GetDataCode = "  " + GetDataCode + " = param.asInt();\n"
         else if (this.argumentstype_[0] == "String")
@@ -157,9 +158,9 @@ export const blynk_iot_get_data = function () {
     }
     else {
         for (let x = 0; x < this.arguments_.length; x++) {
-            args[x] = this.argumentstype_[x] + ' ' + Blockly.Arduino.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+            args[x] = this.argumentstype_[x] + ' ' + Arduino.variableDB_.getName(this.arguments_[x], Variables.NAME_TYPE);
 
-            GetDataCode = GetDataCode + "  " + Blockly.Arduino.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+            GetDataCode = GetDataCode + "  " + Arduino.variableDB_.getName(this.arguments_[x], Variables.NAME_TYPE);
             if (this.argumentstype_[x] == "int")
                 GetDataCode += " = param[" + x + "].asInt();\n"
             else if (this.argumentstype_[x] == "String")
@@ -177,36 +178,36 @@ export const blynk_iot_get_data = function () {
         }
     }
     if (this.arguments_.length > 0)
-        Blockly.Arduino.definitions_['var_declare_' + args] = args.join(';\n') + ";";
+        Arduino.definitions_['var_declare_' + args] = args.join(';\n') + ";";
     code = 'BLYNK_WRITE(' + Vpin + ') {\n' + GetDataCode +
         branch + '}\n';
     // let code =  'BLYNK_WRITE(' + Vpin+ ') {\n'+letiable+" = param.as"+datatype+"();\n"+branch+'}\n';
-    code = Blockly.Arduino.scrub_(this, code);
-    Blockly.Arduino.definitions_[Vpin] = code;
+    code = Arduino.scrub_(this, code);
+    Arduino.definitions_[Vpin] = code;
     return null;
 };
 
 //blynk 定时器
 export const Blynk_iot_timer = function () {
-    Blockly.Arduino.definitions_['var_declare_BlynkTimer'] = 'BlynkTimer timer;';
+    Arduino.definitions_['var_declare_BlynkTimer'] = 'BlynkTimer timer;';
     let timerNo = this.getFieldValue('timerNo');
-    let time = Blockly.Arduino.valueToCode(this, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
+    let time = Arduino.valueToCode(this, 'TIME', Arduino.ORDER_ATOMIC);
     let funcName = 'myTimerEvent' + timerNo;
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
+    let branch = Arduino.statementToCode(this, 'DO');
     let code = 'void' + ' ' + funcName + '() {\n'
         + branch
         + '}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
-    Blockly.Arduino.setups_[funcName] = 'timer.setInterval(' + time + 'L, ' + funcName + ');\n';
+    Arduino.definitions_[funcName] = code;
+    Arduino.setups_[funcName] = 'timer.setInterval(' + time + 'L, ' + funcName + ');\n';
     return "timer.run();\n";
 };
 
 //blynk 连接状态函数
 export const Blynk_iot_CONNECT_STATE = function () {
     let funcName = this.getFieldValue('state');
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
+    let branch = Arduino.statementToCode(this, 'DO');
     let code = funcName + '() {\n' + branch + '}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
+    Arduino.definitions_[funcName] = code;
     return "";
 };
 
@@ -226,10 +227,10 @@ export const blynk_iot_syncVirtual = function () {
 //LED组件颜色&开关
 export const blynk_iot_WidgetLED_COLOR = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
+    let COLOR = Arduino.valueToCode(this, 'COLOR', Arduino.ORDER_ATOMIC);
     COLOR = COLOR.replace(/#/g, "").replace(/\(/g, "").replace(/\)/g, "").replace(/0x/g, '');
-    let dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['var_declare_WidgetLED' + Vpin] = 'WidgetLED led' + Vpin + '(' + Vpin + ');';
+    let dropdown_stat = Arduino.valueToCode(this, 'STAT', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['var_declare_WidgetLED' + Vpin] = 'WidgetLED led' + Vpin + '(' + Vpin + ');';
     let code = 'led' + Vpin + '.setColor("#' + COLOR + '");\n';
     if (dropdown_stat == "HIGH")
         code += 'led' + Vpin + '.on();\n';
@@ -241,10 +242,10 @@ export const blynk_iot_WidgetLED_COLOR = function () {
 //LED组件颜色&亮度
 export const blynk_iot_WidgetLED_VALUE = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let COLOR = Blockly.Arduino.valueToCode(this, 'COLOR', Blockly.Arduino.ORDER_ATOMIC);
+    let COLOR = Arduino.valueToCode(this, 'COLOR', Arduino.ORDER_ATOMIC);
     COLOR = COLOR.replace(/#/g, "").replace(/\(/g, "").replace(/\)/g, "").replace(/0x/g, '');
-    let value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['var_declare_WidgetLED' + Vpin] = 'WidgetLED led' + Vpin + '(' + Vpin + ');';
+    let value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['var_declare_WidgetLED' + Vpin] = 'WidgetLED led' + Vpin + '(' + Vpin + ');';
     let code = 'led' + Vpin + '.setColor("#' + COLOR + '");\n';
     code += 'led' + Vpin + '.setValue(' + value_num + ');';
     return code;
@@ -256,15 +257,15 @@ export const blynk_iot_ir_send_ac = function () {
     let AC_POWER = this.getFieldValue('AC_POWER');
     let AC_MODE = this.getFieldValue('AC_MODE');
     let AC_FAN = this.getFieldValue('AC_FAN');
-    let dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    let AC_TEMP = Blockly.Arduino.valueToCode(this, 'AC_TEMP', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['include_Arduino'] = '#ifndef UNIT_TEST\n#include <Arduino.h>\n#endif';
-    Blockly.Arduino.definitions_['include_IRremoteESP8266'] = '#include <IRremoteESP8266.h>';
-    Blockly.Arduino.definitions_['include_IRsend'] = '#include <IRsend.h>';
-    Blockly.Arduino.definitions_['include' + AC_TYPE] = '#include <ir_' + AC_TYPE + '.h>';
-    Blockly.Arduino.definitions_['define_IR_LED' + dropdown_pin] = '#define IR_LED ' + dropdown_pin;
-    Blockly.Arduino.definitions_['IR' + AC_TYPE + 'AC'] = 'IR' + AC_TYPE + 'AC ' + AC_TYPE + 'AC(IR_LED); ';
-    Blockly.Arduino.setups_['setup' + AC_TYPE] = AC_TYPE + 'AC.begin();';
+    let dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+    let AC_TEMP = Arduino.valueToCode(this, 'AC_TEMP', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_Arduino'] = '#ifndef UNIT_TEST\n#include <Arduino.h>\n#endif';
+    Arduino.definitions_['include_IRremoteESP8266'] = '#include <IRremoteESP8266.h>';
+    Arduino.definitions_['include_IRsend'] = '#include <IRsend.h>';
+    Arduino.definitions_['include' + AC_TYPE] = '#include <ir_' + AC_TYPE + '.h>';
+    Arduino.definitions_['define_IR_LED' + dropdown_pin] = '#define IR_LED ' + dropdown_pin;
+    Arduino.definitions_['IR' + AC_TYPE + 'AC'] = 'IR' + AC_TYPE + 'AC ' + AC_TYPE + 'AC(IR_LED); ';
+    Arduino.setups_['setup' + AC_TYPE] = AC_TYPE + 'AC.begin();';
     let code = AC_TYPE + 'AC.setPower(' + AC_POWER + ');\n';
     code += AC_TYPE + 'AC.setFan(' + AC_FAN + ');\n';
     code += AC_TYPE + 'AC.setMode(' + AC_MODE + ');\n';
@@ -275,14 +276,14 @@ export const blynk_iot_ir_send_ac = function () {
 
 //红外接收
 export const blynk_iot_ir_recv_raw = function () {
-    let dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['include_IRremote'] = '#ifndef UNIT_TEST\n'
+    let dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_IRremote'] = '#ifndef UNIT_TEST\n'
         + '#include <Arduino.h>\n'
         + '#endif\n#include <IRremoteESP8266.h>\n#include <IRrecv.h>\n#include <IRutils.h>\n#if DECODE_AC\n#include <ir_Daikin.h>\n#include <ir_Fujitsu.h>\n#include <ir_Gree.h>\n#include <ir_Haier.h>\n#include <ir_Kelvinator.h>\n#include <ir_Midea.h>\n#include <ir_Toshiba.h>\n#endif \n';
-    Blockly.Arduino.definitions_['define_RECV_PIN' + dropdown_pin] = '#define RECV_PIN ' + dropdown_pin + '\n';
-    // Blockly.Arduino.definitions_['define_BAUD_RATE'] = '#define BAUD_RATE 115200\n';
-    Blockly.Arduino.definitions_['var_declare_CAPTURE_BUFFER_SIZE'] = '#define CAPTURE_BUFFER_SIZE 1024\n#if DECODE_AC\n#define TIMEOUT 50U\n#else\n#define TIMEOUT 15U  \n#endif\n#define MIN_UNKNOWN_SIZE 12\n#define IN_UNKNOWN_SIZE 12\nIRrecv irrecv(RECV_PIN, CAPTURE_BUFFER_SIZE, TIMEOUT, true);\ndecode_results results;';
-    Blockly.Arduino.setups_['ir_recv_begin'] = 'while(!Serial)\n'
+    Arduino.definitions_['define_RECV_PIN' + dropdown_pin] = '#define RECV_PIN ' + dropdown_pin + '\n';
+    // Arduino.definitions_['define_BAUD_RATE'] = '#define BAUD_RATE 115200\n';
+    Arduino.definitions_['var_declare_CAPTURE_BUFFER_SIZE'] = '#define CAPTURE_BUFFER_SIZE 1024\n#if DECODE_AC\n#define TIMEOUT 50U\n#else\n#define TIMEOUT 15U  \n#endif\n#define MIN_UNKNOWN_SIZE 12\n#define IN_UNKNOWN_SIZE 12\nIRrecv irrecv(RECV_PIN, CAPTURE_BUFFER_SIZE, TIMEOUT, true);\ndecode_results results;';
+    Arduino.setups_['ir_recv_begin'] = 'while(!Serial)\n'
         + '    delay(50);\n'
         + '  #if DECODE_HASH\n'
         + '  irrecv.setUnknownThreshold(MIN_UNKNOWN_SIZE);\n'
@@ -347,38 +348,38 @@ export const blynk_iot_ir_recv_raw = function () {
         + '  if(description != "")\n'
         + '    Serial.println("Mesg Desc.: " + description);\n'
         + '}\n';
-    Blockly.Arduino.definitions_['dumpACInfo'] = funcode;
+    Arduino.definitions_['dumpACInfo'] = funcode;
     return code;
 };
 
 //红外发射
 export const blynk_iot_ir_send = function () {
-    let dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
+    let dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
     let IR_CODE = this.getFieldValue('IR_CODE');
     let IR_CODE_LENGTH = IR_CODE.split(',').length;
     let random_num = Math.ceil(Math.random() * 100000);
-    Blockly.Arduino.definitions_['define_IRremote'] = '#ifndef UNIT_TEST\n#include <Arduino.h>\n#endif\n#include <IRremoteESP8266.h>\n#include <IRsend.h>\n#define IR_LED ' + dropdown_pin;
-    Blockly.Arduino.definitions_['var_declare_IRsend_irsend'] = 'IRsend irsend(IR_LED);\n';
-    Blockly.Arduino.definitions_['var_declare_send' + random_num] = 'uint16_t rawData' + random_num + '[' + IR_CODE_LENGTH + '] = {' + IR_CODE + '};';
-    // Blockly.Arduino.setups_['Serial.begin'] = 'irsend.begin();\n  Serial.begin(115200, SERIAL_8N1, SERIAL_TX_ONLY);\n';
-    Blockly.Arduino.setups_['irsend_begin'] = 'irsend.begin();\n';
+    Arduino.definitions_['define_IRremote'] = '#ifndef UNIT_TEST\n#include <Arduino.h>\n#endif\n#include <IRremoteESP8266.h>\n#include <IRsend.h>\n#define IR_LED ' + dropdown_pin;
+    Arduino.definitions_['var_declare_IRsend_irsend'] = 'IRsend irsend(IR_LED);\n';
+    Arduino.definitions_['var_declare_send' + random_num] = 'uint16_t rawData' + random_num + '[' + IR_CODE_LENGTH + '] = {' + IR_CODE + '};';
+    // Arduino.setups_['Serial.begin'] = 'irsend.begin();\n  Serial.begin(115200, SERIAL_8N1, SERIAL_TX_ONLY);\n';
+    Arduino.setups_['irsend_begin'] = 'irsend.begin();\n';
     let code = 'irsend.sendRaw(rawData' + random_num + ', ' + IR_CODE_LENGTH + ', 38);\ndelay(2000);\n';
     return code;
 }
 
 //发送邮件
 export const blynk_email = function () {
-    let email_add = Blockly.Arduino.valueToCode(this, 'email_add', Blockly.Arduino.ORDER_ATOMIC);
-    let Subject = Blockly.Arduino.valueToCode(this, 'Subject', Blockly.Arduino.ORDER_ATOMIC);
-    let content = Blockly.Arduino.valueToCode(this, 'content', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['define_BLYNK_MAX_SENDBYTES'] = '#define BLYNK_MAX_SENDBYTES 128 \n';
+    let email_add = Arduino.valueToCode(this, 'email_add', Arduino.ORDER_ATOMIC);
+    let Subject = Arduino.valueToCode(this, 'Subject', Arduino.ORDER_ATOMIC);
+    let content = Arduino.valueToCode(this, 'content', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['define_BLYNK_MAX_SENDBYTES'] = '#define BLYNK_MAX_SENDBYTES 128 \n';
     let code = 'Blynk.email(' + email_add + ', ' + Subject + ', ' + content + ');\n';
     return code;
 };
 
 //发送通知
 export const blynk_notify = function () {
-    let content = Blockly.Arduino.valueToCode(this, 'content', Blockly.Arduino.ORDER_ATOMIC);
+    let content = Arduino.valueToCode(this, 'content', Arduino.ORDER_ATOMIC);
     let code = 'Blynk.notify(' + content + ');\n';
     return code;
 };
@@ -386,8 +387,8 @@ export const blynk_notify = function () {
 //物联网-终端组件显示文本
 export const blynk_terminal = function () {
     let Vpin = this.getFieldValue('Vpin');
-    Blockly.Arduino.definitions_['var_declare_WidgetTerminal' + Vpin] = 'WidgetTerminal terminal' + Vpin + '(' + Vpin + ');\n';
-    let content = Blockly.Arduino.valueToCode(this, 'content', Blockly.Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['var_declare_WidgetTerminal' + Vpin] = 'WidgetTerminal terminal' + Vpin + '(' + Vpin + ');\n';
+    let content = Arduino.valueToCode(this, 'content', Arduino.ORDER_ATOMIC);
     let code = 'terminal' + Vpin + '.println(' + content + ');\nterminal' + Vpin + '.flush();\n';
     return code;
 };
@@ -395,23 +396,23 @@ export const blynk_terminal = function () {
 //从终端获取字符串
 export const blynk_iot_terminal_get = function () {
     let Vpin = this.getFieldValue('Vpin');
-    Blockly.Arduino.definitions_['var_declare_WidgetTerminal'] = 'WidgetTerminal terminal(' + Vpin + ');\n';
-    Blockly.Arduino.definitions_['var_declare_action'] = 'String terminal_text ;';
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
+    Arduino.definitions_['var_declare_WidgetTerminal'] = 'WidgetTerminal terminal(' + Vpin + ');\n';
+    Arduino.definitions_['var_declare_action'] = 'String terminal_text ;';
+    let branch = Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格s
     let code = 'BLYNK_WRITE' + '(' + Vpin + '){\n'
         + '  terminal_text = param.asStr();\n'
         + '  ' + branch + '\n'
         + '  terminal.flush();\n'
         + '}\n'
-    Blockly.Arduino.definitions_[Vpin] = code;
+    Arduino.definitions_[Vpin] = code;
     return null;
 };
 
 //视频流
 export const blynk_videourl = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let url = Blockly.Arduino.valueToCode(this, 'url', Blockly.Arduino.ORDER_ATOMIC);
+    let url = Arduino.valueToCode(this, 'url', Arduino.ORDER_ATOMIC);
     let code = 'Blynk.setProperty(' + Vpin + ',"url",' + url + ');\n';
     return code;
 };
@@ -419,8 +420,8 @@ export const blynk_videourl = function () {
 //桥接授权码
 export const blynk_bridge_auth = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['var_declare_WidgetBridge' + Vpin] = 'WidgetBridge bridge' + Vpin + '(' + Vpin + ');\n';
+    let auth = Arduino.valueToCode(this, 'auth', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['var_declare_WidgetBridge' + Vpin] = 'WidgetBridge bridge' + Vpin + '(' + Vpin + ');\n';
     let code = 'bridge' + Vpin + '.setAuthToken(' + auth + ');\n';
     return code;
 };
@@ -428,8 +429,8 @@ export const blynk_bridge_auth = function () {
 //桥接数字输出
 export const blynk_bridge_digitalWrite = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    let dropdown_stat = Blockly.Arduino.valueToCode(this, 'STAT', Blockly.Arduino.ORDER_ATOMIC);
+    let dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+    let dropdown_stat = Arduino.valueToCode(this, 'STAT', Arduino.ORDER_ATOMIC);
     let code = 'bridge' + Vpin + '.digitalWrite(' + dropdown_pin + ', ' + dropdown_stat + ');\n';
     return code;
 };
@@ -437,8 +438,8 @@ export const blynk_bridge_digitalWrite = function () {
 //桥接模拟输出
 export const blynk_bridge_AnaloglWrite = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    let value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
+    let dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+    let value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_ATOMIC);
     let code = 'bridge' + Vpin + '.analogWrite(' + dropdown_pin + ', ' + value_num + ');\n';
     return code;
 };
@@ -447,18 +448,18 @@ export const blynk_bridge_AnaloglWrite = function () {
 export const blynk_bridge_VPin = function () {
     let Vpin = this.getFieldValue('Vpin');
     let Vpin2 = this.getFieldValue('Vpin2');
-    let value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
+    let value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_ATOMIC);
     let code = 'bridge' + Vpin + '.virtualWrite(' + Vpin2 + ', ' + value_num + ');\n';
     return code;
 };
 
 //RTC组件初始化
 export const blynk_WidgetRTC_init = function () {
-    Blockly.Arduino.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
-    Blockly.Arduino.definitions_['include_WidgetRTC'] = '#include <WidgetRTC.h>';
-    let value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['var_declare_WidgetRTC'] = 'WidgetRTC rtc;\n';
-    Blockly.Arduino.setups_['setSyncInterval'] = 'setSyncInterval(' + value_num + '* 60);';
+    Arduino.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
+    Arduino.definitions_['include_WidgetRTC'] = '#include <WidgetRTC.h>';
+    let value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['var_declare_WidgetRTC'] = 'WidgetRTC rtc;\n';
+    Arduino.setups_['setSyncInterval'] = 'setSyncInterval(' + value_num + '* 60);';
     let code = 'rtc.begin();\n';
     return code;
 };
@@ -467,15 +468,15 @@ export const blynk_WidgetRTC_init = function () {
 export const blynk_WidgetRTC_get_time = function () {
     let timeType = this.getFieldValue('TIME_TYPE');
     let code = timeType + '()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //播放音乐组件
 export const blynk_iot_playmusic = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
-    if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
-        branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
+    let branch = Arduino.statementToCode(this, 'DO');
+    if (Arduino.INFINITE_LOOP_TRAP) {
+        branch = Arduino.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
     }
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     let code = 'BLYNK_WRITE(' + Vpin + '){\n'
@@ -483,27 +484,27 @@ export const blynk_iot_playmusic = function () {
         + '  ' + branch + '\n'
         + '  Blynk.setProperty(' + Vpin + ', "label", action);\n'
         + '}\n';
-    code = Blockly.Arduino.scrub_(this, code);
-    Blockly.Arduino.definitions_[Vpin] = code;
+    code = Arduino.scrub_(this, code);
+    Arduino.definitions_[Vpin] = code;
     return "";
 };
 //光线传感器
 export const blynk_light = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
+    let branch = Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     let code = 'BLYNK_WRITE' + '(' + Vpin + '){\n'
         + '  int lx = param.asInt();\n'
         + '  ' + branch + '\n'
         + '}\n';
-    Blockly.Arduino.definitions_[Vpin] = code;
+    Arduino.definitions_[Vpin] = code;
     return "";
 };
 
 //重力传感器
 export const blynk_gravity = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
+    let branch = Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     let code = 'BLYNK_WRITE' + '(' + Vpin + '){\n'
         + '  int x = param[0].asFloat();\n'
@@ -511,7 +512,7 @@ export const blynk_gravity = function () {
         + '  int z = param[2].asFloat();\n'
         + '  ' + branch + '\n'
         + '}\n';
-    Blockly.Arduino.definitions_[Vpin] = code;
+    Arduino.definitions_[Vpin] = code;
     return "";
 };
 
@@ -521,7 +522,7 @@ export const blynk_acc = blynk_gravity;
 //时间输入
 export const blynk_time_input_1 = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let branch = Blockly.Arduino.statementToCode(this, 'DO');
+    let branch = Arduino.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     let code = 'BLYNK_WRITE' + '(' + Vpin + '){\n'
         + '  long startTimeInSecs = param[0].asLong();\n'
@@ -530,52 +531,52 @@ export const blynk_time_input_1 = function () {
         + '  long second=(startTimeInSecs-3600*hour)%60;\n'
         + '  ' + branch + '\n'
         + '}\n';
-    Blockly.Arduino.definitions_[Vpin] = code;
+    Arduino.definitions_[Vpin] = code;
     return "";
 };
 
 //执行器-蜂鸣器频率选择列表
 export const tone_notes = function () {
     let code = this.getFieldValue('STAT');
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const factory_declare2 = function () {
     let VALUE = this.getFieldValue('VALUE');
-    Blockly.Arduino.definitions_['var_' + VALUE] = VALUE;
+    Arduino.definitions_['var_' + VALUE] = VALUE;
     return '';
 };
 
 //一键配网（无需安可信）
 export const blynk_AP_config = function () {
-    let server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
-    let auth_key = Blockly.Arduino.valueToCode(this, 'auth_key', Blockly.Arduino.ORDER_ATOMIC);
-    let board_type = Mixly.JSFuncs.getPlatform();
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    let server_add = Arduino.valueToCode(this, 'server_add', Arduino.ORDER_ATOMIC);
+    let auth_key = Arduino.valueToCode(this, 'auth_key', Arduino.ORDER_ATOMIC);
+    let board_type = JSFuncs.getPlatform();
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
     if (board_type.match(RegExp(/ESP8266/))) {
-        Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
+        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
     }
     else if (board_type.match(RegExp(/ESP32/))) {
-        Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-        Blockly.Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
-        Blockly.Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
+        Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
+        Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
+        Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
     }
-    Blockly.Arduino.definitions_['include_DNSServer'] = '#include <DNSServer.h>';
-    Blockly.Arduino.definitions_['include_ESP8266WebServer'] = '#include <ESP8266WebServer.h>\n';
-    Blockly.Arduino.definitions_['include_WiFiManager'] = '#include <WiFiManager.h>';
-    Blockly.Arduino.definitions_['var_declare_WiFiServer'] = 'WiFiServer server(80);';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_WiFiManager'] = 'WiFiManager wifiManager;';
-    Blockly.Arduino.setups_['setup_wifiManagerautoConnect'] = 'wifiManager.autoConnect("Blynk");';
-    Blockly.Arduino.setups_['setup_server.begin'] = 'Serial.println("Connected.");\n  server.begin();';
+    Arduino.definitions_['include_DNSServer'] = '#include <DNSServer.h>';
+    Arduino.definitions_['include_ESP8266WebServer'] = '#include <ESP8266WebServer.h>\n';
+    Arduino.definitions_['include_WiFiManager'] = '#include <WiFiManager.h>';
+    Arduino.definitions_['var_declare_WiFiServer'] = 'WiFiServer server(80);';
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth_key + ';';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_WiFiManager'] = 'WiFiManager wifiManager;';
+    Arduino.setups_['setup_wifiManagerautoConnect'] = 'wifiManager.autoConnect("Blynk");';
+    Arduino.setups_['setup_server.begin'] = 'Serial.println("Connected.");\n  server.begin();';
     if (isNaN(server_add.charAt(2))) {
-        Blockly.Arduino.setups_['setup_Blynkconfig'] = 'Blynk.config(auth, ' + server_add + ', 8080);';
+        Arduino.setups_['setup_Blynkconfig'] = 'Blynk.config(auth, ' + server_add + ', 8080);';
     }
     else {
         server_add = server_add.replace(/"/g, "").replace(/\./g, ",");
-        Blockly.Arduino.setups_['setup_Blynkconfig'] = 'Blynk.config(auth, ' + 'IPAddress(' + server_add + '), 8080);';
+        Arduino.setups_['setup_Blynkconfig'] = 'Blynk.config(auth, ' + 'IPAddress(' + server_add + '), 8080);';
     }
     let code = 'Blynk.run();';
     return code;
@@ -583,23 +584,23 @@ export const blynk_AP_config = function () {
 
 //一键配网手动配置授权码（无需安可信）
 export const blynk_AP_config_2 = function () {
-    let server_add = Blockly.Arduino.valueToCode(this, 'server_add', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['include_FS'] = '#include <FS.h>';
-    Blockly.Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-    Blockly.Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
-    Blockly.Arduino.definitions_['include_DNSServer'] = '#include <DNSServer.h>';
-    Blockly.Arduino.definitions_['include_ESP8266WebServer'] = '#include <ESP8266WebServer.h>';
-    Blockly.Arduino.definitions_['include_WiFiManager'] = '#include <WiFiManager.h>';
-    Blockly.Arduino.definitions_['include_ArduinoJson'] = '#include <ArduinoJson.h>';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char blynk_token[34] = "YOUR_BLYNK_TOKEN";';
-    Blockly.Arduino.definitions_['var_declare_shouldSaveConfig'] = 'bool shouldSaveConfig = false;';
-    Blockly.Arduino.definitions_['saveConfigCallback'] = 'void saveConfigCallback (){\n'
+    let server_add = Arduino.valueToCode(this, 'server_add', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['include_FS'] = '#include <FS.h>';
+    Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+    Arduino.definitions_['include_BlynkSimpleEsp8266'] = '#include <BlynkSimpleEsp8266.h>';
+    Arduino.definitions_['include_DNSServer'] = '#include <DNSServer.h>';
+    Arduino.definitions_['include_ESP8266WebServer'] = '#include <ESP8266WebServer.h>';
+    Arduino.definitions_['include_WiFiManager'] = '#include <WiFiManager.h>';
+    Arduino.definitions_['include_ArduinoJson'] = '#include <ArduinoJson.h>';
+    Arduino.definitions_['var_declare_auth_key'] = 'char blynk_token[34] = "YOUR_BLYNK_TOKEN";';
+    Arduino.definitions_['var_declare_shouldSaveConfig'] = 'bool shouldSaveConfig = false;';
+    Arduino.definitions_['saveConfigCallback'] = 'void saveConfigCallback (){\n'
         + '  Serial.println("Should save config");\n'
         + '  shouldSaveConfig = true;\n'
         + '}';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['otasetup1'] = 'Serial.println("mounting FS...");\n'
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['otasetup1'] = 'Serial.println("mounting FS...");\n'
         + ' if (SPIFFS.begin()){\n'
         + '    Serial.println("mounted file system");\n'
         + '    if (SPIFFS.exists("/config.json")) {\n'
@@ -656,11 +657,11 @@ export const blynk_AP_config_2 = function () {
         + '  Serial.println("local ip");\n'
         + '  Serial.println(WiFi.localIP());\n';
     if (isNaN(server_add.charAt(2))) {
-        Blockly.Arduino.setups_['otasetup1'] += '  Blynk.config(blynk_token,' + server_add + ',8080);';
+        Arduino.setups_['otasetup1'] += '  Blynk.config(blynk_token,' + server_add + ',8080);';
     }
     else {
         server_add = server_add.replace(/"/g, "").replace(/\./g, ",");
-        Blockly.Arduino.setups_['otasetup1'] += '  Blynk.config(blynk_token,' + 'IPAddress(' + server_add + '),8080);';
+        Arduino.setups_['otasetup1'] += '  Blynk.config(blynk_token,' + 'IPAddress(' + server_add + '),8080);';
     }
     let code = 'Blynk.run();\n';
     return code;
@@ -668,7 +669,7 @@ export const blynk_AP_config_2 = function () {
 
 export const Blynk_connect_state = function () {
     let code = 'Blynk.connected()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //Blynk终端清屏
@@ -680,10 +681,10 @@ export const blynk_terminal_clear = function () {
 //Blynk LCD显示
 export const blynk_lcd = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let x = Blockly.Arduino.valueToCode(this, 'x', Blockly.Arduino.ORDER_ATOMIC);
-    let y = Blockly.Arduino.valueToCode(this, 'y', Blockly.Arduino.ORDER_ATOMIC);
-    let value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['include_lcd'] = 'WidgetLCD lcd(' + Vpin + ');\n';
+    let x = Arduino.valueToCode(this, 'x', Arduino.ORDER_ATOMIC);
+    let y = Arduino.valueToCode(this, 'y', Arduino.ORDER_ATOMIC);
+    let value = Arduino.valueToCode(this, 'value', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_lcd'] = 'WidgetLCD lcd(' + Vpin + ');\n';
     let code = 'lcd.print(' + x + ', ' + y + ', ' + value + ');\n';
     return code;
 };
@@ -696,16 +697,16 @@ export const blynk_lcd_clear = function () {
 
 //ESP32 blynk BLE连接方式
 export const blynk_esp32_ble = function () {
-    let auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
-    let name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['define_BLYNK_USE_DIRECT_CONNECT'] = '#define BLYNK_USE_DIRECT_CONNECT';
-    Blockly.Arduino.definitions_['include_BlynkSimpleEsp32_BLE'] = '#include <BlynkSimpleEsp32_BLE.h>';
-    Blockly.Arduino.definitions_['include_BLEDevice'] = '#include <BLEDevice.h>';
-    Blockly.Arduino.definitions_['include_BLEServer'] = '#include <BLEServer.h>\n';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth + ';';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Serial.println("Waiting for connections...");\n'
+    let auth = Arduino.valueToCode(this, 'auth', Arduino.ORDER_ATOMIC);
+    let name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['define_BLYNK_USE_DIRECT_CONNECT'] = '#define BLYNK_USE_DIRECT_CONNECT';
+    Arduino.definitions_['include_BlynkSimpleEsp32_BLE'] = '#include <BlynkSimpleEsp32_BLE.h>';
+    Arduino.definitions_['include_BLEDevice'] = '#include <BLEDevice.h>';
+    Arduino.definitions_['include_BLEServer'] = '#include <BLEServer.h>\n';
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth + ';';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_Blynk.begin'] = 'Serial.println("Waiting for connections...");\n'
         + '  Blynk.setDeviceName(' + name + ');\n'
         + '  Blynk.begin(auth);\n';
     let code = 'Blynk.run();\n';
@@ -714,14 +715,14 @@ export const blynk_esp32_ble = function () {
 
 //ESP32 blynk Bluetooth连接方式
 export const blynk_esp32_Bluetooth = function () {
-    let auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
-    let name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['define_BLYNK_USE_DIRECT_CONNECT'] = '#define BLYNK_USE_DIRECT_CONNECT';
-    Blockly.Arduino.definitions_['include_BlynkSimpleEsp32_BT'] = '#include <BlynkSimpleEsp32_BT.h>\n';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth + ';';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Serial.println("Waiting for connections...");\n'
+    let auth = Arduino.valueToCode(this, 'auth', Arduino.ORDER_ATOMIC);
+    let name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['define_BLYNK_USE_DIRECT_CONNECT'] = '#define BLYNK_USE_DIRECT_CONNECT';
+    Arduino.definitions_['include_BlynkSimpleEsp32_BT'] = '#include <BlynkSimpleEsp32_BT.h>\n';
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth + ';';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_Blynk.begin'] = 'Serial.println("Waiting for connections...");\n'
         + '  Blynk.setDeviceName(' + name + ');\n'
         + '  Blynk.begin(auth);\n';
     let code = 'Blynk.run();\n';
@@ -730,33 +731,33 @@ export const blynk_esp32_Bluetooth = function () {
 
 //Arduino blynk Bluetooth 连接方式
 export const arduino_blynk_bluetooth = function () {
-    let auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
-    let RX = Blockly.Arduino.valueToCode(this, 'RX', Blockly.Arduino.ORDER_ATOMIC);
-    let TX = Blockly.Arduino.valueToCode(this, 'TX', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
-    Blockly.Arduino.definitions_['include_BlynkSimpleSerialBLE'] = '#include <BlynkSimpleSerialBLE.h>';
-    Blockly.Arduino.definitions_['define_auth'] = 'char auth[] = ' + auth + ';';
+    let auth = Arduino.valueToCode(this, 'auth', Arduino.ORDER_ATOMIC);
+    let RX = Arduino.valueToCode(this, 'RX', Arduino.ORDER_ATOMIC);
+    let TX = Arduino.valueToCode(this, 'TX', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['include_SoftwareSerial'] = '#include <SoftwareSerial.h>';
+    Arduino.definitions_['include_BlynkSimpleSerialBLE'] = '#include <BlynkSimpleSerialBLE.h>';
+    Arduino.definitions_['define_auth'] = 'char auth[] = ' + auth + ';';
     if (RX != 0 || TX != 1) {
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-        Blockly.Arduino.definitions_['var_declare_SoftwareSerial'] = 'SoftwareSerial SerialBLE(' + RX + ', ' + TX + ');';
-        Blockly.Arduino.setups_['setup_SerialBLE_begin'] = 'SerialBLE.begin(9600);';
-        Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(SerialBLE, auth);';
+        Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+        Arduino.definitions_['var_declare_SoftwareSerial'] = 'SoftwareSerial SerialBLE(' + RX + ', ' + TX + ');';
+        Arduino.setups_['setup_SerialBLE_begin'] = 'SerialBLE.begin(9600);';
+        Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(SerialBLE, auth);';
     }
     else {
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-        Blockly.Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(Serial, auth);';
+        Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+        Arduino.setups_['setup_Blynk.begin'] = 'Blynk.begin(Serial, auth);';
     }
-    Blockly.Arduino.setups_['setup_Serial.println'] = 'Serial.println("Waiting for connections...");';
+    Arduino.setups_['setup_Serial.println'] = 'Serial.println("Waiting for connections...");';
     let code = 'Blynk.run();\n';
     return code;
 };
 
 //Blynk Table小部件添加数据
 export const blynk_table = function () {
-    let id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
-    let mingcheng = Blockly.Arduino.valueToCode(this, 'mingcheng', Blockly.Arduino.ORDER_ATOMIC);
-    let shujv = Blockly.Arduino.valueToCode(this, 'shujv', Blockly.Arduino.ORDER_ATOMIC);
+    let id = Arduino.valueToCode(this, 'id', Arduino.ORDER_ATOMIC);
+    let mingcheng = Arduino.valueToCode(this, 'mingcheng', Arduino.ORDER_ATOMIC);
+    let shujv = Arduino.valueToCode(this, 'shujv', Arduino.ORDER_ATOMIC);
     let Vpin = this.getFieldValue('Vpin');
     let code = 'Blynk.virtualWrite(' + Vpin + ', "add", ' + id + ',' + mingcheng + ', ' + shujv + ');\n';
     return code;
@@ -764,9 +765,9 @@ export const blynk_table = function () {
 
 //Blynk Table小部件更新数据
 export const blynk_table_update = function () {
-    let id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
-    let mingcheng = Blockly.Arduino.valueToCode(this, 'mingcheng', Blockly.Arduino.ORDER_ATOMIC);
-    let shujv = Blockly.Arduino.valueToCode(this, 'shujv', Blockly.Arduino.ORDER_ATOMIC);
+    let id = Arduino.valueToCode(this, 'id', Arduino.ORDER_ATOMIC);
+    let mingcheng = Arduino.valueToCode(this, 'mingcheng', Arduino.ORDER_ATOMIC);
+    let shujv = Arduino.valueToCode(this, 'shujv', Arduino.ORDER_ATOMIC);
     let Vpin = this.getFieldValue('Vpin');
     let code = 'Blynk.virtualWrite(' + Vpin + ', "update", ' + id + ',' + mingcheng + ', ' + shujv + ');\n';
     return code;
@@ -774,7 +775,7 @@ export const blynk_table_update = function () {
 
 //Blynk Table小部件高亮显示数据
 export const blynk_table_highlight = function () {
-    let id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
+    let id = Arduino.valueToCode(this, 'id', Arduino.ORDER_ATOMIC);
     let Vpin = this.getFieldValue('Vpin');
     let code = 'Blynk.virtualWrite(' + Vpin + ', "pick", ' + id + ');\n';
     return code;
@@ -782,7 +783,7 @@ export const blynk_table_highlight = function () {
 
 //Blynk Table小部件选择数据
 export const blynk_table_select = function () {
-    let id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
+    let id = Arduino.valueToCode(this, 'id', Arduino.ORDER_ATOMIC);
     let Vpin = this.getFieldValue('Vpin');
     let code = 'Blynk.virtualWrite(' + Vpin + ', "select", ' + id + ');\n';
     return code;
@@ -790,7 +791,7 @@ export const blynk_table_select = function () {
 
 //Blynk Table小部件取消选择数据
 export const blynk_table_unselect = function () {
-    let id = Blockly.Arduino.valueToCode(this, 'id', Blockly.Arduino.ORDER_ATOMIC);
+    let id = Arduino.valueToCode(this, 'id', Arduino.ORDER_ATOMIC);
     let Vpin = this.getFieldValue('Vpin');
     let code = 'Blynk.virtualWrite(' + Vpin + ', "deselect", ' + id + ');\n';
     return code;
@@ -799,7 +800,7 @@ export const blynk_table_unselect = function () {
 //Blynk Table小部件数据清除
 export const blynk_table_cleardata = function () {
     let Vpin = this.getFieldValue('Vpin');
-    Blockly.Arduino.definitions_["rowIndex_" + Vpin] = 'int rowIndex_' + Vpin + ' = 0;\n';
+    Arduino.definitions_["rowIndex_" + Vpin] = 'int rowIndex_' + Vpin + ' = 0;\n';
     let code = 'Blynk.virtualWrite(' + Vpin + ', "clr");\nrowIndex_' + Vpin + ' = 0;\n';
     return code;
 };
@@ -807,13 +808,13 @@ export const blynk_table_cleardata = function () {
 //blynk服务器连接状态
 export const blynk_connected = function () {
     let code = 'Blynk.connected()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //ESP32 CAM相机
 export const esp_camera = function () {
-    let wifi_ssid = Blockly.Arduino.valueToCode(this, 'wifi_ssid', Blockly.Arduino.ORDER_ATOMIC);
-    let wifi_pass = Blockly.Arduino.valueToCode(this, 'wifi_pass', Blockly.Arduino.ORDER_ATOMIC);
+    let wifi_ssid = Arduino.valueToCode(this, 'wifi_ssid', Arduino.ORDER_ATOMIC);
+    let wifi_pass = Arduino.valueToCode(this, 'wifi_pass', Arduino.ORDER_ATOMIC);
     let mode = this.getFieldValue('mode');
     let code = "";
     if (mode > 0) {
@@ -835,65 +836,65 @@ export const esp_camera = function () {
             + 'Serial.println(IP);\n'
             + 'Serial.println("");\n';
     }
-    Blockly.Arduino.definitions_['esp_camera'] = '#include "esp_camera.h"\n#include <WiFi.h>\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h"\n#include "dl_lib.h"\n#include "esp_http_server.h"\nconst char*wif_ssid = ' + wifi_ssid + ';\nconst char*wif_password = ' + wifi_pass + ';\n#define PART_BOUNDARY "123456789000000000000987654321"\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nstatic const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;\nstatic const char* _STREAM_BOUNDARY = "\\r\\n--" PART_BOUNDARY "\\r\\n";\nstatic const char* _STREAM_PART = "Content-Type: image/jpeg\\r\\nContent-Length: %u\\r\\n\\r\\n";\nhttpd_handle_t stream_httpd = NULL;\nstatic esp_err_t stream_handler(httpd_req_t *req){\n  camera_fb_t * fb = NULL;\n  esp_err_t res = ESP_OK;\n  size_t _jpg_buf_len = 0;\n  uint8_t * _jpg_buf = NULL;\n  char * part_buf[64];\n  res = httpd_resp_set_type(req, _STREAM_CONTENT_TYPE);\n  if(res != ESP_OK){\n    return res;\n  }\n  while(true){\n    fb = esp_camera_fb_get();\n    if (!fb) {\n      Serial.println("Camera capture failed");\n      res = ESP_FAIL;\n    } else {\n      if(fb->width > 400){\n        if(fb->format != PIXFORMAT_JPEG){\n          bool jpeg_converted = frame2jpg(fb, 80, &_jpg_buf, &_jpg_buf_len);\n          esp_camera_fb_return(fb);\n          fb = NULL;\n          if(!jpeg_converted){\n            Serial.println("JPEG compression failed");\n            res = ESP_FAIL;\n          }\n        } else {\n          _jpg_buf_len = fb->len;\n          _jpg_buf = fb->buf;\n        }\n      }\n    }\n    if(res == ESP_OK){\n      size_t hlen = snprintf((char *)part_buf, 64, _STREAM_PART, _jpg_buf_len);\n      res = httpd_resp_send_chunk(req, (const char *)part_buf, hlen);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, (const char *)_jpg_buf, _jpg_buf_len);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, _STREAM_BOUNDARY, strlen(_STREAM_BOUNDARY));\n    }\n    if(fb){\n      esp_camera_fb_return(fb);\n      fb = NULL;\n      _jpg_buf = NULL;\n    } else if(_jpg_buf){\n      free(_jpg_buf);\n      _jpg_buf = NULL;\n    }\n    if(res != ESP_OK){\n      break;\n    }\n  }\n  return res;\n}\nvoid startCameraServer(){\n  httpd_config_t config = HTTPD_DEFAULT_CONFIG();\n  config.server_port = 80;\n  httpd_uri_t index_uri = {\n    .uri       = "/",\n    .method    = HTTP_GET,\n    .handler   = stream_handler,\n    .user_ctx  = NULL\n  };\n  if (httpd_start(&stream_httpd, &config) == ESP_OK) {\n    httpd_register_uri_handler(stream_httpd, &index_uri);\n } \n}\n';
-    Blockly.Arduino.setups_['setups_esp_camera'] = '  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);\n  Serial.begin(115200);\n  Serial.setDebugOutput(false);\n  camera_config_t config;\n  config.ledc_channel = LEDC_CHANNEL_0;\n  config.ledc_timer = LEDC_TIMER_0;\n  config.pin_d0 = Y2_GPIO_NUM;\n  config.pin_d1 = Y3_GPIO_NUM;\n  config.pin_d2 = Y4_GPIO_NUM;\n  config.pin_d3 = Y5_GPIO_NUM;\n  config.pin_d4 = Y6_GPIO_NUM;\n  config.pin_d5 = Y7_GPIO_NUM;\n  config.pin_d6 = Y8_GPIO_NUM;\n  config.pin_d7 = Y9_GPIO_NUM;\n  config.pin_xclk = XCLK_GPIO_NUM;\n  config.pin_pclk = PCLK_GPIO_NUM;\n  config.pin_vsync = VSYNC_GPIO_NUM;\n  config.pin_href = HREF_GPIO_NUM;\n  config.pin_sscb_sda = SIOD_GPIO_NUM;\n  config.pin_sscb_scl = SIOC_GPIO_NUM;\n  config.pin_pwdn = PWDN_GPIO_NUM;\n  config.pin_reset = RESET_GPIO_NUM;\n  config.xclk_freq_hz = 20000000;\n  config.pixel_format = PIXFORMAT_JPEG; \n  if(psramFound()){\n    config.frame_size = FRAMESIZE_UXGA;\n    config.jpeg_quality = 10;\n    config.fb_count = 2;\n  } else {\n    config.frame_size = FRAMESIZE_SVGA;\n    config.jpeg_quality = 12;\n    config.fb_count = 1;\n  }\n  esp_err_t err = esp_camera_init(&config);\n  if (err != ESP_OK) {\n    Serial.printf("Camera init failed with error 0x%x", err);\n    return;\n  }\n  ' + code + '  startCameraServer();\n';
+    Arduino.definitions_['esp_camera'] = '#include "esp_camera.h"\n#include <WiFi.h>\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h"\n#include "dl_lib.h"\n#include "esp_http_server.h"\nconst char*wif_ssid = ' + wifi_ssid + ';\nconst char*wif_password = ' + wifi_pass + ';\n#define PART_BOUNDARY "123456789000000000000987654321"\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nstatic const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;\nstatic const char* _STREAM_BOUNDARY = "\\r\\n--" PART_BOUNDARY "\\r\\n";\nstatic const char* _STREAM_PART = "Content-Type: image/jpeg\\r\\nContent-Length: %u\\r\\n\\r\\n";\nhttpd_handle_t stream_httpd = NULL;\nstatic esp_err_t stream_handler(httpd_req_t *req){\n  camera_fb_t * fb = NULL;\n  esp_err_t res = ESP_OK;\n  size_t _jpg_buf_len = 0;\n  uint8_t * _jpg_buf = NULL;\n  char * part_buf[64];\n  res = httpd_resp_set_type(req, _STREAM_CONTENT_TYPE);\n  if(res != ESP_OK){\n    return res;\n  }\n  while(true){\n    fb = esp_camera_fb_get();\n    if (!fb) {\n      Serial.println("Camera capture failed");\n      res = ESP_FAIL;\n    } else {\n      if(fb->width > 400){\n        if(fb->format != PIXFORMAT_JPEG){\n          bool jpeg_converted = frame2jpg(fb, 80, &_jpg_buf, &_jpg_buf_len);\n          esp_camera_fb_return(fb);\n          fb = NULL;\n          if(!jpeg_converted){\n            Serial.println("JPEG compression failed");\n            res = ESP_FAIL;\n          }\n        } else {\n          _jpg_buf_len = fb->len;\n          _jpg_buf = fb->buf;\n        }\n      }\n    }\n    if(res == ESP_OK){\n      size_t hlen = snprintf((char *)part_buf, 64, _STREAM_PART, _jpg_buf_len);\n      res = httpd_resp_send_chunk(req, (const char *)part_buf, hlen);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, (const char *)_jpg_buf, _jpg_buf_len);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, _STREAM_BOUNDARY, strlen(_STREAM_BOUNDARY));\n    }\n    if(fb){\n      esp_camera_fb_return(fb);\n      fb = NULL;\n      _jpg_buf = NULL;\n    } else if(_jpg_buf){\n      free(_jpg_buf);\n      _jpg_buf = NULL;\n    }\n    if(res != ESP_OK){\n      break;\n    }\n  }\n  return res;\n}\nvoid startCameraServer(){\n  httpd_config_t config = HTTPD_DEFAULT_CONFIG();\n  config.server_port = 80;\n  httpd_uri_t index_uri = {\n    .uri       = "/",\n    .method    = HTTP_GET,\n    .handler   = stream_handler,\n    .user_ctx  = NULL\n  };\n  if (httpd_start(&stream_httpd, &config) == ESP_OK) {\n    httpd_register_uri_handler(stream_httpd, &index_uri);\n } \n}\n';
+    Arduino.setups_['setups_esp_camera'] = '  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);\n  Serial.begin(115200);\n  Serial.setDebugOutput(false);\n  camera_config_t config;\n  config.ledc_channel = LEDC_CHANNEL_0;\n  config.ledc_timer = LEDC_TIMER_0;\n  config.pin_d0 = Y2_GPIO_NUM;\n  config.pin_d1 = Y3_GPIO_NUM;\n  config.pin_d2 = Y4_GPIO_NUM;\n  config.pin_d3 = Y5_GPIO_NUM;\n  config.pin_d4 = Y6_GPIO_NUM;\n  config.pin_d5 = Y7_GPIO_NUM;\n  config.pin_d6 = Y8_GPIO_NUM;\n  config.pin_d7 = Y9_GPIO_NUM;\n  config.pin_xclk = XCLK_GPIO_NUM;\n  config.pin_pclk = PCLK_GPIO_NUM;\n  config.pin_vsync = VSYNC_GPIO_NUM;\n  config.pin_href = HREF_GPIO_NUM;\n  config.pin_sscb_sda = SIOD_GPIO_NUM;\n  config.pin_sscb_scl = SIOC_GPIO_NUM;\n  config.pin_pwdn = PWDN_GPIO_NUM;\n  config.pin_reset = RESET_GPIO_NUM;\n  config.xclk_freq_hz = 20000000;\n  config.pixel_format = PIXFORMAT_JPEG; \n  if(psramFound()){\n    config.frame_size = FRAMESIZE_UXGA;\n    config.jpeg_quality = 10;\n    config.fb_count = 2;\n  } else {\n    config.frame_size = FRAMESIZE_SVGA;\n    config.jpeg_quality = 12;\n    config.fb_count = 1;\n  }\n  esp_err_t err = esp_camera_init(&config);\n  if (err != ESP_OK) {\n    Serial.printf("Camera init failed with error 0x%x", err);\n    return;\n  }\n  ' + code + '  startCameraServer();\n';
     return 'delay(1);\n';
 };
 
 //ESP32 CAM相机 & blynk
 export const esp_camera_blynk = function () {
-    let wifi_ssid = Blockly.Arduino.valueToCode(this, 'wifi_ssid', Blockly.Arduino.ORDER_ATOMIC);
-    let wifi_pass = Blockly.Arduino.valueToCode(this, 'wifi_pass', Blockly.Arduino.ORDER_ATOMIC);
-    let server_add = Blockly.Arduino.valueToCode(this, 'server', Blockly.Arduino.ORDER_ATOMIC);
+    let wifi_ssid = Arduino.valueToCode(this, 'wifi_ssid', Arduino.ORDER_ATOMIC);
+    let wifi_pass = Arduino.valueToCode(this, 'wifi_pass', Arduino.ORDER_ATOMIC);
+    let server_add = Arduino.valueToCode(this, 'server', Arduino.ORDER_ATOMIC);
     if (!isNaN(server_add.charAt(2))) {
         server_add = server_add.replace(/"/g, "").replace(/\./g, ",");
         server_add = 'IPAddress(' + server_add + ')';
     }
-    let auth = Blockly.Arduino.valueToCode(this, 'auth', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
-    Blockly.Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-    Blockly.Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
-    Blockly.Arduino.definitions_['include_WidgetRTC'] = '#include <WidgetRTC.h>';
-    Blockly.Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
-    Blockly.Arduino.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
-    Blockly.Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth + ';';
+    let auth = Arduino.valueToCode(this, 'auth', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['define_BLYNK_PRINT'] = '#define BLYNK_PRINT Serial';
+    Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
+    Arduino.definitions_['include_BlynkSimpleEsp32'] = '#include <BlynkSimpleEsp32.h>';
+    Arduino.definitions_['include_WidgetRTC'] = '#include <WidgetRTC.h>';
+    Arduino.definitions_['include_WiFiClient'] = '#include <WiFiClient.h>';
+    Arduino.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
+    Arduino.definitions_['var_declare_auth_key'] = 'char auth[] = ' + auth + ';';
 
-    Blockly.Arduino.definitions_['esp_camera'] = '#include "esp_camera.h"\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h"\n#include "dl_lib.h"\n#include "esp_http_server.h"\nconst char*wif_ssid = ' + wifi_ssid + ';\nconst char*wif_password = ' + wifi_pass + ';\n#define PART_BOUNDARY "123456789000000000000987654321"\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nstatic const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;\nstatic const char* _STREAM_BOUNDARY = "\\r\\n--" PART_BOUNDARY "\\r\\n";\nstatic const char* _STREAM_PART = "Content-Type: image/jpeg\\r\\nContent-Length: %u\\r\\n\\r\\n";\nhttpd_handle_t stream_httpd = NULL;\nstatic esp_err_t stream_handler(httpd_req_t *req){\n  camera_fb_t * fb = NULL;\n  esp_err_t res = ESP_OK;\n  size_t _jpg_buf_len = 0;\n  uint8_t * _jpg_buf = NULL;\n  char * part_buf[64];\n  res = httpd_resp_set_type(req, _STREAM_CONTENT_TYPE);\n  if(res != ESP_OK){\n    return res;\n  }\n  while(true){\n    fb = esp_camera_fb_get();\n    if (!fb) {\n      Serial.println("Camera capture failed");\n      res = ESP_FAIL;\n    } else {\n      if(fb->width > 400){\n        if(fb->format != PIXFORMAT_JPEG){\n          bool jpeg_converted = frame2jpg(fb, 80, &_jpg_buf, &_jpg_buf_len);\n          esp_camera_fb_return(fb);\n          fb = NULL;\n          if(!jpeg_converted){\n            Serial.println("JPEG compression failed");\n            res = ESP_FAIL;\n          }\n        } else {\n          _jpg_buf_len = fb->len;\n          _jpg_buf = fb->buf;\n        }\n      }\n    }\n    if(res == ESP_OK){\n      size_t hlen = snprintf((char *)part_buf, 64, _STREAM_PART, _jpg_buf_len);\n      res = httpd_resp_send_chunk(req, (const char *)part_buf, hlen);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, (const char *)_jpg_buf, _jpg_buf_len);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, _STREAM_BOUNDARY, strlen(_STREAM_BOUNDARY));\n    }\n    if(fb){\n      esp_camera_fb_return(fb);\n      fb = NULL;\n      _jpg_buf = NULL;\n    } else if(_jpg_buf){\n      free(_jpg_buf);\n      _jpg_buf = NULL;\n    }\n    if(res != ESP_OK){\n      break;\n    }\n  }\n  return res;\n}\nvoid startCameraServer(){\n  httpd_config_t config = HTTPD_DEFAULT_CONFIG();\n  config.server_port = 80;\n  httpd_uri_t index_uri = {\n    .uri       = "/",\n    .method    = HTTP_GET,\n    .handler   = stream_handler,\n    .user_ctx  = NULL\n  };\n  if (httpd_start(&stream_httpd, &config) == ESP_OK) {\n    httpd_register_uri_handler(stream_httpd, &index_uri);\n } \n}\n';
-    Blockly.Arduino.setups_['setups_esp_camera'] = 'WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);\n  Serial.begin(115200);\n  Serial.setDebugOutput(false);\n  camera_config_t config;\n  config.ledc_channel = LEDC_CHANNEL_0;\n  config.ledc_timer = LEDC_TIMER_0;\n  config.pin_d0 = Y2_GPIO_NUM;\n  config.pin_d1 = Y3_GPIO_NUM;\n  config.pin_d2 = Y4_GPIO_NUM;\n  config.pin_d3 = Y5_GPIO_NUM;\n  config.pin_d4 = Y6_GPIO_NUM;\n  config.pin_d5 = Y7_GPIO_NUM;\n  config.pin_d6 = Y8_GPIO_NUM;\n  config.pin_d7 = Y9_GPIO_NUM;\n  config.pin_xclk = XCLK_GPIO_NUM;\n  config.pin_pclk = PCLK_GPIO_NUM;\n  config.pin_vsync = VSYNC_GPIO_NUM;\n  config.pin_href = HREF_GPIO_NUM;\n  config.pin_sscb_sda = SIOD_GPIO_NUM;\n  config.pin_sscb_scl = SIOC_GPIO_NUM;\n  config.pin_pwdn = PWDN_GPIO_NUM;\n  config.pin_reset = RESET_GPIO_NUM;\n  config.xclk_freq_hz = 20000000;\n  config.pixel_format = PIXFORMAT_JPEG; \n  if(psramFound()){\n    config.frame_size = FRAMESIZE_UXGA;\n    config.jpeg_quality = 10;\n    config.fb_count = 2;\n  } else {\n    config.frame_size = FRAMESIZE_SVGA;\n    config.jpeg_quality = 12;\n    config.fb_count = 1;\n  }\n  esp_err_t err = esp_camera_init(&config);\n  if (err != ESP_OK) {\n    Serial.printf("Camera init failed with error 0x%x", err);\n    return;\n  }\n  WiFi.begin(wif_ssid,wif_password);\n  while (WiFi.status() != WL_CONNECTED) {\n    delay(500);\n    Serial.print(".");\n }\n  Serial.println("");\n  Serial.println("WiFi connected");\n  Serial.print("Camera Stream Ready! Go to: http://");\n  Serial.print(WiFi.localIP());\n  Serial.println("");\n  startCameraServer();\n  Blynk.config(auth,' + server_add + ',8080);\n';
+    Arduino.definitions_['esp_camera'] = '#include "esp_camera.h"\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h"\n#include "dl_lib.h"\n#include "esp_http_server.h"\nconst char*wif_ssid = ' + wifi_ssid + ';\nconst char*wif_password = ' + wifi_pass + ';\n#define PART_BOUNDARY "123456789000000000000987654321"\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nstatic const char* _STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;\nstatic const char* _STREAM_BOUNDARY = "\\r\\n--" PART_BOUNDARY "\\r\\n";\nstatic const char* _STREAM_PART = "Content-Type: image/jpeg\\r\\nContent-Length: %u\\r\\n\\r\\n";\nhttpd_handle_t stream_httpd = NULL;\nstatic esp_err_t stream_handler(httpd_req_t *req){\n  camera_fb_t * fb = NULL;\n  esp_err_t res = ESP_OK;\n  size_t _jpg_buf_len = 0;\n  uint8_t * _jpg_buf = NULL;\n  char * part_buf[64];\n  res = httpd_resp_set_type(req, _STREAM_CONTENT_TYPE);\n  if(res != ESP_OK){\n    return res;\n  }\n  while(true){\n    fb = esp_camera_fb_get();\n    if (!fb) {\n      Serial.println("Camera capture failed");\n      res = ESP_FAIL;\n    } else {\n      if(fb->width > 400){\n        if(fb->format != PIXFORMAT_JPEG){\n          bool jpeg_converted = frame2jpg(fb, 80, &_jpg_buf, &_jpg_buf_len);\n          esp_camera_fb_return(fb);\n          fb = NULL;\n          if(!jpeg_converted){\n            Serial.println("JPEG compression failed");\n            res = ESP_FAIL;\n          }\n        } else {\n          _jpg_buf_len = fb->len;\n          _jpg_buf = fb->buf;\n        }\n      }\n    }\n    if(res == ESP_OK){\n      size_t hlen = snprintf((char *)part_buf, 64, _STREAM_PART, _jpg_buf_len);\n      res = httpd_resp_send_chunk(req, (const char *)part_buf, hlen);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, (const char *)_jpg_buf, _jpg_buf_len);\n    }\n    if(res == ESP_OK){\n      res = httpd_resp_send_chunk(req, _STREAM_BOUNDARY, strlen(_STREAM_BOUNDARY));\n    }\n    if(fb){\n      esp_camera_fb_return(fb);\n      fb = NULL;\n      _jpg_buf = NULL;\n    } else if(_jpg_buf){\n      free(_jpg_buf);\n      _jpg_buf = NULL;\n    }\n    if(res != ESP_OK){\n      break;\n    }\n  }\n  return res;\n}\nvoid startCameraServer(){\n  httpd_config_t config = HTTPD_DEFAULT_CONFIG();\n  config.server_port = 80;\n  httpd_uri_t index_uri = {\n    .uri       = "/",\n    .method    = HTTP_GET,\n    .handler   = stream_handler,\n    .user_ctx  = NULL\n  };\n  if (httpd_start(&stream_httpd, &config) == ESP_OK) {\n    httpd_register_uri_handler(stream_httpd, &index_uri);\n } \n}\n';
+    Arduino.setups_['setups_esp_camera'] = 'WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);\n  Serial.begin(115200);\n  Serial.setDebugOutput(false);\n  camera_config_t config;\n  config.ledc_channel = LEDC_CHANNEL_0;\n  config.ledc_timer = LEDC_TIMER_0;\n  config.pin_d0 = Y2_GPIO_NUM;\n  config.pin_d1 = Y3_GPIO_NUM;\n  config.pin_d2 = Y4_GPIO_NUM;\n  config.pin_d3 = Y5_GPIO_NUM;\n  config.pin_d4 = Y6_GPIO_NUM;\n  config.pin_d5 = Y7_GPIO_NUM;\n  config.pin_d6 = Y8_GPIO_NUM;\n  config.pin_d7 = Y9_GPIO_NUM;\n  config.pin_xclk = XCLK_GPIO_NUM;\n  config.pin_pclk = PCLK_GPIO_NUM;\n  config.pin_vsync = VSYNC_GPIO_NUM;\n  config.pin_href = HREF_GPIO_NUM;\n  config.pin_sscb_sda = SIOD_GPIO_NUM;\n  config.pin_sscb_scl = SIOC_GPIO_NUM;\n  config.pin_pwdn = PWDN_GPIO_NUM;\n  config.pin_reset = RESET_GPIO_NUM;\n  config.xclk_freq_hz = 20000000;\n  config.pixel_format = PIXFORMAT_JPEG; \n  if(psramFound()){\n    config.frame_size = FRAMESIZE_UXGA;\n    config.jpeg_quality = 10;\n    config.fb_count = 2;\n  } else {\n    config.frame_size = FRAMESIZE_SVGA;\n    config.jpeg_quality = 12;\n    config.fb_count = 1;\n  }\n  esp_err_t err = esp_camera_init(&config);\n  if (err != ESP_OK) {\n    Serial.printf("Camera init failed with error 0x%x", err);\n    return;\n  }\n  WiFi.begin(wif_ssid,wif_password);\n  while (WiFi.status() != WL_CONNECTED) {\n    delay(500);\n    Serial.print(".");\n }\n  Serial.println("");\n  Serial.println("WiFi connected");\n  Serial.print("Camera Stream Ready! Go to: http://");\n  Serial.print(WiFi.localIP());\n  Serial.println("");\n  startCameraServer();\n  Blynk.config(auth,' + server_add + ',8080);\n';
     return 'Blynk.run();\n';
 };
 
 export const take_a_photo1 = function () {
-    Blockly.Arduino.definitions_['take_a_photo'] = '#include "esp_camera.h"\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "fd_forward.h"\n#include "fr_forward.h"\n#include "FS.h" \n#include "SD_MMC.h" \n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h" \n#include "dl_lib.h"\n#include "driver/rtc_io.h"\n#include <EEPROM.h>\n#define EEPROM_SIZE 1\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nint pictureNumber = 0;\n';
+    Arduino.definitions_['take_a_photo'] = '#include "esp_camera.h"\n#include "esp_timer.h"\n#include "img_converters.h"\n#include "Arduino.h"\n#include "fb_gfx.h"\n#include "fd_forward.h"\n#include "fr_forward.h"\n#include "FS.h" \n#include "SD_MMC.h" \n#include "soc/soc.h"\n#include "soc/rtc_cntl_reg.h" \n#include "dl_lib.h"\n#include "driver/rtc_io.h"\n#include <EEPROM.h>\n#define EEPROM_SIZE 1\n#define PWDN_GPIO_NUM     32\n#define RESET_GPIO_NUM    -1\n#define XCLK_GPIO_NUM      0\n#define SIOD_GPIO_NUM     26\n#define SIOC_GPIO_NUM     27\n#define Y9_GPIO_NUM       35\n#define Y8_GPIO_NUM       34\n#define Y7_GPIO_NUM       39\n#define Y6_GPIO_NUM       36\n#define Y5_GPIO_NUM       21\n#define Y4_GPIO_NUM       19\n#define Y3_GPIO_NUM       18\n#define Y2_GPIO_NUM        5\n#define VSYNC_GPIO_NUM    25\n#define HREF_GPIO_NUM     23\n#define PCLK_GPIO_NUM     22\nint pictureNumber = 0;\n';
     let code = 'WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);\nSerial.begin(115200);\ncamera_config_t config;\nconfig.ledc_channel = LEDC_CHANNEL_0;\nconfig.ledc_timer = LEDC_TIMER_0;\nconfig.pin_d0 = Y2_GPIO_NUM;\nconfig.pin_d1 = Y3_GPIO_NUM;\nconfig.pin_d2 = Y4_GPIO_NUM;\nconfig.pin_d3 = Y5_GPIO_NUM;\nconfig.pin_d4 = Y6_GPIO_NUM;\nconfig.pin_d5 = Y7_GPIO_NUM;\nconfig.pin_d6 = Y8_GPIO_NUM;\nconfig.pin_d7 = Y9_GPIO_NUM;\nconfig.pin_xclk = XCLK_GPIO_NUM;\nconfig.pin_pclk = PCLK_GPIO_NUM;\nconfig.pin_vsync = VSYNC_GPIO_NUM;\nconfig.pin_href = HREF_GPIO_NUM;\nconfig.pin_sscb_sda = SIOD_GPIO_NUM;\nconfig.pin_sscb_scl = SIOC_GPIO_NUM;\nconfig.pin_pwdn = PWDN_GPIO_NUM;\nconfig.pin_reset = RESET_GPIO_NUM;\nconfig.xclk_freq_hz = 20000000;\nconfig.pixel_format = PIXFORMAT_JPEG; \nif(psramFound()){\n  config.frame_size = FRAMESIZE_UXGA;\n  config.jpeg_quality = 10;\n  config.fb_count = 2;\n} else {\n  config.frame_size = FRAMESIZE_SVGA;\n  config.jpeg_quality = 12;\n  config.fb_count = 1;\n}\nesp_err_t err = esp_camera_init(&config);\nif (err != ESP_OK) {\n  Serial.printf("Camera init failed with error 0x%x", err);\n  return;\n}\nif(!SD_MMC.begin()){\n  Serial.println("SD Card Mount Failed");\n  return;\n}\nuint8_t cardType = SD_MMC.cardType();\nif(cardType == CARD_NONE){\n  Serial.println("No SD Card attached");\n  return;\n}\ncamera_fb_t * fb = NULL;\nfb = esp_camera_fb_get();\nif(!fb) {\n  Serial.println("Camera capture failed");\n  return;\n}\nEEPROM.begin(EEPROM_SIZE);\npictureNumber = EEPROM.read(0) + 1;\nString path = "/picture" + String(pictureNumber) +".jpg";\nfs::FS &fs = SD_MMC; \nSerial.printf("Picture file name: %s\\n", path.c_str());\nFile file = fs.open(path.c_str(), FILE_WRITE);\nif(!file){\n  Serial.println("Failed to open file in writing mode");\n} \nelse {\n  file.write(fb->buf, fb->len);\n  Serial.printf("Saved file to path: %s\\n", path.c_str());\n  EEPROM.write(0, pictureNumber);\n  EEPROM.commit();\n}\nfile.close();\nesp_camera_fb_return(fb); \npinMode(4, OUTPUT);\ndigitalWrite(4, LOW);\nrtc_gpio_hold_en(GPIO_NUM_4);\n';
     return code;
 };
 
 export const blynk_table_click = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let branch = Blockly.Arduino.statementToCode(this, 'function');
+    let branch = Arduino.statementToCode(this, 'function');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
-    Blockly.Arduino.definitions_["blynk_table" + Vpin] = 'WidgetTable table_' + Vpin + ';\nBLYNK_ATTACH_WIDGET(table_' + Vpin + ', ' + Vpin + ');\n';
-    Blockly.Arduino.setups_["setup_blynk_table_click" + Vpin] = 'table_' + Vpin + '.onSelectChange([](int index, bool selected) {\n  ' + branch + '\n  });\n';
+    Arduino.definitions_["blynk_table" + Vpin] = 'WidgetTable table_' + Vpin + ';\nBLYNK_ATTACH_WIDGET(table_' + Vpin + ', ' + Vpin + ');\n';
+    Arduino.setups_["setup_blynk_table_click" + Vpin] = 'table_' + Vpin + '.onSelectChange([](int index, bool selected) {\n  ' + branch + '\n  });\n';
     let code = '';
     return code;
 };
 
 export const blynk_table_order = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let branch = Blockly.Arduino.statementToCode(this, 'function');
+    let branch = Arduino.statementToCode(this, 'function');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
-    Blockly.Arduino.definitions_["blynk_table" + Vpin] = 'WidgetTable table_' + Vpin + ';\nBLYNK_ATTACH_WIDGET(table_' + Vpin + ', ' + Vpin + ');\n';
-    Blockly.Arduino.setups_["setup_blynk_table_order" + Vpin] = 'table_' + Vpin + '.onOrderChange([](int indexFrom, int indexTo) {\n  ' + branch + '\n  });\n';
+    Arduino.definitions_["blynk_table" + Vpin] = 'WidgetTable table_' + Vpin + ';\nBLYNK_ATTACH_WIDGET(table_' + Vpin + ', ' + Vpin + ');\n';
+    Arduino.setups_["setup_blynk_table_order" + Vpin] = 'table_' + Vpin + '.onOrderChange([](int indexFrom, int indexTo) {\n  ' + branch + '\n  });\n';
     let code = '';
     return code;
 };
 
 export const blynk_table_add_data = function () {
     let Vpin = this.getFieldValue('Vpin');
-    let data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
-    let name = Blockly.Arduino.valueToCode(this, 'name', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_["rowIndex_" + Vpin] = 'int rowIndex_' + Vpin + ' = 0;\n';
+    let data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
+    let name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_["rowIndex_" + Vpin] = 'int rowIndex_' + Vpin + ' = 0;\n';
     let code = 'table_' + Vpin + '.addRow(rowIndex_' + Vpin + ', ' + name + ', ' + data + ');\ntable_' + Vpin + '.pickRow(rowIndex_' + Vpin + ');\nrowIndex_' + Vpin + '++;\n';
     return code;
 };

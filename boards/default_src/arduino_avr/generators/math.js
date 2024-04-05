@@ -1,4 +1,4 @@
-import * as Blockly from 'blockly/core';
+import { Arduino } from '../../arduino_common/arduino_generator';
 
 export const math_number = function () {
     // Numeric value.
@@ -6,7 +6,7 @@ export const math_number = function () {
     // -4.abs() returns -4 in Dart due to strange order of operation choices.
     // -4 is actually an operator and a number.  Reflect this in the order.
     var order = code < 0 ?
-        Blockly.Arduino.ORDER_UNARY_PREFIX : Blockly.Arduino.ORDER_ATOMIC;
+        Arduino.ORDER_UNARY_PREFIX : Arduino.ORDER_ATOMIC;
     return [code, order];
 };
 
@@ -16,12 +16,12 @@ export const math_arithmetic = function () {
     var tuple = math_arithmetic.OPERATORS[mode];
     var operator = tuple[0];
     var order = tuple[1];
-    var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '0';
-    var argument1 = Blockly.Arduino.valueToCode(this, 'B', order) || '0';
+    var argument0 = Arduino.valueToCode(this, 'A', order) || '0';
+    var argument1 = Arduino.valueToCode(this, 'B', order) || '0';
     var code;
     if (!operator) {
         code = 'pow(' + argument0 + ', ' + argument1 + ')';
-        return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+        return [code, Arduino.ORDER_UNARY_POSTFIX];
     }
     if (operator == ' % ') {
         //取余必须是整数
@@ -34,20 +34,20 @@ export const math_arithmetic = function () {
 
 export const math_bit = function () {
     var operator = this.getFieldValue('OP');
-    var order = Blockly.Arduino.ORDER_ATOMIC;
-    var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '0';
-    var argument1 = Blockly.Arduino.valueToCode(this, 'B', order) || '0';
+    var order = Arduino.ORDER_ATOMIC;
+    var argument0 = Arduino.valueToCode(this, 'A', order) || '0';
+    var argument1 = Arduino.valueToCode(this, 'B', order) || '0';
     var code = '(' + argument0 + operator + argument1 + ')';
     return [code, order];
 };
 
 math_arithmetic.OPERATORS = {
-    ADD: [' + ', Blockly.Arduino.ORDER_ADDITIVE],
-    MINUS: [' - ', Blockly.Arduino.ORDER_ADDITIVE],
-    MULTIPLY: [' * ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
-    DIVIDE: [' / ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
-    QUYU: [' % ', Blockly.Arduino.ORDER_MULTIPLICATIVE],//增加取余操作
-    POWER: [null, Blockly.Arduino.ORDER_NONE]  // Handle power separately.
+    ADD: [' + ', Arduino.ORDER_ADDITIVE],
+    MINUS: [' - ', Arduino.ORDER_ADDITIVE],
+    MULTIPLY: [' * ', Arduino.ORDER_MULTIPLICATIVE],
+    DIVIDE: [' / ', Arduino.ORDER_MULTIPLICATIVE],
+    QUYU: [' % ', Arduino.ORDER_MULTIPLICATIVE],//增加取余操作
+    POWER: [null, Arduino.ORDER_NONE]  // Handle power separately.
 };
 
 export const math_single = function () {
@@ -57,24 +57,24 @@ export const math_single = function () {
     var arg;
     if (operator == 'NEG') {
         // Negation is a special case given its different operator precedents.
-        arg = Blockly.Arduino.valueToCode(this, 'NUM',
-            Blockly.Arduino.ORDER_UNARY_PREFIX) || '0';
+        arg = Arduino.valueToCode(this, 'NUM',
+            Arduino.ORDER_UNARY_PREFIX) || '0';
         if (arg[0] == '-') {
             // --3 is not legal in Dart.
             arg = ' ' + arg;
         }
         code = '-' + arg;
-        return [code, Blockly.Arduino.ORDER_UNARY_PREFIX];
+        return [code, Arduino.ORDER_UNARY_PREFIX];
     }
     if (operator == 'ABS' || operator.substring(0, 5) == 'ROUND') {
-        arg = Blockly.Arduino.valueToCode(this, 'NUM',
-            Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
+        arg = Arduino.valueToCode(this, 'NUM',
+            Arduino.ORDER_UNARY_POSTFIX) || '0';
     } else if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
-        arg = Blockly.Arduino.valueToCode(this, 'NUM',
-            Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
+        arg = Arduino.valueToCode(this, 'NUM',
+            Arduino.ORDER_MULTIPLICATIVE) || '0';
     } else {
-        arg = Blockly.Arduino.valueToCode(this, 'NUM',
-            Blockly.Arduino.ORDER_NONE) || '0';
+        arg = Arduino.valueToCode(this, 'NUM',
+            Arduino.ORDER_NONE) || '0';
     }
     // First, handle cases which generate values that don't need parentheses.
     switch (operator) {
@@ -122,7 +122,7 @@ export const math_single = function () {
         break;
     }
     if (code) {
-        return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+        return [code, Arduino.ORDER_UNARY_POSTFIX];
     }
     // Second, handle cases which generate values that may need parentheses.
     switch (operator) {
@@ -141,67 +141,67 @@ export const math_single = function () {
     default:
         throw 'Unknown math operator: ' + operator;
     }
-    return [code, Blockly.Arduino.ORDER_MULTIPLICATIVE];
+    return [code, Arduino.ORDER_MULTIPLICATIVE];
 };
 
 export const math_trig = math_single;
 
 export const math_to_int = function () {
-    var argument0 = Blockly.Arduino.valueToCode(this, 'A', Blockly.Arduino.ORDER_NONE) || '0';
+    var argument0 = Arduino.valueToCode(this, 'A', Arduino.ORDER_NONE) || '0';
     var operator = this.getFieldValue('OP');
     var code = operator + '(' + argument0 + ')';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //变量定义
 export const arduino_variate_type = function () {
     var dropdown_variate_type = this.getFieldValue('variate_type');
     var code = dropdown_variate_type;
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //获取某个变量在内存中所占用的字节数
 export const math_SizeOf = function () {
     this.setTooltip("以字节形式返回某个操作数的储存大小");
-    var value_data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
+    var value_data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
     var code = 'sizeof(' + value_data + ')';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const math_max_min = function () {
-    var a = Blockly.Arduino.valueToCode(this, 'A', Blockly.Arduino.ORDER_NONE) || '0';
-    var b = Blockly.Arduino.valueToCode(this, 'B', Blockly.Arduino.ORDER_NONE) || '0';
+    var a = Arduino.valueToCode(this, 'A', Arduino.ORDER_NONE) || '0';
+    var b = Arduino.valueToCode(this, 'B', Arduino.ORDER_NONE) || '0';
     var operator = this.getFieldValue('OP');
     var code = operator + '(' + a + ', ' + b + ')';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const math_random_seed = function () {
     // Random integer between [X] and [Y].
-    var a = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE) || '0';
-    //Blockly.Arduino.setups_['setup_randomSeed'] ='randomSeed(' + a +  ');'+'\n';
+    var a = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_NONE) || '0';
+    //Arduino.setups_['setup_randomSeed'] ='randomSeed(' + a +  ');'+'\n';
     return 'randomSeed(' + a + ');' + '\n';
 };
 
 export const math_random_int = function () {
     // Random integer between [X] and [Y].
-    var argument0 = Blockly.Arduino.valueToCode(this, 'FROM',
-        Blockly.Arduino.ORDER_NONE) || '0';
-    var argument1 = Blockly.Arduino.valueToCode(this, 'TO',
-        Blockly.Arduino.ORDER_NONE) || '0';
+    var argument0 = Arduino.valueToCode(this, 'FROM',
+        Arduino.ORDER_NONE) || '0';
+    var argument1 = Arduino.valueToCode(this, 'TO',
+        Arduino.ORDER_NONE) || '0';
     var code = 'random(' + argument0 + ', ' + argument1 + ')';
-    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+    return [code, Arduino.ORDER_UNARY_POSTFIX];
 };
 
 export const base_map = function () {
     var dropdown_maptype = this.getFieldValue('maptype');
-    var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE);
-    var value_fl = Blockly.Arduino.valueToCode(this, 'fromLow', Blockly.Arduino.ORDER_ATOMIC);
-    var value_fh = Blockly.Arduino.valueToCode(this, 'fromHigh', Blockly.Arduino.ORDER_ATOMIC);
-    var value_tl = Blockly.Arduino.valueToCode(this, 'toLow', Blockly.Arduino.ORDER_ATOMIC);
-    var value_th = Blockly.Arduino.valueToCode(this, 'toHigh', Blockly.Arduino.ORDER_ATOMIC);
+    var value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_NONE);
+    var value_fl = Arduino.valueToCode(this, 'fromLow', Arduino.ORDER_ATOMIC);
+    var value_fh = Arduino.valueToCode(this, 'fromHigh', Arduino.ORDER_ATOMIC);
+    var value_tl = Arduino.valueToCode(this, 'toLow', Arduino.ORDER_ATOMIC);
+    var value_th = Arduino.valueToCode(this, 'toHigh', Arduino.ORDER_ATOMIC);
     if (dropdown_maptype == 'map_float') {
-        Blockly.Arduino.definitions_['function_mapfloat'] = 'float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)'
+        Arduino.definitions_['function_mapfloat'] = 'float mapfloat(float x, float in_min, float in_max, float out_min, float out_max)'
             + '\n{'
             + '\n  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;'
             + '\n}';
@@ -210,31 +210,31 @@ export const base_map = function () {
     else {
         var code = 'map(' + value_num + ', ' + value_fl + ', ' + value_fh + ', ' + value_tl + ', ' + value_th + ')';
     }
-    return [code, Blockly.Arduino.ORDER_NONE];
+    return [code, Arduino.ORDER_NONE];
 };
 
 export const math_constrain = function () {
     // Constrain a number between two limits.
-    var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE',
-        Blockly.Arduino.ORDER_NONE) || '0';
-    var argument1 = Blockly.Arduino.valueToCode(this, 'LOW',
-        Blockly.Arduino.ORDER_NONE) || '0';
-    var argument2 = Blockly.Arduino.valueToCode(this, 'HIGH',
-        Blockly.Arduino.ORDER_NONE) || '0';
+    var argument0 = Arduino.valueToCode(this, 'VALUE',
+        Arduino.ORDER_NONE) || '0';
+    var argument1 = Arduino.valueToCode(this, 'LOW',
+        Arduino.ORDER_NONE) || '0';
+    var argument2 = Arduino.valueToCode(this, 'HIGH',
+        Arduino.ORDER_NONE) || '0';
     var code = 'constrain(' + argument0 + ', ' + argument1 + ', ' +
         argument2 + ')';
-    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+    return [code, Arduino.ORDER_UNARY_POSTFIX];
 };
 
 export const variables_operation = function () {
     var type = this.getFieldValue('type');
-    var variables = Blockly.Arduino.valueToCode(this, 'variables', Blockly.Arduino.ORDER_ATOMIC);
-    var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC);
+    var variables = Arduino.valueToCode(this, 'variables', Arduino.ORDER_ATOMIC);
+    var data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
     var code = '' + variables + ' = ' + variables + ' ' + type + ' ' + data + ';\n';
     return code;
 };
 export const math_auto_add_or_minus = function () {
-    var value_math_auto_add_minus_output = Blockly.Arduino.valueToCode(this, 'math_auto_add_minus_output', Blockly.Arduino.ORDER_ATOMIC);
+    var value_math_auto_add_minus_output = Arduino.valueToCode(this, 'math_auto_add_minus_output', Arduino.ORDER_ATOMIC);
     var dropdown_math_auto_add_minus_type = this.getFieldValue('math_auto_add_minus_type');
     var code = value_math_auto_add_minus_output + dropdown_math_auto_add_minus_type + ';\n';
     return code;

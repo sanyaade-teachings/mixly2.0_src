@@ -1,11 +1,11 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['SENSOR_HUE'] = 40;
+const SENSOR_HUE = 40;
 
 export const gps_init = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GPS_INIT)
         this.appendValueInput("RX", Number)
@@ -26,7 +26,7 @@ export const gps_init = {
 
 export const gps_data_available = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GPS_DATA_AVAILABLE);
         this.setOutput(true, Boolean);
@@ -36,7 +36,7 @@ export const gps_data_available = {
 
 export const gps_data_encode = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GPS_DATA_ENCODE);
         this.setOutput(true, Boolean);
@@ -45,7 +45,7 @@ export const gps_data_encode = {
 
 export const gps_xxx_isValid = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField("GPS")
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GPS_LOCATION, "location"], [Blockly.Msg.MIXLY_GPS_DATE, "date"], [Blockly.Msg.MIXLY_GPS_TIME, "time"]]), "WHAT")
@@ -57,7 +57,7 @@ export const gps_xxx_isValid = {
 
 export const gps_getData_xxx = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GPS_GET)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GPS_LOCATION_LAT, "location.lat"], [Blockly.Msg.MIXLY_GPS_LOCATION_LNG, "location.lng"], [Blockly.Msg.MIXLY_GPS_DATE_YEAR, "date.year"], [Blockly.Msg.MIXLY_GPS_DATE_MONTH, "date.month"], [Blockly.Msg.MIXLY_GPS_DATE_DAY, "date.day"], [Blockly.Msg.MIXLY_GPS_TIME_HOUR, "time.hour"], [Blockly.Msg.MIXLY_GPS_TIME_MINUTE, "time.minute"], [Blockly.Msg.MIXLY_GPS_TIME_SECOND, "time.second"], [Blockly.Msg.MIXLY_GPS_TIME_CENTISECOND, "time.centisecond"]]), "WHAT");
@@ -68,7 +68,7 @@ export const gps_getData_xxx = {
 
 export const chaoshengbo2 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_CHAOSHENGBO);
         this.appendDummyInput("")
@@ -88,7 +88,7 @@ export const chaoshengbo2 = {
 export const DHT = {
     init: function () {
         var WHAT = [[Blockly.Msg.MIXLY_GETTEMPERATUE, 'temperature'], [Blockly.Msg.MIXLY_GETHUMIDITY, 'humidity']];
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([['DHT11', '11'], ['DHT21', '21'], ['DHT22', '22']]), 'TYPE')
             .appendField(Blockly.Msg.MIXLY_PIN)
@@ -110,7 +110,7 @@ export const DHT = {
 //lm35温度传感器
 export const LM35 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("LM35" + Blockly.Msg.MIXLY_TEMP);
         this.appendValueInput("PIN", Number)
@@ -125,7 +125,7 @@ export const LM35 = {
 export const ds18b20 = {
     init: function () {
         var UNIT = [[Blockly.Msg.MIXLY_DS18B20_C, '0'], [Blockly.Msg.MIXLY_DS18B20_F, '1']];
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DS18B20)
             .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN")
@@ -172,7 +172,7 @@ export const mlx90614_get_data = {
 //DF称重模块
 export const weightSensor = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("Hx711")
             .appendField(Blockly.Msg.MIXLY_WEIGHTSENSOR);
@@ -194,7 +194,7 @@ export const weightSensor = {
 //DS1302 RTC
 export const DS1302_init = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_DS1302_INITPIN);
@@ -219,7 +219,7 @@ var RTCTypeList = [['DS1307', 'RtcDS1307'], ['DS3231', 'RtcDS3231']];
 //DS1307 RTC
 export const DS1307_init = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RTCINIT);
         this.appendDummyInput("").setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(RTCTypeList), 'RTCType');
@@ -290,7 +290,7 @@ var RTC_TIME_TYPE = [
 //传感器-实时时钟块_获取时间
 export const RTC_get_time = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField("RTC" + Blockly.Msg.MIXLY_RTCGETTIME);
@@ -308,7 +308,7 @@ export const RTC_get_time = {
 // //传感器-实时时钟块_设置时间
 export const RTC_time = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendValueInput("hour")
             .setCheck(Number);
         this.appendDummyInput("")
@@ -329,7 +329,7 @@ export const RTC_time = {
 
 export const RTC_date = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendValueInput("year")
             .setCheck(Number);
         this.appendDummyInput("")
@@ -359,7 +359,7 @@ export const RTC_set_time = {
             .appendField(Blockly.Msg.MIXLY_GPS_TIME);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -380,7 +380,7 @@ export const get_system_date_time = {
 //传感器-实时时钟块_设置日期
 export const RTC_set_date = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_RTCSETDATE);
@@ -398,7 +398,7 @@ var SHT20_TYPE = [
 ];
 export const SHT20 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("SHT20" + Blockly.Msg.MIXLY_DHT11_T_H);
         this.appendDummyInput("")
@@ -420,7 +420,7 @@ var ADXL345_GETAB = [
 //传感器-重力感应块-获取数据
 export const ADXL345 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ADXL345);
         this.appendDummyInput("")
@@ -439,7 +439,7 @@ var LIS3DHTR_GETDATA = [
 ];
 export const LIS3DHTR = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField('LIS3DHTR' + Blockly.Msg.MixGo_MPU9250);
         this.appendDummyInput("")
@@ -452,7 +452,7 @@ export const LIS3DHTR = {
 };
 export const ADXL345_setOffset = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETTING)
             .appendField('ADXL345')
@@ -470,7 +470,7 @@ export const ADXL345_setOffset = {
 //传感器-MPU6050-获取数据
 export const MPU6050 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MPU6050);
         this.appendDummyInput("")
@@ -492,7 +492,7 @@ export const MPU6050 = {
 //传感器-MPU6050-更新数据
 export const MPU6050_update = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MPU6050 + Blockly.Msg.MIXLY_update_data);
         this.setPreviousStatement(true);
@@ -510,7 +510,7 @@ var Encoder_NO = [
 //旋转编码器定义
 export const encoder_init = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField(Blockly.Msg.MIXLY_ENCODER);
@@ -536,7 +536,7 @@ export const encoder_init = {
 //旋转编码器赋值
 export const encoder_write = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Encoder_NO), "Encoder_NO");
         this.appendDummyInput()
@@ -554,7 +554,7 @@ export const encoder_write = {
 //旋转编码器读值
 export const encoder_read = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Encoder_NO), "Encoder_NO");
         this.appendDummyInput()
@@ -569,7 +569,7 @@ export const encoder_read = {
 //旋转编码器定义
 export const encoder_init1 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField(Blockly.Msg.MIXLY_ENCODER);
@@ -595,7 +595,7 @@ export const encoder_init1 = {
 //旋转编码器赋值
 export const encoder_write1 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Encoder_NO), "Encoder_NO");
         this.appendDummyInput()
@@ -613,7 +613,7 @@ export const encoder_write1 = {
 //旋转编码器读值
 export const encoder_read1 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Encoder_NO), "Encoder_NO");
         this.appendDummyInput()
@@ -642,7 +642,7 @@ export const sensor_encoder_init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -663,7 +663,7 @@ export const sensor_encoder_get = {
             ]), "OPERATE_TYPE");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -686,7 +686,7 @@ export const sensor_encoder_set = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -708,7 +708,7 @@ export const sensor_encoder_handle = {
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_MSTIMER2_DO);
         this.setInputsInline(true);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -717,7 +717,7 @@ export const sensor_encoder_handle = {
 //BME280读取
 export const BME280_READ = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SERIAL_READ)
             .appendField(new Blockly.FieldDropdown([["BME280", "bme"], ["BMP280", "bmp"]]), "TYPE");
@@ -735,7 +735,7 @@ export const BME280_READ = {
 //PS2
 export const PS2_init = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.PS2);
         this.appendDummyInput("")
@@ -762,7 +762,7 @@ export const PS2_init = {
 };
 export const PS2_update = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2 + Blockly.Msg.MIXLY_update_data);
         this.setPreviousStatement(true);
@@ -792,7 +792,7 @@ var PSBUTTON = [
 //
 export const PS2_Button = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.PS2_BUTTON)
             .appendField(new Blockly.FieldDropdown(PSBUTTON), "psbt")
@@ -805,7 +805,7 @@ export const PS2_Button = {
 
 export const PS2_stk = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         var PSSTK = [
             [Blockly.Msg.PS2_RX, "PSS_RX"],
             [Blockly.Msg.PS2_RY, "PSS_RY"],
@@ -828,7 +828,7 @@ var DF_TCS34725_COLOR = [
 
 export const TCS34725_Get_RGB = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.TCS34725_Get_RGB)
             .appendField(new Blockly.FieldDropdown(DF_TCS34725_COLOR), "DF_TCS34725_COLOR");
@@ -863,7 +863,7 @@ export const tcs230_init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -878,7 +878,7 @@ export const tcs230_Get_RGB = {
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.COLOUR_RGB_RED, "R"], [Blockly.Msg.COLOUR_RGB_GREEN, "G"], [Blockly.Msg.COLOUR_RGB_BLUE, "B"]]), "tcs230_color");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -886,7 +886,7 @@ export const tcs230_Get_RGB = {
 
 export const Arduino_keypad_4_4_start = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_Keypad);
@@ -914,7 +914,7 @@ export const Arduino_keypad_4_4_start = {
 
 export const keypad_row_data = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendValueInput("keypad_row_1", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -940,7 +940,7 @@ export const keypad_row_data = {
 
 export const keypad_col_data = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendValueInput("keypad_col_1", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -966,7 +966,7 @@ export const keypad_col_data = {
 
 export const keypad_type_data = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_CENTRE)
             .appendField(new Blockly.FieldTextInput("1"), "keypad_1_1")
@@ -1004,7 +1004,7 @@ export const get_keypad_num = {
             .appendField(Blockly.Msg.MIXLY_Keypad_GETKEY);
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -1012,7 +1012,7 @@ export const get_keypad_num = {
 
 export const arduino_keypad_event = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_Keypad)
             .appendField(new Blockly.FieldTextInput("KEYPAD_4_4"), "keypad_name");
@@ -1050,7 +1050,7 @@ var MixGo_MPU9250_GETAB = [
 //传感器_重力感应块_获取9轴数据
 export const mixgo_MPU9250 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("MPU9250" + Blockly.Msg.MixGo_MPU9250);
         this.appendDummyInput("")
@@ -1066,7 +1066,7 @@ export const mixgo_MPU9250 = {
 //NTC电阻
 export const NTC_TEMP = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("NTC")
             .appendField(Blockly.Msg.MIXLY_TEMP);
@@ -1091,7 +1091,7 @@ export const NTC_TEMP = {
 //AHT20/21温湿度传感器
 export const AHT20_21 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("").appendField("AHT20/21" + Blockly.Msg.MIXLY_TEM_HUM)
         this.appendDummyInput("").setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_TEMPERATURE, "AHT21.GetTemperature()"], [Blockly.Msg.MIXLY_Humidity, "AHT21.GetHumidity()"], [Blockly.Msg.MIXLY_DewPoint, "AHT21.GetDewPoint()"]]), "AHT21_TYPE");
         this.setInputsInline(true);

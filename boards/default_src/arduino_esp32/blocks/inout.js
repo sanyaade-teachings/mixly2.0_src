@@ -2,11 +2,11 @@ import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 import { inout_analog_write } from '../../arduino_avr/blocks/inout';
 
-Blockly.Msg['BASE_HUE'] = 20//'#ae3838';//40;
+const BASE_HUE = 20//'#ae3838';//40;
 
 export const ledcSetup = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(BASE_HUE);
         this.appendValueInput('CHANNEL')
             .setCheck(Number)
             .appendField("ledc" + Blockly.Msg.MIXLY_SETUP + Blockly.Msg.MIXLY_CHANNEL);
@@ -27,7 +27,7 @@ export const ledcSetup = {
 
 export const ledcAttachPin = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(BASE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField("ledc" + Blockly.Msg.MIXLY_ATTATCH + Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
@@ -42,7 +42,7 @@ export const ledcAttachPin = {
 };
 export const ledcDetachPin = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(BASE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField("ledc" + Blockly.Msg.MIXLY_DETACH + Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
@@ -56,7 +56,7 @@ export const ledcWrite = inout_analog_write;
 
 export const inout_touchRead = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(BASE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
             .appendField(Blockly.Msg.MIXLY_PIN);
@@ -70,7 +70,7 @@ export const inout_touchRead = {
 
 export const touchAttachInterrupt = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(BASE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.Msg.MIXLY_TOUCHATTACHINTERRUPT_PIN)
             .setCheck(Number);

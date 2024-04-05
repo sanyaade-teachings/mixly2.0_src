@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['HANDBIT_HUE'] = 65;
+const ACTUATOR_HUE = 100;
 
 Blockly.Msg.TURN_OFF_BLUETOOTH_TO_CONNECT = "关闭蓝牙可连接";
 Blockly.Msg.TURN_ON_BLUETOOTH_TO_CONNECT = "打开蓝牙可连接";
@@ -60,7 +60,7 @@ export const hsc025a_instruction = {
             .appendField(new Blockly.FieldDropdown(hsc025a_mode), "instruction");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -75,7 +75,7 @@ export const hsc025a_play = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.setTooltip(Blockly.Msg.HSC025A_DESIGNATED_PLAYBACK1);
         this.setHelpUrl("");
     }
@@ -90,7 +90,7 @@ export const hsc025a_volume = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.setTooltip(Blockly.Msg.RANGE_0);
         this.setHelpUrl("");
     }

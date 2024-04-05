@@ -1,12 +1,12 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['COMMUNICATE_HUE'] = 140;
+const COMMUNICATE_HUE = 140;
 
 //红外接收模块
 export const ir_recv = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(new Blockly.FieldTextInput('ir_item'), 'VAR')
             .appendField(Blockly.Msg.MIXLY_IR_RECEIVE)
@@ -33,7 +33,7 @@ export const ir_recv = {
 export const ir_send_nec = {
     init: function () {
         var TYPE = [['RC5', 'RC5'], ['RC6', 'RC6'], ['NEC', 'NEC'], ['Sony', 'Sony'], ['Panasonic', 'Panasonic'], ['JVC', 'JVC'], ['SAMSUNG', 'SAMSUNG'], ['Whynter', 'Whynter'], ['AiwaRCT501', 'AiwaRCT501'], ['LG', 'LG'], ['Sanyo', 'Sanyo'], ['Mitsubishi', 'Mitsubishi'], ['DISH', 'DISH'], ['SharpRaw', 'SharpRaw'], ['Denon', 'Denon']];
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_IR_SEND_NEC1)
             .appendField(new Blockly.FieldDropdown(TYPE), 'TYPE')
@@ -55,7 +55,7 @@ export const ir_send_nec = {
 //红外接收使能
 export const ir_recv_enable = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.Msg.MIXLY_IR_RECEIVE_ENABLE);
         this.setPreviousStatement(true);
@@ -68,7 +68,7 @@ export const ir_recv_enable = {
 //红外接收模块(raw)
 export const ir_recv_raw = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.Msg.MIXLY_IR_RECEIVE_RAW)
             .setCheck(Number);
@@ -82,7 +82,7 @@ export const ir_recv_raw = {
 //红外发射模块(raw)
 export const ir_send_raw = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_IR_SEND_RAW)
             .appendField(new Blockly.FieldDropdown(Profile.default.digital), "PIN");
@@ -110,7 +110,7 @@ export const i2c_master_Init = {
             .appendField(Blockly.Msg.MIXLY_SETUP + 'I2C' + Blockly.Msg.MIXLY_MASTER);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -125,7 +125,7 @@ export const i2c_slave_Init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_I2C_MASTER_INITHelp);
         this.setHelpUrl("");
     }
@@ -145,7 +145,7 @@ export const i2c_begin_end_transmission = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -161,7 +161,7 @@ export const i2c_write = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
     }
 };
@@ -169,7 +169,7 @@ export const i2c_write = {
 // IIC写入数线数据
 export const i2c_slave_write_array = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('array')
             .appendField(Blockly.Msg.MIXLY_I2C_SLAVE_WRITE_ARRAY)
             .setCheck(null)
@@ -188,7 +188,7 @@ export const i2c_slave_write_array = {
 // IIC从机读取字节数
 export const i2c_howmany = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_I2C_HOWMANY);
         this.setOutput(true, Number);
@@ -199,7 +199,7 @@ export const i2c_howmany = {
 // IIC主机或从机读取成功吗？
 export const i2c_available = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_I2C_AVAILABLE);
         this.setOutput(true, Boolean);
@@ -210,7 +210,7 @@ export const i2c_available = {
 // IIC主机或从机读取的数据
 export const i2c_read = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_I2C_MASTER_READ2);
         this.setOutput(true, Number);
@@ -221,7 +221,7 @@ export const i2c_read = {
 //写入寄存器地址
 export const i2c_master_writerReg = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('device')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -243,7 +243,7 @@ export const i2c_master_writerReg = {
 //读取寄存器地址
 export const i2c_master_readerReg = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('device')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -265,7 +265,7 @@ export const i2c_master_readerReg = {
 
 export const i2c_slave_onrequest = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_I2C_SLAVE_ONREQUEST);
         this.appendStatementInput('DO')
@@ -278,7 +278,7 @@ export const i2c_slave_onrequest = {
 
 export const i2c_master_writer = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('device')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -295,7 +295,7 @@ export const i2c_master_writer = {
 };
 export const i2c_master_reader = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('device')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -311,7 +311,7 @@ export const i2c_master_reader = {
 };
 export const i2c_master_reader2 = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_I2C_MASTER_READ2);
         this.setOutput(true, Number);
@@ -321,7 +321,7 @@ export const i2c_master_reader2 = {
 
 export const i2c_slave_onreceive = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_I2C_SLAVE_ONRECEIVE);
         this.appendValueInput("onReceive_length")
@@ -338,7 +338,7 @@ export const i2c_slave_onreceive = {
 
 export const i2c_slave_write = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('value')
             .appendField(Blockly.Msg.MIXLY_I2C_SLAVE_WRITE)
             .setCheck(Number)
@@ -353,7 +353,7 @@ export const i2c_slave_write = {
 //SPI
 export const spi_transfer = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput('pin')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -372,7 +372,7 @@ export const spi_transfer = {
 //RFID
 export const RFID_init = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_INITIAL);
         this.appendDummyInput("")
@@ -403,7 +403,7 @@ export const RFID_on = {
         this.appendStatementInput("do_");
         this.setPreviousStatement(true);
         this.setNextStatement(true);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_RFID_ON);
     }
 };
@@ -412,7 +412,7 @@ export const RFID_on = {
 //读卡号
 export const RFID_readcardnum = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_READ_CARDNUM)
         this.setOutput(true, String);
@@ -424,7 +424,7 @@ export const RFID_readcardnum = {
 //串口打印卡号
 /* export const RFID_serialprintcardnum = {
    init: function() {
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(COMMUNICATE_HUE);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
         .appendField('打印RFID卡号');
@@ -444,7 +444,7 @@ export const RFID_in = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip('');
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_RFID_IN);
     }
 };
@@ -452,7 +452,7 @@ export const RFID_in = {
 //写数据块
 export const RFID_writecarddata = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("address1")
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_WRITE)
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_DATA_BLOCK)
@@ -469,7 +469,7 @@ export const RFID_writecarddata = {
 //读数据块的内容
 export const RFID_readcarddata = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("address")
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_READ)
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_DATA_BLOCK)
@@ -484,7 +484,7 @@ export const RFID_readcarddata = {
 /* //串口打印数据内容
 export const RFID_serialprintcarddata = {
    init: function() {
-    this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+    this.setColour(COMMUNICATE_HUE);
     this.appendValueInput("address")
         .appendField(new Blockly.FieldDropdown(Profile.default.serial_select), "serial_select")
         .appendField("打印RFID数据块");
@@ -498,7 +498,7 @@ export const RFID_serialprintcarddata = {
 //关闭RFID
 export const RFID_off = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_OFF);
         this.setPreviousStatement(true, null);
@@ -536,7 +536,7 @@ export const MFRC522_init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -554,7 +554,7 @@ export const MFRC522_IsNewCard = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -569,7 +569,7 @@ export const MFRC522_ReadCardUID = {
             .appendField(" " + Blockly.Msg.MIXLY_RFID_READ_CARD_UID);
         this.setInputsInline(false);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -597,7 +597,7 @@ export const MFRC522_WriteCard = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -625,7 +625,7 @@ export const MFRC522_ReadCard = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -639,7 +639,7 @@ export const spi_begin_slave = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -656,7 +656,7 @@ export const spi_begin_master = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -672,7 +672,7 @@ export const spi_transfer_Init = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -687,7 +687,7 @@ export const spi_transfer_1 = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -703,7 +703,7 @@ export const spi_transfer_2 = {
             .appendField(Blockly.Msg.MIXLY_RETURN_DATA);
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -720,7 +720,7 @@ export const spi_slave_interrupt = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -733,7 +733,7 @@ export const spi_slave_receive = {
             .appendField("SPI " + Blockly.Msg.MIXLY_SALVE + " " + Blockly.Msg.MIXLY_STM32_SPI_GET_REGISTER_DATA);
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

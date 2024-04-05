@@ -22,10 +22,8 @@
  * @fileoverview Utility functions for handling variables and procedure names.
  * @author fraser@google.com (Neil Fraser)
  */
-'use strict';
 
-goog.provide('Blockly.Names');
-
+import Variables from './variables';
 
 /**
  * Class for a database of entity names (variables, functions, etc).
@@ -35,16 +33,16 @@ goog.provide('Blockly.Names');
  *     before all variable names.
  * @constructor
  */
-Blockly.Names = function(reservedWords, opt_variablePrefix) {
-  this.variablePrefix_ = opt_variablePrefix || '';
-  this.reservedDict_ = Object.create(null);
-  if (reservedWords) {
-    var splitWords = reservedWords.split(',');
-    for (var i = 0; i < splitWords.length; i++) {
-      this.reservedDict_[splitWords[i]] = true;
+export const Names = function (reservedWords, opt_variablePrefix) {
+    this.variablePrefix_ = opt_variablePrefix || '';
+    this.reservedDict_ = Object.create(null);
+    if (reservedWords) {
+        var splitWords = reservedWords.split(',');
+        for (var i = 0; i < splitWords.length; i++) {
+            this.reservedDict_[splitWords[i]] = true;
+        }
     }
-  }
-  this.reset();
+    this.reset();
 };
 
 /**
@@ -54,7 +52,7 @@ Blockly.Names = function(reservedWords, opt_variablePrefix) {
  * will never be shown to the user in the workspace or stored in the variable
  * map.
  */
-Blockly.Names.DEVELOPER_VARIABLE_TYPE = 'DEVELOPER_VARIABLE';
+Names.DEVELOPER_VARIABLE_TYPE = 'DEVELOPER_VARIABLE';
 
 /**
  * When JavaScript (or most other languages) is generated, variable 'foo' and
@@ -68,10 +66,10 @@ Blockly.Names.DEVELOPER_VARIABLE_TYPE = 'DEVELOPER_VARIABLE';
 /**
  * Empty the database and start from scratch.  The reserved words are kept.
  */
-Blockly.Names.prototype.reset = function() {
-  this.db_ = Object.create(null);
-  this.dbReverse_ = Object.create(null);
-  this.variableMap_ = null;
+Names.prototype.reset = function () {
+    this.db_ = Object.create(null);
+    this.dbReverse_ = Object.create(null);
+    this.variableMap_ = null;
 };
 
 /**
@@ -79,35 +77,34 @@ Blockly.Names.prototype.reset = function() {
  * @param {!Blockly.VariableMap} map The map to track.
  * @package
  */
-Blockly.Names.prototype.setVariableMap = function(map) {
-  this.variableMap_ = map;
+Names.prototype.setVariableMap = function (map) {
+    this.variableMap_ = map;
 };
 
 /**
  * Get the name for a user-defined variable, based on its ID.
- * This should only be used for variables of type Blockly.Variables.NAME_TYPE.
+ * This should only be used for variables of type Variables.NAME_TYPE.
  * @param {string} id The ID to look up in the variable map.
  * @return {?string} The name of the referenced variable, or null if there was
  *     no variable map or the variable was not found in the map.
  * @private
  */
-Blockly.Names.prototype.getNameForUserVariable_ = function(id) {
-  if (!this.variableMap_) {
-    /*
-    console.log('Deprecated call to Blockly.Names.prototype.getName without ' +
-        'defining a variable map. To fix, add the folowing code in your ' +
-        'generator\'s init() function:\n' +
-        'Blockly.YourGeneratorName.variableDB_.setVariableMap(' +
-        'workspace.getVariableMap());');
-        */
+Names.prototype.getNameForUserVariable_ = function (id) {
+    if (!this.variableMap_) {
+        /*
+        console.log('Deprecated call to Names.prototype.getName without ' +
+            'defining a variable map. To fix, add the folowing code in your ' +
+            'generator\'s init() function:\n' +
+            'Blockly.YourGeneratorName.variableDB_.setVariableMap(' +
+            'workspace.getVariableMap());');
+            */
+        return null;
+    }
+    var variable = this.variableMap_.getVariableById(id);
+    if (variable) {
+        return variable.name;
+    }
     return null;
-  }
-  var variable = this.variableMap_.getVariableById(id);
-  if (variable) {
-    return variable.name;
-  } else {
-    return null;
-  }
 };
 
 /**
@@ -117,25 +114,25 @@ Blockly.Names.prototype.getNameForUserVariable_ = function(id) {
  *     ('VARIABLE', 'PROCEDURE', 'BUILTIN', etc...).
  * @return {string} An entity name that is legal in the exported language.
  */
-Blockly.Names.prototype.getName = function(name, type) {
-  if (type == Blockly.Variables.NAME_TYPE) {
-    var varName = this.getNameForUserVariable_(name);
-    if (varName) {
-      name = varName;
+Names.prototype.getName = function (name, type) {
+    if (type == Variables.NAME_TYPE) {
+        var varName = this.getNameForUserVariable_(name);
+        if (varName) {
+            name = varName;
+        }
     }
-  }
-  var normalized = name.toLowerCase() + '_' + type;
+    var normalized = name.toLowerCase() + '_' + type;
 
-  var isVarType = type == Blockly.Variables.NAME_TYPE ||
-      type == Blockly.Names.DEVELOPER_VARIABLE_TYPE;
+    var isVarType = type == Variables.NAME_TYPE ||
+        type == Names.DEVELOPER_VARIABLE_TYPE;
 
-  var prefix = isVarType ? this.variablePrefix_ : '';
-  if (normalized in this.db_) {
-    return prefix + this.db_[normalized];
-  }
-  var safeName = this.getDistinctName(name, type);
-  this.db_[normalized] = safeName.substr(prefix.length);
-  return safeName;
+    var prefix = isVarType ? this.variablePrefix_ : '';
+    if (normalized in this.db_) {
+        return prefix + this.db_[normalized];
+    }
+    var safeName = this.getDistinctName(name, type);
+    this.db_[normalized] = safeName.substr(prefix.length);
+    return safeName;
 };
 
 /**
@@ -148,20 +145,20 @@ Blockly.Names.prototype.getName = function(name, type) {
  *     ('VARIABLE', 'PROCEDURE', 'BUILTIN', etc...).
  * @return {string} An entity name that is legal in the exported language.
  */
-Blockly.Names.prototype.getDistinctName = function(name, type) {
-  var safeName = this.safeName_(name);
-  var i = '';
-  while (this.dbReverse_[safeName + i] ||
-         (safeName + i) in this.reservedDict_) {
-    // Collision with existing name.  Create a unique name.
-    i = i ? i + 1 : 2;
-  }
-  safeName += i;
-  this.dbReverse_[safeName] = true;
-  var isVarType = type == Blockly.Variables.NAME_TYPE ||
-      type == Blockly.Names.DEVELOPER_VARIABLE_TYPE;
-  var prefix = isVarType ? this.variablePrefix_ : '';
-  return prefix + safeName;
+Names.prototype.getDistinctName = function (name, type) {
+    var safeName = this.safeName_(name);
+    var i = '';
+    while (this.dbReverse_[safeName + i] ||
+        (safeName + i) in this.reservedDict_) {
+        // Collision with existing name.  Create a unique name.
+        i = i ? i + 1 : 2;
+    }
+    safeName += i;
+    this.dbReverse_[safeName] = true;
+    var isVarType = type == Variables.NAME_TYPE ||
+        type == Names.DEVELOPER_VARIABLE_TYPE;
+    var prefix = isVarType ? this.variablePrefix_ : '';
+    return prefix + safeName;
 };
 
 /**
@@ -172,20 +169,20 @@ Blockly.Names.prototype.getDistinctName = function(name, type) {
  * @return {string} Safe entity name.
  * @private
  */
-Blockly.Names.prototype.safeName_ = function(name) {
-  if (!name) {
-    name = 'unnamed';
-  } else {
-    // Unfortunately names in non-latin characters will look like
-    // _E9_9F_B3_E4_B9_90 which is pretty meaningless.
-    // https://github.com/google/blockly/issues/1654
-    name = encodeURI(name.replace(/ /g, '_')).replace(/[^,\w]/g, '_');
-    // Most languages don't allow names with leading numbers.
-    if ('0123456789'.indexOf(name[0]) != -1) {
-      name = 'my_' + name;
+Names.prototype.safeName_ = function (name) {
+    if (!name) {
+        name = 'unnamed';
+    } else {
+        // Unfortunately names in non-latin characters will look like
+        // _E9_9F_B3_E4_B9_90 which is pretty meaningless.
+        // https://github.com/google/blockly/issues/1654
+        name = encodeURI(name.replace(/ /g, '_')).replace(/[^,\w]/g, '_');
+        // Most languages don't allow names with leading numbers.
+        if ('0123456789'.indexOf(name[0]) != -1) {
+            name = 'my_' + name;
+        }
     }
-  }
-  return name;
+    return name;
 };
 
 /**
@@ -195,6 +192,6 @@ Blockly.Names.prototype.safeName_ = function(name) {
  * @param {string} name2 Second name.
  * @return {boolean} True if names are the same.
  */
-Blockly.Names.equals = function(name1, name2) {
-  return name1.toLowerCase() == name2.toLowerCase();
+Names.equals = function (name1, name2) {
+    return name1.toLowerCase() == name2.toLowerCase();
 };

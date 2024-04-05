@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['MATH_HUE'] = 230;
+const MATH_HUE = 230;
 
 Blockly.FieldTextInput.math_number_validator = function (text) {
     //return window.isNaN(text) ? null : String(text);
@@ -13,7 +13,7 @@ export const math_number = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldTextInput('0',
                 Blockly.FieldTextInput.math_number_validator), 'NUM');
@@ -38,7 +38,7 @@ export const math_arithmetic = {
             [Blockly.Msg.MATH_POWER_SYMBOL, 'POWER']
         ];
         //this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('A')
             .setCheck(null);
@@ -73,7 +73,7 @@ export const math_bit = {
             ['>>', '>>'],
             ['<<', '<<']
         ];
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('A')
             .setCheck(Number);
@@ -108,7 +108,7 @@ export const math_trig = {
             ['~', '~'],
         ];
         //this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('NUM')
             .setCheck(Number)
@@ -142,7 +142,7 @@ export const math_to_int = {
             [Blockly.Msg.MATH_SQ, 'sq'],
             [Blockly.Msg.MATH_SQRT, 'sqrt']
         ];
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.appendValueInput('A')
             .setCheck(Number)
             .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
@@ -188,7 +188,7 @@ export const arduino_variate_type = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(DATATYPES), "variate_type");
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -201,7 +201,7 @@ export const math_SizeOf = {
             .appendField(Blockly.Msg.MIXLY_GET + " " + Blockly.Msg.MIXLY_I2C_BYTES);
         this.setInputsInline(false);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -213,7 +213,7 @@ export const math_max_min = {
             [Blockly.Msg.MIXLY_MAX, 'max'],
             [Blockly.Msg.MIXLY_MIN, 'min'],
         ];
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.appendValueInput('A')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -243,7 +243,7 @@ export const math_max_min = {
 
 export const math_random_seed = {
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         // this.appendDummyInput()
         //     .appendField(Blockly.Msg.LANG_MATH_RANDOM_SEED);
         this.appendValueInput('NUM')
@@ -262,7 +262,7 @@ export const math_random_int = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('FROM')
             .setCheck(Number)
@@ -283,7 +283,7 @@ export const math_constrain = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('VALUE')
             .setCheck(Number)
@@ -302,7 +302,7 @@ export const math_constrain = {
 
 export const base_map = {
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.appendValueInput("NUM", Number)
             .appendField(Blockly.Msg.MIXLY_MAP)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_INT, "map_int"], [Blockly.Msg.LANG_MATH_FLOAT, "map_float"]]), "maptype")
@@ -330,7 +330,7 @@ export const base_map = {
 
 export const variables_operation = {
     init: function () {
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.appendValueInput("variables")
             .setCheck(null);
         this.appendValueInput("data")
@@ -353,7 +353,7 @@ export const math_auto_add_or_minus = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['MATH_HUE']);
+        this.setColour(MATH_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

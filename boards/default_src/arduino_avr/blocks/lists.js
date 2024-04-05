@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['LISTS_HUE'] = 260;
+const LISTS_HUE = 260;
 
 const DATATYPES = [
     [Blockly.Msg.LANG_MATH_INT, 'int'],
@@ -23,7 +23,7 @@ export const lists_create_with = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
             .appendField(' ')
@@ -150,7 +150,7 @@ export const lists_create_with = {
 
 export const lists_create_with_text = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
             .appendField(' ')
@@ -183,7 +183,7 @@ export const lists_create_with2 = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
             .appendField(' ')
@@ -310,7 +310,7 @@ export const lists_create_with2 = {
 
 export const lists_create_with_text2 = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
             .appendField(' ')
@@ -343,7 +343,7 @@ export const lists_create_with_container = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LISTS_CREATE_WITH_CONTAINER_TITLE_ADD);
         this.appendStatementInput('STACK');
@@ -358,7 +358,7 @@ export const lists_create_with_item = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
         this.setPreviousStatement(true);
@@ -370,7 +370,7 @@ export const lists_create_with_item = {
 
 export const lists_getIndex = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('AT')
             .setCheck(Number)
@@ -388,7 +388,7 @@ export const lists_getIndex = {
 
 export const lists_setIndex = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput('AT')
             .setCheck(Number)
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
@@ -407,7 +407,7 @@ export const lists_setIndex = {
 
 export const listsGetValueByIndex = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.setOutput(true, Number);
         this.appendValueInput('AT')
             .setCheck(Number)
@@ -422,7 +422,7 @@ export const listsGetValueByIndex = {
 
 export const listsSetValueByIndex = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput('AT')
             .setCheck(Number)
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')
@@ -442,7 +442,7 @@ export const lists_length = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_LENGTH)
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR');
@@ -454,7 +454,7 @@ export const lists_length = {
 //创建二维数组
 export const create_array2_with_text = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput("name")
             .setCheck(null)
             .appendField(new Blockly.FieldDropdown(DATATYPES), "TYPE")
@@ -479,7 +479,7 @@ export const create_array2_with_text = {
 //二维数组赋值
 export const array2_assignment = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput("name")
             .setCheck(null)
             .appendField(Blockly.Msg.array2_assignment);
@@ -502,7 +502,7 @@ export const array2_assignment = {
 //获取二维数组值
 export const get_array2_value = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput("name")
             .setCheck(null)
             .appendField(Blockly.Msg.get_array2_value);
@@ -522,7 +522,7 @@ export const get_array2_value = {
 //二维数组赋值
 export const lists2SetValueByIndex = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput("name")
             .setCheck(null)
             .appendField(Blockly.Msg.array2_assignment);
@@ -543,7 +543,7 @@ export const lists2SetValueByIndex = {
 //二维数组取值
 export const lists2GetValueByIndex = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendValueInput("name")
             .setCheck(null)
             .appendField(Blockly.Msg.get_array2_value);
@@ -572,7 +572,7 @@ export const lists_array2_setup = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -583,7 +583,7 @@ export const lists_array2_setup_get_data = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("");
         this.itemCount_ = 3;
         this.updateShape_();
@@ -726,7 +726,7 @@ export const loop_array = {
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LEFT_CYCLE, "0"], [Blockly.Msg.RIGHT_CYCLE, "1"]]), "mode");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.setTooltip(Blockly.Msg.LEFT_CYCLE + Blockly.Msg.LEFT_CYCLE1 + Blockly.Msg.RIGHT_CYCLE + Blockly.Msg.RIGHT_CYCLE1);
         this.setHelpUrl("");
     }
@@ -742,7 +742,7 @@ export const lists_array2_get_length = {
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.array2_rows, "row"], [Blockly.Msg.array2_cols, "col"]]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

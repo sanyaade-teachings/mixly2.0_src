@@ -1,11 +1,11 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['SERIAL_HUE'] = 65;
+const SERIAL_HUE = 65;
 
 export const serial_HardwareSerial = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP + Blockly.Msg.Hardware_Serial)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select");
@@ -30,7 +30,7 @@ export const serial_HardwareSerial = {
 
 export const serial_begin = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", Number)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_BEGIN)
@@ -44,7 +44,7 @@ export const serial_begin = {
 
 export const serial_write = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_WRITE);
@@ -56,7 +56,7 @@ export const serial_write = {
 
 export const serial_print = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
@@ -69,7 +69,7 @@ export const serial_print = {
 
 export const serial_println = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
@@ -83,7 +83,7 @@ export const serial_println = {
 
 export const serial_print_num = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_PRINT)
@@ -103,7 +103,7 @@ export const serial_print_hex = serial_print_num;
 
 export const serial_available = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_AVAILABLE);
@@ -114,7 +114,7 @@ export const serial_available = {
 
 export const serial_readstr = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR);
@@ -125,7 +125,7 @@ export const serial_readstr = {
 
 export const serial_readstr_until = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendValueInput("CONTENT", Number)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_READSTR_UNTIL)
@@ -138,7 +138,7 @@ export const serial_readstr_until = {
 
 export const serial_parseInt_Float = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             //.appendField(Blockly.Msg.MIXLY_SERIAL_READ)
@@ -158,7 +158,7 @@ export const serial_parseInt_Float = {
 
 export const serial_flush = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_FLUSH);
@@ -169,7 +169,7 @@ export const serial_flush = {
 };
 export const serial_softserial = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select");
@@ -191,7 +191,7 @@ export const serial_softserial = {
 
 export const serial_event = {
     init: function () {
-        this.setColour(Blockly.Msg['SERIAL_HUE']);
+        this.setColour(SERIAL_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(Profile.default.serial_HardwareSelect), "serial_select")
             .appendField(Blockly.Msg.MIXLY_SERIAL_EVENT);

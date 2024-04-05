@@ -1,10 +1,11 @@
-import * as Blockly from 'blockly/core';
+import { Arduino } from '../../arduino_common/arduino_generator';
+import Variables from '../../arduino_common/others/variables';
 
 export const variables_get = function () {
     // Variable getter.
-    var code = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-        Blockly.Variables.NAME_TYPE);
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    var code = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+        Variables.NAME_TYPE);
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const variables_declare = function () {
@@ -15,46 +16,46 @@ export const variables_declare = function () {
     //TODO: settype to variable
     if (dropdown_variables_type == 'global_variate') {
         if (dropdown_type == 'String') {
-            argument0 = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '""';
+            argument0 = Arduino.valueToCode(this, 'VALUE', Arduino.ORDER_ASSIGNMENT) || '""';
         } else {
-            argument0 = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+            argument0 = Arduino.valueToCode(this, 'VALUE', Arduino.ORDER_ASSIGNMENT) || '0';
         }
-        var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-            Blockly.Variables.NAME_TYPE);
+        var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+            Variables.NAME_TYPE);
         if (dropdown_type == 'String' || dropdown_type == 'char*')
-            Blockly.Arduino.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + ';';
+            Arduino.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + ';';
         else
-            Blockly.Arduino.definitions_['var_declare' + varName] = 'volatile ' + dropdown_type + ' ' + varName + ';';
+            Arduino.definitions_['var_declare' + varName] = 'volatile ' + dropdown_type + ' ' + varName + ';';
 
-        Blockly.Arduino.setups_['setup_var' + varName] = varName + ' = ' + argument0 + ';';
+        Arduino.setups_['setup_var' + varName] = varName + ' = ' + argument0 + ';';
     }
     else {
         if (dropdown_type == 'String') {
-            argument0 = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '""';
+            argument0 = Arduino.valueToCode(this, 'VALUE', Arduino.ORDER_ASSIGNMENT) || '""';
         } else {
-            argument0 = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+            argument0 = Arduino.valueToCode(this, 'VALUE', Arduino.ORDER_ASSIGNMENT) || '0';
         }
-        var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-            Blockly.Variables.NAME_TYPE);
+        var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+            Variables.NAME_TYPE);
         code = dropdown_type + ' ' + varName + ' = ' + argument0 + ';\n';
     }
-    //Blockly.Arduino.variableTypes_[varName] = dropdown_type;//处理变量类型
+    //Arduino.variableTypes_[varName] = dropdown_type;//处理变量类型
     return code;
 };
 
 export const variables_set = function () {
     // Variable setter.
-    var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE',
-        Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-    var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-        Blockly.Variables.NAME_TYPE);
+    var argument0 = Arduino.valueToCode(this, 'VALUE',
+        Arduino.ORDER_ASSIGNMENT) || '0';
+    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+        Variables.NAME_TYPE);
     return varName + ' = ' + argument0 + ';\n';
 };
 export const variables_change = function () {
     // Variable setter.
     var operator = this.getFieldValue('OP');
-    var varName = Blockly.Arduino.valueToCode(this, 'MYVALUE', Blockly.Arduino.ORDER_ASSIGNMENT);
+    var varName = Arduino.valueToCode(this, 'MYVALUE', Arduino.ORDER_ASSIGNMENT);
     //修复强制类型转换不正确的bug
     var code = '((' + operator + ')(' + varName + '))';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };

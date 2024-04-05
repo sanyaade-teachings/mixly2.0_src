@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['VARIABLES_HUE'] = 330;
+const VARIABLES_HUE = 330;
 
 var DATATYPES = [
     [Blockly.Msg.LANG_MATH_INT, 'int'],
@@ -26,7 +26,7 @@ var DATATYPES = [
 export const variables_declare = {
     // Variable setter.
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(VARIABLES_HUE);
         this.appendValueInput('VALUE', null)
             .appendField(Blockly.Msg.MIXLY_DECLARE)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GLOBAL_VARIABLE, "global_variate"], [Blockly.Msg.MIXLY_LOCAL_VARIABLE, "local_variate"]]), "variables_type")
@@ -51,7 +51,7 @@ export const variables_declare = {
 
 export const variables_get = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(VARIABLES_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
         this.setOutput(true);
@@ -77,7 +77,7 @@ export const variables_get = {
 
 export const variables_set = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(VARIABLES_HUE);
         this.appendValueInput('VALUE')
             .appendField(new Blockly.FieldTextInput('item'), 'VAR')
             .appendField(Blockly.Msg.MIXLY_VALUE2);
@@ -100,7 +100,7 @@ export const variables_set = {
   */
 export const variables_change = {
     init: function () {
-        this.setColour(Blockly.Msg['VARIABLES_HUE']);
+        this.setColour(VARIABLES_HUE);
         var DATATYPES = [
             [Blockly.Msg.LANG_MATH_INT, 'int'],
             [Blockly.Msg.LANG_MATH_UNSIGNED_INT, 'unsigned int'],

@@ -1,5 +1,8 @@
 import * as Blockly from 'blockly/core';
 
+const ETHERNET_HUE = 0;
+const WEATHER_HUE = "#27b6ac";
+
 /**
  * @name 模块名 Http GET请求
  * @support 支持板卡 {ESP8266, ESP32, ESP32C3, ESP32S2, ESP32S3}
@@ -19,7 +22,7 @@ export const http_get = {
             .appendField(Blockly.Msg.MIXLY_FAILED);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setTooltip("");
     }
 };
@@ -51,7 +54,7 @@ export const http_post = {
             .appendField(Blockly.Msg.MIXLY_FAILED);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setTooltip("");
     }
 };
@@ -1267,7 +1270,7 @@ export const china_city = {
             .appendField(new Blockly.FieldDependentDropdown("province", citysByProvince, defaultOptions), "city");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.setHelpUrl("");
         this.preProvince = null;
     }
@@ -1275,7 +1278,7 @@ export const china_city = {
 
 export const weather_private_key = {
     init: function () {
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown([['S9l2sb_ZK-UsWaynG', 'S9l2sb_ZK-UsWaynG'], ['SpRpSYb7QOMT0M8Tz', 'SpRpSYb7QOMT0M8Tz'], ['SboqGMxP4tYNXUN8f', 'SboqGMxP4tYNXUN8f'], ['SJiRrYGYFkGnfi081', 'SJiRrYGYFkGnfi081'], ['SMhSshUxuTL0GLVLS', 'SMhSshUxuTL0GLVLS']]), 'key');
         this.setOutput(true, null);
@@ -1303,7 +1306,7 @@ export const weather_seniverse_city_weather = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.setTooltip("这里的API私钥免费体验有次数限制\n访问频率限制20次/分钟");
         this.setHelpUrl("");
     }
@@ -1318,7 +1321,7 @@ export const weather_get_seniverse_weather_info = {
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_AVAILABLE, "update"], [Blockly.Msg.MIXLY_GET_DATA_UPDATE_TIME, "getLastUpdate"], [Blockly.Msg.MIXLY_GET_SERVER_RESPONSE_STATUS_CODE, "getServerCode"]]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -1334,7 +1337,7 @@ export const weather_get_seniverse_weather_info1 = {
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_WEATHER_PHENOMENON, "getWeatherText"], [Blockly.Msg.MIXLY_WEATHER_PHENOMENON_CODE, "getWeatherCode"], [Blockly.Msg.MIXLY_TEMPERATURE, "getDegree"]]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -1363,7 +1366,7 @@ export const weather_get_seniverse_weather_info2 = {
             ]), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -1385,7 +1388,7 @@ export const weather_get_seniverse_weather_info3 = {
             ), "type");
         this.setInputsInline(true);
         this.setOutput(true, null);
-        this.setColour("#27b6ac");
+        this.setColour(WEATHER_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

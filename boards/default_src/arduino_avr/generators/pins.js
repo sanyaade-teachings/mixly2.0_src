@@ -1,9 +1,10 @@
-import * as Blockly from 'blockly/core';
+import { Arduino } from '../../arduino_common/arduino_generator';
 
 export const pins_digital = function () {
     var code = this.getFieldValue('PIN');
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
+
 export const pins_analog = pins_digital;
 export const pins_pwm = pins_digital;
 export const pins_interrupt = pins_digital;

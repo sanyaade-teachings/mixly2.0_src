@@ -1,6 +1,5 @@
-import * as Blockly from 'blockly/core';
-// import * as Mixly from 'mixly';
 import { Profile } from 'mixly';
+import { Arduino } from '../../arduino_common/arduino_generator';
 
 export const ir_recv = function () {
     /*var xmlDom = Blockly.Xml.workspaceToDom(Mixly.Editor.blockEditor);
@@ -10,11 +9,11 @@ export const ir_recv = function () {
     } else {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }*/
-    var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    var branch = Blockly.Arduino.statementToCode(this, 'DO');
-    var branch2 = Blockly.Arduino.statementToCode(this, 'DO2');
-    Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
-    Blockly.Arduino.definitions_['var_declare_irProtocolList'] =
+    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+    var branch = Arduino.statementToCode(this, 'DO');
+    var branch2 = Arduino.statementToCode(this, 'DO2');
+    Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
+    Arduino.definitions_['var_declare_irProtocolList'] =
         `const String IR_PROTOCOL_TYPE[] = {
   "UNKNOWN",
   "PULSE_DISTANCE",
@@ -43,8 +42,8 @@ export const ir_recv = function () {
   "MAGIQUEST",
   "WHYNTER"
 };`;
-    Blockly.Arduino.definitions_['var_declare_irrecv_' + dropdown_pin] = `IRrecv irrecv_${dropdown_pin}(${dropdown_pin});\n`;
-    Blockly.Arduino.setups_['setup_ir_recv_' + dropdown_pin] = `irrecv_${dropdown_pin}.enableIRIn();`;
+    Arduino.definitions_['var_declare_irrecv_' + dropdown_pin] = `IRrecv irrecv_${dropdown_pin}(${dropdown_pin});\n`;
+    Arduino.setups_['setup_ir_recv_' + dropdown_pin] = `irrecv_${dropdown_pin}.enableIRIn();`;
     var code =
         `if (irrecv_${dropdown_pin}.decode()) {
   struct IRData *pIrData = &irrecv_${dropdown_pin}.decodedIRData;
@@ -71,18 +70,18 @@ export const ir_recv_enable = function () {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }*/
 
-    Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>';
-    var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>';
+    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
     var code = 'irrecv_' + dropdown_pin + '.enableIRIn();\n';
     return code;
 }
 
 export const ir_send_nec = function () {
     var pin = this.getFieldValue('PIN');
-    Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
-    Blockly.Arduino.definitions_['var_declare_ir_send_' + pin] = `IRsend irsend_${pin}(${pin});`;
-    var data = Blockly.Arduino.valueToCode(this, 'data', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var bits = Blockly.Arduino.valueToCode(this, 'bits', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
+    Arduino.definitions_['var_declare_ir_send_' + pin] = `IRsend irsend_${pin}(${pin});`;
+    var data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC) || '0';
+    var bits = Arduino.valueToCode(this, 'bits', Arduino.ORDER_ATOMIC) || '0';
     var type = this.getFieldValue('TYPE');
     var code = `irsend_${pin}.send${type}(${data},${bits});\n`;
     return code;
@@ -98,13 +97,13 @@ export const ir_recv_raw = function () {
         this.setWarningText(Blockly.Msg.IR_AND_TONE_WARNING);
     }*/
 
-    var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
-    Blockly.Arduino.definitions_['var_declare_ir_recv' + dropdown_pin] = 'IRrecv irrecv_' + dropdown_pin + '(' + dropdown_pin + ');\ndecode_results results_' + dropdown_pin + ';\n';
-    if (!Blockly.Arduino.setups_['setup_serial_Serial']) {
-        Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(' + Profile.default.serial + ');';
+    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
+    Arduino.definitions_['var_declare_ir_recv' + dropdown_pin] = 'IRrecv irrecv_' + dropdown_pin + '(' + dropdown_pin + ');\ndecode_results results_' + dropdown_pin + ';\n';
+    if (!Arduino.setups_['setup_serial_Serial']) {
+        Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(' + Profile.default.serial + ');';
     }
-    Blockly.Arduino.setups_['setup_ir_recv_' + dropdown_pin] = 'irrecv_' + dropdown_pin + '.enableIRIn();\n';
+    Arduino.setups_['setup_ir_recv_' + dropdown_pin] = 'irrecv_' + dropdown_pin + '.enableIRIn();\n';
     var code = "if (irrecv_" + dropdown_pin + ".decode(&results_" + dropdown_pin + ")) {\n"
     code += '  ' + 'dumpRaw(&results_' + dropdown_pin + ');\n';
     code += '  irrecv_' + dropdown_pin + '.resume();\n'
@@ -122,16 +121,16 @@ export const ir_recv_raw = function () {
         + '  }\n'
         + '  Serial.println("");\n'
         + '}\n';
-    Blockly.Arduino.definitions_['dumpRaw'] = funcode;
+    Arduino.definitions_['dumpRaw'] = funcode;
     return code;
 };
 
 export const ir_send_raw = function () {
     var pin = this.getFieldValue('PIN');
-    Blockly.Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
-    Blockly.Arduino.definitions_['var_declare_ir_send_' + pin] = `IRsend irsend_${pin}(${pin});`;
-    var length = Blockly.Arduino.valueToCode(this, 'length', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var freq = Blockly.Arduino.valueToCode(this, 'freq', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_IRremote'] = '#include <IRremote.h>\n';
+    Arduino.definitions_['var_declare_ir_send_' + pin] = `IRsend irsend_${pin}(${pin});`;
+    var length = Arduino.valueToCode(this, 'length', Arduino.ORDER_ATOMIC) || '0';
+    var freq = Arduino.valueToCode(this, 'freq', Arduino.ORDER_ATOMIC) || '0';
     var text = this.getFieldValue('TEXT');
     var code = 'unsigned int buf_raw[' + length + ']={' + text + '};\n'
     code = code + `irsend_${pin}.sendRaw(buf_raw,${length},${freq});\n`;
@@ -139,10 +138,10 @@ export const ir_send_raw = function () {
 }
 
 export const i2c_master_writer = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    var device = Blockly.Arduino.valueToCode(this, 'device', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    var device = Arduino.valueToCode(this, 'device', Arduino.ORDER_ATOMIC) || '0';
+    var value = Arduino.valueToCode(this, 'value', Arduino.ORDER_ATOMIC) || '0';
     var code = "Wire.beginTransmission(" + device + ");\n";
     code += "Wire.write(" + value + ");\n";
     code += "Wire.endTransmission();\n";
@@ -150,56 +149,56 @@ export const i2c_master_writer = function () {
 };
 
 export const i2c_master_reader2 = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
-    //Blockly.Arduino.setups_['setup_wire_begin'] ='Wire.begin();';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    //Arduino.setups_['setup_wire_begin'] ='Wire.begin();';
     var code = "Wire.read()";
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 // YANG add slave write
 export const i2c_slave_write = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    var value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    var value = Arduino.valueToCode(this, 'value', Arduino.ORDER_ATOMIC) || '0';
     var code = "Wire.write(" + value + ");\n";
     return code;
 };
 
 export const RFID_init = function () {
     var sda = this.getFieldValue('SDA');
-    Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
-    Blockly.Arduino.definitions_['include_RFID'] = '#include <RFID.h>';
-    Blockly.Arduino.definitions_['var_declare_RFID'] = 'RFID rfid(' + sda + ',5);';
-    Blockly.Arduino.definitions_['var_declare__i and tmp'] = 'unsigned char i,tmp;';
-    Blockly.Arduino.definitions_['var_declare__status'] = 'unsigned char status;';
-    Blockly.Arduino.definitions_['var_declare__strmax'] = 'unsigned char str[MAX_LEN];';
-    Blockly.Arduino.definitions_['var_declare__RC_size'] = 'unsigned char RC_size;';
-    Blockly.Arduino.definitions_['var_declare__blockAddr'] = 'unsigned char blockAddr;        //选择操作的块地址0～63';
-    Blockly.Arduino.definitions_['define_1'] = '//4字节卡序列号，第5字节为校验字节';
-    Blockly.Arduino.definitions_['define_2'] = 'unsigned char serNum[5];';
-    Blockly.Arduino.definitions_['define_3'] = '//写卡数据';
-    Blockly.Arduino.definitions_['define_5'] = '//原扇区A密码，16个扇区，每个扇区密码6Byte';
-    Blockly.Arduino.definitions_['define_6'] = 'unsigned char sectorKeyA[16][16] = {';
-    Blockly.Arduino.definitions_['define_7'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
-    Blockly.Arduino.definitions_['define_8'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
-    Blockly.Arduino.definitions_['define_9'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},};';
+    Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
+    Arduino.definitions_['include_RFID'] = '#include <RFID.h>';
+    Arduino.definitions_['var_declare_RFID'] = 'RFID rfid(' + sda + ',5);';
+    Arduino.definitions_['var_declare__i and tmp'] = 'unsigned char i,tmp;';
+    Arduino.definitions_['var_declare__status'] = 'unsigned char status;';
+    Arduino.definitions_['var_declare__strmax'] = 'unsigned char str[MAX_LEN];';
+    Arduino.definitions_['var_declare__RC_size'] = 'unsigned char RC_size;';
+    Arduino.definitions_['var_declare__blockAddr'] = 'unsigned char blockAddr;        //选择操作的块地址0～63';
+    Arduino.definitions_['define_1'] = '//4字节卡序列号，第5字节为校验字节';
+    Arduino.definitions_['define_2'] = 'unsigned char serNum[5];';
+    Arduino.definitions_['define_3'] = '//写卡数据';
+    Arduino.definitions_['define_5'] = '//原扇区A密码，16个扇区，每个扇区密码6Byte';
+    Arduino.definitions_['define_6'] = 'unsigned char sectorKeyA[16][16] = {';
+    Arduino.definitions_['define_7'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
+    Arduino.definitions_['define_8'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
+    Arduino.definitions_['define_9'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},};';
 
-    Blockly.Arduino.definitions_['define_10'] = '//新扇区A密码，16个扇区，每个扇区密码6Byte';
-    Blockly.Arduino.definitions_['define_11'] = 'unsigned char sectorNewKeyA[16][16] = {';
-    Blockly.Arduino.definitions_['define_12'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
-    Blockly.Arduino.definitions_['define_13'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xff,0x07,0x80,0x69, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
-    Blockly.Arduino.definitions_['define_14'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xff,0x07,0x80,0x69, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},};';
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Blockly.Arduino.setups_['setup_output_2'] = 'SPI.begin();';
-    Blockly.Arduino.setups_['setup_output_3'] = 'rfid.init();';
+    Arduino.definitions_['define_10'] = '//新扇区A密码，16个扇区，每个扇区密码6Byte';
+    Arduino.definitions_['define_11'] = 'unsigned char sectorNewKeyA[16][16] = {';
+    Arduino.definitions_['define_12'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
+    Arduino.definitions_['define_13'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xff,0x07,0x80,0x69, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},';
+    Arduino.definitions_['define_14'] = ' {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xff,0x07,0x80,0x69, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF},};';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_output_2'] = 'SPI.begin();';
+    Arduino.setups_['setup_output_3'] = 'rfid.init();';
     return "";
 };
 
 export const RFID_on = function () {
     // Do while/until loop.
-    var branch = Blockly.Arduino.statementToCode(this, 'do_');
-    if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
-        branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
+    var branch = Arduino.statementToCode(this, 'do_');
+    if (Arduino.INFINITE_LOOP_TRAP) {
+        branch = Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
     }
 
@@ -215,8 +214,8 @@ export const RFID_readcardnum = function () {
         + '  rfid.selectTag(rfid.serNum);\n'
         + '  return stringserNum;\n'//直接返回string
         + '}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
-    return [funcName + '()', Blockly.Arduino.ORDER_ATOMIC];
+    Arduino.definitions_[funcName] = code;
+    return [funcName + '()', Arduino.ORDER_ATOMIC];
 };
 
 /* export const RFID_serialprintcardnum = function() {
@@ -237,7 +236,7 @@ export const RFID_readcardnum = function () {
         +"\n"+'      //选卡，返回卡容量（锁定卡片，防止多次读写）'
         +"\n"+'      rfid.selectTag(rfid.serNum);'
         + '\n}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
+    Arduino.definitions_[funcName] = code;
     return  funcName+'();\n';
 }; */
 
@@ -245,7 +244,7 @@ export const RFID_readcardnum = function () {
 
 
 export const RFID_writecarddata = function () {
-    var address2 = Blockly.Arduino.valueToCode(this, 'address1', Blockly.Arduino.ORDER_ATOMIC);
+    var address2 = Arduino.valueToCode(this, 'address1', Arduino.ORDER_ATOMIC);
     var data2 = this.getFieldValue('data1');
     var funcName = 'RFID_writecarddata';
     var code = 'void' + ' ' + funcName + '(int ad2){\n'
@@ -266,12 +265,12 @@ export const RFID_writecarddata = function () {
         + '    }\n'
         + '  }\n'
         + '}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
+    Arduino.definitions_[funcName] = code;
     return funcName + '(' + address2 + ');\n';
 }
 
 export const RFID_readcarddata = function () {
-    var address3 = Blockly.Arduino.valueToCode(this, 'address', Blockly.Arduino.ORDER_ATOMIC);
+    var address3 = Arduino.valueToCode(this, 'address', Arduino.ORDER_ATOMIC);
     var funcName = 'RFID_readcarddata'
     var code = 'String' + ' ' + funcName + '(int ad3){\n'
         + '  //读卡\n'
@@ -289,13 +288,13 @@ export const RFID_readcarddata = function () {
         + '  String stringstr((char*)str);\n'//str是一个char数组，必须先转换成char*，才能继续转换成string
         + '  return stringstr;\n'
         + '}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
-    return [funcName + '(' + address3 + ')', Blockly.Arduino.ORDER_ATOMIC];
+    Arduino.definitions_[funcName] = code;
+    return [funcName + '(' + address3 + ')', Arduino.ORDER_ATOMIC];
 };
 
 
 /* export const RFID_serialprintcarddata = function() {
-    var address3 = Blockly.Arduino.valueToCode(this, 'address', Blockly.Arduino.ORDER_ATOMIC);
+    var address3 = Arduino.valueToCode(this, 'address', Arduino.ORDER_ATOMIC);
   var funcName='RFID_serialprintcarddata';
     var code='void'+ ' ' + funcName + '(int ad3) {\n'
     +"\n"+'//读卡 '
@@ -312,7 +311,7 @@ export const RFID_readcarddata = function () {
     +"\n"+'   } '
     +"\n"+'  rfid.halt();'
     + '\n}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
+    Arduino.definitions_[funcName] = code;
     return  funcName+'('+address3+');\n';
 }; */
 
@@ -322,7 +321,7 @@ export const RFID_off = function () {
     var code = 'void' + ' ' + funcName + '() {\n'
         + "\n" + ' rfid.halt();   '
         + '\n}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
+    Arduino.definitions_[funcName] = code;
     return funcName + '();\n';
 };
 
@@ -336,12 +335,12 @@ export const RFID_in = function () {
         + "\n" + '      rfid.selectTag(rfid.serNum);'
         + "\n" + '  return stringserNum; '//直接返回string
         + '\n}\n';
-    Blockly.Arduino.definitions_[funcName] = code;
-    var argument0 = Blockly.Arduino.valueToCode(this, 'uid_',
-        Blockly.Arduino.ORDER_NONE) || 'false';
-    var branch = Blockly.Arduino.statementToCode(this, 'do_');
-    if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
-        branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
+    Arduino.definitions_[funcName] = code;
+    var argument0 = Arduino.valueToCode(this, 'uid_',
+        Arduino.ORDER_NONE) || 'false';
+    var branch = Arduino.statementToCode(this, 'do_');
+    if (Arduino.INFINITE_LOOP_TRAP) {
+        branch = Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
     }
     /*
@@ -361,13 +360,13 @@ export const RFID_in = function () {
 //初始化RFID
 export const MFRC522_init = function () {
     var text_rfid_name = this.getFieldValue('rfid_name');
-    var value_PIN_SDA = Blockly.Arduino.valueToCode(this, 'PIN_SDA', Blockly.Arduino.ORDER_ATOMIC);
-    var value_PIN_RST = Blockly.Arduino.valueToCode(this, 'PIN_RST', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
-    Blockly.Arduino.definitions_['include_MFRC522'] = '#include <MFRC522.h>';
-    Blockly.Arduino.definitions_['var_declare_' + text_rfid_name] = 'MFRC522 ' + text_rfid_name + '(' + value_PIN_SDA + ', ' + value_PIN_RST + ');';
-    Blockly.Arduino.setups_['setup_spi'] = 'SPI.begin();';
-    Blockly.Arduino.setups_['setup_mfc522_' + text_rfid_name] = text_rfid_name + '.PCD_Init();';
+    var value_PIN_SDA = Arduino.valueToCode(this, 'PIN_SDA', Arduino.ORDER_ATOMIC);
+    var value_PIN_RST = Arduino.valueToCode(this, 'PIN_RST', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
+    Arduino.definitions_['include_MFRC522'] = '#include <MFRC522.h>';
+    Arduino.definitions_['var_declare_' + text_rfid_name] = 'MFRC522 ' + text_rfid_name + '(' + value_PIN_SDA + ', ' + value_PIN_RST + ');';
+    Arduino.setups_['setup_spi'] = 'SPI.begin();';
+    Arduino.setups_['setup_mfc522_' + text_rfid_name] = text_rfid_name + '.PCD_Init();';
     var code = '';
     return code;
 };
@@ -375,8 +374,8 @@ export const MFRC522_init = function () {
 //RFID侦测到信号
 export const MFRC522_IsNewCard = function () {
     var text_rfid_name = this.getFieldValue('rfid_name');
-    var statements_DO = Blockly.Arduino.statementToCode(this, 'DO');
-    Blockly.Arduino.definitions_['function_MFRC522_IsNewCard'] = 'boolean MFRC522_IsNewCard(MFRC522 *_name){\n'
+    var statements_DO = Arduino.statementToCode(this, 'DO');
+    Arduino.definitions_['function_MFRC522_IsNewCard'] = 'boolean MFRC522_IsNewCard(MFRC522 *_name){\n'
         + '  if(!_name->PICC_IsNewCardPresent())\n'
         + '    return false;\n'
         + '  if(!_name->PICC_ReadCardSerial())\n'
@@ -394,7 +393,7 @@ export const MFRC522_IsNewCard = function () {
 //RFID读取卡号
 export const MFRC522_ReadCardUID = function () {
     var text_rfid_name = this.getFieldValue('rfid_name');
-    Blockly.Arduino.definitions_['function_MFRC522_ReadCardUID'] = 'String MFRC522_ReadCardUID(MFRC522 *_name){\n'
+    Arduino.definitions_['function_MFRC522_ReadCardUID'] = 'String MFRC522_ReadCardUID(MFRC522 *_name){\n'
         + '  String _CardUID = "";\n'
         + '  for (byte _i = 0; _i < _name->uid.size; _i++){\n'
         + '    if(_name->uid.uidByte[_i] < 0x10)\n'
@@ -404,16 +403,16 @@ export const MFRC522_ReadCardUID = function () {
         + '  return _CardUID;\n'
         + '}\n';
     var code = 'MFRC522_ReadCardUID(&' + text_rfid_name + ')';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //RFID写卡
 export const MFRC522_WriteCard = function () {
     var text_rfid_name = this.getFieldValue('rfid_name');
-    var value_block = Blockly.Arduino.valueToCode(this, 'block', Blockly.Arduino.ORDER_ATOMIC);
-    var value_buffer = Blockly.Arduino.valueToCode(this, 'buffer', Blockly.Arduino.ORDER_ATOMIC);
-    var value_length = Blockly.Arduino.valueToCode(this, 'length', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['function_MFRC522_WriteCard'] = 'boolean MFRC522_WriteCard(MFRC522 *_name, byte _block, byte *_buffer, byte _length){\n'
+    var value_block = Arduino.valueToCode(this, 'block', Arduino.ORDER_ATOMIC);
+    var value_buffer = Arduino.valueToCode(this, 'buffer', Arduino.ORDER_ATOMIC);
+    var value_length = Arduino.valueToCode(this, 'length', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['function_MFRC522_WriteCard'] = 'boolean MFRC522_WriteCard(MFRC522 *_name, byte _block, byte *_buffer, byte _length){\n'
         + '  MFRC522::MIFARE_Key _key;\n'
         + '  for(byte i = 0; i < 6; i++)\n'
         + '    _key.keyByte[i] = 0xFF;\n'
@@ -438,7 +437,7 @@ export const MFRC522_WriteCard = function () {
         + '  }\n'
         + '  return true;\n'
         + '}\n'
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     var code = 'MFRC522_WriteCard(&' + text_rfid_name + ', ' + value_block + ', ' + value_buffer + ', ' + value_length + ');\n';
     return code;
 };
@@ -446,10 +445,10 @@ export const MFRC522_WriteCard = function () {
 //RFID读卡
 export const MFRC522_ReadCard = function () {
     var text_rfid_name = this.getFieldValue('rfid_name');
-    var value_block = Blockly.Arduino.valueToCode(this, 'block', Blockly.Arduino.ORDER_ATOMIC);
-    var value_buffer = Blockly.Arduino.valueToCode(this, 'buffer', Blockly.Arduino.ORDER_ATOMIC);
-    var value_length = Blockly.Arduino.valueToCode(this, 'length', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['function_MFRC522_ReadCard'] = 'boolean MFRC522_ReadCard(MFRC522 *_name, byte _block, byte *_buffer, byte _length){\n'
+    var value_block = Arduino.valueToCode(this, 'block', Arduino.ORDER_ATOMIC);
+    var value_buffer = Arduino.valueToCode(this, 'buffer', Arduino.ORDER_ATOMIC);
+    var value_length = Arduino.valueToCode(this, 'length', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['function_MFRC522_ReadCard'] = 'boolean MFRC522_ReadCard(MFRC522 *_name, byte _block, byte *_buffer, byte _length){\n'
         + '  MFRC522::MIFARE_Key _key;\n'
         + '  for(byte i = 0; i < 6; i++)\n'
         + '    _key.keyByte[i] = 0xFF;\n'
@@ -491,33 +490,33 @@ export const MFRC522_ReadCard = function () {
         + '  }\n'
         + '  return true;\n'
         + '}\n'
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     var code = 'MFRC522_ReadCard(&' + text_rfid_name + ', ' + value_block + ', ' + value_buffer + ', ' + value_length + ');\n';
     return code;
 };
 
 //IIC主机初始化
 export const i2c_master_Init = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
     var code = '';
     return code;
 };
 
 //IIC从机初始化
 export const i2c_slave_Init = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    var value_i2c_address = Blockly.Arduino.valueToCode(this, 'i2c_address', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.setups_['setup_i2c'] = 'Wire.begin(' + value_i2c_address + ');';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    var value_i2c_address = Arduino.valueToCode(this, 'i2c_address', Arduino.ORDER_ATOMIC);
+    Arduino.setups_['setup_i2c'] = 'Wire.begin(' + value_i2c_address + ');';
     var code = '';
     return code;
 };
 
 //IIC发送数据
 export const i2c_begin_end_transmission = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    var value_i2c_address = Blockly.Arduino.valueToCode(this, 'i2c_address', Blockly.Arduino.ORDER_ATOMIC);
-    var statements_transmission_data = Blockly.Arduino.statementToCode(this, 'transmission_data');
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    var value_i2c_address = Arduino.valueToCode(this, 'i2c_address', Arduino.ORDER_ATOMIC);
+    var statements_transmission_data = Arduino.statementToCode(this, 'transmission_data');
     var code = 'Wire.beginTransmission(' + value_i2c_address + ');\n'
         + statements_transmission_data
         + 'Wire.endTransmission();\n';
@@ -526,23 +525,23 @@ export const i2c_begin_end_transmission = function () {
 
 //IIC写入数据
 export const i2c_write = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    var value_i2c_write_data = Blockly.Arduino.valueToCode(this, 'i2c_write_data', Blockly.Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    var value_i2c_write_data = Arduino.valueToCode(this, 'i2c_write_data', Arduino.ORDER_ATOMIC);
     var code = 'Wire.write(' + value_i2c_write_data + ');\n';
     return code;
 };
 
 export const i2c_slave_write_array = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    var array = Blockly.Arduino.valueToCode(this, 'array', Blockly.Arduino.ORDER_ATOMIC);
-    var length = Blockly.Arduino.valueToCode(this, 'length', Blockly.Arduino.ORDER_ATOMIC) || '1';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    var array = Arduino.valueToCode(this, 'array', Arduino.ORDER_ATOMIC);
+    var length = Arduino.valueToCode(this, 'length', Arduino.ORDER_ATOMIC) || '1';
     var code = "Wire.write(" + array + "," + length + ");\n";
     return code;
 };
 
 export const i2c_available = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
     var workspace = this.workspace;
     var blocks = workspace.getAllBlocks();
     var y = 0;
@@ -551,32 +550,32 @@ export const i2c_available = function () {
             break;
     }
     if (y == blocks.length)
-        Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+        Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
     var code = "Wire.available()";
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //从机接收字节数
 export const i2c_howmany = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
     var code = "howMany";
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //IIC读取数据
 export const i2c_read = function () {
     var code = "Wire.read()";
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 //SPI
 export const spi_transfer = function () {
-    Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
-    Blockly.Arduino.setups_['setup_spi'] = 'SPI.begin();';
-    var pin = Blockly.Arduino.valueToCode(this, 'pin', Blockly.Arduino.ORDER_ATOMIC);
-    var value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.setups_['setup_output_' + pin] = 'pinMode(' + pin + ', OUTPUT);';
+    Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
+    Arduino.setups_['setup_spi'] = 'SPI.begin();';
+    var pin = Arduino.valueToCode(this, 'pin', Arduino.ORDER_ATOMIC);
+    var value = Arduino.valueToCode(this, 'value', Arduino.ORDER_ATOMIC);
+    Arduino.setups_['setup_output_' + pin] = 'pinMode(' + pin + ', OUTPUT);';
     var code = "digitalWrite(" + pin + ", LOW);\n";
     code += "SPI.transfer(" + value + ");\n";
     code += "digitalWrite(" + pin + ", HIGH);\n";
@@ -585,8 +584,8 @@ export const spi_transfer = function () {
 
 //SPI 初始化从机
 export const spi_begin_slave = function () {
-    Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
-    Blockly.Arduino.setups_['setup_spi'] = 'pinMode(12, OUTPUT);'
+    Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
+    Arduino.setups_['setup_spi'] = 'pinMode(12, OUTPUT);'
         + '\n  SPCR |= _BV(SPE);';
     var code = '';
     return code;
@@ -594,11 +593,11 @@ export const spi_begin_slave = function () {
 
 //寄存器读写
 export const i2c_master_writerReg = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    var device = Blockly.Arduino.valueToCode(this, 'device', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var regadd = Blockly.Arduino.valueToCode(this, 'regadd', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var value = Blockly.Arduino.valueToCode(this, 'value', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    var device = Arduino.valueToCode(this, 'device', Arduino.ORDER_ATOMIC) || '0';
+    var regadd = Arduino.valueToCode(this, 'regadd', Arduino.ORDER_ATOMIC) || '0';
+    var value = Arduino.valueToCode(this, 'value', Arduino.ORDER_ATOMIC) || '0';
     var code = "Wire.beginTransmission(" + device + ");\n";
     code += "Wire.write(" + regadd + ");\n";
     code += "Wire.write(" + value + ");\n";
@@ -607,11 +606,11 @@ export const i2c_master_writerReg = function () {
 };
 
 export const i2c_master_readerReg = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
-    Blockly.Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    var device = Blockly.Arduino.valueToCode(this, 'device', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var regadd = Blockly.Arduino.valueToCode(this, 'regadd', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var bytes = Blockly.Arduino.valueToCode(this, 'bytes', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
+    var device = Arduino.valueToCode(this, 'device', Arduino.ORDER_ATOMIC) || '0';
+    var regadd = Arduino.valueToCode(this, 'regadd', Arduino.ORDER_ATOMIC) || '0';
+    var bytes = Arduino.valueToCode(this, 'bytes', Arduino.ORDER_ATOMIC) || '0';
     var code = "Wire.beginTransmission(" + device + ");\n";
     code += "Wire.write(" + regadd + ");\n";
     code += "Wire.requestFrom(" + device + ", " + bytes + ");\n";
@@ -620,50 +619,50 @@ export const i2c_master_readerReg = function () {
 };
 
 export const i2c_slave_onreceive = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
-    var value_onReceive_length = Blockly.Arduino.valueToCode(this, 'onReceive_length', Blockly.Arduino.ORDER_ATOMIC);
-    var statements_i2c_onReceive_data = Blockly.Arduino.statementToCode(this, 'DO');
-    Blockly.Arduino.definitions_['function_receiveEvent'] = 'void receiveEvent(int ' + value_onReceive_length + ')'
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    var value_onReceive_length = Arduino.valueToCode(this, 'onReceive_length', Arduino.ORDER_ATOMIC);
+    var statements_i2c_onReceive_data = Arduino.statementToCode(this, 'DO');
+    Arduino.definitions_['function_receiveEvent'] = 'void receiveEvent(int ' + value_onReceive_length + ')'
         + '\n{'
         + '  ' + statements_i2c_onReceive_data
         + '\n}\n'
-    Blockly.Arduino.setups_['setup_i2c_receiveEvent'] = 'Wire.onReceive(receiveEvent);';
+    Arduino.setups_['setup_i2c_receiveEvent'] = 'Wire.onReceive(receiveEvent);';
     var code = '';
     return code;
 }
 
 export const i2c_slave_onrequest = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
-    Blockly.Arduino.setups_['setup_i2c_slave'] = 'Wire.setClock(400000);';
-    Blockly.Arduino.setups_['setup_i2c_onRequest'] = 'Wire.onRequest(i2cRequestEvent);';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    Arduino.setups_['setup_i2c_slave'] = 'Wire.setClock(400000);';
+    Arduino.setups_['setup_i2c_onRequest'] = 'Wire.onRequest(i2cRequestEvent);';
     var funcName = 'i2cRequestEvent';
-    var branch = Blockly.Arduino.statementToCode(this, 'DO');
+    var branch = Arduino.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
-    Blockly.Arduino.definitions_[funcName] = code2;
+    Arduino.definitions_[funcName] = code2;
     return '';
 }
 
 export const i2c_master_reader = function () {
-    Blockly.Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
-    var device = Blockly.Arduino.valueToCode(this, 'device', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    var bytes = Blockly.Arduino.valueToCode(this, 'bytes', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    Arduino.definitions_['include_Wire'] = '#include <Wire.h>\n';
+    var device = Arduino.valueToCode(this, 'device', Arduino.ORDER_ATOMIC) || '0';
+    var bytes = Arduino.valueToCode(this, 'bytes', Arduino.ORDER_ATOMIC) || '0';
     var code = "Wire.requestFrom(" + device + ", " + bytes + ");\n";
     return code;
 };
 
 export const spi_begin_master = function () {
-    var value_spi_slave_pin = Blockly.Arduino.valueToCode(this, 'spi_slave_pin', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
-    Blockly.Arduino.setups_['setup_spi'] = 'SPI.begin();';
-    Blockly.Arduino.setups_['setup_spi_divider'] = 'SPI.setClockDivider(SPI_CLOCK_DIV8);';
-    Blockly.Arduino.setups_['setup_spi_pin_' + value_spi_slave_pin] = 'digitalWrite(' + value_spi_slave_pin + ', HIGH);';
+    var value_spi_slave_pin = Arduino.valueToCode(this, 'spi_slave_pin', Arduino.ORDER_ATOMIC);
+    Arduino.definitions_['include_SPI'] = '#include <SPI.h>';
+    Arduino.setups_['setup_spi'] = 'SPI.begin();';
+    Arduino.setups_['setup_spi_divider'] = 'SPI.setClockDivider(SPI_CLOCK_DIV8);';
+    Arduino.setups_['setup_spi_pin_' + value_spi_slave_pin] = 'digitalWrite(' + value_spi_slave_pin + ', HIGH);';
     var code = '';
     return code;
 };
 
 export const spi_transfer_Init = function () {
-    var value_slave_pin = Blockly.Arduino.valueToCode(this, 'slave_pin', Blockly.Arduino.ORDER_ATOMIC);
-    var statements_transfer_data = Blockly.Arduino.statementToCode(this, 'transfer_data');
+    var value_slave_pin = Arduino.valueToCode(this, 'slave_pin', Arduino.ORDER_ATOMIC);
+    var statements_transfer_data = Arduino.statementToCode(this, 'transfer_data');
     var code = 'digitalWrite(' + value_slave_pin + ', LOW);\n'
         + statements_transfer_data
         + 'digitalWrite(' + value_slave_pin + ', HIGH);\n';
@@ -671,34 +670,34 @@ export const spi_transfer_Init = function () {
 };
 
 export const spi_transfer_1 = function () {
-    var value_transfer_data = Blockly.Arduino.valueToCode(this, 'transfer_data', Blockly.Arduino.ORDER_ATOMIC);
+    var value_transfer_data = Arduino.valueToCode(this, 'transfer_data', Arduino.ORDER_ATOMIC);
     var code = 'SPI.transfer(' + value_transfer_data + ');\n';
     return code;
 };
 
 export const spi_transfer_2 = function () {
-    var value_transfer_data = Blockly.Arduino.valueToCode(this, 'transfer_data', Blockly.Arduino.ORDER_ATOMIC);
+    var value_transfer_data = Arduino.valueToCode(this, 'transfer_data', Arduino.ORDER_ATOMIC);
     var code = 'SPI.transfer(' + value_transfer_data + ')';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };
 
 export const spi_slave_interrupt = function () {
-    var statements_slave_interrupt_data = Blockly.Arduino.statementToCode(this, 'slave_interrupt_data');
-    Blockly.Arduino.definitions_['function_ISR'] = 'ISR(SPI_STC_vect)'
+    var statements_slave_interrupt_data = Arduino.statementToCode(this, 'slave_interrupt_data');
+    Arduino.definitions_['function_ISR'] = 'ISR(SPI_STC_vect)'
         + '\n{'
         + '\n' + statements_slave_interrupt_data
         + '\n}\n'
-    Blockly.Arduino.setups_['setup_spi_interrupt'] = 'SPI.attachInterrupt();';
+    Arduino.setups_['setup_spi_interrupt'] = 'SPI.attachInterrupt();';
     var code = '';
     return code;
 };
 
 export const spi_slave_receive = function () {
-    Blockly.Arduino.definitions_['function_SPI_SlaveReceive'] = 'char SPI_SlaveReceive()'
+    Arduino.definitions_['function_SPI_SlaveReceive'] = 'char SPI_SlaveReceive()'
         + '\n{'
         + '\n  while(!(SPSR&(1<<SPIF)));'
         + '\n  return SPDR;'
         + '\n}\n'
     var code = 'SPI_SlaveReceive()';
-    return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Arduino.ORDER_ATOMIC];
 };

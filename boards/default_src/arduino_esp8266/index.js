@@ -1,5 +1,8 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
+import Variables from '../arduino_common/others/variables';
+import Procedures from '../arduino_common/others/procedures';
+import { Arduino } from '../arduino_common/arduino_generator';
 
 import pins from './pins/pins';
 
@@ -59,6 +62,11 @@ import Esp8266ZhHant from './language/zh-hant';
 import Esp8266En from './language/en';
 
 import '../arduino_avr/css/color.css';
+
+Blockly.Arduino = Arduino;
+
+Object.assign(Blockly.Variables, Variables);
+Object.assign(Blockly.Procedures, Procedures);
 
 Profile.default = {};
 Object.assign(Profile, pins);

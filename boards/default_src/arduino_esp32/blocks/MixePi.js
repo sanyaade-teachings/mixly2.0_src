@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['DISPLAY_HUE'] = 180;
+const DISPLAY_HUE = 180;
 
 var MIXEPI_ADXL345_ACTION = [
     [Blockly.Msg.HANDBIT_FORWARD, "accel.getAcceleration().x>-4.7&&accel.getAcceleration().x<0&&accel.getAcceleration().y<1&&accel.getAcceleration().y>-1&&accel.getAcceleration().z<-8&&accel.getAcceleration().z>-9.8"],
@@ -18,7 +18,7 @@ var BRIGHTNESS_SELECT = [["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "
 
 export const brightness_select = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldDropdown(BRIGHTNESS_SELECT), 'STAT');
         this.setOutput(true, Number);

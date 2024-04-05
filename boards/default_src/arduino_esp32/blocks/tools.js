@@ -1,5 +1,6 @@
 import * as Blockly from 'blockly/core';
 
+const TOOLS_HUE = "#555555";
 let toolsBlocks = {};
 let toolsGenerators = {};
 
@@ -69,7 +70,7 @@ for (let i in BOARDS_PIN_DEF) {
         init: function () {
             this.appendDummyInput()
                 .appendField(new Blockly.FieldImage(pinDef.path, pinDef.width, pinDef.height, "*"));
-            this.setColour(Blockly.Msg['TOOLS_HUE']);
+            this.setColour(TOOLS_HUE);
             this.setTooltip(pinDef.tooltip);
             this.setHelpUrl(pinDef.helpUrl);
         }

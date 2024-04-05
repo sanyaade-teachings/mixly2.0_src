@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['TEXTS_HUE'] = 160;
+const TEXTS_HUE = 160;
 
 export const text = {
     /**
@@ -9,7 +9,7 @@ export const text = {
      */
     init: function () {
         //this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendDummyInput()
             .appendField(this.newQuote_(true))
             .appendField(new Blockly.FieldTextInput(''), 'TEXT')
@@ -56,7 +56,7 @@ Blockly.FieldTextInput.char_validator = function (text) {
 
 export const text_char = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendDummyInput()
             .appendField(this.newQuote_(true))
             .appendField(new Blockly.FieldTextInput('', Blockly.FieldTextInput.char_validator), 'TEXT')
@@ -78,7 +78,7 @@ export const text_char = {
 
 export const text_join = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput('A')
             .setCheck([String, Number]);
         this.appendValueInput('B')
@@ -97,7 +97,7 @@ export const text_to_number = {
             [Blockly.Msg.MIXLY_TO_INT, 'toInt'],
             [Blockly.Msg.MIXLY_TO_FLOAT, 'toFloat']
         ];
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput('VAR')
             .setCheck([String, Number])
             .appendField(new Blockly.FieldDropdown(TO_INT_FLOAT), 'TOWHAT');
@@ -116,7 +116,7 @@ export const text_to_number = {
 
 export const ascii_to_char = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput('VAR')
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_TOCHAR);
@@ -127,7 +127,7 @@ export const ascii_to_char = {
 
 export const char_to_ascii = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_TOASCII)
             .appendField("'")
@@ -146,7 +146,7 @@ export const number_to_text = {
             [Blockly.Msg.MATH_DEC, 'DEC'],
             [Blockly.Msg.MATH_HEX, 'HEX']
         ];
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput('VAR')
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_TOSTRING)
@@ -158,7 +158,7 @@ export const number_to_text = {
 
 export const number_to_text_ = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput('VAR')
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_TOSTRING);
@@ -169,7 +169,7 @@ export const number_to_text_ = {
 
 export const text_length = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput("VAR")
             .appendField(Blockly.Msg.MIXLY_LENGTH)
             .setCheck(String);
@@ -180,7 +180,7 @@ export const text_length = {
 
 export const text_char_at = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput("VAR")
             .setCheck(String);
         this.appendValueInput("AT")
@@ -204,7 +204,7 @@ export const text_equals_starts_ends = {
             [Blockly.Msg.MIXLY_STARTSWITH, 'startsWith'],
             [Blockly.Msg.MIXLY_ENDSWITH, 'endsWith']
         ];
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput("STR1")
             .setCheck([String, Number]);
         this.appendValueInput("STR2")
@@ -227,7 +227,7 @@ export const text_equals_starts_ends = {
 
 export const text_compareTo = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput("STR1")
             .setCheck([String, Number]);
         this.appendValueInput("STR2")
@@ -241,7 +241,7 @@ export const text_compareTo = {
 //小数获取有效位
 export const decimal_places = {
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendValueInput("numeral")
             .setCheck(null)
             .appendField(Blockly.Msg.LANG_MATH_FLOAT);
@@ -269,7 +269,7 @@ export const substring = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.LANG_MATH_STRING);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.SUBSTRING_HELP);
         this.setHelpUrl("");
     }
@@ -285,7 +285,7 @@ export const letter_conversion = {
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.CAPITAL, ".toUpperCase()"], [Blockly.Msg.LOWER_CASE, ".toLowerCase()"]]), "type");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.LETTER_CONVERSION_HELP);
         this.setHelpUrl("");
     }
@@ -306,7 +306,7 @@ export const data_replacement = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.DATA_REPLACEMENT_HELP);
         this.setHelpUrl("");
     }
@@ -322,7 +322,7 @@ export const eliminate = {
             .appendField(Blockly.Msg.ELIMINATE_NON_VISUAL_CHARACTERS);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.ELIMINATE_HELP);
         this.setHelpUrl("");
     }
@@ -340,7 +340,7 @@ export const first_and_last = {
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.STARTSWITH, ".startsWith"], [Blockly.Msg.ENDSWITH, ".endsWith"]]), "type");
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.FIRST_AND_LAST_HELP);
         this.setHelpUrl("");
     }
@@ -354,7 +354,7 @@ export const type_conversion = {
             .appendField(Blockly.Msg.DATA_TYPE_CONVERSION)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.LANG_MATH_STRING, "String"], [Blockly.Msg.LANG_MATH_CHAR, "char"], [Blockly.Msg.LANG_MATH_BYTE, "byte"], [Blockly.Msg.LANG_MATH_INT, "int"], [Blockly.Msg.LANG_MATH_LONG, "long"], [Blockly.Msg.LANG_MATH_FLOAT, "float"], [Blockly.Msg.LANG_MATH_WORD, "word"]]), "type");
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip(Blockly.Msg.TYPE_CONVERSION_HELP);
         this.setHelpUrl("");
     }
@@ -366,7 +366,7 @@ export const create_with_item = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LISTS_CREATE_WITH_ITEM_TITLE);
         this.setPreviousStatement(true);
@@ -382,7 +382,7 @@ export const create_with_container = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.HTML_TEXT);
         this.appendStatementInput('STACK');
@@ -417,7 +417,7 @@ export const text_join2 = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_TEXT_JOIN + Blockly.Msg.MIXLY_MICROBIT_TYPE_STRING);
         this.itemCount_ = 3;
@@ -561,7 +561,7 @@ export const String_to_Long_Integer = {
             .appendField(Blockly.Msg.MIXLY_MICROBIT_TYPE_STRING + Blockly.Msg.A_TO_B + Blockly.Msg.LANG_MATH_LONG)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MATH_HEX, "16"], [Blockly.Msg.MATH_DEC, "10"], [Blockly.Msg.MATH_OCT, "8"], [Blockly.Msg.MATH_BIN, "2"], [Blockly.Msg.blynk_IOT_AUTO, "0"]]), "type");
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip("");
         this.setHelpUrl("https://blog.csdn.net/lizhengze1117/article/details/103318662?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-10.base&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-10.base");
     }

@@ -1,9 +1,9 @@
-import * as Blockly from 'blockly/core';
+import { Arduino } from '../../arduino_common/arduino_generator';
 
 //HSC025A 蓝牙MP3指令
 export const hsc025a_instruction = function () {
     var instruction = this.getFieldValue('instruction');
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     var code = "";
     if (instruction == 1) {
         code = '  Serial.write(0x7E);\n  Serial.write(0x02);\n  Serial.write(0x00);\n  Serial.write(0xEF);\n';
@@ -79,16 +79,16 @@ export const hsc025a_instruction = function () {
 
 //指定播放歌曲
 export const hsc025a_play = function () {
-    var num = Blockly.Arduino.valueToCode(this, 'num', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    var num = Arduino.valueToCode(this, 'num', Arduino.ORDER_ATOMIC);
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     var code = '  Serial.write(0x7E);\n  Serial.write(0x04);\n  Serial.write(0x40);\n  Serial.write(0x00);\n  Serial.write(' + num + ');\n  Serial.write(0xEF);\n';
     return code;
 };
 
 //音量设置
 export const hsc025a_volume = function () {
-    var num = Blockly.Arduino.valueToCode(this, 'num', Blockly.Arduino.ORDER_ATOMIC);
-    Blockly.Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    var num = Arduino.valueToCode(this, 'num', Arduino.ORDER_ATOMIC);
+    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     var code = '  Serial.write(0x7E);\n  Serial.write(0x03);\n  Serial.write(0x0F);\n  Serial.write(' + num + ');\n  Serial.write(0xEF);\n';
     return code;
 };

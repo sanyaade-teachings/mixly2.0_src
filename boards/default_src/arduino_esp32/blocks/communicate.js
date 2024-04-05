@@ -1,10 +1,10 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['COMMUNICATE_HUE'] = 140;
+const COMMUNICATE_HUE = 140;
 
 export const serialBT_Init = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField(Blockly.Msg.MIXLY_SERIALBT_INIT)
             .setCheck(String);
@@ -16,7 +16,7 @@ export const serialBT_Init = {
 };
 export const serialBT_available = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SERIALBT_AVAILABLE);
         this.setOutput(true, Boolean);
@@ -26,7 +26,7 @@ export const serialBT_available = {
 
 export const serialBT_read = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SERIALBT_READ);
         this.setOutput(true, Boolean);
@@ -36,7 +36,7 @@ export const serialBT_read = {
 };
 export const serialBT_write = {
     init: function () {
-        this.setColour(Blockly.Msg['COMMUNICATE_HUE']);
+        this.setColour(COMMUNICATE_HUE);
         this.appendValueInput("CONTENT", String)
             .appendField(Blockly.Msg.MIXLY_SERIALBT_WRITE);
         this.setPreviousStatement(true, null);

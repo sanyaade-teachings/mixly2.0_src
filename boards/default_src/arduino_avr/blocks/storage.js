@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['STORAGE_HUE'] = 0;
+const STORAGE_HUE = 0;
 
 export const store_sd_init = {
     init: function () {
@@ -29,7 +29,7 @@ export const store_sd_init = {
             .appendField(Blockly.Msg.MIXLY_PIN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setInputsInline(false);
         this.setTooltip();
         this.setHelpUrl('');
@@ -63,7 +63,7 @@ export const store_sd_init_32 = {
             .appendField(Blockly.Msg.MIXLY_PIN);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setInputsInline(false);
         this.setTooltip();
         this.setHelpUrl('');
@@ -75,7 +75,7 @@ export const sd_card_type = {
         this.appendDummyInput()
             .appendField("SD" + Blockly.Msg.MIXLY_TYPE);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -88,7 +88,7 @@ export const sd_card_root_files = {
         this.setOutput(false, null);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -106,7 +106,7 @@ var volume_TYPE = [
 
 export const sd_volume = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendDummyInput()
             .appendField("SD")
             .appendField(new Blockly.FieldDropdown(volume_TYPE), 'volume_TYPE');
@@ -123,7 +123,7 @@ export const sd_exist = {
             .appendField(this.newQuote_(false))
             .appendField(Blockly.Msg.MIXLY_SD_FILE_Exist);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     },
@@ -146,7 +146,7 @@ export const sd_DelFile = {
             .appendField(this.newQuote_(false));
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     },
@@ -168,7 +168,7 @@ export const sd_read = {
         this.appendDummyInput()
             .appendField(this.newQuote_(false));
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     },
@@ -184,7 +184,7 @@ export const sd_read = {
 
 export const store_sd_write = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("FILE")
             .appendField(Blockly.Msg.MIXLY_WRITE_SD_FILE)
             .appendField(this.newQuote_(true));
@@ -214,7 +214,7 @@ export const store_sd_write = {
 
 export const store_eeprom_write_long = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_EEPROM_WRITE_LONG);
@@ -230,7 +230,7 @@ export const store_eeprom_write_long = {
 
 export const store_eeprom_read_long = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_EEPROM_READ_LONG);
@@ -242,7 +242,7 @@ export const store_eeprom_read_long = {
 
 export const store_eeprom_write_byte = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_EEPROM_WRITE_BYTE);
@@ -258,7 +258,7 @@ export const store_eeprom_write_byte = {
 
 export const store_eeprom_read_byte = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("ADDRESS", Number)
             .setCheck(Number)
             .appendField(Blockly.Msg.MIXLY_EEPROM_READ_BYTE);
@@ -269,7 +269,7 @@ export const store_eeprom_read_byte = {
 
 export const store_eeprom_put = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("ADDRESS")
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_ESP32_WRITE)
@@ -288,7 +288,7 @@ export const store_eeprom_put = {
 
 export const store_eeprom_get = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("ADDRESS")
             .setCheck(null)
             .appendField(Blockly.Msg.MIXLY_SERIAL_READ)
@@ -318,7 +318,7 @@ export const simple_spiffs_read = {
         this.appendDummyInput()
             .appendField(this.newQuote_(false));
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     },
@@ -334,7 +334,7 @@ export const simple_spiffs_read = {
 
 export const simple_spiffs_store_spiffs_write = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.appendValueInput("FILE")
             .appendField(Blockly.Msg.MIXLY_WRITE_SPIFFS_FILE)
             .appendField(this.newQuote_(true));
@@ -373,7 +373,7 @@ export const simple_spiffs_DelFile = {
             .appendField(this.newQuote_(false));
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(STORAGE_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     },

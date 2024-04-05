@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['LOGIC_HUE'] = 210;
+const LOGIC_HUE = 210;
 
 export const logic_compare = {
     /**
@@ -24,7 +24,7 @@ export const logic_compare = {
             ['\u2265', 'GTE']
         ];
         //this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
-        this.setColour(Blockly.Msg['LOGIC_HUE']);
+        this.setColour(LOGIC_HUE);
         this.setOutput(true, Boolean);
         this.appendValueInput('A');
         this.appendValueInput('B')
@@ -59,7 +59,7 @@ export const logic_operation = {
             [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']
         ];
         //this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
-        this.setColour(Blockly.Msg['LOGIC_HUE']);
+        this.setColour(LOGIC_HUE);
         this.setOutput(true, Boolean);
         this.appendValueInput('A')
             .setCheck([Boolean, Number]);
@@ -87,7 +87,7 @@ export const logic_negate = {
      */
     init: function () {
         //this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
-        this.setColour(Blockly.Msg['LOGIC_HUE']);
+        this.setColour(LOGIC_HUE);
         this.setOutput(true, Boolean);
         this.appendValueInput('BOOL')
             .setCheck([Number, Boolean])
@@ -110,7 +110,7 @@ export const logic_boolean = {
             [Blockly.Msg.LOGIC_BOOLEAN_FALSE, 'FALSE']
         ];
         //this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL);
-        this.setColour(Blockly.Msg['LOGIC_HUE']);
+        this.setColour(LOGIC_HUE);
         this.setOutput(true, Boolean);
         this.appendDummyInput()
             .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
@@ -125,7 +125,7 @@ export const logic_null = {
      */
     init: function () {
         //this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL);
-        this.setColour(Blockly.Msg['LOGIC_HUE']);
+        this.setColour(LOGIC_HUE);
         this.setOutput(true);
         this.appendDummyInput()
             .appendField(Blockly.Msg.LOGIC_NULL);
@@ -136,7 +136,7 @@ export const logic_null = {
 
 export const logic_true_or_false = {
     init: function () {
-        this.setColour(Blockly.Msg['LOGIC_HUE']);
+        this.setColour(LOGIC_HUE);
         this.appendValueInput('A');
         this.appendValueInput('B')
             .appendField(Blockly.Msg.LOGIC_TERNARY_IF_TRUE);

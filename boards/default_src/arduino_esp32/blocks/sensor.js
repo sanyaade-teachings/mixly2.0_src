@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['SENSOR_HUE'] = 40;
+const SENSOR_HUE = 40;
 
 //ESP32片内霍尔传感器值
 export const ESP32_hallRead = {
@@ -9,7 +9,7 @@ export const ESP32_hallRead = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ESP32_HALL);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -21,7 +21,7 @@ export const ESP32_temprature = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.ESP32_TEMP);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.setTooltip();
         this.setHelpUrl("");
     }
@@ -52,7 +52,7 @@ export const ESP_TCS34725_Get_RGB = {
             [Blockly.Msg.COLOUR_RGB_GREEN, "g"],
             [Blockly.Msg.COLOUR_RGB_BLUE, "b"],
         ];
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.TCS34725_Get_RGB)
             .appendField(new Blockly.FieldDropdown(TCS34725_COLOR), "TCS34725_COLOR");

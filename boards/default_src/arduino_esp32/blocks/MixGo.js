@@ -1,12 +1,13 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['ACTUATOR_HUE'] = 100;
+const ACTUATOR_HUE = 100;
+const DISPLAY_HUE = 180;
 
 //执行器_点阵屏显示_字符显示
 export const HT16K33_TEXT = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MAX7219_PUTSTR);
         this.appendValueInput("TEXT", String)
@@ -27,7 +28,7 @@ export const HT16K33_POS = {
             [Blockly.Msg.MIXLY_4DIGITDISPLAY_ON, "LED_ON"],
             [Blockly.Msg.MIXLY_4DIGITDISPLAY_OFF, "LED_OFF"]
         ];
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
         this.appendValueInput('XVALUE')
@@ -52,7 +53,7 @@ export const HT16K33_POS = {
 //执行器_点阵屏显示_显示图案
 export const HT16K33_DisplayChar = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
         this.appendValueInput("Chars")
@@ -68,7 +69,7 @@ export const HT16K33_DisplayChar = {
 //执行器_点阵屏显示_图案数组
 export const HT16K33_LedArray = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ARRAYVAR)
             .appendField(new Blockly.FieldTextInput("LedArray1"), "VAR");
@@ -217,7 +218,7 @@ export const HT16K33_LedArray = {
 //物联网_点阵屏_清除显示
 export const HT16K33_Displayclear = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
         this.appendDummyInput("")
@@ -275,7 +276,7 @@ export const HT16K33_show_image = {
             ]), "img_");
         this.setOutput(true);
         this.setTooltip('');
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setTooltip(Blockly.Msg.OLED_BITMAP_OR_STRING);
         this.setHelpUrl('');
     }
@@ -283,7 +284,7 @@ export const HT16K33_show_image = {
 
 export const HT16K33_blink_rate = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
         this.appendValueInput('x')
@@ -298,7 +299,7 @@ export const HT16K33_blink_rate = {
 
 export const HT16K33_brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MICROBIT_monitor);
         this.appendValueInput("Brightness")
@@ -388,7 +389,7 @@ export const sensor_mixgo_pin_near = {
 };
 export const mixGo_led = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETTING)
             .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
@@ -404,7 +405,7 @@ export const mixGo_led = {
 
 export const mixGo_led_brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETTING)
             .appendField(Blockly.Msg.MIXLY_BUILDIN_LED)
@@ -420,7 +421,7 @@ export const mixGo_led_brightness = {
 
 export const MixGo_rgb_rainbow1 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("WAIT")
@@ -440,7 +441,7 @@ var DISPLAY_RAINBOW_TYPE = [
 
 export const MixGo_rgb_rainbow3 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -457,7 +458,7 @@ export const MixGo_rgb_rainbow3 = {
 
 export const MixGo_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("_LED_")
@@ -477,7 +478,7 @@ export const MixGo_rgb = {
 
 export const MixGo_rgb2 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -498,7 +499,7 @@ export const MixGo_rgb2 = {
 
 export const MixGo_rgb_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("Brightness")
@@ -513,7 +514,7 @@ export const MixGo_rgb_Brightness = {
 };
 export const MixGo_rgb_show = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB_SHOW)
         this.setPreviousStatement(true, null);

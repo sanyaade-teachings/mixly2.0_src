@@ -1,11 +1,11 @@
 import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
-Blockly.Msg['HANDBIT_HUE'] = 65;
+const HANDBIT_HUE = 65;
 
 export const handbit_button_is_pressed = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON);
         this.appendDummyInput("")
@@ -20,7 +20,7 @@ export const handbit_button_is_pressed = {
 
 export const handbit_light = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
         this.setOutput(true, Number);
@@ -31,7 +31,7 @@ export const handbit_light = {
 
 export const handbit_sound = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
         this.setOutput(true, Number);
@@ -42,7 +42,7 @@ export const handbit_sound = {
 
 export const inout_touchRead = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH + Blockly.Msg.MIXLY_PIN)
             .setCheck(Number);
@@ -91,7 +91,7 @@ var HANDBIT_MSA300_ACTION = [
 //传感器_重力感应
 export const handbit_MSA300 = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MixGo_MPU9250);
         this.appendDummyInput("")
@@ -106,7 +106,7 @@ export const handbit_MSA300 = {
 
 export const handbit_MSA300_action = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.Handbit);
         this.appendDummyInput("")

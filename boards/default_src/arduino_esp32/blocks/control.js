@@ -1,10 +1,10 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['LOOPS_HUE'] = 120;
+const LOOPS_HUE = 120;
 
 export const controls_hw_timer = {
     init: function () {
-        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_HW_TIMER)
             .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "TIMER_NUM");
@@ -41,7 +41,7 @@ export const controls_runnig_core = {
         this.appendStatementInput("loop")
             .setCheck(null)
             .appendField(Blockly.Msg.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);
-        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.setColour(LOOPS_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -49,7 +49,7 @@ export const controls_runnig_core = {
 
 export const control_core_delay = {
     init: function () {
-        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_CONTROL_CORE_DELAY);
         this.appendValueInput("sleeplength", Number)
@@ -63,7 +63,7 @@ export const control_core_delay = {
 };
 export const controls_hw_timer_start = {
     init: function () {
-        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_HW_TIMER)
             .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "TIMER_NUM")
@@ -76,7 +76,7 @@ export const controls_hw_timer_start = {
 
 export const controls_hw_timer_stop = {
     init: function () {
-        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.setColour(LOOPS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_HW_TIMER)
             .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "TIMER_NUM")
@@ -94,7 +94,7 @@ export const esp32_deep_sleep = {
             .appendField(new Blockly.FieldTextInput("5"), "time")
             .appendField(Blockly.Msg.MIXLY_SECOND);
         this.setPreviousStatement(true, null);
-        this.setColour(Blockly.Msg['LOOPS_HUE']);
+        this.setColour(LOOPS_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

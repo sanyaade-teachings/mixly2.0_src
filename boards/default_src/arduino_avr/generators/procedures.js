@@ -1,16 +1,18 @@
-import * as Blockly from 'blockly/core';
+import { Arduino } from '../../arduino_common/arduino_generator';
+import Variables from '../../arduino_common/others/variables';
+import Procedures from '../../arduino_common/others/procedures';
 
 export const procedures_defreturn = function () {
     // Define a procedure with a return value.
-    var funcName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('NAME'),
-        Blockly.Procedures.NAME_TYPE);
-    var branch = Blockly.Arduino.statementToCode(this, 'STACK');
-    if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
-        branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
+    var funcName = Arduino.variableDB_.getName(this.getFieldValue('NAME'),
+        Procedures.NAME_TYPE);
+    var branch = Arduino.statementToCode(this, 'STACK');
+    if (Arduino.INFINITE_LOOP_TRAP) {
+        branch = Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
     }
-    var returnValue = Blockly.Arduino.valueToCode(this, 'RETURN',
-        Blockly.Arduino.ORDER_NONE) || '';
+    var returnValue = Arduino.valueToCode(this, 'RETURN',
+        Arduino.ORDER_NONE) || '';
     var type = this.getFieldValue('TYPE');
     if (returnValue) {
         returnValue = '  return ' + returnValue + ';\n';
@@ -18,13 +20,13 @@ export const procedures_defreturn = function () {
     var returnType = type ? type : 'void';
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = this.argumentstype_[x] + ' ' + Blockly.Arduino.variableDB_.getName(this.arguments_[x],
-            Blockly.Variables.NAME_TYPE);
+        args[x] = this.argumentstype_[x] + ' ' + Arduino.variableDB_.getName(this.arguments_[x],
+            Variables.NAME_TYPE);
     }
     var code = returnType + ' ' + funcName + '(' + args.join(', ') + ') {\n' +
         branch + returnValue + '}\n';
-    code = Blockly.Arduino.scrub_(this, code);
-    Blockly.Arduino.definitions_[funcName] = code;
+    code = Arduino.scrub_(this, code);
+    Arduino.definitions_[funcName] = code;
     return null;
 };
 
@@ -32,25 +34,25 @@ export const procedures_defnoreturn = procedures_defreturn;
 
 export const procedures_callreturn = function () {
     // Call a procedure with a return value.
-    var funcName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('NAME'),
-        Blockly.Procedures.NAME_TYPE);
+    var funcName = Arduino.variableDB_.getName(this.getFieldValue('NAME'),
+        Procedures.NAME_TYPE);
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = Blockly.Arduino.valueToCode(this, 'ARG' + x,
-            Blockly.Arduino.ORDER_NONE) || 'null';
+        args[x] = Arduino.valueToCode(this, 'ARG' + x,
+            Arduino.ORDER_NONE) || 'null';
     }
     var code = funcName + '(' + args.join(', ') + ')';
-    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+    return [code, Arduino.ORDER_UNARY_POSTFIX];
 };
 
 export const procedures_callnoreturn = function () {
     // Call a procedure with no return value.
-    var funcName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('NAME'),
-        Blockly.Procedures.NAME_TYPE);
+    var funcName = Arduino.variableDB_.getName(this.getFieldValue('NAME'),
+        Procedures.NAME_TYPE);
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = Blockly.Arduino.valueToCode(this, 'ARG' + x,
-            Blockly.Arduino.ORDER_NONE) || 'null';
+        args[x] = Arduino.valueToCode(this, 'ARG' + x,
+            Arduino.ORDER_NONE) || 'null';
     }
     var code = funcName + '(' + args.join(', ') + ');\n';
     return code;
@@ -58,12 +60,12 @@ export const procedures_callnoreturn = function () {
 
 export const procedures_ifreturn = function () {
     // Conditionally return value from a procedure.
-    var condition = Blockly.Arduino.valueToCode(this, 'CONDITION',
-        Blockly.Arduino.ORDER_NONE) || 'false';
+    var condition = Arduino.valueToCode(this, 'CONDITION',
+        Arduino.ORDER_NONE) || 'false';
     var code = 'if (' + condition + ') {\n';
     if (this.hasReturnValue_) {
-        var value = Blockly.Arduino.valueToCode(this, 'VALUE',
-            Blockly.Arduino.ORDER_NONE) || '';
+        var value = Arduino.valueToCode(this, 'VALUE',
+            Arduino.ORDER_NONE) || '';
         code += '  return ' + value + ';\n';
     } else {
         code += '  return;\n';
@@ -76,8 +78,8 @@ export const procedures_return = function () {
     // Conditionally return value from a procedure.
     var code = ""
     if (this.hasReturnValue_) {
-        var value = Blockly.Arduino.valueToCode(this, 'VALUE',
-            Blockly.Arduino.ORDER_NONE) || 'None';
+        var value = Arduino.valueToCode(this, 'VALUE',
+            Arduino.ORDER_NONE) || 'None';
         code += 'return ' + value + ';\n';
     } else {
         code += 'return;\n';

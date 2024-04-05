@@ -1,5 +1,7 @@
 import * as Blockly from 'blockly/core';
 
+const TEXTS_HUE = 160;
+
 export const text_base64_url_codec = {
     init: function () {
         this.appendValueInput("VALUE")
@@ -14,7 +16,7 @@ export const text_base64_url_codec = {
                 ["解码", "DECODE"]
             ]), "OPTION");
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['TEXTS_HUE']);
+        this.setColour(TEXTS_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }

@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['SCOOP_HUE'] = 120;
+const SCOOP_HUE = 120;
 
 export const SCoopTask = {
     init: function () {
@@ -14,7 +14,7 @@ export const SCoopTask = {
         this.appendStatementInput("loop")
             .appendField(Blockly.Msg.MIXLY_CONTROL_SCoop_loop)
             .setCheck(null);
-        this.setColour(Blockly.Msg['SCOOP_HUE']);
+        this.setColour(SCOOP_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_SCOOP);
         this.setHelpUrl("https://mixly.readthedocs.io/zh_CN/latest/arduino/03.Control.html#scoop-task");
         this.wiki = {
@@ -27,7 +27,7 @@ export const SCoopTask = {
 
 export const SCoop_yield = {
     init: function () {
-        this.setColour(Blockly.Msg['SCOOP_HUE']);
+        this.setColour(SCOOP_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_CONTROL_SCoop_yield);
         this.setPreviousStatement(false, null);
@@ -43,7 +43,7 @@ export const SCoop_yield = {
 };
 export const SCoop_sleep = {
     init: function () {
-        this.setColour(Blockly.Msg['SCOOP_HUE']);
+        this.setColour(SCOOP_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_CONTROL_SCoop_sleep);
         this.appendValueInput("sleeplength", Number)

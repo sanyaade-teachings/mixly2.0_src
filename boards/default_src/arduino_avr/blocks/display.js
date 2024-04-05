@@ -1,18 +1,16 @@
 import * as Blockly from 'blockly/core';
 import * as layui from 'layui';
-import * as Mixly from 'mixly';
-import { Profile } from 'mixly';
 import $ from 'jquery';
-
-const {
+import {
+    Profile,
     LayerExt,
     XML,
     MFile
-} = Mixly;
+} from 'mixly';
 
 const { layer } = layui;
 
-Blockly.Msg['DISPLAY_HUE'] = 180;
+const DISPLAY_HUE = 180;
 
 var DRAWFIll = [
     [Blockly.Msg.OLED_HOLLOW, "draw"],
@@ -21,7 +19,7 @@ var DRAWFIll = [
 
 export const group_lcd_init2 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput('device')
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -48,7 +46,7 @@ export const group_lcd_init2 = {
 
 export const group_lcd_init3 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_SETUP)
@@ -78,7 +76,7 @@ export const group_lcd_init3 = {
 
 export const group_lcd_print = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput("TEXT", String)
             .setCheck([String, Number])
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -107,7 +105,7 @@ export const group_lcd_print = {
 
 export const group_lcd_print2 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput("row", Number)
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -131,7 +129,7 @@ export const group_lcd_print2 = {
 
 export const group_lcd_power = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_DF_LCD)
             .appendField(new Blockly.FieldTextInput('mylcd'), 'VAR')
@@ -146,7 +144,7 @@ export const group_lcd_power = {
 
 export const display_4digitdisplay_power = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "_TM1650")
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ON, "displayOn"], [Blockly.Msg.MIXLY_OFF, "displayOff"], [Blockly.Msg.MIXLY_LCD_STAT_CLEAR, "clear"]]), "STAT");
@@ -159,7 +157,7 @@ export const display_4digitdisplay_power = {
 
 export const display_4digitdisplay_displayString = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "_TM1650")
         this.appendValueInput("VALUE")
@@ -174,7 +172,7 @@ export const display_4digitdisplay_displayString = {
 
 export const display_4digitdisplay_showDot = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "_TM1650")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY_NOMBER1)
@@ -191,7 +189,7 @@ export const display_4digitdisplay_showDot = {
 
 export const display_TM1637_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -214,7 +212,7 @@ export const display_TM1637_init = {
 
 export const display_TM1637_displyPrint = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput("VALUE")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
@@ -229,7 +227,7 @@ export const display_TM1637_displyPrint = {
 
 export const display_TM1637_displayTime = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -257,7 +255,7 @@ export const display_TM1637_displayTime = {
 
 export const display_TM1637_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -275,7 +273,7 @@ export const display_TM1637_Brightness = {
 
 export const display_TM1637_clearDisplay = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -289,7 +287,7 @@ export const display_TM1637_clearDisplay = {
 //HT16K33点阵屏幕初始化
 export const HT16K33_Init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_INIT);
         // this.appendDummyInput("")
@@ -345,7 +343,7 @@ export const MAX7219_init = {
             .appendField(Blockly.Msg.MIXLY_MAX7219_VDISPALY);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setInputsInline(false);
         this.setTooltip(Blockly.Msg.MAX7219_INIT_TOOLTIP);
         this.setHelpUrl('');
@@ -356,7 +354,7 @@ var MATRIX_TYPES = [['MAX7219', 'MAX7219'], ['HT16K33', 'HT16K33']];
 //点阵屏显示点
 export const display_Matrix_DrawPixel = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE');
@@ -398,7 +396,7 @@ var display_Rotation_NUM = [
 //点阵屏旋转
 export const display_Max7219_Rotation = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField('MAX7219');
@@ -422,7 +420,7 @@ export const display_Max7219_Rotation = {
 //点阵屏旋转
 export const display_Max7219_setPosition = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField('MAX7219');
@@ -450,7 +448,7 @@ export const display_Max7219_setPosition = {
 //点阵屏旋转
 export const display_HT16K33_Rotation = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField('HT16K33');
@@ -471,7 +469,7 @@ export const display_HT16K33_Rotation = {
 //点阵屏滚动显示字符
 export const display_Matrix_TEXT = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE');
@@ -493,7 +491,7 @@ export const display_Matrix_TEXT = {
 //点阵屏滚动显示文本
 export const display_Matrix_print = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE');
@@ -516,7 +514,7 @@ export const display_Matrix_print = {
 //点阵屏显示_显示图案
 export const display_Matrix_DisplayChar = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE')
@@ -544,7 +542,7 @@ export const display_Matrix_DisplayChar = {
 //点阵屏显示_图案数组
 export const display_Matrix_LedArray = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ARRAYVAR)
             .appendField(new Blockly.FieldTextInput("LedArray1"), "VAR");
@@ -627,7 +625,7 @@ export const display_Matrix_LedArray = {
 
 export const display_matrix_bitmap = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ARRAYVAR)
             .appendField(new Blockly.FieldTextInput("LedArray1"), "VAR");
@@ -655,7 +653,7 @@ export const display_matrix_bitmap = {
 //点阵屏亮度
 export const display_Matrix_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE');
@@ -683,7 +681,7 @@ var MAX7219_FILLSCREEN_SELECT = [
 //点阵屏 全屏亮灭
 export const display_Matrix_fillScreen = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE');
@@ -754,7 +752,7 @@ export const Matrix_img = {
             ]), "img_");
         this.setOutput(true);
         this.setTooltip('');
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_TOOPTIP_Matrix_MAX7219_PREDEFARR);
         this.setHelpUrl('');
     }
@@ -763,7 +761,7 @@ export const Matrix_img = {
 //点阵屏 设置生效
 export const display_Matrix_write = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_MATRIX_TYPE)
             .appendField(new Blockly.FieldDropdown(MATRIX_TYPES), 'TYPE')
@@ -1141,7 +1139,7 @@ var ICON_SIZE = [
 //显示-OLED-初始化(iic)
 export const oled_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField(new Blockly.FieldDropdown(OLED_TYPE), "OLED_TYPE")
@@ -1164,7 +1162,7 @@ export const oled_init = {
 };
 export const u8g2_spi_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETUP)
             .appendField(new Blockly.FieldDropdown(U8G2_TYPE_SSD1306_NOKIA5110), "U8G2_TYPE_SPI")
@@ -1197,7 +1195,7 @@ export const u8g2_spi_init = {
 };
 export const u8g2_LCD12864_spi_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETUP + "LCD12864")
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1222,7 +1220,7 @@ export const u8g2_LCD12864_spi_init = {
 };
 export const u8g2_LCD12864_8080_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_SETUP + "LCD12864")
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1261,7 +1259,7 @@ export const u8g2_LCD12864_8080_init = {
 //显示-OLED-清屏幕
 export const oled_clear = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1275,7 +1273,7 @@ export const oled_clear = {
 //显示-OLED-定义图像名称和数据
 export const oled_define_bitmap_data = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1293,7 +1291,7 @@ export const oled_define_bitmap_data = {
 //显示-OLED-设置图标
 export const oled_icons = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1321,7 +1319,7 @@ export const oled_icons = {
 //显示-OLED-设置图标（表情）
 export const oled_face = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1345,7 +1343,7 @@ export const oled_face = {
 //显示-OLED-显示图像
 export const oled_showBitmap = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1375,7 +1373,7 @@ export const oled_showBitmap = {
 //显示-OLED-画点
 export const oled_drawPixel = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1396,7 +1394,7 @@ export const oled_drawPixel = {
 //显示-OLED-画线
 export const oled_drawLine = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1423,7 +1421,7 @@ export const oled_drawLine = {
 //显示-OLED-画直线
 export const oled_draw_Str_Line = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1449,7 +1447,7 @@ export const oled_draw_Str_Line = {
 //显示-OLED-新建页面
 export const oled_page = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1465,7 +1463,7 @@ export const oled_page = {
 //显示-OLED-画三角
 export const oled_drawTriangle = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1498,7 +1496,7 @@ export const oled_drawTriangle = {
 //显示-OLED-画长方形
 export const oled_drawFrame = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1527,7 +1525,7 @@ export const oled_drawFrame = {
 //显示-OLED-画圆角矩形
 export const oled_drawRFrame = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1559,7 +1557,7 @@ export const oled_drawRFrame = {
 //显示-OLED-画圆（空心，实心）
 export const oled_drawCircle = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1587,7 +1585,7 @@ export const oled_drawCircle = {
 //显示-OLED-画椭圆（空心，实心）
 export const oled_drawEllipse = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1618,7 +1616,7 @@ export const oled_drawEllipse = {
 //显示-OLED-显示字符串
 export const oled_drawStr = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1642,7 +1640,7 @@ export const oled_drawStr = {
 //显示-OLED-设置字体
 export const oled_set_EN_Font = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1663,7 +1661,7 @@ export const oled_set_EN_Font = {
 //显示-OLED-设置字体
 export const oled_set_CN_Font = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1681,7 +1679,7 @@ export const oled_set_CN_Font = {
 //显示-OLED-设置字体
 export const oled_set_ZH_TW_Font = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1695,7 +1693,7 @@ export const oled_set_ZH_TW_Font = {
 //显示-OLED-显示字符串
 export const oled_print = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.DISPLAY)
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
@@ -1727,7 +1725,7 @@ export const u8g2_setContrast = {
         this.appendDummyInput();
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setTooltip(Blockly.Msg.MIXLY_U8G2_SETCONTRAST_HELP);
         this.setHelpUrl("");
     }
@@ -1742,7 +1740,7 @@ export const get_utf8_width = {
             .appendField(new Blockly.FieldTextInput("u8g2"), "NAME")
             .appendField(' ' + Blockly.Msg.OLED_DRAWSTR + Blockly.Msg.MIXLY_WIDTH);
         this.setOutput(true, null);
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setTooltip("");
         this.setHelpUrl("https://www.cnblogs.com/danpianjicainiao/p/11048729.html#_label3_1_39");
     }
@@ -1767,7 +1765,7 @@ export const lcd_display_pattern = {
             .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "number");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setTooltip("");
         this.setHelpUrl("https://www.arduino.cc/en/Reference/LiquidCrystalCreateChar");
     }
@@ -1776,7 +1774,7 @@ export const lcd_display_pattern = {
 //点阵屏显示_图案数组
 export const lcd_pattern = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ARRAYVAR)
             .appendField(new Blockly.FieldTextInput("lcd"), "VAR");
@@ -1835,7 +1833,7 @@ export const lcd_pattern = {
 
 export const display_lcd_bitmap = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_DISPLAY_MATRIX_ARRAYVAR)
             .appendField(new Blockly.FieldTextInput("lcd"), "VAR");
@@ -1862,7 +1860,7 @@ export const display_lcd_bitmap = {
 
 export const TFT_init_with_pin = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_SETUP + " TFT " + Blockly.Msg.DISPLAY);
@@ -1940,14 +1938,14 @@ export const TFT_st7735_show_hz = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
 };
 export const TFT_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput('BRIGHTNESS')
             .setCheck(Number)
             .appendField("TFT" + Blockly.Msg.TFT_Brightness + Blockly.Msg.MIXLY_BRIGHTNESS);
@@ -1960,7 +1958,7 @@ export const TFT_Brightness = {
 
 export const TFT_color_seclet = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(new Blockly.FieldColour("33ccff"), "COLOR");
@@ -1972,7 +1970,7 @@ export const TFT_color_seclet = {
 
 export const TFT_color_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput("R")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -1993,7 +1991,7 @@ export const TFT_color_rgb = {
 
 export const TFT_init = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_SETUP + " TFT " + Blockly.Msg.DISPLAY);
@@ -2006,7 +2004,7 @@ export const TFT_init = {
 
 export const TFT_fillScreen = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.MIXLY_BACKGROUND_COLOR);
@@ -2029,7 +2027,7 @@ var display_Rotation_NUM = [
 
 export const TFT_Rotation = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField('TFT');
         this.appendDummyInput("")
@@ -2046,7 +2044,7 @@ export const TFT_Rotation = {
 //显示-TFT-定义字模名称和数据
 export const tft_define_bitmap_data = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_BITMAP_NAME)
@@ -2061,7 +2059,7 @@ export const tft_define_bitmap_data = {
 
 export const tft_generate_bitmap_data = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage(require('../../../../common/media/btn/setting.png'), 20, 20, "*", () => {
                 this.showSettingDialog();
@@ -2234,7 +2232,7 @@ export const tft_generate_bitmap_data = {
 //显示-TFT-显示位图（汉字）
 export const tft_showBitmap = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_BITMAP);
@@ -2263,7 +2261,7 @@ export const tft_showBitmap = {
 
 export const tft_drawPixel = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAWPIXEL);
@@ -2287,7 +2285,7 @@ export const tft_drawPixel = {
 //显示-TFT-画线
 export const tft_drawLine = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAWLINE);
@@ -2317,7 +2315,7 @@ export const tft_drawLine = {
 //显示-TFT-画直线
 export const tft_drawFastLine = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAWSTRLINE);
@@ -2346,7 +2344,7 @@ export const tft_drawFastLine = {
 /*
 export const oled_page = {
   init: function() {
-    this.setColour(Blockly.Msg['DISPLAY_HUE']);
+    this.setColour(DISPLAY_HUE);
     this.appendDummyInput("")
     .appendField("TFT")
     .appendField(Blockly.Msg.OLED_PAGE);
@@ -2362,7 +2360,7 @@ export const oled_page = {
 //显示-TFT-画三角
 export const tft_Triangle = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAW_TRIANGLE);
@@ -2400,7 +2398,7 @@ export const tft_Triangle = {
 //显示-TFT-画长方形
 export const tft_Rect = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAW_RECTANGLE);
@@ -2432,7 +2430,7 @@ export const tft_Rect = {
 //显示-TFT-画圆角矩形
 export const tft_RoundRect = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAW_RAD_RECTANGLE);
@@ -2466,7 +2464,7 @@ export const tft_RoundRect = {
 //显示-TFT-画圆（空心，实心）
 export const tft_Circle = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_DRAW_CIRCLE);
@@ -2498,7 +2496,7 @@ export const tft_Circle = {
 //显示-OLED-设置字体
 export const tft_set_EN_Font = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT");
         this.appendDummyInput("")
@@ -2519,7 +2517,7 @@ export const tft_set_EN_Font = {
 //显示-OLED-设置字体
 export const tft_set_CN_Font = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT");
         this.appendDummyInput("")
@@ -2539,7 +2537,7 @@ export const tft_set_CN_Font = {
 //显示-TFT-设置图标
 export const tft_icons = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_BITMAP);
@@ -2570,7 +2568,7 @@ export const tft_icons = {
 //显示-TFT-显示字符串
 export const tft_print = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_PRINT_VAR);
@@ -2597,7 +2595,7 @@ export const tft_print = {
 //显示-TFT-显示字符串
 export const tft_print_refresh = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField("TFT")
             .appendField(Blockly.Msg.OLED_PRINT_VAR);
@@ -2625,7 +2623,7 @@ export const group_lcd_init = group_lcd_init2;
 
 export const display_TM1637_init_32 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -2648,7 +2646,7 @@ export const display_TM1637_init_32 = {
 
 export const display_TM1637_displyPrint_32 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendValueInput("VALUE")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
@@ -2663,7 +2661,7 @@ export const display_TM1637_displyPrint_32 = {
 
 export const display_TM1637_displayTime_32 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -2691,7 +2689,7 @@ export const display_TM1637_displayTime_32 = {
 
 export const display_TM1637_Brightness_32 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")
@@ -2709,7 +2707,7 @@ export const display_TM1637_Brightness_32 = {
 
 export const display_TM1637_clearDisplay_32 = {
     init: function () {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
+        this.setColour(DISPLAY_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_4DIGITDISPLAY + "TM1637")
             .appendField(new Blockly.FieldTextInput("display"), "NAME")

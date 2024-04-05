@@ -1,10 +1,10 @@
 import * as Blockly from 'blockly/core';
 
-Blockly.Msg['ETHERNET_HUE'] = 0;
+const ETHERNET_HUE = 0;
 
 export const ethernet_init_begin = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_BEGIN)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_ETHERNET, 'Ethernet'], [Blockly.Msg.MIXLY_ETHERNET2, 'Ethernet2']]), "Ethernet");
@@ -19,7 +19,7 @@ export const ethernet_init_begin = {
 
 export const ethernet_mac_address = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(new Blockly.FieldTextInput('DE'), 'VAR1')
             .appendField('-')
@@ -39,7 +39,7 @@ export const ethernet_mac_address = {
 
 export const ethernet_init_local_ip = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_LOCALIP);
         this.setOutput(true, 'IPAddress');
@@ -49,7 +49,7 @@ export const ethernet_init_local_ip = {
 
 export const ethernet_client_connect_server = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_CONNECT_SERVER)
             .appendField(this.newQuote_(true))
@@ -75,7 +75,7 @@ export const ethernet_client_connect_server = {
 
 export const ethernet_client_stop = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_STOP);
         this.setPreviousStatement(true, null);
@@ -86,7 +86,7 @@ export const ethernet_client_stop = {
 
 export const ethernet_client_connected = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_CONNECTED);
         this.setOutput(true, Number);
@@ -96,7 +96,7 @@ export const ethernet_client_connected = {
 
 export const ethernet_client_available = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_AVAILABLE);
         this.setOutput(true, Number);
@@ -106,7 +106,7 @@ export const ethernet_client_available = {
 
 export const ethernet_client_print = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendValueInput('TEXT')
             .setCheck(String)
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PRINT);
@@ -119,7 +119,7 @@ export const ethernet_client_print = {
 
 export const ethernet_client_println = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendValueInput('TEXT')
             .setCheck(String)
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PRINTLN);
@@ -132,7 +132,7 @@ export const ethernet_client_println = {
 
 export const ethernet_client_read = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_READ);
         this.setOutput(true, Number);
@@ -142,7 +142,7 @@ export const ethernet_client_read = {
 
 export const ethernet_client_get_request = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_GET_REQUEST);
         this.appendDummyInput()
@@ -172,7 +172,7 @@ export const ethernet_client_get_request = {
 
 export const NTP_server = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.NTP_SERVER);
         this.appendValueInput("server_add")
@@ -203,7 +203,7 @@ var NTP_TIME_TYPE = [
 //传感器-实时时钟块_获取时间
 export const NTP_server_get_time = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.NTP_server_get_time);
@@ -217,7 +217,7 @@ export const NTP_server_get_time = {
 
 export const MQTT_server = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/iot.png'), 20, 20))
             .appendField(Blockly.Msg.MQTT_SERVER);
@@ -246,7 +246,7 @@ export const MQTT_server = {
 //WIFI信息
 export const WIFI_info = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/iot.png'), 20, 20))
             .appendField(Blockly.Msg.MIXLY_NETWORK_INIT);
@@ -322,7 +322,7 @@ var Topic_validator = function (newValue) {
 //MQTT-发送消息到topic
 export const MQTT_publish = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(new Blockly.FieldImage(require('../../../../common/media/blynk/iot.png'), 20, 20))
             .appendField(Blockly.Msg.MQTT_publish);
@@ -342,7 +342,7 @@ export const MQTT_publish = {
 
 export const MQTT_subscribe_value = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MQTT_Topic)
             .appendField(new Blockly.FieldTextInput('Topic_0', Topic_validator), "Topic_0");
@@ -358,7 +358,7 @@ export const MQTT_add_subscribe_topic = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MQTT_Topic);
         this.setPreviousStatement(true);
@@ -374,7 +374,7 @@ export const MQTT_subscribe = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT)
             .appendField(Blockly.Msg.MQTT_Topic + Blockly.Msg.MQTT_subscribe2)
@@ -577,7 +577,7 @@ export const mqtt_topics_set = {
      * @this Blockly.Block
      */
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_EMQX_SUBSCRIBE + Blockly.Msg.MQTT_Topic);
         this.appendStatementInput('STACK');
@@ -601,7 +601,7 @@ export const http_get = {
             .appendField(Blockly.Msg.MIXLY_FAILED);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setTooltip("");
     }
 };
@@ -609,7 +609,7 @@ export const http_get = {
 //自动配网
 export const WIFI_smartConfig = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.blynk_smartconfig)
             .appendField(new Blockly.FieldDropdown([["SmartConfig", 'SmartConfig'], ["AP", 'AP']]), "MODE");
@@ -648,7 +648,7 @@ export const WIFI_ap_or_sta = {
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setHelpUrl("");
     }
 };
@@ -686,7 +686,7 @@ export const WIFI_ap_and_sta = {
             .appendField(Blockly.Msg.MIXLY_ETHERNET_CLINET_PORT);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setHelpUrl("");
     }
 };
@@ -706,7 +706,7 @@ export const WIFI_incomingPacket = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -722,7 +722,7 @@ export const WIFI_send_data = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -731,7 +731,7 @@ export const WIFI_send_data = {
 //天气GET
 export const WeatherGet = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.WeatherGet)
             .appendField(new Blockly.FieldTextInput('北京'), 'data')
@@ -744,7 +744,7 @@ export const WeatherGet = {
 //获取当天天气
 export const WeatherGetToday = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.WeatherGetToday)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_Humidity, "0"], ['PM2.5', "1"], ['PM1.0', "2"], [Blockly.Msg.TodayQuality, "3"], [Blockly.Msg.MIXLY_TEMPERATURE, "4"]]), "type");
@@ -756,7 +756,7 @@ export const WeatherGetToday = {
 //获取当天天气
 export const WeatherGetForecast = {
     init: function () {
-        this.setColour(Blockly.Msg['ETHERNET_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.WeatherGetForecast)
             .appendField(new Blockly.FieldDropdown([[Blockly.Msg.MIXLY_GPS_DATE, "ForecastDate"], [Blockly.Msg.ForecastHigh, "ForecastHigh"], [Blockly.Msg.ForecastLow, "ForecastLow"], [Blockly.Msg.ForecastYmd, "ForecastYmd"], [Blockly.Msg.MIXLY_WEEK, "ForecastWeek"], [Blockly.Msg.ForecastAqi, "ForecastAqi"], [Blockly.Msg.ForecastFx, "ForecastFx"], [Blockly.Msg.ForecastFl, "ForecastFl"], [Blockly.Msg.ForecastType, "ForecastType"]]), "type");

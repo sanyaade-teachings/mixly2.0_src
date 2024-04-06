@@ -520,16 +520,16 @@ Serial.refreshOutputBox = (port) => {
     } else {
         outputStr = outputStr.replaceAll('\r\n', '\n');
         if (endPos && typeof endPos === 'object') {
-            const oldOutputStr = statusBarSerial.getValueRange({
+            const oldOutputStr = statusBarSerial.getManager().get('serial_output').getValueRange({
                 row: 0,
                 column: 0
             }, endPos);
             if (outputStr === oldOutputStr)
                 return;
         }
-        statusBarSerial.setValue(outputStr, toolConfig.scroll);
-        portObj.endPos = statusBarSerial.getEndPos();
-        statusBarSerial.editor && statusBarSerial.editor.setReadOnly(false);
+        statusBarSerial.getManager().get('serial_output').setValue(outputStr, toolConfig.scroll);
+        portObj.endPos = statusBarSerial.getManager().get('serial_output').getEndPos();
+        statusBarSerial.getManager().get('serial_output').editor && statusBarSerial.getManager().get('serial_output').editor.setReadOnly(false);
     }
 }
 
@@ -765,8 +765,8 @@ Serial.receiveBoxscrollToTop = () => {
 Serial.statusBarPortAddHotKey = (port) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-    const session = statusBarSerial.editor.getSession();
-    statusBarSerial.editor.commands.addCommands([
+    const session = statusBarSerial.getManager().get('serial_output').editor.getSession();
+    statusBarSerial.getManager().get('serial_output').editor.commands.addCommands([
         {
             name: "Empty",
             bindKey: "Ctrl-E",
@@ -792,7 +792,7 @@ Serial.statusBarPortAddHotKey = (port) => {
                 }
                 const { endPos } = portObj;
                 if (!endPos || typeof endPos !== 'object') {
-                    statusBarSerial.editor.setReadOnly(true);
+                    statusBarSerial.getManager().get('serial_output').editor.setReadOnly(true);
                     return false;
                 }
                 const cursor = session.selection.getCursor();
@@ -817,8 +817,8 @@ Serial.statusBarPortAddHotKey = (port) => {
                 }
                 const cursor = session.selection.getCursor();
                 if (cursor.row === endPos.row) {
-                    const newPos = statusBarSerial.getEndPos();
-                    const sendStr = statusBarSerial.getValueRange(endPos, newPos);
+                    const newPos = statusBarSerial.getManager().get('serial_output').getEndPos();
+                    const sendStr = statusBarSerial.getManager().get('serial_output').getValueRange(endPos, newPos);
                     Serial.writeString(port, sendStr, '\r\n');
                 }
                 return false;
@@ -828,22 +828,22 @@ Serial.statusBarPortAddHotKey = (port) => {
     session.selection.on('changeCursor', function() {
         const portObj = Serial.portsOperator[port];
         if (!portObj || !portObj.portOpened) {
-            statusBarSerial.editor.setReadOnly(false);
+            statusBarSerial.getManager().get('serial_output').editor.setReadOnly(false);
             return;
         }
         const { endPos } = portObj;
         if (!endPos || typeof endPos !== 'object') {
-            statusBarSerial.editor.setReadOnly(false);
+            statusBarSerial.getManager().get('serial_output').editor.setReadOnly(false);
             return;
         }
         const cursor = session.selection.getCursor();
         if (cursor.row < endPos.row)
-            statusBarSerial.editor.setReadOnly(true);
+            statusBarSerial.getManager().get('serial_output').editor.setReadOnly(true);
         else if (cursor.row === endPos.row
               && cursor.column < endPos.column)
-            statusBarSerial.editor.setReadOnly(true);
+            statusBarSerial.getManager().get('serial_output').editor.setReadOnly(true);
         else
-            statusBarSerial.editor.setReadOnly(false);
+            statusBarSerial.getManager().get('serial_output').editor.setReadOnly(false);
     });
 
     const portObj = Serial.portsOperator[port];
@@ -879,7 +879,7 @@ Serial.refreshTerminalMenu = (port) => {
     }
     const menuElem = '<div style="float:left;">{{d.name}}&nbsp</div><div style="float:right;">{{d.hotKey}}</div>';
     const terminalMenu = {
-        elem: `#${statusBarSerial.config.contentId}`,
+        elem: `#${statusBarSerial.getManager().get('serial_output').config.contentId}`,
         trigger: 'contextmenu',
         isAllowSpread: true,
         id: `tab-${newPort}-ace-terminal`,
@@ -894,13 +894,13 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-terminal-help`) {
                 Serial.statusBarPortAddCommand(port, 'config port send -h');
             } else if (obj.id === `tab-${newPort}-ace-fontsize-decrease`) {
-                const size = parseInt(statusBarSerial.editor.getFontSize(), 10) || 12;
-                statusBarSerial.editor.setFontSize(Math.max(size - 1 || 1));
+                const size = parseInt(statusBarSerial.getManager().get('serial_output').editor.getFontSize(), 10) || 12;
+                statusBarSerial.getManager().get('serial_output').editor.setFontSize(Math.max(size - 1 || 1));
             } else if (obj.id === `tab-${newPort}-ace-fontsize-increase`) {
-                const size = parseInt(statusBarSerial.editor.getFontSize(), 10) || 12;
-                statusBarSerial.editor.setFontSize(size + 1);
+                const size = parseInt(statusBarSerial.getManager().get('serial_output').editor.getFontSize(), 10) || 12;
+                statusBarSerial.getManager().get('serial_output').editor.setFontSize(size + 1);
             } else if (obj.id === `tab-${newPort}-ace-fontsize-default`) {
-                statusBarSerial.editor.setFontSize(12);
+                statusBarSerial.getManager().get('serial_output').editor.setFontSize(12);
             } else if (obj.id === `tab-${newPort}-ace-terminal-port-close`) {
                 Serial.statusBarPortAddCommand(port, 'port -c');
             } else if (obj.id === `tab-${newPort}-ace-terminal-port-open`) {
@@ -916,7 +916,7 @@ Serial.refreshTerminalMenu = (port) => {
             } else if (obj.id === `tab-${newPort}-ace-close`) {
                 mainStatusBarTabs.remove(port);
             } else if (obj.id === `tab-${newPort}-ace-empty`) {
-                // statusBarSerial.editor.execCommand('Empty');
+                // statusBarSerial.getManager().get('serial_output').editor.execCommand('Empty');
                 portObj.output = [];
                 Serial.refreshOutputBox(port);
             } else if (obj.id === `tab-${newPort}-serial-send-ctrlc`) {
@@ -1040,10 +1040,10 @@ Serial.statusBarPortAddCursorEvent = (port) => {
     Serial.refreshOutputBox(port);
     portObj.terminalOpend = true;
     Serial.refreshTerminalMenu(port);
-    const { selection } = statusBarSerial.editor;
-    const session = statusBarSerial.editor.getSession();
+    const { selection } = statusBarSerial.getManager().get('serial_output').editor;
+    const session = statusBarSerial.getManager().get('serial_output').editor.getSession();
     const initRow = session.getLength();
-    statusBarSerial.editor.gotoLine(initRow);
+    statusBarSerial.getManager().get('serial_output').editor.gotoLine(initRow);
     selection.moveCursorLineEnd();
     const initCursor = selection.getCursor();
     portObj.cursorCallback = session.selection.on('changeCursor', function (e) {
@@ -1074,8 +1074,8 @@ Serial.statusBarPortRemoveCursorEvent = (port) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
     const portObj = Serial.portsOperator[port];
-    if (!portObj || !statusBarSerial.editor) return;
-    const session = statusBarSerial.editor.getSession();
+    if (!portObj || !statusBarSerial.getManager().get('serial_output').editor) return;
+    const session = statusBarSerial.getManager().get('serial_output').editor.getSession();
     if (portObj.cursorCallback) {
         session.selection.removeEventListener('changeCursor', portObj.cursorCallback);
         Serial.refreshOutputBox(port);
@@ -1258,7 +1258,7 @@ Serial.terminalExitCallback = (port, commandList) => {
 Serial.statusBarPortAddCommand = (port, command, withNewLine = true) => {
     const { mainStatusBarTabs } = Mixly;
     const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-    statusBarSerial.addValue(command + (withNewLine ? '\n' : ''), true);
+    statusBarSerial.getManager().get('serial_output').addValue(command + (withNewLine ? '\n' : ''), true);
     if (withNewLine) {
         Serial.refreshOutputBox(port);
     }
@@ -1335,7 +1335,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
         if (error) {
             statusBarSerial.close();
             console.log('failed to open: ' + error);
-            statusBarSerial.setValue(error + '\n', true);
+            statusBarSerial.getManager().get('serial_output').setValue(error + '\n', true);
             Serial.receiveBoxAddValue(error + '\n', true);
             portObj.serialport = null;
             Serial.refreshConnectStatus(port);
@@ -1348,7 +1348,7 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             portObj.portOpened = true;
             // Serial.refreshTerminalMenu(port);
             Serial.refreshConnectStatus(port);
-            statusBarSerial.setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
+            statusBarSerial.getManager().get('serial_output').setValue(Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
             Serial.receiveBoxSetValue(port, Msg.Lang['已打开串口'] + ': ' + port + '\n', true);
             portObj.output.push('');
             Serial.outputBoxAdd(port, Msg.Lang['已打开串口'] + ': ' + port);
@@ -1473,10 +1473,10 @@ Serial.connect = function (port = null, baud = null, endFunc = (code) => {}) {
             Serial.receiveBoxAddValue(port, Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
         }
 
-        if (statusBarSerial.getValue(port).lastIndexOf("\n") != statusBarSerial.getValue(port).length - 1) {
-            statusBarSerial.addValue('\n' + Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
+        if (statusBarSerial.getManager().get('serial_output').getValue(port).lastIndexOf("\n") != statusBarSerial.getManager().get('serial_output').getValue(port).length - 1) {
+            statusBarSerial.getManager().get('serial_output').addValue('\n' + Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
         } else {
-            statusBarSerial.addValue(Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
+            statusBarSerial.getManager().get('serial_output').addValue(Msg.Lang['已关闭串口'] + ': ' + port + '\n', true);
         }
         portObj.serialport = null;
         portObj.output = [];
@@ -1538,7 +1538,7 @@ Serial.showErrorData = function (port, select, data) {
     if (toolOpened) {
         Serial.receiveBoxAddValue(port, data, toolConfig.scroll);
     } else {
-        statusBarSerial.addValue(data, true);
+        statusBarSerial.getManager().get('serial_output').addValue(data, true);
     }
 }
 

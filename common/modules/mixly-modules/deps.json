@@ -829,7 +829,6 @@
         "path": "/common/sidebars-manager.js",
         "require": [
             "path",
-            "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
             "Mixly.Registry",
@@ -837,7 +836,8 @@
             "Mixly.HTMLTemplate",
             "Mixly.SideBarLocalStorage",
             "Mixly.SideBarLibs",
-            "Mixly.PagesManager"
+            "Mixly.PagesManager",
+            "Mixly.IdGenerator"
         ],
         "provide": [
             "Mixly.SideBarsManager",
@@ -848,7 +848,15 @@
     {
         "path": "/common/statusbar-serial.js",
         "require": [
-            "Mixly.StatusBar"
+            "path",
+            "$.ui",
+            "$.flot",
+            "Mixly.Env",
+            "Mixly.StatusBar",
+            "Mixly.SideBarsManager",
+            "Mixly.HTMLTemplate",
+            "Mixly.PageBase",
+            "Mixly.Regression"
         ],
         "provide": [
             "Mixly.StatusBarSerial"
@@ -858,10 +866,7 @@
         "path": "/common/statusbar-terminal.js",
         "require": [
             "Mprogress",
-            "$.ui",
-            "$.flot",
-            "Mixly.StatusBar",
-            "Mixly.Regression"
+            "Mixly.StatusBar"
         ],
         "provide": [
             "Mixly.StatusBarTerminal"
@@ -893,7 +898,8 @@
             "Mixly.StatusBarSerial",
             "Mixly.PagesManager",
             "Mixly.ContextMenu",
-            "Mixly.Menu"
+            "Mixly.Menu",
+            "Mixly.IdGenerator"
         ],
         "provide": [
             "Mixly.StatusBarsManager"

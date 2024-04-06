@@ -1,7 +1,6 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Registry');
@@ -10,12 +9,12 @@ goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.SideBarLocalStorage');
 goog.require('Mixly.SideBarLibs');
 goog.require('Mixly.PagesManager');
+goog.require('Mixly.IdGenerator');
 goog.provide('Mixly.SideBarsManager');
 goog.provide('Mixly.LeftSideBarsManager');
 goog.provide('Mixly.RightSideBarsManager');
 
 const {
-    XML,
     Env,
     Msg,
     Registry,
@@ -23,7 +22,8 @@ const {
     HTMLTemplate,
     SideBarLocalStorage,
     SideBarLibs,
-    PagesManager
+    PagesManager,
+    IdGenerator
 } = Mixly;
 
 class SideBarsManager extends PagesManager {
@@ -97,7 +97,7 @@ class SideBarsManager extends PagesManager {
             tabContentElem: $tab[0],
             typesRegistry: SideBarsManager.typesRegistry
         });
-        this.id = managerHTMLTemplate.id;
+        this.id = IdGenerator.generate();
         this.addEventsType(['show', 'hide']);
         SideBarsManager.add(this);
     }

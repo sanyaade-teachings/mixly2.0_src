@@ -12,6 +12,7 @@ goog.require('Mixly.StatusBarSerial');
 goog.require('Mixly.PagesManager');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.Menu');
+goog.require('Mixly.IdGenerator');
 goog.provide('Mixly.StatusBarsManager');
 
 const {
@@ -25,7 +26,8 @@ const {
     StatusBarSerial,
     PagesManager,
     ContextMenu,
-    Menu
+    Menu,
+    IdGenerator
 } = Mixly;
 
 class StatusBarsManager extends PagesManager {
@@ -83,7 +85,7 @@ class StatusBarsManager extends PagesManager {
             typesRegistry: StatusBarsManager.typesRegistry
         });
         this.tabId = tabHTMLTemplate.id;
-        this.id = managerHTMLTemplate.id;
+        this.id = IdGenerator.generate();
         this.#$btn_ = $tab.find('.operation > button');
         this.addEventsType(['show', 'hide', 'onSelectMenu', 'getMenu']);
         this.#addMenuBtn_();
@@ -164,7 +166,7 @@ class StatusBarsManager extends PagesManager {
             children: toolChildMenu,
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem('板卡文件系统管理', ''),
+                name: ContextMenu.getItem('板卡文件管理', ''),
                 callback: (key, opt) => console.log(123)
             }
         });

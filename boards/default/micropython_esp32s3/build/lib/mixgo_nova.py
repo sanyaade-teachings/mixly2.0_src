@@ -31,7 +31,7 @@ onboard_tft = st7735.ST7735(onboard_spi, 160, 128, dc_pin=18, cs_pin=45, bl_pin=
 '''ACC-Sensor'''
 try :
 	import mxc6655xa
-	onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c)     
+	onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c, front=True)     
 except Exception as e:
 	print("Warning: Failed to communicate with MXC6655XA (ACC) or",e)
 

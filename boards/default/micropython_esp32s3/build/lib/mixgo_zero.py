@@ -30,7 +30,7 @@ onboard_tft = st7789_bf.ST7789(onboard_spi, 320, 240, dc_pin=18, cs_pin=45, bl_p
 '''ACC-Sensor'''
 try :
 	import mxc6655xa
-	onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c)     
+	onboard_acc = mxc6655xa.MXC6655XA(onboard_i2c, front=True)     
 except Exception as e:
 	print("Warning: Failed to communicate with MXC6655XA (ACC) or",e)
 
@@ -46,13 +46,6 @@ try :
 	onboard_als_r = ltr553als.LTR_553ALS(onboard_i2c_1)     
 except Exception as e:
 	print("Warning: Failed to communicate with TR_553ALS (ALS&PS) or",e)
-
-'''BPS-Sensor'''
-try :
-	import spl06_001
-	onboard_bps = spl06_001.SPL06(onboard_i2c)     
-except Exception as e:
-	print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
 
 '''THS-Sensor'''
 try :
@@ -74,6 +67,13 @@ try :
 	onboard_mgs = mmc5603.MMC5603(onboard_i2c)
 except Exception as e:
 	print("Warning: Failed to communicate with MMC5603 (MGS) or",e)
+
+'''BPS-Sensor'''
+try :
+	import spl06_001
+	onboard_bps = spl06_001.SPL06(onboard_i2c)     
+except Exception as e:
+	print("Warning: Failed to communicate with SPL06-001 (BPS) or",e)
 
 '''2RGB_WS2812'''    
 from ws2812 import NeoPixel

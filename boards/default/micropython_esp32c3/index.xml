@@ -1827,8 +1827,7 @@
     <block type="mixgome_display_font" m-show='micropython:esp32c3:mixgo_me'></block>
     <block type="mixgome_display_image_create" m-show='micropython:esp32c3:mixgo_me'></block>
     <block type="display_image_create" m-show='micropython:esp32c3:mixgo_cc'></block>
-    <block type="display_image_builtins" m-show='micropython:esp32c3:mixgo_cc'></block>
-    <block type="display_image_builtins_all" m-show='micropython:esp32c3:mixgo_me'></block>
+    <block type="display_image_builtins_all" m-show='micropython:esp32c3:mixgo_me micropython:esp32c3:mixgo_cc'></block>
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>

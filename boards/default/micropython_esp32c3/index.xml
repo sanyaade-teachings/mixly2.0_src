@@ -31,7 +31,7 @@
 <script src="../python/blocks/storage.js"></script>
 <script src="../micropython_common/blocks/actuator_onboard.js"></script>
 <script src="../micropython_common/blocks/actuator_extern.js"></script>
-<script src="blocks/me_go.js"></script>
+<script src="blocks/ce_go.js"></script>
 <script src="blocks/me_g1.js"></script>
 <script src="../micropython_common/blocks/display_onboard.js"></script>
 <script src="../micropython_common/blocks/display_extern.js"></script>
@@ -1890,9 +1890,9 @@
   </category>
 
   <category id="catME_GO" colour="100" m-show='micropython:esp32c3:mixgo_me micropython:esp32c3:mixgo_cc'>
-    <block type="me_go_led_bright">
+    <block type="ce_go_led_bright">
       <value name="led">
-        <shadow type="me_go_light_number">
+        <shadow type="ce_go_light_number">
         </shadow>
       </value>
       <value name="bright">
@@ -1900,15 +1900,15 @@
         </shadow>
       </value>
     </block>
-    <block type="me_go_get_led_state">
+    <block type="ce_go_get_led_state">
       <value name="led">
-        <shadow type="me_go_light_number">
+        <shadow type="ce_go_light_number">
         </shadow>
       </value>
     </block>
-    <block type="me_go_led_brightness">
+    <block type="ce_go_led_brightness">
       <value name="led">
-        <shadow type="me_go_light_number">
+        <shadow type="ce_go_light_number">
         </shadow>
       </value>
       <value name="bright">
@@ -1917,37 +1917,37 @@
         </shadow>
       </value>
     </block>
-    <block type="me_go_get_led_bright">
+    <block type="ce_go_get_led_bright">
       <value name="led">
-        <shadow type="me_go_light_number">
+        <shadow type="ce_go_light_number">
         </shadow>
       </value>
     </block>
-    <block type="me_go_stepper_keep">
+    <block type="ce_go_stepper_keep">
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-    <block type="me_go_stepper_stop"></block>
-    <block type="me_go_dc_motor">
+    <block type="ce_go_stepper_stop"></block>
+    <block type="ce_go_dc_motor">
       <value name="speed">
         <shadow type="math_number">
           <field name="NUM">100</field>
         </shadow>
       </value>
     </block>
-    <block type="me_go_hall_initialize">
+    <block type="ce_go_hall_initialize">
       <value name="num">
         <shadow type="math_number">
           <field name="NUM">0</field>
         </shadow>
       </value>
     </block>
-    <block type="me_go_hall_data">
+    <block type="ce_go_hall_data">
     </block>
-    <block type="me_go_hall_attachInterrupt">
+    <block type="ce_go_hall_attachInterrupt">
       <value name="DO">
         <shadow type="factory_block_return">
           <field name="VALUE">interrupt_func</field>
@@ -1976,10 +1976,10 @@
         </block>
       </statement>
     </block>
-    <block type="me_go_pin_near_state_change"></block>
-    <block type="me_go_pin_near_line"></block>
-    <block type="me_go_pin_near"></block>
-    <block type="me_go_pin_light"></block>
+    <block type="ce_go_pin_near_state_change"></block>
+    <block type="ce_go_pin_near_line"></block>
+    <block type="ce_go_pin_near"></block>
+    <block type="ce_go_pin_light"></block>
     <block type="sensor_mixgome_eulerangles" m-show='micropython:esp32c3:mixgo_me'></block>
   </category>
   <category id="catME_G1" colour="40" m-show='micropython:esp32c3:mixgo_me'>

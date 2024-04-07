@@ -1621,11 +1621,6 @@
       <value name="LIST">
         <shadow type="pins_playlist"></shadow>
       </value>
-      <value name="PIN">
-        <shadow type="pins_pwm_pin">
-          <field name="PIN">0</field>
-        </shadow>
-      </value>
     </block>
     <block type="esp32_music_set_tempo">
       <value name="TICKS">

@@ -637,9 +637,9 @@ Blockly.Blocks['sensor_sound'] = {
             .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
         this.setOutput(true, Number);
         this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
     }
 };
-
 
 Blockly.Blocks['sensor_aht11'] = {
     init: function(){
@@ -1437,17 +1437,6 @@ Blockly.Blocks['bitbot_als_num'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.als_num), 'PIN');
     this.setOutput(true, Number);
   }
-};
-
-Blockly.Blocks['sensor_mixgo_nova_sound'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
-    }
 };
 
 Blockly.Blocks['sensor_button_is_pressed']=Blockly.Blocks['sensor_mixgo_button_is_pressed'];

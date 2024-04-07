@@ -1669,11 +1669,6 @@
       <value name="LIST">
         <shadow type="pins_playlist"></shadow>
       </value>
-      <value name="PIN">
-        <shadow type="pins_pwm_pin">
-          <field name="PIN">0</field>
-        </shadow>
-      </value>
     </block>
     <block type="esp32_music_set_tempo">
       <value name="TICKS">
@@ -1759,9 +1754,6 @@
     </block>
     <block type="actuator_onboard_neopixel_write">
     </block>
-
-
-
   </category>
   <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-hide='micropython:esp32c3:generic micropython:esp32c3:mixgocar_c3'>
     <block type="display_show_image">

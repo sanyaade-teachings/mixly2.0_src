@@ -28,11 +28,21 @@ Blockly.Python.forBlock['esp32_onboard_music_pitch'] = function(block) {
 };
 
 Blockly.Python.forBlock['esp32_onboard_music_pitch_with_time'] = function(block) {
-  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
-  var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
-  var number_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
-  var code = 'onboard_music.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
+    var number_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";   
+        var code = 'spk_midi.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
+    }
+    else if (version == 'mixgo_nova') {
+        Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
+        var code = 'spk_midi.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
+    }
+    else{
+        Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
+        var code = 'onboard_music.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
+    }
   return code;
 };
 
@@ -45,12 +55,21 @@ Blockly.Python.forBlock['esp32_onboard_music_stop'] = function(block) {
 
 Blockly.Python.forBlock['esp32_onboard_music_play_list'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-      Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
     var lst = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT);
-    var code = "onboard_music.play("+ lst +")\n";
+    if(version=='mixgo_zero'){
+        Blockly.Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";   
+        var code = "spk_midi.play("+ lst +")\n";
+    }
+    else if(version == 'mixgo_nova'){
+        Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
+        var code = "spk_midi.play("+ lst +")\n";
+    }
+    else{
+        Blockly.Python.definitions_['import_'+version+'_onboard_music'] = 'from '+version+' import onboard_music';
+        var code = "onboard_music.play("+ lst +")\n";
+    }
     return code;
 };
-
 
 Blockly.Python.forBlock['esp32_music_reset'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
@@ -363,19 +382,6 @@ Blockly.Python.forBlock['actuator_mixgo_nova_voice_get'] = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];;
 };
 
-Blockly.Python.forBlock['actuator_mixgo_nova_music_play_list'] = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='mixgo_zero'){
-        Blockly.Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";   
-    }
-    else{
-        Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
-    }
-    var lst = Blockly.Python.valueToCode(this, 'LIST', Blockly.Python.ORDER_ASSIGNMENT);
-    var code = "spk_midi.play("+ lst +")\n";
-    return code;
-};
-
 Blockly.Python.forBlock['actuator_mixgo_nova_record_audio'] = function(){
     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     if(version=='mixgo_zero'){
@@ -420,20 +426,6 @@ Blockly.Python.forBlock['actuator_mixgo_nova_onboard_music_pitch'] = function(bl
   Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
   var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
   var code = 'spk_midi.pitch(' + number_pitch + ')\n';
-  return code;
-};
-
-Blockly.Python.forBlock['actuator_mixgo_nova_onboard_music_pitch_with_time'] = function(block) {
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if(version=='mixgo_zero'){
-        Blockly.Python.definitions_['import_mixgo_zero_voice_spk_midi'] = "from mixgo_zero_voice import spk_midi";   
-    }
-    else{
-        Blockly.Python.definitions_['import_mixgo_nova_voice_spk_midi'] = "from mixgo_nova_voice import spk_midi";
-    }
-  var number_pitch = Blockly.Python.valueToCode(block, 'pitch', Blockly.Python.ORDER_ATOMIC);
-  var number_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
-  var code = 'spk_midi.pitch_time(' + number_pitch + ', ' + number_time + ')\n';
   return code;
 };
 

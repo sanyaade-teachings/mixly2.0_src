@@ -1499,7 +1499,7 @@
     <block type="sensor_mixgo_nova_pin_near" m-show='micropython:esp32s3:mixgo_nova'></block>
     <block type="sensor_mixgo_LTR308" m-show='micropython:esp32s3:mixgo_zero'></block>
     <block type="sensor_mixgo_nova_LTR308" m-show='micropython:esp32s3:mixgo_nova'></block>
-    <block type="sensor_mixgo_nova_sound"></block>
+    <block type="sensor_sound"></block>
     <block type="sensor_hp203" m-show='micropython:esp32s3:mixgo_zero'></block>
     <block type="sensor_aht11"></block>
     <block type="sensor_get_acceleration"></block>
@@ -1668,7 +1668,7 @@
         </shadow>
       </value>
     </block> -->
-    <block type="actuator_mixgo_nova_onboard_music_pitch_with_time">
+    <block type="esp32_onboard_music_pitch_with_time">
       <value name="pitch">
         <shadow type="pins_tone_notes">
           <field name="PIN">440</field>
@@ -1687,7 +1687,7 @@
         </shadow>
       </value>
     </block> -->
-    <block type="actuator_mixgo_nova_music_play_list">
+    <block type="esp32_onboard_music_play_list">
       <value name="LIST">
         <shadow type="pins_playlist"></shadow>
       </value>

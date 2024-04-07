@@ -883,18 +883,7 @@ Blockly.Blocks.actuator_mixgo_nova_voice_get = {
   }
 };
 
-Blockly.Blocks.actuator_mixgo_nova_music_play_list = {
-    init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);
-        this.appendValueInput('LIST')
-            .appendField(Blockly.Msg.MIXLY_ESP32_MUSIC_PLAY_LISTS)        
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_ESP32_MUSIC_PLAY_LISTS);
 
-    }
-}
 
 Blockly.Blocks.actuator_mixgo_nova_record_audio = {
     init: function () {
@@ -947,24 +936,6 @@ Blockly.Blocks.actuator_mixgo_nova_onboard_music_pitch = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_TONE);
-    }
-};
-
-Blockly.Blocks.actuator_mixgo_nova_onboard_music_pitch_with_time = {
-    init: function() {
-        this.setColour(Blockly.Msg['ACTUATOR_ONBOARD_HUE']);        
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_TONE);    
-        this.appendValueInput('pitch')
-            .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_FREQUENCY);
-        this.appendValueInput('time')
-            .setCheck(Number)
-            .appendField(Blockly.Msg.MIXLY_DURATION);
-        this.setInputsInline(true);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setTooltip(Blockly.Msg.MIXLY_TOOLTIP_BLOCKGROUP_TONE2);
     }
 };
 

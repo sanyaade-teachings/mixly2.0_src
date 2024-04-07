@@ -208,12 +208,26 @@ Blockly.Python.forBlock['sensor_sound'] = function(){
     Blockly.Python.definitions_['import_'+version+'_sound'] = 'from '+version+' import sound';
     var code =  'sound.loudness()';
     }
+    else if(version == 'mixgo_zero') {
+        Blockly.Python.definitions_['import_mixgo_zero_voice_sound_level'] = "from mixgo_zero_voice import sound_level";
+        var code = 'sound_level()';
+    } 
+    else if(version == 'mixgo_nova') {
+        Blockly.Python.definitions_['import_mixgo_nova_voice_sound_level'] = "from mixgo_nova_voice import sound_level";
+        var code = 'sound_level()';
+    }
     else{
     Blockly.Python.definitions_['import_'+version+'_onboard_sound'] = 'from '+version+' import onboard_sound';
     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var code = 'onboard_sound.read()';
     }
     return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.forBlock['sensor_mixgo_nova_sound'] = function(){
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+   
+    return [code, Blockly.Python.ORDER_ATOMIC];  
 };
 
 Blockly.Python.forBlock['sensor_hp203'] = function(){
@@ -734,18 +748,6 @@ Blockly.Python.forBlock['sensor_bitbot_ALS'] = function(){
 Blockly.Python.forBlock['bitbot_als_num'] = function() {
   var code = this.getFieldValue('PIN');
   return [code, Blockly.Python.ORDER_ATOMIC];
-};
-
-Blockly.Python.forBlock['sensor_mixgo_nova_sound'] = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version == 'mixgo_zero') {
-        Blockly.Python.definitions_['import_mixgo_zero_voice_sound_level'] = "from mixgo_zero_voice import sound_level";
-    } 
-    else {
-        Blockly.Python.definitions_['import_mixgo_nova_voice_sound_level'] = "from mixgo_nova_voice import sound_level";
-    }
-    var code = 'sound_level()';
-    return [code, Blockly.Python.ORDER_ATOMIC];  
 };
 
 Blockly.Python.forBlock.sensor_button_is_pressed=Blockly.Python.forBlock.sensor_mixgo_button_is_pressed;

@@ -9,8 +9,8 @@ MicroPython library for the MixGo ME -Onboard resources
 dahanzimin From the Mixly Team
 """
 
-import time,gc
-from machine import Pin,SoftI2C,ADC,PWM,RTC
+import time, gc
+from machine import Pin, SoftI2C, ADC, PWM, RTC
 
 '''i2c-onboard'''
 onboard_i2c=SoftI2C(scl = Pin(7), sda = Pin(6), freq = 400000)
@@ -48,7 +48,7 @@ except Exception as e:
 
 '''2RGB_WS2812'''
 from ws2812 import NeoPixel
-onboard_rgb = NeoPixel(Pin(9), 2, ORDER=(0, 1, 2, 3),multiplex=1)
+onboard_rgb = NeoPixel(Pin(9), 2, ORDER=(0, 1, 2, 3), multiplex=1)
 
 '''1Buzzer-Music'''
 from music import MIDI
@@ -148,6 +148,45 @@ class Button:
         self.pin.irq(handler = handler, trigger = trigger)
         
 B1key = Button(9)
+
+'''2LED-Multiplex RGB'''
+class LED:
+    def __init__(self, rgb, num=2, color=3):
+        self._rgb = rgb
+        self._col = [color] * num
+        self._color = ((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 1, 0), (0, 1, 1), (1, 0, 1), (1, 1, 1))
+
+    def setbrightness(self, index, value):
+        self._rgb[index - 1] = (value if self._color[self._col[index-1]][0] else 0,
+                                value if self._color[self._col[index-1]][1] else 0,
+                                value if self._color[self._col[index-1]][2] else 0)
+        self._rgb.write()
+
+    def getbrightness(self, index):
+        color = self._rgb[index - 1]
+        return color[0] | color[1] | color[2]
+
+    def setonoff(self, index, value):
+        if value == -1:
+            if self.getbrightness(index) < 50:
+                self.setbrightness(index, 100)
+            else:
+                self.setbrightness(index, 0)
+        elif value == 1:
+            self.setbrightness(index, 100)
+        elif value == 0:
+            self.setbrightness(index, 0)
+
+    def getonoff(self, index):
+        return True if self.getbrightness(index) > 50 else False
+
+    def setcolor(self, index, color):
+        self._col[index-1] = color
+
+    def getcolor(self, index):
+        return self._col[index-1]
+
+onboard_led=LED(onboard_rgb)
 
 '''Reclaim memory'''
 gc.collect()

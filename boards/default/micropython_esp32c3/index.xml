@@ -1590,9 +1590,9 @@
 
   </category>
   <category id="catOnBoardActuator" name="catOnBoardActuator" colour="#6C9858" m-hide='micropython:esp32c3:generic'>
-    <block type="mixgo_cc_actuator_led_bright" m-show='micropython:esp32c3:mixgo_cc'>
+    <block type="actuator_led_bright" m-show='micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me'>
       <value name="led">
-        <shadow type="cc_number">
+        <shadow type="number">
         </shadow>
       </value>
       <value name="bright">
@@ -1600,15 +1600,15 @@
         </shadow>
       </value>
     </block>
-    <block type="mixgo_cc_actuator_get_led_state" m-show='micropython:esp32c3:mixgo_cc'>
+    <block type="actuator_get_led_state" m-show='micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me'>
       <value name="led">
-        <shadow type="cc_number">
+        <shadow type="number">
         </shadow>
       </value>
     </block>
-    <block type="mixgo_cc_actuator_led_brightness" m-show='micropython:esp32c3:mixgo_cc'>
+    <block type="actuator_led_brightness" m-show='micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me'>
       <value name="led">
-        <shadow type="cc_number">
+        <shadow type="number">
         </shadow>
       </value>
       <value name="bright">
@@ -1617,9 +1617,9 @@
         </shadow>
       </value>
     </block>
-    <block type="mixgo_cc_actuator_get_led_bright" m-show='micropython:esp32c3:mixgo_cc'>
+    <block type="actuator_get_led_bright" m-show='micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me'>
       <value name="led">
-        <shadow type="cc_number">
+        <shadow type="number">
         </shadow>
       </value>
     </block>
@@ -1827,7 +1827,8 @@
     <block type="mixgome_display_font" m-show='micropython:esp32c3:mixgo_me'></block>
     <block type="mixgome_display_image_create" m-show='micropython:esp32c3:mixgo_me'></block>
     <block type="display_image_create" m-show='micropython:esp32c3:mixgo_cc'></block>
-    <block type="display_image_builtins_all" m-show='micropython:esp32c3:mixgo_me micropython:esp32c3:mixgo_cc'></block>
+    <block type="display_image_builtins" m-show='micropython:esp32c3:mixgo_cc'></block>
+    <block type="display_image_builtins_all" m-show='micropython:esp32c3:mixgo_me'></block>
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>
@@ -1994,6 +1995,18 @@
       </block>
       <block type="me_g1_rfid_readid"></block>
       <block type="me_g1_rfid_write">
+        <value name="SECTOR">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="CONTENT">
+          <shadow type="text">
+            <field name="TEXT">Mixly</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="me_g1_rfid_write_outcome">
         <value name="SECTOR">
           <shadow type="math_number">
             <field name="NUM">0</field>

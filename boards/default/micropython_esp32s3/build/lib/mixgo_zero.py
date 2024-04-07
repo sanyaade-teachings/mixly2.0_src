@@ -177,13 +177,11 @@ class LED:
 
 	def getbrightness(self, index):
 		color = self._rgb.led_get(index - 1)
-		for c in self._color:
-			if (bool(c[0]) == bool(color[0])) & (bool(c[1]) == bool(color[1])) & (bool(c[2]) == bool(color[2])):
-				return color[0] | color[1] | color[2]
+		return color[0] | color[1] | color[2]
 
 	def setonoff(self, index, value):
 		if value == -1:
-			if self.getbrightness(index)[0] < 50:
+			if self.getbrightness(index) < 50:
 				self.setbrightness(index, 100)
 			else:
 				self.setbrightness(index, 0)
@@ -193,7 +191,7 @@ class LED:
 			self.setbrightness(index, 0)
 
 	def getonoff(self, index):
-		return True if self.getbrightness(index)[0] > 0 else False
+		return True if self.getbrightness(index) > 50 else False
 
 	def setcolor(self, index, color):
 		self._col[index-1] = color
@@ -201,7 +199,7 @@ class LED:
 	def getcolor(self, index):
 		return self._col[index-1]
 
-onboard_led=LED(onboard_rgb)
+onboard_led = LED(onboard_rgb)
 
 class Clock:
     def __init__(self, x, y, radius, color, oled=onboard_tft):  #定义时钟中心点和半径

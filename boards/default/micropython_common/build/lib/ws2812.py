@@ -52,7 +52,6 @@ class NeoPixel:
 	def write(self):
 		if self.multiplex: self.pin.init(self.pin.OUT)
 		bitstream(self.pin, 0, self.timing, self.rgb_buf + self.led_buf)
-		sleep(0.00001)
 		if self.multiplex: self.pin.init(self.pin.IN)
 
 	def color_chase(self,R, G, B, wait):

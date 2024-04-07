@@ -104,8 +104,7 @@ class LED:
     def __init__(self, pins=[]):
         self._pins = [PWM(Pin(pin), duty_u16=65535) for pin in pins]
         self._brightness = [0 for _ in range(len(self._pins))]
-        print(self._brightness)
-  
+
     def setbrightness(self, index, val):
         if not 0 <= val <= 100:
             raise ValueError("Brightness must be in the range: 0-100%")

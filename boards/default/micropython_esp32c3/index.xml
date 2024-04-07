@@ -31,7 +31,7 @@
 <script src="../python/blocks/storage.js"></script>
 <script src="../micropython_common/blocks/actuator_onboard.js"></script>
 <script src="../micropython_common/blocks/actuator_extern.js"></script>
-<script src="blocks/ce_go.js"></script>
+<script src="../micropython_common/blocks/ce_go.js"></script>
 <script src="blocks/me_g1.js"></script>
 <script src="../micropython_common/blocks/display_onboard.js"></script>
 <script src="../micropython_common/blocks/display_extern.js"></script>
@@ -62,7 +62,7 @@
 <script src="../python/generators/storage.js"></script>
 <script src="../micropython_common/generators/actuator_onboard.js"></script>
 <script src="../micropython_common/generators/actuator_extern.js"></script>
-<script src="generators/me_go.js"></script>
+<script src="../micropython_common/generators/ce_go.js"></script>
 <script src="generators/me_g1.js"></script>
 <script src="../micropython_common/generators/display_onboard.js"></script>
 <script src="../micropython_common/generators/display_extern.js"></script>

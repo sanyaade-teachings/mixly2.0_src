@@ -6,7 +6,7 @@ goog.require('Blockly.Blocks');
 Blockly.Msg['MEGO_HUE'] = 100
 
 //LED
-Blockly.Blocks['me_go_light_number'] = {
+Blockly.Blocks['ce_go_light_number'] = {
     init: function() {
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput("")
@@ -25,7 +25,7 @@ Blockly.Blocks['me_go_light_number'] = {
     }
 };
 
-Blockly.Blocks.me_go_led_bright = {
+Blockly.Blocks.ce_go_led_bright = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
@@ -41,7 +41,7 @@ Blockly.Blocks.me_go_led_bright = {
   }
 };
 
-Blockly.Blocks.me_go_get_led_bright = {
+Blockly.Blocks.ce_go_get_led_bright = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
@@ -56,7 +56,7 @@ Blockly.Blocks.me_go_get_led_bright = {
   }
 };
 
-Blockly.Blocks.me_go_get_led_state = {
+Blockly.Blocks.ce_go_get_led_state = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
@@ -71,7 +71,7 @@ Blockly.Blocks.me_go_get_led_state = {
   }
 };
 
-Blockly.Blocks.me_go_led_brightness = {
+Blockly.Blocks.ce_go_led_brightness = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput()
@@ -90,7 +90,7 @@ Blockly.Blocks.me_go_led_brightness = {
 };
 
 
-Blockly.Blocks.me_go_stepper_keep = {
+Blockly.Blocks.ce_go_stepper_keep = {
     init: function () {
       this.setColour(Blockly.Msg['MEGO_HUE']);
       this.appendDummyInput()
@@ -113,7 +113,7 @@ Blockly.Blocks.me_go_stepper_keep = {
     }
 }
 
-Blockly.Blocks.me_go_stepper_stop = {
+Blockly.Blocks.ce_go_stepper_stop = {
     init: function () {
       this.setColour(Blockly.Msg['MEGO_HUE']);
       this.appendDummyInput()
@@ -159,7 +159,7 @@ Blockly.Blocks.ce_go_dc_motor = {
     }
 }
 
-Blockly.Blocks.me_go_hall_attachInterrupt = {
+Blockly.Blocks.ce_go_hall_attachInterrupt = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput("")
@@ -175,7 +175,7 @@ Blockly.Blocks.me_go_hall_attachInterrupt = {
 }
 };
 
-Blockly.Blocks.me_go_hall_initialize = {
+Blockly.Blocks.ce_go_hall_initialize = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput("")    
@@ -194,7 +194,7 @@ Blockly.Blocks.me_go_hall_initialize = {
 }
 };
 
-Blockly.Blocks.me_go_hall_data = {
+Blockly.Blocks.ce_go_hall_data = {
   init: function() {
     this.setColour(Blockly.Msg['MEGO_HUE']);
     this.appendDummyInput("")    
@@ -210,7 +210,7 @@ Blockly.Blocks.me_go_hall_data = {
 }
 };
 
-Blockly.Blocks['me_go_pin_near_line'] = {
+Blockly.Blocks['ce_go_pin_near_line'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
@@ -234,7 +234,7 @@ Blockly.Blocks['me_go_pin_near_line'] = {
     }
 };
 
-Blockly.Blocks['me_go_pin_near'] = {
+Blockly.Blocks['ce_go_pin_near'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
@@ -258,7 +258,7 @@ Blockly.Blocks['me_go_pin_near'] = {
     }
 };
 
-Blockly.Blocks['me_go_pin_near_state_change'] = {
+Blockly.Blocks['ce_go_pin_near_state_change'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
@@ -299,7 +299,7 @@ Blockly.Blocks['sensor_mixgome_eulerangles'] = {
     }
 };
 
-Blockly.Blocks['me_go_pin_light'] = {
+Blockly.Blocks['ce_go_pin_light'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()

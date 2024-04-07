@@ -100,7 +100,7 @@ Blockly.Python.forBlock['me_go_hall_data'] = function() {
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['me_go_pin_near_line'] = function(){
+Blockly.Python.forBlock['ce_go_pin_near_line'] = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
     var code = 'car.patrol()'+key+'';
@@ -114,7 +114,7 @@ Blockly.Python.forBlock['me_go_pin_near'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['me_go_pin_near_state_change'] = function(){
+Blockly.Python.forBlock['ce_go_pin_near_state_change'] = function(){
     var key = this.getFieldValue('key');
     Blockly.Python.definitions_['import_me_go_hall'] = 'from me_go import car';
     

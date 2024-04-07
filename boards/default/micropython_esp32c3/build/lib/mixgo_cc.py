@@ -204,8 +204,9 @@ else:
 '''2-LED'''     #Modify indexing method    
 class LED:
     def __init__(self, pins=[]):
-        self._pins = [PWM(Pin(pin), duty_u16=65535) for pin in pins]
-        self._brightness = [0 for _ in range(len(self._pins))]
+        self._pins = pins
+        self._flag = [True] * len(pins)
+        self._brightness = [0] * len(pins)
 
     def setbrightness(self, index, val):
         if not 0 <= val <= 100:
@@ -213,6 +214,9 @@ class LED:
         if len(self._pins) == 0:
             print("Warning: Old version, without this function")
         else:
+            if self._flag[index-1]:
+                self._pins[index-1] = PWM(Pin(self._pins[index-1]), duty_u16=65535)
+                self._flag[index-1] = False
             self._brightness[index - 1] = val
             self._pins[index - 1].duty_u16(65535 - val * 65535 // 100)
 

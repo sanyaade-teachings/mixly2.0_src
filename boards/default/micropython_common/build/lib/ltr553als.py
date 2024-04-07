@@ -68,7 +68,7 @@ class LTR_553ALS:
 		self._wreg(LTR_PS_REG_CONTR,0x03)							# PS_CONTR:  Active mode
 		self._wreg(LTR_PS_REG_LED,0x5B)			#PS_LED: LED_pulse_period=50khz,DUTY = 100%,LED_pulsed_current_level = 50mA
 		self._wreg(LTR_PS_REG_PULSES,0x0A)		#PS_N_Pulses: Number_of_pulses = 10
-		self._wreg(LTR_PS_REG_RATE,0x02)		#PS_Measurement_Rate=100ms
+		self._wreg(LTR_PS_REG_RATE,0x08)		#PS_Measurement_Rate=10ms
 		self._wreg(LTR_ALS_REG_RATE,0x12)		#ALS_Measurement_Rate=200ms,ALS_integration_time=200ms
 	
 	def _status(self):

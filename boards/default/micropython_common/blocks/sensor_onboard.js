@@ -1414,17 +1414,6 @@ Blockly.Blocks['sensor_mixbot_get_gyro'] = {
     }
 };
 
-Blockly.Blocks['sensor_bitbot_LTR308'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-            .appendField(Blockly.Msg.DIGITAL+Blockly.Msg.MIXLY_ESP32_EXTERN_LIGHT)
-            .appendField(Blockly.Msg.MIXLY_GET_LIGHT_INTENSITY+"(lux)");
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-    }
-};
-
 Blockly.Blocks['sensor_bitbot_ALS'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);

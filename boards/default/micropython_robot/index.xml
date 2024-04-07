@@ -1505,7 +1505,7 @@
       <block type="sensor_get_acceleration" m-show='micropython:esp32:mixbot'></block>
       <block type="sensor_mixbot_get_gyro" m-show='micropython:esp32:mixbot'></block>  
       <block type="sensor_mixgo_pin_near_single" m-show="micropython:esp32c3:feiyi"></block>
-      <block type="sensor_bitbot_LTR308" m-show="micropython:esp32c3:feiyi"></block>
+      <block type="sensor_LTR308" m-show="micropython:esp32c3:feiyi"></block>
       <block type="sensor_bitbot_ALS" m-show="micropython:esp32c3:feiyi">
         <value name="mode">
         <shadow type="bitbot_als_num">

@@ -1,10 +1,10 @@
 """
-CE GO -Onboard resources
+ME GO -Onboard resources
 
-MicroPython library for the CE GO (Smart Car base for MixGo CE)
+MicroPython library for the ME GO (Smart Car base for MixGo ME)
 =======================================================
 
-#Preliminary composition                       20220830
+#Preliminary composition                       20220625
 
 dahanzimin From the Mixly Team
 """
@@ -14,7 +14,7 @@ from tm1931 import TM1931
 from machine import Pin, SoftI2C, ADC
 
 '''i2c-onboard'''
-i2c = SoftI2C(scl = Pin(4, pull=Pin.PULL_UP), sda = Pin(5, pull=Pin.PULL_UP), freq = 400000)
+i2c = SoftI2C(scl = Pin(7), sda = Pin(6), freq = 400000)
 i2c_scan = i2c.scan()
 
 '''Version judgment'''
@@ -57,12 +57,12 @@ class CAR(TM1931):
         super().__init__(i2c_bus)
         self._mode = self.CL
         self.atten = 0.82 if version else 1
-        self.adc0 = ADC(Pin(9), atten=ADC.ATTN_11DB)
-        self.adc1 = ADC(Pin(10), atten=ADC.ATTN_11DB)
-        self.adc2 = ADC(Pin(1), atten=ADC.ATTN_11DB)
-        self.adc3 = ADC(Pin(2), atten=ADC.ATTN_11DB)
-
-    def ir_mode(self, select=0):
+        self.adc0 = ADC(Pin(0), atten=ADC.ATTN_11DB)
+        self.adc1 = ADC(Pin(1), atten=ADC.ATTN_11DB)
+        self.adc2 = ADC(Pin(2), atten=ADC.ATTN_11DB)
+        self.adc3 = ADC(Pin(3), atten=ADC.ATTN_11DB)
+        
+    def ir_mode(self,select=0):
         '''Infrared line patrol obstacle avoidance mode'''
         self._mode=select
         if select==self.CL:
@@ -217,19 +217,19 @@ class HALL:
         self._speed = 0     #cm/s
         self._on_receive = None
         self._time = time.ticks_ms()
-        Pin(pin, Pin.IN).irq(handler=self._receive_cb, trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING))
+        Pin(pin, Pin.IN).irq(handler=self._receive_cb, trigger = (Pin.IRQ_RISING | Pin.IRQ_FALLING))
 
     def _receive_cb(self, event_source):
         self.turns += self._pulse_turns
         self.distance += self._pulse_distance
         self._speed += self._pulse_distance
         if self._on_receive:
-            self._on_receive(round(self.turns, 2),round(self.distance, 2))
+            self._on_receive(round(self.turns,2),round(self.distance,2))
 
     def irq_cb(self, callback):
         self._on_receive = callback
 
-    def initial(self, turns=None, distance=None):
+    def initial(self,turns=None,distance=None):
         if not (turns is None):
             self.turns = turns
         if not (distance  is None):
@@ -239,11 +239,11 @@ class HALL:
     def speed(self):   
         value=self._speed/time.ticks_diff(time.ticks_ms(), self._time)*1000 if self._speed>0 else 0
         self._time = time.ticks_ms()
-        self._speed = 0
+        self._speed=0
         return round(value, 2)
 
-hall_A = HALL(6)
-hall_B = HALL(7)
+hall_A = HALL(20)
+hall_B = HALL(21)
 
 '''Reclaim memory'''
 gc.collect()

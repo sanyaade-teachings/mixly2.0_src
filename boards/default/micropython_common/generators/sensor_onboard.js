@@ -724,13 +724,6 @@ Blockly.Python.forBlock['sensor_mixbot_get_gyro'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_bitbot_LTR308'] = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    Blockly.Python.definitions_['import_'+version+'_onboard_als'] = "from "+version+" import onboard_als";
-    var code = 'onboard_als.als_vis()';
-    return [code, Blockly.Python.ORDER_ATOMIC];
-};
-
 Blockly.Python.forBlock['sensor_bitbot_ALS'] = function(){
     Blockly.Python.definitions_['import_feiyi_onboard_bot51'] = 'from feiyi import onboard_bot51';
     var mode = Blockly.Python.valueToCode(this, 'mode', Blockly.Python.ORDER_ATOMIC);

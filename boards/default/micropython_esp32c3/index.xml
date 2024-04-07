@@ -2019,8 +2019,6 @@
         </value>
       </block>
       <block type="me_g1_rfid_status"></block> 
-
-
   </category>
   <category id="catCC_G1" colour="40" m-show='micropython:esp32c3:mixgo_cc'>
       <block type="cc_g1_read_bat"></block>   

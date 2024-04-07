@@ -1614,7 +1614,7 @@
       </value>
     </block>
     <block type="rm_actuator_get_led_bright" m-show='micropython:esp32:rm_e1'></block>
-    <block type="mixgo_actuator_led_bright" m-show='micropython:esp32:mixgo'>
+    <block type="actuator_led_bright" m-show='micropython:esp32:mixgo'>
       <value name="led">
         <shadow type="number">
         </shadow>
@@ -1624,13 +1624,13 @@
         </shadow>
       </value>
     </block>
-    <block type="mixgo_actuator_get_led_state" m-show='micropython:esp32:mixgo'>
+    <block type="actuator_get_led_state" m-show='micropython:esp32:mixgo'>
       <value name="led">
         <shadow type="number">
         </shadow>
       </value>
     </block>
-    <block type="mixgo_actuator_led_brightness" m-show='micropython:esp32:mixgo'>
+    <block type="actuator_led_brightness" m-show='micropython:esp32:mixgo'>
       <value name="led">
         <shadow type="number">
         </shadow>
@@ -1641,7 +1641,7 @@
         </shadow>
       </value>
     </block>
-    <block type="mixgo_actuator_get_led_bright" m-show='micropython:esp32:mixgo'>
+    <block type="actuator_get_led_bright" m-show='micropython:esp32:mixgo'>
       <value name="led">
         <shadow type="number">
         </shadow>

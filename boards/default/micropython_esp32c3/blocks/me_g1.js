@@ -112,6 +112,25 @@ Blockly.Blocks['me_g1_rfid_write'] = {
     }
 };
 
+Blockly.Blocks['me_g1_rfid_write_outcome'] = {
+    init: function(){
+        var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]
+        if(version=="mixgo_me"){var name='ME G1'}
+        this.setColour(Blockly.Msg['MEG1_HUE']);
+        this.appendDummyInput()
+            .appendField(name)
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_RFID_WRITE);
+        this.appendValueInput('SECTOR')
+            .appendField(Blockly.Msg.MIXLY_LIST_INDEX)
+        this.appendValueInput('CONTENT')
+            .appendField(Blockly.Msg.MIXLY_COMMUNICATION_WRITE_NUM)
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.RETURN_SUCCESS_OR_NOT)
+        this.setInputsInline(true);
+        this.setOutput(true);
+    }
+};
+
 Blockly.Blocks['me_g1_rfid_status'] = {
     init: function(){
         var version=Mixly.Boards.getSelectedBoardKey().split(':')[2]

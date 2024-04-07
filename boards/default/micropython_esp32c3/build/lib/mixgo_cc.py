@@ -201,55 +201,46 @@ else:
     A3key = KEYSensor(5,2500)
     A4key = KEYSensor(5,3500)
 
-'''2-LED'''     # Dual resources  
+'''2-LED'''     #Modify indexing method    
 class LED:
-    __species = {}
-    __first_init = True
-    def __new__(cls, pin, *args, **kwargs):
-        if pin not in cls.__species.keys():
-            cls.__first_init = True
-            cls.__species[pin]=object.__new__(cls)
-        return cls.__species[pin] 
-
-    def __init__(self, pin):
-         if self.__first_init:
-            self.__first_init = False
-            self._pin =PWM(Pin(pin),duty_u16=65535)
-            self.setbrightness(0)
-        
-    def setbrightness(self,val):
+    def __init__(self, pins=[]):
+        self._pins = [PWM(Pin(pin), duty_u16=65535) for pin in pins]
+        self._brightness = [0 for _ in range(len(self._pins))]
+  
+    def setbrightness(self, index, val):
         if not 0 <= val <= 100:
             raise ValueError("Brightness must be in the range: 0-100%")
-        self._brightness=val
-        self._pin.duty_u16(65535-val*65535//100)
+        if len(self._pins) == 0:
+            print("Warning: Old version, without this function")
+        else:
+            self._brightness[index - 1] = val
+            self._pins[index - 1].duty_u16(65535 - val * 65535 // 100)
 
-    def getbrightness(self):
-        return self._brightness
+    def getbrightness(self, index):
+        if len(self._pins) == 0:
+            print("Warning: Old version, without this function")
+        else:
+            return self._brightness[index - 1]
 
-    def setonoff(self,val):
-        if(val == -1):
-            self.setbrightness(100)  if self._brightness<50 else self.setbrightness(0) 
-        elif(val == 1):
-            self.setbrightness(100) 
-        elif(val == 0):
-            self.setbrightness(0) 
-            
-    def getonoff(self):
-        return True if self._brightness>0 else False
+    def setonoff(self, index, val):
+        if len(self._pins) == 0:
+            print("Warning: Old version, without this function")
+        else:
+            if val == -1:
+                self.setbrightness(index, 100)  if self.getbrightness(index) < 50 else self.setbrightness(index, 0) 
+            elif val == 1:
+                self.setbrightness(index, 100) 
+            elif val == 0:
+                self.setbrightness(index, 0) 
+
+    def getonoff(self, index):
+        if len(self._pins) == 0:
+            print("Warning: Old version, without this function")
+        else:
+            return True if self.getbrightness(index) > 50 else False
 
 #LED with function call / L1(IO20),L2(IO21)
-if version==0:
-    def ledonoff(pin,val=None):
-        print("Warning: Old version, without this function")
-
-    def ledbrightness(pin,val=None):
-        print("Warning: Old version, without this function")  
-else:
-    def ledonoff(pin,val=None):
-        return LED(pin).getonoff()  if val is None  else LED(pin).setonoff(val)
-
-    def ledbrightness(pin,val=None):
-        return LED(pin).getbrightness()  if val is None  else LED(pin).setbrightness(val)
+onboard_led = LED() if version == 0 else LED(pins=[20, 21])
 
 '''Reclaim memory'''
 gc.collect()

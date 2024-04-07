@@ -99,34 +99,34 @@ class Touch_Pad:
 def touched(pin,value=33000):
     return Touch_Pad(pin).is_touched(value)  if value  else Touch_Pad(pin).raw_value()
 
-'''2-LED'''     #Repair brightness adjustment range 0-100%    
+'''2-LED'''     #Modify indexing method    
 class LED:
-    def __init__(self, pin):
-        self._pin =PWM(Pin(pin),freq=5000,duty_u16=65535)
-        self.setbrightness(0)
-        
-    def setbrightness(self,val):
+    def __init__(self, pins=[]):
+        self._pins = [PWM(Pin(pin), duty_u16=65535) for pin in pins]
+        self._brightness = [0 for _ in range(len(self._pins))]
+        print(self._brightness)
+  
+    def setbrightness(self, index, val):
         if not 0 <= val <= 100:
             raise ValueError("Brightness must be in the range: 0-100%")
-        self._brightness=val
-        self._pin.duty_u16(65535-val*65535//100)
+        self._brightness[index - 1] = val
+        self._pins[index - 1].duty_u16(65535 - val * 65535 // 100)
 
-    def getbrightness(self):
-        return self._brightness
+    def getbrightness(self, index):
+        return self._brightness[index - 1]
 
-    def setonoff(self,val):
-        if(val == -1):
-            self.setbrightness(100)  if self._brightness<50 else self.setbrightness(0) 
-        elif(val == 1):
-            self.setbrightness(100) 
-        elif(val == 0):
-            self.setbrightness(0) 
-            
-    def getonoff(self):
-        return True if self._brightness>0 else False
+    def setonoff(self, index, val):
+        if val == -1:
+            self.setbrightness(index, 100)  if self.getbrightness(index) < 50 else self.setbrightness(index, 0) 
+        elif val == 1:
+            self.setbrightness(index, 100) 
+        elif val == 0:
+            self.setbrightness(index, 0) 
 
-led1 = LED(33)
-led2 = LED(34)
+    def getonoff(self, index):
+        return True if self.getbrightness(index) > 50 else False
+
+onboard_led = LED(pins=[33, 34])
 
 '''MIC_Sensor'''
 class MICSensor:

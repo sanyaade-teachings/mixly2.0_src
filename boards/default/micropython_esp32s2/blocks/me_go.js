@@ -210,7 +210,7 @@ Blockly.Blocks.me_go_hall_data = {
 }
 };
 
-Blockly.Blocks['ce_go_pin_near_line'] = {
+Blockly.Blocks['me_go_pin_near_line'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()
@@ -258,7 +258,7 @@ Blockly.Blocks['me_go_pin_near'] = {
     }
 };
 
-Blockly.Blocks['ce_go_pin_near_state_change'] = {
+Blockly.Blocks['me_go_pin_near_state_change'] = {
     init: function(){
         this.setColour(Blockly.Msg['MEGO_HUE']);
         this.appendDummyInput()

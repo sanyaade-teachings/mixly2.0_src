@@ -128,7 +128,7 @@ Blockly.Blocks.me_go_stepper_stop = {
     }
 }
 
-Blockly.Blocks.me_go_dc_motor = {
+Blockly.Blocks.ce_go_dc_motor = {
     init: function () {
       this.setColour(Blockly.Msg['MEGO_HUE']);
       this.appendDummyInput()

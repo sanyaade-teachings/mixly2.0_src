@@ -55,7 +55,7 @@ Blockly.Python.forBlock['me_go_stepper_stop'] = function(){
     return code;
 };
 
-Blockly.Python.forBlock['me_go_dc_motor'] = function(){
+Blockly.Python.forBlock['ce_go_dc_motor'] = function(){
     var wheel = this.getFieldValue('wheel');
     Blockly.Python.definitions_['import_me_go_car'] = 'from me_go import car';
     var v = this.getFieldValue('direction');

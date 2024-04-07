@@ -1,6 +1,7 @@
 import * as Blockly from 'blockly/core';
 
 const TOOLS_HUE = "#555555";
+const LISTS_HUE = 260;
 
 export const factory_notes = {
     init: function () {
@@ -41,7 +42,7 @@ export const IICSCAN = {
 //取模工具显示数据部分
 export const tool_modulus_show = {
     init: function () {
-        this.setColour(Blockly.Msg['LISTS_HUE']);
+        this.setColour(LISTS_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.OLED_BITMAP_NAME)
             .appendField(new Blockly.FieldTextInput('mylist'), 'VAR')

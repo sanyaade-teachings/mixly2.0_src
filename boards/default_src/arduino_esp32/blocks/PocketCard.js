@@ -2,11 +2,12 @@ import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 import { sensor_mixgo_pin_near } from './MixGo';
 
+const SENSOR_HUE = 40;
 const ACTUATOR_HUE = 100;
 
 export const mixgo_button_is_pressed = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON);
         this.appendDummyInput("")
@@ -21,7 +22,7 @@ export const mixgo_button_is_pressed = {
 
 export const sensor_mixgo_sound = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
         this.setOutput(true, Number);
@@ -32,7 +33,7 @@ export const sensor_mixgo_sound = {
 
 export const mixgo_touch_pin = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
             .appendField(Blockly.Msg.MIXLY_PIN)
@@ -47,7 +48,7 @@ export const mixgo_touch_pin = {
 
 export const sensor_mixgo_light = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT)
             .appendField(new Blockly.FieldDropdown([["A", "39"], ["B", "36"]]), "direction");
@@ -59,7 +60,7 @@ export const sensor_mixgo_light = {
 //NTC电阻
 export const NTC_TEMP = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("NTC")
             .appendField(Blockly.Msg.MIXLY_TEMP);
@@ -72,7 +73,7 @@ export const NTC_TEMP = {
 
 export const MPU9250_update = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("MPU9250" + Blockly.Msg.MIXLY_update_data);
         this.setPreviousStatement(true);

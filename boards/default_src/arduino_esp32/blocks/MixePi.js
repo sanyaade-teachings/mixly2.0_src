@@ -2,6 +2,8 @@ import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
 const DISPLAY_HUE = 180;
+const SENSOR_HUE = 40;
+const ACTUATOR_HUE = 100;
 
 var MIXEPI_ADXL345_ACTION = [
     [Blockly.Msg.HANDBIT_FORWARD, "accel.getAcceleration().x>-4.7&&accel.getAcceleration().x<0&&accel.getAcceleration().y<1&&accel.getAcceleration().y>-1&&accel.getAcceleration().z<-8&&accel.getAcceleration().z>-9.8"],
@@ -27,7 +29,7 @@ export const brightness_select = {
 
 export const mixePi_button_is_pressed = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_BUTTON);
         this.appendDummyInput("")
@@ -42,7 +44,7 @@ export const mixePi_button_is_pressed = {
 
 export const mixepi_light = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
         this.setOutput(true, Number);
@@ -53,7 +55,7 @@ export const mixepi_light = {
 
 export const mixepi_sound = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
         this.setOutput(true, Number);
@@ -64,7 +66,7 @@ export const mixepi_sound = {
 
 export const mixepi_inout_touchRead = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_ESP32_TOUCH)
             .appendField(Blockly.Msg.MIXLY_PIN)
@@ -80,7 +82,7 @@ export const mixepi_inout_touchRead = {
 
 export const mixepi_ADXL345_action = {
     init: function () {
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput("")
             .appendField("MIXEPI");
         this.appendDummyInput("")
@@ -95,7 +97,7 @@ export const mixepi_ADXL345_action = {
 
 export const mixepi_rgb_rainbow1 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("WAIT")
@@ -115,7 +117,7 @@ var DISPLAY_RAINBOW_TYPE = [
 
 export const mixepi_rgb_rainbow3 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -132,7 +134,7 @@ export const mixepi_rgb_rainbow3 = {
 
 export const RGB_color_seclet = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(new Blockly.FieldColour("ff0000"), "COLOR");
@@ -144,7 +146,7 @@ export const RGB_color_seclet = {
 
 export const RGB_color_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendValueInput("R")
             .setCheck(Number)
             .setAlign(Blockly.ALIGN_RIGHT)
@@ -165,7 +167,7 @@ export const RGB_color_rgb = {
 
 export const mixepi_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("_LED_")
@@ -185,7 +187,7 @@ export const mixepi_rgb = {
 
 export const mixepi_rgb2 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -211,7 +213,7 @@ export const mixepi_rgb2 = {
 
 export const mixepi_rgb_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("Brightness")

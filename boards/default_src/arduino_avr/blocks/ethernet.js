@@ -264,7 +264,7 @@ export const WIFI_info = {
 
 export const network_connect = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_ESP32_NETWORK_CONNECT);
         this.appendValueInput('id')
@@ -282,7 +282,7 @@ export const network_connect = {
 
 export const network_wifi_connect = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_NETWORK_WIFI_CONNECT);
         this.setOutput(true, Number);
@@ -293,7 +293,7 @@ export const network_wifi_connect = {
 
 export const network_get_connect = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput()
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_GET + Blockly.Msg.MIXLY_DEVICE)
@@ -306,7 +306,7 @@ export const network_get_connect = {
 
 export const MQTT_connect = {
     init: function () {
-        this.setColour(Blockly.Msg['STORAGE_HUE']);
+        this.setColour(ETHERNET_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MQTT_connect);
         this.setPreviousStatement(true, null);

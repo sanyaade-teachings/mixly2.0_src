@@ -29,7 +29,7 @@ export const ESP32_temprature = {
 
 export const OneButton = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(SENSOR_HUE);
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_CURRENT);
         this.appendDummyInput("")

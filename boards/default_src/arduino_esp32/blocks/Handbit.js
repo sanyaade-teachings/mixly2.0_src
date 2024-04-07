@@ -2,6 +2,7 @@ import * as Blockly from 'blockly/core';
 import { Profile } from 'mixly';
 
 const HANDBIT_HUE = 65;
+const ACTUATOR_HUE = 100;
 
 export const handbit_button_is_pressed = {
     init: function () {
@@ -56,7 +57,7 @@ export const inout_touchRead = {
 
 export const touchAttachInterrupt = {
     init: function () {
-        this.setColour(Blockly.Msg['BASE_HUE']);
+        this.setColour(HANDBIT_HUE);
         this.appendValueInput("PIN", Number)
             .appendField(Blockly.Msg.MIXLY_TOUCHATTACHINTERRUPT_PIN)
             .setCheck(Number);
@@ -121,7 +122,7 @@ export const handbit_MSA300_action = {
 
 export const handbit_rgb_rainbow1 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("WAIT")
@@ -141,7 +142,7 @@ var DISPLAY_RAINBOW_TYPE = [
 
 export const handbit_rgb_rainbow3 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -158,7 +159,7 @@ export const handbit_rgb_rainbow3 = {
 
 export const handbit_rgb = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("_LED_")
@@ -178,7 +179,7 @@ export const handbit_rgb = {
 
 export const handbit_rgb2 = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendDummyInput("")
@@ -201,7 +202,7 @@ export const handbit_rgb2 = {
 
 export const handbit_rgb_Brightness = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("Brightness")
@@ -217,7 +218,7 @@ export const handbit_rgb_Brightness = {
 
 export const handbit_rgb_show = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB_SHOW)
         this.setPreviousStatement(true, null);
@@ -237,7 +238,7 @@ export const handbit_motor_move = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.setTooltip("");
         this.setHelpUrl("");
     }
@@ -245,7 +246,7 @@ export const handbit_motor_move = {
 
 export const handbit_RGB_color_HSV = {
     init: function () {
-        this.setColour(Blockly.Msg['ACTUATOR_HUE']);
+        this.setColour(ACTUATOR_HUE);
         this.appendDummyInput("")
             .appendField(Blockly.Msg.MIXLY_RGB);
         this.appendValueInput("_LED_")

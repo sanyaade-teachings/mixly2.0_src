@@ -297,7 +297,6 @@ Blockly.Blocks['set_add_discard'] = {
     this.appendDummyInput("")   
         .appendField(new Blockly.FieldDropdown(changenum), 'OPERATE')
     this.appendValueInput('data')
-        .setCheck(Number)
         .appendField(Blockly.Msg.blockpy_SET_VARIABLES_NAME)    
     this.setInputsInline(true);
     this.setPreviousStatement(true);

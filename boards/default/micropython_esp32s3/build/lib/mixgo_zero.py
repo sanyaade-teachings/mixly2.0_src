@@ -21,8 +21,11 @@ onboard_i2c = SoftI2C(scl=Pin(47), sda=Pin(48), freq=400000)
 onboard_i2c_1 = SoftI2C(scl=Pin(47), sda=Pin(21), freq=400000)
 
 '''SPI-onboard'''
-onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
-#onboard_spi = SoftSPI(baudrate=5000000, sck=Pin(17), mosi=Pin(16), miso=Pin(15), polarity=0, phase=0)
+try:
+	import _boot 
+	onboard_spi = _boot.onboard_spi
+except:
+	onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
 
 '''TFT/320*240'''
 onboard_tft = st7789_bf.ST7789(onboard_spi, 320, 240, dc_pin=18, cs_pin=45, bl_pin=46, font_address=0xE00000)

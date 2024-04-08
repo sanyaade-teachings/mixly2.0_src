@@ -46,7 +46,7 @@ class MXC6655XA:
 		if self._chip_id() != 0x02:
 			raise AttributeError("Cannot find a MXC6655XA")
 		self._Enable()              #star
-		time.sleep(0.3)
+		#time.sleep(0.3)
 		
 	def _wreg(self, reg, val):
 		'''Write memory address'''

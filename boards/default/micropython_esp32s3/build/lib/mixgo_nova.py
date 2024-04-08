@@ -23,7 +23,11 @@ onboard_i2c_soft = SoftI2C(scl=Pin(13), sda=Pin(15), freq=400000)
 onboard_i2c_scan = onboard_i2c.scan()
 
 '''SPI-onboard'''
-onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
+try:
+	import _boot 
+	onboard_spi = _boot.onboard_spi
+except:
+	onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
 
 '''TFT/128*160'''
 onboard_tft = st7735.ST7735(onboard_spi, 160, 128, dc_pin=18, cs_pin=45, bl_pin=14, font_address=0x700000)

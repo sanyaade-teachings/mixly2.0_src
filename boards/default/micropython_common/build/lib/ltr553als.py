@@ -48,7 +48,7 @@ class LTR_553ALS:
 			raise AttributeError("Cannot find a LTR_553ALS")
 			
 		self._configure()
-		time.sleep(0.1)
+		#time.sleep(0.1)
 	
 	def _wreg(self, reg, val):
 		'''Write memory address'''

@@ -51,7 +51,7 @@ class ST7735(uframebuf.FrameBuffer_Uincode):
 		self._init()
 		self.fill(0)
 		self.show()
-		time.sleep_ms(100)
+		#time.sleep_ms(100)
 		self._brightness = 0.6 
 		self.bl_led = PWM(Pin(bl_pin), duty_u16=int(self._brightness * 60000)) if bl_pin else None
 

@@ -681,13 +681,14 @@ Blockly.Blocks['ai_sensor_face'] = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.MIXLY_GET)
             .appendField(new Blockly.FieldDropdown([
+                ["ID","info1"],
                 [Blockly.Msg.MIXLY_CONFIDENCE_DEGREE, "info2"],
                 [Blockly.Msg.MIXLY_POSITION_XY+"-xywh", "rect"],
                 ["x"+Blockly.Msg.MIXLY_POSITION_XY, "rect[0]"],
                 ["y"+Blockly.Msg.MIXLY_POSITION_XY, "rect[1]"],
                 ["w"+Blockly.Msg.MIXLY_POSITION_XY, "rect[2]"],
                 ["h"+Blockly.Msg.MIXLY_POSITION_XY, "rect[3]"]                              
-            ]), "key");         
+            ]), "key");
         this.setOutput(true);
         this.setInputsInline(true);
          this.setTooltip(Blockly.Msg.MIXLY_AI_SENSOR_FACE_TOOLTIP);
@@ -699,7 +700,7 @@ Blockly.Blocks['ai_sensor_classifier_faces'] = {
         this.setColour(Blockly.Msg['AI_SENSOR_HUE']);
         this.appendValueInput('SUB')
         this.appendDummyInput()
-            .appendField(Blockly.Msg.MIXLY_FACE_CLASSIFIER);        
+            .appendField(Blockly.Msg.MIXLY_AipFace);        
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_RIGHT)
             .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN+"[face]");     

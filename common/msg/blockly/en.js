@@ -36,7 +36,7 @@ En.MSG = {
     catNova_G1:"Nova G1",
     catAIOT:"Intelligent IOT",
     catAIsensor:"MixGo AI Sensor",
-    catAIsensor2:"MixGo AI LPR",
+    catAIsensor2:"MixGo AI image identification",
     catSensor: "Sensor",
     catActuator: "Actuator",
     catExternSensor: "External Sensor",

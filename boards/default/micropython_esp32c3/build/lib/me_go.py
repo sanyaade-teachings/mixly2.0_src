@@ -208,8 +208,8 @@ except Exception as e:
 '''2Hall_HEP'''
 class HALL:
 
-    _pulse_turns=1/480 if version else 1/400    #圈数= 1/(减速比*磁极)
-    _pulse_distance=_pulse_turns*math.pi*4.4    #距离= 圈数*π*轮胎直径
+    _pulse_turns=1/480 if version else 1/400    #鍦堟暟= 1/(鍑忛�熸瘮*纾佹瀬)
+    _pulse_distance=_pulse_turns*math.pi*4.4    #璺濈= 鍦堟暟*蟺*杞儙鐩村緞
 
     def __init__(self, pin):
         self.turns = 0 

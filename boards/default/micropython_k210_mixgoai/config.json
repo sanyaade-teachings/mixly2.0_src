@@ -1,8 +1,8 @@
 {
     "board": {
         "MixGo AI": "MixGo AI",
-        "MixGo AI传感器": "MixGo AI sensor",
-        "MixGo AI车牌识别": "MixGo AI sensor2"
+        "MixGoAI智能传感": "MixGo AI sensor",
+        "MixGoAI图像识别": "MixGo AI sensor2"
     },
     "language": "MicroPython",
     "burn": {

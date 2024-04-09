@@ -3,6 +3,7 @@ goog.loadJs('common', () => {
 goog.require('path');
 goog.require('$.ui');
 goog.require('$.flot');
+goog.require('$.select2');
 goog.require('Mixly.Env');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.SideBarsManager');
@@ -173,12 +174,19 @@ class StatusBarSerial extends PageBase {
     #valueTemp_ = '';
     #statusTemp_ = false;
     #$send_ = null;
+    #$settingMenu= null;
     #manager_ = null;
 
     constructor() {
         super();
         const $content = $(HTMLTemplate.get('statusbar/statusbar-serial.html').render());
         this.setContent($content);
+        this.#$settingMenu = $content.find('.setting-menu');
+        this.#$settingMenu.select2({
+            minimumResultsForSearch: 50,
+            dropdownAutoWidth: true,
+            dropdownCssClass: 'mixly-scrollbar'
+        });
         this.#$send_ = $content.find('.send');
         this.#manager_ = new RightSideBarsManager($content.find('.content')[0]);
         this.#manager_.add('serial_output', 'serial_output', '监视器');
@@ -241,6 +249,7 @@ class StatusBarSerial extends PageBase {
 
     dispose() {
         this.getManager().dispose();
+        this.#$settingMenu.select2('destroy');
         super.dispose();
         this.#$close_ = null;
     }

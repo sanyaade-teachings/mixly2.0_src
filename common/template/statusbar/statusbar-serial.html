@@ -25,45 +25,59 @@
 
     div[m-id="{{d.mId}}"] > .send > .box {
         flex-grow: 1;
-        border-style: solid;
-        border-width: 1px;
         height: 100%;
+        padding: 0 5px;
+    }
+
+    div[m-id="{{d.mId}}"] > .send > * {
+        border-style: solid;
+        border-width: 1px 1px 1px 0px;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > * {
+        border-color: #c9c9c9;
+        background-color: #ffffff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > * {
         border-color: rgba(128, 128, 128, 0.35);
         background-color: #1e1e1e;
-        padding: 0 5px;
     }
 
     /*div[m-id="{{d.mId}}"] > .send > .box:focus {
         border-color: var(--app-dark-color);
     }*/
 
-    div[m-id="{{d.mId}}"] > .send > .setting-menu {
-        border-style: solid;
-        border-width: 1px;
-        border-color: rgba(128, 128, 128, 0.35);
-        background-color: #1e1e1e;
-    }
-
     /*div[m-id="{{d.mId}}"] > .send > .setting-menu:hover {
         background-color: var(--app-dark-color);
     }*/
 
-    div[m-id="{{d.mId}}"] > .send > .setting-menu > option:checked {
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .setting-menu > option:checked {
+      color: white;
+      background-color: var(--app-light-color);
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > .setting-menu > option:checked {
       color: white;
       background-color: var(--app-dark-color);
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .setting-menu > option:checked {
+      color: white;
+      background-color: var(--app-light-color);
     }
 </style>
 <div m-id={{ d.mId }}>
     <div class="content"></div>
     <div class="send">
         <input class="box" type="text" name="title" placeholder="消息 (Enter 发送)" autocomplete="off">
-        <select class="setting-menu" value="send-with">
-            <option value="no">无结束符</option>
-            <option value="\n">换行</option>
-            <option value="\r">回车</option>
-            <option value="\r\n" selected>换行+回车</option>
+        <select class="setting-menu" value="send-with" style="width: 60px;">
+            <option value="no">no</option>
+            <option value="\n">\n</option>
+            <option value="\r">\r</option>
+            <option value="\r\n" selected>\r\n</option>
         </select>
-        <select class="setting-menu" value="baud" style="margin-right: 2px;border-right-width: 0;">
+        <select class="setting-menu" value="baud" style="margin-right: 2px;border-right-width: 0;width: 100px;">
             <option value="300">300</option>
             <option value="600">600</option>
             <option value="750">750</option>

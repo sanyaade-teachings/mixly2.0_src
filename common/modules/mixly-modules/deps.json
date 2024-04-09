@@ -851,6 +851,7 @@
             "path",
             "$.ui",
             "$.flot",
+            "$.select2",
             "Mixly.Env",
             "Mixly.StatusBar",
             "Mixly.SideBarsManager",

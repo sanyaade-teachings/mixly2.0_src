@@ -45,13 +45,12 @@ class ST7735(uframebuf.FrameBuffer_Uincode):
 		self.dc = Pin(dc_pin, Pin.OUT, value=1)
 		self.cs = Pin(cs_pin, Pin.OUT, value=1)
 		self._buffer = bytearray(width * height * 2)
-		self._bufbgr = bytearray(width * height * 2)
 		super().__init__(self._buffer, width, height, uframebuf.RGB565)
 		self.font(font_address)
 		self._init()
 		self.fill(0)
 		self.show()
-		#time.sleep_ms(100)
+		time.sleep_ms(100)
 		self._brightness = 0.6 
 		self.bl_led = PWM(Pin(bl_pin), duty_u16=int(self._brightness * 60000)) if bl_pin else None
 
@@ -110,15 +109,10 @@ class ST7735(uframebuf.FrameBuffer_Uincode):
 
 	def show(self):
 		"""Refresh the display and show the changes."""
-		#uframebuf的width, height也得对应
-		for i in range(1, len(self._buffer), 2):  #对偶数字节和奇数字节进行置换
-			self._bufbgr[i], self._bufbgr[i - 1] = self._buffer[i - 1], self._buffer[i]
-
 		#正常显示_CMD_MADCTL=0xa0, 180显示_CMD_MADCTL=0x60
 		self._write(_CMD_CASET, b'\x01\x01\x01\xa0')
 		self._write(_CMD_RASET, b'\x02\x02\x02\x81')
-		self._write(_CMD_RAMWR, self._bufbgr)
-
+		self._write(_CMD_RAMWR, self._buffer)
 		#90显示_CMD_MADCTL=0x00, 180显示_CMD_MADCTL=0xc0
 		#self._write(_CMD_CASET, b'\x02\x02\x02\x81')
 		#self._write(_CMD_RASET, b'\x01\x01\x01\xa0')

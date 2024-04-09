@@ -24,6 +24,7 @@ onboard_i2c_1 = SoftI2C(scl=Pin(47), sda=Pin(21), freq=400000)
 try:
 	import _boot 
 	onboard_spi = _boot.onboard_spi
+	onboard_spi.init(baudrate=50000000)
 except:
 	onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
 

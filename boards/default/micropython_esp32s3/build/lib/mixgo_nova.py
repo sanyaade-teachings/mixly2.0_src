@@ -26,6 +26,7 @@ onboard_i2c_scan = onboard_i2c.scan()
 try:
 	import _boot 
 	onboard_spi = _boot.onboard_spi
+	onboard_spi.init(baudrate=50000000)
 except:
 	onboard_spi = SPI(1, baudrate=50000000, polarity=0, phase=0)
 

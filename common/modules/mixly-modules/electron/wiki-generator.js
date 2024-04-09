@@ -53,8 +53,10 @@ class WikiGenerator {
 
     async generate() {
         let output = this.buildTree(this.#$xml_.children());
+        fs_extra.ensureDirSync('./outputBlock/');
+        fs_extra.emptyDirSync('./outputBlock/');
         let info = await this.generateWikiPage('./outputBlock/', {
-            title: 'Keyes Easy Plug',
+            title: 'Micropython ESP32',
             order: 1
         }, output);
         fs_extra.outputFileSync(path.join('./outputBlock/', 'README.md'), info.md);
@@ -115,28 +117,32 @@ class WikiGenerator {
                 md: Mustache.render(WikiGenerator.WIKI_PAGE_FILE, config)
             };
         } else {
-            let emptyNum = 0;
+            let index = 0;
             for (let i in nodes) {
                 if (!nodes[i].children) {
-                    emptyNum += 1;
                     continue;
                 }
-                let desPath = path.join(rootPath, nodes[i].id);
+                index += 1;
+                let order = String(index * 5);
+                let mdIndex = Array(4 - Math.min(order.length, 4)).fill('0').join('') + order;
+                let desPath = path.join(rootPath, mdIndex + '-' + nodes[i].id);
                 let info = await this.generateWikiPage(desPath, {
                     id: nodes[i].id,
                     title: nodes[i].name,
-                    order: (i - 0) + 1
+                    order: order,
                 }, nodes[i].children);
                 if (info.file) {
-                    fs_extra.outputFileSync(desPath + '.md', info.md);
+                    fs_extra.outputFileSync(`${desPath}.md`, info.md);
                 } else if (!info.isEmpty) {
                     fs_extra.outputFileSync(path.join(desPath, 'README.md'), info.md);
+                } else if (info.isEmpty) {
+                    index -= 1;
                 }
             }
             config.blocks = [];
             return {
                 file: false,
-                isEmpty: emptyNum == nodes.length,
+                isEmpty: !index,
                 md: Mustache.render(WikiGenerator.WIKI_PAGE_DIR, config)
             };
         }

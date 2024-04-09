@@ -4,10 +4,11 @@ order: {{&order}}
 index: {{&index}}
 ---
 {{#blocks}}
-
+<!-- 
 #### **块类型\: {{&type}}**
 
 ---
+-->
 
 ::: tabs
 
@@ -17,7 +18,7 @@ index: {{&index}}
 
 @tab 代码
 
-```arduino
+```python
 {{&code}}
 ```
 

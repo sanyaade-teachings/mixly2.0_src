@@ -37,6 +37,7 @@ class FooterLayerBoardConfig extends FooterLayer {
         }
      * @return { FooterLayerBoardConfig obj }
      **/
+    #canvas_ = null;
     constructor(id, boardsInfo) {
         super(id, {
             onHidden: (instance) => {
@@ -102,8 +103,8 @@ class FooterLayerBoardConfig extends FooterLayer {
     renderMenu() {
         let { options, selectedOptions } = this.boardsInfo[this.boardName];
         this.renderTemplate(options);
-        this.setSelectedOptions(selectedOptions);
         this.renderOptions(options);
+        this.setSelectedOptions(selectedOptions);
         this.renderBoardName = this.boardName
     }
 
@@ -115,11 +116,11 @@ class FooterLayerBoardConfig extends FooterLayer {
             if (!boardsInfo.defaultOptions[i]) {
                 continue;
             }
-            let label = boardsInfo.defaultOptions[i].label;
+            let id = boardsInfo.defaultOptions[i].key;
             if (boardsInfo.optionIsLegal(i, selectedOptions[i])) {
-                label = selectedOptions[i].label;
+                id = selectedOptions[i].key;
             }
-            this.$body.find(`[mid=${i}]`).find('p').text(label);
+            this.$body.find(`[mid=${i}]`).val(id).trigger('change');;
             boardsInfo.setSelectedOption(i, selectedOptions[i]);
         }
         // 重新计算窗口的位置
@@ -156,48 +157,38 @@ class FooterLayerBoardConfig extends FooterLayer {
         if (!$container.length) {
             return;
         }
-        const boardName = this.boardName;
-        let _this = this;
-        let config = {
-            elem: $container[0],
-            align: 'right',
-            data: options,
-            anywhereClose: true,
-            className: 'mixly-scrollbar editor-dropdown-menu board-config-menu',
-            ready: (elemPanel, elem) => {
-                const $elemPanel = $(elemPanel);
-                const $elem = $(elem);
-                $elemPanel.css({
-                    'left': 'auto',
-                    'right': 'calc(100vw - ' + ($elem.offset().left + $elem.outerWidth()) + 'px)',
-                    'min-width': $elem.outerWidth() + 'px'
-                });
-                const $p = $elem.find('p');
-                const $lis = $elemPanel.find('li');
-                for (let i = 0; $lis[i]; i++) {
-                    const $div = $($lis[i]).children('div');
-                    if ($div.text() === $p.text()) {
-                        let $li = $($lis[i]);
-                        $li.addClass('selected');
-                        $div.css('color', '#fff');
-                    }
-                }
-            },
-            click: function(data, othis) {
-                const $elem = $(this.elem);
-                const $p = $elem.children('p');
-                $p.text(data.title);
-                _this.boardsInfo[boardName].setSelectedOption(mId, {
-                    key: data.id,
-                    label: data.title
-                });
-                _this.setProps({});
+        let menu = [];
+        let maxLength = 0;
+        for (let item of options) {
+            menu.push({
+                id: item.id,
+                text: item.title
+            });
+            let nowLength = this.getStrWidth(item.title);
+            if (maxLength < nowLength) {
+                maxLength = nowLength;
             }
-        };
-        this.dropdownItems[mId] = dropdown.render(config);
+        }
+        $container.select2({
+            data: menu,
+            minimumResultsForSearch: 50,
+            width: 'auto',
+            dropdownCssClass: 'mixly-scrollbar'
+        });
+        $container.next().css('min-width', (maxLength + 30) + 'px');
+        $container.on('select2:select', (e) => {
+            const boardName = this.boardName;
+            const data = e.params.data;
+            this.boardsInfo[boardName].setSelectedOption(mId, {
+                key: data.id,
+                label: data.text
+            });
+            this.setProps({});
+        });
     }
 
     renderTemplate(options) {
+        this.$body.find('select').select2('destroy');
         const xmlStr = FooterLayerBoardConfig.menuHTMLTemplate.render({ options });
         this.updateContent(xmlStr);
     }
@@ -213,6 +204,17 @@ class FooterLayerBoardConfig extends FooterLayer {
         this.boardKey = this.boardsInfo[boardName].key;
         this.renderMenu(this.layer);
     }
+
+    getStrWidth(str, font = '14px Arial') {
+        try {
+            this.#canvas_ = this.#canvas_ || document.createElement('canvas').getContext('2d');
+            this.#canvas_.font = font;
+            return this.#canvas_.measureText(str).width;
+        } catch (e) {
+            return 0;
+        }
+    }
+
 }
 
 Mixly.FooterLayerBoardConfig = FooterLayerBoardConfig;

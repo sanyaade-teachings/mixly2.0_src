@@ -59,69 +59,18 @@
         background-color: #007ACC;
     }
 
+    div[m-id="{{d.mId}}"] .select2-selection--single {
+        height: 24px;
+    }
+
+    div[m-id="{{d.mId}}"] .select2-selection--single > span {
+        line-height: 24px !important;
+        height: 24px !important;
+    }
 
     .footer-layer-board-config .footer-layer-btn.reset {
         font-size: 13px;
         line-height: 12px;
-    }
-
-    .board-config-menu {
-        display: inline-block;
-        animation-name: unset;
-    }
-
-    html[data-bs-theme=light] .board-config-menu {
-        border: 1px solid #bebebe !important;
-        box-shadow: 0 2px 5px rgb(0 0 0 / 50%) !important;
-    }
-
-    html[data-bs-theme=dark] .board-config-menu {
-        border: 1px solid #454545 !important;
-        box-shadow: 0 2px 5px rgb(0 0 0 / 50%) !important;
-    }
-
-    html[data-bs-theme=dark] .board-config-menu,
-    html[data-bs-theme=dark] .board-config-menu > ul {
-        background-color: #252526 !important;
-    }
-
-    .board-config-menu > .layui-dropdown-menu {
-        max-height: 150px;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    .board-config-menu > .layui-dropdown-menu > li {
-        font-size: 14px;
-        line-height: 14px;
-        border-radius: 5px;
-        box-sizing: content-box;
-        padding: 5px 10px !important;
-        margin: 0px 5px;
-        border-radius: 5px !important;
-        transition: none;
-        -webkit-transition: none;
-    }
-
-    .board-config-menu li.selected > div,
-    .board-config-menu li:hover > div {
-        color: #fff;
-    }
-
-    html[data-bs-theme=light] .board-config-menu li.selected {
-        background-color: rgb(0 150 136 / 60%) !important;
-    }
-
-    html[data-bs-theme=light] .board-config-menu li:hover {
-        background-color: var(--app-light-color);
-    }
-
-    html[data-bs-theme=dark] .board-config-menu li.selected {
-        background-color: rgb(41 128 185 / 60%) !important;
-    }
-
-    html[data-bs-theme=dark] .board-config-menu li:hover {
-        background-color: #2980b9;
     }
 </style>
 <div m-id="{{d.mId}}">
@@ -132,11 +81,6 @@
         <p>{{ item.name }}</p>
     </button>
     <p>&nbsp:&nbsp</p>
-    <button
-        mid="{{ item.key }}"
-        class="layui-btn layui-btn-fluid layui-btn-xs option">
-        <p style="font-size: 13px;">{{ item.label }}</p>
-        <i class="layui-icon layui-icon-triangle-d"></i>
-    </button>
+    <select mid="{{ item.key }}"></select>
     {{# }); }}
 </div>

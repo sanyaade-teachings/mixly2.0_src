@@ -181,7 +181,7 @@ if version==0:
     '''ACC-Sensor'''
     try:
         import msa301
-        onboard_mxc6655xa = msa301.MSA301(onboard_i2c,front=True)
+        onboard_acc = msa301.MSA301(onboard_i2c,front=True)
     except Exception as e:
         print("Warning: Failed to communicate with MSA301 or",e)
 

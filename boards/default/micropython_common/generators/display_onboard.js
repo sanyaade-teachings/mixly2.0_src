@@ -593,8 +593,19 @@ Blockly.Python.forBlock['onboard_tft_show_image_xy'] = function() {
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
-    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-    var code = "onboard_tft.image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size+ ',color=' + color + ")\n";
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);  
+    if(color.slice(0,2)=="0x"){
+      var code = "onboard_tft.image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size+ ',color=' + color + ")\n";   
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = "onboard_tft.image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size+ ',color=0x'+rgb565.toString(16) + ")\n";  
+    }
     return code;
 }
 
@@ -608,7 +619,18 @@ Blockly.Python.forBlock['onboard_tft_show_image_or_string_delay'] = function() {
     var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
     var op = this.getFieldValue('center');
     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-    var code = "onboard_tft.shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op + ',color=' + color + ")\n";
+    if(color.slice(0,2)=="0x"){
+      var code = "onboard_tft.shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op + ',color=' + color + ")\n"; 
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = "onboard_tft.shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op + ',color=0x'+rgb565.toString(16) + ")\n";  
+    }
     return code;
 }
 
@@ -627,7 +649,20 @@ Blockly.Python.forBlock['onboard_tft_show_frame_string_delay'] = function() {
     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-    var code = "onboard_tft.frame(" + data +',size = ' + size + ',delay = ' + time + ',color=' + color+ ")\n";
+    if(color.slice(0,2)=="0x"){
+      var code = "onboard_tft.frame(" + data +',size = ' + size + ',delay = ' + time + ',color=' + color+ ")\n";   
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = "onboard_tft.frame(" + data +',size = ' + size + ',delay = ' + time + ',color=0x'+rgb565.toString(16) + ")\n";  
+   }
+
+    
     return code;
 }
 
@@ -641,16 +676,27 @@ Blockly.Python.forBlock['onboard_tft_scroll_string'] = function() {
 
 
 Blockly.Python.forBlock['onboard_tft_scroll_string_delay'] = function() {  
-     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-     Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
-     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
-     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
-     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
-     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
-     var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
-     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-     var code = "onboard_tft.scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=' + color+ ")\n";
-     return code;
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
+    var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+    var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
+    var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    if(color.slice(0,2)=="0x"){
+      var code = "onboard_tft.scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=' + color+ ")\n";  
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = "onboard_tft.scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=0x'+rgb565.toString(16) + ")\n";
+    }     
+    return code;
 }
 
 Blockly.Python.forBlock['onboard_tft_display_shape_rect'] = function (block) {
@@ -662,7 +708,18 @@ Blockly.Python.forBlock['onboard_tft_display_shape_rect'] = function (block) {
   var h = Blockly.Python.valueToCode(block, 'h', Blockly.Python.ORDER_ATOMIC);
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var shape = block.getFieldValue('shape');
-  var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  if(color.slice(0,2)=="0x"){
+    var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', ' + color + ')\n'+'onboard_tft.show()\n'; 
+  }
+  else{
+    const rgbValues = color.match(/\d+/g);
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+    var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+    var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+    var code = 'onboard_tft.' + shape + '(' + x + ', ' + y + ', ' + w + ', ' + h + ', 0x'+rgb565.toString(16) + ')\n'+'onboard_tft.show()\n';
+  }
   return code;
 };
 
@@ -674,7 +731,18 @@ Blockly.Python.forBlock['onboard_tft_display_hvline'] = function (block) { //水
   var var_length = Blockly.Python.valueToCode(block, 'length', Blockly.Python.ORDER_ATOMIC);
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var hv = block.getFieldValue('dir_h_v');
-  var code = 'onboard_tft.' + (('0' == hv) ? 'v': 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  if(color.slice(0,2)=="0x"){
+    var code = 'onboard_tft.' + (('0' == hv) ? 'v': 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  }
+  else{
+    const rgbValues = color.match(/\d+/g);
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+    var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+    var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+    var code = 'onboard_tft.' + (('0' == hv) ? 'v': 'h') + 'line(' + x + ', ' + y + ', ' + var_length + ', 0x'+rgb565.toString(16) + ')\n'+'onboard_tft.show()\n';
+  }
   return code;
 };
 
@@ -686,7 +754,18 @@ Blockly.Python.forBlock['onboard_tft_display_line'] = function (block) {
   var x2 = Blockly.Python.valueToCode(block, 'x2', Blockly.Python.ORDER_ATOMIC);
   var y2 = Blockly.Python.valueToCode(block, 'y2', Blockly.Python.ORDER_ATOMIC);
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-  var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  if(color.slice(0,2)=="0x"){
+    var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', ' + color + ')\n'+'onboard_tft.show()\n';
+  }
+  else{
+    const rgbValues = color.match(/\d+/g);
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+    var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+    var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+    var code = 'onboard_tft.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', 0x'+rgb565.toString(16)  + ')\n'+'onboard_tft.show()\n';
+  }
   return code;
 };
 
@@ -721,7 +800,18 @@ Blockly.Python.forBlock['onboard_tft_bright_point'] = function() {
     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
     var color = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC);
-    var code ='onboard_tft.pixel(int(' + x + '), int(' + y + '), '+ color + ")\n"+'onboard_tft.show()\n';
+    if(color.slice(0,2)=="0x"){
+      var code ='onboard_tft.pixel(int(' + x + '), int(' + y + '), '+ color + ")\n"+'onboard_tft.show()\n';
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code ='onboard_tft.pixel(int(' + x + '), int(' + y + '), 0x'+rgb565.toString(16) + ")\n"+'onboard_tft.show()\n';
+    }
     return code;
 }
 
@@ -746,20 +836,42 @@ Blockly.Python.forBlock['onboard_tft_fill'] = function() {
   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
     Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
     var color = Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ASSIGNMENT);
-    var code = 'onboard_tft.fill(' + color + ')\nonboard_tft.show()\n';
+    if(color.slice(0,2)=="0x"){
+      var code = 'onboard_tft.fill(' + color + ')\nonboard_tft.show()\n';
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = 'onboard_tft.fill(0x'+rgb565.toString(16) + ')\nonboard_tft.show()\n';
+    }
     return code;
 };
 
 Blockly.Python.forBlock['onboard_tft_clock_init'] = function() {  
-     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
-     var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
-     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
-     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
-     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
-     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-     var code = sub + "=Clock("+ x +',' + y +',' + size+ ',' + color+ ")\n";
-     return code;
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+    var x = Blockly.Python.valueToCode(this, 'x', Blockly.Python.ORDER_ASSIGNMENT);
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    if(color.slice(0,2)=="0x"){
+      var code = sub + "=Clock("+ x +',' + y +',' + size+ ',' + color+ ")\n";
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = sub + "=Clock("+ x +',' + y +',' + size+ ',0x'+rgb565.toString(16) + ")\n";
+    }
+    return code;
 }
 
 Blockly.Python.forBlock['onboard_tft_clock_get_rtctime'] = function() {  
@@ -790,11 +902,23 @@ Blockly.Python.forBlock['onboard_tft_clock_draw'] = function() {
 }
 
 Blockly.Python.forBlock['onboard_tft_clock_clear'] = function() {  
-     var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-     Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
-     var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
-     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-     var code = sub + ".clear("+color+")\n";
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+    Blockly.Python.definitions_['import_'+version+'_Clock'] = "from "+version+" import Clock";
+    var sub = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ASSIGNMENT);
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    if(color.slice(0,2)=="0x"){
+      var code = sub + ".clear("+color+")\n";
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = sub + ".clear(0x"+rgb565.toString(16)+")\n";
+    }
+     
      return code;
 }
 
@@ -803,9 +927,20 @@ Blockly.Python.forBlock['onboard_tft_display_shape_circle'] = function (block) {
   Blockly.Python.definitions_['import_'+version+'_onboard_tft'] = "from "+version+" import onboard_tft";
   var x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
   var y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
-  var r = Blockly.Python.valueToCode(block, 'r', Blockly.Python.ORDER_ATOMIC);
+  var R = Blockly.Python.valueToCode(block, 'r', Blockly.Python.ORDER_ATOMIC);
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
   var shape = block.getFieldValue('shape');
-  var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + r + ', ' + r + ', ' + color + ',' + shape +')\n'+'onboard_tft.show()\n';
+  if(color.slice(0,2)=="0x"){
+    var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', ' + color + ',' + shape +')\n'+'onboard_tft.show()\n';
+  }
+  else{
+    const rgbValues = color.match(/\d+/g);
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+    var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+    var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+    var code = 'onboard_tft.ellipse(' + x + ', ' + y + ', ' + R + ', ' + R + ', 0x'+rgb565.toString(16) + ',' + shape +')\n'+'onboard_tft.show()\n';
+  }
   return code;
 };

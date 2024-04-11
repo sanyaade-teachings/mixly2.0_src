@@ -403,7 +403,18 @@ Blockly.Python.forBlock['tft_show_image_xy'] = function() {
     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-    var code = v+ ".image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size + ',color=' + color + ")\n";
+    if(color.slice(0,2)=="0x"){
+      var code = v+ ".image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size + ',color=' + color + ")\n";
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = v+ ".image(" + data+  ',x = ' + x +',y = ' + y +',size = ' + size + ',color=0x'+rgb565.toString(16)  + ")\n";
+    }
     return code;
 }
 
@@ -424,7 +435,18 @@ Blockly.Python.forBlock['tft_show_image_or_string_delay'] = function() {
     var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
     var op = this.getFieldValue('center');
-    var code = v+".shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op  +',color=' + color +  ")\n";
+    if(color.slice(0,2)=="0x"){
+      var code = v+".shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op  +',color=' + color +  ")\n";
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = v+".shows(" + data + ',x = ' + x +',y = ' + y +',size = ' + size +',space = ' + space + ',center = ' + op  +',color=0x'+rgb565.toString(16) +  ")\n";
+    }
     return code;
 }
 
@@ -436,22 +458,44 @@ Blockly.Python.forBlock['tft_show_frame_string_delay'] = function() {
     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-    var code = v+".frame(" + data +',size = ' + size + ',delay = ' + time +',color=' + color +  ")\n";
+    if(color.slice(0,2)=="0x"){
+      var code = v+".frame(" + data +',size = ' + size + ',delay = ' + time +',color=' + color +  ")\n";
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = v+".frame(" + data +',size = ' + size + ',delay = ' + time +',color=0x'+rgb565.toString(16)+  ")\n";
+    }
     return code;
 }
 
 
 Blockly.Python.forBlock['tft_scroll_string_delay'] = function() {  
-     Blockly.Python.definitions_['import_st7789'] = 'import st7789';
+    Blockly.Python.definitions_['import_st7789'] = 'import st7789';
     var v = Blockly.Python.valueToCode(this, 'SUB', Blockly.Python.ORDER_ATOMIC);
     var data = Blockly.Python.valueToCode(this, 'data', Blockly.Python.ORDER_ASSIGNMENT);
-     var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
-     var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
-     var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
-     var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
-     var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-     var code = v+".scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=' + color + ")\n";
-     return code;
+    var y = Blockly.Python.valueToCode(this, 'y', Blockly.Python.ORDER_ASSIGNMENT);
+    var size = Blockly.Python.valueToCode(this, 'size', Blockly.Python.ORDER_ASSIGNMENT);
+    var time = Blockly.Python.valueToCode(this, 'time', Blockly.Python.ORDER_ASSIGNMENT);
+    var space = Blockly.Python.valueToCode(this, 'space', Blockly.Python.ORDER_ASSIGNMENT);
+    var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
+    if(color.slice(0,2)=="0x"){
+      var code = v+".scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=' + color + ")\n";
+    }
+    else{
+      const rgbValues = color.match(/\d+/g);
+      const r = parseInt(rgbValues[0]);
+      const g = parseInt(rgbValues[1]);
+      const b = parseInt(rgbValues[2]);
+      var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+      var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+      var code = v+".scroll("+ data +',y = ' + y +',size = ' + size+ ',speed =' + time  + ',space = '+ space + ',color=0x'+rgb565.toString(16) + ")\n";
+    }
+    return code;
 }
 
 Blockly.Python.forBlock['tft_fill'] = function(){
@@ -470,7 +514,18 @@ Blockly.Python.forBlock['tft_line_arbitrarily'] = function(){
   var location_x2 = Blockly.Python.valueToCode(this, 'x2', Blockly.Python.ORDER_ATOMIC);
   var location_y2= Blockly.Python.valueToCode(this, 'y2', Blockly.Python.ORDER_ATOMIC);
   var color =  Blockly.Python.valueToCode(this, 'VAR', Blockly.Python.ORDER_ATOMIC) ;
-  var code = varName + '.line('+location_x1+', '+location_y1+', '+location_x2+', '+location_y2+', color='+color+')\n';
+  if(color.slice(0,2)=="0x"){
+    var code = varName + '.line('+location_x1+', '+location_y1+', '+location_x2+', '+location_y2+', color='+color+')\n';
+  }
+  else{
+    const rgbValues = color.match(/\d+/g);
+    const r = parseInt(rgbValues[0]);
+    const g = parseInt(rgbValues[1]);
+    const b = parseInt(rgbValues[2]);
+    var rgb = "0x"+((r << 16) + (g << 8) + b).toString(16).padStart(4, "0");
+    var rgb565 = (rgb & 0xf80000) >>8 | (rgb & 0xfc00) >>5 | (rgb & 0xff) >>3;
+    var code = varName + '.line('+location_x1+', '+location_y1+', '+location_x2+', '+location_y2+', color=0x'+rgb565.toString(16) +')\n';
+  }
   return code;
 };
 

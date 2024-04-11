@@ -538,10 +538,10 @@ export const algorithm_print_number = function () {
     return code;
 };
 
-// export const algorithm_get_book_num = function() {
-//   var code = 'n='+this.getFieldValue('NUM')+'\n';
-//   return code;
-// };
+export const algorithm_get_book_num = function() {
+  var code = 'n='+this.getFieldValue('NUM')+'\n';
+  return code;
+};
 
 // export const algorithm_print_sequence = function() {
 //   var code = 'print("顺序法查找次数为：",cnt)';

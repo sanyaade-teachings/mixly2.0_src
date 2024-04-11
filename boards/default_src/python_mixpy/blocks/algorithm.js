@@ -385,7 +385,7 @@ export const algorithm_book_scale = {
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(Blockly.Msg['ALGORITHM_HUE']);
+        this.setColour(ALGORITHM_HUE);
         this.setTooltip('');
         this.setHelpUrl('');
     }

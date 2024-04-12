@@ -3,7 +3,7 @@ import { Profile } from 'mixly';
 
 import Variables from '../python/others/variables';
 import Procedures from '../python/others/procedures';
-import Python from '../python/python_generator';
+import { Python } from '../python/python_generator';
 
 import * as PythonVariablesBlocks from '../python/blocks/variables';
 import * as PythonControlBlocks from '../python/blocks/control';

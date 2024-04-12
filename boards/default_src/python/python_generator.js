@@ -8,7 +8,7 @@ import Names from './others/names';
  * Python code generator.
  * @type {!Blockly.Generator}
  */
-const Python = new Blockly.Generator('Python');
+export const Python = new Blockly.Generator('Python');
 Python.INDENT = "    ";
 
 /**
@@ -306,5 +306,3 @@ Python.getAdjustedInt = function (block, atId, opt_delta, opt_negate) {
     }
     return at;
 };
-
-export default Python;

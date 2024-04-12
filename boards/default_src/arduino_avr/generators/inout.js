@@ -1,23 +1,22 @@
 import { Profile } from 'mixly';
-import { Arduino } from '../../arduino_common/arduino_generator';
 
-export const inout_highlow = function () {
+export const inout_highlow = function (_, generator) {
     // Boolean values HIGH and LOW.
     var code = (this.getFieldValue('BOOL') == 'HIGH') ? 'HIGH' : 'LOW';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const inout_pinMode = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const inout_pinMode = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('MODE');
     //
     var code = 'pinMode(' + dropdown_pin + ', ' + dropdown_mode + ');\n';
     return code;
-};
+}
 
-export const inout_digital_write2 = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
-    var dropdown_stat = Arduino.valueToCode(this, 'STAT', Arduino.ORDER_ATOMIC);
+export const inout_digital_write2 = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var dropdown_stat = generator.valueToCode(this, 'STAT', generator.ORDER_ATOMIC);
     var code = "";
     var isVar = true;
     for (var pin of Profile.default.digital) {
@@ -29,24 +28,24 @@ export const inout_digital_write2 = function () {
     if (isVar) {
         code = code + 'pinMode(' + dropdown_pin + ', OUTPUT);\n';
     } else {
-        if (Arduino.setups_['setup_input_' + dropdown_pin]) {
-            delete Arduino.setups_['setup_input_' + dropdown_pin];
+        if (generator.setups_['setup_input_' + dropdown_pin]) {
+            delete generator.setups_['setup_input_' + dropdown_pin];
         }
-        Arduino.setups_['setup_output_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
+        generator.setups_['setup_output_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
     }
     code += 'digitalWrite(' + dropdown_pin + ',' + dropdown_stat + ');\n'
     return code;
-};
+}
 
-export const inout_digital_read = function () {
+export const inout_digital_read = function (_, generator) {
     var dropdown_pin = this.getFieldValue('PIN');
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     var code = 'digitalRead(' + dropdown_pin + ')';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const inout_digital_read2 = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const inout_digital_read2 = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var code = "";
     if (window.isNaN(dropdown_pin) && !(new RegExp("^A([0-9]|10|11|12|13|14|15)$").test(dropdown_pin))) {
         var funcName = 'mixly_digitalRead';
@@ -56,210 +55,211 @@ export const inout_digital_read2 = function () {
             + '  pinMode(pin, OUTPUT);\n'
             + '  return _return;\n'
             + '}\n';
-        Arduino.definitions_[funcName] = code2;
+        generator.definitions_[funcName] = code2;
         code = 'mixly_digitalRead(' + dropdown_pin + ')';
     } else {
-        if (Arduino.setups_['setup_output_' + dropdown_pin]) {
+        if (generator.setups_['setup_output_' + dropdown_pin]) {
             //存在pinMode已设为output则不再设为input
         } else {
-            Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+            generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
         }
-        if (Arduino.setups_['setup_setup']) { //解决pullup重复问题
-            if (Arduino.setups_['setup_setup'].indexOf('pinMode(' + dropdown_pin) > -1) {
-                delete Arduino.setups_['setup_input_' + dropdown_pin];
+        if (generator.setups_['setup_setup']) { //解决pullup重复问题
+            if (generator.setups_['setup_setup'].indexOf('pinMode(' + dropdown_pin) > -1) {
+                delete generator.setups_['setup_input_' + dropdown_pin];
             }
         }
         code = 'digitalRead(' + dropdown_pin + ')';
     }
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-
-export const inout_analog_write = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const inout_analog_write = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     //var dropdown_stat = this.getFieldValue('STAT');
-    var value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_ATOMIC);
+    var value_num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
     const { pwm } = Profile.default;
     if (typeof pwm === 'object') {
         for (let i of pwm)
             if (dropdown_pin === i[1]) {
-                Arduino.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
+                generator.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', OUTPUT);';
                 break;
             }
     }
     var code = 'analogWrite(' + dropdown_pin + ', ' + value_num + ');\n';
     return code;
-};
+}
 
-export const inout_analog_read = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const inout_analog_read = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     const { analog } = Profile.default;
     if (typeof analog === 'object') {
         for (let i of analog)
             if (dropdown_pin === i[1]) {
-                //Arduino.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+                //generator.setups_['setup_output' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
                 break;
             }
     }
     var code = 'analogRead(' + dropdown_pin + ')';
-    return [code, Arduino.ORDER_ATOMIC];
-};
-export const inout_buildin_led = function () {
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const inout_buildin_led = function (_, generator) {
     var dropdown_stat = this.getFieldValue('STAT');
-    Arduino.setups_['setup_output_13'] = 'pinMode(13, OUTPUT);';
+    generator.setups_['setup_output_13'] = 'pinMode(13, OUTPUT);';
     var code = 'digitalWrite(13, ' + dropdown_stat + ');\n'
     return code;
-};
-export const OneButton_interrupt = function () {
-    Arduino.definitions_['include_OneButton'] = '#include <OneButton.h>';
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+}
+
+export const OneButton_interrupt = function (_, generator) {
+    generator.definitions_['include_OneButton'] = '#include <OneButton.h>';
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    var dropdown_stat = Arduino.valueToCode(this, 'STAT', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['var_declare_button' + dropdown_pin] = 'OneButton button' + dropdown_pin + '(' + dropdown_pin + ',' + ((dropdown_stat == 'HIGH') ? 'false' : 'true') + ');';
-    Arduino.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
+    var dropdown_stat = generator.valueToCode(this, 'STAT', generator.ORDER_ATOMIC);
+    generator.definitions_['var_declare_button' + dropdown_pin] = 'OneButton button' + dropdown_pin + '(' + dropdown_pin + ',' + ((dropdown_stat == 'HIGH') ? 'false' : 'true') + ');';
+    generator.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
     var code = 'button' + dropdown_pin + '.tick();';
     var funcName = dropdown_mode + dropdown_pin;
-    var branch = Arduino.statementToCode(this, 'DO');
+    var branch = generator.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
-    Arduino.definitions_[funcName] = code2;
+    generator.definitions_[funcName] = code2;
     return code;
-};
+}
 
-export const controls_attachInterrupt = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const controls_attachInterrupt = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
     var interrupt_pin = 'digitalPinToInterrupt(' + dropdown_pin + ')';
     var code = 'attachInterrupt' + '(' + interrupt_pin + ',' + 'attachInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ',' + dropdown_mode + ');\n'
     var funcName = 'attachInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin;
-    var branch = Arduino.statementToCode(this, 'DO');
+    var branch = generator.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
-    Arduino.definitions_[funcName] = code2;
+    generator.definitions_[funcName] = code2;
     return code;
-};
+}
 
-export const controls_detachInterrupt = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+export const controls_detachInterrupt = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
     var interrupt_pin = 'digitalPinToInterrupt(' + dropdown_pin + ')';
     var code = 'detachInterrupt' + '(' + interrupt_pin + ');\n'
     return code;
-};
+}
 
-export const controls_attachPinInterrupt = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const controls_attachPinInterrupt = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    Arduino.definitions_['include_PinChangeInterrupt'] = '#include <PinChangeInterrupt.h>';
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+    generator.definitions_['include_PinChangeInterrupt'] = '#include <PinChangeInterrupt.h>';
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
     var code = 'attachPCINT(digitalPinToPCINT(' + dropdown_pin + '),' + 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin + ',' + dropdown_mode + ');\n'
     var funcName = 'attachPinInterrupt_fun_' + dropdown_mode + '_' + dropdown_pin;
-    var branch = Arduino.statementToCode(this, 'DO');
+    var branch = generator.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
-    Arduino.definitions_[funcName] = code2;
+    generator.definitions_[funcName] = code2;
     return code;
-};
+}
 
-export const controls_detachPinInterrupt = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+export const controls_detachPinInterrupt = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     //var interrupt_pin=digitalPinToInterrupt(dropdown_pin).toString();
     var code = 'detachPCINT(digitalPinToPCINT(' + dropdown_pin + '));\n'
     return code;
-};
+}
 
 
-export const inout_pulseIn = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const inout_pulseIn = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_stat = this.getFieldValue('STAT');
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     var code = 'pulseIn(' + dropdown_pin + ', ' + dropdown_stat + ')';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const inout_pulseIn2 = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const inout_pulseIn2 = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_stat = this.getFieldValue('STAT');
-    var timeout = Arduino.valueToCode(this, 'TIMEOUT', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
+    var timeout = generator.valueToCode(this, 'TIMEOUT', generator.ORDER_ATOMIC) || '0';
+    generator.setups_['setup_input_' + dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT);';
     var code = 'pulseIn(' + dropdown_pin + ', ' + dropdown_stat + ', ' + timeout + ')';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const inout_shiftout = function () {
-    var dropdown_pin1 = Arduino.valueToCode(this, 'PIN1', Arduino.ORDER_ATOMIC);
-    var dropdown_pin2 = Arduino.valueToCode(this, 'PIN2', Arduino.ORDER_ATOMIC);
+export const inout_shiftout = function (_, generator) {
+    var dropdown_pin1 = generator.valueToCode(this, 'PIN1', generator.ORDER_ATOMIC);
+    var dropdown_pin2 = generator.valueToCode(this, 'PIN2', generator.ORDER_ATOMIC);
     var dropdown_order = this.getFieldValue('ORDER');
-    var value = Arduino.valueToCode(this, 'DATA', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.setups_['setup_output_' + dropdown_pin1] = 'pinMode(' + dropdown_pin1 + ', OUTPUT);';
-    Arduino.setups_['setup_output_' + dropdown_pin2] = 'pinMode(' + dropdown_pin2 + ', OUTPUT);';
+    var value = generator.valueToCode(this, 'DATA', generator.ORDER_ATOMIC) || '0';
+    generator.setups_['setup_output_' + dropdown_pin1] = 'pinMode(' + dropdown_pin1 + ', OUTPUT);';
+    generator.setups_['setup_output_' + dropdown_pin2] = 'pinMode(' + dropdown_pin2 + ', OUTPUT);';
     var code = 'shiftOut(' + dropdown_pin1 + ', ' + dropdown_pin2 + ', ' + dropdown_order + ', ' + value + ');\n'
     return code;
-};
+}
 
-export const ESP32touchButton = function () {
-    Arduino.definitions_['include_ESP32touchButton'] = '#include <ESP32touchButton.h>';
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
+export const ESP32touchButton = function (_, generator) {
+    generator.definitions_['include_ESP32touchButton'] = '#include <ESP32touchButton.h>';
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
     var dropdown_mode = this.getFieldValue('mode');
-    Arduino.definitions_['var_declare_button' + dropdown_pin] = 'ESP32touchButton button' + dropdown_pin + '(' + dropdown_pin + ',true);';
-    Arduino.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
+    generator.definitions_['var_declare_button' + dropdown_pin] = 'ESP32touchButton button' + dropdown_pin + '(' + dropdown_pin + ',true);';
+    generator.setups_['setup_onebutton_' + dropdown_pin + dropdown_mode] = 'button' + dropdown_pin + '.' + dropdown_mode + '(' + dropdown_mode + dropdown_pin + ');';
     var code = 'button' + dropdown_pin + '.tick();';
     var funcName = dropdown_mode + dropdown_pin;
-    var branch = Arduino.statementToCode(this, 'DO');
+    var branch = generator.statementToCode(this, 'DO');
     var code2 = 'void' + ' ' + funcName + '() {\n' + branch + '}\n';
-    Arduino.definitions_[funcName] = code2;
+    generator.definitions_[funcName] = code2;
     return code;
-};
+}
 
-export const inout_soft_analog_write = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
-    var value_num = Arduino.valueToCode(this, 'NUM', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['include_SoftPWM'] = '#include <SoftPWM.h>';
-    Arduino.setups_['setup_soft_analog_write'] = 'SoftPWMBegin();';
+export const inout_soft_analog_write = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    var value_num = generator.valueToCode(this, 'NUM', generator.ORDER_ATOMIC);
+    generator.definitions_['include_SoftPWM'] = '#include <SoftPWM.h>';
+    generator.setups_['setup_soft_analog_write'] = 'SoftPWMBegin();';
     var code = 'SoftPWMSet(' + dropdown_pin + ', ' + value_num + ');\n';
     return code;
-};
+}
 
-export const inout_cancel_soft_analog_write = function () {
-    var dropdown_pin = Arduino.valueToCode(this, 'PIN', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['include_SoftPWM'] = '#include <SoftPWM.h>';
-    Arduino.setups_['setup_soft_analog_write'] = 'SoftPWMBegin();';
+export const inout_cancel_soft_analog_write = function (_, generator) {
+    var dropdown_pin = generator.valueToCode(this, 'PIN', generator.ORDER_ATOMIC);
+    generator.definitions_['include_SoftPWM'] = '#include <SoftPWM.h>';
+    generator.setups_['setup_soft_analog_write'] = 'SoftPWMBegin();';
     var code = 'SoftPWMEnd(' + dropdown_pin + ');\n';
     return code;
-};
+}
 
-//ADS1015模数转换模块 设置范围以及精度
-export const ADS1015_setGain = function () {
+// ADS1015模数转换模块 设置范围以及精度
+export const ADS1015_setGain = function (_, generator) {
     var GAIN = this.getFieldValue('ADS1015_setGain');
-    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Arduino.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
-    Arduino.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
-    Arduino.setups_['setup_ads.begin()'] = 'ads.begin(); \n';
-    Arduino.setups_['setup_ads.setGain'] = 'ads.setGain(' + GAIN + ');';
+    generator.definitions_['include_Wire'] = '#include <Wire.h>';
+    generator.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
+    generator.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
+    generator.setups_['setup_ads.begin()'] = 'ads.begin(); \n';
+    generator.setups_['setup_ads.setGain'] = 'ads.setGain(' + GAIN + ');';
     var code = '';
     return code;
-};
+}
 
-//ADS1015模数转换模块 采集数值
-export const ADS1015_Get_Value = function () {
-    Arduino.definitions_['include_Wire'] = '#include <Wire.h>';
-    Arduino.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
-    Arduino.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
-    Arduino.setups_['setup_ads.begin()'] = 'ads.begin();';
+// ADS1015模数转换模块 采集数值
+export const ADS1015_Get_Value = function (_, generator) {
+    generator.definitions_['include_Wire'] = '#include <Wire.h>';
+    generator.definitions_['include_Adafruit_ADS1015'] = '#include <Adafruit_ADS1015.h>';
+    generator.definitions_['var_declare_Adafruit_ADS1015_ads'] = 'Adafruit_ADS1015 ads;\n';
+    generator.setups_['setup_ads.begin()'] = 'ads.begin();';
     var dropdown_type = this.getFieldValue('ADS1015_AIN');
     var code = dropdown_type;
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//PCF8591T模数转换模块 采集数值
-export const PCF8591T = function () {
-    //Arduino.definitions_['include_Wire'] = '#include "Arduino.h"';
-    Arduino.definitions_['include_PCF8591_h'] = '#include <PCF8591.h>';
-    Arduino.definitions_['var_declare_PCF8591'] = 'PCF8591 pcf8591(0x48);';
-    Arduino.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin(); \n';
+// PCF8591T模数转换模块 采集数值
+export const PCF8591T = function (_, generator) {
+    //generator.definitions_['include_Wire'] = '#include "generator.h"';
+    generator.definitions_['include_PCF8591_h'] = '#include <PCF8591.h>';
+    generator.definitions_['var_declare_PCF8591'] = 'PCF8591 pcf8591(0x48);';
+    generator.setups_['setup_pcf8591.begin()'] = 'pcf8591.begin(); \n';
     var dropdown_type = this.getFieldValue('PCF8591T_AIN');
     var code = dropdown_type;
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}

@@ -1,9 +1,7 @@
-import Python from '../../python/python_generator';
-
 // sub_algorithm_1
 
-export const algorithm_prepare = function () {
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_prepare = function (_, generator) {
+    generator.definitions_.import_sprite = "import sprite";
     var line1 = 'g = [[0,0,0,0,0,0,0,0,0,0], [0,0,0,1,0,0,0,0,0,0], [0,0,0,1,0,0,1,0,0,0], [0,1,1,0,1,1,0,0,0,0], [0,0,0,1,0,0,0,1,0,0], [0,0,0,1,0,0,1,1,0,0], [0,0,1,0,0,1,0,1,0,0], [0,0,0,0,1,1,1,0,0,0]]\n';
     var line2 = 'mark = [[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0]]\n';
     var code = line1 + line2 + "vis = [0,1,0,0,0,0,0,0,0]\n";
@@ -23,7 +21,7 @@ house = [ sprite.Sprite('mark', 150, 380),
 for i in house:
     i.hide()\n`;
     return code;
-};
+}
 
 export const algorithm_add_school = function () {
     // var code = "path = [1]\n"
@@ -40,10 +38,10 @@ def drive(n):
         print('移动失败！程序有误！')
         exit()\n`;
     return code;
-};
+}
 
-export const algorithm_find_path = function () {
-    Python.definitions_.import_random = "import random";
+export const algorithm_find_path = function (_, generator) {
+    generator.definitions_.import_random = "import random";
     // var line1 = 'if random.choice([0,1]) == 0:\n'
     //           + '    list = list1\n'
     //           + 'else:\n'
@@ -64,51 +62,51 @@ export const algorithm_find_path = function () {
         + '            break\n';
     var code = line1;
     return code;
-};
+}
 
-export const algorithm_new_path = function () {
+export const algorithm_new_path = function (_, generator) {
     var code = "flag == 1";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const algorithm_set_path = function () {
     var code = "mark[f][_my_variable+1] = 1\nvis[_my_variable+1] = 1\n";
     return code;
-};
+}
 
 export const algorithm_add_path = function () {
     var code = "path.append(_my_variable+1)\n";
     code += `drive(path[len(path) - 1])\nhouse[_my_variable+1].show()\n`;
     return code;
-};
+}
 
-export const algorithm_del_path = function () {
-    Python.definitions_.import_time = "import time";
+export const algorithm_del_path = function (_, generator) {
+    generator.definitions_.import_time = "import time";
     var code = "del path[len(path) - 1]\n";
     code += `house[0].show()\ntime.sleep(0.5)\nhouse[0].hide()\n`;
     return code;
-};
+}
 
 export const algorithm_return_path = function () {
     var code = 'for i in range(7):\n' + '    mark[f][i+1] = 0\n' + '    vis[f] = 0\n';
     code = `house[f].hide()\ndrive(path[len(path) - 1])\n` + code;
     return code;
-};
+}
 
-export const algorithm_no_left = function () {
+export const algorithm_no_left = function (_, generator) {
     var code = "len(path) == 7";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const algorithm_print_path = function () {
     var code = 'name = ["","学校","小智家","小欣家","小思家","小科家","贝贝家","乐乐家"]\nres = ""\nfor i in path:\n    res = res + name[i] + "-"\nprint(res[:-1])\n';
     return code;
-};
+}
 
 // sub_algorithm_2
 
-export const algorithm_prepare2 = function () {
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_prepare2 = function (_, generator) {
+    generator.definitions_.import_sprite = "import sprite";
     var line1 = 'g = [[0,0,0,0,0,0,0,0,0,0], [0,0,0,1,0,0,0,0,0,0], [0,0,0,1,0,0,1,0,0,0], [0,1,1,0,1,0,0,0,0,0], [0,0,0,1,0,0,0,1,0,0], [0,0,0,1,0,0,0,1,0,0], [0,0,1,0,0,0,0,1,0,0], [0,0,0,0,1,1,1,0,0,0]]\n';
     var line2 = 'mark = [[0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0]]\n';
     var code = line1 + line2 + "vis = [0,1,0,0,0,0,0,0,0]\n";
@@ -130,23 +128,23 @@ barricade.enlargeTo(100)
 for i in house:
     i.hide()\n`;
     return code;
-};
+}
 
-export const algorithm_current_school = function () {
+export const algorithm_current_school = function (_, generator) {
     var code = "f == 1";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const algorithm_no_path = function () {
     var code = "print('没有符合条件的路线')\n";
     return code;
-};
+}
 
 // sub_algorithm_3
 
-export const algorithm_prepare_2_1 = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_prepare_2_1 = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var line1 = 'g = [[10000,10000,10000,10000,10000,10000,10000,10000,10000,10000,10000],[10000,10000,500,300,10000,10000,10000,10000,10000,10000,10000],[10000,500,10000,10000,100,10000,10000,10000,10000,10000,10000],[10000,300,10000,10000,400,300,10000,10000,10000,10000,10000],[10000,10000,100,400,10000,10000,200,10000,10000,10000,10000],[10000,10000,10000,300,10000,10000,100,200,10000,10000,10000],[10000,10000,10000,10000,200,100,10000,10000,100,10000,10000],[10000,10000,10000,10000,10000,200,10000,10000,100,10000,10000],[10000,10000,10000,10000,10000,10000,100,100,10000,10000,10000]]\n';
     var line2 = 'now=1\n';
     var code = line1 + line2 + "last=1\npath=[]\npath.append(1)\n";
@@ -159,11 +157,11 @@ stu.enlargeTo(100)
 time.sleep(1)\n
 `
     return code;
-};
+}
 
-export const algorithm_prepare_2_2 = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_prepare_2_2 = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var line1 = 'g =[[10000,10000,10000,10000,10000,10000,10000],[10000,10000,300,500,10000,10000,10000],[10000,300,10000,10000,300,700,10000],[10000,500,10000,10000,10000,100,10000],[10000,10000,300,10000,10000,10000,200],[10000,10000,700,100,10000,10000,100],[10000,10000,10000,10000,200,100,10000]]\n';
     var line2 = 'now=1\n';
     var code = line1 + line2 + "last=1\npath=[]\npath.append(1)\n";
@@ -176,28 +174,28 @@ stu.enlargeTo(100)
 time.sleep(1)\n
 `
     return code;
-};
+}
 
-export const algorithm_move_recent = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_move_recent = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var line1 = 'tmp=10000\nfor i in range(0, len(g), 1):\n' + '    if g[now][i]<tmp and i!=last:\n' + '        next=i\n' + '        tmp=g[now][i]\n'
         + 'stu.slideTo(position[next][0], position[next][1], 1)\ntime.sleep(0.5)\n'
         + 'path.append(next)\n' + 'last=now\n' + 'now=next\n'
         + 'if len(path)>6:\n    print("路线错乱！程序有误！")\n    exit()\n';
     var code = line1;
     return code;
-};
+}
 
-export const algorithm_not_home = function () {
+export const algorithm_not_home = function (_, generator) {
     var code = "name[now] != '小科家'";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const algorithm_not_school = function () {
+export const algorithm_not_school = function (_, generator) {
     var code = "name[now] != '学校'";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const algorithm_print_path2 = function () {
     var code = `res = ""
@@ -206,14 +204,14 @@ for i in path:
 print(res[:-1])\n`;
 
     return code;
-};
+}
 
 // sub_algorithm_4 hanoi
 
-export const hanoi_init = function () {
-    //   Python.definitions_.import_turtle = "import turtle";
-    //   Python.definitions_.import_time = "import time";
-    //   Python.definitions_.import_math = "import math";
+export const hanoi_init = function (_, generator) {
+    //   generator.definitions_.import_turtle = "import turtle";
+    //   generator.definitions_.import_time = "import time";
+    //   generator.definitions_.import_math = "import math";
     //   function randomHexColor() {
     //     //随机生成十六进制颜色
     //     var hex = Math.floor(Math.random() * 16777216).toString(16);
@@ -231,7 +229,7 @@ export const hanoi_init = function () {
     //     i++;
     //     colorList.push('"' + randomHexColor() + '"');
     //   }
-    //   Python.setups_['init_Hanoi'] = `
+    //   generator.setups_['init_Hanoi'] = `
     // def init_Hanoi():
     //     pen = turtle.Turtle()
     //     pen.hideturtle()
@@ -246,7 +244,7 @@ export const hanoi_init = function () {
     //         pen.goto(150 * i - 150,-100)
     //         pen.setheading(90)
     //         pen.forward(200)`;
-    //   Python.setups_['begin'] = `
+    //   generator.setups_['begin'] = `
     // def begin():
     //     s = turtle.Turtle()
     //     s.hideturtle()
@@ -265,7 +263,7 @@ export const hanoi_init = function () {
     //     s.write('Start!')
     //     time.sleep(1)
     //     s.clear()\n`;
-    //     Python.setups_['move'] = `
+    //     generator.setups_['move'] = `
     // def move(x, y):
     //     try:
     //         t = tower[x].pop(-1)
@@ -302,8 +300,8 @@ export const hanoi_init = function () {
     // count_turtle.goto(0,150)
     // count_turtle.write('总步数：0')
     // begin()\n`;
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var num = this.getFieldValue('NUM');
     if (num >= 7) var code = `print('层数过高!不得高于6层!')\nexit()\n`;
     else {
@@ -334,11 +332,11 @@ _steps = {'steps' : 0}
 time.sleep(1)\n`
     }
     return code;
-};
+}
 
-export const hanoi_move = function () {
-    var fromNum = Python.valueToCode(this, 'FROM_NUM', Python.ORDER_ATOMIC) || '0';
-    var toNum = Python.valueToCode(this, 'TO_NUM', Python.ORDER_ATOMIC) || '0';
+export const hanoi_move = function (_, generator) {
+    var fromNum = generator.valueToCode(this, 'FROM_NUM', generator.ORDER_ATOMIC) || '0';
+    var toNum = generator.valueToCode(this, 'TO_NUM', generator.ORDER_ATOMIC) || '0';
     // var code = `move(${fromNum}, ${toNum})\ntotal_num[0]+=1\ncount_turtle.clear()\ncount_turtle.write('总步数：'+str(total_num[0]))\n`;
     var code = `if len(_Hanoi[${fromNum}])>0 :
     _HanoiBlockMoved = _Hanoi[${fromNum}].pop()
@@ -360,13 +358,13 @@ else :
     exit()
 `
     return code;
-};
+}
 
 // sub_algorithm_5
 
-export const algorithm_all_books_sequence = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_all_books_sequence = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `if 'ring' not in globals():
     sprite.clearAllSprites()
     ring=[0,0,0,0,0,0,0,0,0,0]
@@ -380,11 +378,11 @@ else:
     n=len(ring)-1\nring[n]=1
 time.sleep(1)\n`;
     return code;
-};
+}
 
-export const algorithm_all_books = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_all_books = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `if 'ring' not in globals():
     sprite.clearAllSprites()
     ring=[0,0,0,0,0,0,0,0,0,0]
@@ -400,49 +398,49 @@ left = 0
 right = len(ring)-1
 time.sleep(1)\n`;
     return code;
-};
+}
 
-export const algorithm_first_book = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_first_book = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var line1 = 'res=0\n';
     var code = line1 + "flag=ring[res]\n";
     code += `Books[res].filterBrighter()\ntime.sleep(0.1)\nBooks[res].filterOrigin()\n`;
     return code;
-};
+}
 
 // export const algorithm_no_ring = function() {
 //   var code = "ring[i]==0";
-//   return [code, Python.ORDER_ATOMIC];
-// };
+//   return [code, generator.ORDER_ATOMIC];
+// }
 
-export const algorithm_no_ring2 = function () {
+export const algorithm_no_ring2 = function (_, generator) {
     var code = "flag==0";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const algorithm_next_book = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_next_book = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = "res+=1\nflag=ring[res]\n";
     code += `Books[res].filterBrighter()\ntime.sleep(0.1)\nBooks[res].filterOrigin()\n`;
     code = `Books[res].filterGray()\ntime.sleep(0.3)\n` + code;
     return code;
-};
+}
 
-export const algorithm_two_left = function () {
+export const algorithm_two_left = function (_, generator) {
     var code = "right - left >= 1";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const algorithm_divide_books = function () {
     var code = "res = int((left + right) / 2)\n";
     return code;
-};
+}
 
-export const algorithm_get_half_books = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_get_half_books = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = "flag = sum(ring[left:res+1])\n";
     code += `for i in range(left, res+1, 1):
     Books[i].filterBrighter()\n
@@ -450,39 +448,39 @@ time.sleep(0.3)
 for i in range(left, res+1, 1):
     Books[i].filterOrigin()\n`;
     return code;
-};
+}
 
 // export const algorithm_check_half_books = function() {
 //   var code = "while ring[i]==0:\n    if i==mid:\n        flag=0\n        break\n    i+=1\n";
 //   return code;
-// };
+// }
 
-export const algorithm_delete_books = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_delete_books = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = "left = res+1\n";
     code += `for i in range(0, left, 1):
     Books[i].filterGray()
 time.sleep(0.5)
 res = left\n`
     return code;
-};
+}
 
-export const algorithm_delete_books2 = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_delete_books2 = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = "right=res\n";
     code += `for i in range(right+1, len(ring)+1, 1):
     Books[i].filterGray()
 time.sleep(0.5)
 res = right\n`
     return code;
-};
+}
 
 // export const algorithm_print_book = function() {
 //   var code = "print(i)\n";
 //   return code;
-// };
+// }
 
 export const algorithm_print_book2 = function () {
     var code = `Books[res].filterBrighter()
@@ -490,20 +488,20 @@ print('未消磁的书籍是第'+str(res+1)+'本《'+name[res%10]+'》。')\n`;
     code += `if res!=n:
     print('答案错误！请检查程序！')\n`
     return code;
-};
+}
 
 // sub_algorithm_6
 
-export const algorithm_book_scale = function () {
+export const algorithm_book_scale = function (_, generator) {
     var FIELD_NUM = this.getFieldValue("NUM");
     const pos = {
         5: '130*i, 120',
         10: '(130*i-650) if i>5 else 130*i, 320 if i>5 else 120',
         20: '(65*i-650)+30 if i>10 else 65*i+30, 320 if i>10 else 120',
         50: '(26*i-650)+50 if i>25 else 26*i+50, 320 if i>25 else 120'
-    };
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+    }
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `sprite.clearAllSprites()
   ring = []
   name = ['小王子','海底两万里','荷花镇的早市','孔子的故事','夏洛的网','草房子','月下看猫头鹰','会唱歌的咖啡磨','父与子','城南旧事']
@@ -516,73 +514,73 @@ export const algorithm_book_scale = function () {
   time.sleep(1)
   `;
     return code;
-};
+}
 
-export const algorithm_number_zero = function () {
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_number_zero = function (_, generator) {
+    generator.definitions_.import_sprite = "import sprite";
     var code = "cnt=0\n";
     code += `cntText = sprite.Text('计数器：0', 30, 200)\n`
     return code;
-};
+}
 
-export const algorithm_number_add = function () {
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_number_add = function (_, generator) {
+    generator.definitions_.import_sprite = "import sprite";
     var code = "cnt+=1\n";
     code += `cntText.changeText('计数器：'+str(cnt))\n`
     return code;
-};
+}
 
-export const algorithm_print_number = function () {
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_print_number = function (_, generator) {
+    generator.definitions_.import_sprite = "import sprite";
     var code = "print('计数器大小：'+str(cnt))\n";
     return code;
-};
+}
 
 export const algorithm_get_book_num = function() {
-  var code = 'n='+this.getFieldValue('NUM')+'\n';
-  return code;
-};
+    var code = 'n='+this.getFieldValue('NUM')+'\n';
+    return code;
+}
 
 // export const algorithm_print_sequence = function() {
 //   var code = 'print("顺序法查找次数为：",cnt)';
 //   return code;
-// };
+// }
 
 // export const algorithm_print_divide = function() {
 //   var code = 'print("二分法查找次数为：",cnt)';
 //   return code;
-// };
+// }
 
 // sub_algorithm_7
 
-export const algorithm_init_jttl = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_init_jttl = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `sprite.clearAllSprites()
 _head = 10
 _foot = 32
 _footText = sprite.Text('脚的数量：', 20, 10)
 _sprite = []\n`;
     return code;
-};
+}
 
-export const algorithm_rabbit_zero = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_rabbit_zero = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `_rabbit = 0\n`;
     // code += `_sprite.append(sprite.Sprite('jttl/rabbit', len(_sprite)*130+130 if len(_sprite)<5 else len(_sprite)*130+130-650, 120 if len(_sprite)<5 else 320))\n`;
     code += `time.sleep(1)\n`;
     return code;
-};
+}
 
-export const algorithm_rabbit_number_in_range = function () {
+export const algorithm_rabbit_number_in_range = function (_, generator) {
     var code = `_rabbit < _head`;
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const algorithm_chick_calculate = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_chick_calculate = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `_chick = _head - _rabbit\n`;
     code += `for i in range(0, _chick, 1):
     _sprite.append(sprite.Sprite('jttl/chick', len(_sprite)*130+130 if len(_sprite)<5 else len(_sprite)*130+130-650, 120 if len(_sprite)<5 else 320))\n
@@ -590,22 +588,22 @@ time.sleep(0.5)
 _footText.changeText('脚的数量：'+str(_rabbit*4 + _chick*2))
 time.sleep(1)\n`
     return code;
-};
+}
 
-export const algorithm_check_feet = function () {
+export const algorithm_check_feet = function (_, generator) {
     var code = `_rabbit*4 + _chick*2 == _foot`;
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const algorithm_print_jttl_answer = function () {
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_print_jttl_answer = function (_, generator) {
+    generator.definitions_.import_sprite = "import sprite";
     var code = `print('鸡的数量：'+str(_chick)+'只；\\n兔的数量：'+str(_rabbit)+'只。')\n`;
     return code;
-};
+}
 
-export const algorithm_rabbit_add = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_rabbit_add = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `_rabbit += 1\n`;
     code += `sprite.clearAllSprites()
 _sprite = []
@@ -614,13 +612,13 @@ for i in range(0, _rabbit, 1):
     _sprite.append(sprite.Sprite('jttl/rabbit', len(_sprite)*130+130 if len(_sprite)<5 else len(_sprite)*130+130-650, 120 if len(_sprite)<5 else 320))\n`
     code += `time.sleep(0.5)\n`;
     return code;
-};
+}
 
 // sub_algorithm_8
 
-export const algorithm_init_fzsf = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_init_fzsf = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = ``;
     code += `sprite.clearAllSprites()
 sprite.createBackground('/fzsf/map_ck_xxjsjs')
@@ -645,11 +643,11 @@ bear.enlargeTo(80)
 _pos = 0
 time.sleep(1)\n`;
     return code;
-};
+}
 
-export const algorithm_fz_calc = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_fz_calc = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var FIELD_PATHNAME = this.getFieldValue("PATHNAME");
     const calc = [0, [1, 3], [2, 4], [5, 7], [6]]
     var code = ``;
@@ -669,16 +667,16 @@ _S4.hide()
 time.sleep(1)\n`;
     }
     return code;
-};
+}
 
-export const algorithm_fz_compare = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_fz_compare = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var FIELD_PATHNAME = this.getFieldValue("PATHNAME");
     var FIELD_PATHNAME2 = this.getFieldValue("PATHNAME2");
     var code = ``;
     code += `_Slen[${FIELD_PATHNAME}] < _Slen[${FIELD_PATHNAME2}]`;
-    return [code, Python.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
     // `if(_Slen[${FIELD_PATHNAME}]==0 or _Slen[${FIELD_PATHNAME2}]==0):
     //     print('请先计算出长度再比较！程序有误！')
     //     exit()
@@ -704,11 +702,11 @@ export const algorithm_fz_compare = function () {
     // _S${FIELD_PATHNAME}.hide()
     // _S${FIELD_PATHNAME2}.hide()\n`;
     // return code;
-};
+}
 
-export const algorithm_fz_set_min = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_fz_set_min = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var FIELD_PATHNAME = this.getFieldValue("PATHNAME");
     var code = ``;
     code += `
@@ -724,11 +722,11 @@ time.sleep(0.5)
 _S${FIELD_PATHNAME}.show()
 time.sleep(1)\n`;
     return code;
-};
+}
 
-export const algorithm_fz_move = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_fz_move = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = ``;
     code += `if(_pos == _tag[_Smin][0]):
     for i in range(1, len(_tag[_Smin]), 1):
@@ -744,13 +742,13 @@ _S4.hide()
 if(_pos == 5):
     print('成功抵达信息科技教室！')\n`;
     return code;
-};
+}
 
 // sub_algorithm_9
 
-export const algorithm_init_hxdb = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_init_hxdb = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = ``;
     code += `sprite.clearAllSprites()
 sprite.createBackground('/hxdb/hxdbbg')
@@ -759,22 +757,22 @@ _num = sprite.Text('目前士兵数量：0',0,0,'num')
 _last = sprite.Text('剩余：0',500,0,'last')
 _line = 3\n`;
     return code;
-};
+}
 
-export const algorithm_hxdb_init_soldier = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_hxdb_init_soldier = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var FIELD_NUM = this.getFieldValue("NUM");
     var code = ``;
     code += `for i in range(0, ${FIELD_NUM}, 1):
     _soldier.append(sprite.Sprite('/hxdb/soldier', 30 + (len(_soldier)%_line)*50 + (len(_soldier)//(4*_line))*(_line+1)*50 +(len(_soldier)%3-2), 80+(len(_soldier)//_line)*100-(len(_soldier)//(4*_line))*4*100+(len(_soldier)%2)))
 _num.changeText('目前士兵数量：'+str(len(_soldier)))\n`;
     return code;
-};
+}
 
-export const algorithm_hxdb_stand_in_line = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_hxdb_stand_in_line = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var FIELD_NAME = this.getFieldValue("NUM");
     var code = `for i in range(0, len(_soldier), 1):
     _soldier[i].slideTo(30 + (i%${FIELD_NAME})*50 + (i//(4*${FIELD_NAME}))*(${FIELD_NAME}+1)*50 +(i%3-2), 80+(i//${FIELD_NAME})*100-(i//(4*${FIELD_NAME}))*4*100+(i%2), 0.05)
@@ -782,43 +780,43 @@ _line = ${FIELD_NAME}
 _last.changeText('剩余：'+str(len(_soldier)%_line))
 time.sleep(2)\n`;
     return code;
-};
+}
 
-export const algorithm_hxdb_last_line = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_hxdb_last_line = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var FIELD_NAME = this.getFieldValue("NUM");
     var code = `len(_soldier)%_line == ${FIELD_NAME}`;
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const algorithm_hxdb_add = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_hxdb_add = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `_num.changeText('目前士兵数量：'+str(len(_soldier)+1))
 _last.changeText('剩余：')
 time.sleep(0.5)
 _soldier.append(sprite.Sprite('/hxdb/soldier', 30 + (len(_soldier)%_line)*50 + (len(_soldier)//(4*_line))*(_line+1)*50 +(len(_soldier)%3-2), 80+(len(_soldier)//_line)*100-(len(_soldier)//(4*_line))*4*100+(len(_soldier)%2)))
 time.sleep(1)\n`;
     return code;
-};
+}
 
-export const algorithm_hxdb_result = function () {
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_sprite = "import sprite";
+export const algorithm_hxdb_result = function (_, generator) {
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_sprite = "import sprite";
     var code = `print('符合要求的士兵数量为：'+str(len(_soldier)))\n`;
     return code;
-};
+}
 
 // others
 
-export const hanoi_init_offline = function () {
-    Python.definitions_.import_turtle = "import turtle";
-    Python.definitions_.import_time = "import time";
-    Python.definitions_.import_math = "import math";
-    var color = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+export const hanoi_init_offline = function (_, generator) {
+    generator.definitions_.import_turtle = "import turtle";
+    generator.definitions_.import_time = "import time";
+    generator.definitions_.import_math = "import math";
+    var color = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var num = this.getFieldValue('NUM');
-    Python.setups_['init_Hanoi'] = `
+    generator.setups_['init_Hanoi'] = `
 def init_Hanoi():
     pen = turtle.Turtle()
     pen.hideturtle()
@@ -833,7 +831,7 @@ def init_Hanoi():
         pen.goto(150 * i - 150,-100)
         pen.setheading(90)
         pen.forward(200)`;
-    Python.setups_['begin'] = `
+    generator.setups_['begin'] = `
 def begin():    
     s = turtle.Turtle()
     s.hideturtle()
@@ -852,7 +850,7 @@ def begin():
     s.write('Start!')
     time.sleep(1)
     s.clear()\n`;
-    Python.setups_['move'] = `
+    generator.setups_['move'] = `
 def move(x, y):
     try:
         t = tower[x].pop(-1)
@@ -895,22 +893,21 @@ count_turtle.goto(0,150)
 count_turtle.write('总步数：0')    
 begin()\n`;
     return code;
-};
+}
 
 export const algorithm_get_current_location = function () {
     var line1 = 'f = path[(len(path) - 1)]\n';
     var code = line1;
     return code;
-};
+}
 
-export const algorithm_void_path = function () {
+export const algorithm_void_path = function (_, generator) {
     var code = "len(path)==0";
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const algorithm_color_seclet = function () {
+export const algorithm_color_seclet = function (_, generator) {
     var colour = this.getFieldValue('COLOR');
     var code = '"' + colour + '"'
-    return [code, Python.ORDER_ATOMIC];
-};
-
+    return [code, generator.ORDER_ATOMIC];
+}

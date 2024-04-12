@@ -1,89 +1,87 @@
-import { Arduino } from '../../arduino_common/arduino_generator';
-
-//初始化SPIFFS
-export const initialize_spiffs = function () {
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File myFile;\n';
-    Arduino.setups_['setup_SPIFFS.begin'] = 'SPIFFS.begin(true);';
+// 初始化SPIFFS
+export const initialize_spiffs = function (_, generator) {
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File myFile;\n';
+    generator.setups_['setup_SPIFFS.begin'] = 'SPIFFS.begin(true);';
     var code = '';
     return code;
-};
+}
 
-//打开文件
-export const spiffs_open_file = function () {
+// 打开文件
+export const spiffs_open_file = function (_, generator) {
     var file_var = this.getFieldValue('file_var');
     var file_path = this.getFieldValue('file_path');
     file_path = '"' + file_path + '"';
     var mode = this.getFieldValue('MODE');
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
     return file_var + '= SPIFFS.open(String(' + file_path + '), ' + mode + ');\n';
-};
+}
 
-export const spiffs_close_file = function () {
+export const spiffs_close_file = function (_, generator) {
     var file_var = this.getFieldValue('file_var');
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
     return file_var + '.close();\n';
-};
+}
 
-//将数据追加到文件
-export const spiffs_write_data = function () {
+// 将数据追加到文件
+export const spiffs_write_data = function (_, generator) {
     var file_var = this.getFieldValue('file_var');
-    var data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
     return file_var + '.print(String(' + data + '));\n';
-};
+}
 
-//文件可读
-export const spiffs_read_available = function () {
+// 文件可读
+export const spiffs_read_available = function (_, generator) {
     var file_var = this.getFieldValue('file_var');
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
     var code = file_var + '.available()';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//读取文件内容
-export const spiffs_read_data = function () {
+// 读取文件内容
+export const spiffs_read_data = function (_, generator) {
     var file_var = this.getFieldValue('file_var');
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
     var code = file_var + '.read()';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//检查文件大小
-export const spiffs_file_size = function () {
+// 检查文件大小
+export const spiffs_file_size = function (_, generator) {
     var file_var = this.getFieldValue('file_var');
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
-    Arduino.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+    generator.definitions_['esp32_spiffs'] = 'File ' + file_var + ';\n';
     var code = file_var + '.size()';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//删除文件
-export const spiffs_delete_file = function () {
-    Arduino.definitions_['include_FS'] = '#include "FS.h"';
-    Arduino.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
+// 删除文件
+export const spiffs_delete_file = function (_, generator) {
+    generator.definitions_['include_FS'] = '#include "FS.h"';
+    generator.definitions_['include_SPIFFS'] = '#include "SPIFFS.h"';
     var file_path = this.getFieldValue('file_path');
     file_path = '"' + file_path + '"';
     return 'SPIFFS.remove(String(' + file_path + '));';
-};
+}
 
-export const store_eeprom_write_long = function () {
-    var address = Arduino.valueToCode(this, 'ADDRESS', Arduino.ORDER_ATOMIC) || '0';
-    var data = Arduino.valueToCode(this, 'DATA', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
-    Arduino.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
+export const store_eeprom_write_long = function (_, generator) {
+    var address = generator.valueToCode(this, 'ADDRESS', generator.ORDER_ATOMIC) || '0';
+    var data = generator.valueToCode(this, 'DATA', generator.ORDER_ATOMIC) || '0';
+    generator.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
+    generator.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
     var funcName = 'eepromWriteLong';
     var code2 = 'void ' + funcName + '(int address, unsigned long value) {\n'
         + '  union u_tag {\n'
@@ -98,14 +96,14 @@ export const store_eeprom_write_long = function () {
         + '  if (time.b[3] != EEPROM.read(address+3) ) EEPROM.write(address+3, time.b[3]);\n'
         + '   EEPROM.commit();\n'
         + '}\n';
-    Arduino.definitions_[funcName] = code2;
+    generator.definitions_[funcName] = code2;
     return 'eepromWriteLong(' + address + ', ' + data + ');\n';
 }
 
-export const store_eeprom_read_long = function () {
-    var address = Arduino.valueToCode(this, 'ADDRESS', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
-    Arduino.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
+export const store_eeprom_read_long = function (_, generator) {
+    var address = generator.valueToCode(this, 'ADDRESS', generator.ORDER_ATOMIC) || '0';
+    generator.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
+    generator.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
     var code = 'eepromReadLong(' + address + ')';
     var funcName = 'eepromReadLong';
     var code2 = 'unsigned long ' + funcName + '(int address) {\n'
@@ -120,38 +118,38 @@ export const store_eeprom_read_long = function () {
         + '  time.b[3] = EEPROM.read(address+3);\n'
         + '  return time.ULtime;\n'
         + '}\n';
-    Arduino.definitions_[funcName] = code2;
-    return [code, Arduino.ORDER_ATOMIC];
+    generator.definitions_[funcName] = code2;
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const store_eeprom_write_byte = function () {
-    var address = Arduino.valueToCode(this, 'ADDRESS', Arduino.ORDER_ATOMIC) || '0';
-    var data = Arduino.valueToCode(this, 'DATA', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
-    Arduino.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
+export const store_eeprom_write_byte = function (_, generator) {
+    var address = generator.valueToCode(this, 'ADDRESS', generator.ORDER_ATOMIC) || '0';
+    var data = generator.valueToCode(this, 'DATA', generator.ORDER_ATOMIC) || '0';
+    generator.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
+    generator.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
     return 'EEPROM.write(' + address + ', ' + data + ');\nEEPROM.commit();\n';
 }
 
-export const store_eeprom_read_byte = function () {
-    var address = Arduino.valueToCode(this, 'ADDRESS', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
-    Arduino.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
+export const store_eeprom_read_byte = function (_, generator) {
+    var address = generator.valueToCode(this, 'ADDRESS', generator.ORDER_ATOMIC) || '0';
+    generator.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
+    generator.setups_['setup_EEPROM.begin'] = 'EEPROM.begin(512);';
     var code = 'EEPROM.read(' + address + ')';
-    return [code, Arduino.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const store_eeprom_put = function () {
-    Arduino.setups_['setup_EEPROM_begin'] = 'EEPROM.begin(4000);';
-    var address = Arduino.valueToCode(this, 'ADDRESS', Arduino.ORDER_ATOMIC) || '0';
-    var data = Arduino.valueToCode(this, 'DATA', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
+export const store_eeprom_put = function (_, generator) {
+    generator.setups_['setup_EEPROM_begin'] = 'EEPROM.begin(4000);';
+    var address = generator.valueToCode(this, 'ADDRESS', generator.ORDER_ATOMIC) || '0';
+    var data = generator.valueToCode(this, 'DATA', generator.ORDER_ATOMIC) || '0';
+    generator.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     return 'EEPROM.put(' + address + ', ' + data + ');\nEEPROM.commit();';
 }
 
-export const store_eeprom_get = function () {
-    Arduino.setups_['setup_EEPROM_begin'] = 'EEPROM.begin(4000);';
-    var address = Arduino.valueToCode(this, 'ADDRESS', Arduino.ORDER_ATOMIC) || '0';
-    var data = Arduino.valueToCode(this, 'DATA', Arduino.ORDER_ATOMIC) || '0';
-    Arduino.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
+export const store_eeprom_get = function (_, generator) {
+    generator.setups_['setup_EEPROM_begin'] = 'EEPROM.begin(4000);';
+    var address = generator.valueToCode(this, 'ADDRESS', generator.ORDER_ATOMIC) || '0';
+    var data = generator.valueToCode(this, 'DATA', generator.ORDER_ATOMIC) || '0';
+    generator.definitions_['include_EEPROM'] = '#include <EEPROM.h>';
     return 'EEPROM.get(' + address + ', ' + data + ');\n';
 }

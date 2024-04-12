@@ -1,17 +1,16 @@
 import * as Blockly from 'blockly/core';
-import Python from '../python_generator';
 
-export const procedures_defreturn = function () {
+export const procedures_defreturn = function (_, generator) {
     // Define a procedure with a return value.
-    var funcName = Python.variableDB_.getName(this.getFieldValue('NAME'),
+    var funcName = generator.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
-    var branch = Python.statementToCode(this, 'STACK') || '    pass\n';
-    if (Python.INFINITE_LOOP_TRAP) {
-        branch = Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+    var branch = generator.statementToCode(this, 'STACK') || '    pass\n';
+    if (generator.INFINITE_LOOP_TRAP) {
+        branch = generator.INFINITE_LOOP_TRAP.replace(/%1/g,
             '\'' + this.id + '\'') + branch;
     }
-    var returnValue = Python.valueToCode(this, 'RETURN',
-        Python.ORDER_NONE) || '';
+    var returnValue = generator.valueToCode(this, 'RETURN',
+        generator.ORDER_NONE) || '';
     //var type=this.getFieldValue('TYPE');
     if (returnValue) {
         returnValue = '    return ' + returnValue + '\n';
@@ -19,70 +18,70 @@ export const procedures_defreturn = function () {
     //var returnType = returnValue ? type : 'void';
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        var varName = Python.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+        var varName = generator.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
         args[x] = varName;
     }
     var code = 'def ' + funcName + '(' + args.join(', ') + '):\n' +
         branch + returnValue + '\n';
-    code = Python.scrub_(this, code);
-    Python.setups_[funcName] = code;
+    code = generator.scrub_(this, code);
+    generator.setups_[funcName] = code;
     return null;
-};
+}
 
 export const procedures_defnoreturn = procedures_defreturn;
 
-export const procedures_callreturn = function () {
+export const procedures_callreturn = function (_, generator) {
     // Call a procedure with a return value.
-    var funcName = Python.variableDB_.getName(this.getFieldValue('NAME'),
+    var funcName = generator.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = Python.valueToCode(this, 'ARG' + x,
-            Python.ORDER_NONE) || 'null';
+        args[x] = generator.valueToCode(this, 'ARG' + x,
+            generator.ORDER_NONE) || 'null';
     }
     var code = funcName + '(' + args.join(', ') + ')';
-    return [code, Python.ORDER_UNARY_POSTFIX];
-};
+    return [code, generator.ORDER_UNARY_POSTFIX];
+}
 
-export const procedures_callnoreturn = function () {
+export const procedures_callnoreturn = function (_, generator) {
     // Call a procedure with no return value.
-    var funcName = Python.variableDB_.getName(this.getFieldValue('NAME'),
+    var funcName = generator.variableDB_.getName(this.getFieldValue('NAME'),
         Blockly.Procedures.NAME_TYPE);
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = Python.valueToCode(this, 'ARG' + x,
-            Python.ORDER_NONE) || 'null';
+        args[x] = generator.valueToCode(this, 'ARG' + x,
+            generator.ORDER_NONE) || 'null';
     }
     var code = funcName + '(' + args.join(', ') + ')\n';
     return code;
-};
+}
 
-export const procedures_ifreturn = function () {
+export const procedures_ifreturn = function (_, generator) {
     // Conditionally return value from a procedure.
-    var condition = Python.valueToCode(this, 'CONDITION',
-        Python.ORDER_NONE) || 'False';
+    var condition = generator.valueToCode(this, 'CONDITION',
+        generator.ORDER_NONE) || 'False';
     var code = 'if (' + condition + ') :\n';
     if (this.hasReturnValue_) {
-        var value = Python.valueToCode(this, 'VALUE',
-            Python.ORDER_NONE) || 'None';
+        var value = generator.valueToCode(this, 'VALUE',
+            generator.ORDER_NONE) || 'None';
         code += '    return ' + value;
     } else {
         code += '    return None';
     }
     code += '\n';
     return code;
-};
+}
 
-export const procedures_return = function () {
+export const procedures_return = function (_, generator) {
     // Conditionally return value from a procedure.
     var code = ""
     if (this.hasReturnValue_) {
-        var value = Python.valueToCode(this, 'VALUE',
-            Python.ORDER_NONE) || 'None';
+        var value = generator.valueToCode(this, 'VALUE',
+            generator.ORDER_NONE) || 'None';
         code += 'return ' + value;
     } else {
         code += 'return None';
     }
     code += '\n';
     return code;
-};
+}

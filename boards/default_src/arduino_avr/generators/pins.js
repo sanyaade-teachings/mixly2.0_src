@@ -1,9 +1,7 @@
-import { Arduino } from '../../arduino_common/arduino_generator';
-
-export const pins_digital = function () {
+export const pins_digital = function (_, generator) {
     var code = this.getFieldValue('PIN');
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const pins_analog = pins_digital;
 export const pins_pwm = pins_digital;

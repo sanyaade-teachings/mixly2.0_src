@@ -1,92 +1,91 @@
-import Python from '../../python/python_generator';
 import { Profile } from 'mixly';
 
-export const system_run_in_background = function() {
-    var branch = Python.statementToCode(this, 'do');
+export const system_run_in_background = function (_, generator) {
+    var branch = generator.statementToCode(this, 'do');
     return 'control.inBackground(() => {\n' + branch + '})\n';
-};
+}
 
-export const system_reset = function() {
+export const system_reset = function () {
     return 'control.reset()\n';
 }
 
-export const system_wait = function() {
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ATOMIC) || Profile.default.serial;
+export const system_wait = function (_, generator) {
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC) || Profile.default.serial;
     return 'control.waitMicros('  + data +  ')\n';
 }
 
-export const system_raise_event = function() {
-    var source = Python.valueToCode(this, 'system_event_bus_source', Python.ORDER_ATOMIC) || Profile.default.serial;
-    var value = Python.valueToCode(this, 'system_event_bus_value', Python.ORDER_ATOMIC) || Profile.default.serial;
+export const system_raise_event = function (_, generator) {
+    var source = generator.valueToCode(this, 'system_event_bus_source', generator.ORDER_ATOMIC) || Profile.default.serial;
+    var value = generator.valueToCode(this, 'system_event_bus_value', generator.ORDER_ATOMIC) || Profile.default.serial;
     return 'control.raiseEvent('  + source + ', ' + value +  ')\n';
 }
 
-export const system_on_event = function() {
-    var source = Python.valueToCode(this, 'system_event_bus_source', Python.ORDER_ATOMIC) || Profile.default.serial;
-    var value = Python.valueToCode(this, 'system_event_bus_value', Python.ORDER_ATOMIC) || Profile.default.serial;
-    var branch = Python.statementToCode(this, 'do');
+export const system_on_event = function (_, generator) {
+    var source = generator.valueToCode(this, 'system_event_bus_source', generator.ORDER_ATOMIC) || Profile.default.serial;
+    var value = generator.valueToCode(this, 'system_event_bus_value', generator.ORDER_ATOMIC) || Profile.default.serial;
+    var branch = generator.statementToCode(this, 'do');
     return 'control.onEvent('  + source + ', ' + value +  ', () => {\n' + branch + ')\n';
 }
 
-export const system_timestamp = function() {
-    return ['control.eventTimestamp()', Python.ORDER_ATOMIC];
+export const system_timestamp = function (_, generator) {
+    return ['control.eventTimestamp()', generator.ORDER_ATOMIC];
 }
 
-export const system_value = function() {
-    return ['control.eventValue()', Python.ORDER_ATOMIC];
+export const system_value = function (_, generator) {
+    return ['control.eventValue()', generator.ORDER_ATOMIC];
 }
 
-export const system_event_bus_source = function() {
-    return [this.getFieldValue('key'), Python.ORDER_ATOMIC];
+export const system_event_bus_source = function (_, generator) {
+    return [this.getFieldValue('key'), generator.ORDER_ATOMIC];
 }
 
-export const system_event_bus_value = function() {
-    return [this.getFieldValue('key'), Python.ORDER_ATOMIC];
+export const system_event_bus_value = function (_, generator) {
+    return [this.getFieldValue('key'), generator.ORDER_ATOMIC];
 }
 
-export const system_device_name = function() {
-    return ['control.deviceName()', Python.ORDER_ATOMIC];
+export const system_device_name = function (_, generator) {
+    return ['control.deviceName()', generator.ORDER_ATOMIC];
 }
 
-export const system_device_serial_number = function() {
-    return ['control.deviceSerialNumber()', Python.ORDER_ATOMIC];
+export const system_device_serial_number = function (_, generator) {
+    return ['control.deviceSerialNumber()', generator.ORDER_ATOMIC];
 }
 
-//ok
-export const base_delay = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    var delay_time = Python.valueToCode(this, 'DELAY_TIME', Python.ORDER_ATOMIC) || '1000'
+// ok
+export const base_delay = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    var delay_time = generator.valueToCode(this, 'DELAY_TIME', generator.ORDER_ATOMIC) || '1000'
     var code = 'sleep(' + delay_time + ')\n';
     return code;
-};
+}
 
-//ok
-export const Panic_with_status_code = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    var status_code = Python.valueToCode(this, 'STATUS_CODE', Python.ORDER_ATOMIC) || '1000'
+// ok
+export const Panic_with_status_code = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    var status_code = generator.valueToCode(this, 'STATUS_CODE', generator.ORDER_ATOMIC) || '1000'
     var code = 'panic(' + status_code + ')\n';
     return code;
-};
+}
 
-//ok
-export const controls_millis = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+// ok
+export const controls_millis = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var code = 'running_time()';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//ok
+// ok
 export const controls_end_program = function () {
     return 'while True:\n    pass\n';
-};
+}
 
-//ok
-export const reset = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+// ok
+export const reset = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     return 'reset()\n';
-};
+}
 
-export const controls_uname = function () {
-    Python.definitions_['import_os'] = 'import os';
-    return ['os.uname()', Python.ORDER_ATOMIC];
-};
+export const controls_uname = function (_, generator) {
+    generator.definitions_['import_os'] = 'import os';
+    return ['os.uname()', generator.ORDER_ATOMIC];
+}

@@ -1,8 +1,6 @@
-import Python from '../../python/python_generator';
-
-export const pins_digital = function () {
+export const pins_digital = function (_, generator) {
     var code = this.getFieldValue('PIN');
-    return [code, Python.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 };
 
 export const pins_button = pins_digital;

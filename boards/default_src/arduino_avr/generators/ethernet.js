@@ -1,69 +1,70 @@
 import { JSFuncs } from 'mixly';
-import { Arduino } from '../../arduino_common/arduino_generator';
 
-export const ethernet_init_begin = function () {
+export const ethernet_init_begin = function (_, generator) {
     var Ethernet = this.getFieldValue('Ethernet');
-    Arduino.definitions_['include_spi'] = '#include <SPI.h>';
-    Arduino.definitions_['include_' + Ethernet] = '#include <' + Ethernet + '.h>';
-    Arduino.definitions_['var_declare_EthernetClient'] = 'EthernetClient client;';
-    var mac = Arduino.valueToCode(this, 'MAC', Arduino.ORDER_ATOMIC);
+    generator.definitions_['include_spi'] = '#include <SPI.h>';
+    generator.definitions_['include_' + Ethernet] = '#include <' + Ethernet + '.h>';
+    generator.definitions_['var_declare_EthernetClient'] = 'EthernetClient client;';
+    var mac = generator.valueToCode(this, 'MAC', generator.ORDER_ATOMIC);
     var code = "Ethernet.begin(" + mac + ")";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const ethernet_mac_address = function () {
+export const ethernet_mac_address = function (_, generator) {
     var VAR1 = this.getFieldValue('VAR1');
     var VAR2 = this.getFieldValue('VAR2');
     var VAR3 = this.getFieldValue('VAR3');
     var VAR4 = this.getFieldValue('VAR4');
     var VAR5 = this.getFieldValue('VAR5');
     var VAR6 = this.getFieldValue('VAR6');
-    Arduino.definitions_['var_declare_byte_mac'] = 'byte mac[] = {0x' + VAR1 + ', 0x' + VAR2 + ', 0x' + VAR3 + ', 0x' + VAR4 + ', 0x' + VAR5 + ', 0x' + VAR6 + '};';
+    generator.definitions_['var_declare_byte_mac'] = 'byte mac[] = {0x' + VAR1 + ', 0x' + VAR2 + ', 0x' + VAR3 + ', 0x' + VAR4 + ', 0x' + VAR5 + ', 0x' + VAR6 + '};';
     var code = "mac";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const ethernet_init_local_ip = function () {
+export const ethernet_init_local_ip = function (_, generator) {
     var code = "Ethernet.localIP()";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const ethernet_client_connect_server = function () {
-    var PORT = Arduino.valueToCode(this, 'PORT', Arduino.ORDER_ATOMIC);
-    var SERVER = Arduino.quote_(this.getFieldValue('SERVER'));
+export const ethernet_client_connect_server = function (_, generator) {
+    var PORT = generator.valueToCode(this, 'PORT', generator.ORDER_ATOMIC);
+    var SERVER = generator.quote_(this.getFieldValue('SERVER'));
     var code = 'client.connect(' + SERVER + ',' + PORT + ')';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const ethernet_client_stop = function () {
     var code = "client.stop();\n";
     return code;
-};
+}
 
-export const ethernet_client_connected = function () {
+export const ethernet_client_connected = function (_, generator) {
     var code = "client.connected()";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const ethernet_client_available = function () {
+export const ethernet_client_available = function (_, generator) {
     var code = "client.available()";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const ethernet_client_print = function () {
-    var TEXT = Arduino.valueToCode(this, 'TEXT', Arduino.ORDER_ATOMIC) || '""';
+export const ethernet_client_print = function (_, generator) {
+    var TEXT = generator.valueToCode(this, 'TEXT', generator.ORDER_ATOMIC) || '""';
     var code = 'client.print(' + TEXT + ');\n';
     return code;
-};
-export const ethernet_client_println = function () {
-    var TEXT = Arduino.valueToCode(this, 'TEXT', Arduino.ORDER_ATOMIC) || '""';
+}
+
+export const ethernet_client_println = function (_, generator) {
+    var TEXT = generator.valueToCode(this, 'TEXT', generator.ORDER_ATOMIC) || '""';
     var code = 'client.println(' + TEXT + ');\n';
     return code;
-};
-export const ethernet_client_read = function () {
+}
+
+export const ethernet_client_read = function (_, generator) {
     var code = "(char)client.read()";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const ethernet_client_get_request = function () {
     var URL = this.getFieldValue('URL');
@@ -73,13 +74,13 @@ export const ethernet_client_get_request = function () {
         + 'client.println(F("Connection: close"));\n'
         + 'client.println();\n';
     return code;
-};
+}
 
-export const WIFI_info = function () {
-    var SSID = Arduino.valueToCode(this, 'SSID', Arduino.ORDER_ATOMIC);
-    var PWD = Arduino.valueToCode(this, 'PWD', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-    Arduino.setups_['setup_WiFi_begin'] = 'WiFi.begin(' + SSID + ', ' + PWD + ');\n'
+export const WIFI_info = function (_, generator) {
+    var SSID = generator.valueToCode(this, 'SSID', generator.ORDER_ATOMIC);
+    var PWD = generator.valueToCode(this, 'PWD', generator.ORDER_ATOMIC);
+    generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+    generator.setups_['setup_WiFi_begin'] = 'WiFi.begin(' + SSID + ', ' + PWD + ');\n'
         + '  while (WiFi.status() != WL_CONNECTED) {\n'
         + '    delay(500);\n'
         + '    Serial.print(".");\n'
@@ -87,63 +88,66 @@ export const WIFI_info = function () {
         + '  Serial.println("Local IP:");\n'
         + '  Serial.print(WiFi.localIP());\n'
     return "";
-};
-
-export const network_wifi_connect = function () {
-    return ["WiFi.status()", Arduino.ORDER_ATOMIC];
 }
 
-export const network_get_connect = function () {
+export const network_wifi_connect = function (_, generator) {
+    return ["WiFi.status()", generator.ORDER_ATOMIC];
+}
+
+export const network_get_connect = function (_, generator) {
     var board_type = JSFuncs.getPlatform();
     var mode = this.getFieldValue('mode');
     if (board_type.match(RegExp(/ESP8266/))) {
-        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
     }
     else if (board_type.match(RegExp(/ESP32/))) {
-        Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
+        generator.definitions_['include_WiFi'] = '#include <WiFi.h>';
     }
     if (mode == 'IP') {
-        return ["WiFi.localIP()", Arduino.ORDER_ATOMIC];
+        return ["WiFi.localIP()", generator.ORDER_ATOMIC];
     }
-    return ["WiFi.macAddress()", Arduino.ORDER_ATOMIC];
+    return ["WiFi.macAddress()", generator.ORDER_ATOMIC];
 }
 
-export const NTP_server = function () {
-    var server_add = Arduino.valueToCode(this, 'server_add', Arduino.ORDER_ATOMIC);
-    var timeZone = Arduino.valueToCode(this, 'timeZone', Arduino.ORDER_ATOMIC);
-    var Interval = Arduino.valueToCode(this, 'Interval', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
-    Arduino.definitions_['include_NtpClientLib'] = '#include <NtpClientLib.h>';
-    Arduino.definitions_['var_declare_timeZone'] = 'int8_t timeZone = ' + timeZone + ';';
-    Arduino.definitions_['var_declare_ntpServer'] = 'const PROGMEM char *ntpServer = ' + server_add + ';';
-    Arduino.setups_['setup_NTP.setInterval'] = 'NTP.setInterval (' + Interval + ');';
-    Arduino.setups_['setup_NTP.setNTPTimeout'] = 'NTP.setNTPTimeout (1500);';
-    Arduino.setups_['setup_NTP.begin'] = 'NTP.begin (ntpServer, timeZone, false);';
+export const NTP_server = function (_, generator) {
+    var server_add = generator.valueToCode(this, 'server_add', generator.ORDER_ATOMIC);
+    var timeZone = generator.valueToCode(this, 'timeZone', generator.ORDER_ATOMIC);
+    var Interval = generator.valueToCode(this, 'Interval', generator.ORDER_ATOMIC);
+    generator.definitions_['include_TimeLib'] = '#include <TimeLib.h>';
+    generator.definitions_['include_NtpClientLib'] = '#include <NtpClientLib.h>';
+    generator.definitions_['var_declare_timeZone'] = 'int8_t timeZone = ' + timeZone + ';';
+    generator.definitions_['var_declare_ntpServer'] = 'const PROGMEM char *ntpServer = ' + server_add + ';';
+    generator.setups_['setup_NTP.setInterval'] = 'NTP.setInterval (' + Interval + ');';
+    generator.setups_['setup_NTP.setNTPTimeout'] = 'NTP.setNTPTimeout (1500);';
+    generator.setups_['setup_NTP.begin'] = 'NTP.begin (ntpServer, timeZone, false);';
     return "";
-};
-export const NTP_server_get_time = function () {
+}
+
+export const NTP_server_get_time = function (_, generator) {
     var timeType = this.getFieldValue('TIME_TYPE');
     var code = timeType;
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
+
 var Client_ID;
-export const MQTT_server = function () {
-    var server_add = Arduino.valueToCode(this, 'server_add', Arduino.ORDER_ATOMIC);
-    var server_port = Arduino.valueToCode(this, 'server_port', Arduino.ORDER_ATOMIC);
-    var IOT_ID = Arduino.valueToCode(this, 'IOT_ID', Arduino.ORDER_ATOMIC);
-    var IOT_PWD = Arduino.valueToCode(this, 'IOT_PWD', Arduino.ORDER_ATOMIC);
-    Client_ID = Arduino.valueToCode(this, 'Client_ID', Arduino.ORDER_ATOMIC);
+
+export const MQTT_server = function (_, generator) {
+    var server_add = generator.valueToCode(this, 'server_add', generator.ORDER_ATOMIC);
+    var server_port = generator.valueToCode(this, 'server_port', generator.ORDER_ATOMIC);
+    var IOT_ID = generator.valueToCode(this, 'IOT_ID', generator.ORDER_ATOMIC);
+    var IOT_PWD = generator.valueToCode(this, 'IOT_PWD', generator.ORDER_ATOMIC);
+    Client_ID = generator.valueToCode(this, 'Client_ID', generator.ORDER_ATOMIC);
     if (Client_ID.length > 2) {
         Client_ID += '/';
     }
     Client_ID = Client_ID.replace(/"/g, "");
-    Arduino.definitions_['include_Adafruit_MQTT'] = '#include "Adafruit_MQTT.h"';
-    Arduino.definitions_['include_Adafruit_MQTT_Client'] = '#include "Adafruit_MQTT_Client.h"';
-    Arduino.definitions_['include__WiFiClient'] = 'WiFiClient client;';
-    Arduino.definitions_['var_declare_Adafruit_MQTT_Client'] = 'Adafruit_MQTT_Client mqtt(&client, ' + server_add + ', ' + server_port + ', ' + IOT_ID + ', ' + IOT_PWD + ');';
+    generator.definitions_['include_Adafruit_MQTT'] = '#include "Adafruit_MQTT.h"';
+    generator.definitions_['include_Adafruit_MQTT_Client'] = '#include "Adafruit_MQTT_Client.h"';
+    generator.definitions_['include__WiFiClient'] = 'WiFiClient client;';
+    generator.definitions_['var_declare_Adafruit_MQTT_Client'] = 'Adafruit_MQTT_Client mqtt(&client, ' + server_add + ', ' + server_port + ', ' + IOT_ID + ', ' + IOT_PWD + ');';
     var board_type = JSFuncs.getPlatform();
     if (board_type.match(RegExp(/ESP8266/))) {
-        Arduino.definitions_['var_declare_ MQTT_connect();'] = 'void MQTT_connect();';
+        generator.definitions_['var_declare_ MQTT_connect();'] = 'void MQTT_connect();';
     }
     var funcName = 'MQTT_connect';
     var code = 'void' + ' ' + funcName + '() {\n'
@@ -165,9 +169,9 @@ export const MQTT_server = function () {
         + '  }\n'
         + '  Serial.println("MQTT Connected!");\n'
         + '}\n';
-    Arduino.definitions_['var_declare_' + funcName] = code;
+    generator.definitions_['var_declare_' + funcName] = code;
     return funcName + '();\n';
-};
+}
 
 export const MQTT_connect = function () {
     var funcName = 'MQTT_connect';
@@ -193,73 +197,73 @@ export const MQTT_connect = function () {
     return funcName + '();\n';
 }
 
-//物联网-发送数据到app
-export const MQTT_publish = function () {
+// 物联网-发送数据到app
+export const MQTT_publish = function (_, generator) {
     var Topic = this.getFieldValue('Topic');
-    var data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
     var Topic_var = "MQTT_Topic_" + Topic;
-    Arduino.definitions_['var_declare_Adafruit_MQTT_Publish' + Topic_var] = 'Adafruit_MQTT_Publish ' + Topic_var + ' = Adafruit_MQTT_Publish(&mqtt, "' + Client_ID + Topic + '");';
+    generator.definitions_['var_declare_Adafruit_MQTT_Publish' + Topic_var] = 'Adafruit_MQTT_Publish ' + Topic_var + ' = Adafruit_MQTT_Publish(&mqtt, "' + Client_ID + Topic + '");';
     var code = Topic_var + '.publish(' + data + ');\n ';
     return code;
-};
+}
 
-export const MQTT_subscribe_value = function () {
+export const MQTT_subscribe_value = function (_, generator) {
     var Topic = this.getFieldValue('Topic_0');
     if (Topic)
         Topic = Topic.replace(/"/g, "");
     var Topic_var = "MQTT_Topic_" + Topic;
     var code = '(char *)' + Topic_var + '.lastread';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const MQTT_subscribe = function () {
+export const MQTT_subscribe = function (_, generator) {
     var n = 0;
     var Topic = this.getFieldValue('Topic_0');
     if (Topic)
         Topic = Topic.replace(/"/g, "");
     var Topic_var = "MQTT_Topic_" + Topic;
-    var branch = Arduino.statementToCode(this, 'DO' + n);
+    var branch = generator.statementToCode(this, 'DO' + n);
     var code = 'if (subscription ==&' + Topic_var + ') {\n  ' + branch.replace(new RegExp(/\n/g), "\n  ") + '\n  }';
-    Arduino.definitions_['var_declare_Adafruit_MQTT_Subscribe' + Client_ID + '/' + Topic] = 'Adafruit_MQTT_Subscribe ' + Topic_var + ' = Adafruit_MQTT_Subscribe(&mqtt,"' + Client_ID + Topic + '");';
-    Arduino.setups_['setup_mqtt.subscribe' + Topic] = 'mqtt.subscribe(&' + Topic_var + ');';
+    generator.definitions_['var_declare_Adafruit_MQTT_Subscribe' + Client_ID + '/' + Topic] = 'Adafruit_MQTT_Subscribe ' + Topic_var + ' = Adafruit_MQTT_Subscribe(&mqtt,"' + Client_ID + Topic + '");';
+    generator.setups_['setup_mqtt.subscribe' + Topic] = 'mqtt.subscribe(&' + Topic_var + ');';
     for (n = 1; n <= this.elseifCount_; n++) {
         var Topic = this.getFieldValue('Topic_' + n);
         if (Topic)
             Topic = Topic.replace(/"/g, "");
         Topic_var = "MQTT_Topic_" + Topic;
-        branch = Arduino.statementToCode(this, 'DO' + n);
-        Arduino.definitions_['var_declare_Adafruit_MQTT_Subscribe' + Client_ID + Topic] = 'Adafruit_MQTT_Subscribe ' + Topic_var + ' = Adafruit_MQTT_Subscribe(&mqtt,"' + Client_ID + Topic + '");';
-        Arduino.setups_['setup_mqtt.subscribe' + Topic] = 'mqtt.subscribe(&' + Topic_var + ');';
+        branch = generator.statementToCode(this, 'DO' + n);
+        generator.definitions_['var_declare_Adafruit_MQTT_Subscribe' + Client_ID + Topic] = 'Adafruit_MQTT_Subscribe ' + Topic_var + ' = Adafruit_MQTT_Subscribe(&mqtt,"' + Client_ID + Topic + '");';
+        generator.setups_['setup_mqtt.subscribe' + Topic] = 'mqtt.subscribe(&' + Topic_var + ');';
         code += ' else if (subscription == &' + Topic_var + ') {\n  ' + branch.replace(new RegExp(/\n/g), "\n  ") + '\n  }';
     }
     if (this.elseCount_) {
-        branch = Arduino.statementToCode(this, 'ELSE');
+        branch = generator.statementToCode(this, 'ELSE');
         code += ' else {\n  ' + branch + '\n  }';
     }
     return 'Adafruit_MQTT_Subscribe *subscription;\nwhile ((subscription = mqtt.readSubscription(5000))) {\n  ' + code + '\n}\n';
-};
+}
 
-//ESP8266 GET请求
-export const http_get = function () {
-    var api = Arduino.valueToCode(this, 'api', Arduino.ORDER_ATOMIC);
-    var branch = Arduino.statementToCode(this, 'success');
+// ESP8266 GET请求
+export const http_get = function (_, generator) {
+    var api = generator.valueToCode(this, 'api', generator.ORDER_ATOMIC);
+    var branch = generator.statementToCode(this, 'success');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
-    var branch1 = Arduino.statementToCode(this, 'failure');
+    var branch1 = generator.statementToCode(this, 'failure');
     branch1 = branch1.replace(/(^\s*)|(\s*$)/g, "");
-    Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-    Arduino.definitions_['include_ESP8266HTTPClient'] = '#include <ESP8266HTTPClient.h>';
+    generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+    generator.definitions_['include_ESP8266HTTPClient'] = '#include <ESP8266HTTPClient.h>';
     var code = 'if (WiFi.status() == WL_CONNECTED) {\nHTTPClient http;\nhttp.begin(' + api + ');\nint httpCode = http.GET();\nif (httpCode > 0) {\nString Request_result = http.getString();\n' + branch + '\n}\nelse {\n' + branch1 + '\n} \nhttp.end();\n}\n';
     return code;
-};
+}
 
-export const WIFI_smartConfig = function () {
+export const WIFI_smartConfig = function (_, generator) {
     var MODE = this.getFieldValue('MODE');
     // var board_type = JSFuncs.getPlatform();
     if (MODE == 'SmartConfig') {
-        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
-        Arduino.definitions_['include_ESP8266WiFiMulti'] = '#include <ESP8266WiFiMulti.h>';
-        Arduino.definitions_['var_declare_ESP8266WiFiMulti'] = ' ESP8266WiFiMulti wifiMulti;';
-        Arduino.setups_['setup_WiFi_Smartconfig'] = 'Serial.println("Wait for Smartconfig");\n'
+        generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        generator.definitions_['include_ESP8266WiFiMulti'] = '#include <ESP8266WiFiMulti.h>';
+        generator.definitions_['var_declare_ESP8266WiFiMulti'] = ' ESP8266WiFiMulti wifiMulti;';
+        generator.setups_['setup_WiFi_Smartconfig'] = 'Serial.println("Wait for Smartconfig");\n'
             + 'wifiMulti.run();\n'
             + 'WiFi.setAutoConnect(true);\n'
             + 'if (WiFi.status() == WL_CONNECTED) {\n'
@@ -282,45 +286,45 @@ export const WIFI_smartConfig = function () {
             + '}\n'
         return "";
     }
-    Arduino.definitions_['include_WiFiManager'] = '#include <WiFiManager.h>';
-    Arduino.definitions_['var_declare_WiFiServer'] = 'WiFiServer server(80);';
-    Arduino.setups_['setup_WiFi_mode'] = 'WiFi.mode(WIFI_STA);';
-    Arduino.setups_['setup_WiFiManager'] = 'WiFiManager wm;';
-    Arduino.setups_['setup_bool_res'] = 'bool res;';
-    Arduino.setups_['setup_wifiManagerautoConnect'] = 'res=wm.autoConnect();';
+    generator.definitions_['include_WiFiManager'] = '#include <WiFiManager.h>';
+    generator.definitions_['var_declare_WiFiServer'] = 'WiFiServer server(80);';
+    generator.setups_['setup_WiFi_mode'] = 'WiFi.mode(WIFI_STA);';
+    generator.setups_['setup_WiFiManager'] = 'WiFiManager wm;';
+    generator.setups_['setup_bool_res'] = 'bool res;';
+    generator.setups_['setup_wifiManagerautoConnect'] = 'res=wm.autoConnect();';
     return "";
-};
+}
 
-export const WIFI_ap_or_sta = function () {
+export const WIFI_ap_or_sta = function (_, generator) {
     var dropdown_mode = this.getFieldValue('mode');
-    var value_SSID = Arduino.valueToCode(this, 'SSID', Arduino.ORDER_ATOMIC);
-    var value_PSK = Arduino.valueToCode(this, 'PSK', Arduino.ORDER_ATOMIC);
-    var value_IP1 = Arduino.valueToCode(this, 'IP1', Arduino.ORDER_ATOMIC);
-    var value_IP2 = Arduino.valueToCode(this, 'IP2', Arduino.ORDER_ATOMIC);
-    var value_IP = Arduino.valueToCode(this, 'IP', Arduino.ORDER_ATOMIC);
-    var value_duankou = Arduino.valueToCode(this, 'duankou', Arduino.ORDER_ATOMIC);
+    var value_SSID = generator.valueToCode(this, 'SSID', generator.ORDER_ATOMIC);
+    var value_PSK = generator.valueToCode(this, 'PSK', generator.ORDER_ATOMIC);
+    var value_IP1 = generator.valueToCode(this, 'IP1', generator.ORDER_ATOMIC);
+    var value_IP2 = generator.valueToCode(this, 'IP2', generator.ORDER_ATOMIC);
+    var value_IP = generator.valueToCode(this, 'IP', generator.ORDER_ATOMIC);
+    var value_duankou = generator.valueToCode(this, 'duankou', generator.ORDER_ATOMIC);
     value_IP1 = value_IP1.replace(new RegExp(/\./g), ",");
     value_IP2 = value_IP2.replace(new RegExp(/\./g), ",");
     value_IP = value_IP.replace(new RegExp(/\./g), ",");
     var board_type = JSFuncs.getPlatform();
     if (board_type.match(RegExp(/ESP8266/)) != null)
-        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
     else
-        Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+        generator.definitions_['include_WiFi'] = '#include <WiFi.h>';
+    generator.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
     if (dropdown_mode == 'STA') {
-        Arduino.definitions_['include_WiFiUdp'] = '#include <WiFiUdp.h>';
-        Arduino.definitions_['define_STASSID'] = '#define STASSID ' + value_SSID + '';
-        Arduino.definitions_['define_STAPSK'] = '#define STAPSK ' + value_PSK + '';
-        Arduino.definitions_['var_declare_ESP8266ip1'] = 'IPAddress ESP8266ip1(' + value_IP1 + ');';
-        Arduino.definitions_['var_declare_ESP8266ip2'] = 'IPAddress ESP8266ip2(' + value_IP2 + ');';
-        Arduino.definitions_['var_declare_ESP8266ip'] = 'IPAddress ESP8266ip(' + value_IP + ');';
-        Arduino.definitions_['var_declare_localPort'] = 'unsigned int localPort = ' + value_duankou + ';';
-        Arduino.definitions_['var_declare_remotePort'] = 'unsigned int remotePort = ' + value_duankou + ';';
-        Arduino.definitions_['var_declare_incomingPacket'] = 'char incomingPacket[537];';
-        Arduino.definitions_['var_declare_A'] = 'char A;';
-        Arduino.definitions_['var_declare_Udp'] = 'WiFiUDP Udp;';
-        Arduino.setups_['setup_wifi_sta'] = 'WiFi.mode(WIFI_STA);\n'
+        generator.definitions_['include_WiFiUdp'] = '#include <WiFiUdp.h>';
+        generator.definitions_['define_STASSID'] = '#define STASSID ' + value_SSID + '';
+        generator.definitions_['define_STAPSK'] = '#define STAPSK ' + value_PSK + '';
+        generator.definitions_['var_declare_ESP8266ip1'] = 'IPAddress ESP8266ip1(' + value_IP1 + ');';
+        generator.definitions_['var_declare_ESP8266ip2'] = 'IPAddress ESP8266ip2(' + value_IP2 + ');';
+        generator.definitions_['var_declare_ESP8266ip'] = 'IPAddress ESP8266ip(' + value_IP + ');';
+        generator.definitions_['var_declare_localPort'] = 'unsigned int localPort = ' + value_duankou + ';';
+        generator.definitions_['var_declare_remotePort'] = 'unsigned int remotePort = ' + value_duankou + ';';
+        generator.definitions_['var_declare_incomingPacket'] = 'char incomingPacket[537];';
+        generator.definitions_['var_declare_A'] = 'char A;';
+        generator.definitions_['var_declare_Udp'] = 'WiFiUDP Udp;';
+        generator.setups_['setup_wifi_sta'] = 'WiFi.mode(WIFI_STA);\n'
             + '  WiFi.begin(STASSID, STAPSK);\n'
             + '  while(WiFi.status() != WL_CONNECTED){\n'
             + '    Serial.print(".");\n'
@@ -333,18 +337,18 @@ export const WIFI_ap_or_sta = function () {
             + '  Udp.begin(localPort);';
     }
     else {
-        Arduino.definitions_['include_WiFiUDP'] = '#include <WiFiUDP.h>';
-        Arduino.definitions_['var_declare_AP_NameChar'] = 'const char AP_NameChar[] = ' + value_SSID + ';';
-        Arduino.definitions_['var_declare_WiFiAPPSK'] = 'const char WiFiAPPSK[] = ' + value_PSK + ';';
-        Arduino.definitions_['var_declare_ESP8266ip1'] = 'IPAddress ESP8266ip1(' + value_IP1 + ');';
-        Arduino.definitions_['var_declare_ESP8266ip2'] = 'IPAddress ESP8266ip2(' + value_IP2 + ');';
-        Arduino.definitions_['var_declare_ESP8266ip'] = 'IPAddress ESP8266ip(' + value_IP + ');';
-        Arduino.definitions_['var_declare_localPort'] = 'unsigned int localPort = ' + value_duankou + ';';
-        Arduino.definitions_['var_declare_remotePort'] = 'unsigned int remotePort = ' + value_duankou + ';';
-        Arduino.definitions_['var_declare_incomingPacket'] = 'char incomingPacket[537];';
-        Arduino.definitions_['var_declare_A'] = 'char A;';
-        Arduino.definitions_['var_declare_Udp'] = 'WiFiUDP Udp;';
-        Arduino.setups_['setup_wifi_ap'] = 'WiFi.mode(WIFI_AP);\n'
+        generator.definitions_['include_WiFiUDP'] = '#include <WiFiUDP.h>';
+        generator.definitions_['var_declare_AP_NameChar'] = 'const char AP_NameChar[] = ' + value_SSID + ';';
+        generator.definitions_['var_declare_WiFiAPPSK'] = 'const char WiFiAPPSK[] = ' + value_PSK + ';';
+        generator.definitions_['var_declare_ESP8266ip1'] = 'IPAddress ESP8266ip1(' + value_IP1 + ');';
+        generator.definitions_['var_declare_ESP8266ip2'] = 'IPAddress ESP8266ip2(' + value_IP2 + ');';
+        generator.definitions_['var_declare_ESP8266ip'] = 'IPAddress ESP8266ip(' + value_IP + ');';
+        generator.definitions_['var_declare_localPort'] = 'unsigned int localPort = ' + value_duankou + ';';
+        generator.definitions_['var_declare_remotePort'] = 'unsigned int remotePort = ' + value_duankou + ';';
+        generator.definitions_['var_declare_incomingPacket'] = 'char incomingPacket[537];';
+        generator.definitions_['var_declare_A'] = 'char A;';
+        generator.definitions_['var_declare_Udp'] = 'WiFiUDP Udp;';
+        generator.setups_['setup_wifi_ap'] = 'WiFi.mode(WIFI_AP);\n'
             + '  WiFi.softAP(AP_NameChar, WiFiAPPSK);\n'
             + '  Udp.begin(localPort);\n'
             + '  Serial.println();\n'
@@ -352,40 +356,40 @@ export const WIFI_ap_or_sta = function () {
     }
     var code = '';
     return code;
-};
+}
 
-export const WIFI_ap_and_sta = function () {
-    var value_SSID1 = Arduino.valueToCode(this, 'SSID1', Arduino.ORDER_ATOMIC);
-    var value_SSID2 = Arduino.valueToCode(this, 'SSID2', Arduino.ORDER_ATOMIC);
-    var value_PSK1 = Arduino.valueToCode(this, 'PSK1', Arduino.ORDER_ATOMIC);
-    var value_PSK2 = Arduino.valueToCode(this, 'PSK2', Arduino.ORDER_ATOMIC);
-    var value_IP1 = Arduino.valueToCode(this, 'IP1', Arduino.ORDER_ATOMIC);
-    var value_IP2 = Arduino.valueToCode(this, 'IP2', Arduino.ORDER_ATOMIC);
-    var value_IP = Arduino.valueToCode(this, 'IP', Arduino.ORDER_ATOMIC);
-    var value_duankou = Arduino.valueToCode(this, 'duankou', Arduino.ORDER_ATOMIC);
+export const WIFI_ap_and_sta = function (_, generator) {
+    var value_SSID1 = generator.valueToCode(this, 'SSID1', generator.ORDER_ATOMIC);
+    var value_SSID2 = generator.valueToCode(this, 'SSID2', generator.ORDER_ATOMIC);
+    var value_PSK1 = generator.valueToCode(this, 'PSK1', generator.ORDER_ATOMIC);
+    var value_PSK2 = generator.valueToCode(this, 'PSK2', generator.ORDER_ATOMIC);
+    var value_IP1 = generator.valueToCode(this, 'IP1', generator.ORDER_ATOMIC);
+    var value_IP2 = generator.valueToCode(this, 'IP2', generator.ORDER_ATOMIC);
+    var value_IP = generator.valueToCode(this, 'IP', generator.ORDER_ATOMIC);
+    var value_duankou = generator.valueToCode(this, 'duankou', generator.ORDER_ATOMIC);
     value_IP1 = value_IP1.replace(new RegExp(/\./g), ",");
     value_IP2 = value_IP2.replace(new RegExp(/\./g), ",");
     value_IP = value_IP.replace(new RegExp(/\./g), ",");
-    Arduino.definitions_['define_STASSID'] = '#define STASSID ' + value_SSID1;
-    Arduino.definitions_['define_STAPSK'] = '#define STAPSK ' + value_PSK1;
+    generator.definitions_['define_STASSID'] = '#define STASSID ' + value_SSID1;
+    generator.definitions_['define_STAPSK'] = '#define STAPSK ' + value_PSK1;
     var board_type = JSFuncs.getPlatform();
     if (board_type.match(RegExp(/ESP8266/)) != null)
-        Arduino.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
+        generator.definitions_['include_ESP8266WiFi'] = '#include <ESP8266WiFi.h>';
     else
-        Arduino.definitions_['include_WiFi'] = '#include <WiFi.h>';
-    Arduino.definitions_['include_WiFiUDP'] = '#include <WiFiUDP.h>';
-    Arduino.definitions_['var_declare_AP_NameChar'] = 'const char AP_NameChar[] = ' + value_SSID2 + ';';
-    Arduino.definitions_['var_declare_WiFiAPPSK'] = 'const char WiFiAPPSK[] = ' + value_PSK2 + ';';
-    Arduino.definitions_['var_declare_ESP8266ip1'] = 'IPAddress ESP8266ip1(' + value_IP1 + ');';
-    Arduino.definitions_['var_declare_ESP8266ip2'] = 'IPAddress ESP8266ip2(' + value_IP2 + ');';
-    Arduino.definitions_['var_declare_ESP8266ip'] = 'IPAddress ESP8266ip(' + value_IP + ');';
-    Arduino.definitions_['var_declare_localPort'] = 'unsigned int localPort = ' + value_duankou + ';';
-    Arduino.definitions_['var_declare_remotePort'] = 'unsigned int remotePort = ' + value_duankou + ';';
-    Arduino.definitions_['var_declare_incomingPacket'] = 'char incomingPacket[537];';
-    Arduino.definitions_['var_declare_A'] = 'char A;';
-    Arduino.definitions_['var_declare_Udp'] = 'WiFiUDP Udp;';
-    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Arduino.setups_['setup_wifi_ap_and_sta'] = 'WiFi.mode(WIFI_AP_STA);\n'
+        generator.definitions_['include_WiFi'] = '#include <WiFi.h>';
+    generator.definitions_['include_WiFiUDP'] = '#include <WiFiUDP.h>';
+    generator.definitions_['var_declare_AP_NameChar'] = 'const char AP_NameChar[] = ' + value_SSID2 + ';';
+    generator.definitions_['var_declare_WiFiAPPSK'] = 'const char WiFiAPPSK[] = ' + value_PSK2 + ';';
+    generator.definitions_['var_declare_ESP8266ip1'] = 'IPAddress ESP8266ip1(' + value_IP1 + ');';
+    generator.definitions_['var_declare_ESP8266ip2'] = 'IPAddress ESP8266ip2(' + value_IP2 + ');';
+    generator.definitions_['var_declare_ESP8266ip'] = 'IPAddress ESP8266ip(' + value_IP + ');';
+    generator.definitions_['var_declare_localPort'] = 'unsigned int localPort = ' + value_duankou + ';';
+    generator.definitions_['var_declare_remotePort'] = 'unsigned int remotePort = ' + value_duankou + ';';
+    generator.definitions_['var_declare_incomingPacket'] = 'char incomingPacket[537];';
+    generator.definitions_['var_declare_A'] = 'char A;';
+    generator.definitions_['var_declare_Udp'] = 'WiFiUDP Udp;';
+    generator.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    generator.setups_['setup_wifi_ap_and_sta'] = 'WiFi.mode(WIFI_AP_STA);\n'
         + '  WiFi.softAP(AP_NameChar, WiFiAPPSK);\n'
         + '  WiFi.begin(STASSID, STAPSK);\n'
         + '  Udp.begin(localPort);\n'
@@ -393,11 +397,11 @@ export const WIFI_ap_and_sta = function () {
         + '  Serial.println("Started ap. Local ip: " + WiFi.localIP().toString());';
     var code = '';
     return code;
-};
+}
 
-export const WIFI_incomingPacket = function () {
-    var value_input_data = Arduino.valueToCode(this, 'input_data', Arduino.ORDER_ATOMIC) || 'COM';
-    var statements_do = Arduino.statementToCode(this, 'do');
+export const WIFI_incomingPacket = function (_, generator) {
+    var value_input_data = generator.valueToCode(this, 'input_data', generator.ORDER_ATOMIC) || 'COM';
+    var statements_do = generator.statementToCode(this, 'do');
     statements_do = statements_do.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     var code = 'int packetSize = Udp.parsePacket();\n'
         + 'if (packetSize) {\n'
@@ -411,15 +415,15 @@ export const WIFI_incomingPacket = function () {
         + '  }\n'
         + '}\n';
     return code;
-};
+}
 
-export const WIFI_send_data = function () {
-    var value_data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
+export const WIFI_send_data = function (_, generator) {
+    var value_data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
     var code = 'Udp.beginPacket(Udp.remoteIP(),Udp.remotePort());\n'
         + 'Udp.write(' + value_data + ');\n'
         + 'Udp.endPacket();\n';
     return code;
-};
+}
 
 var WeatherCity = {
     "北京": "101010100",
@@ -2994,12 +2998,13 @@ var WeatherCity = {
     "阿里山": "101340902",
     "新港": "101340904"
 };
-//天气GET
-export const WeatherGet = function () {
+
+// 天气GET
+export const WeatherGet = function (_, generator) {
     var data = this.getFieldValue('data');
     var CityCode = WeatherCity[data];
-    Arduino.definitions_['include_Weather_Forcast'] = '#include <Weather_Forcast.h>';
-    Arduino.definitions_['var_declare_Weather_Forcast'] = 'Weather_Forcast Weather;';
+    generator.definitions_['include_Weather_Forcast'] = '#include <Weather_Forcast.h>';
+    generator.definitions_['var_declare_Weather_Forcast'] = 'Weather_Forcast Weather;';
     if (CityCode) {
         this.setFieldValue('ok', "check");
     } else {
@@ -3008,33 +3013,33 @@ export const WeatherGet = function () {
     }
 
     var code = "Weather.RefreshData(\"" + CityCode + "\")";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 //获取当天天气
-export const WeatherGetToday = function () {
+export const WeatherGetToday = function (_, generator) {
     var type = this.getFieldValue('type');
     var code = "Weather.getToday(" + type + ")";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 //获取预报天气
-export const WeatherGetForecast = function () {
+export const WeatherGetForecast = function (_, generator) {
     var type = this.getFieldValue('type');
-    var date = Arduino.valueToCode(this, 'date', Arduino.ORDER_ATOMIC);
+    var date = generator.valueToCode(this, 'date', generator.ORDER_ATOMIC);
     var code = "Weather.get" + type + "(" + date + ")";
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const mixio_mqtt_subscribe = function () {
-    var server = Arduino.valueToCode(this, 'server', Arduino.ORDER_ATOMIC);
-    var port = Arduino.valueToCode(this, 'port', Arduino.ORDER_ATOMIC);
-    var mqtt_username = Arduino.valueToCode(this, 'mqtt_username', Arduino.ORDER_ATOMIC);
-    var mqtt_password = Arduino.valueToCode(this, 'mqtt_password', Arduino.ORDER_ATOMIC);
-    var project = Arduino.valueToCode(this, 'project', Arduino.ORDER_ATOMIC);
+export const mixio_mqtt_subscribe = function (_, generator) {
+    var server = generator.valueToCode(this, 'server', generator.ORDER_ATOMIC);
+    var port = generator.valueToCode(this, 'port', generator.ORDER_ATOMIC);
+    var mqtt_username = generator.valueToCode(this, 'mqtt_username', generator.ORDER_ATOMIC);
+    var mqtt_password = generator.valueToCode(this, 'mqtt_password', generator.ORDER_ATOMIC);
+    var project = generator.valueToCode(this, 'project', generator.ORDER_ATOMIC);
     port = port.replace(/"/g, "")
-    Arduino.definitions_['include_PubSubClient'] = '#include <PubSubClient.h>\n';
-    Arduino.definitions_['var_declare_PubSubClient'] = 'const char *mqtt_broker = ' + server + ';\n'
+    generator.definitions_['include_PubSubClient'] = '#include <PubSubClient.h>\n';
+    generator.definitions_['var_declare_PubSubClient'] = 'const char *mqtt_broker = ' + server + ';\n'
         + 'const char *mqtt_username = ' + mqtt_username + ';\n'
         + 'const char *mqtt_password = ' + mqtt_password + ';\n'
         + 'const int mqtt_port = ' + port + ';\n'
@@ -3055,7 +3060,7 @@ export const mixio_mqtt_subscribe = function () {
         + '  mqtt_data = data;\n'
         + '  mqtt_status = true;\n'
         + '}\n';
-    Arduino.setups_['setups_PubSubClient'] = 'client.setServer(mqtt_broker, mqtt_port);\n'
+    generator.setups_['setups_PubSubClient'] = 'client.setServer(mqtt_broker, mqtt_port);\n'
         + 'client.setCallback(callback);\n'
         + 'while (!client.connected()) {\n'
         + '  String client_id = "esp-client-";\n'
@@ -3072,13 +3077,13 @@ export const mixio_mqtt_subscribe = function () {
         + '}\n';
     var code = 'client.loop();\n';
     return code;
-};
+}
 
-export const mixio_mqtt_subscribe_key = function () {
+export const mixio_mqtt_subscribe_key = function (_, generator) {
     var key = this.getFieldValue('key');
     var server = this.getFieldValue('server');
-    Arduino.definitions_['include_PubSubClient'] = '#include <PubSubClient.h>\n';
-    Arduino.definitions_['var_declare_PubSubClient'] = 'const char *mqtt_broker = "' + server + '";\n'
+    generator.definitions_['include_PubSubClient'] = '#include <PubSubClient.h>\n';
+    generator.definitions_['var_declare_PubSubClient'] = 'const char *mqtt_broker = "' + server + '";\n'
         + 'const char *mqtt_username = "MixIO_public";\n'
         + 'const char *mqtt_password = "MixIO_public";\n'
         + 'const int mqtt_port = 1883;\n'
@@ -3099,7 +3104,7 @@ export const mixio_mqtt_subscribe_key = function () {
         + '  mqtt_data = data;\n'
         + '  mqtt_status = true;\n'
         + '}\n';
-    Arduino.setups_['setups_PubSubClient'] = 'client.setServer(mqtt_broker, mqtt_port);\n'
+    generator.setups_['setups_PubSubClient'] = 'client.setServer(mqtt_broker, mqtt_port);\n'
         + 'client.setCallback(callback);\n'
         + 'while (!client.connected()) {\n'
         + '  String client_id = "esp-client-";\n'
@@ -3116,11 +3121,11 @@ export const mixio_mqtt_subscribe_key = function () {
         + '}\n';
     var code = 'client.loop();\n';
     return code;
-};
+}
 
-export const mixio_mqtt_publish = function () {
-    var data = Arduino.valueToCode(this, 'data', Arduino.ORDER_ATOMIC);
-    var topic = Arduino.valueToCode(this, 'topic', Arduino.ORDER_ATOMIC);
+export const mixio_mqtt_publish = function (_, generator) {
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ATOMIC);
+    var topic = generator.valueToCode(this, 'topic', generator.ORDER_ATOMIC);
     var mode = this.getFieldValue('mode');
     if (mode == 1) {
         var code = 'client.publish(String(String(mqtt_username) +"/"+ String(project) +"/"+ String(' + topic + ')).c_str(),String(' + data + ').c_str());\n';
@@ -3129,15 +3134,15 @@ export const mixio_mqtt_publish = function () {
         var code = 'client.publish(String("MixIO/"+ String(project) +"/default/"+ String(' + topic + ')).c_str(),String(' + data + ').c_str());\n';
     }
     return code;
-};
+}
 
-export const mixio_mqtt_received_the_news = function () {
+export const mixio_mqtt_received_the_news = function (_, generator) {
     var mode = this.getFieldValue('mode');
-    var topic = Arduino.valueToCode(this, 'topic', Arduino.ORDER_ATOMIC);
-    var branch = Arduino.statementToCode(this, 'function');
+    var topic = generator.valueToCode(this, 'topic', generator.ORDER_ATOMIC);
+    var branch = generator.statementToCode(this, 'function');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");
     if (mode == 1) {
-        Arduino.setups_['setups_topic_' + topic + ''] = 'client.subscribe(String(String(mqtt_username) +"/"+ String(project) +"/"+ String(' + topic + ')).c_str());'
+        generator.setups_['setups_topic_' + topic + ''] = 'client.subscribe(String(String(mqtt_username) +"/"+ String(project) +"/"+ String(' + topic + ')).c_str());'
         var code = 'if (mqtt_status) {\n'
             + '  if (String(mqtt_topic).equals(String(String(mqtt_username) +"/"+ String(project) +"/"+ String(' + topic + ')))) {\n'
             + '  ' + branch + '\n'
@@ -3146,7 +3151,7 @@ export const mixio_mqtt_received_the_news = function () {
             + '}\n'
     }
     if (mode == 2) {
-        Arduino.setups_['setups_topic_' + topic + ''] = 'client.subscribe(String("MixIO/"+ String(project) +"/default/"+ String(' + topic + ')).c_str());'
+        generator.setups_['setups_topic_' + topic + ''] = 'client.subscribe(String("MixIO/"+ String(project) +"/default/"+ String(' + topic + ')).c_str());'
         var code = 'if (mqtt_status) {\n'
             + '  if (String(mqtt_topic).equals(String("MixIO/"+ String(project) +"/default/"+ String(' + topic + ')).c_str())) {\n'
             + '  ' + branch + '\n'
@@ -3155,20 +3160,20 @@ export const mixio_mqtt_received_the_news = function () {
             + '}\n'
     }
     return code;
-};
+}
 
-export const asyncelegantota = function () {
+export const asyncelegantota = function (_, generator) {
     var board_type = JSFuncs.getPlatform();
     if (board_type.match(RegExp(/ESP8266/))) {
-        Arduino.definitions_['include_ESPAsyncTCP'] = '#include <ESPAsyncTCP.h>';
+        generator.definitions_['include_ESPAsyncTCP'] = '#include <ESPAsyncTCP.h>';
     } else {
-        Arduino.definitions_['include_AsyncTCP'] = '#include <AsyncTCP.h>';
+        generator.definitions_['include_AsyncTCP'] = '#include <AsyncTCP.h>';
     }
-    Arduino.definitions_['include_ESPAsyncWebServer'] = '#include <ESPAsyncWebServer.h>';
-    Arduino.definitions_['include_AsyncElegantOTA'] = '#include <AsyncElegantOTA.h>\n';
-    Arduino.definitions_['var_AsyncWebServer'] = 'AsyncWebServer server(80);\n';
-    Arduino.setups_['setups_AsyncWebServer'] = 'AsyncElegantOTA.begin(&server);\n'
+    generator.definitions_['include_ESPAsyncWebServer'] = '#include <ESPAsyncWebServer.h>';
+    generator.definitions_['include_AsyncElegantOTA'] = '#include <AsyncElegantOTA.h>\n';
+    generator.definitions_['var_AsyncWebServer'] = 'AsyncWebServer server(80);\n';
+    generator.setups_['setups_AsyncWebServer'] = 'AsyncElegantOTA.begin(&server);\n'
         + 'server.begin();\n';
     var code = '';
     return code;
-}; 22
+}

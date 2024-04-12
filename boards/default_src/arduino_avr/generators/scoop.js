@@ -1,9 +1,7 @@
-import { Arduino } from '../../arduino_common/arduino_generator';
-
-export const SCoopTask = function () {
+export const SCoopTask = function (_, generator) {
     var _tasknum = this.getFieldValue('_tasknum');
-    var statements_setup = Arduino.statementToCode(this, 'setup');
-    var statements_loop = Arduino.statementToCode(this, 'loop');
+    var statements_setup = generator.statementToCode(this, 'setup');
+    var statements_loop = generator.statementToCode(this, 'loop');
     var taskcode = 'defineTask(scoopTask' + _tasknum + ')\n'
         + 'void scoopTask' + _tasknum + '::setup()\n'
         + '{\n'
@@ -13,19 +11,20 @@ export const SCoopTask = function () {
         + '{\n'
         + statements_loop
         + '}\n';
-    Arduino.definitions_['include_Scoop'] = '#include "SCoop.h"';
-    Arduino.setups_['scoop_start'] = 'mySCoop.start();';
-    Arduino.definitions_['scoop_task' + _tasknum] = taskcode;
+    generator.definitions_['include_Scoop'] = '#include "SCoop.h"';
+    generator.setups_['scoop_start'] = 'mySCoop.start();';
+    generator.definitions_['scoop_task' + _tasknum] = taskcode;
     var code = "";
     return code;
-};
+}
 
 export const SCoop_yield = function () {
     var code = 'yield();\n';
     return code;
-};
-export const SCoop_sleep = function () {
-    var value_sleeplength = Arduino.valueToCode(this, 'sleeplength', Arduino.ORDER_ATOMIC);
+}
+
+export const SCoop_sleep = function (_, generator) {
+    var value_sleeplength = generator.valueToCode(this, 'sleeplength', generator.ORDER_ATOMIC);
     var code = 'sleep(' + value_sleeplength + ');\n'
     return code;
-};
+}

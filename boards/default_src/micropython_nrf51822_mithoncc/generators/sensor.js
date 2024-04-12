@@ -1,69 +1,67 @@
-import Python from '../../python/python_generator';
-
-export const sensor_button_is_pressed = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    var btn = Python.valueToCode(this, 'btn', Python.ORDER_ATOMIC);
+export const sensor_button_is_pressed = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    var btn = generator.valueToCode(this, 'btn', generator.ORDER_ATOMIC);
     var code = btn + '.is_pressed()';
-    return [code, Python.ORDER_ATOMIC];
-};
-
-export const sensor_button_was_pressed = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    var btn = Python.valueToCode(this, 'btn', Python.ORDER_ATOMIC);
-    var code = btn + '.was_pressed()';
-    return [code, Python.ORDER_ATOMIC];
-};
-
-export const sensor_button_get_presses = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    var btn = Python.valueToCode(this, 'btn', Python.ORDER_ATOMIC);
-    var code = btn + '.get_presses()';
-    return [code, Python.ORDER_ATOMIC];
-};
-
-export const controls_GestureLists = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    var gesture = this.getFieldValue('gesture');
-    // Python.definitions_['func_gesture' + gesture] = code;
-    return ['"' + gesture + '"', Python.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const controls_attachGestureInterrupt = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_button_was_pressed = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    var btn = generator.valueToCode(this, 'btn', generator.ORDER_ATOMIC);
+    var code = btn + '.was_pressed()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_button_get_presses = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    var btn = generator.valueToCode(this, 'btn', generator.ORDER_ATOMIC);
+    var code = btn + '.get_presses()';
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const controls_GestureLists = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
-    var branch = Python.statementToCode(this, 'DO');
-    var d = branch || Python.PASS;
+    // generator.definitions_['func_gesture' + gesture] = code;
+    return ['"' + gesture + '"', generator.ORDER_ATOMIC];
+}
+
+export const controls_attachGestureInterrupt = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    var gesture = this.getFieldValue('gesture');
+    var branch = generator.statementToCode(this, 'DO');
+    var d = branch || generator.PASS;
     var code = 'if accelerometer.is_gesture("' + gesture + '"):\n' + d;
-    // Python.definitions_['func_gesture' + gesture] = code;
+    // generator.definitions_['func_gesture' + gesture] = code;
     return code;
 }
 
-export const sensor_current_gesture1 = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_current_gesture1 = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     var code = 'accelerometer.is_gesture("' + gesture + '")';
-    return [code, Python.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const sensor_current_gesture2 = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_current_gesture2 = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
     var code = 'accelerometer.was_gesture("' + gesture + '")';
-    return [code, Python.ORDER_ATOMIC];
+    return [code, generator.ORDER_ATOMIC];
 }
 
-export const controls_attachGestureInterrupt2 = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const controls_attachGestureInterrupt2 = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('gesture');
-    var branch = Python.statementToCode(this, 'DO');
-    var d = branch || Python.PASS;
+    var branch = generator.statementToCode(this, 'DO');
+    var d = branch || generator.PASS;
     var code = 'if accelerometer.was_gesture("' + gesture + '"):\n' + d;
-    // Python.definitions_['func_gesture' + gesture] = code;
+    // generator.definitions_['func_gesture' + gesture] = code;
     return code;
 }
 
-export const sensor_get_gestures = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_get_gestures = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var gesture = this.getFieldValue('GES');
     var a;
     if (gesture == 'all') {
@@ -72,79 +70,84 @@ export const sensor_get_gestures = function () {
     else if (gesture == 'current') {
         a = 'accelerometer.current_gesture()';
     }
-    return [a, Python.ORDER_ATOMIC];
-};
+    return [a, generator.ORDER_ATOMIC];
+}
 
-export const sensor_current_gesture = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    return ['accelerometer.current_gesture()', Python.ORDER_ATOMIC];
-};
+export const sensor_current_gesture = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    return ['accelerometer.current_gesture()', generator.ORDER_ATOMIC];
+}
 
-export const sensor_get_acceleration = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_get_acceleration = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var key = this.getFieldValue('key')
     var code = 'accelerometer.get_' + key + '()';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const sensor_set_acceleration = function () {
     var key = this.getFieldValue('key')
     var code = 'input.setAccelerometerRange(' + key + ')\n';
     return code;
-};
-//undefined?!?!?!?!
-export const sensor_light_level = function () {
-    return ['input.lightLevel()', Python.ORDER_ATOMIC];
-};
+}
 
-export const sensor_calibrate_compass = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+// undefined?!?!?!?!
+export const sensor_light_level = function (_, generator) {
+    return ['input.lightLevel()', generator.ORDER_ATOMIC];
+}
+
+export const sensor_calibrate_compass = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     return 'compass.calibrate()\n';
-};
+}
 
-export const sensor_is_compass_calibrated = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    return ['compass.is_calibrated()', Python.ORDER_ATOMIC];
-};
+export const sensor_is_compass_calibrated = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    return ['compass.is_calibrated()', generator.ORDER_ATOMIC];
+}
 
-export const sensor_compass_heading = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    return ['compass.heading()', Python.ORDER_ATOMIC];
-};
+export const sensor_compass_heading = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    return ['compass.heading()', generator.ORDER_ATOMIC];
+}
 
-export const sensor_temperature = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    return ['temperature()', Python.ORDER_ATOMIC];
-};
-export const sensor_field_strength = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_temperature = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    return ['temperature()', generator.ORDER_ATOMIC];
+}
+
+export const sensor_field_strength = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     var compass = this.getFieldValue('compass');
     var code = 'compass.' + compass + '()'
-    return [code, Python.ORDER_ATOMIC];
-};
-export const sensor_rotation = function () {
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_rotation = function (_, generator) {
     var key = this.getFieldValue('key')
     var code = 'input.rotation(' + key + ')';
-    return [code, Python.ORDER_ATOMIC];
-};
-export const sensor_magnetic = function () {
+    return [code, generator.ORDER_ATOMIC];
+}
+
+export const sensor_magnetic = function (_, generator) {
     var key = this.getFieldValue('key')
     var code = 'input.magneticForce(' + key + ')';
-    return [code, Python.ORDER_ATOMIC];
-};
-export const sensor_distance_hrsc04 = function () {
-    var Trig = this.getFieldValue('Trig');
-    var Echo = this.getFieldValue('Echo');
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_ultrasonic'] = 'import ultrasonic';
-    return ['ultrasonic.distance_cm(t_pin=pin' + Trig + ', e_pin=pin' + Echo + ')', Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const sensor_distance_hrsc04_ = function () {
+export const sensor_distance_hrsc04 = function (_, generator) {
     var Trig = this.getFieldValue('Trig');
     var Echo = this.getFieldValue('Echo');
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.setups_['class_hrsc04_'] =
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_ultrasonic'] = 'import ultrasonic';
+    return ['ultrasonic.distance_cm(t_pin=pin' + Trig + ', e_pin=pin' + Echo + ')', generator.ORDER_ATOMIC];
+}
+
+export const sensor_distance_hrsc04_ = function (_, generator) {
+    var Trig = this.getFieldValue('Trig');
+    var Echo = this.getFieldValue('Echo');
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.setups_['class_hrsc04_'] =
         'class HCSR04:\n' +
         '    def __init__(self, tpin=pin' + Trig + ', epin=pin' + Echo + ', spin=pin13):\n' +
         '        self.trigger_pin = tpin\n' +
@@ -184,107 +187,106 @@ export const sensor_distance_hrsc04_ = function () {
         '\n' +
         'sonar=HCSR04()\n' +
         '\n'
-    return ['sonar.distance_cm()', Python.ORDER_ATOMIC];
-};
+    return ['sonar.distance_cm()', generator.ORDER_ATOMIC];
+}
 
-export const DS1307_init = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_RTC'] = 'from RTC import *';
+export const DS1307_init = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
-    //Python.definitions_['include_Mixly'] = '#include "Mixly.h"';
-    //Python.setups_['class_DS1307'] = Python.CLASS_DS1307_INIT;
-    //Python.definitions_['DS1307'+RTCName] = 'DS1307 ' + RTCName + '('+SDA+','+SCL+');';
+    //generator.definitions_['include_Mixly'] = '#include "Mixly.h"';
+    //generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
+    //generator.definitions_['DS1307'+RTCName] = 'DS1307 ' + RTCName + '('+SDA+','+SCL+');';
     //return 'DS1307' + '('+SDA+','+SCL+')\n';
-};
+}
 
-export const RTC_get_time = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_RTC'] = 'from RTC import *';
+export const RTC_get_time = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
     var timeType = this.getFieldValue('TIME_TYPE');
-    //Python.setups_['class_DS1307'] = Python.CLASS_DS1307_INIT;
+    //generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
 
     switch (timeType) {
     //
     case "Year":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Month":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Day":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Hour":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Minute":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Second":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Week":
         var code = 'ds.' + timeType + '()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Mix1":
         var code = 'ds.get_date()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     case "Mix2":
         var code = 'ds.get_time()';
-        return [code, Python.ORDER_ASSIGNMENT];
+        return [code, generator.ORDER_ASSIGNMENT];
     }
 
-};
+}
 
-export const RTC_set_time = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_RTC'] = 'from RTC import *';
+export const RTC_set_time = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
-    var hour = Python.valueToCode(this, "hour", Python.ORDER_ASSIGNMENT);
-    var minute = Python.valueToCode(this, "minute", Python.ORDER_ASSIGNMENT);
-    var second = Python.valueToCode(this, "second", Python.ORDER_ASSIGNMENT);
-    //Python.setups_['class_DS1307'] = Python.CLASS_DS1307_INIT;
+    var hour = generator.valueToCode(this, "hour", generator.ORDER_ASSIGNMENT);
+    var minute = generator.valueToCode(this, "minute", generator.ORDER_ASSIGNMENT);
+    var second = generator.valueToCode(this, "second", generator.ORDER_ASSIGNMENT);
+    //generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
 
     var code = 'ds.set_time(' + hour + ', ' + minute + ', ' + second + ')\n';
     return code;
-};
+}
 
-export const RTC_set_date = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_RTC'] = 'from RTC import *';
+export const RTC_set_date = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_RTC'] = 'from RTC import *';
     //var RTCName = this.getFieldValue('RTCName');
-    var year = Python.valueToCode(this, "year", Python.ORDER_ASSIGNMENT);
-    var month = Python.valueToCode(this, "month", Python.ORDER_ASSIGNMENT);
-    var day = Python.valueToCode(this, "day", Python.ORDER_ASSIGNMENT);
-    //Python.setups_['class_DS1307'] = Python.CLASS_DS1307_INIT;
+    var year = generator.valueToCode(this, "year", generator.ORDER_ASSIGNMENT);
+    var month = generator.valueToCode(this, "month", generator.ORDER_ASSIGNMENT);
+    var day = generator.valueToCode(this, "day", generator.ORDER_ASSIGNMENT);
+    //generator.setups_['class_DS1307'] = generator.CLASS_DS1307_INIT;
     var code = 'ds.set_date(' + year + ', ' + month + ', ' + day + ')\n';
     return code;
-};
+}
 
-export const sensor_compass_reset = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
+export const sensor_compass_reset = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
     return 'compass.clear_calibration()\n';
-};
+}
 
+export const sensor_light = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    return ['display.read_light_level()', generator.ORDER_ATOMIC];
+}
 
-export const sensor_light = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    return ['display.read_light_level()', Python.ORDER_ATOMIC];
-};
-
-export const sensor_hrsc04_init = function () {
+export const sensor_hrsc04_init = function (_, generator) {
     var Trig = this.getFieldValue('Trig');
     var Echo = this.getFieldValue('Echo');
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_ultrasonic'] = 'from ultrasonic import *';
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_ultrasonic'] = 'from ultrasonic import *';
     return "sonar = HCSR04(tpin=pin" + Trig + ", epin=pin" + Echo + ")\n"
-};
+}
 
-export const TCS34725_Get_RGB = function () {
-    Python.definitions_['import_microbit_*'] = 'from microbit import *';
-    Python.definitions_['import_TCS'] = 'from TCS import *';
+export const TCS34725_Get_RGB = function (_, generator) {
+    generator.definitions_['import_microbit_*'] = 'from microbit import *';
+    generator.definitions_['import_TCS'] = 'from TCS import *';
 
     var RGB = this.getFieldValue('TCS34725_COLOR');
-    return ["tcs.getRawRGBData(" + RGB + ")", Python.ORDER_ATOMIC];
-};
+    return ["tcs.getRawRGBData(" + RGB + ")", generator.ORDER_ATOMIC];
+}

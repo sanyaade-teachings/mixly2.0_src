@@ -1,4 +1,3 @@
-import { Arduino } from '../../arduino_common/arduino_generator';
 import Variables from '../../arduino_common/others/variables';
 
 export const factory_notes = function () {
@@ -17,22 +16,20 @@ export const factory_notes = function () {
         }
         return code;
     }
-
     return '//\n';
-
 }
 
-export const folding_block = function () {
-    var branch = Arduino.statementToCode(this, 'DO');
+export const folding_block = function (_, generator) {
+    var branch = generator.statementToCode(this, 'DO');
     branch = branch.replace(/(^\s*)|(\s*$)/g, "");//去除两端空格
     return '' + branch + '\n';
-};
+}
 
-export const IICSCAN = function () {
-    Arduino.definitions_['include_WIRE'] = '#include <Wire.h>';
-    Arduino.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
-    Arduino.setups_['setup_wire_begin'] = 'Wire.begin();';
-    Arduino.setups_['setup_Serial.println("I2C Scanner")'] = 'Serial.println("I2C Scanner");';
+export const IICSCAN = function (_, generator) {
+    generator.definitions_['include_WIRE'] = '#include <Wire.h>';
+    generator.setups_['setup_serial_Serial'] = 'Serial.begin(9600);';
+    generator.setups_['setup_wire_begin'] = 'Wire.begin();';
+    generator.setups_['setup_Serial.println("I2C Scanner")'] = 'Serial.println("I2C Scanner");';
     var code = 'byte error, address;\n'
         + 'int nDevices;\n'
         + 'Serial.println("Scanning...");\n'
@@ -61,7 +58,7 @@ export const IICSCAN = function () {
         + '  Serial.println("done");\n'
         + 'delay(5000);\n';
     return code;
-};
+}
 
 function string_Bin_to_Hex(outstr_select) {
     switch (outstr_select) {
@@ -184,10 +181,10 @@ function myAtoi(str) {
 }
 
 //取模工具显示数据部分
-export const tool_modulus_show = function () {
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'), Variables.NAME_TYPE);
+export const tool_modulus_show = function (_, generator) {
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'), Variables.NAME_TYPE);
     var checkbox_save_hz = this.getFieldValue('save_hz') == 'TRUE';
-    var value_input = Arduino.valueToCode(this, 'input_data', Arduino.ORDER_ATOMIC);
+    var value_input = generator.valueToCode(this, 'input_data', generator.ORDER_ATOMIC);
 
     var X_1 = 0;
     for (var i of value_input) {
@@ -199,12 +196,12 @@ export const tool_modulus_show = function () {
     this.setFieldValue(X_1, "x");
 
     if (checkbox_save_hz)
-        Arduino.libs_[varName] = 'static const unsigned char PROGMEM ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
+        generator.libs_[varName] = 'static const unsigned char PROGMEM ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
     else
-        Arduino.libs_[varName] = 'unsigned char ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
+        generator.libs_[varName] = 'unsigned char ' + varName + '[' + X_1 + '] = ' + '{' + value_input + '};';
     var code = '';
     return code;
-};
+}
 
 //取模工具设置部分
 var bitArr = new Array();
@@ -212,7 +209,7 @@ for (var i = 0; i < 8; i++)bitArr[i] = (0x80 >> i);//初始化位数组
 var canvas = document.createElement("canvas");//创建canvas
 var ctx = canvas.getContext("2d");//获得内容描述句柄
 
-export const tool_modulus = function () {
+export const tool_modulus = function (_, generator) {
     var dropdown_bitmap_formats = this.getFieldValue('bitmap_formats');
     var dropdown_modulus_way = this.getFieldValue('modulus_way');
     var dropdown_modulus_direction = this.getFieldValue('modulus_direction');
@@ -566,15 +563,15 @@ export const tool_modulus = function () {
     modulus_data = modulus_data.substring(0, modulus_data.length - 3);
 
     if (checkbox_show_hz)
-        Arduino.definitions_['var_declare_tool_modulus_data_' + dropdown_hz_sharp + '_' + text_hz_line_height + 'px' + encodeUnicode(text_input_data)] = '//' + hz_sharp;
+        generator.definitions_['var_declare_tool_modulus_data_' + dropdown_hz_sharp + '_' + text_hz_line_height + 'px' + encodeUnicode(text_input_data)] = '//' + hz_sharp;
 
     var code = modulus_data;
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
 export const nano_pin = function () {
     return "";
-};
+}
 
 export const promini_pin = nano_pin;
 export const leonardo_pin = nano_pin;
@@ -589,20 +586,20 @@ export const esp32s3_pin = nano_pin;
 export const core_esp32c3_pin = nano_pin;
 
 //获取两个日期差值
-export const get_the_number_of_days_between_the_two_dates = function () {
-    var year_start = Arduino.valueToCode(this, 'year_start', Arduino.ORDER_ATOMIC);
-    var month_start = Arduino.valueToCode(this, 'month_start', Arduino.ORDER_ATOMIC);
-    var day_start = Arduino.valueToCode(this, 'day_start', Arduino.ORDER_ATOMIC);
-    var year_end = Arduino.valueToCode(this, 'year_end', Arduino.ORDER_ATOMIC);
-    var month_end = Arduino.valueToCode(this, 'month_end', Arduino.ORDER_ATOMIC);
-    var day_end = Arduino.valueToCode(this, 'day_end', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['get_the_number_of_days_between_the_two_dates'] = 'int day_diff(int year_start, int month_start, int day_start, int year_end, int month_end, int day_end)\n{\n  int y2, m2, d2;\n  int y1, m1, d1;\n  m1 = (month_start + 9) % 12;\n  y1 = year_start - m1/10;\n  d1 = 365*y1 + y1/4 - y1/100 + y1/400 + (m1*306 + 5)/10 + (day_start - 1);\n  m2 = (month_end + 9) % 12;\n  y2 = year_end - m2/10;\n  d2 = 365*y2 + y2/4 - y2/100 + y2/400 + (m2*306 + 5)/10 + (day_end - 1);\n  return (d2 - d1);\n}';
+export const get_the_number_of_days_between_the_two_dates = function (_, generator) {
+    var year_start = generator.valueToCode(this, 'year_start', generator.ORDER_ATOMIC);
+    var month_start = generator.valueToCode(this, 'month_start', generator.ORDER_ATOMIC);
+    var day_start = generator.valueToCode(this, 'day_start', generator.ORDER_ATOMIC);
+    var year_end = generator.valueToCode(this, 'year_end', generator.ORDER_ATOMIC);
+    var month_end = generator.valueToCode(this, 'month_end', generator.ORDER_ATOMIC);
+    var day_end = generator.valueToCode(this, 'day_end', generator.ORDER_ATOMIC);
+    generator.definitions_['get_the_number_of_days_between_the_two_dates'] = 'int day_diff(int year_start, int month_start, int day_start, int year_end, int month_end, int day_end)\n{\n  int y2, m2, d2;\n  int y1, m1, d1;\n  m1 = (month_start + 9) % 12;\n  y1 = year_start - m1/10;\n  d1 = 365*y1 + y1/4 - y1/100 + y1/400 + (m1*306 + 5)/10 + (day_start - 1);\n  m2 = (month_end + 9) % 12;\n  y2 = year_end - m2/10;\n  d2 = 365*y2 + y2/4 - y2/100 + y2/400 + (m2*306 + 5)/10 + (day_end - 1);\n  return (d2 - d1);\n}';
     var code = 'day_diff(' + year_start + ', ' + month_start + ', ' + day_start + ', ' + year_end + ', ' + month_end + ', ' + day_end + ')';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const esp8266_board_pin = function () {
+export const esp8266_board_pin = function (_, generator) {
     var pin = this.getFieldValue('pin');
     var code = '' + pin + '';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}

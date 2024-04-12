@@ -1,44 +1,42 @@
-import Python from '../../python/python_generator';
-
-export const display_show_image_or_string = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
+export const display_show_image_or_string = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var code = "matrix.show(" + data + ")\n";
     return code;
 }
 
-export const display_scroll_string = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
+export const display_scroll_string = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var code = "matrix.scroll(" + data + ")\n";
     return code;
 }
 
-export const display_show_static = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
+export const display_show_static = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var code = "matrix.showstatic(" + data + ")\n";
     return code;
 }
 
-export const display_show_image_or_string_delay = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
-    var time = Python.valueToCode(this, 'time', Python.ORDER_ASSIGNMENT);
+export const display_show_image_or_string_delay = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
+    var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var code = "matrix.show(" + data + ',' + time + ")\n";
     return code;
 }
 
-export const display_scroll_string_delay = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
-    var time = Python.valueToCode(this, 'time', Python.ORDER_ASSIGNMENT);
+export const display_scroll_string_delay = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
+    var time = generator.valueToCode(this, 'time', generator.ORDER_ASSIGNMENT);
     var code = "matrix.scroll(" + data + ',' + time + ")\n";
     return code;
 }
 
-export const display_image_create = function (block) {
-    Python.definitions_['import_matrix'] = 'import matrix';
+export const display_image_create = function (block, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
     var colours = {
         "#000000": "0",
         //"#440000": "1",
@@ -180,110 +178,108 @@ export const display_image_create = function (block) {
     var colour_7e = colours[block.getFieldValue("7e")];
     var colour_7f = colours[block.getFieldValue("7f")];
     var code = 'matrix.Image("' + colour_00 + colour_01 + colour_02 + colour_03 + colour_04 + colour_05 + colour_06 + colour_07 + colour_08 + colour_09 + colour_0a + colour_0b + colour_0c + colour_0d + colour_0e + colour_0f + ':' + colour_10 + colour_11 + colour_12 + colour_13 + colour_14 + colour_15 + colour_16 + colour_17 + colour_18 + colour_19 + colour_1a + colour_1b + colour_1c + colour_1d + colour_1e + colour_1f + ':' + colour_20 + colour_21 + colour_22 + colour_23 + colour_24 + colour_25 + colour_26 + colour_27 + colour_28 + colour_29 + colour_2a + colour_2b + colour_2c + colour_2d + colour_2e + colour_2f + ':' + colour_30 + colour_31 + colour_32 + colour_33 + colour_34 + colour_35 + colour_36 + colour_37 + colour_38 + colour_39 + colour_3a + colour_3b + colour_3c + colour_3d + colour_3e + colour_3f + ':' + colour_40 + colour_41 + colour_42 + colour_43 + colour_44 + colour_45 + colour_46 + colour_47 + colour_48 + colour_49 + colour_4a + colour_4b + colour_4c + colour_4d + colour_4e + colour_4f + ':' + colour_50 + colour_51 + colour_52 + colour_53 + colour_54 + colour_55 + colour_56 + colour_57 + colour_58 + colour_59 + colour_5a + colour_5b + colour_5c + colour_5d + colour_5e + colour_5f + ':' + colour_60 + colour_61 + colour_62 + colour_63 + colour_64 + colour_65 + colour_66 + colour_67 + colour_68 + colour_69 + colour_6a + colour_6b + colour_6c + colour_6d + colour_6e + colour_6f + ':' + colour_70 + colour_71 + colour_72 + colour_73 + colour_74 + colour_75 + colour_76 + colour_77 + colour_78 + colour_79 + colour_7a + colour_7b + colour_7c + colour_7d + colour_7e + colour_7f + '")';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const display_image_builtins = function (block) {
-    Python.definitions_['import_matrix'] = 'import matrix';
+export const display_image_builtins = function (block, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
     var dropdown_image = block.getFieldValue('image');
     var code = 'matrix.Image.' + dropdown_image;
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const display_get_pixel = function (block) {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var value_x = Python.valueToCode(block, 'x', Python.ORDER_ATOMIC);
-    var value_y = Python.valueToCode(block, 'y', Python.ORDER_ATOMIC);
+export const display_get_pixel = function (block, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var value_x = generator.valueToCode(block, 'x', generator.ORDER_ATOMIC);
+    var value_y = generator.valueToCode(block, 'y', generator.ORDER_ATOMIC);
     var code = 'matrix.get_pixel(int(' + value_x + '), int(' + value_y + '))';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const display_bright_point = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var x = Python.valueToCode(this, 'x', Python.ORDER_ASSIGNMENT);
-    var y = Python.valueToCode(this, 'y', Python.ORDER_ASSIGNMENT);
-    var dropdown_stat = Python.valueToCode(this, 'STAT', Python.ORDER_ATOMIC);
+export const display_bright_point = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
+    var y = generator.valueToCode(this, 'y', generator.ORDER_ASSIGNMENT);
+    var dropdown_stat = generator.valueToCode(this, 'STAT', generator.ORDER_ATOMIC);
     var code = 'matrix.set_pixel(int(' + x + '), int(' + y + '), ' + dropdown_stat + ")\n";
     return code;
 }
 
-export const display_get_screen_pixel = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
+export const display_get_screen_pixel = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
     var code = 'matrix.get_brightness()';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const display_get_screen_image = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
+export const display_get_screen_image = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
     var code = 'matrix.get_screenimage()';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-
-export const display_bright_screen = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var x = Python.valueToCode(this, 'x', Python.ORDER_ASSIGNMENT);
+export const display_bright_screen = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var code = 'matrix.set_brightness(' + x + ')\n';
     return code;
-};
+}
 
-
-export const display_blink_rate = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var x = Python.valueToCode(this, 'x', Python.ORDER_ASSIGNMENT);
+export const display_blink_rate = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var x = generator.valueToCode(this, 'x', generator.ORDER_ASSIGNMENT);
     var code = 'matrix.blink_rate(' + x + ')\n';
     return code;
 }
 
-export const display_clear = function () {
-    Python.definitions_['import_matrix'] = 'import matrix';
+export const display_clear = function (_, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
     var code = 'matrix.clear()\n';
     return code;
-};
+}
 
-export const display_use_i2c_init = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var i2csub = Python.valueToCode(this, 'I2CSUB', Python.ORDER_ATOMIC);
-    var sub = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    var row = Python.valueToCode(this, 'row', Python.ORDER_ATOMIC);
-    var column = Python.valueToCode(this, 'column', Python.ORDER_ATOMIC);
+export const display_use_i2c_init = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var i2csub = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
+    var sub = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var row = generator.valueToCode(this, 'row', generator.ORDER_ATOMIC);
+    var column = generator.valueToCode(this, 'column', generator.ORDER_ATOMIC);
     var code = sub + " = ssd1306.SSD1306_I2C(" + row + "," + column + "," + i2csub + ")\n";
     return code;
-};
+}
 
-export const display_draw_4strings = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var value_text_line1 = Python.valueToCode(this, 'Text_line1', Python.ORDER_ASSIGNMENT) || '\'\'';
-    var value_text_line2 = Python.valueToCode(this, 'Text_line2', Python.ORDER_ASSIGNMENT) || '\'\'';
-    var value_text_line3 = Python.valueToCode(this, 'Text_line3', Python.ORDER_ASSIGNMENT) || '\'\'';
-    var value_text_line4 = Python.valueToCode(this, 'Text_line4', Python.ORDER_ASSIGNMENT) || '\'\'';
+export const display_draw_4strings = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var value_text_line1 = generator.valueToCode(this, 'Text_line1', generator.ORDER_ASSIGNMENT) || '\'\'';
+    var value_text_line2 = generator.valueToCode(this, 'Text_line2', generator.ORDER_ASSIGNMENT) || '\'\'';
+    var value_text_line3 = generator.valueToCode(this, 'Text_line3', generator.ORDER_ASSIGNMENT) || '\'\'';
+    var value_text_line4 = generator.valueToCode(this, 'Text_line4', generator.ORDER_ASSIGNMENT) || '\'\'';
     var code = varName + '.show_str(' + value_text_line1 + ',' + value_text_line2 + ',' + value_text_line3 + ',' + value_text_line4 + ')\n'
     return code;
-};
+}
 
-export const display_line_arbitrarily = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var location_x1 = Python.valueToCode(this, 'x1', Python.ORDER_ATOMIC);
-    var location_y1 = Python.valueToCode(this, 'y1', Python.ORDER_ATOMIC);
-    var location_x2 = Python.valueToCode(this, 'x2', Python.ORDER_ATOMIC);
-    var location_y2 = Python.valueToCode(this, 'y2', Python.ORDER_ATOMIC);
+export const display_line_arbitrarily = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var location_x1 = generator.valueToCode(this, 'x1', generator.ORDER_ATOMIC);
+    var location_y1 = generator.valueToCode(this, 'y1', generator.ORDER_ATOMIC);
+    var location_x2 = generator.valueToCode(this, 'x2', generator.ORDER_ATOMIC);
+    var location_y2 = generator.valueToCode(this, 'y2', generator.ORDER_ATOMIC);
     var code = varName + '.show_line(' + location_x1 + ', ' + location_y1 + ', ' + location_x2 + ', ' + location_y2 + ', 1)\n';
     return code;
-};
+}
 
-export const display_rect = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var location_x = Python.valueToCode(this, 'x', Python.ORDER_ATOMIC);
-    var location_y = Python.valueToCode(this, 'y', Python.ORDER_ATOMIC);
-    var value_width = Python.valueToCode(this, 'width', Python.ORDER_ATOMIC);
-    var value_height = Python.valueToCode(this, 'height', Python.ORDER_ATOMIC);
+export const display_rect = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var location_x = generator.valueToCode(this, 'x', generator.ORDER_ATOMIC);
+    var location_y = generator.valueToCode(this, 'y', generator.ORDER_ATOMIC);
+    var value_width = generator.valueToCode(this, 'width', generator.ORDER_ATOMIC);
+    var value_height = generator.valueToCode(this, 'height', generator.ORDER_ATOMIC);
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
     var code = '';
@@ -296,13 +292,13 @@ export const display_rect = function () {
         break;
     }
     return code;
-};
+}
 
-export const image_arithmetic = function (a) {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var op = a.getFieldValue("OP");
-    var imga = Python.valueToCode(a, 'A', Python.ORDER_ATOMIC);
-    var imgb = Python.valueToCode(a, 'B', Python.ORDER_ATOMIC);
+export const image_arithmetic = function (block, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var op = block.getFieldValue("OP");
+    var imga = generator.valueToCode(block, 'A', generator.ORDER_ATOMIC);
+    var imgb = generator.valueToCode(block, 'B', generator.ORDER_ATOMIC);
     var code = '';
     if (op == 'INTERSECTION') {
         code = imga + '-(' + imga + '-' + imgb + ')';
@@ -310,104 +306,103 @@ export const image_arithmetic = function (a) {
     else {
         code = imga + op + imgb;
     }
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-
-export const display_line = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var location_x = Python.valueToCode(this, 'x', Python.ORDER_ATOMIC);
-    var location_y = Python.valueToCode(this, 'y', Python.ORDER_ATOMIC);
-    var value_length = Python.valueToCode(this, 'length', Python.ORDER_ATOMIC);
+export const display_line = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var location_x = generator.valueToCode(this, 'x', generator.ORDER_ATOMIC);
+    var location_y = generator.valueToCode(this, 'y', generator.ORDER_ATOMIC);
+    var value_length = generator.valueToCode(this, 'length', generator.ORDER_ATOMIC);
     var value_direction = this.getFieldValue("direction");
     var code = varName + '.show_' + value_direction + '(' + location_x + ', ' + location_y + ', ' + value_length + ', 1)\n';
     return code;
-};
+}
 
-export const display_onoff = function () {
+export const display_onoff = function (_, generator) {
     var code = (this.getFieldValue('ONOFF') == 'ON') ? '1' : '0';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const image_shift = function (a) {
-    Python.definitions_['import_matrix'] = 'import matrix';
-    var op = a.getFieldValue("OP");
-    var image = Python.valueToCode(a, 'img', Python.ORDER_ATOMIC);
-    var value = Python.valueToCode(a, 'val', Python.ORDER_ATOMIC);
+export const image_shift = function (block, generator) {
+    generator.definitions_['import_matrix'] = 'import matrix';
+    var op = block.getFieldValue("OP");
+    var image = generator.valueToCode(block, 'img', generator.ORDER_ATOMIC);
+    var value = generator.valueToCode(block, 'val', generator.ORDER_ATOMIC);
     var code = image + '.shift_' + op + '(' + value + ')';
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const display_fill = function () {
-    var varName = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    Python.definitions_['import_machine'] = 'import machine';
+export const display_fill = function (_, generator) {
+    var varName = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    generator.definitions_['import_machine'] = 'import machine';
     var key = this.getFieldValue('key');
     var code = varName + '.show_fill(' + key + ')\n';
     return code;
-};
+}
 
-// export const switch = function () {
+// export const switch = function (_, generator) {
 //     var code = this.getFieldValue('flag');
-//     return [code, Python.ORDER_ATOMIC];
-// };
+//     return [code, generator.ORDER_ATOMIC];
+// }
 
-export const display_tm_use_i2c_init = function () {
-    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    var iv = Python.valueToCode(this, 'I2CSUB', Python.ORDER_ATOMIC);
+export const display_tm_use_i2c_init = function (_, generator) {
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue("key");
     var code;
     if (key == 'TM1650') {
-        Python.definitions_['import_tm1650'] = 'import tm1650';
+        generator.definitions_['import_tm1650'] = 'import tm1650';
         code = v + ' = tm1650.' + key + "(" + iv + ')\n';
     } else if (key == 'TM1637') {
-        Python.definitions_['import_tm1637'] = 'import tm1637';
+        generator.definitions_['import_tm1637'] = 'import tm1637';
         code = v + ' = tm1637.' + key + "(" + iv + ')\n';
     }
     return code;
-};
+}
 
-export const display_tm1650_power = function () {
+export const display_tm1650_power = function (_, generator) {
     var type = this.getFieldValue("TYPE");
-    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
+    var v = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
     var stat = this.getFieldValue("STAT");
     var code = v + '.' + type + stat + "()\n";
     return code;
-};
+}
 
-export const display_tm1650_show_num = function () {
+export const display_tm1650_show_num = function (_, generator) {
     var type = this.getFieldValue("TYPE");
-    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var val = Python.valueToCode(this, 'VALUE', Python.ORDER_ATOMIC);
+    var v = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var val = generator.valueToCode(this, 'VALUE', generator.ORDER_ATOMIC);
     var code = v + '.' + type + "_show_num(" + val + ")\n";
     return code;
-};
+}
 
-export const display_tm1650_show_dot = function () {
+export const display_tm1650_show_dot = function (_, generator) {
     var type = this.getFieldValue("TYPE");
-    var v = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var n = Python.valueToCode(this, 'NO', Python.ORDER_ATOMIC);
-    var stat = Python.valueToCode(this, 'STAT', Python.ORDER_ATOMIC);
+    var v = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var n = generator.valueToCode(this, 'NO', generator.ORDER_ATOMIC);
+    var stat = generator.valueToCode(this, 'STAT', generator.ORDER_ATOMIC);
     var code = v + '.' + type + "_show_dot(" + n + ", " + stat + ")\n";
     return code;
-};
+}
 
-export const display_animate = function () {
+export const display_animate = function (_, generator) {
     // Boolean values true and false.
     var name = this.getFieldValue("ANIMATION");
     var code = 'matrix.Image.' + name;
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const display_circle = function () {
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var location_x = Python.valueToCode(this, 'x', Python.ORDER_ATOMIC);
-    var location_y = Python.valueToCode(this, 'y', Python.ORDER_ATOMIC);
-    var value_r = Python.valueToCode(this, 'r', Python.ORDER_ATOMIC);
+export const display_circle = function (_, generator) {
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var location_x = generator.valueToCode(this, 'x', generator.ORDER_ATOMIC);
+    var location_y = generator.valueToCode(this, 'y', generator.ORDER_ATOMIC);
+    var value_r = generator.valueToCode(this, 'r', generator.ORDER_ATOMIC);
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
     var code = '';
@@ -420,18 +415,18 @@ export const display_circle = function () {
         break;
     }
     return code;
-};
+}
 
-export const display_triangle = function () {
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var location_x0 = Python.valueToCode(this, 'x0', Python.ORDER_ATOMIC);
-    var location_y0 = Python.valueToCode(this, 'y0', Python.ORDER_ATOMIC);
-    var location_x1 = Python.valueToCode(this, 'x1', Python.ORDER_ATOMIC);
-    var location_y1 = Python.valueToCode(this, 'y1', Python.ORDER_ATOMIC);
-    var location_x2 = Python.valueToCode(this, 'x2', Python.ORDER_ATOMIC);
-    var location_y2 = Python.valueToCode(this, 'y2', Python.ORDER_ATOMIC);
+export const display_triangle = function (_, generator) {
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var location_x0 = generator.valueToCode(this, 'x0', generator.ORDER_ATOMIC);
+    var location_y0 = generator.valueToCode(this, 'y0', generator.ORDER_ATOMIC);
+    var location_x1 = generator.valueToCode(this, 'x1', generator.ORDER_ATOMIC);
+    var location_y1 = generator.valueToCode(this, 'y1', generator.ORDER_ATOMIC);
+    var location_x2 = generator.valueToCode(this, 'x2', generator.ORDER_ATOMIC);
+    var location_y2 = generator.valueToCode(this, 'y2', generator.ORDER_ATOMIC);
     var checkbox_fill = this.getFieldValue("fill") == 'TRUE' ? 'True' : 'False';
     var size = this.getFieldValue('OP');
     var code = '';
@@ -444,64 +439,59 @@ export const display_triangle = function () {
         break;
     }
     return code;
-};
+}
 
-export const display_oled_showBitmap = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var location_x = Python.valueToCode(this, 'START_X', Python.ORDER_ATOMIC);
-    var location_y = Python.valueToCode(this, 'START_Y', Python.ORDER_ATOMIC);
-    var bmp = Python.valueToCode(this, 'bitmap_name', Python.ORDER_ATOMIC);
-    var w = Python.valueToCode(this, 'WIDTH', Python.ORDER_ATOMIC);
-    var h = Python.valueToCode(this, 'HEIGHT', Python.ORDER_ATOMIC);
+export const display_oled_showBitmap = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var location_x = generator.valueToCode(this, 'START_X', generator.ORDER_ATOMIC);
+    var location_y = generator.valueToCode(this, 'START_Y', generator.ORDER_ATOMIC);
+    var bmp = generator.valueToCode(this, 'bitmap_name', generator.ORDER_ATOMIC);
+    var w = generator.valueToCode(this, 'WIDTH', generator.ORDER_ATOMIC);
+    var h = generator.valueToCode(this, 'HEIGHT', generator.ORDER_ATOMIC);
     var code = varName + '.show_bitmap(' + location_x + ', ' + location_y + ', ' + bmp + ',' + w + ',' + h + ')\n';
     return code;
-};
+}
 
-export const display_oled_drawPixel = function () {
-    Python.definitions_['import_machine'] = 'import machine';
-    Python.definitions_['import_ssd1306'] = 'import ssd1306';
-    var varName = Python.valueToCode(this, 'VAR', Python.ORDER_ATOMIC);
-    var location_x = Python.valueToCode(this, 'POS_X', Python.ORDER_ATOMIC);
-    var location_y = Python.valueToCode(this, 'POS_Y', Python.ORDER_ATOMIC);
+export const display_oled_drawPixel = function (_, generator) {
+    generator.definitions_['import_machine'] = 'import machine';
+    generator.definitions_['import_ssd1306'] = 'import ssd1306';
+    var varName = generator.valueToCode(this, 'VAR', generator.ORDER_ATOMIC);
+    var location_x = generator.valueToCode(this, 'POS_X', generator.ORDER_ATOMIC);
+    var location_y = generator.valueToCode(this, 'POS_Y', generator.ORDER_ATOMIC);
     var code = varName + '.show_pixel(' + location_x + ', ' + location_y + ')\n';
     return code;
-};
+}
 
-
-
-
-//pe:
-export const display_matrix_use_i2c_init = function () {
-    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    var iv = Python.valueToCode(this, 'I2CSUB', Python.ORDER_ATOMIC);
+// pe:
+export const display_matrix_use_i2c_init = function (_, generator) {
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var iv = generator.valueToCode(this, 'I2CSUB', generator.ORDER_ATOMIC);
     var key = this.getFieldValue("key");
     var code;
     if (key == '32x12 Matrix') {
-        Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
+        generator.definitions_['import_matrix32x12'] = 'import matrix32x12';
         code = v + ' = matrix32x12.Matrix(' + iv + ')\n';
     } else if (key == 'TM1637') {
-        Python.definitions_['import_tm1637'] = 'import tm1637';
+        generator.definitions_['import_tm1637'] = 'import tm1637';
         code = v + ' = tm1637.' + key + "(" + iv + ')\n';
     }
     return code;
-};
+}
 
-export const display_show_image = function () {
-    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
+export const display_show_image = function (_, generator) {
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    generator.definitions_['import_matrix32x12'] = 'import matrix32x12';
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var code = v + ".set_buffer(" + data + ")\n";
     return code;
 }
 
-export const display_scroll_string_extern = function () {
-    Python.definitions_['import_matrix32x12'] = 'import matrix32x12';
-    var v = Python.valueToCode(this, 'SUB', Python.ORDER_ATOMIC);
-    var data = Python.valueToCode(this, 'data', Python.ORDER_ASSIGNMENT);
+export const display_scroll_string_extern = function (_, generator) {
+    generator.definitions_['import_matrix32x12'] = 'import matrix32x12';
+    var v = generator.valueToCode(this, 'SUB', generator.ORDER_ATOMIC);
+    var data = generator.valueToCode(this, 'data', generator.ORDER_ASSIGNMENT);
     var code = v + ".scroll(" + data + ")\n";
     return code;
 }
-
-

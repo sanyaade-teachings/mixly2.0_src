@@ -1,11 +1,10 @@
 import * as Blockly from 'blockly/core';
-import Python from '../python_generator';
 
-//物联网-wifi信息
-export const blynk_server = function () {
-    var wifi_ssid = Python.valueToCode(this, 'wifi_ssid', Python.ORDER_ATOMIC);
-    var wifi_pass = Python.valueToCode(this, 'wifi_pass', Python.ORDER_ATOMIC);
-    Python.definitions_.import_time = "import network,time,BlynkLib";
+// 物联网-wifi信息
+export const blynk_server = function (_, generator) {
+    var wifi_ssid = generator.valueToCode(this, 'wifi_ssid', generator.ORDER_ATOMIC);
+    var wifi_pass = generator.valueToCode(this, 'wifi_pass', generator.ORDER_ATOMIC);
+    generator.definitions_.import_time = "import network,time,BlynkLib";
     var code;
     code = "wlan = network.WLAN(network.STA_IF)\n";
     code += "wlan.active(True)\n";
@@ -21,27 +20,27 @@ export const blynk_server = function () {
     code += "  blynk.run()\n"
     code += "  pass\n"
     return code;
-};
+}
 
-//物联网-wifi信息
-export const blynk_iot_get_data = function () {
+// 物联网-wifi信息
+export const blynk_iot_get_data = function (_, generator) {
     var Vpin = this.getFieldValue('Vpin');
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = Python.valueToCode(this, 'ARG' + x, Python.ORDER_NONE) || 'null';
+        args[x] = generator.valueToCode(this, 'ARG' + x, generator.ORDER_NONE) || 'null';
     }
     var code = '(a' + args.join(', ') + ');\n';
-    var branch = Python.statementToCode(this, 'STACK');
-    if (Python.INFINITE_LOOP_TRAP) {
-        branch = Python.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
+    var branch = generator.statementToCode(this, 'STACK');
+    if (generator.INFINITE_LOOP_TRAP) {
+        branch = generator.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
     }
     var args = [];
     for (var x = 0; x < this.arguments_.length; x++) {
-        args[x] = this.argumentstype_[x] + ' ' + Python.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+        args[x] = this.argumentstype_[x] + ' ' + generator.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
     }
     var GetDataCode = "";
     if (this.arguments_.length == 1) {
-        GetDataCode = Python.variableDB_.getName(this.arguments_[0], Blockly.Variables.NAME_TYPE);
+        GetDataCode = generator.variableDB_.getName(this.arguments_[0], Blockly.Variables.NAME_TYPE);
         if (this.argumentstype_[0] == "int")
             GetDataCode += "= param.asInt();\n"
         else if (this.argumentstype_[0] == "String")
@@ -59,9 +58,9 @@ export const blynk_iot_get_data = function () {
     }
     else {
         for (var x = 0; x < this.arguments_.length; x++) {
-            args[x] = this.argumentstype_[x] + ' ' + Python.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+            args[x] = this.argumentstype_[x] + ' ' + generator.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
 
-            GetDataCode += Python.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+            GetDataCode += generator.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
             if (this.argumentstype_[x] == "int")
                 GetDataCode += "= param[" + x + "].asInt();\n"
             else if (this.argumentstype_[x] == "String")
@@ -80,12 +79,11 @@ export const blynk_iot_get_data = function () {
     }
 
     if (this.arguments_.length > 0)
-        Python.definitions_[args] = args.join(';\n') + ";";
+        generator.definitions_[args] = args.join(';\n') + ";";
     var code = ' BLYNK_WRITE(' + Vpin + ') {\n' + GetDataCode +
         branch + '}\n';
     // var code =  'BLYNK_WRITE(' + Vpin+ ') {\n'+variable+" = param.as"+datatype+"();\n"+branch+'}\n';
-    code = Python.scrub_(this, code);
-    Python.definitions_[Vpin] = code;
+    code = generator.scrub_(this, code);
+    generator.definitions_[Vpin] = code;
     return null;
-};
-
+}

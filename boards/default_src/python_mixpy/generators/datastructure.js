@@ -1,12 +1,11 @@
 import * as Blockly from 'blockly/core';
-import Python from '../../python/python_generator';
 
-export const ds_create_linkedlist = function () {
+export const ds_create_linkedlist = function (_, generator) {
     // Create a list with any number of elements of any type.
     //var dropdown_type = this.getFieldValue('TYPE');
-    var varName = Python.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Blockly.Variables.NAME_TYPE);
-    var typeName = Python.variableDB_.getName(this.getFieldValue('TYPE'),
+    var typeName = generator.variableDB_.getName(this.getFieldValue('TYPE'),
         Blockly.Variables.NAME_TYPE);
     //var size=window.parseFloat(this.getFieldValue('SIZE'));
     var code = 'class ' + typeName + ":\n";
@@ -14,48 +13,46 @@ export const ds_create_linkedlist = function () {
     var attr = new Array(this.itemCount_);
     var default_value = '0';
     for (var n = 0; n < this.itemCount_; n++) {
-
         var keyName = this.getFieldValue('KEY' + n);
-
-        attr[n] = '        self.' + keyName + " = " + (Python.valueToCode(this, 'ADD' + n, Python.ORDER_NONE) || default_value);
+        attr[n] = '        self.' + keyName + " = " + (generator.valueToCode(this, 'ADD' + n, generator.ORDER_NONE) || default_value);
     }
     code += attr.join('\n') + '\n';
     code += '        self.next = None\n';
     code += varName + ' = ' + typeName + '()\n'
     return code;
-};
+}
 
-export const ds_create_node = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var typeName = Python.variableDB_.getName(this.getFieldValue('TYPE'),
+export const ds_create_node = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var typeName = generator.variableDB_.getName(this.getFieldValue('TYPE'),
         Blockly.Variables.NAME_TYPE);
     //var size=window.parseFloat(this.getFieldValue('SIZE'));
 
     var code = varName + ' = ' + typeName + '()\n';
     return code;
-};
+}
 
-export const ds_get_node_attr = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var typeName = Python.variableDB_.getName(this.getFieldValue('TYPE'),
+export const ds_get_node_attr = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var typeName = generator.variableDB_.getName(this.getFieldValue('TYPE'),
         Blockly.Variables.NAME_TYPE);
     var code = varName + '.' + typeName;
-    return [code, Python.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const ds_set_node_attr = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var typeName = Python.variableDB_.getName(this.getFieldValue('TYPE'),
+export const ds_set_node_attr = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var typeName = generator.variableDB_.getName(this.getFieldValue('TYPE'),
         Blockly.Variables.NAME_TYPE);
-    var argument = Python.valueToCode(this, 'VAR', Python.ORDER_ASSIGNMENT) || '0';
+    var argument = generator.valueToCode(this, 'VAR', generator.ORDER_ASSIGNMENT) || '0';
     var code = varName + '.' + typeName + ' = ' + argument + '\n';
     return code;
-};
+}
 
-export const ds_add_node_by_name = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var varName2 = Python.valueToCode(this, 'NODE2', Python.ORDER_ASSIGNMENT) || '0';
-    var varName3 = Python.valueToCode(this, 'NODE3', Python.ORDER_ASSIGNMENT) || '0';
+export const ds_add_node_by_name = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var varName2 = generator.valueToCode(this, 'NODE2', generator.ORDER_ASSIGNMENT) || '0';
+    var varName3 = generator.valueToCode(this, 'NODE3', generator.ORDER_ASSIGNMENT) || '0';
     var direction = this.getFieldValue('DIR');
     if (direction == 'after') {
         var code = 'now = ' + varName + '\n';
@@ -83,13 +80,13 @@ export const ds_add_node_by_name = function () {
         code += '        print("插入节点失败，未找到指定名称的节点")\n';
     }
     return code;
-};
+}
 
-export const ds_add_node_by_attr = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var varName2 = Python.valueToCode(this, 'VAR', Python.ORDER_ASSIGNMENT) || '0';
-    var varName3 = Python.valueToCode(this, 'NODE3', Python.ORDER_ASSIGNMENT) || '0';
-    var typeName = Python.variableDB_.getName(this.getFieldValue('TYPE'),
+export const ds_add_node_by_attr = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var varName2 = generator.valueToCode(this, 'VAR', generator.ORDER_ASSIGNMENT) || '0';
+    var varName3 = generator.valueToCode(this, 'NODE3', generator.ORDER_ASSIGNMENT) || '0';
+    var typeName = generator.variableDB_.getName(this.getFieldValue('TYPE'),
         Blockly.Variables.NAME_TYPE);
     var direction = this.getFieldValue('DIR');
     if (direction == 'after') {
@@ -118,11 +115,11 @@ export const ds_add_node_by_attr = function () {
         code += '        print("插入节点失败，未找到指定的节点")\n';
     }
     return code;
-};
+}
 
-export const ds_del_node_by_name = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var varName2 = Python.valueToCode(this, 'NODE2', Python.ORDER_ASSIGNMENT) || '0';
+export const ds_del_node_by_name = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var varName2 = generator.valueToCode(this, 'NODE2', generator.ORDER_ASSIGNMENT) || '0';
 
 
     var code = 'if ' + varName + ' == ' + varName2 + ':\n';
@@ -138,13 +135,13 @@ export const ds_del_node_by_name = function () {
     code += '        print("删除节点失败，未找到指定名称的节点")\n';
 
     return code;
-};
+}
 
-export const ds_del_node_by_attr = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var varName2 = Python.valueToCode(this, 'VAR', Python.ORDER_ASSIGNMENT) || '0';
+export const ds_del_node_by_attr = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var varName2 = generator.valueToCode(this, 'VAR', generator.ORDER_ASSIGNMENT) || '0';
 
-    var typeName = Python.variableDB_.getName(this.getFieldValue('TYPE'),
+    var typeName = generator.variableDB_.getName(this.getFieldValue('TYPE'),
         Blockly.Variables.NAME_TYPE);
 
     var code = 'if ' + varName + '.' + typeName + ' == ' + varName2 + ':\n';
@@ -160,11 +157,11 @@ export const ds_del_node_by_attr = function () {
     code += '        print("删除节点失败，未找到指定的节点")\n';
 
     return code;
-};
+}
 
-export const ds_reverse_linkedlist = function () {
-    var varName = Python.valueToCode(this, 'NODE', Python.ORDER_ASSIGNMENT) || '0';
-    var varName2 = Python.valueToCode(this, 'NODE2', Python.ORDER_ASSIGNMENT) || '0';
+export const ds_reverse_linkedlist = function (_, generator) {
+    var varName = generator.valueToCode(this, 'NODE', generator.ORDER_ASSIGNMENT) || '0';
+    var varName2 = generator.valueToCode(this, 'NODE2', generator.ORDER_ASSIGNMENT) || '0';
 
 
     var code = 'ptr = ' + varName + '\n';
@@ -176,4 +173,4 @@ export const ds_reverse_linkedlist = function () {
     code += '    before.next = last\n'
     code += varName2 + ' = before\n';
     return code;
-};
+}

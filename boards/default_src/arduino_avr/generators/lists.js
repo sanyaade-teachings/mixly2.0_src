@@ -1,62 +1,61 @@
-import { Arduino } from '../../arduino_common/arduino_generator';
 import Variables from '../../arduino_common/others/variables';
 
-export const lists_create_with = function () {
+export const lists_create_with = function (_, generator) {
     // Create a list with any number of elements of any type.
     var dropdown_type = this.getFieldValue('TYPE');
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
     var size = window.parseFloat(this.getFieldValue('SIZE'));
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Arduino.valueToCode(this, 'ADD' + n,
-            Arduino.ORDER_NONE) || '0';
+        code[n] = generator.valueToCode(this, 'ADD' + n,
+            generator.ORDER_NONE) || '0';
     }
-    Arduino.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[' + size + ']' + '=' + '{' + code.join(', ') + '};\n';
+    generator.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[' + size + ']' + '=' + '{' + code.join(', ') + '};\n';
     return '';
-};
+}
 
-export const lists_create_with_text = function () {
+export const lists_create_with_text = function (_, generator) {
     var dropdown_type = this.getFieldValue('TYPE');
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
     var size = window.parseFloat(this.getFieldValue('SIZE'));
     var text = this.getFieldValue('TEXT');
-    Arduino.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[' + size + ']' + '=' + '{' + text + '};\n';
+    generator.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[' + size + ']' + '=' + '{' + text + '};\n';
     return '';
-};
+}
 
-export const lists_create_with2 = function () {
+export const lists_create_with2 = function (_, generator) {
     // Create a list with any number of elements of any type.
     var dropdown_type = this.getFieldValue('TYPE');
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
     //var size=window.parseFloat(this.getFieldValue('SIZE'));
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Arduino.valueToCode(this, 'ADD' + n,
-            Arduino.ORDER_NONE) || '0';
+        code[n] = generator.valueToCode(this, 'ADD' + n,
+            generator.ORDER_NONE) || '0';
     }
-    Arduino.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[]' + '=' + '{' + code.join(', ') + '};\n';
+    generator.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[]' + '=' + '{' + code.join(', ') + '};\n';
     return '';
-};
+}
 
-export const lists_create_with_text2 = function () {
+export const lists_create_with_text2 = function (_, generator) {
     var dropdown_type = this.getFieldValue('TYPE');
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
     var size = window.parseFloat(this.getFieldValue('SIZE')) || '';
     var text = this.getFieldValue('TEXT');
-    Arduino.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[' + size + ']' + '=' + '{' + text + '};\n';
+    generator.definitions_['var_declare' + varName] = dropdown_type + ' ' + varName + '[' + size + ']' + '=' + '{' + text + '};\n';
     return '';
-};
+}
 
-export const lists_getIndex = function () {
+export const lists_getIndex = function (_, generator) {
     // Indexing into a list is the same as indexing into a string.
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
-    var argument0 = Arduino.valueToCode(this, 'AT',
-        Arduino.ORDER_ADDITIVE) || '1';
+    var argument0 = generator.valueToCode(this, 'AT',
+        generator.ORDER_ADDITIVE) || '1';
     if (argument0.match(/^\d+$/)) {
         // If the index is a naked number, decrement it right now.
         argument0 = parseInt(argument0, 10) - 1;
@@ -65,17 +64,17 @@ export const lists_getIndex = function () {
         argument0 += ' - 1';
     }
     var code = varName + '[(int)(' + argument0 + ')]';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const lists_setIndex = function () {
+export const lists_setIndex = function (_, generator) {
     // Set element at index.
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
-    var argument0 = Arduino.valueToCode(this, 'AT',
-        Arduino.ORDER_ADDITIVE) || '1';
-    var argument2 = Arduino.valueToCode(this, 'TO',
-        Arduino.ORDER_ASSIGNMENT) || '0';
+    var argument0 = generator.valueToCode(this, 'AT',
+        generator.ORDER_ADDITIVE) || '1';
+    var argument2 = generator.valueToCode(this, 'TO',
+        generator.ORDER_ASSIGNMENT) || '0';
     // Blockly uses one-based indicies.
     if (argument0.match(/^\d+$/)) {
         // If the index is a naked number, decrement it right now.
@@ -85,89 +84,89 @@ export const lists_setIndex = function () {
         argument0 += ' - 1';
     }
     return varName + '[(int)(' + argument0 + ')] = ' + argument2 + ';\n';
-};
+}
 
-export const listsGetValueByIndex = function () {
+export const listsGetValueByIndex = function (_, generator) {
     // Indexing into a list is the same as indexing into a string.
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
-    var argument0 = Arduino.valueToCode(this, 'AT',
-        Arduino.ORDER_ADDITIVE) || '0';
+    var argument0 = generator.valueToCode(this, 'AT',
+        generator.ORDER_ADDITIVE) || '0';
     var code = varName + '[' + argument0 + ']';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const listsSetValueByIndex = function () {
+export const listsSetValueByIndex = function (_, generator) {
     // Set element at index.
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
-    var argument0 = Arduino.valueToCode(this, 'AT',
-        Arduino.ORDER_ADDITIVE) || '0';
-    var argument2 = Arduino.valueToCode(this, 'TO',
-        Arduino.ORDER_ASSIGNMENT) || '0';
+    var argument0 = generator.valueToCode(this, 'AT',
+        generator.ORDER_ADDITIVE) || '0';
+    var argument2 = generator.valueToCode(this, 'TO',
+        generator.ORDER_ASSIGNMENT) || '0';
     return varName + '[' + argument0 + '] = ' + argument2 + ';\n';
-};
+}
 
-export const lists_length = function () {
-    var varName = Arduino.variableDB_.getName(this.getFieldValue('VAR'),
+export const lists_length = function (_, generator) {
+    var varName = generator.variableDB_.getName(this.getFieldValue('VAR'),
         Variables.NAME_TYPE);
     var code = 'sizeof(' + varName + ')/sizeof(' + varName + '[0])';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//创建二维数组
-export const create_array2_with_text = function () {
+// 创建二维数组
+export const create_array2_with_text = function (_, generator) {
     var TYPE = this.getFieldValue('TYPE');
-    var line = Arduino.valueToCode(this, 'line', Arduino.ORDER_ATOMIC);
-    var list = Arduino.valueToCode(this, 'list', Arduino.ORDER_ATOMIC);
-    var name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
-    var String = Arduino.valueToCode(this, 'String', Arduino.ORDER_ATOMIC);
-    Arduino.definitions_['var_declare_array' + name] = '' + TYPE + ' ' + name + '[' + line + '][' + list + ']={' + String + '};\n ';
+    var line = generator.valueToCode(this, 'line', generator.ORDER_ATOMIC);
+    var list = generator.valueToCode(this, 'list', generator.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
+    var String = generator.valueToCode(this, 'String', generator.ORDER_ATOMIC);
+    generator.definitions_['var_declare_array' + name] = '' + TYPE + ' ' + name + '[' + line + '][' + list + ']={' + String + '};\n ';
     return '';
-};
+}
 
-//二维数组赋值
-export const array2_assignment = function () {
-    var line = Arduino.valueToCode(this, 'line', Arduino.ORDER_ATOMIC);
-    var list = Arduino.valueToCode(this, 'list', Arduino.ORDER_ATOMIC);
-    var name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
-    var assignment = Arduino.valueToCode(this, 'assignment', Arduino.ORDER_ATOMIC);
+// 二维数组赋值
+export const array2_assignment = function (_, generator) {
+    var line = generator.valueToCode(this, 'line', generator.ORDER_ATOMIC);
+    var list = generator.valueToCode(this, 'list', generator.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
+    var assignment = generator.valueToCode(this, 'assignment', generator.ORDER_ATOMIC);
     var code = '' + name + '[' + line + '-1][' + list + '-1]=' + assignment + ';\n'
     return code;
-};
+}
 
-//获取二维数组值
-export const get_array2_value = function () {
-    var line = Arduino.valueToCode(this, 'line', Arduino.ORDER_ATOMIC);
-    var list = Arduino.valueToCode(this, 'list', Arduino.ORDER_ATOMIC);
-    var name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
+// 获取二维数组值
+export const get_array2_value = function (_, generator) {
+    var line = generator.valueToCode(this, 'line', generator.ORDER_ATOMIC);
+    var list = generator.valueToCode(this, 'list', generator.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
     var code = '' + name + '[' + line + '-1][' + list + '-1]'
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-//二维数组赋值
-export const lists2SetValueByIndex = function () {
-    var line = Arduino.valueToCode(this, 'line', Arduino.ORDER_ATOMIC);
-    var list = Arduino.valueToCode(this, 'list', Arduino.ORDER_ATOMIC);
-    var name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
-    var assignment = Arduino.valueToCode(this, 'assignment', Arduino.ORDER_ATOMIC);
+// 二维数组赋值
+export const lists2SetValueByIndex = function (_, generator) {
+    var line = generator.valueToCode(this, 'line', generator.ORDER_ATOMIC);
+    var list = generator.valueToCode(this, 'list', generator.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
+    var assignment = generator.valueToCode(this, 'assignment', generator.ORDER_ATOMIC);
     var code = name + '[' + line + '][' + list + '] = ' + assignment + ';\n'
     return code;
-};
+}
 
-//二维数组取值
-export const lists2GetValueByIndex = function () {
-    var line = Arduino.valueToCode(this, 'line', Arduino.ORDER_ATOMIC);
-    var list = Arduino.valueToCode(this, 'list', Arduino.ORDER_ATOMIC);
-    var name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
+// 二维数组取值
+export const lists2GetValueByIndex = function (_, generator) {
+    var line = generator.valueToCode(this, 'line', generator.ORDER_ATOMIC);
+    var list = generator.valueToCode(this, 'list', generator.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
     var code = name + '[' + line + '][' + list + ']';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}
 
-export const lists_array2_setup = function () {
+export const lists_array2_setup = function (_, generator) {
     var dropdown_lists_create_type = this.getFieldValue('lists_create_type');
     var text_lists_create_name = this.getFieldValue('lists_create_name');
-    var statements_lists_with_2_1_data = Arduino.statementToCode(this, 'lists_with_2_1_data');
+    var statements_lists_with_2_1_data = generator.statementToCode(this, 'lists_with_2_1_data');
 
     if (statements_lists_with_2_1_data) {
         var num_x = 0;
@@ -204,24 +203,25 @@ export const lists_array2_setup = function () {
             statements_lists_with_2_1_data1 = statements_lists_with_2_1_data1 + i;
         }
         num_x++;
-        Arduino.definitions_['var_declare' + text_lists_create_name] = dropdown_lists_create_type + ' ' + text_lists_create_name + '[' + num_x + '][' + num_y + '] = {' + statements_lists_with_2_1_data1 + '\n};';
+        generator.definitions_['var_declare' + text_lists_create_name] = dropdown_lists_create_type + ' ' + text_lists_create_name + '[' + num_x + '][' + num_y + '] = {' + statements_lists_with_2_1_data1 + '\n};';
     }
     else {
         if (dropdown_lists_create_type == 'String')
-            Arduino.definitions_['var_declare' + text_lists_create_name] = dropdown_lists_create_type + ' ' + text_lists_create_name + '[2][2] = {{"0","0"},{"0","0"}};';
+            generator.definitions_['var_declare' + text_lists_create_name] = dropdown_lists_create_type + ' ' + text_lists_create_name + '[2][2] = {{"0","0"},{"0","0"}};';
         else
-            Arduino.definitions_['var_declare' + text_lists_create_name] = dropdown_lists_create_type + ' ' + text_lists_create_name + '[2][2] = {{0,0},{0,0}};';
+            generator.definitions_['var_declare' + text_lists_create_name] = dropdown_lists_create_type + ' ' + text_lists_create_name + '[2][2] = {{0,0},{0,0}};';
     }
 
     var code = '';
     return code;
-};
-export const lists_array2_setup_get_data = function () {
+}
+
+export const lists_array2_setup_get_data = function (_, generator) {
     // Create a list with any number of elements of any type.
     var code = new Array(this.itemCount_);
     for (var n = 0; n < this.itemCount_; n++) {
-        code[n] = Arduino.valueToCode(this, 'ADD' + n,
-            Arduino.ORDER_NONE) || '0';
+        code[n] = generator.valueToCode(this, 'ADD' + n,
+            generator.ORDER_NONE) || '0';
     }
     var code1 = '';
     var surround_parent = this.getSurroundParent();
@@ -257,25 +257,26 @@ export const lists_array2_setup_get_data = function () {
         code1 = '';
     }
     return code1;
-};
+}
 
-//一维数组循环
-export const loop_array = function () {
+// 一维数组循环
+export const loop_array = function (_, generator) {
     var type = this.getFieldValue('TYPE');
     var mode = this.getFieldValue('mode');
-    var name = Arduino.valueToCode(this, 'name', Arduino.ORDER_ATOMIC);
+    var name = generator.valueToCode(this, 'name', generator.ORDER_ATOMIC);
     if (mode == 0) {
-        Arduino.definitions_['loop_array1'] = 'void array_left_loop() {\n  ' + type + ' item =0;\n  item = ' + name + '[(int)(0)];\n  for (int i = (2); i <= (sizeof(' + name + ')/sizeof(' + name + '[0])); i = i + (1)) {\n    ' + name + '[(int)((i - 1) - 1)] = ' + name + '[(int)(i - 1)];\n  }\n  ' + name + '[(int)(sizeof(' + name + ')/sizeof(' + name + '[0]) - 1)] = item;\n}\n';
+        generator.definitions_['loop_array1'] = 'void array_left_loop() {\n  ' + type + ' item =0;\n  item = ' + name + '[(int)(0)];\n  for (int i = (2); i <= (sizeof(' + name + ')/sizeof(' + name + '[0])); i = i + (1)) {\n    ' + name + '[(int)((i - 1) - 1)] = ' + name + '[(int)(i - 1)];\n  }\n  ' + name + '[(int)(sizeof(' + name + ')/sizeof(' + name + '[0]) - 1)] = item;\n}\n';
         var code = 'array_left_loop();\n';
     }
     if (mode == 1) {
-        Arduino.definitions_['loop_array'] = 'void array_right_loop() {\n  ' + type + ' item =0;\n  item = ' + name + '[(int)(sizeof(' + name + ')/sizeof(' + name + '[0]) - 1)];\n  for (int i = (sizeof(' + name + ')/sizeof(' + name + '[0])); i >= (1); i = i + (-1)) {\n    ' + name + '[(int)((i + 1) - 1)] = ' + name + '[(int)(i - 1)];\n  }\n  ' + name + '[(int)(0)] = item;\n}\n';
+        generator.definitions_['loop_array'] = 'void array_right_loop() {\n  ' + type + ' item =0;\n  item = ' + name + '[(int)(sizeof(' + name + ')/sizeof(' + name + '[0]) - 1)];\n  for (int i = (sizeof(' + name + ')/sizeof(' + name + '[0])); i >= (1); i = i + (-1)) {\n    ' + name + '[(int)((i + 1) - 1)] = ' + name + '[(int)(i - 1)];\n  }\n  ' + name + '[(int)(0)] = item;\n}\n';
         var code = 'array_right_loop();\n';
     }
     return code;
-};
-//获取二维数组的行数与列数
-export const lists_array2_get_length = function () {
+}
+
+// 获取二维数组的行数与列数
+export const lists_array2_get_length = function (_, generator) {
     var text_list_name = this.getFieldValue('list_name');
     var dropdown_type = this.getFieldValue('type');
     var code = '';
@@ -283,5 +284,5 @@ export const lists_array2_get_length = function () {
         code = '(sizeof(' + text_list_name + '[0]) / sizeof(' + text_list_name + '[0][0]))';
     else
         code = '(sizeof(' + text_list_name + ') / sizeof(' + text_list_name + '[0]))';
-    return [code, Arduino.ORDER_ATOMIC];
-};
+    return [code, generator.ORDER_ATOMIC];
+}

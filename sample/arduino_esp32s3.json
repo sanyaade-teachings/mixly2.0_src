@@ -1,1 +1,16 @@
-{"Arduino ESP32S3":{"URL和Base64编解码.mix":"file","使用http发送POST请求.mix":"file","心知天气.mix":"file"}}
+{
+    "Arduino ESP32S3": {
+        "URL和Base64编解码.mix": {
+            "__file__": true,
+            "__name__": "URL和Base64编解码.mix"
+        },
+        "使用http发送POST请求.mix": {
+            "__file__": true,
+            "__name__": "使用http发送POST请求.mix"
+        },
+        "心知天气.mix": {
+            "__file__": true,
+            "__name__": "心知天气.mix"
+        }
+    }
+}

@@ -55,11 +55,14 @@ class FooterLayerExampleExt extends FooterLayerExample {
         }
         let exampleList = [];
         for (let key in obj) {
+            if (!(obj[key] instanceof Object)) {
+                continue;
+            }
             const exampleObj = {
-                title: key,
+                title: obj[key]['__name__'],
                 id: inPath + '/' + key
             };
-            if (obj[key] instanceof Object) {
+            if (!obj[key]['__file__']) {
                 exampleObj.children = [];
             }
             exampleList.push(exampleObj);

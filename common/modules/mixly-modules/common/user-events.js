@@ -71,7 +71,11 @@ class UserEvents {
             let actionType = 1;
             switch (event.type) {
             case Blockly.Events.BLOCK_MOVE:
-                recordLine.blockType = this.workspace.getBlockById(event.blockId).type;
+                let block = this.workspace.getBlockById(event.blockId);
+                if (!block) {
+                    return;
+                }
+                recordLine.blockType = block.type;
                 actionType = 3;
                 break;
             case Blockly.Events.BLOCK_DELETE:

@@ -57,7 +57,7 @@ class UserOPEvents {
 
     send(data) {
         for (let key in this.#DEFAULT_DATA) {
-           data[key] =  this.#DEFAULT_DATA[key]();
+           data[key] = this.#DEFAULT_DATA[key]();
         }
         return new Promise((resolve, reject) => {
             $.post('https://cc.mixly.cn/api/behaviorrecord', data, function() {

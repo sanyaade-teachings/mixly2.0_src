@@ -19,7 +19,7 @@ const { USER, SOFTWARE } = Config;
 class UserEvents {
     #DEFAULT_DATA = {
         uid: () => {
-            return USER.visitorId.str32CRC32b;
+            return LocalStorage.get('Authorization/user_id') ?? '';
         },
         mid: () => {
             return LocalStorage.get('module_id') ?? '';
@@ -71,7 +71,7 @@ class UserEvents {
             let actionType = 1;
             switch (event.type) {
             case Blockly.Events.BLOCK_MOVE:
-                recordLine.blockType = this.workspace.getBlockById(event.blockId);
+                recordLine.blockType = this.workspace.getBlockById(event.blockId).type;
                 actionType = 3;
                 break;
             case Blockly.Events.BLOCK_DELETE:
@@ -94,14 +94,12 @@ class UserEvents {
         }
         let data = {};
         for (let key in this.#DEFAULT_DATA) {
-           data[key] =  this.#DEFAULT_DATA[key]();
+           data[key] = this.#DEFAULT_DATA[key]();
         }
         for (let i in message) {
             data[i] = message[i];
         }
         data.actionFlow = this.getFlowItems();
-        console.log(data);
-        this.resetFlow();
         $.post(SOFTWARE?.behaviorRecord?.url, data, () => {
             this.resetFlow();
         })

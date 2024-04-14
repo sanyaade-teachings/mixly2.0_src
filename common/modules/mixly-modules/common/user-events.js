@@ -14,18 +14,42 @@ const {
     LocalStorage
 } = Mixly;
 
-const { USER } = Config;
+const { USER, SOFTWARE } = Config;
 
 class UserEvents {
+    #DEFAULT_DATA = {
+        uid: () => {
+            return USER.visitorId.str32CRC32b;
+        },
+        mid: () => {
+            return LocalStorage.get('module_id') ?? '';
+        },
+        type: () => {
+            return Boards.getSelectedBoardName();
+        },
+        code: () => {
+            return MFile.getCode();
+        },
+        blocks: () => {
+            return MFile.getMil();
+        },
+        time: () => {
+            return (new Date()).toLocaleString();
+        },
+        fileName: () => {
+            return LocalStorage.get('file_name') ?? '';
+        }
+    };
+
+    #actionFlow_ = [];
+    #prevCode_ = '';
+
     constructor(workspace) {
         this.workspace = workspace;
-        this.actionArrayRecord = [];
-        this.addBlocklyEventListener();
-        this.prevCode = '';
-        setInterval(() => this.send(), 10000);
+        this.#addBlocklyEventListener_();
     }
 
-    addBlocklyEventListener() {
+    #addBlocklyEventListener_() {
         this.blocklyEventListener = this.workspace.addChangeListener((event) => {
             if (![
                     Blockly.Events.BLOCK_MOVE,
@@ -35,17 +59,14 @@ class UserEvents {
                 return;
             }
             const currentCode = MFile.getCode();
-            if (Blockly.Events.BLOCK_MOVE ===event.type && this.prevCode === currentCode) {
+            if (Blockly.Events.BLOCK_MOVE === event.type && this.#prevCode_ === currentCode) {
                 return;
             }
-            this.prevCode = currentCode;
+            this.#prevCode_ = currentCode;
             const recordLine = {};
-            recordLine.type = Boards.getSelectedBoardName();
-            recordLine.uid = USER.visitorId.str32CRC32b;
             recordLine.blockId = event.blockId;
             recordLine.currentCode = currentCode;
-            recordLine.file_name = LocalStorage.get('file_name') ?? '';
-            recordLine.mid = LocalStorage.get('module_id') ?? '';
+            recordLine.currentBlocks = MFile.getMil();
             recordLine.time = (new Date()).toLocaleString();
             let actionType = 1;
             switch (event.type) {
@@ -63,17 +84,46 @@ class UserEvents {
                 break;
             }
             recordLine.actionType = actionType;
-            this.actionArrayRecord.push(recordLine);
+            this.addFlowItem(recordLine);
         });
     }
 
-    send() {
-        for (;this.actionArrayRecord.length;) {
-            const record = this.actionArrayRecord.shift();
-            $.post('https://edu.mixly.org?r=sitecontroller/behaviorrecord', record, function (result) {
-                // console.log(result);
-            });
+    addRecord(message) {
+        if (this.flowIsEmpty()) {
+            return;
         }
+        let data = {};
+        for (let key in this.#DEFAULT_DATA) {
+           data[key] =  this.#DEFAULT_DATA[key]();
+        }
+        for (let i in message) {
+            data[i] = message[i];
+        }
+        data.actionFlow = this.getFlowItems();
+        console.log(data);
+        this.resetFlow();
+        $.post(SOFTWARE?.behaviorRecord?.url, data, () => {
+            this.resetFlow();
+        })
+        .fail(() => {
+            this.resetFlow();
+        });
+    }
+
+    addFlowItem(data) {
+        this.#actionFlow_.push(data);
+    }
+
+    getFlowItems() {
+        return this.#actionFlow_;
+    }
+
+    resetFlow() {
+        this.#actionFlow_ = [];
+    }
+
+    flowIsEmpty() {
+        return this.#actionFlow_.length === 0;
     }
 }
 

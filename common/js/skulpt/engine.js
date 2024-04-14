@@ -576,11 +576,12 @@ PyEngine.prototype.run = function(type) {
             if (nowValue.lastIndexOf('\n') !== nowValue.length - 1) {
                 statusBarTerminal.addValue('\n');
             }
-            if (window.userOpEvents) {
-                window.userOpEvents.addRecord({
-                    operation: 'run-success'
-                });
-            }
+            window.userOpEvents && window.userOpEvents.addRecord({
+                operation: 'run-success'
+            });
+            window.userEvents && window.userEvents.addRecord({
+                operation: 'run-success'
+            });
             statusBarTerminal.addValue(`==${Mixly.Msg.Lang['程序运行完成']}==\n`);
         },
         function(error) {
@@ -604,11 +605,12 @@ PyEngine.prototype.run = function(type) {
                 statusBarTerminal.addValue('\n');
             }
             statusBarTerminal.addValue(error.toString() + '\n');
-            if (window.userOpEvents) {
-                window.userOpEvents.addRecord({
-                    operation: 'run-error'
-                });
-            }
+            window.userOpEvents && window.userOpEvents.addRecord({
+                operation: 'run-error'
+            });
+            window.userEvents && window.userEvents.addRecord({
+                operation: 'run-error'
+            });
             statusBarTerminal.addValue(`==${Mixly.Msg.Lang['程序运行完成']}==\n`);
         }
 );

@@ -54,7 +54,7 @@ const {
 
 const electron = Mixly.require('electron');
 
-const { BOARD, USER } = Config;
+const { BOARD, USER, SOFTWARE } = Config;
 const {
     FooterLayerExample,
     LibManager,
@@ -136,7 +136,7 @@ window.addEventListener('load', () => {
     LazyLoad.js(scrpitPathList, () => {
         Editor.init();
         Boards.init();
-        if (window.frames.length !== parent.frames.length) {
+        if (SOFTWARE?.behaviorRecord?.enabled) {
             window.userEvents = new UserEvents(Editor.blockEditor);
         }
         if (!goog.isElectron && window.location.host.indexOf('mixly.cn') !== -1) {

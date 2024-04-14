@@ -23,5 +23,9 @@
     "webCompiler": {
         "enabled": false
     },
+    "behaviorRecord": {
+        "url": "",
+        "enabled": false
+    },
     "debug": false
 }

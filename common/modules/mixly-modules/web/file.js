@@ -110,6 +110,9 @@ File.parseData = (ext, text) => {
 }
 
 File.save = async () => {
+    window.userEvents && window.userEvents.addRecord({
+        operation: 'save'
+    });
     if (!File.obj) {
         File.saveAs();
         return;

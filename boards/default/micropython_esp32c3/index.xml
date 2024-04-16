@@ -2012,7 +2012,7 @@
       </block>
       <block type="me_g1_rfid_status"></block> 
   </category>
-  <category id="catCC_G1" colour="40" m-show='micropython:esp32c3:mixgo_cc'>
+  <category id="catCC_G1" colour="40" m-show='micropython:esp32c3:mixgo_cc micropython:esp32c3:mixgo_me'>
       <block type="cc_g1_read_bat"></block>   
       <block type="cc_g1_read_joystick"></block>
       <block type="cc_g1_read_key"></block>

@@ -18,7 +18,7 @@ const { SELECTED_BOARD } = Config;
 
 Storage.user = function (key, value) {
     let storagePath = path.join(LocalStorage.PATH['USER'], key);
-    if (value) {
+    if (arguments.length > 1) {
         LocalStorage.set(storagePath, value);
     } else {
         value = LocalStorage.get(storagePath);
@@ -28,10 +28,9 @@ Storage.user = function (key, value) {
 
 Storage.board = function (key, value) {
     let storagePath = path.join(laytpl(LocalStorage.PATH['BOARD']).render({
-        boardType: SELECTED_BOARD.boardType,
-        boardName: SELECTED_BOARD.boardName
+        boardType: SELECTED_BOARD.boardType
     }), key);
-    if (value) {
+    if (arguments.length > 1) {
         LocalStorage.set(storagePath, value);
     } else {
         value = LocalStorage.get(storagePath);
@@ -45,7 +44,7 @@ Storage.thirdParty = function (name, key, value) {
         boardName: SELECTED_BOARD.boardName,
         thirdPartyName: name ?? 'default'
     }), key);
-    if (value) {
+    if (arguments.length > 1) {
         LocalStorage.set(storagePath, value);
     } else {
         value = LocalStorage.get(storagePath);

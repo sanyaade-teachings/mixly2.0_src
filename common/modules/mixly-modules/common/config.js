@@ -54,7 +54,10 @@ Config.init = () => {
         ...goog.getJSON(path.join(Env.boardDirPath, 'config.json'), BOARD_DEFAULT_CONFIG),
         ...urlConfig
     };
-
+    if (Config.BOARD.filePath) {
+        LocalStorage.set(`${LocalStorage.PATH['USER']}/filePath`, Config.BOARD.filePath);
+        delete Config.BOARD.filePath;
+    }
     console.log('Config.BOARD:', Config.BOARD);
 
     let pathPrefix = '../';
@@ -107,7 +110,7 @@ Config.init = () => {
                 str16CRC32b: Url.CRC32(visitorId16, 16),
                 str32CRC32b: Url.CRC32(visitorId32, 16)
             };
-            LocalStorage.set(LocalStorage.PATH['USER'] + '/visitorId', visitorId);
+            LocalStorage.set(`${LocalStorage.PATH['USER']}/visitorId`, visitorId);
             Config.BOARD.visitorId = visitorId;
         })
         .catch(error => {

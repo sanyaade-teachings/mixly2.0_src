@@ -8,7 +8,7 @@ const { MArray, LocalStorage } = Mixly;
 
 LocalStorage.PATH = {
     USER: 'mixly2.0/user',
-    BOARD: 'mixly2.0/boards/{{d.boardType}}/{{d.boardName}}/user',
+    BOARD: 'mixly2.0/boards/{{d.boardType}}/user',
     THIRD_PARTY: 'mixly2.0/boards/{{d.boardType}}/third_party/{{d.thirdPartyName}}'
 };
 

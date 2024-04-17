@@ -69,21 +69,18 @@ ipcRenderer.on('open-file', (event, message) => {
         }
         return undefined;
     }
-    console.log(message);
-
     let mixStr = fs.readFileSync(message, "utf8");
     let boardType = getBoardFromXml(mixStr);
-    console.log(boardType)
-    if (boardType && boardType.indexOf('@') != -1) {
+    if (boardType && boardType.indexOf('@') !== -1) {
         boardType = boardType.substring(0, boardType.indexOf('@'));
-    } else if (boardType && boardType.indexOf('/') != -1) {
+    } else if (boardType && boardType.indexOf('/') !== -1) {
         boardType = boardType.substring(0, boardType.indexOf('/'));
     }
-    console.log(boardType && boardType);
     if (boardType) {
+        BoardManager.loadBoards();
         const { boardsList } = BoardManager;
         for (let i = 0; i < boardsList.length; i++) {
-            if (boardsList[i].boardType == boardType) {
+            if (boardsList[i].boardType === boardType) {
                 boardsList[i].filePath = message;
                 const {
                     boardType,
@@ -102,7 +99,7 @@ ipcRenderer.on('open-file', (event, message) => {
                 let params = "id=error";
                 try {
                     params = Url.jsonToUrl(boardJson);
-                    window.location.href = boardsList[i].boardIndex + "?" + params;
+                    window.location.href = "./boards/index.html?" + params;
                 } catch (e) {
                     console.log(e);
                 }

@@ -148,7 +148,7 @@ class FooterLayerBoardConfig extends FooterLayer {
             allowHTML: true,
             interactive: true,
             placement: 'left',
-            offset: [ 0, 21 ]
+            offset: [ 0, 16 ]
         });
     }
 

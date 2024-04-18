@@ -270,7 +270,6 @@ class EditorMonaco extends EditorBase {
         const editor = EditorMonaco.getEditor();
         editor.updateOptions({
             theme: `vs-${mode}`
-            // theme: 'myCustomTheme'
         });
     }
 

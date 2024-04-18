@@ -256,17 +256,16 @@ class EditorAce extends EditorBase {
     }
 
     resetFontSize() {
-        const size = parseInt(Math.max(window.screen.width / 85, window.screen.height / 85, 12));
-        this.#editor_.setFontSize(size);
+        this.#editor_.setFontSize(17);
     }
 
     increaseFontSize() {
-        const size = parseInt(this.#editor_.getFontSize(), 10) || 12;
+        const size = parseInt(this.#editor_.getFontSize(), 10) || 17;
         this.#editor_.setFontSize(size + 1);
     }
 
     decreaseFontSize() {
-        const size = parseInt(this.#editor_.getFontSize(), 10) || 12;
+        const size = parseInt(this.#editor_.getFontSize(), 10) || 17;
         this.#editor_.setFontSize(Math.max(size - 1 || 1));
     }
 

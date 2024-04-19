@@ -61,7 +61,7 @@ import Esp8266ZhHans from './language/zh-hans';
 import Esp8266ZhHant from './language/zh-hant';
 import Esp8266En from './language/en';
 
-import '../arduino_avr/css/color.css';
+import './css/color.css';
 
 Blockly.Arduino = Arduino;
 

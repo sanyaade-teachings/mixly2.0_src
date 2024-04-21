@@ -123,16 +123,11 @@ export const blynk_iot_push_data = function (_, generator) {
 // 从app接收数据
 export const blynk_iot_get_data = function (_, generator) {
     let Vpin = this.getFieldValue('Vpin');
-    let args = [];
-    for (let x = 0; x < this.arguments_.length; x++) {
-        args[x] = generator.valueToCode(this, 'ARG' + x, generator.ORDER_NONE) || 'null';
-    }
-    let code = '(a' + args.join(', ') + ');\n';
     let branch = generator.statementToCode(this, 'STACK');
     if (generator.INFINITE_LOOP_TRAP) {
         branch = generator.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
     }
-    args = [];
+    let args = [];
     for (let x = 0; x < this.arguments_.length; x++) {
         args[x] = this.argumentstype_[x] + ' ' + generator.variableDB_.getName(this.arguments_[x], Variables.NAME_TYPE);
     }
@@ -177,7 +172,7 @@ export const blynk_iot_get_data = function (_, generator) {
     }
     if (this.arguments_.length > 0)
         generator.definitions_['var_declare_' + args] = args.join(';\n') + ";";
-    code = 'BLYNK_WRITE(' + Vpin + ') {\n' + GetDataCode +
+    let code = 'BLYNK_WRITE(' + Vpin + ') {\n' + GetDataCode +
         branch + '}\n';
     // let code =  'BLYNK_WRITE(' + Vpin+ ') {\n'+letiable+" = param.as"+datatype+"();\n"+branch+'}\n';
     code = generator.scrub_(this, code);

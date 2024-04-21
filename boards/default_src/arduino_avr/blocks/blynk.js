@@ -165,7 +165,6 @@ export const blynk_iot_get_data = {
         this.appendDummyInput()
             .appendField("", "PARAMS");
         this.setMutator(new Blockly.icons.MutatorIcon(["procedures_mutatorarg"], this));//添加齿轮
-        this.setTooltip();
         this.arguments_ = [];//新增参数名称
         this.argumentstype_ = [];//新增参数类型
         this.setStatements_(true);

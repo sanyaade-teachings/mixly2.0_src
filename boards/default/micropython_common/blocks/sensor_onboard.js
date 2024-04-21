@@ -282,29 +282,6 @@ Blockly.Blocks.HCSR04 = {
 
 
 
-Blockly.Blocks['sensor_mixgo_light'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
-    }
-};
-
-Blockly.Blocks['sensor_mixgo_sound'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
-    }
-};
-
-
 Blockly.Blocks['number1'] = {
    init: function() {
     this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
@@ -627,6 +604,7 @@ Blockly.Blocks['sensor_LTR308'] = {
             .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
         this.setOutput(true, Number);
         this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
     }
 };
 
@@ -1085,67 +1063,9 @@ Blockly.Blocks['sensor_mixgoce_temperature'] = {
         
     }
 };
-//mpython onboard_sensor:
-Blockly.Blocks['sensor_mpython_qmi8658_get_acceleration'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_ACCELERATION)
-        .appendField(new Blockly.FieldDropdown([
-            ["x", "[0]"],
-            ["y", "[1]"],
-            ["z", "[2]"],
-            ["(x,y,z)", ""]
-            ]), "key");
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.MIXLY_MICROBIT_JS_ACCELERATION);
-        var thisBlock = this;
-        this.setTooltip(function() {
-            var mode = thisBlock.getFieldValue('key');
-            var mode0 = Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET;
-            var mode1 = Blockly.Msg.MIXLY_MICROBIT_Direction;
-            var mode2 = Blockly.Msg.MIXLY_MICROBIT_JS_ACCELERATION1;
-            var TOOLTIPS = {
-                '[0]': 'x',
-                '[1]': 'y',
-                '[2]': 'z',
-                '':Blockly.Msg.MIXLY_MICROBIT_Shiliang_Direction,
-            };
-            return mode0 +TOOLTIPS[mode]+mode1+mode2;
-        });
-    }
-};
 
-Blockly.Blocks['sensor_mpython_mmc5603_get_magnetic'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET+Blockly.Msg.MIXLY_MICROBIT_JS_FIELD_STRENGTH)
-        .appendField(new Blockly.FieldDropdown([
-            ["x", "[0]"],
-            ["y", "[1]"],
-            ["z", "[2]"],
-            ["(x,y,z)", ""]
-            ]), "key");
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        var thisBlock = this;
-        this.setTooltip(function() {
-            var mode = thisBlock.getFieldValue('key');
-            var mode0 = Blockly.Msg.MIXLY_MICROBIT_PY_STORAGE_GET;
-            var mode1 = Blockly.Msg.MIXLY_MICROBIT_Direction;
-            var mode2 = Blockly.Msg.MIXLY_MICROBIT_JS_FIELD_STRENGTH;
-            var TOOLTIPS = {
-                '[0]': 'x',
-                '[1]': 'y',
-                '[2]': 'z',
-                '':Blockly.Msg.MIXLY_MICROBIT_Shiliang_Direction,
-            };
-            return mode0 +TOOLTIPS[mode]+mode1+mode2;
-        });
-    }
-};
+
+
 
 Blockly.Blocks['sensor_mpython_qmi8658_get_gyro'] = {
     init: function(){
@@ -1189,16 +1109,8 @@ Blockly.Blocks['sensor_mpython_qmi8658_temperature'] = {
     }
 };
 
-Blockly.Blocks['sensor_mpython_mmc5603_get_angle'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_MICROBIT_JS_GET_COMPASS+Blockly.Msg.MIXLY_MICROBIT_JS_BY_ANGLE)
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
 
-    }
-};
+
 
 Blockly.Blocks['sensor_rm_pin_near_double'] = {
     init: function(){

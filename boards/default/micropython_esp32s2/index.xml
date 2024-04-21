@@ -1706,9 +1706,6 @@
     </block>
     <block type="actuator_onboard_neopixel_write">
     </block>
-
-
-
   </category>
   <category id="catOnBoardDisplay" name="catOnBoardDisplay" colour='#569A98' m-hide='micropython:esp32s2:generic'>
     <block type="display_show_image">

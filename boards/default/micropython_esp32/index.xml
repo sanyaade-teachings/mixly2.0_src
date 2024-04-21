@@ -1531,8 +1531,8 @@
       <block type="sensor_rm_pin_near_double" m-show="micropython:esp32:rm_e1"></block>
       <block type="sensor_rm_battery_left" m-show="micropython:esp32:rm_e1"></block>
       <block type="sensor_rm_acc" m-show="micropython:esp32:rm_e1"></block>
-      <block type="sensor_mixgo_light" m-show="micropython:esp32:mixgo micropython:esp32:mpython"></block>
-      <block type="sensor_mixgo_sound" m-show="micropython:esp32:mixgo micropython:esp32:mpython"></block>
+      <block type="sensor_LTR308" m-show="micropython:esp32:mixgo micropython:esp32:mpython"></block>
+      <block type="sensor_sound" m-show="micropython:esp32:mixgo micropython:esp32:mpython"></block>
       <block type="sensor_onboard_mpu9250_gesture" m-show="micropython:esp32:mixgo"></block>
       <block type="sensor_onboard_mpu9250_get_acceleration" m-show="micropython:esp32:mixgo"></block>
       <block type="sensor_onboard_mpu9250_get_magnetic" m-show="micropython:esp32:mixgo"></block>
@@ -1542,10 +1542,10 @@
       <block type="sensor_onboard_mpu9250_field_strength" m-show="micropython:esp32:mixgo"></block>
       <block type="sensor_onboard_compass_reset" m-show="micropython:esp32:mixgo"></block>
       <block type="sensor_mpython_qmi8658_temperature" m-show="micropython:esp32:mpython"></block>
-      <block type="sensor_mpython_qmi8658_get_acceleration" m-show="micropython:esp32:mpython"></block>
+      <block type="sensor_get_acceleration" m-show="micropython:esp32:mpython"></block>
       <block type="sensor_mpython_qmi8658_get_gyro" m-show="micropython:esp32:mpython"></block>
-      <block type="sensor_mpython_mmc5603_get_magnetic" m-show="micropython:esp32:mpython"></block>
-      <block type="sensor_mpython_mmc5603_get_angle" m-show="micropython:esp32:mpython"></block>
+      <block type="sensor_mixgo_cc_mmc5603_get_magnetic" m-show="micropython:esp32:mpython"></block>
+      <block type="sensor_mixgo_cc_mmc5603_get_angle" m-show="micropython:esp32:mpython"></block>
       <block type="onboard_RTC_set_datetime" m-hide="micropython:esp32:mixgo_pe">
         <value name="year">
           <shadow type="math_number">
@@ -1971,7 +1971,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_oled_scroll_string">
+    <block type="display_scroll_string">
       <value name="data">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
@@ -2005,7 +2005,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_oled_show_frame_string">
+    <block type="display_show_frame_string">
       <value name="data">
         <shadow type="text">
           <field name="TEXT">Mixly</field>
@@ -2090,7 +2090,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_oled_shift">
+    <block type="display_shift">
 
       <value name="val">
         <shadow type="math_number">
@@ -2098,7 +2098,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_oled_get_pixel">
+    <block type="display_get_pixel">
 
       <value name="x">
         <shadow type="math_number">

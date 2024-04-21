@@ -1,9 +1,6 @@
 <div class="menu-line">
-    <label>
-        {{d.name}}
-    </label>
-    <div></div>
-    <label>
-        {{d.hotKey}}
-    </label>
+    <label>{{d.name}}&emsp;</label>
+    {{# if (d.hotKey) { }}
+        <label>{{d.hotKey}}</label>
+    {{# } }}
 </div>

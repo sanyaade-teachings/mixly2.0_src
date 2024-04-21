@@ -53,8 +53,8 @@ Blockly.Screenshot.getBase64Image_ = function(image) {
     return new Promise(resolve => {
         const img = new Image();
         img.crossOrigin = '';
-        const href = image.getAttribute('xlink:href') ?? '';
-        if (!href || href.indexOf('file://') === -1) {
+        const href = image.getAttribute('xlink:href');
+        if (!href) {
             resolve();
         }
         img.src = href;

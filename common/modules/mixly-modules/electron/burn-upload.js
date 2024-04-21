@@ -355,12 +355,7 @@ BU.cancel = function () {
 */
 BU.initBurn = function () {
     if (BU.burning) return;
-    const { mainStatusBarTabs } = Mixly;
-    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
     const { burn } = SELECTED_BOARD;
-    statusBarTerminal.setValue('');
-    mainStatusBarTabs.changeTo("output");
-    mainStatusBarTabs.show();
     BU.burning = true;
     BU.uploading = false;
     if (burn.type === 'volume') {
@@ -378,11 +373,6 @@ BU.initBurn = function () {
 BU.initUpload = function () {
     if (BU.uploading) return;
     const { upload } = SELECTED_BOARD;
-    const { mainStatusBarTabs } = Mixly;
-    const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
-    statusBarTerminal.setValue('');
-    mainStatusBarTabs.changeTo('output');
-    mainStatusBarTabs.show();
     BU.burning = false;
     BU.uploading = true;
     if (upload.type === "volume") {
@@ -552,6 +542,9 @@ BU.uploadByCmd = async function (layerNum, port, command) {
 BU.runCmd = function (layerNum, type, port, command, sucFunc) {
     const { mainStatusBarTabs } = Mixly;
     const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
+    statusBarTerminal.setValue('');
+    mainStatusBarTabs.changeTo('output');
+    mainStatusBarTabs.show();
     let nowCommand = MString.tpl(command, { com: port });
 
     BU.shell = child_process.exec(nowCommand, { encoding: 'binary' }, function (error, stdout, stderr) {

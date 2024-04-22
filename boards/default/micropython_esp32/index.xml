@@ -2127,7 +2127,7 @@
         </shadow>
       </value>
     </block>
-    <block type="onboard_oled_clear"></block>
+    <block type="display_clear"></block>
   </category>
   <category id="catPE_G1" colour="100" m-show='micropython:esp32:mixgo_pe'>
     <block type="communicate_i2c_init">

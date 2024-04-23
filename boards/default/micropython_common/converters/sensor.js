@@ -214,7 +214,7 @@ pbc.moduleFunctionD.get('mixgo')['get_soundlevel'] = function (py2block, func, a
         throw new Error("Incorrect number of arguments");
     }
     if (args.length == 0){
-    return block("sensor_mixgo_sound", func.lineno, {}, {}, {
+    return block("sensor_sound", func.lineno, {}, {}, {
         "inline": "true"
     });
     }

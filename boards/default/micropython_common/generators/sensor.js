@@ -282,10 +282,6 @@ Blockly.Python.forBlock['sensor_mixgo_light'] = function(){
     return ['mixgo.get_brightness()', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['sensor_mixgo_sound'] = function(){
-    Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
-    return ['mixgo.get_soundlevel()', Blockly.Python.ORDER_ATOMIC];
-};
 
 Blockly.Python.forBlock['sensor_mixgo_extern_light'] = function(){
     Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
@@ -412,6 +408,5 @@ Blockly.Python.forBlock.sensor_button_get_presses=Blockly.Python.forBlock.sensor
 Blockly.Python.forBlock.sensor_pin_pressed=Blockly.Python.forBlock.sensor_mixgo_pin_pressed;
 Blockly.Python.forBlock.sensor_pin_near=Blockly.Python.forBlock.sensor_mixgo_pin_near;
 Blockly.Python.forBlock.sensor_light=Blockly.Python.forBlock.sensor_mixgo_light;
-Blockly.Python.forBlock.sensor_sound=Blockly.Python.forBlock.sensor_mixgo_sound;
 Blockly.Python.forBlock.sensor_get_acceleration=Blockly.Python.forBlock.sensor_mixgo_get_acceleration;
 Blockly.Python.forBlock.dht11=Blockly.Python.forBlock.sensor_dht11

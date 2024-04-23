@@ -554,17 +554,6 @@ Blockly.Blocks['sensor_mixgo_light'] = {
     }
 };
 
-Blockly.Blocks['sensor_mixgo_sound'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
-    }
-};
-
 Blockly.Blocks['sensor_mixgo_extern_light'] = {
     init: function(){
         this.setColour(Blockly.Msg['SENSOR_HUE']);
@@ -904,7 +893,6 @@ Blockly.Blocks['sensor_button_get_presses']=Blockly.Blocks['sensor_mixgo_button_
 Blockly.Blocks['sensor_pin_pressed']=Blockly.Blocks['sensor_mixgo_pin_pressed'];
 Blockly.Blocks['sensor_pin_near']=Blockly.Blocks['sensor_mixgo_pin_near'];
 Blockly.Blocks['sensor_light']=Blockly.Blocks['sensor_mixgo_light'];
-Blockly.Blocks['sensor_sound']=Blockly.Blocks['sensor_mixgo_sound'];
 Blockly.Blocks['sensor_get_acceleration']=Blockly.Blocks['sensor_mpu9250_get_acceleration'];
 Blockly.Blocks['dht11']=Blockly.Blocks['sensor_dht11'];
 Blockly.Blocks['sensor_field_strength']=Blockly.Blocks['sensor_mpu9250_field_strength'];

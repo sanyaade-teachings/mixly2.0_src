@@ -45,7 +45,7 @@ Blockly.Python.forBlock['me_g1_rfid_write'] = function(){
     var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_me_g1'] = 'import me_g1';
     var code = 'me_g1.ext_rc522.write_card('+cnt+','+sector+')\n';
-    return code;
+    return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python.forBlock['me_g1_rfid_write_outcome'] = function(){

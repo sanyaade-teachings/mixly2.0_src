@@ -280,7 +280,27 @@ Blockly.Blocks.HCSR04 = {
 
 };
 
+Blockly.Blocks['sensor_mixgo_light'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
+    }
+};
 
+Blockly.Blocks['sensor_mixgo_sound'] = {
+    init: function(){
+        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
+        this.appendDummyInput()
+        .appendField(Blockly.Msg.MIXLY_ESP32_SOUND);
+        this.setOutput(true, Number);
+        this.setInputsInline(true);
+        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_SOUND_TOOLTIP);
+    }
+};
 
 Blockly.Blocks['number1'] = {
    init: function() {

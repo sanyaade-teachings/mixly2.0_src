@@ -79,23 +79,6 @@ Blockly.Python.forBlock['HCSR04'] = function () {
     var code = 'sonar.Sonar(' + dropdown_pin1 + ', ' + dropdown_pin2 + ').checkdist()';
     return [code, Blockly.Python.ORDER_ATOMIC];
 }
-Blockly.Python.forBlock['sensor_mixgo_light'] = function(){
-    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-    if (version == "mixgo"){
-    Blockly.Python.definitions_['import_mixgo'] = 'import mixgo';
-    return ['mixgo.get_brightness()', Blockly.Python.ORDER_ATOMIC];
-    }
-    else if (version == "mixgo_ce"){
-    Blockly.Python.definitions_['import_mixgo_ce'] = 'import mixgo_ce';
-    return ['mixgo_ce.get_brightness()', Blockly.Python.ORDER_ATOMIC];
-    }
-    else if(version == "mpython"){
-    Blockly.Python.definitions_['import_mpython_onboard_light'] = 'from mpython import onboard_light';
-    return ['onboard_light.brightness()', Blockly.Python.ORDER_ATOMIC];
-    }
-    else{return ['', Blockly.Python.ORDER_ATOMIC];}
-    
-};
 
 
 
@@ -302,16 +285,6 @@ Blockly.Python.forBlock['rfid_write_return'] = function(){
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Blocks['sensor_mixgo_light'] = {
-    init: function(){
-        this.setColour(Blockly.Msg['SENSOR_ONBOARD_HUE']);
-        this.appendDummyInput()
-        .appendField(Blockly.Msg.MIXLY_ESP32_LIGHT);
-        this.setOutput(true, Number);
-        this.setInputsInline(true);
-        this.setTooltip(Blockly.Msg.ESP32_SENSOR_NIXGO_LIGHT_TOOLTIP);
-    }
-};
 
 
 Blockly.Python.forBlock['sensor_get_acceleration'] = function(){
@@ -776,5 +749,6 @@ Blockly.Python.forBlock.sensor_button_was_pressed=Blockly.Python.forBlock.sensor
 Blockly.Python.forBlock.sensor_button_get_presses=Blockly.Python.forBlock.sensor_mixgo_button_get_presses;
 Blockly.Python.forBlock.sensor_pin_pressed=Blockly.Python.forBlock.sensor_mixgo_pin_pressed;
 Blockly.Python.forBlock.sensor_pin_near=Blockly.Python.forBlock.sensor_mixgo_pin_near;
+Blockly.Python.forBlock.sensor_mixgo_light=Blockly.Python.forBlock.sensor_LTR308;
 Blockly.Python.forBlock.sensor_light=Blockly.Python.forBlock.sensor_mixgo_light;
 Blockly.Python.forBlock.dht11=Blockly.Python.forBlock.sensor_dht11

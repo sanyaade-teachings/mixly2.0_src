@@ -1,0 +1,16 @@
+{
+    "Arduino ESP32S2": {
+        "Xq_6xPgECJw3.mix": {
+            "__file__": true,
+            "__name__": "URL和Base64编解码.mix"
+        },
+        "Y_cOtFra7Ukf.mix": {
+            "__file__": true,
+            "__name__": "使用http发送POST请求.mix"
+        },
+        "mH3eVmWy_Dq-.mix": {
+            "__file__": true,
+            "__name__": "心知天气.mix"
+        }
+    }
+}

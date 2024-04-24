@@ -1,0 +1,288 @@
+{
+    "Python ESP32": {
+        "Tsf3ubM_Wl4g.mix": {
+            "__file__": true,
+            "__name__": "1-1 滚动显示mixly.mix"
+        },
+        "B1Sp4MhDZsad.mix": {
+            "__file__": true,
+            "__name__": "1-2 滚动显示两句话.mix"
+        },
+        "4F1xQJeNNpw-.mix": {
+            "__file__": true,
+            "__name__": "10-传按键数据上云端.mix"
+        },
+        "cNSkT3Tlp2TZ.mix": {
+            "__file__": true,
+            "__name__": "11-1 云端控制LED灯.mix"
+        },
+        "Ea-_KKQyzRQR.mix": {
+            "__file__": true,
+            "__name__": "11-2 云端控制rgb灯.mix"
+        },
+        "dxFx2Rg5J7fA.mix": {
+            "__file__": true,
+            "__name__": "12-1 应用开关控制LED灯.mix"
+        },
+        "5ONJJPU-bi2u.mix": {
+            "__file__": true,
+            "__name__": "12-2 应用旋钮控制LED灯.mix"
+        },
+        "XoyT0hX3QetG.mix": {
+            "__file__": true,
+            "__name__": "12-3 应用点亮显示屏.mix"
+        },
+        "CyvFf6uQybEs.mix": {
+            "__file__": true,
+            "__name__": "2-1 心情晴雨表-按下.mix"
+        },
+        "1UqKYou4lKcA.mix": {
+            "__file__": true,
+            "__name__": "2-1 心情晴雨表-按着.mix"
+        },
+        "D_pOnHHryQPo.mix": {
+            "__file__": true,
+            "__name__": "2-2 心情晴雨表-联合图形.mix"
+        },
+        "TQ5dopYJEzb7.mix": {
+            "__file__": true,
+            "__name__": "3-1 抢答器.mix"
+        },
+        "Qn6Ff_7xOv7P.mix": {
+            "__file__": true,
+            "__name__": "3-2 倒计时抢答器.mix"
+        },
+        "4ciTJwng9PiK.mix": {
+            "__file__": true,
+            "__name__": "4-1可调报警器.mix"
+        },
+        "q3PDIkcEU1Vd.mix": {
+            "__file__": true,
+            "__name__": "4-2音乐门铃.mix"
+        },
+        "YROZy1rTCcQR.mix": {
+            "__file__": true,
+            "__name__": "5-1创建基准音.mix"
+        },
+        "Qh-J9paf_s4a.mix": {
+            "__file__": true,
+            "__name__": "5-2录音电子琴.mix"
+        },
+        "MmOfNQwS1hog.mix": {
+            "__file__": true,
+            "__name__": "6-1闹钟.mix"
+        },
+        "99nmzd6FkLaK.mix": {
+            "__file__": true,
+            "__name__": "6-2实时时钟.mix"
+        },
+        "LRf9ITM4pLoh.mix": {
+            "__file__": true,
+            "__name__": "7-1光电密码锁.mix"
+        },
+        "_1mt0UNSSpCM.mix": {
+            "__file__": true,
+            "__name__": "7-2密码锁.mix"
+        },
+        "FYXbS_Um8Dw_.mix": {
+            "__file__": true,
+            "__name__": "7-3密码锁-可修改密码.mix"
+        },
+        "aD_tzn6DtNtV.mix": {
+            "__file__": true,
+            "__name__": "8-1磁场魔术.mix"
+        },
+        "W-ilePFvf5Xy.mix": {
+            "__file__": true,
+            "__name__": "8-2扫雷法宝.mix"
+        },
+        "VSPw8md7T34F.mix": {
+            "__file__": true,
+            "__name__": "9-1平衡仪.mix"
+        },
+        "1L0bMd-x0gVU.mix": {
+            "__file__": true,
+            "__name__": "9-2平衡仪升级版.mix"
+        },
+        "F1IIt3N8rkLY.mix": {
+            "__file__": true,
+            "__name__": "9-3平衡仪小小精灵快快跑.mix"
+        },
+        "Peh9B43cWayW.mix": {
+            "__file__": true,
+            "__name__": "9-4平衡仪左右前后移动.mix"
+        },
+        "FvdZtkZXeDrE": {
+            "EHG6OHPltgRt": {
+                "-20kPFrN3TGT": {
+                    "MZ_9uYZZjEan.mix": {
+                        "__file__": true,
+                        "__name__": "1-1 滚动显示mixly.mix"
+                    },
+                    "4HDcDobzsMSe.mix": {
+                        "__file__": true,
+                        "__name__": "1-2 滚动显示两句话.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第一课"
+                },
+                "Od0jA2PIHyDT": {
+                    "LPw2ZlysOFul.mix": {
+                        "__file__": true,
+                        "__name__": "光电密码锁.mix"
+                    },
+                    "m3bJuAasoQNc.mix": {
+                        "__file__": true,
+                        "__name__": "密码锁-可修改密码.mix"
+                    },
+                    "PghycbTnHXX2.mix": {
+                        "__file__": true,
+                        "__name__": "密码锁.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第七课"
+                },
+                "qMXhSGmLDKfv": {
+                    "bbl35ShR8N53.mix": {
+                        "__file__": true,
+                        "__name__": "3-1 抢答器.mix"
+                    },
+                    "We3r9clTitGu.mix": {
+                        "__file__": true,
+                        "__name__": "3-2 倒计时抢答器.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第三课"
+                },
+                "dxDXCiXP9g79": {
+                    "lKxpiWamoSWD.mix": {
+                        "__file__": true,
+                        "__name__": "平衡仪.mix"
+                    },
+                    "jPZaxsiWe-3k.mix": {
+                        "__file__": true,
+                        "__name__": "平衡仪升级版.mix"
+                    },
+                    "wa-rN45aOwjC.mix": {
+                        "__file__": true,
+                        "__name__": "平衡仪小小精灵快快跑.mix"
+                    },
+                    "0D0Qt65shh5n.mix": {
+                        "__file__": true,
+                        "__name__": "平衡仪左右前后移动.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第九课"
+                },
+                "22TU8b0FrYBU": {
+                    "lWGuiCjQcToX.mix": {
+                        "__file__": true,
+                        "__name__": "2-1 心情晴雨表-按下.mix"
+                    },
+                    "bcpAzuKlhNuv.mix": {
+                        "__file__": true,
+                        "__name__": "2-1 心情晴雨表-按着.mix"
+                    },
+                    "W-jqQB7FhFGH.mix": {
+                        "__file__": true,
+                        "__name__": "2-2 心情晴雨表-联合图形.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第二课"
+                },
+                "KdGhCXX1wIoa": {
+                    "gKvP-_bWRtTS.mix": {
+                        "__file__": true,
+                        "__name__": "创建基准音.mix"
+                    },
+                    "pSIdzp6NUUuJ.mix": {
+                        "__file__": true,
+                        "__name__": "录音电子琴.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第五课"
+                },
+                "cDbXVdH8F7V0": {
+                    "OOY9qEcjxD3H.mix": {
+                        "__file__": true,
+                        "__name__": "扫雷法宝.mix"
+                    },
+                    "jDVQoqa_bxxc.mix": {
+                        "__file__": true,
+                        "__name__": "磁场魔术.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第八课"
+                },
+                "1VWEuJuWi-lK": {
+                    "Vk2ALXCVUdYp.mix": {
+                        "__file__": true,
+                        "__name__": "实时时钟.mix"
+                    },
+                    "uzRCsphFzU-t.mix": {
+                        "__file__": true,
+                        "__name__": "闹钟.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第六课"
+                },
+                "qCli0igNZKRp": {
+                    "VS5ggOkSi0fj.mix": {
+                        "__file__": true,
+                        "__name__": "11-1 云端控制LED灯.mix"
+                    },
+                    "rvQDAhY0TvK7.mix": {
+                        "__file__": true,
+                        "__name__": "11-2 云端控制rgb灯.mix"
+                    },
+                    "pE5IzDenXj24.mix": {
+                        "__file__": true,
+                        "__name__": "11-3 处理三个指令.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第十一课"
+                },
+                "M8qNIFuhgNka": {
+                    "sGUYLpxDdzTE.mix": {
+                        "__file__": true,
+                        "__name__": "12-1 应用开关控制LED灯.mix"
+                    },
+                    "XKHNHjTBopKb.mix": {
+                        "__file__": true,
+                        "__name__": "12-2 应用旋钮控制LED灯.mix"
+                    },
+                    "fFTc9lIdWICc.mix": {
+                        "__file__": true,
+                        "__name__": "12-3 应用点亮显示屏.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第十二课"
+                },
+                "MqYA5vgnScHN": {
+                    "miWMzPEEknoF.mix": {
+                        "__file__": true,
+                        "__name__": "10-传按键数据上云端.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第十课"
+                },
+                "nuk5lrgro9xg": {
+                    "LEygZ1xToq6B.mix": {
+                        "__file__": true,
+                        "__name__": "可调报警器.mix"
+                    },
+                    "ydJ3E7FcVI3z.mix": {
+                        "__file__": true,
+                        "__name__": "音乐门铃.mix"
+                    },
+                    "__file__": false,
+                    "__name__": "第四课"
+                },
+                "__file__": false,
+                "__name__": "智能物联"
+            },
+            "__file__": false,
+            "__name__": "教材范例"
+        }
+    }
+}

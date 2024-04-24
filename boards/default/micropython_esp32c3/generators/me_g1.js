@@ -48,11 +48,13 @@ Blockly.Python.forBlock['me_g1_rfid_write'] = function(){
     return code;
 };
 
+
+
 Blockly.Python.forBlock['me_g1_rfid_write_outcome'] = function(){
     var sector = Blockly.Python.valueToCode(this, 'SECTOR', Blockly.Python.ORDER_ATOMIC);
     var cnt = Blockly.Python.valueToCode(this, 'CONTENT', Blockly.Python.ORDER_ATOMIC);
     Blockly.Python.definitions_['import_me_g1'] = 'import me_g1';
-    var code = 'me_g1.ext_rc522.write_card('+cnt+','+sector+')\n';
+    var code = 'me_g1.ext_rc522.write_card('+cnt+','+sector+')';
     return [code, Blockly.Python.ORDER_ATOMIC];
 };
 

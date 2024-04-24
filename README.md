@@ -24,6 +24,11 @@ http://wiki.mixly.org
 
 [Mixly2.0在线版](https://smilebrightly.gitee.io/mixly2.0_src)
 
+### 网盘下载地址
+
+- [百度网盘链接](https://pan.baidu.com/s/1BotIhmA6EGWVout-MoxBLg%C2%A0?pwd=ny1n)
+- [123网盘链接](https://www.123pan.com/s/uAxvTd-xdX9d.html)
+
 ### 图片预览
 
 ---

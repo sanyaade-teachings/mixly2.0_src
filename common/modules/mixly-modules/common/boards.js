@@ -9,9 +9,7 @@ goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.ToolboxSearcher');
 goog.require('Mixly.MString');
-goog.require('Mixly.FooterLayer');
 goog.require('Mixly.Msg');
-goog.require('Mixly.FooterLayerBoardConfig');
 goog.require('Mixly.BoardConfigItem');
 goog.require('Mixly.Profile');
 goog.require('Mixly.EditorBlockly');
@@ -25,9 +23,7 @@ const {
     Env,
     ToolboxSearcher,
     MString,
-    FooterLayer,
     Msg,
-    FooterLayerBoardConfig,
     BoardConfigItem,
     Profile,
     EditorBlockly,
@@ -69,7 +65,6 @@ Boards.init = () => {
         Boards.dict[BOARD.boardType] = new BoardConfigItem(BOARD.boardType, BOARD.boardType);
     }
     Boards.NAME = Object.keys(Boards.dict);
-    Boards.configMenu = new FooterLayerBoardConfig('mixly-board-config', Boards.dict);
     const $boards = $('#boards-type');
     if ($boards.length) {
         $boards.empty();
@@ -78,6 +73,10 @@ Boards.init = () => {
         }
         form.render('select', 'boards-type-filter');
     }
+}
+
+Boards.addLayer = (boardConfigLayer) => {
+    Boards.configMenu = boardConfigLayer;
 }
 
 Boards.getType = () => {

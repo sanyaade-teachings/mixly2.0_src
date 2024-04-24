@@ -38,8 +38,8 @@ class FooterLayerBoardConfig extends FooterLayer {
      * @return { FooterLayerBoardConfig obj }
      **/
     #canvas_ = null;
-    constructor(id, boardsInfo) {
-        super(id, {
+    constructor(element, boardsInfo) {
+        super(element, {
             onHidden: (instance) => {
                 this.boardsInfo[this.boardName].writeSelectedOptions();
             },
@@ -63,8 +63,7 @@ class FooterLayerBoardConfig extends FooterLayer {
             ]
         });
         this.$content.addClass('footer-layer-board-config');
-        this.containerId = id;
-        this.$footerContainer = $(`#${id}`);
+        this.$footerContainer = $(element);
         this.boardsInfo = boardsInfo;
         // 当前用户所选择的板卡
         this.boardName = null;
@@ -215,6 +214,9 @@ class FooterLayerBoardConfig extends FooterLayer {
         }
     }
 
+    resize() {
+        this.$body.find('select').select2('close');
+    }
 }
 
 Mixly.FooterLayerBoardConfig = FooterLayerBoardConfig;

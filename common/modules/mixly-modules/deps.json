@@ -4,7 +4,6 @@
         "require": [
             "path",
             "layui",
-            "Mixly.Msg",
             "Mixly.Url",
             "Mixly.Config",
             "Mixly.Env",
@@ -51,9 +50,7 @@
             "Mixly.Env",
             "Mixly.ToolboxSearcher",
             "Mixly.MString",
-            "Mixly.FooterLayer",
             "Mixly.Msg",
-            "Mixly.FooterLayerBoardConfig",
             "Mixly.BoardConfigItem",
             "Mixly.Profile",
             "Mixly.EditorBlockly",
@@ -402,13 +399,17 @@
     {
         "path": "/common/footerbar.js",
         "require": [
+            "path",
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg",
             "Mixly.Config",
+            "Mixly.Boards",
             "Mixly.FooterLayer",
             "Mixly.FooterLayerBoardConfig",
             "Mixly.FooterLayerMessage",
+            "Mixly.Component",
+            "Mixly.HTMLTemplate",
             "Mixly.Electron.FooterLayerExample",
             "Mixly.Web.FooterLayerExample"
         ],
@@ -1017,6 +1018,15 @@
         ],
         "provide": [
             "Mixly.XML"
+        ]
+    },
+    {
+        "path": "/electron/arduino-cli.js",
+        "require": [
+            "Mixly.Electron"
+        ],
+        "provide": [
+            "Mixly.Electron.ArduinoCLI"
         ]
     },
     {

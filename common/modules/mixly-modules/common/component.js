@@ -33,10 +33,8 @@ class Component {
     setContent(jqElem) {
         if (this.#$content_) {
             this.#$content_.replaceWith(jqElem);
-            this.#$content_ = jqElem;
-        } else {
-            this.#$content_ = jqElem;
         }
+        this.#$content_ = jqElem;
     }
 
     getContent() {

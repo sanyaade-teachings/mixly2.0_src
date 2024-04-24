@@ -29,8 +29,8 @@ class FooterLayerExample extends FooterLayer {
         );
     }
 
-    constructor(domId) {
-        super(domId, {
+    constructor(element) {
+        super(element, {
             onMount: (instance) => {
                 this.examplesTree.reload({ data: this.getRoot() });
             }
@@ -39,7 +39,6 @@ class FooterLayerExample extends FooterLayer {
         this.updateContent(FooterLayerExample.menuHTMLTemplate.render());
         this.$treeBody = this.$body.children('.example-tree-body');
         this.DEPTH = 5;
-        this.containerId = domId;
         this.render();
     }
 

@@ -2,7 +2,6 @@ goog.loadJs('common', () => {
 
 goog.require('path');
 goog.require('layui');
-goog.require('Mixly.Msg');
 goog.require('Mixly.Url');
 goog.require('Mixly.Config');
 goog.require('Mixly.Env');
@@ -24,7 +23,6 @@ goog.require('Mixly.Web.File');
 goog.provide('Mixly.App');
 
 const {
-    Msg,
     Url,
     Config,
     Env,
@@ -64,17 +62,7 @@ class App extends Component {
 
     constructor(element) {
         super();
-        const $content = $(HTMLTemplate.get('app.html').render({
-            outputAceName: Msg.Lang['输出'],
-            row: Msg.Lang['行'],
-            column: Msg.Lang['列'],
-            unknown: Msg.Lang['未知'],
-            config: Msg.Lang['配置板卡'],
-            selected: Msg.Lang['已选择'],
-            on: Msg.Lang['在'],
-            message: Msg.Lang['消息'],
-            example: Msg.Lang['例程']
-        }));
+        const $content = $(HTMLTemplate.get('app.html').render());
         this.setContent($content);
         this.mountOn($(element));
         Nav.init($content.find('.mixly-nav')[0]);
@@ -86,7 +74,8 @@ class App extends Component {
             favicon: 'fileicon-mix'
         });
         NavEvents.init();
-        FooterBar.init();
+        this.#footerbar_ = new FooterBar();
+        this.#footerbar_.mountOn($content.find('.mixly-footerbar'));
         this.#addEventsListenerForNav_();
         this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
@@ -480,12 +469,13 @@ class App extends Component {
     resize() {
         Nav.resize();
         this.#workspace_.resize();
+        this.#footerbar_.resize();
     }
 
     onMounted() {
         super.onMounted();
         const $appLoading = $('.mixly-app-loading');
-        $appLoading.addClass('skeleton-fadeout');
+        // $appLoading.addClass('skeleton-fadeout');
         setTimeout(() => {
             $appLoading.remove();
         }, 500);

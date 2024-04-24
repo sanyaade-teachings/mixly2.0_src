@@ -32,14 +32,14 @@ class FooterLayer {
             ...DEFAULT_CONFIG_TIPPY
         }
      **/
-    constructor(domId, config) {
+    constructor(element, config) {
         this.config = {
             ...FooterLayer.DEFAULT_CONFIG_TIPPY,
             ...(config ?? {})
         };
         this.btns = config.btns ?? [];
         this.btnsClickEvent = {};
-        this.domId = domId;
+        this.element = element;
         this.layer = null;
         this.#create_();
         this.#addSharedMethod_();
@@ -55,15 +55,15 @@ class FooterLayer {
     }
 
     #create_() {
-        this.layer = tippy(`#${this.domId}`, this.config)[0];
+        this.layer = tippy(this.element, this.config);
     }
 
     updateContent(content) {
         if (this.$body.length) {
             this.$body.html(content);
-            return;
+        } else {
+            this.setContent(content);
         }
-        this.setContent(content);
     }
 
     #addBtnsClickEvent_() {
@@ -98,7 +98,7 @@ class FooterLayer {
      * @return {void}
      **/
     #addContainerClickEvent_() {
-        $(`#${this.domId}`).off().click(() => {
+        $(this.element).off().click(() => {
             if (this.layer.state.isShown) {
                 this.hide();
             } else {
@@ -106,6 +106,8 @@ class FooterLayer {
             }
         });
     }
+
+    resize() {}
 }
 
 Mixly.FooterLayer = FooterLayer;

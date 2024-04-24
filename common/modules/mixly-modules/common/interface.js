@@ -75,7 +75,6 @@ window.addEventListener('load', () => {
     LazyLoad.css(cssPathList);
     LazyLoad.js(scrpitPathList, () => {
         Interface.app = new App($('body')[0]);
-        Boards.init();
         if (window.frames.length !== parent.frames.length) {
             window.userEvents = new UserEvents(Editor.blockEditor);
         }

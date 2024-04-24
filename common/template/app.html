@@ -30,11 +30,6 @@
         width: 100%;
         height: var(--footer-height);
         z-index: 1000;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-content: center;
     }
 
     html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .mixly-footerbar {
@@ -44,90 +39,9 @@
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .mixly-footerbar {
         background-color: rgb(0 150 136);
     }
-
-    div[m-id="{{d.mId}}"] > .mixly-footerbar p {
-        white-space: nowrap;
-        display: inline-block;
-    }
-
-    div[m-id="{{d.mId}}"] > .mixly-footerbar > .footerbar-item {
-        display: inline-flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        font-size:12px;
-        line-height:12px;
-        color: #fff;
-    }
-
-    div[m-id="{{d.mId}}"] > .mixly-footerbar > .footerbar-item > div {
-        display: inline-flex;
-        flex-direction: row;
-        align-items: center;
-        margin: 0 5px;
-    }
-
-    div[m-id="{{d.mId}}"] > .mixly-footerbar > .footerbar-item > div > a {
-        color: #fff;
-    }
-
-    div[m-id="{{d.mId}}"] > .mixly-footerbar > .footerbar-item > button {
-        cursor: pointer;
-        border: none;
-        margin: 0 5px;
-        padding: 3px;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    div[m-id="{{d.mId}}"] > .mixly-footerbar > .footerbar-item > button > a {
-        color: #fff;
-        font-size: 12px;
-        line-height: 12px;
-    }
 </style>
 <div m-id="{{d.mId}}">
     <div class="mixly-nav"></div>
     <div class="mixly-workspace"></div>
-    <div class="mixly-footerbar">
-        <div class="footerbar-item">
-            <button id="mixly-example-menu" m-title="{{d.example}}" class="layui-btn layui-btn-xs layui-btn-primary m-btn">
-                <a class="icon-doc-text">{{ d.example }}</a>
-            </button>
-            <div id="mixly-footer-cursor">
-                <div>
-                    <p>{{ d.row }}&nbsp</p>
-                    <p id="mixly-footer-row">1</p>
-                </div>
-                <div>
-                    <p>,&nbsp{{ d.column }}&nbsp</p>
-                    <p id="mixly-footer-column">1</p>
-                </div>
-                <div style="display: none;">
-                    <p>,&nbsp{{ d.selected }}&nbsp</p>
-                    <p id="mixly-footer-selected"></p>
-                </div>
-            </div>
-        </div>
-        <div class="footerbar-item">
-            <div>
-                <a class='icon-code'></a>
-                <p id="mixly-footer-codelang">{{ d.unknown }}</p>
-            </div>
-            <div>
-                <a class='icon-microchip'></a>
-                <p id="mixly-footer-boardname"></p>
-                <div id="mixly-footer-port-div" style="display: none;">
-                    <p>&nbsp{{d.on}}&nbsp</p>
-                    <p id="mixly-footer-port"></p>
-                </div>
-            </div>
-            <button id="mixly-board-config" class="layui-btn layui-btn-xs layui-btn-primary m-btn">
-                <a id="mixly-footer-boardconfig" class="icon-cog">{{ d.config }}</a>
-            </button>
-            <button id="mixly-message" class="layui-btn layui-btn-xs layui-btn-primary m-btn">
-                <a id="mixly-footer-message" class="icon-bell">{{ d.message }}</a>
-            </button>
-        </div>
-    </div>
+    <div class="mixly-footerbar"></div>
 </div>

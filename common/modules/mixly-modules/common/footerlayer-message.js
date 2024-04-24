@@ -35,8 +35,8 @@ class FooterLayerMessage extends FooterLayer {
         this.STYLES = ['primary', 'secondary', 'success', 'danger', 'warning'];
     }
 
-    constructor(domId) {
-        super(domId, {
+    constructor(element) {
+        super(element, {
             onMount: (instance) => {
                 this.$body.scrollTop(this.$container.parent().prop('scrollHeight'));
             },

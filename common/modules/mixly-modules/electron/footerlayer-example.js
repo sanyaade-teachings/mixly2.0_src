@@ -33,8 +33,8 @@ const electron_remote = Mixly.require('@electron/remote');
 const { app } = electron_remote;
 
 class FooterLayerExampleExt extends FooterLayerExample {
-    constructor(exampleBtnId) {
-        super(exampleBtnId);
+    constructor(element) {
+        super(element);
     }
 
     getRoot() {

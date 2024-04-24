@@ -6,7 +6,7 @@ goog.provide('Mixly.Web.FS');
 
 const { FS } = Mixly.Web;
 
-FS.pool = workerpool.pool('../common/modules/mixly-modules/workers/file-system-access.js', {
+FS.pool = workerpool.pool('../common/modules/mixly-modules/workers/web/file-system-access.js', {
     workerOpts: {
         name: 'fileSystemAccess'
     },

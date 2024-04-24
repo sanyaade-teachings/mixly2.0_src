@@ -11,6 +11,7 @@ const {
     Events,
 } = Mixly;
 
+
 class Serial {
     // {array} 已打开的串口号
     static openedPortsName = [];

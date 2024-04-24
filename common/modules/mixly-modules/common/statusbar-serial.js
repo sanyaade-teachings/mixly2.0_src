@@ -22,6 +22,14 @@ const {
     Regression
 } = Mixly;
 
+const worker = new Worker('../common/modules/mixly-modules/workers/nodejs/node-serial-worker.js', {
+    name: 'nodeSerialWorker'
+});
+
+worker.addEventListener('message', (event) => {
+    console.log(event.data);
+});
+
 
 class StatusBarSerialOutput extends StatusBar {
     constructor() {
@@ -174,7 +182,7 @@ class StatusBarSerial extends PageBase {
     #valueTemp_ = '';
     #statusTemp_ = false;
     #$send_ = null;
-    #$settingMenu= null;
+    #$settingMenu = null;
     #manager_ = null;
 
     constructor() {
@@ -200,14 +208,36 @@ class StatusBarSerial extends PageBase {
         this.addDirty();
         const $tab = this.getTab();
         $tab.dblclick(() => {
-            this.runEvent('reconnect');
+            // this.runEvent('reconnect');
+            if (this.isOpened()) {
+                this.close();
+                worker.postMessage({
+                    type: 'close',
+                    port: this.port
+                });
+            } else {
+                this.open();
+                worker.postMessage({
+                    type: 'open',
+                    port: this.port
+                });
+            }
         });
+        this.port = this.getPort();
         this.#$close_ = $tab.find('.chrome-tab-close');
         this.#$close_.addClass('layui-badge-dot layui-bg-blue');
-        if (this.#statusTemp_) {
+        if (!this.#statusTemp_) {
             this.open();
+            worker.postMessage({
+                type: 'open',
+                port: this.port
+            });
         } else {
             this.close();
+            worker.postMessage({
+                type: 'close',
+                port: this.port
+            });
         }
         this.setValue(this.#valueTemp_);
     }

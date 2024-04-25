@@ -61,7 +61,11 @@ class NodeSerialWorker extends SerialWorker {
     close() {
         super.close();
         if (this.isOpened()) {
-            this.#serialport_.close();
+            try {
+                this.#serialport_.close();
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 

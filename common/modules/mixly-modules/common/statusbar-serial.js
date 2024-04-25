@@ -1,15 +1,16 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
-goog.require('$.ui');
-goog.require('$.flot');
 goog.require('$.select2');
 goog.require('Mixly.Env');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.SideBarsManager');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.PageBase');
-goog.require('Mixly.Regression');
+goog.require('Mixly.StatusBarSerialOutput');
+goog.require('Mixly.StatusBarSerialChart');
+goog.require('Mixly.Electron.Serial');
+goog.require('Mixly.Web.Serial');
 goog.provide('Mixly.StatusBarSerial');
 
 const {
@@ -19,153 +20,15 @@ const {
     RightSideBarsManager,
     HTMLTemplate,
     PageBase,
-    Regression
+    Regression,
+    StatusBarSerialOutput,
+    StatusBarSerialChart,
+    Electron = {},
+    Web = {}
 } = Mixly;
 
-const worker = new Worker('../common/modules/mixly-modules/workers/nodejs/node-serial-worker.js', {
-    name: 'nodeSerialWorker'
-});
+const { Serial } = goog.isElectron ? Electron : Web;
 
-worker.addEventListener('message', (event) => {
-    console.log(event.data);
-});
-
-
-class StatusBarSerialOutput extends StatusBar {
-    constructor() {
-        super();
-    }
-
-    init() {
-        super.init();
-        this.hideCloseBtn();
-    }
-}
-
-class StatusBarSerialChart extends PageBase {
-    constructor() {
-        super();
-        const $draw = $('<div style="width: 100%; height: 100%;"></div>');
-        this.setContent($draw);
-        const regression = new Regression();
-
-        var data = [],
-            startTime = Date.now(),
-            totalPoints = 500,
-            needUpdate = false;
-
-        function getData() {
-            return [
-                { data, lines: { show: true }}
-            ];
-        }
-
-        function setData() {
-            while (data.length > totalPoints) {
-                data.shift();
-            }
-            var y = Math.random() * 100;
-
-            if (y < 0) {
-                y = 0;
-            } else if (y > 100) {
-                y = 100;
-            }
-            data.push([Date.now(), y]);
-            needUpdate = true;
-        }
-
-        const setRange = (plot) => {
-            let { xaxis } = this.plot.getAxes();
-            let { data = [] } = this.plot.getData()[0] ?? {};
-            if (!data.length) {
-                return;
-            }
-            if (data.length >= totalPoints) {
-                xaxis.options.min = data[0][0];
-                xaxis.options.max = data[totalPoints - 1][0];
-                return;
-            }
-            let x = [], y = [];
-            for (let i in data) {
-                x.push((i - 0) + 1);
-                y.push(data[i][0] - data[0][0]);
-            }
-            regression.fit(x, y);
-            let xMax = regression.predict([totalPoints])[0] + data[0][0];
-            let xMin = data[0][0];
-            xaxis.options.min = xMin;
-            xaxis.options.max = xMax;
-        }
-
-        // Set up the control widget
-
-        this.plot = $.plot($draw, getData(), {
-            series: {
-                shadowSize: 1   // Drawing is faster without shadows
-            },
-            yaxis: {
-                min: 0,
-                max: 100,
-                show: true,
-                font: {
-                    fill: "#c2c3c2"
-                },
-                labelWidth: 30
-            },
-            xaxis: {
-                show: true,
-                font: {
-                    fill: "#c2c3c2"
-                },
-                mode: 'time',
-                timezone: 'browser',
-                twelveHourClock: true,
-                timeBase: 'milliseconds',
-                minTickSize: [1, 'second'],
-                min: startTime,
-                max: startTime + 1000 * 10,
-            }
-        });
-
-        const update = () => {
-            if (!needUpdate) {
-                setTimeout(update, 10);
-                return;
-            }
-            this.plot.setData(getData());
-            this.plot.getSurface().clearCache();
-            // this.plot.resize();
-            this.plot.setupGrid(false);
-            this.plot.draw();
-            setRange(this.plot);
-            needUpdate = false;
-            // setTimeout(update, 1);
-            window.requestAnimationFrame(update);
-        }
-
-        // window.requestAnimationFrame(update);
-
-        // update();
-
-        // setInterval(setData, 100);
-        // setInterval(setData, 1);
-    }
-
-    init() {
-        super.init();
-        this.hideCloseBtn();
-        this.resize();
-    }
-
-    resize() {
-        this.plot.getSurface().clearCache();
-        super.resize();
-        this.plot.resize();
-        this.plot.setupGrid(false);
-        this.plot.draw();
-    }
-}
 
 class StatusBarSerial extends PageBase {
     static {
@@ -184,6 +47,10 @@ class StatusBarSerial extends PageBase {
     #$send_ = null;
     #$settingMenu = null;
     #manager_ = null;
+    #output_ = null;
+    #chart_ = null;
+    #serial_ = null;
+    #port_ = '';
 
     constructor() {
         super();
@@ -200,44 +67,52 @@ class StatusBarSerial extends PageBase {
         this.#manager_.add('serial_output', 'serial_output', '监视器');
         this.#manager_.add('serial_chart', 'serial_chart', '绘图器');
         this.#manager_.changeTo('serial_output');
+        this.#output_ = this.#manager_.get('serial_output');
+        this.#chart_ = this.#manager_.get('serial_chart');
         this.addEventsType(['reconnect']);
+    }
+
+    #addEventsListener_() {
+        this.#serial_.bind('onOpen', () => {
+            this.open();
+            this.setValue(`===串口${this.getPort()}开启===\n`);
+        });
+
+        this.#serial_.bind('onClose', () => {
+            this.close();
+            this.addValue(`\n===串口${this.getPort()}关闭===`);
+        });
+
+        this.#serial_.bind('onError', (error) => {
+            this.addValue(`${String(error)}\n`);
+        });
+
+        this.#serial_.bind('onString', (str) => {
+            this.addValue(str);
+        });
     }
 
     init() {
         super.init();
         this.addDirty();
         const $tab = this.getTab();
+        this.#port_ = $tab.attr('data-tab-id');
+        this.#serial_ = new NodeSerial(this.getPort());
+        this.#addEventsListener_();
         $tab.dblclick(() => {
-            // this.runEvent('reconnect');
             if (this.isOpened()) {
-                this.close();
-                worker.postMessage({
-                    type: 'close',
-                    port: this.port
-                });
+                this.#serial_.close();
             } else {
-                this.open();
-                worker.postMessage({
-                    type: 'open',
-                    port: this.port
-                });
+                this.#serial_.open();
             }
         });
-        this.port = this.getPort();
+        
         this.#$close_ = $tab.find('.chrome-tab-close');
         this.#$close_.addClass('layui-badge-dot layui-bg-blue');
         if (!this.#statusTemp_) {
-            this.open();
-            worker.postMessage({
-                type: 'open',
-                port: this.port
-            });
+            this.#serial_.open();
         } else {
-            this.close();
-            worker.postMessage({
-                type: 'close',
-                port: this.port
-            });
+            this.#serial_.close();
         }
         this.setValue(this.#valueTemp_);
     }
@@ -273,8 +148,7 @@ class StatusBarSerial extends PageBase {
     }
 
     getPort() {
-        const $tab = this.getTab();
-        return $tab.attr('data-tab-id');
+        return this.#port_;
     }
 
     dispose() {
@@ -289,8 +163,7 @@ class StatusBarSerial extends PageBase {
             this.#valueTemp_ = data;
             return;
         }
-        const serialOutput = this.getManager().get('serial_output');
-        serialOutput.setValue(data, scroll);
+        this.#output_.setValue(data, scroll);
     }
 
     addValue(data) {
@@ -298,8 +171,7 @@ class StatusBarSerial extends PageBase {
             this.#valueTemp_ += data;
             return;
         }
-        const serialOutput = this.getManager().get('serial_output');
-        serialOutput.setValue(data);
+        this.#output_.addValue(data);
     }
 
     getManager() {

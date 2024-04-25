@@ -175,8 +175,9 @@ class StatusBarsManager extends PagesManager {
             type: 'ampy-filesystem-tool',
             data: {
                 isHtmlName: true,
-                name: 'Ampy',
-                callback: (key, opt) => console.log(123)
+                disabled: true,
+                name: ContextMenu.getItem('Ampy', '不可用'),
+                callback: (key, opt) => {}
             }
         });
         toolChildMenu.add({
@@ -184,8 +185,9 @@ class StatusBarsManager extends PagesManager {
             type: 'esptool-filesystem-tool',
             data: {
                 isHtmlName: true,
-                name: 'ESPTool',
-                callback: (key, opt) => console.log(123)
+                disabled: true,
+                name: ContextMenu.getItem('ESPTool', '不可用'),
+                callback: (key, opt) => {}
             }
         });
         

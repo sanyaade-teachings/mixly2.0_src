@@ -78,7 +78,7 @@ class EditorAce extends EditorBase {
         }
     }
 
-    addValue(data) {
+    addValue(data, scroll = true) {
         if (this.#destroyed_) {
             return;
         }

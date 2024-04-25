@@ -71,7 +71,7 @@ class FooterLayerExampleExt extends FooterLayerExample {
     }
 
     dataToWorkspace(inPath) {
-        const data = goog.get(Config.pathPrefix + `../sample/${inPath}`);
+        const data = goog.get(Config.pathPrefix + `sample/${inPath}`);
         this.updateCode(inPath.substring(inPath.lastIndexOf('.')), data);
     }
 }

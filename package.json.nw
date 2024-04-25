@@ -8,9 +8,9 @@
   "node-remote": "http://localhost:7000",
   "scripts": {
     "start": "nw .",
-    "build:nw:win:x64": "build --tasks win-x64 --mirror https://registry.npmmirror.com/nwjs/ .",
-    "build:nw:linux:x64": "build --tasks linux-x64 --mirror https://registry.npmmirror.com/nwjs/ .",
-    "build:nw:mac:x64": "build --tasks mac-x64 --mirror https://registry.npmmirror.com/nwjs/ ."
+    "build:nw:win:x64": "build --tasks win-x64 --mirror https://npmmirror.com/mirrors/nwjs/ .",
+    "build:nw:linux:x64": "build --tasks linux-x64 --mirror https://npmmirror.com/mirrors/nwjs/ .",
+    "build:nw:mac:x64": "build --tasks mac-x64 --mirror https://npmmirror.com/mirrors/nwjs/ ."
   },
   "window": {
     "icon": "files/mixly_uncompressed.ico",

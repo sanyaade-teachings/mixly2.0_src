@@ -20,8 +20,10 @@
             "Mixly.Electron.FS",
             "Mixly.Electron.File",
             "Mixly.Electron.LibManager",
+            "Mixly.Electron.Serial",
             "Mixly.Web.FS",
-            "Mixly.Web.File"
+            "Mixly.Web.File",
+            "Mixly.Web.Serial"
         ],
         "provide": [
             "Mixly.App"
@@ -871,6 +873,8 @@
             "path",
             "$.select2",
             "Mixly.Env",
+            "Mixly.Msg",
+            "Mixly.Debug",
             "Mixly.StatusBar",
             "Mixly.SideBarsManager",
             "Mixly.HTMLTemplate",
@@ -1041,6 +1045,15 @@
         ]
     },
     {
+        "path": "/electron/arduino-cli.js",
+        "require": [
+            "Mixly.Electron"
+        ],
+        "provide": [
+            "Mixly.Electron.ArduinoCLI"
+        ]
+    },
+    {
         "path": "/electron/arduino-shell.js",
         "require": [
             "path",
@@ -1058,7 +1071,7 @@
             "Mixly.Nav",
             "Mixly.Workspace",
             "Mixly.EditorMix",
-            "Mixly.Electron.Serial",
+            "Mixly.Serial",
             "Mixly.Electron.Shell"
         ],
         "provide": [
@@ -1077,7 +1090,8 @@
             "Mixly.Msg",
             "Mixly.Nav",
             "Mixly.Workspace",
-            "Mixly.Electron.Serial"
+            "Mixly.Serial",
+            "Mixly.Debug"
         ],
         "provide": [
             "Mixly.Electron.BU"
@@ -1222,7 +1236,9 @@
     {
         "path": "/electron/serial.js",
         "require": [
+            "layui",
             "Mixly.Serial",
+            "Mixly.Env",
             "Mixly.Electron"
         ],
         "provide": [

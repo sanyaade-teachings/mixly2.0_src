@@ -6,6 +6,12 @@ goog.provide('Mixly.Serial');
 const { Events } = Mixly;
 
 class Serial {
+    static {
+        this.getSelectedPortName = function () {
+            return $('#ports-type').val();
+        }
+    }
+
     #buffer_ = [];
     #bufferLength_ = 0;
     #encoder_ = new TextEncoder();
@@ -94,15 +100,19 @@ class Serial {
         this.#bufferLength_ = 0;
     }
 
-    open() {}
+    open() {
+        this.#isOpened_ = true;
+    }
 
-    close() {}
+    close() {
+        this.#isOpened_ = false;
+    }
 
     toggle() {
         if (this.isOpened()) {
-            this.close();
+            return this.close();
         } else {
-            this.open();
+            return this.open();
         }
     }
 
@@ -163,6 +173,7 @@ class Serial {
     }
 
     onError(error) {
+        this.#isOpened_ = false;
         this.#events_.run('onError', error);
     }
 

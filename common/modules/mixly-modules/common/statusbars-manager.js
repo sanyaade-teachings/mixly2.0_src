@@ -89,6 +89,7 @@ class StatusBarsManager extends PagesManager {
         this.#$btn_ = $tab.find('.operation > button');
         this.addEventsType(['show', 'hide', 'onSelectMenu', 'getMenu']);
         this.#addMenuBtn_();
+        this.#addEventsListener_();
         StatusBarsManager.add(this);
     }
 
@@ -256,6 +257,19 @@ class StatusBarsManager extends PagesManager {
             return menus[0];
         }
         return { list: [], empty: Msg.Lang['无选项'] };
+    }
+
+    #addEventsListener_() {
+        this.bind('getMenu', () => {
+            return StatusBarSerial.getMenu();
+        });
+
+        this.bind('onSelectMenu', (port) => {
+            this.add('serial', port);
+            this.changeTo(port);
+            const statusBarSerial = this.getStatusBarById(port);
+            statusBarSerial.open();
+        });
     }
 
     dispose() {

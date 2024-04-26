@@ -18,8 +18,11 @@ goog.require('Mixly.Electron.Loader');
 goog.require('Mixly.Electron.FS');
 goog.require('Mixly.Electron.File');
 goog.require('Mixly.Electron.LibManager');
+goog.require('Mixly.Electron.Serial');
 goog.require('Mixly.Web.FS');
 goog.require('Mixly.Web.File');
+goog.require('Mixly.Web.Serial');
+
 goog.provide('Mixly.App');
 
 const {
@@ -38,9 +41,14 @@ const {
     Web = {},
     Component
 } = Mixly;
+
 const { Loader } = Electron;
+
 const { FS, File, LibManager } = goog.isElectron? Electron : Web;
+
 const { BOARD } = Config;
+
+const { Serial } = goog.isElectron ? Electron : Web;
 
 const { layer } = layui;
 
@@ -80,6 +88,7 @@ class App extends Component {
         this.#addEventsListenerForWorkspace_();
         this.#addObserver_();
         Mixly.mainStatusBarTabs = this.#workspace_.getStatusBarsManager();
+        Serial.refreshPorts();
     }
 
     #addEventsListenerForNav_() {

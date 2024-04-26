@@ -15,7 +15,7 @@ goog.require('Mixly.MString');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.EditorMix');
-goog.require('Mixly.Electron.Serial');
+goog.require('Mixly.Serial');
 goog.require('Mixly.Electron.Shell');
 goog.provide('Mixly.Electron.ArduShell');
 
@@ -32,6 +32,7 @@ const {
     Nav,
     Workspace,
     EditorMix,
+    Serial,
     Config
 } = Mixly;
 
@@ -46,7 +47,6 @@ const iconv_lite = Mixly.require('iconv-lite');
 
 const { 
     ArduShell,
-    Serial,
     Shell
 } = Electron;
 
@@ -242,6 +242,7 @@ ArduShell.compile = (doFunc = () => {}) => {
 * @return void
 */
 ArduShell.initUpload = () => {
+    const { mainStatusBarTabs } = Mixly;
     ArduShell.compiling = false;
     ArduShell.uploading = true;
     const boardType = Boards.getSelectedBoardCommandParam();
@@ -255,9 +256,14 @@ ArduShell.initUpload = () => {
         break;
     }
     if (port) {
-        Serial.portClose(port, () => {
+        const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+        if (statusBarSerial) {
+            statusBarSerial.getSerial().close().finally(() => {
+                ArduShell.upload(boardType, port);
+            });
+        } else {
             ArduShell.upload(boardType, port);
-        });
+        }
     } else {
         layer.msg(Msg.Lang["无可用设备"], {
             time: 1000
@@ -355,19 +361,10 @@ ArduShell.upload = (boardType, port) => {
     }
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {
-            const code = MFile.getCode();
-            mainStatusBarTabs.show();
-            const portObj = Serial.portsOperator[port];
-            if (!portObj) return;
-            const { toolConfig } = portObj;
-            const baudRateList = code.match(/(?<=Serial.begin[\s]*\([\s]*)[0-9]*(?=[\s]*\))/g);
-            if (baudRateList && Serial.BAUDRATES.includes(baudRateList[0]-0)) {
-                toolConfig.baudRates = baudRateList[0]-0;
-            }
-            if (USER.autoOpenPort === 'no') {
-                return;
-            }
-            Serial.connect(port, toolConfig.baudRates);
+            mainStatusBarTabs.add('serial', port);
+            mainStatusBarTabs.changeTo(port);
+            const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+            statusBarSerial.open();
         }
     );
 }

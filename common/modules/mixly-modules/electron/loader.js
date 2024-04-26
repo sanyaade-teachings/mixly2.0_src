@@ -9,12 +9,14 @@ goog.provide('Mixly.Electron.Loader');
 const {
     Url,
     Config,
-    Electron,
-    Env
+    Env,
+    Electron
 } = Mixly;
+
 const { BOARD } = Config;
 
 const { Serial, Loader, File } = Electron;
+
 
 Loader.onbeforeunload = function(reload = false) {
     const pageReload = (href) => {
@@ -25,28 +27,18 @@ Loader.onbeforeunload = function(reload = false) {
         }
     }
     let href = Config.pathPrefix + 'index.html?' + Url.jsonToUrl({ boardType: BOARD.boardType ?? 'None' });
-    Serial?.refreshPortsTimer && clearInterval(Serial?.refreshPortsTimer);
-    const portsObj = Serial?.portsOperator ?? null;
-    if (goog.isElectron && portsObj && typeof portsObj === 'object') {
-        if (Object.keys(portsObj).length) {
-            let portsClosePromise = [];
-            for (let i in portsObj) {
-                const { serialport } = portsObj[i];
-                if (serialport && (serialport.isOpen || serialport.opening))
-                    portsClosePromise.push(Loader.closePort(serialport));
-            }
-            Promise.all(portsClosePromise)
-            .then(() => {
-            })
-            .catch((error) => {
-            })
-            .finally(() => {
-                pageReload(href);
-            });
-            return;
+    let portsClosePromise = [];
+    const { mainStatusBarTabs } = Mixly;
+    Serial.getCurrentPorts().map((port) => {
+        const statusBarSerial = mainStatusBarTabs.getStatusBarById(port.name);
+        if (statusBarSerial) {
+            portsClosePromise.push(statusBarSerial.getSerial().close());
         }
-    }
-    pageReload(href);
+    });
+    Promise.all(portsClosePromise)
+    .finally(() => {
+        pageReload(href);
+    });
 };
 
 Loader.closePort = (serialport) => {

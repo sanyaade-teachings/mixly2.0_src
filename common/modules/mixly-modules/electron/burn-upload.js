@@ -9,7 +9,8 @@ goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Nav');
 goog.require('Mixly.Workspace');
-goog.require('Mixly.Electron.Serial');
+goog.require('Mixly.Serial');
+goog.require('Mixly.Debug');
 goog.provide('Mixly.Electron.BU');
 
 const {
@@ -21,10 +22,12 @@ const {
     MString,
     Msg,
     Nav,
-    Workspace
+    Workspace,
+    Serial,
+    Debug
 } = Mixly;
 
-const { BU, Serial } = Electron;
+const { BU } = Electron;
 const { BOARD, SELECTED_BOARD, USER } = Config;
 
 var downloadShell = null;
@@ -187,11 +190,10 @@ BU.copyFiles = (type, layerNum, startPath, desPath) => {
             if (USER.autoOpenPort === 'no') {
                 return;
             }
-            Serial.connect(Serial.uploadPorts[0].name, null, (opened) => {
-                if (opened) {
-                    Serial.writeCtrlD(Serial.uploadPorts[0].name);
-                }
-            });
+            mainStatusBarTabs.add('serial', port);
+            mainStatusBarTabs.changeTo(port);
+            const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+            statusBarSerial.open();
         }
     })
     .catch((error) => {
@@ -578,18 +580,10 @@ BU.runCmd = function (layerNum, type, port, command, sucFunc) {
             statusBarTerminal.addValue('==' + (type === 'burn' ? Msg.Lang['烧录成功'] : Msg.Lang['上传成功']) + '==\n');
             if (type === 'upload') {
                 mainStatusBarTabs.show();
-                if (USER.autoOpenPort === 'no') {
-                    return;
-                }
-                Serial.connect(port, null, (opened) => {
-                    if (!opened) {
-                        return;
-                    }
-                    setTimeout(() => {
-                        // Serial.clearContent(port);
-                        Serial.writeCtrlD(port);
-                    }, 1000);
-                });
+                mainStatusBarTabs.add('serial', port);
+                mainStatusBarTabs.changeTo(port);
+                const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+                statusBarSerial.open();
             }
         }
     })
@@ -726,7 +720,16 @@ BU.operateWithPort = (type, port, command) => {
             }
         });
     }
-    Serial.portClose(port, operate);
+    const { mainStatusBarTabs } = Mixly;
+    const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
+    if (statusBarSerial) {
+        statusBarSerial.getSerial().close()
+        .finally(() => {
+            operate();
+        });
+    } else {
+        operate();
+    }
 }
 
 /**

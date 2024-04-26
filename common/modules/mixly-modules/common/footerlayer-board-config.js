@@ -119,7 +119,7 @@ class FooterLayerBoardConfig extends FooterLayer {
             if (boardsInfo.optionIsLegal(i, selectedOptions[i])) {
                 id = selectedOptions[i].key;
             }
-            this.$body.find(`[mid=${i}]`).val(id).trigger('change');;
+            this.$body.find(`[mid=${i}]`).val(id).trigger('change');
             boardsInfo.setSelectedOption(i, selectedOptions[i]);
         }
         // 重新计算窗口的位置

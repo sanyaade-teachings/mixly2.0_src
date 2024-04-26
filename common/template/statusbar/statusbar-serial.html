@@ -26,20 +26,73 @@
     div[m-id="{{d.mId}}"] > .send > .box {
         flex-grow: 1;
         height: 100%;
+        font-size: 13px;
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+    }
+
+    div[m-id="{{d.mId}}"] > .send > .box > input {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-style: solid;
+        border-width: 1px;
         padding: 0 5px;
     }
 
-    div[m-id="{{d.mId}}"] > .send > * {
-        border-style: solid;
-        border-width: 1px 1px 1px 0px;
+    div[m-id="{{d.mId}}"] > .send > .box > .setting {
+        position: absolute;
+        right: 0px;
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
     }
 
-    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > * {
+    div[m-id="{{d.mId}}"] > .send > .box > .setting label {
+        height: 18px;
+        font-size: 10px;
+        padding: 2px;
+        margin: auto 5px auto 0px;
+        line-height: 15px;
+        border-radius: 4px;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .box > .setting label {
+        border-color: var(--app-light-color);
+        color: #000;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > .box > .setting label {
+        border-color: var(--app-dark-color);
+        color: #fff;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .box > .setting .btn-check:checked+.btn {
+        background-color: var(--app-light-color);
+        color: #fff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > .box > .setting .btn-check:checked+.btn {
+        background-color: var(--app-dark-color);
+    }
+
+    div[m-id="{{d.mId}}"] > .send > .select2 {
+        border-style: solid;
+        border-width: 1px 1px 1px 0;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > *,
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .box > input,
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send .select2-selection--single {
         border-color: #c9c9c9;
         background-color: #ffffff;
     }
 
-    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > * {
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > *,
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > .box > input,
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send .select2-selection--single {
         border-color: rgba(128, 128, 128, 0.35);
         background-color: #1e1e1e;
     }
@@ -52,15 +105,8 @@
 
     div[m-id="{{d.mId}}"] > .send .select2-selection--single > span {
         height: 23px;
+        line-height: 24px;
     }
-
-    /*div[m-id="{{d.mId}}"] > .send > .box:focus {
-        border-color: var(--app-dark-color);
-    }*/
-
-    /*div[m-id="{{d.mId}}"] > .send > .setting-menu:hover {
-        background-color: var(--app-dark-color);
-    }*/
 
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .setting-menu > option:checked {
       color: white;
@@ -76,11 +122,27 @@
       color: white;
       background-color: var(--app-light-color);
     }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .send > .box > input:focus {
+        border-color: var(--app-light-color) !important;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .send > .box > input:focus {
+        border-color: var(--app-dark-color) !important;
+    }
 </style>
 <div m-id={{ d.mId }}>
     <div class="content"></div>
     <div class="send">
-        <input class="box" type="text" name="title" placeholder="消息 (Enter 发送)" autocomplete="off">
+        <div class="box">
+            <input type="text" name="title" placeholder="消息 (Enter 发送)" autocomplete="off" disabled>
+            <div class="setting">
+                <input type="checkbox" class="btn-check dtr" id="{{ d.mId }}-dtr" autocomplete="off">
+                <label class="btn btn-outline-primary" for="{{ d.mId }}-dtr">DTR</label><br>
+                <input type="checkbox" class="btn-check rts" id="{{ d.mId }}-rts" autocomplete="off">
+                <label class="btn btn-outline-primary" for="{{ d.mId }}-rts">RTS</label><br>
+            </div>
+        </div>
         <select data-id="send-with" class="setting-menu" style="width: 60px;">
             <option value="no">no</option>
             <option value="\n">\n</option>

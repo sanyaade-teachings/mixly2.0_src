@@ -56,7 +56,7 @@ class ContextMenu {
     }
 
     #getMenu_($trigger, e) {
-        const outputs = this.#events_.run('getMenu', $trigger, e);
+        const outputs = this.runEvent('getMenu', $trigger, e);
         if (!outputs.length) {
             return {};
         }
@@ -95,12 +95,16 @@ class ContextMenu {
         this.#events_.addType(eventsType);
     }
 
-    runEvent(eventsType) {
-        this.#events_.run(eventsType);
+    runEvent(eventsType, ...args) {
+        return this.#events_.run(eventsType, ...args);
     }
 
     offEvent(eventsType) {
         this.#events_.off(eventsType);
+    }
+
+    resetEvent() {
+        this.#events_.reset();
     }
 
     register(id, menu) {

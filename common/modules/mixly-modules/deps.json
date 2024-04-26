@@ -129,20 +129,6 @@
         ]
     },
     {
-        "path": "/common/dom-operator.js",
-        "require": [
-            "path",
-            "layui",
-            "Mixly.Config",
-            "Mixly.XML",
-            "Mixly.Env",
-            "Mixly.Msg"
-        ],
-        "provide": [
-            "Mixly.DomOperator"
-        ]
-    },
-    {
         "path": "/common/drag.js",
         "require": [
             "Mixly.Config",
@@ -152,6 +138,16 @@
             "Mixly.Drag",
             "Mixly.DragH",
             "Mixly.DragV"
+        ]
+    },
+    {
+        "path": "/common/dropdown-menu.js",
+        "require": [
+            "tippy",
+            "Mixly.ContextMenu"
+        ],
+        "provide": [
+            "Mixly.DropdownMenu"
         ]
     },
     {
@@ -541,7 +537,6 @@
         "path": "/common/layer-ext.js",
         "require": [
             "layui",
-            "Mixly.DomOperator",
             "Mixly.Config",
             "Mixly.Msg"
         ],
@@ -582,7 +577,8 @@
         "path": "/common/menu.js",
         "require": [
             "Mixly.Debug",
-            "Mixly.IdGenerator"
+            "Mixly.IdGenerator",
+            "Mixly.Events"
         ],
         "provide": [
             "Mixly.Menu"
@@ -924,8 +920,10 @@
             "Mixly.StatusBarSerial",
             "Mixly.PagesManager",
             "Mixly.ContextMenu",
+            "Mixly.DropdownMenu",
             "Mixly.Menu",
-            "Mixly.IdGenerator"
+            "Mixly.IdGenerator",
+            "Mixly.Serial"
         ],
         "provide": [
             "Mixly.StatusBarsManager"

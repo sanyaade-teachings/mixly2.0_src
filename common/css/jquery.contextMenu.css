@@ -324,8 +324,12 @@ html[data-bs-theme=dark] .context-menu-list {
 }
 
 html[data-bs-theme=dark] .context-menu-item {
-  color: #c1c1c1;
+  color: #eee;
   background-color: #252525;
+}
+
+html[data-bs-theme=dark] .context-menu-item.context-menu-disabled {
+  color: #919191;
 }
 
 html[data-bs-theme=dark] .context-menu-item.context-menu-hover {
@@ -337,5 +341,5 @@ html[data-bs-theme=dark] .context-menu-separator {
 }
 
 html[data-bs-theme=dark] .context-menu-submenu:after {
-  border-color: transparent transparent transparent #c1c1c1;
+  border-color: transparent transparent transparent #eee;
 }

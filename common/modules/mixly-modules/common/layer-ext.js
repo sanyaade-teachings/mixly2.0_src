@@ -1,7 +1,6 @@
 goog.loadJs('common', () => {
 
 goog.require('layui');
-goog.require('Mixly.DomOperator');
 goog.require('Mixly.Config');
 goog.require('Mixly.Msg');
 goog.provide('Mixly.LayerExt');
@@ -9,8 +8,7 @@ goog.provide('Mixly.LayerExt');
 const {
     LayerExt,
     Config,
-    Msg,
-    DomOperator
+    Msg
 } = Mixly;
 
 const { BOARD, USER } = Config;
@@ -42,16 +40,6 @@ LayerExt.DEFAULT_CONFIG = {
     maxmin: false,
     zIndex: 19891014
 };
-
-LayerExt.openSerialTool = (toolConfig, sucFunc, endFunc) => {
-    let serialTool = new DomOperator.SerialDom.generate(
-        toolConfig,
-        LayerExt.SHADE_ALL,
-        Msg.nowLang
-    );
-    serialTool.open(sucFunc, endFunc);
-    return serialTool;
-}
 
 LayerExt.open = (toolConfig) => {
     if (typeof toolConfig !== 'object')

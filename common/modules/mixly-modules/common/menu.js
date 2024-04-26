@@ -2,19 +2,24 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.Debug');
 goog.require('Mixly.IdGenerator');
+goog.require('Mixly.Events');
 goog.provide('Mixly.Menu');
 
 const {
     Debug,
-    IdGenerator
+    IdGenerator,
+    Events
 } = Mixly;
 
 class Menu {
     #menuItems_ = [];
     #ids_ = {};
-    constructor(sort) {
+    #isDynamic_ = false;
+    #events_ = new Events(['onRead']);
+    constructor(isDynamic) {
         this.#ids_ = {};
         this.#menuItems_ = [];
+        this.#isDynamic_ = isDynamic;
     }
 
     add(item) {
@@ -64,7 +69,34 @@ class Menu {
     }
 
     getAllItems() {
+        if (this.#isDynamic_) {
+            this.runEvent('onRead');
+        }
         return this.#menuItems_;
+    }
+
+    bind(type, func) {
+        return this.#events_.bind(type, func);
+    }
+
+    unbind(id) {
+        this.#events_.unbind(id);
+    }
+
+    addEventsType(eventsType) {
+        this.#events_.addType(eventsType);
+    }
+
+    runEvent(eventsType, ...args) {
+        return this.#events_.run(eventsType, ...args);
+    }
+
+    offEvent(eventsType) {
+        this.#events_.off(eventsType);
+    }
+
+    resetEvent() {
+        this.#events_.reset();
     }
 }
 

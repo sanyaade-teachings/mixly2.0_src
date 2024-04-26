@@ -24,7 +24,6 @@ const {
     RightSideBarsManager,
     HTMLTemplate,
     PageBase,
-    Regression,
     StatusBarSerialOutput,
     StatusBarSerialChart,
     Electron = {},
@@ -60,8 +59,10 @@ class StatusBarSerial extends PageBase {
     #opened_ = false;
     #valueTemp_ = '';
     #statusTemp_ = false;
-    #$send_ = null;
+    #$sendInput_ = null;
     #$settingMenu_ = null;
+    #$dtr_ = null;
+    #$rts_ = null;
     #manager_ = null;
     #output_ = null;
     #chart_ = null;
@@ -69,13 +70,16 @@ class StatusBarSerial extends PageBase {
     #port_ = '';
     #config_ = {
         baud: 115200,
-        dtr: false,
+        dtr: true,
         rts: false
     };
+    #sendWith_ = '';
+    #dropdownMenu_ = null;
 
     constructor() {
         super();
-        const $content = $(HTMLTemplate.get('statusbar/statusbar-serial.html').render());
+        const template = HTMLTemplate.get('statusbar/statusbar-serial.html');
+        const $content = $(template.render());
         this.setContent($content);
         this.#$settingMenu_ = $content.find('.setting-menu');
         this.#$settingMenu_.select2({
@@ -83,7 +87,10 @@ class StatusBarSerial extends PageBase {
             dropdownAutoWidth: true,
             dropdownCssClass: 'mixly-scrollbar'
         });
-        this.#$send_ = $content.find('.send');
+        this.id = template.getId();
+        this.#$sendInput_ = $content.find('.send > .box > input');
+        this.#$dtr_ = $content.find('.dtr');
+        this.#$rts_ = $content.find('.rts');
         this.#manager_ = new RightSideBarsManager($content.find('.content')[0]);
         this.#manager_.add('serial_output', 'serial_output', '监视器');
         this.#manager_.add('serial_chart', 'serial_chart', '绘图器');
@@ -97,11 +104,15 @@ class StatusBarSerial extends PageBase {
         this.#serial_.bind('onOpen', () => {
             this.setStatus(true);
             this.setValue(`==串口${this.getPort()}开启==\n`);
+            this.#$sendInput_.attr('disabled', false);
+            this.#serial_.config(this.#config_).catch(Debug.error);
         });
 
         this.#serial_.bind('onClose', () => {
             this.setStatus(false);
             this.addValue(`\n==串口${this.getPort()}关闭==`);
+            this.#$sendInput_.val('');
+            this.#$sendInput_.attr('disabled', true);
         });
 
         this.#serial_.bind('onError', (error) => {
@@ -117,13 +128,64 @@ class StatusBarSerial extends PageBase {
             const { data } = event.params;
             if (id === 'baud') {
                 const baud = data.id - 0;
-                this.getSerial().setBaudRate(baud)
+                if (!this.isOpened) {
+                    this.#config_.baud = baud;
+                    return;
+                }
+                this.#serial_.setBaudRate(baud)
                 .then(() => {
                     this.#config_.baud = baud;
                 })
                 .catch((error) => {
                     this.#$settingMenu_.filter('[data-id="baud"]').val(data).trigger('change');
                 });
+            } else if (id === 'send-with') {
+                if (data.id === 'no') {
+                    this.#sendWith_ = '';
+                } else {
+                    this.#sendWith_ = data.id.replace('\\r', '\r').replace('\\n', '\n');
+                }
+            }
+        });
+
+        this.#$sendInput_.keydown((event) => {
+            if (event.keyCode !== 13) {
+                return;
+            }
+            const data = this.#$sendInput_.val() + this.#sendWith_;
+            this.#serial_.sendString(data).catch(Debug.error);
+            this.#$sendInput_.val('');
+        });
+
+        this.#$dtr_.change((event) => {
+            let dtr = false;
+            if (this.#$dtr_.prop('checked')) {
+                dtr = true;
+            }
+            if (this.isOpened()) {
+                this.#serial_.setDTR(dtr)
+                .then(() => {
+                    this.#config_.dtr = dtr;
+                })
+                .catch(Debug.error);
+            } else {
+                this.#config_.dtr = dtr;
+            }
+        });
+
+        this.#$rts_.change((event) => {
+            let rts = false;
+            if (this.#$rts_.prop('checked')) {
+                rts = true;
+            }
+            if (this.isOpened()) {
+                this.#serial_.setRTS(rts)
+                .then(() => {
+                    this.#config_.rts = rts;
+                })
+                .catch(Debug.error);
+            } else {
+                this.#config_.rts = rts;
             }
         });
     }
@@ -145,6 +207,8 @@ class StatusBarSerial extends PageBase {
         }
         this.setValue(this.#valueTemp_);
         this.#$settingMenu_.filter('[data-id="baud"]').val(this.#config_.baud).trigger('change');
+        this.#$dtr_.prop('checked', this.#config_.dtr);
+        this.#$rts_.prop('checked', this.#config_.rts);
     }
 
     open() {

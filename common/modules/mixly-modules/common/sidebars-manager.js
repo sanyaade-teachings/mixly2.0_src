@@ -23,7 +23,8 @@ const {
     SideBarLocalStorage,
     SideBarLibs,
     PagesManager,
-    IdGenerator
+    IdGenerator,
+    Boards
 } = Mixly;
 
 class SideBarsManager extends PagesManager {

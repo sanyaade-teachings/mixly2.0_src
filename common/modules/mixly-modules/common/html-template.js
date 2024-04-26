@@ -31,17 +31,17 @@ class HTMLTemplate {
         }
     }
 
-    #style = null;
-    #html = null;
+    #style_ = null;
+    #html_ = null;
+    #regexStyle_ = /(?<=<style>)[\s\S]*?(?=<\/style>)/gm;
+    #regexHTML_ = /<style>[\s\S]*?<\/style>/gm;
     constructor(template) {
         this.id = IdGenerator.generate();
-        const regexStyle = /(?<=<style>)[\s\S]*?(?=<\/style>)/gm;
-        const regexHTML = /<style>[\s\S]*?<\/style>/gm;
-        this.#style = XML.render((template.match(regexStyle) || []).join('\n'), {
+        this.#style_ = XML.render((template.match(this.#regexStyle_) || []).join('\n'), {
             mId: this.id
         });
-        this.#html = template.replace(regexHTML, '');
-        if (this.#style) {
+        this.#html_ = template.replace(this.#regexHTML_, '');
+        if (this.#style_) {
         	this.addCSS();
         }
     }
@@ -50,7 +50,7 @@ class HTMLTemplate {
         if (!config.mId) {
             config.mId = this.id;
         }
-        return XML.render(this.#html, config);
+        return XML.render(this.#html_, config);
     }
 
     addCSS() {
@@ -60,8 +60,12 @@ class HTMLTemplate {
         }
         let $style = $('<style></style>');
         $style.attr('style-id', this.id);
-        $style.attr('type', 'text/css').html(this.#style);
+        $style.attr('type', 'text/css').html(this.#style_);
         $('head').append($style);
+    }
+
+    getId() {
+        return this.id;
     }
 }
 

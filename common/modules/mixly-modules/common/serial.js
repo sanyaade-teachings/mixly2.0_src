@@ -182,15 +182,10 @@ class Serial {
     }
 
     config(info) {
-        if (typeof info !== Object) {
-            return;
-        }
-        this.#baud_ = info.baud;
-        this.setBaudRate(this.#baud_);
-        this.#dtr_ = info.dtr;
-        this.setDTR(this.#dtr_);
-        this.#rts_ = info.rts;
-        this.setDTR(this.#rts_);
+        return Promise.all([
+            this.setBaudRate(info.baud),
+            this.setDTRAndRTS(info.dtr, info.rts)
+        ]);
     }
 
     bind(type, func) {

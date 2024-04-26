@@ -149,9 +149,8 @@ class ElectronSerial extends Serial {
             this.#parserBytes_ = this.#serialport_.pipe(new ByteLengthParser({ length: 1 }));
             this.#serialport_.open((error) => {
                 if (error) {
-                    reject(error);
                     this.onError(error);
-                    // this.onClose(1);
+                    reject(error);
                 } else {
                     resolve();
                 }
@@ -183,8 +182,24 @@ class ElectronSerial extends Serial {
                 resolve();
                 return;
             }
-            super.setBaudRate(baud);
-            this.#serialport_.update({ baudRate: baud - 0 }, error => {
+            this.#serialport_.update({ baudRate: baud - 0 }, (error) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    super.setBaudRate(baud);
+                    resolve();
+                }
+            });
+        });
+    }
+
+    send(data) {
+        return new Promise((resolve, reject) => {
+            if (!this.isOpened()) {
+                resolve();
+                return;
+            }
+            this.#serialport_.write(data, (error) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -192,6 +207,39 @@ class ElectronSerial extends Serial {
                 }
             });
         });
+    }
+
+    sendString(str) {
+        return this.send(str);
+    }
+
+    sendBuffer(buffer) {
+        return this.send(buffer);
+    }
+
+    setDTRAndRTS(dtr, rts) {
+        return new Promise((resolve, reject) => {
+            if (!this.isOpened()) {
+                resolve();
+                return;
+            }
+            this.#serialport_.set({ dtr, rts }, (error) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    super.setDTRAndRTS(dtr, rts);
+                    resolve();
+                }
+            });
+        });
+    }
+
+    setDTR(dtr) {
+        return this.setDTRAndRTS(dtr, this.getRTS());
+    }
+
+    setRTS(rts) {
+        return this.setDTRAndRTS(this.getDTR(), rts);
     }
 }
 

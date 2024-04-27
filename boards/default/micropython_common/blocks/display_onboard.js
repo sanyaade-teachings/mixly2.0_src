@@ -25,6 +25,29 @@ Blockly.Blocks.display_show_image = {
   }
 };
 
+Blockly.Blocks.display_image_builtins ={
+    init:function(){
+    this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+    var version = Mixly.Boards.getSelectedBoardKey().split(':')[2];
+    this.appendDummyInput("")
+        .appendField(Blockly.Msg.MIXLY_MICROBIT_Built_in_image1);
+    if(version=='mixgo' || version == 'mixgo_cc'){
+      this.appendDummyInput("")
+          .appendField(new Blockly.FieldDropdown(profile.default.builtins), 'PIN');      
+    }
+    else if(version=='mixgo_pe'||version == 'mixgo_ce'||version == 'feiyi'||version == 'mixbot'||version == 'mixgo_me'){
+      this.appendDummyInput("")
+          .appendField(new Blockly.FieldDropdown(profile.default.builtins_all), 'PIN');      
+    } 
+    else{ 
+      this.appendDummyInput("")
+          .appendField(new Blockly.FieldDropdown(profile.default.pbm_image), 'PIN');
+    }
+    this.setOutput(true);
+    this.setInputsInline(true);
+  }
+};
+
  Blockly.Blocks.display_show_image_or_string_delay = {
   init: function() {
     this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
@@ -121,45 +144,45 @@ Blockly.Blocks['display_image_create']= {
   }
 };
 
-Blockly.Blocks['display_image_builtins'] = {
-  init : function () {
-    this.jsonInit({
-      "colour" : Blockly.Msg['DISPLAY_ONBOARD_HUE'],
-      "args0" : [{
-          "name" : "image",
-          "options" : [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"]
-         // ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
-          ],
-          "type" : "field_dropdown"
-        }
-      ],
-      "output" : ["esp32_image", "List"],
-      "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/image.html#attributes",
-      "tooltip" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image1,
-      "message0" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image
-    });
-  }
-};
+// Blockly.Blocks['display_image_builtins'] = {
+//   init : function () {
+//     this.jsonInit({
+//       "colour" : Blockly.Msg['DISPLAY_ONBOARD_HUE'],
+//       "args0" : [{
+//           "name" : "image",
+//           "options" : [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"]
+//          // ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
+//           ],
+//           "type" : "field_dropdown"
+//         }
+//       ],
+//       "output" : ["esp32_image", "List"],
+//       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/image.html#attributes",
+//       "tooltip" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image1,
+//       "message0" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image
+//     });
+//   }
+// };
 
-Blockly.Blocks['display_image_builtins_all'] = {
-  init : function () {
-    this.jsonInit({
-      "colour" : Blockly.Msg['DISPLAY_ONBOARD_HUE'],
-      "args0" : [{
-          "name" : "image",
-          "options" : [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"]
-          ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
-          ],
-          "type" : "field_dropdown"
-        }
-      ],
-      "output" : ["esp32_image", "List"],
-      "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/image.html#attributes",
-      "tooltip" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image1,
-      "message0" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image
-    });
-  }
-};
+// Blockly.Blocks['display_image_builtins_all'] = {
+//   init : function () {
+//     this.jsonInit({
+//       "colour" : Blockly.Msg['DISPLAY_ONBOARD_HUE'],
+//       "args0" : [{
+//           "name" : "image",
+//           "options" : [["HEART", "HEART"],["HEART_SMALL", "HEART_SMALL"],["HAPPY", "HAPPY"],["SAD", "SAD"],["SMILE", "SMILE"],["SILLY", "SILLY"],["FABULOUS", "FABULOUS"],["SURPRISED", "SURPRISED"],["ASLEEP", "ASLEEP"],["ANGRY", "ANGRY"],["CONFUSED", "CONFUSED"],["NO", "NO"],["YES", "YES"]
+//           ,["LEFT_ARROW", "LEFT_ARROW"],["RIGHT_ARROW", "RIGHT_ARROW"],["DRESS", "DRESS"],["TRANSFORMERS", "TRANSFORMERS"],["SCISSORS", "SCISSORS"],["EXIT", "EXIT"],["TREE", "TREE"],["PACMAN", "PACMAN"],["TARGET", "TARGET"],["TSHIRT", "TSHIRT"],["ROLLERSKATE", "ROLLERSKATE"],["DUCK", "DUCK"],["HOUSE", "HOUSE"],["TORTOISE", "TORTOISE"],["BUTTERFLY", "BUTTERFLY"],["STICKFIGURE", "STICKFIGURE"],["GHOST", "GHOST"],["PITCHFORK", "PITCHFORK"],["MUSIC_QUAVERS", "MUSIC_QUAVERS"],["MUSIC_QUAVER", "MUSIC_QUAVER"],["MUSIC_CROTCHET", "MUSIC_CROTCHET"],["COW", "COW"],["RABBIT", "RABBIT"],["SQUARE_SMALL", "SQUARE_SMALL"],["SQUARE", "SQUARE"],["DIAMOND_SMALL", "DIAMOND_SMALL"],["DIAMOND", "DIAMOND"],["CHESSBOARD", "CHESSBOARD"],["TRIANGLE_LEFT", "TRIANGLE_LEFT"],["TRIANGLE", "TRIANGLE"],["SNAKE", "SNAKE"],["UMBRELLA", "UMBRELLA"],["SKULL", "SKULL"],["GIRAFFE", "GIRAFFE"],["SWORD", "SWORD"]
+//           ],
+//           "type" : "field_dropdown"
+//         }
+//       ],
+//       "output" : ["esp32_image", "List"],
+//       "helpUrl" : "https://microbit-micropython.readthedocs.io/en/latest/image.html#attributes",
+//       "tooltip" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image1,
+//       "message0" : Blockly.Msg.MIXLY_MICROBIT_Built_in_image
+//     });
+//   }
+// };
 
 Blockly.Blocks['image_arithmetic'] = {
   init: function() {
@@ -667,130 +690,130 @@ Blockly.Blocks['mpython_display_line'] = {
   }
 };
 
-Blockly.Blocks['mpython_pbm_image'] = {
-  init: function () {
-    this.jsonInit({
-      "colour": Blockly.Msg['DISPLAY_ONBOARD_HUE'],
-      "args0": [
-        {
-          "type": "field_label",
-          "name": "size_image",
-          "text": Blockly.Msg.MIXLY_MICROBIT_Built_in_image1
-        },
+// Blockly.Blocks['mpython_pbm_image'] = {
+//   init: function () {
+//     this.jsonInit({
+//       "colour": Blockly.Msg['DISPLAY_ONBOARD_HUE'],
+//       "args0": [
+//         {
+//           "type": "field_label",
+//           "name": "size_image",
+//           "text": Blockly.Msg.MIXLY_MICROBIT_Built_in_image1
+//         },
        
-        {
-          "name": "path",
-          "options": [
-            ["Heart","Heart"],
-            ["Angry","Angry"],
-            ["Bored","Bored"],
-            ["Confused","Confused"],
-            ["Happy","Happy"],            
-            ["Paper","Paper"],
-            ["Rock","Rock"],
-            ["Sad","Sad"],
-            ["Scissors","Scissors"],
-            ["Silly","Silly"],
-            ["Sleep","Sleep"],
-            ["Small_heart","Small_heart"],
-            ["Small_paper","Small_paper"],
-            ["Small_rock","Small_rock"],
-            ["Small_scissors","Small_scissors"],
-            ["Smile","Smile"],
-            ["Surprise","Surprise"],
-            ["Wonderful","Wonderful"],
-            ["Eyes_Angry","Eyes_Angry"],
-            ["Awake","Awake"],
-            ["Black_eye","Black_eye"],
-            ["Bottom_left","Bottom_left"],
-            ["Bottom_right","Bottom_right"],
-            ["Crazy_1","Crazy_1"],
-            ["Crazy_2","Crazy_2"],
-            ["Disappointed","Disappointed"],
-            ["Dizzy","Dizzy"],
-            ["Down","Down"],
-            ["Evil","Evil"],
-            ["Hurt","Hurt"],
-            ["Knocked_out","Knocked_out"],
-            ["Love","Love"],
-            ["Middle_left","Middle_left"],
-            ["Middle_right","Middle_right"],
-            ["Neutral","Neutral"],
-            ["Nuclear","Nuclear"],
-            ["Pinch_left","Pinch_left"],
-            ["Pinch_middle","Pinch_middle"],
-            ["Pinch_right","Pinch_right"],
-            ["Tear","Tear"],
-            ["Tired_left","Tired_left"],
-            ["Tired_middle","Tired_middle"],
-            ["Tired_right","Tired_right"],
-            ["Toxic","Toxic"],
-            ["Up","Up"],
-            ["Winking","Winking"],
-            ["Accept","Accept"],
-            ["Backward","Backward"],
-            ["Decline","Decline"],
-            ["Forward","Forward"],
-            ["Left","Left"],
-            ["No_go","No_go"],
-            ["Question_mark","Question_mark"],
-            ["Right","Right"],
-            ["Stop_1","Stop_1"],
-            ["Stop_2","Stop_2"],
-            ["Thumbs_down","Thumbs_down"],
-            ["Thumbs_up","Thumbs_up"],
-            ["Warning","Warning"],
-            ["Bomb","Bomb"],
-            ["Boom","Boom"],
-            ["Fire","Fire"],
-            ["Flowers","Flowers"],
-            ["Forest","Forest"],
-            ["Lightning","Lightning"],
-            ["Light_off","Light_off"],
-            ["Light_on","Light_on"],
-            ["Night","Night"],
-            ["Pirate","Pirate"],
-            ["Snow","Snow"],
-            ["Target","Target"],
-            ["Bar_0","Bar_0"],
-            ["Bar_1","Bar_1"],
-            ["Bar_2","Bar_2"],
-            ["Bar_3","Bar_3"],
-            ["Bar_4","Bar_4"],
-            ["Dial_0","Dial_0"],
-            ["Dial_1","Dial_1"],
-            ["Dial_2","Dial_2"],
-            ["Dial_3","Dial_3"],
-            ["Dial_4","Dial_4"],
-            ["Dots_0","Dots_0"],
-            ["Dots_1","Dots_1"],
-            ["Dots_2","Dots_2"],
-            ["Dots_3","Dots_3"],
-            ["Hourglass_0","Hourglass_0"],
-            ["Hourglass_1","Hourglass_1"],
-            ["Hourglass_2","Hourglass_2"],
-            ["Timer_0","Timer_0"],
-            ["Timer_1","Timer_1"],
-            ["Timer_2","Timer_2"],
-            ["Timer_3","Timer_3"],
-            ["Timer_4","Timer_4"],
-            ["Water_level_0","Water_level_0"],
-            ["Water_level_1","Water_level_1"],
-            ["Water_level_2","Water_level_2"],
-            ["Water_level_3","Water_level_3"],
+//         {
+//           "name": "path",
+//           "options": [
+//             ["Heart","Heart"],
+//             ["Angry","Angry"],
+//             ["Bored","Bored"],
+//             ["Confused","Confused"],
+//             ["Happy","Happy"],            
+//             ["Paper","Paper"],
+//             ["Rock","Rock"],
+//             ["Sad","Sad"],
+//             ["Scissors","Scissors"],
+//             ["Silly","Silly"],
+//             ["Sleep","Sleep"],
+//             ["Small_heart","Small_heart"],
+//             ["Small_paper","Small_paper"],
+//             ["Small_rock","Small_rock"],
+//             ["Small_scissors","Small_scissors"],
+//             ["Smile","Smile"],
+//             ["Surprise","Surprise"],
+//             ["Wonderful","Wonderful"],
+//             ["Eyes_Angry","Eyes_Angry"],
+//             ["Awake","Awake"],
+//             ["Black_eye","Black_eye"],
+//             ["Bottom_left","Bottom_left"],
+//             ["Bottom_right","Bottom_right"],
+//             ["Crazy_1","Crazy_1"],
+//             ["Crazy_2","Crazy_2"],
+//             ["Disappointed","Disappointed"],
+//             ["Dizzy","Dizzy"],
+//             ["Down","Down"],
+//             ["Evil","Evil"],
+//             ["Hurt","Hurt"],
+//             ["Knocked_out","Knocked_out"],
+//             ["Love","Love"],
+//             ["Middle_left","Middle_left"],
+//             ["Middle_right","Middle_right"],
+//             ["Neutral","Neutral"],
+//             ["Nuclear","Nuclear"],
+//             ["Pinch_left","Pinch_left"],
+//             ["Pinch_middle","Pinch_middle"],
+//             ["Pinch_right","Pinch_right"],
+//             ["Tear","Tear"],
+//             ["Tired_left","Tired_left"],
+//             ["Tired_middle","Tired_middle"],
+//             ["Tired_right","Tired_right"],
+//             ["Toxic","Toxic"],
+//             ["Up","Up"],
+//             ["Winking","Winking"],
+//             ["Accept","Accept"],
+//             ["Backward","Backward"],
+//             ["Decline","Decline"],
+//             ["Forward","Forward"],
+//             ["Left","Left"],
+//             ["No_go","No_go"],
+//             ["Question_mark","Question_mark"],
+//             ["Right","Right"],
+//             ["Stop_1","Stop_1"],
+//             ["Stop_2","Stop_2"],
+//             ["Thumbs_down","Thumbs_down"],
+//             ["Thumbs_up","Thumbs_up"],
+//             ["Warning","Warning"],
+//             ["Bomb","Bomb"],
+//             ["Boom","Boom"],
+//             ["Fire","Fire"],
+//             ["Flowers","Flowers"],
+//             ["Forest","Forest"],
+//             ["Lightning","Lightning"],
+//             ["Light_off","Light_off"],
+//             ["Light_on","Light_on"],
+//             ["Night","Night"],
+//             ["Pirate","Pirate"],
+//             ["Snow","Snow"],
+//             ["Target","Target"],
+//             ["Bar_0","Bar_0"],
+//             ["Bar_1","Bar_1"],
+//             ["Bar_2","Bar_2"],
+//             ["Bar_3","Bar_3"],
+//             ["Bar_4","Bar_4"],
+//             ["Dial_0","Dial_0"],
+//             ["Dial_1","Dial_1"],
+//             ["Dial_2","Dial_2"],
+//             ["Dial_3","Dial_3"],
+//             ["Dial_4","Dial_4"],
+//             ["Dots_0","Dots_0"],
+//             ["Dots_1","Dots_1"],
+//             ["Dots_2","Dots_2"],
+//             ["Dots_3","Dots_3"],
+//             ["Hourglass_0","Hourglass_0"],
+//             ["Hourglass_1","Hourglass_1"],
+//             ["Hourglass_2","Hourglass_2"],
+//             ["Timer_0","Timer_0"],
+//             ["Timer_1","Timer_1"],
+//             ["Timer_2","Timer_2"],
+//             ["Timer_3","Timer_3"],
+//             ["Timer_4","Timer_4"],
+//             ["Water_level_0","Water_level_0"],
+//             ["Water_level_1","Water_level_1"],
+//             ["Water_level_2","Water_level_2"],
+//             ["Water_level_3","Water_level_3"],
 
 
-          ],
-          "type": "field_dropdown"
-        }
-      ],
-      "output": "String",
-      "helpUrl": '',
-      "tooltip": '',
-      "message0": '%1 %2'
-    });
-  }
-};
+//           ],
+//           "type": "field_dropdown"
+//         }
+//       ],
+//       "output": "String",
+//       "helpUrl": '',
+//       "tooltip": '',
+//       "message0": '%1 %2' 
+//     });
+//   }
+// };
 
 //mixbot onboard_matrix below:
 

@@ -2,6 +2,16 @@
 goog.provide('Blockly.Blocks.pins');
 goog.require('Blockly.Blocks');
 Blockly.Msg['PINS_HUE'] = 230;
+Blockly.Msg['DISPLAY_ONBOARD_HUE'] = '#569A98'
+
+Blockly.Blocks['pins_pbm_image'] = {
+    init: function() {
+        this.setColour(Blockly.Msg['DISPLAY_ONBOARD_HUE']);
+        this.appendDummyInput("")
+            .appendField(new Blockly.FieldDropdown(profile.default.pbm_image), 'PIN');
+        this.setOutput(true, "esp32_image");
+    }
+};
 
 Blockly.Blocks['pins_digital'] = {
    init: function() {

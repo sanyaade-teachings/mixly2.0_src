@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
+goog.require('dayjs');
 goog.require('$.select2');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -61,6 +62,8 @@ class StatusBarSerial extends PageBase {
     #statusTemp_ = false;
     #$sendInput_ = null;
     #$settingMenu_ = null;
+    #$scroll_ = null;
+    #$timestamp_ = null;
     #$dtr_ = null;
     #$rts_ = null;
     #manager_ = null;
@@ -71,10 +74,15 @@ class StatusBarSerial extends PageBase {
     #config_ = {
         baud: 115200,
         dtr: true,
-        rts: false
+        rts: false,
+        sendWith: '\r\n',
+        hex: false
     };
-    #sendWith_ = '';
     #dropdownMenu_ = null;
+    #addTimestamp_ = false;
+    #maxLine_ = 200;
+    #lastUpdate_ = 0;
+    #refreshFrequency_ = 50;
 
     constructor() {
         super();
@@ -89,6 +97,8 @@ class StatusBarSerial extends PageBase {
         });
         this.id = template.getId();
         this.#$sendInput_ = $content.find('.send > .box > input');
+        this.#$scroll_ = $content.find('.scroll');
+        this.#$timestamp_ = $content.find('.timestamp');
         this.#$dtr_ = $content.find('.dtr');
         this.#$rts_ = $content.find('.rts');
         this.#manager_ = new RightSideBarsManager($content.find('.content')[0]);
@@ -98,29 +108,58 @@ class StatusBarSerial extends PageBase {
         this.#output_ = this.#manager_.get('serial_output');
         this.#chart_ = this.#manager_.get('serial_chart');
         this.addEventsType(['reconnect']);
+        const config = Serial.getConfig();
+        this.#config_.dtr = config.dtr;
+        this.#config_.rts = config.rts;
+        this.#config_.baud = config.baudRates;
+        this.#config_.pointNum = config.pointNum;
+        this.#config_.reset = config.ctrlDBtn;
+        this.#config_.interrupt = config.ctrlCBtn;
+        this.#config_.yMax = config.yMax;
+        this.#config_.yMin = config.yMin;
     }
 
     #addEventsListener_() {
+        this.getTab().dblclick(() => this.toggle());
+
         this.#serial_.bind('onOpen', () => {
             this.setStatus(true);
-            this.setValue(`==串口${this.getPort()}开启==\n`);
+            this.#serial_.config(this.#config_);
+            this.setValue(`==串口${this.getPort()}开启==\n`, this.#output_.scrollChecked());
             this.#$sendInput_.attr('disabled', false);
-            this.#serial_.config(this.#config_).catch(Debug.error);
+            if (this.#output_.timestampChecked()) {
+                this.#addTimestamp_ = true;
+            }
         });
 
         this.#serial_.bind('onClose', () => {
             this.setStatus(false);
-            this.addValue(`\n==串口${this.getPort()}关闭==`);
+            this.setValue(`${this.getValue()
+                + this.#valueTemp_}\n==串口${this.getPort()}关闭==`, this.#output_.scrollChecked());
+            this.#valueTemp_ = '';
             this.#$sendInput_.val('');
             this.#$sendInput_.attr('disabled', true);
         });
 
         this.#serial_.bind('onError', (error) => {
-            this.addValue(`${String(error)}\n`);
+            this.setValue(`${this.getValue()
+                + this.#valueTemp_}\n${String(error)}\n`, this.#output_.scrollChecked());
+            this.#valueTemp_ = '';
         });
 
         this.#serial_.bind('onString', (str) => {
-            this.addValue(str);
+            if (this.#output_.timestampChecked()) {
+                if (this.#addTimestamp_) {
+                    const timestamp = dayjs().format('HH:mm:ss.SSS');
+                    this.addValue(`${timestamp} -> `, this.#output_.scrollChecked());
+                }
+                if (str === '\r') {
+                    this.#addTimestamp_ = true;
+                } else {
+                    this.#addTimestamp_ = false;
+                }
+            }
+            this.addValue(str, this.#output_.scrollChecked());
         });
 
         this.#$settingMenu_.on('select2:select', (event) => {
@@ -141,9 +180,9 @@ class StatusBarSerial extends PageBase {
                 });
             } else if (id === 'send-with') {
                 if (data.id === 'no') {
-                    this.#sendWith_ = '';
+                    this.#config_.sendWith = '';
                 } else {
-                    this.#sendWith_ = data.id.replace('\\r', '\r').replace('\\n', '\n');
+                    this.#config_.sendWith = data.id.replace('\\r', '\r').replace('\\n', '\n');
                 }
             }
         });
@@ -152,7 +191,7 @@ class StatusBarSerial extends PageBase {
             if (event.keyCode !== 13) {
                 return;
             }
-            const data = this.#$sendInput_.val() + this.#sendWith_;
+            const data = this.#$sendInput_.val() + this.#config_.sendWith;
             this.#serial_.sendString(data).catch(Debug.error);
             this.#$sendInput_.val('');
         });
@@ -194,25 +233,26 @@ class StatusBarSerial extends PageBase {
         super.init();
         this.addDirty();
         const $tab = this.getTab();
-        this.#port_ = $tab.attr('data-tab-id');
-        this.#serial_ = new Serial(this.getPort());
-        this.#addEventsListener_();
-        $tab.dblclick(() => this.toggle());
         this.#$close_ = $tab.find('.chrome-tab-close');
         this.#$close_.addClass('layui-badge-dot layui-bg-blue');
+        this.#port_ = $tab.attr('data-tab-id');
+        this.#serial_ = new Serial(this.getPort());
+        this.#serial_.config(this.#config_).catch(Debug.error);
+        this.#addEventsListener_();
+        this.setValue(this.#valueTemp_);
+        this.#valueTemp_ = '';
         if (!this.#statusTemp_) {
             this.open();
         } else {
             this.close();
         }
-        this.setValue(this.#valueTemp_);
         this.#$settingMenu_.filter('[data-id="baud"]').val(this.#config_.baud).trigger('change');
         this.#$dtr_.prop('checked', this.#config_.dtr);
         this.#$rts_.prop('checked', this.#config_.rts);
     }
 
     open() {
-        this.#serial_.open().catch(Debug.error);
+        this.#serial_.open(this.#config_.baud).catch(Debug.error);
     }
 
     close() {
@@ -220,7 +260,11 @@ class StatusBarSerial extends PageBase {
     }
 
     toggle() {
-        this.#serial_.toggle().catch(Debug.error);
+        if (this.isOpened()) {
+            this.close();
+        } else {
+            this.open();
+        }
     }
 
     setStatus(isOpened) {
@@ -261,6 +305,14 @@ class StatusBarSerial extends PageBase {
         this.#$close_ = null;
     }
 
+    getValue() {
+        if (!this.isInited()) {
+            return this.#valueTemp_;
+        } else {
+            return this.#output_.getValue();
+        }
+    }
+
     setValue(data, scroll) {
         if (!this.isInited()) {
             this.#valueTemp_ = data;
@@ -269,12 +321,26 @@ class StatusBarSerial extends PageBase {
         this.#output_.setValue(data, scroll);
     }
 
-    addValue(data) {
+    addValue(data, scroll) {
         if (!this.isInited()) {
             this.#valueTemp_ += data;
             return;
         }
-        this.#output_.addValue(data);
+        if (Date.now() - this.#lastUpdate_ < this.#refreshFrequency_) {
+            this.#valueTemp_ += data;
+            return;
+        }
+        this.#output_.addValue(this.#valueTemp_ + data, scroll);
+        this.#valueTemp_ = '';
+        const editor = this.#output_.getEditor();
+        const { selection, session } = editor;
+        const row = session.getLength();
+        if (row > this.#maxLine_) {
+            const initCursor = selection.getCursor();
+            const removedLine = row - this.#maxLine_;
+            session.removeFullLines(0, removedLine);
+        }
+        this.#lastUpdate_ = Date.now();
     }
 
     getManager() {

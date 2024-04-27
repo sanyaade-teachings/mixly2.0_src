@@ -1,0 +1,64 @@
+<style>
+    div[m-id="{{d.mId}}"] {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    div[m-id="{{d.mId}}"] > .setting {
+        position: absolute;
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        top: 5px;
+        right: 5px;
+        width: fit-content;
+        height: 23px;
+        z-index: 1;
+    }
+
+    div[m-id="{{d.mId}}"] > .setting label {
+        height: 18px;
+        font-size: 10px;
+        padding: 2px;
+        margin: auto 5px auto 0px;
+        line-height: 15px;
+        border-radius: 4px;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .setting label {
+        border-color: var(--app-light-color);
+        color: #000;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .setting label {
+        border-color: var(--app-dark-color);
+        color: #fff;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .setting .btn-check:checked+.btn {
+        background-color: var(--app-light-color);
+        color: #fff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .setting .btn-check:checked+.btn {
+        background-color: var(--app-dark-color);
+    }
+
+    div[m-id="{{d.mId}}"] > .body {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<div m-id="{{d.mId}}">
+    <div class="setting">
+        <input type="checkbox" class="btn-check scroll" id="{{ d.mId }}-scroll" autocomplete="off">
+        <label class="btn btn-outline-primary" for="{{ d.mId }}-scroll">滚屏</label><br>
+        <input type="checkbox" class="btn-check timestamp" id="{{ d.mId }}-timestamp" autocomplete="off">
+        <label class="btn btn-outline-primary" for="{{ d.mId }}-timestamp">时间戳</label><br>
+        <input type="checkbox" class="btn-check hex" id="{{ d.mId }}-hex" autocomplete="off">
+        <label class="btn btn-outline-primary" for="{{ d.mId }}-hex">HEX</label><br>
+    </div>
+    <div class="body"></div>
+</div>

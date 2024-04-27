@@ -210,10 +210,6 @@
   white-space: nowrap;
 }
 
-.context-menu-item * {
-  cursor: pointer;
-}
-
 .context-menu-separator {
   padding: 0; 
   margin: .35em 0;

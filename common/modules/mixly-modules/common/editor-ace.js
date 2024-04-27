@@ -82,15 +82,11 @@ class EditorAce extends EditorBase {
         if (this.#destroyed_) {
             return;
         }
-        this.#editor_.updateSelectionMarkers();
-        const { selection, session } = this.#editor_;
-        const initCursor = selection.getCursor();
-        this.scrollToBottom();
-        this.#editor_.insert(data);
+        const { session } = this.#editor_;
+        const endCursor = this.getEndPos();
+        session.insert(endCursor, data);
         if (scroll) {
             this.scrollToBottom();
-        } else {
-            selection.moveCursorTo(initCursor.row, initCursor.column, true);
         }
     }
 

@@ -1,6 +1,7 @@
 goog.loadJs('common', () => {
 
 goog.require('path');
+goog.require('layui');
 goog.require('Mixly.XML');
 goog.require('Mixly.Env');
 goog.require('Mixly.Msg');
@@ -33,6 +34,9 @@ const {
     IdGenerator,
     Serial
 } = Mixly;
+
+const { layer } = layui;
+
 
 class StatusBarsManager extends PagesManager {
     static {
@@ -130,7 +134,14 @@ class StatusBarsManager extends PagesManager {
                 isHtmlName: true,
                 name: ContextMenu.getItem('打开选中串口', ''),
                 callback: (key, opt) => {
-                    this.runEvent('onSelectMenu', Serial.getSelectedPortName());
+                    const port = Serial.getSelectedPortName();
+                    if (port) {
+                        this.runEvent('onSelectMenu', Serial.getSelectedPortName());
+                    } else {
+                        layer.msg(Msg.Lang["无可用设备"], {
+                            time: 1000
+                        });
+                    }
                 }
             }
         });

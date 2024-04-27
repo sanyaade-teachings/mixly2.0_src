@@ -29,6 +29,10 @@ class ElectronSerial extends Serial {
     static {
         this.ports = [];
 
+        this.getConfig = function () {
+            return Serial.getConfig();
+        }
+
         this.getCurrentPorts = function () {
             return this.ports;
         }
@@ -130,16 +134,17 @@ class ElectronSerial extends Serial {
         });
     }
 
-    open() {
+    open(baud) {
         return new Promise((resolve, reject) => {
             if (this.isOpened()) {
                 resolve();
                 return;
             }
+            baud = baud ?? this.getBaudRate();
             super.open();
             this.#serialport_ = new SerialPort({
                 path: this.getPort(),
-                baudRate: this.getBaudRate() - 0,  // 波特率
+                baudRate: baud,  // 波特率
                 dataBits: 8,  // 数据位
                 parity: 'none',  // 奇偶校验
                 stopBits: 1,  // 停止位
@@ -152,6 +157,7 @@ class ElectronSerial extends Serial {
                     this.onError(error);
                     reject(error);
                 } else {
+                    this.setBaudRate(baud);
                     resolve();
                 }
             });
@@ -178,7 +184,7 @@ class ElectronSerial extends Serial {
 
     setBaudRate(baud) {
         return new Promise((resolve, reject) => {
-            if (!this.isOpened()) {
+            if (!this.isOpened() || this.getBaudRate() === baud) {
                 resolve();
                 return;
             }
@@ -219,7 +225,8 @@ class ElectronSerial extends Serial {
 
     setDTRAndRTS(dtr, rts) {
         return new Promise((resolve, reject) => {
-            if (!this.isOpened()) {
+            if (!this.isOpened()
+                || (this.getDTR() === dtr && this.getRTS() === rts)) {
                 resolve();
                 return;
             }

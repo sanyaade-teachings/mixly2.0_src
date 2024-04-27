@@ -1,14 +1,37 @@
 goog.loadJs('common', () => {
 
+goog.require('Mixly.Config');
 goog.require('Mixly.Events');
 goog.provide('Mixly.Serial');
 
-const { Events } = Mixly;
+const { Config, Events } = Mixly;
+
+const { BOARD } = Config;
+
 
 class Serial {
     static {
+        this.DEFAULT_CONFIG = {
+            ctrlCBtn: false,
+            ctrlDBtn: false,
+            baudRates: 9600,
+            yMax: 100,
+            yMin: 0,
+            pointNum: 100,
+            rts: true,
+            dtr: true
+        };
+
         this.getSelectedPortName = function () {
             return $('#ports-type').val();
+        }
+
+        this.getConfig = function () {
+            let config = BOARD?.serial ?? {};
+            return {
+                ...this.DEFAULT_CONFIG,
+                ...config
+            };
         }
     }
 
@@ -100,7 +123,7 @@ class Serial {
         this.#bufferLength_ = 0;
     }
 
-    open() {
+    open(baud) {
         this.#isOpened_ = true;
     }
 

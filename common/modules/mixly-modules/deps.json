@@ -780,6 +780,7 @@
     {
         "path": "/common/serial.js",
         "require": [
+            "Mixly.Config",
             "Mixly.Events"
         ],
         "provide": [
@@ -857,7 +858,11 @@
     {
         "path": "/common/statusbar-serial-output.js",
         "require": [
-            "Mixly.StatusBar"
+            "path",
+            "Mixly.PageBase",
+            "Mixly.StatusBar",
+            "Mixly.Env",
+            "Mixly.HTMLTemplate"
         ],
         "provide": [
             "Mixly.StatusBarSerialOutput"
@@ -867,6 +872,7 @@
         "path": "/common/statusbar-serial.js",
         "require": [
             "path",
+            "dayjs",
             "$.select2",
             "Mixly.Env",
             "Mixly.Msg",
@@ -910,6 +916,7 @@
         "path": "/common/statusbars-manager.js",
         "require": [
             "path",
+            "layui",
             "Mixly.XML",
             "Mixly.Env",
             "Mixly.Msg",
@@ -1040,15 +1047,6 @@
         ],
         "provide": [
             "Mixly.XML"
-        ]
-    },
-    {
-        "path": "/electron/arduino-cli.js",
-        "require": [
-            "Mixly.Electron"
-        ],
-        "provide": [
-            "Mixly.Electron.ArduinoCLI"
         ]
     },
     {

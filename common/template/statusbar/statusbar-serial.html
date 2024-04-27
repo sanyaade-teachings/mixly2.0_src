@@ -21,6 +21,7 @@
         height: 25px;
         display: flex;
         flex-direction: row;
+        z-index: 1;
     }
 
     div[m-id="{{d.mId}}"] > .send > .box {
@@ -135,8 +136,10 @@
     <div class="content"></div>
     <div class="send">
         <div class="box">
-            <input type="text" name="title" placeholder="消息 (Enter 发送)" autocomplete="off" disabled>
+            <input type="text" placeholder="消息 支持发送「字符串 e.g. mixly」和「字节数据 e.g. 00 03」 (Enter 发送)" autocomplete="off" disabled>
             <div class="setting">
+                <input type="checkbox" class="btn-check hex" id="{{ d.mId }}-hex" autocomplete="off">
+                <label class="btn btn-outline-primary" for="{{ d.mId }}-hex">HEX</label><br>
                 <input type="checkbox" class="btn-check dtr" id="{{ d.mId }}-dtr" autocomplete="off">
                 <label class="btn btn-outline-primary" for="{{ d.mId }}-dtr">DTR</label><br>
                 <input type="checkbox" class="btn-check rts" id="{{ d.mId }}-rts" autocomplete="off">

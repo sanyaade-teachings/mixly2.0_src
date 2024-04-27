@@ -200,6 +200,10 @@
         "provide": ["Mustache"],
         "require": []
     }, {
+        "path": "modules/web-modules/dayjs.min.js",
+        "provide": ["dayjs"],
+        "require": []
+    }, {
         "path": "modules/web-modules/jquery/select2.min.js",
         "provide": ["$.select2"],
         "require": ["$"]

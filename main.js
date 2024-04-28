@@ -24,11 +24,13 @@ const usbDetection = require('usb-detection');
 
 usbDetection.startMonitoring();
 usbDetection.on('change', (device) => {
-    sendCommand({
-        obj: 'Mixly.Electron.Serial',
-        func: 'refreshPorts',
-        args: []
-    });
+    setTimeout(() => {
+        sendCommand({
+            obj: 'Mixly.Electron.Serial',
+            func: 'refreshPorts',
+            args: []
+        });
+    }, 1000);
 });
 
 usbDetection.on('remove', (device) => {

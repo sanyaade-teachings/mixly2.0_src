@@ -287,8 +287,8 @@ class EditorAce extends EditorBase {
         if (!range.isEmpty()) {
             const copyText = session.getTextRange(range);
             navigator.clipboard.writeText(copyText)
-            .then((message) => {
-                Debug.log('clipboard：复制成功', message);
+            .then(() => {
+                Debug.log('clipboard：复制成功', copyText);
             }).catch((error) => {
                 Debug.error('clipboard：复制失败', error);
             });
@@ -304,8 +304,8 @@ class EditorAce extends EditorBase {
             return;
         }
         navigator.clipboard.writeText(copyText)
-        .then((message) => {
-            Debug.log('clipboard：复制成功', message);
+        .then(() => {
+            Debug.log('clipboard：复制成功', copyText);
         }).catch((error) => {
             Debug.error('clipboard：复制失败', error);
         });

@@ -5,13 +5,21 @@ goog.require('Mixly.PageBase');
 goog.require('Mixly.StatusBar');
 goog.require('Mixly.Env');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.IdGenerator');
+goog.require('Mixly.ContextMenu');
+goog.require('Mixly.Menu');
+goog.require('Mixly.Msg');
 goog.provide('Mixly.StatusBarSerialOutput');
 
 const {
     PageBase,
     StatusBar,
     Env,
-    HTMLTemplate
+    HTMLTemplate,
+    IdGenerator,
+    ContextMenu,
+    Menu,
+    Msg
 } = Mixly;
 
 
@@ -29,17 +37,37 @@ class StatusBarSerialOutput extends PageBase {
     #scroll_ = true;
     #timestamp_ = false;
     #hex_ = false;
+    #contextMenuId_ = IdGenerator.generate();
+    #contextMenu_ = null;
 
     constructor() {
         super();
         const template = HTMLTemplate.get('statusbar/statusbar-serial-output.html');
         const $content = $(template.render());
+        $content.attr('content-menu-id', this.#contextMenuId_);
         this.setContent($content);
         this.#$scroll_ = $content.find('.scroll');
         this.#$timestamp_ = $content.find('.timestamp');
         this.#$hex_ = $content.find('.hex');
         this.addPage($content.find('.body'), 'editor', new StatusBar());
         this.#addEventsListener_();
+        this.#addContextMenu_();
+    }
+
+    #addContextMenu_() {
+        this.#contextMenu_ = new ContextMenu(`div[content-menu-id="${this.#contextMenuId_}"]`);
+        let menu = new Menu();
+        menu.add({
+            weight: 0,
+            type: 'copy',
+            data: {
+                isHtmlName: true,
+                name: ContextMenu.getItem(Msg.Lang['复制'], 'Ctrl+C'),
+                callback: (key, opt) => this.getPage('editor').copy()
+            }
+        });
+        this.#contextMenu_.register('code', menu);
+        this.#contextMenu_.bind('getMenu', () => 'code');
     }
 
     #addEventsListener_() {
@@ -88,8 +116,20 @@ class StatusBarSerialOutput extends PageBase {
         this.getPage('editor').addValue(data, scroll);
     }
 
+    getPageAce() {
+        return this.getPage('editor');
+    }
+
     getEditor() {
         return this.getPage('editor').getEditor();
+    }
+
+    getContextMenuId() {
+        return this.#contextMenuId_;
+    }
+
+    getContextMenu() {
+        return this.#contextMenu_;
     }
     
     scrollChecked() {
@@ -102,6 +142,12 @@ class StatusBarSerialOutput extends PageBase {
 
     hexChecked() {
         return this.#hex_;
+    }
+
+    dispose() {
+        this.#contextMenu_.dispose();
+        this.#contextMenu_ = null;
+        super.dispose();
     }
 }
 

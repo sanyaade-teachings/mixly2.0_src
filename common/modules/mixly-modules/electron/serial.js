@@ -55,22 +55,20 @@ class ElectronSerial extends Serial {
                         resolve(newPorts);
                     });
                 } else {
-                    setTimeout(() => {
-                        SerialPort.list().then(ports => {
-                            let newPorts = [];
-                            for (let i = 0; i < ports.length; i++) {
-                                let port = ports[i];
-                                newPorts.push({
-                                    vendorId: port.vendorId,
-                                    productId: port.productId,
-                                    name: port.path
-                                });
-                            }
-                            resolve(newPorts);
-                        }).catch(error => {
-                            reject(error);
-                        });
-                    }, 100);
+                    SerialPort.list().then(ports => {
+                        let newPorts = [];
+                        for (let i = 0; i < ports.length; i++) {
+                            let port = ports[i];
+                            newPorts.push({
+                                vendorId: port.vendorId,
+                                productId: port.productId,
+                                name: port.path
+                            });
+                        }
+                        resolve(newPorts);
+                    }).catch(error => {
+                        reject(error);
+                    });
                 }
             });
         }
@@ -247,6 +245,21 @@ class ElectronSerial extends Serial {
 
     setRTS(rts) {
         return this.setDTRAndRTS(this.getDTR(), rts);
+    }
+
+    onBuffer(buffer) {
+        super.onBuffer(buffer);
+        for (let i = 0; i < buffer.length; i++) {
+            super.onByte(buffer[i]);
+        }
+        const string = this.decodeBuffer(buffer);
+        if (!string) {
+            return;
+        }
+        for (let char of string) {
+            super.onChar(char);
+        }
+        super.onString(string);
     }
 }
 

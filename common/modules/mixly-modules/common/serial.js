@@ -44,7 +44,7 @@ class Serial {
     #rts_ = false;
     #isOpened_ = false;
     #port_ = '';
-    #events_ = new Events(['onOpen', 'onClose', 'onError', 'onBuffer', 'onString']);
+    #events_ = new Events(['onOpen', 'onClose', 'onError', 'onBuffer', 'onString', 'onByte', 'onChar']);
     constructor(port) {
         this.#port_ = port;
         this.resetBuffer();
@@ -176,13 +176,28 @@ class Serial {
 
     sendBuffer(buffer) {}
 
+    interrupt() {
+        return this.sendBuffer([3, 13, 10]);
+    }
+
+    reset() {
+        return this.sendBuffer([3, 4]);
+    }
+
     onBuffer(buffer) {
         this.#events_.run('onBuffer', buffer);
-        const data = this.decodeBuffer(buffer);
-        if (!data) {
-            return;
-        }
-        this.#events_.run('onString', data);
+    }
+
+    onString(string) {
+        this.#events_.run('onString', string);
+    }
+
+    onByte(byte) {
+        this.#events_.run('onByte', byte);
+    }
+
+    onChar(char) {
+        this.#events_.run('onChar', char);
     }
 
     onOpen() {

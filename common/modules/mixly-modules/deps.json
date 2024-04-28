@@ -862,7 +862,11 @@
             "Mixly.PageBase",
             "Mixly.StatusBar",
             "Mixly.Env",
-            "Mixly.HTMLTemplate"
+            "Mixly.HTMLTemplate",
+            "Mixly.IdGenerator",
+            "Mixly.ContextMenu",
+            "Mixly.Menu",
+            "Mixly.Msg"
         ],
         "provide": [
             "Mixly.StatusBarSerialOutput"
@@ -881,6 +885,7 @@
             "Mixly.SideBarsManager",
             "Mixly.HTMLTemplate",
             "Mixly.PageBase",
+            "Mixly.ContextMenu",
             "Mixly.StatusBarSerialOutput",
             "Mixly.StatusBarSerialChart",
             "Mixly.Electron.Serial",

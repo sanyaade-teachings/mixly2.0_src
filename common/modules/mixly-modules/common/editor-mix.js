@@ -104,12 +104,12 @@ class EditorMix extends EditorBase {
         const contextMenu = codePage.getContextMenu();
         let codeMenu = contextMenu.getItem('code');
         codeMenu.add({
-            weight: 4,
+            weight: 6,
             type: 'sep2',
             data: '---------'
         });
         codeMenu.add({
-            weight: 5,
+            weight: 7,
             type: 'block',
             data: {
                 isHtmlName: false,

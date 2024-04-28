@@ -83,7 +83,7 @@ class EditorCode extends EditorMonaco {
             data: '---------'
         });
         menu.add({
-            weight: 3,
+            weight: 4,
             type: 'togglecomment',
             data: {
                 isHtmlName: true,
@@ -92,7 +92,7 @@ class EditorCode extends EditorMonaco {
             }
         });
         menu.add({
-            weight: 3,
+            weight: 5,
             type: 'toggleBlockComment',
             data: {
                 isHtmlName: true,

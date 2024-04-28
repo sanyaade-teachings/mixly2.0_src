@@ -239,15 +239,6 @@ Blockly.Blocks['pins_builtinimg'] = {
     }
 };
 
-Blockly.Blocks['pins_pbm_image'] = {
-    init: function() {
-        this.setColour(Blockly.Msg['DISPLAY_HUE']);
-        this.appendDummyInput("")
-            .appendField(new Blockly.FieldDropdown(profile.default.pbm_image), 'PIN');
-        this.setOutput(true, "esp32_image");
-    }
-};
-
 Blockly.Blocks['pins_imglist'] = {
     init: function() {
         this.setColour(Blockly.Msg['PINS_HUE']);

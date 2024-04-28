@@ -77,21 +77,21 @@ Blockly.Python.forBlock['display_scroll_string_delay'] = function() {
      return code;
 }
 
-// Blockly.Python.forBlock['display_image_builtins'] = function(block) {
-//   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-//      Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
-//   var dropdown_image = block.getFieldValue('image');
-//   var code = 'onboard_matrix.' + dropdown_image;
-//   return [code, Blockly.Python.ORDER_ATOMIC];
-// };
+Blockly.Python.forBlock['display_image_builtins'] = function(block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+     Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var dropdown_image = block.getFieldValue('image');
+  var code = 'onboard_matrix.' + dropdown_image;
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
 
-// Blockly.Python.forBlock['display_image_builtins_all'] = function(block) {
-//   var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-//        Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
-//   var dropdown_image = block.getFieldValue('image');
-//   var code = 'onboard_matrix.' + dropdown_image;
-//   return [code, Blockly.Python.ORDER_ATOMIC];
-// };
+Blockly.Python.forBlock['display_image_builtins_all'] = function(block) {
+  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
+       Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
+  var dropdown_image = block.getFieldValue('image');
+  var code = 'onboard_matrix.' + dropdown_image;
+  return [code, Blockly.Python.ORDER_ATOMIC];
+};
 
 
 
@@ -346,28 +346,6 @@ Blockly.Python.forBlock['mixgo_display_image_create_new'] = function(block) {
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.forBlock['display_image_builtins'] = function() {
-  var version = Mixly.Boards.getSelectedBoardKey().split(':')[2]
-  if (version == "mpython") {
-    var pin = this.getFieldValue('PIN');
-    var sort = ['expression_picture','eye_picture','informatio_picture','object_picture','progres_picture']
-    var img = [["Angry","Bored","Confused","Happy","Heart","Paper","Rock","Sad","Scissors","Silly","Sleep","Small_heart","Small_paper","Small_rock","Small_scissors","Smile","Surprise","Wonderful"],["Eyes_Angry","Awake","Black_eye","Bottom_left","Bottom_right","Crazy_1","Crazy_2","Disappointed","Dizzy","Down","Hurt","Evil","Knocked_out","Love","Middle_left","Middle_right","Neutral","Nuclear","Pinch_left","Pinch_middle","Pinch_right","Tear","Tired_middle","Tired_left","Tired_right","Toxic","Up","Winking"],["Accept","Backward","Decline","Forward","Left","No_go","Question_mark","Right","Stop_1","Stop_2","Thumbs_down","Thumbs_up","Warning"],["Bomb","Boom","Fire","Flowers","Forest","Lightning","Light_off","Light_on","Night","Pirate","Snow","Target"],["Bar_0","Bar_1","Bar_2","Bar_3","Bar_4","Dial_0","Dial_1","Dial_2","Dial_3","Dial_4","Dots_0","Dots_1","Dots_2","Dots_3","Hourglass_0","Hourglass_1","Hourglass_2","Timer_0","Timer_1","Timer_2","Timer_3","Timer_4","Water_level_0","Water_level_1","Water_level_2","Water_level_3"]]  
-    for (var i=0;i<5;i++){
-      if(img[i].indexOf(pin)!=-1){
-        var tag = i;
-        break;
-      }
-    }
-    Blockly.Python.definitions_['import_'+sort[tag]+'_'+pin] = "from "+sort[tag]+" import "+pin;
-    var code = pin;
-  }
-  else{
-    Blockly.Python.definitions_['import_'+version+'_onboard_matrix'] = "from "+version+" import onboard_matrix";
-    var dropdown_image = this.getFieldValue('PIN');
-    var code = 'onboard_matrix.' + dropdown_image;  
-  }
-  return [code, Blockly.Python.ORDER_ATOMIC];
-}
 
 //mpython
 

@@ -1846,7 +1846,7 @@
          
     <block type="mixbot_display_image_create" m-show="micropython:esp32:mixbot"></block>
     <block type="bitbot_display_image_create" m-show="micropython:esp32c3:feiyi"></block>
-    <block type="display_image_builtins"></block>
+    <block type="display_image_builtins_all"></block>
     <block type="image_arithmetic">
       <value name="A">
         <shadow type="pins_builtinimg"></shadow>

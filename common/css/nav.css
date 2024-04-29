@@ -40,22 +40,6 @@
     transition: 0s;
 }
 
-html[data-bs-theme=dark] .content {
-    background-color: #181818;
-}
-
-html[data-bs-theme=light] .content {
-    background-color: #fff;
-}
-
-html[data-bs-theme=dark] #table_whole {
-    background-color: #181818 !important;
-}
-
-html[data-bs-theme=light] #table_whole {
-    background-color: #fff;
-}
-
 html[data-bs-theme=light] .layui-layer-tips .layui-layer-content {
     background-color: #f2f2f2;
     color: #000;

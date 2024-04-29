@@ -10,6 +10,7 @@ goog.require('Mixly.Events');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.StatusBarTerminal');
 goog.require('Mixly.StatusBarSerial');
+goog.require('Mixly.StatusBarFSEsptool');
 goog.require('Mixly.PagesManager');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.DropdownMenu');
@@ -27,6 +28,7 @@ const {
     HTMLTemplate,
     StatusBarTerminal,
     StatusBarSerial,
+    StatusBarFSEsptool,
     PagesManager,
     ContextMenu,
     DropdownMenu,
@@ -56,6 +58,7 @@ class StatusBarsManager extends PagesManager {
         this.managersRegistry = new Registry();
         this.typesRegistry.register(['#default', 'terminal'], StatusBarTerminal);
         this.typesRegistry.register(['serial'], StatusBarSerial);
+        this.typesRegistry.register(['filesystem-esptool'], StatusBarFSEsptool);
 
         this.getMain = function() {
             if (!this.managersRegistry.length()) {
@@ -183,9 +186,11 @@ class StatusBarsManager extends PagesManager {
             type: 'esptool-filesystem-tool',
             data: {
                 isHtmlName: true,
-                disabled: true,
-                name: ContextMenu.getItem('ESPTool', '不可用'),
-                callback: (key, opt) => {}
+                name: ContextMenu.getItem('ESPTool', ''),
+                callback: (key, opt) => {
+                    this.add('filesystem-esptool', 'FS-ESPTool');
+                    this.changeTo('ESPTool');
+                }
             }
         });
 
@@ -243,6 +248,10 @@ class StatusBarsManager extends PagesManager {
             const statusBarSerial = this.getStatusBarById(port);
             statusBarSerial.open();
         });
+    }
+
+    getDropdownMenu() {
+        return this.#dropdownMenu_;
     }
 
     dispose() {

@@ -35,10 +35,12 @@
 
 html[data-bs-theme=light] .self-adaption-btn {
     background-color: var(--app-light-color) !important;
+    border-color: var(--app-light-color) !important;
 }
 
 html[data-bs-theme=dark] .self-adaption-btn {
     background-color: var(--app-dark-color) !important;
+    border-color: var(--app-dark-color) !important;
 }
 
 .statusbar-btn {

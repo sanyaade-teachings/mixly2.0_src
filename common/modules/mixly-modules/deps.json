@@ -844,6 +844,18 @@
         ]
     },
     {
+        "path": "/common/statusbar-fs-esptool.js",
+        "require": [
+            "path",
+            "Mixly.Env",
+            "Mixly.PageBase",
+            "Mixly.HTMLTemplate"
+        ],
+        "provide": [
+            "Mixly.StatusBarFSEsptool"
+        ]
+    },
+    {
         "path": "/common/statusbar-serial-chart.js",
         "require": [
             "$.ui",
@@ -930,6 +942,7 @@
             "Mixly.HTMLTemplate",
             "Mixly.StatusBarTerminal",
             "Mixly.StatusBarSerial",
+            "Mixly.StatusBarFSEsptool",
             "Mixly.PagesManager",
             "Mixly.ContextMenu",
             "Mixly.DropdownMenu",

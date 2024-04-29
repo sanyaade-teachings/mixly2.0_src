@@ -19,8 +19,7 @@ class Shell {
         this.ENCODING = Env.currentPlatform == 'win32' ? 'cp936' : 'utf-8';
     }
 
-    constructor(command) {
-        this.command = command;
+    constructor() {
         this.shell = null;
     }
 

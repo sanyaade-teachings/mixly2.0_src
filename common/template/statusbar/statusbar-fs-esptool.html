@@ -14,14 +14,31 @@
         margin: 0px 20px 20px 20px;
     }
 
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] * {
+        background-color: #ffffff;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] * {
+        background-color: #1e1e1e;
+    }
+
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] > .content > .card {
+        box-shadow: 0 0 5px 1px #ddd;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] > .content > .card {
+        box-shadow: 0 0 5px 1px #111;
+    }
+
     div[m-id="{{d.mId}}"] > .content > .card > .card-header {
         padding: 5px 7px;
     }
 
     div[m-id="{{d.mId}}"] > .content > .card > .card-header > .layui-icon {
-        float: right;
         cursor: pointer;
-        padding: 2px 0 0 0;
+        position: absolute;
+        right: 7px;
+        top: 7px;
     }
 
     html[data-bs-theme=light] div[m-id="{{d.mId}}"] input:focus {
@@ -37,9 +54,7 @@
 <div m-id="{{d.mId}}" class="mixly-scrollbar page-item">
     <div class="content">
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <button class="manage-btn btn btn-primary btn-sm self-adaption-btn m-btn" type="button">
-                新增目录
-            </button>
+            <button class="manage-btn btn btn-primary btn-sm self-adaption-btn m-btn" type="button">新建目录</button>
         </div>
     </div>
 <div>

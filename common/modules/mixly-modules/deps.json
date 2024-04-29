@@ -208,15 +208,6 @@
         ]
     },
     {
-        "path": "/common/editor-code-segment.js",
-        "require": [
-            "Mixly.EditorBase"
-        ],
-        "provide": [
-            "Mixly.EditorCodeSegment"
-        ]
-    },
-    {
         "path": "/common/editor-code.js",
         "require": [
             "ace",
@@ -473,6 +464,16 @@
         ],
         "provide": [
             "Mixly.FooterLayer"
+        ]
+    },
+    {
+        "path": "/common/fs-esptool.js",
+        "require": [
+            "Mixly.Serial",
+            "Mixly.Boards"
+        ],
+        "provide": [
+            "Mixly.FSEsptool"
         ]
     },
     {
@@ -849,7 +850,10 @@
             "path",
             "Mixly.Env",
             "Mixly.PageBase",
-            "Mixly.HTMLTemplate"
+            "Mixly.HTMLTemplate",
+            "Mixly.Debug",
+            "Mixly.Electron.FS",
+            "Mixly.Electron.FSEsptool"
         ],
         "provide": [
             "Mixly.StatusBarFSEsptool"
@@ -1192,6 +1196,23 @@
         ],
         "provide": [
             "Mixly.Electron.FooterLayerExample"
+        ]
+    },
+    {
+        "path": "/electron/fs-esptool.js",
+        "require": [
+            "layui",
+            "path",
+            "Mustache",
+            "Mixly.Env",
+            "Mixly.FSEsptool",
+            "Mixly.LayerExt",
+            "Mixly.Debug",
+            "Mixly.Msg",
+            "Mixly.Electron.Shell"
+        ],
+        "provide": [
+            "Mixly.Electron.FSEsptool"
         ]
     },
     {

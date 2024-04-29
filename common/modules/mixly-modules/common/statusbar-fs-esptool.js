@@ -4,13 +4,20 @@ goog.require('path');
 goog.require('Mixly.Env');
 goog.require('Mixly.PageBase');
 goog.require('Mixly.HTMLTemplate');
+goog.require('Mixly.Debug');
+goog.require('Mixly.Electron.FS');
+goog.require('Mixly.Electron.FSEsptool');
 goog.provide('Mixly.StatusBarFSEsptool');
 
 const {
     Env,
     PageBase,
-    HTMLTemplate
+    HTMLTemplate,
+    Debug,
+    Electron = {}
 } = Mixly;
+
+const { FS, FSEsptool } = Electron;
 
 
 class StatusBarFSEsptool extends PageBase {
@@ -27,6 +34,7 @@ class StatusBarFSEsptool extends PageBase {
     }
 
     #$btn_ = null;
+    #fsEsptool_ = null;
 
     constructor() {
         super();
@@ -34,6 +42,7 @@ class StatusBarFSEsptool extends PageBase {
         const $content = $(template.render());
         this.setContent($content);
         this.#$btn_ = $content.find('.manage-btn');
+        this.#fsEsptool_ = new FSEsptool();
         this.#addEventsListener_();
     }
 
@@ -49,6 +58,25 @@ class StatusBarFSEsptool extends PageBase {
         this.#$btn_.parent().before($content);
         $content.find('.close-btn').click(() => {
             $content.remove();
+        });
+
+        $content.find('.folder-btn').click(() => {
+            FS.showDirectoryPicker()
+            .then((folderPath) => {
+                if (!folderPath) {
+                    return;
+                }
+                $content.find('.folder-input').val(path.join(folderPath));
+            })
+            .catch(Debug.error);
+        });
+
+        $content.find('.download-btn').click(() => {
+            this.#fsEsptool_.download($content.find('.folder-input').val());
+        });
+
+        $content.find('.upload-btn').click(() => {
+            this.#fsEsptool_.upload($content.find('.folder-input').val());
         });
     }
 }

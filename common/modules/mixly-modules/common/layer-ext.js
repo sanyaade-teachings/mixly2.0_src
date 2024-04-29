@@ -153,4 +153,8 @@ LayerExt.open = (toolConfig) => {
     });
 }
 
+LayerExt.openProgressLayer = () => {
+
+}
+
 });

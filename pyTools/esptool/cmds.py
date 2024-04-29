@@ -1106,9 +1106,9 @@ def read_flash(esp, args):
 
         def flash_progress(progress, length):
             msg = "%d (%d %%)" % (progress, progress * 100.0 / length)
-            padding = "\b" * len(msg)
-            if progress == length:
-                padding = "\n"
+            # padding = "\b" * len(msg)
+            # if progress == length:
+            padding = "\n"
             sys.stdout.write(msg + padding)
             sys.stdout.flush()
 

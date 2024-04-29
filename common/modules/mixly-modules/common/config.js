@@ -55,6 +55,11 @@ Config.init = () => {
         ...urlConfig
     };
 
+    if (typeof Config.BOARD.board === 'string'
+        && path.extname(Config.BOARD.board) === '.json') {
+        Config.BOARD.board = goog.getJSON(path.join(Env.boardDirPath, Config.BOARD.board));
+    }
+
     let pathPrefix = '../';
 
     Config.SOFTWARE = goog.getJSON(path.join(pathPrefix, 'sw-config.json'), SOFTWARE_DEFAULT_CONFIG);

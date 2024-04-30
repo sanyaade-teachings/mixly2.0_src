@@ -852,6 +852,7 @@
             "Mixly.PageBase",
             "Mixly.HTMLTemplate",
             "Mixly.Debug",
+            "Mixly.Component",
             "Mixly.Electron.FS",
             "Mixly.Electron.FSEsptool"
         ],

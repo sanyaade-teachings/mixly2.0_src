@@ -1,17 +1,47 @@
-<div class="card text-center">
+<style>
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] input:focus,
+    html[data-bs-theme=light] div[m-id="{{d.mId}}"] select:focus {
+        border-color: var(--app-light-color) !important;
+        box-shadow: none;
+    }
+
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] input:focus,
+    html[data-bs-theme=dark] div[m-id="{{d.mId}}"] select:focus {
+        border-color: var(--app-dark-color) !important;
+        box-shadow: none;
+    }
+</style>
+<div m-id="{{d.mId}}" class="card text-center">
     <div class="card-header">
         映射目录
         <i class="close-btn layui-icon layui-icon-close"></i>
     </div>
     <div class="card-body">
-        <div class="input-group flex-nowrap input-group-sm mb-3">
-            <span class="input-group-text" id="addon-wrapping">注释</span>
-            <input class="form-control form-control-sm" type="text" placeholder="注释信息">
-        </div>
-        <div class="input-group flex-nowrap input-group-sm mb-3">
-            <span class="input-group-text" id="addon-wrapping">路径</span>
-            <input class="folder-input form-control form-control-sm" type="text" placeholder="本地映射目录" disabled>
-            <button type="button" class="folder-btn btn btn-primary btn-sm self-adaption-btn m-btn">选择目录</button>
+        <div class="row g-3">
+            <div class="col-sm-3 mb-3">
+                <div class="input-group flex-nowrap input-group-sm">
+                    <span class="input-group-text">文件系统</span>
+                    <select class="fs-type form-select">
+                        <option value="default" selected>跟随板卡配置</option>
+                        <option value="spiffs">spiffs</option>
+                        <option value="fat">fat</option>
+                        <option value="littlefs">littlefs</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <div class="input-group flex-nowrap input-group-sm">
+                    <span class="input-group-text">注释</span>
+                    <input class="form-control form-control-sm" type="text" placeholder="注释信息">
+                </div>
+            </div>
+            <div class="col-sm-5 mb-3">
+                <div class="input-group flex-nowrap input-group-sm">
+                    <span class="input-group-text">路径</span>
+                    <input class="folder-input form-control form-control-sm" type="text" placeholder="本地映射目录" disabled>
+                    <button type="button" class="folder-btn btn btn-primary btn-sm self-adaption-btn m-btn">选择目录</button>
+                </div>
+            </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
             <button class="download-btn btn btn-primary btn-sm self-adaption-btn m-btn" type="button">下载</button>

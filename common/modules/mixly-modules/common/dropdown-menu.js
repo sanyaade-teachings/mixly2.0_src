@@ -7,11 +7,12 @@ goog.provide('Mixly.DropdownMenu');
 const { ContextMenu } = Mixly;
 
 
-class DropdownMenu {
+class DropdownMenu extends ContextMenu {
     #contextMenu_ = null;
     #layer_ = null;
-    constructor(selector, menu, config = {}) {
-        this.#contextMenu_ = new ContextMenu(selector, {
+    #shown_ = false;
+    constructor(selector) {
+        super(selector, {
             trigger: 'none',
             position: (opt) => {
                 opt.$menu.css({
@@ -26,19 +27,16 @@ class DropdownMenu {
                     opt.$menu.detach();
                     $('body > .mixly-drapdown-menu > .tippy-box > .tippy-content').empty().append(opt.$menu);
                     this.#layer_.setProps({});
-                    this.#contextMenu_.shown = true;
+                    this.#shown_ = true;
                 },
                 hide: (opt) => {
-                    this.#contextMenu_.shown = false;
+                    this.#shown_ = false;
                     if (this.#layer_.state.isShown) {
                         this.#layer_.hide();
                     }
                 }
             }
         });
-        
-        this.#contextMenu_.register('menu', menu);
-        this.#contextMenu_.bind('getMenu', () => 'menu');
 
         this.#layer_ = tippy($(selector)[0], {
             allowHTML: true,
@@ -56,14 +54,17 @@ class DropdownMenu {
                 $(instance.popper).addClass('mixly-drapdown-menu');
             },
             onMount: (instance) => {
-                this.#contextMenu_.show();
+                this.show();
             },
             onHide: () => {
-                if (this.#contextMenu_.shown) {
-                    this.#contextMenu_.hide();
-                }
+                this.#shown_ && this.hide();
             }
         });
+    }
+
+    dispose() {
+        super.dispose();
+        this.#layer_.destroy();
     }
 }
 

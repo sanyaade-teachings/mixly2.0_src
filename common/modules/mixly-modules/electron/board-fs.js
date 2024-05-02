@@ -4,16 +4,16 @@ goog.require('layui');
 goog.require('path');
 goog.require('Mustache');
 goog.require('Mixly.Env');
-goog.require('Mixly.FSEsptool');
+goog.require('Mixly.BoardFS');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Msg');
 goog.require('Mixly.Electron.Shell');
-goog.provide('Mixly.Electron.FSEsptool');
+goog.provide('Mixly.Electron.BoardFS');
 
 const {
     Env,
-    FSEsptool,
+    BoardFS,
     LayerExt,
     Debug,
     Msg,
@@ -27,11 +27,11 @@ const fs_extra = Mixly.require('fs-extra');
 const { layer } = layui;
 
 
-class FSEsptoolExt extends FSEsptool {
+class BoardFSExt extends BoardFS {
     static {
         this.UPLOAD_TEMPLATE = '"{{&fsTool}}" -c "{{&usrFolder}}" -b 4096 -p 256 -s {{&size}} "{{&target}}"'
             + ' && '
-            + '"{{&python3}}" "{{&esptool}}" --port {{&port}} --baud 921600 --after no_reset write_flash -z {{&offset}} "{{&target}}"';
+            + '"{{&python3}}" "{{&esptool}}" --port {{&port}} --baud 921600 --before default_reset --after hard_reset write_flash -z {{&offset}} "{{&target}}"';
         this.DOWNLOAD_TEMPLATE = '"{{&python3}}" "{{&esptool}}" --port {{&port}} --baud 921600 --after no_reset read_flash {{&offset}} {{&size}} "{{&target}}"'
             + ' && '
             + '"{{&fsTool}}" -u "{{&usrFolder}}" -b 4096 -p 256 -s {{&size}} "{{&target}}"';
@@ -64,7 +64,7 @@ class FSEsptoolExt extends FSEsptool {
                 const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
                 statusBarTerminal.setValue('');
                 mainStatusBarTabs.changeTo('output');
-                const command = this.#renderTemplate_(FSEsptoolExt.DOWNLOAD_TEMPLATE);
+                const command = this.#renderTemplate_(BoardFSExt.DOWNLOAD_TEMPLATE);
                 this.#shell_.exec(command)
                 .then((info) => {
                     if (info.code) {
@@ -107,7 +107,7 @@ class FSEsptoolExt extends FSEsptool {
                 const statusBarTerminal = mainStatusBarTabs.getStatusBarById('output');
                 statusBarTerminal.setValue('');
                 mainStatusBarTabs.changeTo('output');
-                const command = this.#renderTemplate_(FSEsptoolExt.UPLOAD_TEMPLATE);
+                const command = this.#renderTemplate_(BoardFSExt.UPLOAD_TEMPLATE);
                 this.#shell_.exec(command)
                 .then((info) => {
                     if (info.code) {
@@ -150,6 +150,6 @@ class FSEsptoolExt extends FSEsptool {
     }
 }
 
-Electron.FSEsptool = FSEsptoolExt;
+Electron.BoardFS = BoardFSExt;
 
 });

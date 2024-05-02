@@ -3,6 +3,8 @@ goog.loadJs('electron', () => {
 goog.require('layui');
 goog.require('Mixly.Serial');
 goog.require('Mixly.Env');
+goog.require('Mixly.Nav');
+goog.require('Mixly.Msg');
 goog.require('Mixly.Electron');
 goog.provide('Mixly.Electron.Serial');
 
@@ -19,6 +21,8 @@ const {
 const {
     Serial,
     Env,
+    Nav,
+    Msg,
     Electron
 } = Mixly;
 
@@ -44,13 +48,14 @@ class ElectronSerial extends Serial {
                         let portsName = stdout.split('\n');
                         let newPorts = [];
                         for (let i = 0; i < portsName.length; i++) {
-                            if(portsName[i]) {
-                                newPorts.push({
-                                    vendorId: 'None',
-                                    productId: 'None',
-                                    name: portsName[i]
-                                });
+                            if (!portsName[i]) {
+                                continue;
                             }
+                            newPorts.push({
+                                vendorId: 'None',
+                                productId: 'None',
+                                name: portsName[i]
+                            });
                         }
                         resolve(newPorts);
                     });
@@ -90,20 +95,32 @@ class ElectronSerial extends Serial {
          * @return {void}
          **/
         this.renderSelectBox = function (ports) {
-            const $select = $('#ports-type');
-            const selectedPort = $select.val();
-            $select.empty();
-            ports.map(port => {
-                let $option = $(`<option value="${port.name}">${port.name}</option>`);
-                if (selectedPort === port.name) {
-                    $option.attr('selected', true);
+            const $portSelector = Nav.getMain().getPortSelector();
+            const selectedPort = $portSelector.val();
+            $portSelector.empty();
+            let config = ports.length ? [] : [
+                {
+                    text: Msg.Lang['无可用串口'],
+                    disabled: true
                 }
-                $select.append($option);
-            });
-            form.render('select', 'ports-type-filter');
+            ];
+            if (ports.length) {
+                ports.map(port => {
+                    let newOption = new Option(port.name, port.name);
+                    if (selectedPort === port.name) {
+                        newOption.setAttribute('selected', true);
+                    }
+                    $portSelector.append(newOption);
+                });
+            } else {
+                let newOption = new Option(Msg.Lang['无可用串口']);
+                newOption.setAttribute('disabled', true);
+                $portSelector.append(newOption);
+            }
+            $portSelector.trigger('change');
             let footerStatus = ports.length ? 'inline-flex' : 'none';
             $('#mixly-footer-port-div').css('display', footerStatus);
-            $('#mixly-footer-port').html($select.val());
+            $('#mixly-footer-port').html($portSelector.val());
         }
     }
 

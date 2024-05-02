@@ -9,18 +9,20 @@
             "Mixly.Env",
             "Mixly.Drag",
             "Mixly.Nav",
-            "Mixly.NavEvents",
             "Mixly.Workspace",
             "Mixly.FooterBar",
             "Mixly.HTMLTemplate",
             "Mixly.LayerExt",
             "Mixly.Debug",
             "Mixly.Component",
+            "Mixly.EditorMix",
             "Mixly.Electron.Loader",
             "Mixly.Electron.FS",
             "Mixly.Electron.File",
             "Mixly.Electron.LibManager",
             "Mixly.Electron.Serial",
+            "Mixly.Electron.ArduShell",
+            "Mixly.Electron.BU",
             "Mixly.Web.FS",
             "Mixly.Web.File",
             "Mixly.Web.Serial"
@@ -41,6 +43,16 @@
         ]
     },
     {
+        "path": "/common/board-fs.js",
+        "require": [
+            "Mixly.Serial",
+            "Mixly.Boards"
+        ],
+        "provide": [
+            "Mixly.BoardFS"
+        ]
+    },
+    {
         "path": "/common/boards.js",
         "require": [
             "tippy",
@@ -56,7 +68,8 @@
             "Mixly.BoardConfigItem",
             "Mixly.Profile",
             "Mixly.EditorBlockly",
-            "Mixly.Debug"
+            "Mixly.Debug",
+            "Mixly.Nav"
         ],
         "provide": [
             "Mixly.Boards"
@@ -76,7 +89,8 @@
     {
         "path": "/common/component.js",
         "require": [
-            "Mixly.Events"
+            "Mixly.Events",
+            "Mixly.IdGenerator"
         ],
         "provide": [
             "Mixly.Component"
@@ -412,6 +426,7 @@
             "path",
             "Blockly",
             "layui",
+            "$.select2",
             "Mixly.Env",
             "Mixly.XML",
             "Mixly.Msg",
@@ -464,16 +479,6 @@
         ],
         "provide": [
             "Mixly.FooterLayer"
-        ]
-    },
-    {
-        "path": "/common/fs-esptool.js",
-        "require": [
-            "Mixly.Serial",
-            "Mixly.Boards"
-        ],
-        "provide": [
-            "Mixly.FSEsptool"
         ]
     },
     {
@@ -664,26 +669,17 @@
         ]
     },
     {
-        "path": "/common/nav-events.js",
-        "require": [
-            "layui",
-            "Mixly.LayerExt",
-            "Mixly.Boards"
-        ],
-        "provide": [
-            "Mixly.NavEvents"
-        ]
-    },
-    {
         "path": "/common/nav.js",
         "require": [
             "layui",
+            "$.select2",
             "Mixly.Env",
             "Mixly.Config",
             "Mixly.Command",
             "Mixly.XML",
             "Mixly.Msg",
-            "Mixly.HTMLTemplate"
+            "Mixly.HTMLTemplate",
+            "Mixly.Component"
         ],
         "provide": [
             "Mixly.Nav"
@@ -782,7 +778,8 @@
         "path": "/common/serial.js",
         "require": [
             "Mixly.Config",
-            "Mixly.Events"
+            "Mixly.Events",
+            "Mixly.Nav"
         ],
         "provide": [
             "Mixly.Serial"
@@ -845,19 +842,33 @@
         ]
     },
     {
-        "path": "/common/statusbar-fs-esptool.js",
+        "path": "/common/statusbar-fs.js",
         "require": [
             "path",
+            "layui",
+            "$.select2",
             "Mixly.Env",
             "Mixly.PageBase",
             "Mixly.HTMLTemplate",
             "Mixly.Debug",
             "Mixly.Component",
+            "Mixly.Registry",
+            "Mixly.Serial",
             "Mixly.Electron.FS",
-            "Mixly.Electron.FSEsptool"
+            "Mixly.Electron.BoardFS"
         ],
         "provide": [
-            "Mixly.StatusBarFSEsptool"
+            "Mixly.StatusBarFS"
+        ]
+    },
+    {
+        "path": "/common/statusbar-output.js",
+        "require": [
+            "Mprogress",
+            "Mixly.StatusBar"
+        ],
+        "provide": [
+            "Mixly.StatusBarOutput"
         ]
     },
     {
@@ -913,16 +924,6 @@
         ]
     },
     {
-        "path": "/common/statusbar-terminal.js",
-        "require": [
-            "Mprogress",
-            "Mixly.StatusBar"
-        ],
-        "provide": [
-            "Mixly.StatusBarTerminal"
-        ]
-    },
-    {
         "path": "/common/statusbar.js",
         "require": [
             "Mixly.XML",
@@ -945,9 +946,9 @@
             "Mixly.Registry",
             "Mixly.Events",
             "Mixly.HTMLTemplate",
-            "Mixly.StatusBarTerminal",
+            "Mixly.StatusBarOutput",
             "Mixly.StatusBarSerial",
-            "Mixly.StatusBarFSEsptool",
+            "Mixly.StatusBarFS",
             "Mixly.PagesManager",
             "Mixly.ContextMenu",
             "Mixly.DropdownMenu",
@@ -1087,7 +1088,6 @@
             "Mixly.MArray",
             "Mixly.Msg",
             "Mixly.MString",
-            "Mixly.Nav",
             "Mixly.Workspace",
             "Mixly.EditorMix",
             "Mixly.Serial",
@@ -1095,6 +1095,23 @@
         ],
         "provide": [
             "Mixly.Electron.ArduShell"
+        ]
+    },
+    {
+        "path": "/electron/board-fs.js",
+        "require": [
+            "layui",
+            "path",
+            "Mustache",
+            "Mixly.Env",
+            "Mixly.BoardFS",
+            "Mixly.LayerExt",
+            "Mixly.Debug",
+            "Mixly.Msg",
+            "Mixly.Electron.Shell"
+        ],
+        "provide": [
+            "Mixly.Electron.BoardFS"
         ]
     },
     {
@@ -1107,7 +1124,6 @@
             "Mixly.Boards",
             "Mixly.MString",
             "Mixly.Msg",
-            "Mixly.Nav",
             "Mixly.Workspace",
             "Mixly.Serial",
             "Mixly.Debug"
@@ -1200,23 +1216,6 @@
         ]
     },
     {
-        "path": "/electron/fs-esptool.js",
-        "require": [
-            "layui",
-            "path",
-            "Mustache",
-            "Mixly.Env",
-            "Mixly.FSEsptool",
-            "Mixly.LayerExt",
-            "Mixly.Debug",
-            "Mixly.Msg",
-            "Mixly.Electron.Shell"
-        ],
-        "provide": [
-            "Mixly.Electron.FSEsptool"
-        ]
-    },
-    {
         "path": "/electron/fs.js",
         "require": [
             "path",
@@ -1275,6 +1274,8 @@
             "layui",
             "Mixly.Serial",
             "Mixly.Env",
+            "Mixly.Nav",
+            "Mixly.Msg",
             "Mixly.Electron"
         ],
         "provide": [

@@ -3,6 +3,7 @@ goog.loadJs('common', () => {
 goog.require('path');
 goog.require('Blockly');
 goog.require('layui');
+goog.require('$.select2');
 goog.require('Mixly.Env');
 goog.require('Mixly.XML');
 goog.require('Mixly.Msg');

@@ -497,6 +497,16 @@ class StatusBarSerial extends PageBase {
         super.resize();
         this.getManager().resize();
     }
+
+    onMounted() {
+        super.onMounted();
+        this.#manager_.onMounted();
+    }
+
+    onUnmounted() {
+        this.#manager_.onUnmounted();
+        super.onUnmounted();
+    }
 }
 
 Mixly.StatusBarSerial = StatusBarSerial;

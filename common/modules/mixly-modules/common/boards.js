@@ -14,6 +14,7 @@ goog.require('Mixly.BoardConfigItem');
 goog.require('Mixly.Profile');
 goog.require('Mixly.EditorBlockly');
 goog.require('Mixly.Debug');
+goog.require('Mixly.Nav');
 goog.provide('Mixly.Boards');
 
 const {
@@ -28,6 +29,7 @@ const {
     Profile,
     EditorBlockly,
     Debug,
+    Nav,
     Boards
 } = Mixly;
 
@@ -66,13 +68,15 @@ Boards.init = () => {
     }
     Boards.NAME = Object.keys(Boards.dict);
     const $boards = $('#boards-type');
-    if ($boards.length) {
-        $boards.empty();
-        for (let name of Object.keys(Boards.dict)) {
-            $boards.append(`<option value="${Boards.dict[name].key}">${name}</option>`);
-        }
-        form.render('select', 'boards-type-filter');
+    const $boardSelector = Nav.getMain().getBoardSelector();
+    $boardSelector.empty();
+    for (let name of Object.keys(Boards.dict)) {
+        $boardSelector.append(new Option(name, Boards.dict[name].key));
     }
+    Nav.getMain().bind('changeBoard', (data) => {
+        Boards.changeTo(data.text);
+        Boards.updateCategories(data.text);
+    });
 }
 
 Boards.addLayer = (boardConfigLayer) => {

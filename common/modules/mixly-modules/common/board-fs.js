@@ -2,15 +2,27 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.Serial');
 goog.require('Mixly.Boards');
-goog.provide('Mixly.FSEsptool');
+goog.provide('Mixly.BoardFS');
 
 const {
     Serial,
     Boards
 } = Mixly;
 
+class ESP8266Handler {
+    constructor(boardName, type) {
 
-class FSEsptool {
+    }
+}
+
+class ESP32Handler {
+    constructor(boardName, type) {
+        
+    }
+}
+
+
+class BoardFS {
     static {
         this.ESP32_PARTITIONS = {
             'app3M_fat9M_16MB': {
@@ -117,7 +129,7 @@ class FSEsptool {
         const keys = Boards.getSelectedBoardKey().split(':');
         if (keys[0] === 'esp32') {
             const partitionScheme = Boards.getSelectedBoardConfigParam('PartitionScheme');
-            Object.assign(this.#config_, FSEsptool.ESP32_PARTITIONS[partitionScheme]);
+            Object.assign(this.#config_, BoardFS.ESP32_PARTITIONS[partitionScheme]);
         } else if (keys[0] === 'esp8266') {
 
         }
@@ -129,6 +141,6 @@ class FSEsptool {
     }
 }
 
-Mixly.FSEsptool = FSEsptool;
+Mixly.BoardFS = BoardFS;
 
 });

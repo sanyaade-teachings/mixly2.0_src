@@ -119,6 +119,20 @@ class PagesManager extends Component {
         this.#tabs_.resize();
     }
 
+    onmounted() {
+        super.onmounted();
+        const page = this.getActive();
+        page && page.onmounted();
+        this.#tabs_.onmounted();
+    }
+
+    onUnmounted() {
+        const page = this.getActive();
+        page && page.onUnmounted();
+        this.#tabs_.onUnmounted();
+        super.onUnmounted();
+    }
+
     getActive() {
         return this.get(this.#activeId_);
     }

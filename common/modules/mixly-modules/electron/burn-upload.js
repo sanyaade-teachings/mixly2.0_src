@@ -7,7 +7,6 @@ goog.require('Mixly.Env');
 goog.require('Mixly.Boards');
 goog.require('Mixly.MString');
 goog.require('Mixly.Msg');
-goog.require('Mixly.Nav');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.Serial');
 goog.require('Mixly.Debug');
@@ -21,7 +20,6 @@ const {
     Boards,
     MString,
     Msg,
-    Nav,
     Workspace,
     Serial,
     Debug
@@ -751,32 +749,5 @@ BU.burnWithPort = (port, command) => {
 BU.uploadWithPort = (port, command) => {
     BU.operateWithPort('upload', port, command);
 }
-
-Nav.register({
-    icon: 'icon-upload-1',
-    title: '',
-    id: 'command-burn-btn',
-    displayText: Blockly.Msg.MSG['burn'],
-    preconditionFn: () => {
-        return goog.isElectron && SELECTED_BOARD?.nav?.burn;
-    },
-    callback: () => BU.initBurn(),
-    scopeType: Nav.Scope.LEFT,
-    weight: 3
-});
-
-Nav.register({
-    icon: 'icon-upload',
-    title: '',
-    id: 'command-upload-btn',
-    displayText: Blockly.Msg.MSG['upload'],
-    preconditionFn: () => {
-        const { SELECTED_BOARD } = Config;
-        return goog.isElectron && SELECTED_BOARD?.nav?.upload && !SELECTED_BOARD?.nav?.compile;
-    },
-    callback: () => BU.initUpload(),
-    scopeType: Nav.Scope.LEFT,
-    weight: 5
-});
 
 });

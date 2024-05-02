@@ -12,7 +12,6 @@ goog.require('Mixly.MFile');
 goog.require('Mixly.MArray');
 goog.require('Mixly.Msg');
 goog.require('Mixly.MString');
-goog.require('Mixly.Nav');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.EditorMix');
 goog.require('Mixly.Serial');
@@ -29,7 +28,6 @@ const {
     MArray,
     Msg,
     MString,
-    Nav,
     Workspace,
     EditorMix,
     Serial,
@@ -361,10 +359,10 @@ ArduShell.upload = (boardType, port) => {
     }
     ArduShell.runCmd(layerNum, 'upload', cmdStr,
         function () {
-            mainStatusBarTabs.add('serial', port);
+            /*mainStatusBarTabs.add('serial', port);
             mainStatusBarTabs.changeTo(port);
             const statusBarSerial = mainStatusBarTabs.getStatusBarById(port);
-            statusBarSerial.open();
+            statusBarSerial.open();*/
         }
     );
 }
@@ -656,57 +654,5 @@ ArduShell.uploadWithBinOrHex = function (filePath) {
     ArduShell.binFilePath = filePath;
     ArduShell.initUpload();
 }
-
-Nav.register({
-    icon: 'icon-check',
-    title: '',
-    id: 'arduino-compile-btn',
-    displayText: Blockly.Msg.MSG['compile'],
-    preconditionFn: () => {
-        const { SELECTED_BOARD } = Config;
-        if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile) {
-            return false;
-        }
-        const workspace = Workspace.getMain();
-        const editorsManager = workspace.getEditorsManager();
-        const editor = editorsManager.getActive();
-        if (!editor) {
-            return false;
-        }
-        if (editor instanceof EditorMix) {
-            return true;
-        }
-        return false;
-    },
-    callback: () => ArduShell.initCompile(),
-    scopeType: Nav.Scope.LEFT,
-    weight: 4
-});
-
-Nav.register({
-    icon: 'icon-upload',
-    title: '',
-    id: 'arduino-upload-btn',
-    displayText: Blockly.Msg.MSG['upload'],
-    preconditionFn: () => {
-        const { SELECTED_BOARD } = Config;
-        if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
-            return false;
-        }
-        const workspace = Workspace.getMain();
-        const editorsManager = workspace.getEditorsManager();
-        const editor = editorsManager.getActive();
-        if (!editor) {
-            return false;
-        }
-        if (editor instanceof EditorMix) {
-            return true;
-        }
-        return false;
-    },
-    callback: () => ArduShell.initUpload(),
-    scopeType: Nav.Scope.LEFT,
-    weight: 5
-});
 
 });

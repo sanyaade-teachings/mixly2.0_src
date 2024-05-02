@@ -82,82 +82,12 @@
         cursor: pointer;
     }
 
-    ul[m-id="{{d.mId}}"] .layui-select-title {
-        position: absolute;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-form-selected {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-form-selected .layui-anim {
-        position: relative;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-anim .layui-this:after {
-        width: 0%;
-    }
-
     ul[m-id="{{d.mId}}"] .layui-nav-child {
         top: calc(var(--nav-height) + 1px);
     }
 
-    ul[m-id="{{d.mId}}"] input {
-        height: var(--nav-select-height) !important;
-    }
-
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] input {
-        background-color: #009f90;
-        border-color: #009f90;
-        color: #fff;
-    }
-
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] input:hover,
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] input:focus {
-        border-color: #037a6f !important;
-    }
-
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] input:hover,
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] input:focus {
-        border-color: #1f1f1f !important;
-    }
-
-    ul[m-id="{{d.mId}}"] input::-webkit-input-placeholder,
-    ul[m-id="{{d.mId}}"] input::-webkit-input-placeholder {
-        color: #ddd;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-input {
-        border-radius: 3px;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-form input {
-        height: 24px;
-    }
-
     ul[m-id="{{d.mId}}"] dl {
         z-index: 1001;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-form dl {
-        top: calc(var(--nav-select-height) + (var(--nav-height) - var(--nav-select-height)) / 2);
-        padding: 3px 0;
-    }
-
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-anim > dd > button {
-        border-color: #5a6778;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-anim > dd > button:hover {
-        box-shadow: unset;
-        opacity: .8;
-    }
-
-    ul[m-id="{{d.mId}}"] .layui-anim > dd > button > i {
-        line-height: 12px;
     }
 
     .layui-nav .layui-nav-item a {
@@ -194,6 +124,10 @@
         display: flex;
     }
 
+    ul[m-id="{{d.mId}}"] .dropdown-container > * {
+        margin-left: 5px;
+    }
+
     ul[m-id="{{d.mId}}"] .right-btn-container button {
         padding: 0;
         margin: 2px;
@@ -209,8 +143,7 @@
         font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
     }
 
-    ul[m-id="{{d.mId}}"] .layui-nav-item dd > a,
-    ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd {
+    ul[m-id="{{d.mId}}"] .layui-nav-item dd > a {
         font-size: 14px;
         line-height: 14px;
         border-radius: 5px;
@@ -222,38 +155,23 @@
         font-family: Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif;
     }
 
-    ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-this {
-        color: rgba(255, 255, 255);
-    }
-
     ul[m-id="{{d.mId}}"] .layui-nav-item dd > a {
         transition: none;
         -webkit-transition: none;
     }
 
-    ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
-    ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
+    ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover {
         transition: none;
         -webkit-transition: none;
         color: #fff;
     }
 
-    ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-disabled:hover {
-        background-color: unset !important;
-    }
-
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
+    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover {
         background-color: var(--app-light-color);
     }
 
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover,
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd:hover {
+    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-nav-item dd > a:hover {
         background-color: #2980b9;
-    }
-
-    html[data-bs-theme=light] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-this {
-        background-color: rgb(0 150 136 / 60%) !important;
     }
 
     html[data-bs-theme=light] ul[m-id="{{d.mId}}"] hr {
@@ -261,18 +179,11 @@
         margin: 4px 0;
     }
 
-    html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] .layui-form-select > dl > dd.layui-this {
-        background-color: rgb(41 128 185 / 60%) !important;
-    }
-
     html[data-bs-theme=dark] ul[m-id="{{d.mId}}"] hr {
         border-bottom: 1px solid #fff !important;
         margin: 4px 0;
     }
 
-    ul[m-id="{{d.mId}}"] .layui-form-select > dl {
-        overflow-y: auto;
-    }
 
     ul[m-id="{{d.mId}}"] > .editor-btn-container {
         line-height: 22px;

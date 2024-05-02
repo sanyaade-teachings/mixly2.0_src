@@ -8,9 +8,9 @@ goog.require('Mixly.Msg');
 goog.require('Mixly.Registry');
 goog.require('Mixly.Events');
 goog.require('Mixly.HTMLTemplate');
-goog.require('Mixly.StatusBarTerminal');
+goog.require('Mixly.StatusBarOutput');
 goog.require('Mixly.StatusBarSerial');
-goog.require('Mixly.StatusBarFSEsptool');
+goog.require('Mixly.StatusBarFS');
 goog.require('Mixly.PagesManager');
 goog.require('Mixly.ContextMenu');
 goog.require('Mixly.DropdownMenu');
@@ -26,9 +26,9 @@ const {
     Registry,
     Events,
     HTMLTemplate,
-    StatusBarTerminal,
+    StatusBarOutput,
     StatusBarSerial,
-    StatusBarFSEsptool,
+    StatusBarFS,
     PagesManager,
     ContextMenu,
     DropdownMenu,
@@ -56,9 +56,9 @@ class StatusBarsManager extends PagesManager {
         );
         this.typesRegistry = new Registry();
         this.managersRegistry = new Registry();
-        this.typesRegistry.register(['#default', 'terminal'], StatusBarTerminal);
+        this.typesRegistry.register(['#default', 'terminal'], StatusBarOutput);
         this.typesRegistry.register(['serial'], StatusBarSerial);
-        this.typesRegistry.register(['filesystem-esptool'], StatusBarFSEsptool);
+        this.typesRegistry.register(['filesystem-esptool'], StatusBarFS);
 
         this.getMain = function() {
             if (!this.managersRegistry.length()) {
@@ -129,7 +129,6 @@ class StatusBarsManager extends PagesManager {
         const selector = `div[m-id="${this.tabId}"] .layui-btn`;
         let menu = new Menu();
         let serialChildMenu = new Menu(true);
-        let toolChildMenu = new Menu();
         menu.add({
             weight: 0,
             type: 'serial-default',
@@ -164,31 +163,12 @@ class StatusBarsManager extends PagesManager {
         });
         menu.add({
             weight: 3,
-            type: 'tool',
-            children: toolChildMenu,
+            type: 'filesystem-tool',
             data: {
                 isHtmlName: true,
-                name: ContextMenu.getItem('板卡文件管理', '')
-            }
-        });
-        toolChildMenu.add({
-            weight: 0,
-            type: 'ampy-filesystem-tool',
-            data: {
-                isHtmlName: true,
-                disabled: true,
-                name: ContextMenu.getItem('Ampy', '不可用'),
-                callback: (key, opt) => {}
-            }
-        });
-        toolChildMenu.add({
-            weight: 1,
-            type: 'esptool-filesystem-tool',
-            data: {
-                isHtmlName: true,
-                name: ContextMenu.getItem('ESPTool', ''),
+                name: ContextMenu.getItem('板卡文件管理', ''),
                 callback: (key, opt) => {
-                    this.add('filesystem-esptool', 'FS-ESPTool');
+                    this.add('filesystem-esptool', '板卡文件管理');
                     this.changeTo('ESPTool');
                 }
             }
@@ -222,7 +202,9 @@ class StatusBarsManager extends PagesManager {
                 });
             }
         });
-        this.#dropdownMenu_ = new DropdownMenu(selector, menu);
+        this.#dropdownMenu_ = new DropdownMenu(selector);
+        this.#dropdownMenu_.register('menu', menu);
+        this.#dropdownMenu_.bind('getMenu', () => 'menu');
     }
 
     #onSelectMenu_(event) {

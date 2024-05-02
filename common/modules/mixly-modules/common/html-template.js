@@ -13,6 +13,8 @@ const {
 
 class HTMLTemplate {
     static {
+        this.regexStyle_ = /(?<=<style>)[\s\S]*?(?=<\/style>)/gm;
+        this.regexHTML_ = /<style>[\s\S]*?<\/style>/gm;
         this.templateRegistry = new Registry();
 
         this.add = function(id, htmlTemplate) {
@@ -33,16 +35,14 @@ class HTMLTemplate {
 
     #style_ = null;
     #html_ = null;
-    #regexStyle_ = /(?<=<style>)[\s\S]*?(?=<\/style>)/gm;
-    #regexHTML_ = /<style>[\s\S]*?<\/style>/gm;
     constructor(template) {
         this.id = IdGenerator.generate();
-        this.#style_ = XML.render((template.match(this.#regexStyle_) || []).join('\n'), {
+        this.#style_ = XML.render((template.match(HTMLTemplate.regexStyle_) || []).join('\n'), {
             mId: this.id
         });
-        this.#html_ = template.replace(this.#regexHTML_, '');
+        this.#html_ = template.replace(HTMLTemplate.regexHTML_, '');
         if (this.#style_) {
-        	this.addCSS();
+        	this.#addCss_();
         }
     }
 
@@ -53,7 +53,7 @@ class HTMLTemplate {
         return XML.render(this.#html_, config);
     }
 
-    addCSS() {
+    #addCss_() {
         let hasStyleNode = $('head').find(`style[style-id="${this.id}"]`).length;
         if (hasStyleNode) {
             return;

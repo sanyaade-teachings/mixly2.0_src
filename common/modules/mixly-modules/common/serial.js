@@ -2,9 +2,14 @@ goog.loadJs('common', () => {
 
 goog.require('Mixly.Config');
 goog.require('Mixly.Events');
+goog.require('Mixly.Nav');
 goog.provide('Mixly.Serial');
 
-const { Config, Events } = Mixly;
+const {
+    Config,
+    Events,
+    Nav
+} = Mixly;
 
 const { BOARD } = Config;
 
@@ -23,7 +28,7 @@ class Serial {
         };
 
         this.getSelectedPortName = function () {
-            return $('#ports-type').val();
+            return Nav.getMain().getPortSelector().val();
         }
 
         this.getConfig = function () {

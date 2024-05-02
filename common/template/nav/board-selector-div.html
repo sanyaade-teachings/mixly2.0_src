@@ -1,22 +1,31 @@
-<div tabindex="1"></div>
-<div
-    id="boardSelector-div"
-    class="layui-form mixly-scrollbar"
-    lay-filter="boards-type-filter"
-    style="
-        width: 150px;
-        margin-left: 10px;
-    "
->
-    <div
-        id="boardSelector"
-        class="layui-input-inline"
-        style="
-            position: absolute;
-            width: 150px;
-            top: 3.5px;
-        "
-    >
-        <select id="boards-type" spellcheck="false" lay-filter="boards-type"></select>
-    </div>
-</div>
+<style>
+    .select2-dropdown.mixly-{{d.mId}} {
+        width: 100% !important;
+        transform: translate(calc(-50% + 75px), calc((var(--nav-height) - var(--nav-select-height)) / 2));
+    }
+
+    .select2-dropdown.mixly-{{d.mId}} li {
+        white-space: nowrap !important;
+    }
+
+    html[data-bs-theme=dark] .select2-dropdown.mixly-{{d.mId}} > .select2-search > input {
+        border-color: var(--lay-color-border-1);
+    }
+
+    html[data-bs-theme=dark] .select2-dropdown.mixly-{{d.mId}} > .select2-search > input:focus {
+        border-color: var(--app-dark-color) !important;
+    }
+
+    html[data-bs-theme=dark] select[m-id="{{d.mId}}"] + .select2 > .selection > .select2-selection {
+        background-color: var(--lay-color-fill-2);
+        border-color: var(--lay-color-border-1);
+        border-radius: 3px;
+    }
+
+    body > .select2-container:has(.mixly-{{d.mId}}) {
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        animation-name: layui-upbit;
+    }
+</style>
+<select m-id={{d.mId}} id="boards-type"></select>

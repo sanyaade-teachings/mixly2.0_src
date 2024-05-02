@@ -2,14 +2,11 @@ goog.loadJs('common', () => {
 
 goog.require('Mprogress');
 goog.require('Mixly.StatusBar');
-goog.provide('Mixly.StatusBarTerminal');
+goog.provide('Mixly.StatusBarOutput');
 
-const {
-    StatusBar,
-    Regression
-} = Mixly;
+const { StatusBar } = Mixly;
 
-class StatusBarTerminal extends StatusBar {
+class StatusBarOutput extends StatusBar {
     constructor() {
         super();
     }
@@ -20,6 +17,6 @@ class StatusBarTerminal extends StatusBar {
     }
 }
 
-Mixly.StatusBarTerminal = StatusBarTerminal;
+Mixly.StatusBarOutput = StatusBarOutput;
 
 });

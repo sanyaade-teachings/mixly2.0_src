@@ -1,9 +1,13 @@
 goog.loadJs('common', () => {
 
 goog.require('Mixly.Events');
+goog.require('Mixly.IdGenerator');
 goog.provide('Mixly.Component');
 
-const { Events } = Mixly;
+const {
+    Events,
+    IdGenerator
+} = Mixly;
 
 
 class Component {
@@ -11,7 +15,9 @@ class Component {
     #mounted_ = false;
     #events_ = new Events(['destroyed', 'created']);
 
-    constructor() {}
+    constructor() {
+        this.id = IdGenerator.generate();
+    }
 
     mountOn($container) {
         $container.append(this.getContent());
@@ -42,6 +48,14 @@ class Component {
     }
 
     resize() {}
+
+    getId() {
+        return this.id;
+    }
+
+    setId(id) {
+        this.id = id;
+    }
 
     dispose() {
         this.runEvent('destroyed');

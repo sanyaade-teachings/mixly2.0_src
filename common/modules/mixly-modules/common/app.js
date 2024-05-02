@@ -7,18 +7,20 @@ goog.require('Mixly.Config');
 goog.require('Mixly.Env');
 goog.require('Mixly.Drag');
 goog.require('Mixly.Nav');
-goog.require('Mixly.NavEvents');
 goog.require('Mixly.Workspace');
 goog.require('Mixly.FooterBar');
 goog.require('Mixly.HTMLTemplate');
 goog.require('Mixly.LayerExt');
 goog.require('Mixly.Debug');
 goog.require('Mixly.Component');
+goog.require('Mixly.EditorMix');
 goog.require('Mixly.Electron.Loader');
 goog.require('Mixly.Electron.FS');
 goog.require('Mixly.Electron.File');
 goog.require('Mixly.Electron.LibManager');
 goog.require('Mixly.Electron.Serial');
+goog.require('Mixly.Electron.ArduShell');
+goog.require('Mixly.Electron.BU');
 goog.require('Mixly.Web.FS');
 goog.require('Mixly.Web.File');
 goog.require('Mixly.Web.Serial');
@@ -31,22 +33,28 @@ const {
     Env,
     Drag,
     Nav,
-    NavEvents,
     Workspace,
     FooterBar,
     HTMLTemplate,
     LayerExt,
     Debug,
+    Component,
+    EditorMix,
     Electron = {},
-    Web = {},
-    Component
+    Web = {}
 } = Mixly;
 
 const { Loader } = Electron;
 
-const { FS, File, LibManager } = goog.isElectron? Electron : Web;
+const {
+    FS,
+    File,
+    LibManager,
+    ArduShell,
+    BU
+} = goog.isElectron? Electron : Web;
 
-const { BOARD } = Config;
+const { BOARD, SELECTED_BOARD } = Config;
 
 const { Serial } = goog.isElectron ? Electron : Web;
 
@@ -73,7 +81,8 @@ class App extends Component {
         const $content = $(HTMLTemplate.get('app.html').render());
         this.setContent($content);
         this.mountOn($(element));
-        Nav.init($content.find('.mixly-nav')[0]);
+        this.#nav_ = new Nav();
+        this.#nav_.mountOn($content.find('.mixly-nav'));
         this.#workspace_ = new Workspace($content.find('.mixly-workspace')[0]);
         this.#workspace_.getEditorsManager().getTabs().addTab({
             name: 'Untitled-1.mix',
@@ -81,7 +90,7 @@ class App extends Component {
             type: '.mix',
             favicon: 'fileicon-mix'
         });
-        NavEvents.init();
+        // NavEvents.init();
         this.#footerbar_ = new FooterBar();
         this.#footerbar_.mountOn($content.find('.mixly-footerbar'));
         this.#addEventsListenerForNav_();
@@ -93,7 +102,7 @@ class App extends Component {
 
     #addEventsListenerForNav_() {
         const editorsManager = this.#workspace_.getEditorsManager();
-        Nav.register({
+        this.#nav_.register({
             id: 'home-btn',
             preconditionFn: () => {
                 return true;
@@ -104,7 +113,7 @@ class App extends Component {
             scopeType: Nav.Scope.LEFT,
             weight: -1
         });
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-ccw',
             title: 'undo(ctrl+z)',
             id: 'undo-btn',
@@ -116,7 +125,7 @@ class App extends Component {
             scopeType: Nav.Scope.LEFT,
             weight: 0
         });
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-cw',
             title: 'redo(ctrl+y)',
             id: 'redo-btn',
@@ -129,7 +138,83 @@ class App extends Component {
             weight: 1
         });
 
-        /*const leftSideBarOption = Nav.register({
+        this.#nav_.register({
+            icon: 'icon-check',
+            title: '',
+            id: 'arduino-compile-btn',
+            displayText: Blockly.Msg.MSG['compile'],
+            preconditionFn: () => {
+                if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile) {
+                    return false;
+                }
+                const workspace = Workspace.getMain();
+                const editorsManager = workspace.getEditorsManager();
+                const editor = editorsManager.getActive();
+                if (!editor) {
+                    return false;
+                }
+                if (editor instanceof EditorMix) {
+                    return true;
+                }
+                return false;
+            },
+            callback: () => ArduShell.initCompile(),
+            scopeType: Nav.Scope.LEFT,
+            weight: 4
+        });
+
+        this.#nav_.register({
+            icon: 'icon-upload',
+            title: '',
+            id: 'arduino-upload-btn',
+            displayText: Blockly.Msg.MSG['upload'],
+            preconditionFn: () => {
+                if (!goog.isElectron || !SELECTED_BOARD?.nav?.compile || !SELECTED_BOARD?.nav?.upload) {
+                    return false;
+                }
+                const workspace = Workspace.getMain();
+                const editorsManager = workspace.getEditorsManager();
+                const editor = editorsManager.getActive();
+                if (!editor) {
+                    return false;
+                }
+                if (editor instanceof EditorMix) {
+                    return true;
+                }
+                return false;
+            },
+            callback: () => ArduShell.initUpload(),
+            scopeType: Nav.Scope.LEFT,
+            weight: 5
+        });
+
+        this.#nav_.register({
+            icon: 'icon-upload-1',
+            title: '',
+            id: 'command-burn-btn',
+            displayText: Blockly.Msg.MSG['burn'],
+            preconditionFn: () => {
+                return goog.isElectron && SELECTED_BOARD?.nav?.burn;
+            },
+            callback: () => BU.initBurn(),
+            scopeType: Nav.Scope.LEFT,
+            weight: 3
+        });
+
+        this.#nav_.register({
+            icon: 'icon-upload',
+            title: '',
+            id: 'command-upload-btn',
+            displayText: Blockly.Msg.MSG['upload'],
+            preconditionFn: () => {
+                return goog.isElectron && SELECTED_BOARD?.nav?.upload && !SELECTED_BOARD?.nav?.compile;
+            },
+            callback: () => BU.initUpload(),
+            scopeType: Nav.Scope.LEFT,
+            weight: 5
+        });
+
+        /*const leftSideBarOption = this.#nav_.register({
             icon: 'codicon-layout-sidebar-left-off',
             title: '操作左侧边栏',
             id: 'left-sidebar-btn',
@@ -170,7 +255,7 @@ class App extends Component {
             $a.addClass('codicon-layout-sidebar-left');
         });
 
-        const rightSideBarOption = Nav.register({
+        const rightSideBarOption = this.#nav_.register({
             icon: 'codicon-layout-sidebar-right-off',
             title: '操作右侧边栏',
             id: 'right-sidebar-btn',
@@ -211,7 +296,7 @@ class App extends Component {
             $a.addClass('codicon-layout-sidebar-right');
         });*/
 
-        const bottomSideBarOption = Nav.register({
+        const bottomSideBarOption = this.#nav_.register({
             icon: 'codicon-layout-panel-off',
             title: '操作状态栏',
             id: 'bottom-sidebar-btn',
@@ -252,7 +337,7 @@ class App extends Component {
             $a.addClass('codicon-layout-panel');
         });
 
-        Nav.register({
+        this.#nav_.register({
             id: 'file',
             displayText: '文件',
             preconditionFn: () => {
@@ -262,7 +347,7 @@ class App extends Component {
             weight: 1
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-doc-new',
             id: ['file', 'new-file'],
             displayText: '新建',
@@ -274,7 +359,7 @@ class App extends Component {
             weight: 1
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-doc',
             id: ['file', 'open-file'],
             displayText: '打开',
@@ -286,13 +371,13 @@ class App extends Component {
             weight: 2
         });
 
-        Nav.register({
+        this.#nav_.register({
             id: ['file', 'hr'],
             scopeType: Nav.Scope.RIGHT,
             weight: 3
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-floppy',
             id: ['file', 'save-file'],
             displayText: '保存',
@@ -304,7 +389,7 @@ class App extends Component {
             weight: 4
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-save-as',
             id: ['file', 'save-as-file'],
             displayText: '另存为',
@@ -316,13 +401,13 @@ class App extends Component {
             weight: 5
         });
 
-        Nav.register({
+        this.#nav_.register({
             id: ['file', 'hr'],
             scopeType: Nav.Scope.RIGHT,
             weight: 6
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-export',
             id: ['file', 'export-file'],
             displayText: '导出库',
@@ -334,7 +419,7 @@ class App extends Component {
             weight: 7
         });
 
-        Nav.register({
+        this.#nav_.register({
             id: 'setting',
             displayText: '设置',
             preconditionFn: () => {
@@ -344,7 +429,7 @@ class App extends Component {
             weight: 1
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-menu',
             id: ['setting', 'manage-libs'],
             displayText: '管理库',
@@ -356,7 +441,7 @@ class App extends Component {
             weight: 1
         });
 
-        Nav.register({
+        this.#nav_.register({
             icon: 'icon-comment-1',
             id: ['setting', 'feedback'],
             displayText: '反馈',
@@ -476,7 +561,7 @@ class App extends Component {
     }
 
     resize() {
-        Nav.resize();
+        this.#nav_.resize();
         this.#workspace_.resize();
         this.#footerbar_.resize();
     }
